@@ -592,14 +592,13 @@ func test_sunjian_lends_you_one_of_his_old_generals() -> void:
 	s.square = "borrow"
 	s.resolved = false
 	Quests.choose_event(q, s, rng(0), 0)
-	var offer: Array = s.offer.duplicate()
-	offer.sort()
-	check_eq(offer, ["chengpu", "handang", "huanggai"])
+	check_eq(s.offer.size(), 3)
+	check(s.offer.all(func(c): return c in ["chengpu", "handang", "huanggai", "zhuzhi", "wujing", "sunben"]), "孙家的将领")
 	Quests.resolve(q, s, rng(0), 1)
 	check(s.resolved and s.owned.size() == 1, "one of them joins")
 
 
 func test_sunjians_old_guard_can_be_drawn() -> void:
 	var db := GameData.get_db()
-	for cid in ["chengpu", "handang", "huanggai", "zumao"]:
+	for cid in ["chengpu", "handang", "huanggai", "zumao", "zhuzhi", "wujing", "sunben", "sunjing"]:
 		check(db.cards[cid]["in_pool"], cid)

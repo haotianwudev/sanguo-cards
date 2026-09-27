@@ -115,3 +115,7 @@
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
 | ⬜ 缺 | `chengpu` | 程普·程公（R） |
 | ⬜ 缺 | `handang` | 韩当（R） |
+| ⬜ 缺 | `zhuzhi` | 朱治·君理（R） |
+| ⬜ 缺 | `wujing` | 吴景（R） |
+| ⬜ 缺 | `sunben` | 孙贲（R） |
+| ⬜ 缺 | `sunjing` | 孙静（R） |
