@@ -21,9 +21,9 @@
   "rarity_colors": {"N": "gray", "R": "blue", "SR": "purple", "SSR": "gold", "lord": "red"},
   "map": {
     "cell": 8,
-    "glyphs": {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休", "boss": "将"},
-    "type_names": {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复"},
-    "type_colors": {"battle": "red", "boss": "purple", "treasure": "gold", "recover": "blue", "choose": "amber", "event": "text"}
+    "glyphs": {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休", "recruit": "募", "boss": "将"},
+    "type_names": {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复", "recruit": "招募"},
+    "type_colors": {"battle": "red", "boss": "purple", "treasure": "gold", "recover": "blue", "choose": "amber", "recruit": "green", "event": "text"}
   },
   "portrait_framing": {
     "_comment": "how many head-heights tall each portrait box shows (≈2.5 bust, ≈5.5 half body, large = whole picture)",

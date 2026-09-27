@@ -6,8 +6,9 @@ Square types:
   event    story text (+ optional portraits, optional reward cards)
   choose   pick one card; that card joins and the path continues at the option's `goto`
   battle   must win to continue (`boss: true` marks the big one)
-  treasure a chest of soldier cards
+  treasure a chest: several soldier cards shown, keep one
   recover  restore the shared HP bar and reset cumulative AP costs / once-per-battle skills
+  recruit  a few unowned generals are offered; keep one
 Within a quest the party's damage and cumulative skill costs carry over from battle to battle
 (Rance X); they reset at a recover square or when the quest ends. Losing restarts the quest,
 but choices already made are remembered.
@@ -22,7 +23,7 @@ from importlib import resources
 from . import collection as col
 from .cards import CardDB, PlayerCard
 
-TYPES = ("event", "choose", "battle", "treasure", "recover")
+TYPES = ("event", "choose", "battle", "treasure", "recover", "recruit")
 
 
 @dataclass(frozen=True)
@@ -153,11 +154,30 @@ def resolve(db: CardDB, q: Quest, save: col.Save, rng: random.Random,
             gained.append(db.cards[opt["card"]])
         col.grant_card(db, save, opt["card"])
     elif s.type == "treasure":
-        gained = col.open_chest(db, save, rng, db.gacha["chest_cards"])
+        if save.offer and choice is not None:
+            gained.append(col.take(db, save, save.offer[choice]))
+        save.offer = []
     elif s.type == "recover":
         reset_carry(save)
+    elif s.type == "recruit":
+        if save.offer and choice is not None:
+            gained.append(col.take(db, save, save.offer[choice]))
+        save.offer = []
     save.resolved = True
     return gained
+
+
+def offer(db: CardDB, q: Quest, save: col.Save, rng: random.Random) -> list[PlayerCard]:
+    """Cards shown on the current recruit square (generals) or treasure square (soldiers) —
+    rolled once, then kept, so leaving and coming back can't reroll them."""
+    kind = here(q, save).type
+    if kind not in ("recruit", "treasure") or save.resolved:
+        return []
+    if not save.offer:
+        cards = (col.recruit_offer(db, save, rng) if kind == "recruit"
+                 else col.chest_offer(db, rng, db.gacha["chest_cards"]))
+        save.offer = [c.id for c in cards]
+    return [db.cards[c] for c in save.offer]
 
 
 def move(q: Quest, save: col.Save, square_id: str) -> None:
@@ -166,6 +186,7 @@ def move(q: Quest, save: col.Save, square_id: str) -> None:
     save.square = square_id
     save.visited.append(square_id)
     save.resolved = False
+    save.offer = []
     _auto_resolve(q, save)
 
 

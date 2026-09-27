@@ -397,9 +397,18 @@ class QuestScreen(Screen):
                     grid.mount(CardView(app.db, ld.card, note=leader_note(ld)))
                 actions.mount(Button("⚔ 出战 (Enter)", name="fight", variant="error"))
                 actions.mount(Button("先去整备（回主菜单）", name="back"))
-            elif s.type == "treasure":
-                body.mount(Static("一只沉甸甸的宝箱。里面是兵卡——同种兵卡越多部队越强，但重复的会衰减。", classes="story-text"))
-                actions.mount(Button("打开宝箱 (Enter)", name="resolve", variant="warning"))
+            elif s.type in ("treasure", "recruit"):
+                cards = quest.offer(app.db, q, app.save, app.rng)
+                app.persist()
+                if s.type == "treasure":
+                    msg = "宝箱里有几张兵卡，只能拿一张。同种兵卡越多部队越强，但重复的会衰减——缺什么拿什么。"
+                else:
+                    msg = "闻名而来的豪杰，只能收下一位。"
+                body.mount(Static(msg, classes="story-text"))
+                if cards:
+                    self.call_later(mount_offer, body, app.db, cards)
+                else:
+                    actions.mount(Button("空空如也，继续 (Enter)", name="resolve", variant="primary"))
             elif s.type == "recover":
                 body.mount(Static("可以在这里休整：体力回满，累积技能的 AP 加价和限 1 次技能全部重置。", classes="story-text"))
                 actions.mount(Button("休整 (Enter)", name="resolve", variant="primary"))
@@ -413,7 +422,7 @@ class QuestScreen(Screen):
         elif s.type == "recover":
             body.mount(Static(f"[{C.blue}]休整完毕，体力全满。[/]", classes="story-text"))
         if self._gained:
-            body.mount(Static("开出兵卡：" if s.type == "treasure" else "获得卡牌：", classes="story-text"))
+            body.mount(Static("获得卡牌：", classes="story-text"))
             grid = Grid(classes="card-grid")
             body.mount(grid)
             for c in self._gained:
@@ -441,7 +450,8 @@ class QuestScreen(Screen):
             self.do(moves[0])
 
     def action_step(self, n: int) -> None:
-        names = [b.name for b in self.query(Button) if b.name and (b.name.startswith("move-") or b.name.startswith("choose-"))]
+        names = [b.name for b in self.query(Button)
+                 if b.name and b.name.split("-")[0] in ("move", "choose", "pick")]
         if n - 1 < len(names):
             self.do(names[n - 1])
 
@@ -459,7 +469,7 @@ class QuestScreen(Screen):
         s = quest.here(q, app.save)
         if name == "resolve":
             self._gained = quest.resolve(app.db, q, app.save, app.rng)
-        elif name.startswith("choose-"):
+        elif name.startswith("choose-") or name.startswith("pick-"):
             self._gained = quest.resolve(app.db, q, app.save, app.rng, int(name.split("-")[1]))
         elif name.startswith("move-"):
             self._gained = []
@@ -486,49 +496,73 @@ class QuestScreen(Screen):
 
 # ---- gacha -------------------------------------------------------------------
 
+async def mount_offer(parent, db: CardDB, cards: list, name_prefix: str = "pick") -> None:
+    row = Horizontal(classes="choice-row")
+    await parent.mount(row)
+    for i, c in enumerate(cards):
+        col_ = Vertical(classes="choice")
+        await row.mount(col_)
+        await col_.mount(CardView(db, build_fighter(db, c.id)))
+        await col_.mount(Button(f"{i + 1}. 选这张", name=f"{name_prefix}-{i}", variant="warning"))
+
+
 class GachaScreen(Screen):
-    BINDINGS = [Binding("escape", "app.pop_screen", "返回"), Binding("1", "pull(1)", "招募 1 次"),
-                Binding("0", "pull(10)", "招募 10 次")]
+    """招募: a few unowned generals are shown; keep one. Unlimited."""
+    BINDINGS = [Binding("escape", "app.pop_screen", "返回"), Binding("enter", "roll", "招募")] + \
+        [Binding(str(i), f"pick({i})", show=False) for i in range(1, 6)]
 
     def compose(self) -> ComposeResult:
-        yield Static("招募", classes="screen-title")
+        yield Static("招募　[dim]每次亮出几位武将，只能带走一位[/]", classes="screen-title")
         with Horizontal(id="gacha-actions"):
-            yield Button("招募 1 次", id="p1", variant="primary")
-            yield Button("招募 10 次", id="p10", variant="warning")
+            yield Button("招募 (Enter)", id="roll", variant="primary")
             yield Static(id="pool-left")
-        yield VerticalScroll(Grid(id="gacha-results", classes="card-grid"))
+        yield VerticalScroll(id="gacha-results")
         yield Footer()
 
     def on_mount(self) -> None:
+        self.offer: list = []
         self.update_left()
 
     def update_left(self) -> None:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        self.query_one("#pool-left", Static).update(f"卡池剩余 {col.pool_left(app.db, app.save)} 张")
+        self.query_one("#pool-left", Static).update(f"尚未招募的武将 {col.pool_left(app.db, app.save)} 位")
 
-    @on(Button.Pressed, "#p1")
-    def one(self) -> None:
-        self.action_pull(1)
+    @on(Button.Pressed, "#roll")
+    async def roll_pressed(self) -> None:
+        await self.action_roll()
 
-    @on(Button.Pressed, "#p10")
-    def ten(self) -> None:
-        self.action_pull(10)
-
-    def action_pull(self, n: int) -> None:
+    async def action_roll(self) -> None:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        cards = col.pull(app.db, app.save, app.rng, n)
-        grid = self.query_one("#gacha-results", Grid)
-        grid.remove_children()
-        if not cards:
-            self.notify("卡池里的武将已经全部招募！", severity="warning")
+        self.offer = col.recruit_offer(app.db, app.save, app.rng)
+        box = self.query_one("#gacha-results", VerticalScroll)
+        await box.remove_children()
+        if not self.offer:
+            self.notify("所有武将都已招募！", severity="warning")
             return
-        for c in sorted(cards, key=lambda c: RARITIES.index(c.rarity), reverse=True):
-            grid.mount(CardView(app.db, build_fighter(app.db, c.id), note=f"[b {C.gold}]✦ NEW[/]"))
-        best = max(cards, key=lambda c: RARITIES.index(c.rarity))
-        if best.rarity == "SSR":
-            self.notify(f"✦✦✦ SSR {best.name}！", title="招募")
+        await box.mount(Static("选一位带走：", classes="story-text"))
+        await mount_offer(box, app.db, self.offer)
+        if any(c.rarity == "SSR" for c in self.offer):
+            self.notify("✦✦✦ 有 SSR！", title="招募")
+
+    async def action_pick(self, n: int) -> None:
+        if not self.offer or n - 1 >= len(self.offer):
+            return
+        app: SanguoApp = self.app  # type: ignore[assignment]
+        card = col.take(app.db, app.save, self.offer[n - 1].id)
+        self.offer = []
         app.persist()
+        box = self.query_one("#gacha-results", VerticalScroll)
+        await box.remove_children()
+        await box.mount(Static(f"[b {C.gold}]{escape(card.name)}[/] 加入！　按 Enter 再招募", classes="story-text"))
+        grid = Grid(classes="card-grid")
+        await box.mount(grid)
+        await grid.mount(CardView(app.db, build_fighter(app.db, card.id), note=f"[b {C.gold}]✦ NEW[/]"))
         self.update_left()
+
+    @on(Button.Pressed)
+    async def picked(self, event: Button.Pressed) -> None:
+        if event.button.name and event.button.name.startswith("pick-"):
+            await self.action_pick(int(event.button.name.split("-")[1]) + 1)
 
 
 # ---- collection & party ------------------------------------------------------
@@ -865,7 +899,7 @@ class BattleScreen(Screen[bool]):
                 app.save.damage, extra, uses = self.b.carry_out()
                 app.save.carry_extra.update(extra)
                 app.save.carry_uses.update(uses)
-            chest = col.chest_after_battle(app.db, app.save, app.rng, self.b.overkill, self.boss)
+            chest = col.chest_after_battle(app.db, app.rng, self.b.overkill, self.boss)
             app.persist()
         # dismiss on the next tick: dismissing from inside another screen's dismiss callback deadlocks
         app.push_screen(ResultModal(won, chest, self.b.overkill),
@@ -873,7 +907,8 @@ class BattleScreen(Screen[bool]):
 
 
 class ResultModal(ModalScreen[None]):
-    BINDINGS = [Binding("enter", "close", "确定"), Binding("escape", "close", show=False)]
+    BINDINGS = [Binding("enter", "close", "确定"), Binding("escape", "close", show=False)] + \
+        [Binding(str(i), f"pick({i})", show=False) for i in range(1, 6)]
 
     def __init__(self, won: bool, chest: list | None = None, overkill: float = 0.0) -> None:
         super().__init__()
@@ -882,23 +917,47 @@ class ResultModal(ModalScreen[None]):
         self.overkill = overkill
 
     def compose(self) -> ComposeResult:
-        with Vertical(id="dialog", classes="win" if self.won else "lose"):
+        app: SanguoApp = self.app  # type: ignore[assignment]
+        with Vertical(id="dialog", classes=("win" if self.won else "lose") + (" wide" if self.chest else "")):
             yield Static("★  胜 利  ★" if self.won else "✗  战 败", id="result-text")
             if not self.won:
                 yield Static("[dim]调整编成或去招募，再来一次[/]")
-            else:
-                ok = f"　过量伤害 {round(self.overkill * 100)}%" if self.overkill else ""
-                if self.chest:
-                    names = "、".join(f"[b]{escape(c.name)}[/]〔{self.app.db.troops[c.troop].short}〕"  # type: ignore[attr-defined]
-                                      for c in self.chest)
-                    yield Static(f"[{C.gold}]宝箱！[/]{ok}\n获得兵卡：{names}")
-                else:
-                    yield Static(f"[dim]没有掉落宝箱{ok}（过量伤害越高越容易掉）[/]")
-            yield Button("确定", id="ok", variant="primary")
+                yield Button("确定", id="ok", variant="primary")
+                return
+            ok = f"　过量伤害 {round(self.overkill * 100)}%" if self.overkill else ""
+            if not self.chest:
+                yield Static(f"[dim]没有掉落宝箱{ok}（过量伤害越高越容易掉）[/]")
+                yield Button("确定", id="ok", variant="primary")
+                return
+            yield Static(f"[{C.gold}]宝箱！[/]{ok}　选一张兵卡带走：")
+            with Horizontal(classes="choice-row"):
+                for i, c in enumerate(self.chest):
+                    with Vertical(classes="choice"):
+                        yield CardView(app.db, build_fighter(app.db, c.id),
+                                       note=f"已有 ×{col.copies(app.db, app.save, c.id)}")
+                        yield Button(f"{i + 1}. 拿这张", name=f"pick-{i}", variant="warning")
 
-    @on(Button.Pressed, "#ok")
-    def action_close(self) -> None:
+    def action_pick(self, n: int) -> None:
+        if not self.chest or n - 1 >= len(self.chest):
+            return
+        app: SanguoApp = self.app  # type: ignore[assignment]
+        card = col.take(app.db, app.save, self.chest[n - 1].id)
+        app.persist()
+        self.notify(f"获得兵卡：{card.name}", title="宝箱")
         self.dismiss(None)
+
+    @on(Button.Pressed)
+    def pressed(self, event: Button.Pressed) -> None:
+        if event.button.name and event.button.name.startswith("pick-"):
+            self.action_pick(int(event.button.name.split("-")[1]) + 1)
+        elif event.button.id == "ok":
+            self.dismiss(None)
+
+    def action_close(self) -> None:
+        if not self.chest:  # a chest must be picked from (Enter takes the first card)
+            self.dismiss(None)
+        else:
+            self.action_pick(1)
 
 
 # ---- free battle -------------------------------------------------------------
@@ -1018,6 +1077,7 @@ class SanguoApp(App):
     ModalScreen { align: center middle; background: $sg-bg 70%; }
     #dialog { width: 50; height: auto; padding: 1 2; border: heavy $sg-gold; background: $sg-card; }
     #dialog.lose { border: heavy $sg-red; }
+    #dialog.wide { width: 110; }
     #dialog Button { width: 100%; margin-top: 1; }
     #result-text { text-align: center; text-style: bold; color: $sg-gold; padding: 1 0; }
     #dialog.lose #result-text { color: $sg-red; }

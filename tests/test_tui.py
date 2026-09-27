@@ -71,15 +71,40 @@ def test_gacha_and_auto_party(tmp_path):
             await pilot.press("2")
             await pilot.pause()
             assert isinstance(app.screen, GachaScreen)
-            await pilot.press("0")  # ten pulls
-            await pilot.pause()
-            assert len(app.save.owned) == 10
+            for _ in range(3):  # recruit three times: each shows 3 generals, keep one
+                await pilot.press("enter")
+                await pilot.pause()
+                await pilot.press("2")
+                await pilot.pause()
+            assert len(app.save.owned) == 3
             await pilot.press("escape", "4")
             await pilot.pause()
             assert isinstance(app.screen, PartyScreen)
             await pilot.press("a")
             await pilot.pause()
             assert len(app.save.party) == 3
+    run(go())
+
+
+def test_battle_chest_lets_you_pick_one_soldier(tmp_path):
+    async def go():
+        app = SanguoApp(existing_save(tmp_path), seed=5)
+        async with app.run_test(size=SIZE) as pilot:
+            await pilot.pause()
+            await pilot.press("5")
+            await pilot.pause()
+            next(b for b in app.screen.query(Button) if b.id == "sc-shanzei").press()
+            await pilot.pause()
+            screen = app.screen
+            screen.boss = True  # guarantee a chest
+            screen.b.enemy.hp = 1
+            await pilot.press("1", "1")
+            await pilot.pause()
+            chest = app.screen.chest
+            assert len(chest) == app.db.gacha["chest_cards_boss"]
+            await pilot.press("3")  # keep the third card
+            await pilot.pause()
+            assert app.save.soldiers == {chest[2].id: 1}
     run(go())
 
 

@@ -38,7 +38,9 @@ def bot_battle(db, save, scenario, seed, boss=False):
         save.damage, extra, uses = b.carry_out()
         save.carry_extra.update(extra)
         save.carry_uses.update(uses)
-        col.chest_after_battle(db, save, random.Random(seed), b.overkill, boss)
+        chest = col.chest_after_battle(db, random.Random(seed), b.overkill, boss)
+        if chest:
+            col.take(db, save, chest[0].id)
     return b.result == "win"
 
 
@@ -55,7 +57,8 @@ def play_quest(db, q, save, pick=0, fork=None, seed=0):
             save.party = col.auto_party(db, save)
             if not bot_battle(db, save, s.battle, rng.randrange(10**6), s.boss):
                 return False
-        quest.resolve(db, q, save, rng, pick if s.type == "choose" else None)
+        offered = quest.offer(db, q, save, rng)
+        quest.resolve(db, q, save, rng, pick if s.type == "choose" else (0 if offered else None))
         opts = quest.next_options(q, save)
         if not opts:
             quest.complete(q, save)
@@ -168,3 +171,16 @@ def test_hulao_quest_needs_a_real_party(db, qs):
     rest, greedy = rate(db, qs[2], mid, fork=1), rate(db, qs[2], mid, fork=0)
     assert 0.15 < rest < 0.8
     assert greedy < rest
+
+
+def test_recruit_and_treasure_offers_do_not_reroll(db, qs):
+    q = qs[0]
+    save = col.Save.new(db)
+    quest.begin(q, save)
+    save.square, save.resolved = "heroes", False
+    first = [c.id for c in quest.offer(db, q, save, random.Random(1))]
+    again = [c.id for c in quest.offer(db, q, save, random.Random(99))]
+    assert first == again and len(first) == db.gacha["offer_size"]
+    got = quest.resolve(db, q, save, random.Random(0), 2)
+    assert [c.id for c in got] == [first[2]] and first[2] in save.owned
+    assert not any(c in save.owned for c in (first[0], first[1]))

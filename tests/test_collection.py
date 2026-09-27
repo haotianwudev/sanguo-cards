@@ -132,13 +132,27 @@ def test_soldier_can_lead_and_uses_one_of_its_copies(db):
 
 def test_boss_always_drops_a_chest_and_overkill_helps(db):
     rng = random.Random(0)
-    assert len(col.chest_after_battle(db, col.Save(), rng, 0.0, boss=True)) == db.gacha["chest_cards_boss"]
-    assert col.chest_after_battle(db, col.Save(), rng, 0.5, boss=False)  # 50% overkill: guaranteed
-    drops = sum(bool(col.chest_after_battle(db, col.Save(), random.Random(i), 0.0, False)) for i in range(400))
+    assert len(col.chest_after_battle(db, rng, 0.0, boss=True)) == db.gacha["chest_cards_boss"]
+    assert col.chest_after_battle(db, rng, 0.5, boss=False)  # 50% overkill: guaranteed
+    drops = sum(bool(col.chest_after_battle(db, random.Random(i), 0.0, False)) for i in range(400))
     assert 150 < drops < 250  # ~50% without overkill
 
 
-def test_removed_cards_are_dropped_from_old_saves(db):
-    save = col.Save(owned=["guanyu", "gone_card"], soldiers={"dangyang": 2, "cav_n": 1}, party=["gone_card"])
-    assert col.owned_ids(db, save) == ["guanyu", "cav_n"]
-    assert save.party == []
+def test_chest_shows_different_soldiers_and_only_the_pick_is_kept(db, save):
+    offer = col.chest_after_battle(db, random.Random(1), 0.0, boss=True)
+    assert len({c.id for c in offer}) == len(offer) and all(c.soldier for c in offer)
+    assert save.soldiers == {}  # nothing granted until a card is picked
+    col.take(db, save, offer[0].id)
+    assert save.soldiers == {offer[0].id: 1}
+
+
+def test_recruit_offers_unowned_generals_and_you_keep_one(db, save):
+    save.owned = ["guanyu"]
+    offer = col.recruit_offer(db, save, random.Random(2))
+    assert len(offer) == db.gacha["offer_size"]
+    assert len({c.id for c in offer}) == len(offer)
+    assert all(not c.soldier and c.in_pool and c.id != "guanyu" for c in offer)
+    col.take(db, save, offer[1].id)
+    assert save.owned == ["guanyu", offer[1].id]
+    with pytest.raises(ValueError):
+        col.take(db, save, "guanyu")  # generals never duplicate

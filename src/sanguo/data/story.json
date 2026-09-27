@@ -46,12 +46,13 @@
         "chest": {"x": 6, "y": 0, "type": "treasure", "label": "藏宝洞", "next": ["boss"]},
         "spring": {"x": 6, "y": 2, "type": "recover", "label": "山泉", "next": ["boss"]},
         "boss": {"x": 7, "y": 1, "type": "battle", "battle": "shanzei", "boss": true, "label": "山寨", "next": ["mother"]},
-        "mother": {"x": 8, "y": 1, "type": "event", "label": "吴国太", "portraits": ["wuguotai"], "cards": ["wuguotai"],
+        "mother": {"x": 8, "y": 1, "type": "event", "label": "吴国太", "portraits": ["wuguotai"], "cards": ["wuguotai"], "next": ["heroes"],
           "text": [
             "山寨平定。回到孙家庄园，一位端庄的妇人迎了出来。",
             "“伯符的母亲，吴国太。”她看着一身血污的你们，“先把伤养好，其余的慢慢说。”",
             "吴国太愿随军照料伤兵。孙策笑道：“有了名声，自会有豪杰来投。”"
-          ]}
+          ]},
+        "heroes": {"x": 9, "y": 1, "type": "recruit", "label": "来投"}
       }
     },
 
@@ -70,8 +71,9 @@
         "altar": {"x": 5, "y": 0, "type": "treasure", "label": "祭坛", "next": ["zhangjiao"]},
         "flank": {"x": 5, "y": 2, "type": "recover", "label": "休整", "next": ["zhangjiao"]},
         "zhangjiao": {"x": 6, "y": 1, "type": "battle", "battle": "huangjin", "boss": true, "label": "张角", "next": ["after"]},
-        "after": {"x": 7, "y": 1, "type": "event", "label": "平定",
-          "text": ["张角病死军中，黄巾溃散。{lord}之名，开始传遍天下。"]}
+        "after": {"x": 7, "y": 1, "type": "event", "label": "平定", "next": ["heroes"],
+          "text": ["张角病死军中，黄巾溃散。{lord}之名，开始传遍天下。"]},
+        "heroes": {"x": 8, "y": 1, "type": "recruit", "label": "来投"}
       }
     },
 
@@ -87,8 +89,9 @@
         "march": {"x": 3, "y": 1, "type": "event", "label": "关前", "next": ["lvbu"],
           "text": ["虎牢关前，一骑当先。人中吕布，马中赤兔。", "诸侯军中无人敢出——轮到{lord}了。"]},
         "lvbu": {"x": 4, "y": 1, "type": "battle", "battle": "hulao", "boss": true, "label": "吕布", "next": ["after"]},
-        "after": {"x": 5, "y": 1, "type": "event", "label": "西迁",
-          "text": ["吕布退走，董卓焚洛阳西迁。", "（后续章节开发中）"]}
+        "after": {"x": 5, "y": 1, "type": "event", "label": "西迁", "next": ["heroes"],
+          "text": ["吕布退走，董卓焚洛阳西迁。", "（后续章节开发中）"]},
+        "heroes": {"x": 6, "y": 1, "type": "recruit", "label": "来投"}
       }
     }
   ]

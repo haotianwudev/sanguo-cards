@@ -33,6 +33,7 @@ class Save:
     carry_extra: dict = field(default_factory=dict)  # card id -> {skill: 累积 increments}
     carry_uses: dict = field(default_factory=dict)  # card id -> {skill: uses left}
     choices: dict = field(default_factory=dict)  # choose-square id -> goto (remembered across retries)
+    offer: list[str] = field(default_factory=list)  # generals shown on the current recruit square
     quests_cleared: list[str] = field(default_factory=list)
     lord_name: str = "主公"
     party_slots: int = 4  # including the lord
@@ -96,12 +97,48 @@ def pull(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]
     return got
 
 
+def recruit_offer(db: CardDB, save: Save, rng: random.Random, n: int | None = None) -> list[PlayerCard]:
+    """Recruiting shows a few unowned generals (rarity rolled per card) and the player keeps one."""
+    _sync(db, save)
+    n = n or db.gacha["offer_size"]
+    rates = db.gacha["rates"]
+    offer: list[PlayerCard] = []
+    for _ in range(n):
+        pools = {r: [c for c in db.pool(r) if c.id not in save.owned and c not in offer] for r in rates}
+        live = [r for r in rates if pools[r]]
+        if not live:
+            break  # fewer generals left than slots
+        rarity = rng.choices(live, weights=[rates[r] for r in live])[0]
+        offer.append(rng.choice(pools[rarity]))
+    return offer
+
+
+def take(db: CardDB, save: Save, card_id: str) -> PlayerCard:
+    """Keep the one card picked from a recruit offer (a general) or a chest (a soldier)."""
+    card = db.cards[card_id]
+    if not card.soldier and card_id in save.owned:
+        raise ValueError(f"已经拥有 {card.name}")
+    grant_card(db, save, card_id)
+    return card
+
+
 def pool_left(db: CardDB, save: Save) -> int:
     return sum(1 for r in db.gacha["rates"] for c in db.pool(r) if c.id not in save.owned)
 
 
+def chest_offer(db: CardDB, rng: random.Random, n: int) -> list[PlayerCard]:
+    """A treasure chest shows n different soldier cards (weighted by how common each is); the player keeps one."""
+    pool = list(db.soldiers())
+    offer: list[PlayerCard] = []
+    for _ in range(min(n, len(pool))):
+        c = rng.choices(pool, weights=[x.weight for x in pool])[0]
+        offer.append(c)
+        pool.remove(c)
+    return offer
+
+
 def open_chest(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]:
-    """A treasure chest: n soldier cards, weighted by how common each is. Soldiers stack."""
+    """Grant n soldier cards straight away (no choice) — used by the balance simulations."""
     _sync(db, save)
     pool = db.soldiers()
     got = rng.choices(pool, weights=[c.weight for c in pool], k=n)
@@ -207,10 +244,10 @@ def record_win(save: Save, scenario_id: str) -> None:
         save.cleared.append(scenario_id)
 
 
-def chest_after_battle(db: CardDB, save: Save, rng: random.Random, overkill: float, boss: bool) -> list[PlayerCard]:
+def chest_after_battle(db: CardDB, rng: random.Random, overkill: float, boss: bool) -> list[PlayerCard]:
     """Rance X: a won battle may drop a chest. Bosses always do; otherwise 50% + overkill share
-    (overkill ≥ 50% of the enemy's HP guarantees it). Chests hold soldier cards only."""
+    (overkill ≥ 50% of the enemy's HP guarantees it). Returns the soldier cards shown — keep one with take()."""
     chance = 1.0 if boss else min(1.0, db.gacha["chest_base"] + overkill)
     if rng.random() >= chance:
         return []
-    return open_chest(db, save, rng, db.gacha["chest_cards_boss" if boss else "chest_cards"])
+    return chest_offer(db, rng, db.gacha["chest_cards_boss" if boss else "chest_cards"])
