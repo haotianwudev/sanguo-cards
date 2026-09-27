@@ -2,15 +2,19 @@
 
 pics/art.json is the single place art is configured:
   "portraits": {
-    "<key>": {"src": "sun ce.jpg",            # image under pics/ (any size, jpg/png)
+    "<key>": {"src": "source/generals/sunce.jpg",   # image under pics/ (any size, jpg/png/webp)
               "face": [0.49, 0.22],          # face centre, as fractions of width/height
               "head": 0.10,                  # head height / image height (sets close-up tightness)
               "placeholder": true,           # optional: stand-in art, not final
-              "source": "https://…", "license": "Public domain", "artist": "…"}   # optional provenance
+              "source": "https://…", "license": "Public domain", "artist": "…",   # optional provenance
+              "prep": {"from": "source/soldiers/x.jpg", "cut_top": 0.15, "figure": 0.7}}  # optional, see below
   }
+Raw images live in pics/source/ (never modified); anything a tool derives goes to pics/processed/.
+An entry with "prep" is regenerated first: tools/prep_art.py cuts a title band off "from" and pads it
+into "src", so the figure can be framed smaller.
 <key> is a card id or a person id (all versions of that person share it), or an enemy's "portrait".
 
-Running it shrinks every source into src/sanguo/data/portraits/, rewrites portraits.json, and regenerates
+Running it shrinks every source into godot/data/portraits/, rewrites portraits.json, and regenerates
 pics/ART-NEEDS.md (what still needs art) and pics/SOURCES.md (where each image came from).
 Entries whose source image is missing keep their already-built portrait, so a fresh clone without the
 original pictures still works.
@@ -31,6 +35,15 @@ OUT = ROOT / "godot" / "data" / "portraits"  # the Godot project is the game now
 MAX_H = 640
 
 
+def _prep():
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("prep_art", ROOT / "tools" / "prep_art.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.prep
+
+
 def build(pics: Path = PICS, out: Path = OUT) -> list[str]:
     cfg = json.loads((pics / "art.json").read_text("utf-8"))["portraits"]
     index = {}
@@ -40,6 +53,9 @@ def build(pics: Path = PICS, out: Path = OUT) -> list[str]:
             continue
         dst = out / f"{key}.jpg"
         src = pics / e["src"]
+        prep = e.get("prep")
+        if prep and (pics / prep["from"]).exists():
+            _prep()(pics / prep["from"], src, float(prep.get("cut_top", 0.15)), float(prep.get("figure", 0.7)))
         if src.exists():
             im = Image.open(src)
             if im.mode in ("RGBA", "LA", "P"):  # flatten transparent art onto the paper colour
@@ -94,9 +110,10 @@ def write_needs(db: CardDB, pics: Path = PICS) -> None:
         "",
         "## 怎么换图",
         "",
-        "1. 把图放进 `pics/`（任意尺寸，jpg / png）。",
+        "1. 把原图放进 `pics/source/` 对应的子文件夹（generals 武将 / soldiers 兵卡 / frames 卡框），文件名用 key（如 `huanggai.jpg`）。",
         "2. 在 `pics/art.json` 的 `portraits` 里改（或加）一行：",
-        '   `"<key>": {"src": "文件名.jpg", "face": [x, y], "head": h}`',
+        '   `"<key>": {"src": "source/generals/<key>.jpg", "face": [x, y], "head": h}`',
+        '   - 带标题字的兵卡图：加 `"prep": {"from": "source/soldiers/<key>.jpg", "cut_top": 0.15, "figure": 0.7}`，`src` 写 `processed/<key>_card.jpg`',
         "   - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（半身像约 0.2，全身像约 0.07–0.12）",
         '   - 换掉占位图时，把 `"placeholder": true` 删掉',
         "3. 运行 `sanguo-art`：自动缩图、更新游戏里的头像、重新生成本文件和 `SOURCES.md`。",

@@ -4,9 +4,10 @@
 
 ## 怎么换图
 
-1. 把图放进 `pics/`（任意尺寸，jpg / png）。
+1. 把原图放进 `pics/source/` 对应的子文件夹（generals 武将 / soldiers 兵卡 / frames 卡框），文件名用 key（如 `huanggai.jpg`）。
 2. 在 `pics/art.json` 的 `portraits` 里改（或加）一行：
-   `"<key>": {"src": "文件名.jpg", "face": [x, y], "head": h}`
+   `"<key>": {"src": "source/generals/<key>.jpg", "face": [x, y], "head": h}`
+   - 带标题字的兵卡图：加 `"prep": {"from": "source/soldiers/<key>.jpg", "cut_top": 0.15, "figure": 0.7}`，`src` 写 `processed/<key>_card.jpg`
    - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（半身像约 0.2，全身像约 0.07–0.12）
    - 换掉占位图时，把 `"placeholder": true` 删掉
 3. 运行 `sanguo-art`：自动缩图、更新游戏里的头像、重新生成本文件和 `SOURCES.md`。

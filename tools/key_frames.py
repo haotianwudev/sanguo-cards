@@ -1,7 +1,7 @@
 """Turn card-frame JPGs with a baked-in "transparency" checkerboard into real transparent PNGs,
 and measure each frame's inner window for the card layout.
 
-    python tools/key_frames.py "pics/card frames" godot/data/art/frames
+    python tools/key_frames.py pics/source/frames godot/data/art/frames
 
 Writes frame_<name>.png (transparent inside and outside) and frames.json with the window rectangle
 (where the portrait shows) as fractions of the card size.
@@ -112,7 +112,8 @@ def main() -> None:
     for f in sorted(src.iterdir()):
         if f.suffix.lower() not in (".jpg", ".jpeg", ".png"):
             continue
-        name = f.stem.replace("card frame", "").strip() or f.stem
+        name = f.stem.replace("card frame", "").strip()
+        name = name[len("frame_"):] if name.startswith("frame_") else name
         img, meta = key(f)
         img.save(dst / f"frame_{name}.png")
         index[name] = {"file": f"frame_{name}.png", **meta}
