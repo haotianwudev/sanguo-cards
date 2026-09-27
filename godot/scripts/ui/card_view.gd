@@ -174,7 +174,8 @@ func _build() -> void:
 		tag.add_theme_stylebox_override("normal", Kit.box(Color(0.1, 0.06, 0.02, 0.78), 6, 1, Color("#c9a14a"), 3))
 		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		var tw := 18.0 * parts[1].length() + 14
-		_add(tag, Vector2(win.position.x + (win.size.x - tw) / 2, win.position.y + 4), Vector2(tw, 22))
+		# straddles the top edge of the portrait window, on the frame, clear of the figure's head
+		_add(tag, Vector2(win.position.x + (win.size.x - tw) / 2, win.position.y - 13), Vector2(tw, 22))
 
 	# troop badge (top-left corner) and, without frame art, the rarity gem
 	var bs := 40.0 if not small else 30.0
