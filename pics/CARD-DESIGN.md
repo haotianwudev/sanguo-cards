@@ -39,7 +39,7 @@
 
 ## 3. 优先级
 
-1. ~~卡框~~（已到位：`pics/card frames`，已抠成透明接入游戏）+ 兵种徽记 9 个
+1. ~~卡框~~（已到位：`pics/source/frames`，已抠成透明接入游戏）+ 兵种徽记 9 个
 2. 字体 2 套 → 手机 / 网页版必需
 3. 数值图标 + 技能图标
 4. 主要人物立绘（按 `ART-NEEDS.md`）
@@ -48,11 +48,13 @@
 
 ## 4. 放哪里
 
-放进 `godot/data/art/`，在 `godot/data/ui.json` 的 `card` 段写路径，例如：
+原图放进 `pics/source/` 对应文件夹（见 `pics/README.md`）。卡框的用法写在 `godot/data/ui.json` 的 `card` 段：
 ```json
 "card": {
-  "frames": {"N": "art/frame_n.png", "R": "art/frame_r.png", "SR": "art/frame_sr.png", "SSR": "art/frame_ssr.png", "lord": "art/frame_lord.png"},
-  "troop_icons": {"cavalry": "art/troop_cavalry.png", "...": "..."}
+  "frames": {"N": "wood", "R": "bronze", "SR": "silver", "SSR": "ssr", "lord": "gold", "enemy": "iron"},
+  "plates": {"wood": [0.30, 0.874, 0.40, 0.076], "...": "..."},   // 名牌位置
+  "badges": {"wood": [0.080, 0.078], "...": "..."},                // 兵种徽记位置（角上宝石）
+  "name_styles": {"wood": {"color": "#f6e7c8", "outline": "#3a2412"}, "...": "..."}
 }
 ```
 没填的项自动用程序画的占位。
