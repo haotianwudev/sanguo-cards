@@ -9,7 +9,7 @@
 | `lord` | placeholder/zhu gong.webp | 用户提供 | ⚠️ 兰斯系列主角立绘（AliceSoft），仅自用占位，发布前必须替换 | — |
 | `sunce` | sun ce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | zhou yu.jpg | 用户提供 | 用户提供 | — |
-| `wuguotai` | wu guotai.jpg | 用户提供 | ⚠️ 疑似光荣官方立绘，发布前替换 | — |
+| `wuguotai` | placeholder/Gemini_Generated_Image_584vn7584vn7584v.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunjian` | sun jian.png | 用户提供 | ⚠️ 疑似光荣官方立绘，发布前替换 | — |
 | `dianwei` | placeholder/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
 | `diaochan` | placeholder/diaochan.jpg | [链接](https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg) | Public domain | Unknown author |
