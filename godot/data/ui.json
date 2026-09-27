@@ -50,6 +50,6 @@
   },
   "portrait_framing": {
     "_comment": "how many head-heights tall each portrait box shows (≈2.5 bust, ≈5.5 half body, large = whole picture)",
-    "card": 2.6, "leader": 2.6, "story": 5.5, "collection": 99, "enemy": 2.4
+    "card": 4.2, "leader": 2.6, "story": 5.5, "collection": 99, "enemy": 2.4
   }
 }
