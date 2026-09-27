@@ -86,7 +86,7 @@ func demo(name: String) -> void:
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			Quests.resolve(q, save, rng, 0)
-			for sid in ["wake", "bandage", "village", "hill"]:
+			for sid in ["wake", "bandage", "village", "zy_hill", "hill"]:
 				Quests.move(q, save, sid)
 				if sid != "hill":
 					Quests.resolve(q, save, rng)
@@ -104,7 +104,7 @@ func demo(name: String) -> void:
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			Quests.resolve(q, save, rng, 0)
-			for sid in ["wake", "bandage", "village", "boar", "raid"]:
+			for sid in ["wake", "bandage", "village", "sc_home", "boar", "raid"]:
 				Quests.move(q, save, sid)
 				Quests.resolve(q, save, rng)
 			save.relics = ["hupi", "yuxi"]
@@ -128,7 +128,7 @@ func demo(name: String) -> void:
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			Quests.resolve(q, save, rng, 0)
-			for sid in ["wake", "bandage", "village", "boar", "raid", "plan"]:
+			for sid in ["wake", "bandage", "village", "sc_home", "boar", "raid", "plan"]:
 				Quests.move(q, save, sid)
 				Quests.resolve(q, save, rng)
 			for sid in ["zy_lure", "zy_back", "zy_hall", "rescue", "dinner", "muster"]:
@@ -142,7 +142,7 @@ func demo(name: String) -> void:
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			Quests.resolve(q, save, rng, 0)
-			for sid in ["wake", "bandage", "village", "boar", "raid"]:
+			for sid in ["wake", "bandage", "village", "sc_home", "boar", "raid"]:
 				Quests.move(q, save, sid)
 				Quests.resolve(q, save, rng)
 			Quests.move(q, save, "plan")
