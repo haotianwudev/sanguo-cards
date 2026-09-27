@@ -3,7 +3,7 @@
   "portraits": {
     "changsha": {"src": "processed/changsha_card.jpg", "face": [0.48, 0.3], "head": 0.238, "license": "用户提供（Gemini 生成）", "prep": {"from": "source/soldiers/changsha.jpg", "cut_top": 0.15, "figure": 0.7}},
     "danyang": {"src": "processed/danyang_card.jpg", "face": [0.48, 0.3], "head": 0.238, "license": "用户提供（Gemini 生成）", "prep": {"from": "source/soldiers/danyang.jpg", "cut_top": 0.15, "figure": 0.7}},
-    "lord": {"src": "source/generals/lord.jpg", "face": [0.50, 0.19], "head": 0.14, "license": "用户提供（Gemini 生成）"},
+    "lord": {"src": "source/generals/lord.jpg", "face": [0.50, 0.30], "head": 0.24, "license": "用户提供（Gemini 生成）"},
     "sunce": {"src": "source/generals/sunce.jpg", "face": [0.49, 0.28], "head": 0.13, "license": "用户提供", "note": "原图丢失，这是游戏里保留的 640px 版本；有高清原图就替换同名文件"},
     "zhouyu": {"src": "source/generals/zhouyu.jpg", "face": [0.53, 0.35], "head": 0.11, "license": "用户提供", "note": "原图丢失，这是游戏里保留的 640px 版本；有高清原图就替换同名文件"},
     "wuguotai": {"src": "source/generals/wuguotai.jpg", "face": [0.48, 0.33], "head": 0.17, "license": "用户提供（Gemini 生成）"},
