@@ -53,6 +53,8 @@
 | 状态 | key | 用在 |
 |---|---|---|
 | ✅ 正式 | `sunjian` | 剧情立绘 |
+| ⬜ 缺 | `dongbai` | 剧情立绘 |
+| 🟡 占位 | `lvbu` | 剧情立绘 |
 | 🟡 占位 | `liubei` | 剧情立绘 |
 | 🟡 占位 | `guanyu` | 剧情立绘 |
 | ⬜ 缺 | `zhangfei` | 剧情立绘 |
@@ -61,9 +63,8 @@
 
 | 状态 | key | 敌人 |
 |---|---|---|
-| ⬜ 缺 | `xurong` | 徐荣 |
 | ⬜ 缺 | `huaxiong` | 华雄 |
-| 🟡 占位 | `lvbu` | 吕布 |
+| ⬜ 缺 | `lijue` | 李傕 |
 
 能拿到的卡
 
@@ -94,6 +95,7 @@
 | 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | 🟡 占位 | `diaochan` | 貂蝉（SSR） |
+| ⬜ 缺 | `xurong` | 徐荣（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
 | ⬜ 缺 | `zhoucang` | 周仓（R） |
 | 🟡 占位 | `liaohua` | 廖化（R） |

@@ -108,8 +108,12 @@ framing of anyone under 18). 吴夫人 (later 吴国太) treats him like a son a
 away with his flirting, cluelessly maternal — that contrast is the joke. 孙策: reckless, spear first, can't swim,
 sulks at being left home. 周瑜: sharp (reads people, counts everything) but petty — keeps a **ledger** of what
 everyone owes him. 孙坚: huge, jealous-ish, 虎皮 + 古锭刀. Chapter 1 富春 (孙坚's hometown, during his campaign
-against 董卓) → chapter 2 讨伐董卓 (吕布 nearly unbeatable; losing leads to 三英战吕布, winning raises 难度 and
-opens three chests, one grand).
+against 董卓; only the brother whose plan you pick joins) → chapter 2 讨伐董卓 (the other brother joins; 祖茂 vs 华雄 —
+win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 joins; elite 董白; 吕布 raids the camp; 吕布's
+chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three chests; hand 董白 to 袁绍 for a relic (she's executed)
+or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
+董白 is a 19-year-old woman general with two hammers — never written as a 萝莉 or sexualized, and no groping of anyone
+unconscious or captive; comedy comes from her temper and the others' reactions.
 
 Writing rules:
 - **Names.** A card name `A·B` shows **A on the name plate** and **B as the small tag** at the top of the card

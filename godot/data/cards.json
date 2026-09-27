@@ -65,6 +65,7 @@
     "volley": {"name": "齐射", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 0.6, "hits": 3}]},
     "buzhan": {"name": "步战", "cost": 0, "effects": [{"type": "attack", "power": 0.8}]},
     "jushun": {"name": "举盾", "cost": 1, "cumulative": true, "effects": [{"type": "guard", "cut": 0.5}]},
+    "shuangchui": {"name": "双锤", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 0.9, "hits": 2}]},
     "mafei": {"name": "麻沸散", "cost": 2, "cumulative": true, "effects": [{"type": "heal", "power": 4.0}, {"type": "guard", "cut": 0.2}]},
     "rengdao": {"name": "扔刀", "cost": 3, "uses": 1, "effects": [{"type": "attack", "power": 4.5}]},
     "huoshang": {"name": "火上浇油", "cost": 3, "uses": 1, "effects": [{"type": "magic", "power": 3.0, "burning_mult": 2.0}]},
@@ -181,6 +182,8 @@
     "sunjian": {"name": "孙坚", "rarity": "SSR", "troop": "infantry", "bonus": {"hp": 150, "at": 38}, "skills": ["menghu"]},
     "wuguotai": {"name": "吴夫人·慈母", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 40, "at": 18}, "skills": ["cimu"], "pool": false},
     "huatuo": {"name": "华佗·神医", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 40, "at": 20}, "skills": ["mafei"]},
+    "dongbai": {"name": "董白·双锤", "rarity": "SR", "troop": "infantry", "bonus": {"hp": 60, "at": 20}, "skills": ["shuangchui"], "pool": false},
+    "lijue": {"name": "李傕", "rarity": "SR", "troop": "cavalry", "bonus": {"hp": 50, "at": 18}, "skills": ["fubing"], "pool": false},
     "zuoci": {"name": "左慈·乌角先生", "rarity": "SSR", "troop": "mage", "bonus": {"hp": 60, "at": 30}, "skills": ["zhibei"]},
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]},
     "yezhu_bing": {"name": "野猪兵", "rarity": "N", "troop": "cavalry", "bonus": {"hp": 20}, "weight": 2, "pool": false},
@@ -194,6 +197,8 @@
     "lvbu": {"name": "吕布", "rarity": "SSR", "troop": "cavalry", "bonus": {"hp": 110, "at": 32}, "skills": ["wushuang"], "pool": false}
   },
   "enemies": {
+    "dongbai": {"name": "董白", "portrait": "dongbai", "hp": 8000, "at": 290, "actions": 2, "moves": [{"name": "双锤", "power": 1.0, "weight": 3}, {"name": "锤震", "power": 1.2, "weight": 1, "confuse": 0.6}, {"name": "旋风双锤·蓄力", "power": 0, "weight": 1, "charge": "旋风双锤"}, {"name": "旋风双锤", "power": 2.6, "weight": 0}, {"name": "力大无穷", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "dongbai"},
+    "lijue": {"name": "李傕", "portrait": "lijue", "hp": 10000, "at": 310, "actions": 2, "moves": [{"name": "西凉铁骑", "power": 1.0, "weight": 3}, {"name": "纵火", "power": 0.5, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "劫掠", "power": 0.8, "weight": 1, "heal": 0.08}, {"name": "焚城·蓄力", "power": 0, "weight": 1, "charge": "焚城"}, {"name": "焚城", "power": 2.4, "weight": 0, "pierce": true}], "card": "lijue"},
     "yuji_xintu": {"name": "于吉信徒", "portrait": "fushui_xintu", "hp": 2800, "at": 165, "actions": 2, "moves": [{"name": "泼符水", "power": 1.0, "weight": 3}, {"name": "念咒", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "仙师保佑", "power": 0, "weight": 1, "heal": 0.1, "when": "half"}], "card": "fushui_xintu"},
     "boar": {"name": "野猪", "hp": 1300, "at": 110, "actions": 2, "moves": [{"name": "冲撞", "power": 1.0, "weight": 3}, {"name": "獠牙", "power": 1.4, "weight": 1}, {"name": "发狂", "power": 0, "weight": 2, "rage": 0.3, "when": "half", "once": true}], "card": "yezhu_bing"},
     "tiger": {"name": "吊睛白额虎", "portrait": "baie_hu", "hp": 3000, "at": 190, "actions": 2, "moves": [{"name": "扑", "power": 1.0, "weight": 2}, {"name": "剪", "power": 1.6, "weight": 1}, {"name": "虎啸", "power": 0.3, "weight": 1, "ap_drain": 2}], "card": "baie_hu"},
@@ -212,6 +217,8 @@
     "lvbu": {"name": "吕布", "portrait": "lvbu", "hp": 12500, "at": 600, "actions": 3, "phys_resist": 0.2, "moves": [{"name": "方天画戟", "power": 1.0, "weight": 4}, {"name": "赤兔冲阵", "power": 1.4, "weight": 1, "confuse": 0.4}, {"name": "无双·蓄力", "power": 0, "weight": 1, "charge": "天下无双"}, {"name": "天下无双", "power": 2.2, "weight": 0, "pierce": true}, {"name": "人中吕布", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "lvbu"}
   },
   "scenarios": {
+    "dongbai": {"name": "董白", "turn_limit": 8, "enemy": "dongbai"},
+    "lijue": {"name": "洛阳城门·李傕", "turn_limit": 8, "enemy": "lijue"},
     "yuji_xintu": {"name": "于吉信徒", "turn_limit": 6, "enemy": "yuji_xintu"},
     "boar": {"name": "野猪林", "turn_limit": 6, "enemy": "boar"},
     "tiger": {"name": "打虎", "turn_limit": 6, "enemy": "tiger"},
@@ -221,7 +228,7 @@
     "shuizei": {"name": "水寨·胡玉", "turn_limit": 8, "enemy": "shuizei"},
     "shuizei_main": {"name": "水贼大寨", "turn_limit": 8, "enemy": "shuizei_main"},
     "xurong": {"name": "梁东·徐荣", "turn_limit": 8, "enemy": "xurong"},
-    "hulao_ch1": {"name": "虎牢关·吕布", "turn_limit": 10, "enemy": "lvbu_hulao"},
+    "hulao_ch1": {"name": "追兵·吕布", "turn_limit": 10, "enemy": "lvbu_hulao"},
     "shanzei_scout": {"name": "山贼斥候", "turn_limit": 6, "enemy": "shanzei_scout"},
     "huangjin_vanguard": {"name": "黄巾前锋", "turn_limit": 8, "enemy": "huangjin_vanguard"},
     "huaxiong": {"name": "汜水关·华雄", "turn_limit": 8, "enemy": "huaxiong"},

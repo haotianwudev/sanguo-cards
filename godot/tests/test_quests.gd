@@ -60,7 +60,8 @@ func test_each_plan_walks_its_own_branch_and_both_rescue_her() -> void:
 		check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), [branch[0]])
 		check(s.has_card(["sunce", "zhouyu"][pick]) and not s.has_card(["zhouyu", "sunce"][pick]), "only the planner joins first")
 		walk_to(q, s, branch + ["rescue"])
-		check(s.has_card("sunce") and s.has_card("zhouyu") and s.has_card("wuguotai"), "all three after the rescue")
+		check(s.has_card(["sunce", "zhouyu"][pick]) and s.has_card("wuguotai"), "the planner and 吴夫人 after the rescue")
+		check(not s.has_card(["zhouyu", "sunce"][pick]), "the other brother joins in chapter 2")
 		check(not s.has_card("huanggai"))
 
 
@@ -122,7 +123,7 @@ func test_story_cards_do_not_stack() -> void:
 		Quests.move(q, s, "plan")
 		Quests.resolve(q, s, rng(0), pick)
 		walk_to(q, s, [["sc_gate", "sc_road", "sc_hall"], ["zy_lure", "zy_back", "zy_hall"]][pick] + ["rescue"])
-		check(s.copies("sunce") == 1 and s.copies("zhouyu") == 1, "rescue doesn't give a second copy")
+		check(s.copies(["sunce", "zhouyu"][pick]) == 1, "rescue doesn't give a second copy")
 
 
 func event_on_road(eid: String, option: int, seed_value := 0) -> SaveData:
@@ -505,3 +506,35 @@ func test_yuji_only_brings_trouble() -> void:
 	check_eq(chased.danger, 1, "险 +1")
 	var fled := event_on_road("yuji", 2)
 	check(fled.event_battle.get("ambush", false), "his followers ambush you")
+
+
+func test_chapter_two_follows_the_dongbai_story() -> void:
+	var q := quest(1)
+	var sq: Dictionary = q["squares"]
+	check_eq(q["start"], "set_out")
+	check(sq["set_out"]["cards"].has("sunce") and sq["set_out"]["cards"].has("zhouyu"), "both brothers now")
+	check_eq(sq["huaxiong"]["lose_goto"], "jian_hua")
+	check(sq["dongbai"]["elite"], "董白 is an elite fight")
+	var fate: Array = sq["fate"]["choose"].map(func(o): return o["goto"])
+	check_eq(fate, ["give", "keep"])
+	check(sq["luoyang_b"]["cards"].has("dongbai") and not sq["luoyang_a"]["cards"].has("dongbai"), "董白 joins only if spared")
+
+
+func test_saving_zumao_gives_the_red_headscarf() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "save_zumao"
+	s.resolved = false
+	Quests.choose_event(q, s, rng(0), 0)
+	check(s.relics.has("chize") and s.resolved)
+
+
+func test_handing_dongbai_over_pays_a_relic() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "give"
+	s.resolved = false
+	Quests.choose_event(q, s, rng(0), 0)
+	check_eq(s.relics.size(), 1)
