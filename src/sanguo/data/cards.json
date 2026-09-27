@@ -1,0 +1,66 @@
+{
+  "skills": {
+    "slash":    {"name": "普通攻击", "cost": 1, "uses": null, "target": "enemy",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 1.0}]},
+    "sweep":    {"name": "横扫千军", "cost": 1, "uses": 2, "target": "all_enemies",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 0.55}]},
+    "guard":    {"name": "坚守", "cost": 1, "uses": null, "target": "ally",
+                 "effects": [{"type": "guard"}]},
+
+    "rende":    {"name": "仁德", "cost": 1, "uses": 3, "target": "ally",
+                 "effects": [{"type": "heal", "stat": "int", "power": 1.2}]},
+    "rally":    {"name": "桃园激励", "cost": 1, "uses": 1, "target": "all_allies",
+                 "effects": [{"type": "atk_up", "turns": 3}]},
+    "qinglong": {"name": "青龙偃月斩", "cost": 1, "uses": 2, "target": "enemy",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 1.9}]},
+    "roar":     {"name": "当阳怒吼", "cost": 2, "uses": 1, "target": "all_enemies",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 0.5},
+                             {"type": "stun", "chance": 0.6}]},
+    "qijin":    {"name": "七进七出", "cost": 1, "uses": 2, "target": "enemy",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 1.3},
+                             {"type": "self_guard"}]},
+    "huoji":    {"name": "火计", "cost": 2, "uses": 1, "target": "all_enemies",
+                 "effects": [{"type": "damage", "stat": "int", "power": 1.0}]},
+    "bazhen":   {"name": "八阵图", "cost": 1, "uses": 1, "target": "all_allies",
+                 "effects": [{"type": "guard"}]},
+
+    "wushuang": {"name": "无双", "cost": 1, "uses": 2, "target": "all_enemies",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 0.8}]},
+    "fangtian": {"name": "方天画戟", "cost": 1, "uses": null, "target": "enemy",
+                 "effects": [{"type": "damage", "stat": "atk", "power": 1.3}]},
+    "hunluan":  {"name": "混乱之计", "cost": 1, "uses": 2, "target": "enemy",
+                 "effects": [{"type": "stun", "chance": 0.7}]},
+    "dusha":    {"name": "毒杀", "cost": 1, "uses": null, "target": "enemy",
+                 "effects": [{"type": "damage", "stat": "int", "power": 0.9}]},
+    "baozheng": {"name": "暴政", "cost": 1, "uses": 1, "target": "all_allies",
+                 "effects": [{"type": "atk_up", "turns": 2}]}
+  },
+
+  "generals": {
+    "liubei":     {"name": "刘备",   "faction": "蜀", "hp": 380, "atk": 72,  "int": 78,  "def": 60,
+                   "skills": ["slash", "rende", "rally"]},
+    "guanyu":     {"name": "关羽",   "faction": "蜀", "hp": 420, "atk": 97,  "int": 75,  "def": 70,
+                   "skills": ["slash", "qinglong", "guard"]},
+    "zhangfei":   {"name": "张飞",   "faction": "蜀", "hp": 440, "atk": 98,  "int": 30,  "def": 55,
+                   "skills": ["slash", "sweep", "roar"]},
+    "zhaoyun":    {"name": "赵云",   "faction": "蜀", "hp": 400, "atk": 96,  "int": 76,  "def": 75,
+                   "skills": ["slash", "qijin", "guard"]},
+    "zhugeliang": {"name": "诸葛亮", "faction": "蜀", "hp": 300, "atk": 38,  "int": 100, "def": 50,
+                   "skills": ["slash", "huoji", "bazhen"]},
+
+    "lvbu":       {"name": "吕布",   "faction": "董", "hp": 950, "atk": 160, "int": 38,  "def": 70,
+                   "skills": ["fangtian", "wushuang"]},
+    "huaxiong":   {"name": "华雄",   "faction": "董", "hp": 460, "atk": 128, "int": 58,  "def": 50,
+                   "skills": ["slash", "sweep"]},
+    "liru":       {"name": "李儒",   "faction": "董", "hp": 300, "atk": 44,  "int": 128, "def": 30,
+                   "skills": ["dusha", "hunluan"]},
+    "dongzhuo":   {"name": "董卓",   "faction": "董", "hp": 600, "atk": 80,  "int": 60,  "def": 60,
+                   "skills": ["slash", "baozheng"]}
+  },
+
+  "scenarios": {
+    "hulao": {"name": "虎牢关之战", "turn_limit": 10, "ap": 3,
+              "player": ["liubei", "guanyu", "zhangfei", "zhaoyun"],
+              "enemy": ["huaxiong", "lvbu", "liru"]}
+  }
+}
