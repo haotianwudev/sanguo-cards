@@ -6,7 +6,7 @@
 |---|---|---|---|---|
 | `changsha` | processed/changsha_card.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `danyang` | processed/danyang_card.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `lord` | source/generals/lord.webp | 用户提供 | ⚠️ 兰斯系列主角立绘（AliceSoft），仅自用占位，发布前必须替换 | — |
+| `lord` | source/generals/lord.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供 | — |
 | `wuguotai` | source/generals/wuguotai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
