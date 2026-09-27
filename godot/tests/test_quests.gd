@@ -602,3 +602,11 @@ func test_sunjians_old_guard_can_be_drawn() -> void:
 	var db := GameData.get_db()
 	for cid in ["chengpu", "handang", "huanggai", "zumao", "zhuzhi", "wujing", "sunben", "sunjing"]:
 		check(db.cards[cid]["in_pool"], cid)
+
+
+func test_luoyang_brings_palace_maids_and_dongbais_guards_follow_her() -> void:
+	var sq: Dictionary = quest(1)["squares"]
+	check(sq["luoyang_a"]["cards"].has("gongnv") and sq["luoyang_b"]["cards"].has("gongnv"), "宫女 either way")
+	check(sq["luoyang_b"]["cards"].has("xiliang_nvbing") and not sq["luoyang_a"]["cards"].has("xiliang_nvbing"), "女亲兵 only with 董白")
+	var soldiers: Array = GameData.get_db().soldier_cards().map(func(c): return c["id"])
+	check(soldiers.has("gongnv") and soldiers.has("xiliang_nvbing"), "both can turn up in chests")
