@@ -3,7 +3,7 @@ import random
 import pytest
 
 from sanguo.battle import Battle
-from sanguo.cards import load_db
+from sanguo.cards import build_fighter, build_lord, load_db
 
 
 @pytest.fixture
@@ -11,13 +11,18 @@ def db():
     return load_db()
 
 
-def new(db, seed=0):
-    return Battle.from_scenario(db, "hulao", seed=seed)
+def party(db, *card_ids):
+    return [build_lord(db, "主公")] + [build_fighter(db, c) for c in card_ids]
 
 
-def test_data_loads(db):
-    assert "hulao" in db.scenarios
-    assert db.generals["guanyu"].name == "关羽"
+# a plausible party after ~20 draws: a few SRs, no SSR
+REF_HULAO = ("machao", "zhangfei", "daqiao")
+# the weakest legal party: plain troop cards only
+STARTER = ("cav_n", "spear_n", "archer_n")
+
+
+def new(db, scenario="hulao", cards=REF_HULAO, seed=0):
+    return Battle.from_scenario(db, scenario, party(db, *cards), seed=seed)
 
 
 def test_round_starts_with_intents_and_ap(db):
@@ -26,7 +31,7 @@ def test_round_starts_with_intents_and_ap(db):
     assert set(b.intents) == {0, 1, 2}
 
 
-def test_each_general_acts_once_per_round(db):
+def test_each_unit_acts_once_per_round(db):
     b = new(db)
     b.act(1, "slash", 0)
     with pytest.raises(ValueError):
@@ -35,20 +40,26 @@ def test_each_general_acts_once_per_round(db):
 
 def test_ap_limits_actions(db):
     b = new(db)
-    b.act(0, "slash", 0)
-    b.act(1, "slash", 0)
-    b.act(2, "slash", 0)
+    for i in range(3):
+        b.act(i, "slash", 0)
     assert b.ap == 0
     assert not b.can_act(b.player[3])
 
 
+def test_ap_skill_lets_everyone_act(db):
+    b = new(db, cards=("cav_n", "spear_n", "huangyueying"))
+    b.act(3, "muniu")  # cost 1, +2 AP
+    assert b.ap == 4
+    for i in range(3):
+        b.act(i, "slash", 0)
+
+
 def test_limited_uses_run_out(db):
     b = new(db)
-    for _ in range(2):
-        b.act(1, "qinglong", 0)
-        b.end_turn()
-    assert b.player[1].uses_left["qinglong"] == 0
-    assert "qinglong" not in [s.id for s in b.usable_skills(b.player[1])]
+    b.act(1, "xiliang", 0)  # 马超 signature, 1 use
+    b.end_turn()
+    assert b.player[1].uses_left["xiliang"] == 0
+    assert "xiliang" not in [s.id for s in b.usable_skills(b.player[1])]
 
 
 def test_guard_halves_damage(db):
@@ -81,9 +92,9 @@ def test_win_when_all_enemies_down(db):
     assert b.result == "win"
 
 
-def greedy_play(db, seed):
-    """Simple bot: guard whoever an enemy targets hardest, otherwise hit the weakest enemy hard."""
-    b = new(db, seed)
+def greedy_play(db, scenario, cards, seed):
+    """Naive bot: ignores enemy intents; hits the weakest enemy with its biggest attack, heals when hurt."""
+    b = new(db, scenario, cards, seed)
     rng = random.Random(seed)
     while b.result is None:
         while b.result is None and b.ap > 0:
@@ -92,7 +103,6 @@ def greedy_play(db, seed):
                 break
             i = rng.choice(ready)
             u = b.player[i]
-            skills = b.usable_skills(u)
             hurt = any(p.alive and p.hp < 0.4 * p.card.hp for p in b.player)
 
             def score(s):
@@ -104,7 +114,7 @@ def greedy_play(db, seed):
                     return 2.0 if hurt else 0
                 return 0.1  # guard / buffs: only when nothing better
 
-            sk = max(skills, key=score)
+            sk = max(b.usable_skills(u), key=score)
             tgt = None
             if b.needs_target(sk):
                 pool = b.foes(u) if sk.target == "enemy" else b.friends(u)
@@ -115,9 +125,20 @@ def greedy_play(db, seed):
     return b.result
 
 
-def test_scenario_is_winnable_but_not_trivial(db):
-    results = [greedy_play(db, s) for s in range(200)]
-    win_rate = results.count("win") / len(results)
-    # a naive damage-first bot (ignores enemy intents) should win only sometimes;
-    # this leaves room for deliberate play (guarding, focus fire) to do better
-    assert 0.15 < win_rate < 0.6, win_rate
+def win_rate(db, scenario, cards, n=200):
+    return [greedy_play(db, scenario, cards, s) for s in range(n)].count("win") / n
+
+
+def test_huangjin_is_beatable_with_starter_troops(db):
+    # the first battle should be winnable with only N cards, but not a free win
+    assert 0.3 < win_rate(db, "huangjin", STARTER) < 0.9
+
+
+def test_hulao_is_hard_for_naive_play(db):
+    # leaves room for deliberate play (guarding vs 无双, focus fire) to do better
+    assert 0.15 < win_rate(db, "hulao", REF_HULAO) < 0.6
+
+
+def test_better_cards_win_more(db):
+    ssr = ("guanyu", "zhaoyun", "diaochan")
+    assert win_rate(db, "hulao", STARTER) < win_rate(db, "hulao", REF_HULAO) < win_rate(db, "hulao", ssr)

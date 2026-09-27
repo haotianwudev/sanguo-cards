@@ -2,7 +2,7 @@
 
 Flow per round:
   1. Round starts: each living enemy declares an *intent* (skill + target), visible to the player.
-  2. Player spends AP: each general may act at most once per round.
+  2. Player spends AP: each card in the party may act at most once per round.
   3. Player ends the turn: enemies execute their intents, statuses tick down.
 Win: every enemy down. Lose: every player general down, or the turn limit runs out.
 """
@@ -11,7 +11,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass, field
 
-from .cards import CardDB, GeneralCard, Scenario, Skill
+from .cards import CardDB, Fighter, Scenario, Skill
 
 PLAYER, ENEMY = "player", "enemy"
 GUARD_FACTOR = 0.5
@@ -20,7 +20,7 @@ ATK_UP_FACTOR = 1.3
 
 @dataclass
 class Unit:
-    card: GeneralCard
+    card: Fighter
     side: str
     hp: int
     uses_left: dict[str, int | None]
@@ -62,18 +62,18 @@ class Battle:
     result: str | None = None  # "win" | "lose"
 
     @classmethod
-    def from_scenario(cls, db: CardDB, scenario_id: str, seed: int | None = None) -> Battle:
+    def from_scenario(cls, db: CardDB, scenario_id: str, party: list[Fighter],
+                      seed: int | None = None) -> Battle:
         sc = db.scenarios[scenario_id]
         b = cls(db, sc, random.Random(seed),
-                [cls._unit(db, g, PLAYER) for g in sc.player],
-                [cls._unit(db, g, ENEMY) for g in sc.enemy])
+                [cls._unit(db, f, PLAYER) for f in party],
+                [cls._unit(db, db.enemies[e], ENEMY) for e in sc.enemy])
         b._start_round()
         return b
 
     @staticmethod
-    def _unit(db: CardDB, gid: str, side: str) -> Unit:
-        card = db.generals[gid]
-        return Unit(card, side, card.hp, {s: db.skills[s].uses for s in card.skills})
+    def _unit(db: CardDB, f: Fighter, side: str) -> Unit:
+        return Unit(f, side, f.hp, {s: db.skills[s].uses for s in f.skills})
 
     # ---- queries -------------------------------------------------------
 
@@ -194,6 +194,8 @@ class Battle:
             targets = [x for x in self.foes(u) if x.alive]
         elif sk.target == "all_allies":
             targets = [x for x in self.friends(u) if x.alive]
+        elif sk.target == "self":
+            targets = [u]
         else:
             targets = [target]
         head = f"{u.name}【{sk.name}】"
@@ -210,6 +212,10 @@ class Battle:
         if kind == "self_guard":
             u.guard = True
             return [f"  {u.name} 进入防御姿态"]
+        if kind == "ap":
+            if u.side == PLAYER:
+                self.ap += eff["amount"]
+            return [f"  行动力 +{eff['amount']}"]
         for t in targets:
             if not t.alive:
                 continue

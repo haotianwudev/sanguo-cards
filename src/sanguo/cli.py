@@ -1,13 +1,115 @@
-"""Plain-text front end for a battle. All game rules live in battle.py; this only renders and reads input."""
+"""Plain-text front end: main menu (gacha, collection, party, battle). Rules live elsewhere; this only renders and reads input."""
 from __future__ import annotations
 
 import argparse
+import random
+from pathlib import Path
 
+from . import collection as col
 from .battle import Battle, Unit
-from .cards import load_db
+from .cards import RARITIES, CardDB, Fighter, build_fighter, load_db, power, power_split
+
+TARGET_LABEL = {"enemy": "单体敌", "ally": "单体友", "self": "自身", "all_enemies": "全体敌", "all_allies": "全体友"}
+RARITY_MARK = {"N": "N  ", "R": "R  ", "SR": "SR ", "SSR": "SSR"}
 
 
-def bar(u: Unit, width: int = 16) -> str:
+def ask(prompt: str, n: int, allow_back: bool = True) -> int | None:
+    """Return a 0-based choice, or None for back."""
+    while True:
+        raw = input(prompt).strip().lower()
+        if allow_back and raw in ("", "0", "b"):
+            return None
+        if raw in ("q", "quit"):
+            raise SystemExit("已退出")
+        if raw.isdigit() and 1 <= int(raw) <= n:
+            return int(raw) - 1
+        print("  输入无效")
+
+
+def troop_tag(db: CardDB, troop: str) -> str:
+    return f"〔{db.troops[troop].short}〕"
+
+
+def fighter_line(db: CardDB, f: Fighter) -> str:
+    rarity = RARITY_MARK[f.rarity] if f.rarity else "主公"
+    troop_p, general_p = power_split(db, f)
+    split = f"(兵种{troop_p}+武将{general_p})" if general_p else f"(兵种{troop_p})"
+    skills = "、".join(db.skills[s].name for s in f.skills)
+    return (f"{rarity} {troop_tag(db, f.troop)}{f.name:<5} 战力{power(f):>4}{split:<14} | "
+            f"兵{f.hp:>4} 武{f.atk:>3} 智{f.int:>3} 统{f.def_:>3} | {skills}")
+
+
+# ---- gacha ---------------------------------------------------------------
+
+def do_pull(db: CardDB, save: col.Save, rng: random.Random, n: int) -> None:
+    n = min(n, save.draws)
+    if n == 0:
+        print("  招募令已用完 —— 打赢战斗可以获得更多")
+        return
+    cards = col.pull(db, save, rng, n)
+    if not cards:
+        print("  所有武将都已招募！")
+        return
+    print(f"\n—— 招募 {len(cards)} 次 ——")
+    for c in sorted(cards, key=lambda c: RARITIES.index(c.rarity), reverse=True):
+        flash = " ✦✦✦" if c.rarity == "SSR" else (" ✦" if c.rarity == "SR" else "")
+        print(f"  {fighter_line(db, build_fighter(db, c.id))}{flash}")
+    print(f"  剩余招募令 {save.draws} · 卡池剩余 {col.pool_left(db, save)} 张")
+
+
+# ---- collection & party --------------------------------------------------
+
+def show_collection(db: CardDB, save: col.Save) -> list[Fighter]:
+    fighters = sorted(col.owned_fighters(db, save),
+                      key=lambda f: (list(db.troops).index(f.troop), -power(f)))
+    print(f"\n—— 卡册（{len(save.owned)}/{len(db.cards)}）——")
+    troop = None
+    for i, f in enumerate(fighters):
+        if f.troop != troop:
+            troop = f.troop
+            print(f" [{db.troops[troop].name}]")
+        mark = " ◆出战" if f.id in save.party else ""
+        print(f"  {i + 1:>2}. {fighter_line(db, f)}{mark}")
+    if not fighters:
+        print("  （空）先去抽卡吧")
+    return fighters
+
+
+def show_party(db: CardDB, save: col.Save) -> None:
+    print(f"\n—— 当前编成（{len(save.party) + 1}/{save.party_slots}）——")
+    for f in col.party_fighters(db, save):
+        print(f"  {fighter_line(db, f)}")
+
+
+def edit_party(db: CardDB, save: col.Save) -> None:
+    while True:
+        show_party(db, save)
+        print("\n  1. 自动编成（每个兵种取最强，再取最强的兵种）\n  2. 手动编成\n  0. 返回")
+        choice = ask("选择：", 2)
+        if choice is None:
+            return
+        if choice == 0:
+            save.party = col.auto_party(db, save)
+            continue
+        fighters = show_collection(db, save)
+        if not fighters:
+            continue
+        raw = input(f"输入最多 {save.party_slots - 1} 个卡册编号，空格分隔（同兵种只能一张）：").split()
+        try:
+            ids = [fighters[int(x) - 1].id for x in raw]
+        except (ValueError, IndexError):
+            print("  编号无效")
+            continue
+        err = col.validate_party(db, save, ids)
+        if err:
+            print(f"  ✗ {err}")
+        else:
+            save.party = ids
+
+
+# ---- battle --------------------------------------------------------------
+
+def bar(u: Unit, width: int = 14) -> str:
     filled = round(width * u.hp / u.card.hp)
     return "█" * filled + "·" * (width - filled)
 
@@ -24,48 +126,37 @@ def status(u: Unit) -> str:
 
 
 def render(b: Battle) -> None:
+    db = b.db
     print()
     print(f"═══ {b.scenario.name} · 第 {b.round}/{b.scenario.turn_limit} 回合 · 行动力 {b.ap} ═══")
     print("敌军：")
     for i, e in enumerate(b.enemy):
+        name = f"{troop_tag(db, e.card.troop)}{e.name}"
         if not e.alive:
-            print(f"  {i + 1}. {e.name:<4} —— 败退")
+            print(f"  {i + 1}. {name:<7} —— 败退")
             continue
         intent = b.intents.get(i)
         plan = ""
         if intent:
             tgt = intent.target.name if intent.target else \
-                {"all_enemies": "我军全体", "all_allies": "敌军全体"}.get(intent.skill.target, "")
+                {"all_enemies": "我军全体", "all_allies": "敌军全体", "self": "自身"}.get(intent.skill.target, "")
             plan = f"  ⚠ 准备【{intent.skill.name}】→ {tgt}"
-        print(f"  {i + 1}. {e.name:<4} {bar(e)} {e.hp:>4}/{e.card.hp:<4} {status(e)}{plan}")
+        print(f"  {i + 1}. {name:<7} {bar(e)} {e.hp:>4}/{e.card.hp:<4} {status(e)}{plan}")
     print("我军：")
     for i, p in enumerate(b.player):
+        name = f"{troop_tag(db, p.card.troop)}{p.name}"
         if not p.alive:
-            print(f"  {i + 1}. {p.name:<4} —— 败退")
+            print(f"  {i + 1}. {name:<7} —— 败退")
             continue
         mark = "✓已行动" if p.acted else ""
-        print(f"  {i + 1}. {p.name:<4} {bar(p)} {p.hp:>4}/{p.card.hp:<4} {status(p)} {mark}")
-
-
-def ask(prompt: str, n: int, allow_back: bool = True) -> int | None:
-    """Return a 0-based choice, or None for back/end."""
-    while True:
-        raw = input(prompt).strip().lower()
-        if allow_back and raw in ("", "0", "b", "e"):
-            return None
-        if raw in ("q", "quit"):
-            raise SystemExit("已退出")
-        if raw.isdigit() and 1 <= int(raw) <= n:
-            return int(raw) - 1
-        print("  输入无效")
+        print(f"  {i + 1}. {name:<7} {bar(p)} {p.hp:>4}/{p.card.hp:<4} {status(p)} {mark}")
 
 
 def skill_label(b: Battle, u: Unit, sid: str) -> str:
     sk = b.db.skills[sid]
     left = u.uses_left[sid]
     uses = "∞" if left is None else f"剩{left}"
-    tgt = {"enemy": "单体敌", "ally": "单体友", "all_enemies": "全体敌", "all_allies": "全体友"}[sk.target]
-    return f"{sk.name}（耗{sk.cost} · {uses} · {tgt}）"
+    return f"{sk.name}（耗{sk.cost} · {uses} · {TARGET_LABEL[sk.target]}）"
 
 
 def player_turn(b: Battle) -> None:
@@ -75,7 +166,7 @@ def player_turn(b: Battle) -> None:
         if b.ap == 0 or not ready:
             input("行动力用尽 / 无人可动，回车结束回合…")
             return
-        who = ask("选择武将编号（回车=结束回合，q=退出）：", len(b.player))
+        who = ask("选择部队编号（回车=结束回合，q=退出）：", len(b.player))
         if who is None:
             return
         u = b.player[who]
@@ -102,15 +193,10 @@ def player_turn(b: Battle) -> None:
             print(line)
 
 
-def main(argv: list[str] | None = None) -> None:
-    ap = argparse.ArgumentParser(prog="sanguo", description="三国卡牌 · 文字版战斗")
-    ap.add_argument("--scenario", default="hulao")
-    ap.add_argument("--seed", type=int, default=None)
-    args = ap.parse_args(argv)
-
-    db = load_db()
-    b = Battle.from_scenario(db, args.scenario, seed=args.seed)
-    print(f"【{b.scenario.name}】{b.scenario.turn_limit} 回合内击败全部敌将。每回合行动力 {b.scenario.ap}，每名武将每回合限动一次。")
+def run_battle(db: CardDB, save: col.Save, scenario_id: str, seed: int | None) -> None:
+    sc = db.scenarios[scenario_id]
+    b = Battle.from_scenario(db, scenario_id, col.party_fighters(db, save), seed=seed)
+    print(f"\n【{sc.name}】{sc.turn_limit} 回合内击败全部敌将。每回合行动力 {sc.ap}，每支部队每回合限动一次。")
     while b.result is None:
         player_turn(b)
         if b.result:
@@ -118,7 +204,68 @@ def main(argv: list[str] | None = None) -> None:
         for line in b.end_turn():
             print(line)
     render(b)
-    print("\n★ 胜利！" if b.result == "win" else "\n✗ 战败……")
+    if b.result == "win":
+        reward = col.record_win(db, save, scenario_id)
+        print(f"\n★ 胜利！获得招募令 ×{reward}")
+    else:
+        print("\n✗ 战败…… 调整编成再来")
+
+
+def choose_battle(db: CardDB, save: col.Save, seed: int | None) -> None:
+    ids = list(db.scenarios)
+    for i, sid in enumerate(ids):
+        sc = db.scenarios[sid]
+        done = "✓已通关" if sid in save.cleared else "未通关"
+        enemies = "、".join(db.enemies[e].name for e in sc.enemy)
+        print(f"  {i + 1}. {sc.name:<6} 敌：{enemies}  （{done}）")
+    pick = ask("选择战役（回车=返回）：", len(ids))
+    if pick is not None:
+        run_battle(db, save, ids[pick], seed)
+
+
+# ---- main ----------------------------------------------------------------
+
+def main(argv: list[str] | None = None) -> None:
+    ap = argparse.ArgumentParser(prog="sanguo", description="三国卡牌 · 文字版")
+    ap.add_argument("--save", type=Path, default=col.DEFAULT_SAVE, help=f"存档路径（默认 {col.DEFAULT_SAVE}）")
+    ap.add_argument("--new", action="store_true", help="忽略旧存档，重新开始")
+    ap.add_argument("--seed", type=int, default=None, help="固定随机种子（抽卡与战斗）")
+    args = ap.parse_args(argv)
+
+    db = load_db()
+    rng = random.Random(args.seed)
+    if args.save.exists() and not args.new:
+        save = col.Save.load(args.save)
+        print(f"读取存档：{args.save}")
+    else:
+        save = col.Save.new(db)
+        name = input("请输入主公之名（回车=主公）：").strip()
+        save.lord_name = name or "主公"
+        print(f"欢迎，{save.lord_name}。获得招募令 ×{save.draws} —— 先去招募武将吧。")
+
+    try:
+        while True:
+            print(f"\n══ {save.lord_name} · 招募令 {save.draws} · 卡册 {len(save.owned)}/{len(db.cards)} ══")
+            print("  1. 招募 1 次\n  2. 招募 10 次\n  3. 卡册\n  4. 编成\n  5. 出战\n  0. 保存并退出")
+            choice = ask("选择：", 5)
+            if choice is None:
+                break
+            if choice == 0:
+                do_pull(db, save, rng, 1)
+            elif choice == 1:
+                do_pull(db, save, rng, 10)
+            elif choice == 2:
+                show_collection(db, save)
+            elif choice == 3:
+                edit_party(db, save)
+            elif choice == 4:
+                if not save.party:
+                    print("  编成为空 —— 只有主公一人出战（可在「编成」里自动编成）")
+                choose_battle(db, save, args.seed)
+            save.dump(args.save)
+    finally:
+        save.dump(args.save)
+        print(f"已保存到 {args.save}")
 
 
 if __name__ == "__main__":
