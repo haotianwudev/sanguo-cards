@@ -97,7 +97,12 @@ func test_failing_restarts_but_keeps_choices_and_cards() -> void:
 
 func test_every_event_option_resolves_or_leads_somewhere() -> void:
 	var q := quest(0)
-	for eid in q["event_pool"]:
+	var all: Array = []
+	for qq in GameData.get_db().quests:
+		for eid in qq["event_pool"]:
+			if not all.has(eid):
+				all.append(eid)
+	for eid in all:
 		var ev: Dictionary = GameData.get_db().events[eid]
 		for i in ev["options"].size():
 			for seed_value in 4:
@@ -538,3 +543,32 @@ func test_handing_dongbai_over_pays_a_relic() -> void:
 	s.resolved = false
 	Quests.choose_event(q, s, rng(0), 0)
 	check_eq(s.relics.size(), 1)
+
+
+func test_trades_take_something_away() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.relics = ["hupi"]
+	s.grant_card("danyang")
+	s.grant_card("danyang")
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "merchant"}
+	Quests.choose_event(q, s, rng(0), 0)
+	check(s.relics.is_empty() and not s.offer.is_empty(), "a relic for a pick of generals")
+	var s2 := SaveData.create()
+	Quests.begin(q, s2)
+	s2.grant_card("danyang")
+	s2.grant_card("danyang")
+	s2.take("sunce")
+	s2.square = "road"
+	s2.resolved = false
+	s2.events = {"road": "smith"}
+	Quests.choose_event(q, s2, rng(0), 0)
+	check(s2.copies("danyang") == 0 and s2.offer_kind == "upgrade", "two soldiers melted into an upgrade")
+
+
+func test_each_chapter_has_a_big_event_pool() -> void:
+	check(quest(0)["event_pool"].size() >= 20, "chapter 1: %d events" % quest(0)["event_pool"].size())
+	check(quest(1)["event_pool"].size() >= 15, "chapter 2: %d events" % quest(1)["event_pool"].size())

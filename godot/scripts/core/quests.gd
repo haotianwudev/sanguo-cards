@@ -453,6 +453,20 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				var r: Dictionary = db.relics[rid]
 				out["gained"].append({"id": rid, "name": "宝物·" + r["name"], "relic": true})
 				out["log"].append("获得宝物：%s（%s）" % [r["name"], r["desc"]])
+		if e.has("drop_relic") and not save.relics.is_empty():  # trade away a random 宝物
+			var gone: String = save.relics.pop_at(rng.randi_range(0, save.relics.size() - 1))
+			out["log"].append("失去宝物：" + db.relics[gone]["name"])
+		if e.has("lose_soldier"):  # lose soldier copies at random
+			for _n in int(e["lose_soldier"]):
+				var have: Array = save.soldiers.keys().filter(func(c): return save.soldiers[c] > 0)
+				if have.is_empty():
+					break
+				var cid: String = have[rng.randi_range(0, have.size() - 1)]
+				save.soldiers[cid] -= 1
+				if save.soldiers[cid] <= 0:
+					save.soldiers.erase(cid)
+					save.party.erase(cid)
+				out["log"].append("失去兵卡：" + db.cards[cid]["name"])
 		if e.has("difficulty"):
 			save.difficulty += int(e["difficulty"])
 			out["log"].append("难度上升！今后所有敌人 +%d%%" % int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)))

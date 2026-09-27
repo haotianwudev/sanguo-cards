@@ -95,7 +95,7 @@ Adding a portrait, checklist:
 - **Event** (`story.json` events, for ？ squares; a square with `event` is fixed): `title, glyph, color, text,
   portraits, options [{label, effects, win}]` — effects `say, damage, heal, rest, poison (−⅓ HP), card, soldier,
   offer {from | generals + rates | soldiers}, upgrade (true = pick, "random"), refresh, relic, danger (险, run),
-  difficulty (whole campaign), battle + ambush, chance {then, else}`. Text uses `{lord}` for the player's name.
+  difficulty (whole campaign), drop_relic, lose_soldier (trades: give something up), battle + ambush, chance {then, else}`. Text uses `{lord}` for the player's name.
 
 After adding content: run tests, screenshot the relevant demo, fix layout overflow (e.g. three skills shrink the
 battle cards), commit, push.
