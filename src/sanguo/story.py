@@ -1,7 +1,7 @@
 """Branching story: a graph of nodes, each a list of steps. Pure logic — the CLI renders steps and calls advance().
 
 Step kinds:
-  {"text": [lines]}                                   show lines ({lord} is replaced)
+  {"text": [lines], "portraits": [ids]}               show lines ({lord} is replaced), optional portraits
   {"choose": [{"card", "label", "goto"}, ...]}        pick one: that card joins, story jumps to "goto"
   {"battle": scenario_id}                             must win to continue
   {"give": {"cards": [...]}}                          reward cards
@@ -15,6 +15,8 @@ from importlib import resources
 
 from . import collection as col
 from .cards import CardDB
+
+KINDS = ("text", "choose", "battle", "give")
 
 
 @dataclass(frozen=True)
@@ -51,7 +53,10 @@ def _validate(db: CardDB, story: Story) -> None:
             need_node(n.next, n.id)
         for i, st in enumerate(n.steps):
             where = f"{n.id}[{i}]"
-            (kind,) = st.keys()
+            kinds = [k for k in st if k in KINDS]
+            if len(kinds) != 1:
+                raise ValueError(f"{where}: a step needs exactly one of {KINDS}, got {list(st)}")
+            kind = kinds[0]
             if kind == "choose":
                 for opt in st["choose"]:
                     if opt["card"] not in db.cards:
@@ -64,8 +69,6 @@ def _validate(db: CardDB, story: Story) -> None:
                 bad = [c for c in st["give"].get("cards", []) if c not in db.cards]
                 if bad:
                     raise ValueError(f"{where}: unknown cards {bad}")
-            elif kind != "text":
-                raise ValueError(f"{where}: unknown step kind {kind}")
 
 
 def current(story: Story, save: col.Save) -> tuple[Node, dict] | None:
@@ -77,8 +80,7 @@ def current(story: Story, save: col.Save) -> tuple[Node, dict] | None:
 
 
 def kind(step: dict) -> str:
-    (k,) = step.keys()
-    return k
+    return next(k for k in step if k in KINDS)
 
 
 def advance(db: CardDB, story: Story, save: col.Save, choice: int | None = None) -> None:

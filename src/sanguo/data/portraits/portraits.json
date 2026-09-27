@@ -1,0 +1,7 @@
+{
+  "_comment": "key = card id or person id; face = [x, y] of the face centre as a fraction of the image; head = head height as a fraction of image height (sets how tight close-ups crop)",
+  "sunce":    {"file": "sunce.jpg",    "face": [0.49, 0.22], "head": 0.10},
+  "zhouyu":   {"file": "zhouyu.jpg",   "face": [0.46, 0.29], "head": 0.08},
+  "wuguotai": {"file": "wuguotai.jpg", "face": [0.50, 0.26], "head": 0.22},
+  "sunjian":  {"file": "sunjian.jpg",  "face": [0.49, 0.16], "head": 0.12}
+}

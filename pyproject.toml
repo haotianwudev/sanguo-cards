@@ -7,7 +7,7 @@ name = "sanguo-cards"
 version = "0.1.0"
 description = "三国卡牌 — Three Kingdoms card strategy game (text-first)"
 requires-python = ">=3.11"
-dependencies = ["textual>=1.0"]
+dependencies = ["textual>=1.0", "pillow>=10"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
@@ -20,6 +20,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "sanguo.data" = ["*.json"]
+"sanguo.data.portraits" = ["*.json", "*.jpg"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

@@ -16,7 +16,7 @@ from textual.screen import ModalScreen, Screen
 from textual.widgets import Button, DataTable, Footer, Input, Label, RichLog, Static
 
 from . import collection as col
-from . import story
+from . import portrait, story
 from .battle import Battle
 from .cards import LORD, RARITIES, CardDB, Fighter, Leader, Skill, build_fighter, load_db, power, power_split
 
@@ -66,20 +66,42 @@ def card_body(db: CardDB, f: Fighter) -> str:
             f"[#abb2bf]{skills}[/]")
 
 
-class CardView(Static):
-    """A card with a rarity-coloured border. Clicking posts CardView.Clicked."""
+class Portrait(Static):
+    """A character portrait that redraws itself to fit whatever size the layout gives it."""
+
+    def __init__(self, key: str, heads: float = 3.0, **kw) -> None:
+        super().__init__(**kw)
+        self.key = key
+        self.heads = heads
+
+    def render(self):
+        w, h = self.content_size.width, self.content_size.height
+        if w <= 0 or h <= 0:
+            return ""
+        return portrait.render(self.key, w, h, self.heads)
+
+
+class CardView(Vertical):
+    """A card with a rarity-coloured border (and portrait, when there is art). Clicking posts CardView.Clicked."""
 
     class Clicked(Message):
         def __init__(self, card_id: str) -> None:
             super().__init__()
             self.card_id = card_id
 
-    def __init__(self, db: CardDB, f: Fighter, note: str = "", **kw) -> None:
-        super().__init__(card_body(db, f) + (f"\n{note}" if note else ""), **kw)
+    def __init__(self, db: CardDB, f: Fighter, note: str = "", show_portrait: bool = True, **kw) -> None:
+        super().__init__(**kw)
+        self.db, self.f, self.note, self.show_portrait = db, f, note, show_portrait
         self.card_id = f.id
         self.border_title = escape(f.name)
         self.border_subtitle = f.rarity or "主公"
         self.add_class(f.rarity or "lord")
+
+    def compose(self) -> ComposeResult:
+        key = portrait.key_for(self.db, self.f.id) if self.show_portrait else None
+        if key:
+            yield Portrait(key, heads=2.6, classes="card-portrait")
+        yield Static(card_body(self.db, self.f) + (f"\n{self.note}" if self.note else ""))
 
     def on_click(self) -> None:
         self.post_message(self.Clicked(self.card_id))
@@ -195,7 +217,15 @@ class StoryScreen(Screen):
         lord = escape(app.save.lord_name)
         if kind == "text":
             text = "\n\n".join(escape(line).replace("{lord}", f"[b #e06c75]{lord}[/]") for line in step["text"])
-            body.mount(Static(text, classes="story-text"))
+            keys = [k for k in step.get("portraits", []) if k in portrait._index()]
+            if keys:
+                row = Horizontal(classes="story-row")
+                body.mount(row)
+                for k in keys:
+                    row.mount(Portrait(k, heads=5.5, classes="story-portrait"))
+                row.mount(Static(text, classes="story-text story-side"))
+            else:
+                body.mount(Static(text, classes="story-text"))
             actions.mount(Button("继续 ▶", name="next", variant="primary"))
         elif kind == "choose":
             body.mount(Static("选择一人随你同行：", classes="story-text"))
@@ -340,7 +370,10 @@ class CollectionScreen(Screen):
         detail.remove_children()
         if event.row_key and event.row_key.value:
             f = build_fighter(app.db, event.row_key.value)
-            detail.mount(CardView(app.db, f))
+            key = portrait.key_for(app.db, f.id)
+            if key:
+                detail.mount(Portrait(key, heads=99, classes="big-portrait"))
+            detail.mount(CardView(app.db, f, show_portrait=False))
             skills = "\n".join(f"[b]{app.db.skills[s].name}[/]  {skill_desc(app.db.skills[s])}" for s in f.skills)
             ld = col.leader_for(app.db, app.save, f.id)
             detail.mount(Static(skills + "\n\n当队长时：" + leader_note(ld), classes="skill-list"))
@@ -423,12 +456,19 @@ class PartyScreen(Screen):
 class LeaderView(Vertical):
     """One leader in the bottom row: its stats and one button per skill (Rance X style)."""
 
-    def __init__(self, idx: int, skill_ids: tuple[str, ...], **kw) -> None:
+    def __init__(self, idx: int, skill_ids: tuple[str, ...], card_id: str, placeholder: str, **kw) -> None:
         super().__init__(**kw)
         self.idx = idx
         self.skill_ids = skill_ids
+        self.card_id = card_id
+        self.placeholder = placeholder
 
     def compose(self) -> ComposeResult:
+        key = portrait.key_for(self.app.db, self.card_id)  # type: ignore[attr-defined]
+        if key:
+            yield Portrait(key, heads=2.0, classes="leader-portrait")
+        else:
+            yield Static(self.placeholder, classes="leader-portrait no-portrait")
         yield Static(classes="leader-info")
         for sid in self.skill_ids:
             yield Button("", name=f"{self.idx}:{sid}", classes="skill")
@@ -455,7 +495,9 @@ class BattleScreen(Screen[bool]):
             yield Button("回合结束 (E)", id="end", variant="error")
         with Horizontal(id="leaders"):
             for i, u in enumerate(self.b.leaders):
-                yield LeaderView(i, u.leader.card.skills, classes="leader")
+                troop = app.db.troops[u.leader.card.troop]
+                yield LeaderView(i, u.leader.card.skills, u.leader.card.id, f"\n〔{troop.name}〕",
+                                 classes="leader")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -680,6 +722,13 @@ class SanguoApp(App):
     CardView.lord { border: round #e06c75; border-title-color: #e06c75; }
     .card-grid { grid-size: 4; grid-gutter: 1 2; height: auto; padding: 0 2; }
     #gacha-results { grid-size: 5; }
+    CardView .card-portrait { height: 7; margin-bottom: 1; }
+    .big-portrait { height: 20; margin-bottom: 1; }
+    .story-row { height: auto; }
+    .story-portrait { width: 26; height: 16; margin-right: 2; }
+    .story-side { width: 1fr; }
+    .leader-portrait { height: 7; }
+    .no-portrait { content-align: center middle; color: #5c6370; background: #1d1e22; }
     .empty-slot { border: dashed #3b3f4a; width: 1fr; height: 9; content-align: center middle; color: #5c6370; }
 
     #story-title { height: 3; padding: 1 2 0 2; text-style: bold; color: #f5c542; }

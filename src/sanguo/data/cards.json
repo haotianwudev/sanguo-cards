@@ -45,6 +45,7 @@
     "chibi": {"name": "赤壁业火", "cost": 3, "uses": 1, "effects": [{"type": "magic", "power": 7.0}]},
     "lianying": {"name": "火烧连营", "cost": 2, "uses": 1, "effects": [{"type": "magic", "power": 3.0}, {"type": "break", "amount": 0.3, "turns": 3}]},
     "baiyi": {"name": "白衣渡江", "cost": 1, "uses": 1, "effects": [{"type": "attack", "power": 2.5}, {"type": "stun", "chance": 0.3}]},
+    "menghu": {"name": "江东猛虎", "cost": 2, "cumulative": true, "effects": [{"type": "attack", "power": 1.3, "hits": 3}]},
     "shenting": {"name": "神亭酣战", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 1.0, "hits": 2}]}
   },
   "cards": {
@@ -87,6 +88,7 @@
     "sunce_zhong": {"name": "孙策·中年", "rarity": "SSR", "troop": "cavalry", "person": "sunce", "bonus": {"hp": 110, "at": 36}, "skills": ["bawang"]},
     "zhouyu_chibi": {"name": "周瑜·赤壁", "rarity": "SSR", "troop": "strategist", "person": "zhouyu", "bonus": {"hp": 70, "at": 32}, "skills": ["chibi"]},
     "luxun": {"name": "陆逊", "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 60, "at": 28}, "skills": ["lianying"]},
+    "sunjian": {"name": "孙坚", "rarity": "SSR", "troop": "infantry", "bonus": {"hp": 150, "at": 38}, "skills": ["menghu"]},
     "wuguotai": {"name": "吴国太", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 40, "at": 18}, "skills": ["cimu"], "pool": false},
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]}
   },
