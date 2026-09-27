@@ -1,4 +1,4 @@
-# Start the game as a web page for phones on the same Wi-Fi.
+﻿# Start the game as a web page for phones on the same Wi-Fi.
 # Usage (normal PowerShell, in the repo folder):  .\scripts\serve-lan.ps1
 # One-time setup (admin PowerShell) so the phone is allowed through the firewall:
 #   New-NetFirewallRule -DisplayName "sanguo-cards LAN" -Direction Inbound -Protocol TCP -LocalPort 8766 -RemoteAddress LocalSubnet -Profile Private -Action Allow
