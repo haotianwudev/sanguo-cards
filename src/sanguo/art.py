@@ -27,7 +27,7 @@ from .cards import CardDB, load_db
 
 ROOT = Path(__file__).resolve().parents[2]
 PICS = ROOT / "pics"
-OUT = Path(__file__).resolve().parent / "data" / "portraits"
+OUT = ROOT / "godot" / "data" / "portraits"  # the Godot project is the game now
 MAX_H = 640
 
 
@@ -41,7 +41,13 @@ def build(pics: Path = PICS, out: Path = OUT) -> list[str]:
         dst = out / f"{key}.jpg"
         src = pics / e["src"]
         if src.exists():
-            im = Image.open(src).convert("RGB")
+            im = Image.open(src)
+            if im.mode in ("RGBA", "LA", "P"):  # flatten transparent art onto the paper colour
+                im = im.convert("RGBA")
+                bg = Image.new("RGBA", im.size, (246, 243, 234, 255))
+                bg.alpha_composite(im)
+                im = bg
+            im = im.convert("RGB")
             if im.height > MAX_H:
                 im = im.resize((round(im.width * MAX_H / im.height), MAX_H), Image.LANCZOS)
             im.save(dst, quality=88)

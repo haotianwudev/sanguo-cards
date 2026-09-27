@@ -57,7 +57,28 @@ func _build() -> void:
 	er.add_theme_constant_override("separation", 22)
 	enemy_panel.add_child(er)
 	var key := Kit.enemy_portrait_key(e)
-	if key != "":
+	var fr := Kit.frame("enemy")
+	if key != "" and not fr.is_empty():
+		var holder := Control.new()  # portrait inside the enemy frame (iron by default, see ui.json)
+		var sz := Vector2(160, 224)
+		holder.custom_minimum_size = sz
+		var r: Rect2 = fr["window"]
+		var win := Rect2(r.position * sz, r.size * sz)
+		var art := TextureRect.new()
+		art.texture = Kit.portrait(key, win.size.x / win.size.y, 3.5)
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		art.position = win.position
+		art.size = win.size
+		holder.add_child(art)
+		var frame := TextureRect.new()
+		frame.texture = fr["texture"]
+		frame.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		frame.stretch_mode = TextureRect.STRETCH_SCALE
+		frame.size = sz
+		holder.add_child(frame)
+		_enemy_art = holder
+	elif key != "":
 		var tr := TextureRect.new()
 		tr.texture = Kit.portrait(key, 0.75, 3.5)
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -138,14 +159,14 @@ func _build() -> void:
 		col.add_theme_constant_override("separation", 6)
 		row.add_child(col)
 		var card_id: String = u["leader"]["card"]["id"]
-		var v := CardView.make(card_id, Vector2(200, 250), {"leader": u["leader"], "skills": false,
+		var v := CardView.make(card_id, Vector2(180, 252), {"leader": u["leader"], "skills": false,
 			"lord_name": Game.save.lord_name})
 		v.focus_mode = Control.FOCUS_NONE
 		col.add_child(v)
 		_cards.append(v)
 		for sid in u["leader"]["card"]["skills"]:
 			var btn := Kit.button("", "blue", Kit.FONT_SMALL)
-			btn.custom_minimum_size = Vector2(200, 44)
+			btn.custom_minimum_size = Vector2(180, 44)
 			btn.pressed.connect(_on_skill.bind(i, sid))
 			col.add_child(btn)
 			_skill_buttons.append([i, sid, btn])
@@ -370,8 +391,8 @@ func _tip(text: String) -> void:
 	var l := Kit.label(text, Kit.FONT_SMALL)
 	l.add_theme_color_override("font_color", Color.WHITE)
 	l.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.72), 10, 0, Color.TRANSPARENT, 10))
-	l.position = Vector2(200, 14)
-	l.size = Vector2(700, 36)
+	l.position = Vector2(215, 218)
+	l.size = Vector2(675, 36)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.z_index = 30
 	add_child(l)

@@ -25,6 +25,11 @@
     "type_names": {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复", "recruit": "招募"},
     "type_colors": {"battle": "red", "boss": "purple", "treasure": "gold", "recover": "blue", "choose": "amber", "recruit": "green", "event": "text"}
   },
+  "card": {
+    "_comment": "frame art per rarity (see pics/CARD-DESIGN.md). Window/plate come from art/frames/frames.json; missing entries fall back to drawn frames",
+    "frames": {"N": "wood", "R": "bronze", "SR": "silver", "SSR": "ssr", "lord": "gold", "enemy": "iron"},
+    "plate": [0.26, 0.872, 0.48, 0.066]
+  },
   "portrait_framing": {
     "_comment": "how many head-heights tall each portrait box shows (≈2.5 bust, ≈5.5 half body, large = whole picture)",
     "card": 2.6, "leader": 2.6, "story": 5.5, "collection": 99, "enemy": 2.4

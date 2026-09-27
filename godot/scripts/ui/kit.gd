@@ -121,6 +121,30 @@ static func bar(value: float, max_value: float, color_name := "green", height :=
 	return p
 
 
+# ---- card frames ---------------------------------------------------------------
+
+static func frame(kind: String) -> Dictionary:
+	## Frame art for a rarity ("N", "R", "SR", "SSR", "lord") or "enemy":
+	## {texture, window: Rect2 (fractions), plate: Rect2 (fractions)} — empty if none is configured.
+	var key := "frame:" + kind
+	if _textures.has(key):
+		return _textures[key]
+	var out := {}
+	var cfg: Dictionary = GameData.get_db().ui.get("card", {})
+	var name: String = cfg.get("frames", {}).get(kind, "")
+	var index_path := "res://data/art/frames/frames.json"
+	if name != "" and FileAccess.file_exists(index_path):
+		var idx: Dictionary = GameData.read_json(index_path)
+		if idx.has(name):
+			var e: Dictionary = idx[name]
+			var w: Array = e["window"]
+			var p: Array = cfg.get("plate", [0.26, 0.872, 0.48, 0.066])
+			out = {"texture": load("res://data/art/frames/" + e["file"]),
+				"window": Rect2(w[0], w[1], w[2], w[3]), "plate": Rect2(p[0], p[1], p[2], p[3])}
+	_textures[key] = out
+	return out
+
+
 # ---- portraits ---------------------------------------------------------------
 
 static func _portrait_index() -> Dictionary:

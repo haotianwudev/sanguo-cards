@@ -38,7 +38,7 @@ func _ready() -> void:
 		var cell := VBoxContainer.new()
 		cell.add_theme_constant_override("separation", 10)
 		row.add_child(cell)
-		var v := CardView.make(card_ids[i], Vector2(220, 330), {"count": counts[i] if i < counts.size() else 0})
+		var v := CardView.make(card_ids[i], Vector2(220, 368), {"count": counts[i] if i < counts.size() else 0})
 		v.pressed.connect(_select.bind(i))
 		v.modulate.a = 0.0
 		cell.add_child(v)

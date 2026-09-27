@@ -4,6 +4,7 @@
 
 | key | 文件 | 来源 | 协议 | 作者 |
 |---|---|---|---|---|
+| `lord` | placeholder/zhu gong.webp | 用户提供 | ⚠️ 兰斯系列主角立绘（AliceSoft），仅自用占位，发布前必须替换 | — |
 | `sunce` | sun ce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | zhou yu.jpg | 用户提供 | 用户提供 | — |
 | `wuguotai` | wu guotai.jpg | 用户提供 | ⚠️ 疑似光荣官方立绘，发布前替换 | — |
