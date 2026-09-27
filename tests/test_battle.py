@@ -15,7 +15,7 @@ def party(db, *card_ids):
     return [build_lord(db, "主公")] + [build_fighter(db, c) for c in card_ids]
 
 
-# a plausible party after ~20 draws: a few SRs, no SSR
+# a mid-strength party: a few SRs, no SSR
 REF_HULAO = ("machao", "zhangfei", "daqiao")
 # the weakest legal party: plain troop cards only
 STARTER = ("cav_n", "spear_n", "archer_n")
@@ -127,6 +127,12 @@ def greedy_play(db, scenario, cards, seed):
 
 def win_rate(db, scenario, cards, n=200):
     return [greedy_play(db, scenario, cards, s) for s in range(n)].count("win") / n
+
+
+@pytest.mark.parametrize("hero", ["sunce", "zhouyu", "huanggai"])
+def test_bandits_are_beatable_with_any_opening_choice(db, hero):
+    # first story battle: just the lord plus the one hero picked in the prologue
+    assert win_rate(db, "shanzei", (hero,)) > 0.7
 
 
 def test_huangjin_is_beatable_with_starter_troops(db):

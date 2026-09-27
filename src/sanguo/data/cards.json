@@ -1,6 +1,5 @@
 {
   "gacha": {
-    "start_draws": 20, "draws_on_win": 10,
     "rates": {"N": 45, "R": 35, "SR": 16, "SSR": 4},
     "party_slots": 4
   },
@@ -82,6 +81,24 @@
                    "effects": [{"type": "damage", "stat": "int", "power": 0.9}]},
     "baozheng":   {"name": "暴政", "cost": 1, "uses": 1, "target": "all_allies",
                    "effects": [{"type": "atk_up", "turns": 2}]},
+    "xiaobawang": {"name": "小霸王", "cost": 1, "uses": 2, "target": "enemy",
+                   "effects": [{"type": "damage", "stat": "atk", "power": 1.6}]},
+    "yehuo":      {"name": "业火", "cost": 1, "uses": 1, "target": "all_enemies",
+                   "effects": [{"type": "damage", "stat": "int", "power": 0.8}]},
+    "kurou":      {"name": "苦肉计", "cost": 1, "uses": 1, "target": "all_allies",
+                   "effects": [{"type": "atk_up", "turns": 2}]},
+    "cimu":       {"name": "慈母", "cost": 1, "uses": 2, "target": "all_allies",
+                   "effects": [{"type": "heal", "stat": "int", "power": 0.6}]},
+    "bawang":     {"name": "霸王之怒", "cost": 1, "uses": 2, "target": "enemy",
+                   "effects": [{"type": "damage", "stat": "atk", "power": 2.0}]},
+    "chibi":      {"name": "赤壁业火", "cost": 2, "uses": 1, "target": "all_enemies",
+                   "effects": [{"type": "damage", "stat": "int", "power": 1.2}]},
+    "lianying":   {"name": "火烧连营", "cost": 2, "uses": 1, "target": "all_enemies",
+                   "effects": [{"type": "damage", "stat": "int", "power": 0.9}, {"type": "stun", "chance": 0.2}]},
+    "baiyi":      {"name": "白衣渡江", "cost": 1, "uses": 2, "target": "enemy",
+                   "effects": [{"type": "damage", "stat": "atk", "power": 1.5}, {"type": "stun", "chance": 0.3}]},
+    "shenting":   {"name": "神亭酣战", "cost": 1, "uses": 2, "target": "enemy",
+                   "effects": [{"type": "damage", "stat": "atk", "power": 1.6}]},
     "taiping":    {"name": "太平妖术", "cost": 1, "uses": 2, "target": "all_enemies",
                    "effects": [{"type": "damage", "stat": "int", "power": 0.6}]}
   },
@@ -121,10 +138,22 @@
     "sunshangxiang": {"name": "孙尚香", "rarity": "SSR", "troop": "archer", "bonus": {"hp": 80, "atk": 32}, "skills": ["xiaoji"]},
     "dianwei":   {"name": "典韦",   "rarity": "SSR", "troop": "infantry",   "bonus": {"hp": 140, "atk": 32, "def": 10}, "skills": ["shuangji"]},
     "zhugeliang":{"name": "诸葛亮", "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 60, "int": 30}, "skills": ["huoji", "bazhen"]},
+    "sunce":     {"name": "孙策·少年", "person": "sunce", "rarity": "SR", "troop": "cavalry",    "bonus": {"hp": 70, "atk": 24}, "skills": ["xiaobawang"], "pool": false},
+    "zhouyu":    {"name": "周瑜·少年", "person": "zhouyu", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 50, "int": 20}, "skills": ["yehuo"], "pool": false},
+    "huanggai":  {"name": "黄盖",   "rarity": "SR", "troop": "infantry",   "bonus": {"hp": 90, "atk": 14, "def": 8}, "skills": ["kurou"], "pool": false},
+    "lvmeng":    {"name": "吕蒙",   "rarity": "SR", "troop": "infantry",   "bonus": {"hp": 70, "atk": 18, "int": 10}, "skills": ["baiyi"]},
+    "taishici":  {"name": "太史慈", "rarity": "SR", "troop": "archer",     "bonus": {"hp": 60, "atk": 22}, "skills": ["shenting"]},
+    "sunce_zhong": {"name": "孙策·中年", "person": "sunce", "rarity": "SSR", "troop": "cavalry", "bonus": {"hp": 110, "atk": 36, "def": 10}, "skills": ["bawang"]},
+    "zhouyu_chibi": {"name": "周瑜·赤壁", "person": "zhouyu", "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 70, "int": 32}, "skills": ["chibi"]},
+    "luxun":     {"name": "陆逊",   "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 60, "int": 28}, "skills": ["lianying"]},
+    "wuguotai":  {"name": "吴国太", "rarity": "SR", "troop": "logistics",  "bonus": {"hp": 40, "int": 18}, "skills": ["cimu"], "pool": false},
+
     "diaochan":  {"name": "貂蝉",   "rarity": "SSR", "troop": "logistics",  "bonus": {"hp": 60, "int": 25}, "skills": ["biyue"]}
   },
 
   "enemies": {
+    "shanzei":   {"name": "山贼",     "troop": "infantry",   "hp": 200, "atk": 55,  "int": 10,  "def": 30, "skills": ["slash"]},
+    "shanzeitou":{"name": "山贼头目", "troop": "infantry",   "hp": 320, "atk": 70,  "int": 20,  "def": 40, "skills": ["slash", "sweep"]},
     "huangjin":  {"name": "黄巾力士", "troop": "infantry",   "hp": 480, "atk": 98,  "int": 28,  "def": 40, "skills": ["slash"]},
     "zhangbao":  {"name": "张宝",     "troop": "strategist", "hp": 480, "atk": 42,  "int": 112,  "def": 35, "skills": ["dusha", "hunluan"]},
     "zhangjiao": {"name": "张角",     "troop": "strategist", "hp": 720, "atk": 42,  "int": 133,  "def": 40, "skills": ["dusha", "taiping"]},
@@ -135,6 +164,8 @@
   },
 
   "scenarios": {
+    "shanzei":  {"name": "剿灭山贼",   "turn_limit": 8,  "ap": 3,
+                 "enemy": ["shanzei", "shanzeitou", "shanzei"]},
     "huangjin": {"name": "黄巾之乱",   "turn_limit": 10, "ap": 3,
                  "enemy": ["huangjin", "zhangjiao", "zhangbao"]},
     "hulao":    {"name": "虎牢关之战", "turn_limit": 10, "ap": 3,

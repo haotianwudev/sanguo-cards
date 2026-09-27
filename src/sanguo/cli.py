@@ -6,6 +6,7 @@ import random
 from pathlib import Path
 
 from . import collection as col
+from . import story
 from .battle import Battle, Unit
 from .cards import RARITIES, CardDB, Fighter, build_fighter, load_db, power, power_split
 
@@ -42,10 +43,6 @@ def fighter_line(db: CardDB, f: Fighter) -> str:
 # ---- gacha ---------------------------------------------------------------
 
 def do_pull(db: CardDB, save: col.Save, rng: random.Random, n: int) -> None:
-    n = min(n, save.draws)
-    if n == 0:
-        print("  招募令已用完 —— 打赢战斗可以获得更多")
-        return
     cards = col.pull(db, save, rng, n)
     if not cards:
         print("  所有武将都已招募！")
@@ -54,7 +51,7 @@ def do_pull(db: CardDB, save: col.Save, rng: random.Random, n: int) -> None:
     for c in sorted(cards, key=lambda c: RARITIES.index(c.rarity), reverse=True):
         flash = " ✦✦✦" if c.rarity == "SSR" else (" ✦" if c.rarity == "SR" else "")
         print(f"  {fighter_line(db, build_fighter(db, c.id))}{flash}")
-    print(f"  剩余招募令 {save.draws} · 卡池剩余 {col.pool_left(db, save)} 张")
+    print(f"  卡池剩余 {col.pool_left(db, save)} 张")
 
 
 # ---- collection & party --------------------------------------------------
@@ -193,7 +190,7 @@ def player_turn(b: Battle) -> None:
             print(line)
 
 
-def run_battle(db: CardDB, save: col.Save, scenario_id: str, seed: int | None) -> None:
+def run_battle(db: CardDB, save: col.Save, scenario_id: str, seed: int | None) -> bool:
     sc = db.scenarios[scenario_id]
     b = Battle.from_scenario(db, scenario_id, col.party_fighters(db, save), seed=seed)
     print(f"\n【{sc.name}】{sc.turn_limit} 回合内击败全部敌将。每回合行动力 {sc.ap}，每支部队每回合限动一次。")
@@ -204,11 +201,12 @@ def run_battle(db: CardDB, save: col.Save, scenario_id: str, seed: int | None) -
         for line in b.end_turn():
             print(line)
     render(b)
-    if b.result == "win":
-        reward = col.record_win(db, save, scenario_id)
-        print(f"\n★ 胜利！获得招募令 ×{reward}")
-    else:
+    if b.result != "win":
         print("\n✗ 战败…… 调整编成再来")
+        return False
+    col.record_win(save, scenario_id)
+    print("\n★ 胜利！")
+    return True
 
 
 def choose_battle(db: CardDB, save: col.Save, seed: int | None) -> None:
@@ -223,6 +221,45 @@ def choose_battle(db: CardDB, save: col.Save, seed: int | None) -> None:
         run_battle(db, save, ids[pick], seed)
 
 
+# ---- story ---------------------------------------------------------------
+
+def play_story(db: CardDB, st: story.Story, save: col.Save, seed: int | None) -> None:
+    """Run story steps until a battle is lost, the player backs out, or the story runs out."""
+    last_node = None
+    while (cur := story.current(st, save)) is not None:
+        node, step = cur
+        if node.id != last_node:
+            print(f"\n━━━━ {node.title} ━━━━")
+            last_node = node.id
+        k = story.kind(step)
+        if k == "text":
+            for line in step["text"]:
+                print("  " + line.format(lord=save.lord_name))
+            input("  （回车继续）")
+        elif k == "choose":
+            opts = step["choose"]
+            for i, opt in enumerate(opts):
+                print(f"  {i + 1}. {opt['label']}")
+                print(f"       {fighter_line(db, build_fighter(db, opt['card']))}")
+            pick = ask("做出选择：", len(opts), allow_back=False)
+            story.advance(db, st, save, pick)
+            print(f"  → {db.cards[opts[pick]['card']].name} 加入！")
+            continue
+        elif k == "give":
+            give = step["give"]
+            for cid in give.get("cards", []):
+                print(f"  获得卡牌：{fighter_line(db, build_fighter(db, cid))}")
+        elif k == "battle":
+            show_party(db, save)
+            go = ask(f"  即将开战【{db.scenarios[step['battle']].name}】 1=出战  回车=先回主菜单（调整编成/招募）：", 1)
+            if go is None:
+                return
+            if not run_battle(db, save, step["battle"], seed):
+                return
+        story.advance(db, st, save)
+    print("\n（剧情暂时到此为止）")
+
+
 # ---- main ----------------------------------------------------------------
 
 def main(argv: list[str] | None = None) -> None:
@@ -233,34 +270,38 @@ def main(argv: list[str] | None = None) -> None:
     args = ap.parse_args(argv)
 
     db = load_db()
+    st = story.load_story(db)
     rng = random.Random(args.seed)
     if args.save.exists() and not args.new:
         save = col.Save.load(args.save)
         print(f"读取存档：{args.save}")
     else:
         save = col.Save.new(db)
-        name = input("请输入主公之名（回车=主公）：").strip()
+        name = input("请输入你的名字（回车=主公）：").strip()
         save.lord_name = name or "主公"
-        print(f"欢迎，{save.lord_name}。获得招募令 ×{save.draws} —— 先去招募武将吧。")
+        play_story(db, st, save, args.seed)
+        save.dump(args.save)
 
     try:
         while True:
-            print(f"\n══ {save.lord_name} · 招募令 {save.draws} · 卡册 {len(save.owned)}/{len(db.cards)} ══")
-            print("  1. 招募 1 次\n  2. 招募 10 次\n  3. 卡册\n  4. 编成\n  5. 出战\n  0. 保存并退出")
-            choice = ask("选择：", 5)
+            cur = story.current(st, save)
+            story_label = f"剧情：{cur[0].title}" if cur else "剧情（暂无新章节）"
+            print(f"\n══ {save.lord_name} · 卡册 {len(save.owned)}/{len(db.cards)} ══")
+            print(f"  1. {story_label}\n  2. 招募 1 次\n  3. 招募 10 次\n  4. 卡册\n  5. 编成\n  6. 自由出战\n  0. 保存并退出")
+            choice = ask("选择：", 6)
             if choice is None:
                 break
             if choice == 0:
-                do_pull(db, save, rng, 1)
+                play_story(db, st, save, args.seed)
             elif choice == 1:
-                do_pull(db, save, rng, 10)
+                do_pull(db, save, rng, 1)
             elif choice == 2:
-                show_collection(db, save)
+                do_pull(db, save, rng, 10)
             elif choice == 3:
-                edit_party(db, save)
+                show_collection(db, save)
             elif choice == 4:
-                if not save.party:
-                    print("  编成为空 —— 只有主公一人出战（可在「编成」里自动编成）")
+                edit_party(db, save)
+            elif choice == 5:
                 choose_battle(db, save, args.seed)
             save.dump(args.save)
     finally:

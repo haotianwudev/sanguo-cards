@@ -43,6 +43,8 @@ class PlayerCard:
     troop: str
     bonus: dict[str, int]
     skills: tuple[str, ...]
+    in_pool: bool = True  # False = story-only, never drawn from the gacha
+    person: str = ""  # who this is; variants of one general (孙策·少年 / 孙策·中年) share it
 
 
 @dataclass(frozen=True)
@@ -78,7 +80,7 @@ class CardDB:
     scenarios: dict[str, Scenario]
 
     def pool(self, rarity: str) -> list[PlayerCard]:
-        return [c for c in self.cards.values() if c.rarity == rarity]
+        return [c for c in self.cards.values() if c.rarity == rarity and c.in_pool]
 
 
 def load_raw() -> dict:
@@ -98,7 +100,7 @@ def load_db(raw: dict | None = None) -> CardDB:
     }
     cards = {
         cid: PlayerCard(cid, c["name"], c["rarity"], c["troop"], dict(c.get("bonus", {})),
-                        tuple(c.get("skills", ())))
+                        tuple(c.get("skills", ())), c.get("pool", True), c.get("person", cid))
         for cid, c in raw["cards"].items()
     }
     enemies = {
