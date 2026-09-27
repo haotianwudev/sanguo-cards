@@ -53,7 +53,7 @@ func test_each_plan_walks_its_own_branch_and_both_rescue_her() -> void:
 		var s := SaveData.create()
 		Quests.begin(q, s)
 		Quests.resolve(q, s, rng(0), 0)
-		walk_to(q, s, ["wake", "village", "boar", "raid"])
+		walk_to(q, s, ["wake", "bandage", "village", "boar", "raid"])
 		Quests.move(q, s, "plan")
 		Quests.resolve(q, s, rng(0), pick)
 		var branch: Array = [["sc_gate", "sc_road", "sc_hall"], ["zy_lure", "zy_back", "zy_hall"]][pick]
@@ -81,14 +81,14 @@ func test_failing_restarts_but_keeps_choices_and_cards() -> void:
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["wake", "village", "boar", "raid"])
+	walk_to(q, s, ["wake", "bandage", "village", "boar", "raid"])
 	Quests.move(q, s, "plan")
 	Quests.resolve(q, s, rng(0), 1)
 	s.damage = 999
 	Quests.fail(q, s)
 	check(s.square == "era" and s.damage == 0 and s.has_card("zhouyu"))
 	check(s.resolved, "the birthplace choice stands")
-	walk_to(q, s, ["wake", "village", "boar", "raid"])
+	walk_to(q, s, ["wake", "bandage", "village", "boar", "raid"])
 	Quests.move(q, s, "plan")
 	check(s.resolved, "earlier plan stands")
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["zy_lure"])
@@ -118,7 +118,7 @@ func test_story_cards_do_not_stack() -> void:
 		var s := SaveData.create()
 		Quests.begin(q, s)
 		Quests.resolve(q, s, rng(0), 0)
-		walk_to(q, s, ["wake", "village", "boar", "raid"])
+		walk_to(q, s, ["wake", "bandage", "village", "boar", "raid"])
 		Quests.move(q, s, "plan")
 		Quests.resolve(q, s, rng(0), pick)
 		walk_to(q, s, [["sc_gate", "sc_road", "sc_hall"], ["zy_lure", "zy_back", "zy_hall"]][pick] + ["rescue"])
@@ -464,3 +464,10 @@ func test_lvbu_is_nearly_unbeatable() -> void:
 		if bot_fight(b) == "win":
 			wins += 1
 	check(wins <= 3, "吕布 wins %d/30 against the chapter-2 party" % (30 - wins))
+
+
+func test_chapter_one_ends_with_the_riverside_oath_before_heading_north() -> void:
+	var q := quest(0)
+	check_eq(q["squares"]["vault"]["next"], ["oath"])
+	check_eq(q["squares"]["oath"]["next"], ["north"])
+	check(q["squares"]["north"]["next"].is_empty(), "north is the last square")
