@@ -11,6 +11,7 @@ pics/
     soldiers/       兵卡立绘
     frames/         卡框（frame_bronze / silver / gold / ssr / wood / iron / other）
     public-domain/  维基共享资源下载的公有领域占位图（清代绣像等）
+    map/            地图美术：章节底图、格子图标、棋子等（规格见 CARD-DESIGN.md 第 5 节）
   processed/        工具从原图生成的中间图（可随时重新生成，删掉也没关系）
 ```
 
