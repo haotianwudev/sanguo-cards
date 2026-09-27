@@ -480,3 +480,18 @@ func test_after_fuchun_you_follow_zhouyu_uphill_or_sunce_to_the_boars() -> void:
 	check_eq(q["squares"]["sc_home"]["next"], ["boar"])
 	for g in q["shuffle"]:
 		check(not g.has("hill") and not g.has("boar"), "the two paths keep their places")
+
+
+func test_huatuo_heals_joins_or_leaves_his_book() -> void:
+	var db := GameData.get_db()
+	check(quest(0)["event_pool"].has("huatuo"))
+	check(db.cards["huatuo"]["troop"] == "logistics" and db.cards["huatuo"]["skills"] == ["mafei"])
+	var joined := 0
+	var book := 0
+	for seed_value in 20:
+		var s := event_on_road("huatuo", 1, seed_value)
+		if s.has_card("huatuo"):
+			joined += 1
+		if s.relics.has("qingnang"):
+			book += 1
+	check(joined > 0 and book > 0 and joined + book == 20, "joins %d, leaves 青囊书 %d" % [joined, book])
