@@ -64,7 +64,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	var tough := 1.0 + float(mods.get("enemy", 0.0))
 	var max_hp := int(round(e["hp"] * tough * (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough, "stunned": false,
-		"break_amount": 0.0, "break_turns": 0}
+		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_turns": 0}
 	var hp := 0
 	for ld in party:
 		var cid: String = ld["card"]["id"]
@@ -267,6 +267,14 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			enemy["break_turns"] = maxi(enemy["break_turns"], int(eff["turns"]))
 			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
+		"burn":  # 火攻: the enemy loses HP before each of its turns; a new fire keeps the bigger one, restarts the count
+			var bonus := float(mods.get("at", 0.0)) + float(mods.get("magic", 0.0))
+			var resist: float = enemy["data"]["magic_resist"] * (1.0 - minf(1.0, float(mods.get("pierce", 0.0))))
+			var per := maxi(1, int(round(at * float(eff["power"]) * mult * (1.0 + bonus) * (1.0 - resist))))
+			enemy["burn_dmg"] = maxi(enemy["burn_dmg"], per)
+			enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff["turns"]))
+			_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
+			return ["  %s 着火了！每回合 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
 		"ap":
 			ap = mini(ap_max(), ap + int(eff["amount"]))
 			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
@@ -279,8 +287,20 @@ func _enemy_phase(defend_cut: float) -> Array:
 	if result != "":
 		return []
 	var data: Dictionary = enemy["data"]
+	var log: Array = []
+	if enemy["burn_turns"] > 0:
+		enemy["burn_turns"] -= 1
+		var d: int = mini(enemy["burn_dmg"], enemy["hp"])
+		enemy["hp"] -= d
+		_ev({"t": "burn", "dmg": d, "hp": enemy["hp"], "turns": enemy["burn_turns"]})
+		log.append("%s 被火烧，损失 %d 体力" % [data["name"], d])
+		if enemy["burn_turns"] == 0:
+			enemy["burn_dmg"] = 0
+		_check_end()
+		if result != "":
+			return log
 	_ev({"t": "enemy_turn"})
-	var log: Array = ["—— %s 的行动 ——" % data["name"]]
+	log.append("—— %s 的行动 ——" % data["name"])
 	if enemy["stunned"]:
 		enemy["stunned"] = false
 		_ev({"t": "enemy_stunned"})

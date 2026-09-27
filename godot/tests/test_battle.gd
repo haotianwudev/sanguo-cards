@@ -156,3 +156,31 @@ func test_events_describe_what_happened() -> void:
 	check_eq(ev[0]["t"], "enemy_turn")
 	check(ev.any(func(e): return e["t"] == "enemy_hit"), "enemy attacked")
 	check(ev.any(func(e): return e["t"] == "round" and e["n"] == 2), "next round began")
+
+
+func test_sunce_has_a_plain_skill_that_never_gets_dearer() -> void:
+	var db := GameData.get_db()
+	for cid in ["sunce", "sunce_zhong"]:
+		var plain: Array = db.cards[cid]["skills"].filter(func(s): return not db.skills[s]["cumulative"] and db.skills[s]["uses"] == null)
+		check(not plain.is_empty(), "%s needs a repeatable skill" % cid)
+
+
+func test_fire_keeps_burning_on_the_enemy_turn() -> void:
+	var b := Battle.start("boar", party(["zhouyu"]), 5)
+	var i := -1
+	for k in b.leaders.size():
+		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
+			i = k
+	b.act(i, "yehuo")
+	check(b.enemy["burn_turns"] == 3 and b.enemy["burn_dmg"] > 0, "on fire")
+	var before: int = b.enemy["hp"]
+	b.take_events()
+	b.end_round()
+	var burns := b.take_events().filter(func(e): return e["t"] == "burn")
+	check(burns.size() == 1 and b.enemy["hp"] < before, "burns before it acts")
+	check_eq(b.enemy["burn_turns"], 2)
+	check(db_skill_cumulative("yehuo"), "火攻 can be cast again (it just costs more)")
+
+
+func db_skill_cumulative(sid: String) -> bool:
+	return GameData.get_db().skills[sid]["cumulative"]

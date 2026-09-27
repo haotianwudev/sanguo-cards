@@ -201,6 +201,8 @@ func _refresh() -> void:
 		st.append("混乱：下回合无法行动")
 	if e["break_turns"] > 0:
 		st.append("破防 +%d%%（%d 回合）" % [int(round(e["break_amount"] * 100)), e["break_turns"]])
+	if e["burn_turns"] > 0:
+		st.append("🔥 着火 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
 	_enemy_status.text = "　".join(st)
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
@@ -298,12 +300,12 @@ func _play(events: Array) -> void:
 				tw.tween_property(v, "position:y", y - 26, 0.1).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(v, "position:y", y, 0.14)
 				await get_tree().create_timer(0.12).timeout
-			"hit", "interrupt":
+			"hit", "interrupt", "burn":
 				Kit.shake(_enemy_art, 9.0, 0.2)
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
 				var big: bool = ev["dmg"] > b.enemy["max_hp"] * 0.08
 				Kit.float_text(self, _enemy_center() + Vector2(0, -30), str(ev["dmg"]),
-					Kit.c("amber") if ev["t"] == "hit" else Kit.c("purple"), 52 if big else 40)
+					{"hit": Kit.c("amber"), "burn": Kit.c("red")}.get(ev["t"], Kit.c("purple")), 52 if big else 40)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
 				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
 				if ev["t"] == "hit" and ev["combo"] >= 2:
