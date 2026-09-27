@@ -112,8 +112,9 @@ against 董卓; only the brother whose plan you pick joins) → chapter 2 讨伐
 win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 joins; elite 董白; 吕布 raids the camp; 吕布's
 chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three chests; hand 董白 to 袁绍 for a relic (she's executed)
 or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
-董白 is a 19-year-old woman general with two hammers — never written as a 萝莉 or sexualized, and no groping of anyone
-unconscious or captive; comedy comes from her temper and the others' reactions.
+董白: 董卓's granddaughter, a grown woman general (years of fighting in 西凉) with two hammers, loves a fight, a
+striking figure (身材火辣). The text gives no number for her age, but she is always clearly an adult — never a 萝莉;
+no groping of anyone unconscious or captive; comedy comes from her temper, her love of duels and the others' reactions.
 
 Writing rules:
 - **Names.** A card name `A·B` shows **A on the name plate** and **B as the small tag** at the top of the card
