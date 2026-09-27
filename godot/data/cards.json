@@ -194,6 +194,7 @@
     "lvbu": {"name": "吕布", "rarity": "SSR", "troop": "cavalry", "bonus": {"hp": 110, "at": 32}, "skills": ["wushuang"], "pool": false}
   },
   "enemies": {
+    "yuji_xintu": {"name": "于吉信徒", "portrait": "fushui_xintu", "hp": 2800, "at": 165, "actions": 2, "moves": [{"name": "泼符水", "power": 1.0, "weight": 3}, {"name": "念咒", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "仙师保佑", "power": 0, "weight": 1, "heal": 0.1, "when": "half"}], "card": "fushui_xintu"},
     "boar": {"name": "野猪", "hp": 1300, "at": 110, "actions": 2, "moves": [{"name": "冲撞", "power": 1.0, "weight": 3}, {"name": "獠牙", "power": 1.4, "weight": 1}, {"name": "发狂", "power": 0, "weight": 2, "rage": 0.3, "when": "half", "once": true}], "card": "yezhu_bing"},
     "tiger": {"name": "吊睛白额虎", "portrait": "baie_hu", "hp": 3000, "at": 190, "actions": 2, "moves": [{"name": "扑", "power": 1.0, "weight": 2}, {"name": "剪", "power": 1.6, "weight": 1}, {"name": "虎啸", "power": 0.3, "weight": 1, "ap_drain": 2}], "card": "baie_hu"},
     "huangjin_yaodao": {"name": "妖道唐周", "portrait": "yaodao", "hp": 5500, "at": 220, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "符水", "power": 0, "weight": 1, "heal": 0.12}, {"name": "黄天当立", "power": 1.5, "weight": 2}, {"name": "妖言惑众", "power": 0.5, "weight": 1, "confuse": 0.6}, {"name": "五雷正法·蓄力", "power": 0, "weight": 1, "charge": "五雷正法"}, {"name": "五雷正法", "power": 2.8, "weight": 0, "pierce": true}], "card": "yaodao_card"},
@@ -211,6 +212,7 @@
     "lvbu": {"name": "吕布", "portrait": "lvbu", "hp": 12500, "at": 600, "actions": 3, "phys_resist": 0.2, "moves": [{"name": "方天画戟", "power": 1.0, "weight": 4}, {"name": "赤兔冲阵", "power": 1.4, "weight": 1, "confuse": 0.4}, {"name": "无双·蓄力", "power": 0, "weight": 1, "charge": "天下无双"}, {"name": "天下无双", "power": 2.2, "weight": 0, "pierce": true}, {"name": "人中吕布", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "lvbu"}
   },
   "scenarios": {
+    "yuji_xintu": {"name": "于吉信徒", "turn_limit": 6, "enemy": "yuji_xintu"},
     "boar": {"name": "野猪林", "turn_limit": 6, "enemy": "boar"},
     "tiger": {"name": "打虎", "turn_limit": 6, "enemy": "tiger"},
     "yaodao": {"name": "妖道唐周", "turn_limit": 8, "enemy": "huangjin_yaodao"},

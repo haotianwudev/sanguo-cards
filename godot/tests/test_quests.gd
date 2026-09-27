@@ -495,3 +495,13 @@ func test_huatuo_heals_joins_or_leaves_his_book() -> void:
 		if s.relics.has("qingnang"):
 			book += 1
 	check(joined > 0 and book > 0 and joined + book == 20, "joins %d, leaves 青囊书 %d" % [joined, book])
+
+
+func test_yuji_only_brings_trouble() -> void:
+	check(quest(0)["event_pool"].has("yuji"))
+	var drank := event_on_road("yuji", 0)
+	check(drank.damage > 0 and drank.relics.has("huangjinfu"), "poisoned and cursed")
+	var chased := event_on_road("yuji", 1)
+	check_eq(chased.danger, 1, "险 +1")
+	var fled := event_on_road("yuji", 2)
+	check(fled.event_battle.get("ambush", false), "his followers ambush you")

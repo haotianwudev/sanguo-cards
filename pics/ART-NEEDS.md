@@ -22,8 +22,9 @@
 | ✅ 正式 | `lord` | 主公 / 穿越者 |
 | ✅ 正式 | `zuoci` | 事件「葫芦道人」 |
 | ⬜ 缺 | `huatuo` | 事件「游方郎中」 |
+| ⬜ 缺 | `yuji` | 事件「白衣道人」 |
+| ✅ 正式 | `sunce` | 事件「白衣道人」 |
 | ✅ 正式 | `wuguotai` | 剧情立绘 |
-| ✅ 正式 | `sunce` | 剧情立绘 |
 | ✅ 正式 | `zhouyu` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
@@ -32,6 +33,7 @@
 |---|---|---|
 | ✅ 正式 | `shuizei_bing` | 水贼喽啰 |
 | ⬜ 缺 | `baie_hu` | 吊睛白额虎 |
+| ⬜ 缺 | `fushui_xintu` | 于吉信徒 |
 | ⬜ 缺 | `boar` | 野猪 |
 | ✅ 正式 | `langlijiao` | 「浪里蛟」胡玉 |
 | ✅ 正式 | `yaodao` | 妖道唐周 |
@@ -83,7 +85,6 @@
 | ⬜ 缺 | `daqiao` | 大乔（SR） |
 | ⬜ 缺 | `huangyueying` | 黄月英（SR） |
 | ⬜ 缺 | `zhangyan` | 张燕（SR） |
-| ⬜ 缺 | `yuji` | 于吉（SR） |
 | 🟡 占位 | `zhaoyun` | 赵云（SSR） |
 | 🟡 占位 | `sunshangxiang` | 孙尚香（SSR） |
 | 🟡 占位 | `dianwei` | 典韦（SSR） |
