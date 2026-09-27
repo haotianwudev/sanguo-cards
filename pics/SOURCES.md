@@ -34,3 +34,4 @@
 | `zhangliao` | source/public-domain/zhangliao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg) | Public domain | — |
 | `zhaoyun` | source/public-domain/zhaoyun.jpg | [链接](https://commons.wikimedia.org/wiki/File:ZhaoYun.jpg) | Public domain | Unknown authorUnknown author |
 | `zhugeliang` | source/public-domain/zhugeliang.jpg | [链接](https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg) | Public domain | Unknown authorUnknown author |
+| `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |

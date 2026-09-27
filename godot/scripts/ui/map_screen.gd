@@ -13,6 +13,7 @@ var q: Dictionary
 var _scroll: ScrollContainer
 var _layer: Control
 var _lines: MapLines
+var _bg: TextureRect
 var _token: Panel
 var _nodes: Dictionary = {}  # square id -> Button
 var _pulses: Array = []
@@ -60,6 +61,11 @@ func _ready() -> void:
 	add_child(_scroll)
 	_layer = Control.new()
 	_scroll.add_child(_layer)
+	_bg = TextureRect.new()
+	_bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_layer.add_child(_bg)
 	_lines = MapLines.new()
 	_lines.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_layer.add_child(_lines)
@@ -98,6 +104,10 @@ func _rebuild_map() -> void:
 		max_x = maxi(max_x, s["x"])
 	_layer.custom_minimum_size = Vector2(180 + max_x * COL_W + 60, 360)
 	_lines.size = _layer.custom_minimum_size
+	# chapter background: data/art/map/<quest id>.jpg (built by `sanguo-art` from pics/art.json "maps")
+	var bg_path: String = "res://data/art/map/%s.jpg" % q["id"]
+	_bg.texture = load(bg_path) if ResourceLoader.exists(bg_path) else null
+	_bg.size = _layer.custom_minimum_size
 	for s in q["squares"].values():
 		var b := Button.new()
 		b.text = _glyph(s)
@@ -107,10 +117,15 @@ func _rebuild_map() -> void:
 		b.pivot_offset = Vector2(SQ, SQ) / 2
 		b.pressed.connect(_on_square.bind(s["id"]))
 		_layer.add_child(b)
-		var lbl := Kit.label(s["label"] if s["label"] != "" else _type_name(s), 16, "muted")
+		var lbl := Kit.label(s["label"] if s["label"] != "" else _type_name(s), 16, "text")
+		var pill := Kit.box(Kit.c("card").lerp(Color.TRANSPARENT, 0.15), 8, 0, Color.TRANSPARENT, 0)
+		pill.content_margin_left = 8
+		pill.content_margin_right = 8
+		lbl.add_theme_stylebox_override("normal", pill)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.position = _pos(s) + Vector2(-60, SQ / 2 + 2)
-		lbl.size = Vector2(120, 22)
+		var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x + 16
+		lbl.position = _pos(s) + Vector2(-w / 2, SQ / 2 + 2)
+		lbl.size = Vector2(w, 22)
 		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_layer.add_child(lbl)
 		_nodes[s["id"]] = b
@@ -214,8 +229,10 @@ func _refresh() -> void:
 			targets.append(o["goto"])
 		for t in targets:
 			var walked: bool = path.has(s["id"] + ">" + t)
-			var col := Kit.c("gold") if walked else Kit.c("border")
-			_lines.segs.append([_pos(s), _pos(q["squares"][t]), col, 6.0 if walked else 3.0])
+			var a := _pos(s)
+			var b := _pos(q["squares"][t])
+			_lines.segs.append([a, b, Color(0.12, 0.09, 0.06, 0.55), 9.0 if walked else 6.0])
+			_lines.segs.append([a, b, Kit.c("gold") if walked else Color(0.96, 0.93, 0.85, 0.9), 5.0 if walked else 2.5])
 	_lines.queue_redraw()
 
 	for sid in _nodes:
