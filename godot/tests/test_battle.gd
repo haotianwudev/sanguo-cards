@@ -180,7 +180,8 @@ func test_fire_keeps_burning_on_the_enemy_turn() -> void:
 		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
 			i = k
 	b.act(i, "yehuo")
-	check(b.enemy["burn_turns"] == 3 and b.enemy["burn_dmg"] > 0, "on fire")
+	check(b.enemy["burn_turns"] == 3 and b.enemy["burn_dmg"] == int(round(b.enemy["max_hp"] * 0.1)), "on fire: 10% a turn")
+	check_eq(b.enemy["hp"], b.enemy["max_hp"], "no damage up front")
 	var before: int = b.enemy["hp"]
 	b.take_events()
 	b.end_round()
