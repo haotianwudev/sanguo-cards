@@ -533,6 +533,8 @@ func test_saving_zumao_gives_the_red_headscarf() -> void:
 	s.resolved = false
 	Quests.choose_event(q, s, rng(0), 0)
 	check(s.relics.has("chize") and s.resolved)
+	check(s.has_card("zumao"), "祖茂 follows you")
+	check(GameData.get_db().skills["yindi"]["effects"].any(func(e): return e["type"] == "guard"), "引敌 draws fire")
 
 
 func test_handing_dongbai_over_pays_a_relic() -> void:
@@ -581,3 +583,23 @@ func test_chapter_two_is_full_of_dong_zhuo_troops() -> void:
 		check(fights.has(f), f)
 	check(q["squares"]["liru"]["ambush"], "李儒 lays an ambush")
 	check(GameData.get_db().enemies["feixiong"]["phys_resist"] > 0.3, "飞熊军 wear heavy armour")
+
+
+func test_sunjian_lends_you_one_of_his_old_generals() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "borrow"
+	s.resolved = false
+	Quests.choose_event(q, s, rng(0), 0)
+	var offer: Array = s.offer.duplicate()
+	offer.sort()
+	check_eq(offer, ["chengpu", "handang", "huanggai"])
+	Quests.resolve(q, s, rng(0), 1)
+	check(s.resolved and s.owned.size() == 1, "one of them joins")
+
+
+func test_sunjians_old_guard_can_be_drawn() -> void:
+	var db := GameData.get_db()
+	for cid in ["chengpu", "handang", "huanggai", "zumao"]:
+		check(db.cards[cid]["in_pool"], cid)

@@ -96,7 +96,7 @@ func demo(name: String) -> void:
 			save.quests_cleared = ["prologue"]
 			var q: Dictionary = GameData.get_db().quests[1]
 			Quests.begin(q, save, rng)
-			for sid in ["road1", "youqi", "zumao", "huaxiong", "save_zumao", "counter", "tent", "liru", "dongbai", "capture", "raid_camp"]:
+			for sid in ["road1", "youqi", "zumao", "huaxiong", "save_zumao", "counter", "borrow", "tent", "liru", "dongbai", "capture", "raid_camp"]:
 				Quests.resolve(q, save, rng)
 				Quests.move(q, save, sid)
 			show_screen(MapScreen.new())
