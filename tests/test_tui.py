@@ -57,7 +57,7 @@ def test_new_game_walks_the_prologue_map(tmp_path):
             assert app.save.resolved and app.save.damage >= 500
             await pilot.press("enter", "enter")  # to the loot square and take it
             await pilot.pause()
-            assert "cav_n" in app.save.owned
+            assert app.save.soldiers.get("cav_n") == 1
             assert (tmp_path / "s.json").exists()
     run(go())
 

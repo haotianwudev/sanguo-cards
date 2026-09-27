@@ -135,7 +135,7 @@ class CardView(Vertical):
         self.db, self.f, self.note, self.show_portrait = db, f, note, show_portrait
         self.card_id = f.id
         self.border_title = escape(f.name)
-        self.border_subtitle = f.rarity or "主公"
+        self.border_subtitle = rarity_label(f.rarity)
         self.add_class(f.rarity or "lord")
 
     def compose(self) -> ComposeResult:
@@ -154,14 +154,20 @@ class CardView(Vertical):
 
 def card_table(db: CardDB, save: col.Save, table: DataTable, troop: str | None = None) -> None:
     table.clear(columns=True)
-    table.add_columns("", "稀有", "兵种", "武将", "战力", "兵种+武将", "体力", "攻击", "技能")
+    table.add_columns("", "稀有", "兵种", "卡牌", "张数", "战力", "兵种+武将", "体力", "攻击", "技能")
     fighters = [f for f in col.owned_fighters(db, save) if troop is None or f.troop == troop]
     for f in sorted(fighters, key=lambda f: (-RARITIES.index(f.rarity), -power(f))):
         tp, gp = power_split(db, f)
         color = RARITY_COLOR[f.rarity]
-        table.add_row("◆" if f.id in save.party else "", f"[{color}]{f.rarity}[/]", db.troops[f.troop].name,
-                      f"[{color}]{escape(f.name)}[/]", f"[b]{power(f)}[/]", f"{tp}+{gp}",
-                      f.hp, f.at, "、".join(db.skills[s].name for s in f.skills), key=f.id)
+        n = col.copies(db, save, f.id)
+        table.add_row("◆" if f.id in save.party else "", f"[{color}]{rarity_label(f.rarity)}[/]",
+                      db.troops[f.troop].name, f"[{color}]{escape(f.name)}[/]", f"×{n}" if db.cards[f.id].soldier else "",
+                      f"[b]{power(f)}[/]", f"{tp}+{gp}", f.hp, f.at,
+                      "、".join(db.skills[s].name for s in f.skills), key=f.id)
+
+
+def rarity_label(rarity: str | None) -> str:
+    return {"N": "兵", None: "主公"}.get(rarity, rarity or "")
 
 
 def leader_note(ld: Leader) -> str:
@@ -405,7 +411,7 @@ class QuestScreen(Screen):
                 actions.mount(Button("⚔ 出战 (Enter)", name="fight", variant="error"))
                 actions.mount(Button("先去整备（回主菜单）", name="back"))
             elif s.type == "treasure":
-                body.mount(Static("一只沉甸甸的宝箱。", classes="story-text"))
+                body.mount(Static("一只沉甸甸的宝箱。里面是兵卡——同种兵卡越多部队越强，但重复的会衰减。", classes="story-text"))
                 actions.mount(Button("打开宝箱 (Enter)", name="resolve", variant="warning"))
             elif s.type == "recover":
                 body.mount(Static("可以在这里休整：体力回满，累积技能的 AP 加价和限 1 次技能全部重置。", classes="story-text"))
@@ -420,7 +426,7 @@ class QuestScreen(Screen):
         elif s.type == "recover":
             body.mount(Static(f"[{C.blue}]休整完毕，体力全满。[/]", classes="story-text"))
         if self._gained:
-            body.mount(Static("获得卡牌：", classes="story-text"))
+            body.mount(Static("开出兵卡：" if s.type == "treasure" else "获得卡牌：", classes="story-text"))
             grid = Grid(classes="card-grid")
             body.mount(grid)
             for c in self._gained:
@@ -485,7 +491,7 @@ class QuestScreen(Screen):
                 app.persist()
                 self.render_all()
 
-            app.push_screen(BattleScreen(s.battle, carry=True), after)
+            app.push_screen(BattleScreen(s.battle, carry=True, boss=s.boss), after)
             return
         app.persist()
         self.render_all()
@@ -686,9 +692,10 @@ class BattleScreen(Screen[bool]):
                 + [Binding("e", "end_round", "回合结束"), Binding("d", "defend", "防御"),
                    Binding("r", "retreat", "撤退"), Binding("escape", "cancel", "取消")])
 
-    def __init__(self, scenario_id: str, carry: bool = False) -> None:
+    def __init__(self, scenario_id: str, carry: bool = False, boss: bool = False) -> None:
         super().__init__()
         self.scenario_id = scenario_id
+        self.boss = boss
         self.carry = carry  # quest battle: start with the quest's wear, hand it back afterwards
         self.selected: int | None = None
 
@@ -859,28 +866,42 @@ class BattleScreen(Screen[bool]):
             return
         app: SanguoApp = self.app  # type: ignore[assignment]
         won = self.b.result == "win"
+        chest: list = []
         if won:
             col.record_win(app.save, self.scenario_id)
             if self.carry:
                 app.save.damage, extra, uses = self.b.carry_out()
                 app.save.carry_extra.update(extra)
                 app.save.carry_uses.update(uses)
+            chest = col.chest_after_battle(app.db, app.save, app.rng, self.b.overkill, self.boss)
             app.persist()
         # dismiss on the next tick: dismissing from inside another screen's dismiss callback deadlocks
-        app.push_screen(ResultModal(won), lambda _: self.app.call_later(self.dismiss, won))
+        app.push_screen(ResultModal(won, chest, self.b.overkill),
+                        lambda _: self.app.call_later(self.dismiss, won))
 
 
 class ResultModal(ModalScreen[None]):
     BINDINGS = [Binding("enter", "close", "确定"), Binding("escape", "close", show=False)]
 
-    def __init__(self, won: bool) -> None:
+    def __init__(self, won: bool, chest: list | None = None, overkill: float = 0.0) -> None:
         super().__init__()
         self.won = won
+        self.chest = chest or []
+        self.overkill = overkill
 
     def compose(self) -> ComposeResult:
         with Vertical(id="dialog", classes="win" if self.won else "lose"):
             yield Static("★  胜 利  ★" if self.won else "✗  战 败", id="result-text")
-            yield Static("" if self.won else "[dim]调整编成或去招募，再来一次[/]")
+            if not self.won:
+                yield Static("[dim]调整编成或去招募，再来一次[/]")
+            else:
+                ok = f"　过量伤害 {round(self.overkill * 100)}%" if self.overkill else ""
+                if self.chest:
+                    names = "、".join(f"[b]{escape(c.name)}[/]〔{self.app.db.troops[c.troop].short}〕"  # type: ignore[attr-defined]
+                                      for c in self.chest)
+                    yield Static(f"[{C.gold}]宝箱！[/]{ok}\n获得兵卡：{names}")
+                else:
+                    yield Static(f"[dim]没有掉落宝箱{ok}（过量伤害越高越容易掉）[/]")
             yield Button("确定", id="ok", variant="primary")
 
     @on(Button.Pressed, "#ok")

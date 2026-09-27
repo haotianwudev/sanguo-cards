@@ -68,6 +68,7 @@ class Battle:
     guard_cut: float = 0.0  # from guard skills this round
     defend_streak: int = 0
     result: str | None = None  # "win" | "lose"
+    overkill: float = 0.0  # excess damage on the killing blow, as a share of the enemy's max HP
     opening: list[str] = field(default_factory=list)  # log lines from the first round start
 
     @classmethod
@@ -168,6 +169,8 @@ class Battle:
                 if e.hp <= 0:
                     break
                 d = self._dmg(u.at * eff["power"] * mult, kind)
+                if d > e.hp:
+                    self.overkill = (d - e.hp) / e.max_hp
                 e.hp = max(0, e.hp - d)
                 self.combo += 1
                 log.append(f"  {e.name} 受到 {d} 伤害（{self.combo} 连击）")

@@ -6,7 +6,7 @@ Square types:
   event    story text (+ optional portraits, optional reward cards)
   choose   pick one card; that card joins and the path continues at the option's `goto`
   battle   must win to continue (`boss: true` marks the big one)
-  treasure a random card from the gacha pool
+  treasure a chest of soldier cards
   recover  restore the shared HP bar and reset cumulative AP costs / once-per-battle skills
 Within a quest the party's damage and cumulative skill costs carry over from battle to battle
 (Rance X); they reset at a recover square or when the quest ends. Losing restarts the quest,
@@ -144,17 +144,16 @@ def resolve(db: CardDB, q: Quest, save: col.Save, rng: random.Random,
         return gained
     if s.type == "event":
         for cid in s.cards:
-            if cid not in save.owned:
-                gained.append(db.cards[cid])
+            gained.append(db.cards[cid])
             col.grant_card(db, save, cid)
     elif s.type == "choose":
         opt = s.choose[choice]
         save.choices[s.id] = opt["goto"]
-        if opt["card"] not in save.owned:
+        if not col.has(db, save, opt["card"]):
             gained.append(db.cards[opt["card"]])
         col.grant_card(db, save, opt["card"])
     elif s.type == "treasure":
-        gained = col.pull(db, save, rng, 1)
+        gained = col.open_chest(db, save, rng, db.gacha["chest_cards"])
     elif s.type == "recover":
         reset_carry(save)
     save.resolved = True

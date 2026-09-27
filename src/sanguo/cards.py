@@ -47,6 +47,12 @@ class PlayerCard:
     skills: tuple[str, ...]
     in_pool: bool = True  # False = story-only, never drawn from the gacha
     person: str = ""  # who this is; variants of one general (孙策·少年 / 孙策·中年) share it
+    weight: int = 1  # soldiers only: how often a chest drops it
+
+    @property
+    def soldier(self) -> bool:
+        """N cards are soldiers (兵卡): chest drops, stackable. Everything else is a unique general."""
+        return self.rarity == "N"
 
 
 @dataclass(frozen=True)
@@ -101,7 +107,11 @@ class CardDB:
     scenarios: dict[str, Scenario]
 
     def pool(self, rarity: str) -> list[PlayerCard]:
-        return [c for c in self.cards.values() if c.rarity == rarity and c.in_pool]
+        """Generals the gacha can still give at this rarity (soldiers come from chests instead)."""
+        return [c for c in self.cards.values() if c.rarity == rarity and c.in_pool and not c.soldier]
+
+    def soldiers(self) -> list[PlayerCard]:
+        return [c for c in self.cards.values() if c.soldier]
 
 
 def load_raw() -> dict:
@@ -121,7 +131,7 @@ def load_db(raw: dict | None = None) -> CardDB:
     }
     cards = {
         cid: PlayerCard(cid, c["name"], c["rarity"], c["troop"], dict(c.get("bonus", {})),
-                        tuple(c.get("skills", ())), c.get("pool", True), c.get("person", cid))
+                        tuple(c.get("skills", ())), c.get("pool", True), c.get("person", cid), c.get("weight", 1))
         for cid, c in raw["cards"].items()
     }
     enemies = {
@@ -173,11 +183,13 @@ def build_lord(db: CardDB, name: str) -> Fighter:
     return Fighter(LORD, name, LORD, t.hp, t.at, t.skills)
 
 
-def build_leader(db: CardDB, card: Fighter, members: list[Fighter]) -> Leader:
-    """Rance X: leader stat = leader_mult × own stat + the rest of the troop's cards."""
+def build_leader(db: CardDB, card: Fighter, members: list[Fighter], weights: list[float] | None = None) -> Leader:
+    """Rance X: leader stat = leader_mult × own stat + the rest of the troop's cards.
+    `weights` scales each member (duplicate soldier cards count for less, see collection.troop_members)."""
     m = db.battle["leader_mult"]
-    return Leader(card, tuple(members), m * card.hp + sum(f.hp for f in members),
-                  m * card.at + sum(f.at for f in members))
+    w = weights or [1.0] * len(members)
+    return Leader(card, tuple(members), round(m * card.hp + sum(f.hp * k for f, k in zip(members, w))),
+                  round(m * card.at + sum(f.at * k for f, k in zip(members, w))))
 
 
 def _power(hp: float, at: float, n_skills: int) -> int:

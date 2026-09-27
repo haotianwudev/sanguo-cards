@@ -16,23 +16,24 @@ def save(db):
     return col.Save.new(db)
 
 
-def test_pull_is_free_and_never_duplicates(db, save):
-    in_pool = [c for c in db.cards.values() if c.in_pool]
-    got = col.pull(db, save, random.Random(1), len(in_pool) + 5)
-    assert len(got) == len(in_pool)  # stops once the pool is empty
-    assert len(set(save.owned)) == len(save.owned) == len(in_pool)
+def test_gacha_gives_unique_generals_only(db, save):
+    generals = [c for c in db.cards.values() if c.in_pool and not c.soldier]
+    got = col.pull(db, save, random.Random(1), len(generals) + 5)
+    assert len(got) == len(generals)  # stops once every general is owned
+    assert len(set(save.owned)) == len(save.owned) == len(generals)
+    assert not any(c.soldier for c in got)  # soldiers come from chests
     assert not any(db.cards[c].in_pool is False for c in save.owned)  # story-only cards never drop
 
 
 def test_rates_roughly_follow_config(db):
-    counts = {"N": 0, "R": 0, "SR": 0, "SSR": 0}
+    counts = {"R": 0, "SR": 0, "SSR": 0}
     for seed in range(2000):
         s = col.Save()
         (card,) = col.pull(db, s, random.Random(seed), 1)
         counts[card.rarity] += 1
     rates = db.gacha["rates"]
     for r, c in counts.items():
-        assert c / 2000 == pytest.approx(rates[r] / 100, abs=0.03)
+        assert c / 2000 == pytest.approx(rates[r] / sum(rates.values()), abs=0.03)
 
 
 def test_party_rejects_duplicate_troops(db, save):
@@ -56,10 +57,12 @@ def test_auto_party_picks_best_per_troop(db, save):
     ids = col.auto_party(db, save)
     assert "guanyu" in ids and "cav_n" not in ids and "madai" not in ids
     assert col.validate_party(db, save, ids) is None
-    leaders = col.party_leaders(db, col.Save(owned=save.owned, party=ids))
+    save.party = ids
+    leaders = col.party_leaders(db, save)
     assert leaders[0].card.troop == "lord" and len(leaders) == 4
     cav = next(ld for ld in leaders if ld.card.id == "guanyu")
     assert {m.id for m in cav.members} == {"cav_n", "madai"}  # benched cavalry backs 关羽 up
+    assert set(save.owned) == {"madai", "guanyu"} and save.soldiers["cav_n"] == 1  # N ids became soldier copies
 
 
 def test_general_adds_power_on_top_of_troop(db):
@@ -79,8 +82,8 @@ def test_save_roundtrip(db, save, tmp_path):
 
 def test_granted_card_fills_party_when_troop_free(db, save):
     col.grant_card(db, save, "sunce")  # cavalry
-    col.grant_card(db, save, "cav_n")  # cavalry again: owned, but not auto-slotted
-    assert save.party == ["sunce"] and "cav_n" in save.owned
+    col.grant_card(db, save, "cav_n")  # cavalry again: kept, but not auto-slotted
+    assert save.party == ["sunce"] and save.soldiers["cav_n"] == 1
 
 
 def test_variants_of_one_general_cannot_share_a_party(db, save):
@@ -93,6 +96,43 @@ def test_variants_of_one_general_cannot_share_a_party(db, save):
 
 
 def test_gacha_has_variants_of_story_generals_but_not_the_story_versions(db):
-    pool_ids = {c.id for r in ("N", "R", "SR", "SSR") for c in db.pool(r)}
+    pool_ids = {c.id for r in ("R", "SR", "SSR") for c in db.pool(r)}
     assert {"sunce_zhong", "zhouyu_chibi", "lvmeng"} <= pool_ids
     assert not ({"sunce", "zhouyu", "huanggai", "wuguotai"} & pool_ids)
+
+
+# ---- soldiers & chests -----------------------------------------------------------
+
+def test_chests_hold_stackable_soldiers(db, save):
+    got = col.open_chest(db, save, random.Random(3), 30)
+    assert len(got) == 30 and all(c.soldier for c in got)
+    assert sum(save.soldiers.values()) == 30
+    assert max(save.soldiers.values()) > 1  # duplicates stack
+
+
+def test_duplicate_soldiers_decay_but_new_types_count_fully(db):
+    lead = col.Save(owned=["zhangfei"])
+    one = col.leader_for(db, lead, "zhangfei").at
+    dup = col.Save(owned=["zhangfei"], soldiers={"spear_n": 2})
+    two_same = col.leader_for(db, dup, "zhangfei").at
+    mix = col.Save(owned=["zhangfei"], soldiers={"spear_n": 1, "qingzhou": 1})
+    two_kinds = col.leader_for(db, mix, "zhangfei").at
+    spear = build_fighter(db, "spear_n").at
+    assert two_same == one + round(spear * 1.6) or abs(two_same - (one + spear * 1.6)) <= 1
+    assert two_kinds > two_same  # a different soldier card beats another copy
+    many = col.Save(owned=["zhangfei"], soldiers={"spear_n": 50})
+    assert col.leader_for(db, many, "zhangfei").at < one + spear / (1 - 0.6) + 1  # bounded
+
+
+def test_soldier_can_lead_and_uses_one_of_its_copies(db):
+    save = col.Save(soldiers={"cav_n": 3})
+    ld = col.leader_for(db, save, "cav_n")
+    assert len(ld.members) == 2
+
+
+def test_boss_always_drops_a_chest_and_overkill_helps(db):
+    rng = random.Random(0)
+    assert len(col.chest_after_battle(db, col.Save(), rng, 0.0, boss=True)) == db.gacha["chest_cards_boss"]
+    assert col.chest_after_battle(db, col.Save(), rng, 0.5, boss=False)  # 50% overkill: guaranteed
+    drops = sum(bool(col.chest_after_battle(db, col.Save(), random.Random(i), 0.0, False)) for i in range(400))
+    assert 150 < drops < 250  # ~50% without overkill

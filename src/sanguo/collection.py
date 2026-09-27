@@ -1,4 +1,11 @@
-"""Player progress: owned cards, the party, story position, save/load."""
+"""Player progress: owned cards, the party, quest position, save/load.
+
+Two kinds of card:
+  generals (R/SR/SSR) — unique; come from the gacha and the story.
+  soldiers (N, 兵卡)  — stackable; come mostly from battle chests. Copies of the same soldier card back
+                        their troop with diminishing returns (×0.6 per extra copy), so a *different*
+                        soldier card of that troop (长沙刀兵 vs 当阳兵) is worth more than another copy.
+"""
 from __future__ import annotations
 
 import json
@@ -6,15 +13,17 @@ import random
 from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 
-from .cards import RARITIES, CardDB, Fighter, Leader, PlayerCard, build_fighter, build_leader, build_lord
+from .cards import CardDB, Fighter, Leader, PlayerCard, build_fighter, build_leader, build_lord
 
 DEFAULT_SAVE = Path.home() / ".sanguo-cards" / "save.json"
+GACHA_RARITIES = ("R", "SR", "SSR")
 
 
 @dataclass
 class Save:
-    owned: list[str] = field(default_factory=list)  # card ids, no duplicates
-    party: list[str] = field(default_factory=list)  # card ids; the lord is implicit and always first
+    owned: list[str] = field(default_factory=list)  # general card ids, no duplicates
+    soldiers: dict[str, int] = field(default_factory=dict)  # soldier card id -> copies
+    party: list[str] = field(default_factory=list)  # leader card ids; the lord is implicit and always first
     cleared: list[str] = field(default_factory=list)  # scenario ids won at least once
     # quest map progress (see quest.py)
     quest: str = ""  # quest in progress ("" = none started)
@@ -45,18 +54,37 @@ class Save:
         path.write_text(json.dumps(asdict(self), ensure_ascii=False, indent=1), "utf-8")
 
 
-# ---- gacha -------------------------------------------------------------
+def _sync(db: CardDB, save: Save) -> None:
+    """Soldier ids found in `owned` (older saves, hand-built test saves) become soldier copies."""
+    if any(db.cards[c].soldier for c in save.owned):
+        for c in [c for c in save.owned if db.cards[c].soldier]:
+            save.soldiers[c] = save.soldiers.get(c, 0) + 1
+        save.owned = [c for c in save.owned if not db.cards[c].soldier]
+
+
+def has(db: CardDB, save: Save, card_id: str) -> bool:
+    _sync(db, save)
+    return save.soldiers.get(card_id, 0) > 0 if db.cards[card_id].soldier else card_id in save.owned
+
+
+def copies(db: CardDB, save: Save, card_id: str) -> int:
+    _sync(db, save)
+    return save.soldiers.get(card_id, 0) if db.cards[card_id].soldier else int(card_id in save.owned)
+
+
+# ---- getting cards ---------------------------------------------------------
 
 def pull(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]:
-    """Free, unlimited pulls. Owned cards leave the pool, so there are never duplicates.
+    """Free, unlimited gacha for generals. Owned generals leave the pool, so there are never duplicates.
     If the rolled rarity is exhausted, roll again among rarities that still have cards."""
+    _sync(db, save)
     rates = db.gacha["rates"]
     got = []
     for _ in range(n):
-        pools = {r: [c for c in db.pool(r) if c.id not in save.owned] for r in RARITIES}
-        live = [r for r in RARITIES if pools[r]]
+        pools = {r: [c for c in db.pool(r) if c.id not in save.owned] for r in GACHA_RARITIES}
+        live = [r for r in GACHA_RARITIES if pools[r]]
         if not live:
-            break  # everything in the pool is already owned
+            break  # every general is already owned
         rarity = rng.choices(live, weights=[rates[r] for r in live])[0]
         card = rng.choice(pools[rarity])
         save.owned.append(card.id)
@@ -65,13 +93,40 @@ def pull(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]
 
 
 def pool_left(db: CardDB, save: Save) -> int:
-    return sum(1 for c in db.cards.values() if c.in_pool and c.id not in save.owned)
+    return sum(1 for r in GACHA_RARITIES for c in db.pool(r) if c.id not in save.owned)
+
+
+def open_chest(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]:
+    """A treasure chest: n soldier cards, weighted by how common each is. Soldiers stack."""
+    _sync(db, save)
+    pool = db.soldiers()
+    got = rng.choices(pool, weights=[c.weight for c in pool], k=n)
+    for c in got:
+        save.soldiers[c.id] = save.soldiers.get(c.id, 0) + 1
+    return got
+
+
+def grant_card(db: CardDB, save: Save, card_id: str) -> None:
+    """Give a card outside the gacha (story). Slots it into the party if there's room for its troop."""
+    _sync(db, save)
+    if db.cards[card_id].soldier:
+        save.soldiers[card_id] = save.soldiers.get(card_id, 0) + 1
+    elif card_id not in save.owned:
+        save.owned.append(card_id)
+    if card_id not in save.party and validate_party(db, save, save.party + [card_id]) is None:
+        save.party.append(card_id)
 
 
 # ---- party -------------------------------------------------------------
 
+def owned_ids(db: CardDB, save: Save) -> list[str]:
+    """Every distinct card the player has: generals, then soldier types."""
+    _sync(db, save)
+    return list(save.owned) + [c for c, n in save.soldiers.items() if n > 0]
+
+
 def owned_fighters(db: CardDB, save: Save) -> list[Fighter]:
-    return [build_fighter(db, cid) for cid in save.owned]
+    return [build_fighter(db, cid) for cid in owned_ids(db, save)]
 
 
 def validate_party(db: CardDB, save: Save, card_ids: list[str]) -> str | None:
@@ -82,7 +137,7 @@ def validate_party(db: CardDB, save: Save, card_ids: list[str]) -> str | None:
         return "同一张卡不能重复上阵"
     troops, people = set(), set()
     for cid in card_ids:
-        if cid not in save.owned:
+        if not has(db, save, cid):
             return f"未拥有卡牌 {cid}"
         c = db.cards[cid]
         if c.person in people:
@@ -94,14 +149,31 @@ def validate_party(db: CardDB, save: Save, card_ids: list[str]) -> str | None:
     return None
 
 
-def troop_members(db: CardDB, save: Save, leader_id: str) -> list[Fighter]:
-    """Every other owned card of the leader's troop — they back the leader up (Rance X unit strength)."""
+def troop_members(db: CardDB, save: Save, leader_id: str) -> tuple[list[Fighter], list[float]]:
+    """Everyone else in the leader's troop, with how much each counts: other generals fully; each soldier
+    card type 1, 0.6, 0.36 … per copy (a soldier leader uses up one of its own copies)."""
+    _sync(db, save)
     troop = db.cards[leader_id].troop
-    return [build_fighter(db, c) for c in save.owned if c != leader_id and db.cards[c].troop == troop]
+    decay = db.gacha["soldier_decay"]
+    members, weights = [], []
+    for c in save.owned:
+        if c != leader_id and db.cards[c].troop == troop:
+            members.append(build_fighter(db, c))
+            weights.append(1.0)
+    for c, n in save.soldiers.items():
+        if db.cards[c].troop != troop:
+            continue
+        n -= c == leader_id
+        f = build_fighter(db, c)
+        for i in range(n):
+            members.append(f)
+            weights.append(decay ** i)
+    return members, weights
 
 
 def leader_for(db: CardDB, save: Save, card_id: str) -> Leader:
-    return build_leader(db, build_fighter(db, card_id), troop_members(db, save, card_id))
+    members, weights = troop_members(db, save, card_id)
+    return build_leader(db, build_fighter(db, card_id), members, weights)
 
 
 def leader_power(ld: Leader) -> int:
@@ -110,7 +182,7 @@ def leader_power(ld: Leader) -> int:
 
 def auto_party(db: CardDB, save: Save) -> list[str]:
     """Best leader per troop (the strongest card leads), then the strongest troops that fit."""
-    ranked = sorted(save.owned, key=lambda c: leader_power(leader_for(db, save, c)), reverse=True)
+    ranked = sorted(owned_ids(db, save), key=lambda c: leader_power(leader_for(db, save, c)), reverse=True)
     picked: list[str] = []
     for cid in ranked:
         if len(picked) == save.party_slots - 1:
@@ -122,7 +194,8 @@ def auto_party(db: CardDB, save: Save) -> list[str]:
 
 def party_leaders(db: CardDB, save: Save) -> list[Leader]:
     """The lord (alone in its unit) plus one leader per chosen troop."""
-    return [build_leader(db, build_lord(db, save.lord_name), [])] +         [leader_for(db, save, cid) for cid in save.party]
+    return [build_leader(db, build_lord(db, save.lord_name), [])] + \
+        [leader_for(db, save, cid) for cid in save.party if has(db, save, cid)]
 
 
 def record_win(save: Save, scenario_id: str) -> None:
@@ -130,9 +203,10 @@ def record_win(save: Save, scenario_id: str) -> None:
         save.cleared.append(scenario_id)
 
 
-def grant_card(db: CardDB, save: Save, card_id: str) -> None:
-    """Give a card outside the gacha (story). Slots it into the party if there's room for its troop."""
-    if card_id not in save.owned:
-        save.owned.append(card_id)
-    if card_id not in save.party and validate_party(db, save, save.party + [card_id]) is None:
-        save.party.append(card_id)
+def chest_after_battle(db: CardDB, save: Save, rng: random.Random, overkill: float, boss: bool) -> list[PlayerCard]:
+    """Rance X: a won battle may drop a chest. Bosses always do; otherwise 50% + overkill share
+    (overkill ≥ 50% of the enemy's HP guarantees it). Chests hold soldier cards only."""
+    chance = 1.0 if boss else min(1.0, db.gacha["chest_base"] + overkill)
+    if rng.random() >= chance:
+        return []
+    return open_chest(db, save, rng, db.gacha["chest_cards_boss" if boss else "chest_cards"])

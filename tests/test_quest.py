@@ -19,7 +19,7 @@ def qs(db):
     return quest.load_quests(db)
 
 
-def bot_battle(db, save, scenario, seed):
+def bot_battle(db, save, scenario, seed, boss=False):
     """Fight one quest battle with the naive bot, carrying the quest's wear in and out."""
     b = Battle.start(db, scenario, col.party_leaders(db, save), seed=seed,
                      damage=save.damage, extra=save.carry_extra, uses=save.carry_uses)
@@ -38,6 +38,7 @@ def bot_battle(db, save, scenario, seed):
         save.damage, extra, uses = b.carry_out()
         save.carry_extra.update(extra)
         save.carry_uses.update(uses)
+        col.chest_after_battle(db, save, random.Random(seed), b.overkill, boss)
     return b.result == "win"
 
 
@@ -52,7 +53,7 @@ def play_quest(db, q, save, pick=0, fork=None, seed=0):
         s = quest.here(q, save)
         if s.type == "battle" and not save.resolved:
             save.party = col.auto_party(db, save)
-            if not bot_battle(db, save, s.battle, rng.randrange(10**6)):
+            if not bot_battle(db, save, s.battle, rng.randrange(10**6), s.boss):
                 return False
         quest.resolve(db, q, save, rng, pick if s.type == "choose" else None)
         opts = quest.next_options(q, save)
