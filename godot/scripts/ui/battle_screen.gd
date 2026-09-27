@@ -42,7 +42,8 @@ func _ready() -> void:
 	b.take_events()
 	_refresh()
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
-		_tip("点队长卡下的技能出手 · AP 每回合 +2（最多 6）· 每位队长每回合行动一次 · 全军共用一条体力")
+		_tip("点队长卡下的技能出手 · AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
+			int(GameData.get_db().battle["ap_per_round"]), b.ap_max()])
 
 
 # ---- layout ------------------------------------------------------------------

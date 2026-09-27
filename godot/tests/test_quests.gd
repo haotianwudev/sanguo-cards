@@ -572,3 +572,12 @@ func test_trades_take_something_away() -> void:
 func test_each_chapter_has_a_big_event_pool() -> void:
 	check(quest(0)["event_pool"].size() >= 20, "chapter 1: %d events" % quest(0)["event_pool"].size())
 	check(quest(1)["event_pool"].size() >= 15, "chapter 2: %d events" % quest(1)["event_pool"].size())
+
+
+func test_chapter_two_is_full_of_dong_zhuo_troops() -> void:
+	var q := quest(1)
+	var fights: Array = q["squares"].values().filter(func(s): return s["type"] == "battle").map(func(s): return s["battle"])
+	for f in ["xiliang_youqi", "guosi", "feixiong", "liru", "huaxiong", "dongbai", "hulao_ch1", "lijue"]:
+		check(fights.has(f), f)
+	check(q["squares"]["liru"]["ambush"], "李儒 lays an ambush")
+	check(GameData.get_db().enemies["feixiong"]["phys_resist"] > 0.3, "飞熊军 wear heavy armour")

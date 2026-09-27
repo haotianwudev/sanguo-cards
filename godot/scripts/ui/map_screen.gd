@@ -506,8 +506,43 @@ func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 		tags += "[color=%s][b]精英战[/b]（必掉宝箱，三选一）[/color]　" % Kit.c("red").to_html()
 	if fight["ambush"]:
 		tags += "[color=%s][b]埋伏！敌人先手[/b][/color]　" % Kit.c("red").to_html()
-	return "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次\n%d 回合内击破。任务中体力不会自动回满。" % [
-		tags, e["name"], e["hp"], e["at"], e["actions"], sc["turn_limit"]]
+	return "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次%s\n招式：%s\n%d 回合内击破。任务中体力不会自动回满。" % [
+		tags, e["name"], e["hp"], e["at"], e["actions"], _resists(e), _moves_text(e), sc["turn_limit"]]
+
+
+func _resists(e: Dictionary) -> String:
+	var r := ""
+	if e["phys_resist"] > 0.0:
+		r += "　物理抗性 %d%%" % int(round(e["phys_resist"] * 100))
+	if e["magic_resist"] > 0.0:
+		r += "　法术抗性 %d%%" % int(round(e["magic_resist"] * 100))
+	return r
+
+
+func _moves_text(e: Dictionary) -> String:
+	## the enemy's moves with what makes them dangerous, so the player can plan (the wind-up itself is skipped)
+	var parts: Array = []
+	var charged: Array = e["moves"].filter(func(m): return m.has("charge")).map(func(m): return m["charge"])
+	for m in e["moves"]:
+		if m.has("charge"):
+			continue
+		var tags: Array = []
+		if charged.has(m["name"]):
+			tags.append("蓄力大招")
+		if m.get("pierce", false):
+			tags.append("无视防御")
+		if m.has("confuse"):
+			tags.append("混乱")
+		if m.has("rage"):
+			tags.append("狂暴" + ("·残血" if m.get("when", "") == "half" else ""))
+		if m.has("heal"):
+			tags.append("回复")
+		if m.has("ap_drain"):
+			tags.append("夺AP")
+		if m.has("burn_party"):
+			tags.append("火烧全军")
+		parts.append(m["name"] + ("（%s）" % "·".join(tags) if not tags.is_empty() else ""))
+	return " · ".join(parts)
 
 
 func _fight_button(s: Dictionary, buttons: Control) -> void:

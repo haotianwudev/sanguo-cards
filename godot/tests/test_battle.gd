@@ -34,15 +34,15 @@ func test_enemy_hp_scales_with_party_size() -> void:
 	check(new_battle().enemy["max_hp"] > small.enemy["max_hp"])
 
 
-func test_ap_starts_at_2_gains_2_caps_at_6() -> void:
+func test_ap_starts_at_3_gains_3_caps_at_8() -> void:
 	var b := new_battle()
-	check_eq(b.ap, 2)
+	check_eq(b.ap, 3)
 	var seen: Array = []
 	for _i in 4:
 		b.party_hp = b.party_max
 		b.end_round()
 		seen.append(b.ap)
-	check_eq(seen, [4, 6, 6, 6])
+	check_eq(seen, [6, 8, 8, 8])
 
 
 func test_each_leader_acts_once_per_round() -> void:
@@ -57,7 +57,7 @@ func test_cumulative_skill_costs_one_more_each_use() -> void:
 	check_eq(b.cost(b.leaders[1], charge), 1)
 	b.act(1, "charge")
 	check_eq(b.cost(b.leaders[1], charge), 2)
-	check_eq(b.ap, 1)
+	check_eq(b.ap, 2)
 
 
 func test_once_per_battle_skill() -> void:
@@ -275,3 +275,12 @@ func test_a_wind_up_lands_on_the_next_enemy_turn_not_this_one() -> void:
 				func(e): return "charge" if e["t"] == "enemy_charge" else e["move"])
 			var k := names.find("charge")
 			check(k < 0 or not names.slice(k).has("天下无双"), "seed %d: %s" % [seed_value, names])
+
+
+func test_troop_basic_attacks_cost_1_ap() -> void:
+	var db := GameData.get_db()
+	for tid in db.troops:
+		if tid == "lord":
+			continue
+		for sid in db.troops[tid]["skills"]:
+			check(db.skills[sid]["cost"] >= 1, "%s: %s" % [tid, db.skills[sid]["name"]])
