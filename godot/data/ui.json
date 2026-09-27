@@ -1,0 +1,32 @@
+{
+  "_comment": "Presentation config for the terminal UI. Colour values in rarity_colors / map colours are palette names from themes.*",
+  "default_theme": "light",
+  "themes": {
+    "dark": {
+      "bg": "#1b1c21", "panel": "#25262c", "card": "#23242a", "card-hover": "#2c2e36", "card-ssr": "#2a2720",
+      "spent": "#1d1e22", "log-bg": "#202126", "enemy-bg": "#2a1f20", "party-bg": "#1f2622", "sel-bg": "#2e2b22",
+      "border": "#4b5263", "track": "#3b3f4a", "text": "#d7dae0", "muted": "#abb2bf", "dim": "#5c6370",
+      "gold": "#f5c542", "red": "#e06c75", "enemy-border": "#be5046", "green": "#98c379", "amber": "#e5c07b",
+      "blue": "#61afef", "purple": "#c678dd", "gray": "#8b949e"
+    },
+    "light": {
+      "bg": "#f6f3ea", "panel": "#ebe6d9", "card": "#fffdf7", "card-hover": "#f3eee2", "card-ssr": "#fff6d8",
+      "spent": "#e9e6df", "log-bg": "#fbf9f3", "enemy-bg": "#fbecea", "party-bg": "#edf5ea", "sel-bg": "#fff1c4",
+      "border": "#b9b2a3", "track": "#d6d0c3", "text": "#2b2b2b", "muted": "#5f6368", "dim": "#9a968c",
+      "gold": "#b7791f", "red": "#c0392b", "enemy-border": "#c0392b", "green": "#2e7d32", "amber": "#a8660a",
+      "blue": "#1f6fb2", "purple": "#8e44ad", "gray": "#7a7a7a"
+    }
+  },
+  "rarity_labels": {"N": "兵", "R": "R", "SR": "SR", "SSR": "SSR", "lord": "主公"},
+  "rarity_colors": {"N": "gray", "R": "blue", "SR": "purple", "SSR": "gold", "lord": "red"},
+  "map": {
+    "cell": 8,
+    "glyphs": {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休", "recruit": "募", "boss": "将"},
+    "type_names": {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复", "recruit": "招募"},
+    "type_colors": {"battle": "red", "boss": "purple", "treasure": "gold", "recover": "blue", "choose": "amber", "recruit": "green", "event": "text"}
+  },
+  "portrait_framing": {
+    "_comment": "how many head-heights tall each portrait box shows (≈2.5 bust, ≈5.5 half body, large = whole picture)",
+    "card": 2.6, "leader": 2.6, "story": 5.5, "collection": 99, "enemy": 2.4
+  }
+}

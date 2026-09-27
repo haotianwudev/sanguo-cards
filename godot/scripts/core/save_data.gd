@@ -1,0 +1,272 @@
+class_name SaveData
+extends RefCounted
+## Player progress: cards, party, quest position. Also the rules for getting cards and building the party.
+##
+## Two kinds of card:
+##   generals (R/SR/SSR) — unique; come from recruiting (pick 1 of a few) and the story.
+##   soldiers (N, 兵卡)  — stackable; come from battle chests (pick 1 of a few). Copies of the same soldier
+##                         card back their troop with diminishing returns (×soldier_decay per extra copy).
+
+const SAVE_PATH := "user://save.json"
+
+var owned: Array = []  # general card ids, no duplicates
+var soldiers: Dictionary = {}  # soldier card id -> copies
+var party: Array = []  # leader card ids; the lord is implicit and always first
+var cleared: Array = []  # scenario ids won at least once
+# quest map progress (see Quests)
+var quest := ""
+var square := ""
+var visited: Array = []
+var resolved := false
+var damage := 0  # shared-HP damage carried between battles in this quest
+var carry_extra: Dictionary = {}  # card id -> {skill: 累积 increments}
+var carry_uses: Dictionary = {}  # card id -> {skill: uses left}
+var choices: Dictionary = {}  # choose-square id -> goto (remembered across retries)
+var offer: Array = []  # cards shown on the current recruit/treasure square
+var quests_cleared: Array = []
+var lord_name := "主公"
+var party_slots := 4  # including the lord
+var theme := "light"
+
+const FIELDS := ["owned", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme"]
+
+
+static func create() -> SaveData:
+	var s := SaveData.new()
+	s.party_slots = int(GameData.get_db().gacha["party_slots"])
+	return s
+
+
+func to_dict() -> Dictionary:
+	var d := {}
+	for f in FIELDS:
+		d[f] = get(f)
+	return d
+
+
+static func from_dict(d: Dictionary) -> SaveData:
+	var s := SaveData.new()
+	for f in FIELDS:
+		if d.has(f):
+			s.set(f, d[f])
+	# JSON has no ints: restore them
+	s.damage = int(s.damage)
+	s.party_slots = int(s.party_slots)
+	for k in s.soldiers:
+		s.soldiers[k] = int(s.soldiers[k])
+	for table in [s.carry_extra, s.carry_uses]:
+		for cid in table:
+			for sk in table[cid]:
+				table[cid][sk] = int(table[cid][sk])
+	s._sync()
+	return s
+
+
+func write(path: String = SAVE_PATH) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(JSON.stringify(to_dict(), " "))
+
+
+static func read(path: String = SAVE_PATH) -> SaveData:
+	if not FileAccess.file_exists(path):
+		return null
+	return from_dict(GameData.read_json(path))
+
+
+func _db() -> GameData:
+	return GameData.get_db()
+
+
+func _sync() -> void:
+	## Drop cards that no longer exist; soldier ids found in `owned` become soldier copies.
+	var db := _db()
+	owned = owned.filter(func(c): return db.cards.has(c))
+	party = party.filter(func(c): return db.cards.has(c))
+	for c in soldiers.keys():
+		if not db.cards.has(c):
+			soldiers.erase(c)
+	for c in owned.filter(func(c): return db.cards[c]["soldier"]):
+		soldiers[c] = soldiers.get(c, 0) + 1
+	owned = owned.filter(func(c): return not db.cards[c]["soldier"])
+
+
+func has_card(card_id: String) -> bool:
+	_sync()
+	if _db().cards[card_id]["soldier"]:
+		return soldiers.get(card_id, 0) > 0
+	return owned.has(card_id)
+
+
+func copies(card_id: String) -> int:
+	_sync()
+	if _db().cards[card_id]["soldier"]:
+		return soldiers.get(card_id, 0)
+	return 1 if owned.has(card_id) else 0
+
+
+# ---- getting cards -------------------------------------------------------------
+
+func recruit_offer(rng: RandomNumberGenerator, n: int = 0) -> Array:
+	## A few unowned generals (rarity rolled per card); the player keeps one with take().
+	_sync()
+	var db := _db()
+	if n <= 0:
+		n = int(db.gacha["offer_size"])
+	var rates: Dictionary = db.gacha["rates"]
+	var result: Array = []
+	for _i in n:
+		var live: Array = []
+		var pools := {}
+		for r in rates:
+			pools[r] = db.pool(r).filter(func(c): return not owned.has(c["id"]) and not result.has(c))
+			if not pools[r].is_empty():
+				live.append(r)
+		if live.is_empty():
+			break
+		var rarity: String = GameData.weighted_pick(rng, live, live.map(func(r): return float(rates[r])))
+		var p: Array = pools[rarity]
+		result.append(p[rng.randi_range(0, p.size() - 1)])
+	return result
+
+
+func pool_left() -> int:
+	var db := _db()
+	var n := 0
+	for r in db.gacha["rates"]:
+		n += db.pool(r).filter(func(c): return not owned.has(c["id"])).size()
+	return n
+
+
+static func chest_offer(rng: RandomNumberGenerator, n: int) -> Array:
+	## A chest shows n different soldier cards (weighted by how common each is); the player keeps one.
+	var pool: Array = GameData.get_db().soldier_cards()
+	var result: Array = []
+	for _i in mini(n, pool.size()):
+		var c: Dictionary = GameData.weighted_pick(rng, pool, pool.map(func(x): return float(x["weight"])))
+		result.append(c)
+		pool.erase(c)
+	return result
+
+
+func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool) -> Array:
+	## Rance X: bosses always drop a chest; otherwise 50% + the overkill share (≥ 50% overkill guarantees it).
+	var g: Dictionary = _db().gacha
+	var chance := 1.0 if boss else minf(1.0, float(g["chest_base"]) + overkill)
+	if rng.randf() >= chance:
+		return []
+	return chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]))
+
+
+func take(card_id: String) -> Dictionary:
+	## Keep the one card picked from a recruit offer (a general) or a chest (a soldier).
+	var card: Dictionary = _db().cards[card_id]
+	assert(card["soldier"] or not owned.has(card_id), "already own " + card_id)
+	grant_card(card_id)
+	return card
+
+
+func grant_card(card_id: String) -> void:
+	## Give a card (story / pick). Slots it into the party if there's room for its troop.
+	_sync()
+	if _db().cards[card_id]["soldier"]:
+		soldiers[card_id] = soldiers.get(card_id, 0) + 1
+	elif not owned.has(card_id):
+		owned.append(card_id)
+	if not party.has(card_id) and validate_party(party + [card_id]) == "":
+		party.append(card_id)
+
+
+# ---- party ---------------------------------------------------------------------
+
+func owned_ids() -> Array:
+	_sync()
+	var ids: Array = owned.duplicate()
+	for c in soldiers:
+		if soldiers[c] > 0:
+			ids.append(c)
+	return ids
+
+
+func validate_party(card_ids: Array) -> String:
+	## "" if the party is legal, otherwise the reason.
+	var db := _db()
+	if card_ids.size() > party_slots - 1:
+		return "最多 %d 张卡（主公固定占一位）" % (party_slots - 1)
+	var troops_seen := {}
+	var people := {}
+	for cid in card_ids:
+		if not has_card(cid):
+			return "未拥有卡牌 " + cid
+		var c: Dictionary = db.cards[cid]
+		if people.has(c["person"]):
+			return "同一武将的不同版本不能同时上阵（%s）" % c["name"]
+		if troops_seen.has(c["troop"]):
+			return "兵种重复：%s 只能由一人指挥（%s）" % [db.troops[c["troop"]]["name"], c["name"]]
+		troops_seen[c["troop"]] = true
+		people[c["person"]] = true
+	return ""
+
+
+func troop_members(leader_id: String) -> Array:
+	## [members, weights]: other generals of the troop count fully; each soldier card type counts
+	## 1, decay, decay² … per copy (a soldier leader uses up one of its own copies).
+	_sync()
+	var db := _db()
+	var troop: String = db.cards[leader_id]["troop"]
+	var decay := float(db.gacha["soldier_decay"])
+	var members: Array = []
+	var weights: Array = []
+	for c in owned:
+		if c != leader_id and db.cards[c]["troop"] == troop:
+			members.append(db.build_fighter(c))
+			weights.append(1.0)
+	for c in soldiers:
+		if db.cards[c]["troop"] != troop:
+			continue
+		var n: int = soldiers[c] - (1 if c == leader_id else 0)
+		var f := db.build_fighter(c)
+		for i in n:
+			members.append(f)
+			weights.append(pow(decay, i))
+	return [members, weights]
+
+
+func leader_for(card_id: String) -> Dictionary:
+	var mw := troop_members(card_id)
+	return _db().build_leader(_db().build_fighter(card_id), mw[0], mw[1])
+
+
+static func leader_power(ld: Dictionary) -> int:
+	return int(round(ld["at"] + ld["hp"] / 5.0))
+
+
+func auto_party() -> Array:
+	## Best leader per troop (the strongest card leads), then the strongest troops that fit.
+	var ranked := owned_ids()
+	var powers := {}
+	for c in ranked:
+		powers[c] = leader_power(leader_for(c))
+	ranked.sort_custom(func(a, b): return powers[a] > powers[b])
+	var picked: Array = []
+	for cid in ranked:
+		if picked.size() == party_slots - 1:
+			break
+		if validate_party(picked + [cid]) == "":
+			picked.append(cid)
+	return picked
+
+
+func party_leaders() -> Array:
+	## The lord (alone in its unit) plus one leader per chosen troop.
+	var db := _db()
+	var leaders: Array = [db.build_leader(db.build_lord(lord_name), [])]
+	for cid in party:
+		if has_card(cid):
+			leaders.append(leader_for(cid))
+	return leaders
+
+
+func record_win(scenario_id: String) -> void:
+	if not cleared.has(scenario_id):
+		cleared.append(scenario_id)

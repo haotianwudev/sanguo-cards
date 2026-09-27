@@ -1,0 +1,165 @@
+class_name GameData
+extends RefCounted
+## All game content, loaded once from res://data/*.json. Records are plain Dictionaries.
+## Stats follow Rance X: each card has only HP and AT. A troop type (兵种) is a unit; the card chosen
+## to lead it gets  AT = leader_mult × own AT + the rest of that troop's cards  (HP likewise).
+
+const DATA_DIR := "res://data"
+
+static var _inst: GameData
+
+var gacha: Dictionary
+var battle: Dictionary
+var troops: Dictionary  # id -> {id, name, short, hp, at, skills}
+var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null), effects}
+var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
+var enemies: Dictionary  # id -> {id, name, hp, at, actions, moves, phys_resist, magic_resist, portrait}
+var scenarios: Dictionary  # id -> {id, name, turn_limit, enemy}
+var quests: Array  # [{id, title, start, squares: {id -> square}}]
+var ui: Dictionary
+
+
+static func get_db() -> GameData:
+	if _inst == null:
+		_inst = GameData.new()
+		_inst._load(DATA_DIR)
+	return _inst
+
+
+static func read_json(path: String) -> Variant:
+	var text := FileAccess.get_file_as_string(path)
+	var parsed: Variant = JSON.parse_string(text)
+	assert(parsed != null, "could not parse %s" % path)
+	return parsed
+
+
+func _load(dir: String) -> void:
+	var raw: Dictionary = read_json(dir + "/cards.json")
+	gacha = raw["gacha"]
+	battle = raw["battle"]
+	for sid in raw["skills"]:
+		var s: Dictionary = raw["skills"][sid]
+		skills[sid] = {"id": sid, "name": s["name"], "cost": int(s["cost"]),
+			"cumulative": s.get("cumulative", false),
+			"uses": null if s.get("uses") == null else int(s["uses"]),
+			"effects": s["effects"]}
+	for tid in raw["troops"]:
+		var t: Dictionary = raw["troops"][tid]
+		troops[tid] = {"id": tid, "name": t["name"], "short": t["short"], "hp": int(t["hp"]),
+			"at": int(t["at"]), "skills": t["skills"]}
+	for cid in raw["cards"]:
+		var c: Dictionary = raw["cards"][cid]
+		var bonus := {}
+		for k in c.get("bonus", {}):
+			bonus[k] = int(c["bonus"][k])
+		cards[cid] = {"id": cid, "name": c["name"], "rarity": c["rarity"], "troop": c["troop"],
+			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
+			"person": c.get("person", cid), "weight": int(c.get("weight", 1)),
+			"soldier": c["rarity"] == "N"}
+	for eid in raw["enemies"]:
+		var e: Dictionary = raw["enemies"][eid]
+		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
+			"actions": int(e["actions"]), "moves": e["moves"],
+			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)),
+			"portrait": e.get("portrait", "")}
+	for sid in raw["scenarios"]:
+		var sc: Dictionary = raw["scenarios"][sid]
+		scenarios[sid] = {"id": sid, "name": sc["name"], "turn_limit": int(sc["turn_limit"]), "enemy": sc["enemy"]}
+	_validate()
+
+	var story: Dictionary = read_json(dir + "/story.json")
+	for q in story["quests"]:
+		var squares := {}
+		for sq_id in q["squares"]:
+			var s: Dictionary = q["squares"][sq_id]
+			squares[sq_id] = {"id": sq_id, "x": int(s["x"]), "y": int(s["y"]), "type": s["type"],
+				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
+				"cards": s.get("cards", []), "choose": s.get("choose", []), "battle": s.get("battle", ""),
+				"boss": s.get("boss", false), "label": s.get("label", "")}
+		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares})
+	Quests.validate(self)
+
+	ui = read_json(dir + "/ui.json")
+
+
+func _validate() -> void:
+	for sk in skills.values():
+		for e in sk["effects"]:
+			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap"],
+				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
+	for c in cards.values():
+		assert(troops.has(c["troop"]) and c["troop"] != "lord", "card %s: bad troop" % c["id"])
+		for s in c["skills"]:
+			assert(skills.has(s), "card %s: unknown skill %s" % [c["id"], s])
+	for sc in scenarios.values():
+		assert(enemies.has(sc["enemy"]), "scenario %s: unknown enemy" % sc["id"])
+
+
+# ---- cards -------------------------------------------------------------------
+
+func pool(rarity: String) -> Array:
+	## Generals the recruit offer can give at this rarity (soldiers come from chests instead).
+	return cards.values().filter(func(c): return c["rarity"] == rarity and c["in_pool"] and not c["soldier"])
+
+
+func soldier_cards() -> Array:
+	return cards.values().filter(func(c): return c["soldier"])
+
+
+func build_fighter(card_id: String) -> Dictionary:
+	## 兵种基础 + 武将自身能力. Skills = the troop's skill + the general's own.
+	var c: Dictionary = cards[card_id]
+	var t: Dictionary = troops[c["troop"]]
+	var sk: Array = t["skills"].duplicate()
+	for s in c["skills"]:
+		if not sk.has(s):
+			sk.append(s)
+	return {"id": card_id, "name": c["name"], "troop": c["troop"], "hp": t["hp"] + c["bonus"].get("hp", 0),
+		"at": t["at"] + c["bonus"].get("at", 0), "skills": sk, "rarity": c["rarity"]}
+
+
+func build_lord(lord_name: String) -> Dictionary:
+	var t: Dictionary = troops["lord"]
+	return {"id": "lord", "name": lord_name, "troop": "lord", "hp": t["hp"], "at": t["at"],
+		"skills": t["skills"].duplicate(), "rarity": null}
+
+
+func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:
+	## Rance X: leader stat = leader_mult × own stat + the rest of the troop (weighted: duplicate soldiers decay).
+	var m: int = int(battle["leader_mult"])
+	var hp := float(m * card["hp"])
+	var at := float(m * card["at"])
+	for i in members.size():
+		var w: float = weights[i] if i < weights.size() else 1.0
+		hp += members[i]["hp"] * w
+		at += members[i]["at"] * w
+	return {"card": card, "members": members, "hp": int(round(hp)), "at": int(round(at))}
+
+
+static func _power(hp: float, at: float, n_skills: int) -> int:
+	return int(round(hp / 5.0 + at + 15 * n_skills))
+
+
+func power(f: Dictionary) -> int:
+	return _power(f["hp"], f["at"], f["skills"].size())
+
+
+func power_split(f: Dictionary) -> Array:
+	## [兵种战力, 武将战力]
+	var t: Dictionary = troops[f["troop"]]
+	var troop := _power(t["hp"], t["at"], t["skills"].size())
+	return [troop, power(f) - troop]
+
+
+# ---- helpers -----------------------------------------------------------------
+
+static func weighted_pick(rng: RandomNumberGenerator, items: Array, weights: Array) -> Variant:
+	var total := 0.0
+	for w in weights:
+		total += w
+	var r := rng.randf() * total
+	for i in items.size():
+		r -= weights[i]
+		if r < 0.0:
+			return items[i]
+	return items[items.size() - 1]

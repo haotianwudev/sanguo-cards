@@ -1,0 +1,24 @@
+; Engine configuration file.
+; Edit it in the Godot editor (Project > Project Settings) rather than by hand where possible.
+
+config_version=5
+
+[application]
+
+config/name="三国卡牌"
+config/description="小而精的三国 roguelike 卡牌游戏（兰斯10式战斗 + 爬塔地图）"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
