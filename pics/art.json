@@ -30,7 +30,9 @@
     "zhangjiao": {"src": "source/public-domain/zhangjiao.jpg", "face": [0.52, 0.13], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg", "license": "Public domain", "artist": "Unknown author"},
     "zhangliao": {"src": "source/public-domain/zhangliao.jpg", "face": [0.27, 0.17], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg", "license": "Public domain", "artist": "—"},
     "zhaoyun": {"src": "source/public-domain/zhaoyun.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:ZhaoYun.jpg", "license": "Public domain", "artist": "Unknown authorUnknown author"},
-    "zhugeliang": {"src": "source/public-domain/zhugeliang.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg", "license": "Public domain", "artist": "Unknown authorUnknown author"}
+    "zhugeliang": {"src": "source/public-domain/zhugeliang.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg", "license": "Public domain", "artist": "Unknown authorUnknown author"},
+    "langlijiao": {"src": "source/generals/langlijiao.jpg", "face": [0.50, 0.23], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "yaodao": {"src": "source/generals/yaodao.jpg", "face": [0.50, 0.30], "head": 0.25, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {
