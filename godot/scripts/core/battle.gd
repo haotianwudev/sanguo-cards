@@ -77,8 +77,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		hp += int(round(ld["hp"] * (1.0 + float(mods.get("troop_hp", {}).get(ld["card"]["troop"], 0.0)))))
 	b.party_max = int(round(hp * (1.0 + float(mods.get("hp", 0.0)))))
 	b.party_hp = maxi(1, hp - damage)
-	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"]) - int(mods.get("ap_round", 0)) \
-		+ int(mods.get("ap_start", 0))
+	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"]) + int(mods.get("ap_start", 0))
 	b.turn_limit = int(b.scenario["turn_limit"]) + int(mods.get("turns", 0))
 	b.opening = []
 	if ambush and mods.get("no_ambush", 0) > 0:
