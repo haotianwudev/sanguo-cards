@@ -126,6 +126,9 @@
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]}
   },
   "enemies": {
+    "boar": {"name": "野猪", "hp": 1300, "at": 110, "actions": 2, "moves": [{"name": "冲撞", "power": 1.0, "weight": 3}, {"name": "獠牙", "power": 1.4, "weight": 1}]},
+    "tiger": {"name": "吊睛白额虎", "hp": 3000, "at": 190, "actions": 2, "moves": [{"name": "扑", "power": 1.0, "weight": 2}, {"name": "掀", "power": 1.2, "weight": 2}, {"name": "剪", "power": 1.6, "weight": 1}]},
+    "huangjin_yaodao": {"name": "黄巾妖道", "hp": 5500, "at": 220, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "符水", "power": 1.0, "weight": 3}, {"name": "黄天当立", "power": 1.5, "weight": 1}, {"name": "妖言惑众", "power": 0.5, "confuse": 0.6, "weight": 1}]},
     "shuizei_scout": {"name": "水贼喽啰", "hp": 2600, "at": 170, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "水鬼翻身", "power": 1.4, "weight": 1}]},
     "shuizei_guard": {"name": "看门水贼", "hp": 4600, "at": 210, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "敲锣", "power": 0.6, "weight": 1}]},
     "shuizei": {"name": "水贼头目·浪里蛟", "hp": 5000, "at": 190, "actions": 2, "moves": [{"name": "分水刺", "power": 1.0, "weight": 3}, {"name": "翻江倒海", "power": 1.5, "weight": 1}]},
@@ -140,6 +143,9 @@
     "lvbu": {"name": "吕布", "portrait": "lvbu", "hp": 12500, "at": 600, "actions": 3, "phys_resist": 0.2, "moves": [{"name": "方天画戟", "power": 1.0, "weight": 4}, {"name": "无双", "power": 2.2, "weight": 1}, {"name": "赤兔冲阵", "power": 1.4, "confuse": 0.4, "weight": 1}]}
   },
   "scenarios": {
+    "boar": {"name": "野猪林", "turn_limit": 6, "enemy": "boar"},
+    "tiger": {"name": "打虎", "turn_limit": 6, "enemy": "tiger"},
+    "yaodao": {"name": "黄巾妖道", "turn_limit": 8, "enemy": "huangjin_yaodao"},
     "shuizei_scout": {"name": "水贼喽啰", "turn_limit": 6, "enemy": "shuizei_scout"},
     "shuizei_guard": {"name": "看门水贼", "turn_limit": 6, "enemy": "shuizei_guard"},
     "shuizei": {"name": "水寨·浪里蛟", "turn_limit": 8, "enemy": "shuizei"},

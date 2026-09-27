@@ -40,9 +40,11 @@ func continue_game() -> void:
 func start_quest_battle(q: Dictionary, sq: Dictionary) -> void:
 	battle_ctx = {"quest": q, "square": sq}
 	var b := BattleScreen.new()
-	b.scenario_id = sq["battle"]
+	var fight := Quests.battle_here(q, save)
+	b.scenario_id = fight["battle"]
 	b.carry = true
-	b.boss = sq["boss"]
+	b.boss = fight["boss"]
+	b.ambush = fight["ambush"]
 	show_screen(b)
 
 

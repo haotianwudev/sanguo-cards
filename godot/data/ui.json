@@ -21,9 +21,9 @@
   "rarity_colors": {"N": "gray", "R": "blue", "SR": "purple", "SSR": "gold", "lord": "red"},
   "map": {
     "cell": 8,
-    "glyphs": {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休", "recruit": "募", "boss": "将"},
-    "type_names": {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复", "recruit": "招募"},
-    "type_colors": {"battle": "red", "boss": "purple", "treasure": "gold", "recover": "blue", "choose": "amber", "recruit": "green", "event": "text"}
+    "glyphs": {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休", "recruit": "募", "boss": "将", "elite": "精", "mystery": "？"},
+    "type_names": {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复", "recruit": "招募", "mystery": "奇遇"},
+    "type_colors": {"battle": "red", "boss": "purple", "treasure": "gold", "recover": "blue", "choose": "amber", "recruit": "green", "event": "text", "elite": "red", "mystery": "blue"}
   },
   "card": {
     "_comment": "frame art per rarity (see pics/CARD-DESIGN.md). Window/plate come from art/frames/frames.json; missing entries fall back to drawn frames",

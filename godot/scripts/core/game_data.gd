@@ -15,7 +15,8 @@ var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null),
 var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
 var enemies: Dictionary  # id -> {id, name, hp, at, actions, moves, phys_resist, magic_resist, portrait}
 var scenarios: Dictionary  # id -> {id, name, turn_limit, enemy}
-var quests: Array  # [{id, title, start, squares: {id -> square}}]
+var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, recruit_pool, event_pool}]
+var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
 var ui: Dictionary
 
 
@@ -75,9 +76,16 @@ func _load(dir: String) -> void:
 			squares[sq_id] = {"id": sq_id, "x": int(s["x"]), "y": int(s["y"]), "type": s["type"],
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
 				"cards": s.get("cards", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
-				"boss": s.get("boss", false), "label": s.get("label", "")}
+				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
+				"label": s.get("label", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
-			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", [])})
+			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
+			"event_pool": q.get("event_pool", [])})
+	for eid in story.get("events", {}):
+		var ev: Dictionary = story["events"][eid]
+		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "text": ev.get("text", []),
+			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
+				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", [])})}
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")

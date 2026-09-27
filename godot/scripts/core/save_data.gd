@@ -23,13 +23,17 @@ var carry_extra: Dictionary = {}  # card id -> {skill: 累积 increments}
 var carry_uses: Dictionary = {}  # card id -> {skill: uses left}
 var choices: Dictionary = {}  # choose-square id -> goto (remembered across retries)
 var offer: Array = []  # cards shown on the current recruit/treasure square
+var events: Dictionary = {}  # ？ square id -> event id rolled for it this run
+var event_battle: Dictionary = {}  # a fight an event started: {battle, ambush, win: [effects on victory]}
+var event_note: Array = []  # what the last event did, shown on its square
 var quests_cleared: Array = []
 var lord_name := "主公"
 var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme"]
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
+	"events", "event_battle", "event_note"]
 
 
 static func create() -> SaveData:

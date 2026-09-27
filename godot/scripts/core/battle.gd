@@ -46,8 +46,9 @@ func _ev(e: Dictionary) -> void:
 
 
 static func start(scenario_id: String, party: Array, seed_value: int = -1, damage: int = 0,
-		extra: Dictionary = {}, uses: Dictionary = {}) -> Battle:
+		extra: Dictionary = {}, uses: Dictionary = {}, ambush := false) -> Battle:
 	## damage / extra / uses carry a quest's wear from earlier battles.
+	## ambush: the enemy strikes once before the first round.
 	var b := Battle.new()
 	b.db = GameData.get_db()
 	if seed_value >= 0:
@@ -72,7 +73,8 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	b.party_max = hp
 	b.party_hp = maxi(1, hp - damage)
 	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"])
-	b.opening = b._start_round()
+	b.opening = b._ambush() if ambush else []
+	b.opening.append_array(b._start_round())
 	return b
 
 
@@ -277,6 +279,19 @@ func _enemy_phase(defend_cut: float) -> Array:
 		log.append("已到第 %d 回合上限 —— 撤退！" % round_no)
 		return log
 	log.append_array(_start_round())
+	return log
+
+
+func _ambush() -> Array:
+	## 埋伏: every enemy action lands once before the party can move (never kills outright).
+	var data: Dictionary = enemy["data"]
+	var log: Array = ["[color=red]埋伏！%s 抢先出手[/color]" % data["name"]]
+	for _a in int(data["actions"]):
+		var mv: Dictionary = data["moves"][0]
+		var d := maxi(1, int(round(data["at"] * float(mv["power"]) * _variance())))
+		party_hp = maxi(1, party_hp - d)
+		_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": 0.0, "hp": party_hp})
+		log.append("%s【%s】 我军受到 %d 伤害" % [data["name"], mv["name"], d])
 	return log
 
 

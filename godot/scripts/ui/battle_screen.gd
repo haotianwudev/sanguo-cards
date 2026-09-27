@@ -6,7 +6,8 @@ extends Control
 
 var scenario_id := "hulao"
 var carry := false  # quest battle: start with the quest's wear, hand it back afterwards
-var boss := false
+var boss := false  # boss or elite: the chest always drops, with more cards
+var ambush := false
 
 var b: Battle
 var _busy := false
@@ -31,7 +32,8 @@ var _party_box: Control
 func _ready() -> void:
 	var save := Game.save
 	if carry:
-		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses)
+		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
+			ambush)
 	else:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi())
 	_build()

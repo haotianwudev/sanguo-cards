@@ -139,7 +139,12 @@ func _rebuild_map() -> void:
 
 func _glyph(s: Dictionary) -> String:
 	var glyphs: Dictionary = GameData.get_db().ui["map"]["glyphs"]
-	return glyphs["boss"] if s["boss"] else glyphs[s["type"]]
+	return glyphs[_kind(s)]
+
+
+func _kind(s: Dictionary) -> String:
+	## glyph / colour key: boss and elite battles have their own
+	return "boss" if s["boss"] else ("elite" if s["elite"] else s["type"])
 
 
 func _type_name(s: Dictionary) -> String:
@@ -148,7 +153,7 @@ func _type_name(s: Dictionary) -> String:
 
 func _type_color(s: Dictionary) -> Color:
 	var names: Dictionary = GameData.get_db().ui["map"]["type_colors"]
-	return Kit.c(names["boss" if s["boss"] else s["type"]])
+	return Kit.c(names[_kind(s)])
 
 
 func _style_square(b: Button, s: Dictionary, state: String) -> void:
@@ -299,14 +304,19 @@ func _show_square(s: Dictionary) -> void:
 	_clear_sheet()
 	var save := Game.save
 	var db := GameData.get_db()
-	var head := Kit.label("%s  %s" % [_glyph(s), s["label"] if s["label"] != "" else _type_name(s)], Kit.FONT_BIG)
+	var ev: Dictionary = {}
+	if s["type"] == "mystery" and s["id"] == save.square:
+		ev = Quests.event_here(q, save, Game.rng)
+		Game.persist()
+	var title: String = ev.get("title", s["label"] if s["label"] != "" else _type_name(s))
+	var head := Kit.label("%s  %s" % [_glyph(s), title], Kit.FONT_BIG)
 	_sheet_box.add_child(head)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 18)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_sheet_box.add_child(row)
 
-	for key in s["portraits"]:
+	for key in ev.get("portraits", s["portraits"]):
 		var tex := Kit.portrait(key, 0.75, 5.0)
 		if tex != null:
 			var tr := TextureRect.new()
@@ -331,7 +341,7 @@ func _show_square(s: Dictionary) -> void:
 	row.add_child(buttons)
 
 	var lines: Array = []
-	for t in s["text"]:
+	for t in ev.get("text", s["text"]):
 		lines.append(t.replace("{lord}", "[color=%s][b]%s[/b][/color]" % [Kit.c("red").to_html(), save.lord_name]))
 	var body := "\n\n".join(lines)
 
@@ -343,6 +353,8 @@ func _show_square(s: Dictionary) -> void:
 			body = "休整完毕，体力全满。"
 		elif s["type"] == "choose":
 			body = "已做出选择。"
+		elif s["type"] == "mystery":
+			body = "\n".join(save.event_note)
 		elif body == "":
 			body = "已完成。"
 		if opts.is_empty():
@@ -392,15 +404,26 @@ func _show_square(s: Dictionary) -> void:
 				if body == "":  # nothing to read first
 					_open_choose(s)
 		"battle":
-			var sc: Dictionary = db.scenarios[s["battle"]]
-			var e: Dictionary = db.enemies[sc["enemy"]]
-			var boss := "[color=%s][b]首领战[/b][/color]　" % Kit.c("purple").to_html() if s["boss"] else ""
-			text.text = "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次\n%d 回合内击破。任务中体力不会自动回满。" % [
-				boss, e["name"], e["hp"], e["at"], e["actions"], sc["turn_limit"]]
-			var fight := Kit.button("⚔ 出战", "red", Kit.FONT_BIG)
-			fight.pressed.connect(func(): Game.start_quest_battle(q, s))
-			buttons.add_child(fight)
-			Kit.focus(fight)
+			text.text = _battle_info(s, Quests.battle_here(q, save))
+			_fight_button(s, buttons)
+		"mystery":
+			if not save.event_battle.is_empty():
+				text.text = "\n".join(save.event_note) + "\n\n" + _battle_info(s, Quests.battle_here(q, save))
+				_fight_button(s, buttons)
+			elif not save.offer.is_empty():
+				text.text = body + "\n\n" + "\n".join(save.event_note)
+				var open := Kit.button("挑选", "gold")
+				open.pressed.connect(_open_offer.bind(s))
+				buttons.add_child(open)
+				Kit.focus(open)
+			else:
+				text.text = body
+				for i in ev["options"].size():
+					var b := Kit.button(ev["options"][i]["label"], "gold")
+					b.pressed.connect(_choose_event.bind(i))
+					buttons.add_child(b)
+					if i == 0:
+						Kit.focus(b)
 		"treasure", "recruit":
 			var is_chest: bool = s["type"] == "treasure"
 			text.text = "宝箱里有几张兵卡，只能拿一张。同种兵卡越多部队越强，但重复的会衰减——缺什么拿什么。" if is_chest \
@@ -415,6 +438,38 @@ func _show_square(s: Dictionary) -> void:
 			rest.pressed.connect(_resolve)
 			buttons.add_child(rest)
 			Kit.focus(rest)
+
+
+func _battle_info(s: Dictionary, fight: Dictionary) -> String:
+	var db := GameData.get_db()
+	var sc: Dictionary = db.scenarios[fight["battle"]]
+	var e: Dictionary = db.enemies[sc["enemy"]]
+	var tags := ""
+	if s["boss"]:
+		tags += "[color=%s][b]首领战[/b][/color]　" % Kit.c("purple").to_html()
+	elif s["elite"]:
+		tags += "[color=%s][b]精英战[/b]（必掉宝箱，三选一）[/color]　" % Kit.c("red").to_html()
+	if fight["ambush"]:
+		tags += "[color=%s][b]埋伏！敌人先手[/b][/color]　" % Kit.c("red").to_html()
+	return "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次\n%d 回合内击破。任务中体力不会自动回满。" % [
+		tags, e["name"], e["hp"], e["at"], e["actions"], sc["turn_limit"]]
+
+
+func _fight_button(s: Dictionary, buttons: Control) -> void:
+	var fight := Kit.button("⚔ 出战", "red", Kit.FONT_BIG)
+	fight.pressed.connect(func(): Game.start_quest_battle(q, s))
+	buttons.add_child(fight)
+	Kit.focus(fight)
+
+
+func _choose_event(i: int) -> void:
+	var out := Quests.choose_event(q, Game.save, Game.rng, i)
+	Game.persist()
+	_refresh()
+	for c in out["gained"]:
+		_show_toast("获得：" + c["name"])
+	if not Game.save.offer.is_empty():
+		_open_offer(Quests.here(q, Game.save))
 
 
 func _resolve(choice := -1) -> void:
@@ -442,7 +497,7 @@ func _open_offer(s: Dictionary) -> void:
 		_resolve()
 		return
 	var o := PickOverlay.new()
-	o.title = "宝箱 —— 选一张兵卡" if s["type"] == "treasure" else "豪杰来投 —— 选一位"
+	o.title = {"treasure": "宝箱 —— 选一张兵卡", "recruit": "豪杰来投 —— 选一位"}.get(s["type"], "选一张带走")
 	o.card_ids = cards.map(func(c): return c["id"])
 	o.counts = cards.map(func(c): return Game.save.copies(c["id"]) if c["soldier"] else 0)
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)

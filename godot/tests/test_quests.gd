@@ -53,10 +53,10 @@ func test_each_plan_walks_its_own_branch_and_both_rescue_her() -> void:
 		var s := SaveData.create()
 		Quests.begin(q, s)
 		Quests.resolve(q, s, rng(0), 0)
-		walk_to(q, s, ["wake", "village", "raid"])
+		walk_to(q, s, ["wake", "village", "boar", "raid"])
 		Quests.move(q, s, "plan")
 		Quests.resolve(q, s, rng(0), pick)
-		var branch: Array = [["sc_gate", "sc_hall"], ["zy_lure", "zy_hall"]][pick]
+		var branch: Array = [["sc_gate", "sc_road", "sc_hall"], ["zy_lure", "zy_back", "zy_hall"]][pick]
 		check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), [branch[0]])
 		check(s.has_card(["sunce", "zhouyu"][pick]) and not s.has_card(["zhouyu", "sunce"][pick]), "only the planner joins first")
 		walk_to(q, s, branch + ["rescue"])
@@ -81,17 +81,72 @@ func test_failing_restarts_but_keeps_choices_and_cards() -> void:
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["wake", "village", "raid"])
+	walk_to(q, s, ["wake", "village", "boar", "raid"])
 	Quests.move(q, s, "plan")
 	Quests.resolve(q, s, rng(0), 1)
 	s.damage = 999
 	Quests.fail(q, s)
 	check(s.square == "era" and s.damage == 0 and s.has_card("zhouyu"))
 	check(s.resolved, "the birthplace choice stands")
-	walk_to(q, s, ["wake", "village", "raid"])
+	walk_to(q, s, ["wake", "village", "boar", "raid"])
 	Quests.move(q, s, "plan")
 	check(s.resolved, "earlier plan stands")
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["zy_lure"])
+
+
+func test_every_event_option_resolves_or_leads_somewhere() -> void:
+	var q := quest(0)
+	for eid in q["event_pool"]:
+		var ev: Dictionary = GameData.get_db().events[eid]
+		for i in ev["options"].size():
+			for seed_value in 4:
+				var s := SaveData.create()
+				Quests.begin(q, s)
+				s.square = "road"
+				s.resolved = false
+				s.events = {"road": eid}
+				Quests.choose_event(q, s, rng(seed_value), i)
+				check(s.resolved or not s.event_battle.is_empty() or not s.offer.is_empty(), "%s option %d" % [eid, i])
+				if not s.offer.is_empty():
+					Quests.resolve(q, s, rng(0), 0)
+					check(s.resolved, "%s pick" % eid)
+
+
+func test_poison_costs_a_third_of_the_hp() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "snake"}
+	Quests.choose_event(q, s, rng(0), 1)  # squeeze the venom out yourself: always poisoned
+	check_eq(s.damage, int(round(Quests.party_max(s) / 3.0)))
+
+
+func test_hero_can_be_anyone() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "hero"}
+	Quests.choose_event(q, s, rng(0), 0)
+	check_eq(s.offer.size(), 3)
+	check(s.offer.all(func(c): return not GameData.get_db().cards[c]["soldier"]), "generals")
+
+
+func test_ambush_hits_before_the_first_round() -> void:
+	var s := SaveData.create()
+	var calm := Battle.start("shuizei_scout", s.party_leaders(), 1)
+	var ambushed := Battle.start("shuizei_scout", s.party_leaders(), 1, 0, {}, {}, true)
+	check(ambushed.party_hp < calm.party_hp and ambushed.round_no == 1)
+
+
+func test_chapter_one_is_a_long_road() -> void:
+	var q := quest(0)
+	check(q["squares"].size() >= 16, "squares")
+	var fights: int = q["squares"].values().filter(func(s): return s["type"] in ["battle", "mystery"]).size()
+	check(fights >= 10, "battles and ？ squares: %d" % fights)
 
 
 func test_an_old_save_on_a_removed_square_restarts_the_quest() -> void:
@@ -123,18 +178,12 @@ func play_quest(q: Dictionary, s: SaveData, pick: int, fork: int, seed_value: in
 	Quests.begin(q, s)
 	for _step in 100:
 		var sq := Quests.here(q, s)
-		if sq["type"] == "battle" and not s.resolved:
-			s.party = s.auto_party()
-			var b := Battle.start(sq["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses)
-			if bot_fight(b) != "win":
+		if sq["type"] == "mystery" and not s.resolved:
+			Quests.event_here(q, s, r)
+			Quests.choose_event(q, s, r, 0)
+		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
+			if not fight(q, s, r):
 				return false
-			var carry := b.carry_out()
-			s.damage = carry[0]
-			s.carry_extra.merge(carry[1], true)
-			s.carry_uses.merge(carry[2], true)
-			var chest := s.chest_after_battle(r, b.overkill, sq["boss"])
-			if not chest.is_empty():
-				s.take(chest[0]["id"])
 		var offered := Quests.offer(q, s, r)
 		var choice := 0 if not offered.is_empty() else -1
 		if sq["type"] == "choose":
@@ -147,6 +196,22 @@ func play_quest(q: Dictionary, s: SaveData, pick: int, fork: int, seed_value: in
 		var idx: int = fork if fork >= 0 and fork < opts.size() else r.randi_range(0, opts.size() - 1)
 		Quests.move(q, s, opts[idx]["id"])
 	return false
+
+
+func fight(q: Dictionary, s: SaveData, r: RandomNumberGenerator) -> bool:
+	var f := Quests.battle_here(q, s)
+	s.party = s.auto_party()
+	var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"])
+	if bot_fight(b) != "win":
+		return false
+	var carry := b.carry_out()
+	s.damage = carry[0]
+	s.carry_extra.merge(carry[1], true)
+	s.carry_uses.merge(carry[2], true)
+	var chest := s.chest_after_battle(r, b.overkill, f["boss"])
+	if not chest.is_empty():
+		s.take(chest[0]["id"])
+	return true
 
 
 func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
