@@ -142,3 +142,17 @@ func test_better_cards_win_more() -> void:
 	var b := win_rate("hulao", REF)
 	var c := win_rate("hulao", SSR)
 	check(a < b and b < c, "%.2f < %.2f < %.2f" % [a, b, c])
+
+
+func test_events_describe_what_happened() -> void:
+	var b := new_battle()
+	b.take_events()
+	b.act(0, "tuji")
+	var kinds: Array = b.take_events().map(func(e): return e["t"])
+	check_eq(kinds.slice(0, 2), ["act", "hit"])
+	b.party_hp = b.party_max
+	b.end_round()
+	var ev := b.take_events()
+	check_eq(ev[0]["t"], "enemy_turn")
+	check(ev.any(func(e): return e["t"] == "enemy_hit"), "enemy attacked")
+	check(ev.any(func(e): return e["t"] == "round" and e["n"] == 2), "next round began")

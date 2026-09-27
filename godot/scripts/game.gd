@@ -1,0 +1,105 @@
+extends Node
+## Autoload "Game": the current save, the RNG, and which screen is showing.
+
+var save: SaveData
+var rng := RandomNumberGenerator.new()
+var root: Control  # the main scene; screens are its children
+var persist_enabled := true
+var battle_ctx: Dictionary = {}  # set while a quest battle is running
+
+
+func _ready() -> void:
+	rng.randomize()
+
+
+func persist() -> void:
+	if persist_enabled and save != null:
+		save.write()
+
+
+func show_screen(screen: Control) -> void:
+	for ch in root.get_children():
+		ch.queue_free()
+	screen.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.add_child(screen)
+
+
+func new_game(lord_name: String) -> void:
+	save = SaveData.create()
+	save.lord_name = lord_name if lord_name.strip_edges() != "" else "主公"
+	Quests.ensure_started(save)
+	persist()
+	show_screen(MapScreen.new())
+
+
+func continue_game() -> void:
+	save = SaveData.read()
+	show_screen(MapScreen.new())
+
+
+func start_quest_battle(q: Dictionary, sq: Dictionary) -> void:
+	battle_ctx = {"quest": q, "square": sq}
+	var b := BattleScreen.new()
+	b.scenario_id = sq["battle"]
+	b.carry = true
+	b.boss = sq["boss"]
+	show_screen(b)
+
+
+func battle_finished(won: bool) -> void:
+	var q: Dictionary = battle_ctx.get("quest", {})
+	battle_ctx = {}
+	var note := ""
+	if not q.is_empty():
+		if won:
+			Quests.resolve(q, save, rng)
+		else:
+			Quests.fail(q, save)
+			note = "任务失败 —— 从任务开头重新出发（已获得的卡和做过的选择保留）"
+	persist()
+	var m := MapScreen.new()
+	m.toast = note
+	show_screen(m)
+
+
+# ---- demo states for screenshots / quick checks -----------------------------------
+
+func demo(name: String) -> void:
+	persist_enabled = false
+	rng.seed = 7
+	save = SaveData.create()
+	save.lord_name = "阿明"
+	match name:
+		"title":
+			show_screen(TitleScreen.new())
+		"map", "pick":
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng)
+			Quests.move(q, save, "pick")
+			Quests.resolve(q, save, rng, 1)
+			for sid in ["zy_talk", "zy_fight", "zy_loot", "gate"]:
+				Quests.move(q, save, sid)
+				Quests.resolve(q, save, rng)
+			save.damage = 900
+			if name == "pick":
+				Quests.move(q, save, "chest")
+			show_screen(MapScreen.new())
+		"choose":
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng)
+			Quests.move(q, save, "pick")
+			show_screen(MapScreen.new())
+		"battle", "fight":
+			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu"]
+			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
+			save.party = ["sunce_zhong", "zhouyu_chibi", "wuguotai"]
+			var b := BattleScreen.new()
+			b.scenario_id = "hulao"
+			show_screen(b)
+			if name == "fight":  # play a few actions to exercise the animations
+				await get_tree().create_timer(0.5).timeout
+				await b._on_skill(1, "charge")
+				await b._on_skill(0, "tuji")
+				b._on_end_round()

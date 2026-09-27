@@ -29,6 +29,20 @@ var defend_streak := 0
 var result := ""  # "" | "win" | "lose"
 var overkill := 0.0  # excess damage on the killing blow, as a share of the enemy's max HP
 var opening: Array = []  # log lines from the first round start
+## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
+## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
+##       "enemy_hit"|"confuse"|"round"|"interrupt", ...}
+var events: Array = []
+
+
+func take_events() -> Array:
+	var out := events
+	events = []
+	return out
+
+
+func _ev(e: Dictionary) -> void:
+	events.append(e)
 
 
 static func start(scenario_id: String, party: Array, seed_value: int = -1, damage: int = 0,
@@ -123,6 +137,7 @@ func act(i: int, skill_id: String) -> Array:
 	u["acted"] = true
 	u["idle_rounds"] = 0
 	var mult: float = float(db.battle["boost_mult"]) if u["boosted"] else 1.0
+	_ev({"t": "act", "unit": i, "skill": skill_id, "boost": u["boosted"]})
 	var log: Array = ["%s【%s】%s" % [unit_name(u), sk["name"], "（BOOST）" if u["boosted"] else ""]]
 	u["boosted"] = false
 	for eff in sk["effects"]:
@@ -140,6 +155,7 @@ func defend() -> Array:
 	var cuts: Array = db.battle["defend_cuts"]
 	var cut: float = cuts[mini(defend_streak, cuts.size() - 1)]
 	defend_streak += 1
+	_ev({"t": "defend", "cut": cut})
 	var log: Array = ["全军防御（伤害 -%d%%）" % int(round(cut * 100))]
 	log.append_array(_enemy_phase(cut))
 	return log
@@ -179,35 +195,46 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				enemy["hp"] = maxi(0, enemy["hp"] - d)
 				combo += 1
+				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"]})
 				log.append("  %s 受到 %d 伤害（%d 连击）" % [ename, d, combo])
 			return log
 		"heal":
 			var amt := mini(int(round(at * float(eff["power"]) * mult)), party_max - party_hp)
 			party_hp += amt
+			_ev({"t": "heal", "amt": amt, "hp": party_hp})
 			return ["  体力恢复 %d" % amt]
 		"guard":
 			guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - float(eff["cut"]))
+			_ev({"t": "guard", "cut": guard_cut})
 			return ["  本回合受到伤害 -%d%%" % int(round(guard_cut * 100))]
 		"boost":
 			var bm := str(db.battle["boost_mult"])
 			if eff["target"] == "all":
+				var who: Array = []
 				for t in leaders:
 					if t != u:
 						t["boosted"] = true
+						who.append(leaders.find(t))
+				_ev({"t": "boost", "units": who})
 				return ["  全军进入 BOOST（下次行动 ×%s）" % bm]
 			u["boosted"] = true
+			_ev({"t": "boost", "units": [leaders.find(u)]})
 			return ["  %s 进入 BOOST（下次行动 ×%s）" % [unit_name(u), bm]]
 		"stun":
 			if rng.randf() < float(eff["chance"]):
 				enemy["stunned"] = true
+				_ev({"t": "stun", "ok": true})
 				return ["  %s 陷入混乱！下回合无法行动" % ename]
+			_ev({"t": "stun", "ok": false})
 			return ["  %s 未受影响" % ename]
 		"break":
 			enemy["break_amount"] = maxf(enemy["break_amount"], float(eff["amount"]))
 			enemy["break_turns"] = maxi(enemy["break_turns"], int(eff["turns"]))
+			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
 		"ap":
 			ap = mini(int(db.battle["ap_max"]), ap + int(eff["amount"]))
+			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
 			return ["  AP +%d" % int(eff["amount"])]
 	assert(false, "unknown effect " + kind)
 	return []
@@ -217,9 +244,11 @@ func _enemy_phase(defend_cut: float) -> Array:
 	if result != "":
 		return []
 	var data: Dictionary = enemy["data"]
+	_ev({"t": "enemy_turn"})
 	var log: Array = ["—— %s 的行动 ——" % data["name"]]
 	if enemy["stunned"]:
 		enemy["stunned"] = false
+		_ev({"t": "enemy_stunned"})
 		log.append("%s 混乱中，无法行动" % data["name"])
 	else:
 		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut)
@@ -228,11 +257,13 @@ func _enemy_phase(defend_cut: float) -> Array:
 			var mv: Dictionary = GameData.weighted_pick(rng, moves, moves.map(func(m): return float(m["weight"])))
 			var d := maxi(1, int(round(data["at"] * float(mv["power"]) * _variance() * (1.0 - cut))))
 			party_hp = maxi(0, party_hp - d)
+			_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": cut, "hp": party_hp})
 			log.append("%s【%s】 我军受到 %d 伤害%s" % [data["name"], mv["name"], d,
 				("（减伤 %d%%）" % int(round(cut * 100))) if cut > 0.0 else ""])
 			if mv.has("confuse") and rng.randf() < float(mv["confuse"]):
 				var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
 				victim["confuse_next"] = true
+				_ev({"t": "confuse", "unit": leaders.find(victim)})
 				log.append("  %s 陷入混乱，下回合无法行动" % unit_name(victim))
 			_check_end()
 			if result != "":
@@ -259,6 +290,7 @@ func _start_round() -> Array:
 	ap = mini(int(cfg["ap_max"]), ap + int(cfg["ap_per_round"]))
 	combo = 0
 	guard_cut = 0.0
+	_ev({"t": "round", "n": round_no, "ap": ap})
 	var log: Array = ["─── 第 %d 回合 ───" % round_no]
 	for u in leaders:
 		u["acted"] = false
@@ -266,6 +298,7 @@ func _start_round() -> Array:
 		u["confuse_next"] = false
 		if not u["boosted"] and u["idle_rounds"] >= int(cfg["boost_idle_rounds"]) and rng.randf() < float(cfg["boost_chance"]):
 			u["boosted"] = true
+			_ev({"t": "boost", "units": [leaders.find(u)], "idle": true})
 			log.append("%s 蓄势已久 —— BOOST！" % unit_name(u))
 	for u in leaders:
 		var members: Array = u["leader"]["members"]
@@ -274,6 +307,7 @@ func _start_round() -> Array:
 			var d := _dmg(m["at"] * float(cfg["interrupt_power"]), "attack")
 			enemy["hp"] = maxi(0, enemy["hp"] - d)
 			combo += 1
+			_ev({"t": "interrupt", "unit": leaders.find(u), "member": m["name"], "dmg": d, "hp": enemy["hp"]})
 			log.append("插入！%s部队的 %s 突袭，造成 %d 伤害" % [unit_name(u), m["name"], d])
 	_check_end()
 	return log
