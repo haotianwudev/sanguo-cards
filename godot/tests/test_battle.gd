@@ -193,3 +193,12 @@ func test_fire_keeps_burning_on_the_enemy_turn() -> void:
 
 func db_skill_cumulative(sid: String) -> bool:
 	return GameData.get_db().skills[sid]["cumulative"]
+
+
+func test_infantry_can_raise_shields() -> void:
+	var db := GameData.get_db()
+	check(db.build_fighter("danyang")["skills"].has("jushun"), "刀兵 troop skill")
+	var b := Battle.start("boar", party(["danyang"]), 2)
+	var i := b.leaders.size() - 1
+	b.act(i, "jushun")
+	check(is_equal_approx(b.guard_cut, 0.5), "举盾: half damage this round")

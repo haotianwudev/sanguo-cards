@@ -155,20 +155,26 @@ func _build() -> void:
 	row.position = Vector2(20, 358)
 	row.add_theme_constant_override("separation", 16)
 	add_child(row)
+	# three skills under a card only fit if the cards shrink a little
+	var most := 0
+	for u in b.leaders:
+		most = maxi(most, u["leader"]["card"]["skills"].size())
+	var card_size := Vector2(180, 252) if most <= 2 else Vector2(150, 210)
+	var btn_h := 44 if most <= 2 else 34
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
 		var col := VBoxContainer.new()
 		col.add_theme_constant_override("separation", 6)
 		row.add_child(col)
 		var card_id: String = u["leader"]["card"]["id"]
-		var v := CardView.make(card_id, Vector2(180, 252), {"leader": u["leader"], "skills": false,
+		var v := CardView.make(card_id, card_size, {"leader": u["leader"], "skills": false,
 			"lord_name": Game.save.lord_name})
 		v.focus_mode = Control.FOCUS_NONE
 		col.add_child(v)
 		_cards.append(v)
 		for sid in u["leader"]["card"]["skills"]:
 			var btn := Kit.button("", "blue", Kit.FONT_SMALL)
-			btn.custom_minimum_size = Vector2(180, 44)
+			btn.custom_minimum_size = Vector2(card_size.x, btn_h)
 			btn.pressed.connect(_on_skill.bind(i, sid))
 			col.add_child(btn)
 			_skill_buttons.append([i, sid, btn])

@@ -139,9 +139,9 @@ func demo(name: String) -> void:
 			Quests.move(q, save, "plan")
 			show_screen(MapScreen.new())
 		"battle", "fight":
-			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu"]
+			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
-			save.party = ["sunce_zhong", "zhouyu_chibi", "wuguotai"]
+			save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
 			show_screen(b)
