@@ -224,6 +224,8 @@ func _refresh() -> void:
 	while not frontier.is_empty():
 		var cur: Dictionary = q["squares"][frontier.pop_back()]
 		var nexts: Array = cur["next"].duplicate()
+		if cur["lose_goto"] != "":
+			nexts.append(cur["lose_goto"])
 		if cur["type"] == "choose":
 			if save.choices.has(cur["id"]):
 				nexts = [save.choices[cur["id"]]]
@@ -242,6 +244,8 @@ func _refresh() -> void:
 		for o in s["choose"]:
 			if not o["locked"]:
 				targets.append(o["goto"])
+		if s["lose_goto"] != "":
+			targets.append(s["lose_goto"])
 		for t in targets:
 			var walked: bool = path.has(s["id"] + ">" + t)
 			var a := _pos(s)
@@ -284,6 +288,10 @@ func _show_run() -> void:
 		ch.queue_free()
 	var db := GameData.get_db()
 	var save := Game.save
+	if save.difficulty > 0:
+		var h := _chip("难度 +%d%%" % int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)), "purple")
+		h.tooltip_text = "打赢了虎牢关的吕布，天下都盯上了你：今后所有敌人都更强"
+		_run_box.add_child(h)
 	if save.danger > 0:
 		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
 		d.tooltip_text = "本轮的敌人体力和攻击都变强了"
@@ -492,6 +500,8 @@ func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 	var tags := ""
 	if s["boss"]:
 		tags += "[color=%s][b]首领战[/b][/color]　" % Kit.c("purple").to_html()
+	if s["lose_goto"] != "":
+		tags += "[color=%s]打不赢也不会失败[/color]　" % Kit.c("green").to_html()
 	elif s["elite"]:
 		tags += "[color=%s][b]精英战[/b]（必掉宝箱，三选一）[/color]　" % Kit.c("red").to_html()
 	if fight["ambush"]:

@@ -30,6 +30,9 @@ var event_note: Array = []  # what the last event did, shown on its square
 var offer_kind := ""  # "upgrade": the offer lists your own generals, the pick goes up a tier
 var relics: Array = []  # 宝物 held this run
 var danger := 0  # 险 accepted this run: enemies get stronger
+var difficulty := 0  # 难度: permanent, every level makes all enemies stronger (beating 吕布 at 虎牢关)
+var picks_left := 0  # more pick-ones to come after this one (三连抽)
+var offer_rates: Dictionary = {}  # rarity weights for those picks
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
@@ -38,7 +41,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates"]
 
 
 static func create() -> SaveData:
@@ -62,6 +65,8 @@ static func from_dict(d: Dictionary) -> SaveData:
 	# JSON has no ints: restore them
 	s.damage = int(s.damage)
 	s.danger = int(s.danger)
+	s.difficulty = int(s.difficulty)
+	s.picks_left = int(s.picks_left)
 	s.party_slots = int(s.party_slots)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
@@ -151,14 +156,15 @@ func upgrade(card_id: String) -> void:
 
 # ---- getting cards -------------------------------------------------------------
 
-func recruit_offer(rng: RandomNumberGenerator, n: int = 0) -> Array:
+func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {}) -> Array:
 	## A few generals (rarity rolled per card); the player keeps one with take(). Owned ones can come again
 	## (another copy raises their tier) until they're 金.
 	_sync()
 	var db := _db()
 	if n <= 0:
 		n = int(db.gacha["offer_size"]) + offer_extra()
-	var rates: Dictionary = db.gacha["rates"]
+	if rates.is_empty():
+		rates = db.gacha["rates"]
 	var result: Array = []
 	for _i in n:
 		var live: Array = []

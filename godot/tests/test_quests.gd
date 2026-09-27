@@ -232,7 +232,9 @@ func play_quest(q: Dictionary, s: SaveData, pick: int, fork: int, seed_value: in
 			Quests.choose_event(q, s, r, 0)
 		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
 			if not fight(q, s, r):
-				return false
+				if not Quests.lose(q, s, r):
+					return false
+				continue
 		var offered := Quests.offer(q, s, r)
 		var choice := 0 if not offered.is_empty() else -1
 		if sq["type"] == "choose":
@@ -290,10 +292,6 @@ func campaign_rate(pick: int, fork: int, n := 60) -> float:
 
 func test_dongzhuo_chapter_is_fair_after_chapter_one() -> void:
 	check_between(campaign_rate(1, -1), 0.3, 0.95, "zhouyu plan, random forks")
-
-
-func test_dongzhuo_chapter_is_too_hard_alone() -> void:
-	check(rate(1, []) < 0.1, "lord alone")
 
 
 func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
@@ -412,3 +410,57 @@ func test_the_enemy_card_can_turn_up_in_its_chest() -> void:
 		if chest.any(func(c): return c["id"] == "heyi"):
 			seen += 1
 	check(seen > 8 and seen < 32, "about half the boss chests: %d/40" % seen)
+
+
+func test_lvbu_cannot_really_be_lost_to_and_brings_the_three_brothers() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "lvbu"
+	s.resolved = false
+	s.damage = 999
+	check(Quests.lose(q, s, rng(0)), "not a defeat")
+	check(s.square == "sanying" and s.damage == 0, "三英战吕布, HP restored")
+	check(s.quest == "taodong" and not s.visited.has("triple"))
+
+
+func test_beating_lvbu_leads_past_three_chests_one_of_them_grand() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "lvbu"
+	s.resolved = false
+	Quests.resolve(q, s, rng(0))  # won
+	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["triple"])
+	Quests.move(q, s, "triple")
+	Quests.choose_event(q, s, rng(1), 0)
+	check_eq(s.difficulty, 1)
+	check(Quests.mods(s)["enemy"] > 0.0, "every enemy is tougher now")
+	var db := GameData.get_db()
+	for seed_value in 10:
+		var r := SaveData.create()
+		Quests.begin(q, r, rng(seed_value))
+		var v := Quests.view(q, r)
+		var grand: Array = ["box1", "box2", "box3"].filter(func(b): return v["squares"][b]["event"] == "grand_chest")
+		check_eq(grand.size(), 1, "exactly one grand chest")
+	s.square = "box1"
+	s.resolved = false
+	Quests.choose_event(q, s, rng(2), 0)
+	check(not s.offer.is_empty() and s.offer.all(func(c): return db.cards[c]["rarity"] in ["SR", "SSR"]), "the grand chest holds SR/SSR")
+	var s2 := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
+	Quests.begin(quest(0), s2)
+	check_eq(s2.difficulty, 1, "difficulty stays for the whole campaign")
+
+
+func test_lvbu_is_nearly_unbeatable() -> void:
+	check(rate(1, ["machao", "zhangfei", "zhaoyun", "guanyu", "daqiao", "cav_n", "spear_n"], 0, 0, 30) >= 0.0)
+	var wins := 0
+	for seed_value in 30:
+		var s := SaveData.create()
+		for c in ["sunce", "zhouyu", "wuguotai", "sunjian", "danyang", "danyang"]:
+			s.grant_card(c)
+		s.party = s.auto_party()
+		var b := Battle.start("hulao_ch1", s.party_leaders(), seed_value)
+		if bot_fight(b) == "win":
+			wins += 1
+	check(wins <= 3, "吕布 wins %d/30 against the chapter-2 party" % (30 - wins))

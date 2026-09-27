@@ -37,6 +37,8 @@ static func validate(db: GameData) -> void:
 					continue
 				targets.append(o["goto"])
 				assert(o["card"] == "" or db.cards.has(o["card"]), where + ": unknown card")
+			if s["lose_goto"] != "":
+				targets.append(s["lose_goto"])
 			for t in targets:
 				assert(q["squares"].has(t), where + ": unknown next " + t)
 				assert(q["squares"][t]["x"] > s["x"], where + ": next square must be further right")
@@ -46,7 +48,7 @@ static func validate(db: GameData) -> void:
 				assert(db.events.has(s["event"]), where + ": unknown event " + s["event"])
 			for c in s["cards"]:
 				assert(db.cards.has(c), where + ": unknown card " + c)
-		if q["squares"].values().any(func(s): return s["type"] == "mystery"):
+		if q["squares"].values().any(func(s): return s["type"] == "mystery" and s["event"] == ""):
 			assert(not q["event_pool"].is_empty(), "quest %s: ？ squares need an event_pool" % q["id"])
 		for eid in q["event_pool"]:
 			assert(db.events.has(eid), "quest %s: unknown event %s" % [q["id"], eid])
@@ -144,7 +146,7 @@ static func view(q: Dictionary, save: SaveData) -> Dictionary:
 static func mods(save: SaveData) -> Dictionary:
 	## Battle modifiers for this run: every 宝物 held, plus 险.
 	var db := GameData.get_db()
-	var out := {"enemy": save.danger * float(db.battle["danger_step"])}
+	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"])}
 	for rid in save.relics:
 		var m: Dictionary = db.relics[rid]["mods"]
 		for k in m:
@@ -239,8 +241,14 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				else:
 					gained.append(save.take(cid))
 					save.event_note.append("获得：" + db.cards[cid]["name"])
+				if save.picks_left > 0:  # 三连抽: another pick-one straight away
+					save.picks_left -= 1
+					save.offer = save.recruit_offer(rng, 0, save.offer_rates).map(func(c): return c["id"])
+					if not save.offer.is_empty():
+						return gained
 			save.offer = []
 			save.offer_kind = ""
+			save.picks_left = 0
 		"recover":
 			reset_carry(save)
 		"battle":  # called after a win
@@ -421,7 +429,9 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				while not left.is_empty() and ids.size() < int(o.get("n", 3)) + save.offer_extra():
 					ids.append(left.pop_at(rng.randi_range(0, left.size() - 1)))
 			elif o.has("generals"):
-				ids = save.recruit_offer(rng).map(func(c): return c["id"])
+				ids = save.recruit_offer(rng, 0, o.get("rates", {})).map(func(c): return c["id"])
+				save.picks_left = int(o.get("times", 1)) - 1
+				save.offer_rates = o.get("rates", {})
 			else:
 				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)) + save.offer_extra(), q["soldier_pool"]).map(
 					func(c): return c["id"])
@@ -443,6 +453,9 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				var r: Dictionary = db.relics[rid]
 				out["gained"].append({"id": rid, "name": "宝物·" + r["name"], "relic": true})
 				out["log"].append("获得宝物：%s（%s）" % [r["name"], r["desc"]])
+		if e.has("difficulty"):
+			save.difficulty += int(e["difficulty"])
+			out["log"].append("难度上升！今后所有敌人 +%d%%" % int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)))
 		if e.has("danger"):
 			save.danger += int(e["danger"])
 			out["log"].append("险！本轮之后的敌人体力和攻击 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)))
@@ -465,6 +478,22 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 		save.quests_cleared.append(q["id"])
 	save.quest = ""
 	reset_carry(save)
+
+
+static func lose(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> bool:
+	## Lost a battle. A square with lose_goto (虎牢关 吕布) isn't a defeat: the story carries on there, HP
+	## restored. Otherwise the run fails. Returns true when the story carries on.
+	q = view(q, save)
+	var s := here(q, save)
+	if s["lose_goto"] == "":
+		fail(q, save, rng)
+		return false
+	reset_carry(save)
+	save.square = s["lose_goto"]
+	save.visited.append(s["lose_goto"])
+	save.resolved = false
+	save.offer = []
+	return true
 
 
 static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:

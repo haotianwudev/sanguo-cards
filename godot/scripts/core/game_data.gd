@@ -86,7 +86,7 @@ func _load(dir: String) -> void:
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
 				"cards": s.get("cards", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
-				"event": s.get("event", ""),
+				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""),
 				"label": s.get("label", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),

@@ -56,8 +56,9 @@ func battle_finished(won: bool) -> void:
 		if won:
 			var gained := Quests.resolve(q, save, rng)
 			note = "　".join(gained.map(func(c): return "获得：" + c["name"]))
+		elif Quests.lose(q, save, rng):
+			note = "……打不过。就在这时——"
 		else:
-			Quests.fail(q, save, rng)
 			note = "任务失败 —— 新的一轮从头出发（卡和选择保留，宝物和险清空，格子重新洗牌）"
 	persist()
 	var m := MapScreen.new()
@@ -90,6 +91,14 @@ func demo(name: String) -> void:
 				if sid != "hill":
 					Quests.resolve(q, save, rng)
 			save.events = {"hill": "zuoci"}
+			show_screen(MapScreen.new())
+		"ch2":  # 第二章 at 虎牢关: the 吕布 fork (win: three chests, lose: 三英战吕布)
+			save.quests_cleared = ["prologue"]
+			var q: Dictionary = GameData.get_db().quests[1]
+			Quests.begin(q, save, rng)
+			for sid in ["liangdong", "regroup", "helmet", "yangren", "tent", "gate"]:
+				Quests.resolve(q, save, rng)
+				Quests.move(q, save, sid)
 			show_screen(MapScreen.new())
 		"relics":  # an elite's 宝物 pick, a couple already held
 			var q: Dictionary = GameData.get_db().quests[0]
