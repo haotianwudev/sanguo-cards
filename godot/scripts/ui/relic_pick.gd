@@ -60,8 +60,7 @@ func _ready() -> void:
 		name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		var tag := Kit.label(rar[0], 16, rar[1])
 		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		var star: String = "" if Game.save.relic_rank <= 1 else "\n（宝物★%d：效果增强）" % Game.save.relic_rank
-		var desc := Kit.label(r["desc"] + star, Kit.FONT_BODY, "muted")
+		var desc := Kit.label(r["desc"], Kit.FONT_BODY, "muted")
 		desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		desc.custom_minimum_size = Vector2(260, 0)

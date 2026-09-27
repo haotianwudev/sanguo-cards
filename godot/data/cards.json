@@ -5,8 +5,8 @@
   "battle": {"ap_start": 2, "ap_per_round": 2, "ap_max": 6, "combo_bonus": 0.1, "variance": 0.2, "boost_mult": 1.5, "boost_idle_rounds": 3, "boost_chance": 0.5, "leader_mult": 5, "interrupt_chance": 0.3, "interrupt_power": 2.0, "defend_cuts": [0.3, 0.5, 0.7, 0.9], "enemy_hp_per_extra_leader": 0.083,
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)", "danger_step": 0.2},
   "_relics": "宝物: kept for one run (a chapter attempt). rarity: common / rare / curse (strong with a cost). mods: at, magic, heal, hp, guard (damage taken cut), combo (extra per combo step), desperate (attack when below half HP), ap_start, ap_round, ap_max, turns, start_heal, boost_start, stun_start, calm, no_ambush, chest, offer_extra, pierce (ignore resists), first_hit (first hit each battle), defend (extra defend cut), stun (confuse chance), troop_at / troop_hp {troop: share} (Rance X faction items); after_win: heal this share of HP after every win",
-  "relic_pick": {"_comment": "an elite win offers n relics to pick one from, drawn by rarity weight; a normal battle's chest holds a random one with chest_chance; every ★ above 1 adds rank_step to a relic's positive effects (Rance X: アイテムUP raises every item's ★)",
-                 "n": 3, "chest_chance": 0.2, "rank_step": 0.5,
+  "relic_pick": {"_comment": "an elite win offers n relics to pick one from, drawn by rarity weight; a normal battle's chest holds a random one with chest_chance",
+                 "n": 3, "chest_chance": 0.2,
                  "weights": {"common": 60, "rare": 35, "curse": 5}},
   "relics": {
     "hupi": {"name": "虎皮披风", "icon": "虎", "rarity": "common", "desc": "孙坚同款。攻击 +15%", "mods": {"at": 0.15}},

@@ -90,7 +90,6 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	## Start a run. With an rng the shuffle groups are dealt anew; without one the map is as written (tests).
 	q = q.get("_raw", q)
 	save.relics = []
-	save.relic_rank = 1
 	save.danger = 0
 	save.layout = {}
 	if rng != null:
@@ -143,23 +142,19 @@ static func view(q: Dictionary, save: SaveData) -> Dictionary:
 
 
 static func mods(save: SaveData) -> Dictionary:
-	## Battle modifiers for this run: every 宝物 held (positive shares grow with the ★), plus 险.
+	## Battle modifiers for this run: every 宝物 held, plus 险.
 	var db := GameData.get_db()
 	var out := {"enemy": save.danger * float(db.battle["danger_step"])}
-	var star := 1.0 + float(db.relic_pick["rank_step"]) * (save.relic_rank - 1)
 	for rid in save.relics:
 		var m: Dictionary = db.relics[rid]["mods"]
 		for k in m:
 			if m[k] is Dictionary:  # troop_at / troop_hp: {troop: share}
 				var sub: Dictionary = out.get(k, {})
 				for troop in m[k]:
-					sub[troop] = sub.get(troop, 0.0) + float(m[k][troop]) * star
+					sub[troop] = sub.get(troop, 0.0) + float(m[k][troop])
 				out[k] = sub
 			else:
-				var v := float(m[k])
-				if v > 0.0 and v < 1.0:  # shares scale with ★; counts (AP, turns) and costs don't
-					v *= star
-				out[k] = out.get(k, 0.0) + v
+				out[k] = out.get(k, 0.0) + float(m[k])
 	return out
 
 
@@ -378,7 +373,15 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			save.carry_extra = {}
 			save.carry_uses = {}
 			out["log"].append("技能重置：累积加价清零，限 1 次技能可以再用")
-		if e.has("upgrade"):  # pick one of your generals (not yet 金) to go up a tier
+		if e.has("upgrade") and str(e["upgrade"]) == "random":  # a random general of yours goes up a tier
+			var pool: Array = save.owned.filter(func(c): return not save.maxed(c))
+			if pool.is_empty():
+				out["log"].append("……你还没有能升级的武将。")
+			else:
+				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
+				save.upgrade(cid)
+				out["log"].append("%s 升为%s卡！" % [db.cards[cid]["name"], db.gacha["tiers"][save.tier(cid)]["name"]])
+		elif e.has("upgrade"):  # pick one of your generals (not yet 金) to go up a tier
 			var mine: Array = save.owned.filter(func(c): return not save.maxed(c))
 			var ids: Array = []
 			while not mine.is_empty() and ids.size() < int(e.get("n", 3)):
@@ -440,9 +443,6 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				var r: Dictionary = db.relics[rid]
 				out["gained"].append({"id": rid, "name": "宝物·" + r["name"], "relic": true})
 				out["log"].append("获得宝物：%s（%s）" % [r["name"], r["desc"]])
-		if e.has("relic_up"):  # 宝物UP: every 宝物's ★ +1
-			save.relic_rank += int(e["relic_up"])
-			out["log"].append("宝物★%d：所有宝物的效果增强" % save.relic_rank)
 		if e.has("danger"):
 			save.danger += int(e["danger"])
 			out["log"].append("险！本轮之后的敌人体力和攻击 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)))

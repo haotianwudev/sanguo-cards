@@ -345,15 +345,17 @@ func test_troop_relics_only_help_their_troop() -> void:
 	check(m["troop_at"].has("cavalry") and not m["troop_at"].has("infantry"))
 
 
-func test_relic_rank_scales_shares_but_not_counts_or_costs() -> void:
+func test_temple_upgrades_a_general() -> void:
+	var q := quest(0)
 	var s := SaveData.create()
-	s.relics = ["hupi", "bingfu", "yuxi"]
-	var one := Quests.mods(s)
-	s.relic_rank = 3
-	var three := Quests.mods(s)
-	check(is_equal_approx(three["at"], one["at"] * 2.0), "★3 = +100%")
-	check_eq(three["ap_start"], one["ap_start"])
-	check_eq(three["hp"], one["hp"], "the curse's cost doesn't grow")
+	s.take("zhouyu")
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "temple"}
+	Quests.choose_event(q, s, rng(0), 0)
+	check(s.resolved and s.offer.is_empty(), "no pick: the mountain god chooses")
+	check_eq(s.tier("zhouyu"), 1)
 
 
 func test_elite_offers_a_relic_pick_and_danger_toughens_enemies() -> void:

@@ -284,10 +284,6 @@ func _show_run() -> void:
 		ch.queue_free()
 	var db := GameData.get_db()
 	var save := Game.save
-	if not save.relics.is_empty() and save.relic_rank > 1:
-		var st := _chip("宝物★%d" % save.relic_rank, "purple")
-		st.tooltip_text = "所有宝物的效果 +%d%%" % int(round(float(db.relic_pick["rank_step"]) * (save.relic_rank - 1) * 100))
-		_run_box.add_child(st)
 	if save.danger > 0:
 		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
 		d.tooltip_text = "本轮的敌人体力和攻击都变强了"

@@ -30,7 +30,6 @@ var event_note: Array = []  # what the last event did, shown on its square
 var offer_kind := ""  # "upgrade": the offer lists your own generals, the pick goes up a tier
 var relics: Array = []  # 宝物 held this run
 var danger := 0  # 险 accepted this run: enemies get stronger
-var relic_rank := 1  # ★ of every 宝物 this run (宝物UP raises it)
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
@@ -39,7 +38,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "relic_rank"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout"]
 
 
 static func create() -> SaveData:
@@ -63,7 +62,6 @@ static func from_dict(d: Dictionary) -> SaveData:
 	# JSON has no ints: restore them
 	s.damage = int(s.damage)
 	s.danger = int(s.danger)
-	s.relic_rank = maxi(1, int(s.relic_rank))
 	s.party_slots = int(s.party_slots)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
