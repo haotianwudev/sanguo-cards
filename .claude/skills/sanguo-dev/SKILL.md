@@ -107,7 +107,9 @@ chapter 1 (富春); the body ages with the story, so later chapters show him old
 framing of anyone under 18). 吴夫人 (later 吴国太) treats him like a son and lets him get
 away with his flirting, cluelessly maternal — that contrast is the joke. 孙策: reckless, spear first, can't swim,
 sulks at being left home. 周瑜: sharp (reads people, counts everything) but petty — keeps a **ledger** of what
-everyone owes him. 孙坚: huge, jealous-ish, 虎皮 + 古锭刀. Chapter 1 富春 (孙坚's hometown, during his campaign
+everyone owes him. 孙坚: huge, 虎皮 + 古锭刀; sharp-tongued and mean to the hero (「嘴甜的」, sends him to the front row, mocks his
+fighting) but heroic when it counts (first into the charge, holds the gate alone against 吕布, comes back for you);
+after the 玉玺 his ambition shows (won't let go of it, threatens anyone who talks, heads home to 江东). Chapter 1 富春 (孙坚's hometown, during his campaign
 against 董卓; only the brother whose plan you pick joins) → chapter 2 讨伐董卓 (the other brother joins; 祖茂 vs 华雄 —
 win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 joins; elite 董白; 吕布 raids the camp; 吕布's
 chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three chests; hand 董白 to 袁绍 for a relic (she's executed)
