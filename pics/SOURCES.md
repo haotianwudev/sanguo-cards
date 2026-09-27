@@ -4,8 +4,8 @@
 
 | key | 文件 | 来源 | 协议 | 作者 |
 |---|---|---|---|---|
-| `changsha` | processed/changsha_card.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `danyang` | processed/danyang_card.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `changsha` | source/soldiers/changsha.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `danyang` | source/soldiers/danyang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord` | source/generals/lord.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供 | — |

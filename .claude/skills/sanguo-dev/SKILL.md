@@ -51,6 +51,16 @@ Art: put the original in `pics/source/...`, add/adjust the `pics/art.json` entry
 Framing: `face` = face centre [x, y] as fractions; `head` = head height / image height. **Bigger head ⇒ smaller figure**;
 smaller face x ⇒ figure moves right; bigger face y ⇒ figure moves up. Enemies share their card's portrait key.
 
+Adding a portrait, checklist:
+1. File name = the portrait key the game looks up: a card's `person` (or its id), or an enemy's `portrait`
+   (enemies reuse their card's key — check `cards.json` before inventing a new one). Generals/enemies go in
+   `pics/source/generals/`, soldiers in `pics/source/soldiers/`. ≥ 900 px tall is plenty (the game keeps 640).
+2. `art.json` entry with `license` (who made it, e.g. 「用户提供（Gemini 生成）」); no `placeholder` for final art.
+3. Run `sanguo-art` — it builds `godot/data/portraits/`, `portraits.json`, `ART-NEEDS.md`, `SOURCES.md`. Never hand-edit
+   those four. Then `--import`, and commit the new `.jpg.import` files with the jpgs (every portrait has one).
+4. Screenshot it on its card (`--demo=cards:<card ids>`) and in its scene; adjust `face`/`head` until the head sits in
+   the upper third and the figure isn't cropped at the frame.
+
 ## Editing gotchas (these bit us)
 
 - **Don't put multi-line Python in bash heredocs** when the code contains `\n`, `\\`, or nested quotes — write the
@@ -100,6 +110,18 @@ sulks at being left home. 周瑜: sharp (reads people, counts everything) but pe
 everyone owes him. 孙坚: huge, jealous-ish, 虎皮 + 古锭刀. Chapter 1 富春 (孙坚's hometown, during his campaign
 against 董卓) → chapter 2 讨伐董卓 (吕布 nearly unbeatable; losing leads to 三英战吕布, winning raises 难度 and
 opens three chests, one grand).
+
+Writing rules:
+- **Names.** A card name `A·B` shows **A on the name plate** and **B as the small tag** at the top of the card
+  (`孙策·少年`). So the real name goes first, the nickname / version second: `胡玉·浪里蛟`, `唐周·妖道` — never
+  `浪里蛟·胡玉`. Enemy names are what the battle title and every log line print: keep them short (`「浪里蛟」胡玉`,
+  `妖道唐周`, `黄巾渠帅何仪`), no double `·`.
+- **Real people are welcome when they fit** — look them up first (胡玉 really was the 钱塘 pirate 孙坚 scared off at 17).
+- **Continuity.** When you name, rename or add a character, grep `story.json` (squares *and* events) and `cards.json`
+  for every place that talks about them or the role they replace, and update all of it. Every boss the player fights
+  must be introduced in the text before the fight (who they are, why they're there).
+- **Punctuation.** Dialogue in 「」, quotes inside dialogue in 『』; Chinese punctuation throughout — no ASCII or curly
+  quotes (`"` `'` `‘’` `“”`).
 
 ## Git
 
