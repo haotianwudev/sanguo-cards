@@ -158,6 +158,14 @@ func test_events_describe_what_happened() -> void:
 	check(ev.any(func(e): return e["t"] == "round" and e["n"] == 2), "next round began")
 
 
+func test_young_sunce_strikes_for_1_ap_and_saves_xiaobawang() -> void:
+	var f := GameData.get_db().build_fighter("sunce")
+	check_eq(f["skills"], ["tingqiang", "xiaobawang"])
+	var db := GameData.get_db()
+	check(db.skills["tingqiang"]["cost"] == 1 and not db.skills["tingqiang"]["cumulative"], "挺枪: plain 1 AP")
+	check(db.skills["xiaobawang"]["cumulative"], "小霸王 builds up")
+
+
 func test_sunce_has_a_plain_skill_that_never_gets_dearer() -> void:
 	var db := GameData.get_db()
 	for cid in ["sunce", "sunce_zhong"]:

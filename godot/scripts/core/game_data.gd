@@ -57,6 +57,7 @@ func _load(dir: String) -> void:
 			bonus[k] = int(c["bonus"][k])
 		cards[cid] = {"id": cid, "name": c["name"], "rarity": c["rarity"], "troop": c["troop"],
 			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
+			"troop_skills": c.get("troop_skills", true),
 			"person": c.get("person", cid), "weight": int(c.get("weight", 1)),
 			"soldier": c["rarity"] == "N"}
 	for eid in raw["enemies"]:
@@ -134,7 +135,7 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	## 兵种基础 + 武将自身能力 (× mult: the 铜/银/金 tier). Skills = the troop's skill + the general's own.
 	var c: Dictionary = cards[card_id]
 	var t: Dictionary = troops[c["troop"]]
-	var sk: Array = t["skills"].duplicate()
+	var sk: Array = t["skills"].duplicate() if c["troop_skills"] else []  # "troop_skills": false = own skills only
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
