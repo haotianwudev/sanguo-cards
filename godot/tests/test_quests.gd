@@ -319,3 +319,68 @@ func test_changsha_is_weaker_than_danyang() -> void:
 	var cs := db.build_fighter("changsha")
 	var dy := db.build_fighter("danyang")
 	check(cs["at"] < dy["at"] and cs["hp"] < dy["hp"], "长沙刀兵 %d/%d vs 丹阳兵 %d/%d" % [cs["at"], cs["hp"], dy["at"], dy["hp"]])
+
+
+# ---- 宝物 / 险 / shuffled runs ------------------------------------------------------
+
+func test_relics_change_battles() -> void:
+	var s := SaveData.create()
+	s.take("sunce")
+	s.party = s.auto_party()
+	var plain := Battle.start("boar", s.party_leaders(), 1)
+	s.relics = ["bingfu", "bingfa", "yuxi", "chize", "zhangu"]
+	var m := Quests.mods(s)
+	var b := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, m)
+	check_eq(b.ap, plain.ap + 2, "兵符 +1 at start, 玉玺 +1 per round")
+	check_eq(b.turn_limit, plain.turn_limit + 2, "孙子兵法")
+	check(b.party_max < plain.party_max, "玉玺 costs HP")
+	check(b.enemy["stunned"], "赤帻")
+	check(b.leaders.all(func(u): return u["boosted"]), "战鼓")
+
+
+func test_troop_relics_only_help_their_troop() -> void:
+	var s := SaveData.create()
+	s.relics = ["madeng"]
+	var m := Quests.mods(s)
+	check(m["troop_at"].has("cavalry") and not m["troop_at"].has("infantry"))
+
+
+func test_relic_rank_scales_shares_but_not_counts_or_costs() -> void:
+	var s := SaveData.create()
+	s.relics = ["hupi", "bingfu", "yuxi"]
+	var one := Quests.mods(s)
+	s.relic_rank = 3
+	var three := Quests.mods(s)
+	check(is_equal_approx(three["at"], one["at"] * 2.0), "★3 = +100%")
+	check_eq(three["ap_start"], one["ap_start"])
+	check_eq(three["hp"], one["hp"], "the curse's cost doesn't grow")
+
+
+func test_elite_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "yaodao"
+	s.resolved = false
+	Quests.resolve(q, s, rng(0))
+	check(s.offer_kind == "relic" and s.offer.size() == 3)
+	Quests.take_relic(s, s.offer[0])
+	check(s.relics.size() == 1 and s.offer.is_empty())
+	s.danger = 1
+	var calm := Battle.start("boar", s.party_leaders(), 1)
+	var risky := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, Quests.mods(s))
+	check(risky.enemy["max_hp"] > calm.enemy["max_hp"])
+
+
+func test_each_run_deals_the_shuffle_groups_anew() -> void:
+	var q := quest(0)
+	var layouts := {}
+	for seed_value in 12:
+		var s := SaveData.create()
+		Quests.begin(q, s, rng(seed_value))
+		var v := Quests.view(q, s)
+		var types: Array = ["reeds", "road", "ferry"].map(func(id): return v["squares"][id]["type"] + v["squares"][id]["event"])
+		types.sort()
+		check_eq(types, ["battle", "mystery", "mysteryrisk"], "same contents, new places")
+		layouts[JSON.stringify(s.layout)] = true
+	check(layouts.size() > 3, "runs differ")

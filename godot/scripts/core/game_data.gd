@@ -17,6 +17,8 @@ var enemies: Dictionary  # id -> {id, name, hp, at, actions, moves, phys_resist,
 var scenarios: Dictionary  # id -> {id, name, turn_limit, enemy}
 var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, recruit_pool, event_pool}]
 var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
+var relics: Dictionary  # 宝物: id -> {id, name, icon, rarity, desc, mods, after_win}
+var relic_pick: Dictionary  # elite reward: {n, weights by rarity}
 var ui: Dictionary
 
 
@@ -63,6 +65,12 @@ func _load(dir: String) -> void:
 			"actions": int(e["actions"]), "moves": e["moves"],
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)),
 			"portrait": e.get("portrait", "")}
+	for rid in raw.get("relics", {}):
+		var r: Dictionary = raw["relics"][rid]
+		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),
+			"rarity": r.get("rarity", "common"), "desc": r.get("desc", ""), "mods": r.get("mods", {}),
+			"after_win": float(r.get("after_win", 0.0))}
+	relic_pick = raw.get("relic_pick", {"n": 3, "weights": {"common": 1}})
 	for sid in raw["scenarios"]:
 		var sc: Dictionary = raw["scenarios"][sid]
 		scenarios[sid] = {"id": sid, "name": sc["name"], "turn_limit": int(sc["turn_limit"]), "enemy": sc["enemy"]}
@@ -77,13 +85,15 @@ func _load(dir: String) -> void:
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
 				"cards": s.get("cards", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
+				"event": s.get("event", ""),
 				"label": s.get("label", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
-			"event_pool": q.get("event_pool", [])})
+			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", [])})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]
-		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "text": ev.get("text", []),
+		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),
+			"text": ev.get("text", []),
 			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
 				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", [])})}
 	Quests.validate(self)

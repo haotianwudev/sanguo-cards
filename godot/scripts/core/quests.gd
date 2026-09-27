@@ -12,7 +12,13 @@ extends RefCounted
 ##   recruit  a few unowned generals shown, keep one
 ##   mystery  ？: a random event from the quest's event_pool, rolled on arrival (a new roll every run).
 ##            Its options can fight (maybe an ambush), hurt, poison (lose a third of HP), heal, give cards or open a pick-one.
-## Battle squares may be `elite` (精: tougher, always drops a 3-card chest) or `ambush` (enemy strikes first).
+## Battle squares may be `elite` (精: tougher, always drops a 3-card chest and a 宝物) or `ambush` (enemy strikes first).
+## A ？ square with a fixed `event` always holds that event (险 squares).
+## Rogue runs: every attempt at a quest is a run. 宝物 and 险 last for the run; `shuffle` groups of squares
+## trade contents at the start of each run (the paths stay, what's on them moves).
+
+const CONTENT := ["type", "label", "battle", "boss", "elite", "ambush", "event"]  # what a shuffle moves
+static var _views := {}
 ## Damage and cumulative skill costs carry from battle to battle within a quest; they reset at a recover
 ## square or when the quest ends. Losing restarts the quest; choices already made are remembered.
 
@@ -36,6 +42,8 @@ static func validate(db: GameData) -> void:
 				assert(q["squares"][t]["x"] > s["x"], where + ": next square must be further right")
 			if s["type"] == "battle":
 				assert(db.scenarios.has(s["battle"]), where + ": unknown battle")
+			if s["event"] != "":
+				assert(db.events.has(s["event"]), where + ": unknown event " + s["event"])
 			for c in s["cards"]:
 				assert(db.cards.has(c), where + ": unknown card " + c)
 		if q["squares"].values().any(func(s): return s["type"] == "mystery"):
@@ -56,6 +64,8 @@ static func _validate_effects(db: GameData, effects: Array, where: String) -> vo
 		if e.has("offer"):
 			for c in e["offer"].get("from", []):
 				assert(db.cards.has(c), where + ": unknown card " + c)
+		if e.has("relic") and e["relic"] is String:
+			assert(db.relics.has(e["relic"]), where + ": unknown relic " + e["relic"])
 		if e.has("chance"):
 			_validate_effects(db, e.get("then", []) + e.get("else", []), where)
 
@@ -67,15 +77,33 @@ static func current_quest(save: SaveData) -> Variant:
 	return null
 
 
-static func ensure_started(save: SaveData) -> Variant:
+static func ensure_started(save: SaveData, rng: RandomNumberGenerator = null) -> Variant:
+	## The quest in progress, laid out for this run (see view()).
 	var q: Variant = current_quest(save)
 	# a save from an older version of the story may stand on a square that no longer exists
 	if q != null and (save.quest != q["id"] or not q["squares"].has(save.square)):
-		begin(q, save)
-	return q
+		begin(q, save, rng)
+	return view(q, save) if q != null else null
 
 
-static func begin(q: Dictionary, save: SaveData) -> void:
+static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
+	## Start a run. With an rng the shuffle groups are dealt anew; without one the map is as written (tests).
+	q = q.get("_raw", q)
+	save.relics = []
+	save.relic_rank = 1
+	save.danger = 0
+	save.layout = {}
+	if rng != null:
+		for group in q["shuffle"]:
+			var dealt: Array = group.duplicate()
+			for i in range(dealt.size() - 1, 0, -1):
+				var j := rng.randi_range(0, i)
+				var tmp = dealt[i]
+				dealt[i] = dealt[j]
+				dealt[j] = tmp
+			for i in group.size():
+				if dealt[i] != group[i]:
+					save.layout[group[i]] = dealt[i]
 	save.quest = q["id"]
 	save.square = q["start"]
 	save.visited = [q["start"]]
@@ -94,13 +122,55 @@ static func reset_carry(save: SaveData) -> void:
 	save.carry_uses = {}
 
 
+static func view(q: Dictionary, save: SaveData) -> Dictionary:
+	## The quest as this run sees it: squares in a shuffle group show the contents dealt to them.
+	var raw: Dictionary = q.get("_raw", q)
+	if save.layout.is_empty() or save.quest != raw["id"]:
+		return raw
+	var key: String = raw["id"] + JSON.stringify(save.layout)
+	if not _views.has(key):
+		var v := raw.duplicate()
+		v["_raw"] = raw
+		v["squares"] = raw["squares"].duplicate()
+		for sid in save.layout:
+			var s: Dictionary = raw["squares"][sid].duplicate()
+			var src: Dictionary = raw["squares"][save.layout[sid]]
+			for f in CONTENT:
+				s[f] = src[f]
+			v["squares"][sid] = s
+		_views[key] = v
+	return _views[key]
+
+
+static func mods(save: SaveData) -> Dictionary:
+	## Battle modifiers for this run: every 宝物 held (positive shares grow with the ★), plus 险.
+	var db := GameData.get_db()
+	var out := {"enemy": save.danger * float(db.battle["danger_step"])}
+	var star := 1.0 + float(db.relic_pick["rank_step"]) * (save.relic_rank - 1)
+	for rid in save.relics:
+		var m: Dictionary = db.relics[rid]["mods"]
+		for k in m:
+			if m[k] is Dictionary:  # troop_at / troop_hp: {troop: share}
+				var sub: Dictionary = out.get(k, {})
+				for troop in m[k]:
+					sub[troop] = sub.get(troop, 0.0) + float(m[k][troop]) * star
+				out[k] = sub
+			else:
+				var v := float(m[k])
+				if v > 0.0 and v < 1.0:  # shares scale with ★; counts (AP, turns) and costs don't
+					v *= star
+				out[k] = out.get(k, 0.0) + v
+	return out
+
+
 static func here(q: Dictionary, save: SaveData) -> Dictionary:
-	return q["squares"][save.square]
+	return view(q, save)["squares"][save.square]
 
 
 static func next_options(q: Dictionary, save: SaveData) -> Array:
 	if not save.resolved:
 		return []
+	q = view(q, save)
 	var s := here(q, save)
 	if s["type"] == "choose":
 		return [q["squares"][save.choices[s["id"]]]]
@@ -109,6 +179,7 @@ static func next_options(q: Dictionary, save: SaveData) -> Array:
 
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## Cards shown on the current recruit (generals) or treasure (soldiers) square — rolled once, then kept.
+	q = view(q, save)
 	var kind: String = here(q, save)["type"]
 	var db := GameData.get_db()
 	if kind == "mystery" and not save.resolved:
@@ -123,13 +194,14 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 		elif kind == "recruit":
 			cards = save.recruit_offer(rng)
 		else:
-			cards = SaveData.chest_offer(rng, int(db.gacha["chest_cards"]), q["soldier_pool"])
+			cards = SaveData.chest_offer(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), q["soldier_pool"])
 		save.offer = cards.map(func(c): return c["id"])
 	return save.offer.map(func(c): return db.cards[c])
 
 
 static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, choice: int = -1) -> Array:
 	## Resolve the current square (battles: only after a win). Returns the cards gained.
+	q = view(q, save)
 	var db := GameData.get_db()
 	var s := here(q, save)
 	var gained: Array = []
@@ -158,6 +230,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			if not save.event_battle.is_empty():
 				var won: Dictionary = save.event_battle
 				save.event_battle = {}
+				after_win(save)
 				var out := _apply(won["win"], q, save, rng)
 				gained.append_array(out["gained"])
 				save.event_note.append_array(out["log"])
@@ -175,11 +248,19 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			save.offer_kind = ""
 		"recover":
 			reset_carry(save)
+		"battle":  # called after a win
+			after_win(save)
+			if s["elite"]:  # pick one of a few 宝物 (the map opens the pick)
+				save.offer = relic_offer(save, rng)
+				save.offer_kind = "relic"
+			elif rng.randf() < float(db.relic_pick["chest_chance"]):  # Rance X: chests hold items too
+				gained.append_array(_apply([{"relic": true}], q, save, rng)["gained"])
 	save.resolved = true
 	return gained
 
 
 static func move(q: Dictionary, save: SaveData, square_id: String) -> void:
+	q = view(q, save)
 	var ok := next_options(q, save).any(func(s): return s["id"] == square_id)
 	assert(ok, "cannot move to " + square_id)
 	save.square = square_id
@@ -198,6 +279,8 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 	var s := here(q, save)
 	if s["type"] != "mystery":
 		return {}
+	if s["event"] != "":
+		return GameData.get_db().events[s["event"]]
 	if not save.events.has(s["id"]):
 		var seen: Array = save.events.values()
 		var fresh: Array = q["event_pool"].filter(func(e): return not seen.has(e))
@@ -210,6 +293,7 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, i: int) -> Dictionary:
 	## Take option i of the current event. Returns {gained, log}. Afterwards the square is either resolved,
 	## waiting for a fight (save.event_battle) or waiting for a pick (save.offer).
+	q = view(q, save)
 	var ev := event_here(q, save, rng)
 	var opt: Dictionary = ev["options"][i]
 	save.event_note = ["你选择了：" + opt["label"]]
@@ -224,6 +308,7 @@ static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerat
 
 static func battle_here(q: Dictionary, save: SaveData) -> Dictionary:
 	## What fighting on the current square means: {battle, boss (always a chest), ambush}.
+	q = view(q, save)
 	var s := here(q, save)
 	if s["type"] == "mystery":
 		return {"battle": save.event_battle.get("battle", ""), "boss": false,
@@ -231,11 +316,46 @@ static func battle_here(q: Dictionary, save: SaveData) -> Dictionary:
 	return {"battle": s["battle"], "boss": s["boss"] or s["elite"], "ambush": s["ambush"]}
 
 
+static func after_win(save: SaveData) -> void:
+	## 宝物 that act after every victory (酒囊: heal a share of HP).
+	var db := GameData.get_db()
+	for rid in save.relics:
+		var share: float = db.relics[rid]["after_win"]
+		if share > 0.0:
+			save.damage = maxi(0, save.damage - int(round(party_max(save) * share)))
+
+
 static func party_max(save: SaveData) -> int:
+	## the shared HP bar's full size, 宝物 included (传国玉玺, troop items)
+	var m := mods(save)
 	var hp := 0
 	for ld in save.party_leaders():
-		hp += int(ld["hp"])
-	return hp
+		hp += int(round(ld["hp"] * (1.0 + float(m.get("troop_hp", {}).get(ld["card"]["troop"], 0.0)))))
+	return int(round(hp * (1.0 + float(m.get("hp", 0.0)))))
+
+
+static func relic_offer(save: SaveData, rng: RandomNumberGenerator) -> Array:
+	## A few 宝物 not held yet, drawn by rarity weight (relic_pick in cards.json).
+	var db := GameData.get_db()
+	var weights: Dictionary = db.relic_pick["weights"]
+	var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r))
+	var ids: Array = []
+	while not left.is_empty() and ids.size() < int(db.relic_pick["n"]):
+		var w: Array = left.map(func(r): return float(weights.get(db.relics[r]["rarity"], 0)))
+		var r: String = GameData.weighted_pick(rng, left, w)
+		ids.append(r)
+		left.erase(r)
+	return ids
+
+
+static func take_relic(save: SaveData, rid: String) -> Dictionary:
+	## Keep the picked 宝物 from a relic offer.
+	var db := GameData.get_db()
+	if not save.relics.has(rid):
+		save.relics.append(rid)
+	save.offer = []
+	save.offer_kind = ""
+	return {"id": rid, "name": "宝物·" + db.relics[rid]["name"], "relic": true}
 
 
 static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Dictionary:
@@ -295,17 +415,37 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			var ids: Array = []
 			if o.has("from"):
 				var left: Array = o["from"].filter(func(c): return not save.maxed(c))
-				while not left.is_empty() and ids.size() < int(o.get("n", 3)):
+				while not left.is_empty() and ids.size() < int(o.get("n", 3)) + save.offer_extra():
 					ids.append(left.pop_at(rng.randi_range(0, left.size() - 1)))
 			elif o.has("generals"):
 				ids = save.recruit_offer(rng).map(func(c): return c["id"])
 			else:
-				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)), q["soldier_pool"]).map(func(c): return c["id"])
+				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)) + save.offer_extra(), q["soldier_pool"]).map(
+					func(c): return c["id"])
 			save.offer = ids
 			if ids.is_empty():
 				out["log"].append("……可惜，什么也没有。")
 		if e.has("battle"):
 			save.event_battle = {"battle": e["battle"], "ambush": e.get("ambush", false), "win": []}
+		if e.has("relic"):  # a named 宝物, or true for a random one not held yet
+			var rid: String = ""
+			if e["relic"] is String:
+				rid = e["relic"]
+			else:
+				var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r))
+				if not left.is_empty():
+					rid = left[rng.randi_range(0, left.size() - 1)]
+			if rid != "" and not save.relics.has(rid):
+				save.relics.append(rid)
+				var r: Dictionary = db.relics[rid]
+				out["gained"].append({"id": rid, "name": "宝物·" + r["name"], "relic": true})
+				out["log"].append("获得宝物：%s（%s）" % [r["name"], r["desc"]])
+		if e.has("relic_up"):  # 宝物UP: every 宝物's ★ +1
+			save.relic_rank += int(e["relic_up"])
+			out["log"].append("宝物★%d：所有宝物的效果增强" % save.relic_rank)
+		if e.has("danger"):
+			save.danger += int(e["danger"])
+			out["log"].append("险！本轮之后的敌人体力和攻击 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)))
 		if e.has("chance"):
 			var branch: Array = e.get("then", []) if rng.randf() < float(e["chance"]) else e.get("else", [])
 			var sub := _apply(branch, q, save, rng)
@@ -327,6 +467,7 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 	reset_carry(save)
 
 
-static func fail(q: Dictionary, save: SaveData) -> void:
-	## Lost a battle: back to the start with full HP. Cards and choices are kept.
-	begin(q, save)
+static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
+	## Lost a battle: a new run from the start with full HP (宝物 and 险 gone, squares dealt again).
+	## Cards and choices are kept.
+	begin(q, save, rng)

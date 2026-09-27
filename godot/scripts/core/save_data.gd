@@ -28,6 +28,10 @@ var events: Dictionary = {}  # ？ square id -> event id rolled for it this run
 var event_battle: Dictionary = {}  # a fight an event started: {battle, ambush, win: [effects on victory]}
 var event_note: Array = []  # what the last event did, shown on its square
 var offer_kind := ""  # "upgrade": the offer lists your own generals, the pick goes up a tier
+var relics: Array = []  # 宝物 held this run
+var danger := 0  # 险 accepted this run: enemies get stronger
+var relic_rank := 1  # ★ of every 宝物 this run (宝物UP raises it)
+var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
 var party_slots := 4  # including the lord
@@ -35,7 +39,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "relic_rank"]
 
 
 static func create() -> SaveData:
@@ -58,6 +62,8 @@ static func from_dict(d: Dictionary) -> SaveData:
 			s.set(f, d[f])
 	# JSON has no ints: restore them
 	s.damage = int(s.damage)
+	s.danger = int(s.danger)
+	s.relic_rank = maxi(1, int(s.relic_rank))
 	s.party_slots = int(s.party_slots)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
@@ -153,7 +159,7 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0) -> Array:
 	_sync()
 	var db := _db()
 	if n <= 0:
-		n = int(db.gacha["offer_size"])
+		n = int(db.gacha["offer_size"]) + offer_extra()
 	var rates: Dictionary = db.gacha["rates"]
 	var result: Array = []
 	for _i in n:
@@ -198,7 +204,15 @@ func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool,
 	var chance := 1.0 if boss else minf(1.0, float(g["chest_base"]) + overkill)
 	if rng.randf() >= chance:
 		return []
-	return chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]), only)
+	return chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only)
+
+
+func offer_extra() -> int:
+	## 招贤榜: one more card on every pick-one
+	var n := 0
+	for rid in relics:
+		n += int(_db().relics[rid]["mods"].get("offer_extra", 0))
+	return n
 
 
 func take(card_id: String) -> Dictionary:

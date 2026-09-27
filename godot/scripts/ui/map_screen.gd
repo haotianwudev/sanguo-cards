@@ -21,6 +21,7 @@ var _sheet: PanelContainer
 var _sheet_box: VBoxContainer
 var _hp_bar: ProgressBar
 var _hp_label: Label
+var _run_box: HBoxContainer
 var _title: Label
 var _busy := false
 
@@ -52,6 +53,10 @@ func _ready() -> void:
 	top.add_child(_hp_bar)
 	_hp_label = Kit.label("", Kit.FONT_BODY)
 	top.add_child(_hp_label)
+	_run_box = HBoxContainer.new()  # 宝物 and 险 this run
+	_run_box.add_theme_constant_override("separation", 6)
+	top.add_child(_run_box)
+	top.move_child(_run_box, 1)
 
 	# map
 	_scroll = ScrollContainer.new()
@@ -92,7 +97,7 @@ func _pos(s: Dictionary) -> Vector2:
 
 
 func _rebuild_map() -> void:
-	q = Quests.ensure_started(Game.save)
+	q = Quests.ensure_started(Game.save, Game.rng)
 	Game.persist()
 	for n in _nodes.values():
 		n.queue_free()
@@ -139,12 +144,17 @@ func _rebuild_map() -> void:
 
 func _glyph(s: Dictionary) -> String:
 	var glyphs: Dictionary = GameData.get_db().ui["map"]["glyphs"]
-	return glyphs[_kind(s)]
+	return _fixed_event(s).get("glyph", glyphs[_kind(s)])
 
 
 func _kind(s: Dictionary) -> String:
 	## glyph / colour key: boss and elite battles have their own
 	return "boss" if s["boss"] else ("elite" if s["elite"] else s["type"])
+
+
+func _fixed_event(s: Dictionary) -> Dictionary:
+	## a ？ square holding a set event (险) shows that event's glyph and colour
+	return GameData.get_db().events[s["event"]] if s["event"] != "" else {}
 
 
 func _type_name(s: Dictionary) -> String:
@@ -153,7 +163,7 @@ func _type_name(s: Dictionary) -> String:
 
 func _type_color(s: Dictionary) -> Color:
 	var names: Dictionary = GameData.get_db().ui["map"]["type_colors"]
-	return Kit.c(names[_kind(s)])
+	return Kit.c(_fixed_event(s).get("color", names[_kind(s)]))
 
 
 func _style_square(b: Button, s: Dictionary, state: String) -> void:
@@ -198,13 +208,12 @@ func _refresh() -> void:
 		return
 	_title.text = q["title"]
 	var party := save.party_leaders()
-	var hp_max := 0
-	for ld in party:
-		hp_max += ld["hp"]
+	var hp_max := Quests.party_max(save)
 	var hp := maxi(1, hp_max - save.damage)
 	_hp_bar.max_value = hp_max
 	Kit.tween_bar(_hp_bar, hp)
 	_hp_label.text = "%d / %d" % [hp, hp_max]
+	_show_run()
 
 	var reachable := {}
 	for s in Quests.next_options(q, save):
@@ -266,6 +275,37 @@ func _refresh() -> void:
 	_token.position = _pos(here) - Vector2(14, SQ / 2 + 22)
 	_center_on(here)
 	_show_square(here)
+	if save.offer_kind == "relic" and not save.offer.is_empty():
+		_open_relics.call_deferred()
+
+
+func _show_run() -> void:
+	for ch in _run_box.get_children():
+		ch.queue_free()
+	var db := GameData.get_db()
+	var save := Game.save
+	if not save.relics.is_empty() and save.relic_rank > 1:
+		var st := _chip("宝物★%d" % save.relic_rank, "purple")
+		st.tooltip_text = "所有宝物的效果 +%d%%" % int(round(float(db.relic_pick["rank_step"]) * (save.relic_rank - 1) * 100))
+		_run_box.add_child(st)
+	if save.danger > 0:
+		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
+		d.tooltip_text = "本轮的敌人体力和攻击都变强了"
+		_run_box.add_child(d)
+	for rid in save.relics:
+		var r: Dictionary = db.relics[rid]
+		var c := _chip(r["icon"] + " " + r["name"], {"rare": "purple", "curse": "red"}.get(r["rarity"], "gold"))
+		c.tooltip_text = r["desc"]
+		_run_box.add_child(c)
+
+
+func _chip(text: String, color: String) -> Label:
+	var l := Kit.label(text, 16)
+	l.add_theme_color_override("font_color", Color.WHITE)
+	l.add_theme_stylebox_override("normal", Kit.box(Kit.c(color), 8, 0, Color.TRANSPARENT, 6))
+	l.mouse_filter = Control.MOUSE_FILTER_STOP
+	l.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	return l
 
 
 func _center_on(s: Dictionary) -> void:
@@ -514,6 +554,23 @@ func _open_offer(s: Dictionary) -> void:
 		o.title = "仙人点化 —— 选一位武将升级"
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
+	add_child(o)
+
+
+func _open_relics() -> void:
+	if get_node_or_null("RelicPick") != null:
+		return
+	var o := RelicPick.new()
+	o.name = "RelicPick"
+	o.title = "战利品 —— 选一件宝物（本轮有效）"
+	o.relic_ids = Game.save.offer.duplicate()
+	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	o.picked.connect(func(i):
+		var got := Quests.take_relic(Game.save, o.relic_ids[i])
+		Game.persist()
+		o.queue_free()
+		_refresh()
+		_show_toast("获得：" + got["name"]))
 	add_child(o)
 
 

@@ -33,11 +33,11 @@ func _ready() -> void:
 	var save := Game.save
 	if carry:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
-			ambush)
+			ambush, Quests.mods(save))
 	else:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi())
 	_build()
-	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.scenario["turn_limit"], b.enemy["data"]["name"]]])
+	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])
 	_log_lines(b.opening)
 	b.take_events()
 	_refresh()
@@ -205,13 +205,13 @@ func _refresh() -> void:
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
 		ch.queue_free()
-	for k in int(GameData.get_db().battle["ap_max"]):
+	for k in b.ap_max():
 		var pip := Panel.new()
 		pip.custom_minimum_size = Vector2(22, 22)
 		pip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		pip.add_theme_stylebox_override("panel", Kit.box(Kit.c("gold") if k < b.ap else Kit.c("track"), 11, 2, Kit.c("gold"), 0))
 		_ap_row.add_child(pip)
-	_round_label.text = "第 %d/%d 回合" % [b.round_no, b.scenario["turn_limit"]]
+	_round_label.text = "第 %d/%d 回合" % [b.round_no, b.turn_limit]
 	_combo_label.text = "%d 连击 +%d%%" % [b.combo, b.combo * 10] if b.combo > 0 else ""
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
@@ -433,7 +433,7 @@ func _finish() -> void:
 			save.carry_uses.merge(out[2], true)
 		await _banner("胜　利", Kit.c("gold"))
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
-		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, q.get("soldier_pool", []))
+		var chest := save.chest_after_battle(Game.rng, b.overkill + float(b.mods.get("chest", 0.0)), boss, q.get("soldier_pool", []))
 		if not chest.is_empty():
 			var o := PickOverlay.new()
 			o.title = "宝箱！（过量伤害 %d%%）选一张兵卡带走" % int(round(b.overkill * 100))

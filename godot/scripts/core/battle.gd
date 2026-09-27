@@ -29,6 +29,8 @@ var defend_streak := 0
 var result := ""  # "" | "win" | "lose"
 var overkill := 0.0  # excess damage on the killing blow, as a share of the enemy's max HP
 var opening: Array = []  # log lines from the first round start
+var mods: Dictionary = {}  # 宝物 / 险 (see cards.json relics) + enemy (险: enemy strength)
+var turn_limit := 0
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
 ##       "enemy_hit"|"confuse"|"round"|"interrupt", ...}
@@ -46,9 +48,9 @@ func _ev(e: Dictionary) -> void:
 
 
 static func start(scenario_id: String, party: Array, seed_value: int = -1, damage: int = 0,
-		extra: Dictionary = {}, uses: Dictionary = {}, ambush := false) -> Battle:
+		extra: Dictionary = {}, uses: Dictionary = {}, ambush := false, mods := {}) -> Battle:
 	## damage / extra / uses carry a quest's wear from earlier battles.
-	## ambush: the enemy strikes once before the first round.
+	## ambush: the enemy strikes once before the first round.  mods: the run's 宝物 and 险 (Quests.mods).
 	var b := Battle.new()
 	b.db = GameData.get_db()
 	if seed_value >= 0:
@@ -57,8 +59,11 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		b.rng.randomize()
 	b.scenario = b.db.scenarios[scenario_id]
 	var e: Dictionary = b.db.enemies[b.scenario["enemy"]]
-	var max_hp := int(round(e["hp"] * (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
-	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "stunned": false, "break_amount": 0.0, "break_turns": 0}
+	b.mods = mods
+	var tough := 1.0 + float(mods.get("enemy", 0.0))
+	var max_hp := int(round(e["hp"] * tough * (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
+	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough, "stunned": false,
+		"break_amount": 0.0, "break_turns": 0}
 	var hp := 0
 	for ld in party:
 		var cid: String = ld["card"]["id"]
@@ -69,11 +74,25 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 			u_extra[s] = extra.get(cid, {}).get(s, 0)
 		b.leaders.append({"leader": ld, "uses_left": u_left, "extra_cost": u_extra, "acted": false,
 			"idle_rounds": 0, "boosted": false, "confused": false, "confuse_next": false})
-		hp += ld["hp"]
-	b.party_max = hp
+		hp += int(round(ld["hp"] * (1.0 + float(mods.get("troop_hp", {}).get(ld["card"]["troop"], 0.0)))))
+	b.party_max = int(round(hp * (1.0 + float(mods.get("hp", 0.0)))))
 	b.party_hp = maxi(1, hp - damage)
-	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"])
-	b.opening = b._ambush() if ambush else []
+	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"]) - int(mods.get("ap_round", 0)) \
+		+ int(mods.get("ap_start", 0))
+	b.turn_limit = int(b.scenario["turn_limit"]) + int(mods.get("turns", 0))
+	b.opening = []
+	if ambush and mods.get("no_ambush", 0) > 0:
+		b.opening.append("锦帆铃叮当一响——识破了埋伏！")
+	elif ambush:
+		b.opening = b._ambush()
+	b.party_hp = mini(b.party_max, b.party_hp + int(round(b.party_max * float(mods.get("start_heal", 0.0)))))
+	if mods.get("boost_start", 0) > 0:
+		for u in b.leaders:
+			u["boosted"] = true
+		b.opening.append("战鼓擂响，全军 BOOST！")
+	if mods.get("stun_start", 0) > 0:
+		b.enemy["stunned"] = true
+		b.opening.append("%s 盯着赤帻发愣——第一回合无法行动" % e["name"])
 	b.opening.append_array(b._start_round())
 	return b
 
@@ -97,6 +116,10 @@ func carry_out() -> Array:
 
 static func unit_name(u: Dictionary) -> String:
 	return u["leader"]["card"]["name"]
+
+
+func ap_max() -> int:
+	return int(db.battle["ap_max"]) + int(mods.get("ap_max", 0))
 
 
 func cost(u: Dictionary, sk: Dictionary) -> int:
@@ -178,7 +201,7 @@ func _variance() -> float:
 func _dmg(base: float, kind: String) -> int:
 	var data: Dictionary = enemy["data"]
 	var resist: float = data["phys_resist"] if kind == "attack" else data["magic_resist"]
-	var d: float = base * (1.0 + float(db.battle["combo_bonus"]) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
+	var d: float = base * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
 	return maxi(1, int(round(d * _variance())))
 
 
@@ -192,7 +215,12 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			for _h in int(eff.get("hits", 1)):
 				if enemy["hp"] <= 0:
 					break
-				var d := _dmg(at * float(eff["power"]) * mult, kind)
+				var bonus := float(mods.get("at", 0.0)) + float(mods.get("troop_at", {}).get(u["leader"]["card"]["troop"], 0.0))
+				if kind == "magic":
+					bonus += float(mods.get("magic", 0.0))
+				if party_hp * 2 < party_max:
+					bonus += float(mods.get("desperate", 0.0))
+				var d := _dmg(at * float(eff["power"]) * mult * (1.0 + bonus), kind)
 				if d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				enemy["hp"] = maxi(0, enemy["hp"] - d)
@@ -201,7 +229,8 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				log.append("  %s 受到 %d 伤害（%d 连击）" % [ename, d, combo])
 			return log
 		"heal":
-			var amt := mini(int(round(at * float(eff["power"]) * mult)), party_max - party_hp)
+			var amt := mini(int(round(at * float(eff["power"]) * mult * (1.0 + float(mods.get("heal", 0.0))))),
+				party_max - party_hp)
 			party_hp += amt
 			_ev({"t": "heal", "amt": amt, "hp": party_hp})
 			return ["  体力恢复 %d" % amt]
@@ -235,7 +264,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
 		"ap":
-			ap = mini(int(db.battle["ap_max"]), ap + int(eff["amount"]))
+			ap = mini(ap_max(), ap + int(eff["amount"]))
 			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
 			return ["  AP +%d" % int(eff["amount"])]
 	assert(false, "unknown effect " + kind)
@@ -253,16 +282,16 @@ func _enemy_phase(defend_cut: float) -> Array:
 		_ev({"t": "enemy_stunned"})
 		log.append("%s 混乱中，无法行动" % data["name"])
 	else:
-		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut)
+		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0)))
 		var moves: Array = data["moves"]
 		for _a in int(data["actions"]):
 			var mv: Dictionary = GameData.weighted_pick(rng, moves, moves.map(func(m): return float(m["weight"])))
-			var d := maxi(1, int(round(data["at"] * float(mv["power"]) * _variance() * (1.0 - cut))))
+			var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - cut))))
 			party_hp = maxi(0, party_hp - d)
 			_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": cut, "hp": party_hp})
 			log.append("%s【%s】 我军受到 %d 伤害%s" % [data["name"], mv["name"], d,
 				("（减伤 %d%%）" % int(round(cut * 100))) if cut > 0.0 else ""])
-			if mv.has("confuse") and rng.randf() < float(mv["confuse"]):
+			if mv.has("confuse") and mods.get("calm", 0) <= 0 and rng.randf() < float(mv["confuse"]):
 				var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
 				victim["confuse_next"] = true
 				_ev({"t": "confuse", "unit": leaders.find(victim)})
@@ -274,7 +303,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 		enemy["break_turns"] -= 1
 		if enemy["break_turns"] == 0:
 			enemy["break_amount"] = 0.0
-	if round_no >= scenario["turn_limit"]:
+	if round_no >= turn_limit:
 		result = "lose"
 		log.append("已到第 %d 回合上限 —— 撤退！" % round_no)
 		return log
@@ -288,7 +317,7 @@ func _ambush() -> Array:
 	var log: Array = ["[color=red]埋伏！%s 抢先出手[/color]" % data["name"]]
 	for _a in int(data["actions"]):
 		var mv: Dictionary = data["moves"][0]
-		var d := maxi(1, int(round(data["at"] * float(mv["power"]) * _variance())))
+		var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - float(mods.get("guard", 0.0))))))
 		party_hp = maxi(1, party_hp - d)
 		_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": 0.0, "hp": party_hp})
 		log.append("%s【%s】 我军受到 %d 伤害" % [data["name"], mv["name"], d])
@@ -302,7 +331,7 @@ func _start_round() -> Array:
 			if not u["acted"]:
 				u["idle_rounds"] += 1
 	round_no += 1
-	ap = mini(int(cfg["ap_max"]), ap + int(cfg["ap_per_round"]))
+	ap = mini(ap_max(), ap + int(cfg["ap_per_round"]) + int(mods.get("ap_round", 0)))
 	combo = 0
 	guard_cut = 0.0
 	_ev({"t": "round", "n": round_no, "ap": ap})

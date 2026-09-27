@@ -54,10 +54,11 @@ func battle_finished(won: bool) -> void:
 	var note := ""
 	if not q.is_empty():
 		if won:
-			Quests.resolve(q, save, rng)
+			var gained := Quests.resolve(q, save, rng)
+			note = "　".join(gained.map(func(c): return "获得：" + c["name"]))
 		else:
-			Quests.fail(q, save)
-			note = "任务失败 —— 从任务开头重新出发（已获得的卡和做过的选择保留）"
+			Quests.fail(q, save, rng)
+			note = "任务失败 —— 新的一轮从头出发（卡和选择保留，宝物和险清空，格子重新洗牌）"
 	persist()
 	var m := MapScreen.new()
 	m.toast = note
@@ -89,6 +90,18 @@ func demo(name: String) -> void:
 				if sid != "hill":
 					Quests.resolve(q, save, rng)
 			save.events = {"hill": "zuoci"}
+			show_screen(MapScreen.new())
+		"relics":  # an elite's 宝物 pick, a couple already held
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng, 0)
+			for sid in ["wake", "village", "boar", "raid"]:
+				Quests.move(q, save, sid)
+				Quests.resolve(q, save, rng)
+			save.relics = ["hupi", "yuxi"]
+			save.danger = 1
+			save.offer = ["zhangu", "jiunang", "huangjinfu"]
+			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
