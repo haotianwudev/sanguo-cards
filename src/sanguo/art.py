@@ -108,69 +108,91 @@ def _status(cfg: dict, key: str) -> str:
     return "🟡 占位" if cfg[key].get("placeholder") else "✅ 正式"
 
 
-def write_needs(db: CardDB, pics: Path = PICS) -> None:
+def write_needs(pics: Path = PICS) -> None:
+    """ART-NEEDS.md from the Godot game data: what each chapter shows that still has no (final) art."""
+    NL = chr(10)
     cfg = json.loads((pics / "art.json").read_text("utf-8"))["portraits"]
-    people: dict[str, list] = {}
-    for c in db.cards.values():
-        if not c.soldier:
-            people.setdefault(c.person, []).append(c)
+    data = ROOT / "godot" / "data"
+    cards = json.loads((data / "cards.json").read_text("utf-8"))
+    story = json.loads((data / "story.json").read_text("utf-8"))
+    names = {cid: c["name"] for cid, c in cards["cards"].items()}
 
-    def row(key: str, what: str) -> str:
-        return f"| {_status(cfg, key)} | `{key}` | {what} |"
+    def key_of(cid: str) -> str:
+        return cards["cards"][cid].get("person", cid.split("_")[0] if cid.endswith("_card") else cid)
 
-    def cards_of(p: str) -> str:
-        return " / ".join(f"{c.name}（{c.rarity}·{db.troops[c.troop].name}）" for c in people[p])
+    def status(key: str) -> str:
+        if key not in cfg:
+            return "⬜ 缺"
+        return "🟡 占位" if cfg[key].get("placeholder") else "✅ 正式"
 
-    story = sorted({c.person for c in db.cards.values() if not c.in_pool and not c.soldier})
+    seen: set[str] = set()
+
+    def rows(items: list[tuple[str, str]]) -> list[str]:
+        out = []
+        for key, what in items:
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(f"| {status(key)} | `{key}` | {what} |")
+        return out or ["| ✅ | — | 都有了 |"]
+
+    def chapter(q: dict) -> list[str]:
+        people: list[tuple[str, str]] = []
+        enemies: list[tuple[str, str]] = []
+        loot: list[tuple[str, str]] = []
+        for s in q["squares"].values():
+            for pk in s.get("portraits", []):
+                people.append((pk, "剧情立绘"))
+            for c in s.get("cards", []):
+                loot.append((key_of(c), names[c]))
+            for o in s.get("choose", []):
+                if o.get("card"):
+                    loot.append((key_of(o["card"]), names[o["card"]]))
+            fights = [s["battle"]] if s.get("battle") else []
+            for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in q.get("event_pool", [])]:
+                if not ev:
+                    continue
+                for pk in ev.get("portraits", []):
+                    people.append((pk, f"事件「{ev['title']}」"))
+                for o in ev["options"]:
+                    fights += [e["battle"] for e in o.get("effects", []) if "battle" in e]
+            for f in fights:
+                e = cards["enemies"][cards["scenarios"][f]["enemy"]]
+                enemies.append((e.get("portrait") or cards["scenarios"][f]["enemy"], e["name"]))
+                if e.get("card"):
+                    loot.append((key_of(e["card"]), f"{names[e['card']]}（{e['name']}的卡）"))
+        for c in q.get("soldier_pool", []) + q.get("recruit_pool", []):
+            loot.append((key_of(c), names[c]))
+        return (["", f"## {q['title']}", "", "| 状态 | key | 用在 |", "|---|---|---|"]
+                + rows([("lord", "主公 / 穿越者")] + people)
+                + ["", "敌人（战斗界面上方；和它的卡共用一张图）", "", "| 状态 | key | 敌人 |", "|---|---|---|"] + rows(enemies)
+                + ["", "能拿到的卡", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(loot))
+
     out = [
         "# 美术需求",
         "",
-        "> 本文件由 `sanguo-art` 根据 `pics/art.json` 自动生成，别手改——改 `art.json` 然后重新运行。",
+        "> 本文件由 `sanguo-art` 根据游戏数据（godot/data）和 `pics/art.json` 自动生成，别手改。",
+        "> 卡框、地图、宝物图标等非立绘需求见 `CARD-DESIGN.md`。",
         "",
         "## 怎么换图",
         "",
-        "1. 把原图放进 `pics/source/` 对应的子文件夹（generals 武将 / soldiers 兵卡 / frames 卡框），文件名用 key（如 `huanggai.jpg`）。",
-        "2. 在 `pics/art.json` 的 `portraits` 里改（或加）一行：",
-        '   `"<key>": {"src": "source/generals/<key>.jpg", "face": [x, y], "head": h}`',
-        '   - 带标题字的兵卡图：加 `"prep": {"from": "source/soldiers/<key>.jpg", "cut_top": 0.15, "figure": 0.7}`，`src` 写 `processed/<key>_card.jpg`',
-        "   - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（半身像约 0.2，全身像约 0.07–0.12）",
-        '   - 换掉占位图时，把 `"placeholder": true` 删掉',
-        "3. 运行 `sanguo-art`：自动缩图、更新游戏里的头像、重新生成本文件和 `SOURCES.md`。",
+        "1. 把原图放进 `pics/source/` 对应的子文件夹（generals 武将 / soldiers 兵卡 / map 地图），文件名用 key（如 `langlijiao.jpg`）。",
+        "2. 在 `pics/art.json` 的 `portraits` 里加一行：`\"<key>\": {\"src\": \"source/generals/<key>.jpg\", \"face\": [x, y], \"head\": h}`",
+        "   - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（越大人物越小）",
+        "   - 换掉占位图时，把 `\"placeholder\": true` 删掉",
+        "3. 运行 `sanguo-art`。",
         "",
-        "## 图片规格",
+        "规格：竖版 5:7（≥ 1000×1400），人物居中、脸在上 1/3，半身到全身，背景简单。",
         "",
-        "- 竖版立绘，约 3:4，最短边 ≥ 600px。界面里的头像框都是竖的：卡牌和队长卡取胸像，剧情取半身，卡册显示整张。",
-        "- 脸要清楚：终端里头像只有约 15×10 个色块，半身像、背景简单的图效果最好。",
-        "- 同一人的不同版本（孙策·少年 / 孙策·中年）默认共用一个 key；想分开就用卡牌 id 做 key（如 `sunce_zhong`）。",
-        "- 占位图的来源和协议见 `SOURCES.md`。",
-        "",
-        "状态：✅ 正式美术　🟡 占位图（清代绣像等公有领域图，可用但风格不统一）　⬜ 缺",
-        "",
-        "## 剧情人物",
-        "",
-        "| 状态 | key | 卡牌 |",
-        "|---|---|---|",
-        row("lord", "**主公 / 穿越者**（玩家自己，现代人穿越到东汉末年）"),
-        *[row(p, cards_of(p)) for p in story],
-        "",
-        "## 敌人（战斗界面上方）",
-        "",
-        "| 状态 | key | 敌人 |",
-        "|---|---|---|",
-        *[row(e.portrait or e.id, e.name) for e in db.enemies.values()],
-        "",
-        "## 兵种（兵卡和没有立绘时的占位）",
-        "",
-        "| 状态 | key | 兵种 |",
-        "|---|---|---|",
-        *[row(f"troop_{t.id}", t.name) for t in db.troops.values() if t.id != "lord"],
+        "状态：✅ 正式美术　🟡 占位图（清代绣像等公有领域图）　⬜ 缺",
     ]
-    for rarity in ("SSR", "SR", "R"):
-        ps = [p for p, cs in people.items() if p not in story and max(c.rarity for c in cs) == rarity
-              and all(c.rarity in ("R", "SR", "SSR") for c in cs)]
-        ps = [p for p in ps if max(("R", "SR", "SSR").index(c.rarity) for c in people[p]) == ("R", "SR", "SSR").index(rarity)]
-        out += ["", f"## {rarity}", "", "| 状态 | key | 卡牌 |", "|---|---|---|", *[row(p, cards_of(p)) for p in sorted(ps)]]
-    (pics / "ART-NEEDS.md").write_text("\n".join(out) + "\n", "utf-8")
+    for q in story["quests"]:
+        out += chapter(q)
+    rest = [(key_of(cid), c["name"] + f"（{c['rarity']}）") for cid, c in cards["cards"].items()
+            if c["rarity"] != "N" and key_of(cid) not in seen]
+    rest.sort(key=lambda r: {"SSR": 0, "SR": 1, "R": 2}.get(r[1][-3:-1].strip("（"), 3))
+    out += ["", "## 其余武将（招募池，按需再画）", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(rest)
+    (pics / "ART-NEEDS.md").write_text(NL.join(out) + NL, "utf-8")
 
 
 def write_sources(pics: Path = PICS) -> None:
@@ -193,8 +215,7 @@ def main(argv: list[str] | None = None) -> None:
     maps = build_maps()
     if maps:
         print(f"built {len(maps)} map backgrounds → {MAP_OUT}")
-    db = load_db()
-    write_needs(db)
+    write_needs()
     write_sources()
     print(f"built {len(built)} portraits → {OUT}")
     print(f"updated {PICS / 'ART-NEEDS.md'} and {PICS / 'SOURCES.md'}")

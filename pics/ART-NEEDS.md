@@ -1,99 +1,106 @@
 # 美术需求
 
-> 本文件由 `sanguo-art` 根据 `pics/art.json` 自动生成，别手改——改 `art.json` 然后重新运行。
+> 本文件由 `sanguo-art` 根据游戏数据（godot/data）和 `pics/art.json` 自动生成，别手改。
+> 卡框、地图、宝物图标等非立绘需求见 `CARD-DESIGN.md`。
 
 ## 怎么换图
 
-1. 把原图放进 `pics/source/` 对应的子文件夹（generals 武将 / soldiers 兵卡 / frames 卡框），文件名用 key（如 `huanggai.jpg`）。
-2. 在 `pics/art.json` 的 `portraits` 里改（或加）一行：
-   `"<key>": {"src": "source/generals/<key>.jpg", "face": [x, y], "head": h}`
-   - 带标题字的兵卡图：加 `"prep": {"from": "source/soldiers/<key>.jpg", "cut_top": 0.15, "figure": 0.7}`，`src` 写 `processed/<key>_card.jpg`
-   - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（半身像约 0.2，全身像约 0.07–0.12）
+1. 把原图放进 `pics/source/` 对应的子文件夹（generals 武将 / soldiers 兵卡 / map 地图），文件名用 key（如 `langlijiao.jpg`）。
+2. 在 `pics/art.json` 的 `portraits` 里加一行：`"<key>": {"src": "source/generals/<key>.jpg", "face": [x, y], "head": h}`
+   - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（越大人物越小）
    - 换掉占位图时，把 `"placeholder": true` 删掉
-3. 运行 `sanguo-art`：自动缩图、更新游戏里的头像、重新生成本文件和 `SOURCES.md`。
+3. 运行 `sanguo-art`。
 
-## 图片规格
+规格：竖版 5:7（≥ 1000×1400），人物居中、脸在上 1/3，半身到全身，背景简单。
 
-- 竖版立绘，约 3:4，最短边 ≥ 600px。界面里的头像框都是竖的：卡牌和队长卡取胸像，剧情取半身，卡册显示整张。
-- 脸要清楚：终端里头像只有约 15×10 个色块，半身像、背景简单的图效果最好。
-- 同一人的不同版本（孙策·少年 / 孙策·中年）默认共用一个 key；想分开就用卡牌 id 做 key（如 `sunce_zhong`）。
-- 占位图的来源和协议见 `SOURCES.md`。
+状态：✅ 正式美术　🟡 占位图（清代绣像等公有领域图）　⬜ 缺
 
-状态：✅ 正式美术　🟡 占位图（清代绣像等公有领域图，可用但风格不统一）　⬜ 缺
+## 第一章 · 富春
 
-## 剧情人物
-
-| 状态 | key | 卡牌 |
+| 状态 | key | 用在 |
 |---|---|---|
-| ✅ 正式 | `lord` | **主公 / 穿越者**（玩家自己，现代人穿越到东汉末年） |
-| 🟡 占位 | `huanggai` | 黄盖（SR·刀兵） |
-| ✅ 正式 | `sunce` | 孙策·少年（SR·骑兵） / 孙策·中年（SSR·骑兵） |
-| ✅ 正式 | `wuguotai` | 吴国太（SR·后勤） |
-| ✅ 正式 | `zhouyu` | 周瑜·少年（SR·谋士） / 周瑜·赤壁（SSR·谋士） |
+| ✅ 正式 | `lord` | 主公 / 穿越者 |
+| ⬜ 缺 | `zuoci` | 事件「独眼道人」 |
+| ✅ 正式 | `wuguotai` | 剧情立绘 |
+| ✅ 正式 | `sunce` | 剧情立绘 |
+| ✅ 正式 | `zhouyu` | 剧情立绘 |
 
-## 敌人（战斗界面上方）
+敌人（战斗界面上方；和它的卡共用一张图）
 
 | 状态 | key | 敌人 |
 |---|---|---|
-| ⬜ 缺 | `shanzei_scout` | 山贼斥候 |
-| ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋 |
+| ⬜ 缺 | `shuizei_bing` | 水贼喽啰 |
+| ⬜ 缺 | `baie_hu` | 吊睛白额虎 |
+| ⬜ 缺 | `boar` | 野猪 |
+| ⬜ 缺 | `langlijiao` | 水贼头目·浪里蛟 |
+| ⬜ 缺 | `yaodao` | 黄巾妖道 |
+| ⬜ 缺 | `heyi` | 黄巾渠帅·水贼大寨 |
+
+能拿到的卡
+
+| 状态 | key | 卡 |
+|---|---|---|
+| ⬜ 缺 | `yezhu_bing` | 野猪兵（野猪的卡） |
+| ✅ 正式 | `danyang` | 丹阳兵 |
+| ⬜ 缺 | `huangjin_nanxia` | 南下黄巾 |
+| ✅ 正式 | `changsha` | 长沙刀兵 |
+
+## 第二章 · 讨伐董卓
+
+| 状态 | key | 用在 |
+|---|---|---|
+| ✅ 正式 | `sunjian` | 剧情立绘 |
+| 🟡 占位 | `liubei` | 剧情立绘 |
+| 🟡 占位 | `guanyu` | 剧情立绘 |
+| ⬜ 缺 | `zhangfei` | 剧情立绘 |
+
+敌人（战斗界面上方；和它的卡共用一张图）
+
+| 状态 | key | 敌人 |
+|---|---|---|
+| ⬜ 缺 | `xurong` | 徐荣 |
 | ⬜ 缺 | `huaxiong` | 华雄 |
-| ⬜ 缺 | `shanzeituan` | 山贼团 |
-| 🟡 占位 | `zhangjiao` | 黄巾军·张角 |
 | 🟡 占位 | `lvbu` | 吕布 |
 
-## 兵种（兵卡和没有立绘时的占位）
+能拿到的卡
 
-| 状态 | key | 兵种 |
+| 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `troop_cavalry` | 骑兵 |
-| ⬜ 缺 | `troop_spear` | 枪兵 |
-| ⬜ 缺 | `troop_archer` | 弓兵 |
-| ⬜ 缺 | `troop_infantry` | 刀兵 |
-| ⬜ 缺 | `troop_strategist` | 谋士 |
-| ⬜ 缺 | `troop_logistics` | 后勤 |
+| ✅ | — | 都有了 |
 
-## SSR
+## 其余武将（招募池，按需再画）
 
-| 状态 | key | 卡牌 |
+| 状态 | key | 卡 |
 |---|---|---|
-| 🟡 占位 | `dianwei` | 典韦（SSR·刀兵） |
-| 🟡 占位 | `diaochan` | 貂蝉（SSR·后勤） |
-| 🟡 占位 | `guanyu` | 关羽（SSR·骑兵） |
-| ⬜ 缺 | `luxun` | 陆逊（SSR·谋士） |
-| ✅ 正式 | `sunjian` | 孙坚（SSR·刀兵） |
-| 🟡 占位 | `sunshangxiang` | 孙尚香（SSR·弓兵） |
-| 🟡 占位 | `zhaoyun` | 赵云（SSR·枪兵） |
-| 🟡 占位 | `zhugeliang` | 诸葛亮（SSR·谋士） |
-
-## SR
-
-| 状态 | key | 卡牌 |
-|---|---|---|
-| ⬜ 缺 | `daqiao` | 大乔（SR·后勤） |
-| 🟡 占位 | `ganning` | 甘宁（SR·弓兵） |
-| ⬜ 缺 | `huangyueying` | 黄月英（SR·后勤） |
-| 🟡 占位 | `huangzhong` | 黄忠（SR·弓兵） |
-| 🟡 占位 | `liubei` | 刘备（SR·刀兵） |
-| 🟡 占位 | `lvmeng` | 吕蒙（SR·刀兵） |
-| 🟡 占位 | `machao` | 马超（SR·骑兵） |
-| 🟡 占位 | `pangtong` | 庞统（SR·谋士） |
-| 🟡 占位 | `taishici` | 太史慈（SR·弓兵） |
-| 🟡 占位 | `xuchu` | 许褚（SR·刀兵） |
-| 🟡 占位 | `xuhuang` | 徐晃（SR·枪兵） |
-| ⬜ 缺 | `zhangfei` | 张飞（SR·枪兵） |
-| 🟡 占位 | `zhangliao` | 张辽（SR·骑兵） |
-
-## R
-
-| 状态 | key | 卡牌 |
-|---|---|---|
-| ⬜ 缺 | `jiangqin` | 蒋钦（R·弓兵） |
-| 🟡 占位 | `jianyong` | 简雍（R·谋士） |
-| 🟡 占位 | `liaohua` | 廖化（R·刀兵） |
-| ⬜ 缺 | `lidian` | 李典（R·枪兵） |
-| 🟡 占位 | `madai` | 马岱（R·骑兵） |
-| 🟡 占位 | `mizhu` | 糜竺（R·后勤） |
-| ⬜ 缺 | `sunqian` | 孙乾（R·后勤） |
-| ⬜ 缺 | `wangping` | 王平（R·枪兵） |
-| ⬜ 缺 | `zhoucang` | 周仓（R·刀兵） |
+| 🟡 占位 | `machao` | 马超（SR） |
+| 🟡 占位 | `zhangliao` | 张辽（SR） |
+| 🟡 占位 | `xuhuang` | 徐晃（SR） |
+| 🟡 占位 | `huangzhong` | 黄忠（SR） |
+| 🟡 占位 | `ganning` | 甘宁（SR） |
+| 🟡 占位 | `xuchu` | 许褚（SR） |
+| 🟡 占位 | `pangtong` | 庞统（SR） |
+| ⬜ 缺 | `daqiao` | 大乔（SR） |
+| ⬜ 缺 | `huangyueying` | 黄月英（SR） |
+| ⬜ 缺 | `zhangyan` | 张燕（SR） |
+| ⬜ 缺 | `yuji` | 于吉（SR） |
+| 🟡 占位 | `zhaoyun` | 赵云（SSR） |
+| 🟡 占位 | `sunshangxiang` | 孙尚香（SSR） |
+| 🟡 占位 | `dianwei` | 典韦（SSR） |
+| 🟡 占位 | `zhugeliang` | 诸葛亮（SSR） |
+| 🟡 占位 | `huanggai` | 黄盖（SR） |
+| 🟡 占位 | `lvmeng` | 吕蒙（SR） |
+| 🟡 占位 | `taishici` | 太史慈（SR） |
+| ⬜ 缺 | `luxun` | 陆逊（SSR） |
+| 🟡 占位 | `diaochan` | 貂蝉（SSR） |
+| 🟡 占位 | `zhangjiao` | 张角（SSR） |
+| ⬜ 缺 | `zhoucang` | 周仓（R） |
+| 🟡 占位 | `liaohua` | 廖化（R） |
+| 🟡 占位 | `madai` | 马岱（R） |
+| ⬜ 缺 | `wangping` | 王平（R） |
+| ⬜ 缺 | `lidian` | 李典（R） |
+| ⬜ 缺 | `jiangqin` | 蒋钦（R） |
+| 🟡 占位 | `jianyong` | 简雍（R） |
+| 🟡 占位 | `mizhu` | 糜竺（R） |
+| ⬜ 缺 | `sunqian` | 孙乾（R） |
+| ⬜ 缺 | `guanhai` | 管亥（R） |
+| ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
