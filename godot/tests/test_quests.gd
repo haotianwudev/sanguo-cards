@@ -112,6 +112,55 @@ func test_every_event_option_resolves_or_leads_somewhere() -> void:
 					check(s.resolved, "%s pick" % eid)
 
 
+func test_story_cards_do_not_stack() -> void:
+	for pick in 2:
+		var q := quest(0)
+		var s := SaveData.create()
+		Quests.begin(q, s)
+		Quests.resolve(q, s, rng(0), 0)
+		walk_to(q, s, ["wake", "village", "boar", "raid"])
+		Quests.move(q, s, "plan")
+		Quests.resolve(q, s, rng(0), pick)
+		walk_to(q, s, [["sc_gate", "sc_road", "sc_hall"], ["zy_lure", "zy_back", "zy_hall"]][pick] + ["rescue"])
+		check(s.copies("sunce") == 1 and s.copies("zhouyu") == 1, "rescue doesn't give a second copy")
+
+
+func event_on_road(eid: String, option: int, seed_value := 0) -> SaveData:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": eid}
+	Quests.choose_event(q, s, rng(seed_value), option)
+	return s
+
+
+func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	s.take("sunce")
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "zuoci"}
+	s.carry_extra = {"sunce": {"xiaobawang": 2}}
+	var labels: Array = GameData.get_db().events["zuoci"]["options"].map(func(o): return o["label"])
+	Quests.choose_event(q, s, rng(0), labels.find("求点化"))
+	check_eq(s.offer, ["sunce"])
+	Quests.resolve(q, s, rng(0), 0)
+	check(s.tier("sunce") == 1 and s.resolved and s.offer_kind == "", "升银")
+	var s2 := SaveData.create()
+	Quests.begin(q, s2)
+	s2.square = "road"
+	s2.resolved = false
+	s2.events = {"road": "zuoci"}
+	s2.carry_extra = {"sunce": {"xiaobawang": 2}}
+	s2.damage = 100
+	Quests.choose_event(q, s2, rng(0), labels.find("求静心"))
+	check(s2.carry_extra.is_empty() and s2.damage == 100, "skills reset, HP untouched")
+
+
 func test_poison_costs_a_third_of_the_hp() -> void:
 	var q := quest(0)
 	var s := SaveData.create()

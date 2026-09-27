@@ -120,16 +120,17 @@ func soldier_cards() -> Array:
 	return cards.values().filter(func(c): return c["soldier"])
 
 
-func build_fighter(card_id: String) -> Dictionary:
-	## 兵种基础 + 武将自身能力. Skills = the troop's skill + the general's own.
+func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
+	## 兵种基础 + 武将自身能力 (× mult: the 铜/银/金 tier). Skills = the troop's skill + the general's own.
 	var c: Dictionary = cards[card_id]
 	var t: Dictionary = troops[c["troop"]]
 	var sk: Array = t["skills"].duplicate()
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
-	return {"id": card_id, "name": c["name"], "troop": c["troop"], "hp": t["hp"] + c["bonus"].get("hp", 0),
-		"at": t["at"] + c["bonus"].get("at", 0), "skills": sk, "rarity": c["rarity"]}
+	return {"id": card_id, "name": c["name"], "troop": c["troop"],
+		"hp": int(round((t["hp"] + c["bonus"].get("hp", 0)) * mult)),
+		"at": int(round((t["at"] + c["bonus"].get("at", 0)) * mult)), "skills": sk, "rarity": c["rarity"]}
 
 
 func build_lord(lord_name: String) -> Dictionary:

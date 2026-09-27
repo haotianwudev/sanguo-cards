@@ -196,7 +196,7 @@ static func enemy_portrait_key(enemy: Dictionary) -> String:
 
 static func portrait(key: String, aspect: float, heads: float) -> Texture2D:
 	## A crop of the portrait around the face: `aspect` = width/height of the box, `heads` = head-heights tall.
-	if key == "":
+	if key == "" or not _portrait_index().has(key):  # no art yet
 		return null
 	var entry: Dictionary = _portrait_index()[key]
 	var tex: Texture2D = _textures.get(key)

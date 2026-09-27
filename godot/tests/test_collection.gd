@@ -107,3 +107,54 @@ func test_removed_cards_are_dropped_and_save_roundtrips() -> void:
 	var again := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
 	check_eq(again.to_dict(), s.to_dict())
 	check_eq(typeof(again.damage), TYPE_INT)
+
+
+func test_generals_repeat_and_climb_bronze_silver_gold() -> void:
+	var s := SaveData.create()
+	s.take("ganning")
+	check_eq(s.tier("ganning"), 0)
+	var base: int = s.fighter("ganning")["at"]
+	s.take("ganning")
+	check_eq(s.tier("ganning"), 1)
+	check(s.fighter("ganning")["at"] > base, "silver is stronger")
+	s.take("ganning")
+	check_eq(s.tier("ganning"), 1)
+	s.take("ganning")
+	check_eq(s.tier("ganning"), 2)
+	check(s.maxed("ganning"))
+	check_eq(s.owned.count("ganning"), 1)
+
+
+func test_recruit_offers_can_repeat_owned_but_not_gold_generals() -> void:
+	var s := SaveData.create()
+	for c in GameData.get_db().pool("R"):
+		s.owned.append(c["id"])
+		s.dupes[c["id"]] = 4
+	var r := RandomNumberGenerator.new()
+	for seed_value in 20:
+		r.seed = seed_value
+		check(s.recruit_offer(r).all(func(c): return c["rarity"] != "R"), "gold R cards are out of the pool")
+	s.dupes = {}
+	var seen_owned := false
+	for seed_value in 20:
+		r.seed = seed_value
+		seen_owned = seen_owned or s.recruit_offer(r).any(func(c): return s.owned.has(c["id"]))
+	check(seen_owned, "owned generals can come again")
+
+
+func test_upgrade_jumps_to_the_next_tier() -> void:
+	var s := SaveData.create()
+	s.take("lvmeng")
+	s.upgrade("lvmeng")
+	check_eq(s.tier("lvmeng"), 1)
+	s.upgrade("lvmeng")
+	check_eq(s.tier("lvmeng"), 2)
+	check_eq(s.copies("lvmeng"), 4)
+
+
+func test_dupes_survive_a_save_roundtrip() -> void:
+	var s := SaveData.create()
+	s.take("lvmeng")
+	s.take("lvmeng")
+	var back := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
+	check_eq(back.tier("lvmeng"), 1)

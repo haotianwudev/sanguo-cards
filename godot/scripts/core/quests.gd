@@ -119,7 +119,7 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 		var cards: Array
 		if kind == "recruit" and not q["recruit_pool"].is_empty():
 			cards = q["recruit_pool"].map(func(c): return db.cards[c]).filter(
-				func(c): return c["soldier"] or not save.owned.has(c["id"]))
+				func(c): return not save.maxed(c["id"]))
 		elif kind == "recruit":
 			cards = save.recruit_offer(rng)
 		else:
@@ -138,8 +138,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 	match s["type"]:
 		"event":
 			for cid in s["cards"]:
-				gained.append(db.cards[cid])
-				save.grant_card(cid)
+				if db.cards[cid]["soldier"] or not save.has_card(cid):  # story cards don't stack
+					gained.append(db.cards[cid])
+					save.grant_card(cid)
 		"choose":
 			var opt: Dictionary = s["choose"][choice]
 			assert(not opt["locked"], "locked choice")
@@ -147,7 +148,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			if opt["card"] != "":
 				if not save.has_card(opt["card"]):
 					gained.append(db.cards[opt["card"]])
-				save.grant_card(opt["card"])
+					save.grant_card(opt["card"])
 		"treasure", "recruit":
 			if not save.offer.is_empty() and choice >= 0:
 				gained.append(save.take(save.offer[choice]))
@@ -163,10 +164,15 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				if not save.offer.is_empty():
 					return gained  # the victory opened a pick-one: resolved once it's taken
 			if not save.offer.is_empty() and choice >= 0:
-				var got := save.take(save.offer[choice])
-				gained.append(got)
-				save.event_note.append("获得：" + got["name"])
+				var cid: String = save.offer[choice]
+				if save.offer_kind == "upgrade":
+					save.upgrade(cid)
+					save.event_note.append("%s 升为%s卡！" % [db.cards[cid]["name"], db.gacha["tiers"][save.tier(cid)]["name"]])
+				else:
+					gained.append(save.take(cid))
+					save.event_note.append("获得：" + db.cards[cid]["name"])
 			save.offer = []
+			save.offer_kind = ""
 		"recover":
 			reset_carry(save)
 	save.resolved = true
@@ -248,6 +254,19 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			var h := mini(save.damage, int(round(top * float(e["heal"]))))
 			save.damage -= h
 			out["log"].append("体力 +%d" % h)
+		if e.has("refresh"):  # 重置技能: cumulative AP costs and once-per-battle skills, HP untouched
+			save.carry_extra = {}
+			save.carry_uses = {}
+			out["log"].append("技能重置：累积加价清零，限 1 次技能可以再用")
+		if e.has("upgrade"):  # pick one of your generals (not yet 金) to go up a tier
+			var mine: Array = save.owned.filter(func(c): return not save.maxed(c))
+			var ids: Array = []
+			while not mine.is_empty() and ids.size() < int(e.get("n", 3)):
+				ids.append(mine.pop_at(rng.randi_range(0, mine.size() - 1)))
+			save.offer = ids
+			save.offer_kind = "upgrade"
+			if ids.is_empty():
+				out["log"].append("……你还没有能升级的武将。")
 		if e.has("rest"):
 			reset_carry(save)
 			out["log"].append("体力全满，技能次数恢复")
@@ -275,7 +294,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			var o: Dictionary = e["offer"]
 			var ids: Array = []
 			if o.has("from"):
-				var left: Array = o["from"].filter(func(c): return db.cards[c]["soldier"] or not save.has_card(c))
+				var left: Array = o["from"].filter(func(c): return not save.maxed(c))
 				while not left.is_empty() and ids.size() < int(o.get("n", 3)):
 					ids.append(left.pop_at(rng.randi_range(0, left.size() - 1)))
 			elif o.has("generals"):

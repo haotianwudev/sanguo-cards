@@ -7,6 +7,7 @@ extends Control
 
 signal pressed
 
+var tier := 0  # generals: 0 铜 / 1 银 / 2 金 (picks the frame)
 var fighter: Dictionary
 var leader: Dictionary = {}  # when shown as a party leader: uses leader AT/HP and troop size
 var count := 0  # soldier copies (0 = hide)
@@ -19,9 +20,15 @@ var selected := false
 static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> CardView:
 	var db := GameData.get_db()
 	var v := CardView.new()
-	v.fighter = db.build_lord(opts.get("lord_name", "主公")) if card_id == "lord" else db.build_fighter(card_id)
+	if card_id == "lord":
+		v.fighter = db.build_lord(opts.get("lord_name", "主公"))
+	elif Game.save != null and Game.save.has_card(card_id):
+		v.fighter = Game.save.fighter(card_id)  # at its 铜/银/金 tier
+	else:
+		v.fighter = db.build_fighter(card_id)
 	v.leader = opts.get("leader", {})
 	v.count = opts.get("count", 0)
+	v.tier = opts.get("tier", Game.save.tier(card_id) if Game.save != null and card_id != "lord" else 0)
 	v.note = opts.get("note", "")
 	v.show_skills = opts.get("skills", true)
 	v.custom_minimum_size = size
@@ -54,7 +61,12 @@ func set_state(is_dimmed: bool, is_selected: bool) -> void:
 
 
 func _rarity_key() -> String:
-	return "lord" if fighter["rarity"] == null else str(fighter["rarity"])
+	## generals are framed by tier (铜/银/金 by copies owned), soldiers and the lord by rarity
+	if fighter["rarity"] == null:
+		return "lord"
+	if fighter["rarity"] != "N" and fighter["id"] != "lord":
+		return "tier%d" % tier
+	return str(fighter["rarity"])
 
 
 func _add(node: Control, pos: Vector2, sz: Vector2) -> Control:

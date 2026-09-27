@@ -1,5 +1,7 @@
 {
-  "gacha": {"rates": {"R": 70, "SR": 25, "SSR": 5}, "offer_size": 3, "party_slots": 4, "soldier_decay": 0.6, "chest_base": 0.5, "chest_cards": 2, "chest_cards_boss": 3},
+  "gacha": {"rates": {"R": 70, "SR": 25, "SSR": 5}, "offer_size": 3, "party_slots": 4, "soldier_decay": 0.6, "chest_base": 0.5, "chest_cards": 2, "chest_cards_boss": 3,
+    "_tiers": "generals can be drawn again: copies needed for each tier (铜/银/金) and the multiplier on the general's own stats",
+    "tiers": [{"name": "铜", "copies": 1, "mult": 1.0}, {"name": "银", "copies": 2, "mult": 1.25}, {"name": "金", "copies": 4, "mult": 1.6}]},
   "battle": {"ap_start": 2, "ap_per_round": 2, "ap_max": 6, "combo_bonus": 0.1, "variance": 0.2, "boost_mult": 1.5, "boost_idle_rounds": 3, "boost_chance": 0.5, "leader_mult": 5, "interrupt_chance": 0.3, "interrupt_power": 2.0, "defend_cuts": [0.3, 0.5, 0.7, 0.9], "enemy_hp_per_extra_leader": 0.083},
   "troops": {
     "lord": {"name": "主公", "short": "主", "hp": 400, "at": 80, "skills": ["tuji", "haoling"]},

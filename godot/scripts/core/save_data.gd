@@ -10,6 +10,7 @@ extends RefCounted
 const SAVE_PATH := "user://save.json"
 
 var owned: Array = []  # general card ids, no duplicates
+var dupes: Dictionary = {}  # general card id -> copies owned when more than one (铜 1 / 银 2 / 金 4)
 var soldiers: Dictionary = {}  # soldier card id -> copies
 var party: Array = []  # leader card ids; the lord is implicit and always first
 var cleared: Array = []  # scenario ids won at least once
@@ -26,14 +27,15 @@ var offer: Array = []  # cards shown on the current recruit/treasure square
 var events: Dictionary = {}  # ？ square id -> event id rolled for it this run
 var event_battle: Dictionary = {}  # a fight an event started: {battle, ambush, win: [effects on victory]}
 var event_note: Array = []  # what the last event did, shown on its square
+var offer_kind := ""  # "upgrade": the offer lists your own generals, the pick goes up a tier
 var quests_cleared: Array = []
 var lord_name := "主公"
 var party_slots := 4  # including the lord
 var theme := "light"
 
-const FIELDS := ["owned", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
+const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note"]
+	"events", "event_battle", "event_note", "offer_kind"]
 
 
 static func create() -> SaveData:
@@ -59,6 +61,8 @@ static func from_dict(d: Dictionary) -> SaveData:
 	s.party_slots = int(s.party_slots)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
+	for k in s.dupes:
+		s.dupes[k] = int(s.dupes[k])
 	for table in [s.carry_extra, s.carry_uses]:
 		for cid in table:
 			for sk in table[cid]:
@@ -106,13 +110,46 @@ func copies(card_id: String) -> int:
 	_sync()
 	if _db().cards[card_id]["soldier"]:
 		return soldiers.get(card_id, 0)
-	return 1 if owned.has(card_id) else 0
+	return dupes.get(card_id, 1) if owned.has(card_id) else 0
+
+
+func tier(card_id: String, n := -1) -> int:
+	## 0 铜 / 1 银 / 2 金 for a general with n copies (default: the copies owned).
+	if n < 0:
+		n = copies(card_id)
+	var t := 0
+	var tiers: Array = _db().gacha["tiers"]
+	for i in tiers.size():
+		if n >= int(tiers[i]["copies"]):
+			t = i
+	return t
+
+
+func maxed(card_id: String) -> bool:
+	var tiers: Array = _db().gacha["tiers"]
+	return not _db().cards[card_id]["soldier"] and copies(card_id) >= int(tiers[-1]["copies"])
+
+
+func fighter(card_id: String) -> Dictionary:
+	## The card's fighter at the tier it's owned at.
+	var db := _db()
+	if db.cards[card_id]["soldier"]:
+		return db.build_fighter(card_id)
+	return db.build_fighter(card_id, float(db.gacha["tiers"][tier(card_id)]["mult"]))
+
+
+func upgrade(card_id: String) -> void:
+	## 升级: straight to the next tier's copy count.
+	var tiers: Array = _db().gacha["tiers"]
+	var nxt := mini(tier(card_id) + 1, tiers.size() - 1)
+	dupes[card_id] = maxi(copies(card_id), int(tiers[nxt]["copies"]))
 
 
 # ---- getting cards -------------------------------------------------------------
 
 func recruit_offer(rng: RandomNumberGenerator, n: int = 0) -> Array:
-	## A few unowned generals (rarity rolled per card); the player keeps one with take().
+	## A few generals (rarity rolled per card); the player keeps one with take(). Owned ones can come again
+	## (another copy raises their tier) until they're 金.
 	_sync()
 	var db := _db()
 	if n <= 0:
@@ -123,7 +160,7 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0) -> Array:
 		var live: Array = []
 		var pools := {}
 		for r in rates:
-			pools[r] = db.pool(r).filter(func(c): return not owned.has(c["id"]) and not result.has(c))
+			pools[r] = db.pool(r).filter(func(c): return not maxed(c["id"]) and not result.has(c))
 			if not pools[r].is_empty():
 				live.append(r)
 		if live.is_empty():
@@ -138,7 +175,7 @@ func pool_left() -> int:
 	var db := _db()
 	var n := 0
 	for r in db.gacha["rates"]:
-		n += db.pool(r).filter(func(c): return not owned.has(c["id"])).size()
+		n += db.pool(r).filter(func(c): return not maxed(c["id"])).size()
 	return n
 
 
@@ -165,9 +202,8 @@ func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool,
 
 
 func take(card_id: String) -> Dictionary:
-	## Keep the one card picked from a recruit offer (a general) or a chest (a soldier).
+	## Keep the one card picked from a recruit offer (a general: another copy if owned) or a chest (a soldier).
 	var card: Dictionary = _db().cards[card_id]
-	assert(card["soldier"] or not owned.has(card_id), "already own " + card_id)
 	grant_card(card_id)
 	return card
 
@@ -179,6 +215,8 @@ func grant_card(card_id: String) -> void:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):
 		owned.append(card_id)
+	else:
+		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":
 		party.append(card_id)
 
@@ -225,7 +263,7 @@ func troop_members(leader_id: String) -> Array:
 	var weights: Array = []
 	for c in owned:
 		if c != leader_id and db.cards[c]["troop"] == troop:
-			members.append(db.build_fighter(c))
+			members.append(fighter(c))
 			weights.append(1.0)
 	for c in soldiers:
 		if db.cards[c]["troop"] != troop:
@@ -240,7 +278,7 @@ func troop_members(leader_id: String) -> Array:
 
 func leader_for(card_id: String) -> Dictionary:
 	var mw := troop_members(card_id)
-	return _db().build_leader(_db().build_fighter(card_id), mw[0], mw[1])
+	return _db().build_leader(fighter(card_id), mw[0], mw[1])
 
 
 static func leader_power(ld: Dictionary) -> int:

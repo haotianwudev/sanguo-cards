@@ -80,6 +80,26 @@ func demo(name: String) -> void:
 		root.add_child(o)
 		return
 	match name:
+		"event":  # a ？ square: 左慈 on the hill
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng, 0)
+			for sid in ["wake", "village", "hill"]:
+				Quests.move(q, save, sid)
+				if sid != "hill":
+					Quests.resolve(q, save, rng)
+			save.events = {"hill": "zuoci"}
+			show_screen(MapScreen.new())
+		"tiers":  # 铜 / 银 / 金 frames
+			save.owned = ["sunce", "zhouyu", "sunjian"]
+			save.dupes = {"zhouyu": 2, "sunjian": 4}
+			show_screen(TitleScreen.new())
+			var o := PickOverlay.new()
+			o.title = "铜 · 银 · 金"
+			o.card_ids = ["sunce", "zhouyu", "sunjian"]
+			o.captions = ["1 张 · 铜", "2 张 · 银", "4 张 · 金"]
+			o.set_anchors_preset(Control.PRESET_FULL_RECT)
+			root.add_child(o)
 		"title":
 			show_screen(TitleScreen.new())
 		"map", "pick":

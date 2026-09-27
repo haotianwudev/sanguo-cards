@@ -418,10 +418,19 @@ func _show_square(s: Dictionary) -> void:
 				Kit.focus(open)
 			else:
 				text.text = body
+				var many: bool = ev["options"].size() > 3  # two columns so every option fits
+				var grid := GridContainer.new()
+				grid.columns = 2 if many else 1
+				grid.add_theme_constant_override("h_separation", 10)
+				grid.add_theme_constant_override("v_separation", 10)
+				buttons.add_child(grid)
+				if many:
+					buttons.custom_minimum_size.x = 380
 				for i in ev["options"].size():
 					var b := Kit.button(ev["options"][i]["label"], "gold")
+					b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 					b.pressed.connect(_choose_event.bind(i))
-					buttons.add_child(b)
+					grid.add_child(b)
 					if i == 0:
 						Kit.focus(b)
 		"treasure", "recruit":
@@ -500,9 +509,29 @@ func _open_offer(s: Dictionary) -> void:
 	o.title = {"treasure": "宝箱 —— 选一张兵卡", "recruit": "豪杰来投 —— 选一位"}.get(s["type"], "选一张带走")
 	o.card_ids = cards.map(func(c): return c["id"])
 	o.counts = cards.map(func(c): return Game.save.copies(c["id"]) if c["soldier"] else 0)
+	o.captions = cards.map(func(c): return _offer_caption(c))
+	if Game.save.offer_kind == "upgrade":
+		o.title = "仙人点化 —— 选一位武将升级"
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
 	add_child(o)
+
+
+func _offer_caption(c: Dictionary) -> String:
+	## what taking this card does to your collection
+	var save := Game.save
+	var tiers: Array = GameData.get_db().gacha["tiers"]
+	if c["soldier"]:
+		return ""
+	var have := save.copies(c["id"])
+	if save.offer_kind == "upgrade":
+		return "%s → %s" % [tiers[save.tier(c["id"])]["name"], tiers[mini(save.tier(c["id"]) + 1, tiers.size() - 1)]["name"]]
+	if have == 0:
+		return "新武将"
+	var after := save.tier(c["id"], have + 1)
+	if after > save.tier(c["id"]):
+		return "已有 %d 张 · 升%s！" % [have, tiers[after]["name"]]
+	return "已有 %d 张 · 再 %d 张升%s" % [have, int(tiers[after + 1]["copies"]) - have - 1, tiers[after + 1]["name"]]
 
 
 func _complete() -> void:
