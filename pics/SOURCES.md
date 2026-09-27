@@ -36,4 +36,8 @@
 | `zhugeliang` | source/public-domain/zhugeliang.jpg | [链接](https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg) | Public domain | Unknown authorUnknown author |
 | `langlijiao` | source/generals/langlijiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yaodao` | source/generals/yaodao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `heyi` | source/generals/heyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zuoci` | source/generals/zuoci.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `shuizei_bing` | source/soldiers/shuizei_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huangjin_nanxia` | source/soldiers/huangjin_nanxia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |

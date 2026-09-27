@@ -5,7 +5,7 @@
   "lord": {"file": "lord.jpg", "face": [0.5, 0.3], "head": 0.24},
   "sunce": {"file": "sunce.jpg", "face": [0.49, 0.28], "head": 0.13},
   "zhouyu": {"file": "zhouyu.jpg", "face": [0.53, 0.35], "head": 0.11},
-  "wuguotai": {"file": "wuguotai.jpg", "face": [0.51, 0.28], "head": 0.24},
+  "wuguotai": {"file": "wuguotai.jpg", "face": [0.52, 0.28], "head": 0.22},
   "sunjian": {"file": "sunjian.jpg", "face": [0.49, 0.22], "head": 0.17},
   "dianwei": {"file": "dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true},
   "diaochan": {"file": "diaochan.jpg", "face": [0.55, 0.22], "head": 0.07, "placeholder": true},
@@ -31,5 +31,9 @@
   "zhaoyun": {"file": "zhaoyun.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true},
   "zhugeliang": {"file": "zhugeliang.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true},
   "langlijiao": {"file": "langlijiao.jpg", "face": [0.5, 0.23], "head": 0.22},
-  "yaodao": {"file": "yaodao.jpg", "face": [0.5, 0.3], "head": 0.25}
+  "yaodao": {"file": "yaodao.jpg", "face": [0.5, 0.3], "head": 0.25},
+  "heyi": {"file": "heyi.jpg", "face": [0.53, 0.25], "head": 0.22},
+  "zuoci": {"file": "zuoci.jpg", "face": [0.5, 0.32], "head": 0.22},
+  "shuizei_bing": {"file": "shuizei_bing.jpg", "face": [0.5, 0.19], "head": 0.2},
+  "huangjin_nanxia": {"file": "huangjin_nanxia.jpg", "face": [0.52, 0.28], "head": 0.22}
 }
