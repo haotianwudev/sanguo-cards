@@ -21,6 +21,7 @@ class Save:
     story_path: list[str] = field(default_factory=list)  # branches taken, in order
     lord_name: str = "主公"
     party_slots: int = 4  # including the lord
+    theme: str = "light"  # UI theme: "light" | "dark"
 
     @classmethod
     def new(cls, db: CardDB) -> Save:

@@ -13,6 +13,7 @@ from textual.binding import Binding
 from textual.containers import Center, Grid, Horizontal, Vertical, VerticalScroll
 from textual.message import Message
 from textual.screen import ModalScreen, Screen
+from textual.theme import Theme
 from textual.widgets import Button, DataTable, Footer, Input, Label, RichLog, Static
 
 from . import collection as col
@@ -20,7 +21,46 @@ from . import portrait, story
 from .battle import Battle
 from .cards import LORD, RARITIES, CardDB, Fighter, Leader, Skill, build_fighter, load_db, power, power_split
 
-RARITY_COLOR = {"N": "#8b949e", "R": "#61afef", "SR": "#c678dd", "SSR": "#f5c542", None: "#e06c75"}
+# Two palettes. Markup colours in Python read from C (updated in place by set_palette);
+# CSS reads the same names as $sg-* theme variables.
+PALETTES = {
+    "dark": {
+        "bg": "#1b1c21", "panel": "#25262c", "card": "#23242a", "card-hover": "#2c2e36", "card-ssr": "#2a2720",
+        "spent": "#1d1e22", "log-bg": "#202126", "enemy-bg": "#2a1f20", "party-bg": "#1f2622", "sel-bg": "#2e2b22",
+        "border": "#4b5263", "track": "{C.track}", "text": "#d7dae0", "muted": "{C.muted}", "dim": "#5c6370",
+        "gold": "{C.gold}", "red": "{C.red}", "enemy-border": "#be5046", "green": "{C.green}", "amber": "{C.amber}",
+        "blue": "{C.blue}", "purple": "{C.purple}", "gray": "{C.gray}",
+    },
+    "light": {
+        "bg": "#f6f3ea", "panel": "#ebe6d9", "card": "#fffdf7", "card-hover": "#f3eee2", "card-ssr": "#fff6d8",
+        "spent": "#e9e6df", "log-bg": "#fbf9f3", "enemy-bg": "#fbecea", "party-bg": "#edf5ea", "sel-bg": "#fff1c4",
+        "border": "#b9b2a3", "track": "#d6d0c3", "text": "#2b2b2b", "muted": "#5f6368", "dim": "#9a968c",
+        "gold": "#b7791f", "red": "#c0392b", "enemy-border": "#c0392b", "green": "#2e7d32", "amber": "#a8660a",
+        "blue": "#1f6fb2", "purple": "#8e44ad", "gray": "#7a7a7a",
+    },
+}
+
+
+class _Palette:
+    def use(self, name: str) -> None:
+        for k, v in PALETTES[name].items():
+            setattr(self, k.replace("-", "_"), v)
+        RARITY_COLOR.update({"N": self.gray, "R": self.blue, "SR": self.purple, "SSR": self.gold, None: self.red})
+
+
+RARITY_COLOR: dict = {}
+C = _Palette()
+C.use("light")
+
+
+def make_themes() -> list[Theme]:
+    out = []
+    for name, pal in PALETTES.items():
+        out.append(Theme(name=f"sanguo-{name}", dark=name == "dark", primary=pal["blue"], secondary=pal["purple"],
+                         accent=pal["gold"], error=pal["red"], success=pal["green"], warning=pal["amber"],
+                         foreground=pal["text"], background=pal["bg"], surface=pal["card"], panel=pal["panel"],
+                         variables={f"sg-{k}": v for k, v in pal.items()}))
+    return out
 
 
 def skill_desc(sk: Skill) -> str:
@@ -52,18 +92,18 @@ def skill_desc(sk: Skill) -> str:
 def hp_bar(hp: int, max_hp: int, width: int = 26) -> str:
     frac = hp / max_hp if max_hp else 0
     filled = round(width * frac)
-    color = "#98c379" if frac > 0.5 else "#e5c07b" if frac > 0.25 else "#e06c75"
-    return f"[{color}]{'█' * filled}[/][#3b3f4a]{'░' * (width - filled)}[/]"
+    color = C.green if frac > 0.5 else C.amber if frac > 0.25 else C.red
+    return f"[{color}]{'█' * filled}[/][{C.track}]{'░' * (width - filled)}[/]"
 
 
 def card_body(db: CardDB, f: Fighter) -> str:
     troop_p, general_p = power_split(db, f)
     split = f"兵种 {troop_p} + 武将 {general_p}" if general_p else f"兵种 {troop_p}"
     skills = " · ".join(db.skills[s].name for s in f.skills)
-    return (f"[b]{db.troops[f.troop].name}[/]  战力 [b #f5c542]{power(f)}[/]\n"
+    return (f"[b]{db.troops[f.troop].name}[/]  战力 [b {C.gold}]{power(f)}[/]\n"
             f"[dim]{split}[/]\n"
             f"体力 {f.hp}  攻击 {f.at}\n"
-            f"[#abb2bf]{skills}[/]")
+            f"[{C.muted}]{skills}[/]")
 
 
 class Portrait(Static):
@@ -99,9 +139,13 @@ class CardView(Vertical):
 
     def compose(self) -> ComposeResult:
         key = portrait.key_for(self.db, self.f.id) if self.show_portrait else None
+        body = Static(card_body(self.db, self.f) + (f"\n{self.note}" if self.note else ""), classes="card-body")
         if key:
-            yield Portrait(key, heads=2.6, classes="card-portrait")
-        yield Static(card_body(self.db, self.f) + (f"\n{self.note}" if self.note else ""))
+            with Horizontal(classes="card-row"):
+                yield Portrait(key, heads=2.6, classes="card-portrait")
+                yield body
+        else:
+            yield body
 
     def on_click(self) -> None:
         self.post_message(self.Clicked(self.card_id))
@@ -121,7 +165,7 @@ def card_table(db: CardDB, save: col.Save, table: DataTable, troop: str | None =
 
 def leader_note(ld: Leader) -> str:
     backing = f"部队 {len(ld.members) + 1} 人 · " if ld.members else ""
-    return f"[#e5c07b]{backing}队长 攻击{ld.at} 体力{ld.hp}[/]"
+    return f"[{C.amber}]{backing}队长 攻击{ld.at} 体力{ld.hp}[/]"
 
 
 # ---- main menu ---------------------------------------------------------------
@@ -130,7 +174,15 @@ TITLE_ART = "[b]三　国　卡　牌[/]\n[dim]穿越江东 · 抽卡组军[/]"
 
 
 class MenuScreen(Screen):
-    BINDINGS = [Binding(str(i), f"go({i})", show=False) for i in range(1, 7)] + [Binding("q", "app.quit", "退出")]
+    BINDINGS = [Binding(str(i), f"go({i})", show=False) for i in range(1, 7)] + [
+        Binding("t", "toggle_theme", "亮/暗主题"), Binding("q", "app.quit", "退出")]
+
+    def action_toggle_theme(self) -> None:
+        app: SanguoApp = self.app  # type: ignore[assignment]
+        app.save.theme = "dark" if app.save.theme == "light" else "light"
+        app.apply_theme(app.save.theme)
+        app.persist()
+        self.refresh_status()
 
     def compose(self) -> ComposeResult:
         with Center(id="menu-wrap"):
@@ -216,7 +268,7 @@ class StoryScreen(Screen):
         kind = story.kind(step)
         lord = escape(app.save.lord_name)
         if kind == "text":
-            text = "\n\n".join(escape(line).replace("{lord}", f"[b #e06c75]{lord}[/]") for line in step["text"])
+            text = "\n\n".join(escape(line).replace("{lord}", f"[b {C.red}]{lord}[/]") for line in step["text"])
             keys = [k for k in step.get("portraits", []) if k in portrait._index()]
             if keys:
                 row = Horizontal(classes="story-row")
@@ -325,7 +377,7 @@ class GachaScreen(Screen):
             self.notify("卡池里的武将已经全部招募！", severity="warning")
             return
         for c in sorted(cards, key=lambda c: RARITIES.index(c.rarity), reverse=True):
-            grid.mount(CardView(app.db, build_fighter(app.db, c.id), note="[b #f5c542]✦ NEW[/]"))
+            grid.mount(CardView(app.db, build_fighter(app.db, c.id), note=f"[b {C.gold}]✦ NEW[/]"))
         best = max(cards, key=lambda c: RARITIES.index(c.rarity))
         if best.rarity == "SSR":
             self.notify(f"✦✦✦ SSR {best.name}！", title="招募")
@@ -404,7 +456,7 @@ class PartyScreen(Screen):
         for _ in range(app.save.party_slots - len(party)):
             slots.mount(Static("\n\n空位", classes="empty-slot"))
         self.query_one("#party-power", Static).update(
-            f"全军体力 [b #98c379]{sum(ld.hp for ld in party)}[/]　队长攻击合计 [b #f5c542]{sum(ld.at for ld in party)}[/]"
+            f"全军体力 [b {C.green}]{sum(ld.hp for ld in party)}[/]　队长攻击合计 [b {C.gold}]{sum(ld.at for ld in party)}[/]"
             "　[dim]同兵种的其他卡会自动编入该队长的部队，加成队长[/]")
         table = self.query_one("#cards", DataTable)
         row = table.cursor_row
@@ -465,13 +517,15 @@ class LeaderView(Vertical):
 
     def compose(self) -> ComposeResult:
         key = portrait.key_for(self.app.db, self.card_id)  # type: ignore[attr-defined]
-        if key:
-            yield Portrait(key, heads=2.0, classes="leader-portrait")
-        else:
-            yield Static(self.placeholder, classes="leader-portrait no-portrait")
-        yield Static(classes="leader-info")
-        for sid in self.skill_ids:
-            yield Button("", name=f"{self.idx}:{sid}", classes="skill")
+        with Horizontal(classes="leader-row"):
+            if key:
+                yield Portrait(key, heads=2.6, classes="leader-portrait")
+            else:
+                yield Static(self.placeholder, classes="leader-portrait no-portrait")
+            with Vertical(classes="leader-side"):
+                yield Static(classes="leader-info")
+                for sid in self.skill_ids:
+                    yield Button("", name=f"{self.idx}:{sid}", classes="skill")
 
 
 class BattleScreen(Screen[bool]):
@@ -496,7 +550,7 @@ class BattleScreen(Screen[bool]):
         with Horizontal(id="leaders"):
             for i, u in enumerate(self.b.leaders):
                 troop = app.db.troops[u.leader.card.troop]
-                yield LeaderView(i, u.leader.card.skills, u.leader.card.id, f"\n〔{troop.name}〕",
+                yield LeaderView(i, u.leader.card.skills, u.leader.card.id, f"\n\n\n〔{troop.name}〕",
                                  classes="leader")
         yield Footer()
 
@@ -520,37 +574,37 @@ class BattleScreen(Screen[bool]):
             line = escape(line) if not line.startswith("[b]") else line
             if line.startswith("——"):
                 enemy = True
-                log.write(f"[b #e06c75]{line}[/]")
+                log.write(f"[b {C.red}]{line}[/]")
             elif line.startswith("───"):
                 enemy = False
                 log.write(f"[dim]{line}[/]")
             elif line.startswith("插入"):
-                log.write(f"[#c678dd]{line}[/]")
+                log.write(f"[{C.purple}]{line}[/]")
             elif line.startswith("  "):
-                log.write(f"[#abb2bf]{line}[/]")
+                log.write(f"[{C.muted}]{line}[/]")
             else:
-                log.write(f"[#e06c75]{line}[/]" if enemy else f"[#98c379]{line}[/]")
+                log.write(f"[{C.red}]{line}[/]" if enemy else f"[{C.green}]{line}[/]")
 
     def refresh_all(self) -> None:
         b = self.b
         e = b.enemy
         tags = []
         if e.stunned:
-            tags.append("[#c678dd]混乱：下回合无法行动[/]")
+            tags.append(f"[{C.purple}]混乱：下回合无法行动[/]")
         if e.break_turns:
-            tags.append(f"[#e5c07b]破防 +{round(e.break_amount * 100)}%（{e.break_turns} 回合）[/]")
+            tags.append(f"[{C.amber}]破防 +{round(e.break_amount * 100)}%（{e.break_turns} 回合）[/]")
         pct = 100 * e.hp / e.max_hp
         self.query_one("#enemy-panel", Static).update(
             f"{hp_bar(e.hp, e.max_hp, 64)}  [b]{e.hp}[/]/{e.max_hp}  ({pct:.0f}%)\n"
             f"[dim]攻击 {e.data.at} · 每回合行动 {e.data.actions} 次[/]   {'  '.join(tags)}")
 
         cfg = b.db.battle
-        pips = "[#f5c542]" + "●" * b.ap + "[/][#3b3f4a]" + "○" * (cfg["ap_max"] - b.ap) + "[/]"
+        pips = f"[{C.gold}]" + "●" * b.ap + f"[/][{C.track}]" + "○" * (cfg["ap_max"] - b.ap) + "[/]"
         extras = []
         if b.combo:
-            extras.append(f"[#e5c07b]{b.combo} 连击 (+{b.combo * 10}%)[/]")
+            extras.append(f"[{C.amber}]{b.combo} 连击 (+{b.combo * 10}%)[/]")
         if b.guard_cut:
-            extras.append(f"[#61afef]减伤 {round(b.guard_cut * 100)}%[/]")
+            extras.append(f"[{C.blue}]减伤 {round(b.guard_cut * 100)}%[/]")
         self.query_one("#party-status", Static).update(
             f"体力 {hp_bar(b.party_hp, b.party_max, 40)}  [b]{b.party_hp}[/]/{b.party_max}\n"
             f"AP {pips} {b.ap}/{cfg['ap_max']}    第 [b]{b.round}[/]/{b.scenario.turn_limit} 回合    "
@@ -559,16 +613,16 @@ class BattleScreen(Screen[bool]):
         for view in self.query(LeaderView):
             u = b.leaders[view.idx]
             if u.confused:
-                state = "[#c678dd]混乱[/]"
+                state = f"[{C.purple}]混乱[/]"
             elif u.acted:
                 state = "[dim]已行动[/]"
             elif b.can_act(view.idx):
-                state = "[#98c379]可行动[/]"
+                state = f"[{C.green}]可行动[/]"
             else:
                 state = "[dim]AP 不足[/]"
-            boost = "  [b #f5c542]BOOST[/]" if u.boosted else ""
-            members = f" · 部队 {len(u.leader.members) + 1} 人" if u.leader.members else ""
-            view.query_one(".leader-info", Static).update(f"攻击 [b]{u.at}[/]{members}\n{state}{boost}")
+            boost = f"  [b {C.gold}]BOOST[/]" if u.boosted else ""
+            members = f"部队 {len(u.leader.members) + 1} 人" if u.leader.members else "[dim]独自一人[/]"
+            view.query_one(".leader-info", Static).update(f"攻击 [b]{u.at}[/]\n{members}\n{state}{boost}")
             view.set_class(b.can_act(view.idx), "ready")
             view.set_class(view.idx == self.selected, "selected")
             view.set_class(u.acted or u.confused, "spent")
@@ -702,84 +756,89 @@ class ScenarioScreen(Screen):
 class SanguoApp(App):
     TITLE = "三国卡牌"
     CSS = """
-    Screen { background: #1b1c21; }
-    Footer { background: #25262c; }
-    .screen-title { height: 3; padding: 1 2 0 2; text-style: bold; color: #f5c542; }
+    Screen { background: $sg-bg; }
+    Footer { background: $sg-panel; }
+    .screen-title { height: 3; padding: 1 2 0 2; text-style: bold; color: $sg-gold; }
 
     #menu-wrap { height: 1fr; align: center middle; }
     #menu { width: 44; height: auto; align-horizontal: center; }
-    #title { color: #f5c542; border: double #f5c542; text-align: center; padding: 1 0; margin-bottom: 1; }
-    #status { padding: 0 0 1 0; color: #abb2bf; text-align: center; width: 100%; }
+    #title { color: $sg-gold; border: double $sg-gold; text-align: center; padding: 1 0; margin-bottom: 1; }
+    #status { padding: 0 0 1 0; color: $sg-muted; text-align: center; width: 100%; }
     #menu Button { width: 100%; margin: 0 0 1 0; }
 
-    CardView { border: round #8b949e; border-title-align: left; border-subtitle-align: right;
-               padding: 0 1; height: auto; min-height: 7; width: 1fr; min-width: 28; background: #23242a; }
-    CardView:hover { background: #2c2e36; }
-    CardView.N { border: round #8b949e; border-title-color: #8b949e; }
-    CardView.R { border: round #61afef; border-title-color: #61afef; }
-    CardView.SR { border: round #c678dd; border-title-color: #c678dd; }
-    CardView.SSR { border: heavy #f5c542; border-title-color: #f5c542; background: #2a2720; }
-    CardView.lord { border: round #e06c75; border-title-color: #e06c75; }
+    CardView { border: round $sg-gray; border-title-align: left; border-subtitle-align: right;
+               padding: 0 1; height: auto; min-height: 7; width: 1fr; min-width: 28; background: $sg-card; }
+    CardView:hover { background: $sg-card-hover; }
+    CardView.N { border: round $sg-gray; border-title-color: $sg-gray; }
+    CardView.R { border: round $sg-blue; border-title-color: $sg-blue; }
+    CardView.SR { border: round $sg-purple; border-title-color: $sg-purple; }
+    CardView.SSR { border: heavy $sg-gold; border-title-color: $sg-gold; background: $sg-card-ssr; }
+    CardView.lord { border: round $sg-red; border-title-color: $sg-red; }
     .card-grid { grid-size: 4; grid-gutter: 1 2; height: auto; padding: 0 2; }
-    #gacha-results { grid-size: 5; }
-    CardView .card-portrait { height: 7; margin-bottom: 1; }
-    .big-portrait { height: 20; margin-bottom: 1; }
+    #gacha-results { grid-size: 4; }
+    .card-row { height: auto; }
+    CardView .card-portrait { width: 12; height: 8; margin-right: 1; }
+    .card-body { width: 1fr; }
+    .big-portrait { width: 30; height: 20; margin-bottom: 1; }
     .story-row { height: auto; }
     .story-portrait { width: 26; height: 16; margin-right: 2; }
     .story-side { width: 1fr; }
-    .leader-portrait { height: 7; }
-    .no-portrait { content-align: center middle; color: #5c6370; background: #1d1e22; }
-    .empty-slot { border: dashed #3b3f4a; width: 1fr; height: 9; content-align: center middle; color: #5c6370; }
+    .leader-row { height: auto; }
+    .leader-portrait { width: 15; height: 10; }
+    .leader-side { width: 1fr; height: auto; padding-left: 1; }
+    .no-portrait { content-align: center middle; color: $sg-dim; background: $sg-spent; }
+    .empty-slot { border: dashed $sg-track; width: 1fr; height: 9; content-align: center middle; color: $sg-dim; }
 
-    #story-title { height: 3; padding: 1 2 0 2; text-style: bold; color: #f5c542; }
+    #story-title { height: 3; padding: 1 2 0 2; text-style: bold; color: $sg-gold; }
     #story-body { padding: 1 4; }
-    .story-text { padding: 0 0 1 0; color: #d7dae0; }
+    .story-text { padding: 0 0 1 0; color: $sg-text; }
     .choice-row { height: auto; }
     .choice { width: 1fr; height: auto; padding: 0 1; }
     .choice Button { width: 100%; }
+    .choice CardView { height: 12; }
     #story-actions { height: auto; padding: 0 4 1 4; }
     #story-actions Button { margin-right: 2; }
 
     #gacha-actions { height: auto; padding: 0 2 1 2; }
     #gacha-actions Button { margin-right: 2; }
-    #pool-left { padding: 1 2; color: #abb2bf; }
+    #pool-left { padding: 1 2; color: $sg-muted; }
 
     #filters { height: auto; padding: 0 2; }
     .filter { min-width: 8; margin-right: 1; }
     #collection { height: 1fr; padding: 1 2; }
     #collection DataTable { width: 1fr; }
     #detail { width: 40; padding-left: 2; }
-    .skill-list { padding: 1 0; color: #abb2bf; }
+    .skill-list { padding: 1 0; color: $sg-muted; }
 
     #slots { height: auto; padding: 0 2; }
     #party-actions { height: auto; padding: 1 2; }
     #party-power { padding: 1 2; }
     PartyScreen DataTable { height: 1fr; margin: 0 2; }
 
-    #enemy-panel { height: auto; margin: 0 1; padding: 0 2; border: heavy #be5046;
-                   border-title-color: #e06c75; border-title-style: bold; background: #2a1f20; }
-    BattleScreen #log { height: 1fr; margin: 0 1; border: round #3b3f4a; background: #202126; }
-    #party-bar { height: auto; margin: 0 1; padding: 0 1; border: round #98c379; background: #1f2622; }
+    #enemy-panel { height: auto; margin: 0 1; padding: 0 2; border: heavy $sg-enemy-border;
+                   border-title-color: $sg-red; border-title-style: bold; background: $sg-enemy-bg; }
+    BattleScreen #log { height: 1fr; margin: 0 1; border: round $sg-track; background: $sg-log-bg; }
+    #party-bar { height: auto; margin: 0 1; padding: 0 1; border: round $sg-green; background: $sg-party-bg; }
     #party-status { width: 1fr; }
     #party-bar Button { margin-left: 1; min-width: 16; }
     #leaders { height: auto; padding: 0 1; }
-    .leader { width: 1fr; height: auto; margin: 0 1 0 0; padding: 0 1; border: round #4b5263;
-              border-title-color: #d7dae0; background: #23242a; }
-    .leader.ready { border: round #98c379; }
-    .leader.selected { border: heavy #f5c542; background: #2e2b22; }
-    .leader.spent { background: #1d1e22; color: #5c6370; }
-    .leader-info { height: 2; }
+    .leader { width: 1fr; height: auto; margin: 0 1 0 0; padding: 0 1; border: round $sg-border;
+              border-title-color: $sg-text; background: $sg-card; }
+    .leader.ready { border: round $sg-green; }
+    .leader.selected { border: heavy $sg-gold; background: $sg-sel-bg; }
+    .leader.spent { background: $sg-spent; color: $sg-dim; }
+    .leader-info { height: 3; }
     .leader .skill { width: 100%; min-width: 10; height: 1; border: none; margin-top: 1; }
 
     #scenarios { padding: 1 4; height: auto; }
     .scenario { width: 100%; margin-bottom: 1; }
 
-    ModalScreen { align: center middle; background: rgba(0,0,0,0.6); }
-    #dialog { width: 50; height: auto; padding: 1 2; border: heavy #f5c542; background: #23242a; }
-    #dialog.lose { border: heavy #e06c75; }
+    ModalScreen { align: center middle; background: $sg-bg 70%; }
+    #dialog { width: 50; height: auto; padding: 1 2; border: heavy $sg-gold; background: $sg-card; }
+    #dialog.lose { border: heavy $sg-red; }
     #dialog Button { width: 100%; margin-top: 1; }
-    #result-text { text-align: center; text-style: bold; color: #f5c542; padding: 1 0; }
-    #dialog.lose #result-text { color: #e06c75; }
+    #result-text { text-align: center; text-style: bold; color: $sg-gold; padding: 1 0; }
+    #dialog.lose #result-text { color: $sg-red; }
     """
 
     def __init__(self, save_path: Path, new: bool = False, seed: int | None = None) -> None:
@@ -791,6 +850,13 @@ class SanguoApp(App):
         self.rng = random.Random(seed)
         self.fresh = new or not save_path.exists()
         self.save = col.Save.new(self.db) if self.fresh else col.Save.load(save_path)
+        for theme in make_themes():
+            self.register_theme(theme)
+        self.apply_theme(self.save.theme)
+
+    def apply_theme(self, name: str) -> None:
+        C.use(name)
+        self.theme = f"sanguo-{name}"
 
     def persist(self) -> None:
         self.save.dump(self.save_path)
