@@ -126,5 +126,12 @@ Writing rules:
 ## Git
 
 Repo `haotianwudev/sanguo-cards` (public), branch `master`. Commit each finished change with a descriptive message,
-push when done (the owner asked for pushes). Never commit art that isn't ours (the old Rance placeholder was scrubbed
+push when done (the owner asked for pushes).
+
+More than one agent works on this repo (Claude Code, Gemini). Before you start and again before you commit:
+`git fetch && git status` — pull what others pushed, and if files you didn't touch are modified, someone else is
+mid-edit: leave them alone. **Stage by path (`git add <your files>`), never `git add -A`**, so you only commit your own work.
+
+Replacing art: overwriting `pics/source/<key>.jpg` with a new version is fine (git keeps the old one). If the new image
+has no title band, drop the entry's `prep` block and point `src` at the source file; re-check the framing. Never commit art that isn't ours (the old Rance placeholder was scrubbed
 from history for this reason).
