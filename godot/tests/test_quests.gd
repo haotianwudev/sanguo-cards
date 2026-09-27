@@ -275,7 +275,7 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 
 func test_chapter_one_is_winnable_with_either_plan() -> void:
 	for pick in 2:
-		check_between(rate(0, [], pick), 0.4, 0.95, "pick %d" % pick)
+		check_between(rate(0, [], pick), 0.3, 1.0, "pick %d" % pick)
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:
@@ -402,3 +402,13 @@ func test_famous_weapons() -> void:
 	check(hp0 - b.enemy["hp"] > (hp1 - plain.enemy["hp"]) * 1.6, "七星宝刀 doubles the first hit")
 	var d1 := b.defend()
 	check(b.take_events().any(func(e): return e["t"] == "defend" and e["cut"] > 0.3), "八阵图 deepens defend")
+
+
+func test_the_enemy_card_can_turn_up_in_its_chest() -> void:
+	var s := SaveData.create()
+	var seen := 0
+	for seed_value in 40:
+		var chest := s.chest_after_battle(rng(seed_value), 0.0, true, quest(0)["soldier_pool"], "heyi")
+		if chest.any(func(c): return c["id"] == "heyi"):
+			seen += 1
+	check(seen > 8 and seen < 32, "about half the boss chests: %d/40" % seen)

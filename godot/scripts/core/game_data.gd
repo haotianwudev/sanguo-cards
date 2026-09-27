@@ -65,7 +65,7 @@ func _load(dir: String) -> void:
 		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
 			"actions": int(e["actions"]), "moves": e["moves"],
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)),
-			"portrait": e.get("portrait", "")}
+			"portrait": e.get("portrait", ""), "card": e.get("card", "")}
 	for rid in raw.get("relics", {}):
 		var r: Dictionary = raw["relics"][rid]
 		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),
@@ -118,6 +118,11 @@ func _validate() -> void:
 			assert(skills.has(s), "card %s: unknown skill %s" % [c["id"], s])
 	for sc in scenarios.values():
 		assert(enemies.has(sc["enemy"]), "scenario %s: unknown enemy" % sc["id"])
+	for e in enemies.values():
+		assert(e["card"] == "" or cards.has(e["card"]), "enemy %s: unknown card %s" % [e["id"], e["card"]])
+		var names: Array = e["moves"].map(func(m): return m["name"])
+		for m in e["moves"]:
+			assert(not m.has("charge") or names.has(m["charge"]), "enemy %s: charges an unknown move" % e["id"])
 
 
 # ---- cards -------------------------------------------------------------------

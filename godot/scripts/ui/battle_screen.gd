@@ -209,6 +209,14 @@ func _refresh() -> void:
 		st.append("破防 +%d%%（%d 回合）" % [int(round(e["break_amount"] * 100)), e["break_turns"]])
 	if e["burn_turns"] > 0:
 		st.append("🔥 着火 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
+	if e["charging"] != "":
+		st.append("⚠ 蓄力中：下回合【%s】！" % e["charging"])
+	if e["at"] > e["data"]["at"] * 1.01:
+		st.append("狂暴 攻击 %d" % int(round(e["at"])))
+	if b.party_burn["turns"] > 0:
+		st.append("我军着火 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
+	if b.ap_drain > 0:
+		st.append("下回合 AP -%d" % b.ap_drain)
 	_enemy_status.text = "　".join(st)
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
@@ -359,6 +367,19 @@ func _play(events: Array) -> void:
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.4).timeout
+			"enemy_charge":
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "蓄力！", Kit.c("red"), 44)
+				Kit.shake(_enemy_art, 5.0, 0.4)
+				_refresh()
+				await get_tree().create_timer(0.5).timeout
+			"enemy_rage":
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "狂暴！", Kit.c("red"), 44)
+				_flash(_enemy_art, Color(1.8, 0.5, 0.5))
+				await get_tree().create_timer(0.4).timeout
+			"enemy_heal":
+				Kit.float_text(self, _enemy_center(), "+%d" % ev["amt"], Kit.c("green"), 40)
+				Kit.tween_bar(_enemy_hp, ev["hp"])
+				await get_tree().create_timer(0.35).timeout
 			"confuse":
 				Kit.pop(_cards[ev["unit"]], 1.06)
 				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60),
@@ -441,7 +462,8 @@ func _finish() -> void:
 			save.carry_uses.merge(out[2], true)
 		await _banner("胜　利", Kit.c("gold"))
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
-		var chest := save.chest_after_battle(Game.rng, b.overkill + float(b.mods.get("chest", 0.0)), boss, q.get("soldier_pool", []))
+		var chest := save.chest_after_battle(Game.rng, b.overkill + float(b.mods.get("chest", 0.0)), boss, q.get("soldier_pool", []),
+			b.enemy["data"]["card"])
 		if not chest.is_empty():
 			var o := PickOverlay.new()
 			o.title = "宝箱！（过量伤害 %d%%）选一张兵卡带走" % int(round(b.overkill * 100))

@@ -196,13 +196,20 @@ static func chest_offer(rng: RandomNumberGenerator, n: int, only: Array = []) ->
 	return result
 
 
-func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool, only: Array = []) -> Array:
+func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool, only: Array = [],
+		enemy_card := "") -> Array:
 	## Rance X: bosses always drop a chest; otherwise 50% + the overkill share (≥ 50% overkill guarantees it).
 	var g: Dictionary = _db().gacha
 	var chance := 1.0 if boss else minf(1.0, float(g["chest_base"]) + overkill)
 	if rng.randf() >= chance:
 		return []
-	return chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only)
+	var cards := chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only)
+	# the beaten enemy's own card may be in there (bosses and elites more often)
+	var db := _db()
+	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"])
+	if enemy_card != "" and not maxed(enemy_card) and not cards.has(db.cards[enemy_card]) and rng.randf() < card_chance:
+		cards[cards.size() - 1] = db.cards[enemy_card]
+	return cards
 
 
 func offer_extra() -> int:

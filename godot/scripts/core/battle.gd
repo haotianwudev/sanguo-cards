@@ -32,6 +32,8 @@ var opening: Array = []  # log lines from the first round start
 var mods: Dictionary = {}  # 宝物 / 险 (see cards.json relics) + enemy (险: enemy strength)
 var turn_limit := 0
 var first_hit_done := false
+var party_burn := {}  # the enemy's fire on us: {dmg, turns}
+var ap_drain := 0  # AP the enemy takes away at the next round start
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
 ##       "enemy_hit"|"confuse"|"round"|"interrupt", ...}
@@ -64,7 +66,8 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	var tough := 1.0 + float(mods.get("enemy", 0.0))
 	var max_hp := int(round(e["hp"] * tough * (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough, "stunned": false,
-		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_turns": 0}
+		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_turns": 0, "charging": "", "charge_ready": false, "used": []}
+	b.party_burn = {"dmg": 0, "turns": 0}
 	var hp := 0
 	for ld in party:
 		var cid: String = ld["card"]["id"]
@@ -224,7 +227,8 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				if not first_hit_done:  # 七星宝刀
 					bonus += float(mods.get("first_hit", 0.0))
 					first_hit_done = true
-				var d := _dmg(at * float(eff["power"]) * mult * (1.0 + bonus), kind)
+				var fire := float(eff.get("burning_mult", 1.0)) if enemy["burn_turns"] > 0 else 1.0  # 火上浇油
+				var d := _dmg(at * float(eff["power"]) * mult * (1.0 + bonus) * fire, kind)
 				if d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				enemy["hp"] = maxi(0, enemy["hp"] - d)
@@ -302,22 +306,56 @@ func _enemy_phase(defend_cut: float) -> Array:
 		_check_end()
 		if result != "":
 			return log
+	if party_burn["turns"] > 0:
+		party_burn["turns"] -= 1
+		party_hp = maxi(0, party_hp - party_burn["dmg"])
+		_ev({"t": "enemy_hit", "dmg": party_burn["dmg"], "move": "火", "cut": 0.0, "hp": party_hp})
+		log.append("[color=red]我军被火烧，损失 %d 体力[/color]" % party_burn["dmg"])
+		_check_end()
+		if result != "":
+			return log
 	_ev({"t": "enemy_turn"})
 	log.append("—— %s 的行动 ——" % data["name"])
+	enemy["charge_ready"] = enemy["charging"] != ""  # wound up last turn: it lands now
 	if enemy["stunned"]:
 		enemy["stunned"] = false
 		_ev({"t": "enemy_stunned"})
 		log.append("%s 混乱中，无法行动" % data["name"])
 	else:
 		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0)))
-		var moves: Array = data["moves"]
 		for _a in int(data["actions"]):
-			var mv: Dictionary = GameData.weighted_pick(rng, moves, moves.map(func(m): return float(m["weight"])))
-			var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - cut))))
-			party_hp = maxi(0, party_hp - d)
-			_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": cut, "hp": party_hp})
-			log.append("%s【%s】 我军受到 %d 伤害%s" % [data["name"], mv["name"], d,
-				("（减伤 %d%%）" % int(round(cut * 100))) if cut > 0.0 else ""])
+			var mv := _enemy_move()
+			if mv.has("charge"):  # winds up: next turn opens with the big one
+				enemy["charging"] = mv["charge"]
+				_ev({"t": "enemy_charge", "move": mv["charge"]})
+				log.append("[color=red]%s 正在蓄力……下回合【%s】！[/color]" % [data["name"], mv["charge"]])
+				continue  # the wind-up costs this action only
+			if mv.get("once", false):
+				enemy["used"].append(mv["name"])
+			if float(mv["power"]) > 0.0:
+				var c: float = 0.0 if mv.get("pierce", false) else cut
+				var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - c))))
+				party_hp = maxi(0, party_hp - d)
+				_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": c, "hp": party_hp})
+				log.append("%s【%s】 我军受到 %d 伤害%s%s" % [data["name"], mv["name"], d,
+					("（减伤 %d%%）" % int(round(c * 100))) if c > 0.0 else "", "（无视防御！）" if mv.get("pierce", false) else ""])
+			else:
+				log.append("%s【%s】" % [data["name"], mv["name"]])
+			if mv.has("rage"):
+				enemy["at"] *= 1.0 + float(mv["rage"])
+				_ev({"t": "enemy_rage", "amount": float(mv["rage"])})
+				log.append("[color=red]  %s 狂暴了！攻击 +%d%%[/color]" % [data["name"], int(round(float(mv["rage"]) * 100))])
+			if mv.has("heal"):
+				var h := mini(int(round(enemy["max_hp"] * float(mv["heal"]))), enemy["max_hp"] - enemy["hp"])
+				enemy["hp"] += h
+				_ev({"t": "enemy_heal", "amt": h, "hp": enemy["hp"]})
+				log.append("  %s 回复了 %d 体力" % [data["name"], h])
+			if mv.has("ap_drain"):
+				ap_drain += int(mv["ap_drain"])
+				log.append("[color=red]  下回合我军 AP -%d[/color]" % int(mv["ap_drain"]))
+			if mv.has("burn_party"):
+				party_burn = {"dmg": int(round(party_max * float(mv["burn_party"]))), "turns": int(mv.get("turns", 3))}
+				log.append("[color=red]  我军着火了！每回合 -%d（%d 回合）[/color]" % [party_burn["dmg"], party_burn["turns"]])
 			if mv.has("confuse") and mods.get("calm", 0) <= 0 and rng.randf() < float(mv["confuse"]):
 				var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
 				victim["confuse_next"] = true
@@ -351,6 +389,23 @@ func _ambush() -> Array:
 	return log
 
 
+func _enemy_move() -> Dictionary:
+	## A charged move first; otherwise a weighted pick among the moves allowed now.
+	var moves: Array = enemy["data"]["moves"]
+	if enemy["charging"] != "" and enemy["charge_ready"]:
+		enemy["charge_ready"] = false
+		var name: String = enemy["charging"]
+		enemy["charging"] = ""
+		for m in moves:
+			if m["name"] == name:
+				return m
+	var ok: Array = moves.filter(func(m):
+		return float(m["weight"]) > 0.0 \
+			and not (m.get("when", "") == "half" and enemy["hp"] * 2 >= enemy["max_hp"]) \
+			and not (m.get("once", false) and enemy["used"].has(m["name"])) 			and not (m.has("charge") and enemy["charging"] != ""))
+	return GameData.weighted_pick(rng, ok, ok.map(func(m): return float(m["weight"])))
+
+
 func _start_round() -> Array:
 	var cfg := db.battle
 	if round_no > 0:
@@ -359,6 +414,9 @@ func _start_round() -> Array:
 				u["idle_rounds"] += 1
 	round_no += 1
 	ap = mini(ap_max(), ap + int(cfg["ap_per_round"]) + int(mods.get("ap_round", 0)))
+	if ap_drain > 0:
+		ap = maxi(0, ap - ap_drain)
+		ap_drain = 0
 	combo = 0
 	guard_cut = 0.0
 	_ev({"t": "round", "n": round_no, "ap": ap})

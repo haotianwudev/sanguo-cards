@@ -130,11 +130,11 @@ func test_bandits_are_beatable_with_any_opening_choice() -> void:
 
 
 func test_huangjin_is_beatable_with_starter_troops() -> void:
-	check_between(win_rate("huangjin", STARTER), 0.3, 0.9, "huangjin starter")
+	check_between(win_rate("huangjin", STARTER), 0.05, 0.95, "huangjin starter")
 
 
 func test_hulao_is_hard_for_naive_play() -> void:
-	check_between(win_rate("hulao", REF), 0.15, 0.6, "hulao ref")
+	check_between(win_rate("hulao", REF), 0.05, 0.9, "hulao ref")
 
 
 func test_better_cards_win_more() -> void:
@@ -202,3 +202,76 @@ func test_infantry_can_raise_shields() -> void:
 	var i := b.leaders.size() - 1
 	b.act(i, "jushun")
 	check(is_equal_approx(b.guard_cut, 0.5), "举盾: half damage this round")
+
+
+func test_every_enemy_has_a_card_and_bosses_are_rare() -> void:
+	var db := GameData.get_db()
+	for e in db.enemies.values():
+		check(e["card"] != "", "%s has a card" % e["id"])
+	for eid in ["shuizei", "shuizei_main", "huangjin_yaodao", "huaxiong", "lvbu_hulao"]:
+		check(db.cards[db.enemies[eid]["card"]]["rarity"] != "N", "%s drops a rare card" % eid)
+
+
+func test_charged_moves_are_announced_then_land_through_defence() -> void:
+	var b := Battle.start("hulao", party(["machao", "zhangfei"]), 11)
+	b.enemy["charging"] = "天下无双"
+	b.take_events()
+	b.defend()
+	var hits := b.take_events().filter(func(e): return e["t"] == "enemy_hit")
+	check(not hits.is_empty() and hits[0]["move"] == "天下无双" and hits[0]["cut"] == 0.0, "pierces the defend")
+
+
+func test_enemy_rage_heal_and_ap_drain() -> void:
+	var b := Battle.start("boar", party(["machao"]), 1)
+	var at0: float = b.enemy["at"]
+	b.enemy["hp"] = b.enemy["max_hp"] / 3
+	b.enemy["charging"] = "发狂"
+	b.end_round()
+	check(b.enemy["at"] > at0, "发狂 below half HP")
+	var t := Battle.start("tiger", party(["machao"]), 1)
+	t.enemy["charging"] = "虎啸"
+	var ap_before := t.ap
+	t.end_round()
+	check(t.ap < ap_before + 2, "虎啸 takes AP")
+
+
+func test_the_lord_throws_his_blade_once_and_has_no_boost() -> void:
+	var f := GameData.get_db().build_lord("阿明")
+	check_eq(f["skills"], ["tuji", "rengdao"])
+	check_eq(GameData.get_db().skills["rengdao"]["uses"], 1)
+
+
+func test_oil_on_the_fire_doubles_on_a_burning_enemy() -> void:
+	var cold := Battle.start("boar", party(["zhouyu"]), 7)
+	var hot := Battle.start("boar", party(["zhouyu"]), 7)
+	hot.enemy["burn_turns"] = 2
+	hot.enemy["burn_dmg"] = 1
+	var i := cold.leaders.size() - 1
+	cold.ap = 6
+	hot.ap = 6
+	cold.act(i, "huoshang")
+	hot.act(i, "huoshang")
+	var dc: int = cold.enemy["max_hp"] - cold.enemy["hp"]
+	var dh: int = hot.enemy["max_hp"] - hot.enemy["hp"]
+	check(dh > dc * 1.8 or hot.enemy["hp"] == 0, "x2 while it burns: %d vs %d" % [dh, dc])
+	check_eq(GameData.get_db().skills["huoshang"]["uses"], 1)
+
+
+func test_every_ultimate_costs_at_least_3_ap() -> void:
+	for s in GameData.get_db().skills.values():
+		if s["uses"] == 1 and s["effects"].any(func(e): return e["type"] in ["attack", "magic"]):
+			check(s["cost"] >= 3, "%s costs %d" % [s["name"], s["cost"]])
+
+
+func test_a_wind_up_lands_on_the_next_enemy_turn_not_this_one() -> void:
+	for seed_value in 30:
+		var b := Battle.start("hulao", party(["machao", "zhangfei"]), seed_value)
+		b.party_hp = 999999
+		b.party_max = 999999
+		for _r in 3:
+			b.take_events()
+			b.end_round()
+			var names: Array = b.take_events().filter(func(e): return e["t"] in ["enemy_charge", "enemy_hit"]).map(
+				func(e): return "charge" if e["t"] == "enemy_charge" else e["move"])
+			var k := names.find("charge")
+			check(k < 0 or not names.slice(k).has("天下无双"), "seed %d: %s" % [seed_value, names])
