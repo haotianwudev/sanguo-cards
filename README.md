@@ -14,6 +14,15 @@ python -m pytest                     # 规则 + 数值平衡测试
 
 推荐用 Windows Terminal，窗口至少 120×36。
 
+### 手机上玩（同一个 Wi-Fi）
+
+1. **只做一次**：在管理员 PowerShell 里放行端口（只对局域网开放）：
+   ```powershell
+   New-NetFirewallRule -DisplayName "sanguo-cards LAN" -Direction Inbound -Protocol TCP -LocalPort 8766 -RemoteAddress LocalSubnet -Profile Private -Action Allow
+   ```
+2. **每次玩**：在项目文件夹运行 `.\scripts\serve-lan.ps1`，它会打印手机要打开的网址（如 `http://192.168.1.172:8766`）。
+3. 手机浏览器打开那个网址，横屏玩。电脑和手机共用一个存档。
+
 ## 操作
 
 | 画面 | 操作 |
