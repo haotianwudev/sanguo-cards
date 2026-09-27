@@ -10,7 +10,7 @@
 | `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供 | — |
 | `wuguotai` | source/generals/wuguotai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `sunjian` | source/generals/sunjian.jpg | 用户提供 | ⚠️ 疑似光荣官方立绘，发布前替换 | — |
+| `sunjian` | source/generals/sunjian.jpg | 用户提供 | 用户提供 | — |
 | `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
 | `diaochan` | source/public-domain/diaochan.jpg | [链接](https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg) | Public domain | Unknown author |
 | `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |

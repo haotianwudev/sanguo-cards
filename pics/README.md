@@ -23,5 +23,5 @@ pics/
   在 `art.json` 里改那一行的 `src`、`face`、`head`，然后运行 `sanguo-art`。
 - **换卡框**：放进 `source/frames/`（文件名 `frame_<名字>.jpg`），运行
   `python tools/key_frames.py pics/source/frames godot/data/art/frames`（自动抠掉棋盘格背景）。
-- **原图注意**：`source/generals/sunce.jpg`、`zhouyu.jpg`、`sunjian.jpg` 的原图丢失了，现在是游戏里保留的 640px 版本；
+- **原图注意**：`source/generals/sunce.jpg`、`zhouyu.jpg` 的原图丢失了，现在是游戏里保留的 640px 版本；
   有高清原图直接替换同名文件即可。
