@@ -1,99 +1,41 @@
 {
   "_comment": "Quest maps. x = column (left to right, never back), y = row 0-2. Diagonal links may only move one row.",
   "quests": [
-    {
-      "id": "prologue", "title": "序章 · 穿越江东", "start": "wake",
-      "_pools": "这一章能拿到的卡：宝箱/战后宝箱只出 soldier_pool，招募格只出 recruit_pool",
-      "soldier_pool": ["danyang", "changsha"], "recruit_pool": ["danyang", "changsha"],
+    {"id": "prologue", "title": "第一章 · 富春", "start": "era", "_pools": "第一章能拿到的卡：宝箱/战利品只出 soldier_pool（本地兵 + 水贼、南下黄巾），招募格只出 recruit_pool", "soldier_pool": ["danyang", "changsha", "shuizei_bing", "huangjin_nanxia"], "recruit_pool": ["danyang", "changsha"],
       "squares": {
-        "wake": {"x": 0, "y": 1, "type": "event", "label": "穿越", "next": ["pick"],
-          "portraits": ["sunce", "zhouyu"],
-          "text": [
-            "一道白光之后，{lord}睁开眼——四周是泥路、茅屋，和一面绣着“孙”字的旗。",
-            "“你是何人？衣着好生古怪。”一位英气逼人的少年按剑而立，身旁的白衣青年却在打量你手里的手机。",
-            "少年大笑：“我乃孙策孙伯符！这位是我的兄弟周瑜周公瑾。”",
-            "周瑜：“附近山中有贼人劫掠乡里，我等正要去剿。阁下既来此地，不如与我们同行？”",
-            "孙策、周瑜，还有闻声赶来的老将黄盖，都愿意与你同去——但人手有限，只能有一人随你。"
-          ]},
-        "pick": {"x": 1, "y": 1, "type": "choose", "label": "三选一",
-          "choose": [
-            {"card": "sunce",    "label": "跟孙策正面杀上山", "goto": "sc_talk"},
-            {"card": "zhouyu",   "label": "听周瑜设伏诱敌",   "goto": "zy_talk"},
-            {"card": "huanggai", "label": "随黄盖稳扎稳打",   "goto": "hg_talk"}
-          ]},
-
-        "sc_talk": {"x": 2, "y": 0, "type": "event", "label": "孙策", "next": ["sc_fight"], "portraits": ["sunce"],
-          "text": ["孙策翻身上马：“贼人不过乌合之众，随我冲！”", "你们直扑山道。"]},
-        "sc_fight": {"x": 3, "y": 0, "type": "battle", "battle": "shanzei_scout", "label": "山道", "next": ["sc_loot"]},
-        "sc_loot": {"x": 4, "y": 0, "type": "event", "label": "降卒", "next": ["gate"], "portraits": ["sunce"],
-          "cards": ["danyang"],
-          "text": ["孙策一枪挑落贼哨。山下几个丹阳汉子闻讯赶来，愿随军效力。", "“丹阳兵精悍，”孙策说，“就交给你带吧。”"]},
-
-        "zy_talk": {"x": 2, "y": 1, "type": "event", "label": "周瑜", "next": ["zy_fight"], "portraits": ["zhouyu"],
-          "text": ["周瑜展开地图：“山道狭窄，正宜设伏。先以弱兵诱之，再以弓弩截其归路。”"]},
-        "zy_fight": {"x": 3, "y": 1, "type": "battle", "battle": "shanzei_scout", "label": "伏击", "next": ["zy_loot"]},
-        "zy_loot": {"x": 4, "y": 1, "type": "event", "label": "缴获", "next": ["gate"], "portraits": ["zhouyu"],
-          "cards": ["danyang"],
-          "text": ["贼哨果然中计，一个不少地落入埋伏。", "周瑜微笑：“伏兵里有一队丹阳兵，勇悍善战，阁下可用。”"]},
-
-        "hg_talk": {"x": 2, "y": 2, "type": "event", "label": "黄盖", "next": ["hg_fight"],
-          "text": ["黄盖捋须：“老夫跟过孙坚将军，这等山贼见得多了。结阵而进，慢些无妨。”"]},
-        "hg_fight": {"x": 3, "y": 2, "type": "battle", "battle": "shanzei_scout", "label": "结阵", "next": ["hg_loot"]},
-        "hg_loot": {"x": 4, "y": 2, "type": "event", "label": "粮车", "next": ["gate"],
-          "cards": ["changsha"],
-          "text": ["阵势一压，贼哨便溃了。", "黄盖：“这些是跟过孙坚将军的长沙旧部，刀法扎实，编成一队，行军打仗都用得上。”"]},
-
-        "gate": {"x": 5, "y": 1, "type": "event", "label": "寨前", "next": ["chest", "spring"],
-          "text": ["山寨就在前方。左边小路通往贼人的藏宝洞，右边有一眼山泉可以歇脚。", "天色将晚，只来得及去一处。"]},
-        "chest": {"x": 6, "y": 0, "type": "treasure", "label": "藏宝洞", "next": ["boss"]},
-        "spring": {"x": 6, "y": 2, "type": "recover", "label": "山泉", "next": ["boss"]},
-        "boss": {"x": 7, "y": 1, "type": "battle", "battle": "shanzei", "boss": true, "label": "山寨", "next": ["mother"]},
-        "mother": {"x": 8, "y": 1, "type": "event", "label": "吴国太", "portraits": ["wuguotai"], "cards": ["wuguotai"], "next": ["heroes"],
-          "text": [
-            "山寨平定。回到孙家庄园，一位端庄的妇人迎了出来。",
-            "“伯符的母亲，吴国太。”她看着一身血污的你们，“先把伤养好，其余的慢慢说。”",
-            "吴国太愿随军照料伤兵。孙策笑道：“有了名声，自会有豪杰来投。”"
-          ]},
-        "heroes": {"x": 9, "y": 1, "type": "recruit", "label": "丹阳募兵"}
+        "era": {"x": 0, "y": 1, "type": "choose", "label": "出生点", "text": ["你，{lord}，三十岁，社畜。加班到凌晨三点，顺手点开了一款三国游戏。", "屏幕上跳出一行字：「请选择你的出生点。据说会有一位美貌夫人把你捡回家。」", "你迷迷糊糊地伸出了手指——"], "choose": [{"label": "南方 · 江东富春", "goto": "wake"}, {"label": "北方 · 谯县（未开放）", "locked": true}]},
+        "wake": {"x": 1, "y": 1, "type": "event", "label": "醒来", "next": ["village"], "portraits": ["wuguotai"], "text": ["再睁眼时，你躺在一张绣花床上，额头搭着湿布。一位雍容的美妇正俯身看着你，衣襟上的熏香若有若无。", "美妇：「可算醒了。江边捡到你的时候只剩半口气。我姓吴，这里的人都叫我吴夫人。」", "你低头一看——胳膊细了，腰不酸了，肚子上居然有腹肌。铜镜里是一张十六岁的脸。", "{lord}（压低嗓音）：「夫人救命之恩，在下无以为报，只好以身相——」", "吴夫人噗嗤一笑，拿团扇敲你脑门：「小小年纪，嘴倒挺甜。我儿子都跟你一般大了。」", "{lord}（内心）：夫人，我心理年龄三十，按理说咱俩是同龄人。"]},
+        "village": {"x": 2, "y": 1, "type": "event", "label": "富春", "next": ["raid"], "portraits": ["sunce", "zhouyu"], "text": ["这里是吴郡富春，江东猛虎孙坚的老家。吴夫人，正是孙坚的夫人。董卓乱政，孙坚起兵北上讨董，把乡里的壮丁全带走了。", "村里只剩老人、妇女，和两个没被带走的少年。", "浓眉少年提枪瞪着你：「我叫孙策。听说你醒来第一句话，是对我娘说的？」", "俊秀少年摇着羽扇打圆场：「周瑜，字公瑾。伯符，人家刚醒，许是烧糊涂了。」", "{lord}：「误会！我这人一见长辈就爱说真心话。」孙策的枪尖又往前送了一寸。"]},
+        "raid": {"x": 3, "y": 1, "type": "event", "label": "夜袭", "next": ["plan"], "portraits": ["wuguotai"], "text": ["当夜江上火把连成一片。水贼趁壮丁不在，摸上岸来抢粮——奇怪的是，里面混着几个头裹黄巾的汉子。", "黄巾汉子指着吴夫人：「就是她！孙坚的婆娘！」贼首眼睛都直了：「孙坚的？这么标致？带回去做压寨夫人！」", "吴夫人被扛上船前还回头喊：「策儿！公瑾！还有那个嘴甜的——别让他们碰我的首饰盒！」", "{lord}攥紧拳头：抢我的……咳，抢孙家的夫人，这梁子结下了。"]},
+        "plan": {"x": 4, "y": 1, "type": "choose", "label": "定计", "text": ["孙策把枪往地上一戳：「还等什么，直接杀进水寨！」", "周瑜摇头：「水寨易守难攻。不如在下游放把火，把贼人调出来，再趁虚而入——调虎离山。」", "两人一齐看向你。毕竟你年纪最大（心理上）。"], "choose": [{"card": "sunce", "label": "孙策：正面强攻", "goto": "sc_gate"}, {"card": "zhouyu", "label": "周瑜：调虎离山", "goto": "zy_lure"}]},
+        "sc_gate": {"x": 5, "y": 0, "type": "battle", "label": "寨门", "battle": "shuizei_scout", "next": ["sc_hall"]},
+        "sc_hall": {"x": 6, "y": 0, "type": "battle", "label": "水寨", "battle": "shuizei", "boss": true, "next": ["rescue"]},
+        "zy_lure": {"x": 5, "y": 2, "type": "event", "label": "放火", "next": ["zy_hall"], "portraits": ["zhouyu"], "text": ["周瑜在下游点着了几条破船，火光冲天。「粮船着火啦！」水贼们提着裤子冲了出去。", "寨里只剩几个看门的。周瑜收起火折子，彬彬有礼：「请。」", "{lord}：「公瑾，你这么会放火，以后打仗可以多用用。」周瑜若有所思。"]},
+        "zy_hall": {"x": 6, "y": 2, "type": "battle", "label": "水寨", "battle": "shuizei_guard", "boss": true, "next": ["rescue"]},
+        "rescue": {"x": 7, "y": 1, "type": "event", "label": "救人", "next": ["muster"], "portraits": ["wuguotai"], "cards": ["sunce", "zhouyu", "wuguotai"], "text": ["吴夫人被绑在柱子上，发髻有点乱，神色倒还镇定：「来得正好，这绳子勒得我腰疼。」", "你上前解绳，手忙脚乱，不知道该往哪儿碰。身后孙策咳嗽了一声，很响。", "吴夫人揉着手腕，笑眯眯地打量你：「小家伙，挺有担当嘛。」又回头：「策儿，把枪放下，他救了你娘。」", "吴夫人压低声音：「我偷听到了。那几个裹黄巾的，是当年被你爹在宛城打散的黄巾余孽，逃到江东跟水贼搭了伙。抓我，是冲着孙家报仇来的。」", "孙策咬牙：「欺负我爹不在家？」", "吴夫人：「以后你们三个出门，我跟着。谁受了伤，我给谁包扎。」", "（吴夫人——日后的吴国太——加入队伍，能给全队回复体力。）"]},
+        "muster": {"x": 8, "y": 1, "type": "event", "label": "征兵", "next": ["draft"], "portraits": ["sunce"], "text": ["贼首带着主力逃回了江心的大寨，黄巾渠帅也在那里，放话要把孙家满门抓去祭旗。", "{lord}：「村里没壮丁，咱们就自己征兵。把附近的丹阳汉子、流落的长沙刀兵都招来，一口气端了他们老窝。」", "孙策难得认真：「大寨里是水贼主力，还有黄巾的妖道，不是刚才那些喽啰。仗会难打得多。」", "吴夫人：「去吧，打完了娘给你们做好吃的。」她瞥了你一眼，「你也有份。」"]},
+        "draft": {"x": 9, "y": 1, "type": "recruit", "label": "江东征兵", "next": ["reeds", "camp"]},
+        "reeds": {"x": 10, "y": 0, "type": "battle", "label": "芦苇荡", "battle": "shuizei_scout", "next": ["lair"]},
+        "camp": {"x": 10, "y": 2, "type": "recover", "label": "江边扎营", "next": ["lair"]},
+        "lair": {"x": 11, "y": 1, "type": "battle", "label": "水贼大寨", "battle": "shuizei_main", "boss": true, "next": ["vault"]},
+        "vault": {"x": 12, "y": 1, "type": "treasure", "label": "水寨宝库", "next": ["north"]},
+        "north": {"x": 13, "y": 1, "type": "event", "label": "北上", "cards": ["danyang", "shuizei_bing", "huangjin_nanxia"], "portraits": ["wuguotai", "sunce", "zhouyu"], "text": ["大寨一破，被水贼抓去的丹阳壮丁全放了出来，一个个嚷着要跟你走。水贼和几个南下的黄巾也跪了一地：「好汉饶命！我们也就是混口饭吃……」{lord}：「混饭？跟我混，管饱。」", "宝库里金银不少，吴夫人只挑回了她的首饰盒，满意地拍了拍。", "渠帅临死前狞笑：「南下的黄巾不止我们一伙……孙坚在前线，他的后路早就……」话没说完就断了气。", "{lord}望向北方：「孙将军在前线讨董，家乡的兵全跟着他，后路还有黄巾在打主意。现在咱们有兵有粮——不如北上，支援孙将军！」", "孙策眼睛一亮：「去找我爹！」周瑜点头。吴夫人整了整衣襟：「我也去。他三个月没写信了，得当面问问。」", "{lord}（内心）：要见孙坚了……当着他的面，嘴得收一收。"]}
       }
     },
-
-    {
-      "id": "huangjin", "title": "第一章 · 黄巾之乱", "start": "rumor",
+    {"id": "taodong", "title": "第二章 · 讨伐董卓", "start": "luyang",
       "squares": {
-        "rumor": {"x": 0, "y": 1, "type": "event", "label": "起事", "next": ["road_a", "road_b"],
-          "text": ["“苍天已死，黄天当立！”张角率三十六方黄巾起事，州郡望风而降。",
-                   "{lord}率军北上。前方两条路：大路有黄巾前锋把守，山路难行但能绕到敌后。"]},
-        "road_a": {"x": 1, "y": 0, "type": "battle", "battle": "huangjin_vanguard", "label": "大路", "next": ["camp"]},
-        "road_b": {"x": 1, "y": 2, "type": "event", "label": "山路", "next": ["cache"],
-          "text": ["山路崎岖，走了整整一天，队伍疲惫不堪，但一路无人阻拦。"]},
-        "cache": {"x": 2, "y": 2, "type": "treasure", "label": "敌后粮仓", "next": ["camp"]},
-        "camp": {"x": 3, "y": 1, "type": "recover", "label": "扎营", "next": ["front"]},
-        "front": {"x": 4, "y": 1, "type": "battle", "battle": "huangjin_vanguard", "label": "阵前", "next": ["altar", "flank"]},
-        "altar": {"x": 5, "y": 0, "type": "treasure", "label": "祭坛", "next": ["zhangjiao"]},
-        "flank": {"x": 5, "y": 2, "type": "recover", "label": "休整", "next": ["zhangjiao"]},
-        "zhangjiao": {"x": 6, "y": 1, "type": "battle", "battle": "huangjin", "boss": true, "label": "张角", "next": ["after"]},
-        "after": {"x": 7, "y": 1, "type": "event", "label": "平定", "next": ["heroes"],
-          "text": ["张角病死军中，黄巾溃散。{lord}之名，开始传遍天下。"]},
-        "heroes": {"x": 8, "y": 1, "type": "recruit", "label": "来投"}
-      }
-    },
-
-    {
-      "id": "hulao", "title": "第二章 · 虎牢关", "start": "alliance",
-      "squares": {
-        "alliance": {"x": 0, "y": 1, "type": "event", "label": "会盟", "next": ["sishui"],
-          "text": ["董卓入洛阳，废帝专权。十八路诸侯会盟讨董，{lord}亦在其列。",
-                   "先锋探报：汜水关守将华雄连斩数将，关后便是虎牢——还有那个人。"]},
-        "sishui": {"x": 1, "y": 1, "type": "battle", "battle": "huaxiong", "label": "汜水关", "next": ["spoils", "tent"]},
-        "spoils": {"x": 2, "y": 0, "type": "treasure", "label": "关内", "next": ["march"]},
-        "tent": {"x": 2, "y": 2, "type": "recover", "label": "军帐", "next": ["march"]},
-        "march": {"x": 3, "y": 1, "type": "event", "label": "关前", "next": ["lvbu"],
-          "text": ["虎牢关前，一骑当先。人中吕布，马中赤兔。", "诸侯军中无人敢出——轮到{lord}了。"]},
-        "lvbu": {"x": 4, "y": 1, "type": "battle", "battle": "hulao", "boss": true, "label": "吕布", "next": ["after"]},
-        "after": {"x": 5, "y": 1, "type": "event", "label": "西迁", "next": ["heroes"],
-          "text": ["吕布退走，董卓焚洛阳西迁。", "（后续章节开发中）"]},
-        "heroes": {"x": 6, "y": 1, "type": "recruit", "label": "来投"}
+        "luyang": {"x": 0, "y": 1, "type": "event", "label": "鲁阳会师", "next": ["liangdong"], "portraits": ["sunjian", "wuguotai"], "cards": ["sunjian"], "text": ["鲁阳大营。孙坚身高八尺，虎皮披风，大刀扛在肩上，老远就闻到一股杀气。", "吴夫人一见丈夫，眼圈就红了。孙坚一把搂住她，越过她的肩膀，盯着你。", "孙坚：「你就是信里那个……『嘴很甜』的小子？」", "{lord}（夫人你到底写了什么）：「孙将军！末将{lord}，带江东子弟前来助阵！」", "孙坚哼了一声，拍你肩膀，差点把你拍进地里：「能打就行。跟着我，别给孙家丢人。」", "（孙坚加入队伍。）"]},
+        "liangdong": {"x": 1, "y": 1, "type": "battle", "label": "梁东", "battle": "xurong", "next": ["supply", "regroup"]},
+        "supply": {"x": 2, "y": 0, "type": "treasure", "label": "徐荣辎重", "next": ["helmet"]},
+        "regroup": {"x": 2, "y": 2, "type": "recover", "label": "收拢残兵", "next": ["helmet"]},
+        "helmet": {"x": 3, "y": 1, "type": "event", "label": "赤帻", "next": ["yangren"], "portraits": ["sunjian"], "text": ["徐荣虽退，西凉兵又漫山遍野压过来。孙坚头上的赤帻太显眼，箭全往他身上招呼。", "孙坚把头巾一摘，塞给你：「你年轻，跑得快，戴上。」", "{lord}：「将军，这叫借人挡箭吧？」孙坚：「这叫信任。」", "你顶着赤帻在林子里绕了三圈，把追兵全带进了沟里。回营时吴夫人塞给你一碗热汤。孙坚看着那碗汤，脸更黑了。", "（后方的袁术扣下了军粮。只能速战速决。）"]},
+        "yangren": {"x": 4, "y": 1, "type": "battle", "label": "阳人", "battle": "huaxiong", "next": ["spoils", "tent"]},
+        "spoils": {"x": 5, "y": 0, "type": "treasure", "label": "华雄营", "next": ["gate"]},
+        "tent": {"x": 5, "y": 2, "type": "recover", "label": "军帐", "next": ["gate"]},
+        "gate": {"x": 6, "y": 1, "type": "event", "label": "虎牢关", "next": ["lvbu"], "portraits": ["sunjian", "sunce"], "text": ["华雄的首级挂上了辕门。诸侯们拍着桌子喊「文台威武」，一粒米也没送来。", "大军推到虎牢关下。关门一开，一骑红马冲了出来——人中吕布，马中赤兔。", "孙策握枪的手在抖，不是怕，是兴奋。孙坚按住他：「这个，一起上。」", "{lord}（内心）：三英战吕布那三位还没到……现在是四个倒霉蛋战吕布。"]},
+        "lvbu": {"x": 7, "y": 1, "type": "battle", "label": "吕布", "battle": "hulao_ch1", "boss": true, "next": ["luoyang"]},
+        "luoyang": {"x": 8, "y": 1, "type": "event", "label": "洛阳", "next": ["heroes"], "portraits": ["sunjian", "wuguotai"], "text": ["吕布退走，董卓一把火烧了洛阳，挟天子西迁。", "孙坚在宫里一口井边停下——井里冒着五色光。捞上来一看，是一方玉玺，缺了一角，用金补着。", "孙坚的手在抖：「传国玉玺……」吴夫人一把揣进袖子：「先收着，回家再说。」", "{lord}（内心）：这东西我有印象……好像不太吉利。", "（第一章完，后续章节开发中。）"]},
+        "heroes": {"x": 9, "y": 1, "type": "recruit", "label": "来投"}
       }
     }
   ]

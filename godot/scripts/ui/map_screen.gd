@@ -214,7 +214,7 @@ func _refresh() -> void:
 			if save.choices.has(cur["id"]):
 				nexts = [save.choices[cur["id"]]]
 			else:
-				nexts = cur["choose"].map(func(o): return o["goto"])
+				nexts = cur["choose"].filter(func(o): return not o["locked"]).map(func(o): return o["goto"])
 		for n in nexts:
 			if not ahead.has(n):
 				ahead[n] = true
@@ -226,7 +226,8 @@ func _refresh() -> void:
 	for s in q["squares"].values():
 		var targets: Array = s["next"].duplicate()
 		for o in s["choose"]:
-			targets.append(o["goto"])
+			if not o["locked"]:
+				targets.append(o["goto"])
 		for t in targets:
 			var walked: bool = path.has(s["id"] + ">" + t)
 			var a := _pos(s)
@@ -371,11 +372,25 @@ func _show_square(s: Dictionary) -> void:
 			Kit.focus(next)
 		"choose":
 			text.text = body if body != "" else "选一人随你同行。"
-			var open := Kit.button("做出选择", "gold")
-			open.pressed.connect(_open_choose.bind(s))
-			buttons.add_child(open)
-			Kit.focus(open)
-			_open_choose(s)
+			if s["choose"].any(func(o): return o["card"] == ""):
+				# choices without cards (a destination, a plan): one button each, locked ones greyed out
+				var first := true
+				for i in s["choose"].size():
+					var o: Dictionary = s["choose"][i]
+					var b := Kit.button(o["label"], "gold")
+					b.disabled = o["locked"]
+					b.pressed.connect(_resolve.bind(i))
+					buttons.add_child(b)
+					if first and not o["locked"]:
+						Kit.focus(b)
+						first = false
+			else:
+				var open := Kit.button("做出选择", "gold")
+				open.pressed.connect(_open_choose.bind(s))
+				buttons.add_child(open)
+				Kit.focus(open)
+				if body == "":  # nothing to read first
+					_open_choose(s)
 		"battle":
 			var sc: Dictionary = db.scenarios[s["battle"]]
 			var e: Dictionary = db.enemies[sc["enemy"]]

@@ -83,21 +83,25 @@ func demo(name: String) -> void:
 		"map", "pick":
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
-			Quests.resolve(q, save, rng)
-			Quests.move(q, save, "pick")
-			Quests.resolve(q, save, rng, 1)
-			for sid in ["zy_talk", "zy_fight", "zy_loot", "gate"]:
+			Quests.resolve(q, save, rng, 0)
+			for sid in ["wake", "village", "raid", "plan"]:
 				Quests.move(q, save, sid)
 				Quests.resolve(q, save, rng)
+			for sid in ["zy_lure", "zy_hall", "rescue", "muster"]:
+				Quests.move(q, save, sid)
+				Quests.resolve(q, save, rng, 1)
 			save.damage = 900
 			if name == "pick":
-				Quests.move(q, save, "chest")
+				Quests.move(q, save, "draft")
 			show_screen(MapScreen.new())
 		"choose":
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
-			Quests.resolve(q, save, rng)
-			Quests.move(q, save, "pick")
+			Quests.resolve(q, save, rng, 0)
+			for sid in ["wake", "village", "raid"]:
+				Quests.move(q, save, sid)
+				Quests.resolve(q, save, rng)
+			Quests.move(q, save, "plan")
 			show_screen(MapScreen.new())
 		"battle", "fight":
 			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu"]

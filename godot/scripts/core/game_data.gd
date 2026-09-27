@@ -74,13 +74,18 @@ func _load(dir: String) -> void:
 			var s: Dictionary = q["squares"][sq_id]
 			squares[sq_id] = {"id": sq_id, "x": int(s["x"]), "y": int(s["y"]), "type": s["type"],
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
-				"cards": s.get("cards", []), "choose": s.get("choose", []), "battle": s.get("battle", ""),
+				"cards": s.get("cards", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "label": s.get("label", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", [])})
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")
+
+
+static func _choose_option(o: Dictionary) -> Dictionary:
+	## A choice on a choose square. `card` (optional) joins the party; `locked` options are shown but can't be picked.
+	return {"card": o.get("card", ""), "label": o.get("label", ""), "goto": o.get("goto", ""), "locked": o.get("locked", false)}
 
 
 func _validate() -> void:

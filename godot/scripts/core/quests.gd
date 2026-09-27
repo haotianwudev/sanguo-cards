@@ -24,8 +24,10 @@ static func validate(db: GameData) -> void:
 			assert(s["type"] in TYPES, where + ": unknown type " + s["type"])
 			var targets: Array = s["next"].duplicate()
 			for o in s["choose"]:
+				if o["locked"]:
+					continue
 				targets.append(o["goto"])
-				assert(db.cards.has(o["card"]), where + ": unknown card")
+				assert(o["card"] == "" or db.cards.has(o["card"]), where + ": unknown card")
 			for t in targets:
 				assert(q["squares"].has(t), where + ": unknown next " + t)
 				assert(q["squares"][t]["x"] > s["x"], where + ": next square must be further right")
@@ -44,7 +46,8 @@ static func current_quest(save: SaveData) -> Variant:
 
 static func ensure_started(save: SaveData) -> Variant:
 	var q: Variant = current_quest(save)
-	if q != null and save.quest != q["id"]:
+	# a save from an older version of the story may stand on a square that no longer exists
+	if q != null and (save.quest != q["id"] or not q["squares"].has(save.square)):
 		begin(q, save)
 	return q
 
@@ -111,10 +114,12 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				save.grant_card(cid)
 		"choose":
 			var opt: Dictionary = s["choose"][choice]
+			assert(not opt["locked"], "locked choice")
 			save.choices[s["id"]] = opt["goto"]
-			if not save.has_card(opt["card"]):
-				gained.append(db.cards[opt["card"]])
-			save.grant_card(opt["card"])
+			if opt["card"] != "":
+				if not save.has_card(opt["card"]):
+					gained.append(db.cards[opt["card"]])
+				save.grant_card(opt["card"])
 		"treasure", "recruit":
 			if not save.offer.is_empty() and choice >= 0:
 				gained.append(save.take(save.offer[choice]))
