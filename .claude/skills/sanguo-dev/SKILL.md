@@ -22,7 +22,7 @@ Balance is not a goal right now — don't spend turns tuning numbers unless aske
 | `godot/scripts/core/` | pure logic: `game_data.gd` (load + validate), `battle.gd` (engine, emits events), `quests.gd` (maps, events, runs), `save_data.gd` |
 | `godot/scripts/ui/` | `map_screen`, `battle_screen`, `card_view`, `pick_overlay`, `relic_pick`, `title_screen`, `kit` (palette, helpers) |
 | `godot/tests/` | `run_tests.gd` runner, `test_*.gd` (extend `TestCase`, `check`, `check_eq`, `check_between`, `bot_fight`, `party`) |
-| `pics/` | raw art (`source/`), `art.json` (framing), `ART-NEEDS.md` (generated), `CARD-DESIGN.md` (art specs) |
+| `pics/` | raw art (`source/`), `art.json` (framing), `ART-NEEDS.md` (generated: what each chapter still lacks), `CARD-DESIGN.md` (art specs, **§7 per-character look briefs**, §8 art priorities) |
 | `src/sanguo/art.py` | `sanguo-art` CLI: builds portraits + map backgrounds into `godot/data/`, regenerates ART-NEEDS / SOURCES |
 | `src/sanguo/*.py`, `tests/` | the old Textual (terminal) version — frozen, don't extend it |
 
@@ -119,6 +119,9 @@ striking figure (身材火辣). The text gives no number for her age, but she is
 no groping of anyone unconscious or captive; comedy comes from her temper, her love of duels and the others' reactions.
 
 Writing rules:
+- **Looks match the art.** A character's appearance in the text must match their portrait — or, before the art exists,
+  the brief in `CARD-DESIGN.md` §7. When you write a new character's look, add/adjust their brief there; when new art
+  arrives that differs, change the text (左慈: 「独眼瘸腿」 became 白发、竹杖、冒紫烟的葫芦 to match his portrait).
 - **Names.** A card name `A·B` shows **A on the name plate** and **B as the small tag** at the top of the card
   (`孙策·少年`). So the real name goes first, the nickname / version second: `胡玉·浪里蛟`, `唐周·妖道` — never
   `浪里蛟·胡玉`. Enemy names are what the battle title and every log line print: keep them short (`「浪里蛟」胡玉`,
