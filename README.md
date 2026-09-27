@@ -1,18 +1,29 @@
 # 三国卡牌 (sanguo-cards)
 
-三国题材卡牌策略游戏，借鉴兰斯10的卡牌战斗/战役节奏与三国群侠传的武将收集。目前是**纯 Python 文字版**，零依赖。
+三国题材卡牌策略游戏，借鉴兰斯10的卡牌战斗/战役节奏与三国群侠传的武将收集。终端界面（[Textual](https://textual.textualize.io/)），鼠标键盘都能操作；也保留了纯文字模式。
 
 ## 运行
 
 ```bash
 python -m pip install -e ".[dev]"   # 一次即可
-sanguo                               # 或：python -m sanguo
+sanguo                               # 终端界面（或：python -m sanguo）
+sanguo --plain                       # 纯文字模式
 sanguo --seed 7                      # 固定随机种子，复现同一局
 sanguo --new                         # 放弃存档重新开始（存档在 ~/.sanguo-cards/save.json）
 python -m pytest                     # 规则 + 数值平衡测试
 ```
 
-Windows 终端如出现中文乱码，先执行 `chcp 65001` 或设置 `PYTHONIOENCODING=utf-8`。
+推荐用 Windows Terminal，窗口至少 120×36。纯文字模式如出现中文乱码，先执行 `chcp 65001`。
+
+## 操作
+
+| 画面 | 操作 |
+|---|---|
+| 主菜单 | 数字键 1–6 或点击 |
+| 剧情 | 回车继续；三选一点按钮；Esc 回主菜单 |
+| 招募 | `1` 抽 1 次，`0` 抽 10 次 |
+| 编成 | 表格里回车 / 点击 = 加入（同兵种、同武将会替换）；点上方卡片 = 移出；`a` 自动编成 |
+| 战斗 | 数字键选部队 → 数字键选技能 → 数字键选目标（也可以全用鼠标点）；`E` 结束回合；Esc 取消 |
 
 ## 玩法
 

@@ -7,13 +7,13 @@ name = "sanguo-cards"
 version = "0.1.0"
 description = "三国卡牌 — Three Kingdoms card strategy game (text-first)"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["textual>=1.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 
 [project.scripts]
-sanguo = "sanguo.cli:main"
+sanguo = "sanguo.tui:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

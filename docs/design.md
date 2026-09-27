@@ -46,11 +46,12 @@
 3. **剧情 + 战役层（兰斯10 的另一半）** — 第一章起的分支剧情；行动回合制大地图，
    各势力有入侵进度条；事件与招降穿插其中。
 4. **存档、多剧本** — 黄巾、虎牢关、赤壁……
-5. **界面** — 规则层（`battle.py`）无 I/O，可直接接 Textual（终端 UI）、pygame 或 Web 前端。
+5. **界面** — 已有 Textual 终端界面；规则层无 I/O，以后要做 pygame 或 Web 前端也可以直接接。
 
 ## 代码约定
 
 - `src/sanguo/battle.py`：纯逻辑，所有操作返回日志行，不 print、不 input。
-- `src/sanguo/cli.py`：只负责显示和读输入。
+- `src/sanguo/tui.py`：Textual 终端界面（默认入口）；`cli.py`：纯文字界面（`--plain`）。两者都只负责显示和读输入。
+- `tests/test_tui.py`：用 Textual 的 pilot 无头驱动界面做冒烟测试。
 - `src/sanguo/data/cards.json`：技能、武将、剧本全在这里；加内容优先改数据，不改代码。
 - 效果类型（`damage` / `heal` / `guard` / `self_guard` / `atk_up` / `stun`）在 `Battle._apply` 里实现，新效果从那里加。

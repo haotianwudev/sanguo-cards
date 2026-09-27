@@ -1,3 +1,3 @@
-from .cli import main
+from .tui import main
 
 main()
