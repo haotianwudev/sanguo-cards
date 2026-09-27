@@ -136,3 +136,9 @@ def test_boss_always_drops_a_chest_and_overkill_helps(db):
     assert col.chest_after_battle(db, col.Save(), rng, 0.5, boss=False)  # 50% overkill: guaranteed
     drops = sum(bool(col.chest_after_battle(db, col.Save(), random.Random(i), 0.0, False)) for i in range(400))
     assert 150 < drops < 250  # ~50% without overkill
+
+
+def test_removed_cards_are_dropped_from_old_saves(db):
+    save = col.Save(owned=["guanyu", "gone_card"], soldiers={"dangyang": 2, "cav_n": 1}, party=["gone_card"])
+    assert col.owned_ids(db, save) == ["guanyu", "cav_n"]
+    assert save.party == []

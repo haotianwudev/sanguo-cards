@@ -4,7 +4,7 @@ Two kinds of card:
   generals (R/SR/SSR) — unique; come from the gacha and the story.
   soldiers (N, 兵卡)  — stackable; come mostly from battle chests. Copies of the same soldier card back
                         their troop with diminishing returns (×0.6 per extra copy), so a *different*
-                        soldier card of that troop (长沙刀兵 vs 当阳兵) is worth more than another copy.
+                        soldier card of that troop (长沙刀兵 vs 丹阳兵) is worth more than another copy.
 """
 from __future__ import annotations
 
@@ -55,7 +55,12 @@ class Save:
 
 
 def _sync(db: CardDB, save: Save) -> None:
-    """Soldier ids found in `owned` (older saves, hand-built test saves) become soldier copies."""
+    """Soldier ids found in `owned` (older saves, hand-built test saves) become soldier copies.
+    Cards that no longer exist in the data (renamed / removed) are dropped."""
+    if any(c not in db.cards for c in [*save.owned, *save.soldiers, *save.party]):
+        save.owned = [c for c in save.owned if c in db.cards]
+        save.soldiers = {c: n for c, n in save.soldiers.items() if c in db.cards}
+        save.party = [c for c in save.party if c in db.cards]
     if any(db.cards[c].soldier for c in save.owned):
         for c in [c for c in save.owned if db.cards[c].soldier]:
             save.soldiers[c] = save.soldiers.get(c, 0) + 1
