@@ -1,6 +1,7 @@
 {
   "_comment": "Art config: one entry per portrait key (card id, person id, or enemy portrait). Run `sanguo-art` after editing. See ART-NEEDS.md.",
   "portraits": {
+    "danyang": {"src": "placeholder/Gemini_Generated_Image_v43ixkv43ixkv43i.jpg", "face": [0.45, 0.33], "head": 0.14, "license": "用户提供（Gemini 生成）"},
     "lord": {"src": "placeholder/zhu gong.webp", "face": [0.52, 0.17], "head": 0.25, "placeholder": true, "license": "⚠️ 兰斯系列主角立绘（AliceSoft），仅自用占位，发布前必须替换"},
     "sunce": {"src": "sun ce.jpg", "face": [0.49, 0.22], "head": 0.1, "license": "用户提供"},
     "zhouyu": {"src": "zhou yu.jpg", "face": [0.46, 0.29], "head": 0.08, "license": "用户提供"},

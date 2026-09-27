@@ -130,19 +130,50 @@ func _build() -> void:
 		frame.stretch_mode = TextureRect.STRETCH_SCALE
 		_add(frame, Vector2.ZERO, Vector2(w, card_h))
 
-	# name: on the frame's plate, or a plate of our own
-	var plate := Rect2(win.position.x, win.end.y + 2, win.size.x, 28)
+	# name, engraved on the frame's plate (style per frame in ui.json); a variant (孙策·中年) gets a tag
+	var full: String = fighter["name"]
+	var parts := full.split("·", true, 1)
+	var main_name: String = parts[0]
+	var plate := Rect2(win.position.x, win.end.y + 2, win.size.x, 30)
+	var style := Kit.name_style("none")
 	if not fr.is_empty():
 		var p: Rect2 = fr["plate"]
 		plate = Rect2(p.position.x * w, p.position.y * card_h, p.size.x * w, p.size.y * card_h)
-	var nm := Kit.label(fighter["name"], clampi(int(plate.size.y * 0.9), 14, 24))
-	nm.add_theme_color_override("font_color", Color.WHITE)
-	nm.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
-	nm.add_theme_constant_override("outline_size", 6)
+		if fr["has_plate"]:
+			style = Kit.name_style(fr["name"])
+		else:
+			var band := ColorRect.new()
+			band.color = Color(0, 0, 0, 0.6)
+			_add(band, plate.position, plate.size)
+	var fs := clampi(int(plate.size.y * 0.86), 14, 30)
+	if main_name.length() >= 4:
+		fs = int(fs * 0.85)
+	var spacing := int(fs * 0.18) if main_name.length() <= 3 else 0
+	var nm := Label.new()
+	nm.text = main_name
+	nm.add_theme_font_override("font", Kit.name_font(fs, spacing))
+	nm.add_theme_font_size_override("font_size", fs)
+	nm.add_theme_color_override("font_color", Color(style["color"]))
+	if style.has("outline"):
+		nm.add_theme_color_override("font_outline_color", Color(style["outline"]))
+		nm.add_theme_constant_override("outline_size", maxi(3, fs / 5))
+	if style.has("shadow"):
+		nm.add_theme_color_override("font_shadow_color", Color(style["shadow"], 0.85))
+		nm.add_theme_constant_override("shadow_offset_x", 0)
+		nm.add_theme_constant_override("shadow_offset_y", 1)
 	nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	nm.clip_text = true
-	_add(nm, plate.position - Vector2(12, 0), plate.size + Vector2(24, 0))
+	_add(nm, plate.position - Vector2(8, 2), plate.size + Vector2(16, 4))
+	if parts.size() > 1:
+		var tag := Label.new()
+		tag.text = parts[1]
+		tag.add_theme_font_override("font", Kit.name_font(14, 1))
+		tag.add_theme_font_size_override("font_size", 14 if not small else 12)
+		tag.add_theme_color_override("font_color", Color("#ffe7a0"))
+		tag.add_theme_stylebox_override("normal", Kit.box(Color(0.1, 0.06, 0.02, 0.78), 6, 1, Color("#c9a14a"), 3))
+		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		var tw := 18.0 * parts[1].length() + 14
+		_add(tag, Vector2(win.position.x + (win.size.x - tw) / 2, win.position.y + 4), Vector2(tw, 22))
 
 	# troop badge (top-left corner) and, without frame art, the rarity gem
 	var bs := 40.0 if not small else 30.0

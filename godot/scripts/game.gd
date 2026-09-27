@@ -69,6 +69,14 @@ func demo(name: String) -> void:
 	rng.seed = 7
 	save = SaveData.create()
 	save.lord_name = "阿明"
+	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
+		show_screen(TitleScreen.new())
+		var o := PickOverlay.new()
+		o.title = "卡牌预览"
+		o.card_ids = Array(name.substr(6).split(","))
+		o.set_anchors_preset(Control.PRESET_FULL_RECT)
+		root.add_child(o)
+		return
 	match name:
 		"title":
 			show_screen(TitleScreen.new())

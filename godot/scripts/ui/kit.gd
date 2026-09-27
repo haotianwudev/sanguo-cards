@@ -138,11 +138,31 @@ static func frame(kind: String) -> Dictionary:
 		if idx.has(name):
 			var e: Dictionary = idx[name]
 			var w: Array = e["window"]
-			var p: Array = cfg.get("plate", [0.26, 0.872, 0.48, 0.066])
-			out = {"texture": load("res://data/art/frames/" + e["file"]),
-				"window": Rect2(w[0], w[1], w[2], w[3]), "plate": Rect2(p[0], p[1], p[2], p[3])}
+			var p: Array = cfg.get("plates", {}).get(name, cfg.get("plate", [0.29, 0.875, 0.42, 0.075]))
+			out = {"name": name, "texture": load("res://data/art/frames/" + e["file"]),
+				"window": Rect2(w[0], w[1], w[2], w[3]), "plate": Rect2(p[0], p[1], p[2], p[3]),
+				"has_plate": cfg.get("plates", {}).has(name)}
 	_textures[key] = out
 	return out
+
+
+static func name_style(frame_name: String) -> Dictionary:
+	var styles: Dictionary = GameData.get_db().ui.get("card", {}).get("name_styles", {})
+	return styles.get(frame_name, styles.get("none", {"color": "#ffffff", "outline": "#000000"}))
+
+
+static func name_font(size: int, spacing: int) -> Font:
+	## The calligraphic font for card names (system KaiTi for now; bundle a font for phone/web builds).
+	var key := "namefont:%d:%d" % [size, spacing]
+	if not _textures.has(key):
+		var sys := SystemFont.new()
+		sys.font_names = PackedStringArray(GameData.get_db().ui.get("card", {}).get("name_font", ["KaiTi"]))
+		var fv := FontVariation.new()
+		fv.base_font = sys
+		fv.spacing_glyph = spacing
+		fv.variation_embolden = 0.35
+		_textures[key] = fv
+	return _textures[key]
 
 
 # ---- portraits ---------------------------------------------------------------

@@ -28,7 +28,21 @@
   "card": {
     "_comment": "frame art per rarity (see pics/CARD-DESIGN.md). Window/plate come from art/frames/frames.json; missing entries fall back to drawn frames",
     "frames": {"N": "wood", "R": "bronze", "SR": "silver", "SSR": "ssr", "lord": "gold", "enemy": "iron"},
-    "plate": [0.26, 0.872, 0.48, 0.066]
+    "plate": [0.29, 0.875, 0.42, 0.075],
+    "_plates": "per-frame name plate [x, y, w, h] as fractions of the card; frames without a plate get a drawn band",
+    "plates": {"wood": [0.30, 0.874, 0.40, 0.076], "bronze": [0.30, 0.872, 0.40, 0.078], "silver": [0.30, 0.882, 0.40, 0.074],
+               "gold": [0.30, 0.872, 0.40, 0.08], "ssr": [0.30, 0.868, 0.40, 0.08], "iron": [0.28, 0.87, 0.44, 0.08]},
+    "name_font": ["KaiTi", "STKaiti", "Kaiti SC", "Noto Serif CJK SC", "SimSun"],
+    "_name_styles": "name text per frame: engraved (dark text + light shadow) on metal, light text + dark outline on dark plates",
+    "name_styles": {
+      "wood":   {"color": "#f6e7c8", "outline": "#3a2412"},
+      "bronze": {"color": "#2e1a08", "shadow": "#f3cf98"},
+      "silver": {"color": "#1d2533", "shadow": "#ffffff"},
+      "gold":   {"color": "#4a2a00", "shadow": "#fff3c4"},
+      "ssr":    {"color": "#ffe7a0", "outline": "#1b1640"},
+      "iron":   {"color": "#1c1f24", "shadow": "#eef1f5"},
+      "none":   {"color": "#ffffff", "outline": "#000000"}
+    }
   },
   "portrait_framing": {
     "_comment": "how many head-heights tall each portrait box shows (≈2.5 bust, ≈5.5 half body, large = whole picture)",
