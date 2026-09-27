@@ -1,68 +1,95 @@
 {
-  "start": "prologue",
-  "nodes": {
-    "prologue": {
-      "title": "序章 · 穿越",
-      "steps": [
-        {"text": [
-          "一道白光之后，{lord}睁开眼——四周是泥路、茅屋，和一面绣着“孙”字的旗。",
-          "“你是何人？衣着好生古怪。”一位英气逼人的少年按剑而立，身旁的白衣青年却在打量你手里的手机。",
-          "少年大笑：“我乃孙策孙伯符！这位是我的兄弟周瑜周公瑾。”",
-          "周瑜：“附近山中有贼人劫掠乡里，我等正要去剿。阁下既来此地，不如与我们同行？”",
-          "孙策、周瑜，还有闻声赶来的老将黄盖，都愿意与你同去——但人手有限，只能有一人随你。"
-        ], "portraits": ["sunce", "zhouyu"]},
-        {"choose": [
-          {"card": "sunce",    "label": "跟孙策正面杀上山", "goto": "path_sunce"},
-          {"card": "zhouyu",   "label": "听周瑜设伏诱敌",   "goto": "path_zhouyu"},
-          {"card": "huanggai", "label": "随黄盖稳扎稳打",   "goto": "path_huanggai"}
-        ]}
-      ]
+  "_comment": "Quest maps. x = column (left to right, never back), y = row 0-2. Diagonal links may only move one row.",
+  "quests": [
+    {
+      "id": "prologue", "title": "序章 · 穿越江东", "start": "wake",
+      "squares": {
+        "wake": {"x": 0, "y": 1, "type": "event", "label": "穿越", "next": ["pick"],
+          "portraits": ["sunce", "zhouyu"],
+          "text": [
+            "一道白光之后，{lord}睁开眼——四周是泥路、茅屋，和一面绣着“孙”字的旗。",
+            "“你是何人？衣着好生古怪。”一位英气逼人的少年按剑而立，身旁的白衣青年却在打量你手里的手机。",
+            "少年大笑：“我乃孙策孙伯符！这位是我的兄弟周瑜周公瑾。”",
+            "周瑜：“附近山中有贼人劫掠乡里，我等正要去剿。阁下既来此地，不如与我们同行？”",
+            "孙策、周瑜，还有闻声赶来的老将黄盖，都愿意与你同去——但人手有限，只能有一人随你。"
+          ]},
+        "pick": {"x": 1, "y": 1, "type": "choose", "label": "三选一",
+          "choose": [
+            {"card": "sunce",    "label": "跟孙策正面杀上山", "goto": "sc_talk"},
+            {"card": "zhouyu",   "label": "听周瑜设伏诱敌",   "goto": "zy_talk"},
+            {"card": "huanggai", "label": "随黄盖稳扎稳打",   "goto": "hg_talk"}
+          ]},
+
+        "sc_talk": {"x": 2, "y": 0, "type": "event", "label": "孙策", "next": ["sc_fight"], "portraits": ["sunce"],
+          "text": ["孙策翻身上马：“贼人不过乌合之众，随我冲！”", "你们直扑山道。"]},
+        "sc_fight": {"x": 3, "y": 0, "type": "battle", "battle": "shanzei_scout", "label": "山道", "next": ["sc_loot"]},
+        "sc_loot": {"x": 4, "y": 0, "type": "event", "label": "降卒", "next": ["gate"], "portraits": ["sunce"],
+          "cards": ["cav_n", "spear_n"],
+          "text": ["孙策一枪挑落贼哨，几个喽啰跪地求饶。", "“这些人弓马倒还娴熟，”孙策说，“就交给你带吧。”"]},
+
+        "zy_talk": {"x": 2, "y": 1, "type": "event", "label": "周瑜", "next": ["zy_fight"], "portraits": ["zhouyu"],
+          "text": ["周瑜展开地图：“山道狭窄，正宜设伏。先以弱兵诱之，再以弓弩截其归路。”"]},
+        "zy_fight": {"x": 3, "y": 1, "type": "battle", "battle": "shanzei_scout", "label": "伏击", "next": ["zy_loot"]},
+        "zy_loot": {"x": 4, "y": 1, "type": "event", "label": "缴获", "next": ["gate"], "portraits": ["zhouyu"],
+          "cards": ["archer_n", "strat_n"],
+          "text": ["贼哨果然中计，一个不少地落入埋伏。", "周瑜微笑：“降卒中有几位识字的，还有一队弓手，阁下可用。”"]},
+
+        "hg_talk": {"x": 2, "y": 2, "type": "event", "label": "黄盖", "next": ["hg_fight"],
+          "text": ["黄盖捋须：“老夫跟过孙坚将军，这等山贼见得多了。结阵而进，慢些无妨。”"]},
+        "hg_fight": {"x": 3, "y": 2, "type": "battle", "battle": "shanzei_scout", "label": "结阵", "next": ["hg_loot"]},
+        "hg_loot": {"x": 4, "y": 2, "type": "event", "label": "粮车", "next": ["gate"],
+          "cards": ["inf_n", "log_n"],
+          "text": ["阵势一压，贼哨便溃了。", "黄盖：“缴来的粮车正好，再编一队步卒，行军打仗都用得上。”"]},
+
+        "gate": {"x": 5, "y": 1, "type": "event", "label": "寨前", "next": ["chest", "spring"],
+          "text": ["山寨就在前方。左边小路通往贼人的藏宝洞，右边有一眼山泉可以歇脚。", "天色将晚，只来得及去一处。"]},
+        "chest": {"x": 6, "y": 0, "type": "treasure", "label": "藏宝洞", "next": ["boss"]},
+        "spring": {"x": 6, "y": 2, "type": "recover", "label": "山泉", "next": ["boss"]},
+        "boss": {"x": 7, "y": 1, "type": "battle", "battle": "shanzei", "boss": true, "label": "山寨", "next": ["mother"]},
+        "mother": {"x": 8, "y": 1, "type": "event", "label": "吴国太", "portraits": ["wuguotai"], "cards": ["wuguotai"],
+          "text": [
+            "山寨平定。回到孙家庄园，一位端庄的妇人迎了出来。",
+            "“伯符的母亲，吴国太。”她看着一身血污的你们，“先把伤养好，其余的慢慢说。”",
+            "吴国太愿随军照料伤兵。孙策笑道：“有了名声，自会有豪杰来投。”"
+          ]}
+      }
     },
 
-    "path_sunce": {
-      "title": "孙策路线 · 小霸王",
-      "steps": [
-        {"text": ["孙策翻身上马：“贼人不过乌合之众，随我冲！”", "你们直扑山寨正门。"], "portraits": ["sunce"]},
-        {"battle": "shanzei"},
-        {"text": ["孙策一枪挑落贼首，寨中贼众纷纷跪降。", "“这些人弓马倒还娴熟，”孙策说，“就交给你带吧。”"], "portraits": ["sunce"]},
-        {"give": {"cards": ["cav_n", "spear_n"]}}
-      ],
-      "next": "wuguotai"
+    {
+      "id": "huangjin", "title": "第一章 · 黄巾之乱", "start": "rumor",
+      "squares": {
+        "rumor": {"x": 0, "y": 1, "type": "event", "label": "起事", "next": ["road_a", "road_b"],
+          "text": ["“苍天已死，黄天当立！”张角率三十六方黄巾起事，州郡望风而降。",
+                   "{lord}率军北上。前方两条路：大路有黄巾前锋把守，山路难行但能绕到敌后。"]},
+        "road_a": {"x": 1, "y": 0, "type": "battle", "battle": "huangjin_vanguard", "label": "大路", "next": ["camp"]},
+        "road_b": {"x": 1, "y": 2, "type": "event", "label": "山路", "next": ["cache"],
+          "text": ["山路崎岖，走了整整一天，队伍疲惫不堪，但一路无人阻拦。"]},
+        "cache": {"x": 2, "y": 2, "type": "treasure", "label": "敌后粮仓", "next": ["camp"]},
+        "camp": {"x": 3, "y": 1, "type": "recover", "label": "扎营", "next": ["front"]},
+        "front": {"x": 4, "y": 1, "type": "battle", "battle": "huangjin_vanguard", "label": "阵前", "next": ["altar", "flank"]},
+        "altar": {"x": 5, "y": 0, "type": "treasure", "label": "祭坛", "next": ["zhangjiao"]},
+        "flank": {"x": 5, "y": 2, "type": "recover", "label": "休整", "next": ["zhangjiao"]},
+        "zhangjiao": {"x": 6, "y": 1, "type": "battle", "battle": "huangjin", "boss": true, "label": "张角", "next": ["after"]},
+        "after": {"x": 7, "y": 1, "type": "event", "label": "平定",
+          "text": ["张角病死军中，黄巾溃散。{lord}之名，开始传遍天下。"]}
+      }
     },
 
-    "path_zhouyu": {
-      "title": "周瑜路线 · 美周郎",
-      "steps": [
-        {"text": ["周瑜展开地图：“山道狭窄，正宜设伏。先以弱兵诱之，再以弓弩截其归路。”"], "portraits": ["zhouyu"]},
-        {"battle": "shanzei"},
-        {"text": ["贼人果然中计，一个不少地落入埋伏。", "周瑜微笑：“降卒中有几位识字的，还有一队弓手，阁下可用。”"], "portraits": ["zhouyu"]},
-        {"give": {"cards": ["archer_n", "strat_n"]}}
-      ],
-      "next": "wuguotai"
-    },
-
-    "path_huanggai": {
-      "title": "黄盖路线 · 老当益壮",
-      "steps": [
-        {"text": ["黄盖捋须：“老夫跟过孙坚将军，这等山贼见得多了。结阵而进，慢些无妨。”"]},
-        {"battle": "shanzei"},
-        {"text": ["阵势一压，贼人便溃了。", "黄盖：“缴来的粮车正好，再编一队步卒，行军打仗都用得上。”"]},
-        {"give": {"cards": ["inf_n", "log_n"]}}
-      ],
-      "next": "wuguotai"
-    },
-
-    "wuguotai": {
-      "title": "序章 · 吴国太",
-      "steps": [
-        {"text": [
-          "回到孙家庄园，一位端庄的妇人迎了出来。",
-          "“伯符的母亲，吴国太。”她看着一身血污的你们，“先把伤养好，其余的慢慢说。”",
-          "吴国太愿随军照料伤兵。孙策笑道：“有了名声，自会有豪杰来投。”"
-        ], "portraits": ["wuguotai"]},
-        {"give": {"cards": ["wuguotai"]}},
-        {"text": ["（序章完 · 后续剧情开发中）"]}
-      ]
+    {
+      "id": "hulao", "title": "第二章 · 虎牢关", "start": "alliance",
+      "squares": {
+        "alliance": {"x": 0, "y": 1, "type": "event", "label": "会盟", "next": ["sishui"],
+          "text": ["董卓入洛阳，废帝专权。十八路诸侯会盟讨董，{lord}亦在其列。",
+                   "先锋探报：汜水关守将华雄连斩数将，关后便是虎牢——还有那个人。"]},
+        "sishui": {"x": 1, "y": 1, "type": "battle", "battle": "huaxiong", "label": "汜水关", "next": ["spoils", "tent"]},
+        "spoils": {"x": 2, "y": 0, "type": "treasure", "label": "关内", "next": ["march"]},
+        "tent": {"x": 2, "y": 2, "type": "recover", "label": "军帐", "next": ["march"]},
+        "march": {"x": 3, "y": 1, "type": "event", "label": "关前", "next": ["lvbu"],
+          "text": ["虎牢关前，一骑当先。人中吕布，马中赤兔。", "诸侯军中无人敢出——轮到{lord}了。"]},
+        "lvbu": {"x": 4, "y": 1, "type": "battle", "battle": "hulao", "boss": true, "label": "吕布", "next": ["after"]},
+        "after": {"x": 5, "y": 1, "type": "event", "label": "西迁",
+          "text": ["吕布退走，董卓焚洛阳西迁。", "（后续章节开发中）"]}
+      }
     }
-  }
+  ]
 }

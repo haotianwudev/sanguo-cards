@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import random
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 
 from .cards import RARITIES, CardDB, Fighter, Leader, PlayerCard, build_fighter, build_leader, build_lord
@@ -16,9 +16,16 @@ class Save:
     owned: list[str] = field(default_factory=list)  # card ids, no duplicates
     party: list[str] = field(default_factory=list)  # card ids; the lord is implicit and always first
     cleared: list[str] = field(default_factory=list)  # scenario ids won at least once
-    story_node: str = ""  # current story node ("" = the story's start)
-    story_step: int = 0  # index of the next step inside that node
-    story_path: list[str] = field(default_factory=list)  # branches taken, in order
+    # quest map progress (see quest.py)
+    quest: str = ""  # quest in progress ("" = none started)
+    square: str = ""  # square the party stands on
+    visited: list[str] = field(default_factory=list)
+    resolved: bool = False  # current square done?
+    damage: int = 0  # shared-HP damage carried between battles in this quest
+    carry_extra: dict = field(default_factory=dict)  # card id -> {skill: 累积 increments}
+    carry_uses: dict = field(default_factory=dict)  # card id -> {skill: uses left}
+    choices: dict = field(default_factory=dict)  # choose-square id -> goto (remembered across retries)
+    quests_cleared: list[str] = field(default_factory=list)
     lord_name: str = "主公"
     party_slots: int = 4  # including the lord
     theme: str = "light"  # UI theme: "light" | "dark"
@@ -29,7 +36,9 @@ class Save:
 
     @classmethod
     def load(cls, path: Path) -> Save:
-        return cls(**json.loads(path.read_text("utf-8")))
+        raw = json.loads(path.read_text("utf-8"))
+        known = {f.name for f in fields(cls)}
+        return cls(**{k: v for k, v in raw.items() if k in known})  # older saves: drop retired fields
 
     def dump(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

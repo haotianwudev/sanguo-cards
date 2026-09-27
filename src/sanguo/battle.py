@@ -71,17 +71,31 @@ class Battle:
     opening: list[str] = field(default_factory=list)  # log lines from the first round start
 
     @classmethod
-    def start(cls, db: CardDB, scenario_id: str, party: list[Leader], seed: int | None = None) -> Battle:
+    def start(cls, db: CardDB, scenario_id: str, party: list[Leader], seed: int | None = None,
+              damage: int = 0, extra: dict | None = None, uses: dict | None = None) -> Battle:
+        """damage / extra / uses carry a quest's wear from earlier battles (see quest.py)."""
         sc = db.scenarios[scenario_id]
         e = db.enemies[sc.enemy]
         max_hp = round(e.hp * (1 + db.battle["enemy_hp_per_extra_leader"] * (len(party) - 1)))
-        units = [LeaderUnit(ld, {s: db.skills[s].uses for s in ld.card.skills}, {s: 0 for s in ld.card.skills})
-                 for ld in party]
+        extra, uses = extra or {}, uses or {}
+        units = []
+        for ld in party:
+            cid = ld.card.id
+            units.append(LeaderUnit(
+                ld,
+                {s: uses.get(cid, {}).get(s, db.skills[s].uses) for s in ld.card.skills},
+                {s: extra.get(cid, {}).get(s, 0) for s in ld.card.skills}))
         hp = sum(ld.hp for ld in party)
-        b = cls(db, sc, random.Random(seed), units, EnemyUnit(e, max_hp, max_hp), hp, hp,
+        b = cls(db, sc, random.Random(seed), units, EnemyUnit(e, max_hp, max_hp), max(1, hp - damage), hp,
                 ap=db.battle["ap_start"] - db.battle["ap_per_round"])
         b.opening = b._start_round()
         return b
+
+    def carry_out(self) -> tuple[int, dict, dict]:
+        """(damage taken, 累积 increments, uses left) keyed by card id — for the next battle in a quest."""
+        extra = {u.leader.card.id: dict(u.extra_cost) for u in self.leaders}
+        uses = {u.leader.card.id: {s: n for s, n in u.uses_left.items() if n is not None} for u in self.leaders}
+        return self.party_max - self.party_hp, extra, uses
 
     # ---- queries -------------------------------------------------------
 

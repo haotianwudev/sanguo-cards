@@ -93,11 +93,17 @@
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]}
   },
   "enemies": {
+    "shanzei_scout": {"name": "山贼斥候", "hp": 2200, "at": 150, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 1}]},
+    "huangjin_vanguard": {"name": "黄巾前锋", "hp": 5000, "at": 220, "actions": 2, "moves": [{"name": "黄巾冲阵", "power": 1.0, "weight": 3}, {"name": "呐喊", "power": 1.3, "weight": 1}]},
+    "huaxiong": {"name": "华雄", "hp": 5500, "at": 320, "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "横扫千军", "power": 1.6, "weight": 1}]},
     "shanzeituan": {"name": "山贼团", "hp": 5200, "at": 190, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "围殴", "power": 1.6, "weight": 1}]},
     "huangjinjun": {"name": "黄巾军·张角", "hp": 11000, "at": 260, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "黄巾冲阵", "power": 1.0, "weight": 3}, {"name": "太平妖术", "power": 1.4, "weight": 2}, {"name": "符水惑众", "power": 0.5, "confuse": 0.6, "weight": 1}]},
     "lvbu": {"name": "吕布", "hp": 12500, "at": 600, "actions": 3, "phys_resist": 0.2, "moves": [{"name": "方天画戟", "power": 1.0, "weight": 4}, {"name": "无双", "power": 2.2, "weight": 1}, {"name": "赤兔冲阵", "power": 1.4, "confuse": 0.4, "weight": 1}]}
   },
   "scenarios": {
+    "shanzei_scout": {"name": "山贼斥候", "turn_limit": 6, "enemy": "shanzei_scout"},
+    "huangjin_vanguard": {"name": "黄巾前锋", "turn_limit": 8, "enemy": "huangjin_vanguard"},
+    "huaxiong": {"name": "汜水关·华雄", "turn_limit": 8, "enemy": "huaxiong"},
     "shanzei": {"name": "剿灭山贼", "turn_limit": 8, "enemy": "shanzeituan"},
     "huangjin": {"name": "黄巾之乱", "turn_limit": 10, "enemy": "huangjinjun"},
     "hulao": {"name": "虎牢关之战", "turn_limit": 10, "enemy": "lvbu"}

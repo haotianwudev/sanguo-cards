@@ -5,7 +5,7 @@ from textual.widgets import Button, Input
 
 from sanguo import collection as col
 from sanguo.cards import load_db
-from sanguo.tui import BattleScreen, GachaScreen, MenuScreen, PartyScreen, SanguoApp, StoryScreen
+from sanguo.tui import BattleScreen, GachaScreen, MenuScreen, PartyScreen, QuestScreen, SanguoApp
 
 SIZE = (150, 44)
 
@@ -24,7 +24,7 @@ def button(app, name):
     return next(b for b in app.screen.query(Button) if b.name == name)
 
 
-def test_new_game_story_battle_and_prologue(tmp_path):
+def test_new_game_walks_the_prologue_map(tmp_path):
     async def go():
         app = SanguoApp(tmp_path / "s.json", new=True, seed=1)
         async with app.run_test(size=SIZE) as pilot:
@@ -32,27 +32,32 @@ def test_new_game_story_battle_and_prologue(tmp_path):
             app.screen.query_one(Input).value = "阿明"
             await pilot.press("enter")
             await pilot.pause()
-            assert isinstance(app.screen, StoryScreen)
-            await pilot.press("enter")  # intro text
+            assert isinstance(app.screen, QuestScreen)
+            assert app.save.square == "wake"
+            await pilot.press("enter")  # read the intro
+            await pilot.press("enter")  # step to the only next square
             await pilot.pause()
-            button(app, "choose-0").press()  # 孙策
+            assert app.save.square == "pick"
+            await pilot.press("1")  # 孙策
             await pilot.pause()
-            assert app.save.story_path == ["path_sunce"]
-            await pilot.press("enter")  # path text
+            assert app.save.choices["pick"] == "sc_talk" and "sunce" in app.save.owned
+            await pilot.press("enter", "enter", "enter")  # to the square, read, move on to the battle
             await pilot.pause()
-            button(app, "fight").press()
+            assert app.save.square == "sc_fight"
+            await pilot.press("enter")  # 出战
             await pilot.pause()
             assert isinstance(app.screen, BattleScreen)
             app.screen.b.enemy.hp = 1
-            await pilot.press("1", "1")  # leader 1 (lord) → skill 1 (突击)
+            app.screen.b.party_hp -= 500  # this damage must follow us to the next battle
+            await pilot.press("1", "1")
             await pilot.pause()
             await pilot.press("enter")  # result modal
             await pilot.pause()
-            assert isinstance(app.screen, StoryScreen)
-            for _ in range(5):
-                await pilot.press("enter")
-                await pilot.pause()
-            assert "wuguotai" in app.save.owned and "cav_n" in app.save.owned
+            assert isinstance(app.screen, QuestScreen)
+            assert app.save.resolved and app.save.damage >= 500
+            await pilot.press("enter", "enter")  # to the loot square and take it
+            await pilot.pause()
+            assert "cav_n" in app.save.owned
             assert (tmp_path / "s.json").exists()
     run(go())
 

@@ -1,6 +1,6 @@
 from sanguo import portrait
 from sanguo.cards import load_db
-from sanguo.story import load_story
+from sanguo.quest import load_quests
 
 
 def test_render_is_exactly_the_requested_size():
@@ -18,6 +18,5 @@ def test_variants_share_their_persons_portrait():
 
 def test_story_portraits_all_exist():
     db = load_db()
-    st = load_story(db)
-    keys = {k for n in st.nodes.values() for step in n.steps for k in step.get("portraits", [])}
+    keys = {k for q in load_quests(db) for s in q.squares.values() for k in s.portraits}
     assert keys and keys <= set(portrait._index())

@@ -7,6 +7,7 @@ import random
 from pathlib import Path
 
 from rich.markup import escape
+from rich.text import Text
 from textual import on
 from textual.app import App, ComposeResult
 from textual.binding import Binding
@@ -17,7 +18,7 @@ from textual.theme import Theme
 from textual.widgets import Button, DataTable, Footer, Input, Label, RichLog, Static
 
 from . import collection as col
-from . import portrait, story
+from . import portrait, quest
 from .battle import Battle
 from .cards import LORD, RARITIES, CardDB, Fighter, Leader, Skill, build_fighter, load_db, power, power_split
 
@@ -205,8 +206,8 @@ class MenuScreen(Screen):
 
     def refresh_status(self) -> None:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        cur = story.current(app.st, app.save)
-        chapter = cur[0].title if cur else "暂无新章节"
+        cur = quest.current_quest(app.quests, app.save)
+        chapter = cur.title if cur else "暂无新章节"
         self.query_one("#status", Static).update(
             f"[b]{escape(app.save.lord_name)}[/]   卡册 {len(app.save.owned)}/{len(app.db.cards)}"
             f"   编成 {len(app.save.party) + 1}/{app.save.party_slots}\n[dim]剧情：{chapter}[/]")
@@ -217,7 +218,7 @@ class MenuScreen(Screen):
 
     def action_go(self, n: int) -> None:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        screens = {1: StoryScreen, 2: GachaScreen, 3: CollectionScreen, 4: PartyScreen, 5: ScenarioScreen}
+        screens = {1: QuestScreen, 2: GachaScreen, 3: CollectionScreen, 4: PartyScreen, 5: ScenarioScreen}
         if n == 6:
             app.exit()
         else:
@@ -237,39 +238,141 @@ class NameModal(ModalScreen[str]):
         self.dismiss(self.query_one("#name", Input).value.strip() or "主公")
 
 
-# ---- story -------------------------------------------------------------------
+# ---- quest map ---------------------------------------------------------------
 
-class StoryScreen(Screen):
-    BINDINGS = [Binding("escape", "app.pop_screen", "返回主菜单"), Binding("enter", "next", "继续")]
+SQUARE_GLYPH = {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休"}
+TYPE_NAME = {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复"}
+CELL = 8  # map columns per square: 4 for the square, 4 for the link
+
+
+def _glyph(s: quest.Square) -> str:
+    return "将" if s.boss else SQUARE_GLYPH[s.type]
+
+
+def _type_color(s: quest.Square) -> str:
+    if s.boss:
+        return C.purple
+    return {"battle": C.red, "treasure": C.gold, "recover": C.blue, "choose": C.amber}.get(s.type, C.text)
+
+
+def map_text(q: quest.Quest, save: col.Save) -> Text:
+    """Draw the quest map: squares on rows 0-2, links between neighbouring columns."""
+    width = (max(s.x for s in q.squares.values()) + 1) * CELL
+    lines = 3 * 3 - 1
+    grid: list[list[tuple[str, str] | None]] = [[(" ", "")] * width for _ in range(lines)]
+    visited = set(save.visited)
+    reachable = {s.id for s in quest.next_options(q, save)}
+    path_pairs = set(zip(save.visited, save.visited[1:]))
+
+    def put(line: int, col_: int, text: str, style: str) -> None:
+        for ch in text:
+            wide = ord(ch) > 0x2E80
+            grid[line][col_] = (ch, style)
+            if wide:
+                grid[line][col_ + 1] = None
+                col_ += 2
+            else:
+                col_ += 1
+
+    for s in q.squares.values():
+        targets = list(s.next) + [o["goto"] for o in s.choose]
+        for t in targets:
+            ts = q.squares[t]
+            on_path = (s.id, t) in path_pairs
+            if not on_path and s.type == "choose" and s.id in save.choices and save.choices[s.id] != t:
+                style = C.border
+            else:
+                style = f"bold {C.gold}" if on_path else C.track
+            base = s.x * CELL
+            if ts.y == s.y:
+                put(3 * s.y, base + 4, "────", style)
+            elif ts.y == s.y + 1:
+                put(3 * s.y + 1, base + 5, "╲", style)
+                put(3 * s.y + 2, base + 6, "╲", style)
+            else:
+                put(3 * s.y - 1, base + 5, "╱", style)
+                put(3 * s.y - 2, base + 6, "╱", style)
+    for s in q.squares.values():
+        if s.id == save.square:
+            style = f"bold {C.bg} on {C.gold}"
+        elif s.id in reachable:
+            style = f"bold {C.bg} on {C.green}"
+        elif s.id in visited:
+            style = f"{C.dim} on {C.track}"
+        else:
+            style = f"bold {_type_color(s)} on {C.panel}"
+        put(3 * s.y, s.x * CELL, f" {_glyph(s)} ", style)
+        label = (s.label or TYPE_NAME[s.type])[:2]
+        put(3 * s.y + 1, s.x * CELL, label, C.muted if s.id not in visited else C.dim)
+
+    text = Text(no_wrap=True, overflow="crop")
+    for i, row in enumerate(grid):
+        for cell in row:
+            if cell is not None:
+                text.append(cell[0], cell[1] or None)
+        if i < lines - 1:
+            text.append("\n")
+    return text
+
+
+class QuestScreen(Screen):
+    BINDINGS = ([Binding("escape", "app.pop_screen", "回主菜单"), Binding("enter", "primary", "继续")]
+                + [Binding(str(i), f"step({i})", show=False) for i in range(1, 4)])
 
     def compose(self) -> ComposeResult:
-        yield Static(id="story-title")
-        yield VerticalScroll(id="story-body")
-        yield Horizontal(id="story-actions")
+        yield Static(id="quest-head")
+        yield Static(id="quest-map")
+        yield Static(id="quest-legend")
+        yield VerticalScroll(id="quest-body")
+        yield Horizontal(id="quest-actions")
         yield Footer()
 
     def on_mount(self) -> None:
-        self.render_step()
+        self.render_all()
 
-    def render_step(self) -> None:
+    def on_screen_resume(self) -> None:
+        self.render_all()
+
+    # -- rendering
+
+    def render_all(self) -> None:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        body = self.query_one("#story-body", VerticalScroll)
-        actions = self.query_one("#story-actions", Horizontal)
+        body = self.query_one("#quest-body", VerticalScroll)
+        actions = self.query_one("#quest-actions", Horizontal)
         body.remove_children()
         actions.remove_children()
-        cur = story.current(app.st, app.save)
-        if cur is None:
-            self.query_one("#story-title", Static).update("剧情")
+        q = quest.ensure_started(app.quests, app.save)
+        app.persist()
+        if q is None:
+            self.query_one("#quest-head", Static).update("剧情")
+            self.query_one("#quest-map", Static).update("")
+            self.query_one("#quest-legend", Static).update("")
             body.mount(Static("剧情暂时到此为止。去招募、编成，或者自由出战吧。", classes="story-text"))
             actions.mount(Button("返回主菜单", name="back"))
             return
-        node, step = cur
-        self.query_one("#story-title", Static).update(f"━━  {node.title}  ━━")
-        kind = story.kind(step)
+        s = quest.here(q, app.save)
+        party = col.party_leaders(app.db, app.save)
+        hp_max = sum(ld.hp for ld in party)
+        hp = max(1, hp_max - app.save.damage)
+        worn = sum(n for d in app.save.carry_extra.values() for n in d.values())
+        wear = f"　[{C.amber}]累积技能已加价 +{worn}[/]" if worn else ""
+        self.query_one("#quest-head", Static).update(
+            f"[b {C.gold}]{q.title}[/]　　体力 {hp_bar(hp, hp_max, 30)} {hp}/{hp_max}{wear}\n"
+            f"[dim]任务中体力不会自动回满，只有「休」格能回复；输掉战斗要从任务开头重来。[/]")
+        self.query_one("#quest-map", Static).update(map_text(q, app.save))
+        self.query_one("#quest-legend", Static).update(
+            f"[{C.gold}]■[/] 当前　[{C.green}]■[/] 可前往　"
+            f"[{C.red}]战[/] 战斗　[{C.purple}]将[/] 首领　[{C.gold}]宝[/] 宝箱　[{C.blue}]休[/] 回复　事 剧情　[{C.amber}]选[/] 抉择")
+        self.render_square(q, s, body, actions)
+
+    def render_square(self, q: quest.Quest, s: quest.Square, body: VerticalScroll, actions: Horizontal) -> None:
+        app: SanguoApp = self.app  # type: ignore[assignment]
         lord = escape(app.save.lord_name)
-        if kind == "text":
-            text = "\n\n".join(escape(line).replace("{lord}", f"[b {C.red}]{lord}[/]") for line in step["text"])
-            keys = [k for k in step.get("portraits", []) if k in portrait._index()]
+        title = f"[b]{_glyph(s)} {s.label or TYPE_NAME[s.type]}[/]　[dim]{TYPE_NAME[s.type]}[/]"
+        body.mount(Static(title, classes="square-title"))
+        if s.type == "event" and s.text:
+            text = "\n\n".join(escape(line).replace("{lord}", f"[b {C.red}]{lord}[/]") for line in s.text)
+            keys = [k for k in s.portraits if k in portrait._index()]
             if keys:
                 row = Horizontal(classes="story-row")
                 body.mount(row)
@@ -278,64 +381,114 @@ class StoryScreen(Screen):
                 row.mount(Static(text, classes="story-text story-side"))
             else:
                 body.mount(Static(text, classes="story-text"))
-            actions.mount(Button("继续 ▶", name="next", variant="primary"))
-        elif kind == "choose":
-            body.mount(Static("选择一人随你同行：", classes="story-text"))
-            row = Horizontal(classes="choice-row")
-            body.mount(row)
-            for i, opt in enumerate(step["choose"]):
-                col_ = Vertical(classes="choice")
-                row.mount(col_)
-                col_.mount(CardView(app.db, build_fighter(app.db, opt["card"])))
-                col_.mount(Button(opt["label"], name=f"choose-{i}", variant="warning"))
-        elif kind == "give":
+        if not app.save.resolved:
+            if s.type in ("event",):
+                actions.mount(Button("继续 ▶ (Enter)", name="resolve", variant="primary"))
+            elif s.type == "choose":
+                row = Horizontal(classes="choice-row")
+                body.mount(row)
+                for i, opt in enumerate(s.choose):
+                    col_ = Vertical(classes="choice")
+                    row.mount(col_)
+                    col_.mount(CardView(app.db, build_fighter(app.db, opt["card"])))
+                    col_.mount(Button(f"{i + 1}. {opt['label']}", name=f"choose-{i}", variant="warning"))
+            elif s.type == "battle":
+                sc = app.db.scenarios[s.battle]
+                e = app.db.enemies[sc.enemy]
+                boss = f"[b {C.purple}]首领战[/]　" if s.boss else ""
+                body.mount(Static(f"{boss}敌军：[b]{e.name}[/]　体力 {e.hp}　攻击 {e.at}　每回合 {e.actions} 次行动　"
+                                  f"{sc.turn_limit} 回合内击破\n\n当前编成：", classes="story-text"))
+                grid = Grid(classes="card-grid")
+                body.mount(grid)
+                for ld in col.party_leaders(app.db, app.save):
+                    grid.mount(CardView(app.db, ld.card, note=leader_note(ld)))
+                actions.mount(Button("⚔ 出战 (Enter)", name="fight", variant="error"))
+                actions.mount(Button("先去整备（回主菜单）", name="back"))
+            elif s.type == "treasure":
+                body.mount(Static("一只沉甸甸的宝箱。", classes="story-text"))
+                actions.mount(Button("打开宝箱 (Enter)", name="resolve", variant="warning"))
+            elif s.type == "recover":
+                body.mount(Static("可以在这里休整：体力回满，累积技能的 AP 加价和限 1 次技能全部重置。", classes="story-text"))
+                actions.mount(Button("休整 (Enter)", name="resolve", variant="primary"))
+            return
+        # resolved: where to next?
+        if s.type == "choose":
+            chosen = next(o for o in s.choose if o["goto"] == app.save.choices[s.id])
+            body.mount(Static(f"已选择：{chosen['label']}", classes="story-text"))
+        elif s.type == "battle":
+            body.mount(Static(f"[{C.green}]已击破。[/]", classes="story-text"))
+        elif s.type == "recover":
+            body.mount(Static(f"[{C.blue}]休整完毕，体力全满。[/]", classes="story-text"))
+        if self._gained:
             body.mount(Static("获得卡牌：", classes="story-text"))
             grid = Grid(classes="card-grid")
             body.mount(grid)
-            for cid in step["give"].get("cards", []):
-                grid.mount(CardView(app.db, build_fighter(app.db, cid)))
-            actions.mount(Button("继续 ▶", name="next", variant="primary"))
-        elif kind == "battle":
-            sc = app.db.scenarios[step["battle"]]
-            enemy = app.db.enemies[sc.enemy].name
-            body.mount(Static(f"即将开战：[b]{sc.name}[/]　敌军：{enemy}\n\n当前编成：", classes="story-text"))
-            grid = Grid(classes="card-grid")
-            body.mount(grid)
-            for ld in col.party_leaders(app.db, app.save):
-                grid.mount(CardView(app.db, ld.card, note=leader_note(ld)))
-            actions.mount(Button("⚔ 出战", name="fight", variant="error"))
-            actions.mount(Button("先去整备（回主菜单）", name="back"))
+            for c in self._gained:
+                grid.mount(CardView(app.db, build_fighter(app.db, c.id), note=f"[b {C.gold}]✦ NEW[/]"))
+        opts = quest.next_options(q, app.save)
+        if not opts:
+            actions.mount(Button("完成任务 ▶ (Enter)", name="complete", variant="success"))
+            return
+        for i, n in enumerate(opts):
+            actions.mount(Button(f"{i + 1}. 前往 {_glyph(n)} {n.label or TYPE_NAME[n.type]}", name=f"move-{n.id}",
+                                 variant="primary" if i == 0 else "default"))
 
-    def action_next(self) -> None:
-        app: SanguoApp = self.app  # type: ignore[assignment]
-        cur = story.current(app.st, app.save)
-        if cur and story.kind(cur[1]) in ("text", "give"):
-            story.advance(app.db, app.st, app.save)
-            app.persist()
-            self.render_step()
+    _gained: list = []
+
+    # -- actions
+
+    def action_primary(self) -> None:
+        names = [b.name for b in self.query_one("#quest-actions", Horizontal).query(Button)]
+        for name in ("resolve", "fight", "complete"):
+            if name in names:
+                self.do(name)
+                return
+        moves = [n for n in names if n and n.startswith("move-")]
+        if len(moves) == 1:
+            self.do(moves[0])
+
+    def action_step(self, n: int) -> None:
+        names = [b.name for b in self.query(Button) if b.name and (b.name.startswith("move-") or b.name.startswith("choose-"))]
+        if n - 1 < len(names):
+            self.do(names[n - 1])
 
     @on(Button.Pressed)
     def pressed(self, event: Button.Pressed) -> None:
-        app: SanguoApp = self.app  # type: ignore[assignment]
-        bid = event.button.name or ""
-        if bid == "next":
-            self.action_next()
-        elif bid == "back":
-            app.pop_screen()
-        elif bid.startswith("choose-"):
-            story.advance(app.db, app.st, app.save, int(bid.split("-")[1]))
-            app.persist()
-            self.render_step()
-        elif bid == "fight":
-            scenario = story.current(app.st, app.save)[1]["battle"]
+        if event.button.name:
+            self.do(event.button.name)
 
+    def do(self, name: str) -> None:
+        app: SanguoApp = self.app  # type: ignore[assignment]
+        q = quest.current_quest(app.quests, app.save)
+        if name == "back" or q is None:
+            app.pop_screen()
+            return
+        s = quest.here(q, app.save)
+        if name == "resolve":
+            self._gained = quest.resolve(app.db, q, app.save, app.rng)
+        elif name.startswith("choose-"):
+            self._gained = quest.resolve(app.db, q, app.save, app.rng, int(name.split("-")[1]))
+        elif name.startswith("move-"):
+            self._gained = []
+            quest.move(q, app.save, name[5:])
+        elif name == "complete":
+            self._gained = []
+            quest.complete(q, app.save)
+            self.notify(f"「{q.title}」完成！", title="任务")
+        elif name == "fight":
             def after(won: bool | None) -> None:
                 if won:
-                    story.advance(app.db, app.st, app.save)
-                    app.persist()
-                self.render_step()
+                    self._gained = quest.resolve(app.db, q, app.save, app.rng)
+                else:
+                    quest.fail(q, app.save)
+                    self.notify("任务失败 —— 从任务开头重新出发（已获得的卡和做过的选择保留）", severity="warning", timeout=6)
+                app.persist()
+                self.render_all()
 
-            app.push_screen(BattleScreen(scenario), after)
+            app.push_screen(BattleScreen(s.battle, carry=True), after)
+            return
+        app.persist()
+        self.render_all()
 
 
 # ---- gacha -------------------------------------------------------------------
@@ -533,14 +686,17 @@ class BattleScreen(Screen[bool]):
                 + [Binding("e", "end_round", "回合结束"), Binding("d", "defend", "防御"),
                    Binding("r", "retreat", "撤退"), Binding("escape", "cancel", "取消")])
 
-    def __init__(self, scenario_id: str) -> None:
+    def __init__(self, scenario_id: str, carry: bool = False) -> None:
         super().__init__()
         self.scenario_id = scenario_id
+        self.carry = carry  # quest battle: start with the quest's wear, hand it back afterwards
         self.selected: int | None = None
 
     def compose(self) -> ComposeResult:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        self.b = Battle.start(app.db, self.scenario_id, col.party_leaders(app.db, app.save), seed=app.seed)
+        sv = app.save
+        wear = dict(damage=sv.damage, extra=sv.carry_extra, uses=sv.carry_uses) if self.carry else {}
+        self.b = Battle.start(app.db, self.scenario_id, col.party_leaders(app.db, sv), seed=app.seed, **wear)
         yield Static(id="enemy-panel")
         yield RichLog(id="log", markup=True, wrap=True)
         with Horizontal(id="party-bar"):
@@ -705,6 +861,10 @@ class BattleScreen(Screen[bool]):
         won = self.b.result == "win"
         if won:
             col.record_win(app.save, self.scenario_id)
+            if self.carry:
+                app.save.damage, extra, uses = self.b.carry_out()
+                app.save.carry_extra.update(extra)
+                app.save.carry_uses.update(uses)
             app.persist()
         # dismiss on the next tick: dismissing from inside another screen's dismiss callback deadlocks
         app.push_screen(ResultModal(won), lambda _: self.app.call_later(self.dismiss, won))
@@ -787,6 +947,13 @@ class SanguoApp(App):
     .leader-portrait { width: 15; height: 10; }
     .leader-side { width: 1fr; height: auto; padding-left: 1; }
     .no-portrait { content-align: center middle; color: $sg-dim; background: $sg-spent; }
+    #quest-head { height: auto; padding: 1 2 0 2; }
+    #quest-map { height: auto; margin: 1 2; padding: 1 2; border: round $sg-border; background: $sg-card; }
+    #quest-legend { height: auto; padding: 0 2; color: $sg-muted; }
+    #quest-body { padding: 1 4; }
+    .square-title { padding: 0 0 1 0; }
+    #quest-actions { height: auto; padding: 0 4 1 4; }
+    #quest-actions Button { margin-right: 2; }
     .empty-slot { border: dashed $sg-track; width: 1fr; height: 9; content-align: center middle; color: $sg-dim; }
 
     #story-title { height: 3; padding: 1 2 0 2; text-style: bold; color: $sg-gold; }
@@ -844,7 +1011,7 @@ class SanguoApp(App):
     def __init__(self, save_path: Path, new: bool = False, seed: int | None = None) -> None:
         super().__init__()
         self.db = load_db()
-        self.st = story.load_story(self.db)
+        self.quests = quest.load_quests(self.db)
         self.save_path = save_path
         self.seed = seed
         self.rng = random.Random(seed)
@@ -867,7 +1034,7 @@ class SanguoApp(App):
             def named(name: str | None) -> None:
                 self.save.lord_name = name or "主公"
                 self.persist()
-                self.push_screen(StoryScreen())
+                self.push_screen(QuestScreen())
             self.push_screen(NameModal(), named)
 
     def on_unmount(self) -> None:
