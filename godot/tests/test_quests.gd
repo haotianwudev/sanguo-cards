@@ -619,3 +619,28 @@ func test_tangji_can_be_escorted_and_join() -> void:
 	s.event_battle = s.event_battle  # won
 	Quests.resolve(quest(0), s, rng(0))
 	check(s.has_card("tangji"), "唐姬 joins after the fight")
+
+
+func test_bandits_turn_up_everywhere() -> void:
+	for qi in 2:
+		for eid in ["shanzei", "yazhai", "shanzhai", "jieying"]:
+			check(quest(qi)["event_pool"].has(eid), "chapter %d: %s" % [qi + 1, eid])
+	check_eq(quest(1)["squares"]["road2"]["event"], "yazhai", "the road to 孙坚 passes her fort")
+
+
+func test_a_fixed_event_is_not_rolled_again() -> void:
+	var q := quest(1)
+	for seed_value in 30:
+		var s := SaveData.create()
+		Quests.begin(q, s)
+		s.square = "road1"
+		s.resolved = false
+		s.events = {}
+		check(Quests.event_here(q, s, rng(seed_value))["id"] != "yazhai", "seed %d" % seed_value)
+
+
+func test_beating_the_bandit_queen_brings_her_along() -> void:
+	var s := event_on_road("yazhai", 1)
+	check(s.event_battle.get("battle", "") == "yanzhihu")
+	Quests.resolve(quest(0), s, rng(0))
+	check(s.has_card("yanzhihu"))

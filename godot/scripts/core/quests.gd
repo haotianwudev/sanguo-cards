@@ -286,6 +286,9 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 		return GameData.get_db().events[s["event"]]
 	if not save.events.has(s["id"]):
 		var seen: Array = save.events.values()
+		for other in q["squares"].values():  # events a square always holds don't come up at random too
+			if other["event"] != "":
+				seen.append(other["event"])
 		var fresh: Array = q["event_pool"].filter(func(e): return not seen.has(e))
 		if fresh.is_empty():
 			fresh = q["event_pool"]

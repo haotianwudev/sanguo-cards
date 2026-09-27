@@ -65,6 +65,7 @@
     "volley": {"name": "齐射", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 0.6, "hits": 3}]},
     "buzhan": {"name": "步战", "cost": 1, "effects": [{"type": "attack", "power": 0.8}]},
     "jushun": {"name": "举盾", "cost": 1, "cumulative": true, "effects": [{"type": "guard", "cut": 0.5}]},
+    "yanzhi": {"name": "胭脂双刀", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 1.0, "hits": 2}, {"type": "stun", "chance": 0.2}]},
     "beige": {"name": "悲歌", "cost": 2, "cumulative": true, "effects": [{"type": "heal", "power": 3.0}, {"type": "stun", "chance": 0.3}]},
     "dujun": {"name": "督军", "cost": 1, "cumulative": true, "effects": [{"type": "ap", "amount": 2}]},
     "hujie": {"name": "护姐心切", "cost": 1, "cumulative": true, "effects": [{"type": "guard", "cut": 0.3}, {"type": "attack", "power": 0.8}]},
@@ -207,6 +208,7 @@
     "gongnv": {"name": "宫女", "rarity": "N", "troop": "logistics", "bonus": {"hp": 25}, "weight": 2},
     "xiliang_nvbing": {"name": "西凉女亲兵", "rarity": "N", "troop": "cavalry", "bonus": {"hp": 15, "at": 9}, "weight": 1},
     "tangji": {"name": "唐姬·弘农王妃", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 45, "at": 16}, "skills": ["beige"], "pool": false},
+    "yanzhihu": {"name": "胭脂虎·压寨夫人", "rarity": "R", "troop": "bandit", "bonus": {"hp": 45, "at": 14}, "skills": ["yanzhi"]},
     "zuoci": {"name": "左慈·乌角先生", "rarity": "SSR", "troop": "mage", "bonus": {"hp": 60, "at": 30}, "skills": ["zhibei"]},
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]},
     "yezhu_bing": {"name": "野猪兵", "rarity": "N", "troop": "cavalry", "bonus": {"hp": 20}, "weight": 2, "pool": false},
@@ -220,6 +222,8 @@
     "lvbu": {"name": "吕布", "rarity": "SSR", "troop": "cavalry", "bonus": {"hp": 110, "at": 32}, "skills": ["wushuang"], "pool": false}
   },
   "enemies": {
+    "shanzei_band": {"name": "山贼", "portrait": "shanzei_bing", "hp": 3800, "at": 190, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.08}], "card": "shanzei_bing"},
+    "yanzhihu": {"name": "「胭脂虎」", "portrait": "yanzhihu", "hp": 6500, "at": 230, "actions": 2, "moves": [{"name": "胭脂双刀", "power": 1.0, "weight": 3}, {"name": "媚眼", "power": 0.3, "weight": 1, "confuse": 0.6}, {"name": "喽啰们上", "power": 1.4, "weight": 1}, {"name": "母老虎发威", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "yanzhihu"},
     "xiliang_youqi": {"name": "西凉游骑", "portrait": "xiliang_bing", "hp": 5000, "at": 240, "actions": 2, "moves": [{"name": "马刀", "power": 1.0, "weight": 3}, {"name": "冲阵", "power": 1.5, "weight": 1}, {"name": "回马箭", "power": 1.2, "weight": 1}], "card": "xiliang_bing"},
     "guosi": {"name": "郭汜", "portrait": "guosi", "hp": 6500, "at": 250, "actions": 2, "moves": [{"name": "马槊", "power": 1.0, "weight": 3}, {"name": "劫掠", "power": 0.8, "weight": 2, "heal": 0.08}, {"name": "抢粮", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "发狠", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "guosi"},
     "feixiong": {"name": "飞熊军", "portrait": "feixiong_bing", "hp": 9000, "at": 270, "actions": 2, "phys_resist": 0.35, "moves": [{"name": "重甲冲锋", "power": 1.2, "weight": 3}, {"name": "结阵", "power": 0, "weight": 1, "heal": 0.06}, {"name": "熊冲·蓄力", "power": 0, "weight": 1, "charge": "熊冲"}, {"name": "熊冲", "power": 2.6, "weight": 0}], "card": "feixiong_bing"},
@@ -245,6 +249,8 @@
     "lvbu": {"name": "吕布", "portrait": "lvbu", "hp": 12500, "at": 600, "actions": 3, "phys_resist": 0.2, "moves": [{"name": "方天画戟", "power": 1.0, "weight": 4}, {"name": "赤兔冲阵", "power": 1.4, "weight": 1, "confuse": 0.4}, {"name": "无双·蓄力", "power": 0, "weight": 1, "charge": "天下无双"}, {"name": "天下无双", "power": 2.2, "weight": 0, "pierce": true}, {"name": "人中吕布", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "lvbu"}
   },
   "scenarios": {
+    "shanzei_band": {"name": "山贼", "turn_limit": 6, "enemy": "shanzei_band"},
+    "yanzhihu": {"name": "山寨·胭脂虎", "turn_limit": 8, "enemy": "yanzhihu"},
     "xiliang_youqi": {"name": "西凉游骑", "turn_limit": 6, "enemy": "xiliang_youqi"},
     "guosi": {"name": "郭汜", "turn_limit": 8, "enemy": "guosi"},
     "feixiong": {"name": "飞熊军", "turn_limit": 8, "enemy": "feixiong"},
