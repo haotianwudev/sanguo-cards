@@ -100,7 +100,7 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 			save.relics = ["hupi", "yuxi"]
 			save.danger = 1
-			save.offer = ["zhangu", "jiunang", "huangjinfu"]
+			save.offer = ["bingfa", "chitu", "dilu"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
 		"tiers":  # 铜 / 银 / 金 frames

@@ -31,6 +31,7 @@ var overkill := 0.0  # excess damage on the killing blow, as a share of the enem
 var opening: Array = []  # log lines from the first round start
 var mods: Dictionary = {}  # 宝物 / 险 (see cards.json relics) + enemy (险: enemy strength)
 var turn_limit := 0
+var first_hit_done := false
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
 ##       "enemy_hit"|"confuse"|"round"|"interrupt", ...}
@@ -177,7 +178,7 @@ func end_round() -> Array:
 
 func defend() -> Array:
 	var cuts: Array = db.battle["defend_cuts"]
-	var cut: float = cuts[mini(defend_streak, cuts.size() - 1)]
+	var cut: float = minf(0.95, float(cuts[mini(defend_streak, cuts.size() - 1)]) + float(mods.get("defend", 0.0)))
 	defend_streak += 1
 	_ev({"t": "defend", "cut": cut})
 	var log: Array = ["全军防御（伤害 -%d%%）" % int(round(cut * 100))]
@@ -200,6 +201,7 @@ func _variance() -> float:
 func _dmg(base: float, kind: String) -> int:
 	var data: Dictionary = enemy["data"]
 	var resist: float = data["phys_resist"] if kind == "attack" else data["magic_resist"]
+	resist *= 1.0 - minf(1.0, float(mods.get("pierce", 0.0)))
 	var d: float = base * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
 	return maxi(1, int(round(d * _variance())))
 
@@ -219,6 +221,9 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 					bonus += float(mods.get("magic", 0.0))
 				if party_hp * 2 < party_max:
 					bonus += float(mods.get("desperate", 0.0))
+				if not first_hit_done:  # 七星宝刀
+					bonus += float(mods.get("first_hit", 0.0))
+					first_hit_done = true
 				var d := _dmg(at * float(eff["power"]) * mult * (1.0 + bonus), kind)
 				if d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
@@ -251,7 +256,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "boost", "units": [leaders.find(u)]})
 			return ["  %s 进入 BOOST（下次行动 ×%s）" % [unit_name(u), bm]]
 		"stun":
-			if rng.randf() < float(eff["chance"]):
+			if rng.randf() < float(eff["chance"]) + float(mods.get("stun", 0.0)):
 				enemy["stunned"] = true
 				_ev({"t": "stun", "ok": true})
 				return ["  %s 陷入混乱！下回合无法行动" % ename]

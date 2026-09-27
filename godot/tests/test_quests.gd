@@ -340,7 +340,7 @@ func test_relics_change_battles() -> void:
 
 func test_troop_relics_only_help_their_troop() -> void:
 	var s := SaveData.create()
-	s.relics = ["madeng"]
+	s.relics = ["chitu"]
 	var m := Quests.mods(s)
 	check(m["troop_at"].has("cavalry") and not m["troop_at"].has("infantry"))
 
@@ -384,3 +384,19 @@ func test_each_run_deals_the_shuffle_groups_anew() -> void:
 		check_eq(types, ["battle", "mystery", "mysteryrisk"], "same contents, new places")
 		layouts[JSON.stringify(s.layout)] = true
 	check(layouts.size() > 3, "runs differ")
+
+
+func test_famous_weapons() -> void:
+	var s := SaveData.create()
+	s.take("zhouyu")
+	s.party = s.auto_party()
+	var plain := Battle.start("yaodao", s.party_leaders(), 3)
+	s.relics = ["qinggang", "qixing", "bazhen"]
+	var b := Battle.start("yaodao", s.party_leaders(), 3, 0, {}, {}, false, Quests.mods(s))
+	var hp0: int = b.enemy["hp"]
+	var hp1: int = plain.enemy["hp"]
+	b.act(0, "tuji")
+	plain.act(0, "tuji")
+	check(hp0 - b.enemy["hp"] > (hp1 - plain.enemy["hp"]) * 1.6, "七星宝刀 doubles the first hit")
+	var d1 := b.defend()
+	check(b.take_events().any(func(e): return e["t"] == "defend" and e["cut"] > 0.3), "八阵图 deepens defend")
