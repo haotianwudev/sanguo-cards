@@ -20,7 +20,7 @@ python -m pytest                     # 规则 + 数值平衡测试
    ```powershell
    New-NetFirewallRule -DisplayName "sanguo-cards LAN" -Direction Inbound -Protocol TCP -LocalPort 8766 -RemoteAddress LocalSubnet -Profile Private -Action Allow
    ```
-2. **每次玩**：在项目文件夹运行 `.\scripts\serve-lan.ps1`，它会打印手机要打开的网址（如 `http://192.168.1.172:8766`）。
+2. **每次玩**：双击 `scripts\serve-lan.cmd`（或在项目文件夹运行 `scripts\serve-lan.cmd`），它会打印手机要打开的网址（如 `http://192.168.1.172:8766`）。
 3. 手机浏览器打开那个网址，横屏玩。电脑和手机共用一个存档。
 
 ## 操作
