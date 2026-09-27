@@ -56,8 +56,10 @@ def test_auto_party_picks_best_per_troop(db, save):
     ids = col.auto_party(db, save)
     assert "guanyu" in ids and "cav_n" not in ids and "madai" not in ids
     assert col.validate_party(db, save, ids) is None
-    fighters = col.party_fighters(db, col.Save(owned=save.owned, party=ids))
-    assert fighters[0].troop == "lord" and len(fighters) == 4
+    leaders = col.party_leaders(db, col.Save(owned=save.owned, party=ids))
+    assert leaders[0].card.troop == "lord" and len(leaders) == 4
+    cav = next(ld for ld in leaders if ld.card.id == "guanyu")
+    assert {m.id for m in cav.members} == {"cav_n", "madai"}  # benched cavalry backs 关羽 up
 
 
 def test_general_adds_power_on_top_of_troop(db):

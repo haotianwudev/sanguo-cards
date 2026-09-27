@@ -1,52 +1,56 @@
-"""Rance-10-style card battle engine. Pure logic, no I/O — every call returns log lines.
+"""Rance X battle engine. Pure logic, no I/O — every call returns log lines.
 
-Flow per round:
-  1. Round starts: each living enemy declares an *intent* (skill + target), visible to the player.
-  2. Player spends AP: each card in the party may act at most once per round.
-  3. Player ends the turn: enemies execute their intents, statuses tick down.
-Win: every enemy down. Lose: every player general down, or the turn limit runs out.
+One shared party HP bar (sum of the leaders' HP) against one enemy with one HP bar.
+Round flow:
+  1. Round start: AP += 2 (max 6); leaders that sat out 3+ rounds may get BOOST (×1.5);
+     troop members may interrupt with a free attack.
+  2. Player phase: spend AP on leader skills. Each leader acts at most once per round.
+     累积 skills cost +1 AP after every use; 1回制限 skills can be used once per battle.
+     Every hit raises the combo; each combo step adds +10% damage.
+  3. End the round (or 防御: end it with a 30/50/70/90% damage cut for consecutive defends);
+     the enemy attacks the shared HP bar.
+Win: enemy HP 0. Lose: party HP 0, or the round limit runs out.
 """
 from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
 
-from .cards import CardDB, Fighter, Scenario, Skill
-
-PLAYER, ENEMY = "player", "enemy"
-GUARD_FACTOR = 0.5
-ATK_UP_FACTOR = 1.3
+from .cards import CardDB, Enemy, Leader, Scenario, Skill
 
 
 @dataclass
-class Unit:
-    card: Fighter
-    side: str
-    hp: int
+class LeaderUnit:
+    leader: Leader
     uses_left: dict[str, int | None]
+    extra_cost: dict[str, int]  # 累积 increments so far
     acted: bool = False
-    guard: bool = False
-    stunned: bool = False  # set by a stun effect; the unit loses its next action
-    dazed: bool = False  # player side: this round is lost to a stun (for display)
-    atk_up: int = 0  # rounds remaining
+    idle_rounds: int = 0
+    boosted: bool = False
+    confused: bool = False  # loses this round's action
+    confuse_next: bool = False  # hit by the enemy; will lose next round's action
 
     @property
     def name(self) -> str:
-        return self.card.name
+        return self.leader.card.name
 
     @property
-    def alive(self) -> bool:
-        return self.hp > 0
-
-    def stat(self, key: str) -> float:
-        base = {"atk": self.card.atk, "int": self.card.int}[key]
-        return base * ATK_UP_FACTOR if self.atk_up > 0 else base
+    def at(self) -> int:
+        return self.leader.at
 
 
 @dataclass
-class Intent:
-    skill: Skill
-    target: Unit | None  # None for all-target skills
+class EnemyUnit:
+    data: Enemy
+    hp: int
+    max_hp: int
+    stunned: bool = False  # skips its next phase
+    break_amount: float = 0.0  # extra damage taken
+    break_turns: int = 0
+
+    @property
+    def name(self) -> str:
+        return self.data.name
 
 
 @dataclass
@@ -54,203 +58,197 @@ class Battle:
     db: CardDB
     scenario: Scenario
     rng: random.Random
-    player: list[Unit]
-    enemy: list[Unit]
+    leaders: list[LeaderUnit]
+    enemy: EnemyUnit
+    party_hp: int
+    party_max: int
     round: int = 0
     ap: int = 0
-    intents: dict[int, Intent] = field(default_factory=dict)  # enemy index -> intent
+    combo: int = 0
+    guard_cut: float = 0.0  # from guard skills this round
+    defend_streak: int = 0
     result: str | None = None  # "win" | "lose"
+    opening: list[str] = field(default_factory=list)  # log lines from the first round start
 
     @classmethod
-    def from_scenario(cls, db: CardDB, scenario_id: str, party: list[Fighter],
-                      seed: int | None = None) -> Battle:
+    def start(cls, db: CardDB, scenario_id: str, party: list[Leader], seed: int | None = None) -> Battle:
         sc = db.scenarios[scenario_id]
-        b = cls(db, sc, random.Random(seed),
-                [cls._unit(db, f, PLAYER) for f in party],
-                [cls._unit(db, db.enemies[e], ENEMY) for e in sc.enemy])
-        b._start_round()
+        e = db.enemies[sc.enemy]
+        max_hp = round(e.hp * (1 + db.battle["enemy_hp_per_extra_leader"] * (len(party) - 1)))
+        units = [LeaderUnit(ld, {s: db.skills[s].uses for s in ld.card.skills}, {s: 0 for s in ld.card.skills})
+                 for ld in party]
+        hp = sum(ld.hp for ld in party)
+        b = cls(db, sc, random.Random(seed), units, EnemyUnit(e, max_hp, max_hp), hp, hp,
+                ap=db.battle["ap_start"] - db.battle["ap_per_round"])
+        b.opening = b._start_round()
         return b
-
-    @staticmethod
-    def _unit(db: CardDB, f: Fighter, side: str) -> Unit:
-        return Unit(f, side, f.hp, {s: db.skills[s].uses for s in f.skills})
 
     # ---- queries -------------------------------------------------------
 
-    def side(self, side: str) -> list[Unit]:
-        return self.player if side == PLAYER else self.enemy
+    def cost(self, u: LeaderUnit, sk: Skill) -> int:
+        return sk.cost + u.extra_cost[sk.id]
 
-    def foes(self, u: Unit) -> list[Unit]:
-        return self.enemy if u.side == PLAYER else self.player
+    def skills_of(self, u: LeaderUnit) -> list[Skill]:
+        return [self.db.skills[s] for s in u.leader.card.skills]
 
-    def friends(self, u: Unit) -> list[Unit]:
-        return self.player if u.side == PLAYER else self.enemy
+    def usable(self, u: LeaderUnit, sk: Skill) -> bool:
+        return u.uses_left[sk.id] != 0 and self.cost(u, sk) <= self.ap
 
-    def usable_skills(self, u: Unit) -> list[Skill]:
-        out = []
-        for sid in u.card.skills:
-            sk = self.db.skills[sid]
-            if u.uses_left[sid] == 0:
-                continue
-            if u.side == PLAYER and sk.cost > self.ap:
-                continue
-            out.append(sk)
-        return out
-
-    def can_act(self, u: Unit) -> bool:
-        return (self.result is None and u.side == PLAYER and u.alive and not u.acted
-                and not u.stunned and bool(self.usable_skills(u)))
-
-    @staticmethod
-    def needs_target(skill: Skill) -> bool:
-        return skill.target in ("enemy", "ally")
+    def can_act(self, i: int) -> bool:
+        u = self.leaders[i]
+        return (self.result is None and not u.acted and not u.confused
+                and any(self.usable(u, sk) for sk in self.skills_of(u)))
 
     # ---- player actions ------------------------------------------------
 
-    def act(self, actor_idx: int, skill_id: str, target_idx: int | None = None) -> list[str]:
-        u = self.player[actor_idx]
-        if not self.can_act(u):
-            raise ValueError(f"{u.name} 本回合无法行动")
+    def act(self, i: int, skill_id: str) -> list[str]:
+        u = self.leaders[i]
         sk = self.db.skills[skill_id]
-        if sk not in self.usable_skills(u):
-            raise ValueError(f"{u.name} 不能使用 {sk.name}")
-        target = None
-        if self.needs_target(sk):
-            pool = self.foes(u) if sk.target == "enemy" else self.friends(u)
-            if target_idx is None or not (0 <= target_idx < len(pool)) or not pool[target_idx].alive:
-                raise ValueError("目标无效")
-            target = pool[target_idx]
-        self.ap -= sk.cost
+        if not self.can_act(i) or skill_id not in u.leader.card.skills or not self.usable(u, sk):
+            raise ValueError(f"{u.name} 现在不能使用 {sk.name}")
+        self.ap -= self.cost(u, sk)
+        if sk.cumulative:
+            u.extra_cost[sk.id] += 1
+        if u.uses_left[sk.id] is not None:
+            u.uses_left[sk.id] -= 1
         u.acted = True
-        log = self._use(u, sk, target)
+        u.idle_rounds = 0
+        mult = self.db.battle["boost_mult"] if u.boosted else 1.0
+        log = [f"{u.name}【{sk.name}】" + ("（BOOST）" if u.boosted else "")]
+        u.boosted = False
+        for eff in sk.effects:
+            log += self._apply(u, eff, mult)
         self._check_end()
         return log
 
-    def end_turn(self) -> list[str]:
-        if self.result:
-            return []
-        log = ["—— 敌方行动 ——"]
-        for i, e in enumerate(self.enemy):
-            if not e.alive or self.result:
-                continue
-            if e.stunned:
-                log.append(f"{e.name} 陷入混乱，无法行动")
-                e.stunned = False
-                continue
-            intent = self.intents.get(i)
-            if intent is None:
-                continue
-            target = intent.target
-            if target is not None and not target.alive:
-                living = [p for p in self.player if p.alive]
-                target = self.rng.choice(living) if living else None
-                if target is None:
-                    break
-            log += self._use(e, intent.skill, target)
-            self._check_end()
-        if self.result is None and self.round >= self.scenario.turn_limit:
-            self.result = "lose"
-            log.append(f"已到第 {self.round} 回合上限 —— 敌军援兵到达，撤退！")
-        if self.result is None:
-            self._start_round()
-        return log
+    def end_round(self) -> list[str]:
+        self.defend_streak = 0
+        return self._enemy_phase(0.0)
+
+    def retreat(self) -> list[str]:
+        self.result = "lose"
+        return ["全军撤退！"]
+
+    def defend(self) -> list[str]:
+        cuts = self.db.battle["defend_cuts"]
+        cut = cuts[min(self.defend_streak, len(cuts) - 1)]
+        self.defend_streak += 1
+        return [f"全军防御（伤害 -{round(cut * 100)}%）"] + self._enemy_phase(cut)
 
     # ---- internals -----------------------------------------------------
 
-    def _start_round(self) -> None:
-        self.round += 1
-        self.ap = self.scenario.ap
-        for p in self.player:
-            p.guard = False
-        for u in self.player + self.enemy:
-            if u.atk_up > 0:
-                u.atk_up -= 1
-        for e in self.enemy:
-            e.guard = False
-        # a player general stunned during the enemy phase sits out exactly this round
-        for p in self.player:
-            p.dazed = p.stunned
-            p.acted = p.stunned
-            p.stunned = False
-        self.intents = {i: self._enemy_intent(e) for i, e in enumerate(self.enemy) if e.alive}
+    def _dmg(self, base: float, kind: str) -> int:
+        cfg = self.db.battle
+        e = self.enemy
+        resist = e.data.phys_resist if kind == "attack" else e.data.magic_resist
+        d = base * (1 + cfg["combo_bonus"] * self.combo) * (1 + e.break_amount) * (1 - resist)
+        d *= self.rng.uniform(1 - cfg["variance"], 1 + cfg["variance"])
+        return max(1, round(d))
 
-    def _enemy_intent(self, e: Unit) -> Intent:
-        skills = self.usable_skills(e)
-        # prefer limited-use signature skills ~40% of the time once available
-        special = [s for s in skills if s.uses is not None]
-        pick = self.rng.choice(special) if special and self.rng.random() < 0.4 else \
-            self.rng.choice([s for s in skills if s.uses is None] or skills)
-        target = None
-        if pick.target == "enemy":
-            target = self.rng.choice([p for p in self.player if p.alive])
-        elif pick.target == "ally":
-            target = min((x for x in self.enemy if x.alive), key=lambda x: x.hp / x.card.hp)
-        return Intent(pick, target)
-
-    def _use(self, u: Unit, sk: Skill, target: Unit | None) -> list[str]:
-        if u.uses_left[sk.id] is not None:
-            u.uses_left[sk.id] -= 1
-        if sk.target == "all_enemies":
-            targets = [x for x in self.foes(u) if x.alive]
-        elif sk.target == "all_allies":
-            targets = [x for x in self.friends(u) if x.alive]
-        elif sk.target == "self":
-            targets = [u]
-        else:
-            targets = [target]
-        head = f"{u.name}【{sk.name}】"
-        if len(targets) == 1 and self.needs_target(sk):
-            head += f" → {targets[0].name}"
-        log = [head]
-        for eff in sk.effects:
-            log += self._apply(u, eff, targets)
-        return log
-
-    def _apply(self, u: Unit, eff: dict, targets: list[Unit]) -> list[str]:
+    def _apply(self, u: LeaderUnit, eff: dict, mult: float) -> list[str]:
         kind = eff["type"]
-        log = []
-        if kind == "self_guard":
-            u.guard = True
-            return [f"  {u.name} 进入防御姿态"]
+        e = self.enemy
+        if kind in ("attack", "magic"):
+            log = []
+            for _ in range(eff.get("hits", 1)):
+                if e.hp <= 0:
+                    break
+                d = self._dmg(u.at * eff["power"] * mult, kind)
+                e.hp = max(0, e.hp - d)
+                self.combo += 1
+                log.append(f"  {e.name} 受到 {d} 伤害（{self.combo} 连击）")
+            return log
+        if kind == "heal":
+            amt = min(round(u.at * eff["power"] * mult), self.party_max - self.party_hp)
+            self.party_hp += amt
+            return [f"  体力恢复 {amt}"]
+        if kind == "guard":
+            self.guard_cut = 1 - (1 - self.guard_cut) * (1 - eff["cut"])
+            return [f"  本回合受到伤害 -{round(self.guard_cut * 100)}%"]
+        if kind == "boost":
+            if eff["target"] == "all":
+                for t in self.leaders:
+                    if t is not u:
+                        t.boosted = True
+                return [f"  全军进入 BOOST（下次行动 ×{self.db.battle['boost_mult']}）"]
+            u.boosted = True
+            return [f"  {u.name} 进入 BOOST（下次行动 ×{self.db.battle['boost_mult']}）"]
+        if kind == "stun":
+            if self.rng.random() < eff["chance"]:
+                e.stunned = True
+                return [f"  {e.name} 陷入混乱！下回合无法行动"]
+            return [f"  {e.name} 未受影响"]
+        if kind == "break":
+            e.break_amount = max(e.break_amount, eff["amount"])
+            e.break_turns = max(e.break_turns, eff["turns"])
+            return [f"  {e.name} 破防：受到伤害 +{round(eff['amount'] * 100)}%（{eff['turns']} 回合）"]
         if kind == "ap":
-            if u.side == PLAYER:
-                self.ap += eff["amount"]
-            return [f"  行动力 +{eff['amount']}"]
-        for t in targets:
-            if not t.alive:
-                continue
-            if kind == "damage":
-                base = u.stat(eff["stat"]) * eff["power"]
-                dmg = base * 100 / (100 + t.card.def_) * self.rng.uniform(0.9, 1.1)
-                if t.guard:
-                    dmg *= GUARD_FACTOR
-                dmg = max(1, round(dmg))
-                t.hp = max(0, t.hp - dmg)
-                log.append(f"  {t.name} 受到 {dmg} 伤害" + ("（防御）" if t.guard else "")
-                           + ("，败退！" if not t.alive else ""))
-            elif kind == "heal":
-                amt = round(u.stat(eff["stat"]) * eff["power"])
-                amt = min(amt, t.card.hp - t.hp)
-                t.hp += amt
-                log.append(f"  {t.name} 恢复 {amt} 兵力")
-            elif kind == "guard":
-                t.guard = True
-                log.append(f"  {t.name} 进入防御姿态")
-            elif kind == "atk_up":
-                t.atk_up = max(t.atk_up, eff["turns"] + 1)  # +1: ticks at next round start
-                log.append(f"  {t.name} 士气高涨（{eff['turns']} 回合）")
-            elif kind == "stun":
-                if self.rng.random() < eff["chance"]:
-                    t.stunned = True
-                    log.append(f"  {t.name} 陷入混乱！")
-                else:
-                    log.append(f"  {t.name} 未受影响")
-            else:
-                raise ValueError(f"unknown effect {kind}")
+            self.ap = min(self.db.battle["ap_max"], self.ap + eff["amount"])
+            return [f"  AP +{eff['amount']}"]
+        raise ValueError(f"unknown effect {kind}")
+
+    def _enemy_phase(self, defend_cut: float) -> list[str]:
+        if self.result:
+            return []
+        e = self.enemy
+        log = [f"—— {e.name} 的行动 ——"]
+        if e.stunned:
+            e.stunned = False
+            log.append(f"{e.name} 混乱中，无法行动")
+        else:
+            cut = 1 - (1 - self.guard_cut) * (1 - defend_cut)
+            var = self.db.battle["variance"]
+            for _ in range(e.data.actions):
+                mv = self.rng.choices(e.data.moves, weights=[m["weight"] for m in e.data.moves])[0]
+                d = max(1, round(e.data.at * mv["power"] * self.rng.uniform(1 - var, 1 + var) * (1 - cut)))
+                self.party_hp = max(0, self.party_hp - d)
+                log.append(f"{e.name}【{mv['name']}】 我军受到 {d} 伤害" + (f"（减伤 {round(cut * 100)}%）" if cut else ""))
+                if mv.get("confuse") and self.rng.random() < mv["confuse"]:
+                    victim = self.rng.choice(self.leaders)
+                    victim.confuse_next = True
+                    log.append(f"  {victim.name} 陷入混乱，下回合无法行动")
+                self._check_end()
+                if self.result:
+                    return log
+        if e.break_turns > 0:
+            e.break_turns -= 1
+            if e.break_turns == 0:
+                e.break_amount = 0.0
+        if self.round >= self.scenario.turn_limit:
+            self.result = "lose"
+            log.append(f"已到第 {self.round} 回合上限 —— 撤退！")
+            return log
+        return log + self._start_round()
+
+    def _start_round(self) -> list[str]:
+        cfg = self.db.battle
+        if self.round > 0:
+            for u in self.leaders:
+                if not u.acted:
+                    u.idle_rounds += 1
+        self.round += 1
+        self.ap = min(cfg["ap_max"], self.ap + cfg["ap_per_round"])
+        self.combo = 0
+        self.guard_cut = 0.0
+        log = [f"─── 第 {self.round} 回合 ───"]
+        for u in self.leaders:
+            u.acted = False
+            u.confused, u.confuse_next = u.confuse_next, False
+            if not u.boosted and u.idle_rounds >= cfg["boost_idle_rounds"] and self.rng.random() < cfg["boost_chance"]:
+                u.boosted = True
+                log.append(f"{u.name} 蓄势已久 —— BOOST！")
+        for u in self.leaders:
+            if u.leader.members and self.enemy.hp > 0 and self.rng.random() < cfg["interrupt_chance"]:
+                m = self.rng.choice(u.leader.members)
+                d = self._dmg(m.at * cfg["interrupt_power"], "attack")
+                self.enemy.hp = max(0, self.enemy.hp - d)
+                self.combo += 1
+                log.append(f"插入！{u.name}部队的 {m.name} 突袭，造成 {d} 伤害")
+        self._check_end()
         return log
 
     def _check_end(self) -> None:
-        if not any(e.alive for e in self.enemy):
+        if self.enemy.hp <= 0:
             self.result = "win"
-        elif not any(p.alive for p in self.player):
+        elif self.party_hp <= 0:
             self.result = "lose"

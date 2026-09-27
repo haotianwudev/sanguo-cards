@@ -17,11 +17,34 @@ from textual.widgets import Button, DataTable, Footer, Input, Label, RichLog, St
 
 from . import collection as col
 from . import story
-from .battle import Battle, Unit
-from .cards import LORD, RARITIES, CardDB, Fighter, build_fighter, load_db, power, power_split
+from .battle import Battle
+from .cards import LORD, RARITIES, CardDB, Fighter, Leader, Skill, build_fighter, load_db, power, power_split
 
 RARITY_COLOR = {"N": "#8b949e", "R": "#61afef", "SR": "#c678dd", "SSR": "#f5c542", None: "#e06c75"}
-TARGET_LABEL = {"enemy": "单体敌", "ally": "单体友", "self": "自身", "all_enemies": "全体敌", "all_allies": "全体友"}
+
+
+def skill_desc(sk: Skill) -> str:
+    """Short plain-text summary of what a skill does."""
+    parts = []
+    for e in sk.effects:
+        t = e["type"]
+        if t in ("attack", "magic"):
+            hits = f" ×{e['hits']}连" if e.get("hits", 1) > 1 else ""
+            parts.append(f"{'攻击' if t == 'attack' else '魔法'}{e['power']}倍{hits}")
+        elif t == "heal":
+            parts.append(f"回复 攻击×{e['power']}")
+        elif t == "guard":
+            parts.append(f"减伤{round(e['cut'] * 100)}%")
+        elif t == "boost":
+            parts.append("全军BOOST" if e["target"] == "all" else "自身BOOST")
+        elif t == "stun":
+            parts.append(f"混乱{round(e['chance'] * 100)}%")
+        elif t == "break":
+            parts.append(f"破防+{round(e['amount'] * 100)}%")
+        elif t == "ap":
+            parts.append(f"AP+{e['amount']}")
+    tag = "限1次" if sk.uses == 1 else ("累积" if sk.cumulative else "")
+    return f"AP{sk.cost}{' ' + tag if tag else ''}：" + "、".join(parts)
 
 
 # ---- shared rendering ------------------------------------------------------
@@ -39,7 +62,7 @@ def card_body(db: CardDB, f: Fighter) -> str:
     skills = " · ".join(db.skills[s].name for s in f.skills)
     return (f"[b]{db.troops[f.troop].name}[/]  战力 [b #f5c542]{power(f)}[/]\n"
             f"[dim]{split}[/]\n"
-            f"兵{f.hp} 武{f.atk} 智{f.int} 统{f.def_}\n"
+            f"体力 {f.hp}  攻击 {f.at}\n"
             f"[#abb2bf]{skills}[/]")
 
 
@@ -64,14 +87,19 @@ class CardView(Static):
 
 def card_table(db: CardDB, save: col.Save, table: DataTable, troop: str | None = None) -> None:
     table.clear(columns=True)
-    table.add_columns("", "稀有", "兵种", "武将", "战力", "兵种+武将", "兵", "武", "智", "统", "技能")
+    table.add_columns("", "稀有", "兵种", "武将", "战力", "兵种+武将", "体力", "攻击", "技能")
     fighters = [f for f in col.owned_fighters(db, save) if troop is None or f.troop == troop]
     for f in sorted(fighters, key=lambda f: (-RARITIES.index(f.rarity), -power(f))):
         tp, gp = power_split(db, f)
         color = RARITY_COLOR[f.rarity]
         table.add_row("◆" if f.id in save.party else "", f"[{color}]{f.rarity}[/]", db.troops[f.troop].name,
                       f"[{color}]{escape(f.name)}[/]", f"[b]{power(f)}[/]", f"{tp}+{gp}",
-                      f.hp, f.atk, f.int, f.def_, "、".join(db.skills[s].name for s in f.skills), key=f.id)
+                      f.hp, f.at, "、".join(db.skills[s].name for s in f.skills), key=f.id)
+
+
+def leader_note(ld: Leader) -> str:
+    backing = f"部队 {len(ld.members) + 1} 人 · " if ld.members else ""
+    return f"[#e5c07b]{backing}队长 攻击{ld.at} 体力{ld.hp}[/]"
 
 
 # ---- main menu ---------------------------------------------------------------
@@ -187,12 +215,12 @@ class StoryScreen(Screen):
             actions.mount(Button("继续 ▶", name="next", variant="primary"))
         elif kind == "battle":
             sc = app.db.scenarios[step["battle"]]
-            enemies = "、".join(app.db.enemies[e].name for e in sc.enemy)
-            body.mount(Static(f"即将开战：[b]{sc.name}[/]　敌军：{enemies}\n\n当前编成：", classes="story-text"))
+            enemy = app.db.enemies[sc.enemy].name
+            body.mount(Static(f"即将开战：[b]{sc.name}[/]　敌军：{enemy}\n\n当前编成：", classes="story-text"))
             grid = Grid(classes="card-grid")
             body.mount(grid)
-            for f in col.party_fighters(app.db, app.save):
-                grid.mount(CardView(app.db, f))
+            for ld in col.party_leaders(app.db, app.save):
+                grid.mount(CardView(app.db, ld.card, note=leader_note(ld)))
             actions.mount(Button("⚔ 出战", name="fight", variant="error"))
             actions.mount(Button("先去整备（回主菜单）", name="back"))
 
@@ -313,10 +341,9 @@ class CollectionScreen(Screen):
         if event.row_key and event.row_key.value:
             f = build_fighter(app.db, event.row_key.value)
             detail.mount(CardView(app.db, f))
-            skills = "\n".join(f"[b]{app.db.skills[s].name}[/] 耗{app.db.skills[s].cost} · "
-                               f"{'∞' if app.db.skills[s].uses is None else f'{app.db.skills[s].uses}次'} · "
-                               f"{TARGET_LABEL[app.db.skills[s].target]}" for s in f.skills)
-            detail.mount(Static(skills, classes="skill-list"))
+            skills = "\n".join(f"[b]{app.db.skills[s].name}[/]  {skill_desc(app.db.skills[s])}" for s in f.skills)
+            ld = col.leader_for(app.db, app.save, f.id)
+            detail.mount(Static(skills + "\n\n当队长时：" + leader_note(ld), classes="skill-list"))
 
 
 class PartyScreen(Screen):
@@ -338,12 +365,14 @@ class PartyScreen(Screen):
         app: SanguoApp = self.app  # type: ignore[assignment]
         slots = self.query_one("#slots", Horizontal)
         slots.remove_children()
-        party = col.party_fighters(app.db, app.save)
-        for f in party:
-            slots.mount(CardView(app.db, f))
+        party = col.party_leaders(app.db, app.save)
+        for ld in party:
+            slots.mount(CardView(app.db, ld.card, note=leader_note(ld)))
         for _ in range(app.save.party_slots - len(party)):
             slots.mount(Static("\n\n空位", classes="empty-slot"))
-        self.query_one("#party-power", Static).update(f"编成总战力 [b #f5c542]{sum(power(f) for f in party)}[/]")
+        self.query_one("#party-power", Static).update(
+            f"全军体力 [b #98c379]{sum(ld.hp for ld in party)}[/]　队长攻击合计 [b #f5c542]{sum(ld.at for ld in party)}[/]"
+            "　[dim]同兵种的其他卡会自动编入该队长的部队，加成队长[/]")
         table = self.query_one("#cards", DataTable)
         row = table.cursor_row
         card_table(app.db, app.save, table)
@@ -391,208 +420,185 @@ class PartyScreen(Screen):
 
 # ---- battle ------------------------------------------------------------------
 
-class UnitView(Static):
-    class Clicked(Message):
-        def __init__(self, side: str, idx: int) -> None:
-            super().__init__()
-            self.side, self.idx = side, idx
+class LeaderView(Vertical):
+    """One leader in the bottom row: its stats and one button per skill (Rance X style)."""
 
-    def __init__(self, side: str, idx: int, **kw) -> None:
+    def __init__(self, idx: int, skill_ids: tuple[str, ...], **kw) -> None:
         super().__init__(**kw)
-        self.side, self.idx = side, idx
+        self.idx = idx
+        self.skill_ids = skill_ids
 
-    def on_click(self) -> None:
-        self.post_message(self.Clicked(self.side, self.idx))
+    def compose(self) -> ComposeResult:
+        yield Static(classes="leader-info")
+        for sid in self.skill_ids:
+            yield Button("", name=f"{self.idx}:{sid}", classes="skill")
 
 
 class BattleScreen(Screen[bool]):
     BINDINGS = ([Binding(str(i), f"num({i})", show=False) for i in range(1, 10)]
-                + [Binding("e", "end_turn", "结束回合"), Binding("escape", "cancel", "取消选择")])
+                + [Binding("e", "end_round", "回合结束"), Binding("d", "defend", "防御"),
+                   Binding("r", "retreat", "撤退"), Binding("escape", "cancel", "取消")])
 
     def __init__(self, scenario_id: str) -> None:
         super().__init__()
         self.scenario_id = scenario_id
         self.selected: int | None = None
-        self.pending: str | None = None  # skill waiting for a target
 
     def compose(self) -> ComposeResult:
         app: SanguoApp = self.app  # type: ignore[assignment]
-        self.b = Battle.from_scenario(app.db, self.scenario_id, col.party_fighters(app.db, app.save), seed=app.seed)
-        yield Static(id="battle-head")
-        yield Label("敌军", classes="side-label enemy-label")
-        with Horizontal(id="enemies"):
-            for i in range(len(self.b.enemy)):
-                yield UnitView("enemy", i, classes="unit enemy")
-        yield Label("我军", classes="side-label")
-        with Horizontal(id="players"):
-            for i in range(len(self.b.player)):
-                yield UnitView("player", i, classes="unit player")
-        with Horizontal(id="battle-bottom"):
-            with Vertical(id="controls"):
-                yield Static(id="prompt")
-                yield Vertical(id="skills")
-                yield Button("结束回合 (E)", id="end", variant="error")
-            yield RichLog(id="log", markup=True, wrap=True)
+        self.b = Battle.start(app.db, self.scenario_id, col.party_leaders(app.db, app.save), seed=app.seed)
+        yield Static(id="enemy-panel")
+        yield RichLog(id="log", markup=True, wrap=True)
+        with Horizontal(id="party-bar"):
+            yield Static(id="party-status")
+            yield Button("防御 (D)", id="defend", variant="primary")
+            yield Button("回合结束 (E)", id="end", variant="error")
+        with Horizontal(id="leaders"):
+            for i, u in enumerate(self.b.leaders):
+                yield LeaderView(i, u.leader.card.skills, classes="leader")
         yield Footer()
 
     def on_mount(self) -> None:
-        sc = self.b.scenario
-        self.log_lines([f"[b]【{sc.name}】[/] {sc.turn_limit} 回合内击败全部敌将。"
-                        f"每回合行动力 {sc.ap}，每支部队每回合限动一次。"])
+        b = self.b
+        self.query_one("#enemy-panel", Static).border_title = escape(b.enemy.name)
+        for view in self.query(LeaderView):
+            u = b.leaders[view.idx]
+            view.border_title = f"{view.idx + 1}. {escape(u.name)}"
+            view.border_subtitle = self.app.db.troops[u.leader.card.troop].name  # type: ignore[attr-defined]
+        self.log_lines([f"[b]【{b.scenario.name}】[/] {b.scenario.turn_limit} 回合内击破 {escape(b.enemy.name)}。"
+                        "每位队长每回合行动一次；AP 每回合 +2，最多 6。"] + b.opening)
         self.refresh_all()
 
     # -- rendering
 
-    def log_lines(self, lines: list[str], enemy: bool = False) -> None:
+    def log_lines(self, lines: list[str]) -> None:
         log = self.query_one("#log", RichLog)
+        enemy = False
         for line in lines:
+            line = escape(line) if not line.startswith("[b]") else line
             if line.startswith("——"):
                 enemy = True
                 log.write(f"[b #e06c75]{line}[/]")
-            elif line.startswith("  "):
+            elif line.startswith("───"):
+                enemy = False
                 log.write(f"[dim]{line}[/]")
+            elif line.startswith("插入"):
+                log.write(f"[#c678dd]{line}[/]")
+            elif line.startswith("  "):
+                log.write(f"[#abb2bf]{line}[/]")
             else:
                 log.write(f"[#e06c75]{line}[/]" if enemy else f"[#98c379]{line}[/]")
 
-    def unit_text(self, u: Unit, idx: int) -> str:
-        db = self.b.db
-        tags = []
-        if u.guard:
-            tags.append("[#61afef]防御[/]")
-        if u.atk_up > 0:
-            tags.append("[#e5c07b]士气↑[/]")
-        if u.dazed or u.stunned:
-            tags.append("[#c678dd]混乱[/]")
-        lines = [f"[b]{idx + 1}. {escape(u.name)}[/] [dim]{db.troops[u.card.troop].name}[/]",
-                 hp_bar(u.hp, u.card.hp), f"{u.hp}/{u.card.hp}  {' '.join(tags)}"]
-        if not u.alive:
-            return f"[b]{idx + 1}. {escape(u.name)}[/]\n\n[dim]—— 败退 ——[/]"
-        if u.side == "enemy":
-            intent = self.b.intents.get(idx)
-            if intent:
-                tgt = intent.target.name if intent.target else \
-                    {"all_enemies": "我军全体", "all_allies": "敌军全体", "self": "自身"}[intent.skill.target]
-                lines.append(f"[#e5c07b]⚠ {intent.skill.name} → {escape(tgt)}[/]")
-        else:
-            lines.append("[dim]已行动[/]" if u.acted else "[#98c379]可行动[/]")
-        return "\n".join(lines)
-
     def refresh_all(self) -> None:
         b = self.b
-        pips = "●" * b.ap + "○" * max(0, b.scenario.ap - b.ap)
-        self.query_one("#battle-head", Static).update(
-            f"[b]{b.scenario.name}[/]　第 [b]{b.round}[/]/{b.scenario.turn_limit} 回合　行动力 [b #f5c542]{pips}[/] {b.ap}")
-        targets = self.target_pool()
-        for view in self.query(UnitView):
-            units = b.enemy if view.side == "enemy" else b.player
-            u = units[view.idx]
-            view.update(self.unit_text(u, view.idx))
-            view.set_class(not u.alive, "dead")
-            view.set_class(view.side == "player" and b.can_act(u), "ready")
-            view.set_class(view.side == "player" and view.idx == self.selected, "selected")
-            view.set_class(targets is not None and units is targets and u.alive, "targetable")
-        self.refresh_controls()
+        e = b.enemy
+        tags = []
+        if e.stunned:
+            tags.append("[#c678dd]混乱：下回合无法行动[/]")
+        if e.break_turns:
+            tags.append(f"[#e5c07b]破防 +{round(e.break_amount * 100)}%（{e.break_turns} 回合）[/]")
+        pct = 100 * e.hp / e.max_hp
+        self.query_one("#enemy-panel", Static).update(
+            f"{hp_bar(e.hp, e.max_hp, 64)}  [b]{e.hp}[/]/{e.max_hp}  ({pct:.0f}%)\n"
+            f"[dim]攻击 {e.data.at} · 每回合行动 {e.data.actions} 次[/]   {'  '.join(tags)}")
 
-    def target_pool(self) -> list[Unit] | None:
-        if self.pending is None or self.selected is None:
-            return None
-        sk = self.b.db.skills[self.pending]
-        return self.b.enemy if sk.target == "enemy" else self.b.player
+        cfg = b.db.battle
+        pips = "[#f5c542]" + "●" * b.ap + "[/][#3b3f4a]" + "○" * (cfg["ap_max"] - b.ap) + "[/]"
+        extras = []
+        if b.combo:
+            extras.append(f"[#e5c07b]{b.combo} 连击 (+{b.combo * 10}%)[/]")
+        if b.guard_cut:
+            extras.append(f"[#61afef]减伤 {round(b.guard_cut * 100)}%[/]")
+        self.query_one("#party-status", Static).update(
+            f"体力 {hp_bar(b.party_hp, b.party_max, 40)}  [b]{b.party_hp}[/]/{b.party_max}\n"
+            f"AP {pips} {b.ap}/{cfg['ap_max']}    第 [b]{b.round}[/]/{b.scenario.turn_limit} 回合    "
+            + "    ".join(extras))
 
-    def refresh_controls(self) -> None:
-        b = self.b
-        prompt = self.query_one("#prompt", Static)
-        skills = self.query_one("#skills", Vertical)
-        skills.remove_children()
-        if b.result:
-            prompt.update("")
-            return
-        if self.selected is None:
-            ready = [i + 1 for i, p in enumerate(b.player) if b.can_act(p)]
-            prompt.update(f"选择出手部队：点击我军或按 {'/'.join(map(str, ready))}" if ready and b.ap
-                          else "行动力用尽 —— 按 E 结束回合")
-            return
-        u = b.player[self.selected]
-        if self.pending:
-            sk = b.db.skills[self.pending]
-            who = "敌将" if sk.target == "enemy" else "友军"
-            prompt.update(f"[b]{escape(u.name)}[/]【{sk.name}】→ 选择目标{who}（点击或按数字，Esc 取消）")
-            return
-        prompt.update(f"[b]{escape(u.name)}[/] 使用：（按数字或点击，Esc 取消）")
-        for i, sk in enumerate(b.usable_skills(u)):
-            left = u.uses_left[sk.id]
-            uses = "∞" if left is None else f"剩{left}"
-            skills.mount(Button(f"{i + 1}. {sk.name}  耗{sk.cost}·{uses}·{TARGET_LABEL[sk.target]}",
-                                name=sk.id, classes="skill"))
+        for view in self.query(LeaderView):
+            u = b.leaders[view.idx]
+            if u.confused:
+                state = "[#c678dd]混乱[/]"
+            elif u.acted:
+                state = "[dim]已行动[/]"
+            elif b.can_act(view.idx):
+                state = "[#98c379]可行动[/]"
+            else:
+                state = "[dim]AP 不足[/]"
+            boost = "  [b #f5c542]BOOST[/]" if u.boosted else ""
+            members = f" · 部队 {len(u.leader.members) + 1} 人" if u.leader.members else ""
+            view.query_one(".leader-info", Static).update(f"攻击 [b]{u.at}[/]{members}\n{state}{boost}")
+            view.set_class(b.can_act(view.idx), "ready")
+            view.set_class(view.idx == self.selected, "selected")
+            view.set_class(u.acted or u.confused, "spent")
+            for n, btn in enumerate(view.query(Button)):
+                sk = b.db.skills[btn.name.split(":")[1]]
+                left = u.uses_left[sk.id]
+                tag = "限1" if sk.uses == 1 else ("累积" if sk.cumulative else "")
+                cost = b.cost(u, sk)
+                btn.label = f"{n + 1} {sk.name}  AP{cost}" + (f" {tag}" if tag else "") + (" ✗" if left == 0 else "")
+                btn.tooltip = skill_desc(sk)
+                btn.disabled = not (b.can_act(view.idx) and b.usable(u, sk))
 
     # -- input
 
     def action_num(self, n: int) -> None:
         b = self.b
-        i = n - 1
         if b.result:
             return
-        if self.pending:
-            pool = self.target_pool()
-            if pool is not None and i < len(pool) and pool[i].alive:
-                self.fire(i)
-        elif self.selected is not None:
-            usable = b.usable_skills(b.player[self.selected])
-            if i < len(usable):
-                self.pick_skill(usable[i].id)
-        elif i < len(b.player) and b.can_act(b.player[i]):
-            self.selected = i
-            self.refresh_all()
-
-    @on(UnitView.Clicked)
-    def unit_clicked(self, event: UnitView.Clicked) -> None:
-        b = self.b
-        pool = self.target_pool()
-        if pool is not None:
-            units = b.enemy if event.side == "enemy" else b.player
-            if units is pool and pool[event.idx].alive:
-                self.fire(event.idx)
-        elif event.side == "player" and b.can_act(b.player[event.idx]):
-            self.selected = event.idx
-            self.refresh_all()
+        i = n - 1
+        if self.selected is None:
+            if i < len(b.leaders) and b.can_act(i):
+                self.selected = i
+                self.refresh_all()
+            return
+        u = b.leaders[self.selected]
+        skills = u.leader.card.skills
+        if i < len(skills) and b.usable(u, b.db.skills[skills[i]]):
+            self.fire(self.selected, skills[i])
 
     @on(Button.Pressed, ".skill")
     def skill_pressed(self, event: Button.Pressed) -> None:
-        self.pick_skill(event.button.name)
+        i, sid = event.button.name.split(":")
+        self.fire(int(i), sid)
 
     @on(Button.Pressed, "#end")
     def end_pressed(self) -> None:
-        self.action_end_turn()
+        self.action_end_round()
 
-    def pick_skill(self, sid: str) -> None:
-        if self.b.needs_target(self.b.db.skills[sid]):
-            self.pending = sid
-            self.refresh_all()
-        else:
-            self.pending = sid
-            self.fire(None)
+    @on(Button.Pressed, "#defend")
+    def defend_pressed(self) -> None:
+        self.action_defend()
 
-    def fire(self, target: int | None) -> None:
-        lines = self.b.act(self.selected, self.pending, target)
-        self.selected = self.pending = None
-        self.log_lines(lines)
+    def fire(self, i: int, sid: str) -> None:
+        self.selected = None
+        self.log_lines(self.b.act(i, sid))
         self.refresh_all()
         self.check_result()
 
     def action_cancel(self) -> None:
-        if self.pending:
-            self.pending = None
-        else:
-            self.selected = None
+        self.selected = None
         self.refresh_all()
 
-    def action_end_turn(self) -> None:
+    def action_end_round(self) -> None:
         if self.b.result:
             return
-        self.selected = self.pending = None
-        self.log_lines(self.b.end_turn())
-        if self.b.result is None:
-            self.query_one("#log", RichLog).write(f"[dim]─── 第 {self.b.round} 回合 ───[/]")
+        self.selected = None
+        self.log_lines(self.b.end_round())
+        self.refresh_all()
+        self.check_result()
+
+    def action_retreat(self) -> None:
+        if self.b.result:
+            return
+        self.log_lines(self.b.retreat())
+        self.refresh_all()
+        self.check_result()
+
+    def action_defend(self) -> None:
+        if self.b.result:
+            return
+        self.selected = None
+        self.log_lines(self.b.defend())
         self.refresh_all()
         self.check_result()
 
@@ -636,9 +642,9 @@ class ScenarioScreen(Screen):
         yield Static("自由出战", classes="screen-title")
         with Vertical(id="scenarios"):
             for sid, sc in app.db.scenarios.items():
-                enemies = "、".join(app.db.enemies[e].name for e in sc.enemy)
+                e = app.db.enemies[sc.enemy]
                 done = " ✓" if sid in app.save.cleared else ""
-                yield Button(f"{sc.name}{done}　—　{enemies}", id=f"sc-{sid}", classes="scenario")
+                yield Button(f"{sc.name}{done}　—　{e.name}（体力 {e.hp}）", id=f"sc-{sid}", classes="scenario")
         yield Footer()
 
     def on_screen_resume(self) -> None:
@@ -701,23 +707,20 @@ class SanguoApp(App):
     #party-power { padding: 1 2; }
     PartyScreen DataTable { height: 1fr; margin: 0 2; }
 
-    #battle-head { height: 1; padding: 0 2; background: #25262c; }
-    .side-label { padding: 0 2; color: #98c379; text-style: bold; }
-    .enemy-label { color: #e06c75; }
-    #enemies, #players { height: auto; padding: 0 1; }
-    .unit { border: round #4b5263; width: 1fr; height: 7; padding: 0 1; margin: 0 1; background: #23242a; }
-    .unit.enemy { border: round #be5046; }
-    .unit.ready { border: round #98c379; }
-    .unit.selected { border: heavy #f5c542; background: #2e2b22; }
-    .unit.targetable { border: heavy #e5c07b; background: #2e2b22; }
-    .unit.dead { border: round #2f323b; color: #5c6370; background: #1b1c21; }
-    #battle-bottom { height: 1fr; padding: 0 1; }
-    #controls { width: 52; padding: 0 1; }
-    #prompt { height: auto; padding: 1 0; color: #e5c07b; }
-    #skills { height: auto; }
-    .skill { width: 100%; margin-bottom: 0; }
-    #end { width: 100%; margin-top: 1; }
-    #log { width: 1fr; border: round #3b3f4a; background: #202126; }
+    #enemy-panel { height: auto; margin: 0 1; padding: 0 2; border: heavy #be5046;
+                   border-title-color: #e06c75; border-title-style: bold; background: #2a1f20; }
+    BattleScreen #log { height: 1fr; margin: 0 1; border: round #3b3f4a; background: #202126; }
+    #party-bar { height: auto; margin: 0 1; padding: 0 1; border: round #98c379; background: #1f2622; }
+    #party-status { width: 1fr; }
+    #party-bar Button { margin-left: 1; min-width: 16; }
+    #leaders { height: auto; padding: 0 1; }
+    .leader { width: 1fr; height: auto; margin: 0 1 0 0; padding: 0 1; border: round #4b5263;
+              border-title-color: #d7dae0; background: #23242a; }
+    .leader.ready { border: round #98c379; }
+    .leader.selected { border: heavy #f5c542; background: #2e2b22; }
+    .leader.spent { background: #1d1e22; color: #5c6370; }
+    .leader-info { height: 2; }
+    .leader .skill { width: 100%; min-width: 10; height: 1; border: none; margin-top: 1; }
 
     #scenarios { padding: 1 4; height: auto; }
     .scenario { width: 100%; margin-bottom: 1; }
@@ -761,14 +764,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--save", type=Path, default=col.DEFAULT_SAVE, help=f"存档路径（默认 {col.DEFAULT_SAVE}）")
     ap.add_argument("--new", action="store_true", help="忽略旧存档，重新开始")
     ap.add_argument("--seed", type=int, default=None, help="固定随机种子（抽卡与战斗）")
-    ap.add_argument("--plain", action="store_true", help="纯文字模式（不用终端界面）")
     args = ap.parse_args(argv)
-    if args.plain:
-        from . import cli
-        rest = ["--save", str(args.save)] + (["--new"] if args.new else []) + \
-               (["--seed", str(args.seed)] if args.seed is not None else [])
-        cli.main(rest)
-        return
     SanguoApp(args.save, new=args.new, seed=args.seed).run()
 
 

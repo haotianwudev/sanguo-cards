@@ -43,10 +43,8 @@ def test_new_game_story_battle_and_prologue(tmp_path):
             button(app, "fight").press()
             await pilot.pause()
             assert isinstance(app.screen, BattleScreen)
-            for e in app.screen.b.enemy:
-                e.hp = 0
-            app.screen.b.enemy[0].hp = 1
-            await pilot.press("1", "1", "1")  # lord → 普通攻击 → enemy 1
+            app.screen.b.enemy.hp = 1
+            await pilot.press("1", "1")  # leader 1 (lord) → skill 1 (突击)
             await pilot.pause()
             await pilot.press("enter")  # result modal
             await pilot.pause()
@@ -96,8 +94,8 @@ def test_battle_keyboard_flow_and_loss(tmp_path):
             assert screen.selected == 0
             await pilot.press("escape")
             assert screen.selected is None
-            screen.b.player[0].hp = 1  # lord alone vs 虎牢关: lose on the enemy phase
-            screen.b.round = screen.b.scenario.turn_limit
+            screen.b.party_hp = 1  # one shared HP bar: any hit ends it
+            screen.b.enemy.stunned = False
             await pilot.press("e")
             await pilot.pause()
             assert screen.b.result == "lose"

@@ -6,7 +6,7 @@ import random
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-from .cards import RARITIES, CardDB, Fighter, PlayerCard, build_fighter, build_lord, power
+from .cards import RARITIES, CardDB, Fighter, Leader, PlayerCard, build_fighter, build_leader, build_lord
 
 DEFAULT_SAVE = Path.home() / ".sanguo-cards" / "save.json"
 
@@ -84,19 +84,35 @@ def validate_party(db: CardDB, save: Save, card_ids: list[str]) -> str | None:
     return None
 
 
+def troop_members(db: CardDB, save: Save, leader_id: str) -> list[Fighter]:
+    """Every other owned card of the leader's troop — they back the leader up (Rance X unit strength)."""
+    troop = db.cards[leader_id].troop
+    return [build_fighter(db, c) for c in save.owned if c != leader_id and db.cards[c].troop == troop]
+
+
+def leader_for(db: CardDB, save: Save, card_id: str) -> Leader:
+    return build_leader(db, build_fighter(db, card_id), troop_members(db, save, card_id))
+
+
+def leader_power(ld: Leader) -> int:
+    return round(ld.at + ld.hp / 5)
+
+
 def auto_party(db: CardDB, save: Save) -> list[str]:
-    """Greedy: strongest cards first, skipping any whose troop type or general is already in."""
+    """Best leader per troop (the strongest card leads), then the strongest troops that fit."""
+    ranked = sorted(save.owned, key=lambda c: leader_power(leader_for(db, save, c)), reverse=True)
     picked: list[str] = []
-    for f in sorted(owned_fighters(db, save), key=power, reverse=True):
+    for cid in ranked:
         if len(picked) == save.party_slots - 1:
             break
-        if validate_party(db, save, picked + [f.id]) is None:
-            picked.append(f.id)
+        if validate_party(db, save, picked + [cid]) is None:
+            picked.append(cid)
     return picked
 
 
-def party_fighters(db: CardDB, save: Save) -> list[Fighter]:
-    return [build_lord(db, save.lord_name)] + [build_fighter(db, cid) for cid in save.party]
+def party_leaders(db: CardDB, save: Save) -> list[Leader]:
+    """The lord (alone in its unit) plus one leader per chosen troop."""
+    return [build_leader(db, build_lord(db, save.lord_name), [])] +         [leader_for(db, save, cid) for cid in save.party]
 
 
 def record_win(save: Save, scenario_id: str) -> None:
