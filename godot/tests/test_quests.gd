@@ -610,3 +610,12 @@ func test_luoyang_brings_palace_maids_and_dongbais_guards_follow_her() -> void:
 	check(sq["luoyang_b"]["cards"].has("xiliang_nvbing") and not sq["luoyang_a"]["cards"].has("xiliang_nvbing"), "女亲兵 only with 董白")
 	var soldiers: Array = GameData.get_db().soldier_cards().map(func(c): return c["id"])
 	check(soldiers.has("gongnv") and soldiers.has("xiliang_nvbing"), "both can turn up in chests")
+
+
+func test_tangji_can_be_escorted_and_join() -> void:
+	check(quest(1)["event_pool"].has("tangji"))
+	var s := event_on_road("tangji", 0)
+	check(not s.event_battle.is_empty(), "the pursuers attack")
+	s.event_battle = s.event_battle  # won
+	Quests.resolve(quest(0), s, rng(0))
+	check(s.has_card("tangji"), "唐姬 joins after the fight")

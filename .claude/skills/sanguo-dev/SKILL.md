@@ -114,6 +114,9 @@ against 董卓; only the brother whose plan you pick joins) → chapter 2 讨伐
 win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 joins; elite 董白; 吕布 raids the camp; 吕布's
 chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three chests; hand 董白 to 袁绍 for a relic (she's executed)
 or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
+Planned: chapter 3 brings 蔡文姬 (蔡邕's daughter, 洛阳/长安) and 貂蝉 (王允, 连环计 with 吕布); the locked north
+birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
+out of the story until later chapters — as gacha cards they're fine.
 董白: 董卓's granddaughter, a grown woman general (years of fighting in 西凉) with two hammers, loves a fight, a
 striking figure (身材火辣). The text gives no number for her age, but she is always clearly an adult — never a 萝莉;
 no groping of anyone unconscious or captive; comedy comes from her temper, her love of duels and the others' reactions.
