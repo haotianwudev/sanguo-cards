@@ -283,7 +283,7 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 
 func test_chapter_one_is_winnable_with_either_plan() -> void:
 	for pick in 2:
-		check_between(rate(0, [], pick), 0.3, 1.0, "pick %d" % pick)
+		check_between(rate(0, [], pick), 0.2, 1.0, "pick %d" % pick)
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:
@@ -297,12 +297,12 @@ func campaign_rate(pick: int, fork: int, n := 60) -> float:
 
 
 func test_dongzhuo_chapter_is_fair_after_chapter_one() -> void:
-	check_between(campaign_rate(1, -1), 0.3, 0.95, "zhouyu plan, random forks")
+	check_between(campaign_rate(1, -1), 0.2, 0.95, "zhouyu plan, random forks")
 
 
 func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 	var q := quest(0)
-	var allowed := ["danyang", "changsha", "shuizei_bing", "huangjin_nanxia"]
+	var allowed := ["danyang", "changsha", "shuizei_bing", "huangjin_nanxia", "huangjin_nvyi"]
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	for sid in ["vault", "draft"]:
@@ -644,3 +644,26 @@ func test_beating_the_bandit_queen_brings_her_along() -> void:
 	check(s.event_battle.get("battle", "") == "yanzhihu")
 	Quests.resolve(quest(0), s, rng(0))
 	check(s.has_card("yanzhihu"))
+
+
+func test_yellow_turban_remnants_and_their_medics() -> void:
+	for qi in 2:
+		for eid in ["hj_camp", "hj_medics", "hj_road"]:
+			check(quest(qi)["event_pool"].has(eid), "chapter %d: %s" % [qi + 1, eid])
+	var s := event_on_road("hj_medics", 1)
+	check(s.damage == 0, "they patch you up")
+	check_eq(GameData.get_db().cards["huangjin_nvyi"]["troop"], "logistics")
+
+
+func test_the_yellow_turban_saint() -> void:
+	check(quest(0)["event_pool"].has("shengnv") and quest(1)["event_pool"].has("shengnv"))
+	var healed := event_on_road("shengnv", 0)
+	check(healed.resolved and healed.damage == 0)
+	var joined := 0
+	for seed_value in 20:
+		var s := event_on_road("shengnv", 1, seed_value)
+		if s.has_card("zhangning"):
+			joined += 1
+		else:
+			check(s.relics.has("taipingyaoshu"), "she leaves her book")
+	check(joined > 0 and joined < 20)

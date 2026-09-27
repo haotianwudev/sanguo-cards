@@ -26,6 +26,7 @@
 | ✅ 正式 | `sunce` | 事件「白衣道人」 |
 | ✅ 正式 | `zhouyu` | 事件「二乔」 |
 | ⬜ 缺 | `yanzhihu` | 事件「压寨夫人」 |
+| ⬜ 缺 | `zhangning` | 事件「黄巾圣女」 |
 | ✅ 正式 | `wuguotai` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
@@ -36,6 +37,8 @@
 | ⬜ 缺 | `baie_hu` | 吊睛白额虎 |
 | ⬜ 缺 | `fushui_xintu` | 于吉信徒 |
 | ⬜ 缺 | `shanzei_bing` | 山贼 |
+| ✅ 正式 | `huangjin_nanxia` | 黄巾余孽 |
+| ⬜ 缺 | `inf_n` | 官军 |
 | ⬜ 缺 | `boar` | 野猪 |
 | ✅ 正式 | `langlijiao` | 「浪里蛟」胡玉 |
 | ✅ 正式 | `yaodao` | 妖道唐周 |
@@ -47,8 +50,8 @@
 |---|---|---|
 | ⬜ 缺 | `yezhu_bing` | 野猪兵（野猪的卡） |
 | ✅ 正式 | `danyang` | 丹阳兵 |
-| ✅ 正式 | `huangjin_nanxia` | 南下黄巾 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
+| ⬜ 缺 | `huangjin_nvyi` | 黄巾女医 |
 
 ## 第二章 · 讨伐董卓
 
