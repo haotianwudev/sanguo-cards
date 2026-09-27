@@ -85,8 +85,14 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 		return []
 	var db := GameData.get_db()
 	if save.offer.is_empty():
-		var cards: Array = save.recruit_offer(rng) if kind == "recruit" \
-			else SaveData.chest_offer(rng, int(db.gacha["chest_cards"]))
+		var cards: Array
+		if kind == "recruit" and not q["recruit_pool"].is_empty():
+			cards = q["recruit_pool"].map(func(c): return db.cards[c]).filter(
+				func(c): return c["soldier"] or not save.owned.has(c["id"]))
+		elif kind == "recruit":
+			cards = save.recruit_offer(rng)
+		else:
+			cards = SaveData.chest_offer(rng, int(db.gacha["chest_cards"]), q["soldier_pool"])
 		save.offer = cards.map(func(c): return c["id"])
 	return save.offer.map(func(c): return db.cards[c])
 

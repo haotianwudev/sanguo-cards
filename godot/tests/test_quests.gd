@@ -73,7 +73,7 @@ func test_failing_restarts_but_keeps_choices_and_cards() -> void:
 
 
 func test_recruit_offer_does_not_reroll() -> void:
-	var q := quest(0)
+	var q := quest(1)  # 黄巾之乱: a normal recruit square (the prologue's only offers 丹阳兵)
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	s.square = "heroes"
@@ -143,3 +143,18 @@ func test_hulao_quest_needs_a_real_party_and_rest() -> void:
 	var greedy := rate(2, mid, 0, 0)
 	check_between(rest, 0.15, 0.8, "rest before 吕布")
 	check(greedy < rest, "resting beats grabbing the chest (%.2f vs %.2f)" % [greedy, rest])
+
+
+func test_prologue_only_gives_danyang_soldiers() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	for sid in ["chest", "heroes"]:
+		s.square = sid
+		s.resolved = false
+		s.offer = []
+		check_eq(Quests.offer(q, s, rng(3)).map(func(c): return c["id"]), ["danyang"], sid)
+	var chest := s.chest_after_battle(rng(1), 0.0, true, q["soldier_pool"])
+	check_eq(chest.map(func(c): return c["id"]), ["danyang"], "battle chest")
+	for sid in ["sc_loot", "zy_loot", "hg_loot"]:
+		check_eq(q["squares"][sid]["cards"], ["danyang"], sid)

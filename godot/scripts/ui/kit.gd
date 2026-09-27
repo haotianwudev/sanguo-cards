@@ -141,7 +141,9 @@ static func frame(kind: String) -> Dictionary:
 			var p: Array = cfg.get("plates", {}).get(name, cfg.get("plate", [0.29, 0.875, 0.42, 0.075]))
 			out = {"name": name, "texture": load("res://data/art/frames/" + e["file"]),
 				"window": Rect2(w[0], w[1], w[2], w[3]), "plate": Rect2(p[0], p[1], p[2], p[3]),
-				"has_plate": cfg.get("plates", {}).has(name)}
+				"has_plate": cfg.get("plates", {}).has(name),
+				"badge": Vector2(cfg.get("badges", {}).get(name, [0.09, 0.07])[0], cfg.get("badges", {}).get(name, [0.09, 0.07])[1]),
+				"badge_size": float(cfg.get("badge_size", 0.19))}
 	_textures[key] = out
 	return out
 

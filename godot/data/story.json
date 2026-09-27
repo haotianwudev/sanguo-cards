@@ -3,6 +3,8 @@
   "quests": [
     {
       "id": "prologue", "title": "序章 · 穿越江东", "start": "wake",
+      "_pools": "这一章能拿到的卡：宝箱/战后宝箱只出 soldier_pool，招募格只出 recruit_pool",
+      "soldier_pool": ["danyang"], "recruit_pool": ["danyang"],
       "squares": {
         "wake": {"x": 0, "y": 1, "type": "event", "label": "穿越", "next": ["pick"],
           "portraits": ["sunce", "zhouyu"],
@@ -24,22 +26,22 @@
           "text": ["孙策翻身上马：“贼人不过乌合之众，随我冲！”", "你们直扑山道。"]},
         "sc_fight": {"x": 3, "y": 0, "type": "battle", "battle": "shanzei_scout", "label": "山道", "next": ["sc_loot"]},
         "sc_loot": {"x": 4, "y": 0, "type": "event", "label": "降卒", "next": ["gate"], "portraits": ["sunce"],
-          "cards": ["cav_n", "spear_n"],
-          "text": ["孙策一枪挑落贼哨，几个喽啰跪地求饶。", "“这些人弓马倒还娴熟，”孙策说，“就交给你带吧。”"]},
+          "cards": ["danyang"],
+          "text": ["孙策一枪挑落贼哨。山下几个丹阳汉子闻讯赶来，愿随军效力。", "“丹阳兵精悍，”孙策说，“就交给你带吧。”"]},
 
         "zy_talk": {"x": 2, "y": 1, "type": "event", "label": "周瑜", "next": ["zy_fight"], "portraits": ["zhouyu"],
           "text": ["周瑜展开地图：“山道狭窄，正宜设伏。先以弱兵诱之，再以弓弩截其归路。”"]},
         "zy_fight": {"x": 3, "y": 1, "type": "battle", "battle": "shanzei_scout", "label": "伏击", "next": ["zy_loot"]},
         "zy_loot": {"x": 4, "y": 1, "type": "event", "label": "缴获", "next": ["gate"], "portraits": ["zhouyu"],
-          "cards": ["archer_n", "strat_n"],
-          "text": ["贼哨果然中计，一个不少地落入埋伏。", "周瑜微笑：“降卒中有几位识字的，还有一队弓手，阁下可用。”"]},
+          "cards": ["danyang"],
+          "text": ["贼哨果然中计，一个不少地落入埋伏。", "周瑜微笑：“伏兵里有一队丹阳兵，勇悍善战，阁下可用。”"]},
 
         "hg_talk": {"x": 2, "y": 2, "type": "event", "label": "黄盖", "next": ["hg_fight"],
           "text": ["黄盖捋须：“老夫跟过孙坚将军，这等山贼见得多了。结阵而进，慢些无妨。”"]},
         "hg_fight": {"x": 3, "y": 2, "type": "battle", "battle": "shanzei_scout", "label": "结阵", "next": ["hg_loot"]},
         "hg_loot": {"x": 4, "y": 2, "type": "event", "label": "粮车", "next": ["gate"],
-          "cards": ["inf_n", "log_n"],
-          "text": ["阵势一压，贼哨便溃了。", "黄盖：“缴来的粮车正好，再编一队步卒，行军打仗都用得上。”"]},
+          "cards": ["danyang"],
+          "text": ["阵势一压，贼哨便溃了。", "黄盖：“老夫认得这些丹阳子弟，编成一队，行军打仗都用得上。”"]},
 
         "gate": {"x": 5, "y": 1, "type": "event", "label": "寨前", "next": ["chest", "spring"],
           "text": ["山寨就在前方。左边小路通往贼人的藏宝洞，右边有一眼山泉可以歇脚。", "天色将晚，只来得及去一处。"]},
@@ -52,7 +54,7 @@
             "“伯符的母亲，吴国太。”她看着一身血污的你们，“先把伤养好，其余的慢慢说。”",
             "吴国太愿随军照料伤兵。孙策笑道：“有了名声，自会有豪杰来投。”"
           ]},
-        "heroes": {"x": 9, "y": 1, "type": "recruit", "label": "来投"}
+        "heroes": {"x": 9, "y": 1, "type": "recruit", "label": "丹阳募兵"}
       }
     },
 

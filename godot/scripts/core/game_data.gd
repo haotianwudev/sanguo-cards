@@ -76,7 +76,8 @@ func _load(dir: String) -> void:
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
 				"cards": s.get("cards", []), "choose": s.get("choose", []), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "label": s.get("label", "")}
-		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares})
+		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
+			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", [])})
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")

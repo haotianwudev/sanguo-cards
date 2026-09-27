@@ -430,7 +430,8 @@ func _finish() -> void:
 			save.carry_extra.merge(out[1], true)
 			save.carry_uses.merge(out[2], true)
 		await _banner("胜　利", Kit.c("gold"))
-		var chest := save.chest_after_battle(Game.rng, b.overkill, boss)
+		var q: Dictionary = Game.battle_ctx.get("quest", {})
+		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, q.get("soldier_pool", []))
 		if not chest.is_empty():
 			var o := PickOverlay.new()
 			o.title = "宝箱！（过量伤害 %d%%）选一张兵卡带走" % int(round(b.overkill * 100))

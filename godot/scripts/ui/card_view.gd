@@ -120,7 +120,7 @@ func _build() -> void:
 		troop_l.add_theme_font_size_override("font_size", 14)
 		troop_l.add_theme_color_override("font_color", Color.WHITE)
 		troop_l.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.55), 6, 0, Color.TRANSPARENT, 3))
-		_add(troop_l, Vector2(win.end.x - 62, win.position.y + 4), Vector2(58, 22))
+		_add(troop_l, Vector2(win.end.x - 60, win.end.y - strip_h - 25), Vector2(58, 22))
 
 	# frame art on top of the portrait
 	if not fr.is_empty():
@@ -177,9 +177,13 @@ func _build() -> void:
 
 	# troop badge (top-left corner) and, without frame art, the rarity gem
 	var bs := 40.0 if not small else 30.0
+	var badge_pos := Vector2(win.position.x - bs * 0.35, win.position.y - bs * 0.35)
+	if not fr.is_empty():  # centred on the frame's top-left corner gem (ui.json card.badges)
+		bs = maxf(24.0, w * fr["badge_size"])
+		badge_pos = fr["badge"] * Vector2(w, card_h) - Vector2(bs, bs) / 2
 	var badge := Panel.new()
-	badge.add_theme_stylebox_override("panel", Kit.box(Kit.c("bg"), int(bs / 2), 3, rc, 0))
-	_add(badge, Vector2(win.position.x - bs * 0.35, win.position.y - bs * 0.35), Vector2(bs, bs))
+	badge.add_theme_stylebox_override("panel", Kit.box(Kit.c("bg"), int(bs / 2), maxi(2, int(bs / 14)), rc, 0))
+	_add(badge, badge_pos, Vector2(bs, bs))
 	var bl := Kit.label(troop["short"], int(bs * 0.5))
 	bl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	bl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER

@@ -138,9 +138,11 @@ func pool_left() -> int:
 	return n
 
 
-static func chest_offer(rng: RandomNumberGenerator, n: int) -> Array:
+static func chest_offer(rng: RandomNumberGenerator, n: int, only: Array = []) -> Array:
 	## A chest shows n different soldier cards (weighted by how common each is); the player keeps one.
-	var pool: Array = GameData.get_db().soldier_cards()
+	## `only` limits the pool (a chapter's soldier_pool).
+	var db := GameData.get_db()
+	var pool: Array = db.soldier_cards() if only.is_empty() else only.map(func(c): return db.cards[c])
 	var result: Array = []
 	for _i in mini(n, pool.size()):
 		var c: Dictionary = GameData.weighted_pick(rng, pool, pool.map(func(x): return float(x["weight"])))
@@ -149,13 +151,13 @@ static func chest_offer(rng: RandomNumberGenerator, n: int) -> Array:
 	return result
 
 
-func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool) -> Array:
+func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool, only: Array = []) -> Array:
 	## Rance X: bosses always drop a chest; otherwise 50% + the overkill share (≥ 50% overkill guarantees it).
 	var g: Dictionary = _db().gacha
 	var chance := 1.0 if boss else minf(1.0, float(g["chest_base"]) + overkill)
 	if rng.randf() >= chance:
 		return []
-	return chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]))
+	return chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]), only)
 
 
 func take(card_id: String) -> Dictionary:
