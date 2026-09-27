@@ -69,7 +69,7 @@
     "baier": {"name": "白毦兵", "rarity": "N", "troop": "spear", "bonus": {"hp": 30, "at": 8}, "weight": 1},
     "jingzhou_gong": {"name": "荆州弓手", "rarity": "N", "troop": "archer", "bonus": {"at": 6}, "weight": 2},
     "liannu": {"name": "连弩兵", "rarity": "N", "troop": "archer", "bonus": {"at": 12}, "weight": 1},
-    "changsha": {"name": "长沙刀兵", "rarity": "N", "troop": "infantry", "bonus": {"at": 8}, "weight": 2},
+    "changsha": {"name": "长沙刀兵", "rarity": "N", "troop": "infantry", "bonus": {"at": 3}, "weight": 3},
     "danyang": {"name": "丹阳兵", "rarity": "N", "troop": "infantry", "bonus": {"hp": 30, "at": 10}, "weight": 1},
     "xianzhen": {"name": "陷阵营", "rarity": "N", "troop": "infantry", "bonus": {"hp": 20, "at": 14}, "weight": 1},
     "shuzuo": {"name": "书佐", "rarity": "N", "troop": "strategist", "bonus": {"hp": 20}, "weight": 2},

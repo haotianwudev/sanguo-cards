@@ -4,7 +4,7 @@
     {
       "id": "prologue", "title": "序章 · 穿越江东", "start": "wake",
       "_pools": "这一章能拿到的卡：宝箱/战后宝箱只出 soldier_pool，招募格只出 recruit_pool",
-      "soldier_pool": ["danyang"], "recruit_pool": ["danyang"],
+      "soldier_pool": ["danyang", "changsha"], "recruit_pool": ["danyang", "changsha"],
       "squares": {
         "wake": {"x": 0, "y": 1, "type": "event", "label": "穿越", "next": ["pick"],
           "portraits": ["sunce", "zhouyu"],
@@ -40,8 +40,8 @@
           "text": ["黄盖捋须：“老夫跟过孙坚将军，这等山贼见得多了。结阵而进，慢些无妨。”"]},
         "hg_fight": {"x": 3, "y": 2, "type": "battle", "battle": "shanzei_scout", "label": "结阵", "next": ["hg_loot"]},
         "hg_loot": {"x": 4, "y": 2, "type": "event", "label": "粮车", "next": ["gate"],
-          "cards": ["danyang"],
-          "text": ["阵势一压，贼哨便溃了。", "黄盖：“老夫认得这些丹阳子弟，编成一队，行军打仗都用得上。”"]},
+          "cards": ["changsha"],
+          "text": ["阵势一压，贼哨便溃了。", "黄盖：“这些是跟过孙坚将军的长沙旧部，刀法扎实，编成一队，行军打仗都用得上。”"]},
 
         "gate": {"x": 5, "y": 1, "type": "event", "label": "寨前", "next": ["chest", "spring"],
           "text": ["山寨就在前方。左边小路通往贼人的藏宝洞，右边有一眼山泉可以歇脚。", "天色将晚，只来得及去一处。"]},

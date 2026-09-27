@@ -145,16 +145,26 @@ func test_hulao_quest_needs_a_real_party_and_rest() -> void:
 	check(greedy < rest, "resting beats grabbing the chest (%.2f vs %.2f)" % [greedy, rest])
 
 
-func test_prologue_only_gives_danyang_soldiers() -> void:
+func test_prologue_only_gives_danyang_and_changsha_soldiers() -> void:
 	var q := quest(0)
+	var allowed := ["danyang", "changsha"]
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	for sid in ["chest", "heroes"]:
 		s.square = sid
 		s.resolved = false
 		s.offer = []
-		check_eq(Quests.offer(q, s, rng(3)).map(func(c): return c["id"]), ["danyang"], sid)
+		var ids: Array = Quests.offer(q, s, rng(3)).map(func(c): return c["id"])
+		check(not ids.is_empty() and ids.all(func(c): return c in allowed), "%s %s" % [sid, ids])
 	var chest := s.chest_after_battle(rng(1), 0.0, true, q["soldier_pool"])
-	check_eq(chest.map(func(c): return c["id"]), ["danyang"], "battle chest")
-	for sid in ["sc_loot", "zy_loot", "hg_loot"]:
+	check(chest.all(func(c): return c["id"] in allowed), "battle chest")
+	check_eq(q["squares"]["hg_loot"]["cards"], ["changsha"], "黄盖's old Changsha men")
+	for sid in ["sc_loot", "zy_loot"]:
 		check_eq(q["squares"][sid]["cards"], ["danyang"], sid)
+
+
+func test_changsha_is_weaker_than_danyang() -> void:
+	var db := GameData.get_db()
+	var cs := db.build_fighter("changsha")
+	var dy := db.build_fighter("danyang")
+	check(cs["at"] < dy["at"] and cs["hp"] < dy["hp"], "长沙刀兵 %d/%d vs 丹阳兵 %d/%d" % [cs["at"], cs["hp"], dy["at"], dy["hp"]])

@@ -4,6 +4,7 @@
 
 | key | 文件 | 来源 | 协议 | 作者 |
 |---|---|---|---|---|
+| `changsha` | placeholder/Gemini_Generated_Image_cqn0y1cqn0y1cqn0.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `danyang` | placeholder/Gemini_Generated_Image_v43ixkv43ixkv43i.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord` | placeholder/zhu gong.webp | 用户提供 | ⚠️ 兰斯系列主角立绘（AliceSoft），仅自用占位，发布前必须替换 | — |
 | `sunce` | sun ce.jpg | 用户提供 | 用户提供 | — |
