@@ -16,7 +16,6 @@ from pathlib import Path
 from .cards import CardDB, Fighter, Leader, PlayerCard, build_fighter, build_leader, build_lord
 
 DEFAULT_SAVE = Path.home() / ".sanguo-cards" / "save.json"
-GACHA_RARITIES = ("R", "SR", "SSR")
 
 
 @dataclass
@@ -86,8 +85,8 @@ def pull(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]
     rates = db.gacha["rates"]
     got = []
     for _ in range(n):
-        pools = {r: [c for c in db.pool(r) if c.id not in save.owned] for r in GACHA_RARITIES}
-        live = [r for r in GACHA_RARITIES if pools[r]]
+        pools = {r: [c for c in db.pool(r) if c.id not in save.owned] for r in db.gacha["rates"]}
+        live = [r for r in db.gacha["rates"] if pools[r]]
         if not live:
             break  # every general is already owned
         rarity = rng.choices(live, weights=[rates[r] for r in live])[0]
@@ -98,7 +97,7 @@ def pull(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]
 
 
 def pool_left(db: CardDB, save: Save) -> int:
-    return sum(1 for r in GACHA_RARITIES for c in db.pool(r) if c.id not in save.owned)
+    return sum(1 for r in db.gacha["rates"] for c in db.pool(r) if c.id not in save.owned)
 
 
 def open_chest(db: CardDB, save: Save, rng: random.Random, n: int) -> list[PlayerCard]:

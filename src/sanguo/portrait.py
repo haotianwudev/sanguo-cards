@@ -31,6 +31,11 @@ def key_for(db: CardDB, card_id: str) -> str | None:
     return None
 
 
+def key_for_enemy(enemy) -> str | None:
+    key = enemy.portrait or enemy.id
+    return key if key in _index() else None
+
+
 @lru_cache(maxsize=16)
 def _image(key: str) -> Image.Image:
     entry = _index()[key]

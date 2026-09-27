@@ -87,6 +87,17 @@
 4. **存档、多剧本** — 黄巾、虎牢关、赤壁……
 5. **界面** — 已有 Textual 终端界面；规则层无 I/O，以后要做 pygame 或 Web 前端也可以直接接。
 
+## 配置
+
+所有内容和数值都在配置文件里，改配置不用改代码：
+
+| 文件 | 管什么 |
+|---|---|
+| `src/sanguo/data/cards.json` | 兵种、技能、武将卡、兵卡（掉率 `weight`）、敌人（含 `portrait`）、单场战斗、抽卡概率、兵卡衰减、宝箱规则、战斗常量 |
+| `src/sanguo/data/story.json` | 任务地图（格子、连线、剧情文字、立绘、奖励） |
+| `src/sanguo/data/ui.json` | 界面：亮/暗配色、稀有度名称和颜色、地图图标和名称、各处头像取景 |
+| `pics/art.json` | 美术：每个头像的源图、脸的位置、来源/协议。运行 `sanguo-art` 生成游戏里的头像，并更新 `pics/ART-NEEDS.md`、`pics/SOURCES.md` |
+
 ## 代码约定
 
 - `src/sanguo/battle.py`：纯逻辑，所有操作返回日志行，不 print、不 input。

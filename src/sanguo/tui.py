@@ -3,7 +3,9 @@ this module only renders state and turns clicks/keys into calls on them."""
 from __future__ import annotations
 
 import argparse
+import json
 import random
+from importlib import resources
 from pathlib import Path
 
 from rich.markup import escape
@@ -24,34 +26,20 @@ from .cards import LORD, RARITIES, CardDB, Fighter, Leader, Skill, build_fighter
 
 # Two palettes. Markup colours in Python read from C (updated in place by set_palette);
 # CSS reads the same names as $sg-* theme variables.
-PALETTES = {
-    "dark": {
-        "bg": "#1b1c21", "panel": "#25262c", "card": "#23242a", "card-hover": "#2c2e36", "card-ssr": "#2a2720",
-        "spent": "#1d1e22", "log-bg": "#202126", "enemy-bg": "#2a1f20", "party-bg": "#1f2622", "sel-bg": "#2e2b22",
-        "border": "#4b5263", "track": "{C.track}", "text": "#d7dae0", "muted": "{C.muted}", "dim": "#5c6370",
-        "gold": "{C.gold}", "red": "{C.red}", "enemy-border": "#be5046", "green": "{C.green}", "amber": "{C.amber}",
-        "blue": "{C.blue}", "purple": "{C.purple}", "gray": "{C.gray}",
-    },
-    "light": {
-        "bg": "#f6f3ea", "panel": "#ebe6d9", "card": "#fffdf7", "card-hover": "#f3eee2", "card-ssr": "#fff6d8",
-        "spent": "#e9e6df", "log-bg": "#fbf9f3", "enemy-bg": "#fbecea", "party-bg": "#edf5ea", "sel-bg": "#fff1c4",
-        "border": "#b9b2a3", "track": "#d6d0c3", "text": "#2b2b2b", "muted": "#5f6368", "dim": "#9a968c",
-        "gold": "#b7791f", "red": "#c0392b", "enemy-border": "#c0392b", "green": "#2e7d32", "amber": "#a8660a",
-        "blue": "#1f6fb2", "purple": "#8e44ad", "gray": "#7a7a7a",
-    },
-}
+UI = json.loads(resources.files("sanguo.data").joinpath("ui.json").read_text("utf-8"))
+PALETTES: dict[str, dict[str, str]] = UI["themes"]
 
 
 class _Palette:
     def use(self, name: str) -> None:
         for k, v in PALETTES[name].items():
             setattr(self, k.replace("-", "_"), v)
-        RARITY_COLOR.update({"N": self.gray, "R": self.blue, "SR": self.purple, "SSR": self.gold, None: self.red})
+        RARITY_COLOR.update({(None if r == "lord" else r): PALETTES[name][c] for r, c in UI["rarity_colors"].items()})
 
 
 RARITY_COLOR: dict = {}
 C = _Palette()
-C.use("light")
+C.use(UI["default_theme"])
 
 
 def make_themes() -> list[Theme]:
@@ -143,7 +131,7 @@ class CardView(Vertical):
         body = Static(card_body(self.db, self.f) + (f"\n{self.note}" if self.note else ""), classes="card-body")
         if key:
             with Horizontal(classes="card-row"):
-                yield Portrait(key, heads=2.6, classes="card-portrait")
+                yield Portrait(key, heads=FRAMING["card"], classes="card-portrait")
                 yield body
         else:
             yield body
@@ -167,7 +155,7 @@ def card_table(db: CardDB, save: col.Save, table: DataTable, troop: str | None =
 
 
 def rarity_label(rarity: str | None) -> str:
-    return {"N": "兵", None: "主公"}.get(rarity, rarity or "")
+    return UI["rarity_labels"].get(rarity or "lord", rarity or "")
 
 
 def leader_note(ld: Leader) -> str:
@@ -246,19 +234,18 @@ class NameModal(ModalScreen[str]):
 
 # ---- quest map ---------------------------------------------------------------
 
-SQUARE_GLYPH = {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休"}
-TYPE_NAME = {"event": "剧情", "choose": "抉择", "battle": "战斗", "treasure": "宝箱", "recover": "回复"}
-CELL = 8  # map columns per square: 4 for the square, 4 for the link
+SQUARE_GLYPH: dict[str, str] = UI["map"]["glyphs"]
+TYPE_NAME: dict[str, str] = UI["map"]["type_names"]
+CELL: int = UI["map"]["cell"]  # map columns per square: 4 for the square, the rest for the link
+FRAMING: dict[str, float] = UI["portrait_framing"]
 
 
 def _glyph(s: quest.Square) -> str:
-    return "将" if s.boss else SQUARE_GLYPH[s.type]
+    return SQUARE_GLYPH["boss"] if s.boss else SQUARE_GLYPH[s.type]
 
 
 def _type_color(s: quest.Square) -> str:
-    if s.boss:
-        return C.purple
-    return {"battle": C.red, "treasure": C.gold, "recover": C.blue, "choose": C.amber}.get(s.type, C.text)
+    return getattr(C, UI["map"]["type_colors"]["boss" if s.boss else s.type].replace("-", "_"))
 
 
 def map_text(q: quest.Quest, save: col.Save) -> Text:
@@ -383,7 +370,7 @@ class QuestScreen(Screen):
                 row = Horizontal(classes="story-row")
                 body.mount(row)
                 for k in keys:
-                    row.mount(Portrait(k, heads=5.5, classes="story-portrait"))
+                    row.mount(Portrait(k, heads=FRAMING["story"], classes="story-portrait"))
                 row.mount(Static(text, classes="story-text story-side"))
             else:
                 body.mount(Static(text, classes="story-text"))
@@ -583,7 +570,7 @@ class CollectionScreen(Screen):
             f = build_fighter(app.db, event.row_key.value)
             key = portrait.key_for(app.db, f.id)
             if key:
-                detail.mount(Portrait(key, heads=99, classes="big-portrait"))
+                detail.mount(Portrait(key, heads=FRAMING["collection"], classes="big-portrait"))
             detail.mount(CardView(app.db, f, show_portrait=False))
             skills = "\n".join(f"[b]{app.db.skills[s].name}[/]  {skill_desc(app.db.skills[s])}" for s in f.skills)
             ld = col.leader_for(app.db, app.save, f.id)
@@ -678,7 +665,7 @@ class LeaderView(Vertical):
         key = portrait.key_for(self.app.db, self.card_id)  # type: ignore[attr-defined]
         with Horizontal(classes="leader-row"):
             if key:
-                yield Portrait(key, heads=2.6, classes="leader-portrait")
+                yield Portrait(key, heads=FRAMING["leader"], classes="leader-portrait")
             else:
                 yield Static(self.placeholder, classes="leader-portrait no-portrait")
             with Vertical(classes="leader-side"):
@@ -704,7 +691,12 @@ class BattleScreen(Screen[bool]):
         sv = app.save
         wear = dict(damage=sv.damage, extra=sv.carry_extra, uses=sv.carry_uses) if self.carry else {}
         self.b = Battle.start(app.db, self.scenario_id, col.party_leaders(app.db, sv), seed=app.seed, **wear)
-        yield Static(id="enemy-panel")
+        e = self.b.enemy.data
+        key = portrait.key_for_enemy(e)
+        with Horizontal(id="enemy-panel"):
+            if key:
+                yield Portrait(key, heads=FRAMING["enemy"], classes="enemy-portrait")
+            yield Static(id="enemy-info")
         yield RichLog(id="log", markup=True, wrap=True)
         with Horizontal(id="party-bar"):
             yield Static(id="party-status")
@@ -719,7 +711,7 @@ class BattleScreen(Screen[bool]):
 
     def on_mount(self) -> None:
         b = self.b
-        self.query_one("#enemy-panel", Static).border_title = escape(b.enemy.name)
+        self.query_one("#enemy-panel", Horizontal).border_title = escape(b.enemy.name)
         for view in self.query(LeaderView):
             u = b.leaders[view.idx]
             view.border_title = f"{view.idx + 1}. {escape(u.name)}"
@@ -757,7 +749,7 @@ class BattleScreen(Screen[bool]):
         if e.break_turns:
             tags.append(f"[{C.amber}]破防 +{round(e.break_amount * 100)}%（{e.break_turns} 回合）[/]")
         pct = 100 * e.hp / e.max_hp
-        self.query_one("#enemy-panel", Static).update(
+        self.query_one("#enemy-info", Static).update(
             f"{hp_bar(e.hp, e.max_hp, 64)}  [b]{e.hp}[/]/{e.max_hp}  ({pct:.0f}%)\n"
             f"[dim]攻击 {e.data.at} · 每回合行动 {e.data.actions} 次[/]   {'  '.join(tags)}")
 
@@ -1003,6 +995,8 @@ class SanguoApp(App):
     #party-power { padding: 1 2; }
     PartyScreen DataTable { height: 1fr; margin: 0 2; }
 
+    .enemy-portrait { width: 9; height: 6; margin-right: 2; }
+    #enemy-info { width: 1fr; height: auto; }
     #enemy-panel { height: auto; margin: 0 1; padding: 0 2; border: heavy $sg-enemy-border;
                    border-title-color: $sg-red; border-title-style: bold; background: $sg-enemy-bg; }
     BattleScreen #log { height: 1fr; margin: 0 1; border: round $sg-track; background: $sg-log-bg; }

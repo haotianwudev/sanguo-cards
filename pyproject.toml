@@ -14,6 +14,7 @@ dev = ["pytest>=8"]
 
 [project.scripts]
 sanguo = "sanguo.tui:main"
+sanguo-art = "sanguo.art:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

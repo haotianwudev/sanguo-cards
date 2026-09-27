@@ -40,4 +40,9 @@ python -m pytest                     # 规则 + 数值平衡测试
 - 每一击 +10% 连击伤害；3 回合没出手的队长可能 BOOST（×1.5）；部下偶尔会插入攻击。
 - 防御：结束本回合并减伤，连续防御 30% → 50% → 70% → 90%。
 
+## 改内容
+
+全部走配置：卡牌/敌人/数值在 `src/sanguo/data/cards.json`，地图剧情在 `story.json`，界面配色和文字在 `ui.json`，
+美术在 `pics/art.json`（改完运行 `sanguo-art`）。缺哪些图看 `pics/ART-NEEDS.md`。
+
 设计说明与路线图见 [docs/design.md](docs/design.md)。

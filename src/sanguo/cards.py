@@ -86,6 +86,7 @@ class Enemy:
     moves: tuple[dict, ...]  # {"name", "power", "weight", optional "confuse"}
     phys_resist: float = 0.0
     magic_resist: float = 0.0
+    portrait: str = ""  # art key (pics/art.json); "" = the enemy id
 
 
 @dataclass(frozen=True)
@@ -136,7 +137,7 @@ def load_db(raw: dict | None = None) -> CardDB:
     }
     enemies = {
         eid: Enemy(eid, e["name"], e["hp"], e["at"], e["actions"], tuple(e["moves"]),
-                   e.get("phys_resist", 0.0), e.get("magic_resist", 0.0))
+                   e.get("phys_resist", 0.0), e.get("magic_resist", 0.0), e.get("portrait", ""))
         for eid, e in raw["enemies"].items()
     }
     scenarios = {
