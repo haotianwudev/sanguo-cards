@@ -8,9 +8,6 @@ extends Control
 
 signal closed
 
-const BG := Color(0.11, 0.09, 0.08)
-const PANEL := Color(0.18, 0.15, 0.12)
-const LINE := Color(0.55, 0.45, 0.28)
 
 var _party_row: HBoxContainer
 var _summary: VBoxContainer
@@ -28,7 +25,7 @@ func _ready() -> void:
 	z_index = 60
 	size = Vector2(1280, 720)
 	var bg := ColorRect.new()
-	bg.color = BG
+	bg.color = Kit.c("bg")
 	bg.size = size
 	add_child(bg)
 	var title := Kit.label("整　备", Kit.FONT_BIG + 8, "gold")
@@ -119,7 +116,7 @@ func _panel(pos: Vector2, sz: Vector2) -> Panel:
 	var p := Panel.new()
 	p.position = pos
 	p.size = sz
-	p.add_theme_stylebox_override("panel", Kit.box(PANEL, 10, 2, LINE, 0))
+	p.add_theme_stylebox_override("panel", Kit.box(Kit.c("panel"), 10, 2, Kit.c("border"), 0))
 	add_child(p)
 	return p
 

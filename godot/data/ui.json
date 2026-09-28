@@ -1,7 +1,15 @@
 {
   "_comment": "Presentation config for the terminal UI. Colour values in rarity_colors / map colours are palette names from themes.*",
-  "default_theme": "light",
+  "default_theme": "ink",
+  "_themes": "ink = the default: warm dark lacquer (easy on a phone screen, lets the art stand out, like Rance X); light / dark kept as alternatives",
   "themes": {
+    "ink": {
+      "bg": "#17130f", "panel": "#221c16", "card": "#2a231c", "card-hover": "#342b22", "card-ssr": "#3a2f1c",
+      "spent": "#1c1813", "log-bg": "#1d1813", "enemy-bg": "#2d1b16", "party-bg": "#1a2119", "sel-bg": "#3b301c",
+      "border": "#6b573a", "track": "#3a3026", "text": "#efe5d0", "muted": "#bfae8e", "dim": "#7d6f5a",
+      "gold": "#e0b25a", "red": "#c4553d", "enemy-border": "#b9472f", "green": "#5b8a4a", "amber": "#d9993e",
+      "blue": "#3e6a8f", "purple": "#8a5aa6", "gray": "#8a8174"
+    },
     "dark": {
       "bg": "#1b1c21", "panel": "#25262c", "card": "#23242a", "card-hover": "#2c2e36", "card-ssr": "#2a2720",
       "spent": "#1d1e22", "log-bg": "#202126", "enemy-bg": "#2a1f20", "party-bg": "#1f2622", "sel-bg": "#2e2b22",

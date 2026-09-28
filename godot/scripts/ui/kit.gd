@@ -13,7 +13,7 @@ static var _textures: Dictionary = {}
 
 static func pal() -> Dictionary:
 	if _pal.is_empty():
-		use_theme("light")
+		use_theme(GameData.get_db().ui.get("default_theme", "light"))
 	return _pal
 
 
@@ -102,6 +102,9 @@ static func button(text: String, color_name := "blue", size := FONT_BODY) -> But
 		b.add_theme_stylebox_override("normal", box(base, 10, 0, Color.TRANSPARENT, 14))
 		b.add_theme_stylebox_override("hover", box(base.lightened(0.12), 10, 0, Color.TRANSPARENT, 14))
 		b.add_theme_stylebox_override("pressed", box(base.darkened(0.15), 10, 0, Color.TRANSPARENT, 14))
+		if base.get_luminance() > 0.5:  # light buttons (gold) get dark text
+			for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+				b.add_theme_color_override(st, Color(0.1, 0.07, 0.04))
 	b.custom_minimum_size = Vector2(0, 56)
 	return b
 
