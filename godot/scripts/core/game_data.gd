@@ -157,9 +157,9 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 		"at": int(round((t["at"] + c["bonus"].get("at", 0)) * mult)), "skills": sk, "rarity": c["rarity"]}
 
 
-func build_lord(lord_name: String) -> Dictionary:
+func build_lord(lord_name: String, mult := 1.0) -> Dictionary:
 	var t: Dictionary = troops["lord"]
-	return {"id": "lord", "name": lord_name, "troop": "lord", "hp": t["hp"], "at": t["at"],
+	return {"id": "lord", "name": lord_name, "troop": "lord", "hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)),
 		"skills": t["skills"].duplicate(), "rarity": null}
 
 

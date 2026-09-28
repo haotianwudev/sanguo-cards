@@ -169,3 +169,12 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speaker_key("当夜，江上一排贼船亮起火把。"), "", "narration: nobody")
 	check_eq(Kit.speaker_key("富春江边，孙家老宅。孙坚的旧大刀挂在墙上。"), "", "a name merely mentioned: no face")
 	check_eq(Kit.speaker_key("吴夫人：「文台那把刀，你拿去。」"), "wuguotai", "the speaker, not who is talked about")
+
+
+func test_the_lord_starts_bronze_and_can_go_up() -> void:
+	var s := SaveData.create()
+	check_eq(s.tier("lord"), 0, "the lord's card starts 铜")
+	var at0: int = s.lord()["at"]
+	s.upgrade("lord")
+	check_eq(s.tier("lord"), 1, "银 after one upgrade")
+	check(s.lord()["at"] > at0 and s.party_leaders()[0]["card"]["at"] == s.lord()["at"], "a higher tier hits harder, in battle too")

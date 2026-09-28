@@ -21,14 +21,14 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 	var db := GameData.get_db()
 	var v := CardView.new()
 	if card_id == "lord":
-		v.fighter = db.build_lord(opts.get("lord_name", "主公"))
+		v.fighter = Game.save.lord() if Game.save != null else db.build_lord(opts.get("lord_name", "主公"))
 	elif Game.save != null and Game.save.has_card(card_id):
 		v.fighter = Game.save.fighter(card_id)  # at its 铜/银/金 tier
 	else:
 		v.fighter = db.build_fighter(card_id)
 	v.leader = opts.get("leader", {})
 	v.count = opts.get("count", 0)
-	v.tier = opts.get("tier", Game.save.tier(card_id) if Game.save != null and card_id != "lord" else 0)
+	v.tier = opts.get("tier", Game.save.tier(card_id) if Game.save != null else 0)
 	v.note = opts.get("note", "")
 	v.show_skills = opts.get("skills", true)
 	v.custom_minimum_size = size
@@ -61,10 +61,8 @@ func set_state(is_dimmed: bool, is_selected: bool) -> void:
 
 
 func _rarity_key() -> String:
-	## generals are framed by tier (铜/银/金 by copies owned), soldiers and the lord by rarity
-	if fighter["rarity"] == null:
-		return "lord"
-	if fighter["rarity"] != "N" and fighter["id"] != "lord":
+	## generals and the lord are framed by tier (铜/银/金), soldiers by rarity
+	if fighter["rarity"] == null or fighter["rarity"] != "N":
 		return "tier%d" % tier
 	return str(fighter["rarity"])
 

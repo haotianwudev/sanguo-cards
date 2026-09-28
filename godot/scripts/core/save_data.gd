@@ -48,11 +48,12 @@ var run_records: Array = []  # key choices and outcomes this run, as short lines
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
+var lord_tier := 0  # the lord's card starts 铜 like everyone (0 铜 / 1 银 / 2 金); upgrade("lord") raises it
 var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_tier", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -104,6 +105,7 @@ static func from_dict(d: Dictionary) -> SaveData:
 	s.difficulty = int(s.difficulty)
 	s.picks_left = int(s.picks_left)
 	s.party_slots = int(s.party_slots)
+	s.lord_tier = int(s.lord_tier)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
 	for k in s.dupes:
@@ -159,7 +161,9 @@ func copies(card_id: String) -> int:
 
 
 func tier(card_id: String, n := -1) -> int:
-	## 0 铜 / 1 银 / 2 金 for a general with n copies (default: the copies owned).
+	## 0 铜 / 1 银 / 2 金 for a general with n copies (default: the copies owned); the lord has its own lord_tier.
+	if card_id == "lord":
+		return lord_tier
 	if n < 0:
 		n = copies(card_id)
 	var t := 0
@@ -183,9 +187,18 @@ func fighter(card_id: String) -> Dictionary:
 	return db.build_fighter(card_id, float(db.gacha["tiers"][tier(card_id)]["mult"]))
 
 
+func lord() -> Dictionary:
+	## the lord's fighter at its tier
+	var db := _db()
+	return db.build_lord(lord_name, float(db.gacha["tiers"][lord_tier]["mult"]))
+
+
 func upgrade(card_id: String) -> void:
 	## 升级: straight to the next tier's copy count.
 	var tiers: Array = _db().gacha["tiers"]
+	if card_id == "lord":
+		lord_tier = mini(lord_tier + 1, tiers.size() - 1)
+		return
 	var nxt := mini(tier(card_id) + 1, tiers.size() - 1)
 	dupes[card_id] = maxi(copies(card_id), int(tiers[nxt]["copies"]))
 
@@ -365,7 +378,7 @@ func auto_party() -> Array:
 func party_leaders() -> Array:
 	## The lord (alone in its unit) plus one leader per chosen troop.
 	var db := _db()
-	var leaders: Array = [db.build_leader(db.build_lord(lord_name), [])]
+	var leaders: Array = [db.build_leader(lord(), [])]
 	for cid in party:
 		if has_card(cid):
 			leaders.append(leader_for(cid))
