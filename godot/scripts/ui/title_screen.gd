@@ -25,6 +25,15 @@ func _ready() -> void:
 		cont.pressed.connect(Game.continue_game)
 		col.add_child(cont)
 		Kit.focus(cont)
+		var saved := SaveData.read()
+		if saved != null and saved.replay != "":
+			var back := Kit.button("放弃重玩，回到主线", "gray")
+			back.pressed.connect(Game.back_to_story)
+			col.add_child(back)
+		if saved != null and not saved.quests_cleared.is_empty():
+			var replay := Kit.button("重玩章节", "gold")
+			replay.pressed.connect(func(): _replay_menu(col, saved))
+			col.add_child(replay)
 
 	var name_edit := LineEdit.new()
 	name_edit.placeholder_text = "你的名字（留空 = 主公）"
@@ -38,3 +47,21 @@ func _ready() -> void:
 	col.add_child(start)
 	if not has_save:
 		Kit.focus(start)
+
+
+func _replay_menu(col: VBoxContainer, saved: SaveData) -> void:
+	## one button per finished chapter; replays get harder with every clear (进阶)
+	if col.get_node_or_null("Replays") != null:
+		return
+	var box := VBoxContainer.new()
+	box.name = "Replays"
+	box.add_theme_constant_override("separation", 8)
+	col.add_child(box)
+	var step := float(GameData.get_db().battle["danger_step"])
+	for q in GameData.get_db().quests:
+		if not saved.quests_cleared.has(q["id"]):
+			continue
+		var n := int(saved.clears.get(q["id"], 1))
+		var b := Kit.button("%s　（通关 %d 次 · 进阶 +%d%%）" % [q["title"], n, int(round(n * step * 100))], "gold", Kit.FONT_BODY)
+		b.pressed.connect(Game.replay_chapter.bind(q["id"]))
+		box.add_child(b)

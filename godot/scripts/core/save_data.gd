@@ -39,7 +39,10 @@ var run_relics: Array = []  # every 宝物 picked up this run, even ones traded 
 var merit := 0  # 战功: earned per chapter, kept across chapters, spent between chapters
 var merit_paid := ""  # quest id whose 战功 has been paid out (so a reopened recap doesn't pay twice)
 var run_bosses := 0  # bosses and elites beaten this run
-var heirloom := ""  # 传家宝: the one 宝物 carried into the next chapter (every run of it starts with it)
+var kept_relics: Array = []  # 宝物 brought from finished chapters: every run starts with them
+var clears: Dictionary = {}  # quest id -> times cleared (replays get harder: 进阶)
+var replay := ""  # quest id being replayed ("" = the main story)
+var stash: Dictionary = {}  # the main story's run, parked while replaying
 var flags: Array = []  # every recorded line from finished chapters (cross-chapter story branching)
 var run_records: Array = []  # key choices and outcomes this run, as short lines (「董白：留下」)
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
@@ -50,13 +53,34 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "heirloom"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
 static func create() -> SaveData:
 	var s := SaveData.new()
 	s.party_slots = int(GameData.get_db().gacha["party_slots"])
 	return s
+
+
+# the fields that make up one run of a quest (parked while a finished chapter is replayed)
+const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events",
+	"event_battle", "event_note", "offer_kind", "relics", "danger", "picks_left", "offer_rates", "run_start",
+	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid"]
+
+
+func stash_run() -> void:
+	stash = {}
+	for f in RUN_FIELDS:
+		var v: Variant = get(f)
+		stash[f] = v.duplicate(true) if v is Dictionary or v is Array else v
+
+
+func restore_run() -> void:
+	for f in stash:
+		set(f, stash[f])
+	stash = {}
+	damage = int(damage)
+	danger = int(danger)
 
 
 func to_dict() -> Dictionary:

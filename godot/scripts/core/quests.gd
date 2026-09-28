@@ -73,6 +73,10 @@ static func _validate_effects(db: GameData, effects: Array, where: String) -> vo
 
 
 static func current_quest(save: SaveData) -> Variant:
+	if save.replay != "":
+		for q in GameData.get_db().quests:
+			if q["id"] == save.replay:
+				return q
 	for q in GameData.get_db().quests:
 		if not save.quests_cleared.has(q["id"]):
 			return q
@@ -91,10 +95,9 @@ static func ensure_started(save: SaveData, rng: RandomNumberGenerator = null) ->
 static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
 	## Start a run. With an rng the shuffle groups are dealt anew; without one the map is as written (tests).
 	q = q.get("_raw", q)
-	save.relics = []
-	if save.heirloom != "" and GameData.get_db().relics.has(save.heirloom):
-		save.relics = [save.heirloom]  # the 传家宝 starts every run of the chapter
-	save.danger = 0
+	# relics brought from finished chapters start every run; ones found in this chapter reset on a restart
+	save.relics = save.kept_relics.filter(func(r): return GameData.get_db().relics.has(r))
+	save.danger = int(save.clears.get(q["id"], 0)) if save.replay == q["id"] else 0  # 进阶: replays get harder
 	save.run_start = collection(save)
 	save.run_battles = 0
 	save.run_bosses = 0
@@ -386,6 +389,22 @@ static func spend_merit(save: SaveData, what: String) -> bool:
 	return true
 
 
+static func start_replay(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
+	## Replay a finished chapter: the main story's run is parked and comes back when the replay ends.
+	q = q.get("_raw", q)
+	assert(save.quests_cleared.has(q["id"]), "only finished chapters can be replayed")
+	if save.replay == "":
+		save.stash_run()
+	save.replay = q["id"]
+	begin(q, save, rng)
+
+
+static func stop_replay(save: SaveData) -> void:
+	if save.replay != "":
+		save.replay = ""
+		save.restore_run()
+
+
 static func interlude(quest_id: String, save: SaveData) -> Array:
 	## The scenes to play after finishing a quest, filtered by the player's story flags.
 	var scenes: Array = GameData.get_db().interludes.get(quest_id, [])
@@ -570,11 +589,17 @@ static func _auto_resolve(q: Dictionary, save: SaveData) -> void:
 
 static func complete(q: Dictionary, save: SaveData) -> void:
 	q = q.get("_raw", q)
+	save.clears[q["id"]] = int(save.clears.get(q["id"], 0)) + 1
+	if save.replay == q["id"]:  # a replay: cards and 战功 stay, the story carries on where it was
+		save.replay = ""
+		save.restore_run()
+		return
 	if not save.quests_cleared.has(q["id"]):
 		save.quests_cleared.append(q["id"])
 	for line in save.run_records:  # this run's choices become lasting story flags
 		if not save.flags.has(line):
 			save.flags.append(line)
+	save.kept_relics = save.relics.duplicate()  # every 宝物 goes on to the next chapter
 	save.quest = ""
 	reset_carry(save)
 

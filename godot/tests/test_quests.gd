@@ -735,14 +735,35 @@ func test_finished_chapters_leave_story_flags_that_pick_the_interlude() -> void:
 	check(s.flags.has("董白：留下"), "flags outlive a new run")
 
 
-func test_the_heirloom_starts_every_run_of_the_next_chapter() -> void:
+func test_relics_carry_into_the_next_chapter_but_new_ones_reset_on_a_restart() -> void:
 	var s := SaveData.create()
-	s.heirloom = "hupi"
+	Quests.begin(quest(0), s)
+	s.relics = ["hupi", "jiunang"]
+	Quests.complete(quest(0), s)
 	Quests.begin(quest(1), s)
-	check_eq(s.relics, ["hupi"])
-	s.relics.append("jiunang")
+	check_eq(s.relics, ["hupi", "jiunang"], "all of chapter 1's relics come along")
+	s.relics.append("bingfu")
 	Quests.fail(quest(1), s)
-	check_eq(s.relics, ["hupi"], "a restart keeps the heirloom, drops the rest")
-	s.heirloom = ""
+	check_eq(s.relics, ["hupi", "jiunang"], "a restart drops only what this chapter gave")
+
+
+func test_replaying_a_chapter_is_harder_and_returns_to_the_story() -> void:
+	var s := SaveData.create()
+	Quests.begin(quest(0), s)
+	Quests.complete(quest(0), s)
 	Quests.begin(quest(1), s)
-	check(s.relics.is_empty())
+	s.square = "counter"
+	s.damage = 123
+	s.take("sunce")
+	Quests.start_replay(quest(0), s, rng(0))
+	check(s.quest == "prologue" and s.danger == 1, "进阶: one clear = +1 险")
+	s.grant_card("danyang")
+	Quests.complete(quest(0), s)
+	check(s.replay == "" and s.quest == "taodong" and s.square == "counter" and s.damage == 123, "back where the story was")
+	check(s.has_card("danyang"), "replay rewards stay")
+	check_eq(s.clears["prologue"], 2)
+	check_eq(s.quests_cleared, ["prologue"])
+	Quests.start_replay(quest(0), s, rng(0))
+	check_eq(s.danger, 2, "harder again")
+	Quests.stop_replay(s)
+	check(s.quest == "taodong" and s.square == "counter", "giving up returns to the story too")

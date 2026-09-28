@@ -209,7 +209,7 @@ func _refresh() -> void:
 		_title.text = "剧情"
 		_show_end()
 		return
-	_title.text = q["title"]
+	_title.text = q["title"] + ("　（重玩 · 进阶 +%d%%）" % int(round(save.danger * float(GameData.get_db().battle["danger_step"]) * 100)) if save.replay != "" else "")
 	var party := save.party_leaders()
 	var hp_max := Quests.party_max(save)
 	var hp := maxi(1, hp_max - save.damage)
@@ -693,7 +693,10 @@ func _complete() -> void:
 		lines.append("[color=%s][b]难度[/b][/color]　%s" % [gold, "　".join(hard)])
 	lines.append("[color=%s][b]战功[/b][/color]　本章 +%d（打赢一场 +%d，首领和精英再 +%d）" % [gold, Quests.merit_earned(Game.save),
 		int(db.gacha["merit"]["per_battle"]), int(db.gacha["merit"]["per_boss"])])
-	lines.append("\n宝物只在本章有效，将会清空（选作传家宝的那一件除外）；卡牌、战功、难度和你的选择都会带到下一章。")
+	if Game.save.replay != "":
+		lines.append("\n这是重玩：卡牌和战功保留，打完回到主线原来的进度。")
+	else:
+		lines.append("\n宝物、卡牌、战功、难度和你的选择都会带到下一章。")
 	text.text = "\n".join(lines)
 	var spend := HBoxContainer.new()
 	spend.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -724,27 +727,6 @@ func _complete() -> void:
 		mine.shuffle()
 		Game.persist()
 		_pick_then(mine.slice(0, 3), "用战功点化 —— 选一位武将升级", "upgrade", refresh_spend))
-	if not Game.save.relics.is_empty():
-		# 传家宝: keep one of this chapter's relics for the next one
-		var keep := HBoxContainer.new()
-		keep.alignment = BoxContainer.ALIGNMENT_CENTER
-		keep.add_theme_constant_override("separation", 10)
-		col.add_child(keep)
-		keep.add_child(Kit.label("传家宝（带一件进下一章）：", Kit.FONT_BODY, "gold"))
-		var picks: Array = []
-		for rid in Game.save.relics:
-			var b := Kit.button(db.relics[rid]["icon"] + " " + db.relics[rid]["name"], "gray")
-			b.toggle_mode = true
-			b.tooltip_text = db.relics[rid]["desc"]
-			b.button_pressed = Game.save.heirloom == rid
-			b.toggled.connect(func(on):
-				Game.save.heirloom = rid if on else ""
-				for other in picks:
-					if other != b:
-						other.set_pressed_no_signal(false)
-				Game.persist())
-			picks.append(b)
-			keep.add_child(b)
 	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
 	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	go.custom_minimum_size = Vector2(320, 60)
@@ -785,8 +767,14 @@ func _pick_then(ids: Array, title: String, kind: String, after: Callable) -> voi
 func _finish_chapter() -> void:
 	## flags saved, then the interlude and the next chapter's title card, then the next chapter's map
 	var done_id: String = q.get("_raw", q)["id"]
+	var was_replay: bool = Game.save.replay != ""
 	Quests.complete(q, Game.save)
 	Game.persist()
+	if was_replay:
+		_show_toast("重玩完成，回到主线")
+		_rebuild_map()
+		_refresh()
+		return
 	var nxt: Variant = Quests.current_quest(Game.save)
 	var o := InterludeOverlay.new()
 	o.scenes = Quests.interlude(done_id, Game.save)

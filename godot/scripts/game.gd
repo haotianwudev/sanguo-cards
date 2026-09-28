@@ -37,6 +37,23 @@ func continue_game() -> void:
 	show_screen(MapScreen.new())
 
 
+func replay_chapter(quest_id: String) -> void:
+	## Replay a finished chapter for cards and 战功; each clear makes it harder (进阶).
+	save = SaveData.read()
+	for q in GameData.get_db().quests:
+		if q["id"] == quest_id:
+			Quests.start_replay(q, save, rng)
+	persist()
+	show_screen(MapScreen.new())
+
+
+func back_to_story() -> void:
+	save = SaveData.read()
+	Quests.stop_replay(save)
+	persist()
+	show_screen(MapScreen.new())
+
+
 func start_quest_battle(q: Dictionary, sq: Dictionary) -> void:
 	battle_ctx = {"quest": q, "square": sq}
 	var b := BattleScreen.new()
