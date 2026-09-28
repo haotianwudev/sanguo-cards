@@ -59,5 +59,7 @@
   "_battles": "battle backgrounds, keyed by scenario id (cards.json scenarios); 16:9, scaled to 720px high into godot/data/art/battle/",
   "battles": {},
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
-  "cgs": {}
+  "cgs": {
+    "c1_wake": {"src": "source/cg/c1_wake.jpg", "license": "用户提供（Gemini 生成）"}
+  }
 }
