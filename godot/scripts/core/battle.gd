@@ -9,7 +9,7 @@ extends RefCounted
 ##   2. Player phase: spend AP on leader skills. Each leader acts at most once per round.
 ##      累积 skills cost +1 AP after every use; 1回制限 skills can be used once per battle.
 ##      Every hit raises the combo; each combo step adds combo_bonus damage.
-##   3. End the round (or defend: end it with a growing damage cut); the enemy attacks the shared HP bar.
+##   3. End the round (or defend: pay defend_ap AP to end it with a growing damage cut); the enemy attacks the shared HP bar.
 ## Win: enemy HP 0. Lose: party HP 0, the round limit runs out, or retreat.
 
 var db: GameData
@@ -179,7 +179,19 @@ func end_round() -> Array:
 	return _enemy_phase(0.0)
 
 
+func defend_cost() -> int:
+	return int(db.battle.get("defend_ap", 0))
+
+
+func can_defend() -> bool:
+	return ap >= defend_cost()
+
+
 func defend() -> Array:
+	## like Rance X, guarding isn't free: it costs AP (battle.defend_ap), then ends the round with the damage cut
+	if not can_defend():
+		return ["AP 不够，无法防御（需要 %d）" % defend_cost()]
+	ap -= defend_cost()
 	var cuts: Array = db.battle["defend_cuts"]
 	var cut: float = minf(0.95, float(cuts[mini(defend_streak, cuts.size() - 1)]) + float(mods.get("defend", 0.0)))
 	defend_streak += 1

@@ -266,7 +266,8 @@ func _refresh() -> void:
 		if not btn.disabled and first_focus == null:
 			first_focus = btn
 	_end.disabled = _busy
-	_defend.disabled = _busy
+	_defend.text = "防御  AP%d" % b.defend_cost() if b.defend_cost() > 0 else "防御"
+	_defend.disabled = _busy or not b.can_defend()
 	_retreat.disabled = _busy
 	if not _busy:
 		Kit.focus(first_focus if first_focus != null else _end)
@@ -299,7 +300,7 @@ func _on_end_round() -> void:
 
 
 func _on_defend() -> void:
-	if _busy or b.result != "":
+	if _busy or b.result != "" or not b.can_defend():
 		return
 	_log_lines(b.defend())
 	await _play(b.take_events())

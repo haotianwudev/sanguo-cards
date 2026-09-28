@@ -284,3 +284,16 @@ func test_troop_basic_attacks_cost_1_ap() -> void:
 			continue
 		for sid in db.troops[tid]["skills"]:
 			check(db.skills[sid]["cost"] >= 1, "%s: %s" % [tid, db.skills[sid]["name"]])
+
+
+func test_defend_costs_ap() -> void:
+	var b := new_battle("hulao", REF, 2)
+	var need: int = b.defend_cost()
+	check(need > 0, "defending costs AP")
+	b.ap = need - 1
+	var hp: int = b.party_hp
+	var r0: int = b.round_no
+	check("AP 不够" in b.defend()[0] and b.party_hp == hp and b.round_no == r0, "too little AP: nothing happens")
+	b.ap = need
+	b.defend()
+	check(b.round_no == r0 + 1, "enough AP: the round ends")
