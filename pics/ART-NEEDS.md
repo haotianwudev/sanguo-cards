@@ -97,7 +97,7 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `gongnv` | 宫女 |
+| ✅ 正式 | `gongnv` | 宫女 |
 | ✅ 正式 | `xiliang_nvbing` | 西凉女亲兵 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）

@@ -49,7 +49,8 @@
     "yuji": {"src": "source/generals/yuji.jpg", "face": [0.55, 0.25], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "yanzhihu": {"src": "source/generals/yanzhihu.jpg", "face": [0.54, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "fushui_xintu": {"src": "source/soldiers/fushui_xintu.jpg", "face": [0.50, 0.26], "head": 0.22, "license": "用户提供（Gemini 生成）"},
-    "baie_hu": {"src": "source/generals/baie_hu.jpg", "face": [0.50, 0.41], "head": 0.22, "license": "用户提供（Gemini 生成）"}
+    "baie_hu": {"src": "source/generals/baie_hu.jpg", "face": [0.50, 0.41], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "gongnv": {"src": "source/soldiers/gongnv.jpg", "face": [0.52, 0.18], "head": 0.20, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {
