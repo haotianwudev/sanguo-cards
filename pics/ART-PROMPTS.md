@@ -90,10 +90,10 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `chenlan` ⬜ 缺
 
 ```
-A vertical character portrait of Chen Lan (陈兰), Yuan Shu's general guarding a mountain pass.
+A vertical character portrait of Chen Lan (陈兰), Yuan Shu's veteran general who leads the night raid.
 Appearance: Weathered, stubborn man in his 40s with a grey-streaked beard and narrowed eyes.
 Armor & Clothing: Battered iron armor under a rain cape, mud on his boots.
-Weapon: Planting a long spear in the ground at a narrow mountain pass in the rain.
+Weapon: Levelling a long spear, rain dripping from its tip, torchlight behind him.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
@@ -284,7 +284,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c3_jiling`
 
 ```
-A horizontal battle scene illustration: a rainy night courtyard lit by torches: the general Ji Ling with a three-pointed glaive at the gate under a 袁 banner, soldiers pouring in.
+A horizontal battle scene illustration: a narrow mountain pass in heavy rain: Yuan Shu's foremost general Ji Ling in gilded armor with a three-pointed glaive, standing alone in front of a wall of spearmen, the final battle.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy and the action fill the upper half of the frame, the bottom third is calmer ground (game UI cards sit there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -300,7 +300,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c3_chenlan`
 
 ```
-A horizontal battle scene illustration: a narrow mountain pass in heavy rain: Chen Lan and a wall of spearmen blocking the way.
+A horizontal battle scene illustration: a rainy night courtyard lit by torches: the grey-bearded general Chen Lan with a long spear at the gate under a 袁 banner, soldiers pouring in.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy and the action fill the upper half of the frame, the bottom third is calmer ground (game UI cards sit there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -540,7 +540,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c3_raid`
 
 ```
-A horizontal story event illustration: rainy night: torches and a 袁 banner outside the courtyard wall, Ji Ling with a three-pointed glaive at the gate, Lady Wu clutching the brocade box behind the hero, Sun Ce charging out with a spear.
+A horizontal story event illustration: rainy night: torches and a 袁 banner outside the courtyard wall, the grey-bearded general Chen Lan with a long spear at the gate, Lady Wu clutching the brocade box behind the hero, Sun Ce charging out with a spear.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
@@ -549,7 +549,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c3_news`
 
 ```
-A horizontal story event illustration: a rainy mountain pass: the dying general Chen Lan in the mud, Lady Wu sinking to her knees in the rain with the brocade box fallen beside her, Sun Ce holding her and crying, Zhou Yu's ledger lying in the mud (grief, no gore).
+A horizontal story event illustration: a rainy mountain pass: the defeated general Ji Ling kneeling in the mud leaning on his three-pointed glaive, Lady Wu sinking to her knees in the rain with the brocade box fallen beside her, Sun Ce holding her and crying, Zhou Yu's ledger lying in the mud (grief, no gore).
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)

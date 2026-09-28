@@ -179,8 +179,9 @@ or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
 Chapter 3 传国玉玺 (quest `yuxi`, 初平二年): leaving 洛阳 — with 「董白：留下」 she spots 蔡文姬 among the refugees
 and you save her (she joins), otherwise bandits carry 蔡文姬 off; 袁术 starves 孙坚 out → 南阳; 孙策 blurts out the
 seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches on 刘表 though the hero warns him about 岘山;
-袁术's generals come for the seal (桥蕤, 纪灵's night raid, 雷薄's pursuit, 陈兰 at the last pass, who dies telling you
-孙坚 fell at 岘山); 袁术 himself is unbeatable (lose_goto) → 结局一 · 玉碎 (吴夫人 refuses capture — written restrained,
+袁术's generals come for the seal (桥蕤 spying, 陈兰's night raid, 雷薄's pursuit); 纪灵, 袁术's strongest (fought 关羽
+30 rounds), is the chapter boss at the last pass and, beaten, tells 吴夫人 孙坚 fell at 岘山; 袁术 himself is an unbeatable
+last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 refuses capture — written restrained,
 never explicit; the hero covers 孙策 and 周瑜's escape and falls). A quest `ending` {title, text} shows an ending card
 and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
 Planned: 貂蝉 (王允, 连环计 with 吕布); the locked north
