@@ -42,7 +42,8 @@
     "huaxiong": {"src": "source/generals/huaxiong.jpg", "face": [0.51, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
     "chengpu": {"src": "source/generals/chengpu.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "zhangning": {"src": "source/generals/zhangning.jpg", "face": [0.50, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
-    "yezhu_bing": {"src": "source/soldiers/yezhu_bing.jpg", "face": [0.55, 0.24], "head": 0.22, "license": "用户提供（Gemini 生成）"}
+    "yezhu_bing": {"src": "source/soldiers/yezhu_bing.jpg", "face": [0.55, 0.24], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "huatuo": {"src": "source/generals/huatuo.jpg", "face": [0.48, 0.26], "head": 0.22, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {
