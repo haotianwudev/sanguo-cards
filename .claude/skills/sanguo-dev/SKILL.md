@@ -121,7 +121,8 @@ Adding a portrait, checklist:
   person (shared portrait / one version in a party), pool (false = story or drop only), troop_skills (false = own skills
   replace the troop's)`. Every troop has two skills — a plain 1-AP move and a signature (骑 马刀/冲锋, 枪 刺击/枪阵,
   弓 射击/齐射, 刀 步战/举盾, 谋 计略/献策 (+AP), 贼 劫掠/偷袭 (break), 法 妖术/符咒 (stun), 勤 包扎/鼓舞) — soldier
-  cards use exactly those, generals add their own. Leader stat = 5 × own + troop members; soldier copies decay ×0.6; generals repeat → tiers
+  cards get only the plain move (精兵 marked `"elite": true` — 丹阳兵, 陷阵营, 白毦兵 … — get both), generals
+  get both plus their own. Leader stat = 5 × own + troop members; soldier copies decay ×0.6; generals repeat → tiers
   铜 1 / 银 2 / 金 4 copies (`gacha.tiers`, frame `tier0/1/2` in ui.json).
   The lord has tiers too (`lord_copies`, starts 铜); its card (`db.cards["lord"]`, added at load, never in pools)
   turns up in recruit offers at `gacha.lord_rate`. **周目**: `SaveData.new_lap()` restarts the story keeping every card

@@ -256,3 +256,12 @@ func test_cards_can_be_left_behind() -> void:
 	check(not s.benched.has("sunce"), "a leader is always brought")
 	s.set_brought("xiliang_nvbing", true)
 	check_eq(s.leader_for("sunce")["hp"], full, "brought again")
+
+
+func test_soldiers_have_only_the_plain_move() -> void:
+	var db := GameData.get_db()
+	var cs := db.build_fighter("changsha")  # 刀兵 soldier
+	check_eq(cs["skills"], [db.troops["infantry"]["skills"][0]], "a soldier card: the troop's plain move only")
+	check_eq(db.build_fighter("danyang")["skills"], db.troops["infantry"]["skills"], "精兵 丹阳兵: both")
+	var hz := db.build_fighter("huangzhong")  # 弓兵 general
+	check(hz["skills"].has(db.troops["archer"]["skills"][0]) and hz["skills"].has(db.troops["archer"]["skills"][1]), "a general: both troop skills")

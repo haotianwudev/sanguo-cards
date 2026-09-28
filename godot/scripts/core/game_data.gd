@@ -62,7 +62,7 @@ func _load(dir: String) -> void:
 			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true),
 			"person": c.get("person", cid), "weight": int(c.get("weight", 1)),
-			"soldier": c["rarity"] == "N"}
+			"soldier": c["rarity"] == "N", "elite": c.get("elite", false)}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
 		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
@@ -156,10 +156,15 @@ func soldier_cards() -> Array:
 
 
 func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
-	## 兵种基础 + 武将自身能力 (× mult: the 铜/银/金 tier). Skills = the troop's skill + the general's own.
+	## 兵种基础 + 武将自身能力 (× mult: the 铜/银/金 tier). Skills: a soldier card has only its troop's plain move;
+	## a general has the troop's pair (plain + signature) plus its own ("troop_skills": false = own skills only).
 	var c: Dictionary = cards[card_id]
 	var t: Dictionary = troops[c["troop"]]
-	var sk: Array = t["skills"].duplicate() if c["troop_skills"] else []  # "troop_skills": false = own skills only
+	var sk: Array = []
+	if c["soldier"] and not c["elite"]:  # 精兵 (丹阳兵, 陷阵营 …) get the signature too
+		sk = [t["skills"][0]]
+	elif c["troop_skills"]:
+		sk = t["skills"].duplicate()
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
