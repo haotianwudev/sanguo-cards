@@ -52,8 +52,8 @@ Framing: `face` = face centre [x, y] as fractions; `head` = head height / image 
 smaller face x ⇒ figure moves right; bigger face y ⇒ figure moves up. Enemies share their card's portrait key.
 
 Story CGs: squares, events and interlude scenes take `"cg": "<key>"`; the art goes in `pics/source/cg/<key>.jpg` +
-`pics/art.json` "cgs" (→ `godot/data/art/cg/`). With a CG the map panel shows it instead of portraits and the
-interlude shows it full screen. Add the key and what to draw to `CARD-DESIGN.md` §8b.
+`pics/art.json` "cgs" (→ `godot/data/art/cg/`). Like Rance X, a CG dominates: arriving at a square with one switches the map screen to CG mode (the picture fills
+the screen, the text box sits over it, a top-bar tab switches back to the map); the interlude shows it full screen. Add the key and what to draw to `CARD-DESIGN.md` §8b.
 Battle CGs (Rance X style: the enemy in its scene): the owner supplies one picture per battle — `pics/source/battles/<scenario id>.jpg`, registered in
 `pics/art.json` "battles", built by `sanguo-art` into `godot/data/art/battle/`; the battle screen paints it (washed) when
 present. For any other art a feature needs, don't wait for it: add the requirement to `CARD-DESIGN.md` (and a brief).

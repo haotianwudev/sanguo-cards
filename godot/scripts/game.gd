@@ -172,6 +172,12 @@ func demo(name: String) -> void:
 			var ts := TitleScreen.new()
 			show_screen(ts)
 			ts.call_deferred("_replay_menu", ts._col, save)
+		"cg":  # standing on a story square that has a CG (醒来)
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng, 0)
+			Quests.move(q, save, "wake")
+			show_screen(MapScreen.new())
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}

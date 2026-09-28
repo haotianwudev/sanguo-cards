@@ -18,6 +18,10 @@ var _token: Panel
 var _nodes: Dictionary = {}  # square id -> Button
 var _pulses: Array = []
 var _sheet: PanelContainer
+var _cg_view: TextureRect  # Rance X style: a story CG fills the screen, the text box sits over it
+var _cg_tab: Button  # switch between the CG and the map
+var _cg_mode := false
+var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _sheet_box: VBoxContainer
 var _hp_bar: ProgressBar
 var _hp_label: Label
@@ -77,6 +81,23 @@ func _ready() -> void:
 	_lines = MapLines.new()
 	_lines.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_layer.add_child(_lines)
+
+	# story CG (behind the top bar and the text box)
+	_cg_view = TextureRect.new()
+	_cg_view.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_cg_view.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_cg_view.size = Vector2(1280, 720)
+	_cg_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_cg_view.visible = false
+	add_child(_cg_view)
+	move_child(_cg_view, 0)
+	_cg_tab = Kit.button("查看地图", "purple")
+	_cg_tab.visible = false
+	_cg_tab.pressed.connect(func():
+		_cg_mode = not _cg_mode
+		_apply_cg_mode())
+	top.add_child(_cg_tab)
+	top.move_child(_cg_tab, 2)
 
 	# bottom panel
 	_sheet = PanelContainer.new()
@@ -368,13 +389,14 @@ func _show_square(s: Dictionary) -> void:
 	_sheet_box.add_child(row)
 
 	var art := Kit.cg(ev.get("cg", s["cg"]))
-	if art != null:  # a story illustration replaces the portraits
-		var pic := TextureRect.new()
-		pic.texture = art
-		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		pic.custom_minimum_size = Vector2(320, 180)
-		row.add_child(pic)
+	_cg_view.texture = art
+	_cg_tab.visible = art != null
+	if art == null:
+		_cg_mode = false
+	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
+		_cg_square = s["id"]
+		_cg_mode = true
+	_apply_cg_mode()
 	for key in (ev.get("portraits", s["portraits"]) if art == null else []):
 		var tex := Kit.portrait(key, 0.75, 5.0)
 		if tex != null:
@@ -611,6 +633,17 @@ func _open_offer(s: Dictionary) -> void:
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
 	add_child(o)
+
+
+func _apply_cg_mode() -> void:
+	## CG mode: the illustration fills the screen, the map hides, the text box turns translucent over the picture
+	_cg_view.visible = _cg_mode
+	_scroll.visible = not _cg_mode
+	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
+	var bg := Kit.c("card")
+	if _cg_mode:
+		bg.a = 0.86
+	_sheet.add_theme_stylebox_override("panel", Kit.box(bg, 14, 2, Kit.c("gold") if _cg_mode else Kit.c("border"), 14))
 
 
 func _open_party() -> void:
