@@ -8,7 +8,7 @@
 | `danyang` | source/soldiers/danyang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord` | source/generals/lord.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
-| `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供 | — |
+| `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wuguotai` | source/generals/wuguotai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunjian` | source/generals/sunjian.jpg | 用户提供 | 用户提供 | — |
 | `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
