@@ -762,7 +762,19 @@ func _pick_then(ids: Array, title: String, kind: String, after: Callable) -> voi
 
 
 func _finish_chapter() -> void:
+	## flags saved, then the interlude and the next chapter's title card, then the next chapter's map
+	var done_id: String = q.get("_raw", q)["id"]
 	Quests.complete(q, Game.save)
+	Game.persist()
+	var nxt: Variant = Quests.current_quest(Game.save)
+	var o := InterludeOverlay.new()
+	o.scenes = Quests.interlude(done_id, Game.save)
+	o.next_title = nxt["title"] if nxt != null else ""
+	o.finished.connect(_after_interlude)
+	add_child(o)
+
+
+func _after_interlude() -> void:
 	Game.persist()
 	_show_toast("「%s」完成！" % q["title"])
 	_rebuild_map()

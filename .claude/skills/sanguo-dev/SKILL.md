@@ -101,6 +101,9 @@ Adding a portrait, checklist:
   run began), relics picked up, and the run's key lines. Mark what matters with `record` (square, when resolved),
   `record_win` / `record_lose` (battle squares), `record` on choose options, or a `{"record": ...}` event effect —
   short lines like 「董白：留下」. These lines are also the hook for later cross-chapter branching.
+- **Between chapters**: recap (战功 paid once, spent on a draw or an upgrade) → `Quests.complete` turns the run's records
+  into permanent `save.flags` → interlude scenes from `godot/data/interludes.json` (keyed by the finished quest; a scene's
+  `requires` / `unless` name a flag) → the next chapter's title card. The 部队 button on the map opens the party screen.
 
 After adding content: run tests, screenshot the relevant demo, fix layout overflow (e.g. three skills shrink the
 battle cards), commit, push.
@@ -122,9 +125,6 @@ or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
 Planned: chapter 3 brings 蔡文姬 (蔡邕's daughter, 洛阳/长安) and 貂蝉 (王允, 连环计 with 吕布); the locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
-董白: 董卓's granddaughter, a grown woman general (years of fighting in 西凉) with two hammers, loves a fight, a
-striking figure (身材火辣). The text gives no number for her age, but she is always clearly an adult — never a 萝莉;
-no groping of anyone unconscious or captive; comedy comes from her temper, her love of duels and the others' reactions.
 
 Writing rules:
 - **Looks match the art.** A character's appearance in the text must match their portrait — or, before the art exists,

@@ -141,6 +141,13 @@ func demo(name: String) -> void:
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_open_party")
+		"interlude":  # after chapter 2, with 董白 spared
+			save.quests_cleared = ["prologue", "taodong"]
+			save.flags = ["董白：留下", "唐姬：护送"]
+			show_screen(TitleScreen.new())
+			var o := InterludeOverlay.new()
+			o.scenes = Quests.interlude("taodong", save)
+			root.add_child(o)
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}

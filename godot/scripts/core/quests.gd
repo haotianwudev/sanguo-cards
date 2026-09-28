@@ -384,6 +384,14 @@ static func spend_merit(save: SaveData, what: String) -> bool:
 	return true
 
 
+static func interlude(quest_id: String, save: SaveData) -> Array:
+	## The scenes to play after finishing a quest, filtered by the player's story flags.
+	var scenes: Array = GameData.get_db().interludes.get(quest_id, [])
+	return scenes.filter(func(sc):
+		return (not sc.has("requires") or save.flags.has(sc["requires"])) \
+			and not (sc.has("unless") and save.flags.has(sc["unless"])))
+
+
 static func after_win(save: SaveData) -> void:
 	## 宝物 that act after every victory (酒囊: heal a share of HP).
 	var db := GameData.get_db()
@@ -559,8 +567,12 @@ static func _auto_resolve(q: Dictionary, save: SaveData) -> void:
 
 
 static func complete(q: Dictionary, save: SaveData) -> void:
+	q = q.get("_raw", q)
 	if not save.quests_cleared.has(q["id"]):
 		save.quests_cleared.append(q["id"])
+	for line in save.run_records:  # this run's choices become lasting story flags
+		if not save.flags.has(line):
+			save.flags.append(line)
 	save.quest = ""
 	reset_carry(save)
 

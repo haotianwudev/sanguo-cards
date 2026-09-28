@@ -716,3 +716,20 @@ func test_beating_a_boss_or_elite_counts_for_merit() -> void:
 	s.resolved = false
 	Quests.resolve(q, s, rng(0))
 	check_eq(s.run_bosses, 1)
+
+
+func test_finished_chapters_leave_story_flags_that_pick_the_interlude() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	Quests.record(s, "董白：留下")
+	Quests.complete(q, s)
+	check(s.flags.has("董白：留下"))
+	var titles: Array = Quests.interlude("taodong", s).map(func(sc): return sc["title"])
+	check(titles.has("玉玺") and titles.has("单挑") and not titles.has("河边"), str(titles))
+	var s2 := SaveData.create()
+	s2.flags = ["董白：交给袁绍"]
+	var t2: Array = Quests.interlude("taodong", s2).map(func(sc): return sc["title"])
+	check(t2.has("河边") and not t2.has("单挑"), str(t2))
+	Quests.begin(quest(0), s)
+	check(s.flags.has("董白：留下"), "flags outlive a new run")

@@ -19,6 +19,7 @@ var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, 
 var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
 var relics: Dictionary  # 宝物: id -> {id, name, icon, rarity, desc, mods, after_win}
 var relic_pick: Dictionary  # elite reward: {n, weights by rarity}
+var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
 var ui: Dictionary
 
 
@@ -101,6 +102,9 @@ func _load(dir: String) -> void:
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")
+	if FileAccess.file_exists(dir + "/interludes.json"):
+		var il: Dictionary = read_json(dir + "/interludes.json")
+		interludes = il.get("after", {})
 
 
 static func _choose_option(o: Dictionary) -> Dictionary:
