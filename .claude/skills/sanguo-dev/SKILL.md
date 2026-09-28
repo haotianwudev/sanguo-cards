@@ -42,6 +42,14 @@ timeout 120 $G --headless --path . --import >/dev/null 2>&1
 timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad>/x.png --wait=1.5
 ```
 
+Android APK (debug, arm64; preset in `godot/export_presets.cfg`, templates in `%APPDATA%/Godot/export_templates/4.7.2.stable`,
+SDK / JDK / debug keystore set in the editor settings):
+
+```bash
+timeout 900 $G --headless --path . --export-debug "Android" ../build/sanguo-cards.apk   # build/ is gitignored
+/c/platform-tools/adb install -r ../build/sanguo-cards.apk                            # phone with USB debugging on
+```
+
 Demos (`Game.demo()` in `scripts/game.gd`): `title`, `map`, `pick`, `choose`, `event` (左慈 on a ？ square),
 `relics` (宝物 pick), `tiers` (铜/银/金 frames), `ch2` (虎牢关 fork), `battle`, `fight`, `cards:id1,id2,...`.
 Demos walk square ids — when you insert or rename squares, update their walks (and `walk_to` in tests).
