@@ -35,5 +35,6 @@
   "heyi": {"file": "heyi.jpg", "face": [0.53, 0.25], "head": 0.22},
   "zuoci": {"file": "zuoci.jpg", "face": [0.5, 0.32], "head": 0.22},
   "shuizei_bing": {"file": "shuizei_bing.jpg", "face": [0.5, 0.19], "head": 0.2},
-  "huangjin_nanxia": {"file": "huangjin_nanxia.jpg", "face": [0.52, 0.28], "head": 0.22}
+  "huangjin_nanxia": {"file": "huangjin_nanxia.jpg", "face": [0.52, 0.28], "head": 0.22},
+  "dongbai": {"file": "dongbai.jpg", "face": [0.5, 0.38], "head": 0.22}
 }
