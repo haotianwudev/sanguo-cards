@@ -558,7 +558,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c3_end`
 
 ```
-A horizontal story event illustration: a restrained tragic scene in the rain: Lady Wu standing tall and calm facing Yuan Shu's golden carriage, the jade seal box on the ground at her feet, the hero stepping in front of her with Sun Jian's old saber, Sun Ce and Zhou Yu escaping on horseback in the distance (no gore, no violence shown).
+A horizontal story event illustration: a restrained tragic scene in the rain: Lady Wu standing tall and calm facing Yuan Shu's golden carriage, the imperial jade seal shattered on a stone at her feet, its gold-patched corner in the mud, Yuan Shu leaping from the carriage aghast, the hero stepping in front of her with Sun Jian's old saber, Sun Ce and Zhou Yu escaping on horseback in the distance (no gore, no violence shown).
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)

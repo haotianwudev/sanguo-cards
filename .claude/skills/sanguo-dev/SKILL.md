@@ -181,7 +181,7 @@ and you save her (she joins), otherwise bandits carry 蔡文姬 off; 袁术 star
 seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches on 刘表 though the hero warns him about 岘山;
 袁术's generals come for the seal (桥蕤 spying, 陈兰's night raid, 雷薄's pursuit); 纪灵, 袁术's strongest (fought 关羽
 30 rounds), is the chapter boss at the last pass and, beaten, tells 吴夫人 孙坚 fell at 岘山; 袁术 himself is an unbeatable
-last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 refuses capture — written restrained,
+last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 smashes the seal on a stone and refuses capture — written restrained,
 never explicit; the hero covers 孙策 and 周瑜's escape and falls). A quest `ending` {title, text} shows an ending card
 and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
 Planned: 貂蝉 (王允, 连环计 with 吕布); the locked north
