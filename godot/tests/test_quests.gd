@@ -474,7 +474,8 @@ func test_lvbu_is_nearly_unbeatable() -> void:
 
 func test_chapter_one_ends_with_the_riverside_oath_before_heading_north() -> void:
 	var q := quest(0)
-	check_eq(q["squares"]["vault"]["next"], ["oath"])
+	check_eq(q["squares"]["vault"]["next"], ["armor"])
+	check_eq(q["squares"]["armor"]["next"], ["oath"])
 	check_eq(q["squares"]["oath"]["next"], ["north"])
 	check(q["squares"]["north"]["next"].is_empty(), "north is the last square")
 
@@ -776,3 +777,15 @@ func test_squares_can_depend_on_earlier_chapters() -> void:
 	check(not Quests.is_open(gated, s) and Quests.is_open(barred, s))
 	s.flags = ["董白：留下"]
 	check(Quests.is_open(gated, s) and not Quests.is_open(barred, s))
+
+
+func test_wu_gives_the_hero_sun_jians_old_armor() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "armor"
+	s.resolved = false
+	Quests.choose_event(q, s, rng(0), 0)
+	check(s.relics.has("jiujia") and s.run_records.has("穿上了孙坚的旧甲"))
+	for seed_value in 20:
+		check(not Quests.relic_offer(s, rng(seed_value)).has("jiujia"), "never offered at random")

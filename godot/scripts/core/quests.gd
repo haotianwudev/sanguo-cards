@@ -440,7 +440,7 @@ static func relic_offer(save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## A few 宝物 not held yet, drawn by rarity weight (relic_pick in cards.json).
 	var db := GameData.get_db()
 	var weights: Dictionary = db.relic_pick["weights"]
-	var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r))
+	var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r) and db.relics[r]["rarity"] != "story")
 	var ids: Array = []
 	while not left.is_empty() and ids.size() < int(db.relic_pick["n"]):
 		var w: Array = left.map(func(r): return float(weights.get(db.relics[r]["rarity"], 0)))
@@ -548,7 +548,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			if e["relic"] is String:
 				rid = e["relic"]
 			else:
-				var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r))
+				var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r) and db.relics[r]["rarity"] != "story")
 				if not left.is_empty():
 					rid = left[rng.randi_range(0, left.size() - 1)]
 			if rid != "" and not save.relics.has(rid):

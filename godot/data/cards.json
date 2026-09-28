@@ -12,6 +12,7 @@
                  "n": 3, "chest_chance": 0.2,
                  "weights": {"common": 60, "rare": 35, "curse": 5}},
   "relics": {
+    "jiujia": {"name": "孙坚旧甲", "icon": "甲", "rarity": "story", "desc": "文台年轻时的银甲，吴夫人亲手给你系上的。受到的伤害 -10%，体力 +5%", "mods": {"guard": 0.1, "hp": 0.05}},
     "hupi": {"name": "虎皮披风", "icon": "虎", "rarity": "common", "desc": "孙坚同款。攻击 +15%", "mods": {"at": 0.15}},
     "shoushihe": {"name": "首饰盒", "icon": "盒", "rarity": "common", "desc": "吴夫人的宝贝，打开就想起她。回复 +50%", "mods": {"heal": 0.5}},
     "jiunang": {"name": "酒囊", "icon": "酒", "rarity": "common", "desc": "左慈送的，喝不完。每打赢一场，回复 10% 体力", "after_win": 0.1},
