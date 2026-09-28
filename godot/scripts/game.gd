@@ -151,7 +151,7 @@ func demo(name: String) -> void:
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_complete")
-		"party":  # the 部队编成 screen with a mid-game collection
+		"party", "party_pick":  # the 整备 screen with a mid-game collection
 			for c in ["sunce", "zhouyu", "wuguotai", "sunjian", "huanggai", "chengpu", "dongbai"]:
 				save.grant_card(c)
 			for c in ["danyang", "danyang", "changsha", "gongnv", "xiliang_nvbing"]:
@@ -159,6 +159,13 @@ func demo(name: String) -> void:
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_open_party")
+			if name == "party_pick":  # a general selected: the detail panel with unit and skills
+				(func():
+					await get_tree().process_frame
+					var o: PartyOverlay = m.get_node("Party")
+					o._sel = "sunce"
+					o._filter = "cavalry"
+					o._rebuild()).call_deferred()
 		"interlude":  # after chapter 2, with 董白 spared
 			save.quests_cleared = ["prologue", "taodong"]
 			save.flags = ["董白：留下", "唐姬：护送"]

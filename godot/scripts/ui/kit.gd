@@ -227,6 +227,45 @@ static func skill_icon(skill: Dictionary) -> Texture2D:
 	return icon("skill_" + SKILL_ICONS.get(effects[0]["type"], "phys"))
 
 
+static func skill_desc(sk: Dictionary) -> String:
+	## one line on what a skill does, from its effects (for the 整备 detail panel)
+	var parts: Array = []
+	for e in sk.get("effects", []):
+		match e["type"]:
+			"attack":
+				parts.append("物理攻击 ×%s%s" % [_num(e["power"]), ("，%d 连击" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else ""])
+			"magic":
+				parts.append("法术攻击 ×%s%s" % [_num(e["power"]), ("（对灼烧中的敌人 ×%s）" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
+			"heal":
+				parts.append("回复全军体力 ×%s" % _num(e["power"]))
+			"guard":
+				parts.append("本回合受到伤害 -%d%%" % int(round(float(e["cut"]) * 100)))
+			"boost":
+				parts.append("全军 BOOST" if e.get("target", "") == "all" else "自己 BOOST（下次出手 ×1.5）")
+			"stun":
+				parts.append("%d%% 让敌人混乱一回合" % int(round(float(e["chance"]) * 100)))
+			"ap":
+				parts.append("AP +%d" % int(e["amount"]))
+			"burn":
+				if e.has("pct"):
+					parts.append("灼烧：每回合掉 %d%% 体力，%d 回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])
+				else:
+					parts.append("灼烧 ×%s，%d 回合" % [_num(e["power"]), int(e["turns"])])
+			"break":
+				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
+	var tags: Array = []
+	if sk.get("uses", null) != null:
+		tags.append("每场限 %d 次" % int(sk["uses"]))
+	if sk.get("cumulative", false):
+		tags.append("每用一次 AP +1")
+	return "；".join(parts) + (("（%s）" % "，".join(tags)) if not tags.is_empty() else "")
+
+
+static func _num(x: Variant) -> String:
+	var f := float(x)
+	return str(int(f)) if is_equal_approx(f, round(f)) else ("%.2f" % f).rstrip("0")
+
+
 static func card_back() -> Texture2D:
 	var key := "card:back"
 	if not _textures.has(key):

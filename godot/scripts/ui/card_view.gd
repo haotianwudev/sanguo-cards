@@ -132,9 +132,9 @@ func _build() -> void:
 			ic.texture = Kit.icon(pair[0])
 			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			ic.custom_minimum_size = Vector2(strip_h - 4, strip_h - 4)
+			ic.custom_minimum_size = Vector2(strip_h - 6, strip_h - 6)
 			line.add_child(ic)
-			var num := Kit.label("%d  " % pair[1], 16 if not small else 13)
+			var num := Kit.label("%d " % pair[1], int(clampf(w / 11.0, 10, 16)))  # fits 4-digit troops on small cards
 			num.add_theme_color_override("font_color", Color.WHITE)
 			line.add_child(num)
 		_add(line, strip.position, strip.size)
