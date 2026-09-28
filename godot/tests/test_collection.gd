@@ -217,13 +217,10 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 	check_eq(Quests.mods(n)["enemy"], Quests.mods(s)["enemy"], "enemies unchanged")
 
 
-func test_later_laps_draw_better_and_bring_back_old_cards() -> void:
+func test_cards_you_have_had_can_be_drawn_again() -> void:
 	var s := SaveData.create()
 	s.grant_card("dongbai")  # story-only: not in the normal recruit pool
 	var rarity: String = GameData.get_db().cards["dongbai"]["rarity"]
 	check(s.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "a card you've had can be drawn")
 	var n := s.new_lap()
-	check(n.seen.has("dongbai"))
-	var r1 := s.lap_rates()
-	var r2 := n.lap_rates()
-	check(r2["SSR"] > r1["SSR"] and r2["R"] < r1["R"], "the 2nd 周目 draws rarer cards")
+	check(n.seen.has("dongbai") and n.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "still drawable next 周目")

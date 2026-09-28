@@ -33,7 +33,7 @@ func new_game(lord_name: String) -> void:
 
 
 func new_lap() -> void:
-	## 新周目: the story from the top with the collection carried over (and a better recruit pool)
+	## 新周目: the story from the top with the collection carried over (cards ever had can all be drawn)
 	save = SaveData.read().new_lap()
 	Quests.ensure_started(save)
 	persist()

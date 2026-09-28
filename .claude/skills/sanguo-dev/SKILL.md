@@ -123,8 +123,8 @@ Adding a portrait, checklist:
   铜 1 / 银 2 / 金 4 copies (`gacha.tiers`, frame `tier0/1/2` in ui.json).
   The lord has tiers too (`lord_copies`, starts 铜); its card (`db.cards["lord"]`, added at load, never in pools)
   turns up in recruit offers at `gacha.lord_rate`. **周目**: `SaveData.new_lap()` restarts the story keeping every card
-  as it is — no gifts, no other rule changes; quality climbs only through the pool (`lap_rates()` shifts toward SR/SSR,
-  `recruit_pool()` adds every general ever owned via `seen`, story-only ones included).
+  as it is — no gifts, no rarity shift, no other rule changes (the user wants those decided later); the only pool change
+  is `recruit_pool()` adding every general ever owned via `seen`, story-only ones included.
 - **Skill**: `cost, cumulative (+1 AP per use), uses (1 = 限1), effects[]` — `attack/magic {power, hits, burning_mult}`,
   `heal`, `guard {cut}`, `boost`, `stun {chance}`, `break`, `ap`, `burn {pct | power, turns}`. Once-per-battle damage
   skills (大招) cost ≥ 3 AP (a test enforces it).

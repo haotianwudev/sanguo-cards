@@ -88,7 +88,7 @@ func restore_run() -> void:
 
 func new_lap() -> SaveData:
 	## 新周目: the story starts over; the whole collection (tiers as they are), the lord, the name and 战功 come
-	## along. Card quality climbs through the recruit pool (lap_rates, recruit_pool), not by gifts.
+	## along. No gifts, no other rule changes; the recruit pool also holds every general ever had (recruit_pool).
 	_sync()
 	var s := SaveData.create()
 	s.lap = lap + 1
@@ -238,7 +238,7 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 	if n <= 0:
 		n = int(db.gacha["offer_size"]) + offer_extra()
 	if rates.is_empty():
-		rates = lap_rates()
+		rates = db.gacha["rates"]
 	var result: Array = []
 	for _i in n:
 		if not maxed("lord") and not result.has(db.cards["lord"]) and rng.randf() < float(db.gacha.get("lord_rate", 0.0)):
@@ -256,17 +256,6 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 		var p: Array = pools[rarity]
 		result.append(p[rng.randi_range(0, p.size() - 1)])
 	return result
-
-
-func lap_rates() -> Dictionary:
-	## the recruit rarity weights for this 周目: higher rarities come more often every 周目
-	var db := _db()
-	var cfg: Dictionary = db.gacha.get("lap", {})
-	var out := {}
-	for r in db.gacha["rates"]:
-		var base := float(db.gacha["rates"][r])
-		out[r] = maxf(minf(base, float(cfg.get("min_rate", 0))), base + (lap - 1) * float(cfg.get("rates", {}).get(r, 0)))
-	return out
 
 
 func recruit_pool(rarity: String) -> Array:
