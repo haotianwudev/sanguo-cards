@@ -39,7 +39,7 @@
 | ⬜ 缺 | `shanzei_bing` | 山贼 |
 | ✅ 正式 | `huangjin_nanxia` | 黄巾余孽 |
 | ⬜ 缺 | `inf_n` | 官军 |
-| ✅ 正式 | `yezhu_bing` | 野猪 |
+| ✅ 正式 | `boar` | 野猪 |
 | ✅ 正式 | `langlijiao` | 「浪里蛟」胡玉 |
 | ✅ 正式 | `yaodao` | 妖道唐周 |
 | ✅ 正式 | `heyi` | 黄巾渠帅何仪 |
@@ -48,6 +48,7 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
+| ✅ 正式 | `yezhu_bing` | 野猪兵（野猪的卡） |
 | ✅ 正式 | `danyang` | 丹阳兵 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |

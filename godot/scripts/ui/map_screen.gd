@@ -244,6 +244,7 @@ func _icon_key(s: Dictionary) -> String:
 			"赤": return "red_turban"
 			"宝": return "treasure"
 			"将": return "boss"
+			_: return ""  # no icon drawn for this glyph (交、甲、寨): the square shows the glyph itself
 	return _kind(s)
 
 

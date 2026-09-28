@@ -43,7 +43,8 @@
     "huaxiong": {"src": "source/generals/huaxiong.jpg", "face": [0.51, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
     "chengpu": {"src": "source/generals/chengpu.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "zhangning": {"src": "source/generals/zhangning.jpg", "face": [0.50, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
-    "yezhu_bing": {"src": "source/soldiers/yezhu_bing.jpg", "face": [0.50, 0.45], "head": 0.30, "license": "用户提供（Gemini 生成）"},
+    "yezhu_bing": {"src": "source/soldiers/yezhu_bing.jpg", "face": [0.55, 0.24], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "boar": {"src": "source/soldiers/boar.jpg", "face": [0.50, 0.45], "head": 0.30, "license": "用户提供（Gemini 生成）"},
     "huatuo": {"src": "source/generals/huatuo.jpg", "face": [0.48, 0.26], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "huangjin_nvyi": {"src": "source/soldiers/huangjin_nvyi.jpg", "face": [0.53, 0.25], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "xiliang_nvbing": {"src": "source/soldiers/xiliang_nvbing.jpg", "face": [0.51, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
@@ -56,7 +57,7 @@
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {
     "prologue": {"src": "source/map/bg_prologue.jpg", "license": "用户提供"},
-    "taodong": {"src": "source/map/bg_taodong.jpg", "license": "用户提供"}
+    "taodong": {"src": "source/map/bg_taodong.jpg", "license": "程序生成占位（tools/build_chapter2_map.py）"}
   },
   "_battles": "battle backgrounds, keyed by scenario id (cards.json scenarios); 16:9, scaled to 720px high into godot/data/art/battle/",
   "battles": {},

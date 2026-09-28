@@ -51,17 +51,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
 
-### `boar` ⬜ 缺
-
-```
-A vertical character portrait of a huge wild boar (野猪).
-Appearance: Massive bristly dark-brown boar with long curved tusks and small angry red eyes.
-Armor & Clothing: No clothing; mud splashed on its flanks.
-Weapon: Head lowered, charging straight at the viewer.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
 ### `lijue` ⬜ 缺
 
 ```

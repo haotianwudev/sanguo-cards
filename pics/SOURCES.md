@@ -47,6 +47,7 @@
 | `chengpu` | source/generals/chengpu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangning` | source/generals/zhangning.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yezhu_bing` | source/soldiers/yezhu_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `boar` | source/soldiers/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huatuo` | source/generals/huatuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangjin_nvyi` | source/soldiers/huangjin_nvyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiliang_nvbing` | source/soldiers/xiliang_nvbing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -56,4 +57,4 @@
 | `baie_hu` | source/generals/baie_hu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gongnv` | source/soldiers/gongnv.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
-| `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
+| `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
