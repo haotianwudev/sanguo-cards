@@ -58,32 +58,58 @@ func _build() -> void:
 	var e: Dictionary = b.enemy["data"]
 	# battle background: data/art/battle/<scenario id>.jpg (built by `sanguo-art` from pics/art.json "battles")
 	var bg_path := "res://data/art/battle/%s.jpg" % scenario_id
-	if ResourceLoader.exists(bg_path):
+	# Rance X style: with a battle CG the painting owns the top of the screen (it is the enemy: it shakes and
+	# flashes when hit), the enemy's name and HP sit in a slim strip over it, and our side lives in a dark band below
+	var has_cg := ResourceLoader.exists(bg_path)
+	if has_cg:
 		var bg := TextureRect.new()
 		bg.texture = load(bg_path)
 		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		bg.size = Vector2(1280, 720)
+		bg.position = Vector2(0, -20)
+		bg.size = Vector2(1280, 740)
 		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(bg)
-		var wash := ColorRect.new()  # keeps panels and text readable over the painting
-		wash.color = Kit.c("bg")
-		wash.color.a = 0.35
-		wash.size = Vector2(1280, 720)
-		wash.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		add_child(wash)
+		_enemy_art = bg
+		var band_col := Kit.c("bg")
+		var grad := Gradient.new()
+		grad.set_color(0, Color(band_col, 0.0))
+		grad.set_color(1, Color(band_col, 0.9))
+		var gt := GradientTexture2D.new()
+		gt.gradient = grad
+		gt.fill_from = Vector2(0, 0)
+		gt.fill_to = Vector2(0, 1)
+		var fade := TextureRect.new()  # the painting fades into the band where our cards are
+		fade.texture = gt
+		fade.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		fade.stretch_mode = TextureRect.STRETCH_SCALE
+		fade.position = Vector2(0, 300)
+		fade.size = Vector2(1280, 90)
+		fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(fade)
+		var band := ColorRect.new()
+		band.color = Color(band_col, 0.9)
+		band.position = Vector2(0, 390)
+		band.size = Vector2(1280, 330)
+		band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(band)
 	# enemy (top-left)
 	var enemy_panel := PanelContainer.new()
 	enemy_panel.position = Vector2(20, 14)
-	enemy_panel.size = Vector2(880, 250)
-	enemy_panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("enemy_bg"), 16, 3, Kit.c("enemy_border"), 14))
+	enemy_panel.size = Vector2(880, 250) if not has_cg else Vector2(560, 0)
+	var ebg := Kit.c("enemy_bg")
+	if has_cg:
+		ebg.a = 0.72
+	enemy_panel.add_theme_stylebox_override("panel", Kit.box(ebg, 16, 3 if not has_cg else 2, Kit.c("enemy_border"), 14 if not has_cg else 10))
 	add_child(enemy_panel)
 	var er := HBoxContainer.new()
 	er.add_theme_constant_override("separation", 22)
 	enemy_panel.add_child(er)
 	var key := Kit.enemy_portrait_key(e)
 	var fr := Kit.frame("enemy")
-	if key != "" and not fr.is_empty():
+	if has_cg:
+		pass  # the CG is the enemy
+	elif key != "" and not fr.is_empty():
 		var holder := Control.new()  # portrait inside the enemy frame (iron by default, see ui.json)
 		var sz := Vector2(160, 224)
 		holder.custom_minimum_size = sz
@@ -120,38 +146,51 @@ func _build() -> void:
 		ph.add_theme_stylebox_override("normal", Kit.box(Kit.c("card"), 12, 0, Color.TRANSPARENT, 0))
 		ph.custom_minimum_size = Vector2(165, 220)
 		_enemy_art = ph
-	er.add_child(_enemy_art)
+	if not has_cg:
+		er.add_child(_enemy_art)
 	var info := VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.alignment = BoxContainer.ALIGNMENT_CENTER
-	info.add_theme_constant_override("separation", 10)
+	info.add_theme_constant_override("separation", 10 if not has_cg else 4)
 	er.add_child(info)
-	info.add_child(Kit.label(e["name"], Kit.FONT_TITLE, "red"))
-	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 30)
+	if has_cg:  # one line: name and stats, then the bar
+		var top := HBoxContainer.new()
+		top.add_theme_constant_override("separation", 14)
+		top.add_child(Kit.label(e["name"], Kit.FONT_BIG, "red"))
+		var st := Kit.label("攻击 %d · 每回合 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted")
+		st.size_flags_vertical = Control.SIZE_SHRINK_END
+		top.add_child(st)
+		info.add_child(top)
+	else:
+		info.add_child(Kit.label(e["name"], Kit.FONT_TITLE, "red"))
+	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 30 if not has_cg else 20)
 	info.add_child(_enemy_hp)
-	_enemy_hp_label = Kit.label("", Kit.FONT_BODY)
+	_enemy_hp_label = Kit.label("", Kit.FONT_BODY if not has_cg else Kit.FONT_SMALL)
 	info.add_child(_enemy_hp_label)
-	info.add_child(Kit.label("攻击 %d · 每回合行动 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
-	_enemy_status = Kit.label("", Kit.FONT_BODY, "purple")
+	if not has_cg:
+		info.add_child(Kit.label("攻击 %d · 每回合行动 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
+	_enemy_status = Kit.label("", Kit.FONT_BODY if not has_cg else Kit.FONT_SMALL, "purple")
 	info.add_child(_enemy_status)
 
 	# log (top-right)
 	var log_panel := PanelContainer.new()
-	log_panel.position = Vector2(916, 14)
-	log_panel.size = Vector2(344, 250)
+	log_panel.position = Vector2(916, 14) if not has_cg else Vector2(950, 14)
+	log_panel.size = Vector2(344, 250) if not has_cg else Vector2(310, 180)
+	if has_cg:  # a small see-through log so the painting shows
+		log_panel.add_theme_stylebox_override("panel", Kit.box(Color(0, 0, 0, 0.45), 10, 0, Color.TRANSPARENT, 8))
 	add_child(log_panel)
 	_log = RichTextLabel.new()
 	_log.bbcode_enabled = true
 	_log.scroll_following = true
-	_log.add_theme_font_size_override("normal_font_size", 16)
-	_log.add_theme_font_size_override("bold_font_size", 16)
+	_log.add_theme_font_size_override("normal_font_size", 16 if not has_cg else 14)
+	_log.add_theme_font_size_override("bold_font_size", 16 if not has_cg else 14)
 	log_panel.add_child(_log)
 
 	# party bar
 	_party_box = PanelContainer.new()
-	_party_box.position = Vector2(20, 276)
-	_party_box.size = Vector2(1240, 70)
-	_party_box.add_theme_stylebox_override("panel", Kit.box(Kit.c("party_bg"), 14, 2, Kit.c("green"), 12))
+	_party_box.position = Vector2(20, 276) if not has_cg else Vector2(20, 390)
+	_party_box.size = Vector2(1240, 70) if not has_cg else Vector2(1240, 48)
+	_party_box.add_theme_stylebox_override("panel", Kit.box(Kit.c("party_bg"), 14, 2, Kit.c("green"), 12 if not has_cg else 7))
 	add_child(_party_box)
 	var pr := HBoxContainer.new()
 	pr.add_theme_constant_override("separation", 18)
@@ -175,7 +214,7 @@ func _build() -> void:
 
 	# leaders (bottom-left)
 	var row := HBoxContainer.new()
-	row.position = Vector2(20, 358)
+	row.position = Vector2(20, 358) if not has_cg else Vector2(20, 448)
 	row.add_theme_constant_override("separation", 16)
 	add_child(row)
 	# three skills under a card only fit if the cards shrink a little
@@ -184,6 +223,9 @@ func _build() -> void:
 		most = maxi(most, u["leader"]["card"]["skills"].size())
 	var card_size := Vector2(180, 252) if most <= 2 else Vector2(150, 210)
 	var btn_h := 44 if most <= 2 else 34
+	if has_cg:  # the band is shorter: smaller cards
+		card_size = Vector2(124, 174) if most <= 2 else Vector2(118, 150)
+		btn_h = 26
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
 		var col := VBoxContainer.new()
@@ -196,24 +238,35 @@ func _build() -> void:
 		col.add_child(v)
 		_cards.append(v)
 		for sid in u["leader"]["card"]["skills"]:
-			var btn := Kit.button("", "blue", Kit.FONT_SMALL)
+			var btn := Kit.button("", "blue", Kit.FONT_SMALL if not has_cg else 14)
 			btn.custom_minimum_size = Vector2(card_size.x, btn_h)
+			if has_cg:  # narrow cards: the label is cut rather than widening the column
+				btn.clip_text = true
+				btn.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+				for st in ["normal", "hover", "pressed", "disabled", "focus"]:
+					var sb := btn.get_theme_stylebox(st).duplicate() as StyleBoxFlat
+					if sb != null:
+						sb.content_margin_top = 2
+						sb.content_margin_bottom = 2
+						sb.content_margin_left = 4
+						sb.content_margin_right = 4
+						btn.add_theme_stylebox_override(st, sb)
 			btn.pressed.connect(_on_skill.bind(i, sid))
 			col.add_child(btn)
 			_skill_buttons.append([i, sid, btn])
 
 	# actions (bottom-right)
 	var acts := VBoxContainer.new()
-	acts.position = Vector2(1010, 380)
-	acts.size = Vector2(250, 320)
-	acts.add_theme_constant_override("separation", 14)
+	acts.position = Vector2(1010, 380) if not has_cg else Vector2(1040, 456)
+	acts.size = Vector2(250, 320) if not has_cg else Vector2(220, 220)
+	acts.add_theme_constant_override("separation", 14 if not has_cg else 10)
 	add_child(acts)
 	_end = Kit.button("回合结束", "red", Kit.FONT_BIG)
-	_end.custom_minimum_size = Vector2(250, 70)
+	_end.custom_minimum_size = Vector2(250, 70) if not has_cg else Vector2(220, 60)
 	_end.pressed.connect(_on_end_round)
 	acts.add_child(_end)
 	_defend = Kit.button("防御", "blue", Kit.FONT_BIG)
-	_defend.custom_minimum_size = Vector2(250, 62)
+	_defend.custom_minimum_size = Vector2(250, 62) if not has_cg else Vector2(220, 52)
 	_defend.pressed.connect(_on_defend)
 	acts.add_child(_defend)
 	_retreat = Kit.button("撤退", "gray", Kit.FONT_BODY)
@@ -241,6 +294,7 @@ func _refresh() -> void:
 	if b.ap_drain > 0:
 		st.append("下回合 AP -%d" % b.ap_drain)
 	_enemy_status.text = "　".join(st)
+	_enemy_status.visible = not st.is_empty()  # no empty line under the enemy bar
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
 		ch.queue_free()

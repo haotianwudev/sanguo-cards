@@ -313,14 +313,6 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low ang
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
 
-### `shuizei_scout`
-
-```
-A horizontal battle scene illustration: river bandits leaping out of tall riverside reeds at a broken wooden fort gate, brandishing knives.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy and the action fill the upper half of the frame, the bottom third is calmer ground (game UI cards sit there).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `shuizei`
 
 ```
