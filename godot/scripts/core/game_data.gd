@@ -93,6 +93,7 @@ func _load(dir: String) -> void:
 				"cg": s.get("cg", ""), "prompt": s.get("prompt", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
+			"subtitle": q.get("subtitle", ""),
 			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", [])})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]

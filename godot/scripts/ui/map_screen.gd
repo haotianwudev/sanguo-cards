@@ -1009,6 +1009,7 @@ func _finish_chapter() -> void:
 	var o := InterludeOverlay.new()
 	o.scenes = Quests.interlude(done_id, Game.save)
 	o.next_title = nxt["title"] if nxt != null else ""
+	o.next_subtitle = nxt.get("subtitle", "") if nxt != null else ""
 	o.finished.connect(_after_interlude)
 	add_child(o)
 

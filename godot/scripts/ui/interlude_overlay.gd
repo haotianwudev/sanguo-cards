@@ -6,6 +6,7 @@ signal finished
 
 var scenes: Array = []
 var next_title := ""  # "" when there is no next chapter yet
+var next_subtitle := ""  # time and place under the title (「半年后」)
 var _page := -1
 var _line := 0  # lines of the current scene shown so far
 var _scene_lines: Array = []
@@ -130,6 +131,13 @@ func _show_title() -> void:
 	t.position = Vector2(0, 280)
 	t.size = Vector2(1280, 120)
 	_box.add_child(t)
+	if next_subtitle != "":
+		var when := Kit.label(next_subtitle, Kit.FONT_BIG + 6)
+		when.add_theme_color_override("font_color", Color(0.95, 0.92, 0.85))
+		when.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		when.position = Vector2(0, 220)
+		when.size = Vector2(1280, 50)
+		_box.add_child(when)
 	var sub := Kit.label("后续章节开发中" if next_title == "" else "点击开始", Kit.FONT_BODY)
 	sub.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

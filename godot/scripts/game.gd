@@ -166,6 +166,12 @@ func demo(name: String) -> void:
 			var o := InterludeOverlay.new()
 			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
+		"titlecard":  # the chapter-2 title card straight away
+			var o := InterludeOverlay.new()
+			o.next_title = GameData.get_db().quests[1]["title"]
+			o.next_subtitle = GameData.get_db().quests[1]["subtitle"]
+			show_screen(TitleScreen.new())
+			root.add_child(o)
 		"replays":  # the title screen's 重玩章节 list
 			save.quests_cleared = ["prologue", "taodong"]
 			save.clears = {"prologue": 3, "taodong": 1}

@@ -130,7 +130,8 @@ Adding a portrait, checklist:
   short lines like 「董白：留下」. These lines are also the hook for later cross-chapter branching.
 - **Between chapters**: recap (战功 paid once, spent on a draw or an upgrade) → `Quests.complete` turns the run's records
   into permanent `save.flags` → interlude scenes from `godot/data/interludes.json` (keyed by the finished quest; a scene's
-  `requires` / `unless` name a flag) → the next chapter's title card. The 部队 button on the map opens the party screen.
+  `requires` / `unless` name a flag) → the next chapter's title card (with the quest's `subtitle`, e.g. 「半年后」 — the journey from 富春 to 孙坚 takes about half a year;
+  孙坚 had left home well before, and he meets the hero for the first time in chapter 2). The 部队 button on the map opens the party screen.
 - **Replays**: the title screen replays finished chapters (`Quests.start_replay` parks the main run in `save.stash`);
   each clear adds +1 险 (`save.clears`); cards and 战功 stay, story flags don't change.
 
