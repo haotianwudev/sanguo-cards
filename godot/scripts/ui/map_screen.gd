@@ -31,7 +31,6 @@ var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
 var _dlg_raw: Array = []  # the lines before {lord} is filled in (for speaker lookup)
-var _dlg_cast: Array = []  # the scene's own portraits: the face for narration before anyone speaks
 var _dlg_prompt := ""  # the one-line summary shown at the choice (square / event "prompt")
 var _sheet_hidden := false
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
@@ -445,15 +444,6 @@ func _show_square(s: Dictionary) -> void:
 		_dlg_face.custom_minimum_size = Vector2(96, 96) if art != null else Vector2(135, 180)
 		_dlg_face.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_child(_dlg_face)
-	for key in (ev.get("portraits", s["portraits"]) if art == null and not talking else []):
-		var tex := Kit.portrait(key, 0.75, 5.0)
-		if tex != null:
-			var tr := TextureRect.new()
-			tr.texture = tex
-			tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-			tr.custom_minimum_size = Vector2(135, 180)
-			row.add_child(tr)
 	var text := RichTextLabel.new()
 	text.bbcode_enabled = true
 	text.fit_content = false
@@ -594,7 +584,6 @@ func _show_square(s: Dictionary) -> void:
 	if narrative and lines.size() > 1:
 		_dlg_lines = lines
 		_dlg_raw = raw_lines
-		_dlg_cast = ev.get("portraits", s["portraits"])
 		_dlg_text = text
 		_dlg_buttons = buttons
 		_dlg_recap = s["type"] == "choose" or s["type"] == "mystery"
@@ -614,12 +603,8 @@ func _dialog_show() -> void:
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	if _dlg_face != null:
-		var key := Kit.speaker_key(str(_dlg_raw[_dlg_i]))
-		if key == "" and _dlg_face.texture == null and not _dlg_cast.is_empty():  # narration: the scene's cast
-			key = _dlg_cast[0]
-		var tex: Texture2D = Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0)
-		if tex != null:
-			_dlg_face.texture = tex
+		var key := Kit.speaker_key(str(_dlg_raw[_dlg_i]))  # narration: no face
+		_dlg_face.texture = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
 		_dlg_face.visible = _dlg_face.texture != null
 	if last:
 		if _dlg_recap:  # choosing: keep the whole setup in view next to the options

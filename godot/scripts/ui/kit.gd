@@ -194,10 +194,18 @@ static var _names: Dictionary = {}
 
 
 static func speaker_key(raw_line: String) -> String:
-	## The portrait for whoever speaks (or leads) a story line: {lord} first, then a name right before 「 / ：,
-	## then the first known name in the line. "" when nobody is recognised.
+	## The portrait for whoever speaks a story line: {lord}, else the first known name before the first 「 / ：.
+	## "" for narration (no speech on the line) -- a name merely mentioned doesn't get a face.
 	if raw_line.begins_with("{lord}"):
 		return "lord"
+	var cut := -1
+	for mark in ["「", "："]:
+		var at := raw_line.find(mark)
+		if at >= 0 and (cut < 0 or at < cut):
+			cut = at
+	if cut < 0:
+		return ""
+	var head := raw_line.substr(0, cut)
 	if _names.is_empty():
 		for cid in GameData.get_db().cards:
 			var key := portrait_key(cid)
@@ -208,13 +216,9 @@ static func speaker_key(raw_line: String) -> String:
 	var best := ""
 	var best_at := 1 << 30
 	for n in _names:
-		var at := raw_line.find(n)
-		if at < 0 or not _portrait_index().has(_names[n]):
-			continue
-		var speaks := raw_line.substr(at + n.length(), 6).find("：") >= 0 or raw_line.substr(at + n.length(), 4).find("「") >= 0
-		var score := at - (1000000 if speaks else 0)
-		if score < best_at:
-			best_at = score
+		var at := head.find(n)
+		if at >= 0 and at < best_at and _portrait_index().has(_names[n]):
+			best_at = at
 			best = _names[n]
 	return best
 
