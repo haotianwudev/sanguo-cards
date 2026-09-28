@@ -478,6 +478,12 @@ func _show_square(s: Dictionary) -> void:
 			done.pressed.connect(_complete)
 			buttons.add_child(done)
 			Kit.focus(done)
+		elif opts.size() == 1:  # one way on: just carry on
+			text.text = body
+			var go := Kit.button("继续 ▶", "blue")
+			go.pressed.connect(_advance)
+			buttons.add_child(go)
+			Kit.focus(go)
 		else:
 			text.text = body + "\n\n[color=%s]点击发光的格子前进[/color]" % Kit.c("green").to_html()
 			var first := true
@@ -713,11 +719,27 @@ func _choose_event(i: int) -> void:
 
 
 func _resolve(choice := -1) -> void:
+	## resolve the square, then go straight on (no replay of what was just read)
+	var kind: String = Quests.here(q, Game.save)["type"]
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
 	Game.persist()
-	_refresh()
 	for c in gained:
 		_show_toast("获得：" + c["name"])
+	if kind == "mystery" or not Game.save.offer.is_empty():  # an event's outcome / a pick still to make: show it first
+		_refresh()
+		return
+	_advance()
+
+
+func _advance() -> void:
+	## one way on: walk there; several: back to the map to choose; none: the chapter's end panel
+	var opts := Quests.next_options(q, Game.save)
+	if opts.size() == 1:
+		_on_square(opts[0]["id"])
+		return
+	if opts.size() > 1:
+		_cg_mode = false
+	_refresh()
 
 
 func _open_choose(s: Dictionary) -> void:

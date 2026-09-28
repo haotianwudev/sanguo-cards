@@ -187,6 +187,8 @@ func demo(name: String) -> void:
 			show_screen(m)
 			for _i in 12:
 				m.call_deferred("_on_story_click", m._fake_click())
+			if OS.get_cmdline_user_args().has("--press-continue"):  # then press 继续: it should walk on to 换药
+				m.get_tree().create_timer(0.5).timeout.connect(func(): m._resolve())
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}
