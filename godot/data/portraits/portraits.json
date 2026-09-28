@@ -39,7 +39,7 @@
   "dongbai": {"file": "dongbai.jpg", "face": [0.51, 0.31], "head": 0.2},
   "zumao": {"file": "zumao.jpg", "face": [0.5, 0.28], "head": 0.22},
   "huaxiong": {"file": "huaxiong.jpg", "face": [0.51, 0.22], "head": 0.2},
-  "chengpu": {"file": "chengpu.jpg", "face": [0.52, 0.28], "head": 0.22},
+  "chengpu": {"file": "chengpu.jpg", "face": [0.5, 0.23], "head": 0.23},
   "zhangning": {"file": "zhangning.jpg", "face": [0.5, 0.22], "head": 0.2},
   "yezhu_bing": {"file": "yezhu_bing.jpg", "face": [0.55, 0.24], "head": 0.22},
   "boar": {"file": "boar.jpg", "face": [0.5, 0.45], "head": 0.3},

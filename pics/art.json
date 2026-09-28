@@ -40,7 +40,7 @@
     "dongbai": {"src": "source/generals/dongbai.jpg", "face": [0.51, 0.31], "head": 0.20, "license": "用户提供（Gemini 生成）"},
     "zumao": {"src": "source/generals/zumao.jpg", "face": [0.50, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "huaxiong": {"src": "source/generals/huaxiong.jpg", "face": [0.51, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
-    "chengpu": {"src": "source/generals/chengpu.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "chengpu": {"src": "source/generals/chengpu.jpg", "face": [0.50, 0.23], "head": 0.23, "license": "用户提供（Gemini 生成）"},
     "zhangning": {"src": "source/generals/zhangning.jpg", "face": [0.50, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
     "yezhu_bing": {"src": "source/soldiers/yezhu_bing.jpg", "face": [0.55, 0.24], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "boar": {"src": "source/soldiers/boar.jpg", "face": [0.50, 0.45], "head": 0.30, "license": "用户提供（Gemini 生成）"},
