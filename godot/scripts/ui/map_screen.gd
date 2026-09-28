@@ -28,6 +28,7 @@ var _dlg_i := -1
 var _dlg_text: RichTextLabel
 var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
+var _dlg_recap := false  # a choice follows: once the lines are read, show them all beside the options
 var _sheet_hidden := false
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _sheet_box: VBoxContainer
@@ -486,6 +487,7 @@ func _show_square(s: Dictionary) -> void:
 			Kit.focus(go)
 		else:
 			text.text = body + "\n\n[color=%s]点击发光的格子前进[/color]" % Kit.c("green").to_html()
+			text.scroll_following = true  # the last lines set up the fork
 			var first := true
 			for n in opts:
 				var go := Kit.button("前往 %s %s" % [_glyph(n), n["label"] if n["label"] != "" else _type_name(n)])
@@ -574,6 +576,7 @@ func _show_square(s: Dictionary) -> void:
 		_dlg_lines = lines
 		_dlg_text = text
 		_dlg_buttons = buttons
+		_dlg_recap = s["type"] == "choose" or s["type"] == "mystery"
 		_dlg_i = 0
 		text.scroll_active = false
 		text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
@@ -589,6 +592,9 @@ func _dialog_show() -> void:
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	if last:
+		if _dlg_recap:  # choosing: keep the whole setup in view next to the options
+			_dialog_skip()
+			return
 		_dlg_buttons.visible = true
 		_dlg_i = -1
 		for b in _dlg_buttons.find_children("*", "Button", true, false):
@@ -600,8 +606,9 @@ func _dialog_show() -> void:
 func _dialog_skip() -> void:
 	if _dlg_i < 0:
 		return
-	_dlg_text.text = "\n\n".join(_dlg_lines)
+	_dlg_text.text = "\n".join(_dlg_lines) if _dlg_recap else "\n\n".join(_dlg_lines)
 	_dlg_text.scroll_active = true
+	_dlg_text.scroll_following = true  # land on the last lines — the ones that set up the choice
 	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
 	_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
 	_dlg_i = _dlg_lines.size() - 1

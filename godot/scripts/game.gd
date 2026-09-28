@@ -178,6 +178,13 @@ func demo(name: String) -> void:
 			Quests.resolve(q, save, rng, 0)
 			Quests.move(q, save, "wake")
 			show_screen(MapScreen.new())
+		"era":  # the very first choice, clicked to its last line
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			var m := MapScreen.new()
+			show_screen(m)
+			for _i in 12:
+				m.call_deferred("_on_story_click", m._fake_click())
 		"cg_click":  # the same, clicked through to the last line (buttons shown)
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
