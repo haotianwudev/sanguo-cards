@@ -52,4 +52,5 @@
 | `yuji` | source/generals/yuji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yanzhihu` | source/generals/yanzhihu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `fushui_xintu` | source/soldiers/fushui_xintu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `baie_hu` | source/generals/baie_hu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |

@@ -47,5 +47,6 @@
   "xiliang_nvbing": {"file": "xiliang_nvbing.jpg", "face": [0.51, 0.28], "head": 0.22},
   "yuji": {"file": "yuji.jpg", "face": [0.55, 0.25], "head": 0.22},
   "yanzhihu": {"file": "yanzhihu.jpg", "face": [0.54, 0.28], "head": 0.22},
-  "fushui_xintu": {"file": "fushui_xintu.jpg", "face": [0.5, 0.26], "head": 0.22}
+  "fushui_xintu": {"file": "fushui_xintu.jpg", "face": [0.5, 0.26], "head": 0.22},
+  "baie_hu": {"file": "baie_hu.jpg", "face": [0.5, 0.41], "head": 0.22}
 }

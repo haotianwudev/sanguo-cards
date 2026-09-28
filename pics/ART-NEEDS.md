@@ -34,7 +34,7 @@
 | 状态 | key | 敌人 |
 |---|---|---|
 | ✅ 正式 | `shuizei_bing` | 水贼喽啰 |
-| ⬜ 缺 | `baie_hu` | 吊睛白额虎 |
+| ✅ 正式 | `baie_hu` | 吊睛白额虎 |
 | ✅ 正式 | `fushui_xintu` | 于吉信徒 |
 | ⬜ 缺 | `shanzei_bing` | 山贼 |
 | ✅ 正式 | `huangjin_nanxia` | 黄巾余孽 |
