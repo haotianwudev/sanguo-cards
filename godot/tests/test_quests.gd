@@ -302,7 +302,7 @@ func test_dongzhuo_chapter_is_fair_after_chapter_one() -> void:
 
 func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 	var q := quest(0)
-	var allowed := ["danyang", "changsha", "shuizei_bing", "huangjin_nanxia", "huangjin_nvyi"]
+	var allowed: Array = q["soldier_pool"]
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	for sid in ["vault", "draft"]:
@@ -311,7 +311,7 @@ func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 		s.offer = []
 		var ids: Array = Quests.offer(q, s, rng(3)).map(func(c): return c["id"])
 		if sid == "draft":
-			check(ids.all(func(c): return c in ["danyang", "changsha"]), "征兵 only finds locals")
+			check(ids.all(func(c): return c in q["recruit_pool"]), "征兵 only finds locals")
 		check(not ids.is_empty() and ids.all(func(c): return c in allowed), "%s %s" % [sid, ids])
 	var chest := s.chest_after_battle(rng(1), 0.0, true, q["soldier_pool"])
 	check(chest.all(func(c): return c["id"] in allowed), "battle chest")

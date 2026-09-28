@@ -7,7 +7,62 @@
 
 ## 立绘（竖版 3:4）
 
-### `zhangfei` ⬜ 缺
+### `chenwu` ⬜ 缺
+
+```
+A vertical character portrait of Chen Wu (陈武), a loyal Jiangdong general from Lujiang who followed Sun Ce.
+Appearance: Sturdy, tanned man in his late 20s, square jaw, short beard, calm steady eyes of a marksman.
+Armor & Clothing: Jiangdong red-and-brown lamellar armor, a quiver of red-fletched arrows on his back, a leather bracer.
+Weapon: Drawing a large recurved war bow to full draw, arrow aimed past the viewer.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+```
+
+### `jiangdong_gong` ⬜ 缺
+
+```
+A vertical character portrait of a Jiangdong archer (江东弓手), a common soldier of the Sun family's army.
+Appearance: Young adult soldier with a sun-browned face and a focused squint, headband.
+Armor & Clothing: Simple red Han tunic over light leather armor, straw sandals, quiver at the hip.
+Weapon: Nocking an arrow on a plain wooden bow.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+```
+
+### `liehu` ⬜ 缺
+
+```
+A vertical character portrait of a mountain hunter (山中猎户) from the hills around Fuchun who joined the army.
+Appearance: Weathered, lean adult man in his 30s with a scruffy beard and a friendly grin.
+Armor & Clothing: Fur vest over rough hemp clothes, a boar-tusk necklace, a pheasant hanging from his belt.
+Weapon: A hunting bow slung ready, one arrow held between his fingers.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+```
+
+### `yuenv_gong` ⬜ 缺
+
+```
+A vertical character portrait of a Yue woman archer (越女弓手), an adult woman of the southern Yue people serving as an archer.
+Appearance: Adult woman in her 20s, confident sharp eyes, tanned skin, hair in a high braided ponytail with a red cord.
+Armor & Clothing: Close-fitting indigo Yue-style tunic with embroidered hems and leather arm guards, short practical skirt over trousers.
+Weapon: Drawing a slim bamboo bow, arrow at her cheek.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+```
+
+### `shanyue_nu` ⬜ 缺
+
+```
+A vertical character portrait of a Shanyue crossbowman (山越弩手), a hill-tribe fighter from the mountains of Jiangdong.
+Appearance: Stocky adult man with tattooed arms and cheeks, fierce stare, hair tied up with a bone pin.
+Armor & Clothing: Rattan-and-hide armor, cloth leggings, bare feet planted on a rock.
+Weapon: Aiming a heavy wooden crossbow braced against his shoulder.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+```
+
+### `zhangfei` 🟡 换掉占位
 
 ```
 A vertical character portrait of Zhang Fei (张飞), the legendary fierce powerhouse general from the Three Kingdoms era.
