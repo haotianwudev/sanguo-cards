@@ -86,7 +86,7 @@ Adding a portrait, checklist:
 - **Enemy**: `hp, at, actions, resists, portrait, card (its chest may hold it: 25%, bosses/elites 50%), moves[]` — move
   `power (0 = no hit), weight (0 = only after a charge), confuse, rage, heal, ap_drain, burn_party, pierce,
   charge (wind-up announced a turn ahead), when: "half", once`. Make fights strong; make their cards modest.
-- **Relic 宝物** (`cards.json` relics): per run; `rarity common/rare/curse, icon, desc, mods {...}, after_win`. Mods are
+- **Relic 宝物** (`cards.json` relics): found during a chapter; all carry into the next chapter (`kept_relics`), but ones found in the current chapter reset on a restart; `rarity common/rare/curse, icon, desc, mods {...}, after_win`. Mods are
   summed by `Quests.mods(save)` and passed to `Battle.start(..., ambush, mods)`. New mod ⇒ read it in `battle.gd`.
 - **Quest** (`story.json` quests): squares `{x, y, type, label, next, text, portraits, cards, choose, battle, boss,
   elite, ambush, event, lose_goto}`; types `event choose battle treasure recover recruit mystery`. Moves only go right,
@@ -104,6 +104,8 @@ Adding a portrait, checklist:
 - **Between chapters**: recap (战功 paid once, spent on a draw or an upgrade) → `Quests.complete` turns the run's records
   into permanent `save.flags` → interlude scenes from `godot/data/interludes.json` (keyed by the finished quest; a scene's
   `requires` / `unless` name a flag) → the next chapter's title card. The 部队 button on the map opens the party screen.
+- **Replays**: the title screen replays finished chapters (`Quests.start_replay` parks the main run in `save.stash`);
+  each clear adds +1 险 (`save.clears`); cards and 战功 stay, story flags don't change.
 
 After adding content: run tests, screenshot the relevant demo, fix layout overflow (e.g. three skills shrink the
 battle cards), commit, push.
