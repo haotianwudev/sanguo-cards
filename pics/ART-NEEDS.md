@@ -53,6 +53,23 @@
 | ✅ 正式 | `changsha` | 长沙刀兵 |
 | ⬜ 缺 | `huangjin_nvyi` | 黄巾女医 |
 
+战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
+
+| 状态 | key | 战斗 |
+|---|---|---|
+| ⬜ 缺 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
+| ⬜ 缺 | `tiger` | 打虎（吊睛白额虎） |
+| ⬜ 缺 | `yuji_xintu` | 于吉信徒（于吉信徒） |
+| ⬜ 缺 | `shanzei_band` | 山贼（山贼） |
+| ⬜ 缺 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
+| ⬜ 缺 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ⬜ 缺 | `guanjun` | 官军（官军） |
+| ⬜ 缺 | `boar` | 野猪林（野猪） |
+| ⬜ 缺 | `shuizei` | 水寨·胡玉（「浪里蛟」胡玉） |
+| ⬜ 缺 | `shuizei_guard` | 看门水贼（看门水贼） |
+| ⬜ 缺 | `yaodao` | 妖道唐周（妖道唐周） |
+| ⬜ 缺 | `shuizei_main` | 水贼大寨（黄巾渠帅何仪） |
+
 ## 第二章 · 讨伐董卓
 
 | 状态 | key | 用在 |
@@ -83,6 +100,26 @@
 |---|---|---|
 | ⬜ 缺 | `gongnv` | 宫女 |
 | ⬜ 缺 | `xiliang_nvbing` | 西凉女亲兵 |
+
+战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
+
+| 状态 | key | 战斗 |
+|---|---|---|
+| ⬜ 缺 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
+| ⬜ 缺 | `xiliang_scout` | 截粮（西凉斥候） |
+| ⬜ 缺 | `tiger` | 打虎（吊睛白额虎） |
+| ⬜ 缺 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
+| ⬜ 缺 | `shanzei_band` | 山贼（山贼） |
+| ⬜ 缺 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
+| ⬜ 缺 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ⬜ 缺 | `guanjun` | 官军（官军） |
+| ⬜ 缺 | `guosi` | 郭汜（郭汜） |
+| ⬜ 缺 | `huaxiong` | 汜水关·华雄（华雄） |
+| ⬜ 缺 | `feixiong` | 飞熊军（飞熊军） |
+| ⬜ 缺 | `liru` | 李儒伏兵（李儒） |
+| ⬜ 缺 | `dongbai` | 董白（董白） |
+| ⬜ 缺 | `hulao_ch1` | 追兵·吕布（吕布） |
+| ⬜ 缺 | `lijue` | 洛阳城门·李傕（李傕） |
 
 ## 其余武将（招募池，按需再画）
 
@@ -120,7 +157,7 @@
 | ⬜ 缺 | `sunqian` | 孙乾（R） |
 | ⬜ 缺 | `guanhai` | 管亥（R） |
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
-| ⬜ 缺 | `chengpu` | 程普·程公（R） |
+| ✅ 正式 | `chengpu` | 程普·程公（R） |
 | ⬜ 缺 | `handang` | 韩当（R） |
 | ⬜ 缺 | `zhuzhi` | 朱治·君理（R） |
 | ⬜ 缺 | `wujing` | 吴景（R） |

@@ -39,10 +39,13 @@
     "huangjin_nanxia": {"src": "source/soldiers/huangjin_nanxia.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "dongbai": {"src": "source/generals/dongbai.jpg", "face": [0.50, 0.38], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "zumao": {"src": "source/generals/zumao.jpg", "face": [0.50, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
-    "huaxiong": {"src": "source/generals/huaxiong.jpg", "face": [0.51, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"}
+    "huaxiong": {"src": "source/generals/huaxiong.jpg", "face": [0.51, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"},
+    "chengpu": {"src": "source/generals/chengpu.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {
     "prologue": {"src": "source/map/bg_prologue.jpg", "license": "用户提供"}
-  }
+  },
+  "_battles": "battle backgrounds, keyed by scenario id (cards.json scenarios); 16:9, scaled to 720px high into godot/data/art/battle/",
+  "battles": {}
 }
