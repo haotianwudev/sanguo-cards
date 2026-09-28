@@ -417,12 +417,20 @@ func _show_square(s: Dictionary) -> void:
 		ev = Quests.event_here(q, save, Game.rng)
 		Game.persist()
 	var title: String = ev.get("title", s["label"] if s["label"] != "" else _type_name(s))
+	# [speaker face | title over (text, buttons)]: the face spans the panel's full height
+	var outer := HBoxContainer.new()
+	outer.add_theme_constant_override("separation", 16)
+	outer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_sheet_box.add_child(outer)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 6)
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var head := Kit.label("%s  %s" % [_glyph(s), title], Kit.FONT_BIG)
-	_sheet_box.add_child(head)
+	col.add_child(head)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 18)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_sheet_box.add_child(row)
+	col.add_child(row)
 
 	var art := Kit.cg(ev.get("cg", s["cg"]))
 	_cg_view.texture = art
@@ -441,9 +449,10 @@ func _show_square(s: Dictionary) -> void:
 		_dlg_face = TextureRect.new()
 		_dlg_face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		_dlg_face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		_dlg_face.custom_minimum_size = Vector2(96, 96) if art != null else Vector2(135, 180)
+		_dlg_face.custom_minimum_size = Vector2(128, 128) if art != null else Vector2(172, 230)
 		_dlg_face.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		row.add_child(_dlg_face)
+		outer.add_child(_dlg_face)
+	outer.add_child(col)
 	var text := RichTextLabel.new()
 	text.bbcode_enabled = true
 	text.fit_content = false
