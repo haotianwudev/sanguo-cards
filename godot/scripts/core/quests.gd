@@ -154,10 +154,10 @@ static func view(q: Dictionary, save: SaveData) -> Dictionary:
 
 
 static func mods(save: SaveData) -> Dictionary:
-	## Battle modifiers for this run: every 宝物 held, plus 险.
+	## Battle modifiers for this run: every 宝物 carried by a unit, plus 险.
 	var db := GameData.get_db()
 	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"])}
-	for rid in save.relics:
+	for rid in save.active_relics():
 		var m: Dictionary = db.relics[rid]["mods"]
 		for k in m:
 			if m[k] is Dictionary:  # troop_at / troop_hp: {troop: share}
@@ -421,7 +421,7 @@ static func interlude(quest_id: String, save: SaveData) -> Array:
 static func after_win(save: SaveData) -> void:
 	## 宝物 that act after every victory (酒囊: heal a share of HP).
 	var db := GameData.get_db()
-	for rid in save.relics:
+	for rid in save.active_relics():
 		var share: float = db.relics[rid]["after_win"]
 		if share > 0.0:
 			save.damage = maxi(0, save.damage - int(round(party_max(save) * share)))

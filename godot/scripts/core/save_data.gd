@@ -48,6 +48,8 @@ var run_records: Array = []  # key choices and outcomes this run, as short lines
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
+var unworn: Array = []  # 宝物 left in the card pool (not worn: no effect)
+var benched: Array = []  # cards left behind: not in any unit (never a leader)
 var seen: Array = []  # every general ever owned, across 周目: they can all be drawn again
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
@@ -55,7 +57,7 @@ var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_copies", "lap", "seen", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_copies", "lap", "seen", "unworn", "benched", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -68,7 +70,7 @@ static func create() -> SaveData:
 # the fields that make up one run of a quest (parked while a finished chapter is replayed)
 const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events",
 	"event_battle", "event_note", "offer_kind", "relics", "danger", "picks_left", "offer_rates", "run_start",
-	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid"]
+	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn"]
 
 
 func stash_run() -> void:
@@ -309,7 +311,7 @@ func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool,
 func offer_extra() -> int:
 	## 招贤榜: one more card on every pick-one
 	var n := 0
-	for rid in relics:
+	for rid in active_relics():
 		n += int(_db().relics[rid]["mods"].get("offer_extra", 0))
 	return n
 
@@ -337,6 +339,62 @@ func grant_card(card_id: String) -> void:
 		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":
 		party.append(card_id)
+
+
+# ---- 宝物 in units (Rance X items) --------------------------------------------------
+
+func units() -> Array:
+	## the fielded units: the lord's, then each leader's
+	return ["lord"] + party
+
+
+func unit_troop(unit: String) -> String:
+	return "lord" if unit == "lord" else _db().cards[unit]["troop"]
+
+
+func relic_unit(rid: String) -> String:
+	## the unit a worn 宝物 sits in (its troop's leader, or the lord); "" when it's left in the pool or its troop
+	## isn't out
+	if unworn.has(rid):
+		return ""
+	var troop: String = _db().relics[rid]["troop"]
+	for u in units():
+		if unit_troop(u) == troop:
+			return u
+	return ""
+
+
+func relic_unit_for_troop(troop: String) -> String:
+	## the fielded unit of a troop ("" if nobody leads it)
+	for u in units():
+		if unit_troop(u) == troop:
+			return u
+	return ""
+
+
+func unit_relics(unit: String) -> Array:
+	return relics.filter(func(r): return relic_unit(r) == unit)
+
+
+func set_worn(rid: String, on: bool) -> void:
+	## 装上 / 不装 (it stays in the pool, no effect)
+	if on:
+		unworn.erase(rid)
+	elif not unworn.has(rid):
+		unworn.append(rid)
+
+
+func active_relics() -> Array:
+	## the 宝物 that work: worn, and their unit is in the party
+	return relics.filter(func(r): return relic_unit(r) != "")
+
+
+func set_brought(card_id: String, on: bool) -> void:
+	## 带上 / 不带: a card left behind joins no unit (a leader is always brought)
+	if on:
+		benched.erase(card_id)
+	elif not benched.has(card_id) and not party.has(card_id):
+		benched.append(card_id)
 
 
 # ---- party ---------------------------------------------------------------------
@@ -380,11 +438,11 @@ func troop_members(leader_id: String) -> Array:
 	var members: Array = []
 	var weights: Array = []
 	for c in owned:
-		if c != leader_id and db.cards[c]["troop"] == troop:
+		if c != leader_id and db.cards[c]["troop"] == troop and not benched.has(c):
 			members.append(fighter(c))
 			weights.append(1.0)
 	for c in soldiers:
-		if db.cards[c]["troop"] != troop:
+		if db.cards[c]["troop"] != troop or (benched.has(c) and c != leader_id):
 			continue
 		var n: int = soldiers[c] - (1 if c == leader_id else 0)
 		var f := db.build_fighter(c)

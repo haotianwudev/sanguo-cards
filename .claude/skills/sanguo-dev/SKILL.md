@@ -125,6 +125,10 @@ Adding a portrait, checklist:
   turns up in recruit offers at `gacha.lord_rate`. **周目**: `SaveData.new_lap()` restarts the story keeping every card
   as it is — no gifts, no rarity shift, no other rule changes (the user wants those decided later); the only pool change
   is `recruit_pool()` adding every general ever owned via `seen`, story-only ones included.
+  **宝物 are cards (Rance X items)**: every relic has a fixed team (`relics.*.troop`, lord = the lord's unit); worn, it
+  sits in that troop's fielded unit (never as leader, any number) and only works while that unit is out
+  (`SaveData.relic_unit / active_relics`, `Quests.mods` uses active ones). The player can leave a 宝物 in the pool
+  (`unworn`) and leave any card behind (`benched`: joins no unit; a leader is always brought). Both in 整备.
 - **Skill**: `cost, cumulative (+1 AP per use), uses (1 = 限1), effects[]` — `attack/magic {power, hits, burning_mult}`,
   `heal`, `guard {cut}`, `boost`, `stun {chance}`, `break`, `ap`, `burn {pct | power, turns}`. Once-per-battle damage
   skills (大招) cost ≥ 3 AP (a test enforces it).

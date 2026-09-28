@@ -329,7 +329,8 @@ func test_changsha_is_weaker_than_danyang() -> void:
 
 func test_relics_change_battles() -> void:
 	var s := SaveData.create()
-	s.take("sunce")
+	for c in ["sunce", "zhouyu", "sunjian"]:  # 谋士 and 刀兵 units carry 兵符 / 兵法 and 赤帻 / 战鼓
+		s.take(c)
 	s.party = s.auto_party()
 	var plain := Battle.start("boar", s.party_leaders(), 1)
 	s.relics = ["bingfu", "bingfa", "yuxi", "chize", "zhangu"]
@@ -345,6 +346,8 @@ func test_relics_change_battles() -> void:
 func test_troop_relics_only_help_their_troop() -> void:
 	var s := SaveData.create()
 	s.relics = ["chitu"]
+	check(not Quests.mods(s).has("troop_at"), "no 骑兵 unit out: 赤兔马 rests")
+	s.take("sunce")
 	var m := Quests.mods(s)
 	check(m["troop_at"].has("cavalry") and not m["troop_at"].has("infantry"))
 

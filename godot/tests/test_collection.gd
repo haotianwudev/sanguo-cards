@@ -224,3 +224,35 @@ func test_cards_you_have_had_can_be_drawn_again() -> void:
 	check(s.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "a card you've had can be drawn")
 	var n := s.new_lap()
 	check(n.seen.has("dongbai") and n.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "still drawable next 周目")
+
+
+func test_relics_belong_to_a_team_and_work_while_it_is_out() -> void:
+	var s := SaveData.create()
+	s.grant_card("sunce")  # 骑兵 leader
+	s.relics = ["chitu", "jiujia", "bingfa"]  # 骑兵队 / 主公队 / 谋士队
+	check_eq(s.relic_unit("chitu"), "sunce", "赤兔马 sits in the 骑兵 unit")
+	check_eq(s.relic_unit("jiujia"), "lord", "孙坚旧甲 in the lord's")
+	check_eq(s.relic_unit("bingfa"), "", "no 谋士 out: 孙子兵法 rests")
+	check(not Quests.mods(s).has("turns"), "a resting 宝物 does nothing")
+	s.grant_card("zhouyu")  # 谋士 leader
+	check_eq(s.relic_unit("bingfa"), "zhouyu")
+	check(Quests.mods(s).get("turns", 0.0) > 0.0, "its team is out: it works")
+	s.set_worn("bingfa", false)
+	check(s.relic_unit("bingfa") == "" and not Quests.mods(s).has("turns"), "left in the pool: no effect")
+	s.set_worn("bingfa", true)
+	check_eq(s.relic_unit("bingfa"), "zhouyu", "worn again")
+	for rid in GameData.get_db().relics:
+		check(GameData.get_db().troops.has(GameData.get_db().relics[rid]["troop"]), "%s belongs to a real troop" % rid)
+
+
+func test_cards_can_be_left_behind() -> void:
+	var s := SaveData.create()
+	s.grant_card("sunce")  # 骑兵 leader
+	s.grant_card("xiliang_nvbing")  # 骑兵 soldiers join his unit
+	var full: int = s.leader_for("sunce")["hp"]
+	s.set_brought("xiliang_nvbing", false)
+	check(s.leader_for("sunce")["hp"] < full, "left behind: not in the unit")
+	s.set_brought("sunce", false)
+	check(not s.benched.has("sunce"), "a leader is always brought")
+	s.set_brought("xiliang_nvbing", true)
+	check_eq(s.leader_for("sunce")["hp"], full, "brought again")

@@ -70,7 +70,7 @@ func _load(dir: String) -> void:
 	for rid in raw.get("relics", {}):
 		var r: Dictionary = raw["relics"][rid]
 		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),
-			"rarity": r.get("rarity", "common"), "desc": r.get("desc", ""), "mods": r.get("mods", {}),
+			"rarity": r.get("rarity", "common"), "troop": r.get("troop", "lord"), "desc": r.get("desc", ""), "mods": r.get("mods", {}),
 			"after_win": float(r.get("after_win", 0.0))}
 	relic_pick = raw.get("relic_pick", {"n": 3, "weights": {"common": 1}})
 	for sid in raw["scenarios"]:

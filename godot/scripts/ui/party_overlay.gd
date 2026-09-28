@@ -5,6 +5,8 @@ extends Control
 ## The lord always leads; up to party_slots - 1 more leaders, one per troop. Soldier cards and benched generals
 ## of a leader's troop fight in that leader's unit automatically.
 ## Tap a card to see it; tap it again (or the button on the right) to send it out / bring it back.
+## 宝物 are cards too (in the pool, and the 宝物 tab): each belongs to one troop's unit (never as its leader) and
+## works while worn and that unit is out. Any card (generals, soldiers, 宝物) can also be left behind.
 
 signal closed
 
@@ -18,7 +20,7 @@ var _msg: Label
 var _sort_btn: Button
 var _filter := "all"  # all / general / soldier / <troop id>
 var _sort := "power"  # power / rarity
-var _sel := "lord"  # the card shown on the right ("lord" for the lord)
+var _sel := "lord"  # the card shown on the right ("lord" for the lord, "relic:<id>" for a 宝物)
 
 
 func _ready() -> void:
@@ -39,7 +41,7 @@ func _ready() -> void:
 	# the party: lord + leaders, with a summary box
 	var party_box := _panel(Vector2(20, 58), Vector2(850, 262))
 	_party_row = HBoxContainer.new()
-	_party_row.position = Vector2(14, 10)
+	_party_row.position = Vector2(14, 6)
 	_party_row.add_theme_constant_override("separation", 12)
 	party_box.add_child(_party_row)
 	_summary = VBoxContainer.new()
@@ -127,7 +129,10 @@ func _rebuild() -> void:
 			ch.queue_free()
 	var save := Game.save
 	var db := GameData.get_db()
-	if _sel != "lord" and not save.has_card(_sel):
+	if _sel.begins_with("relic:"):
+		if not save.relics.has(_sel.substr(6)):
+			_sel = "lord"
+	elif _sel != "lord" and not save.has_card(_sel):
 		_sel = "lord"
 
 	# ---- party row
@@ -150,6 +155,8 @@ func _rebuild() -> void:
 	_summary.add_child(_stat_line("全军体力", str(Quests.party_max(save))))
 	_summary.add_child(_stat_line("攻击合计", str(at_sum)))
 	_summary.add_child(_stat_line("出阵", "%d / %d 队" % [leaders.size(), save.party_slots]))
+	if not save.relics.is_empty():
+		_summary.add_child(_stat_line("宝物", "%d / %d 生效" % [save.active_relics().size(), save.relics.size()]))
 	var used := {}
 	for cid in save.party:
 		used[db.cards[cid]["troop"]] = true
@@ -175,6 +182,8 @@ func _rebuild() -> void:
 	for tr in db.troops:
 		if troops_owned.has(tr):
 			tabs.append([tr, db.troops[tr]["name"]])
+	if not save.relics.is_empty():
+		tabs.append(["relic", "宝物"])
 	for tb in tabs:
 		var b := Kit.button(tb[1], "gold" if _filter == tb[0] else "blue", 15)
 		b.custom_minimum_size = Vector2(64, 36)
@@ -185,6 +194,11 @@ func _rebuild() -> void:
 	_sort_btn.text = "按战力 ▼" if _sort == "power" else "按稀有度 ▼"
 
 	# ---- pool
+	if _filter == "relic":
+		for rid in save.relics:
+			_grid.add_child(_relic_card(rid))
+		_fill_detail()
+		return
 	var ids: Array = save.owned_ids().filter(func(cid):
 		var c: Dictionary = db.cards[cid]
 		match _filter:
@@ -203,10 +217,13 @@ func _rebuild() -> void:
 	for cid in ids:
 		var c: Dictionary = db.cards[cid]
 		var v := CardView.make(cid, Vector2(108, 151), {"skills": false, "count": save.copies(cid) if c["soldier"] else 0})
-		v.set_state(save.party.has(cid), _sel == cid)
+		v.set_state(save.benched.has(cid), _sel == cid)  # left behind: greyed
 		v.pressed.connect(_tap.bind(cid))
 		_grid.add_child(v)
-	if ids.is_empty():
+	if _filter == "all":  # 宝物 are in the pool too
+		for rid in save.relics:
+			_grid.add_child(_relic_card(rid))
+	if ids.is_empty() and not (_filter == "all" and not save.relics.is_empty()):
 		_grid.add_child(Kit.label("这一类还没有卡。", Kit.FONT_BODY, "dim"))
 
 	_fill_detail()
@@ -218,17 +235,122 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	var opts := {"leader": ld, "skills": false}
 	if cid == "lord":
 		opts["lord_name"] = Game.save.lord_name
-	var v := CardView.make(cid, Vector2(150, 210), opts)
+	var v := CardView.make(cid, Vector2(150, 196), opts)
 	v.set_state(false, _sel == cid)
 	v.pressed.connect(_tap.bind(cid))
 	box.add_child(v)
 	var n: int = ld["members"].size()
 	var l := Kit.label(role + ("  · 部队 %d" % (n + 1) if n > 0 else ""), 14, "gold")
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.custom_minimum_size = Vector2(150, 24)
+	l.custom_minimum_size = Vector2(150, 20)
 	box.add_child(l)
+	# the 宝物 this unit carries, as small icons (tap one to see it)
+	var items := HBoxContainer.new()
+	items.alignment = BoxContainer.ALIGNMENT_CENTER
+	items.add_theme_constant_override("separation", 4)
+	items.custom_minimum_size = Vector2(150, 26)
+	for rid in Game.save.unit_relics(cid):
+		var b := TextureButton.new()  # fixed 26px: a Button would grow to the icon's own size
+		b.texture_normal = Kit.relic_icon(rid)
+		b.ignore_texture_size = true
+		b.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		b.custom_minimum_size = Vector2(26, 26)
+		b.tooltip_text = GameData.get_db().relics[rid]["name"]
+		b.pressed.connect(_tap.bind("relic:" + rid))
+		items.add_child(b)
+	box.add_child(items)
 	return box
 
+
+func _relic_card(rid: String) -> Control:
+	## a 宝物 as a card in the pool: icon, name, where it sits
+	var save := Game.save
+	var r: Dictionary = GameData.get_db().relics[rid]
+	var col: String = {"rare": "purple", "curse": "red", "story": "gold"}.get(r["rarity"], "amber")
+	var sel := _sel == "relic:" + rid
+	var b := Button.new()
+	b.custom_minimum_size = Vector2(108, 151)
+	b.add_theme_stylebox_override("normal", Kit.box(Kit.c("card"), 10, 3 if sel else 2, Kit.c("gold") if sel else Kit.c(col), 6))
+	b.add_theme_stylebox_override("hover", Kit.box(Kit.c("card_hover"), 10, 2, Kit.c(col), 6))
+	b.add_theme_stylebox_override("pressed", Kit.box(Kit.c("card_hover"), 10, 2, Kit.c(col), 6))
+	b.pressed.connect(_tap.bind("relic:" + rid))
+	var v := VBoxContainer.new()
+	v.set_anchors_preset(Control.PRESET_FULL_RECT)
+	v.alignment = BoxContainer.ALIGNMENT_CENTER
+	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b.add_child(v)
+	var ic := TextureRect.new()
+	ic.texture = Kit.relic_icon(rid)
+	ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	ic.custom_minimum_size = Vector2(0, 70)
+	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	v.add_child(ic)
+	var n := Kit.label(r["name"], 15)
+	n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	n.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	n.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	v.add_child(n)
+	var unit := save.relic_unit(rid)
+	var w := Kit.label(_team_name(rid) + ("（没装）" if save.unworn.has(rid) else ("" if unit != "" else "（未出阵）")), 12,
+		"gold" if unit != "" else "dim")
+	w.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	w.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	v.add_child(w)
+	return b
+
+
+func _team_name(rid: String) -> String:
+	var troop: String = GameData.get_db().relics[rid]["troop"]
+	return "主公队" if troop == "lord" else GameData.get_db().troops[troop]["name"] + "队"
+
+
+func _unit_name(unit: String) -> String:
+	if unit == "lord":
+		return Game.save.lord_name + " 队"
+	return GameData.get_db().cards[unit]["name"].split("·")[0] + " 队"
+
+
+func _fill_relic_detail(rid: String) -> void:
+	var save := Game.save
+	var db := GameData.get_db()
+	var r: Dictionary = db.relics[rid]
+	var top := HBoxContainer.new()
+	top.add_theme_constant_override("separation", 12)
+	_detail.add_child(top)
+	var ic := TextureRect.new()
+	ic.texture = Kit.relic_icon(rid)
+	ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	ic.custom_minimum_size = Vector2(110, 110)
+	top.add_child(ic)
+	var info := VBoxContainer.new()
+	top.add_child(info)
+	info.add_child(Kit.label(r["name"], Kit.FONT_BIG + 2, "gold"))
+	info.add_child(_info_line("种类", {"rare": "稀有", "curse": "诅咒", "story": "传家宝"}.get(r["rarity"], "普通")))
+	var unit := save.relic_unit(rid)
+	info.add_child(_info_line("属于", _team_name(rid)))
+	var state := Kit.label("没装，放在卡池里" if save.unworn.has(rid) else (("生效中：在 %s" % _unit_name(unit)) if unit != ""
+		else "%s没出阵，暂不生效" % _team_name(rid)), 15, "green" if unit != "" else "amber")
+	state.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	state.custom_minimum_size = Vector2(190, 0)
+	info.add_child(state)
+	_detail.add_child(_heading("效　果"))
+	var d := Kit.label(r["desc"], 15)
+	d.add_theme_color_override("font_color", Color(1, 1, 1, 0.85))
+	d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	d.custom_minimum_size = Vector2(340, 0)
+	_detail.add_child(d)
+	var hint := Kit.label("每件宝物属于固定的队伍，装上就编进那支队伍（不能当队长，件数不限），队伍出阵时生效；也可以不装，放在卡池里。", 14)
+	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
+	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	hint.custom_minimum_size = Vector2(340, 0)
+	_detail.add_child(hint)
+	var worn := not save.unworn.has(rid)
+	var act := Kit.button("不　装（放回卡池）" if worn else "装　上", "red" if worn else "green")
+	act.custom_minimum_size = Vector2(340, 50)
+	act.pressed.connect(_toggle.bind("relic:" + rid))
+	_detail.add_child(act)
 
 func _stat_line(name: String, value: String) -> Control:
 	var row := HBoxContainer.new()
@@ -241,6 +363,9 @@ func _stat_line(name: String, value: String) -> Control:
 
 
 func _fill_detail() -> void:
+	if _sel.begins_with("relic:"):
+		_fill_relic_detail(_sel.substr(6))
+		return
 	var save := Game.save
 	var db := GameData.get_db()
 	var is_lord := _sel == "lord"
@@ -282,8 +407,13 @@ func _fill_detail() -> void:
 	var parts: Array = []
 	for n in names:
 		parts.append(n + ("×%d" % names[n] if names[n] > 1 else ""))
-	var unit := Kit.label(("当队长时编入：" + "、".join(parts)) if not parts.is_empty()
-		else ("主公单独成队。" if is_lord else "同兵种没有别的卡，一人成队。"), 15)
+	var where := ""
+	if not is_lord and not save.party.has(_sel):
+		var lead := save.relic_unit_for_troop(f["troop"])
+		where = ("没带：不参战。\n" if save.benched.has(_sel) else
+			("现在编在 %s 里。\n" % _unit_name(lead) if lead != "" else "这个兵种没人当队长，现在不参战。\n"))
+	var unit := Kit.label(where + (("当队长时编入：" + "、".join(parts)) if not parts.is_empty()
+		else ("主公单独成队。" if is_lord else "同兵种没有别的卡，一人成队。")), 15)
 	unit.add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
 	unit.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	unit.custom_minimum_size = Vector2(340, 0)
@@ -309,18 +439,28 @@ func _fill_detail() -> void:
 		d.custom_minimum_size = Vector2(340, 0)
 		_detail.add_child(d)
 
-	# the action
+	# the actions: lead the troop / step down; bring along or leave behind
 	var act: Button
 	if is_lord:
 		act = Kit.button("主公固定出阵", "blue")
 		act.disabled = true
 	elif save.party.has(_sel):
-		act = Kit.button("下　阵", "red")
+		act = Kit.button("下　阵（不当队长）", "red")
 	else:
-		act = Kit.button("出　阵", "green")
+		act = Kit.button("出阵当队长", "green")
 	act.custom_minimum_size = Vector2(340, 50)
 	act.pressed.connect(_toggle.bind(_sel))
 	_detail.add_child(act)
+	if not is_lord and not save.party.has(_sel):
+		var sel := _sel
+		var left := save.benched.has(sel)
+		var bring := Kit.button("带　上" if left else "不　带（留在卡池）", "blue" if left else "gray")
+		bring.custom_minimum_size = Vector2(340, 44)
+		bring.pressed.connect(func():
+			save.set_brought(sel, left)
+			_msg.text = ("%s 编回部队" if left else "%s 留在卡池，不参战") % db.cards[sel]["name"]
+			_rebuild())
+		_detail.add_child(bring)
 
 
 func _info_line(k: String, v: String) -> Control:
@@ -349,6 +489,14 @@ func _tap(cid: String) -> void:
 func _toggle(cid: String) -> void:
 	if cid == "lord":
 		return
+	if cid.begins_with("relic:"):  # 装上 / 不装
+		var rid := cid.substr(6)
+		var on: bool = Game.save.unworn.has(rid)
+		Game.save.set_worn(rid, on)
+		var r: Dictionary = GameData.get_db().relics[rid]
+		_msg.text = ("%s 装进了%s" % [r["name"], _team_name(rid)]) if on else ("%s 放回卡池，不生效" % r["name"])
+		_rebuild()
+		return
 	if Game.save.party.has(cid):
 		_remove(cid)
 	else:
@@ -371,6 +519,7 @@ func _add(cid: String) -> void:
 		_msg.text = why
 		return
 	save.party = next
+	save.set_brought(cid, true)  # a leader is always brought
 	_msg.text = "%s 出任%s队长%s" % [card["name"], db.troops[card["troop"]]["name"],
 		"（换下 %s）" % "、".join(replaced.map(func(p): return db.cards[p]["name"])) if not replaced.is_empty() else ""]
 	_rebuild()
