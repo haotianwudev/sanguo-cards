@@ -200,43 +200,87 @@ MAPS = {
                "heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky",
 }
 
-# relic icons (cards.json relics id -> the object itself); rim colour by rarity: story/common bronze, rare purple-gold, curse dark red
+# relic icons (cards.json relics id -> the object itself)
+# Authentic ancient Chinese items, pure cut-outs on transparent backgrounds (no western circular medallion).
+# Excluded lord/protagonist relics per user instruction: jiujia, hupi, qixing, zhaoxianbang, yitian, yuxi.
 RELICS = {
-    "jiujia": "Sun Jian's old silver armor with tiger-engraved shoulder guards", "hupi": "a folded tiger-pelt cape",
-    "shoushihe": "an open lacquered jewelry box with hairpins and jade", "jiunang": "a leather wine skin with a cork",
-    "bingfu": "a bronze tiger tally split in two halves", "hushenfu": "a red paper amulet with a tassel",
-    "xiangnang": "an embroidered silk scent pouch", "jinfan": "a bronze bell tied to a strip of brocade sail",
-    "bingfa": "a bamboo-slip scroll of The Art of War tied with cord", "gudingdao": "an ancient broad-bladed saber with a ring pommel",
-    "yushan": "a white feather fan", "zhangu": "a red war drum with crossed drumsticks",
-    "chize": "a red soldier's headscarf (Zu Mao's)", "qinggang": "a slender straight sword with a blue-green blade",
-    "qixing": "a jeweled dagger with seven star gems on the scabbard", "bazhen": "a scroll unrolled to show an eight-trigram formation diagram",
-    "dunjia": "a mysterious Taoist book glowing faintly, with talismans", "muniu": "a small wooden mechanical ox on wheels",
-    "beishui": "a cracked cooking cauldron beside a sunken boat", "dingxin": "a tiny pill box with a golden pill",
-    "jubaopen": "a bowl overflowing with gold ingots and coins", "zhaoxianbang": "a recruitment notice nailed to a wooden board",
-    "yitian": "a heavy straight sword with a gold hilt", "chitu": "the head of a red warhorse with a flowing mane",
-    "zhangba": "a long serpent-bladed spear", "zhugenu": "a repeating crossbow with a bolt magazine",
-    "qinglong": "a green-dragon crescent-moon glaive head", "mengde": "a bound book of military strategy with a seal",
-    "heishan": "a black iron command token", "taipingyaoshu": "a yellow Taoist scripture tied with a yellow cloth",
-    "qingnang": "a green cloth medicine book pouch", "yuxi": "the jade Imperial Seal with a dragon knob, glowing ominously",
-    "huangjinfu": "a yellow Yellow-Turban talisman, burnt at the edges", "dilu": "the head of a white horse with a dark spot on its forehead",
-    "fangtian": "a halberd with a crescent side blade", "tengjia": "a suit of woven rattan armor",
+    "shoushihe": "an exquisite Han dynasty Chinese lacquer jewelry box (汉代黑红髹漆妆奁), lid slightly ajar showing delicate jade hairpins, gold tassels and pearls inside",
+    "jiunang": "an ancient Chinese gourd flask wine pouch (左慈酒葫芦/酒囊), polished leather and dried gourd with brass spout, wrapped in ceremonial red cord with a bronze coin charm",
+    "bingfu": "an authentic ancient Chinese Han dynasty bronze Tiger Tally (汉代错金铜虎符), cast in the shape of a crouching tiger with inlaid gold seal script characters on its back",
+    "hushenfu": "a traditional Chinese silk protective amulet pouch (汉代朱砂平安符囊), triangular folded cinnabar red silk embroidered with gold cloud patterns, bound by silk cord with a jade bead and red tassels",
+    "xiangnang": "an authentic Han dynasty Chinese embroidered scented sachet (汉代刺绣茱萸香囊), rhombus-shaped silk pouch with gold thread floral embroidery, tied with a traditional Chinese mystic knot (同心结) and dual crimson silk tassels",
+    "jinfan": "Gan Ning's Brocade Sail Bells (甘宁锦帆铃), two ornate ancient Chinese bronze ringing bells with incised wave patterns, bound together with a vibrant flowing patterned brocade silk ribbon",
+    "bingfa": "an ancient Chinese bamboo scroll book of Sun Tzu's Art of War (孙子兵法竹简), aged brown bamboo slips bound with leather cord, partially unrolled to reveal brush-inked clerical script calligraphy, paired with a small bamboo calligraphy brush",
+    "gudingdao": "Sun Jian's ancient broad-bladed saber with a ring pommel (古锭刀), an authentic Han dynasty ring-pommel broad saber (环首刀) with brass cloud-pattern fittings and a black-lacquered wood scabbard with red tassels",
+    "yushan": "Zhou Yu's crane feather fan (周瑜白鹤羽扇), pure white crane feathers neatly arranged, bound with a carved pale green jade handle and silk tassel",
+    "zhangu": "a Han dynasty Chinese red-lacquered war drum (汉军战鼓), heavy cowhide drumhead, ornate dragon brass studs on the drum rim, resting beside a pair of wooden drumsticks wrapped in red cloth",
+    "chize": "Sun Jian's red headscarf (祖茂/孙坚赤帻), a bold crimson silk warrior turban cloth with battle wear and scorched edges, tied with a knot",
+    "qinggang": "the legendary Qinggang Sword (青釭剑), a pristine double-edged Chinese straight sword (汉剑) of tempered blue-tinted steel, intricate brass guard with dragon engravings and dark lacquered scabbard",
+    "bazhen": "Zhuge Liang's Eight Trigrams Formation scroll (八阵图), an antique silk map scroll spread open showing painted bagua diagrams, stones, and tactical compass markings in vermilion and ink",
+    "dunjia": "Zuo Ci's Book of Dunjia (遁甲天书), an ancient mystical Taoist silk-bound tome with archaic seals, faint golden light, and paper talismans tucked between the aged pages",
+    "muniu": "the Wooden Ox (木牛流马), an ingenious ancient Chinese mechanical wooden transport in the stylized shape of a carved wooden ox with bronze gears and levers",
+    "beishui": "an ancient bronze three-legged cooking cauldron (破釜) with chipped rim and battle scratches, beside a charred burning ship plank",
+    "dingxin": "an ancient Chinese medicinal pill box (定心丸), carved dark cinnabar lacquer box containing a gleaming golden herb-rolled pill on yellow silk lining",
+    "jubaopen": "the Treasure Basin (聚宝盆), an ornate Han dynasty bronze and gilt basin filled with sparkling sycee silver ingots (元宝), gold nuggets, and antique coins",
+    "chitu": "Red Hare's ceremonial golden saddle and bridle (赤兔金鞍缰辔), an opulent warhorse saddle of crimson leather and gilded bronze fittings, with ornate brass stirrups and red plume bridle",
+    "zhangba": "the blade head of Zhang Fei's Eighteen-foot Snake Spear (丈八蛇矛), undulating wavy steel spear blade shaped like a writhing serpent, with a black steel socket and crimson horsehair tassel",
+    "zhugenu": "Zhuge's Repeating Crossbow (诸葛连弩), an ingenious Han dynasty wooden multi-shot crossbow with top-mounted bolt magazine and bronze firing mechanism",
+    "qinglong": "the head of Guan Yu's Green Dragon Crescent Blade (青龙偃月刀), heavy steel curved glaive blade with an engraved green dragon swallowing the steel base, adorned with a brass dragon collar and crimson tassel",
+    "mengde": "Cao Cao's New Book of Mengde (孟德新书), a fine silk-wrapped bamboo scroll case and unrolled bamboo slips bearing Cao Cao's military commentary and vermilion personal seal",
+    "heishan": "the Black Mountain Command Token (黑山令), an imposing dark iron and bronze pass token engraved with a fierce coiled dragon and archaic Chinese characters, tied with rough braided rope",
+    "taipingyaoshu": "Zhang Jue's Essential Art of Great Peace (太平要术), ancient scrolls bound in yellow silk, covered with vermilion Taoist incantations, thunder talismans, and celestial diagrams",
+    "qingnang": "Hua Tuo's Green Pouch Book (青囊书), a weathered green brocade medicine scroll bundle tied with leather cords, accompanied by silver acupuncture needles and dried healing herbs",
+    "huangjinfu": "a Yellow Turban Talisman (黄巾符), yellow hemp paper talisman inscribed with cinnabar red mystical Daoist spell script, singed by lightning and smoke at the corners",
+    "dilu": "Hex Mark's silver stirrup and bridle (的卢辔饰), refined white leather and silver-inlaid bridle and bit with tear-shaped silver ornaments and blue tassels",
+    "fangtian": "the head of Lü Bu's Sky Piercer Halberd (方天画戟), a formidable four-pointed spearhead flanked by dual polished crescent moon side blades and red battle tassels",
+    "tengjia": "the Southern Rattan Armor (藤甲), woven impenetrable dried wild mountain vine breastplate, treated with oil and bound with brass rivets",
 }
 
 
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
+# Priority: 1. 宝物 (Relics, non-lord, pure Chinese items, no disc) -> 2. 人物立绘 (Portraits) -> 不用画 CG
 NEXT = [
-    ("portrait", "chenwu", "陈武（R 弓兵）"), ("portrait", "jiangdong_gong", "江东弓手"), ("portrait", "liehu", "山中猎户"),
-    ("portrait", "yuenv_gong", "越女弓手（成年女性）"), ("portrait", "shanyue_nu", "山越弩手"),
-    ("cg", "c1_armor", "第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）"),
-    ("cg", "c2_setout", "第二章开场：北上"), ("cg", "c2_zumao", "阵前：华雄追砍祖茂"), ("cg", "c2_jianhua", "孙坚斩华雄"),
-    ("cg", "c2_capture", "俘虏董白"), ("cg", "c2_captive", "俘虏的日子：石头剪刀布"), ("cg", "c2_raid", "吕布劫营"),
-    ("map", "taodong", "第二章地图底图（换掉程序生成的占位）"),
+    ("relic", "shoushihe", "首饰盒（吴夫人的漆器妆奁）"),
+    ("relic", "jiunang", "酒囊（左慈酒葫芦）"),
+    ("relic", "bingfu", "虎符（汉代错金铜虎符）"),
+    ("relic", "hushenfu", "平安符（道教朱砂三角符囊配玉珠流苏）"),
+    ("relic", "xiangnang", "香囊（汉代刺绣茱萸香囊同心结）"),
+    ("relic", "jinfan", "锦帆铃（甘宁锦帆双青铜响铃）"),
+    ("relic", "bingfa", "孙子兵法（古朴竹简卷轴墨书汉隶）"),
+    ("relic", "yushan", "羽扇（周瑜白鹤羽扇青玉柄）"),
+    ("relic", "zhangu", "战鼓（汉军红漆大鼓双槌）"),
+    ("relic", "chize", "赤帻（祖茂红头巾战袍角）"),
+    ("relic", "qinggang", "青釭剑（削铁如泥青钢佩剑）"),
+    ("relic", "bazhen", "八阵图（八卦阵法绢帛图谱）"),
+    ("relic", "dunjia", "遁甲天书（左慈道术古卷）"),
+    ("relic", "muniu", "木牛流马（汉代木制机巧独轮车）"),
+    ("relic", "beishui", "破釜（古铜炊鼎战痕）"),
+    ("relic", "dingxin", "定心丸（漆木药盒金箔丹药）"),
+    ("relic", "jubaopen", "聚宝盆（汉代金铜博山纹宝盆）"),
+    ("relic", "chitu", "赤兔马（赤兔金辔鞍饰）"),
+    ("relic", "zhangba", "丈八蛇矛（张飞蛇形矛尖）"),
+    ("relic", "zhugenu", "诸葛连弩（机关连弩箭匣）"),
+    ("relic", "qinglong", "青龙偃月刀（关羽青龙偃月刀头）"),
+    ("relic", "mengde", "孟德新书（曹操兵书竹简漆盒）"),
+    ("relic", "heishan", "黑山令（张燕黑铁令牌）"),
+    ("relic", "taipingyaoshu", "太平要术（张角黄绫天书符咒）"),
+    ("relic", "qingnang", "青囊书（华佗青锦布囊医书）"),
+    ("relic", "huangjinfu", "黄巾符（黄巾朱砂道符）"),
+    ("relic", "dilu", "的卢（的卢白马铜辔鞍饰）"),
+    ("relic", "fangtian", "方天画戟（吕布方天画戟头双月牙）"),
+    ("relic", "tengjia", "藤甲（南蛮油浸老藤胸甲）"),
+    ("portrait", "chenwu", "陈武（R 弓兵）"),
+    ("portrait", "jiangdong_gong", "江东弓手"),
+    ("portrait", "liehu", "山中猎户"),
+    ("portrait", "yuenv_gong", "越女弓手（成年女性）"),
+    ("portrait", "shanyue_nu", "山越弩手"),
 ]
 NEXT_RULES = [
-    "每张图都用下面对应小节的**完整提示词**；图上长相必须和台词对得上（见 `CARD-DESIGN.md` 第 7 节）。",
+    "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
+    "宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。",
     "女性角色一律画成成年人；董白不写年龄、不画成萝莉。",
-    "文件名 = key：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），剧情 CG 放 `pics/source/cg/`，地图放 `pics/source/map/bg_<key>.jpg`。",
-    "在 `pics/art.json` 对应段登记（立绘要填 `face` / `head`），`license` 写「用户提供（Gemini 生成）」；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
+    "文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。",
+    "立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
     "**不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。",
     "提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。",
 ]
@@ -251,11 +295,10 @@ def map_prompt(scene: str) -> str:
 
 
 def relic_prompt(obj: str, rarity: str) -> str:
-    rim = {"curse": "dark red rim with cracks", "rare": "purple and gold rim"}.get(rarity, "bronze rim")
-    return (f"A game item icon: {obj}.{NL}"
-            f"Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a {rim}, "
-            f"transparent background (PNG).{NL}"
-            f"Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.")
+    return (f"Masterpiece 1:1 square game inventory item icon of {obj}.{NL}"
+            f"Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.{NL}"
+            f"Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.{NL}"
+            f"Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.")
 
 
 OVERRIDES = {
@@ -303,11 +346,11 @@ def main() -> None:
            "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
            ]
     maps_done = {k for k, v in art.get("maps", {}).items() if "生成" not in v.get("license", "")}
-    delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done}
+    delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": {"gudingdao"}}
     todo = [n for n in NEXT if n[1] not in delivered[n[0]]]
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
-        out += [f"{i}. `{key}` — {what}（{ {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图'}[kind] }）"
+        out += [f"{i}. `{key}` — {what}（{ {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物'}[kind] }）"
                 for i, (kind, key, what) in enumerate(todo, 1)]
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
     out += ["## 立绘（竖版 3:4）", ""]

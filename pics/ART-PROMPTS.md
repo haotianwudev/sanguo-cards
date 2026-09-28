@@ -9,26 +9,48 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-1. `chenwu` — 陈武（R 弓兵）（立绘）
-2. `jiangdong_gong` — 江东弓手（立绘）
-3. `liehu` — 山中猎户（立绘）
-4. `yuenv_gong` — 越女弓手（成年女性）（立绘）
-5. `shanyue_nu` — 山越弩手（立绘）
-6. `c1_armor` — 第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）（剧情 CG）
-7. `c2_setout` — 第二章开场：北上（剧情 CG）
-8. `c2_zumao` — 阵前：华雄追砍祖茂（剧情 CG）
-9. `c2_jianhua` — 孙坚斩华雄（剧情 CG）
-10. `c2_capture` — 俘虏董白（剧情 CG）
-11. `c2_captive` — 俘虏的日子：石头剪刀布（剧情 CG）
-12. `c2_raid` — 吕布劫营（剧情 CG）
-13. `taodong` — 第二章地图底图（换掉程序生成的占位）（地图）
+1. `shoushihe` — 首饰盒（吴夫人的漆器妆奁）（宝物）
+2. `jiunang` — 酒囊（左慈酒葫芦）（宝物）
+3. `bingfu` — 虎符（汉代错金铜虎符）（宝物）
+4. `hushenfu` — 平安符（道教朱砂三角符囊配玉珠流苏）（宝物）
+5. `xiangnang` — 香囊（汉代刺绣茱萸香囊同心结）（宝物）
+6. `jinfan` — 锦帆铃（甘宁锦帆双青铜响铃）（宝物）
+7. `bingfa` — 孙子兵法（古朴竹简卷轴墨书汉隶）（宝物）
+8. `yushan` — 羽扇（周瑜白鹤羽扇青玉柄）（宝物）
+9. `zhangu` — 战鼓（汉军红漆大鼓双槌）（宝物）
+10. `chize` — 赤帻（祖茂红头巾战袍角）（宝物）
+11. `qinggang` — 青釭剑（削铁如泥青钢佩剑）（宝物）
+12. `bazhen` — 八阵图（八卦阵法绢帛图谱）（宝物）
+13. `dunjia` — 遁甲天书（左慈道术古卷）（宝物）
+14. `muniu` — 木牛流马（汉代木制机巧独轮车）（宝物）
+15. `beishui` — 破釜（古铜炊鼎战痕）（宝物）
+16. `dingxin` — 定心丸（漆木药盒金箔丹药）（宝物）
+17. `jubaopen` — 聚宝盆（汉代金铜博山纹宝盆）（宝物）
+18. `chitu` — 赤兔马（赤兔金辔鞍饰）（宝物）
+19. `zhangba` — 丈八蛇矛（张飞蛇形矛尖）（宝物）
+20. `zhugenu` — 诸葛连弩（机关连弩箭匣）（宝物）
+21. `qinglong` — 青龙偃月刀（关羽青龙偃月刀头）（宝物）
+22. `mengde` — 孟德新书（曹操兵书竹简漆盒）（宝物）
+23. `heishan` — 黑山令（张燕黑铁令牌）（宝物）
+24. `taipingyaoshu` — 太平要术（张角黄绫天书符咒）（宝物）
+25. `qingnang` — 青囊书（华佗青锦布囊医书）（宝物）
+26. `huangjinfu` — 黄巾符（黄巾朱砂道符）（宝物）
+27. `dilu` — 的卢（的卢白马铜辔鞍饰）（宝物）
+28. `fangtian` — 方天画戟（吕布方天画戟头双月牙）（宝物）
+29. `tengjia` — 藤甲（南蛮油浸老藤胸甲）（宝物）
+30. `chenwu` — 陈武（R 弓兵）（立绘）
+31. `jiangdong_gong` — 江东弓手（立绘）
+32. `liehu` — 山中猎户（立绘）
+33. `yuenv_gong` — 越女弓手（成年女性）（立绘）
+34. `shanyue_nu` — 山越弩手（立绘）
 
 交图规则：
 
-- 每张图都用下面对应小节的**完整提示词**；图上长相必须和台词对得上（见 `CARD-DESIGN.md` 第 7 节）。
+- 每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。
+- 宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。
 - 女性角色一律画成成年人；董白不写年龄、不画成萝莉。
-- 文件名 = key：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），剧情 CG 放 `pics/source/cg/`，地图放 `pics/source/map/bg_<key>.jpg`。
-- 在 `pics/art.json` 对应段登记（立绘要填 `face` / `head`），`license` 写「用户提供（Gemini 生成）」；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。
+- 文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。
+- 立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。
 - **不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。
 - 提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。
 
@@ -579,292 +601,274 @@ Style: match the chapter-1 map (godot/data/art/map/prologue.jpg): ink outlines, 
 
 ## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）
 
-### `jiujia`
-
-```
-A game item icon: Sun Jian's old silver armor with tiger-engraved shoulder guards.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
-```
-
-### `hupi`
-
-```
-A game item icon: a folded tiger-pelt cape.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
-```
-
 ### `shoushihe`
 
 ```
-A game item icon: an open lacquered jewelry box with hairpins and jade.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an exquisite Han dynasty Chinese lacquer jewelry box (汉代黑红髹漆妆奁), lid slightly ajar showing delicate jade hairpins, gold tassels and pearls inside.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `jiunang`
 
 ```
-A game item icon: a leather wine skin with a cork.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an ancient Chinese gourd flask wine pouch (左慈酒葫芦/酒囊), polished leather and dried gourd with brass spout, wrapped in ceremonial red cord with a bronze coin charm.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `bingfu`
 
 ```
-A game item icon: a bronze tiger tally split in two halves.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an authentic ancient Chinese Han dynasty bronze Tiger Tally (汉代错金铜虎符), cast in the shape of a crouching tiger with inlaid gold seal script characters on its back.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `hushenfu`
 
 ```
-A game item icon: a red paper amulet with a tassel.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of a traditional Chinese silk protective amulet pouch (汉代朱砂平安符囊), triangular folded cinnabar red silk embroidered with gold cloud patterns, bound by silk cord with a jade bead and red tassels.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `xiangnang`
 
 ```
-A game item icon: an embroidered silk scent pouch.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an authentic Han dynasty Chinese embroidered scented sachet (汉代刺绣茱萸香囊), rhombus-shaped silk pouch with gold thread floral embroidery, tied with a traditional Chinese mystic knot (同心结) and dual crimson silk tassels.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `jinfan`
 
 ```
-A game item icon: a bronze bell tied to a strip of brocade sail.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Gan Ning's Brocade Sail Bells (甘宁锦帆铃), two ornate ancient Chinese bronze ringing bells with incised wave patterns, bound together with a vibrant flowing patterned brocade silk ribbon.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `bingfa`
 
 ```
-A game item icon: a bamboo-slip scroll of The Art of War tied with cord.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an ancient Chinese bamboo scroll book of Sun Tzu's Art of War (孙子兵法竹简), aged brown bamboo slips bound with leather cord, partially unrolled to reveal brush-inked clerical script calligraphy, paired with a small bamboo calligraphy brush.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `gudingdao`
 
 ```
-A game item icon: an ancient broad-bladed saber with a ring pommel.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Sun Jian's ancient broad-bladed saber with a ring pommel (古锭刀), an authentic Han dynasty ring-pommel broad saber (环首刀) with brass cloud-pattern fittings and a black-lacquered wood scabbard with red tassels.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `yushan`
 
 ```
-A game item icon: a white feather fan.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Zhou Yu's crane feather fan (周瑜白鹤羽扇), pure white crane feathers neatly arranged, bound with a carved pale green jade handle and silk tassel.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `zhangu`
 
 ```
-A game item icon: a red war drum with crossed drumsticks.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of a Han dynasty Chinese red-lacquered war drum (汉军战鼓), heavy cowhide drumhead, ornate dragon brass studs on the drum rim, resting beside a pair of wooden drumsticks wrapped in red cloth.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `chize`
 
 ```
-A game item icon: a red soldier's headscarf (Zu Mao's).
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Sun Jian's red headscarf (祖茂/孙坚赤帻), a bold crimson silk warrior turban cloth with battle wear and scorched edges, tied with a knot.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `qinggang`
 
 ```
-A game item icon: a slender straight sword with a blue-green blade.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
-```
-
-### `qixing`
-
-```
-A game item icon: a jeweled dagger with seven star gems on the scabbard.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the legendary Qinggang Sword (青釭剑), a pristine double-edged Chinese straight sword (汉剑) of tempered blue-tinted steel, intricate brass guard with dragon engravings and dark lacquered scabbard.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `bazhen`
 
 ```
-A game item icon: a scroll unrolled to show an eight-trigram formation diagram.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Zhuge Liang's Eight Trigrams Formation scroll (八阵图), an antique silk map scroll spread open showing painted bagua diagrams, stones, and tactical compass markings in vermilion and ink.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `dunjia`
 
 ```
-A game item icon: a mysterious Taoist book glowing faintly, with talismans.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Zuo Ci's Book of Dunjia (遁甲天书), an ancient mystical Taoist silk-bound tome with archaic seals, faint golden light, and paper talismans tucked between the aged pages.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `muniu`
 
 ```
-A game item icon: a small wooden mechanical ox on wheels.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the Wooden Ox (木牛流马), an ingenious ancient Chinese mechanical wooden transport in the stylized shape of a carved wooden ox with bronze gears and levers.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `beishui`
 
 ```
-A game item icon: a cracked cooking cauldron beside a sunken boat.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an ancient bronze three-legged cooking cauldron (破釜) with chipped rim and battle scratches, beside a charred burning ship plank.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `dingxin`
 
 ```
-A game item icon: a tiny pill box with a golden pill.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of an ancient Chinese medicinal pill box (定心丸), carved dark cinnabar lacquer box containing a gleaming golden herb-rolled pill on yellow silk lining.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `jubaopen`
 
 ```
-A game item icon: a bowl overflowing with gold ingots and coins.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
-```
-
-### `zhaoxianbang`
-
-```
-A game item icon: a recruitment notice nailed to a wooden board.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
-```
-
-### `yitian`
-
-```
-A game item icon: a heavy straight sword with a gold hilt.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the Treasure Basin (聚宝盆), an ornate Han dynasty bronze and gilt basin filled with sparkling sycee silver ingots (元宝), gold nuggets, and antique coins.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `chitu`
 
 ```
-A game item icon: the head of a red warhorse with a flowing mane.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Red Hare's ceremonial golden saddle and bridle (赤兔金鞍缰辔), an opulent warhorse saddle of crimson leather and gilded bronze fittings, with ornate brass stirrups and red plume bridle.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `zhangba`
 
 ```
-A game item icon: a long serpent-bladed spear.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the blade head of Zhang Fei's Eighteen-foot Snake Spear (丈八蛇矛), undulating wavy steel spear blade shaped like a writhing serpent, with a black steel socket and crimson horsehair tassel.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `zhugenu`
 
 ```
-A game item icon: a repeating crossbow with a bolt magazine.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Zhuge's Repeating Crossbow (诸葛连弩), an ingenious Han dynasty wooden multi-shot crossbow with top-mounted bolt magazine and bronze firing mechanism.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `qinglong`
 
 ```
-A game item icon: a green-dragon crescent-moon glaive head.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the head of Guan Yu's Green Dragon Crescent Blade (青龙偃月刀), heavy steel curved glaive blade with an engraved green dragon swallowing the steel base, adorned with a brass dragon collar and crimson tassel.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `mengde`
 
 ```
-A game item icon: a bound book of military strategy with a seal.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Cao Cao's New Book of Mengde (孟德新书), a fine silk-wrapped bamboo scroll case and unrolled bamboo slips bearing Cao Cao's military commentary and vermilion personal seal.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `heishan`
 
 ```
-A game item icon: a black iron command token.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the Black Mountain Command Token (黑山令), an imposing dark iron and bronze pass token engraved with a fierce coiled dragon and archaic Chinese characters, tied with rough braided rope.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `taipingyaoshu`
 
 ```
-A game item icon: a yellow Taoist scripture tied with a yellow cloth.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Zhang Jue's Essential Art of Great Peace (太平要术), ancient scrolls bound in yellow silk, covered with vermilion Taoist incantations, thunder talismans, and celestial diagrams.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `qingnang`
 
 ```
-A game item icon: a green cloth medicine book pouch.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
-```
-
-### `yuxi`
-
-```
-A game item icon: the jade Imperial Seal with a dragon knob, glowing ominously.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Hua Tuo's Green Pouch Book (青囊书), a weathered green brocade medicine scroll bundle tied with leather cords, accompanied by silver acupuncture needles and dried healing herbs.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `huangjinfu`
 
 ```
-A game item icon: a yellow Yellow-Turban talisman, burnt at the edges.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of a Yellow Turban Talisman (黄巾符), yellow hemp paper talisman inscribed with cinnabar red mystical Daoist spell script, singed by lightning and smoke at the corners.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `dilu`
 
 ```
-A game item icon: the head of a white horse with a dark spot on its forehead.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of Hex Mark's silver stirrup and bridle (的卢辔饰), refined white leather and silver-inlaid bridle and bit with tear-shaped silver ornaments and blue tassels.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `fangtian`
 
 ```
-A game item icon: a halberd with a crescent side blade.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the head of Lü Bu's Sky Piercer Halberd (方天画戟), a formidable four-pointed spearhead flanked by dual polished crescent moon side blades and red battle tassels.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ### `tengjia`
 
 ```
-A game item icon: a suit of woven rattan armor.
-Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
-Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+Masterpiece 1:1 square game inventory item icon of the Southern Rattan Armor (藤甲), woven impenetrable dried wild mountain vine breastplate, treated with oil and bound with brass rivets.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
 ```
 
 ## 已出图的提示词存档（重画时从这里开始）

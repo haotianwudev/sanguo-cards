@@ -135,7 +135,7 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 			save.relics = ["hupi", "yuxi"]
 			save.danger = 1
-			save.offer = ["bingfa", "chitu", "dilu"]
+			save.offer = ["gudingdao", "bingfa", "chitu"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
 		"recap":  # the chapter recap at the end of chapter 2
@@ -164,7 +164,7 @@ func demo(name: String) -> void:
 				save.grant_card(c)
 			for c in ["danyang", "danyang", "changsha", "gongnv", "xiliang_nvbing"]:
 				save.grant_card(c)
-			save.kept_relics = ["jiujia", "hupi", "chitu", "bingfa", "yuxi"]  # a run starts with these
+			save.kept_relics = ["jiujia", "hupi", "chitu", "bingfa", "gudingdao", "yuxi"]  # a run starts with these
 			save.relics = save.kept_relics.duplicate()
 			var m := MapScreen.new()
 			show_screen(m)
@@ -175,8 +175,8 @@ func demo(name: String) -> void:
 					var o: PartyOverlay = m.get_node("Party")
 					o._sel = "sunce"
 					o._filter = "cavalry"
-					if OS.get_cmdline_user_args().has("--relics"):  # the 宝物 tab, 赤兔马 selected
-						o._sel = "relic:chitu"
+					if OS.get_cmdline_user_args().has("--relics"):  # the 宝物 tab, 古锭刀 selected
+						o._sel = "relic:gudingdao"
 						o._filter = "relic"
 					o._rebuild()).call_deferred()
 		"interlude":  # after chapter 2, with 董白 spared

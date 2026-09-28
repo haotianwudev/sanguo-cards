@@ -57,7 +57,7 @@ func _ready() -> void:
 			tr.texture = relic_tex
 			tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			tr.custom_minimum_size = Vector2(96, 96)
+			tr.custom_minimum_size = Vector2(112, 112)
 			tr.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 			icon = tr
 		else:
