@@ -50,7 +50,7 @@
 |---|---|---|
 | ✅ 正式 | `danyang` | 丹阳兵 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
-| ⬜ 缺 | `huangjin_nvyi` | 黄巾女医 |
+| ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
