@@ -171,6 +171,27 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speaker_key("吴夫人：「文台那把刀，你拿去。」"), "wuguotai", "the speaker, not who is talked about")
 
 
+func test_the_lord_card_can_be_drawn() -> void:
+	var s := SaveData.create()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 5
+	var seen := false
+	for _i in 300:
+		if s.recruit_offer(rng).any(func(c): return c["id"] == "lord"):
+			seen = true
+			break
+	check(seen, "the lord turns up in recruit offers now and then")
+	s.take("lord")
+	check_eq(s.tier("lord"), 1, "a second copy: 银")
+	check(not s.owned.has("lord") and not s.party.has("lord"), "the lord isn't a collection card")
+	s.take("lord")
+	s.take("lord")
+	check(s.maxed("lord"), "4 copies: 金, then it stops turning up")
+	rng.seed = 5
+	for _i in 100:
+		check(not s.recruit_offer(rng).any(func(c): return c["id"] == "lord"))
+
+
 func test_the_lord_starts_bronze_and_can_go_up() -> void:
 	var s := SaveData.create()
 	check_eq(s.tier("lord"), 0, "the lord's card starts 铜")
@@ -178,3 +199,31 @@ func test_the_lord_starts_bronze_and_can_go_up() -> void:
 	s.upgrade("lord")
 	check_eq(s.tier("lord"), 1, "银 after one upgrade")
 	check(s.lord()["at"] > at0 and s.party_leaders()[0]["card"]["at"] == s.lord()["at"], "a higher tier hits harder, in battle too")
+
+
+func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
+	var s := SaveData.create()
+	s.lord_name = "阿明"
+	s.grant_card("sunce")
+	s.grant_card("danyang")
+	s.quests_cleared = ["prologue"]
+	s.flags = ["董白：留下"]
+	s.merit = 7
+	var n := s.new_lap()
+	check_eq(n.lap, 2)
+	check(n.owned.has("sunce") and n.soldiers.get("danyang", 0) == 1 and n.lord_name == "阿明" and n.merit == 7, "cards, name, 战功 kept")
+	check(n.tier("sunce") == s.tier("sunce") and n.tier("lord") == s.tier("lord"), "tiers carried over as they are, no gifts")
+	check(n.quests_cleared.is_empty() and n.flags.is_empty(), "the story starts over")
+	check_eq(Quests.mods(n)["enemy"], Quests.mods(s)["enemy"], "enemies unchanged")
+
+
+func test_later_laps_draw_better_and_bring_back_old_cards() -> void:
+	var s := SaveData.create()
+	s.grant_card("dongbai")  # story-only: not in the normal recruit pool
+	var rarity: String = GameData.get_db().cards["dongbai"]["rarity"]
+	check(s.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "a card you've had can be drawn")
+	var n := s.new_lap()
+	check(n.seen.has("dongbai"))
+	var r1 := s.lap_rates()
+	var r2 := n.lap_rates()
+	check(r2["SSR"] > r1["SSR"] and r2["R"] < r1["R"], "the 2nd 周目 draws rarer cards")

@@ -34,7 +34,14 @@ func _ready() -> void:
 			var back := Kit.button("放弃重玩，回到主线", "gray")
 			back.pressed.connect(Game.back_to_story)
 			col.add_child(back)
+		if saved != null and saved.lap > 1:
+			var lap_l := Kit.label("第 %d 周目" % saved.lap, Kit.FONT_BODY, "muted")
+			lap_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			col.add_child(lap_l)
 		if saved != null and not saved.quests_cleared.is_empty():
+			var lap := Kit.button("开始第 %d 周目（继承全部卡牌，卡池更好）" % (saved.lap + 1), "purple", Kit.FONT_BODY)
+			lap.pressed.connect(Game.new_lap)
+			col.add_child(lap)
 			var replay := Kit.button("重玩章节", "gold")
 			replay.pressed.connect(func(): _replay_menu(col, saved))
 			col.add_child(replay)
@@ -45,7 +52,7 @@ func _ready() -> void:
 	name_edit.add_theme_font_size_override("font_size", Kit.FONT_BODY)
 	name_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(name_edit)
-	var start := Kit.button("新的旅程" if not has_save else "重新开始", "blue", Kit.FONT_BIG)
+	var start := Kit.button("新的旅程" if not has_save else "从零开始（清空存档）", "blue", Kit.FONT_BIG if not has_save else Kit.FONT_BODY)
 	start.pressed.connect(func(): Game.new_game(name_edit.text))
 	name_edit.text_submitted.connect(func(t): Game.new_game(t))
 	col.add_child(start)

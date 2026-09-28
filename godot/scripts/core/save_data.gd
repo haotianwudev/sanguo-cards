@@ -48,12 +48,14 @@ var run_records: Array = []  # key choices and outcomes this run, as short lines
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
-var lord_tier := 0  # the lord's card starts 铜 like everyone (0 铜 / 1 银 / 2 金); upgrade("lord") raises it
+var seen: Array = []  # every general ever owned, across 周目: they can all be drawn again
+var lap := 1  # 周目: how many times the story has been started with the collection carried over
+var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_tier", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_copies", "lap", "seen", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -84,6 +86,28 @@ func restore_run() -> void:
 	danger = int(danger)
 
 
+func new_lap() -> SaveData:
+	## 新周目: the story starts over; the whole collection (tiers as they are), the lord, the name and 战功 come
+	## along. Card quality climbs through the recruit pool (lap_rates, recruit_pool), not by gifts.
+	_sync()
+	var s := SaveData.create()
+	s.lap = lap + 1
+	s.lord_name = lord_name
+	s.merit = merit
+	s.owned = owned.duplicate()
+	s.soldiers = soldiers.duplicate()
+	s.party = party.duplicate()
+	s.clears = clears.duplicate()
+	s.seen = seen.duplicate()
+	for c in owned:
+		if not s.seen.has(c):
+			s.seen.append(c)
+	s.theme = theme
+	s.dupes = dupes.duplicate()
+	s.lord_copies = lord_copies
+	return s
+
+
 func to_dict() -> Dictionary:
 	var d := {}
 	for f in FIELDS:
@@ -105,7 +129,8 @@ static func from_dict(d: Dictionary) -> SaveData:
 	s.difficulty = int(s.difficulty)
 	s.picks_left = int(s.picks_left)
 	s.party_slots = int(s.party_slots)
-	s.lord_tier = int(s.lord_tier)
+	s.lord_copies = int(s.lord_copies)
+	s.lap = int(s.lap)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
 	for k in s.dupes:
@@ -155,15 +180,15 @@ func has_card(card_id: String) -> bool:
 
 func copies(card_id: String) -> int:
 	_sync()
+	if card_id == "lord":
+		return lord_copies
 	if _db().cards[card_id]["soldier"]:
 		return soldiers.get(card_id, 0)
 	return dupes.get(card_id, 1) if owned.has(card_id) else 0
 
 
 func tier(card_id: String, n := -1) -> int:
-	## 0 铜 / 1 银 / 2 金 for a general with n copies (default: the copies owned); the lord has its own lord_tier.
-	if card_id == "lord":
-		return lord_tier
+	## 0 铜 / 1 银 / 2 金 for a general (or the lord) with n copies (default: the copies owned).
 	if n < 0:
 		n = copies(card_id)
 	var t := 0
@@ -190,14 +215,14 @@ func fighter(card_id: String) -> Dictionary:
 func lord() -> Dictionary:
 	## the lord's fighter at its tier
 	var db := _db()
-	return db.build_lord(lord_name, float(db.gacha["tiers"][lord_tier]["mult"]))
+	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]))
 
 
 func upgrade(card_id: String) -> void:
 	## 升级: straight to the next tier's copy count.
 	var tiers: Array = _db().gacha["tiers"]
 	if card_id == "lord":
-		lord_tier = mini(lord_tier + 1, tiers.size() - 1)
+		lord_copies = maxi(lord_copies, int(tiers[mini(tier("lord") + 1, tiers.size() - 1)]["copies"]))
 		return
 	var nxt := mini(tier(card_id) + 1, tiers.size() - 1)
 	dupes[card_id] = maxi(copies(card_id), int(tiers[nxt]["copies"]))
@@ -213,13 +238,16 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 	if n <= 0:
 		n = int(db.gacha["offer_size"]) + offer_extra()
 	if rates.is_empty():
-		rates = db.gacha["rates"]
+		rates = lap_rates()
 	var result: Array = []
 	for _i in n:
+		if not maxed("lord") and not result.has(db.cards["lord"]) and rng.randf() < float(db.gacha.get("lord_rate", 0.0)):
+			result.append(db.cards["lord"])  # now and then the lord's own card turns up
+			continue
 		var live: Array = []
 		var pools := {}
 		for r in rates:
-			pools[r] = db.pool(r).filter(func(c): return not maxed(c["id"]) and not result.has(c))
+			pools[r] = recruit_pool(r).filter(func(c): return not maxed(c["id"]) and not result.has(c))
 			if not pools[r].is_empty():
 				live.append(r)
 		if live.is_empty():
@@ -230,11 +258,33 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 	return result
 
 
+func lap_rates() -> Dictionary:
+	## the recruit rarity weights for this 周目: higher rarities come more often every 周目
+	var db := _db()
+	var cfg: Dictionary = db.gacha.get("lap", {})
+	var out := {}
+	for r in db.gacha["rates"]:
+		var base := float(db.gacha["rates"][r])
+		out[r] = maxf(minf(base, float(cfg.get("min_rate", 0))), base + (lap - 1) * float(cfg.get("rates", {}).get(r, 0)))
+	return out
+
+
+func recruit_pool(rarity: String) -> Array:
+	## the normal pool, plus any general you've had before (story-only ones too, like 董白 or 孙坚)
+	var db := _db()
+	var p: Array = db.pool(rarity)
+	for cid in seen + owned:
+		var c: Dictionary = db.cards.get(cid, {})
+		if not c.is_empty() and c["rarity"] == rarity and not c["soldier"] and not p.has(c):
+			p.append(c)
+	return p
+
+
 func pool_left() -> int:
 	var db := _db()
 	var n := 0
 	for r in db.gacha["rates"]:
-		n += db.pool(r).filter(func(c): return not maxed(c["id"])).size()
+		n += recruit_pool(r).filter(func(c): return not maxed(c["id"])).size()
 	return n
 
 
@@ -285,10 +335,15 @@ func take(card_id: String) -> Dictionary:
 func grant_card(card_id: String) -> void:
 	## Give a card (story / pick). Slots it into the party if there's room for its troop.
 	_sync()
+	if card_id == "lord":  # another copy of the lord: maybe a higher tier
+		lord_copies += 1
+		return
 	if _db().cards[card_id]["soldier"]:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):
 		owned.append(card_id)
+		if not seen.has(card_id):
+			seen.append(card_id)
 	else:
 		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":

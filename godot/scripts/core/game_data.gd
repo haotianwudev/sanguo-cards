@@ -77,6 +77,10 @@ func _load(dir: String) -> void:
 		var sc: Dictionary = raw["scenarios"][sid]
 		scenarios[sid] = {"id": sid, "name": sc["name"], "turn_limit": int(sc["turn_limit"]), "enemy": sc["enemy"]}
 	_validate()
+	# the lord as a card: never in the normal pools, but recruit offers can show it (gacha.lord_rate); another
+	# copy raises its 铜/银/金 tier like a general's. Its fighter always comes from build_lord / SaveData.lord().
+	cards["lord"] = {"id": "lord", "name": "主公", "rarity": str(gacha.get("lord_rarity", "SR")), "troop": "lord",
+		"bonus": {}, "skills": [], "in_pool": false, "troop_skills": true, "person": "lord", "weight": 1, "soldier": false}
 
 	var story: Dictionary = read_json(dir + "/story.json")
 	for q in story["quests"]:

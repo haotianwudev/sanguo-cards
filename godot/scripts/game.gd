@@ -32,6 +32,14 @@ func new_game(lord_name: String) -> void:
 	show_screen(MapScreen.new())
 
 
+func new_lap() -> void:
+	## 新周目: the story from the top with the collection carried over (and a better recruit pool)
+	save = SaveData.read().new_lap()
+	Quests.ensure_started(save)
+	persist()
+	show_screen(MapScreen.new())
+
+
 func continue_game() -> void:
 	save = SaveData.read()
 	show_screen(MapScreen.new())
