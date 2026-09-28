@@ -234,23 +234,24 @@ func _build() -> void:
 		var card_id: String = u["leader"]["card"]["id"]
 		var v := CardView.make(card_id, card_size, {"leader": u["leader"], "skills": false,
 			"lord_name": Game.save.lord_name})
+		if has_cg:
+			v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		v.focus_mode = Control.FOCUS_NONE
 		col.add_child(v)
 		_cards.append(v)
 		for sid in u["leader"]["card"]["skills"]:
 			var btn := Kit.button("", "blue", Kit.FONT_SMALL if not has_cg else 14)
 			btn.custom_minimum_size = Vector2(card_size.x, btn_h)
-			if has_cg:  # narrow cards: the label is cut rather than widening the column
+			if has_cg:  # slim buttons a bit wider than the small card, label cut rather than widening the column
+				btn.custom_minimum_size = Vector2(card_size.x + 32, btn_h)
 				btn.clip_text = true
 				btn.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+				var base := Kit.c("blue")
 				for st in ["normal", "hover", "pressed", "disabled", "focus"]:
-					var sb := btn.get_theme_stylebox(st).duplicate() as StyleBoxFlat
-					if sb != null:
-						sb.content_margin_top = 2
-						sb.content_margin_bottom = 2
-						sb.content_margin_left = 4
-						sb.content_margin_right = 4
-						btn.add_theme_stylebox_override(st, sb)
+					var bgc := base.lightened(0.12) if st == "hover" else (base.darkened(0.15) if st == "pressed" else base)
+					if st == "disabled":
+						bgc = Color(base.darkened(0.45), 0.8)
+					btn.add_theme_stylebox_override(st, Kit.box(bgc, 8, 2 if st == "focus" else 0, Kit.c("gold"), 3))
 			btn.pressed.connect(_on_skill.bind(i, sid))
 			col.add_child(btn)
 			_skill_buttons.append([i, sid, btn])
