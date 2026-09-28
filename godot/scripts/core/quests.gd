@@ -181,7 +181,12 @@ static func next_options(q: Dictionary, save: SaveData) -> Array:
 	var s := here(q, save)
 	if s["type"] == "choose":
 		return [q["squares"][save.choices[s["id"]]]]
-	return s["next"].map(func(n): return q["squares"][n])
+	return s["next"].map(func(n): return q["squares"][n]).filter(func(n): return is_open(n, save))
+
+
+static func is_open(s: Dictionary, save: SaveData) -> bool:
+	## A square with requires / unless (a story flag from an earlier chapter) only exists when the flag says so.
+	return (s["requires"] == "" or save.flags.has(s["requires"])) and (s["unless"] == "" or not save.flags.has(s["unless"]))
 
 
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:

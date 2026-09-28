@@ -166,6 +166,12 @@ func demo(name: String) -> void:
 			var o := InterludeOverlay.new()
 			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
+		"replays":  # the title screen's 重玩章节 list
+			save.quests_cleared = ["prologue", "taodong"]
+			save.clears = {"prologue": 3, "taodong": 1}
+			var ts := TitleScreen.new()
+			show_screen(ts)
+			ts.call_deferred("_replay_menu", ts._col, save)
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}

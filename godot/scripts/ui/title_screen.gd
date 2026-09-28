@@ -2,11 +2,15 @@ class_name TitleScreen
 extends Control
 
 
+var _col: VBoxContainer
+
+
 func _ready() -> void:
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(center)
 	var col := VBoxContainer.new()
+	_col = col
 	col.add_theme_constant_override("separation", 18)
 	col.custom_minimum_size = Vector2(420, 0)
 	center.add_child(col)

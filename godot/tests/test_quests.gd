@@ -767,3 +767,12 @@ func test_replaying_a_chapter_is_harder_and_returns_to_the_story() -> void:
 	check_eq(s.danger, 2, "harder again")
 	Quests.stop_replay(s)
 	check(s.quest == "taodong" and s.square == "counter", "giving up returns to the story too")
+
+
+func test_squares_can_depend_on_earlier_chapters() -> void:
+	var s := SaveData.create()
+	var gated := {"requires": "董白：留下", "unless": ""}
+	var barred := {"requires": "", "unless": "董白：留下"}
+	check(not Quests.is_open(gated, s) and Quests.is_open(barred, s))
+	s.flags = ["董白：留下"]
+	check(Quests.is_open(gated, s) and not Quests.is_open(barred, s))

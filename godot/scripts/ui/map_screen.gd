@@ -117,6 +117,8 @@ func _rebuild_map() -> void:
 	_bg.texture = load(bg_path) if ResourceLoader.exists(bg_path) else null
 	_bg.size = _layer.custom_minimum_size
 	for s in q["squares"].values():
+		if not Quests.is_open(s, Game.save):  # hidden by an earlier chapter's choices
+			continue
 		var b := Button.new()
 		b.text = _glyph(s)
 		b.add_theme_font_size_override("font_size", 30)
@@ -250,6 +252,8 @@ func _refresh() -> void:
 		if s["lose_goto"] != "":
 			targets.append(s["lose_goto"])
 		for t in targets:
+			if not _nodes.has(s["id"]) or not _nodes.has(t):
+				continue
 			var walked: bool = path.has(s["id"] + ">" + t)
 			var a := _pos(s)
 			var b := _pos(q["squares"][t])
