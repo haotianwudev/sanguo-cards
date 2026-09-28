@@ -51,50 +51,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
 
-### `huatuo` ⬜ 缺
-
-```
-A vertical character portrait of Hua Tuo (华佗), the legendary wandering physician of the Three Kingdoms era.
-Appearance: Lean middle-aged man with a calm, sharp gaze, a thin goatee, sleeves rolled up like a working doctor.
-Armor & Clothing: Plain grey-blue traveling robe, a wooden medicine chest on his back painted with the characters 沛国华佗.
-Weapon: Holding a silver acupuncture needle between his fingers; a small hand axe peeks out of the medicine chest (his brain-surgery joke).
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `yuji` ⬜ 缺
-
-```
-A vertical character portrait of Yu Ji (于吉), the eerie Taoist priest of Jiangdong.
-Appearance: Middle-aged Taoist with a thin mustache and an unsettling, knowing smile, narrowed eyes.
-Armor & Clothing: Flowing white Taoist robe, hair in a topknot with a wooden pin.
-Weapon: Holding a tall cloth banner reading 「于吉仙师 符水治百病」 with a single copper coin dangling from it.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `fushui_xintu` ⬜ 缺
-
-```
-A vertical character portrait of a fanatical follower of the Taoist charm-water cult (符水信徒).
-Appearance: Gaunt peasant with feverish devoted eyes, a yellow paper talisman stuck on the forehead.
-Armor & Clothing: Ragged brown peasant clothes, a yellow cloth sash.
-Weapon: Holding out a bowl of murky charm water with both hands, pressing it forward insistently.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `baie_hu` ⬜ 缺
-
-```
-A vertical character portrait of a giant white-browed tiger (吊睛白额虎) from Chinese legend.
-Appearance: Enormous fierce tiger with slanted glaring eyes and a white patch on its brow, muscles rippling.
-Armor & Clothing: Wearing a simple leather war saddle (it can be ridden as a mount).
-Weapon: Crouched and snarling, about to pounce, claws out.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
 ### `boar` ⬜ 缺
 
 ```
@@ -102,17 +58,6 @@ A vertical character portrait of a huge wild boar (野猪).
 Appearance: Massive bristly dark-brown boar with long curved tusks and small angry red eyes.
 Armor & Clothing: No clothing; mud splashed on its flanks.
 Weapon: Head lowered, charging straight at the viewer.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `yezhu_bing` ⬜ 缺
-
-```
-A vertical character portrait of a boar-rider soldier (野猪兵).
-Appearance: Stocky, grinning peasant soldier in his 20s.
-Armor & Clothing: Patched leather armor and a straw hat.
-Weapon: Riding a big wild boar and waving a short spear, charging.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
@@ -201,50 +146,6 @@ A vertical character portrait of Lady Tang (唐姬), the widowed consort of the 
 Appearance: An adult woman in her twenties with graceful noble bearing, soot smudged on her cheek, steady unyielding eyes.
 Armor & Clothing: Plain coarse cloth dress that cannot hide her dignity, hair loosely tied.
 Weapon: Clutching a jade hairpin to her chest.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `yanzhihu` ⬜ 缺
-
-```
-A vertical character portrait of 'Rouge Tiger' (胭脂虎), the fierce bandit queen of a mountain fort.
-Appearance: A curvy adult woman in her thirties with a bold, teasing grin, fiery eyes and a confident swagger.
-Armor & Clothing: Red bandit leather vest and trousers, a sash at the waist, bangles.
-Weapon: Hands on hips with twin sabers tucked in her sash, standing on a fort wall.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `huangjin_nvyi` ⬜ 缺
-
-```
-A vertical character portrait of a Yellow Turban field medic (黄巾女医).
-Appearance: An adult woman in her twenties, calm and capable, sleeves rolled up.
-Armor & Clothing: Yellow headscarf, simple brown clothes, a medicine chest painted with Taiping Taoist charms.
-Weapon: Bandaging a wounded arm, looking up at the viewer.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `gongnv` ⬜ 缺
-
-```
-A vertical character portrait of a palace maid fleeing the burning Luoyang (宫女).
-Appearance: An adult woman in her twenties, frightened but resolute.
-Armor & Clothing: Han dynasty palace dress with a soot-blackened hem.
-Weapon: Holding a lantern and a small medicine box.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `xiliang_nvbing` ⬜ 缺
-
-```
-A vertical character portrait of a Xiliang female cavalry guard (西凉女亲兵).
-Appearance: An adult woman in her twenties, fierce and loyal, high ponytail.
-Armor & Clothing: Fitted Xiliang leather armor with fur trim.
-Weapon: Mounted, a curved saber raised.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
@@ -490,9 +391,10 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c1_wake`
 
 ```
-A horizontal story event illustration: a beautiful mature noblewoman (Lady Wu, adult) leaning over a young man lying in an embroidered bed, touching her forehead to his to check his fever, soft candlelight, the young man blushing.
+A horizontal story event illustration: a beautiful mature noblewoman (Lady Wu, adult) leaning over a young man with short modern hair lying in an embroidered bed, curiously touching his short hair, touching her forehead to his to check his fever, soft candlelight, the young man blushing.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c1_bandage`
@@ -501,6 +403,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: Lady Wu gently blowing on a bandaged wound on the young man's thigh while he clutches the blanket, bright red with embarrassment, morning light (comedic, non-explicit).
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c1_raid`
@@ -509,6 +412,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: a night raid: torches on the river, river bandits carrying Lady Wu onto a boat as she shouts back over her shoulder, the young Sun Ce jumping into the river after them.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c1_rescue`
@@ -517,6 +421,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: inside a river fortress: the young man holding Lady Wu's hands after untying her ropes from a pillar, Sun Ce coughing loudly behind them.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c1_dinner`
@@ -525,6 +430,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: a warm family dinner: the young man pretending to be drunk with his head on Lady Wu's lap, Sun Ce snapping his chopsticks in two, Zhou Yu hiding a laugh (comedic).
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c1_oath`
@@ -533,6 +439,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: three young men (the hero, Sun Ce, Zhou Yu) kneeling on a riverbank swearing brotherhood, three chopsticks stuck in the ground as incense, sunset over the river.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c1_north`
@@ -541,6 +448,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: farewell at the village gate: Lady Wu hugging the young man goodbye, Sun Ce grinding his teeth, a bundle of hand-sewn clothes with a little tiger embroidered on it.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c2_zumao`
@@ -549,6 +457,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: a battlefield: the veteran Zu Mao wearing a red headscarf being chased by the giant Hua Xiong, the young Sun Ce charging in with a spear.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c2_capture`
@@ -557,6 +466,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: the hero carrying the unconscious woman general Dong Bai over his shoulder like a sack of rice, Sun Ce and Zhou Yu each struggling to carry one of her giant bronze hammers (comedic).
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c2_raid`
@@ -565,6 +475,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: a burning army camp at night: Sun Jian alone blocking the camp gate with his sword against Lü Bu on the red horse Red Hare.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c2_sanying`
@@ -573,6 +484,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: three heroes fighting Lü Bu: Liu Bei with twin swords, Guan Yu with the crescent blade and Zhang Fei with the snake spear circling Lü Bu, dust flying.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c2_fate`
@@ -581,6 +493,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: the woman general Dong Bai tied on a horse glaring defiantly at the hero, an envoy of Yuan Shao waiting beside them, tense.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `c2_yuxi`
@@ -589,6 +502,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: burning Luoyang at night: Sun Jian by a well holding up the glowing Imperial Jade Seal, his face lit by five-colored light, his eyes turning ambitious.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `i1_sewing`
@@ -597,6 +511,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: night by lamplight: Lady Wu sewing a winter coat, the young man sitting beside her, Sun Ce sulking outside the window.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `i2_yuxi`
@@ -605,6 +520,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: night on a river boat: Sun Jian hugging a brocade box at the bow, Lady Wu standing at the cabin door holding a late-night snack.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `i2_duel`
@@ -613,6 +529,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: sunset riverbank: Dong Bai and Sun Ce collapsed on the ground laughing after a long duel, hammers and spear dropped beside them.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```
 
 ### `i2_qin`
@@ -621,4 +538,5 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 A horizontal story event illustration: night on the stern of a boat: Lady Tang playing a guqin, Lady Wu draping a coat over her shoulders.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape.)
 ```

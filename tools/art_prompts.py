@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PICS = ROOT / "pics"
 NL = "\n"
 
+HERO = "the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape"
 STYLE = ("Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean "
          "ink outlines, rich vibrant colors")
 PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper "
@@ -135,7 +136,7 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
-    "c1_wake": "a beautiful mature noblewoman (Lady Wu, adult) leaning over a young man lying in an embroidered bed, touching her forehead to his to check his fever, soft candlelight, the young man blushing",
+    "c1_wake": "a beautiful mature noblewoman (Lady Wu, adult) leaning over a young man with short modern hair lying in an embroidered bed, curiously touching his short hair, touching her forehead to his to check his fever, soft candlelight, the young man blushing",
     "c1_bandage": "Lady Wu gently blowing on a bandaged wound on the young man's thigh while he clutches the blanket, bright red with embarrassment, morning light (comedic, non-explicit)",
     "c1_raid": "a night raid: torches on the river, river bandits carrying Lady Wu onto a boat as she shouts back over her shoulder, the young Sun Ce jumping into the river after them",
     "c1_rescue": "inside a river fortress: the young man holding Lady Wu's hands after untying her ropes from a pillar, Sun Ce coughing loudly behind them",
@@ -172,7 +173,8 @@ def cg_prompt(scene: str) -> str:
     return (f"A horizontal story event illustration: {scene}.{NL}"
             f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third "
             f"less busy (dialogue text sits there).{NL}"
-            f"Style: {STYLE}, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.")
+            f"Style: {STYLE}, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.{NL}"
+            f"(When the hero appears — {HERO}.)")
 
 
 def main() -> None:
