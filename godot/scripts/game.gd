@@ -133,6 +133,14 @@ func demo(name: String) -> void:
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_complete")
+		"party":  # the 部队编成 screen with a mid-game collection
+			for c in ["sunce", "zhouyu", "wuguotai", "sunjian", "huanggai", "chengpu", "dongbai"]:
+				save.grant_card(c)
+			for c in ["danyang", "danyang", "changsha", "gongnv", "xiliang_nvbing"]:
+				save.grant_card(c)
+			var m := MapScreen.new()
+			show_screen(m)
+			m.call_deferred("_open_party")
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}

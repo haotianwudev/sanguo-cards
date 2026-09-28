@@ -43,6 +43,9 @@ func _ready() -> void:
 	add_child(top)
 	_title = Kit.label("", Kit.FONT_BIG, "gold")
 	top.add_child(_title)
+	var party_btn := Kit.button("部队", "gold")
+	party_btn.pressed.connect(_open_party)
+	top.add_child(party_btn)
 	var sp := Control.new()
 	sp.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(sp)
@@ -595,6 +598,15 @@ func _open_offer(s: Dictionary) -> void:
 		o.title = "仙人点化 —— 选一位武将升级"
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
+	add_child(o)
+
+
+func _open_party() -> void:
+	if get_node_or_null("Party") != null:
+		return
+	var o := PartyOverlay.new()
+	o.name = "Party"
+	o.closed.connect(func(): _refresh())
 	add_child(o)
 
 
