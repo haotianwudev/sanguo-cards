@@ -6,6 +6,7 @@ pics/
   ART-NEEDS.md      还缺哪些图（sanguo-art 自动生成）
   SOURCES.md        每张图的来源和协议（sanguo-art 自动生成）
   CARD-DESIGN.md    卡牌版式和美术规格
+  ART-PROMPTS.md    每张缺的图的完整出图提示词（python tools/art_prompts.py 生成）
   source/           原图：只放原始文件，工具永远不改它们
     generals/       武将立绘（含主公 lord）
     soldiers/       兵卡立绘

@@ -58,6 +58,11 @@ Battle CGs (Rance X style: the enemy in its scene): the owner supplies one pictu
 `pics/art.json` "battles", built by `sanguo-art` into `godot/data/art/battle/`; the battle screen paints it (washed) when
 present. For any other art a feature needs, don't wait for it: add the requirement to `CARD-DESIGN.md` (and a brief).
 
+**Every art requirement ships with a full image prompt.** Add the subject to the tables in `tools/art_prompts.py`
+(portraits: name / appearance / armor & clothing / weapon; battles and story CGs: one scene line — composition and style
+are fixed templates so the set stays consistent; women are always written as adults) and run `python tools/art_prompts.py`
+to regenerate `pics/ART-PROMPTS.md`. Keep the prompt consistent with the brief in `CARD-DESIGN.md` §7 and the story text.
+
 Adding a portrait, checklist:
 1. File name = the portrait key the game looks up: a card's `person` (or its id), or an enemy's `portrait`
    (enemies reuse their card's key — check `cards.json` before inventing a new one). Generals/enemies go in
