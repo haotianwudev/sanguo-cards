@@ -1,7 +1,9 @@
 {
   "gacha": {"rates": {"R": 70, "SR": 25, "SSR": 5}, "offer_size": 3, "party_slots": 4, "soldier_decay": 0.6, "chest_base": 0.5, "chest_cards": 2, "chest_cards_boss": 3,
     "_tiers": "generals can be drawn again: copies needed for each tier (铜/银/金) and the multiplier on the general's own stats",
-    "tiers": [{"name": "铜", "copies": 1, "mult": 1.0}, {"name": "银", "copies": 2, "mult": 1.25}, {"name": "金", "copies": 4, "mult": 1.6}]},
+    "tiers": [{"name": "铜", "copies": 1, "mult": 1.0}, {"name": "银", "copies": 2, "mult": 1.25}, {"name": "金", "copies": 4, "mult": 1.6}],
+    "_merit": "战功: earned at the end of each chapter (per battle won, extra per boss/elite beaten), kept across chapters, spent in the recap",
+    "merit": {"per_battle": 1, "per_boss": 2, "draw": 5, "upgrade": 8}},
   "_enemy_moves": "enemy move fields: power (× attack; 0 = no hit), weight (0 = only after a charge), confuse, rage (attack up for good), heal (share of its HP), ap_drain (AP taken next round), burn_party {share of party HP per turn, turns}, pierce (ignores guard and defend), charge (spends the turn winding up: next turn opens with that move), when: half (only below half HP), once. card: its card, which the chest after beating it may hold (enemy_card_chance, bosses and elites enemy_card_chance_boss)",
   "battle": {"ap_start": 3, "ap_per_round": 3, "ap_max": 8, "combo_bonus": 0.1, "variance": 0.2, "boost_mult": 1.5, "boost_idle_rounds": 3, "boost_chance": 0.5, "leader_mult": 5, "interrupt_chance": 0.3, "interrupt_power": 2.0, "defend_cuts": [0.3, 0.5, 0.7, 0.9], "enemy_hp_per_extra_leader": 0.083,
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)", "danger_step": 0.2, "_difficulty": "难度: permanent (whole campaign) enemy strength per level, e.g. after beating 虎牢关 吕布", "difficulty_step": 0.2, "enemy_card_chance": 0.25, "enemy_card_chance_boss": 0.5},

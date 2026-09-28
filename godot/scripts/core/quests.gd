@@ -95,6 +95,7 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.danger = 0
 	save.run_start = collection(save)
 	save.run_battles = 0
+	save.run_bosses = 0
 	save.run_relics = []
 	save.run_records = []
 	save.layout = {}
@@ -259,6 +260,8 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			reset_carry(save)
 		"battle":  # called after a win
 			after_win(save)
+			if s["boss"] or s["elite"]:
+				save.run_bosses += 1
 			record(save, s["record_win"])
 			if s["elite"]:  # pick one of a few 宝物 (the map opens the pick)
 				save.offer = relic_offer(save, rng)
@@ -354,6 +357,31 @@ static func recap(save: SaveData) -> Dictionary:
 			cards.append([cid, gained])
 	return {"battles": save.run_battles, "cards": cards, "relics": save.run_relics.duplicate(),
 		"records": save.run_records.duplicate(), "danger": save.danger, "difficulty": save.difficulty}
+
+
+static func merit_earned(save: SaveData) -> int:
+	var m: Dictionary = GameData.get_db().gacha["merit"]
+	return save.run_battles * int(m["per_battle"]) + save.run_bosses * int(m["per_boss"])
+
+
+static func pay_merit(q: Dictionary, save: SaveData) -> int:
+	## Pay out this chapter's 战功 once. Returns what was added (0 if already paid).
+	q = q.get("_raw", q)
+	if save.merit_paid == q["id"]:
+		return 0
+	var n := merit_earned(save)
+	save.merit += n
+	save.merit_paid = q["id"]
+	return n
+
+
+static func spend_merit(save: SaveData, what: String) -> bool:
+	## what: "draw" | "upgrade" (costs in gacha.merit)
+	var cost: int = int(GameData.get_db().gacha["merit"][what])
+	if save.merit < cost:
+		return false
+	save.merit -= cost
+	return true
 
 
 static func after_win(save: SaveData) -> void:

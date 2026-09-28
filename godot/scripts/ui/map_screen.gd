@@ -638,6 +638,8 @@ func _complete() -> void:
 		return
 	var db := GameData.get_db()
 	var r := Quests.recap(Game.save)
+	var earned := Quests.pay_merit(q, Game.save)
+	Game.persist()
 	var panel := PanelContainer.new()
 	panel.name = "Recap"
 	panel.z_index = 60
@@ -677,8 +679,39 @@ func _complete() -> void:
 		hard.append("难度 +%d%%（永久）" % int(round(r["difficulty"] * float(db.battle["difficulty_step"]) * 100)))
 	if not hard.is_empty():
 		lines.append("[color=%s][b]难度[/b][/color]　%s" % [gold, "　".join(hard)])
-	lines.append("\n宝物只在本章有效，将会清空；卡牌、难度和你的选择都会带到下一章。")
+	lines.append("[color=%s][b]战功[/b][/color]　本章 +%d（打赢一场 +%d，首领和精英再 +%d）" % [gold, Quests.merit_earned(Game.save),
+		int(db.gacha["merit"]["per_battle"]), int(db.gacha["merit"]["per_boss"])])
+	lines.append("\n宝物只在本章有效，将会清空；卡牌、战功、难度和你的选择都会带到下一章。")
 	text.text = "\n".join(lines)
+	var spend := HBoxContainer.new()
+	spend.alignment = BoxContainer.ALIGNMENT_CENTER
+	spend.add_theme_constant_override("separation", 16)
+	col.add_child(spend)
+	var have := Kit.label("", Kit.FONT_BIG, "gold")
+	spend.add_child(have)
+	var draw := Kit.button("抽一次卡（%d 战功）" % int(db.gacha["merit"]["draw"]), "blue")
+	var up := Kit.button("点化一位武将（%d 战功）" % int(db.gacha["merit"]["upgrade"]), "purple")
+	spend.add_child(draw)
+	spend.add_child(up)
+	var refresh_spend := func():
+		var s := Game.save
+		have.text = "战功 %d" % s.merit
+		draw.disabled = s.merit < int(db.gacha["merit"]["draw"]) or s.pool_left() == 0
+		up.disabled = s.merit < int(db.gacha["merit"]["upgrade"]) or not s.owned.any(func(c): return not s.maxed(c))
+	refresh_spend.call()
+	draw.pressed.connect(func():
+		if not Quests.spend_merit(Game.save, "draw"):
+			return
+		var drawn := Game.save.recruit_offer(Game.rng)
+		Game.persist()
+		_pick_then(drawn.map(func(c): return c["id"]), "用战功招募 —— 选一位", "draw", refresh_spend))
+	up.pressed.connect(func():
+		if not Quests.spend_merit(Game.save, "upgrade"):
+			return
+		var mine: Array = Game.save.owned.filter(func(c): return not Game.save.maxed(c))
+		mine.shuffle()
+		Game.persist()
+		_pick_then(mine.slice(0, 3), "用战功点化 —— 选一位武将升级", "upgrade", refresh_spend))
 	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
 	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	go.custom_minimum_size = Vector2(320, 60)
@@ -687,6 +720,33 @@ func _complete() -> void:
 		_finish_chapter())
 	col.add_child(go)
 	Kit.focus(go)
+
+
+func _pick_then(ids: Array, title: String, kind: String, after: Callable) -> void:
+	## a pick-one over the recap: "draw" takes the card, "upgrade" raises its tier
+	var tiers: Array = GameData.get_db().gacha["tiers"]
+	var o := PickOverlay.new()
+	o.title = title
+	o.card_ids = ids
+	if kind == "upgrade":
+		o.captions = ids.map(func(c): return "%s → %s" % [tiers[Game.save.tier(c)]["name"],
+			tiers[mini(Game.save.tier(c) + 1, tiers.size() - 1)]["name"]])
+	else:
+		o.captions = ids.map(func(c): return _offer_caption(GameData.get_db().cards[c]))
+	o.z_index = 70
+	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	o.picked.connect(func(i):
+		var cid: String = ids[i]
+		if kind == "upgrade":
+			Game.save.upgrade(cid)
+			_show_toast("%s 升为%s卡！" % [GameData.get_db().cards[cid]["name"], tiers[Game.save.tier(cid)]["name"]])
+		else:
+			Game.save.take(cid)
+			_show_toast("获得：" + GameData.get_db().cards[cid]["name"])
+		Game.persist()
+		o.queue_free()
+		after.call())
+	add_child(o)
 
 
 func _finish_chapter() -> void:

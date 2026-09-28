@@ -36,6 +36,9 @@ var offer_rates: Dictionary = {}  # rarity weights for those picks
 var run_start: Dictionary = {}  # card id -> copies owned when this run began (for the chapter recap)
 var run_battles := 0  # battles won this run
 var run_relics: Array = []  # every 宝物 picked up this run, even ones traded away
+var merit := 0  # 战功: earned per chapter, kept across chapters, spent between chapters
+var merit_paid := ""  # quest id whose 战功 has been paid out (so a reopened recap doesn't pay twice)
+var run_bosses := 0  # bosses and elites beaten this run
 var run_records: Array = []  # key choices and outcomes this run, as short lines (「董白：留下」)
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
@@ -45,7 +48,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses"]
 
 
 static func create() -> SaveData:
@@ -70,6 +73,8 @@ static func from_dict(d: Dictionary) -> SaveData:
 	s.damage = int(s.damage)
 	s.danger = int(s.danger)
 	s.run_battles = int(s.run_battles)
+	s.merit = int(s.merit)
+	s.run_bosses = int(s.run_bosses)
 	s.difficulty = int(s.difficulty)
 	s.picks_left = int(s.picks_left)
 	s.party_slots = int(s.party_slots)

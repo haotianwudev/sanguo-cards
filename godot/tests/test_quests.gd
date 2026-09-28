@@ -690,3 +690,29 @@ func test_the_chapter_recap_remembers_the_run() -> void:
 	check_eq(r["relics"], ["hupi"])
 	Quests.fail(q, s)
 	check(Quests.recap(s)["records"].is_empty(), "a new run starts a clean recap")
+
+
+func test_merit_is_paid_once_per_chapter_and_spent_between_chapters() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.run_battles = 6
+	s.run_bosses = 2
+	check_eq(Quests.pay_merit(q, s), 6 + 2 * 2)
+	check_eq(Quests.pay_merit(q, s), 0, "a reopened recap doesn't pay twice")
+	check_eq(s.merit, 10)
+	check(Quests.spend_merit(s, "draw"), "5 for a draw")
+	check_eq(s.merit, 5)
+	check(not Quests.spend_merit(s, "upgrade"), "8 for an upgrade — not enough left")
+	var back := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
+	check(back.merit == 5 and back.merit_paid == "prologue")
+
+
+func test_beating_a_boss_or_elite_counts_for_merit() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "yaodao"
+	s.resolved = false
+	Quests.resolve(q, s, rng(0))
+	check_eq(s.run_bosses, 1)
