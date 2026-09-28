@@ -584,6 +584,306 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), green tunic under silver armor, fur-trimmed cape, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
 
+## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）
+
+### `taodong`
+
+```
+A wide horizontal game map illustration, a hand-painted Chinese landscape scroll (浅绛 / 青绿山水): the march north to fight Dong Zhuo, left to right: country roads and farmland leaving the south; a dusty Central-Plains highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky.
+Composition & Framing: very wide panorama, 3200x1080 (it scrolls sideways), seen from high above at an angle; keep three roughly horizontal travel bands (top / middle / bottom) free of busy detail, map squares sit on them; soft mist.
+Style: match the chapter-1 map (godot/data/art/map/prologue.jpg): ink outlines, soft green and ochre washes on rice paper; no text, no UI, no people close up.
+```
+
+## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）
+
+### `jiujia`
+
+```
+A game item icon: Sun Jian's old silver armor with tiger-engraved shoulder guards.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `hupi`
+
+```
+A game item icon: a folded tiger-pelt cape.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `shoushihe`
+
+```
+A game item icon: an open lacquered jewelry box with hairpins and jade.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `jiunang`
+
+```
+A game item icon: a leather wine skin with a cork.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `bingfu`
+
+```
+A game item icon: a bronze tiger tally split in two halves.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `hushenfu`
+
+```
+A game item icon: a red paper amulet with a tassel.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `xiangnang`
+
+```
+A game item icon: an embroidered silk scent pouch.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `jinfan`
+
+```
+A game item icon: a bronze bell tied to a strip of brocade sail.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `bingfa`
+
+```
+A game item icon: a bamboo-slip scroll of The Art of War tied with cord.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `gudingdao`
+
+```
+A game item icon: an ancient broad-bladed saber with a ring pommel.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `yushan`
+
+```
+A game item icon: a white feather fan.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `zhangu`
+
+```
+A game item icon: a red war drum with crossed drumsticks.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `chize`
+
+```
+A game item icon: a red soldier's headscarf (Zu Mao's).
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `qinggang`
+
+```
+A game item icon: a slender straight sword with a blue-green blade.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `qixing`
+
+```
+A game item icon: a jeweled dagger with seven star gems on the scabbard.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `bazhen`
+
+```
+A game item icon: a scroll unrolled to show an eight-trigram formation diagram.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `dunjia`
+
+```
+A game item icon: a mysterious Taoist book glowing faintly, with talismans.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `muniu`
+
+```
+A game item icon: a small wooden mechanical ox on wheels.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `beishui`
+
+```
+A game item icon: a cracked cooking cauldron beside a sunken boat.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `dingxin`
+
+```
+A game item icon: a tiny pill box with a golden pill.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `jubaopen`
+
+```
+A game item icon: a bowl overflowing with gold ingots and coins.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `zhaoxianbang`
+
+```
+A game item icon: a recruitment notice nailed to a wooden board.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `yitian`
+
+```
+A game item icon: a heavy straight sword with a gold hilt.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `chitu`
+
+```
+A game item icon: the head of a red warhorse with a flowing mane.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `zhangba`
+
+```
+A game item icon: a long serpent-bladed spear.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `zhugenu`
+
+```
+A game item icon: a repeating crossbow with a bolt magazine.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `qinglong`
+
+```
+A game item icon: a green-dragon crescent-moon glaive head.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `mengde`
+
+```
+A game item icon: a bound book of military strategy with a seal.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `heishan`
+
+```
+A game item icon: a black iron command token.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `taipingyaoshu`
+
+```
+A game item icon: a yellow Taoist scripture tied with a yellow cloth.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a purple and gold rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `qingnang`
+
+```
+A game item icon: a green cloth medicine book pouch.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a bronze rim, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `yuxi`
+
+```
+A game item icon: the jade Imperial Seal with a dragon knob, glowing ominously.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `huangjinfu`
+
+```
+A game item icon: a yellow Yellow-Turban talisman, burnt at the edges.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `dilu`
+
+```
+A game item icon: the head of a white horse with a dark spot on its forehead.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `fangtian`
+
+```
+A game item icon: a halberd with a crescent side blade.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
+### `tengjia`
+
+```
+A game item icon: a suit of woven rattan armor.
+Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a dark red rim with cracks, transparent background (PNG).
+Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.
+```
+
 ## 已出图的提示词存档（重画时从这里开始）
 
 ### `i1_sewing` ✅

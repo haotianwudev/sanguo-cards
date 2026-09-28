@@ -122,11 +122,28 @@ func _build() -> void:
 	var strip := ColorRect.new()
 	strip.color = Color(0, 0, 0, 0.55)
 	_add(strip, Vector2(win.position.x, win.end.y - strip_h), Vector2(win.size.x, strip_h))
-	var stats := Kit.label("攻%d  兵%d" % [at, hp], 16 if not small else 13)
-	stats.add_theme_color_override("font_color", Color.WHITE)
-	stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	stats.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_add(stats, strip.position, strip.size)
+	if Kit.icon("stat_at") != null and Kit.icon("stat_hp") != null:  # ⚔ 121  ♥ 490
+		var line := HBoxContainer.new()
+		line.alignment = BoxContainer.ALIGNMENT_CENTER
+		line.add_theme_constant_override("separation", 3)
+		line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		for pair in [["stat_at", at], ["stat_hp", hp]]:
+			var ic := TextureRect.new()
+			ic.texture = Kit.icon(pair[0])
+			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			ic.custom_minimum_size = Vector2(strip_h - 4, strip_h - 4)
+			line.add_child(ic)
+			var num := Kit.label("%d  " % pair[1], 16 if not small else 13)
+			num.add_theme_color_override("font_color", Color.WHITE)
+			line.add_child(num)
+		_add(line, strip.position, strip.size)
+	else:
+		var stats := Kit.label("攻%d  兵%d" % [at, hp], 16 if not small else 13)
+		stats.add_theme_color_override("font_color", Color.WHITE)
+		stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		stats.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_add(stats, strip.position, strip.size)
 	if leader.has("members") and not leader["members"].is_empty():
 		var troop_l := Label.new()
 		troop_l.text = "部队%d" % (leader["members"].size() + 1)
@@ -234,6 +251,18 @@ func _build() -> void:
 			chip.add_theme_stylebox_override("normal", Kit.box(Kit.c("card"), 6, 1, Kit.c("border"), 3))
 			chip.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			chip.clip_text = true
+			var sic := Kit.skill_icon(sk)
+			if sic != null:  # the skill's kind on the left of the chip
+				chip.add_theme_stylebox_override("normal", Kit.box(Kit.c("card"), 6, 1, Kit.c("border"), 3))
+				(chip.get_theme_stylebox("normal") as StyleBoxFlat).content_margin_left = 22
+				var ic := TextureRect.new()
+				ic.texture = sic
+				ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				ic.position = Vector2(3, 2)
+				ic.size = Vector2(18, 18)
+				ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				chip.add_child(ic)
 			_add(chip, Vector2(8, y), Vector2(w - 16, 22))
 			y += 26
 	if note != "":

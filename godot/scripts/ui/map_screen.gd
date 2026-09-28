@@ -269,15 +269,17 @@ func _style_square(b: Button, s: Dictionary, state: String) -> void:
 			b.add_theme_stylebox_override(st, empty_sb)
 		var focus_sb := Kit.box(Color.TRANSPARENT, int(SQ / 2), 3, Kit.c("amber"), 0)
 		b.add_theme_stylebox_override("focus", focus_sb)
+		for st in ["icon_normal_color", "icon_hover_color", "icon_pressed_color", "icon_focus_color", "icon_disabled_color"]:
+			b.add_theme_color_override(st, Color.WHITE)  # a disabled button would fade its icon to 40%
 		match state:
 			"current":
-				b.modulate = Color(1.2, 1.15, 0.95)
+				b.modulate = Color(1.15, 1.1, 0.95)
 			"reachable":
 				b.modulate = Color.WHITE
-			"visited":
-				b.modulate = Color(0.65, 0.65, 0.65)
-			"closed":
-				b.modulate = Color(0.40, 0.40, 0.40)
+			"visited":  # been there: greyed
+				b.modulate = Color(0.6, 0.6, 0.6)
+			"closed":  # not reachable yet: still readable
+				b.modulate = Color(0.92, 0.92, 0.92)
 		return
 	var r := int(SQ / 2)
 	var bg := Kit.c("card")

@@ -172,6 +172,53 @@ CGS = {
 
 # hand-written prompts that replace the template for a key (e.g. the owner's own prompt for a scene).
 # They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
+# chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
+MAPS = {
+    "taodong": "the march north to fight Dong Zhuo, left to right: country roads and farmland leaving the south; a dusty Central-Plains "
+               "highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); "
+               "Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three "
+               "heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky",
+}
+
+# relic icons (cards.json relics id -> the object itself); rim colour by rarity: story/common bronze, rare purple-gold, curse dark red
+RELICS = {
+    "jiujia": "Sun Jian's old silver armor with tiger-engraved shoulder guards", "hupi": "a folded tiger-pelt cape",
+    "shoushihe": "an open lacquered jewelry box with hairpins and jade", "jiunang": "a leather wine skin with a cork",
+    "bingfu": "a bronze tiger tally split in two halves", "hushenfu": "a red paper amulet with a tassel",
+    "xiangnang": "an embroidered silk scent pouch", "jinfan": "a bronze bell tied to a strip of brocade sail",
+    "bingfa": "a bamboo-slip scroll of The Art of War tied with cord", "gudingdao": "an ancient broad-bladed saber with a ring pommel",
+    "yushan": "a white feather fan", "zhangu": "a red war drum with crossed drumsticks",
+    "chize": "a red soldier's headscarf (Zu Mao's)", "qinggang": "a slender straight sword with a blue-green blade",
+    "qixing": "a jeweled dagger with seven star gems on the scabbard", "bazhen": "a scroll unrolled to show an eight-trigram formation diagram",
+    "dunjia": "a mysterious Taoist book glowing faintly, with talismans", "muniu": "a small wooden mechanical ox on wheels",
+    "beishui": "a cracked cooking cauldron beside a sunken boat", "dingxin": "a tiny pill box with a golden pill",
+    "jubaopen": "a bowl overflowing with gold ingots and coins", "zhaoxianbang": "a recruitment notice nailed to a wooden board",
+    "yitian": "a heavy straight sword with a gold hilt", "chitu": "the head of a red warhorse with a flowing mane",
+    "zhangba": "a long serpent-bladed spear", "zhugenu": "a repeating crossbow with a bolt magazine",
+    "qinglong": "a green-dragon crescent-moon glaive head", "mengde": "a bound book of military strategy with a seal",
+    "heishan": "a black iron command token", "taipingyaoshu": "a yellow Taoist scripture tied with a yellow cloth",
+    "qingnang": "a green cloth medicine book pouch", "yuxi": "the jade Imperial Seal with a dragon knob, glowing ominously",
+    "huangjinfu": "a yellow Yellow-Turban talisman, burnt at the edges", "dilu": "the head of a white horse with a dark spot on its forehead",
+    "fangtian": "a halberd with a crescent side blade", "tengjia": "a suit of woven rattan armor",
+}
+
+
+def map_prompt(scene: str) -> str:
+    return (f"A wide horizontal game map illustration, a hand-painted Chinese landscape scroll (浅绛 / 青绿山水): {scene}.{NL}"
+            f"Composition & Framing: very wide panorama, 3200x1080 (it scrolls sideways), seen from high above at an angle; keep three "
+            f"roughly horizontal travel bands (top / middle / bottom) free of busy detail, map squares sit on them; soft mist.{NL}"
+            f"Style: match the chapter-1 map (godot/data/art/map/prologue.jpg): ink outlines, soft green and ochre washes on rice paper; "
+            f"no text, no UI, no people close up.")
+
+
+def relic_prompt(obj: str, rarity: str) -> str:
+    rim = {"curse": "dark red rim with cracks", "rare": "purple and gold rim"}.get(rarity, "bronze rim")
+    return (f"A game item icon: {obj}.{NL}"
+            f"Composition & Framing: square 256x256 (draw at 1024x1024), the object centered on a round medallion with a {rim}, "
+            f"transparent background (PNG).{NL}"
+            f"Style: painted item icon matching the card frames: gold linework, rich colours, soft highlight; no text.")
+
+
 OVERRIDES = {
     "i1_sewing": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG第一章通关幕间事件图：【吴夫人的针线 · 窗里温存与窗外受气包】
 - 室内温馨核心互动（暖光主舞台）：
@@ -231,6 +278,15 @@ def main() -> None:
         if key in art.get("cgs", {}):
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+    out += ["## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）", ""]
+    for key, scene in MAPS.items():
+        if "生成" not in art.get("maps", {}).get(key, {}).get("license", "生成"):
+            continue
+        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or map_prompt(scene), "```", ""]
+    rarity = {k: v.get("rarity", "common") for k, v in json.loads((ROOT / "godot/data/cards.json").read_text("utf-8"))["relics"].items()}
+    out += ["## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）", ""]
+    for key, obj in RELICS.items():
+        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or relic_prompt(obj, rarity.get(key, "common")), "```", ""]
     done_overrides = [k for k in OVERRIDES if k in art.get("cgs", {}) or k in art.get("battles", {}) or k in done]
     if done_overrides:
         out += ["## 已出图的提示词存档（重画时从这里开始）", ""]

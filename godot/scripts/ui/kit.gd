@@ -54,6 +54,10 @@ static func box(bg: Color, radius := 12, border := 0, border_color := Color.TRAN
 static func make_theme() -> Theme:
 	var t := Theme.new()
 	t.default_font_size = FONT_BODY
+	var body := load("res://data/fonts/body.ttf") as Font  # bundled 思源黑体: phones and the web have no CJK font
+	if body != null:
+		t.default_font = body
+		ThemeDB.fallback_font = body
 	t.set_color("font_color", "Label", c("text"))
 	t.set_color("default_color", "RichTextLabel", c("text"))
 	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
@@ -154,13 +158,16 @@ static func name_style(frame_name: String) -> Dictionary:
 
 
 static func name_font(size: int, spacing: int) -> Font:
-	## The calligraphic font for card names (system KaiTi for now; bundle a font for phone/web builds).
+	## The calligraphic font for card names: the bundled 霞鹜文楷 (tools/build_fonts.py), else the system KaiTi.
 	var key := "namefont:%d:%d" % [size, spacing]
 	if not _textures.has(key):
-		var sys := SystemFont.new()
-		sys.font_names = PackedStringArray(GameData.get_db().ui.get("card", {}).get("name_font", ["KaiTi"]))
+		var base := load("res://data/fonts/name.ttf") as Font
+		if base == null:
+			var sys := SystemFont.new()
+			sys.font_names = PackedStringArray(GameData.get_db().ui.get("card", {}).get("name_font", ["KaiTi"]))
+			base = sys
 		var fv := FontVariation.new()
-		fv.base_font = sys
+		fv.base_font = base
 		fv.spacing_glyph = spacing
 		fv.variation_embolden = 0.35
 		_textures[key] = fv
@@ -197,6 +204,27 @@ static func token_icon() -> Texture2D:
 		var path := "res://data/art/map/token_lord.png"
 		_textures[key] = load(path) if ResourceLoader.exists(path) else null
 	return _textures[key]
+
+
+static func icon(key: String) -> Texture2D:
+	## a small UI icon: data/art/icons/<key>.png (stat_at / stat_hp / stat_ap, skill_*), or null
+	var k := "icon:" + key
+	if not _textures.has(k):
+		var path := "res://data/art/icons/%s.png" % key
+		_textures[k] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[k]
+
+
+const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
+	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap"}
+
+
+static func skill_icon(skill: Dictionary) -> Texture2D:
+	## the icon for a skill's first effect (物理 / 法术 / 回复 / 防御 / BOOST / 混乱 / 破防 / 加 AP)
+	var effects: Array = skill.get("effects", [])
+	if effects.is_empty():
+		return null
+	return icon("skill_" + SKILL_ICONS.get(effects[0]["type"], "phys"))
 
 
 static func card_back() -> Texture2D:

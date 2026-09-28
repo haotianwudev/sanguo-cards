@@ -258,6 +258,9 @@ func _refresh() -> void:
 		var btn: Button = entry[2]
 		var tag := "限1" if sk["uses"] == 1 else ("累积" if sk["cumulative"] else "")
 		btn.text = "%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""]
+		btn.icon = Kit.skill_icon(sk)
+		btn.expand_icon = false
+		btn.add_theme_constant_override("icon_max_width", 24)
 		btn.disabled = _busy or not (b.can_act(i) and b.usable(u, sk))
 		btn.focus_mode = Control.FOCUS_NONE if btn.disabled else Control.FOCUS_ALL
 		if not btn.disabled and first_focus == null:
