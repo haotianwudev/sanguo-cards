@@ -667,3 +667,26 @@ func test_the_yellow_turban_saint() -> void:
 		else:
 			check(s.relics.has("taipingyaoshu"), "she leaves her book")
 	check(joined > 0 and joined < 20)
+
+
+func test_the_chapter_recap_remembers_the_run() -> void:
+	var q := quest(1)
+	var s := SaveData.create()
+	s.take("sunce")
+	Quests.begin(q, s)
+	s.take("zhouyu")
+	s.grant_card("gongnv")
+	s.grant_card("gongnv")
+	s.square = "lvbu"
+	s.resolved = false
+	Quests.lose(q, s, rng(0))
+	s.square = "fate"
+	s.resolved = false
+	Quests.resolve(q, s, rng(0), 1)
+	Quests.take_relic(s, "hupi")
+	var r := Quests.recap(s)
+	check(r["records"].has("吕布：三英战吕布") and r["records"].has("董白：留下"), str(r["records"]))
+	check(r["cards"].has(["zhouyu", 1]) and r["cards"].has(["gongnv", 2]) and not r["cards"].any(func(c): return c[0] == "sunce"), str(r["cards"]))
+	check_eq(r["relics"], ["hupi"])
+	Quests.fail(q, s)
+	check(Quests.recap(s)["records"].is_empty(), "a new run starts a clean recap")

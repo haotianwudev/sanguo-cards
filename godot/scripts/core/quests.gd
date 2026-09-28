@@ -93,6 +93,10 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	q = q.get("_raw", q)
 	save.relics = []
 	save.danger = 0
+	save.run_start = collection(save)
+	save.run_battles = 0
+	save.run_relics = []
+	save.run_records = []
 	save.layout = {}
 	if rng != null:
 		for group in q["shuffle"]:
@@ -204,6 +208,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 	var gained: Array = []
 	if save.resolved:
 		return gained
+	record(save, s["record"])
 	match s["type"]:
 		"event":
 			for cid in s["cards"]:
@@ -214,6 +219,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			var opt: Dictionary = s["choose"][choice]
 			assert(not opt["locked"], "locked choice")
 			save.choices[s["id"]] = opt["goto"]
+			record(save, opt["record"])
 			if opt["card"] != "":
 				if not save.has_card(opt["card"]):
 					gained.append(db.cards[opt["card"]])
@@ -253,6 +259,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			reset_carry(save)
 		"battle":  # called after a win
 			after_win(save)
+			record(save, s["record_win"])
 			if s["elite"]:  # pick one of a few 宝物 (the map opens the pick)
 				save.offer = relic_offer(save, rng)
 				save.offer_kind = "relic"
@@ -322,6 +329,33 @@ static func battle_here(q: Dictionary, save: SaveData) -> Dictionary:
 	return {"battle": s["battle"], "boss": s["boss"] or s["elite"], "ambush": s["ambush"]}
 
 
+static func record(save: SaveData, line: String) -> void:
+	if line != "" and not save.run_records.has(line):
+		save.run_records.append(line)
+
+
+static func collection(save: SaveData) -> Dictionary:
+	## card id -> copies owned (generals and soldiers)
+	var out := {}
+	for cid in save.owned:
+		out[cid] = save.copies(cid)
+	for cid in save.soldiers:
+		out[cid] = int(save.soldiers[cid])
+	return out
+
+
+static func recap(save: SaveData) -> Dictionary:
+	## What this run brought: {battles, cards: [[card id, copies gained]], relics, records, danger, difficulty}.
+	var now := collection(save)
+	var cards: Array = []
+	for cid in now:
+		var gained: int = now[cid] - int(save.run_start.get(cid, 0))
+		if gained > 0:
+			cards.append([cid, gained])
+	return {"battles": save.run_battles, "cards": cards, "relics": save.run_relics.duplicate(),
+		"records": save.run_records.duplicate(), "danger": save.danger, "difficulty": save.difficulty}
+
+
 static func after_win(save: SaveData) -> void:
 	## 宝物 that act after every victory (酒囊: heal a share of HP).
 	var db := GameData.get_db()
@@ -359,6 +393,8 @@ static func take_relic(save: SaveData, rid: String) -> Dictionary:
 	var db := GameData.get_db()
 	if not save.relics.has(rid):
 		save.relics.append(rid)
+	if not save.run_relics.has(rid):
+		save.run_relics.append(rid)
 	save.offer = []
 	save.offer_kind = ""
 	return {"id": rid, "name": "宝物·" + db.relics[rid]["name"], "relic": true}
@@ -370,6 +406,8 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 	var out := {"gained": [], "log": []}
 	var top := party_max(save)
 	for e in effects:
+		if e.has("record"):
+			record(save, str(e["record"]))
 		if e.has("say"):
 			out["log"].append(str(e["say"]).replace("{lord}", save.lord_name))
 		if e.has("damage"):
@@ -453,6 +491,8 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 					rid = left[rng.randi_range(0, left.size() - 1)]
 			if rid != "" and not save.relics.has(rid):
 				save.relics.append(rid)
+				if not save.run_relics.has(rid):
+					save.run_relics.append(rid)
 				var r: Dictionary = db.relics[rid]
 				out["gained"].append({"id": rid, "name": "宝物·" + r["name"], "relic": true})
 				out["log"].append("获得宝物：%s（%s）" % [r["name"], r["desc"]])
@@ -505,6 +545,7 @@ static func lose(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nul
 	if s["lose_goto"] == "":
 		fail(q, save, rng)
 		return false
+	record(save, s["record_lose"])
 	reset_carry(save)
 	save.square = s["lose_goto"]
 	save.visited.append(s["lose_goto"])

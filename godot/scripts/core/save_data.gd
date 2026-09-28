@@ -33,6 +33,10 @@ var danger := 0  # 险 accepted this run: enemies get stronger
 var difficulty := 0  # 难度: permanent, every level makes all enemies stronger (beating 吕布 at 虎牢关)
 var picks_left := 0  # more pick-ones to come after this one (三连抽)
 var offer_rates: Dictionary = {}  # rarity weights for those picks
+var run_start: Dictionary = {}  # card id -> copies owned when this run began (for the chapter recap)
+var run_battles := 0  # battles won this run
+var run_relics: Array = []  # every 宝物 picked up this run, even ones traded away
+var run_records: Array = []  # key choices and outcomes this run, as short lines (「董白：留下」)
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
@@ -41,7 +45,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records"]
 
 
 static func create() -> SaveData:
@@ -65,6 +69,7 @@ static func from_dict(d: Dictionary) -> SaveData:
 	# JSON has no ints: restore them
 	s.damage = int(s.damage)
 	s.danger = int(s.danger)
+	s.run_battles = int(s.run_battles)
 	s.difficulty = int(s.difficulty)
 	s.picks_left = int(s.picks_left)
 	s.party_slots = int(s.party_slots)

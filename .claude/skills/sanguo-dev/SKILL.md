@@ -97,6 +97,11 @@ Adding a portrait, checklist:
   offer {from | generals + rates | soldiers}, upgrade (true = pick, "random"), refresh, relic, danger (险, run),
   difficulty (whole campaign), drop_relic, lose_soldier (trades: give something up), battle + ambush, chance {then, else}`. Text uses `{lord}` for the player's name.
 
+- **Chapter recap**: finishing a chapter shows `Quests.recap(save)` — battles won, cards gained (collection diff since the
+  run began), relics picked up, and the run's key lines. Mark what matters with `record` (square, when resolved),
+  `record_win` / `record_lose` (battle squares), `record` on choose options, or a `{"record": ...}` event effect —
+  short lines like 「董白：留下」. These lines are also the hook for later cross-chapter branching.
+
 After adding content: run tests, screenshot the relevant demo, fix layout overflow (e.g. three skills shrink the
 battle cards), commit, push.
 

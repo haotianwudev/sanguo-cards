@@ -54,6 +54,7 @@ func battle_finished(won: bool) -> void:
 	var note := ""
 	if not q.is_empty():
 		if won:
+			save.run_battles += 1
 			var gained := Quests.resolve(q, save, rng)
 			note = "　".join(gained.map(func(c): return "获得：" + c["name"]))
 		elif Quests.lose(q, save, rng):
@@ -112,6 +113,24 @@ func demo(name: String) -> void:
 			save.offer = ["bingfa", "chitu", "dilu"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
+		"recap":  # the chapter recap at the end of chapter 2
+			save.quests_cleared = ["prologue"]
+			var q: Dictionary = GameData.get_db().quests[1]
+			Quests.begin(q, save)
+			save.grant_card("sunce")
+			Quests.record(save, "华雄：亲手斩杀，救下祖茂")
+			Quests.record(save, "吕布：三英战吕布")
+			Quests.record(save, "董白：留下")
+			save.grant_card("dongbai")
+			save.grant_card("gongnv")
+			save.grant_card("gongnv")
+			save.run_relics = ["chize", "hupi"]
+			save.run_battles = 7
+			save.square = "heroes"
+			save.resolved = true
+			var m := MapScreen.new()
+			show_screen(m)
+			m.call_deferred("_complete")
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}

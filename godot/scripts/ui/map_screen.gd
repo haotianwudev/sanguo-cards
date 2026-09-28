@@ -633,6 +633,63 @@ func _offer_caption(c: Dictionary) -> String:
 
 
 func _complete() -> void:
+	## the chapter recap first, then on to the next chapter
+	if get_node_or_null("Recap") != null:
+		return
+	var db := GameData.get_db()
+	var r := Quests.recap(Game.save)
+	var panel := PanelContainer.new()
+	panel.name = "Recap"
+	panel.z_index = 60
+	panel.position = Vector2(190, 60)
+	panel.size = Vector2(900, 600)
+	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 18, 3, Kit.c("gold"), 28))
+	add_child(panel)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 14)
+	panel.add_child(col)
+	var title := Kit.label("「%s」回顾" % q["title"], Kit.FONT_BIG + 6, "gold")
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(title)
+	var text := RichTextLabel.new()
+	text.bbcode_enabled = true
+	text.scroll_active = true
+	text.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
+	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
+	text.add_theme_color_override("default_color", Kit.c("text"))
+	col.add_child(text)
+	var gold := Kit.c("gold").to_html()
+	var lines: Array = ["[color=%s][b]战斗[/b][/color]　打赢了 %d 场" % [gold, r["battles"]]]
+	var cards: Array = r["cards"].map(func(c): return db.cards[c[0]]["name"] + ("×%d" % c[1] if c[1] > 1 else ""))
+	lines.append("[color=%s][b]新得卡牌[/b][/color]　%s" % [gold, "、".join(cards) if not cards.is_empty() else "无"])
+	var relics: Array = r["relics"].map(func(x): return db.relics[x]["name"])
+	lines.append("[color=%s][b]宝物[/b][/color]　%s" % [gold, "、".join(relics) if not relics.is_empty() else "无"])
+	lines.append("[color=%s][b]关键选择[/b][/color]" % gold)
+	for rec in r["records"]:
+		lines.append("　· " + rec)
+	if r["records"].is_empty():
+		lines.append("　· （一路平安，无事发生）")
+	var hard: Array = []
+	if r["danger"] > 0:
+		hard.append("险 +%d%%" % int(round(r["danger"] * float(db.battle["danger_step"]) * 100)))
+	if r["difficulty"] > 0:
+		hard.append("难度 +%d%%（永久）" % int(round(r["difficulty"] * float(db.battle["difficulty_step"]) * 100)))
+	if not hard.is_empty():
+		lines.append("[color=%s][b]难度[/b][/color]　%s" % [gold, "　".join(hard)])
+	lines.append("\n宝物只在本章有效，将会清空；卡牌、难度和你的选择都会带到下一章。")
+	text.text = "\n".join(lines)
+	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
+	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	go.custom_minimum_size = Vector2(320, 60)
+	go.pressed.connect(func():
+		panel.queue_free()
+		_finish_chapter())
+	col.add_child(go)
+	Kit.focus(go)
+
+
+func _finish_chapter() -> void:
 	Quests.complete(q, Game.save)
 	Game.persist()
 	_show_toast("「%s」完成！" % q["title"])

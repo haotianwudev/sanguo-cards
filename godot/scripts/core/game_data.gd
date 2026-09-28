@@ -87,7 +87,8 @@ func _load(dir: String) -> void:
 				"cards": s.get("cards", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
 				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""),
-				"label": s.get("label", "")}
+				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
+				"record_lose": s.get("record_lose", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
 			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", [])})
@@ -104,7 +105,8 @@ func _load(dir: String) -> void:
 
 static func _choose_option(o: Dictionary) -> Dictionary:
 	## A choice on a choose square. `card` (optional) joins the party; `locked` options are shown but can't be picked.
-	return {"card": o.get("card", ""), "label": o.get("label", ""), "goto": o.get("goto", ""), "locked": o.get("locked", false)}
+	return {"card": o.get("card", ""), "label": o.get("label", ""), "goto": o.get("goto", ""), "locked": o.get("locked", false),
+		"record": o.get("record", "")}
 
 
 func _validate() -> void:
