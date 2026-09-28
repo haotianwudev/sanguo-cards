@@ -450,7 +450,7 @@ func _show_square(s: Dictionary) -> void:
 	var buttons := VBoxContainer.new()
 	buttons.add_theme_constant_override("separation", 10)
 	buttons.custom_minimum_size = Vector2(250, 0)
-	buttons.alignment = BoxContainer.ALIGNMENT_END
+	buttons.alignment = BoxContainer.ALIGNMENT_BEGIN if _cg_mode else BoxContainer.ALIGNMENT_END  # CG strip: up beside the text
 	row.add_child(buttons)
 
 	var lines: Array = []
