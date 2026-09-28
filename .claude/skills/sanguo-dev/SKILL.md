@@ -56,7 +56,9 @@ Story CGs: squares, events and interlude scenes take `"cg": "<key>"`; the art go
 the screen, the text box sits over it, a top-bar tab switches back to the map); the interlude shows it full screen.
 Story text plays one line per click (visual-novel style) on event / choose / ？ squares and in interludes; the
 buttons appear after the last line; 跳过 shows everything, 隐藏 (CG mode) hides the text box until the next click.
-Keep each story line short enough to read as one subtitle. Add the key and what to draw to `CARD-DESIGN.md` §8b.
+Keep each story line short enough to read as one subtitle.
+Never replay a scene at a choice or fork: give the square (or event) a `prompt` — one line that sums up the
+options (「孙策主张正面强攻，周瑜主张调虎离山。听谁的？」) — shown beside the buttons. Add the key and what to draw to `CARD-DESIGN.md` §8b.
 Battle CGs (Rance X style: the enemy in its scene): the owner supplies one picture per battle — `pics/source/battles/<scenario id>.jpg`, registered in
 `pics/art.json` "battles", built by `sanguo-art` into `godot/data/art/battle/`; the battle screen paints it (washed) when
 present. For any other art a feature needs, don't wait for it: add the requirement to `CARD-DESIGN.md` (and a brief).

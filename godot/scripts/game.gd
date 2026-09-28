@@ -178,6 +178,14 @@ func demo(name: String) -> void:
 			Quests.resolve(q, save, rng, 0)
 			Quests.move(q, save, "wake")
 			show_screen(MapScreen.new())
+		"fork":  # after 富春: follow 周瑜 or 孙策
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng, 0)
+			for sid in ["wake", "bandage", "village"]:
+				Quests.move(q, save, sid)
+				Quests.resolve(q, save, rng)
+			show_screen(MapScreen.new())
 		"era":  # the very first choice, clicked to its last line
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)

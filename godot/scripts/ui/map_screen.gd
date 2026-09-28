@@ -28,7 +28,8 @@ var _dlg_i := -1
 var _dlg_text: RichTextLabel
 var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
-var _dlg_recap := false  # a choice follows: once the lines are read, show them all beside the options
+var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
+var _dlg_prompt := ""  # the one-line summary shown at the choice (square / event "prompt")
 var _sheet_hidden := false
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _sheet_box: VBoxContainer
@@ -451,7 +452,7 @@ func _show_square(s: Dictionary) -> void:
 	var buttons := VBoxContainer.new()
 	buttons.add_theme_constant_override("separation", 10)
 	buttons.custom_minimum_size = Vector2(250, 0)
-	buttons.alignment = BoxContainer.ALIGNMENT_BEGIN if _cg_mode else BoxContainer.ALIGNMENT_END  # CG strip: up beside the text
+	buttons.alignment = BoxContainer.ALIGNMENT_BEGIN  # top-down, so several options always fit
 	row.add_child(buttons)
 
 	var lines: Array = []
@@ -460,6 +461,8 @@ func _show_square(s: Dictionary) -> void:
 	var body := "\n\n".join(lines)
 	_dlg_lines = []
 	_dlg_i = -1
+	_update_tools()
+	var prompt: String = ev.get("prompt", s["prompt"]).replace("{lord}", save.lord_name)
 
 	if save.resolved:
 		var opts := Quests.next_options(q, save)
@@ -486,8 +489,8 @@ func _show_square(s: Dictionary) -> void:
 			buttons.add_child(go)
 			Kit.focus(go)
 		else:
-			text.text = body + "\n\n[color=%s]点击发光的格子前进[/color]" % Kit.c("green").to_html()
-			text.scroll_following = true  # the last lines set up the fork
+			# a fork: sum it up instead of replaying the scene
+			text.text = (prompt if prompt != "" else "前面有几条路，选一条走。") + "\n\n[color=%s]点击发光的格子前进[/color]" % Kit.c("green").to_html()
 			var first := true
 			for n in opts:
 				var go := Kit.button("前往 %s %s" % [_glyph(n), n["label"] if n["label"] != "" else _type_name(n)])
@@ -577,6 +580,7 @@ func _show_square(s: Dictionary) -> void:
 		_dlg_text = text
 		_dlg_buttons = buttons
 		_dlg_recap = s["type"] == "choose" or s["type"] == "mystery"
+		_dlg_prompt = prompt
 		_dlg_i = 0
 		text.scroll_active = false
 		text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
@@ -606,7 +610,10 @@ func _dialog_show() -> void:
 func _dialog_skip() -> void:
 	if _dlg_i < 0:
 		return
-	_dlg_text.text = "\n".join(_dlg_lines) if _dlg_recap else "\n\n".join(_dlg_lines)
+	if _dlg_recap and _dlg_prompt != "":  # at a choice: the summary, not the scene again
+		_dlg_text.text = _dlg_prompt
+	else:
+		_dlg_text.text = "\n".join(_dlg_lines) if _dlg_recap else "\n\n".join(_dlg_lines)
 	_dlg_text.scroll_active = true
 	_dlg_text.scroll_following = true  # land on the last lines — the ones that set up the choice
 	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
