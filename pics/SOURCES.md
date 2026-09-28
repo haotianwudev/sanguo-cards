@@ -16,7 +16,6 @@
 | `diaochan` | source/public-domain/diaochan.jpg | [链接](https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg) | Public domain | Unknown author |
 | `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |
 | `guanyu` | source/public-domain/guanyu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Guanyu-1.jpg) | Public domain | UnknownUnknown , uploaded by Tiangong83 on <a class="external t |
-| `huanggai` | source/public-domain/huanggai.jpg | [链接](https://commons.wikimedia.org/wiki/File:HuangGai.jpg) | Public domain | Unknown authorUnknown author |
 | `huangzhong` | source/public-domain/huangzhong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Huang_Zhong_Portrait.jpg) | Public domain | — |
 | `jianyong` | source/public-domain/jianyong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg) | CC BY-SA 4.0 | Morio |
 | `liaohua` | source/public-domain/liaohua.jpg | [链接](https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg) | CC BY-SA 3.0 | SamSpade21 |
@@ -56,5 +55,15 @@
 | `fushui_xintu` | source/soldiers/fushui_xintu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `baie_hu` | source/generals/baie_hu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gongnv` | source/soldiers/gongnv.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `handang` | source/generals/handang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huanggai` | source/generals/huanggai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lijue` | source/generals/lijue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `guosi` | source/generals/guosi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `liru` | source/generals/liru.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `feixiong_bing` | source/soldiers/feixiong_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiliang_scout` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiliang_bing` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangfei` | source/generals/zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |

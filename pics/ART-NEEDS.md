@@ -51,6 +51,9 @@
 | ✅ 正式 | `yezhu_bing` | 野猪兵（野猪的卡） |
 | ✅ 正式 | `danyang` | 丹阳兵 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
+| ⬜ 缺 | `jiangdong_gong` | 江东弓手 |
+| ⬜ 缺 | `liehu` | 山中猎户 |
+| ⬜ 缺 | `yuenv_gong` | 越女弓手 |
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
@@ -74,25 +77,25 @@
 
 | 状态 | key | 用在 |
 |---|---|---|
-| ⬜ 缺 | `tangji` | 事件「落难贵人」 |
+| ✅ 正式 | `tangji` | 事件「落难贵人」 |
 | ✅ 正式 | `zumao` | 剧情立绘 |
 | ✅ 正式 | `sunjian` | 剧情立绘 |
 | ✅ 正式 | `dongbai` | 剧情立绘 |
 | 🟡 占位 | `lvbu` | 剧情立绘 |
 | 🟡 占位 | `liubei` | 剧情立绘 |
 | 🟡 占位 | `guanyu` | 剧情立绘 |
-| ⬜ 缺 | `zhangfei` | 剧情立绘 |
+| ✅ 正式 | `zhangfei` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
 
 | 状态 | key | 敌人 |
 |---|---|---|
-| ⬜ 缺 | `xiliang_bing` | 西凉斥候 |
-| ⬜ 缺 | `guosi` | 郭汜 |
+| ✅ 正式 | `xiliang_bing` | 西凉斥候 |
+| ✅ 正式 | `guosi` | 郭汜 |
 | ✅ 正式 | `huaxiong` | 华雄 |
-| ⬜ 缺 | `feixiong_bing` | 飞熊军 |
-| ⬜ 缺 | `liru` | 李儒 |
-| ⬜ 缺 | `lijue` | 李傕 |
+| ✅ 正式 | `feixiong_bing` | 飞熊军 |
+| ✅ 正式 | `liru` | 李儒 |
+| ✅ 正式 | `lijue` | 李傕 |
 
 能拿到的卡
 
@@ -139,7 +142,7 @@
 | 🟡 占位 | `sunshangxiang` | 孙尚香（SSR） |
 | 🟡 占位 | `dianwei` | 典韦（SSR） |
 | 🟡 占位 | `zhugeliang` | 诸葛亮（SSR） |
-| 🟡 占位 | `huanggai` | 黄盖（SR） |
+| ✅ 正式 | `huanggai` | 黄盖（SR） |
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
 | 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
@@ -152,13 +155,14 @@
 | ⬜ 缺 | `wangping` | 王平（R） |
 | ⬜ 缺 | `lidian` | 李典（R） |
 | ⬜ 缺 | `jiangqin` | 蒋钦（R） |
+| ⬜ 缺 | `chenwu` | 陈武（R） |
 | 🟡 占位 | `jianyong` | 简雍（R） |
 | 🟡 占位 | `mizhu` | 糜竺（R） |
 | ⬜ 缺 | `sunqian` | 孙乾（R） |
 | ⬜ 缺 | `guanhai` | 管亥（R） |
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
 | ✅ 正式 | `chengpu` | 程普·程公（R） |
-| ⬜ 缺 | `handang` | 韩当（R） |
+| ✅ 正式 | `handang` | 韩当（R） |
 | ⬜ 缺 | `zhuzhi` | 朱治·君理（R） |
 | ⬜ 缺 | `wujing` | 吴景（R） |
 | ⬜ 缺 | `sunben` | 孙贲（R） |

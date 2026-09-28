@@ -13,7 +13,6 @@
     "diaochan": {"src": "source/public-domain/diaochan.jpg", "face": [0.55, 0.22], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg", "license": "Public domain", "artist": "Unknown author"},
     "ganning": {"src": "source/public-domain/ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:GanNing.jpg", "license": "Public domain", "artist": "Unknown authorUnknown author"},
     "guanyu": {"src": "source/public-domain/guanyu.jpg", "face": [0.5, 0.35], "head": 0.33, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Guanyu-1.jpg", "license": "Public domain", "artist": "UnknownUnknown , uploaded by Tiangong83 on <a class=\"external t"},
-    "huanggai": {"src": "source/public-domain/huanggai.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:HuangGai.jpg", "license": "Public domain", "artist": "Unknown authorUnknown author"},
     "huangzhong": {"src": "source/public-domain/huangzhong.jpg", "face": [0.34, 0.13], "head": 0.07, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Huang_Zhong_Portrait.jpg", "license": "Public domain", "artist": "—"},
     "jianyong": {"src": "source/public-domain/jianyong.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg", "license": "CC BY-SA 4.0", "artist": "Morio"},
     "liaohua": {"src": "source/public-domain/liaohua.jpg", "face": [0.45, 0.25], "head": 0.1, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg", "license": "CC BY-SA 3.0", "artist": "SamSpade21"},
@@ -52,7 +51,17 @@
     "yanzhihu": {"src": "source/generals/yanzhihu.jpg", "face": [0.54, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "fushui_xintu": {"src": "source/soldiers/fushui_xintu.jpg", "face": [0.50, 0.26], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "baie_hu": {"src": "source/generals/baie_hu.jpg", "face": [0.50, 0.41], "head": 0.22, "license": "用户提供（Gemini 生成）"},
-    "gongnv": {"src": "source/soldiers/gongnv.jpg", "face": [0.52, 0.18], "head": 0.20, "license": "用户提供（Gemini 生成）"}
+    "gongnv": {"src": "source/soldiers/gongnv.jpg", "face": [0.52, 0.18], "head": 0.20, "license": "用户提供（Gemini 生成）"},
+    "handang": {"src": "source/generals/handang.jpg", "face": [0.50, 0.21], "head": 0.21, "license": "用户提供（Gemini 生成）"},
+    "huanggai": {"src": "source/generals/huanggai.jpg", "face": [0.53, 0.21], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "lijue": {"src": "source/generals/lijue.jpg", "face": [0.51, 0.27], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "guosi": {"src": "source/generals/guosi.jpg", "face": [0.51, 0.24], "head": 0.21, "license": "用户提供（Gemini 生成）"},
+    "liru": {"src": "source/generals/liru.jpg", "face": [0.50, 0.26], "head": 0.20, "license": "用户提供（Gemini 生成）"},
+    "feixiong_bing": {"src": "source/soldiers/feixiong_bing.jpg", "face": [0.55, 0.17], "head": 0.18, "license": "用户提供（Gemini 生成）"},
+    "xiliang_scout": {"src": "source/soldiers/xiliang_scout.jpg", "face": [0.52, 0.22], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "xiliang_bing": {"src": "source/soldiers/xiliang_scout.jpg", "face": [0.52, 0.22], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "zhangfei": {"src": "source/generals/zhangfei.jpg", "face": [0.50, 0.22], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "tangji": {"src": "source/generals/tangji.jpg", "face": [0.50, 0.23], "head": 0.24, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {

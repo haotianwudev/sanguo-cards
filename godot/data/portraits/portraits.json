@@ -12,7 +12,6 @@
   "diaochan": {"file": "diaochan.jpg", "face": [0.55, 0.22], "head": 0.07, "placeholder": true},
   "ganning": {"file": "ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true},
   "guanyu": {"file": "guanyu.jpg", "face": [0.5, 0.35], "head": 0.33, "placeholder": true},
-  "huanggai": {"file": "huanggai.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true},
   "huangzhong": {"file": "huangzhong.jpg", "face": [0.34, 0.13], "head": 0.07, "placeholder": true},
   "jianyong": {"file": "jianyong.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true},
   "liaohua": {"file": "liaohua.jpg", "face": [0.45, 0.25], "head": 0.1, "placeholder": true},
@@ -51,5 +50,15 @@
   "yanzhihu": {"file": "yanzhihu.jpg", "face": [0.54, 0.28], "head": 0.22},
   "fushui_xintu": {"file": "fushui_xintu.jpg", "face": [0.5, 0.26], "head": 0.22},
   "baie_hu": {"file": "baie_hu.jpg", "face": [0.5, 0.41], "head": 0.22},
-  "gongnv": {"file": "gongnv.jpg", "face": [0.52, 0.18], "head": 0.2}
+  "gongnv": {"file": "gongnv.jpg", "face": [0.52, 0.18], "head": 0.2},
+  "handang": {"file": "handang.jpg", "face": [0.5, 0.21], "head": 0.21},
+  "huanggai": {"file": "huanggai.jpg", "face": [0.53, 0.21], "head": 0.22},
+  "lijue": {"file": "lijue.jpg", "face": [0.51, 0.27], "head": 0.22},
+  "guosi": {"file": "guosi.jpg", "face": [0.51, 0.24], "head": 0.21},
+  "liru": {"file": "liru.jpg", "face": [0.5, 0.26], "head": 0.2},
+  "feixiong_bing": {"file": "feixiong_bing.jpg", "face": [0.55, 0.17], "head": 0.18},
+  "xiliang_scout": {"file": "xiliang_scout.jpg", "face": [0.52, 0.22], "head": 0.22},
+  "xiliang_bing": {"file": "xiliang_bing.jpg", "face": [0.52, 0.22], "head": 0.22},
+  "zhangfei": {"file": "zhangfei.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "tangji": {"file": "tangji.jpg", "face": [0.5, 0.23], "head": 0.24}
 }
