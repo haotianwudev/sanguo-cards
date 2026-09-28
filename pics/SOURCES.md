@@ -42,4 +42,5 @@
 | `huangjin_nanxia` | source/soldiers/huangjin_nanxia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `dongbai` | source/generals/dongbai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zumao` | source/generals/zumao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huaxiong` | source/generals/huaxiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |

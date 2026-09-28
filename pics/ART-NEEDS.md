@@ -72,7 +72,7 @@
 |---|---|---|
 | ⬜ 缺 | `xiliang_bing` | 西凉斥候 |
 | ⬜ 缺 | `guosi` | 郭汜 |
-| ⬜ 缺 | `huaxiong` | 华雄 |
+| ✅ 正式 | `huaxiong` | 华雄 |
 | ⬜ 缺 | `feixiong_bing` | 飞熊军 |
 | ⬜ 缺 | `liru` | 李儒 |
 | ⬜ 缺 | `lijue` | 李傕 |

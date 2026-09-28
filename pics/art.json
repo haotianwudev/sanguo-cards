@@ -38,7 +38,8 @@
     "shuizei_bing": {"src": "source/soldiers/shuizei_bing.jpg", "face": [0.50, 0.19], "head": 0.20, "license": "用户提供（Gemini 生成）"},
     "huangjin_nanxia": {"src": "source/soldiers/huangjin_nanxia.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "dongbai": {"src": "source/generals/dongbai.jpg", "face": [0.50, 0.38], "head": 0.22, "license": "用户提供（Gemini 生成）"},
-    "zumao": {"src": "source/generals/zumao.jpg", "face": [0.50, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"}
+    "zumao": {"src": "source/generals/zumao.jpg", "face": [0.50, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
+    "huaxiong": {"src": "source/generals/huaxiong.jpg", "face": [0.51, 0.22], "head": 0.20, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {

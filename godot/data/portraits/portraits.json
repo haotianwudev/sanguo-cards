@@ -37,5 +37,6 @@
   "shuizei_bing": {"file": "shuizei_bing.jpg", "face": [0.5, 0.19], "head": 0.2},
   "huangjin_nanxia": {"file": "huangjin_nanxia.jpg", "face": [0.52, 0.28], "head": 0.22},
   "dongbai": {"file": "dongbai.jpg", "face": [0.5, 0.38], "head": 0.22},
-  "zumao": {"file": "zumao.jpg", "face": [0.5, 0.28], "head": 0.22}
+  "zumao": {"file": "zumao.jpg", "face": [0.5, 0.28], "head": 0.22},
+  "huaxiong": {"file": "huaxiong.jpg", "face": [0.51, 0.22], "head": 0.2}
 }
