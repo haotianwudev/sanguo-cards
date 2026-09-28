@@ -135,7 +135,7 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 			save.relics = ["hupi", "yuxi"]
 			save.danger = 1
-			save.offer = ["gudingdao", "bingfa", "chitu"]
+			save.offer = ["shoushihe", "bingfa", "dunjia"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
 		"recap":  # the chapter recap at the end of chapter 2
@@ -164,7 +164,7 @@ func demo(name: String) -> void:
 				save.grant_card(c)
 			for c in ["danyang", "danyang", "changsha", "gongnv", "xiliang_nvbing"]:
 				save.grant_card(c)
-			save.kept_relics = ["jiujia", "hupi", "chitu", "bingfa", "gudingdao", "yuxi"]  # a run starts with these
+			save.kept_relics = ["shoushihe", "jiunang", "bingfu", "bingfa", "gudingdao", "dunjia"]  # a run starts with these
 			save.relics = save.kept_relics.duplicate()
 			var m := MapScreen.new()
 			show_screen(m)

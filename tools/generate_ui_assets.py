@@ -750,7 +750,11 @@ def draw_relic_motif(draw: ImageDraw.Draw, motif: str, center: float, S: int, ac
         draw.polygon([(cx, cy - 45), (cx + 38, cy + 30), (cx - 38, cy + 30)], fill=gold)
 
 def generate_relic(relic_id: str, out_path: Path):
-    if relic_id not in RELIC_MOTIFS or relic_id in ("gudingdao",):
+    if relic_id not in RELIC_MOTIFS or relic_id in (
+        "gudingdao", "shoushihe", "jiunang", "bingfu", "hushenfu",
+        "xiangnang", "jinfan", "bingfa", "yushan", "zhangu",
+        "chize", "qinggang", "bazhen", "dunjia",
+    ):
         return
     name, motif, rarity, char = RELIC_MOTIFS[relic_id]
     cfg = RELIC_TIER_STYLES[rarity]

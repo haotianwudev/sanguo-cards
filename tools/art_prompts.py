@@ -346,7 +346,12 @@ def main() -> None:
            "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
            ]
     maps_done = {k for k, v in art.get("maps", {}).items() if "生成" not in v.get("license", "")}
-    delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": {"gudingdao"}}
+    relics_done = {
+        "gudingdao", "shoushihe", "jiunang", "bingfu", "hushenfu",
+        "xiangnang", "jinfan", "bingfa", "yushan", "zhangu",
+        "chize", "qinggang", "bazhen", "dunjia",
+    }
+    delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done}
     todo = [n for n in NEXT if n[1] not in delivered[n[0]]]
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
