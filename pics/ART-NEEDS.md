@@ -48,7 +48,6 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ✅ 正式 | `yezhu_bing` | 野猪兵（野猪的卡） |
 | ✅ 正式 | `danyang` | 丹阳兵 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
 | ⬜ 缺 | `jiangdong_gong` | 江东弓手 |

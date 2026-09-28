@@ -100,8 +100,6 @@ PORTRAITS = {
                 "Crouched and snarling, about to pounce, claws out."),
     "boar": ("a huge wild boar (野猪)", "Massive bristly dark-brown boar with long curved tusks and small angry red eyes.",
              "No clothing; mud splashed on its flanks.", "Head lowered, charging straight at the viewer."),
-    "yezhu_bing": ("a boar-rider soldier (野猪兵)", "Stocky, grinning peasant soldier in his 20s.",
-                   "Patched leather armor and a straw hat.", "Riding a big wild boar and waving a short spear, charging."),
     "lijue": ("Li Jue (李傕), the brutal Xiliang general who burned Luoyang",
               "Heavy-set, cruel-faced man in his 30s with a scarred cheek, thick stubble and a sneer.",
               "Dark Xiliang iron scale armor with fur trim, a horsehair-crested helmet.",
