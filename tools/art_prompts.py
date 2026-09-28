@@ -157,6 +157,22 @@ CGS = {
 }
 
 
+# hand-written prompts that replace the template for a key (e.g. the owner's own prompt for a scene).
+# They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
+OVERRIDES = {
+    "i1_sewing": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG第一章通关幕间事件图：【吴夫人的针线 · 窗里温存与窗外受气包】
+- 室内温馨核心互动（暖光主舞台）：
+  - 深夜的富春庄园寝房内，案几上的油灯洒下暖洋洋的橘色柔光。
+  - 【吴夫人（宠溺调侃）】：三十多岁的绝色美妇身穿素雅柔顺的居家对襟襦裙，青丝微挽。膝头放着一件正缝制到一半的厚实保暖冬衣，手中捏着细长的缝衣针，正笑靥如花、极其宠溺地拿圆润的针尾轻轻敲了一下主角的额头，眼神满是亲昵与调侃。
+  - 【主角（心满意足）】：青年主角坐在她身旁，微笑着伸手让夫人比量衣袖长短，桌边搁着他刚端进来的一大碗热气腾腾的枸杞鸡汤与竹编针线笸箩。
+- 窗外喜剧反差神笔（画龙点睛的笑点）：
+  - 透过室内敞开的雕花木窗，映出窗外清冷的青蓝月夜庭院：
+  - 【可怜的孙策】：少年孙策正像个被遗弃的小狗一样，孤零零蹲在墙根底下的泥地里。手里死死抓着自己那件线头乱飞、歪歪扭扭还没缝好的烂棉袄，鼓着圆滚滚的包子脸，眼泪汪汪又咬牙切齿地透过窗户缝偷看屋里亲昵的两人，委屈酸楚溢出屏幕！
+- 构图光影与画风：
+  - 极富戏剧魅力的双重冷暖光影：屋内是充满熏香、热汤与针线温情的金黄暖光，屋外是照着委屈孙策的清冷月光。
+  - 规格：横版 16:9 比例，日系经典战术卡牌RPG剧情CG插画风（赛璐珞上色带精良墨线，类似兰斯10经典幕间短剧插画），人物神态极其生动鲜活，温馨甜蜜中带着无厘头爆笑！""",
+}
+
 def portrait_prompt(p: tuple) -> str:
     name, look, clothes, weapon = p
     return (f"A vertical character portrait of {name}.{NL}Appearance: {look}{NL}Armor & Clothing: {clothes}{NL}"
@@ -191,17 +207,22 @@ def main() -> None:
         if key in done:
             continue
         status = "🟡 换掉占位" if key in art["portraits"] else "⬜ 缺"
-        out += [f"### `{key}` {status}", "", "```", portrait_prompt(p), "```", ""]
+        out += [f"### `{key}` {status}", "", "```", OVERRIDES.get(key) or portrait_prompt(p), "```", ""]
     out += ["## 战斗 CG（横版 16:9，每场战斗一张）", ""]
     for key, scene in BATTLES.items():
         if key in art.get("battles", {}):
             continue
-        out += [f"### `{key}`", "", "```", battle_prompt(scene), "```", ""]
+        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or battle_prompt(scene), "```", ""]
     out += ["## 剧情插图 CG（横版 16:9）", ""]
     for key, scene in CGS.items():
         if key in art.get("cgs", {}):
             continue
-        out += [f"### `{key}`", "", "```", cg_prompt(scene), "```", ""]
+        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+    done_overrides = [k for k in OVERRIDES if k in art.get("cgs", {}) or k in art.get("battles", {}) or k in done]
+    if done_overrides:
+        out += ["## 已出图的提示词存档（重画时从这里开始）", ""]
+        for key in done_overrides:
+            out += [f"### `{key}` ✅", "", "```", OVERRIDES[key], "```", ""]
     (PICS / "ART-PROMPTS.md").write_text(NL.join(out), "utf-8", newline=NL)
     print(f"wrote {PICS / 'ART-PROMPTS.md'}")
 

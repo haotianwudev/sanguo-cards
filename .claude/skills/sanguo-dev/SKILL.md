@@ -65,6 +65,9 @@ present. For any other art a feature needs, don't wait for it: add the requireme
 (portraits: name / appearance / armor & clothing / weapon; battles and story CGs: one scene line — composition and style
 are fixed templates so the set stays consistent; women are always written as adults) and run `python tools/art_prompts.py`
 to regenerate `pics/ART-PROMPTS.md`. Keep the prompt consistent with the brief in `CARD-DESIGN.md` §7 and the story text.
+When the owner hands over a prompt of their own (often Chinese, with 【角色】 sections, a staging note and the gag),
+put it in `OVERRIDES` under its key — it replaces the template and stays archived after the art exists.
+When new art arrives, look at it and rewrite that scene's lines to match what's drawn.
 
 Adding a portrait, checklist:
 1. File name = the portrait key the game looks up: a card's `person` (or its id), or an enemy's `portrait`

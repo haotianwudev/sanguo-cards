@@ -2,7 +2,7 @@
   "_comment": "Scenes between chapters, keyed by the quest just finished. Each scene: title, portraits, text; optional requires / unless = a recorded line (see record / record_win / record_lose in story.json) the player must / must not have. {lord} is the player's name. cg: a full-screen illustration key (pics/art.json cgs).",
   "after": {
     "prologue": [
-      {"title": "吴夫人的针线", "portraits": ["wuguotai"], "text": ["出发前一夜，吴夫人屋里的灯亮到很晚。", "你端着一碗热汤进去，看见她在灯下缝衣服，针脚又密又匀——是给你的冬衣。", "「北边冷，」她头也不抬，「你这孩子，来的时候连件厚衣裳都没有。」", "{lord}在她身边坐下：「夫人，您手真巧。要不……以后我的衣服都归您管？」", "吴夫人拿针尾敲了一下你的额头：「想得美。」又把缝好的袖子往你胳膊上比了比，「嗯，长了半寸，改改。」", "窗外，孙策蹲在墙根底下，委屈地看着自己那件还没缝完的。"], "cg": "i1_sewing"},
+      {"title": "吴夫人的针线", "portraits": ["wuguotai"], "text": ["出发前一夜，吴夫人屋里的油灯亮到很晚。", "你端着一大碗热腾腾的枸杞鸡汤进去。她坐在窗边，膝上摊着一件带毛边的厚冬衣，针脚又密又匀——是给你的。", "「北边冷，」她头也不抬，「你这孩子，来的时候连件厚衣裳都没有。」", "{lord}在她身边坐下：「夫人，您手真巧。要不……以后我的衣服都归您管？」", "吴夫人笑眯眯地拿针尾敲了一下你的额头：「想得美。」", "她拉过你的胳膊，把缝好的袖子往上一比：「嗯，长了半寸，改改。」", "窗外月光底下，孙策蹲在墙根的泥地里，死死攥着自己那件线头乱飞、缝得歪歪扭扭的破棉袄。", "他眼泪汪汪，又咬着牙，从窗缝里往屋里瞅：「……我也要。」"], "cg": "i1_sewing"},
       {"title": "私房钱", "portraits": ["zhouyu"], "requires": "跟周瑜上山，挖出了他的私房钱", "text": ["半夜，你看见周瑜扛着小锄头，鬼鬼祟祟地往后山走——又是那个陶罐。", "「换个地方埋，」他一脸严肃，「知道的人太多了。」", "他盯着你：「你发誓，谁也不说。」你举手发誓。他点点头，翻开账本：「保密费，每月五文，从你那边扣。」"]},
       {"title": "吹牛", "portraits": ["sunce"], "requires": "定计：孙策正面强攻", "text": ["孙策在村口给小孩们讲他是怎么一枪挑翻水寨寨门的，越讲越神，最后变成了一枪挑翻了三座寨子。", "你路过时他冲你挤眼睛：「对吧？三座！」小孩们齐刷刷地看向你。你只好点头。"]}
     ],
