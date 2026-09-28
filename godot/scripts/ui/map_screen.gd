@@ -21,6 +21,7 @@ var _sheet: PanelContainer
 var _cg_view: TextureRect  # Rance X style: a story CG fills the screen, the text box sits over it
 var _cg_tab: Button  # switch between the CG and the map
 var _cg_mode := false
+var _cg_bar: ColorRect  # keeps the top bar readable over a CG
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _sheet_box: VBoxContainer
 var _hp_bar: ProgressBar
@@ -91,6 +92,14 @@ func _ready() -> void:
 	_cg_view.visible = false
 	add_child(_cg_view)
 	move_child(_cg_view, 0)
+	_cg_bar = ColorRect.new()
+	_cg_bar.color = Kit.c("bg")
+	_cg_bar.color.a = 0.82
+	_cg_bar.size = Vector2(1280, 70)
+	_cg_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_cg_bar.visible = false
+	add_child(_cg_bar)
+	move_child(_cg_bar, 1)
 	_cg_tab = Kit.button("查看地图", "purple")
 	_cg_tab.visible = false
 	_cg_tab.pressed.connect(func():
@@ -638,6 +647,7 @@ func _open_offer(s: Dictionary) -> void:
 func _apply_cg_mode() -> void:
 	## CG mode: the illustration fills the screen, the map hides, the text box turns translucent over the picture
 	_cg_view.visible = _cg_mode
+	_cg_bar.visible = _cg_mode
 	_scroll.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
 	var bg := Kit.c("card")

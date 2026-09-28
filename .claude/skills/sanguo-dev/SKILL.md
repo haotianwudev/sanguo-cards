@@ -84,6 +84,9 @@ Adding a portrait, checklist:
   per-square formatter used before (`dump_q`), never `json.dump(indent=2)` the whole file.
 - GDScript: `:=` can't infer from Variant (`dict["x"]`, `array.filter(...).size()`) — write `var n: int = ...`.
   Two `var` of the same name in one function is a parse error. Lambdas can't reassign outer locals.
+- **Never overwrite real art to test a display path.** To try a CG / background with a stand-in picture, use a key
+  nothing uses (e.g. `test_cg`) and point a demo at it — `c1_wake.jpg` was once clobbered by a stand-in and had to be
+  restored from git. Check `git status` for deleted/modified art before committing.
 - Never commit with failing tests: chain `... | grep passed` checks don't stop `&&` — look at the result first.
 
 ## How the game is modelled (add things through data)
