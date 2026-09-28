@@ -49,4 +49,5 @@
 | `huatuo` | source/generals/huatuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangjin_nvyi` | source/soldiers/huangjin_nvyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiliang_nvbing` | source/soldiers/xiliang_nvbing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yuji` | source/generals/yuji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
