@@ -158,3 +158,12 @@ func test_dupes_survive_a_save_roundtrip() -> void:
 	s.take("lvmeng")
 	var back := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
 	check_eq(back.tier("lvmeng"), 1)
+
+
+func test_story_lines_find_their_speaker() -> void:
+	check_eq(Kit.speaker_key("{lord}：「夫人……」"), "lord")
+	check_eq(Kit.speaker_key("孙策把枪往地上一戳：「还等什么！」"), "sunce")
+	check_eq(Kit.speaker_key("周瑜摇头：「水寨易守难攻。」"), "zhouyu")
+	check_eq(Kit.speaker_key("吴夫人笑眯眯地拿针尾敲了一下你的额头：「想得美。」"), "wuguotai")
+	check_eq(Kit.speaker_key("孙策：「娘，凭什么他三块？」吴夫人：「他瘦。」"), "sunce", "the first speaker wins")
+	check_eq(Kit.speaker_key("当夜，江上一排贼船亮起火把。"), "", "narration: nobody")

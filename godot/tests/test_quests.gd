@@ -789,3 +789,9 @@ func test_wu_gives_the_hero_sun_jians_old_armor() -> void:
 	check(s.relics.has("jiujia") and s.run_records.has("穿上了孙坚的旧甲"))
 	for seed_value in 20:
 		check(not Quests.relic_offer(s, rng(seed_value)).has("jiujia"), "never offered at random")
+
+
+func test_every_interlude_click_turns_the_page() -> void:
+	# the full-screen backdrop must let clicks through to the overlay, which turns the page
+	var src := FileAccess.get_file_as_string("res://scripts/ui/interlude_overlay.gd")
+	check(src.contains("bg.mouse_filter = Control.MOUSE_FILTER_IGNORE"), "the backdrop doesn't swallow clicks")

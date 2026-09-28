@@ -187,6 +187,38 @@ static func portrait_key(card_id: String) -> String:
 	return ""
 
 
+const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "公瑾": "zhouyu", "文台": "sunjian", "主公": "lord",
+	"左慈": "zuoci", "胡玉": "langlijiao", "唐周": "yaodao", "何仪": "heyi", "董白": "dongbai", "刘备": "liubei",
+	"关羽": "guanyu", "张飞": "zhangfei", "吕布": "lvbu", "华佗": "huatuo", "于吉": "yuji", "祖茂": "zumao"}
+static var _names: Dictionary = {}
+
+
+static func speaker_key(raw_line: String) -> String:
+	## The portrait for whoever speaks (or leads) a story line: {lord} first, then a name right before 「 / ：,
+	## then the first known name in the line. "" when nobody is recognised.
+	if raw_line.begins_with("{lord}"):
+		return "lord"
+	if _names.is_empty():
+		for cid in GameData.get_db().cards:
+			var key := portrait_key(cid)
+			if key != "":
+				_names[GameData.get_db().cards[cid]["name"].split("·")[0]] = key
+		for n in ALIASES:
+			_names[n] = ALIASES[n]
+	var best := ""
+	var best_at := 1 << 30
+	for n in _names:
+		var at := raw_line.find(n)
+		if at < 0 or not _portrait_index().has(_names[n]):
+			continue
+		var speaks := raw_line.substr(at + n.length(), 6).find("：") >= 0 or raw_line.substr(at + n.length(), 4).find("「") >= 0
+		var score := at - (1000000 if speaks else 0)
+		if score < best_at:
+			best_at = score
+			best = _names[n]
+	return best
+
+
 static func enemy_portrait_key(enemy: Dictionary) -> String:
 	var key: String = enemy.get("portrait", "")
 	if key == "":

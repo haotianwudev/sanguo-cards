@@ -19,6 +19,7 @@ func _ready() -> void:
 	var bg := ColorRect.new()
 	bg.color = Color(0.08, 0.07, 0.06, 1.0)
 	bg.size = size
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE  # clicks go to the overlay, which turns the page
 	add_child(bg)
 	gui_input.connect(func(e):
 		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
