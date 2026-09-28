@@ -6,6 +6,7 @@
     "lord": {"src": "source/generals/lord.jpg", "face": [0.50, 0.165], "head": 0.18, "license": "用户提供（Gemini 生成）"},
     "sunce": {"src": "source/generals/sunce.jpg", "face": [0.49, 0.28], "head": 0.13, "license": "用户提供", "note": "原图丢失，这是游戏里保留的 640px 版本；有高清原图就替换同名文件"},
     "zhouyu": {"src": "source/generals/zhouyu.jpg", "face": [0.51, 0.285], "head": 0.18, "license": "用户提供（Gemini 生成）"},
+    "zhouyu_chibi": {"src": "source/generals/zhouyu_chibi.jpg", "face": [0.50, 0.24], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "wuguotai": {"src": "source/generals/wuguotai.jpg", "face": [0.52, 0.28], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "sunjian": {"src": "source/generals/sunjian.jpg", "face": [0.49, 0.22], "head": 0.17, "license": "用户提供"},
     "dianwei": {"src": "source/public-domain/dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true, "source": "https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg", "license": "Public domain", "artist": "Unknown author"},

@@ -187,7 +187,7 @@ static func portrait_key(card_id: String) -> String:
 	return ""
 
 
-const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "公瑾": "zhouyu", "文台": "sunjian", "主公": "lord",
+const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce", "公瑾": "zhouyu", "周瑜": "zhouyu", "文台": "sunjian", "孙坚": "sunjian", "主公": "lord",
 	"左慈": "zuoci", "胡玉": "langlijiao", "唐周": "yaodao", "何仪": "heyi", "董白": "dongbai", "刘备": "liubei",
 	"关羽": "guanyu", "张飞": "zhangfei", "吕布": "lvbu", "华佗": "huatuo", "于吉": "yuji", "祖茂": "zumao"}
 static var _names: Dictionary = {}
