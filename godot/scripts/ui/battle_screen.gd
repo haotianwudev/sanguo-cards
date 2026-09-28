@@ -50,6 +50,22 @@ func _ready() -> void:
 
 func _build() -> void:
 	var e: Dictionary = b.enemy["data"]
+	# battle background: data/art/battle/<scenario id>.jpg (built by `sanguo-art` from pics/art.json "battles")
+	var bg_path := "res://data/art/battle/%s.jpg" % scenario_id
+	if ResourceLoader.exists(bg_path):
+		var bg := TextureRect.new()
+		bg.texture = load(bg_path)
+		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		bg.size = Vector2(1280, 720)
+		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(bg)
+		var wash := ColorRect.new()  # keeps panels and text readable over the painting
+		wash.color = Kit.c("bg")
+		wash.color.a = 0.35
+		wash.size = Vector2(1280, 720)
+		wash.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(wash)
 	# enemy (top-left)
 	var enemy_panel := PanelContainer.new()
 	enemy_panel.position = Vector2(20, 14)

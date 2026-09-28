@@ -194,6 +194,12 @@ static func enemy_portrait_key(enemy: Dictionary) -> String:
 	return key if _portrait_index().has(key) else ""
 
 
+static func cg(key: String) -> Texture2D:
+	## a story illustration (data/art/cg/<key>.jpg), or null until it's drawn
+	var path := "res://data/art/cg/%s.jpg" % key
+	return load(path) if key != "" and ResourceLoader.exists(path) else null
+
+
 static func portrait(key: String, aspect: float, heads: float) -> Texture2D:
 	## A crop of the portrait around the face: `aspect` = width/height of the box, `heads` = head-heights tall.
 	if key == "" or not _portrait_index().has(key):  # no art yet

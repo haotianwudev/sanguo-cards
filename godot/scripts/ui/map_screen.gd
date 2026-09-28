@@ -367,7 +367,15 @@ func _show_square(s: Dictionary) -> void:
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_sheet_box.add_child(row)
 
-	for key in ev.get("portraits", s["portraits"]):
+	var art := Kit.cg(ev.get("cg", s["cg"]))
+	if art != null:  # a story illustration replaces the portraits
+		var pic := TextureRect.new()
+		pic.texture = art
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		pic.custom_minimum_size = Vector2(320, 180)
+		row.add_child(pic)
+	for key in (ev.get("portraits", s["portraits"]) if art == null else []):
 		var tex := Kit.portrait(key, 0.75, 5.0)
 		if tex != null:
 			var tr := TextureRect.new()

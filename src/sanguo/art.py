@@ -35,6 +35,9 @@ OUT = ROOT / "godot" / "data" / "portraits"  # the Godot project is the game now
 MAX_H = 640
 MAP_OUT = ROOT / "godot" / "data" / "art" / "map"
 MAP_H = 800
+BATTLE_OUT = ROOT / "godot" / "data" / "art" / "battle"
+BATTLE_H = 720
+CG_OUT = ROOT / "godot" / "data" / "art" / "cg"
 
 
 def _prep():
@@ -83,9 +86,10 @@ def build(pics: Path = PICS, out: Path = OUT) -> list[str]:
     return built
 
 
-def build_maps(pics: Path = PICS, out: Path = MAP_OUT) -> list[str]:
-    """Chapter map backgrounds: "maps" in art.json, keyed by quest id → godot/data/art/map/<id>.jpg."""
-    cfg = json.loads((pics / "art.json").read_text("utf-8")).get("maps", {})
+def build_maps(pics: Path = PICS, out: Path = MAP_OUT, section: str = "maps", height: int = MAP_H) -> list[str]:
+    """Chapter map backgrounds ("maps", keyed by quest id → godot/data/art/map/<id>.jpg) and battle backgrounds
+    ("battles", keyed by scenario id → godot/data/art/battle/<id>.jpg)."""
+    cfg = json.loads((pics / "art.json").read_text("utf-8")).get(section, {})
     out.mkdir(parents=True, exist_ok=True)
     built = []
     for key, e in cfg.items():
@@ -93,8 +97,8 @@ def build_maps(pics: Path = PICS, out: Path = MAP_OUT) -> list[str]:
         if not src.exists():
             continue
         im = Image.open(src).convert("RGB")
-        if im.height > MAP_H:
-            im = im.resize((round(im.width * MAP_H / im.height), MAP_H), Image.LANCZOS)
+        if im.height > height:
+            im = im.resize((round(im.width * height / im.height), height), Image.LANCZOS)
         im.save(out / f"{key}.jpg", quality=88)
         built.append(key)
     return built
@@ -163,10 +167,26 @@ def write_needs(pics: Path = PICS) -> None:
                     loot.append((key_of(e["card"]), f"{names[e['card']]}（{e['name']}的卡）"))
         for c in q.get("soldier_pool", []) + q.get("recruit_pool", []):
             loot.append((key_of(c), names[c]))
+        battles_cfg = json.loads((pics / "art.json").read_text("utf-8")).get("battles", {})
+        fights_here: list[str] = []
+        for s in q["squares"].values():
+            if s.get("battle"):
+                fights_here.append(s["battle"])
+            for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in q.get("event_pool", [])]:
+                if ev:
+                    for o in ev["options"]:
+                        fights_here += [e["battle"] for e in o.get("effects", []) if "battle" in e]
+        bg_rows = []
+        for f in dict.fromkeys(fights_here):
+            sc = cards["scenarios"][f]
+            st = "✅ 已有" if f in battles_cfg else "⬜ 缺"
+            bg_rows.append(f"| {st} | `{f}` | {sc['name']}（{cards['enemies'][sc['enemy']]['name']}） |")
         return (["", f"## {q['title']}", "", "| 状态 | key | 用在 |", "|---|---|---|"]
                 + rows([("lord", "主公 / 穿越者")] + people)
                 + ["", "敌人（战斗界面上方；和它的卡共用一张图）", "", "| 状态 | key | 敌人 |", "|---|---|---|"] + rows(enemies)
-                + ["", "能拿到的卡", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(loot))
+                + ["", "能拿到的卡", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(loot)
+                + ["", "战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）", "", "| 状态 | key | 战斗 |", "|---|---|---|"]
+                + bg_rows)
 
     out = [
         "# 美术需求",
@@ -215,6 +235,12 @@ def main(argv: list[str] | None = None) -> None:
     maps = build_maps()
     if maps:
         print(f"built {len(maps)} map backgrounds → {MAP_OUT}")
+    cgs = build_maps(out=CG_OUT, section="cgs", height=BATTLE_H)
+    if cgs:
+        print(f"built {len(cgs)} story illustrations → {CG_OUT}")
+    fights = build_maps(out=BATTLE_OUT, section="battles", height=BATTLE_H)
+    if fights:
+        print(f"built {len(fights)} battle backgrounds → {BATTLE_OUT}")
     write_needs()
     write_sources()
     print(f"built {len(built)} portraits → {OUT}")

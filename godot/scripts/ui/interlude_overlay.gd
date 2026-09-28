@@ -46,8 +46,23 @@ func _show_scene(sc: Dictionary) -> void:
 	_box.size = size
 	_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_box)
-	var x := 60.0
-	for key in sc.get("portraits", []):
+	var art := Kit.cg(sc.get("cg", ""))
+	if art != null:  # full-screen illustration, text over a dark band at the bottom
+		var pic := TextureRect.new()
+		pic.texture = art
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		pic.size = size
+		pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_box.add_child(pic)
+		var band := ColorRect.new()
+		band.color = Color(0, 0, 0, 0.62)
+		band.position = Vector2(0, 400)
+		band.size = Vector2(1280, 320)
+		band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_box.add_child(band)
+	var x := 60.0 if art == null else 9999.0
+	for key in (sc.get("portraits", []) if art == null else []):
 		var tex := Kit.portrait(key, 0.75, 5.0)
 		if tex == null:
 			continue
@@ -61,6 +76,8 @@ func _show_scene(sc: Dictionary) -> void:
 		x += 230
 	var title := Kit.label(sc.get("title", ""), Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(60, 40)
+	title.add_theme_constant_override("outline_size", 8)
+	title.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
 	_box.add_child(title)
 	var text := RichTextLabel.new()
 	text.bbcode_enabled = true
