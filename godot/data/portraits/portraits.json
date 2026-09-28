@@ -45,5 +45,6 @@
   "huatuo": {"file": "huatuo.jpg", "face": [0.48, 0.26], "head": 0.22},
   "huangjin_nvyi": {"file": "huangjin_nvyi.jpg", "face": [0.53, 0.25], "head": 0.22},
   "xiliang_nvbing": {"file": "xiliang_nvbing.jpg", "face": [0.51, 0.28], "head": 0.22},
-  "yuji": {"file": "yuji.jpg", "face": [0.55, 0.25], "head": 0.22}
+  "yuji": {"file": "yuji.jpg", "face": [0.55, 0.25], "head": 0.22},
+  "yanzhihu": {"file": "yanzhihu.jpg", "face": [0.54, 0.28], "head": 0.22}
 }
