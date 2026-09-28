@@ -263,5 +263,7 @@ func test_soldiers_have_only_the_plain_move() -> void:
 	var cs := db.build_fighter("changsha")  # 刀兵 soldier
 	check_eq(cs["skills"], [db.troops["infantry"]["skills"][0]], "a soldier card: the troop's plain move only")
 	check_eq(db.build_fighter("danyang")["skills"], db.troops["infantry"]["skills"], "精兵 丹阳兵: both")
-	var hz := db.build_fighter("huangzhong")  # 弓兵 general
-	check(hz["skills"].has(db.troops["archer"]["skills"][0]) and hz["skills"].has(db.troops["archer"]["skills"][1]), "a general: both troop skills")
+	var hz := db.build_fighter("huangzhong")  # 弓兵 general with his own 百步穿杨
+	check_eq(hz["skills"], [db.troops["archer"]["skills"][0], "baibu"], "a general: the plain move + his own")
+	var jq := db.build_fighter("jiangqin")  # no skill of his own
+	check_eq(jq["skills"], db.troops["archer"]["skills"], "no own skill: the troop's signature instead")

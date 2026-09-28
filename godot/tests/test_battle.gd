@@ -52,7 +52,7 @@ func test_each_leader_acts_once_per_round() -> void:
 
 
 func test_cumulative_skill_costs_one_more_each_use() -> void:
-	var b := new_battle()
+	var b := new_battle("hulao", [["bingzhou"], []])  # 精兵 骑兵: has 冲锋
 	var charge: Dictionary = b.db.skills["charge"]
 	check_eq(b.cost(b.leaders[1], charge), 1)
 	b.act(1, "charge")
@@ -108,7 +108,7 @@ func test_win_when_enemy_hp_zero() -> void:
 
 
 func test_carry_in_and_out() -> void:
-	var b := Battle.start("hulao", party(["machao"]), 0, 1000, {"machao": {"charge": 2}})
+	var b := Battle.start("hulao", party(["bingzhou"]), 0, 1000, {"bingzhou": {"charge": 2}})
 	check_eq(b.party_hp, b.party_max - 1000)
 	check_eq(b.cost(b.leaders[1], b.db.skills["charge"]), 3)
 	check_eq(b.carry_out()[0], 1000)

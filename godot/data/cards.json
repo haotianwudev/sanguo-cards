@@ -69,7 +69,7 @@
     "fangtian": {"name": "方天画戟", "troop": "cavalry", "icon": "戟", "rarity": "curse", "desc": "【诅咒】吕布的戟，太重了。攻击 +30%，但受到的伤害 +15%", "mods": {"at": 0.3, "guard": -0.15}},
     "tengjia": {"name": "藤甲", "troop": "bandit", "icon": "藤", "rarity": "curse", "desc": "【诅咒】刀枪不入，就怕火。受到的伤害 -30%，但体力上限 -10%", "mods": {"guard": 0.3, "hp": -0.1}}
   },
-  "_troops": "every troop: a plain 1-AP move (first) plus a signature (cumulative or limited); soldier cards get only the plain move (elite soldiers, \"elite\": true, get both), generals get both plus their own",
+  "_troops": "every troop: a plain 1-AP move (first) plus a signature (cumulative or limited); soldier cards get only the plain move (elite soldiers, \"elite\": true, get both), generals get the plain move plus their own signature (or the troop's if they have none)",
   "troops": {
     "lord": {"name": "主公", "short": "主", "hp": 400, "at": 80, "skills": ["tuji", "rengdao"]},
     "cavalry": {"name": "骑兵", "short": "骑", "hp": 380, "at": 85, "skills": ["madao", "charge"]},
