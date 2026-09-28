@@ -56,3 +56,4 @@
 | `baie_hu` | source/generals/baie_hu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gongnv` | source/soldiers/gongnv.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
+| `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |

@@ -167,6 +167,46 @@ static func name_font(size: int, spacing: int) -> Font:
 	return _textures[key]
 
 
+static func badge(troop_id: String) -> Texture2D:
+	var key := "badge:" + troop_id
+	if not _textures.has(key):
+		var path := "res://data/art/badges/%s.png" % troop_id
+		_textures[key] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[key]
+
+
+static func relic_icon(relic_id: String) -> Texture2D:
+	var key := "relic:" + relic_id
+	if not _textures.has(key):
+		var path := "res://data/art/relics/%s.png" % relic_id
+		_textures[key] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[key]
+
+
+static func map_icon(kind: String) -> Texture2D:
+	var key := "map_icon:" + kind
+	if not _textures.has(key):
+		var path := "res://data/art/map/icons/%s.png" % kind
+		_textures[key] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[key]
+
+
+static func token_icon() -> Texture2D:
+	var key := "token:lord"
+	if not _textures.has(key):
+		var path := "res://data/art/map/token_lord.png"
+		_textures[key] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[key]
+
+
+static func card_back() -> Texture2D:
+	var key := "card:back"
+	if not _textures.has(key):
+		var path := "res://data/art/frames/card_back.png"
+		_textures[key] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[key]
+
+
 # ---- portraits ---------------------------------------------------------------
 
 static func _portrait_index() -> Dictionary:

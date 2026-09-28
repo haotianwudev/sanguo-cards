@@ -14,7 +14,7 @@ var _scroll: ScrollContainer
 var _layer: Control
 var _lines: MapLines
 var _bg: TextureRect
-var _token: Panel
+var _token: Control
 var _nodes: Dictionary = {}  # square id -> Button
 var _pulses: Array = []
 var _sheet: PanelContainer
@@ -177,8 +177,14 @@ func _rebuild_map() -> void:
 		if not Quests.is_open(s, Game.save):  # hidden by an earlier chapter's choices
 			continue
 		var b := Button.new()
-		b.text = _glyph(s)
-		b.add_theme_font_size_override("font_size", 30)
+		var icon_tex: Texture2D = Kit.map_icon(_icon_key(s))
+		if icon_tex != null:
+			b.icon = icon_tex
+			b.expand_icon = true
+			b.flat = true
+		else:
+			b.text = _glyph(s)
+			b.add_theme_font_size_override("font_size", 30)
 		b.size = Vector2(SQ, SQ)
 		b.position = _pos(s) - Vector2(SQ, SQ) / 2
 		b.pivot_offset = Vector2(SQ, SQ) / 2
@@ -196,11 +202,23 @@ func _rebuild_map() -> void:
 		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_layer.add_child(lbl)
 		_nodes[s["id"]] = b
-	_token = Panel.new()
-	_token.add_theme_stylebox_override("panel", Kit.box(Kit.c("red"), 14, 3, Color.WHITE, 0))
-	_token.size = Vector2(28, 28)
-	_token.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_token.z_index = 5
+	var token_tex: Texture2D = Kit.token_icon()
+	if token_tex != null:
+		var tr := TextureRect.new()
+		tr.texture = token_tex
+		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.size = Vector2(34, 34)
+		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tr.z_index = 5
+		_token = tr
+	else:
+		var p := Panel.new()
+		p.add_theme_stylebox_override("panel", Kit.box(Kit.c("red"), 14, 3, Color.WHITE, 0))
+		p.size = Vector2(28, 28)
+		p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		p.z_index = 5
+		_token = p
 	_layer.add_child(_token)
 
 
@@ -212,6 +230,21 @@ func _glyph(s: Dictionary) -> String:
 func _kind(s: Dictionary) -> String:
 	## glyph / colour key: boss and elite battles have their own
 	return "boss" if s["boss"] else ("elite" if s["elite"] else s["type"])
+
+
+func _icon_key(s: Dictionary) -> String:
+	var fe: Dictionary = _fixed_event(s)
+	if fe.has("glyph"):
+		match fe["glyph"]:
+			"险": return "hazard"
+			"威": return "glory"
+			"庙": return "temple"
+			"医": return "physician"
+			"凶": return "curse"
+			"赤": return "red_turban"
+			"宝": return "treasure"
+			"将": return "boss"
+	return _kind(s)
 
 
 func _fixed_event(s: Dictionary) -> Dictionary:
@@ -229,6 +262,22 @@ func _type_color(s: Dictionary) -> Color:
 
 
 func _style_square(b: Button, s: Dictionary, state: String) -> void:
+	if b.icon != null:
+		var empty_sb := StyleBoxEmpty.new()
+		for st in ["normal", "hover", "pressed", "disabled"]:
+			b.add_theme_stylebox_override(st, empty_sb)
+		var focus_sb := Kit.box(Color.TRANSPARENT, int(SQ / 2), 3, Kit.c("amber"), 0)
+		b.add_theme_stylebox_override("focus", focus_sb)
+		match state:
+			"current":
+				b.modulate = Color(1.2, 1.15, 0.95)
+			"reachable":
+				b.modulate = Color.WHITE
+			"visited":
+				b.modulate = Color(0.65, 0.65, 0.65)
+			"closed":
+				b.modulate = Color(0.40, 0.40, 0.40)
+		return
 	var r := int(SQ / 2)
 	var bg := Kit.c("card")
 	var fg := _type_color(s)
@@ -340,7 +389,7 @@ func _refresh() -> void:
 			tw.tween_property(b, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_SINE)
 			_pulses.append(tw)
 	var here: Dictionary = q["squares"][save.square]
-	_token.position = _pos(here) - Vector2(14, SQ / 2 + 22)
+	_token.position = _pos(here) - Vector2(_token.size.x / 2.0, SQ / 2.0 + _token.size.y - 8)
 	_center_on(here)
 	_show_square(here)
 	if save.offer_kind == "relic" and not save.offer.is_empty():
@@ -391,7 +440,7 @@ func _on_square(sid: String) -> void:
 	_busy = true
 	var target: Dictionary = q["squares"][sid]
 	var tw := create_tween()
-	var dest := _pos(target) - Vector2(14, SQ / 2 + 22)
+	var dest := _pos(target) - Vector2(_token.size.x / 2.0, SQ / 2.0 + _token.size.y - 8)
 	tw.tween_property(_token, "position", dest + Vector2(0, -18), 0.18).set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(_token, "position", dest, 0.14).set_trans(Tween.TRANS_BOUNCE)
 	await tw.finished

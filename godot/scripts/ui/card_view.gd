@@ -195,14 +195,22 @@ func _build() -> void:
 	if not fr.is_empty():  # centred on the frame's top-left corner gem (ui.json card.badges)
 		bs = maxf(24.0, w * fr["badge_size"])
 		badge_pos = fr["badge"] * Vector2(w, card_h) - Vector2(bs, bs) / 2
-	var badge := Panel.new()
-	badge.add_theme_stylebox_override("panel", Kit.box(Kit.c("bg"), int(bs / 2), maxi(2, int(bs / 14)), rc, 0))
-	_add(badge, badge_pos, Vector2(bs, bs))
-	var bl := Kit.label(troop["short"], int(bs * 0.5))
-	bl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	bl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	bl.size = badge.size
-	badge.add_child(bl)
+	var b_tex: Texture2D = Kit.badge(str(fighter["troop"]))
+	if b_tex != null:
+		var br := TextureRect.new()
+		br.texture = b_tex
+		br.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		br.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		_add(br, badge_pos, Vector2(bs, bs))
+	else:
+		var badge := Panel.new()
+		badge.add_theme_stylebox_override("panel", Kit.box(Kit.c("bg"), int(bs / 2), maxi(2, int(bs / 14)), rc, 0))
+		_add(badge, badge_pos, Vector2(bs, bs))
+		var bl := Kit.label(troop["short"], int(bs * 0.5))
+		bl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		bl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		bl.size = badge.size
+		badge.add_child(bl)
 	if fr.is_empty():
 		var gem := Label.new()
 		gem.text = Kit.rarity_label(fighter["rarity"])

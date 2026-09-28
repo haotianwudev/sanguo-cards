@@ -50,12 +50,24 @@ func _ready() -> void:
 		box.add_theme_constant_override("separation", 12)
 		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		b.add_child(box)
-		var icon := Kit.label(r["icon"], 52, "gold")
-		icon.add_theme_stylebox_override("normal", Kit.box(Kit.c(rar[1]), 48, 0, Color.TRANSPARENT, 8))
-		icon.add_theme_color_override("font_color", Color.WHITE)
-		icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		icon.custom_minimum_size = Vector2(84, 84)
-		icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		var icon: Control
+		var relic_tex: Texture2D = Kit.relic_icon(relic_ids[i])
+		if relic_tex != null:
+			var tr := TextureRect.new()
+			tr.texture = relic_tex
+			tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			tr.custom_minimum_size = Vector2(96, 96)
+			tr.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			icon = tr
+		else:
+			var lbl := Kit.label(r["icon"], 52, "gold")
+			lbl.add_theme_stylebox_override("normal", Kit.box(Kit.c(rar[1]), 48, 0, Color.TRANSPARENT, 8))
+			lbl.add_theme_color_override("font_color", Color.WHITE)
+			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			lbl.custom_minimum_size = Vector2(84, 84)
+			lbl.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			icon = lbl
 		var name := Kit.label(r["name"], Kit.FONT_BIG)
 		name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		var tag := Kit.label(rar[0], 16, rar[1])
