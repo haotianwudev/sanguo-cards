@@ -66,6 +66,7 @@
     "c1_rescue": {"src": "source/cg/c1_rescue.jpg", "license": "用户提供（Gemini 生成）"},
     "c1_dinner": {"src": "source/cg/c1_dinner.jpg", "license": "用户提供（Gemini 生成）"},
     "c1_oath": {"src": "source/cg/c1_oath.jpg", "license": "用户提供（Gemini 生成）"},
-    "c1_north": {"src": "source/cg/c1_north.jpg", "license": "用户提供（Gemini 生成）"}
+    "c1_north": {"src": "source/cg/c1_north.jpg", "license": "用户提供（Gemini 生成）"},
+    "i1_sewing": {"src": "source/cg/i1_sewing.jpg", "license": "用户提供（Gemini 生成）"}
   }
 }
