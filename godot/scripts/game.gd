@@ -178,6 +178,15 @@ func demo(name: String) -> void:
 			Quests.resolve(q, save, rng, 0)
 			Quests.move(q, save, "wake")
 			show_screen(MapScreen.new())
+		"cg_click":  # the same, clicked through to the last line (buttons shown)
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng, 0)
+			Quests.move(q, save, "wake")
+			var m := MapScreen.new()
+			show_screen(m)
+			for _i in 12:
+				m.call_deferred("_on_story_click", m._fake_click())
 		"tiers":  # 铜 / 银 / 金 frames
 			save.owned = ["sunce", "zhouyu", "sunjian"]
 			save.dupes = {"zhouyu": 2, "sunjian": 4}

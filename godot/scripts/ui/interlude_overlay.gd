@@ -7,6 +7,9 @@ signal finished
 var scenes: Array = []
 var next_title := ""  # "" when there is no next chapter yet
 var _page := -1
+var _line := 0  # lines of the current scene shown so far
+var _scene_lines: Array = []
+var _scene_text: RichTextLabel
 var _box: Control
 
 
@@ -29,6 +32,11 @@ func _unhandled_input(e: InputEvent) -> void:
 
 
 func _next() -> void:
+	if _scene_text != null and _line < _scene_lines.size() - 1:  # next line of the same scene
+		_line += 1
+		_show_line()
+		return
+	_scene_text = null
 	_page += 1
 	if _box != null:
 		_box.queue_free()
@@ -88,14 +96,26 @@ func _show_scene(sc: Dictionary) -> void:
 	text.add_theme_color_override("default_color", Color(0.95, 0.92, 0.85))
 	text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var lord := "[color=#e06c5a][b]%s[/b][/color]" % Game.save.lord_name
-	text.text = "\n".join(sc.get("text", []).map(func(t): return t.replace("{lord}", lord)))
+	_scene_lines = sc.get("text", []).map(func(t): return t.replace("{lord}", lord))
+	_scene_text = text
+	_line = 0
+	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 6)
+	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 6)
 	_box.add_child(text)
+	_show_line()
 	var hint := Kit.label("点击继续 ▶", Kit.FONT_BODY)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.5))
 	hint.position = Vector2(1100, 680)
 	_box.add_child(hint)
 	_box.modulate.a = 0.0
 	_box.create_tween().tween_property(_box, "modulate:a", 1.0, 0.35)
+
+
+func _show_line() -> void:
+	if _scene_lines.is_empty():
+		return
+	var more := _line < _scene_lines.size() - 1
+	_scene_text.text = str(_scene_lines[_line]) + ("　[color=#d9a441]▼[/color]" if more else "")
 
 
 func _show_title() -> void:

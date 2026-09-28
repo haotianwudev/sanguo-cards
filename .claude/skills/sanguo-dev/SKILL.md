@@ -53,7 +53,10 @@ smaller face x ⇒ figure moves right; bigger face y ⇒ figure moves up. Enemie
 
 Story CGs: squares, events and interlude scenes take `"cg": "<key>"`; the art goes in `pics/source/cg/<key>.jpg` +
 `pics/art.json` "cgs" (→ `godot/data/art/cg/`). Like Rance X, a CG dominates: arriving at a square with one switches the map screen to CG mode (the picture fills
-the screen, the text box sits over it, a top-bar tab switches back to the map); the interlude shows it full screen. Add the key and what to draw to `CARD-DESIGN.md` §8b.
+the screen, the text box sits over it, a top-bar tab switches back to the map); the interlude shows it full screen.
+Story text plays one line per click (visual-novel style) on event / choose / ？ squares and in interludes; the
+buttons appear after the last line; 跳过 shows everything, 隐藏 (CG mode) hides the text box until the next click.
+Keep each story line short enough to read as one subtitle. Add the key and what to draw to `CARD-DESIGN.md` §8b.
 Battle CGs (Rance X style: the enemy in its scene): the owner supplies one picture per battle — `pics/source/battles/<scenario id>.jpg`, registered in
 `pics/art.json` "battles", built by `sanguo-art` into `godot/data/art/battle/`; the battle screen paints it (washed) when
 present. For any other art a feature needs, don't wait for it: add the requirement to `CARD-DESIGN.md` (and a brief).

@@ -22,6 +22,13 @@ var _cg_view: TextureRect  # Rance X style: a story CG fills the screen, the tex
 var _cg_tab: Button  # switch between the CG and the map
 var _cg_mode := false
 var _cg_bar: ColorRect  # keeps the top bar readable over a CG
+# story text plays one line per click (visual-novel style); the buttons appear after the last line
+var _dlg_lines: Array = []
+var _dlg_i := -1
+var _dlg_text: RichTextLabel
+var _dlg_buttons: Control
+var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
+var _sheet_hidden := false
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _sheet_box: VBoxContainer
 var _hp_bar: ProgressBar
@@ -88,7 +95,8 @@ func _ready() -> void:
 	_cg_view.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_cg_view.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	_cg_view.size = Vector2(1280, 720)
-	_cg_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_cg_view.mouse_filter = Control.MOUSE_FILTER_STOP
+	_cg_view.gui_input.connect(_on_story_click)
 	_cg_view.visible = false
 	add_child(_cg_view)
 	move_child(_cg_view, 0)
@@ -116,6 +124,21 @@ func _ready() -> void:
 	_sheet_box = VBoxContainer.new()
 	_sheet_box.add_theme_constant_override("separation", 10)
 	_sheet.add_child(_sheet_box)
+	_sheet.gui_input.connect(_on_story_click)
+	_dlg_tools = HBoxContainer.new()  # sits at the text box's top-right corner
+	_dlg_tools.position = Vector2(1040, 456)
+	_dlg_tools.add_theme_constant_override("separation", 8)
+	_dlg_tools.z_index = 5
+	add_child(_dlg_tools)
+	var skip := Kit.button("跳过", "gray", Kit.FONT_SMALL)
+	skip.focus_mode = Control.FOCUS_NONE
+	skip.pressed.connect(_dialog_skip)
+	_dlg_tools.add_child(skip)
+	var hide_btn := Kit.button("隐藏", "gray", Kit.FONT_SMALL)
+	hide_btn.name = "Hide"
+	hide_btn.focus_mode = Control.FOCUS_NONE
+	hide_btn.pressed.connect(_hide_sheet)
+	_dlg_tools.add_child(hide_btn)
 
 	_rebuild_map()
 	_refresh()
@@ -434,6 +457,8 @@ func _show_square(s: Dictionary) -> void:
 	for t in ev.get("text", s["text"]):
 		lines.append(t.replace("{lord}", "[color=%s][b]%s[/b][/color]" % [Kit.c("red").to_html(), save.lord_name]))
 	var body := "\n\n".join(lines)
+	_dlg_lines = []
+	_dlg_i = -1
 
 	if save.resolved:
 		var opts := Quests.next_options(q, save)
@@ -537,6 +562,85 @@ func _show_square(s: Dictionary) -> void:
 			rest.pressed.connect(_resolve)
 			buttons.add_child(rest)
 			Kit.focus(rest)
+	# narrative text: one line per click, then the buttons
+	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty())
+	if narrative and lines.size() > 1:
+		_dlg_lines = lines
+		_dlg_text = text
+		_dlg_buttons = buttons
+		_dlg_i = 0
+		text.scroll_active = false
+		text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
+		text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 4)
+		text.mouse_filter = Control.MOUSE_FILTER_PASS
+		buttons.visible = false
+		_dialog_show()
+	_update_tools()
+
+
+func _dialog_show() -> void:
+	var last := _dlg_i >= _dlg_lines.size() - 1
+	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
+	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
+	if last:
+		_dlg_buttons.visible = true
+		_dlg_i = -1
+		for b in _dlg_buttons.find_children("*", "Button", true, false):
+			Kit.focus(b)
+			break
+	_update_tools()
+
+
+func _dialog_skip() -> void:
+	if _dlg_i < 0:
+		return
+	_dlg_text.text = "\n\n".join(_dlg_lines)
+	_dlg_text.scroll_active = true
+	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
+	_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
+	_dlg_i = _dlg_lines.size() - 1
+	_dlg_buttons.visible = true
+	_dlg_i = -1
+	_update_tools()
+
+
+func _on_story_click(e: InputEvent) -> void:
+	if not (e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT):
+		return
+	if _sheet_hidden:  # a click on the picture brings the text back
+		_sheet_hidden = false
+		_sheet.visible = true
+		_update_tools()
+		return
+	if _dlg_i >= 0:
+		_dlg_i += 1
+		_dialog_show()
+
+
+func _unhandled_input(e: InputEvent) -> void:
+	if e.is_action_pressed("ui_accept") and (_dlg_i >= 0 or _sheet_hidden):
+		get_viewport().set_input_as_handled()
+		_on_story_click(_fake_click())
+
+
+func _fake_click() -> InputEventMouseButton:
+	var ev := InputEventMouseButton.new()
+	ev.pressed = true
+	ev.button_index = MOUSE_BUTTON_LEFT
+	return ev
+
+
+func _hide_sheet() -> void:
+	## Rance X style: hide the text box to look at the whole CG; any click brings it back
+	_sheet_hidden = true
+	_sheet.visible = false
+	_update_tools()
+
+
+func _update_tools() -> void:
+	_dlg_tools.visible = not _sheet_hidden and (_dlg_i >= 0 or _cg_mode)
+	_dlg_tools.get_child(0).visible = _dlg_i >= 0
+	_dlg_tools.get_node("Hide").visible = _cg_mode
 
 
 func _battle_info(s: Dictionary, fight: Dictionary) -> String:
@@ -648,6 +752,9 @@ func _apply_cg_mode() -> void:
 	## CG mode: the illustration fills the screen, the map hides, the text box turns translucent over the picture
 	_cg_view.visible = _cg_mode
 	_cg_bar.visible = _cg_mode
+	if not _cg_mode and _sheet_hidden:
+		_sheet_hidden = false
+		_sheet.visible = true
 	_scroll.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
 	var bg := Kit.c("card")
