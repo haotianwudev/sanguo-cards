@@ -39,6 +39,7 @@ var run_relics: Array = []  # every 宝物 picked up this run, even ones traded 
 var merit := 0  # 战功: earned per chapter, kept across chapters, spent between chapters
 var merit_paid := ""  # quest id whose 战功 has been paid out (so a reopened recap doesn't pay twice)
 var run_bosses := 0  # bosses and elites beaten this run
+var heirloom := ""  # 传家宝: the one 宝物 carried into the next chapter (every run of it starts with it)
 var flags: Array = []  # every recorded line from finished chapters (cross-chapter story branching)
 var run_records: Array = []  # key choices and outcomes this run, as short lines (「董白：留下」)
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
@@ -49,7 +50,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags"]
+	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "heirloom"]
 
 
 static func create() -> SaveData:

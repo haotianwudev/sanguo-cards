@@ -125,6 +125,7 @@ func demo(name: String) -> void:
 			save.grant_card("gongnv")
 			save.grant_card("gongnv")
 			save.run_relics = ["chize", "hupi"]
+			save.relics = ["chize", "hupi"]
 			save.run_battles = 7
 			save.run_bosses = 3
 			save.merit = 4

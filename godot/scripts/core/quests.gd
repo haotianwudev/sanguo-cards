@@ -92,6 +92,8 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	## Start a run. With an rng the shuffle groups are dealt anew; without one the map is as written (tests).
 	q = q.get("_raw", q)
 	save.relics = []
+	if save.heirloom != "" and GameData.get_db().relics.has(save.heirloom):
+		save.relics = [save.heirloom]  # the 传家宝 starts every run of the chapter
 	save.danger = 0
 	save.run_start = collection(save)
 	save.run_battles = 0

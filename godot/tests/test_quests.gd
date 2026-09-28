@@ -733,3 +733,16 @@ func test_finished_chapters_leave_story_flags_that_pick_the_interlude() -> void:
 	check(t2.has("河边") and not t2.has("单挑"), str(t2))
 	Quests.begin(quest(0), s)
 	check(s.flags.has("董白：留下"), "flags outlive a new run")
+
+
+func test_the_heirloom_starts_every_run_of_the_next_chapter() -> void:
+	var s := SaveData.create()
+	s.heirloom = "hupi"
+	Quests.begin(quest(1), s)
+	check_eq(s.relics, ["hupi"])
+	s.relics.append("jiunang")
+	Quests.fail(quest(1), s)
+	check_eq(s.relics, ["hupi"], "a restart keeps the heirloom, drops the rest")
+	s.heirloom = ""
+	Quests.begin(quest(1), s)
+	check(s.relics.is_empty())
