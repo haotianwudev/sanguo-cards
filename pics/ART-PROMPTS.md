@@ -62,17 +62,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
 
-### `zhangfei` 🟡 换掉占位
-
-```
-A vertical character portrait of Zhang Fei (张飞), the legendary fierce powerhouse general from the Three Kingdoms era.
-Appearance: Massive, dark-skinned muscular powerhouse warrior in his early 30s. Fierce round panther-like eyes with an intense battle glare, thick bristling black beard and mustache, roaring at the top of his lungs with explosive, terrifying battle fury (wide open mouth yelling a war cry).
-Armor & Clothing: Rugged Han dynasty black iron plate armor over a deep green battle tunic, heavy spiked shoulder guards, thick leather belt with a bronze tiger buckle.
-Weapon: Gripping his legendary Zhangba Snake Spear (丈八蛇矛 - an ancient long spear with an undulating, serpentine wavy steel spearhead) thrusting forward dynamically.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
 ### `liubei` 🟡 换掉占位
 
 ```
@@ -102,39 +91,6 @@ A vertical character portrait of Lü Bu (吕布), the unrivaled, terrifying warr
 Appearance: Tall, handsome, arrogant warrior in his early 30s with a cold predatory glare and a confident smirk, overwhelming aura.
 Armor & Clothing: Ornate crimson and black armor with gold trim, a helmet crowned with two long pheasant tail feathers (雉尾冠), a red cape flaring behind him.
 Weapon: Holding the Sky Piercer halberd (方天画戟 - a long halberd with a crescent side blade) across his shoulders.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `lijue` ⬜ 缺
-
-```
-A vertical character portrait of Li Jue (李傕), the brutal Xiliang general who burned Luoyang.
-Appearance: Heavy-set, cruel-faced man in his 30s with a scarred cheek, thick stubble and a sneer.
-Armor & Clothing: Dark Xiliang iron scale armor with fur trim, a horsehair-crested helmet.
-Weapon: A flaming torch in one hand and a saber in the other, fire and smoke behind him.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `handang` ⬜ 缺
-
-```
-A vertical character portrait of Han Dang (韩当), Sun Jian's silent horse-archer general.
-Appearance: Expressionless, weathered man in his 30s with sharp hawk-like eyes and a short beard.
-Armor & Clothing: Light leather cavalry armor, a quiver of arrows at his hip.
-Weapon: Mounted on a horse, drawing a large bow.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `huanggai` 🟡 换掉占位
-
-```
-A vertical character portrait of Huang Gai (黄盖), Sun Jian's tough veteran general.
-Appearance: Burly veteran in his 40s with a booming laugh, grey-streaked beard, chest covered in old scars.
-Armor & Clothing: Heavy armor with the robe pulled open to show off his scars.
-Weapon: Holding an iron whip (铁鞭), slapping his chest proudly.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
@@ -179,61 +135,6 @@ A vertical character portrait of Sun Jing (孙静), Sun Jian's stingy younger br
 Appearance: Thin older man in his 40s with squinting eyes and a thin mustache, a miserly expression.
 Armor & Clothing: Plain grey household robe and a cap.
 Weapon: Flicking the beads of an abacus, peering over it suspiciously.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `tangji` ⬜ 缺
-
-```
-A vertical character portrait of Lady Tang (唐姬), the widowed consort of the deposed young emperor.
-Appearance: An adult woman in her twenties with graceful noble bearing, soot smudged on her cheek, steady unyielding eyes.
-Armor & Clothing: Plain coarse cloth dress that cannot hide her dignity, hair loosely tied.
-Weapon: Clutching a jade hairpin to her chest.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `guosi` ⬜ 缺
-
-```
-A vertical character portrait of Guo Si (郭汜), the raiding Xiliang general.
-Appearance: Wiry, greedy-looking man in his 30s with a crooked grin.
-Armor & Clothing: Xiliang cavalry armor with looted jewelry hanging from it.
-Weapon: Holding a long lance (马槊) and a sack of loot.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `liru` ⬜ 缺
-
-```
-A vertical character portrait of Li Ru (李儒), Dong Zhuo's scheming strategist.
-Appearance: Pale, thin man in his 30s with cold calculating eyes and a thin smile.
-Armor & Clothing: Dark purple scholar's robe.
-Weapon: Holding a cup of poisoned wine (鸩酒) in one hand, a folding fan in the other.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `feixiong_bing` ⬜ 缺
-
-```
-A vertical character portrait of a Flying Bear elite heavy cavalryman (飞熊军) of Dong Zhuo's guard.
-Appearance: Massive faceless soldier behind a bear-shaped visor.
-Armor & Clothing: Full black heavy armor with bear-fur trim.
-Weapon: Mounted on an armored warhorse, lance lowered.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
-### `xiliang_bing` ⬜ 缺
-
-```
-A vertical character portrait of a Xiliang light cavalry raider (西凉铁骑).
-Appearance: Rugged frontier horseman in his 20s with windburned skin.
-Armor & Clothing: Leather and iron cavalry gear, a fur hat.
-Weapon: Galloping, saber drawn.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```

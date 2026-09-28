@@ -211,7 +211,7 @@
     "feixiong_bing": {"name": "飞熊军", "rarity": "N", "troop": "cavalry", "bonus": {"hp": 40, "at": 6}, "weight": 1, "pool": false},
     "zumao": {"name": "祖茂·老将", "rarity": "R", "troop": "infantry", "bonus": {"hp": 60, "at": 10}, "skills": ["yindi"]},
     "chengpu": {"name": "程普·程公", "rarity": "R", "troop": "spear", "bonus": {"hp": 70, "at": 12}, "skills": ["tiji"]},
-    "handang": {"name": "韩当", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 45, "at": 16}, "skills": ["qishe"]},
+    "handang": {"name": "韩当", "rarity": "R", "troop": "archer", "bonus": {"hp": 45, "at": 16}, "skills": ["qishe"]},
     "zhuzhi": {"name": "朱治·君理", "rarity": "R", "troop": "strategist", "bonus": {"hp": 45, "at": 12}, "skills": ["dujun"]},
     "wujing": {"name": "吴景", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 50, "at": 12}, "skills": ["hujie"]},
     "sunben": {"name": "孙贲", "rarity": "R", "troop": "spear", "bonus": {"hp": 45, "at": 14}, "skills": ["jixi"]},
