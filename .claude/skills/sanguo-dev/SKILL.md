@@ -125,6 +125,11 @@ Adding a portrait, checklist:
   turns up in recruit offers at `gacha.lord_rate`. **周目**: `SaveData.new_lap()` restarts the story keeping every card
   as it is — no gifts, no rarity shift, no other rule changes (the user wants those decided later); the only pool change
   is `recruit_pool()` adding every general ever owned via `seen`, story-only ones included.
+  **Rogue per run** (rolled in `Quests.begin` only when given an rng — tests pass none and stay fixed): a **天命**
+  (`cards.json fates`, pick one of `fate_offer` in the RelicPick overlay with `source = "fates"`; mods like relics,
+  `Quests.mods` adds it) and a **词缀** on every elite / boss square (`battle.affixes`: hp / at shares, resists,
+  +actions, regen; `save.affixes[square]`, `Quests.affix_here`, applied in `Battle.start` via `mods.affix` on a copy
+  of the enemy data). Game.new_game / new_lap pass the rng so a chapter's first run is dealt too.
   **宝物 are cards (Rance X items)**: every relic has a fixed team (`relics.*.troop`, lord = the lord's unit); worn, it
   sits in that troop's fielded unit (never as leader, any number) and only works while that unit is out
   (`SaveData.relic_unit / active_relics`, `Quests.mods` uses active ones). The player can leave a 宝物 in the pool

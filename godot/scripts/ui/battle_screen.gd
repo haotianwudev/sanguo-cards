@@ -32,12 +32,18 @@ var _party_box: Control
 func _ready() -> void:
 	var save := Game.save
 	if carry:
+		var m := Quests.mods(save)
+		var afx := Quests.affix_here(save)
+		if not afx.is_empty():
+			m["affix"] = afx
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
-			ambush, Quests.mods(save))
+			ambush, m)
 	else:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi())
 	_build()
 	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])
+	if b.mods.has("affix"):
+		_log_lines(["[color=red]【词缀·%s】%s[/color]" % [b.mods["affix"]["name"], b.mods["affix"]["desc"]]])
 	_log_lines(b.opening)
 	b.take_events()
 	_refresh()

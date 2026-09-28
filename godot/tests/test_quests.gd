@@ -814,3 +814,40 @@ func test_chapter_three_branches_on_dongbai_and_ends_in_ending_one() -> void:
 	check(sq["wenji_join"]["cards"].has("caiwenji"), "saved, she joins")
 	check_eq(sq["yuanshu"]["lose_goto"], "end", "袁术 can't really be beaten: losing leads on to the ending")
 	check(q["ending"].get("title", "").begins_with("结局一"), "the chapter ends in 结局一")
+
+
+func test_every_run_offers_fates_and_rolls_affixes() -> void:
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[1]
+	var s := SaveData.create()
+	Quests.begin(q, s, rng(4))
+	check_eq(s.fate_offer.size(), 3, "three 天命 to pick from")
+	check(s.fate == "", "none picked yet")
+	var f := Quests.pick_fate(s, 0)
+	check(s.fate == f["id"] and s.fate_offer.is_empty())
+	var m := Quests.mods(s)
+	for k in f["mods"]:
+		check(m.has(k), "the 天命's %s is in the run's mods" % k)
+	var elite_squares: Array = q["squares"].keys().filter(func(k): return q["squares"][k]["boss"] or q["squares"][k]["elite"])
+	check(not elite_squares.is_empty() and elite_squares.all(func(k): return s.affixes.has(k)), "every elite / boss has a 词缀")
+	var plain := SaveData.create()
+	Quests.begin(q, plain)
+	check(plain.fate_offer.is_empty() and plain.affixes.is_empty(), "no rng (tests): nothing rolled")
+
+
+func test_affixes_change_the_enemy() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	s.take("sunce")
+	var base := Battle.start("dongbai", s.party_leaders(), 1)
+	var afx: Dictionary = db.battle["affixes"]
+	var thick := Battle.start("dongbai", s.party_leaders(), 1, 0, {}, {}, false, {"affix": afx["houxue"]})
+	check(thick.enemy["max_hp"] > base.enemy["max_hp"], "厚血: more HP")
+	var fast := Battle.start("dongbai", s.party_leaders(), 1, 0, {}, {}, false, {"affix": afx["xunjie"]})
+	check(int(fast.enemy["data"]["actions"]) == int(base.enemy["data"]["actions"]) + 1, "迅捷: one more action")
+	check(int(db.enemies["dongbai"]["actions"]) == int(base.enemy["data"]["actions"]), "the enemy's own data is untouched")
+	var regen := Battle.start("dongbai", s.party_leaders(), 1, 0, {}, {}, false, {"affix": afx["zaisheng"]})
+	regen.enemy["hp"] -= 2000
+	var hp0: int = regen.enemy["hp"]
+	regen.end_round()
+	check(regen.take_events().any(func(e): return e["t"] == "enemy_heal") or regen.enemy["hp"] >= hp0, "再生 heals each enemy turn")

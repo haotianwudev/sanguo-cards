@@ -395,6 +395,8 @@ func _refresh() -> void:
 	_token.position = _pos(here) - Vector2(_token.size.x / 2.0, SQ / 2.0 + _token.size.y - 8)
 	_center_on(here)
 	_show_square(here)
+	if save.fate == "" and not save.fate_offer.is_empty():
+		_open_fates()
 	if save.offer_kind == "relic" and not save.offer.is_empty():
 		_open_relics.call_deferred()
 
@@ -412,6 +414,11 @@ func _show_run() -> void:
 		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
 		d.tooltip_text = "本轮的敌人体力和攻击都变强了"
 		_run_box.add_child(d)
+	if save.fate != "" and db.fates.has(save.fate):
+		var f: Dictionary = db.fates[save.fate]
+		var fc := _chip("命 " + f["name"], "purple")
+		fc.tooltip_text = "天命：" + f["desc"]
+		_run_box.add_child(fc)
 	for rid in save.relics:
 		var r: Dictionary = db.relics[rid]
 		var c := _chip(r["icon"] + " " + r["name"], {"rare": "purple", "curse": "red"}.get(r["rarity"], "gold"))
@@ -753,6 +760,10 @@ func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 		tags += "[color=%s][b]精英战[/b]（必掉宝箱，三选一）[/color]　" % Kit.c("red").to_html()
 	if fight["ambush"]:
 		tags += "[color=%s][b]埋伏！敌人先手[/b][/color]　" % Kit.c("red").to_html()
+	var afx_id: String = Game.save.affixes.get(s["id"], "")
+	if afx_id != "" and db.battle.get("affixes", {}).has(afx_id):  # this run's 词缀
+		var afx: Dictionary = db.battle["affixes"][afx_id]
+		tags += "[color=%s][b]词缀·%s[/b]（%s）[/color]　" % [Kit.c("amber").to_html(), afx["name"], afx["desc"]]
 	return "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次%s\n招式：%s\n%d 回合内击破。任务中体力不会自动回满。" % [
 		tags, e["name"], e["hp"], e["at"], e["actions"], _resists(e), _moves_text(e), sc["turn_limit"]]
 
@@ -886,6 +897,25 @@ func _open_party() -> void:
 	var o := PartyOverlay.new()
 	o.name = "Party"
 	o.closed.connect(func(): _refresh())
+	add_child(o)
+
+
+func _open_fates() -> void:
+	## 天命: the first thing a run does — pick one of three, it lasts the run
+	if get_node_or_null("FatePick") != null:
+		return
+	var o := RelicPick.new()
+	o.name = "FatePick"
+	o.source = "fates"
+	o.title = "天命 —— 这一轮，你的运数是？（本轮有效）"
+	o.relic_ids = Game.save.fate_offer.duplicate()
+	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	o.picked.connect(func(i):
+		var f := Quests.pick_fate(Game.save, i)
+		Game.persist()
+		o.queue_free()
+		_refresh()
+		_show_toast("天命：" + f["name"]))
 	add_child(o)
 
 

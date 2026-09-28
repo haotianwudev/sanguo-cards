@@ -48,6 +48,9 @@ var run_records: Array = []  # key choices and outcomes this run, as short lines
 var layout: Dictionary = {}  # this run's shuffled squares: square id -> the square whose contents it shows
 var quests_cleared: Array = []
 var lord_name := "主公"
+var fate := ""  # 天命 picked for this run ("" = not yet)
+var fate_offer: Array = []  # the fates to pick from at the start of a run
+var affixes: Dictionary = {}  # square id -> 词缀 id for this run's elites and bosses
 var unworn: Array = []  # 宝物 left in the card pool (not worn: no effect)
 var benched: Array = []  # cards left behind: not in any unit (never a leader)
 var seen: Array = []  # every general ever owned, across 周目: they can all be drawn again
@@ -57,7 +60,7 @@ var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_copies", "lap", "seen", "unworn", "benched", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -70,7 +73,7 @@ static func create() -> SaveData:
 # the fields that make up one run of a quest (parked while a finished chapter is replayed)
 const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events",
 	"event_battle", "event_note", "offer_kind", "relics", "danger", "picks_left", "offer_rates", "run_start",
-	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn"]
+	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn", "fate", "fate_offer", "affixes"]
 
 
 func stash_run() -> void:

@@ -19,6 +19,8 @@ var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, 
 var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
 var relics: Dictionary  # 宝物: id -> {id, name, icon, rarity, desc, mods, after_win}
 var relic_pick: Dictionary  # elite reward: {n, weights by rarity}
+var _raw_top: Dictionary = {}
+var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one picked per run)
 var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
 var ui: Dictionary
 
@@ -73,6 +75,11 @@ func _load(dir: String) -> void:
 			"rarity": r.get("rarity", "common"), "troop": r.get("troop", "lord"), "desc": r.get("desc", ""), "mods": r.get("mods", {}),
 			"after_win": float(r.get("after_win", 0.0))}
 	relic_pick = raw.get("relic_pick", {"n": 3, "weights": {"common": 1}})
+	_raw_top = {"fate_offer": raw.get("fate_offer", 3)}
+	for fid in raw.get("fates", {}):
+		var f: Dictionary = raw["fates"][fid]
+		fates[fid] = {"id": fid, "name": f["name"], "icon": f.get("icon", f["name"].left(1)), "rarity": f.get("rarity", "common"),
+			"desc": f.get("desc", ""), "mods": f.get("mods", {}), "troop": "lord", "after_win": 0.0}
 	for sid in raw["scenarios"]:
 		var sc: Dictionary = raw["scenarios"][sid]
 		scenarios[sid] = {"id": sid, "name": sc["name"], "turn_limit": int(sc["turn_limit"]), "enemy": sc["enemy"]}
@@ -206,3 +213,8 @@ static func weighted_pick(rng: RandomNumberGenerator, items: Array, weights: Arr
 		if r < 0.0:
 			return items[i]
 	return items[items.size() - 1]
+
+
+func raw_int(key: String, default := 0) -> int:
+	## a top-level number from cards.json (e.g. fate_offer)
+	return int(_raw_top.get(key, default))

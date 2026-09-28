@@ -118,6 +118,21 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.quest = q["id"]
 	save.square = q["start"]
 	save.visited = [q["start"]]
+	# rogue: pick a 天命 for this run, and every elite / boss gets a random 词缀 (only with an rng: tests stay fixed)
+	save.fate = ""
+	save.fate_offer = []
+	save.affixes = {}
+	if rng != null:
+		var db := GameData.get_db()
+		var fs: Array = db.fates.keys()
+		for _i in mini(int(db.raw_int("fate_offer", 3)), fs.size()):
+			save.fate_offer.append(fs.pop_at(rng.randi_range(0, fs.size() - 1)))
+		var afx: Array = db.battle.get("affixes", {}).keys()
+		if not afx.is_empty():
+			var laid: Dictionary = view(q, save)["squares"]
+			for sid in laid:
+				if laid[sid]["boss"] or laid[sid]["elite"]:
+					save.affixes[sid] = afx[rng.randi_range(0, afx.size() - 1)]
 	save.resolved = false
 	save.offer = []
 	save.events = {}
@@ -157,8 +172,11 @@ static func mods(save: SaveData) -> Dictionary:
 	## Battle modifiers for this run: every 宝物 carried by a unit, plus 险.
 	var db := GameData.get_db()
 	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"])}
-	for rid in save.active_relics():
-		var m: Dictionary = db.relics[rid]["mods"]
+	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
+	if save.fate != "" and db.fates.has(save.fate):
+		sources.append(db.fates[save.fate])  # 天命 of this run
+	for src in sources:
+		var m: Dictionary = src["mods"]
 		for k in m:
 			if m[k] is Dictionary:  # troop_at / troop_hp: {troop: share}
 				var sub: Dictionary = out.get(k, {})
@@ -168,6 +186,20 @@ static func mods(save: SaveData) -> Dictionary:
 			else:
 				out[k] = out.get(k, 0.0) + float(m[k])
 	return out
+
+
+static func pick_fate(save: SaveData, i: int) -> Dictionary:
+	## take one of this run's offered 天命
+	save.fate = save.fate_offer[i]
+	save.fate_offer = []
+	return GameData.get_db().fates[save.fate]
+
+
+static func affix_here(save: SaveData) -> Dictionary:
+	## the 词缀 on the current square's enemy ({} if none)
+	var id: String = save.affixes.get(save.square, "")
+	var all: Dictionary = GameData.get_db().battle.get("affixes", {})
+	return all.get(id, {}).merged({"id": id}) if id != "" else {}
 
 
 static func here(q: Dictionary, save: SaveData) -> Dictionary:

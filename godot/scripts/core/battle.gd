@@ -61,11 +61,17 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	else:
 		b.rng.randomize()
 	b.scenario = b.db.scenarios[scenario_id]
-	var e: Dictionary = b.db.enemies[b.scenario["enemy"]]
+	var e: Dictionary = b.db.enemies[b.scenario["enemy"]].duplicate(true)
 	b.mods = mods
+	var afx: Dictionary = mods.get("affix", {})  # 词缀 on an elite / boss (see Quests.affix_here)
+	e["phys_resist"] = minf(0.8, float(e["phys_resist"]) + float(afx.get("phys_resist", 0.0)))
+	e["magic_resist"] = minf(0.8, float(e["magic_resist"]) + float(afx.get("magic_resist", 0.0)))
+	e["actions"] = int(e["actions"]) + int(afx.get("actions", 0))
 	var tough := 1.0 + float(mods.get("enemy", 0.0))
-	var max_hp := int(round(e["hp"] * tough * (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
-	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough, "stunned": false,
+	var max_hp := int(round(e["hp"] * tough * (1.0 + float(afx.get("hp", 0.0)))
+		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
+	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough * (1.0 + float(afx.get("at", 0.0))),
+		"regen": float(afx.get("regen", 0.0)), "stunned": false,
 		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_turns": 0, "charging": "", "charge_ready": false, "used": []}
 	b.party_burn = {"dmg": 0, "turns": 0}
 	var hp := 0
@@ -328,6 +334,11 @@ func _enemy_phase(defend_cut: float) -> Array:
 			return log
 	_ev({"t": "enemy_turn"})
 	log.append("—— %s 的行动 ——" % data["name"])
+	if enemy.get("regen", 0.0) > 0.0 and enemy["hp"] < enemy["max_hp"]:  # 词缀·再生
+		var h := mini(int(round(enemy["max_hp"] * enemy["regen"])), enemy["max_hp"] - enemy["hp"])
+		enemy["hp"] += h
+		_ev({"t": "enemy_heal", "amount": h, "hp": enemy["hp"]})
+		log.append("[color=red]  %s 再生，回复 %d 体力[/color]" % [data["name"], h])
 	enemy["charge_ready"] = enemy["charging"] != ""  # wound up last turn: it lands now
 	if enemy["stunned"]:
 		enemy["stunned"] = false

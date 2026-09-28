@@ -27,7 +27,7 @@ func show_screen(screen: Control) -> void:
 func new_game(lord_name: String) -> void:
 	save = SaveData.create()
 	save.lord_name = lord_name if lord_name.strip_edges() != "" else "主公"
-	Quests.ensure_started(save)
+	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
 
@@ -35,7 +35,7 @@ func new_game(lord_name: String) -> void:
 func new_lap() -> void:
 	## 新周目: the story from the top with the collection carried over (cards ever had can all be drawn)
 	save = SaveData.read().new_lap()
-	Quests.ensure_started(save)
+	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
 
@@ -186,6 +186,19 @@ func demo(name: String) -> void:
 			var o := InterludeOverlay.new()
 			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
+		"fate", "affix":  # a run's start: pick a 天命 / an elite square with its 词缀
+			save.grant_card("sunce")
+			save.grant_card("zhouyu")
+			save.quests_cleared = ["prologue"]
+			var q2: Dictionary = GameData.get_db().quests[1]
+			Quests.begin(q2, save, rng)
+			if name == "affix":
+				save.fate = save.fate_offer[0]
+				save.fate_offer = []
+				save.square = "dongbai"
+				save.visited.append("dongbai")
+				save.resolved = false
+			show_screen(MapScreen.new())
 		"ch3", "ch3_lost":  # chapter 3 after chapter 2 (董白 kept, or handed over)
 			save.quests_cleared = ["prologue", "taodong"]
 			save.flags = ["董白：留下"] if name == "ch3" else ["董白：交给袁绍"]

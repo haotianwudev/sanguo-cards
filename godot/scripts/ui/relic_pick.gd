@@ -6,8 +6,10 @@ signal picked(index: int)
 
 var title := "选一件宝物"
 var relic_ids: Array = []
+var source := "relics"  # or "fates" (天命 at the start of a run)
 
 const RARITY := {"common": ["普通", "blue"], "rare": ["稀有", "purple"], "curse": ["诅咒", "red"]}
+const FATE_RARITY := {"common": ["吉", "blue"], "rare": ["大吉", "purple"], "curse": ["险中求", "red"]}
 
 
 func _ready() -> void:
@@ -33,8 +35,8 @@ func _ready() -> void:
 	row.add_theme_constant_override("separation", 24)
 	col.add_child(row)
 	for i in relic_ids.size():
-		var r: Dictionary = db.relics[relic_ids[i]]
-		var rar: Array = RARITY.get(r["rarity"], ["", "gold"])
+		var r: Dictionary = db.relics[relic_ids[i]] if source == "relics" else db.fates[relic_ids[i]]
+		var rar: Array = (RARITY if source == "relics" else FATE_RARITY).get(r["rarity"], ["", "gold"])
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(300, 360)
 		for st in ["normal", "hover", "pressed", "focus"]:
@@ -51,7 +53,7 @@ func _ready() -> void:
 		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		b.add_child(box)
 		var icon: Control
-		var relic_tex: Texture2D = Kit.relic_icon(relic_ids[i])
+		var relic_tex: Texture2D = Kit.relic_icon(relic_ids[i]) if source == "relics" else null
 		if relic_tex != null:
 			var tr := TextureRect.new()
 			tr.texture = relic_tex
