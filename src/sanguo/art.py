@@ -219,8 +219,17 @@ def write_sources(pics: Path = PICS) -> None:
     cfg = json.loads((pics / "art.json").read_text("utf-8"))["portraits"]
     out = ["# 图片来源", "", "> 由 `sanguo-art` 根据 `pics/art.json` 生成。", "",
            "| key | 文件 | 来源 | 协议 | 作者 |", "|---|---|---|---|---|"]
-    maps = json.loads((pics / "art.json").read_text("utf-8")).get("maps", {})
-    for key, e in [*cfg.items(), *((f"map:{k}", v) for k, v in maps.items())]:
+    art_data = json.loads((pics / "art.json").read_text("utf-8"))
+    maps = art_data.get("maps", {})
+    battles = art_data.get("battles", {})
+    cgs = art_data.get("cgs", {})
+    entries = [
+        *cfg.items(),
+        *((f"map:{k}", v) for k, v in maps.items()),
+        *((f"battle:{k}", v) for k, v in battles.items()),
+        *((f"cg:{k}", v) for k, v in cgs.items()),
+    ]
+    for key, e in entries:
         if key.startswith("_"):
             continue
         src = f"[链接]({e['source']})" if e.get("source") else "用户提供"

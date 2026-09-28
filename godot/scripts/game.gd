@@ -107,6 +107,14 @@ func demo(name: String) -> void:
 		o.set_anchors_preset(Control.PRESET_FULL_RECT)
 		root.add_child(o)
 		return
+	if name.begins_with("battle:"):  # --demo=battle:<scenario_id>
+		save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
+		save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
+		save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
+		var b := BattleScreen.new()
+		b.scenario_id = name.substr(7)
+		show_screen(b)
+		return
 	match name:
 		"event":  # a ？ square: 左慈 on the hill
 			var q: Dictionary = GameData.get_db().quests[0]

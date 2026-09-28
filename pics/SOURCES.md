@@ -67,3 +67,12 @@
 | `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
+| `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_rescue` | source/cg/c1_rescue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_dinner` | source/cg/c1_dinner.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_oath` | source/cg/c1_oath.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_north` | source/cg/c1_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:i1_sewing` | source/cg/i1_sewing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
