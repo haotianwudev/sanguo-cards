@@ -186,6 +186,19 @@ func demo(name: String) -> void:
 			var o := InterludeOverlay.new()
 			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
+		"ch3", "ch3_lost":  # chapter 3 after chapter 2 (董白 kept, or handed over)
+			save.quests_cleared = ["prologue", "taodong"]
+			save.flags = ["董白：留下"] if name == "ch3" else ["董白：交给袁绍"]
+			if name == "ch3":
+				save.grant_card("dongbai")
+			Quests.ensure_started(save)
+			show_screen(MapScreen.new())
+		"ending":  # the 结局一 card
+			show_screen(TitleScreen.new())
+			var o := InterludeOverlay.new()
+			o.ending = GameData.get_db().quests[2]["ending"]
+			o.scenes = []
+			root.add_child(o)
 		"titlecard":  # the chapter-2 title card straight away
 			var o := InterludeOverlay.new()
 			o.next_title = GameData.get_db().quests[1]["title"]

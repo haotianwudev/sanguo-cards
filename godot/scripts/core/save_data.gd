@@ -101,6 +101,7 @@ func new_lap() -> SaveData:
 	s.party = party.duplicate()
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
+	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
 	for c in owned:
 		if not s.seen.has(c):
 			s.seen.append(c)

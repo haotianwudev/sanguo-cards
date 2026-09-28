@@ -1059,7 +1059,11 @@ func _finish_chapter() -> void:
 	o.scenes = Quests.interlude(done_id, Game.save)
 	o.next_title = nxt["title"] if nxt != null else ""
 	o.next_subtitle = nxt.get("subtitle", "") if nxt != null else ""
-	o.finished.connect(_after_interlude)
+	o.ending = q.get("_raw", q).get("ending", {})
+	if o.ending.is_empty():
+		o.finished.connect(_after_interlude)
+	else:  # an ending: back to the title screen, where a new 周目 can start
+		o.finished.connect(func(): Game.show_screen(TitleScreen.new()))
 	add_child(o)
 
 

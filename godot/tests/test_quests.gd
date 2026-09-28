@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "yuxi"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -798,3 +798,19 @@ func test_every_interlude_click_turns_the_page() -> void:
 	# the full-screen backdrop must let clicks through to the overlay, which turns the page
 	var src := FileAccess.get_file_as_string("res://scripts/ui/interlude_overlay.gd")
 	check(src.contains("bg.mouse_filter = Control.MOUSE_FILTER_IGNORE"), "the backdrop doesn't swallow clicks")
+
+
+func test_chapter_three_branches_on_dongbai_and_ends_in_ending_one() -> void:
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[2]
+	check_eq(q["id"], "yuxi")
+	var kept := SaveData.create()
+	kept.flags = ["董白：留下"]
+	var gone := SaveData.create()
+	gone.flags = ["董白：交给袁绍"]
+	var sq: Dictionary = q["squares"]
+	check(Quests.is_open(sq["wenji_seen"], kept) and not Quests.is_open(sq["wenji_taken"], kept), "董白 alive: she spots 蔡文姬")
+	check(Quests.is_open(sq["wenji_taken"], gone) and not Quests.is_open(sq["wenji_seen"], gone), "otherwise 蔡文姬 is taken")
+	check(sq["wenji_join"]["cards"].has("caiwenji"), "saved, she joins")
+	check_eq(sq["yuanshu"]["lose_goto"], "end", "袁术 can't really be beaten: losing leads on to the ending")
+	check(q["ending"].get("title", "").begins_with("结局一"), "the chapter ends in 结局一")

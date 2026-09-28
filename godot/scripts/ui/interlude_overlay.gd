@@ -6,6 +6,7 @@ signal finished
 
 var scenes: Array = []
 var next_title := ""  # "" when there is no next chapter yet
+var ending: Dictionary = {}  # {title, text}: an ending card instead of the next chapter's title
 var next_subtitle := ""  # time and place under the title (「半年后」)
 var _page := -1
 var _line := 0  # lines of the current scene shown so far
@@ -126,6 +127,33 @@ func _show_title() -> void:
 	_box.size = size
 	_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_box)
+	if not ending.is_empty():  # 结局: its name, a line under it, then back to the title screen
+		var bg := ColorRect.new()
+		bg.color = Color(0, 0, 0, 1)
+		bg.size = size
+		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_box.add_child(bg)
+		var e := Kit.label(ending.get("title", ""), 64, "gold")
+		e.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		e.position = Vector2(0, 250)
+		e.size = Vector2(1280, 110)
+		_box.add_child(e)
+		var line := Kit.label(ending.get("text", ""), Kit.FONT_BIG)
+		line.add_theme_color_override("font_color", Color(0.95, 0.92, 0.85, 0.85))
+		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.position = Vector2(140, 380)
+		line.size = Vector2(1000, 100)
+		_box.add_child(line)
+		var back := Kit.label("点击回到标题（可以开始新周目）", Kit.FONT_BODY)
+		back.add_theme_color_override("font_color", Color(1, 1, 1, 0.5))
+		back.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		back.position = Vector2(0, 520)
+		back.size = Vector2(1280, 40)
+		_box.add_child(back)
+		_box.modulate.a = 0.0
+		_box.create_tween().tween_property(_box, "modulate:a", 1.0, 1.6)
+		return
 	var t := Kit.label(next_title if next_title != "" else "未完待续", 72, "gold")
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	t.position = Vector2(0, 280)

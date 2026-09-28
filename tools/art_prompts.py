@@ -22,6 +22,30 @@ PORTRAIT_BG = "plain off-white studio background with subtle warm lighting (clea
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "caiwenji": ("Cai Wenji (蔡文姬, Cai Yan), the gifted poet and musician, daughter of the scholar Cai Yong",
+                 "Adult woman in her 20s, gentle but steady eyes with a quiet sorrow, long black hair half tied with a white ribbon.",
+                 "Plain white scholar's robe with pale blue trim, a little dusty from the road.",
+                 "Holding a guqin (古琴) to her chest; one of its strings is broken."),
+    "yuanshu": ("Yuan Shu (袁术), the arrogant warlord of Nanyang who dreams of becoming emperor",
+                "Plump, pale man in his 30s with a thin mustache, heavy-lidded eyes full of contempt, a self-satisfied sneer.",
+                "Gaudy gold-embroidered imperial-yellow robes he has no right to wear, a jeweled crown, rings on every finger.",
+                "Reaching out with one greedy hand as if for the jade seal, a cup of honey water in the other."),
+    "jiling": ("Ji Ling (纪灵), Yuan Shu's foremost general",
+               "Tall, grim man in his 30s with a hard square face, thick eyebrows and a short beard.",
+               "Heavy gilded lamellar armor with the character 袁 on the chest plate, a red cape.",
+               "Wielding a three-pointed double-edged glaive (三尖两刃刀)."),
+    "leibo": ("Lei Bo (雷薄), one of Yuan Shu's cavalry commanders",
+              "Wiry, sharp-nosed man in his 30s with a cruel grin and a scar across his chin.",
+              "Light cavalry armor in Yuan yellow and black, a fur-trimmed collar.",
+              "Mounted, swinging a curved cavalry saber, a bow on his back."),
+    "chenlan": ("Chen Lan (陈兰), Yuan Shu's general guarding a mountain pass",
+                "Weathered, stubborn man in his 40s with a grey-streaked beard and narrowed eyes.",
+                "Battered iron armor under a rain cape, mud on his boots.",
+                "Planting a long spear in the ground at a narrow mountain pass in the rain."),
+    "qiaorui": ("Qiao Rui (桥蕤), a stout officer of Yuan Shu who spies on the Sun household",
+                "Short, round-bellied man in his 30s with a sly smile and small shrewd eyes.",
+                "Plain officer's armor over a merchant-style robe (he is in disguise), a straw hat hanging on his back.",
+                "A heavy broad saber resting on his shoulder."),
     "chenwu": ("Chen Wu (陈武), a loyal Jiangdong general from Lujiang who followed Sun Ce",
                "Sturdy, tanned man in his late 20s, square jaw, short beard, calm steady eyes of a marksman.",
                "Jiangdong red-and-brown lamellar armor, a quiver of red-fletched arrows on his back, a leather bracer.",
@@ -131,6 +155,12 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "c3_shanfei": "a one-eyed bandit chief on horseback dragging a woman in white onto his saddle amid fleeing refugees on a dusty road, a broken guqin on the ground",
+    "c3_qiaorui": "outside the Nanyang city wall at dusk: the stout officer Qiao Rui with Yuan soldiers in disguise stepping out of a market crowd, sabers drawn",
+    "c3_jiling": "a rainy night courtyard lit by torches: the general Ji Ling with a three-pointed glaive at the gate under a 袁 banner, soldiers pouring in",
+    "c3_leibo": "a mountain trail at dawn: Lei Bo leading Yuan cavalry in pursuit, arrows flying, mud splashing",
+    "c3_chenlan": "a narrow mountain pass in heavy rain: Chen Lan and a wall of spearmen blocking the way",
+    "c3_yuanshu": "a rain-soaked valley mouth: Yuan Shu's golden-roofed carriage behind rows of archers and a huge 袁 banner, overwhelming numbers",
     "boar": "a huge wild boar charging out of a muddy forest clearing full of fallen logs in the hills of Jiangdong",
     "shuizei_scout": "river bandits leaping out of tall riverside reeds at a broken wooden fort gate, brandishing knives",
     "shuizei": "the river bandit chief 'River Dragon' Hu Yu with his twin daggers on the plank walkways of a river fortress over dark water",
@@ -156,6 +186,15 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c3_leave": "leaving the ruins of burning Luoyang: an endless column of refugees, Sun Jian riding in front hugging a brocade box, Lady Wu handing out food from her carriage",
+    "c3_wenji": "on a muddy road after a fight: Cai Wenji, an adult woman in a white robe, kneeling to pick up her guqin with a broken string, Dong Bai with her twin hammers looking away embarrassed, Lady Wu putting a cloak on Cai Wenji's shoulders",
+    "c3_supply": "night in a hungry army camp: Sun Jian alone by a campfire opening and closing a brocade box, Zhou Yu counting on his fingers, Sun Ce hiding his rice bowl behind his back",
+    "c3_slip": "a lively tavern: a tipsy Sun Ce slamming the table and bragging, Zhou Yu lunging to cover his mouth, the hero throwing coins on the table, soldiers in Yuan uniforms at the next table freezing with chopsticks in the air (comedic)",
+    "c3_entrust": "lamplit room at night: Sun Jian placing the brocade box with the jade seal into Lady Wu's hands, the hero standing at the doorway, Sun Jian gruffly avoiding his eyes",
+    "c3_warn": "the night before the campaign: the hero earnestly pleading with Sun Jian, who laughs and claps him hard on the shoulder, a war banner and armor stand behind them",
+    "c3_raid": "rainy night: torches and a 袁 banner outside the courtyard wall, Ji Ling with a three-pointed glaive at the gate, Lady Wu clutching the brocade box behind the hero, Sun Ce charging out with a spear",
+    "c3_news": "a rainy mountain pass: the dying general Chen Lan in the mud, Lady Wu sinking to her knees in the rain with the brocade box fallen beside her, Sun Ce holding her and crying, Zhou Yu's ledger lying in the mud (grief, no gore)",
+    "c3_end": "a restrained tragic scene in the rain: Lady Wu standing tall and calm facing Yuan Shu's golden carriage, the jade seal box on the ground at her feet, the hero stepping in front of her with Sun Jian's old saber, Sun Ce and Zhou Yu escaping on horseback in the distance (no gore, no violence shown)",
     "c1_wake": "a beautiful mature noblewoman (Lady Wu, adult) leaning over a young man with short modern hair lying in an embroidered bed, pressing a damp cloth on his forehead, lanterns, incense smoke, soft light",
     "c1_bandage": "Lady Wu sitting on the bed rewrapping a bandage on the young man's thigh, a tray with medicine and bandage rolls, the young man bright red with embarrassment, morning light (comedic, non-explicit)",
     "c1_raid": "a night raid: the grinning bandit chief Hu Yu with a headband holding up a torch, the gate of 富春山庄 in flames, river bandits and Yellow Turban men charging with tridents and sabers, a line of torch-lit boats on the river",

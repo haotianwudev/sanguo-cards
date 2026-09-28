@@ -34,6 +34,11 @@ func _ready() -> void:
 			var back := Kit.button("放弃重玩，回到主线", "gray")
 			back.pressed.connect(Game.back_to_story)
 			col.add_child(back)
+		var endings: Array = saved.flags.filter(func(f): return str(f).begins_with("结局")) if saved != null else []
+		if not endings.is_empty():
+			var end_l := Kit.label("已达成：" + "、".join(endings), Kit.FONT_BODY, "gold")
+			end_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			col.add_child(end_l)
 		if saved != null and saved.lap > 1:
 			var lap_l := Kit.label("第 %d 周目" % saved.lap, Kit.FONT_BODY, "muted")
 			lap_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
