@@ -5,6 +5,33 @@
 > 出好的图按 key 命名：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），战斗 CG 放 `pics/source/battles/`，
 > 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。
 
+## 下一批（交给 Gemini）
+
+按顺序画；交付后重跑本脚本，这一条会自动消失。
+
+1. `chenwu` — 陈武（R 弓兵）（立绘）
+2. `jiangdong_gong` — 江东弓手（立绘）
+3. `liehu` — 山中猎户（立绘）
+4. `yuenv_gong` — 越女弓手（成年女性）（立绘）
+5. `shanyue_nu` — 山越弩手（立绘）
+6. `c1_armor` — 第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）（剧情 CG）
+7. `c2_setout` — 第二章开场：北上（剧情 CG）
+8. `c2_zumao` — 阵前：华雄追砍祖茂（剧情 CG）
+9. `c2_jianhua` — 孙坚斩华雄（剧情 CG）
+10. `c2_capture` — 俘虏董白（剧情 CG）
+11. `c2_captive` — 俘虏的日子：石头剪刀布（剧情 CG）
+12. `c2_raid` — 吕布劫营（剧情 CG）
+13. `taodong` — 第二章地图底图（换掉程序生成的占位）（地图）
+
+交图规则：
+
+- 每张图都用下面对应小节的**完整提示词**；图上长相必须和台词对得上（见 `CARD-DESIGN.md` 第 7 节）。
+- 女性角色一律画成成年人；董白不写年龄、不画成萝莉。
+- 文件名 = key：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），剧情 CG 放 `pics/source/cg/`，地图放 `pics/source/map/bg_<key>.jpg`。
+- 在 `pics/art.json` 对应段登记（立绘要填 `face` / `head`），`license` 写「用户提供（Gemini 生成）」；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。
+- **不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。
+- 提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。
+
 ## 立绘（竖版 3:4）
 
 ### `chenwu` ⬜ 缺
