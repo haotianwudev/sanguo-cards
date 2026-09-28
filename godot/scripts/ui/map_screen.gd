@@ -757,6 +757,10 @@ func _apply_cg_mode() -> void:
 		_sheet.visible = true
 	_scroll.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
+	# a CG gets the screen: the text box shrinks to a subtitle strip at the bottom
+	_sheet.position = Vector2(24, 552) if _cg_mode else Vector2(24, 448)
+	_sheet.size = Vector2(1232, 156) if _cg_mode else Vector2(1232, 258)
+	_dlg_tools.position = Vector2(1040, _sheet.position.y + 8)
 	var bg := Kit.c("card")
 	if _cg_mode:
 		bg.a = 0.86
