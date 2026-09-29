@@ -314,6 +314,11 @@ NEXT = [
     ("battle", "tiger", "打虎（第一章）"), ("battle", "yaodao", "妖道唐周（第一章）"),
     ("battle", "shuizei_main", "水贼大寨·何仪（第一章 BOSS）"), ("battle", "huaxiong", "汜水关·华雄"),
     ("battle", "dongbai", "董白（精英）"), ("battle", "hulao_ch1", "追兵·吕布"),
+    ("battle", "xiliang_youqi", "西凉游骑（第二章）"), ("battle", "guosi", "郭汜（第二章）"),
+    ("battle", "feixiong", "飞熊军（第二章）"), ("battle", "liru", "李儒伏兵（第二章）"),
+    ("battle", "lijue", "洛阳城门·李傕（第二章）"), ("battle", "xiliang_scout", "截粮·西凉斥候（第二章）"),
+    ("cg", "c2_setout", "第二章开场：北上"), ("cg", "c2_zumao", "阵前：华雄追砍祖茂"), ("cg", "c2_jianhua", "孙坚斩华雄"),
+    ("cg", "c2_capture", "俘虏董白"), ("cg", "c2_captive", "俘虏的日子：石头剪刀布"), ("cg", "c2_raid", "吕布劫营"),
     ("ui", "chest_normal", "宝箱（开宝箱动画用，见本文件「宝箱图」）"), ("ui", "chest_grand", "高级宝箱（同上）"),
     ("cg", "c1_armor", "第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）"),
 ]
@@ -322,6 +327,10 @@ CHESTS = {
     "chest_normal": "a sturdy wooden treasure chest with bronze corner caps and a heavy bronze padlock, Han-dynasty style, closed",
     "chest_grand": "a grand red-lacquered treasure chest painted with gold clouds and dragons, inset with jade, a faint golden glow leaking from the seam, closed",
 }
+# already delivered but wrong somewhere: redraw (listed above the batch)
+REDO = [
+    ("inf_n", "官军刀兵：盾牌上的鹰和回纹边是古希腊重装步兵盾的样式——换成汉军的盾（长方形或圆盾，黑红漆面，饕餮 / 云纹或素面），其他不变"),
+]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
     "宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。",
@@ -407,6 +416,8 @@ def main() -> None:
     todo = [n for n in NEXT if n[1] not in delivered[n[0]]]
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
+        if REDO:
+            out += ["**先重画**（已交付但有地方不对）：", ""] + [f"- `{k}` — {why}" for k, why in REDO] + [""]
         out += [f"{i}. `{key}` — {what}（{ {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物', 'battle': '战斗 CG', 'ui': '界面'}[kind] }）"
                 for i, (kind, key, what) in enumerate(todo, 1)]
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
