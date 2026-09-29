@@ -2096,14 +2096,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ## 词缀徽记（128×128 透明 PNG，放 `godot/data/art/affixes/<key>.png`）
 
-### `xunjie`
-
-```
-A tiny game badge icon: a winged boot / swift wind swirl, drawn as a red Chinese seal stamp (朱印) with the symbol carved inside.
-Composition & Framing: square 128x128 (draw at 512x512), transparent background (PNG), bold simple shapes readable at 28px.
-Style: ink and cinnabar, crisp edges; no text.
-```
-
 ## 界面大图（横版 16:9 JPG，放 `godot/data/art/ui/<key>.jpg`）
 
 ## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）
