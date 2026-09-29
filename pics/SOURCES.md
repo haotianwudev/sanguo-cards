@@ -64,6 +64,7 @@
 | `xiliang_bing` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangfei` | source/generals/zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `inf_n` | source/soldiers/inf_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -260,17 +260,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
 
-### `inf_n` ⬜ 缺
-
-```
-A vertical character portrait of a Han dynasty government sword-and-shield soldier (官军刀兵).
-Appearance: Disciplined, stern-faced soldier in his 20s.
-Armor & Clothing: Standard Han army lamellar armor and helmet.
-Weapon: Sword raised behind a round shield.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
 ### `c3_shanfei`

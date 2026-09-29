@@ -60,7 +60,8 @@
     "xiliang_scout": {"src": "source/soldiers/xiliang_scout.jpg", "face": [0.52, 0.22], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "xiliang_bing": {"src": "source/soldiers/xiliang_scout.jpg", "face": [0.52, 0.22], "head": 0.22, "license": "用户提供（Gemini 生成）"},
     "zhangfei": {"src": "source/generals/zhangfei.jpg", "face": [0.50, 0.22], "head": 0.22, "license": "用户提供（Gemini 生成）"},
-    "tangji": {"src": "source/generals/tangji.jpg", "face": [0.50, 0.23], "head": 0.24, "license": "用户提供（Gemini 生成）"}
+    "tangji": {"src": "source/generals/tangji.jpg", "face": [0.50, 0.23], "head": 0.24, "license": "用户提供（Gemini 生成）"},
+    "inf_n": {"src": "source/soldiers/inf_n.jpg", "face": [0.51, 0.25], "head": 0.22, "license": "用户提供（Gemini 生成）"}
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {

@@ -38,7 +38,7 @@
 | ✅ 正式 | `fushui_xintu` | 于吉信徒 |
 | ⬜ 缺 | `shanzei_bing` | 山贼 |
 | ✅ 正式 | `huangjin_nanxia` | 黄巾余孽 |
-| ⬜ 缺 | `inf_n` | 官军 |
+| ✅ 正式 | `inf_n` | 官军 |
 | ✅ 正式 | `boar` | 野猪 |
 | ✅ 正式 | `langlijiao` | 「浪里蛟」胡玉 |
 | ✅ 正式 | `yaodao` | 妖道唐周 |
