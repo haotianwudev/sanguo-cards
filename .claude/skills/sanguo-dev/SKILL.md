@@ -204,6 +204,8 @@ birthplace is 卞夫人's route. Historical women who were children in 190 (甄�
 out of the story until later chapters — as gacha cards they're fine.
 
 Writing rules:
+- A named enemy should be introduced before you fight it: give its battle square `text` (lines play first, then
+  the enemy info and 出战) rather than putting the introduction in the square after the fight.
 - The hero is a modern man who **never read 三国演义** (「三国演义我不熟啊」) and regrets it (「早知道会穿越，当年就该把那本书
   读完」). He knows only the famous: from textbooks (周瑜 via 苏轼, 蔡文姬, 二乔), games (孙策, 吕布, 左慈) and TV (关羽,
   华佗, 黄盖's 苦肉计); most others he's never heard of. His foresight is thin: 孙坚's card blurb says only that he dies

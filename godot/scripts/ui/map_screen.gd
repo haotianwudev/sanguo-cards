@@ -30,7 +30,8 @@ var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
-var _dlg_prev := ""  # the last named speaker in this scene (for 他 / 她 lines)
+var _dlg_prev := ""
+var _dlg_after := ""  # shown under the last line (a battle's enemy info)  # the last named speaker in this scene (for 他 / 她 lines)
 var _dlg_raw: Array = []  # the lines before {lord} is filled in (for speaker lookup)
 var _dlg_prompt := ""  # the one-line summary shown at the choice (square / event "prompt")
 var _sheet_hidden := false
@@ -506,7 +507,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = true
 	_apply_cg_mode()
 	var raw_lines: Array = ev.get("text", s["text"])
-	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose"] \
+	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle"] \
 		or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()))
 	_dlg_face = null
 	if talking:  # a face for whoever is speaking, changed line by line
@@ -657,7 +658,9 @@ func _show_square(s: Dictionary) -> void:
 			buttons.add_child(rest)
 			Kit.focus(rest)
 	# narrative text: one line per click, then the buttons
-	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty())
+	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()) \
+		or (s["type"] == "battle" and not save.resolved)  # a battle with lines of its own plays them before the fight
+	_dlg_after = _battle_info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
 	if narrative and lines.size() > 1:
 		_dlg_lines = lines
 		_dlg_raw = raw_lines
@@ -692,6 +695,11 @@ func _dialog_show() -> void:
 		if _dlg_recap:  # choosing: keep the whole setup in view next to the options
 			_dialog_skip()
 			return
+		if _dlg_after != "":  # before a fight: the last line, then what you're up against
+			_dlg_text.text = str(_dlg_lines[_dlg_i]) + "\n\n" + _dlg_after
+			_dlg_text.scroll_active = true
+			_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
+			_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
 		_dlg_buttons.visible = true
 		_dlg_i = -1
 		for b in _dlg_buttons.find_children("*", "Button", true, false):
@@ -709,6 +717,8 @@ func _dialog_skip() -> void:
 		_dlg_text.text = str(_dlg_lines[-1])
 	else:
 		_dlg_text.text = "\n".join(_dlg_lines) if _dlg_recap else "\n\n".join(_dlg_lines)
+		if _dlg_after != "":
+			_dlg_text.text += "\n\n" + _dlg_after
 	_dlg_text.scroll_active = true
 	_dlg_text.scroll_following = true  # land on the last lines — the ones that set up the choice
 	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
