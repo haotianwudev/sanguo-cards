@@ -103,8 +103,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `wangyun` ⬜ 缺
 
 ```
-A vertical character portrait of Wang Yun (王允), the Minister over the Masses, secretly plotting against Dong Zhuo.
-Appearance: Lean, upright old man in his 60s with neatly combed white hair and a measuring, careful gaze.
+A vertical character portrait of Wang Yun (王允), the Minister over the Masses — outwardly righteous, secretly ambitious and cunning.
+Appearance: Lean, upright old man in his 60s with neatly combed white hair; a benevolent, righteous face, but a cold, calculating glint in the eyes.
 Armor & Clothing: Dark official's robe with the minister's seal cord.
 Weapon: Holding a folded memorial behind his back, standing very straight.
 Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.

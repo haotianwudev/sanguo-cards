@@ -211,7 +211,9 @@ trap to kill everyone, 董白 too; break out and beat 董卓's guard, but he ord
 貂蝉 on her own, rides in with his cavalry and 貂蝉 (「诛此贼！」) and saves them; 董白 shields him, 吕布 kills him, 董白 breaks —
 she never knew, believing the marriage and the reconciliation were sincere. Running gag on route B: 蔡文姬 and 董白 (both
 adults, both sweet on the hero) — 蔡文姬 sniffs at 董白's lack of learning and envies her figure, 董白 fires back that
-蔡文姬 has none; keep it light banter. (未完待续)
+蔡文姬 has none; keep it light banter. 王允 looks righteous but is ambitious and cunning — only hinted so far (a
+merchant's appraising look, tears that come right on time, first up the steps to take charge after 董卓 dies without a
+glance at 董白); the user will write where that goes. (未完待续)
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
