@@ -15,6 +15,7 @@
   "chenwu": {"file": "chenwu.jpg", "face": [0.5, 0.35], "head": 0.16},
   "sunjing": {"file": "sunjing.jpg", "face": [0.5, 0.23], "head": 0.22},
   "wujing": {"file": "wujing.jpg", "face": [0.5, 0.2], "head": 0.2},
+  "sunben": {"file": "sunben.jpg", "face": [0.5, 0.23], "head": 0.2},
   "dianwei": {"file": "dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true},
   "diaochan": {"file": "diaochan.jpg", "face": [0.55, 0.22], "head": 0.07, "placeholder": true},
   "ganning": {"file": "ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true},

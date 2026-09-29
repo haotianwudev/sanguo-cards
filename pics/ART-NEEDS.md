@@ -204,5 +204,5 @@
 | ✅ 正式 | `handang` | 韩当（R） |
 | ⬜ 缺 | `zhuzhi` | 朱治·君理（R） |
 | ✅ 正式 | `wujing` | 吴景（R） |
-| ⬜ 缺 | `sunben` | 孙贲（R） |
+| ✅ 正式 | `sunben` | 孙贲（R） |
 | ✅ 正式 | `sunjing` | 孙静（R） |

@@ -19,6 +19,7 @@
 | `chenwu` | source/generals/chenwu.jpg | 用户提供 | Antigravity 生成 | — |
 | `sunjing` | source/generals/sunjing.jpg | 用户提供 | Antigravity 生成 | — |
 | `wujing` | source/generals/wujing.jpg | 用户提供 | Antigravity 生成 | — |
+| `sunben` | source/generals/sunben.jpg | 用户提供 | Antigravity 生成 | — |
 | `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
 | `diaochan` | source/public-domain/diaochan.jpg | [链接](https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg) | Public domain | Unknown author |
 | `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |
