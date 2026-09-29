@@ -196,18 +196,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `aguduo` ⬜ 缺
-
-```
-A vertical character portrait of Aguduo (阿古朵), a Qiang woman who captains Dong Bai's Xiliang woman cavalry — an adult woman.
-Appearance: Blunt, loyal adult woman in her mid-20s with a wind-burned face, many small braids and a fur hat.
-Armor & Clothing: Leather and fur riding armor, a red sash like the one Dong Bai's riders wear.
-Weapon: A curved saber and a bone flute (qiang di) hanging from her belt.
-Background: the Xiliang grassland with a string of horses and a felt tent.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `gaoshun` ⬜ 缺
 
 ```
@@ -999,7 +987,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c4_dongjia`
 
 ```
-A horizontal story event illustration: a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) in the doorway with her twin hammers, behind her a few dozen people — scarred Flying Bear veterans, household servants, old retainers with kitchen cleavers; the hero and Cai Wenji (adult) looking up from the straw.
+A horizontal story event illustration: a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) in the doorway with her twin hammers, alone — one woman, one horse, a pair of hammers, the empty street behind her; the hero and Cai Wenji (adult) looking up from the straw.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
