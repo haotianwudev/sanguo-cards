@@ -2001,14 +2001,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）
 
-### `renzhe`
-
-```
-A square emblem illustration for a 'fate' card in a roguelike: a pair of hands offering a bowl of rice and a bandage to a wounded soldier.
-Composition & Framing: square 512x512 (draw at 1024x1024), the symbol centred inside a round jade-and-gold medallion with a thin gold rim, transparent background (PNG).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, painted emblem, strong silhouette readable at 112px; no text.
-```
-
 ### `caiyun`
 
 ```
