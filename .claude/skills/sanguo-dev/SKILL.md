@@ -42,9 +42,13 @@ timeout 120 $G --headless --path . --import >/dev/null 2>&1
 timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad>/x.png --wait=1.5
 ```
 
+第四章：`--demo=ch6`（二周目，围府线）/ `--demo=ch6b`（三周目，报信线），加 `--at=<square id>` 直接跳到那一格截图。
+`tests/test_routes.gd` walks chapters 3–4 on every 周目 route (squares, records, endings, cards, which chapter follows) and checks
+that no two open squares ever share a spot; keep it green when you add squares.
+
 Fonts are bundled subsets (`godot/data/fonts/body.ttf` 思源黑体, `name.ttf` 霞鹜文楷), used by `Kit.make_theme` / `Kit.name_font`.
 **Story text with a rare character** (not in the common GB2312 set) shows as a box on phones until you rerun `python tools/build_fonts.py`
-(it rescans `godot/data` + `godot/scripts`), then `--import`.
+(it rescans `godot/data` + `godot/scripts`), then `--import`. `test_the_bundled_font_has_every_character_the_game_prints` fails when you forget.
 UI icons (badges, map squares, token, relics, card back, stat/skill icons) are generated placeholders from `tools/generate_ui_assets.py`;
 once any is replaced by drawn art, don't rerun that script — it overwrites them all.
 

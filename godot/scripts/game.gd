@@ -232,6 +232,20 @@ func demo(name: String) -> void:
 			save.grant_card("dongbai")
 			Quests.ensure_started(save)
 			show_screen(MapScreen.new())
+		"ch6", "ch6b":  # 第四章 · 挟天子: 二周目 (nobody warns you) / 三周目 (貂蝉 comes); --at=<square> jumps ahead
+			save.quests_cleared = ["prologue", "taodong", "yuxi", "shouluoyang", "changan"]
+			save.flags = ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"]
+			if name == "ch6b":
+				save.flags.append("结局二 · 同归")
+			for c in ["dongbai", "caiwenji", "huangfusong", "zhujun"]:
+				save.grant_card(c)
+			Quests.ensure_started(save)
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--at="):
+					save.square = a.trim_prefix("--at=")
+					save.visited.append(save.square)
+					save.resolved = false
+			show_screen(MapScreen.new())
 		"ch2_wait":  # chapter 2 after 董白's fate (kept): the months before 洛阳 burns
 			save.quests_cleared = ["prologue"]
 			var q2: Dictionary = GameData.get_db().quests[1]
