@@ -15,8 +15,7 @@
 
 1. `c2_sanying` — 虎牢关：三英战吕布（打斗 + 一排看呆的人，见提示词）（剧情 CG）
 2. `huaxiong` — 汜水关·华雄（西凉铁骑重甲大刀，关口烽燧荒野）（战斗 CG）
-3. `dongbai` — 董白（董卓孙女，成年女将双巨锤，被重锤砸裂碎石坑凹陷的河滩）（战斗 CG）
-4. `hulao_ch1` — 追兵·吕布（虎牢关追击战，月夜残阳赤兔马方天戟）（战斗 CG）
+3. `hulao_ch1` — 追兵·吕布（虎牢关追击战，月夜残阳赤兔马方天戟）（战斗 CG）
 5. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
 6. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
 7. `feixiong` — 飞熊军（黑甲重骑阵列）（战斗 CG）
@@ -969,14 +968,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the giant general Hua Xiong swinging his great blade on an open battlefield, a red headscarf lying in the dust.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `dongbai`
-
-```
-A horizontal battle scene illustration: Dong Bai, an adult woman general, leaping with two giant bronze hammers on a riverbank cratered by her blows.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
