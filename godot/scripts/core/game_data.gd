@@ -111,7 +111,7 @@ func _load(dir: String) -> void:
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),
 			"text": ev.get("text", []), "cg": ev.get("cg", ""), "prompt": ev.get("prompt", ""),
 			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
-				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", [])})}
+				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", []), "needs": o.get("needs", {})})}
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")

@@ -111,6 +111,8 @@ func test_every_event_option_resolves_or_leads_somewhere() -> void:
 				s.square = "road"
 				s.resolved = false
 				s.events = {"road": eid}
+				s.relics = ["hupi", "jiunang"]  # enough to trade with (options with needs)
+				s.soldiers = {"danyang": 2, "changsha": 2}
 				Quests.choose_event(q, s, rng(seed_value), i)
 				check(s.resolved or not s.event_battle.is_empty() or not s.offer.is_empty(), "%s option %d" % [eid, i])
 				if not s.offer.is_empty():
@@ -234,8 +236,9 @@ func play_quest(q: Dictionary, s: SaveData, pick: int, fork: int, seed_value: in
 	for _step in 100:
 		var sq := Quests.here(q, s)
 		if sq["type"] == "mystery" and not s.resolved:
-			Quests.event_here(q, s, r)
-			Quests.choose_event(q, s, r, 0)
+			var ev := Quests.event_here(q, s, r)
+			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
+			Quests.choose_event(q, s, r, ok[0])  # the first option you can afford
 		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
 			if not fight(q, s, r):
 				if not Quests.lose(q, s, r):
@@ -851,3 +854,18 @@ func test_affixes_change_the_enemy() -> void:
 	var hp0: int = regen.enemy["hp"]
 	regen.end_round()
 	check(regen.take_events().any(func(e): return e["t"] == "enemy_heal") or regen.enemy["hp"] >= hp0, "再生 heals each enemy turn")
+
+
+func test_trades_need_something_to_trade() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var swap: Dictionary = db.events["merchant"]["options"][0]  # a relic for a general
+	check(Quests.option_blocked(s, swap) != "", "no relic: can't trade one")
+	s.relics = ["hupi"]
+	check_eq(Quests.option_blocked(s, swap), "", "with a relic: fine")
+	var pay: Dictionary = db.events["shanzei"]["options"][1]  # pay the toll with a soldier
+	check(Quests.option_blocked(s, pay) != "", "no soldiers: can't pay the toll")
+	s.grant_card("danyang")
+	check_eq(Quests.option_blocked(s, pay), "")
+	var flee: Dictionary = db.events["storm"]["options"][1]  # losing a soldier is just a cost here
+	check_eq(Quests.option_blocked(SaveData.create(), flee), "", "costs aren't trades")

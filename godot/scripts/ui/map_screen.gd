@@ -631,13 +631,17 @@ func _show_square(s: Dictionary) -> void:
 				buttons.add_child(grid)
 				if many:
 					buttons.custom_minimum_size.x = 380
+				var focused := false
 				for i in ev["options"].size():
-					var b := Kit.button(ev["options"][i]["label"], "gold")
+					var why := Quests.option_blocked(Game.save, ev["options"][i])  # a trade with nothing to trade: greyed
+					var b := Kit.button(ev["options"][i]["label"] + ("（%s）" % why if why != "" else ""), "gold")
 					b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+					b.disabled = why != ""
 					b.pressed.connect(_choose_event.bind(i))
 					grid.add_child(b)
-					if i == 0:
+					if why == "" and not focused:
 						Kit.focus(b)
+						focused = true
 		"treasure", "recruit":
 			var is_chest: bool = s["type"] == "treasure"
 			text.text = "宝箱里有几张兵卡，只能拿一张。同种兵卡越多部队越强，但重复的会衰减——缺什么拿什么。" if is_chest \

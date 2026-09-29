@@ -348,12 +348,26 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 	return GameData.get_db().events[save.events[s["id"]]]
 
 
+static func option_blocked(save: SaveData, opt: Dictionary) -> String:
+	## "" if the event option can be taken, else what's missing (a trade needs something to trade)
+	var needs: Dictionary = opt.get("needs", {})
+	if save.relics.size() < int(needs.get("relics", 0)):
+		return "没有宝物" if save.relics.is_empty() else "宝物不够"
+	var soldiers := 0
+	for c in save.soldiers:
+		soldiers += int(save.soldiers[c])
+	if soldiers < int(needs.get("soldiers", 0)):
+		return "兵卡不够（要 %d 张）" % int(needs["soldiers"])
+	return ""
+
+
 static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, i: int) -> Dictionary:
 	## Take option i of the current event. Returns {gained, log}. Afterwards the square is either resolved,
 	## waiting for a fight (save.event_battle) or waiting for a pick (save.offer).
 	q = view(q, save)
 	var ev := event_here(q, save, rng)
 	var opt: Dictionary = ev["options"][i]
+	assert(option_blocked(save, opt) == "", "option %s is blocked: %s" % [opt["label"], option_blocked(save, opt)])
 	save.event_note = ["你选择了：" + opt["label"]]
 	var out := _apply(opt["effects"], q, save, rng)
 	save.event_note.append_array(out["log"])
