@@ -203,7 +203,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A vertical character portrait of Wu Jing (吴景), Lady Wu's protective younger brother.
-Appearance: Handsome young general in his 20s whose features resemble his sister's, a suspicious, protective frown.
+Appearance: Handsome general in his 30s whose features resemble his elder sister's, a short neat beard, a suspicious, protective frown.
 Armor & Clothing: Bright silver cavalry armor and a white cape.
 Weapon: Riding a white horse, gripping the reins and glaring at the viewer.
 Background: A Sun family courtyard and military stable with sleek cavalry horses, wooden gates, and fluttering silk pennants.

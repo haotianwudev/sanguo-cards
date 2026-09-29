@@ -148,7 +148,7 @@ PORTRAITS = {
                "Holding a supply list scroll in one hand and a writing brush in the other.",
                "An orderly army granary and logistics warehouse with stacked rice sacks, supply carts, accounting scrolls, and ledger chests"),
     "wujing": ("Wu Jing (吴景), Lady Wu's protective younger brother",
-               "Handsome young general in his 20s whose features resemble his sister's, a suspicious, protective frown.",
+               "Handsome general in his 30s whose features resemble his elder sister's, a short neat beard, a suspicious, protective frown.",
                "Bright silver cavalry armor and a white cape.",
                "Riding a white horse, gripping the reins and glaring at the viewer.",
                "A Sun family courtyard and military stable with sleek cavalry horses, wooden gates, and fluttering silk pennants"),
