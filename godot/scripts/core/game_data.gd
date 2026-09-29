@@ -62,7 +62,7 @@ func _load(dir: String) -> void:
 			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true),
 			"person": c.get("person", cid), "weight": int(c.get("weight", 1)),
-			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "reward": c.get("reward", false)}
+			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false)}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
 		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
@@ -152,7 +152,7 @@ func pool(rarity: String) -> Array:
 
 
 func soldier_cards() -> Array:
-	return cards.values().filter(func(c): return c["soldier"] and not c["reward"])  # reward cards never drop
+	return cards.values().filter(func(c): return c["soldier"] and not c["beast"])  # 野兽卡 never come in chests
 
 
 func build_fighter(card_id: String, mult := 1.0) -> Dictionary:

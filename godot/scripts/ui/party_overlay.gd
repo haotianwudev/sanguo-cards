@@ -388,7 +388,7 @@ func _fill_detail() -> void:
 	info.add_child(_info_line("兵种", db.troops[f["troop"]]["name"]))
 	if not is_lord:
 		var c: Dictionary = db.cards[_sel]
-		info.add_child(_info_line("稀有度", Kit.rarity_label(c["rarity"]) + ("（精兵）" if c.get("elite", false) else "")))
+		info.add_child(_info_line("稀有度", ("野兽" if c.get("beast", false) else Kit.rarity_label(c["rarity"])) + ("（精兵）" if c.get("elite", false) and not c.get("beast", false) else "")))
 		if c["soldier"]:
 			info.add_child(_info_line("张数", "×%d" % save.copies(_sel)))
 		else:

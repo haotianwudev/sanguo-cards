@@ -69,7 +69,7 @@
     "fangtian": {"name": "方天画戟", "troop": "cavalry", "icon": "戟", "rarity": "curse", "desc": "【诅咒】吕布的戟，太重了。攻击 +30%，但受到的伤害 +15%", "mods": {"at": 0.3, "guard": -0.15}},
     "tengjia": {"name": "藤甲", "troop": "bandit", "icon": "藤", "rarity": "curse", "desc": "【诅咒】刀枪不入，就怕火。受到的伤害 -30%，但体力上限 -10%", "mods": {"guard": 0.3, "hp": -0.1}}
   },
-  "_rewards": "cards with reward: true (野猪, 白额虎) exist but never drop or turn up in pools; they are handed out later as special rewards",
+  "_beasts": "野兽卡 (beast: true — 野猪, 白额虎): beasts, not soldiers or generals; for now they never drop or turn up in chests or pools",
   "_troops": "every troop: a plain 1-AP move (first) plus a signature (cumulative or limited); soldier cards get only the plain move (elite soldiers, \"elite\": true, get both), generals get the plain move plus their own signature (or the troop's if they have none)",
   "troops": {
     "lord": {"name": "主公", "short": "主", "hp": 400, "at": 80, "skills": ["tuji", "rengdao"]},
@@ -261,8 +261,8 @@
     "zhangning": {"name": "张宁·圣女", "rarity": "SR", "troop": "mage", "bonus": {"hp": 45, "at": 22}, "skills": ["leiji"]},
     "zuoci": {"name": "左慈·乌角先生", "rarity": "SSR", "troop": "mage", "bonus": {"hp": 60, "at": 30}, "skills": ["zhibei"]},
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]},
-    "baie_hu": {"name": "白额虎", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 50, "at": 14}, "skills": ["huxiao"], "pool": false, "reward": true},
-    "yezhu": {"name": "野猪", "rarity": "N", "elite": true, "troop": "cavalry", "bonus": {"hp": 30, "at": 6}, "weight": 1, "pool": false, "reward": true, "person": "boar"},
+    "baie_hu": {"name": "白额虎", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 50, "at": 14}, "skills": ["huxiao"], "pool": false, "beast": true},
+    "yezhu": {"name": "野猪", "rarity": "N", "elite": true, "troop": "cavalry", "bonus": {"hp": 30, "at": 6}, "weight": 1, "pool": false, "beast": true, "person": "boar"},
     "langlijiao": {"name": "胡玉·浪里蛟", "rarity": "R", "troop": "bandit", "bonus": {"hp": 40, "at": 12}, "skills": ["fanjiang"], "pool": false},
     "yaodao_card": {"name": "唐周·妖道", "rarity": "R", "troop": "mage", "person": "yaodao", "bonus": {"hp": 20, "at": 14}, "skills": ["fushui_heal"], "pool": false},
     "heyi": {"name": "何仪·渠帅", "rarity": "SR", "troop": "mage", "bonus": {"hp": 45, "at": 16}, "skills": ["huangtian"], "pool": false},
