@@ -40,7 +40,7 @@ func _ready() -> void:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
 			ambush, m)
 	else:
-		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi())
+		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), 0, {}, {}, ambush)
 	_build()
 	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])
 	if b.mods.has("affix"):
@@ -48,6 +48,8 @@ func _ready() -> void:
 	_log_lines(b.opening)
 	b.take_events()
 	_refresh()
+	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
+		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
 		_tip("点队长卡下的技能出手 · AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
 			int(GameData.get_db().battle["ap_per_round"]), b.ap_max()])
@@ -565,3 +567,4 @@ func _finish() -> void:
 		await _banner("战　败", Kit.c("red"))
 		await get_tree().create_timer(0.6).timeout
 		Game.battle_finished(false)
+

@@ -113,6 +113,7 @@ func demo(name: String) -> void:
 		save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 		var b := BattleScreen.new()
 		b.scenario_id = name.substr(7)
+		b.ambush = OS.get_cmdline_user_args().has("--ambush")  # --ambush: the enemy strikes first
 		show_screen(b)
 		return
 	match name:
