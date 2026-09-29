@@ -8,6 +8,7 @@
 | `danyang` | source/soldiers/danyang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `jiangdong_gong` | source/soldiers/jiangdong_gong.jpg | 用户提供 | Antigravity 生成 | — |
 | `liehu` | source/soldiers/liehu.jpg | 用户提供 | Antigravity 生成 | — |
+| `yuenv_gong` | source/soldiers/yuenv_gong.jpg | 用户提供 | Antigravity 生成 | — |
 | `lord` | source/generals/lord.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -51,22 +51,21 @@
 36. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
 37. `c3_news` — 纪灵败退与噩耗（剧情 CG）
 38. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-39. `yuenv_gong` — 越女弓手（第一章缺失兵卡）（立绘）
-40. `chenwu` — 陈武（R 弓兵）（立绘）
-41. `shanyue_nu` — 山越弩手（立绘）
-42. `liubei` — 刘备（换掉占位）（立绘）
-43. `guanyu` — 关羽（换掉占位）（立绘）
-44. `lvbu` — 吕布（换掉占位）（立绘）
-45. `sunjing` — 孙静（立绘）
-46. `wujing` — 吴景（立绘）
-47. `sunben` — 孙贲（立绘）
-48. `zhuzhi` — 朱治（立绘）
-49. `caiwenji` — 蔡文姬（立绘）
-50. `yuanshu` — 袁术（立绘）
-51. `jiling` — 纪灵（立绘）
-52. `leibo` — 雷薄（立绘）
-53. `chenlan` — 陈兰（立绘）
-54. `qiaorui` — 桥蕤（立绘）
+39. `chenwu` — 陈武（R 弓兵）（立绘）
+40. `shanyue_nu` — 山越弩手（立绘）
+41. `liubei` — 刘备（换掉占位）（立绘）
+42. `guanyu` — 关羽（换掉占位）（立绘）
+43. `lvbu` — 吕布（换掉占位）（立绘）
+44. `sunjing` — 孙静（立绘）
+45. `wujing` — 吴景（立绘）
+46. `sunben` — 孙贲（立绘）
+47. `zhuzhi` — 朱治（立绘）
+48. `caiwenji` — 蔡文姬（立绘）
+49. `yuanshu` — 袁术（立绘）
+50. `jiling` — 纪灵（立绘）
+51. `leibo` — 雷薄（立绘）
+52. `chenlan` — 陈兰（立绘）
+53. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -163,18 +162,6 @@ Appearance: Sturdy, tanned man in his late 20s, square jaw, short beard, calm st
 Armor & Clothing: Jiangdong red-and-brown lamellar armor, a quiver of red-fletched arrows on his back, a leather bracer.
 Weapon: Drawing a large recurved war bow to full draw, arrow aimed past the viewer.
 Background: A Jiangdong fortress rampart overlooking the misty Yangtze River, with red Sun-clan banners, wooden archery targets, and distant patrol boats.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `yuenv_gong` ⬜ 缺
-
-```
-A vertical character portrait of a Yue woman archer (越女弓手), an adult woman of the southern Yue people serving as an archer.
-Appearance: Adult woman in her 20s, confident sharp eyes, tanned skin, hair in a high braided ponytail with a red cord.
-Armor & Clothing: Close-fitting indigo Yue-style tunic with embroidered hems and leather arm guards, short practical skirt over trousers.
-Weapon: Drawing a slim bamboo bow, arrow at her cheek.
-Background: A misty subtropical bamboo grove with a crystal mountain stream, wild mountain flowers, and steep verdant green cliffs.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -276,6 +263,14 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ```
 
 ## 战斗 CG（横版 16:9，每场战斗一张）
+
+### `dagu`
+
+```
+A horizontal battle scene illustration: the Dagu pass outside Luoyang: the veteran Xiliang general Xu Rong on horseback before rows of heavy cavalry and spearmen in battle formation, dust and banners, an ambush glinting in the hills.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
+```
 
 ### `c3_shanfei`
 
@@ -398,6 +393,24 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ```
 
 ## 剧情插图 CG（横版 16:9）
+
+### `c2_heqin`
+
+```
+A horizontal story event illustration: a tense army tent: Sun Jian kicking over a gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
+
+### `c2_mixin`
+
+```
+A horizontal story event illustration: night after a battle: Zhou Yu reading a captured secret letter by torchlight, Sun Jian crushing its edge in his fist, far on the horizon the sky over Luoyang faintly red.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
 
 ### `c3_leave`
 
