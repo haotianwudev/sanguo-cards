@@ -24,7 +24,7 @@ func test_recruit_offers_unowned_generals_and_you_keep_one() -> void:
 func test_recruiting_everything_empties_the_pool() -> void:
 	var s := SaveData.create()
 	var r := rng(1)
-	for _i in 200:
+	for _i in 500:  # every general up to 金
 		var offer := s.recruit_offer(r)
 		if offer.is_empty():
 			break

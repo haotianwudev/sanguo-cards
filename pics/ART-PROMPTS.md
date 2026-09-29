@@ -77,6 +77,126 @@
 
 ## 立绘（竖版 3:4）
 
+### `lusu` ⬜ 缺
+
+```
+A vertical character portrait of Lu Su (鲁肃), a generous, far-sighted young gentleman of Jiangdong who once gave Zhou Yu half his granary.
+Appearance: Round-faced, kind man in his late 20s with a calm smile and a neat short beard.
+Armor & Clothing: Fine but plain scholar-gentleman robes in deep blue, a jade pendant at the belt.
+Weapon: Gesturing toward a large granary behind him, a sack of grain at his feet.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `zhangzhongjing` ⬜ 缺
+
+```
+A vertical character portrait of Zhang Zhongjing (张仲景), the Sage of Medicine, who served as governor of Changsha.
+Appearance: Thin, serious man in his 40s with a long grey-streaked beard and thoughtful eyes.
+Armor & Clothing: Official's robe with the sleeves rolled up, a physician's satchel across the chest.
+Weapon: Holding an open bamboo-slip medical book in one hand and a bundle of herbs in the other.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `dongfeng` ⬜ 缺
+
+```
+A vertical character portrait of Dong Feng (董奉), the Jiangdong doctor of the apricot grove legend.
+Appearance: Gentle, ageless-looking man in his 30s with a serene smile.
+Armor & Clothing: Simple Taoist-style physician robes in light green, a straw hat on his back.
+Weapon: Standing under a blossoming apricot tree, a medicine gourd at his hip.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `zhangzhao` ⬜ 缺
+
+```
+A vertical character portrait of Zhang Zhao (张昭), the stern chief steward of the Sun household.
+Appearance: Stern, upright man in his 30s with a severe frown and a well-kept beard.
+Armor & Clothing: Dark formal official robes and cap.
+Weapon: Holding a thick stack of ledgers and a writing brush, looking disapprovingly at the viewer.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `xiaoqiao` ⬜ 缺
+
+```
+A vertical character portrait of Xiao Qiao (小乔), the younger of the famous Qiao sisters, an adult woman.
+Appearance: Adult woman in her 20s, lively bright eyes and a playful smile, hair in an elegant bun with flowers.
+Armor & Clothing: Pink-and-white layered Han dress with flowing sleeves.
+Weapon: Playing a guqin on her lap.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `zhenmi` ⬜ 缺
+
+```
+A vertical character portrait of Zhen Mi (甄宓), the renowned beauty later celebrated as the Goddess of the Luo River, an adult woman.
+Appearance: Adult woman in her 20s, graceful and melancholy, long flowing black hair.
+Armor & Clothing: Flowing pale-blue silk robes with gauzy ribbons drifting as if underwater.
+Weapon: Holding a jade hairpin, standing by a misty river.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `bulianshi` ⬜ 缺
+
+```
+A vertical character portrait of Bu Lianshi (步练师), a gentle, capable lady of Jiangdong, an adult woman.
+Appearance: Adult woman in her 20s with a soft, kind face and calm eyes.
+Armor & Clothing: Elegant lavender Han dress, a simple hairpin.
+Weapon: Carrying a lacquered tray with medicine bowls and bandages.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `qiaoguolao` ⬜ 缺
+
+```
+A vertical character portrait of Qiao Guolao (乔国老), the fussy old father of the Qiao sisters.
+Appearance: Plump, cheerful old man in his 60s with a long white beard and rosy cheeks.
+Armor & Clothing: Rich brocade robes of a retired gentleman.
+Weapon: Hugging a dowry chest overflowing with silks, looking both proud and reluctant.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `huofu` ⬜ 缺
+
+```
+A vertical character portrait of an army cook (伙夫).
+Appearance: Burly, cheerful adult man with a bald head and a thick mustache.
+Armor & Clothing: Stained apron over a soldier's tunic.
+Weapon: Stirring a huge cauldron with a long ladle.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `chuangong` ⬜ 缺
+
+```
+A vertical character portrait of a Jiangdong boatman (江东船工).
+Appearance: Wiry, sun-browned adult man with a headband and rolled trousers.
+Armor & Clothing: Simple hemp clothes, barefoot.
+Weapon: Carrying a long punting pole and a coil of rope over his shoulder.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `caiwenji` ⬜ 缺
 
 ```
