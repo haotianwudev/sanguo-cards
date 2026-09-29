@@ -230,7 +230,7 @@ his uncle 周忠) says take the emperor to 洛阳; 董白 brings 董卓's old gu
 on the gate, 吕布 goes to 袁绍, 李傕 and 郭汜 hold 长安 (no infighting); 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said
 曹操); the emperor has the hero made 破虏将军 (孙坚's own old title, handed down grudgingly); pushed aside, and sent against
 袁术 in 南阳 because 孙坚 can't leave the emperor: 桥蕤, 黄忠 (a 南阳 soldier robbed by 袁术's men, sick son
-黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 纪灵 (boss) holds the rear and flees with 袁术 and 冯夫人 to 九江 — 袁术 takes 寿春 and styles himself 扬州牧 (as in history). (未完待续)
+黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 孙坚's old men inside 宛城 (he once camped in 南阳; they know the tiger tally he gave the hero) open the east gate — 里应外合, 纪灵 (boss) holds the rear and flees with 袁术 and 冯夫人 to 九江 — 袁术 takes 寿春 and styles himself 扬州牧 (as in history). (未完待续)
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
