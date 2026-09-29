@@ -2000,14 +2000,6 @@ Composition & Framing: square 512x512 (draw at 1024x1024), the symbol centred in
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, painted emblem, strong silhouette readable at 112px; no text.
 ```
 
-### `xiansheng`
-
-```
-A square emblem illustration for a 'fate' card in a roguelike: a war drum struck with a shockwave of sound, war cries.
-Composition & Framing: square 512x512 (draw at 1024x1024), the symbol centred inside a round jade-and-gold medallion with a thin gold rim, transparent background (PNG).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, painted emblem, strong silhouette readable at 112px; no text.
-```
-
 ### `jixing`
 
 ```
