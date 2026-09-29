@@ -76,6 +76,78 @@
 
 ## 立绘（竖版 3:4）
 
+### `diaochan` 🟡 换掉占位
+
+```
+A vertical character portrait of Diaochan (貂蝉), the famed beauty and Wang Yun's adoptive daughter — clever, brave, always seeming to flirt — an adult woman.
+Appearance: Breathtakingly beautiful adult woman in her early 20s with a teasing, unreadable smile and knowing eyes.
+Armor & Clothing: Flowing layered silk dress in moonlit blue and silver with long dancing sleeves, a jade hairpin.
+Weapon: A round silk fan held half open, one long sleeve drifting in the air.
+Background: a moonlit garden with a round moon gate and curling incense smoke.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `huangzhong` 🟡 换掉占位
+
+```
+A vertical character portrait of Huang Zhong (黄忠), a Nanyang man in his forties and a peerless archer — not yet the old general of legend.
+Appearance: Sturdy, weathered man in his early 40s with a square jaw, a short beard and steady eyes.
+Armor & Clothing: Rough soldier's clothes with a leather bracer, rope marks still on his wrists.
+Weapon: A heavy longbow drawn to full, an arrow nocked.
+Background: a Nanyang army camp gate in summer with a broken 袁 banner pole.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `xuhuang` 🟡 换掉占位
+
+```
+A vertical character portrait of Xu Huang (徐晃), a dark-faced Hedong officer under Yang Feng who kneels to the emperor.
+Appearance: Dark-skinned, stern man in his 30s with thick brows and an honest, stubborn look.
+Armor & Clothing: Plain iron lamellar armor with a dusty brown cloak.
+Weapon: A huge long-handled battle axe resting on his shoulder.
+Background: a mountain pass east of Huayin with Yang Feng's banners.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `bingzhou` ⬜ 缺
+
+```
+A vertical character portrait of a Bingzhou wolf rider (并州狼骑), one of Lü Bu's northern cavalrymen.
+Appearance: Fierce, wind-burned northern horseman in his 20s with a wolfish grin.
+Armor & Clothing: Fur-trimmed leather and iron armor, a wolf tail hanging from his helmet.
+Weapon: A curved saber raised as he gallops.
+Background: the open northern steppe at dusk.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `xianzhen` ⬜ 缺
+
+```
+A vertical character portrait of a Trap-Breaking Camp soldier (陷阵营), Gao Shun's silent elite infantry.
+Appearance: Grim, silent heavy infantryman, his face half hidden by a deep helmet.
+Armor & Clothing: Heavy black lamellar armor, plain and unadorned.
+Weapon: A tall rectangular black shield and a long ji.
+Background: a shield wall in the dark before dawn.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `xurong` ⬜ 缺
+
+```
+A vertical character portrait of Xu Rong (徐荣), Dong Zhuo's veteran general who beat Sun Jian at Liangdong.
+Appearance: Weathered, calm general in his 40s with a grey-streaked beard and a hard, measuring gaze.
+Armor & Clothing: Well-worn Xiliang lamellar armor with a dark red cloak.
+Weapon: A ring-pommel saber at his side, one hand pointing out an ambush.
+Background: a valley outside the Dagu pass with hidden troops on the slopes.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `zhurong` ⬜ 缺
 
 ```

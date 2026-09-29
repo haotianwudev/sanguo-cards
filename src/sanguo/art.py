@@ -130,6 +130,8 @@ def write_needs(pics: Path = PICS) -> None:
         return "🟡 占位" if cfg[key].get("placeholder") else "✅ 正式"
 
     seen: set[str] = set()
+    seen_cg: set[str] = set()
+    interludes = json.loads((data / "interludes.json").read_text("utf-8")).get("after", {})
 
     def rows(items: list[tuple[str, str]]) -> list[str]:
         out = []
@@ -181,18 +183,51 @@ def write_needs(pics: Path = PICS) -> None:
             sc = cards["scenarios"][f]
             st = "✅ 已有" if f in battles_cfg else "⬜ 缺"
             bg_rows.append(f"| {st} | `{f}` | {sc['name']}（{cards['enemies'][sc['enemy']]['name']}） |")
-        return (["", f"## {q['title']}", "", "| 状态 | key | 用在 |", "|---|---|---|"]
+        art_cfg = json.loads((pics / "art.json").read_text("utf-8"))
+        cgs_cfg = art_cfg.get("cgs", {})
+        route = {"结局二 · 同归": "三周目"}
+        cg_rows = []
+        for sid, s in sorted(q["squares"].items(), key=lambda kv: kv[1]["x"]):
+            if s.get("cg") and s["cg"] not in seen_cg:
+                seen_cg.add(s["cg"])
+                tag = route.get(str(s.get("requires", "")), "") or ("二周目" if s.get("unless") == "结局二 · 同归" else "")
+                cg_rows.append(f"| {'✅ 已有' if s['cg'] in cgs_cfg else '⬜ 缺'} | `{s['cg']}` | {s.get('label', sid)}{'（' + tag + '）' if tag else ''} |")
+        end = q.get("ending", {})
+        if end.get("cg") and end["cg"] not in seen_cg:
+            seen_cg.add(end["cg"])
+            cg_rows.append(f"| {'✅ 已有' if end['cg'] in cgs_cfg else '⬜ 缺'} | `{end['cg']}` | 结局卡「{end['title']}」 |")
+        for sc in interludes.get(q["id"], []):
+            if sc.get("cg") and sc["cg"] not in seen_cg:
+                seen_cg.add(sc["cg"])
+                cg_rows.append(f"| {'✅ 已有' if sc['cg'] in cgs_cfg else '⬜ 缺'} | `{sc['cg']}` | 幕间「{sc['title']}」 |")
+        ev_rows = []
+        for eid in q.get("event_pool", []):
+            ev = story["events"][eid]
+            if ev.get("cg") and ev["cg"] not in seen_cg:
+                seen_cg.add(ev["cg"])
+                ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev['title']}」 |")
+        for s in q["squares"].values():
+            ev = story["events"].get(s.get("event", ""))
+            if ev and ev.get("cg") and ev["cg"] not in seen_cg:
+                seen_cg.add(ev["cg"])
+                ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev['title']}」 |")
+        m = art_cfg.get("maps", {}).get(q["id"])
+        map_st = "⬜ 缺" if not m else ("🟡 程序占位" if "生成" in m.get("license", "") else "✅ 已有")
+        return (["", f"## {q['title']}", "", f"地图底图 `{q['id']}`：{map_st}", "", "| 状态 | key | 用在 |", "|---|---|---|"]
                 + rows([("lord", "主公 / 穿越者")] + people)
                 + ["", "敌人（战斗界面上方；和它的卡共用一张图）", "", "| 状态 | key | 敌人 |", "|---|---|---|"] + rows(enemies)
                 + ["", "能拿到的卡", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(loot)
                 + ["", "战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）", "", "| 状态 | key | 战斗 |", "|---|---|---|"]
-                + bg_rows)
+                + bg_rows
+                + ["", "剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）", "", "| 状态 | key | 剧情格 |", "|---|---|---|"]
+                + (cg_rows or ["| ✅ | — | 没有 |"])
+                + (["", "奇遇插图（这一章第一次会抽到的「？」事件）", "", "| 状态 | key | 事件 |", "|---|---|---|"] + ev_rows if ev_rows else []))
 
     out = [
         "# 美术需求",
         "",
         "> 本文件由 `sanguo-art` 根据游戏数据（godot/data）和 `pics/art.json` 自动生成，别手改。",
-        "> 卡框、地图、宝物图标等非立绘需求见 `CARD-DESIGN.md`。",
+        "> 按章节列出立绘、战斗背景、剧情 CG、奇遇插图和地图底图；宝物、天命、词缀、标题等见 `ART-PLAN.md`，出图提示词见 `ART-PROMPTS.md`。",
         "",
         "## 怎么换图",
         "",
