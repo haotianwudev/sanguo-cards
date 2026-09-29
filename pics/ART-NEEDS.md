@@ -200,7 +200,7 @@
 | ⬜ 缺 | `c2_jianhua` | 孙坚斩华雄 |
 | ⬜ 缺 | `c2_counter` | 收拢士卒 |
 | ⬜ 缺 | `c2_borrow` | 借将 |
-| ⬜ 缺 | `c2_capture` | 俘虏 |
+| ✅ 已有 | `c2_capture` | 俘虏 |
 | ⬜ 缺 | `c2_captive` | 俘虏的日子 |
 | ⬜ 缺 | `c2_raid` | 吕布劫营 |
 | ⬜ 缺 | `c2_sanying` | 三英战吕布 |
