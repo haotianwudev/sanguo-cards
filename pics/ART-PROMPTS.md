@@ -55,6 +55,7 @@
 - 每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。
 - 宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。
 - 女性角色一律画成成年人；董白不写年龄、不画成萝莉。
+- 卡牌立绘必须带背景：背景为符合人物身份与阵营的古风场景（军营、要塞、江岸、山林、宫室等，具自然景深与环境光影，不再使用纯白/摄影棚素底）。人物半身居中，面部在上方三分之一。
 - 文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。
 - 战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；照新的战斗画面构图：敌人大、居中、在画面中上部，左上、右上两角别放重要东西（血条和战斗记录在那里），下面 45% 画简单的地面（我方卡牌半透明地压在上面）。
 - 宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。
@@ -71,8 +72,9 @@ A vertical character portrait of Cai Wenji (蔡文姬, Cai Yan), the gifted poet
 Appearance: Adult woman in her 20s, gentle but steady eyes with a quiet sorrow, long black hair half tied with a white ribbon.
 Armor & Clothing: Plain white scholar's robe with pale blue trim, a little dusty from the road.
 Weapon: Holding a guqin (古琴) to her chest; one of its strings is broken.
+Background: A quiet, candlelit ancient scholar study with unrolled bamboo scrolls on low tables, a bronze incense burner emitting delicate fragrant smoke ribbons, and a painted silk partition screen.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `yuanshu` ⬜ 缺
@@ -82,8 +84,9 @@ A vertical character portrait of Yuan Shu (袁术), the arrogant warlord of Nany
 Appearance: Plump, pale man in his 30s with a thin mustache, heavy-lidded eyes full of contempt, a self-satisfied sneer.
 Armor & Clothing: Gaudy gold-embroidered imperial-yellow robes he has no right to wear, a jeweled crown, rings on every finger.
 Weapon: Reaching out with one greedy hand as if for the jade seal, a cup of honey water in the other.
+Background: An opulent imperial audience chamber in Nanyang with carved lacquered dragon pillars, gilded screens, hanging yellow-gold imperial tapestries, and a jade throne.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `jiling` ⬜ 缺
@@ -93,8 +96,9 @@ A vertical character portrait of Ji Ling (纪灵), Yuan Shu's foremost general.
 Appearance: Tall, grim man in his 30s with a hard square face, thick eyebrows and a short beard.
 Armor & Clothing: Heavy gilded lamellar armor with the character 袁 on the chest plate, a red cape.
 Weapon: Wielding a three-pointed double-edged glaive (三尖两刃刀).
+Background: A massive army encampment with towering yellow Yuan-clan war banners fluttering in the wind, rows of wooden barracks, and spear racks.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `leibo` ⬜ 缺
@@ -104,8 +108,9 @@ A vertical character portrait of Lei Bo (雷薄), one of Yuan Shu's cavalry comm
 Appearance: Wiry, sharp-nosed man in his 30s with a cruel grin and a scar across his chin.
 Armor & Clothing: Light cavalry armor in Yuan yellow and black, a fur-trimmed collar.
 Weapon: Mounted, swinging a curved cavalry saber, a bow on his back.
+Background: A dusty frontier cavalry camp with horse corrals, yellow command flags, and camp tents under a glaring afternoon sun.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `chenlan` ⬜ 缺
@@ -115,8 +120,9 @@ A vertical character portrait of Chen Lan (陈兰), Yuan Shu's veteran general w
 Appearance: Weathered, stubborn man in his 40s with a grey-streaked beard and narrowed eyes.
 Armor & Clothing: Battered iron armor under a rain cape, mud on his boots.
 Weapon: Levelling a long spear, rain dripping from its tip, torchlight behind him.
+Background: A rain-swept night battlefield with burning barricades, muddy palisade fences, and flickering torches in the drizzling rain.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `qiaorui` ⬜ 缺
@@ -126,8 +132,9 @@ A vertical character portrait of Qiao Rui (桥蕤), a stout officer of Yuan Shu 
 Appearance: Short, round-bellied man in his 30s with a sly smile and small shrewd eyes.
 Armor & Clothing: Plain officer's armor over a merchant-style robe (he is in disguise), a straw hat hanging on his back.
 Weapon: A heavy broad saber resting on his shoulder.
+Background: A bustling ancient market street outside Nanyang city gate, with merchant carts, tiled roofs, hanging red lanterns, and market stalls.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `chenwu` ⬜ 缺
@@ -137,8 +144,9 @@ A vertical character portrait of Chen Wu (陈武), a loyal Jiangdong general fro
 Appearance: Sturdy, tanned man in his late 20s, square jaw, short beard, calm steady eyes of a marksman.
 Armor & Clothing: Jiangdong red-and-brown lamellar armor, a quiver of red-fletched arrows on his back, a leather bracer.
 Weapon: Drawing a large recurved war bow to full draw, arrow aimed past the viewer.
+Background: A Jiangdong fortress rampart overlooking the misty Yangtze River, with red Sun-clan banners, wooden archery targets, and distant patrol boats.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `jiangdong_gong` ⬜ 缺
@@ -148,8 +156,9 @@ A vertical character portrait of a Jiangdong archer (江东弓手), a common sol
 Appearance: Young adult soldier with a sun-browned face and a focused squint, headband.
 Armor & Clothing: Simple red Han tunic over light leather armor, straw sandals, quiver at the hip.
 Weapon: Nocking an arrow on a plain wooden bow.
+Background: A Sun family army training ground and riverside camp with red flags, wooden archery butts, weapon racks, and barracks tents.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `liehu` ⬜ 缺
@@ -159,8 +168,9 @@ A vertical character portrait of a mountain hunter (山中猎户) from the hills
 Appearance: Weathered, lean adult man in his 30s with a scruffy beard and a friendly grin.
 Armor & Clothing: Fur vest over rough hemp clothes, a boar-tusk necklace, a pheasant hanging from his belt.
 Weapon: A hunting bow slung ready, one arrow held between his fingers.
+Background: A misty Fuchun mountain forest with tall pine trees, green bamboo thickets, mossy boulders, and distant layered mountain ridges.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `yuenv_gong` ⬜ 缺
@@ -170,8 +180,9 @@ A vertical character portrait of a Yue woman archer (越女弓手), an adult wom
 Appearance: Adult woman in her 20s, confident sharp eyes, tanned skin, hair in a high braided ponytail with a red cord.
 Armor & Clothing: Close-fitting indigo Yue-style tunic with embroidered hems and leather arm guards, short practical skirt over trousers.
 Weapon: Drawing a slim bamboo bow, arrow at her cheek.
+Background: A misty subtropical bamboo grove with a crystal mountain stream, wild mountain flowers, and steep verdant green cliffs.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `shanyue_nu` ⬜ 缺
@@ -181,8 +192,9 @@ A vertical character portrait of a Shanyue crossbowman (山越弩手), a hill-tr
 Appearance: Stocky adult man with tattooed arms and cheeks, fierce stare, hair tied up with a bone pin.
 Armor & Clothing: Rattan-and-hide armor, cloth leggings, bare feet planted on a rock.
 Weapon: Aiming a heavy wooden crossbow braced against his shoulder.
+Background: A rugged Shanyue mountain fortress with heavy timber stockades, rock crags, tribal bone totems, and mountain mist.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `liubei` 🟡 换掉占位
@@ -192,8 +204,9 @@ A vertical character portrait of Liu Bei (刘备), the humble, earnest leader wh
 Appearance: Gentle-faced man in his early 30s with notably large earlobes and long arms, kind sincere eyes, neat short beard, a slightly awkward, eager-to-please smile.
 Armor & Clothing: Modest green-and-cream Han scholar-general robe over light leather armor, a simple topknot with a cloth band.
 Weapon: Holding his twin swords (双股剑) a little clumsily in both hands, as if not quite sure how to use them.
+Background: A modest Han military garrison headquarters with a tactical map table, candle lanterns, rolled bamboo scrolls, and straw partitions.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `guanyu` 🟡 换掉占位
@@ -203,8 +216,9 @@ A vertical character portrait of Guan Yu (关羽), the dignified god of war of t
 Appearance: Tall imposing man in his early 30s with a deep red face, phoenix eyes half-closed in calm pride, a magnificent long flowing black beard reaching his chest.
 Armor & Clothing: Green war robe over Han dynasty lamellar armor, green headscarf, a heroic cape.
 Weapon: Holding the Green Dragon Crescent Blade (青龙偃月刀 - a long glaive with a dragon-headed crescent blade) upright beside him.
+Background: A solemn military command post with green banners, heavy weapon stands, and dramatic evening clouds in the sky.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `lvbu` 🟡 换掉占位
@@ -214,8 +228,9 @@ A vertical character portrait of Lü Bu (吕布), the unrivaled, terrifying warr
 Appearance: Tall, handsome, arrogant warrior in his early 30s with a cold predatory glare and a confident smirk, overwhelming aura.
 Armor & Clothing: Ornate crimson and black armor with gold trim, a helmet crowned with two long pheasant tail feathers (雉尾冠), a red cape flaring behind him.
 Weapon: Holding the Sky Piercer halberd (方天画戟 - a long halberd with a crescent side blade) across his shoulders.
+Background: A scorched, dust-swept battlefield under a dramatic crimson and dark sky, with broken weapons stuck in the ground and distant fortress ramparts.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `zhuzhi` ⬜ 缺
@@ -225,8 +240,9 @@ A vertical character portrait of Zhu Zhi (朱治), Sun Jian's shrewd quartermast
 Appearance: Sharp, composed man in his 30s with a neat mustache and an appraising look.
 Armor & Clothing: Official's robe over light armor, a sword at his waist.
 Weapon: Holding a supply list scroll in one hand and a writing brush in the other.
+Background: An orderly army granary and logistics warehouse with stacked rice sacks, supply carts, accounting scrolls, and ledger chests.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `wujing` ⬜ 缺
@@ -236,8 +252,9 @@ A vertical character portrait of Wu Jing (吴景), Lady Wu's protective younger 
 Appearance: Handsome young general in his 20s whose features resemble his sister's, a suspicious, protective frown.
 Armor & Clothing: Bright silver cavalry armor and a white cape.
 Weapon: Riding a white horse, gripping the reins and glaring at the viewer.
+Background: A Sun family courtyard and military stable with sleek cavalry horses, wooden gates, and fluttering silk pennants.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `sunben` ⬜ 缺
@@ -247,8 +264,9 @@ A vertical character portrait of Sun Ben (孙贲), Sun Jian's competitive nephew
 Appearance: Young spear general in his 20s with a cocky smirk, arms crossed.
 Armor & Clothing: Red and bronze Sun-clan armor.
 Weapon: Hugging a spear against his shoulder, looking unimpressed.
+Background: A military training courtyard with wooden practice dummies, weapon racks, and earthen ramparts.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ### `sunjing` ⬜ 缺
@@ -258,8 +276,9 @@ A vertical character portrait of Sun Jing (孙静), Sun Jian's stingy younger br
 Appearance: Thin older man in his 40s with squinting eyes and a thin mustache, a miserly expression.
 Armor & Clothing: Plain grey household robe and a cap.
 Weapon: Flicking the beads of an abacus, peering over it suspiciously.
+Background: A Sun clan estate counting room and storehouse with heavy iron-bound chests, stacked bamboo tax records, and abacus desks.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
 ## 战斗 CG（横版 16:9，每场战斗一张）
