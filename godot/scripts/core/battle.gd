@@ -340,7 +340,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 	if enemy.get("regen", 0.0) > 0.0 and enemy["hp"] < enemy["max_hp"]:  # 词缀·再生
 		var h := mini(int(round(enemy["max_hp"] * enemy["regen"])), enemy["max_hp"] - enemy["hp"])
 		enemy["hp"] += h
-		_ev({"t": "enemy_heal", "amount": h, "hp": enemy["hp"]})
+		_ev({"t": "enemy_heal", "amt": h, "hp": enemy["hp"]})
 		log.append("[color=red]  %s 再生，回复 %d 体力[/color]" % [data["name"], h])
 	enemy["charge_ready"] = enemy["charging"] != ""  # wound up last turn: it lands now
 	if enemy["stunned"]:

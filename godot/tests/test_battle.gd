@@ -347,3 +347,17 @@ func test_most_people_do_not_heal() -> void:
 		if c["skills"].any(func(s): return db.skills[s]["effects"].any(func(e): return e["type"] == "heal")):
 			healers += 1
 	check(healers * 5 < generals, "%d of %d generals heal" % [healers, generals])
+
+
+func test_regen_event_has_what_the_screen_reads() -> void:
+	## the screen reads ev["amt"] for enemy_heal; 词缀·再生 once sent "amount" and froze the battle on a stunned enemy
+	var b := Battle.start("dagu", party(["zhouyu"]), 3)
+	b.enemy["regen"] = 0.04
+	b.enemy["hp"] -= 1000
+	b.enemy["stunned"] = true
+	b.take_events()
+	b.end_round()
+	var heals: Array = b.take_events().filter(func(e): return e["t"] == "enemy_heal")
+	check(not heals.is_empty(), "再生 heals")
+	for e in heals:
+		check(e.has("amt") and e.has("hp"), "enemy_heal carries amt and hp")

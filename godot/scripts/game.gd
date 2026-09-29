@@ -115,6 +115,13 @@ func demo(name: String) -> void:
 		b.scenario_id = name.substr(7)
 		b.ambush = OS.get_cmdline_user_args().has("--ambush")  # --ambush: the enemy strikes first
 		show_screen(b)
+		if OS.get_cmdline_user_args().has("--stun-end"):  # confuse the enemy, then press 回合结束
+			await get_tree().create_timer(0.5).timeout
+			b.b.enemy["stunned"] = true
+			if OS.get_cmdline_user_args().has("--regen"):  # 词缀·再生 on a hurt enemy
+				b.b.enemy["regen"] = 0.04
+				b.b.enemy["hp"] -= 1000
+			b._end.pressed.emit()
 		return
 	match name:
 		"event":  # a ？ square: 左慈 on the hill
