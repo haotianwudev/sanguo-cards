@@ -226,6 +226,12 @@ func demo(name: String) -> void:
 				save.visited.append("dongbai")
 				save.resolved = false
 			show_screen(MapScreen.new())
+		"ch4", "ch5":  # route B: 驻守洛阳 / 长安
+			save.quests_cleared = ["prologue", "taodong", "yuxi"] + (["shouluoyang"] if name == "ch5" else [])
+			save.flags = ["董白：留下", "结局一 · 玉碎", "路线：守洛阳"] + (["路线：长安"] if name == "ch5" else [])
+			save.grant_card("dongbai")
+			Quests.ensure_started(save)
+			show_screen(MapScreen.new())
 		"ch2_wait":  # chapter 2 after 董白's fate (kept): the months before 洛阳 burns
 			save.quests_cleared = ["prologue"]
 			var q2: Dictionary = GameData.get_db().quests[1]

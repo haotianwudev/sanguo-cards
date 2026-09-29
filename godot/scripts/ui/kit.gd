@@ -303,7 +303,7 @@ const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce",
 	# how the story first describes people before their names come up
 	"美妇": "wuguotai", "浓眉少年": "sunce", "俊秀少年": "zhouyu", "瘦老头": "sunjing", "渠帅": "heyi", "孙静": "sunjing",
 	"女当家": "yanzhihu", "胭脂虎": "yanzhihu", "张宁": "zhangning", "白衣道人": "yuji", "华雄": "huaxiong", "纪灵": "jiling",
-	"袁术": "yuanshu", "冯夫人": "fengfuren", "冯氏": "fengfuren", "蔡文姬": "caiwenji", "唐姬": "tangji", "程普": "chengpu", "黄盖": "huanggai", "韩当": "handang"}
+	"袁术": "yuanshu", "冯夫人": "fengfuren", "冯氏": "fengfuren", "董卓": "dongzhuo", "蔡邕": "caiyong", "王允": "wangyun", "李儒": "liru", "郭汜": "guosi", "李傕": "lijue", "蔡文姬": "caiwenji", "唐姬": "tangji", "程普": "chengpu", "黄盖": "huanggai", "韩当": "handang"}
 const PREVIOUS := "^"  # speaker_key: "the same speaker as the line before" (他 / 她 / a line opening on a quote)
 static var _names: Dictionary = {}
 

@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "yuxi"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -810,10 +810,13 @@ func test_chapter_three_branches_on_dongbai_and_ends_in_ending_one() -> void:
 	var kept := SaveData.create()
 	kept.flags = ["董白：留下"]
 	var gone := SaveData.create()
-	gone.flags = ["董白：交给袁绍"]
+	gone.flags = ["董白：交给袁绍", "结局一 · 玉碎"]
+	var again := SaveData.create()
+	again.flags = ["董白：留下", "结局一 · 玉碎"]
 	var sq: Dictionary = q["squares"]
-	check(Quests.is_open(sq["wenji_seen"], kept) and not Quests.is_open(sq["wenji_taken"], kept), "董白 alive: she spots 蔡文姬")
-	check(Quests.is_open(sq["wenji_taken"], gone) and not Quests.is_open(sq["wenji_seen"], gone), "otherwise 蔡文姬 is taken")
+	check(Quests.is_open(sq["wenji_taken"], kept) and not Quests.is_open(sq["wenji_seen"], kept), "一周目: 蔡文姬 can't be saved")
+	check(Quests.is_open(sq["wenji_taken"], gone) and not Quests.is_open(sq["wenji_seen"], gone), "no 董白: she's taken")
+	check(Quests.is_open(sq["wenji_seen"], again) and not Quests.is_open(sq["wenji_taken"], again), "later 周目 with 董白: she can be saved")
 	check(sq["wenji_join"]["cards"].has("caiwenji"), "saved, she joins")
 	check_eq(sq["yuanshu"]["lose_goto"], "end", "袁术 can't really be beaten: losing leads on to the ending")
 	check(q["ending"].get("title", "").begins_with("结局一"), "the chapter ends in 结局一")
@@ -894,3 +897,16 @@ func test_the_marriage_offer_is_dongbai_either_way() -> void:
 	Quests.record(gone, "董白：交给袁绍")
 	check(Quests.is_open(sq["heqin_g"], gone) and not Quests.is_open(sq["heqin_k"], gone), "she's dead")
 	check("董白" in sq["heqin_k"]["text"][1] and "董白" in sq["heqin_g"]["text"][1], "the bride offered is 董白")
+
+
+func test_route_b_goes_on_to_luoyang_and_changan() -> void:
+	var s := SaveData.create()
+	s.quests_cleared = ["prologue", "taodong", "yuxi"]
+	check(Quests.current_quest(s) == null, "route A: the story ends after chapter 3")
+	s.flags = ["路线：守洛阳"]
+	check_eq(Quests.current_quest(s)["id"], "shouluoyang", "saved 蔡文姬: chapter 4")
+	s.quests_cleared.append("shouluoyang")
+	s.flags.append("路线：长安")
+	check_eq(Quests.current_quest(s)["id"], "changan", "then 长安")
+	var q3: Dictionary = GameData.get_db().quests[2]
+	check(q3["squares"]["wenji_join"]["next"].is_empty() and q3["squares"]["wenji_join"]["record"] == "路线：守洛阳", "saving her ends chapter 3 on route B")

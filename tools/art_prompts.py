@@ -22,6 +22,18 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "dongzhuo": ("Dong Zhuo (董卓), the tyrant chancellor who burned Luoyang",
+        "Enormously fat, heavy-jowled man in his 50s with a thick beard, small cunning eyes and a jovial smile that never reaches them.",
+        "Extravagant purple-and-gold chancellor's robes straining over his belly, a jeweled belt.",
+        "Holding a wine cup in one hand, the other resting on a sword hilt."),
+    "caiyong": ("Cai Yong (蔡邕), the great scholar and calligrapher, Cai Wenji's father",
+        "Gentle, frail scholar in his late 50s with a long white beard and kind, tired eyes.",
+        "Plain grey scholar's robe and a scholar's cap.",
+        "Holding a guqin under his arm and a bamboo scroll."),
+    "wangyun": ("Wang Yun (王允), the Minister over the Masses, secretly plotting against Dong Zhuo",
+        "Lean, upright old man in his 60s with neatly combed white hair and a measuring, careful gaze.",
+        "Dark official's robe with the minister's seal cord.",
+        "Holding a folded memorial behind his back, standing very straight."),
     "fengfuren": ("Lady Feng (冯夫人), Yuan Shu's beloved and very beautiful wife — a scheming villain, an adult woman",
                   "Adult woman in her late 20s of striking beauty, a sweet smile that doesn't reach her cold, calculating eyes.",
                   "Luxurious pale-gold silk robes and a jeweled hairpin — elegant, never gaudy.",
@@ -289,6 +301,9 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "c4_guosi": "a looted village road: Guo Si on horseback over captured grain carts, soldiers loading the villagers' last sacks, an old man knocked down, Dong Bai smashing a cart wheel with her twin hammers",
+    "c5_hall": "a wedding hall turned trap: red lanterns and silk, the doors slammed shut, black-armored Flying Bear cavalry pouring in from behind the curtains",
+    "c5_dongzhuo": "before the Weiyang Palace steps: the enormous Dong Zhuo on his chariot surrounded by the last Flying Bear guards, Lü Bu charging on Red Hare with his halberd leveled",
     "dagu": "the Dagu pass outside Luoyang: the veteran Xiliang general Xu Rong on horseback before rows of heavy cavalry and spearmen in battle formation, dust and banners, an ambush glinting in the hills",
     "c3_shanfei": "a one-eyed bandit chief on horseback dragging a woman in white onto his saddle amid fleeing refugees on a dusty road, a broken guqin on the ground",
     "c3_qiaorui": "outside the Nanyang city wall at dusk: the stout officer Qiao Rui with Yuan soldiers in disguise stepping out of a market crowd, sabers drawn",
@@ -321,6 +336,14 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c4_wenji": "night by a campfire in ruined Luoyang: Cai Wenji, an adult woman in white, holding her guqin with a broken string, telling her story; Dong Bai listening with folded arms, Lady Wu wrapping a cloak around Cai Wenji",
+    "c4_peace": "Sun Jian's tent in Luoyang: the envoy Li Ru with a feather fan offering peace, Sun Jian scowling, Zhou Yu whispering advice, the hero stepping forward to speak",
+    "c4_betroth": "a comedic betrothal: everyone in the tent turning to stare at the hero, Sun Ce leaping up in refusal, Dong Bai (an adult woman) turning away with bright red ears, Lady Wu laughing and taking her hand",
+    "c5_enter": "the gates of Chang'an: the enormous Dong Zhuo hugging his granddaughter Dong Bai, who laughs, while he eyes the hero coldly over her shoulder; Lü Bu on Red Hare standing silently behind",
+    "c5_diaochan": "a moonlit garden: Diaochan, an adult woman of great beauty, kneeling before an incense burner praying to the moon; Wang Yun and the hero watching from the garden gate",
+    "c5_dress": "a bedroom in Chang'an: Dong Bai (adult) in a red wedding dress turning happily before a bronze mirror, the hero behind her with a troubled face",
+    "c5_wedding": "the wedding trap: Dong Zhuo raising his cup with a cruel smile, doors shut, soldiers everywhere; Dong Bai in her red dress with the veil torn off, stunned; the hero pulling her behind him and drawing Sun Jian's old saber (no gore)",
+    "c5_death": "the tragic end, restrained: on the palace steps Dong Bai in her bloodied red wedding dress kneels holding her fallen grandfather, sobbing; Lü Bu stands behind with his halberd lowered; the hero with his saber stopped in mid-air, stricken (no gore shown)",
     "c3_feng": "a quiet veranda in Nanyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger",
     "c2_heqin": "a tense army tent: Sun Jian kicking over a marriage-proposal gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly; outside the tent flap a carriage curtain slightly lifted",
     "c2_mixin": "night after a battle: Zhou Yu reading a captured secret letter by torchlight, Sun Jian crushing its edge in his fist, far on the horizon the sky over Luoyang faintly red",

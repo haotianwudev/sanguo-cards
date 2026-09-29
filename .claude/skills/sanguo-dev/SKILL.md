@@ -201,7 +201,15 @@ seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches
 last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 smashes the seal on a stone and refuses capture — written restrained,
 never explicit; the hero covers 孙策 and 周瑜's escape and falls). A quest `ending` {title, text} shows an ending card
 and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
-Planned: 貂蝉 (王允, 连环计 with 吕布); the locked north
+Route B (a later 周目 — flag 「结局一 · 玉碎」 — with 董白 kept): 蔡文姬 can be saved, which ends chapter 3 early
+(「路线：守洛阳」). Chapter 4 驻守洛阳 (quest requires that flag): 蔡文姬's story (郭汜 escorting the officials' families,
+plundering), 周瑜's plan to rob his grain carts, 郭汜 fought off (no 蔡邕), 孙坚 holds 洛阳, the coalition disperses,
+李儒 sues for peace (周瑜 for it, the hero suggests 王允), 董白 is betrothed to the hero (wedding to be in 长安), the hero
+goes to 长安 (「路线：长安」). Chapter 5 长安: 董卓 greets 董白, 蔡邕 reunion, 王允, 貂蝉 and the hero's 连环计 — hidden from
+董白; 李儒 sees through it, 吕布 is chained in the 相府 dungeon, 貂蝉 taken into the back court; the wedding is 董卓's
+trap to kill everyone, 董白 too; break out, 貂蝉 frees 吕布, 董卓 beaten; 董白 shields him, 吕布 kills him, 董白 breaks —
+she never knew, believing the marriage and the reconciliation were sincere. (未完待续)
+The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
 

@@ -1108,6 +1108,9 @@ func _pick_then(ids: Array, title: String, kind: String, after: Callable) -> voi
 func _finish_chapter() -> void:
 	## flags saved, then the interlude and the next chapter's title card, then the next chapter's map
 	var done_id: String = q.get("_raw", q)["id"]
+	var ending: Dictionary = q.get("_raw", q).get("ending", {})
+	if not Game.save.run_records.has(ending.get("title", "")):  # the ending only if this run reached it
+		ending = {}
 	var was_replay: bool = Game.save.replay != ""
 	Quests.complete(q, Game.save)
 	Game.persist()
@@ -1121,7 +1124,7 @@ func _finish_chapter() -> void:
 	o.scenes = Quests.interlude(done_id, Game.save)
 	o.next_title = nxt["title"] if nxt != null else ""
 	o.next_subtitle = nxt.get("subtitle", "") if nxt != null else ""
-	o.ending = q.get("_raw", q).get("ending", {})
+	o.ending = ending
 	if o.ending.is_empty():
 		o.finished.connect(_after_interlude)
 	else:  # an ending: back to the title screen, where a new 周目 can start

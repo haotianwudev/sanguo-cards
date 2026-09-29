@@ -78,7 +78,8 @@ static func current_quest(save: SaveData) -> Variant:
 			if q["id"] == save.replay:
 				return q
 	for q in GameData.get_db().quests:
-		if not save.quests_cleared.has(q["id"]):
+		# a chapter with requires only comes on the route that earned it (story flags from earlier chapters)
+		if not save.quests_cleared.has(q["id"]) and _flags_hold(q.get("requires", ""), save, false):
 			return q
 	return null
 
@@ -219,8 +220,22 @@ static func next_options(q: Dictionary, save: SaveData) -> Array:
 static func is_open(s: Dictionary, save: SaveData) -> bool:
 	## A square with requires / unless only exists when the flag says so: a story flag from an earlier chapter, or a
 	## line recorded earlier in this run (a choice made in this chapter).
-	var has := func(line: String) -> bool: return save.flags.has(line) or save.run_records.has(line)
-	return (s["requires"] == "" or has.call(s["requires"])) and (s["unless"] == "" or not has.call(s["unless"]))
+	## Either may be a list: requires needs all of them, unless hides the square when all of them hold.
+	return _flags_hold(s["requires"], save, true) and (_as_list(s["unless"]).is_empty() or not _flags_hold(s["unless"], save, true))
+
+
+static func _as_list(v: Variant) -> Array:
+	if v is Array:
+		return v
+	return [] if str(v) == "" else [str(v)]
+
+
+static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
+	## every line in v is a story flag (or, with this_run, a line recorded earlier in this run)
+	for line in _as_list(v):
+		if not (save.flags.has(line) or (this_run and save.run_records.has(line))):
+			return false
+	return true
 
 
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:
