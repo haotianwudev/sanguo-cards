@@ -953,3 +953,18 @@ func test_chapter4_nobody_warns_you_until_ending_two() -> void:
 	s.flags = [q["ending"]["title"]]
 	check(Quests.is_open(sq["mimou"], s) and not Quests.is_open(sq["chaohui"], s), "after 结局二: 貂蝉 comes")
 	check(Quests.is_open(sq["dongtao"], s), "and the chapter runs on to 南阳")
+
+
+func test_mengde_makes_strategist_skills_cheaper() -> void:
+	## 策士 hardly attack, so their book cuts their skills' AP instead (never below 1)
+	var b := Battle.start("boar", party(["zhouyu"]), 1, 0, {}, {}, false, {"troop_cost": {"strategist": 1}})
+	var i := -1
+	for k in b.leaders.size():
+		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
+			i = k
+	var u: Dictionary = b.leaders[i]
+	var db := GameData.get_db()
+	check_eq(b.cost(u, db.skills["huoshang"]), 2, "火上浇油 3 -> 2")
+	check_eq(b.cost(u, db.skills["yehuo"]), 1, "火攻 stays at 1")
+	var lord: Dictionary = b.leaders.filter(func(l): return l["leader"]["card"]["troop"] == "lord")[0]
+	check_eq(b.cost(lord, db.skills["rengdao"]), 3, "not a 策士: no discount")

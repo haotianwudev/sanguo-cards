@@ -132,7 +132,10 @@ func ap_max() -> int:
 
 
 func cost(u: Dictionary, sk: Dictionary) -> int:
-	return sk["cost"] + u["extra_cost"][sk["id"]]
+	## troop_cost (孟德新书): that troop's skills cost less, but a paid skill never drops below 1 AP
+	var c: int = sk["cost"] + u["extra_cost"][sk["id"]]
+	var cut := int(mods.get("troop_cost", {}).get(u["leader"]["card"]["troop"], 0))
+	return c if cut == 0 or sk["cost"] == 0 else maxi(1, c - cut)
 
 
 func skills_of(u: Dictionary) -> Array:
