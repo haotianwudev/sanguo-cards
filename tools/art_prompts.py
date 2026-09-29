@@ -273,7 +273,7 @@ CGS = {
     "c2_capture": "the hero carrying the unconscious woman general Dong Bai over his shoulder like a sack of rice, Sun Ce and Zhou Yu each struggling to carry one of her giant bronze hammers (comedic)",
     "c2_captive": "inside a prisoner tent: the woman general Dong Bai, an adult woman with her arms loosely tied, playing rock-paper-scissors against the hero, her hand a split second late, a half-eaten bowl of braised pork beside her, Sun Ce peeking in enviously through the tent flap (comedic)",
     "c2_raid": "a burning army camp at night: Sun Jian alone blocking the camp gate with his sword against Lü Bu on the red horse Red Hare",
-    "c2_sanying": "three heroes fighting Lü Bu: Liu Bei with twin swords, Guan Yu with the crescent blade and Zhang Fei with the snake spear circling Lü Bu, dust flying",
+    "c2_sanying": "the legendary three heroes fighting Lü Bu in a storm of dust: Lü Bu on the rearing red horse Red Hare parrying with his crescent halberd, Guan Yu with the green-dragon crescent blade, Zhang Fei thrusting the serpent spear, Liu Bei with twin swords, sparks flying where the blades meet; in the foreground the onlookers frozen in awe — the hero sitting in the dust, Sun Ce gaping with his spear trembling, Zhou Yu's ledger fallen at his feet, Sun Jian with his arm in a sling narrowing his eyes, and the woman general Dong Bai (adult) tied across a horse staring wide-eyed",
     "c2_fate": "the woman general Dong Bai tied on a horse glaring defiantly at the hero, an envoy of Yuan Shao waiting beside them, tense",
     "c2_setout": "setting off north on a country road: Sun Ce on a brown horse galloping ahead the wrong way, the hero on a white horse and Zhou Yu on a black horse exchanging a look, Lady Wu's carved carriage behind with a chest of ledgers tied on the back",
     "c2_jianhua": "a battlefield: Sun Jian in a tiger-pelt cape beheading the giant Hua Xiong with one sweep of his saber, the fallen hero looking up at him, dust and blood spray (not gory)",
@@ -345,6 +345,7 @@ RELICS = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Priority: 1. 宝物 (Relics, non-lord, pure Chinese items, no disc) -> 2. 人物立绘 (Portraits) -> 不用画 CG
 NEXT = [
+    ("cg", "c2_sanying", "虎牢关：三英战吕布（打斗 + 一排看呆的人，见提示词）"),
     # 1. 战斗背景 CG（横版 16:9，第二章先头关键战役 -> 推进战斗）：
     ("battle", "huaxiong", "汜水关·华雄（西凉铁骑重甲大刀，关口烽燧荒野）"),
     ("battle", "dongbai", "董白（董卓孙女，成年女将双巨锤，被重锤砸裂碎石坑凹陷的河滩）"),
@@ -362,7 +363,6 @@ NEXT = [
     ("cg", "c2_capture", "俘虏董白：主角扛米袋一样扛董白，孙策周瑜合力扛巨锤（爆笑）"),
     ("cg", "c2_captive", "俘虏的日子：战俘帐内董白与主角猜拳，孙策帐外酸溜溜偷看"),
     ("cg", "c2_raid", "吕布劫营：夜袭中军大寨，孙坚单人挡寨门"),
-    ("cg", "c2_sanying", "虎牢关：三英战吕布"),
     ("cg", "c2_triple", "联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩"),
     ("cg", "c2_jianhua", "孙坚斩华雄（孙坚虎皮斗篷挥刀斩敌）"),
     ("cg", "c2_keep", "吴夫人给董白梳头（董白嘴硬眼眶红，主角探头）"),

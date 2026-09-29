@@ -13,21 +13,21 @@
 
 - `inf_n` — 官军刀兵：盾牌上的鹰和回纹边是古希腊重装步兵盾的样式——换成汉军的盾（长方形或圆盾，黑红漆面，饕餮 / 云纹或素面），其他不变
 
-1. `huaxiong` — 汜水关·华雄（西凉铁骑重甲大刀，关口烽燧荒野）（战斗 CG）
-2. `dongbai` — 董白（董卓孙女，成年女将双巨锤，被重锤砸裂碎石坑凹陷的河滩）（战斗 CG）
-3. `hulao_ch1` — 追兵·吕布（虎牢关追击战，月夜残阳赤兔马方天戟）（战斗 CG）
-4. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
-5. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
-6. `feixiong` — 飞熊军（黑甲重骑阵列）（战斗 CG）
-7. `liru` — 李儒伏兵（峡谷险道两侧峭壁伏兵）（战斗 CG）
-8. `lijue` — 洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）（战斗 CG）
-9. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
-10. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
-11. `c2_zumao` — 阵前：华雄追砍祖茂，孙策挺枪急救（剧情 CG）
-12. `c2_capture` — 俘虏董白：主角扛米袋一样扛董白，孙策周瑜合力扛巨锤（爆笑）（剧情 CG）
-13. `c2_captive` — 俘虏的日子：战俘帐内董白与主角猜拳，孙策帐外酸溜溜偷看（剧情 CG）
-14. `c2_raid` — 吕布劫营：夜袭中军大寨，孙坚单人挡寨门（剧情 CG）
-15. `c2_sanying` — 虎牢关：三英战吕布（剧情 CG）
+1. `c2_sanying` — 虎牢关：三英战吕布（打斗 + 一排看呆的人，见提示词）（剧情 CG）
+2. `huaxiong` — 汜水关·华雄（西凉铁骑重甲大刀，关口烽燧荒野）（战斗 CG）
+3. `dongbai` — 董白（董卓孙女，成年女将双巨锤，被重锤砸裂碎石坑凹陷的河滩）（战斗 CG）
+4. `hulao_ch1` — 追兵·吕布（虎牢关追击战，月夜残阳赤兔马方天戟）（战斗 CG）
+5. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
+6. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
+7. `feixiong` — 飞熊军（黑甲重骑阵列）（战斗 CG）
+8. `liru` — 李儒伏兵（峡谷险道两侧峭壁伏兵）（战斗 CG）
+9. `lijue` — 洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）（战斗 CG）
+10. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
+11. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
+12. `c2_zumao` — 阵前：华雄追砍祖茂，孙策挺枪急救（剧情 CG）
+13. `c2_capture` — 俘虏董白：主角扛米袋一样扛董白，孙策周瑜合力扛巨锤（爆笑）（剧情 CG）
+14. `c2_captive` — 俘虏的日子：战俘帐内董白与主角猜拳，孙策帐外酸溜溜偷看（剧情 CG）
+15. `c2_raid` — 吕布劫营：夜袭中军大寨，孙坚单人挡寨门（剧情 CG）
 16. `c2_triple` — 联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩（剧情 CG）
 17. `c2_jianhua` — 孙坚斩华雄（孙坚虎皮斗篷挥刀斩敌）（剧情 CG）
 18. `c2_keep` — 吴夫人给董白梳头（董白嘴硬眼眶红，主角探头）（剧情 CG）
@@ -545,7 +545,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c2_sanying`
 
 ```
-A horizontal story event illustration: three heroes fighting Lü Bu: Liu Bei with twin swords, Guan Yu with the crescent blade and Zhang Fei with the snake spear circling Lü Bu, dust flying.
+A horizontal story event illustration: the legendary three heroes fighting Lü Bu in a storm of dust: Lü Bu on the rearing red horse Red Hare parrying with his crescent halberd, Guan Yu with the green-dragon crescent blade, Zhang Fei thrusting the serpent spear, Liu Bei with twin swords, sparks flying where the blades meet; in the foreground the onlookers frozen in awe — the hero sitting in the dust, Sun Ce gaping with his spear trembling, Zhou Yu's ledger fallen at his feet, Sun Jian with his arm in a sling narrowing his eyes, and the woman general Dong Bai (adult) tied across a horse staring wide-eyed.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
