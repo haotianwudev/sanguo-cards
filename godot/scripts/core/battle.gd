@@ -289,16 +289,19 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			enemy["break_turns"] = maxi(enemy["break_turns"], int(eff["turns"]))
 			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
-		"burn":  # 火攻: the enemy loses HP before each of its turns; a new fire keeps the bigger one, restarts the count
+		"burn":  # 火攻: the enemy loses HP before each of its turns; every new fire stacks on top and restarts the count
 			# "pct": a share of the enemy's full HP per turn; "power": × the caster's attack (magic resist applies)
 			var bonus := float(mods.get("at", 0.0)) + float(mods.get("magic", 0.0))
 			var resist: float = enemy["data"]["magic_resist"] * (1.0 - minf(1.0, float(mods.get("pierce", 0.0))))
 			var per := maxi(1, int(round(at * float(eff.get("power", 0.0)) * mult * (1.0 + bonus) * (1.0 - resist))))
 			if eff.has("pct"):
 				per = maxi(1, int(round(enemy["max_hp"] * float(eff["pct"]) * mult)))
-			enemy["burn_dmg"] = maxi(enemy["burn_dmg"], per)
+			var stacked: bool = enemy["burn_turns"] > 0
+			enemy["burn_dmg"] = (enemy["burn_dmg"] if stacked else 0) + per
 			enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff["turns"]))
 			_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
+			if stacked:
+				return ["  %s 火上加火！每回合 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
 			return ["  %s 着火了！每回合 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
 		"ap":
 			ap = mini(ap_max(), ap + int(eff["amount"]))
