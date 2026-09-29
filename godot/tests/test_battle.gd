@@ -324,3 +324,11 @@ func test_the_hero_can_throw_his_blade_every_turn() -> void:
 	var sk: Dictionary = GameData.get_db().skills["rengdao"]
 	check_eq(sk["cost"], 3)
 	check(not sk["cumulative"] and sk["uses"] == null, "no rising cost, no use limit")
+
+
+func test_every_heal_gets_dearer_each_use() -> void:
+	## healing is never free to spam and never once-only: each use costs 1 AP more
+	for sid in GameData.get_db().skills:
+		var sk: Dictionary = GameData.get_db().skills[sid]
+		if sk["effects"].any(func(e): return e["type"] == "heal"):
+			check(sk["cumulative"] and sk["uses"] == null, sid + " should be cumulative, with no use limit")
