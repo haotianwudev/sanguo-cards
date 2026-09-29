@@ -22,6 +22,22 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "fanchou": ("Fan Chou (樊稠), a loud, brash Xiliang general",
+        "Burly man in his 30s with a wild beard and a mocking grin.",
+        "Dented Xiliang lamellar armor with fur trim.",
+        "Hefting a huge broad saber over his shoulder."),
+    "zhangji": ("Zhang Ji (张济), a steady, reserved Xiliang general",
+        "Calm man in his 40s with a trimmed beard and patient eyes.",
+        "Neat dark Xiliang armor.",
+        "Holding a long spear upright, making a polite martial salute."),
+    "niufu": ("Niu Fu (牛辅), Dong Zhuo's son-in-law and Dong Bai's uncle",
+        "Heavy-set man in his 40s with a hard, jealous glare.",
+        "Rich Xiliang general's armor with gold studs.",
+        "Gripping a heavy saber, pointing it at the viewer in challenge."),
+    "huzhen": ("Hu Zhen (胡轸), a grim Xiliang general guarding the chancellor's inner gate",
+        "Grim, scarred man in his 30s.",
+        "Black armor, a red sash.",
+        "Barring a gate with a drawn broad saber."),
     "dongzhuo": ("Dong Zhuo (董卓), the tyrant chancellor who burned Luoyang",
         "Enormously fat, heavy-jowled man in his 50s with a thick beard, small cunning eyes and a jovial smile that never reaches them.",
         "Extravagant purple-and-gold chancellor's robes straining over his belly, a jeweled belt.",
@@ -301,6 +317,10 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "c5_fanchou": "a courtyard duel ring at a feast: Fan Chou swinging a huge saber, laughing Xiliang officers cheering from the tables",
+    "c5_zhangji": "a courtyard duel ring at a feast: the steady Zhang Ji with his spear levelled, lantern light",
+    "c5_niufu": "a courtyard duel ring at a feast: Niu Fu charging with a heavy saber, Dong Bai standing up at the table shouting, Dong Zhuo watching with narrowed eyes",
+    "c5_huzhen": "the chancellor's inner gate at night: Hu Zhen barring the way with a broad saber as the great doors swing shut behind him",
     "c4_guosi": "a looted village road: Guo Si on horseback over captured grain carts, soldiers loading the villagers' last sacks, an old man knocked down, Dong Bai smashing a cart wheel with her twin hammers",
     "c5_hall": "a wedding hall turned trap: red lanterns and silk, the doors slammed shut, black-armored Flying Bear cavalry pouring in from behind the curtains",
     "c5_dongzhuo": "the steps before the chancellor's mansion at night: the enormous Dong Zhuo with a drawn sword among his elite black-armored guards, wedding lanterns burning behind him",
@@ -336,6 +356,9 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c5_feast": "a lavish welcome feast in Dong Zhuo's mansion: the enormous Dong Zhuo peeling shrimp for his granddaughter Dong Bai (adult), who laughs as she talks; he wipes his eyes with a sleeve; behind them a row of Xiliang generals rising from their seats, eyeing the hero; Lü Bu silent in the corridor",
+    "c5_dance": "a lantern-lit banquet hall: Diaochan, an adult woman of great beauty, dancing with long silk sleeves; the enormous Dong Zhuo leaning forward spellbound with wine in his beard; Wang Yun at the host's seat with a knowing half-smile",
+    "c5_fengyi": "the Phoenix Pavilion in a lotus garden: Diaochan (adult) weeping on Lü Bu's shoulder at the railing; behind them the furious Dong Zhuo hurling Lü Bu's halberd; Lü Bu twisting away; Diaochan's eyes glancing sideways toward the viewer with the ghost of a smile",
     "c5_rescue": "a long street at night: rows of Flying Bear archers drawing their bows at the exhausted hero, who shields Dong Bai (adult, red wedding dress) behind him; from the far end Lü Bu bursts through on Red Hare with his halberd, a thousand cavalry behind him, and Diaochan (adult, torn dress, bloodied hands) riding behind him",
     "c4_wenji": "night by a campfire in ruined Luoyang: Cai Wenji, an adult woman in white, holding her guqin with a broken string, telling her story; Dong Bai listening with folded arms, Lady Wu wrapping a cloak around Cai Wenji",
     "c4_peace": "Sun Jian's tent in Luoyang: the envoy Li Ru with a feather fan offering peace, Sun Jian scowling, Zhou Yu whispering advice, the hero stepping forward to speak",
