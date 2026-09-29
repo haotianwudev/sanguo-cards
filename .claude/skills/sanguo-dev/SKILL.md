@@ -227,9 +227,10 @@ restrained). The squares from x5 of the warned route require that flag; the trap
 requires (they're only reachable from the split). **Later 周目**: 貂蝉 (王允's adoptive daughter) warns him; 李傕/郭汜 attack 长安, 王允 keeps 吕布 on a leash; 周瑜 (in 长安 with
 his uncle 周忠) says take the emperor to 洛阳; 董白 brings 董卓's old guard, 貂蝉 comes along, 皇甫嵩 holds the gate;
 王允's checkpoint, pursuers or 樊稠, 徐晃 defects, 李傕 at 函谷关 (boss) → 洛阳, 孙坚 kneels; 长安 falls, 王允 dies
-on the gate, 吕布 goes to 袁绍; 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said
-曹操); the hero is pushed aside and sent against 袁术 in 南阳: 桥蕤, 黄忠 (a 南阳 soldier robbed by 袁术's men, sick son
-黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 纪灵 (boss) holds the rear while 袁术 flees east to 寿春. (未完待续)
+on the gate, 吕布 goes to 袁绍, 李傕 and 郭汜 hold 长安 (no infighting); 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said
+曹操); the emperor has the hero made 破虏将军 (孙坚's own old title, handed down grudgingly); pushed aside, and sent against
+袁术 in 南阳 because 孙坚 can't leave the emperor: 桥蕤, 黄忠 (a 南阳 soldier robbed by 袁术's men, sick son
+黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 纪灵 (boss) holds the rear and flees with 袁术 and 冯夫人 to 九江 — 袁术 takes 寿春 and styles himself 扬州牧 (as in history). (未完待续)
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
