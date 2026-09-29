@@ -72,7 +72,8 @@
     "shuizei_scout": {"src": "source/battles/shuizei_scout.jpg", "license": "用户提供（Gemini 生成）"},
     "shuizei": {"src": "source/battles/shuizei.jpg", "license": "用户提供（Gemini 生成）"},
     "shuizei_guard": {"src": "source/battles/shuizei_guard.jpg", "license": "用户提供（Gemini 生成）"},
-    "yaodao": {"src": "source/battles/yaodao.jpg", "license": "用户提供（Gemini 生成）"}
+    "yaodao": {"src": "source/battles/yaodao.jpg", "license": "用户提供（Gemini 生成）"},
+    "shuizei_main": {"src": "source/battles/shuizei_main.jpg", "license": "用户提供（Gemini 生成）"}
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
   "cgs": {
