@@ -6,6 +6,15 @@ var _col: VBoxContainer
 
 
 func _ready() -> void:
+	var art := Kit.ui_art("title")  # title picture, dimmed so the menu stays readable
+	if art != null:
+		var pic := TextureRect.new()
+		pic.texture = art
+		pic.set_anchors_preset(Control.PRESET_FULL_RECT)
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		pic.modulate = Color(0.5, 0.5, 0.5)
+		add_child(pic)
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(center)

@@ -53,7 +53,7 @@ func _ready() -> void:
 		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		b.add_child(box)
 		var icon: Control
-		var relic_tex: Texture2D = Kit.relic_icon(relic_ids[i]) if source == "relics" else null
+		var relic_tex: Texture2D = Kit.relic_icon(relic_ids[i]) if source == "relics" else Kit.fate_icon(relic_ids[i])
 		if relic_tex != null:
 			var tr := TextureRect.new()
 			tr.texture = relic_tex

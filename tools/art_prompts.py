@@ -341,6 +341,17 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "c4_gaoshun": "the back gate of a scholar's mansion in Chang'an before dawn, the house burning behind: the grim, dark-faced Gao Shun standing like a post behind a wall of tall black shields bristling with halberds, his Trap-Breaking Camp utterly silent",
+    "c4_langqi": "a long Chang'an street at dawn, lanterns smashed: Bingzhou wolf riders in fur-trimmed armor galloping straight at the viewer, sabers raised, their leader howling",
+    "c4_lvbu": "the great Xuanping Gate of Chang'an in falling snow at dawn: Lü Bu on the rearing Red Hare with his halberd raised high, Gao Shun's black shield wall behind him; a woman in a black cloak (Diaochan, adult) seated behind his saddle looking away",
+    "c6_shaoka": "the Qingming Gate of Chang'an at night: a row of torches, Han guards in red and black with halberds barring the road, their officer holding out a written order",
+    "c6_zhuibing": "a winter road along the Wei river: pursuing house troops of Minister Wang Yun under a banner reading 奉诏讨贼, crossbowmen kneeling in a line, dust and snow",
+    "c6_fanchou": "a narrow mountain road east of Chang'an: the loud, brash Xiliang general Fan Chou on horseback swinging a huge saber, laughing, Xiliang cavalry pouring down the slope",
+    "c6_lijue": "Hangu Pass at sunset: the gaunt, cruel Li Jue on horseback before a huge 李 banner, his blade still stained, rows of Xiliang cavalry filling the pass behind him",
+    "c7_qiaorui": "a Yuan army camp gate in Nanyang in summer: the stout Qiao Rui tossing away a chicken bone and drawing his broad saber, Yuan soldiers scrambling out of their tents",
+    "c7_leibo": "a mountain road outside Wancheng: Lei Bo with a scar on his chin leading light cavalry in a charge, arrows in the air",
+    "c7_chenlan": "the walls of Wancheng in Nanyang: the grey-bearded general Chen Lan on the gate tower pointing a long spear down, archers along the battlements, the 袁 banner above",
+    "c7_jiling": "the west gate of Wancheng at dawn, smoke rising in the city behind: Ji Ling alone on horseback in gilded armor with his three-pointed double-edged blade, holding the gate while Yuan Shu's carriages flee behind him",
     "c5_fanchou": "a courtyard duel ring at a feast: Fan Chou swinging a huge saber, laughing Xiliang officers cheering from the tables",
     "c5_zhangji": "a courtyard duel ring at a feast: the steady Zhang Ji with his spear levelled, lantern light",
     "c5_niufu": "a courtyard duel ring at a feast: Niu Fu charging with a heavy saber, Dong Bai standing up at the table shouting, Dong Zhuo watching with narrowed eyes",
@@ -380,6 +391,15 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c4_zhujun": "Sun Jian's camp in the ruins of Luoyang: the veteran general Zhu Jun (grey-bearded, straight-backed, hearty laugh) slapping the huge Sun Jian on the shoulder, Sun Jian bowing formally for once; Sun Ce behind them red-faced trying not to laugh",
+    "c6_yizu": "the palace steps of Chang'an the day after Dong Zhuo's death: soldiers with chains coming for Dong Bai (adult) kneeling numbly; the hero standing in front of her with his blade half drawn; the white-haired Huangfu Song stepping to his side; Wang Yun smiling coldly; high above, the small boy emperor clutching a pillar",
+    "c6_warn": "night at a window in Chang'an: Diaochan (adult) in a black cloak, pale but smiling, leaning in at the hero's window by candlelight; in the neighbouring window Dong Bai slamming her shutters",
+    "c4_siege": "before dawn, the scholar Cai Yong's house in Chang'an surrounded by torches: the elderly Cai Yong led away by soldiers without resisting, Cai Wenji (adult, in white) reaching after him held back by the hero, who draws Sun Jian's big blade; Gao Shun's silent black-armored troops at the back gate",
+    "c4_dongjia": "a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) in the doorway with her twin hammers, behind her a few dozen people — scarred Flying Bear veterans, household servants, old retainers with kitchen cleavers; the hero and Cai Wenji (adult) looking up from the straw",
+    "c7_feng": "a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingers on his wrist; behind the tent flap Diaochan coughing, Dong Bai slamming a hammer down, Cai Wenji's zither string snapping — all three glaring",
+    "c7_flee": "the east gate of Wancheng: Yuan Shu's overloaded carriages and grain carts fleeing east in a cloud of dust, Lady Feng's palanquin last with its curtain lifted, Ji Ling covering the retreat; in the foreground the hero and Huang Zhong watching from the captured wall under a 孙 banner",
+    "end_yusui": "an ending card illustration, quiet and symbolic: the Imperial Jade Seal broken into pieces on a wet grey stone by a rainy mountain road, its gold-mended corner lying in the mud, a woman's hairpin beside it; cold rain, muted colours, no people",
+    "end_tonggui": "an ending card illustration, quiet and symbolic: three sets of footprints side by side in fresh snow before the closed Xuanping Gate of Chang'an at dawn, a pair of notched bronze hammers and a broken guqin lying together in the snow; soft falling snow, muted colours, no people, no blood",
     "c4_tonggui": "dawn at a snowy Chang'an city gate: the short-haired hero in battered silver armor stands with Sun Jian's big blade, Dong Bai (adult) on his left with her notched twin hammers, Cai Wenji (adult) on his right holding a broken guqin; the three of them smiling faintly; before them the silhouette of Lü Bu on Red Hare raising his halberd, Gao Shun's black shield wall behind; restrained and elegiac, no gore",
     "c6_fenghou": "the throne hall in Chang'an: the ten-year-old boy emperor on a huge throne, leaning forward and insisting in a trembling voice; below, the white-haired Wang Yun bowing with a smile that doesn't reach his eyes; the short-haired hero in silver armor kneeling in surprise among the ministers; Lü Bu smirking in the front row",
     "c6_escape": "night escape from Chang'an: a covered carriage racing through a burning city gate; Dong Bai (adult) on horseback in red with her twin hammers leading a few hundred black-armored veterans; the hero riding beside the carriage with the boy emperor peeking out clutching a small bundle; Diaochan (adult) riding pillion behind the hero; in the distance the white-haired Huangfu Song holding a gate with his guards",
@@ -449,6 +469,10 @@ CGS = {
 # They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
 # chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
 MAPS = {
+    "yuxi": "the road from burning Luoyang south to Nanyang, left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled city of Nanyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
+    "shouluoyang": "ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an",
+    "changan": "Chang'an in winter, left to right: the grand city gate; Dong Zhuo's lavish mansion with a courtyard duel ring; the palace with a rockery garden; a scholar's modest house; the Minister's mansion; a lotus pond with the Phoenix Pavilion; at the far right the chancellor's mansion hung with red wedding lanterns",
+    "dongui": "one long campaign, left to right: snowy Chang'an palace and the Xuanping Gate; the Wei river road east; the mountains and Hangu Pass; half-restored Luoyang with Sun banners; the summer road south; a Yuan army camp; the walled city of Wancheng in Nanyang at the far right",
     "taodong": "the march north to fight Dong Zhuo, left to right: country roads and farmland leaving the south; a dusty Central-Plains "
                "highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); "
                "Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three "
@@ -489,6 +513,80 @@ RELICS = {
     "dilu": "Hex Mark's silver stirrup and bridle (的卢辔饰), refined white leather and silver-inlaid bridle and bit with tear-shaped silver ornaments and blue tassels",
     "fangtian": "the head of Lü Bu's Sky Piercer Halberd (方天画戟), a formidable four-pointed spearhead flanked by dual polished crescent moon side blades and red battle tassels",
     "tengjia": "the Southern Rattan Armor (藤甲), woven impenetrable dried wild mountain vine breastplate, treated with oil and bound with brass rivets",
+}
+
+
+# ？ event illustrations (event id -> scene); shown full-screen when the event comes up, like a story CG (key e_<id>)
+EVENTS = {
+    "ambush": "river bandits bursting out of tall reeds with gongs and rusty sabers, shouting",
+    "snake": "comic scene: the short-haired hero hopping on one leg clutching his thigh, a small green bamboo viper slithering away, Sun Ce and Zhou Yu doubled over laughing",
+    "tiger": "a white-browed tiger lounging on a rock on a mountain road, lazily licking its paw, staring at the viewer",
+    "zuoci": "a white-haired old Taoist grinning with two front teeth, sitting on a boulder with a bamboo staff, purple smoke curling from a gourd in his hand",
+    "chest": "a rusty iron chest half-buried by the roadside, carved with four small characters 非礼勿开",
+    "hero": "a burly man in a roadside tavern smashing a table with one fist, wine cups flying, drinkers scattering",
+    "refugees": "a column of ragged refugees on a dusty road, an old man collapsed, a mother holding a child out toward the viewer",
+    "washer": "a cheerful adult woman washing clothes at a mountain stream, sleeves rolled up, laughing, a basket of cloth beside her",
+    "dice": "river bandits gambling with dice on a broken boat by the river, waving the viewer over",
+    "fruit": "a tree heavy with glossy red fruit by an empty road, Zhou Yu raising a warning finger",
+    "risk": "a small boat in thick river fog, an old boatman squatting at the bow smoking a long pipe, dangerous rapids ahead",
+    "temple": "a crumbling mountain temple with a noseless earth-god statue, half a stick of incense still smoking in the censer",
+    "grand_chest": "a big gilded chest carved with the character 袁 in an army camp, a pompous lord forcing a smile",
+    "huatuo": "a lean middle-aged doctor treating a village woman at a roadside medicine stall, his box painted 沛国华佗",
+    "yuji": "a Taoist in white blocking the road, waving a banner reading 于吉仙师 符水治百病, followers kneeling",
+    "merchant": "a plump merchant with a donkey cart piled with exotic goods, spreading his arms in welcome",
+    "smith": "a roadside smithy with a roaring forge, a bare-chested old blacksmith hammering a glowing blade",
+    "tomb": "a half-collapsed ancient tomb in a mountain hollow, cold wind from the entrance, Sun Ce stepping in eagerly while Zhou Yu checks his ledger",
+    "guanlu": "a young diviner at a fortune-telling stall under a tree, sign reading 管辂神算",
+    "xushao": "the famous critic Xu Shao holding court by the roadside, a crowd of hopeful men waiting for his one-line verdicts",
+    "qiao": "two beautiful adult sisters washing clothes by a river, one gentle and one lively, Sun Ce and Zhou Yu frozen mid-step staring",
+    "drink": "a tavern drinking contest: Sun Ce slamming a wine jar on the table, a crowd circling",
+    "deserters": "ragged deserters without armour crouching by the road gnawing bark, shrinking back in fear",
+    "storm": "a sudden thunderstorm turning a road into mud, the army struggling through the rain",
+    "horse": "a horse dealer holding the reins of two horses — a white-faced one with an ominous look and a fiery red one",
+    "convoy": "Xiliang soldiers escorting grain carts with sacks stamped 董 along a road below a hill",
+    "surrender": "a small group of men in yellow headscarves carrying a white flag, kneeling on a road",
+    "shanzei": "a one-eyed bandit with a big axe jumping out at a mountain bend, his gang behind him",
+    "shanzhai": "a mountain bandit fort with a tattered 替天行道 banner, smoke of roasting meat rising, Sun Ce swallowing",
+    "jieying": "a night camp raid: dogs barking, a wall of torches coming out of the dark",
+    "hj_camp": "a Yellow Turban remnant camp in a valley: old people, children and women around a pot of wild greens, thin smoke",
+    "hj_medics": "a ruined temple where women in yellow headscarves clean soldiers' wounds, Taiping talismans on their medicine boxes",
+    "hj_road": "Yellow Turban remnants charging out of a forest with sticks and bamboo spears, shouting",
+    "yuan_tax": "a roadside toll shed where soldiers in Yuan livery block the road, demanding rice",
+    "black_market": "a narrow alley at night lit by a green lantern, a masked man opening his coat full of stolen treasures",
+    "jz_spy": "a suspicious peddler caught at a city gate, a map of the city defences falling out of his carrying pole",
+    "veterans": "old soldiers missing arms and legs sunning themselves at a city gate, recognising Sun Ce with joy",
+    "plague": "a village entrance hung with white cloth, an old doctor raising his hand to stop the viewer",
+    "yuxi_rumor": "a crowded teahouse, everyone whispering behind their hands",
+    "tongyao": "children clapping and running along a road singing, in the background the silhouette of a huge fat man",
+    "zhuhou_yan": "an envoy presenting an invitation card from the allied commander's camp, banquet tents in the background",
+}
+# 天命 pictures (cards.json fates id -> symbol); godot/data/art/fates/<id>.png, shown on the 天命 pick
+FATES = {
+    "jiangxing": "a brilliant general's star blazing above a Han helmet on a battlefield at night",
+    "tiebi": "an iron wall of interlocking Han shields, arrows bouncing off",
+    "bingduo": "a sea of banners and spears stretching to the horizon",
+    "shenji": "a tactician's hand placing a black go stone on a battle map, glowing lines spreading",
+    "tianshi": "a sundial and a bronze water clock under a turning sky",
+    "renzhe": "a pair of hands offering a bowl of rice and a bandage to a wounded soldier",
+    "caiyun": "a bronze coin tree heavy with golden coins and ingots",
+    "xiansheng": "a war drum struck with a shockwave of sound, war cries",
+    "jixing": "a lucky star and five-coloured auspicious clouds",
+    "beishui": "broken cauldrons and a burning boat at a riverbank, soldiers facing the enemy with no way back",
+    "luanshi": "a blood-red sky over burning cities, fortune favouring the bold",
+    "jijin": "cavalry charging forward at full gallop in a blur of speed",
+}
+# 词缀 badges (cards.json battle.affixes id -> symbol); godot/data/art/affixes/<id>.png, shown in the battle info
+AFFIXES = {
+    "jianjia": "a heavy armour plate",
+    "fayu": "a Taoist ward talisman glowing blue",
+    "kuangbao": "a roaring red beast face",
+    "houxue": "a thick red heart-shaped shield",
+    "zaisheng": "a sprouting green herb",
+    "xunjie": "a winged boot / swift wind swirl",
+}
+# full-screen UI pictures: godot/data/art/ui/<key>.jpg
+UI_ART = {
+    "title": "the title screen: a wide panoramic scene of the Three Kingdoms era at dawn — the Yangtze river in the foreground with a small boat, the young short-haired hero in silver armor with a cape standing on the bank looking north toward distant burning cities and banners; the sky split between warm sunrise and war smoke; leave the centre third of the frame calm and darker (the menu sits there)",
 }
 
 
@@ -642,6 +740,26 @@ def cg_prompt(scene: str) -> str:
             f"(When the hero appears — {HERO}.)")
 
 
+def fate_prompt(sym: str) -> str:
+    return (f"A square emblem illustration for a 'fate' card in a roguelike: {sym}.{NL}"
+            f"Composition & Framing: square 512x512 (draw at 1024x1024), the symbol centred inside a round jade-and-gold medallion "
+            f"with a thin gold rim, transparent background (PNG).{NL}"
+            f"Style: {STYLE}, painted emblem, strong silhouette readable at 112px; no text.")
+
+
+def affix_prompt(sym: str) -> str:
+    return (f"A tiny game badge icon: {sym}, drawn as a red Chinese seal stamp (朱印) with the symbol carved inside.{NL}"
+            f"Composition & Framing: square 128x128 (draw at 512x512), transparent background (PNG), bold simple shapes readable at 28px.{NL}"
+            f"Style: ink and cinnabar, crisp edges; no text.")
+
+
+def ui_prompt(scene: str) -> str:
+    return (f"A horizontal key-art illustration for {scene}.{NL}"
+            f"Composition & Framing: Horizontal 16:9, 1920x1080; the picture is shown dimmed under the menu.{NL}"
+            f"Style: {STYLE}, epic cinematic lighting, painterly sky; no text, no logo, no UI.{NL}"
+            f"(The hero — {HERO}.)")
+
+
 def main() -> None:
     art = json.loads((PICS / "art.json").read_text("utf-8"))
     done = {k for k, v in art["portraits"].items() if not v.get("placeholder")}
@@ -680,6 +798,28 @@ def main() -> None:
         if key in art.get("cgs", {}):
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+    out += ["## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）", ""]
+    for eid, scene in EVENTS.items():
+        key = "e_" + eid
+        if key in art.get("cgs", {}):
+            continue
+        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+    art_dir = ROOT / "godot" / "data" / "art"
+    out += ["## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）", ""]
+    for key, sym in FATES.items():
+        if (art_dir / "fates" / f"{key}.png").exists():
+            continue
+        out += [f"### `{key}`", "", "```", fate_prompt(sym), "```", ""]
+    out += ["## 词缀徽记（128×128 透明 PNG，放 `godot/data/art/affixes/<key>.png`）", ""]
+    for key, sym in AFFIXES.items():
+        if (art_dir / "affixes" / f"{key}.png").exists():
+            continue
+        out += [f"### `{key}`", "", "```", affix_prompt(sym), "```", ""]
+    out += ["## 界面大图（横版 16:9 JPG，放 `godot/data/art/ui/<key>.jpg`）", ""]
+    for key, scene in UI_ART.items():
+        if (art_dir / "ui" / f"{key}.jpg").exists():
+            continue
+        out += [f"### `{key}`", "", "```", ui_prompt(scene), "```", ""]
     out += ["## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）", ""]
     for key, obj in CHESTS.items():
         out += [f"### `{key}`", "", "```", f"A game item sprite: {obj}.{NL}Composition & Framing: square 512x512, the chest centred "

@@ -363,6 +363,24 @@ static func enemy_portrait_key(enemy: Dictionary) -> String:
 	return key if _portrait_index().has(key) else ""
 
 
+static func fate_icon(fate_id: String) -> Texture2D:
+	## a 天命 card picture (data/art/fates/<id>.png), or null (the pick shows its one-character glyph)
+	var path := "res://data/art/fates/%s.png" % fate_id
+	return load(path) if ResourceLoader.exists(path) else null
+
+
+static func affix_icon_path(affix_id: String) -> String:
+	## a 词缀 badge (data/art/affixes/<id>.png) for rich text, or "" until it's drawn
+	var path := "res://data/art/affixes/%s.png" % affix_id
+	return path if ResourceLoader.exists(path) else ""
+
+
+static func ui_art(key: String) -> Texture2D:
+	## a full-screen UI picture (data/art/ui/<key>.jpg: title, …), or null
+	var path := "res://data/art/ui/%s.jpg" % key
+	return load(path) if ResourceLoader.exists(path) else null
+
+
 static func cg(key: String) -> Texture2D:
 	## a story illustration (data/art/cg/<key>.jpg), or null until it's drawn
 	var path := "res://data/art/cg/%s.jpg" % key

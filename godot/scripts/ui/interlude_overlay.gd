@@ -133,6 +133,16 @@ func _show_title() -> void:
 		bg.size = size
 		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_box.add_child(bg)
+		var art := Kit.cg(ending.get("cg", ""))  # the ending's own picture, dimmed under the words
+		if art != null:
+			var pic := TextureRect.new()
+			pic.texture = art
+			pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+			pic.size = size
+			pic.modulate = Color(0.55, 0.55, 0.55)
+			pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			_box.add_child(pic)
 		var e := Kit.label(ending.get("title", ""), 64, "gold")
 		e.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		e.position = Vector2(0, 250)
