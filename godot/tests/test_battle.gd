@@ -236,10 +236,9 @@ func test_enemy_rage_heal_and_ap_drain() -> void:
 	check(t.ap < ap_before + 2, "虎啸 takes AP")
 
 
-func test_the_lord_throws_his_blade_once_and_has_no_boost() -> void:
+func test_the_lord_throws_his_blade_and_has_no_boost() -> void:
 	var f := GameData.get_db().build_lord("阿明")
 	check_eq(f["skills"], ["tuji", "rengdao"])
-	check_eq(GameData.get_db().skills["rengdao"]["uses"], 1)
 
 
 func test_oil_on_the_fire_doubles_on_a_burning_enemy() -> void:
@@ -318,3 +317,10 @@ func test_fire_attack_is_free_to_repeat() -> void:
 	check_eq(b.ap, ap0 - 1, "still 1 AP the second time")
 	check_eq(b.enemy["burn_dmg"], int(round(b.enemy["max_hp"] * 0.1)), "one fire at a time: still 10% a turn")
 	check_eq(b.enemy["burn_turns"], 3, "casting again only restarts the count")
+
+
+func test_the_hero_can_throw_his_blade_every_turn() -> void:
+	## 扔刀: 3 AP every time, no once-per-battle limit
+	var sk: Dictionary = GameData.get_db().skills["rengdao"]
+	check_eq(sk["cost"], 3)
+	check(not sk["cumulative"] and sk["uses"] == null, "no rising cost, no use limit")

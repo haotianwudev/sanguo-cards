@@ -136,7 +136,7 @@
     "zhenjiu": {"name": "鸩酒", "cost": 2, "cumulative": true, "effects": [{"type": "burn", "pct": 0.08, "turns": 3}, {"type": "stun", "chance": 0.3}]},
     "shuangchui": {"name": "双锤", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 0.9, "hits": 2}]},
     "mafei": {"name": "麻沸散", "cost": 2, "cumulative": true, "effects": [{"type": "heal", "power": 4.0}, {"type": "guard", "cut": 0.2}]},
-    "rengdao": {"name": "扔刀", "cost": 3, "uses": 1, "effects": [{"type": "attack", "power": 4.5}]},
+    "rengdao": {"name": "扔刀", "cost": 3, "effects": [{"type": "attack", "power": 4.5}]},
     "huoshang": {"name": "火上浇油", "cost": 3, "uses": 1, "effects": [{"type": "magic", "power": 3.0, "burning_mult": 2.0}]},
     "huxiao": {"name": "虎啸", "cost": 1, "cumulative": true, "effects": [{"type": "stun", "chance": 0.4}]},
     "fanjiang": {"name": "翻江倒海", "cost": 2, "cumulative": true, "effects": [{"type": "attack", "power": 1.2, "hits": 2}]},
