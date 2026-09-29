@@ -289,13 +289,13 @@ func _refresh() -> void:
 	if e["break_turns"] > 0:
 		st.append("破防 +%d%%（%d 回合）" % [int(round(e["break_amount"] * 100)), e["break_turns"]])
 	if e["burn_turns"] > 0:
-		st.append("🔥 着火 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
+		st.append("🔥 灼烧 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
 	if e["charging"] != "":
 		st.append("⚠ 蓄力中：下回合【%s】！" % e["charging"])
 	if e["at"] > e["data"]["at"] * 1.01:
 		st.append("狂暴 攻击 %d" % int(round(e["at"])))
 	if b.party_burn["turns"] > 0:
-		st.append("我军着火 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
+		st.append("我军灼烧 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
 	if b.ap_drain > 0:
 		st.append("下回合 AP -%d" % b.ap_drain)
 	_enemy_status.text = "　".join(st)

@@ -299,7 +299,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			enemy["burn_dmg"] = maxi(enemy["burn_dmg"], per)
 			enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff["turns"]))
 			_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
-			return ["  %s 着火了！每回合 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
+			return ["  %s 陷入灼烧！每回合结算 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
 		"ap":
 			ap = mini(ap_max(), ap + int(eff["amount"]))
 			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
@@ -318,7 +318,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 		var d: int = mini(enemy["burn_dmg"], enemy["hp"])
 		enemy["hp"] -= d
 		_ev({"t": "burn", "dmg": d, "hp": enemy["hp"], "turns": enemy["burn_turns"]})
-		log.append("%s 被火烧，损失 %d 体力" % [data["name"], d])
+		log.append("%s 灼烧结算，损失 %d 体力" % [data["name"], d])
 		if enemy["burn_turns"] == 0:
 			enemy["burn_dmg"] = 0
 		_check_end()
@@ -378,7 +378,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 				log.append("[color=red]  下回合我军 AP -%d[/color]" % int(mv["ap_drain"]))
 			if mv.has("burn_party"):
 				party_burn = {"dmg": int(round(party_max * float(mv["burn_party"]))), "turns": int(mv.get("turns", 3))}
-				log.append("[color=red]  我军着火了！每回合 -%d（%d 回合）[/color]" % [party_burn["dmg"], party_burn["turns"]])
+				log.append("[color=red]  我军陷入灼烧！每回合 -%d（%d 回合）[/color]" % [party_burn["dmg"], party_burn["turns"]])
 			if mv.has("confuse") and mods.get("calm", 0) <= 0 and rng.randf() < float(mv["confuse"]):
 				var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
 				victim["confuse_next"] = true
