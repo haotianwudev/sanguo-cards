@@ -51,7 +51,7 @@
 | ✅ 正式 | `danyang` | 丹阳兵 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
 | ✅ 正式 | `jiangdong_gong` | 江东弓手 |
-| ⬜ 缺 | `liehu` | 山中猎户 |
+| ✅ 正式 | `liehu` | 山中猎户 |
 | ⬜ 缺 | `yuenv_gong` | 越女弓手 |
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
 
