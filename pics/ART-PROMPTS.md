@@ -2162,15 +2162,6 @@ Style: ink and cinnabar, crisp edges; no text.
 
 ## 界面大图（横版 16:9 JPG，放 `godot/data/art/ui/<key>.jpg`）
 
-### `title`
-
-```
-A horizontal key-art illustration for the title screen: a wide panoramic scene of the Three Kingdoms era at dawn — the Yangtze river in the foreground with a small boat, the young short-haired hero in silver armor with a cape standing on the bank looking north toward distant burning cities and banners; the sky split between warm sunrise and war smoke; leave the centre third of the frame calm and darker (the menu sits there).
-Composition & Framing: Horizontal 16:9, 1920x1080; the picture is shown dimmed under the menu.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, epic cinematic lighting, painterly sky; no text, no logo, no UI.
-(The hero — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
 ## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）
 
 ### `chest_normal`
