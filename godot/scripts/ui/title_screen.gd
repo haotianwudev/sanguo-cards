@@ -24,7 +24,7 @@ func _ready() -> void:
 	col.custom_minimum_size = Vector2(420, 0)
 	center.add_child(col)
 
-	var title := Kit.label("三　国　卡　牌", Kit.FONT_TITLE + 16, "gold")
+	var title := Kit.label("重　开　三　国", Kit.FONT_TITLE + 16, "gold")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(title)
 	var sub := Kit.label("穿越江东 · 招兵买将", Kit.FONT_BIG, "muted")

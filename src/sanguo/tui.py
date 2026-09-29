@@ -165,7 +165,7 @@ def leader_note(ld: Leader) -> str:
 
 # ---- main menu ---------------------------------------------------------------
 
-TITLE_ART = "[b]三　国　卡　牌[/]\n[dim]穿越江东 · 抽卡组军[/]"
+TITLE_ART = "[b]重　开　三　国[/]\n[dim]穿越江东 · 抽卡组军[/]"
 
 
 class MenuScreen(Screen):
@@ -986,7 +986,7 @@ class ScenarioScreen(Screen):
 # ---- app ---------------------------------------------------------------------
 
 class SanguoApp(App):
-    TITLE = "三国卡牌"
+    TITLE = "重开三国"
     CSS = """
     Screen { background: $sg-bg; }
     Footer { background: $sg-panel; }
@@ -1117,7 +1117,7 @@ class SanguoApp(App):
 
 
 def main(argv: list[str] | None = None) -> None:
-    ap = argparse.ArgumentParser(prog="sanguo", description="三国卡牌")
+    ap = argparse.ArgumentParser(prog="sanguo", description="重开三国")
     ap.add_argument("--save", type=Path, default=col.DEFAULT_SAVE, help=f"存档路径（默认 {col.DEFAULT_SAVE}）")
     ap.add_argument("--new", action="store_true", help="忽略旧存档，重新开始")
     ap.add_argument("--seed", type=int, default=None, help="固定随机种子（抽卡与战斗）")

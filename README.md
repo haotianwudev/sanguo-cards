@@ -1,4 +1,4 @@
-# 三国卡牌 (sanguo-cards)
+# 重开三国 (sanguo-cards)
 
 三国题材卡牌策略游戏，借鉴兰斯10的卡牌战斗/战役节奏与三国群侠传的武将收集。终端界面（[Textual](https://textual.textualize.io/)），鼠标键盘都能操作，也能用 `textual serve` 放到浏览器里玩。战斗照搬兰斯10。
 

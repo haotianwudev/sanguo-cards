@@ -1,9 +1,9 @@
 ---
 name: sanguo-dev
-description: Develop 三国卡牌 (sanguo-cards), a Godot 4 Rance X-style Three Kingdoms roguelike card game. Use for any change to its cards, skills, enemies, relics, quest maps, random events, story text, UI, art pipeline, or tests — and to run its tests, demos and screenshots.
+description: Develop 重开三国 (sanguo-cards; formerly 三国卡牌), a Godot 4 Rance X-style Three Kingdoms roguelike card game. Use for any change to its cards, skills, enemies, relics, quest maps, random events, story text, UI, art pipeline, or tests — and to run its tests, demos and screenshots.
 ---
 
-# 三国卡牌 development
+# 重开三国 development
 
 A small, polished roguelike card game: Rance X (ランス10) battles, Rance X quest maps walked square by square,
 Slay-the-Spire-style runs, a comic 三国群侠传-flavoured story. Landscape 1280×720, meant for phone and Switch.
