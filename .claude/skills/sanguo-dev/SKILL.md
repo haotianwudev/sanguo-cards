@@ -215,7 +215,8 @@ adults, both sweet on the hero) — 蔡文姬 sniffs at 董白's lack of learnin
 merchant's appraising look, tears that come right on time, first up the steps to take charge after 董卓 dies without a
 glance at 董白); the user will write where that goes. 貂蝉 (adult): clever, beautiful, brave, and
 always seems to be flirting with someone — whether she means it with the hero stays unclear; 董白 doesn't like how
-she looks at him. (未完待续)
+she looks at him. 吕布 stays a brute and selfish: he rescues nobody on purpose (「别以为我是来
+救你的」), kills 董卓 over his own pupil's plea, grabs 貂蝉 and shouts for the credit. (未完待续)
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
