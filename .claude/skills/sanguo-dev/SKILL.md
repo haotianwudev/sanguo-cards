@@ -146,7 +146,7 @@ Adding a portrait, checklist:
   (`unworn`) and leave any card behind (`benched`: joins no unit; a leader is always brought). Both in 整备.
 - **Skill**: `cost, cumulative (+1 AP per use), uses (1 = 限1), effects[]` — `attack/magic {power, hits, burning_mult}`,
   `heal`, `guard {cut}`, `boost`, `stun {chance}`, `break`, `ap`, `burn {pct | power, turns}` (one fire at a time: a new one keeps the bigger and restarts the count; 周瑜's 火攻 is 10%/turn at a flat 1 AP). Once-per-battle damage
-  skills (大招) cost ≥ 3 AP (a test enforces it). **Every heal is cumulative** (+1 AP each use, no use limit — a test enforces it).
+  skills (大招) cost ≥ 3 AP (a test enforces it). **Heals**: an everyday heal is cumulative (+1 AP each use); a big heal is a once-only 大招. Few generals heal (doctors, 刘备, the mother figures, 后勤 troops) — give the rest statuses (guard / boost / ap / break / stun). Tests enforce both.
 - **Enemy**: `hp, at, actions, resists, portrait, card (its chest may hold it: 25%, bosses/elites 50%), moves[]` — move
   `power (0 = no hit), weight (0 = only after a charge), confuse, rage, heal, ap_drain, burn_party, pierce,
   charge (wind-up announced a turn ahead), when: "half", once`. Make fights strong; make their cards modest.

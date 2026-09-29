@@ -326,9 +326,24 @@ func test_the_hero_can_throw_his_blade_every_turn() -> void:
 	check(not sk["cumulative"] and sk["uses"] == null, "no rising cost, no use limit")
 
 
-func test_every_heal_gets_dearer_each_use() -> void:
-	## healing is never free to spam and never once-only: each use costs 1 AP more
+func test_heals_get_dearer_or_are_a_once_only_big_heal() -> void:
+	## a heal is never free to spam: an everyday heal costs 1 AP more each use, a big heal (大招) is once per battle
 	for sid in GameData.get_db().skills:
 		var sk: Dictionary = GameData.get_db().skills[sid]
 		if sk["effects"].any(func(e): return e["type"] == "heal"):
-			check(sk["cumulative"] and sk["uses"] == null, sid + " should be cumulative, with no use limit")
+			check(sk["cumulative"] != (sk["uses"] == 1), sid + " should be cumulative or once-only")
+
+
+func test_most_people_do_not_heal() -> void:
+	## healing belongs to doctors, 后勤 and a few big once-only heals; the rest give statuses
+	var db := GameData.get_db()
+	var healers := 0
+	var generals := 0
+	for cid in db.cards:
+		var c: Dictionary = db.cards[cid]
+		if c.get("troop", "") == "lord" or not c.has("skills"):
+			continue
+		generals += 1
+		if c["skills"].any(func(s): return db.skills[s]["effects"].any(func(e): return e["type"] == "heal")):
+			healers += 1
+	check(healers * 5 < generals, "%d of %d generals heal" % [healers, generals])
