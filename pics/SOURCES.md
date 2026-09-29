@@ -74,6 +74,7 @@
 | `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `inf_n` | source/soldiers/inf_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `shanzei_bing` | source/soldiers/shanzei_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhuzhi` | source/generals/zhuzhi.jpg | 用户提供 | Antigravity 生成 | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

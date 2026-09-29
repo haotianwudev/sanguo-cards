@@ -53,7 +53,14 @@
 | ✅ 正式 | `jiangdong_gong` | 江东弓手 |
 | ✅ 正式 | `liehu` | 山中猎户 |
 | ✅ 正式 | `yuenv_gong` | 越女弓手 |
+| ⬜ 缺 | `huofu` | 伙夫 |
+| ⬜ 缺 | `chuangong` | 江东船工 |
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
+| ⬜ 缺 | `yahuan` | 丫鬟 |
+| ⬜ 缺 | `chuniang` | 厨娘 |
+| ⬜ 缺 | `xiuniang` | 绣娘 |
+| ⬜ 缺 | `huansha` | 浣纱女 |
+| ⬜ 缺 | `caisang` | 采桑女 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -168,6 +175,10 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
+| ⬜ 缺 | `lusu` | 鲁肃（SR） |
+| ⬜ 缺 | `zhangzhongjing` | 张仲景（SR） |
+| ⬜ 缺 | `xiaoqiao` | 小乔（SR） |
+| ⬜ 缺 | `zhenmi` | 甄宓（SR） |
 | 🟡 占位 | `machao` | 马超（SR） |
 | 🟡 占位 | `zhangliao` | 张辽（SR） |
 | 🟡 占位 | `xuhuang` | 徐晃（SR） |
@@ -188,6 +199,10 @@
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | 🟡 占位 | `diaochan` | 貂蝉（SSR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
+| ⬜ 缺 | `dongfeng` | 董奉（R） |
+| ⬜ 缺 | `zhangzhao` | 张昭（R） |
+| ⬜ 缺 | `bulianshi` | 步练师（R） |
+| ⬜ 缺 | `qiaoguolao` | 乔国老（R） |
 | ⬜ 缺 | `zhoucang` | 周仓（R） |
 | 🟡 占位 | `liaohua` | 廖化（R） |
 | 🟡 占位 | `madai` | 马岱（R） |
@@ -202,7 +217,7 @@
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
 | ✅ 正式 | `chengpu` | 程普·程公（R） |
 | ✅ 正式 | `handang` | 韩当（R） |
-| ⬜ 缺 | `zhuzhi` | 朱治·君理（R） |
+| ✅ 正式 | `zhuzhi` | 朱治·君理（R） |
 | ✅ 正式 | `wujing` | 吴景（R） |
 | ✅ 正式 | `sunben` | 孙贲（R） |
 | ✅ 正式 | `sunjing` | 孙静（R） |

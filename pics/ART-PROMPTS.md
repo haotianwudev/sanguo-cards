@@ -54,13 +54,12 @@
 39. `liubei` — 刘备（换掉占位）（立绘）
 40. `guanyu` — 关羽（换掉占位）（立绘）
 41. `lvbu` — 吕布（换掉占位）（立绘）
-42. `zhuzhi` — 朱治（立绘）
-43. `caiwenji` — 蔡文姬（立绘）
-44. `yuanshu` — 袁术（立绘）
-45. `jiling` — 纪灵（立绘）
-46. `leibo` — 雷薄（立绘）
-47. `chenlan` — 陈兰（立绘）
-48. `qiaorui` — 桥蕤（立绘）
+42. `caiwenji` — 蔡文姬（立绘）
+43. `yuanshu` — 袁术（立绘）
+44. `jiling` — 纪灵（立绘）
+45. `leibo` — 雷薄（立绘）
+46. `chenlan` — 陈兰（立绘）
+47. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -373,18 +372,6 @@ Appearance: Tall, handsome, arrogant warrior in his early 30s with a cold predat
 Armor & Clothing: Ornate crimson and black armor with gold trim, a helmet crowned with two long pheasant tail feathers (雉尾冠), a red cape flaring behind him.
 Weapon: Holding the Sky Piercer halberd (方天画戟 - a long halberd with a crescent side blade) across his shoulders.
 Background: A scorched, dust-swept battlefield under a dramatic crimson and dark sky, with broken weapons stuck in the ground and distant fortress ramparts.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `zhuzhi` ⬜ 缺
-
-```
-A vertical character portrait of Zhu Zhi (朱治), Sun Jian's shrewd quartermaster general.
-Appearance: Sharp, composed man in his 30s with a neat mustache and an appraising look.
-Armor & Clothing: Official's robe over light armor, a sword at his waist.
-Weapon: Holding a supply list scroll in one hand and a writing brush in the other.
-Background: An orderly army granary and logistics warehouse with stacked rice sacks, supply carts, accounting scrolls, and ledger chests.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
