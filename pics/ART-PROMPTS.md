@@ -1950,15 +1950,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
 
-## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）
-
-### `jijin`
-
-```
-A square emblem illustration for a 'fate' card in a roguelike: cavalry charging forward at full gallop in a blur of speed.
-Composition & Framing: square 512x512 (draw at 1024x1024), the symbol centred inside a round jade-and-gold medallion with a thin gold rim, transparent background (PNG).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, painted emblem, strong silhouette readable at 112px; no text.
-```
 
 ## 词缀徽记（128×128 透明 PNG，放 `godot/data/art/affixes/<key>.png`）
 
