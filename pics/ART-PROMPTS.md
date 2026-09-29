@@ -77,6 +77,78 @@
 
 ## 立绘（竖版 3:4）
 
+### `yahuan` ⬜ 缺
+
+```
+A vertical character portrait of a household maid (丫鬟) of the Sun family, an adult woman.
+Appearance: Adult woman in her 20s with a round, cheerful face and a shy smile, hair in two simple buns.
+Armor & Clothing: Plain light-green servant's dress with an apron.
+Weapon: Carrying a tea tray with cups, curtsying.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `chuniang` ⬜ 缺
+
+```
+A vertical character portrait of an army cook (厨娘), an adult woman.
+Appearance: Sturdy, cheerful adult woman in her 30s with rosy cheeks and strong forearms.
+Armor & Clothing: Rolled sleeves, a flour-dusted apron, a cloth tied over her hair.
+Weapon: Holding a big cleaver in one hand and a steaming pot of braised pork in the other.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `xiuniang` ⬜ 缺
+
+```
+A vertical character portrait of an embroiderer (绣娘) who mends armor and stitches banners, an adult woman.
+Appearance: Graceful adult woman in her 20s with focused eyes and a needle held in her lips.
+Armor & Clothing: Neat blue dress, a pincushion on her wrist.
+Weapon: Stitching a large red banner with the character 孙 across her lap.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `huansha` ⬜ 缺
+
+```
+A vertical character portrait of a riverside washerwoman (浣纱女), an adult woman.
+Appearance: Lively adult woman in her 20s with a bright laugh, sleeves rolled high.
+Armor & Clothing: Simple hemp dress, barefoot by the water.
+Weapon: Holding a wooden washing bat over her shoulder, a basket of cloth at her side.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `caisang` ⬜ 缺
+
+```
+A vertical character portrait of a mulberry-leaf picker (采桑女), an adult woman.
+Appearance: Healthy, sun-kissed adult woman in her 20s with a gentle smile.
+Armor & Clothing: Country dress with a straw hat hanging on her back.
+Weapon: Carrying a bamboo basket full of mulberry leaves.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `chaniang` ⬜ 缺
+
+```
+A vertical character portrait of a Jiangdong teahouse keeper (茶娘), an adult woman.
+Appearance: Sharp-eyed, confident adult woman in her 30s with a sly smile.
+Armor & Clothing: Smart dark-red dress with a white apron, a jade hairpin.
+Weapon: Pouring tea from a long-spouted kettle with a flourish.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `lusu` ⬜ 缺
 
 ```
