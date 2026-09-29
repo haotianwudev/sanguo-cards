@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -908,5 +908,9 @@ func test_route_b_goes_on_to_luoyang_and_changan() -> void:
 	s.quests_cleared.append("shouluoyang")
 	s.flags.append("路线：长安")
 	check_eq(Quests.current_quest(s)["id"], "changan", "then 长安")
+	s.quests_cleared.append("changan")
+	check(Quests.current_quest(s) == null, "第四章 waits for 董卓's death")
+	s.flags.append("长安：吕布杀了董卓")
+	check_eq(Quests.current_quest(s)["id"], "dongui", "then 第四章 · 挟天子")
 	var q3: Dictionary = GameData.get_db().quests[2]
 	check(q3["squares"]["wenji_join"]["next"].is_empty() and q3["squares"]["wenji_join"]["record"] == "路线：守洛阳", "saving her ends chapter 3 on route B")

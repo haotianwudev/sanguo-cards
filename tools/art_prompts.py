@@ -22,6 +22,14 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "xunyou": ("Xun You (荀攸), a quiet strategist just freed from Dong Zhuo's prison",
+        "Lean, calm scholar in his mid-30s with a thin beard and patient, unreadable eyes.",
+        "A worn dark-blue scholar's robe, slightly rumpled from prison, neatly tied anyway.",
+        "Holding a single go stone between two fingers, a go board tucked under his arm."),
+    "zhongyao": ("Zhong Yao (钟繇), the great calligrapher, a Gentleman of the Yellow Gate close to the boy emperor",
+        "Refined official in his early 40s with a neat beard and ink-stained fingertips, gentle but sharp eyes.",
+        "Dark court robes with a black official's cap.",
+        "Holding a large brush over an unrolled edict, the characters crisp and elegant."),
     "xiandi": ("Emperor Xian of Han (汉献帝 刘协), the boy emperor, a puppet in Dong Zhuo's hands — a child of about ten",
         "A slight boy of about ten with a pale, serious face and quiet, watchful eyes older than his years.",
         "Black-and-red imperial robes too big for him and a heavy mianliu crown with bead curtains.",
@@ -368,6 +376,11 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c6_fenghou": "the throne hall in Chang'an: the ten-year-old boy emperor on a huge throne, leaning forward and insisting in a trembling voice; below, the white-haired Wang Yun bowing with a smile that doesn't reach his eyes; the short-haired hero in silver armor kneeling in surprise among the ministers; Lü Bu smirking in the front row",
+    "c6_escape": "night escape from Chang'an: a covered carriage racing through a burning city gate; Dong Bai (adult) on horseback in red with her twin hammers leading a few hundred black-armored veterans; the hero riding beside the carriage with the boy emperor peeking out clutching a small bundle; Diaochan (adult) riding pillion behind the hero; in the distance the white-haired Huangfu Song holding a gate with his guards",
+    "c6_huihe": "the restored gate of Luoyang at dawn: the huge Sun Jian in tiger-pelt cape dismounted and kneeling on one knee in the dust before the small boy emperor stepping down from a battered carriage; Lady Wu running from the crowd toward the hero; Jiangdong soldiers in neat ranks",
+    "c6_seal": "a makeshift throne hall in half-ruined Luoyang: the boy emperor on a simple throne, asking quietly; Sun Jian standing before him with a brocade box held firmly against his chest, not offering it; Zhou Yu writing in his ledger with lowered eyes; the hero silent among the ministers; Lady Wu watching Sun Jian from the back",
+    "c7_huangzhong": "a captured camp in Nanyang: Huang Zhong, a sturdy man in his 40s in rough soldier's clothes, rope marks on his wrists, drawing a heavy bow to full; his arrow snapping the banner pole with the character 袁 on the far camp gate; Sun Ce gaping, the hero grinning",
     "c5_garden": "behind a rockery in the palace garden of Chang'an: the ten-year-old boy emperor, his heavy bead-curtained crown taken off and set on a stone, rubbing his neck and looking up hopefully at the short-haired hero in silver armor, who crouches to his eye level; a eunuch keeps watch at the corner; a gentle, melancholy mood",
     "c5_feast": "a lavish welcome feast in Dong Zhuo's mansion: the enormous Dong Zhuo peeling shrimp for his granddaughter Dong Bai (adult), who laughs as she talks; he wipes his eyes with a sleeve; behind them a row of Xiliang generals rising from their seats, eyeing the hero; Lü Bu silent in the corridor",
     "c5_dance": "a lantern-lit banquet hall: Diaochan, an adult woman of great beauty, dancing with long silk sleeves; the enormous Dong Zhuo leaning forward spellbound with wine in his beard; Wang Yun at the host's seat with a knowing half-smile",

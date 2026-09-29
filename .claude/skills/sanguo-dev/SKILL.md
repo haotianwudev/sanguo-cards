@@ -202,10 +202,10 @@ last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 smashes 
 never explicit; the hero covers 孙策 and 周瑜's escape and falls). A quest `ending` {title, text} shows an ending card
 and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
 Route B (a later 周目 — flag 「结局一 · 玉碎」 — with 董白 kept): 蔡文姬 can be saved, which ends chapter 3 early
-(「路线：守洛阳」). Chapter 4 驻守洛阳 (quest requires that flag): 蔡文姬's story (郭汜 escorting the officials' families,
+(「路线：守洛阳」). On route B the 驻守洛阳 and 长安 maps both count as 第三章 (titles 「第三章 · 驻守洛阳」「第三章 · 长安」). 驻守洛阳 (quest requires that flag): 蔡文姬's story (郭汜 escorting the officials' families,
 plundering), 周瑜's plan to rob his grain carts, 郭汜 fought off (no 蔡邕), 孙坚 holds 洛阳, the coalition disperses,
 朱儁 (孙坚's old commander from the 黄巾 war, fled 董卓) arrives and joins, asking the hero to carry a question to 皇甫嵩; 李儒 sues for peace (周瑜 for it, the hero suggests 王允), 董白 is betrothed to the hero (wedding to be in 长安), the hero
-goes to 长安 (「路线：长安」). Chapter 5 长安: 汉献帝 (a boy of about ten, 董卓's puppet — never anything but a child in the text or art) secretly asks the hero where he's from, where 孙坚 is and whether he can take him back to 洛阳; after 董卓 dies 王允 answers for him (「长安才是都城」); Chapter 5 长安: 董卓 greets 董白, humiliates 皇甫嵩 at the feast (he later sides with 王允, brings the palace guard at 格杀勿论 and joins; after 董卓 dies he asks 王允 about 董白 and gets no answer), 蔡邕 reunion, 王允, 貂蝉 and the hero's 连环计 — hidden from
+goes to 长安 (「路线：长安」). 长安: 汉献帝 (a boy of about ten, 董卓's puppet — never anything but a child in the text or art) secretly asks the hero where he's from, where 孙坚 is and whether he can take him back to 洛阳; after 董卓 dies 王允 answers for him (「长安才是都城」); Chapter 5 长安: 董卓 greets 董白, humiliates 皇甫嵩 at the feast (he later sides with 王允, brings the palace guard at 格杀勿论 and joins; after 董卓 dies he asks 王允 about 董白 and gets no answer), 蔡邕 reunion, 王允, 貂蝉 and the hero's 连环计 — hidden from
 董白; 李儒 sees through it, 吕布 is chained in the 相府 dungeon, 貂蝉 taken into the back court; the wedding is 董卓's
 trap to kill everyone, 董白 too; break out and beat 董卓's guard, but he orders 格杀勿论 (董白 too) — then 吕布, freed from the dungeon by
 貂蝉 on her own, rides in with his cavalry and 貂蝉 (「诛此贼！」) and saves them; 董白 shields him, 吕布 kills him, 董白 breaks —
@@ -216,7 +216,16 @@ merchant's appraising look, tears that come right on time, first up the steps to
 glance at 董白); the user will write where that goes. 貂蝉 (adult): clever, beautiful, brave, and
 always seems to be flirting with someone — whether she means it with the hero stays unclear; 董白 doesn't like how
 she looks at him. 吕布 stays a brute and selfish: he rescues nobody on purpose (「别以为我是来
-救你的」), kills 董卓 over his own pupil's plea, grabs 貂蝉 and shouts for the credit. (未完待续)
+救你的」), kills 董卓 over his own pupil's plea, grabs 貂蝉 and shouts for the credit.
+第四章 · 挟天子 (quest `dongui`, one map; requires 「长安：吕布杀了董卓」): 王允 rules — the hero stops the 夷三族 of 董卓's house
+(the boy emperor backs him); asks 王允 to pardon the 西凉 army and bring 孙坚 into 长安 — refused; 论功: 吕布 温侯, 孙坚 吴侯,
+皇甫嵩 征西将军, and the emperor insists on the hero over 王允: **富春亭侯**; recruits 荀攸 (天牢) or 钟繇 (尚书台);
+王允 plots with 吕布 to kill him, 貂蝉 warns him; 李傕/郭汜 attack 长安, 王允 keeps 吕布 on a leash; 周瑜 (in 长安 with
+his uncle 周忠) says take the emperor to 洛阳; 董白 brings 董卓's old guard, 貂蝉 comes along, 皇甫嵩 holds the gate;
+王允's checkpoint, pursuers or 樊稠, 徐晃 defects, 李傕 at 函谷关 (boss) → 洛阳, 孙坚 kneels; 长安 falls, 王允 dies
+on the gate, 吕布 goes to 袁绍; 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said
+曹操); the hero is pushed aside and sent against 袁术 in 南阳: 桥蕤, 黄忠 (a 南阳 soldier robbed by 袁术's men, sick son
+黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 纪灵 (boss) holds the rear while 袁术 flees east to 寿春. (未完待续)
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.
@@ -225,7 +234,7 @@ Writing rules:
 - **Timeline** — the whole story so far spans about a year; each chapter opens with a `【年号 · 月】` line:
   ch1 富春 初平元年正月 → ch2 sets out 二月 (a month on the road), reaches 中原 in spring, two months of waiting,
   洛阳 burns in early summer → ch3 南阳 夏—秋 (冯夫人 sews winter clothes) / ch4 洛阳 夏—秋 → ch5 长安 arrives in winter,
-  the wedding and 董卓's death at 初平二年正月 (「整整一年」). Don't write 「小半年」「好几个月」 that break this.
+  the wedding and 董卓's death at 初平二年正月 (「整整一年」) → 第四章: escape 二月, 洛阳 三月, 南阳 夏. Don't write 「小半年」「好几个月」 that break this.
 - A named enemy should be introduced before you fight it: give its battle square `text` (lines play first, then
   the enemy info and 出战) rather than putting the introduction in the square after the fight.
 - The hero is a modern man who **never read 三国演义** (「三国演义我不熟啊」) and regrets it (「早知道会穿越，当年就该把那本书
