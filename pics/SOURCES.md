@@ -15,6 +15,7 @@
 | `zhouyu_chibi` | source/generals/zhouyu_chibi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wuguotai` | source/generals/wuguotai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunjian` | source/generals/sunjian.jpg | 用户提供 | 用户提供 | — |
+| `chenwu` | source/generals/chenwu.jpg | 用户提供 | Antigravity 生成 | — |
 | `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
 | `diaochan` | source/public-domain/diaochan.jpg | [链接](https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg) | Public domain | Unknown author |
 | `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |

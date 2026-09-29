@@ -84,6 +84,7 @@
 | 🟡 占位 | `liubei` | 剧情立绘 |
 | 🟡 占位 | `guanyu` | 剧情立绘 |
 | ✅ 正式 | `zhangfei` | 剧情立绘 |
+| ✅ 正式 | `lijue` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
 
@@ -94,7 +95,7 @@
 | ✅ 正式 | `huaxiong` | 华雄 |
 | ✅ 正式 | `feixiong_bing` | 飞熊军 |
 | ✅ 正式 | `liru` | 李儒 |
-| ✅ 正式 | `lijue` | 李傕 |
+| ⬜ 缺 | `xurong` | 徐荣 |
 
 能拿到的卡
 
@@ -107,6 +108,7 @@
 
 | 状态 | key | 战斗 |
 |---|---|---|
+| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
 | ⬜ 缺 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
@@ -114,13 +116,13 @@
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
-| ✅ 已有 | `guanjun` | 官军（官军） |
 | ⬜ 缺 | `guosi` | 郭汜（郭汜） |
 | ⬜ 缺 | `huaxiong` | 汜水关·华雄（华雄） |
 | ⬜ 缺 | `feixiong` | 飞熊军（飞熊军） |
 | ⬜ 缺 | `liru` | 李儒伏兵（李儒） |
 | ⬜ 缺 | `dongbai` | 董白（董白） |
 | ⬜ 缺 | `hulao_ch1` | 追兵·吕布（吕布） |
+| ⬜ 缺 | `dagu` | 大谷·徐荣（徐荣） |
 | ⬜ 缺 | `lijue` | 洛阳城门·李傕（李傕） |
 
 ## 第三章 · 传国玉玺
@@ -185,7 +187,6 @@
 | 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | 🟡 占位 | `diaochan` | 貂蝉（SSR） |
-| ⬜ 缺 | `xurong` | 徐荣（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
 | ⬜ 缺 | `zhoucang` | 周仓（R） |
 | 🟡 占位 | `liaohua` | 廖化（R） |
@@ -193,7 +194,7 @@
 | ⬜ 缺 | `wangping` | 王平（R） |
 | ⬜ 缺 | `lidian` | 李典（R） |
 | ⬜ 缺 | `jiangqin` | 蒋钦（R） |
-| ⬜ 缺 | `chenwu` | 陈武（R） |
+| ✅ 正式 | `chenwu` | 陈武（R） |
 | 🟡 占位 | `jianyong` | 简雍（R） |
 | 🟡 占位 | `mizhu` | 糜竺（R） |
 | ⬜ 缺 | `sunqian` | 孙乾（R） |

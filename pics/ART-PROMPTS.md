@@ -51,21 +51,20 @@
 36. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
 37. `c3_news` — 纪灵败退与噩耗（剧情 CG）
 38. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-39. `chenwu` — 陈武（R 弓兵）（立绘）
-40. `shanyue_nu` — 山越弩手（立绘）
-41. `liubei` — 刘备（换掉占位）（立绘）
-42. `guanyu` — 关羽（换掉占位）（立绘）
-43. `lvbu` — 吕布（换掉占位）（立绘）
-44. `sunjing` — 孙静（立绘）
-45. `wujing` — 吴景（立绘）
-46. `sunben` — 孙贲（立绘）
-47. `zhuzhi` — 朱治（立绘）
-48. `caiwenji` — 蔡文姬（立绘）
-49. `yuanshu` — 袁术（立绘）
-50. `jiling` — 纪灵（立绘）
-51. `leibo` — 雷薄（立绘）
-52. `chenlan` — 陈兰（立绘）
-53. `qiaorui` — 桥蕤（立绘）
+39. `shanyue_nu` — 山越弩手（立绘）
+40. `liubei` — 刘备（换掉占位）（立绘）
+41. `guanyu` — 关羽（换掉占位）（立绘）
+42. `lvbu` — 吕布（换掉占位）（立绘）
+43. `sunjing` — 孙静（立绘）
+44. `wujing` — 吴景（立绘）
+45. `sunben` — 孙贲（立绘）
+46. `zhuzhi` — 朱治（立绘）
+47. `caiwenji` — 蔡文姬（立绘）
+48. `yuanshu` — 袁术（立绘）
+49. `jiling` — 纪灵（立绘）
+50. `leibo` — 雷薄（立绘）
+51. `chenlan` — 陈兰（立绘）
+52. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -150,18 +149,6 @@ Appearance: Short, round-bellied man in his 30s with a sly smile and small shrew
 Armor & Clothing: Plain officer's armor over a merchant-style robe (he is in disguise), a straw hat hanging on his back.
 Weapon: A heavy broad saber resting on his shoulder.
 Background: A bustling ancient market street outside Nanyang city gate, with merchant carts, tiled roofs, hanging red lanterns, and market stalls.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `chenwu` ⬜ 缺
-
-```
-A vertical character portrait of Chen Wu (陈武), a loyal Jiangdong general from Lujiang who followed Sun Ce.
-Appearance: Sturdy, tanned man in his late 20s, square jaw, short beard, calm steady eyes of a marksman.
-Armor & Clothing: Jiangdong red-and-brown lamellar armor, a quiver of red-fletched arrows on his back, a leather bracer.
-Weapon: Drawing a large recurved war bow to full draw, arrow aimed past the viewer.
-Background: A Jiangdong fortress rampart overlooking the misty Yangtze River, with red Sun-clan banners, wooden archery targets, and distant patrol boats.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -397,7 +384,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c2_heqin`
 
 ```
-A horizontal story event illustration: a tense army tent: Sun Jian kicking over a gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly.
+A horizontal story event illustration: a tense army tent: Sun Jian kicking over a marriage-proposal gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly; outside the tent flap a carriage curtain slightly lifted.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
