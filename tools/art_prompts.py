@@ -311,12 +311,24 @@ NEXT = [
     ("portrait", "liehu", "山中猎户"),
     ("portrait", "yuenv_gong", "越女弓手（成年女性）"),
     ("portrait", "shanyue_nu", "山越弩手"),
+    ("battle", "tiger", "打虎（第一章）"), ("battle", "yaodao", "妖道唐周（第一章）"),
+    ("battle", "shuizei_main", "水贼大寨·何仪（第一章 BOSS）"), ("battle", "huaxiong", "汜水关·华雄"),
+    ("battle", "dongbai", "董白（精英）"), ("battle", "hulao_ch1", "追兵·吕布"),
+    ("ui", "chest_normal", "宝箱（开宝箱动画用，见本文件「宝箱图」）"), ("ui", "chest_grand", "高级宝箱（同上）"),
+    ("cg", "c1_armor", "第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）"),
 ]
+# the chest sprites the chest-opening animation uses (godot/data/art/ui/chest_<key>.png)
+CHESTS = {
+    "chest_normal": "a sturdy wooden treasure chest with bronze corner caps and a heavy bronze padlock, Han-dynasty style, closed",
+    "chest_grand": "a grand red-lacquered treasure chest painted with gold clouds and dragons, inset with jade, a faint golden glow leaking from the seam, closed",
+}
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
     "宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。",
     "女性角色一律画成成年人；董白不写年龄、不画成萝莉。",
     "文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。",
+    "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；照新的战斗画面构图：敌人大、居中、在画面中上部，左上、右上两角别放重要东西（血条和战斗记录在那里），下面 45% 画简单的地面（我方卡牌半透明地压在上面）。",
+    "宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。",
     "立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
     "**不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。",
     "提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。",
@@ -360,8 +372,9 @@ def portrait_prompt(p: tuple) -> str:
 
 def battle_prompt(scene: str) -> str:
     return (f"A horizontal battle scene illustration: {scene}.{NL}"
-            f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy and the action fill the "
-            f"upper half of the frame, the bottom third is calmer ground (game UI cards sit there).{NL}"
+            f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the "
+            f"upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm "
+            f"(HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).{NL}"
             f"Style: {STYLE}, dramatic battle lighting, like a Rance X battle CG; no text, no UI.")
 
 
@@ -388,11 +401,13 @@ def main() -> None:
         "xiangnang", "jinfan", "bingfa", "yushan", "zhangu",
         "chize", "qinggang", "bazhen", "dunjia",
     }
-    delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done}
+    ui_done = {k for k in CHESTS if (ROOT / "godot" / "data" / "art" / "ui" / f"{k}.png").exists()}
+    delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done,
+                 "battle": set(art.get("battles", {})), "ui": ui_done}
     todo = [n for n in NEXT if n[1] not in delivered[n[0]]]
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
-        out += [f"{i}. `{key}` — {what}（{ {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物'}[kind] }）"
+        out += [f"{i}. `{key}` — {what}（{ {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物', 'battle': '战斗 CG', 'ui': '界面'}[kind] }）"
                 for i, (kind, key, what) in enumerate(todo, 1)]
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
     out += ["## 立绘（竖版 3:4）", ""]
@@ -411,6 +426,11 @@ def main() -> None:
         if key in art.get("cgs", {}):
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+    out += ["## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）", ""]
+    for key, obj in CHESTS.items():
+        out += [f"### `{key}`", "", "```", f"A game item sprite: {obj}.{NL}Composition & Framing: square 512x512, the chest centred "
+                f"at a slight three-quarter angle, transparent background (PNG), no shadow box.{NL}Style: {STYLE}, painted prop, rich "
+                f"colours, crisp outline; no text.", "```", ""]
     out += ["## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）", ""]
     for key, scene in MAPS.items():
         if "生成" not in art.get("maps", {}).get(key, {}).get("license", "生成"):

@@ -87,7 +87,8 @@ func _open_chest() -> void:
 	var grand := chest == "grand"
 	var center := size / 2 - Vector2(0, 40)
 	var box := TextureRect.new()
-	box.texture = Kit.map_icon("treasure")
+	var art := "res://data/art/ui/chest_%s.png" % chest  # drawn chest (CARD-DESIGN §2), else the map's 宝 icon
+	box.texture = load(art) if ResourceLoader.exists(art) else Kit.map_icon("treasure")
 	box.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	box.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	box.size = Vector2(200, 200) if not grand else Vector2(250, 250)
