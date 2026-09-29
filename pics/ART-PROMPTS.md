@@ -2096,14 +2096,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ## 词缀徽记（128×128 透明 PNG，放 `godot/data/art/affixes/<key>.png`）
 
-### `fayu`
-
-```
-A tiny game badge icon: a Taoist ward talisman glowing blue, drawn as a red Chinese seal stamp (朱印) with the symbol carved inside.
-Composition & Framing: square 128x128 (draw at 512x512), transparent background (PNG), bold simple shapes readable at 28px.
-Style: ink and cinnabar, crisp edges; no text.
-```
-
 ### `kuangbao`
 
 ```
