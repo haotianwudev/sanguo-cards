@@ -69,6 +69,7 @@
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei_scout` | source/battles/shuizei_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei` | source/battles/shuizei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:shuizei_guard` | source/battles/shuizei_guard.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
