@@ -36,7 +36,7 @@
 | ✅ 正式 | `shuizei_bing` | 水贼喽啰 |
 | ✅ 正式 | `baie_hu` | 吊睛白额虎 |
 | ✅ 正式 | `fushui_xintu` | 于吉信徒 |
-| ⬜ 缺 | `shanzei_bing` | 山贼 |
+| ✅ 正式 | `shanzei_bing` | 山贼 |
 | ✅ 正式 | `huangjin_nanxia` | 黄巾余孽 |
 | ✅ 正式 | `inf_n` | 官军 |
 | ✅ 正式 | `boar` | 野猪 |

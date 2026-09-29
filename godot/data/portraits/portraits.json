@@ -60,5 +60,6 @@
   "xiliang_bing": {"file": "xiliang_bing.jpg", "face": [0.52, 0.22], "head": 0.22},
   "zhangfei": {"file": "zhangfei.jpg", "face": [0.5, 0.22], "head": 0.22},
   "tangji": {"file": "tangji.jpg", "face": [0.5, 0.23], "head": 0.24},
-  "inf_n": {"file": "inf_n.jpg", "face": [0.51, 0.25], "head": 0.22}
+  "inf_n": {"file": "inf_n.jpg", "face": [0.51, 0.25], "head": 0.22},
+  "shanzei_bing": {"file": "shanzei_bing.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

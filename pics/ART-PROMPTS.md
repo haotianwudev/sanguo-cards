@@ -247,17 +247,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
 ```
 
-### `shanzei_bing` ⬜ 缺
-
-```
-A vertical character portrait of a one-eyed mountain bandit (山贼).
-Appearance: Scruffy bandit with an eye patch and a gap-toothed leer.
-Armor & Clothing: Ragged patched clothes, a rope belt.
-Weapon: Carrying a big wood axe over his shoulder.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, plain off-white studio background with subtle warm lighting (clean, no battlefield clutter).
-```
-
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
 ### `c3_shanfei`
