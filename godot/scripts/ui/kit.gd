@@ -258,7 +258,7 @@ static func skill_desc(sk: Dictionary) -> String:
 				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
 	var tags: Array = []
 	if sk.get("uses", null) != null:
-		tags.append("每场限 %d 次" % int(sk["uses"]))
+		tags.append("限 %d 次，到休整格才恢复" % int(sk["uses"]))
 	if sk.get("cumulative", false):
 		tags.append("每用一次 AP +1")
 	return "；".join(parts) + (("（%s）" % "，".join(tags)) if not tags.is_empty() else "")

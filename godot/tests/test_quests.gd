@@ -77,6 +77,34 @@ func test_recover_square_clears_carried_wear() -> void:
 	check(s.damage == 0 and s.carry_extra.is_empty())
 
 
+func test_a_once_only_skill_stays_spent_until_a_rest() -> void:
+	## 大招 are once per stretch of map, not once per battle: used up, they stay used up until a 休整 square
+	var s := SaveData.create()
+	s.grant_card("daqiao")
+	var b := Battle.start("boar", party(["daqiao"]), 1)
+	var i := -1
+	for k in b.leaders.size():
+		if b.leaders[k]["leader"]["card"]["id"] == "daqiao":
+			i = k
+	b.act(i, "guose")
+	var carry := b.carry_out()
+	check_eq(carry[2].get("daqiao", {}).get("guose"), 0, "国色 spent")
+	var b2 := Battle.start("boar", party(["daqiao"]), 2, 0, carry[1], carry[2])
+	b2.ap = 9
+	var j := -1
+	for k in b2.leaders.size():
+		if b2.leaders[k]["leader"]["card"]["id"] == "daqiao":
+			j = k
+	check(not b2.usable(b2.leaders[j], GameData.get_db().skills["guose"]), "still spent in the next battle")
+	var q := quest(0)
+	Quests.begin(q, s)
+	s.carry_uses = carry[2]
+	s.square = "camp"
+	s.resolved = false
+	Quests.resolve(q, s, rng(0))
+	check(s.carry_uses.is_empty(), "a rest brings it back")
+
+
 func test_failing_restarts_but_keeps_choices_and_cards() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
