@@ -194,7 +194,7 @@ or hide her; then months of waiting while the coalition feasts (驻军 → two c
 洛阳 burns) before 李傕 at the city gate; one 洛阳 square each way via requires / unless on 「董白：留下」 — requires /
 unless also read this run's own records; a spared 董白 joins).
 Chapter 3 传国玉玺 (quest `yuxi`, 初平元年夏—秋): leaving 洛阳 — with 「董白：留下」 she spots 蔡文姬 among the refugees
-and you save her (she joins), otherwise bandits carry 蔡文姬 off; 袁术 starves 孙坚 out → 南阳; 孙策 blurts out the
+and you save her (she joins), otherwise bandits carry 蔡文姬 off; 袁术 starves 孙坚 out → back to 鲁阳 (孙坚's camp in 南阳郡; 袁术 sits in 宛城 — not 寿春 until 193); 孙策 blurts out the
 seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches on 刘表 though the hero warns him about 岘山;
 袁术's generals come for the seal (桥蕤 spying, 陈兰's night raid, 雷薄's pursuit); 纪灵, 袁术's strongest (fought 关羽
 30 rounds), is the chapter boss at the last pass and, beaten, tells 吴夫人 孙坚 fell at 岘山; 袁术 himself is an unbeatable

@@ -129,7 +129,7 @@ PORTRAITS = {
         "Lean, upright old man in his 60s with neatly combed white hair; a benevolent, righteous face, but a cold, calculating glint in the eyes.",
         "Dark official's robe with the minister's seal cord.",
         "Holding a folded memorial behind his back, standing very straight."),
-    "fengfuren": ("Lady Feng (冯夫人), Yuan Shu's beloved and very beautiful wife — a scheming villain, an adult woman",
+    "fengfuren": ("Lady Feng (冯夫人), Yuan Shu's favourite and very beautiful consort (not his wife) — a scheming villain, an adult woman",
                   "Adult woman in her late 20s of striking beauty, a sweet smile that doesn't reach her cold, calculating eyes.",
                   "Luxurious pale-gold silk robes and a jeweled hairpin — elegant, never gaudy.",
                   "Holding a lacquered box of homemade pastries, a small embroidered handkerchief in her other hand."),
@@ -475,7 +475,7 @@ CGS = {
     "c5_dress": "a bedroom in Chang'an: Dong Bai (adult) in a red wedding dress turning happily before a bronze mirror, the hero behind her with a troubled face",
     "c5_wedding": "the wedding trap: Dong Zhuo raising his cup with a cruel smile, doors shut, soldiers everywhere; Dong Bai in her red dress with the veil torn off, stunned; the hero pulling her behind him and drawing Sun Jian's old saber (no gore)",
     "c5_death": "the moment of mercy, restrained: the defeated Dong Zhuo collapsed on the palace steps; Dong Bai (adult) in her red wedding dress throws herself in front of him with her arms spread wide, tears streaming, begging; the hero's saber stopped in mid-air above them; behind the hero, Lü Bu on Red Hare with his halberd raised, Diaochan at his side (no gore)",
-    "c3_feng": "a quiet veranda in Nanyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger",
+    "c3_feng": "a quiet veranda in Luyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger",
     "c2_heqin": "a tense army tent: Sun Jian kicking over a marriage-proposal gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly; outside the tent flap a carriage curtain slightly lifted",
     "c2_mixin": "night after a battle: Zhou Yu reading a captured secret letter by torchlight, Sun Jian crushing its edge in his fist, far on the horizon the sky over Luoyang faintly red",
     "c3_leave": "leaving the ruins of burning Luoyang: an endless column of refugees, Sun Jian riding in front hugging a brocade box, Lady Wu handing out food from her carriage",
@@ -525,7 +525,7 @@ CGS = {
 # They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
 # chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
 MAPS = {
-    "yuxi": "the road from burning Luoyang south to Nanyang, left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled city of Nanyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
+    "yuxi": "the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
     "shouluoyang": "ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an",
     "changan": "Chang'an in winter, left to right: the grand city gate; Dong Zhuo's lavish mansion with a courtyard duel ring; the palace with a rockery garden; a scholar's modest house; the Minister's mansion; a lotus pond with the Phoenix Pavilion; at the far right the chancellor's mansion hung with red wedding lanterns",
     "dongui": "one long campaign, left to right: snowy Chang'an palace and the Xuanping Gate; the Wei river road east; the mountains and Hangu Pass; half-restored Luoyang with Sun banners; the summer road south; a Yuan army camp; the walled city of Wancheng in Nanyang at the far right",

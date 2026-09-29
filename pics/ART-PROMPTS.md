@@ -367,7 +367,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `fengfuren` ⬜ 缺
 
 ```
-A vertical character portrait of Lady Feng (冯夫人), Yuan Shu's beloved and very beautiful wife — a scheming villain, an adult woman.
+A vertical character portrait of Lady Feng (冯夫人), Yuan Shu's favourite and very beautiful consort (not his wife) — a scheming villain, an adult woman.
 Appearance: Adult woman in her late 20s of striking beauty, a sweet smile that doesn't reach her cold, calculating eyes.
 Armor & Clothing: Luxurious pale-gold silk robes and a jeweled hairpin — elegant, never gaudy.
 Weapon: Holding a lacquered box of homemade pastries, a small embroidered handkerchief in her other hand.
@@ -1215,7 +1215,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c3_feng`
 
 ```
-A horizontal story event illustration: a quiet veranda in Nanyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger.
+A horizontal story event illustration: a quiet veranda in Luyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
@@ -2080,7 +2080,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `yuxi`
 
 ```
-A wide horizontal game map illustration, a hand-painted Chinese landscape scroll (浅绛 / 青绿山水): the road from burning Luoyang south to Nanyang, left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled city of Nanyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right.
+A wide horizontal game map illustration, a hand-painted Chinese landscape scroll (浅绛 / 青绿山水): the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right.
 Composition & Framing: very wide panorama, 3200x1080 (it scrolls sideways), seen from high above at an angle; keep three roughly horizontal travel bands (top / middle / bottom) free of busy detail, map squares sit on them; soft mist.
 Style: match the chapter-1 map (godot/data/art/map/prologue.jpg): ink outlines, soft green and ochre washes on rice paper; no text, no UI, no people close up.
 ```
