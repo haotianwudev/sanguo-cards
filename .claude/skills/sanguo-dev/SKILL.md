@@ -220,7 +220,11 @@ she looks at him. 吕布 stays a brute and selfish: he rescues nobody on purpose
 第四章 · 挟天子 (quest `dongui`, one map; requires 「长安：吕布杀了董卓」): 王允 rules — the hero stops the 夷三族 of 董卓's house
 (the boy emperor backs him); asks 王允 to pardon the 西凉 army and bring 孙坚 into 长安 — refused; 论功: 吕布 温侯, 孙坚 吴侯,
 皇甫嵩 征西将军, and the emperor insists on the hero over 王允: **富春亭侯**; recruits 荀攸 (天牢) or 钟繇 (尚书台);
-王允 plots with 吕布 to kill him, 貂蝉 warns him; 李傕/郭汜 attack 长安, 王允 keeps 吕布 on a leash; 周瑜 (in 长安 with
+王允 plots with 吕布 to kill him. **First time through (no 「结局二 · 同归」 flag) nobody warns him**: 吕布 and 高顺 surround
+蔡邕's house (蔡邕 arrested for sighing over 董卓), breakouts (高顺, 并州狼骑), he sends 孙策 and 周瑜 off to 洛阳, 董白 brings
+what's left of the 董 household, 吕布 at 宣平门 (last stand, lose_goto) → 结局二 · 同归 (the hero, 董白 and 蔡文姬 fall together,
+restrained). The squares from x5 of the warned route require that flag; the trap squares sit on the same spots with no
+requires (they're only reachable from the split). **Later 周目**: 貂蝉 (王允's adoptive daughter) warns him; 李傕/郭汜 attack 长安, 王允 keeps 吕布 on a leash; 周瑜 (in 长安 with
 his uncle 周忠) says take the emperor to 洛阳; 董白 brings 董卓's old guard, 貂蝉 comes along, 皇甫嵩 holds the gate;
 王允's checkpoint, pursuers or 樊稠, 徐晃 defects, 李傕 at 函谷关 (boss) → 洛阳, 孙坚 kneels; 长安 falls, 王允 dies
 on the gate, 吕布 goes to 袁绍; 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said

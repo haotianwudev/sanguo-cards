@@ -22,6 +22,10 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "gaoshun": ("Gao Shun (高顺), Lü Bu's grim, silent commander of the Trap-Breaking Camp (陷阵营)",
+        "Stern, dark-faced man in his 30s, jaw set, eyes that never blink; utterly still.",
+        "Heavy black lamellar armor, plain and unadorned, a tall rectangular shield.",
+        "Standing like a post, shield planted, a long ji in his other hand."),
     "xunyou": ("Xun You (荀攸), a quiet strategist just freed from Dong Zhuo's prison",
         "Lean, calm scholar in his mid-30s with a thin beard and patient, unreadable eyes.",
         "A worn dark-blue scholar's robe, slightly rumpled from prison, neatly tied anyway.",
@@ -376,6 +380,7 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c4_tonggui": "dawn at a snowy Chang'an city gate: the short-haired hero in battered silver armor stands with Sun Jian's big blade, Dong Bai (adult) on his left with her notched twin hammers, Cai Wenji (adult) on his right holding a broken guqin; the three of them smiling faintly; before them the silhouette of Lü Bu on Red Hare raising his halberd, Gao Shun's black shield wall behind; restrained and elegiac, no gore",
     "c6_fenghou": "the throne hall in Chang'an: the ten-year-old boy emperor on a huge throne, leaning forward and insisting in a trembling voice; below, the white-haired Wang Yun bowing with a smile that doesn't reach his eyes; the short-haired hero in silver armor kneeling in surprise among the ministers; Lü Bu smirking in the front row",
     "c6_escape": "night escape from Chang'an: a covered carriage racing through a burning city gate; Dong Bai (adult) on horseback in red with her twin hammers leading a few hundred black-armored veterans; the hero riding beside the carriage with the boy emperor peeking out clutching a small bundle; Diaochan (adult) riding pillion behind the hero; in the distance the white-haired Huangfu Song holding a gate with his guards",
     "c6_huihe": "the restored gate of Luoyang at dawn: the huge Sun Jian in tiger-pelt cape dismounted and kneeling on one knee in the dust before the small boy emperor stepping down from a battered carriage; Lady Wu running from the crowd toward the hero; Jiangdong soldiers in neat ranks",

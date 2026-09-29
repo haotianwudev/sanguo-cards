@@ -914,3 +914,14 @@ func test_route_b_goes_on_to_luoyang_and_changan() -> void:
 	check_eq(Quests.current_quest(s)["id"], "dongui", "then 第四章 · 挟天子")
 	var q3: Dictionary = GameData.get_db().quests[2]
 	check(q3["squares"]["wenji_join"]["next"].is_empty() and q3["squares"]["wenji_join"]["record"] == "路线：守洛阳", "saving her ends chapter 3 on route B")
+
+
+func test_chapter4_nobody_warns_you_until_ending_two() -> void:
+	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "dongui")[0]
+	var sq: Dictionary = q["squares"]
+	var s := SaveData.create()
+	check(Quests.is_open(sq["chaohui"], s) and not Quests.is_open(sq["mimou"], s), "first time: 围府, no 貂蝉")
+	check(sq["tonggui"]["record"] == q["ending"]["title"], "the trap ends in 结局二")
+	s.flags = [q["ending"]["title"]]
+	check(Quests.is_open(sq["mimou"], s) and not Quests.is_open(sq["chaohui"], s), "after 结局二: 貂蝉 comes")
+	check(Quests.is_open(sq["dongtao"], s), "and the chapter runs on to 南阳")

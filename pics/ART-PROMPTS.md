@@ -76,6 +76,18 @@
 
 ## 立绘（竖版 3:4）
 
+### `gaoshun` ⬜ 缺
+
+```
+A vertical character portrait of Gao Shun (高顺), Lü Bu's grim, silent commander of the Trap-Breaking Camp (陷阵营).
+Appearance: Stern, dark-faced man in his 30s, jaw set, eyes that never blink; utterly still.
+Armor & Clothing: Heavy black lamellar armor, plain and unadorned, a tall rectangular shield.
+Weapon: Standing like a post, shield planted, a long ji in his other hand.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `xunyou` ⬜ 缺
 
 ```
@@ -719,6 +731,15 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ```
 
 ## 剧情插图 CG（横版 16:9）
+
+### `c4_tonggui`
+
+```
+A horizontal story event illustration: dawn at a snowy Chang'an city gate: the short-haired hero in battered silver armor stands with Sun Jian's big blade, Dong Bai (adult) on his left with her notched twin hammers, Cai Wenji (adult) on his right holding a broken guqin; the three of them smiling faintly; before them the silhouette of Lü Bu on Red Hare raising his halberd, Gao Shun's black shield wall behind; restrained and elegiac, no gore.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
 
 ### `c6_fenghou`
 
