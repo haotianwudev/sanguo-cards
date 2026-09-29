@@ -297,20 +297,3 @@ func test_defend_costs_ap() -> void:
 	b.ap = need
 	b.defend()
 	check(b.round_no == r0 + 1, "enough AP: the round ends")
-
-
-func test_fire_stacks() -> void:
-	## 火攻 is cumulative (each use costs more AP), so each new fire must add to the burn, not replace it
-	var b := Battle.start("boar", party(["zhouyu"]), 5)
-	var i := -1
-	for k in b.leaders.size():
-		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
-			i = k
-	var one := int(round(b.enemy["max_hp"] * 0.1))
-	b.act(i, "yehuo")
-	check_eq(b.enemy["burn_dmg"], one, "first fire: 10% a turn")
-	b.ap = 9
-	b.leaders[i]["acted"] = false
-	b.act(i, "yehuo")
-	check_eq(b.enemy["burn_dmg"], one * 2, "the second fire stacks: 20% a turn")
-	check_eq(b.enemy["burn_turns"], 3, "and the count restarts")

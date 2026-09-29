@@ -251,9 +251,9 @@ static func skill_desc(sk: Dictionary) -> String:
 				parts.append("AP +%d" % int(e["amount"]))
 			"burn":
 				if e.has("pct"):
-					parts.append("灼烧：每回合掉 %d%% 体力，%d 回合（可叠加）" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])
+					parts.append("灼烧：每回合掉 %d%% 体力，%d 回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])
 				else:
-					parts.append("灼烧 ×%s，%d 回合（可叠加）" % [_num(e["power"]), int(e["turns"])])
+					parts.append("灼烧 ×%s，%d 回合" % [_num(e["power"]), int(e["turns"])])
 			"break":
 				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
 	var tags: Array = []
