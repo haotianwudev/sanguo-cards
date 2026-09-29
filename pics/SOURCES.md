@@ -87,4 +87,5 @@
 | `cg:c1_dinner` | source/cg/c1_dinner.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_oath` | source/cg/c1_oath.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_north` | source/cg/c1_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_armor` | source/cg/c1_armor.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:i1_sewing` | source/cg/i1_sewing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
