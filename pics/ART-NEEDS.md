@@ -64,7 +64,7 @@
 | ✅ 已有 | `yuji_xintu` | 于吉信徒（于吉信徒） |
 | ⬜ 缺 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
-| ⬜ 缺 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ⬜ 缺 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `boar` | 野猪林（野猪） |
 | ✅ 已有 | `shuizei` | 水寨·胡玉（「浪里蛟」胡玉） |
@@ -113,7 +113,7 @@
 | ⬜ 缺 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
 | ⬜ 缺 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
-| ⬜ 缺 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ⬜ 缺 | `guanjun` | 官军（官军） |
 | ⬜ 缺 | `guosi` | 郭汜（郭汜） |
 | ⬜ 缺 | `huaxiong` | 汜水关·华雄（华雄） |
@@ -154,7 +154,7 @@
 | ⬜ 缺 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
 | ⬜ 缺 | `shanzei_band` | 山贼（山贼） |
-| ⬜ 缺 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ⬜ 缺 | `c3_shanfei` | 独眼匪首（独眼匪首） |
 | ⬜ 缺 | `c3_qiaorui` | 城外·桥蕤（桥蕤） |
 | ⬜ 缺 | `c3_chenlan` | 夜袭·陈兰（陈兰） |

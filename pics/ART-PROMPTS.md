@@ -329,14 +329,6 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low ang
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
 
-### `huangjin_remnant`
-
-```
-A horizontal battle scene illustration: Yellow Turban remnants rising up with farm tools in a smoky valley camp.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `guanjun`
 
 ```

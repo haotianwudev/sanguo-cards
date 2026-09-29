@@ -75,6 +75,7 @@
 | `battle:tiger` | source/battles/tiger.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:yuji_xintu` | source/battles/yuji_xintu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:yanzhihu` | source/battles/yanzhihu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:huangjin_remnant` | source/battles/huangjin_remnant.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
