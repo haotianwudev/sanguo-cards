@@ -815,6 +815,10 @@
     "c2_keep": {
       "src": "source/cg/c2_keep.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_captive": {
+      "src": "source/cg/c2_captive.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
