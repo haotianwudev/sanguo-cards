@@ -194,6 +194,18 @@ func demo(name: String) -> void:
 			var o := InterludeOverlay.new()
 			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
+		"chest", "grand_chest":  # a chest opening over the map (use --wait to catch a moment of it)
+			Quests.ensure_started(save, rng)
+			save.fate = "jiangxing"
+			save.fate_offer = []
+			var m := MapScreen.new()
+			show_screen(m)
+			var o := PickOverlay.new()
+			o.title = "宝箱 —— 选一张兵卡"
+			o.card_ids = ["danyang", "jiangdong_gong", "xiliang_nvbing"] if name == "chest" else ["huangzhong", "danyang", "sunshangxiang"]
+			o.chest = "normal" if name == "chest" else "grand"
+			o.set_anchors_preset(Control.PRESET_FULL_RECT)
+			m.add_child(o)
 		"fate", "affix":  # a run's start: pick a 天命 / an elite square with its 词缀
 			save.grant_card("sunce")
 			save.grant_card("zhouyu")

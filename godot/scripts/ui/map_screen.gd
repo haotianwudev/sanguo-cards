@@ -867,6 +867,8 @@ func _open_offer(s: Dictionary) -> void:
 	o.captions = cards.map(func(c): return _offer_caption(c))
 	if Game.save.offer_kind == "upgrade":
 		o.title = "仙人点化 —— 选一位武将升级"
+	elif s["type"] == "treasure" or s.get("event", "") == "grand_chest" or Game.save.events.get(s["id"], "") in ["chest", "grand_chest"]:
+		o.chest = "grand" if s.get("event", "") == "grand_chest" else "normal"
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
 	add_child(o)
