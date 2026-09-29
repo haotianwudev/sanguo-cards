@@ -14,7 +14,6 @@
 - `inf_n` — 官军刀兵：盾牌上的鹰和回纹边是古希腊重装步兵盾的样式——换成汉军的盾（长方形或圆盾，黑红漆面，饕餮 / 云纹或素面），其他不变
 
 1. `c2_sanying` — 虎牢关：三英战吕布（打斗 + 一排看呆的人，见提示词）（剧情 CG）
-2. `huaxiong` — 汜水关·华雄（西凉铁骑重甲大刀，关口烽燧荒野）（战斗 CG）
 3. `hulao_ch1` — 追兵·吕布（虎牢关追击战，月夜残阳赤兔马方天戟）（战斗 CG）
 5. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
 6. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
@@ -956,14 +955,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the strategist Li Ru smiling from a cliff above a narrow gorge while ambushers spring out on both sides.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `huaxiong`
-
-```
-A horizontal battle scene illustration: the giant general Hua Xiong swinging his great blade on an open battlefield, a red headscarf lying in the dust.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
