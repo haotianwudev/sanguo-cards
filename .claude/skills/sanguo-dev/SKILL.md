@@ -202,6 +202,9 @@ birthplace is 卞夫人's route. Historical women who were children in 190 (甄�
 out of the story until later chapters — as gacha cards they're fine.
 
 Writing rules:
+- The hero is a modern man: when a character first appears he sizes them up in a `{lord}（内心）：` aside —
+  history vs 演义, textbook lines, games, office life (孙坚 = the loudest, best-paid department head; 袁绍 = the boss who
+  loves meetings and never decides). One per character, right after they show up; keep new characters getting one.
 - **Looks match the art.** A character's appearance in the text must match their portrait — or, before the art exists,
   the brief in `CARD-DESIGN.md` §7. When you write a new character's look, add/adjust their brief there; when new art
   arrives that differs, change the text (左慈: 「独眼瘸腿」 became 白发、竹杖、冒紫烟的葫芦 to match his portrait).
