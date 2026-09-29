@@ -144,6 +144,9 @@ func _open_chest() -> void:
 			back.add_child(p)
 		v.add_child(back)
 		backs.append(back)
+		for ch in v.get_children():  # the skill tags under the card stay hidden until it turns over
+			if ch is Control and ch != back and (ch as Control).position.y >= back.size.y - 1:
+				ch.visible = false
 		var home := v.position
 		v.position = home + (center - (v.global_position - global_position) - v.size / 2)
 		v.scale = Vector2(0.3, 0.3)
@@ -159,6 +162,10 @@ func _open_chest() -> void:
 		var fl := v.create_tween()
 		fl.tween_property(v, "scale:x", 0.0, 0.1)
 		fl.tween_callback(backs[i].queue_free)
+		fl.tween_callback(func():
+			for ch in v.get_children():
+				if ch is Control:
+					ch.visible = true)
 		fl.tween_property(v, "scale:x", 1.0, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		var rar: String = str(db.cards[card_ids[i]]["rarity"])
 		if rar in ["SR", "SSR"] or (rar == "R" and grand):
