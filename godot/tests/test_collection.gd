@@ -167,6 +167,10 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speaker_key("吴夫人笑眯眯地拿针尾敲了一下你的额头：「想得美。」"), "wuguotai")
 	check_eq(Kit.speaker_key("孙策：「娘，凭什么他三块？」吴夫人：「他瘦。」"), "sunce", "the first speaker wins")
 	check_eq(Kit.speaker_key("当夜，江上一排贼船亮起火把。"), "", "narration: nobody")
+	check_eq(Kit.speaker_key("浓眉少年：「我叫孙策！」"), "sunce", "described before named")
+	check_eq(Kit.speaker_key("他顿了顿：「周瑜，字公瑾。」"), Kit.PREVIOUS, "他: the last speaker goes on")
+	check_eq(Kit.speaker_key("「不求同年同月同日生——」孙策顿了顿"), "sunce", "the name right after an opening quote")
+	check_eq(Kit.speaker_key("「还有点烫，」她认真地说"), Kit.PREVIOUS, "an opening quote with only 她 after it")
 	check_eq(Kit.speaker_key("富春江边，孙家老宅。孙坚的旧大刀挂在墙上。"), "", "a name merely mentioned: no face")
 	check_eq(Kit.speaker_key("吴夫人：「文台那把刀，你拿去。」"), "wuguotai", "the speaker, not who is talked about")
 

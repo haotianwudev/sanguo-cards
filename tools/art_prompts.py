@@ -345,6 +345,7 @@ RELICS = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Priority: 1. 宝物 (Relics, non-lord, pure Chinese items, no disc) -> 2. 人物立绘 (Portraits) -> 不用画 CG
 NEXT = [
+    ("portrait", "sunjing", "孙静（第一章就开口说话，没有立绘对话里就没有头像——先画他）"),
     ("relic", "shoushihe", "首饰盒（吴夫人的漆器妆奁）"),
     ("relic", "jiunang", "酒囊（左慈酒葫芦）"),
     ("relic", "bingfu", "虎符（汉代错金铜虎符）"),

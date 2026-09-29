@@ -299,13 +299,20 @@ static func portrait_key(card_id: String) -> String:
 
 const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce", "公瑾": "zhouyu", "周瑜": "zhouyu", "文台": "sunjian", "孙坚": "sunjian", "主公": "lord",
 	"左慈": "zuoci", "胡玉": "langlijiao", "唐周": "yaodao", "何仪": "heyi", "董白": "dongbai", "刘备": "liubei",
-	"关羽": "guanyu", "张飞": "zhangfei", "吕布": "lvbu", "华佗": "huatuo", "于吉": "yuji", "祖茂": "zumao"}
+	"关羽": "guanyu", "张飞": "zhangfei", "吕布": "lvbu", "华佗": "huatuo", "于吉": "yuji", "祖茂": "zumao",
+	# how the story first describes people before their names come up
+	"美妇": "wuguotai", "浓眉少年": "sunce", "俊秀少年": "zhouyu", "瘦老头": "sunjing", "渠帅": "heyi", "孙静": "sunjing",
+	"女当家": "yanzhihu", "胭脂虎": "yanzhihu", "张宁": "zhangning", "白衣道人": "yuji", "华雄": "huaxiong", "纪灵": "jiling",
+	"袁术": "yuanshu", "蔡文姬": "caiwenji", "唐姬": "tangji", "程普": "chengpu", "黄盖": "huanggai", "韩当": "handang"}
+const PREVIOUS := "^"  # speaker_key: "the same speaker as the line before" (他 / 她 / a line opening on a quote)
 static var _names: Dictionary = {}
 
 
 static func speaker_key(raw_line: String) -> String:
 	## The portrait for whoever speaks a story line: {lord}, else the first known name before the first 「 / ：.
 	## "" for narration (no speech on the line) -- a name merely mentioned doesn't get a face.
+	## PREVIOUS when the speaker is 他 / 她 or the line opens on a quote with no name after it (the caller keeps the
+	## last speaker of the scene).
 	if raw_line.begins_with("{lord}"):
 		return "lord"
 	var cut := -1
@@ -323,10 +330,26 @@ static func speaker_key(raw_line: String) -> String:
 				_names[GameData.get_db().cards[cid]["name"].split("·")[0]] = key
 		for n in ALIASES:
 			_names[n] = ALIASES[n]
+	var best := _first_name(head)
+	if best != "":
+		return best
+	if head == "":  # 「……」孙策顿了顿 — the name right after the quote, else whoever spoke last
+		var close := raw_line.find("」")
+		if close >= 0:
+			var tail := raw_line.substr(close + 1)
+			var next_q := tail.find("「")
+			best = _first_name(tail.substr(0, next_q) if next_q >= 0 else tail)
+		return best if best != "" else PREVIOUS
+	if head.begins_with("他") or head.begins_with("她") or head.begins_with("两人"):
+		return PREVIOUS
+	return ""
+
+
+static func _first_name(text: String) -> String:
 	var best := ""
 	var best_at := 1 << 30
 	for n in _names:
-		var at := head.find(n)
+		var at := text.find(n)
 		if at >= 0 and at < best_at and _portrait_index().has(_names[n]):
 			best_at = at
 			best = _names[n]
