@@ -987,7 +987,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c4_dongjia`
 
 ```
-A horizontal story event illustration: a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) in the doorway with her twin hammers, alone — one woman, one horse, a pair of hammers, the empty street behind her; the hero and Cai Wenji (adult) looking up from the straw.
+A horizontal story event illustration: a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) in the doorway with her twin hammers, behind her a crowd of scarred, grey-haired Flying Bear veterans in battered black armor; the hero and Cai Wenji (adult) looking up from the straw.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
