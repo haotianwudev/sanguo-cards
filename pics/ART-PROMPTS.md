@@ -76,6 +76,18 @@
 
 ## 立绘（竖版 3:4）
 
+### `fengfuren` ⬜ 缺
+
+```
+A vertical character portrait of Lady Feng (冯夫人), Yuan Shu's beloved and very beautiful wife — a scheming villain, an adult woman.
+Appearance: Adult woman in her late 20s of striking beauty, a sweet smile that doesn't reach her cold, calculating eyes.
+Armor & Clothing: Luxurious pale-gold silk robes and a jeweled hairpin — elegant, never gaudy.
+Weapon: Holding a lacquered box of homemade pastries, a small embroidered handkerchief in her other hand.
+Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `yahuan` ⬜ 缺
 
 ```
@@ -507,6 +519,15 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ```
 
 ## 剧情插图 CG（横版 16:9）
+
+### `c3_feng`
+
+```
+A horizontal story event illustration: a quiet veranda in Nanyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
 
 ### `c2_heqin`
 

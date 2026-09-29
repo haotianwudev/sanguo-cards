@@ -22,6 +22,10 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "fengfuren": ("Lady Feng (冯夫人), Yuan Shu's beloved and very beautiful wife — a scheming villain, an adult woman",
+                  "Adult woman in her late 20s of striking beauty, a sweet smile that doesn't reach her cold, calculating eyes.",
+                  "Luxurious pale-gold silk robes and a jeweled hairpin — elegant, never gaudy.",
+                  "Holding a lacquered box of homemade pastries, a small embroidered handkerchief in her other hand."),
     "yahuan": ("a household maid (丫鬟) of the Sun family, an adult woman",
         "Adult woman in her 20s with a round, cheerful face and a shy smile, hair in two simple buns.",
         "Plain light-green servant's dress with an apron.",
@@ -317,6 +321,7 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c3_feng": "a quiet veranda in Nanyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing together over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden under the bed inside; in the background the hero and Zhou Yu watch warily from a doorway, Zhou Yu jotting in his ledger",
     "c2_heqin": "a tense army tent: Sun Jian kicking over a marriage-proposal gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly; outside the tent flap a carriage curtain slightly lifted",
     "c2_mixin": "night after a battle: Zhou Yu reading a captured secret letter by torchlight, Sun Jian crushing its edge in his fist, far on the horizon the sky over Luoyang faintly red",
     "c3_leave": "leaving the ruins of burning Luoyang: an endless column of refugees, Sun Jian riding in front hugging a brocade box, Lady Wu handing out food from her carriage",
