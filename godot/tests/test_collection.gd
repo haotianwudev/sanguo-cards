@@ -267,3 +267,11 @@ func test_soldiers_have_only_the_plain_move() -> void:
 	check_eq(hz["skills"], [db.troops["archer"]["skills"][0], "baibu"], "a general: the plain move + his own")
 	var jq := db.build_fighter("jiangqin")  # no skill of his own
 	check_eq(jq["skills"], db.troops["archer"]["skills"], "no own skill: the troop's signature instead")
+
+
+func test_beast_cards_are_saved_for_rewards() -> void:
+	var db := GameData.get_db()
+	for cid in ["yezhu", "baie_hu"]:
+		check(db.cards.has(cid) and not db.cards[cid]["in_pool"], "%s exists, out of the pools" % cid)
+		check(not db.soldier_cards().any(func(c): return c["id"] == cid), "%s never in a chest" % cid)
+	check(not db.enemies.values().any(func(e): return e["card"] in ["yezhu", "baie_hu"]), "no enemy drops them")

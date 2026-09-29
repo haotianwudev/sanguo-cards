@@ -69,6 +69,7 @@
     "fangtian": {"name": "方天画戟", "troop": "cavalry", "icon": "戟", "rarity": "curse", "desc": "【诅咒】吕布的戟，太重了。攻击 +30%，但受到的伤害 +15%", "mods": {"at": 0.3, "guard": -0.15}},
     "tengjia": {"name": "藤甲", "troop": "bandit", "icon": "藤", "rarity": "curse", "desc": "【诅咒】刀枪不入，就怕火。受到的伤害 -30%，但体力上限 -10%", "mods": {"guard": 0.3, "hp": -0.1}}
   },
+  "_rewards": "cards with reward: true (野猪, 白额虎) exist but never drop or turn up in pools; they are handed out later as special rewards",
   "_troops": "every troop: a plain 1-AP move (first) plus a signature (cumulative or limited); soldier cards get only the plain move (elite soldiers, \"elite\": true, get both), generals get the plain move plus their own signature (or the troop's if they have none)",
   "troops": {
     "lord": {"name": "主公", "short": "主", "hp": 400, "at": 80, "skills": ["tuji", "rengdao"]},
@@ -260,7 +261,8 @@
     "zhangning": {"name": "张宁·圣女", "rarity": "SR", "troop": "mage", "bonus": {"hp": 45, "at": 22}, "skills": ["leiji"]},
     "zuoci": {"name": "左慈·乌角先生", "rarity": "SSR", "troop": "mage", "bonus": {"hp": 60, "at": 30}, "skills": ["zhibei"]},
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]},
-    "baie_hu": {"name": "白额虎", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 50, "at": 14}, "skills": ["huxiao"], "pool": false},
+    "baie_hu": {"name": "白额虎", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 50, "at": 14}, "skills": ["huxiao"], "pool": false, "reward": true},
+    "yezhu": {"name": "野猪", "rarity": "N", "elite": true, "troop": "cavalry", "bonus": {"hp": 30, "at": 6}, "weight": 1, "pool": false, "reward": true, "person": "boar"},
     "langlijiao": {"name": "胡玉·浪里蛟", "rarity": "R", "troop": "bandit", "bonus": {"hp": 40, "at": 12}, "skills": ["fanjiang"], "pool": false},
     "yaodao_card": {"name": "唐周·妖道", "rarity": "R", "troop": "mage", "person": "yaodao", "bonus": {"hp": 20, "at": 14}, "skills": ["fushui_heal"], "pool": false},
     "heyi": {"name": "何仪·渠帅", "rarity": "SR", "troop": "mage", "bonus": {"hp": 45, "at": 16}, "skills": ["huangtian"], "pool": false},
@@ -289,7 +291,7 @@
     "lijue": {"name": "李傕", "portrait": "lijue", "hp": 10000, "at": 310, "actions": 2, "moves": [{"name": "西凉铁骑", "power": 1.0, "weight": 3}, {"name": "纵火", "power": 0.5, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "劫掠", "power": 0.8, "weight": 1, "heal": 0.08}, {"name": "焚城·蓄力", "power": 0, "weight": 1, "charge": "焚城"}, {"name": "焚城", "power": 2.4, "weight": 0, "pierce": true}], "card": "lijue"},
     "yuji_xintu": {"name": "于吉信徒", "portrait": "fushui_xintu", "hp": 2800, "at": 165, "actions": 2, "moves": [{"name": "泼符水", "power": 1.0, "weight": 3}, {"name": "念咒", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "仙师保佑", "power": 0, "weight": 1, "heal": 0.1, "when": "half"}], "card": "fushui_xintu"},
     "boar": {"name": "野猪", "hp": 1300, "at": 110, "actions": 2, "moves": [{"name": "冲撞", "power": 1.0, "weight": 3}, {"name": "獠牙", "power": 1.4, "weight": 1}, {"name": "发狂", "power": 0, "weight": 2, "rage": 0.3, "when": "half", "once": true}]},
-    "tiger": {"name": "吊睛白额虎", "portrait": "baie_hu", "hp": 3000, "at": 190, "actions": 2, "moves": [{"name": "扑", "power": 1.0, "weight": 2}, {"name": "剪", "power": 1.6, "weight": 1}, {"name": "虎啸", "power": 0.3, "weight": 1, "ap_drain": 2}], "card": "baie_hu"},
+    "tiger": {"name": "吊睛白额虎", "portrait": "baie_hu", "hp": 3000, "at": 190, "actions": 2, "moves": [{"name": "扑", "power": 1.0, "weight": 2}, {"name": "剪", "power": 1.6, "weight": 1}, {"name": "虎啸", "power": 0.3, "weight": 1, "ap_drain": 2}]},
     "huangjin_yaodao": {"name": "妖道唐周", "portrait": "yaodao", "hp": 5500, "at": 220, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "符水", "power": 0, "weight": 1, "heal": 0.12}, {"name": "黄天当立", "power": 1.5, "weight": 2}, {"name": "妖言惑众", "power": 0.5, "weight": 1, "confuse": 0.6}, {"name": "五雷正法·蓄力", "power": 0, "weight": 1, "charge": "五雷正法"}, {"name": "五雷正法", "power": 2.8, "weight": 0, "pierce": true}], "card": "yaodao_card"},
     "shuizei_scout": {"name": "水贼喽啰", "portrait": "shuizei_bing", "hp": 2600, "at": 170, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "水鬼翻身", "power": 1.4, "weight": 1}], "card": "shuizei_bing"},
     "shuizei_guard": {"name": "看门水贼", "portrait": "shuizei_bing", "hp": 4600, "at": 210, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "敲锣叫人", "power": 0, "weight": 1, "rage": 0.2}], "card": "shuizei_bing"},
