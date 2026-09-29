@@ -51,24 +51,23 @@
 36. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
 37. `c3_news` — 纪灵败退与噩耗（剧情 CG）
 38. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-39. `jiangdong_gong` — 江东弓手（第一章缺失兵卡）（立绘）
-40. `liehu` — 山中猎户（第一章缺失兵卡）（立绘）
-41. `yuenv_gong` — 越女弓手（第一章缺失兵卡）（立绘）
-42. `chenwu` — 陈武（R 弓兵）（立绘）
-43. `shanyue_nu` — 山越弩手（立绘）
-44. `liubei` — 刘备（换掉占位）（立绘）
-45. `guanyu` — 关羽（换掉占位）（立绘）
-46. `lvbu` — 吕布（换掉占位）（立绘）
-47. `sunjing` — 孙静（立绘）
-48. `wujing` — 吴景（立绘）
-49. `sunben` — 孙贲（立绘）
-50. `zhuzhi` — 朱治（立绘）
-51. `caiwenji` — 蔡文姬（立绘）
-52. `yuanshu` — 袁术（立绘）
-53. `jiling` — 纪灵（立绘）
-54. `leibo` — 雷薄（立绘）
-55. `chenlan` — 陈兰（立绘）
-56. `qiaorui` — 桥蕤（立绘）
+39. `liehu` — 山中猎户（第一章缺失兵卡）（立绘）
+40. `yuenv_gong` — 越女弓手（第一章缺失兵卡）（立绘）
+41. `chenwu` — 陈武（R 弓兵）（立绘）
+42. `shanyue_nu` — 山越弩手（立绘）
+43. `liubei` — 刘备（换掉占位）（立绘）
+44. `guanyu` — 关羽（换掉占位）（立绘）
+45. `lvbu` — 吕布（换掉占位）（立绘）
+46. `sunjing` — 孙静（立绘）
+47. `wujing` — 吴景（立绘）
+48. `sunben` — 孙贲（立绘）
+49. `zhuzhi` — 朱治（立绘）
+50. `caiwenji` — 蔡文姬（立绘）
+51. `yuanshu` — 袁术（立绘）
+52. `jiling` — 纪灵（立绘）
+53. `leibo` — 雷薄（立绘）
+54. `chenlan` — 陈兰（立绘）
+55. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -165,18 +164,6 @@ Appearance: Sturdy, tanned man in his late 20s, square jaw, short beard, calm st
 Armor & Clothing: Jiangdong red-and-brown lamellar armor, a quiver of red-fletched arrows on his back, a leather bracer.
 Weapon: Drawing a large recurved war bow to full draw, arrow aimed past the viewer.
 Background: A Jiangdong fortress rampart overlooking the misty Yangtze River, with red Sun-clan banners, wooden archery targets, and distant patrol boats.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `jiangdong_gong` ⬜ 缺
-
-```
-A vertical character portrait of a Jiangdong archer (江东弓手), a common soldier of the Sun family's army.
-Appearance: Young adult soldier with a sun-browned face and a focused squint, headband.
-Armor & Clothing: Simple red Han tunic over light leather armor, straw sandals, quiver at the hip.
-Weapon: Nocking an arrow on a plain wooden bow.
-Background: A Sun family army training ground and riverside camp with red flags, wooden archery butts, weapon racks, and barracks tents.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
