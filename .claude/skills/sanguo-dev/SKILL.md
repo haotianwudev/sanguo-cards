@@ -181,7 +181,9 @@ a black cape trimmed with white fur — **not** a tiger pelt; the tiger pelt is 
 wears the tiger-pelt cape). (never younger than 18 — no sexual
 framing of anyone under 18). 吴夫人 (later 吴国太) treats him like a son and lets him get
 away with his flirting, cluelessly maternal — that contrast is the joke. 孙策: reckless, spear first, can't swim,
-sulks at being left home. 周瑜: sharp (reads people, counts everything) but petty — keeps a **ledger** of what
+sulks at being left home. After 江边三结义 (by birth: the hero is 大哥, a year older than 孙策 and two than
+周瑜; 孙策 老二, 周瑜 老三): 孙策 calls him 「短毛大哥」/「大哥」, he calls 孙策 「虎子」 and 周瑜 「三弟」 (「周扒皮」 behind his
+back — 周瑜 hears it and charges a coin); 周瑜 calls them 大哥 / 二哥. Keep using these after chapter 1. 周瑜: sharp (reads people, counts everything) but petty — keeps a **ledger** of what
 everyone owes him. 孙坚: huge, 虎皮 + 古锭刀; sharp-tongued and mean to the hero (「嘴甜的」, sends him to the front row, mocks his
 fighting) but heroic when it counts (first into the charge, holds the gate alone against 吕布, comes back for you);
 after the 玉玺 his ambition shows (won't let go of it, threatens anyone who talks, heads home to 江东). Chapter 1 富春 (孙坚's hometown, during his campaign
