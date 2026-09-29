@@ -176,7 +176,9 @@ battle cards), commit, push.
 Comic, a little 擦边, never explicit. The hero is a 30-year-old office worker's soul in an **18-year-old** body in
 chapter 1 (富春); the body ages with the story, so later chapters show him older He carries 孙坚's old big blade (吴夫人 gives it to him in 富春; 胡玉 and 孙坚 recognise it; it's what 扔刀 throws).
 He wears short modern hair (his portrait) — odd in the Han, where short hair means a convict (髡刑); 吴夫人
-likes it and keeps touching it, 孙策 and 孙坚 mock it. (never younger than 18 — no sexual
+likes it and keeps touching it, 孙策 and 孙坚 mock it. From 旧甲 on he wears 孙坚's old silver armor (tiger-engraved shoulders),
+a black cape trimmed with white fur — **not** a tiger pelt; the tiger pelt is the armor skirt's lining (孙坚 himself
+wears the tiger-pelt cape). (never younger than 18 — no sexual
 framing of anyone under 18). 吴夫人 (later 吴国太) treats him like a son and lets him get
 away with his flirting, cluelessly maternal — that contrast is the joke. 孙策: reckless, spear first, can't swim,
 sulks at being left home. 周瑜: sharp (reads people, counts everything) but petty — keeps a **ledger** of what
