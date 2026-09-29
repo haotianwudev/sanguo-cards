@@ -81,7 +81,7 @@ func battle_finished(won: bool) -> void:
 		if won:
 			save.run_battles += 1
 			var gained := Quests.resolve(q, save, rng)
-			note = "　".join(gained.map(func(c): return "获得：" + c["name"]))
+			note = "　".join(gained.filter(func(c): return not c.get("relic", false)).map(func(c): return "获得：" + c["name"]))
 		elif Quests.lose(q, save, rng):
 			note = "……打不过。就在这时——"
 		else:

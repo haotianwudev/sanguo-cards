@@ -835,8 +835,9 @@ func _choose_event(i: int) -> void:
 	var out := Quests.choose_event(q, Game.save, Game.rng, i)
 	Game.persist()
 	_refresh()
-	if not out["gained"].is_empty():  # an event handed you cards: show them
-		await _reveal(out["gained"], "获　得")
+	var cards: Array = out["gained"].filter(func(c): return not c.get("relic", false))  # 宝物 show in the top bar
+	if not cards.is_empty():  # an event handed you cards: show them
+		await _reveal(cards, "获　得")
 	if not Game.save.offer.is_empty():
 		_open_offer(Quests.here(q, Game.save))
 
@@ -848,6 +849,7 @@ func _resolve(choice := -1) -> void:
 	Game.persist()
 	if kind == "choose":  # a choice can open squares further on (requires / unless on this run's records)
 		_rebuild_map()
+	gained = gained.filter(func(c): return not c.get("relic", false))  # 宝物 show in the top bar, not here
 	if choice < 0 and not gained.is_empty():  # the story hands you cards (picks already showed theirs)
 		await _reveal(gained, "入　队" if gained.any(func(c): return not c["soldier"]) else "获　得")
 	else:
@@ -969,8 +971,7 @@ func _open_relics() -> void:
 		var got := Quests.take_relic(Game.save, o.relic_ids[i])
 		Game.persist()
 		o.queue_free()
-		_refresh()
-		_show_toast("获得：" + got["name"]))
+		_refresh())
 	add_child(o)
 
 

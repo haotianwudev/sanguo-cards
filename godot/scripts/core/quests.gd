@@ -605,7 +605,6 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 					save.run_relics.append(rid)
 				var r: Dictionary = db.relics[rid]
 				out["gained"].append({"id": rid, "name": "宝物·" + r["name"], "relic": true})
-				out["log"].append("获得宝物：%s（%s）" % [r["name"], r["desc"]])
 		if e.has("drop_relic") and not save.relics.is_empty():  # trade away a random 宝物
 			var gone: String = save.relics.pop_at(rng.randi_range(0, save.relics.size() - 1))
 			out["log"].append("失去宝物：" + db.relics[gone]["name"])
