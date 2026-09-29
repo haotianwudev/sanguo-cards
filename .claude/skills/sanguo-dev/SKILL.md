@@ -188,7 +188,7 @@ everyone owes him. 孙坚: huge, 虎皮 + 古锭刀; sharp-tongued and mean to t
 fighting) but heroic when it counts (first into the charge, holds the gate alone against 吕布, comes back for you);
 after the 玉玺 his ambition shows (won't let go of it, threatens anyone who talks, heads home to 江东). Chapter 1 富春 (孙坚's hometown, during his campaign
 against 董卓; only the brother whose plan you pick joins) → chapter 2 讨伐董卓 (the other brother joins; 祖茂 vs 华雄 —
-win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 joins; elite 董白; 吕布 raids the camp; 吕布's
+win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 does NOT join (he lends you an old general instead); elite 董白; 吕布 raids the camp; 吕布's
 chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three chests; hand 董白 to 袁绍 for a relic (she's executed)
 or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
 Chapter 3 传国玉玺 (quest `yuxi`, 初平二年): leaving 洛阳 — with 「董白：留下」 she spots 蔡文姬 among the refugees
