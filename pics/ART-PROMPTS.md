@@ -31,14 +31,13 @@
 20. `yuenv_gong` — 越女弓手（成年女性）（立绘）
 21. `shanyue_nu` — 山越弩手（立绘）
 22. `tiger` — 打虎（第一章）（战斗 CG）
-23. `yaodao` — 妖道唐周（第一章）（战斗 CG）
-24. `shuizei_main` — 水贼大寨·何仪（第一章 BOSS）（战斗 CG）
-25. `huaxiong` — 汜水关·华雄（战斗 CG）
-26. `dongbai` — 董白（精英）（战斗 CG）
-27. `hulao_ch1` — 追兵·吕布（战斗 CG）
-28. `chest_normal` — 宝箱（开宝箱动画用，见本文件「宝箱图」）（界面）
-29. `chest_grand` — 高级宝箱（同上）（界面）
-30. `c1_armor` — 第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）（剧情 CG）
+23. `shuizei_main` — 水贼大寨·何仪（第一章 BOSS）（战斗 CG）
+24. `huaxiong` — 汜水关·华雄（战斗 CG）
+25. `dongbai` — 董白（精英）（战斗 CG）
+26. `hulao_ch1` — 追兵·吕布（战斗 CG）
+27. `chest_normal` — 宝箱（开宝箱动画用，见本文件「宝箱图」）（界面）
+28. `chest_grand` — 高级宝箱（同上）（界面）
+29. `c1_armor` — 第一章：吴夫人给主角系上孙坚旧甲（第一章唯一缺的 CG）（剧情 CG）
 
 交图规则：
 
@@ -328,14 +327,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the Yellow Turban commander He Yi on the deck of a great river fortress, Yellow Turban and bandit banners, fire ships on the water.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `yaodao`
-
-```
-A horizontal battle scene illustration: the Yellow Turban sorcerer Tang Zhou at a smoking altar in front of a fortress, paper talismans swirling, kneeling followers.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
