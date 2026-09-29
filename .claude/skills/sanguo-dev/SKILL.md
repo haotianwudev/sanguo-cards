@@ -208,8 +208,8 @@ Writing rules:
   读完」). He knows only the famous: from textbooks (周瑜 via 苏轼, 蔡文姬, 二乔), games (孙策, 吕布, 左慈) and TV (关羽,
   华佗, 黄盖's 苦肉计); most others he's never heard of. His foresight is thin: 孙坚's card blurb says only that he dies
   fighting 刘表 (no 岘山 / 黄祖 / ambush details — those he hears from others), and everyone knows 「见到吕布，跑」. When a character first appears he sizes them up in a `{lord}（内心）：` aside —
-  recognised or 「没听过」, plus a modern jab (孙坚 = the loudest, best-paid department head; 袁绍 = the boss who loves
-  meetings and never decides). One per character; no historical detail he couldn't know; characters never cite 演义.
+  recognised or 「没听过」, plus a modern jab that stays believable (袁绍 = the boss who loves meetings and never
+  decides) — no forced office metaphors; famous people (孙坚) he simply knows. One per character; no historical detail he couldn't know; characters never cite 演义.
 - **Looks match the art.** A character's appearance in the text must match their portrait — or, before the art exists,
   the brief in `CARD-DESIGN.md` §7. When you write a new character's look, add/adjust their brief there; when new art
   arrives that differs, change the text (左慈: 「独眼瘸腿」 became 白发、竹杖、冒紫烟的葫芦 to match his portrait).
