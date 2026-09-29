@@ -194,6 +194,13 @@ func demo(name: String) -> void:
 			var o := InterludeOverlay.new()
 			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
+		"reveal":  # the 入队 overlay: 孙策 and 周瑜 join
+			var m := MapScreen.new()
+			show_screen(m)
+			save.grant_card("sunce")
+			save.grant_card("zhouyu")
+			var db := GameData.get_db()
+			m.call_deferred("_reveal", [db.cards["sunce"], db.cards["zhouyu"]], "入　队")
 		"chest", "grand_chest":  # a chest opening over the map (use --wait to catch a moment of it)
 			Quests.ensure_started(save, rng)
 			save.fate = "jiangxing"

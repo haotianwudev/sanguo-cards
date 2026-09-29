@@ -825,8 +825,8 @@ func _choose_event(i: int) -> void:
 	var out := Quests.choose_event(q, Game.save, Game.rng, i)
 	Game.persist()
 	_refresh()
-	for c in out["gained"]:
-		_show_toast("获得：" + c["name"])
+	if not out["gained"].is_empty():  # an event handed you cards: show them
+		await _reveal(out["gained"], "获　得")
 	if not Game.save.offer.is_empty():
 		_open_offer(Quests.here(q, Game.save))
 
@@ -836,12 +836,25 @@ func _resolve(choice := -1) -> void:
 	var kind: String = Quests.here(q, Game.save)["type"]
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
 	Game.persist()
-	for c in gained:
-		_show_toast("获得：" + c["name"])
+	if choice < 0 and not gained.is_empty():  # the story hands you cards (picks already showed theirs)
+		await _reveal(gained, "入　队" if gained.any(func(c): return not c["soldier"]) else "获　得")
+	else:
+		for c in gained:
+			_show_toast("获得：" + c["name"])
 	if kind == "mystery" or not Game.save.offer.is_empty():  # an event's outcome / a pick still to make: show it first
 		_refresh()
 		return
 	_advance()
+
+
+func _reveal(cards: Array, title: String) -> void:
+	## the 入队 overlay: the cards flip in, tap to go on
+	var o := CardReveal.new()
+	o.title = title
+	o.card_ids = cards.map(func(c): return c["id"])
+	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(o)
+	await o.closed
 
 
 func _advance() -> void:
