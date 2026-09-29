@@ -120,7 +120,7 @@ Adding a portrait, checklist:
 - **Card** (`cards.json` cards): `name, rarity (N = soldier, R/SR/SSR = general), troop, bonus {hp, at}, skills,
   person (shared portrait / one version in a party), pool (false = story or drop only), troop_skills (false = own skills
   replace the troop's)`. Every troop has two skills — a plain 1-AP move and a signature (骑 马刀/冲锋, 枪 刺击/枪阵,
-  弓 射击/齐射, 刀 步战/举盾, 谋 计略/献策 (+AP), 贼 劫掠/偷袭 (break), 法 妖术/符咒 (stun), 勤 包扎/鼓舞) — soldier
+  弓 射击/齐射, 刀 步战/举盾, 策 计略/献策 (+AP; 策士 took in the old 法师 troop — too few cards), 贼 劫掠/偷袭 (break), 勤 包扎/鼓舞) — soldier
   cards get only the plain move (精兵 marked `"elite": true` — 丹阳兵, 陷阵营, 白毦兵 … — get both); a general gets
   the plain move plus its own signature (or the troop's signature if it has none). Leader stat = 5 × own + troop members; soldier copies decay ×0.6; generals repeat → tiers
   铜 1 / 银 2 / 金 4 copies (`gacha.tiers`, frame `tier0/1/2` in ui.json).

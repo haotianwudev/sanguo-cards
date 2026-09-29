@@ -63,7 +63,7 @@ BADGE_STYLES = {
         "char_color": "#fce4ec", "char_shadow": "#140404", "char_rim": "#e57373"
     },
     "strategist": {
-        "char": "谋", "name": "谋士", "rim_type": "gold",
+        "char": "策", "name": "策士", "rim_type": "gold",
         "bg_inner": "#4a1c6d", "bg_outer": "#1c072b",
         "char_color": "#f3e5f5", "char_shadow": "#0e0217", "char_rim": "#ce93d8"
     },
