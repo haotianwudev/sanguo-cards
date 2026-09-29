@@ -54,16 +54,15 @@
 39. `liubei` — 刘备（换掉占位）（立绘）
 40. `guanyu` — 关羽（换掉占位）（立绘）
 41. `lvbu` — 吕布（换掉占位）（立绘）
-42. `sunjing` — 孙静（立绘）
-43. `wujing` — 吴景（立绘）
-44. `sunben` — 孙贲（立绘）
-45. `zhuzhi` — 朱治（立绘）
-46. `caiwenji` — 蔡文姬（立绘）
-47. `yuanshu` — 袁术（立绘）
-48. `jiling` — 纪灵（立绘）
-49. `leibo` — 雷薄（立绘）
-50. `chenlan` — 陈兰（立绘）
-51. `qiaorui` — 桥蕤（立绘）
+42. `wujing` — 吴景（立绘）
+43. `sunben` — 孙贲（立绘）
+44. `zhuzhi` — 朱治（立绘）
+45. `caiwenji` — 蔡文姬（立绘）
+46. `yuanshu` — 袁术（立绘）
+47. `jiling` — 纪灵（立绘）
+48. `leibo` — 雷薄（立绘）
+49. `chenlan` — 陈兰（立绘）
+50. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -220,18 +219,6 @@ Appearance: Young spear general in his 20s with a cocky smirk, arms crossed.
 Armor & Clothing: Red and bronze Sun-clan armor.
 Weapon: Hugging a spear against his shoulder, looking unimpressed.
 Background: A military training courtyard with wooden practice dummies, weapon racks, and earthen ramparts.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `sunjing` ⬜ 缺
-
-```
-A vertical character portrait of Sun Jing (孙静), Sun Jian's stingy younger brother who keeps the family home.
-Appearance: Thin older man in his 40s with squinting eyes and a thin mustache, a miserly expression.
-Armor & Clothing: Plain grey household robe and a cap.
-Weapon: Flicking the beads of an abacus, peering over it suspiciously.
-Background: A Sun clan estate counting room and storehouse with heavy iron-bound chests, stacked bamboo tax records, and abacus desks.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
