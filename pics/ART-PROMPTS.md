@@ -51,20 +51,19 @@
 36. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
 37. `c3_news` — 纪灵败退与噩耗（剧情 CG）
 38. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-39. `shanyue_nu` — 山越弩手（立绘）
-40. `liubei` — 刘备（换掉占位）（立绘）
-41. `guanyu` — 关羽（换掉占位）（立绘）
-42. `lvbu` — 吕布（换掉占位）（立绘）
-43. `sunjing` — 孙静（立绘）
-44. `wujing` — 吴景（立绘）
-45. `sunben` — 孙贲（立绘）
-46. `zhuzhi` — 朱治（立绘）
-47. `caiwenji` — 蔡文姬（立绘）
-48. `yuanshu` — 袁术（立绘）
-49. `jiling` — 纪灵（立绘）
-50. `leibo` — 雷薄（立绘）
-51. `chenlan` — 陈兰（立绘）
-52. `qiaorui` — 桥蕤（立绘）
+39. `liubei` — 刘备（换掉占位）（立绘）
+40. `guanyu` — 关羽（换掉占位）（立绘）
+41. `lvbu` — 吕布（换掉占位）（立绘）
+42. `sunjing` — 孙静（立绘）
+43. `wujing` — 吴景（立绘）
+44. `sunben` — 孙贲（立绘）
+45. `zhuzhi` — 朱治（立绘）
+46. `caiwenji` — 蔡文姬（立绘）
+47. `yuanshu` — 袁术（立绘）
+48. `jiling` — 纪灵（立绘）
+49. `leibo` — 雷薄（立绘）
+50. `chenlan` — 陈兰（立绘）
+51. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -149,18 +148,6 @@ Appearance: Short, round-bellied man in his 30s with a sly smile and small shrew
 Armor & Clothing: Plain officer's armor over a merchant-style robe (he is in disguise), a straw hat hanging on his back.
 Weapon: A heavy broad saber resting on his shoulder.
 Background: A bustling ancient market street outside Nanyang city gate, with merchant carts, tiled roofs, hanging red lanterns, and market stalls.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `shanyue_nu` ⬜ 缺
-
-```
-A vertical character portrait of a Shanyue crossbowman (山越弩手), a hill-tribe fighter from the mountains of Jiangdong.
-Appearance: Stocky adult man with tattooed arms and cheeks, fierce stare, hair tied up with a bone pin.
-Armor & Clothing: Rattan-and-hide armor, cloth leggings, bare feet planted on a rock.
-Weapon: Aiming a heavy wooden crossbow braced against his shoulder.
-Background: A rugged Shanyue mountain fortress with heavy timber stockades, rock crags, tribal bone totems, and mountain mist.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```

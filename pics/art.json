@@ -6,6 +6,7 @@
     "jiangdong_gong": {"src": "source/soldiers/jiangdong_gong.jpg", "face": [0.50, 0.26], "head": 0.20, "license": "Antigravity 生成"},
     "liehu": {"src": "source/soldiers/liehu.jpg", "face": [0.50, 0.27], "head": 0.20, "license": "Antigravity 生成"},
     "yuenv_gong": {"src": "source/soldiers/yuenv_gong.jpg", "face": [0.50, 0.27], "head": 0.22, "license": "Antigravity 生成"},
+    "shanyue_nu": {"src": "source/soldiers/shanyue_nu.jpg", "face": [0.50, 0.28], "head": 0.20, "license": "Antigravity 生成"},
     "lord": {"src": "source/generals/lord.jpg", "face": [0.50, 0.16], "head": 0.14, "license": "用户提供（Gemini 生成）"},
     "sunce": {"src": "source/generals/sunce.jpg", "face": [0.49, 0.28], "head": 0.13, "license": "用户提供", "note": "原图丢失，这是游戏里保留的 640px 版本；有高清原图就替换同名文件"},
     "zhouyu": {"src": "source/generals/zhouyu.jpg", "face": [0.51, 0.285], "head": 0.18, "license": "用户提供（Gemini 生成）"},
