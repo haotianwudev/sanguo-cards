@@ -883,3 +883,14 @@ func test_dongbai_choice_reaches_the_right_luoyang_after_the_wait() -> void:
 	var s2 := SaveData.create()
 	Quests.record(s2, "董白：交给袁绍")
 	check(Quests.is_open(sq["luoyang_a"], s2) and not Quests.is_open(sq["luoyang_b"], s2), "handed over: the other one")
+
+
+func test_the_marriage_offer_is_dongbai_either_way() -> void:
+	var sq: Dictionary = GameData.get_db().quests[1]["squares"]
+	var kept := SaveData.create()
+	Quests.record(kept, "董白：留下")
+	check(Quests.is_open(sq["heqin_k"], kept) and not Quests.is_open(sq["heqin_g"], kept), "she's in the carriage")
+	var gone := SaveData.create()
+	Quests.record(gone, "董白：交给袁绍")
+	check(Quests.is_open(sq["heqin_g"], gone) and not Quests.is_open(sq["heqin_k"], gone), "she's dead")
+	check("董白" in sq["heqin_k"]["text"][1] and "董白" in sq["heqin_g"]["text"][1], "the bride offered is 董白")

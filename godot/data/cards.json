@@ -335,6 +335,7 @@
     "shuizei": {"name": "水寨·胡玉", "turn_limit": 8, "enemy": "shuizei"},
     "shuizei_main": {"name": "水贼大寨", "turn_limit": 8, "enemy": "shuizei_main"},
     "xurong": {"name": "梁东·徐荣", "turn_limit": 8, "enemy": "xurong"},
+    "dagu": {"name": "大谷·徐荣", "turn_limit": 8, "enemy": "xurong"},
     "hulao_ch1": {"name": "追兵·吕布", "turn_limit": 10, "enemy": "lvbu_hulao"},
     "shanzei_scout": {"name": "山贼斥候", "turn_limit": 6, "enemy": "shanzei_scout"},
     "huangjin_vanguard": {"name": "黄巾前锋", "turn_limit": 8, "enemy": "huangjin_vanguard"},
