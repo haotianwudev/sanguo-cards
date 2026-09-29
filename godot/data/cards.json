@@ -226,6 +226,8 @@
     "wangping": {"name": "王平", "rarity": "R", "troop": "spear", "bonus": {"hp": 40}},
     "lidian": {"name": "李典", "rarity": "R", "troop": "spear", "bonus": {"hp": 30, "at": 6}},
     "jiangqin": {"name": "蒋钦", "rarity": "R", "troop": "archer", "bonus": {"hp": 30, "at": 10}},
+    "zhujun": {"name": "朱儁", "rarity": "SR", "troop": "infantry", "bonus": {"hp": 80, "at": 16}, "pool": false},
+    "huangfusong": {"name": "皇甫嵩", "rarity": "SR", "troop": "cavalry", "bonus": {"hp": 70, "at": 18}, "pool": false},
     "caiwenji": {"name": "蔡文姬", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 40, "at": 18}, "skills": ["hujia"], "pool": false},
     "jiling": {"name": "纪灵", "rarity": "SR", "troop": "infantry", "bonus": {"hp": 75, "at": 24}, "skills": ["sanjian"], "pool": false},
     "qiaorui": {"name": "桥蕤", "rarity": "R", "troop": "infantry", "bonus": {"hp": 55, "at": 12}, "pool": false},

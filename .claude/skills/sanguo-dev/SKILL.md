@@ -193,7 +193,7 @@ chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three che
 or hide her; then months of waiting while the coalition feasts (驻军 → two columns of ？ / camp → 火光 when
 洛阳 burns) before 李傕 at the city gate; one 洛阳 square each way via requires / unless on 「董白：留下」 — requires /
 unless also read this run's own records; a spared 董白 joins).
-Chapter 3 传国玉玺 (quest `yuxi`, 初平二年): leaving 洛阳 — with 「董白：留下」 she spots 蔡文姬 among the refugees
+Chapter 3 传国玉玺 (quest `yuxi`, 初平元年夏—秋): leaving 洛阳 — with 「董白：留下」 she spots 蔡文姬 among the refugees
 and you save her (she joins), otherwise bandits carry 蔡文姬 off; 袁术 starves 孙坚 out → 南阳; 孙策 blurts out the
 seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches on 刘表 though the hero warns him about 岘山;
 袁术's generals come for the seal (桥蕤 spying, 陈兰's night raid, 雷薄's pursuit); 纪灵, 袁术's strongest (fought 关羽
@@ -204,8 +204,8 @@ and returns to the title (new 周目); reached endings stay in `flags` across �
 Route B (a later 周目 — flag 「结局一 · 玉碎」 — with 董白 kept): 蔡文姬 can be saved, which ends chapter 3 early
 (「路线：守洛阳」). Chapter 4 驻守洛阳 (quest requires that flag): 蔡文姬's story (郭汜 escorting the officials' families,
 plundering), 周瑜's plan to rob his grain carts, 郭汜 fought off (no 蔡邕), 孙坚 holds 洛阳, the coalition disperses,
-李儒 sues for peace (周瑜 for it, the hero suggests 王允), 董白 is betrothed to the hero (wedding to be in 长安), the hero
-goes to 长安 (「路线：长安」). Chapter 5 长安: 董卓 greets 董白, 蔡邕 reunion, 王允, 貂蝉 and the hero's 连环计 — hidden from
+朱儁 (孙坚's old commander from the 黄巾 war, fled 董卓) arrives and joins, asking the hero to carry a question to 皇甫嵩; 李儒 sues for peace (周瑜 for it, the hero suggests 王允), 董白 is betrothed to the hero (wedding to be in 长安), the hero
+goes to 长安 (「路线：长安」). Chapter 5 长安: 董卓 greets 董白, humiliates 皇甫嵩 at the feast (he later sides with 王允, brings the palace guard at 格杀勿论 and joins; after 董卓 dies he asks 王允 about 董白 and gets no answer), 蔡邕 reunion, 王允, 貂蝉 and the hero's 连环计 — hidden from
 董白; 李儒 sees through it, 吕布 is chained in the 相府 dungeon, 貂蝉 taken into the back court; the wedding is 董卓's
 trap to kill everyone, 董白 too; break out and beat 董卓's guard, but he orders 格杀勿论 (董白 too) — then 吕布, freed from the dungeon by
 貂蝉 on her own, rides in with his cavalry and 貂蝉 (「诛此贼！」) and saves them; 董白 shields him, 吕布 kills him, 董白 breaks —
@@ -222,6 +222,10 @@ birthplace is 卞夫人's route. Historical women who were children in 190 (甄�
 out of the story until later chapters — as gacha cards they're fine.
 
 Writing rules:
+- **Timeline** — the whole story so far spans about a year; each chapter opens with a `【年号 · 月】` line:
+  ch1 富春 初平元年正月 → ch2 sets out 二月 (a month on the road), reaches 中原 in spring, two months of waiting,
+  洛阳 burns in early summer → ch3 南阳 夏—秋 (冯夫人 sews winter clothes) / ch4 洛阳 夏—秋 → ch5 长安 arrives in winter,
+  the wedding and 董卓's death at 初平二年正月 (「整整一年」). Don't write 「小半年」「好几个月」 that break this.
 - A named enemy should be introduced before you fight it: give its battle square `text` (lines play first, then
   the enemy info and 出战) rather than putting the introduction in the square after the fight.
 - The hero is a modern man who **never read 三国演义** (「三国演义我不熟啊」) and regrets it (「早知道会穿越，当年就该把那本书

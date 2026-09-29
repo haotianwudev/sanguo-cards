@@ -22,6 +22,14 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "zhujun": ("Zhu Jun (朱儁), the veteran Han General of Chariots and Cavalry, Sun Jian's old commander",
+        "Upright old general in his late 50s with a grizzled grey beard, a hearty laugh and a ramrod-straight back.",
+        "Worn but well-kept Han general's lamellar armor with a faded red cloak.",
+        "One hand on his sword hilt, the other raised in a big, hearty wave."),
+    "huangfusong": ("Huangfu Song (皇甫嵩), the great Han general who crushed the Yellow Turbans, now humiliated at Dong Zhuo's court",
+        "Dignified, silent old general around 60, white hair and beard neatly bound, a stern and unbending gaze.",
+        "A plain dark court robe over armor, a general's seal cord at the waist.",
+        "Standing perfectly straight, both hands resting on a long sword planted point-down before him."),
     "fanchou": ("Fan Chou (樊稠), a loud, brash Xiliang general",
         "Burly man in his 30s with a wild beard and a mocking grin.",
         "Dented Xiliang lamellar armor with fur trim.",
