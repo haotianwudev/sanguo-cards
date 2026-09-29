@@ -422,14 +422,7 @@ func _show_run() -> void:
 		var fc := _chip("命 " + f["name"], "purple")
 		fc.tooltip_text = "天命：" + f["desc"]
 		_run_box.add_child(fc)
-	for rid in save.relics:
-		var r: Dictionary = db.relics[rid]
-		var c := _chip(r["icon"] + " " + r["name"], {"rare": "purple", "curse": "red"}.get(r["rarity"], "gold"))
-		c.tooltip_text = r["desc"]
-		if save.relic_unit(rid) == "":  # not worn, or its team isn't out: greyed
-			c.modulate = Color(1, 1, 1, 0.45)
-			c.tooltip_text += "（没生效：没装或队伍没出阵，去整备里看看）"
-		_run_box.add_child(c)
+	# 宝物 aren't listed here: they're cards, see 整备
 
 
 func _chip(text: String, color: String) -> Label:
