@@ -173,7 +173,7 @@
     "biyue": {"name": "闭月", "cost": 1, "uses": 1, "effects": [{"type": "stun", "chance": 1.0}]},
     "xiaobawang": {"name": "小霸王", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 2.8}]},
     "tingqiang": {"name": "挺枪", "cost": 1, "effects": [{"type": "attack", "power": 1.4}]},
-    "yehuo": {"name": "火攻", "cost": 1, "effects": [{"type": "percent", "pct": 0.1, "ignite": true, "turns": 3}]},
+    "yehuo": {"name": "火攻", "cost": 1, "effects": [{"type": "burn", "pct": 0.1, "turns": 3}]},
     "kurou": {"name": "苦肉计", "cost": 0, "uses": 1, "effects": [{"type": "boost", "target": "all"}]},
     "cimu": {"name": "慈母", "cost": 1, "uses": 1, "effects": [{"type": "heal", "power": 6.0}]},
     "bawang": {"name": "霸王之怒", "cost": 2, "effects": [{"type": "attack", "power": 3.2}]},

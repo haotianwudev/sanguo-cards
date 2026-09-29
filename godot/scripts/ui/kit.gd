@@ -218,7 +218,7 @@ static func icon(key: String) -> Texture2D:
 	return _textures[k]
 
 
-const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "percent": "magic", "heal": "heal", "guard": "guard",
+const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
 	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap"}
 
 
@@ -249,8 +249,6 @@ static func skill_desc(sk: Dictionary) -> String:
 				parts.append("%d%% 让敌人混乱一回合" % int(round(float(e["chance"]) * 100)))
 			"ap":
 				parts.append("AP +%d" % int(e["amount"]))
-			"percent":
-				parts.append("敌人损失 %d%% 最大体力（无视防御）%s" % [int(round(float(e["pct"]) * 100)), "，着火" if e.get("ignite", false) else ""])
 			"burn":
 				if e.has("pct"):
 					parts.append("灼烧：每回合掉 %d%% 体力，%d 回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])

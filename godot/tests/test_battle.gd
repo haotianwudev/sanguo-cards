@@ -173,23 +173,22 @@ func test_sunce_has_a_plain_skill_that_never_gets_dearer() -> void:
 		check(not plain.is_empty(), "%s needs a repeatable skill" % cid)
 
 
-func test_fire_attack_takes_a_tenth_up_front_and_sets_it_alight() -> void:
-	## 周瑜's 火攻 wears bosses down: 10% of the enemy's full HP each cast, whatever its armour
+func test_fire_keeps_burning_on_the_enemy_turn() -> void:
+	## 周瑜's 火攻 wears bosses down: the fire takes 10% of the enemy's full HP each turn
 	var b := Battle.start("boar", party(["zhouyu"]), 5)
 	var i := -1
 	for k in b.leaders.size():
 		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
 			i = k
-	var tenth := int(round(b.enemy["max_hp"] * 0.1))
 	b.act(i, "yehuo")
-	check_eq(b.enemy["max_hp"] - b.enemy["hp"], tenth, "10% of full HP straight off")
-	check_eq(b.enemy["burn_turns"], 3, "alight for 3 turns (火上浇油 hits it double)")
+	check(b.enemy["burn_turns"] == 3 and b.enemy["burn_dmg"] == int(round(b.enemy["max_hp"] * 0.1)), "on fire: 10% a turn")
+	check_eq(b.enemy["hp"], b.enemy["max_hp"], "no damage up front")
 	var before: int = b.enemy["hp"]
 	b.take_events()
 	b.end_round()
-	check(b.take_events().filter(func(e): return e["t"] == "burn").is_empty(), "being alight doesn't burn on its own")
+	var burns := b.take_events().filter(func(e): return e["t"] == "burn")
+	check(burns.size() == 1 and b.enemy["hp"] < before, "burns before it acts")
 	check_eq(b.enemy["burn_turns"], 2)
-	check(b.enemy["hp"] <= before, "no extra fire damage")
 	check(not db_skill_cumulative("yehuo"), "火攻 can be cast again at the same cost")
 
 
@@ -302,7 +301,7 @@ func test_defend_costs_ap() -> void:
 
 
 func test_fire_attack_is_free_to_repeat() -> void:
-	## 周瑜's 火攻 is like 香姫's spells in Rance X: the same 1 AP every time, as often as you like
+	## 周瑜's 火攻: the same 1 AP every time, as often as you like — the fire itself doesn't stack
 	var sk: Dictionary = GameData.get_db().skills["yehuo"]
 	check(not sk["cumulative"] and sk["uses"] == null, "no rising cost, no use limit")
 	var b := Battle.start("boar", party(["zhouyu"]), 5)
@@ -317,4 +316,5 @@ func test_fire_attack_is_free_to_repeat() -> void:
 	b.leaders[i]["acted"] = false
 	b.act(i, "yehuo")
 	check_eq(b.ap, ap0 - 1, "still 1 AP the second time")
-	check_eq(b.enemy["max_hp"] - b.enemy["hp"], 2 * int(round(b.enemy["max_hp"] * 0.1)), "two casts, 20% gone")
+	check_eq(b.enemy["burn_dmg"], int(round(b.enemy["max_hp"] * 0.1)), "one fire at a time: still 10% a turn")
+	check_eq(b.enemy["burn_turns"], 3, "casting again only restarts the count")

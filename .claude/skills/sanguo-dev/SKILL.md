@@ -145,9 +145,7 @@ Adding a portrait, checklist:
   (`SaveData.relic_unit / active_relics`, `Quests.mods` uses active ones). The player can leave a 宝物 in the pool
   (`unworn`) and leave any card behind (`benched`: joins no unit; a leader is always brought). Both in 整备.
 - **Skill**: `cost, cumulative (+1 AP per use), uses (1 = 限1), effects[]` — `attack/magic {power, hits, burning_mult}`,
-  `heal`, `guard {cut}`, `boost`, `stun {chance}`, `break`, `ap`, `burn {pct | power, turns}` (a new fire keeps the bigger one, no stacking),
-  `percent {pct, ignite, turns}` (share of the enemy's full HP straight off, ignores armour — 周瑜's 火攻 for wearing bosses down; `ignite`
-  sets it alight for 火上浇油 without a burn of its own). Once-per-battle damage
+  `heal`, `guard {cut}`, `boost`, `stun {chance}`, `break`, `ap`, `burn {pct | power, turns}` (one fire at a time: a new one keeps the bigger and restarts the count; 周瑜's 火攻 is 10%/turn at a flat 1 AP). Once-per-battle damage
   skills (大招) cost ≥ 3 AP (a test enforces it).
 - **Enemy**: `hp, at, actions, resists, portrait, card (its chest may hold it: 25%, bosses/elites 50%), moves[]` — move
   `power (0 = no hit), weight (0 = only after a charge), confuse, rage, heal, ap_drain, burn_party, pierce,

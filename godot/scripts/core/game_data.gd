@@ -129,7 +129,7 @@ static func _choose_option(o: Dictionary) -> Dictionary:
 func _validate() -> void:
 	for sk in skills.values():
 		for e in sk["effects"]:
-			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "percent"],
+			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn"],
 				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
 	for c in cards.values():
 		assert(troops.has(c["troop"]) and c["troop"] != "lord", "card %s: bad troop" % c["id"])
