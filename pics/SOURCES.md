@@ -28,7 +28,7 @@
 | `jianyong` | source/public-domain/jianyong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg) | CC BY-SA 4.0 | Morio |
 | `liaohua` | source/public-domain/liaohua.jpg | [链接](https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg) | CC BY-SA 3.0 | SamSpade21 |
 | `liubei` | source/public-domain/liubei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Liu_Bei_Tang.jpg) | Public domain | Yan Liben (閻立本) |
-| `lvbu` | source/public-domain/lvbu.jpg | [链接](https://commons.wikimedia.org/wiki/File:L%C3%BC_Bu_Portrait.jpg) | Public domain | — |
+| `lvbu` | source/generals/lvbu.jpg | 用户提供 | 用户提供 | — |
 | `lvmeng` | source/public-domain/lvmeng.jpg | [链接](https://commons.wikimedia.org/wiki/File:Lu_Meng.jpg) | Public domain | 不詳 (Unknown) |
 | `machao` | source/public-domain/machao.jpg | [链接](https://commons.wikimedia.org/wiki/File:MaChao.jpg) | Public domain | Unknown authorUnknown author |
 | `madai` | source/public-domain/madai.jpg | [链接](https://commons.wikimedia.org/wiki/File:Ma_Dai_Qing_portrait.jpg) | Public domain | Unknown author |

@@ -53,13 +53,12 @@
 38. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
 39. `liubei` — 刘备（换掉占位）（立绘）
 40. `guanyu` — 关羽（换掉占位）（立绘）
-41. `lvbu` — 吕布（换掉占位）（立绘）
-42. `caiwenji` — 蔡文姬（立绘）
-43. `yuanshu` — 袁术（立绘）
-44. `jiling` — 纪灵（立绘）
-45. `leibo` — 雷薄（立绘）
-46. `chenlan` — 陈兰（立绘）
-47. `qiaorui` — 桥蕤（立绘）
+41. `caiwenji` — 蔡文姬（立绘）
+42. `yuanshu` — 袁术（立绘）
+43. `jiling` — 纪灵（立绘）
+44. `leibo` — 雷薄（立绘）
+45. `chenlan` — 陈兰（立绘）
+46. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -720,18 +719,6 @@ Appearance: Tall imposing man in his early 30s with a deep red face, phoenix eye
 Armor & Clothing: Green war robe over Han dynasty lamellar armor, green headscarf, a heroic cape.
 Weapon: Holding the Green Dragon Crescent Blade (青龙偃月刀 - a long glaive with a dragon-headed crescent blade) upright beside him.
 Background: A solemn military command post with green banners, heavy weapon stands, and dramatic evening clouds in the sky.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `lvbu` 🟡 换掉占位
-
-```
-A vertical character portrait of Lü Bu (吕布), the unrivaled, terrifying warrior of the Three Kingdoms era.
-Appearance: Tall, handsome, arrogant warrior in his early 30s with a cold predatory glare and a confident smirk, overwhelming aura.
-Armor & Clothing: Ornate crimson and black armor with gold trim, a helmet crowned with two long pheasant tail feathers (雉尾冠), a red cape flaring behind him.
-Weapon: Holding the Sky Piercer halberd (方天画戟 - a long halberd with a crescent side blade) across his shoulders.
-Background: A scorched, dust-swept battlefield under a dramatic crimson and dark sky, with broken weapons stuck in the ground and distant fortress ramparts.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
