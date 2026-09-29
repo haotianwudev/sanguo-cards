@@ -206,8 +206,8 @@ func test_infantry_can_raise_shields() -> void:
 
 func test_every_enemy_has_a_card_and_bosses_are_rare() -> void:
 	var db := GameData.get_db()
-	for e in db.enemies.values():
-		check(e["card"] != "", "%s has a card" % e["id"])
+	for e in db.enemies.values():  # beasts (野猪) drop nothing
+		check(e["card"] != "" or e["id"] in ["boar"], "%s has a card" % e["id"])
 	for eid in ["shuizei", "shuizei_main", "huangjin_yaodao", "huaxiong", "lvbu_hulao"]:
 		check(db.cards[db.enemies[eid]["card"]]["rarity"] != "N", "%s drops a rare card" % eid)
 
