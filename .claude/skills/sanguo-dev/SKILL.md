@@ -128,6 +128,9 @@ Adding a portrait, checklist:
   turns up in recruit offers at `gacha.lord_rate`. **周目**: `SaveData.new_lap()` restarts the story keeping every card
   as it is — no gifts, no rarity shift, no other rule changes (the user wants those decided later); the only pool change
   is `recruit_pool()` adding every general ever owned via `seen`, story-only ones included.
+  **难度** is shown from 1 (`SaveData.level()` = difficulty + 1; beating 虎牢关 吕布 → 2): enemies +difficulty_step per
+  level, and chests (`chest_mix`: treasure squares and after battles) turn each soldier into a general with
+  `gacha.chest_general` base + per_level × (难度 - 1). Event offers of soldiers stay soldiers.
   **Rogue per run** (rolled in `Quests.begin` only when given an rng — tests pass none and stay fixed): a **天命**
   (`cards.json fates`, pick one of `fate_offer` in the RelicPick overlay with `source = "fates"`; mods like relics,
   `Quests.mods` adds it) and a **词缀** on every elite / boss square (`battle.affixes`: hp / at shares, resists,

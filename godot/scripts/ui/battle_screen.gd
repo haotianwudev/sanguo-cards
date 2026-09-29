@@ -552,7 +552,7 @@ func _finish() -> void:
 			b.enemy["data"]["card"])
 		if not chest.is_empty():
 			var o := PickOverlay.new()
-			o.title = "宝箱！（过量伤害 %d%%）选一张兵卡带走" % int(round(b.overkill * 100))
+			o.title = "宝箱！（过量伤害 %d%%）选一张卡带走" % int(round(b.overkill * 100))
 			o.chest = "grand" if boss else "normal"
 			o.card_ids = chest.map(func(c): return c["id"])
 			o.counts = chest.map(func(c): return save.copies(c["id"]))

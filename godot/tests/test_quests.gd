@@ -314,7 +314,7 @@ func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 			check(ids.all(func(c): return c in q["recruit_pool"]), "征兵 only finds locals")
 		check(not ids.is_empty() and ids.all(func(c): return c in allowed), "%s %s" % [sid, ids])
 	var chest := s.chest_after_battle(rng(1), 0.0, true, q["soldier_pool"])
-	check(chest.all(func(c): return c["id"] in allowed), "battle chest")
+	check(chest.all(func(c): return c["id"] in allowed or not c["soldier"]), "battle chest: local soldiers (or a general)")
 	check_eq(q["squares"]["north"]["cards"], ["danyang", "shuizei_bing", "huangjin_nanxia"], "freed men and prisoners")
 
 

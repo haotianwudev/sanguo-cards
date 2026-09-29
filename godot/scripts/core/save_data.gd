@@ -30,7 +30,8 @@ var event_note: Array = []  # what the last event did, shown on its square
 var offer_kind := ""  # "upgrade": the offer lists your own generals, the pick goes up a tier
 var relics: Array = []  # 宝物 held this run
 var danger := 0  # 险 accepted this run: enemies get stronger
-var difficulty := 0  # 难度: permanent, every level makes all enemies stronger (beating 吕布 at 虎牢关)
+var difficulty := 0  # 难度 above 1 (shown as 难度 difficulty + 1): permanent, every level makes all enemies stronger
+                    # and chests give more generals (beating 吕布 at 虎牢关 → 难度 2)
 var picks_left := 0  # more pick-ones to come after this one (三连抽)
 var offer_rates: Dictionary = {}  # rarity weights for those picks
 var run_start: Dictionary = {}  # card id -> copies owned when this run began (for the chapter recap)
@@ -303,12 +304,34 @@ func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool,
 	var chance := 1.0 if boss else minf(1.0, float(g["chest_base"]) + overkill)
 	if rng.randf() >= chance:
 		return []
-	var cards := chest_offer(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only)
+	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only)
 	# the beaten enemy's own card may be in there (bosses and elites more often)
 	var db := _db()
 	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"])
 	if enemy_card != "" and not maxed(enemy_card) and not cards.has(db.cards[enemy_card]) and rng.randf() < card_chance:
 		cards[cards.size() - 1] = db.cards[enemy_card]
+	return cards
+
+
+func level() -> int:
+	## 难度 as the player sees it: starts at 1
+	return difficulty + 1
+
+
+func chest_general_chance() -> float:
+	var cg: Dictionary = _db().gacha.get("chest_general", {})
+	return minf(0.9, float(cg.get("base", 0.0)) + float(cg.get("per_level", 0.0)) * difficulty)
+
+
+func chest_mix(rng: RandomNumberGenerator, n: int, only: Array = []) -> Array:
+	## a chest's cards: soldiers, each of which may turn into a general (more often at a higher 难度)
+	var cards := chest_offer(rng, n, only)
+	var chance := chest_general_chance()
+	for i in cards.size():
+		if rng.randf() < chance:
+			var g := recruit_offer(rng, 1)
+			if not g.is_empty() and not cards.has(g[0]):
+				cards[i] = g[0]
 	return cards
 
 

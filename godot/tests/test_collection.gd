@@ -37,10 +37,10 @@ func test_chest_shows_different_soldiers_and_only_the_pick_is_kept() -> void:
 	var s := SaveData.create()
 	var offer := s.chest_after_battle(rng(1), 0.0, true)
 	check_eq(offer.size(), int(GameData.get_db().gacha["chest_cards_boss"]))
-	check(offer.all(func(c): return c["soldier"]))
-	check(s.soldiers.is_empty(), "nothing granted before picking")
+	check(offer.all(func(c): return offer.count(c) == 1), "all different")
+	check(s.soldiers.is_empty() and s.owned.is_empty(), "nothing granted before picking")
 	s.take(offer[0]["id"])
-	check_eq(s.soldiers, {offer[0]["id"]: 1})
+	check_eq(s.copies(offer[0]["id"]), 1, "only the pick is kept")
 
 
 func test_chest_chance_follows_overkill() -> void:
@@ -275,3 +275,20 @@ func test_beast_cards_stay_out_of_drops_for_now() -> void:
 		check(db.cards.has(cid) and not db.cards[cid]["in_pool"], "%s exists, out of the pools" % cid)
 		check(not db.soldier_cards().any(func(c): return c["id"] == cid), "%s never in a chest" % cid)
 	check(not db.enemies.values().any(func(e): return e["card"] in ["yezhu", "baie_hu"]), "no enemy drops them")
+
+
+func test_chests_hold_more_generals_at_a_higher_difficulty() -> void:
+	var s := SaveData.create()
+	check_eq(s.level(), 1, "难度 starts at 1")
+	var gens := func(save: SaveData) -> int:
+		var r := RandomNumberGenerator.new()
+		r.seed = 9
+		var n := 0
+		for _i in 300:
+			n += save.chest_mix(r, 3).filter(func(c): return not c["soldier"]).size()
+		return n
+	var low: int = gens.call(s)
+	check(low > 0, "a normal chest can hold a general")
+	s.difficulty = 1
+	check_eq(s.level(), 2)
+	check(gens.call(s) > low, "难度 2: more generals")

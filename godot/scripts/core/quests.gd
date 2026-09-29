@@ -238,7 +238,7 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 		elif kind == "recruit":
 			cards = save.recruit_offer(rng)
 		else:
-			cards = SaveData.chest_offer(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), q["soldier_pool"])
+			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), q["soldier_pool"])
 		save.offer = cards.map(func(c): return c["id"])
 	return save.offer.map(func(c): return db.cards[c])
 
@@ -606,7 +606,8 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				out["log"].append("失去兵卡：" + db.cards[cid]["name"])
 		if e.has("difficulty"):
 			save.difficulty += int(e["difficulty"])
-			out["log"].append("难度上升！今后所有敌人 +%d%%" % int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)))
+			out["log"].append("难度上升到 %d！今后所有敌人 +%d%%，宝箱里的武将也更多了" % [save.level(),
+				int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100))])
 		if e.has("danger"):
 			save.danger += int(e["danger"])
 			out["log"].append("险！本轮之后的敌人体力和攻击 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)))

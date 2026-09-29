@@ -1,7 +1,9 @@
 {
   "gacha": {"rates": {"R": 70, "SR": 25, "SSR": 5}, "offer_size": 3,
     "_items": "宝物 are cards like in Rance X: each belongs to one troop's unit (relics.*.troop; lord = the lord's own), never as its leader, any number; worn ones work while that unit is out, or leave them in the pool", "lord_rate": 0.06, "lord_rarity": "SR",
-    "_lap": "周目: a new playthrough keeps every card as it is; generals you have ever had (even story-only ones) join the recruit pool", "party_slots": 4, "soldier_decay": 0.6, "chest_base": 0.5, "chest_cards": 2, "chest_cards_boss": 3,
+    "_lap": "周目: a new playthrough keeps every card as it is; generals you have ever had (even story-only ones) join the recruit pool", "party_slots": 4, "soldier_decay": 0.6, "chest_base": 0.5,
+    "_chest_general": "each card in a chest (treasure squares and after battles) may be a general instead of a soldier: base + per_level × (难度 - 1)",
+    "chest_general": {"base": 0.15, "per_level": 0.15}, "chest_cards": 2, "chest_cards_boss": 3,
     "_tiers": "generals can be drawn again: copies needed for each tier (铜/银/金) and the multiplier on the general's own stats",
     "tiers": [{"name": "铜", "copies": 1, "mult": 1.0}, {"name": "银", "copies": 2, "mult": 1.25}, {"name": "金", "copies": 4, "mult": 1.6}],
     "_merit": "战功: earned at the end of each chapter (per battle won, extra per boss/elite beaten), kept across chapters, spent in the recap",

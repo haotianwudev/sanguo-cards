@@ -406,9 +406,10 @@ func _show_run() -> void:
 		ch.queue_free()
 	var db := GameData.get_db()
 	var save := Game.save
-	if save.difficulty > 0:
-		var h := _chip("难度 +%d%%" % int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)), "purple")
-		h.tooltip_text = "打赢了虎牢关的吕布，天下都盯上了你：今后所有敌人都更强"
+	if true:  # 难度 always shows: it starts at 1
+		var h := _chip("难度 %d" % save.level(), "purple" if save.difficulty > 0 else "gray")
+		h.tooltip_text = "难度 %d：敌人 +%d%%，宝箱每张卡有 %d%% 是武将（打赢虎牢关的吕布等可以提高难度）" % [save.level(),
+			int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)), int(round(save.chest_general_chance() * 100))]
 		_run_box.add_child(h)
 	if save.danger > 0:
 		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
@@ -861,7 +862,7 @@ func _open_offer(s: Dictionary) -> void:
 		_resolve()
 		return
 	var o := PickOverlay.new()
-	o.title = {"treasure": "宝箱 —— 选一张兵卡", "recruit": "豪杰来投 —— 选一位"}.get(s["type"], "选一张带走")
+	o.title = {"treasure": "宝箱 —— 选一张卡", "recruit": "豪杰来投 —— 选一位"}.get(s["type"], "选一张带走")
 	o.card_ids = cards.map(func(c): return c["id"])
 	o.counts = cards.map(func(c): return Game.save.copies(c["id"]) if c["soldier"] else 0)
 	o.captions = cards.map(func(c): return _offer_caption(c))
@@ -999,7 +1000,7 @@ func _complete() -> void:
 	if r["danger"] > 0:
 		hard.append("险 +%d%%" % int(round(r["danger"] * float(db.battle["danger_step"]) * 100)))
 	if r["difficulty"] > 0:
-		hard.append("难度 +%d%%（永久）" % int(round(r["difficulty"] * float(db.battle["difficulty_step"]) * 100)))
+		hard.append("难度 %d（敌人 +%d%%，宝箱武将更多）" % [r["difficulty"] + 1, int(round(r["difficulty"] * float(db.battle["difficulty_step"]) * 100))])
 	if not hard.is_empty():
 		lines.append("[color=%s][b]难度[/b][/color]　%s" % [gold, "　".join(hard)])
 	lines.append("[color=%s][b]战功[/b][/color]　本章 +%d（打赢一场 +%d，首领和精英再 +%d）" % [gold, Quests.merit_earned(Game.save),
