@@ -226,6 +226,14 @@ func demo(name: String) -> void:
 				save.visited.append("dongbai")
 				save.resolved = false
 			show_screen(MapScreen.new())
+		"ch2_wait":  # chapter 2 after 董白's fate (kept): the months before 洛阳 burns
+			save.quests_cleared = ["prologue"]
+			var q2: Dictionary = GameData.get_db().quests[1]
+			Quests.begin(q2, save)
+			Quests.record(save, "董白：留下")
+			save.square = "wait"
+			save.visited.append("wait")
+			show_screen(MapScreen.new())
 		"ch3", "ch3_lost":  # chapter 3 after chapter 2 (董白 kept, or handed over)
 			save.quests_cleared = ["prologue", "taodong"]
 			save.flags = ["董白：留下"] if name == "ch3" else ["董白：交给袁绍"]

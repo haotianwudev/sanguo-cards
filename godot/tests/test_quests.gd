@@ -869,3 +869,17 @@ func test_trades_need_something_to_trade() -> void:
 	check_eq(Quests.option_blocked(s, pay), "")
 	var flee: Dictionary = db.events["storm"]["options"][1]  # losing a soldier is just a cost here
 	check_eq(Quests.option_blocked(SaveData.create(), flee), "", "costs aren't trades")
+
+
+func test_dongbai_choice_reaches_the_right_luoyang_after_the_wait() -> void:
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[1]
+	var sq: Dictionary = q["squares"]
+	check(sq["give"]["next"] == ["wait"] and sq["keep"]["next"] == ["wait"], "both choices lead to the long wait")
+	check_eq(sq["fire"]["next"], ["luoyang_a", "luoyang_b"])
+	var s := SaveData.create()
+	Quests.record(s, "董白：留下")  # chosen in this chapter
+	check(Quests.is_open(sq["luoyang_b"], s) and not Quests.is_open(sq["luoyang_a"], s), "kept her: the 洛阳 where she joins")
+	var s2 := SaveData.create()
+	Quests.record(s2, "董白：交给袁绍")
+	check(Quests.is_open(sq["luoyang_a"], s2) and not Quests.is_open(sq["luoyang_b"], s2), "handed over: the other one")

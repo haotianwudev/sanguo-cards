@@ -846,6 +846,8 @@ func _resolve(choice := -1) -> void:
 	var kind: String = Quests.here(q, Game.save)["type"]
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
 	Game.persist()
+	if kind == "choose":  # a choice can open squares further on (requires / unless on this run's records)
+		_rebuild_map()
 	if choice < 0 and not gained.is_empty():  # the story hands you cards (picks already showed theirs)
 		await _reveal(gained, "入　队" if gained.any(func(c): return not c["soldier"]) else "获　得")
 	else:

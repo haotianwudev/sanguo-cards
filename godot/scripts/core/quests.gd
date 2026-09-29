@@ -217,8 +217,10 @@ static func next_options(q: Dictionary, save: SaveData) -> Array:
 
 
 static func is_open(s: Dictionary, save: SaveData) -> bool:
-	## A square with requires / unless (a story flag from an earlier chapter) only exists when the flag says so.
-	return (s["requires"] == "" or save.flags.has(s["requires"])) and (s["unless"] == "" or not save.flags.has(s["unless"]))
+	## A square with requires / unless only exists when the flag says so: a story flag from an earlier chapter, or a
+	## line recorded earlier in this run (a choice made in this chapter).
+	var has := func(line: String) -> bool: return save.flags.has(line) or save.run_records.has(line)
+	return (s["requires"] == "" or has.call(s["requires"])) and (s["unless"] == "" or not has.call(s["unless"]))
 
 
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:

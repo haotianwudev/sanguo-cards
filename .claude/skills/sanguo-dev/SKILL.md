@@ -190,7 +190,9 @@ after the 玉玺 his ambition shows (won't let go of it, threatens anyone who ta
 against 董卓; only the brother whose plan you pick joins) → chapter 2 讨伐董卓 (the other brother joins; 祖茂 vs 华雄 —
 win: you throw your blade and get the 赤帻, lose: 孙坚 kills 华雄; 孙坚 does NOT join (he lends you an old general instead); elite 董白; 吕布 raids the camp; 吕布's
 chase is nearly unbeatable — lose: 三英战吕布, win: 难度 up + three chests; hand 董白 to 袁绍 for a relic (she's executed)
-or hide her; 李傕 at the burning 洛阳; a spared 董白 joins).
+or hide her; then months of waiting while the coalition feasts (驻军 → two columns of ？ / camp → 火光 when
+洛阳 burns) before 李傕 at the city gate; one 洛阳 square each way via requires / unless on 「董白：留下」 — requires /
+unless also read this run's own records; a spared 董白 joins).
 Chapter 3 传国玉玺 (quest `yuxi`, 初平二年): leaving 洛阳 — with 「董白：留下」 she spots 蔡文姬 among the refugees
 and you save her (she joins), otherwise bandits carry 蔡文姬 off; 袁术 starves 孙坚 out → 南阳; 孙策 blurts out the
 seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches on 刘表 though the hero warns him about 岘山;
