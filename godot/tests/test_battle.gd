@@ -173,22 +173,24 @@ func test_sunce_has_a_plain_skill_that_never_gets_dearer() -> void:
 		check(not plain.is_empty(), "%s needs a repeatable skill" % cid)
 
 
-func test_fire_keeps_burning_on_the_enemy_turn() -> void:
+func test_fire_attack_takes_a_tenth_up_front_and_sets_it_alight() -> void:
+	## 周瑜's 火攻 wears bosses down: 10% of the enemy's full HP each cast, whatever its armour
 	var b := Battle.start("boar", party(["zhouyu"]), 5)
 	var i := -1
 	for k in b.leaders.size():
 		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
 			i = k
+	var tenth := int(round(b.enemy["max_hp"] * 0.1))
 	b.act(i, "yehuo")
-	check(b.enemy["burn_turns"] == 3 and b.enemy["burn_dmg"] == int(round(b.enemy["max_hp"] * 0.1)), "on fire: 10% a turn")
-	check_eq(b.enemy["hp"], b.enemy["max_hp"], "no damage up front")
+	check_eq(b.enemy["max_hp"] - b.enemy["hp"], tenth, "10% of full HP straight off")
+	check_eq(b.enemy["burn_turns"], 3, "alight for 3 turns (火上浇油 hits it double)")
 	var before: int = b.enemy["hp"]
 	b.take_events()
 	b.end_round()
-	var burns := b.take_events().filter(func(e): return e["t"] == "burn")
-	check(burns.size() == 1 and b.enemy["hp"] < before, "burns before it acts")
+	check(b.take_events().filter(func(e): return e["t"] == "burn").is_empty(), "being alight doesn't burn on its own")
 	check_eq(b.enemy["burn_turns"], 2)
-	check(db_skill_cumulative("yehuo"), "火攻 can be cast again (it just costs more)")
+	check(b.enemy["hp"] <= before, "no extra fire damage")
+	check(not db_skill_cumulative("yehuo"), "火攻 can be cast again at the same cost")
 
 
 func db_skill_cumulative(sid: String) -> bool:
@@ -297,3 +299,22 @@ func test_defend_costs_ap() -> void:
 	b.ap = need
 	b.defend()
 	check(b.round_no == r0 + 1, "enough AP: the round ends")
+
+
+func test_fire_attack_is_free_to_repeat() -> void:
+	## 周瑜's 火攻 is like 香姫's spells in Rance X: the same 1 AP every time, as often as you like
+	var sk: Dictionary = GameData.get_db().skills["yehuo"]
+	check(not sk["cumulative"] and sk["uses"] == null, "no rising cost, no use limit")
+	var b := Battle.start("boar", party(["zhouyu"]), 5)
+	var i := -1
+	for k in b.leaders.size():
+		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
+			i = k
+	var ap0: int = b.ap
+	b.act(i, "yehuo")
+	check_eq(b.ap, ap0 - 1, "costs 1 AP")
+	b.ap = ap0
+	b.leaders[i]["acted"] = false
+	b.act(i, "yehuo")
+	check_eq(b.ap, ap0 - 1, "still 1 AP the second time")
+	check_eq(b.enemy["max_hp"] - b.enemy["hp"], 2 * int(round(b.enemy["max_hp"] * 0.1)), "two casts, 20% gone")

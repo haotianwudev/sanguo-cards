@@ -289,7 +289,18 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			enemy["break_turns"] = maxi(enemy["break_turns"], int(eff["turns"]))
 			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
-		"burn":  # 火攻: the enemy loses HP before each of its turns; a new fire keeps the bigger one, restarts the count
+		"percent":  # 火攻: a share of the enemy's full HP straight off — armour, resist and 破防 don't matter; wears bosses down
+			var pd := mini(maxi(1, int(round(enemy["max_hp"] * float(eff["pct"])))), enemy["hp"])
+			enemy["hp"] -= pd
+			combo += 1
+			_ev({"t": "hit", "dmg": pd, "combo": combo, "kind": "magic", "hp": enemy["hp"]})
+			var plog: Array = ["  %s 损失 %d 体力（最大体力的 %d%%）" % [ename, pd, int(round(float(eff["pct"]) * 100))]]
+			if eff.get("ignite", false) and enemy["hp"] > 0:  # sets it alight (for 火上浇油) without a burn of its own
+				enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff.get("turns", 3)))
+				_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
+				plog.append("  %s 着火了（%d 回合）" % [ename, enemy["burn_turns"]])
+			return plog
+		"burn":  # the enemy loses HP before each of its turns; a new fire keeps the bigger one, restarts the count
 			# "pct": a share of the enemy's full HP per turn; "power": × the caster's attack (magic resist applies)
 			var bonus := float(mods.get("at", 0.0)) + float(mods.get("magic", 0.0))
 			var resist: float = enemy["data"]["magic_resist"] * (1.0 - minf(1.0, float(mods.get("pierce", 0.0))))
@@ -313,7 +324,9 @@ func _enemy_phase(defend_cut: float) -> Array:
 		return []
 	var data: Dictionary = enemy["data"]
 	var log: Array = []
-	if enemy["burn_turns"] > 0:
+	if enemy["burn_turns"] > 0 and enemy["burn_dmg"] == 0:  # alight but not burning (火攻): just count down
+		enemy["burn_turns"] -= 1
+	elif enemy["burn_turns"] > 0:
 		enemy["burn_turns"] -= 1
 		var d: int = mini(enemy["burn_dmg"], enemy["hp"])
 		enemy["hp"] -= d
