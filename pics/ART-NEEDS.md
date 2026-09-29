@@ -305,6 +305,14 @@
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
 | 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
+| ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
+| ⬜ 缺 | `lvlingqi` | 吕玲绮·温侯之女（SSR） |
+| ⬜ 缺 | `mayunlu` | 马云騄（SR） |
+| ⬜ 缺 | `baosanniang` | 鲍三娘（SR） |
+| ⬜ 缺 | `wangyi` | 王异（SR） |
+| ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
+| ⬜ 缺 | `caifuren` | 蔡夫人·荆州（SR） |
+| ⬜ 缺 | `bianfuren` | 卞夫人（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
 | ⬜ 缺 | `dongfeng` | 董奉（R） |
 | ⬜ 缺 | `zhangzhao` | 张昭（R） |
@@ -327,3 +335,6 @@
 | ✅ 正式 | `zhuzhi` | 朱治·君理（R） |
 | ✅ 正式 | `sunben` | 孙贲（R） |
 | ✅ 正式 | `sunjing` | 孙静（R） |
+| ⬜ 缺 | `yanfuren` | 严夫人（R） |
+| ⬜ 缺 | `liniang` | 黎娘·山越女王（R） |
+| ⬜ 缺 | `aguduo` | 阿古朵·西凉女骑（R） |

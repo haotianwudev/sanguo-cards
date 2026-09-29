@@ -76,6 +76,138 @@
 
 ## 立绘（竖版 3:4）
 
+### `zhurong` ⬜ 缺
+
+```
+A vertical character portrait of Lady Zhurong (祝融夫人), queen of the Nanzhong tribes who claims descent from the fire god — an adult woman.
+Appearance: Proud, sun-bronzed adult woman around 30 with a fierce grin, wild dark hair bound with red cords, gold and bone earrings.
+Armor & Clothing: Tribal queen's armor of leather and bronze plates, a leopard pelt over one shoulder, feather ornaments.
+Weapon: A bandolier of throwing knives across her chest, one knife twirling between her fingers.
+Background: a steaming southern jungle with a volcano glowing on the horizon.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `lvlingqi` ⬜ 缺
+
+```
+A vertical character portrait of Lü Lingqi (吕玲绮), Lü Bu's daughter who inherited his halberd — an adult woman.
+Appearance: Cool, stoic adult woman in her early 20s with sharp eyes like her father's, long black hair in a high tail.
+Armor & Clothing: Red-and-black armor echoing Lü Bu's, a helmet with two long pheasant tail plumes held under her arm.
+Weapon: A smaller version of the Sky Piercer halberd resting on her shoulder.
+Background: a windswept northern steppe at dusk with a red horse grazing behind her.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `mayunlu` ⬜ 缺
+
+```
+A vertical character portrait of Ma Yunlu (马云騄), Ma Chao's younger sister, a Xiliang woman general — an adult woman.
+Appearance: Bold, bright-eyed adult woman in her early 20s with a confident smile, long ponytail tied with a silver ring.
+Armor & Clothing: Silver lamellar armor trimmed with white fur, a short white cape.
+Weapon: A long lance with a white tassel, reins of a white horse in her other hand.
+Background: the Xiliang frontier: dry grassland, a beacon tower and distant snowy mountains.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `baosanniang` ⬜ 缺
+
+```
+A vertical character portrait of Bao Sanniang (鲍三娘), the heroine of the Bao manor who beat every suitor — an adult woman.
+Appearance: Cheerful, athletic adult woman in her 20s with a playful grin and a braid wrapped around her head.
+Armor & Clothing: Practical pale-green armor over a red martial robe, arm guards.
+Weapon: A spear spun behind her back in a ready stance.
+Background: a country manor's training yard with weapon racks and a few defeated suitors sitting on the ground.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `wangyi` ⬜ 缺
+
+```
+A vertical character portrait of Wang Yi (王异), the Jicheng heroine who planned the city's defence — an adult woman.
+Appearance: Composed adult woman in her early 30s with an unshakeable gaze, hair simply pinned, no jewelry.
+Armor & Clothing: Plain dark robe with a leather belt, sleeves bound for work, a wind-torn cloak.
+Weapon: A short sword at her waist, a map of city walls in her hand.
+Background: a besieged frontier city wall at dusk with soldiers and smoke.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `xinxianying` ⬜ 缺
+
+```
+A vertical character portrait of Xin Xianying (辛宪英), the famously perceptive lady of the Xin family — an adult woman.
+Appearance: Elegant adult woman in her 20s with clever eyes and a small knowing smile.
+Armor & Clothing: Light blue scholar-lady robes with neat layered collars.
+Weapon: Holding a bamboo slip in one hand and a brush in the other.
+Background: a quiet study with bamboo scrolls and a window onto a plum tree.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `caifuren` ⬜ 缺
+
+```
+A vertical character portrait of Lady Cai (蔡夫人) of Jingzhou, Liu Biao's wife and the power behind the Cai clan — a scheming adult woman.
+Appearance: Beautiful adult woman in her late 20s with a cold, graceful smile and calculating eyes.
+Armor & Clothing: Rich purple silks with gold embroidery, an ornate phoenix hairpin.
+Weapon: A round silk fan half-hiding her face.
+Background: a lavish Jingzhou mansion hall with a river view through carved screens.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `bianfuren` ⬜ 缺
+
+```
+A vertical character portrait of Lady Bian (卞夫人), a former singer of great grace and good sense — the heroine of the northern start, an adult woman.
+Appearance: Graceful adult woman around 30 with warm eyes and a calm, shrewd smile.
+Armor & Clothing: Elegant but modest pale rose robes, a simple jade hairpin.
+Weapon: Holding a lantern in the snow, a thick cloak over one arm to share.
+Background: a snowy northern plain outside the town of Qiao at night.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `yanfuren` ⬜ 缺
+
+```
+A vertical character portrait of Lady Yan (严夫人), Lü Bu's stern, practical wife — an adult woman.
+Appearance: Handsome, strong-willed adult woman in her 30s with a stern frown and arms crossed.
+Armor & Clothing: Sturdy dark red robes of a general's wife, sleeves tied back.
+Weapon: A household ledger tucked under one arm.
+Background: the courtyard of a general's residence with a halberd rack.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `liniang` ⬜ 缺
+
+```
+A vertical character portrait of Li Niang (黎娘), queen of a Shanyue mountain tribe in Jiangdong — an adult woman.
+Appearance: Fierce adult woman in her mid-20s with sharp eyes, blue tribal tattoos on her arms and cheek, hair cropped at the shoulders.
+Armor & Clothing: Hide and woven-bark armor, bead necklaces, bare feet wrapped in cloth.
+Weapon: A bamboo bow with poison arrows, a quiver of green-fletched shafts.
+Background: misty Jiangdong mountains with bamboo forests and stilt houses.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `aguduo` ⬜ 缺
+
+```
+A vertical character portrait of Aguduo (阿古朵), a Qiang woman who captains Dong Bai's Xiliang woman cavalry — an adult woman.
+Appearance: Blunt, loyal adult woman in her mid-20s with a wind-burned face, many small braids and a fur hat.
+Armor & Clothing: Leather and fur riding armor, a red sash like the one Dong Bai's riders wear.
+Weapon: A curved saber and a bone flute (qiang di) hanging from her belt.
+Background: the Xiliang grassland with a string of horses and a felt tent.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `gaoshun` ⬜ 缺
 
 ```
