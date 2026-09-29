@@ -11,6 +11,7 @@ var ambush := false
 
 var b: Battle
 var _busy := false
+const BAND_ALPHA := 0.5  # how much the dark band under our cards hides the battle CG
 var _enemy_art: Control
 var _enemy_hp: ProgressBar
 var _enemy_hp_label: Label
@@ -74,7 +75,7 @@ func _build() -> void:
 		var band_col := Kit.c("bg")
 		var grad := Gradient.new()
 		grad.set_color(0, Color(band_col, 0.0))
-		grad.set_color(1, Color(band_col, 0.9))
+		grad.set_color(1, Color(band_col, BAND_ALPHA))
 		var gt := GradientTexture2D.new()
 		gt.gradient = grad
 		gt.fill_from = Vector2(0, 0)
@@ -88,7 +89,7 @@ func _build() -> void:
 		fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		add_child(fade)
 		var band := ColorRect.new()
-		band.color = Color(band_col, 0.9)
+		band.color = Color(band_col, BAND_ALPHA)
 		band.position = Vector2(0, 390)
 		band.size = Vector2(1280, 330)
 		band.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -190,7 +191,10 @@ func _build() -> void:
 	_party_box = PanelContainer.new()
 	_party_box.position = Vector2(20, 276) if not has_cg else Vector2(20, 390)
 	_party_box.size = Vector2(1240, 70) if not has_cg else Vector2(1240, 48)
-	_party_box.add_theme_stylebox_override("panel", Kit.box(Kit.c("party_bg"), 14, 2, Kit.c("green"), 12 if not has_cg else 7))
+	var pbg := Kit.c("party_bg")
+	if has_cg:
+		pbg.a = 0.7
+	_party_box.add_theme_stylebox_override("panel", Kit.box(pbg, 14, 2, Kit.c("green"), 12 if not has_cg else 7))
 	add_child(_party_box)
 	var pr := HBoxContainer.new()
 	pr.add_theme_constant_override("separation", 18)
