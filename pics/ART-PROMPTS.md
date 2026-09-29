@@ -655,7 +655,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c5_death`
 
 ```
-A horizontal story event illustration: the tragic end, restrained: on the palace steps Dong Bai in her bloodied red wedding dress kneels holding her fallen grandfather, sobbing; Lü Bu stands behind with his halberd lowered; the hero with his saber stopped in mid-air, stricken (no gore shown).
+A horizontal story event illustration: the moment of mercy, restrained: the defeated Dong Zhuo collapsed on the palace steps; Dong Bai (adult) in her red wedding dress throws herself in front of him with her arms spread wide, tears streaming, begging; the hero's saber stopped in mid-air above them; behind the hero, Lü Bu on Red Hare with his halberd raised, Diaochan at his side (no gore).
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
