@@ -957,10 +957,10 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
 
-### `c5_snowqin`
+### `c5_snow`
 
 ```
-A horizontal story event illustration: a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) with a guqin on her knees, snow on the strings, her hand and the hero's hand touching as both reach to brush it off; lantern glow, quiet and bittersweet.
+A horizontal story event illustration: a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) slowly straightening the collar of a red wedding robe she has draped over the hero, her hand resting on his chest, snowflakes on her lashes; beside them a line of writing traced in the snow on the step; lantern glow, quiet and bittersweet.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)

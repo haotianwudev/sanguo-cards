@@ -443,7 +443,7 @@ BATTLES = {
 # story cg key: the scene
 CGS = {
     "c4_xizi": "lamplight inside a small army tent at night: Cai Wenji (adult, in white) guiding the hero's hand over a brush, her hand over his, both leaning over a sheet of paper with wobbly characters; soft warm glow, tender and shy",
-    "c5_snowqin": "a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) with a guqin on her knees, snow on the strings, her hand and the hero's hand touching as both reach to brush it off; lantern glow, quiet and bittersweet",
+    "c5_snow": "a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) slowly straightening the collar of a red wedding robe she has draped over the hero, her hand resting on his chest, snowflakes on her lashes; beside them a line of writing traced in the snow on the step; lantern glow, quiet and bittersweet",
     "c7_stars": "a grassy hilltop above an army camp on a summer night under a sky full of low stars: Cai Wenji (adult, in white) laughing with her fist held out mid rock-paper-scissors, the short-haired hero pretending to lose; gentle and warm",
     "c4_zhujun": "Sun Jian's camp in the ruins of Luoyang: the veteran general Zhu Jun (grey-bearded, straight-backed, hearty laugh) slapping the huge Sun Jian on the shoulder, Sun Jian bowing formally for once; Sun Ce behind them red-faced trying not to laugh",
     "c6_yizu": "the palace steps of Chang'an the day after Dong Zhuo's death: soldiers with chains coming for Dong Bai (adult) kneeling numbly; the hero standing in front of her with his blade half drawn; the white-haired Huangfu Song stepping to his side; Wang Yun smiling coldly; high above, the small boy emperor clutching a pillar",
