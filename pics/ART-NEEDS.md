@@ -84,6 +84,7 @@
 | 状态 | key | 用在 |
 |---|---|---|
 | ✅ 正式 | `tangji` | 事件「落难贵人」 |
+| ⬜ 缺 | `baosanniang` | 事件「比武招亲」 |
 | ✅ 正式 | `zumao` | 剧情立绘 |
 | ✅ 正式 | `sunjian` | 剧情立绘 |
 | ✅ 正式 | `dongbai` | 剧情立绘 |
@@ -123,6 +124,7 @@
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ⬜ 缺 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `guosi` | 郭汜（郭汜） |
 | ⬜ 缺 | `huaxiong` | 汜水关·华雄（华雄） |
 | ⬜ 缺 | `feixiong` | 飞熊军（飞熊军） |
@@ -165,6 +167,7 @@
 | ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ⬜ 缺 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `c3_shanfei` | 独眼匪首（独眼匪首） |
 | ⬜ 缺 | `c3_qiaorui` | 城外·桥蕤（桥蕤） |
 | ⬜ 缺 | `c3_chenlan` | 夜袭·陈兰（陈兰） |
@@ -198,6 +201,7 @@
 | ⬜ 缺 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ⬜ 缺 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `c4_guosi` | 劫粮·郭汜（郭汜） |
 | ⬜ 缺 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
 
@@ -269,6 +273,7 @@
 | ⬜ 缺 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ⬜ 缺 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `c6_shaoka` | 清明门·哨卡（司徒哨卡） |
 | ⬜ 缺 | `c6_zhuibing` | 司徒府追兵（司徒府追兵） |
 | ⬜ 缺 | `c6_fanchou` | 山道·樊稠（樊稠） |
@@ -308,7 +313,6 @@
 | ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
 | ⬜ 缺 | `lvlingqi` | 吕玲绮·温侯之女（SSR） |
 | ⬜ 缺 | `mayunlu` | 马云騄（SR） |
-| ⬜ 缺 | `baosanniang` | 鲍三娘（SR） |
 | ⬜ 缺 | `wangyi` | 王异（SR） |
 | ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
 | ⬜ 缺 | `caifuren` | 蔡夫人·荆州（SR） |
