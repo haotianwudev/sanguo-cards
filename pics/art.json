@@ -949,6 +949,10 @@
     "c2_heqin": {
       "src": "source/cg/c2_heqin.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_zumao_saved": {
+      "src": "source/cg/c2_zumao_saved.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
