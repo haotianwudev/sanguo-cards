@@ -953,6 +953,10 @@
     "c2_zumao_saved": {
       "src": "source/cg/c2_zumao_saved.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_counter": {
+      "src": "source/cg/c2_counter.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
