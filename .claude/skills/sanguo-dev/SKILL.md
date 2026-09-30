@@ -248,7 +248,7 @@ her palace robes for a light 留仙裙 and learns to 「放假」; 刘表 sends 
 刘表 sues for peace through 蒯越, the court makes 刘表 荆州牧 and the hero **镇南将军·督荆襄军事** in 襄阳; 周瑜 warns it's a 鸿门宴, 貂蝉 insists on
 coming to see the 汉江; 蔡夫人 (claims 蔡文姬 as kin via a genealogy, showers 貂蝉 with pearls — 貂蝉: her eyes never smile) and her brother
 蔡瑁 (水军都督, wants 貂蝉) plot a poisoned banquet at the 万山水阁. No 荀攸 in 第五章. Split on 「结局三 · 恨海」 + 「贾诩：入队」: **without both** (a 庆功 night, 貂蝉 pours her first cup for him) 千斤闸, 50 crossbows, 鸩羽落红 in a 金兽爵 — 貂蝉 drinks it for the hero, stabs 蔡瑁's eye with her hairpin, knocks over the brazier;
-she dies in his arms (「这回，换妾身护了你一次」), he has the 蔡 clan wiped out (董白: 「你越来越像我爷爷了」) and is stabbed by a 蔡 retainer
+she dies in his arms (「这回，换妾身护了你一次」), he has 蔡氏, 蒯家 and 刘表 all wiped out (一个不留; 蒯越: 「蒯家没有碰过那杯酒」) (董白: 「你越来越像我爷爷了」) and is stabbed by a 蔡 retainer
 by the 汉江 → **结局三 · 恨海** (restrained). **With both**: the hero dreams it all and runs barefoot to 贾诩, who names the poison (鸩羽落红) at once;
 贾诩 plans 联蒯灭蔡, 蒯越 turns, the hero hides
 everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls; 貂蝉, who knows nothing of his plan, reads the trap, takes his jokes for
