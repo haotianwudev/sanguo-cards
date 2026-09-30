@@ -60,7 +60,7 @@
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
 | ✅ 正式 | `yahuan` | 丫鬟 |
 | ⬜ 缺 | `chuniang` | 厨娘 |
-| ⬜ 缺 | `xiuniang` | 绣娘 |
+| ✅ 正式 | `xiuniang` | 绣娘 |
 | ⬜ 缺 | `huansha` | 浣纱女 |
 | ⬜ 缺 | `caisang` | 采桑女 |
 

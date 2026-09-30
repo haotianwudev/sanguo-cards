@@ -652,18 +652,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `xiuniang` ⬜ 缺
-
-```
-A vertical character portrait of an embroiderer (绣娘) who mends armor and stitches banners, an adult woman.
-Appearance: Graceful adult woman in her 20s with focused eyes and a needle held in her lips.
-Armor & Clothing: Neat blue dress, a pincushion on her wrist.
-Weapon: Stitching a large red banner with the character 孙 across her lap.
-Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `huansha` ⬜ 缺
 
 ```
