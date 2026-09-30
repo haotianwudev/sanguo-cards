@@ -854,6 +854,10 @@
     "dagu": {
       "src": "source/battles/dagu.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "xiliang_youqi": {
+      "src": "source/battles/xiliang_youqi.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",

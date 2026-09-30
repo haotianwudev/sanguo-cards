@@ -23,44 +23,43 @@
 8. `zhongyao` — 钟繇（立绘）
 9. `xuhuang` — 徐晃（换掉占位）（立绘）
 10. `huangzhong` — 黄忠（换掉占位，四十出头的军汉，不是老将）（立绘）
-11. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
-12. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
-13. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
-14. `e_tangji` — 破庙救唐姬（剧情 CG）
-15. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-16. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
-17. `yuanshu` — 袁术（立绘）
-18. `jiling` — 纪灵（立绘）
-19. `leibo` — 雷薄（立绘）
-20. `chenlan` — 陈兰（立绘）
-21. `qiaorui` — 桥蕤（立绘）
-22. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
-23. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
-24. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
-25. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
-26. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
-27. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
-28. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-29. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
-30. `c3_supply` — 饥民与军粮（剧情 CG）
-31. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-32. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
-33. `c3_warn` — 劝阻孙坚（剧情 CG）
-34. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-35. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-36. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-37. `changan` — 第三章·长安地图底图（地图）
-38. `dongui` — 第四章·挟天子地图底图（地图）
-39. `yuxi` — 第三章·传国玉玺地图底图（地图）
-40. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-41. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-42. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-43. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-44. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-45. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-46. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-47. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
-48. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+11. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
+12. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
+13. `e_tangji` — 破庙救唐姬（剧情 CG）
+14. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+15. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+16. `yuanshu` — 袁术（立绘）
+17. `jiling` — 纪灵（立绘）
+18. `leibo` — 雷薄（立绘）
+19. `chenlan` — 陈兰（立绘）
+20. `qiaorui` — 桥蕤（立绘）
+21. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
+22. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
+23. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
+24. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
+25. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
+26. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
+27. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+28. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
+29. `c3_supply` — 饥民与军粮（剧情 CG）
+30. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+31. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
+32. `c3_warn` — 劝阻孙坚（剧情 CG）
+33. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+34. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+35. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
+36. `changan` — 第三章·长安地图底图（地图）
+37. `dongui` — 第四章·挟天子地图底图（地图）
+38. `yuxi` — 第三章·传国玉玺地图底图（地图）
+39. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+40. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+41. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+42. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+43. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+44. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+45. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+46. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
+47. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
 
 交图规则：
 
@@ -643,86 +642,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
-### `c2_bubing`
-
-```
-A horizontal battle scene illustration: a dusty Central Plains highway: a squad of Dong Zhuo's foot soldiers in black-and-red with long ji forming a line across the road.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c2_gongqi`
-
-```
-A horizontal battle scene illustration: a side path between wheat fields: Xiliang horse archers wheeling around and loosing arrows, fire arrows streaking.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c3_xunluo`
-
-```
-A horizontal battle scene illustration: outside a walled town in Nanyang: a Yuan army patrol with spears under a 袁 banner blocking a country road.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c3_liukou`
-
-```
-A horizontal battle scene illustration: a burned-out village: ragged bandits with sabers and stolen sacks of grain charging out from behind broken walls.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c3_gongshou`
-
-```
-A horizontal battle scene illustration: a fork in a road lined with trees: Yuan archers kneeling behind a low earth bank, bows drawn, a 袁 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c4_yaliang`
-
-```
-A horizontal battle scene illustration: a mountain road: Xiliang soldiers on horseback guarding grain carts stamped 董, turning to fight.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c5_xiangfu`
-
-```
-A horizontal battle scene illustration: a red-lantern courtyard inside the chancellor's mansion at night: black-armored mansion guards with ji closing ranks between pillars.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c6_qianfeng`
-
-```
-A horizontal battle scene illustration: the road to Tong Pass at dusk: Li Jue's Xiliang vanguard cavalry charging out of a dust cloud under a 李 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c7_yingbing`
-
-```
-A horizontal battle scene illustration: a summer road in Nanyang: Yuan army camp soldiers behind a shield line of big rectangular shields, spears levelled, a 袁 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c7_gongnu`
-
-```
-A horizontal battle scene illustration: the edge of a wheat field in Nanyang: Yuan crossbowmen rising from the tall wheat and shooting, fire arrows in the air.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `c4_gaoshun`
 
 ```
@@ -911,14 +830,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: a rain-soaked valley mouth: Yuan Shu's golden-roofed carriage behind rows of archers and a huge 袁 banner, overwhelming numbers.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `xiliang_youqi`
-
-```
-A horizontal battle scene illustration: Xiliang light cavalry galloping down a dusty Central Plains road.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
