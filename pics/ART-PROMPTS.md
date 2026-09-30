@@ -71,7 +71,7 @@
 56. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
 57. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
 58. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-59. `c8_grapes` — 水阁·揽入怀中剥葡萄（破局线的关键一幕）（剧情 CG）
+59. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
 60. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
 61. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
 62. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
@@ -1285,7 +1285,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c8_grapes`
 
 ```
-A horizontal story event illustration: a lamplit banquet pavilion over the Han river: the short-haired hero casually holding Diaochan (adult, blushing, peeling a grape) in one arm and pushing a gold beast-shaped wine cup away with the other hand; across the table the burly Cai Mao going green in the face; the calm scholar Kuai Yue watching; comic and tense.
+A horizontal story event illustration: a lamplit banquet pavilion over the Han river: Diaochan (adult, pale-jade skirt) had risen and started toward the burly Cai Mao, one hand already at the hairpin in her hair, ready to drink the poison for the hero — and the short-haired hero has caught her by the waist and pulled her back into his arms, his other hand sweeping a gold beast-shaped wine cup away across the table; she looks up at him, startled; across the table Cai Mao going green in the face; tense and tender.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
