@@ -511,10 +511,10 @@ CGS = {
     "c3_feng": "a quiet veranda in Luyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden inside",
     "c2_heqin": "a tense army tent: Sun Jian kicking over a marriage-proposal gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly; outside the tent flap a carriage curtain slightly lifted",
     "c2_mixin": "night after a battle: Zhou Yu reading a captured secret letter by torchlight, Sun Jian crushing its edge in his fist, far on the horizon the sky over Luoyang faintly red",
-    "c3_leave": "leaving the ruins of burning Luoyang: Sun Jian riding in front hugging a brocade box; Lady Wu (adult) leaning from a carriage to hand bread to a child; refugees only as distant silhouettes",
+    "c3_leave": "leaving the ruins of burning Luoyang: Sun Jian riding in front hugging a brocade box; Lady Wu (adult) leaning from a carriage to hand bread to a child; a long column of refugees trudging behind them",
     "c3_wenji": "on a muddy road after a fight: Cai Wenji, an adult woman in a white robe, kneeling to pick up her guqin with a broken string, Dong Bai with her twin hammers looking away embarrassed, Lady Wu putting a cloak on Cai Wenji's shoulders",
     "c3_supply": "night in a hungry army camp: Sun Jian alone by a campfire opening and closing a brocade box, Zhou Yu counting on his fingers, Sun Ce hiding his rice bowl behind his back",
-    "c3_slip": "a lively tavern: a tipsy Sun Ce slamming the table and bragging, Zhou Yu lunging to cover his mouth, the hero tossing coins on the table; the other drinkers only as blurred shapes",
+    "c3_slip": "a lively tavern full of drinkers: a tipsy Sun Ce slamming the table and bragging, Zhou Yu lunging to cover his mouth, the hero tossing coins on the table; at the next table soldiers in Yuan livery freezing mid-bite",
     "c3_entrust": "lamplit room at night: Sun Jian placing the brocade box with the jade seal into Lady Wu's hands, the hero standing at the doorway, Sun Jian gruffly avoiding his eyes",
     "c3_warn": "the night before the campaign: the hero earnestly pleading with Sun Jian, who laughs and claps him hard on the shoulder, a war banner and armor stand behind them",
     "c3_raid": "a rainy night at a courtyard gate lit by torches: the grey-bearded general Chen Lan with a long spear under a 袁 banner; the short-haired hero barring the way, Lady Wu (adult) behind him clutching a brocade box",
@@ -611,7 +611,7 @@ EVENTS = {
     "zuoci": "a white-haired old Taoist grinning with two front teeth, sitting on a boulder with a bamboo staff, purple smoke curling from a gourd in his hand",
     "chest": "a rusty iron chest half-buried by the roadside, carved with four small characters 非礼勿开",
     "hero": "a burly man in a roadside tavern smashing a table with one fist, wine cups flying, drinkers scattering",
-    "refugees": "an old man collapsed on a dusty road and a mother holding a child out toward the viewer, other refugees only as distant silhouettes",
+    "refugees": "a column of ragged refugees on a dusty road, an old man collapsed, a mother holding a child out toward the viewer",
     "washer": "a cheerful adult woman washing clothes at a mountain stream, sleeves rolled up, laughing, a basket of cloth beside her",
     "dice": "river bandits gambling with dice on a broken boat by the river, waving the viewer over",
     "fruit": "a tree heavy with glossy red fruit by an empty road, Zhou Yu raising a warning finger",
@@ -624,9 +624,9 @@ EVENTS = {
     "smith": "a roadside smithy with a roaring forge, a bare-chested old blacksmith hammering a glowing blade",
     "tomb": "a half-collapsed ancient tomb in a mountain hollow, cold wind from the entrance, Sun Ce stepping in eagerly while Zhou Yu checks his ledger",
     "guanlu": "a young diviner at a fortune-telling stall under a tree, sign reading 管辂神算",
-    "xushao": "the famous critic Xu Shao sitting under a tree by the roadside, one hopeful man bowing before him waiting for his verdict",
+    "xushao": "the famous critic Xu Shao holding court under a tree by the roadside, a crowd of hopeful men waiting for his one-line verdicts",
     "qiao": "two beautiful adult sisters washing clothes by a river, one gentle and one lively, Sun Ce and Zhou Yu frozen mid-step staring",
-    "drink": "a tavern drinking contest: Sun Ce slamming a wine jar on the table, a couple of onlookers cheering in the background",
+    "drink": "a tavern drinking contest: Sun Ce slamming a wine jar on the table, a crowd of drinkers circling and cheering",
     "deserters": "ragged deserters without armour crouching by the road gnawing bark, shrinking back in fear",
     "storm": "a sudden thunderstorm turning a road into mud, the army struggling through the rain",
     "horse": "a horse dealer holding the reins of two horses — a white-faced one with an ominous look and a fiery red one",
@@ -831,8 +831,8 @@ def battle_prompt(scene: str) -> str:
 def cg_prompt(scene: str) -> str:
     return (f"A horizontal story event illustration: {scene}.{NL}"
             f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third "
-            f"less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant "
-            f"silhouettes).{NL}"
+            f"less busy (dialogue text sits there). At most four named characters in focus; unnamed background people "
+            f"(soldiers, crowds) are fine.{NL}"
             f"Style: {STYLE}, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.{NL}"
             f"(When the hero appears — {HERO}.)" + (f"{NL}({DONGBAI}.)" if "Dong Bai" in scene else ""))
 
