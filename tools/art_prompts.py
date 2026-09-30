@@ -768,7 +768,7 @@ NEXT_RULES = [
     "女性角色一律画成成年人；董白不写年龄、不画成萝莉。",
     "卡牌立绘必须带背景：背景为符合人物身份与阵营的古风场景（军营、要塞、江岸、山林、宫室等，具自然景深与环境光影，不再使用纯白/摄影棚素底）。人物半身居中，面部在上方三分之一。",
     "文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。",
-    "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；照新的战斗画面构图：敌人大、居中、在画面中上部，左上、右上两角别放重要东西（血条和战斗记录在那里），下面 45% 画简单的地面（我方卡牌半透明地压在上面）。",
+    "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部，下方 30% 为干净地面。",
     "宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。",
     "立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
     "**不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。",
@@ -823,8 +823,7 @@ def portrait_prompt(p: tuple) -> str:
 def battle_prompt(scene: str) -> str:
     return (f"A horizontal battle scene illustration: {scene}.{NL}"
             f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the "
-            f"upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm "
-            f"(HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).{NL}"
+            f"upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.{NL}"
             f"Style: {STYLE}, dramatic battle lighting, like a Rance X battle CG; no text, no UI.")
 
 
