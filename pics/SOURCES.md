@@ -23,7 +23,7 @@
 | `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
 | `diaochan` | source/public-domain/diaochan.jpg | [链接](https://commons.wikimedia.org/wiki/File:Diaochan_Qing_Dynasty_Illustration.jpg) | Public domain | Unknown author |
 | `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |
-| `guanyu` | source/public-domain/guanyu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Guanyu-1.jpg) | Public domain | UnknownUnknown , uploaded by Tiangong83 on <a class="external t |
+| `guanyu` | source/generals/guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangzhong` | source/public-domain/huangzhong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Huang_Zhong_Portrait.jpg) | Public domain | — |
 | `jianyong` | source/public-domain/jianyong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg) | CC BY-SA 4.0 | Morio |
 | `liaohua` | source/public-domain/liaohua.jpg | [链接](https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg) | CC BY-SA 3.0 | SamSpade21 |

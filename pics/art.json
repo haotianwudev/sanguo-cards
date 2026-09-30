@@ -183,16 +183,13 @@
       "artist": "Unknown authorUnknown author"
     },
     "guanyu": {
-      "src": "source/public-domain/guanyu.jpg",
+      "src": "source/generals/guanyu.jpg",
       "face": [
-        0.5,
-        0.35
+        0.51,
+        0.27
       ],
-      "head": 0.33,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Guanyu-1.jpg",
-      "license": "Public domain",
-      "artist": "UnknownUnknown , uploaded by Tiangong83 on <a class=\"external t"
+      "head": 0.18,
+      "license": "用户提供（Gemini 生成）"
     },
     "huangzhong": {
       "src": "source/public-domain/huangzhong.jpg",

@@ -19,7 +19,7 @@
   "dianwei": {"file": "dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true},
   "diaochan": {"file": "diaochan.jpg", "face": [0.55, 0.22], "head": 0.07, "placeholder": true},
   "ganning": {"file": "ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true},
-  "guanyu": {"file": "guanyu.jpg", "face": [0.5, 0.35], "head": 0.33, "placeholder": true},
+  "guanyu": {"file": "guanyu.jpg", "face": [0.51, 0.27], "head": 0.18},
   "huangzhong": {"file": "huangzhong.jpg", "face": [0.34, 0.13], "head": 0.07, "placeholder": true},
   "jianyong": {"file": "jianyong.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true},
   "liaohua": {"file": "liaohua.jpg", "face": [0.45, 0.25], "head": 0.1, "placeholder": true},

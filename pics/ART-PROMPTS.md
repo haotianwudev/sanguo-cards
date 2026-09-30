@@ -14,44 +14,43 @@
 - `inf_n` — 官军刀兵：盾牌上的鹰和回纹边是古希腊重装步兵盾的样式——换成汉军的盾（长方形或圆盾，黑红漆面，饕餮 / 云纹或素面），其他不变
 
 1. `c2_sanying` — 虎牢关：三英战吕布（打斗 + 一排看呆的人，见提示词）（剧情 CG）
-5. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
-6. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
-7. `feixiong` — 飞熊军（黑甲重骑阵列）（战斗 CG）
-8. `liru` — 李儒伏兵（峡谷险道两侧峭壁伏兵）（战斗 CG）
-9. `lijue` — 洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）（战斗 CG）
-10. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
-11. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
-12. `c2_zumao` — 阵前：华雄追砍祖茂，孙策挺枪急救（剧情 CG）
-15. `c2_raid` — 吕布劫营：夜袭中军大寨，孙坚单人挡寨门（剧情 CG）
-16. `c2_triple` — 联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩（剧情 CG）
-17. `c2_jianhua` — 孙坚斩华雄（孙坚虎皮斗篷挥刀斩敌）（剧情 CG）
-19. `c2_yuxi` — 洛阳枯井得玉玺（孙坚捧起微光玉玺）（剧情 CG）
-21. `e_tangji` — 破庙救唐姬（剧情 CG）
-22. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-23. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
-24. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
-25. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
-26. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
-27. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
-28. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
-29. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
-30. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-31. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
-32. `c3_supply` — 饥民与军粮（剧情 CG）
-33. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-34. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
-35. `c3_warn` — 劝阻孙坚（剧情 CG）
-36. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-37. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-38. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-39. `liubei` — 刘备（换掉占位）（立绘）
-40. `guanyu` — 关羽（换掉占位）（立绘）
-41. `caiwenji` — 蔡文姬（立绘）
-42. `yuanshu` — 袁术（立绘）
-43. `jiling` — 纪灵（立绘）
-44. `leibo` — 雷薄（立绘）
-45. `chenlan` — 陈兰（立绘）
-46. `qiaorui` — 桥蕤（立绘）
+2. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
+3. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
+4. `feixiong` — 飞熊军（黑甲重骑阵列）（战斗 CG）
+5. `liru` — 李儒伏兵（峡谷险道两侧峭壁伏兵）（战斗 CG）
+6. `lijue` — 洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）（战斗 CG）
+7. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
+8. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
+9. `c2_zumao` — 阵前：华雄追砍祖茂，孙策挺枪急救（剧情 CG）
+10. `c2_raid` — 吕布劫营：夜袭中军大寨，孙坚单人挡寨门（剧情 CG）
+11. `c2_triple` — 联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩（剧情 CG）
+12. `c2_jianhua` — 孙坚斩华雄（孙坚虎皮斗篷挥刀斩敌）（剧情 CG）
+13. `c2_yuxi` — 洛阳枯井得玉玺（孙坚捧起微光玉玺）（剧情 CG）
+14. `e_tangji` — 破庙救唐姬（剧情 CG）
+15. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+16. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+17. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
+18. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
+19. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
+20. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
+21. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
+22. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
+23. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+24. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
+25. `c3_supply` — 饥民与军粮（剧情 CG）
+26. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+27. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
+28. `c3_warn` — 劝阻孙坚（剧情 CG）
+29. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+30. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+31. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
+32. `liubei` — 刘备（换掉占位）（立绘）
+33. `caiwenji` — 蔡文姬（立绘）
+34. `yuanshu` — 袁术（立绘）
+35. `jiling` — 纪灵（立绘）
+36. `leibo` — 雷薄（立绘）
+37. `chenlan` — 陈兰（立绘）
+38. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -700,18 +699,6 @@ Appearance: Gentle-faced man in his early 30s with notably large earlobes and lo
 Armor & Clothing: Modest green-and-cream Han scholar-general robe over light leather armor, a simple topknot with a cloth band.
 Weapon: Holding his twin swords (双股剑) a little clumsily in both hands, as if not quite sure how to use them.
 Background: A modest Han military garrison headquarters with a tactical map table, candle lanterns, rolled bamboo scrolls, and straw partitions.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `guanyu` 🟡 换掉占位
-
-```
-A vertical character portrait of Guan Yu (关羽), the dignified god of war of the Three Kingdoms era.
-Appearance: Tall imposing man in his early 30s with a deep red face, phoenix eyes half-closed in calm pride, a magnificent long flowing black beard reaching his chest.
-Armor & Clothing: Green war robe over Han dynasty lamellar armor, green headscarf, a heroic cape.
-Weapon: Holding the Green Dragon Crescent Blade (青龙偃月刀 - a long glaive with a dragon-headed crescent blade) upright beside him.
-Background: A solemn military command post with green banners, heavy weapon stands, and dramatic evening clouds in the sky.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -1932,6 +1919,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
 
+## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）
 
 ## 词缀徽记（128×128 透明 PNG，放 `godot/data/art/affixes/<key>.png`）
 
