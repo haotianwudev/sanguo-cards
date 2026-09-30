@@ -377,6 +377,15 @@
       "license": "Public domain",
       "artist": "Unknown authorUnknown author"
     },
+    "xurong": {
+      "src": "source/generals/xurong.jpg",
+      "face": [
+        0.55,
+        0.23
+      ],
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
+    },
     "zhangjiao": {
       "src": "source/public-domain/zhangjiao.jpg",
       "face": [

@@ -159,7 +159,7 @@
 | ✅ 正式 | `huaxiong` | 华雄 |
 | ✅ 正式 | `feixiong_bing` | 飞熊军 |
 | ✅ 正式 | `liru` | 李儒 |
-| ⬜ 缺 | `xurong` | 徐荣 |
+| ✅ 正式 | `xurong` | 徐荣 |
 
 能拿到的卡
 

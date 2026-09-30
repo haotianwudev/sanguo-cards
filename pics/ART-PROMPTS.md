@@ -128,18 +128,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `xurong` ⬜ 缺
-
-```
-A vertical character portrait of Xu Rong (徐荣), Dong Zhuo's veteran general who beat Sun Jian at Liangdong.
-Appearance: Weathered, calm general in his 40s with a grey-streaked beard and a hard, measuring gaze.
-Armor & Clothing: Well-worn Xiliang lamellar armor with a dark red cloak.
-Weapon: A ring-pommel saber at his side, one hand pointing out an ambush.
-Background: a valley outside the Dagu pass with hidden troops on the slopes.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `zhurong` ⬜ 缺
 
 ```

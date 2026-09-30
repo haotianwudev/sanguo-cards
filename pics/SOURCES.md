@@ -41,6 +41,7 @@
 | `taishici` | source/public-domain/taishici.jpg | [链接](https://commons.wikimedia.org/wiki/File:Taishi_Ci_Qing_illustration.jpg) | Public domain | Unknown author |
 | `xuchu` | source/public-domain/xuchu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Chu_Qing_illustration.jpg) | Public domain | Unknown author |
 | `xuhuang` | source/public-domain/xuhuang.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Huang_Portrait.jpg) | Public domain | Unknown authorUnknown author |
+| `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangjiao` | source/public-domain/zhangjiao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg) | Public domain | Unknown author |
 | `zhangliao` | source/public-domain/zhangliao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg) | Public domain | — |
 | `zhaoyun` | source/public-domain/zhaoyun.jpg | [链接](https://commons.wikimedia.org/wiki/File:ZhaoYun.jpg) | Public domain | Unknown authorUnknown author |
