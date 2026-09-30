@@ -45,7 +45,12 @@ func test_chest_shows_different_soldiers_and_only_the_pick_is_kept() -> void:
 
 func test_chest_chance_follows_overkill() -> void:
 	var s := SaveData.create()
-	check(not s.chest_after_battle(rng(0), 0.5, false).is_empty(), "50% overkill guarantees a chest")
+	check_eq(s.chest_chance(0.0, false), 0.5, "50% with no overkill")
+	check_eq(s.chest_chance(0.5, false), 0.75, "half of the overkill is added")
+	check_eq(s.chest_chance(1.0, false), 1.0, "100% overkill guarantees a chest")
+	check_eq(s.chest_chance(0.0, true), 1.0, "bosses and elites always drop")
+	check_eq(s.chest_chance(0.0, false, 0.25), 0.75, "a 宝物's chest bonus counts in full")
+	check(not s.chest_after_battle(rng(0), 1.0, false).is_empty(), "100% overkill: a chest")
 	var drops := 0
 	for i in 400:
 		if not s.chest_after_battle(rng(i), 0.0, false).is_empty():

@@ -550,11 +550,17 @@ func _finish() -> void:
 			save.carry_uses.merge(out[2], true)
 		await _banner("胜　利", Kit.c("gold"))
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
-		var chest := save.chest_after_battle(Game.rng, b.overkill + float(b.mods.get("chest", 0.0)), boss, q.get("soldier_pool", []),
-			b.enemy["data"]["card"])
-		if not chest.is_empty():
+		var bonus := float(b.mods.get("chest", 0.0))
+		var chance := save.chest_chance(b.overkill, boss, bonus)
+		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, q.get("soldier_pool", []),
+			b.enemy["data"]["card"], bonus)
+		var odds := "首领必掉" if boss else "溢出伤害 %d%% · 宝箱几率 %d%%" % [int(round(b.overkill * 100)), int(round(chance * 100))]
+		if chest.is_empty():
+			await _banner("%s —— 这次没有宝箱" % odds, Kit.c("gray"))
+			await get_tree().create_timer(0.5).timeout
+		else:
 			var o := PickOverlay.new()
-			o.title = "宝箱！（过量伤害 %d%%）选一张卡带走" % int(round(b.overkill * 100))
+			o.title = "宝箱！（%s）选一张卡带走" % odds
 			o.chest = "grand" if boss else "normal"
 			o.card_ids = chest.map(func(c): return c["id"])
 			o.counts = chest.map(func(c): return save.copies(c["id"]))
