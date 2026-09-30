@@ -423,6 +423,18 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "c2_bingzhou": "a burning army camp at night: Bingzhou horsemen with torches jumping the palisade, tents catching fire",
+    "c2_zonghuo": "the burning streets of Luoyang: Xiliang soldiers with torches setting houses alight, embers everywhere",
+    "c3_mitan": "a tavern back alley at night: Yuan agents in plain clothes drawing short knives from their sleeves",
+    "c3_qibing": "a rainy night road: Yuan cavalry with spears charging out of the dark, rain slanting in the torchlight",
+    "c4_kuibing": "a narrow valley: ragged Xiliang deserters on tired horses turning to fight like cornered animals",
+    "c4_liumin": "the ruins of Luoyang: a desperate mob of starving refugees with hoes and sticks surging over rubble toward the grain carts",
+    "c5_zuibing": "a Chang'an street market: drunken Xiliang soldiers smashing a wine shop, a jar flying through the air",
+    "c5_qinbing": "a lotus garden at night: Lü Bu's Bingzhou guards with ji searching between the pavilions with lanterns",
+    "c6_fubing": "a long Chang'an street before dawn: Wang Yun's house troops in a line with ji and crossbows",
+    "c6_soubu": "outside a ruined shrine in falling snow: search troops with torches and short blades closing in",
+    "c6_xianzhen": "the square before the Xuanping Gate in snow: black-armored Trap-Breaking Camp infantry behind tall shields",
+    "c6_luanbing": "outside a palace side gate at night: rioting soldiers looting in the chaos of the siege, fires in the background",
     "c2_bubing": "a dusty Central Plains highway: a squad of Dong Zhuo's foot soldiers in black-and-red with long ji forming a line across the road",
     "c2_gongqi": "a side path between wheat fields: Xiliang horse archers wheeling around and loosing arrows, fire arrows streaking",
     "c3_xunluo": "outside a walled town in Nanyang: a Yuan army patrol with spears under a 袁 banner blocking a country road",
