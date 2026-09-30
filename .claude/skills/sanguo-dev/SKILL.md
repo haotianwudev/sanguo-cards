@@ -43,7 +43,7 @@ timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad
 ```
 
 第四章：`--demo=ch6`（二周目，围府线）/ `--demo=ch6b`（三周目，报信线），加 `--at=<square id>` 直接跳到那一格截图。
-第五章：`--demo=ch8`（恨海线）/ `--demo=ch8b`（通关恨海后的破局线），同样可加 `--at=`。
+第五章：`--demo=ch8`（恨海线）/ `--demo=ch8b`（通关恨海、第四章收了贾诩后的破局线），同样可加 `--at=`。
 `tests/test_routes.gd` walks chapters 3–5 on every 周目 route (squares, records, endings, cards, which chapter follows) and checks
 that no two open squares ever share a spot; keep it green when you add squares.
 
@@ -224,6 +224,9 @@ glance at 董白); the user will write where that goes. 貂蝉 (adult): clever, 
 always seems to be flirting with someone — whether she means it with the hero stays unclear; 董白 doesn't like how
 she looks at him. 吕布 stays a brute and selfish: he rescues nobody on purpose (「别以为我是来
 救你的」), kills 董卓 over his own pupil's plea, grabs 貂蝉 and shouts for the credit.
+**贾诩** (毒士, best at spotting poison plots): at 董卓's 接风宴 in 长安 he sits in a corner sniffing every cup (the hero knows him from 三国杀);
+after 结局三, 第四章's warned route offers an optional square after 北掖门 where he waits (he gave 李傕 the idea to attack 长安, now bets on
+the emperor — 「顺便押你」) and joins (「贾诩：入队」); without him 第五章 ends in 恨海 again.
 第四章 · 挟天子 (quest `dongui`, one map; requires 「长安：吕布杀了董卓」): 王允 rules — the hero stops the 夷三族 of 董卓's house
 (the boy emperor backs him); asks 王允 to pardon the 西凉 army and bring 孙坚 into 长安 — refused; 论功: 吕布 温侯, 孙坚 吴侯,
 皇甫嵩 征西将军, and the emperor insists on the hero over 王允: **富春亭侯**; recruits 荀攸 (天牢: reads 王允 at once; his uncle 荀彧 is six years younger) and 钟繇 (尚书台: the emperor had him draw the escape route; 钟繇's map and 荀攸's calls run the escape, 荀攸 goes to 南阳, 钟繇 stays by the emperor);
@@ -242,10 +245,10 @@ on the gate, 吕布 goes straight to 张杨 in 河内 (his old 并州 friend), �
 her palace robes for a light 留仙裙 and learns to 「放假」; 刘表 sends 黄祖 across the 汉水 (淯水 battles, 黄祖 mid-map boss, 休整);
 刘表 sues for peace through 蒯越, the court makes 刘表 荆州牧 and the hero **镇南将军·督荆襄军事** in 襄阳; 周瑜 warns it's a 鸿门宴, 貂蝉 insists on
 coming to see the 汉江; 蔡夫人 (claims 蔡文姬 as kin via a genealogy, showers 貂蝉 with pearls — 貂蝉: her eyes never smile) and her brother
-蔡瑁 (水军都督, wants 貂蝉) plot a poisoned banquet at the 万山水阁. Split at x16 on the flag 「结局三 · 恨海」: **first time** 孙坚 recalls 荀攸 to
-洛阳; 千斤闸, 50 crossbows, 鸩羽落红 in a 金兽爵 — 貂蝉 drinks it for the hero, stabs 蔡瑁's eye with her hairpin, knocks over the brazier;
+蔡瑁 (水军都督, wants 貂蝉) plot a poisoned banquet at the 万山水阁. 孙坚 recalls 荀攸 to 洛阳. Split on 「结局三 · 恨海」 + 「贾诩：入队」: **without both** 千斤闸, 50 crossbows, 鸩羽落红 in a 金兽爵 — 貂蝉 drinks it for the hero, stabs 蔡瑁's eye with her hairpin, knocks over the brazier;
 she dies in his arms (「这回，换妾身护了你一次」), he has the 蔡 clan wiped out (董白: 「你越来越像我爷爷了」) and is stabbed by a 蔡 retainer
-by the 汉江 → **结局三 · 恨海** (restrained). **After it**: the hero dreams it all and keeps 荀攸; 荀攸 plans 联蒯灭蔡, 蒯越 turns, the hero hides
+by the 汉江 → **结局三 · 恨海** (restrained). **With both**: the hero dreams it all and runs barefoot to 贾诩, who names the poison (鸩羽落红) at once;
+贾诩 plans 联蒯灭蔡, 蒯越 turns, the hero hides
 everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls, he pulls 貂蝉 into his arms and hands her grapes (「她喝不得烈酒，免了」), offers
 蔡瑁 half the cup, the poison burns the carpet, the crossbows turn; only the ringleaders die, 刘表 hands over the army, 蒯越 joins, the hero is
 督荆襄九郡大都督; moonlit 楼船 and hot chestnuts. (未完待续)

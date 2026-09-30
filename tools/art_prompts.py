@@ -89,6 +89,11 @@ PORTRAITS = {
         "Rich purple silks with gold embroidery, an ornate phoenix hairpin.",
         "A round silk fan half-hiding her face.",
         "a lavish Jingzhou mansion hall with a river view through carved screens"),
+    "jiaxu": ("Jia Xu (贾诩), the 'poison strategist' — a Xiliang officer who can smell a plot, and poison, in any cup",
+        "Thin, sallow man in his mid-40s with a sparse goatee, drooping lazy eyelids and a faint, unreadable half-smile; sharp eyes under the sleepy lids.",
+        "A loose, faded Xiliang officer's robe that hangs off his thin frame, a plain dark cap, a gourd wine flask at his belt.",
+        "Holding a wine cup under his nose, sniffing it before drinking; no weapon.",
+        "a dim corner of a lantern-lit banquet hall in Chang'an, the feast blurred behind him"),
     "liubiao": ("Liu Biao (刘表), Governor of Jingzhou and an imperial clansman — a scholar who talks rather than fights",
         "Pale, dignified man around 50 with a long, well-kept black beard, soft hands and a mild, hesitant smile.",
         "Wide-sleeved dark-green scholar-official robes with a black official's cap and a jade pendant at the belt.",
@@ -800,6 +805,7 @@ NEXT = [
     ("cg", "end_tonggui", "结局卡·同归（象征画，不画人，不见血）"),
 
     # 第五章 · 荆襄风云：
+    ("portrait", "jiaxu", "贾诩（毒士，第三章长安露面、第四章入队、第五章破局线核心）"),
     ("portrait", "liubiao", "刘表（荆州牧，坐谈客）"),
     ("portrait", "caimao", "蔡瑁（水军都督，骄横外戚）"),
     ("portrait", "kuaiyue", "蒯越（荆襄谋主）"),

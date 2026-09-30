@@ -5,6 +5,7 @@ extends TestCase
 const E1 := "结局一 · 玉碎"
 const E2 := "结局二 · 同归"
 const E3 := "结局三 · 恨海"
+const JX := "贾诩：入队"
 
 
 func rng(seed_value: int) -> RandomNumberGenerator:
@@ -268,7 +269,7 @@ func test_the_bundled_font_has_every_character_the_game_prints() -> void:
 	check(missing.is_empty(), "not in the font (run tools/build_fonts.py): %s" % str(missing))
 
 
-# ---- 第五章 · 荆襄风云: first time the banquet kills 貂蝉 (结局三), with that ending 荀攸 stays and it's broken ----
+# ---- 第五章 · 荆襄风云: first time the banquet kills 貂蝉 (结局三); after it, 贾诩 (met in 长安, recruited in 第四章) breaks it ----
 
 func ch5_save(flags: Array) -> SaveData:
 	var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"] + flags,
@@ -288,7 +289,7 @@ func test_chapter5_first_time_the_banquet_ends_in_ending_three() -> void:
 				"jx_jinggao", "jx_xiangyang", "jx_mimou", "jx_shuijun", "jx_yiguan", "jx_a_fuyan", "jx_a_nushou", "jx_a_caimao",
 				"jx_a_xiangxiao", "jx_a_xuexi", "jx_a_henhai"]:
 			check(p.has(sid), "恨海 route passes %s (fork %s)" % [sid, fork[0]])
-		for sid in ["jx_xunyou_stay", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_shuige", "jx_b_dianxing", "jx_b_louchuan"]:
+		for sid in ["jx_meng", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_shuige", "jx_b_dianxing", "jx_b_louchuan"]:
 			check(not p.has(sid), "恨海 route never reaches " + sid)
 		check_eq(p[-1], "jx_a_henhai")
 		check(s.run_records.has(E3), "the run reaches 结局三")
@@ -298,11 +299,12 @@ func test_chapter5_first_time_the_banquet_ends_in_ending_three() -> void:
 		check(Quests.current_quest(s) == null, "the story stops at 结局三")
 
 
-func test_chapter5_after_ending_three_xunyou_breaks_the_banquet() -> void:
-	var s := ch5_save([E3])
+func test_chapter5_after_ending_three_jiaxu_breaks_the_banquet() -> void:
+	var s := ch5_save([E3, JX])
+	s.grant_card("jiaxu")
 	var q := quest_by_id("jingxiang")
 	var p := walk(q, s, [])
-	for sid in ["jx_tianshi", "jx_xunyou_stay", "jx_jinggao", "jx_yiguan", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_dress", "jx_b_shuige",
+	for sid in ["jx_tianshi", "jx_meng", "jx_jinggao", "jx_yiguan", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_dress", "jx_b_shuige",
 			"jx_b_caimao", "jx_b_dianxing", "jx_b_louchuan"]:
 		check(p.has(sid), "破局 route passes " + sid)
 	for sid in ["jx_xunyou_go", "jx_a_fuyan", "jx_a_xiangxiao", "jx_a_henhai"]:
@@ -315,7 +317,7 @@ func test_chapter5_after_ending_three_xunyou_breaks_the_banquet() -> void:
 
 
 func test_chapter5_plays_with_real_fights_on_both_routes() -> void:
-	for flags in [[], [E3]]:
+	for flags in [[], [E3, JX]]:
 		var s := ch5_save(flags)
 		var q := quest_by_id("jingxiang")
 		var r := rng(5)
@@ -344,3 +346,21 @@ func test_chapter5_plays_with_real_fights_on_both_routes() -> void:
 			Quests.move(q, s, opts[0]["id"])
 		check_eq(s.square, "jx_b_louchuan" if flags.has(E3) else "jx_a_henhai", "reached the end of 第五章 %s" % str(flags))
 		check(fights >= 5, "fought the chapter's battles (%d)" % fights)
+
+
+func test_chapter5_without_jiaxu_the_banquet_still_ends_in_ending_three() -> void:
+	var s := ch5_save([E3])  # 结局三 reached, but 贾诩 was passed by in 第四章
+	var p := walk(quest_by_id("jingxiang"), s, [])
+	check(p.has("jx_xunyou_go") and p.has("jx_a_fuyan") and not p.has("jx_meng") and not p.has("jx_b_dingce"), "no 贾诩, no way out")
+	check_eq(p[-1], "jx_a_henhai")
+
+
+func test_after_ending_three_jiaxu_waits_in_changan_in_chapter4() -> void:
+	for flags in [[E3], []]:
+		var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"] + flags,
+				["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+		var p := walk(quest_by_id("dongui"), s, ["jiaxu4"])
+		check_eq(p.has("jiaxu4"), not flags.is_empty(), "贾诩 only after 结局三 %s" % str(flags))
+		check_eq(s.has_card("jiaxu"), not flags.is_empty())
+		check_eq(s.run_records.has(JX), not flags.is_empty())
+		check(p.has("shaoka") and p[-1] == "dongtao")

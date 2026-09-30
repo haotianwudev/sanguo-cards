@@ -329,6 +329,7 @@
     "lvbu": {"name": "吕布", "rarity": "SSR", "troop": "cavalry", "bonus": {"hp": 110, "at": 32}, "skills": ["wushuang"], "pool": false}
 ,
     "kuaiyue": {"name": "蒯越", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 45, "at": 20}, "pool": false},
+    "jiaxu": {"name": "贾诩·毒士", "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 50, "at": 26}, "pool": false},
     "jingzhou_shuijun": {"name": "荆州水军", "rarity": "N", "troop": "spear", "bonus": {"hp": 30, "at": 5}, "weight": 2},
     "huangzu": {"name": "黄祖·江夏太守", "rarity": "SR", "troop": "infantry", "bonus": {"hp": 70, "at": 21}, "pool": false},
     "caimao": {"name": "蔡瑁·水军都督", "rarity": "R", "troop": "spear", "bonus": {"hp": 50, "at": 15}, "pool": false}

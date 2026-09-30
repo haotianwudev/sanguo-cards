@@ -58,31 +58,32 @@
 43. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
 44. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
 45. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-46. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-47. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-48. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-49. `huangzu` — 黄祖（江夏太守）（立绘）
-50. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-51. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-52. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-53. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-54. `c8_grapes` — 水阁·揽入怀中剥葡萄（破局线的关键一幕）（剧情 CG）
-55. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
-56. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-57. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-58. `c8_jiayan` — 宛城家宴（剧情 CG）
-59. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-60. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-61. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-62. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-63. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-64. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-65. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-66. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-67. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-68. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-69. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-70. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+46. `jiaxu` — 贾诩（毒士，第三章长安露面、第四章入队、第五章破局线核心）（立绘）
+47. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+48. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+49. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+50. `huangzu` — 黄祖（江夏太守）（立绘）
+51. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+52. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+53. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+54. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+55. `c8_grapes` — 水阁·揽入怀中剥葡萄（破局线的关键一幕）（剧情 CG）
+56. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
+57. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+58. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+59. `c8_jiayan` — 宛城家宴（剧情 CG）
+60. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+61. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+62. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+63. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+64. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+65. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+66. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+67. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+68. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+69. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+70. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+71. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -203,6 +204,18 @@ Appearance: Beautiful adult woman in her late 20s with a cold, graceful smile an
 Armor & Clothing: Rich purple silks with gold embroidery, an ornate phoenix hairpin.
 Weapon: A round silk fan half-hiding her face.
 Background: a lavish Jingzhou mansion hall with a river view through carved screens.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `jiaxu` ⬜ 缺
+
+```
+A vertical character portrait of Jia Xu (贾诩), the 'poison strategist' — a Xiliang officer who can smell a plot, and poison, in any cup.
+Appearance: Thin, sallow man in his mid-40s with a sparse goatee, drooping lazy eyelids and a faint, unreadable half-smile; sharp eyes under the sleepy lids.
+Armor & Clothing: A loose, faded Xiliang officer's robe that hangs off his thin frame, a plain dark cap, a gourd wine flask at his belt.
+Weapon: Holding a wine cup under his nose, sniffing it before drinking; no weapon.
+Background: a dim corner of a lantern-lit banquet hall in Chang'an, the feast blurred behind him.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
