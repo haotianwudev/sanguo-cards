@@ -130,18 +130,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `lvlingqi` ⬜ 缺
-
-```
-A vertical character portrait of Lü Lingqi (吕玲绮), Lü Bu's daughter who inherited his halberd — an adult woman.
-Appearance: Cool, stoic adult woman in her early 20s with sharp eyes like her father's, long black hair in a high tail.
-Armor & Clothing: Red-and-black armor echoing Lü Bu's, a helmet with two long pheasant tail plumes held under her arm.
-Weapon: A smaller version of the Sky Piercer halberd resting on her shoulder.
-Background: a windswept northern steppe at dusk with a red horse grazing behind her.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `mayunlu` ⬜ 缺
 
 ```

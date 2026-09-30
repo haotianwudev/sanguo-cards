@@ -251,6 +251,15 @@
       "head": 0.22,
       "license": "用户提供"
     },
+    "lvlingqi": {
+      "src": "source/generals/lvlingqi.jpg",
+      "face": [
+        0.52,
+        0.23
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
+    },
     "lvmeng": {
       "src": "source/public-domain/lvmeng.jpg",
       "face": [
