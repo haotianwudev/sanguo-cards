@@ -154,18 +154,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `xianzhen` ⬜ 缺
-
-```
-A vertical character portrait of a Trap-Breaking Camp soldier (陷阵营), Gao Shun's silent elite infantry.
-Appearance: Grim, silent heavy infantryman, his face half hidden by a deep helmet.
-Armor & Clothing: Heavy black lamellar armor, plain and unadorned.
-Weapon: A tall rectangular black shield and a long ji.
-Background: a shield wall in the dark before dawn.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `zhurong` ⬜ 缺
 
 ```

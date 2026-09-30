@@ -430,7 +430,7 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `xianzhen` | 陷阵营（高顺的卡） |
+| ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
