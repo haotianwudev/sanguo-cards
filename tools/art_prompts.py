@@ -679,35 +679,38 @@ UI_ART = {
 
 
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
-# Priority: 1. 宝物 (Relics, non-lord, pure Chinese items, no disc) -> 2. 人物立绘 (Portraits) -> 不用画 CG
+# Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
-    ("cg", "c2_sanying", "虎牢关：三英战吕布（打斗 + 一排看呆的人，见提示词）"),
-    # 1. 战斗背景 CG（横版 16:9，第二章先头关键战役 -> 推进战斗）：
-    ("battle", "huaxiong", "汜水关·华雄（西凉铁骑重甲大刀，关口烽燧荒野）"),
-    ("battle", "dongbai", "董白（董卓孙女，成年女将双巨锤，被重锤砸裂碎石坑凹陷的河滩）"),
-    ("battle", "hulao_ch1", "追兵·吕布（虎牢关追击战，月夜残阳赤兔马方天戟）"),
+    # P0 · 第三章·长安、第四章露脸的立绘（对话头像全程可见）：
+    ("portrait", "dongzhuo", "董卓（第三章·长安首领）"),
+    ("portrait", "wangyun", "王允"),
+    ("portrait", "caiyong", "蔡邕"),
+    ("portrait", "xiandi", "汉献帝（十岁左右的孩子，只画孩子该有的样子）"),
+    ("portrait", "huangfusong", "皇甫嵩"),
+    ("portrait", "lvlingqi", "吕玲绮（吕布之女，成年女性）"),
+    ("portrait", "gaoshun", "高顺"),
+    ("portrait", "xunyou", "荀攸"),
+    ("portrait", "zhongyao", "钟繇"),
+    ("portrait", "xuhuang", "徐晃（换掉占位）"),
+    ("portrait", "huangzhong", "黄忠（换掉占位，四十出头的军汉，不是老将）"),
+
+    # 第二章、第三章还没画完的：
     ("battle", "xiliang_youqi", "西凉游骑（尘土飞扬的中原官道）"),
     ("battle", "guosi", "郭汜（掠夺焚烧村落的西凉军寨）"),
-    ("battle", "feixiong", "飞熊军（黑甲重骑阵列）"),
     ("battle", "liru", "李儒伏兵（峡谷险道两侧峭壁伏兵）"),
     ("battle", "lijue", "洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）"),
     ("battle", "xiliang_scout", "截粮·西凉斥候（山脚运粮辎重车队）"),
-
-    # 2. 剧情插图 CG（横版 16:9，第二章主线事件）：
     ("cg", "c2_setout", "第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）"),
-    ("cg", "c2_zumao", "阵前：华雄追砍祖茂，孙策挺枪急救"),
-    ("cg", "c2_capture", "俘虏董白：主角扛米袋一样扛董白，孙策周瑜合力扛巨锤（爆笑）"),
-    ("cg", "c2_captive", "俘虏的日子：战俘帐内董白与主角猜拳，孙策帐外酸溜溜偷看"),
-    ("cg", "c2_raid", "吕布劫营：夜袭中军大寨，孙坚单人挡寨门"),
-    ("cg", "c2_triple", "联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩"),
-    ("cg", "c2_keep", "吴夫人给董白梳头（董白嘴硬眼眶红，主角探头）"),
-    ("cg", "c2_yuxi", "洛阳枯井得玉玺（孙坚捧起微光玉玺）"),
-    ("cg", "c2_dongbai_join", "董白率西凉女骑正式加入"),
     ("cg", "e_tangji", "破庙救唐姬"),
     ("cg", "e_yazhai", "压寨夫人（胭脂虎指着主角）"),
     ("cg", "e_shengnv", "黄巾圣女（张宁施符水）"),
-
-    # 3. 第三章战斗与剧情 CG：
+    ("portrait", "caiwenji", "蔡文姬"),
+    ("portrait", "fengfuren", "冯夫人（袁术的宠姬，成年女性）"),
+    ("portrait", "yuanshu", "袁术"),
+    ("portrait", "jiling", "纪灵"),
+    ("portrait", "leibo", "雷薄"),
+    ("portrait", "chenlan", "陈兰"),
+    ("portrait", "qiaorui", "桥蕤"),
     ("battle", "c3_shanfei", "独眼匪首（第三章流民匪患）"),
     ("battle", "c3_qiaorui", "城外·桥蕤（第三章南阳城外便装伏兵）"),
     ("battle", "c3_jiling", "山口·纪灵（第三章大雨隘口决战）"),
@@ -724,25 +727,32 @@ NEXT = [
     ("cg", "c3_news", "纪灵败退与噩耗"),
     ("cg", "c3_end", "碎玺决战（吴夫人碎玉玺面袁术）"),
 
-    # 4. 武将与兵卡立绘（竖版 3:4，带场景背景）：
+    # P1 · 地图底图：
+    ("map", "changan", "第三章·长安地图底图"),
+    ("map", "dongui", "第四章·挟天子地图底图"),
+    ("map", "yuxi", "第三章·传国玉玺地图底图"),
+
+    # P2 · 首领 / 精英战斗 CG 和结局卡：
+    ("battle", "c5_dongzhuo", "未央宫前·董卓（首领）"),
+    ("battle", "c4_lvbu", "雪中宣平门·吕布（结局二前的最后一战）"),
+    ("battle", "c7_jiling", "宛城西门·纪灵（首领）"),
+    ("battle", "c6_lijue", "函谷关·李傕（首领）"),
+    ("battle", "c4_gaoshun", "蔡府后门·高顺（精英）"),
+    ("battle", "c5_niufu", "比武·牛辅（精英）"),
+    ("battle", "c5_hall", "喜堂·飞熊军（精英）"),
+    ("battle", "dagu", "大谷·徐荣（精英）"),
+    ("cg", "end_yusui", "结局卡·玉碎（象征画，不画人）"),
+    ("cg", "end_tonggui", "结局卡·同归（象征画，不画人，不见血）"),
+
+    # 兵卡：
     ("portrait", "jiangdong_gong", "江东弓手（第一章缺失兵卡）"),
     ("portrait", "liehu", "山中猎户（第一章缺失兵卡）"),
     ("portrait", "yuenv_gong", "越女弓手（第一章缺失兵卡）"),
     ("portrait", "chenwu", "陈武（R 弓兵）"),
     ("portrait", "shanyue_nu", "山越弩手"),
-    ("portrait", "liubei", "刘备（换掉占位）"),
-    ("portrait", "guanyu", "关羽（换掉占位）"),
-    ("portrait", "lvbu", "吕布（换掉占位）"),
     ("portrait", "sunjing", "孙静"),
-    ("portrait", "wujing", "吴景"),
     ("portrait", "sunben", "孙贲"),
     ("portrait", "zhuzhi", "朱治"),
-    ("portrait", "caiwenji", "蔡文姬"),
-    ("portrait", "yuanshu", "袁术"),
-    ("portrait", "jiling", "纪灵"),
-    ("portrait", "leibo", "雷薄"),
-    ("portrait", "chenlan", "陈兰"),
-    ("portrait", "qiaorui", "桥蕤"),
 ]
 # the chest sprites the chest-opening animation uses (godot/data/art/ui/chest_<key>.png)
 CHESTS = {
