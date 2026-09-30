@@ -330,6 +330,7 @@
 ,
     "kuaiyue": {"name": "蒯越", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 45, "at": 20}, "pool": false},
     "jiaxu": {"name": "贾诩·毒士", "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 50, "at": 26}, "pool": false},
+    "zhangxiu": {"name": "张绣·北地枪王", "rarity": "SR", "troop": "spear", "bonus": {"hp": 55, "at": 21}, "pool": false},
     "jingzhou_shuijun": {"name": "荆州水军", "rarity": "N", "troop": "spear", "bonus": {"hp": 30, "at": 5}, "weight": 2},
     "huangzu": {"name": "黄祖·江夏太守", "rarity": "SR", "troop": "infantry", "bonus": {"hp": 70, "at": 21}, "pool": false},
     "caimao": {"name": "蔡瑁·水军都督", "rarity": "R", "troop": "spear", "bonus": {"hp": 50, "at": 15}, "pool": false}
@@ -407,7 +408,9 @@
     "jing_shuijun": {"name": "荆州水军", "portrait": "inf_n", "hp": 15000, "at": 380, "actions": 2, "moves": [{"name": "分水刺", "power": 1.0, "weight": 3}, {"name": "跳帮", "power": 1.5, "weight": 1}, {"name": "火船", "power": 0.5, "weight": 1, "burn_party": 0.06, "turns": 2}, {"name": "擂鼓", "power": 0, "weight": 1, "rage": 0.15, "once": true}], "card": "jingzhou_shuijun"},
     "caifu_nushou": {"name": "蔡府连弩手", "portrait": "inf_n", "hp": 13000, "at": 400, "actions": 2, "moves": [{"name": "连弩", "power": 1.0, "weight": 3}, {"name": "毒箭", "power": 0.5, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "浓烟里乱射", "power": 1.3, "weight": 1, "confuse": 0.3}], "card": "jingzhou_gong"},
     "caimao_blind": {"name": "独眼蔡瑁", "portrait": "caimao", "hp": 24000, "at": 470, "actions": 3, "moves": [{"name": "乱劈", "power": 1.0, "weight": 3}, {"name": "死士护主", "power": 0, "weight": 1, "heal": 0.06}, {"name": "困兽之斗", "power": 1.6, "weight": 1}, {"name": "血红的独眼", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "caimao"},
-    "caimao": {"name": "水军都督蔡瑁", "portrait": "caimao", "hp": 22000, "at": 450, "actions": 2, "phys_resist": 0.15, "moves": [{"name": "楼船剑", "power": 1.0, "weight": 3}, {"name": "死士围攻", "power": 1.4, "weight": 1}, {"name": "鸩酒泼面", "power": 0.4, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "蔡家家法·蓄力", "power": 0, "weight": 1, "charge": "蔡家家法"}, {"name": "蔡家家法", "power": 2.8, "weight": 0}, {"name": "外戚的骄横", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "caimao"}
+    "caimao": {"name": "水军都督蔡瑁", "portrait": "caimao", "hp": 22000, "at": 450, "actions": 2, "phys_resist": 0.15, "moves": [{"name": "楼船剑", "power": 1.0, "weight": 3}, {"name": "死士围攻", "power": 1.4, "weight": 1}, {"name": "鸩酒泼面", "power": 0.4, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "蔡家家法·蓄力", "power": 0, "weight": 1, "charge": "蔡家家法"}, {"name": "蔡家家法", "power": 2.8, "weight": 0}, {"name": "外戚的骄横", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "caimao"},
+    "zhangxiu": {"name": "「北地枪王」张绣", "portrait": "zhangxiu", "hp": 13000, "at": 370, "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "七点枪花", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "百鸟朝凤·蓄力", "power": 0, "weight": 1, "charge": "百鸟朝凤"}, {"name": "百鸟朝凤", "power": 2.4, "weight": 0}, {"name": "少年气盛", "power": 0, "weight": 1, "rage": 0.2, "when": "half", "once": true}], "card": "zhangxiu"},
+    "zhangji6": {"name": "张济", "portrait": "zhangji", "hp": 16000, "at": 390, "actions": 2, "phys_resist": 0.15, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "稳守", "power": 0.5, "weight": 1, "heal": 0.06}, {"name": "突刺", "power": 1.4, "weight": 1}, {"name": "不点到为止", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "zhangji"}
   },
   "scenarios": {
     "huangjin_remnant": {"name": "黄巾余孽", "turn_limit": 6, "enemy": "huangjin_remnant"},
@@ -478,6 +481,8 @@
     "c7_leibo": {"name": "山道·雷薄", "turn_limit": 8, "enemy": "leibo"},
     "c7_chenlan": {"name": "宛城城下·陈兰", "turn_limit": 8, "enemy": "chenlan"},
     "c7_jiling": {"name": "宛城·纪灵", "turn_limit": 10, "enemy": "jiling"},
+    "c6_zhangxiu": {"name": "渭水桥·张绣", "turn_limit": 8, "enemy": "zhangxiu"},
+    "c6_zhangji": {"name": "渭水营·张济", "turn_limit": 8, "enemy": "zhangji6"},
     "jx_bubing": {"name": "淯水北岸·荆州步卒", "turn_limit": 8, "enemy": "jing_bubing"},
     "jx_gongshou": {"name": "芦苇荡·荆州弓手", "turn_limit": 8, "enemy": "jing_gongshou"},
     "jx_huangzu": {"name": "淯水·黄祖", "turn_limit": 10, "enemy": "huangzu"},

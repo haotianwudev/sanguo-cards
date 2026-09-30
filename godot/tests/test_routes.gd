@@ -285,7 +285,7 @@ func test_chapter5_first_time_the_banquet_ends_in_ending_three() -> void:
 		var q := quest_by_id("jingxiang")
 		check_eq(Quests.current_quest(s)["id"], "jingxiang")
 		var p := walk(q, s, fork)
-		for sid in ["jx_wan", "jx_diaochan", "jx_laixi", "jx_bubing", fork[0], "jx_huangzu", "jx_rest", "jx_tianshi", "jx_xunyou_go",
+		for sid in ["jx_wan", "jx_diaochan", "jx_laixi", "jx_bubing", fork[0], "jx_huangzu", "jx_rest", "jx_tianshi", "jx_qinggong",
 				"jx_jinggao", "jx_xiangyang", "jx_mimou", "jx_shuijun", "jx_yiguan", "jx_a_fuyan", "jx_a_nushou", "jx_a_caimao",
 				"jx_a_xiangxiao", "jx_a_xuexi", "jx_a_henhai"]:
 			check(p.has(sid), "恨海 route passes %s (fork %s)" % [sid, fork[0]])
@@ -307,7 +307,7 @@ func test_chapter5_after_ending_three_jiaxu_breaks_the_banquet() -> void:
 	for sid in ["jx_tianshi", "jx_meng", "jx_jinggao", "jx_yiguan", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_dress", "jx_b_shuige",
 			"jx_b_caimao", "jx_b_dianxing", "jx_b_louchuan"]:
 		check(p.has(sid), "破局 route passes " + sid)
-	for sid in ["jx_xunyou_go", "jx_a_fuyan", "jx_a_xiangxiao", "jx_a_henhai"]:
+	for sid in ["jx_qinggong", "jx_a_fuyan", "jx_a_xiangxiao", "jx_a_henhai"]:
 		check(not p.has(sid), "破局 route never reaches " + sid)
 	check_eq(p[-1], "jx_b_louchuan")
 	check(s.has_card("kuaiyue"), "蒯越 joins")
@@ -351,16 +351,20 @@ func test_chapter5_plays_with_real_fights_on_both_routes() -> void:
 func test_chapter5_without_jiaxu_the_banquet_still_ends_in_ending_three() -> void:
 	var s := ch5_save([E3])  # 结局三 reached, but 贾诩 was passed by in 第四章
 	var p := walk(quest_by_id("jingxiang"), s, [])
-	check(p.has("jx_xunyou_go") and p.has("jx_a_fuyan") and not p.has("jx_meng") and not p.has("jx_b_dingce"), "no 贾诩, no way out")
+	check(p.has("jx_qinggong") and p.has("jx_a_fuyan") and not p.has("jx_meng") and not p.has("jx_b_dingce"), "no 贾诩, no way out")
 	check_eq(p[-1], "jx_a_henhai")
 
 
-func test_after_ending_three_jiaxu_waits_in_changan_in_chapter4() -> void:
+func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:
 	for flags in [[E3], []]:
-		var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"] + flags,
-				["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
-		var p := walk(quest_by_id("dongui"), s, ["jiaxu4"])
-		check_eq(p.has("jiaxu4"), not flags.is_empty(), "贾诩 only after 结局三 %s" % str(flags))
-		check_eq(s.has_card("jiaxu"), not flags.is_empty())
-		check_eq(s.run_records.has(JX), not flags.is_empty())
-		check(p.has("shaoka") and p[-1] == "dongtao")
+		for fork in [["m2"], ["rest"]]:
+			var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"] + flags,
+					["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+			var p := walk(quest_by_id("dongui"), s, fork)
+			for sid in ["zhangxiu6", "zhangji6", "jiaxu6"]:
+				check_eq(p.has(sid), not flags.is_empty(), "%s only on 四周目 %s %s" % [sid, str(flags), fork[0]])
+			if not flags.is_empty():
+				check(not p.has("zhuibing") and not p.has("fanchou6"), "四周目 meets 张家 instead of the old pursuers")
+			check_eq(s.has_card("jiaxu"), not flags.is_empty())
+			check_eq(s.run_records.has(JX), not flags.is_empty())
+			check(p.has(fork[0]) and p.has("shaoka") and p.has("xuhuang") and p[-1] == "dongtao", "reaches 南阳 via " + fork[0])

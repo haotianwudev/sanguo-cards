@@ -58,32 +58,36 @@
 43. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
 44. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
 45. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-46. `jiaxu` — 贾诩（毒士，第三章长安露面、第四章入队、第五章破局线核心）（立绘）
-47. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-48. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-49. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-50. `huangzu` — 黄祖（江夏太守）（立绘）
-51. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-52. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-53. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-54. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-55. `c8_grapes` — 水阁·揽入怀中剥葡萄（破局线的关键一幕）（剧情 CG）
-56. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
-57. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-58. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-59. `c8_jiayan` — 宛城家宴（剧情 CG）
-60. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-61. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-62. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-63. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-64. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-65. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-66. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-67. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-68. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-69. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-70. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-71. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+46. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+47. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+48. `c6_jiaxu` — 贾诩入队（渭水营边的粮车上闻酒葫芦）（剧情 CG）
+49. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+50. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+51. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+52. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+53. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+54. `huangzu` — 黄祖（江夏太守）（立绘）
+55. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+56. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+57. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+58. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+59. `c8_grapes` — 水阁·揽入怀中剥葡萄（破局线的关键一幕）（剧情 CG）
+60. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
+61. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+62. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+63. `c8_jiayan` — 宛城家宴（剧情 CG）
+64. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+65. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+66. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+67. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+68. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+69. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+70. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+71. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+72. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+73. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+74. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+75. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -216,6 +220,18 @@ Appearance: Thin, sallow man in his mid-40s with a sparse goatee, drooping lazy 
 Armor & Clothing: A loose, faded Xiliang officer's robe that hangs off his thin frame, a plain dark cap, a gourd wine flask at his belt.
 Weapon: Holding a wine cup under his nose, sniffing it before drinking; no weapon.
 Background: a dim corner of a lantern-lit banquet hall in Chang'an, the feast blurred behind him.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `zhangxiu` ⬜ 缺
+
+```
+A vertical character portrait of Zhang Xiu (张绣), Zhang Ji's young nephew from Wuwei, a dazzling spearman ('the Spear King of the North').
+Appearance: Handsome, cocky young man in his early 20s with sharp eyebrows, a high topknot and a fearless grin.
+Armor & Clothing: Light silver-and-blue Xiliang scale armor with a short white cape, a white-tasselled helmet under his arm.
+Weapon: A long spear spun into a blur of spear-tip flowers.
+Background: a stone bridge over the Wei river at dawn, Xiliang cavalry with a 张 banner behind.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -902,6 +918,22 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low ang
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
 
+### `c6_zhangxiu`
+
+```
+A horizontal battle scene illustration: a stone bridge over the Wei river at dawn: the cocky young Zhang Xiu alone on the bridge spinning his long spear into a blur of spear-tip flowers, Xiliang cavalry under a 张 banner behind; far back a thin man on a mule sniffing a wine gourd.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
+```
+
+### `c6_zhangji`
+
+```
+A horizontal battle scene illustration: a Xiliang camp gate on the Wei river bank: the steady general Zhang Ji on foot with his spear planted beside him, war drums behind, soldiers pouring out; a thin man sitting on a grain cart by the gate, sighing.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
+```
+
 ### `jx_bubing`
 
 ```
@@ -1176,6 +1208,15 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in th
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
+```
+
+### `c6_jiaxu`
+
+```
+A horizontal story event illustration: an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) sitting on a grain cart sniffing a wine gourd; young Sun Ce's spear tip at his throat and he doesn't blink; the short-haired hero studying him; Zhou Yu frowning over his ledger.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
 
 ### `c8_jiayan`

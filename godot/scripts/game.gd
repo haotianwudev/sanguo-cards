@@ -240,11 +240,13 @@ func demo(name: String) -> void:
 			save.grant_card("dongbai")
 			Quests.ensure_started(save)
 			show_screen(MapScreen.new())
-		"ch6", "ch6b":  # 第四章 · 挟天子: 二周目 (nobody warns you) / 三周目 (貂蝉 comes); --at=<square> jumps ahead
+		"ch6", "ch6b", "ch6c":  # 第四章 · 挟天子: 二周目 (nobody warns you) / 三周目 (貂蝉 comes) / 四周目 (张济 张绣, 贾诩 joins); --at=<square> jumps ahead
 			save.quests_cleared = ["prologue", "taodong", "yuxi", "shouluoyang", "changan"]
 			save.flags = ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"]
-			if name == "ch6b":
+			if name != "ch6":
 				save.flags.append("结局二 · 同归")
+			if name == "ch6c":
+				save.flags.append("结局三 · 恨海")
 			for c in ["dongbai", "caiwenji", "huangfusong", "zhujun"]:
 				save.grant_card(c)
 			Quests.ensure_started(save)
