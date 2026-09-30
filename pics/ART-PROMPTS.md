@@ -23,42 +23,41 @@
 8. `zhongyao` — 钟繇（立绘）
 9. `xuhuang` — 徐晃（换掉占位）（立绘）
 10. `huangzhong` — 黄忠（换掉占位，四十出头的军汉，不是老将）（立绘）
-11. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
-12. `e_tangji` — 破庙救唐姬（剧情 CG）
-13. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-14. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
-15. `yuanshu` — 袁术（立绘）
-16. `jiling` — 纪灵（立绘）
-17. `leibo` — 雷薄（立绘）
-18. `chenlan` — 陈兰（立绘）
-19. `qiaorui` — 桥蕤（立绘）
-20. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
-21. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
-22. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
-23. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
-24. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
-25. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
-26. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-27. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
-28. `c3_supply` — 饥民与军粮（剧情 CG）
-29. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-30. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
-31. `c3_warn` — 劝阻孙坚（剧情 CG）
-32. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-33. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-34. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-35. `changan` — 第三章·长安地图底图（地图）
-36. `dongui` — 第四章·挟天子地图底图（地图）
-37. `yuxi` — 第三章·传国玉玺地图底图（地图）
-38. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-39. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-40. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-41. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-42. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-43. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-44. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-45. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
-46. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+11. `e_tangji` — 破庙救唐姬（剧情 CG）
+12. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+13. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+14. `yuanshu` — 袁术（立绘）
+15. `jiling` — 纪灵（立绘）
+16. `leibo` — 雷薄（立绘）
+17. `chenlan` — 陈兰（立绘）
+18. `qiaorui` — 桥蕤（立绘）
+19. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
+20. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
+21. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
+22. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
+23. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
+24. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
+25. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+26. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
+27. `c3_supply` — 饥民与军粮（剧情 CG）
+28. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+29. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
+30. `c3_warn` — 劝阻孙坚（剧情 CG）
+31. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+32. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+33. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
+34. `changan` — 第三章·长安地图底图（地图）
+35. `dongui` — 第四章·挟天子地图底图（地图）
+36. `yuxi` — 第三章·传国玉玺地图底图（地图）
+37. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+38. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+39. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+40. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+41. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+42. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+43. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+44. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
+45. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
 
 交图规则：
 
@@ -1332,15 +1331,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a restrained tragic scene in the rain on a mountain road: Lady Wu (adult) standing tall and calm, lifting the Imperial Jade Seal high over a grey stone, her face serene; Yuan Shu's golden-roofed carriage only a blur in the background; no gore.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
-### `c2_setout`
-
-```
-A horizontal story event illustration: setting off north on a country road: Sun Ce on a brown horse galloping ahead the wrong way; the short-haired hero and Zhou Yu on horseback exchanging a look and a smile; a covered carriage behind them.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
