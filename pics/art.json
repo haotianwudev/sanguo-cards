@@ -176,6 +176,15 @@
       "head": 0.24,
       "license": "用户提供（Gemini 生成）"
     },
+    "fengfuren": {
+      "src": "source/generals/fengfuren.jpg",
+      "face": [
+        0.5,
+        0.25
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
     "ganning": {
       "src": "source/public-domain/ganning.jpg",
       "face": [
