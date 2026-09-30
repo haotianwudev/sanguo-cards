@@ -253,7 +253,7 @@ by the 汉江 → **结局三 · 恨海** (restrained). **With both**: the hero 
 贾诩 plans 联蒯灭蔡, 蒯越 turns, the hero hides
 everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls; 貂蝉, who knows nothing of his plan, reads the trap, takes his jokes for
 obliviousness and rises to drink the cup for him (hand at her hairpin, as in 恨海) — he pulls her back into his arms; only when the
-crossbows turn does she see it was all arranged (「你今晚唯一的差事，是吃葡萄」 / on the 楼船: 「白费得真好」); hands her grapes (「她喝不得烈酒，免了」), offers
+crossbows turn does she see it was all arranged (「你今晚唯一的差事，是剥橘子」 / on the 楼船: 「白费得真好」); hands her a mandarin orange (「她喝不得烈酒，免了」), offers
 蔡瑁 half the cup, the poison burns the carpet, the crossbows turn; 刘表 runs over before dawn to swear he knew nothing and cuts ties with the 蔡 (「早就不甚往来」), the 蔡 elders strike 蔡瑁
 out of the very genealogy 蔡夫人 used on 蔡文姬 and hand over 800 men, 30 ships and money to save themselves; only the ringleaders die — 蔡瑁, his brothers 蔡中 / 蔡和 (they placed the crossbows) and 刘表's nephew 张允 (mixed the
 poison); 蔡夫人 is spared death but divorced by 刘表 on the spot, stripped of her title and confined to the 蔡洲 estate for life; 刘表 hands over the army, 蒯越 joins, the hero is
