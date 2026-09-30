@@ -859,6 +859,10 @@
     "c2_zumao": {
       "src": "source/cg/c2_zumao.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_triple": {
+      "src": "source/cg/c2_triple.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
