@@ -108,3 +108,4 @@
 | `cg:c2_raid` | source/cg/c2_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_yuxi` | source/cg/c2_yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_sanying` | source/cg/c2_sanying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_zumao` | source/cg/c2_zumao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
