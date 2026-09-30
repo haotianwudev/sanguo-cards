@@ -99,6 +99,11 @@ PORTRAITS = {
         "Light silver-and-blue Xiliang scale armor with a short white cape, a white-tasselled helmet under his arm.",
         "A long spear spun into a blur of spear-tip flowers.",
         "a stone bridge over the Wei river at dawn, Xiliang cavalry with a 张 banner behind"),
+    "ganning": ("Gan Ning (甘宁), the young Brocade-Sail pirate chief of Ba commandery (锦帆贼), cocky and fearless",
+        "Lean, sun-tanned young man in his early 20s with a wild grin, sharp eyes and a feather stuck in his tied-up hair.",
+        "A bright brocade sash over a sleeveless dark jacket, bare muscular arms, a string of bronze bells at his waist.",
+        "A great iron-backed bow drawn to full, a quiver of red-fletched arrows.",
+        "the prow of a brocade-sailed fast boat on a river at noon"),
     "wenpin": ("Wen Pin (文聘), a loyal, steady general of Jingzhou",
         "Solid, earnest man in his early 30s with a square face, a trimmed beard and calm, dutiful eyes.",
         "Green-lacquered Jingzhou lamellar armor with a dark red cape.",
@@ -874,6 +879,7 @@ NEXT = [
     ("cg", "end_tonggui", "结局卡·同归（象征画，不画人，不见血）"),
 
     # 第五章 · 荆襄风云：
+    ("portrait", "ganning", "甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）"),
     ("portrait", "simahui", "司马徽（水镜先生，第五章事件）"),
     ("portrait", "pangdegong", "庞德公（岘山老农，第五章事件）"),
     ("portrait", "huangchengyan", "黄承彦（沔南名士，第五章事件）"),
