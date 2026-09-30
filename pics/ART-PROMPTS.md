@@ -14,93 +14,92 @@
 3. `caiyong` — 蔡邕（立绘）
 4. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
 5. `huangfusong` — 皇甫嵩（立绘）
-6. `gaoshun` — 高顺（立绘）
-7. `xunyou` — 荀攸（立绘）
-8. `zhongyao` — 钟繇（立绘）
-9. `xuhuang` — 徐晃（换掉占位）（立绘）
-10. `huangzhong` — 黄忠（换掉占位，四十出头的军汉，不是老将）（立绘）
-11. `e_tangji` — 破庙救唐姬（剧情 CG）
-12. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-13. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
-14. `yuanshu` — 袁术（立绘）
-15. `jiling` — 纪灵（立绘）
-16. `leibo` — 雷薄（立绘）
-17. `chenlan` — 陈兰（立绘）
-18. `qiaorui` — 桥蕤（立绘）
-19. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
-20. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
-21. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
-22. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
-23. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
-24. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
-25. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-26. `c3_supply` — 饥民与军粮（剧情 CG）
-27. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-28. `c3_warn` — 劝阻孙坚（剧情 CG）
-29. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-30. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-31. `changan` — 第三章·长安地图底图（地图）
-32. `dongui` — 第四章·挟天子地图底图（地图）
-33. `yuxi` — 第三章·传国玉玺地图底图（地图）
-34. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-35. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-36. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-37. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-38. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-39. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-40. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-41. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-42. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
-43. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-44. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-45. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-46. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-47. `yiji` — 伊籍（第五章招贤馆）（立绘）
-48. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
-49. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
-50. `zongzei` — 宗贼（兵卡）（立绘）
-51. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
-52. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-53. `jx_zongzei` — 新野·宗贼（战斗 CG）
-54. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-55. `e_shuijing` — 事件·水镜先生（剧情 CG）
-56. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-57. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-58. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-59. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-60. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-61. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-62. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-63. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-64. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-65. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-66. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-67. `huangzu` — 黄祖（江夏太守）（立绘）
-68. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-69. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-70. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-71. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-72. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-73. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-74. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-75. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-76. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-77. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
-78. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-79. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-80. `c8_jiayan` — 宛城家宴（剧情 CG）
-81. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-82. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-83. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-84. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-85. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-86. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-87. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-88. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-89. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-90. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-91. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-92. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+6. `xunyou` — 荀攸（立绘）
+7. `zhongyao` — 钟繇（立绘）
+8. `xuhuang` — 徐晃（换掉占位）（立绘）
+9. `huangzhong` — 黄忠（换掉占位，四十出头的军汉，不是老将）（立绘）
+10. `e_tangji` — 破庙救唐姬（剧情 CG）
+11. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+12. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+13. `yuanshu` — 袁术（立绘）
+14. `jiling` — 纪灵（立绘）
+15. `leibo` — 雷薄（立绘）
+16. `chenlan` — 陈兰（立绘）
+17. `qiaorui` — 桥蕤（立绘）
+18. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
+19. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
+20. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
+21. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
+22. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
+23. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
+24. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+25. `c3_supply` — 饥民与军粮（剧情 CG）
+26. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+27. `c3_warn` — 劝阻孙坚（剧情 CG）
+28. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+29. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+30. `changan` — 第三章·长安地图底图（地图）
+31. `dongui` — 第四章·挟天子地图底图（地图）
+32. `yuxi` — 第三章·传国玉玺地图底图（地图）
+33. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+34. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+35. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+36. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+37. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+38. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+39. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+40. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+41. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
+42. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+43. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+44. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+45. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+46. `yiji` — 伊籍（第五章招贤馆）（立绘）
+47. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
+48. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
+49. `zongzei` — 宗贼（兵卡）（立绘）
+50. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
+51. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+52. `jx_zongzei` — 新野·宗贼（战斗 CG）
+53. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+54. `e_shuijing` — 事件·水镜先生（剧情 CG）
+55. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+56. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+57. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+58. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+59. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+60. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+61. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+62. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+63. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+64. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+65. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+66. `huangzu` — 黄祖（江夏太守）（立绘）
+67. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+68. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+69. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+70. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+71. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+72. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+73. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+74. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+75. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+76. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
+77. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+78. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+79. `c8_jiayan` — 宛城家宴（剧情 CG）
+80. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+81. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+82. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+83. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+84. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+85. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+86. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+87. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+88. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+89. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+90. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+91. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -449,18 +448,6 @@ Appearance: Fierce adult woman in her mid-20s with sharp eyes, blue tribal tatto
 Armor & Clothing: Hide and woven-bark armor, bead necklaces, bare feet wrapped in cloth.
 Weapon: A bamboo bow with poison arrows, a quiver of green-fletched shafts.
 Background: misty Jiangdong mountains with bamboo forests and stilt houses.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `gaoshun` ⬜ 缺
-
-```
-A vertical character portrait of Gao Shun (高顺), Lü Bu's grim, silent commander of the Trap-Breaking Camp (陷阵营).
-Appearance: Stern, dark-faced man in his 30s, jaw set, eyes that never blink; utterly still.
-Armor & Clothing: Heavy black lamellar armor, plain and unadorned, a tall rectangular shield.
-Weapon: Standing like a post, shield planted, a long ji in his other hand.
-Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```

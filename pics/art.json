@@ -802,6 +802,15 @@
       ],
       "head": 0.28,
       "license": "用户提供（Gemini 生成）"
+    },
+    "gaoshun": {
+      "src": "source/generals/gaoshun.jpg",
+      "face": [
+        0.5,
+        0.32
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
