@@ -43,7 +43,8 @@ timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad
 ```
 
 第四章：`--demo=ch6`（二周目，围府线）/ `--demo=ch6b`（三周目，报信线），加 `--at=<square id>` 直接跳到那一格截图。
-`tests/test_routes.gd` walks chapters 3–4 on every 周目 route (squares, records, endings, cards, which chapter follows) and checks
+第五章：`--demo=ch8`（恨海线）/ `--demo=ch8b`（通关恨海后的破局线），同样可加 `--at=`。
+`tests/test_routes.gd` walks chapters 3–5 on every 周目 route (squares, records, endings, cards, which chapter follows) and checks
 that no two open squares ever share a spot; keep it green when you add squares.
 
 Fonts are bundled subsets (`godot/data/fonts/body.ttf` 思源黑体, `name.ttf` 霞鹜文楷), used by `Kit.make_theme` / `Kit.name_font`.
@@ -236,7 +237,18 @@ his uncle 周忠) says take the emperor to 洛阳; 董白 brings 董卓's old gu
 on the gate, 吕布 goes straight to 张杨 in 河内 (his old 并州 friend), 李傕 and 郭汜 hold 长安 (no infighting); 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said
 曹操); the emperor has the hero made 破虏将军 (孙坚's own old title, handed down grudgingly); pushed aside, and sent against
 袁术 in 南阳 because 孙坚 can't leave the emperor: 桥蕤, 黄忠 (a 南阳 soldier robbed by 袁术's men, sick son
-黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 孙坚's old men inside 宛城 (he once camped in 南阳; they know the tiger tally he gave the hero) open the east gate — 里应外合, 纪灵 (boss) holds the rear and flees with 袁术 and 冯夫人 to 九江 — 袁术 takes 寿春 and styles himself 扬州牧 (as in history). (未完待续)
+黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 孙坚's old men inside 宛城 (he once camped in 南阳; they know the tiger tally he gave the hero) open the east gate — 里应外合, 纪灵 (boss) holds the rear and flees with 袁术 and 冯夫人 to 九江 — 袁术 takes 寿春 and styles himself 扬州牧 (as in history).
+第五章 · 荆襄风云 (quest `jingxiang`, requires 「南阳：袁术东逃」, 初平二年秋 → 初平三年春): 吴夫人 and 蔡邕 move to 宛城 (family supper), 貂蝉 swaps
+her palace robes for a light 留仙裙 and learns to 「放假」; 刘表 sends 黄祖 across the 汉水 (淯水 battles, 黄祖 mid-map boss, 休整);
+刘表 sues for peace through 蒯越, the court makes 刘表 荆州牧 and the hero **镇南将军·督荆襄军事** in 襄阳; 周瑜 warns it's a 鸿门宴, 貂蝉 insists on
+coming to see the 汉江; 蔡夫人 (claims 蔡文姬 as kin via a genealogy, showers 貂蝉 with pearls — 貂蝉: her eyes never smile) and her brother
+蔡瑁 (水军都督, wants 貂蝉) plot a poisoned banquet at the 万山水阁. Split at x16 on the flag 「结局三 · 恨海」: **first time** 孙坚 recalls 荀攸 to
+洛阳; 千斤闸, 50 crossbows, 鸩羽落红 in a 金兽爵 — 貂蝉 drinks it for the hero, stabs 蔡瑁's eye with her hairpin, knocks over the brazier;
+she dies in his arms (「这回，换妾身护了你一次」), he has the 蔡 clan wiped out (董白: 「你越来越像我爷爷了」) and is stabbed by a 蔡 retainer
+by the 汉江 → **结局三 · 恨海** (restrained). **After it**: the hero dreams it all and keeps 荀攸; 荀攸 plans 联蒯灭蔡, 蒯越 turns, the hero hides
+everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls, he pulls 貂蝉 into his arms and hands her grapes (「她喝不得烈酒，免了」), offers
+蔡瑁 half the cup, the poison burns the carpet, the crossbows turn; only the ringleaders die, 刘表 hands over the army, 蒯越 joins, the hero is
+督荆襄九郡大都督; moonlit 楼船 and hot chestnuts. (未完待续)
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
 out of the story until later chapters — as gacha cards they're fine.

@@ -475,6 +475,59 @@
 | ⬜ 缺 | `c7_flee` | 袁术东逃（三周目） |
 | ⬜ 缺 | `end_tonggui` | 结局卡「结局二 · 同归」 |
 
+## 第五章 · 荆襄风云
+
+地图底图 `jingxiang`：⬜ 缺
+
+| 状态 | key | 用在 |
+|---|---|---|
+| ⬜ 缺 | `kuaiyue` | 剧情立绘 |
+| ⬜ 缺 | `caifuren` | 剧情立绘 |
+| ⬜ 缺 | `caimao` | 剧情立绘 |
+| ⬜ 缺 | `liubiao` | 剧情立绘 |
+
+敌人（战斗界面上方；和它的卡共用一张图）
+
+| 状态 | key | 敌人 |
+|---|---|---|
+| ⬜ 缺 | `jingzhou_gong` | 荆州弓手 |
+| ⬜ 缺 | `huangzu` | 江夏太守黄祖 |
+
+能拿到的卡
+
+| 状态 | key | 卡 |
+|---|---|---|
+| ⬜ 缺 | `jingzhou_shuijun` | 荆州水军（荆州水军的卡） |
+
+战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
+
+| 状态 | key | 战斗 |
+|---|---|---|
+| ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
+| ⬜ 缺 | `jx_bubing` | 淯水北岸·荆州步卒（荆州步卒） |
+| ⬜ 缺 | `jx_gongshou` | 芦苇荡·荆州弓手（荆州弓手） |
+| ⬜ 缺 | `jx_huangzu` | 淯水·黄祖（江夏太守黄祖） |
+| ⬜ 缺 | `jx_shuijun` | 水寨·荆州水军（荆州水军） |
+| ⬜ 缺 | `jx_nushou` | 水阁·蔡府连弩手（蔡府连弩手） |
+| ⬜ 缺 | `jx_caimao_a` | 水阁·独眼蔡瑁（独眼蔡瑁） |
+| ⬜ 缺 | `jx_caimao_b` | 水阁·蔡瑁（水军都督蔡瑁） |
+
+剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
+
+| 状态 | key | 剧情格 |
+|---|---|---|
+| ⬜ 缺 | `c8_jiayan` | 宛城小聚 |
+| ⬜ 缺 | `c8_liuxian` | 留仙裙 |
+| ⬜ 缺 | `c8_caifuren` | 襄阳 |
+| ⬜ 缺 | `c8_shuige` | 万山水阁 |
+| ⬜ 缺 | `c8_dress` | 盛装 |
+| ⬜ 缺 | `c8_xiangxiao` | 香消 |
+| ⬜ 缺 | `c8_grapes` | 万山水阁 |
+| ⬜ 缺 | `c8_henhai` | 恨海 |
+| ⬜ 缺 | `c8_louchuan` | 月下楼船 |
+| ⬜ 缺 | `end_henhai` | 结局卡「结局三 · 恨海」 |
+
 ## 其余武将（招募池，按需再画）
 
 | 状态 | key | 卡 |
@@ -503,7 +556,6 @@
 | ⬜ 缺 | `mayunlu` | 马云騄（SR） |
 | ⬜ 缺 | `wangyi` | 王异（SR） |
 | ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
-| ⬜ 缺 | `caifuren` | 蔡夫人·荆州（SR） |
 | ⬜ 缺 | `bianfuren` | 卞夫人（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
 | ⬜ 缺 | `dongfeng` | 董奉（R） |
