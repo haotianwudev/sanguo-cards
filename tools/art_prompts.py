@@ -155,7 +155,7 @@ PORTRAITS = {
         "Holding a half-unrolled bamboo book of the classics instead of a weapon.",
         "a quiet study in the Xiangyang governor's mansion with shelves of bamboo scrolls and the Han river beyond a lattice window"),
     "caimao": ("Cai Mao (蔡瑁), Lady Cai's younger brother and admiral of the Jingzhou navy — an arrogant, greedy in-law",
-        "Burly man in his 40s with a thick moustache, heavy jowls and a sneering, lecherous grin.",
+        "Burly young man of about 25 (younger than his sister) with a short trimmed moustache, a square jaw and a sneering, lecherous grin.",
         "An embroidered brocade robe worn over gilded scale armor, a gold belt, rings on his fingers.",
         "One hand on the hilt of a long sword, the other raising a gold beast-shaped wine cup.",
         "the deck of a great tiered warship on the Han river at dusk, rows of Jingzhou war boats behind"),
