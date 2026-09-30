@@ -60,7 +60,7 @@
 45. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
 46. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
 47. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-48. `c6_jiaxu` — 贾诩入队（渭水营边的粮车上闻酒葫芦）（剧情 CG）
+48. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
 49. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
 50. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
 51. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
@@ -1213,7 +1213,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c6_jiaxu`
 
 ```
-A horizontal story event illustration: an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) sitting on a grain cart sniffing a wine gourd; young Sun Ce's spear tip at his throat and he doesn't blink; the short-haired hero studying him; Zhou Yu frowning over his ledger.
+A horizontal story event illustration: an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) tied up with rope and lounging comfortably on sacks in a grain cart, still sniffing a wine gourd; young Sun Ce, who just tied him, holding the rope end with a spear on his shoulder; the short-haired hero studying him; Zhou Yu frowning over his ledger; comic.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)

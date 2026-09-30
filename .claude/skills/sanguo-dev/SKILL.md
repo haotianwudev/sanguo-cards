@@ -226,8 +226,9 @@ she looks at him. 吕布 stays a brute and selfish: he rescues nobody on purpose
 救你的」), kills 董卓 over his own pupil's plea, grabs 貂蝉 and shouts for the credit.
 **贾诩** (毒士, best at spotting poison plots): at 董卓's 接风宴 in 长安 he sits in a corner sniffing every cup (the hero knows him from 三国杀);
 on the 四周目 (flag 「结局三 · 恨海」), 第四章's escape meets 李傕's pursuers 张绣 (张济's nephew, 北地枪王, 渭水桥) and 张济 (渭水营, elite)
-instead of the 司徒府 pursuers / 樊稠; 张济 withdraws to 弘农 and their strategist 贾诩 stays (he gave 李傕 the idea to attack 长安, now bets
-on the emperor — 「顺便押你」) and joins (「贾诩：入队」).
+instead of the 司徒府 pursuers / 樊稠; 张济 withdraws to 弘农 and the hero simply has their strategist 贾诩 tied up and carried off on a grain cart (he gave
+李傕 the idea to attack 长安; easygoing, he makes himself comfortable); in 洛阳 (a lap-4 休整 square) the hero unties him and treats him
+with great respect — best room, first bowl of 红烧肉, clean wine — and 贾诩 shrugs 「……行吧」 and joins (「贾诩：入队」).
 第四章 · 挟天子 (quest `dongui`, one map; requires 「长安：吕布杀了董卓」): 王允 rules — the hero stops the 夷三族 of 董卓's house
 (the boy emperor backs him); asks 王允 to pardon the 西凉 army and bring 孙坚 into 长安 — refused; 论功: 吕布 温侯, 孙坚 吴侯,
 皇甫嵩 征西将军, and the emperor insists on the hero over 王允: **富春亭侯**; recruits 荀攸 (天牢: reads 王允 at once; his uncle 荀彧 is six years younger) and 钟繇 (尚书台: the emperor had him draw the escape route; 钟繇's map and 荀攸's calls run the escape, 荀攸 goes to 南阳, 钟繇 stays by the emperor);

@@ -543,7 +543,7 @@ CGS = {
     "c4_siege": "before dawn, torches around a scholar's house in Chang'an: the elderly Cai Yong being led away without resisting, looking back; Cai Wenji (adult, in white) reaching after him, held back by the short-haired hero",
     "c4_dongjia": "a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) standing in the doorway with her twin hammers, grey-haired veterans only as silhouettes behind her; the hero looking up from the straw",
     "c7_feng": "a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingertips on his wrist; at the tent flap Dong Bai (adult) slamming a hammer down and Cai Wenji (adult, in white) with a snapped zither string, both glaring",
-    "c6_jiaxu": "an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) sitting on a grain cart sniffing a wine gourd; young Sun Ce's spear tip at his throat and he doesn't blink; the short-haired hero studying him; Zhou Yu frowning over his ledger",
+    "c6_jiaxu": "an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) tied up with rope and lounging comfortably on sacks in a grain cart, still sniffing a wine gourd; young Sun Ce, who just tied him, holding the rope end with a spear on his shoulder; the short-haired hero studying him; Zhou Yu frowning over his ledger; comic",
     "c8_jiayan": "a family supper in the courtyard of the Wancheng governor's house on an autumn evening: Lady Wu (adult) handing the short-haired hero a big bowl of chicken soup and ruffling his cropped hair; Sun Ce hanging over the edge of the pot trying to snatch meat; warm lantern light",
     "c8_liuxian": "the bank of the Yu river at sunset: Diaochan (adult, of great beauty) in a light pale-jade southern 'liuxian' skirt sitting hugging her knees on the grass, laughing with her hand over her mouth; in the shallows Sun Ce slipping while grabbing at a fish; Zhou Yu on a rock writing in his ledger",
     "c8_caifuren": "a lavish welcome banquet in Xiangyang: Lady Cai (adult, purple gold-embroidered silks, phoenix hairpin) holding Cai Wenji's (adult, in white) hands over an open clan genealogy book, all warm smiles; beside them Diaochan (adult) accepting a box of pearls with an equally sweet smile; the elderly scholar Cai Yong stroking his beard sceptically in the background",
@@ -815,7 +815,7 @@ NEXT = [
     # 第五章 · 荆襄风云：
     ("portrait", "jiaxu", "贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）"),
     ("portrait", "zhangxiu", "张绣（北地枪王，张济之侄）"),
-    ("cg", "c6_jiaxu", "贾诩入队（渭水营边的粮车上闻酒葫芦）"),
+    ("cg", "c6_jiaxu", "绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）"),
     ("battle", "c6_zhangxiu", "渭水桥·张绣"),
     ("battle", "c6_zhangji", "渭水营·张济（精英）"),
     ("portrait", "liubiao", "刘表（荆州牧，坐谈客）"),
