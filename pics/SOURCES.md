@@ -96,6 +96,7 @@
 | `battle:huaxiong` | source/battles/huaxiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:hulao_ch1` | source/battles/hulao_ch1.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:feixiong` | source/battles/feixiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:biwu` | source/battles/biwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -114,3 +115,4 @@
 | `cg:c2_sanying` | source/cg/c2_sanying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_zumao` | source/cg/c2_zumao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_triple` | source/cg/c2_triple.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_biwu` | source/cg/e_biwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
