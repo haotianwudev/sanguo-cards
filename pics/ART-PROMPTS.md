@@ -22,34 +22,33 @@
 7. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
 8. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
 9. `c2_zumao` — 阵前：华雄追砍祖茂，孙策挺枪急救（剧情 CG）
-10. `c2_raid` — 吕布劫营：夜袭中军大寨，孙坚单人挡寨门（剧情 CG）
-11. `c2_triple` — 联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩（剧情 CG）
-12. `c2_jianhua` — 孙坚斩华雄（孙坚虎皮斗篷挥刀斩敌）（剧情 CG）
-13. `c2_yuxi` — 洛阳枯井得玉玺（孙坚捧起微光玉玺）（剧情 CG）
-14. `e_tangji` — 破庙救唐姬（剧情 CG）
-15. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-16. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
-17. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
-18. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
-19. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
-20. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
-21. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
-22. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
-23. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-24. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
-25. `c3_supply` — 饥民与军粮（剧情 CG）
-26. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-27. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
-28. `c3_warn` — 劝阻孙坚（剧情 CG）
-29. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-30. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-31. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-32. `caiwenji` — 蔡文姬（立绘）
-33. `yuanshu` — 袁术（立绘）
-34. `jiling` — 纪灵（立绘）
-35. `leibo` — 雷薄（立绘）
-36. `chenlan` — 陈兰（立绘）
-37. `qiaorui` — 桥蕤（立绘）
+10. `c2_triple` — 联军大宴：各路诸侯向主角敬酒祝捷，袁绍让座，孙坚拍肩（剧情 CG）
+11. `c2_jianhua` — 孙坚斩华雄（孙坚虎皮斗篷挥刀斩敌）（剧情 CG）
+12. `c2_yuxi` — 洛阳枯井得玉玺（孙坚捧起微光玉玺）（剧情 CG）
+13. `e_tangji` — 破庙救唐姬（剧情 CG）
+14. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+15. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+16. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
+17. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
+18. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
+19. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
+20. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
+21. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
+22. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+23. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
+24. `c3_supply` — 饥民与军粮（剧情 CG）
+25. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+26. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
+27. `c3_warn` — 劝阻孙坚（剧情 CG）
+28. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+29. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+30. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
+31. `caiwenji` — 蔡文姬（立绘）
+32. `yuanshu` — 袁术（立绘）
+33. `jiling` — 纪灵（立绘）
+34. `leibo` — 雷薄（立绘）
+35. `chenlan` — 陈兰（立绘）
+36. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -1368,15 +1367,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a battlefield: the veteran Zu Mao wearing a red headscarf being chased by the giant Hua Xiong, the young Sun Ce charging in with a spear.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
-### `c2_raid`
-
-```
-A horizontal story event illustration: a burning army camp at night: Sun Jian alone blocking the camp gate with his sword against Lü Bu on the red horse Red Hare.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
