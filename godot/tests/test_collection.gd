@@ -301,3 +301,17 @@ func test_chests_hold_more_generals_at_a_higher_difficulty() -> void:
 	s.difficulty = 1
 	check_eq(s.level(), 2)
 	check(gens.call(s) > low, "难度 2: more generals")
+
+
+func test_generals_outclass_soldiers_of_their_troop() -> void:
+	## every general beats the strongest soldier of the same troop in attack (a unit is 5 × its leader + members)
+	var db := GameData.get_db()
+	var best := {}
+	for cid in db.cards:
+		var c: Dictionary = db.cards[cid]
+		if c["soldier"] and not c["beast"]:
+			best[c["troop"]] = maxi(best.get(c["troop"], 0), db.build_fighter(cid)["at"])
+	for cid in db.cards:
+		var c: Dictionary = db.cards[cid]
+		if not c["soldier"] and best.has(c["troop"]) and c["rarity"] in ["SR", "SSR"]:
+			check(db.build_fighter(cid)["at"] > best[c["troop"]], "%s (%s) should out-hit every %s soldier" % [c["name"], c["rarity"], c["troop"]])
