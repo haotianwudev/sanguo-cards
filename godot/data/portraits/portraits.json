@@ -70,5 +70,6 @@
   "tangji": {"file": "tangji.jpg", "face": [0.5, 0.23], "head": 0.24},
   "inf_n": {"file": "inf_n.jpg", "face": [0.51, 0.25], "head": 0.22},
   "shanzei_bing": {"file": "shanzei_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "zhuzhi": {"file": "zhuzhi.jpg", "face": [0.5, 0.21], "head": 0.21}
+  "zhuzhi": {"file": "zhuzhi.jpg", "face": [0.5, 0.21], "head": 0.21},
+  "yuanshao": {"file": "yuanshao.jpg", "face": [0.5, 0.22], "head": 0.2}
 }
