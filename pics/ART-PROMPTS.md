@@ -896,7 +896,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a moonlit garden behind the Minister's mansion, a round moon gate: Diaochan (adult, of great beauty) finishing a silent dance half a step from the hero, long sleeves still drifting in the night wind, an empty wine cup on the stone steps; her smile teasing and unreadable; silver-blue moonlight.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -905,7 +905,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: dawn on Mount Mang north of Luoyang, mist below: Dong Bai (adult, silver ponytail, purple fur-trimmed riding armor) on a chestnut horse glancing back with red ears after a quick kiss, galloping downhill; the hero on his horse behind her touching his cheek, stunned; the grey city far below in the sunrise.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -915,7 +915,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: New Year's Eve on the highest roof of the chancellor's mansion in Chang'an: Dong Bai (adult) asleep on the hero's shoulder with half a burnt flatbread in her hand, the hero sitting still and not daring to look down; below, the city glowing with bonfires of crackling bamboo, snow on the tiles.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -925,7 +925,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: lamplight inside a small army tent at night: Cai Wenji (adult, in white) guiding the hero's hand over a brush, her hand over his, both leaning over a sheet of paper with wobbly characters; soft warm glow, tender and shy.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -934,7 +934,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) playing a guqin on her knees with snow settling on the strings, the hero sitting beside her in a red wedding robe she has just fitted on him; lantern glow, quiet and bittersweet.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -943,7 +943,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a grassy hilltop above an army camp on a summer night under a sky full of low stars: Cai Wenji (adult, in white) playing a guqin across her knees, the short-haired hero lying back in the grass listening.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -952,7 +952,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: Sun Jian's camp in the ruins of Luoyang: the veteran general Zhu Jun (grey-bearded, straight-backed, hearty laugh) slapping the huge Sun Jian on the shoulder, Sun Jian bowing formally for once; Sun Ce behind them red-faced trying not to laugh.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -960,8 +960,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c6_yizu`
 
 ```
-A horizontal story event illustration: the palace steps of Chang'an the day after Dong Zhuo's death: Dong Bai (adult) kneeling numbly on the stone, the short-haired hero standing in front of her with his blade half drawn toward unseen guards.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+A horizontal story event illustration: the palace steps of Chang'an the day after Dong Zhuo's death: Dong Bai (adult) kneeling numbly on the stone, the short-haired hero standing in front of her with his blade half drawn, the white-haired Huangfu Song stepping to his side; high above, the small boy emperor clutching a pillar.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -971,7 +971,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: night at a window in Chang'an: Diaochan (adult) in a black cloak, pale but smiling, leaning in at the hero's window by candlelight; in the neighbouring window Dong Bai slamming her shutters.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -981,7 +981,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: before dawn, torches around a scholar's house in Chang'an: the elderly Cai Yong being led away without resisting, looking back; Cai Wenji (adult, in white) reaching after him, held back by the short-haired hero.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -990,7 +990,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) standing in the doorway with her twin hammers, grey-haired veterans only as silhouettes behind her; the hero looking up from the straw.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -999,17 +999,18 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c7_feng`
 
 ```
-A horizontal story event illustration: a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingertips on his wrist; at the edge of the tent flap only the head of a big bronze hammer pokes in.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+A horizontal story event illustration: a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingertips on his wrist; at the tent flap Dong Bai (adult) slamming a hammer down and Cai Wenji (adult, in white) with a snapped zither string, both glaring.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+(Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
 ```
 
 ### `c7_flee`
 
 ```
 A horizontal story event illustration: the east gate of Wancheng in a cloud of dust: Lady Feng (adult) lifting the curtain of her palanquin as it hurries away behind a few loaded carts and glancing back with a faint smile; the hero watching from the captured wall under a 孙 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1018,7 +1019,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: an ending card illustration, quiet and symbolic: the Imperial Jade Seal broken into pieces on a wet grey stone by a rainy mountain road, its gold-mended corner lying in the mud, a woman's hairpin beside it; cold rain, muted colours, no people.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1027,7 +1028,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: an ending card illustration, quiet and symbolic: three sets of footprints side by side in fresh snow before the closed Xuanping Gate of Chang'an at dawn, a pair of notched bronze hammers and a broken guqin lying together in the snow; soft falling snow, muted colours, no people, no blood.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1036,7 +1037,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: dawn in falling snow before the closed Xuanping Gate of Chang'an, seen from behind: the short-haired hero in battered silver armor, Dong Bai (adult) with her notched twin hammers on his left, Cai Wenji (adult, in white) holding a broken guqin on his right, the three holding hands and stepping forward together; restrained and elegiac, no gore.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1046,7 +1047,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the throne hall in Chang'an: the ten-year-old boy emperor leaning forward on a huge throne, insisting in a trembling voice; below him the white-haired Wang Yun bowing with a smile that doesn't reach his eyes.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1054,8 +1055,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c6_escape`
 
 ```
-A horizontal story event illustration: night escape from Chang'an: a covered carriage racing through a burning city gate, the boy emperor peeking out clutching a small bundle; Dong Bai (adult) riding alongside with her twin hammers, the hero riding on the other side.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+A horizontal story event illustration: night escape from Chang'an: a covered carriage racing through a burning city gate, the boy emperor peeking out clutching a small bundle; Dong Bai (adult) riding alongside with her twin hammers; the hero riding on the other side with Diaochan (adult) behind his saddle.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1065,7 +1066,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the restored gate of Luoyang at dawn: the huge Sun Jian in his tiger-pelt cape kneeling on one knee in the dust before the small boy emperor stepping down from a battered carriage.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1073,8 +1074,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c6_seal`
 
 ```
-A horizontal story event illustration: a makeshift throne hall in half-ruined Luoyang: the boy emperor on a simple throne asking quietly; the huge Sun Jian standing before him clutching a brocade box against his chest, not offering it.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+A horizontal story event illustration: a makeshift throne hall in half-ruined Luoyang: the boy emperor on a simple throne asking quietly; the huge Sun Jian clutching a brocade box against his chest, not offering it; Zhou Yu writing in his ledger with lowered eyes; Lady Wu (adult) watching Sun Jian from the back.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1083,7 +1084,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a captured camp in Nanyang: Huang Zhong, a sturdy man in his 40s in rough soldier's clothes, rope marks on his wrists, drawing a heavy bow to full; his arrow snapping the banner pole with the character 袁 on the far camp gate; Sun Ce gaping, the hero grinning.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1092,7 +1093,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: behind a rockery in the palace garden of Chang'an: the ten-year-old boy emperor, his heavy bead-curtained crown taken off and set on a stone, rubbing his neck and looking up hopefully at the short-haired hero in silver armor, who crouches to his eye level; a eunuch keeps watch at the corner; a gentle, melancholy mood.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1101,7 +1102,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a lavish welcome feast in Dong Zhuo's mansion: the enormous Dong Zhuo peeling shrimp for his granddaughter Dong Bai (adult), who laughs with her mouth full; he wipes his eye with his sleeve.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1111,7 +1112,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a lantern-lit banquet hall: Diaochan, an adult woman of great beauty, dancing with long silk sleeves; the enormous Dong Zhuo leaning forward spellbound with wine in his beard; Wang Yun at the host's seat with a knowing half-smile.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1120,7 +1121,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the Phoenix Pavilion in a lotus garden: Diaochan (adult) weeping on Lü Bu's shoulder at the railing; behind them the furious Dong Zhuo hurling Lü Bu's halberd; Lü Bu twisting away; Diaochan's eyes glancing sideways toward the viewer with the ghost of a smile.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1129,7 +1130,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a long street at night: Lü Bu on the rearing Red Hare charging in with his halberd, Diaochan (adult) holding on behind his saddle with bloodied hands, shouting.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1138,7 +1139,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: night by a campfire in ruined Luoyang: Cai Wenji, an adult woman in white, holding her guqin with a broken string, telling her story; Dong Bai listening with folded arms, Lady Wu wrapping a cloak around Cai Wenji.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1148,7 +1149,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: Sun Jian's tent in ruined Luoyang: the envoy Li Ru waving a feather fan and offering peace with a gentle smile; the huge Sun Jian sitting with crossed arms, scowling.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1156,8 +1157,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c4_betroth`
 
 ```
-A horizontal story event illustration: a comedic betrothal in a tent: the short-haired hero pointing at himself in disbelief (「我？」); Dong Bai (adult) beside him looking away with bright red ears.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+A horizontal story event illustration: a comedic betrothal in a tent: the short-haired hero pointing at himself in disbelief; Dong Bai (adult) beside him looking away with bright red ears; Sun Ce leaping up in refusal; Lady Wu (adult) laughing behind her sleeve.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1166,8 +1167,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `c5_enter`
 
 ```
-A horizontal story event illustration: the gates of Chang'an: the enormous Dong Zhuo hugging his granddaughter Dong Bai (adult), who laughs; over her shoulder his smiling eyes are cold.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+A horizontal story event illustration: the gates of Chang'an: the enormous Dong Zhuo hugging his granddaughter Dong Bai (adult), who laughs; over her shoulder his smiling eyes are cold; behind him Lü Bu on Red Hare, silent.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1177,7 +1178,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a moonlit garden: Diaochan, an adult woman of great beauty, kneeling before an incense burner praying to the moon; Wang Yun and the hero watching from the garden gate.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1186,7 +1187,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a bedroom in Chang'an: Dong Bai (adult) in a red wedding dress turning happily before a bronze mirror, the hero behind her with a troubled face.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1196,7 +1197,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the wedding trap in a hall of red lanterns: the enormous Dong Zhuo raising his cup with a cruel smile; beside him Dong Bai (adult) in a red wedding dress lifting her veil in shock, the hero pulling her behind him.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1206,7 +1207,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the moment of mercy, restrained: Dong Bai (adult) in her red wedding dress kneeling with her arms spread wide to shield a fallen figure on the palace steps, looking up at Lü Bu towering on Red Hare with his halberd raised; no gore.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1216,7 +1217,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a quiet veranda in Luyang: Lady Wu sewing a winter coat and the beautiful Lady Feng embroidering a handkerchief side by side, laughing over a plate of pastries — Lady Feng's eyes sliding toward a brocade box half-hidden inside.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1225,7 +1226,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a tense army tent: Sun Jian kicking over a marriage-proposal gift box and driving his saber into the table, the envoy Li Jue backing away with a forced smile, young Sun Ce pale with shock, Zhou Yu watching calmly; outside the tent flap a carriage curtain slightly lifted.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1234,7 +1235,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: night after a battle: Zhou Yu reading a captured secret letter by torchlight, Sun Jian crushing its edge in his fist, far on the horizon the sky over Luoyang faintly red.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1243,7 +1244,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: leaving the ruins of burning Luoyang: Sun Jian riding in front hugging a brocade box; Lady Wu (adult) leaning from a carriage to hand bread to a child; refugees only as distant silhouettes.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1252,7 +1253,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: on a muddy road after a fight: Cai Wenji, an adult woman in a white robe, kneeling to pick up her guqin with a broken string, Dong Bai with her twin hammers looking away embarrassed, Lady Wu putting a cloak on Cai Wenji's shoulders.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1262,7 +1263,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: night in a hungry army camp: Sun Jian alone by a campfire opening and closing a brocade box, Zhou Yu counting on his fingers, Sun Ce hiding his rice bowl behind his back.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1271,7 +1272,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a lively tavern: a tipsy Sun Ce slamming the table and bragging, Zhou Yu lunging to cover his mouth, the hero tossing coins on the table; the other drinkers only as blurred shapes.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1280,7 +1281,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: lamplit room at night: Sun Jian placing the brocade box with the jade seal into Lady Wu's hands, the hero standing at the doorway, Sun Jian gruffly avoiding his eyes.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1289,7 +1290,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the night before the campaign: the hero earnestly pleading with Sun Jian, who laughs and claps him hard on the shoulder, a war banner and armor stand behind them.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1298,7 +1299,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a rainy night at a courtyard gate lit by torches: the grey-bearded general Chen Lan with a long spear under a 袁 banner; the short-haired hero barring the way, Lady Wu (adult) behind him clutching a brocade box.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1307,7 +1308,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a rainy mountain pass: the defeated general Ji Ling kneeling in the mud, leaning on his three-pointed blade; Lady Wu (adult) slowly sinking to her knees in the rain.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1316,7 +1317,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a restrained tragic scene in the rain on a mountain road: Lady Wu (adult) standing tall and calm, lifting the Imperial Jade Seal high over a grey stone, her face serene; Yuan Shu's golden-roofed carriage only a blur in the background; no gore.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1325,7 +1326,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: setting off north on a country road: Sun Ce on a brown horse galloping ahead the wrong way; the short-haired hero and Zhou Yu on horseback exchanging a look and a smile; a covered carriage behind them.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1334,7 +1335,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a battlefield: the hero hurling a huge broad saber that strikes the giant Hua Xiong on the back of his helmet; the veteran Zu Mao in a red headscarf falling from his horse, saved.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1343,7 +1344,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: Sun Jian's camp: the burly Sun Jian hugging Lady Wu while glaring at the hero over her shoulder; the hero grinning awkwardly.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1352,7 +1353,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a restrained, somber scene: the woman general Dong Bai in a prisoner cart looking back over her shoulder, the hero standing alone at the camp gate, grey sky (no gore).
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1362,7 +1363,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a ruined temple: Lady Tang, an adult woman in coarse clothes with soot on her cheek, clutching a jade hairpin, looking up with unyielding eyes as the hero and Lady Wu find her.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1371,7 +1372,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a mountain bandit fort: the curvy bandit queen 'Rouge Tiger' standing hands on hips on the fort wall with twin sabers, pointing at the embarrassed hero, her chubby husband carrying a pig behind her (comedic).
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1380,7 +1381,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a forest clearing: the Yellow Turban saint Zhang Ning, an adult woman in a yellow Taoist robe with a nine-section staff, handing out bowls of charm water to kneeling ragged followers.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1389,7 +1390,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: night on a river boat: Sun Jian hugging a brocade box at the bow, Lady Wu standing at the cabin door holding a late-night snack.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1398,7 +1399,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: sunset riverbank: Dong Bai and Sun Ce collapsed on the ground laughing after a long duel, hammers and spear dropped beside them.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 (Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
@@ -1408,7 +1409,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: night on the stern of a boat: Lady Tang playing a guqin, Lady Wu draping a coat over her shoulders.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1419,7 +1420,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: river bandits bursting out of tall reeds with gongs and rusty sabers, shouting.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1428,7 +1429,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: comic scene: the short-haired hero hopping on one leg clutching his thigh, a small green bamboo viper slithering away, Sun Ce and Zhou Yu doubled over laughing.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1437,7 +1438,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a white-browed tiger lounging on a rock on a mountain road, lazily licking its paw, staring at the viewer.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1446,7 +1447,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a white-haired old Taoist grinning with two front teeth, sitting on a boulder with a bamboo staff, purple smoke curling from a gourd in his hand.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1455,7 +1456,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a rusty iron chest half-buried by the roadside, carved with four small characters 非礼勿开.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1464,7 +1465,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a burly man in a roadside tavern smashing a table with one fist, wine cups flying, drinkers scattering.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1473,7 +1474,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: an old man collapsed on a dusty road and a mother holding a child out toward the viewer, other refugees only as distant silhouettes.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1482,7 +1483,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a cheerful adult woman washing clothes at a mountain stream, sleeves rolled up, laughing, a basket of cloth beside her.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1491,7 +1492,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: river bandits gambling with dice on a broken boat by the river, waving the viewer over.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1500,7 +1501,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a tree heavy with glossy red fruit by an empty road, Zhou Yu raising a warning finger.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1509,7 +1510,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a small boat in thick river fog, an old boatman squatting at the bow smoking a long pipe, dangerous rapids ahead.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1518,7 +1519,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a crumbling mountain temple with a noseless earth-god statue, half a stick of incense still smoking in the censer.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1527,7 +1528,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a big gilded chest carved with the character 袁 in an army camp, a pompous lord forcing a smile.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1536,7 +1537,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a lean middle-aged doctor treating a village woman at a roadside medicine stall, his box painted 沛国华佗.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1545,7 +1546,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a Taoist in white blocking the road, waving a banner reading 于吉仙师 符水治百病, followers kneeling.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1554,7 +1555,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a plump merchant with a donkey cart piled with exotic goods, spreading his arms in welcome.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1563,7 +1564,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a roadside smithy with a roaring forge, a bare-chested old blacksmith hammering a glowing blade.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1572,7 +1573,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a half-collapsed ancient tomb in a mountain hollow, cold wind from the entrance, Sun Ce stepping in eagerly while Zhou Yu checks his ledger.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1581,7 +1582,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a young diviner at a fortune-telling stall under a tree, sign reading 管辂神算.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1590,7 +1591,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: the famous critic Xu Shao sitting under a tree by the roadside, one hopeful man bowing before him waiting for his verdict.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1599,7 +1600,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: two beautiful adult sisters washing clothes by a river, one gentle and one lively, Sun Ce and Zhou Yu frozen mid-step staring.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1608,7 +1609,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a tavern drinking contest: Sun Ce slamming a wine jar on the table, a couple of onlookers cheering in the background.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1617,7 +1618,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: ragged deserters without armour crouching by the road gnawing bark, shrinking back in fear.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1626,7 +1627,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a sudden thunderstorm turning a road into mud, the army struggling through the rain.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1635,7 +1636,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a horse dealer holding the reins of two horses — a white-faced one with an ominous look and a fiery red one.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1644,7 +1645,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a few Xiliang soldiers escorting grain carts with sacks stamped 董 along a road below a hill.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1653,7 +1654,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a small group of men in yellow headscarves carrying a white flag, kneeling on a road.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1662,7 +1663,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a one-eyed bandit with a big axe jumping out at a mountain bend, his gang behind him.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1671,7 +1672,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a mountain bandit fort with a tattered 替天行道 banner, smoke of roasting meat rising, Sun Ce swallowing.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1680,7 +1681,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a night camp raid: dogs barking, a wall of torches coming out of the dark.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1689,7 +1690,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a Yellow Turban remnant camp in a valley: old people, children and women around a pot of wild greens, thin smoke.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1698,7 +1699,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a ruined temple where a woman in a yellow headscarf cleans a wounded soldier's wound, a Taiping talisman on her medicine box.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1707,7 +1708,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: Yellow Turban remnants charging out of a forest with sticks and bamboo spears, shouting.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1716,7 +1717,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a roadside toll shed where two soldiers in Yuan livery block the road with spears, demanding rice.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1725,7 +1726,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a narrow alley at night lit by a green lantern, a masked man opening his coat full of stolen treasures.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1734,7 +1735,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a suspicious peddler caught at a city gate, a map of the city defences falling out of his carrying pole.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1743,7 +1744,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: two old soldiers, one missing an arm, sunning themselves at a city gate and recognising Sun Ce with joy.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1752,7 +1753,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a village entrance hung with white cloth, an old doctor raising his hand to stop the viewer.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1761,7 +1762,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a crowded teahouse, everyone whispering behind their hands.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1770,7 +1771,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: children clapping and running along a road singing, in the background the silhouette of a huge fat man.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
@@ -1779,7 +1780,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: an envoy presenting an invitation card from the allied commander's camp, banquet tents in the background.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most three characters in the picture, no crowds (anyone else only as distant silhouettes).
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four characters in the picture, no crowds (anyone else only as distant silhouettes).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
