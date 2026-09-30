@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PICS = ROOT / "pics"
 NL = "\n"
 
+DONGBAI = ("Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor "
+           "and two huge bronze hammers (her delivered portrait and CGs all look like this)")
 HERO = "the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder"
 STYLE = ("Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean "
          "ink outlines, rich vibrant colors")
@@ -473,7 +475,7 @@ BATTLES = {
 # story cg key: the scene
 CGS = {
     "c5_yuexia": "a moonlit garden behind the Minister's mansion, a round moon gate: Diaochan (adult, of great beauty) finishing a silent dance half a step from the hero, long sleeves still drifting in the night wind, an empty wine cup on the stone steps; her smile teasing and unreadable; silver-blue moonlight",
-    "c4_mangshan": "dawn on Mount Mang north of Luoyang, mist below: Dong Bai (adult, in red riding clothes) on a chestnut horse glancing back with red ears after a quick kiss, galloping downhill; the hero on his horse behind her touching his cheek, stunned; the grey city far below in the sunrise",
+    "c4_mangshan": "dawn on Mount Mang north of Luoyang, mist below: Dong Bai (adult, silver ponytail, purple fur-trimmed riding armor) on a chestnut horse glancing back with red ears after a quick kiss, galloping downhill; the hero on his horse behind her touching his cheek, stunned; the grey city far below in the sunrise",
     "c5_chuxi": "New Year's Eve on the highest roof of the chancellor's mansion in Chang'an: Dong Bai (adult) asleep on the hero's shoulder with half a burnt flatbread in her hand, the hero sitting still and not daring to look down; below, the city glowing with bonfires of crackling bamboo, snow on the tiles",
     "c4_xizi": "lamplight inside a small army tent at night: Cai Wenji (adult, in white) guiding the hero's hand over a brush, her hand over his, both leaning over a sheet of paper with wobbly characters; soft warm glow, tender and shy",
     "c5_snow": "a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) playing a guqin on her knees with snow settling on the strings, the hero sitting beside her in a red wedding robe she has just fitted on him; lantern glow, quiet and bittersweet",
@@ -489,7 +491,7 @@ CGS = {
     "end_tonggui": "an ending card illustration, quiet and symbolic: three sets of footprints side by side in fresh snow before the closed Xuanping Gate of Chang'an at dawn, a pair of notched bronze hammers and a broken guqin lying together in the snow; soft falling snow, muted colours, no people, no blood",
     "c4_tonggui": "dawn at a snowy Chang'an city gate: the short-haired hero in battered silver armor stands with Sun Jian's big blade, Dong Bai (adult) on his left with her notched twin hammers, Cai Wenji (adult) on his right holding a broken guqin; the three of them smiling faintly; before them the silhouette of Lü Bu on Red Hare raising his halberd, Gao Shun's black shield wall behind; restrained and elegiac, no gore",
     "c6_fenghou": "the throne hall in Chang'an: the ten-year-old boy emperor on a huge throne, leaning forward and insisting in a trembling voice; below, the white-haired Wang Yun bowing with a smile that doesn't reach his eyes; the short-haired hero in silver armor kneeling in surprise among the ministers; Lü Bu smirking in the front row",
-    "c6_escape": "night escape from Chang'an: a covered carriage racing through a burning city gate; Dong Bai (adult) on horseback in red with her twin hammers leading a few hundred black-armored veterans; the hero riding beside the carriage with the boy emperor peeking out clutching a small bundle; Diaochan (adult) riding pillion behind the hero; in the distance the white-haired Huangfu Song holding a gate with his guards",
+    "c6_escape": "night escape from Chang'an: a covered carriage racing through a burning city gate; Dong Bai (adult) on horseback in her purple armor with her twin hammers leading a few hundred black-armored veterans; the hero riding beside the carriage with the boy emperor peeking out clutching a small bundle; Diaochan (adult) riding pillion behind the hero; in the distance the white-haired Huangfu Song holding a gate with his guards",
     "c6_huihe": "the restored gate of Luoyang at dawn: the huge Sun Jian in tiger-pelt cape dismounted and kneeling on one knee in the dust before the small boy emperor stepping down from a battered carriage; Lady Wu running from the crowd toward the hero; Jiangdong soldiers in neat ranks",
     "c6_seal": "a makeshift throne hall in half-ruined Luoyang: the boy emperor on a simple throne, asking quietly; Sun Jian standing before him with a brocade box held firmly against his chest, not offering it; Zhou Yu writing in his ledger with lowered eyes; the hero silent among the ministers; Lady Wu watching Sun Jian from the back",
     "c7_huangzhong": "a captured camp in Nanyang: Huang Zhong, a sturdy man in his 40s in rough soldier's clothes, rope marks on his wrists, drawing a heavy bow to full; his arrow snapping the banner pole with the character 袁 on the far camp gate; Sun Ce gaping, the hero grinning",
@@ -822,7 +824,7 @@ def cg_prompt(scene: str) -> str:
             f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third "
             f"less busy (dialogue text sits there).{NL}"
             f"Style: {STYLE}, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.{NL}"
-            f"(When the hero appears — {HERO}.)")
+            f"(When the hero appears — {HERO}.)" + (f"{NL}({DONGBAI}.)" if "Dong Bai" in scene else ""))
 
 
 def fate_prompt(sym: str) -> str:
@@ -868,8 +870,9 @@ def main() -> None:
                 for i, (kind, key, what) in enumerate(todo, 1)]
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
     out += ["## 立绘（竖版 3:4）", ""]
+    redo = {k for k, _ in REDO}
     for key, p in PORTRAITS.items():
-        if key in done:
+        if key in done and key not in redo:
             continue
         status = "🟡 换掉占位" if key in art["portraits"] else "⬜ 缺"
         out += [f"### `{key}` {status}", "", "```", OVERRIDES.get(key) or portrait_prompt(p), "```", ""]
@@ -880,7 +883,7 @@ def main() -> None:
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or battle_prompt(scene), "```", ""]
     out += ["## 剧情插图 CG（横版 16:9）", ""]
     for key, scene in CGS.items():
-        if key in art.get("cgs", {}):
+        if key in art.get("cgs", {}) and key not in redo:
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
     out += ["## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）", ""]

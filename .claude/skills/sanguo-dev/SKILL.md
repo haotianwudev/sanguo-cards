@@ -255,7 +255,8 @@ Writing rules:
   fighting 刘表 (no 岘山 / 黄祖 / ambush details — those he hears from others), and everyone knows 「见到吕布，跑」. When a character first appears he sizes them up in a `{lord}（内心）：` aside —
   recognised or 「没听过」, plus a modern jab that stays believable (袁绍 = the boss who loves meetings and never
   decides) — no forced office metaphors; famous people (孙坚) he simply knows. One per character; no historical detail he couldn't know; characters never cite 演义.
-- **Looks match the art.** A character's appearance in the text must match their portrait — or, before the art exists,
+- **Looks match the art.** Settled by delivered art: 董白 has a silver-white high ponytail and purple fur-trimmed armor (her 女骑 wear purple too);
+  鲍三娘 wears red armor over a green skirt; 刘备 fights with twin swords. A character's appearance in the text must match their portrait — or, before the art exists,
   the brief in `CARD-DESIGN.md` §7. When you write a new character's look, add/adjust their brief there; when new art
   arrives that differs, change the text (左慈: 「独眼瘸腿」 became 白发、竹杖、冒紫烟的葫芦 to match his portrait).
 - **Names.** A card name `A·B` shows **A on the name plate** and **B as the small tag** at the top of the card
