@@ -81,5 +81,6 @@
   "yahuan": {"file": "yahuan.jpg", "face": [0.51, 0.24], "head": 0.23},
   "xiuniang": {"file": "xiuniang.jpg", "face": [0.5, 0.29], "head": 0.24},
   "chuangong": {"file": "chuangong.jpg", "face": [0.52, 0.18], "head": 0.19},
-  "xianzhen": {"file": "xianzhen.jpg", "face": [0.5, 0.18], "head": 0.18}
+  "xianzhen": {"file": "xianzhen.jpg", "face": [0.5, 0.18], "head": 0.18},
+  "bingzhou": {"file": "bingzhou.jpg", "face": [0.48, 0.33], "head": 0.28}
 }

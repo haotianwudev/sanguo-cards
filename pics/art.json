@@ -793,6 +793,15 @@
       ],
       "head": 0.18,
       "license": "用户提供（Gemini 生成）"
+    },
+    "bingzhou": {
+      "src": "source/soldiers/bingzhou.jpg",
+      "face": [
+        0.48,
+        0.33
+      ],
+      "head": 0.28,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -1012,6 +1021,10 @@
     },
     "c3_end": {
       "src": "source/cg/c3_end.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_entrust": {
+      "src": "source/cg/c3_entrust.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

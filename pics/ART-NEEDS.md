@@ -159,7 +159,7 @@
 | ✅ 正式 | `huaxiong` | 华雄 |
 | ✅ 正式 | `feixiong_bing` | 飞熊军 |
 | ✅ 正式 | `liru` | 李儒 |
-| ⬜ 缺 | `bingzhou` | 并州狼骑 |
+| ✅ 正式 | `bingzhou` | 并州狼骑 |
 | ✅ 正式 | `xurong` | 徐荣 |
 
 能拿到的卡
@@ -282,7 +282,7 @@
 | ✅ 已有 | `c3_wenji` | 蔡文姬 |
 | ⬜ 缺 | `c3_supply` | 断粮 |
 | ⬜ 缺 | `c3_slip` | 说漏嘴 |
-| ⬜ 缺 | `c3_entrust` | 托玺 |
+| ✅ 已有 | `c3_entrust` | 托玺 |
 | ⬜ 缺 | `c3_warn` | 劝阻 |
 | ⬜ 缺 | `c3_feng` | 冯夫人 |
 | ⬜ 缺 | `c3_raid` | 夜袭 |
