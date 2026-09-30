@@ -100,6 +100,7 @@
 | `battle:hulao_ch1` | source/battles/hulao_ch1.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:feixiong` | source/battles/feixiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:biwu` | source/battles/biwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:lijue` | source/battles/lijue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
