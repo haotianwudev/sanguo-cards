@@ -38,76 +38,75 @@
 23. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
 24. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
 25. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-26. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
-27. `c3_supply` — 饥民与军粮（剧情 CG）
-28. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-29. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
-30. `c3_warn` — 劝阻孙坚（剧情 CG）
-31. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-32. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-33. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-34. `changan` — 第三章·长安地图底图（地图）
-35. `dongui` — 第四章·挟天子地图底图（地图）
-36. `yuxi` — 第三章·传国玉玺地图底图（地图）
-37. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-38. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-39. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-40. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-41. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-42. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-43. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-44. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-45. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
-46. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-47. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-48. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-49. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-50. `yiji` — 伊籍（第五章招贤馆）（立绘）
-51. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
-52. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
-53. `zongzei` — 宗贼（兵卡）（立绘）
-54. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
-55. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-56. `jx_zongzei` — 新野·宗贼（战斗 CG）
-57. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-58. `e_shuijing` — 事件·水镜先生（剧情 CG）
-59. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-60. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-61. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-62. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-63. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-64. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-65. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-66. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-67. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-68. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-69. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-70. `huangzu` — 黄祖（江夏太守）（立绘）
-71. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-72. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-73. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-74. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-75. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-76. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-77. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-78. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-79. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-80. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
-81. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-82. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-83. `c8_jiayan` — 宛城家宴（剧情 CG）
-84. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-85. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-86. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-87. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-88. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-89. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-90. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-91. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-92. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-93. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-94. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-95. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+26. `c3_supply` — 饥民与军粮（剧情 CG）
+27. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+28. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
+29. `c3_warn` — 劝阻孙坚（剧情 CG）
+30. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+31. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+32. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
+33. `changan` — 第三章·长安地图底图（地图）
+34. `dongui` — 第四章·挟天子地图底图（地图）
+35. `yuxi` — 第三章·传国玉玺地图底图（地图）
+36. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+37. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+38. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+39. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+40. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+41. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+42. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+43. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+44. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
+45. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+46. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+47. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+48. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+49. `yiji` — 伊籍（第五章招贤馆）（立绘）
+50. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
+51. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
+52. `zongzei` — 宗贼（兵卡）（立绘）
+53. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
+54. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+55. `jx_zongzei` — 新野·宗贼（战斗 CG）
+56. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+57. `e_shuijing` — 事件·水镜先生（剧情 CG）
+58. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+59. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+60. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+61. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+62. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+63. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+64. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+65. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+66. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+67. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+68. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+69. `huangzu` — 黄祖（江夏太守）（立绘）
+70. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+71. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+72. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+73. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+74. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+75. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+76. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+77. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+78. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+79. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
+80. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+81. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+82. `c8_jiayan` — 宛城家宴（剧情 CG）
+83. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+84. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+85. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+86. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+87. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+88. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+89. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+90. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+91. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+92. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+93. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+94. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -803,18 +802,6 @@ A vertical character portrait of an army cook (伙夫).
 Appearance: Burly, cheerful adult man with a bald head and a thick mustache.
 Armor & Clothing: Stained apron over a soldier's tunic.
 Weapon: Stirring a huge cauldron with a long ladle.
-Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `chuangong` ⬜ 缺
-
-```
-A vertical character portrait of a Jiangdong boatman (江东船工).
-Appearance: Wiry, sun-browned adult man with a headband and rolled trousers.
-Armor & Clothing: Simple hemp clothes, barefoot.
-Weapon: Carrying a long punting pole and a coil of rope over his shoulder.
 Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
@@ -1712,16 +1699,6 @@ A horizontal story event illustration: leaving the ruins of burning Luoyang: Sun
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
-### `c3_wenji`
-
-```
-A horizontal story event illustration: on a muddy road after a fight: Cai Wenji, an adult woman in a white robe, kneeling to pick up her guqin with a broken string, Dong Bai with her twin hammers looking away embarrassed, Lady Wu putting a cloak on Cai Wenji's shoulders.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-(Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor and two huge bronze hammers (her delivered portrait and CGs all look like this).)
 ```
 
 ### `c3_supply`

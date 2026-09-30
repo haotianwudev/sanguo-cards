@@ -84,6 +84,7 @@
 | `baosanniang` | source/generals/baosanniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yahuan` | source/soldiers/yahuan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiuniang` | source/soldiers/xiuniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chuangong` | source/soldiers/chuangong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -135,3 +136,4 @@
 | `cg:c2_counter` | source/cg/c2_counter.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_grand_chest` | source/cg/e_grand_chest.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:end_yusui` | source/cg/end_yusui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_wenji` | source/cg/c3_wenji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

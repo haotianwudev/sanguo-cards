@@ -56,7 +56,7 @@
 | ✅ 正式 | `liehu` | 山中猎户 |
 | ✅ 正式 | `yuenv_gong` | 越女弓手 |
 | ⬜ 缺 | `huofu` | 伙夫 |
-| ⬜ 缺 | `chuangong` | 江东船工 |
+| ✅ 正式 | `chuangong` | 江东船工 |
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
 | ✅ 正式 | `yahuan` | 丫鬟 |
 | ⬜ 缺 | `chuniang` | 厨娘 |
@@ -279,7 +279,7 @@
 | 状态 | key | 剧情格 |
 |---|---|---|
 | ⬜ 缺 | `c3_leave` | 出洛阳 |
-| ⬜ 缺 | `c3_wenji` | 蔡文姬 |
+| ✅ 已有 | `c3_wenji` | 蔡文姬 |
 | ⬜ 缺 | `c3_supply` | 断粮 |
 | ⬜ 缺 | `c3_slip` | 说漏嘴 |
 | ⬜ 缺 | `c3_entrust` | 托玺 |

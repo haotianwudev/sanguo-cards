@@ -775,6 +775,15 @@
       ],
       "head": 0.24,
       "license": "用户提供（Gemini 生成）"
+    },
+    "chuangong": {
+      "src": "source/soldiers/chuangong.jpg",
+      "face": [
+        0.52,
+        0.18
+      ],
+      "head": 0.19,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -986,6 +995,10 @@
     },
     "end_yusui": {
       "src": "source/cg/end_yusui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_wenji": {
+      "src": "source/cg/c3_wenji.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
