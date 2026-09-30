@@ -158,6 +158,15 @@
       "license": "Public domain",
       "artist": "Unknown author"
     },
+    "caiwenji": {
+      "src": "source/generals/caiwenji.jpg",
+      "face": [
+        0.51,
+        0.24
+      ],
+      "head": 0.23,
+      "license": "用户提供（Gemini 生成）"
+    },
     "diaochan": {
       "src": "source/generals/diaochan.jpg",
       "face": [

@@ -37,12 +37,11 @@
 22. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
 23. `c3_news` — 纪灵败退与噩耗（剧情 CG）
 24. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-25. `caiwenji` — 蔡文姬（立绘）
-26. `yuanshu` — 袁术（立绘）
-27. `jiling` — 纪灵（立绘）
-28. `leibo` — 雷薄（立绘）
-29. `chenlan` — 陈兰（立绘）
-30. `qiaorui` — 桥蕤（立绘）
+25. `yuanshu` — 袁术（立绘）
+26. `jiling` — 纪灵（立绘）
+27. `leibo` — 雷薄（立绘）
+28. `chenlan` — 陈兰（立绘）
+29. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -583,18 +582,6 @@ Appearance: Wiry, sun-browned adult man with a headband and rolled trousers.
 Armor & Clothing: Simple hemp clothes, barefoot.
 Weapon: Carrying a long punting pole and a coil of rope over his shoulder.
 Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `caiwenji` ⬜ 缺
-
-```
-A vertical character portrait of Cai Wenji (蔡文姬, Cai Yan), the gifted poet and musician, daughter of the scholar Cai Yong.
-Appearance: Adult woman in her 20s, gentle but steady eyes with a quiet sorrow, long black hair half tied with a white ribbon.
-Armor & Clothing: Plain white scholar's robe with pale blue trim, a little dusty from the road.
-Weapon: Holding a guqin (古琴) to her chest; one of its strings is broken.
-Background: A quiet, candlelit ancient scholar study with unrolled bamboo scrolls on low tables, a bronze incense burner emitting delicate fragrant smoke ribbons, and a painted silk partition screen.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```

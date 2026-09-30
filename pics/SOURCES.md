@@ -21,6 +21,7 @@
 | `wujing` | source/generals/wujing.jpg | 用户提供 | Antigravity 生成 | — |
 | `sunben` | source/generals/sunben.jpg | 用户提供 | Antigravity 生成 | — |
 | `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
+| `caiwenji` | source/generals/caiwenji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `diaochan` | source/generals/diaochan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |
 | `guanyu` | source/generals/guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
