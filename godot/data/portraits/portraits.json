@@ -23,7 +23,7 @@
   "huangzhong": {"file": "huangzhong.jpg", "face": [0.34, 0.13], "head": 0.07, "placeholder": true},
   "jianyong": {"file": "jianyong.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true},
   "liaohua": {"file": "liaohua.jpg", "face": [0.45, 0.25], "head": 0.1, "placeholder": true},
-  "liubei": {"file": "liubei.jpg", "face": [0.45, 0.22], "head": 0.08, "placeholder": true},
+  "liubei": {"file": "liubei.jpg", "face": [0.5, 0.22], "head": 0.2},
   "lvbu": {"file": "lvbu.jpg", "face": [0.49, 0.36], "head": 0.22},
   "lvmeng": {"file": "lvmeng.jpg", "face": [0.4, 0.17], "head": 0.07, "placeholder": true},
   "machao": {"file": "machao.jpg", "face": [0.48, 0.13], "head": 0.07, "placeholder": true},

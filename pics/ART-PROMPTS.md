@@ -44,13 +44,12 @@
 29. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
 30. `c3_news` — 纪灵败退与噩耗（剧情 CG）
 31. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-32. `liubei` — 刘备（换掉占位）（立绘）
-33. `caiwenji` — 蔡文姬（立绘）
-34. `yuanshu` — 袁术（立绘）
-35. `jiling` — 纪灵（立绘）
-36. `leibo` — 雷薄（立绘）
-37. `chenlan` — 陈兰（立绘）
-38. `qiaorui` — 桥蕤（立绘）
+32. `caiwenji` — 蔡文姬（立绘）
+33. `yuanshu` — 袁术（立绘）
+34. `jiling` — 纪灵（立绘）
+35. `leibo` — 雷薄（立绘）
+36. `chenlan` — 陈兰（立绘）
+37. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -687,18 +686,6 @@ Appearance: Short, round-bellied man in his 30s with a sly smile and small shrew
 Armor & Clothing: Plain officer's armor over a merchant-style robe (he is in disguise), a straw hat hanging on his back.
 Weapon: A heavy broad saber resting on his shoulder.
 Background: A bustling ancient market street outside Nanyang city gate, with merchant carts, tiled roofs, hanging red lanterns, and market stalls.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `liubei` 🟡 换掉占位
-
-```
-A vertical character portrait of Liu Bei (刘备), the humble, earnest leader who calls himself a descendant of the Prince of Zhongshan.
-Appearance: Gentle-faced man in his early 30s with notably large earlobes and long arms, kind sincere eyes, neat short beard, a slightly awkward, eager-to-please smile.
-Armor & Clothing: Modest green-and-cream Han scholar-general robe over light leather armor, a simple topknot with a cloth band.
-Weapon: Holding his twin swords (双股剑) a little clumsily in both hands, as if not quite sure how to use them.
-Background: A modest Han military garrison headquarters with a tactical map table, candle lanterns, rolled bamboo scrolls, and straw partitions.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
