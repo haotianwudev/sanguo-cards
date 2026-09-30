@@ -59,18 +59,6 @@
 
 ## 立绘（竖版 3:4）
 
-### `diaochan` 🟡 换掉占位
-
-```
-A vertical character portrait of Diaochan (貂蝉), the famed beauty and Wang Yun's adoptive daughter — clever, brave, always seeming to flirt — an adult woman.
-Appearance: Breathtakingly beautiful adult woman in her early 20s with a teasing, unreadable smile and knowing eyes.
-Armor & Clothing: Flowing layered silk dress in moonlit blue and silver with long dancing sleeves, a jade hairpin.
-Weapon: A round silk fan held half open, one long sleeve drifting in the air.
-Background: a moonlit garden with a round moon gate and curling incense smoke.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `huangzhong` 🟡 换掉占位
 
 ```

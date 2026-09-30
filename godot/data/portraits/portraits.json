@@ -17,7 +17,7 @@
   "wujing": {"file": "wujing.jpg", "face": [0.5, 0.2], "head": 0.2},
   "sunben": {"file": "sunben.jpg", "face": [0.5, 0.23], "head": 0.2},
   "dianwei": {"file": "dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true},
-  "diaochan": {"file": "diaochan.jpg", "face": [0.55, 0.22], "head": 0.07, "placeholder": true},
+  "diaochan": {"file": "diaochan.jpg", "face": [0.52, 0.27], "head": 0.24},
   "ganning": {"file": "ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true},
   "guanyu": {"file": "guanyu.jpg", "face": [0.51, 0.27], "head": 0.18},
   "huangzhong": {"file": "huangzhong.jpg", "face": [0.34, 0.13], "head": 0.07, "placeholder": true},
