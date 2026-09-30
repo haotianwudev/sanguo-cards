@@ -59,9 +59,8 @@
 44. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
 45. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
 46. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-47. `dagu` — 大谷·徐荣（精英）（战斗 CG）
-48. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
-49. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+47. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
+48. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
 
 交图规则：
 
@@ -784,14 +783,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the steps before the chancellor's mansion at night: the enormous Dong Zhuo with a drawn sword among his elite black-armored guards, wedding lanterns burning behind him.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `dagu`
-
-```
-A horizontal battle scene illustration: the Dagu pass outside Luoyang: the veteran Xiliang general Xu Rong on horseback before rows of heavy cavalry and spearmen in battle formation, dust and banners, an ambush glinting in the hills.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
