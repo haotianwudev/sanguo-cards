@@ -945,6 +945,10 @@
     "c2_setout": {
       "src": "source/cg/c2_setout.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_heqin": {
+      "src": "source/cg/c2_heqin.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

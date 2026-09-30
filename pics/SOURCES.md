@@ -127,3 +127,4 @@
 | `cg:c2_triple` | source/cg/c2_triple.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_biwu` | source/cg/e_biwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_setout` | source/cg/c2_setout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_heqin` | source/cg/c2_heqin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

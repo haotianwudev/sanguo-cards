@@ -209,7 +209,7 @@
 | ✅ 已有 | `c2_triple` | 威震诸侯 |
 | ⬜ 缺 | `c2_handover` | 交人 |
 | ✅ 已有 | `c2_keep` | 藏人 |
-| ⬜ 缺 | `c2_heqin` | 和亲 |
+| ✅ 已有 | `c2_heqin` | 和亲 |
 | ⬜ 缺 | `c2_mixin` | 密信 |
 | ✅ 已有 | `c2_yuxi` | 洛阳 |
 | ✅ 已有 | `c2_dongbai_join` | 洛阳 |
