@@ -260,7 +260,7 @@ poison); 蔡夫人 is spared death but divorced by 刘表 on the spot, stripped 
 督荆襄九郡大都督; moonlit 楼船 and hot chestnuts. (未完待续)
 第五章 rogue: soldier_pool = 荆州 types (荆州步卒 / 荆州弓手 / 荆州水军 / 蔡府连弩手) + 宗贼 + 锦帆贼 + own; 招贤馆 recruits 文聘 / 伊籍 / 甘宁;
 extra fights 汉水渡口·锦帆贼, 新野·宗贼 (周瑜 recalls 蒯越 killing 55 宗贼 leaders at a banquet — foreshadowing), 城防·荆州步卒; ？ events
-水镜先生 司马徽 (「好，好」; 卧龙 is eleven and herding cattle — children stay off-stage), 岘山老农 庞德公, 沔南名士 黄承彦 (蔡瑁's brother-in-law:
+水镜先生 司马徽 (「好，好」; 「荆州的奇才都还没长大」 — only the hero thinks of 诸葛亮; he's a child in 192 and not in 荆州 yet), 岘山老农 庞德公, 沔南名士 黄承彦 (蔡瑁's brother-in-law:
 「别喝金杯里的酒」), 锦帆游侠 甘宁 (on his way to 刘表).
 The locked north
 birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
