@@ -251,8 +251,9 @@ coming to see the 汉江; 蔡夫人 (claims 蔡文姬 as kin via a genealogy, sh
 she dies in his arms (「这回，换妾身护了你一次」), he has the 蔡 clan wiped out (董白: 「你越来越像我爷爷了」) and is stabbed by a 蔡 retainer
 by the 汉江 → **结局三 · 恨海** (restrained). **With both**: the hero dreams it all and runs barefoot to 贾诩, who names the poison (鸩羽落红) at once;
 贾诩 plans 联蒯灭蔡, 蒯越 turns, the hero hides
-everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls; 貂蝉 reads the room anyway and rises to drink the cup for him (hand at her
-hairpin, as in 恨海) — he knows the scene from the dream and pulls her back into his arms, hands her grapes (「她喝不得烈酒，免了」), offers
+everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls; 貂蝉, who knows nothing of his plan, reads the trap, takes his jokes for
+obliviousness and rises to drink the cup for him (hand at her hairpin, as in 恨海) — he pulls her back into his arms; only when the
+crossbows turn does she see it was all arranged (「你今晚唯一的差事，是吃葡萄」 / on the 楼船: 「白费得真好」); hands her grapes (「她喝不得烈酒，免了」), offers
 蔡瑁 half the cup, the poison burns the carpet, the crossbows turn; only the ringleaders die, 刘表 hands over the army, 蒯越 joins, the hero is
 督荆襄九郡大都督; moonlit 楼船 and hot chestnuts. (未完待续)
 The locked north
