@@ -829,6 +829,10 @@
     "c2_raid": {
       "src": "source/cg/c2_raid.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_yuxi": {
+      "src": "source/cg/c2_yuxi.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
