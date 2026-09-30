@@ -15,35 +15,34 @@
 
 1. `xiliang_youqi` — 西凉游骑（尘土飞扬的中原官道）（战斗 CG）
 2. `guosi` — 郭汜（掠夺焚烧村落的西凉军寨）（战斗 CG）
-3. `feixiong` — 飞熊军（黑甲重骑阵列）（战斗 CG）
-4. `liru` — 李儒伏兵（峡谷险道两侧峭壁伏兵）（战斗 CG）
-5. `lijue` — 洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）（战斗 CG）
-6. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
-7. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
-8. `e_tangji` — 破庙救唐姬（剧情 CG）
-9. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-10. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
-11. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
-12. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
-13. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
-14. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
-15. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
-16. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
-17. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-18. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
-19. `c3_supply` — 饥民与军粮（剧情 CG）
-20. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
-21. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
-22. `c3_warn` — 劝阻孙坚（剧情 CG）
-23. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
-24. `c3_news` — 纪灵败退与噩耗（剧情 CG）
-25. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
-26. `caiwenji` — 蔡文姬（立绘）
-27. `yuanshu` — 袁术（立绘）
-28. `jiling` — 纪灵（立绘）
-29. `leibo` — 雷薄（立绘）
-30. `chenlan` — 陈兰（立绘）
-31. `qiaorui` — 桥蕤（立绘）
+3. `liru` — 李儒伏兵（峡谷险道两侧峭壁伏兵）（战斗 CG）
+4. `lijue` — 洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）（战斗 CG）
+5. `xiliang_scout` — 截粮·西凉斥候（山脚运粮辎重车队）（战斗 CG）
+6. `c2_setout` — 第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）（剧情 CG）
+7. `e_tangji` — 破庙救唐姬（剧情 CG）
+8. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+9. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+10. `c3_shanfei` — 独眼匪首（第三章流民匪患）（战斗 CG）
+11. `c3_qiaorui` — 城外·桥蕤（第三章南阳城外便装伏兵）（战斗 CG）
+12. `c3_jiling` — 山口·纪灵（第三章大雨隘口决战）（战斗 CG）
+13. `c3_leibo` — 山道追兵·雷薄（第三章清晨山道追击）（战斗 CG）
+14. `c3_chenlan` — 夜袭·陈兰（第三章雨夜火把夜袭）（战斗 CG）
+15. `c3_yuanshu` — 袁术（第三章金顶马车与大军）（战斗 CG）
+16. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+17. `c3_wenji` — 救蔡文姬（泥泞道边拾断弦琴）（剧情 CG）
+18. `c3_supply` — 饥民与军粮（剧情 CG）
+19. `c3_slip` — 酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）（剧情 CG）
+20. `c3_entrust` — 托付玉玺（孙坚夜交锦盒于吴夫人）（剧情 CG）
+21. `c3_warn` — 劝阻孙坚（剧情 CG）
+22. `c3_raid` — 陈兰雨夜袭营（剧情 CG）
+23. `c3_news` — 纪灵败退与噩耗（剧情 CG）
+24. `c3_end` — 碎玺决战（吴夫人碎玉玺面袁术）（剧情 CG）
+25. `caiwenji` — 蔡文姬（立绘）
+26. `yuanshu` — 袁术（立绘）
+27. `jiling` — 纪灵（立绘）
+28. `leibo` — 雷薄（立绘）
+29. `chenlan` — 陈兰（立绘）
+30. `qiaorui` — 桥蕤（立绘）
 
 交图规则：
 
@@ -906,14 +905,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the raider general Guo Si on horseback in a plundered burning village.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `feixiong`
-
-```
-A horizontal battle scene illustration: Dong Zhuo's Flying Bear heavy cavalry in black armor lined up on an open plain.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the top-left and top-right corners calm (HP bar and log sit there), the bottom 45% simple ground (our cards cover it, half see-through).
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
