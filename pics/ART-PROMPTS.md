@@ -167,18 +167,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `baosanniang` ⬜ 缺
-
-```
-A vertical character portrait of Bao Sanniang (鲍三娘), the heroine of the Bao manor who beat every suitor — an adult woman.
-Appearance: Cheerful, athletic adult woman in her 20s with a playful grin and a braid wrapped around her head.
-Armor & Clothing: Practical pale-green armor over a red martial robe, arm guards.
-Weapon: A spear spun behind her back in a ready stance.
-Background: a country manor's training yard with weapon racks and a few defeated suitors sitting on the ground.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `wangyi` ⬜ 缺
 
 ```

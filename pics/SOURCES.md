@@ -77,6 +77,7 @@
 | `zhuzhi` | source/generals/zhuzhi.jpg | 用户提供 | Antigravity 生成 | — |
 | `yuanshao` | source/generals/yuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caocao` | source/generals/caocao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `baosanniang` | source/generals/baosanniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
