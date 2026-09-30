@@ -254,7 +254,8 @@ by the 汉江 → **结局三 · 恨海** (restrained). **With both**: the hero 
 everything from 貂蝉 (吴夫人 dresses her), the 闸 never falls; 貂蝉, who knows nothing of his plan, reads the trap, takes his jokes for
 obliviousness and rises to drink the cup for him (hand at her hairpin, as in 恨海) — he pulls her back into his arms; only when the
 crossbows turn does she see it was all arranged (「你今晚唯一的差事，是吃葡萄」 / on the 楼船: 「白费得真好」); hands her grapes (「她喝不得烈酒，免了」), offers
-蔡瑁 half the cup, the poison burns the carpet, the crossbows turn; only the ringleaders die, 刘表 hands over the army, 蒯越 joins, the hero is
+蔡瑁 half the cup, the poison burns the carpet, the crossbows turn; 刘表 runs over before dawn to swear he knew nothing and cuts ties with the 蔡 (「早就不甚往来」), the 蔡 elders strike 蔡瑁
+out of the very genealogy 蔡夫人 used on 蔡文姬 and hand over 800 men, 30 ships and money to save themselves; only the ringleaders die, 刘表 hands over the army, 蒯越 joins, the hero is
 督荆襄九郡大都督; moonlit 楼船 and hot chestnuts. (未完待续)
 第五章 rogue: soldier_pool = 荆州 types (荆州步卒 / 荆州弓手 / 荆州水军 / 蔡府连弩手) + 宗贼 + 锦帆贼 + own; 招贤馆 recruits 文聘 / 伊籍 / 甘宁;
 extra fights 汉水渡口·锦帆贼, 新野·宗贼 (周瑜 recalls 蒯越 killing 55 宗贼 leaders at a banquet — foreshadowing), 城防·荆州步卒; ？ events
