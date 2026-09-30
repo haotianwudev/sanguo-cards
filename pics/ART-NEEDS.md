@@ -197,7 +197,6 @@
 | ⬜ 缺 | `c2_setout` | 北上 |
 | ✅ 已有 | `c2_zumao` | 阵前 |
 | ⬜ 缺 | `c2_zumao_saved` | 救祖茂 |
-| ⬜ 缺 | `c2_jianhua` | 孙坚斩华雄 |
 | ⬜ 缺 | `c2_counter` | 收拢士卒 |
 | ⬜ 缺 | `c2_borrow` | 借将 |
 | ✅ 已有 | `c2_capture` | 俘虏 |
@@ -205,7 +204,6 @@
 | ✅ 已有 | `c2_raid` | 吕布劫营 |
 | ✅ 已有 | `c2_sanying` | 三英战吕布 |
 | ✅ 已有 | `c2_triple` | 威震诸侯 |
-| ⬜ 缺 | `c2_fate` | 董白的命运 |
 | ⬜ 缺 | `c2_handover` | 交人 |
 | ✅ 已有 | `c2_keep` | 藏人 |
 | ⬜ 缺 | `c2_heqin` | 和亲 |
