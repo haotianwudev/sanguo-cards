@@ -1,9 +1,11 @@
 extends TestCase
-## Chapters 3 and 4 walked end to end on every 周目 route: which squares come up, what gets recorded,
+## Chapters 3 to 5 walked end to end on every 周目 route: which squares come up, what gets recorded,
 ## which chapter follows, which ending (if any) the run reaches.
 
 const E1 := "结局一 · 玉碎"
 const E2 := "结局二 · 同归"
+const E3 := "结局三 · 恨海"
+const JX := "贾诩：入队"
 
 
 func rng(seed_value: int) -> RandomNumberGenerator:
@@ -164,9 +166,9 @@ func test_lap3_chapter4_escapes_with_the_emperor_and_takes_nanyang() -> void:
 		for c in ["diaochan", "xuhuang", "huangzhong"]:
 			check(s.has_card(c), c + " joins")
 		check(s.run_records.has("长安：带陛下出城") and s.run_records.has("南阳：袁术东逃"))
-		check(not s.run_records.has(E2), "no ending on this road — 未完待续")
+		check(not s.run_records.has(E2), "no ending on this road")
 		finish(d, s)
-		check(Quests.current_quest(s) == null, "nothing after 第四章 yet")
+		check_eq(Quests.current_quest(s)["id"], "jingxiang", "第五章 follows 南阳")
 
 
 # ---- every map, every flag combination ----------------------------------------------------
@@ -188,7 +190,7 @@ func reachable(q: Dictionary, s: SaveData) -> Dictionary:
 
 
 func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap() -> void:
-	for id in ["yuxi", "shouluoyang", "changan", "dongui"]:
+	for id in ["yuxi", "shouluoyang", "changan", "dongui", "jingxiang"]:
 		var q := quest_by_id(id)
 		var sq: Dictionary = q["squares"]
 		var lines := {}
@@ -265,3 +267,104 @@ func test_the_bundled_font_has_every_character_the_game_prints() -> void:
 			if c >= 0x3400 and not font.has_char(c):
 				missing[String.chr(c)] = f
 	check(missing.is_empty(), "not in the font (run tools/build_fonts.py): %s" % str(missing))
+
+
+# ---- 第五章 · 荆襄风云: first time the banquet kills 貂蝉 (结局三); after it, 贾诩 (met in 长安, recruited in 第四章) breaks it ----
+
+func ch5_save(flags: Array) -> SaveData:
+	var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"] + flags,
+			["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui"])
+	for c in ["diaochan", "xunyou", "huangzhong", "caiwenji"]:
+		s.grant_card(c)
+	return s
+
+
+func test_chapter5_first_time_the_banquet_ends_in_ending_three() -> void:
+	for fork in [["jx_gongshou", "m_jx1", "m_jx3"], ["m_jx2", "t_jx1", "t_jx3"]]:
+		var s := ch5_save([])
+		var q := quest_by_id("jingxiang")
+		check_eq(Quests.current_quest(s)["id"], "jingxiang")
+		var p := walk(q, s, fork)
+		for sid in ["jx_wan", "jx_diaochan", "jx_laixi", "jx_bubing", fork[0], "jx_huangzu", "jx_rest", "jx_tianshi", "jx_qinggong",
+				"jx_jinggao", "jx_xiangyang", "jx_mimou", "jx_shuijun", "jx_yiguan", "jx_a_fuyan", "jx_a_nushou", "jx_a_caimao",
+				"jx_a_xiangxiao", "jx_a_xuexi", "jx_a_henhai"]:
+			check(p.has(sid), "恨海 route passes %s (fork %s)" % [sid, fork[0]])
+		for sid in ["jx_meng", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_shuige", "jx_b_dianxing", "jx_b_louchuan"]:
+			check(not p.has(sid), "恨海 route never reaches " + sid)
+		check_eq(p[-1], "jx_a_henhai")
+		check(s.run_records.has(E3), "the run reaches 结局三")
+		check(not s.has_card("kuaiyue"), "蒯越 never joins")
+		finish(q, s)
+		check(s.flags.has(E3))
+		check(Quests.current_quest(s) == null, "the story stops at 结局三")
+
+
+func test_chapter5_after_ending_three_jiaxu_breaks_the_banquet() -> void:
+	var s := ch5_save([E3, JX])
+	s.grant_card("jiaxu")
+	var q := quest_by_id("jingxiang")
+	var p := walk(q, s, [])
+	for sid in ["jx_tianshi", "jx_meng", "jx_jinggao", "jx_yiguan", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_dress", "jx_b_shuige",
+			"jx_b_caimao", "jx_b_dianxing", "jx_b_louchuan"]:
+		check(p.has(sid), "破局 route passes " + sid)
+	for sid in ["jx_qinggong", "jx_a_fuyan", "jx_a_xiangxiao", "jx_a_henhai"]:
+		check(not p.has(sid), "破局 route never reaches " + sid)
+	check_eq(p[-1], "jx_b_louchuan")
+	check(s.has_card("kuaiyue"), "蒯越 joins")
+	check(s.run_records.has("荆襄：联蒯灭蔡") and s.run_records.has("貂蝉：全员生还"))
+	finish(q, s)
+	check(Quests.current_quest(s) == null, "未完待续 after 荆襄")
+
+
+func test_chapter5_plays_with_real_fights_on_both_routes() -> void:
+	for flags in [[], [E3, JX]]:
+		var s := ch5_save(flags)
+		var q := quest_by_id("jingxiang")
+		var r := rng(5)
+		Quests.begin(q, s, r)
+		var fights := 0
+		for _step in 200:
+			var sq := Quests.here(q, s)
+			if sq["type"] == "mystery" and not s.resolved:
+				var ev := Quests.event_here(q, s, r)
+				var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
+				Quests.choose_event(q, s, r, ok[0])
+			if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
+				var f := Quests.battle_here(q, s)
+				s.party = s.auto_party()
+				var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"])
+				bot_fight(b)
+				fights += 1
+				s.damage = 0
+			Quests.offer(q, s, r)
+			Quests.resolve(q, s, r, 0 if not s.offer.is_empty() else -1)
+			s.offer = []
+			s.resolved = true
+			var opts := Quests.next_options(q, s)
+			if opts.is_empty():
+				break
+			Quests.move(q, s, opts[0]["id"])
+		check_eq(s.square, "jx_b_louchuan" if flags.has(E3) else "jx_a_henhai", "reached the end of 第五章 %s" % str(flags))
+		check(fights >= 5, "fought the chapter's battles (%d)" % fights)
+
+
+func test_chapter5_without_jiaxu_the_banquet_still_ends_in_ending_three() -> void:
+	var s := ch5_save([E3])  # 结局三 reached, but 贾诩 was passed by in 第四章
+	var p := walk(quest_by_id("jingxiang"), s, [])
+	check(p.has("jx_qinggong") and p.has("jx_a_fuyan") and not p.has("jx_meng") and not p.has("jx_b_dingce"), "no 贾诩, no way out")
+	check_eq(p[-1], "jx_a_henhai")
+
+
+func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:
+	for flags in [[E3], []]:
+		for fork in [["m2"], ["rest"]]:
+			var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"] + flags,
+					["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+			var p := walk(quest_by_id("dongui"), s, fork)
+			for sid in ["zhangxiu6", "zhangji6", "jiaxu6"]:
+				check_eq(p.has(sid), not flags.is_empty(), "%s only on 四周目 %s %s" % [sid, str(flags), fork[0]])
+			if not flags.is_empty():
+				check(not p.has("zhuibing") and not p.has("fanchou6"), "四周目 meets 张家 instead of the old pursuers")
+			check_eq(s.has_card("jiaxu"), not flags.is_empty())
+			check_eq(s.run_records.has(JX), not flags.is_empty())
+			check(p.has(fork[0]) and p.has("shaoka") and p.has("xuhuang") and p[-1] == "dongtao", "reaches 南阳 via " + fork[0])

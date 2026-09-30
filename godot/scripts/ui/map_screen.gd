@@ -652,8 +652,10 @@ func _show_square(s: Dictionary) -> void:
 			Kit.focus(rest)
 	# narrative text: one line per click, then the buttons
 	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()) \
-		or (s["type"] == "battle" and not save.resolved)  # a battle with lines of its own plays them before the fight
+		or (s["type"] in ["battle", "recover"] and not save.resolved)  # a battle / rest with lines of its own plays them first
 	_dlg_after = _battle_info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
+	if s["type"] == "recover" and not save.resolved:  # after a rest's own lines, what resting does
+		_dlg_after = text.text
 	if narrative and lines.size() > 1:
 		_dlg_lines = lines
 		_dlg_raw = raw_lines
