@@ -948,7 +948,6 @@ CHESTS = {
 }
 # already delivered but wrong somewhere: redraw (listed above the batch)
 REDO = [
-    ("inf_n", "官军刀兵：盾牌上的鹰和回纹边是古希腊重装步兵盾的样式——换成汉军的盾（长方形或圆盾，黑红漆面，饕餮 / 云纹或素面），其他不变"),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",

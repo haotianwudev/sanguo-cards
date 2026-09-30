@@ -137,3 +137,4 @@
 | `cg:e_grand_chest` | source/cg/e_grand_chest.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:end_yusui` | source/cg/end_yusui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_wenji` | source/cg/c3_wenji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_end` | source/cg/c3_end.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
