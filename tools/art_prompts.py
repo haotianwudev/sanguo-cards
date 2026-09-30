@@ -423,6 +423,16 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "c2_bubing": "a dusty Central Plains highway: a squad of Dong Zhuo's foot soldiers in black-and-red with long ji forming a line across the road",
+    "c2_gongqi": "a side path between wheat fields: Xiliang horse archers wheeling around and loosing arrows, fire arrows streaking",
+    "c3_xunluo": "outside a walled town in Nanyang: a Yuan army patrol with spears under a 袁 banner blocking a country road",
+    "c3_liukou": "a burned-out village: ragged bandits with sabers and stolen sacks of grain charging out from behind broken walls",
+    "c3_gongshou": "a fork in a road lined with trees: Yuan archers kneeling behind a low earth bank, bows drawn, a 袁 banner",
+    "c4_yaliang": "a mountain road: Xiliang soldiers on horseback guarding grain carts stamped 董, turning to fight",
+    "c5_xiangfu": "a red-lantern courtyard inside the chancellor's mansion at night: black-armored mansion guards with ji closing ranks between pillars",
+    "c6_qianfeng": "the road to Tong Pass at dusk: Li Jue's Xiliang vanguard cavalry charging out of a dust cloud under a 李 banner",
+    "c7_yingbing": "a summer road in Nanyang: Yuan army camp soldiers behind a shield line of big rectangular shields, spears levelled, a 袁 banner",
+    "c7_gongnu": "the edge of a wheat field in Nanyang: Yuan crossbowmen rising from the tall wheat and shooting, fire arrows in the air",
     "biwu": "a village fighting-for-a-husband stage hung with red silk: Bao Sanniang (adult) in pale-green armor twirling her spear with a cheeky grin, a row of defeated suitors rubbing their backs at the edge, a cheering crowd below",
     "c4_gaoshun": "the back gate of a scholar's mansion in Chang'an before dawn, the house burning behind: the grim, dark-faced Gao Shun standing like a post behind a wall of tall black shields bristling with halberds, his Trap-Breaking Camp utterly silent",
     "c4_langqi": "a long Chang'an street at dawn, lanterns smashed: Bingzhou wolf riders in fur-trimmed armor galloping straight at the viewer, sabers raised, their leader howling",
