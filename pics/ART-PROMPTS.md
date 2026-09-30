@@ -58,36 +58,52 @@
 43. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
 44. `end_yusui` — 结局卡·玉碎（象征画，不画人）（剧情 CG）
 45. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-46. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-47. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-48. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-49. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-50. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-51. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-52. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-53. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-54. `huangzu` — 黄祖（江夏太守）（立绘）
-55. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-56. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-57. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-58. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-59. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-60. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
-61. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-62. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-63. `c8_jiayan` — 宛城家宴（剧情 CG）
-64. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-65. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-66. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-67. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-68. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-69. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-70. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-71. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-72. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-73. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-74. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-75. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+46. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+47. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+48. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+49. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+50. `yiji` — 伊籍（第五章招贤馆）（立绘）
+51. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
+52. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
+53. `zongzei` — 宗贼（兵卡）（立绘）
+54. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
+55. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+56. `jx_zongzei` — 新野·宗贼（战斗 CG）
+57. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+58. `e_shuijing` — 事件·水镜先生（剧情 CG）
+59. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+60. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+61. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+62. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+63. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+64. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+65. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+66. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+67. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+68. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+69. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+70. `huangzu` — 黄祖（江夏太守）（立绘）
+71. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+72. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+73. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+74. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+75. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+76. `c8_louchuan` — 月下楼船·糖炒栗子（剧情 CG）
+77. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+78. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+79. `c8_jiayan` — 宛城家宴（剧情 CG）
+80. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+81. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+82. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+83. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+84. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+85. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+86. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+87. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+88. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+89. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+90. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+91. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -232,6 +248,114 @@ Appearance: Handsome, cocky young man in his early 20s with sharp eyebrows, a hi
 Armor & Clothing: Light silver-and-blue Xiliang scale armor with a short white cape, a white-tasselled helmet under his arm.
 Weapon: A long spear spun into a blur of spear-tip flowers.
 Background: a stone bridge over the Wei river at dawn, Xiliang cavalry with a 张 banner behind.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `wenpin` ⬜ 缺
+
+```
+A vertical character portrait of Wen Pin (文聘), a loyal, steady general of Jingzhou.
+Appearance: Solid, earnest man in his early 30s with a square face, a trimmed beard and calm, dutiful eyes.
+Armor & Clothing: Green-lacquered Jingzhou lamellar armor with a dark red cape.
+Weapon: A long spear held upright, a round shield on his back.
+Background: the walls of Xiangyang above the Han river at dawn, Jingzhou banners.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `yiji` ⬜ 缺
+
+```
+A vertical character portrait of Yi Ji (伊籍), a courteous, quick-witted Jingzhou scholar-envoy.
+Appearance: Slim, pleasant man in his early 30s with a thin moustache and a polite, clever smile.
+Armor & Clothing: A tidy sky-blue scholar's robe and black cap.
+Weapon: Bowing slightly with a sealed letter held in both hands.
+Background: a Xiangyang street with a recruitment notice board.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `simahui` ⬜ 缺
+
+```
+A vertical character portrait of Sima Hui (司马徽), 'Master Water Mirror', a hermit scholar who answers everything with 'good, good'.
+Appearance: Genial middle-aged man in his 40s with a long beard, half-closed smiling eyes and a serene, slightly mischievous expression.
+Armor & Clothing: A plain undyed hemp robe, straw sandals, a bamboo hat hanging on his back.
+Weapon: Holding a round bronze mirror in one hand and a feather fan in the other.
+Background: a thatched hut in a bamboo grove outside Xiangyang.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `pangdegong` ⬜ 缺
+
+```
+A vertical character portrait of Pang Degong (庞德公), the great recluse of Jingzhou who farms at the foot of Mount Xian.
+Appearance: Weathered, kindly old farmer-scholar in his 50s with a grey beard and clear, amused eyes.
+Armor & Clothing: A patched farmer's jacket with sleeves rolled up, a straw hat.
+Weapon: Leaning on a hoe.
+Background: terraced fields at the foot of Mount Xian by the Han river.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `huangchengyan` ⬜ 缺
+
+```
+A vertical character portrait of Huang Chengyan (黄承彦), an eccentric scholar-inventor of Mian'nan and Cai Mao's brother-in-law.
+Appearance: Wiry, grey-bearded man in his 40s with ink- and sawdust-stained fingers and a curious, absent-minded look.
+Armor & Clothing: A loose brown scholar's robe with sleeves tied back, tools tucked into his belt.
+Weapon: Holding a small self-walking wooden cart with gears.
+Background: a riverside workshop by the Mian river full of wooden contraptions.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `jingzhou_bu` ⬜ 缺
+
+```
+A vertical character portrait of a Jingzhou foot soldier (荆州步卒), a soldier card.
+Appearance: Stocky young soldier with a stubborn jaw.
+Armor & Clothing: Green-trimmed cloth-and-leather armor, a round shield painted 刘.
+Weapon: A broad saber raised behind the shield.
+Background: the gate of Xiangyang.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `caifu_nu` ⬜ 缺
+
+```
+A vertical character portrait of a Cai household repeating-crossbowman (蔡府连弩手), an elite soldier card.
+Appearance: Cold-eyed guard with a thin face.
+Armor & Clothing: Black-and-purple household livery over light armor, the Cai family crest.
+Weapon: A repeating crossbow braced at the shoulder.
+Background: silk curtains of a lavish pavilion, lamplight.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `zongzei` ⬜ 缺
+
+```
+A vertical character portrait of a clan bandit (宗贼) of Jingzhou, a soldier card.
+Appearance: Burly farmhand-turned-bandit with a scarf over his head and a sly grin.
+Armor & Clothing: Patched peasant clothes with a leather vest, a clan tag on his belt.
+Weapon: A heavy farm cleaver and a torch.
+Background: the rammed-earth wall of a fortified village (wubao) in Jingzhou.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `jinfan_zei` ⬜ 缺
+
+```
+A vertical character portrait of a Brocade-Sail pirate (锦帆贼), Gan Ning's men, an elite soldier card.
+Appearance: Lean, tanned river pirate with a wild grin and a feather in his hair.
+Armor & Clothing: Bright brocade sash, bare arms, a string of bronze bells at the waist.
+Weapon: A short curved blade and a grappling rope.
+Background: a fast boat with a brocade sail on the Han river.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -930,6 +1054,30 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: a Xiliang camp gate on the Wei river bank: the steady general Zhang Ji on foot with his spear planted beside him, war drums behind, soldiers pouring out; a thin man sitting on a grain cart by the gate, sighing.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
+```
+
+### `jx_jinfan`
+
+```
+A horizontal battle scene illustration: a ferry landing on the Han river: brocade-sailed fast boats blocking the crossing, river pirates with bells at their waists leaping onto the jetty with short blades and grappling ropes.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
+```
+
+### `jx_zongzei`
+
+```
+A horizontal battle scene illustration: a fortified clan village (wubao) outside Xinye: clan bandits and armed farmhands pouring out of the rammed-earth gate with cleavers and torches, their chief on the wall.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
+```
+
+### `jx_ganning`
+
+```
+A horizontal battle scene illustration: the Han river at noon: the young, cocky Gan Ning standing on the prow of a brocade-sailed boat drawing a great bow, bronze bells at his waist, his pirates cheering behind him.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -1683,6 +1831,42 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）
 
+### `e_shuijing`
+
+```
+A horizontal story event illustration: a thatched hut in a bamboo grove: the genial hermit Sima Hui sitting at his door with a round bronze mirror, smiling and nodding 'good, good'; young Sun Ce leaning in eagerly pointing at the short-haired hero.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
+
+### `e_pangdegong`
+
+```
+A horizontal story event illustration: fields at the foot of Mount Xian by the Han river: the old recluse Pang Degong leaning on his hoe, his wife bringing a lunch basket along the field ridge, both bowing to each other politely; the short-haired hero watching, oddly uneasy.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
+
+### `e_huangchengyan`
+
+```
+A horizontal story event illustration: a riverside workshop on the Mian river: the grey-bearded inventor Huang Chengyan crouching beside a little self-walking wooden cart; the short-haired hero staring at it in amazement.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
+
+### `e_ganning`
+
+```
+A horizontal story event illustration: a brocade-sailed fast boat in the middle of the Han river: the young pirate Gan Ning on the prow with bronze bells at his waist and a great bow on his back, shouting at the shore with a grin; Zhou Yu clutching his ledger and purse on the bank.
+Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
+(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
+```
+
 ### `e_ambush`
 
 ```
@@ -2141,6 +2325,15 @@ Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japane
 
 ```
 Masterpiece 1:1 square game inventory item icon of an ancient Chinese gourd flask wine pouch (左慈酒葫芦/酒囊), polished leather and dried gourd with brass spout, wrapped in ceremonial red cord with a bronze coin charm.
+Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
+Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
+Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.
+```
+
+### `shuijing`
+
+```
+Masterpiece 1:1 square game inventory item icon of an ancient Chinese Han dynasty round bronze mirror (汉代铜镜) with a polished face catching light, the back cast with cloud and water patterns and a knob with a silk tassel.
 Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.
 Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.
 Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.

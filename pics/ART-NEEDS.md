@@ -485,6 +485,10 @@
 
 | 状态 | key | 用在 |
 |---|---|---|
+| ⬜ 缺 | `simahui` | 事件「水镜先生」 |
+| ⬜ 缺 | `pangdegong` | 事件「岘山老农」 |
+| ⬜ 缺 | `huangchengyan` | 事件「沔南名士」 |
+| 🟡 占位 | `ganning` | 事件「锦帆游侠」 |
 | ⬜ 缺 | `kuaiyue` | 剧情立绘 |
 | ⬜ 缺 | `caifuren` | 剧情立绘 |
 | ⬜ 缺 | `caimao` | 剧情立绘 |
@@ -496,22 +500,33 @@
 |---|---|---|
 | ⬜ 缺 | `jingzhou_gong` | 荆州弓手 |
 | ⬜ 缺 | `huangzu` | 江夏太守黄祖 |
+| ⬜ 缺 | `jinfan_zei` | 锦帆贼 |
+| ⬜ 缺 | `zongzei` | 宗贼 |
+| ⬜ 缺 | `jingzhou_bu` | 荆州步卒 |
 
 能拿到的卡
 
 | 状态 | key | 卡 |
 |---|---|---|
 | ⬜ 缺 | `jingzhou_shuijun` | 荆州水军（荆州水军的卡） |
+| ⬜ 缺 | `caifu_nu` | 蔡府连弩手（蔡府连弩手的卡） |
+| ⬜ 缺 | `yizhe` | 医者 |
+| ⬜ 缺 | `chaniang` | 茶娘 |
+| ⬜ 缺 | `wenpin` | 文聘·荆州大将 |
+| ⬜ 缺 | `yiji` | 伊籍 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
 | 状态 | key | 战斗 |
 |---|---|---|
+| ⬜ 缺 | `jx_ganning` | 汉水·甘宁（「锦帆游侠」甘宁） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `jx_bubing` | 淯水北岸·荆州步卒（荆州步卒） |
 | ⬜ 缺 | `jx_gongshou` | 芦苇荡·荆州弓手（荆州弓手） |
 | ⬜ 缺 | `jx_huangzu` | 淯水·黄祖（江夏太守黄祖） |
+| ⬜ 缺 | `jx_jinfan` | 汉水渡口·锦帆贼（锦帆贼） |
+| ⬜ 缺 | `jx_zongzei` | 新野·宗贼（宗贼） |
 | ⬜ 缺 | `jx_shuijun` | 水寨·荆州水军（荆州水军） |
 | ⬜ 缺 | `jx_nushou` | 水阁·蔡府连弩手（蔡府连弩手） |
 | ⬜ 缺 | `jx_caimao_a` | 水阁·独眼蔡瑁（独眼蔡瑁） |
@@ -532,6 +547,15 @@
 | ⬜ 缺 | `c8_louchuan` | 月下楼船 |
 | ⬜ 缺 | `end_henhai` | 结局卡「结局三 · 恨海」 |
 
+奇遇插图（这一章第一次会抽到的「？」事件）
+
+| 状态 | key | 事件 |
+|---|---|---|
+| ⬜ 缺 | `e_shuijing` | 「水镜先生」 |
+| ⬜ 缺 | `e_pangdegong` | 「岘山老农」 |
+| ⬜ 缺 | `e_huangchengyan` | 「沔南名士」 |
+| ⬜ 缺 | `e_ganning` | 「锦帆游侠」 |
+
 ## 其余武将（招募池，按需再画）
 
 | 状态 | key | 卡 |
@@ -542,7 +566,6 @@
 | ⬜ 缺 | `zhenmi` | 甄宓（SR） |
 | 🟡 占位 | `machao` | 马超（SR） |
 | 🟡 占位 | `zhangliao` | 张辽（SR） |
-| 🟡 占位 | `ganning` | 甘宁（SR） |
 | 🟡 占位 | `xuchu` | 许褚（SR） |
 | 🟡 占位 | `pangtong` | 庞统（SR） |
 | ⬜ 缺 | `daqiao` | 大乔（SR） |
