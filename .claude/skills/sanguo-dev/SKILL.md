@@ -243,7 +243,7 @@ on the gate, 吕布 goes straight to 张杨 in 河内 (his old 并州 friend), �
 曹操); the emperor has the hero made 破虏将军 (孙坚's own old title, handed down grudgingly); pushed aside, and sent against
 袁术 in 南阳 because 孙坚 can't leave the emperor: 桥蕤, 黄忠 (a 南阳 soldier robbed by 袁术's men, sick son
 黄叙) joins, 雷薄, 陈兰, 冯夫人's night visit, 孙坚's old men inside 宛城 (he once camped in 南阳; they know the tiger tally he gave the hero) open the east gate — 里应外合, 纪灵 (boss) holds the rear and flees east with 袁术 and 冯夫人 — where they went is left unsaid for now.
-第五章 · 荆襄风云 (quest `jingxiang`, requires 「南阳：袁术东逃」, 初平四年（193）春 → 秋, ~two years after 南阳 (袁术东逃)): 吴夫人 and 蔡邕 move to 宛城 (family supper), 貂蝉 swaps
+第五章 · 荆襄风云 (quest `jingxiang`, requires 「南阳：袁术东逃」, 初平四年（193）春 → 秋, ~a year after 南阳 (袁术东逃)): 吴夫人 and 蔡邕 move to 宛城 (family supper), 貂蝉 swaps
 her palace robes for a light 留仙裙 and learns to 「放假」; 刘表 sends 黄祖 across the 汉水 (淯水 battles, 黄祖 mid-map boss, 休整);
 刘表 sues for peace through 蒯越, the court makes 刘表 荆州牧 and the hero **镇南将军·督荆襄军事** in 襄阳; 周瑜 warns it's a 鸿门宴, 貂蝉 insists on
 coming to see the 汉江; 蔡夫人 (claims 蔡文姬 as kin via a genealogy, showers 貂蝉 with pearls — 貂蝉: her eyes never smile) and her brother
@@ -270,7 +270,7 @@ Writing rules:
 - **Timeline** — the whole story so far spans about a year; each chapter opens with a `【年号 · 月】` line:
   ch1 富春 初平元年正月 → ch2 sets out 二月 (a month on the road), reaches 中原 in spring, two months of waiting,
   洛阳 burns in early summer → ch3 南阳 夏—秋 (冯夫人 sews winter clothes) / ch4 洛阳 夏—秋 → ch5 长安 arrives in winter,
-  the wedding and 董卓's death at 初平二年正月 (「整整一年」) → 第四章: escape 二月, 洛阳 三月, 南阳 夏. Don't write 「小半年」「好几个月」 that break this.
+  the wedding and 董卓's death at 初平二年正月 (「整整一年」) → 第四章: escape 二月, 洛阳 三月 (then a year of 排挤 in 洛阳), 南阳 初平三年夏 (192) → 第五章 初平四年 (193). Don't write 「小半年」「好几个月」 that break this.
 - A named enemy should be introduced before you fight it: give its battle square `text` (lines play first, then
   the enemy info and 出战) rather than putting the introduction in the square after the fight.
 - **The hero stays a clown (逗比)** — even in tender or tragic scenes give him one goofy beat (a bad joke, a modern word, a sound effect) before the mood lands; he goes to 王允 *because* he knows the 连环计 from TV and proposes it himself (王允 first plays the loyal servant of 董卓, then takes the credit).
