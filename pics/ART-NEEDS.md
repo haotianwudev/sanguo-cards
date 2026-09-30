@@ -58,7 +58,7 @@
 | ⬜ 缺 | `huofu` | 伙夫 |
 | ⬜ 缺 | `chuangong` | 江东船工 |
 | ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
-| ⬜ 缺 | `yahuan` | 丫鬟 |
+| ✅ 正式 | `yahuan` | 丫鬟 |
 | ⬜ 缺 | `chuniang` | 厨娘 |
 | ⬜ 缺 | `xiuniang` | 绣娘 |
 | ⬜ 缺 | `huansha` | 浣纱女 |

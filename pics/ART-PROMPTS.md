@@ -640,18 +640,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `yahuan` ⬜ 缺
-
-```
-A vertical character portrait of a household maid (丫鬟) of the Sun family, an adult woman.
-Appearance: Adult woman in her 20s with a round, cheerful face and a shy smile, hair in two simple buns.
-Armor & Clothing: Plain light-green servant's dress with an apron.
-Weapon: Carrying a tea tray with cups, curtsying.
-Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `chuniang` ⬜ 缺
 
 ```
