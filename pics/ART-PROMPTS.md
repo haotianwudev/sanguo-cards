@@ -641,22 +641,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
-### `c2_bingzhou`
-
-```
-A horizontal battle scene illustration: a burning army camp at night: Bingzhou horsemen with torches jumping the palisade, tents catching fire.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c2_zonghuo`
-
-```
-A horizontal battle scene illustration: the burning streets of Luoyang: Xiliang soldiers with torches setting houses alight, embers everywhere.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `c3_mitan`
 
 ```
@@ -673,26 +657,10 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low ang
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
 
-### `c4_kuibing`
-
-```
-A horizontal battle scene illustration: a narrow valley: ragged Xiliang deserters on tired horses turning to fight like cornered animals.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `c4_liumin`
 
 ```
 A horizontal battle scene illustration: the ruins of Luoyang: a desperate mob of starving refugees with hoes and sticks surging over rubble toward the grain carts.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c5_zuibing`
-
-```
-A horizontal battle scene illustration: a Chang'an street market: drunken Xiliang soldiers smashing a wine shop, a jar flying through the air.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -713,26 +681,10 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low ang
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
 
-### `c6_soubu`
-
-```
-A horizontal battle scene illustration: outside a ruined shrine in falling snow: search troops with torches and short blades closing in.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `c6_xianzhen`
 
 ```
 A horizontal battle scene illustration: the square before the Xuanping Gate in snow: black-armored Trap-Breaking Camp infantry behind tall shields.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c6_luanbing`
-
-```
-A horizontal battle scene illustration: outside a palace side gate at night: rioting soldiers looting in the chaos of the siege, fires in the background.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -761,58 +713,10 @@ Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low ang
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
 
-### `c3_liukou`
-
-```
-A horizontal battle scene illustration: a burned-out village: ragged bandits with sabers and stolen sacks of grain charging out from behind broken walls.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
 ### `c3_gongshou`
 
 ```
 A horizontal battle scene illustration: a fork in a road lined with trees: Yuan archers kneeling behind a low earth bank, bows drawn, a 袁 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c4_yaliang`
-
-```
-A horizontal battle scene illustration: a mountain road: Xiliang soldiers on horseback guarding grain carts stamped 董, turning to fight.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c5_xiangfu`
-
-```
-A horizontal battle scene illustration: a red-lantern courtyard inside the chancellor's mansion at night: black-armored mansion guards with ji closing ranks between pillars.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c6_qianfeng`
-
-```
-A horizontal battle scene illustration: the road to Tong Pass at dusk: Li Jue's Xiliang vanguard cavalry charging out of a dust cloud under a 李 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c7_yingbing`
-
-```
-A horizontal battle scene illustration: a summer road in Nanyang: Yuan army camp soldiers behind a shield line of big rectangular shields, spears levelled, a 袁 banner.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c7_gongnu`
-
-```
-A horizontal battle scene illustration: the edge of a wheat field in Nanyang: Yuan crossbowmen rising from the tall wheat and shooting, fire arrows in the air.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -845,14 +749,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the Qingming Gate of Chang'an at night: a row of torches, Han guards in red and black with halberds barring the road, their officer holding out a written order.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `c6_zhuibing`
-
-```
-A horizontal battle scene illustration: a winter road along the Wei river: pursuing house troops of Minister Wang Yun under a banner reading 奉诏讨贼, crossbowmen kneeling in a line, dust and snow.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```

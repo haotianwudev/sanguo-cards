@@ -14,7 +14,7 @@ var troops: Dictionary  # id -> {id, name, short, hp, at, skills}
 var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null), effects}
 var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
 var enemies: Dictionary  # id -> {id, name, hp, at, actions, moves, phys_resist, magic_resist, portrait}
-var scenarios: Dictionary  # id -> {id, name, turn_limit, enemy}
+var scenarios: Dictionary  # id -> {id, name, turn_limit, enemy, art}
 var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, recruit_pool, event_pool}]
 var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
 var relics: Dictionary  # 宝物: id -> {id, name, icon, rarity, desc, mods, after_win}
@@ -82,7 +82,8 @@ func _load(dir: String) -> void:
 			"desc": f.get("desc", ""), "mods": f.get("mods", {}), "troop": "lord", "after_win": 0.0}
 	for sid in raw["scenarios"]:
 		var sc: Dictionary = raw["scenarios"][sid]
-		scenarios[sid] = {"id": sid, "name": sc["name"], "turn_limit": int(sc["turn_limit"]), "enemy": sc["enemy"]}
+		scenarios[sid] = {"id": sid, "name": sc["name"], "turn_limit": int(sc["turn_limit"]), "enemy": sc["enemy"],
+			"art": sc.get("art", sid)}  # battle CG: soldier battles of one type share one
 	_validate()
 	# the lord as a card: never in the normal pools, but recruit offers can show it (gacha.lord_rate); another
 	# copy raises its 铜/银/金 tier like a general's. Its fighter always comes from build_lord / SaveData.lord().

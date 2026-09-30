@@ -255,6 +255,9 @@ Writing rules:
   fighting 刘表 (no 岘山 / 黄祖 / ambush details — those he hears from others), and everyone knows 「见到吕布，跑」. When a character first appears he sizes them up in a `{lord}（内心）：` aside —
   recognised or 「没听过」, plus a modern jab that stays believable (袁绍 = the boss who loves meetings and never
   decides) — no forced office metaphors; famous people (孙坚) he simply knows. One per character; no historical detail he couldn't know; characters never cite 演义.
+- **Few soldier types per enemy faction (3–5)**: 西凉 游骑/斥候/董军步卒/弓骑/飞熊军, 袁术 步卒/弓手/骑兵/密探, 并州 狼骑/吕布亲兵/陷阵营兵,
+  司徒府 哨卡/府兵. A later chapter reuses the type with stronger hp/at (its own enemy id, same name / portrait / moves), and its
+  scenario shares the type's battle CG via `"art": "<scenario>"`.
 - **CGs have few people** (technical limit): at most four named characters in focus per story CG / event picture; unnamed
   background people (soldiers, crowds) are fine. A scene that needs many people (a row of generals, a banquet of lords) gets no CG; the text carries it.
 - **Looks match the art.** Settled by delivered art: 董白 has a silver-white high ponytail and purple fur-trimmed armor (her 女骑 wear purple too);

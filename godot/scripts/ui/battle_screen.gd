@@ -60,7 +60,7 @@ func _ready() -> void:
 func _build() -> void:
 	var e: Dictionary = b.enemy["data"]
 	# battle background: data/art/battle/<scenario id>.jpg (built by `sanguo-art` from pics/art.json "battles")
-	var bg_path := "res://data/art/battle/%s.jpg" % scenario_id
+	var bg_path := "res://data/art/battle/%s.jpg" % str(b.scenario["art"])  # soldier battles of one type share a picture
 	# Rance X style: with a battle CG the painting owns the top of the screen (it is the enemy: it shakes and
 	# flashes when hit), the enemy's name and HP sit in a slim strip over it, and our side lives in a dark band below
 	var has_cg := ResourceLoader.exists(bg_path)

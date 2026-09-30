@@ -179,7 +179,7 @@ def write_needs(pics: Path = PICS) -> None:
                     for o in ev["options"]:
                         fights_here += [e["battle"] for e in o.get("effects", []) if "battle" in e]
         bg_rows = []
-        for f in dict.fromkeys(fights_here):
+        for f in dict.fromkeys(cards["scenarios"][x].get("art", x) for x in fights_here):
             sc = cards["scenarios"][f]
             st = "✅ 已有" if f in battles_cfg else "⬜ 缺"
             bg_rows.append(f"| {st} | `{f}` | {sc['name']}（{cards['enemies'][sc['enemy']]['name']}） |")
