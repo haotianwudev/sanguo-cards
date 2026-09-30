@@ -768,6 +768,10 @@
     "taodong": {
       "src": "source/map/bg_taodong.jpg",
       "license": "程序生成占位（tools/build_chapter2_map.py）"
+    },
+    "changan": {
+      "src": "source/map/bg_changan.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "battles": {
