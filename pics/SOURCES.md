@@ -132,3 +132,4 @@
 | `cg:c2_zumao_saved` | source/cg/c2_zumao_saved.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_counter` | source/cg/c2_counter.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_grand_chest` | source/cg/e_grand_chest.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_yusui` | source/cg/end_yusui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
