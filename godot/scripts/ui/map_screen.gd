@@ -30,7 +30,7 @@ var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
-var _dlg_prev := ""
+var _dlg_keys: Array = []  # the speaker of each line (Kit.speakers)
 var _dlg_after := ""  # shown under the last line (a battle's enemy info)  # the last named speaker in this scene (for 他 / 她 lines)
 var _dlg_raw: Array = []  # the lines before {lord} is filled in (for speaker lookup)
 var _dlg_prompt := ""  # the one-line summary shown at the choice (square / event "prompt")
@@ -528,7 +528,7 @@ func _show_square(s: Dictionary) -> void:
 
 	var lines: Array = []
 	for t in ev.get("text", s["text"]):
-		lines.append(t.replace("{lord}", "[color=%s][b]%s[/b][/color]" % [Kit.c("red").to_html(), save.lord_name]))
+		lines.append(Kit.strip_tag(t).replace("{lord}", "[color=%s][b]%s[/b][/color]" % [Kit.c("red").to_html(), save.lord_name]))
 	var body := "\n\n".join(lines)
 	_dlg_lines = []
 	_dlg_i = -1
@@ -662,7 +662,7 @@ func _show_square(s: Dictionary) -> void:
 		_dlg_recap = s["type"] == "choose" or s["type"] == "mystery"
 		_dlg_prompt = prompt
 		_dlg_i = 0
-		_dlg_prev = ""
+		_dlg_keys = Kit.speakers(raw_lines, s.get("portraits", []))
 		text.scroll_active = false
 		text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
 		text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 4)
@@ -677,11 +677,7 @@ func _dialog_show() -> void:
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	if _dlg_face != null:
-		var key := Kit.speaker_key(str(_dlg_raw[_dlg_i]))  # narration: no face
-		if key == Kit.PREVIOUS:  # 他 / 她 / an opening quote: the last speaker goes on
-			key = _dlg_prev
-		elif key != "":
-			_dlg_prev = key
+		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
 		_dlg_face.texture = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
 		_dlg_face.visible = _dlg_face.texture != null
 	if last:

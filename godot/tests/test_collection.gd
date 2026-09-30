@@ -166,18 +166,35 @@ func test_dupes_survive_a_save_roundtrip() -> void:
 
 
 func test_story_lines_find_their_speaker() -> void:
-	check_eq(Kit.speaker_key("{lord}：「夫人……」"), "lord")
-	check_eq(Kit.speaker_key("孙策把枪往地上一戳：「还等什么！」"), "sunce")
-	check_eq(Kit.speaker_key("周瑜摇头：「水寨易守难攻。」"), "zhouyu")
-	check_eq(Kit.speaker_key("吴夫人笑眯眯地拿针尾敲了一下你的额头：「想得美。」"), "wuguotai")
-	check_eq(Kit.speaker_key("孙策：「娘，凭什么他三块？」吴夫人：「他瘦。」"), "sunce", "the first speaker wins")
-	check_eq(Kit.speaker_key("当夜，江上一排贼船亮起火把。"), "", "narration: nobody")
-	check_eq(Kit.speaker_key("浓眉少年：「我叫孙策！」"), "sunce", "described before named")
-	check_eq(Kit.speaker_key("他顿了顿：「周瑜，字公瑾。」"), Kit.PREVIOUS, "他: the last speaker goes on")
-	check_eq(Kit.speaker_key("「不求同年同月同日生——」孙策顿了顿"), "sunce", "the name right after an opening quote")
-	check_eq(Kit.speaker_key("「还有点烫，」她认真地说"), Kit.PREVIOUS, "an opening quote with only 她 after it")
-	check_eq(Kit.speaker_key("富春江边，孙家老宅。孙坚的旧大刀挂在墙上。"), "", "a name merely mentioned: no face")
-	check_eq(Kit.speaker_key("吴夫人：「文台那把刀，你拿去。」"), "wuguotai", "the speaker, not who is talked about")
+	var k := Kit.speakers([
+		"{lord}：「夫人……」",
+		"孙策把枪往地上一戳：「还等什么！」",
+		"周瑜摇头：「水寨易守难攻。」",
+		"孙策：「娘，凭什么他三块？」吴夫人：「他瘦。」",
+		"当夜，江上一排贼船亮起火把。",
+		"浓眉少年：「我叫孙策！」",
+		"「不求同年同月同日生——」孙策顿了顿",
+		"「还有点烫，」她认真地说",
+		"吴夫人：「文台那把刀，你拿去。」",
+		"孙策的枪已经端平了：「大哥！」",
+		"天亮后孙坚一身烟灰，盯着董白：「你押她走。」",
+		"他转向你：「嘴甜的。」",
+		"@dongbai 关押董白的帐篷里传出一声大喊：「师父！」",
+	], ["wuguotai"])
+	check_eq(k[0], "lord")
+	check_eq(k[1], "sunce")
+	check_eq(k[2], "zhouyu")
+	check_eq(k[3], "sunce", "the first speaker wins")
+	check_eq(k[4], "", "narration: nobody")
+	check_eq(k[5], "sunce", "described before named")
+	check_eq(k[6], "sunce", "the name right after an opening quote")
+	check_eq(k[7], "wuguotai", "她: the latest woman, the square's cast counts")
+	check_eq(k[8], "wuguotai", "the speaker, not who is talked about")
+	check_eq(k[9], "sunce", "an owner opening the line speaks when nobody else acts")
+	check_eq(k[10], "sunjian", "a name after a short lead-in is the subject; one further in is the object")
+	check_eq(k[11], "sunjian", "他: the latest man")
+	check_eq(k[12], "dongbai", "an @tag names the speaker outright")
+	check_eq(Kit.strip_tag("@dongbai 「师父！」"), "「师父！」")
 
 
 func test_the_lord_card_can_be_drawn() -> void:

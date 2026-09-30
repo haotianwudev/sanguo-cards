@@ -99,7 +99,7 @@ func _show_scene(sc: Dictionary) -> void:
 	text.add_theme_color_override("default_color", Color(0.95, 0.92, 0.85))
 	text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var lord := "[color=#e06c5a][b]%s[/b][/color]" % Game.save.lord_name
-	_scene_lines = sc.get("text", []).map(func(t): return t.replace("{lord}", lord))
+	_scene_lines = sc.get("text", []).map(func(t): return Kit.strip_tag(t).replace("{lord}", lord))
 	_scene_text = text
 	_line = 0
 	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 6)
