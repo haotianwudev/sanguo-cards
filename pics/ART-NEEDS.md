@@ -244,7 +244,7 @@
 | ✅ 正式 | `qiaorui` | 桥蕤 |
 | ✅ 正式 | `chenlan` | 陈兰 |
 | ✅ 正式 | `leibo` | 雷薄 |
-| ⬜ 缺 | `jiling` | 纪灵 |
+| ✅ 正式 | `jiling` | 纪灵 |
 | ⬜ 缺 | `yuanshu` | 袁术 |
 
 能拿到的卡
