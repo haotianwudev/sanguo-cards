@@ -262,9 +262,7 @@ poison); 蔡夫人 is spared death but divorced by 刘表 on the spot, stripped 
 extra fights 汉水渡口·锦帆贼, 新野·宗贼 (周瑜 recalls 蒯越 killing 55 宗贼 leaders at a banquet — foreshadowing), 城防·荆州步卒; ？ events
 水镜先生 司马徽 (「好，好」; 「荆州的奇才都还没长大」 — only the hero thinks of 诸葛亮; he's a child in 192 and not in 荆州 yet), 岘山老农 庞德公, 沔南名士 黄承彦 (蔡瑁's brother-in-law:
 「别喝金杯里的酒」), 锦帆游侠 甘宁 (on his way to 刘表).
-The locked north
-birthplace is 卞夫人's route. Historical women who were children in 190 (甄宓, 步练师, 张春华, 孙尚香) stay
-out of the story until later chapters — as gacha cards they're fine.
+第一章北方出生点 冀州·中山无极·甄府（张夫人收留，初平元年正月；squares live inside the `prologue` quest itself, a second branch off `era` at x ≥ 23 so the south branch's layout is untouched): 主角以现代商业手腕帮甄府清账、平粜、练护卫，甄府转亏为盈；常山义士赵云进真定县衙为雪灾灾民求粮，被袁绍督粮官郭图凌辱鞭打，刺史韩馥懦弱旁观；街角醉鬼郭嘉冷眼点破世道，主角出面借甄家三千石粮救常山，赵云、郭嘉就此结识主角；张夫人押粮赈灾，带着**十多岁**的甄宓（不是 5 岁——甄宓这时是半大的少女，主角待她像亲妹妹，干净的兄妹情，没有暧昧；她长大后会对主角生出爱慕，但那是后面章节的事，这一章绝不要写）同行；太行黑山贼李大目、黄巾渠帅张白骑、妖道玄机子（对标南线胡玉 / 何仪 / 唐周）伏击劫走甄宓；主角、赵云、郭嘉三人首次合作踏平黑山寨救回甄宓、灭三凶；开仓放粮，收常山铁骑 / 太行义勇为嫡系部曲；夜话看透郭图 / 韩馥 / 公孙瓒皆非明主，决意南下会盟；张夫人资助战马、铁甲、军粮作为南下的启动资金。这条线目前是独立结局（quest-level `ending`，暂定「北线 · 敬请期待」，回标题重开一周目），还不接南线第二章 `taodong`——以后要不要接、怎么接，是 owner 的事，先别猜。
 
 Writing rules:
 - **Timeline** — the whole story so far spans about a year; each chapter opens with a `【年号 · 月】` line:

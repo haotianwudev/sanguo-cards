@@ -182,7 +182,11 @@
     "lianying": {"name": "火烧连营", "cost": 3, "uses": 1, "effects": [{"type": "magic", "power": 3.0}, {"type": "break", "amount": 0.3, "turns": 3}]},
     "baiyi": {"name": "白衣渡江", "cost": 3, "uses": 1, "effects": [{"type": "attack", "power": 2.5}, {"type": "stun", "chance": 0.3}]},
     "menghu": {"name": "江东猛虎", "cost": 2, "cumulative": true, "effects": [{"type": "attack", "power": 1.3, "hits": 3}]},
-    "shenting": {"name": "神亭酣战", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 1.0, "hits": 2}]}
+    "shenting": {"name": "神亭酣战", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 1.0, "hits": 2}]},
+    "chijia": {"name": "持家", "cost": 1, "uses": 1, "effects": [{"type": "heal", "power": 5.0}, {"type": "guard", "cut": 0.25}]},
+    "liaodong": {"name": "遗计", "cost": 2, "cumulative": true, "effects": [{"type": "magic", "power": 1.6}, {"type": "break", "amount": 0.25, "turns": 3}]},
+    "mihun": {"name": "摄魂咒", "cost": 1, "cumulative": true, "effects": [{"type": "stun", "chance": 0.35}]},
+    "kaishan": {"name": "开山", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 1.3, "hits": 1}, {"type": "break", "amount": 0.15, "turns": 2}]}
   },
   "cards": {
     "cav_n": {"weight": 3, "name": "骑兵队", "rarity": "N", "troop": "cavalry"},
@@ -315,7 +319,7 @@
     "wangyi": {"name": "王异", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 50, "at": 20}, "skills": ["jiuji"]},
     "xinxianying": {"name": "辛宪英", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 40, "at": 18}, "skills": ["zhiji"]},
     "caifuren": {"name": "蔡夫人·荆州", "rarity": "SR", "troop": "strategist", "bonus": {"hp": 45, "at": 19}, "skills": ["zhenbian"]},
-    "bianfuren": {"name": "卞夫人", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 50, "at": 16}, "skills": ["xianhou"], "pool": false},
+    "bianfuren": {"name": "卞夫人", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 50, "at": 16}, "skills": ["xianhou"]},
     "yanfuren": {"name": "严夫人", "rarity": "R", "troop": "logistics", "bonus": {"hp": 50, "at": 12}, "skills": ["quanfu"]},
     "liniang": {"name": "黎娘·山越女王", "rarity": "R", "troop": "bandit", "bonus": {"hp": 45, "at": 15}, "skills": ["dujian"]},
     "diaochan": {"name": "貂蝉", "rarity": "SSR", "troop": "logistics", "bonus": {"hp": 60, "at": 25}, "skills": ["biyue"]},
@@ -340,7 +344,14 @@
     "wenpin": {"name": "文聘·荆州大将", "rarity": "R", "troop": "spear", "bonus": {"hp": 55, "at": 13}},
     "yiji": {"name": "伊籍", "rarity": "R", "troop": "strategist", "bonus": {"hp": 35, "at": 14}},
     "huangzu": {"name": "黄祖·江夏太守", "rarity": "SR", "troop": "infantry", "bonus": {"hp": 70, "at": 21}, "pool": false},
-    "caimao": {"name": "蔡瑁·水军都督", "rarity": "R", "troop": "spear", "bonus": {"hp": 50, "at": 15}, "pool": false}
+    "caimao": {"name": "蔡瑁·水军都督", "rarity": "R", "troop": "spear", "bonus": {"hp": 50, "at": 15}, "pool": false},
+    "zhangfuren": {"name": "张夫人", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 44, "at": 17}, "skills": ["chijia"], "pool": false},
+    "guojia": {"name": "郭嘉·鬼才", "rarity": "SSR", "troop": "strategist", "bonus": {"hp": 56, "at": 27}, "skills": ["liaodong"]},
+    "changshan_tieqi": {"name": "常山铁骑", "rarity": "N", "elite": true, "troop": "cavalry", "bonus": {"hp": 25, "at": 10}},
+    "taihang_yiyong": {"name": "太行义勇", "rarity": "N", "troop": "infantry", "bonus": {"hp": 15, "at": 6}},
+    "heishan_bing": {"name": "黑山游骑", "rarity": "N", "troop": "bandit", "bonus": {"at": 6}, "weight": 2},
+    "xuanjizi_card": {"name": "玄机子·妖道", "rarity": "R", "troop": "strategist", "bonus": {"hp": 20, "at": 14}, "skills": ["mihun"], "pool": false},
+    "lidamu_card": {"name": "李大目·黑山凶寇", "rarity": "R", "troop": "bandit", "bonus": {"hp": 40, "at": 14}, "skills": ["kaishan"], "pool": false}
   },
   "enemies": {
     "huangjin_remnant": {"name": "黄巾余孽", "portrait": "huangjin_nanxia", "hp": 4200, "at": 200, "actions": 2, "magic_resist": 0.2, "moves": [{"name": "黄天当立", "power": 1.0, "weight": 3}, {"name": "符水", "power": 0, "weight": 1, "heal": 0.08}, {"name": "妖言", "power": 0.5, "weight": 1, "confuse": 0.5}], "card": "huangjin_nanxia"},
@@ -421,7 +432,10 @@
     "jinfan_e": {"name": "锦帆贼", "portrait": "jinfan_zei", "hp": 11500, "at": 345, "actions": 2, "moves": [{"name": "短刀", "power": 1.0, "weight": 3}, {"name": "铃声扰敌", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "跳帮", "power": 1.4, "weight": 1}], "card": "jinfan_zei"},
     "zongzei_e": {"name": "宗贼", "portrait": "zongzei", "hp": 12000, "at": 340, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "据坞死守", "power": 0, "weight": 1, "heal": 0.06}, {"name": "庄丁齐上", "power": 1.3, "weight": 1}, {"name": "抢粮", "power": 0.4, "weight": 1, "ap_drain": 1}], "card": "zongzei"},
     "jing_sibing": {"name": "荆州步卒", "portrait": "jingzhou_bu", "hp": 14000, "at": 370, "actions": 2, "moves": [{"name": "长刀", "power": 1.0, "weight": 3}, {"name": "盾阵", "power": 0, "weight": 1, "heal": 0.05}, {"name": "围攻", "power": 1.3, "weight": 1}, {"name": "只认蔡都督", "power": 0, "weight": 1, "rage": 0.15, "once": true}], "card": "jingzhou_bu"},
-    "ganning_e": {"name": "「锦帆游侠」甘宁", "portrait": "ganning", "hp": 12500, "at": 380, "actions": 2, "moves": [{"name": "铁胎弓", "power": 1.0, "weight": 3}, {"name": "铃响", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "百步穿杨·蓄力", "power": 0, "weight": 1, "charge": "百步穿杨"}, {"name": "百步穿杨", "power": 2.4, "weight": 0, "pierce": true}], "card": "ganning"}
+    "ganning_e": {"name": "「锦帆游侠」甘宁", "portrait": "ganning", "hp": 12500, "at": 380, "actions": 2, "moves": [{"name": "铁胎弓", "power": 1.0, "weight": 3}, {"name": "铃响", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "百步穿杨·蓄力", "power": 0, "weight": 1, "charge": "百步穿杨"}, {"name": "百步穿杨", "power": 2.4, "weight": 0, "pierce": true}], "card": "ganning"},
+    "heishan_youji": {"name": "黑山游骑", "portrait": "heishan_bing", "hp": 3000, "at": 185, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "滚木落石", "power": 1.3, "weight": 1}], "card": "heishan_bing"},
+    "xuanjizi": {"name": "妖道玄机子", "portrait": "xuanjizi", "hp": 5600, "at": 215, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "硫磺迷烟", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "符水邪术", "power": 1.4, "weight": 2}, {"name": "摄魂咒·蓄力", "power": 0, "weight": 1, "charge": "摄魂咒"}, {"name": "摄魂咒", "power": 2.6, "weight": 0, "pierce": true}], "card": "xuanjizi_card"},
+    "lidamu": {"name": "「黑山凶寇」李大目", "portrait": "lidamu", "hp": 7200, "at": 260, "actions": 2, "moves": [{"name": "开山巨斧", "power": 1.1, "weight": 3}, {"name": "横扫千军", "power": 1.4, "weight": 1}, {"name": "凶寇狂怒", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "lidamu_card"}
   },
   "scenarios": {
     "huangjin_remnant": {"name": "黄巾余孽", "turn_limit": 6, "enemy": "huangjin_remnant"},
@@ -511,6 +525,9 @@
     "huaxiong": {"name": "汜水关·华雄", "turn_limit": 8, "enemy": "huaxiong"},
     "shanzei": {"name": "剿灭山贼", "turn_limit": 8, "enemy": "shanzeituan"},
     "huangjin": {"name": "黄巾之乱", "turn_limit": 10, "enemy": "huangjinjun"},
-    "hulao": {"name": "虎牢关之战", "turn_limit": 10, "enemy": "lvbu"}
+    "hulao": {"name": "虎牢关之战", "turn_limit": 10, "enemy": "lvbu"},
+    "heishan_wai": {"name": "太行外围 · 黑山游骑", "turn_limit": 6, "enemy": "heishan_youji"},
+    "heishan_tan": {"name": "祭坛 · 玄机子", "turn_limit": 8, "enemy": "xuanjizi"},
+    "heishan_zhai": {"name": "黑山寨 · 李大目", "turn_limit": 8, "enemy": "lidamu"}
   }
 }
