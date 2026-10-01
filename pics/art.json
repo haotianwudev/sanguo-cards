@@ -886,6 +886,15 @@
       ],
       "head": 0.2,
       "license": "用户提供（Gemini 生成）"
+    },
+    "yuanshu": {
+      "src": "source/generals/yuanshu.jpg",
+      "face": [
+        0.53,
+        0.28
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
