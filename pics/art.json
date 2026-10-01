@@ -808,6 +808,15 @@
       ],
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
+    },
+    "huangfusong": {
+      "src": "source/generals/huangfusong.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.23,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -924,6 +933,18 @@
     },
     "c3_qiaorui": {
       "src": "source/battles/c3_qiaorui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_chenlan": {
+      "src": "source/battles/c3_chenlan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_yuanshu": {
+      "src": "source/battles/c3_yuanshu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_leibo": {
+      "src": "source/battles/c3_leibo.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -1043,6 +1064,10 @@
     },
     "c3_slip": {
       "src": "source/cg/c3_slip.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_supply": {
+      "src": "source/cg/c3_supply.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

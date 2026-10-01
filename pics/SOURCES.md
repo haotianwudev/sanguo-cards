@@ -88,6 +88,7 @@
 | `xianzhen` | source/soldiers/xianzhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `bingzhou` | source/soldiers/bingzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gaoshun` | source/generals/gaoshun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huangfusong` | source/generals/huangfusong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -116,6 +117,9 @@
 | `battle:xiliang_scout` | source/battles/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c3_jiling` | source/battles/c3_jiling.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c3_qiaorui` | source/battles/c3_qiaorui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_chenlan` | source/battles/c3_chenlan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_yuanshu` | source/battles/c3_yuanshu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_leibo` | source/battles/c3_leibo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -145,3 +149,4 @@
 | `cg:c3_end` | source/cg/c3_end.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_entrust` | source/cg/c3_entrust.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_slip` | source/cg/c3_slip.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_supply` | source/cg/c3_supply.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
