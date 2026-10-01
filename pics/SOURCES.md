@@ -95,6 +95,7 @@
 | `chenlan` | source/generals/chenlan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `leibo` | source/generals/leibo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `shanfei_tou` | source/generals/shanfei_tou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `qiaorui` | source/generals/qiaorui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -126,6 +127,7 @@
 | `battle:c3_chenlan` | source/battles/c3_chenlan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c3_yuanshu` | source/battles/c3_yuanshu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c3_leibo` | source/battles/c3_leibo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_shanfei` | source/battles/c3_shanfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

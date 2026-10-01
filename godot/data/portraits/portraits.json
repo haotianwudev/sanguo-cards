@@ -90,5 +90,6 @@
   "wangyun": {"file": "wangyun.jpg", "face": [0.5, 0.25], "head": 0.24},
   "chenlan": {"file": "chenlan.jpg", "face": [0.5, 0.21], "head": 0.22},
   "leibo": {"file": "leibo.jpg", "face": [0.48, 0.29], "head": 0.25},
-  "shanfei_tou": {"file": "shanfei_tou.jpg", "face": [0.5, 0.33], "head": 0.22}
+  "shanfei_tou": {"file": "shanfei_tou.jpg", "face": [0.5, 0.33], "head": 0.22},
+  "qiaorui": {"file": "qiaorui.jpg", "face": [0.5, 0.25], "head": 0.2}
 }

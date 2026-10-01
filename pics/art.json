@@ -868,6 +868,15 @@
       ],
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
+    },
+    "qiaorui": {
+      "src": "source/generals/qiaorui.jpg",
+      "face": [
+        0.5,
+        0.25
+      ],
+      "head": 0.2,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -996,6 +1005,10 @@
     },
     "c3_leibo": {
       "src": "source/battles/c3_leibo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_shanfei": {
+      "src": "source/battles/c3_shanfei.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
