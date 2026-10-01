@@ -30,6 +30,12 @@
 | ✅ 正式 | `yanzhihu` | 事件「压寨夫人」 |
 | ✅ 正式 | `zhangning` | 事件「黄巾圣女」 |
 | ✅ 正式 | `wuguotai` | 剧情立绘 |
+| ⬜ 缺 | `zhangfuren` | 剧情立绘 |
+| ⬜ 缺 | `zhenmi_young` | 剧情立绘 |
+| 🟡 占位 | `zhaoyun` | 剧情立绘 |
+| ⬜ 缺 | `guotu` | 剧情立绘 |
+| ⬜ 缺 | `hanfu` | 剧情立绘 |
+| ⬜ 缺 | `guojia` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
 
@@ -45,12 +51,17 @@
 | ✅ 正式 | `langlijiao` | 「浪里蛟」胡玉 |
 | ✅ 正式 | `yaodao` | 妖道唐周 |
 | ✅ 正式 | `heyi` | 黄巾渠帅何仪 |
+| ⬜ 缺 | `heishan_bing` | 黑山游骑 |
+| ⬜ 缺 | `xuanjizi` | 妖道玄机子 |
+| ⬜ 缺 | `lidamu` | 「黑山凶寇」李大目 |
 
 能拿到的卡
 
 | 状态 | key | 卡 |
 |---|---|---|
 | ✅ 正式 | `danyang` | 丹阳兵 |
+| ⬜ 缺 | `changshan_tieqi` | 常山铁骑 |
+| ⬜ 缺 | `taihang_yiyong` | 太行义勇 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
 | ✅ 正式 | `jiangdong_gong` | 江东弓手 |
 | ✅ 正式 | `liehu` | 山中猎户 |
@@ -80,6 +91,9 @@
 | ✅ 已有 | `shuizei_guard` | 看门水贼（看门水贼） |
 | ✅ 已有 | `yaodao` | 妖道唐周（妖道唐周） |
 | ✅ 已有 | `shuizei_main` | 水贼大寨（黄巾渠帅何仪） |
+| ⬜ 缺 | `heishan_wai` | 太行外围 · 黑山游骑（黑山游骑） |
+| ⬜ 缺 | `heishan_tan` | 祭坛 · 玄机子（妖道玄机子） |
+| ⬜ 缺 | `heishan_zhai` | 黑山寨 · 李大目（「黑山凶寇」李大目） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -575,7 +589,6 @@
 | ✅ 正式 | `daqiao` | 大乔（SR） |
 | ⬜ 缺 | `huangyueying` | 黄月英（SR） |
 | ⬜ 缺 | `zhangyan` | 张燕（SR） |
-| 🟡 占位 | `zhaoyun` | 赵云（SSR） |
 | 🟡 占位 | `sunshangxiang` | 孙尚香（SSR） |
 | 🟡 占位 | `dianwei` | 典韦（SSR） |
 | 🟡 占位 | `zhugeliang` | 诸葛亮（SSR） |
