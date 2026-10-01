@@ -87,5 +87,6 @@
   "huangfusong": {"file": "huangfusong.jpg", "face": [0.5, 0.28], "head": 0.23},
   "caiyong": {"file": "caiyong.jpg", "face": [0.5, 0.28], "head": 0.24},
   "zhujun": {"file": "zhujun.jpg", "face": [0.5, 0.21], "head": 0.22},
-  "wangyun": {"file": "wangyun.jpg", "face": [0.5, 0.25], "head": 0.24}
+  "wangyun": {"file": "wangyun.jpg", "face": [0.5, 0.25], "head": 0.24},
+  "chenlan": {"file": "chenlan.jpg", "face": [0.5, 0.21], "head": 0.22}
 }

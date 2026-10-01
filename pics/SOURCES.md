@@ -92,6 +92,7 @@
 | `caiyong` | source/generals/caiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhujun` | source/generals/zhujun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wangyun` | source/generals/wangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chenlan` | source/generals/chenlan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -153,3 +154,4 @@
 | `cg:c3_entrust` | source/cg/c3_entrust.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_slip` | source/cg/c3_slip.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_supply` | source/cg/c3_supply.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_news` | source/cg/c3_news.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
