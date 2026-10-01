@@ -98,6 +98,7 @@
 | `qiaorui` | source/generals/qiaorui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `jiling` | source/generals/jiling.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yuanshu` | source/generals/yuanshu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `dongzhuo` | source/generals/dongzhuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

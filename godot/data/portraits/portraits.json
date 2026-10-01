@@ -93,5 +93,6 @@
   "shanfei_tou": {"file": "shanfei_tou.jpg", "face": [0.5, 0.33], "head": 0.22},
   "qiaorui": {"file": "qiaorui.jpg", "face": [0.5, 0.25], "head": 0.2},
   "jiling": {"file": "jiling.jpg", "face": [0.5, 0.29], "head": 0.2},
-  "yuanshu": {"file": "yuanshu.jpg", "face": [0.53, 0.28], "head": 0.22}
+  "yuanshu": {"file": "yuanshu.jpg", "face": [0.53, 0.28], "head": 0.22},
+  "dongzhuo": {"file": "dongzhuo.jpg", "face": [0.5, 0.23], "head": 0.24}
 }
