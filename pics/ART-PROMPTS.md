@@ -94,6 +94,18 @@
 
 ## 立绘（竖版 3:4）
 
+### `lord_north` ⬜ 缺
+
+```
+A vertical character portrait of The hero's northern-route host body (北线主角) — a merchant house's account clerk with no martial training, wins by wit and ledgers, not the sword.
+Appearance: Clean, unweathered young man in his early 20s, soft hands, a composed and faintly clever half-smile.
+Armor & Clothing: A plain dark blue scholar's robe, hair tied back in a simple cloth-wrapped topknot (no cap, no helmet, no armor), later layered with a white snow-fox fur cloak gifted by Lady Zhang.
+Weapon: An abacus in one hand, a ledger book tucked under the other arm, no weapon.
+Background: a grain warehouse at the Zhen family estate in Zhongshan, snow visible through a window, sacks of grain stacked in rows.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
 ### `zhurong` ⬜ 缺
 
 ```

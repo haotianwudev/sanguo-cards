@@ -24,6 +24,11 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "lord_north": ("The hero's northern-route host body (北线主角) — a merchant house's account clerk with no martial training, wins by wit and ledgers, not the sword",
+        "Clean, unweathered young man in his early 20s, soft hands, a composed and faintly clever half-smile.",
+        "A plain dark blue scholar's robe, hair tied back in a simple cloth-wrapped topknot (no cap, no helmet, no armor), later layered with a white snow-fox fur cloak gifted by Lady Zhang.",
+        "An abacus in one hand, a ledger book tucked under the other arm, no weapon.",
+        "a grain warehouse at the Zhen family estate in Zhongshan, snow visible through a window, sacks of grain stacked in rows"),
     "diaochan": ("Diaochan (貂蝉), the famed beauty and Wang Yun's adoptive daughter — clever, brave, always seeming to flirt — an adult woman",
         "Breathtakingly beautiful adult woman in her early 20s with a teasing, unreadable smile and knowing eyes.",
         "Flowing layered silk dress in moonlit blue and silver with long dancing sleeves, a jade hairpin.",

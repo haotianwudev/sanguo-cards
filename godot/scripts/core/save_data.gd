@@ -220,9 +220,9 @@ func fighter(card_id: String) -> Dictionary:
 
 
 func lord() -> Dictionary:
-	## the lord's fighter at its tier
+	## the lord's fighter at its tier; the north route starts in a different host body (own hair, no armor)
 	var db := _db()
-	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]))
+	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), run_records.has("出生：冀州无极"))
 
 
 func upgrade(card_id: String) -> void:

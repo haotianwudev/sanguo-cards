@@ -399,7 +399,7 @@
 4. 第二章地图底图（M1，现在是程序生成占位）
 5. ~~宝箱图 2 张~~（已到位，开宝箱动画在用）
 6. 第三章立绘（蔡文姬、袁术、纪灵、雷薄、陈兰、桥蕤）；其余招募池武将（见 `ART-NEEDS.md` 最后一节）
-7. **北线第一章 · 冀州风云**（新，剧情已写入 `prologue` quest 的 `era` 北方分支，x ≥ 23）：立绘 `zhangfuren` `guojia` `zhaoyun` `zhenmi_young` `guotu` `hanfu` `lidamu` `zhangbaiqi` `xuanjizi` `heishan_bing`（第 7 节）；战斗 CG `heishan_wai` `heishan_tan` `heishan_zhai`（第 8 节）；剧情 CG `jz_wake` `jz_ledger` `jz_county` `jz_guojia` `jz_ambush` `jz_rescue` `jz_boss` `jz_end`（第 8b 节，提示词已在 `ART-PROMPTS.md`，故事方格暂未挂 `cg` 字段，等画好再接）；优先级由 owner 决定
+7. **北线第一章 · 冀州风云**（新，剧情已写入 `prologue` quest 的 `era` 北方分支，x ≥ 23）：立绘 `lord_north`（北线主角自己的立绘——不同的发型/束发，无甲，账房打扮，和南线主公共用卡但各自只认自己的立绘，见 `Kit.portrait_key`）`zhangfuren` `guojia` `zhaoyun` `zhenmi_young` `guotu` `hanfu` `lidamu` `zhangbaiqi` `xuanjizi` `heishan_bing`（第 7 节）；战斗 CG `heishan_wai` `heishan_tan` `heishan_zhai`（第 8 节）；剧情 CG `jz_wake` `jz_ledger` `jz_county` `jz_guojia` `jz_ambush` `jz_rescue` `jz_boss` `jz_end`（第 8b 节，提示词已在 `ART-PROMPTS.md`，故事方格暂未挂 `cg` 字段，等画好再接）；优先级由 owner 决定
 
 已到位（画师 / Gemini 图）：第一章底图；主公、孙策、周瑜（含赤壁版）、孙坚、吴国太、左慈、华佗、于吉、胡玉、唐周、何仪、张宁、胭脂虎、董白、祖茂、程普、华雄、韩当、黄盖、李傕、郭汜、李儒、张飞、唐姬；飞熊军、西凉铁骑；江东水贼、南下黄巾、于吉信徒、白额虎、野猪、山贼喽啰、官军刀兵（盾牌待重画）、丹阳兵、长沙刀兵、黄巾女医、宫女、西凉女亲兵；第一章剧情 CG 8 张全齐 + `i1_sewing`；第一章战斗 CG 12 张全齐；宝箱图 2 张。
 程序生成占位（能用，但不是画的）：兵种徽记、格子图标、主公棋子、宝物图标、卡背、数值 / 技能图标、第二章底图。

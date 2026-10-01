@@ -289,6 +289,8 @@ static func _portrait_index() -> Dictionary:
 
 static func portrait_key(card_id: String) -> String:
 	var idx := _portrait_index()
+	if card_id == "lord_north" and not idx.has("lord_north"):
+		card_id = "lord"  # no north-route portrait drawn yet: fall back to the south one
 	if idx.has(card_id):
 		return card_id
 	var card: Dictionary = GameData.get_db().cards.get(card_id, {})
