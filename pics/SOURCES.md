@@ -40,7 +40,7 @@
 | `sunshangxiang` | source/public-domain/sunshangxiang.jpg | [链接](https://commons.wikimedia.org/wiki/File:SunShangxiang.jpg) | Public domain | Unknown authorUnknown author |
 | `taishici` | source/public-domain/taishici.jpg | [链接](https://commons.wikimedia.org/wiki/File:Taishi_Ci_Qing_illustration.jpg) | Public domain | Unknown author |
 | `xuchu` | source/public-domain/xuchu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Chu_Qing_illustration.jpg) | Public domain | Unknown author |
-| `xuhuang` | source/public-domain/xuhuang.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Huang_Portrait.jpg) | Public domain | Unknown authorUnknown author |
+| `xuhuang` | source/generals/xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangjiao` | source/public-domain/zhangjiao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg) | Public domain | Unknown author |
 | `zhangliao` | source/public-domain/zhangliao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg) | Public domain | — |
@@ -114,6 +114,8 @@
 | `battle:dagu` | source/battles/dagu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:xiliang_youqi` | source/battles/xiliang_youqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:xiliang_scout` | source/battles/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_jiling` | source/battles/c3_jiling.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_qiaorui` | source/battles/c3_qiaorui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -142,3 +144,4 @@
 | `cg:c3_wenji` | source/cg/c3_wenji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_end` | source/cg/c3_end.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_entrust` | source/cg/c3_entrust.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_slip` | source/cg/c3_slip.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
