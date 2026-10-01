@@ -89,6 +89,7 @@
 | `bingzhou` | source/soldiers/bingzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gaoshun` | source/generals/gaoshun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangfusong` | source/generals/huangfusong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caiyong` | source/generals/caiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

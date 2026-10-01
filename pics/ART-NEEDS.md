@@ -354,7 +354,7 @@
 | ⬜ 缺 | `dongzhuo` | 剧情立绘 |
 | ✅ 正式 | `lvlingqi` | 剧情立绘 |
 | ⬜ 缺 | `xiandi` | 剧情立绘 |
-| ⬜ 缺 | `caiyong` | 剧情立绘 |
+| ✅ 正式 | `caiyong` | 剧情立绘 |
 | ⬜ 缺 | `wangyun` | 剧情立绘 |
 | ✅ 正式 | `diaochan` | 剧情立绘 |
 
