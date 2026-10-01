@@ -453,18 +453,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `zhujun` ⬜ 缺
-
-```
-A vertical character portrait of Zhu Jun (朱儁), the veteran Han General of Chariots and Cavalry, Sun Jian's old commander.
-Appearance: Upright old general in his late 50s with a grizzled grey beard, a hearty laugh and a ramrod-straight back.
-Armor & Clothing: Worn but well-kept Han general's lamellar armor with a faded red cloak.
-Weapon: One hand on his sword hilt, the other raised in a big, hearty wave.
-Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ### `fanchou` ⬜ 缺
 
 ```
