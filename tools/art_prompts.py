@@ -24,11 +24,11 @@ PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
-    "lord_north": ("The hero's northern-route host body (北线主角) — a merchant house's account clerk with no martial training, wins by wit and ledgers, not the sword",
-        "Clean, unweathered young man in his early 20s, soft hands, a composed and faintly clever half-smile.",
-        "A plain dark blue scholar's robe, hair tied back in a simple cloth-wrapped topknot (no cap, no helmet, no armor), later layered with a white snow-fox fur cloak gifted by Lady Zhang.",
-        "An abacus in one hand, a ledger book tucked under the other arm, no weapon.",
-        "a grain warehouse at the Zhen family estate in Zhongshan, snow visible through a window, sacks of grain stacked in rows"),
+    "lord_north": ("The hero's northern-route host body (北线主角) — started as a merchant house's account clerk, now marching south wearing his adoptive family's late patriarch's old armor",
+        "Clean-cut young man in his early 20s, soft unweathered hands, a composed and faintly clever half-smile.",
+        "Dark iron lamellar armor, worn-in but well-kept (an older, plainer cut than a fresh-forged set — Hebei northern style, no green or gold), hair tied back in a simple cloth-wrapped topknot (no helmet), a white snow-fox fur cloak draped over the armor.",
+        "A hand resting on the pommel of a plain sword, not the ostentatious stance of a born warrior.",
+        "a snowy Hebei plain with a column of cavalry and banners behind him, grey winter sky"),
     "diaochan": ("Diaochan (貂蝉), the famed beauty and Wang Yun's adoptive daughter — clever, brave, always seeming to flirt — an adult woman",
         "Breathtakingly beautiful adult woman in her early 20s with a teasing, unreadable smile and knowing eyes.",
         "Flowing layered silk dress in moonlit blue and silver with long dancing sleeves, a jade hairpin.",

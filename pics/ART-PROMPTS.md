@@ -97,11 +97,11 @@
 ### `lord_north` ⬜ 缺
 
 ```
-A vertical character portrait of The hero's northern-route host body (北线主角) — a merchant house's account clerk with no martial training, wins by wit and ledgers, not the sword.
-Appearance: Clean, unweathered young man in his early 20s, soft hands, a composed and faintly clever half-smile.
-Armor & Clothing: A plain dark blue scholar's robe, hair tied back in a simple cloth-wrapped topknot (no cap, no helmet, no armor), later layered with a white snow-fox fur cloak gifted by Lady Zhang.
-Weapon: An abacus in one hand, a ledger book tucked under the other arm, no weapon.
-Background: a grain warehouse at the Zhen family estate in Zhongshan, snow visible through a window, sacks of grain stacked in rows.
+A vertical character portrait of The hero's northern-route host body (北线主角) — started as a merchant house's account clerk, now marching south wearing his adoptive family's late patriarch's old armor.
+Appearance: Clean-cut young man in his early 20s, soft unweathered hands, a composed and faintly clever half-smile.
+Armor & Clothing: Dark iron lamellar armor, worn-in but well-kept (an older, plainer cut than a fresh-forged set — Hebei northern style, no green or gold), hair tied back in a simple cloth-wrapped topknot (no helmet), a white snow-fox fur cloak draped over the armor.
+Weapon: A hand resting on the pommel of a plain sword, not the ostentatious stance of a born warrior.
+Background: a snowy Hebei plain with a column of cavalry and banners behind him, grey winter sky.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
