@@ -22,7 +22,7 @@
   "fengfuren": {"file": "fengfuren.jpg", "face": [0.5, 0.25], "head": 0.24},
   "ganning": {"file": "ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true},
   "guanyu": {"file": "guanyu.jpg", "face": [0.51, 0.27], "head": 0.18},
-  "huangzhong": {"file": "huangzhong.jpg", "face": [0.34, 0.13], "head": 0.07, "placeholder": true},
+  "huangzhong": {"file": "huangzhong.jpg", "face": [0.48, 0.28], "head": 0.24},
   "jianyong": {"file": "jianyong.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true},
   "liaohua": {"file": "liaohua.jpg", "face": [0.45, 0.25], "head": 0.1, "placeholder": true},
   "liubei": {"file": "liubei.jpg", "face": [0.5, 0.22], "head": 0.2},
