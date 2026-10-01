@@ -42,9 +42,9 @@ func test_cannot_move_before_resolving() -> void:
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["wake"])
 
 
-func test_the_north_is_not_open_yet() -> void:
+func test_both_birthplaces_are_open() -> void:
 	var opts: Array = quest(0)["squares"]["era"]["choose"]
-	check(not opts[0]["locked"] and opts[1]["locked"] and opts[0]["card"] == "")
+	check(not opts[0]["locked"] and not opts[1]["locked"] and opts[0]["card"] == "")
 
 
 func test_each_plan_walks_its_own_branch_and_both_rescue_her() -> void:
