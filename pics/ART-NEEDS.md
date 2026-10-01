@@ -223,7 +223,7 @@
 | ⬜ 缺 | `e_tongyao` | 「童谣」 |
 | ⬜ 缺 | `e_zhuhou_yan` | 「诸侯宴」 |
 | ⬜ 缺 | `e_convoy` | 「截粮队」 |
-| ⬜ 缺 | `e_tangji` | 「落难贵人」 |
+| ✅ 已有 | `e_tangji` | 「落难贵人」 |
 | ✅ 已有 | `e_biwu` | 「比武招亲」 |
 | ✅ 已有 | `e_grand_chest` | 「高级宝箱」 |
 
@@ -285,8 +285,8 @@
 | ✅ 已有 | `c3_slip` | 说漏嘴 |
 | ✅ 已有 | `c3_entrust` | 托玺 |
 | ⬜ 缺 | `c3_warn` | 劝阻 |
-| ⬜ 缺 | `c3_feng` | 冯夫人 |
-| ⬜ 缺 | `c3_raid` | 夜袭 |
+| ✅ 已有 | `c3_feng` | 冯夫人 |
+| ✅ 已有 | `c3_raid` | 夜袭 |
 | ✅ 已有 | `c3_news` | 噩耗 |
 | ✅ 已有 | `c3_end` | 玉碎 |
 | ✅ 已有 | `end_yusui` | 结局卡「结局一 · 玉碎」 |
@@ -566,13 +566,13 @@
 |---|---|---|
 | ⬜ 缺 | `lusu` | 鲁肃（SR） |
 | ⬜ 缺 | `zhangzhongjing` | 张仲景（SR） |
-| ⬜ 缺 | `xiaoqiao` | 小乔（SR） |
+| ✅ 正式 | `xiaoqiao` | 小乔（SR） |
 | ⬜ 缺 | `zhenmi` | 甄宓（SR） |
 | 🟡 占位 | `machao` | 马超（SR） |
 | 🟡 占位 | `zhangliao` | 张辽（SR） |
 | 🟡 占位 | `xuchu` | 许褚（SR） |
 | 🟡 占位 | `pangtong` | 庞统（SR） |
-| ⬜ 缺 | `daqiao` | 大乔（SR） |
+| ✅ 正式 | `daqiao` | 大乔（SR） |
 | ⬜ 缺 | `huangyueying` | 黄月英（SR） |
 | ⬜ 缺 | `zhangyan` | 张燕（SR） |
 | 🟡 占位 | `zhaoyun` | 赵云（SSR） |

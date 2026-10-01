@@ -58,10 +58,10 @@
     "lord": {
       "src": "source/generals/lord.jpg",
       "face": [
-        0.5,
-        0.16
+        0.52,
+        0.21
       ],
-      "head": 0.14,
+      "head": 0.26,
       "license": "用户提供（Gemini 生成）"
     },
     "sunce": {
@@ -95,10 +95,10 @@
     "wuguotai": {
       "src": "source/generals/wuguotai.jpg",
       "face": [
-        0.52,
-        0.28
+        0.51,
+        0.26
       ],
-      "head": 0.22,
+      "head": 0.24,
       "license": "用户提供（Gemini 生成）"
     },
     "sunjian": {
@@ -485,10 +485,10 @@
     "dongbai": {
       "src": "source/generals/dongbai.jpg",
       "face": [
-        0.51,
-        0.31
+        0.53,
+        0.34
       ],
-      "head": 0.2,
+      "head": 0.25,
       "license": "用户提供（Gemini 生成）"
     },
     "zumao": {
@@ -693,9 +693,9 @@
       "src": "source/generals/tangji.jpg",
       "face": [
         0.5,
-        0.23
+        0.3
       ],
-      "head": 0.24,
+      "head": 0.28,
       "license": "用户提供（Gemini 生成）"
     },
     "inf_n": {
@@ -903,6 +903,24 @@
         0.23
       ],
       "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "daqiao": {
+      "src": "source/generals/daqiao.jpg",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "xiaoqiao": {
+      "src": "source/generals/xiaoqiao.jpg",
+      "face": [
+        0.53,
+        0.25
+      ],
+      "head": 0.25,
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -1163,6 +1181,18 @@
     },
     "c3_news": {
       "src": "source/cg/c3_news.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_raid": {
+      "src": "source/cg/c3_raid.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_feng": {
+      "src": "source/cg/c3_feng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_tangji": {
+      "src": "source/cg/e_tangji.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
