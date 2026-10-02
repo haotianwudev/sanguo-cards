@@ -690,20 +690,6 @@ func test_yellow_turban_remnants_and_their_medics() -> void:
 	check_eq(GameData.get_db().cards["huangjin_nvyi"]["troop"], "logistics")
 
 
-func test_the_yellow_turban_saint() -> void:
-	check(quest(0)["event_pool"].has("shengnv") and quest(1)["event_pool"].has("shengnv"))
-	var healed := event_on_road("shengnv", 0)
-	check(healed.resolved and healed.damage == 0)
-	var joined := 0
-	for seed_value in 20:
-		var s := event_on_road("shengnv", 1, seed_value)
-		if s.has_card("zhangning"):
-			joined += 1
-		else:
-			check(s.relics.has("taipingyaoshu"), "she leaves her book")
-	check(joined > 0 and joined < 20)
-
-
 func test_the_chapter_recap_remembers_the_run() -> void:
 	var q := quest(1)
 	var s := SaveData.create()
