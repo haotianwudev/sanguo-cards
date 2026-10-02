@@ -9,11 +9,15 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
+**先重画**（已交付但有地方不对）：
+
+- `zhangning` — 形象改成医仙：素白布衣、竹药箱、金针、只留一块「太平」黄玉佩；旧图的黄袍、九节杖、符纸都不要了
+
 1. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
 2. `xunyou` — 荀攸（立绘）
 3. `zhongyao` — 钟繇（立绘）
 4. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-5. `e_shengnv` — 黄巾圣女（张宁施符水）（剧情 CG）
+5. `e_shengnv` — 黄巾圣女（张宁扎针熬药，不画符水）（剧情 CG）
 6. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
 7. `c3_warn` — 劝阻孙坚（剧情 CG）
 8. `changan` — 第三章·长安地图底图（地图）
@@ -654,6 +658,18 @@ Appearance: Burly, cheerful adult man with a bald head and a thick mustache.
 Armor & Clothing: Stained apron over a soldier's tunic.
 Weapon: Stirring a huge cauldron with a long ladle.
 Background: an atmospheric ancient Chinese scene matching the character, soft natural lighting.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `zhangning` 🟡 换掉占位
+
+```
+A vertical character portrait of Zhang Ning (张宁), daughter of the Yellow Turban leader Zhang Jiao — a wandering healer, not a sorceress — an adult woman.
+Appearance: Gentle, clear-eyed adult woman of about 19 with a calm, quietly stubborn expression, a few loose strands of hair.
+Armor & Clothing: Plain undyed white hemp cross-collar dress with the sleeves rolled up, hair tied up with a dark blue cloth band, a single yellow jade pendant carved with the characters 太平 at her waist (her father's keepsake, the only Taoist trace); no yellow robe, no talismans.
+Weapon: A bamboo medicine box slung on her back, a long gold acupuncture needle held between two fingers, the other hand checking a pulse.
+Background: a misty Taihang mountain field hospital: a straw-roofed shed with bundles of drying herbs, a clay pot of medicine steaming over a small fire.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -1598,7 +1614,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `e_shengnv`
 
 ```
-A horizontal story event illustration: a forest clearing: the Yellow Turban saint Zhang Ning, an adult woman in a yellow Taoist robe with a nine-section staff, handing out bowls of charm water to kneeling ragged followers.
+A horizontal story event illustration: a forest clearing: Zhang Ning, an adult woman healer in a plain white hemp dress with rolled-up sleeves and a bamboo medicine box at her feet, needling a wounded Yellow Turban man while ragged sick followers lie on straw mats around her and a clay pot of medicine steams over a fire.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
