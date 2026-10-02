@@ -408,6 +408,11 @@ PORTRAITS = {
                "Plain grey-blue traveling robe, a wooden medicine chest on his back painted with the characters 沛国华佗.",
                "Holding a silver acupuncture needle between his fingers; a small hand axe peeks out of the medicine chest (his brain-surgery joke).",
                "A rustic apothecary clinic and traveling medical pavilion with hanging bundles of dried medicinal herbs, an herb-grinding mortar, and medicine drawers"),
+    "zhangning": ("Zhang Ning (张宁), daughter of the Yellow Turban leader Zhang Jiao — a wandering healer, not a sorceress — an adult woman",
+                  "Gentle, clear-eyed adult woman of about 19 with a calm, quietly stubborn expression, a few loose strands of hair.",
+                  "Plain undyed white hemp cross-collar dress with the sleeves rolled up, hair tied up with a dark blue cloth band, a single yellow jade pendant carved with the characters 太平 at her waist (her father's keepsake, the only Taoist trace); no yellow robe, no talismans.",
+                  "A bamboo medicine box slung on her back, a long gold acupuncture needle held between two fingers, the other hand checking a pulse.",
+                  "a misty Taihang mountain field hospital: a straw-roofed shed with bundles of drying herbs, a clay pot of medicine steaming over a small fire"),
     "yuji": ("Yu Ji (于吉), the eerie Taoist priest of Jiangdong",
              "Middle-aged Taoist with a thin mustache and an unsettling, knowing smile, narrowed eyes.",
              "Flowing white Taoist robe, hair in a topknot with a wooden pin.",
@@ -733,7 +738,7 @@ CGS = {
     "c2_dongbai_join": "a burning Luoyang street at night: the woman general Dong Bai striding toward the hero with her two giant bronze hammers, a line of Xiliang female cavalry guards kneeling behind her, ruined houses and refugees",
     "e_tangji": "a ruined temple: Lady Tang, an adult woman in coarse clothes with soot on her cheek, clutching a jade hairpin, looking up with unyielding eyes as the hero and Lady Wu find her",
     "e_yazhai": "a mountain bandit fort: the curvy bandit queen 'Rouge Tiger' standing hands on hips on the fort wall with twin sabers, pointing at the embarrassed hero, her chubby husband carrying a pig behind her (comedic)",
-    "e_shengnv": "a forest clearing: the Yellow Turban saint Zhang Ning, an adult woman in a yellow Taoist robe with a nine-section staff, handing out bowls of charm water to kneeling ragged followers",
+    "e_shengnv": "a forest clearing: Zhang Ning, an adult woman healer in a plain white hemp dress with rolled-up sleeves and a bamboo medicine box at her feet, needling a wounded Yellow Turban man while ragged sick followers lie on straw mats around her and a clay pot of medicine steams over a fire",
     "c2_yuxi": "burning Luoyang at night: Sun Jian by a well holding up the glowing Imperial Jade Seal, his face lit by five-colored light, his eyes turning ambitious",
     "i1_sewing": "night by lamplight: Lady Wu sewing a winter coat, the young man sitting beside her, Sun Ce sulking outside the window",
     "i2_yuxi": "night on a river boat: Sun Jian hugging a brocade box at the bow, Lady Wu standing at the cabin door holding a late-night snack",
@@ -907,7 +912,7 @@ NEXT = [
     ("cg", "c2_setout", "第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）"),
     ("cg", "e_tangji", "破庙救唐姬"),
     ("cg", "e_yazhai", "压寨夫人（胭脂虎指着主角）"),
-    ("cg", "e_shengnv", "黄巾圣女（张宁施符水）"),
+    ("cg", "e_shengnv", "黄巾圣女（张宁扎针熬药，不画符水）"),
     ("portrait", "caiwenji", "蔡文姬"),
     ("portrait", "fengfuren", "冯夫人（袁术的宠姬，成年女性）"),
     ("portrait", "yuanshu", "袁术"),
@@ -1018,6 +1023,7 @@ CHESTS = {
 }
 # already delivered but wrong somewhere: redraw (listed above the batch)
 REDO = [
+    ("zhangning", "形象改成医仙：素白布衣、竹药箱、金针、只留一块「太平」黄玉佩；旧图的黄袍、九节杖、符纸都不要了"),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
