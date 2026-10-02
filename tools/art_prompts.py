@@ -27,7 +27,7 @@ PORTRAITS = {
     "lord_north": ("The hero's northern-route host body (北线主角) — a merchant house's account clerk turned commander, wearing the late patriarch's old armor",
                  "Clean-cut young man in his early 20s, soft unweathered hands, a composed and faintly clever half-smile.",
                  "Old fish-scale armor of the Hebei northern style, worn-in but meticulously kept (plain iron, no green or gold), hair tied in a cloth-wrapped topknot (no helmet, never short modern hair), a snow-white mink fur cloak over the armor.",
-                 "A plain saber at his hip with a small red knotted good-luck charm tied to its hilt, a round shield with short iron spikes on his arm.",
+                 "A plain white-wax-wood long spear (白蜡杆长枪) held upright, a small red knotted good-luck charm tied just below the spearhead.",
                  "a snowy Hebei plain road with a column of Changshan cavalry and banners behind him, grey winter sky"),
     "xiahoulan": ("Xiahou Lan (夏侯兰), Zhao Yun's childhood friend, a county clerk of punishments who becomes the army's stern provost",
                 "Lean young man around 20 with an unsmiling iron face and a vertical crease between his brows; utterly unbending.",
@@ -990,7 +990,7 @@ UI_ART = {
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
     # P0 · 北线（第一章已做进游戏，一张图都没有）：
-    ("portrait", "lord_north", "北线主角（束发、鱼鳞甲、白貂披风、刀与刺盾）"),
+    ("portrait", "lord_north", "北线主角（束发、鱼鳞甲、白貂披风、白蜡杆长枪系红平安结）"),
     ("portrait", "zhangfuren", "张夫人"),
     ("portrait", "zhenmi_young", "甄宓（十三四岁的少女，只画孩子该有的样子）"),
     ("portrait", "zhaoyun", "赵云（换掉占位）"),

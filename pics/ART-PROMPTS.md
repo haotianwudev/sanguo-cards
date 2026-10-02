@@ -13,7 +13,7 @@
 
 - `zhangning` — 形象改成医仙：素白布衣、竹药箱、金针、只留一块「太平」黄玉佩；旧图的黄袍、九节杖、符纸都不要了
 
-1. `lord_north` — 北线主角（束发、鱼鳞甲、白貂披风、刀与刺盾）（立绘）
+1. `lord_north` — 北线主角（束发、鱼鳞甲、白貂披风、白蜡杆长枪系红平安结）（立绘）
 2. `zhangfuren` — 张夫人（立绘）
 3. `zhenmi_young` — 甄宓（十三四岁的少女，只画孩子该有的样子）（立绘）
 4. `zhaoyun` — 赵云（换掉占位）（立绘）
@@ -134,7 +134,7 @@
 A vertical character portrait of The hero's northern-route host body (北线主角) — a merchant house's account clerk turned commander, wearing the late patriarch's old armor.
 Appearance: Clean-cut young man in his early 20s, soft unweathered hands, a composed and faintly clever half-smile.
 Armor & Clothing: Old fish-scale armor of the Hebei northern style, worn-in but meticulously kept (plain iron, no green or gold), hair tied in a cloth-wrapped topknot (no helmet, never short modern hair), a snow-white mink fur cloak over the armor.
-Weapon: A plain saber at his hip with a small red knotted good-luck charm tied to its hilt, a round shield with short iron spikes on his arm.
+Weapon: A plain white-wax-wood long spear (白蜡杆长枪) held upright, a small red knotted good-luck charm tied just below the spearhead.
 Background: a snowy Hebei plain road with a column of Changshan cavalry and banners behind him, grey winter sky.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
