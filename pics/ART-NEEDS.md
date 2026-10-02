@@ -28,7 +28,6 @@
 | ✅ 正式 | `sunce` | 事件「白衣道人」 |
 | ✅ 正式 | `zhouyu` | 事件「二乔」 |
 | ✅ 正式 | `yanzhihu` | 事件「压寨夫人」 |
-| ✅ 正式 | `zhangning` | 事件「黄巾圣女」 |
 | ✅ 正式 | `wuguotai` | 剧情立绘 |
 | ⬜ 缺 | `zhangfuren` | 剧情立绘 |
 | ⬜ 缺 | `zhenmi_young` | 剧情立绘 |
@@ -144,7 +143,6 @@
 | ⬜ 缺 | `e_hj_camp` | 「黄巾余孽营地」 |
 | ⬜ 缺 | `e_hj_medics` | 「黄巾女眷」 |
 | ⬜ 缺 | `e_hj_road` | 「黄巾劫道」 |
-| ⬜ 缺 | `e_shengnv` | 「黄巾圣女」 |
 | ⬜ 缺 | `e_risk` | 「险滩」 |
 
 ## 第二章 · 讨伐董卓
@@ -595,6 +593,7 @@
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
 | 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
+| ✅ 正式 | `zhangning` | 张宁·医仙（SR） |
 | ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
 | ✅ 正式 | `lvlingqi` | 吕玲绮·温侯之女（SSR） |
 | ⬜ 缺 | `mayunlu` | 马云騄（SR） |
