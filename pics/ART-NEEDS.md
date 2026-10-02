@@ -367,7 +367,6 @@
 | 状态 | key | 用在 |
 |---|---|---|
 | ✅ 正式 | `dongzhuo` | 剧情立绘 |
-| ✅ 正式 | `lvlingqi` | 剧情立绘 |
 | ⬜ 缺 | `xiandi` | 剧情立绘 |
 | ✅ 正式 | `caiyong` | 剧情立绘 |
 | ✅ 正式 | `wangyun` | 剧情立绘 |
@@ -597,6 +596,7 @@
 | 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
+| ✅ 正式 | `lvlingqi` | 吕玲绮·温侯之女（SSR） |
 | ⬜ 缺 | `mayunlu` | 马云騄（SR） |
 | ⬜ 缺 | `wangyi` | 王异（SR） |
 | ⬜ 缺 | `xinxianying` | 辛宪英（SR） |

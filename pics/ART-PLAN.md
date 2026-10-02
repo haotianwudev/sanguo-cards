@@ -235,7 +235,7 @@ G、H、I、J 这四类的代码已经接好：图放进对应文件夹就会自
 
 | 批次 | 内容 | 理由 |
 |---|---|---|
-| **P0** | 第三章·长安、第四章露脸的立绘：董卓、王允、蔡邕、汉献帝、皇甫嵩、高顺、荀攸、钟繇、吕玲绮；徐晃、黄忠换掉占位 | 对话头像全程可见，缺了最显眼 |
+| **P0** | 第三章·长安、第四章露脸的立绘：董卓、王允、蔡邕、汉献帝、皇甫嵩、高顺、荀攸、钟繇；徐晃、黄忠换掉占位 | 对话头像全程可见，缺了最显眼 |
 | **P1** | 地图底图 `changan` `dongui` `yuxi`（`taodong` 换掉程序占位） | 每轮都看得到 |
 | **P2** | 首领、精英战斗 CG：`c5_dongzhuo` `c4_lvbu` `c3_jiling` `c7_jiling` `c6_lijue` `c4_gaoshun` `c5_niufu` `c5_hall` `dagu`；结局卡 `end_yusui` `end_tonggui` | 高潮战斗和周目收尾 |
 | **P3** | 名场面：`c3_end` `c5_diaochan` `c5_fengyi` `c5_wedding` `c5_death` `c4_tonggui` `c6_escape` `c6_seal`；感情戏 6 张（`c4_xizi` `c4_mangshan` `c5_yuexia` `c5_chuxi` `c5_snow` `c7_stars`） | 玩家记得住的画面 |
