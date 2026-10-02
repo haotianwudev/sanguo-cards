@@ -93,70 +93,71 @@
 78. `zhangwei` — 张卫（南线第十章）（立绘）
 79. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
 80. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
-81. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-82. `c3_warn` — 劝阻孙坚（剧情 CG）
-83. `changan` — 第三章·长安地图底图（地图）
-84. `dongui` — 第四章·挟天子地图底图（地图）
-85. `yuxi` — 第三章·传国玉玺地图底图（地图）
-86. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-87. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-88. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-89. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-90. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-91. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-92. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-93. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-94. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
-95. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-96. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-97. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-98. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-99. `yiji` — 伊籍（第五章招贤馆）（立绘）
-100. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
-101. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
-102. `zongzei` — 宗贼（兵卡）（立绘）
-103. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
-104. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-105. `jx_zongzei` — 新野·宗贼（战斗 CG）
-106. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-107. `e_shuijing` — 事件·水镜先生（剧情 CG）
-108. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-109. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-110. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-111. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-112. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-113. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-114. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-115. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-116. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-117. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-118. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-119. `huangzu` — 黄祖（江夏太守）（立绘）
-120. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-121. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-122. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-123. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-124. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-125. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-126. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-127. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-128. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-129. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
-130. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-131. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-132. `c8_jiayan` — 宛城家宴（剧情 CG）
-133. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-134. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-135. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-136. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-137. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-138. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-139. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-140. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-141. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-142. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-143. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-144. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+81. `dianwei` — 典韦（第十一章南线）（立绘）
+82. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+83. `c3_warn` — 劝阻孙坚（剧情 CG）
+84. `changan` — 第三章·长安地图底图（地图）
+85. `dongui` — 第四章·挟天子地图底图（地图）
+86. `yuxi` — 第三章·传国玉玺地图底图（地图）
+87. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+88. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+89. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+90. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+91. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+92. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+93. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+94. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+95. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
+96. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+97. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+98. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+99. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+100. `yiji` — 伊籍（第五章招贤馆）（立绘）
+101. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
+102. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
+103. `zongzei` — 宗贼（兵卡）（立绘）
+104. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
+105. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+106. `jx_zongzei` — 新野·宗贼（战斗 CG）
+107. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+108. `e_shuijing` — 事件·水镜先生（剧情 CG）
+109. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+110. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+111. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+112. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+113. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+114. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+115. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+116. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+117. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+118. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+119. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+120. `huangzu` — 黄祖（江夏太守）（立绘）
+121. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+122. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+123. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+124. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+125. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+126. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+127. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+128. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+129. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+130. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
+131. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+132. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+133. `c8_jiayan` — 宛城家宴（剧情 CG）
+134. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+135. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+136. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+137. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+138. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+139. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+140. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+141. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+142. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+143. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+144. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+145. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -1501,6 +1502,18 @@ Appearance: Handsome, proud young man of about 25 with fine features and a restr
 Armor & Clothing: A scholar's silk headscarf and a white crane-feather cloak.
 Weapon: A white feather fan.
 Background: an eight-trigram battle formation with repeating crossbows beside the Luo River.
+Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
+Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
+```
+
+### `dianwei` 🟡 换掉占位
+
+```
+A vertical character portrait of Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer.
+Appearance: A towering, tower-like man in his 30s with a dark face, a thick curly beard, scars everywhere, fierce yet honest eyes.
+Armor & Clothing: Battered heavy Cao army armor with one arm bare.
+Weapon: A massive iron halberd in each hand.
+Background: the south gate of Luoyang with the enemy camp and its cooking smoke below the walls.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
