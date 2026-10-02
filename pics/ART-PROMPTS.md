@@ -1258,7 +1258,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A vertical character portrait of Ma Chao (马超), the dazzling young general of Xiliang.
-Appearance: Handsome, sharp-featured man around 30 with fierce brows and fair skin.
+Appearance: Handsome, sharp-featured young man of about 25 with fierce brows and fair skin.
 Armor & Clothing: Silver lion-helm armor with a beast-face breastplate and a white war robe.
 Weapon: A gold-inlaid tiger-head spear, mounted on a white horse.
 Background: burning camps at the Yanjin ford of the Yellow River.
@@ -1389,8 +1389,8 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 ### `luxun` ⬜ 缺
 
 ```
-A vertical character portrait of Lu Xun (陆逊), the calm young strategist of the Lu family, now in his early twenties.
-Appearance: Refined young man of about 22 with calm, steady eyes.
+A vertical character portrait of Lu Xun (陆逊), the calm young strategist of the Lu family, now a young man of about nineteen.
+Appearance: Refined young man of about nineteen with calm, steady eyes.
 Armor & Clothing: Scholar's robes under light armor.
 Weapon: A long sword at his side, a fan in hand.
 Background: a river camp on the Han River.
@@ -1498,7 +1498,7 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A vertical character portrait of Zhuge Liang (诸葛亮), the brilliant, proud young strategist serving Liu Bei.
-Appearance: Handsome, proud young man of about 25 with fine features and a restrained edge in his eyes.
+Appearance: Handsome, proud young man of about 21 with fine features and a restrained edge in his eyes.
 Armor & Clothing: A scholar's silk headscarf and a white crane-feather cloak.
 Weapon: A white feather fan.
 Background: an eight-trigram battle formation with repeating crossbows beside the Luo River.
