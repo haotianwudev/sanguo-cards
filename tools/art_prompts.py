@@ -1074,8 +1074,12 @@ CGS = {
     "jz_guojia": "a snowy street under wine-shop banners: Guo Jia leaning against a post sizing up the hero, Zhao Yun kneeling on one knee, the town of Zhending behind",
     "jz_ambush": "a snowy mountain gorge: Xuanjizi galloping off with young Zhen Mi over his saddle, Li Damu and Zhang Baiqi charging down from the cliffs",
     "jz_rescue": "a blood-red altar cave: Zhao Yun's spear driving at Xuanjizi, young Zhen Mi tied to a post, screaming",
-    "jz_boss": "the stockade gate: the hero's shield locking Li Damu's huge axe, Zhao Yun's spear cocked to strike, the stockade wall ablaze behind",
-    "jz_end": "a snowy highway: Lady Zhang fastening a sable-fur cloak on the hero, young Zhen Mi on tiptoe tying a lucky knot to his sword hilt, Zhao Yun and Guo Jia riding on either side",
+    "jz_boss": "the stockade gate: the hero's spear shaft crossed awkwardly to block Li Damu's huge axe, Zhao Yun's own spear cocked to strike, the stockade wall ablaze behind",
+    "jz_crowd": "a snowy Changshan square: thousands of gaunt refugees kneeling in the snow around steaming porridge pots, the hero on horseback looking down at the sea of grateful faces, newly-formed cavalry banners behind him",
+    "jz_training": "a frost-covered training yard: Zhao Yun correcting the hero's grip on a white-wax-wood spear mid-stance, Lady Zhang's fur coat hanging on a line in the background with a fresh spear-hole through it",
+    "jz_fireside": "a snug estate room at night: the hero, Zhao Yun and Guo Jia sitting close around a charcoal brazier with wine cups, snow visible through a lattice window, firelight on their faces",
+    "jz_armor": "a dim household hall: Lady Zhang holding out a worn but well-kept lamellar armor set with both arms, eyes reddening, young Zhen Mi biting her lip beside her, the hero receiving it with both hands",
+    "jz_end": "a snowy highway: the hero in dark lamellar armor and a white fur cloak holding a spear at the center, Zhao Yun in silver armor on a white horse to one side and Guo Jia sipping wine from a carriage on the other, a column of cavalry and new banners behind",
 }
 
 

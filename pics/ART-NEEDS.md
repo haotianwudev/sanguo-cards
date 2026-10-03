@@ -106,8 +106,18 @@
 | ✅ 已有 | `c1_armor` | 旧甲 |
 | ✅ 已有 | `c1_oath` | 结义 |
 | ✅ 已有 | `c1_north` | 北上 |
+| ⬜ 缺 | `jz_wake` | 甄府 |
+| ⬜ 缺 | `jz_ledger` | 账房 |
+| ⬜ 缺 | `jz_county` | 县衙 |
+| ⬜ 缺 | `jz_guojia` | 街头 |
 | ✅ 已有 | `jz_ambush` | 峡谷伏击 |
 | ✅ 已有 | `jz_rescue` | 祭坛 |
+| ⬜ 缺 | `jz_boss` | 黑山寨 |
+| ⬜ 缺 | `jz_crowd` | 放粮 |
+| ⬜ 缺 | `jz_training` | 教枪 |
+| ⬜ 缺 | `jz_fireside` | 夜话 |
+| ⬜ 缺 | `jz_armor` | 赠甲 |
+| ⬜ 缺 | `jz_end` | 南下 |
 | ✅ 已有 | `i1_sewing` | 幕间「吴夫人的针线」 |
 
 奇遇插图（这一章第一次会抽到的「？」事件）
