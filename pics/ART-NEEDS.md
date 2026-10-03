@@ -106,7 +106,7 @@
 | ✅ 已有 | `c1_armor` | 旧甲 |
 | ✅ 已有 | `c1_oath` | 结义 |
 | ✅ 已有 | `c1_north` | 北上 |
-| ⬜ 缺 | `jz_wake` | 甄府 |
+| ✅ 已有 | `jz_wake` | 甄府 |
 | ⬜ 缺 | `jz_ledger` | 账房 |
 | ⬜ 缺 | `jz_county` | 县衙 |
 | ⬜ 缺 | `jz_guojia` | 街头 |

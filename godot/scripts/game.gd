@@ -332,6 +332,12 @@ func demo(name: String) -> void:
 			Quests.resolve(q, save, rng, 0)
 			Quests.move(q, save, "wake")
 			show_screen(MapScreen.new())
+		"cg_north":  # standing on northern prologue CG (甄府醒来)
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			Quests.resolve(q, save, rng, 1)
+			Quests.move(q, save, "jz_arrive")
+			show_screen(MapScreen.new())
 		"fork":  # after 富春: follow 周瑜 or 孙策
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
