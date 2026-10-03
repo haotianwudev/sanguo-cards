@@ -1089,6 +1089,7 @@ CGS = {
 # They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
 # chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
 MAPS = {
+    "luoyang_n": "the Yellow River road to Hulao Pass, left to right: a frozen river crossing with a grain-cart convoy; an old road where a red-armored horsewoman fell from her horse in the snow; the allied lords' camp at Suanzao with a bright red sponsor banner among the tents; the Bian river with a defeated army's wreckage and a lone general's tent; the grim grey walls of Hulao Pass with watchfires; at the far right the Yellow River ford crowded with routed soldiers and abandoned boats under a sky red from distant Luoyang burning",
     "yuxi": "the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
     "shouluoyang": "ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an",
     "changan": "Chang'an in winter, left to right: the grand city gate; Dong Zhuo's lavish mansion with a courtyard duel ring; the palace with a rockery garden; a scholar's modest house; the Minister's mansion; a lotus pond with the Phoenix Pavilion; at the far right the chancellor's mansion hung with red wedding lanterns",
@@ -1254,6 +1255,7 @@ NEXT = [
     ("cg", "jz_boss", "北线·黑山破寨（剧情 CG）"),
 
     # P0 · 北线主线（其他）：
+    ("map", "luoyang_n", "第二章·洛阳烟云地图底图"),
     ("portrait", "zhaoyun", "赵云（换掉占位）"),
     ("portrait", "guojia", "郭嘉"),
     ("portrait", "lidamu", "李大目（北线第一章首领）"),
