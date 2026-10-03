@@ -136,13 +136,21 @@ func demo(name: String) -> void:
 					Quests.resolve(q, save, rng)
 			save.events = {"hill": "zuoci"}
 			show_screen(MapScreen.new())
-		"ch2":  # 第二章 at 虎牢关: the 吕布 fork (win: three chests, lose: 三英战吕布)
+		"ch2":  # 第二章 at 虎牢关: the 吕布 fork (win: three chests, lose: 三英战吕布; --at=<id> jumps ahead)
 			save.quests_cleared = ["prologue"]
 			var q: Dictionary = GameData.get_db().quests[1]
 			Quests.begin(q, save, rng)
-			for sid in ["road1", "youqi", "zumao", "huaxiong", "save_zumao", "counter", "borrow", "tent", "liru", "dongbai", "capture", "captive", "raid_camp"]:
-				Quests.resolve(q, save, rng)
+			Quests.pick_fate(save, 0)
+			var at: String = "raid_camp"
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--at="):
+					at = a.substr(5)
+			var path := ["road1", "youqi", "zumao", "huaxiong", "save_zumao", "counter", "bubing2", "borrow", "spoils", "feixiong", "dongbai", "capture", "dongbai_rest", "captive", "scout2", "raid_camp", "bingzhou2", "lvbu", "triple", "box1", "box2", "box3", "fate", "give"]
+			for sid in path:
+				Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
 				Quests.move(q, save, sid)
+				if sid == at:
+					break
 			show_screen(MapScreen.new())
 		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)
 			save.flags = ["出生：冀州无极"]

@@ -163,6 +163,7 @@
 | `cg:i1_sewing` | source/cg/i1_sewing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_capture` | source/cg/c2_capture.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_keep` | source/cg/c2_keep.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_handover` | source/cg/c2_handover.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_captive` | source/cg/c2_captive.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_dongbai_join` | source/cg/c2_dongbai_join.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_raid` | source/cg/c2_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

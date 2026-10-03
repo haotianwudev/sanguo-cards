@@ -227,7 +227,7 @@
 | ✅ 已有 | `c2_raid` | 吕布劫营 |
 | ✅ 已有 | `c2_sanying` | 三英战吕布 |
 | ✅ 已有 | `c2_triple` | 威震诸侯 |
-| ⬜ 缺 | `c2_handover` | 交人 |
+| ✅ 已有 | `c2_handover` | 交人 |
 | ✅ 已有 | `c2_keep` | 藏人 |
 | ✅ 已有 | `c2_heqin` | 和亲 |
 | ⬜ 缺 | `c2_mixin` | 密信 |
