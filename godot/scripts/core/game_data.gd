@@ -106,7 +106,10 @@ func _load(dir: String) -> void:
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
 			"subtitle": q.get("subtitle", ""), "ending": q.get("ending", {}), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
-			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", [])})
+			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", []),
+				"pool_overrides": q.get("pool_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
+					"unless": o.get("unless", ""), "soldier_pool": o.get("soldier_pool", []),
+					"recruit_pool": o.get("recruit_pool", []), "event_pool": o.get("event_pool", [])})})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),

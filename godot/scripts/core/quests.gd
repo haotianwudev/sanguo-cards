@@ -50,10 +50,15 @@ static func validate(db: GameData) -> void:
 				assert(db.cards.has(c), where + ": unknown card " + c)
 			for r in s["relics"]:
 				assert(db.relics.has(r), where + ": unknown relic " + r)
+		var all_event_pools: Array = [q["event_pool"]] + q["pool_overrides"].map(func(o): return o["event_pool"])
 		if q["squares"].values().any(func(s): return s["type"] == "mystery" and s["event"] == ""):
-			assert(not q["event_pool"].is_empty(), "quest %s: ？ squares need an event_pool" % q["id"])
-		for eid in q["event_pool"]:
-			assert(db.events.has(eid), "quest %s: unknown event %s" % [q["id"], eid])
+			assert(all_event_pools.any(func(p): return not p.is_empty()), "quest %s: ？ squares need an event_pool" % q["id"])
+		for pool in all_event_pools:
+			for eid in pool:
+				assert(db.events.has(eid), "quest %s: unknown event %s" % [q["id"], eid])
+		for o in q["pool_overrides"]:
+			for c in o["soldier_pool"] + o["recruit_pool"]:
+				assert(db.cards.has(c), "quest %s: unknown card %s in a pool override" % [q["id"], c])
 	for ev in db.events.values():
 		for o in ev["options"]:
 			_validate_effects(db, o["effects"] + o["win"], "event " + ev["id"])
@@ -242,6 +247,19 @@ static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
 	return true
 
 
+static func pools(q: Dictionary, save: SaveData) -> Dictionary:
+	## soldier_pool / recruit_pool / event_pool, swapped per-field by the first matching entry in
+	## pool_overrides (requires / unless checked against this run's own records, e.g. a birthplace choice) —
+	## so one quest shared by two routes (south/north prologue) doesn't hand out the other route's soldiers.
+	var out := {"soldier_pool": q["soldier_pool"], "recruit_pool": q["recruit_pool"], "event_pool": q["event_pool"]}
+	for o in q["pool_overrides"]:
+		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+			for k in out:
+				if not o[k].is_empty():
+					out[k] = o[k]
+	return out
+
+
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## Cards shown on the current recruit (generals) or treasure (soldiers) square — rolled once, then kept.
 	q = view(q, save)
@@ -252,14 +270,15 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 	if not (kind in ["recruit", "treasure"]) or save.resolved:
 		return []
 	if save.offer.is_empty():
+		var p := pools(q, save)
 		var cards: Array
-		if kind == "recruit" and not q["recruit_pool"].is_empty():
-			cards = q["recruit_pool"].map(func(c): return db.cards[c]).filter(
+		if kind == "recruit" and not p["recruit_pool"].is_empty():
+			cards = p["recruit_pool"].map(func(c): return db.cards[c]).filter(
 				func(c): return not save.maxed(c["id"]))
 		elif kind == "recruit":
 			cards = save.recruit_offer(rng)
 		else:
-			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), q["soldier_pool"])
+			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), p["soldier_pool"])
 		save.offer = cards.map(func(c): return c["id"])
 	return save.offer.map(func(c): return db.cards[c])
 
@@ -367,9 +386,10 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 		for other in q["squares"].values():  # events a square always holds don't come up at random too
 			if other["event"] != "":
 				seen.append(other["event"])
-		var fresh: Array = q["event_pool"].filter(func(e): return not seen.has(e))
+		var ev_pool: Array = pools(q, save)["event_pool"]
+		var fresh: Array = ev_pool.filter(func(e): return not seen.has(e))
 		if fresh.is_empty():
-			fresh = q["event_pool"]
+			fresh = ev_pool
 		save.events[s["id"]] = fresh[rng.randi_range(0, fresh.size() - 1)]
 	return GameData.get_db().events[save.events[s["id"]]]
 
@@ -587,7 +607,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				out["gained"].append(c)
 				out["log"].append("获得：" + c["name"])
 		if e.has("soldier"):
-			var pool: Array = q["soldier_pool"]
+			var pool: Array = pools(q, save)["soldier_pool"]
 			if pool.is_empty():
 				pool = db.soldier_cards().map(func(c): return c["id"])
 			var c: Dictionary = db.cards[pool[rng.randi_range(0, pool.size() - 1)]]
@@ -608,7 +628,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				save.picks_left = int(o.get("times", 1)) - 1
 				save.offer_rates = o.get("rates", {})
 			else:
-				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)) + save.offer_extra(), q["soldier_pool"]).map(
+				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)) + save.offer_extra(), pools(q, save)["soldier_pool"]).map(
 					func(c): return c["id"])
 			save.offer = ids
 			if ids.is_empty():

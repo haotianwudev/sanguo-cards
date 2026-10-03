@@ -118,6 +118,7 @@
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:luoyang_n` | source/map/bg_luoyang_n.jpg | 用户提供 | 用户提供 | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei_scout` | source/battles/shuizei_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei` | source/battles/shuizei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
