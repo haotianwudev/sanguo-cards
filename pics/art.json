@@ -64,6 +64,15 @@
       "head": 0.26,
       "license": "用户提供（Gemini 生成）"
     },
+    "lord_north": {
+      "src": "source/generals/lord_north.jpg",
+      "face": [
+        0.53,
+        0.22
+      ],
+      "head": 0.26,
+      "license": "用户提供（Gemini 生成）"
+    },
     "sunce": {
       "src": "source/generals/sunce.jpg",
       "face": [
@@ -405,16 +414,13 @@
       "artist": "—"
     },
     "zhaoyun": {
-      "src": "source/public-domain/zhaoyun.jpg",
+      "src": "source/generals/zhaoyun.jpg",
       "face": [
-        0.55,
-        0.12
+        0.52,
+        0.28
       ],
-      "head": 0.08,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:ZhaoYun.jpg",
-      "license": "Public domain",
-      "artist": "Unknown authorUnknown author"
+      "head": 0.27,
+      "license": "用户提供（Gemini 生成）"
     },
     "zhugeliang": {
       "src": "source/public-domain/zhugeliang.jpg",
@@ -521,10 +527,10 @@
     "zhangning": {
       "src": "source/generals/zhangning.jpg",
       "face": [
-        0.5,
-        0.22
+        0.45,
+        0.24
       ],
-      "head": 0.2,
+      "head": 0.27,
       "license": "用户提供（Gemini 生成）"
     },
     "boar": {
@@ -922,6 +928,123 @@
       ],
       "head": 0.25,
       "license": "用户提供（Gemini 生成）"
+    },
+    "zhangfuren": {
+      "src": "source/generals/zhangfuren.jpg",
+      "face": [
+        0.49,
+        0.25
+      ],
+      "head": 0.27,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "zhenmi_young": {
+      "src": "source/generals/zhenmi_young.jpg",
+      "face": [
+        0.52,
+        0.25
+      ],
+      "head": 0.27,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jiangqiao": {
+      "src": "source/generals/jiangqiao.jpg",
+      "face": [
+        0.52,
+        0.26
+      ],
+      "head": 0.27,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "zhenghao": {
+      "src": "source/generals/zhenghao.jpg",
+      "face": [
+        0.46,
+        0.29
+      ],
+      "head": 0.27,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "guojia": {
+      "src": "source/generals/guojia.jpg",
+      "face": [
+        0.48,
+        0.24
+      ],
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "lidamu": {
+      "src": "source/generals/lidamu.jpg",
+      "face": [
+        0.5,
+        0.26
+      ],
+      "head": 0.27,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "xuanjizi": {
+      "src": "source/generals/xuanjizi.jpg",
+      "face": [
+        0.55,
+        0.23
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "zhangbaiqi": {
+      "src": "source/generals/zhangbaiqi.jpg",
+      "face": [
+        0.53,
+        0.23
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "guotu": {
+      "src": "source/generals/guotu.jpg",
+      "face": [
+        0.47,
+        0.26
+      ],
+      "head": 0.28,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hanfu": {
+      "src": "source/generals/hanfu.jpg",
+      "face": [
+        0.56,
+        0.24
+      ],
+      "head": 0.26,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "changshan_tieqi": {
+      "src": "source/soldiers/changshan_tieqi.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "taihang_yiyong": {
+      "src": "source/soldiers/taihang_yiyong.jpg",
+      "face": [
+        0.6,
+        0.28
+      ],
+      "head": 0.26,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "heishan_bing": {
+      "src": "source/soldiers/heishan_bing.jpg",
+      "face": [
+        0.52,
+        0.22
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -1054,6 +1177,18 @@
     },
     "c3_shanfei": {
       "src": "source/battles/c3_shanfei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "heishan_tan": {
+      "src": "source/battles/heishan_tan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "heishan_wai": {
+      "src": "source/battles/heishan_wai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "heishan_zhai": {
+      "src": "source/battles/heishan_zhai.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -1193,6 +1328,14 @@
     },
     "e_tangji": {
       "src": "source/cg/e_tangji.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jz_ambush": {
+      "src": "source/cg/jz_ambush.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jz_rescue": {
+      "src": "source/cg/jz_rescue.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

@@ -11,6 +11,7 @@
 | `yuenv_gong` | source/soldiers/yuenv_gong.jpg | 用户提供 | Antigravity 生成 | — |
 | `shanyue_nu` | source/soldiers/shanyue_nu.jpg | 用户提供 | Antigravity 生成 | — |
 | `lord` | source/generals/lord.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north` | source/generals/lord_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
 | `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhouyu_chibi` | source/generals/zhouyu_chibi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -44,7 +45,7 @@
 | `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangjiao` | source/public-domain/zhangjiao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg) | Public domain | Unknown author |
 | `zhangliao` | source/public-domain/zhangliao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg) | Public domain | — |
-| `zhaoyun` | source/public-domain/zhaoyun.jpg | [链接](https://commons.wikimedia.org/wiki/File:ZhaoYun.jpg) | Public domain | Unknown authorUnknown author |
+| `zhaoyun` | source/generals/zhaoyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhugeliang` | source/public-domain/zhugeliang.jpg | [链接](https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg) | Public domain | Unknown authorUnknown author |
 | `langlijiao` | source/generals/langlijiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yaodao` | source/generals/yaodao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -101,6 +102,19 @@
 | `dongzhuo` | source/generals/dongzhuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `daqiao` | source/generals/daqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiaoqiao` | source/generals/xiaoqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangfuren` | source/generals/zhangfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhenmi_young` | source/generals/zhenmi_young.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiangqiao` | source/generals/jiangqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhenghao` | source/generals/zhenghao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `guojia` | source/generals/guojia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lidamu` | source/generals/lidamu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xuanjizi` | source/generals/xuanjizi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangbaiqi` | source/generals/zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `guotu` | source/generals/guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `hanfu` | source/generals/hanfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `changshan_tieqi` | source/soldiers/changshan_tieqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `taihang_yiyong` | source/soldiers/taihang_yiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `heishan_bing` | source/soldiers/heishan_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 程序生成占位（tools/build_chapter2_map.py） | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -133,6 +147,9 @@
 | `battle:c3_yuanshu` | source/battles/c3_yuanshu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c3_leibo` | source/battles/c3_leibo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c3_shanfei` | source/battles/c3_shanfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:heishan_tan` | source/battles/heishan_tan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:heishan_wai` | source/battles/heishan_wai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:heishan_zhai` | source/battles/heishan_zhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -167,3 +184,5 @@
 | `cg:c3_raid` | source/cg/c3_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_feng` | source/cg/c3_feng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_tangji` | source/cg/e_tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:jz_ambush` | source/cg/jz_ambush.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:jz_rescue` | source/cg/jz_rescue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

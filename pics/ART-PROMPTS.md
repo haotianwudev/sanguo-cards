@@ -9,155 +9,155 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-**先重画**（已交付但有地方不对）：
-
-- `zhangning` — 形象改成医仙：素白布衣、竹药箱、金针、只留一块「太平」黄玉佩；旧图的黄袍、九节杖、符纸都不要了
-
-1. `lord_north` — 北线主角（束发、鱼鳞甲、白貂披风、白蜡杆长枪系红平安结）（立绘）
-2. `zhangfuren` — 张夫人（立绘）
-3. `zhenmi_young` — 甄宓（十三四岁的少女，只画孩子该有的样子）（立绘）
-4. `zhaoyun` — 赵云（换掉占位）（立绘）
-5. `guojia` — 郭嘉（立绘）
-6. `lidamu` — 李大目（北线第一章首领）（立绘）
-7. `xuanjizi` — 妖道玄机子（立绘）
-8. `zhangbaiqi` — 张白骑（立绘）
-9. `guotu` — 郭图（立绘）
-10. `hanfu` — 韩馥（立绘）
-11. `heishan_bing` — 黑山游骑（兵卡）（立绘）
-12. `changshan_tieqi` — 常山铁骑（兵卡）（立绘）
-13. `taihang_yiyong` — 太行义勇（兵卡）（立绘）
-14. `xiahoulan` — 夏侯兰（立绘）
-15. `zhangyan` — 张燕（立绘）
-16. `wenchou` — 文丑（立绘）
-17. `gongsunzan` — 公孙瓒（立绘）
-18. `caohong` — 曹洪（第二章）（立绘）
-19. `yudu` — 于毒（第三章精英）（立绘）
-20. `quyi` — 麹义（第三章精英）（立绘）
-21. `zhenghao` — 郑好（成年女性）（立绘）
-22. `jiangqiao` — 姜巧（成年女性）（立绘）
-23. `taishici` — 太史慈（换掉占位）（立绘）
-24. `guanhai` — 管亥（立绘）
-25. `kongrong` — 孔融（立绘）
-26. `taoqian` — 陶谦（立绘）
-27. `mizhu` — 糜竺（换掉占位）（立绘）
-28. `mifang` — 糜芳（立绘）
-29. `mizhen` — 糜贞（成年女性）（立绘）
-30. `chendeng` — 陈登（立绘）
-31. `chengui` — 陈珪（立绘）
-32. `caobao` — 曹豹（立绘）
-33. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
-34. `xunyu` — 荀彧（第六章）（立绘）
-35. `caoren` — 曹仁（第六章）（立绘）
-36. `chengong` — 陈宫（立绘）
-37. `zhangliao` — 张辽（换掉占位）（立绘）
-38. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
-39. `xunyou` — 荀攸（立绘）
-40. `zhongyao` — 钟繇（立绘）
-41. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
-42. `zhangxun` — 张勋（南线第六章）（立绘）
-43. `liuxun` — 刘勋（南线第六章）（立绘）
-44. `lusu` — 鲁肃（南线第六章入队）（立绘）
-45. `zhengbao` — 郑宝（南线第六章）（立绘）
-46. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
-47. `zangba` — 臧霸（北线第七章）（立绘）
-48. `yanliang` — 颜良（北线第七章，和文丑一起出场）（立绘）
-49. `shenrong` — 审荣（北线第七章）（立绘）
-50. `liuyao` — 刘繇（南线第七章）（立绘）
-51. `yanbaihu` — 严白虎（南线第七章）（立绘）
-52. `wanglang` — 王朗（南线第七章）（立绘）
-53. `zhoutai` — 周泰（南线第七章）（立绘）
-54. `jiangqin` — 蒋钦（南线第七章）（立绘）
-55. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
-56. `sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）
-57. `guonvwang` — 郭女王（北线第八章，成年女性）（立绘）
-58. `mateng` — 马腾（北线第八、九章）（立绘）
-59. `hansui` — 韩遂（北线第八章）（立绘）
-60. `machao` — 马超（换掉占位）（立绘）
-61. `madai` — 马岱（北线第九章）（立绘）
-62. `pangde` — 庞德（北线第九章）（立绘）
-63. `tadun` — 蹋顿（北线第九章）（立绘）
-64. `gongsunkang` — 公孙康（北线第九章）（立绘）
-65. `liuzhang` — 刘璋（南线第九章）（立绘）
-66. `yanyan` — 严颜（南线第九章）（立绘）
-67. `zhangren` — 张任（南线第九章）（立绘）
-68. `fazheng` — 法正（南线第九章）（立绘）
-69. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
-70. `menghuo` — 孟获（南线第九章）（立绘）
-71. `luxun` — 陆逊（成年，南线第九章）（立绘）
-72. `yujin` — 于禁（北线第十章）（立绘）
-73. `lidian` — 李典（北线第十章）（立绘）
-74. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
-75. `xuchu` — 许褚（换掉占位）（立绘）
-76. `zhanghe` — 张郃（北线第十章）（立绘）
-77. `zhanglu` — 张鲁（南线第十章）（立绘）
-78. `zhangwei` — 张卫（南线第十章）（立绘）
-79. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
-80. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
-81. `dianwei` — 典韦（第十一章南线）（立绘）
-82. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-83. `c3_warn` — 劝阻孙坚（剧情 CG）
-84. `changan` — 第三章·长安地图底图（地图）
-85. `dongui` — 第四章·挟天子地图底图（地图）
-86. `yuxi` — 第三章·传国玉玺地图底图（地图）
-87. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-88. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-89. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-90. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-91. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-92. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-93. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-94. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-95. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
-96. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-97. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-98. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-99. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-100. `yiji` — 伊籍（第五章招贤馆）（立绘）
-101. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
-102. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
-103. `zongzei` — 宗贼（兵卡）（立绘）
-104. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
-105. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-106. `jx_zongzei` — 新野·宗贼（战斗 CG）
-107. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-108. `e_shuijing` — 事件·水镜先生（剧情 CG）
-109. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-110. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-111. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-112. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-113. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-114. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-115. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-116. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-117. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-118. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-119. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-120. `huangzu` — 黄祖（江夏太守）（立绘）
-121. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-122. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-123. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-124. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-125. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-126. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-127. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-128. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-129. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-130. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
-131. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-132. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-133. `c8_jiayan` — 宛城家宴（剧情 CG）
-134. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-135. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-136. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-137. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-138. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-139. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-140. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-141. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-142. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-143. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-144. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-145. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+1. `sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）
+2. `zhenmi` — 甄宓（成年女性，洛神仙子）（立绘）
+3. `mizhen` — 糜贞（成年女性，徐州千金）（立绘）
+4. `guonvwang` — 郭女王（成年女性，曹丕文德皇后）（立绘）
+5. `caifuren` — 蔡夫人（成年女性，荆州蔡氏主母）（立绘）
+6. `bianfuren` — 卞夫人（成年女性，曹操武宣皇后）（立绘）
+7. `yanfuren` — 严夫人（成年女性，吕布正妻）（立绘）
+8. `zhurong` — 祝融夫人（成年女性，南中女王）（立绘）
+9. `mayunlu` — 马云騄（成年女性，西凉女将）（立绘）
+10. `wangyi` — 王异（成年女性，智勇奇女）（立绘）
+11. `xinxianying` — 辛宪英（成年女性，魏晋才女）（立绘）
+12. `bulianshi` — 步练师（成年女性，江东贤女）（立绘）
+13. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
+14. `liniang` — 黎娘（成年女性，山越女王）（立绘）
+15. `chuniang` — 厨娘（成年女性，军中厨娘）（立绘）
+16. `chaniang` — 茶娘（成年女性，茶楼掌柜）（立绘）
+17. `huansha` — 浣纱女（成年女性，水乡浣纱）（立绘）
+18. `caisang` — 采桑女（成年女性，桑园采桑）（立绘）
+19. `e_yazhai` — 压寨夫人（剧情 CG，胭脂虎指着主角）（剧情 CG）
+20. `xiahoulan` — 夏侯兰（立绘）
+21. `zhangyan` — 张燕（立绘）
+22. `wenchou` — 文丑（立绘）
+23. `gongsunzan` — 公孙瓒（立绘）
+24. `caohong` — 曹洪（第二章）（立绘）
+25. `yudu` — 于毒（第三章精英）（立绘）
+26. `quyi` — 麹义（第三章精英）（立绘）
+27. `taishici` — 太史慈（换掉占位）（立绘）
+28. `guanhai` — 管亥（立绘）
+29. `kongrong` — 孔融（立绘）
+30. `taoqian` — 陶谦（立绘）
+31. `mizhu` — 糜竺（换掉占位）（立绘）
+32. `mifang` — 糜芳（立绘）
+33. `mizhen` — 糜贞（成年女性）（立绘）
+34. `chendeng` — 陈登（立绘）
+35. `chengui` — 陈珪（立绘）
+36. `caobao` — 曹豹（立绘）
+37. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
+38. `xunyu` — 荀彧（第六章）（立绘）
+39. `caoren` — 曹仁（第六章）（立绘）
+40. `chengong` — 陈宫（立绘）
+41. `zhangliao` — 张辽（换掉占位）（立绘）
+42. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
+43. `xunyou` — 荀攸（立绘）
+44. `zhongyao` — 钟繇（立绘）
+45. `e_yazhai` — 压寨夫人（胭脂虎指着主角）（剧情 CG）
+46. `zhangxun` — 张勋（南线第六章）（立绘）
+47. `liuxun` — 刘勋（南线第六章）（立绘）
+48. `lusu` — 鲁肃（南线第六章入队）（立绘）
+49. `zhengbao` — 郑宝（南线第六章）（立绘）
+50. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
+51. `zangba` — 臧霸（北线第七章）（立绘）
+52. `yanliang` — 颜良（北线第七章，和文丑一起出场）（立绘）
+53. `shenrong` — 审荣（北线第七章）（立绘）
+54. `liuyao` — 刘繇（南线第七章）（立绘）
+55. `yanbaihu` — 严白虎（南线第七章）（立绘）
+56. `wanglang` — 王朗（南线第七章）（立绘）
+57. `zhoutai` — 周泰（南线第七章）（立绘）
+58. `jiangqin` — 蒋钦（南线第七章）（立绘）
+59. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
+60. `sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）
+61. `guonvwang` — 郭女王（北线第八章，成年女性）（立绘）
+62. `mateng` — 马腾（北线第八、九章）（立绘）
+63. `hansui` — 韩遂（北线第八章）（立绘）
+64. `machao` — 马超（换掉占位）（立绘）
+65. `madai` — 马岱（北线第九章）（立绘）
+66. `pangde` — 庞德（北线第九章）（立绘）
+67. `tadun` — 蹋顿（北线第九章）（立绘）
+68. `gongsunkang` — 公孙康（北线第九章）（立绘）
+69. `liuzhang` — 刘璋（南线第九章）（立绘）
+70. `yanyan` — 严颜（南线第九章）（立绘）
+71. `zhangren` — 张任（南线第九章）（立绘）
+72. `fazheng` — 法正（南线第九章）（立绘）
+73. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
+74. `menghuo` — 孟获（南线第九章）（立绘）
+75. `luxun` — 陆逊（成年，南线第九章）（立绘）
+76. `yujin` — 于禁（北线第十章）（立绘）
+77. `lidian` — 李典（北线第十章）（立绘）
+78. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
+79. `xuchu` — 许褚（换掉占位）（立绘）
+80. `zhanghe` — 张郃（北线第十章）（立绘）
+81. `zhanglu` — 张鲁（南线第十章）（立绘）
+82. `zhangwei` — 张卫（南线第十章）（立绘）
+83. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
+84. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
+85. `dianwei` — 典韦（第十一章南线）（立绘）
+86. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+87. `c3_warn` — 劝阻孙坚（剧情 CG）
+88. `changan` — 第三章·长安地图底图（地图）
+89. `dongui` — 第四章·挟天子地图底图（地图）
+90. `yuxi` — 第三章·传国玉玺地图底图（地图）
+91. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+92. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+93. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+94. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+95. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+96. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+97. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+98. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+99. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
+100. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+101. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+102. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+103. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+104. `yiji` — 伊籍（第五章招贤馆）（立绘）
+105. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
+106. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
+107. `zongzei` — 宗贼（兵卡）（立绘）
+108. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
+109. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+110. `jx_zongzei` — 新野·宗贼（战斗 CG）
+111. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+112. `e_shuijing` — 事件·水镜先生（剧情 CG）
+113. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+114. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+115. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+116. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+117. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+118. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+119. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+120. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+121. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+122. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+123. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+124. `huangzu` — 黄祖（江夏太守）（立绘）
+125. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+126. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+127. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
+128. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+129. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+130. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+131. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+132. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+133. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+134. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
+135. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+136. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+137. `c8_jiayan` — 宛城家宴（剧情 CG）
+138. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+139. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+140. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+141. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+142. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+143. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+144. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+145. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+146. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+147. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+148. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+149. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -173,18 +173,6 @@
 - 提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。
 
 ## 立绘（竖版 3:4）
-
-### `lord_north` ⬜ 缺
-
-```
-A vertical character portrait of The hero's northern-route host body (北线主角) — a merchant house's account clerk turned commander, wearing the late patriarch's old armor.
-Appearance: Clean-cut young man in his early 20s, soft unweathered hands, a composed and faintly clever half-smile.
-Armor & Clothing: Old fish-scale armor of the Hebei northern style, worn-in but meticulously kept (plain iron, no green or gold), hair tied in a cloth-wrapped topknot (no helmet, never short modern hair), a snow-white mink fur cloak over the armor.
-Weapon: A plain white-wax-wood long spear (白蜡杆长枪) held upright, a small red knotted good-luck charm tied just below the spearhead.
-Background: a snowy Hebei plain road with a column of Changshan cavalry and banners behind him, grey winter sky.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
 
 ### `xiahoulan` ⬜ 缺
 
@@ -266,30 +254,6 @@ Appearance: Hard, taciturn veteran around 40 from the western frontier, his face
 Armor & Clothing: Heavy iron armor, a tall shield.
 Weapon: A tall shield braced in one hand, a ring-pommel saber in the other, a shield wall behind him.
 Background: the open plain before Jieqiao bridge.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `zhenghao` ⬜ 缺
-
-```
-A vertical character portrait of Zheng Hao (郑好), a fiery Taihang bandit chief turned the hero's bodyguard maid — an adult woman.
-Appearance: Bold adult woman around 20 with thick brows, big bright eyes and a fang-showing grin.
-Armor & Clothing: Red short-cut fighting clothes with bound sleeves, leather bracers and a wide cloth sash.
-Weapon: A heavy broad-backed saber over her shoulder.
-Background: the palisade of a Taihang mountain bandit fort.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `jiangqiao` ⬜ 缺
-
-```
-A vertical character portrait of Jiang Qiao (姜巧), a sly Taihang bandit chief turned the hero's bodyguard maid, expert in traps and hidden weapons — an adult woman.
-Appearance: Petite, quick adult woman around 20 with fox-like eyes and a mischievous smirk.
-Armor & Clothing: Teal close-fitting clothes, many small pouches (lime powder, caltrops) on her belt, needles hidden in her cuffs.
-Weapon: A fan of throwing darts between her fingers.
-Background: a Taihang forest path rigged with tripwires and traps.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -470,30 +434,6 @@ Appearance: Brave, steady young man around 25 with sharp brows.
 Armor & Clothing: Bingzhou-style iron armor and a dark cloak.
 Weapon: A long glaive, mounted.
 Background: outside the walls of Xiaopei.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `changshan_tieqi` ⬜ 缺
-
-```
-A vertical character portrait of a Changshan iron cavalryman (常山铁骑), the northern hero's first loyal troops.
-Appearance: Sturdy Hebei horseman with a white headscarf.
-Armor & Clothing: Iron armor under a white surcoat.
-Weapon: A long spear, mounted.
-Background: a snowy Changshan plain.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `taihang_yiyong` ⬜ 缺
-
-```
-A vertical character portrait of a Taihang volunteer (太行义勇), a mountain hunter turned soldier.
-Appearance: Rugged mountain hunter with a weathered face.
-Armor & Clothing: A fur vest over coarse cloth, leg wraps.
-Weapon: A hunting bow or a woodsman's chopper.
-Background: the Taihang mountain forest.
 Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
@@ -1518,138 +1458,6 @@ Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character c
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
 ```
 
-### `zhangning` 🟡 换掉占位
-
-```
-A vertical character portrait of Zhang Ning (张宁), daughter of the Yellow Turban leader Zhang Jiao — a wandering healer, not a sorceress — an adult woman.
-Appearance: Gentle, clear-eyed adult woman of about 19 with a calm, quietly stubborn expression, a few loose strands of hair.
-Armor & Clothing: Plain undyed white hemp cross-collar dress with the sleeves rolled up, hair tied up with a dark blue cloth band, a single yellow jade pendant carved with the characters 太平 at her waist (her father's keepsake, the only Taoist trace); no yellow robe, no talismans.
-Weapon: A bamboo medicine box slung on her back, a long gold acupuncture needle held between two fingers, the other hand checking a pulse.
-Background: a misty Taihang mountain field hospital: a straw-roofed shed with bundles of drying herbs, a clay pot of medicine steaming over a small fire.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `zhangfuren` ⬜ 缺
-
-```
-A vertical character portrait of Lady Zhang (张夫人), the shrewd, warm matriarch of the wealthy Zhen merchant family — the heroine of the northern start, an adult woman.
-Appearance: Graceful and composed woman in her 30s, sharp and warm eyes, an air of quiet command.
-Armor & Clothing: Rich dark brocade robes with full hairpins and jewelry befitting a great merchant house's mistress.
-Weapon: A ledger book in one hand, a silver hairpin in the other, standing straight-backed.
-Background: a granary hall at the Zhen family estate in Zhongshan, Jizhou, sacks of grain stacked in rows.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `guojia` ⬜ 缺
-
-```
-A vertical character portrait of Guo Jia (郭嘉), a brilliant, dissolute strategist from Yingchuan, rarely sober.
-Appearance: Lean young man in his 20s, eyes glazed with drink yet sharp underneath, a knowing half-smile.
-Armor & Clothing: Thin, loosely-draped blue-grey scholar's robe, a feather fan tucked at the shoulder.
-Weapon: A wine gourd tied with red cord at his waist, no weapon.
-Background: a snowy market street in Zhending, Changshan, wine-shop banners fluttering.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `zhaoyun` 🟡 换掉占位
-
-```
-A vertical character portrait of Zhao Yun (赵云), a young knight-errant of Changshan, upright and fierce.
-Appearance: Young man around 20, sharp handsome features, a stern, unyielding expression.
-Armor & Clothing: Silver-white light armor over a white war robe, hair bound under a silver helmet.
-Weapon: A bright silver spear with a frost-rimed tip.
-Background: a snowy Changshan plain, a white warhorse waiting nearby.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `zhenmi_young` ⬜ 缺
-
-```
-A vertical character portrait of young Zhen Mi (甄宓), the early-teen daughter of the Zhen family — a child, not an adult; this key is for her younger appearance only, separate from the adult `zhenmi` gacha card.
-Appearance: A girl of about thirteen or fourteen, round cheeks, dimples when she smiles, hair in twin buns.
-Armor & Clothing: Pale pink embroidered robes with little rabbits stitched on the hem.
-Weapon: Holding a sweet pastry or a cloth doll, no weapon.
-Background: a covered walkway at the Zhen family estate in snow.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `guotu` ⬜ 缺
-
-```
-A vertical character portrait of Guo Tu (郭图), Yuan Shao's grain-supervising aide — petty, arrogant, a northern-route villain.
-Appearance: Man in his 30s, pale and slightly plump, a contemptuous sneer.
-Armor & Clothing: Fine brocade official robes and an advancing-scholar's cap, a jade-studded belt.
-Weapon: A grain-levy document in one hand, the other behind his back.
-Background: the county court hall of Zhending.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `hanfu` ⬜ 缺
-
-```
-A vertical character portrait of Han Fu (韩馥), the governor of Jizhou — timid and ineffectual.
-Appearance: Man in his 50s, soft and overweight, a shrinking, nervous expression.
-Armor & Clothing: Oversized official robes and a drooping scholar's cap.
-Weapon: No weapon, hands fidgeting with his sleeve.
-Background: a corner of the county court hall of Zhending, behind the judge's bench.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `lidamu` ⬜ 缺
-
-```
-A vertical character portrait of Li Damu (李大目), chieftain of the Black Mountain bandits — the final boss of the northern first chapter.
-Appearance: Man in his 40s, a slab of scarred muscle, one eye missing and the other narrowed, a wild beard.
-Armor & Clothing: Ragged animal-hide vest over battered iron armor, old scars showing.
-Weapon: A huge two-handed mountain-splitting axe.
-Background: the gate of the Black Mountain stockade in the Taihang mountains, blood-red sunset.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `zhangbaiqi` ⬜ 缺
-
-```
-A vertical character portrait of Zhang Baiqi (张白骑), a Yellow Turban remnant chieftain who rides a white horse.
-Appearance: Man in his 30s, lean and cunning-eyed.
-Armor & Clothing: Yellow Turban remnant garb, faded yellow cloth over leather armor.
-Weapon: A curved saber, riding a white horse.
-Background: a dusty Taihang mountain gorge.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `xuanjizi` ⬜ 缺
-
-```
-A vertical character portrait of Xuanjizi (玄机子), a sorcerer claiming the mantle of the Way of Peace — a fraud preying on refugees.
-Appearance: Ageless, gaunt figure, long matted hair hiding half his face, eyes manic and cruel.
-Armor & Clothing: A ragged Daoist robe covered in paper talismans, bare feet.
-Weapon: A peachwood staff wound with charms and withered herbs.
-Background: a blood-stained mountain cave altar, smoke and talismans swirling.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
-### `heishan_bing` ⬜ 缺
-
-```
-A vertical character portrait of a lean Black Mountain bandit scout (黑山游骑).
-Appearance: Wiry mountain bandit with soot smeared on his face as camouflage.
-Armor & Clothing: Furs and coarse cloth, mismatched scavenged gear.
-Weapon: A broadsword or spear, crouched warily.
-Background: the snowy forest fringe outside the Black Mountain stockade.
-Composition & Framing: Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper third of the canvas, head fully visible with margin at the top.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.
-```
-
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
 ### `c3_mitan`
@@ -1952,30 +1760,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal battle scene illustration: the steps before the chancellor's mansion at night: the enormous Dong Zhuo with a drawn sword among his elite black-armored guards, wedding lanterns burning behind him.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `heishan_wai`
-
-```
-A horizontal battle scene illustration: the snowy outer slope of a Taihang mountain pass at night: Black Mountain bandit scouts around torches, the stockade wall faint in the distance.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `heishan_tan`
-
-```
-A horizontal battle scene illustration: a grim cave altar stained with blood and scattered talismans: the sorcerer Xuanjizi turning with a sneer beside a bound girl.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
-```
-
-### `heishan_zhai`
-
-```
-A horizontal battle scene illustration: the gate of the Black Mountain stockade: Li Damu swinging his huge axe to block the gate, the stockade wall ablaze behind him.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, dramatic battle lighting, like a Rance X battle CG; no text, no UI.
 ```
@@ -2526,24 +2310,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 
 ```
 A horizontal story event illustration: a snowy street under wine-shop banners: Guo Jia leaning against a post sizing up the hero, Zhao Yun kneeling on one knee, the town of Zhending behind.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
-### `jz_ambush`
-
-```
-A horizontal story event illustration: a snowy mountain gorge: Xuanjizi galloping off with young Zhen Mi over his saddle, Li Damu and Zhang Baiqi charging down from the cliffs.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
-### `jz_rescue`
-
-```
-A horizontal story event illustration: a blood-red altar cave: Zhao Yun's spear driving at Xuanjizi, young Zhen Mi tied to a post, screaming.
 Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
 Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)

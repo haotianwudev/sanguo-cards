@@ -1214,10 +1214,30 @@ UI_ART = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
-    # P0 · 北线（第一章已做进游戏，一张图都没有）：
-    ("portrait", "lord_north", "北线主角（束发、鱼鳞甲、白貂披风、白蜡杆长枪系红平安结）"),
-    ("portrait", "zhangfuren", "张夫人"),
-    ("portrait", "zhenmi_young", "甄宓（十三四岁的少女，只画孩子该有的样子）"),
+    # 红颜立绘优先：
+    ("portrait", "sunshangxiang", "孙尚香（成年女性，换掉占位）"),
+    ("portrait", "zhenmi", "甄宓（成年女性，洛神仙子）"),
+    ("portrait", "zhenghao", "郑好（成年女性，太行女寨主）"),
+    ("portrait", "jiangqiao", "姜巧（成年女性，太行巧手女将）"),
+    ("portrait", "mizhen", "糜贞（成年女性，徐州千金）"),
+    ("portrait", "guonvwang", "郭女王（成年女性，曹丕文德皇后）"),
+    ("portrait", "caifuren", "蔡夫人（成年女性，荆州蔡氏主母）"),
+    ("portrait", "bianfuren", "卞夫人（成年女性，曹操武宣皇后）"),
+    ("portrait", "yanfuren", "严夫人（成年女性，吕布正妻）"),
+    ("portrait", "zhurong", "祝融夫人（成年女性，南中女王）"),
+    ("portrait", "mayunlu", "马云騄（成年女性，西凉女将）"),
+    ("portrait", "wangyi", "王异（成年女性，智勇奇女）"),
+    ("portrait", "xinxianying", "辛宪英（成年女性，魏晋才女）"),
+    ("portrait", "bulianshi", "步练师（成年女性，江东贤女）"),
+    ("portrait", "wuxian", "吴苋（成年女性，蜀汉皇后）"),
+    ("portrait", "liniang", "黎娘（成年女性，山越女王）"),
+    ("portrait", "chuniang", "厨娘（成年女性，军中厨娘）"),
+    ("portrait", "chaniang", "茶娘（成年女性，茶楼掌柜）"),
+    ("portrait", "huansha", "浣纱女（成年女性，水乡浣纱）"),
+    ("portrait", "caisang", "采桑女（成年女性，桑园采桑）"),
+    ("cg", "e_yazhai", "压寨夫人（剧情 CG，胭脂虎指着主角）"),
+
+    # P0 · 北线主线（其他）：
     ("portrait", "zhaoyun", "赵云（换掉占位）"),
     ("portrait", "guojia", "郭嘉"),
     ("portrait", "lidamu", "李大目（北线第一章首领）"),
@@ -1427,9 +1447,7 @@ CHESTS = {
     "chest_grand": "a grand red-lacquered treasure chest painted with gold clouds and dragons, inset with jade, a faint golden glow leaking from the seam, closed",
 }
 # already delivered but wrong somewhere: redraw (listed above the batch)
-REDO = [
-    ("zhangning", "形象改成医仙：素白布衣、竹药箱、金针、只留一块「太平」黄玉佩；旧图的黄袍、九节杖、符纸都不要了"),
-]
+REDO = []
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
     "宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。",
