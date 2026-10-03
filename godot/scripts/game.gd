@@ -342,7 +342,8 @@ func demo(name: String) -> void:
 				if a.begins_with("--at="):
 					at = a.substr(5)
 			if at != "jz_arrive":
-				for sid in ["jz_test", "jz_ledger_a", "jz_ledger"]:
+				var path := ["jz_test", "jz_ledger_a", "jz_ledger", "jz_county", "jz_guojia", "jz_relief", "jz_ambush", "jz_plan", "jz_fire", "jz_rescue", "jz_recover", "jz_boss", "jz_reunite", "jz_almsgiving", "jz_training", "jz_night", "jz_end"]
+				for sid in path:
 					Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
 					Quests.move(q, save, sid)
 					if sid == at:

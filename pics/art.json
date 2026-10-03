@@ -1349,6 +1349,10 @@
     "jz_ledger": {
       "src": "source/cg/jz_ledger.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "jz_county": {
+      "src": "source/cg/jz_county.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

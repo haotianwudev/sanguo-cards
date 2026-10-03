@@ -189,3 +189,4 @@
 | `cg:jz_end` | source/cg/jz_end.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:jz_wake` | source/cg/jz_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:jz_ledger` | source/cg/jz_ledger.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:jz_county` | source/cg/jz_county.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
