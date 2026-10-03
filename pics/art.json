@@ -1345,6 +1345,10 @@
     "jz_wake": {
       "src": "source/cg/jz_wake.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "jz_ledger": {
+      "src": "source/cg/jz_ledger.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

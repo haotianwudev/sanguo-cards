@@ -108,7 +108,7 @@
 | ✅ 已有 | `c1_oath` | 结义 |
 | ✅ 已有 | `c1_north` | 北上 |
 | ✅ 已有 | `jz_wake` | 甄府 |
-| ⬜ 缺 | `jz_ledger` | 账房 |
+| ✅ 已有 | `jz_ledger` | 账房 |
 | ⬜ 缺 | `jz_county` | 县衙 |
 | ⬜ 缺 | `jz_guojia` | 街头 |
 | ✅ 已有 | `jz_ambush` | 峡谷伏击 |
