@@ -5440,9 +5440,16 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `taodong`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：the march north to fight Dong Zhuo, left to right: country roads and farmland leaving the south; a dusty Central-Plains highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky。
-构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
-画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
+横向游戏地图插画，手绘中国山水长卷（青绿山水/浅绛山水）：【南军北伐讨董·行军大地图】
+- 地貌与场景流向（从左至右全景铺展）：
+  - 左侧：江东水乡田园与初春丘陵古道，孙坚军北伐出发；渐入尘土飞扬的中原官道，道旁有一处被西凉军劫掠烧毁的断壁残村。
+  - 中段：汜水关前古战场（山势陡峭的隘口与高耸关楼，华雄斩将处）；紧邻着孙坚军扎下的巨大主营，木栅鹿角森严，营帐连绵，赤红孙字战旗迎风招展。
+  - 右侧：虎牢关前风沙呼啸的荒凉戈壁古战场（三英战吕布之处）；最右侧是黄昏薄暮中火光冲天的洛阳雄城，残破城垣上升腾起遮天蔽日的灰黑浓烟与灼热火星。
+- 构图与排布：
+  - 规格：超宽全景（16:9 横版或 3200x1080 横向长卷），斜向高空俯瞰视角。
+  - 上 / 中 / 下三条大致水平的行进主路径保持舒朗明净、不堆砌繁杂近景障碍（供游戏节点和连线清晰排布），流云薄雾轻绕群山之间。
+- 画风：
+  - 与第一章地图底图风格完全一致：工笔墨线勾勒轮廓，宣纸质感，以淡绿、石青、赭石清雅晕染；无文字、无UI、无近景特写人物。
 ```
 
 ## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）
