@@ -1054,6 +1054,15 @@
       ],
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
+    },
+    "zhangyan": {
+      "src": "source/generals/zhangyan.jpg",
+      "face": [
+        0.56,
+        0.15
+      ],
+      "head": 0.2,
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",

@@ -635,7 +635,7 @@
 | 🟡 占位 | `pangtong` | 庞统（SR） |
 | ✅ 正式 | `daqiao` | 大乔（SR） |
 | ⬜ 缺 | `huangyueying` | 黄月英（SR） |
-| ⬜ 缺 | `zhangyan` | 张燕（SR） |
+| ✅ 正式 | `zhangyan` | 张燕（SR） |
 | 🟡 占位 | `sunshangxiang` | 孙尚香（SSR） |
 | 🟡 占位 | `dianwei` | 典韦（SSR） |
 | 🟡 占位 | `zhugeliang` | 诸葛亮（SSR） |
