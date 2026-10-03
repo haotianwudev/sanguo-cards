@@ -5407,9 +5407,18 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `yuxi`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right。
-构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
-画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
+横向游戏地图插画，手绘中国山水长卷（青绿山水/浅绛山水）：【焦土南逃·从废墟洛阳到南阳鲁阳大地图】
+- 地貌与场景流向（从左至右全景铺展）：
+  - 左侧：烈火余烬中浓烟滚滚的洛阳焦土废墟，残破宫墙与一条蜿蜒逃难的漫长流民队伍；
+  - 中偏左：枯黄秋草丘陵与饥馑挨饿的诸侯败兵营寨；
+  - 中段：依山而建的鲁阳古城与热闹的酒肆客栈街道（孙坚扎营鲁阳）；
+  - 中偏右：秋雨连绵浸透的南阳平原农田，驻扎着袁术军的大营营帐；
+  - 极右侧：大雨滂沱中的险峻狭窄峡谷关隘（岘山峡谷隘口）。
+- 构图与排布：
+  - 规格：超宽全景（16:9 横版或 3200x1080 横向长卷），斜向高空俯瞰视角。
+  - 上 / 中 / 下三条大致水平的行进主路径保持舒朗明净、不堆砌繁杂近景障碍（供游戏节点和连线清晰排布），流云薄雾轻绕群山之间。
+- 画风：
+  - 与第一章地图底图风格完全一致：工笔墨线勾勒轮廓，宣纸质感，以淡绿、石青、赭石清雅晕染；无文字、无UI、无近景特写人物。
 ```
 
 ### `shouluoyang`
