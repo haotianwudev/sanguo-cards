@@ -1046,6 +1046,7 @@ CGS = {
     "c3_end": "a restrained tragic scene in the rain on a mountain road: Lady Wu (adult) standing tall and calm, lifting the Imperial Jade Seal high over a grey stone, her face serene; Yuan Shu's golden-roofed carriage only a blur in the background; no gore",
     "c1_wake": "a beautiful mature noblewoman (Lady Wu, adult) leaning over a young man with short modern hair lying in an embroidered bed, pressing a damp cloth on his forehead, lanterns, incense smoke, soft light",
     "c1_bandage": "Lady Wu sitting on the bed rewrapping a bandage on the young man's thigh, a tray with medicine and bandage rolls, the young man bright red with embarrassment, morning light (comedic, non-explicit)",
+    "c1_village": "a village courtyard: a bold, thick-browed young man (Sun Ce) grinning as he points a spear right at the hero's nose, while a refined young man with a feather fan (Zhou Yu) looks on with a shrewd, appraising half-smile, a small ledger tucked in his sleeve",
     "c1_raid": "a night raid: the grinning bandit chief Hu Yu with a headband holding up a torch, the gate of 富春山庄 in flames, river bandits and Yellow Turban men charging with tridents and sabers, a line of torch-lit boats on the river",
     "c1_rescue": "inside a river fortress: the young man holding Lady Wu's hands after untying her ropes from a pillar, Sun Ce coughing loudly behind them",
     "c1_dinner": "a warm family dinner: the young man pretending to be drunk with his head on Lady Wu's lap, Sun Ce snapping his chopsticks in two, Zhou Yu hiding a laugh (comedic)",
@@ -1072,15 +1073,12 @@ CGS = {
     "i2_duel": "sunset riverbank: Dong Bai and Sun Ce collapsed on the ground laughing after a long duel, hammers and spear dropped beside them",
     "i2_qin": "night on the stern of a boat: Lady Tang playing a guqin, Lady Wu draping a coat over her shoulders",
     "jz_wake": "铺着厚毛毡的甄府暖阁，窗外飞雪：张夫人端着药碗俯身探试主角额头体温，烛光摇曳",
-    "jz_ledger": "甄府账房：张夫人将半副大账本递给主角，十多岁的甄宓探头扒着桌角偷看，手里攥着点心",
     "jz_county": "真定县衙公堂石阶前：赵云护着满身尘土的受灾乡民后退，郭图高踞堂上冷笑，韩馥缩在一旁瑟瑟发抖",
     "jz_guojia": "真定飘雪街头青布酒旗下：郭嘉斜倚着酒旗木柱打量主角，赵云单膝跪地抱拳，背景是真定古城",
     "jz_ambush": "雪地峡谷：玄机子纵马掠走甄宓，李大目和张白骑率众悍匪从山崖上狂暴杀出",
+    "jz_ledger": "甄府账房：张夫人将半副大账本递给主角，十多岁的甄宓探头扒着桌角偷看，手里攥着点心",
     "jz_rescue": "血色祭坛洞窟前：赵云亮银枪如龙直挑玄机子，甄宓被绑在石柱上惊叫挣扎",
     "jz_boss": "黑山贼寨门前：主角横起白蜡杆长枪狼狈架住李大目沉重巨斧，赵云回枪蓄势直刺李大目咽喉，身后寨墙火光冲天",
-    "jz_crowd": "大雪纷飞的常山校场广场：数千饥民捧着热气腾腾的米粥在雪地中跪拜叩谢，主角骑在马上动容俯瞰，身后常山铁骑与太行义勇新旗猎猎招展",
-    "jz_training": "清晨薄霜覆盖的甄家演武场：赵云从容纠正主角手持白蜡杆长枪的刺击姿势，背景晾衣绳上张夫人的雪白狐裘正中被扎了个大窟窿，赵云憋笑",
-    "jz_fireside": "深夜温馨的别院暖阁：主角、赵云与郭嘉围坐在红泥炭火盆旁煮酒论天下大势，窗外飘雪，火光映面",
     "ln_camp": "夜里的马车内：主角用烈酒给吕玲绮腕上的伤口正骨包扎，张夫人掀帘探头满眼心疼，小甄宓踮脚递来一块热栗子糕",
     "ln_handhold": "虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外",
     "jz_end": "大雪官道上：主角身披鱼鳞甲与雪白貂裘、手握白蜡杆长枪居中，赵云银甲白马在左，郭嘉车中抿酒在右，张夫人怀抱账本骑矮脚马跟在队伍中，身后铁骑义勇新军相随",
@@ -1245,15 +1243,15 @@ NEXT = [
     ("portrait", "caisang", "采桑女（成年女性，桑园采桑）"),
     ("cg", "e_yazhai", "压寨夫人（剧情 CG，胭脂虎指着主角）"),
 
+    # P0 · 南线第一章补的剧情 CG（孙策/周瑜初登场，之前漏画）：
+    ("cg", "c1_village", "南线·富春初遇孙策周瑜（剧情 CG）"),
+
     # P0 · 北线第一章剧情 CG（待画，最新核心需求）：
     ("cg", "jz_wake", "北线·甄府醒来（剧情 CG）"),
     ("cg", "jz_ledger", "北线·账房认亲（剧情 CG）"),
     ("cg", "jz_county", "北线·县衙受辱（剧情 CG）"),
     ("cg", "jz_guojia", "北线·街头结识（剧情 CG）"),
     ("cg", "jz_boss", "北线·黑山破寨（剧情 CG）"),
-    ("cg", "jz_crowd", "北线·常山放粮（剧情 CG）"),
-    ("cg", "jz_training", "北线·雪地教枪（剧情 CG）"),
-    ("cg", "jz_fireside", "北线·围炉夜话（剧情 CG）"),
 
     # P0 · 北线主线（其他）：
     ("portrait", "zhaoyun", "赵云（换掉占位）"),
@@ -1558,35 +1556,8 @@ OVERRIDES = {
 - 构图与画风：
   - 规格：横版 16:9，极具压迫感与速度感的战斗动作定格抓拍，烈火照耀的炽热对比光影，赛璐珞风格动作特效；无文字无UI。""",
 
-    "jz_crowd": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【常山放粮 · 万民跪谢与义旗初张】
-- 场景与宏大景深：
-  - 常山城外的白雪校场广场，远方是苍茫巍峨的太行雪山。数口支在军用木架上的巨大铁锅正滚沸着雪白浓稠的米粥，白雾热气蒸腾升空。
-- 震撼人心的众生百态：
-  - 前景与中景：数千名饱经雪灾与战乱的饥民、枯瘦的妇孺老幼，以及整齐解甲的黄巾降卒，双手捧着粗陶热粥碗，泪流满面、自发地齐刷刷跪倒在茫茫雪地之中，叩拜之势如波浪般连绵不绝。
-  - 核心英雄特写：主角身着北线便装外罩雪白狐裘披风，腰佩宝剑、手挽缰绳，端坐在高大神骏的战马之上，俯瞰着眼前黑压压跪倒的受恩百姓，神情肃穆动容。
-  - 赵云一身银甲跨白马持枪侍立在主角身侧；他们身后，数支崭新的战旗迎风招展，上面苍劲有力地书写着「常山铁骑」、「太行义勇」的军号旗帜！
-- 构图与画风：
-  - 规格：横版 16:9，大景深史诗场面，升腾的热粥白气与冰冷雪原融为一体，充满英雄崛起与民心所向的磅礴感染力；无文字无UI。""",
 
-    "jz_training": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【雪地教枪 · 子龙指点与扎漏狐裘】
-- 场景与清晨环境：
-  - 甄家别院后院的清晨演武场。青石板地面覆盖着一层皑皑薄霜，光秃秃的老柳树挂着冰棱，古色古香的抄手游廊环绕。
-- 核心互动与爆笑反差：
-  - 【赵云手把手带教】：年轻赵云褪去盔甲只穿贴身利落的白色劲装战袍，站在主角身侧，双手握住主角的双臂，神态极其认真严肃地纠正主角刺枪的发力姿态。
-  - 【主角扎马步受罪】：青年主角扎着并不算标准的大马步，双手端着长长的白蜡杆长枪，双腿抖得像筛糠，额头冷汗直冒，表情龇牙咧嘴、叫苦不迭。
-  - 【爆笑反差神笔】：演武场后方的晾衣绳上，正晾着张夫人那件珍贵名贵的雪白大狐裘——正中心赫然被枪尖扎出了一个焦黑线头乱飞的大窟窿！赵云眼角余光扫到窟窿，嘴角拼命抽搐、咬紧嘴唇强忍大笑；游廊拐角处，张夫人正怒容满面地卷起锦缎长袖、一手拿着算盘气势汹汹冲出！
-- 构图与画风：
-  - 规格：横版 16:9，晨光熹微，日系经典战术卡牌RPG生动有趣的幕间日常喜剧风，动作与神情刻画极其鲜活传神；无文字无UI。""",
 
-    "jz_fireside": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【围炉夜话 · 煮酒论霸与三杰归心】
-- 场景与静谧暖意：
-  - 深夜常山别院温馨的暖阁客堂内。古朴雅致的雕花木窗半掩，映出窗外幽蓝清冷的茫茫飞雪；室内中央置着一只兽足铜炭盆，银丝炭泛着金红色的温暖火光，温酒小铜壶香气袅袅。
-- 英雄聚首（知己归心）：
-  - 【北线主角（胸怀天下）】：主角脱去外衣只着青黑素袍，盘坐席上，单手举着一只青铜酒爵，另一只手在虚空中从容比划，双眸神采飞扬，正就着炭火酒香自信分析十八路诸侯虚实与天下争霸大势。
-  - 【赵云（信服动容）】：年轻赵云端坐一旁，佩剑平放膝上，双手捧着热酒，目光炽热清亮，全神贯注倾听，神情中充满了遇得明主的崇敬与热血。
-  - 【郭嘉（拍手称绝）】：郭嘉毫无吃相地歪斜半躺在锦缎软垫上，一条腿翘起，左手抓着红绳酒葫芦，右手羽扇轻击掌心，眼中原本的懒散醉意彻底化作惊艳与狂喜，抚掌痛快大笑。
-- 构图与画风：
-  - 规格：横版 16:9，窗外幽蓝极冷、室内金黄极暖的强烈双重氛围光，炭火的侧逆光精妙勾勒出三位青年豪杰的面庞轮廓，豪迈相知、相见恨晚的氛围感拉满；无文字无UI。""",
 }
 OVERRIDES.update(OVERRIDES_ZH)
 

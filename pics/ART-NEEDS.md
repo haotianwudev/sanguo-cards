@@ -100,6 +100,7 @@
 |---|---|---|
 | ✅ 已有 | `c1_wake` | 醒来 |
 | ✅ 已有 | `c1_bandage` | 换药 |
+| ⬜ 缺 | `c1_village` | 富春 |
 | ✅ 已有 | `c1_raid` | 夜袭 |
 | ✅ 已有 | `c1_rescue` | 救人 |
 | ✅ 已有 | `c1_dinner` | 压惊宴 |
@@ -113,9 +114,6 @@
 | ✅ 已有 | `jz_ambush` | 峡谷伏击 |
 | ✅ 已有 | `jz_rescue` | 祭坛 |
 | ⬜ 缺 | `jz_boss` | 黑山寨 |
-| ⬜ 缺 | `jz_crowd` | 放粮 |
-| ⬜ 缺 | `jz_training` | 教枪 |
-| ⬜ 缺 | `jz_fireside` | 夜话 |
 | ✅ 已有 | `jz_end` | 南下 |
 | ✅ 已有 | `i1_sewing` | 幕间「吴夫人的针线」 |
 

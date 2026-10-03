@@ -332,11 +332,21 @@ func demo(name: String) -> void:
 			Quests.resolve(q, save, rng, 0)
 			Quests.move(q, save, "wake")
 			show_screen(MapScreen.new())
-		"cg_north":  # standing on northern prologue CG (甄府醒来)
+		"cg_north":  # standing on a northern prologue square (甄府醒来 by default; --at=<square id> for any other)
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			Quests.resolve(q, save, rng, 1)
 			Quests.move(q, save, "jz_arrive")
+			var at: String = "jz_arrive"
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--at="):
+					at = a.substr(5)
+			if at != "jz_arrive":
+				for sid in ["jz_test", "jz_ledger_a", "jz_ledger"]:
+					Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
+					Quests.move(q, save, sid)
+					if sid == at:
+						break
 			show_screen(MapScreen.new())
 		"fork":  # after 富春: follow 周瑜 or 孙策
 			var q: Dictionary = GameData.get_db().quests[0]
