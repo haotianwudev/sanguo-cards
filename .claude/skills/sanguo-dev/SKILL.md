@@ -62,7 +62,11 @@ timeout 900 $G --headless --path . --export-debug "Android" ../build/sanguo-card
 ```
 
 Demos (`Game.demo()` in `scripts/game.gd`): `title`, `map`, `pick`, `choose`, `event` (左慈 on a ？ square),
-`relics` (宝物 pick), `tiers` (铜/银/金 frames), `ch2` (虎牢关 fork), `battle`, `fight`, `cards:id1,id2,...`.
+`relics` (宝物 pick), `tiers` (铜/银/金 frames), `ch2` (虎牢关 fork), `battle`, `fight`, `cards:id1,id2,...`,
+`chest` / `grand_chest` (a loot chest over the map). Add `--north` to any `--demo=` to play as the north-route
+lord (appends 「出生：冀州无极」 to `run_records`) — for demos that call `Quests.begin` internally (`chest`,
+`grand_chest`, the chapter forks) that reset `run_records`, append the record again after the call, same as a
+real run would after walking past `era`.
 Demos walk square ids — when you insert or rename squares, update their walks (and `walk_to` in tests).
 Screenshots of overlays look washed out because the PNG keeps alpha; in the game the dim is dark.
 
@@ -73,15 +77,25 @@ smaller face x ⇒ figure moves right; bigger face y ⇒ figure moves up. Enemie
 Story CGs: squares, events and interlude scenes take `"cg": "<key>"`; the art goes in `pics/source/cg/<key>.jpg` +
 `pics/art.json` "cgs" (→ `godot/data/art/cg/`). Like Rance X, a CG dominates: arriving at a square with one switches the map screen to CG mode (the picture fills
 the screen, the text box sits over it, a top-bar tab switches back to the map); the interlude shows it full screen.
+**One `cg` per square.** A square with two CG-worthy beats needs two squares: split its `text` array at the second
+beat, give the tail half a new square id with the new `cg`, point `next` at it, and shift every later square's `x`
+by the number you inserted (none, if it was the last square on that path). Wire a square's `cg` field as soon as you
+write the prompt, even with no art yet (`Kit.cg()` returns `null` safely) — `write_needs()` only tracks a cg if the
+square already names it, so an unwired prompt never shows up as missing in `ART-NEEDS.md`.
 Story text plays one line per click (visual-novel style) on event / choose / ？ squares and in interludes; the
 buttons appear after the last line; 跳过 shows everything, 隐藏 (CG mode) hides the text box until the next click.
 Keep each story line short enough to read as one subtitle.
 Never replay a scene at a choice or fork: give the square (or event) a `prompt` — one line that sums up the
 options (「孙策主张正面强攻，周瑜主张调虎离山。听谁的？」) — shown beside the buttons.
 A finished story square shows its prompt (or 「这一段已经看完了」), a pending pick shows only the outcome — nothing replays.
-Each line shows its speaker's face (`Kit.speaker_key`: {lord}, then a name before 「 / ：, then the first name in the line,
-aliases like 伯符 / 公瑾 / 文台 / 吴夫人 in `Kit.ALIASES`); narration keeps the last speaker, or the square's `portraits`.
-Write lines so the speaker's name comes first (「孙策把枪往地上一戳：……」). Add the key and what to draw to `CARD-DESIGN.md` §8b.
+Each line shows its speaker's face via `Kit.speakers(lines, cast)` (`cast` = the square's `portraits`, seeds 她/他):
+an `@key 台词` tag names the speaker outright (strip it for display with `Kit.strip_tag`); otherwise it's the subject
+of the clause before the first 「 (a name at the clause start, or just after a short lead-in like 的/后/里/中/上/前/边/外/下/来/天/—/个/是);
+a possessive at the clause start is a fallback owner; 你/{lord} = "lord"; 她/他 = the latest same-gender subject
+(`Kit.FEMALE`); an opening-quote line takes the subject after 」, else the last speaker. `Kit.ALIASES` maps
+descriptive phrases and names to keys (伯符 / 公瑾 / 文台 / 吴夫人 / 黑脸大汉 / 一员虎将 …) — add new ones here, not a new mechanism.
+Write lines so the speaker's name comes first (「孙策把枪往地上一戳：……」); use an `@key ` tag only when the clause-subject
+rule would get it wrong (e.g. the line opens with someone else's name as the object). Add the key and what to draw to `CARD-DESIGN.md` §8b.
 Battle CGs (Rance X style: the enemy in its scene): the owner supplies one picture per battle — `pics/source/battles/<scenario id>.jpg`, registered in
 `pics/art.json` "battles", built by `sanguo-art` into `godot/data/art/battle/`; the battle screen paints it (washed) when
 present. For any other art a feature needs, don't wait for it: add the requirement to `CARD-DESIGN.md` (and a brief).
@@ -119,6 +133,19 @@ Adding a portrait, checklist:
   nothing uses (e.g. `test_cg`) and point a demo at it — `c1_wake.jpg` was once clobbered by a stand-in and had to be
   restored from git. Check `git status` for deleted/modified art before committing.
 - Never commit with failing tests: chain `... | grep passed` checks don't stop `&&` — look at the result first.
+- **A fighter dict's `"id"` is load-bearing** — `CardView.make` special-cases `card_id == "lord"`, and battle/party
+  code keys collection, tier and leader lookups off it. If one card needs more than one portrait depending on save
+  state (the north-route lord: own hairstyle and armor, `Kit.portrait_key` falls back to the south one until
+  `lord_north` art exists), give the fighter dict a separate `"person"` field for the portrait lookup
+  (`fighter.get("person", fighter["id"])` in `card_view.gd`) and leave `"id"` alone. Changing `"id"` itself breaks
+  anything that does `== "lord"` elsewhere — it compiles fine and only shows up as a blank portrait or a frozen
+  pick overlay (the card errors building `db.build_fighter("lord_north")`, which doesn't exist, and the rest of
+  that screen's `_ready()` never finishes).
+- **`project.godot`'s `window/stretch/aspect` must stay `"keep"`**, not `"expand"`. `expand` gives a wider-than-16:9
+  phone screen more raw canvas instead of scaling into it, and since most screens size themselves in literal 1280×720
+  pixels (`size = Vector2(1280, 720)` all over `scripts/ui/`), the game ends up pinned to the top-left with a dead
+  strip on the other side instead of centred. Verify any stretch-mode change with
+  `$G --path . --resolution 2340x1080 -- --demo=map --shot=<file>.png --wait=1` (a tall-phone aspect) before trusting it.
 
 ## How the game is modelled (add things through data)
 
@@ -262,7 +289,7 @@ poison); 蔡夫人 is spared death but divorced by 刘表 on the spot, stripped 
 extra fights 汉水渡口·锦帆贼, 新野·宗贼 (周瑜 recalls 蒯越 killing 55 宗贼 leaders at a banquet — foreshadowing), 城防·荆州步卒; ？ events
 水镜先生 司马徽 (「好，好」; 「荆州的奇才都还没长大」 — only the hero thinks of 诸葛亮; he's a child in 192 and not in 荆州 yet), 岘山老农 庞德公, 沔南名士 黄承彦 (蔡瑁's brother-in-law:
 「别喝金杯里的酒」), 锦帆游侠 甘宁 (on his way to 刘表).
-第一章北方出生点 冀州·中山无极·甄府（张夫人收留，初平元年正月；squares live inside the `prologue` quest itself, a second branch off `era` at x ≥ 23 so the south branch's layout is untouched): 主角以现代商业手腕帮甄府清账、平粜、练护卫，甄府转亏为盈；常山义士赵云进真定县衙为雪灾灾民求粮，被袁绍督粮官郭图凌辱鞭打，刺史韩馥懦弱旁观；街角醉鬼郭嘉冷眼点破世道，主角出面借甄家三千石粮救常山，赵云、郭嘉就此结识主角；张夫人押粮赈灾，带着**十多岁**的甄宓（不是 5 岁——甄宓这时是半大的少女，主角待她像亲妹妹，干净的兄妹情，没有暧昧；她长大后会对主角生出爱慕，但那是后面章节的事，这一章绝不要写）同行；太行黑山贼李大目、黄巾渠帅张白骑、妖道玄机子（对标南线胡玉 / 何仪 / 唐周）伏击劫走甄宓；主角、赵云、郭嘉三人首次合作踏平黑山寨救回甄宓、灭三凶；开仓放粮，收常山铁骑 / 太行义勇为嫡系部曲；夜话看透郭图 / 韩馥 / 公孙瓒皆非明主，决意南下会盟；张夫人资助战马、铁甲、军粮作为南下的启动资金。这条线目前是独立结局（quest-level `ending`，暂定「北线 · 敬请期待」，回标题重开一周目），还不接南线第二章 `taodong`——以后要不要接、怎么接，是 owner 的事，先别猜。
+第一章北方出生点 冀州·中山无极·甄府（张夫人收留，初平元年正月；squares live inside the `prologue` quest itself, a second branch off `era` at x ≥ 23 so the south branch's layout is untouched): 主角以现代商业手腕帮甄府清账、平粜、练护卫，甄府转亏为盈；常山义士赵云进真定县衙为雪灾灾民求粮，被袁绍督粮官郭图凌辱鞭打，刺史韩馥懦弱旁观；街角醉鬼郭嘉冷眼点破世道，主角出面借甄家三千石粮救常山，赵云、郭嘉就此结识主角；张夫人押粮赈灾，带着**十多岁**的甄宓（不是 5 岁——甄宓这时是半大的少女，主角待她像亲妹妹，干净的兄妹情，没有暧昧；她长大后会对主角生出爱慕，但那是后面章节的事，这一章绝不要写）同行；太行黑山贼李大目、黄巾渠帅张白骑、妖道玄机子（对标南线胡玉 / 何仪 / 唐周）伏击劫走甄宓；主角、赵云、郭嘉三人首次合作踏平黑山寨救回甄宓、灭三凶；开仓放粮，收常山铁骑 / 太行义勇为嫡系部曲（`jz_almsgiving`）；赵云教枪，走火入魔扎穿张夫人的狐裘（`jz_training`，主角从此改用枪，不再是南线的刀/盾）；围炉夜话看透郭图 / 韩馥 / 公孙瓒皆非明主，决意南下会盟（`jz_night`，cg `jz_fireside`）；张夫人取出甄宓亡父的旧鱼鳞甲——他当年领兵护商队，死在黑山贼手里，和这章的反派是一路货——给主角穿上，又赠貂裘，然后把账本一揣，骑马跟着一起南下（甄宓年纪小留在冀州，不是留守相送；告别那场戏在 `jz_end`，没单独出 CG，就是一句台词，别又拆格去凑一张）。主角性格和南线一致：遇到没名气的角色照样 `{lord}（内心）：……三国演义我不熟啊……`，逗比吐槽不断，还总爱调戏张夫人（被她一巴掌拍回去，没有暧昧，纯斗嘴）。**立绘**：`lord_north` 和南线的 `lord` 共用同一张卡（`id` 都是 `"lord"`），只是发型（束发，不是南线的寸头）和甲胄（河北风格旧甲，不是南线的青金色）不同——见上面「`id` vs `person`」的坑，改这条线的立绘逻辑前先读那条。这条线目前是独立结局（quest-level `ending`，暂定「北线 · 敬请期待」，回标题重开一周目），还不接南线第二章 `taodong`——以后要不要接、怎么接，是 owner 的事，先别猜。
 
 **Long-range story direction**: `docs/STORY.md` (南北双线 through 第十二章; 第十一章洛阳 is the fork: each line has one trap choice — south 收吕布 → 结局四 虎噬, north 信诸葛亮、交出帅印 → he poisons the hero that night and stages it as a drunken fall from the wall; the south just wins at 赤壁 (no body, no note — only an old guard muttering 「只有军师进过帐」) → 结局五 烛灭; done right, the ending depends on the *other* line's record in the save: 南线结局 赤壁 / 北线结局 官渡, or both right → 第十二章 天命归一). It is a direction only — the game is built one chapter at a time,
 the implemented chapter (`story.json`) wins, and the outline is synced afterwards. Don't build unbuilt chapters from it or change the game to match it unless asked.
