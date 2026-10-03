@@ -110,5 +110,6 @@
   "hanfu": {"file": "hanfu.jpg", "face": [0.56, 0.24], "head": 0.26},
   "changshan_tieqi": {"file": "changshan_tieqi.jpg", "face": [0.5, 0.28], "head": 0.24},
   "taihang_yiyong": {"file": "taihang_yiyong.jpg", "face": [0.6, 0.28], "head": 0.26},
-  "heishan_bing": {"file": "heishan_bing.jpg", "face": [0.52, 0.22], "head": 0.22}
+  "heishan_bing": {"file": "heishan_bing.jpg", "face": [0.52, 0.22], "head": 0.22},
+  "xiahoulan": {"file": "xiahoulan.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

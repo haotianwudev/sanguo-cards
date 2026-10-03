@@ -115,6 +115,7 @@
 | `changshan_tieqi` | source/soldiers/changshan_tieqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taihang_yiyong` | source/soldiers/taihang_yiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `heishan_bing` | source/soldiers/heishan_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiahoulan` | source/generals/xiahoulan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
