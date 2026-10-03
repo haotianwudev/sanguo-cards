@@ -152,6 +152,7 @@
 | `battle:heishan_zhai` | source/battles/heishan_zhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_raid` | source/cg/c1_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_rescue` | source/cg/c1_rescue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_dinner` | source/cg/c1_dinner.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

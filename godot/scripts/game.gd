@@ -326,11 +326,23 @@ func demo(name: String) -> void:
 			var ts := TitleScreen.new()
 			show_screen(ts)
 			ts.call_deferred("_replay_menu", ts._col, save)
-		"cg":  # standing on a story square that has a CG (醒来)
+		"cg":  # standing on a southern prologue square (醒来 by default; --at=<square id> for any other)
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			Quests.resolve(q, save, rng, 0)
-			Quests.move(q, save, "wake")
+			var at: String = "wake"
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--at="):
+					at = a.substr(5)
+			if at == "wake":
+				Quests.move(q, save, "wake")
+			else:
+				var path := ["wake", "bandage", "village", "sc_home", "boar", "raid", "plan", "fire", "rescue", "dinner", "armor", "oath", "north"]
+				for sid in path:
+					Quests.move(q, save, sid)
+					if sid == at:
+						break
+					Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
 			show_screen(MapScreen.new())
 		"cg_north":  # standing on a northern prologue square (甄府醒来 by default; --at=<square id> for any other)
 			var q: Dictionary = GameData.get_db().quests[0]
