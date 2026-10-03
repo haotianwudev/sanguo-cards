@@ -177,9 +177,11 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 
 
 func build_lord(lord_name: String, mult := 1.0, north := false) -> Dictionary:
+	## "id" stays "lord" everywhere (card/collection/leader lookups all key on it); "person" carries the
+	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]
-	return {"id": "lord_north" if north else "lord", "name": lord_name, "troop": "lord", "hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)),
-		"skills": t["skills"].duplicate(), "rarity": null}
+	return {"id": "lord", "person": "lord_north" if north else "lord", "name": lord_name, "troop": "lord",
+		"hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)), "skills": t["skills"].duplicate(), "rarity": null}
 
 
 func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:

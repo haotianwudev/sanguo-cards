@@ -95,7 +95,7 @@ func _build() -> void:
 		var panel := Panel.new()
 		panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 12, 4, rc, 0))
 		_add(panel, Vector2.ZERO, Vector2(w, card_h))
-	var key := Kit.portrait_key(fighter["id"])
+	var key := Kit.portrait_key(fighter.get("person", fighter["id"]))
 	var heads: float = GameData.get_db().ui["portrait_framing"].get("card", 4.2)
 	var tex := Kit.portrait(key, win.size.x / win.size.y, heads) if key != "" else null
 	if tex != null:

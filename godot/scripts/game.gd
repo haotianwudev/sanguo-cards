@@ -99,6 +99,8 @@ func demo(name: String) -> void:
 	rng.seed = 7
 	save = SaveData.create()
 	save.lord_name = "阿明"
+	if OS.get_cmdline_user_args().has("--north"):  # any --demo, played as the north-route lord
+		save.run_records.append("出生：冀州无极")
 	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
 		show_screen(TitleScreen.new())
 		var o := PickOverlay.new()
