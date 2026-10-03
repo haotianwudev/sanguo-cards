@@ -97,7 +97,7 @@ func _load(dir: String) -> void:
 			var s: Dictionary = q["squares"][sq_id]
 			squares[sq_id] = {"id": sq_id, "x": int(s["x"]), "y": int(s["y"]), "type": s["type"],
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
-				"cards": s.get("cards", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
+				"cards": s.get("cards", []), "relics": s.get("relics", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
 				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""),
 				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
@@ -105,7 +105,7 @@ func _load(dir: String) -> void:
 				"cg": s.get("cg", ""), "prompt": s.get("prompt", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
-			"subtitle": q.get("subtitle", ""), "ending": q.get("ending", {}), "requires": q.get("requires", ""),
+			"subtitle": q.get("subtitle", ""), "ending": q.get("ending", {}), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
 			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", [])})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]

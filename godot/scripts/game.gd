@@ -144,6 +144,26 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 				Quests.move(q, save, sid)
 			show_screen(MapScreen.new())
+		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)
+			save.flags = ["出生：冀州无极"]
+			save.quests_cleared = ["prologue", "taodong"]
+			var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "luoyang_n")[0]
+			Quests.begin(q, save, rng)
+			Quests.pick_fate(save, 0)
+			var at: String = "ln_lvbu"
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--at="):
+					at = a.substr(5)
+			var path := ["ln_river", "ln_charge", "ln_lvlingqi", "ln_camp", "ln_rest1", "ln_loot1", "ln_mystery1",
+				"ln_banner", "ln_feast", "ln_caocao", "ln_lend", "ln_zhen", "ln_pursuit", "ln_xurong", "ln_rescue",
+				"ln_rest2", "ln_loot2", "ln_mystery2", "ln_approach", "ln_feixiong", "ln_langqi", "ln_rest3", "ln_lvbu",
+				"ln_triple", "ln_box1", "ln_box2", "ln_box3", "ln_handhold", "ln_blaze", "ln_ferry", "ln_end"]
+			for sid in path:
+				Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
+				Quests.move(q, save, sid)
+				if sid == at:
+					break
+			show_screen(MapScreen.new())
 		"relics":  # an elite's 宝物 pick, a couple already held
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
@@ -291,7 +311,7 @@ func demo(name: String) -> void:
 		"ending":  # the 结局一 card
 			show_screen(TitleScreen.new())
 			var o := InterludeOverlay.new()
-			o.ending = GameData.get_db().quests[2]["ending"]
+			o.ending = GameData.get_db().quests.filter(func(q): return q["id"] == "yuxi")[0]["ending"]
 			o.scenes = []
 			root.add_child(o)
 		"titlecard":  # the chapter-2 title card straight away

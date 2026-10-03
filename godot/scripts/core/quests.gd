@@ -48,6 +48,8 @@ static func validate(db: GameData) -> void:
 				assert(db.events.has(s["event"]), where + ": unknown event " + s["event"])
 			for c in s["cards"]:
 				assert(db.cards.has(c), where + ": unknown card " + c)
+			for r in s["relics"]:
+				assert(db.relics.has(r), where + ": unknown relic " + r)
 		if q["squares"].values().any(func(s): return s["type"] == "mystery" and s["event"] == ""):
 			assert(not q["event_pool"].is_empty(), "quest %s: ？ squares need an event_pool" % q["id"])
 		for eid in q["event_pool"]:
@@ -78,8 +80,10 @@ static func current_quest(save: SaveData) -> Variant:
 			if q["id"] == save.replay:
 				return q
 	for q in GameData.get_db().quests:
-		# a chapter with requires only comes on the route that earned it (story flags from earlier chapters)
-		if not save.quests_cleared.has(q["id"]) and _flags_hold(q.get("requires", ""), save, false):
+		# a chapter with requires only comes on the route that earned it (story flags from earlier chapters);
+		# unless hides it on a route that earned something else (e.g. the other birthplace)
+		if not save.quests_cleared.has(q["id"]) and _flags_hold(q.get("requires", ""), save, false) \
+				and not (q.get("unless", "") != "" and _flags_hold(q["unless"], save, false)):
 			return q
 	return null
 
@@ -275,6 +279,11 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				if db.cards[cid]["soldier"] or not save.has_card(cid):  # story cards don't stack
 					gained.append(db.cards[cid])
 					save.grant_card(cid)
+			for rid in s["relics"]:
+				if not save.relics.has(rid):
+					save.relics.append(rid)
+					save.run_relics.append(rid)
+					gained.append({"id": rid, "name": "宝物·" + db.relics[rid]["name"], "relic": true})
 		"choose":
 			var opt: Dictionary = s["choose"][choice]
 			assert(not opt["locked"], "locked choice")

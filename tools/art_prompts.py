@@ -9,17 +9,19 @@ Add new characters / battles / scenes to the tables below when you add them to t
 import json
 from pathlib import Path
 
+try:
+    from tools.art_prompts_zh import OVERRIDES_ZH, PORTRAITS_ZH, BATTLES_ZH, CGS_ZH, EVENTS_ZH
+except ImportError:
+    from art_prompts_zh import OVERRIDES_ZH, PORTRAITS_ZH, BATTLES_ZH, CGS_ZH, EVENTS_ZH
+
 ROOT = Path(__file__).resolve().parents[1]
 PICS = ROOT / "pics"
 NL = "\n"
 
-DONGBAI = ("Dong Bai: an adult woman general with long silver-white hair in a high ponytail, purple fur-trimmed leather armor "
-           "and two huge bronze hammers (her delivered portrait and CGs all look like this)")
-HERO = "the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder"
-STYLE = ("Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean "
-         "ink outlines, rich vibrant colors")
-PORTRAIT_COMPOSITION = ("Vertical 3:4 aspect ratio, waist-up portrait, character centered, face positioned neatly in the upper "
-                        "third of the canvas, head fully visible with margin at the top.")
+DONGBAI = ("董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）")
+HERO = "主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀"
+STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
+PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。")
 # Backgrounds are now atmospheric and character-specific per user directive
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
@@ -907,6 +909,7 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "ln_lvlingqi": "黄河南岸古道夜色：吕玲绮一身红黑铠甲，战马打滑前蹄跪地，她单手举着小号方天画戟，满脸泪痕，眼神凶狠又无助",
     "c3_mitan": "a tavern back alley at night: Yuan agents in plain clothes drawing short knives from their sleeves",
     "c3_qibing": "a rainy night road: Yuan cavalry with spears charging out of the dark, rain slanting in the torchlight",
     "c4_liumin": "the ruins of Luoyang: a desperate mob of starving refugees with hoes and sticks surging over rubble toward the grain carts",
@@ -1068,17 +1071,19 @@ CGS = {
     "i2_yuxi": "night on a river boat: Sun Jian hugging a brocade box at the bow, Lady Wu standing at the cabin door holding a late-night snack",
     "i2_duel": "sunset riverbank: Dong Bai and Sun Ce collapsed on the ground laughing after a long duel, hammers and spear dropped beside them",
     "i2_qin": "night on the stern of a boat: Lady Tang playing a guqin, Lady Wu draping a coat over her shoulders",
-    "jz_wake": "a room with thick felt matting, snow falling outside the window: Lady Zhang leaning in with a bowl of medicine to check the hero's fever, candlelight",
-    "jz_ledger": "an estate office: Lady Zhang handing over half the household ledger, young Zhen Mi (early teens, twin buns) peeking over the desk edge clutching a pastry",
-    "jz_county": "the county court hall: Zhao Yun shielding dust-covered petitioners as he backs away, Guo Tu looking down with a sneer from the bench, Han Fu shrinking in the corner",
-    "jz_guojia": "a snowy street under wine-shop banners: Guo Jia leaning against a post sizing up the hero, Zhao Yun kneeling on one knee, the town of Zhending behind",
-    "jz_ambush": "a snowy mountain gorge: Xuanjizi galloping off with young Zhen Mi over his saddle, Li Damu and Zhang Baiqi charging down from the cliffs",
-    "jz_rescue": "a blood-red altar cave: Zhao Yun's spear driving at Xuanjizi, young Zhen Mi tied to a post, screaming",
-    "jz_boss": "the stockade gate: the hero's spear shaft crossed awkwardly to block Li Damu's huge axe, Zhao Yun's own spear cocked to strike, the stockade wall ablaze behind",
-    "jz_crowd": "a snowy Changshan square: thousands of gaunt refugees kneeling in the snow around steaming porridge pots, the hero on horseback looking down at the sea of grateful faces, newly-formed cavalry banners behind him",
-    "jz_training": "a frost-covered training yard: Zhao Yun correcting the hero's grip on a white-wax-wood spear mid-stance, Lady Zhang's fur coat hanging on a line in the background with a fresh spear-hole through it",
-    "jz_fireside": "a snug estate room at night: the hero, Zhao Yun and Guo Jia sitting close around a charcoal brazier with wine cups, snow visible through a lattice window, firelight on their faces",
-    "jz_end": "a snowy highway: the hero in dark lamellar armor and a white fur cloak holding a spear at the center, Zhao Yun in silver armor on a white horse to one side and Guo Jia sipping wine from a carriage on the other, Lady Zhang riding a sturdy pony just behind them clutching a ledger, a column of cavalry and new banners following",
+    "jz_wake": "铺着厚毛毡的甄府暖阁，窗外飞雪：张夫人端着药碗俯身探试主角额头体温，烛光摇曳",
+    "jz_ledger": "甄府账房：张夫人将半副大账本递给主角，十多岁的甄宓探头扒着桌角偷看，手里攥着点心",
+    "jz_county": "真定县衙公堂石阶前：赵云护着满身尘土的受灾乡民后退，郭图高踞堂上冷笑，韩馥缩在一旁瑟瑟发抖",
+    "jz_guojia": "真定飘雪街头青布酒旗下：郭嘉斜倚着酒旗木柱打量主角，赵云单膝跪地抱拳，背景是真定古城",
+    "jz_ambush": "雪地峡谷：玄机子纵马掠走甄宓，李大目和张白骑率众悍匪从山崖上狂暴杀出",
+    "jz_rescue": "血色祭坛洞窟前：赵云亮银枪如龙直挑玄机子，甄宓被绑在石柱上惊叫挣扎",
+    "jz_boss": "黑山贼寨门前：主角横起白蜡杆长枪狼狈架住李大目沉重巨斧，赵云回枪蓄势直刺李大目咽喉，身后寨墙火光冲天",
+    "jz_crowd": "大雪纷飞的常山校场广场：数千饥民捧着热气腾腾的米粥在雪地中跪拜叩谢，主角骑在马上动容俯瞰，身后常山铁骑与太行义勇新旗猎猎招展",
+    "jz_training": "清晨薄霜覆盖的甄家演武场：赵云从容纠正主角手持白蜡杆长枪的刺击姿势，背景晾衣绳上张夫人的雪白狐裘正中被扎了个大窟窿，赵云憋笑",
+    "jz_fireside": "深夜温馨的别院暖阁：主角、赵云与郭嘉围坐在红泥炭火盆旁煮酒论天下大势，窗外飘雪，火光映面",
+    "ln_camp": "夜里的马车内：主角用烈酒给吕玲绮腕上的伤口正骨包扎，张夫人掀帘探头满眼心疼，小甄宓踮脚递来一块热栗子糕",
+    "ln_handhold": "虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外",
+    "jz_end": "大雪官道上：主角身披鱼鳞甲与雪白貂裘、手握白蜡杆长枪居中，赵云银甲白马在左，郭嘉车中抿酒在右，张夫人怀抱账本骑矮脚马跟在队伍中，身后铁骑义勇新军相随",
 }
 
 
@@ -1239,6 +1244,16 @@ NEXT = [
     ("portrait", "huansha", "浣纱女（成年女性，水乡浣纱）"),
     ("portrait", "caisang", "采桑女（成年女性，桑园采桑）"),
     ("cg", "e_yazhai", "压寨夫人（剧情 CG，胭脂虎指着主角）"),
+
+    # P0 · 北线第一章剧情 CG（待画，最新核心需求）：
+    ("cg", "jz_wake", "北线·甄府醒来（剧情 CG）"),
+    ("cg", "jz_ledger", "北线·账房认亲（剧情 CG）"),
+    ("cg", "jz_county", "北线·县衙受辱（剧情 CG）"),
+    ("cg", "jz_guojia", "北线·街头结识（剧情 CG）"),
+    ("cg", "jz_boss", "北线·黑山破寨（剧情 CG）"),
+    ("cg", "jz_crowd", "北线·常山放粮（剧情 CG）"),
+    ("cg", "jz_training", "北线·雪地教枪（剧情 CG）"),
+    ("cg", "jz_fireside", "北线·围炉夜话（剧情 CG）"),
 
     # P0 · 北线主线（其他）：
     ("portrait", "zhaoyun", "赵云（换掉占位）"),
@@ -1466,18 +1481,17 @@ NEXT_RULES = [
 
 
 def map_prompt(scene: str) -> str:
-    return (f"A wide horizontal game map illustration, a hand-painted Chinese landscape scroll (浅绛 / 青绿山水): {scene}.{NL}"
-            f"Composition & Framing: very wide panorama, 3200x1080 (it scrolls sideways), seen from high above at an angle; keep three "
-            f"roughly horizontal travel bands (top / middle / bottom) free of busy detail, map squares sit on them; soft mist.{NL}"
-            f"Style: match the chapter-1 map (godot/data/art/map/prologue.jpg): ink outlines, soft green and ochre washes on rice paper; "
-            f"no text, no UI, no people close up.")
+    return (f"横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：{scene}。{NL}"
+            f"构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。{NL}"
+            f"画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；"
+            f"不要文字、不要 UI、不要近景人物。")
 
 
 def relic_prompt(obj: str, rarity: str) -> str:
-    return (f"Masterpiece 1:1 square game inventory item icon of {obj}.{NL}"
-            f"Composition & Framing: square 256x256 (draw at 1024x1024), the item is displayed cleanly as an isolated single artifact, angled dynamically in center.{NL}"
-            f"Solid plain off-white background (#ffffff), clean cut-out, no border, no frame, no circular medallion, no runes, no western fantasy elements.{NL}"
-            f"Style: Authentic ancient Chinese Three Kingdoms artifact aesthetic, retro Japanese anime RPG tactical game item illustration, Rance X art style inspiration, crisp clean ink outlines, rich vibrant cel-shading, delicate metallic highlights; no text.")
+    return (f"杰作级 1:1 方形游戏道具图标：{obj}。{NL}"
+            f"构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。{NL}"
+            f"纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。{NL}"
+            f"画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。")
 
 
 OVERRIDES = {
@@ -1492,57 +1506,181 @@ OVERRIDES = {
 - 构图光影与画风：
   - 极富戏剧魅力的双重冷暖光影：屋内是充满熏香、热汤与针线温情的金黄暖光，屋外是照着委屈孙策的清冷月光。
   - 规格：横版 16:9 比例，日系经典战术卡牌RPG剧情CG插画风（赛璐珞上色带精良墨线，类似兰斯10经典幕间短剧插画），人物神态极其生动鲜活，温馨甜蜜中带着无厘头爆笑！""",
-}
 
-def portrait_prompt(p: tuple) -> str:
+    "jz_wake": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【甄府初醒 · 主母探温】
+- 场景与环境光影：
+  - 冀州中山无极县甄府雅致的客舍偏房内。窗外冰天雪地、大雪纷飞；室内地面铺着厚厚的狼皮保暖毛毡，案头铜炉生着融融红炭，暖黄色的烛光驱散寒意。
+- 核心人物互动：
+  - 【张夫人（雍容主母）】：三十多岁雍容干练的绝色贵妇，甄家当家主母。梳着华贵高髻，插着金步摇与玉簪，身穿深紫底色、暗纹织锦的阔袖居家汉服襦裙。手中端着一碗还冒着腾腾热气的黑褐色汤药，正微微俯下身，用温润细腻的手背轻轻贴在主角的前额测试体温。嘴角带着一丝似笑非笑的精明打量，眼神中既有对救起之人的母性怜惜，又带着大商贾审视货色的锐利。
+  - 【北线主角（初愈苏醒）】：二十岁出头的清秀青年，黑发束成整齐的发髻（包着干净素布巾，绝非现代短发，不戴头盔）。面色尚带一丝大病初愈的虚弱苍白，倚靠在雕花床榻的软枕锦被上，眼神清澈而机警，正有些受宠若惊地仰视着俯身的张夫人。
+- 构图与画风：
+  - 规格：横版 16:9（1920x1080），主要人物位于画面中上部三分之二，下方三分之一留白供游戏对话框展示。
+  - 日系战术卡牌RPG剧情插画风（类似兰斯10赛璐珞上色带精良墨线），暖调烛光与窗外冷冽蓝雪形成唯美冷暖对比；无文字无UI。""",
+
+    "jz_ledger": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【甄府账房 · 甩账与贪嘴小妹】
+- 场景与环境：
+  - 甄府明亮宽敞的账房内堂。高大的沉香木公案上整齐码放着一叠叠竹简、账册与紫檀木算盘，墙上悬挂着河北各州郡商道舆图。
+- 核心人物互动（温馨搞笑）：
+  - 【张夫人（甩手掌柜）】：张夫人站在桌案前，身着华丽外袍，双手叉腰，神态傲娇又大度，一只手将半副沉甸甸的甄家总账册啪地按在桌上推给主角。桌角还摆着一袭刚刚赶制出来的华美雪白狐裘长袍（作为给主角的奖赏福利）。
+  - 【北线主角（从容自得）】：青年主角手握毛笔端坐在案几后，桌上散落着他绘制的复式记账法草稿纸，面带自信得体的微笑，抬头与张夫人对视。
+- 喜剧反差神笔（画龙点睛）：
+  - 【小甄宓（娇憨馋嘴）】：十三四岁的少女甄宓，梳着可爱的双丫髻，身穿浅粉色绣着小兔纹样的小襦裙。此时从高高的桌案侧后方悄悄探出半个小脑袋，乌溜溜的大眼睛满是崇拜好奇地偷看新来的账房哥哥，两腮鼓鼓囊囊，手里还紧紧攥着咬了半块的桂花糕，嘴角沾着点心渣！
+- 构图与画风：
+  - 规格：横版 16:9，日系经典战术卡牌RPG剧情CG风格，赛璐珞精细线稿，温暖明朗的室内自然采光，人物表情生动鲜明；无文字无UI。""",
+
+    "jz_county": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【真定县衙 · 子龙隐忍与官绅弄权】
+- 场景与氛围：
+  - 常山真定县衙大堂与门前台阶。冬日阴霾压抑的灰冷天空，威严肃杀的官府石狮与水火棍。
+- 核心人物戏剧冲突：
+  - 【郭图（刻薄小人）】：三十多岁白净微胖文官，头戴进贤冠，身着考究官袍，腰系玉带。高高站在台阶顶端，手持袁绍征粮文书，嘴角挂着轻蔑刻薄的冷笑，挥手示意差役驱赶乡民，一副视人命如草芥的嚣张嘴脸。
+  - 【韩馥（唯唯诺诺）】：五十多岁的冀州刺史，体态臃肿虚胖，官袍松垮，躲在公堂柱子阴影里缩头缩脑，双手缩在袖子里瑟瑟发抖，不敢发一言。
+  - 【赵云（隐忍护民）】：二十岁出头的俊朗英武青年赵云，白袍银甲（头戴银白轻盔），长枪尚在鞘中横于胸前。为了保护身后衣衫褴褛、面黄肌瘦的真定受灾百姓，他以身相护缓缓后退，手臂已被衙役水火棍打中衣袍撕裂，剑眉倒竖，牙关紧咬，眼眶因悲愤而泛红，满腔怒火却顾全大局强行克制。
+- 构图与画风：
+  - 规格：横版 16:9，微仰视构图展现阶级与权势倾轧的张力，冷峻肃杀的战乱纪实色调，赛璐珞墨线质感；无文字无UI。""",
+
+    "jz_guojia": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【真定街头 · 鬼才抱葫与子龙跪谢】
+- 场景与环境：
+  - 真定县城萧瑟飘雪的青石街头。路边简陋酒肆的破旧青布酒旗在寒风中猎猎作响，街面积着薄雪。
+- 核心人物站位与神态：
+  - 【赵云（单膝跪谢）】：银甲白袍的年轻赵云满面震惊与难以言喻的感激，单膝重重跪在薄雪泥地中，双手抱拳向主角行郑重军礼。
+  - 【北线主角（仗义疏财）】：主角束发青衫、身披雪白狐裘，面容温润和煦，正快步上前双手稳稳扶住赵云的臂膀，风度翩翩。
+  - 【郭嘉（放浪形骸）】：二十多岁的青衫落魄文士郭嘉，身形消瘦高挑，衣衫单薄不修边幅，肩头插着羽扇。他正吊儿郎当斜靠在酒肆木柱旁，单脚踏着台阶，怀里抱着一只系着鲜艳红绳的大酒葫芦，半眯着醉眼斜睨主角，嘴角扬起一抹看破玄机又玩世不恭的戏谑坏笑。
+- 构图与画风：
+  - 规格：横版 16:9，日系RPG风云际会的名场面构图，雪花飘洒，青布酒旗、银甲战袍与酒葫芦形成鲜明视觉符号；无文字无UI。""",
+
+    "jz_boss": """横版 16:9 战斗剧情CG插画，三国日系战术卡牌RPG北线第一章：【黑山寨门 · 长枪横架与穿喉一击】
+- 场景与战场动态：
+  - 太行山黑山贼大寨的正门隘口。巨大的粗木栅栏寨门正在熊熊烈火中崩塌坍陷，黑烟滚滚，火星四溅，地面泥泞染血。
+- 生死一瞬的戏剧定格：
+  - 【李大目（凶煞巨寇）】：四十多岁、宛如黑铁塔般的凶蛮山贼首领，半身赤裸披着染血兽皮，面上一道贯穿左眼的狰狞刀疤，独眼血红暴突，狂怒嘶吼着将一柄沉重巨大的开山双刃阔斧从半空狂暴劈下！
+  - 【北线主角（狼狈硬接）】：主角咬紧牙关，双手横握一杆白蜡杆长枪向上死命死架（姿势狼狈僵硬宛如顶门杠），粗壮的白蜡枪杆被巨斧劈得弯曲如弓，交击处迸溅出耀眼的火星电芒！
+  - 【赵云（一枪绝杀）】：赵云身如白龙穿云，一身银甲在火光中泛着冷冽寒芒，如闪电般从侧翼低空掠出，手中亮银枪化作一道无可匹敌的璀璨匹练，枪尖寒星直贯李大目咽喉破绽！
+- 构图与画风：
+  - 规格：横版 16:9，极具压迫感与速度感的战斗动作定格抓拍，烈火照耀的炽热对比光影，赛璐珞风格动作特效；无文字无UI。""",
+
+    "jz_crowd": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【常山放粮 · 万民跪谢与义旗初张】
+- 场景与宏大景深：
+  - 常山城外的白雪校场广场，远方是苍茫巍峨的太行雪山。数口支在军用木架上的巨大铁锅正滚沸着雪白浓稠的米粥，白雾热气蒸腾升空。
+- 震撼人心的众生百态：
+  - 前景与中景：数千名饱经雪灾与战乱的饥民、枯瘦的妇孺老幼，以及整齐解甲的黄巾降卒，双手捧着粗陶热粥碗，泪流满面、自发地齐刷刷跪倒在茫茫雪地之中，叩拜之势如波浪般连绵不绝。
+  - 核心英雄特写：主角身着北线便装外罩雪白狐裘披风，腰佩宝剑、手挽缰绳，端坐在高大神骏的战马之上，俯瞰着眼前黑压压跪倒的受恩百姓，神情肃穆动容。
+  - 赵云一身银甲跨白马持枪侍立在主角身侧；他们身后，数支崭新的战旗迎风招展，上面苍劲有力地书写着「常山铁骑」、「太行义勇」的军号旗帜！
+- 构图与画风：
+  - 规格：横版 16:9，大景深史诗场面，升腾的热粥白气与冰冷雪原融为一体，充满英雄崛起与民心所向的磅礴感染力；无文字无UI。""",
+
+    "jz_training": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【雪地教枪 · 子龙指点与扎漏狐裘】
+- 场景与清晨环境：
+  - 甄家别院后院的清晨演武场。青石板地面覆盖着一层皑皑薄霜，光秃秃的老柳树挂着冰棱，古色古香的抄手游廊环绕。
+- 核心互动与爆笑反差：
+  - 【赵云手把手带教】：年轻赵云褪去盔甲只穿贴身利落的白色劲装战袍，站在主角身侧，双手握住主角的双臂，神态极其认真严肃地纠正主角刺枪的发力姿态。
+  - 【主角扎马步受罪】：青年主角扎着并不算标准的大马步，双手端着长长的白蜡杆长枪，双腿抖得像筛糠，额头冷汗直冒，表情龇牙咧嘴、叫苦不迭。
+  - 【爆笑反差神笔】：演武场后方的晾衣绳上，正晾着张夫人那件珍贵名贵的雪白大狐裘——正中心赫然被枪尖扎出了一个焦黑线头乱飞的大窟窿！赵云眼角余光扫到窟窿，嘴角拼命抽搐、咬紧嘴唇强忍大笑；游廊拐角处，张夫人正怒容满面地卷起锦缎长袖、一手拿着算盘气势汹汹冲出！
+- 构图与画风：
+  - 规格：横版 16:9，晨光熹微，日系经典战术卡牌RPG生动有趣的幕间日常喜剧风，动作与神情刻画极其鲜活传神；无文字无UI。""",
+
+    "jz_fireside": """横版 16:9 剧情CG插画，三国日系战术卡牌RPG北线第一章：【围炉夜话 · 煮酒论霸与三杰归心】
+- 场景与静谧暖意：
+  - 深夜常山别院温馨的暖阁客堂内。古朴雅致的雕花木窗半掩，映出窗外幽蓝清冷的茫茫飞雪；室内中央置着一只兽足铜炭盆，银丝炭泛着金红色的温暖火光，温酒小铜壶香气袅袅。
+- 英雄聚首（知己归心）：
+  - 【北线主角（胸怀天下）】：主角脱去外衣只着青黑素袍，盘坐席上，单手举着一只青铜酒爵，另一只手在虚空中从容比划，双眸神采飞扬，正就着炭火酒香自信分析十八路诸侯虚实与天下争霸大势。
+  - 【赵云（信服动容）】：年轻赵云端坐一旁，佩剑平放膝上，双手捧着热酒，目光炽热清亮，全神贯注倾听，神情中充满了遇得明主的崇敬与热血。
+  - 【郭嘉（拍手称绝）】：郭嘉毫无吃相地歪斜半躺在锦缎软垫上，一条腿翘起，左手抓着红绳酒葫芦，右手羽扇轻击掌心，眼中原本的懒散醉意彻底化作惊艳与狂喜，抚掌痛快大笑。
+- 构图与画风：
+  - 规格：横版 16:9，窗外幽蓝极冷、室内金黄极暖的强烈双重氛围光，炭火的侧逆光精妙勾勒出三位青年豪杰的面庞轮廓，豪迈相知、相见恨晚的氛围感拉满；无文字无UI。""",
+}
+OVERRIDES.update(OVERRIDES_ZH)
+
+
+def portrait_prompt(p: tuple, key: str = None) -> tuple[str, str]:
     if len(p) >= 5:
         name, look, clothes, weapon, bg = p[:5]
     else:
         name, look, clothes, weapon = p
-        bg = "an atmospheric ancient Chinese scene matching the character, soft natural lighting"
-    return (f"A vertical character portrait of {name}.{NL}"
-            f"Appearance: {look}{NL}"
-            f"Armor & Clothing: {clothes}{NL}"
-            f"Weapon: {weapon}{NL}"
-            f"Background: {bg}.{NL}"
-            f"Composition & Framing: {PORTRAIT_COMPOSITION}{NL}"
-            f"Style: {STYLE}, atmospheric environmental lighting, soft depth of field keeping the background scenic yet secondary to the character.")
+        bg = "与人物身份相符的古风氛围场景，柔和自然光"
+    en_prompt = (f"{name}的竖版人物立绘。{NL}"
+                 f"外貌：{look}{NL}"
+                 f"铠甲与服饰：{clothes}{NL}"
+                 f"武器：{weapon}{NL}"
+                 f"背景：{bg}。{NL}"
+                 f"构图：{PORTRAIT_COMPOSITION}{NL}"
+                 f"画风：{STYLE}，带氛围的环境光，景深柔和，背景有景致但服从于人物。")
+
+    p_zh = PORTRAITS_ZH.get(key)
+    if p_zh:
+        if len(p_zh) >= 5:
+            name_z, look_z, clothes_z, weapon_z, bg_z = p_zh[:5]
+        else:
+            name_z, look_z, clothes_z, weapon_z = p_zh
+            bg_z = "与人物身份相符的三国古风场景，柔和自然光"
+        zh_prompt = (f"{name_z}的竖版人物立绘。{NL}"
+                     f"外貌：{look_z}{NL}"
+                     f"铠甲与服饰：{clothes_z}{NL}"
+                     f"武器：{weapon_z}{NL}"
+                     f"背景：{bg_z}。{NL}"
+                     f"构图：{PORTRAIT_COMPOSITION}{NL}"
+                     f"画风：{STYLE}，带氛围的环境光，景深柔和，背景有景致但服从于人物。")
+    else:
+        zh_prompt = en_prompt
+    return zh_prompt, en_prompt
 
 
-def battle_prompt(scene: str) -> str:
-    return (f"A horizontal battle scene illustration: {scene}.{NL}"
-            f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, dramatic low angle; the enemy big and centred in the "
-            f"upper-middle of the frame (its head / face about 30-45% from the top), the bottom 30% simple ground.{NL}"
-            f"Style: {STYLE}, dramatic battle lighting, like a Rance X battle CG; no text, no UI.")
+def battle_prompt(scene: str, key: str = None) -> tuple[str, str]:
+    en_prompt = (f"横版战斗场景插画：{scene}。{NL}"
+                 f"构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。{NL}"
+                 f"画风：{STYLE}，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。")
+    scene_zh = BATTLES_ZH.get(key, scene)
+    zh_prompt = (f"横版战斗场景插画：{scene_zh}。{NL}"
+                 f"构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。{NL}"
+                 f"画风：{STYLE}，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。")
+    return zh_prompt, en_prompt
 
 
-def cg_prompt(scene: str) -> str:
-    return (f"A horizontal story event illustration: {scene}.{NL}"
-            f"Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third "
-            f"less busy (dialogue text sits there). At most four named characters in focus; unnamed background people "
-            f"(soldiers, crowds) are fine.{NL}"
-            f"Style: {STYLE}, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.{NL}"
-            f"(When the hero appears — {HERO}.)" + (f"{NL}({DONGBAI}.)" if "Dong Bai" in scene else ""))
+def cg_prompt(scene: str, key: str = None, is_event: bool = False) -> tuple[str, str]:
+    en_prompt = (f"横版剧情事件插画：{scene}。{NL}"
+                 f"构图：横版 16:9，1920x1080，人物位于画面上部三分之二，下方三分之一留得简洁（对话文字压在那里）。"
+                 f"画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。{NL}"
+                 f"画风：{STYLE}，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。{NL}"
+                 f"（主角出场时——{HERO}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene or "Dong Bai" in scene) else ""))
+
+    if is_event:
+        eid = key[2:] if key and key.startswith("e_") else key
+        scene_zh = EVENTS_ZH.get(eid, scene)
+    else:
+        scene_zh = CGS_ZH.get(key, scene)
+
+    zh_prompt = (f"横版剧情事件插画：{scene_zh}。{NL}"
+                 f"构图：横版 16:9，1920x1080，人物位于画面上部三分之二，下方三分之一留得简洁（对话文字压在那里）。"
+                 f"画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。{NL}"
+                 f"画风：{STYLE}，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。{NL}"
+                 f"（主角出场时——{HERO}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene_zh or "Dong Bai" in scene_zh) else ""))
+    return zh_prompt, en_prompt
+
+
+def render_item(header: str, zh_prompt: str, en_prompt: str = None) -> list[str]:
+    lines = [header, "", "```", zh_prompt, "```"]
+    if en_prompt and en_prompt.strip() != zh_prompt.strip():
+        lines += ["", "<details>", "<summary>English Prompt (英文备用)</summary>", "", "```", en_prompt, "```", "</details>"]
+    lines.append("")
+    return lines
 
 
 def fate_prompt(sym: str) -> str:
-    return (f"A square emblem illustration for a 'fate' card in a roguelike: {sym}.{NL}"
-            f"Composition & Framing: square 512x512 (draw at 1024x1024), the symbol centred inside a round jade-and-gold medallion "
-            f"with a thin gold rim, transparent background (PNG).{NL}"
-            f"Style: {STYLE}, painted emblem, strong silhouette readable at 112px; no text.")
+    return (f"肉鸽游戏「天命」卡的方形徽记插画：{sym}。{NL}"
+            f"构图：方形 512x512（按 1024x1024 绘制），图案居中，嵌在细金边的圆形玉金奖章内，透明背景（PNG）。{NL}"
+            f"画风：{STYLE}，彩绘徽记，轮廓醒目，缩到 112px 仍能看清；不要文字。")
 
 
 def affix_prompt(sym: str) -> str:
-    return (f"A tiny game badge icon: {sym}, drawn as a red Chinese seal stamp (朱印) with the symbol carved inside.{NL}"
-            f"Composition & Framing: square 128x128 (draw at 512x512), transparent background (PNG), bold simple shapes readable at 28px.{NL}"
-            f"Style: ink and cinnabar, crisp edges; no text.")
+    return (f"游戏小徽章图标：{sym}，画成红色中式印章（朱印），图案刻在印中。{NL}"
+            f"构图：方形 128x128（按 512x512 绘制），透明背景（PNG），形状粗壮简洁，缩到 28px 仍清晰。{NL}"
+            f"画风：水墨与朱砂，边缘利落；不要文字。")
 
 
 def ui_prompt(scene: str) -> str:
-    return (f"A horizontal key-art illustration for {scene}.{NL}"
-            f"Composition & Framing: Horizontal 16:9, 1920x1080; the picture is shown dimmed under the menu.{NL}"
-            f"Style: {STYLE}, epic cinematic lighting, painterly sky; no text, no logo, no UI.{NL}"
-            f"(The hero — {HERO}.)")
+    return (f"{scene}的横版主视觉插画。{NL}"
+            f"构图：横版 16:9，1920x1080；画面在菜单下方会被压暗显示。{NL}"
+            f"画风：{STYLE}，史诗电影感光线，绘画感天空；不要文字、不要标志、不要 UI。{NL}"
+            f"（主角——{HERO}。）")
 
 
 def main() -> None:
@@ -1573,23 +1711,43 @@ def main() -> None:
         if key in done and key not in redo:
             continue
         status = "🟡 换掉占位" if key in art["portraits"] else "⬜ 缺"
-        out += [f"### `{key}` {status}", "", "```", OVERRIDES.get(key) or portrait_prompt(p), "```", ""]
+        hdr = f"### `{key}` {status}"
+        if key in OVERRIDES:
+            out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+        else:
+            zh, en = portrait_prompt(p, key)
+            out += render_item(hdr, zh, en)
     out += ["## 战斗 CG（横版 16:9，每场战斗一张）", ""]
     for key, scene in BATTLES.items():
         if key in art.get("battles", {}):
             continue
-        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or battle_prompt(scene), "```", ""]
+        hdr = f"### `{key}`"
+        if key in OVERRIDES:
+            out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+        else:
+            zh, en = battle_prompt(scene, key)
+            out += render_item(hdr, zh, en)
     out += ["## 剧情插图 CG（横版 16:9）", ""]
     for key, scene in CGS.items():
         if key in art.get("cgs", {}) and key not in redo:
             continue
-        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+        hdr = f"### `{key}`"
+        if key in OVERRIDES:
+            out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+        else:
+            zh, en = cg_prompt(scene, key)
+            out += render_item(hdr, zh, en)
     out += ["## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）", ""]
     for eid, scene in EVENTS.items():
         key = "e_" + eid
         if key in art.get("cgs", {}):
             continue
-        out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or cg_prompt(scene), "```", ""]
+        hdr = f"### `{key}`"
+        if key in OVERRIDES:
+            out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+        else:
+            zh, en = cg_prompt(scene, key, is_event=True)
+            out += render_item(hdr, zh, en)
     art_dir = ROOT / "godot" / "data" / "art"
     out += ["## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）", ""]
     for key, sym in FATES.items():
@@ -1608,9 +1766,8 @@ def main() -> None:
         out += [f"### `{key}`", "", "```", ui_prompt(scene), "```", ""]
     out += ["## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）", ""]
     for key, obj in CHESTS.items():
-        out += [f"### `{key}`", "", "```", f"A game item sprite: {obj}.{NL}Composition & Framing: square 512x512, the chest centred "
-                f"at a slight three-quarter angle, transparent background (PNG), no shadow box.{NL}Style: {STYLE}, painted prop, rich "
-                f"colours, crisp outline; no text.", "```", ""]
+        out += [f"### `{key}`", "", "```", f"游戏道具精灵图：{obj}。{NL}构图：方形 512x512，宝箱居中，略带四分之三视角，透明背景（PNG），不要阴影底框。{NL}"
+                f"画风：{STYLE}，彩绘道具，色彩浓郁，轮廓利落；不要文字。", "```", ""]
     out += ["## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）", ""]
     for key, scene in MAPS.items():
         if "生成" not in art.get("maps", {}).get(key, {}).get("license", "生成"):

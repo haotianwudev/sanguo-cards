@@ -42,6 +42,7 @@ timeout 120 $G --headless --path . --import >/dev/null 2>&1
 timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad>/x.png --wait=1.5
 ```
 
+北线第二章：`--demo=ln2`（虎牢关前，`--at=<square id>` 跳到任意格，`--at=` 的目标必须在脚本自带的 `path` 数组里，新加格子要同步那份列表）。
 第四章：`--demo=ch6`（二周目，围府线）/ `--demo=ch6b`（三周目，报信线）/ `--demo=ch6c`（四周目，渭水打张济张绣、收贾诩），加 `--at=<square id>` 直接跳到那一格截图。
 第五章：`--demo=ch8`（恨海线）/ `--demo=ch8b`（通关恨海、第四章收了贾诩后的破局线），同样可加 `--at=`。
 `tests/test_routes.gd` walks chapters 3–5 on every 周目 route (squares, records, endings, cards, which chapter follows) and checks
@@ -100,7 +101,8 @@ Battle CGs (Rance X style: the enemy in its scene): the owner supplies one pictu
 `pics/art.json` "battles", built by `sanguo-art` into `godot/data/art/battle/`; the battle screen paints it (washed) when
 present. For any other art a feature needs, don't wait for it: add the requirement to `CARD-DESIGN.md` (and a brief).
 
-**Every art requirement ships with a full image prompt.** Add the subject to the tables in `tools/art_prompts.py`
+**Every art requirement ships with a full image prompt, written in Chinese** (the templates in `tools/art_prompts.py` and
+every table entry you add are Chinese; old English entries get translated whenever you touch them). Add the subject to the tables in `tools/art_prompts.py`
 (portraits: name / appearance / armor & clothing / weapon; battles and story CGs: one scene line — composition and style
 are fixed templates so the set stays consistent; women are always written as adults) and run `python tools/art_prompts.py`
 to regenerate `pics/ART-PROMPTS.md`. Keep the prompt consistent with the brief in `CARD-DESIGN.md` §7 and the story text.
@@ -182,10 +184,18 @@ Adding a portrait, checklist:
   charge (wind-up announced a turn ahead), when: "half", once`. Make fights strong; make their cards modest.
 - **Relic 宝物** (`cards.json` relics): found during a chapter; all carry into the next chapter (`kept_relics`), but ones found in the current chapter reset on a restart; `rarity common/rare/curse, icon, desc, mods {...}, after_win`. Mods are
   summed by `Quests.mods(save)` and passed to `Battle.start(..., ambush, mods)`. New mod ⇒ read it in `battle.gd`.
-- **Quest** (`story.json` quests): squares `{x, y, type, label, next, text, portraits, cards, choose, battle, boss,
+  A story square can hand one over directly on arrival with `"relics": ["<id>"]` (same shape as `"cards"`; a
+  `choose` option can't do this — it only has `label/goto/record/card` — so route the option to a one-line event
+  square carrying the `relics` field instead, both branches rejoining the next common square).
+- **Quest** (`story.json` quests): squares `{x, y, type, label, next, text, portraits, cards, relics, choose, battle, boss,
   elite, ambush, event, lose_goto}`; types `event choose battle treasure recover recruit mystery`. Moves only go right,
   one row at a time (a test checks). `soldier_pool`, `recruit_pool`, `event_pool`, `shuffle` (groups that trade
   contents each run). A run = one attempt: losing restarts it (cards, choices, 难度 kept; 宝物, 险, layout reset).
+  A quest itself can carry `requires`/`unless` (checked against `save.flags` only, i.e. earlier *completed* chapters —
+  not this run's own records) to gate which route opens next; `current_quest()` walks `db.quests` in array order and
+  returns the first uncleared one whose `requires` holds and `unless` doesn't. Prefer `unless` over `requires` for a
+  "the other branch's" chapter (e.g. `taodong`'s `unless: 出生：冀州无极`) so a save that never made that choice — most
+  tests, old saves — still defaults into it, instead of needing every such save to positively declare the branch it's on.
 - **Event** (`story.json` events, for ？ squares; a square with `event` is fixed): `title, glyph, color, text,
   portraits, options [{label, effects, win}]` — effects `say, damage, heal, rest, poison (−⅓ HP), card, soldier,
   offer {from | generals + rates | soldiers}, upgrade (true = pick, "random"), refresh, relic, danger (险, run),
@@ -289,7 +299,9 @@ poison); 蔡夫人 is spared death but divorced by 刘表 on the spot, stripped 
 extra fights 汉水渡口·锦帆贼, 新野·宗贼 (周瑜 recalls 蒯越 killing 55 宗贼 leaders at a banquet — foreshadowing), 城防·荆州步卒; ？ events
 水镜先生 司马徽 (「好，好」; 「荆州的奇才都还没长大」 — only the hero thinks of 诸葛亮; he's a child in 192 and not in 荆州 yet), 岘山老农 庞德公, 沔南名士 黄承彦 (蔡瑁's brother-in-law:
 「别喝金杯里的酒」), 锦帆游侠 甘宁 (on his way to 刘表).
-第一章北方出生点 冀州·中山无极·甄府（张夫人收留，初平元年正月；squares live inside the `prologue` quest itself, a second branch off `era` at x ≥ 23 so the south branch's layout is untouched): 主角以现代商业手腕帮甄府清账、平粜、练护卫，甄府转亏为盈；常山义士赵云进真定县衙为雪灾灾民求粮，被袁绍督粮官郭图凌辱鞭打，刺史韩馥懦弱旁观；街角醉鬼郭嘉冷眼点破世道，主角出面借甄家三千石粮救常山，赵云、郭嘉就此结识主角；张夫人押粮赈灾，带着**十多岁**的甄宓（不是 5 岁——甄宓这时是半大的少女，主角待她像亲妹妹，干净的兄妹情，没有暧昧；她长大后会对主角生出爱慕，但那是后面章节的事，这一章绝不要写）同行；太行黑山贼李大目、黄巾渠帅张白骑、妖道玄机子（对标南线胡玉 / 何仪 / 唐周）伏击劫走甄宓；主角、赵云、郭嘉三人首次合作踏平黑山寨救回甄宓、灭三凶；开仓放粮，收常山铁骑 / 太行义勇为嫡系部曲（`jz_almsgiving`）；赵云教枪，走火入魔扎穿张夫人的狐裘（`jz_training`，主角从此改用枪，不再是南线的刀/盾）；围炉夜话看透郭图 / 韩馥 / 公孙瓒皆非明主，决意南下会盟（`jz_night`，cg `jz_fireside`）；张夫人取出甄宓亡父的旧鱼鳞甲——他当年领兵护商队，死在黑山贼手里，和这章的反派是一路货——给主角穿上，又赠貂裘，然后把账本一揣，骑马跟着一起南下（甄宓年纪小留在冀州，不是留守相送；告别那场戏在 `jz_end`，没单独出 CG，就是一句台词，别又拆格去凑一张）。主角性格和南线一致：遇到没名气的角色照样 `{lord}（内心）：……三国演义我不熟啊……`，逗比吐槽不断，还总爱调戏张夫人（被她一巴掌拍回去，没有暧昧，纯斗嘴）。**立绘**：`lord_north` 和南线的 `lord` 共用同一张卡（`id` 都是 `"lord"`），只是发型（束发，不是南线的寸头）和甲胄（河北风格旧甲，不是南线的青金色）不同——见上面「`id` vs `person`」的坑，改这条线的立绘逻辑前先读那条。这条线目前是独立结局（quest-level `ending`，暂定「北线 · 敬请期待」，回标题重开一周目），还不接南线第二章 `taodong`——以后要不要接、怎么接，是 owner 的事，先别猜。
+第一章北方出生点 冀州·中山无极·甄府（张夫人收留，初平元年正月；squares live inside the `prologue` quest itself, a second branch off `era` at x ≥ 23 so the south branch's layout is untouched): 主角以现代商业手腕帮甄府清账、平粜、练护卫，甄府转亏为盈；常山义士赵云进真定县衙为雪灾灾民求粮，被袁绍督粮官郭图凌辱鞭打，刺史韩馥懦弱旁观；街角醉鬼郭嘉冷眼点破世道，主角出面借甄家三千石粮救常山，赵云、郭嘉就此结识主角；张夫人押粮赈灾，带着**十多岁**的甄宓（不是 5 岁——甄宓这时是半大的少女，主角待她像亲妹妹，干净的兄妹情，没有暧昧；她长大后会对主角生出爱慕，但那是后面章节的事，这一章绝不要写）同行；太行黑山贼李大目、黄巾渠帅张白骑、妖道玄机子（对标南线胡玉 / 何仪 / 唐周）伏击劫走甄宓；主角、赵云、郭嘉三人首次合作踏平黑山寨救回甄宓、灭三凶；开仓放粮，收常山铁骑 / 太行义勇为嫡系部曲（`jz_almsgiving`）；赵云教枪，走火入魔扎穿张夫人的狐裘（`jz_training`，主角从此改用枪，不再是南线的刀/盾）；围炉夜话看透郭图 / 韩馥 / 公孙瓒皆非明主，决意南下会盟（`jz_night`，cg `jz_fireside`）；张夫人取出甄宓亡父的旧鱼鳞甲——他当年领兵护商队，死在黑山贼手里，和这章的反派是一路货——给主角穿上，又赠貂裘，然后把账本一揣，骑马跟着一起南下（甄宓年纪小留在冀州，不是留守相送；告别那场戏在 `jz_end`，没单独出 CG，就是一句台词，别又拆格去凑一张）。主角性格和南线一致：遇到没名气的角色照样 `{lord}（内心）：……三国演义我不熟啊……`，逗比吐槽不断，还总爱调戏张夫人（被她一巴掌拍回去，没有暧昧，纯斗嘴）。**立绘**：`lord_north` 和南线的 `lord` 共用同一张卡（`id` 都是 `"lord"`），只是发型（束发，不是南线的寸头）和甲胄（河北风格旧甲，不是南线的青金色）不同——见上面「`id` vs `person`」的坑，改这条线的立绘逻辑前先读那条。`jz_end` 不再是独立结局，直接接进第二章 `luoyang_n`（见下一段）。
+
+第二章北线 洛阳烟云（quest `luoyang_n`，紧跟在 `taodong` 后面插入，`requires: 出生：冀州无极`；`taodong` 则是 `unless: 出生：冀州无极`——两边都不用正面声明「南方出生」，没走过 `era` 选择的旧存档/测试默认落在南线，这点很重要，别改回两边都用 `requires` 正面声明，会把"没设过出生记录"的 save 导到两条线都进不去或进错线）：车队往酸枣送粮，古道上救下逃婚的吕玲绮（精英战 `ln_lvlingqi`，`record_win` 吕玲绮：救下，营地里入队）；中山甄记大旗赞助诸侯联军，诸侯宴上对袁绍的吐槽和南线一字不差（同一个人，同一个老板）；曹操借粮是个 `choose`，两个选项各 goto 一个一行小方块再合流到 `ln_zhen`，不是靠 choose 选项直接发宝物（choose 选项只认 `label/goto/record/card`，没有 `relic`）——「借」那格改用了 squares 的 `relics` 字段直接发《孟德新书》；汴水救曹操撞上徐荣（新敌人 `xurong_n`，数值比南线 `xurong` 强，因为这里是本章中段首领，南线同期只是普通战，重用 `dagu` 的战斗图）；虎牢关前劫粮营，吕布那一战赢了接 `ln_triple`（一个固定事件 + 三个宝箱的 shuffle 组，和南线 `taodong` 的 `triple`/`box1-3` 一个模式），输了接 `ln_sanying`（三英战吕布，北线视角，复用南线 CG `c2_sanying`）；车帘后牵手；黄河边看洛阳方向天烧红、联军散伙，回冀州收尾，记「北线：班师冀州」。这章才是真正的「北线 · 敬请期待」占位结局所在地（挪到了 `ln_end`）。截图走查用 `--demo=ln2`（任意 `--at=<square id>` 跳到那一格）。曹洪、吕玲绮立绘都已到位；`ln_lvlingqi`（她的战斗 CG）、`ln_langqi`（并州狼骑战斗图）、`ln_camp`/`ln_handhold`（两张剧情 CG）还缺。
 
 **Long-range story direction**: `docs/STORY.md` (南北双线 through 第十二章; 第十一章洛阳 is the fork: each line has one trap choice — south 收吕布 → 结局四 虎噬, north 信诸葛亮、交出帅印 → he poisons the hero that night and stages it as a drunken fall from the wall; the south just wins at 赤壁 (no body, no note — only an old guard muttering 「只有军师进过帐」) → 结局五 烛灭; done right, the ending depends on the *other* line's record in the save: 南线结局 赤壁 / 北线结局 官渡, or both right → 第十二章 天命归一). It is a direction only — the game is built one chapter at a time,
 the implemented chapter (`story.json`) wins, and the outline is synced afterwards. Don't build unbuilt chapters from it or change the game to match it unless asked.
