@@ -1055,7 +1055,7 @@
     },
     "taodong": {
       "src": "source/map/bg_taodong.jpg",
-      "license": "程序生成占位（tools/build_chapter2_map.py）"
+      "license": "用户提供"
     },
     "changan": {
       "src": "source/map/bg_changan.jpg",
