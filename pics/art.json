@@ -1357,6 +1357,10 @@
     "jz_guojia": {
       "src": "source/cg/jz_guojia.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "jz_boss": {
+      "src": "source/cg/jz_boss.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
