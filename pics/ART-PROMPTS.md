@@ -29,7 +29,7 @@
 18. `caisang` — 采桑女（成年女性，桑园采桑）（立绘）
 19. `e_yazhai` — 压寨夫人（剧情 CG，胭脂虎指着主角）（剧情 CG）
 20. `c1_village` — 南线·富春初遇孙策周瑜（剧情 CG）（剧情 CG）
-21. `jz_boss` — 北线·黑山破寨（剧情 CG）（剧情 CG）
+21. ~~`jz_boss` — 北线·黑山破寨（剧情 CG）~~（✅ 已完成）
 22. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
 23. `xiahoulan` — 夏侯兰（立绘）
 24. `zhangyan` — 张燕（立绘）
@@ -5381,9 +5381,16 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `luoyang_n`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：the Yellow River road to Hulao Pass, left to right: a frozen river crossing with a grain-cart convoy; an old road where a red-armored horsewoman fell from her horse in the snow; the allied lords' camp at Suanzao with a bright red sponsor banner among the tents; the Bian river with a defeated army's wreckage and a lone general's tent; the grim grey walls of Hulao Pass with watchfires; at the far right the Yellow River ford crowded with routed soldiers and abandoned boats under a sky red from distant Luoyang burning。
-构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
-画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
+横向游戏地图插画，手绘中国山水长卷（青绿山水/浅绛山水）：【黄河古道至虎牢关·行军大地图】
+- 地貌与场景流向（从左至右全景铺展）：
+  - 左侧：冰封黄河渡口，大雪覆盖的平原上，一支甄家运粮大车队缓慢行进；荒凉的积雪古道旁，一员红甲女骑（董白）坠马卧雪。
+  - 中段：酸枣十八路诸侯联军大营，密密麻麻的连绵营帐中高高飘扬着鲜明赤红的赞助商大旗；汴水河畔，溃败军阵的战车残骸与一顶孤悬的落魄名将营帐（曹操中伏）。
+  - 右侧：虎牢关险峻森严的灰石雄关，关楼上升腾着烽火与狼烟；最右侧是挤满西凉溃兵与废弃渡船的黄河残渡，天边被千里洛阳大火染成一片触目惊心的血红与烈焰浓烟。
+- 构图与排布：
+  - 规格：超宽全景（16:9横版 或 3200x1080 横向长卷），斜向高空俯瞰视角。
+  - 上 / 中 / 下三条大致水平的行进主路径保持舒朗明净、不堆砌繁杂近景障碍（供游戏节点和连线清晰排布），流云薄雾轻绕群山之间。
+- 画风：
+  - 与第一章地图底图风格完全一致：工笔墨线勾勒轮廓，宣纸质感，以淡绿、石青、赭石清雅晕染；无文字、无UI、无近景特写人物。
 ```
 
 ### `yuxi`
