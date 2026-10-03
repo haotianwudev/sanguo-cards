@@ -186,3 +186,4 @@
 | `cg:e_tangji` | source/cg/e_tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:jz_ambush` | source/cg/jz_ambush.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:jz_rescue` | source/cg/jz_rescue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:jz_end` | source/cg/jz_end.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

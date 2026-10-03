@@ -2351,24 +2351,6 @@ Style: Retro Japanese tactical anime RPG card illustration, Rance X art style in
 (When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
 ```
 
-### `jz_armor`
-
-```
-A horizontal story event illustration: a dim household hall: Lady Zhang holding out a worn but well-kept lamellar armor set with both arms, eyes reddening, young Zhen Mi biting her lip beside her, the hero receiving it with both hands.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
-### `jz_end`
-
-```
-A horizontal story event illustration: a snowy highway: the hero in dark lamellar armor and a white fur cloak holding a spear at the center, Zhao Yun in silver armor on a white horse to one side and Guo Jia sipping wine from a carriage on the other, a column of cavalry and new banners behind.
-Composition & Framing: Horizontal 16:9 aspect ratio, 1920x1080, characters in the upper two thirds, the bottom third less busy (dialogue text sits there). At most four named characters in focus; unnamed background people (soldiers, crowds) are fine.
-Style: Retro Japanese tactical anime RPG card illustration, Rance X art style inspiration, cel-shaded with crisp clean ink outlines, rich vibrant colors, visual-novel event CG, expressive faces, warm cinematic lighting; no text, no UI.
-(When the hero appears — the hero: a young man with short, modern-style black hair (unusual in the Han dynasty), wearing Sun Jian's old silver armor with tiger-engraved shoulder guards over a green tunic, a black cape trimmed with white fur (not a tiger pelt), a tiger-pelt lining showing under the armor skirt, carrying Sun Jian's huge old broad-bladed saber over his shoulder.)
-```
-
 ## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）
 
 ### `e_shuijing`

@@ -1337,6 +1337,10 @@
     "jz_rescue": {
       "src": "source/cg/jz_rescue.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "jz_end": {
+      "src": "source/cg/jz_end.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

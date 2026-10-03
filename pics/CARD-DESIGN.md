@@ -464,7 +464,7 @@
 4. 第二章地图底图（M1，现在是程序生成占位）
 5. ~~宝箱图 2 张~~（已到位，开宝箱动画在用）
 6. 第三章立绘（蔡文姬、袁术、纪灵、雷薄、陈兰、桥蕤）；其余招募池武将（见 `ART-NEEDS.md` 最后一节）
-7. **北线第一章 · 冀州风云**（新，剧情已写入 `prologue` quest 的 `era` 北方分支，x ≥ 23）：立绘 `lord_north`（北线主角自己的立绘——束发不是南线的寸头；甲胄是甄宓亡父留下的旧鱼鳞甲，河北风格，不是南线的青金色，`jz_end` 有赠甲一场戏；和南线主公共用卡但各自只认自己的立绘，见 `Kit.portrait_key`）`zhangfuren` `guojia` `zhaoyun` `zhenmi_young` `guotu` `hanfu` `lidamu` `zhangbaiqi` `xuanjizi` `heishan_bing`（第 7 节）；战斗 CG `heishan_wai` `heishan_tan` `heishan_zhai`（第 8 节）；剧情 CG `jz_wake` `jz_ledger` `jz_county` `jz_guojia` `jz_ambush`✅ `jz_rescue`✅ `jz_boss` `jz_crowd`（放粮跪谢）`jz_training`（赵云教枪，为凑这张把 `jz_night` 拆成了 `jz_training`+`jz_night`）`jz_fireside`（围炉夜话）`jz_armor`（赠甲，为凑这张把 `jz_end` 拆成了 `jz_armor`+`jz_end`）`jz_end`（南下，提示词已在 `ART-PROMPTS.md`，故事方格已经挂好 `cg` 字段，画完直接进 `pics/source/cg/` 就会被认出来）；优先级由 owner 决定
+7. **北线第一章 · 冀州风云**（新，剧情已写入 `prologue` quest 的 `era` 北方分支，x ≥ 23）：立绘 `lord_north`（北线主角自己的立绘——束发不是南线的寸头；甲胄是甄宓亡父留下的旧鱼鳞甲，河北风格，不是南线的青金色，`jz_end` 有赠甲一场戏；和南线主公共用卡但各自只认自己的立绘，见 `Kit.portrait_key`）`zhangfuren` `guojia` `zhaoyun` `zhenmi_young` `guotu` `hanfu` `lidamu` `zhangbaiqi` `xuanjizi` `heishan_bing`（第 7 节）；战斗 CG `heishan_wai` `heishan_tan` `heishan_zhai`（第 8 节）；剧情 CG `jz_wake` `jz_ledger` `jz_county` `jz_guojia` `jz_ambush`✅ `jz_rescue`✅ `jz_boss` `jz_crowd`（放粮跪谢）`jz_training`（赵云教枪，为凑这张把 `jz_night` 拆成了 `jz_training`+`jz_night`）`jz_fireside`（围炉夜话）`jz_end`✅（赠甲+南下合一格，张夫人把账本一揣跟着上路，提示词已在 `ART-PROMPTS.md`；赠甲这段没单独出 CG，就是一句台词）；优先级由 owner 决定
 
 已到位（画师 / Gemini 图）：第一章底图；主公、孙策、周瑜（含赤壁版）、孙坚、吴国太、左慈、华佗、于吉、胡玉、唐周、何仪、胭脂虎、董白、祖茂、程普、华雄、韩当、黄盖、李傕、郭汜、李儒、张飞、唐姬；飞熊军、西凉铁骑；江东水贼、南下黄巾、于吉信徒、白额虎、野猪、山贼喽啰、官军刀兵（盾牌待重画）、丹阳兵、长沙刀兵、黄巾女医、宫女、西凉女亲兵；第一章剧情 CG 8 张全齐 + `i1_sewing`；第一章战斗 CG 12 张全齐；宝箱图 2 张。
 **要重画**：`zhangning` 张宁改成医仙形象（见第 7 节；旧图是黄袍、九节杖、符纸的圣女，先凑合用着），提示词在 `ART-PROMPTS.md`。
