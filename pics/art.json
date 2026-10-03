@@ -1353,6 +1353,10 @@
     "jz_county": {
       "src": "source/cg/jz_county.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "jz_guojia": {
+      "src": "source/cg/jz_guojia.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

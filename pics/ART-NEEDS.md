@@ -110,7 +110,7 @@
 | ✅ 已有 | `jz_wake` | 甄府 |
 | ✅ 已有 | `jz_ledger` | 账房 |
 | ✅ 已有 | `jz_county` | 县衙 |
-| ⬜ 缺 | `jz_guojia` | 街头 |
+| ✅ 已有 | `jz_guojia` | 街头 |
 | ✅ 已有 | `jz_ambush` | 峡谷伏击 |
 | ✅ 已有 | `jz_rescue` | 祭坛 |
 | ⬜ 缺 | `jz_boss` | 黑山寨 |
