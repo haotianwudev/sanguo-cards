@@ -1127,7 +1127,7 @@ MAPS = {
                 "grey winter sky; an open snowy road through farmland with a lone wandering old Taoist glimpsed at the roadside; a "
                 "narrowing mountain gorge climbing toward a firelit skirmish; at the far right the bandits' snow-wrapped cliffside "
                 "stronghold on a mountain, smoke rising from its gate, with a path turning back south at its foot",
-    "luoyang_n": "the Yellow River road to Hulao Pass, left to right: a frozen river crossing with a grain-cart convoy; an old road where a red-armored horsewoman fell from her horse in the snow; the allied lords' camp at Suanzao with a bright red sponsor banner among the tents; the Bian river with a defeated army's wreckage and a lone general's tent; the grim grey walls of Hulao Pass with watchfires; at the far right the Yellow River ford crowded with routed soldiers and abandoned boats under a sky red from distant Luoyang burning",
+    "luoyang_n": "【需重画：地图已拉长到 38 列，旧底图是按 33 列画的】黄河古道到虎牢关再退回黄河渡口，自左向右依次：①左端（第 0–5 列）结冰的黄河古渡，粮车队，雪地里摔下马的红衣女将与她的营地；②（第 6–12 列）中山甄记的商旗、酸枣诸侯营里一面醒目的红色赞助旗，曹操借粮的帅帐，汴水边；③（第 13–19 列）西凉伏兵出没的林间小径，汴水败军的残旗和孤零零的将军帐，酸枣大营的宝箱与篝火；④（第 20–28 列）虎牢关灰暗的城墙与点点烽火，关前夜袭的火光，三英战吕布留下的一片烟尘，沿途散落的宝箱；⑤（第 29–34 列）洛阳方向天际被大火烧红，一条逆行的行军路，难民与星空下的路边；⑥右端（第 35–37 列）逃兵挤满的黄河渡口，丢弃的小船，岸边险路，渡口对岸是冀州方向。整体冷灰与火红对比，冬日雪气，俯视地图构图，中间一条主路，上下各留一条岔路位置（第 7、11、14、26、27、28、35 列有上/下岔点）",
     "yuxi": "the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
     "shouluoyang": "ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an",
     "changan": "Chang'an in winter, left to right: the grand city gate; Dong Zhuo's lavish mansion with a courtyard duel ring; the palace with a rockery garden; a scholar's modest house; the Minister's mansion; a lotus pond with the Phoenix Pavilion; at the far right the chancellor's mansion hung with red wedding lanterns",
@@ -1731,6 +1731,7 @@ def main() -> None:
            "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
            ]
     maps_done = {k for k, v in art.get("maps", {}).items() if "生成" not in v.get("license", "")}
+    maps_done -= {"luoyang_n"}  # 二章拉长到 38 列，旧底图要重画；重画交付后删掉这一行
     relics_done = {p.stem for p in (ROOT / "godot" / "data" / "art" / "relics").glob("*.png")}
     ui_done = {k for k in CHESTS if (ROOT / "godot" / "data" / "art" / "ui" / f"{k}.png").exists()}
     delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done,
