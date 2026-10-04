@@ -296,7 +296,7 @@
 |---|---|---|
 | ✅ 已有 | `c2_ln_meet` | 夜奔的红衣姑娘 |
 | ✅ 已有 | `ln_camp` | 半个闺女 |
-| ⬜ 缺 | `c2_ln_sponsor` | 中山甄记 |
+| ✅ 已有 | `c2_ln_sponsor` | 中山甄记 |
 | ⬜ 缺 | `c2_ln_caocao` | 曹操借粮 |
 | ⬜ 缺 | `c2_ln_bianshui` | 救曹操 |
 | ✅ 已有 | `ln_handhold` | 车帘后 |

@@ -212,4 +212,5 @@
 | `cg:ln_handhold` | source/cg/ln_handhold.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_lingqi_oath` | source/cg/c2_lingqi_oath.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_ln_meet` | source/cg/c2_ln_meet.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_ln_sponsor` | source/cg/c2_ln_sponsor.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_era` | source/cg/c1_era.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
