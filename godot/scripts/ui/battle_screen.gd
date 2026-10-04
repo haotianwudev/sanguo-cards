@@ -24,6 +24,7 @@ var _combo_label: Label
 var _log: RichTextLabel
 var _cards: Array = []  # CardView per leader
 var _skill_popup: Control  # open skill-picker for whichever leader was last tapped, or null
+var _skill_popup_at := 0  # msec it opened: the finger-lift from the tap that opened it must not close it
 var _defend: Button
 var _retreat: Button
 var _end: Button
@@ -345,7 +346,9 @@ func _open_skills(i: int) -> void:
 	dim.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
 	dim.add_theme_stylebox_override("hover", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
 	dim.add_theme_stylebox_override("pressed", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
-	dim.pressed.connect(_close_skill_popup)
+	dim.button_down.connect(func():  # a fresh touch-down only: the lift from the tap that opened it must not close it
+		if Time.get_ticks_msec() - _skill_popup_at > 350:
+			_close_skill_popup())
 	overlay.add_child(dim)
 	var card_x: float = _cards[i].global_position.x
 	var card_top: float = _cards[i].global_position.y
@@ -372,6 +375,7 @@ func _open_skills(i: int) -> void:
 	add_child(overlay)
 	panel.position = Vector2(clampf(card_x, 10, 1280 - 280), clampf(card_top - 10, 10, 720) - panel.size.y if card_top > 300 else card_top + _cards[i].size.y + 10)
 	_skill_popup = overlay
+	_skill_popup_at = Time.get_ticks_msec()
 	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
 
 
