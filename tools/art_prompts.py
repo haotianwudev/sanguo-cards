@@ -991,6 +991,7 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c1_era": "3 a.m. in a cramped modern apartment, lit only by a monitor: a worn-out 30-year-old office worker with short buzz-cut hair, loosened tie, cold coffee cups and overtime paperwork around him, leaning in toward the screen; on the monitor a game asks him to pick a birthplace, split into two glowing panels — on the left a warm misty Jiangnan river town at dusk with a graceful noblewoman's silhouette on the riverbank, on the right a snowstorm over a northern merchant caravan with a red banner; his face lit half warm, half cold by the two panels; no readable text on the screen",
     "c5_yuexia": "a moonlit garden behind the Minister's mansion, a round moon gate: Diaochan (adult, of great beauty) finishing a silent dance half a step from the hero, long sleeves still drifting in the night wind, an empty wine cup on the stone steps; her smile teasing and unreadable; silver-blue moonlight",
     "c4_mangshan": "dawn on Mount Mang north of Luoyang, mist below: Dong Bai (adult, silver ponytail, purple fur-trimmed riding armor) on a chestnut horse glancing back with red ears after a quick kiss, galloping downhill; the hero on his horse behind her touching his cheek, stunned; the grey city far below in the sunrise",
     "c5_chuxi": "New Year's Eve on the highest roof of the chancellor's mansion in Chang'an: Dong Bai (adult) asleep on the hero's shoulder with half a burnt flatbread in her hand, the hero sitting still and not daring to look down; below, the city glowing with bonfires of crackling bamboo, snow on the tiles",
@@ -1266,6 +1267,7 @@ NEXT = [
     ("cg", "jz_guojia", "北线·街头结识（剧情 CG）"),
     ("cg", "jz_boss", "北线·黑山破寨（剧情 CG）"),
 
+    ("cg", "c1_era", "开场·凌晨三点选出生点（剧情 CG，南北线共用的第一张）"),
     # P0 · 北线主线（其他）：
     ("map", "prologue_north", "第一章北线·冀州风云地图底图"),
     ("map", "luoyang_n", "第二章·洛阳烟云地图底图"),
