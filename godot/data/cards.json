@@ -199,6 +199,11 @@
     "mengjiang": {"name": "猛将", "cost": 3, "effects": [{"type": "attack", "power": 4.8}]}
   },
   "cards": {
+    "jiangqiao": {"name": "姜巧", "type": "hero", "hp": 350, "at": 140, "desc": "原姜家寨大当家，精通暗器与陷阱。", "tags": ["北线", "远程"]},
+    "zhenghao": {"name": "郑好", "type": "hero", "hp": 400, "at": 180, "desc": "原郑家寨大当家，刀法泼辣狂放。", "tags": ["北线", "近战"]},
+    "beihai_tuntian": {"name": "北海屯田兵", "type": "soldier", "cost": 1, "hp": 250, "at": 60, "desc": "青州降卒编成的屯田兵，耐力极好。"},
+    "jiang_jiguanshou": {"name": "姜家机关手", "type": "soldier", "cost": 2, "hp": 150, "at": 100, "desc": "姜巧的手下，擅长远程暗器。"},
+    "zheng_daoshou": {"name": "郑家刀手", "type": "soldier", "cost": 2, "hp": 200, "at": 120, "desc": "郑好的亲卫，作战不要命。"},
     "cav_n": {"weight": 3, "name": "骑兵队", "rarity": "N", "troop": "cavalry"},
     "spear_n": {"weight": 3, "name": "枪兵队", "rarity": "N", "troop": "spear"},
     "archer_n": {"weight": 3, "name": "弓兵队", "rarity": "N", "troop": "archer"},
@@ -371,6 +376,9 @@
     "baima_yicong": {"name": "白马义从", "rarity": "R", "troop": "cavalry", "bonus": {"hp": 25, "at": 12}, "weight": 2, "scope": "north"}
   },
   "enemies": {
+    "guanhai": {"name": "管亥", "portrait": "guanhai", "hp": 20000, "at": 400, "actions": 2, "moves": [{"name": "狂沙斩", "power": 1.2, "weight": 4}, {"name": "黄天当立", "power": 1.8, "weight": 1}]},
+    "jiangqiao": {"name": "姜巧", "portrait": "jiangqiao", "hp": 12000, "at": 280, "actions": 3, "moves": [{"name": "连弩", "power": 0.8, "weight": 4}, {"name": "毒蒺藜", "power": 0.5, "weight": 2, "poison": 0.3}]},
+    "zhenghao": {"name": "郑好", "portrait": "zhenghao", "hp": 14000, "at": 320, "actions": 2, "moves": [{"name": "厚背大刀", "power": 1.2, "weight": 4}, {"name": "压寨劈砍", "power": 1.5, "weight": 2, "pierce": true}]},
     "huangjin_remnant": {"name": "黄巾余孽", "portrait": "huangjin_nanxia", "hp": 4200, "at": 200, "actions": 2, "magic_resist": 0.2, "moves": [{"name": "黄天当立", "power": 1.0, "weight": 3}, {"name": "符水", "power": 0, "weight": 1, "heal": 0.08}, {"name": "妖言", "power": 0.5, "weight": 1, "confuse": 0.5}], "card": "huangjin_nanxia"},
     "guanjun": {"name": "官军", "portrait": "inf_n", "hp": 4000, "at": 210, "actions": 2, "moves": [{"name": "刀盾", "power": 1.0, "weight": 3}, {"name": "弓弩齐发", "power": 1.2, "weight": 1}, {"name": "军令如山", "power": 0, "weight": 1, "rage": 0.2}], "card": "inf_n"},
     "shanzei_band": {"name": "山贼", "portrait": "shanzei_bing", "hp": 3800, "at": 190, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.08}], "card": "shanzei_bing"},
@@ -469,6 +477,10 @@
     "jizhou_nushou": {"name": "冀州强弩", "portrait": "inf_n", "hp": 4800, "at": 200, "actions": 2, "moves": [{"name": "齐射", "power": 1.0, "weight": 3}, {"name": "火箭", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "inf_n"}
   },
   "scenarios": {
+    "bh_guanhai": {"name": "北海解围", "turn_limit": 15, "enemy": "guanhai"},
+    "bh_lubu": {"name": "太行山口·吕布", "turn_limit": 8, "enemy": "lvbu_hulao"},
+    "bh_jiangqiao": {"name": "姜家寨", "turn_limit": 10, "enemy": "jiangqiao"},
+    "bh_zhenghao": {"name": "郑家寨", "turn_limit": 10, "enemy": "zhenghao"},
     "c4_lijue_test": {"name": "拦路迎亲", "turn_limit": 6, "enemy": "lijue"},
     "huangjin_remnant": {"name": "黄巾余孽", "turn_limit": 6, "enemy": "huangjin_remnant"},
     "guanjun": {"name": "官军", "turn_limit": 6, "enemy": "guanjun"},
