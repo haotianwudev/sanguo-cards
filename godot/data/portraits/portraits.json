@@ -113,5 +113,6 @@
   "heishan_bing": {"file": "heishan_bing.jpg", "face": [0.52, 0.22], "head": 0.22},
   "xiahoulan": {"file": "xiahoulan.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhangyan": {"file": "zhangyan.jpg", "face": [0.56, 0.15], "head": 0.2},
-  "zhenmi": {"file": "zhenmi.jpg", "face": [0.5, 0.25], "head": 0.25}
+  "zhenmi": {"file": "zhenmi.jpg", "face": [0.5, 0.25], "head": 0.25},
+  "mizhen": {"file": "mizhen.jpg", "face": [0.5, 0.25], "head": 0.26}
 }
