@@ -1089,18 +1089,11 @@ CGS = {
 # They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
 # chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
 MAPS = {
-    "prologue": "two alternate starting routes side by side on one long scroll, split exactly in half (the player picks one at the "
-                "very start, never both — each half must read as a complete journey on its own). Left half (0-50%, warm green "
-                "Jiangnan river country): at 0-8% the river town of Fuchun with fishing boats; at 8-13% a wooded hill with wild boars; "
-                "at 13-22% a bamboo-palisaded river pirate fort with a gate (the first stronghold); at 22-32% an army camp with "
-                "cookfires and a recruitment ground; at 32-39% reed marshes, a small river island, and a second, larger pirate "
-                "stronghold glimpsed further off; at 39-48% quiet riverbank country where the road bends toward distant misty "
-                "mountains. A band of thick mist and a mountain ridge sits right at the 48-52% seam, marking the two realities apart. "
-                "Right half (50-100%, winter Hebei, cold pale palette): at 50-58% a small stone-walled trading town under falling "
-                "snow (the Zhen family's); at 58-65% a larger walled city with a government hall; at 65-74% an open snowy road "
-                "through farmland with a lone wandering old Taoist glimpsed at the roadside; at 74-87% a narrowing mountain gorge "
-                "climbing toward a firelit skirmish; at 87-100% the far right, the bandits' snow-wrapped cliffside stronghold on a "
-                "mountain, smoke rising from its gate, with the road finally turning back south at its foot",
+    "prologue_north": "winter Hebei, the road from the Zhen family's trading town to the Black Mountain bandit lair, left to "
+                "right: a small stone-walled trading town under falling snow; a larger walled city with a government hall under a "
+                "grey winter sky; an open snowy road through farmland with a lone wandering old Taoist glimpsed at the roadside; a "
+                "narrowing mountain gorge climbing toward a firelit skirmish; at the far right the bandits' snow-wrapped cliffside "
+                "stronghold on a mountain, smoke rising from its gate, with a path turning back south at its foot",
     "luoyang_n": "the Yellow River road to Hulao Pass, left to right: a frozen river crossing with a grain-cart convoy; an old road where a red-armored horsewoman fell from her horse in the snow; the allied lords' camp at Suanzao with a bright red sponsor banner among the tents; the Bian river with a defeated army's wreckage and a lone general's tent; the grim grey walls of Hulao Pass with watchfires; at the far right the Yellow River ford crowded with routed soldiers and abandoned boats under a sky red from distant Luoyang burning",
     "yuxi": "the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
     "shouluoyang": "ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an",
@@ -1267,6 +1260,7 @@ NEXT = [
     ("cg", "jz_boss", "北线·黑山破寨（剧情 CG）"),
 
     # P0 · 北线主线（其他）：
+    ("map", "prologue_north", "第一章北线·冀州风云地图底图"),
     ("map", "luoyang_n", "第二章·洛阳烟云地图底图"),
     ("portrait", "zhaoyun", "赵云（换掉占位）"),
     ("portrait", "guojia", "郭嘉"),

@@ -218,9 +218,12 @@ def write_needs(pics: Path = PICS) -> None:
             if ev and ev.get("cg") and ev["cg"] not in seen_cg:
                 seen_cg.add(ev["cg"])
                 ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev['title']}」 |")
-        m = art_cfg.get("maps", {}).get(q["id"])
-        map_st = "⬜ 缺" if not m else ("🟡 程序占位" if "生成" in m.get("license", "") else "✅ 已有")
-        return (["", f"## {q['title']}", "", f"地图底图 `{q['id']}`：{map_st}", "", "| 状态 | key | 用在 |", "|---|---|---|"]
+        def map_status(key: str) -> str:
+            m = art_cfg.get("maps", {}).get(key)
+            return "⬜ 缺" if not m else ("🟡 程序占位" if "生成" in m.get("license", "") else "✅ 已有")
+        map_keys = [q["id"]] + [o["map"] for o in q.get("map_overrides", []) if o.get("map")]
+        map_line = "、".join(f"`{k}`：{map_status(k)}" for k in map_keys)
+        return (["", f"## {q['title']}", "", f"地图底图 {map_line}", "", "| 状态 | key | 用在 |", "|---|---|---|"]
                 + rows([("lord", "主公 / 穿越者")] + people)
                 + ["", "敌人（战斗界面上方；和它的卡共用一张图）", "", "| 状态 | key | 敌人 |", "|---|---|---|"] + rows(enemies)
                 + ["", "能拿到的卡", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(loot)

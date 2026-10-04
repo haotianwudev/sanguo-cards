@@ -108,11 +108,12 @@ func _load(dir: String) -> void:
 			"subtitle": q.get("subtitle", ""), "ending": q.get("ending", {}), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
 			"event_pool": q.get("event_pool", []), "event_scope": q.get("event_scope", "south"), "shuffle": q.get("shuffle", []),
 				"pool_overrides": q.get("pool_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
-					"unless": o.get("unless", ""), "soldier_pool": o.get("soldier_pool", []), "soldier_scope": o.get("soldier_scope", ""),
-					"recruit_pool": o.get("recruit_pool", []), "event_pool": o.get("event_pool", []),
-					"event_scope": o.get("event_scope", "")}),
+					"unless": o.get("unless", ""), "soldier_scope": o.get("soldier_scope", ""),
+					"recruit_pool": o.get("recruit_pool", []), "event_scope": o.get("event_scope", "")}),
 				"title_overrides": q.get("title_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
-					"unless": o.get("unless", ""), "title": o.get("title", "")})})
+					"unless": o.get("unless", ""), "title": o.get("title", "")}),
+				"map_overrides": q.get("map_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
+					"unless": o.get("unless", ""), "map": o.get("map", "")})})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),

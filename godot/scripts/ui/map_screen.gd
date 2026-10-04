@@ -171,8 +171,8 @@ func _rebuild_map() -> void:
 		max_x = maxi(max_x, s["x"])
 	_layer.custom_minimum_size = Vector2(180 + max_x * COL_W + 60, 360)
 	_lines.size = _layer.custom_minimum_size
-	# chapter background: data/art/map/<quest id>.jpg (built by `sanguo-art` from pics/art.json "maps")
-	var bg_path: String = "res://data/art/map/%s.jpg" % q["id"]
+	# chapter background: data/art/map/<quest id or map_overrides key>.jpg (built by `sanguo-art` from pics/art.json "maps")
+	var bg_path: String = "res://data/art/map/%s.jpg" % Quests.map_key(q, Game.save)
 	_bg.texture = load(bg_path) if ResourceLoader.exists(bg_path) else null
 	_bg.size = _layer.custom_minimum_size
 	for s in q["squares"].values():

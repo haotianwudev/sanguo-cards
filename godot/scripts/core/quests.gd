@@ -298,6 +298,17 @@ static func title(q: Dictionary, save: SaveData) -> String:
 	return q["title"]
 
 
+static func map_key(q: Dictionary, save: SaveData) -> String:
+	## the map background file is normally data/art/map/<quest id>.jpg; map_overrides (same shape as
+	## title_overrides) swaps in a different file key for a route that needs its own separate map image
+	## instead of sharing the other route's — e.g. prologue's south/north halves are different enough
+	## (river town vs. snowy mountains) that one stretched image can't cover both well.
+	for o in q["map_overrides"]:
+		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+			return o["map"]
+	return q["id"]
+
+
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## Cards shown on the current recruit (generals) or treasure (soldiers) square — rolled once, then kept.
 	q = view(q, save)
