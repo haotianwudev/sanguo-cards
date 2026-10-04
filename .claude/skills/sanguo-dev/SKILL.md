@@ -205,7 +205,13 @@ Adding a portrait, checklist:
   Same idea for the displayed chapter name:
   `title_overrides` (`[{requires, unless, title}]`, `Quests.title(q, save)`) swaps `q["title"]` for a route that shouldn't keep
   showing the other route's chapter name on the map header/recap/toast — `prologue` has one so the north route shows "第一章 ·
-  冀州风云" instead of the south-only "第一章 · 富春" it used to show throughout.
+  冀州风云" instead of the south-only "第一章 · 富春" it used to show throughout. And for the map background itself:
+  `map_overrides` (`[{requires, unless, map}]`, `Quests.map_key(q, save)`, read by `map_screen.gd`'s `res://data/art/map/<key>.jpg`
+  load instead of a bare `q["id"]`) swaps in a whole separate image file — `prologue` south keeps its own `prologue.jpg` untouched,
+  the north override points at `prologue_north` (a map that doesn't exist yet, so north currently shows no background — that's
+  `ResourceLoader.exists()` failing gracefully, not a bug). Tried a single stretched south+north scroll first; don't — the user
+  wants two separate map images for a shared quest, one per route, matching how chapter 2's `taodong.jpg`/`luoyang_n.jpg` already
+  are two separate files (they're separate *quests* so that was free; `prologue`'s two routes are one quest, hence this field).
 - **Event** (`story.json` events, for ？ squares; a square with `event` is fixed): `title, glyph, color, text,
   portraits, options [{label, effects, win}]` — effects `say, damage, heal, rest, poison (−⅓ HP), card, soldier,
   offer {from | generals + rates | soldiers}, upgrade (true = pick, "random"), refresh, relic, danger (险, run),

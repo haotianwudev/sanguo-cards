@@ -467,18 +467,13 @@
 4. 第二章地图底图（M1，现在是程序生成占位）
 5. ~~宝箱图 2 张~~（已到位，开宝箱动画在用）
 6. 第三章立绘（蔡文姬、袁术、纪灵、雷薄、陈兰、桥蕤）；其余招募池武将（见 `ART-NEEDS.md` 最后一节）
-7. **北线第一章 · 冀州风云**（新，剧情已写入 `prologue` quest 的 `era` 北方分支，x ≥ 23）：立绘 `lord_north`（北线主角自己的立绘——束发不是南线的寸头；甲胄是甄宓亡父留下的旧鱼鳞甲，河北风格，不是南线的青金色，`jz_end` 有赠甲一场戏；和南线主公共用卡但各自只认自己的立绘，见 `Kit.portrait_key`）`zhangfuren` `guojia` `zhaoyun` `zhenmi_young` `guotu` `hanfu` `lidamu` `zhangbaiqi` `xuanjizi` `heishan_bing`（第 7 节）；战斗 CG `heishan_wai` `heishan_tan` `heishan_zhai`（第 8 节）；剧情 CG 对标南线砍到 8 张，按「每个角色第一次出场都要有 CG」保留：`jz_wake`✅（张夫人）`jz_ledger`（甄宓）`jz_county`（赵云）`jz_guojia`（郭嘉）`jz_ambush`✅ `jz_rescue`✅（黑山寨三部曲）`jz_boss`、`jz_end`✅（南下）——`jz_crowd`（放粮）`jz_training`（教枪）`jz_fireside`（夜话）三张已经砍掉，不用再画；⚠️**地图底图 `prologue.jpg` 需要重画，需求已经重新设计（这次特意按格子的真实 x 坐标比例标了位置，吸取 `luoyang_n` 酸枣大营画偏的教训）**：现有图（`用户提供`，已标记完成）只画了富春/长江一带的江南山水，这一章现在左右两半分别延伸到南线（x0-22）和北线（x23-46，冀州无极→邺城→太行黑山寨，雪景），同一张图被横向拉伸铺满两种完全不同的地理和季节——北线部分的格子背景目前是南方夏景河谷，视觉上对不上。南北两段格子数几乎相等（23 格 / 24 格），所以画面正好对半分；`tools/art_prompts.py` 的 `MAPS["prologue"]` 已经写了新的提示词（因为这张图被标记「已完成」，自动生成的 `ART-PROMPTS.md` 不会把它列出来，得去源码里看），完整提示词如下，重画时直接用：
+7. **北线第一章 · 冀州风云**（新，剧情已写入 `prologue` quest 的 `era` 北方分支，x ≥ 23）：立绘 `lord_north`（北线主角自己的立绘——束发不是南线的寸头；甲胄是甄宓亡父留下的旧鱼鳞甲，河北风格，不是南线的青金色，`jz_end` 有赠甲一场戏；和南线主公共用卡但各自只认自己的立绘，见 `Kit.portrait_key`）`zhangfuren` `guojia` `zhaoyun` `zhenmi_young` `guotu` `hanfu` `lidamu` `zhangbaiqi` `xuanjizi` `heishan_bing`（第 7 节）；战斗 CG `heishan_wai` `heishan_tan` `heishan_zhai`（第 8 节）；剧情 CG 对标南线砍到 8 张，按「每个角色第一次出场都要有 CG」保留：`jz_wake`✅（张夫人）`jz_ledger`（甄宓）`jz_county`（赵云）`jz_guojia`（郭嘉）`jz_ambush`✅ `jz_rescue`✅（黑山寨三部曲）`jz_boss`、`jz_end`✅（南下）——`jz_crowd`（放粮）`jz_training`（教枪）`jz_fireside`（夜话）三张已经砍掉，不用再画；**地图底图：南北各一张，分开的**（一开始想把南北拼成一张横向拉伸的长卷，用户明确说不对——改成两张独立的图，和第二章 `taodong.jpg`/`luoyang_n.jpg` 一个模式）：`prologue.jpg`✅ 南线本来就是独立的富春江南山水，完全不用动；新增 `prologue_north`（⬜缺，走 `map_overrides` 机制——`Quests.map_key(q, save)` 按出生点在 `prologue`/`prologue_north` 两个文件之间切换，见 `SKILL.md`），提示词：
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：两条互斥的开局路线并排画在同一幅长卷上，正好对半分（玩家一开始二选一，不会同时经历两边，每一半都要能单独读成一段完整的旅程）。
-左半段（画面 0-50%，暖色调江南水乡）：0-8% 是富春渔镇，岸边渔船；8-13% 一片有野猪出没的树林山坡；13-22% 一座竹篱围起、带寨门的江边水贼营寨（第一座贼寨）；22-32% 一处带篝火的征兵营地；32-39% 芦苇荡、一座江心小岛，远处隐约可见第二座更大的水贼营寨；39-48% 安静的江岸，小路渐渐转向远处雾气缭绕的山脉。
-48-52% 是分界：一片浓雾和一道山梁把两段现实隔开。
-右半段（画面 50-100%，清冷河北冬景）：50-58% 飘雪中一座石砌小城（甄家商号）；58-65% 一座更大的带官署大堂的城池（邺城）；65-74% 雪原上的开阔官道，路边远远能看见一个游荡的白发老道的身影（彩蛋，不用画清楚）；74-87% 一道渐渐收窄、往上爬升的太行山峡谷，尽头隐约有战斗的火光；87-100% 画面最右端，山崖上的黑山寨，寨门口炊烟和白雪，山脚下的小路开始折向南方。
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：winter Hebei, the road from the Zhen family's trading town to the Black Mountain bandit lair, left to right: a small stone-walled trading town under falling snow; a larger walled city with a government hall under a grey winter sky; an open snowy road through farmland with a lone wandering old Taoist glimpsed at the roadside; a narrowing mountain gorge climbing toward a firelit skirmish; at the far right the bandits' snow-wrapped cliffside stronghold on a mountain, smoke rising from its gate, with a path turning back south at its foot。
 构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
-画风：墨线勾勒，宣纸淡彩——左半段延续现有江南段的淡绿赭石，右半段改用偏冷的青灰与大片留白表现雪色；不要文字、不要 UI、不要近景人物。
+画风：与第一章南线地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩，整体改用偏冷的青灰与大片留白表现雪色；不要文字、不要 UI、不要近景人物。
 ```
-
-（`map_prompt()` 通用模板那句「画风与第一章地图一致」对这张图本身是循环引用，上面这版已经手动改写成直接描述画风，不要照抄模板原文）
 8. **北线第二章 · 洛阳烟云**（新，quest `luoyang_n`，紧接 `taodong` 之后，`--demo=ln2` 截图走查）：立绘 `caohong` `lvlingqi`✅（曹洪待画，吕玲绮已到位）；战斗 CG `ln_lvlingqi`（新，黄河古道·吕玲绮）`ln_langqi`（新，劫营·并州狼骑）——其余战斗全复用南线已到位的图（`xiliang_youqi` `xiliang_scout` `guanjun` `dagu` `feixiong` `hulao_ch1`，见各 scenario 的 `art` 字段）；剧情 CG `ln_camp`（马车正骨认半个闺女）`ln_handhold`（车帘后牵手）；三英战吕布直接复用南线 `c2_sanying`；**地图底图 `luoyang_n`✅**（已交付：雪山栈道上吕玲绮坠马→牛车队渡河→红旗酸枣大营→汴水残营→虎牢关城墙烽火→右上角洛阳方向的火光，六幕的地理顺序都对得上；⚠️小瑕疵：红旗酸枣大营画在整张图约 50-60% 的位置，视觉上偏右，实际对应的 `ln_banner`/`ln_feast`/`ln_caocao` 只排在全程第 8-11 格（约 26-32%）——顺序没错，就是玩家真正走到「见诸侯、借粮」时背景还没卷到大营那块，打完汴水才看到。owner 确认过先放着不用改）；优先级由 owner 决定
 
 已到位（画师 / Gemini 图）：第一章底图；主公、孙策、周瑜（含赤壁版）、孙坚、吴国太、左慈、华佗、于吉、胡玉、唐周、何仪、胭脂虎、董白、祖茂、程普、华雄、韩当、黄盖、李傕、郭汜、李儒、张飞、唐姬；飞熊军、西凉铁骑；江东水贼、南下黄巾、于吉信徒、白额虎、野猪、山贼喽啰、官军刀兵（盾牌待重画）、丹阳兵、长沙刀兵、黄巾女医、宫女、西凉女亲兵；第一章剧情 CG 8 张全齐 + `i1_sewing`；第一章战斗 CG 12 张全齐；宝箱图 2 张。
