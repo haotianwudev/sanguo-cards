@@ -915,6 +915,7 @@ PORTRAITS = {
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
     "jz_county_fight": "邺城州衙门前的雪街：几名衙役抡着水火棍围上来，背景是州衙的朱漆大门和瑟缩的灾民，雪地上已经洒了几滴血",
+    "jz_road_bandits": "太行官道旁的雪林：几个衣衫混杂的黑山散兵从树后窜出拦路打劫，背景是积雪的官道和两侧稀疏的冬林",
     "ln_lvlingqi": "黄河南岸古道夜色：吕玲绮一身红黑铠甲，战马打滑前蹄跪地，她单手举着小号方天画戟，满脸泪痕，眼神凶狠又无助",
     "c3_mitan": "a tavern back alley at night: Yuan agents in plain clothes drawing short knives from their sleeves",
     "c3_qibing": "a rainy night road: Yuan cavalry with spears charging out of the dark, rain slanting in the torchlight",
@@ -1275,6 +1276,7 @@ NEXT = [
     ("portrait", "zhangbaiqi", "张白骑"),
     ("portrait", "yayi", "衙役（州衙拔刀相助一战的敌人）"),
     ("battle", "jz_county_fight", "州衙·拔刀相助 战斗背景"),
+    ("battle", "jz_road_bandits", "官道·黑山散兵 战斗背景（选路分支，走官道那一边）"),
     ("portrait", "guotu", "郭图"),
     ("portrait", "hanfu", "韩馥"),
     ("portrait", "heishan_bing", "黑山游骑（兵卡）"),

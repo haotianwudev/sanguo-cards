@@ -93,6 +93,7 @@
 | ✅ 已有 | `heishan_tan` | 祭坛 · 玄机子（妖道玄机子） |
 | ✅ 已有 | `heishan_zhai` | 黑山寨 · 李大目（「黑山凶寇」李大目） |
 | ⬜ 缺 | `jz_county_fight` | 州衙 · 拔刀相助（衙役） |
+| ⬜ 缺 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 

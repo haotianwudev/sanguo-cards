@@ -442,6 +442,7 @@
     "jing_sibing": {"name": "荆州步卒", "portrait": "jingzhou_bu", "hp": 14000, "at": 370, "actions": 2, "moves": [{"name": "长刀", "power": 1.0, "weight": 3}, {"name": "盾阵", "power": 0, "weight": 1, "heal": 0.05}, {"name": "围攻", "power": 1.3, "weight": 1}, {"name": "只认蔡都督", "power": 0, "weight": 1, "rage": 0.15, "once": true}], "card": "jingzhou_bu"},
     "ganning_e": {"name": "「锦帆游侠」甘宁", "portrait": "ganning", "hp": 12500, "at": 380, "actions": 2, "moves": [{"name": "铁胎弓", "power": 1.0, "weight": 3}, {"name": "铃响", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "百步穿杨·蓄力", "power": 0, "weight": 1, "charge": "百步穿杨"}, {"name": "百步穿杨", "power": 2.4, "weight": 0, "pierce": true}], "card": "ganning"},
     "heishan_youji": {"name": "黑山游骑", "portrait": "heishan_bing", "hp": 3000, "at": 185, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "滚木落石", "power": 1.3, "weight": 1}], "card": "heishan_bing"},
+    "heishan_sanbing": {"name": "黑山散兵", "portrait": "heishan_bing", "hp": 2800, "at": 175, "actions": 2, "moves": [{"name": "乱刀", "power": 1.0, "weight": 3}, {"name": "偷袭", "power": 1.3, "weight": 1}], "card": "heishan_bing"},
     "xuanjizi": {"name": "妖道玄机子", "portrait": "xuanjizi", "hp": 5600, "at": 215, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "硫磺迷烟", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "符水邪术", "power": 1.4, "weight": 2}, {"name": "摄魂咒·蓄力", "power": 0, "weight": 1, "charge": "摄魂咒"}, {"name": "摄魂咒", "power": 2.6, "weight": 0, "pierce": true}], "card": "xuanjizi_card"},
     "lidamu": {"name": "「黑山凶寇」李大目", "portrait": "lidamu", "hp": 7200, "at": 260, "actions": 2, "moves": [{"name": "开山巨斧", "power": 1.1, "weight": 3}, {"name": "横扫千军", "power": 1.4, "weight": 1}, {"name": "凶寇狂怒", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "lidamu_card"},
     "zhangbaiqi": {"name": "黄巾渠帅·张白骑", "portrait": "zhangbaiqi", "hp": 4800, "at": 195, "actions": 2, "moves": [{"name": "乱刀齐下", "power": 1.0, "weight": 3}, {"name": "黄巾浪潮", "power": 1.3, "weight": 1}, {"name": "裹挟乱兵", "power": 0, "weight": 1, "ap_drain": 1}], "card": "zhangbaiqi_card"}
@@ -467,6 +468,7 @@
     "yuji_xintu": {"name": "于吉信徒", "turn_limit": 6, "enemy": "yuji_xintu"},
     "boar": {"name": "野猪林", "turn_limit": 6, "enemy": "boar"},
     "jz_county_fight": {"name": "州衙 · 拔刀相助", "turn_limit": 5, "enemy": "yayi"},
+    "jz_road_bandits": {"name": "官道 · 黑山散兵", "turn_limit": 6, "enemy": "heishan_sanbing"},
     "tiger": {"name": "打虎", "turn_limit": 6, "enemy": "tiger"},
     "yaodao": {"name": "妖道唐周", "turn_limit": 8, "enemy": "huangjin_yaodao"},
     "shuizei_scout": {"name": "水贼喽啰", "turn_limit": 6, "enemy": "shuizei_scout"},
