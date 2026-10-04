@@ -300,7 +300,7 @@
 | ⬜ 缺 | `c2_ln_caocao` | 曹操借粮 |
 | ⬜ 缺 | `c2_ln_bianshui` | 救曹操 |
 | ✅ 已有 | `ln_handhold` | 车帘后 |
-| ⬜ 缺 | `c2_lingqi_oath` | 星下誓言 |
+| ✅ 已有 | `c2_lingqi_oath` | 星下誓言 |
 
 ## 第三章 · 黑山风云
 

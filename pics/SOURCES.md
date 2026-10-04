@@ -210,4 +210,5 @@
 | `cg:jz_boss` | source/cg/jz_boss.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ln_camp` | source/cg/ln_camp.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ln_handhold` | source/cg/ln_handhold.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_lingqi_oath` | source/cg/c2_lingqi_oath.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_era` | source/cg/c1_era.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
