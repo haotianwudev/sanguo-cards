@@ -692,6 +692,15 @@
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
     },
+    "xiliang_gongqi": {
+      "src": "source/soldiers/xiliang_gongqi.jpg",
+      "face": [
+        0.51,
+        0.25
+      ],
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
+    },
     "zhangfei": {
       "src": "source/generals/zhangfei.jpg",
       "face": [
@@ -1257,6 +1266,14 @@
     },
     "heishan_zhai": {
       "src": "source/battles/heishan_zhai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ln_lvlingqi": {
+      "src": "source/battles/ln_lvlingqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c2_gongqi": {
+      "src": "source/battles/c2_gongqi.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },

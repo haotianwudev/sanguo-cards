@@ -191,6 +191,7 @@
 |---|---|---|
 | ✅ 正式 | `guosi` | 郭汜 |
 | ✅ 正式 | `huaxiong` | 华雄 |
+| ✅ 正式 | `xiliang_gongqi` | 西凉弓骑 |
 | ✅ 正式 | `feixiong_bing` | 飞熊军 |
 | ✅ 正式 | `liru` | 李儒 |
 | ✅ 正式 | `bingzhou` | 并州狼骑 |
@@ -218,7 +219,7 @@
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `guosi` | 郭汜（郭汜） |
 | ✅ 已有 | `huaxiong` | 汜水关·华雄（华雄） |
-| ⬜ 缺 | `c2_gongqi` | 小路·西凉弓骑（西凉弓骑） |
+| ✅ 已有 | `c2_gongqi` | 小路·西凉弓骑（西凉弓骑） |
 | ✅ 已有 | `feixiong` | 飞熊军（飞熊军） |
 | ✅ 已有 | `liru` | 李儒伏兵（李儒） |
 | ✅ 已有 | `dongbai` | 董白（董白） |
@@ -279,7 +280,7 @@
 |---|---|---|
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ✅ 已有 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
-| ⬜ 缺 | `ln_lvlingqi` | 黄河古道·吕玲绮（吕玲绮） |
+| ✅ 已有 | `ln_lvlingqi` | 黄河古道·吕玲绮（吕玲绮） |
 | ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `dagu` | 大谷·徐荣（徐荣） |
 | ✅ 已有 | `feixiong` | 飞熊军（飞熊军） |
@@ -287,7 +288,7 @@
 | ✅ 已有 | `hulao_ch1` | 追兵·吕布（吕布） |
 | ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `guosi` | 郭汜（郭汜） |
-| ⬜ 缺 | `c2_gongqi` | 小路·西凉弓骑（西凉弓骑） |
+| ✅ 已有 | `c2_gongqi` | 小路·西凉弓骑（西凉弓骑） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -342,7 +343,22 @@
 
 | 状态 | key | 剧情格 |
 |---|---|---|
+| ⬜ 缺 | `c3_recruit_board` | 真定发榜 |
+| ⬜ 缺 | `c3_xiahoulan_law` | 军法如山 |
+| ⬜ 缺 | `c3_bribe_villager` | 和稀泥 |
+| ⬜ 缺 | `c3_encounter_ning` | 深山绝壁 |
+| ⬜ 缺 | `c3_leave_ning` | 明哲保身 |
+| ⬜ 缺 | `c3_save_ning` | 战白骑 |
 | ⬜ 缺 | `end_fuchao` | 覆巢 |
+| ⬜ 缺 | `c3_zhangyan_meet` | 黑山大寨 |
+| ⬜ 缺 | `c3_alliance` | 黑山令 |
+| ⬜ 缺 | `c3_guotu_raid` | 郭图寻仇 |
+| ⬜ 缺 | `c3_secret_path` | 黑山秘道 |
+| ⬜ 缺 | `c3_breakout` | 府门突围 |
+| ⬜ 缺 | `c3_guojia_map` | 界桥前夜 |
+| ⬜ 缺 | `c3_quyi_camp` | 先登死士 |
+| ⬜ 缺 | `c3_save_zan` | 猛将文丑 |
+| ⬜ 缺 | `c3_banma_flag` | 斑马大旗 |
 
 ## 第三章 · 传国玉玺
 

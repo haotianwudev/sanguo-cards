@@ -76,6 +76,7 @@
 | `feixiong_bing` | source/soldiers/feixiong_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiliang_scout` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiliang_bing` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiliang_gongqi` | source/soldiers/xiliang_gongqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangfei` | source/generals/zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `inf_n` | source/soldiers/inf_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -159,6 +160,8 @@
 | `battle:heishan_tan` | source/battles/heishan_tan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:heishan_wai` | source/battles/heishan_wai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:heishan_zhai` | source/battles/heishan_zhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:ln_lvlingqi` | source/battles/ln_lvlingqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c2_gongqi` | source/battles/c2_gongqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
