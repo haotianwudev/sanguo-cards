@@ -23,7 +23,7 @@ var _round_label: Label
 var _combo_label: Label
 var _log: RichTextLabel
 var _cards: Array = []  # CardView per leader
-var _skill_buttons: Array = []  # [leader index, skill id, Button]
+var _skill_popup: Control  # open skill-picker for whichever leader was last tapped, or null
 var _defend: Button
 var _retreat: Button
 var _end: Button
@@ -218,59 +218,34 @@ func _build() -> void:
 	_combo_label = Kit.label("", Kit.FONT_BODY, "amber")
 	pr.add_child(_combo_label)
 
-	# leaders (bottom-left)
+	# leaders (bottom-left) — skills live in a popup now (tap the card), not stacked buttons under it,
+	# so the card itself can run much bigger; the 5th "locked" slot is a slim strip, not full card width,
+	# so it doesn't eat into the 4 real cards' size (a future 5-member chapter can revisit this split)
 	var row := HBoxContainer.new()
-	row.position = Vector2(20, 350) if not has_cg else Vector2(20, 444)
-	row.add_theme_constant_override("separation", 2)  # cards sit edge to edge: bigger cards, and this width
-		# already fits a 5th column at the same size when a future chapter grows the party past 4
+	row.position = Vector2(20, 340) if not has_cg else Vector2(20, 440)
+	row.add_theme_constant_override("separation", 2)
 	add_child(row)
-	# three skills under a card only fit if the cards shrink a little
-	var most := 0
-	for u in b.leaders:
-		most = maxi(most, u["leader"]["card"]["skills"].size())
-	var card_size := Vector2(206, 288) if most <= 2 else Vector2(172, 240)
-	var btn_h := 36 if most <= 2 else 28
-	if has_cg:  # the band is shorter: smaller cards
-		card_size = Vector2(156, 218) if most <= 2 else Vector2(149, 189)
-		btn_h = 22
+	var card_size := Vector2(240, 336) if not has_cg else Vector2(190, 266)
+	var locked_w := 70.0
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
-		var col := VBoxContainer.new()
-		col.add_theme_constant_override("separation", 4)
-		row.add_child(col)
 		var card_id: String = u["leader"]["card"]["id"]
 		var v := CardView.make(card_id, card_size, {"leader": u["leader"], "skills": false,
 			"lord_name": Game.save.lord_name})
 		if has_cg:
 			v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		v.focus_mode = Control.FOCUS_NONE
-		col.add_child(v)
+		v.pressed.connect(_open_skills.bind(i))
+		row.add_child(v)
 		_cards.append(v)
-		for sid in u["leader"]["card"]["skills"]:
-			var btn := Kit.button("", "blue", Kit.FONT_SMALL if not has_cg else 14)
-			btn.custom_minimum_size = Vector2(card_size.x, btn_h)
-			if has_cg:  # slim buttons a bit wider than the small card, label cut rather than widening the column
-				btn.custom_minimum_size = Vector2(card_size.x + 32, btn_h)
-				btn.clip_text = true
-				btn.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-				var base := Kit.c("blue")
-				for st in ["normal", "hover", "pressed", "disabled", "focus"]:
-					var bgc := base.lightened(0.12) if st == "hover" else (base.darkened(0.15) if st == "pressed" else base)
-					if st == "disabled":
-						bgc = Color(base.darkened(0.45), 0.8)
-					btn.add_theme_stylebox_override(st, Kit.box(bgc, 8, 2 if st == "focus" else 0, Kit.c("gold"), 3))
-			btn.pressed.connect(_on_skill.bind(i, sid))
-			col.add_child(btn)
-			_skill_buttons.append([i, sid, btn])
-	for _i in range(b.leaders.size(), 5):  # locked slots up to a 5-member party, for a future chapter
-		var locked := PanelContainer.new()
-		locked.custom_minimum_size = card_size
-		locked.add_theme_stylebox_override("panel", Kit.box(Kit.c("card").darkened(0.5), 10, 2, Kit.c("gray"), 0))
-		var lbl := Kit.label("第五人\n敬请期待", (Kit.FONT_SMALL if not has_cg else 12), "gray")
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		locked.add_child(lbl)
-		row.add_child(locked)
+	var locked := PanelContainer.new()  # one slim slot for a future 5th party member
+	locked.custom_minimum_size = Vector2(locked_w, card_size.y)
+	locked.add_theme_stylebox_override("panel", Kit.box(Kit.c("card").darkened(0.5), 10, 2, Kit.c("gray"), 0))
+	var lbl := Kit.label("第五人\n敬请\n期待", 12, "gray")
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	locked.add_child(lbl)
+	row.add_child(locked)
 
 	# actions (bottom-right) — narrower than before so the leader cards (left) can run bigger
 	var acts := VBoxContainer.new()
@@ -327,27 +302,14 @@ func _refresh() -> void:
 		var u: Dictionary = b.leaders[i]
 		var v: CardView = _cards[i]
 		v.set_state(u["acted"] or u["confused"] or not b.can_act(i), false)
-	var first_focus: Button = null
-	for entry in _skill_buttons:
-		var i: int = entry[0]
-		var u: Dictionary = b.leaders[i]
-		var sk: Dictionary = GameData.get_db().skills[entry[1]]
-		var btn: Button = entry[2]
-		var tag := "限1" if sk["uses"] == 1 else ("累积" if sk["cumulative"] else "")
-		btn.text = "%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""]
-		btn.icon = Kit.skill_icon(sk)
-		btn.expand_icon = false
-		btn.add_theme_constant_override("icon_max_width", 24)
-		btn.disabled = _busy or not (b.can_act(i) and b.usable(u, sk))
-		btn.focus_mode = Control.FOCUS_NONE if btn.disabled else Control.FOCUS_ALL
-		if not btn.disabled and first_focus == null:
-			first_focus = btn
+		v.focus_mode = Control.FOCUS_NONE if (_busy or not b.can_act(i)) else Control.FOCUS_ALL
 	_end.disabled = _busy
 	_defend.text = "防御  AP%d" % b.defend_cost() if b.defend_cost() > 0 else "防御"
 	_defend.disabled = _busy or not b.can_defend()
 	_retreat.disabled = _busy
 	if not _busy:
-		Kit.focus(first_focus if first_focus != null else _end)
+		var first_card: CardView = _cards.filter(func(v): return v.focus_mode == Control.FOCUS_ALL).front() if _cards.any(func(v): return v.focus_mode == Control.FOCUS_ALL) else null
+		Kit.focus(first_card if first_card != null else _end)
 
 
 # ---- input -------------------------------------------------------------------
@@ -360,6 +322,57 @@ func _unhandled_input(event: InputEvent) -> void:
 			_on_end_round()
 		KEY_D:
 			_on_defend()
+
+
+func _close_skill_popup() -> void:
+	if _skill_popup != null:
+		_skill_popup.queue_free()
+		_skill_popup = null
+
+
+func _open_skills(i: int) -> void:
+	if _busy or b.result != "" or not b.can_act(i):
+		return
+	_close_skill_popup()
+	var u: Dictionary = b.leaders[i]
+	var overlay := Control.new()
+	overlay.z_index = 60
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	var dim := Button.new()  # a borderless full-screen button: click anywhere outside the panel to cancel
+	dim.flat = true
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+	dim.add_theme_stylebox_override("hover", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+	dim.add_theme_stylebox_override("pressed", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+	dim.pressed.connect(_close_skill_popup)
+	overlay.add_child(dim)
+	var card_x: float = _cards[i].global_position.x
+	var card_top: float = _cards[i].global_position.y
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 14, 3, Kit.c("gold"), 14))
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 8)
+	panel.add_child(col)
+	col.add_child(Kit.label(u["leader"]["card"]["name"], Kit.FONT_BODY + 2, "gold"))
+	for sid in u["leader"]["card"]["skills"]:
+		var sk: Dictionary = GameData.get_db().skills[sid]
+		var tag := "限1" if sk["uses"] == 1 else ("累积" if sk["cumulative"] else "")
+		var btn := Kit.button("%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""], "blue", Kit.FONT_BODY)
+		btn.icon = Kit.skill_icon(sk)
+		btn.expand_icon = false
+		btn.add_theme_constant_override("icon_max_width", 28)
+		btn.custom_minimum_size = Vector2(260, 48)
+		btn.disabled = not b.usable(u, sk)
+		btn.pressed.connect(func():
+			_close_skill_popup()
+			_on_skill(i, sid))
+		col.add_child(btn)
+	overlay.add_child(panel)
+	add_child(overlay)
+	panel.position = Vector2(clampf(card_x, 10, 1280 - 280), clampf(card_top - 10, 10, 720) - panel.size.y if card_top > 300 else card_top + _cards[i].size.y + 10)
+	_skill_popup = overlay
+	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
 
 
 func _on_skill(i: int, sid: String) -> void:
