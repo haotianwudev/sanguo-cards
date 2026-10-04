@@ -152,6 +152,10 @@ Adding a portrait, checklist:
 - **Never overwrite real art to test a display path.** To try a CG / background with a stand-in picture, use a key
   nothing uses (e.g. `test_cg`) and point a demo at it — `c1_wake.jpg` was once clobbered by a stand-in and had to be
   restored from git. Check `git status` for deleted/modified art before committing.
+- **Listing files under `res://` at runtime: use `ResourceLoader.list_directory()`, never `DirAccess`.** An exported
+  APK packs only the imported copies, so `DirAccess` sees `xxx.jpg.import` and never `xxx.jpg` — it works in the
+  editor and silently returns nothing on a phone (the 测试工具 CG gallery was empty on device for exactly this). To
+  check, export the pack (`--export-pack "Android" <scratch>/test.pck`) and run it with `--main-pack <it> -- --demo=...`.
 - Never commit with failing tests: chain `... | grep passed` checks don't stop `&&` — look at the result first.
 - **A fighter dict's `"id"` is load-bearing** — `CardView.make` special-cases `card_id == "lord"`, and battle/party
   code keys collection, tier and leader lookups off it. If one card needs more than one portrait depending on save

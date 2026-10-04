@@ -170,23 +170,20 @@ func _cards_panel() -> Control:
 
 
 func _cg_keys() -> Dictionary:
-	## group key (the part before the first "_", i1/i2… folded into "i") -> sorted CG keys actually shipped
+	## group key (the part before the first "_", i1/i2… folded into "i") -> sorted CG keys actually shipped.
+	## ResourceLoader.list_directory, not DirAccess: an exported APK packs only the imported copies, so a raw
+	## directory listing shows `xxx.jpg.import` and never `xxx.jpg` — the gallery came up empty on phones.
 	var groups := {}
-	var dir := DirAccess.open("res://data/art/cg")
-	if dir == null:
-		return groups
-	dir.list_dir_begin()
-	var f := dir.get_next()
-	while f != "":
-		if f.ends_with(".jpg"):
-			var key := f.trim_suffix(".jpg")
-			var g := key.get_slice("_", 0)
-			if g.begins_with("i") and g.length() <= 2:
-				g = "i"
-			if not groups.has(g):
-				groups[g] = []
-			groups[g].append(key)
-		f = dir.get_next()
+	for f in ResourceLoader.list_directory("res://data/art/cg"):
+		if not f.ends_with(".jpg"):
+			continue
+		var key: String = f.trim_suffix(".jpg")
+		var g := key.get_slice("_", 0)
+		if g.begins_with("i") and g.length() <= 2:
+			g = "i"
+		if not groups.has(g):
+			groups[g] = []
+		groups[g].append(key)
 	for g in groups:
 		groups[g].sort()
 	return groups
