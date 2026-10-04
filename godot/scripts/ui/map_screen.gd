@@ -695,6 +695,8 @@ func _dialog_show() -> void:
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
+		if key == "lord" and Game.save.lord()["person"] == "lord_north":  # the north route has its own face
+			key = "lord_north"
 		_dlg_face.texture = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
 		_dlg_face.visible = _dlg_face.texture != null
 	if last:

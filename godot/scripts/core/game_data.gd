@@ -61,7 +61,7 @@ func _load(dir: String) -> void:
 		cards[cid] = {"id": cid, "name": c["name"], "rarity": c["rarity"], "troop": c["troop"],
 			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true),
-			"person": c.get("person", cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
+			"person": c.get("person", cid.trim_suffix("_card") if cid.ends_with("_card") else cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
 			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false)}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
@@ -178,7 +178,7 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 		if not sk.has(s):
 			sk.append(s)
 	mult *= float(gacha.get("rarity_mult", {}).get(c["rarity"], 1.0))  # generals outclass soldiers of their troop
-	return {"id": card_id, "name": c["name"], "troop": c["troop"],
+	return {"id": card_id, "name": c["name"], "troop": c["troop"], "person": c["person"],
 		"hp": int(round((t["hp"] + c["bonus"].get("hp", 0)) * mult)),
 		"at": int(round((t["at"] + c["bonus"].get("at", 0)) * mult)), "skills": sk, "rarity": c["rarity"]}
 
@@ -187,8 +187,9 @@ func build_lord(lord_name: String, mult := 1.0, north := false) -> Dictionary:
 	## "id" stays "lord" everywhere (card/collection/leader lookups all key on it); "person" carries the
 	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]
+	var skills: Array = t.get("skills_north", t["skills"]) if north else t["skills"]
 	return {"id": "lord", "person": "lord_north" if north else "lord", "name": lord_name, "troop": "lord",
-		"hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)), "skills": t["skills"].duplicate(), "rarity": null}
+		"hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)), "skills": skills.duplicate(), "rarity": null}
 
 
 func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:

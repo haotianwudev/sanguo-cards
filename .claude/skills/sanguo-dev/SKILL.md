@@ -142,7 +142,19 @@ Adding a portrait, checklist:
   (`fighter.get("person", fighter["id"])` in `card_view.gd`) and leave `"id"` alone. Changing `"id"` itself breaks
   anything that does `== "lord"` elsewhere — it compiles fine and only shows up as a blank portrait or a frozen
   pick overlay (the card errors building `db.build_fighter("lord_north")`, which doesn't exist, and the rest of
-  that screen's `_ready()` never finishes).
+  that screen's `_ready()` never finishes). **Dialogue faces are a separate code path and don't inherit this fix
+  for free**: `map_screen.gd`'s `_dialog_show()` gets its speaker key from `Kit.speakers()`, which hardcodes the
+  lord's clauses (`{lord}`/`你`) to the literal string `"lord"` — it has no fighter dict to read a `"person"` field
+  off. Fixed by checking `Game.save.lord()["person"] == "lord_north"` right where `_dialog_show()` resolves the key,
+  swapping to `"lord_north"` before calling `Kit.portrait()` (which, unlike `Kit.portrait_key()`, does its own index
+  lookup and has no south fallback — only safe because `lord_north` is already a real entry in `portraits.json`).
+  North's lord troop also diverges from south in combat now: `cards.json`'s `"lord"` troop carries a
+  `"skills_north"` override (`tuji` stays shared, `rengdao`/扔刀 swapped for `duomingqiang`/夺命枪 — same cost/power,
+  just spear-flavored instead of blade-flavored, matching the established "主角从此改用枪" north identity) that
+  `build_lord(name, mult, north)` in `game_data.gd` reads via `t.get("skills_north", t["skills"]) if north else ...`.
+  Any other north/south lord divergence (new portrait-keyed surface, another stat/skill split) needs the same
+  pattern: don't assume the south lord's single "id" covers both routes just because `build_lord`'s `north` flag
+  already threads through — check every place that reads off the lord specifically, not just the obvious ones.
 - **`project.godot`'s `window/stretch/aspect` must stay `"keep"`**, not `"expand"`. `expand` gives a wider-than-16:9
   phone screen more raw canvas instead of scaling into it, and since most screens size themselves in literal 1280×720
   pixels (`size = Vector2(1280, 720)` all over `scripts/ui/`), the game ends up pinned to the top-left with a dead
