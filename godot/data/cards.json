@@ -117,7 +117,7 @@
     "baozha": {"name": "包扎", "cost": 1, "cumulative": true, "effects": [{"type": "heal", "power": 1.5}]},
     "guwu": {"name": "鼓舞", "cost": 2, "uses": 1, "effects": [{"type": "boost", "target": "all"}]},
     "charge": {"name": "冲锋", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 2.2}]},
-    "qiangzhen": {"name": "枪阵", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 0.6}, {"type": "guard", "cut": 0.25}]},
+    "qiangzhen": {"name": "枪阵", "cost": 2, "cumulative": true, "effects": [{"type": "attack", "power": 3.0}, {"type": "guard", "cut": 0.25}]},
     "volley": {"name": "齐射", "cost": 1, "cumulative": true, "effects": [{"type": "attack", "power": 0.6, "hits": 3}]},
     "buzhan": {"name": "步战", "cost": 1, "effects": [{"type": "attack", "power": 1.0}]},
     "jushun": {"name": "举盾", "cost": 1, "cumulative": true, "effects": [{"type": "guard", "cut": 0.5}]},
