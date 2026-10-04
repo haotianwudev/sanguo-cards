@@ -262,6 +262,15 @@ func _build() -> void:
 			btn.pressed.connect(_on_skill.bind(i, sid))
 			col.add_child(btn)
 			_skill_buttons.append([i, sid, btn])
+	for _i in range(b.leaders.size(), 5):  # locked slots up to a 5-member party, for a future chapter
+		var locked := PanelContainer.new()
+		locked.custom_minimum_size = card_size
+		locked.add_theme_stylebox_override("panel", Kit.box(Kit.c("card").darkened(0.5), 10, 2, Kit.c("gray"), 0))
+		var lbl := Kit.label("第五人\n敬请期待", (Kit.FONT_SMALL if not has_cg else 12), "gray")
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		locked.add_child(lbl)
+		row.add_child(locked)
 
 	# actions (bottom-right)
 	var acts := VBoxContainer.new()
