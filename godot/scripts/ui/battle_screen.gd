@@ -220,17 +220,18 @@ func _build() -> void:
 
 	# leaders (bottom-left)
 	var row := HBoxContainer.new()
-	row.position = Vector2(20, 358) if not has_cg else Vector2(20, 448)
-	row.add_theme_constant_override("separation", 16)
+	row.position = Vector2(20, 350) if not has_cg else Vector2(20, 444)
+	row.add_theme_constant_override("separation", 2)  # cards sit edge to edge: bigger cards, and this width
+		# already fits a 5th column at the same size when a future chapter grows the party past 4
 	add_child(row)
 	# three skills under a card only fit if the cards shrink a little
 	var most := 0
 	for u in b.leaders:
 		most = maxi(most, u["leader"]["card"]["skills"].size())
-	var card_size := Vector2(180, 252) if most <= 2 else Vector2(150, 210)
+	var card_size := Vector2(192, 269) if most <= 2 else Vector2(160, 224)
 	var btn_h := 44 if most <= 2 else 34
 	if has_cg:  # the band is shorter: smaller cards
-		card_size = Vector2(124, 174) if most <= 2 else Vector2(118, 150)
+		card_size = Vector2(132, 185) if most <= 2 else Vector2(126, 160)
 		btn_h = 26
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
