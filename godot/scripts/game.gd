@@ -6,10 +6,40 @@ var rng := RandomNumberGenerator.new()
 var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
+var options := {"fullscreen": false, "fast": false}  # player options, kept in user://options.cfg (not in the save)
+const OPTIONS_PATH := "user://options.cfg"
 
 
 func _ready() -> void:
 	rng.randomize()
+	var cfg := ConfigFile.new()
+	if persist_enabled and cfg.load(OPTIONS_PATH) == OK:
+		for k in options:
+			options[k] = cfg.get_value("options", k, options[k])
+	if not OS.has_feature("mobile") and options["fullscreen"]:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
+func set_option(key: String, value: Variant) -> void:
+	options[key] = value
+	if key == "fullscreen":
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if value else DisplayServer.WINDOW_MODE_WINDOWED)
+	if persist_enabled:
+		var cfg := ConfigFile.new()
+		for k in options:
+			cfg.set_value("options", k, options[k])
+		cfg.save(OPTIONS_PATH)
+
+
+func battle_speed() -> float:
+	return 1.6 if options["fast"] else 1.0
+
+
+func go_home() -> void:
+	persist()
+	battle_ctx = {}
+	Engine.time_scale = 1.0
+	show_screen(TitleScreen.new())
 
 
 func persist() -> void:

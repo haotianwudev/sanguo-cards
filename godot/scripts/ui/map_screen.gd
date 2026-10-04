@@ -78,6 +78,9 @@ func _ready() -> void:
 	_run_box.add_theme_constant_override("separation", 6)
 	top.add_child(_run_box)
 	top.move_child(_run_box, 1)
+	var menu_btn := Kit.button("设置", "gray")
+	menu_btn.pressed.connect(_open_settings)
+	top.add_child(menu_btn)
 
 	# map
 	_scroll = ScrollContainer.new()
@@ -940,6 +943,14 @@ func _apply_cg_mode() -> void:
 	if _cg_mode:
 		bg.a = 0.86
 	_sheet.add_theme_stylebox_override("panel", Kit.box(bg, 14, 2, Kit.c("gold") if _cg_mode else Kit.c("border"), 14))
+
+
+func _open_settings() -> void:
+	if get_node_or_null("Settings") != null:
+		return
+	var o := SettingsOverlay.new()
+	o.name = "Settings"
+	add_child(o)
 
 
 func _open_party() -> void:

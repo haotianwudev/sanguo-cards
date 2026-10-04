@@ -43,6 +43,7 @@ func _ready() -> void:
 	else:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), 0, {}, {}, ambush)
 	_build()
+	Engine.time_scale = Game.battle_speed()
 	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])
 	if b.mods.has("affix"):
 		_log_lines(["[color=red]【词缀·%s】%s[/color]" % [b.mods["affix"]["name"], b.mods["affix"]["desc"]]])
@@ -57,6 +58,19 @@ func _ready() -> void:
 
 
 # ---- layout ------------------------------------------------------------------
+
+func _exit_tree() -> void:
+	Engine.time_scale = 1.0
+
+
+func _open_settings() -> void:
+	if get_node_or_null("Settings") != null:
+		return
+	var o := SettingsOverlay.new()
+	o.name = "Settings"
+	o.in_battle = true
+	add_child(o)
+
 
 func _build() -> void:
 	var e: Dictionary = b.enemy["data"]
@@ -266,6 +280,12 @@ func _build() -> void:
 	var retreat := _retreat
 	retreat.pressed.connect(_on_retreat)
 	acts.add_child(retreat)
+	var menu_btn := Kit.button("设置", "gray", Kit.FONT_SMALL)
+	menu_btn.custom_minimum_size = Vector2(84, 40)
+	menu_btn.position = Vector2(1186, 8)
+	menu_btn.z_index = 5
+	menu_btn.pressed.connect(_open_settings)
+	add_child(menu_btn)
 
 
 func _refresh() -> void:
