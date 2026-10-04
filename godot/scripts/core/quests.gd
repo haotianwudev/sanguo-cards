@@ -260,6 +260,15 @@ static func pools(q: Dictionary, save: SaveData) -> Dictionary:
 	return out
 
 
+static func title(q: Dictionary, save: SaveData) -> String:
+	## q["title"], swapped by the first matching entry in title_overrides — same reasoning as pools(): a
+	## quest shared by two routes (south/north prologue) shouldn't keep showing the other route's chapter name.
+	for o in q["title_overrides"]:
+		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+			return o["title"]
+	return q["title"]
+
+
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## Cards shown on the current recruit (generals) or treasure (soldiers) square — rolled once, then kept.
 	q = view(q, save)

@@ -322,7 +322,7 @@ func _refresh() -> void:
 		_title.text = "剧情"
 		_show_end()
 		return
-	_title.text = q["title"] + ("　（重玩 · 进阶 +%d%%）" % int(round(save.danger * float(GameData.get_db().battle["danger_step"]) * 100)) if save.replay != "" else "")
+	_title.text = Quests.title(q, save) + ("　（重玩 · 进阶 +%d%%）" % int(round(save.danger * float(GameData.get_db().battle["danger_step"]) * 100)) if save.replay != "" else "")
 	var party := save.party_leaders()
 	var hp_max := Quests.party_max(save)
 	var hp := maxi(1, hp_max - save.damage)
@@ -1004,7 +1004,7 @@ func _complete() -> void:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 14)
 	panel.add_child(col)
-	var title := Kit.label("「%s」回顾" % q["title"], Kit.FONT_BIG + 6, "gold")
+	var title := Kit.label("「%s」回顾" % Quests.title(q, Game.save), Kit.FONT_BIG + 6, "gold")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(title)
 	var text := RichTextLabel.new()
@@ -1135,7 +1135,7 @@ func _finish_chapter() -> void:
 
 func _after_interlude() -> void:
 	Game.persist()
-	_show_toast("「%s」完成！" % q["title"])
+	_show_toast("「%s」完成！" % Quests.title(q, Game.save))
 	_rebuild_map()
 	_refresh()
 

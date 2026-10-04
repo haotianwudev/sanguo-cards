@@ -109,7 +109,9 @@ func _load(dir: String) -> void:
 			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", []),
 				"pool_overrides": q.get("pool_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
 					"unless": o.get("unless", ""), "soldier_pool": o.get("soldier_pool", []),
-					"recruit_pool": o.get("recruit_pool", []), "event_pool": o.get("event_pool", [])})})
+					"recruit_pool": o.get("recruit_pool", []), "event_pool": o.get("event_pool", [])}),
+				"title_overrides": q.get("title_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
+					"unless": o.get("unless", ""), "title": o.get("title", "")})})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),

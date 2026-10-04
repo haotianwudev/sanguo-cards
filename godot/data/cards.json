@@ -353,7 +353,8 @@
     "taihang_yiyong": {"name": "太行义勇", "rarity": "N", "troop": "infantry", "bonus": {"hp": 15, "at": 6}},
     "heishan_bing": {"name": "黑山游骑", "rarity": "N", "troop": "bandit", "bonus": {"at": 6}, "weight": 2},
     "xuanjizi_card": {"name": "玄机子·妖道", "rarity": "R", "troop": "strategist", "bonus": {"hp": 20, "at": 14}, "skills": ["mihun"], "pool": false},
-    "lidamu_card": {"name": "李大目·黑山凶寇", "rarity": "R", "troop": "bandit", "bonus": {"hp": 40, "at": 14}, "skills": ["kaishan"], "pool": false}
+    "lidamu_card": {"name": "李大目·黑山凶寇", "rarity": "R", "troop": "bandit", "bonus": {"hp": 40, "at": 14}, "skills": ["kaishan"], "pool": false},
+    "zhangbaiqi_card": {"name": "张白骑·黄巾渠帅", "rarity": "R", "troop": "bandit", "bonus": {"hp": 30, "at": 10}, "skills": ["huangtian"], "pool": false}
   },
   "enemies": {
     "huangjin_remnant": {"name": "黄巾余孽", "portrait": "huangjin_nanxia", "hp": 4200, "at": 200, "actions": 2, "magic_resist": 0.2, "moves": [{"name": "黄天当立", "power": 1.0, "weight": 3}, {"name": "符水", "power": 0, "weight": 1, "heal": 0.08}, {"name": "妖言", "power": 0.5, "weight": 1, "confuse": 0.5}], "card": "huangjin_nanxia"},
@@ -439,7 +440,8 @@
     "ganning_e": {"name": "「锦帆游侠」甘宁", "portrait": "ganning", "hp": 12500, "at": 380, "actions": 2, "moves": [{"name": "铁胎弓", "power": 1.0, "weight": 3}, {"name": "铃响", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "百步穿杨·蓄力", "power": 0, "weight": 1, "charge": "百步穿杨"}, {"name": "百步穿杨", "power": 2.4, "weight": 0, "pierce": true}], "card": "ganning"},
     "heishan_youji": {"name": "黑山游骑", "portrait": "heishan_bing", "hp": 3000, "at": 185, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "滚木落石", "power": 1.3, "weight": 1}], "card": "heishan_bing"},
     "xuanjizi": {"name": "妖道玄机子", "portrait": "xuanjizi", "hp": 5600, "at": 215, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "硫磺迷烟", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "符水邪术", "power": 1.4, "weight": 2}, {"name": "摄魂咒·蓄力", "power": 0, "weight": 1, "charge": "摄魂咒"}, {"name": "摄魂咒", "power": 2.6, "weight": 0, "pierce": true}], "card": "xuanjizi_card"},
-    "lidamu": {"name": "「黑山凶寇」李大目", "portrait": "lidamu", "hp": 7200, "at": 260, "actions": 2, "moves": [{"name": "开山巨斧", "power": 1.1, "weight": 3}, {"name": "横扫千军", "power": 1.4, "weight": 1}, {"name": "凶寇狂怒", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "lidamu_card"}
+    "lidamu": {"name": "「黑山凶寇」李大目", "portrait": "lidamu", "hp": 7200, "at": 260, "actions": 2, "moves": [{"name": "开山巨斧", "power": 1.1, "weight": 3}, {"name": "横扫千军", "power": 1.4, "weight": 1}, {"name": "凶寇狂怒", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "lidamu_card"},
+    "zhangbaiqi": {"name": "黄巾渠帅·张白骑", "portrait": "zhangbaiqi", "hp": 4800, "at": 195, "actions": 2, "moves": [{"name": "乱刀齐下", "power": 1.0, "weight": 3}, {"name": "黄巾浪潮", "power": 1.3, "weight": 1}, {"name": "裹挟乱兵", "power": 0, "weight": 1, "ap_drain": 1}], "card": "zhangbaiqi_card"}
   },
   "scenarios": {
     "huangjin_remnant": {"name": "黄巾余孽", "turn_limit": 6, "enemy": "huangjin_remnant"},
@@ -540,6 +542,7 @@
     "hulao": {"name": "虎牢关之战", "turn_limit": 10, "enemy": "lvbu"},
     "heishan_wai": {"name": "太行外围 · 黑山游骑", "turn_limit": 6, "enemy": "heishan_youji"},
     "heishan_tan": {"name": "祭坛 · 玄机子", "turn_limit": 8, "enemy": "xuanjizi"},
-    "heishan_zhai": {"name": "黑山寨 · 李大目", "turn_limit": 8, "enemy": "lidamu"}
+    "heishan_zhai": {"name": "黑山寨 · 李大目", "turn_limit": 8, "enemy": "lidamu"},
+    "heishan_jie": {"name": "峡谷断后 · 张白骑", "turn_limit": 7, "enemy": "zhangbaiqi", "art": "heishan_wai"}
   }
 }
