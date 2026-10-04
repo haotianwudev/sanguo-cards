@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:

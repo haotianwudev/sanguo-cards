@@ -998,6 +998,24 @@
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
     },
+    "caohong": {
+      "src": "source/generals/caohong.jpg",
+      "face": [
+        0.50,
+        0.23
+      ],
+      "head": 0.26,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "yayi": {
+      "src": "source/soldiers/yayi.jpg",
+      "face": [
+        0.50,
+        0.28
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
     "zhangbaiqi": {
       "src": "source/generals/zhangbaiqi.jpg",
       "face": [
@@ -1097,7 +1115,7 @@
     },
     "prologue_north": {
       "src": "source/map/bg_prologue_north.jpg",
-      "license": "用户提供（Gemini 生成）"
+      "license": "用户提供"
     },
     "taodong": {
       "src": "source/map/bg_taodong.jpg",

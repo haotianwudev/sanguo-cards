@@ -37,6 +37,12 @@ PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部�
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "chunyuqiong": ("Chunyu Qiong (淳于琼), Yuan Shao's stout general in heavy armor",
+                    "A broad, stout man around 30 with a thick beard and an arrogant, obstinate look.",
+                    "Heavy Jizhou steel armor, very wide shoulders.",
+                    "Both hands firmly gripping a heavy, sharp halberd (戟).",
+                    "a steep gorge pass in the Taihang mountains, Jizhou infantry lined up behind him"),
+
     "yayi": ("a generic Han-dynasty county yamen guard/runner (衙役), not a named character",
              "A thuggish, sneering henchman, nothing noble about him.",
              "Short black county-guard uniform with a white sash, a red-tasseled leather cap.",
@@ -1002,6 +1008,14 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c3_xiahoulan_law": "a village road outside Zhending: Xiahou Lan pinning a thuggish soldier to the ground with one foot, hand on his saber, raising a punishment rod high in the other hand; the hero standing nearby looking awkward",
+    "c3_save_ning": "a deep gorge in the Taihang mountains: the girl Zhang Ning with her medicine box cornered against a cliff by Yellow Turban bandits; the hero charging in from the side with his saber drawn to kick the leader",
+    "c3_alliance": "a wooden hall in the Black Mountain fort: the hero and Zhang Yan sitting across a table, the hero holding a wine bowl, Zhang Yan slamming a token on the table; Lady Zhang pouring wine, Zhang Ning watching",
+    "c3_banma_flag": "a high ground at the Jieqiao battlefield: the hero and Lü Lingqi side by side on horseback, Lü Lingqi holding a giant black-and-white vertically striped 'Zebra' war banner whipping in the wind",
+    "c3_save_zan": "Jieqiao battlefield: Zhao Yun on a white horse clashing his silver spear against Wen Chou's heavy lance in a shower of sparks; Gongsun Zan slumped on the ground behind them looking terrified",
+    "c3_quyi_camp": "Jieqiao battlefield: Yuan Shao's vanguard Qu Yi standing coldly in front of a wall of 800 soldiers holding giant black iron-bound shields and heavy crossbows, stopping a charge of white horses",
+    "end_fuchao": "outside the burned gate of the Zhen manor: the hero shot full of arrows collapsed on the steps, Lady Zhang dead in a pool of blood protecting the young Zhen Mi from a hail of arrows (restrained, no gore)",
+
     "c1_era": "3 a.m. in a cramped modern apartment, lit only by a monitor: a worn-out 30-year-old office worker with short buzz-cut hair, loosened tie, cold coffee cups and overtime paperwork around him, leaning in toward the screen; on the monitor a game asks him to pick a birthplace, split into two glowing panels — on the left a warm misty Jiangnan river town at dusk with a graceful noblewoman's silhouette on the riverbank, on the right a snowstorm over a northern merchant caravan with a red banner; his face lit half warm, half cold by the two panels; no readable text on the screen",
     "c5_yuexia": "a moonlit garden behind the Minister's mansion, a round moon gate: Diaochan (adult, of great beauty) finishing a silent dance half a step from the hero, long sleeves still drifting in the night wind, an empty wine cup on the stone steps; her smile teasing and unreadable; silver-blue moonlight",
     "c4_mangshan": "dawn on Mount Mang north of Luoyang, mist below: Dong Bai (adult, silver ponytail, purple fur-trimmed riding armor) on a chestnut horse glancing back with red ears after a quick kiss, galloping downhill; the hero on his horse behind her touching his cheek, stunned; the grey city far below in the sunrise",
@@ -1245,6 +1259,17 @@ UI_ART = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
+    ("portrait", "chunyuqiong", "淳于琼（成年男性，袁绍大将）"),
+    ("portrait", "yudu", "于毒（成年男性，黑山叛党）"),
+    ("portrait", "quyi", "麹义（成年男性，先登主将）"),
+    ("cg", "c3_xiahoulan_law", "北线·夏侯兰军法（剧情 CG）"),
+    ("cg", "c3_save_ning", "北线·救张宁（剧情 CG）"),
+    ("cg", "c3_alliance", "北线·结盟张燕（剧情 CG）"),
+    ("cg", "c3_banma_flag", "北线·斑马大旗（剧情 CG）"),
+    ("cg", "c3_save_zan", "北线·赵云救公孙瓒（剧情 CG）"),
+    ("cg", "c3_quyi_camp", "北线·麹义先登营（剧情 CG）"),
+    ("cg", "end_fuchao", "结局卡·覆巢（剧情 CG）"),
+
     # 红颜立绘优先：
     ("portrait", "sunshangxiang", "孙尚香（成年女性，换掉占位）"),
     ("portrait", "zhenmi", "甄宓（成年女性，洛神仙子）"),

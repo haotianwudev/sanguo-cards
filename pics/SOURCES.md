@@ -110,6 +110,8 @@
 | `guojia` | source/generals/guojia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lidamu` | source/generals/lidamu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xuanjizi` | source/generals/xuanjizi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caohong` | source/generals/caohong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yayi` | source/soldiers/yayi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangbaiqi` | source/generals/zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guotu` | source/generals/guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `hanfu` | source/generals/hanfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -121,7 +123,7 @@
 | `zhenmi` | source/generals/zhenmi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mizhen` | source/generals/mizhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
-| `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:luoyang_n` | source/map/bg_luoyang_n.jpg | 用户提供 | 用户提供 | — |

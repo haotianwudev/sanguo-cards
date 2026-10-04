@@ -106,6 +106,8 @@
   "guojia": {"file": "guojia.jpg", "face": [0.48, 0.24], "head": 0.25},
   "lidamu": {"file": "lidamu.jpg", "face": [0.5, 0.26], "head": 0.27},
   "xuanjizi": {"file": "xuanjizi.jpg", "face": [0.51, 0.21], "head": 0.22},
+  "caohong": {"file": "caohong.jpg", "face": [0.5, 0.23], "head": 0.26},
+  "yayi": {"file": "yayi.jpg", "face": [0.5, 0.28], "head": 0.24},
   "zhangbaiqi": {"file": "zhangbaiqi.jpg", "face": [0.53, 0.23], "head": 0.24},
   "guotu": {"file": "guotu.jpg", "face": [0.47, 0.26], "head": 0.28},
   "hanfu": {"file": "hanfu.jpg", "face": [0.56, 0.24], "head": 0.26},
