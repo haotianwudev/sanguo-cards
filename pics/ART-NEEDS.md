@@ -642,7 +642,7 @@
 | ⬜ 缺 | `lusu` | 鲁肃（SR） |
 | ⬜ 缺 | `zhangzhongjing` | 张仲景（SR） |
 | ✅ 正式 | `xiaoqiao` | 小乔（SR） |
-| ⬜ 缺 | `zhenmi` | 甄宓（SR） |
+| ✅ 正式 | `zhenmi` | 甄宓（SR） |
 | 🟡 占位 | `machao` | 马超（SR） |
 | 🟡 占位 | `zhangliao` | 张辽（SR） |
 | 🟡 占位 | `xuchu` | 许褚（SR） |
