@@ -26,9 +26,13 @@
 | ✅ 正式 | `huatuo` | 事件「游方郎中」 |
 | ✅ 正式 | `yuji` | 事件「白衣道人」 |
 | ✅ 正式 | `sunce` | 事件「白衣道人」 |
+| ✅ 正式 | `zumao` | 事件「救祖茂」 |
+| ✅ 正式 | `dongbai` | 事件「交人」 |
 | ✅ 正式 | `zhouyu` | 事件「二乔」 |
+| ✅ 正式 | `sunjian` | 事件「借将」 |
 | ✅ 正式 | `yanzhihu` | 事件「压寨夫人」 |
-| ✅ 正式 | `wuguotai` | 剧情立绘 |
+| ✅ 正式 | `wuguotai` | 事件「旧甲」 |
+| ✅ 正式 | `baosanniang` | 事件「比武招亲」 |
 | ✅ 正式 | `zhangfuren` | 剧情立绘 |
 | ✅ 正式 | `zhenmi_young` | 剧情立绘 |
 | ✅ 正式 | `zhaoyun` | 剧情立绘 |
@@ -43,6 +47,7 @@
 | ✅ 正式 | `shuizei_bing` | 水贼喽啰 |
 | ✅ 正式 | `baie_hu` | 吊睛白额虎 |
 | ✅ 正式 | `fushui_xintu` | 于吉信徒 |
+| ✅ 正式 | `xiliang_bing` | 西凉斥候 |
 | ✅ 正式 | `shanzei_bing` | 山贼 |
 | ✅ 正式 | `huangjin_nanxia` | 黄巾余孽 |
 | ✅ 正式 | `inf_n` | 官军 |
@@ -64,16 +69,6 @@
 | ✅ 正式 | `taihang_yiyong` | 太行义勇 |
 | ✅ 正式 | `changsha` | 长沙刀兵 |
 | ✅ 正式 | `jiangdong_gong` | 江东弓手 |
-| ✅ 正式 | `liehu` | 山中猎户 |
-| ✅ 正式 | `yuenv_gong` | 越女弓手 |
-| ⬜ 缺 | `huofu` | 伙夫 |
-| ✅ 正式 | `chuangong` | 江东船工 |
-| ✅ 正式 | `huangjin_nvyi` | 黄巾女医 |
-| ✅ 正式 | `yahuan` | 丫鬟 |
-| ⬜ 缺 | `chuniang` | 厨娘 |
-| ✅ 正式 | `xiuniang` | 绣娘 |
-| ⬜ 缺 | `huansha` | 浣纱女 |
-| ⬜ 缺 | `caisang` | 采桑女 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -82,10 +77,12 @@
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
 | ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
 | ✅ 已有 | `yuji_xintu` | 于吉信徒（于吉信徒） |
+| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ✅ 已有 | `guanjun` | 官军（官军） |
+| ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `boar` | 野猪林（野猪） |
 | ✅ 已有 | `shuizei` | 水寨·胡玉（「浪里蛟」胡玉） |
 | ✅ 已有 | `shuizei_guard` | 看门水贼（看门水贼） |
@@ -132,19 +129,25 @@
 | ⬜ 缺 | `e_washer` | 「浣纱女」 |
 | ⬜ 缺 | `e_dice` | 「水贼赌局」 |
 | ⬜ 缺 | `e_fruit` | 「野果」 |
+| ⬜ 缺 | `e_risk` | 「险滩」 |
 | ⬜ 缺 | `e_temple` | 「山神庙」 |
+| ✅ 已有 | `c2_triple` | 「威震诸侯」 |
+| ✅ 已有 | `e_grand_chest` | 「高级宝箱」 |
 | ⬜ 缺 | `e_huatuo` | 「游方郎中」 |
 | ⬜ 缺 | `e_yuji` | 「白衣道人」 |
+| ✅ 已有 | `c2_zumao_saved` | 「救祖茂」 |
+| ✅ 已有 | `c2_handover` | 「交人」 |
 | ⬜ 缺 | `e_merchant` | 「行商」 |
 | ⬜ 缺 | `e_smith` | 「铁匠铺」 |
 | ⬜ 缺 | `e_tomb` | 「古墓」 |
 | ⬜ 缺 | `e_guanlu` | 「管辂算命」 |
+| ⬜ 缺 | `e_xushao` | 「月旦评」 |
 | ⬜ 缺 | `e_qiao` | 「二乔」 |
 | ⬜ 缺 | `e_drink` | 「斗酒」 |
 | ⬜ 缺 | `e_deserters` | 「逃兵」 |
 | ⬜ 缺 | `e_storm` | 「暴雨」 |
 | ⬜ 缺 | `e_horse` | 「卖马人」 |
-| ⬜ 缺 | `e_xushao` | 「月旦评」 |
+| ⬜ 缺 | `e_convoy` | 「截粮队」 |
 | ⬜ 缺 | `e_surrender` | 「降卒」 |
 | ⬜ 缺 | `e_shanzei` | 「山贼拦路」 |
 | ⬜ 缺 | `e_yazhai` | 「压寨夫人」 |
@@ -153,7 +156,16 @@
 | ⬜ 缺 | `e_hj_camp` | 「黄巾余孽营地」 |
 | ⬜ 缺 | `e_hj_medics` | 「黄巾女眷」 |
 | ⬜ 缺 | `e_hj_road` | 「黄巾劫道」 |
-| ⬜ 缺 | `e_risk` | 「险滩」 |
+| ⬜ 缺 | `e_yuan_tax` | 「袁术的税吏」 |
+| ⬜ 缺 | `e_black_market` | 「南阳黑市」 |
+| ⬜ 缺 | `e_veterans` | 「孙家旧部」 |
+| ⬜ 缺 | `e_plague` | 「疫村」 |
+| ⬜ 缺 | `e_tongyao` | 「童谣」 |
+| ✅ 已有 | `e_biwu` | 「比武招亲」 |
+| ✅ 已有 | `c2_sanying` | 「惊退温侯」 |
+| ⬜ 缺 | `e_taihang_hunter` | 「太行猎户」 |
+| ⬜ 缺 | `e_zhen_caravan` | 「甄家商队」 |
+| ⬜ 缺 | `e_taihang_bear` | 「黑熊挡道」 |
 
 ## 第二章 · 讨伐董卓
 
@@ -162,10 +174,6 @@
 | 状态 | key | 用在 |
 |---|---|---|
 | ✅ 正式 | `tangji` | 事件「落难贵人」 |
-| ✅ 正式 | `baosanniang` | 事件「比武招亲」 |
-| ✅ 正式 | `zumao` | 剧情立绘 |
-| ✅ 正式 | `sunjian` | 剧情立绘 |
-| ✅ 正式 | `dongbai` | 剧情立绘 |
 | ✅ 正式 | `lvbu` | 剧情立绘 |
 | ✅ 正式 | `liubei` | 剧情立绘 |
 | ✅ 正式 | `guanyu` | 剧情立绘 |
@@ -176,7 +184,6 @@
 
 | 状态 | key | 敌人 |
 |---|---|---|
-| ✅ 正式 | `xiliang_bing` | 西凉斥候 |
 | ✅ 正式 | `guosi` | 郭汜 |
 | ✅ 正式 | `huaxiong` | 华雄 |
 | ✅ 正式 | `feixiong_bing` | 飞熊军 |
@@ -195,14 +202,14 @@
 
 | 状态 | key | 战斗 |
 |---|---|---|
-| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
-| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
+| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `guosi` | 郭汜（郭汜） |
 | ✅ 已有 | `huaxiong` | 汜水关·华雄（华雄） |
@@ -221,14 +228,10 @@
 |---|---|---|
 | ✅ 已有 | `c2_setout` | 北上 |
 | ✅ 已有 | `c2_zumao` | 阵前 |
-| ✅ 已有 | `c2_zumao_saved` | 救祖茂 |
 | ✅ 已有 | `c2_counter` | 收拢士卒 |
 | ✅ 已有 | `c2_capture` | 俘虏 |
 | ✅ 已有 | `c2_captive` | 俘虏的日子 |
 | ✅ 已有 | `c2_raid` | 吕布劫营 |
-| ✅ 已有 | `c2_sanying` | 三英战吕布 |
-| ✅ 已有 | `c2_triple` | 威震诸侯 |
-| ✅ 已有 | `c2_handover` | 交人 |
 | ✅ 已有 | `c2_keep` | 藏人 |
 | ✅ 已有 | `c2_heqin` | 和亲 |
 | ⬜ 缺 | `c2_mixin` | 密信 |
@@ -242,12 +245,8 @@
 
 | 状态 | key | 事件 |
 |---|---|---|
-| ⬜ 缺 | `e_tongyao` | 「童谣」 |
-| ⬜ 缺 | `e_zhuhou_yan` | 「诸侯宴」 |
-| ⬜ 缺 | `e_convoy` | 「截粮队」 |
 | ✅ 已有 | `e_tangji` | 「落难贵人」 |
-| ✅ 已有 | `e_biwu` | 「比武招亲」 |
-| ✅ 已有 | `e_grand_chest` | 「高级宝箱」 |
+| ⬜ 缺 | `e_zhuhou_yan` | 「诸侯宴」 |
 
 ## 第二章 · 洛阳烟云
 
@@ -273,6 +272,7 @@
 
 | 状态 | key | 战斗 |
 |---|---|---|
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ✅ 已有 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
 | ⬜ 缺 | `ln_lvlingqi` | 黄河古道·吕玲绮（吕玲绮） |
 | ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
@@ -319,12 +319,13 @@
 
 | 状态 | key | 战斗 |
 |---|---|---|
-| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
-| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
+| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `c3_shanfei` | 独眼匪首（独眼匪首） |
 | ⬜ 缺 | `c3_xunluo` | 城外·袁军步卒（袁军步卒） |
@@ -357,11 +358,7 @@
 
 | 状态 | key | 事件 |
 |---|---|---|
-| ⬜ 缺 | `e_yuan_tax` | 「袁术的税吏」 |
-| ⬜ 缺 | `e_black_market` | 「南阳黑市」 |
 | ⬜ 缺 | `e_jz_spy` | 「荆州细作」 |
-| ⬜ 缺 | `e_veterans` | 「孙家旧部」 |
-| ⬜ 缺 | `e_plague` | 「疫村」 |
 | ⬜ 缺 | `e_yuxi_rumor` | 「玉玺流言」 |
 
 ## 第三章 · 驻守洛阳
@@ -389,9 +386,12 @@
 | 状态 | key | 战斗 |
 |---|---|---|
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
+| ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
 | ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `c4_guosi` | 劫粮·郭汜（郭汜） |
 | ✅ 已有 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
@@ -440,6 +440,13 @@
 | 状态 | key | 战斗 |
 |---|---|---|
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
+| ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
+| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
+| ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `guanjun` | 官军（官军） |
+| ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
 | ⬜ 缺 | `c5_fanchou` | 比武·樊稠（樊稠） |
 | ⬜ 缺 | `c5_zhangji` | 比武·张济（张济） |
@@ -499,9 +506,12 @@
 | 状态 | key | 战斗 |
 |---|---|---|
 | ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
+| ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
 | ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
-| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `xiliang_youqi` | 西凉游骑（西凉游骑） |
 | ⬜ 缺 | `c6_shaoka` | 清明门·哨卡（司徒哨卡） |
@@ -573,8 +583,6 @@
 |---|---|---|
 | ⬜ 缺 | `jingzhou_shuijun` | 荆州水军（荆州水军的卡） |
 | ⬜ 缺 | `caifu_nu` | 蔡府连弩手（蔡府连弩手的卡） |
-| ⬜ 缺 | `yizhe` | 医者 |
-| ⬜ 缺 | `chaniang` | 茶娘 |
 | ⬜ 缺 | `wenpin` | 文聘·荆州大将 |
 | ⬜ 缺 | `yiji` | 伊籍 |
 
@@ -583,7 +591,13 @@
 | 状态 | key | 战斗 |
 |---|---|---|
 | ⬜ 缺 | `jx_ganning` | 汉水·甘宁（「锦帆游侠」甘宁） |
+| ✅ 已有 | `shuizei_scout` | 水贼喽啰（水贼喽啰） |
+| ✅ 已有 | `tiger` | 打虎（吊睛白额虎） |
+| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ✅ 已有 | `yanzhihu` | 山寨·胭脂虎（「胭脂虎」） |
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ⬜ 缺 | `jx_bubing` | 淯水北岸·荆州步卒（荆州步卒） |
 | ⬜ 缺 | `jx_gongshou` | 芦苇荡·荆州弓手（荆州弓手） |

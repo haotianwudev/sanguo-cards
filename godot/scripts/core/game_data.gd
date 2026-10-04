@@ -61,7 +61,7 @@ func _load(dir: String) -> void:
 		cards[cid] = {"id": cid, "name": c["name"], "rarity": c["rarity"], "troop": c["troop"],
 			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true),
-			"person": c.get("person", cid), "weight": int(c.get("weight", 1)),
+			"person": c.get("person", cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
 			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false)}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
@@ -104,18 +104,19 @@ func _load(dir: String) -> void:
 				"record_lose": s.get("record_lose", ""), "requires": s.get("requires", ""), "unless": s.get("unless", ""),
 				"cg": s.get("cg", ""), "prompt": s.get("prompt", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
-			"soldier_pool": q.get("soldier_pool", []), "recruit_pool": q.get("recruit_pool", []),
+			"soldier_pool": q.get("soldier_pool", []), "soldier_scope": q.get("soldier_scope", ""), "recruit_pool": q.get("recruit_pool", []),
 			"subtitle": q.get("subtitle", ""), "ending": q.get("ending", {}), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
-			"event_pool": q.get("event_pool", []), "shuffle": q.get("shuffle", []),
+			"event_pool": q.get("event_pool", []), "event_scope": q.get("event_scope", "south"), "shuffle": q.get("shuffle", []),
 				"pool_overrides": q.get("pool_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
-					"unless": o.get("unless", ""), "soldier_pool": o.get("soldier_pool", []),
-					"recruit_pool": o.get("recruit_pool", []), "event_pool": o.get("event_pool", [])}),
+					"unless": o.get("unless", ""), "soldier_pool": o.get("soldier_pool", []), "soldier_scope": o.get("soldier_scope", ""),
+					"recruit_pool": o.get("recruit_pool", []), "event_pool": o.get("event_pool", []),
+					"event_scope": o.get("event_scope", "")}),
 				"title_overrides": q.get("title_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
 					"unless": o.get("unless", ""), "title": o.get("title", "")})})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),
-			"text": ev.get("text", []), "cg": ev.get("cg", ""), "prompt": ev.get("prompt", ""),
+			"text": ev.get("text", []), "cg": ev.get("cg", ""), "prompt": ev.get("prompt", ""), "scope": ev.get("scope", "south"),
 			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
 				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", []), "needs": o.get("needs", {})})}
 	Quests.validate(self)

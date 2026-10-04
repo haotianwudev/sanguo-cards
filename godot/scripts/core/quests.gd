@@ -50,15 +50,24 @@ static func validate(db: GameData) -> void:
 				assert(db.cards.has(c), where + ": unknown card " + c)
 			for r in s["relics"]:
 				assert(db.relics.has(r), where + ": unknown relic " + r)
-		var all_event_pools: Array = [q["event_pool"]] + q["pool_overrides"].map(func(o): return o["event_pool"])
+		for eid in q["event_pool"]:
+			assert(db.events.has(eid), "quest %s: unknown event %s" % [q["id"], eid])
+		var scopes: Array = [q["event_scope"], q["id"]] + q["pool_overrides"].map(func(o): return o["event_scope"]).filter(func(s): return s != "")
 		if q["squares"].values().any(func(s): return s["type"] == "mystery" and s["event"] == ""):
-			assert(all_event_pools.any(func(p): return not p.is_empty()), "quest %s: ？ squares need an event_pool" % q["id"])
-		for pool in all_event_pools:
-			for eid in pool:
-				assert(db.events.has(eid), "quest %s: unknown event %s" % [q["id"], eid])
+			var covered: bool = not q["event_pool"].is_empty() or db.events.values().any(func(e): return e["scope"] in scopes)
+			assert(covered, "quest %s: ？ squares need an event_pool/event_scope" % q["id"])
 		for o in q["pool_overrides"]:
-			for c in o["soldier_pool"] + o["recruit_pool"]:
+			for c in o["recruit_pool"]:
 				assert(db.cards.has(c), "quest %s: unknown card %s in a pool override" % [q["id"], c])
+			assert(o["soldier_scope"] == "" or o["soldier_scope"] in ["south", "north"], "quest %s: unknown soldier_scope in a pool override" % q["id"])
+		assert(q["soldier_scope"] == "" or q["soldier_scope"] in ["south", "north"], "quest %s: unknown soldier_scope" % q["id"])
+	var quest_ids: Array = db.quests.map(func(q): return q["id"])
+	for eid in db.events:
+		var scope: String = db.events[eid]["scope"]
+		assert(scope in ["universal", "south", "north"] or scope in quest_ids, "event %s: unknown scope" % eid)
+	for cid in db.cards:
+		var cscope: String = db.cards[cid].get("scope", "")
+		assert(cscope in ["", "south", "north"], "card %s: unknown scope" % cid)
 	for ev in db.events.values():
 		for o in ev["options"]:
 			_validate_effects(db, o["effects"] + o["win"], "event " + ev["id"])
@@ -248,15 +257,35 @@ static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
 
 
 static func pools(q: Dictionary, save: SaveData) -> Dictionary:
-	## soldier_pool / recruit_pool / event_pool, swapped per-field by the first matching entry in
-	## pool_overrides (requires / unless checked against this run's own records, e.g. a birthplace choice) —
-	## so one quest shared by two routes (south/north prologue) doesn't hand out the other route's soldiers.
-	var out := {"soldier_pool": q["soldier_pool"], "recruit_pool": q["recruit_pool"], "event_pool": q["event_pool"]}
+	## recruit_pool is swapped by the first matching entry in pool_overrides (requires / unless checked against
+	## this run's own records, e.g. a birthplace choice) — so one quest shared by two routes (south/north
+	## prologue) doesn't hand out the other route's generals. soldier_pool and event_pool resolve by scope
+	## instead: a card/event's own "scope" field ("universal" only for events, "south"/"north", or — events
+	## only — the owning quest's own id for a one-off cameo like qiao/yuji) is matched against the quest's
+	## soldier_scope/event_scope (also override-able). An empty soldier_scope keeps the legacy behaviour: the
+	## quest's own literal soldier_pool list (or, if that's empty too, every soldier card — see save_data.gd's
+	## chest_mix/recruit_offer fallback) — see the "_events" note in story.json for why this exists.
+	var out := {"recruit_pool": q["recruit_pool"]}
+	var soldier_scope: String = q["soldier_scope"]
+	var event_scope: String = q["event_scope"]
 	for o in q["pool_overrides"]:
 		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
-			for k in out:
-				if not o[k].is_empty():
-					out[k] = o[k]
+			if not o["recruit_pool"].is_empty():
+				out["recruit_pool"] = o["recruit_pool"]
+			if o["soldier_scope"] != "":
+				soldier_scope = o["soldier_scope"]
+			if o["event_scope"] != "":
+				event_scope = o["event_scope"]
+	var db := GameData.get_db()
+	if soldier_scope != "":
+		out["soldier_pool"] = db.cards.values().filter(func(c): return c.get("scope", "") == soldier_scope).map(func(c): return c["id"])
+	else:
+		out["soldier_pool"] = q["soldier_pool"]
+	var event_pool: Array = []
+	for eid in db.events:
+		if db.events[eid]["scope"] in ["universal", event_scope, q["id"]]:
+			event_pool.append(eid)
+	out["event_pool"] = event_pool
 	return out
 
 

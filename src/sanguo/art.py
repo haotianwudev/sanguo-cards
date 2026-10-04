@@ -124,6 +124,13 @@ def write_needs(pics: Path = PICS) -> None:
     def key_of(cid: str) -> str:
         return cards["cards"][cid].get("person", cid.split("_")[0] if cid.endswith("_card") else cid)
 
+    def event_pool_of(q: dict) -> list[str]:
+        # mirrors Quests.pools()' event_pool resolution (scope "universal" / the quest's event_scope(s),
+        # across every route a shared quest like prologue can take / the quest's own id for one-off cameos)
+        scopes = {q.get("event_scope", "south"), q["id"], "universal"}
+        scopes |= {o["event_scope"] for o in q.get("pool_overrides", []) if o.get("event_scope")}
+        return [eid for eid, ev in story["events"].items() if ev.get("scope", "south") in scopes]
+
     def status(key: str) -> str:
         if key not in cfg:
             return "⬜ 缺"
@@ -155,7 +162,7 @@ def write_needs(pics: Path = PICS) -> None:
                 if o.get("card"):
                     loot.append((key_of(o["card"]), names[o["card"]]))
             fights = [s["battle"]] if s.get("battle") else []
-            for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in q.get("event_pool", [])]:
+            for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in event_pool_of(q)]:
                 if not ev:
                     continue
                 for pk in ev.get("portraits", []):
@@ -174,7 +181,7 @@ def write_needs(pics: Path = PICS) -> None:
         for s in q["squares"].values():
             if s.get("battle"):
                 fights_here.append(s["battle"])
-            for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in q.get("event_pool", [])]:
+            for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in event_pool_of(q)]:
                 if ev:
                     for o in ev["options"]:
                         fights_here += [e["battle"] for e in o.get("effects", []) if "battle" in e]
@@ -201,7 +208,7 @@ def write_needs(pics: Path = PICS) -> None:
                 seen_cg.add(sc["cg"])
                 cg_rows.append(f"| {'✅ 已有' if sc['cg'] in cgs_cfg else '⬜ 缺'} | `{sc['cg']}` | 幕间「{sc['title']}」 |")
         ev_rows = []
-        for eid in q.get("event_pool", []):
+        for eid in event_pool_of(q):
             ev = story["events"][eid]
             if ev.get("cg") and ev["cg"] not in seen_cg:
                 seen_cg.add(ev["cg"])
