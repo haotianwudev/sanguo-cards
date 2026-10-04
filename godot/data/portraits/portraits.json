@@ -19,6 +19,7 @@
   "sunben": {"file": "sunben.jpg", "face": [0.5, 0.23], "head": 0.2},
   "dianwei": {"file": "dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true},
   "caiwenji": {"file": "caiwenji.jpg", "face": [0.51, 0.24], "head": 0.23},
+  "guonvwang": {"file": "guonvwang.jpg", "face": [0.5, 0.25], "head": 0.26},
   "diaochan": {"file": "diaochan.jpg", "face": [0.52, 0.27], "head": 0.24},
   "fengfuren": {"file": "fengfuren.jpg", "face": [0.5, 0.25], "head": 0.24},
   "ganning": {"file": "ganning.jpg", "face": [0.55, 0.15], "head": 0.07, "placeholder": true},

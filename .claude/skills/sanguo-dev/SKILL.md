@@ -344,6 +344,7 @@ Writing rules:
   scenario shares the type's battle CG via `"art": "<scenario>"`.
 - **CGs have few people** (technical limit): at most four named characters in focus per story CG / event picture; unnamed
   background people (soldiers, crowds) are fine. A scene that needs many people (a row of generals, a banquet of lords) gets no CG; the text carries it.
+- **CG prompt negative rule**: Never include phrases like 「预留柔和暗部供对白字幕展示」「便于字幕展示」「字幕黑条」 or any mention of 字幕 in art prompts — image generation models will hallucinate fake black subtitle bars or text artifacts! Always describe natural in-world ground (平整雪地、青石地面、硬质泥路). For battle CGs, use the established template with 「下方 35% 留白为开阔坚硬平整的[地貌]供我方出战卡牌陈列」.
 - **Looks match the art.** Settled by delivered art: 董白 has a silver-white high ponytail and purple fur-trimmed armor (her 女骑 wear purple too);
   鲍三娘 wears red armor over a green skirt; 刘备 fights with twin swords. A character's appearance in the text must match their portrait — or, before the art exists,
   the brief in `CARD-DESIGN.md` §7. When you write a new character's look, add/adjust their brief there; when new art

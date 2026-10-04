@@ -306,6 +306,7 @@ const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce",
 	"美妇": "wuguotai", "浓眉少年": "sunce", "俊秀少年": "zhouyu", "瘦老头": "sunjing", "渠帅": "heyi", "孙静": "sunjing",
 	"女当家": "yanzhihu", "胭脂虎": "yanzhihu", "张宁": "zhangning", "白衣道人": "yuji", "华雄": "huaxiong", "纪灵": "jiling",
 	"曹操": "caocao", "孟德": "caocao", "袁绍": "yuanshao", "袁术": "yuanshu", "冯夫人": "fengfuren", "冯氏": "fengfuren", "董卓": "dongzhuo", "蔡邕": "caiyong", "王允": "wangyun", "黑脸大汉": "zhangfei", "大耳朵": "liubei", "虎皮披风": "sunjian", "一员虎将": "sunjian", "摇羽扇的文士": "liru", "祝融": "zhurong", "吕玲绮": "lvlingqi", "马云騄": "mayunlu", "鲍三娘": "baosanniang", "王异": "wangyi", "辛宪英": "xinxianying", "蔡夫人": "caifuren", "卞夫人": "bianfuren", "严夫人": "yanfuren", "黎娘": "liniang", "高顺": "gaoshun", "荀攸": "xunyou", "钟繇": "zhongyao", "徐晃": "xuhuang", "黄忠": "huangzhong", "貂蝉": "diaochan", "桥蕤": "qiaorui", "雷薄": "leibo", "陈兰": "chenlan", "吴景": "wujing", "孙贲": "sunben", "汉献帝": "xiandi", "献帝": "xiandi", "小皇帝": "xiandi", "刘协": "xiandi", "朱儁": "zhujun", "朱公": "zhujun", "皇甫嵩": "huangfusong", "皇甫将军": "huangfusong", "李儒": "liru", "郭汜": "guosi", "李傕": "lijue", "樊稠": "fanchou", "张济": "zhangji", "牛辅": "niufu", "胡轸": "huzhen", "蔡文姬": "caiwenji", "唐姬": "tangji", "程普": "chengpu", "黄盖": "huanggai", "韩当": "handang", "刘表": "liubiao", "景升": "liubiao", "蔡瑁": "caimao", "德珪": "caimao", "蒯越": "kuaiyue", "黄祖": "huangzu", "贾诩": "jiaxu", "文和": "jiaxu", "张绣": "zhangxiu",
+	"郭女王": "guonvwang", "郭照": "guonvwang",
 	"甄宓": "zhenmi_young"}  # TODO: once a later chapter grows her up and wires the real `zhenmi` card, point this at that chapter's own squares only
 static func enemy_portrait_key(enemy: Dictionary) -> String:
 	var key: String = enemy.get("portrait", "")
@@ -422,7 +423,7 @@ static func tween_bar(bar_node: ProgressBar, to: float, duration := 0.35) -> voi
 const FEMALE := ["wuguotai", "dongbai", "caiwenji", "diaochan", "fengfuren", "tangji", "zhangning", "yanzhihu", "gongnv",
 	"xiliang_nvbing", "daqiao", "xiaoqiao", "zhenmi", "sunshangxiang", "huangyueying", "bulianshi", "lvlingqi", "baosanniang",
 	"zhurong", "mayunlu", "wangyi", "xinxianying", "caifuren", "bianfuren", "yanfuren", "liniang", "huangjin_nvyi", "yuenv_gong",
-	"yahuan", "chuniang", "xiuniang", "huansha", "caisang", "chaniang"]
+	"yahuan", "chuniang", "xiuniang", "huansha", "caisang", "chaniang", "guonvwang"]
 const _CLAUSE_END := "，。；！？…」、"  # not ——: 孙贲——孙策的堂兄——在旁边 is one clause
 static var _all_names: Dictionary = {}  # every name the story uses -> key (with or without art: a face only shows when drawn)
 
