@@ -17,7 +17,7 @@
 
 ## 第一章 · 富春
 
-地图底图 `prologue`：✅ 已有、`prologue_north`：⬜ 缺
+地图底图 `prologue`：✅ 已有、`prologue_north`：🟡 程序占位
 
 | 状态 | key | 用在 |
 |---|---|---|

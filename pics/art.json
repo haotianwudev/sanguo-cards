@@ -413,10 +413,10 @@
     "zhaoyun": {
       "src": "source/generals/zhaoyun.jpg",
       "face": [
-        0.52,
-        0.28
+        0.5,
+        0.25
       ],
-      "head": 0.27,
+      "head": 0.26,
       "license": "用户提供（Gemini 生成）"
     },
     "zhugeliang": {
@@ -1085,6 +1085,10 @@
     "prologue": {
       "src": "source/map/bg_prologue.jpg",
       "license": "用户提供"
+    },
+    "prologue_north": {
+      "src": "source/map/bg_prologue_north.jpg",
+      "license": "用户提供（Gemini 生成）"
     },
     "taodong": {
       "src": "source/map/bg_taodong.jpg",

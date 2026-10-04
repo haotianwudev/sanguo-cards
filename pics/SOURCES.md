@@ -120,6 +120,7 @@
 | `zhenmi` | source/generals/zhenmi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mizhen` | source/generals/mizhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
+| `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
 | `map:changan` | source/map/bg_changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:luoyang_n` | source/map/bg_luoyang_n.jpg | 用户提供 | 用户提供 | — |

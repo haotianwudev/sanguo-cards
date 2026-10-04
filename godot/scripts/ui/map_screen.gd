@@ -154,8 +154,14 @@ func _ready() -> void:
 
 # ---- map drawing ---------------------------------------------------------------
 
+func _x_offset() -> int:
+	if q != null and Quests.map_key(q, Game.save) == "prologue_north":
+		return 23
+	return 0
+
+
 func _pos(s: Dictionary) -> Vector2:
-	return Vector2(90 + s["x"] * COL_W, MAP_TOP + 50 + s["y"] * LANE_H)
+	return Vector2(90 + (s["x"] - _x_offset()) * COL_W, MAP_TOP + 50 + s["y"] * LANE_H)
 
 
 func _rebuild_map() -> void:
@@ -166,9 +172,14 @@ func _rebuild_map() -> void:
 	_nodes.clear()
 	if q == null:
 		return
+	var offset := _x_offset()
 	var max_x := 0
 	for s in q["squares"].values():
-		max_x = maxi(max_x, s["x"])
+		if offset > 0 and s["x"] < offset:
+			continue
+		if offset == 0 and q["id"] == "prologue" and s["x"] >= 23:
+			continue
+		max_x = maxi(max_x, s["x"] - offset)
 	_layer.custom_minimum_size = Vector2(180 + max_x * COL_W + 60, 360)
 	_lines.size = _layer.custom_minimum_size
 	# chapter background: data/art/map/<quest id or map_overrides key>.jpg (built by `sanguo-art` from pics/art.json "maps")
@@ -177,6 +188,10 @@ func _rebuild_map() -> void:
 	_bg.size = _layer.custom_minimum_size
 	for s in q["squares"].values():
 		if not Quests.is_open(s, Game.save):  # hidden by an earlier chapter's choices
+			continue
+		if offset > 0 and s["x"] < offset:
+			continue
+		if offset == 0 and q["id"] == "prologue" and s["x"] >= 23:
 			continue
 		var b := Button.new()
 		var icon_tex: Texture2D = Kit.map_icon(_icon_key(s))
