@@ -52,7 +52,7 @@ func _ready() -> void:
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
-		_tip("点队长卡下的技能出手 · AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
+		_tip("点队长卡选技能出手 · AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
 			int(GameData.get_db().battle["ap_per_round"]), b.ap_max()])
 
 
@@ -341,11 +341,10 @@ func _open_skills(i: int) -> void:
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	var dim := Button.new()  # a borderless full-screen button: click anywhere outside the panel to cancel
-	dim.flat = true
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
-	dim.add_theme_stylebox_override("hover", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
-	dim.add_theme_stylebox_override("pressed", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+	dim.focus_mode = Control.FOCUS_NONE
+	for st in ["normal", "hover", "pressed", "focus"]:  # not flat: a flat Button skips its stylebox, so nothing dims
+		dim.add_theme_stylebox_override(st, Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
 	dim.button_down.connect(func():  # a fresh touch-down only: the lift from the tap that opened it must not close it
 		if Time.get_ticks_msec() - _skill_popup_at > 350:
 			_close_skill_popup())

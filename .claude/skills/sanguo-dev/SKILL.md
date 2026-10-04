@@ -74,8 +74,14 @@ built when `OS.is_debug_build()` is true (so it never ships in a release export 
 repo uses for phone testing all have it). Three tabs: jump straight into any chapter (`_CHAPTER_JUMPS`, a hardcoded
 table of `quests_cleared` + `flags` per chapter mirroring the exact combinations `Game.demo()`'s `"ch4"`/`"ch6"`/
 `"ch8"` cases already use — doesn't cover every narrative branch, just the main line into each chapter), browse
-every card in `db.cards` in a grid regardless of what the save owns, browse every delivered CG (scans
-`res://data/art/cg/*.jpg` directly, so it only ever shows what's actually shipped) with a tap-to-preview overlay.
+every card in `db.cards` regardless of what the save owns, browse every delivered CG (scans
+`res://data/art/cg/*.jpg` directly, so it only ever shows what's actually shipped). Both galleries are split into
+category tabs (cards: SSR / SR / R / 兵卡 / 剧情·敌方卡 by `rarity` + `in_pool`; CGs: by the key's prefix before the first
+`_`, labelled via `_CG_GROUPS`, unknown prefixes still show under their raw name) and only build/load the picked tab —
+all ~160 cards or every CG at once was too heavy on a phone. Tap a card or CG for a full-screen view; that overlay
+closes on a fresh touch-down only (`button_down` + a 350 ms guard), because `CardView` fires `pressed` on touch-down and
+the lift from the same tap would otherwise land on the overlay and close it instantly — same fix as the battle skill
+popup.
 `--demo=debug` opens the tool straight away; `--at=jump|cards|cgs` picks which tab. Keep `_CHAPTER_JUMPS` in sync
 by hand whenever a new chapter's gating flags change — it's deliberately a plain data table, not derived from
 `Quests.current_quest()`, because the branch flags (结局/路线/...) aren't mechanically recoverable from a quest's
