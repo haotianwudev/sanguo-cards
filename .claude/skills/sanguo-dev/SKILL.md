@@ -68,6 +68,18 @@ Demos (`Game.demo()` in `scripts/game.gd`): `title`, `map`, `pick`, `choose`, `e
 lord (appends 「出生：冀州无极」 to `run_records`) — for demos that call `Quests.begin` internally (`chest`,
 `grand_chest`, the chapter forks) that reset `run_records`, append the record again after the call, same as a
 real run would after walking past `era`.
+
+**In-game QA tool** (`scripts/ui/debug_screen.gd`, `DebugScreen`): a "测试工具" button on the title screen, only
+built when `OS.is_debug_build()` is true (so it never ships in a release export — the `--export-debug` builds this
+repo uses for phone testing all have it). Three tabs: jump straight into any chapter (`_CHAPTER_JUMPS`, a hardcoded
+table of `quests_cleared` + `flags` per chapter mirroring the exact combinations `Game.demo()`'s `"ch4"`/`"ch6"`/
+`"ch8"` cases already use — doesn't cover every narrative branch, just the main line into each chapter), browse
+every card in `db.cards` in a grid regardless of what the save owns, browse every delivered CG (scans
+`res://data/art/cg/*.jpg` directly, so it only ever shows what's actually shipped) with a tap-to-preview overlay.
+`--demo=debug` opens the tool straight away; `--at=jump|cards|cgs` picks which tab. Keep `_CHAPTER_JUMPS` in sync
+by hand whenever a new chapter's gating flags change — it's deliberately a plain data table, not derived from
+`Quests.current_quest()`, because the branch flags (结局/路线/...) aren't mechanically recoverable from a quest's
+own `requires`/`unless` the way `quests_cleared` is.
 Demos walk square ids — when you insert or rename squares, update their walks (and `walk_to` in tests).
 Screenshots of overlays look washed out because the PNG keeps alpha; in the game the dim is dark.
 

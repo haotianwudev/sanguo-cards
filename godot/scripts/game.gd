@@ -412,6 +412,13 @@ func demo(name: String) -> void:
 			root.add_child(o)
 		"title":
 			show_screen(TitleScreen.new())
+		"debug":  # --at=jump/cards/cgs picks the opening tab
+			show_screen(TitleScreen.new())
+			var dbg := DebugScreen.new()
+			root.add_child(dbg)
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--at="):
+					dbg._show(a.trim_prefix("--at="))
 		"map", "pick":
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)

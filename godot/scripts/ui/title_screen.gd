@@ -73,6 +73,12 @@ func _ready() -> void:
 	if not has_save:
 		Kit.focus(start)
 
+	if OS.is_debug_build():  # QA tool: jump chapters / browse all cards & CGs / quit — never shown in a release build
+		var dbg := Kit.button("测试工具", "gray", 14)
+		dbg.custom_minimum_size = Vector2(0, 32)
+		dbg.pressed.connect(func(): Game.root.add_child(DebugScreen.new()))
+		col.add_child(dbg)
+
 
 func _replay_menu(col: VBoxContainer, saved: SaveData) -> void:
 	## one button per finished chapter; replays get harder with every clear (进阶)
