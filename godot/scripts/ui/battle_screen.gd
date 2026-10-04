@@ -228,15 +228,15 @@ func _build() -> void:
 	var most := 0
 	for u in b.leaders:
 		most = maxi(most, u["leader"]["card"]["skills"].size())
-	var card_size := Vector2(192, 269) if most <= 2 else Vector2(160, 224)
-	var btn_h := 44 if most <= 2 else 34
+	var card_size := Vector2(206, 288) if most <= 2 else Vector2(172, 240)
+	var btn_h := 36 if most <= 2 else 28
 	if has_cg:  # the band is shorter: smaller cards
-		card_size = Vector2(132, 185) if most <= 2 else Vector2(126, 160)
-		btn_h = 26
+		card_size = Vector2(156, 218) if most <= 2 else Vector2(149, 189)
+		btn_h = 22
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
 		var col := VBoxContainer.new()
-		col.add_theme_constant_override("separation", 6)
+		col.add_theme_constant_override("separation", 4)
 		row.add_child(col)
 		var card_id: String = u["leader"]["card"]["id"]
 		var v := CardView.make(card_id, card_size, {"leader": u["leader"], "skills": false,
@@ -272,18 +272,18 @@ func _build() -> void:
 		locked.add_child(lbl)
 		row.add_child(locked)
 
-	# actions (bottom-right)
+	# actions (bottom-right) — narrower than before so the leader cards (left) can run bigger
 	var acts := VBoxContainer.new()
-	acts.position = Vector2(1010, 380) if not has_cg else Vector2(1040, 456)
-	acts.size = Vector2(250, 320) if not has_cg else Vector2(220, 220)
+	acts.position = Vector2(1070, 380) if not has_cg else Vector2(1090, 456)
+	acts.size = Vector2(190, 320) if not has_cg else Vector2(170, 220)
 	acts.add_theme_constant_override("separation", 14 if not has_cg else 10)
 	add_child(acts)
 	_end = Kit.button("回合结束", "red", Kit.FONT_BIG)
-	_end.custom_minimum_size = Vector2(250, 70) if not has_cg else Vector2(220, 60)
+	_end.custom_minimum_size = Vector2(190, 70) if not has_cg else Vector2(170, 60)
 	_end.pressed.connect(_on_end_round)
 	acts.add_child(_end)
 	_defend = Kit.button("防御", "blue", Kit.FONT_BIG)
-	_defend.custom_minimum_size = Vector2(250, 62) if not has_cg else Vector2(220, 52)
+	_defend.custom_minimum_size = Vector2(190, 62) if not has_cg else Vector2(170, 52)
 	_defend.pressed.connect(_on_defend)
 	acts.add_child(_defend)
 	_retreat = Kit.button("撤退", "gray", Kit.FONT_BODY)

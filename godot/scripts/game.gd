@@ -345,7 +345,7 @@ func demo(name: String) -> void:
 			if at == "wake":
 				Quests.move(q, save, "wake")
 			else:
-				var path := ["wake", "bandage", "village", "sc_home", "boar", "raid", "plan", "fire", "rescue", "dinner", "armor", "oath", "north"]
+				var path := ["wake", "bandage", "village", "sc_home", "boar", "raid", "plan", "sc_gate", "sc_road", "sc_hall", "rescue", "dinner", "muster", "draft", "reeds", "yaodao", "isle", "lair", "vault", "armor", "oath", "north"]
 				for sid in path:
 					Quests.move(q, save, sid)
 					if sid == at:
