@@ -26,6 +26,11 @@ PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部�
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "yayi": ("a generic Han-dynasty county yamen guard/runner (衙役), not a named character",
+             "A thuggish, sneering henchman, nothing noble about him.",
+             "Short black county-guard uniform with a white sash, a red-tasseled leather cap.",
+             "A water-and-fire cudgel (水火棍) held low, ready to swing.",
+             "the snowy street outside Ye City's county yamen (州衙)"),
     "lord_north": ("The hero's northern-route host body (北线主角) — a merchant house's account clerk turned commander, wearing the late patriarch's old armor",
                  "Clean-cut young man in his early 20s, soft unweathered hands, a composed and faintly clever half-smile.",
                  "Old fish-scale armor of the Hebei northern style, worn-in but meticulously kept (plain iron, no green or gold), hair tied in a cloth-wrapped topknot (no helmet, never short modern hair), a snow-white mink fur cloak over the armor.",
@@ -909,6 +914,7 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "jz_county_fight": "邺城州衙门前的雪街：几名衙役抡着水火棍围上来，背景是州衙的朱漆大门和瑟缩的灾民，雪地上已经洒了几滴血",
     "ln_lvlingqi": "黄河南岸古道夜色：吕玲绮一身红黑铠甲，战马打滑前蹄跪地，她单手举着小号方天画戟，满脸泪痕，眼神凶狠又无助",
     "c3_mitan": "a tavern back alley at night: Yuan agents in plain clothes drawing short knives from their sleeves",
     "c3_qibing": "a rainy night road: Yuan cavalry with spears charging out of the dark, rain slanting in the torchlight",
@@ -1267,6 +1273,8 @@ NEXT = [
     ("portrait", "lidamu", "李大目（北线第一章首领）"),
     ("portrait", "xuanjizi", "妖道玄机子"),
     ("portrait", "zhangbaiqi", "张白骑"),
+    ("portrait", "yayi", "衙役（州衙拔刀相助一战的敌人）"),
+    ("battle", "jz_county_fight", "州衙·拔刀相助 战斗背景"),
     ("portrait", "guotu", "郭图"),
     ("portrait", "hanfu", "韩馥"),
     ("portrait", "heishan_bing", "黑山游骑（兵卡）"),

@@ -355,7 +355,8 @@
     "heishan_bing": {"name": "黑山游骑", "rarity": "N", "troop": "bandit", "bonus": {"at": 6}, "weight": 2, "scope": "north"},
     "xuanjizi_card": {"name": "玄机子·妖道", "rarity": "R", "troop": "strategist", "person": "xuanjizi", "bonus": {"hp": 20, "at": 14}, "skills": ["mihun"], "pool": false},
     "lidamu_card": {"name": "李大目·黑山凶寇", "rarity": "R", "troop": "bandit", "person": "lidamu", "bonus": {"hp": 40, "at": 14}, "skills": ["kaishan"], "pool": false},
-    "zhangbaiqi_card": {"name": "张白骑·黄巾渠帅", "rarity": "R", "troop": "bandit", "person": "zhangbaiqi", "bonus": {"hp": 30, "at": 10}, "skills": ["huangtian"], "pool": false}
+    "zhangbaiqi_card": {"name": "张白骑·黄巾渠帅", "rarity": "R", "troop": "bandit", "person": "zhangbaiqi", "bonus": {"hp": 30, "at": 10}, "skills": ["huangtian"], "pool": false},
+    "yayi_card": {"name": "衙役", "rarity": "N", "troop": "infantry", "bonus": {}, "pool": false}
   },
   "enemies": {
     "huangjin_remnant": {"name": "黄巾余孽", "portrait": "huangjin_nanxia", "hp": 4200, "at": 200, "actions": 2, "magic_resist": 0.2, "moves": [{"name": "黄天当立", "power": 1.0, "weight": 3}, {"name": "符水", "power": 0, "weight": 1, "heal": 0.08}, {"name": "妖言", "power": 0.5, "weight": 1, "confuse": 0.5}], "card": "huangjin_nanxia"},
@@ -411,6 +412,7 @@
     "lijue": {"name": "李傕", "portrait": "lijue", "hp": 10000, "at": 310, "actions": 2, "moves": [{"name": "西凉铁骑", "power": 1.0, "weight": 3}, {"name": "纵火", "power": 0.5, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "劫掠", "power": 0.8, "weight": 1, "heal": 0.08}, {"name": "焚城·蓄力", "power": 0, "weight": 1, "charge": "焚城"}, {"name": "焚城", "power": 2.4, "weight": 0, "pierce": true}], "card": "lijue"},
     "yuji_xintu": {"name": "于吉信徒", "portrait": "fushui_xintu", "hp": 2800, "at": 165, "actions": 2, "moves": [{"name": "泼符水", "power": 1.0, "weight": 3}, {"name": "念咒", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "仙师保佑", "power": 0, "weight": 1, "heal": 0.1, "when": "half"}], "card": "fushui_xintu"},
     "boar": {"name": "野猪", "hp": 1300, "at": 110, "actions": 2, "moves": [{"name": "冲撞", "power": 1.0, "weight": 3}, {"name": "獠牙", "power": 1.4, "weight": 1}, {"name": "发狂", "power": 0, "weight": 2, "rage": 0.3, "when": "half", "once": true}]},
+    "yayi": {"name": "衙役", "hp": 1100, "at": 90, "actions": 1, "moves": [{"name": "乱棍", "power": 1.0, "weight": 3}, {"name": "蛮力一击", "power": 1.3, "weight": 1}], "card": "yayi_card"},
     "tiger": {"name": "吊睛白额虎", "portrait": "baie_hu", "hp": 3000, "at": 190, "actions": 2, "moves": [{"name": "扑", "power": 1.0, "weight": 2}, {"name": "剪", "power": 1.6, "weight": 1}, {"name": "虎啸", "power": 0.3, "weight": 1, "ap_drain": 2}]},
     "huangjin_yaodao": {"name": "妖道唐周", "portrait": "yaodao", "hp": 5500, "at": 220, "actions": 2, "magic_resist": 0.3, "moves": [{"name": "符水", "power": 0, "weight": 1, "heal": 0.12}, {"name": "黄天当立", "power": 1.5, "weight": 2}, {"name": "妖言惑众", "power": 0.5, "weight": 1, "confuse": 0.6}, {"name": "五雷正法·蓄力", "power": 0, "weight": 1, "charge": "五雷正法"}, {"name": "五雷正法", "power": 2.8, "weight": 0, "pierce": true}], "card": "yaodao_card"},
     "shuizei_scout": {"name": "水贼喽啰", "portrait": "shuizei_bing", "hp": 2600, "at": 170, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "水鬼翻身", "power": 1.4, "weight": 1}], "card": "shuizei_bing"},
@@ -464,6 +466,7 @@
     "c3_yuanshu": {"name": "袁术", "turn_limit": 6, "enemy": "yuanshu"},
     "yuji_xintu": {"name": "于吉信徒", "turn_limit": 6, "enemy": "yuji_xintu"},
     "boar": {"name": "野猪林", "turn_limit": 6, "enemy": "boar"},
+    "jz_county_fight": {"name": "州衙 · 拔刀相助", "turn_limit": 5, "enemy": "yayi"},
     "tiger": {"name": "打虎", "turn_limit": 6, "enemy": "tiger"},
     "yaodao": {"name": "妖道唐周", "turn_limit": 8, "enemy": "huangjin_yaodao"},
     "shuizei_scout": {"name": "水贼喽啰", "turn_limit": 6, "enemy": "shuizei_scout"},

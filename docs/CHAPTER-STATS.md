@@ -15,7 +15,7 @@
 | 章节 | quest id | 路线门槛 | 格数 | 战斗 普/精/首 | 分叉点 | 入队 | CG 已有/合计 | 兵卡池/招贤池/事件池/洗牌组 | 结局 |
 |---|---|---|---:|---:|---:|---|---:|---|---|
 | 第一章 · 富春（南线） | `prologue`（x 0–22） | 出生点=南方 | 31 | 4 / 1 / 3 | 2 | 孙策、周瑜、吴夫人、丹阳兵等 3 张兵卡 | 8/9 | 15 / 3 / 31 / 2 | — |
-| 第一章 · 冀州风云（北线） | `prologue`（x 23–46） | 出生点=北方 | 25 | 1 / 1 / 2（对标南线，见下方说明） | 1 choose | 赵云、郭嘉、常山铁骑、太行义勇 | 7/8 | 3 / 0 / 11（事件池＝universal 6 + north 6，见下方说明） | 「北线·敬请期待」（已挪到第二章） |
+| 第一章 · 冀州风云（北线） | `prologue`（x 23–?） | 出生点=北方 | 28 | 3 / 2 / 2（对标南线，见下方说明；含郭嘉/赵云定计分叉各一条线） | 1 choose | 赵云、郭嘉、常山铁骑、太行义勇 | 7/8 | 3 / 0 / 11（事件池＝universal 6 + north 6，见下方说明） | 「北线·敬请期待」（已挪到第二章） |
 | 第二章 · 讨伐董卓（南线） | `taodong` | 南方出生 | 51 | 12 / 2 / 1 | 1 choose + 2 lose_goto | 董白、宫女、西凉女亲兵 | 14/17 | 0 / 0 / 32 / 1 | — |
 | 第二章 · 洛阳烟云（北线） | `luoyang_n` | 北方出生 | 34 | 4 / 2 / 2 | 1 choose + 1 lose_goto | 吕玲绮 | 1/3 | 3 / 3 / 9 / 0 | 「北线·敬请期待」 |
 | 第三章 · 传国玉玺 | `yuxi` | 一周目必经 | 23 | 10 / 1 / 1 | 1 lose_goto | 蔡文姬（条件触发） | 8/10 | 0 / 0 / 33 / 2 | 结局一 · 玉碎 |
@@ -23,7 +23,7 @@
 | 第三章 · 长安 | `changan` | 路线：长安 | 28 | 6 / 2 / 1 | 0 | 皇甫嵩 | 0/13 | 0 / 0 / 12 / 0 | （接第四章） |
 | 第四章 · 挟天子 | `dongui` | 吕布杀了董卓 | 37* | 12 / 6 / 2 | 1 lose_goto | 荀攸、钟繇、徐晃、黄忠、贾诩、貂蝉、飞熊军 | 0/15 | 0 / 0 / 25 / 0 | 结局二 · 同归（无警告路线） |
 | 第五章 · 荆襄风云 | `jingxiang` | 南阳：袁术东逃 | 32* | 6 / 1 / 3 | 0（AB 两条路线靠 requires/unless 互斥，不是 choose） | 蒯越、蔡府连弩手、荆州水军 | 0/11 | 14 / 3 / 24 / 4 | 结局三 · 恨海（默认线） |
-| **合计（已实装）** | 8 条 quest | — | **321** | **61 / 17 / 15**（共 93 场战斗） | — | 27 个可招募卡 | **38/92** | — | 4 个结局卡 + 1 个占位结局 |
+| **合计（已实装）** | 8 条 quest | — | **324** | **63 / 18 / 15**（共 96 场战斗） | — | 27 个可招募卡 | **38/92** | — | 4 个结局卡 + 1 个占位结局 |
 
 \* `dongui`/`jingxiang` 很多格子 x 相同、y 不同（同一时间点的互斥分支，比如警告/不警告、A 线/B 线），格数是两条分支加总，不是玩家一轮会走的步数。
 
@@ -50,12 +50,12 @@
 
 | 节点 | 格子 | 战斗 | 分叉 | 入队/获得 | CG |
 |---|---|---|---|---|---|
-| 甄府结缘 | jz_arrive→jz_test(choose)→jz_ledger_a/jz_ledger_b→jz_ledger→jz_county→jz_guojia | — | `jz_test`：如实说不会算账 / 先应下来再偷学，两句不同的俏皮话，汇合回 `jz_ledger`（choose 本身不配 CG——背景 CG 放在前一格 `jz_arrive`，choose 格只放文字，这样「结束后再看」回看逻辑和南线 `plan` 一致） | 张夫人、甄宓、赵云、郭嘉依次首次登场 | jz_wake✅, jz_ledger✅, jz_county✅, jz_guojia✅ |
+| 甄府结缘 | jz_arrive→jz_ledger→jz_county→jz_help（战斗·拔刀相助）→jz_guojia | 普通 1（拔刀相助，新敌人 `yayi` 衙役） | 开场那个「会不会算账」的 choose 分叉（`jz_test`→`jz_ledger_a`/`jz_ledger_b`）砍掉了——两个回答只换一句俏皮话，没有机制差异，没必要占一个分叉点，直接合并进 `jz_ledger`，保留「先应下来，今晚再偷偷现学」那版（张夫人「别熬得太狠」是立人设的台词）。`jz_county`（衙役举棍要打赵云）后面新加 `jz_help`：主角自己动手打退衙役，不再是纯靠 `jz_guojia` 里郭嘉一张嘴说退郭图——赵云亲眼看着主角打架，`jz_guojia` 开场台词也跟着从「赵云又气又急」改成「赵云抱拳道谢」 | 张夫人、甄宓、赵云、郭嘉依次首次登场 | jz_wake✅, jz_ledger✅, jz_county✅, jz_guojia✅ |
 | 赴难路上（新补的 4 格） | jz_integrity（赵云却礼，立住「正直」）→jz_relief→jz_mystery1（真正的随机？格，见下）→jz_curious（甄宓十万个为什么，立住「好奇」）→jz_zuoci（左慈路遇，「你们俩……哦不，是你」，埋 `STORY.md` 规划的「双击」伏笔） | — | — | — | — |
 | 黑山救援 | jz_ambush→jz_breakout→jz_plan→jz_fire→jz_rescue→jz_recover→jz_boss→jz_loot | 首领 1（断后·张白骑，新）+ 普通 1（上风口）+ 精英 1（祭坛·玄机子，补标）+ 首领 1（黑山寨·李大目）+ 北线专属 treasure 1（黑山寨缴获，走 `pool_overrides`） | — | 赵云、郭嘉入队（并肩打完这一战才说出口，不是一见面就纳头便拜） | jz_ambush✅, jz_rescue✅, jz_boss |
 | 立足冀州 | jz_reunite→jz_almsgiving→jz_training→jz_night→jz_end | — | — | 常山铁骑、太行义勇 | jz_end✅（`jz_almsgiving`/`jz_training`/`jz_night` 三格砍掉了 CG，没有角色首次登场，纯气氛，保 CG 预算给角色登场和黑山寨三部曲） |
 
-本段小计：1 普通 / 1 精英 / 2 首领，1 choose，CG 8 张挂字段、**7 张已交付，只差 `jz_boss`（黑山寨决战）**——和南线同样的「每角色一张 CG」原则、同样 8 张的量级；战斗三档现在也对标了南线一轮能撞上的量级（南线约 1-2 普通 + 1 精英 + 2 首领）。`jz_county` 的事件地点从真定县衙改到了冀州治所邺城州衙（赵云是为乡里跑去邺城讨说法，主角是在邺城的分号做生意撞上的），已交付的 `jz_county.jpg`/`jz_guojia.jpg` 画面本身是通用的公堂/雪街场景，没有城市专属标识，改地点不影响已交付的图。衔接：`jz_end` 不再单独出结局卡，直接进第二章 `luoyang_n`。
+本段小计：3 普通 / 2 精英 / 2 首领，1 choose，CG 8 张挂字段、**7 张已交付，只差 `jz_boss`（黑山寨决战）**——和南线同样的「每角色一张 CG」原则、同样 8 张的量级；战斗三档现在也对标了南线一轮能撞上的量级（南线约 1-2 普通 + 1 精英 + 2 首领）。`jz_county` 的事件地点从真定县衙改到了冀州治所邺城州衙（赵云是为乡里跑去邺城讨说法，主角是在邺城的分号做生意撞上的），已交付的 `jz_county.jpg`/`jz_guojia.jpg` 画面本身是通用的公堂/雪街场景，没有城市专属标识，改地点不影响已交付的图。衔接：`jz_end` 不再单独出结局卡，直接进第二章 `luoyang_n`。
 「赴难路上」这 3 格最初是专门为了补格数加的：当时 `prologue` 南北共用一个 quest，`soldier_pool`/`recruit_pool`/`event_pool` 全是南线口味（丹阳兵、江东弓手……），没法照搬南线那样随手插 `treasure`/`recruit`/`mystery` 格去凑数（会在太行山里开出一把丹阳兵），所以只能加纯 `event` 叙事格——好处是不用碰引擎，坏处是加不了战利品/随机事件那味儿的细节。这个「一个 quest 两套池子」的结构问题后来解掉了（`pool_overrides` + 事件 `scope` 系统，见下方），`jz_mystery1` 就是解掉之后第一个吃到红利的真随机格。
 人物基调：张夫人对主角是真心疼爱，带几分精明主母的宠溺（`jz_ledger_b` 那句「别熬得太狠」就是这个调子）；甄宓单纯好奇、黏人；赵云正直勇敢、认死理但重情义；郭嘉看着无所谓，心里一清二楚。
 `jz_mystery1` 是这次补的真正随机？格——之前「一个 quest 两套池子」的限制已经解掉了，后来又把事件池整个重做成 config-based：每个事件带一个 `scope`，quest 不再手抄一长串 id，只声明自己的 `event_scope`（南线 quest 是 `south`，北线是 `north`，`prologue` 用 `pool_overrides` 按出生点切换）。`scope` 可以是 `universal`/`south`/`north` 这三个大池子，也可以直接写某个 quest 自己的 id——专属一个章节、只该遇见一次的孤例（`qiao`/`yuji` 只在 `prologue`，`shuijing`/`pangdegong`/`ganning`/`huangchengyan` 只在第五章 `jingxiang`，`jz_spy`/`yuxi_rumor` 只在第三章 `yuxi`，`zhuhou_yan`/`tangji` 只在第二章 `taodong`）就这么标，不会被南线大池子误共享到别的章节。`soldier_pool`/`recruit_pool` 还是走 `pool_overrides`，`出生：冀州无极` 的存档配了 `soldier_pool`：`heishan_bing`/`changshan_tieqi`/`taihang_yiyong`。`Quests.pools(q, save)` 是统一入口，机制细节见 `SKILL.md`。标 `scope` 之前把事件整个 JSON（含 `options`/`effects` 里的 `say`，不只是顶层 `text`）过一遍，查有没有南线角色台词或 `shuizei_scout` 这类南线专属战斗——第一遍只查顶层文本漏了好几个（`washer`/`horse`/`guanlu`/`chest`/`yazhai` 的南线台词全在 `options` 里），回头用递归扫描才查全，顺手把 `luoyang_n` 沿用的 `hero`/`deserters`/`dice` 也摘了。现在 `universal` 6 个、`north` 6 个（含这次新写的 `taihang_hunter`/`zhen_caravan`/`taihang_bear` 三个纯北线事件，都是非战斗的性格/资源事件，不需要新战斗资源）、`south` 37 个、按章节 id 单独 scope 的孤例 10 个（`prologue` 2、`taodong` 2、`yuxi` 2、`jingxiang` 4）——北线（universal+north）加起来 11 个可抽事件，比重构前的 3-6 个厚实不少，但离南线还有差距，想再加就照着这三个的样子写新的 `scope: "north"` 事件就行，不用再碰 quest 配置。
