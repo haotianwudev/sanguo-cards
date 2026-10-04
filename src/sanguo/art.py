@@ -166,8 +166,8 @@ def write_needs(pics: Path = PICS) -> None:
                 if not ev:
                     continue
                 for pk in ev.get("portraits", []):
-                    people.append((pk, f"事件「{ev['title']}」"))
-                for o in ev["options"]:
+                    people.append((pk, f"事件「{ev.get('title', '')}」"))
+                for o in ev.get("options", ev.get("choose", [])):
                     fights += [e["battle"] for e in o.get("effects", []) if "battle" in e]
             for f in fights:
                 e = cards["enemies"][cards["scenarios"][f]["enemy"]]
@@ -183,7 +183,7 @@ def write_needs(pics: Path = PICS) -> None:
                 fights_here.append(s["battle"])
             for ev in [story["events"].get(s.get("event", ""))] + [story["events"][e] for e in event_pool_of(q)]:
                 if ev:
-                    for o in ev["options"]:
+                    for o in ev.get("options", ev.get("choose", [])):
                         fights_here += [e["battle"] for e in o.get("effects", []) if "battle" in e]
         bg_rows = []
         for f in dict.fromkeys(cards["scenarios"][x].get("art", x) for x in fights_here):
@@ -212,12 +212,12 @@ def write_needs(pics: Path = PICS) -> None:
             ev = story["events"][eid]
             if ev.get("cg") and ev["cg"] not in seen_cg:
                 seen_cg.add(ev["cg"])
-                ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev['title']}」 |")
+                ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev.get('title', eid)}」 |")
         for s in q["squares"].values():
             ev = story["events"].get(s.get("event", ""))
             if ev and ev.get("cg") and ev["cg"] not in seen_cg:
                 seen_cg.add(ev["cg"])
-                ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev['title']}」 |")
+                ev_rows.append(f"| {'✅ 已有' if ev['cg'] in cgs_cfg else '⬜ 缺'} | `{ev['cg']}` | 「{ev.get('title', s.get('event', ''))}」 |")
         def map_status(key: str) -> str:
             m = art_cfg.get("maps", {}).get(key)
             return "⬜ 缺" if not m else ("🟡 程序占位" if "生成" in m.get("license", "") else "✅ 已有")
