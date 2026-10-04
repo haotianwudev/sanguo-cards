@@ -336,16 +336,13 @@
       "artist": "Unknown authorUnknown author"
     },
     "sunshangxiang": {
-      "src": "source/public-domain/sunshangxiang.jpg",
+      "src": "source/generals/sunshangxiang.jpg",
       "face": [
-        0.45,
-        0.16
+        0.51,
+        0.23
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:SunShangxiang.jpg",
-      "license": "Public domain",
-      "artist": "Unknown authorUnknown author"
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
     },
     "taishici": {
       "src": "source/public-domain/taishici.jpg",

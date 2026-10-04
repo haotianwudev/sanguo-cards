@@ -9,7 +9,7 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-1. `sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）
+1. ~~`sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）~~（✅ 已完成）
 2. `zhenmi` — 甄宓（成年女性，洛神仙子）（立绘）
 3. `mizhen` — 糜贞（成年女性，徐州千金）（立绘）
 4. `guonvwang` — 郭女王（成年女性，曹丕文德皇后）（立绘）
@@ -66,7 +66,7 @@
 55. `zhoutai` — 周泰（南线第七章）（立绘）
 56. `jiangqin` — 蒋钦（南线第七章）（立绘）
 57. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
-58. `sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）
+58. ~~`sunshangxiang` — 孙尚香（成年女性，换掉占位）（立绘）~~（✅ 已完成）
 59. `guonvwang` — 郭女王（北线第八章，成年女性）（立绘）
 60. `mateng` — 马腾（北线第八、九章）（立绘）
 61. `hansui` — 韩遂（北线第八章）（立绘）
@@ -1932,7 +1932,7 @@ Sun Quan (孙权), Sun Jian's second son, a composed young man of about nineteen
 ```
 </details>
 
-### `sunshangxiang` 🟡 换掉占位
+### `sunshangxiang` ✅ 已有
 
 ```
 孙尚香（孙坚之女，十九岁左右的成年女性，红甲弓腰姬，江东郡主）的竖版人物立绘。

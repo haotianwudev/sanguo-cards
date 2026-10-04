@@ -38,7 +38,7 @@
 | `madai` | source/public-domain/madai.jpg | [链接](https://commons.wikimedia.org/wiki/File:Ma_Dai_Qing_portrait.jpg) | Public domain | Unknown author |
 | `mizhu` | source/public-domain/mizhu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Mi_Zhu.jpg) | Public domain | unspecified |
 | `pangtong` | source/public-domain/pangtong.jpg | [链接](https://commons.wikimedia.org/wiki/File:PangTong.jpg) | Public domain | Unknown authorUnknown author |
-| `sunshangxiang` | source/public-domain/sunshangxiang.jpg | [链接](https://commons.wikimedia.org/wiki/File:SunShangxiang.jpg) | Public domain | Unknown authorUnknown author |
+| `sunshangxiang` | source/generals/sunshangxiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taishici` | source/public-domain/taishici.jpg | [链接](https://commons.wikimedia.org/wiki/File:Taishi_Ci_Qing_illustration.jpg) | Public domain | Unknown author |
 | `xuchu` | source/public-domain/xuchu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Chu_Qing_illustration.jpg) | Public domain | Unknown author |
 | `xuhuang` | source/generals/xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
