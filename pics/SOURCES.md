@@ -202,3 +202,5 @@
 | `cg:jz_county` | source/cg/jz_county.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:jz_guojia` | source/cg/jz_guojia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:jz_boss` | source/cg/jz_boss.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ln_camp` | source/cg/ln_camp.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c1_era` | source/cg/c1_era.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

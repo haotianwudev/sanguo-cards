@@ -992,10 +992,10 @@
     "xuanjizi": {
       "src": "source/generals/xuanjizi.jpg",
       "face": [
-        0.55,
-        0.23
+        0.51,
+        0.21
       ],
-      "head": 0.24,
+      "head": 0.22,
       "license": "用户提供（Gemini 生成）"
     },
     "zhangbaiqi": {
@@ -1422,6 +1422,14 @@
     },
     "jz_boss": {
       "src": "source/cg/jz_boss.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ln_camp": {
+      "src": "source/cg/ln_camp.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c1_era": {
+      "src": "source/cg/c1_era.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

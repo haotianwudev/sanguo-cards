@@ -332,3 +332,13 @@ func test_generals_outclass_soldiers_of_their_troop() -> void:
 		var c: Dictionary = db.cards[cid]
 		if not c["soldier"] and best.has(c["troop"]) and c["rarity"] in ["SR", "SSR"]:
 			check(db.build_fighter(cid)["at"] > best[c["troop"]], "%s (%s) should out-hit every %s soldier" % [c["name"], c["rarity"], c["troop"]])
+
+
+func test_boss_cards_and_xuanjizi_have_portraits() -> void:
+	check_eq(Kit.portrait_key("xuanjizi_card"), "xuanjizi")
+	check_eq(Kit.portrait_key("lidamu_card"), "lidamu")
+	check_eq(Kit.portrait_key("yaodao_card"), "yaodao")
+	check_eq(Kit.portrait_key("dongzhuo_card"), "dongzhuo")
+	var fighter := GameData.get_db().build_fighter("xuanjizi_card")
+	check_eq(fighter.get("person"), "xuanjizi")
+

@@ -296,6 +296,10 @@ static func portrait_key(card_id: String) -> String:
 	var card: Dictionary = GameData.get_db().cards.get(card_id, {})
 	if card.has("person") and idx.has(card["person"]):
 		return card["person"]
+	if card_id.ends_with("_card"):
+		var base := card_id.trim_suffix("_card")
+		if idx.has(base):
+			return base
 	return ""
 
 
