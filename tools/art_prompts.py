@@ -20,6 +20,17 @@ NL = "\n"
 
 DONGBAI = ("董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）")
 HERO = "主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀"
+HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿甄宓亡父留下的河北式旧鱼鳞甲（素铁色，不要绿色和金色），外披雪白貂裘，手持白蜡杆长枪（枪头下系一个红色平安结）"
+HERO_MODERN = "主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器"
+
+
+def hero_note(key: str) -> str:
+    ## which outfit line a CG gets: before the transmigration (the opening), the north route, or the south default
+    if key in ("c1_era",):
+        return HERO_MODERN
+    if key and key.startswith(("jz_", "ln_")):
+        return HERO_NORTH
+    return HERO
 STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
 PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。")
 # Backgrounds are now atmospheric and character-specific per user directive
@@ -1642,7 +1653,7 @@ def cg_prompt(scene: str, key: str = None, is_event: bool = False) -> tuple[str,
                  f"构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。"
                  f"画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。{NL}"
                  f"画风：{STYLE}，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。{NL}"
-                 f"（主角出场时——{HERO}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene or "Dong Bai" in scene) else ""))
+                 f"（主角出场时——{hero_note(key)}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene or "Dong Bai" in scene) else ""))
 
     if is_event:
         eid = key[2:] if key and key.startswith("e_") else key
@@ -1654,7 +1665,7 @@ def cg_prompt(scene: str, key: str = None, is_event: bool = False) -> tuple[str,
                  f"构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。"
                  f"画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。{NL}"
                  f"画风：{STYLE}，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。{NL}"
-                 f"（主角出场时——{HERO}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene_zh or "Dong Bai" in scene_zh) else ""))
+                 f"（主角出场时——{hero_note(key)}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene_zh or "Dong Bai" in scene_zh) else ""))
     return zh_prompt, en_prompt
 
 

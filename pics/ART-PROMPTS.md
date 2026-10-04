@@ -3246,7 +3246,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 横版剧情事件插画：开场：凌晨三点的出租屋，只有显示器亮着；三十岁的社畜（寸头、领带松着、桌上冷掉的咖啡和加班文件）凑近屏幕，游戏画面让他选出生点，分成左右两块发光的画面——左边是暮色里雾气蒙蒙的江南水乡、江边一位雍容妇人的剪影，右边是风雪中挂着红旗的北方商队；他的脸被两边映得一半暖一半冷；屏幕上不要出现能读的文字。
 构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
+（主角出场时——主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器。）
 ```
 
 <details>
@@ -3256,7 +3256,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 横版剧情事件插画：3 a.m. in a cramped modern apartment, lit only by a monitor: a worn-out 30-year-old office worker with short buzz-cut hair, loosened tie, cold coffee cups and overtime paperwork around him, leaning in toward the screen; on the monitor a game asks him to pick a birthplace, split into two glowing panels — on the left a warm misty Jiangnan river town at dusk with a graceful noblewoman's silhouette on the riverbank, on the right a snowstorm over a northern merchant caravan with a red banner; his face lit half warm, half cold by the two panels; no readable text on the screen。
 构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
+（主角出场时——主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器。）
 ```
 </details>
 
@@ -4356,7 +4356,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 横版剧情事件插画：虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外。
 构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
+（主角出场时——北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿甄宓亡父留下的河北式旧鱼鳞甲（素铁色，不要绿色和金色），外披雪白貂裘，手持白蜡杆长枪（枪头下系一个红色平安结）。）
 ```
 
 ## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）
