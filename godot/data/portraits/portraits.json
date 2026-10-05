@@ -123,5 +123,10 @@
   "xiahoulan": {"file": "xiahoulan.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhangyan": {"file": "zhangyan.jpg", "face": [0.56, 0.15], "head": 0.2},
   "zhenmi": {"file": "zhenmi.jpg", "face": [0.5, 0.25], "head": 0.25},
-  "mizhen": {"file": "mizhen.jpg", "face": [0.5, 0.25], "head": 0.26}
+  "mizhen": {"file": "mizhen.jpg", "face": [0.5, 0.25], "head": 0.26},
+  "baier": {"file": "baier.jpg", "face": [0.5, 0.28], "head": 0.32},
+  "qingzhou": {"file": "qingzhou.jpg", "face": [0.48, 0.32], "head": 0.3},
+  "youzhou": {"file": "youzhou.jpg", "face": [0.47, 0.3], "head": 0.32},
+  "liannu": {"file": "liannu.jpg", "face": [0.46, 0.25], "head": 0.28},
+  "minfu": {"file": "minfu.jpg", "face": [0.53, 0.28], "head": 0.28}
 }

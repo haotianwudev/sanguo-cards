@@ -1055,7 +1055,7 @@
     "caohong": {
       "src": "source/generals/caohong.jpg",
       "face": [
-        0.50,
+        0.5,
         0.23
       ],
       "head": 0.26,
@@ -1064,7 +1064,7 @@
     "yayi": {
       "src": "source/soldiers/yayi.jpg",
       "face": [
-        0.50,
+        0.5,
         0.28
       ],
       "head": 0.24,
@@ -1159,6 +1159,51 @@
       ],
       "head": 0.26,
       "license": "用户提供（Gemini 生成）"
+    },
+    "baier": {
+      "src": "source/soldiers/baier.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.32,
+      "license": "Antigravity 生成"
+    },
+    "qingzhou": {
+      "src": "source/soldiers/qingzhou.jpg",
+      "face": [
+        0.48,
+        0.32
+      ],
+      "head": 0.3,
+      "license": "Antigravity 生成"
+    },
+    "youzhou": {
+      "src": "source/soldiers/youzhou.jpg",
+      "face": [
+        0.47,
+        0.3
+      ],
+      "head": 0.32,
+      "license": "Antigravity 生成"
+    },
+    "liannu": {
+      "src": "source/soldiers/liannu.jpg",
+      "face": [
+        0.46,
+        0.25
+      ],
+      "head": 0.28,
+      "license": "Antigravity 生成"
+    },
+    "minfu": {
+      "src": "source/soldiers/minfu.jpg",
+      "face": [
+        0.53,
+        0.28
+      ],
+      "head": 0.28,
+      "license": "Antigravity 生成"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -1319,6 +1364,14 @@
     },
     "c2_gongqi": {
       "src": "source/battles/c2_gongqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_langqi": {
+      "src": "source/battles/c4_langqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ln_langqi": {
+      "src": "source/battles/ln_langqi.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },

@@ -223,7 +223,7 @@
 | ✅ 已有 | `feixiong` | 飞熊军（飞熊军） |
 | ✅ 已有 | `liru` | 李儒伏兵（李儒） |
 | ✅ 已有 | `dongbai` | 董白（董白） |
-| ⬜ 缺 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
+| ✅ 已有 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
 | ✅ 已有 | `hulao_ch1` | 追兵·吕布（吕布） |
 | ✅ 已有 | `dagu` | 大谷·徐荣（徐荣） |
 | ✅ 已有 | `lijue` | 洛阳城门·李傕（李傕） |
@@ -284,7 +284,7 @@
 | ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 | ✅ 已有 | `dagu` | 大谷·徐荣（徐荣） |
 | ✅ 已有 | `feixiong` | 飞熊军（飞熊军） |
-| ⬜ 缺 | `ln_langqi` | 劫营·并州狼骑（并州狼骑） |
+| ✅ 已有 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
 | ✅ 已有 | `hulao_ch1` | 追兵·吕布（吕布） |
 | ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `guosi` | 郭汜（郭汜） |
@@ -568,13 +568,21 @@
 | ✅ 正式 | `gaoshun` | 高顺 |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋 |
 | ⬜ 缺 | `guanhai` | 管亥 |
+| ⬜ 缺 | `bandit` | 太行巡山兵 |
+| ⬜ 缺 | `yanliang` | 颜良 |
+| ⬜ 缺 | `huangjin` | 黄巾渠帅 |
 
 能拿到的卡
 
 | 状态 | key | 卡 |
 |---|---|---|
+| ⬜ 缺 | `zheng_daoshou` | 郑家刀手（郑好的卡） |
+| ⬜ 缺 | `jiang_jiguanshou` | 姜家机关手（姜巧的卡） |
 | ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
+| 🟡 占位 | `taishici` | 太史慈 |
 | ⬜ 缺 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
+| ⬜ 缺 | `beihai_tuntian` | 北海屯田兵 |
+| ✅ 正式 | `qingzhou` | 青州兵（黄巾渠帅的卡） |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -584,20 +592,27 @@
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ⬜ 缺 | `bh_zhenghao` | 郑家寨（郑好） |
 | ⬜ 缺 | `bh_jiangqiao` | 姜家寨（姜巧） |
-| ⬜ 缺 | `ln_langqi` | 劫营·并州狼骑（并州狼骑） |
+| ✅ 已有 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
 | ⬜ 缺 | `c4_gaoshun` | 后门·高顺（高顺） |
 | ⬜ 缺 | `bh_lubu` | 太行山口·吕布（吕布） |
 | ⬜ 缺 | `hs_jizhou_qibing` | 秘道追兵·冀州轻骑（冀州轻骑） |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
 | ⬜ 缺 | `bh_guanhai` | 北海解围（管亥） |
+| ⬜ 缺 | `bh_patrol` | 太行伏兵（太行巡山兵） |
+| ⬜ 缺 | `bh_yanliang` | 渡口·颜良（颜良） |
+| ⬜ 缺 | `bh_hj_qushuai` | 青州渠帅（黄巾渠帅） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
 | 状态 | key | 剧情格 |
 |---|---|---|
+| ⬜ 缺 | `c4_drink` | 山寨敬酒 |
 | ⬜ 缺 | `end_juefa` | 结局七 |
 | ⬜ 缺 | `c4_escape` | 金蝉脱壳 |
-| ⬜ 缺 | `c4_taishici` | 太史慈 |
+| ⬜ 缺 | `c4_yanliang` | 渡口·颜良 |
+| ⬜ 缺 | `c4_million_hj` | 北海之围 |
+| ⬜ 缺 | `c4_taishici_break` | 太史慈 |
+| ⬜ 缺 | `c4_porridge` | 阵前熬粥 |
 | ⬜ 缺 | `c4_kongrong` | 让北海 |
 
 ## 第四章 · 挟天子
@@ -651,7 +666,7 @@
 | ⬜ 缺 | `c7_chenlan` | 宛城城下·陈兰（陈兰） |
 | ⬜ 缺 | `c7_jiling` | 宛城·纪灵（纪灵） |
 | ⬜ 缺 | `c4_gaoshun` | 后门·高顺（高顺） |
-| ⬜ 缺 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
+| ✅ 已有 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
 | ⬜ 缺 | `c6_xianzhen` | 宣平门前·陷阵营兵（陷阵营兵） |
 | ⬜ 缺 | `c4_lvbu` | 宣平门·吕布（吕布） |
 
@@ -779,7 +794,6 @@
 | 🟡 占位 | `zhugeliang` | 诸葛亮（SSR） |
 | ✅ 正式 | `huanggai` | 黄盖（SR） |
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
-| 🟡 占位 | `taishici` | 太史慈（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
 | ⬜ 缺 | `mayunlu` | 马云騄（SR） |

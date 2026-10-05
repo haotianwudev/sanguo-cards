@@ -128,6 +128,11 @@
 | `zhangyan` | source/generals/zhangyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhenmi` | source/generals/zhenmi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mizhen` | source/generals/mizhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `baier` | source/soldiers/baier.jpg | 用户提供 | Antigravity 生成 | — |
+| `qingzhou` | source/soldiers/qingzhou.jpg | 用户提供 | Antigravity 生成 | — |
+| `youzhou` | source/soldiers/youzhou.jpg | 用户提供 | Antigravity 生成 | — |
+| `liannu` | source/soldiers/liannu.jpg | 用户提供 | Antigravity 生成 | — |
+| `minfu` | source/soldiers/minfu.jpg | 用户提供 | Antigravity 生成 | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -167,6 +172,8 @@
 | `battle:heishan_zhai` | source/battles/heishan_zhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:ln_lvlingqi` | source/battles/ln_lvlingqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c2_gongqi` | source/battles/c2_gongqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c4_langqi` | source/battles/c4_langqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:ln_langqi` | source/battles/ln_langqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
