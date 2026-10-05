@@ -95,6 +95,7 @@
 | `chuangong` | source/soldiers/chuangong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xianzhen` | source/soldiers/xianzhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `bingzhou` | source/soldiers/bingzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `quyi` | source/generals/quyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gaoshun` | source/generals/gaoshun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangfusong` | source/generals/huangfusong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caiyong` | source/generals/caiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

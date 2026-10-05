@@ -863,6 +863,15 @@
       "head": 0.28,
       "license": "用户提供（Gemini 生成）"
     },
+    "quyi": {
+      "src": "source/generals/quyi.jpg",
+      "face": [
+        0.49,
+        0.25
+      ],
+      "head": 0.23,
+      "license": "用户提供（Gemini 生成）"
+    },
     "gaoshun": {
       "src": "source/generals/gaoshun.jpg",
       "face": [
