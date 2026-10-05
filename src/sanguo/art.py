@@ -253,8 +253,8 @@ def write_needs(pics: Path = PICS) -> None:
     ]
     for q in story["quests"]:
         out += chapter(q)
-    rest = [(key_of(cid), c["name"] + f"（{c['rarity']}）") for cid, c in cards["cards"].items()
-            if c["rarity"] != "N" and key_of(cid) not in seen]
+    rest = [(key_of(cid), c.get("name", "") + f"（{c.get('rarity', 'N')}）") for cid, c in cards["cards"].items()
+            if c.get("rarity", "N") != "N" and key_of(cid) not in seen]
     rest.sort(key=lambda r: {"SSR": 0, "SR": 1, "R": 2}.get(r[1][-3:-1].strip("（"), 3))
     out += ["", "## 其余武将（招募池，按需再画）", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(rest)
     (pics / "ART-NEEDS.md").write_text(NL.join(out) + NL, "utf-8", newline="\n")

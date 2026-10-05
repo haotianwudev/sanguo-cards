@@ -728,6 +728,51 @@
       "head": 0.26,
       "license": "用户提供（Gemini 生成）"
     },
+    "cav_n": {
+      "src": "source/soldiers/cav_n.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.24,
+      "license": "Antigravity 生成"
+    },
+    "spear_n": {
+      "src": "source/soldiers/spear_n.jpg",
+      "face": [
+        0.53,
+        0.34
+      ],
+      "head": 0.24,
+      "license": "Antigravity 生成"
+    },
+    "archer_n": {
+      "src": "source/soldiers/archer_n.jpg",
+      "face": [
+        0.45,
+        0.33
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "strat_n": {
+      "src": "source/soldiers/strat_n.jpg",
+      "face": [
+        0.51,
+        0.25
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "log_n": {
+      "src": "source/soldiers/log_n.jpg",
+      "face": [
+        0.54,
+        0.24
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
     "shanzei_bing": {
       "src": "source/soldiers/shanzei_bing.jpg",
       "face": [

@@ -551,6 +551,55 @@
 | ⬜ 缺 | `c5_rescue` | 格杀勿论 |
 | ⬜ 缺 | `c5_death` | 董卓之死 |
 
+## 第四章 · 双凤乱太行
+
+地图底图 `beihai`：⬜ 缺
+
+| 状态 | key | 用在 |
+|---|---|---|
+| ✅ | — | 都有了 |
+
+敌人（战斗界面上方；和它的卡共用一张图）
+
+| 状态 | key | 敌人 |
+|---|---|---|
+| ✅ 正式 | `zhenghao` | 郑好 |
+| ✅ 正式 | `jiangqiao` | 姜巧 |
+| ✅ 正式 | `gaoshun` | 高顺 |
+| ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋 |
+| ⬜ 缺 | `guanhai` | 管亥 |
+
+能拿到的卡
+
+| 状态 | key | 卡 |
+|---|---|---|
+| ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
+| ⬜ 缺 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
+
+战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
+
+| 状态 | key | 战斗 |
+|---|---|---|
+| ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
+| ✅ 已有 | `shanzei_band` | 山贼（山贼） |
+| ⬜ 缺 | `bh_zhenghao` | 郑家寨（郑好） |
+| ⬜ 缺 | `bh_jiangqiao` | 姜家寨（姜巧） |
+| ⬜ 缺 | `ln_langqi` | 劫营·并州狼骑（并州狼骑） |
+| ⬜ 缺 | `c4_gaoshun` | 后门·高顺（高顺） |
+| ⬜ 缺 | `bh_lubu` | 太行山口·吕布（吕布） |
+| ⬜ 缺 | `hs_jizhou_qibing` | 秘道追兵·冀州轻骑（冀州轻骑） |
+| ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
+| ⬜ 缺 | `bh_guanhai` | 北海解围（管亥） |
+
+剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
+
+| 状态 | key | 剧情格 |
+|---|---|---|
+| ⬜ 缺 | `end_juefa` | 结局七 |
+| ⬜ 缺 | `c4_escape` | 金蝉脱壳 |
+| ⬜ 缺 | `c4_taishici` | 太史慈 |
+| ⬜ 缺 | `c4_kongrong` | 让北海 |
+
 ## 第四章 · 挟天子
 
 地图底图 `dongui`：⬜ 缺
@@ -563,7 +612,6 @@
 | ✅ 正式 | `xuhuang` | 剧情立绘 |
 | ✅ 正式 | `wujing` | 剧情立绘 |
 | ✅ 正式 | `huangzhong` | 剧情立绘 |
-| ✅ 正式 | `gaoshun` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
 
@@ -575,7 +623,7 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
+| ✅ | — | 都有了 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -753,7 +801,6 @@
 | 🟡 占位 | `jianyong` | 简雍（R） |
 | 🟡 占位 | `mizhu` | 糜竺（R） |
 | ⬜ 缺 | `sunqian` | 孙乾（R） |
-| ⬜ 缺 | `guanhai` | 管亥（R） |
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
 | ✅ 正式 | `chengpu` | 程普·程公（R） |
 | ✅ 正式 | `handang` | 韩当（R） |

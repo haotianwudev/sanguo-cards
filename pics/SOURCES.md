@@ -80,6 +80,11 @@
 | `zhangfei` | source/generals/zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `inf_n` | source/soldiers/inf_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cav_n` | source/soldiers/cav_n.jpg | 用户提供 | Antigravity 生成 | — |
+| `spear_n` | source/soldiers/spear_n.jpg | 用户提供 | Antigravity 生成 | — |
+| `archer_n` | source/soldiers/archer_n.jpg | 用户提供 | Antigravity 生成 | — |
+| `strat_n` | source/soldiers/strat_n.jpg | 用户提供 | Antigravity 生成 | — |
+| `log_n` | source/soldiers/log_n.jpg | 用户提供 | Antigravity 生成 | — |
 | `shanzei_bing` | source/soldiers/shanzei_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhuzhi` | source/generals/zhuzhi.jpg | 用户提供 | Antigravity 生成 | — |
 | `yuanshao` | source/generals/yuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
