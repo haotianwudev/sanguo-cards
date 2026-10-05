@@ -133,6 +133,11 @@
 | `youzhou` | source/soldiers/youzhou.jpg | 用户提供 | Antigravity 生成 | — |
 | `liannu` | source/soldiers/liannu.jpg | 用户提供 | Antigravity 生成 | — |
 | `minfu` | source/soldiers/minfu.jpg | 用户提供 | Antigravity 生成 | — |
+| `zheng_daoshou` | source/soldiers/zheng_daoshou.jpg | 用户提供 | Antigravity 生成 | — |
+| `jiang_jiguanshou` | source/soldiers/jiang_jiguanshou.jpg | 用户提供 | Antigravity 生成 | — |
+| `beihai_tuntian` | source/soldiers/beihai_tuntian.jpg | 用户提供 | Antigravity 生成 | — |
+| `huangjin_lishi` | source/soldiers/huangjin_lishi.jpg | 用户提供 | Antigravity 生成 | — |
+| `lulin` | source/soldiers/lulin.jpg | 用户提供 | Antigravity 生成 | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -226,3 +231,4 @@
 | `cg:c2_ln_meet` | source/cg/c2_ln_meet.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_ln_sponsor` | source/cg/c2_ln_sponsor.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_era` | source/cg/c1_era.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_yazhai` | source/cg/e_yazhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -170,10 +170,18 @@ def write_needs(pics: Path = PICS) -> None:
                 for o in ev.get("options", ev.get("choose", [])):
                     fights += [e["battle"] for e in o.get("effects", []) if "battle" in e]
             for f in fights:
-                e = cards["enemies"][cards["scenarios"][f]["enemy"]]
-                enemies.append((e.get("portrait") or cards["scenarios"][f]["enemy"], e["name"]))
+                sc = cards["scenarios"].get(f)
+                if not sc:
+                    continue
+                enemy_id = sc.get("enemy")
+                e = cards["enemies"].get(enemy_id)
+                if not e:
+                    continue
+                enemies.append((e.get("portrait") or enemy_id, e.get("name", enemy_id)))
                 if e.get("card"):
-                    loot.append((key_of(e["card"]), f"{names[e['card']]}（{e['name']}的卡）"))
+                    card_id = e["card"]
+                    card_name = names.get(card_id, card_id)
+                    loot.append((key_of(card_id), f"{card_name}（{e['name']}的卡）"))
         for c in q.get("soldier_pool", []) + q.get("recruit_pool", []):
             loot.append((key_of(c), names[c]))
         battles_cfg = json.loads((pics / "art.json").read_text("utf-8")).get("battles", {})

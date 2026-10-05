@@ -155,7 +155,7 @@
 | ⬜ 缺 | `e_convoy` | 「截粮队」 |
 | ⬜ 缺 | `e_surrender` | 「降卒」 |
 | ⬜ 缺 | `e_shanzei` | 「山贼拦路」 |
-| ⬜ 缺 | `e_yazhai` | 「压寨夫人」 |
+| ✅ 已有 | `e_yazhai` | 「压寨夫人」 |
 | ⬜ 缺 | `e_shanzhai` | 「山寨」 |
 | ⬜ 缺 | `e_jieying` | 「山贼劫营」 |
 | ⬜ 缺 | `e_hj_camp` | 「黄巾余孽营地」 |
@@ -576,12 +576,12 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `zheng_daoshou` | 郑家刀手（郑好的卡） |
-| ⬜ 缺 | `jiang_jiguanshou` | 姜家机关手（姜巧的卡） |
+| ✅ 正式 | `zheng_daoshou` | 郑家刀手（郑好的卡） |
+| ✅ 正式 | `jiang_jiguanshou` | 姜家机关手（姜巧的卡） |
 | ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
 | 🟡 占位 | `taishici` | 太史慈 |
-| ⬜ 缺 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
-| ⬜ 缺 | `beihai_tuntian` | 北海屯田兵 |
+| ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
+| ✅ 正式 | `beihai_tuntian` | 北海屯田兵 |
 | ✅ 正式 | `qingzhou` | 青州兵（黄巾渠帅的卡） |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
@@ -595,12 +595,18 @@
 | ✅ 已有 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
 | ⬜ 缺 | `c4_gaoshun` | 后门·高顺（高顺） |
 | ⬜ 缺 | `bh_lubu` | 太行山口·吕布（吕布） |
-| ⬜ 缺 | `hs_jizhou_qibing` | 秘道追兵·冀州轻骑（冀州轻骑） |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
 | ⬜ 缺 | `bh_guanhai` | 北海解围（管亥） |
 | ⬜ 缺 | `bh_patrol` | 太行伏兵（太行巡山兵） |
 | ⬜ 缺 | `bh_yanliang` | 渡口·颜良（颜良） |
 | ⬜ 缺 | `bh_hj_qushuai` | 青州渠帅（黄巾渠帅） |
+| ⬜ 缺 | `bh_jiang_trap` | 姜家寨暗哨（山贼） |
+| ⬜ 缺 | `bh_wolf2` | 并州精骑（并州狼骑） |
+| ⬜ 缺 | `bh_jz_inf` | 冀州步卒（冀州步卒） |
+| ⬜ 缺 | `bh_jz_spear` | 冀州长枪（冀州大枪阵） |
+| ⬜ 缺 | `bh_jz_scout` | 冀州游骑（冀州轻骑） |
+| ⬜ 缺 | `bh_jz_arch` | 冀州强弩（冀州强弩） |
+| ⬜ 缺 | `bh_hj_duzhan` | 黄巾督战队（黄巾前锋） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 

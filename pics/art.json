@@ -1204,6 +1204,51 @@
       ],
       "head": 0.28,
       "license": "Antigravity 生成"
+    },
+    "zheng_daoshou": {
+      "src": "source/soldiers/zheng_daoshou.jpg",
+      "face": [
+        0.49,
+        0.28
+      ],
+      "head": 0.3,
+      "license": "Antigravity 生成"
+    },
+    "jiang_jiguanshou": {
+      "src": "source/soldiers/jiang_jiguanshou.jpg",
+      "face": [
+        0.53,
+        0.24
+      ],
+      "head": 0.28,
+      "license": "Antigravity 生成"
+    },
+    "beihai_tuntian": {
+      "src": "source/soldiers/beihai_tuntian.jpg",
+      "face": [
+        0.5,
+        0.24
+      ],
+      "head": 0.3,
+      "license": "Antigravity 生成"
+    },
+    "huangjin_lishi": {
+      "src": "source/soldiers/huangjin_lishi.jpg",
+      "face": [
+        0.52,
+        0.28
+      ],
+      "head": 0.3,
+      "license": "Antigravity 生成"
+    },
+    "lulin": {
+      "src": "source/soldiers/lulin.jpg",
+      "face": [
+        0.51,
+        0.25
+      ],
+      "head": 0.28,
+      "license": "Antigravity 生成"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -1583,6 +1628,10 @@
     },
     "c1_era": {
       "src": "source/cg/c1_era.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_yazhai": {
+      "src": "source/cg/e_yazhai.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
