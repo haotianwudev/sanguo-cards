@@ -192,8 +192,12 @@ func _preview(cid: String) -> void:
 		if Time.get_ticks_msec() - opened > 350:
 			overlay.queue_free())
 	overlay.add_child(dim)
-	var v := CardView.make(cid, Vector2(320, 448), {"skills": true})
-	v.position = Vector2(480, 120)
+	var v := CardView.make(cid, Vector2(320, 448), {"skills": false})
+	v.position = Vector2(300, 120)
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(v)
+	var panel := Kit.skill_panel(v.fighter["skills"], 340)
+	panel.position = Vector2(660, 130)
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.add_child(panel)
 	add_child(overlay)

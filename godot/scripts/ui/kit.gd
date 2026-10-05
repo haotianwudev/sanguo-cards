@@ -230,6 +230,35 @@ static func skill_icon(skill: Dictionary) -> Texture2D:
 	return icon("skill_" + SKILL_ICONS.get(effects[0]["type"], "phys"))
 
 
+static func skill_panel(skill_ids: Array, width: float) -> VBoxContainer:
+	## every skill with its icon, AP cost and what it does (the tap-to-view panel next to a big card)
+	var db := GameData.get_db()
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 6)
+	box.custom_minimum_size = Vector2(width, 0)
+	box.add_child(label("技　能", FONT_BODY + 2, "gold"))
+	if skill_ids.is_empty():
+		box.add_child(label("没有技能。", FONT_BODY, "dim"))
+	for sid in skill_ids:
+		var sk: Dictionary = db.skills[sid]
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 6)
+		var ic := TextureRect.new()
+		ic.texture = skill_icon(sk)
+		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		ic.custom_minimum_size = Vector2(24, 24)
+		row.add_child(ic)
+		row.add_child(label("%s　AP%d" % [sk["name"], sk["cost"]], FONT_BODY, "gold"))
+		box.add_child(row)
+		var d := label(skill_desc(sk), 15)
+		d.add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
+		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		d.custom_minimum_size = Vector2(width, 0)
+		box.add_child(d)
+	return box
+
+
 static func skill_desc(sk: Dictionary) -> String:
 	## one line on what a skill does, from its effects (for the 整备 detail panel)
 	var parts: Array = []

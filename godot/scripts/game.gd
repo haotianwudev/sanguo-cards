@@ -460,6 +460,8 @@ func demo(name: String) -> void:
 			for a in OS.get_cmdline_user_args():
 				if a.begins_with("--at="):
 					dbg._show(a.trim_prefix("--at="))
+				if a.begins_with("--card="):  # open that card's preview straight away
+					dbg._preview_card(a.trim_prefix("--card="))
 		"map", "pick":
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)

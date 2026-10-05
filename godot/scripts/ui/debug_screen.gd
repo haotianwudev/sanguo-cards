@@ -244,10 +244,14 @@ func _overlay(alpha: float) -> Control:
 
 func _preview_card(cid: String) -> void:
 	var overlay := _overlay(0.82)
-	var v := CardView.make(cid, Vector2(320, 448), {"skills": true})
-	v.position = Vector2(480, 120)
+	var v := CardView.make(cid, Vector2(320, 448), {"skills": false})
+	v.position = Vector2(300, 120)
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(v)
+	var panel := Kit.skill_panel(v.fighter["skills"], 340)
+	panel.position = Vector2(660, 130)
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.add_child(panel)
 	var c: Dictionary = GameData.get_db().cards[cid]
 	var troops: Dictionary = GameData.get_db().troops
 	var troop: String = troops[c["troop"]]["name"] if troops.has(c["troop"]) else c["troop"]
