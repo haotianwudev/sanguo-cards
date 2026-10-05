@@ -2360,6 +2360,63 @@
           "target": "all"
         }
       ]
+    },
+    "jiangling": {
+      "name": "将令",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 0.5
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "caibo": {
+      "name": "财帛",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "tanxiao": {
+      "name": "谈笑风生",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 1
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "shuike": {
+      "name": "说客",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.4
+        },
+        {
+          "type": "break",
+          "amount": 0.2,
+          "turns": 2
+        }
+      ]
     }
   },
   "cards": {
@@ -2891,7 +2948,10 @@
       "bonus": {
         "hp": 30,
         "at": 8
-      }
+      },
+      "skills": [
+        "jiangling"
+      ]
     },
     "madai": {
       "name": "马岱",
@@ -3117,7 +3177,10 @@
       "bonus": {
         "hp": 30,
         "at": 10
-      }
+      },
+      "skills": [
+        "tanxiao"
+      ]
     },
     "mizhu": {
       "name": "糜竺",
@@ -3126,7 +3189,10 @@
       "bonus": {
         "hp": 40,
         "at": 8
-      }
+      },
+      "skills": [
+        "caibo"
+      ]
     },
     "sunqian": {
       "name": "孙乾",
@@ -3135,7 +3201,10 @@
       "bonus": {
         "hp": 20,
         "at": 10
-      }
+      },
+      "skills": [
+        "shuike"
+      ]
     },
     "guanhai": {
       "name": "管亥",

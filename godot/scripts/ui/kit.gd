@@ -279,7 +279,7 @@ static func skill_desc(sk: Dictionary) -> String:
 			"guard":
 				parts.append("本回合受到伤害 -%d%%" % int(round(float(e["cut"]) * 100)))
 			"boost":
-				parts.append("全军 BOOST" if e.get("target", "") == "all" else "自己 BOOST（下次出手 ×1.5）")
+				parts.append({"all": "全军 BOOST", "random_idle": "随机让一个还没出手的队友 BOOST"}.get(e.get("target", ""), "自己 BOOST（下次出手 ×1.5）"))
 			"stun":
 				parts.append("%d%% 让敌人混乱一回合" % int(round(float(e["chance"]) * 100)))
 			"ap":

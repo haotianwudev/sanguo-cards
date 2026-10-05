@@ -349,8 +349,8 @@ func test_skills_come_from_kits_not_troops_and_a_card_can_name_its_own() -> void
 	for tid in db.troops:
 		check(not db.troops[tid].has("skills"), "%s: troops carry stats only" % tid)
 		check(not db.default_kit(tid).is_empty() and not db.default_kit(tid, true).is_empty(), "%s: default kit" % tid)
-	var before: String = db.cards["liaohua"]["kit"]
-	db.cards["liaohua"]["kit"] = "spear"  # an infantry card drawing a spear kit
-	check_eq(db.build_fighter("liaohua")["skills"], db.kits["spear"]["special"], "the card's own kit wins over its troop's default")
-	db.cards["liaohua"]["kit"] = before
-	check_eq(db.build_fighter("liaohua")["skills"], db.default_kit("infantry", true), "back on the troop default")
+	var before: String = db.cards["gaoshun"]["kit"]
+	db.cards["gaoshun"]["kit"] = "spear"  # an infantry card drawing a spear kit
+	check_eq(db.build_fighter("gaoshun")["skills"], db.kits["spear"]["special"], "the card's own kit wins over its troop's default")
+	db.cards["gaoshun"]["kit"] = before
+	check_eq(db.build_fighter("gaoshun")["skills"], db.default_kit("infantry", true), "back on the troop default")

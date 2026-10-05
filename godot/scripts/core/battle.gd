@@ -280,6 +280,14 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 						who.append(leaders.find(t))
 				_ev({"t": "boost", "units": who})
 				return ["  全军进入 BOOST（下次行动 ×%s）" % bm]
+			if eff["target"] == "random_idle":  # 鼓舞一个还没出手的友军
+				var idle: Array = leaders.filter(func(t): return t != u and not t["acted"] and not t["boosted"] and not t["confused"])
+				if idle.is_empty():
+					return ["  没有可以鼓舞的人"]
+				var pick: Dictionary = idle[rng.randi_range(0, idle.size() - 1)]
+				pick["boosted"] = true
+				_ev({"t": "boost", "units": [leaders.find(pick)]})
+				return ["  %s 受到鼓舞，进入 BOOST（下次行动 ×%s）" % [unit_name(pick), bm]]
 			u["boosted"] = true
 			_ev({"t": "boost", "units": [leaders.find(u)]})
 			return ["  %s 进入 BOOST（下次行动 ×%s）" % [unit_name(u), bm]]

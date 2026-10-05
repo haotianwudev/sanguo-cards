@@ -505,3 +505,23 @@ func test_a_burn_takes_a_share_of_current_hp_and_never_kills() -> void:
 	b.enemy["hp"] = 1
 	b.end_round()
 	check_eq(b.enemy["hp"], 1, "a fire leaves the last HP")
+
+
+func test_a_helper_boosts_a_random_teammate_who_has_not_acted() -> void:
+	var b := Battle.start("hulao", party(["liaohua", "cav_n"]), 4)
+	var helper := -1
+	for k in b.leaders.size():
+		if b.leaders[k]["leader"]["card"]["id"] == "liaohua":
+			helper = k
+	b.take_events()
+	b.act(helper, "jiangling")
+	var boosted := b.leaders.filter(func(u): return u["boosted"])
+	check_eq(boosted.size(), 1, "exactly one teammate is boosted")
+	check(boosted[0] != b.leaders[helper] and not boosted[0]["acted"], "not the helper, and one who has yet to act")
+	for u in b.leaders:
+		u["acted"] = true
+	b.leaders[helper]["boosted"] = false
+	for u in b.leaders:
+		u["boosted"] = false
+	var log: Array = b._apply(b.leaders[helper], {"type": "boost", "target": "random_idle"}, 1.0)
+	check(b.leaders.all(func(u): return not u["boosted"]), "nobody left to boost: " + str(log))
