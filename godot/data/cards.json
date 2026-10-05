@@ -709,90 +709,157 @@
       "ap": 1.0
     }
   },
-  "troops": {
+  "_kits": "技能组合：normal = 普通兵种的默认技能（普通兵卡、有自己技能的武将拿这个），special = 特殊兵种的默认技能（精兵、没有自己技能的武将拿这个）。兵种（troops）只管 hp/at；一张卡用哪套组合看它的 kit 字段，没写就按 kit_default（兵种 → 组合）。",
+  "kits": {
     "lord": {
       "name": "主公",
-      "short": "主",
-      "hp": 400,
-      "at": 80,
-      "skills": [
+      "normal": [
+        "tuji"
+      ],
+      "special": [
         "tuji",
         "rengdao"
+      ]
+    },
+    "lord_north": {
+      "name": "主公（北线）",
+      "normal": [
+        "tuji"
       ],
-      "skills_north": [
+      "special": [
         "tuji",
         "duomingqiang"
       ]
     },
     "cavalry": {
       "name": "骑兵",
-      "short": "骑",
-      "hp": 380,
-      "at": 85,
-      "skills": [
+      "normal": [
+        "madao"
+      ],
+      "special": [
         "madao",
         "charge"
       ]
     },
     "spear": {
       "name": "枪兵",
-      "short": "枪",
-      "hp": 450,
-      "at": 70,
-      "skills": [
+      "normal": [
+        "cishi"
+      ],
+      "special": [
         "cishi",
         "qiangzhen"
       ]
     },
     "archer": {
       "name": "弓兵",
-      "short": "弓",
-      "hp": 320,
-      "at": 78,
-      "skills": [
+      "normal": [
+        "sheji"
+      ],
+      "special": [
         "sheji",
         "volley"
       ]
     },
     "infantry": {
       "name": "刀兵",
-      "short": "刀",
-      "hp": 430,
-      "at": 75,
-      "skills": [
+      "normal": [
+        "buzhan"
+      ],
+      "special": [
         "buzhan",
         "jushun"
       ]
     },
     "strategist": {
       "name": "策士",
-      "short": "策",
-      "hp": 280,
-      "at": 85,
-      "skills": [
+      "normal": [
+        "xiance"
+      ],
+      "special": [
         "xiance",
         "ploy"
       ]
     },
     "bandit": {
       "name": "贼",
-      "short": "贼",
-      "hp": 360,
-      "at": 80,
-      "skills": [
+      "normal": [
+        "jielue"
+      ],
+      "special": [
         "jielue",
         "touxi"
       ]
     },
     "logistics": {
       "name": "后勤",
-      "short": "勤",
-      "hp": 260,
-      "at": 70,
-      "skills": [
+      "normal": [
+        "baozha"
+      ],
+      "special": [
         "baozha",
         "guwu"
       ]
+    }
+  },
+  "kit_default": {
+    "lord": "lord",
+    "cavalry": "cavalry",
+    "spear": "spear",
+    "archer": "archer",
+    "infantry": "infantry",
+    "strategist": "strategist",
+    "bandit": "bandit",
+    "logistics": "logistics"
+  },
+  "troops": {
+    "lord": {
+      "name": "主公",
+      "short": "主",
+      "hp": 400,
+      "at": 80
+    },
+    "cavalry": {
+      "name": "骑兵",
+      "short": "骑",
+      "hp": 380,
+      "at": 85
+    },
+    "spear": {
+      "name": "枪兵",
+      "short": "枪",
+      "hp": 450,
+      "at": 70
+    },
+    "archer": {
+      "name": "弓兵",
+      "short": "弓",
+      "hp": 320,
+      "at": 78
+    },
+    "infantry": {
+      "name": "刀兵",
+      "short": "刀",
+      "hp": 430,
+      "at": 75
+    },
+    "strategist": {
+      "name": "策士",
+      "short": "策",
+      "hp": 280,
+      "at": 85
+    },
+    "bandit": {
+      "name": "贼",
+      "short": "贼",
+      "hp": 360,
+      "at": 80
+    },
+    "logistics": {
+      "name": "后勤",
+      "short": "勤",
+      "hp": 260,
+      "at": 70
     }
   },
   "skills": {

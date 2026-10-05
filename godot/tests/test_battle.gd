@@ -283,7 +283,7 @@ func test_each_troop_has_its_own_plain_move() -> void:
 	var db := GameData.get_db()
 	var plain := {}
 	for tid in db.troops:
-		plain[tid] = db.skills[db.troops[tid]["skills"][0]]
+		plain[tid] = db.skills[db.default_kit(tid)[0]]
 	check_eq(plain["cavalry"]["cost"], 1)
 	check_eq(int(plain["cavalry"]["effects"][0]["hits"]), 2)
 	check_eq(plain["spear"]["cost"], 2)

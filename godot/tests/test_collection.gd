@@ -287,12 +287,12 @@ func test_cards_can_be_left_behind() -> void:
 func test_soldiers_have_only_the_plain_move() -> void:
 	var db := GameData.get_db()
 	var cs := db.build_fighter("changsha")  # 刀兵 soldier
-	check_eq(cs["skills"], [db.troops["infantry"]["skills"][0]], "a soldier card: the troop's plain move only")
-	check_eq(db.build_fighter("danyang")["skills"], db.troops["infantry"]["skills"], "精兵 丹阳兵: both")
+	check_eq(cs["skills"], db.default_kit("infantry"), "a soldier card: the troop's plain move only")
+	check_eq(db.build_fighter("danyang")["skills"], db.default_kit("infantry", true), "精兵 丹阳兵: both")
 	var hz := db.build_fighter("huangzhong")  # 弓兵 general with his own 百步穿杨
-	check_eq(hz["skills"], [db.troops["archer"]["skills"][0], "baibu"], "a general: the plain move + his own")
+	check_eq(hz["skills"], db.default_kit("archer") + ["baibu"], "a general: the plain move + his own")
 	var jq := db.build_fighter("jiangqin")  # no skill of his own
-	check_eq(jq["skills"], db.troops["archer"]["skills"], "no own skill: the troop's signature instead")
+	check_eq(jq["skills"], db.default_kit("archer", true), "no own skill: the troop's signature instead")
 
 
 func test_beast_cards_stay_out_of_drops_for_now() -> void:
@@ -342,3 +342,15 @@ func test_boss_cards_and_xuanjizi_have_portraits() -> void:
 	var fighter := GameData.get_db().build_fighter("xuanjizi_card")
 	check_eq(fighter.get("person"), "xuanjizi")
 
+
+
+func test_skills_come_from_kits_not_troops_and_a_card_can_name_its_own() -> void:
+	var db := GameData.get_db()
+	for tid in db.troops:
+		check(not db.troops[tid].has("skills"), "%s: troops carry stats only" % tid)
+		check(not db.default_kit(tid).is_empty() and not db.default_kit(tid, true).is_empty(), "%s: default kit" % tid)
+	var before: String = db.cards["liaohua"]["kit"]
+	db.cards["liaohua"]["kit"] = "spear"  # an infantry card drawing a spear kit
+	check_eq(db.build_fighter("liaohua")["skills"], db.kits["spear"]["special"], "the card's own kit wins over its troop's default")
+	db.cards["liaohua"]["kit"] = before
+	check_eq(db.build_fighter("liaohua")["skills"], db.default_kit("infantry", true), "back on the troop default")

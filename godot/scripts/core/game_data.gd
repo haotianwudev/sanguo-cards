@@ -10,7 +10,9 @@ static var _inst: GameData
 
 var gacha: Dictionary
 var battle: Dictionary
-var troops: Dictionary  # id -> {id, name, short, hp, at, skills}
+var troops: Dictionary  # id -> {id, name, short, hp, at} (stats only — skills come from kits)
+var kits: Dictionary  # id -> {id, name, normal, special}: the default skills of normal / special units (cards.json kits)
+var kit_default: Dictionary  # troop id -> the kit a card of that troop uses unless it names its own `kit`
 var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null), effects}
 var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
 var enemies: Dictionary  # id -> {id, name, hp, at, actions, moves, phys_resist, magic_resist, portrait}
@@ -61,7 +63,10 @@ func _load(dir: String) -> void:
 	for tid in raw["troops"]:
 		var t: Dictionary = raw["troops"][tid]
 		troops[tid] = {"id": tid, "name": t["name"], "short": t["short"], "hp": int(t["hp"]),
-			"at": int(t["at"]), "skills": t["skills"]}
+			"at": int(t["at"])}
+	for kid in raw["kits"]:
+		kits[kid] = {"id": kid, "name": raw["kits"][kid]["name"], "normal": raw["kits"][kid]["normal"], "special": raw["kits"][kid]["special"]}
+	kit_default = raw["kit_default"]
 	for cid in raw["cards"]:
 		var c: Dictionary = raw["cards"][cid]
 		var bonus := {}
@@ -69,7 +74,7 @@ func _load(dir: String) -> void:
 			bonus[k] = int(c["bonus"][k])
 		cards[cid] = {"id": cid, "name": c["name"], "rarity": c["rarity"], "troop": c["troop"],
 			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
-			"troop_skills": c.get("troop_skills", true),
+			"troop_skills": c.get("troop_skills", true), "kit": c.get("kit", ""),
 			"person": c.get("person", cid.trim_suffix("_card") if cid.ends_with("_card") else cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
 			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false)}
 	for eid in raw["enemies"]:
@@ -152,6 +157,14 @@ func _validate() -> void:
 		assert(troops.has(c["troop"]) and c["troop"] != "lord", "card %s: bad troop" % c["id"])
 		for s in c["skills"]:
 			assert(skills.has(s), "card %s: unknown skill %s" % [c["id"], s])
+	for k in kits.values():
+		assert(not k["normal"].is_empty() and not k["special"].is_empty(), "kit %s: needs normal and special skills" % k["id"])
+		for s in k["normal"] + k["special"]:
+			assert(skills.has(s), "kit %s: unknown skill %s" % [k["id"], s])
+	for tid in troops:
+		assert(kits.has(kit_default.get(tid, "")), "troop %s: no default kit" % tid)
+	for c in cards.values():
+		assert(c["kit"] == "" or kits.has(c["kit"]), "card %s: unknown kit %s" % [c["id"], c["kit"]])
 	for sc in scenarios.values():
 		assert(enemies.has(sc["enemy"]), "scenario %s: unknown enemy" % sc["id"])
 	for e in enemies.values():
@@ -172,17 +185,28 @@ func soldier_cards() -> Array:
 	return cards.values().filter(func(c): return c["soldier"] and not c["beast"])  # 野兽卡 never come in chests
 
 
+func kit_of(card: Dictionary) -> Dictionary:
+	## the kit a card draws its default skills from: its own `kit`, else the default for its troop
+	return kits[card["kit"] if card.get("kit", "") != "" else kit_default[card["troop"]]]
+
+
+func default_kit(troop_id: String, special := false) -> Array:
+	## a troop's default skills: normal units, or (special) 精兵 and generals without a skill of their own
+	return kits[kit_default[troop_id]]["special" if special else "normal"]
+
+
 func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	## 兵种基础 + 武将自身能力 (× mult: the 铜/银/金 tier). Skills: a soldier has its troop's plain move (精兵 also the
 	## troop's signature); a general has the plain move plus its own signature, or the troop's signature if it has
 	## none ("troop_skills": false = own skills only).
 	var c: Dictionary = cards[card_id]
 	var t: Dictionary = troops[c["troop"]]
+	var kit: Dictionary = kit_of(c)
 	var sk: Array = []
 	if c["soldier"]:
-		sk = t["skills"].duplicate() if c["elite"] else [t["skills"][0]]
+		sk = kit["special" if c["elite"] else "normal"].duplicate()
 	elif c["troop_skills"]:
-		sk = [t["skills"][0]] if not c["skills"].is_empty() else t["skills"].duplicate()
+		sk = kit["normal" if not c["skills"].is_empty() else "special"].duplicate()
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
@@ -196,7 +220,7 @@ func build_lord(lord_name: String, mult := 1.0, north := false) -> Dictionary:
 	## "id" stays "lord" everywhere (card/collection/leader lookups all key on it); "person" carries the
 	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]
-	var skills: Array = t.get("skills_north", t["skills"]) if north else t["skills"]
+	var skills: Array = kits["lord_north"]["special"] if north and kits.has("lord_north") else default_kit("lord", true)
 	return {"id": "lord", "person": "lord_north" if north else "lord", "name": lord_name, "troop": "lord",
 		"hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)), "skills": skills.duplicate(), "rarity": null}
 
@@ -224,7 +248,7 @@ func power(f: Dictionary) -> int:
 func power_split(f: Dictionary) -> Array:
 	## [兵种战力, 武将战力]
 	var t: Dictionary = troops[f["troop"]]
-	var troop := _power(t["hp"], t["at"], t["skills"].size())
+	var troop := _power(t["hp"], t["at"], default_kit(f["troop"], true).size())
 	return [troop, power(f) - troop]
 
 
