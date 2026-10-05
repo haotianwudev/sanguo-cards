@@ -18,7 +18,7 @@ func quest_by_id(id: String) -> Dictionary:
 	return GameData.get_db().quests.filter(func(q): return q["id"] == id)[0]
 
 
-func walk(q: Dictionary, s: SaveData, prefer: Array, seed_value := 1) -> Array:
+func walk(q: Dictionary, s: SaveData, prefer: Array, seed_value := 1, pick_offer := 0, choose_idx := -1) -> Array:
 	## Play a quest square by square as if every fight were won; at a fork take the first square
 	## listed in `prefer`, else the first open one. Returns the squares visited, in order.
 	var r := rng(seed_value)
@@ -31,7 +31,7 @@ func walk(q: Dictionary, s: SaveData, prefer: Array, seed_value := 1) -> Array:
 			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
 			Quests.choose_event(q, s, r, ok[0])
 		Quests.offer(q, s, r)
-		Quests.resolve(q, s, r, 0 if not s.offer.is_empty() else -1)
+		Quests.resolve(q, s, r, choose_idx if sq["type"] == "choose" else (pick_offer if not s.offer.is_empty() else -1))
 		s.offer = []
 		s.resolved = true
 		var opts := Quests.next_options(q, s)
@@ -182,15 +182,21 @@ func reachable(q: Dictionary, s: SaveData) -> Dictionary:
 		if seen.has(id) or not Quests.is_open(sq[id], s):
 			continue
 		seen[id] = true
-		var nexts: Array = sq[id]["next"].duplicate()
-		if sq[id]["lose_goto"] != "":
+		var nexts: Array = []
+		if sq[id].get("next") != null:
+			nexts = sq[id]["next"].duplicate()
+		if sq[id].get("lose_goto", "") != "":
 			nexts.append(sq[id]["lose_goto"])
+		if sq[id].get("type") == "choose":
+			for c in sq[id].get("choose", []):
+				if "goto" in c:
+					nexts.append(c["goto"])
 		todo.append_array(nexts)
 	return seen
 
 
 func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap() -> void:
-	for id in ["yuxi", "shouluoyang", "changan", "dongui", "jingxiang"]:
+	for id in ["yuxi", "shouluoyang", "changan", "beihai", "dongui", "jingxiang"]:
 		var q := quest_by_id(id)
 		var sq: Dictionary = q["squares"]
 		var lines := {}
@@ -368,3 +374,70 @@ func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:
 			check_eq(s.has_card("jiaxu"), not flags.is_empty())
 			check_eq(s.run_records.has(JX), not flags.is_empty())
 			check(p.has(fork[0]) and p.has("shaoka") and p.has("xuhuang") and p[-1] == "dongtao", "reaches 南阳 via " + fork[0])
+
+
+# ---- 北线第四章 · 双凤乱太行 -----------------------------------------------------------------
+func beihai_save() -> SaveData:
+	var s := lap_save(["出生：冀州无极", "界桥：救下公孙瓒"], ["prologue", "luoyang_n", "heishan"])
+	check_eq(Quests.current_quest(s)["id"], "beihai")
+	return s
+
+
+func test_beihai_peace_route_wins_through_to_beihai() -> void:
+	var s := beihai_save()
+	var q := quest_by_id("beihai")
+	var path := walk(q, s, [], 1, 0, 0)
+	for sid in ["bh_zheng", "bh_jiang", "bh_zj_peace", "bh_zj_join", "bh_lubu", "bh_flee", "bh_guanhai", "bh_porridge", "bh_end"]:
+		check(path.has(sid), "passes " + sid)
+	check(not path.has("bh_escape") and not path.has("bh_bad_end"), "winning against 吕布 skips the retreat scenes")
+	for c in ["zhenghao", "jiangqiao", "taishici", "beihai_tuntian"]:
+		check(s.has_card(c), "got " + c)
+	var j := beihai_save()
+	Quests.begin(q, j)
+	j.square = "bh_zj_join"
+	j.resolved = false
+	Quests.resolve(q, j, rng(1), -1)
+	check(j.has_card("zheng_daoshou") and j.has_card("jiang_jiguanshou"), "the two soldier cards come with the two women")
+	finish(q, s)
+	check(s.flags.has("北线：北海相") and s.flags.has("郑姜：和好"), "records become flags")
+
+
+func test_beihai_losing_to_lvbu_after_peace_escapes() -> void:
+	var s := beihai_save()
+	var q := quest_by_id("beihai")
+	Quests.begin(q, s)
+	Quests.record(s, "郑姜：和好")
+	s.square = "bh_lubu"
+	s.resolved = false
+	check(Quests.lose(q, s), "the story carries on")
+	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), [])
+	Quests.resolve(q, s, rng(1), -1)
+	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["bh_escape"])
+
+
+func test_beihai_losing_to_lvbu_after_a_feud_is_ending_seven() -> void:
+	var s := beihai_save()
+	var q := quest_by_id("beihai")
+	var path := walk(q, s, [], 1, 0, 1)
+	check(path.has("bh_zj_fight") and path.has("bh_flee"), "feud route still wins through if you beat 吕布")
+	Quests.begin(q, s)
+	s.square = "bh_lubu"
+	s.resolved = false
+	Quests.lose(q, s)
+	Quests.resolve(q, s, rng(1), -1)
+	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["bh_bad_end"])
+	Quests.move(q, s, "bh_bad_end")
+	Quests.resolve(q, s, rng(1), -1)
+	check(s.run_records.has("结局七 · 绝罚"), "ending seven recorded")
+	check_eq(q["ending"]["title"], "结局七 · 绝罚")
+	check(Quests.next_options(q, s).is_empty(), "the story stops")
+
+
+func test_beihai_fights_all_run_to_a_result() -> void:
+	var s := beihai_save()
+	for c in ["zhaoyun", "taishici", "zhenghao", "jiangqiao"]:
+		s.grant_card(c)
+	s.party = s.auto_party()
+	for sc in ["bh_zhenghao", "bh_jiangqiao", "bh_lubu", "bh_guanhai"]:
+		var b := Battle.start(sc, s.party_leaders(), 3)
+		check(bot_fight(b) in ["win", "lose"], sc + " ends")
