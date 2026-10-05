@@ -5,6 +5,8 @@
 
 ## 战斗：照搬兰斯10（v0.3）
 
+> 技能 / 兵种分工 / 卡牌强度的重做方案见 `docs/skills.md`（技能体系 v2，设计稿）。
+
 规则按兰斯10（RanceX -決戦-）整理。来源：AliceSoft Wiki《Rance X: Game mechanics》
 （https://alicesoft.miraheze.org/wiki/Rance_X:Game_mechanics）、rpgcodex 攻略帖、bonsai-desukara / manga-games 攻略博客。
 
