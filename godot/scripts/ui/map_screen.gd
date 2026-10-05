@@ -687,9 +687,20 @@ func _show_square(s: Dictionary) -> void:
 		text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
 		text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 4)
 		text.mouse_filter = Control.MOUSE_FILTER_PASS
-		buttons.visible = false
+		_show_buttons(buttons, false)
 		_dialog_show()
 	_update_tools()
+	_fit_sheet()
+
+
+func _show_buttons(box: Control, on: bool) -> void:
+	## transparent, not hidden: the options keep their room, so the text box never resizes or re-wraps when they appear
+	box.modulate.a = 1.0 if on else 0.0
+	for b in box.find_children("*", "BaseButton", true, false):
+		if not b.has_meta("fm"):
+			b.set_meta("fm", b.focus_mode)
+		b.mouse_filter = Control.MOUSE_FILTER_STOP if on else Control.MOUSE_FILTER_IGNORE
+		b.focus_mode = b.get_meta("fm") if on else Control.FOCUS_NONE
 
 
 func _dialog_show() -> void:
@@ -711,7 +722,7 @@ func _dialog_show() -> void:
 			_dlg_text.scroll_active = true
 			_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
 			_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
-		_dlg_buttons.visible = true
+		_show_buttons(_dlg_buttons, true)
 		_dlg_i = -1
 		for b in _dlg_buttons.find_children("*", "Button", true, false):
 			Kit.focus(b)
@@ -735,7 +746,7 @@ func _dialog_skip() -> void:
 	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
 	_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
 	_dlg_i = _dlg_lines.size() - 1
-	_dlg_buttons.visible = true
+	_show_buttons(_dlg_buttons, true)
 	_dlg_i = -1
 	_update_tools()
 
@@ -936,13 +947,21 @@ func _apply_cg_mode() -> void:
 	_scroll.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
 	# a CG gets the screen: the text box shrinks to a subtitle strip at the bottom
-	_sheet.position = Vector2(24, 552) if _cg_mode else Vector2(24, 448)
-	_sheet.size = Vector2(1232, 156) if _cg_mode else Vector2(1232, 258)
-	_dlg_tools.position = Vector2(1040, _sheet.position.y + 8)
+	_fit_sheet()
 	var bg := Kit.c("card")
 	if _cg_mode:
 		bg.a = 0.86
 	_sheet.add_theme_stylebox_override("panel", Kit.box(bg, 14, 2, Kit.c("gold") if _cg_mode else Kit.c("border"), 14))
+
+
+func _fit_sheet() -> void:
+	## the strip hugs the bottom edge and grows upward when its options need more room than the subtitle height
+	var h := 258.0
+	if _cg_mode:
+		h = maxf(156.0, _sheet.get_combined_minimum_size().y)
+	_sheet.size = Vector2(1232, h)
+	_sheet.position = Vector2(24, 708 - h) if _cg_mode else Vector2(24, 448)
+	_dlg_tools.position = Vector2(1040, _sheet.position.y + 8)
 
 
 func _open_settings() -> void:
