@@ -76,6 +76,8 @@
     ],
     "defend_ap": 2,
     "enemy_hp_per_extra_leader": 0.083,
+    "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
+    "enemy_hp_mult": 1.35,
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)",
     "danger_step": 0.2,
     "_difficulty": "难度: permanent (whole campaign) enemy strength per level, e.g. after beating 虎牢关 吕布",
@@ -747,8 +749,8 @@
       "hp": 280,
       "at": 85,
       "skills": [
-        "ploy",
-        "xiance"
+        "xiance",
+        "ploy"
       ]
     },
     "bandit": {
@@ -800,27 +802,29 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.0
+          "power": 0.5,
+          "hits": 2
         }
       ]
     },
     "cishi": {
       "name": "刺击",
-      "cost": 1,
+      "cost": 2,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0
+          "power": 2.6
         }
       ]
     },
     "sheji": {
       "name": "射击",
-      "cost": 1,
+      "cost": 0,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0
+          "power": 0.5,
+          "pierce": true
         }
       ]
     },
@@ -842,7 +846,7 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.8
+          "power": 0.5
         },
         {
           "type": "break",
@@ -858,7 +862,7 @@
       "effects": [
         {
           "type": "magic",
-          "power": 1.0
+          "power": 1.6
         },
         {
           "type": "stun",
@@ -921,8 +925,9 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.7,
-          "hits": 5
+          "power": 1.3,
+          "hits": 2,
+          "pierce": true
         }
       ]
     },
@@ -944,17 +949,17 @@
     },
     "yunlu": {
       "name": "云騄突阵",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
+          "power": 0.8,
           "hits": 2
         },
         {
           "type": "stun",
-          "chance": 0.2
+          "chance": 0.35
         }
       ]
     },
@@ -965,24 +970,23 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.1,
+          "power": 0.9,
           "hits": 3
         }
       ]
     },
     "baojia": {
       "name": "鲍家枪",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.3
+          "power": 1.6
         },
         {
-          "type": "break",
-          "amount": 0.2,
-          "turns": 2
+          "type": "counter",
+          "power": 0.5
         }
       ]
     },
@@ -993,7 +997,7 @@
       "effects": [
         {
           "type": "magic",
-          "power": 1.3
+          "power": 1.6
         },
         {
           "type": "break",
@@ -1061,12 +1065,12 @@
     },
     "dujian": {
       "name": "毒箭",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 0.8
+          "power": 0.5
         },
         {
           "type": "burn",
@@ -1156,12 +1160,13 @@
     },
     "charge": {
       "name": "冲锋",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 2.2
+          "power": 1.6,
+          "per_combo": 0.3
         }
       ]
     },
@@ -1172,23 +1177,27 @@
       "effects": [
         {
           "type": "attack",
-          "power": 3.0
+          "power": 1.0
         },
         {
           "type": "guard",
-          "cut": 0.25
+          "cut": 0.3
+        },
+        {
+          "type": "counter",
+          "power": 0.5
         }
       ]
     },
     "volley": {
       "name": "齐射",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 0.6,
-          "hits": 3
+          "power": 2.5,
+          "pierce": true
         }
       ]
     },
@@ -1226,17 +1235,21 @@
     },
     "yanzhi": {
       "name": "胭脂双刀",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
-          "hits": 2
+          "power": 1.0
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
         },
         {
           "type": "stun",
-          "chance": 0.2
+          "chance": 0.25
         }
       ]
     },
@@ -1262,11 +1275,11 @@
       "effects": [
         {
           "type": "attack",
-          "power": 3.0
+          "power": 4.9
         },
         {
           "type": "stun",
-          "chance": 0.3
+          "chance": 0.4
         }
       ]
     },
@@ -1292,12 +1305,11 @@
       "effects": [
         {
           "type": "attack",
-          "power": 2.2
+          "power": 1.4
         },
         {
-          "type": "break",
-          "amount": 0.25,
-          "turns": 2
+          "type": "guard",
+          "cut": 0.4
         }
       ]
     },
@@ -1345,12 +1357,12 @@
     },
     "jixi": {
       "name": "急袭",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.8
+          "power": 2.4
         }
       ]
     },
@@ -1367,13 +1379,16 @@
     },
     "tiji": {
       "name": "铁脊蛇矛",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
-          "hits": 2
+          "power": 1.5
+        },
+        {
+          "type": "counter",
+          "power": 0.5
         }
       ]
     },
@@ -1384,8 +1399,9 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.8,
-          "hits": 3
+          "power": 1.2,
+          "hits": 2,
+          "pierce": true
         }
       ]
     },
@@ -1406,12 +1422,13 @@
     },
     "maoshuo": {
       "name": "马槊",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 2.0
+          "power": 0.8,
+          "hits": 3
         }
       ]
     },
@@ -1422,7 +1439,7 @@
       "effects": [
         {
           "type": "burn",
-          "pct": 0.08,
+          "pct": 0.04,
           "turns": 3
         },
         {
@@ -1433,12 +1450,12 @@
     },
     "shuangchui": {
       "name": "双锤",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 0.9,
+          "power": 1.25,
           "hits": 2
         }
       ]
@@ -1485,7 +1502,7 @@
       "effects": [
         {
           "type": "magic",
-          "power": 3.0,
+          "power": 4.5,
           "burning_mult": 2.0
         }
       ]
@@ -1508,8 +1525,12 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.2,
-          "hits": 2
+          "power": 1.6
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
         }
       ]
     },
@@ -1546,7 +1567,7 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
+          "power": 0.8,
           "hits": 3
         }
       ]
@@ -1558,18 +1579,18 @@
       "effects": [
         {
           "type": "attack",
-          "power": 3.0
+          "power": 2.6
         }
       ]
     },
     "taiping": {
       "name": "苍天已死",
-      "cost": 3,
+      "cost": 4,
       "uses": 1,
       "effects": [
         {
           "type": "magic",
-          "power": 6.0
+          "power": 7.8
         },
         {
           "type": "stun",
@@ -1591,11 +1612,12 @@
     },
     "ploy": {
       "name": "计略",
-      "cost": 1,
+      "cost": 3,
+      "cumulative": true,
       "effects": [
         {
           "type": "magic",
-          "power": 1.2
+          "power": 4.5
         }
       ]
     },
@@ -1616,8 +1638,7 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.5,
-          "hits": 2
+          "power": 1.0
         }
       ]
     },
@@ -1638,8 +1659,12 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.7,
-          "hits": 4
+          "power": 1.6
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
         }
       ]
     },
@@ -1650,7 +1675,7 @@
       "effects": [
         {
           "type": "magic",
-          "power": 2.0
+          "power": 3.4
         },
         {
           "type": "stun",
@@ -1660,12 +1685,12 @@
     },
     "fushui": {
       "name": "符水",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "magic",
-          "power": 1.2
+          "power": 1.4
         },
         {
           "type": "break",
@@ -1681,7 +1706,8 @@
       "effects": [
         {
           "type": "attack",
-          "power": 4.0
+          "power": 5.0,
+          "per_combo": 0.3
         }
       ]
     },
@@ -1692,7 +1718,7 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
+          "power": 0.85,
           "hits": 3
         }
       ]
@@ -1704,11 +1730,15 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.5
+          "power": 3.5
         },
         {
           "type": "stun",
           "chance": 0.6
+        },
+        {
+          "type": "counter",
+          "power": 0.5
         }
       ]
     },
@@ -1731,7 +1761,8 @@
       "effects": [
         {
           "type": "attack",
-          "power": 3.0
+          "power": 2.7,
+          "pierce": true
         }
       ]
     },
@@ -1742,11 +1773,12 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.5
+          "power": 4.9,
+          "pierce": true
         },
         {
           "type": "stun",
-          "chance": 0.3
+          "chance": 0.4
         }
       ]
     },
@@ -1779,22 +1811,22 @@
       "effects": [
         {
           "type": "magic",
-          "power": 2.0
+          "power": 3.5
         },
         {
           "type": "stun",
-          "chance": 0.4
+          "chance": 0.5
         },
         {
           "type": "break",
-          "amount": 0.2,
+          "amount": 0.3,
           "turns": 3
         }
       ]
     },
     "guose": {
       "name": "国色",
-      "cost": 1,
+      "cost": 2,
       "uses": 1,
       "effects": [
         {
@@ -1805,7 +1837,7 @@
     },
     "muniu": {
       "name": "木牛流马",
-      "cost": 0,
+      "cost": 1,
       "uses": 1,
       "effects": [
         {
@@ -1821,23 +1853,28 @@
       "effects": [
         {
           "type": "attack",
-          "power": 4.0
+          "power": 1.9,
+          "per_combo": 0.3
         }
       ]
     },
     "qijin": {
       "name": "七进七出",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
+          "power": 0.8,
           "hits": 2
         },
         {
           "type": "guard",
           "cut": 0.2
+        },
+        {
+          "type": "counter",
+          "power": 0.5
         }
       ]
     },
@@ -1848,34 +1885,35 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.8,
-          "hits": 4
+          "power": 1.4,
+          "hits": 2,
+          "pierce": true
         }
       ]
     },
     "shuangji": {
       "name": "古之恶来",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 2.0
+          "power": 1.4
         },
         {
           "type": "guard",
-          "cut": 0.3
+          "cut": 0.5
         }
       ]
     },
     "huoji": {
       "name": "火计",
-      "cost": 3,
+      "cost": 4,
       "uses": 1,
       "effects": [
         {
           "type": "magic",
-          "power": 5.0
+          "power": 9.0
         }
       ]
     },
@@ -1892,23 +1930,29 @@
     },
     "biyue": {
       "name": "闭月",
-      "cost": 1,
+      "cost": 2,
       "uses": 1,
       "effects": [
         {
           "type": "stun",
           "chance": 1.0
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 2
         }
       ]
     },
     "xiaobawang": {
       "name": "小霸王",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 2.8
+          "power": 1.8,
+          "per_combo": 0.3
         }
       ]
     },
@@ -1918,7 +1962,8 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.4
+          "power": 0.5,
+          "hits": 2
         }
       ]
     },
@@ -1935,18 +1980,22 @@
     },
     "kurou": {
       "name": "苦肉计",
-      "cost": 0,
+      "cost": 1,
       "uses": 1,
       "effects": [
         {
           "type": "boost",
           "target": "all"
+        },
+        {
+          "type": "hurt",
+          "pct": 0.1
         }
       ]
     },
     "cimu": {
       "name": "慈母",
-      "cost": 1,
+      "cost": 2,
       "uses": 1,
       "effects": [
         {
@@ -1958,10 +2007,12 @@
     "bawang": {
       "name": "霸王之怒",
       "cost": 2,
+      "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 3.2
+          "power": 0.9,
+          "hits": 3
         }
       ]
     },
@@ -1983,12 +2034,12 @@
     },
     "lianying": {
       "name": "火烧连营",
-      "cost": 3,
+      "cost": 4,
       "uses": 1,
       "effects": [
         {
           "type": "magic",
-          "power": 3.0
+          "power": 8.0
         },
         {
           "type": "break",
@@ -2004,11 +2055,12 @@
       "effects": [
         {
           "type": "attack",
-          "power": 2.5
+          "power": 5.0
         },
         {
-          "type": "stun",
-          "chance": 0.3
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
         }
       ]
     },
@@ -2019,26 +2071,30 @@
       "effects": [
         {
           "type": "attack",
-          "power": 1.3,
-          "hits": 3
+          "power": 1.7
+        },
+        {
+          "type": "guard",
+          "cut": 0.3
         }
       ]
     },
     "shenting": {
       "name": "神亭酣战",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.0,
-          "hits": 2
+          "power": 1.25,
+          "hits": 2,
+          "pierce": true
         }
       ]
     },
     "chijia": {
       "name": "持家",
-      "cost": 1,
+      "cost": 2,
       "uses": 1,
       "effects": [
         {
@@ -2080,18 +2136,17 @@
     },
     "kaishan": {
       "name": "开山",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.3,
-          "hits": 1
+          "power": 1.6
         },
         {
           "type": "break",
-          "amount": 0.15,
-          "turns": 2
+          "amount": 0.25,
+          "turns": 3
         }
       ]
     },
@@ -2123,28 +2178,27 @@
     },
     "kuangbao": {
       "name": "狂暴",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.6
+          "power": 2.4
         }
       ]
     },
     "xiandeng": {
       "name": "先登",
-      "cost": 1,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
-          "power": 1.8
+          "power": 1.3
         },
         {
-          "type": "break",
-          "amount": 0.2,
-          "turns": 2
+          "type": "guard",
+          "cut": 0.4
         }
       ]
     },
@@ -2155,8 +2209,7 @@
       "effects": [
         {
           "type": "attack",
-          "power": 0.8,
-          "hits": 3
+          "power": 2.5
         }
       ]
     },
@@ -2178,10 +2231,94 @@
     "mengjiang": {
       "name": "猛将",
       "cost": 3,
+      "uses": 1,
       "effects": [
         {
           "type": "attack",
-          "power": 4.8
+          "power": 5.9
+        }
+      ]
+    },
+    "weizhen": {
+      "name": "威震华夏",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 8.0
+        },
+        {
+          "type": "stun",
+          "chance": 0.4
+        }
+      ]
+    },
+    "dujiang": {
+      "name": "小霸王渡江",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 6.2
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "changban": {
+      "name": "长坂单骑",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 7.5
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
+    "guding": {
+      "name": "古锭刀",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 9.0
+        }
+      ]
+    },
+    "gongyaoji": {
+      "name": "弓腰姬",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 6.0,
+          "pierce": true
+        }
+      ]
+    },
+    "shisheng": {
+      "name": "十胜十败",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 3
+        },
+        {
+          "type": "boost",
+          "target": "all"
         }
       ]
     }
@@ -3144,7 +3281,8 @@
         "at": 35
       },
       "skills": [
-        "qinglong"
+        "qinglong",
+        "weizhen"
       ]
     },
     "zhaoyun": {
@@ -3156,7 +3294,8 @@
         "at": 30
       },
       "skills": [
-        "qijin"
+        "qijin",
+        "changban"
       ]
     },
     "sunshangxiang": {
@@ -3168,7 +3307,8 @@
         "at": 32
       },
       "skills": [
-        "xiaoji"
+        "xiaoji",
+        "gongyaoji"
       ]
     },
     "dianwei": {
@@ -3274,7 +3414,8 @@
         "at": 36
       },
       "skills": [
-        "bawang"
+        "bawang",
+        "dujiang"
       ]
     },
     "zhouyu_chibi": {
@@ -3311,7 +3452,8 @@
         "at": 38
       },
       "skills": [
-        "menghu"
+        "menghu",
+        "guding"
       ]
     },
     "wuguotai": {
@@ -3447,9 +3589,7 @@
         "hp": 45,
         "at": 12
       },
-      "skills": [
-        "dujun"
-      ]
+      "skills": []
     },
     "wujing": {
       "name": "吴景",
@@ -3969,7 +4109,8 @@
         "at": 27
       },
       "skills": [
-        "liaodong"
+        "liaodong",
+        "shisheng"
       ]
     },
     "changshan_tieqi": {

@@ -448,7 +448,7 @@ func _play(events: Array) -> void:
 				tw.tween_property(v, "position:y", y - 26, 0.1).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(v, "position:y", y, 0.14)
 				await get_tree().create_timer(0.12).timeout
-			"hit", "interrupt", "burn":
+			"hit", "interrupt", "burn", "counter":
 				Kit.shake(_enemy_art, 9.0, 0.2)
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
 				var big: bool = ev["dmg"] > b.enemy["max_hp"] * 0.08
@@ -462,6 +462,11 @@ func _play(events: Array) -> void:
 				if big:
 					Kit.shake(self, 6.0, 0.18)
 				await get_tree().create_timer(0.16).timeout
+			"hurt":
+				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
+				Kit.tween_bar(_party_hp, ev["hp"])
+				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
+				await get_tree().create_timer(0.3).timeout
 			"heal":
 				Kit.float_text(self, _party_center(), "+%d" % ev["amt"], Kit.c("green"))
 				Kit.tween_bar(_party_hp, ev["hp"])

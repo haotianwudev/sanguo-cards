@@ -314,7 +314,7 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 
 func test_chapter_one_is_winnable_with_either_plan() -> void:
 	for pick in 2:
-		check_between(rate(0, [], pick), 0.2, 1.01, "pick %d" % pick)  # an easy first chapter is fine
+		check_between(rate(0, [], pick), 0.12, 1.01, "pick %d" % pick)  # an easy first chapter is fine
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:

@@ -54,10 +54,10 @@ func test_each_leader_acts_once_per_round() -> void:
 func test_cumulative_skill_costs_one_more_each_use() -> void:
 	var b := new_battle("hulao", [["bingzhou"], []])  # 精兵 骑兵: has 冲锋
 	var charge: Dictionary = b.db.skills["charge"]
-	check_eq(b.cost(b.leaders[1], charge), 1)
-	b.act(1, "charge")
 	check_eq(b.cost(b.leaders[1], charge), 2)
-	check_eq(b.ap, 2)
+	b.act(1, "charge")
+	check_eq(b.cost(b.leaders[1], charge), 3)
+	check_eq(b.ap, 1)
 
 
 func test_once_per_battle_skill() -> void:
@@ -110,7 +110,7 @@ func test_win_when_enemy_hp_zero() -> void:
 func test_carry_in_and_out() -> void:
 	var b := Battle.start("hulao", party(["bingzhou"]), 0, 1000, {"bingzhou": {"charge": 2}})
 	check_eq(b.party_hp, b.party_max - 1000)
-	check_eq(b.cost(b.leaders[1], b.db.skills["charge"]), 3)
+	check_eq(b.cost(b.leaders[1], b.db.skills["charge"]), 4)
 	check_eq(b.carry_out()[0], 1000)
 
 
@@ -169,7 +169,7 @@ func test_young_sunce_strikes_for_1_ap_and_saves_xiaobawang() -> void:
 func test_sunce_has_a_plain_skill_that_never_gets_dearer() -> void:
 	var db := GameData.get_db()
 	for cid in ["sunce", "sunce_zhong"]:
-		var plain: Array = db.cards[cid]["skills"].filter(func(s): return not db.skills[s]["cumulative"] and db.skills[s]["uses"] == null)
+		var plain: Array = db.build_fighter(cid)["skills"].filter(func(s): return not db.skills[s]["cumulative"] and db.skills[s]["uses"] == null)
 		check(not plain.is_empty(), "%s needs a repeatable skill" % cid)
 
 
@@ -277,13 +277,122 @@ func test_a_wind_up_lands_on_the_next_enemy_turn_not_this_one() -> void:
 			check(k < 0 or not names.slice(k).has("天下无双"), "seed %d: %s" % [seed_value, names])
 
 
-func test_troop_basic_attacks_cost_1_ap() -> void:
+func test_each_troop_has_its_own_plain_move() -> void:
+	## docs/skills.md §3: 骑 2 hits of 0.5, 枪 a 2 AP heavy thrust, 弓 a free single arrow, 策 gives AP (no attack),
+	## 后勤 heals; the rest are a plain 1 AP strike
 	var db := GameData.get_db()
+	var plain := {}
 	for tid in db.troops:
-		if tid == "lord":
+		plain[tid] = db.skills[db.troops[tid]["skills"][0]]
+	check_eq(plain["cavalry"]["cost"], 1)
+	check_eq(int(plain["cavalry"]["effects"][0]["hits"]), 2)
+	check_eq(plain["spear"]["cost"], 2)
+	check(float(plain["spear"]["effects"][0]["power"]) >= 2.5, "刺击 is the heavy one")
+	check_eq(plain["archer"]["cost"], 0)
+	check(plain["archer"]["effects"][0].get("pierce", false), "射击 pierces")
+	check(not plain["strategist"]["effects"].any(func(e): return e["type"] in ["attack", "magic"]), "策士 plain move has no attack")
+	check(plain["logistics"]["effects"][0]["type"] == "heal", "后勤 heals")
+	for tid in ["infantry", "bandit"]:
+		check_eq(plain[tid]["cost"], 1, tid)
+
+
+func test_only_the_hero_and_archers_attack_for_free() -> void:
+	var db := GameData.get_db()
+	for sid in db.skills:
+		var sk: Dictionary = db.skills[sid]
+		if sk["cost"] == 0 and sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]):
+			check(sid in ["tuji", "sheji"], "%s attacks for 0 AP" % sid)
+		if sk["cost"] == 0:
+			check(not sk["effects"].any(func(e): return e["type"] == "ap" or (e["type"] == "boost" and e.get("target", "") == "all")),
+				"%s: free AP / team boost" % sid)
+
+
+func _attack_value(sk: Dictionary) -> float:
+	## docs/skills.md §4: total power of an attack skill, with its riders folded into power
+	var v := 0.0
+	for e in sk["effects"]:
+		match e["type"]:
+			"attack", "magic":
+				v += (float(e["power"]) + 3.0 * float(e.get("per_combo", 0.0))) * int(e.get("hits", 1))
+			"guard":
+				v += float(e["cut"]) * 2.5
+			"break":
+				v += float(e["amount"]) * int(e["turns"]) * 1.2
+			"stun":
+				v += float(e["chance"]) * 2.5
+			"counter":
+				v += float(e["power"]) * 1.5
+			"burn":
+				v += float(e.get("pct", 0.0)) * int(e["turns"]) * 15.0 + float(e.get("power", 0.0)) * int(e["turns"])
+			"boost":
+				v += 3.0 if e.get("target", "") == "all" else 1.5
+			"ap":
+				v += float(e["amount"])
+	return v
+
+
+func test_the_dearer_the_attack_the_more_each_ap_buys() -> void:
+	## AP 2 ≳ 2.5, AP 3 ≳ 4.5 (大招 5.9), AP 4 ≳ 7 (大招 9.1), give or take 15%; the hero's throws are the one exception
+	var floors := {2: 2.5, 3: 4.5, 4: 7.0}
+	for sid in GameData.get_db().skills:
+		var sk: Dictionary = GameData.get_db().skills[sid]
+		if sid in ["rengdao", "duomingqiang", "huoshen", "chibi", "huoshang"]:
 			continue
-		for sid in db.troops[tid]["skills"]:
-			check(db.skills[sid]["cost"] >= 1, "%s: %s" % [tid, db.skills[sid]["name"]])
+		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not floors.has(sk["cost"]):
+			continue
+		var lo: float = floors[sk["cost"]] * (1.3 if sk["uses"] == 1 else 1.0) * 0.85
+		check(_attack_value(sk) >= lo, "%s (%d AP) is worth %.2f, wants >= %.2f" % [sk["name"], sk["cost"], _attack_value(sk), lo])
+
+
+func test_finishers_hit_harder_the_bigger_the_combo() -> void:
+	var b := Battle.start("hulao", party(["cav_n"]), 3)
+	b.db.battle["variance"] = 0.0
+	var u: Dictionary = b.leaders[1]
+	var eff := {"type": "attack", "power": 1.0, "per_combo": 0.5}
+	b.combo = 0
+	var hp0: int = b.enemy["hp"]
+	b._apply(u, eff, 1.0)
+	var d0: int = hp0 - b.enemy["hp"]
+	b.combo = 4
+	var hp1: int = b.enemy["hp"]
+	b._apply(u, eff, 1.0)
+	var d4: int = hp1 - b.enemy["hp"]
+	check(d4 > d0 * 2.4, "收尾: combo 4 hits %d vs %d" % [d4, d0])
+	b.db.battle["variance"] = 0.2
+
+
+func test_piercing_ignores_phys_resist() -> void:
+	var b := Battle.start("hulao", party(["cav_n"]), 3)
+	b.db.battle["variance"] = 0.0
+	b.enemy["data"]["phys_resist"] = 0.5
+	var plain := b._dmg(1000, "attack")
+	var pierced := b._dmg(1000, "attack", true)
+	check_eq(pierced, plain * 2)
+	b.db.battle["variance"] = 0.2
+
+
+func test_counter_answers_every_enemy_hit_this_round() -> void:
+	var b := Battle.start("hulao", party(["spear_n"]), 3)
+	b.db.battle["variance"] = 0.0
+	var u: Dictionary = b.leaders[1]
+	b._apply(u, {"type": "counter", "power": 0.5}, 1.0)
+	check_eq(b.counters.size(), 1)
+	b.take_events()
+	var before: int = b.enemy["hp"]
+	b.end_round()
+	var counters := b.take_events().filter(func(e): return e["t"] == "counter")
+	check(counters.size() >= 1 and b.enemy["hp"] < before, "the enemy's blows are answered")
+	check(b.counters.is_empty(), "the stance ends with the round")
+	b.db.battle["variance"] = 0.2
+
+
+func test_sacrifice_costs_hp_but_never_kills() -> void:
+	var b := Battle.start("hulao", party(["cav_n"]), 3)
+	var hp0 := b.party_hp
+	b._apply(b.leaders[1], {"type": "hurt", "pct": 0.1}, 1.0)
+	check_eq(b.party_hp, hp0 - int(round(b.party_max * 0.1)))
+	b._apply(b.leaders[1], {"type": "hurt", "pct": 5.0}, 1.0)
+	check_eq(b.party_hp, 1)
 
 
 func test_defend_costs_ap() -> void:

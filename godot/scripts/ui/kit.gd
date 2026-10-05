@@ -219,7 +219,8 @@ static func icon(key: String) -> Texture2D:
 
 
 const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
-	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap"}
+	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap",
+	"counter": "guard", "hurt": "heal"}
 
 
 static func skill_icon(skill: Dictionary) -> Texture2D:
@@ -265,9 +266,14 @@ static func skill_desc(sk: Dictionary) -> String:
 	for e in sk.get("effects", []):
 		match e["type"]:
 			"attack":
-				parts.append("物理攻击 ×%s%s" % [_num(e["power"]), ("，%d 连击" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else ""])
+				parts.append("物理攻击 ×%s%s%s%s" % [_num(e["power"]), ("，%d 连击" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else "",
+					("，每层连击威力 +%s（收尾）" % _num(e["per_combo"])) if e.has("per_combo") else "", "，穿甲（无视物抗）" if e.get("pierce", false) else ""])
 			"magic":
 				parts.append("法术攻击 ×%s%s" % [_num(e["power"]), ("（对灼烧中的敌人 ×%s）" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
+			"counter":
+				parts.append("反击：本回合敌人每打中一次，还击 ×%s" % _num(e["power"]))
+			"hurt":
+				parts.append("自损全军 %d%% 体力" % int(round(float(e["pct"]) * 100)))
 			"heal":
 				parts.append("回复全军体力 ×%s" % _num(e["power"]))
 			"guard":

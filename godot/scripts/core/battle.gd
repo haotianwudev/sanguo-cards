@@ -34,6 +34,7 @@ var turn_limit := 0
 var first_hit_done := false
 var party_burn := {}  # the enemy's fire on us: {dmg, turns}
 var ap_drain := 0  # AP the enemy takes away at the next round start
+var counters: Array = []  # 反击 (枪兵): [{name, at, power}] — each enemy hit this round is answered by every entry
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
 ##       "enemy_hit"|"confuse"|"round"|"interrupt", ...}
@@ -68,7 +69,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	e["magic_resist"] = minf(0.8, float(e["magic_resist"]) + float(afx.get("magic_resist", 0.0)))
 	e["actions"] = int(e["actions"]) + int(afx.get("actions", 0))
 	var tough := 1.0 + float(mods.get("enemy", 0.0))
-	var max_hp := int(round(e["hp"] * tough * (1.0 + float(afx.get("hp", 0.0)))
+	var max_hp := int(round(e["hp"] * float(b.db.battle.get("enemy_hp_mult", 1.0)) * tough * (1.0 + float(afx.get("hp", 0.0)))
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough * (1.0 + float(afx.get("at", 0.0))),
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
@@ -222,10 +223,11 @@ func _variance() -> float:
 	return rng.randf_range(1.0 - v, 1.0 + v)
 
 
-func _dmg(base: float, kind: String) -> int:
+func _dmg(base: float, kind: String, pierce := false) -> int:
+	## pierce (弓兵 穿甲): this hit ignores the enemy's resist altogether
 	var data: Dictionary = enemy["data"]
 	var resist: float = data["phys_resist"] if kind == "attack" else data["magic_resist"]
-	resist *= 1.0 - minf(1.0, float(mods.get("pierce", 0.0)))
+	resist *= 0.0 if pierce else 1.0 - minf(1.0, float(mods.get("pierce", 0.0)))
 	var d: float = base * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
 	return maxi(1, int(round(d * _variance())))
 
@@ -249,7 +251,8 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 					bonus += float(mods.get("first_hit", 0.0))
 					first_hit_done = true
 				var fire := float(eff.get("burning_mult", 1.0)) if enemy["burn_turns"] > 0 else 1.0  # 火上浇油
-				var d := _dmg(at * float(eff["power"]) * mult * (1.0 + bonus) * fire, kind)
+				var power: float = float(eff["power"]) + float(eff.get("per_combo", 0.0)) * combo  # 收尾 (骑兵)
+				var d := _dmg(at * power * mult * (1.0 + bonus) * fire, kind, bool(eff.get("pierce", false)))
 				if d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				enemy["hp"] = maxi(0, enemy["hp"] - d)
@@ -303,6 +306,14 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff["turns"]))
 			_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
 			return ["  %s 陷入灼烧！每回合结算 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
+		"counter":  # 反击: until the round ends, every hit the enemy lands is answered with ×power of this leader's attack
+			counters.append({"name": unit_name(u), "at": at * mult, "power": float(eff["power"])})
+			return ["  %s 架起拒马：本回合敌人每打中一次，还击 ×%s" % [unit_name(u), str(eff["power"])]]
+		"hurt":  # 苦肉: the party pays a share of its max HP (never to death)
+			var lost := clampi(int(round(party_max * float(eff["pct"]))), 0, party_hp - 1)
+			party_hp -= lost
+			_ev({"t": "hurt", "dmg": lost, "hp": party_hp})
+			return ["  我军折损 %d 体力" % lost]
 		"ap":
 			ap = mini(ap_max(), ap + int(eff["amount"]))
 			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
@@ -365,6 +376,8 @@ func _enemy_phase(defend_cut: float) -> Array:
 				_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": c, "hp": party_hp})
 				log.append("%s【%s】 我军受到 %d 伤害%s%s" % [data["name"], mv["name"], d,
 					("（减伤 %d%%）" % int(round(c * 100))) if c > 0.0 else "", "（无视防御！）" if mv.get("pierce", false) else ""])
+				if party_hp > 0:
+					log.append_array(_counter_strike())
 			else:
 				log.append("%s【%s】" % [data["name"], mv["name"]])
 			if mv.has("rage"):
@@ -399,6 +412,20 @@ func _enemy_phase(defend_cut: float) -> Array:
 		log.append("已到第 %d 回合上限 —— 撤退！" % round_no)
 		return log
 	log.append_array(_start_round())
+	return log
+
+
+func _counter_strike() -> Array:
+	## 反击: answer one enemy hit with every counter set up this round
+	var log: Array = []
+	for c in counters:
+		if enemy["hp"] <= 0:
+			break
+		var d := _dmg(float(c["at"]) * float(c["power"]), "attack")
+		enemy["hp"] = maxi(0, enemy["hp"] - d)
+		_ev({"t": "counter", "unit": c["name"], "dmg": d, "hp": enemy["hp"]})
+		log.append("  %s 反击，造成 %d 伤害" % [c["name"], d])
+	_check_end()
 	return log
 
 
@@ -445,6 +472,7 @@ func _start_round() -> Array:
 		ap_drain = 0
 	combo = 0
 	guard_cut = 0.0
+	counters = []
 	_ev({"t": "round", "n": round_no, "ap": ap})
 	var log: Array = ["─── 第 %d 回合 ───" % round_no]
 	for u in leaders:

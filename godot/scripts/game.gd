@@ -494,6 +494,6 @@ func demo(name: String) -> void:
 			show_screen(b)
 			if name == "fight":  # play a few actions to exercise the animations
 				await get_tree().create_timer(0.5).timeout
-				await b._on_skill(1, "charge")
+				await b._on_skill(1, "bawang")
 				await b._on_skill(0, "tuji")
 				b._on_end_round()
