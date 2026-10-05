@@ -637,3 +637,15 @@ func test_every_elite_and_boss_can_put_a_status_on_us() -> void:
 				check(db.enemies[eid]["moves"].any(func(m): return m.has("confuse") or m.has("ap_drain") or m.has("burn_party")),
 					"%s (%s) has no status move" % [eid, sid])
 	check(checked.size() > 30, "found the elites and bosses")
+
+
+func test_a_confused_leader_cannot_be_swapped_out() -> void:
+	var b := _swap_battle()
+	var slot := _slot_of(b, "machao")
+	b.ap = 6
+	check(b.can_swap(slot), "baseline")
+	b.leaders[slot]["confused"] = true
+	check(not b.can_swap(slot), "confused now")
+	b.leaders[slot]["confused"] = false
+	b.leaders[slot]["confuse_next"] = true
+	check(not b.can_swap(slot), "confused next round")

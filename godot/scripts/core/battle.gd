@@ -155,7 +155,8 @@ func swap_from_round() -> int:
 
 
 func can_swap(i: int) -> bool:
-	return result == "" and round_no >= swap_from_round() and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
+	## a confused leader (or one about to be) cannot be pulled out: swapping is no way to shake the status
+	return result == "" and not leaders[i]["confused"] and not leaders[i]["confuse_next"] and round_no >= swap_from_round() and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
 
 
 func swap(i: int, card_id: String) -> Array:
