@@ -29,6 +29,9 @@ var _defend: Button
 var _retreat: Button
 var _end: Button
 var _party_box: Control
+var _row: HBoxContainer  # the leader cards (换人 swaps one in place)
+var _card_size := Vector2(240, 336)
+var _has_cg := false
 
 
 func _ready() -> void:
@@ -39,9 +42,9 @@ func _ready() -> void:
 		if not afx.is_empty():
 			m["affix"] = afx
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
-			ambush, m)
+			ambush, m, save.swap_roster())
 	else:
-		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), 0, {}, {}, ambush)
+		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), 0, {}, {}, ambush, {}, save.swap_roster())
 	_build()
 	Engine.time_scale = Game.battle_speed()
 	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])
@@ -237,20 +240,16 @@ func _build() -> void:
 	# so the card itself can run much bigger; the 5th "locked" slot is a slim strip, not full card width,
 	# so it doesn't eat into the 4 real cards' size (a future 5-member chapter can revisit this split)
 	var row := HBoxContainer.new()
+	_row = row
+	_has_cg = has_cg
 	row.position = Vector2(20, 340) if not has_cg else Vector2(20, 440)
 	row.add_theme_constant_override("separation", 2)
 	add_child(row)
 	var card_size := Vector2(240, 336) if not has_cg else Vector2(190, 266)
+	_card_size = card_size
 	var locked_w := 70.0
 	for i in b.leaders.size():
-		var u: Dictionary = b.leaders[i]
-		var card_id: String = u["leader"]["card"]["id"]
-		var v := CardView.make(card_id, card_size, {"leader": u["leader"], "skills": false,
-			"lord_name": Game.save.lord_name})
-		if has_cg:
-			v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		v.focus_mode = Control.FOCUS_NONE
-		v.pressed.connect(_open_skills.bind(i))
+		var v := _make_card(i)
 		row.add_child(v)
 		_cards.append(v)
 	var locked := PanelContainer.new()  # one slim slot for a future 5th party member
@@ -286,6 +285,27 @@ func _build() -> void:
 	menu_btn.z_index = 5
 	menu_btn.pressed.connect(_open_settings)
 	add_child(menu_btn)
+
+
+func _make_card(i: int) -> CardView:
+	var u: Dictionary = b.leaders[i]
+	var v := CardView.make(u["leader"]["card"]["id"], _card_size, {"leader": u["leader"], "skills": false,
+		"lord_name": Game.save.lord_name})
+	if _has_cg:
+		v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	v.focus_mode = Control.FOCUS_NONE
+	v.pressed.connect(_open_skills.bind(i))
+	return v
+
+
+func _rebuild_card(i: int) -> void:
+	## 换人: the slot's card is a different one now
+	var old: CardView = _cards[i]
+	var v := _make_card(i)
+	_row.add_child(v)
+	_row.move_child(v, old.get_index())
+	old.queue_free()
+	_cards[i] = v
 
 
 func _refresh() -> void:
@@ -355,7 +375,7 @@ func _close_skill_popup() -> void:
 
 
 func _open_skills(i: int) -> void:
-	if _busy or b.result != "" or not b.can_act(i):
+	if _busy or b.result != "" or not (b.can_act(i) or b.can_swap(i)):
 		return
 	_close_skill_popup()
 	var u: Dictionary = b.leaders[i]
@@ -393,12 +413,83 @@ func _open_skills(i: int) -> void:
 			_close_skill_popup()
 			_on_skill(i, sid))
 		col.add_child(btn)
+	if not b.swap_options(i).is_empty():
+		var sw := Kit.button("换人  AP%d" % b.swap_cost(), "gold", Kit.FONT_BODY)
+		sw.custom_minimum_size = Vector2(260, 48)
+		sw.disabled = not b.can_swap(i)
+		sw.pressed.connect(func():
+			_close_skill_popup()
+			_open_swap(i))
+		col.add_child(sw)
 	overlay.add_child(panel)
 	add_child(overlay)
 	panel.position = Vector2(clampf(card_x, 10, 1280 - 280), clampf(card_top - 10, 10, 720) - panel.size.y if card_top > 300 else card_top + _cards[i].size.y + 10)
 	_skill_popup = overlay
 	_skill_popup_at = Time.get_ticks_msec()
 	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
+
+
+func _swap_note(ld: Dictionary) -> String:
+	## what a benched card still carries from this battle: tiredness and spent big attacks
+	var st: Dictionary = b.bench_states.get(ld["card"]["id"], {})
+	if st.is_empty():
+		return ""
+	var tired := 0
+	for s in st["extra_cost"]:
+		tired += int(st["extra_cost"][s])
+	var spent: Array = st["uses_left"].keys().filter(func(s): return st["uses_left"][s] != null and st["uses_left"][s] == 0)
+	var bits: Array = []
+	if tired > 0:
+		bits.append("疲劳 +%d" % tired)
+	if not spent.is_empty():
+		bits.append("大招已用")
+	return "（%s）" % "，".join(bits) if not bits.is_empty() else ""
+
+
+func _open_swap(i: int) -> void:
+	## pick which card of the same troop takes this slot (costs AP, once a round)
+	_close_skill_popup()
+	var overlay := Control.new()
+	overlay.z_index = 60
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	var dim := Button.new()
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.focus_mode = Control.FOCUS_NONE
+	for st in ["normal", "hover", "pressed", "focus"]:
+		dim.add_theme_stylebox_override(st, Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+	dim.button_down.connect(func():
+		if Time.get_ticks_msec() - _skill_popup_at > 350:
+			_close_skill_popup())
+	overlay.add_child(dim)
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 14, 3, Kit.c("gold"), 14))
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 8)
+	panel.add_child(col)
+	col.add_child(Kit.label("换谁上场？（AP%d，每回合 %d 次）" % [b.swap_cost(), int(GameData.get_db().battle.get("swap_per_round", 1))], Kit.FONT_BODY + 2, "gold"))
+	for ld in b.swap_options(i):
+		var cid: String = ld["card"]["id"]
+		var names: Array = ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"])
+		var btn := Kit.button("%s  攻%d 体%d  %s%s" % [ld["card"]["name"], ld["at"], ld["hp"], "/".join(names), _swap_note(ld)], "blue", Kit.FONT_BODY)
+		btn.custom_minimum_size = Vector2(420, 48)
+		btn.pressed.connect(func():
+			_close_skill_popup()
+			_on_swap(i, cid))
+		col.add_child(btn)
+	overlay.add_child(panel)
+	add_child(overlay)
+	panel.position = Vector2(clampf(_cards[i].global_position.x, 10, 1280 - 440), clampf(_cards[i].global_position.y - panel.size.y - 10, 10, 720))
+	_skill_popup = overlay
+	_skill_popup_at = Time.get_ticks_msec()
+	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
+
+
+func _on_swap(i: int, card_id: String) -> void:
+	if _busy or b.result != "" or not b.can_swap(i):
+		return
+	_log_lines(b.swap(i, card_id))
+	await _play(b.take_events())
 
 
 func _on_skill(i: int, sid: String) -> void:
@@ -465,6 +556,14 @@ func _play(events: Array) -> void:
 				if big:
 					Kit.shake(self, 6.0, 0.18)
 				await get_tree().create_timer(0.16).timeout
+			"swap":
+				_rebuild_card(ev["unit"])
+				_party_hp.max_value = ev["max"]
+				Kit.tween_bar(_party_hp, ev["hp"])
+				_party_hp_label.text = "%d / %d" % [ev["hp"], ev["max"]]
+				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "换人", Kit.c("gold"), 36)
+				Kit.pop(_cards[ev["unit"]], 1.08)
+				await get_tree().create_timer(0.35).timeout
 			"hurt":
 				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
 				Kit.tween_bar(_party_hp, ev["hp"])

@@ -525,3 +525,51 @@ func test_a_helper_boosts_a_random_teammate_who_has_not_acted() -> void:
 		u["boosted"] = false
 	var log: Array = b._apply(b.leaders[helper], {"type": "boost", "target": "random_idle"}, 1.0)
 	check(b.leaders.all(func(u): return not u["boosted"]), "nobody left to boost: " + str(log))
+
+
+func _swap_battle() -> Battle:
+	var s := SaveData.new()
+	s.owned = ["machao", "madai", "mayunlu"]
+	s.party = ["machao"]
+	return Battle.start("hulao", s.party_leaders(), 1, 0, {}, {}, false, {}, s.swap_roster())
+
+
+func _slot_of(b: Battle, cid: String) -> int:
+	for k in b.leaders.size():
+		if b.leaders[k]["leader"]["card"]["id"] == cid:
+			return k
+	return -1
+
+
+func test_swapping_in_a_card_costs_ap_and_the_wear_stays_with_the_card_that_left() -> void:
+	var b := _swap_battle()
+	var slot := _slot_of(b, "machao")
+	b.ap = 6
+	b.act(slot, "xiliang")  # his once-only big attack is spent
+	b.party_hp = b.party_max
+	check(b.can_swap(slot), "AP and a same-troop card to bring in")
+	var ap0 := b.ap
+	var old_max := b.party_max
+	b.swap(slot, "madai")
+	check_eq(b.ap, ap0 - b.swap_cost(), "swap_ap")
+	check_eq(b.leaders[slot]["leader"]["card"]["id"], "madai")
+	check(b.can_act(slot), "swap_ready: the newcomer can still act this round")
+	check(not b.can_swap(slot), "one swap a round")
+	check(b.party_max > 0 and old_max > 0, "the shared bar follows the new line-up")
+	check_eq(b.bench_states["machao"]["uses_left"]["xiliang"], 0, "the spent skill stays spent on machao")
+	var back := b.swap_options(slot).map(func(ld): return ld["card"]["id"])
+	check(back.has("machao") and back.has("mayunlu") and not back.has("madai"), "swap back and other cavalry are options: " + str(back))
+	b.end_round()
+	b.ap = 6
+	b.swap(slot, "machao")
+	check(not b.usable(b.leaders[slot], b.db.skills["xiliang"]), "back in, the big attack is still spent")
+	var out := b.carry_out()
+	check(out[2].has("madai"), "the card swapped out last is carried too")
+
+
+func test_swap_never_crosses_troops_or_doubles_a_person() -> void:
+	var b := _swap_battle()
+	var slot := _slot_of(b, "machao")
+	var ids := b.swap_options(slot).map(func(ld): return ld["card"]["troop"])
+	check(ids.all(func(t): return t == "cavalry"), "same troop only")
+	check_eq(b.swap_options(0).size(), 0, "the lord has no stand-in")

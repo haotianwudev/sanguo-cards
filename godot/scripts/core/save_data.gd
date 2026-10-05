@@ -510,6 +510,21 @@ func auto_party() -> Array:
 	return picked
 
 
+func swap_roster() -> Array:
+	## 换人: every owned card of a troop in the party that is not leading (benched cards stay out), built as the leader
+	## it would be — the battle swaps these in mid-fight
+	var db := _db()
+	var troops_out := {}
+	for cid in party:
+		if has_card(cid):
+			troops_out[db.cards[cid]["troop"]] = true
+	var out: Array = []
+	for c in owned_ids():
+		if troops_out.has(db.cards[c]["troop"]) and not party.has(c) and not benched.has(c):
+			out.append(leader_for(c))
+	return out
+
+
 func party_leaders() -> Array:
 	## The lord (alone in its unit) plus one leader per chosen troop.
 	var db := _db()

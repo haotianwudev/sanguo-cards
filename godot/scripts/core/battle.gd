@@ -34,6 +34,11 @@ var turn_limit := 0
 var first_hit_done := false
 var party_burn := {}  # the enemy's fire on us: {dmg, turns}
 var ap_drain := 0  # AP the enemy takes away at the next round start
+var roster: Array = []  # leader dicts that can be tagged in mid-battle (SaveData.swap_roster): same troop as the slot, not leading
+var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: wear on cards swapped out this battle
+var swaps_done := 0  # this round
+var _carry_extra: Dictionary = {}
+var _carry_uses: Dictionary = {}
 var counters: Array = []  # 反击 (枪兵): [{name, at, power}] — each enemy hit this round is answered by every entry
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
@@ -52,8 +57,8 @@ func _ev(e: Dictionary) -> void:
 
 
 static func start(scenario_id: String, party: Array, seed_value: int = -1, damage: int = 0,
-		extra: Dictionary = {}, uses: Dictionary = {}, ambush := false, mods := {}) -> Battle:
-	## damage / extra / uses carry a quest's wear from earlier battles.
+		extra: Dictionary = {}, uses: Dictionary = {}, ambush := false, mods := {}, roster := []) -> Battle:
+	## damage / extra / uses carry a quest's wear from earlier battles.  roster: cards that can be swapped in (换人).
 	## ambush: the enemy strikes once before the first round.  mods: the run's 宝物 and 险 (Quests.mods).
 	var b := Battle.new()
 	b.db = GameData.get_db()
@@ -75,18 +80,13 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
 		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "charging": "", "charge_ready": false, "used": []}
 	b.party_burn = {"dmg": 0, "turns": 0}
-	var hp := 0
+	b.roster = roster.duplicate()
+	b._carry_extra = extra
+	b._carry_uses = uses
 	for ld in party:
-		var cid: String = ld["card"]["id"]
-		var u_left := {}
-		var u_extra := {}
-		for s in ld["card"]["skills"]:
-			u_left[s] = uses.get(cid, {}).get(s, b.db.skills[s]["uses"])
-			u_extra[s] = extra.get(cid, {}).get(s, 0)
-		b.leaders.append({"leader": ld, "uses_left": u_left, "extra_cost": u_extra, "acted": false,
-			"idle_rounds": 0, "boosted": false, "confused": false, "confuse_next": false})
-		hp += int(round(ld["hp"] * (1.0 + float(mods.get("troop_hp", {}).get(ld["card"]["troop"], 0.0)))))
-	b.party_max = int(round(hp * (1.0 + float(mods.get("hp", 0.0)))))
+		b.leaders.append(b._make_unit(ld))
+	var hp := b._leaders_hp()
+	b.party_max = b._max_hp_for(hp)
 	b.party_hp = maxi(1, hp - damage)
 	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"]) + int(mods.get("ap_start", 0))
 	b.turn_limit = int(b.scenario["turn_limit"]) + int(mods.get("turns", 0))
@@ -107,10 +107,91 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	return b
 
 
+func _make_unit(ld: Dictionary) -> Dictionary:
+	## a leader's battle state; wear comes from this battle's bench, else from the quest's carry-over
+	var cid: String = ld["card"]["id"]
+	var st: Dictionary = bench_states.get(cid, {})
+	var u_left := {}
+	var u_extra := {}
+	for s in ld["card"]["skills"]:
+		u_left[s] = st["uses_left"].get(s, db.skills[s]["uses"]) if st.has("uses_left") else _carry_uses.get(cid, {}).get(s, db.skills[s]["uses"])
+		u_extra[s] = st["extra_cost"].get(s, 0) if st.has("extra_cost") else _carry_extra.get(cid, {}).get(s, 0)
+	return {"leader": ld, "uses_left": u_left, "extra_cost": u_extra, "acted": false,
+		"idle_rounds": 0, "boosted": false, "confused": false, "confuse_next": false}
+
+
+func _leaders_hp() -> int:
+	var hp := 0
+	for u in leaders:
+		var ld: Dictionary = u["leader"]
+		hp += int(round(ld["hp"] * (1.0 + float(mods.get("troop_hp", {}).get(ld["card"]["troop"], 0.0)))))
+	return hp
+
+
+func _max_hp_for(hp: int) -> int:
+	return int(round(hp * (1.0 + float(mods.get("hp", 0.0)))))
+
+
+# ---- 换人: tag a card of the same troop in mid-battle ------------------------------------
+
+func swap_cost() -> int:
+	return int(db.battle.get("swap_ap", 1))
+
+
+func swap_options(i: int) -> Array:
+	## leader dicts that could replace slot i: same troop, not already out, never two versions of one person
+	var troop: String = leaders[i]["leader"]["card"]["troop"]
+	var out_ids: Array = leaders.map(func(u): return u["leader"]["card"]["id"])
+	var people := {}
+	for k in leaders.size():
+		if k != i:
+			people[leaders[k]["leader"]["card"]["person"]] = true
+	return roster.filter(func(ld): return ld["card"]["troop"] == troop and not out_ids.has(ld["card"]["id"]) \
+			and not people.has(ld["card"]["person"]))
+
+
+func can_swap(i: int) -> bool:
+	return result == "" and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
+
+
+func swap(i: int, card_id: String) -> Array:
+	## pay swap_ap, put the card in slot i. The old leader's wear stays on it (so rotating cards spreads the fatigue),
+	## the shared HP bar is rescaled to the new line-up, and (swap_ready) the newcomer can still act this round.
+	var new_ld: Dictionary = {}
+	for ld in swap_options(i):
+		if ld["card"]["id"] == card_id:
+			new_ld = ld
+	assert(can_swap(i) and not new_ld.is_empty(), "cannot swap %s into slot %d" % [card_id, i])
+	ap -= swap_cost()
+	swaps_done += 1
+	var old: Dictionary = leaders[i]
+	var old_ld: Dictionary = old["leader"]
+	bench_states[old_ld["card"]["id"]] = {"uses_left": old["uses_left"].duplicate(), "extra_cost": old["extra_cost"].duplicate()}
+	var u := _make_unit(new_ld)
+	u["confused"] = old["confused"]
+	u["confuse_next"] = old["confuse_next"]
+	u["acted"] = false if bool(db.battle.get("swap_ready", true)) else old["acted"]
+	var old_max := party_max
+	leaders[i] = u
+	party_max = maxi(1, _max_hp_for(_leaders_hp()))
+	party_hp = clampi(int(round(float(party_hp) * party_max / old_max)), 1, party_max)
+	roster.erase(new_ld)
+	roster.append(old_ld)
+	_ev({"t": "swap", "unit": i, "card": card_id, "hp": party_hp, "max": party_max})
+	return ["%s 换下 %s（AP -%d）" % [new_ld["card"]["name"], old_ld["card"]["name"], swap_cost()]]
+
+
 func carry_out() -> Array:
 	## [damage taken, 累积 increments, uses left] keyed by card id — for the next battle in a quest.
 	var extra := {}
 	var uses := {}
+	for cid in bench_states:  # swapped out: the wear they were pulled out with
+		extra[cid] = bench_states[cid]["extra_cost"].duplicate()
+		var left := {}
+		for s in bench_states[cid]["uses_left"]:
+			if bench_states[cid]["uses_left"][s] != null:
+				left[s] = bench_states[cid]["uses_left"][s]
+		uses[cid] = left
 	for u in leaders:
 		var cid: String = u["leader"]["card"]["id"]
 		extra[cid] = u["extra_cost"].duplicate()
@@ -485,6 +566,7 @@ func _start_round() -> Array:
 	combo = 0
 	guard_cut = 0.0
 	counters = []
+	swaps_done = 0
 	_ev({"t": "round", "n": round_no, "ap": ap})
 	var log: Array = ["─── 第 %d 回合 ───" % round_no]
 	for u in leaders:

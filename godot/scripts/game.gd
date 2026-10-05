@@ -485,6 +485,19 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 			Quests.move(q, save, "plan")
 			show_screen(MapScreen.new())
+		"swap":  # 换人: the picker open (add --done to play the swap itself)
+			save.owned = ["machao", "madai", "mayunlu", "zhangfei", "daqiao"]
+			save.party = ["machao", "zhangfei", "daqiao"]
+			var sb := BattleScreen.new()
+			sb.scenario_id = "hulao"
+			show_screen(sb)
+			await get_tree().create_timer(0.5).timeout
+			await sb._on_skill(1, "xiliang")
+			if OS.get_cmdline_user_args().has("--done"):
+				sb.b.ap = 4
+				await sb._on_swap(1, "madai")
+			else:
+				sb._open_swap(1)
 		"battle", "fight":
 			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
