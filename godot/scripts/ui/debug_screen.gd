@@ -181,6 +181,8 @@ func _cg_keys() -> Dictionary:
 		var g := key.get_slice("_", 0)
 		if g.begins_with("i") and g.length() <= 2:
 			g = "i"
+		if key.begins_with("c2_ln_"):
+			g = "ln"
 		if not groups.has(g):
 			groups[g] = []
 		groups[g].append(key)
