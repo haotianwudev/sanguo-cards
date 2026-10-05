@@ -531,7 +531,9 @@ func _swap_battle() -> Battle:
 	var s := SaveData.new()
 	s.owned = ["machao", "madai", "mayunlu"]
 	s.party = ["machao"]
-	return Battle.start("hulao", s.party_leaders(), 1, 0, {}, {}, false, {}, s.swap_roster())
+	var b := Battle.start("hulao", s.party_leaders(), 1, 0, {}, {}, false, {}, s.swap_roster())
+	b.round_no = b.swap_from_round()  # the first rounds are closed to swapping (see the test below)
+	return b
 
 
 func _slot_of(b: Battle, cid: String) -> int:
@@ -541,30 +543,40 @@ func _slot_of(b: Battle, cid: String) -> int:
 	return -1
 
 
-func test_swapping_in_a_card_costs_ap_and_the_wear_stays_with_the_card_that_left() -> void:
+func test_swapping_costs_ap_and_the_card_that_left_cannot_return() -> void:
 	var b := _swap_battle()
 	var slot := _slot_of(b, "machao")
 	b.ap = 6
-	b.act(slot, "xiliang")  # his once-only big attack is spent
 	b.party_hp = b.party_max
 	check(b.can_swap(slot), "AP and a same-troop card to bring in")
 	var ap0 := b.ap
-	var old_max := b.party_max
+	var at0: int = b.leaders[slot]["leader"]["at"]
+	var max0 := b.party_max
+	var hp0 := b.party_hp
 	b.swap(slot, "madai")
 	check_eq(b.ap, ap0 - b.swap_cost(), "swap_ap")
+	check_eq(b.leaders[slot]["leader"]["at"], at0, "the slot keeps its attack")
+	check(b.party_max == max0 and b.party_hp == hp0, "and the shared HP is untouched")
 	check_eq(b.leaders[slot]["leader"]["card"]["id"], "madai")
-	check(b.can_act(slot), "swap_ready: the newcomer can still act this round")
+	check(not b.can_act(slot), "the newcomer waits for next round")
 	check(not b.can_swap(slot), "one swap a round")
-	check(b.party_max > 0 and old_max > 0, "the shared bar follows the new line-up")
-	check_eq(b.bench_states["machao"]["uses_left"]["xiliang"], 0, "the spent skill stays spent on machao")
-	var back := b.swap_options(slot).map(func(ld): return ld["card"]["id"])
-	check(back.has("machao") and back.has("mayunlu") and not back.has("madai"), "swap back and other cavalry are options: " + str(back))
 	b.end_round()
 	b.ap = 6
-	b.swap(slot, "machao")
-	check(not b.usable(b.leaders[slot], b.db.skills["xiliang"]), "back in, the big attack is still spent")
-	var out := b.carry_out()
-	check(out[2].has("madai"), "the card swapped out last is carried too")
+	check(b.can_act(slot), "…and acts then")
+	var back := b.swap_options(slot).map(func(ld): return ld["card"]["id"])
+	check(back.has("mayunlu") and not back.has("machao") and not back.has("madai"), "machao is out for the battle: " + str(back))
+
+
+func test_no_swapping_in_the_first_two_rounds() -> void:
+	var b := _swap_battle()
+	var slot := _slot_of(b, "machao")
+	b.ap = 6
+	b.round_no = 1
+	check(not b.can_swap(slot), "round 1")
+	b.round_no = 2
+	check(not b.can_swap(slot), "round 2")
+	b.round_no = 3
+	check(b.can_swap(slot), "round 3")
 
 
 func test_swap_never_crosses_troops_or_doubles_a_person() -> void:

@@ -414,7 +414,7 @@ func _open_skills(i: int) -> void:
 			_on_skill(i, sid))
 		col.add_child(btn)
 	if not b.swap_options(i).is_empty():
-		var sw := Kit.button("换人  AP%d" % b.swap_cost(), "gold", Kit.FONT_BODY)
+		var sw := Kit.button("换人  AP%d%s" % [b.swap_cost(), "" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round()], "gold", Kit.FONT_BODY)
 		sw.custom_minimum_size = Vector2(260, 48)
 		sw.disabled = not b.can_swap(i)
 		sw.pressed.connect(func():
@@ -429,60 +429,26 @@ func _open_skills(i: int) -> void:
 	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
 
 
-func _swap_note(ld: Dictionary) -> String:
-	## what a benched card still carries from this battle: tiredness and spent big attacks
-	var st: Dictionary = b.bench_states.get(ld["card"]["id"], {})
-	if st.is_empty():
-		return ""
-	var tired := 0
-	for s in st["extra_cost"]:
-		tired += int(st["extra_cost"][s])
-	var spent: Array = st["uses_left"].keys().filter(func(s): return st["uses_left"][s] != null and st["uses_left"][s] == 0)
-	var bits: Array = []
-	if tired > 0:
-		bits.append("疲劳 +%d" % tired)
-	if not spent.is_empty():
-		bits.append("大招已用")
-	return "（%s）" % "，".join(bits) if not bits.is_empty() else ""
-
-
 func _open_swap(i: int) -> void:
-	## pick which card of the same troop takes this slot (costs AP, once a round)
+	## 换人: the same pick-a-card screen as recruiting; whoever comes off is out for the rest of the battle
 	_close_skill_popup()
-	var overlay := Control.new()
-	overlay.z_index = 60
-	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
-	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	var dim := Button.new()
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.focus_mode = Control.FOCUS_NONE
-	for st in ["normal", "hover", "pressed", "focus"]:
-		dim.add_theme_stylebox_override(st, Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
-	dim.button_down.connect(func():
-		if Time.get_ticks_msec() - _skill_popup_at > 350:
-			_close_skill_popup())
-	overlay.add_child(dim)
-	var panel := PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 14, 3, Kit.c("gold"), 14))
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 8)
-	panel.add_child(col)
-	col.add_child(Kit.label("换谁上场？（AP%d，每回合 %d 次）" % [b.swap_cost(), int(GameData.get_db().battle.get("swap_per_round", 1))], Kit.FONT_BODY + 2, "gold"))
-	for ld in b.swap_options(i):
-		var cid: String = ld["card"]["id"]
-		var names: Array = ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"])
-		var btn := Kit.button("%s  攻%d 体%d  %s%s" % [ld["card"]["name"], ld["at"], ld["hp"], "/".join(names), _swap_note(ld)], "blue", Kit.FONT_BODY)
-		btn.custom_minimum_size = Vector2(420, 48)
-		btn.pressed.connect(func():
-			_close_skill_popup()
-			_on_swap(i, cid))
-		col.add_child(btn)
-	overlay.add_child(panel)
-	add_child(overlay)
-	panel.position = Vector2(clampf(_cards[i].global_position.x, 10, 1280 - 440), clampf(_cards[i].global_position.y - panel.size.y - 10, 10, 720))
-	_skill_popup = overlay
-	_skill_popup_at = Time.get_ticks_msec()
-	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
+	var opts: Array = b.swap_options(i)
+	opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
+	opts = opts.slice(0, 5)  # five cards fit across the screen
+	var ids: Array = opts.map(func(ld): return ld["card"]["id"])
+	var o := PickOverlay.new()
+	o.title = "换谁上场？（AP%d · 攻击体力不变 · 换下的人本场不能再上）" % b.swap_cost()
+	o.card_ids = ids
+	o.captions = opts.map(func(ld): return "、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"])))
+	o.confirm_text = "上场"
+	o.cancelable = true
+	o.z_index = 70
+	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	o.picked.connect(func(k):
+		o.queue_free()
+		_on_swap(i, ids[k]))
+	o.cancelled.connect(func(): o.queue_free())
+	add_child(o)
 
 
 func _on_swap(i: int, card_id: String) -> void:

@@ -35,7 +35,7 @@ var first_hit_done := false
 var party_burn := {}  # the enemy's fire on us: {dmg, turns}
 var ap_drain := 0  # AP the enemy takes away at the next round start
 var roster: Array = []  # leader dicts that can be tagged in mid-battle (SaveData.swap_roster): same troop as the slot, not leading
-var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: wear on cards swapped out this battle
+var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: the skill state of cards swapped out (only handed on to the next fight)
 var swaps_done := 0  # this round
 var _carry_extra: Dictionary = {}
 var _carry_uses: Dictionary = {}
@@ -150,13 +150,17 @@ func swap_options(i: int) -> Array:
 			and not people.has(ld["card"]["person"]))
 
 
+func swap_from_round() -> int:
+	return int(db.battle.get("swap_from_round", 3))
+
+
 func can_swap(i: int) -> bool:
-	return result == "" and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
+	return result == "" and round_no >= swap_from_round() and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
 
 
 func swap(i: int, card_id: String) -> Array:
-	## pay swap_ap, put the card in slot i. The old leader's wear stays on it (so rotating cards spreads the fatigue),
-	## the shared HP bar is rescaled to the new line-up, and (swap_ready) the newcomer can still act this round.
+	## pay swap_ap, put the card in slot i. The card that came off is out for the rest of the battle, the shared HP bar and the slot's
+	## attack stay as they were, and (swap_ready) the newcomer can only act from the next round (swap_ready = true lets it act at once). Not before swap_from_round.
 	var new_ld: Dictionary = {}
 	for ld in swap_options(i):
 		if ld["card"]["id"] == card_id:
@@ -167,16 +171,15 @@ func swap(i: int, card_id: String) -> Array:
 	var old: Dictionary = leaders[i]
 	var old_ld: Dictionary = old["leader"]
 	bench_states[old_ld["card"]["id"]] = {"uses_left": old["uses_left"].duplicate(), "extra_cost": old["extra_cost"].duplicate()}
-	var u := _make_unit(new_ld)
+	var stand_in: Dictionary = new_ld.duplicate()  # the slot keeps its attack and HP: a swap changes who fights, not how hard
+	stand_in["at"] = old_ld["at"]
+	stand_in["hp"] = old_ld["hp"]
+	var u := _make_unit(stand_in)
 	u["confused"] = old["confused"]
 	u["confuse_next"] = old["confuse_next"]
-	u["acted"] = false if bool(db.battle.get("swap_ready", true)) else old["acted"]
-	var old_max := party_max
+	u["acted"] = not bool(db.battle.get("swap_ready", false))  # by default the newcomer waits for next round
 	leaders[i] = u
-	party_max = maxi(1, _max_hp_for(_leaders_hp()))
-	party_hp = clampi(int(round(float(party_hp) * party_max / old_max)), 1, party_max)
 	roster.erase(new_ld)
-	roster.append(old_ld)
 	_ev({"t": "swap", "unit": i, "card": card_id, "hp": party_hp, "max": party_max})
 	return ["%s 换下 %s（AP -%d）" % [new_ld["card"]["name"], old_ld["card"]["name"], swap_cost()]]
 

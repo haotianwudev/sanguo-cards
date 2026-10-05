@@ -494,9 +494,12 @@ func demo(name: String) -> void:
 			await get_tree().create_timer(0.5).timeout
 			await sb._on_skill(1, "xiliang")
 			if OS.get_cmdline_user_args().has("--done"):
+				sb.b.round_no = 3
 				sb.b.ap = 4
 				await sb._on_swap(1, "madai")
 			else:
+				sb.b.round_no = 3
+				sb.b.ap = 4
 				sb._open_swap(1)
 		"battle", "fight":
 			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]

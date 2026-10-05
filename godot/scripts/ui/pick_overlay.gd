@@ -4,11 +4,14 @@ extends Control
 ## Used for the story's 三选一, chests (soldiers) and recruiting (generals).
 
 signal picked(index: int)
+signal cancelled
 
 var title := ""
 var card_ids: Array = []
 var captions: Array = []  # optional text under each card
 var counts: Array = []  # optional copy counts (chests)
+var confirm_text := "选一张"
+var cancelable := false  # a 取消 button next to the confirm one (emits cancelled)
 var chest := ""  # "" = cards just flip in; "normal" / "grand" = a chest pops, bursts open and deals them face down
 var _views: Array = []
 var _selected := -1
@@ -55,7 +58,12 @@ func _ready() -> void:
 	var bottom := HBoxContainer.new()
 	bottom.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.add_child(bottom)
-	_confirm = Kit.button("选一张", "gold", Kit.FONT_BIG)
+	if cancelable:
+		var cancel := Kit.button("取消", "gray", Kit.FONT_BIG)
+		cancel.custom_minimum_size = Vector2(200, 64)
+		cancel.pressed.connect(func(): cancelled.emit())
+		bottom.add_child(cancel)
+	_confirm = Kit.button(confirm_text, "gold", Kit.FONT_BIG)
 	_confirm.custom_minimum_size = Vector2(260, 64)
 	_confirm.disabled = true
 	_confirm.pressed.connect(func(): if _selected >= 0: picked.emit(_selected))
