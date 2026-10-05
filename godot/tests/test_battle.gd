@@ -472,3 +472,18 @@ func test_regen_event_has_what_the_screen_reads() -> void:
 	check(not heals.is_empty(), "再生 heals")
 	for e in heals:
 		check(e.has("amt") and e.has("hp"), "enemy_heal carries amt and hp")
+
+
+func test_skill_power_is_the_per_ap_rate_times_its_cost() -> void:
+	## cards.json gives an attack its `rate` (power per AP); the loaded per-hit power × hits is rate × AP cost
+	var db := GameData.get_db()
+	var seen := 0
+	for sid in db.skills:
+		var sk: Dictionary = db.skills[sid]
+		for e in sk["effects"]:
+			if e.has("rate"):
+				seen += 1
+				check(absf(float(e["power"]) * int(e.get("hits", 1)) - float(e["rate"]) * sk["cost"]) < 0.0001, sid)
+	check(seen > 50, "most skills are rate-based")
+	var throw: Dictionary = db.skills["rengdao"]["effects"][0]
+	check_eq(float(throw["power"]), float(throw["rate"]) * 3.0, "the hero's 3 AP throw")

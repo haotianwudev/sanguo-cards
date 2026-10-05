@@ -47,6 +47,12 @@ func _load(dir: String) -> void:
 	skill_budget = raw.get("skill_budget", {})
 	for sid in raw["skills"]:
 		var s: Dictionary = raw["skills"][sid]
+		# power per AP: an attack / magic / heal effect with a `rate` hits for rate × AP cost in total (split over its hits),
+		# so a 3 AP skill at rate 1.2 is worth 3.6 and a hero's 3 AP at rate 2.0 is worth 6; `power` is the per-hit value
+		# written out directly (0 AP skills, or anything without a rate)
+		for e in s["effects"]:
+			if e.has("rate"):
+				e["power"] = float(e["rate"]) * int(s["cost"]) / int(e.get("hits", 1))
 		skills[sid] = {"id": sid, "name": s["name"], "cost": int(s["cost"]),
 			"cumulative": s.get("cumulative", false),
 			"uses": null if s.get("uses") == null else int(s["uses"]),
