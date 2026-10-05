@@ -9,165 +9,158 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-1. `chunyuqiong` — 淳于琼（成年男性，袁绍大将）（立绘）
-2. `yudu` — 于毒（成年男性，黑山叛党）（立绘）
-3. `quyi` — 麹义（成年男性，先登主将）（立绘）
-4. `c3_recruit_board` — 北线·真定发榜（剧情 CG）
-5. `c3_bribe_villager` — 北线·和稀泥（剧情 CG）
-6. `c3_encounter_ning` — 北线·深山绝壁（剧情 CG）
-7. `c3_leave_ning` — 北线·明哲保身（剧情 CG）
-8. `c3_zhangyan_meet` — 北线·黑山大寨（剧情 CG）
-9. `c3_guotu_raid` — 北线·郭图寻仇（剧情 CG）
-10. `c3_secret_path` — 北线·黑山秘道（剧情 CG）
-11. `c3_guojia_map` — 北线·界桥前夜（剧情 CG）
-12. `c3_breakout` — 北线·府门突围（剧情 CG）
-13. `c3_xiahoulan_law` — 北线·夏侯兰军法（剧情 CG）（剧情 CG）
-14. `c3_save_ning` — 北线·救张宁（剧情 CG）（剧情 CG）
-15. `c3_alliance` — 北线·结盟张燕（剧情 CG）（剧情 CG）
-16. `c3_banma_flag` — 北线·斑马大旗（剧情 CG）（剧情 CG）
-17. `c3_save_zan` — 北线·赵云救公孙瓒（剧情 CG）（剧情 CG）
-18. `c3_quyi_camp` — 北线·麹义先登营（剧情 CG）（剧情 CG）
-19. `end_fuchao` — 结局卡·覆巢（剧情 CG）（剧情 CG）
-20. `caifuren` — 蔡夫人（成年女性，荆州蔡氏主母）（立绘）
-21. `bianfuren` — 卞夫人（成年女性，曹操武宣皇后）（立绘）
-22. `yanfuren` — 严夫人（成年女性，吕布正妻）（立绘）
-23. `zhurong` — 祝融夫人（成年女性，南中女王）（立绘）
-24. `mayunlu` — 马云騄（成年女性，西凉女将）（立绘）
-25. `wangyi` — 王异（成年女性，智勇奇女）（立绘）
-26. `xinxianying` — 辛宪英（成年女性，魏晋才女）（立绘）
-27. `bulianshi` — 步练师（成年女性，江东贤女）（立绘）
-28. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
-29. `liniang` — 黎娘（成年女性，山越女王）（立绘）
-30. `chuniang` — 厨娘（成年女性，军中厨娘）（立绘）
-31. `chaniang` — 茶娘（成年女性，茶楼掌柜）（立绘）
-32. `huansha` — 浣纱女（成年女性，水乡浣纱）（立绘）
-33. `caisang` — 采桑女（成年女性，桑园采桑）（立绘）
-34. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
-35. `jz_county_fight` — 州衙·拔刀相助 战斗背景（战斗 CG）
-36. `jz_road_bandits` — 官道·黑山散兵 战斗背景（选路分支，走官道那一边）（战斗 CG）
-37. `wenchou` — 文丑（立绘）
-38. `gongsunzan` — 公孙瓒（立绘）
-39. `yudu` — 于毒（第三章精英）（立绘）
-40. `quyi` — 麹义（第三章精英）（立绘）
-41. `taishici` — 太史慈（换掉占位）（立绘）
-42. `guanhai` — 管亥（立绘）
-43. `kongrong` — 孔融（立绘）
-44. `taoqian` — 陶谦（立绘）
-45. `mizhu` — 糜竺（换掉占位）（立绘）
-46. `mifang` — 糜芳（立绘）
-47. `chendeng` — 陈登（立绘）
-48. `chengui` — 陈珪（立绘）
-49. `caobao` — 曹豹（立绘）
-50. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
-51. `xunyu` — 荀彧（第六章）（立绘）
-52. `caoren` — 曹仁（第六章）（立绘）
-53. `chengong` — 陈宫（立绘）
-54. `zhangliao` — 张辽（换掉占位）（立绘）
-55. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
-56. `xunyou` — 荀攸（立绘）
-57. `zhongyao` — 钟繇（立绘）
-58. `zhangxun` — 张勋（南线第六章）（立绘）
-59. `liuxun` — 刘勋（南线第六章）（立绘）
-60. `lusu` — 鲁肃（南线第六章入队）（立绘）
-61. `zhengbao` — 郑宝（南线第六章）（立绘）
-62. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
-63. `zangba` — 臧霸（北线第七章）（立绘）
-64. `yanliang` — 颜良（北线第七章，和文丑一起出场）（立绘）
-65. `shenrong` — 审荣（北线第七章）（立绘）
-66. `liuyao` — 刘繇（南线第七章）（立绘）
-67. `yanbaihu` — 严白虎（南线第七章）（立绘）
-68. `wanglang` — 王朗（南线第七章）（立绘）
-69. `zhoutai` — 周泰（南线第七章）（立绘）
-70. `jiangqin` — 蒋钦（南线第七章）（立绘）
-71. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
-72. `mateng` — 马腾（北线第八、九章）（立绘）
-73. `hansui` — 韩遂（北线第八章）（立绘）
-74. `machao` — 马超（换掉占位）（立绘）
-75. `madai` — 马岱（北线第九章）（立绘）
-76. `pangde` — 庞德（北线第九章）（立绘）
-77. `tadun` — 蹋顿（北线第九章）（立绘）
-78. `gongsunkang` — 公孙康（北线第九章）（立绘）
-79. `liuzhang` — 刘璋（南线第九章）（立绘）
-80. `yanyan` — 严颜（南线第九章）（立绘）
-81. `zhangren` — 张任（南线第九章）（立绘）
-82. `fazheng` — 法正（南线第九章）（立绘）
-83. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
-84. `menghuo` — 孟获（南线第九章）（立绘）
-85. `luxun` — 陆逊（成年，南线第九章）（立绘）
-86. `yujin` — 于禁（北线第十章）（立绘）
-87. `lidian` — 李典（北线第十章）（立绘）
-88. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
-89. `xuchu` — 许褚（换掉占位）（立绘）
-90. `zhanghe` — 张郃（北线第十章）（立绘）
-91. `zhanglu` — 张鲁（南线第十章）（立绘）
-92. `zhangwei` — 张卫（南线第十章）（立绘）
-93. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
-94. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
-95. `dianwei` — 典韦（第十一章南线）（立绘）
-96. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-97. `c3_warn` — 劝阻孙坚（剧情 CG）
-98. `changan` — 第三章·长安地图底图（地图）
-99. `dongui` — 第四章·挟天子地图底图（地图）
-100. `yuxi` — 第三章·传国玉玺地图底图（地图）
-101. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-102. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-103. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-104. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-105. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-106. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-107. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-108. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-109. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
-110. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-111. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-112. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-113. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-114. `yiji` — 伊籍（第五章招贤馆）（立绘）
-115. `jingzhou_bu` — 荆州步卒（兵卡）（立绘）
-116. `caifu_nu` — 蔡府连弩手（精兵卡）（立绘）
-117. `zongzei` — 宗贼（兵卡）（立绘）
-118. `jinfan_zei` — 锦帆贼（精兵卡）（立绘）
-119. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-120. `jx_zongzei` — 新野·宗贼（战斗 CG）
-121. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-122. `e_shuijing` — 事件·水镜先生（剧情 CG）
-123. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-124. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-125. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-126. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-127. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-128. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-129. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-130. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-131. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-132. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-133. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-134. `huangzu` — 黄祖（江夏太守）（立绘）
-135. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
-136. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
-137. `jingzhou_shuijun` — 荆州水军（兵卡）（立绘）
-138. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-139. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-140. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-141. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-142. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-143. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-144. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
-145. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-146. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-147. `c8_jiayan` — 宛城家宴（剧情 CG）
-148. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-149. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-150. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-151. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-152. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-153. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-154. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-155. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-156. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-157. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-158. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-159. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+1. `quyi` — 麹义（成年男性，先登主将）（立绘）
+2. `c3_recruit_board` — 北线·真定发榜（剧情 CG）
+3. `c3_bribe_villager` — 北线·和稀泥（剧情 CG）
+4. `c3_encounter_ning` — 北线·深山绝壁（剧情 CG）
+5. `c3_leave_ning` — 北线·明哲保身（剧情 CG）
+6. `c3_zhangyan_meet` — 北线·黑山大寨（剧情 CG）
+7. `c3_guotu_raid` — 北线·郭图寻仇（剧情 CG）
+8. `c3_secret_path` — 北线·黑山秘道（剧情 CG）
+9. `c3_guojia_map` — 北线·界桥前夜（剧情 CG）
+10. `c3_breakout` — 北线·府门突围（剧情 CG）
+11. `c3_xiahoulan_law` — 北线·夏侯兰军法（剧情 CG）（剧情 CG）
+12. `c3_save_ning` — 北线·救张宁（剧情 CG）（剧情 CG）
+13. `c3_alliance` — 北线·结盟张燕（剧情 CG）（剧情 CG）
+14. `c3_banma_flag` — 北线·斑马大旗（剧情 CG）（剧情 CG）
+15. `c3_save_zan` — 北线·赵云救公孙瓒（剧情 CG）（剧情 CG）
+16. `c3_quyi_camp` — 北线·麹义先登营（剧情 CG）（剧情 CG）
+17. `end_fuchao` — 结局卡·覆巢（剧情 CG）（剧情 CG）
+18. `caifuren` — 蔡夫人（成年女性，荆州蔡氏主母）（立绘）
+19. `bianfuren` — 卞夫人（成年女性，曹操武宣皇后）（立绘）
+20. `yanfuren` — 严夫人（成年女性，吕布正妻）（立绘）
+21. `zhurong` — 祝融夫人（成年女性，南中女王）（立绘）
+22. `mayunlu` — 马云騄（成年女性，西凉女将）（立绘）
+23. `wangyi` — 王异（成年女性，智勇奇女）（立绘）
+24. `xinxianying` — 辛宪英（成年女性，魏晋才女）（立绘）
+25. `bulianshi` — 步练师（成年女性，江东贤女）（立绘）
+26. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
+27. `liniang` — 黎娘（成年女性，山越女王）（立绘）
+28. `chuniang` — 厨娘（成年女性，军中厨娘）（立绘）
+29. `chaniang` — 茶娘（成年女性，茶楼掌柜）（立绘）
+30. `huansha` — 浣纱女（成年女性，水乡浣纱）（立绘）
+31. `caisang` — 采桑女（成年女性，桑园采桑）（立绘）
+32. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
+33. `jz_county_fight` — 州衙·拔刀相助 战斗背景（战斗 CG）
+34. `jz_road_bandits` — 官道·黑山散兵 战斗背景（选路分支，走官道那一边）（战斗 CG）
+35. `wenchou` — 文丑（立绘）
+36. `gongsunzan` — 公孙瓒（立绘）
+37. `quyi` — 麹义（第三章精英）（立绘）
+38. `taishici` — 太史慈（换掉占位）（立绘）
+39. `guanhai` — 管亥（立绘）
+40. `kongrong` — 孔融（立绘）
+41. `taoqian` — 陶谦（立绘）
+42. `mizhu` — 糜竺（换掉占位）（立绘）
+43. `mifang` — 糜芳（立绘）
+44. `chendeng` — 陈登（立绘）
+45. `chengui` — 陈珪（立绘）
+46. `caobao` — 曹豹（立绘）
+47. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
+48. `xunyu` — 荀彧（第六章）（立绘）
+49. `caoren` — 曹仁（第六章）（立绘）
+50. `chengong` — 陈宫（立绘）
+51. `zhangliao` — 张辽（换掉占位）（立绘）
+52. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
+53. `xunyou` — 荀攸（立绘）
+54. `zhongyao` — 钟繇（立绘）
+55. `zhangxun` — 张勋（南线第六章）（立绘）
+56. `liuxun` — 刘勋（南线第六章）（立绘）
+57. `lusu` — 鲁肃（南线第六章入队）（立绘）
+58. `zhengbao` — 郑宝（南线第六章）（立绘）
+59. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
+60. `zangba` — 臧霸（北线第七章）（立绘）
+61. `yanliang` — 颜良（北线第七章，和文丑一起出场）（立绘）
+62. `shenrong` — 审荣（北线第七章）（立绘）
+63. `liuyao` — 刘繇（南线第七章）（立绘）
+64. `yanbaihu` — 严白虎（南线第七章）（立绘）
+65. `wanglang` — 王朗（南线第七章）（立绘）
+66. `zhoutai` — 周泰（南线第七章）（立绘）
+67. `jiangqin` — 蒋钦（南线第七章）（立绘）
+68. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
+69. `mateng` — 马腾（北线第八、九章）（立绘）
+70. `hansui` — 韩遂（北线第八章）（立绘）
+71. `machao` — 马超（换掉占位）（立绘）
+72. `madai` — 马岱（北线第九章）（立绘）
+73. `pangde` — 庞德（北线第九章）（立绘）
+74. `tadun` — 蹋顿（北线第九章）（立绘）
+75. `gongsunkang` — 公孙康（北线第九章）（立绘）
+76. `liuzhang` — 刘璋（南线第九章）（立绘）
+77. `yanyan` — 严颜（南线第九章）（立绘）
+78. `zhangren` — 张任（南线第九章）（立绘）
+79. `fazheng` — 法正（南线第九章）（立绘）
+80. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
+81. `menghuo` — 孟获（南线第九章）（立绘）
+82. `luxun` — 陆逊（成年，南线第九章）（立绘）
+83. `yujin` — 于禁（北线第十章）（立绘）
+84. `lidian` — 李典（北线第十章）（立绘）
+85. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
+86. `xuchu` — 许褚（换掉占位）（立绘）
+87. `zhanghe` — 张郃（北线第十章）（立绘）
+88. `zhanglu` — 张鲁（南线第十章）（立绘）
+89. `zhangwei` — 张卫（南线第十章）（立绘）
+90. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
+91. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
+92. `dianwei` — 典韦（第十一章南线）（立绘）
+93. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+94. `c3_warn` — 劝阻孙坚（剧情 CG）
+95. `changan` — 第三章·长安地图底图（地图）
+96. `dongui` — 第四章·挟天子地图底图（地图）
+97. `yuxi` — 第三章·传国玉玺地图底图（地图）
+98. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+99. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+100. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+101. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+102. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+103. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+104. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+105. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+106. `ganning` — 甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）（立绘）
+107. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+108. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+109. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+110. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+111. `yiji` — 伊籍（第五章招贤馆）（立绘）
+112. `zongzei` — 宗贼（兵卡）（立绘）
+113. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+114. `jx_zongzei` — 新野·宗贼（战斗 CG）
+115. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+116. `e_shuijing` — 事件·水镜先生（剧情 CG）
+117. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+118. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+119. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+120. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+121. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+122. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+123. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+124. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+125. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+126. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+127. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+128. `huangzu` — 黄祖（江夏太守）（立绘）
+129. `caifuren` — 蔡夫人（荆州，成年女性）（立绘）
+130. `jingzhou_gong` — 荆州弓手（兵卡）（立绘）
+131. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+132. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+133. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+134. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+135. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+136. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+137. `yizhe` — 医者（兵卡，第五章兵卡池）（立绘）
+138. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+139. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+140. `c8_jiayan` — 宛城家宴（剧情 CG）
+141. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+142. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+143. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+144. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+145. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+146. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+147. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+148. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+149. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+150. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+151. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+152. `jingxiang` — 第五章·荆襄风云地图底图（地图）
 
 交图规则：
 
@@ -176,25 +169,13 @@
 - 女性角色一律画成成年人；董白不写年龄、不画成萝莉。
 - 卡牌立绘必须带背景：背景为符合人物身份与阵营的古风场景（军营、要塞、江岸、山林、宫室等，具自然景深与环境光影，不再使用纯白/摄影棚素底）。人物半身居中，面部在上方三分之一。
 - 文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。
-- 战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部，下方 30% 为干净地面。
+- 战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部。
 - 宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。
 - 立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。
 - **不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。
 - 提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。
 
 ## 立绘（竖版 3:4）
-
-### `chunyuqiong` ⬜ 缺
-
-```
-淳于琼（袁绍麾下大将，冀州重装守将）的竖版人物立绘。
-外貌：三十多岁，体格粗壮，满脸络腮胡，神情刚愎傲慢。
-铠甲与服饰：厚重的冀州精钢铠甲，肩宽体阔。
-武器：双手紧握一柄沉重锋利的宽刃大戟。
-背景：太行山绝壁险峻的隘口，身后是严阵以待的冀州步卒。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
 
 ### `wenchou` ⬜ 缺
 
@@ -216,18 +197,6 @@
 铠甲与服饰：银白色精钢重铠搭配亮银护心镜，身披一袭纤尘不染的雪白战袍披风，尽显白马将军之英姿。
 武器：双手横握一杆丈八精钢战槊，跨坐于神骏矫健的纯白骏马背上。
 背景：辽阔苍茫的界桥战场，身后迎风猎猎翻卷着无数绣着「白马」图腾的银白战旗。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-### `yudu` ⬜ 缺
-
-```
-于毒（黑山叛党凶寇首领，阴狠嗜杀）的竖版人物立绘。
-外貌：三十多岁，精瘦阴狠，满脸戾气，一道狰狞刀疤斜斜贯穿鼻梁，笑起来露出一口参差不齐的恶劣黄牙。
-铠甲与服饰：黑色粗粝兽皮背心内衬深色粗布衣，黑布紧紧缠头，腰带上挂满劫掠而来的金银器皿与珠宝挂件。
-武器：肩头扛着一柄沉重锋利、刃口带齿的厚背环首大砍刀。
-背景：太行山脚下刚刚遭受焚掠的村庄废墟，断壁残垣间火光浓烟缭绕。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
@@ -862,58 +831,6 @@ Huang Chengyan (黄承彦), an eccentric scholar-inventor of Mian'nan and Cai Ma
 ```
 </details>
 
-### `jingzhou_bu` ⬜ 缺
-
-```
-荆州步卒（兵卡 / 敌人）的竖版人物立绘。
-外貌：敦实的年轻兵，倔下巴
-铠甲与服饰：绿边布皮甲、画「刘」字的圆盾
-武器：盾后举着大刀
-背景：襄阳城门。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-a Jingzhou foot soldier (荆州步卒), a soldier card的竖版人物立绘。
-外貌：Stocky young soldier with a stubborn jaw.
-铠甲与服饰：Green-trimmed cloth-and-leather armor, a round shield painted 刘.
-武器：A broad saber raised behind the shield.
-背景：the gate of Xiangyang。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
-### `caifu_nu` ⬜ 缺
-
-```
-蔡府连弩手（精兵卡 / 敌人）的竖版人物立绘。
-外貌：瘦脸冷眼的家兵；肩抵连弩
-铠甲与服饰：黑紫色蔡家号衣罩轻甲、蔡家徽记
-武器：仪态沉稳端庄
-背景：华丽水阁的丝帘与灯火。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-a Cai household repeating-crossbowman (蔡府连弩手), an elite soldier card的竖版人物立绘。
-外貌：Cold-eyed guard with a thin face.
-铠甲与服饰：Black-and-purple household livery over light armor, the Cai family crest.
-武器：A repeating crossbow braced at the shoulder.
-背景：silk curtains of a lavish pavilion, lamplight。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zongzei` ⬜ 缺
 
 ```
@@ -935,32 +852,6 @@ a clan bandit (宗贼) of Jingzhou, a soldier card的竖版人物立绘。
 铠甲与服饰：Patched peasant clothes with a leather vest, a clan tag on his belt.
 武器：A heavy farm cleaver and a torch.
 背景：the rammed-earth wall of a fortified village (wubao) in Jingzhou。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
-### `jinfan_zei` ⬜ 缺
-
-```
-锦帆贼（甘宁的人，精兵卡 / 敌人）的竖版人物立绘。
-外貌：精瘦晒黑的江贼，笑得野，头上插根羽毛
-铠甲与服饰：鲜艳锦带、光膀子、腰挂一串铜铃
-武器：短弯刀和挠钩绳
-背景：汉江上挂锦帆的快船。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-a Brocade-Sail pirate (锦帆贼), Gan Ning's men, an elite soldier card的竖版人物立绘。
-外貌：Lean, tanned river pirate with a wild grin and a feather in his hair.
-铠甲与服饰：Bright brocade sash, bare arms, a string of bronze bells at the waist.
-武器：A short curved blade and a grappling rope.
-背景：a fast boat with a brocade sail on the Han river。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
@@ -1091,32 +982,6 @@ a Jingzhou archer (荆州弓手), a soldier card的竖版人物立绘。
 铠甲与服饰：Light green cloth armor over a short tunic, a reed hat, a quiver of arrows at the hip.
 武器：Drawing a longbow, crouched in reeds.
 背景：a reed marsh on the Han river bank in autumn。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
-### `jingzhou_shuijun` ⬜ 缺
-
-```
-荆州水军（兵卡 / 敌人）的竖版人物立绘。
-外貌：光头膀大腰圆的江上汉子，咧嘴笑；跳帮长矛和藤牌
-铠甲与服饰：赤膊皮背心、红头巾、腰缠缆绳
-武器：仪态沉稳端庄
-背景：荆州战船船头、桨和旗。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-a Jingzhou marine (荆州水军), a soldier card的竖版人物立绘。
-外貌：Broad-shouldered river sailor with a shaved head and a rough grin.
-铠甲与服饰：Bare-chested under a short leather vest, a red headband, rope at the waist.
-武器：A boarding pike and a round rattan shield.
-背景：the prow of a Jingzhou war boat on the Han river, oars and flags。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
@@ -2536,7 +2401,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：邺城州衙门前的雪街：几名衙役抡着水火棍围上来，背景是州衙的朱漆大门和瑟缩的灾民，雪地上已经洒了几滴血。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2544,7 +2409,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：太行官道旁的雪林：几个衣衫混杂的黑山散兵从树后窜出拦路打劫，背景是积雪的官道和两侧稀疏的冬林。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2552,7 +2417,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：漆黑幽暗的酒肆后巷：身着平民便服的袁术密探自宽大衣袖中猛然拔出寒光闪闪的短匕，眼神阴鸷围逼而上。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2561,7 +2426,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a tavern back alley at night: Yuan agents in plain clothes drawing short knives from their sleeves。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2570,7 +2435,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：暴雨倾盆的深夜官道：数名手持精钢长矛的袁军轻骑兵从幽暗深处破空冲杀而出，火把照耀下雨丝斜织。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2579,7 +2444,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a rainy night road: Yuan cavalry with spears charging out of the dark, rain slanting in the torchlight。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2588,7 +2453,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：洛阳废墟残垣断壁间：无数面黄肌瘦、眼眶深陷的绝望饥民流民手持锄头木棒，如狂潮般自瓦砾废墟中翻涌扑向运粮车队。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2597,7 +2462,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the ruins of Luoyang: a desperate mob of starving refugees with hoes and sticks surging over rubble toward the grain carts。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2606,7 +2471,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：荷花池夜色幽深处：吕布麾下的并州精锐亲兵手持长戟，手提灯笼在假山楼阁回廊间四处搜寻盘查。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2615,7 +2480,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a lotus garden at night: Lü Bu's Bingzhou guards with ji searching between the pavilions with lanterns。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2624,7 +2489,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：黎明前清冷的长安长街：司徒王允府邸的私兵精甲列队成行，长戟如林、重弩上弦，森然封锁整条街市。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2633,7 +2498,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a long Chang'an street before dawn: Wang Yun's house troops in a line with ji and crossbows。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2642,7 +2507,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：大雪漫天的长安宣平门广场：高顺陷阵营黑甲精锐死士在沉重高大的铁盾墙后森严列阵，黑矛林立，鸦雀无声。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2651,7 +2516,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the square before the Xuanping Gate in snow: black-armored Trap-Breaking Camp infantry behind tall shields。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2660,7 +2525,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：南阳高耸的城寨外：一队手持长枪、打着「袁」字战旗的袁军巡逻队横列长枪封锁乡间要道。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2669,7 +2534,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：outside a walled town in Nanyang: a Yuan army patrol with spears under a 袁 banner blocking a country road。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2678,7 +2543,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：官道旁树影婆娑的三岔路口：袁军精锐弓手半跪在低矮的土坡掩体后，大弓拉满如满月，后方战旗猎猎。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2687,7 +2552,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a fork in a road lined with trees: Yuan archers kneeling behind a low earth bank, bows drawn, a 袁 banner。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2696,7 +2561,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：黎明前火光冲天的长安名士宅邸后门处：面色冷峻黧黑的高顺如磐石般挺立在一人高的黑铁重盾阵后，长戟森冷如林，陷阵营全军肃然无声。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2705,7 +2570,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the back gate of a scholar's mansion in Chang'an before dawn, the house burning behind: the grim, dark-faced Gao Shun standing like a post behind a wall of tall black shields bristling with halberds, his Trap-Breaking Camp utterly silent。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2714,7 +2579,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：黎明时分大雪纷飞的长安宣平门外：吕布高踞在人立而起的赤兔马上，方天画戟高高举起，身后是高顺陷阵营肃杀沉寂的黑盾长戟之墙；马鞍后坐着一位裹在黑色斗篷里的成年绝色女子（貂蝉），眼神望向别处。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2723,7 +2588,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the great Xuanping Gate of Chang'an in falling snow at dawn: Lü Bu on the rearing Red Hare with his halberd raised high, Gao Shun's black shield wall behind him; a woman in a black cloak (Diaochan, adult) seated behind his saddle looking away。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2732,7 +2597,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：浓夜深沉的长安青明门前：火把通明成排，身着红黑战服的大汉禁卫军手持长戟横阻街道，领军校尉神情严厉展开一卷拘捕令公文。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2741,7 +2606,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the Qingming Gate of Chang'an at night: a row of torches, Han guards in red and black with halberds barring the road, their officer holding out a written order。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2750,7 +2615,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：长安以东险要的狭窄山道：粗犷高大的西凉猛将樊稠跨马挥舞沉重泼风大砍刀狂笑挑衅，山坡上西凉铁骑如决堤洪水般奔涌而下。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2759,7 +2624,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a narrow mountain road east of Chang'an: the loud, brash Xiliang general Fan Chou on horseback swinging a huge saber, laughing, Xiliang cavalry pouring down the slope。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2768,7 +2633,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：残阳如血的函谷关隘前：精瘦阴残的西凉大将李傕骑在高头大马上，身后高擎巨大的「李」字战旗，长刀刃口血迹未干，后方漫山遍野的西凉铁骑填塞整条关道。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2777,7 +2642,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：Hangu Pass at sunset: the gaunt, cruel Li Jue on horseback before a huge 李 banner, his blade still stained, rows of Xiliang cavalry filling the pass behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2786,7 +2651,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：盛夏南阳袁军前哨大寨营门前：矮胖油滑的袁军大将桥蕤随手将啃光的鸡骨头扔在地上，狞笑着拔出肩扛的厚背宽刃大砍刀，大批袁兵正慌乱从帐篷中蜂拥而出。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2795,7 +2660,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a Yuan army camp gate in Nanyang in summer: the stout Qiao Rui tossing away a chicken bone and drawing his broad saber, Yuan soldiers scrambling out of their tents。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2804,7 +2669,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：宛城城外崎岖的山路道中：下巴带疤的凶残骑将雷薄率领袁军轻骑兵发起狂暴冲锋，箭矢如飞蝗破空，泥浆飞溅。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2813,7 +2678,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a mountain road outside Wancheng: Lei Bo with a scar on his chin leading light cavalry in a charge, arrows in the air。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2822,7 +2687,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：南阳宛城高耸巍峨的城头：灰白胡须的袁军老将陈兰伫立在箭楼之上面色阴沉长枪下指，女墙垛口后弓弩手密集引弓，城头猎猎翻卷着「袁」字大纛。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2831,7 +2696,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the walls of Wancheng in Nanyang: the grey-bearded general Chen Lan on the gate tower pointing a long spear down, archers along the battlements, the 袁 banner above。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2840,7 +2705,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：黎明时分黑烟滚滚的宛城西门处：袁术第一大将纪灵身披金甲、双手倒提三尖两刃神锋刀，单人独骑傲然堵住城门断后，身后袁术的奢华金顶车队正狼狈出城逃窜。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2849,7 +2714,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the west gate of Wancheng at dawn, smoke rising in the city behind: Ji Ling alone on horseback in gilded armor with his three-pointed double-edged blade, holding the gate while Yuan Shu's carriages flee behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2858,7 +2723,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：渭水桥·张绣（四周目第四章）：黎明渭水石桥，张绣单枪匹马抖出枪花，身后「张」字旗；远处骡子上的贾诩闻酒葫芦。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2867,7 +2732,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a stone bridge over the Wei river at dawn: the cocky young Zhang Xiu alone on the bridge spinning his long spear into a blur of spear-tip flowers, Xiliang cavalry under a 张 banner behind; far back a thin man on a mule sniffing a wine gourd。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2876,7 +2741,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：渭水营·张济（四周目第四章，精英）：渭水边西凉营门，张济拄枪而立，鼓声大作；营门边粮车上坐着叹气的贾诩。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2885,7 +2750,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a Xiliang camp gate on the Wei river bank: the steady general Zhang Ji on foot with his spear planted beside him, war drums behind, soldiers pouring out; a thin man sitting on a grain cart by the gate, sighing。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2894,7 +2759,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：汉水渡口·锦帆贼：汉水渡口，锦帆快船堵住渡口，腰挂铜铃的江贼拿短刀挠钩跳上栈桥。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2903,7 +2768,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a ferry landing on the Han river: brocade-sailed fast boats blocking the crossing, river pirates with bells at their waists leaping onto the jetty with short blades and grappling ropes。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2912,7 +2777,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：新野·宗贼：新野城外的坞堡，宗贼和庄丁举着铡刀火把从夯土寨门冲出，寨主站在墙头。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2921,7 +2786,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a fortified clan village (wubao) outside Xinye: clan bandits and armed farmhands pouring out of the rammed-earth gate with cleavers and torches, their chief on the wall。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2930,7 +2795,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：汉水·甘宁（事件战）：正午汉江，年轻的甘宁站在锦帆快船船头拉满大弓，腰挂铜铃，手下在后面起哄。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2939,7 +2804,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the Han river at noon: the young, cocky Gan Ning standing on the prow of a brocade-sailed boat drawing a great bow, bronze bells at his waist, his pirates cheering behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2948,7 +2813,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：淯水北岸·荆州步卒：秋天淯水北岸，刚渡河的荆州步卒列阵，圆盾画「刘」字，枪林如苇。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2957,7 +2822,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the north bank of the Yu river in autumn: a line of Jingzhou infantry with round shields painted 刘 and a forest of spears, having just waded across, reeds behind them。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2966,7 +2831,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：芦苇荡·荆州弓手：淯水芦苇荡，弓手藏在苇丛里隔水放箭。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2975,7 +2840,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a reed marsh along the Yu river: Jingzhou archers half-hidden in tall reeds loosing a volley across the water。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -2984,7 +2849,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：淯水·黄祖（首领）：淯水南岸「黄」字大旗下，干瘦的老将黄祖举鬼头刀，身后荆州兵和江船。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -2993,7 +2858,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the south bank of the Yu river under a big 黄 banner: the gaunt grey veteran Huang Zu on horseback raising his ghost-head broadsword, Jingzhou troops and river boats behind him, arrows in the air。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3002,7 +2867,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：水寨·荆州水军（精英）：汉江水寨，赤膊的水军从战船跳上栈桥，后面是巨大的楼船。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3011,7 +2876,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a Jingzhou river fortress on the Han river: bare-chested Jingzhou marines leaping from a line of war boats onto the jetty with pikes and rattan shields, a huge tiered flagship behind。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3020,7 +2885,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：水阁·蔡府连弩手：起火冒烟的水阁里，撕破的帘子后连弩手朝浓烟乱射，翻倒的铜炉溅出炭火。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3029,7 +2894,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：inside a burning lakeside pavilion full of smoke: Cai family crossbowmen behind torn silk curtains shooting blindly into the haze, an overturned bronze brazier spilling embers。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3038,7 +2903,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：水阁·独眼蔡瑁（结局三线首领）：烧了一半的水阁，蔡瑁一手捂着流血的右眼一手挥剑，死士环绕，火光浓烟。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3047,7 +2912,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a half-burnt banquet pavilion on a rock above the Han river: the burly Cai Mao clutching his bleeding right eye with one hand and swinging a long sword with the other, death-sworn guards around him, flames and smoke。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3056,7 +2921,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：水阁·蔡瑁（破局线首领）：月下水阁，案几翻倒，蔡瑁被逼到栏杆边拔剑，帘后的连弩全对准了他。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3065,7 +2930,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a moonlit banquet pavilion on a rock above the Han river, overturned tables: the burly Cai Mao in brocade over gilded armor cornered at the railing with his sword drawn, his last guards around him, crossbows now aimed at him from the curtains。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3074,7 +2939,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：奢华夜宴的中庭比武校场：西凉猛将樊稠呼呼抡动沉重大刀，宴席四周划拳狂饮的西凉将领们拍桌大声起哄喝彩。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3083,7 +2948,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a courtyard duel ring at a feast: Fan Chou swinging a huge saber, laughing Xiliang officers cheering from the tables。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3092,7 +2957,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：烛光通明的宴厅武斗场：沉稳严肃的西凉校尉张济长枪平端守势严密，长枪寒芒在红灯笼掩映下冷光凛然。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3101,7 +2966,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a courtyard duel ring at a feast: the steady Zhang Ji with his spear levelled, lantern light。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3110,7 +2975,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：喜庆夜宴的比武擂台：董卓女婿牛辅面目狰狞挥舞沉重腰刀狂暴劈砍，董白在宴席旁猛然起立娇声娇喝，高座上的董卓眯着小眼阴鸷审视。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3119,7 +2984,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a courtyard duel ring at a feast: Niu Fu charging with a heavy saber, Dong Bai standing up at the table shouting, Dong Zhuo watching with narrowed eyes。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3128,7 +2993,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：深夜幽暗的相国府内门重地：带疤冷面将领胡轸横握厚背大刀死死挡住通道，身后两扇沉重如山的包铁巨门正缓缓合拢。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3137,7 +3002,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the chancellor's inner gate at night: Hu Zhen barring the way with a broad saber as the great doors swing shut behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3146,7 +3011,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：饱经劫掠焚毁的破败村道：西凉骑将郭汜高踞战马上指挥士卒哄抢劫掠老百姓最后的余粮粮车，推倒哭嚎的老农，董白手持双铜锤怒容满面一锤砸碎车轮。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3155,7 +3020,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a looted village road: Guo Si on horseback over captured grain carts, soldiers loading the villagers' last sacks, an old man knocked down, Dong Bai smashing a cart wheel with her twin hammers。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3164,7 +3029,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：红绸灯笼高挂的喜堂陷阱：喜宴大门轰然紧闭，黑甲重铠的西凉飞熊军凶卒从大红幕帘后蜂拥杀出，杀气腾腾。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3173,7 +3038,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：a wedding hall turned trap: red lanterns and silk, the doors slammed shut, black-armored Flying Bear cavalry pouring in from behind the curtains。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -3182,7 +3047,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：深夜相国府巍峨的白玉宫阶前：体格如黑熊般极其庞大凶悍的董卓按剑狞笑，身后黑压压挤满全副武装的飞熊军亲兵，婚宴的大红灯笼在夜风中剧烈摇曳。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
@@ -3191,7 +3056,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ```
 横版战斗场景插画：the steps before the chancellor's mansion at night: the enormous Dong Zhuo with a drawn sword among his elite black-armored guards, wedding lanterns burning behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。
+构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 </details>
@@ -5797,6 +5662,30 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 铠甲与服饰：多处破损撕裂的曹军轻甲，战袍撕裂开裂，沾满尘土与斑斑血迹。
 武器：一只手用力向前递出自己战马的真皮缰绳（「天下可无洪，不可无公！」），另一手拔出佩刀戒备断后。
 背景：汴水河畔败军溃乱的混乱江岸，远处浓烟滚滚、喊杀震天。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+
+### `yudu` ✅
+
+```
+于毒（黑山叛党凶寇首领，阴狠嗜杀）的竖版人物立绘。
+外貌：三十多岁，精瘦阴狠，满脸戾气，一道狰狞刀疤斜斜贯穿鼻梁，笑起来露出一口参差不齐的恶劣黄牙。
+铠甲与服饰：黑色粗粝兽皮背心内衬深色粗布衣，黑布紧紧缠头，腰带上挂满劫掠而来的金银器皿与珠宝挂件。
+武器：肩头扛着一柄沉重锋利、刃口带齿的厚背环首大砍刀。
+背景：太行山脚下刚刚遭受焚掠的村庄废墟，断壁残垣间火光浓烟缭绕。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+
+### `chunyuqiong` ✅
+
+```
+淳于琼（袁绍麾下大将，冀州重装守将）的竖版人物立绘。
+外貌：三十多岁，体格粗壮，满脸络腮胡，神情刚愎傲慢。
+铠甲与服饰：厚重的冀州精钢铠甲，肩宽体阔。
+武器：双手紧握一柄沉重锋利的宽刃大戟。
+背景：太行山绝壁险峻的隘口，身后是严阵以待的冀州步卒。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```

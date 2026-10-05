@@ -1548,7 +1548,7 @@ NEXT_RULES = [
     "女性角色一律画成成年人；董白不写年龄、不画成萝莉。",
     "卡牌立绘必须带背景：背景为符合人物身份与阵营的古风场景（军营、要塞、江岸、山林、宫室等，具自然景深与环境光影，不再使用纯白/摄影棚素底）。人物半身居中，面部在上方三分之一。",
     "文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。",
-    "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部，下方 30% 为干净地面。",
+    "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部。",
     "宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。",
     "立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
     "**不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。",
@@ -1686,11 +1686,11 @@ def portrait_prompt(p: tuple, key: str = None) -> tuple[str, str]:
 
 def battle_prompt(scene: str, key: str = None) -> tuple[str, str]:
     en_prompt = (f"横版战斗场景插画：{scene}。{NL}"
-                 f"构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。{NL}"
+                 f"构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。{NL}"
                  f"画风：{STYLE}，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。")
     scene_zh = BATTLES_ZH.get(key, scene)
     zh_prompt = (f"横版战斗场景插画：{scene_zh}。{NL}"
-                 f"构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%），下方 30% 为简洁地面。{NL}"
+                 f"构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。{NL}"
                  f"画风：{STYLE}，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。")
     return zh_prompt, en_prompt
 
