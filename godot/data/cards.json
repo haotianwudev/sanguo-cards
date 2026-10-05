@@ -7157,6 +7157,7 @@
     }
   },
   "scenarios": {
+    "th_patrol": {"name": "太行巡山兵", "turn_limit": 6, "enemy": "th_patrol"},
     "bh_jiang_trap": {"name": "姜家寨暗哨", "turn_limit": 6, "enemy": "liukou"},
     "bh_wolf2": {"name": "并州精骑", "turn_limit": 6, "enemy": "bingzhou_langqi"},
     "bh_jz_inf": {"name": "冀州步卒", "turn_limit": 6, "enemy": "jizhou_buzhu"},

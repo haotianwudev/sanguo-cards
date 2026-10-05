@@ -1633,6 +1633,14 @@
     "e_yazhai": {
       "src": "source/cg/e_yazhai.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_caocao": {
+      "src": "source/cg/c2_ln_caocao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_bianshui": {
+      "src": "source/cg/c2_ln_bianshui.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

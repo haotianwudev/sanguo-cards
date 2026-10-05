@@ -297,8 +297,8 @@
 | ✅ 已有 | `c2_ln_meet` | 夜奔的红衣姑娘 |
 | ✅ 已有 | `ln_camp` | 半个闺女 |
 | ✅ 已有 | `c2_ln_sponsor` | 中山甄记 |
-| ⬜ 缺 | `c2_ln_caocao` | 曹操借粮 |
-| ⬜ 缺 | `c2_ln_bianshui` | 救曹操 |
+| ✅ 已有 | `c2_ln_caocao` | 曹操借粮 |
+| ✅ 已有 | `c2_ln_bianshui` | 救曹操 |
 | ✅ 已有 | `ln_handhold` | 车帘后 |
 | ✅ 已有 | `c2_lingqi_oath` | 星下誓言 |
 
@@ -597,22 +597,22 @@
 | ⬜ 缺 | `bh_lubu` | 太行山口·吕布（吕布） |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
 | ⬜ 缺 | `bh_guanhai` | 北海解围（管亥） |
-| ⬜ 缺 | `bh_patrol` | 太行伏兵（太行巡山兵） |
-| ⬜ 缺 | `bh_yanliang` | 渡口·颜良（颜良） |
-| ⬜ 缺 | `bh_hj_qushuai` | 青州渠帅（黄巾渠帅） |
+| ⬜ 缺 | `th_patrol` | 太行巡山兵（太行巡山兵） |
 | ⬜ 缺 | `bh_jiang_trap` | 姜家寨暗哨（山贼） |
 | ⬜ 缺 | `bh_wolf2` | 并州精骑（并州狼骑） |
 | ⬜ 缺 | `bh_jz_inf` | 冀州步卒（冀州步卒） |
 | ⬜ 缺 | `bh_jz_spear` | 冀州长枪（冀州大枪阵） |
 | ⬜ 缺 | `bh_jz_scout` | 冀州游骑（冀州轻骑） |
 | ⬜ 缺 | `bh_jz_arch` | 冀州强弩（冀州强弩） |
+| ⬜ 缺 | `bh_yanliang` | 渡口·颜良（颜良） |
+| ⬜ 缺 | `bh_hj_qushuai` | 青州渠帅（黄巾渠帅） |
 | ⬜ 缺 | `bh_hj_duzhan` | 黄巾督战队（黄巾前锋） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
 | 状态 | key | 剧情格 |
 |---|---|---|
-| ⬜ 缺 | `c4_drink` | 山寨敬酒 |
+| ⬜ 缺 | `c4_drink` | 收服双凤 |
 | ⬜ 缺 | `end_juefa` | 结局七 |
 | ⬜ 缺 | `c4_escape` | 金蝉脱壳 |
 | ⬜ 缺 | `c4_yanliang` | 渡口·颜良 |
