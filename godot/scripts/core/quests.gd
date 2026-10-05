@@ -187,10 +187,18 @@ static func view(q: Dictionary, save: SaveData) -> Dictionary:
 	return _views[key]
 
 
+static func ramp(save: SaveData) -> float:
+	## the climb in enemy strength: every chapter finished this lap (battle.chapter_step; not while replaying an old chapter, which
+	## has its own 进阶) plus a head start for every earlier lap (battle.lap_step), so a new lap's first stage already beats the last lap's
+	var db := GameData.get_db()
+	var chapters := 0 if save.replay != "" else save.quests_cleared.size()
+	return chapters * float(db.battle.get("chapter_step", 0.0)) + (save.lap - 1) * float(db.battle.get("lap_step", 0.0))
+
+
 static func mods(save: SaveData) -> Dictionary:
 	## Battle modifiers for this run: every 宝物 carried by a unit, plus 险.
 	var db := GameData.get_db()
-	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"])}
+	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"]) + ramp(save)}
 	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
 	if save.fate != "" and db.fates.has(save.fate):
 		sources.append(db.fates[save.fate])  # 天命 of this run

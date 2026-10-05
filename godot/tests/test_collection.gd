@@ -240,7 +240,16 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 	check(n.owned.has("sunce") and n.soldiers.get("danyang", 0) == 1 and n.lord_name == "阿明" and n.merit == 7, "cards, name, 战功 kept")
 	check(n.tier("sunce") == s.tier("sunce") and n.tier("lord") == s.tier("lord"), "tiers carried over as they are, no gifts")
 	check(n.quests_cleared.is_empty() and n.flags.is_empty(), "the story starts over")
-	check_eq(Quests.mods(n)["enemy"], Quests.mods(s)["enemy"], "enemies unchanged")
+	var bat: Dictionary = GameData.get_db().battle
+	var fresh := SaveData.create()
+	check_eq(Quests.mods(fresh)["enemy"], 0.0, "lap 1, first stage: no climb yet")
+	check(is_equal_approx(Quests.mods(n)["enemy"], float(bat["lap_step"])), "lap 2 starts on the lap head start")
+	check(Quests.mods(n)["enemy"] > Quests.mods(fresh)["enemy"], "a new lap's first stage is harder than the last lap's first stage")
+	var mid := SaveData.create()
+	mid.quests_cleared = ["prologue", "taodong"]
+	check(is_equal_approx(Quests.mods(mid)["enemy"], 2.0 * float(bat["chapter_step"])), "each chapter cleared makes the next stage harder")
+	mid.replay = "prologue"
+	check_eq(Quests.mods(mid)["enemy"], 0.0, "replaying an old chapter does not take the climb")
 
 
 func test_cards_you_have_had_can_be_drawn_again() -> void:
