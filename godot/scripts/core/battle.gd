@@ -73,7 +73,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough * (1.0 + float(afx.get("at", 0.0))),
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
-		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_turns": 0, "charging": "", "charge_ready": false, "used": []}
+		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "charging": "", "charge_ready": false, "used": []}
 	b.party_burn = {"dmg": 0, "turns": 0}
 	var hp := 0
 	for ld in party:
@@ -296,14 +296,17 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
 		"burn":  # 火攻: the enemy loses HP before each of its turns; one fire at a time — a new one keeps the bigger, restarts the count
-			# "pct": a share of the enemy's full HP per turn; "power": × the caster's attack (magic resist applies)
+			# "pct": a share of the enemy's CURRENT HP each turn (so it eases off as it burns); "power": a flat amount,
+			# × the caster's attack (magic resist applies). Either way the fire never takes the last HP.
 			var bonus := float(mods.get("at", 0.0)) + float(mods.get("magic", 0.0))
 			var resist: float = enemy["data"]["magic_resist"] * (1.0 - minf(1.0, float(mods.get("pierce", 0.0))))
-			var per := maxi(1, int(round(at * float(eff.get("power", 0.0)) * mult * (1.0 + bonus) * (1.0 - resist))))
-			if eff.has("pct"):
-				per = maxi(1, int(round(enemy["max_hp"] * float(eff["pct"]) * mult)))
-			enemy["burn_dmg"] = maxi(enemy["burn_dmg"], per)
 			enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff["turns"]))
+			if eff.has("pct"):
+				enemy["burn_pct"] = maxf(enemy["burn_pct"], float(eff["pct"]) * mult)
+				_ev({"t": "burn_on", "pct": enemy["burn_pct"], "turns": enemy["burn_turns"]})
+				return ["  %s 陷入灼烧！每回合烧掉现有体力的 %d%%（%d 回合）" % [ename, int(round(enemy["burn_pct"] * 100)), enemy["burn_turns"]]]
+			var per := maxi(1, int(round(at * float(eff.get("power", 0.0)) * mult * (1.0 + bonus) * (1.0 - resist))))
+			enemy["burn_dmg"] = maxi(enemy["burn_dmg"], per)
 			_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
 			return ["  %s 陷入灼烧！每回合结算 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
 		"counter":  # 反击: until the round ends, every hit the enemy lands is answered with ×power of this leader's attack
@@ -329,12 +332,13 @@ func _enemy_phase(defend_cut: float) -> Array:
 	var log: Array = []
 	if enemy["burn_turns"] > 0:
 		enemy["burn_turns"] -= 1
-		var d: int = mini(enemy["burn_dmg"], enemy["hp"])
+		var d: int = clampi(maxi(enemy["burn_dmg"], int(round(enemy["hp"] * enemy["burn_pct"]))), 0, enemy["hp"] - 1)  # never lethal
 		enemy["hp"] -= d
 		_ev({"t": "burn", "dmg": d, "hp": enemy["hp"], "turns": enemy["burn_turns"]})
 		log.append("%s 灼烧结算，损失 %d 体力" % [data["name"], d])
 		if enemy["burn_turns"] == 0:
 			enemy["burn_dmg"] = 0
+			enemy["burn_pct"] = 0.0
 		_check_end()
 		if result != "":
 			return log

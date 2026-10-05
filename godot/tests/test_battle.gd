@@ -181,7 +181,7 @@ func test_fire_keeps_burning_on_the_enemy_turn() -> void:
 		if b.leaders[k]["leader"]["card"]["id"] == "zhouyu":
 			i = k
 	b.act(i, "yehuo")
-	check(b.enemy["burn_turns"] == 3 and b.enemy["burn_dmg"] == int(round(b.enemy["max_hp"] * 0.1)), "on fire: 10% a turn")
+	check(b.enemy["burn_turns"] == 3 and is_equal_approx(b.enemy["burn_pct"], 0.1), "on fire: 10% of what is left, a turn")
 	check_eq(b.enemy["hp"], b.enemy["max_hp"], "no damage up front")
 	var before: int = b.enemy["hp"]
 	b.take_events()
@@ -287,7 +287,7 @@ func test_each_troop_has_its_own_plain_move() -> void:
 	check_eq(plain["cavalry"]["cost"], 1)
 	check_eq(int(plain["cavalry"]["effects"][0]["hits"]), 2)
 	check_eq(plain["spear"]["cost"], 2)
-	check(float(plain["spear"]["effects"][0]["power"]) >= 2.5, "刺击 is the heavy one")
+	check(float(plain["spear"]["effects"][0]["power"]) >= 2.0, "刺击 is the heavy one")
 	check_eq(plain["archer"]["cost"], 0)
 	check(plain["archer"]["effects"][0].get("pierce", false), "射击 pierces")
 	check(not plain["strategist"]["effects"].any(func(e): return e["type"] in ["attack", "magic"]), "策士 plain move has no attack")
@@ -335,14 +335,17 @@ func _attack_value(sk: Dictionary) -> float:
 func test_the_dearer_the_attack_the_more_each_ap_buys() -> void:
 	## the floors, 大招 multiplier and tolerance all live in cards.json skill_budget; `special` skills are exempt
 	var cfg: Dictionary = GameData.get_db().skill_budget
-	var floors: Dictionary = cfg["floor"]
+	var tiers: Dictionary = cfg["rate_by_ap"]
+	for k in range(2, tiers.size() + 1):
+		check(float(tiers[str(k)]) > float(tiers[str(k - 1)]), "%d AP buys more per AP than %d AP" % [k, k - 1])
 	for sid in GameData.get_db().skills:
 		var sk: Dictionary = GameData.get_db().skills[sid]
 		if sk["special"]:
 			continue
-		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not floors.has(str(sk["cost"])):
+		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not tiers.has(str(sk["cost"])) \
+				or sk["effects"].any(func(e): return int(e.get("hits", 1)) > 1):  # multi-hit skills follow multi_hit_rate
 			continue
-		var lo: float = float(floors[str(sk["cost"])]) * (float(cfg["ultimate_mult"]) if sk["uses"] == 1 else 1.0) * float(cfg["tolerance"])
+		var lo: float = float(tiers[str(sk["cost"])]) * sk["cost"] * (float(cfg["ultimate_mult"]) if sk["uses"] == 1 else 1.0) * float(cfg["tolerance"])
 		check(_attack_value(sk) >= lo, "%s (%d AP) is worth %.2f, wants >= %.2f" % [sk["name"], sk["cost"], _attack_value(sk), lo])
 
 
@@ -426,7 +429,7 @@ func test_fire_attack_is_free_to_repeat() -> void:
 	b.leaders[i]["acted"] = false
 	b.act(i, "yehuo")
 	check_eq(b.ap, ap0 - 1, "still 1 AP the second time")
-	check_eq(b.enemy["burn_dmg"], int(round(b.enemy["max_hp"] * 0.1)), "one fire at a time: still 10% a turn")
+	check(is_equal_approx(b.enemy["burn_pct"], 0.1), "one fire at a time: still 10% a turn")
 	check_eq(b.enemy["burn_turns"], 3, "casting again only restarts the count")
 
 
@@ -487,3 +490,18 @@ func test_skill_power_is_the_per_ap_rate_times_its_cost() -> void:
 	check(seen > 50, "most skills are rate-based")
 	var throw: Dictionary = db.skills["rengdao"]["effects"][0]
 	check_eq(float(throw["power"]), float(throw["rate"]) * 3.0, "the hero's 3 AP throw")
+
+
+func test_a_burn_takes_a_share_of_current_hp_and_never_kills() -> void:
+	var b := Battle.start("boar", party(["zhouyu"]), 5)
+	b.enemy["burn_turns"] = 3
+	b.enemy["burn_pct"] = 0.1
+	b.enemy["hp"] = 1000
+	b.take_events()
+	b.end_round()
+	var burn: Dictionary = b.take_events().filter(func(e): return e["t"] == "burn")[0]
+	check_eq(burn["dmg"], 100, "10% of the 1000 it has left")
+	b.enemy["burn_turns"] = 2
+	b.enemy["hp"] = 1
+	b.end_round()
+	check_eq(b.enemy["hp"], 1, "a fire leaves the last HP")

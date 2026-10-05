@@ -77,7 +77,7 @@
     "defend_ap": 2,
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
-    "enemy_hp_mult": 1.35,
+    "enemy_hp_mult": 1.4,
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)",
     "danger_step": 0.2,
     "_difficulty": "难度: permanent (whole campaign) enemy strength per level, e.g. after beating 虎牢关 吕布",
@@ -689,13 +689,16 @@
   "_beasts": "野兽卡 (beast: true — 野猪, 白额虎): beasts, not soldiers or generals; for now they never drop or turn up in chests or pools",
   "_troops": "every troop: a plain 1-AP move (first) plus a signature (cumulative or limited); soldier cards get only the plain move (elite soldiers, \"elite\": true, get both), generals get the plain move plus their own signature (or the troop's if they have none)",
   "skill_budget": {
-    "_doc": "docs/skills.md §4：攻击技能的总威力下限（按 AP），大招再乘 ultimate_mult；tolerance 是容差；weights 把附带效果折成威力。special 技能（技能上 special: true）不参与检查；free: true 的技能允许 0 AP 攻击。",
-    "floor": {
-      "2": 2.5,
-      "3": 4.5,
-      "4": 7.0
+    "_doc": "攻击 / 法术技能没写 rate 时的默认威力：rate_by_ap[AP] × AP（越贵每 AP 越值），限 1 的大招再乘 ultimate_mult；多段技能（hits ≥ 2）每一段 = multi_hit_rate × AP。技能自己写 rate（总威力 = rate × AP）或 hit_rate（每段 = hit_rate × AP）就覆盖默认。tolerance 是测试的容差；weights 把附带效果折成威力。special: true 的技能不参与检查；free: true 的技能允许 0 AP 攻击。",
+    "rate_by_ap": {
+      "1": 1.0,
+      "2": 1.1,
+      "3": 1.2,
+      "4": 1.3,
+      "5": 1.4
     },
-    "ultimate_mult": 1.3,
+    "multi_hit_rate": 0.45,
+    "ultimate_mult": 1.5,
     "tolerance": 0.85,
     "weights": {
       "combo_layers": 3.0,
@@ -891,7 +894,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.0,
           "hits": 2
         }
       ]
@@ -901,8 +903,7 @@
       "cost": 2,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.3
+          "type": "attack"
         }
       ]
     },
@@ -935,8 +936,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.5
+          "type": "attack"
         },
         {
           "type": "break",
@@ -951,8 +951,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic",
-          "rate": 0.8
+          "type": "magic"
         },
         {
           "type": "stun",
@@ -1015,7 +1014,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.3,
           "hits": 2,
           "pierce": true
         }
@@ -1045,7 +1043,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 0.8,
           "hits": 2
         },
         {
@@ -1061,7 +1058,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.35,
           "hits": 3
         }
       ]
@@ -1072,8 +1068,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.8
+          "type": "attack"
         },
         {
           "type": "counter",
@@ -1087,8 +1082,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic",
-          "rate": 0.8
+          "type": "magic"
         },
         {
           "type": "break",
@@ -1160,8 +1154,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.25
+          "type": "attack"
         },
         {
           "type": "burn",
@@ -1256,7 +1249,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 0.8,
           "per_combo": 0.3
         }
       ]
@@ -1267,8 +1259,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.5
+          "type": "attack"
         },
         {
           "type": "guard",
@@ -1287,7 +1278,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.25,
           "pierce": true
         }
       ]
@@ -1297,8 +1287,7 @@
       "cost": 1,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.0
+          "type": "attack"
         }
       ]
     },
@@ -1330,8 +1319,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.5
+          "type": "attack"
         },
         {
           "type": "break",
@@ -1365,8 +1353,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.633333
+          "type": "attack"
         },
         {
           "type": "stun",
@@ -1395,8 +1382,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.7
+          "type": "attack"
         },
         {
           "type": "guard",
@@ -1441,8 +1427,7 @@
           "cut": 0.3
         },
         {
-          "type": "attack",
-          "rate": 0.8
+          "type": "attack"
         }
       ]
     },
@@ -1452,8 +1437,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.2
+          "type": "attack"
         }
       ]
     },
@@ -1474,8 +1458,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.75
+          "type": "attack"
         },
         {
           "type": "counter",
@@ -1490,7 +1473,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.2,
           "hits": 2,
           "pierce": true
         }
@@ -1518,7 +1500,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.2,
           "hits": 3
         }
       ]
@@ -1546,7 +1527,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.25,
           "hits": 2
         }
       ]
@@ -1573,7 +1553,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.5
+          "rate": 2.0
         }
       ]
     },
@@ -1584,7 +1564,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.5
+          "rate": 2.0
         }
       ]
     },
@@ -1618,8 +1598,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.8
+          "type": "attack"
         },
         {
           "type": "break",
@@ -1645,8 +1624,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic",
-          "rate": 1.0
+          "type": "magic"
         },
         {
           "type": "stun",
@@ -1661,7 +1639,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.2,
           "hits": 3
         }
       ]
@@ -1672,8 +1649,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.3
+          "type": "attack"
         }
       ]
     },
@@ -1684,7 +1660,7 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 1.95
+          "rate": 2.2
         },
         {
           "type": "stun",
@@ -1699,7 +1675,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.6,
           "hits": 4
         }
       ]
@@ -1710,8 +1685,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic",
-          "rate": 1.5
+          "type": "magic"
         }
       ]
     },
@@ -1731,8 +1705,7 @@
       "cost": 1,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.0
+          "type": "attack"
         }
       ]
     },
@@ -1741,8 +1714,7 @@
       "cost": 1,
       "effects": [
         {
-          "type": "magic",
-          "rate": 1.2
+          "type": "magic"
         }
       ]
     },
@@ -1752,8 +1724,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.8
+          "type": "attack"
         },
         {
           "type": "break",
@@ -1768,8 +1739,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic",
-          "rate": 1.133333
+          "type": "magic"
         },
         {
           "type": "stun",
@@ -1783,8 +1753,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic",
-          "rate": 0.7
+          "type": "magic"
         },
         {
           "type": "break",
@@ -1800,7 +1769,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.666667,
           "per_combo": 0.3
         }
       ]
@@ -1812,7 +1780,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.275,
           "hits": 3
         }
       ]
@@ -1823,8 +1790,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.166667
+          "type": "attack"
         },
         {
           "type": "stun",
@@ -1855,7 +1821,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.35,
           "pierce": true
         }
       ]
@@ -1867,7 +1832,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.633333,
           "pierce": true
         },
         {
@@ -1904,8 +1868,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic",
-          "rate": 1.166667
+          "type": "magic"
         },
         {
           "type": "stun",
@@ -1947,7 +1910,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 0.95,
           "per_combo": 0.3
         }
       ]
@@ -1959,7 +1921,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 0.8,
           "hits": 2
         },
         {
@@ -1979,7 +1940,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.4,
           "hits": 2,
           "pierce": true
         }
@@ -1991,8 +1951,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.7
+          "type": "attack"
         },
         {
           "type": "guard",
@@ -2002,12 +1961,12 @@
     },
     "huoji": {
       "name": "火计",
-      "cost": 4,
+      "cost": 5,
       "uses": 1,
       "effects": [
         {
           "type": "magic",
-          "rate": 2.25
+          "rate": 2.5
         }
       ]
     },
@@ -2045,7 +2004,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 0.9,
           "per_combo": 0.3
         }
       ]
@@ -2056,7 +2014,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.0,
           "hits": 2
         }
       ]
@@ -2105,20 +2062,19 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.35,
           "hits": 3
         }
       ]
     },
     "chibi": {
       "name": "赤壁业火",
-      "cost": 3,
+      "cost": 5,
       "uses": 1,
       "special": true,
       "effects": [
         {
           "type": "magic",
-          "rate": 1.666667
+          "rate": 2.5
         },
         {
           "type": "burn",
@@ -2133,8 +2089,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic",
-          "rate": 2.0
+          "type": "magic"
         },
         {
           "type": "break",
@@ -2149,8 +2104,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.666667
+          "type": "attack"
         },
         {
           "type": "break",
@@ -2165,8 +2119,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.85
+          "type": "attack"
         },
         {
           "type": "guard",
@@ -2181,7 +2134,6 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.25,
           "hits": 2,
           "pierce": true
         }
@@ -2208,8 +2160,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic",
-          "rate": 0.8
+          "type": "magic"
         },
         {
           "type": "break",
@@ -2235,8 +2186,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.8
+          "type": "attack"
         },
         {
           "type": "break",
@@ -2251,8 +2201,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.0
+          "type": "attack"
         },
         {
           "type": "guard",
@@ -2277,8 +2226,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.2
+          "type": "attack"
         }
       ]
     },
@@ -2288,8 +2236,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 0.65
+          "type": "attack"
         },
         {
           "type": "guard",
@@ -2303,8 +2250,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.25
+          "type": "attack"
         }
       ]
     },
@@ -2318,8 +2264,7 @@
           "cut": 0.35
         },
         {
-          "type": "attack",
-          "rate": 0.8
+          "type": "attack"
         }
       ]
     },
@@ -2329,8 +2274,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "attack",
-          "rate": 1.966667
+          "type": "attack"
         }
       ]
     },
@@ -2341,7 +2285,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2.0
+          "rate": 2.3
         },
         {
           "type": "stun",
@@ -2356,7 +2300,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.55
+          "rate": 2.1
         },
         {
           "type": "boost",
@@ -2371,7 +2315,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 1.875
+          "rate": 2.2
         },
         {
           "type": "counter",
@@ -2386,7 +2330,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2.25
+          "rate": 2.4
         }
       ]
     },
@@ -2397,7 +2341,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2.0,
+          "rate": 2.1,
           "pierce": true
         }
       ]

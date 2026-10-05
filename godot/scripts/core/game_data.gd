@@ -49,12 +49,24 @@ func _load(dir: String) -> void:
 	skill_budget = raw.get("skill_budget", {})
 	for sid in raw["skills"]:
 		var s: Dictionary = raw["skills"][sid]
-		# power per AP: an attack / magic / heal effect with a `rate` hits for rate × AP cost in total (split over its hits),
-		# so a 3 AP skill at rate 1.2 is worth 3.6 and a hero's 3 AP at rate 2.0 is worth 6; `power` is the per-hit value
-		# written out directly (0 AP skills, or anything without a rate)
+		# power per AP: an effect with a `rate` hits for rate × AP cost in total (split over its hits), `hit_rate` gives each hit
+		# hit_rate × AP; so a 3 AP skill at rate 1.2 is worth 3.6, a hero's 3 AP at rate 2.0 is worth 6. An attack / magic effect
+		# with neither (nor a literal `power`) takes the default for its AP tier from skill_budget: rate_by_ap (dearer = more
+		# per AP), multi_hit_rate for each hit of a multi-hit skill, × ultimate_mult for a once-only 大招.
 		for e in s["effects"]:
-			if e.has("rate"):
-				e["power"] = float(e["rate"]) * int(s["cost"]) / int(e.get("hits", 1))
+			var cost := int(s["cost"])
+			var hits := int(e.get("hits", 1))
+			if e["type"] in ["attack", "magic"] and cost > 0 and not (e.has("power") or e.has("rate") or e.has("hit_rate")):
+				var ult := float(skill_budget.get("ultimate_mult", 1.0)) if s.get("uses") != null else 1.0
+				if hits > 1:
+					e["hit_rate"] = float(skill_budget["multi_hit_rate"]) * ult
+				else:
+					var tiers: Dictionary = skill_budget["rate_by_ap"]
+					e["rate"] = float(tiers.get(str(cost), tiers[str(tiers.size())])) * ult
+			if e.has("hit_rate"):
+				e["power"] = float(e["hit_rate"]) * cost
+			elif e.has("rate"):
+				e["power"] = float(e["rate"]) * cost / hits
 		skills[sid] = {"id": sid, "name": s["name"], "cost": int(s["cost"]),
 			"cumulative": s.get("cumulative", false),
 			"uses": null if s.get("uses") == null else int(s["uses"]),

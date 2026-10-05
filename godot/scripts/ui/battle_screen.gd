@@ -297,7 +297,10 @@ func _refresh() -> void:
 	if e["break_turns"] > 0:
 		st.append("破防 +%d%%（%d 回合）" % [int(round(e["break_amount"] * 100)), e["break_turns"]])
 	if e["burn_turns"] > 0:
-		st.append("🔥 灼烧 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
+		if e["burn_pct"] > 0.0:
+			st.append("🔥 灼烧 现有体力 -%d%%/回合（%d 回合）" % [int(round(e["burn_pct"] * 100)), e["burn_turns"]])
+		else:
+			st.append("🔥 灼烧 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
 	if e["charging"] != "":
 		st.append("⚠ 蓄力中：下回合【%s】！" % e["charging"])
 	if e["at"] > e["data"]["at"] * 1.01:
