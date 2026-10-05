@@ -688,6 +688,27 @@
   },
   "_beasts": "野兽卡 (beast: true — 野猪, 白额虎): beasts, not soldiers or generals; for now they never drop or turn up in chests or pools",
   "_troops": "every troop: a plain 1-AP move (first) plus a signature (cumulative or limited); soldier cards get only the plain move (elite soldiers, \"elite\": true, get both), generals get the plain move plus their own signature (or the troop's if they have none)",
+  "skill_budget": {
+    "_doc": "docs/skills.md §4：攻击技能的总威力下限（按 AP），大招再乘 ultimate_mult；tolerance 是容差；weights 把附带效果折成威力。special 技能（技能上 special: true）不参与检查；free: true 的技能允许 0 AP 攻击。",
+    "floor": {
+      "2": 2.5,
+      "3": 4.5,
+      "4": 7.0
+    },
+    "ultimate_mult": 1.3,
+    "tolerance": 0.85,
+    "weights": {
+      "combo_layers": 3.0,
+      "guard": 2.5,
+      "break": 1.2,
+      "stun": 2.5,
+      "counter": 1.5,
+      "burn_pct": 15.0,
+      "boost_all": 3.0,
+      "boost_self": 1.5,
+      "ap": 1.0
+    }
+  },
   "troops": {
     "lord": {
       "name": "主公",
@@ -778,6 +799,7 @@
     "tuji": {
       "name": "突击",
       "cost": 0,
+      "free": true,
       "effects": [
         {
           "type": "attack",
@@ -820,6 +842,7 @@
     "sheji": {
       "name": "射击",
       "cost": 0,
+      "free": true,
       "effects": [
         {
           "type": "attack",
@@ -935,6 +958,7 @@
       "name": "火神之裔",
       "cost": 3,
       "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "magic",
@@ -1478,6 +1502,7 @@
     "rengdao": {
       "name": "扔刀",
       "cost": 3,
+      "special": true,
       "effects": [
         {
           "type": "attack",
@@ -1488,6 +1513,7 @@
     "duomingqiang": {
       "name": "夺命枪",
       "cost": 3,
+      "special": true,
       "effects": [
         {
           "type": "attack",
@@ -1499,6 +1525,7 @@
       "name": "火上浇油",
       "cost": 3,
       "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "magic",
@@ -2020,6 +2047,7 @@
       "name": "赤壁业火",
       "cost": 3,
       "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "magic",

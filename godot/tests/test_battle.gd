@@ -301,46 +301,48 @@ func test_only_the_hero_and_archers_attack_for_free() -> void:
 	for sid in db.skills:
 		var sk: Dictionary = db.skills[sid]
 		if sk["cost"] == 0 and sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]):
-			check(sid in ["tuji", "sheji"], "%s attacks for 0 AP" % sid)
+			check(sk["free"], "%s attacks for 0 AP without being marked free" % sid)
 		if sk["cost"] == 0:
 			check(not sk["effects"].any(func(e): return e["type"] == "ap" or (e["type"] == "boost" and e.get("target", "") == "all")),
 				"%s: free AP / team boost" % sid)
 
 
 func _attack_value(sk: Dictionary) -> float:
-	## docs/skills.md §4: total power of an attack skill, with its riders folded into power
+	## docs/skills.md §4: total power of an attack skill, with its riders folded into power (weights: cards.json skill_budget)
+	var w: Dictionary = GameData.get_db().skill_budget["weights"]
 	var v := 0.0
 	for e in sk["effects"]:
 		match e["type"]:
 			"attack", "magic":
-				v += (float(e["power"]) + 3.0 * float(e.get("per_combo", 0.0))) * int(e.get("hits", 1))
+				v += (float(e["power"]) + float(w["combo_layers"]) * float(e.get("per_combo", 0.0))) * int(e.get("hits", 1))
 			"guard":
-				v += float(e["cut"]) * 2.5
+				v += float(e["cut"]) * float(w["guard"])
 			"break":
-				v += float(e["amount"]) * int(e["turns"]) * 1.2
+				v += float(e["amount"]) * int(e["turns"]) * float(w["break"])
 			"stun":
-				v += float(e["chance"]) * 2.5
+				v += float(e["chance"]) * float(w["stun"])
 			"counter":
-				v += float(e["power"]) * 1.5
+				v += float(e["power"]) * float(w["counter"])
 			"burn":
-				v += float(e.get("pct", 0.0)) * int(e["turns"]) * 15.0 + float(e.get("power", 0.0)) * int(e["turns"])
+				v += float(e.get("pct", 0.0)) * int(e["turns"]) * float(w["burn_pct"]) + float(e.get("power", 0.0)) * int(e["turns"])
 			"boost":
-				v += 3.0 if e.get("target", "") == "all" else 1.5
+				v += float(w["boost_all"]) if e.get("target", "") == "all" else float(w["boost_self"])
 			"ap":
-				v += float(e["amount"])
+				v += float(e["amount"]) * float(w["ap"])
 	return v
 
 
 func test_the_dearer_the_attack_the_more_each_ap_buys() -> void:
-	## AP 2 ≳ 2.5, AP 3 ≳ 4.5 (大招 5.9), AP 4 ≳ 7 (大招 9.1), give or take 15%; the hero's throws are the one exception
-	var floors := {2: 2.5, 3: 4.5, 4: 7.0}
+	## the floors, 大招 multiplier and tolerance all live in cards.json skill_budget; `special` skills are exempt
+	var cfg: Dictionary = GameData.get_db().skill_budget
+	var floors: Dictionary = cfg["floor"]
 	for sid in GameData.get_db().skills:
 		var sk: Dictionary = GameData.get_db().skills[sid]
-		if sid in ["rengdao", "duomingqiang", "huoshen", "chibi", "huoshang"]:
+		if sk["special"]:
 			continue
-		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not floors.has(sk["cost"]):
+		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not floors.has(str(sk["cost"])):
 			continue
-		var lo: float = floors[sk["cost"]] * (1.3 if sk["uses"] == 1 else 1.0) * 0.85
+		var lo: float = float(floors[str(sk["cost"])]) * (float(cfg["ultimate_mult"]) if sk["uses"] == 1 else 1.0) * float(cfg["tolerance"])
 		check(_attack_value(sk) >= lo, "%s (%d AP) is worth %.2f, wants >= %.2f" % [sk["name"], sk["cost"], _attack_value(sk), lo])
 
 

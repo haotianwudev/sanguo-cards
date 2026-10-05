@@ -19,6 +19,7 @@ var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, 
 var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
 var relics: Dictionary  # 宝物: id -> {id, name, icon, rarity, desc, mods, after_win}
 var relic_pick: Dictionary  # elite reward: {n, weights by rarity}
+var skill_budget: Dictionary  # what an attack skill of each AP cost should be worth (cards.json skill_budget; checked by the tests)
 var _raw_top: Dictionary = {}
 var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one picked per run)
 var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
@@ -43,11 +44,13 @@ func _load(dir: String) -> void:
 	var raw: Dictionary = read_json(dir + "/cards.json")
 	gacha = raw["gacha"]
 	battle = raw["battle"]
+	skill_budget = raw.get("skill_budget", {})
 	for sid in raw["skills"]:
 		var s: Dictionary = raw["skills"][sid]
 		skills[sid] = {"id": sid, "name": s["name"], "cost": int(s["cost"]),
 			"cumulative": s.get("cumulative", false),
 			"uses": null if s.get("uses") == null else int(s["uses"]),
+			"special": s.get("special", false), "free": s.get("free", false),
 			"effects": s["effects"]}
 	for tid in raw["troops"]:
 		var t: Dictionary = raw["troops"][tid]
