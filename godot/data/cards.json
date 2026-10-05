@@ -119,6 +119,22 @@
         "desc": "每回合多行动一次，但体力 -20%",
         "actions": 1,
         "hp": -0.2
+      },
+      "mihun": {
+        "name": "迷魂",
+        "desc": "每回合 50% 让一名队长混乱",
+        "confuse": 0.5
+      },
+      "yandu": {
+        "name": "炎毒",
+        "desc": "每回合使我军灼烧：每回合 -8% 全军体力，3 回合（解毒可解）",
+        "burn_party": 0.08,
+        "turns": 3
+      },
+      "duoqi": {
+        "name": "夺气",
+        "desc": "每回合让我军下回合 AP -1",
+        "ap_drain": 1
       }
     },
     "enemy_card_chance": 0.25,
@@ -2422,6 +2438,16 @@
           "turns": 2
         }
       ]
+    },
+    "jiedu": {
+      "name": "解毒",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "cleanse"
+        }
+      ]
     }
   },
   "cards": {
@@ -2697,7 +2723,8 @@
         "at": 14
       },
       "skills": [
-        "shanghan"
+        "shanghan",
+        "jiedu"
       ]
     },
     "dongfeng": {
@@ -2709,7 +2736,8 @@
         "at": 10
       },
       "skills": [
-        "xinglin"
+        "xinglin",
+        "jiedu"
       ]
     },
     "zhangzhao": {
@@ -2733,7 +2761,8 @@
         "at": 17
       },
       "skills": [
-        "qinse"
+        "qinse",
+        "jiedu"
       ]
     },
     "zhenmi": {
@@ -3806,7 +3835,8 @@
         "at": 20
       },
       "skills": [
-        "jinzhen"
+        "jinzhen",
+        "jiedu"
       ]
     },
     "zuoci": {
@@ -4512,6 +4542,12 @@
           "name": "黄天当立",
           "power": 1.8,
           "weight": 1
+        },
+        {
+          "name": "黄巾怒吼",
+          "power": 1.0,
+          "weight": 1,
+          "confuse": 0.5
         }
       ],
       "card": "guanhai"
@@ -4555,6 +4591,12 @@
           "power": 1.5,
           "weight": 2,
           "pierce": true
+        },
+        {
+          "name": "压寨夺气",
+          "power": 1.0,
+          "weight": 1,
+          "ap_drain": 2
         }
       ],
       "card": "zheng_daoshou"
@@ -4762,6 +4804,12 @@
           "name": "熊冲",
           "power": 2.6,
           "weight": 0
+        },
+        {
+          "name": "飞熊震慑",
+          "power": 0.8,
+          "weight": 2,
+          "confuse": 0.5
         }
       ],
       "card": "feixiong_bing"
@@ -5150,6 +5198,13 @@
           "rage": 0.25,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "焚营",
+          "power": 0.8,
+          "weight": 2,
+          "burn_party": 0.08,
+          "turns": 3
         }
       ],
       "card": "fanchou"
@@ -5216,6 +5271,12 @@
           "rage": 0.3,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "酒后狂吼",
+          "power": 1.0,
+          "weight": 1,
+          "confuse": 0.5
         }
       ],
       "card": "niufu"
@@ -5418,6 +5479,12 @@
           "power": 2.4,
           "weight": 0,
           "pierce": true
+        },
+        {
+          "name": "陷阵压境",
+          "power": 1.0,
+          "weight": 1,
+          "ap_drain": 2
         }
       ],
       "card": "xianzhen"
@@ -6270,6 +6337,13 @@
           "power": 0,
           "weight": 1,
           "rage": 0.2
+        },
+        {
+          "name": "火矢齐发",
+          "power": 0.8,
+          "weight": 2,
+          "burn_party": 0.08,
+          "turns": 3
         }
       ],
       "card": "shuizei_bing"
@@ -6303,6 +6377,13 @@
           "name": "翻江倒海",
           "power": 2.6,
           "weight": 0
+        },
+        {
+          "name": "毒烟",
+          "power": 0.6,
+          "weight": 2,
+          "burn_party": 0.08,
+          "turns": 3
         }
       ],
       "card": "langlijiao"
@@ -6515,6 +6596,12 @@
           "rage": 0.3,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "虎威震阵",
+          "power": 1.0,
+          "weight": 1,
+          "confuse": 0.5
         }
       ],
       "card": "huaxiong_card"
@@ -6817,6 +6904,13 @@
           "rage": 0.3,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "毒箭齐发",
+          "power": 0.8,
+          "weight": 2,
+          "burn_party": 0.08,
+          "turns": 3
         }
       ],
       "card": "caimao"
@@ -6939,6 +7033,13 @@
           "rage": 0.25,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "纵火劫营",
+          "power": 0.8,
+          "weight": 2,
+          "burn_party": 0.08,
+          "turns": 3
         }
       ],
       "card": "zhangji"
@@ -7165,6 +7266,12 @@
           "rage": 0.3,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "黑山号角",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
         }
       ],
       "card": "lidamu_card"
@@ -7240,6 +7347,13 @@
           "rage": 0.25,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "放火烧林",
+          "power": 0.8,
+          "weight": 2,
+          "burn_party": 0.08,
+          "turns": 3
         }
       ],
       "card": "yudu_card"
@@ -7290,6 +7404,12 @@
           "power": 2.5,
           "weight": 0,
           "pierce": true
+        },
+        {
+          "name": "先登绞杀",
+          "power": 1.0,
+          "weight": 1,
+          "ap_drain": 2
         }
       ],
       "card": "quyi"
@@ -7318,6 +7438,12 @@
           "rage": 0.3,
           "when": "half",
           "once": true
+        },
+        {
+          "name": "枪出如龙",
+          "power": 1.0,
+          "weight": 1,
+          "ap_drain": 2
         }
       ],
       "card": "wenchou"

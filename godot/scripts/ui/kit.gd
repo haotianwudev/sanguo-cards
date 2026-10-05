@@ -220,7 +220,7 @@ static func icon(key: String) -> Texture2D:
 
 const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
 	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap",
-	"counter": "guard", "hurt": "heal"}
+	"counter": "guard", "hurt": "heal", "cleanse": "heal"}
 
 
 static func skill_icon(skill: Dictionary) -> Texture2D:
@@ -270,6 +270,8 @@ static func skill_desc(sk: Dictionary) -> String:
 					("，每层连击威力 +%s（收尾）" % _num(e["per_combo"])) if e.has("per_combo") else "", "，穿甲（无视物抗）" if e.get("pierce", false) else ""])
 			"magic":
 				parts.append("法术攻击 ×%s%s" % [_num(e["power"]), ("（对灼烧中的敌人 ×%s）" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
+			"cleanse":
+				parts.append("解除我军的异常状态（混乱、灼烧、AP 被夺）")
 			"counter":
 				parts.append("反击：本回合敌人每打中一次，还击 ×%s" % _num(e["power"]))
 			"hurt":

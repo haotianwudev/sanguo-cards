@@ -404,6 +404,21 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 		"counter":  # 反击: until the round ends, every hit the enemy lands is answered with ×power of this leader's attack
 			counters.append({"name": unit_name(u), "at": at * mult, "power": float(eff["power"])})
 			return ["  %s 架起拒马：本回合敌人每打中一次，还击 ×%s" % [unit_name(u), str(eff["power"])]]
+		"cleanse":  # 解状态: confusion, the enemy's fire on us and the AP it drained are all lifted
+			var n := 0
+			for t in leaders:
+				if t["confused"] or t["confuse_next"]:
+					n += 1
+				t["confused"] = false
+				t["confuse_next"] = false
+			if party_burn["turns"] > 0:
+				n += 1
+				party_burn = {"dmg": 0, "turns": 0}
+			if ap_drain > 0:
+				n += 1
+				ap_drain = 0
+			_ev({"t": "cleanse", "n": n})
+			return ["  我军的异常状态解除了" if n > 0 else "  没有需要解除的状态"]
 		"hurt":  # 苦肉: the party pays a share of its max HP (never to death)
 			var lost := clampi(int(round(party_max * float(eff["pct"]))), 0, party_hp - 1)
 			party_hp -= lost
@@ -450,6 +465,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 		_ev({"t": "enemy_heal", "amt": h, "hp": enemy["hp"]})
 		log.append("[color=red]  %s 再生，回复 %d 体力[/color]" % [data["name"], h])
 	enemy["charge_ready"] = enemy["charging"] != ""  # wound up last turn: it lands now
+	var was_stunned: bool = enemy["stunned"]
 	if enemy["stunned"]:
 		enemy["stunned"] = false
 		_ev({"t": "enemy_stunned"})
@@ -499,6 +515,8 @@ func _enemy_phase(defend_cut: float) -> Array:
 			_check_end()
 			if result != "":
 				return log
+	if not was_stunned and result == "":
+		log.append_array(_affix_status())
 	if enemy["break_turns"] > 0:
 		enemy["break_turns"] -= 1
 		if enemy["break_turns"] == 0:
@@ -508,6 +526,27 @@ func _enemy_phase(defend_cut: float) -> Array:
 		log.append("已到第 %d 回合上限 —— 撤退！" % round_no)
 		return log
 	log.append_array(_start_round())
+	return log
+
+
+func _affix_status() -> Array:
+	## 词缀 that put a status on us every time the elite / boss acts (cards.json battle.affixes: confuse, burn_party, ap_drain)
+	var afx: Dictionary = mods.get("affix", {})
+	var log: Array = []
+	var nm := str(afx.get("name", ""))
+	if afx.has("confuse") and mods.get("calm", 0) <= 0 and rng.randf() < float(afx["confuse"]):
+		var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
+		victim["confuse_next"] = true
+		_ev({"t": "confuse", "unit": leaders.find(victim)})
+		log.append("[color=red]  【%s】%s 陷入混乱，下回合无法行动[/color]" % [nm, unit_name(victim)])
+	if afx.has("burn_party"):
+		var dmg := int(round(party_max * float(afx["burn_party"])))
+		if party_burn["turns"] == 0 or dmg > party_burn["dmg"]:
+			party_burn = {"dmg": dmg, "turns": int(afx.get("turns", 3))}
+			log.append("[color=red]  【%s】我军灼烧！每回合 -%d（%d 回合）[/color]" % [nm, dmg, party_burn["turns"]])
+	if afx.has("ap_drain"):
+		ap_drain += int(afx["ap_drain"])
+		log.append("[color=red]  【%s】下回合我军 AP -%d[/color]" % [nm, int(afx["ap_drain"])])
 	return log
 
 

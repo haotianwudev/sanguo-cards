@@ -585,3 +585,55 @@ func test_swap_never_crosses_troops_or_doubles_a_person() -> void:
 	var ids := b.swap_options(slot).map(func(ld): return ld["card"]["troop"])
 	check(ids.all(func(t): return t == "cavalry"), "same troop only")
 	check_eq(b.swap_options(0).size(), 0, "the lord has no stand-in")
+
+
+func test_cleanse_lifts_confusion_fire_and_drained_ap() -> void:
+	var b := Battle.start("hulao", party(["daqiao"]), 2)
+	b.leaders[1]["confused"] = true
+	b.leaders[0]["confuse_next"] = true
+	b.party_burn = {"dmg": 100, "turns": 2}
+	b.ap_drain = 2
+	check(not b.can_act(1), "confused leaders cannot act")
+	var log: Array = b._apply(b.leaders[1], {"type": "cleanse"}, 1.0)
+	check(not b.leaders[1]["confused"] and not b.leaders[0]["confuse_next"], "confusion gone")
+	check_eq(b.party_burn["turns"], 0, "fire out")
+	check_eq(b.ap_drain, 0, "AP no longer drained")
+	check(str(log).contains("解除"), str(log))
+	check(GameData.get_db().skills["jiedu"]["effects"][0]["type"] == "cleanse", "解毒 is the cleanse skill")
+
+
+func _affix_battle(afx: Dictionary) -> Battle:
+	return Battle.start("hulao", party(["cav_n", "spear_n"]), 9, 0, {}, {}, false, {"affix": afx})
+
+
+func test_status_affixes_put_a_status_on_us_each_enemy_turn() -> void:
+	var fire := _affix_battle({"name": "炎毒", "burn_party": 0.08, "turns": 3})
+	fire.end_round()
+	check(fire.party_burn["turns"] > 0 and fire.party_burn["dmg"] == int(round(fire.party_max * 0.08)), "8% of the whole bar a turn")
+	var drain := _affix_battle({"name": "夺气", "ap_drain": 1})
+	drain.end_round()
+	check(drain.ap < drain.ap_max() and drain.ap <= 3 + 3 - 1, "AP taken off the next round: %d" % drain.ap)
+	var haze := _affix_battle({"name": "迷魂", "confuse": 1.0})
+	haze.end_round()
+	check(haze.leaders.any(func(u): return u["confused"]), "a leader is confused")
+	var calm := _affix_battle({"name": "迷魂", "confuse": 1.0})
+	calm.mods["calm"] = 1
+	calm.end_round()
+	check(not calm.leaders.any(func(u): return u["confused"]), "calm resists it")
+
+
+func test_every_elite_and_boss_can_put_a_status_on_us() -> void:
+	## confuse, burn or AP drain: the tougher the enemy, the more it does besides hit
+	var db := GameData.get_db()
+	var checked := {}
+	for q in db.quests:
+		for sid in q["squares"]:
+			var sq: Dictionary = q["squares"][sid]
+			if (sq["boss"] or sq["elite"]) and sq["battle"] != "":
+				var eid: String = db.scenarios[sq["battle"]]["enemy"]
+				if checked.has(eid):
+					continue
+				checked[eid] = true
+				check(db.enemies[eid]["moves"].any(func(m): return m.has("confuse") or m.has("ap_drain") or m.has("burn_party")),
+					"%s (%s) has no status move" % [eid, sid])
+	check(checked.size() > 30, "found the elites and bosses")

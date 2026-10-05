@@ -530,6 +530,10 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "换人", Kit.c("gold"), 36)
 				Kit.pop(_cards[ev["unit"]], 1.08)
 				await get_tree().create_timer(0.35).timeout
+			"cleanse":
+				Kit.float_text(self, _party_center(), "状态解除" if ev["n"] > 0 else "无状态", Kit.c("green"), 34)
+				_refresh()
+				await get_tree().create_timer(0.3).timeout
 			"hurt":
 				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
 				Kit.tween_bar(_party_hp, ev["hp"])
