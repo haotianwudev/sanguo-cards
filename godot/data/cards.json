@@ -4335,20 +4335,6 @@
       ],
       "pool": false
     },
-    "chunyuqiong": {
-      "name": "「大将」淳于琼",
-      "rarity": "SR",
-      "troop": "cavalry",
-      "person": "chunyuqiong",
-      "bonus": {
-        "hp": 80,
-        "at": 15
-      },
-      "skills": [
-        "jianshou"
-      ],
-      "pool": false
-    },
     "quyi": {
       "name": "「先登死士」麹义",
       "rarity": "SR",
@@ -4403,6 +4389,17 @@
         "tingzhu",
         "mengjiang"
       ],
+      "pool": false
+    },
+    "chunyuqiong": {
+      "name": "「乌巢守将」淳于琼",
+      "rarity": "SR",
+      "troop": "infantry",
+      "person": "chunyuqiong",
+      "bonus": {
+        "hp": 90,
+        "at": 18
+      },
       "pool": false
     }
   },
