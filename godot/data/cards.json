@@ -2467,45 +2467,6 @@
         }
       ]
     },
-    "qimou": {
-      "name": "奇谋百出",
-      "cost": 1,
-      "effects": [
-        {
-          "type": "buff",
-          "atk": 0.08,
-          "def": 0.1,
-          "max": 4,
-          "turns": 3
-        }
-      ]
-    },
-    "dongcha": {
-      "name": "洞若观火",
-      "cost": 1,
-      "effects": [
-        {
-          "type": "buff",
-          "atk": 0.12,
-          "def": 0.06,
-          "max": 4,
-          "turns": 3
-        }
-      ]
-    },
-    "dingce": {
-      "name": "运筹定策",
-      "cost": 1,
-      "effects": [
-        {
-          "type": "buff",
-          "atk": 0.08,
-          "def": 0.08,
-          "max": 4,
-          "turns": 3
-        }
-      ]
-    },
     "zhangba": {
       "name": "丈八蛇矛",
       "cost": 2,
@@ -3139,7 +3100,7 @@
       },
       "pool": false,
       "skills": [
-        "qimou"
+        "xianji"
       ]
     },
     "zhongyao": {
@@ -4207,7 +4168,7 @@
       },
       "pool": false,
       "skills": [
-        "dingce"
+        "xianji"
       ]
     },
     "jiaxu": {
@@ -4220,7 +4181,7 @@
       },
       "pool": false,
       "skills": [
-        "dongcha"
+        "xianji"
       ]
     },
     "zhangxiu": {
