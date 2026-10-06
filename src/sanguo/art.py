@@ -119,6 +119,7 @@ def write_needs(pics: Path = PICS) -> None:
     data = ROOT / "godot" / "data"
     cards = json.loads((data / "cards.json").read_text("utf-8"))
     story = json.loads((data / "story.json").read_text("utf-8"))
+    endings_cfg = json.loads((data / "endings.json").read_text("utf-8"))["endings"]
     names = {cid: c["name"] for cid, c in cards["cards"].items()}
 
     def key_of(cid: str) -> str:
@@ -208,6 +209,9 @@ def write_needs(pics: Path = PICS) -> None:
                 tag = route.get(str(s.get("requires", "")), "") or ("二周目" if s.get("unless") == "结局二 · 同归" else "")
                 cg_rows.append(f"| {'✅ 已有' if s['cg'] in cgs_cfg else '⬜ 缺'} | `{s['cg']}` | {s.get('label', sid)}{'（' + tag + '）' if tag else ''} |")
         end = q.get("ending", {})
+        if isinstance(end, str):  # an id in data/endings.json
+            e = endings_cfg.get(end)
+            end = {"title": e["title"], "cg": e.get("cg", "")} if e else {}
         if end.get("cg") and end["cg"] not in seen_cg:
             seen_cg.add(end["cg"])
             cg_rows.append(f"| {'✅ 已有' if end['cg'] in cgs_cfg else '⬜ 缺'} | `{end['cg']}` | 结局卡「{end['title']}」 |")

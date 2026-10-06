@@ -323,11 +323,14 @@
 | ✅ 正式 | `chunyuqiong` | 冀州大将·淳于琼 |
 | ✅ 正式 | `quyi` | 先登主将·麹义 |
 | ✅ 正式 | `wenchou` | 河北庭柱·文丑 |
+| ⬜ 缺 | `shanzei_scout` | 山贼斥候 |
+| ✅ 正式 | `huangjin_vanguard` | 黄巾前锋 |
 
 能拿到的卡
 
 | 状态 | key | 卡 |
 |---|---|---|
+| ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
 | ⬜ 缺 | `yangang` | 严纲 |
 | ⬜ 缺 | `zoudan` | 邹丹 |
 | ⬜ 缺 | `gaolan` | 高览 |
@@ -340,6 +343,7 @@
 | ✅ 已有 | `huangjin_remnant` | 黄巾余孽（黄巾余孽） |
 | ✅ 已有 | `shanzei_band` | 山贼（山贼） |
 | ⬜ 缺 | `hs_zhangbaiqi` | 太行绝壁·张白骑（黄巾渠帅·张白骑） |
+| ✅ 已有 | `heishan_wai` | 太行外围 · 黑山游骑（黑山游骑） |
 | ⬜ 缺 | `hs_yudu` | 黑山大寨·于毒（黑山叛贼·于毒） |
 | ⬜ 缺 | `hs_jizhou_qibing` | 秘道追兵·冀州轻骑（冀州轻骑） |
 | ⬜ 缺 | `hs_jizhou_nu` | 冀州强弩（冀州强弩） |
@@ -349,6 +353,9 @@
 | ⬜ 缺 | `hs_jizhou_buzhu` | 无极突围·冀州步卒（冀州步卒） |
 | ⬜ 缺 | `hs_jizhou_qiangbing` | 秘道追兵·冀州枪阵（冀州大枪阵） |
 | ⬜ 缺 | `hs_jieqiao_scout` | 界桥外围·游骑（冀州轻骑） |
+| ⬜ 缺 | `shanzei_scout` | 山贼斥候（山贼斥候） |
+| ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
+| ⬜ 缺 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -573,7 +580,6 @@
 | ✅ 正式 | `zhenghao` | 郑好 |
 | ✅ 正式 | `jiangqiao` | 姜巧 |
 | ✅ 正式 | `gaoshun` | 高顺 |
-| ✅ 正式 | `huangjin_vanguard` | 黄巾前锋 |
 | ✅ 正式 | `guanhai` | 管亥 |
 | ✅ 正式 | `bandit` | 太行巡山兵 |
 | ✅ 正式 | `yanliang` | 颜良 |
@@ -587,7 +593,6 @@
 | ✅ 正式 | `jiang_jiguanshou` | 姜家机关手（姜巧的卡） |
 | ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
 | ✅ 正式 | `taishici` | 太史慈 |
-| ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
 | ✅ 正式 | `beihai_tuntian` | 北海屯田兵 |
 | ✅ 正式 | `qingzhou` | 青州兵（黄巾渠帅的卡） |
 | ✅ 正式 | `gongsunzan` | 公孙瓒 |
@@ -612,10 +617,11 @@
 | ⬜ 缺 | `bh_jz_inf` | 冀州步卒（冀州步卒） |
 | ⬜ 缺 | `bh_jz_spear` | 冀州长枪（冀州大枪阵） |
 | ⬜ 缺 | `bh_jz_scout` | 冀州游骑（冀州轻骑） |
-| ⬜ 缺 | `bh_jz_arch` | 冀州强弩（冀州强弩） |
 | ⬜ 缺 | `bh_yanliang` | 渡口·颜良（颜良） |
 | ⬜ 缺 | `bh_hj_qushuai` | 青州渠帅（黄巾渠帅） |
 | ⬜ 缺 | `bh_hj_duzhan` | 黄巾督战队（黄巾前锋） |
+| ⬜ 缺 | `shanzei_scout` | 山贼斥候（山贼斥候） |
+| ✅ 已有 | `xiliang_scout` | 截粮（西凉斥候） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 

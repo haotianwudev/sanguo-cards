@@ -195,7 +195,8 @@ func _validate() -> void:
 			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff"],
 				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
 	for c in cards.values():
-		assert(troops.has(c["troop"]) and c["troop"] != "lord", "card %s: bad troop" % c["id"])
+		assert(troops.has(c["troop"]), "card %s: bad troop" % c["id"])
+		assert(c["troop"] != "lord" or c["soldier"], "card %s: only soldier cards can be of the lord's own troop (亲卫 / 侍从)" % c["id"])
 		for s in c["skills"]:
 			assert(skills.has(s), "card %s: unknown skill %s" % [c["id"], s])
 	for k in kits.values():
@@ -244,7 +245,9 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	var t: Dictionary = troops[c["troop"]]
 	var kit: Dictionary = kit_of(c)
 	var sk: Array = []
-	if c["soldier"]:
+	if c["troop"] == "lord":
+		pass  # the lord's retinue never acts: it only makes his unit stronger
+	elif c["soldier"]:
 		sk = kit["special" if c["elite"] else "normal"].duplicate()
 	elif c["troop_skills"]:
 		sk = kit["normal" if not c["skills"].is_empty() else "special"].duplicate()

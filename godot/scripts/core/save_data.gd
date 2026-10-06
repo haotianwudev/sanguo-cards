@@ -478,6 +478,8 @@ func validate_party(card_ids: Array) -> String:
 		if not has_card(cid):
 			return "未拥有卡牌 " + cid
 		var c: Dictionary = db.cards[cid]
+		if c["troop"] == "lord":
+			return "%s 是主公的亲卫，只能跟随主公" % c["name"]
 		if people.has(c["person"]):
 			return "同一武将的不同版本不能同时上阵（%s）" % c["name"]
 		if troops_seen.has(c["troop"]):
@@ -549,7 +551,10 @@ func swap_roster() -> Array:
 func party_leaders() -> Array:
 	## The lord (alone in its unit) plus one leader per chosen troop.
 	var db := _db()
-	var leaders: Array = [db.build_leader(lord(), [])]
+	## the lord's own unit: his 亲卫 and the servants (cards of the troop "lord"), each counting battle.lord_member_mult of its strength
+	var mw := troop_members("lord")
+	var mult := float(db.battle.get("lord_member_mult", 1.0))
+	var leaders: Array = [db.build_leader(lord(), mw[0], mw[1].map(func(w): return float(w) * mult))]
 	for cid in party:
 		if has_card(cid):
 			leaders.append(leader_for(cid))

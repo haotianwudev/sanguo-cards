@@ -78,6 +78,8 @@
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
     "enemy_hp_mult": 1.4,
+    "_lord_member_mult": "主公队的成员（亲卫、丫鬟绣娘这类 troop 为 lord 的卡）按这个比例计入主公队的体力 / 攻击",
+    "lord_member_mult": 0.6,
     "_ramp": "难度递进：本周目每通关一章，之后的敌人体力和攻击 +chapter_step；每多一个周目，从第一关起就 +lap_step（回放旧章节不吃章节递进）",
     "chapter_step": 0.1,
     "lap_step": 0.3,
@@ -2942,7 +2944,7 @@
     "huofu": {
       "name": "伙夫",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 25
       },
@@ -2963,7 +2965,7 @@
     "yahuan": {
       "name": "丫鬟",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 15
       },
@@ -2973,7 +2975,7 @@
     "chuniang": {
       "name": "厨娘",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 25
       },
@@ -2983,7 +2985,7 @@
     "xiuniang": {
       "name": "绣娘",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 10,
         "at": 5
@@ -2994,7 +2996,7 @@
     "huansha": {
       "name": "浣纱女",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 15
       },
@@ -3004,7 +3006,7 @@
     "caisang": {
       "name": "采桑女",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 20
       },
@@ -3014,8 +3016,7 @@
     "chaniang": {
       "name": "茶娘",
       "rarity": "N",
-      "elite": true,
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 20,
         "at": 6
@@ -3946,7 +3947,7 @@
     "gongnv": {
       "name": "宫女",
       "rarity": "N",
-      "troop": "logistics",
+      "troop": "lord",
       "bonus": {
         "hp": 25
       },
@@ -4947,6 +4948,130 @@
         "hp": 45,
         "at": 13
       },
+      "scope": "north"
+    },
+    "qinwei": {
+      "name": "主公亲卫",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 40,
+        "at": 12
+      },
+      "weight": 2
+    },
+    "jiading": {
+      "name": "家丁",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 30,
+        "at": 8
+      },
+      "weight": 3
+    },
+    "shutong": {
+      "name": "书童",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 10,
+        "at": 4
+      },
+      "weight": 2
+    },
+    "mafu": {
+      "name": "马夫",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 20,
+        "at": 3
+      },
+      "weight": 2
+    },
+    "shinv": {
+      "name": "贴身侍女",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 15,
+        "at": 3
+      },
+      "weight": 2
+    },
+    "fucong": {
+      "name": "扈从骑",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 35,
+        "at": 11
+      },
+      "weight": 1
+    },
+    "jiangdong_qinwei": {
+      "name": "江东亲卫",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 35,
+        "at": 9
+      },
+      "weight": 2,
+      "scope": "south"
+    },
+    "changshan_qinwei": {
+      "name": "常山亲卫",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 35,
+        "at": 9
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "zhenfu_yahuan": {
+      "name": "甄府丫鬟",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 15
+      },
+      "weight": 3,
+      "scope": "north"
+    },
+    "zhenfu_xiunv": {
+      "name": "甄府绣娘",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 10,
+        "at": 5
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "zhenfu_chuniang": {
+      "name": "甄府厨娘",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 25
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "zhenfu_jiading": {
+      "name": "甄府家丁",
+      "rarity": "N",
+      "troop": "lord",
+      "bonus": {
+        "hp": 30,
+        "at": 8
+      },
+      "weight": 3,
       "scope": "north"
     }
   },

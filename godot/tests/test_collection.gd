@@ -425,3 +425,27 @@ func test_the_two_routes_recruit_from_their_own_casts() -> void:
 	var south_with_history := SaveData.create()
 	south_with_history.seen = ["zhaoyun"]
 	check(south_with_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "a general you have had before stays offered, whichever route")
+
+
+func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var alone: Dictionary = s.party_leaders()[0]
+	check(alone["members"].is_empty(), "a lord with nobody around is alone")
+	for c in ["qinwei", "yahuan", "xiuniang"]:
+		s.grant_card(c)
+	var with: Dictionary = s.party_leaders()[0]
+	check_eq(with["members"].size(), 3, "his retinue and the servants are his unit's members")
+	check(with["at"] > alone["at"] and with["hp"] > alone["hp"], "which makes the lord stronger")
+	var mult := float(db.battle["lord_member_mult"])
+	var full := 0.0
+	for m in with["members"]:
+		full += m["at"]
+	check(absf(float(with["at"]) - (float(alone["at"]) + full * mult)) < 1.5, "each counts lord_member_mult of its strength: %d vs %d" % [with["at"], int(alone["at"] + full * mult)])
+	check(s.validate_party(["qinwei"]) != "", "a retinue card can never lead a unit of its own")
+	for cid in ["yahuan", "xiuniang", "chuniang", "huansha", "caisang", "chaniang", "gongnv", "huofu", "qinwei"]:
+		check_eq(db.cards[cid]["troop"], "lord", cid + " serves the lord")
+		check(db.build_fighter(cid)["skills"].is_empty(), cid + " has no skills: it only strengthens the lord")
+	var north := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "north")
+	var south := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "south")
+	check(north.size() >= 4 and south.size() >= 4, "both routes have their own: %d / %d" % [north.size(), south.size()])

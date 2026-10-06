@@ -163,6 +163,8 @@ func _rebuild() -> void:
 	var idle: Array = []
 	for cid in save.owned_ids():
 		var tr: String = db.cards[cid]["troop"]
+		if tr == "lord":  # the lord always leads his own unit (亲卫 and servants join it)
+			continue
 		if not used.has(tr) and not idle.has(db.troops[tr]["name"]):
 			idle.append(db.troops[tr]["name"])
 	if not idle.is_empty():
