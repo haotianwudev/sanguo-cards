@@ -1668,10 +1668,18 @@
     "c2_ln_bianshui": {
       "src": "source/cg/c2_ln_bianshui.jpg",
       "license": "用户提供（Gemini 生成）"
-    }
-  }
-}
+    },
     "c3_recruit_board": {
       "src": "source/cg/c3_recruit_board.jpg",
       "license": "用户提供（Gemini 生成）"
     },
+    "c3_bribe_villager": {
+      "src": "source/cg/c3_bribe_villager.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_encounter_ning": {
+      "src": "source/cg/c3_encounter_ning.jpg",
+      "license": "用户提供（Gemini 生成）"
+    }
+  }
+}

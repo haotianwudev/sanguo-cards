@@ -235,4 +235,6 @@
 | `cg:e_yazhai` | source/cg/e_yazhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_ln_caocao` | source/cg/c2_ln_caocao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_ln_bianshui` | source/cg/c2_ln_bianshui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_bribe_villager` | source/cg/c3_bribe_villager.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_encounter_ning` | source/cg/c3_encounter_ning.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_recruit_board` | source/cg/c3_recruit_board.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
