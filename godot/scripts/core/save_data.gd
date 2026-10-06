@@ -271,20 +271,19 @@ func lord() -> Dictionary:
 	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), lord_form())
 
 
-func upgrade_levels() -> int:
-	return int(_db().gacha.get("upgrade_levels", 1))
+func upgrade_copies() -> int:
+	return int(_db().gacha.get("upgrade_copies", 1))
 
 
-func upgrade(card_id: String, levels := -1) -> void:
-	## 点化: straight to the copy count of a tier `levels` above (gacha.upgrade_levels: 2 = 铜 → 金), never past the top one.
-	var tiers: Array = _db().gacha["tiers"]
-	if levels < 0:
-		levels = upgrade_levels()
+func upgrade(card_id: String, n := -1) -> void:
+	## 点化: the card gets `n` more copies (gacha.upgrade_copies: 3 — a 铜 card of 1 copy goes straight to 银 at 4), up to the top tier.
+	if n < 0:
+		n = upgrade_copies()
+	var top := int(_db().gacha["tiers"][-1]["copies"])
 	if card_id == "lord":
-		lord_copies = maxi(lord_copies, int(tiers[mini(tier("lord") + levels, tiers.size() - 1)]["copies"]))
+		lord_copies = mini(lord_copies + n, top)
 		return
-	var nxt := mini(tier(card_id) + levels, tiers.size() - 1)
-	dupes[card_id] = maxi(copies(card_id), int(tiers[nxt]["copies"]))
+	dupes[card_id] = mini(copies(card_id) + n, top)
 
 
 # ---- getting cards -------------------------------------------------------------

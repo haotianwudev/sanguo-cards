@@ -42,8 +42,8 @@
       {"name": "金", "copies": 16, "mult": 1.75},
       {"name": "神", "copies": 64, "mult": 2.4}
     ],
-    "_upgrade_levels": "点化（战功或事件）一次升几个品阶：3 级＝铜→神",
-    "upgrade_levels": 3,
+    "_upgrade_copies": "点化（战功或事件）一次给这张卡加几张：3 张＝铜（1 张）一次到银（4 张）",
+    "upgrade_copies": 3,
     "_merit": "战功: earned at the end of each chapter (per battle won, extra per boss/elite beaten), kept across chapters, spent in the recap",
     "merit": {
       "per_battle": 1,

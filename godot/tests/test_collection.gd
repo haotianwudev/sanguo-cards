@@ -153,22 +153,18 @@ func test_recruit_offers_can_repeat_owned_but_not_gold_generals() -> void:
 	check(seen_owned, "owned generals can come again")
 
 
-func test_upgrade_jumps_the_configured_number_of_tiers() -> void:
+func test_upgrade_adds_the_configured_number_of_copies() -> void:
 	var s := SaveData.create()
 	s.take("lvmeng")
 	s.upgrade("lvmeng", 1)
-	check_eq(s.tier("lvmeng"), 1)
-	s.upgrade("lvmeng", 1)
-	check_eq(s.tier("lvmeng"), 2)
-	check_eq(s.copies("lvmeng"), _copies_for(2))
-	var top: int = GameData.get_db().gacha["tiers"].size() - 1
+	check_eq(s.copies("lvmeng"), 2)
 	var s2 := SaveData.create()
 	s2.take("lvmeng")
-	s2.upgrade("lvmeng")  # gacha.upgrade_levels
-	check_eq(s2.tier("lvmeng"), mini(s2.upgrade_levels(), top), "点化 raises it by gacha.upgrade_levels, never past the top")
-	s2.upgrade("lvmeng", 9)
-	check_eq(s2.tier("lvmeng"), top)
-
+	s2.upgrade("lvmeng")  # gacha.upgrade_copies: 3
+	check_eq(s2.copies("lvmeng"), 1 + s2.upgrade_copies(), "点化 adds gacha.upgrade_copies")
+	check_eq(s2.tier("lvmeng"), 1, "a 铜 card (1 copy) + 3 copies = 4 = 银")
+	s2.upgrade("lvmeng", 9999)
+	check_eq(s2.copies("lvmeng"), _copies_for(GameData.get_db().gacha["tiers"].size() - 1), "never past the top tier")
 
 func test_dupes_survive_a_save_roundtrip() -> void:
 	var s := SaveData.create()
@@ -250,8 +246,8 @@ func test_the_lord_starts_bronze_and_can_go_up() -> void:
 	var s := SaveData.create()
 	check_eq(s.tier("lord"), 0, "the lord's card starts 铜")
 	var at0: int = s.lord()["at"]
-	s.upgrade("lord", 1)
-	check_eq(s.tier("lord"), 1, "银 after one level")
+	s.upgrade("lord")
+	check_eq(s.tier("lord"), 1, "银 after one 点化 (+3 copies)")
 	check(s.lord()["at"] > at0 and s.party_leaders()[0]["card"]["at"] == s.lord()["at"], "a higher tier hits harder, in battle too")
 
 

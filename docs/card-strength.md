@@ -11,8 +11,8 @@
 
 - 张数是累计的（`dupes` / `lord_copies`，**新周目也不清零**：已经拿到的卡再抽到，回来还是原来的级别，继续往上升；主公同理）。
 - 4 倍递增：铜→银 3 张、银→金 12 张、金→神 48 张，神是长期目标（要几个周目的积累，或者多次点化）。
-- **点化**（战功或事件）一次升 `gacha.upgrade_levels`（现 3）级，直接跳到那一阶的张数，最高到神；战功 8 点一次，所以铜卡一次点化就能到神——想让点化不那么爽，调小 `upgrade_levels` 或加大 `merit.upgrade`。
-- 配置全在 `cards.json` 的 `gacha.tiers` / `upgrade_levels` / `rarity_mult`；神的卡框暂用 SSR 框，等专属框图。
+- **点化**（战功或事件）一次给这张卡加 `gacha.upgrade_copies`（现 3）张：铜（1 张）一次到银（4 张），银（4）→ 7 仍是银，要点两次才到金（13→16 差 3 张再点一次）。想让点化更值就调大 `upgrade_copies`。
+- 配置全在 `cards.json` 的 `gacha.tiers` / `upgrade_copies` / `rarity_mult`；神的卡框暂用 SSR 框，等专属框图。
 
 ## 一张卡的数值
 

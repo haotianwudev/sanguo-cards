@@ -185,7 +185,7 @@ func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
 	Quests.choose_event(q, s, rng(0), labels.find("求点化"))
 	check_eq(s.offer, ["sunce"])
 	Quests.resolve(q, s, rng(0), 0)
-	check(s.tier("sunce") == mini(s.upgrade_levels(), GameData.get_db().gacha["tiers"].size() - 1) and s.resolved and s.offer_kind == "", "点化: up gacha.upgrade_levels tiers")
+	check(s.copies("sunce") == 1 + s.upgrade_copies() and s.tier("sunce") == 1 and s.resolved and s.offer_kind == "", "点化: +3 copies, 铜 → 银")
 	var s2 := SaveData.create()
 	Quests.begin(q, s2)
 	s2.square = "road"
@@ -402,7 +402,7 @@ func test_temple_upgrades_a_general() -> void:
 	s.events = {"road": "temple"}
 	Quests.choose_event(q, s, rng(0), 0)
 	check(s.resolved and s.offer.is_empty(), "no pick: the mountain god chooses")
-	check_eq(s.tier("zhouyu"), mini(s.upgrade_levels(), GameData.get_db().gacha["tiers"].size() - 1))
+	check_eq(s.tier("zhouyu"), 1, "+3 copies: 铜 → 银")
 
 
 func test_elite_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
