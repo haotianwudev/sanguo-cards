@@ -14,6 +14,8 @@ var troops: Dictionary  # id -> {id, name, short, hp, at} (stats only — skills
 var kits: Dictionary  # id -> {id, name, normal, special}: the default skills of normal / special units (cards.json kits)
 var lord_forms: Dictionary  # id -> {id, name, route, bonus, skills, art}: the lord's extra cards (cards.json lord_forms)
 var lord_form_grants: Array  # form ids, handed out one per chapter cleared (in order, for the route that matches)
+var endings: Dictionary  # id -> {id, title, route, chapter, kind, who, quest, built, trigger, hint, unlock, cg, text} (data/endings.json)
+var ending_order: Array  # ending ids in file order
 var kit_default: Dictionary  # troop id -> the kit a card of that troop uses unless it names its own `kit`
 var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null), effects}
 var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
@@ -123,6 +125,10 @@ func _load(dir: String) -> void:
 	cards["lord"] = {"id": "lord", "name": "主公", "rarity": str(gacha.get("lord_rarity", "SR")), "troop": "lord",
 		"bonus": {}, "skills": [], "in_pool": false, "troop_skills": true, "person": "lord", "weight": 1, "soldier": false}
 
+	var en: Dictionary = read_json(dir + "/endings.json")
+	for eid in en["endings"]:
+		endings[eid] = en["endings"][eid].merged({"id": eid})
+		ending_order.append(eid)
 	var story: Dictionary = read_json(dir + "/story.json")
 	for q in story["quests"]:
 		var squares := {}
@@ -138,7 +144,7 @@ func _load(dir: String) -> void:
 				"cg": s.get("cg", ""), "prompt": s.get("prompt", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "soldier_scope": q.get("soldier_scope", ""), "recruit_pool": q.get("recruit_pool", []),
-			"subtitle": q.get("subtitle", ""), "ending": q.get("ending", {}), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
+			"subtitle": q.get("subtitle", ""), "ending": _ending_card(q.get("ending", "")), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
 			"event_pool": q.get("event_pool", []), "event_scope": q.get("event_scope", "south"), "shuffle": q.get("shuffle", []),
 				"pool_overrides": q.get("pool_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
 					"unless": o.get("unless", ""), "soldier_scope": o.get("soldier_scope", ""),
@@ -159,6 +165,22 @@ func _load(dir: String) -> void:
 	if FileAccess.file_exists(dir + "/interludes.json"):
 		var il: Dictionary = read_json(dir + "/interludes.json")
 		interludes = il.get("after", {})
+
+
+func _ending_card(id: Variant) -> Dictionary:
+	## a quest's `ending` is an id in data/endings.json; the screens that show it read {title, text, cg}
+	if id is Dictionary:
+		return id
+	if str(id) == "":
+		return {}
+	assert(endings.has(str(id)), "unknown ending %s" % str(id))
+	var e: Dictionary = endings[str(id)]
+	return {"id": str(id), "title": e["title"], "text": e["text"], "cg": e["cg"]}
+
+
+func endings_reached(flags: Array) -> Array:
+	## ids of the endings whose title is among a save's lasting story flags (the title is the flag)
+	return ending_order.filter(func(id): return flags.has(endings[id]["title"]))
 
 
 static func _choose_option(o: Dictionary) -> Dictionary:

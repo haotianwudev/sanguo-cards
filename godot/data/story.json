@@ -213,7 +213,7 @@
       "event_scope": "north",
       "soldier_scope": "north",
       "recruit_pool": ["yangang", "zoudan", "gaolan", "zhanghe"],
-      "ending": {"title": "结局六 · 覆巢", "text": "覆巢之下，安有完卵。你以为不趟浑水就能保住甄家，可乱世里，没有人是旁观者。……也许下一周目，你会拔刀。", "cg": "end_fuchao"},
+      "ending": "fuchao",
       "shuffle": [["hs_m1", "hs_m2"], ["hs_tm1", "hs_tm2"], ["hs_hm1", "hs_hm2"], ["hs_jm1", "hs_jm2"]],
       "squares": {
         "hs_start": {"cg": "c3_recruit_board", "type": "event", "label": "真定发榜", "next": ["hs_m1", "hs_m2"], "text": ["回到常山真定，主角拿着做赞助商赚来的家底，正式开始招兵买马。"], "x": 0, "y": 1},
@@ -279,7 +279,7 @@
       "unless": "出生：冀州无极",
       "start": "leave",
       "subtitle": "初平元年 · 夏 · 出洛阳",
-      "ending": {"title": "结局一 · 玉碎", "text": "宁为玉碎，不为瓦全。江东的梦，碎在了南阳。……也许下一周目，会有不同的结局。", "cg": "end_yusui"},
+      "ending": "yusui",
       "event_pool": [],
       "shuffle": [["r1", "r2"], ["tr", "camp"]],
       "event_scope": "south",
@@ -406,7 +406,7 @@
       "subtitle": "初平三年 · 夏",
       "requires": "界桥：救下公孙瓒",
       "recruit_pool": ["gongsunzan", "zoudan", "bingzhou_qiang"],
-      "ending": {"title": "结局七 · 绝罚", "text": "后院起火，神佛难救。面对暴怒的猛虎，唯有铁板一块方能求生。……下一周目，先让那两个打架的女土匪消停下来。", "cg": "end_juefa"},
+      "ending": "juefa",
       "event_scope": "north",
       "soldier_scope": "north",
       "squares": {
@@ -472,7 +472,7 @@
       "subtitle": "初平二年 — 三年",
       "requires": "长安：吕布杀了董卓",
       "event_pool": [],
-      "ending": {"title": "结局二 · 同归", "text": "殊途同归。一个西凉的将门之女，一个洛阳的才女，还有一个本不该在这里的人。……也许下一周目，会有人来敲你的窗。", "cg": "end_tonggui"},
+      "ending": "tonggui",
       "event_scope": "south",
       "soldier_scope": "",
       "squares": {
@@ -544,7 +544,7 @@
       "recruit_pool": ["wenpin", "yiji", "ganning"],
       "shuffle": [["jx_gongshou", "m_jx2"], ["jx_jinfan", "m_jx4"], ["m_jx3", "t_jx3"], ["jx_chengfang", "jx_zhaoxian"]],
       "event_pool": [],
-      "ending": {"title": "结局三 · 恨海", "text": "恨海难填。一个替你喝下毒酒的姑娘，一座下了三天雨、再没有读书人的城，和一个再也笑不出来的逗比。……下一周目，在长安找一个喝酒之前要先闻一闻的人。", "cg": "end_henhai"},
+      "ending": "henhai",
       "event_scope": "south",
       "soldier_scope": "south",
       "squares": {

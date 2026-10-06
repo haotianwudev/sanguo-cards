@@ -133,6 +133,13 @@ func demo(name: String) -> void:
 		save.run_records.append("出生：冀州无极")
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
+	if name == "endings":  # the 结局图鉴 with two endings reached
+		save.flags = ["结局一 · 玉碎", "结局六 · 覆巢"]
+		show_screen(TitleScreen.new())
+		var book := EndingsBook.new()
+		book._flags = save.flags
+		root.add_child(book)
+		return
 	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
 		show_screen(TitleScreen.new())
 		var o := PickOverlay.new()

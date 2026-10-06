@@ -1021,3 +1021,38 @@ func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
 	check(not Quests.option_locked(save, rescue) and Quests.option_locked(save, junfa), "覆巢 opens 张宁's rescue only")
 	save.flags = ["结局六 · 覆巢", "结局八 · 门后之诛"]
 	check(not Quests.option_locked(save, junfa), "门后之诛 opens 夏侯兰's martial law")
+
+
+func test_endings_are_config_and_every_story_ending_is_in_it() -> void:
+	var db := GameData.get_db()
+	check(db.ending_order.size() >= 11 and db.endings.size() == db.ending_order.size(), "the ending table is loaded")
+	for q in db.quests:
+		if not q["ending"].is_empty():
+			var e: Dictionary = db.endings[q["ending"]["id"]]
+			check(e["built"] and e["quest"] == q["id"] and q["ending"]["title"] == e["title"], "%s: its ending is an entry that points back at it" % q["id"])
+	var titles := {}
+	for id in db.ending_order:
+		var e: Dictionary = db.endings[id]
+		check(not titles.has(e["title"]), "unique title " + e["title"])
+		titles[e["title"]] = true
+		for key in ["route", "chapter", "kind", "who", "trigger", "hint", "unlock"]:
+			check(str(e[key]) != "", "%s has a %s" % [id, key])
+		check(not e["built"] or (str(e["text"]) != "" and e["quest"] != ""), id + ": a built ending has its text and quest")
+	# the flag a square records is the ending's title, word for word
+	for q in db.quests:
+		for s in q["squares"].values():
+			for rec in [s["record"], s["record_win"], s["record_lose"]]:
+				if str(rec).begins_with("结局"):
+					check(titles.has(rec), "%s records an ending that is not in the table: %s" % [s["id"], rec])
+
+
+func test_the_book_tracks_which_endings_were_reached() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	check_eq(s.endings_reached(), [], "none yet")
+	s.flags = ["结局六 · 覆巢", "董白：留下"]
+	check_eq(s.endings_reached(), ["fuchao"])
+	s.run_records = ["结局一 · 玉碎"]
+	check_eq(s.endings_reached(), ["yusui", "fuchao"], "this run's own ending counts, in table order")
+	var again := s.new_lap()
+	check(again.endings_reached().has("fuchao"), "kept across 周目")

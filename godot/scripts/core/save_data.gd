@@ -222,6 +222,11 @@ func fighter(card_id: String) -> Dictionary:
 	return db.build_fighter(card_id, float(db.gacha["tiers"][tier(card_id)]["mult"]))
 
 
+func endings_reached() -> Array:
+	## ending ids this save has reached (flags are kept across 周目; this run's own records count too)
+	return _db().endings_reached(flags + run_records)
+
+
 func is_north() -> bool:
 	## the north-route lord: the birth record is in this run's records during chapter one and in the lasting flags after it
 	return run_records.has("出生：冀州无极") or flags.has("出生：冀州无极")
