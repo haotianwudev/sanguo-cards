@@ -43,9 +43,9 @@ timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad
 ```
 
 北线第二章：`--demo=ln2`（虎牢关前，`--at=<square id>` 跳到任意格，`--at=` 的目标必须在脚本自带的 `path` 数组里，新加格子要同步那份列表）。
-第四章：`--demo=ch6`（二周目，围府线）/ `--demo=ch6b`（三周目，报信线）/ `--demo=ch6c`（四周目，渭水打张济张绣、收贾诩），加 `--at=<square id>` 直接跳到那一格截图。
+第四章：`--demo=ch6`（围府线，已触发前面的 badend）/ `--demo=ch6b`（报信线）/ `--demo=ch6c`（已触发「结局三 · 恨海」，渭水打张济张绣、收贾诩），加 `--at=<square id>` 直接跳到那一格截图。
 第五章：`--demo=ch8`（恨海线）/ `--demo=ch8b`（通关恨海、第四章收了贾诩后的破局线），同样可加 `--at=`。
-`tests/test_routes.gd` walks chapters 3–5 on every 周目 route (squares, records, endings, cards, which chapter follows) and checks
+`tests/test_routes.gd` walks chapters 3–5 on every ending route (squares, records, endings, cards, which chapter follows) and checks
 that no two open squares ever share a spot; keep it green when you add squares.
 
 Fonts are bundled subsets (`godot/data/fonts/body.ttf` 思源黑体, `name.ttf` 霞鹜文楷), used by `Kit.make_theme` / `Kit.name_font`.
@@ -185,6 +185,8 @@ Adding a portrait, checklist:
 
 ## How the game is modelled (add things through data)
 
+**Story unlocks come from endings, not from the lap number.** A branch opens because the save carries an ending flag (`结局一 · 玉碎`, `结局二 · 同归`, `结局三 · 恨海`, … — they stay in `flags` across 周目); `requires` / `unless` read those flags. `lap` only drives the difficulty head start (`battle.lap_step`) and the title screen — never write a gate as "on lap N"; name the badend that must have happened, and call content "after 结局X" in docs and comments.
+
 - **Card** (`cards.json` cards): `name, rarity (N = soldier, R/SR/SSR = general), troop, bonus {hp, at}, skills,
   person (shared portrait / one version in a party), pool (false = story or drop only), troop_skills (false = own skills
   replace the troop's)`. Every troop has two skills — a plain 1-AP move and a signature (骑 马刀/冲锋, 枪 刺击/枪阵,
@@ -296,7 +298,7 @@ seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches
 last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 smashes the seal on a stone and refuses capture — written restrained,
 never explicit; the hero covers 孙策 and 周瑜's escape and falls). A quest `ending` {title, text} shows an ending card
 and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
-Route B (a later 周目 — flag 「结局一 · 玉碎」 — with 董白 kept): 蔡文姬 can be saved, which ends chapter 3 early
+Route B (once the badend 「结局一 · 玉碎」 has been reached — flag 「结局一 · 玉碎」 — with 董白 kept): 蔡文姬 can be saved, which ends chapter 3 early
 (「路线：守洛阳」). On route B the 驻守洛阳 and 长安 maps both count as 第三章 (titles 「第三章 · 驻守洛阳」「第三章 · 长安」). 驻守洛阳 (quest requires that flag): 蔡文姬's story (郭汜 escorting the officials' families,
 plundering), 周瑜's plan to rob his grain carts, 郭汜 fought off (no 蔡邕), 孙坚 holds 洛阳, the coalition disperses,
 朱儁 (孙坚's old commander from the 黄巾 war, fled 董卓) arrives and joins, asking the hero to carry a question to 皇甫嵩; 李儒 sues for peace (周瑜 for it, the hero suggests 王允), 董白 is betrothed to the hero (wedding to be in 长安), the hero
@@ -313,7 +315,7 @@ always seems to be flirting with someone — whether she means it with the hero 
 she looks at him. 吕布 stays a brute and selfish: he rescues nobody on purpose (「别以为我是来
 救你的」), kills 董卓 over his own pupil's plea, grabs 貂蝉 and shouts for the credit.
 **贾诩** (毒士, best at spotting poison plots): at 董卓's 接风宴 in 长安 he sits in a corner sniffing every cup (the hero knows him from 三国杀);
-on the 四周目 (flag 「结局三 · 恨海」), 第四章's escape meets 李傕's pursuers 张绣 (张济's nephew, 北地枪王, 渭水桥) and 张济 (渭水营, elite)
+once 「结局三 · 恨海」 has been reached (flag 「结局三 · 恨海」), 第四章's escape meets 李傕's pursuers 张绣 (张济's nephew, 北地枪王, 渭水桥) and 张济 (渭水营, elite)
 instead of the 司徒府 pursuers / 樊稠; 张济 withdraws to 弘农 and the hero simply has their strategist 贾诩 tied up and carried off on a grain cart (he gave
 李傕 the idea to attack 长安; easygoing, he makes himself comfortable); in 洛阳 (a lap-4 休整 square) the hero unties him and treats him
 with great respect — best room, first bowl of 红烧肉, clean wine — and 贾诩 shrugs 「……行吧」 and joins (「贾诩：入队」).
@@ -324,7 +326,7 @@ with great respect — best room, first bowl of 红烧肉, clean wine — and �
 蔡邕's house (蔡邕 arrested for sighing over 董卓), breakouts (高顺, 并州狼骑) with 孙策 and 周瑜 fighting alongside, 董白 brings
 what's left of the 董 household, 吕布 at 宣平门 (last stand, lose_goto); after it the hero holds the gap so 孙策 and 周瑜 can ride out → 结局二 · 同归 (the hero, 董白 and 蔡文姬 fall together,
 restrained). The squares from x5 of the warned route require that flag; the trap squares sit on the same spots with no
-requires (they're only reachable from the split). **Later 周目**: 貂蝉 (王允's adoptive daughter) warns him; 李傕/郭汜 attack 长安, 王允 keeps 吕布 on a leash; 周瑜 (in 长安 with
+requires (they're only reachable from the split). **After the badend** (flag 「结局二 · 同归」): 貂蝉 (王允's adoptive daughter) warns him; 李傕/郭汜 attack 长安, 王允 keeps 吕布 on a leash; 周瑜 (in 长安 with
 his uncle 周忠) says take the emperor to 洛阳; 董白 brings 董卓's old guard, 貂蝉 comes along, 皇甫嵩 holds the gate;
 王允's checkpoint, pursuers or 樊稠, 徐晃 defects, 李傕 at 函谷关 (boss) → 洛阳, 孙坚 kneels; 长安 falls, 王允 dies
 on the gate, 吕布 goes straight to 张杨 in 河内 (his old 并州 friend), 李傕 and 郭汜 hold 长安 (no infighting); 孙坚 keeps the 玉玺 and takes 大将军·录尚书事 (挟天子 — the hero notes the textbook said
