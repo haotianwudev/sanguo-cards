@@ -145,7 +145,8 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
     sec = SECTION[kind]
     e = cfg[sec].get(key, {})
     if kind == "portrait":
-        rel = e.get("src") or f"source/generals/{key}.jpg"
+        card = json.loads((DATA / "cards.json").read_text("utf-8")).get("cards", {}).get(key, {})
+        rel = e.get("src") or f"source/{'soldiers' if card.get('soldier') else 'generals'}/{key}.jpg"
     else:
         rel = f"source/{SRC_DIR[kind]}/{key}.jpg"
     dst = PICS / rel
@@ -153,6 +154,7 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
     out.save(dst, quality=93)
     e["src"] = rel
     e["license"] = e.get("license") or "用户提供（Gemini 生成）"
+    default_frame = kind == "portrait" and "face" not in e and not face
     if kind == "portrait":
         e.setdefault("face", [0.5, 0.22])
         e.setdefault("head", 0.22)
@@ -168,6 +170,8 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
         flags = "⚠ " + flags
     if bad:
         flags = "强制：" + "；".join(bad) + (" ；" + "；".join(warn) if warn else "")
+    if default_frame:
+        flags += " ；取景用默认值，需看一眼调 face/head（--face X Y --head H）"
     cropped = "" if out.size == im.size else f" 裁 {im.size[0]}×{im.size[1]}→{out.size[0]}×{out.size[1]}"
     log_line(f"- [ ] {datetime.date.today()} {kind} `{key}` ← {src.name}{cropped} · {flags}")
     print(f"✓ {key} [{kind}]{cropped}  {flags}")

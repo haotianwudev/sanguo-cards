@@ -7,7 +7,9 @@ Reply in Chinese. Run from `F:\workspace\sanguo-cards`.
 
 **Inbox (the usual way):** the user drops images into `F:\workspace\sanguo-cards\pics\inbox\`, each named `<key>.png/jpg/webp`; run `python tools/art_ingest.py inbox`. Installed files move to `inbox/_done/`; refused ones stay (tell the user which and why; a file whose name isn't a known key says so — they rename it or you pass `--kind` via `add`).
 
-**One image:** `python tools/art_ingest.py add "<path>" <key>` — the key is the cg / battle / card id (kind is inferred; pass `--kind cg|battle|map|portrait` if it says it can't tell).
+**Portraits (立绘) work the same way** — name the file with the card / enemy / person id (`zhaoyun.png`, a soldier id…). A replacement keeps its existing framing; a brand-new portrait gets default framing and the log says so — look at the built `godot/data/portraits/<key>.jpg` and re-run `add <file> <key> --face X Y --head H` if the face is off-centre (face = face centre as fractions of width/height, head = head height / image height).
+
+**One image:** `python tools/art_ingest.py add "<path>" <key>` — the key is the cg / battle / card id (kind is inferred — cards / enemies / portrait keys → portrait, scenario ids → battle, the rest of the story keys → cg; pass `--kind cg|battle|map|portrait` if it says it can't tell).
 **Many:** write `<path> <key>` per line to a scratch file → `python tools/art_ingest.py batch list.txt`.
 
 It checks quality (too small / blank = refused unless `--force`; blur / dark / odd shape = warning, still installed), crops cg / battle / map to 16:9 (`--anchor top|bottom` keeps that side, e.g. faces near the top), keeps portraits' `face` / `head` framing (new portrait: pass `--face X Y --head H`, else defaults 0.5 0.22 / 0.22), builds the game copy, and appends one line to `pics/ART-LOG.md`.
