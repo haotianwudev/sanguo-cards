@@ -90,6 +90,7 @@
 | `shanzei_bing` | source/soldiers/shanzei_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhuzhi` | source/generals/zhuzhi.jpg | 用户提供 | Antigravity 生成 | — |
 | `yuanshao` | source/generals/yuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `mayunlu` | source/generals/mayunlu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yanfuren` | source/generals/yanfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `bianfuren` | source/generals/bianfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caifuren` | source/generals/caifuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

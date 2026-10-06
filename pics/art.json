@@ -824,6 +824,15 @@
       "head": 0.2,
       "license": "用户提供（Gemini 生成）"
     },
+    "mayunlu": {
+      "src": "source/generals/mayunlu.jpg",
+      "face": [
+        0.49,
+        0.25
+      ],
+      "head": 0.23,
+      "license": "用户提供（Gemini 生成）"
+    },
     "yanfuren": {
       "src": "source/generals/yanfuren.jpg",
       "face": [

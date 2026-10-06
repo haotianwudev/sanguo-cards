@@ -208,6 +208,7 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speakers(["蔡夫人慢慢剥着一颗枇杷：「急什么。朝廷的诏书在他手里，明着动他，就是造反。」"])[0], "caifuren", "蔡夫人 recognized")
 	check_eq(Kit.speakers(["卞夫人手提宫灯，温言道：「风雪甚急，诸位将士且披上暖氅。」"])[0], "bianfuren", "卞夫人 recognized")
 	check_eq(Kit.speakers(["严夫人夹着账册冷笑：「奉先在外征战，这徐州府库的亏空，谁来补齐？」"])[0], "yanfuren", "严夫人 recognized")
+	check_eq(Kit.speakers(["马云騄勒马扬枪笑道：「西凉儿女，何惧中原豪强！」"])[0], "mayunlu", "马云騄 recognized")
 
 
 func test_the_lord_card_can_be_drawn() -> void:

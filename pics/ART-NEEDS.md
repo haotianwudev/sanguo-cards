@@ -802,7 +802,7 @@
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
-| ⬜ 缺 | `mayunlu` | 马云騄（SR） |
+| ✅ 正式 | `mayunlu` | 马云騄（SR） |
 | ⬜ 缺 | `wangyi` | 王异（SR） |
 | ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
 | ✅ 正式 | `bianfuren` | 卞夫人（SR） |
