@@ -248,7 +248,7 @@
         "hs_alliance": {"cg": "c3_alliance", "type": "event", "label": "黑山令", "record": "黑山：结盟", "next": ["hs_rest2"], "text": ["帮张燕平定了叛乱，张燕递给你一面令牌：「黑山百万之众，欠你一个人情。以后太行山，就是你的后院！」"], "x": 21, "y": 1},
         "hs_rest2": {"type": "recover", "label": "大寨夜话", "next": ["hs_timeskip"], "x": 22, "y": 1},
         "hs_timeskip": {"cg": "c3_guotu_raid", "type": "event", "label": "郭图寻仇", "portraits": ["guotu"], "next": ["hs_escape"], "text": ["【初平二年·冬】一年后，韩馥让出冀州，袁绍入主邺城。", "郭图得势猖狂，向袁绍进谗言诬陷甄家「私通黑山匪类」，亲自提兵直扑无极！", "沉重的擂木轰然撞开朱漆府门，木屑横飞，府内仆役惊恐万状。", "郭图端坐马上，轻摇羽扇阴冷嗤笑：「当年在城头落某面皮，今日便叫你甄家上下插翅难飞！」"], "x": 23, "y": 1},
-        "hs_escape": {"cg": "c3_secret_path", "type": "event", "label": "黑山秘道", "record": "郭图：扑空", "next": ["hs_breakout"], "text": ["{lord}拿出黑山令，张燕派人打开了太行秘道。甄家的车队紧急撤退。郭图扑了个空，气急败坏地命大将淳于琼追进太行山口！"], "x": 24, "y": 1},
+        "hs_escape": {"cg": "c3_secret_path", "type": "event", "label": "黑山秘道", "record": "郭图：扑空", "portraits": ["zhangfuren", "zhenmi_young"], "next": ["hs_breakout"], "text": ["烈焰撕裂夜空，无极城内火光冲天。郭图率大军猛攻甄府，城内危在旦夕！", "危急关头，{lord}出示黑山令，张燕早已遣精锐黑山卫士备下太行秘道接应。", "昏暗石径两侧，黑山甲士高举火把，张夫人紧紧牵着年幼的甄宓撤入漆黑洞口。", "甄宓怀抱布偶，回望远处被大火吞没的无极家园，眼眶泛红：「娘亲，兄长他们……还能赶上来么？」", "张夫人强忍悲痛，柔声宽慰：「莫怕，宓儿。有{lord}与子龙将军断后，定能安然杀出重围！」"], "x": 24, "y": 1},
         "hs_em1": {"type": "mystery", "label": "峡谷", "next": ["hs_em2", "hs_pursuit1"], "y": 1, "x": 26},
         "hs_em2": {"type": "mystery", "label": "？", "next": ["hs_pursuit0"], "y": 2, "x": 27},
         "hs_pursuit1": {"type": "battle", "battle": "hs_jizhou_qibing", "label": "冀州轻骑", "next": ["hs_em3"], "text": ["一队冀州轻骑咬上了队尾。吕玲绮提着画戟跳下马车：「我来断后！」"], "x": 29, "y": 1},

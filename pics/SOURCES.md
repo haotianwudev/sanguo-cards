@@ -247,4 +247,5 @@
 | `cg:c3_zhangyan_meet` | source/cg/c3_zhangyan_meet.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_guotu_raid` | source/cg/c3_guotu_raid.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_guojia_map` | source/cg/c3_guojia_map.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_secret_path` | source/cg/c3_secret_path.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_recruit_board` | source/cg/c3_recruit_board.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
