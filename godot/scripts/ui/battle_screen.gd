@@ -325,6 +325,8 @@ func _refresh() -> void:
 		st.append("⚠ 蓄力中：下回合【%s】！" % e["charging"])
 	if e["at"] > e["data"]["at"] * 1.01:
 		st.append("狂暴 攻击 %d" % int(round(e["at"])))
+	if b.buff["layers"] > 0:
+		st.append("战意 ×%d：攻击 +%d%% 受伤 -%d%%（%d 回合）" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), int(round(b.buff["def"] * 100)), b.buff["turns"]])
 	if b.party_burn["turns"] > 0:
 		st.append("我军灼烧 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
 	if b.ap_drain > 0:
@@ -530,6 +532,10 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "换人", Kit.c("gold"), 36)
 				Kit.pop(_cards[ev["unit"]], 1.08)
 				await get_tree().create_timer(0.35).timeout
+			"buff":
+				Kit.float_text(self, _party_center(), "战意 ×%d" % ev["layers"], Kit.c("gold"), 36)
+				_refresh()
+				await get_tree().create_timer(0.3).timeout
 			"cleanse":
 				Kit.float_text(self, _party_center(), "状态解除" if ev["n"] > 0 else "无状态", Kit.c("green"), 34)
 				_refresh()

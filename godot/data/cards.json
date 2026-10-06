@@ -2451,6 +2451,58 @@
           "type": "cleanse"
         }
       ]
+    },
+    "xianji": {
+      "name": "料敌先机",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "atk": 0.1,
+          "def": 0.08,
+          "max": 4,
+          "turns": 3
+        }
+      ]
+    },
+    "qimou": {
+      "name": "奇谋百出",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "atk": 0.08,
+          "def": 0.1,
+          "max": 4,
+          "turns": 3
+        }
+      ]
+    },
+    "dongcha": {
+      "name": "洞若观火",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "atk": 0.12,
+          "def": 0.06,
+          "max": 4,
+          "turns": 3
+        }
+      ]
+    },
+    "dingce": {
+      "name": "运筹定策",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "atk": 0.08,
+          "def": 0.08,
+          "max": 4,
+          "turns": 3
+        }
+      ]
     }
   },
   "cards": {
@@ -3053,7 +3105,10 @@
         "hp": 45,
         "at": 20
       },
-      "pool": false
+      "pool": false,
+      "skills": [
+        "qimou"
+      ]
     },
     "zhongyao": {
       "name": "钟繇",
@@ -4117,7 +4172,10 @@
         "hp": 45,
         "at": 20
       },
-      "pool": false
+      "pool": false,
+      "skills": [
+        "dingce"
+      ]
     },
     "jiaxu": {
       "name": "贾诩·毒士",
@@ -4127,7 +4185,10 @@
         "hp": 50,
         "at": 26
       },
-      "pool": false
+      "pool": false,
+      "skills": [
+        "dongcha"
+      ]
     },
     "zhangxiu": {
       "name": "张绣·北地枪王",
@@ -4255,7 +4316,7 @@
         "at": 27
       },
       "skills": [
-        "liaodong",
+        "xianji",
         "shisheng"
       ]
     },

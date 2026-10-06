@@ -39,6 +39,7 @@ var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: the ski
 var swaps_done := 0  # this round
 var _carry_extra: Dictionary = {}
 var _carry_uses: Dictionary = {}
+var buff := {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0}  # 战意 (军师): stacked layers, rounds left, summed attack bonus / damage cut
 var counters: Array = []  # 反击 (枪兵): [{name, at, power}] — each enemy hit this round is answered by every entry
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
@@ -327,7 +328,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			for _h in int(eff.get("hits", 1)):
 				if enemy["hp"] <= 0:
 					break
-				var bonus := float(mods.get("at", 0.0)) + float(mods.get("troop_at", {}).get(u["leader"]["card"]["troop"], 0.0))
+				var bonus := float(mods.get("at", 0.0)) + float(mods.get("troop_at", {}).get(u["leader"]["card"]["troop"], 0.0)) + float(buff["atk"])
 				if kind == "magic":
 					bonus += float(mods.get("magic", 0.0))
 				if party_hp * 2 < party_max:
@@ -405,6 +406,14 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 		"counter":  # 反击: until the round ends, every hit the enemy lands is answered with ×power of this leader's attack
 			counters.append({"name": unit_name(u), "at": at * mult, "power": float(eff["power"])})
 			return ["  %s 架起拒马：本回合敌人每打中一次，还击 ×%s" % [unit_name(u), str(eff["power"])]]
+		"buff":  # 战意: +1 layer (up to max) of attack and damage-taken cut for the whole party; recasting refreshes the timer
+			if buff["layers"] < int(eff.get("max", 4)):
+				buff["layers"] += 1
+				buff["atk"] += float(eff.get("atk", 0.0))
+				buff["def"] += float(eff.get("def", 0.0))
+			buff["turns"] = int(eff.get("turns", 3))
+			_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
+			return ["  战意 ×%d：全军攻击 +%d%%，受到伤害 -%d%%（%d 回合）" % [buff["layers"], int(round(buff["atk"] * 100)), int(round(buff["def"] * 100)), buff["turns"]]]
 		"cleanse":  # 解状态: confusion, the enemy's fire on us and the AP it drained are all lifted
 			var n := 0
 			for t in leaders:
@@ -472,7 +481,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 		_ev({"t": "enemy_stunned"})
 		log.append("%s 混乱中，无法行动" % data["name"])
 	else:
-		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0)))
+		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0))) * (1.0 - minf(0.9, float(buff["def"])))
 		for _a in int(data["actions"]):
 			var mv := _enemy_move()
 			if mv.has("charge"):  # winds up: next turn opens with the big one
@@ -557,7 +566,7 @@ func _counter_strike() -> Array:
 	for c in counters:
 		if enemy["hp"] <= 0:
 			break
-		var d := _dmg(float(c["at"]) * float(c["power"]), "attack")
+		var d := _dmg(float(c["at"]) * float(c["power"]) * (1.0 + float(buff["atk"])), "attack")
 		enemy["hp"] = maxi(0, enemy["hp"] - d)
 		_ev({"t": "counter", "unit": c["name"], "dmg": d, "hp": enemy["hp"]})
 		log.append("  %s 反击，造成 %d 伤害" % [c["name"], d])
@@ -610,6 +619,10 @@ func _start_round() -> Array:
 	guard_cut = 0.0
 	counters = []
 	swaps_done = 0
+	if buff["turns"] > 0:
+		buff["turns"] -= 1
+		if buff["turns"] == 0:
+			buff = {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0}
 	_ev({"t": "round", "n": round_no, "ap": ap})
 	var log: Array = ["─── 第 %d 回合 ───" % round_no]
 	for u in leaders:

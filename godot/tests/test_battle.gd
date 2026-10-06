@@ -649,3 +649,35 @@ func test_a_confused_leader_cannot_be_swapped_out() -> void:
 	b.leaders[slot]["confused"] = false
 	b.leaders[slot]["confuse_next"] = true
 	check(not b.can_swap(slot), "confused next round")
+
+
+func test_war_spirit_stacks_four_layers_lifts_attack_and_cuts_damage_then_fades() -> void:
+	var b := Battle.start("hulao", party(["guojia"]), 6)
+	var slot := _slot_of(b, "guojia")
+	var eff := {"type": "buff", "atk": 0.1, "def": 0.08, "max": 4, "turns": 3}
+	for _i in 6:
+		b._apply(b.leaders[slot], eff, 1.0)
+	check_eq(b.buff["layers"], 4, "four layers at most")
+	check(is_equal_approx(b.buff["atk"], 0.4) and is_equal_approx(b.buff["def"], 0.32), "0.4 attack, 0.32 cut")
+	b.db.battle["variance"] = 0.0
+	var plain := Battle.start("hulao", party(["guojia"]), 6)
+	var raised: Dictionary = b.leaders[0]
+	var hp_a: int = plain.enemy["hp"]
+	var hp_b: int = b.enemy["hp"]
+	plain._apply(plain.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	b._apply(raised, {"type": "attack", "power": 1.0}, 1.0)
+	check(float(hp_b - b.enemy["hp"]) > float(hp_a - plain.enemy["hp"]) * 1.35, "the layers raise our damage")
+	b.db.battle["variance"] = 0.2
+	var life: int = b.party_hp
+	b.end_round()
+	var hit: int = life - b.party_hp
+	var plain_life: int = plain.party_hp
+	plain.end_round()
+	check(hit < (plain_life - plain.party_hp) * 0.95 or plain_life == plain.party_hp, "and cut what we take")
+	for _i in 4:
+		b.end_round()
+		b.party_hp = b.party_max
+	check_eq(b.buff["layers"], 0, "the status wears off when it is not renewed")
+	var g: Dictionary = GameData.get_db().skills["xianji"]
+	check(g["cost"] == 1 and not g["cumulative"] and g["uses"] == null, "料敌先机 is a plain 1 AP skill")
+	check(GameData.get_db().build_fighter("guojia")["skills"].has("xianji"), "郭嘉 has it as his skill")
