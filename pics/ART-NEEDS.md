@@ -351,7 +351,7 @@
 | ⬜ 缺 | `c3_xiahoulan_law` | 军法如山 |
 | ✅ 已有 | `c3_bribe_villager` | 和稀泥 |
 | ✅ 已有 | `c3_encounter_ning` | 深山绝壁 |
-| ⬜ 缺 | `c3_leave_ning` | 明哲保身 |
+| ✅ 已有 | `c3_leave_ning` | 明哲保身 |
 | ⬜ 缺 | `c3_save_ning` | 战白骑 |
 | ⬜ 缺 | `end_fuchao` | 覆巢 |
 | ⬜ 缺 | `c3_zhangyan_meet` | 黑山大寨 |

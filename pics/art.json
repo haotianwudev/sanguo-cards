@@ -1680,6 +1680,10 @@
     "c3_encounter_ning": {
       "src": "source/cg/c3_encounter_ning.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c3_leave_ning": {
+      "src": "source/cg/c3_leave_ning.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
