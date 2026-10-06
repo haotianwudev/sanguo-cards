@@ -709,8 +709,8 @@ func _dialog_show() -> void:
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
-		if key == "lord" and Game.save.lord()["person"] == "lord_north":  # the north route has its own face
-			key = "lord_north"
+		if key == "lord":  # the north route (and any lord card in play) has its own face
+			key = Game.save.lord()["person"]
 		_dlg_face.texture = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
 		_dlg_face.visible = _dlg_face.texture != null
 	if last:
@@ -1040,6 +1040,7 @@ func _complete() -> void:
 	var db := GameData.get_db()
 	var r := Quests.recap(Game.save)
 	var earned := Quests.pay_merit(q, Game.save)
+	var new_form := Quests.grant_lord_form(q, Game.save, Game.rng)
 	Game.persist()
 	var panel := PanelContainer.new()
 	panel.name = "Recap"
@@ -1066,6 +1067,8 @@ func _complete() -> void:
 	var lines: Array = ["[color=%s][b]战斗[/b][/color]　打赢了 %d 场" % [gold, r["battles"]]]
 	var cards: Array = r["cards"].map(func(c): return db.cards[c[0]]["name"] + ("×%d" % c[1] if c[1] > 1 else ""))
 	lines.append("[color=%s][b]新得卡牌[/b][/color]　%s" % [gold, "、".join(cards) if not cards.is_empty() else "无"])
+	if new_form != "":
+		lines.append("[color=%s][b]主角卡[/b][/color]　获得「%s」，主角变强了！" % [gold, db.lord_forms[new_form]["name"]])
 	var relics: Array = r["relics"].map(func(x): return db.relics[x]["name"])
 	lines.append("[color=%s][b]宝物[/b][/color]　%s" % [gold, "、".join(relics) if not relics.is_empty() else "无"])
 	lines.append("[color=%s][b]关键选择[/b][/color]" % gold)

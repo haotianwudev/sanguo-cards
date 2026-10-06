@@ -965,3 +965,38 @@ func test_mengde_makes_strategist_skills_cheaper() -> void:
 	check_eq(b.cost(u, db.skills["yehuo"]), 1, "火攻 stays at 1")
 	var lord: Dictionary = b.leaders.filter(func(l): return l["leader"]["card"]["troop"] == "lord")[0]
 	check_eq(b.cost(lord, db.skills["rengdao"]), 3, "not a 策士: no discount")
+
+
+func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	s.flags = ["出生：冀州无极"]
+	check(s.is_north(), "the birth flag marks the north route in later chapters too")
+	var base := db.build_lord("阿明", 1.0, true)
+	check_eq(s.lord_form(), "", "no lord card yet")
+	var q: Dictionary = db.quests[0]
+	check_eq(Quests.grant_lord_form(q, s), "lord_north_silver", "the first chapter clear hands out the first card")
+	check_eq(Quests.grant_lord_form(q, s), "", "once per chapter")
+	var lord := s.lord()
+	check(lord["hp"] > base["hp"] and lord["at"] > base["at"], "the card makes the lord stronger")
+	check_eq(lord["person"], "lord_north_silver", "and brings its own face")
+	check_eq(lord["skills"], base["skills"], "north skills stay the spear's")
+	var south := SaveData.create()
+	check_eq(Quests.grant_lord_form(q, south), "lord_south_armor", "the south route has its own card")
+	var again := s.new_lap()
+	check(again.lord_forms.has("lord_north_silver"), "a new lap keeps the lord cards")
+
+
+func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[0]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 3
+	var seen := {}
+	for k in 12:
+		var s := SaveData.create()
+		s.flags = ["出生：冀州无极"] if k % 2 == 0 else []
+		var got := Quests.grant_lord_form(q, s, rng)
+		check(got != "" and db.lord_forms[got]["route"] == ("north" if k % 2 == 0 else "south"), "a card of this route: " + got)
+		seen[got] = true
+	check_eq(seen.size(), 2, "both routes' cards turn up")

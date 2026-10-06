@@ -56,12 +56,14 @@ var unworn: Array = []  # 宝物 left in the card pool (not worn: no effect)
 var benched: Array = []  # cards left behind: not in any unit (never a leader)
 var seen: Array = []  # every general ever owned, across 周目: they can all be drawn again
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
+var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
+var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -112,6 +114,7 @@ func new_lap() -> SaveData:
 	s.theme = theme
 	s.dupes = dupes.duplicate()
 	s.lord_copies = lord_copies
+	s.lord_forms = lord_forms.duplicate()
 	return s
 
 
@@ -219,10 +222,26 @@ func fighter(card_id: String) -> Dictionary:
 	return db.build_fighter(card_id, float(db.gacha["tiers"][tier(card_id)]["mult"]))
 
 
+func is_north() -> bool:
+	## the north-route lord: the birth record is in this run's records during chapter one and in the lasting flags after it
+	return run_records.has("出生：冀州无极") or flags.has("出生：冀州无极")
+
+
+func lord_form() -> String:
+	## the lord card in play: the newest one handed out for this route ("" = the base lord)
+	var route := "north" if is_north() else "south"
+	var db := _db()
+	for i in range(lord_forms.size() - 1, -1, -1):
+		var f: Dictionary = db.lord_forms.get(lord_forms[i], {})
+		if not f.is_empty() and (f["route"] == "" or f["route"] == route):
+			return lord_forms[i]
+	return ""
+
+
 func lord() -> Dictionary:
 	## the lord's fighter at its tier; the north route starts in a different host body (own hair, no armor)
 	var db := _db()
-	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), run_records.has("出生：冀州无极"))
+	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), lord_form())
 
 
 func upgrade(card_id: String) -> void:

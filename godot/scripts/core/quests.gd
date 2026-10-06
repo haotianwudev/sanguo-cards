@@ -518,6 +518,28 @@ static func recap(save: SaveData) -> Dictionary:
 		"records": save.run_records.duplicate(), "danger": save.danger, "difficulty": save.difficulty}
 
 
+static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> String:
+	## each chapter cleared hands out one lord card (version) at random from those of this route not yet had, once;
+	## returns its id ("" = none left / already given). Without an rng (tests) the first one.
+	q = q.get("_raw", q)
+	if save.lord_form_paid == q["id"] or save.replay != "":
+		return ""
+	var db := GameData.get_db()
+	var route := "north" if save.is_north() else "south"
+	save.lord_form_paid = q["id"]
+	var pool: Array = []
+	for fid in db.lord_form_grants:
+		var f: Dictionary = db.lord_forms.get(fid, {})
+		if f.is_empty() or save.lord_forms.has(fid) or (f["route"] != "" and f["route"] != route):
+			continue
+		pool.append(fid)
+	if pool.is_empty():
+		return ""
+	var pick: String = pool[rng.randi_range(0, pool.size() - 1)] if rng != null else pool[0]
+	save.lord_forms.append(pick)
+	return pick
+
+
 static func merit_earned(save: SaveData) -> int:
 	var m: Dictionary = GameData.get_db().gacha["merit"]
 	return save.run_battles * int(m["per_battle"]) + save.run_bosses * int(m["per_boss"])

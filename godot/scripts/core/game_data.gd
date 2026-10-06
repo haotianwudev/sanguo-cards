@@ -12,6 +12,8 @@ var gacha: Dictionary
 var battle: Dictionary
 var troops: Dictionary  # id -> {id, name, short, hp, at} (stats only — skills come from kits)
 var kits: Dictionary  # id -> {id, name, normal, special}: the default skills of normal / special units (cards.json kits)
+var lord_forms: Dictionary  # id -> {id, name, route, bonus, skills, art}: the lord's extra cards (cards.json lord_forms)
+var lord_form_grants: Array  # form ids, handed out one per chapter cleared (in order, for the route that matches)
 var kit_default: Dictionary  # troop id -> the kit a card of that troop uses unless it names its own `kit`
 var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null), effects}
 var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
@@ -79,6 +81,11 @@ func _load(dir: String) -> void:
 	for kid in raw["kits"]:
 		kits[kid] = {"id": kid, "name": raw["kits"][kid]["name"], "normal": raw["kits"][kid]["normal"], "special": raw["kits"][kid]["special"]}
 	kit_default = raw["kit_default"]
+	for fid in raw.get("lord_forms", {}).get("forms", {}):
+		var f: Dictionary = raw["lord_forms"]["forms"][fid]
+		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "bonus": f.get("bonus", {}),
+			"skills": f.get("skills", []), "art": f.get("art", false)}
+	lord_form_grants = raw.get("lord_forms", {}).get("grants", [])
 	for cid in raw["cards"]:
 		var c: Dictionary = raw["cards"][cid]
 		var bonus := {}
@@ -228,13 +235,22 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 		"at": int(round((t["at"] + c["bonus"].get("at", 0)) * mult)), "skills": sk, "rarity": c["rarity"]}
 
 
-func build_lord(lord_name: String, mult := 1.0, north := false) -> Dictionary:
+func build_lord(lord_name: String, mult := 1.0, north := false, form := "") -> Dictionary:
 	## "id" stays "lord" everywhere (card/collection/leader lookups all key on it); "person" carries the
 	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]
 	var skills: Array = kits["lord_north"]["special"] if north and kits.has("lord_north") else default_kit("lord", true)
-	return {"id": "lord", "person": "lord_north" if north else "lord", "name": lord_name, "troop": "lord",
-		"hp": int(round(t["hp"] * mult)), "at": int(round(t["at"] * mult)), "skills": skills.duplicate(), "rarity": null}
+	var f: Dictionary = lord_forms.get(form, {})  # a lord card (version) in play: its own stats, skills and, once drawn, face
+	var person := "lord_north" if north else "lord"
+	if not f.is_empty() and f["art"]:
+		person = form
+	var sk := skills.duplicate()
+	for s in f.get("skills", []):
+		if not sk.has(s):
+			sk.append(s)
+	return {"id": "lord", "person": person, "north": north, "form": form, "name": lord_name, "troop": "lord",
+		"hp": int(round((t["hp"] + int(f.get("bonus", {}).get("hp", 0))) * mult)),
+		"at": int(round((t["at"] + int(f.get("bonus", {}).get("at", 0))) * mult)), "skills": sk, "rarity": null}
 
 
 func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:

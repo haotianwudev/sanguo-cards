@@ -131,6 +131,8 @@ func demo(name: String) -> void:
 	save.lord_name = "阿明"
 	if OS.get_cmdline_user_args().has("--north"):  # any --demo, played as the north-route lord
 		save.run_records.append("出生：冀州无极")
+	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
+		save.lord_forms = GameData.get_db().lord_forms.keys()
 	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
 		show_screen(TitleScreen.new())
 		var o := PickOverlay.new()
