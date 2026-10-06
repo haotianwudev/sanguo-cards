@@ -805,7 +805,7 @@
 | ⬜ 缺 | `mayunlu` | 马云騄（SR） |
 | ⬜ 缺 | `wangyi` | 王异（SR） |
 | ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
-| ⬜ 缺 | `bianfuren` | 卞夫人（SR） |
+| ✅ 正式 | `bianfuren` | 卞夫人（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
 | ⬜ 缺 | `dongfeng` | 董奉（R） |
 | ⬜ 缺 | `zhangzhao` | 张昭（R） |
