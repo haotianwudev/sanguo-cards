@@ -32,7 +32,7 @@ def hero_note(key: str) -> str:
         return HERO_NORTH
     return HERO
 STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
-PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。")
+PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。")
 # Backgrounds are now atmospheric and character-specific per user directive
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
