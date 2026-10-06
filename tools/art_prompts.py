@@ -1714,15 +1714,7 @@ CHESTS = {
 }
 # already delivered but wrong somewhere: redraw (listed above the batch)
 REDO = [
-    ("guosi", "郭汜改成枪兵：兵器换成长枪（原是长枪+布袋，确认是枪不是刀）"),
-    ("leibo", "雷薄改成枪兵：骑马挺枪，不再是挥舞弯刀"),
     ("yayi", "衙役改成枪兵：手持长枪式水火棍"),
-    ("taihang_yiyong", "太行义勇改成枪兵：兵器换成长枪（旧图是猎弓 / 柴刀）"),
-    ("beihai_tuntian", "北海屯田兵改成枪兵：兵器换成长枪（旧图是原兵器）"),
-    ("heishan_bing", "黑山游骑改成枪兵：兵器换成长枪（旧图是朴刀或长矛，确认是长枪）"),
-    ("huangjin_nanxia", "南下黄巾改成枪兵：兵器换成长枪（旧图是原兵器）"),
-    ("shuizei_bing", "江东水贼改成枪兵：兵器换成长枪（旧图是原兵器）"),
-    ("jingzhou_bu", "荆州步卒改成枪兵：兵器换成长枪（旧图是盾后大刀）"),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
