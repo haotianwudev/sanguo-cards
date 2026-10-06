@@ -359,7 +359,7 @@
 | ✅ 已有 | `c3_guotu_raid` | 郭图寻仇 |
 | ⬜ 缺 | `c3_secret_path` | 黑山秘道 |
 | ⬜ 缺 | `c3_breakout` | 府门突围 |
-| ⬜ 缺 | `c3_guojia_map` | 界桥前夜 |
+| ✅ 已有 | `c3_guojia_map` | 界桥前夜 |
 | ⬜ 缺 | `c3_quyi_camp` | 先登死士 |
 | ⬜ 缺 | `c3_save_zan` | 猛将文丑 |
 | ⬜ 缺 | `c3_banma_flag` | 斑马大旗 |
