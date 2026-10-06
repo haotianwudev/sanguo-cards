@@ -16,6 +16,7 @@ var lord_forms: Dictionary  # id -> {id, name, route, bonus, skills, art}: the l
 var lord_form_grants: Array  # form ids, handed out one per chapter cleared (in order, for the route that matches)
 var endings: Dictionary  # id -> {id, title, route, chapter, kind, who, quest, built, trigger, hint, unlock, cg, text} (data/endings.json)
 var ending_order: Array  # ending ids in file order
+var card_chapters: Dictionary  # card id -> [quest ids] that give it out (story gifts, 招贤 lists, a battle's enemy card); a card in no chapter is 公共
 var kit_default: Dictionary  # troop id -> the kit a card of that troop uses unless it names its own `kit`
 var skills: Dictionary  # id -> {id, name, cost, cumulative, uses (int or null), effects}
 var cards: Dictionary  # id -> {id, name, rarity, troop, bonus, skills, in_pool, person, weight, soldier}
@@ -159,12 +160,42 @@ func _load(dir: String) -> void:
 			"text": ev.get("text", []), "cg": ev.get("cg", ""), "prompt": ev.get("prompt", ""), "scope": ev.get("scope", "south"),
 			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
 				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", []), "needs": o.get("needs", {})})}
+	_index_card_chapters()
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")
 	if FileAccess.file_exists(dir + "/interludes.json"):
 		var il: Dictionary = read_json(dir + "/interludes.json")
 		interludes = il.get("after", {})
+
+
+func _index_card_chapters() -> void:
+	## a card is chapter-specific when a chapter hands it out: a square's `cards` / a choice's `card`, a quest's 招贤 list, or the
+	## `card` of an enemy fought on one of its squares. Everything else is 公共 (the chest's public pool).
+	card_chapters = {}
+	var add := func(cid: String, qid: String):
+		if cid != "" and cards.has(cid):
+			if not card_chapters.has(cid):
+				card_chapters[cid] = []
+			if not card_chapters[cid].has(qid):
+				card_chapters[cid].append(qid)
+	for q in quests:
+		for c in q["recruit_pool"]:
+			add.call(c, q["id"])
+		for o in q["pool_overrides"]:
+			for c in o["recruit_pool"]:
+				add.call(c, q["id"])
+		for s in q["squares"].values():
+			for c in s["cards"]:
+				add.call(c, q["id"])
+			for o in s["choose"]:
+				add.call(o["card"], q["id"])
+			if s["type"] == "battle" and scenarios.has(s["battle"]):
+				add.call(enemies[scenarios[s["battle"]]["enemy"]]["card"], q["id"])
+
+
+func is_public(card_id: String) -> bool:
+	return not card_chapters.has(card_id)
 
 
 func _ending_card(id: Variant) -> Dictionary:

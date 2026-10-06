@@ -21,14 +21,17 @@ func test_recruit_offers_unowned_generals_and_you_keep_one() -> void:
 	check_eq(s.owned, ["guanyu", offer[1]["id"]])
 
 
+func _copies_for(tier_index: int) -> int:
+	## the copies a tier needs (cards.json gacha.tiers: 1 / 4 / 16 / 64)
+	return int(GameData.get_db().gacha["tiers"][tier_index]["copies"])
+
+
 func test_recruiting_everything_empties_the_pool() -> void:
 	var s := SaveData.create()
-	var r := rng(1)
-	for _i in 500:  # every general up to 金
-		var offer := s.recruit_offer(r)
-		if offer.is_empty():
-			break
-		s.take(offer[0]["id"])
+	for r in ["R", "SR", "SSR"]:  # every general in the pool at the top tier
+		for c in s.recruit_pool(r):
+			s.owned.append(c["id"])
+			s.dupes[c["id"]] = _copies_for(GameData.get_db().gacha["tiers"].size() - 1)
 	check_eq(s.pool_left(), 0)
 	check(s.owned.all(func(c): return GameData.get_db().cards[c]["in_pool"]), "story-only cards never offered")
 
@@ -114,18 +117,21 @@ func test_removed_cards_are_dropped_and_save_roundtrips() -> void:
 	check_eq(typeof(again.damage), TYPE_INT)
 
 
-func test_generals_repeat_and_climb_bronze_silver_gold() -> void:
+func test_generals_repeat_and_climb_through_the_tiers() -> void:
 	var s := SaveData.create()
 	s.take("ganning")
-	check_eq(s.tier("ganning"), 0)
+	check_eq(s.tier("ganning"), 0, "铜")
 	var base: int = s.fighter("ganning")["at"]
-	s.take("ganning")
-	check_eq(s.tier("ganning"), 1)
-	check(s.fighter("ganning")["at"] > base, "silver is stronger")
-	s.take("ganning")
-	check_eq(s.tier("ganning"), 1)
-	s.take("ganning")
-	check_eq(s.tier("ganning"), 2)
+	var last := base
+	for k in range(1, GameData.get_db().gacha["tiers"].size()):
+		while s.copies("ganning") < _copies_for(k) - 1:
+			s.take("ganning")
+		check_eq(s.tier("ganning"), k - 1, "one short of tier %d" % k)
+		s.take("ganning")
+		check_eq(s.tier("ganning"), k, "tier %d at %d copies" % [k, _copies_for(k)])
+		var at: int = s.fighter("ganning")["at"]
+		check(at > last, "every tier hits harder")
+		last = at
 	check(s.maxed("ganning"))
 	check_eq(s.owned.count("ganning"), 1)
 
@@ -134,11 +140,11 @@ func test_recruit_offers_can_repeat_owned_but_not_gold_generals() -> void:
 	var s := SaveData.create()
 	for c in GameData.get_db().pool("R"):
 		s.owned.append(c["id"])
-		s.dupes[c["id"]] = 4
+		s.dupes[c["id"]] = _copies_for(GameData.get_db().gacha["tiers"].size() - 1)
 	var r := RandomNumberGenerator.new()
 	for seed_value in 20:
 		r.seed = seed_value
-		check(s.recruit_offer(r).all(func(c): return c["rarity"] != "R"), "gold R cards are out of the pool")
+		check(s.recruit_offer(r).all(func(c): return c["rarity"] != "R"), "top-tier R cards are out of the pool")
 	s.dupes = {}
 	var seen_owned := false
 	for seed_value in 20:
@@ -147,22 +153,30 @@ func test_recruit_offers_can_repeat_owned_but_not_gold_generals() -> void:
 	check(seen_owned, "owned generals can come again")
 
 
-func test_upgrade_jumps_to_the_next_tier() -> void:
+func test_upgrade_jumps_the_configured_number_of_tiers() -> void:
 	var s := SaveData.create()
 	s.take("lvmeng")
-	s.upgrade("lvmeng")
+	s.upgrade("lvmeng", 1)
 	check_eq(s.tier("lvmeng"), 1)
-	s.upgrade("lvmeng")
+	s.upgrade("lvmeng", 1)
 	check_eq(s.tier("lvmeng"), 2)
-	check_eq(s.copies("lvmeng"), 4)
+	check_eq(s.copies("lvmeng"), _copies_for(2))
+	var top: int = GameData.get_db().gacha["tiers"].size() - 1
+	var s2 := SaveData.create()
+	s2.take("lvmeng")
+	s2.upgrade("lvmeng")  # gacha.upgrade_levels
+	check_eq(s2.tier("lvmeng"), mini(s2.upgrade_levels(), top), "点化 raises it by gacha.upgrade_levels, never past the top")
+	s2.upgrade("lvmeng", 9)
+	check_eq(s2.tier("lvmeng"), top)
 
 
 func test_dupes_survive_a_save_roundtrip() -> void:
 	var s := SaveData.create()
-	s.take("lvmeng")
-	s.take("lvmeng")
+	for _i in _copies_for(1):
+		s.take("lvmeng")
 	var back := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
 	check_eq(back.tier("lvmeng"), 1)
+	check_eq(back.copies("lvmeng"), _copies_for(1))
 
 
 func test_story_lines_find_their_speaker() -> void:
@@ -221,12 +235,12 @@ func test_the_lord_card_can_be_drawn() -> void:
 			seen = true
 			break
 	check(seen, "the lord turns up in recruit offers now and then")
-	s.take("lord")
-	check_eq(s.tier("lord"), 1, "a second copy: 银")
+	for _i in _copies_for(1) - 1:
+		s.take("lord")
+	check_eq(s.tier("lord"), 1, "enough copies: 银")
 	check(not s.owned.has("lord") and not s.party.has("lord"), "the lord isn't a collection card")
-	s.take("lord")
-	s.take("lord")
-	check(s.maxed("lord"), "4 copies: 金, then it stops turning up")
+	s.lord_copies = _copies_for(GameData.get_db().gacha["tiers"].size() - 1)
+	check(s.maxed("lord"), "at the top tier it stops turning up")
 	rng.seed = 5
 	for _i in 100:
 		check(not s.recruit_offer(rng).any(func(c): return c["id"] == "lord"))
@@ -236,8 +250,8 @@ func test_the_lord_starts_bronze_and_can_go_up() -> void:
 	var s := SaveData.create()
 	check_eq(s.tier("lord"), 0, "the lord's card starts 铜")
 	var at0: int = s.lord()["at"]
-	s.upgrade("lord")
-	check_eq(s.tier("lord"), 1, "银 after one upgrade")
+	s.upgrade("lord", 1)
+	check_eq(s.tier("lord"), 1, "银 after one level")
 	check(s.lord()["at"] > at0 and s.party_leaders()[0]["card"]["at"] == s.lord()["at"], "a higher tier hits harder, in battle too")
 
 
@@ -249,10 +263,26 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 	s.quests_cleared = ["prologue"]
 	s.flags = ["董白：留下"]
 	s.merit = 7
+	s.lord_copies = _copies_for(1) + 1  # 银 + 1 copy
+	s.dupes["sunce"] = _copies_for(1)  # 银
 	var n := s.new_lap()
 	check_eq(n.lap, 2)
-	check(n.owned.has("sunce") and n.soldiers.get("danyang", 0) == 1 and n.lord_name == "阿明" and n.merit == 7, "cards, name, 战功 kept")
-	check(n.tier("sunce") == s.tier("sunce") and n.tier("lord") == s.tier("lord"), "tiers carried over as they are, no gifts")
+	check(n.owned.is_empty() and n.soldiers.is_empty() and n.party.is_empty() and n.merit == 0, "a new lap starts with nothing: no cards, no 战功")
+	check(n.lord_name == "阿明" and n.seen.has("sunce") and n.seen.has("danyang"), "the name and the history of what you had are kept")
+	check_eq(n.lord_copies, _copies_for(1) + 1, "the lord's level is kept: 银 + 1")
+	check_eq(n.tier("lord"), 1, "…still 银")
+	n.grant_card("lord")
+	check_eq(n.lord_copies, _copies_for(1) + 2, "and drawing the lord again keeps levelling him")
+	n.lord_copies = _copies_for(2) - 1
+	n.grant_card("lord")
+	check_eq(n.tier("lord"), 2, "to 金")
+	n.grant_card("sunce")
+	check_eq(n.tier("sunce"), 1, "a general you drew again comes back at the level he had (银), not 铜")
+	n.grant_card("sunce")
+	check_eq(n.tier("sunce"), 1, "and one more copy carries on from there")
+	check_eq(n.copies("sunce"), _copies_for(1) + 1)
+	var all := s.new_lap(true)
+	check(all.owned.has("sunce") and all.soldiers.get("danyang", 0) == 1 and all.merit == 7, "the test option keeps the whole collection")
 	check(n.quests_cleared.is_empty() and n.flags.is_empty(), "the story starts over")
 	var bat: Dictionary = GameData.get_db().battle
 	var fresh := SaveData.create()
@@ -273,6 +303,7 @@ func test_cards_you_have_had_can_be_drawn_again() -> void:
 	check(s.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "a card you've had can be drawn")
 	var n := s.new_lap()
 	check(n.seen.has("dongbai") and n.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "still drawable next 周目")
+	check(not n.owned.has("dongbai"), "…but not owned any more")
 
 
 func test_relics_belong_to_a_team_and_work_while_it_is_out() -> void:
@@ -419,12 +450,17 @@ func test_the_two_routes_recruit_from_their_own_casts() -> void:
 			check(c.get("scope", "") != "south", "north run: %s is a south general" % c["id"])
 	var n_ids: Array = ["R", "SR", "SSR"].map(func(r): return north.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
 	var s_ids: Array = ["R", "SR", "SSR"].map(func(r): return south.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
-	check(n_ids.has("zhaoyun") and not n_ids.has("sunjian") and s_ids.has("sunjian") and not s_ids.has("zhaoyun"), "each side has its own")
+	check(n_ids.has("zhangliao") and not n_ids.has("lusu") and s_ids.has("lusu") and not s_ids.has("zhangliao"), "each side has its own: " + str(n_ids.size()))
 	check(n_ids.has("guanyu") and s_ids.has("guanyu"), "the ones both stories use are in both")
 	check(n_ids.size() >= 40 and s_ids.size() >= 40, "neither side is thin: %d / %d" % [n_ids.size(), s_ids.size()])
-	var south_with_history := SaveData.create()
-	south_with_history.seen = ["zhaoyun"]
-	check(south_with_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "a general you have had before stays offered, whichever route")
+	var north_history := SaveData.create()
+	north_history.flags = ["出生：冀州无极"]
+	north_history.seen = ["zhaoyun"]  # given out by chapter one: not in the public pool, only in your history
+	check(not north.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "a chapter's own general is not in the public pool")
+	check(north_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "…but one you have had before can come again, on his route")
+	var south_history := SaveData.create()
+	south_history.seen = ["zhaoyun"]
+	check(not south_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "and never on the other route")
 
 
 func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
@@ -449,3 +485,35 @@ func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
 	var north := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "north")
 	var south := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "south")
 	check(north.size() >= 4 and south.size() >= 4, "both routes have their own: %d / %d" % [north.size(), south.size()])
+
+
+func test_chests_draw_from_the_public_pool_the_chapters_soldiers_and_your_history() -> void:
+	var db := GameData.get_db()
+	check(db.is_public("cav_n") and not db.is_public("danyang") and not db.is_public("zhaoyun"), "a card some chapter hands out is not public")
+	var s := SaveData.create()
+	var q := "prologue"
+	var pools := s.chest_pools(q)
+	check(pools["public"]["soldier"].all(func(c): return db.is_public(c["id"])), "public soldiers belong to no chapter")
+	check(pools["public"]["general"].all(func(c): return db.is_public(c["id"])), "nor do public generals")
+	check(pools["chapter"]["soldier"].all(func(c): return db.card_chapters[c["id"]].has(q)), "chapter soldiers are this chapter's")
+	check(pools["history"]["soldier"].is_empty() and pools["history"]["general"].is_empty(), "no history on a fresh save")
+	var all: Array = pools["public"]["soldier"] + pools["chapter"]["soldier"] + pools["public"]["general"] + pools["history"]["general"]
+	check(all.all(func(c): return c.get("scope", "") != "north"), "the south never sees a north card")
+	var north := SaveData.create()
+	north.flags = ["出生：冀州无极"]
+	north.seen = ["danyang", "zhaoyun", "sunjian"]
+	var hist: Dictionary = north.chest_pools(q)["history"]
+	var ids: Array = (hist["soldier"] + hist["general"]).map(func(c): return c["id"])
+	check(ids.has("zhaoyun") and not ids.has("sunjian"), "history keeps to the route: " + str(ids))
+	# a chest really draws from all three
+	var seen_src := {"public": false, "chapter": false, "history": false}
+	for seed_value in 80:
+		var chest := north.chest_mix(rng(seed_value), 3, [], q)
+		for c in chest:
+			if db.is_public(c["id"]):
+				seen_src["public"] = true
+			elif db.card_chapters[c["id"]].has(q):
+				seen_src["chapter"] = true
+			if north.seen.has(c["id"]) and not db.is_public(c["id"]):
+				seen_src["history"] = true
+	check(seen_src["public"] and seen_src["chapter"] and seen_src["history"], "all three sources turn up: " + str(seen_src))

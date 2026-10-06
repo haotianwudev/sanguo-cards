@@ -335,7 +335,7 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 		elif kind == "recruit":
 			cards = save.recruit_offer(rng)
 		else:
-			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), p["soldier_pool"])
+			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), [], q["id"])
 		save.offer = cards.map(func(c): return c["id"])
 	return save.offer.map(func(c): return db.cards[c])
 

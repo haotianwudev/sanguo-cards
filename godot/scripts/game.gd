@@ -6,7 +6,7 @@ var rng := RandomNumberGenerator.new()
 var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false}  # player options, kept in user://options.cfg (not in the save)
+var options := {"fullscreen": false, "fast": false, "inherit_all": false}  # player options, kept in user://options.cfg (not in the save)
 const OPTIONS_PATH := "user://options.cfg"
 
 
@@ -63,8 +63,8 @@ func new_game(lord_name: String) -> void:
 
 
 func new_lap() -> void:
-	## 新周目: the story from the top with the collection carried over (cards ever had can all be drawn)
-	save = SaveData.read().new_lap()
+	## 新周目: the story from the top; the collection starts over (cards ever had can drop again), unless the 设置 test option keeps it
+	save = SaveData.read().new_lap(bool(options["inherit_all"]))
 	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
@@ -461,14 +461,14 @@ func demo(name: String) -> void:
 				m.call_deferred("_on_story_click", m._fake_click())
 			if OS.get_cmdline_user_args().has("--press-continue"):  # then press 继续: it should walk on to 换药
 				m.get_tree().create_timer(0.5).timeout.connect(func(): m._resolve())
-		"tiers":  # 铜 / 银 / 金 frames
-			save.owned = ["sunce", "zhouyu", "sunjian"]
-			save.dupes = {"zhouyu": 2, "sunjian": 4}
+		"tiers":  # 铜 / 银 / 金 / 神 frames
+			save.owned = ["sunce", "zhouyu", "sunjian", "guanyu"]
+			save.dupes = {"zhouyu": 4, "sunjian": 16, "guanyu": 64}
 			show_screen(TitleScreen.new())
 			var o := PickOverlay.new()
-			o.title = "铜 · 银 · 金"
-			o.card_ids = ["sunce", "zhouyu", "sunjian"]
-			o.captions = ["1 张 · 铜", "2 张 · 银", "4 张 · 金"]
+			o.title = "铜 · 银 · 金 · 神"
+			o.card_ids = ["sunce", "zhouyu", "sunjian", "guanyu"]
+			o.captions = ["1 张 · 铜", "4 张 · 银", "16 张 · 金", "64 张 · 神"]
 			o.set_anchors_preset(Control.PRESET_FULL_RECT)
 			root.add_child(o)
 		"title":

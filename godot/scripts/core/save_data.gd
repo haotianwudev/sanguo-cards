@@ -94,17 +94,20 @@ func restore_run() -> void:
 	danger = int(danger)
 
 
-func new_lap() -> SaveData:
-	## 新周目: the story starts over; the whole collection (tiers as they are), the lord, the name and 战功 come
-	## along. No gifts, no other rule changes; the recruit pool also holds every general ever had (recruit_pool).
+func new_lap(inherit_all := false) -> SaveData:
+	## 新周目: everything starts over — the cards you own, 战功, the lord's cards — except what is remembered: every card you have
+	## had (`seen`: it can drop again, see chest_pools), how far each was levelled (`dupes`, `lord_copies`: a 银+1 card comes back
+	## as 银+1 and keeps levelling), the endings and the name. `inherit_all` (the test option in 设置) keeps the whole collection.
 	_sync()
 	var s := SaveData.create()
 	s.lap = lap + 1
 	s.lord_name = lord_name
-	s.merit = merit
-	s.owned = owned.duplicate()
-	s.soldiers = soldiers.duplicate()
-	s.party = party.duplicate()
+	if inherit_all:
+		s.merit = merit
+		s.owned = owned.duplicate()
+		s.soldiers = soldiers.duplicate()
+		s.party = party.duplicate()
+		s.lord_forms = lord_forms.duplicate()
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
 	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
@@ -114,7 +117,6 @@ func new_lap() -> SaveData:
 	s.theme = theme
 	s.dupes = dupes.duplicate()
 	s.lord_copies = lord_copies
-	s.lord_forms = lord_forms.duplicate()
 	return s
 
 
@@ -249,13 +251,19 @@ func lord() -> Dictionary:
 	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), lord_form())
 
 
-func upgrade(card_id: String) -> void:
-	## 升级: straight to the next tier's copy count.
+func upgrade_levels() -> int:
+	return int(_db().gacha.get("upgrade_levels", 1))
+
+
+func upgrade(card_id: String, levels := -1) -> void:
+	## 点化: straight to the copy count of a tier `levels` above (gacha.upgrade_levels: 2 = 铜 → 金), never past the top one.
 	var tiers: Array = _db().gacha["tiers"]
+	if levels < 0:
+		levels = upgrade_levels()
 	if card_id == "lord":
-		lord_copies = maxi(lord_copies, int(tiers[mini(tier("lord") + 1, tiers.size() - 1)]["copies"]))
+		lord_copies = maxi(lord_copies, int(tiers[mini(tier("lord") + levels, tiers.size() - 1)]["copies"]))
 		return
-	var nxt := mini(tier(card_id) + 1, tiers.size() - 1)
+	var nxt := mini(tier(card_id) + levels, tiers.size() - 1)
 	dupes[card_id] = maxi(copies(card_id), int(tiers[nxt]["copies"]))
 
 
@@ -290,14 +298,15 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 
 
 func recruit_pool(rarity: String) -> Array:
-	## the normal pool of this route (a general's `scope`: south / north / "" for both), plus any general you've had before
-	## (story-only ones too, like 董白 or 孙坚)
+	## the public generals of this route (a general's `scope`: south / north / "" for both; chapter-specific ones are not here),
+	## plus the ones you have had before on this route (story-only ones too, like 董白 or 孙坚)
 	var db := _db()
-	var route := "north" if is_north() else "south"
-	var p: Array = db.pool(rarity).filter(func(c): return c.get("scope", "") in ["", route])
-	for cid in seen + owned:
+	var route := route()
+	var p: Array = db.pool(rarity).filter(func(c): return c.get("scope", "") in ["", route] and db.is_public(c["id"]))
+	for cid in seen + owned:  # history (only this route's cards) and whatever you hold
 		var c: Dictionary = db.cards.get(cid, {})
-		if not c.is_empty() and c["rarity"] == rarity and not c["soldier"] and not p.has(c):
+		if not c.is_empty() and c["rarity"] == rarity and not c["soldier"] and not p.has(c) \
+				and (owned.has(cid) or c.get("scope", "") in ["", route]):
 			p.append(c)
 	return p
 
@@ -332,11 +341,11 @@ func chest_chance(overkill: float, boss: bool, bonus := 0.0) -> float:
 
 
 func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool, only: Array = [],
-		enemy_card := "", bonus := 0.0) -> Array:
+		enemy_card := "", bonus := 0.0, chapter := "") -> Array:
 	var g: Dictionary = _db().gacha
 	if rng.randf() >= chest_chance(overkill, boss, bonus):
 		return []
-	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only)
+	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only, chapter)
 	# the beaten enemy's own card may be in there (bosses and elites more often)
 	var db := _db()
 	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"])
@@ -355,16 +364,76 @@ func chest_general_chance() -> float:
 	return minf(0.9, float(cg.get("base", 0.0)) + float(cg.get("per_level", 0.0)) * difficulty)
 
 
-func chest_mix(rng: RandomNumberGenerator, n: int, only: Array = []) -> Array:
-	## a chest's cards: soldiers, each of which may turn into a general (more often at a higher 难度)
-	var cards := chest_offer(rng, n, only)
+func route() -> String:
+	return "north" if is_north() else "south"
+
+
+func chest_pools(chapter := "", only: Array = []) -> Dictionary:
+	## the three places a chest's cards come from, each split into soldiers and generals, all limited to this route's cards
+	## (a card's `scope`: south / north / "" = both):
+	##   public  — cards no chapter hands out (the pool shared by every chapter)
+	##   chapter — soldiers specific to this chapter (plus an explicit `only` list)
+	##   history — cards you have had before, in any 周目 (a new 周目 starts with nothing but may meet them again)
+	var db := _db()
+	var r := route()
+	var out := {"public": {"soldier": [], "general": []}, "chapter": {"soldier": [], "general": []}, "history": {"soldier": [], "general": []}}
+	for c in db.cards.values():
+		if c["id"] == "lord" or c.get("beast", false) or not (c.get("scope", "") in ["", r]):
+			continue
+		var chapters: Array = db.card_chapters.get(c["id"], [])
+		if c["soldier"]:
+			if chapters.is_empty():
+				out["public"]["soldier"].append(c)
+			elif chapter != "" and chapters.has(chapter):
+				out["chapter"]["soldier"].append(c)
+		elif c["in_pool"] and chapters.is_empty():
+			out["public"]["general"].append(c)
+	for cid in only:
+		var c: Dictionary = db.cards.get(cid, {})
+		if not c.is_empty() and c["soldier"] and not out["chapter"]["soldier"].has(c) and c.get("scope", "") in ["", r]:
+			out["chapter"]["soldier"].append(c)
+	for cid in seen:
+		var c: Dictionary = db.cards.get(cid, {})
+		if not c.is_empty() and cid != "lord" and c.get("scope", "") in ["", r]:
+			out["history"]["soldier" if c["soldier"] else "general"].append(c)
+	return out
+
+
+func chest_mix(rng: RandomNumberGenerator, n: int, only: Array = [], chapter := "") -> Array:
+	## a chest's cards: each one is drawn from the public pool, this chapter's soldiers or the cards you have had before
+	## (weights: cards.json gacha.chest_sources); a draw may be a general (more often at a higher 难度)
+	var db := _db()
+	var weights: Dictionary = db.gacha.get("chest_sources", {"public": 4, "chapter": 3, "history": 2})
+	var pools := chest_pools(chapter, only)
 	var chance := chest_general_chance()
-	for i in cards.size():
-		if rng.randf() < chance:
-			var g := recruit_offer(rng, 1)
-			if not g.is_empty() and not cards.has(g[0]):
-				cards[i] = g[0]
-	return cards
+	var out: Array = []
+	for _i in n:
+		var live: Array = []
+		for k in pools:
+			if not _chest_left(pools[k]["soldier"], out).is_empty() or not _chest_left(pools[k]["general"], out).is_empty():
+				live.append(k)
+		if live.is_empty():
+			break
+		var src: String = GameData.weighted_pick(rng, live, live.map(func(k): return float(weights.get(k, 1))))
+		var soldiers: Array = _chest_left(pools[src]["soldier"], out)
+		var generals: Array = _chest_left(pools[src]["general"], out).filter(func(c): return not maxed(c["id"]))
+		var general := not generals.is_empty() and (soldiers.is_empty() or rng.randf() < chance)
+		if general:
+			var rates: Dictionary = db.gacha["rates"]
+			var live_r: Array = []
+			for r in rates:
+				if generals.any(func(c): return c["rarity"] == r):
+					live_r.append(r)
+			var rar: String = GameData.weighted_pick(rng, live_r, live_r.map(func(r): return float(rates[r])))
+			var of_rarity: Array = generals.filter(func(c): return c["rarity"] == rar)
+			out.append(of_rarity[rng.randi_range(0, of_rarity.size() - 1)])
+		else:
+			out.append(GameData.weighted_pick(rng, soldiers, soldiers.map(func(c): return float(c["weight"]))))
+	return out
+
+
+func _chest_left(pool: Array, taken: Array) -> Array:
+	return pool.filter(func(c): return not taken.has(c))
 
 
 func offer_extra() -> int:
@@ -388,6 +457,8 @@ func grant_card(card_id: String) -> void:
 	if card_id == "lord":  # another copy of the lord: maybe a higher tier
 		lord_copies += 1
 		return
+	if not seen.has(card_id):
+		seen.append(card_id)
 	if _db().cards[card_id]["soldier"]:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):

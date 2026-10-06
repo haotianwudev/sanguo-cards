@@ -1024,7 +1024,7 @@ func _offer_caption(c: Dictionary) -> String:
 		return ""
 	var have := save.copies(c["id"])
 	if save.offer_kind == "upgrade":
-		return "%s → %s" % [tiers[save.tier(c["id"])]["name"], tiers[mini(save.tier(c["id"]) + 1, tiers.size() - 1)]["name"]]
+		return "%s → %s" % [tiers[save.tier(c["id"])]["name"], tiers[mini(save.tier(c["id"]) + save.upgrade_levels(), tiers.size() - 1)]["name"]]
 	if have == 0:
 		return "新武将"
 	var after := save.tier(c["id"], have + 1)
@@ -1097,7 +1097,7 @@ func _complete() -> void:
 	var have := Kit.label("", Kit.FONT_BIG, "gold")
 	spend.add_child(have)
 	var draw := Kit.button("抽一次卡（%d 战功）" % int(db.gacha["merit"]["draw"]), "blue")
-	var up := Kit.button("点化一位武将（%d 战功）" % int(db.gacha["merit"]["upgrade"]), "purple")
+	var up := Kit.button("点化一位武将 +%d 级（%d 战功）" % [Game.save.upgrade_levels(), int(db.gacha["merit"]["upgrade"])], "purple")
 	spend.add_child(draw)
 	spend.add_child(up)
 	var refresh_spend := func():
@@ -1118,7 +1118,7 @@ func _complete() -> void:
 		var mine: Array = Game.save.owned.filter(func(c): return not Game.save.maxed(c))
 		mine.shuffle()
 		Game.persist()
-		_pick_then(mine.slice(0, 3), "用战功点化 —— 选一位武将升级", "upgrade", refresh_spend))
+		_pick_then(mine.slice(0, 3), "用战功点化 —— 选一位武将升 %d 级" % Game.save.upgrade_levels(), "upgrade", refresh_spend))
 	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
 	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	go.custom_minimum_size = Vector2(320, 60)
@@ -1137,7 +1137,7 @@ func _pick_then(ids: Array, title: String, kind: String, after: Callable) -> voi
 	o.card_ids = ids
 	if kind == "upgrade":
 		o.captions = ids.map(func(c): return "%s → %s" % [tiers[Game.save.tier(c)]["name"],
-			tiers[mini(Game.save.tier(c) + 1, tiers.size() - 1)]["name"]])
+			tiers[mini(Game.save.tier(c) + Game.save.upgrade_levels(), tiers.size() - 1)]["name"]])
 	else:
 		o.captions = ids.map(func(c): return _offer_caption(GameData.get_db().cards[c]))
 	o.z_index = 70

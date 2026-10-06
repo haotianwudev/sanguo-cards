@@ -95,6 +95,12 @@ func _options() -> void:
 		Game.set_option("fast", on)
 		Engine.time_scale = Game.battle_speed() if in_battle else 1.0)
 	col.add_child(fast)
+	var inherit := CheckButton.new()
+	inherit.text = "新周目继承全部卡牌（测试用）"
+	inherit.button_pressed = bool(Game.options["inherit_all"])
+	inherit.add_theme_font_size_override("font_size", Kit.FONT_BODY)
+	inherit.toggled.connect(func(on): Game.set_option("inherit_all", on))
+	col.add_child(inherit)
 	var back := Kit.button("返回", "gray")
 	back.pressed.connect(_menu)
 	col.add_child(back)

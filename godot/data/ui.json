@@ -36,7 +36,7 @@
   "card": {
     "_comment": "frame art per rarity (see pics/CARD-DESIGN.md). Window/plate come from art/frames/frames.json; missing entries fall back to drawn frames",
     "frames": {"N": "wood", "R": "bronze", "SR": "silver", "SSR": "ssr", "lord": "gold", "enemy": "iron",
-               "tier0": "bronze", "tier1": "silver", "tier2": "gold"},
+               "tier0": "bronze", "tier1": "silver", "tier2": "gold", "tier3": "ssr"},
     "_frames": "generals use tierN (铜/银/金 by copies owned); soldiers use their rarity",
     "plate": [0.29, 0.902, 0.42, 0.074],
     "_plates": "per-frame name plate [x, y, w, h] as fractions of the card; frames without a plate get a drawn band",

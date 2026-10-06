@@ -56,7 +56,7 @@ func _ready() -> void:
 			lap_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			col.add_child(lap_l)
 		if saved != null and not saved.quests_cleared.is_empty():
-			var lap := Kit.button("开始第 %d 周目（继承全部卡牌）" % (saved.lap + 1), "purple", Kit.FONT_BODY)
+			var lap := Kit.button("开始第 %d 周目（%s）" % [saved.lap + 1, "测试：继承全部卡牌" if bool(Game.options["inherit_all"]) else "卡牌重置，级别与曾拿到的卡会保留"], "purple", Kit.FONT_BODY)
 			lap.pressed.connect(Game.new_lap)
 			col.add_child(lap)
 			var replay := Kit.button("重玩章节", "gold")

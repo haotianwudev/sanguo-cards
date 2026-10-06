@@ -185,7 +185,7 @@ func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
 	Quests.choose_event(q, s, rng(0), labels.find("求点化"))
 	check_eq(s.offer, ["sunce"])
 	Quests.resolve(q, s, rng(0), 0)
-	check(s.tier("sunce") == 1 and s.resolved and s.offer_kind == "", "升银")
+	check(s.tier("sunce") == mini(s.upgrade_levels(), GameData.get_db().gacha["tiers"].size() - 1) and s.resolved and s.offer_kind == "", "点化: up gacha.upgrade_levels tiers")
 	var s2 := SaveData.create()
 	Quests.begin(q, s2)
 	s2.square = "road"
@@ -351,8 +351,10 @@ func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 		if sid == "draft":
 			check(ids.all(func(c): return c in q["recruit_pool"]), "征兵 only finds locals")
 		check(not ids.is_empty() and ids.all(func(c): return c in allowed), "%s %s" % [sid, ids])
-	var chest := s.chest_after_battle(rng(1), 0.0, true, allowed)
-	check(chest.all(func(c): return c["id"] in allowed or not c["soldier"]), "battle chest: local soldiers (or a general)")
+	var chest := s.chest_after_battle(rng(1), 0.0, true, [], "", 0.0, q["id"])
+	var db := GameData.get_db()
+	check(chest.all(func(c): return not c["soldier"] or db.is_public(c["id"]) or db.card_chapters[c["id"]].has(q["id"]) or s.seen.has(c["id"])),
+		"battle chest: public cards, this chapter's own soldiers, or what you have had")
 	check_eq(q["squares"]["north"]["cards"], ["danyang", "shuizei_bing", "huangjin_nanxia"], "freed men and prisoners")
 
 
@@ -400,7 +402,7 @@ func test_temple_upgrades_a_general() -> void:
 	s.events = {"road": "temple"}
 	Quests.choose_event(q, s, rng(0), 0)
 	check(s.resolved and s.offer.is_empty(), "no pick: the mountain god chooses")
-	check_eq(s.tier("zhouyu"), 1)
+	check_eq(s.tier("zhouyu"), mini(s.upgrade_levels(), GameData.get_db().gacha["tiers"].size() - 1))
 
 
 func test_elite_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
@@ -984,7 +986,8 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	var south := SaveData.create()
 	check_eq(Quests.grant_lord_form(q, south), "lord_south_armor", "the south route has its own card")
 	var again := s.new_lap()
-	check(again.lord_forms.has("lord_north_silver"), "a new lap keeps the lord cards")
+	check(again.lord_forms.is_empty(), "a new lap starts without the lord cards")
+	check(s.new_lap(true).lord_forms.has("lord_north_silver"), "…unless the test option keeps the collection")
 
 
 func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:

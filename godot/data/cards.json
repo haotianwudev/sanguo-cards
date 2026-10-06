@@ -27,26 +27,23 @@
       "base": 0.15,
       "per_level": 0.15
     },
+    "_chest_sources": "宝箱每张卡从三个池子里抽：public 公共池（没有任何章节发放的卡）、chapter 本章特定的士兵、history 之前拿到过的卡（任何周目）；数字是抽中各池的权重。池子都只含当前路线（南 / 北）和两线通用的卡。",
+    "chest_sources": {
+      "public": 4,
+      "chapter": 3,
+      "history": 2
+    },
     "chest_cards": 2,
     "chest_cards_boss": 3,
     "_tiers": "generals can be drawn again: copies needed for each tier (铜/银/金) and the multiplier on the general's own stats",
     "tiers": [
-      {
-        "name": "铜",
-        "copies": 1,
-        "mult": 1.0
-      },
-      {
-        "name": "银",
-        "copies": 2,
-        "mult": 1.25
-      },
-      {
-        "name": "金",
-        "copies": 4,
-        "mult": 1.6
-      }
+      {"name": "铜", "copies": 1, "mult": 1.0},
+      {"name": "银", "copies": 4, "mult": 1.3},
+      {"name": "金", "copies": 16, "mult": 1.75},
+      {"name": "神", "copies": 64, "mult": 2.4}
     ],
+    "_upgrade_levels": "点化（战功或事件）一次升几个品阶：3 级＝铜→神",
+    "upgrade_levels": 3,
     "_merit": "战功: earned at the end of each chapter (per battle won, extra per boss/elite beaten), kept across chapters, spent in the recap",
     "merit": {
       "per_battle": 1,
