@@ -827,6 +827,6 @@
 | ✅ 正式 | `zhuzhi` | 朱治·君理（R） |
 | ✅ 正式 | `sunben` | 孙贲（R） |
 | ✅ 正式 | `sunjing` | 孙静（R） |
-| ⬜ 缺 | `yanfuren` | 严夫人（R） |
+| ✅ 正式 | `yanfuren` | 严夫人（R） |
 | ⬜ 缺 | `liniang` | 黎娘·山越女王（R） |
 | ⬜ 缺 | `baima_yicong` | 白马义从（R） |
