@@ -239,7 +239,7 @@
         "hs_ignore": {"cg": "c3_leave_ning", "type": "event", "label": "明哲保身", "record": "张宁：没救", "next": ["hs_bad_end"], "text": ["前路尚远，甄家的商队与全军身家压在肩头，你咬了咬牙，下令队伍悄悄后撤。", "{lord}握紧了手中的战枪，最后回望了一眼山谷深处，眼神中满是挣扎。", "层层雾气弥漫的绝壁下，那抹素白的身影已被密密麻麻的黄巾狂徒彻底吞没。", "（你狠心避开了这场险境，退出了太行绝壁。然而乱世的因果，终究不会轻易放过任何人……）"], "y": 2, "x": 15},
         "hs_bad_end": {"type": "event", "cg": "end_fuchao", "text": ["几天后你们空手回了无极。一年后，袁绍兵不血刃入主冀州，郭图带大军包围无极甄家报私仇。你外无援军内无险可守，力战身亡，张夫人乱箭中死在甄宓面前。"], "y": 2, "x": 16, "label": "覆巢", "next": [], "record": "结局六 · 覆巢"},
         "hs_save_fight": {"cg": "c3_save_ning", "type": "battle", "battle": "hs_zhangbaiqi", "elite": true, "label": "战白骑", "next": ["hs_zhangyan"], "text": ["赵云长枪一闪：「主公，是那个张白骑！」", "{lord}拔刀：「连看病的大夫都抢，砍了他！」"], "y": 0, "x": 15},
-        "hs_zhangyan": {"cg": "c3_zhangyan_meet", "type": "event", "label": "黑山大寨", "record": "张宁：救下", "cards": ["zhangning"], "next": ["hs_rest1"], "text": ["那姑娘熟练地给伤兵包扎。她竟然是张角之女——张宁。张宁入队。", "黑山首领张燕跃下崖顶，邀请你们前往黑山大寨。"], "y": 0, "x": 16},
+        "hs_zhangyan": {"cg": "c3_zhangyan_meet", "type": "event", "label": "黑山大寨", "record": "张宁：救下", "portraits": ["zhangning", "zhangyan"], "cards": ["zhangning"], "next": ["hs_rest1"], "text": ["素衣少女熟练地取出金针草药为负伤乡勇止血，向你敛衽一礼：「多谢仗义相救。小女子张宁……家父正是昔日大贤良师张角。」", "话音未落，绝壁之上一声长啸！一道矫健如灵猫的身影自数十丈峭壁上凌空跃下，稳稳落在众人面前，腰间短刃泛着幽光。", "四周千峰万壑之上，顷刻间亮起漫山遍野的猩红火把，数十万黑山军森然林立，声势震动太行！", "那精悍汉子抱拳朗笑道：「在下黑山张燕！听闻常山出了位少年英雄，今日一见名不虚传！这黑山绝顶大寨，可敢去喝碗烈酒？」"], "y": 0, "x": 16},
         "hs_rest1": {"type": "recover", "label": "山寨休整", "next": ["hs_hm1", "hs_hm2"], "y": 1, "x": 17},
         "hs_hm1": {"type": "mystery", "label": "黑山内营", "next": ["hs_hm3"], "y": 0, "x": 18},
         "hs_hm2": {"type": "mystery", "label": "演武场", "next": ["hs_hm3"], "y": 2, "x": 18},
