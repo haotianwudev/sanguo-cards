@@ -12,7 +12,9 @@
 | `shanyue_nu` | source/soldiers/shanyue_nu.jpg | 用户提供 | Antigravity 生成 | — |
 | `lord` | source/generals/lord.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_north` | source/generals/lord_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供 | — |
+| `lord_north_silver` | source/generals/lord_north_silver.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_armor` | source/generals/lord_south_armor.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunce` | source/generals/sunce.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhouyu` | source/generals/zhouyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhouyu_chibi` | source/generals/zhouyu_chibi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wuguotai` | source/generals/wuguotai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -26,14 +28,18 @@
 | `guonvwang` | source/generals/guonvwang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `diaochan` | source/generals/diaochan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `fengfuren` | source/generals/fengfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `ganning` | source/public-domain/ganning.jpg | [链接](https://commons.wikimedia.org/wiki/File:GanNing.jpg) | Public domain | Unknown authorUnknown author |
+| `ganning` | source/generals/ganning.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jinfan_zei` | source/soldiers/jinfan_zei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caifu_nu` | source/soldiers/caifu_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jingzhou_bu` | source/soldiers/jingzhou_bu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jingzhou_shuijun` | source/soldiers/jingzhou_shuijun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guanyu` | source/generals/guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangzhong` | source/generals/huangzhong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `jianyong` | source/public-domain/jianyong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg) | CC BY-SA 4.0 | Morio |
 | `kongrong` | source/generals/kongrong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `liaohua` | source/public-domain/liaohua.jpg | [链接](https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg) | CC BY-SA 3.0 | SamSpade21 |
 | `liubei` | source/generals/liubei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `lvbu` | source/generals/lvbu.jpg | 用户提供 | 用户提供 | — |
+| `lvbu` | source/generals/lvbu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lvlingqi` | source/generals/lvlingqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lvmeng` | source/public-domain/lvmeng.jpg | [链接](https://commons.wikimedia.org/wiki/File:Lu_Meng.jpg) | Public domain | 不詳 (Unknown) |
 | `machao` | source/generals/machao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -66,6 +72,7 @@
 | `huangjin_nvyi` | source/soldiers/huangjin_nvyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiliang_nvbing` | source/soldiers/xiliang_nvbing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yuji` | source/generals/yuji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yudu` | source/generals/yudu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yanzhihu` | source/generals/yanzhihu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `fushui_xintu` | source/soldiers/fushui_xintu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `baie_hu` | source/generals/baie_hu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -77,7 +84,7 @@
 | `liru` | source/generals/liru.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `feixiong_bing` | source/soldiers/feixiong_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiliang_scout` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `xiliang_bing` | source/soldiers/xiliang_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiliang_bing` | source/soldiers/xiliang_bing.jpg | 用户提供 | Antigravity 生成 | — |
 | `xiliang_gongqi` | source/soldiers/xiliang_gongqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangfei` | source/generals/zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `tangji` | source/generals/tangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -90,10 +97,6 @@
 | `shanzei_bing` | source/soldiers/shanzei_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhuzhi` | source/generals/zhuzhi.jpg | 用户提供 | Antigravity 生成 | — |
 | `yuanshao` | source/generals/yuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `mayunlu` | source/generals/mayunlu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `yanfuren` | source/generals/yanfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `bianfuren` | source/generals/bianfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `caifuren` | source/generals/caifuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caocao` | source/generals/caocao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `baosanniang` | source/generals/baosanniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yahuan` | source/soldiers/yahuan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -101,6 +104,7 @@
 | `chuangong` | source/soldiers/chuangong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xianzhen` | source/soldiers/xianzhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `bingzhou` | source/soldiers/bingzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chunyuqiong` | source/generals/chunyuqiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `quyi` | source/generals/quyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `gaoshun` | source/generals/gaoshun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangfusong` | source/generals/huangfusong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -149,6 +153,18 @@
 | `beihai_tuntian` | source/soldiers/beihai_tuntian.jpg | 用户提供 | Antigravity 生成 | — |
 | `huangjin_lishi` | source/soldiers/huangjin_lishi.jpg | 用户提供 | Antigravity 生成 | — |
 | `lulin` | source/soldiers/lulin.jpg | 用户提供 | Antigravity 生成 | — |
+| `caifuren` | source/generals/caifuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bianfuren` | source/generals/bianfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yanfuren` | source/generals/yanfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `mayunlu` | source/generals/mayunlu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zongzei` | source/soldiers/zongzei.jpg | 用户提供 | Antigravity 生成 | — |
+| `jingzhou_gong` | source/soldiers/jingzhou_gong.jpg | 用户提供 | Antigravity 生成 | — |
+| `yizhe` | source/soldiers/yizhe.jpg | 用户提供 | Antigravity 生成 | — |
+| `huofu` | source/soldiers/huofu.jpg | 用户提供 | Antigravity 生成 | — |
+| `baima_yicong` | source/soldiers/baima_yicong.jpg | 用户提供 | Antigravity 生成 | — |
+| `huangjin_vanguard` | source/soldiers/huangjin_vanguard.jpg | 用户提供 | Antigravity 生成 | — |
+| `bandit` | source/soldiers/bandit.jpg | 用户提供 | Antigravity 生成 | — |
+| `huangjin` | source/soldiers/huangjin.jpg | 用户提供 | Antigravity 生成 | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -244,6 +260,7 @@
 | `cg:c1_era` | source/cg/c1_era.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_yazhai` | source/cg/e_yazhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_ln_caocao` | source/cg/c2_ln_caocao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_recruit_board` | source/cg/c3_recruit_board.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_ln_bianshui` | source/cg/c2_ln_bianshui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_bribe_villager` | source/cg/c3_bribe_villager.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_encounter_ning` | source/cg/c3_encounter_ning.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -253,4 +270,5 @@
 | `cg:c3_guojia_map` | source/cg/c3_guojia_map.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_secret_path` | source/cg/c3_secret_path.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_breakout` | source/cg/c3_breakout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `cg:c3_recruit_board` | source/cg/c3_recruit_board.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_xiahoulan_law` | source/cg/c3_xiahoulan_law.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_save_ning` | source/cg/c3_save_ning.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

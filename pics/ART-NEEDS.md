@@ -308,14 +308,16 @@
 
 | 状态 | key | 用在 |
 |---|---|---|
-| ✅ | — | 都有了 |
+| ✅ 正式 | `xiahoulan` | 剧情立绘 |
+| ✅ 正式 | `zhangning` | 剧情立绘 |
+| ✅ 正式 | `zhangyan` | 剧情立绘 |
 
 敌人（战斗界面上方；和它的卡共用一张图）
 
 | 状态 | key | 敌人 |
 |---|---|---|
-| ⬜ 缺 | `yudu` | 黑山叛贼·于毒 |
-| ⬜ 缺 | `chunyuqiong` | 冀州大将·淳于琼 |
+| ✅ 正式 | `yudu` | 黑山叛贼·于毒 |
+| ✅ 正式 | `chunyuqiong` | 冀州大将·淳于琼 |
 | ✅ 正式 | `quyi` | 先登主将·麹义 |
 | ✅ 正式 | `wenchou` | 河北庭柱·文丑 |
 
@@ -323,8 +325,7 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ✅ 正式 | `xiahoulan` | 「铁面军法」夏侯兰 |
-| ✅ 正式 | `zhangning` | 张宁·医仙 |
+| ✅ | — | 都有了 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -348,11 +349,11 @@
 | 状态 | key | 剧情格 |
 |---|---|---|
 | ✅ 已有 | `c3_recruit_board` | 真定发榜 |
-| ⬜ 缺 | `c3_xiahoulan_law` | 军法如山 |
+| ✅ 已有 | `c3_xiahoulan_law` | 军法如山 |
 | ✅ 已有 | `c3_bribe_villager` | 和稀泥 |
 | ✅ 已有 | `c3_encounter_ning` | 深山绝壁 |
 | ✅ 已有 | `c3_leave_ning` | 明哲保身 |
-| ⬜ 缺 | `c3_save_ning` | 战白骑 |
+| ✅ 已有 | `c3_save_ning` | 战白骑 |
 | ⬜ 缺 | `end_fuchao` | 覆巢 |
 | ✅ 已有 | `c3_zhangyan_meet` | 黑山大寨 |
 | ⬜ 缺 | `c3_alliance` | 黑山令 |
@@ -566,11 +567,11 @@
 | ✅ 正式 | `zhenghao` | 郑好 |
 | ✅ 正式 | `jiangqiao` | 姜巧 |
 | ✅ 正式 | `gaoshun` | 高顺 |
-| ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋 |
+| ✅ 正式 | `huangjin_vanguard` | 黄巾前锋 |
 | ✅ 正式 | `guanhai` | 管亥 |
-| ⬜ 缺 | `bandit` | 太行巡山兵 |
+| ✅ 正式 | `bandit` | 太行巡山兵 |
 | ✅ 正式 | `yanliang` | 颜良 |
-| ⬜ 缺 | `huangjin` | 黄巾渠帅 |
+| ✅ 正式 | `huangjin` | 黄巾渠帅 |
 
 能拿到的卡
 
@@ -706,7 +707,7 @@
 | ⬜ 缺 | `simahui` | 事件「水镜先生」 |
 | ⬜ 缺 | `pangdegong` | 事件「岘山老农」 |
 | ⬜ 缺 | `huangchengyan` | 事件「沔南名士」 |
-| 🟡 占位 | `ganning` | 事件「锦帆游侠」 |
+| ✅ 正式 | `ganning` | 事件「锦帆游侠」 |
 | ⬜ 缺 | `kuaiyue` | 剧情立绘 |
 | ✅ 正式 | `caifuren` | 剧情立绘 |
 | ⬜ 缺 | `caimao` | 剧情立绘 |
@@ -716,18 +717,18 @@
 
 | 状态 | key | 敌人 |
 |---|---|---|
-| ⬜ 缺 | `jingzhou_gong` | 荆州弓手 |
+| ✅ 正式 | `jingzhou_gong` | 荆州弓手 |
 | ⬜ 缺 | `huangzu` | 江夏太守黄祖 |
-| ⬜ 缺 | `jinfan_zei` | 锦帆贼 |
-| ⬜ 缺 | `zongzei` | 宗贼 |
-| ⬜ 缺 | `jingzhou_bu` | 荆州步卒 |
+| ✅ 正式 | `jinfan_zei` | 锦帆贼 |
+| ✅ 正式 | `zongzei` | 宗贼 |
+| ✅ 正式 | `jingzhou_bu` | 荆州步卒 |
 
 能拿到的卡
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `jingzhou_shuijun` | 荆州水军（荆州水军的卡） |
-| ⬜ 缺 | `caifu_nu` | 蔡府连弩手（蔡府连弩手的卡） |
+| ✅ 正式 | `jingzhou_shuijun` | 荆州水军（荆州水军的卡） |
+| ✅ 正式 | `caifu_nu` | 蔡府连弩手（蔡府连弩手的卡） |
 | ⬜ 缺 | `wenpin` | 文聘·荆州大将 |
 | ⬜ 缺 | `yiji` | 伊籍 |
 
@@ -794,7 +795,6 @@
 | 🟡 占位 | `pangtong` | 庞统（SR） |
 | ✅ 正式 | `daqiao` | 大乔（SR） |
 | ⬜ 缺 | `huangyueying` | 黄月英（SR） |
-| ✅ 正式 | `zhangyan` | 张燕（SR） |
 | ✅ 正式 | `sunshangxiang` | 孙尚香（SSR） |
 | 🟡 占位 | `dianwei` | 典韦（SSR） |
 | 🟡 占位 | `zhugeliang` | 诸葛亮（SSR） |
@@ -829,4 +829,4 @@
 | ✅ 正式 | `sunjing` | 孙静（R） |
 | ✅ 正式 | `yanfuren` | 严夫人（R） |
 | ⬜ 缺 | `liniang` | 黎娘·山越女王（R） |
-| ⬜ 缺 | `baima_yicong` | 白马义从（R） |
+| ✅ 正式 | `baima_yicong` | 白马义从（R） |

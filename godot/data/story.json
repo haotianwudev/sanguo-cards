@@ -224,7 +224,7 @@
         "hs_m6": {"type": "mystery", "label": "？", "next": ["hs_xiahoulan_pre"], "x": 4, "y": 1},
         "hs_xiahoulan_pre": {"type": "event", "label": "兵痞惹事", "next": ["hs_xiahoulan_choice"], "text": ["手底下新招的兵痞抢了乡亲的鸡，赵云的发小夏侯兰站出来执法，要按军法行刑。"], "x": 5, "y": 1},
         "hs_xiahoulan_choice": {"type": "choose", "label": "军法？", "choose": [{"label": "请他执掌军法", "goto": "hs_junfa"}, {"label": "赔钱了事", "goto": "hs_peiqian"}], "x": 6, "y": 1},
-        "hs_junfa": {"cg": "c3_xiahoulan_law", "type": "event", "label": "军法如山", "record": "军纪：严明", "cards": ["xiahoulan"], "next": ["hs_mountain_start"], "text": ["夏侯兰杀兵立威，主角捏着鼻子认了。队伍的纪律瞬间严明起来。夏侯兰入队。"], "y": 0, "x": 7},
+        "hs_junfa": {"cg": "c3_xiahoulan_law", "type": "event", "label": "军法如山", "record": "军纪：严明", "cards": ["xiahoulan"], "next": ["hs_mountain_start"], "text": ["「军中律令，擅掠百姓禽畜者，按律当笞五十，削籍充苦役！」", "夏侯兰面冷如铁，重重一脚将抢鸡的兵痞踩在尘土里，高举戒尺便要施刑。被抢的老农紧紧搂着芦花鸡，在一旁看得目瞪口呆。", "{lord}尴尬地挠了挠头，拱手陪笑道：「执法严明，理当如此！还请夏侯兄手下留情，饶他一条狗命，往后这营中军纪，便全托付给夏侯兄了！」", "夏侯兰收尺抱拳：「诺！既蒙主公信任，兰愿为主公肃正军纪，令行禁止！」"], "y": 0, "x": 7},
         "hs_peiqian": {"cg": "c3_bribe_villager", "type": "event", "label": "和稀泥", "record": "夏侯兰：打发", "portraits": ["xiahoulan"], "next": ["hs_mountain_start"], "text": ["老农死死护着怀里瑟瑟发抖的母鸡，抹着眼泪敢怒不敢言。", "{lord}擦了擦冷汗，摸出沉甸甸的几串铜钱塞过去：「老丈受惊了！这鸡钱加倍赔您，算我账上！」", "抢鸡的兵痞肩头还扎着两根鸡毛，叉着腰得意咧嘴笑，全无惧色。", "夏侯兰在远处大树下冷眼看着，摇了摇头，抱枪转身离去。", "（你掏钱平了事，把夏侯兰打发走了。然而队伍里的兵痞习气渐长，为日后埋下了隐患……）"], "y": 2, "x": 7},
         "hs_mountain_start": {"type": "mystery", "label": "进山", "next": ["hs_tm1", "hs_tm2"], "x": 8, "y": 1},
         "hs_tm1": {"type": "mystery", "label": "？", "next": ["hs_tm3"], "y": 0, "x": 9},

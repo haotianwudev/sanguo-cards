@@ -94,20 +94,19 @@
     "sunce": {
       "src": "source/generals/sunce.jpg",
       "face": [
-        0.49,
-        0.28
+        0.5,
+        0.27
       ],
-      "head": 0.13,
-      "license": "用户提供",
-      "note": "原图丢失，这是游戏里保留的 640px 版本；有高清原图就替换同名文件"
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
     },
     "zhouyu": {
       "src": "source/generals/zhouyu.jpg",
       "face": [
-        0.51,
-        0.285
+        0.52,
+        0.24
       ],
-      "head": 0.18,
+      "head": 0.24,
       "license": "用户提供（Gemini 生成）"
     },
     "zhouyu_chibi": {
@@ -222,16 +221,49 @@
       "license": "用户提供（Gemini 生成）"
     },
     "ganning": {
-      "src": "source/public-domain/ganning.jpg",
+      "src": "source/generals/ganning.jpg",
+      "face": [
+        0.5,
+        0.23
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jinfan_zei": {
+      "src": "source/soldiers/jinfan_zei.jpg",
       "face": [
         0.55,
-        0.15
+        0.27
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:GanNing.jpg",
-      "license": "Public domain",
-      "artist": "Unknown authorUnknown author"
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "caifu_nu": {
+      "src": "source/soldiers/caifu_nu.jpg",
+      "face": [
+        0.5,
+        0.26
+      ],
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jingzhou_bu": {
+      "src": "source/soldiers/jingzhou_bu.jpg",
+      "face": [
+        0.5,
+        0.25
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jingzhou_shuijun": {
+      "src": "source/soldiers/jingzhou_shuijun.jpg",
+      "face": [
+        0.48,
+        0.22
+      ],
+      "head": 0.18,
+      "license": "用户提供（Gemini 生成）"
     },
     "guanyu": {
       "src": "source/generals/guanyu.jpg",
@@ -296,11 +328,11 @@
     "lvbu": {
       "src": "source/generals/lvbu.jpg",
       "face": [
-        0.49,
-        0.36
+        0.48,
+        0.33
       ],
-      "head": 0.22,
-      "license": "用户提供"
+      "head": 0.2,
+      "license": "用户提供（Gemini 生成）"
     },
     "lvlingqi": {
       "src": "source/generals/lvlingqi.jpg",
@@ -608,6 +640,15 @@
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
     },
+    "yudu": {
+      "src": "source/generals/yudu.jpg",
+      "face": [
+        0.49,
+        0.2
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
+    },
     "yanzhihu": {
       "src": "source/generals/yanzhihu.jpg",
       "face": [
@@ -708,13 +749,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "xiliang_bing": {
-      "src": "source/soldiers/xiliang_scout.jpg",
+      "src": "source/soldiers/xiliang_bing.jpg",
       "face": [
-        0.52,
-        0.22
+        0.53,
+        0.3
       ],
       "head": 0.22,
-      "license": "用户提供（Gemini 生成）"
+      "license": "Antigravity 生成"
     },
     "xiliang_gongqi": {
       "src": "source/soldiers/xiliang_gongqi.jpg",
@@ -824,42 +865,6 @@
       "head": 0.2,
       "license": "用户提供（Gemini 生成）"
     },
-    "mayunlu": {
-      "src": "source/generals/mayunlu.jpg",
-      "face": [
-        0.49,
-        0.25
-      ],
-      "head": 0.23,
-      "license": "用户提供（Gemini 生成）"
-    },
-    "yanfuren": {
-      "src": "source/generals/yanfuren.jpg",
-      "face": [
-        0.5,
-        0.28
-      ],
-      "head": 0.24,
-      "license": "用户提供（Gemini 生成）"
-    },
-    "bianfuren": {
-      "src": "source/generals/bianfuren.jpg",
-      "face": [
-        0.49,
-        0.25
-      ],
-      "head": 0.24,
-      "license": "用户提供（Gemini 生成）"
-    },
-    "caifuren": {
-      "src": "source/generals/caifuren.jpg",
-      "face": [
-        0.5,
-        0.28
-      ],
-      "head": 0.24,
-      "license": "用户提供（Gemini 生成）"
-    },
     "caocao": {
       "src": "source/generals/caocao.jpg",
       "face": [
@@ -921,6 +926,15 @@
         0.33
       ],
       "head": 0.28,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "chunyuqiong": {
+      "src": "source/generals/chunyuqiong.jpg",
+      "face": [
+        0.5,
+        0.2
+      ],
+      "head": 0.24,
       "license": "用户提供（Gemini 生成）"
     },
     "quyi": {
@@ -1354,6 +1368,114 @@
       ],
       "head": 0.28,
       "license": "Antigravity 生成"
+    },
+    "caifuren": {
+      "src": "source/generals/caifuren.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "bianfuren": {
+      "src": "source/generals/bianfuren.jpg",
+      "face": [
+        0.49,
+        0.25
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "yanfuren": {
+      "src": "source/generals/yanfuren.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.24,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "mayunlu": {
+      "src": "source/generals/mayunlu.jpg",
+      "face": [
+        0.49,
+        0.25
+      ],
+      "head": 0.23,
+      "license": "用户提供（Gemini 生成）"
+    },
+    "zongzei": {
+      "src": "source/soldiers/zongzei.jpg",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "jingzhou_gong": {
+      "src": "source/soldiers/jingzhou_gong.jpg",
+      "face": [
+        0.46,
+        0.27
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "yizhe": {
+      "src": "source/soldiers/yizhe.jpg",
+      "face": [
+        0.5,
+        0.24
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "huofu": {
+      "src": "source/soldiers/huofu.jpg",
+      "face": [
+        0.51,
+        0.18
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "baima_yicong": {
+      "src": "source/soldiers/baima_yicong.jpg",
+      "face": [
+        0.51,
+        0.2
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "huangjin_vanguard": {
+      "src": "source/soldiers/huangjin_vanguard.jpg",
+      "face": [
+        0.49,
+        0.32
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "bandit": {
+      "src": "source/soldiers/bandit.jpg",
+      "face": [
+        0.57,
+        0.24
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
+    },
+    "huangjin": {
+      "src": "source/soldiers/huangjin.jpg",
+      "face": [
+        0.5,
+        0.29
+      ],
+      "head": 0.22,
+      "license": "Antigravity 生成"
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -1743,12 +1865,12 @@
       "src": "source/cg/c2_ln_caocao.jpg",
       "license": "用户提供（Gemini 生成）"
     },
-    "c2_ln_bianshui": {
-      "src": "source/cg/c2_ln_bianshui.jpg",
-      "license": "用户提供（Gemini 生成）"
-    },
     "c3_recruit_board": {
       "src": "source/cg/c3_recruit_board.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_bianshui": {
+      "src": "source/cg/c2_ln_bianshui.jpg",
       "license": "用户提供（Gemini 生成）"
     },
     "c3_bribe_villager": {
@@ -1781,6 +1903,14 @@
     },
     "c3_breakout": {
       "src": "source/cg/c3_breakout.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_xiahoulan_law": {
+      "src": "source/cg/c3_xiahoulan_law.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_save_ning": {
+      "src": "source/cg/c3_save_ning.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
