@@ -185,7 +185,7 @@ Adding a portrait, checklist:
 
 ## How the game is modelled (add things through data)
 
-**Story unlocks come from endings, not from the lap number.** A branch opens because the save carries an ending flag (`结局一 · 玉碎`, `结局二 · 同归`, `结局三 · 恨海`, … — they stay in `flags` across 周目); `requires` / `unless` read those flags. `lap` only drives the difficulty head start (`battle.lap_step`) and the title screen — never write a gate as "on lap N"; name the badend that must have happened, and call content "after 结局X" in docs and comments.
+**Story unlocks come from endings, not from the lap number.** A choose option can carry `"requires": "<flag>"` (an ending that must already be in the save's lasting `flags`): until then it is greyed and the button says 「（需先触发「…」）」 (`Quests.option_locked` / `option_hint`). 夏侯兰 (「请他执掌军法」 ← 「结局八 · 门后之诛」, chapter 5, not built yet) and 张宁 (「拔刀相助」 ← 「结局六 · 覆巢」) are gated this way — a recruit that belongs to a badend is locked behind it, not behind a lap. A branch opens because the save carries an ending flag (`结局一 · 玉碎`, `结局二 · 同归`, `结局三 · 恨海`, … — they stay in `flags` across 周目); `requires` / `unless` read those flags. `lap` only drives the difficulty head start (`battle.lap_step`) and the title screen — never write a gate as "on lap N"; name the badend that must have happened, and call content "after 结局X" in docs and comments.
 
 - **Card** (`cards.json` cards): `name, rarity (N = soldier, R/SR/SSR = general), troop, bonus {hp, at}, skills,
   person (shared portrait / one version in a party), pool (false = story or drop only), troop_skills (false = own skills

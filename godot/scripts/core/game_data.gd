@@ -162,9 +162,9 @@ func _load(dir: String) -> void:
 
 
 static func _choose_option(o: Dictionary) -> Dictionary:
-	## A choice on a choose square. `card` (optional) joins the party; `locked` options are shown but can't be picked.
+	## A choice on a choose square. `card` (optional) joins the party; `locked` options are shown but can't be picked; `requires` (a story flag, e.g. an ending that has to have happened before) keeps one locked until the save has it.
 	return {"card": o.get("card", ""), "label": o.get("label", ""), "goto": o.get("goto", ""), "locked": o.get("locked", false),
-		"record": o.get("record", "")}
+		"record": o.get("record", ""), "requires": o.get("requires", "")}
 
 
 func _validate() -> void:

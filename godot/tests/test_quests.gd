@@ -1000,3 +1000,24 @@ func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:
 		check(got != "" and db.lord_forms[got]["route"] == ("north" if k % 2 == 0 else "south"), "a card of this route: " + got)
 		seen[got] = true
 	check_eq(seen.size(), 2, "both routes' cards turn up")
+
+
+func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
+	## 夏侯兰 can only be taken on after 「结局八 · 门后之诛」, 张宁 only after 「结局六 · 覆巢」 (the 张夫人 badend)
+	var db := GameData.get_db()
+	var q: Dictionary = {}
+	for x in db.quests:
+		if x["id"] == "heishan":
+			q = x
+	var save := SaveData.create()
+	var junfa: Dictionary = q["squares"]["hs_xiahoulan_choice"]["choose"][0]
+	var peiqian: Dictionary = q["squares"]["hs_xiahoulan_choice"]["choose"][1]
+	var rescue: Dictionary = q["squares"]["hs_save_choice"]["choose"][0]
+	var ignore: Dictionary = q["squares"]["hs_save_choice"]["choose"][1]
+	check(Quests.option_locked(save, junfa) and Quests.option_locked(save, rescue), "both greyed on a first run")
+	check(not Quests.option_locked(save, peiqian) and not Quests.option_locked(save, ignore), "the other options stay open")
+	check(Quests.option_hint(save, rescue).contains("结局六 · 覆巢"), "and the button says what is needed: " + Quests.option_hint(save, rescue))
+	save.flags = ["结局六 · 覆巢"]
+	check(not Quests.option_locked(save, rescue) and Quests.option_locked(save, junfa), "覆巢 opens 张宁's rescue only")
+	save.flags = ["结局六 · 覆巢", "结局八 · 门后之诛"]
+	check(not Quests.option_locked(save, junfa), "门后之诛 opens 夏侯兰's martial law")

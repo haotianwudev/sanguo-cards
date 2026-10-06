@@ -362,7 +362,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 					gained.append({"id": rid, "name": "宝物·" + db.relics[rid]["name"], "relic": true})
 		"choose":
 			var opt: Dictionary = s["choose"][choice]
-			assert(not opt["locked"], "locked choice")
+			assert(not option_locked(save, opt), "locked choice")
 			save.choices[s["id"]] = opt["goto"]
 			record(save, opt["record"])
 			if opt["card"] != "":
@@ -449,6 +449,16 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 			fresh = ev_pool
 		save.events[s["id"]] = fresh[rng.randi_range(0, fresh.size() - 1)]
 	return GameData.get_db().events[save.events[s["id"]]]
+
+
+static func option_locked(save: SaveData, o: Dictionary) -> bool:
+	## a choose-square option that can't be picked: locked outright, or needing a lasting story flag (an ending reached earlier)
+	return o["locked"] or (o["requires"] != "" and not _flags_hold(o["requires"], save, false))
+
+
+static func option_hint(save: SaveData, o: Dictionary) -> String:
+	## why a gated option is greyed ("" when it isn't, or when it is simply locked)
+	return "（需先触发「%s」）" % o["requires"] if o["requires"] != "" and option_locked(save, o) else ""
 
 
 static func option_blocked(save: SaveData, opt: Dictionary) -> String:

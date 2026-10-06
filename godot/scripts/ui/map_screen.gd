@@ -364,7 +364,7 @@ func _refresh() -> void:
 			if save.choices.has(cur["id"]):
 				nexts = [save.choices[cur["id"]]]
 			else:
-				nexts = cur["choose"].filter(func(o): return not o["locked"]).map(func(o): return o["goto"])
+				nexts = cur["choose"].filter(func(o): return not Quests.option_locked(save, o)).map(func(o): return o["goto"])
 		for n in nexts:
 			if not ahead.has(n):
 				ahead[n] = true
@@ -376,7 +376,7 @@ func _refresh() -> void:
 	for s in q["squares"].values():
 		var targets: Array = s["next"].duplicate()
 		for o in s["choose"]:
-			if not o["locked"]:
+			if not Quests.option_locked(save, o):
 				targets.append(o["goto"])
 		if s["lose_goto"] != "":
 			targets.append(s["lose_goto"])
@@ -606,11 +606,11 @@ func _show_square(s: Dictionary) -> void:
 				var first := true
 				for i in s["choose"].size():
 					var o: Dictionary = s["choose"][i]
-					var b := Kit.button(o["label"], "gold")
-					b.disabled = o["locked"]
+					var b := Kit.button(o["label"] + Quests.option_hint(Game.save, o), "gold")
+					b.disabled = Quests.option_locked(Game.save, o)
 					b.pressed.connect(_resolve.bind(i))
 					buttons.add_child(b)
-					if first and not o["locked"]:
+					if first and not Quests.option_locked(Game.save, o):
 						Kit.focus(b)
 						first = false
 			else:
