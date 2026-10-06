@@ -1056,3 +1056,39 @@ func test_the_book_tracks_which_endings_were_reached() -> void:
 	check_eq(s.endings_reached(), ["yusui", "fuchao"], "this run's own ending counts, in table order")
 	var again := s.new_lap()
 	check(again.endings_reached().has("fuchao"), "kept across 周目")
+
+
+func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() -> void:
+	## every plain fork of 洛阳烟云 / 黑山风云 / 双凤乱太行 (not a story choice, not a requires/unless split) has lanes of 2+ squares,
+	## one with fights, one without (？ / 宝箱 / 招募) — so the choice is "fight for it" or "look around", never one lonely square each
+	var db := GameData.get_db()
+	var forks := 0
+	for qid in ["luoyang_n", "heishan", "beihai"]:
+		var q: Dictionary = {}
+		for x in db.quests:
+			if x["id"] == qid:
+				q = x
+		var sq: Dictionary = q["squares"]
+		var preds := {}
+		for s in sq.values():
+			for n in s["next"]:
+				preds[n] = int(preds.get(n, 0)) + 1
+		for s in sq.values():
+			if s["type"] == "choose" or s["next"].size() < 2:
+				continue
+			if s["next"].any(func(n): return sq[n]["requires"] != "" or sq[n]["unless"] != ""):
+				continue
+			forks += 1
+			var lanes: Array = []
+			for first in s["next"]:
+				var lane: Array = [first]
+				while sq[lane[-1]]["next"].size() == 1 and int(preds.get(sq[lane[-1]]["next"][0], 0)) == 1:
+					lane.append(sq[lane[-1]]["next"][0])
+				lanes.append(lane)
+			var with_fights := 0
+			for lane in lanes:
+				check(lane.size() >= 2, "%s: the lane from %s via %s is a single square" % [qid, s["id"], lane[0]])
+				if lane.any(func(id): return sq[id]["type"] == "battle"):
+					with_fights += 1
+			check(with_fights >= 1 and with_fights < lanes.size(), "%s: the fork at %s needs a fight lane and a no-fight lane" % [qid, s["id"]])
+	check(forks >= 12, "found the forks (%d)" % forks)

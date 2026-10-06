@@ -191,6 +191,17 @@ func demo(name: String) -> void:
 				if sid == at:
 					break
 			show_screen(MapScreen.new())
+		"quest":  # --demo=quest --id=<quest id>: that chapter's map at its first square (north route, earlier chapters cleared)
+			var want := "luoyang_n"
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--id="):
+					want = a.substr(5)
+			var order: Array = GameData.get_db().quests.map(func(x): return x["id"])
+			save.flags = ["出生：冀州无极", "北线：班师冀州", "界桥：救下公孙瓒"]
+			save.quests_cleared = order.slice(0, order.find(want))
+			var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == want)[0]
+			Quests.begin(q, save, rng)
+			show_screen(MapScreen.new())
 		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)
 			save.flags = ["出生：冀州无极"]
 			save.quests_cleared = ["prologue", "taodong"]
