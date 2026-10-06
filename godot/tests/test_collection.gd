@@ -205,6 +205,7 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speakers(["颜良横刀立马：「黑山余党，一个不留！」"])[0], "yanliang", "颜良 recognized")
 	check_eq(Kit.speakers(["马超挺枪厉喝：「西凉锦马超在此，曹贼纳命来！」"])[0], "machao", "马超 recognized")
 	check_eq(Kit.speakers(["马岱按刀沉声道：「兄长放心，后方交予末将。」"])[0], "madai", "马岱 recognized")
+	check_eq(Kit.speakers(["蔡夫人慢慢剥着一颗枇杷：「急什么。朝廷的诏书在他手里，明着动他，就是造反。」"])[0], "caifuren", "蔡夫人 recognized")
 
 
 func test_the_lord_card_can_be_drawn() -> void:

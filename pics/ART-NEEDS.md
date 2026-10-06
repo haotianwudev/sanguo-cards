@@ -708,7 +708,7 @@
 | ⬜ 缺 | `huangchengyan` | 事件「沔南名士」 |
 | 🟡 占位 | `ganning` | 事件「锦帆游侠」 |
 | ⬜ 缺 | `kuaiyue` | 剧情立绘 |
-| ⬜ 缺 | `caifuren` | 剧情立绘 |
+| ✅ 正式 | `caifuren` | 剧情立绘 |
 | ⬜ 缺 | `caimao` | 剧情立绘 |
 | ⬜ 缺 | `liubiao` | 剧情立绘 |
 
