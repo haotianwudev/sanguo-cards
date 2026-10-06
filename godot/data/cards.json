@@ -751,10 +751,10 @@
     "lord_north": {
       "name": "主公（北线）",
       "normal": [
-        "tuji"
+        "tuci"
       ],
       "special": [
-        "tuji",
+        "tuci",
         "duomingqiang"
       ]
     },
@@ -1575,6 +1575,10 @@
         {
           "type": "attack",
           "rate": 2.0
+        },
+        {
+          "type": "counter",
+          "power": 0.5
         }
       ]
     },
@@ -2444,6 +2448,17 @@
         {
           "type": "counter",
           "power": 0.5
+        }
+      ]
+    },
+    "tuci": {
+      "name": "突刺",
+      "cost": 0,
+      "free": true,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 1.0
         }
       ]
     }

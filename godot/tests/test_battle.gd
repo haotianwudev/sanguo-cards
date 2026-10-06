@@ -681,3 +681,14 @@ func test_war_spirit_stacks_four_layers_lifts_attack_and_cuts_damage_then_fades(
 	var g: Dictionary = GameData.get_db().skills["xianji"]
 	check(g["cost"] == 1 and not g["cumulative"] and g["uses"] == null, "料敌先机 is a plain 1 AP skill")
 	check(GameData.get_db().build_fighter("guojia")["skills"].has("xianji"), "郭嘉 has it as his skill")
+
+
+func test_the_north_lord_fights_with_a_spear_not_the_blade() -> void:
+	var db := GameData.get_db()
+	var south := db.build_lord("阿明")
+	var north := db.build_lord("阿明", 1.0, true)
+	check_eq(south["skills"], ["tuji", "rengdao"])
+	check_eq(north["skills"], ["tuci", "duomingqiang"])
+	check(db.skills["duomingqiang"]["effects"].any(func(e): return e["type"] == "counter"), "the spear answers every blow; the thrown blade does not")
+	check(not db.skills["rengdao"]["effects"].any(func(e): return e["type"] == "counter"), "the thrown blade is plain damage")
+	check(db.skills["tuci"]["cost"] == 0 and db.skills["tuci"]["free"], "突刺 is the hero's free strike too")
