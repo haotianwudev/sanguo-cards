@@ -324,16 +324,13 @@
       "artist": "不詳 (Unknown)"
     },
     "machao": {
-      "src": "source/public-domain/machao.jpg",
+      "src": "source/generals/machao.jpg",
       "face": [
-        0.48,
-        0.13
+        0.52,
+        0.27
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:MaChao.jpg",
-      "license": "Public domain",
-      "artist": "Unknown authorUnknown author"
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
     },
     "madai": {
       "src": "source/public-domain/madai.jpg",

@@ -34,7 +34,7 @@
   "lvbu": {"file": "lvbu.jpg", "face": [0.49, 0.36], "head": 0.22},
   "lvlingqi": {"file": "lvlingqi.jpg", "face": [0.52, 0.23], "head": 0.22},
   "lvmeng": {"file": "lvmeng.jpg", "face": [0.4, 0.17], "head": 0.07, "placeholder": true},
-  "machao": {"file": "machao.jpg", "face": [0.48, 0.13], "head": 0.07, "placeholder": true},
+  "machao": {"file": "machao.jpg", "face": [0.52, 0.27], "head": 0.25},
   "madai": {"file": "madai.jpg", "face": [0.45, 0.25], "head": 0.06, "placeholder": true},
   "mifang": {"file": "mifang.jpg", "face": [0.5, 0.28], "head": 0.25},
   "mizhu": {"file": "mizhu.jpg", "face": [0.5, 0.28], "head": 0.25},
