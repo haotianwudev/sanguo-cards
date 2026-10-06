@@ -198,6 +198,7 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speakers(["文丑败退，公孙瓒惊魂未定，当场赠五百匹幽州白马：「这份情，伯珪记下了！」"])[0], "gongsunzan", "公孙瓒 recognized")
 	check_eq(Kit.speakers(["文丑大喝：「休走！」"])[0], "wenchou", "文丑 recognized")
 	check_eq(Kit.speakers(["太史慈引弓如满月：「某去去就回！」"])[0], "taishici", "太史慈 recognized")
+	check_eq(Kit.speakers(["糜竺拨动算盘：「东海糜家愿助玄德公一臂之力。」"])[0], "mizhu", "糜竺 recognized")
 
 
 func test_the_lord_card_can_be_drawn() -> void:

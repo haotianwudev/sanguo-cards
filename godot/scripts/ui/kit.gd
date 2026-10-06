@@ -354,6 +354,7 @@ const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce",
 	"公孙瓒": "gongsunzan", "伯珪": "gongsunzan",
 	"文丑": "wenchou",
 	"太史慈": "taishici", "子义": "taishici",
+	"糜竺": "mizhu", "子仲": "mizhu",
 	"甄宓": "zhenmi_young"}  # TODO: once a later chapter grows her up and wires the real `zhenmi` card, point this at that chapter's own squares only
 static func enemy_portrait_key(enemy: Dictionary) -> String:
 	var key: String = enemy.get("portrait", "")

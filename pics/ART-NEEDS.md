@@ -819,7 +819,7 @@
 | ⬜ 缺 | `jiangqin` | 蒋钦（R） |
 | ✅ 正式 | `chenwu` | 陈武（R） |
 | 🟡 占位 | `jianyong` | 简雍（R） |
-| 🟡 占位 | `mizhu` | 糜竺（R） |
+| ✅ 正式 | `mizhu` | 糜竺（R） |
 | ⬜ 缺 | `sunqian` | 孙乾（R） |
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
 | ✅ 正式 | `chengpu` | 程普·程公（R） |
