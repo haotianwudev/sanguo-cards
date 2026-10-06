@@ -196,6 +196,7 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(k[12], "dongbai", "an @tag names the speaker outright")
 	check_eq(Kit.strip_tag("@dongbai 「师父！」"), "「师父！」")
 	check_eq(Kit.speakers(["文丑败退，公孙瓒惊魂未定，当场赠五百匹幽州白马：「这份情，伯珪记下了！」"])[0], "gongsunzan", "公孙瓒 recognized")
+	check_eq(Kit.speakers(["文丑大喝：「休走！」"])[0], "wenchou", "文丑 recognized")
 
 
 func test_the_lord_card_can_be_drawn() -> void:
@@ -349,6 +350,7 @@ func test_boss_cards_and_xuanjizi_have_portraits() -> void:
 	check_eq(Kit.portrait_key("lidamu_card"), "lidamu")
 	check_eq(Kit.portrait_key("yaodao_card"), "yaodao")
 	check_eq(Kit.portrait_key("dongzhuo_card"), "dongzhuo")
+	check_eq(Kit.portrait_key("wenchou"), "wenchou")
 	var fighter := GameData.get_db().build_fighter("xuanjizi_card")
 	check_eq(fighter.get("person"), "xuanjizi")
 
