@@ -333,16 +333,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "madai": {
-      "src": "source/public-domain/madai.jpg",
+      "src": "source/generals/madai.jpg",
       "face": [
-        0.45,
+        0.52,
         0.25
       ],
-      "head": 0.06,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Ma_Dai_Qing_portrait.jpg",
-      "license": "Public domain",
-      "artist": "Unknown author"
+      "head": 0.23,
+      "license": "用户提供（Gemini 生成）"
     },
     "mifang": {
       "src": "source/generals/mifang.jpg",

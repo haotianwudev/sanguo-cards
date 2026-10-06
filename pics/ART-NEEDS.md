@@ -813,7 +813,7 @@
 | ⬜ 缺 | `qiaoguolao` | 乔国老（R） |
 | ⬜ 缺 | `zhoucang` | 周仓（R） |
 | 🟡 占位 | `liaohua` | 廖化（R） |
-| 🟡 占位 | `madai` | 马岱（R） |
+| ✅ 正式 | `madai` | 马岱（R） |
 | ⬜ 缺 | `wangping` | 王平（R） |
 | ⬜ 缺 | `lidian` | 李典（R） |
 | ⬜ 缺 | `jiangqin` | 蒋钦（R） |

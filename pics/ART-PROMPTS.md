@@ -60,7 +60,6 @@
 51. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
 52. `mateng` — 马腾（北线第八、九章）（立绘）
 53. `hansui` — 韩遂（北线第八章）（立绘）
-55. `madai` — 马岱（北线第九章）（立绘）
 56. `pangde` — 庞德（北线第九章）（立绘）
 57. `tadun` — 蹋顿（北线第九章）（立绘）
 58. `gongsunkang` — 公孙康（北线第九章）（立绘）
@@ -1607,32 +1606,6 @@ Han Sui (韩遂), the wily old fox of Xiliang的竖版人物立绘。
 铠甲与服饰：Xiliang leather armor under a fur cloak.
 武器：Twirling his beard, a sheathed sword at his side.
 背景：a Xiliang camp on the steppe。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
-### `madai` 🟡 换掉占位
-
-```
-马岱（马超的堂弟，北线第九章入队）的竖版人物立绘。
-外貌：容貌端正，英气威严
-铠甲与服饰：西凉轻甲、褐色披风
-武器：二十多岁，沉稳机警，比马超朴素；手持长刀
-背景：西凉骑兵的营地。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Ma Dai (马岱), Ma Chao's steady cousin的竖版人物立绘。
-外貌：Steady, alert man in his 20s, plainer than his cousin.
-铠甲与服饰：Xiliang light armor and a brown cape.
-武器：A long saber.
-背景：a Xiliang cavalry camp。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```

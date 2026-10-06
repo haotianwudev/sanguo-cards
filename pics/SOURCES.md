@@ -37,7 +37,7 @@
 | `lvlingqi` | source/generals/lvlingqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lvmeng` | source/public-domain/lvmeng.jpg | [链接](https://commons.wikimedia.org/wiki/File:Lu_Meng.jpg) | Public domain | 不詳 (Unknown) |
 | `machao` | source/generals/machao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `madai` | source/public-domain/madai.jpg | [链接](https://commons.wikimedia.org/wiki/File:Ma_Dai_Qing_portrait.jpg) | Public domain | Unknown author |
+| `madai` | source/generals/madai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mifang` | source/generals/mifang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mizhu` | source/generals/mizhu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `pangtong` | source/public-domain/pangtong.jpg | [链接](https://commons.wikimedia.org/wiki/File:PangTong.jpg) | Public domain | Unknown authorUnknown author |
