@@ -1086,21 +1086,6 @@
         }
       ]
     },
-    "baojia": {
-      "name": "鲍家枪",
-      "cost": 2,
-      "cumulative": true,
-      "effects": [
-        {
-          "type": "attack",
-          "rate": 1.5
-        },
-        {
-          "type": "counter",
-          "power": 0.5
-        }
-      ]
-    },
     "jiuji": {
       "name": "冀城九计",
       "cost": 2,
@@ -1939,26 +1924,6 @@
         }
       ]
     },
-    "qijin": {
-      "name": "七进七出",
-      "cost": 2,
-      "cumulative": true,
-      "effects": [
-        {
-          "type": "attack",
-          "rate": 1.5,
-          "hits": 2
-        },
-        {
-          "type": "guard",
-          "cut": 0.2
-        },
-        {
-          "type": "counter",
-          "power": 0.5
-        }
-      ]
-    },
     "xiaoji": {
       "name": "枭姬",
       "cost": 2,
@@ -2467,23 +2432,8 @@
         }
       ]
     },
-    "zhangba": {
-      "name": "丈八蛇矛",
-      "cost": 2,
-      "cumulative": true,
-      "effects": [
-        {
-          "type": "attack",
-          "rate": 1.5
-        },
-        {
-          "type": "counter",
-          "power": 0.5
-        }
-      ]
-    },
-    "beidiqiang": {
-      "name": "北地枪",
+    "qiangpo": {
+      "name": "枪破千军",
       "cost": 2,
       "cumulative": true,
       "effects": [
@@ -3342,7 +3292,7 @@
         "at": 25
       },
       "skills": [
-        "zhangba",
+        "qiangpo",
         "roar"
       ]
     },
@@ -3488,7 +3438,7 @@
         "at": 30
       },
       "skills": [
-        "qijin",
+        "qiangpo",
         "changban"
       ]
     },
@@ -3949,7 +3899,7 @@
         "at": 19
       },
       "skills": [
-        "baojia"
+        "qiangpo"
       ]
     },
     "wangyi": {
@@ -4194,7 +4144,7 @@
       },
       "pool": false,
       "skills": [
-        "beidiqiang"
+        "qiangpo"
       ]
     },
     "jingzhou_shuijun": {
