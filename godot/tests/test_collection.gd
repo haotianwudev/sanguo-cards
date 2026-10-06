@@ -195,6 +195,7 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(k[11], "sunjian", "他: the latest man")
 	check_eq(k[12], "dongbai", "an @tag names the speaker outright")
 	check_eq(Kit.strip_tag("@dongbai 「师父！」"), "「师父！」")
+	check_eq(Kit.speakers(["文丑败退，公孙瓒惊魂未定，当场赠五百匹幽州白马：「这份情，伯珪记下了！」"])[0], "gongsunzan", "公孙瓒 recognized")
 
 
 func test_the_lord_card_can_be_drawn() -> void:

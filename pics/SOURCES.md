@@ -118,6 +118,7 @@
 | `lidamu` | source/generals/lidamu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xuanjizi` | source/generals/xuanjizi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caohong` | source/generals/caohong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `gongsunzan` | source/generals/gongsunzan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yayi` | source/soldiers/yayi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangbaiqi` | source/generals/zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guotu` | source/generals/guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
