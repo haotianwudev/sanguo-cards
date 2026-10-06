@@ -1532,17 +1532,6 @@
         }
       ]
     },
-    "maoshuo": {
-      "name": "马槊",
-      "cost": 2,
-      "cumulative": true,
-      "effects": [
-        {
-          "type": "attack",
-          "hits": 3
-        }
-      ]
-    },
     "zhenjiu": {
       "name": "鸩酒",
       "cost": 2,
@@ -2490,6 +2479,106 @@
           "power": 1.0
         }
       ]
+    },
+    "jiufa": {
+      "name": "九伐中原",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.2
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "qiaobian": {
+      "name": "巧变",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.5
+        }
+      ]
+    },
+    "baimajiang": {
+      "name": "白马将军",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "luofeng": {
+      "name": "落凤",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "baierzhan": {
+      "name": "白毦死战",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
+    "ziwu": {
+      "name": "子午奇谋",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "ap",
+          "amount": 2
+        }
+      ]
+    },
+    "bashi": {
+      "name": "拔矢啖睛",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "boost",
+          "target": "self"
+        }
+      ]
     }
   },
   "cards": {
@@ -3156,7 +3245,7 @@
     "leibo": {
       "name": "雷薄",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "spear",
       "bonus": {
         "hp": 40,
         "at": 15
@@ -3166,7 +3255,7 @@
     "fanchou": {
       "name": "樊稠",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "spear",
       "bonus": {
         "hp": 45,
         "at": 15
@@ -3196,7 +3285,7 @@
     "huzhen": {
       "name": "胡轸",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "spear",
       "bonus": {
         "hp": 45,
         "at": 14
@@ -3698,13 +3787,13 @@
     "guosi": {
       "name": "郭汜",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "spear",
       "bonus": {
         "hp": 45,
         "at": 14
       },
       "skills": [
-        "maoshuo"
+        "qiangpo"
       ],
       "pool": false
     },
@@ -4387,7 +4476,7 @@
     "yayi_card": {
       "name": "衙役",
       "rarity": "N",
-      "troop": "infantry",
+      "troop": "spear",
       "person": "yayi",
       "bonus": {},
       "pool": false
@@ -4486,6 +4575,318 @@
         "at": 18
       },
       "pool": false
+    },
+    "youzhou_qiang": {
+      "name": "幽州长枪兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 25,
+        "at": 6
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "bingzhou_qiang": {
+      "name": "并州枪卫",
+      "rarity": "N",
+      "elite": true,
+      "troop": "spear",
+      "bonus": {
+        "hp": 20,
+        "at": 9
+      },
+      "weight": 1,
+      "scope": "north"
+    },
+    "changshan_qiang": {
+      "name": "常山枪兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 30,
+        "at": 7
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "jizhou_ji": {
+      "name": "冀州长戟兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 35,
+        "at": 5
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "xiliang_maozi": {
+      "name": "西凉长矛手",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 20,
+        "at": 8
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "danyang_qiang": {
+      "name": "丹阳枪兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 30,
+        "at": 6
+      },
+      "weight": 2,
+      "scope": "south"
+    },
+    "xuzhou_qiang": {
+      "name": "徐州枪兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 25,
+        "at": 5
+      },
+      "weight": 2,
+      "scope": "south"
+    },
+    "tengjia_qiang": {
+      "name": "藤甲枪兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 40,
+        "at": 4
+      },
+      "weight": 2
+    },
+    "bashu_qiang": {
+      "name": "巴蜀长枪兵",
+      "rarity": "N",
+      "troop": "spear",
+      "bonus": {
+        "hp": 25,
+        "at": 7
+      },
+      "weight": 2
+    },
+    "yulin_lang": {
+      "name": "羽林郎",
+      "rarity": "N",
+      "elite": true,
+      "troop": "spear",
+      "bonus": {
+        "hp": 30,
+        "at": 9
+      },
+      "weight": 1
+    },
+    "wudang_feijun": {
+      "name": "无当飞军",
+      "rarity": "N",
+      "elite": true,
+      "troop": "spear",
+      "bonus": {
+        "hp": 30,
+        "at": 10
+      },
+      "weight": 1
+    },
+    "jinwei_ji": {
+      "name": "禁卫长戟营",
+      "rarity": "N",
+      "elite": true,
+      "troop": "spear",
+      "bonus": {
+        "hp": 40,
+        "at": 8
+      },
+      "weight": 1
+    },
+    "jiangwei": {
+      "name": "姜维",
+      "rarity": "SSR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 95,
+        "at": 31
+      },
+      "skills": [
+        "qiangpo",
+        "jiufa"
+      ]
+    },
+    "zhanghe": {
+      "name": "张郃",
+      "rarity": "SR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 65,
+        "at": 20
+      },
+      "skills": [
+        "qiangpo",
+        "qiaobian"
+      ]
+    },
+    "gongsunzan": {
+      "name": "公孙瓒",
+      "rarity": "SR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 70,
+        "at": 19
+      },
+      "skills": [
+        "qiangpo",
+        "baimajiang"
+      ]
+    },
+    "zhangren": {
+      "name": "张任",
+      "rarity": "SR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 62,
+        "at": 21
+      },
+      "skills": [
+        "qiangpo",
+        "luofeng"
+      ]
+    },
+    "chendao": {
+      "name": "陈到",
+      "rarity": "SR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 72,
+        "at": 19
+      },
+      "skills": [
+        "qiangpo",
+        "baierzhan"
+      ]
+    },
+    "weiyan": {
+      "name": "魏延",
+      "rarity": "SR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 60,
+        "at": 23
+      },
+      "skills": [
+        "qiangpo",
+        "ziwu"
+      ]
+    },
+    "xiahoudun": {
+      "name": "夏侯惇",
+      "rarity": "SR",
+      "troop": "spear",
+      "bonus": {
+        "hp": 80,
+        "at": 21
+      },
+      "skills": [
+        "qiangpo",
+        "bashi"
+      ]
+    },
+    "guanping": {
+      "name": "关平",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 50,
+        "at": 13
+      }
+    },
+    "zhangbao": {
+      "name": "张苞",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 55,
+        "at": 14
+      }
+    },
+    "guanxing": {
+      "name": "关兴",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 50,
+        "at": 13
+      }
+    },
+    "yanyan": {
+      "name": "严颜",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 60,
+        "at": 12
+      }
+    },
+    "chenglian": {
+      "name": "成廉",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 50,
+        "at": 13
+      }
+    },
+    "weixu": {
+      "name": "魏续",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 45,
+        "at": 12
+      }
+    },
+    "lingtong": {
+      "name": "凌统",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 50,
+        "at": 15
+      }
+    },
+    "yangang": {
+      "name": "严纲",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 50,
+        "at": 12
+      }
+    },
+    "gaolan": {
+      "name": "高览",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 55,
+        "at": 14
+      }
+    },
+    "zoudan": {
+      "name": "邹丹",
+      "rarity": "R",
+      "troop": "spear",
+      "bonus": {
+        "hp": 45,
+        "at": 13
+      }
     }
   },
   "enemies": {

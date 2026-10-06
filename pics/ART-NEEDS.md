@@ -272,7 +272,10 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ✅ | — | 都有了 |
+| ⬜ 缺 | `xiliang_maozi` | 西凉长矛手 |
+| ⬜ 缺 | `jizhou_ji` | 冀州长戟兵 |
+| ⬜ 缺 | `chenglian` | 成廉 |
+| ⬜ 缺 | `weixu` | 魏续 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -325,7 +328,10 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ✅ | — | 都有了 |
+| ⬜ 缺 | `yangang` | 严纲 |
+| ⬜ 缺 | `zoudan` | 邹丹 |
+| ⬜ 缺 | `gaolan` | 高览 |
+| ⬜ 缺 | `zhanghe` | 张郃 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -584,6 +590,8 @@
 | ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
 | ✅ 正式 | `beihai_tuntian` | 北海屯田兵 |
 | ✅ 正式 | `qingzhou` | 青州兵（黄巾渠帅的卡） |
+| ✅ 正式 | `gongsunzan` | 公孙瓒 |
+| ⬜ 缺 | `bingzhou_qiang` | 并州枪卫 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -807,6 +815,11 @@
 | ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
 | ✅ 正式 | `bianfuren` | 卞夫人（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
+| ⬜ 缺 | `jiangwei` | 姜维（SSR） |
+| ⬜ 缺 | `zhangren` | 张任（SR） |
+| ⬜ 缺 | `chendao` | 陈到（SR） |
+| ⬜ 缺 | `weiyan` | 魏延（SR） |
+| ⬜ 缺 | `xiahoudun` | 夏侯惇（SR） |
 | ⬜ 缺 | `dongfeng` | 董奉（R） |
 | ⬜ 缺 | `zhangzhao` | 张昭（R） |
 | ⬜ 缺 | `bulianshi` | 步练师（R） |
@@ -830,3 +843,8 @@
 | ✅ 正式 | `yanfuren` | 严夫人（R） |
 | ⬜ 缺 | `liniang` | 黎娘·山越女王（R） |
 | ✅ 正式 | `baima_yicong` | 白马义从（R） |
+| ⬜ 缺 | `guanping` | 关平（R） |
+| ⬜ 缺 | `zhangbao` | 张苞（R） |
+| ⬜ 缺 | `guanxing` | 关兴（R） |
+| ⬜ 缺 | `yanyan` | 严颜（R） |
+| ⬜ 缺 | `lingtong` | 凌统（R） |

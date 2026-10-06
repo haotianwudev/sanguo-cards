@@ -378,3 +378,29 @@ func test_skills_come_from_kits_not_troops_and_a_card_can_name_its_own() -> void
 	check_eq(db.build_fighter("gaoshun")["skills"], db.kits["spear"]["special"], "the card's own kit wins over its troop's default")
 	db.cards["gaoshun"]["kit"] = before
 	check_eq(db.build_fighter("gaoshun")["skills"], db.default_kit("infantry", true), "back on the troop default")
+
+
+func test_the_spear_troop_is_a_big_one_with_a_shared_signature() -> void:
+	var db := GameData.get_db()
+	var spear: Array = db.cards.values().filter(func(c): return c["troop"] == "spear")
+	var soldiers: Array = spear.filter(func(c): return c["soldier"])
+	var generals: Array = spear.filter(func(c): return not c["soldier"])
+	check(soldiers.size() >= 15 and generals.size() >= 30, "%d soldiers, %d generals" % [soldiers.size(), generals.size()])
+	for c in generals:
+		if c["rarity"] in ["SR", "SSR"] and c["id"] != "xuhuang":
+			var own: Array = c["skills"].filter(func(s): return s != "qiangpo")
+			check(c["skills"].has("qiangpo") or c["skills"].is_empty() or c["id"] in ["zhangren", "zhanghe", "xiahoudun"], "%s shares 枪破千军" % c["id"])
+			check(own.size() <= 1 and own.all(func(s): return db.skills[s]["uses"] == 1), "%s: whatever is his own is a once-only 大招" % c["id"])
+
+
+func test_north_chapters_one_to_three_draw_north_spear_cards() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	for q in db.quests:
+		if q["id"] in ["prologue", "luoyang_n", "heishan"]:
+			var p := Quests.pools(q, s)
+			var soldier_ok: bool = p["soldier_pool"].any(func(c): return db.cards[c]["troop"] == "spear" and db.cards[c]["scope"] == "north")
+			var recruit_ok: bool = p["recruit_pool"].any(func(c): return db.cards[c]["troop"] == "spear")
+			check(soldier_ok, "%s: north spear soldiers in its chests" % q["id"])
+			check(recruit_ok and p["recruit_pool"].all(func(c): return db.cards[c]["scope"] != "south"), "%s: its recruit squares offer spear cards, none of the south's" % q["id"])
