@@ -404,3 +404,24 @@ func test_north_chapters_one_to_three_draw_north_spear_cards() -> void:
 			var recruit_ok: bool = p["recruit_pool"].any(func(c): return db.cards[c]["troop"] == "spear")
 			check(soldier_ok, "%s: north spear soldiers in its chests" % q["id"])
 			check(recruit_ok and p["recruit_pool"].all(func(c): return db.cards[c]["scope"] != "south"), "%s: its recruit squares offer spear cards, none of the south's" % q["id"])
+
+
+func test_the_two_routes_recruit_from_their_own_casts() -> void:
+	## 南北对称、其余分开: a general's scope keeps the 江东 cast out of the north's offers and the 河北 cast out of the south's
+	var db := GameData.get_db()
+	var south := SaveData.create()
+	var north := SaveData.create()
+	north.flags = ["出生：冀州无极"]
+	for r in ["R", "SR", "SSR"]:
+		for c in south.recruit_pool(r):
+			check(c.get("scope", "") != "north", "south run: %s is a north general" % c["id"])
+		for c in north.recruit_pool(r):
+			check(c.get("scope", "") != "south", "north run: %s is a south general" % c["id"])
+	var n_ids: Array = ["R", "SR", "SSR"].map(func(r): return north.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
+	var s_ids: Array = ["R", "SR", "SSR"].map(func(r): return south.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
+	check(n_ids.has("zhaoyun") and not n_ids.has("sunjian") and s_ids.has("sunjian") and not s_ids.has("zhaoyun"), "each side has its own")
+	check(n_ids.has("guanyu") and s_ids.has("guanyu"), "the ones both stories use are in both")
+	check(n_ids.size() >= 40 and s_ids.size() >= 40, "neither side is thin: %d / %d" % [n_ids.size(), s_ids.size()])
+	var south_with_history := SaveData.create()
+	south_with_history.seen = ["zhaoyun"]
+	check(south_with_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "a general you have had before stays offered, whichever route")

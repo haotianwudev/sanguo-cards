@@ -290,9 +290,11 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 
 
 func recruit_pool(rarity: String) -> Array:
-	## the normal pool, plus any general you've had before (story-only ones too, like 董白 or 孙坚)
+	## the normal pool of this route (a general's `scope`: south / north / "" for both), plus any general you've had before
+	## (story-only ones too, like 董白 or 孙坚)
 	var db := _db()
-	var p: Array = db.pool(rarity)
+	var route := "north" if is_north() else "south"
+	var p: Array = db.pool(rarity).filter(func(c): return c.get("scope", "") in ["", route])
 	for cid in seen + owned:
 		var c: Dictionary = db.cards.get(cid, {})
 		if not c.is_empty() and c["rarity"] == rarity and not c["soldier"] and not p.has(c):

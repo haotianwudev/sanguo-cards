@@ -106,8 +106,7 @@ func _do_jump(jump: Dictionary) -> void:
 
 
 const _CARD_TABS := [["SSR", "SSR"], ["SR", "SR"], ["R", "R"], ["N", "兵卡"], ["story", "剧情 / 敌方卡"]]
-const _CG_GROUPS := {"c1": "第一章", "c2": "第二章", "c3": "第三章", "c4": "第四章", "c5": "第五章", "jz": "北线一章",
-	"ln": "北线二章", "e": "随机事件", "i": "幕间", "end": "结局"}
+const _CG_GROUPS := {"c1": "第一章（南线）", "jz": "第一章（北线）", "e": "随机事件", "i": "幕间", "end": "结局"}  # prefix groups for what no quest square owns
 
 
 ## a gallery: a row of category tabs over a scroll area; only the picked category is built (and its art loaded)
@@ -174,6 +173,7 @@ func _cg_keys() -> Dictionary:
 	## ResourceLoader.list_directory, not DirAccess: an exported APK packs only the imported copies, so a raw
 	## directory listing shows `xxx.jpg.import` and never `xxx.jpg` — the gallery came up empty on phones.
 	var groups := {}
+	var owners := _cg_owners()
 	for f in ResourceLoader.list_directory("res://data/art/cg"):
 		if not f.ends_with(".jpg"):
 			continue
@@ -181,8 +181,8 @@ func _cg_keys() -> Dictionary:
 		var g := key.get_slice("_", 0)
 		if g.begins_with("i") and g.length() <= 2:
 			g = "i"
-		if key.begins_with("c2_ln_"):
-			g = "ln"
+		if owners.has(key) and owners[key] != "prologue":  # a chapter's own squares say where it belongs (south / north split by the data)
+			g = "q:" + owners[key]
 		if not groups.has(g):
 			groups[g] = []
 		groups[g].append(key)
@@ -191,13 +191,40 @@ func _cg_keys() -> Dictionary:
 	return groups
 
 
+func _cg_owners() -> Dictionary:
+	## CG key -> the id of the first chapter whose squares show it (story.json is the source of truth, not the file name)
+	var out := {}
+	for q in GameData.get_db().quests:
+		for s in q["squares"].values():
+			if s["cg"] != "" and not out.has(s["cg"]):
+				out[s["cg"]] = q["id"]
+	return out
+
+
+func _cg_group_label(g: String) -> String:
+	if g.begins_with("q:"):
+		for q in GameData.get_db().quests:
+			if q["id"] == g.substr(2):
+				return "%s（%s）" % [q["title"], "北线" if q["event_scope"] == "north" else "南线"]
+	return _CG_GROUPS.get(g, g)
+
+
 func _cgs_panel() -> Control:
 	var groups := _cg_keys()
-	var order: Array = _CG_GROUPS.keys().filter(func(g): return groups.has(g))
+	var order: Array = []
+	for g in ["c1", "jz"]:  # the prologue is shared by both routes: its two halves lead
+		if groups.has(g):
+			order.append(g)
+	for q in GameData.get_db().quests:
+		if groups.has("q:" + q["id"]):
+			order.append("q:" + q["id"])
+	for g in _CG_GROUPS.keys():
+		if groups.has(g) and not order.has(g):
+			order.append(g)
 	for g in groups:  # a prefix nobody named yet still shows up, under its raw name
 		if not order.has(g):
 			order.append(g)
-	var tabs: Array = order.map(func(g): return [g, "%s（%d）" % [_CG_GROUPS.get(g, g), groups[g].size()]])
+	var tabs: Array = order.map(func(g): return [g, "%s（%d）" % [_cg_group_label(g), groups[g].size()]])
 	return _gallery(tabs, func(g: String) -> Control:
 		var grid := GridContainer.new()
 		grid.columns = 5

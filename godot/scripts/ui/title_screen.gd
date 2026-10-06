@@ -96,6 +96,6 @@ func _replay_menu(col: VBoxContainer, saved: SaveData) -> void:
 		if not saved.quests_cleared.has(q["id"]):
 			continue
 		var n := int(saved.clears.get(q["id"], 1))
-		var b := Kit.button("%s　（通关 %d 次 · 进阶 +%d%%）" % [q["title"], n, int(round(n * step * 100))], "gold", Kit.FONT_BODY)
+		var b := Kit.button("%s（%s）　（通关 %d 次 · 进阶 +%d%%）" % [q["title"], "北线" if q["event_scope"] == "north" else "南线", n, int(round(n * step * 100))], "gold", Kit.FONT_BODY)
 		b.pressed.connect(Game.replay_chapter.bind(q["id"]))
 		box.add_child(b)

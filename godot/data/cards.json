@@ -2843,7 +2843,8 @@
       },
       "skills": [
         "zhiqun"
-      ]
+      ],
+      "scope": "south"
     },
     "zhangzhongjing": {
       "name": "张仲景",
@@ -2869,7 +2870,8 @@
       "skills": [
         "xinglin",
         "jiedu"
-      ]
+      ],
+      "scope": "south"
     },
     "zhangzhao": {
       "name": "张昭",
@@ -2881,7 +2883,8 @@
       },
       "skills": [
         "neishi"
-      ]
+      ],
+      "scope": "south"
     },
     "xiaoqiao": {
       "name": "小乔",
@@ -2894,7 +2897,8 @@
       "skills": [
         "qinse",
         "jiedu"
-      ]
+      ],
+      "scope": "south"
     },
     "zhenmi": {
       "name": "甄宓",
@@ -2906,7 +2910,8 @@
       },
       "skills": [
         "luoshen"
-      ]
+      ],
+      "scope": "north"
     },
     "bulianshi": {
       "name": "步练师",
@@ -2918,7 +2923,8 @@
       },
       "skills": [
         "annei"
-      ]
+      ],
+      "scope": "south"
     },
     "qiaoguolao": {
       "name": "乔国老",
@@ -2930,7 +2936,8 @@
       },
       "skills": [
         "jiazhuang"
-      ]
+      ],
+      "scope": "south"
     },
     "huofu": {
       "name": "伙夫",
@@ -3125,7 +3132,8 @@
       "bonus": {
         "hp": 30,
         "at": 10
-      }
+      },
+      "scope": "north"
     },
     "wangping": {
       "name": "王平",
@@ -3142,7 +3150,8 @@
       "bonus": {
         "hp": 30,
         "at": 6
-      }
+      },
+      "scope": "north"
     },
     "jiangqin": {
       "name": "蒋钦",
@@ -3151,7 +3160,8 @@
       "bonus": {
         "hp": 30,
         "at": 10
-      }
+      },
+      "scope": "south"
     },
     "zhujun": {
       "name": "朱儁",
@@ -3336,7 +3346,8 @@
       "bonus": {
         "hp": 35,
         "at": 11
-      }
+      },
+      "scope": "south"
     },
     "jianyong": {
       "name": "简雍",
@@ -3381,7 +3392,8 @@
       "bonus": {
         "hp": 40,
         "at": 10
-      }
+      },
+      "scope": "north"
     },
     "peiyuanshao": {
       "name": "裴元绍",
@@ -3390,7 +3402,8 @@
       "bonus": {
         "hp": 30,
         "at": 8
-      }
+      },
+      "scope": "north"
     },
     "machao": {
       "name": "马超",
@@ -3402,7 +3415,8 @@
       },
       "skills": [
         "xiliang"
-      ]
+      ],
+      "scope": "north"
     },
     "zhangliao": {
       "name": "张辽",
@@ -3414,7 +3428,8 @@
       },
       "skills": [
         "liaolai"
-      ]
+      ],
+      "scope": "north"
     },
     "zhangfei": {
       "name": "张飞",
@@ -3439,7 +3454,8 @@
       },
       "skills": [
         "duanliang"
-      ]
+      ],
+      "scope": "north"
     },
     "huangzhong": {
       "name": "黄忠",
@@ -3451,7 +3467,8 @@
       },
       "skills": [
         "baibu"
-      ]
+      ],
+      "scope": "south"
     },
     "ganning": {
       "name": "甘宁",
@@ -3463,7 +3480,8 @@
       },
       "skills": [
         "jinfan"
-      ]
+      ],
+      "scope": "south"
     },
     "xuchu": {
       "name": "许褚",
@@ -3475,7 +3493,8 @@
       },
       "skills": [
         "luoyi"
-      ]
+      ],
+      "scope": "north"
     },
     "liubei": {
       "name": "刘备",
@@ -3499,7 +3518,8 @@
       },
       "skills": [
         "lianhuan"
-      ]
+      ],
+      "scope": "south"
     },
     "daqiao": {
       "name": "大乔",
@@ -3511,7 +3531,8 @@
       },
       "skills": [
         "guose"
-      ]
+      ],
+      "scope": "south"
     },
     "huangyueying": {
       "name": "黄月英",
@@ -3535,7 +3556,8 @@
       },
       "skills": [
         "feiyan"
-      ]
+      ],
+      "scope": "north"
     },
     "yuji": {
       "name": "于吉",
@@ -3573,7 +3595,8 @@
       "skills": [
         "qiangpo",
         "changban"
-      ]
+      ],
+      "scope": "north"
     },
     "sunshangxiang": {
       "name": "孙尚香",
@@ -3586,7 +3609,8 @@
       "skills": [
         "xiaoji",
         "gongyaoji"
-      ]
+      ],
+      "scope": "south"
     },
     "dianwei": {
       "name": "典韦",
@@ -3598,7 +3622,8 @@
       },
       "skills": [
         "shuangji"
-      ]
+      ],
+      "scope": "north"
     },
     "zhugeliang": {
       "name": "诸葛亮",
@@ -3655,7 +3680,8 @@
       },
       "skills": [
         "kurou"
-      ]
+      ],
+      "scope": "south"
     },
     "lvmeng": {
       "name": "吕蒙",
@@ -3667,7 +3693,8 @@
       },
       "skills": [
         "baiyi"
-      ]
+      ],
+      "scope": "south"
     },
     "taishici": {
       "name": "太史慈",
@@ -3679,7 +3706,8 @@
       },
       "skills": [
         "shenting"
-      ]
+      ],
+      "scope": "north"
     },
     "sunce_zhong": {
       "name": "孙策·中年",
@@ -3693,7 +3721,8 @@
       "skills": [
         "bawang",
         "dujiang"
-      ]
+      ],
+      "scope": "south"
     },
     "zhouyu_chibi": {
       "name": "周瑜·赤壁",
@@ -3706,7 +3735,8 @@
       },
       "skills": [
         "chibi"
-      ]
+      ],
+      "scope": "south"
     },
     "luxun": {
       "name": "陆逊",
@@ -3718,7 +3748,8 @@
       },
       "skills": [
         "lianying"
-      ]
+      ],
+      "scope": "south"
     },
     "sunjian": {
       "name": "孙坚",
@@ -3731,7 +3762,8 @@
       "skills": [
         "menghu",
         "guding"
-      ]
+      ],
+      "scope": "south"
     },
     "wuguotai": {
       "name": "吴夫人·慈母",
@@ -3832,7 +3864,8 @@
       },
       "skills": [
         "yindi"
-      ]
+      ],
+      "scope": "south"
     },
     "chengpu": {
       "name": "程普·程公",
@@ -3844,7 +3877,8 @@
       },
       "skills": [
         "tiji"
-      ]
+      ],
+      "scope": "south"
     },
     "handang": {
       "name": "韩当",
@@ -3856,7 +3890,8 @@
       },
       "skills": [
         "qishe"
-      ]
+      ],
+      "scope": "south"
     },
     "zhuzhi": {
       "name": "朱治·君理",
@@ -3866,7 +3901,8 @@
         "hp": 45,
         "at": 12
       },
-      "skills": []
+      "skills": [],
+      "scope": "south"
     },
     "wujing": {
       "name": "吴景",
@@ -3878,7 +3914,8 @@
       },
       "skills": [
         "hujie"
-      ]
+      ],
+      "scope": "south"
     },
     "sunben": {
       "name": "孙贲",
@@ -3890,7 +3927,8 @@
       },
       "skills": [
         "jixi"
-      ]
+      ],
+      "scope": "south"
     },
     "sunjing": {
       "name": "孙静",
@@ -3902,7 +3940,8 @@
       },
       "skills": [
         "shoujia"
-      ]
+      ],
+      "scope": "south"
     },
     "gongnv": {
       "name": "宫女",
@@ -3948,7 +3987,8 @@
       },
       "skills": [
         "yanzhi"
-      ]
+      ],
+      "scope": "south"
     },
     "huangjin_nvyi": {
       "name": "黄巾女医",
@@ -3972,7 +4012,8 @@
       "skills": [
         "jinzhen",
         "jiedu"
-      ]
+      ],
+      "scope": "north"
     },
     "zuoci": {
       "name": "左慈·乌角先生",
@@ -3997,7 +4038,8 @@
       "skills": [
         "feidao",
         "huoshen"
-      ]
+      ],
+      "scope": "south"
     },
     "lvlingqi": {
       "name": "吕玲绮·温侯之女",
@@ -4009,7 +4051,8 @@
       },
       "skills": [
         "huaji"
-      ]
+      ],
+      "scope": "north"
     },
     "mayunlu": {
       "name": "马云騄",
@@ -4021,7 +4064,8 @@
       },
       "skills": [
         "yunlu"
-      ]
+      ],
+      "scope": "north"
     },
     "baosanniang": {
       "name": "鲍三娘",
@@ -4045,7 +4089,8 @@
       },
       "skills": [
         "jiuji"
-      ]
+      ],
+      "scope": "north"
     },
     "xinxianying": {
       "name": "辛宪英",
@@ -4069,7 +4114,8 @@
       },
       "skills": [
         "zhenbian"
-      ]
+      ],
+      "scope": "south"
     },
     "bianfuren": {
       "name": "卞夫人",
@@ -4081,7 +4127,8 @@
       },
       "skills": [
         "xianhou"
-      ]
+      ],
+      "scope": "north"
     },
     "yanfuren": {
       "name": "严夫人",
@@ -4093,7 +4140,8 @@
       },
       "skills": [
         "quanfu"
-      ]
+      ],
+      "scope": "north"
     },
     "liniang": {
       "name": "黎娘·山越女王",
@@ -4105,7 +4153,8 @@
       },
       "skills": [
         "dujian"
-      ]
+      ],
+      "scope": "south"
     },
     "diaochan": {
       "name": "貂蝉",
@@ -4343,7 +4392,8 @@
       "bonus": {
         "hp": 55,
         "at": 13
-      }
+      },
+      "scope": "south"
     },
     "yiji": {
       "name": "伊籍",
@@ -4352,7 +4402,8 @@
       "bonus": {
         "hp": 35,
         "at": 14
-      }
+      },
+      "scope": "south"
     },
     "huangzu": {
       "name": "黄祖·江夏太守",
@@ -4398,7 +4449,8 @@
       "skills": [
         "xianji",
         "shisheng"
-      ]
+      ],
+      "scope": "north"
     },
     "changshan_tieqi": {
       "name": "常山铁骑",
@@ -4731,7 +4783,8 @@
       "skills": [
         "qiangpo",
         "qiaobian"
-      ]
+      ],
+      "scope": "north"
     },
     "gongsunzan": {
       "name": "公孙瓒",
@@ -4744,7 +4797,8 @@
       "skills": [
         "qiangpo",
         "baimajiang"
-      ]
+      ],
+      "scope": "north"
     },
     "zhangren": {
       "name": "张任",
@@ -4796,7 +4850,8 @@
       "skills": [
         "qiangpo",
         "bashi"
-      ]
+      ],
+      "scope": "north"
     },
     "guanping": {
       "name": "关平",
@@ -4841,7 +4896,8 @@
       "bonus": {
         "hp": 50,
         "at": 13
-      }
+      },
+      "scope": "north"
     },
     "weixu": {
       "name": "魏续",
@@ -4850,7 +4906,8 @@
       "bonus": {
         "hp": 45,
         "at": 12
-      }
+      },
+      "scope": "north"
     },
     "lingtong": {
       "name": "凌统",
@@ -4859,7 +4916,8 @@
       "bonus": {
         "hp": 50,
         "at": 15
-      }
+      },
+      "scope": "south"
     },
     "yangang": {
       "name": "严纲",
@@ -4868,7 +4926,8 @@
       "bonus": {
         "hp": 50,
         "at": 12
-      }
+      },
+      "scope": "north"
     },
     "gaolan": {
       "name": "高览",
@@ -4877,7 +4936,8 @@
       "bonus": {
         "hp": 55,
         "at": 14
-      }
+      },
+      "scope": "north"
     },
     "zoudan": {
       "name": "邹丹",
@@ -4886,7 +4946,8 @@
       "bonus": {
         "hp": 45,
         "at": 13
-      }
+      },
+      "scope": "north"
     }
   },
   "enemies": {
