@@ -201,6 +201,7 @@ func test_story_lines_find_their_speaker() -> void:
 	check_eq(Kit.speakers(["糜竺拨动算盘：「东海糜家愿助玄德公一臂之力。」"])[0], "mizhu", "糜竺 recognized")
 	check_eq(Kit.speakers(["糜芳满身是血踉跄而来：「曹军屠城，徐州危在旦夕！」"])[0], "mifang", "糜芳 recognized")
 	check_eq(Kit.speakers(["孔融捋须：「北海百姓认你，这印，让给你。」"])[0], "kongrong", "孔融 recognized")
+	check_eq(Kit.speakers(["管亥倒拖长刀而出，大喝：「谁来受死！」"])[0], "guanhai", "管亥 recognized")
 
 
 func test_the_lord_card_can_be_drawn() -> void:

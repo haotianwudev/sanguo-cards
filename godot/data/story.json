@@ -256,7 +256,7 @@
         "hs_pursuit2": {"type": "battle", "battle": "hs_jizhou_nu", "label": "冀州强弩", "next": ["hs_em4"], "text": ["漫天弩箭射来。赵云拨落箭雨：「主公先走！」"], "x": 31, "y": 1},
         "hs_em4": {"type": "mystery", "label": "？", "next": ["hs_chunyuqiong"], "y": 1, "x": 32},
         "hs_chunyuqiong": {"type": "battle", "battle": "hs_chunyuqiong", "label": "太行山口", "next": ["hs_jieqiao_eve"], "text": ["淳于琼带着冀州重兵在山口堵住了去路：「留下甄家家财，饶你们不死！」"], "x": 33, "y": 1},
-        "hs_jieqiao_eve": {"cg": "c3_guojia_map", "type": "event", "label": "界桥前夜", "next": ["hs_jm1", "hs_jm2"], "text": ["【初平三年·春】打退了淳于琼，队伍终于安全。此时传来消息，袁绍和公孙瓒在界桥摆开了阵。", "郭嘉在地图上点了点：「两边都不是好东西。可公孙瓒要是死了，袁绍明天就能收拾太行山。」"], "x": 34, "y": 1},
+        "hs_jieqiao_eve": {"cg": "c3_guojia_map", "type": "event", "label": "界桥前夜", "portraits": ["guojia", "zhaoyun", "zhangyan"], "next": ["hs_jm1", "hs_jm2"], "text": ["【初平三年·春】浴血杀出太行山口，队伍终得喘息。然而前哨飞马急报，袁绍与公孙瓒数十万大军已在界桥陈兵对峙！", "深夜军帐之内，烛火摇曳。郭嘉手执青铜酒樽，慢条斯理地提着马鞭指向铺展在帅案上的行军舆图。", "郭嘉微抿烈酒，唇角勾起一抹玩味的笑意：「袁绍势大，公孙瓒暴烈，两边虽非善类……但公孙伯珪若是败亡，袁本初下一步便要踏平太行。」", "赵云按枪沉吟，张燕抱臂冷笑。郭嘉马鞭在界桥渡口重重一点：「这一局界桥死斗，合该由咱们去掀了棋盘！」"], "x": 34, "y": 1},
         "hs_jm1": {"type": "mystery", "label": "界桥外围", "next": ["hs_jm3"], "y": 0, "x": 35},
         "hs_jm2": {"type": "mystery", "label": "荒野", "next": ["hs_jieqiao_scout"], "y": 2, "x": 35},
         "hs_jm3": {"type": "mystery", "label": "？", "next": ["hs_jieqiao_archers"], "x": 37, "y": 1},

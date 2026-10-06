@@ -567,7 +567,7 @@
 | ✅ 正式 | `jiangqiao` | 姜巧 |
 | ✅ 正式 | `gaoshun` | 高顺 |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋 |
-| ⬜ 缺 | `guanhai` | 管亥 |
+| ✅ 正式 | `guanhai` | 管亥 |
 | ⬜ 缺 | `bandit` | 太行巡山兵 |
 | ⬜ 缺 | `yanliang` | 颜良 |
 | ⬜ 缺 | `huangjin` | 黄巾渠帅 |
