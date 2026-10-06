@@ -160,5 +160,17 @@
   "baima_yicong": {"file": "baima_yicong.jpg", "face": [0.51, 0.2], "head": 0.22},
   "huangjin_vanguard": {"file": "huangjin_vanguard.jpg", "face": [0.49, 0.32], "head": 0.22},
   "bandit": {"file": "bandit.jpg", "face": [0.57, 0.24], "head": 0.22},
-  "huangjin": {"file": "huangjin.jpg", "face": [0.5, 0.29], "head": 0.22}
+  "huangjin": {"file": "huangjin.jpg", "face": [0.5, 0.29], "head": 0.22},
+  "changshan_qinwei": {"file": "changshan_qinwei.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "fucong": {"file": "fucong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jiading": {"file": "jiading.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jiangdong_qinwei": {"file": "jiangdong_qinwei.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "mafu": {"file": "mafu.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "qinwei": {"file": "qinwei.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "shinv": {"file": "shinv.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "shutong": {"file": "shutong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhenfu_chuniang": {"file": "zhenfu_chuniang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhenfu_jiading": {"file": "zhenfu_jiading.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhenfu_xiunv": {"file": "zhenfu_xiunv.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhenfu_yahuan": {"file": "zhenfu_yahuan.jpg", "face": [0.5, 0.22], "head": 0.22}
 }
