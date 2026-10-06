@@ -28,7 +28,7 @@ def hero_note(key: str) -> str:
     ## which outfit line a CG gets: before the transmigration (the opening), the north route, or the south default
     if key in ("c1_era",):
         return HERO_MODERN
-    if key and key.startswith(("jz_", "ln_")):
+    if key and (key.startswith(("jz_", "ln_")) or key.endswith("_north")):
         return HERO_NORTH
     return HERO
 STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
@@ -1140,6 +1140,8 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "defeat_south": "the defeat card of the south route: the lord has fallen at dusk on a muddy battlefield, his huge old broadsword planted in the ground beside him, a torn red Sun banner in the wind; restrained, no blood",
+    "defeat_north": "the defeat card of the north route: the lord has fallen in the snow at dusk, his white-wax spear planted upright beside him with a red knot fluttering below the blade; restrained, no blood",
     "c3_recruit_board": "a recruitment board at the gate of Zhending: the hero slapping his chest proudly before a wooden notice board, Zhao Yun standing by with his silver spear, a crowd of simple villagers watching with amusement",
     "c3_bribe_villager": "a village road in Changshan: the hero awkwardly pressing copper coins into a villager's hands, a rogue soldier smirking nearby, Xiahou Lan watching coldly from a distance",
     "c3_encounter_ning": "a cliffside in the Taihang mountains: Zhang Ning (a young woman in white with a medicine box) holding a gold needle coldly defying a mob of Yellow Turban zealots; the bandit leader Zhang Baiqi laughing and pointing at her",
@@ -1404,6 +1406,8 @@ UI_ART = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
+    ("cg", "defeat_south", "阵亡 CG · 南线（主角倒在黄昏的泥泞战场上，古锭刀插在身旁，克制不见血）"),
+    ("cg", "defeat_north", "阵亡 CG · 北线（主角倒在黄昏的雪原上，白蜡杆长枪插在身旁，克制不见血）"),
     ("portrait", "qinwei", "主公亲卫（主角队新增：亲卫 / 侍从）"),
     ("portrait", "jiading", "家丁（主角队新增：亲卫 / 侍从）"),
     ("portrait", "shutong", "书童（主角队新增：亲卫 / 侍从）"),

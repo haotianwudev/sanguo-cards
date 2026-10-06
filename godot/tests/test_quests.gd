@@ -1020,9 +1020,9 @@ func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
 	check(Quests.option_locked(save, junfa) and Quests.option_locked(save, rescue), "both greyed on a first run")
 	check(not Quests.option_locked(save, peiqian) and not Quests.option_locked(save, ignore), "the other options stay open")
 	check(Quests.option_hint(save, rescue).contains("结局六 · 覆巢"), "and the button says what is needed: " + Quests.option_hint(save, rescue))
-	save.flags = ["结局六 · 覆巢"]
+	save.flags = ["出生：冀州无极", "结局六 · 覆巢"]
 	check(not Quests.option_locked(save, rescue) and Quests.option_locked(save, junfa), "覆巢 opens 张宁's rescue only")
-	save.flags = ["结局六 · 覆巢", "结局八 · 门后之诛"]
+	save.flags = ["出生：冀州无极", "结局六 · 覆巢", "结局八 · 门后之诛"]
 	check(not Quests.option_locked(save, junfa), "门后之诛 opens 夏侯兰's martial law")
 
 

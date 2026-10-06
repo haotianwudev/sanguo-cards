@@ -265,6 +265,7 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 	s.merit = 7
 	s.lord_copies = _copies_for(1) + 1  # 银 + 1 copy
 	s.dupes["sunce"] = _copies_for(1)  # 银
+	s.commit_history()  # an ending was reached with these cards in hand
 	var n := s.new_lap()
 	check_eq(n.lap, 2)
 	check(n.owned.is_empty() and n.soldiers.is_empty() and n.party.is_empty() and n.merit == 0, "a new lap starts with nothing: no cards, no 战功")
@@ -287,8 +288,7 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 	var bat: Dictionary = GameData.get_db().battle
 	var fresh := SaveData.create()
 	check_eq(Quests.mods(fresh)["enemy"], 0.0, "lap 1, first stage: no climb yet")
-	check(is_equal_approx(Quests.mods(n)["enemy"], float(bat["lap_step"])), "lap 2 starts on the lap head start")
-	check(Quests.mods(n)["enemy"] > Quests.mods(fresh)["enemy"], "a new lap's first stage is harder than the last lap's first stage")
+	check_eq(Quests.mods(n)["enemy"], 0.0, "a new lap with no new ending is not harder")
 	var mid := SaveData.create()
 	mid.quests_cleared = ["prologue", "taodong"]
 	check(is_equal_approx(Quests.mods(mid)["enemy"], 2.0 * float(bat["chapter_step"])), "each chapter cleared makes the next stage harder")
@@ -298,9 +298,14 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 
 func test_cards_you_have_had_can_be_drawn_again() -> void:
 	var s := SaveData.create()
-	s.grant_card("dongbai")  # story-only: not in the normal recruit pool
+	s.take("dongbai")  # drawn, not given by the story (she is story-only: not in the normal recruit pool)
+	s.grant_card("zhouyu", true)  # given by a story square
 	var rarity: String = GameData.get_db().cards["dongbai"]["rarity"]
-	check(s.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "a card you've had can be drawn")
+	check(s.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "a card you hold can be drawn")
+	var lost := s.new_lap()
+	check(not lost.seen.has("dongbai"), "a run that never reached an ending leaves no history")
+	s.commit_history()  # an ending
+	check(s.seen.has("dongbai") and not s.seen.has("zhouyu"), "at an ending: what you drew joins the history, what the story gave does not")
 	var n := s.new_lap()
 	check(n.seen.has("dongbai") and n.recruit_pool(rarity).any(func(c): return c["id"] == "dongbai"), "still drawable next 周目")
 	check(not n.owned.has("dongbai"), "…but not owned any more")
@@ -517,3 +522,41 @@ func test_chests_draw_from_the_public_pool_the_chapters_soldiers_and_your_histor
 			if north.seen.has(c["id"]) and not db.is_public(c["id"]):
 				seen_src["history"] = true
 	check(seen_src["public"] and seen_src["chapter"] and seen_src["history"], "all three sources turn up: " + str(seen_src))
+
+
+func test_difficulty_levels_are_unlocked_by_endings_and_each_route_counts_apart() -> void:
+	var db := GameData.get_db()
+	var step := float(db.battle["ending_step"])
+	var fresh := SaveData.create()
+	check_eq(fresh.route_max_level(), 1, "a new save offers difficulty 1 only")
+	var south := SaveData.create()
+	south.flags = ["结局一 · 玉碎", "结局六 · 覆巢"]
+	check_eq(south.route_max_level(), 2, "south: 玉碎 opens 2 (覆巢 is the north's)")
+	var north := SaveData.create()
+	north.flags = ["出生：冀州无极", "结局一 · 玉碎", "结局六 · 覆巢", "结局七 · 绝罚"]
+	check_eq(north.route_max_level(), 3, "north: 覆巢 and 绝罚 open 3 (玉碎 is the south's)")
+	south.play_level = 2
+	check(is_equal_approx(Quests.mods(south)["enemy"], step), "difficulty 2: +ending_step")
+	south.play_level = 9
+	check_eq(south.effective_level(), 2, "never above what the route has unlocked")
+	south.play_level = 1
+	check(is_equal_approx(Quests.mods(south)["enemy"], 0.0), "difficulty 1 adds nothing")
+
+
+func test_playing_below_the_level_an_ending_opens_keeps_its_story_shut() -> void:
+	var db := GameData.get_db()
+	var q: Dictionary = {}
+	for x in db.quests:
+		if x["id"] == "heishan":
+			q = x
+	var rescue: Dictionary = q["squares"]["hs_save_choice"]["choose"][0]  # needs 「结局六 · 覆巢」 (level 2)
+	var s := SaveData.create()
+	s.flags = ["出生：冀州无极", "结局六 · 覆巢"]
+	s.play_level = 1
+	check(Quests.option_locked(s, rescue), "chosen difficulty 1: the flag is there but the story it opens does not run — the same badend again")
+	s.play_level = 2
+	check(not Quests.option_locked(s, rescue), "difficulty 2: it does")
+	s.play_level = 1
+	s.run_records = ["结局六 · 覆巢"]
+	Quests.complete(db.quests[0], s)
+	check(s.flags.has("结局六 · 覆巢"), "the badend is recorded either way")

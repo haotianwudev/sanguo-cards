@@ -54,7 +54,9 @@ var fate_offer: Array = []  # the fates to pick from at the start of a run
 var affixes: Dictionary = {}  # square id -> 词缀 id for this run's elites and bosses
 var unworn: Array = []  # 宝物 left in the card pool (not worn: no effect)
 var benched: Array = []  # cards left behind: not in any unit (never a leader)
-var seen: Array = []  # every general ever owned, across 周目: they can all be drawn again
+var seen: Array = []  # the history across 周目: cards you held when an ending was reached (not ones only the story gave you) — they can drop again
+var story_cards: Array = []  # cards a story square handed out this 周目 (they never enter the history)
+var play_level := 0  # the 难度 level chosen after the birthplace (0 = not chosen: the route's highest); capped by what its endings have unlocked (route_max_level)
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
 var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
 var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
@@ -63,7 +65,7 @@ var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -111,9 +113,8 @@ func new_lap(inherit_all := false) -> SaveData:
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
 	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
-	for c in owned:
-		if not s.seen.has(c):
-			s.seen.append(c)
+	if inherit_all:
+		s.story_cards = story_cards.duplicate()
 	s.theme = theme
 	s.dupes = dupes.duplicate()
 	s.lord_copies = lord_copies
@@ -227,6 +228,25 @@ func fighter(card_id: String) -> Dictionary:
 func endings_reached() -> Array:
 	## ending ids this save has reached (flags are kept across 周目; this run's own records count too)
 	return _db().endings_reached(flags + run_records)
+
+
+func route_max_level() -> int:
+	## the highest 难度 this route offers: 1, raised by the endings of this route that were reached (an ending's `level` is the one it
+	## opens); south and north count apart, an ending shared by both counts for each
+	var db := _db()
+	var top := 1
+	for id in db.endings_reached(flags):
+		var e: Dictionary = db.endings[id]
+		if e["route"] in [route(), "both"]:
+			top = maxi(top, int(e["level"]))
+	return top
+
+
+func effective_level() -> int:
+	## the 难度 actually played on this route: the one chosen at the start, never above what the route has unlocked
+	if play_level <= 0:
+		return route_max_level()
+	return clampi(play_level, 1, route_max_level())
 
 
 func is_north() -> bool:
@@ -451,20 +471,27 @@ func take(card_id: String) -> Dictionary:
 	return card
 
 
-func grant_card(card_id: String) -> void:
-	## Give a card (story / pick). Slots it into the party if there's room for its troop.
+func commit_history() -> void:
+	## An ending was reached: the cards you hold now — except those the story simply gave you — join the history, so a later
+	## 周目 can draw them again (chest_pools / recruit_pool). Nothing is remembered from a run that never reached an ending.
+	_sync()
+	for cid in owned + soldiers.keys():
+		if cid != "lord" and not story_cards.has(cid) and not seen.has(cid):
+			seen.append(cid)
+
+
+func grant_card(card_id: String, from_story := false) -> void:
+	## Give a card (a story square: from_story, or a pick). Slots it into the party if there's room for its troop.
 	_sync()
 	if card_id == "lord":  # another copy of the lord: maybe a higher tier
 		lord_copies += 1
 		return
-	if not seen.has(card_id):
-		seen.append(card_id)
+	if from_story and not story_cards.has(card_id):
+		story_cards.append(card_id)
 	if _db().cards[card_id]["soldier"]:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):
 		owned.append(card_id)
-		if not seen.has(card_id):
-			seen.append(card_id)
 	else:
 		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":

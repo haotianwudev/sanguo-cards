@@ -189,10 +189,11 @@ static func view(q: Dictionary, save: SaveData) -> Dictionary:
 
 static func ramp(save: SaveData) -> float:
 	## the climb in enemy strength: every chapter finished this lap (battle.chapter_step; not while replaying an old chapter, which
-	## has its own 进阶) plus a head start for every earlier lap (battle.lap_step), so a new lap's first stage already beats the last lap's
+	## has its own 进阶) plus a step for every 难度 level above 1 that is being played (battle.ending_step; the level is capped per
+	## route by the endings it has unlocked — south and north count apart)
 	var db := GameData.get_db()
 	var chapters := 0 if save.replay != "" else save.quests_cleared.size()
-	return chapters * float(db.battle.get("chapter_step", 0.0)) + (save.lap - 1) * float(db.battle.get("lap_step", 0.0))
+	return chapters * float(db.battle.get("chapter_step", 0.0)) + (save.effective_level() - 1) * float(db.battle.get("ending_step", 0.0))
 
 
 static func mods(save: SaveData) -> Dictionary:
@@ -256,9 +257,19 @@ static func _as_list(v: Variant) -> Array:
 	return [] if str(v) == "" else [str(v)]
 
 
+static func _ending_active(title: String, save: SaveData) -> bool:
+	## an ending's follow-up story only runs at a 难度 at or above the level that ending opens (cards.json endings.*.level)
+	for e in GameData.get_db().endings.values():
+		if e["title"] == title:
+			return save.effective_level() >= int(e["level"])
+	return true
+
+
 static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
 	## every line in v is a story flag (or, with this_run, a line recorded earlier in this run)
 	for line in _as_list(v):
+		if str(line).begins_with("结局") and not _ending_active(str(line), save):
+			return false  # played below the 难度 this ending opens: what it unlocks stays shut
 		if not (save.flags.has(line) or (this_run and save.run_records.has(line))):
 			return false
 	return true
@@ -354,7 +365,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			for cid in s["cards"]:
 				if db.cards[cid]["soldier"] or not save.has_card(cid):  # story cards don't stack
 					gained.append(db.cards[cid])
-					save.grant_card(cid)
+					save.grant_card(cid, true)
 			for rid in s["relics"]:
 				if not save.relics.has(rid):
 					save.relics.append(rid)
@@ -368,7 +379,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			if opt["card"] != "":
 				if not save.has_card(opt["card"]):
 					gained.append(db.cards[opt["card"]])
-					save.grant_card(opt["card"])
+					save.grant_card(opt["card"], true)
 		"treasure", "recruit":
 			if not save.offer.is_empty() and choice >= 0:
 				gained.append(save.take(save.offer[choice]))
@@ -783,6 +794,8 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 		return
 	if not save.quests_cleared.has(q["id"]):
 		save.quests_cleared.append(q["id"])
+	if save.run_records.any(func(l): return str(l).begins_with("结局")):
+		save.commit_history()  # an ending: what you hold (bar story gifts) can be drawn again next 周目
 	for line in save.run_records:  # this run's choices become lasting story flags
 		if not save.flags.has(line):
 			save.flags.append(line)

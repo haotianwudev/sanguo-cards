@@ -107,6 +107,7 @@ func battle_finished(won: bool) -> void:
 	var q: Dictionary = battle_ctx.get("quest", {})
 	battle_ctx = {}
 	var note := ""
+	var failed := false
 	if not q.is_empty():
 		if won:
 			save.run_battles += 1
@@ -115,11 +116,26 @@ func battle_finished(won: bool) -> void:
 		elif Quests.lose(q, save, rng):
 			note = "……打不过。就在这时——"
 		else:
+			failed = true
 			note = "任务失败 —— 新的一轮从头出发（卡和选择保留，宝物和险清空，格子重新洗牌）"
 	persist()
+	if failed:
+		await show_defeat()
 	var m := MapScreen.new()
 	m.toast = note
 	show_screen(m)
+
+
+func show_defeat() -> void:
+	## 阵亡: the lord falls — a still picture per route (defeat_south / defeat_north); nothing is shown until that art exists
+	var key := "defeat_north" if save.is_north() else "defeat_south"
+	if Kit.cg(key) == null:
+		return
+	var o := DefeatOverlay.new()
+	o.cg_key = key
+	o.line = "%s倒在了战场上……这一轮到此为止" % save.lord_name
+	root.add_child(o)
+	await o.done
 
 
 # ---- demo states for screenshots / quick checks -----------------------------------
@@ -133,6 +149,15 @@ func demo(name: String) -> void:
 		save.run_records.append("出生：冀州无极")
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
+	if name == "level":  # the 难度 pick after the birthplace, with two south endings reached
+		save.flags = ["结局一 · 玉碎", "结局二 · 同归"]
+		show_screen(TitleScreen.new())
+		var lo := LevelOverlay.new()
+		lo.route = "south"
+		lo.top = save.route_max_level()
+		lo.reached = save.endings_reached()
+		root.add_child(lo)
+		return
 	if name == "endings":  # the 结局图鉴 with two endings reached
 		save.flags = ["结局一 · 玉碎", "结局六 · 覆巢"]
 		show_screen(TitleScreen.new())

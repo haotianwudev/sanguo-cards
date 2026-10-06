@@ -118,6 +118,14 @@
 - **状态词缀**：精英 / boss 格随机的词缀（`battle.affixes`）新增三个——迷魂（每回合 50% 让一名队长混乱）、炎毒（每回合灼烧我军 8% 体力，3 回合）、夺气（每回合让我军下回合 AP -1）；
   敌人行动后触发，被眩晕的敌人不触发，「calm」类宝物能挡混乱。
 
+## 4j. 卡池、周目、难度（已实装）
+
+- **宝箱的三个池子**（`gacha.chest_sources` 权重 4 / 3 / 2）：公共池（没有任何章节发放的卡）、本章特定的士兵、之前拿到过的卡；卡的 `scope` 保证南北线分开，两线通用的两边都有。哪些卡属于哪一章由故事数据自动推出（`GameData.card_chapters`：章节的赠卡 / 选择 / 招贤列表 / 战斗敌人的 `card`）。某一战特定的卡（boss 等）照旧按概率掉落。
+- **新周目全部重置**（卡、重复张数、战功、主公卡），只保留：名字、结局、**曾拿到过的记录**（`seen`，宝箱和招募里还会出）、**已经升到的级别**（`dupes` / `lord_copies`：银+1 的卡再抽到还是银+1，继续往上升）。**只有通关到结局时手里的卡才进记录**（`commit_history`），而且只靠剧情送的卡（`story_cards`）不算；设置里有「新周目继承全部卡牌（测试用）」。
+- **品阶**：1 / 4 / 16 / 64 张 = 铜 / 银 / 金 / 神，点化一次升 `gacha.upgrade_levels`（3）级；强度设计见 `docs/card-strength.md`。
+- **难度等级**：开局选完南线 / 北线之后才能选难度（`LevelOverlay`）。每条线（南北分开算）每解锁一个结局，最高可选难度 +1（`endings.json` 的 `level`）；可以选低的，但选得比某个结局的 level 低，它解锁的后续剧情（`requires` 里带那个「结局…」的路线 / 选项 / 入队）就不触发——会再走到同样的 badend，结局照常记录。敌人每个难度等级 +`ending_step`（15%）；没选过（老存档）等于这条线的最高。
+- **阵亡 CG**：run 失败（不是 吕布 那种剧情败）时先放一张整屏图 + 「阵亡」（`DefeatOverlay`，`defeat_south` / `defeat_north`，美术没到之前不显示），提示词在 `pics/ART-PROMPTS.md`。
+
 ## 4i. 战斗特效与角标（已实装）
 
 全部程序绘制（`scripts/ui/battle_fx.gd`，`BattleFx`），不需要美术资源，演示 `--demo=fx --fx=<hit|magic|pierce|boosthit|claw|counter|burn|pburn|break|stun|confuse|boost|buff|cleanse|drain>`。

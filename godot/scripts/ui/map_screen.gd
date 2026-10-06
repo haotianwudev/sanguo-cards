@@ -870,7 +870,10 @@ func _choose_event(i: int) -> void:
 func _resolve(choice := -1) -> void:
 	## resolve the square, then go straight on (no replay of what was just read)
 	var kind: String = Quests.here(q, Game.save)["type"]
+	var was_era: bool = Quests.here(q, Game.save)["id"] == "era"
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
+	if was_era:  # the birthplace is chosen: south and north count apart, so only now can the 难度 be picked
+		await _pick_level()
 	Game.persist()
 	if kind == "choose":  # a choice can open squares further on (requires / unless on this run's records)
 		_rebuild_map()
@@ -884,6 +887,19 @@ func _resolve(choice := -1) -> void:
 		_refresh()
 		return
 	_advance()
+
+
+func _pick_level() -> void:
+	var save := Game.save
+	save.play_level = 1
+	if save.route_max_level() <= 1:
+		return
+	var o := LevelOverlay.new()
+	o.route = save.route()
+	o.top = save.route_max_level()
+	o.reached = save.endings_reached()
+	add_child(o)
+	save.play_level = await o.picked
 
 
 func _reveal(cards: Array, title: String) -> void:
