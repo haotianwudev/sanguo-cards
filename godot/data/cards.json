@@ -1092,7 +1092,8 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack"
+          "type": "attack",
+          "rate": 1.5
         },
         {
           "type": "counter",
@@ -1945,6 +1946,7 @@
       "effects": [
         {
           "type": "attack",
+          "rate": 1.5,
           "hits": 2
         },
         {
@@ -2501,6 +2503,36 @@
           "def": 0.08,
           "max": 4,
           "turns": 3
+        }
+      ]
+    },
+    "zhangba": {
+      "name": "丈八蛇矛",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 1.5
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
+    "beidiqiang": {
+      "name": "北地枪",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 1.5
+        },
+        {
+          "type": "counter",
+          "power": 0.5
         }
       ]
     }
@@ -3349,6 +3381,7 @@
         "at": 25
       },
       "skills": [
+        "zhangba",
         "roar"
       ]
     },
@@ -4198,7 +4231,10 @@
         "hp": 55,
         "at": 21
       },
-      "pool": false
+      "pool": false,
+      "skills": [
+        "beidiqiang"
+      ]
     },
     "jingzhou_shuijun": {
       "name": "荆州水军",
