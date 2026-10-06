@@ -347,7 +347,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				enemy["hp"] = maxi(0, enemy["hp"] - d)
 				combo += 1
-				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"]})
+				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": bool(eff.get("pierce", false))})
 				log.append("  %s 受到 %d 伤害（%d 连击）" % [ename, d, combo])
 			return log
 		"heal":
@@ -617,6 +617,7 @@ func _start_round() -> Array:
 	round_no += 1
 	ap = mini(ap_max(), ap + int(cfg["ap_per_round"]) + int(mods.get("ap_round", 0)))
 	if ap_drain > 0:
+		_ev({"t": "ap_drain", "amount": mini(ap_drain, ap), "ap": maxi(0, ap - ap_drain)})
 		ap = maxi(0, ap - ap_drain)
 		ap_drain = 0
 	combo = 0

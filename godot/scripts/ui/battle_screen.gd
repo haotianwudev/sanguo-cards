@@ -32,6 +32,9 @@ var _party_box: Control
 var _row: HBoxContainer  # the leader cards (换人 swaps one in place)
 var _card_size := Vector2(240, 336)
 var _has_cg := false
+var _fx := {}  # persistent status effects on screen: key -> node (see _sync_fx)
+var _badges: Array = []  # corner badges currently on screen (freed and rebuilt on every refresh)
+var _boost_hits := false  # the blows now landing come from a BOOSTed leader
 
 
 func _ready() -> void:
@@ -342,6 +345,8 @@ func _refresh() -> void:
 		pip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		pip.add_theme_stylebox_override("panel", Kit.box(Kit.c("gold") if k < b.ap else Kit.c("track"), 11, 2, Kit.c("gold"), 0))
 		_ap_row.add_child(pip)
+	if b.ap_drain > 0:  # 夺气: the enemy will take AP next round
+		_ap_row.add_child(Kit.label("夺气 -%d" % b.ap_drain, Kit.FONT_BODY, "red"))
 	_round_label.text = "第 %d/%d 回合" % [b.round_no, b.turn_limit]
 	_combo_label.text = "%d 连击 +%d%%" % [b.combo, b.combo * 10] if b.combo > 0 else ""
 	for i in b.leaders.size():
@@ -353,6 +358,7 @@ func _refresh() -> void:
 	_defend.text = "防御  AP%d" % b.defend_cost() if b.defend_cost() > 0 else "防御"
 	_defend.disabled = _busy or not b.can_defend()
 	_retreat.disabled = _busy
+	_sync_fx()
 	if not _busy:
 		var first_card: CardView = _cards.filter(func(v): return v.focus_mode == Control.FOCUS_ALL).front() if _cards.any(func(v): return v.focus_mode == Control.FOCUS_ALL) else null
 		Kit.focus(first_card if first_card != null else _end)
@@ -491,6 +497,125 @@ func _on_retreat() -> void:
 
 # ---- animation ---------------------------------------------------------------
 
+func _enemy_fx_scale() -> float:
+	return clampf(_enemy_art.size.x / 340.0, 0.5, 1.5)
+
+
+func _enemy_rect() -> Rect2:
+	return Rect2(_enemy_center() - Vector2(170, 110) * _enemy_fx_scale(), Vector2(340, 220) * _enemy_fx_scale())
+
+
+func _card_rect(i: int) -> Rect2:
+	return Rect2(_cards[i].global_position - global_position, _cards[i].size)
+
+
+func _cards_rect() -> Rect2:
+	var r: Rect2 = _card_rect(0)
+	for i in range(1, _cards.size()):
+		r = r.merge(_card_rect(i))
+	return r
+
+
+func _party_rect() -> Rect2:
+	return Rect2(_party_box.global_position - global_position, _party_box.size)
+
+
+func _fx_set(want: Dictionary) -> void:
+	## keep exactly the persistent effects in `want` ({key: Callable that makes the node}) on screen
+	for key in _fx.keys():
+		if not want.has(key) or not is_instance_valid(_fx[key]):
+			if is_instance_valid(_fx[key]):
+				_fx[key].queue_free()
+			_fx.erase(key)
+	for key in want:
+		if not _fx.has(key):
+			_fx[key] = want[key].call()
+
+
+func _sync_fx() -> void:
+	## the statuses that last (灼烧 / 破防 / 眩晕 on the enemy, 灼烧 on us, 混乱 / BOOST / 战意 on the cards)
+	if b == null or _cards.is_empty():
+		return
+	var want := {}
+	var e := b.enemy
+	if e["burn_turns"] > 0:
+		want["e_burn"] = func(): return BattleFx.embers(self, _enemy_rect(), BattleFx.EMBER, 22, 70.0)
+	if e["break_turns"] > 0:
+		want["e_break"] = func(): return BattleFx.cracks(self, _enemy_rect(), Color(1.0, 0.82, 0.35, 0.8))
+	if e["stunned"]:
+		want["e_stun"] = func(): return BattleFx.orbit(self, _enemy_center() + Vector2(0, -80), 80.0, 22.0, 4, BattleFx.GOLD, 11.0)
+	if b.party_burn["turns"] > 0:
+		want["p_burn"] = func(): return BattleFx.embers(self, _party_rect(), BattleFx.EMBER, 26, 50.0)
+	for i in b.leaders.size():
+		var u: Dictionary = b.leaders[i]
+		var id: String = u["leader"]["card"]["id"]
+		var r := _card_rect(i)
+		if u["confused"]:
+			want["conf_%s" % id] = func(): return BattleFx.orbit(self, r.position + Vector2(r.size.x / 2, 8), 56.0, 14.0, 3, BattleFx.VIOLET, 10.0)
+		if u["boosted"]:
+			want["boost_%s" % id] = func(): return BattleFx.boost_aura(self, r)
+		if b.buff["layers"] > 0:
+			want["buff_%s" % id] = func(): return BattleFx.glow(self, r, BattleFx.GOLD)
+		_cards[i].modulate = Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE
+	_fx_set(want)
+	_sync_badges()
+
+
+func _sync_badges() -> void:
+	## 角标: a small round badge per status or buff — enemy (灼 破 晕 怒 蓄) above its HP bar, party-wide (战 灼 夺) over the party bar,
+	## and per card (混 强) in its top-right corner; the little number is the turns / layers left
+	for n in _badges:
+		if is_instance_valid(n):
+			n.queue_free()
+	_badges.clear()
+	var e := b.enemy
+	var row: Array = []
+	if e["burn_turns"] > 0:
+		row.append(BattleFx.badge("灼", Color(1.0, 0.5, 0.15), e["burn_turns"]))
+	if e["break_turns"] > 0:
+		row.append(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]))
+	if e["stunned"]:
+		row.append(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)))
+	if e["at"] > e["data"]["at"] * 1.01:
+		row.append(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)))
+	if e["charging"] != "":
+		row.append(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false))
+	var at := _enemy_hp.global_position - global_position + Vector2(_enemy_hp.size.x - 40.0, -40.0)
+	for k in row.size():
+		row[k].position = at - Vector2(k * 38.0, 0)
+		_badge_add(row[k])
+	var party: Array = []
+	if b.buff["layers"] > 0:
+		party.append(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]))
+	if b.party_burn["turns"] > 0:
+		party.append(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]))
+	if b.ap_drain > 0:
+		party.append(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain))
+	var pr := _party_rect()
+	for k in party.size():
+		party[k].position = Vector2(pr.end.x - 40.0 - k * 38.0, pr.position.y - 20.0)
+		_badge_add(party[k])
+	for i in b.leaders.size():
+		var u: Dictionary = b.leaders[i]
+		var rr := _card_rect(i)
+		var mine: Array = []
+		if u["confused"]:
+			mine.append(BattleFx.badge("混", Color(0.62, 0.42, 0.95)))
+		elif u["confuse_next"]:
+			mine.append(BattleFx.badge("混", Color(0.62, 0.42, 0.95), -1, true))
+		if u["boosted"]:
+			mine.append(BattleFx.badge("强", Color(1.0, 0.5, 0.15)))
+		for k in mine.size():
+			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
+			_badge_add(mine[k])
+
+
+func _badge_add(n: Control) -> void:
+	n.z_index = 48
+	add_child(n)
+	_badges.append(n)
+
+
 func _enemy_center() -> Vector2:
 	return _enemy_art.global_position + _enemy_art.size / 2 - global_position
 
@@ -510,11 +635,27 @@ func _play(events: Array) -> void:
 				var tw := v.create_tween()
 				tw.tween_property(v, "position:y", y - 26, 0.1).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(v, "position:y", y, 0.14)
+				_boost_hits = bool(ev.get("boost", false))
+				if _boost_hits:
+					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
+					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
 				await get_tree().create_timer(0.12).timeout
 			"hit", "interrupt", "burn", "counter":
 				Kit.shake(_enemy_art, 9.0, 0.2)
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
 				var big: bool = ev["dmg"] > b.enemy["max_hp"] * 0.08
+				var ratio := float(ev["dmg"]) / maxf(1.0, float(b.enemy["max_hp"]))
+				BattleFx.scale = _enemy_fx_scale()
+				match ev["t"]:
+					"hit":
+						BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits)
+					"counter":
+						BattleFx.counter(self, _enemy_center())
+					"burn":
+						BattleFx.flame_lick(self, _enemy_rect())
+					"interrupt":
+						BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
+				BattleFx.scale = 1.0
 				Kit.float_text(self, _enemy_center() + Vector2(0, -30), str(ev["dmg"]),
 					{"hit": Kit.c("amber"), "burn": Kit.c("red")}.get(ev["t"], Kit.c("purple")), 52 if big else 40)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
@@ -523,7 +664,8 @@ func _play(events: Array) -> void:
 					_combo_label.text = "%d 连击 +%d%%" % [ev["combo"], ev["combo"] * 10]
 					Kit.pop(_combo_label, 1.3)
 				if big:
-					Kit.shake(self, 6.0, 0.18)
+					Kit.shake(self, 6.0 + 24.0 * minf(ratio, 0.3), 0.18)
+					await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
 				await get_tree().create_timer(0.16).timeout
 			"swap":
 				_rebuild_card(ev["unit"])
@@ -535,12 +677,20 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.35).timeout
 			"buff":
 				Kit.float_text(self, _party_center(), "战意 ×%d" % ev["layers"], Kit.c("gold"), 36)
+				BattleFx.buff_cast(self, range(_cards.size()).map(func(i): return _card_rect(i).get_center()))
 				_refresh()
 				await get_tree().create_timer(0.3).timeout
 			"cleanse":
 				Kit.float_text(self, _party_center(), "状态解除" if ev["n"] > 0 else "无状态", Kit.c("green"), 34)
+				BattleFx.cleanse_wave(self, _cards_rect())
 				_refresh()
 				await get_tree().create_timer(0.3).timeout
+			"ap_drain":
+				var pips: Array = _ap_row.get_children().filter(func(n): return n is Panel)
+				var gone: Array = pips.slice(int(ev["ap"]), int(ev["ap"]) + int(ev["amount"]))
+				BattleFx.drain_shatter(self, gone, gone.size())
+				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP -%d" % ev["amount"], Kit.c("red"), 34)
+				await get_tree().create_timer(0.35).timeout
 			"hurt":
 				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
 				Kit.tween_bar(_party_hp, ev["hp"])
@@ -557,13 +707,18 @@ func _play(events: Array) -> void:
 				for k in ev["units"]:
 					Kit.pop(_cards[k], 1.08)
 					_flash(_cards[k], Color(1.5, 1.35, 0.7))
+					BattleFx.boost_cast(self, _card_rect(k))
 				Kit.float_text(self, _party_center(), "BOOST", Kit.c("gold"), 34)
 				await get_tree().create_timer(0.3).timeout
 			"stun":
 				Kit.float_text(self, _enemy_center(), "混乱！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
+				if ev["ok"]:
+					BattleFx.stun_burst(self, _enemy_center() + Vector2(0, -50))
 				await get_tree().create_timer(0.3).timeout
 			"break":
 				Kit.float_text(self, _enemy_center(), "破防 +%d%%" % int(round(ev["amount"] * 100)), Kit.c("amber"), 34)
+				var crack := BattleFx.break_flash(self, _enemy_rect())
+				crack.get_tree().create_timer(0.8).timeout.connect(crack.queue_free)
 				await get_tree().create_timer(0.3).timeout
 			"ap":
 				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP +%d" % ev["amount"], Kit.c("gold"), 34)
@@ -581,6 +736,10 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.09).timeout
 				Kit.shake(self, 10.0, 0.22)
 				_flash(_party_box, Color(1.6, 0.6, 0.6))
+				if ev["move"] == "火":
+					BattleFx.flame_lick(self, _party_rect())
+				else:
+					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
 				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 44)
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
@@ -602,6 +761,8 @@ func _play(events: Array) -> void:
 				Kit.pop(_cards[ev["unit"]], 1.06)
 				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60),
 					"混乱", Kit.c("purple"), 32)
+				BattleFx.stun_burst(self, _card_rect(ev["unit"]).position + Vector2(_card_rect(ev["unit"]).size.x / 2, 30))
+				BattleFx.burst(self, _card_rect(ev["unit"]).get_center(), BattleFx.VIOLET, 10, 20.0, 110.0, 5.0)
 				await get_tree().create_timer(0.3).timeout
 			"round":
 				await _banner("第 %d 回合" % ev["n"], Kit.c("gold"))

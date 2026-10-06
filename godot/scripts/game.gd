@@ -505,6 +505,66 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 			Quests.move(q, save, "plan")
 			show_screen(MapScreen.new())
+		"fx":  # --demo=fx --fx=<hit|magic|pierce|boosthit|claw|counter|burn|pburn|break|stun|confuse|boost|buff|cleanse|drain>: one effect mid-flight
+			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
+			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
+			save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
+			var fb := BattleScreen.new()
+			fb.scenario_id = "hulao"
+			show_screen(fb)
+			await get_tree().create_timer(0.25).timeout
+			var want := "hit"
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--fx="):
+					want = a.substr(5)
+			var eng: Battle = fb.b
+			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "pierce", "boosthit", "counter", "burn", "break"] else 1.0
+			match want:
+				"hit":
+					BattleFx.hit(fb, fb._enemy_center(), "attack", 3, 0.12)
+				"magic":
+					BattleFx.hit(fb, fb._enemy_center(), "magic", 1, 0.05)
+				"pierce":
+					BattleFx.hit(fb, fb._enemy_center(), "attack", 1, 0.05, true)
+				"boosthit":
+					BattleFx.hit(fb, fb._enemy_center(), "attack", 2, 0.15, false, true)
+				"claw":
+					BattleFx.claw(fb, fb._cards_rect().get_center(), 0.12, 0.5)
+				"counter":
+					BattleFx.counter(fb, fb._enemy_center())
+				"burn":
+					eng.enemy["burn_turns"] = 3
+					eng.enemy["burn_pct"] = 0.1
+					fb._refresh()
+					BattleFx.flame_lick(fb, fb._enemy_rect())
+				"pburn":
+					eng.party_burn = {"dmg": 300, "turns": 2}
+					fb._refresh()
+				"break":
+					eng.enemy["break_turns"] = 3
+					eng.enemy["break_amount"] = 0.25
+					fb._refresh()
+				"stun":
+					eng.enemy["stunned"] = true
+					fb._refresh()
+				"confuse":
+					eng.leaders[1]["confused"] = true
+					fb._refresh()
+				"boost":
+					eng.leaders[1]["boosted"] = true
+					eng.leaders[2]["boosted"] = true
+					fb._refresh()
+					BattleFx.boost_cast(fb, fb._card_rect(1))
+				"buff":
+					eng.buff = {"layers": 3, "turns": 3, "atk": 0.3, "def": 0.24}
+					fb._refresh()
+					BattleFx.buff_cast(fb, range(fb._cards.size()).map(func(i): return fb._card_rect(i).get_center()))
+				"cleanse":
+					BattleFx.cleanse_wave(fb, fb._cards_rect())
+				"drain":
+					eng.ap_drain = 2
+					fb._refresh()
+					BattleFx.drain_shatter(fb, fb._ap_row.get_children().filter(func(n): return n is Panel).slice(1, 3), 2)
 		"swap":  # 换人: the picker open (add --done to play the swap itself)
 			save.owned = ["machao", "madai", "mayunlu", "zhangfei", "daqiao"]
 			save.party = ["machao", "zhangfei", "daqiao"]
