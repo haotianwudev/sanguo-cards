@@ -1114,3 +1114,20 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 				if lane.any(func(id): return sq[id]["type"] == "battle"):
 					fights += 1
 			check_eq(fights, 1, "%s/%s: one lane fights, the other does not" % [q["id"], fid])
+
+
+func test_difficulty_lasts_the_whole_lap_but_danger_is_this_chapters() -> void:
+	## 难度 (what beating 吕布 raises) stays for every later chapter of the lap; 险 taken from a ？ event only lasts the chapter
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	s.difficulty = 1
+	s.danger = 2
+	var step := float(db.battle["difficulty_step"])
+	var dstep := float(db.battle["danger_step"])
+	check(is_equal_approx(float(Quests.mods(s)["enemy"]), step + 2.0 * dstep), "both count while the chapter runs")
+	Quests.begin(db.quests[1], s)  # the next chapter starts
+	check_eq(s.danger, 0, "险 is gone")
+	check_eq(s.difficulty, 1, "难度 stays")
+	check(is_equal_approx(float(Quests.mods(s)["enemy"]), step), "so later chapters keep the one and not the other")
+	var lap2 := s.new_lap()
+	check_eq(lap2.difficulty, 0, "a new lap starts the 难度 again — from the lap head start (battle.lap_step) instead")
