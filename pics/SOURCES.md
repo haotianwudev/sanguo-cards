@@ -40,7 +40,7 @@
 | `mizhu` | source/public-domain/mizhu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Mi_Zhu.jpg) | Public domain | unspecified |
 | `pangtong` | source/public-domain/pangtong.jpg | [链接](https://commons.wikimedia.org/wiki/File:PangTong.jpg) | Public domain | Unknown authorUnknown author |
 | `sunshangxiang` | source/generals/sunshangxiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `taishici` | source/public-domain/taishici.jpg | [链接](https://commons.wikimedia.org/wiki/File:Taishi_Ci_Qing_illustration.jpg) | Public domain | Unknown author |
+| `taishici` | source/generals/taishici.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xuchu` | source/public-domain/xuchu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Chu_Qing_illustration.jpg) | Public domain | Unknown author |
 | `xuhuang` | source/generals/xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

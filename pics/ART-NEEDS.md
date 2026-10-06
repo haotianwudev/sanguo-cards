@@ -579,7 +579,7 @@
 | ✅ 正式 | `zheng_daoshou` | 郑家刀手（郑好的卡） |
 | ✅ 正式 | `jiang_jiguanshou` | 姜家机关手（姜巧的卡） |
 | ✅ 正式 | `xianzhen` | 陷阵营（高顺的卡） |
-| 🟡 占位 | `taishici` | 太史慈 |
+| ✅ 正式 | `taishici` | 太史慈 |
 | ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
 | ✅ 正式 | `beihai_tuntian` | 北海屯田兵 |
 | ✅ 正式 | `qingzhou` | 青州兵（黄巾渠帅的卡） |
