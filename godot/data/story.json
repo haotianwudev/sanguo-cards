@@ -444,7 +444,7 @@
         "bh_guanhai_pre": {"x": 37, "y": 1, "type": "event", "label": "管亥搦战", "next": ["bh_guanhai"], "text": ["城下黄巾大阵裂开，大首领管亥倒拖长刀而出，威风凛凛。"]},
         "bh_guanhai": {"x": 38, "y": 1, "type": "battle", "label": "管亥", "boss": true, "battle": "bh_guanhai", "record_win": "管亥：败阵", "next": ["bh_porridge"], "text": ["管亥势大力沉，太史慈与赵云双枪并举，迎战贼首！"]},
         "bh_porridge": {"x": 39, "y": 1, "type": "event", "label": "阵前熬粥", "record": "管亥：招降", "cards": ["beihai_tuntian"], "next": ["bh_kongrong"], "text": ["打赢之后，{lord}不杀：阵前架起几十口大锅熬粥。管亥看着自己的人捧着粥碗哭，扔下了刀。", "几万饥民编进了北海屯田军。", "（获得兵卡：北海屯田兵）"], "cg": "c4_porridge"},
-        "bh_kongrong": {"x": 40, "y": 1, "type": "event", "cg": "c4_kongrong", "label": "让北海", "next": ["bh_seal"], "text": ["北海解围，孔融将你请进郡府。他捋着胡子，把北海相的印推了过来：「老夫要去洛阳朝廷述职。北海的百姓认你，这印，让给你。」", "{lord}（内心）：孔融！这个我知道——孔融让梨！课本上的！……让梨让到让北海，这位是真的会让。"]},
+        "bh_kongrong": {"x": 40, "y": 1, "type": "event", "cg": "c4_kongrong", "label": "让北海", "portraits": ["kongrong"], "next": ["bh_seal"], "text": ["北海解围，孔融将你请进郡府。他捋着胡子，把北海相的印推了过来：「老夫要去洛阳朝廷述职。北海的百姓认你，这印，让给你。」", "{lord}（内心）：孔融！这个我知道——孔融让梨！课本上的！……让梨让到让北海，这位是真的会让。"]},
         "bh_seal": {"x": 41, "y": 1, "type": "event", "label": "朝廷使节", "next": ["bh_seal_cross", "bh_seal_normal"], "text": ["孔融上表朝廷，力荐你为北海相。没过多久，洛阳的使节就带着诏书到了。"]},
         "bh_seal_cross": {"x": 42, "y": 1, "type": "event", "requires": "南阳：袁术东逃", "next": ["bh_end"], "text": ["传诏的宦官宣完旨，抬起头盯着你看了半天：「……将军前些日子不是还在南阳打袁术吗？头发怎么长出来了？」", "{lord}干笑：「水土好，长得快。」"]},
         "bh_seal_normal": {"x": 42, "y": 2, "type": "event", "unless": "南阳：袁术东逃", "next": ["bh_end"], "text": ["传诏的宦官宣读了任命你为北海相的诏书。"]},

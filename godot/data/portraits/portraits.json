@@ -28,6 +28,7 @@
   "guanyu": {"file": "guanyu.jpg", "face": [0.51, 0.27], "head": 0.18},
   "huangzhong": {"file": "huangzhong.jpg", "face": [0.48, 0.28], "head": 0.24},
   "jianyong": {"file": "jianyong.jpg", "face": [0.55, 0.12], "head": 0.08, "placeholder": true},
+  "kongrong": {"file": "kongrong.jpg", "face": [0.51, 0.25], "head": 0.25},
   "liaohua": {"file": "liaohua.jpg", "face": [0.45, 0.25], "head": 0.1, "placeholder": true},
   "liubei": {"file": "liubei.jpg", "face": [0.5, 0.22], "head": 0.2},
   "lvbu": {"file": "lvbu.jpg", "face": [0.49, 0.36], "head": 0.22},

@@ -263,6 +263,15 @@
       "license": "CC BY-SA 4.0",
       "artist": "Morio"
     },
+    "kongrong": {
+      "src": "source/generals/kongrong.jpg",
+      "face": [
+        0.51,
+        0.25
+      ],
+      "head": 0.25,
+      "license": "用户提供（Gemini 生成）"
+    },
     "liaohua": {
       "src": "source/public-domain/liaohua.jpg",
       "face": [

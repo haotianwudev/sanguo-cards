@@ -30,6 +30,7 @@
 | `guanyu` | source/generals/guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangzhong` | source/generals/huangzhong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `jianyong` | source/public-domain/jianyong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg) | CC BY-SA 4.0 | Morio |
+| `kongrong` | source/generals/kongrong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `liaohua` | source/public-domain/liaohua.jpg | [链接](https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg) | CC BY-SA 3.0 | SamSpade21 |
 | `liubei` | source/generals/liubei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lvbu` | source/generals/lvbu.jpg | 用户提供 | 用户提供 | — |
