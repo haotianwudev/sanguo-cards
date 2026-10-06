@@ -1745,6 +1745,10 @@
     "c3_secret_path": {
       "src": "source/cg/c3_secret_path.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c3_breakout": {
+      "src": "source/cg/c3_breakout.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
