@@ -5,6 +5,8 @@ description: Install finished art for 重开三国 (sanguo-cards) with one comma
 
 Reply in Chinese. Run from `F:\workspace\sanguo-cards`.
 
+**Inbox (the usual way):** the user drops images into `F:\workspace\sanguo-cards\pics\inbox\`, each named `<key>.png/jpg/webp`; run `python tools/art_ingest.py inbox`. Installed files move to `inbox/_done/`; refused ones stay (tell the user which and why; a file whose name isn't a known key says so — they rename it or you pass `--kind` via `add`).
+
 **One image:** `python tools/art_ingest.py add "<path>" <key>` — the key is the cg / battle / card id (kind is inferred; pass `--kind cg|battle|map|portrait` if it says it can't tell).
 **Many:** write `<path> <key>` per line to a scratch file → `python tools/art_ingest.py batch list.txt`.
 

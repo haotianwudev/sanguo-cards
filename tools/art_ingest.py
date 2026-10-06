@@ -2,6 +2,7 @@
 
   python tools/art_ingest.py add  <image> <key> [--kind cg|battle|map|portrait] [--force] [--anchor top|bottom] [--face X Y --head H]
   python tools/art_ingest.py batch <list.txt>      # one "<image path> <key> [kind]" per line (quote paths with spaces)
+  python tools/art_ingest.py inbox                 # every image in pics/inbox/ (file name = key), moved to pics/inbox/_done when installed
   python tools/art_ingest.py flush                 # regenerate ART-NEEDS / ART-PROMPTS / SOURCES, mark the log done
   python tools/art_ingest.py status                # how many images are waiting for a flush
 
@@ -187,6 +188,7 @@ def main(argv=None) -> None:
     b = sub.add_parser("batch")
     b.add_argument("list")
     b.add_argument("--force", action="store_true")
+    sub.add_parser("inbox")
     sub.add_parser("flush")
     sub.add_parser("status")
     args = ap.parse_args(argv)
@@ -204,6 +206,20 @@ def main(argv=None) -> None:
         if n:
             rebuild()
         print(f"{n} 张入库")
+    elif args.cmd == "inbox":
+        box = PICS / "inbox"
+        box.mkdir(exist_ok=True)
+        done = box / "_done"
+        done.mkdir(exist_ok=True)
+        files = sorted(f for f in box.iterdir() if f.is_file() and f.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp"))
+        n = 0
+        for f in files:
+            if add_one(f, f.stem, None, False, "center"):
+                f.replace(done / f.name)
+                n += 1
+        if n:
+            rebuild()
+        print(f"{n}/{len(files)} 张入库（没通过的还留在 pics/inbox/）" if files else "pics/inbox/ 里没有图")
     elif args.cmd == "flush":
         rebuild()
         subprocess.run([sys.executable, str(ROOT / "tools" / "art_prompts.py")], check=True, cwd=ROOT)
