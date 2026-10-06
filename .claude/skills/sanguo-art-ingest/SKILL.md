@@ -12,4 +12,6 @@ It checks quality (too small / blank = refused unless `--force`; blur / dark / o
 Report only the ✓ / ✗ / ⚠ lines to the user (a ⚠ blurry / badly-cropped image is worth telling them about; offer `--force` / another crop for ✗).
 
 **Do not** regenerate `ART-NEEDS.md` / `ART-PROMPTS.md` / `SOURCES.md` per image — that is the token cost. They are refreshed in one go by `python tools/art_ingest.py flush`, when `add` prints that 20 are waiting (or the user asks). `status` shows the count.
-After a batch: commit by path (`pics/source`, `pics/art.json`, `pics/ART-LOG.md`, `godot/data/art`, `godot/data/portraits`), pull --rebase --autostash, push.
+After a batch (only if asked): commit by path (`pics/source`, `pics/art.json`, `pics/ART-LOG.md`, `godot/data/art`, `godot/data/portraits`), pull --rebase --autostash, push.
+
+**Art-only changes: no tests, no `--import`, no screenshots, no font rebuild** — just run the ingest command and report; commit/push only when asked.
