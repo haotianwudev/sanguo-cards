@@ -34,7 +34,7 @@ var turn_limit := 0
 var first_hit_done := false
 var party_burn := {}  # the enemy's fire on us: {dmg, turns}
 var ap_drain := 0  # AP the enemy takes away at the next round start
-var roster: Array = []  # leader dicts that can be tagged in mid-battle (SaveData.swap_roster): same troop as the slot, not leading
+var roster: Array = []  # leader dicts that can be tagged in mid-battle (SaveData.swap_roster): any owned card not leading
 var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: the skill state of cards swapped out (only handed on to the next fight)
 var swaps_done := 0  # this round
 var _carry_extra: Dictionary = {}
@@ -140,15 +140,19 @@ func swap_cost() -> int:
 
 
 func swap_options(i: int) -> Array:
-	## leader dicts that could replace slot i: same troop, not already out, never two versions of one person
-	var troop: String = leaders[i]["leader"]["card"]["troop"]
+	## leader dicts that could replace slot i: any troop (the slot takes the newcomer's troop), but never a troop another
+	## slot already leads, never one already out, never two versions of one person; the lord has no stand-in
+	if leaders[i]["leader"]["card"]["troop"] == "lord":
+		return []
 	var out_ids: Array = leaders.map(func(u): return u["leader"]["card"]["id"])
 	var people := {}
+	var troops := {}
 	for k in leaders.size():
 		if k != i:
 			people[leaders[k]["leader"]["card"]["person"]] = true
-	return roster.filter(func(ld): return ld["card"]["troop"] == troop and not out_ids.has(ld["card"]["id"]) \
-			and not people.has(ld["card"]["person"]))
+			troops[leaders[k]["leader"]["card"]["troop"]] = true
+	return roster.filter(func(ld): return not out_ids.has(ld["card"]["id"]) and not people.has(ld["card"]["person"]) \
+			and not troops.has(ld["card"]["troop"]))
 
 
 func swap_from_round() -> int:

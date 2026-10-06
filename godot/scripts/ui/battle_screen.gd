@@ -441,7 +441,8 @@ func _open_swap(i: int) -> void:
 	var o := PickOverlay.new()
 	o.title = "换谁上场？（AP%d · 攻击体力不变 · 换下的人本场不能再上）" % b.swap_cost()
 	o.card_ids = ids
-	o.captions = opts.map(func(ld): return "、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"])))
+	o.captions = opts.map(func(ld): return "%s · %s" % [GameData.get_db().troops[ld["card"]["troop"]]["name"],
+		"、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"]))])
 	o.confirm_text = "上场"
 	o.cancelable = true
 	o.z_index = 70

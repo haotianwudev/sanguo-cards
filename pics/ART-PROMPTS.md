@@ -14,6 +14,12 @@
 - `guosi` — 郭汜改成枪兵：兵器换成长枪（原是长枪+布袋，确认是枪不是刀）
 - `leibo` — 雷薄改成枪兵：骑马挺枪，不再是挥舞弯刀
 - `yayi` — 衙役改成枪兵：手持长枪式水火棍
+- `taihang_yiyong` — 太行义勇改成枪兵：兵器换成长枪（旧图是猎弓 / 柴刀）
+- `beihai_tuntian` — 北海屯田兵改成枪兵：兵器换成长枪（旧图是原兵器）
+- `heishan_bing` — 黑山游骑改成枪兵：兵器换成长枪（旧图是朴刀或长矛，确认是长枪）
+- `huangjin_nanxia` — 南下黄巾改成枪兵：兵器换成长枪（旧图是原兵器）
+- `shuizei_bing` — 江东水贼改成枪兵：兵器换成长枪（旧图是原兵器）
+- `jingzhou_bu` — 荆州步卒改成枪兵：兵器换成长枪（旧图是盾后大刀）
 
 1. `jiangwei` — 姜维（新增枪兵卡）（立绘）
 2. `chendao` — 陈到（新增枪兵卡）（立绘）
@@ -723,6 +729,32 @@ Zhang Liao (张辽), the composed Bingzhou general的竖版人物立绘。
 ```
 </details>
 
+### `taihang_yiyong` 🟡 换掉占位
+
+```
+太行义勇（兵卡，太行山猎户出身的义勇，不是具名人物）的竖版人物立绘。
+外貌：二十多岁精壮的山民，面容黝黑粗糙，神情朴实而警觉。
+铠甲与服饰：粗布短衣外罩简易皮甲，头缠麻布巾，腰挂猎袋。
+武器：一杆削尖的硬木长矛（带铁枪头），双手握持。
+背景：太行山的山道与松林，晨雾未散。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+
+<details>
+<summary>English Prompt (英文备用)</summary>
+
+```
+a Taihang volunteer (太行义勇), a mountain hunter turned soldier的竖版人物立绘。
+外貌：Rugged mountain hunter with a weathered face.
+铠甲与服饰：A fur vest over coarse cloth, leg wraps.
+武器：A hunting bow or a woodsman's chopper.
+背景：the Taihang mountain forest。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+</details>
+
 ### `zhurong` ⬜ 缺
 
 ```
@@ -936,6 +968,32 @@ Huang Chengyan (黄承彦), an eccentric scholar-inventor of Mian'nan and Cai Ma
 铠甲与服饰：A loose brown scholar's robe with sleeves tied back, tools tucked into his belt.
 武器：Holding a small self-walking wooden cart with gears.
 背景：a riverside workshop by the Mian river full of wooden contraptions。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+</details>
+
+### `jingzhou_bu` 🟡 换掉占位
+
+```
+荆州步卒（兵卡，不是具名人物）的竖版人物立绘。
+外貌：二十多岁的荆州士兵，面容清秀而坚定。
+铠甲与服饰：暗青色荆州制式铁甲，头戴铁盔，肩背圆盾。
+武器：一手持圆盾，另一手握一杆长枪，枪尖朝前。
+背景：荆州城下的列阵，江风吹动军旗。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+
+<details>
+<summary>English Prompt (英文备用)</summary>
+
+```
+a Jingzhou foot soldier (荆州步卒), a soldier card的竖版人物立绘。
+外貌：Stocky young soldier with a stubborn jaw.
+铠甲与服饰：Green-trimmed cloth-and-leather armor, a round shield painted 刘.
+武器：A broad saber raised behind the shield.
+背景：the gate of Xiangyang。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
@@ -2346,6 +2404,32 @@ Guo Si (郭汜), the raiding Xiliang general的竖版人物立绘。
 铠甲与服饰：Xiliang cavalry armor with looted jewelry hanging from it.
 武器：Holding a long lance (马槊) and a sack of loot.
 背景：A plundered and burning frontier village with smoking wooden houses, broken fences, and Xiliang raiding flags。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+</details>
+
+### `heishan_bing` 🟡 换掉占位
+
+```
+黑山游骑（兵卡，黑山贼的斥候，不是具名人物）的竖版人物立绘。
+外貌：二十多岁精瘦的山贼斥候，眼神机警，神情狡黠。
+铠甲与服饰：杂色皮甲拼布衣，头缠黑巾，披破旧斗篷。
+武器：一杆长枪，枪缨黑色，半蹲着警惕地握在身前。
+背景：太行山林间的小径，树影斑驳。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+
+<details>
+<summary>English Prompt (英文备用)</summary>
+
+```
+a lean Black Mountain bandit scout (黑山游骑)的竖版人物立绘。
+外貌：Wiry mountain bandit with soot smeared on his face as camouflage.
+铠甲与服饰：Furs and coarse cloth, mismatched scavenged gear.
+武器：A broadsword or spear, crouched warily.
+背景：the snowy forest fringe outside the Black Mountain stockade。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处，头部完整且顶部留有余白。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```

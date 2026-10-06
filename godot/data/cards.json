@@ -2625,7 +2625,7 @@
     "beihai_tuntian": {
       "name": "北海屯田兵",
       "rarity": "N",
-      "troop": "infantry",
+      "troop": "spear",
       "bonus": {
         "hp": 20,
         "at": 4
@@ -3064,7 +3064,7 @@
     "shuizei_bing": {
       "name": "江东水贼",
       "rarity": "N",
-      "troop": "bandit",
+      "troop": "spear",
       "bonus": {
         "at": 6
       },
@@ -3089,7 +3089,7 @@
     "huangjin_nanxia": {
       "name": "南下黄巾",
       "rarity": "N",
-      "troop": "bandit",
+      "troop": "spear",
       "bonus": {
         "hp": 10,
         "at": 4
@@ -4294,7 +4294,7 @@
     "jingzhou_bu": {
       "name": "荆州步卒",
       "rarity": "N",
-      "troop": "infantry",
+      "troop": "spear",
       "bonus": {
         "hp": 25
       },
@@ -4414,7 +4414,7 @@
     "taihang_yiyong": {
       "name": "太行义勇",
       "rarity": "N",
-      "troop": "infantry",
+      "troop": "spear",
       "bonus": {
         "hp": 15,
         "at": 6
@@ -4424,7 +4424,7 @@
     "heishan_bing": {
       "name": "黑山游骑",
       "rarity": "N",
-      "troop": "bandit",
+      "troop": "spear",
       "bonus": {
         "at": 6
       },

@@ -579,12 +579,22 @@ func test_no_swapping_in_the_first_two_rounds() -> void:
 	check(b.can_swap(slot), "round 3")
 
 
-func test_swap_never_crosses_troops_or_doubles_a_person() -> void:
-	var b := _swap_battle()
+func test_swap_can_bring_in_another_troop_but_never_a_troop_already_leading() -> void:
+	var s := SaveData.new()
+	s.owned = ["machao", "zhaoyun", "madai", "zhangfei", "daqiao"]
+	s.party = ["machao", "zhaoyun"]
+	var b := Battle.start("hulao", s.party_leaders(), 1, 0, {}, {}, false, {}, s.swap_roster())
+	b.round_no = b.swap_from_round()
 	var slot := _slot_of(b, "machao")
-	var ids := b.swap_options(slot).map(func(ld): return ld["card"]["troop"])
-	check(ids.all(func(t): return t == "cavalry"), "same troop only")
+	var troops := b.swap_options(slot).map(func(ld): return ld["card"]["troop"])
+	check(troops.has("cavalry") and troops.has("logistics"), "another cavalry card, or a card of a troop nobody leads: " + str(troops))
+	check(not troops.has("spear"), "zhaoyun already leads the spear troop")
 	check_eq(b.swap_options(0).size(), 0, "the lord has no stand-in")
+	b.ap = 6
+	b.swap(slot, "daqiao")
+	check_eq(b.leaders[slot]["leader"]["card"]["troop"], "logistics", "the slot is a logistics leader now")
+	var next_troops := b.swap_options(slot).map(func(ld): return ld["card"]["troop"])
+	check(next_troops.has("cavalry") and not next_troops.has("spear"), "and the cavalry slot it left can be taken again by cavalry")
 
 
 func test_cleanse_lifts_confusion_fire_and_drained_ap() -> void:
