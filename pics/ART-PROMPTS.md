@@ -9,7 +9,6 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-1. `c3_guotu_raid` — 北线·郭图寻仇（剧情 CG）
 2. `c3_secret_path` — 北线·黑山秘道（剧情 CG）
 3. `c3_guojia_map` — 北线·界桥前夜（剧情 CG）
 4. `c3_breakout` — 北线·府门突围（剧情 CG）
@@ -2978,7 +2977,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 
 ## 剧情插图 CG（横版 16:9）
 
-### `c3_guotu_raid`
+### `c3_guotu_raid` ✅
 
 ```
 16:9 横版故事剧情事件插画，视觉小说剧情 CG，兰斯10赛璐珞厚涂风格，精致清晰黑色墨线勾勒，华丽沉稳色彩。无极甄府大门外：郭图骑在马上，摇着扇子阴冷地笑着，一队冀州重甲兵撞开了甄府的大门。地面为开阔坚硬平整的青石板街道。

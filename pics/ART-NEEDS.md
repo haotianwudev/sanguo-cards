@@ -356,7 +356,7 @@
 | ⬜ 缺 | `end_fuchao` | 覆巢 |
 | ✅ 已有 | `c3_zhangyan_meet` | 黑山大寨 |
 | ⬜ 缺 | `c3_alliance` | 黑山令 |
-| ⬜ 缺 | `c3_guotu_raid` | 郭图寻仇 |
+| ✅ 已有 | `c3_guotu_raid` | 郭图寻仇 |
 | ⬜ 缺 | `c3_secret_path` | 黑山秘道 |
 | ⬜ 缺 | `c3_breakout` | 府门突围 |
 | ⬜ 缺 | `c3_guojia_map` | 界桥前夜 |
