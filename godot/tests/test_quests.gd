@@ -1092,3 +1092,25 @@ func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() 
 					with_fights += 1
 			check(with_fights >= 1 and with_fights < lanes.size(), "%s: the fork at %s needs a fight lane and a no-fight lane" % [qid, s["id"]])
 	check(forks >= 12, "found the forks (%d)" % forks)
+
+
+func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_lane_too() -> void:
+	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng"], "shouluoyang": ["wenji_tale", "plan", "xizi"],
+		"changan": ["caiyong", "yuexia", "xian"], "jingxiang": ["jx_diaochan", "jx_bubing", "jx_jinggao", "jx_xiangyang", "jx_mimou"]}
+	var db := GameData.get_db()
+	for q in db.quests:
+		for fid in forks.get(q["id"], []):
+			var sq: Dictionary = q["squares"]
+			var preds := {}
+			for s in sq.values():
+				for n in s["next"]:
+					preds[n] = int(preds.get(n, 0)) + 1
+			var fights := 0
+			for first in sq[fid]["next"]:
+				var lane: Array = [first]
+				while sq[lane[-1]]["next"].size() == 1 and int(preds.get(sq[lane[-1]]["next"][0], 0)) == 1:
+					lane.append(sq[lane[-1]]["next"][0])
+				check(lane.size() >= 2, "%s/%s: lane %s is one square" % [q["id"], fid, first])
+				if lane.any(func(id): return sq[id]["type"] == "battle"):
+					fights += 1
+			check_eq(fights, 1, "%s/%s: one lane fights, the other does not" % [q["id"], fid])
