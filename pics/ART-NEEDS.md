@@ -569,7 +569,7 @@
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋 |
 | ✅ 正式 | `guanhai` | 管亥 |
 | ⬜ 缺 | `bandit` | 太行巡山兵 |
-| ⬜ 缺 | `yanliang` | 颜良 |
+| ✅ 正式 | `yanliang` | 颜良 |
 | ⬜ 缺 | `huangjin` | 黄巾渠帅 |
 
 能拿到的卡

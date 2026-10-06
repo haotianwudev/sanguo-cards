@@ -123,6 +123,7 @@
 | `gongsunzan` | source/generals/gongsunzan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guanhai` | source/generals/guanhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wenchou` | source/generals/wenchou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yanliang` | source/generals/yanliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yayi` | source/soldiers/yayi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangbaiqi` | source/generals/zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guotu` | source/generals/guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

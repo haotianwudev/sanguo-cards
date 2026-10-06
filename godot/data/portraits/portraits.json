@@ -121,6 +121,7 @@
   "gongsunzan": {"file": "gongsunzan.jpg", "face": [0.5, 0.25], "head": 0.25},
   "guanhai": {"file": "guanhai.jpg", "face": [0.5, 0.3], "head": 0.26},
   "wenchou": {"file": "wenchou.jpg", "face": [0.5, 0.16], "head": 0.22},
+  "yanliang": {"file": "yanliang.jpg", "face": [0.49, 0.19], "head": 0.22},
   "yayi": {"file": "yayi.jpg", "face": [0.5, 0.28], "head": 0.24},
   "zhangbaiqi": {"file": "zhangbaiqi.jpg", "face": [0.53, 0.23], "head": 0.24},
   "guotu": {"file": "guotu.jpg", "face": [0.47, 0.26], "head": 0.28},

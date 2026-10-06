@@ -1127,6 +1127,15 @@
       "head": 0.22,
       "license": "用户提供（Gemini 生成）"
     },
+    "yanliang": {
+      "src": "source/generals/yanliang.jpg",
+      "face": [
+        0.49,
+        0.19
+      ],
+      "head": 0.22,
+      "license": "用户提供（Gemini 生成）"
+    },
     "yayi": {
       "src": "source/soldiers/yayi.jpg",
       "face": [
