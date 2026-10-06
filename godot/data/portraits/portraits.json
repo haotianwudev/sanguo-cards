@@ -35,6 +35,7 @@
   "lvmeng": {"file": "lvmeng.jpg", "face": [0.4, 0.17], "head": 0.07, "placeholder": true},
   "machao": {"file": "machao.jpg", "face": [0.48, 0.13], "head": 0.07, "placeholder": true},
   "madai": {"file": "madai.jpg", "face": [0.45, 0.25], "head": 0.06, "placeholder": true},
+  "mifang": {"file": "mifang.jpg", "face": [0.5, 0.28], "head": 0.25},
   "mizhu": {"file": "mizhu.jpg", "face": [0.5, 0.28], "head": 0.25},
   "pangtong": {"file": "pangtong.jpg", "face": [0.45, 0.12], "head": 0.07, "placeholder": true},
   "sunshangxiang": {"file": "sunshangxiang.jpg", "face": [0.51, 0.23], "head": 0.25},
