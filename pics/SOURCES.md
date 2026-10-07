@@ -165,6 +165,30 @@
 | `huangjin_vanguard` | source/soldiers/huangjin_vanguard.jpg | 用户提供 | Antigravity 生成 | — |
 | `bandit` | source/soldiers/bandit.jpg | 用户提供 | Antigravity 生成 | — |
 | `huangjin` | source/soldiers/huangjin.jpg | 用户提供 | Antigravity 生成 | — |
+| `changshan_qinwei` | source/generals/changshan_qinwei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `fucong` | source/generals/fucong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiading` | source/generals/jiading.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiangdong_qinwei` | source/generals/jiangdong_qinwei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `mafu` | source/generals/mafu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `qinwei` | source/generals/qinwei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `shinv` | source/generals/shinv.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `shutong` | source/generals/shutong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhenfu_chuniang` | source/generals/zhenfu_chuniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhenfu_jiading` | source/generals/zhenfu_jiading.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhenfu_xiunv` | source/generals/zhenfu_xiunv.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhenfu_yahuan` | source/generals/zhenfu_yahuan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bashu_qiang` | source/generals/bashu_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bingzhou_qiang` | source/generals/bingzhou_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `changshan_qiang` | source/generals/changshan_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `danyang_qiang` | source/generals/danyang_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jinwei_ji` | source/generals/jinwei_ji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jizhou_ji` | source/generals/jizhou_ji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `tengjia_qiang` | source/generals/tengjia_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wudang_feijun` | source/generals/wudang_feijun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiliang_maozi` | source/generals/xiliang_maozi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xuzhou_qiang` | source/generals/xuzhou_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `youzhou_qiang` | source/generals/youzhou_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yulin_lang` | source/generals/yulin_lang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |

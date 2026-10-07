@@ -272,8 +272,8 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `xiliang_maozi` | 西凉长矛手 |
-| ⬜ 缺 | `jizhou_ji` | 冀州长戟兵 |
+| ✅ 正式 | `xiliang_maozi` | 西凉长矛手 |
+| ✅ 正式 | `jizhou_ji` | 冀州长戟兵 |
 | ⬜ 缺 | `chenglian` | 成廉 |
 | ⬜ 缺 | `weixu` | 魏续 |
 
@@ -596,7 +596,7 @@
 | ✅ 正式 | `beihai_tuntian` | 北海屯田兵 |
 | ✅ 正式 | `qingzhou` | 青州兵（黄巾渠帅的卡） |
 | ✅ 正式 | `gongsunzan` | 公孙瓒 |
-| ⬜ 缺 | `bingzhou_qiang` | 并州枪卫 |
+| ✅ 正式 | `bingzhou_qiang` | 并州枪卫 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 

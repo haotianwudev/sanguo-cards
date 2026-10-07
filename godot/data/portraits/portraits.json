@@ -172,5 +172,17 @@
   "zhenfu_chuniang": {"file": "zhenfu_chuniang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhenfu_jiading": {"file": "zhenfu_jiading.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhenfu_xiunv": {"file": "zhenfu_xiunv.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "zhenfu_yahuan": {"file": "zhenfu_yahuan.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "zhenfu_yahuan": {"file": "zhenfu_yahuan.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "bashu_qiang": {"file": "bashu_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "bingzhou_qiang": {"file": "bingzhou_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "changshan_qiang": {"file": "changshan_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "danyang_qiang": {"file": "danyang_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jinwei_ji": {"file": "jinwei_ji.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jizhou_ji": {"file": "jizhou_ji.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "tengjia_qiang": {"file": "tengjia_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "wudang_feijun": {"file": "wudang_feijun.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "xiliang_maozi": {"file": "xiliang_maozi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "xuzhou_qiang": {"file": "xuzhou_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "youzhou_qiang": {"file": "youzhou_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "yulin_lang": {"file": "yulin_lang.jpg", "face": [0.5, 0.22], "head": 0.22}
 }
