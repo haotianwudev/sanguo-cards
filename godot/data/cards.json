@@ -3126,7 +3126,6 @@
       "troop": "logistics",
       "troop_skills": false,
       "skills": [
-        "baozha",
         "xinglin",
         "jiedu"
       ],
