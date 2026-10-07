@@ -330,10 +330,11 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
+| ⬜ 缺 | `xiandeng_sishi` | 先登死士 |
 | ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
 | ⬜ 缺 | `yangang` | 严纲 |
 | ⬜ 缺 | `zoudan` | 邹丹 |
-| ⬜ 缺 | `gaolan` | 高览 |
+| ✅ 正式 | `gaolan` | 高览 |
 | ⬜ 缺 | `zhanghe` | 张郃 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
@@ -369,14 +370,14 @@
 | ✅ 已有 | `c3_save_ning` | 战白骑 |
 | ⬜ 缺 | `end_fuchao` | 覆巢 |
 | ✅ 已有 | `c3_zhangyan_meet` | 黑山大寨 |
-| ⬜ 缺 | `c3_alliance` | 黑山令 |
+| ✅ 已有 | `c3_alliance` | 黑山令 |
 | ✅ 已有 | `c3_guotu_raid` | 郭图寻仇 |
 | ✅ 已有 | `c3_secret_path` | 黑山秘道 |
 | ✅ 已有 | `c3_breakout` | 府门突围 |
 | ✅ 已有 | `c3_guojia_map` | 界桥前夜 |
 | ⬜ 缺 | `c3_quyi_camp` | 先登死士 |
-| ⬜ 缺 | `c3_save_zan` | 猛将文丑 |
-| ⬜ 缺 | `c3_banma_flag` | 斑马大旗 |
+| ✅ 已有 | `c3_save_zan` | 猛将文丑 |
+| ✅ 已有 | `c3_banma_flag` | 斑马大旗 |
 
 ## 第三章 · 传国玉玺
 
@@ -804,7 +805,7 @@
 | ✅ 正式 | `xiaoqiao` | 小乔（SR） |
 | ✅ 正式 | `zhenmi` | 甄宓（SR） |
 | ✅ 正式 | `machao` | 马超（SR） |
-| 🟡 占位 | `zhangliao` | 张辽（SR） |
+| ✅ 正式 | `zhangliao` | 张辽（SR） |
 | 🟡 占位 | `xuchu` | 许褚（SR） |
 | 🟡 占位 | `pangtong` | 庞统（SR） |
 | ✅ 正式 | `daqiao` | 大乔（SR） |
@@ -815,10 +816,10 @@
 | ✅ 正式 | `huanggai` | 黄盖（SR） |
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
 | ⬜ 缺 | `luxun` | 陆逊（SSR） |
-| ⬜ 缺 | `zhurong` | 祝融·南中女王（SSR） |
+| ✅ 正式 | `zhurong` | 祝融·南中女王（SSR） |
 | ✅ 正式 | `mayunlu` | 马云騄（SR） |
-| ⬜ 缺 | `wangyi` | 王异（SR） |
-| ⬜ 缺 | `xinxianying` | 辛宪英（SR） |
+| ✅ 正式 | `wangyi` | 王异（SR） |
+| ✅ 正式 | `xinxianying` | 辛宪英（SR） |
 | ✅ 正式 | `bianfuren` | 卞夫人（SR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
 | ⬜ 缺 | `jiangwei` | 姜维（SSR） |
@@ -828,7 +829,7 @@
 | ⬜ 缺 | `xiahoudun` | 夏侯惇（SR） |
 | ⬜ 缺 | `dongfeng` | 董奉（R） |
 | ⬜ 缺 | `zhangzhao` | 张昭（R） |
-| ⬜ 缺 | `bulianshi` | 步练师（R） |
+| ✅ 正式 | `bulianshi` | 步练师（R） |
 | ⬜ 缺 | `qiaoguolao` | 乔国老（R） |
 | ⬜ 缺 | `zhoucang` | 周仓（R） |
 | 🟡 占位 | `liaohua` | 廖化（R） |

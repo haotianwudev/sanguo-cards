@@ -470,7 +470,6 @@
         0.17
       ],
       "head": 0.07,
-      "placeholder": true,
       "source": "https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg",
       "license": "Public domain",
       "artist": "—"
@@ -1746,6 +1745,33 @@
         0.22
       ],
       "head": 0.22
+    },
+    "wangyi": {
+      "src": "source/generals/wangyi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "xinxianying": {
+      "src": "source/generals/xinxianying.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhurong": {
+      "src": "source/generals/zhurong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -2217,6 +2243,14 @@
     },
     "defeat_south": {
       "src": "source/cg/defeat_south.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_banma_flag": {
+      "src": "source/cg/c3_banma_flag.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_save_zan": {
+      "src": "source/cg/c3_save_zan.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

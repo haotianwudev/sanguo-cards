@@ -189,6 +189,15 @@
 | `xuzhou_qiang` | source/soldiers/xuzhou_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `youzhou_qiang` | source/soldiers/youzhou_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yulin_lang` | source/soldiers/yulin_lang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bulianshi` | source/generals/bulianshi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caisang` | source/soldiers/caisang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chaniang` | source/soldiers/chaniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chuniang` | source/soldiers/chuniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `gaolan` | source/generals/gaolan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huansha` | source/soldiers/huansha.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wangyi` | source/generals/wangyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xinxianying` | source/generals/xinxianying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhurong` | source/generals/zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -302,3 +311,8 @@
 | `cg:c3_breakout` | source/cg/c3_breakout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_xiahoulan_law` | source/cg/c3_xiahoulan_law.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_save_ning` | source/cg/c3_save_ning.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_alliance` | source/cg/c3_alliance.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:defeat_north` | source/cg/defeat_north.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:defeat_south` | source/cg/defeat_south.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_banma_flag` | source/cg/c3_banma_flag.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_save_zan` | source/cg/c3_save_zan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

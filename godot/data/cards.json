@@ -4644,6 +4644,18 @@
       ],
       "pool": false
     },
+    "xiandeng_sishi": {
+      "name": "先登死士",
+      "rarity": "N",
+      "elite": true,
+      "troop": "infantry",
+      "bonus": {
+        "hp": 30,
+        "at": 10
+      },
+      "scope": "north",
+      "weight": 1
+    },
     "quyi": {
       "name": "「先登死士」麹义",
       "rarity": "SR",
