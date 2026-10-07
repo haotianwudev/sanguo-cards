@@ -1478,7 +1478,7 @@
       "license": "Antigravity 生成"
     },
     "changshan_qinwei": {
-      "src": "source/generals/changshan_qinwei.jpg",
+      "src": "source/soldiers/changshan_qinwei.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1487,7 +1487,7 @@
       "head": 0.22
     },
     "fucong": {
-      "src": "source/generals/fucong.jpg",
+      "src": "source/soldiers/fucong.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1496,7 +1496,7 @@
       "head": 0.22
     },
     "jiading": {
-      "src": "source/generals/jiading.jpg",
+      "src": "source/soldiers/jiading.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1505,7 +1505,7 @@
       "head": 0.22
     },
     "jiangdong_qinwei": {
-      "src": "source/generals/jiangdong_qinwei.jpg",
+      "src": "source/soldiers/jiangdong_qinwei.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1514,7 +1514,7 @@
       "head": 0.22
     },
     "mafu": {
-      "src": "source/generals/mafu.jpg",
+      "src": "source/soldiers/mafu.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1523,7 +1523,7 @@
       "head": 0.22
     },
     "qinwei": {
-      "src": "source/generals/qinwei.jpg",
+      "src": "source/soldiers/qinwei.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1532,7 +1532,7 @@
       "head": 0.22
     },
     "shinv": {
-      "src": "source/generals/shinv.jpg",
+      "src": "source/soldiers/shinv.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1541,7 +1541,7 @@
       "head": 0.22
     },
     "shutong": {
-      "src": "source/generals/shutong.jpg",
+      "src": "source/soldiers/shutong.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1550,7 +1550,7 @@
       "head": 0.22
     },
     "zhenfu_chuniang": {
-      "src": "source/generals/zhenfu_chuniang.jpg",
+      "src": "source/soldiers/zhenfu_chuniang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1559,7 +1559,7 @@
       "head": 0.22
     },
     "zhenfu_jiading": {
-      "src": "source/generals/zhenfu_jiading.jpg",
+      "src": "source/soldiers/zhenfu_jiading.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1568,7 +1568,7 @@
       "head": 0.22
     },
     "zhenfu_xiunv": {
-      "src": "source/generals/zhenfu_xiunv.jpg",
+      "src": "source/soldiers/zhenfu_xiunv.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1577,7 +1577,7 @@
       "head": 0.22
     },
     "zhenfu_yahuan": {
-      "src": "source/generals/zhenfu_yahuan.jpg",
+      "src": "source/soldiers/zhenfu_yahuan.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1586,7 +1586,7 @@
       "head": 0.22
     },
     "bashu_qiang": {
-      "src": "source/generals/bashu_qiang.jpg",
+      "src": "source/soldiers/bashu_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1595,7 +1595,7 @@
       "head": 0.22
     },
     "bingzhou_qiang": {
-      "src": "source/generals/bingzhou_qiang.jpg",
+      "src": "source/soldiers/bingzhou_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1604,7 +1604,7 @@
       "head": 0.22
     },
     "changshan_qiang": {
-      "src": "source/generals/changshan_qiang.jpg",
+      "src": "source/soldiers/changshan_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1613,7 +1613,7 @@
       "head": 0.22
     },
     "danyang_qiang": {
-      "src": "source/generals/danyang_qiang.jpg",
+      "src": "source/soldiers/danyang_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1622,7 +1622,7 @@
       "head": 0.22
     },
     "jinwei_ji": {
-      "src": "source/generals/jinwei_ji.jpg",
+      "src": "source/soldiers/jinwei_ji.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1631,7 +1631,7 @@
       "head": 0.22
     },
     "jizhou_ji": {
-      "src": "source/generals/jizhou_ji.jpg",
+      "src": "source/soldiers/jizhou_ji.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1640,7 +1640,7 @@
       "head": 0.22
     },
     "tengjia_qiang": {
-      "src": "source/generals/tengjia_qiang.jpg",
+      "src": "source/soldiers/tengjia_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1649,7 +1649,7 @@
       "head": 0.22
     },
     "wudang_feijun": {
-      "src": "source/generals/wudang_feijun.jpg",
+      "src": "source/soldiers/wudang_feijun.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1658,7 +1658,7 @@
       "head": 0.22
     },
     "xiliang_maozi": {
-      "src": "source/generals/xiliang_maozi.jpg",
+      "src": "source/soldiers/xiliang_maozi.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1667,7 +1667,7 @@
       "head": 0.22
     },
     "xuzhou_qiang": {
-      "src": "source/generals/xuzhou_qiang.jpg",
+      "src": "source/soldiers/xuzhou_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1676,7 +1676,7 @@
       "head": 0.22
     },
     "youzhou_qiang": {
-      "src": "source/generals/youzhou_qiang.jpg",
+      "src": "source/soldiers/youzhou_qiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,
@@ -1685,7 +1685,7 @@
       "head": 0.22
     },
     "yulin_lang": {
-      "src": "source/generals/yulin_lang.jpg",
+      "src": "source/soldiers/yulin_lang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,

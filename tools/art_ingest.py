@@ -149,7 +149,7 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
     e = cfg[sec].get(key, {})
     if kind == "portrait":
         card = json.loads((DATA / "cards.json").read_text("utf-8")).get("cards", {}).get(key, {})
-        rel = e.get("src") or f"source/{'soldiers' if card.get('soldier') else 'generals'}/{key}.jpg"
+        rel = e.get("src") or f"source/{'soldiers' if card.get('rarity') == 'N' else 'generals'}/{key}.jpg"
     else:
         rel = f"source/{SRC_DIR[kind]}/{key}.jpg"
     dst = PICS / rel
