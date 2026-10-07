@@ -33,3 +33,12 @@
 - [ ] 2026-10-06 map `jingxiang` ← jingxiang.jpg · ok
 - [ ] 2026-10-06 map `shouluoyang` ← shouluoyang.jpg · ok
 - [ ] 2026-10-06 map `yuxi` ← yuxi.jpg · ok
+- [ ] 2026-10-06 portrait `bulianshi` ← bulianshi.webp · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-06 cg `c3_alliance` ← c3_alliance.jpg · ok
+- [ ] 2026-10-06 portrait `caisang` ← caisang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-06 portrait `chaniang` ← chaniang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-06 portrait `chuniang` ← chuniang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-06 cg `defeat_north` ← defeat_north.jpg · ok
+- [ ] 2026-10-06 cg `defeat_south` ← defeat_south.jpg · ok
+- [ ] 2026-10-06 portrait `gaolan` ← gaolan.webp · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-06 portrait `huansha` ← huansha.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

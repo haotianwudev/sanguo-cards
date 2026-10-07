@@ -184,5 +184,11 @@
   "xiliang_maozi": {"file": "xiliang_maozi.jpg", "face": [0.5, 0.22], "head": 0.22},
   "xuzhou_qiang": {"file": "xuzhou_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "youzhou_qiang": {"file": "youzhou_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "yulin_lang": {"file": "yulin_lang.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "yulin_lang": {"file": "yulin_lang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "bulianshi": {"file": "bulianshi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "caisang": {"file": "caisang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "chaniang": {"file": "chaniang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "chuniang": {"file": "chuniang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "gaolan": {"file": "gaolan.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "huansha": {"file": "huansha.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

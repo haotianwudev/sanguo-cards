@@ -1692,6 +1692,60 @@
         0.22
       ],
       "head": 0.22
+    },
+    "bulianshi": {
+      "src": "source/generals/bulianshi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "caisang": {
+      "src": "source/soldiers/caisang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "chaniang": {
+      "src": "source/soldiers/chaniang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "chuniang": {
+      "src": "source/soldiers/chuniang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "gaolan": {
+      "src": "source/generals/gaolan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "huansha": {
+      "src": "source/soldiers/huansha.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -2151,6 +2205,18 @@
     },
     "c3_save_ning": {
       "src": "source/cg/c3_save_ning.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_alliance": {
+      "src": "source/cg/c3_alliance.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "defeat_north": {
+      "src": "source/cg/defeat_north.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "defeat_south": {
+      "src": "source/cg/defeat_south.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
