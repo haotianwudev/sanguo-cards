@@ -712,5 +712,5 @@ func test_a_soldier_can_have_its_own_skills_instead_of_its_troops() -> void:
 
 func test_the_army_doctor_heals_and_cleanses() -> void:
 	var f := GameData.get_db().build_fighter("junyi")
-	check_eq(f["skills"], ["xinglin", "jiedu"], "杏林春暖 + 解毒")
+	check_eq(f["skills"], ["baozha", "jiedu"], "包扎 + 解毒")
 
