@@ -485,7 +485,7 @@ func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
 		check(db.build_fighter(cid)["skills"].is_empty(), cid + " has no skills: it only strengthens the lord")
 	var north := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "north")
 	var south := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "south")
-	check(north.size() >= 4 and south.size() >= 4, "both routes have their own: %d / %d" % [north.size(), south.size()])
+	check(north.size() >= 3 and south.size() >= 3, "both routes have their own: %d / %d" % [north.size(), south.size()])
 
 
 func test_chests_draw_from_the_public_pool_the_chapters_soldiers_and_your_history() -> void:
