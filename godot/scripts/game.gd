@@ -149,6 +149,12 @@ func demo(name: String) -> void:
 		save.run_records.append("出生：冀州无极")
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
+	if name == "newgame":  # the 从零开始 confirmation (a save exists), then the name
+		show_screen(TitleScreen.new())
+		var d := NewGameDialog.new()
+		d.wipes_save = true
+		root.add_child(d)
+		return
 	if name == "level":  # the 难度 pick after the birthplace, with two south endings reached
 		save.flags = ["结局一 · 玉碎", "结局二 · 同归"]
 		show_screen(TitleScreen.new())

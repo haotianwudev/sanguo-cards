@@ -69,15 +69,11 @@ func _ready() -> void:
 			replay.pressed.connect(func(): _replay_menu(col, saved))
 			col.add_child(replay)
 
-	var name_edit := LineEdit.new()
-	name_edit.placeholder_text = "你的名字（留空 = 主公）"
-	name_edit.custom_minimum_size = Vector2(0, 56)
-	name_edit.add_theme_font_size_override("font_size", Kit.FONT_BODY)
-	name_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	col.add_child(name_edit)
 	var start := Kit.button("新的旅程" if not has_save else "从零开始（清空存档）", "blue", Kit.FONT_BIG if not has_save else Kit.FONT_BODY)
-	start.pressed.connect(func(): Game.new_game(name_edit.text))
-	name_edit.text_submitted.connect(func(t): Game.new_game(t))
+	start.pressed.connect(func():
+		var d := NewGameDialog.new()
+		d.wipes_save = has_save  # a save exists: ask before wiping it, then the name
+		Game.root.add_child(d))
 	col.add_child(start)
 	if not has_save:
 		Kit.focus(start)
