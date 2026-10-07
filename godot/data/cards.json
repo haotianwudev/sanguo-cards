@@ -3124,6 +3124,12 @@
       "rarity": "N",
       "elite": true,
       "troop": "logistics",
+      "troop_skills": false,
+      "skills": [
+        "baozha",
+        "xinglin",
+        "jiedu"
+      ],
       "bonus": {
         "hp": 15,
         "at": 4

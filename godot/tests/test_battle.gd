@@ -708,3 +708,9 @@ func test_a_soldier_can_have_its_own_skills_instead_of_its_troops() -> void:
 	var f := GameData.get_db().build_fighter("xiandeng_sishi")
 	check_eq(f["troop"], "infantry", "a shield-bearer by troop")
 	check_eq(f["skills"], ["sheji", "jushun"], "but its first skill is the archer's shot, then the shield")
+
+
+func test_the_army_doctor_heals_and_cleanses() -> void:
+	var f := GameData.get_db().build_fighter("junyi")
+	check_eq(f["skills"], ["baozha", "xinglin", "jiedu"], "包扎 + 杏林春暖 + 解毒")
+
