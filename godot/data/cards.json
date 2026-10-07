@@ -3109,6 +3109,100 @@
       "weight": 1,
       "scope": "south"
     },
+    "yunliang_bing": {
+      "name": "运粮兵",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 25,
+        "at": 2
+      },
+      "weight": 2
+    },
+    "junyi": {
+      "name": "军医",
+      "rarity": "N",
+      "elite": true,
+      "troop": "logistics",
+      "bonus": {
+        "hp": 15,
+        "at": 4
+      },
+      "weight": 1
+    },
+    "danjia_bing": {
+      "name": "担架兵",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 30,
+        "at": 3
+      },
+      "weight": 2
+    },
+    "tiejiang": {
+      "name": "随军铁匠",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 20,
+        "at": 6
+      },
+      "weight": 1
+    },
+    "tuoma_dui": {
+      "name": "驮马队",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 35
+      },
+      "weight": 2
+    },
+    "junxu_guan": {
+      "name": "军需官",
+      "rarity": "N",
+      "elite": true,
+      "troop": "logistics",
+      "bonus": {
+        "hp": 25,
+        "at": 5
+      },
+      "weight": 1
+    },
+    "caoyun_shuishou": {
+      "name": "漕运水手",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 30,
+        "at": 3
+      },
+      "scope": "south",
+      "weight": 2
+    },
+    "yaonong": {
+      "name": "太行药农",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 20,
+        "at": 4
+      },
+      "scope": "north",
+      "weight": 2
+    },
+    "shangdui": {
+      "name": "甄家商队",
+      "rarity": "N",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 30,
+        "at": 3
+      },
+      "scope": "north",
+      "weight": 2
+    },
     "minfu": {
       "name": "民夫",
       "rarity": "N",
