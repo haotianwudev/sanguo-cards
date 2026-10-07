@@ -3029,7 +3029,7 @@
     "huofu": {
       "name": "伙夫",
       "rarity": "N",
-      "troop": "lord",
+      "troop": "logistics",
       "bonus": {
         "hp": 25
       },
@@ -3060,7 +3060,7 @@
     "chuniang": {
       "name": "厨娘",
       "rarity": "N",
-      "troop": "lord",
+      "troop": "logistics",
       "bonus": {
         "hp": 25
       },
@@ -3081,7 +3081,7 @@
     "huansha": {
       "name": "浣纱女",
       "rarity": "N",
-      "troop": "lord",
+      "troop": "logistics",
       "bonus": {
         "hp": 15
       },
@@ -3091,7 +3091,7 @@
     "caisang": {
       "name": "采桑女",
       "rarity": "N",
-      "troop": "lord",
+      "troop": "logistics",
       "bonus": {
         "hp": 20
       },
@@ -3101,7 +3101,7 @@
     "chaniang": {
       "name": "茶娘",
       "rarity": "N",
-      "troop": "lord",
+      "troop": "logistics",
       "bonus": {
         "hp": 20,
         "at": 6
@@ -5155,7 +5155,7 @@
     "zhenfu_chuniang": {
       "name": "甄府厨娘",
       "rarity": "N",
-      "troop": "lord",
+      "troop": "logistics",
       "bonus": {
         "hp": 25
       },

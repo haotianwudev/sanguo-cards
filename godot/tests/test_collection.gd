@@ -480,7 +480,7 @@ func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
 		full += m["at"]
 	check(absf(float(with["at"]) - (float(alone["at"]) + full * mult)) < 1.5, "each counts lord_member_mult of its strength: %d vs %d" % [with["at"], int(alone["at"] + full * mult)])
 	check(s.validate_party(["qinwei"]) != "", "a retinue card can never lead a unit of its own")
-	for cid in ["yahuan", "xiuniang", "chuniang", "huansha", "caisang", "chaniang", "gongnv", "huofu", "qinwei"]:
+	for cid in ["yahuan", "xiuniang", "gongnv", "shinv", "qinwei"]:
 		check_eq(db.cards[cid]["troop"], "lord", cid + " serves the lord")
 		check(db.build_fighter(cid)["skills"].is_empty(), cid + " has no skills: it only strengthens the lord")
 	var north := db.cards.values().filter(func(c): return c["troop"] == "lord" and c.get("scope", "") == "north")
