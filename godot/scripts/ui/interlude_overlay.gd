@@ -155,7 +155,7 @@ func _show_title() -> void:
 		line.position = Vector2(140, 380)
 		line.size = Vector2(1000, 100)
 		_box.add_child(line)
-		var back := Kit.label("点击回到标题（可以开始新周目）", Kit.FONT_BODY)
+		var back := Kit.label("点击回到标题（可以新的开始）", Kit.FONT_BODY)
 		back.add_theme_color_override("font_color", Color(1, 1, 1, 0.5))
 		back.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		back.position = Vector2(0, 520)

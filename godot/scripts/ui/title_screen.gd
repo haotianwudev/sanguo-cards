@@ -36,9 +36,13 @@ func _ready() -> void:
 	if has_save:
 		var saved := SaveData.read()
 		if saved != null and saved.ended and saved.replay == "":  # an ending was reached: nothing to continue, only a new 周目
-			var over := Kit.label("这一轮已经结局", Kit.FONT_BODY, "muted")
-			over.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			col.add_child(over)
+			var fresh := Kit.button("新的开始", "green", Kit.FONT_BIG)
+			fresh.pressed.connect(Game.new_lap)
+			col.add_child(fresh)
+			Kit.focus(fresh)
+			var keep := Kit.label("测试：继承全部卡牌" if bool(Game.options["inherit_all"]) else "结局、卡的级别和曾拿到过的卡都会保留，卡牌重新来过", 14, "muted")
+			keep.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			col.add_child(keep)
 		else:
 			var cont := Kit.button("继续", "green", Kit.FONT_BIG)
 			cont.pressed.connect(Game.continue_game)
@@ -56,14 +60,11 @@ func _ready() -> void:
 				b._flags = saved.flags
 				Game.root.add_child(b))
 			col.add_child(book)
-		if saved != null and saved.lap > 1:
-			var lap_l := Kit.label("第 %d 周目" % saved.lap, Kit.FONT_BODY, "muted")
-			lap_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			col.add_child(lap_l)
 		if saved != null and not saved.quests_cleared.is_empty():
-			var lap := Kit.button("开始第 %d 周目（%s）" % [saved.lap + 1, "测试：继承全部卡牌" if bool(Game.options["inherit_all"]) else "卡牌重置，级别与曾拿到的卡会保留"], "purple", Kit.FONT_BODY)
-			lap.pressed.connect(Game.new_lap)
-			col.add_child(lap)
+			if not (saved.ended and saved.replay == ""):  # (after an ending the 新的开始 button above is the way on)
+				var lap := Kit.button("新的开始（卡牌重置，结局与卡的级别保留）", "purple", Kit.FONT_BODY)
+				lap.pressed.connect(Game.new_lap)
+				col.add_child(lap)
 			var replay := Kit.button("重玩章节", "gold")
 			replay.pressed.connect(func(): _replay_menu(col, saved))
 			col.add_child(replay)
