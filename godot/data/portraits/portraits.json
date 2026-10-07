@@ -193,5 +193,6 @@
   "huansha": {"file": "huansha.jpg", "face": [0.5, 0.22], "head": 0.22},
   "wangyi": {"file": "wangyi.jpg", "face": [0.5, 0.22], "head": 0.22},
   "xinxianying": {"file": "xinxianying.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "zhurong": {"file": "zhurong.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "zhurong": {"file": "zhurong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "xiandeng_sishi": {"file": "xiandeng_sishi.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

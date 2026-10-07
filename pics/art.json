@@ -1772,6 +1772,15 @@
         0.22
       ],
       "head": 0.22
+    },
+    "xiandeng_sishi": {
+      "src": "source/soldiers/xiandeng_sishi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -2251,6 +2260,14 @@
     },
     "c3_save_zan": {
       "src": "source/cg/c3_save_zan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_quyi_camp": {
+      "src": "source/cg/c3_quyi_camp.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_fuchao": {
+      "src": "source/cg/end_fuchao.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
