@@ -39,7 +39,7 @@
 28. `caoyun_shuishou` — 漕运水手（新增后勤兵卡）（立绘）
 29. `yaonong` — 太行药农（新增后勤兵卡）（立绘）
 30. `shangdui` — 甄家商队（新增后勤兵卡）（立绘）
-31. `sunshangxiang_young` — 孙尚香·幼年（南线第一章富春家中的小女孩，木刀）（立绘）
+31. `sunshangxiang_young` — 孙尚香·少女时期（十二三岁，南线第一章富春家中，木刀）（立绘）
 32. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
 33. `liniang` — 黎娘（成年女性，山越女王）（立绘）
 34. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
@@ -2213,10 +2213,10 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `sunshangxiang_young` ⬜ 缺
 
 ```
-孙尚香·幼年（孙坚的小女儿，八九岁的小女孩，南线第一章富春家中的非战斗角色——和通用池成年版 `sunshangxiang` 是同一人小时候，两个 key 分开画）的竖版人物立绘。
-外貌：八九岁的小女孩，圆脸大眼，浓眉倔强，嘴角挂着调皮的笑，头发扎成两个高高的小髻
-铠甲与服饰：红色小袄配深色短裙，袖口扎紧，脚穿小布靴
-武器：双手举着一把比她还长的木刀，摆出要砍人的架势（只是玩具木刀，不画真刀）
+孙尚香·少女时期（孙坚的小女儿，十二三岁的少女，南线第一章富春家中的非战斗角色——和通用池成年版 `sunshangxiang` 是同一人小时候，两个 key 分开画）的竖版人物立绘。
+外貌：十二三岁的少女，脸庞还带点婴儿肥，大眼浓眉，倔强又调皮，头发高高束成一条马尾，已经显出日后英气的轮廓
+铠甲与服饰：红色窄袖短衣配深色长裤，袖口束紧，脚穿布靴
+武器：双手握着一把练习用的木刀，摆出要砍人的架势（只是木刀，不画真刀）
 背景：富春家中的院子，晾着衣服，阳光明亮。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
@@ -2226,10 +2226,10 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 <summary>English Prompt (英文备用)</summary>
 
 ```
-young Sun Shangxiang (孙尚香), Sun Jian's little daughter at about eight — a child; this key is for her childhood appearance only, separate from the adult `sunshangxiang` card的竖版人物立绘。
-外貌：A mischievous girl of eight or nine with round cheeks, thick brows and two high buns.
-铠甲与服饰：A red padded jacket and a dark short skirt, small cloth boots.
-武器：Holding a toy wooden sword longer than her arm.
+young Sun Shangxiang (孙尚香), Sun Jian's daughter at about twelve or thirteen — a girl, not yet an adult; this key is for her early-teen appearance only, separate from the adult `sunshangxiang` card的竖版人物立绘。
+外貌：A mischievous girl of twelve or thirteen, slightly round cheeks, thick brows, hair in a high ponytail, the spirited look she will grow into.
+铠甲与服饰：A red narrow-sleeved short jacket, dark trousers, cloth boots.
+武器：Gripping a wooden practice sword.
 背景：the courtyard of the Sun family house in Fuchun。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
