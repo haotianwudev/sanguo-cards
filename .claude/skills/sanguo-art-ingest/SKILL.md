@@ -12,7 +12,7 @@ Reply in Chinese. Run from `F:\workspace\sanguo-cards`.
 **One image:** `python tools/art_ingest.py add "<path>" <key>` — the key is the cg / battle / card id (kind is inferred — cards / enemies / portrait keys → portrait, scenario ids → battle, the rest of the story keys → cg; pass `--kind cg|battle|map|portrait` if it says it can't tell).
 **Many:** write `<path> <key>` per line to a scratch file → `python tools/art_ingest.py batch list.txt`.
 
-It checks quality (too small / blank = refused unless `--force`; blur / dark / odd shape = warning, still installed), crops cg / battle / map to 16:9 (`--anchor top|bottom` keeps that side, e.g. faces near the top), keeps portraits' `face` / `head` framing (new portrait: pass `--face X Y --head H`, else defaults 0.5 0.22 / 0.22), builds the game copy, and appends one line to `pics/ART-LOG.md`.
+It checks quality (too small / blank = refused unless `--force`; blur / dark / odd shape = warning, still installed), crops cg / battle to 16:9 (chapter maps — ultra-wide 3200x1080 — are never cropped) (`--anchor top|bottom` keeps that side, e.g. faces near the top), keeps portraits' `face` / `head` framing (new portrait: pass `--face X Y --head H`, else defaults 0.5 0.22 / 0.22), builds the game copy, and appends one line to `pics/ART-LOG.md`.
 Report only the ✓ / ✗ / ⚠ lines to the user (a ⚠ blurry / badly-cropped image is worth telling them about; offer `--force` / another crop for ✗).
 
 **Do not** regenerate `ART-NEEDS.md` / `ART-PROMPTS.md` / `SOURCES.md` per image — that is the token cost. They are refreshed in one go by `python tools/art_ingest.py flush`, when `add` prints that 20 are waiting (or the user asks). `status` shows the count.

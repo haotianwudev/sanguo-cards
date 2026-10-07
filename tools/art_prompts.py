@@ -1275,11 +1275,13 @@ MAPS = {
                 "narrowing mountain gorge climbing toward a firelit skirmish; at the far right the bandits' snow-wrapped cliffside "
                 "stronghold on a mountain, smoke rising from its gate, with a path turning back south at its foot",
     "luoyang_n": "【需重画：地图已拉长到 38 列，旧底图是按 33 列画的】黄河古道到虎牢关再退回黄河渡口，自左向右依次：①左端（第 0–5 列）结冰的黄河古渡，粮车队，雪地里摔下马的红衣女将与她的营地；②（第 6–12 列）中山甄记的商旗、酸枣诸侯营里一面醒目的红色赞助旗，曹操借粮的帅帐，汴水边；③（第 13–19 列）西凉伏兵出没的林间小径，汴水败军的残旗和孤零零的将军帐，酸枣大营的宝箱与篝火；④（第 20–28 列）虎牢关灰暗的城墙与点点烽火，关前夜袭的火光，三英战吕布留下的一片烟尘，沿途散落的宝箱；⑤（第 29–34 列）洛阳方向天际被大火烧红，一条逆行的行军路，难民与星空下的路边；⑥右端（第 35–37 列）逃兵挤满的黄河渡口，丢弃的小船，岸边险路，渡口对岸是冀州方向。整体冷灰与火红对比，冬日雪气，俯视地图构图，中间一条主路，上下各留一条岔路位置（第 7、11、14、26、27、28、35 列有上/下岔点）",
-    "yuxi": "the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right",
-    "shouluoyang": "ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an",
-    "changan": "Chang'an in winter, left to right: the grand city gate; Dong Zhuo's lavish mansion with a courtyard duel ring; the palace with a rockery garden; a scholar's modest house; the Minister's mansion; a lotus pond with the Phoenix Pavilion; at the far right the chancellor's mansion hung with red wedding lanterns",
-    "jingxiang": "from Nanyang south to the Han river, left to right: the walled city of Wancheng in autumn with a courtyard kitchen and a chestnut stall by the river; the reed-lined Yu river and its battlefield; a Han river ferry landing with brocade-sailed boats; fortified clan villages (wubao) around Xinye and the town of Fancheng; the walled city of Xiangyang on the Han river with an armory and a river fortress full of war boats; Mount Xian with terraced fields; at the far right a lone pavilion on a rock above the river at Wanshan",
-    "dongui": "one long campaign, left to right: snowy Chang'an palace and the Xuanping Gate; the Wei river road east; the mountains and Hangu Pass; half-restored Luoyang with Sun banners; the summer road south; a Yuan army camp; the walled city of Wancheng in Nanyang at the far right",
+    "yuxi": "【地图共 27 列，南线第三章·传国玉玺】自焚毁的洛阳向南到南阳鲁阳，自左向右依次：①左端洛阳废墟冒着黑烟，长长的难民队伍南行；②山丘间断粮的孙坚军营，炊烟稀薄；③鲁阳城墙与酒肆街，街口有行人与酒旗；④雨水浸透的农田，袁术军营连绵；⑤最右端大雨中的狭窄山口",
+    "shouluoyang": "【地图共 22 列，南线第三章·收洛阳】重建中的洛阳，自左向右依次：①灰烬中的一堆篝火；②官眷被护送向西的官道；③山脚小路上的西凉粮队；④修复的宗庙与城墙，城头插着红底「孙」字旗；⑤太平的集市街；⑥最右端通向长安的西行大道",
+    "changan": "【地图共 31 列，第三章·长安】冬日长安，自左向右依次：①宏伟的城门；②董卓华丽的府邸与庭院里的比武场；③带假山花园的宫殿；④朴素的书生宅；⑤司徒府；⑥荷塘边的凤仪亭；⑦最右端挂满红色喜庆灯笼的丞相府",
+    "jingxiang": "【地图共 31 列，第五章·荆襄风云】自南阳向南到汉水，自左向右依次：①秋日宛城，院中的灶台与河边的栗子摊；②芦苇丛生的淯水与战场；③汉水渡口，挂锦帆的战船；④新野一带的坞堡与樊城小镇；⑤汉水边的襄阳城，有兵库与停满战船的水寨；⑥种着梯田的岘山；⑦最右端万山上江边岩石上的一座孤亭",
+    "dongui": "【地图共 37 列，第四章·挟天子】一条长征路，自左向右依次：①雪中的长安宫城与宣平门；②渭水东行的大道；③群山与函谷关；④插着红底「孙」字旗、半修复的洛阳；⑤向南的夏日官道；⑥袁术军营；⑦最右端南阳宛城的城墙",
+    "heishan": "【地图共 40 列，北线第三章·黑山风云，三条行进带：上=战斗线，中=主线，下=奇遇线】自左向右依次：①左端（第 0–6 列）真定县城与城外小路，城墙下贴着发榜的告示，军营里一名兵痞在闹事，旁边是校场；②（第 7–14 列）进入太行山：山道、采药人的小屋、深山绝壁，一处悬崖下有白马与人影；③（第 15–22 列）黑山大寨：木寨、演武场、寨中集市，大寨议事堂挂着黑山令；④（第 23–30 列）山中秘道与狭窄的峡谷，太行山口的关卡；⑤（第 31–39 列）界桥外围的原野，河畔的营垒，最右端是插着斑马大旗的战场。整体冬末春初，山色青灰",
+    "beihai": "【地图共 48 列，北线第四章·双凤乱太行，三条行进带：上=战斗线，中=主线，下=奇遇线】自左向右依次：①左端（第 0–12 列）太行外围，山寨与郑家寨、姜家寨隔山相望，两寨之间是山谷；②（第 13–24 列）太行休整营地，北方来的并州狼骑在山口扬尘，吕布的旗号隐约可见；③（第 25–31 列）突围：苇荡深处的河湾，冀州军追兵的营垒，黄河渡口；④（第 32–47 列）北海城：被黄巾军围困的城墙，城外黄巾的营帐与饥民，城门前支着熬粥的大锅，最右端是北海相府。整体夏季，色调偏暖",
     "taodong": "the march north to fight Dong Zhuo, left to right: country roads and farmland leaving the south; a dusty Central-Plains "
                "highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); "
                "Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three "
@@ -1406,6 +1408,14 @@ UI_ART = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
+    # 最优先 · 章节地图底图（缺 6 张 + 长安占位，没有它们这些章节只有空底）：
+    ("map", "heishan", "北线第三章·黑山风云地图底图（40 列）"),
+    ("map", "beihai", "北线第四章·双凤乱太行地图底图（48 列）"),
+    ("map", "yuxi", "南线第三章·传国玉玺地图底图（27 列）"),
+    ("map", "shouluoyang", "南线第三章·收洛阳地图底图（22 列）"),
+    ("map", "changan", "第三章·长安地图底图（31 列，现为程序占位）"),
+    ("map", "dongui", "第四章·挟天子地图底图（37 列）"),
+    ("map", "jingxiang", "第五章·荆襄风云地图底图（31 列）"),
     ("cg", "defeat_south", "阵亡 CG · 南线（主角倒在黄昏的泥泞战场上，古锭刀插在身旁，克制不见血）"),
     ("cg", "defeat_north", "阵亡 CG · 北线（主角倒在黄昏的雪原上，白蜡杆长枪插在身旁，克制不见血）"),
     ("portrait", "qinwei", "主公亲卫（主角队新增：亲卫 / 侍从）"),
@@ -1628,9 +1638,6 @@ NEXT = [
     ("cg", "c3_end", "碎玺决战（吴夫人碎玉玺面袁术）"),
 
     # P1 · 地图底图：
-    ("map", "changan", "第三章·长安地图底图"),
-    ("map", "dongui", "第四章·挟天子地图底图"),
-    ("map", "yuxi", "第三章·传国玉玺地图底图"),
 
     # P2 · 首领 / 精英战斗 CG 和结局卡：
     ("battle", "c5_dongzhuo", "未央宫前·董卓（首领）"),
@@ -1695,7 +1702,6 @@ NEXT = [
     ("battle", "jx_bubing", "淯水北岸·荆州步卒"),
     ("battle", "jx_gongshou", "芦苇荡·荆州弓手"),
     ("battle", "jx_nushou", "水阁·蔡府连弩手"),
-    ("map", "jingxiang", "第五章·荆襄风云地图底图"),
 
     # 兵卡：
     ("portrait", "jiangdong_gong", "江东弓手（第一章缺失兵卡）"),

@@ -7,7 +7,7 @@
   python tools/art_ingest.py status                # how many images are waiting for a flush
 
 What `add` does: (1) kind from the key (art.json / story / scenario / card ids) unless --kind; (2) quality check — hard fail when
-too small / blank, warnings for blur, dark, wrong shape (--force installs anyway); (3) crop cg / battle / map to 16:9 (centre, or
+too small / blank, warnings for blur, dark, wrong shape (--force installs anyway); (3) crop cg / battle to 16:9 (centre, or
 --anchor top|bottom), portraits are only re-saved; (4) writes pics/source/<dir>/<key>.jpg and the pics/art.json entry (an existing
 portrait keeps its face / head framing); (5) builds the game copy and appends a line to pics/ART-LOG.md.
 The docs are NOT regenerated per image — run `flush` after ~20 (add / status print the count and say when it is time).
@@ -35,7 +35,7 @@ DATA = ROOT / "godot" / "data"
 FLUSH_AT = 20
 SECTION = {"cg": "cgs", "battle": "battles", "map": "maps", "portrait": "portraits"}
 SRC_DIR = {"cg": "cg", "battle": "battles", "map": "map"}
-TARGET = 16 / 9  # cg / battle / map are cropped to this
+TARGET = 16 / 9  # cg / battle are cropped to this (portraits and the wide chapter maps are kept as they are)
 MIN_H = {"cg": 480, "battle": 480, "map": 480, "portrait": 400}  # hard fail below
 SOFT_H = {"cg": 560, "battle": 560, "map": 560, "portrait": 560}  # warn below
 
@@ -54,6 +54,9 @@ def infer_kind(key: str) -> str | None:
         return "battle"
     if key in cards.get("cards", {}) or key in cards.get("enemies", {}):
         return "portrait"
+    story = json.loads((DATA / "story.json").read_text("utf-8"))
+    if key in [q["id"] for q in story["quests"]]:
+        return "map"
     text = (DATA / "story.json").read_text("utf-8") + (DATA / "endings.json").read_text("utf-8") + (ROOT / "tools" / "art_prompts.py").read_text("utf-8")
     if re.search(r'"%s"' % re.escape(key), text):
         return "cg"
@@ -77,7 +80,7 @@ def quality(im: Image.Image, kind: str) -> tuple[list[str], list[str]]:
     sharp = float(lap.var())
     if sharp < 25:
         warn.append(f"偏模糊（锐度 {sharp:.0f}）")
-    if kind != "portrait":
+    if kind in ("cg", "battle"):
         r = w / h
         if abs(r / TARGET - 1) > 0.25:
             lost = (1 - min(r, TARGET) / max(r, TARGET)) * 100
@@ -86,7 +89,7 @@ def quality(im: Image.Image, kind: str) -> tuple[list[str], list[str]]:
 
 
 def crop(im: Image.Image, kind: str, anchor: str) -> Image.Image:
-    if kind == "portrait":
+    if kind in ("portrait", "map"):  # a chapter map is an ultra-wide scroll (3200x1080): never cropped
         return im
     w, h = im.size
     if abs(w / h / TARGET - 1) < 0.02:

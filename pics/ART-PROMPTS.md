@@ -9,140 +9,143 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-1. `defeat_south` — 阵亡 CG · 南线（主角倒在黄昏的泥泞战场上，古锭刀插在身旁，克制不见血）（剧情 CG）
-2. `defeat_north` — 阵亡 CG · 北线（主角倒在黄昏的雪原上，白蜡杆长枪插在身旁，克制不见血）（剧情 CG）
-3. `jiangwei` — 姜维（新增枪兵卡）（立绘）
-4. `chendao` — 陈到（新增枪兵卡）（立绘）
-5. `weiyan` — 魏延（新增枪兵卡）（立绘）
-6. `guanping` — 关平（新增枪兵卡）（立绘）
-7. `zhangbao` — 张苞（新增枪兵卡）（立绘）
-8. `guanxing` — 关兴（新增枪兵卡）（立绘）
-9. `chenglian` — 成廉（新增枪兵卡）（立绘）
-10. `weixu` — 魏续（新增枪兵卡）（立绘）
-11. `lingtong` — 凌统（新增枪兵卡）（立绘）
-12. `yangang` — 严纲（新增枪兵卡）（立绘）
-13. `gaolan` — 高览（新增枪兵卡）（立绘）
-14. `zoudan` — 邹丹（新增枪兵卡）（立绘）
-15. `c3_alliance` — 北线·结盟张燕（剧情 CG）（剧情 CG）
-16. `c3_banma_flag` — 北线·斑马大旗（剧情 CG）（剧情 CG）
-17. `c3_save_zan` — 北线·赵云救公孙瓒（剧情 CG）（剧情 CG）
-18. `c3_quyi_camp` — 北线·麹义先登营（剧情 CG）（剧情 CG）
-19. `end_fuchao` — 结局卡·覆巢（剧情 CG）（剧情 CG）
-20. `zhurong` — 祝融夫人（成年女性，南中女王）（立绘）
-21. `wangyi` — 王异（成年女性，智勇奇女）（立绘）
-22. `xinxianying` — 辛宪英（成年女性，魏晋才女）（立绘）
-23. `bulianshi` — 步练师（成年女性，江东贤女）（立绘）
-24. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
-25. `liniang` — 黎娘（成年女性，山越女王）（立绘）
-26. `chuniang` — 厨娘（成年女性，军中厨娘）（立绘）
-27. `chaniang` — 茶娘（成年女性，茶楼掌柜）（立绘）
-28. `huansha` — 浣纱女（成年女性，水乡浣纱）（立绘）
-29. `caisang` — 采桑女（成年女性，桑园采桑）（立绘）
-30. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
-31. `jz_county_fight` — 州衙·拔刀相助 战斗背景（战斗 CG）
-32. `jz_road_bandits` — 官道·黑山散兵 战斗背景（选路分支，走官道那一边）（战斗 CG）
-33. `taoqian` — 陶谦（立绘）
-34. `chendeng` — 陈登（立绘）
-35. `chengui` — 陈珪（立绘）
-36. `caobao` — 曹豹（立绘）
-37. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
-38. `xunyu` — 荀彧（第六章）（立绘）
-39. `caoren` — 曹仁（第六章）（立绘）
-40. `chengong` — 陈宫（立绘）
-41. `zhangliao` — 张辽（换掉占位）（立绘）
-42. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
-43. `xunyou` — 荀攸（立绘）
-44. `zhongyao` — 钟繇（立绘）
-45. `zhangxun` — 张勋（南线第六章）（立绘）
-46. `liuxun` — 刘勋（南线第六章）（立绘）
-47. `lusu` — 鲁肃（南线第六章入队）（立绘）
-48. `zhengbao` — 郑宝（南线第六章）（立绘）
-49. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
-50. `zangba` — 臧霸（北线第七章）（立绘）
-51. `shenrong` — 审荣（北线第七章）（立绘）
-52. `liuyao` — 刘繇（南线第七章）（立绘）
-53. `yanbaihu` — 严白虎（南线第七章）（立绘）
-54. `wanglang` — 王朗（南线第七章）（立绘）
-55. `zhoutai` — 周泰（南线第七章）（立绘）
-56. `jiangqin` — 蒋钦（南线第七章）（立绘）
-57. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
-58. `mateng` — 马腾（北线第八、九章）（立绘）
-59. `hansui` — 韩遂（北线第八章）（立绘）
-60. `pangde` — 庞德（北线第九章）（立绘）
-61. `tadun` — 蹋顿（北线第九章）（立绘）
-62. `gongsunkang` — 公孙康（北线第九章）（立绘）
-63. `liuzhang` — 刘璋（南线第九章）（立绘）
-64. `yanyan` — 严颜（南线第九章）（立绘）
-65. `zhangren` — 张任（南线第九章）（立绘）
-66. `fazheng` — 法正（南线第九章）（立绘）
-67. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
-68. `menghuo` — 孟获（南线第九章）（立绘）
-69. `luxun` — 陆逊（成年，南线第九章）（立绘）
-70. `yujin` — 于禁（北线第十章）（立绘）
-71. `lidian` — 李典（北线第十章）（立绘）
-72. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
-73. `xuchu` — 许褚（换掉占位）（立绘）
-74. `zhanghe` — 张郃（北线第十章）（立绘）
-75. `zhanglu` — 张鲁（南线第十章）（立绘）
-76. `zhangwei` — 张卫（南线第十章）（立绘）
-77. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
-78. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
-79. `dianwei` — 典韦（第十一章南线）（立绘）
-80. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-81. `c3_warn` — 劝阻孙坚（剧情 CG）
-82. `changan` — 第三章·长安地图底图（地图）
-83. `dongui` — 第四章·挟天子地图底图（地图）
-84. `yuxi` — 第三章·传国玉玺地图底图（地图）
-85. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-86. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-87. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-88. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-89. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-90. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-91. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-92. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
-93. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-94. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-95. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-96. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-97. `yiji` — 伊籍（第五章招贤馆）（立绘）
-98. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-99. `jx_zongzei` — 新野·宗贼（战斗 CG）
-100. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-101. `e_shuijing` — 事件·水镜先生（剧情 CG）
-102. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-103. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-104. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-105. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-106. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-107. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-108. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-109. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-110. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-111. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-112. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-113. `huangzu` — 黄祖（江夏太守）（立绘）
-114. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-115. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-116. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-117. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-118. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-119. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-120. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-121. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-122. `c8_jiayan` — 宛城家宴（剧情 CG）
-123. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-124. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-125. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-126. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
-127. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-128. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-129. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-130. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-131. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-132. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-133. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
-134. `jingxiang` — 第五章·荆襄风云地图底图（地图）
+1. `heishan` — 北线第三章·黑山风云地图底图（40 列）（地图）
+2. `beihai` — 北线第四章·双凤乱太行地图底图（48 列）（地图）
+3. `yuxi` — 南线第三章·传国玉玺地图底图（27 列）（地图）
+4. `shouluoyang` — 南线第三章·收洛阳地图底图（22 列）（地图）
+5. `changan` — 第三章·长安地图底图（31 列，现为程序占位）（地图）
+6. `dongui` — 第四章·挟天子地图底图（37 列）（地图）
+7. `jingxiang` — 第五章·荆襄风云地图底图（31 列）（地图）
+8. `defeat_south` — 阵亡 CG · 南线（主角倒在黄昏的泥泞战场上，古锭刀插在身旁，克制不见血）（剧情 CG）
+9. `defeat_north` — 阵亡 CG · 北线（主角倒在黄昏的雪原上，白蜡杆长枪插在身旁，克制不见血）（剧情 CG）
+10. `jiangwei` — 姜维（新增枪兵卡）（立绘）
+11. `chendao` — 陈到（新增枪兵卡）（立绘）
+12. `weiyan` — 魏延（新增枪兵卡）（立绘）
+13. `guanping` — 关平（新增枪兵卡）（立绘）
+14. `zhangbao` — 张苞（新增枪兵卡）（立绘）
+15. `guanxing` — 关兴（新增枪兵卡）（立绘）
+16. `chenglian` — 成廉（新增枪兵卡）（立绘）
+17. `weixu` — 魏续（新增枪兵卡）（立绘）
+18. `lingtong` — 凌统（新增枪兵卡）（立绘）
+19. `yangang` — 严纲（新增枪兵卡）（立绘）
+20. `gaolan` — 高览（新增枪兵卡）（立绘）
+21. `zoudan` — 邹丹（新增枪兵卡）（立绘）
+22. `c3_alliance` — 北线·结盟张燕（剧情 CG）（剧情 CG）
+23. `c3_banma_flag` — 北线·斑马大旗（剧情 CG）（剧情 CG）
+24. `c3_save_zan` — 北线·赵云救公孙瓒（剧情 CG）（剧情 CG）
+25. `c3_quyi_camp` — 北线·麹义先登营（剧情 CG）（剧情 CG）
+26. `end_fuchao` — 结局卡·覆巢（剧情 CG）（剧情 CG）
+27. `zhurong` — 祝融夫人（成年女性，南中女王）（立绘）
+28. `wangyi` — 王异（成年女性，智勇奇女）（立绘）
+29. `xinxianying` — 辛宪英（成年女性，魏晋才女）（立绘）
+30. `bulianshi` — 步练师（成年女性，江东贤女）（立绘）
+31. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
+32. `liniang` — 黎娘（成年女性，山越女王）（立绘）
+33. `chuniang` — 厨娘（成年女性，军中厨娘）（立绘）
+34. `chaniang` — 茶娘（成年女性，茶楼掌柜）（立绘）
+35. `huansha` — 浣纱女（成年女性，水乡浣纱）（立绘）
+36. `caisang` — 采桑女（成年女性，桑园采桑）（立绘）
+37. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
+38. `jz_county_fight` — 州衙·拔刀相助 战斗背景（战斗 CG）
+39. `jz_road_bandits` — 官道·黑山散兵 战斗背景（选路分支，走官道那一边）（战斗 CG）
+40. `taoqian` — 陶谦（立绘）
+41. `chendeng` — 陈登（立绘）
+42. `chengui` — 陈珪（立绘）
+43. `caobao` — 曹豹（立绘）
+44. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
+45. `xunyu` — 荀彧（第六章）（立绘）
+46. `caoren` — 曹仁（第六章）（立绘）
+47. `chengong` — 陈宫（立绘）
+48. `zhangliao` — 张辽（换掉占位）（立绘）
+49. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
+50. `xunyou` — 荀攸（立绘）
+51. `zhongyao` — 钟繇（立绘）
+52. `zhangxun` — 张勋（南线第六章）（立绘）
+53. `liuxun` — 刘勋（南线第六章）（立绘）
+54. `lusu` — 鲁肃（南线第六章入队）（立绘）
+55. `zhengbao` — 郑宝（南线第六章）（立绘）
+56. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
+57. `zangba` — 臧霸（北线第七章）（立绘）
+58. `shenrong` — 审荣（北线第七章）（立绘）
+59. `liuyao` — 刘繇（南线第七章）（立绘）
+60. `yanbaihu` — 严白虎（南线第七章）（立绘）
+61. `wanglang` — 王朗（南线第七章）（立绘）
+62. `zhoutai` — 周泰（南线第七章）（立绘）
+63. `jiangqin` — 蒋钦（南线第七章）（立绘）
+64. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
+65. `mateng` — 马腾（北线第八、九章）（立绘）
+66. `hansui` — 韩遂（北线第八章）（立绘）
+67. `pangde` — 庞德（北线第九章）（立绘）
+68. `tadun` — 蹋顿（北线第九章）（立绘）
+69. `gongsunkang` — 公孙康（北线第九章）（立绘）
+70. `liuzhang` — 刘璋（南线第九章）（立绘）
+71. `yanyan` — 严颜（南线第九章）（立绘）
+72. `zhangren` — 张任（南线第九章）（立绘）
+73. `fazheng` — 法正（南线第九章）（立绘）
+74. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
+75. `menghuo` — 孟获（南线第九章）（立绘）
+76. `luxun` — 陆逊（成年，南线第九章）（立绘）
+77. `yujin` — 于禁（北线第十章）（立绘）
+78. `lidian` — 李典（北线第十章）（立绘）
+79. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
+80. `xuchu` — 许褚（换掉占位）（立绘）
+81. `zhanghe` — 张郃（北线第十章）（立绘）
+82. `zhanglu` — 张鲁（南线第十章）（立绘）
+83. `zhangwei` — 张卫（南线第十章）（立绘）
+84. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
+85. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
+86. `dianwei` — 典韦（第十一章南线）（立绘）
+87. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+88. `c3_warn` — 劝阻孙坚（剧情 CG）
+89. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+90. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+91. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+92. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+93. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+94. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+95. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+96. `end_tonggui` — 结局卡·同归（象征画，不画人，不见血）（剧情 CG）
+97. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+98. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+99. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+100. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+101. `yiji` — 伊籍（第五章招贤馆）（立绘）
+102. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+103. `jx_zongzei` — 新野·宗贼（战斗 CG）
+104. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+105. `e_shuijing` — 事件·水镜先生（剧情 CG）
+106. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+107. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+108. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+109. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+110. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+111. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+112. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+113. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+114. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+115. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+116. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+117. `huangzu` — 黄祖（江夏太守）（立绘）
+118. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+119. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+120. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+121. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+122. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+123. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+124. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+125. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+126. `c8_jiayan` — 宛城家宴（剧情 CG）
+127. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+128. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+129. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+130. `end_henhai` — 结局卡·恨海（象征画，不画人，不见血）（剧情 CG）
+131. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+132. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+133. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+134. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+135. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+136. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+137. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
 
 交图规则：
 
@@ -4837,7 +4840,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `yuxi`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：the road from burning Luoyang south to Luyang (in Nanyang commandery), left to right: the smoking ruins of Luoyang and a long line of refugees; hills and a starving army camp; the walled town of Luyang with a tavern street; rain-soaked farmland with a Yuan army camp; a narrow mountain pass in heavy rain at the far right。
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 27 列，南线第三章·传国玉玺】自焚毁的洛阳向南到南阳鲁阳，自左向右依次：①左端洛阳废墟冒着黑烟，长长的难民队伍南行；②山丘间断粮的孙坚军营，炊烟稀薄；③鲁阳城墙与酒肆街，街口有行人与酒旗；④雨水浸透的农田，袁术军营连绵；⑤最右端大雨中的狭窄山口。
 构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
 画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
 ```
@@ -4845,7 +4848,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `shouluoyang`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：ruined Luoyang being rebuilt, left to right: a campfire among the ashes; a road where officials' families were escorted west; a Xiliang grain convoy on a mountain foot road; the restored ancestral temple and city walls with Sun banners; a peaceful market street; at the far right the western road toward Chang'an。
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 22 列，南线第三章·收洛阳】重建中的洛阳，自左向右依次：①灰烬中的一堆篝火；②官眷被护送向西的官道；③山脚小路上的西凉粮队；④修复的宗庙与城墙，城头插着红底「孙」字旗；⑤太平的集市街；⑥最右端通向长安的西行大道。
 构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
 画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
 ```
@@ -4853,7 +4856,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `changan`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：Chang'an in winter, left to right: the grand city gate; Dong Zhuo's lavish mansion with a courtyard duel ring; the palace with a rockery garden; a scholar's modest house; the Minister's mansion; a lotus pond with the Phoenix Pavilion; at the far right the chancellor's mansion hung with red wedding lanterns。
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 31 列，第三章·长安】冬日长安，自左向右依次：①宏伟的城门；②董卓华丽的府邸与庭院里的比武场；③带假山花园的宫殿；④朴素的书生宅；⑤司徒府；⑥荷塘边的凤仪亭；⑦最右端挂满红色喜庆灯笼的丞相府。
 构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
 画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
 ```
@@ -4861,7 +4864,7 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `jingxiang`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：from Nanyang south to the Han river, left to right: the walled city of Wancheng in autumn with a courtyard kitchen and a chestnut stall by the river; the reed-lined Yu river and its battlefield; a Han river ferry landing with brocade-sailed boats; fortified clan villages (wubao) around Xinye and the town of Fancheng; the walled city of Xiangyang on the Han river with an armory and a river fortress full of war boats; Mount Xian with terraced fields; at the far right a lone pavilion on a rock above the river at Wanshan。
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 31 列，第五章·荆襄风云】自南阳向南到汉水，自左向右依次：①秋日宛城，院中的灶台与河边的栗子摊；②芦苇丛生的淯水与战场；③汉水渡口，挂锦帆的战船；④新野一带的坞堡与樊城小镇；⑤汉水边的襄阳城，有兵库与停满战船的水寨；⑥种着梯田的岘山；⑦最右端万山上江边岩石上的一座孤亭。
 构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
 画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
 ```
@@ -4869,7 +4872,23 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ### `dongui`
 
 ```
-横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：one long campaign, left to right: snowy Chang'an palace and the Xuanping Gate; the Wei river road east; the mountains and Hangu Pass; half-restored Luoyang with Sun banners; the summer road south; a Yuan army camp; the walled city of Wancheng in Nanyang at the far right。
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 37 列，第四章·挟天子】一条长征路，自左向右依次：①雪中的长安宫城与宣平门；②渭水东行的大道；③群山与函谷关；④插着红底「孙」字旗、半修复的洛阳；⑤向南的夏日官道；⑥袁术军营；⑦最右端南阳宛城的城墙。
+构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
+画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
+```
+
+### `heishan`
+
+```
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 40 列，北线第三章·黑山风云，三条行进带：上=战斗线，中=主线，下=奇遇线】自左向右依次：①左端（第 0–6 列）真定县城与城外小路，城墙下贴着发榜的告示，军营里一名兵痞在闹事，旁边是校场；②（第 7–14 列）进入太行山：山道、采药人的小屋、深山绝壁，一处悬崖下有白马与人影；③（第 15–22 列）黑山大寨：木寨、演武场、寨中集市，大寨议事堂挂着黑山令；④（第 23–30 列）山中秘道与狭窄的峡谷，太行山口的关卡；⑤（第 31–39 列）界桥外围的原野，河畔的营垒，最右端是插着斑马大旗的战场。整体冬末春初，山色青灰。
+构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
+画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
+```
+
+### `beihai`
+
+```
+横向游戏地图插画，手绘中国山水长卷（浅绛 / 青绿山水）：【地图共 48 列，北线第四章·双凤乱太行，三条行进带：上=战斗线，中=主线，下=奇遇线】自左向右依次：①左端（第 0–12 列）太行外围，山寨与郑家寨、姜家寨隔山相望，两寨之间是山谷；②（第 13–24 列）太行休整营地，北方来的并州狼骑在山口扬尘，吕布的旗号隐约可见；③（第 25–31 列）突围：苇荡深处的河湾，冀州军追兵的营垒，黄河渡口；④（第 32–47 列）北海城：被黄巾军围困的城墙，城外黄巾的营帐与饥民，城门前支着熬粥的大锅，最右端是北海相府。整体夏季，色调偏暖。
 构图：超宽全景，3200x1080（可横向滚动），斜向高空俯瞰；上 / 中 / 下三条大致水平的行进带保持干净、不放繁杂细节（地图格子落在上面），薄雾轻绕。
 画风：与第一章地图（godot/data/art/map/prologue.jpg）一致：墨线勾勒，宣纸上的淡绿与赭石淡彩；不要文字、不要 UI、不要近景人物。
 ```
