@@ -270,7 +270,7 @@ func default_kit(troop_id: String, special := false) -> Array:
 
 func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	## 兵种基础 + 武将自身能力 (× mult: the 铜/银/金 tier). Skills: a soldier has its troop's plain move (精兵 also the
-	## troop's signature); a general has the plain move plus its own signature, or the troop's signature if it has
+	## troop's signature; "troop_skills": false on either = its own `skills` only); a general has the plain move plus its own signature, or the troop's signature if it has
 	## none ("troop_skills": false = own skills only).
 	var c: Dictionary = cards[card_id]
 	var t: Dictionary = troops[c["troop"]]
@@ -279,7 +279,8 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	if c["troop"] == "lord":
 		pass  # the lord's retinue never acts: it only makes his unit stronger
 	elif c["soldier"]:
-		sk = kit["special" if c["elite"] else "normal"].duplicate()
+		if c["troop_skills"]:  # "troop_skills": false = own skills only (e.g. a shield-bearer that shoots)
+			sk = kit["special" if c["elite"] else "normal"].duplicate()
 	elif c["troop_skills"]:
 		sk = kit["normal" if not c["skills"].is_empty() else "special"].duplicate()
 	for s in c["skills"]:

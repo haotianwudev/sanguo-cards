@@ -1458,7 +1458,7 @@ NEXT = [
     ("portrait", "chunyuqiong", "淳于琼（成年男性，袁绍大将）"),
     ("portrait", "yudu", "于毒（成年男性，黑山叛党）"),
     ("portrait", "quyi", "麹义（成年男性，先登主将）"),
-    ("portrait", "xiandeng_sishi", "先登死士（北线新增兵卡，和麹义同风格：大铁盾 + 环首刀的老兵）"),
+    ("portrait", "xiandeng_sishi", "先登死士（北线新增兵卡，和麹义同风格：大铁盾后端强弩的老兵）"),
     ("cg", "c3_recruit_board", "北线·真定发榜"),
     ("cg", "c3_bribe_villager", "北线·和稀泥"),
     ("cg", "c3_encounter_ning", "北线·深山绝壁"),

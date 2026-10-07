@@ -702,3 +702,9 @@ func test_the_north_lord_fights_with_a_spear_not_the_blade() -> void:
 	check(db.skills["duomingqiang"]["effects"].any(func(e): return e["type"] == "counter"), "the spear answers every blow; the thrown blade does not")
 	check(not db.skills["rengdao"]["effects"].any(func(e): return e["type"] == "counter"), "the thrown blade is plain damage")
 	check(db.skills["tuci"]["cost"] == 0 and db.skills["tuci"]["free"], "突刺 is the hero's free strike too")
+
+
+func test_a_soldier_can_have_its_own_skills_instead_of_its_troops() -> void:
+	var f := GameData.get_db().build_fighter("xiandeng_sishi")
+	check_eq(f["troop"], "infantry", "a shield-bearer by troop")
+	check_eq(f["skills"], ["sheji", "jushun"], "but its first skill is the archer's shot, then the shield")

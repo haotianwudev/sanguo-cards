@@ -4649,6 +4649,11 @@
       "rarity": "N",
       "elite": true,
       "troop": "infantry",
+      "troop_skills": false,
+      "skills": [
+        "sheji",
+        "jushun"
+      ],
       "bonus": {
         "hp": 30,
         "at": 10
