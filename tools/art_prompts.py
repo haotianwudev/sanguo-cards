@@ -1940,6 +1940,10 @@ def main() -> None:
                 for i, (kind, key, what) in enumerate(todo, 1)]
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
     out += ["## 立绘（竖版 3:4）", ""]
+    import re as _re
+    _log = ROOT / "pics" / "ART-LOG.md"  # art_ingest.py records what was delivered: a REDO entry replaced since is done
+    ingested = set(_re.findall(r"`(\w+)` ←", _log.read_text("utf-8"))) if _log.exists() else set()
+    REDO[:] = [(k, w) for k, w in REDO if k not in ingested]
     redo = {k for k, _ in REDO}
     for key, p in PORTRAITS.items():
         if key in done and key not in redo:
