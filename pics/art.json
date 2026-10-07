@@ -1709,12 +1709,36 @@
       "license": "用户提供"
     },
     "changan": {
-      "src": "source/map/bg_changan.jpg",
+      "src": "source/map/changan.jpg",
       "license": "用户提供（Gemini 生成）"
     },
     "luoyang_n": {
       "src": "source/map/bg_luoyang_n.jpg",
       "license": "用户提供"
+    },
+    "beihai": {
+      "src": "source/map/beihai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "dongui": {
+      "src": "source/map/dongui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "heishan": {
+      "src": "source/map/heishan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jingxiang": {
+      "src": "source/map/jingxiang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "shouluoyang": {
+      "src": "source/map/shouluoyang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "yuxi": {
+      "src": "source/map/yuxi.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "battles": {

@@ -26,3 +26,10 @@
 - [x] 2026-10-06 portrait `yayi` ← yayi.jpg · ok
 - [x] 2026-10-06 portrait `youzhou_qiang` ← youzhou_qiang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-06 portrait `yulin_lang` ← yulin_lang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-06 map `beihai` ← beihai.jpg · ok
+- [ ] 2026-10-06 map `changan` ← changan.jpg · ok
+- [ ] 2026-10-06 map `dongui` ← dongui.jpg · ok
+- [ ] 2026-10-06 map `heishan` ← heishan.jpg · ok
+- [ ] 2026-10-06 map `jingxiang` ← jingxiang.jpg · ok
+- [ ] 2026-10-06 map `shouluoyang` ← shouluoyang.jpg · ok
+- [ ] 2026-10-06 map `yuxi` ← yuxi.jpg · ok
