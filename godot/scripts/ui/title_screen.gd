@@ -34,11 +34,16 @@ func _ready() -> void:
 
 	var has_save := FileAccess.file_exists(SaveData.SAVE_PATH) and Game.persist_enabled
 	if has_save:
-		var cont := Kit.button("继续", "green", Kit.FONT_BIG)
-		cont.pressed.connect(Game.continue_game)
-		col.add_child(cont)
-		Kit.focus(cont)
 		var saved := SaveData.read()
+		if saved != null and saved.ended and saved.replay == "":  # an ending was reached: nothing to continue, only a new 周目
+			var over := Kit.label("这一轮已经结局", Kit.FONT_BODY, "muted")
+			over.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			col.add_child(over)
+		else:
+			var cont := Kit.button("继续", "green", Kit.FONT_BIG)
+			cont.pressed.connect(Game.continue_game)
+			col.add_child(cont)
+			Kit.focus(cont)
 		if saved != null and saved.replay != "":
 			var back := Kit.button("放弃重玩，回到主线", "gray")
 			back.pressed.connect(Game.back_to_story)

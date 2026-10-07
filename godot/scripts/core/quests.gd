@@ -805,6 +805,7 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 		save.quests_cleared.append(q["id"])
 	if save.run_records.any(func(l): return str(l).begins_with("结局")):
 		save.commit_history()  # an ending: what you hold (bar story gifts) can be drawn again next 周目
+		save.ended = true
 	for line in save.run_records:  # this run's choices become lasting story flags
 		if not save.flags.has(line):
 			save.flags.append(line)

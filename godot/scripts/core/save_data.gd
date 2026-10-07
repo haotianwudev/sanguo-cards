@@ -59,6 +59,7 @@ var story_cards: Array = []  # cards a story square handed out this 周目 (they
 var play_level := 0  # the 难度 level chosen after the birthplace (0 = not chosen: the route's highest); capped by what its endings have unlocked (route_max_level)
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
 var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
+var ended := false  # an ending was reached: this run is over (no 继续 on the title; a new 周目 or a chapter replay is what is left)
 var lord_form_dupe := false  # the last lord card handed out was one already held (it raised the lord's tier instead); not saved
 var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
@@ -66,7 +67,7 @@ var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 

@@ -556,3 +556,14 @@ func test_playing_below_the_level_an_ending_opens_keeps_its_story_shut() -> void
 	s.run_records = ["结局六 · 覆巢"]
 	Quests.complete(db.quests[0], s)
 	check(s.flags.has("结局六 · 覆巢"), "the badend is recorded either way")
+
+
+func test_reaching_an_ending_closes_the_run_and_a_new_lap_reopens_it() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	check(not s.ended, "a fresh run is not over")
+	s.run_records = ["结局一 · 玉碎"]
+	Quests.complete(db.quests[0], s)
+	check(s.ended, "an ending ends the run (the title offers no 继续)")
+	check(not s.new_lap().ended, "a new 周目 starts open")
+
