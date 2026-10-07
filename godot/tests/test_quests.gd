@@ -1021,6 +1021,12 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_they_add_up() -> 
 		check(hp > last_hp, "each card makes the lord stronger (they add up)")
 		last_hp = hp
 	check_eq(s.route_lord_forms().size(), 5)
+	var copies := s.lord_copies
+	s.lord_form_paid = ""
+	var again := Quests.grant_lord_form(db.quests[0], s, rng)
+	check(again != "" and s.lord_form_dupe, "all held: a random one again")
+	check_eq(s.lord_copies, copies + 1, "…which is another copy of the lord (a higher tier in time)")
+	check_eq(s.route_lord_forms().size(), 5, "the stats are not counted twice")
 	check_eq(s.lord_form(), "lord_north_silver", "the face is the newest card that has art")
 
 

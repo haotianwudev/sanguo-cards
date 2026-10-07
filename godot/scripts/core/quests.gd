@@ -540,7 +540,7 @@ static func recap(save: SaveData) -> Dictionary:
 
 
 static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> String:
-	## each chapter cleared hands out one lord card (version) at random from those of this route not yet had, once;
+	## each chapter cleared hands out one lord card (version) at random from those of this route not yet had (all had: any of them, as another copy of the lord), once;
 	## returns its id ("" = none left / already given). Without an rng (tests) the first one.
 	q = q.get("_raw", q)
 	if save.lord_form_paid == q["id"] or save.replay != "":
@@ -549,15 +549,24 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 	var route := "north" if save.is_north() else "south"
 	save.lord_form_paid = q["id"]
 	var pool: Array = []
+	var all: Array = []
 	for fid in db.lord_form_grants:
 		var f: Dictionary = db.lord_forms.get(fid, {})
-		if f.is_empty() or save.lord_forms.has(fid) or (f["route"] != "" and f["route"] != route):
+		if f.is_empty() or (f["route"] != "" and f["route"] != route):
 			continue
-		pool.append(fid)
-	if pool.is_empty():
+		all.append(fid)
+		if not save.lord_forms.has(fid):
+			pool.append(fid)
+	save.lord_form_dupe = pool.is_empty()
+	if all.is_empty():
 		return ""
+	if pool.is_empty():  # every card of the route is held: a random one again — a repeat is another copy of the lord (raises its tier)
+		pool = all
 	var pick: String = pool[rng.randi_range(0, pool.size() - 1)] if rng != null else pool[0]
-	save.lord_forms.append(pick)
+	if save.lord_form_dupe:
+		save.lord_copies += 1
+	else:
+		save.lord_forms.append(pick)
 	return pick
 
 

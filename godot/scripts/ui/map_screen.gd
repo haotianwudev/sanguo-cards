@@ -1084,7 +1084,10 @@ func _complete() -> void:
 	var cards: Array = r["cards"].map(func(c): return db.cards[c[0]]["name"] + ("×%d" % c[1] if c[1] > 1 else ""))
 	lines.append("[color=%s][b]新得卡牌[/b][/color]　%s" % [gold, "、".join(cards) if not cards.is_empty() else "无"])
 	if new_form != "":
-		lines.append("[color=%s][b]主角卡[/b][/color]　获得「%s」，主角变强了！" % [gold, db.lord_forms[new_form]["name"]])
+		if Game.save.lord_form_dupe:
+			lines.append("[color=%s][b]主角卡[/b][/color]　又获得「%s」，主角卡升级了！" % [gold, db.lord_forms[new_form]["name"]])
+		else:
+			lines.append("[color=%s][b]主角卡[/b][/color]　获得「%s」，主角变强了！" % [gold, db.lord_forms[new_form]["name"]])
 	var relics: Array = r["relics"].map(func(x): return db.relics[x]["name"])
 	lines.append("[color=%s][b]宝物[/b][/color]　%s" % [gold, "、".join(relics) if not relics.is_empty() else "无"])
 	lines.append("[color=%s][b]关键选择[/b][/color]" % gold)

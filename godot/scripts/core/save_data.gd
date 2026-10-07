@@ -59,6 +59,7 @@ var story_cards: Array = []  # cards a story square handed out this 周目 (they
 var play_level := 0  # the 难度 level chosen after the birthplace (0 = not chosen: the route's highest); capped by what its endings have unlocked (route_max_level)
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
 var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
+var lord_form_dupe := false  # the last lord card handed out was one already held (it raised the lord's tier instead); not saved
 var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
