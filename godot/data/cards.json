@@ -737,10 +737,18 @@
   },
   "_kits": "技能组合：normal = 普通兵种的默认技能（普通兵卡、有自己技能的武将拿这个），special = 特殊兵种的默认技能（精兵、没有自己技能的武将拿这个）。兵种（troops）只管 hp/at；一张卡用哪套组合看它的 kit 字段，没写就按 kit_default（兵种 → 组合）。",
   "lord_forms": {
-    "_doc": "主角卡（版本）：每通关一章，从 grants 里当前路线 route 对得上、还没拿过的卡里随机发一张；有就用最新拿到的一张——它的 bonus 加在主角的体力 / 攻击上，skills 追加到主角技能里；art: true 表示已有立绘（portraits 里同 id）。",
+    "_doc": "主角卡（版本）：每通关一章，从 grants 里当前路线 route 对得上、还没拿过的卡里随机发一张；拿到的卡的 bonus 全部加在主角的体力 / 攻击上（叠加），skills 追加到主角技能里；脸用最新拿到的有立绘的那张（art: true，立绘在 portraits 里同 id；art: false 的只加数值，没有专属画面）。每条线的卡数要不少于该线的章数。",
     "grants": [
       "lord_north_silver",
-      "lord_south_armor"
+      "lord_south_armor",
+      "lord_north_cloak",
+      "lord_north_march",
+      "lord_north_guard",
+      "lord_north_banner",
+      "lord_south_boat",
+      "lord_south_robe",
+      "lord_south_plate",
+      "lord_south_cloak"
     ],
     "forms": {
       "lord_north_silver": {
@@ -762,6 +770,86 @@
         },
         "skills": [],
         "art": true
+      },
+      "lord_north_cloak": {
+        "name": "主公·雪裘",
+        "route": "north",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_north_march": {
+        "name": "主公·行军装",
+        "route": "north",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_north_guard": {
+        "name": "主公·重甲",
+        "route": "north",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_north_banner": {
+        "name": "主公·披挂",
+        "route": "north",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_south_boat": {
+        "name": "主公·水战装",
+        "route": "south",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_south_robe": {
+        "name": "主公·战袍",
+        "route": "south",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_south_plate": {
+        "name": "主公·重铠",
+        "route": "south",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
+      },
+      "lord_south_cloak": {
+        "name": "主公·披风",
+        "route": "south",
+        "bonus": {
+          "hp": 40,
+          "at": 8
+        },
+        "skills": [],
+        "art": false
       }
     }
   },

@@ -1002,7 +1002,26 @@ func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:
 		var got := Quests.grant_lord_form(q, s, rng)
 		check(got != "" and db.lord_forms[got]["route"] == ("north" if k % 2 == 0 else "south"), "a card of this route: " + got)
 		seen[got] = true
-	check_eq(seen.size(), 2, "both routes' cards turn up")
+	check(seen.size() > 2, "different cards turn up")
+	check(seen.keys().any(func(k): return db.lord_forms[k]["route"] == "north") and seen.keys().any(func(k): return db.lord_forms[k]["route"] == "south"), "both routes' cards turn up")
+
+
+func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_they_add_up() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	s.flags = ["出生：冀州无极"]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 11
+	var last_hp := int(s.lord()["hp"])
+	for k in 5:
+		s.lord_form_paid = ""
+		var got := Quests.grant_lord_form(db.quests[0], s, rng)
+		check(got != "", "chapter %d of the north route still hands one out" % (k + 1))
+		var hp := int(s.lord()["hp"])
+		check(hp > last_hp, "each card makes the lord stronger (they add up)")
+		last_hp = hp
+	check_eq(s.route_lord_forms().size(), 5)
+	check_eq(s.lord_form(), "lord_north_silver", "the face is the newest card that has art")
 
 
 func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:

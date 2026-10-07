@@ -254,21 +254,29 @@ func is_north() -> bool:
 	return run_records.has("出生：冀州无极") or flags.has("出生：冀州无极")
 
 
-func lord_form() -> String:
-	## the lord card in play: the newest one handed out for this route ("" = the base lord)
+func route_lord_forms() -> Array:
+	## the lord cards handed out so far that belong to this route (they all add up)
 	var route := "north" if is_north() else "south"
 	var db := _db()
-	for i in range(lord_forms.size() - 1, -1, -1):
-		var f: Dictionary = db.lord_forms.get(lord_forms[i], {})
-		if not f.is_empty() and (f["route"] == "" or f["route"] == route):
-			return lord_forms[i]
+	return lord_forms.filter(func(id):
+		var f: Dictionary = db.lord_forms.get(id, {})
+		return not f.is_empty() and (f["route"] == "" or f["route"] == route))
+
+
+func lord_form() -> String:
+	## the lord's face: the newest of this route's cards that has its own art ("" = the base lord)
+	var db := _db()
+	var mine := route_lord_forms()
+	for i in range(mine.size() - 1, -1, -1):
+		if db.lord_forms[mine[i]]["art"]:
+			return mine[i]
 	return ""
 
 
 func lord() -> Dictionary:
 	## the lord's fighter at its tier; the north route starts in a different host body (own hair, no armor)
 	var db := _db()
-	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), lord_form())
+	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), lord_form(), route_lord_forms())
 
 
 func upgrade_copies() -> int:
