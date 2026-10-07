@@ -18,7 +18,7 @@ var _grid: GridContainer
 var _detail: VBoxContainer
 var _msg: Label
 var _sort_btn: Button
-var _filter := "all"  # all / general / soldier / <troop id>
+var _filter := "all"  # all / <troop id> / relic
 var _sort := "power"  # power / rarity
 var _sel := "lord"  # the card shown on the right ("lord" for the lord, "relic:<id>" for a 宝物)
 
@@ -175,7 +175,7 @@ func _rebuild() -> void:
 		_summary.add_child(l)
 
 	# ---- filter tabs + sort
-	var tabs: Array = [["all", "全部"], ["general", "武将"], ["soldier", "兵卡"]]
+	var tabs: Array = [["all", "全部"]]
 	var troops_owned: Array = []
 	for cid in save.owned_ids():
 		var tr: String = db.cards[cid]["troop"]
@@ -484,6 +484,7 @@ func _tap(cid: String) -> void:
 		_toggle(cid)
 		return
 	_sel = cid
+	_filter = GameData.get_db().cards[cid]["troop"]  # the pool jumps to that card's troop
 	_msg.text = ""
 	_rebuild()
 
