@@ -48,6 +48,6 @@
 - [x] 2026-10-06 portrait `xinxianying` ← xinxianying.webp · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-06 portrait `zhangliao` ← zhangliao.jpg · ok
 - [x] 2026-10-06 portrait `zhurong` ← zhurong.webp · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
-- [ ] 2026-10-06 cg `c3_quyi_camp` ← c3_quyi_camp.jpg · ok
-- [ ] 2026-10-06 cg `end_fuchao` ← end_fuchao.jpg · ok
-- [ ] 2026-10-06 portrait `xiandeng_sishi` ← xiandeng_sishi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-06 cg `c3_quyi_camp` ← c3_quyi_camp.jpg · ok
+- [x] 2026-10-06 cg `end_fuchao` ← end_fuchao.jpg · ok
+- [x] 2026-10-06 portrait `xiandeng_sishi` ← xiandeng_sishi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

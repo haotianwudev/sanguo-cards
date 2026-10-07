@@ -330,7 +330,7 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ⬜ 缺 | `xiandeng_sishi` | 先登死士 |
+| ✅ 正式 | `xiandeng_sishi` | 先登死士 |
 | ✅ 正式 | `huangjin_lishi` | 黄巾力士（黄巾前锋的卡） |
 | ⬜ 缺 | `yangang` | 严纲 |
 | ⬜ 缺 | `zoudan` | 邹丹 |
@@ -368,14 +368,14 @@
 | ✅ 已有 | `c3_encounter_ning` | 深山绝壁 |
 | ✅ 已有 | `c3_leave_ning` | 明哲保身 |
 | ✅ 已有 | `c3_save_ning` | 战白骑 |
-| ⬜ 缺 | `end_fuchao` | 覆巢 |
+| ✅ 已有 | `end_fuchao` | 覆巢 |
 | ✅ 已有 | `c3_zhangyan_meet` | 黑山大寨 |
 | ✅ 已有 | `c3_alliance` | 黑山令 |
 | ✅ 已有 | `c3_guotu_raid` | 郭图寻仇 |
 | ✅ 已有 | `c3_secret_path` | 黑山秘道 |
 | ✅ 已有 | `c3_breakout` | 府门突围 |
 | ✅ 已有 | `c3_guojia_map` | 界桥前夜 |
-| ⬜ 缺 | `c3_quyi_camp` | 先登死士 |
+| ✅ 已有 | `c3_quyi_camp` | 先登死士 |
 | ✅ 已有 | `c3_save_zan` | 猛将文丑 |
 | ✅ 已有 | `c3_banma_flag` | 斑马大旗 |
 

@@ -198,6 +198,7 @@
 | `wangyi` | source/generals/wangyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xinxianying` | source/generals/xinxianying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhurong` | source/generals/zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiandeng_sishi` | source/soldiers/xiandeng_sishi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -316,3 +317,5 @@
 | `cg:defeat_south` | source/cg/defeat_south.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_banma_flag` | source/cg/c3_banma_flag.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_save_zan` | source/cg/c3_save_zan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_quyi_camp` | source/cg/c3_quyi_camp.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_fuchao` | source/cg/end_fuchao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
