@@ -1933,7 +1933,7 @@ def main() -> None:
            "> 出好的图按 key 命名：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），战斗 CG 放 `pics/source/battles/`，",
            "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
            ]
-    maps_done = {k for k, v in art.get("maps", {}).items() if "生成" not in v.get("license", "")}
+    maps_done = {k for k, v in art.get("maps", {}).items() if "程序生成" not in v.get("license", "")}
     maps_done -= {"luoyang_n"}  # 二章拉长到 38 列，旧底图要重画；重画交付后删掉这一行
     relics_done = {p.stem for p in (ROOT / "godot" / "data" / "art" / "relics").glob("*.png")}
     ui_done = {k for k in CHESTS if (ROOT / "godot" / "data" / "art" / "ui" / f"{k}.png").exists()}
