@@ -65,7 +65,7 @@ func _row(e: Dictionary, got: bool) -> Control:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	box.add_child(row)
-	var pic := Kit.cg(e["cg"]) if got else null
+	var pic := Kit.cg(e["cg"] if got else "end_locked")  # an unreached one shows the sealed thumbnail (once that art exists)
 	if pic != null:
 		var tex := TextureRect.new()
 		tex.texture = pic

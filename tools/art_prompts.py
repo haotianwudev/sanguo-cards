@@ -1141,6 +1141,14 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "end_hushi": "an ending card illustration, quiet and symbolic: a half-open camp gate on a rainy night by the Luo river, a broken sky-piercer halberd in the mud, a torn red-horse saddle set and a tiger-head bracer; no people, no blood",
+    "end_zhumie": "an ending card illustration, quiet and symbolic: a burned-out white candle, a tipped bronze wine cup, a commander's seal and a white feather fan on a tent table; no people, no blood",
+    "end_juefa": "an ending card illustration, quiet and symbolic: two broken mountain stockade gates in snow with torn banners tangled together, a huge halberd planted in front; no people, no blood",
+    "end_menhou": "an ending card illustration, quiet and symbolic: a closed vermilion government gate at night with warm light through the crack, discarded black banners and broken tally arrows; no people, no blood",
+    "end_chibi": "an ending card illustration, quiet and symbolic: a line of burning chained warships on the Yangtze at night, a small boat with a white coffin drifting south; no people, no blood",
+    "end_guandu": "an ending card illustration, quiet and symbolic: a halberd planted in the mud of the Guandu riverbank at dawn mist, a faded red scarf on its tip, half a broad saber beside it; no people, no blood",
+    "end_tianming": "an ending card illustration, quiet and symbolic: a broad saber and a white-wax spear crossed back to back on one stone terrace at sunrise, the south and north banners flying side by side; no people",
+    "end_locked": "a dark ink-paper thumbnail with a faint cinnabar seal containing a large question mark, almost no detail",
     "defeat_south": "the defeat card of the south route: the lord has fallen at dusk on a muddy battlefield, his huge old broadsword planted in the ground beside him, a torn red Sun banner in the wind; restrained, no blood",
     "defeat_north": "the defeat card of the north route: the lord has fallen in the snow at dusk, his white-wax spear planted upright beside him with a red knot fluttering below the blade; restrained, no blood",
     "c3_recruit_board": "a recruitment board at the gate of Zhending: the hero slapping his chest proudly before a wooden notice board, Zhao Yun standing by with his silver spear, a crowd of simple villagers watching with amusement",
@@ -1409,6 +1417,17 @@ UI_ART = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
+    # 结局图鉴 · 每个结局一张象征画（不画人、不见血）+ 未解锁缩略图：
+    ("cg", "end_tonggui", "结局二·同归（象征画）"),
+    ("cg", "end_henhai", "结局三·恨海（象征画）"),
+    ("cg", "end_hushi", "结局四·虎噬（象征画，南线终章，尚未实装）"),
+    ("cg", "end_zhumie", "结局五·烛灭（象征画，北线终章，尚未实装）"),
+    ("cg", "end_juefa", "结局七·绝罚（象征画）"),
+    ("cg", "end_menhou", "结局八·门后之诛（象征画，尚未实装）"),
+    ("cg", "end_chibi", "南线结局·赤壁（象征画，尚未实装）"),
+    ("cg", "end_guandu", "北线结局·官渡（象征画，尚未实装）"),
+    ("cg", "end_tianming", "第十二章·天命归一（真结局，象征画，尚未实装）"),
+    ("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9，暗色印章问号）"),
     # 最优先 · 章节地图底图（缺 6 张 + 长安占位，没有它们这些章节只有空底）：
     ("map", "heishan", "北线第三章·黑山风云地图底图（40 列）"),
     ("map", "beihai", "北线第四章·双凤乱太行地图底图（48 列）"),
@@ -1651,7 +1670,6 @@ NEXT = [
     ("battle", "c5_hall", "喜堂·飞熊军（精英）"),
     ("battle", "dagu", "大谷·徐荣（精英）"),
     ("cg", "end_yusui", "结局卡·玉碎（象征画，不画人）"),
-    ("cg", "end_tonggui", "结局卡·同归（象征画，不画人，不见血）"),
 
     # 第五章 · 荆襄风云：
     ("portrait", "ganning", "甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）"),
@@ -1696,7 +1714,6 @@ NEXT = [
     ("cg", "c8_dress", "盛装（吴夫人给貂蝉梳头）"),
     ("cg", "c8_xiangxiao", "香消（克制）"),
     ("cg", "c8_henhai", "恨海·汉江冷雨（克制）"),
-    ("cg", "end_henhai", "结局卡·恨海（象征画，不画人，不见血）"),
     ("battle", "jx_huangzu", "淯水·黄祖（首领）"),
     ("battle", "jx_caimao_a", "水阁·独眼蔡瑁（结局三线首领）"),
     ("battle", "jx_caimao_b", "水阁·蔡瑁（破局线首领）"),
