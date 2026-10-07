@@ -9,10 +9,6 @@
 
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
-**先重画**（已交付但有地方不对）：
-
-- `yayi` — 衙役改成枪兵：手持长枪式水火棍
-
 1. `defeat_south` — 阵亡 CG · 南线（主角倒在黄昏的泥泞战场上，古锭刀插在身旁，克制不见血）（剧情 CG）
 2. `defeat_north` — 阵亡 CG · 北线（主角倒在黄昏的雪原上，白蜡杆长枪插在身旁，克制不见血）（剧情 CG）
 3. `jiangwei` — 姜维（新增枪兵卡）（立绘）
@@ -306,32 +302,6 @@
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-### `yayi` 🟡 换掉占位
-
-```
-衙役（县衙差役，不是具名人物）的竖版人物立绘。
-外貌：三十岁上下的普通衙役，面容粗糙，神情凶横中带点怯意。
-铠甲与服饰：深灰色衙役号衣，头戴黑色圆帽，腰系布带。
-武器：一杆木杆铁头长枪（水火棍式制式长枪），双手握持。
-背景：古代县衙大堂门前，青石台阶与「明镜高悬」匾额。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-a generic Han-dynasty county yamen guard/runner (衙役), not a named character的竖版人物立绘。
-外貌：A thuggish, sneering henchman, nothing noble about him.
-铠甲与服饰：Short black county-guard uniform with a white sash, a red-tasseled leather cap.
-武器：A water-and-fire cudgel (水火棍) held low, ready to swing.
-背景：the snowy street outside Ye City's county yamen (州衙)。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `taoqian` ⬜ 缺
 
