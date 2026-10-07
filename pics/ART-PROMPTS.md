@@ -39,106 +39,107 @@
 28. `caoyun_shuishou` — 漕运水手（新增后勤兵卡）（立绘）
 29. `yaonong` — 太行药农（新增后勤兵卡）（立绘）
 30. `shangdui` — 甄家商队（新增后勤兵卡）（立绘）
-31. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
-32. `liniang` — 黎娘（成年女性，山越女王）（立绘）
-33. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
-34. `jz_county_fight` — 州衙·拔刀相助 战斗背景（战斗 CG）
-35. `jz_road_bandits` — 官道·黑山散兵 战斗背景（选路分支，走官道那一边）（战斗 CG）
-36. `taoqian` — 陶谦（立绘）
-37. `chendeng` — 陈登（立绘）
-38. `chengui` — 陈珪（立绘）
-39. `caobao` — 曹豹（立绘）
-40. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
-41. `xunyu` — 荀彧（第六章）（立绘）
-42. `caoren` — 曹仁（第六章）（立绘）
-43. `chengong` — 陈宫（立绘）
-44. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
-45. `xunyou` — 荀攸（立绘）
-46. `zhongyao` — 钟繇（立绘）
-47. `zhangxun` — 张勋（南线第六章）（立绘）
-48. `liuxun` — 刘勋（南线第六章）（立绘）
-49. `lusu` — 鲁肃（南线第六章入队）（立绘）
-50. `zhengbao` — 郑宝（南线第六章）（立绘）
-51. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
-52. `zangba` — 臧霸（北线第七章）（立绘）
-53. `shenrong` — 审荣（北线第七章）（立绘）
-54. `liuyao` — 刘繇（南线第七章）（立绘）
-55. `yanbaihu` — 严白虎（南线第七章）（立绘）
-56. `wanglang` — 王朗（南线第七章）（立绘）
-57. `zhoutai` — 周泰（南线第七章）（立绘）
-58. `jiangqin` — 蒋钦（南线第七章）（立绘）
-59. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
-60. `mateng` — 马腾（北线第八、九章）（立绘）
-61. `hansui` — 韩遂（北线第八章）（立绘）
-62. `pangde` — 庞德（北线第九章）（立绘）
-63. `tadun` — 蹋顿（北线第九章）（立绘）
-64. `gongsunkang` — 公孙康（北线第九章）（立绘）
-65. `liuzhang` — 刘璋（南线第九章）（立绘）
-66. `yanyan` — 严颜（南线第九章）（立绘）
-67. `zhangren` — 张任（南线第九章）（立绘）
-68. `fazheng` — 法正（南线第九章）（立绘）
-69. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
-70. `menghuo` — 孟获（南线第九章）（立绘）
-71. `luxun` — 陆逊（成年，南线第九章）（立绘）
-72. `yujin` — 于禁（北线第十章）（立绘）
-73. `lidian` — 李典（北线第十章）（立绘）
-74. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
-75. `xuchu` — 许褚（换掉占位）（立绘）
-76. `zhanghe` — 张郃（北线第十章）（立绘）
-77. `zhanglu` — 张鲁（南线第十章）（立绘）
-78. `zhangwei` — 张卫（南线第十章）（立绘）
-79. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
-80. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
-81. `dianwei` — 典韦（第十一章南线）（立绘）
-82. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
-83. `c3_warn` — 劝阻孙坚（剧情 CG）
-84. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-85. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-86. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-87. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-88. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-89. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-90. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-91. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
-92. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
-93. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
-94. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-95. `yiji` — 伊籍（第五章招贤馆）（立绘）
-96. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-97. `jx_zongzei` — 新野·宗贼（战斗 CG）
-98. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-99. `e_shuijing` — 事件·水镜先生（剧情 CG）
-100. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-101. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-102. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-103. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
-104. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-105. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-106. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-107. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-108. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
-109. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-110. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-111. `huangzu` — 黄祖（江夏太守）（立绘）
-112. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-113. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-114. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-115. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-116. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-117. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-118. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-119. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-120. `c8_jiayan` — 宛城家宴（剧情 CG）
-121. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-122. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-123. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-124. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-125. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-126. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-127. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-128. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-129. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-130. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+31. `sunshangxiang_young` — 孙尚香·幼年（南线第一章富春家中的小女孩，木刀）（立绘）
+32. `wuxian` — 吴苋（成年女性，蜀汉皇后）（立绘）
+33. `liniang` — 黎娘（成年女性，山越女王）（立绘）
+34. `luoyang_n` — 第二章·洛阳烟云地图底图（地图）
+35. `jz_county_fight` — 州衙·拔刀相助 战斗背景（战斗 CG）
+36. `jz_road_bandits` — 官道·黑山散兵 战斗背景（选路分支，走官道那一边）（战斗 CG）
+37. `taoqian` — 陶谦（立绘）
+38. `chendeng` — 陈登（立绘）
+39. `chengui` — 陈珪（立绘）
+40. `caobao` — 曹豹（立绘）
+41. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
+42. `xunyu` — 荀彧（第六章）（立绘）
+43. `caoren` — 曹仁（第六章）（立绘）
+44. `chengong` — 陈宫（立绘）
+45. `xiandi` — 汉献帝（十岁左右的孩子，只画孩子该有的样子）（立绘）
+46. `xunyou` — 荀攸（立绘）
+47. `zhongyao` — 钟繇（立绘）
+48. `zhangxun` — 张勋（南线第六章）（立绘）
+49. `liuxun` — 刘勋（南线第六章）（立绘）
+50. `lusu` — 鲁肃（南线第六章入队）（立绘）
+51. `zhengbao` — 郑宝（南线第六章）（立绘）
+52. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
+53. `zangba` — 臧霸（北线第七章）（立绘）
+54. `shenrong` — 审荣（北线第七章）（立绘）
+55. `liuyao` — 刘繇（南线第七章）（立绘）
+56. `yanbaihu` — 严白虎（南线第七章）（立绘）
+57. `wanglang` — 王朗（南线第七章）（立绘）
+58. `zhoutai` — 周泰（南线第七章）（立绘）
+59. `jiangqin` — 蒋钦（南线第七章）（立绘）
+60. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
+61. `mateng` — 马腾（北线第八、九章）（立绘）
+62. `hansui` — 韩遂（北线第八章）（立绘）
+63. `pangde` — 庞德（北线第九章）（立绘）
+64. `tadun` — 蹋顿（北线第九章）（立绘）
+65. `gongsunkang` — 公孙康（北线第九章）（立绘）
+66. `liuzhang` — 刘璋（南线第九章）（立绘）
+67. `yanyan` — 严颜（南线第九章）（立绘）
+68. `zhangren` — 张任（南线第九章）（立绘）
+69. `fazheng` — 法正（南线第九章）（立绘）
+70. `wuxian` — 吴苋（南线第九章，成年女性）（立绘）
+71. `menghuo` — 孟获（南线第九章）（立绘）
+72. `luxun` — 陆逊（成年，南线第九章）（立绘）
+73. `yujin` — 于禁（北线第十章）（立绘）
+74. `lidian` — 李典（北线第十章）（立绘）
+75. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
+76. `xuchu` — 许褚（换掉占位）（立绘）
+77. `zhanghe` — 张郃（北线第十章）（立绘）
+78. `zhanglu` — 张鲁（南线第十章）（立绘）
+79. `zhangwei` — 张卫（南线第十章）（立绘）
+80. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
+81. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
+82. `dianwei` — 典韦（第十一章南线）（立绘）
+83. `c3_leave` — 撤离洛阳（流民大队与孙家车队）（剧情 CG）
+84. `c3_warn` — 劝阻孙坚（剧情 CG）
+85. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+86. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+87. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+88. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+89. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+90. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+91. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+92. `simahui` — 司马徽（水镜先生，第五章事件）（立绘）
+93. `pangdegong` — 庞德公（岘山老农，第五章事件）（立绘）
+94. `huangchengyan` — 黄承彦（沔南名士，第五章事件）（立绘）
+95. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+96. `yiji` — 伊籍（第五章招贤馆）（立绘）
+97. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+98. `jx_zongzei` — 新野·宗贼（战斗 CG）
+99. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+100. `e_shuijing` — 事件·水镜先生（剧情 CG）
+101. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+102. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+103. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+104. `jiaxu` — 贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）（立绘）
+105. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+106. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+107. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+108. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+109. `liubiao` — 刘表（荆州牧，坐谈客）（立绘）
+110. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+111. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
+112. `huangzu` — 黄祖（江夏太守）（立绘）
+113. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+114. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+115. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+116. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+117. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+118. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+119. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+120. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+121. `c8_jiayan` — 宛城家宴（剧情 CG）
+122. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+123. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+124. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+125. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+126. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+127. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+128. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+129. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+130. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+131. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
 
 交图规则：
 
@@ -2204,6 +2205,32 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 铠甲与服饰：Battered heavy Cao army armor with one arm bare.
 武器：A massive iron halberd in each hand.
 背景：the south gate of Luoyang with the enemy camp and its cooking smoke below the walls。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+</details>
+
+### `sunshangxiang_young` ⬜ 缺
+
+```
+孙尚香·幼年（孙坚的小女儿，八九岁的小女孩，南线第一章富春家中的非战斗角色——和通用池成年版 `sunshangxiang` 是同一人小时候，两个 key 分开画）的竖版人物立绘。
+外貌：八九岁的小女孩，圆脸大眼，浓眉倔强，嘴角挂着调皮的笑，头发扎成两个高高的小髻
+铠甲与服饰：红色小袄配深色短裙，袖口扎紧，脚穿小布靴
+武器：双手举着一把比她还长的木刀，摆出要砍人的架势（只是玩具木刀，不画真刀）
+背景：富春家中的院子，晾着衣服，阳光明亮。
+构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
+画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
+```
+
+<details>
+<summary>English Prompt (英文备用)</summary>
+
+```
+young Sun Shangxiang (孙尚香), Sun Jian's little daughter at about eight — a child; this key is for her childhood appearance only, separate from the adult `sunshangxiang` card的竖版人物立绘。
+外貌：A mischievous girl of eight or nine with round cheeks, thick brows and two high buns.
+铠甲与服饰：A red padded jacket and a dark short skirt, small cloth boots.
+武器：Holding a toy wooden sword longer than her arm.
+背景：the courtyard of the Sun family house in Fuchun。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
