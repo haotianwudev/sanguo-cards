@@ -95,8 +95,8 @@
 | ✅ 已有 | `heishan_wai` | 太行外围 · 黑山游骑（黑山游骑） |
 | ✅ 已有 | `heishan_tan` | 祭坛 · 玄机子（妖道玄机子） |
 | ✅ 已有 | `heishan_zhai` | 黑山寨 · 李大目（「黑山凶寇」李大目） |
-| ⬜ 缺 | `jz_county_fight` | 州衙 · 拔刀相助（衙役） |
-| ⬜ 缺 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
+| ✅ 已有 | `jz_county_fight` | 州衙 · 拔刀相助（衙役） |
+| ✅ 已有 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -359,7 +359,7 @@
 | ⬜ 缺 | `hs_jieqiao_scout` | 界桥外围·游骑（冀州轻骑） |
 | ⬜ 缺 | `shanzei_scout` | 山贼斥候（山贼斥候） |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
-| ⬜ 缺 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
+| ✅ 已有 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -421,11 +421,11 @@
 | ✅ 已有 | `guanjun` | 官军（官军） |
 | ✅ 已有 | `biwu` | 擂台·鲍三娘（鲍三娘） |
 | ✅ 已有 | `c3_shanfei` | 独眼匪首（独眼匪首） |
-| ⬜ 缺 | `c3_xunluo` | 城外·袁军步卒（袁军步卒） |
-| ⬜ 缺 | `c3_mitan` | 酒楼外·袁军密探（袁军密探） |
-| ⬜ 缺 | `c3_gongshou` | 岔路·袁军弓手（袁军弓手） |
+| ✅ 已有 | `c3_xunluo` | 城外·袁军步卒（袁军步卒） |
+| ✅ 已有 | `c3_mitan` | 酒楼外·袁军密探（袁军密探） |
+| ✅ 已有 | `c3_gongshou` | 岔路·袁军弓手（袁军弓手） |
 | ✅ 已有 | `c3_qiaorui` | 城外·桥蕤（桥蕤） |
-| ⬜ 缺 | `c3_qibing` | 雨夜·袁军骑兵（袁军骑兵） |
+| ✅ 已有 | `c3_qibing` | 雨夜·袁军骑兵（袁军骑兵） |
 | ✅ 已有 | `c3_chenlan` | 夜袭·陈兰（陈兰） |
 | ✅ 已有 | `c3_leibo` | 山道追兵·雷薄（雷薄） |
 | ✅ 已有 | `c3_jiling` | 山口·纪灵（纪灵） |
@@ -663,7 +663,10 @@
 
 | 状态 | key | 卡 |
 |---|---|---|
-| ✅ | — | 都有了 |
+| ⬜ 缺 | `jiangqin` | 蒋钦 |
+| ✅ 正式 | `chenwu` | 陈武 |
+| ⬜ 缺 | `lingtong` | 凌统 |
+| ✅ 正式 | `zhuzhi` | 朱治·君理 |
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -684,9 +687,9 @@
 | ⬜ 缺 | `c6_fubing` | 长街·司徒府兵（司徒府兵） |
 | ⬜ 缺 | `c6_fanchou` | 山道·樊稠（樊稠） |
 | ⬜ 缺 | `c6_lijue` | 函谷关·李傕（李傕） |
-| ⬜ 缺 | `c3_xunluo` | 城外·袁军步卒（袁军步卒） |
+| ✅ 已有 | `c3_xunluo` | 城外·袁军步卒（袁军步卒） |
 | ⬜ 缺 | `c7_qiaorui` | 营寨·桥蕤（桥蕤） |
-| ⬜ 缺 | `c3_gongshou` | 岔路·袁军弓手（袁军弓手） |
+| ✅ 已有 | `c3_gongshou` | 岔路·袁军弓手（袁军弓手） |
 | ⬜ 缺 | `c7_leibo` | 山道·雷薄（雷薄） |
 | ⬜ 缺 | `c7_chenlan` | 宛城城下·陈兰（陈兰） |
 | ⬜ 缺 | `c7_jiling` | 宛城·纪灵（纪灵） |
@@ -694,6 +697,7 @@
 | ✅ 已有 | `c4_langqi` | 长街·并州狼骑（并州狼骑） |
 | ⬜ 缺 | `c6_xianzhen` | 宣平门前·陷阵营兵（陷阵营兵） |
 | ⬜ 缺 | `c4_lvbu` | 宣平门·吕布（吕布） |
+| ⬜ 缺 | `c5_qinbing` | 后园·吕布亲兵（吕布亲兵） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -722,9 +726,9 @@
 
 | 状态 | key | 用在 |
 |---|---|---|
-| ⬜ 缺 | `simahui` | 事件「水镜先生」 |
-| ⬜ 缺 | `pangdegong` | 事件「岘山老农」 |
-| ⬜ 缺 | `huangchengyan` | 事件「沔南名士」 |
+| ✅ 正式 | `simahui` | 事件「水镜先生」 |
+| ✅ 正式 | `pangdegong` | 事件「岘山老农」 |
+| ✅ 正式 | `huangchengyan` | 事件「沔南名士」 |
 | ✅ 正式 | `ganning` | 事件「锦帆游侠」 |
 | ⬜ 缺 | `kuaiyue` | 剧情立绘 |
 | ✅ 正式 | `caifuren` | 剧情立绘 |
@@ -772,6 +776,7 @@
 | ⬜ 缺 | `jx_nushou` | 水阁·蔡府连弩手（蔡府连弩手） |
 | ⬜ 缺 | `jx_caimao_a` | 水阁·独眼蔡瑁（独眼蔡瑁） |
 | ⬜ 缺 | `jx_caimao_b` | 水阁·蔡瑁（水军都督蔡瑁） |
+| ✅ 已有 | `c3_mitan` | 酒楼外·袁军密探（袁军密探） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -839,15 +844,12 @@
 | ✅ 正式 | `madai` | 马岱（R） |
 | ⬜ 缺 | `wangping` | 王平（R） |
 | ⬜ 缺 | `lidian` | 李典（R） |
-| ⬜ 缺 | `jiangqin` | 蒋钦（R） |
-| ✅ 正式 | `chenwu` | 陈武（R） |
 | 🟡 占位 | `jianyong` | 简雍（R） |
 | ✅ 正式 | `mizhu` | 糜竺（R） |
 | ⬜ 缺 | `sunqian` | 孙乾（R） |
 | ⬜ 缺 | `peiyuanshao` | 裴元绍（R） |
 | ✅ 正式 | `chengpu` | 程普·程公（R） |
 | ✅ 正式 | `handang` | 韩当（R） |
-| ✅ 正式 | `zhuzhi` | 朱治·君理（R） |
 | ✅ 正式 | `sunben` | 孙贲（R） |
 | ✅ 正式 | `sunjing` | 孙静（R） |
 | ✅ 正式 | `yanfuren` | 严夫人（R） |
@@ -857,4 +859,3 @@
 | ⬜ 缺 | `zhangbao` | 张苞（R） |
 | ⬜ 缺 | `guanxing` | 关兴（R） |
 | ⬜ 缺 | `yanyan` | 严颜（R） |
-| ⬜ 缺 | `lingtong` | 凌统（R） |

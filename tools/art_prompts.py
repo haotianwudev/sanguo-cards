@@ -37,6 +37,14 @@ PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部�
 
 # key: (name line, appearance, armor & clothing, weapon / pose)
 PORTRAITS = {
+    "daotong": ("道童（兵卡，不是具名人物）", "十一二岁的小道童，圆脸，神情聪明机灵，头顶挽着两个小髻", "青灰色的小道袍，腰系布带，背着一个小竹篓", "手里捧着一卷竹简和一支毛笔", "山间道观的院子，晨雾与松树"),
+    "fangshi": ("方士（精英兵卡，不是具名人物）", "四十岁上下的清瘦方士，眼神深邃，胡须稀疏，神情高深莫测", "宽大的深色道袍，绣着星象符文，头戴方巾，腰挂几个药葫芦", "一手托着罗盘，一手夹着一张朱砂符纸", "烟气缭绕的丹房，炉火与符纸"),
+    "shuzuo": ("书佐（兵卡，不是具名人物）", "二十多岁的年轻文吏，面容清秀，神情拘谨认真，眼下有淡淡的黑眼圈", "青色的低级文吏袍服，黑色小冠，袖口沾着墨渍", "怀里抱着一摞竹简，耳后别着一支毛笔", "军营文书帐内，案上堆满简牍"),
+    "peiyuanshao": ("裴元绍（黑山贼将领，北线，成年男性）", "三十岁上下的精悍山贼头目，目光机警狡黠，脸上有一道旧疤", "杂色皮甲外罩黑色披风，头缠黑巾，腰挂短刀", "手持一柄厚背大砍刀，扛在肩上，咧嘴笑着", "太行山的山寨寨门，黑色旗帜在风里飘动"),
+    "huangyueying": ("黄月英（成年女性，机关巧匠，诸葛亮之妻）", "二十多岁的聪慧女子，面容清秀并不艳丽，目光灵动自信，发髻简单、沾着一点木屑", "朴素的浅褐色布裙，外罩工作用的皮围裙，袖口挽起，腰间挂着各式工具", "手里托着一只精巧的木牛流马模型，另一只手拿着小锤", "机关工坊，墙上挂满图纸与齿轮"),
+    "sunqian": ("孙乾（刘备帐下说客，成年男性，口才出众）", "四十岁上下的儒雅文士，面容和善，目光灵活，带着得体的微笑，留着短须", "整洁的深青色文士长袍，头戴进贤冠，腰系丝绦，随身带着使节符节", "一手持着使节的符节，一手作出游说的手势", "诸侯营帐前的辕门，彩旗飘扬"),
+    "wangping": ("王平（蜀汉将领，成年男性，识字不多的行伍出身）", "三十五岁上下的沉稳将领，方脸，眼神坚毅，神情谨慎", "蜀汉风格的深色札甲与皮护臂，头戴铁盔", "手持一杆长枪，枪缨暗红，稳稳立于身前", "山道关隘前，营垒与旌旗"),
+    "zhoucang": ("周仓（关羽的部下，成年男性，黄巾出身）", "三十岁上下的黝黑壮汉，满脸络腮胡，豪爽憨直，嘴角带笑", "粗布短衣外罩简陋皮甲，头缠黑巾，肩头披着兽皮", "肩扛一柄沉重的大刀，另一手叉腰", "山间的小路与树林，远处是一面绿色的「关」字旗"),
     "qinwei": ("主公亲卫（兵卡，主角的贴身护卫，不是具名人物）", "三十岁上下的精悍护卫，面容沉稳，目光警觉，神情忠诚不苟言笑。", "磨得发亮的深青色亲卫铁甲，肩甲刻有简单的云纹，披一件深色短披风。", "右手按在腰间佩刀上，左手持一面圆盾。", "主公营帐门前，两侧是整齐的灯笼与旌旗"),
     "jiading": ("家丁（兵卡，宅院护卫，不是具名人物）", "三十岁上下结实的汉子，面容憨厚，神情警惕。", "深灰色短打外罩皮背心，头缠黑布巾。", "手持一根结实的齐眉木棍。", "大户宅院的青砖院墙前，灯笼挂在门楣下"),
     "shutong": ("书童（兵卡，主角身边的少年书童，不是具名人物，年满十八岁的成年人）", "十八九岁的清秀青年，神情机灵好学，眼神明亮。", "浅青色布衣，腰系布带，背着一个鼓鼓的书箱。", "怀里抱着一卷竹简和一只笔筒。", "书房窗边，案上堆着竹简，窗外有竹影"),
@@ -1086,6 +1094,32 @@ PORTRAITS = {
 
 # battle scenario id: the scene (the enemy in its setting, Rance X style)
 BATTLES = {
+    "bh_guanhai": "北海城下的决战：身材魁梧的黄巾大首领管亥扛着一柄巨大的鬼头刀，黄袍外罩简陋的皮甲，满脸狂热；身后黄巾军旗如林，数万饥民军队黑压压铺满城外原野，远处北海城头有孔融的守军弩手",
+    "bh_hj_duzhan": "北海城外的黄巾军阵后：几名手持环首刀的黄巾督战队官兵，黄巾裹头，满脸凶相，刀背抵着前面迟疑的饥民士兵向前推；背后是插满黄旗的营寨与浓烟",
+    "bh_hj_qushuai": "青州乡野的田埂上：一名黄巾渠帅披着破旧的黄袍和铁肩甲，手持环刀怒吼，身后是挥舞锄头镰刀的黄巾饥民；远处是被烧毁的村庄与黑烟",
+    "bh_jiang_trap": "太行山姜家寨外围的林间山道：几名山贼暗哨藏在岩石与树木之后，拉满的弓弦对准来路；脚下布满绊索、竹签与暗藏的机关木桩，气氛紧张",
+    "bh_jiangqiao": "姜家寨寨门内：女首领姜巧（成年女性，干练的机关匠，头缠布巾，围着满是工具的皮围裙）手握扳机，身旁是几架上好弦的机关连弩与滑轮吊网；木制寨墙上挂满齿轮与绳索",
+    "bh_jz_inf": "黄河渡口的河滩：一队冀州步卒举着方盾、持环首刀结成阵势压来，旗帜上写着冀州的「袁」字；身后是浑浊的黄河与停泊的渡船，天色阴沉",
+    "bh_jz_scout": "黄河岸边的芦苇荡：几名冀州轻骑手持长矛策马冲出芦苇丛，马蹄溅起泥水，苇絮被风扬起；远处是灰蒙蒙的河面",
+    "bh_jz_spear": "黄河岸边的开阔滩涂：一排冀州长枪兵端着丈二长枪列成密集枪阵，枪尖如林，齐声前压；阵后是冀州军旗和低垂的乌云",
+    "bh_lubu": "太行山口的暴风雪中：暴怒的吕布（头戴三叉束发紫金冠，披锁子连环甲，红色战袍猎猎作响）骑着赤兔马，方天画戟高举，戟尖映着雪光；身后并州狼骑的剪影与翻卷的军旗",
+    "bh_wolf2": "太行山口的雪地：一队并州精骑头戴狼首铁盔，披黑色重甲，骑着高头战马从雪雾中疾冲而来，马蹄扬起雪浪，长矛前指；远处隐约可见吕布的大旗",
+    "bh_yanliang": "黄河渡口的战场：大将颜良（魁梧威猛，披重甲，手持一柄大刀）骑马立于阵前，身后是一排举着强弩的先登死士，弩箭对准前方；背后是奔流的黄河与插满袁字旗的营寨",
+    "bh_zhenghao": "郑家寨的校场：女首领郑好（成年女性，豪爽泼辣，红色束袖短打）手持两柄厚背砍刀，身后几名刀手摆开刀阵；背景是木制山寨的大门与挂满红色布幡的寨墙",
+    "c4_lijue_test": "洛阳官道上：李傕（西凉悍将，披重甲，满脸横肉，大笑着）率一队西凉兵拦住一支披红挂彩的迎亲车队，红绸飘飞，轿帘被长矛挑起；道路两旁是惊慌的百姓",
+    "hs_chunyuqiong": "太行山口的险关：冀州大将淳于琼（四十岁上下，面带傲气，披银色明光铠，手持长戟）立在关前，身后是一排排冀州军旗与举盾的士兵；山势陡峭，雪地泥泞",
+    "hs_jieqiao_scout": "界桥外围的原野：几名袁绍军游骑策马疾驰，手持长矛追砍四散逃命的公孙瓒散兵，尘土飞扬，折断的军旗与倒翻的辎重车散落一地；远处是界桥的轮廓",
+    "hs_jizhou_buzhu": "无极甄府大门外：烈焰冲天，冀州步卒举着方盾、手持环首刀潮水般压向崩塌的朱漆府门，身后是弩手列阵；木屑与火星四处飞溅，夜空被烧成橙红",
+    "hs_jizhou_nu": "太行秘道的狭窄峡谷：一排冀州强弩手半蹲在岩壁两侧，强弩上弦、箭簇齐指谷中；箭矢如蝗，岩壁上插满箭杆，夜色昏暗，火把照亮他们冷峻的脸",
+    "hs_jizhou_qiangbing": "太行秘道的狭窄山道：冀州大枪阵的长枪兵横向列成枪墙，枪尖如林封死去路；两侧是陡峭岩壁，火把摇曳，气氛压抑",
+    "hs_jizhou_qibing": "太行秘道的山道上：几名冀州轻骑在窄路上策马追击，手持长矛前指，披风与火把的光影在岩壁上晃动；扬起的碎石与尘雾",
+    "hs_quyi": "界桥战场：麹义（四十岁上下的凉州铁血老将，黑色铁叶甲外罩暗红旧战袍）率先登死士结成大盾阵，盾面满是箭痕，盾后强弩手露出弩机；身后是一面「袁」字大旗，前方是被冲垮的白马义从与折断的旗杆",
+    "hs_wenchou": "界桥血战：河北名将文丑（魁梧威猛，披金色明光甲，手持长枪）策白马疾驰，枪尖直指前方，身后铁骑如潮；黑白斑马大旗在远处飘扬，战场上尘土与战火翻滚",
+    "hs_yudu": "黑山大寨的议事大厅外：叛党首领于毒（五十岁上下，满脸胡须，披黑色皮甲和兽皮披肩）手持一柄沉重的大斧立于台阶前，身后是持刀的叛党山贼；寨中挂着黑色旗帜与火盆",
+    "hs_zhangbaiqi": "太行绝壁的悬崖栈道：黄巾渠帅张白骑（披着破旧的黄色战袍，手持环刀，身形精悍）立于窄窄的栈道上，身后是几名黄巾残兵；一侧是万丈深渊与云雾，一侧是陡峭的岩壁",
+    "huangjin_vanguard": "太行山道上：几名黄巾前锋头缠黄巾，持长矛与环首刀，沿着狭窄的山道摸黑前进，火把照亮他们疲惫而凶狠的面孔；路边是灌木与嶙峋的岩石",
+    "shanzei_scout": "真定城外的雪地：几名地痞流氓般的山贼斥候提着刀棍围住行人，缩着脖子，眼神贼溜溜；背景是被积雪覆盖的城墙与路旁枯树",
+    "th_patrol": "太行山道：几名太行山的巡山山贼身披兽皮与旧皮甲，手持砍刀与弓箭，在松林间的小径上拦路；晨雾弥漫，树影斑驳",
     "jz_county_fight": "邺城州衙门前的雪街：几名衙役抡着水火棍围上来，背景是州衙的朱漆大门和瑟缩的灾民，雪地上已经洒了几滴血",
     "jz_road_bandits": "太行官道旁的雪林：几个衣衫混杂的黑山散兵从树后窜出拦路打劫，背景是积雪的官道和两侧稀疏的冬林",
     "ln_lvlingqi": "黄河南岸古道夜色：吕玲绮一身红黑铠甲，战马打滑前蹄跪地，她单手举着小号方天画戟，满脸泪痕，眼神凶狠又无助",
@@ -1163,6 +1197,13 @@ BATTLES = {
 
 # story cg key: the scene
 CGS = {
+    "c4_drink": "山寨大堂里三人豪迈对饮：主角居中举碗，左边是郑好（成年女性，红色束袖短打，豪爽大笑），右边是姜巧（成年女性，头缠布巾的机关匠，手里还转着一枚小齿轮），两人互相瞪眼不服，大堂里摆着酒坛与简陋的木桌，众山贼在后面起哄",
+    "c4_escape": "太行山道上：郑好的刀手结成刀阵，姜巧的机关弩与绊索布满山道，把陷阵营的黑甲重盾兵死死拖住；主角在前方挥手招呼队伍向东撤退，山口飘着雪与烟尘",
+    "c4_million_hj": "青州北海城外的原野：数以万计的黄巾饥民军黑压压围住孤零零的北海城，黄旗遮天蔽日，城头孔融守军寥寥；远处的丘陵上，主角一行人勒马眺望",
+    "c4_taishici_break": "北海乱军之中：年轻骁将太史慈（二十出头，英气逼人，披银白轻甲）单枪匹马，长枪连挑数名黄巾兵，突入城门；主角挥刀从旁杀来，两人并肩冲阵，尘土与刀光",
+    "c4_porridge": "北海城前的阵地上：几十口大锅一字排开，热气腾腾地熬着粥，刚刚放下兵器的黄巾饥民捧着粥碗痛哭，管亥（魁梧的黄巾首领）把鬼头刀扔在地上，主角站在锅前舀粥",
+    "c4_kongrong": "北海郡府正堂：孔融（五十岁上下，清瘦儒雅，捋着胡须，一身官服）把一方沉重的北海相印双手推向主角，案上放着几个梨；窗外是刚解围的北海城，阳光明亮",
+    "c4_yanliang": "黄河渡口的黎明：颜良（魁梧威猛，披重甲，手持大刀）立于阵前高声喝令，身后一排先登死士举着强弩，对准渡口对面；浑浊的黄河与寒雾",
     "end_hushi": "an ending card illustration, quiet and symbolic: a half-open camp gate on a rainy night by the Luo river, a broken sky-piercer halberd in the mud, a torn red-horse saddle set and a tiger-head bracer; no people, no blood",
     "end_zhumie": "an ending card illustration, quiet and symbolic: a burned-out white candle, a tipped bronze wine cup, a commander's seal and a white feather fan on a tent table; no people, no blood",
     "end_juefa": "an ending card illustration, quiet and symbolic: two broken mountain stockade gates in snow with torn banners tangled together, a huge halberd planted in front; no people, no blood",
@@ -1322,6 +1363,8 @@ MAPS = {
 # Authentic ancient Chinese items, pure cut-outs on transparent backgrounds (no western circular medallion).
 # Excluded lord/protagonist relics per user instruction: jiujia, hupi, qixing, zhaoxianbang, yitian, yuxi.
 RELICS = {
+    "lizigao": "一枚热腾腾的栗子糕（汉代风格的小点心）：切成方块的栗子糕，表面撒着少许糖霜与碎栗仁，放在一方折叠的浅粉色丝帕里，冒着淡淡的热气，丝帕一角绣着一个小小的甄字",
+    "zhongshan_banner": "中山甄记大旗：一面略显破旧的大旗，赭红色底，中央用白色大字绣着「甄」，旗边缀着流苏与磨损的缺口，旗杆是深色的木杆，顶端带铜制矛尖",
     "shoushihe": "an exquisite Han dynasty Chinese lacquer jewelry box (汉代黑红髹漆妆奁), lid slightly ajar showing delicate jade hairpins, gold tassels and pearls inside",
     "jiunang": "an ancient Chinese gourd flask wine pouch (左慈酒葫芦/酒囊), polished leather and dried gourd with brass spout, wrapped in ceremonial red cord with a bronze coin charm",
     "shuijing": "an ancient Chinese Han dynasty round bronze mirror (汉代铜镜) with a polished face catching light, the back cast with cloud and water patterns and a knob with a silk tassel",
@@ -1358,6 +1401,18 @@ RELICS = {
 
 # ？ event illustrations (event id -> scene); shown full-screen when the event comes up, like a story CG (key e_<id>)
 EVENTS = {
+    "borrow_general": "孙坚大帐前：孙坚指着帐外一排老将，程普、韩当、黄盖、朱治、吴景、孙贲依次站开，个个一身旧伤，眼神沉稳；主角站在帐门口，吴景的目光紧紧盯着他",
+    "hand_over": "盟主大营的辕门外：一辆囚车正缓缓驶出，车内的董白（成年女性）回头望了一眼，神情复杂，什么也没说；孙策站在远处沉默地看着，营门口挂着盟旗",
+    "ln_boater": "结冰的黄河渡口：一位满脸风霜的老艄公撑着小渡船，压低声音收船钱，船上堆着几袋货物；河面上漂着浮冰，天色阴沉",
+    "ln_wine": "酸枣大营外的酒摊：精明的摊主（四十岁上下，围着围裙）正笑眯眯地倒酒，摊上摆满酒坛，远处是诸侯各色旗帜的营帐；食客与士兵三三两两",
+    "lvbu_beaten": "虎牢关下：吕布退入关内，关前一片狼藉；十八路诸侯与士兵争相举杯向主角敬酒，袁绍起身让座，孙坚拍着主角的肩膀；远处一个个子不高、端着酒杯的人（曹操）捋着胡须，静静打量主角",
+    "lvbu_beaten_n": "酸枣大营中央：袁绍派人送来一面「义薄云天」的锦旗，诸侯们围观；曹操（个子不高，捋须）负手站在一旁，盯着那面破旧的「中山甄记」大旗；郭嘉举着酒葫芦遥遥敬了他一下",
+    "old_armor": "吴夫人的房间里：吴夫人打开一只樟木箱，里面是护肩刻虎纹的银甲和白毛滚边的黑披风，她亲手给主角系上甲带；孙策站在门口目瞪口呆，周瑜在一旁翻着账本",
+    "risk_n": "风雪弥漫的悬崖险沟前：向导缩着脖子指着狭窄陡峭的山沟，主角和同伴们勒马站在崖边，雪片遮天；险沟深处暗藏着隐约的伏兵剪影",
+    "taihang_bear": "太行山深林里：一头壮硕的黑熊拦在小路中间，鼻子不住地抽动；赵云抬手按住主角的肩膀，示意别动，主角腿软地缩着脖子；雪后的松林",
+    "taihang_hunter": "雪地里：一位背着柴火的猎户让到路边，怀里护着一只挣扎的锦鸡；甄宓（十几岁的少女）凑过去看，眼睛发亮，郭嘉在一旁打着哈欠",
+    "zhen_caravan": "官道上：一支挂着「甄」字旗的商队停在路边，管事下马向张夫人行礼，张夫人（成年女性，富态精明）手指在账本上划拉，郭嘉在旁笑着凑过去",
+    "zumao_saved": "汜水关下：华雄刚被一把飞刀击中后脑栽下马，祖茂（老将）拄刀站起，摘下头上的赤帻双手递给主角；孙策正举枪补刀高呼「华雄已死」，周瑜在后面记账",
     "shuijing": "a thatched hut in a bamboo grove: the genial hermit Sima Hui sitting at his door with a round bronze mirror, smiling and nodding 'good, good'; young Sun Ce leaning in eagerly pointing at the short-haired hero",
     "pangdegong": "fields at the foot of Mount Xian by the Han river: the old recluse Pang Degong leaning on his hoe, his wife bringing a lunch basket along the field ridge, both bowing to each other politely; the short-haired hero watching, oddly uneasy",
     "huangchengyan": "a riverside workshop on the Mian river: the grey-bearded inventor Huang Chengyan crouching beside a little self-walking wooden cart; the short-haired hero staring at it in amazement",

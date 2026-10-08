@@ -212,6 +212,9 @@
 | `sunshangxiang_young` | source/generals/sunshangxiang_young.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wuxian` | source/generals/wuxian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiandi` | source/generals/xiandi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huangchengyan` | source/generals/huangchengyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `pangdegong` | source/generals/pangdegong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `simahui` | source/generals/simahui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -259,6 +262,12 @@
 | `battle:c2_gongqi` | source/battles/c2_gongqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c4_langqi` | source/battles/c4_langqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:ln_langqi` | source/battles/ln_langqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_gongshou` | source/battles/c3_gongshou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_mitan` | source/battles/c3_mitan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_qibing` | source/battles/c3_qibing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c3_xunluo` | source/battles/c3_xunluo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jz_county_fight` | source/battles/jz_county_fight.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jz_road_bandits` | source/battles/jz_road_bandits.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
