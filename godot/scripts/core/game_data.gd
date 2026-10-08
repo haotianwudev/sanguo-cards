@@ -87,7 +87,7 @@ func _load(dir: String) -> void:
 	for fid in raw.get("lord_forms", {}).get("forms", {}):
 		var f: Dictionary = raw["lord_forms"]["forms"][fid]
 		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "bonus": f.get("bonus", {}),
-			"skills": f.get("skills", []), "art": f.get("art", false)}
+			"skills": f.get("skills", []), "art": f.get("art", false) or ResourceLoader.exists("res://data/portraits/%s.jpg" % fid)}  # its own face once that portrait is delivered
 	lord_form_grants = raw.get("lord_forms", {}).get("grants", [])
 	for cid in raw["cards"]:
 		var c: Dictionary = raw["cards"][cid]
