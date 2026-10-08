@@ -172,6 +172,10 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
     if kind == "portrait":
         card = json.loads((DATA / "cards.json").read_text("utf-8")).get("cards", {}).get(key, {})
         rel = e.get("src") or f"source/{'soldiers' if card.get('rarity') == 'N' else 'generals'}/{key}.jpg"
+        if e and "Gemini" not in str(e.get("license", "")):  # an old public-domain / stock picture is being replaced: its framing, licence and folder no longer apply
+            rel = f"source/{'soldiers' if card.get('rarity') == 'N' else 'generals'}/{key}.jpg"
+            for stale in ("face", "head", "source", "artist", "license"):
+                e.pop(stale, None)
     else:
         rel = f"source/{SRC_DIR[kind]}/{key}.jpg"
     dst = PICS / rel

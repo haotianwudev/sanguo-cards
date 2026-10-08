@@ -53,7 +53,7 @@
 | `xuhuang` | source/generals/xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangjiao` | source/public-domain/zhangjiao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg) | Public domain | Unknown author |
-| `zhangliao` | source/public-domain/zhangliao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Liao_Portrait.jpg) | Public domain | — |
+| `zhangliao` | source/generals/zhangliao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhaoyun` | source/generals/zhaoyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhugeliang` | source/public-domain/zhugeliang.jpg | [链接](https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg) | Public domain | Unknown authorUnknown author |
 | `langlijiao` | source/generals/langlijiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

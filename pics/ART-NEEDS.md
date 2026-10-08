@@ -139,7 +139,6 @@
 | ⬜ 缺 | `e_fruit` | 「野果」 |
 | ⬜ 缺 | `e_risk` | 「险滩」 |
 | ⬜ 缺 | `e_temple` | 「山神庙」 |
-| ✅ 已有 | `c2_triple` | 「威震诸侯」 |
 | ✅ 已有 | `e_grand_chest` | 「高级宝箱」 |
 | ⬜ 缺 | `e_huatuo` | 「游方郎中」 |
 | ⬜ 缺 | `e_yuji` | 「白衣道人」 |
@@ -170,7 +169,6 @@
 | ⬜ 缺 | `e_plague` | 「疫村」 |
 | ⬜ 缺 | `e_tongyao` | 「童谣」 |
 | ✅ 已有 | `e_biwu` | 「比武招亲」 |
-| ✅ 已有 | `c2_sanying` | 「惊退温侯」 |
 | ⬜ 缺 | `e_taihang_hunter` | 「太行猎户」 |
 | ⬜ 缺 | `e_zhen_caravan` | 「甄家商队」 |
 | ⬜ 缺 | `e_taihang_bear` | 「黑熊挡道」 |
@@ -241,6 +239,8 @@
 | ✅ 已有 | `c2_capture` | 俘虏 |
 | ✅ 已有 | `c2_captive` | 俘虏的日子 |
 | ✅ 已有 | `c2_raid` | 吕布劫营 |
+| ✅ 已有 | `c2_sanying` | 三英战吕布 |
+| ✅ 已有 | `c2_triple` | 威震诸侯 |
 | ✅ 已有 | `c2_keep` | 藏人 |
 | ✅ 已有 | `c2_heqin` | 和亲 |
 | ✅ 已有 | `c2_mixin` | 密信 |
