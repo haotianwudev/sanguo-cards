@@ -210,5 +210,15 @@
   "xiandi": {"file": "xiandi.jpg", "face": [0.5, 0.22], "head": 0.22},
   "huangchengyan": {"file": "huangchengyan.jpg", "face": [0.5, 0.22], "head": 0.22},
   "pangdegong": {"file": "pangdegong.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "simahui": {"file": "simahui.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "simahui": {"file": "simahui.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jiaxu": {"file": "jiaxu.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "liubiao": {"file": "liubiao.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_north_banner": {"file": "lord_north_banner.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_north_cloak": {"file": "lord_north_cloak.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_north_guard": {"file": "lord_north_guard.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_north_march": {"file": "lord_north_march.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_south_boat": {"file": "lord_south_boat.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_south_cloak": {"file": "lord_south_cloak.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_south_plate": {"file": "lord_south_plate.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_south_robe": {"file": "lord_south_robe.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

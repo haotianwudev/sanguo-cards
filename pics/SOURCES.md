@@ -215,6 +215,16 @@
 | `huangchengyan` | source/generals/huangchengyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `pangdegong` | source/generals/pangdegong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `simahui` | source/generals/simahui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiaxu` | source/generals/jiaxu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `liubiao` | source/generals/liubiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_banner` | source/generals/lord_north_banner.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_cloak` | source/generals/lord_north_cloak.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_guard` | source/generals/lord_north_guard.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_march` | source/generals/lord_north_march.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_boat` | source/generals/lord_south_boat.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_cloak` | source/generals/lord_south_cloak.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_plate` | source/generals/lord_south_plate.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_robe` | source/generals/lord_south_robe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |

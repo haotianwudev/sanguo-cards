@@ -82,3 +82,13 @@
 - [x] 2026-10-07 battle `jz_road_bandits` ← jz_road_bandits.jpg · ok
 - [x] 2026-10-07 portrait `pangdegong` ← pangdegong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-07 portrait `simahui` ← simahui.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `jiaxu` ← jiaxu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `liubiao` ← liubiao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_north_banner` ← lord_north_banner.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_north_cloak` ← lord_north_cloak.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_north_guard` ← lord_north_guard.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_north_march` ← lord_north_march.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_south_boat` ← lord_south_boat.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_south_cloak` ← lord_south_cloak.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_south_plate` ← lord_south_plate.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `lord_south_robe` ← lord_south_robe.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
