@@ -8222,6 +8222,40 @@
       ],
       "card": "chunyuqiong"
     },
+    "chunyuqiong_boss": {
+      "name": "冀州大将·淳于琼",
+      "portrait": "chunyuqiong",
+      "hp": 15000,
+      "at": 270,
+      "actions": 2,
+      "phys_resist": 0.25,
+      "moves": [
+        {
+          "name": "重戟",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "戟扫千军",
+          "power": 1.2,
+          "weight": 1,
+          "confuse": 0.35
+        },
+        {
+          "name": "坚甲防守",
+          "power": 0,
+          "weight": 1,
+          "heal": 0.05
+        },
+        {
+          "name": "军令·围杀",
+          "power": 1.0,
+          "weight": 1,
+          "ap_drain": 2
+        }
+      ],
+      "card": "chunyuqiong"
+    },
     "quyi_enemy": {
       "name": "先登主将·麹义",
       "portrait": "quyi",
@@ -8972,6 +9006,12 @@
       "name": "太行山口·淳于琼",
       "turn_limit": 10,
       "enemy": "chunyuqiong_enemy"
+    },
+    "hs_bad_hall": {
+      "name": "无极甄府·淳于琼",
+      "turn_limit": 10,
+      "enemy": "chunyuqiong_boss",
+      "art": "hs_chunyuqiong"
     },
     "hs_quyi": {
       "name": "界桥·麹义先登营",

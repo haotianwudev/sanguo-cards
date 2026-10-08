@@ -441,3 +441,24 @@ func test_beihai_fights_all_run_to_a_result() -> void:
 	for sc in ["bh_zhenghao", "bh_jiangqiao", "bh_lubu", "bh_guanhai"]:
 		var b := Battle.start(sc, s.party_leaders(), 3)
 		check(bot_fight(b) in ["win", "lose"], sc + " ends")
+
+
+func test_north_chapter3_turning_your_back_plays_out_the_siege_before_ending_six() -> void:
+	## 绕道避险 → a year on, 郭图 besieges 无极: four fights, a last night, 淳于琼 in the courtyard, then 覆巢
+	var s := lap_save(["出生：冀州无极", "北线：班师冀州"], ["prologue", "luoyang_n"])
+	var q := quest_by_id("heishan")
+	var path := walk(q, s, [], 1, 0, 1)
+	for sid in ["hs_save_choice", "hs_ignore", "hs_bad_return", "hs_bad_skip", "hs_bad_wall", "hs_bad_gate", "hs_bad_street",
+			"hs_bad_night", "hs_bad_hall", "hs_bad_end"]:
+		check(path.has(sid), "覆巢 line passes " + sid)
+	for sid in ["hs_zhangyan", "hs_yudu", "hs_hm2"]:
+		check(not path.has(sid), "and never reaches " + sid)
+	check(s.run_records.has("结局六 · 覆巢"), "the run reaches 结局六")
+	var s2 := lap_save(["出生：冀州无极", "北线：班师冀州"], ["prologue", "luoyang_n"])
+	Quests.begin(q, s2)
+	s2.run_records.append("张宁：没救")
+	s2.square = "hs_bad_hall"
+	s2.resolved = false
+	check(Quests.lose(q, s2), "losing the last stand is not a failed run: the story goes on")
+	check_eq(s2.square, "hs_bad_end", "…to the ending")
+
