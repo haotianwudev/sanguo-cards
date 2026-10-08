@@ -297,15 +297,10 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]
 	var skills: Array = kits["lord_north"]["special"] if north and kits.has("lord_north") else default_kit("lord", true)
-	var f: Dictionary = lord_forms.get(form, {})  # the lord card whose face is shown (the newest one with art)
-	var add_hp := 0  # every lord card held adds up: stats and skills
-	var add_at := 0
-	var extra: Array = []
-	for fid in (forms if not forms.is_empty() else ([form] if form != "" else [])):
-		var lf: Dictionary = lord_forms.get(fid, {})
-		add_hp += int(lf.get("bonus", {}).get("hp", 0))
-		add_at += int(lf.get("bonus", {}).get("at", 0))
-		extra.append_array(lf.get("skills", []))
+	var f: Dictionary = lord_forms.get(form, {})  # the lord card in use: its own stats, skills and (once drawn) face
+	var add_hp := int(f.get("bonus", {}).get("hp", 0))
+	var add_at := int(f.get("bonus", {}).get("at", 0))
+	var extra: Array = f.get("skills", [])
 	var person := "lord_north" if north else "lord"
 	if not f.is_empty() and f["art"]:
 		person = form

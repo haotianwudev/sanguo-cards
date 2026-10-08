@@ -21,7 +21,10 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 	var db := GameData.get_db()
 	var v := CardView.new()
 	if card_id == "lord":
-		v.fighter = Game.save.lord() if Game.save != null else db.build_lord(opts.get("lord_name", "主公"))
+		if opts.has("form") and Game.save != null:  # a specific lord card ("" = the plain lord)
+			v.fighter = Game.save.lord_with_form(opts["form"])
+		else:
+			v.fighter = Game.save.lord() if Game.save != null else db.build_lord(opts.get("lord_name", "主公"))
 	elif Game.save != null and Game.save.has_card(card_id):
 		v.fighter = Game.save.fighter(card_id)  # at its 铜/银/金 tier
 	else:

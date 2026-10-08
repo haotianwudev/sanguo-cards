@@ -149,6 +149,20 @@ func demo(name: String) -> void:
 		save.run_records.append("出生：冀州无极")
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
+	if name == "lordcards":  # 整备 on the 主公 tab with three lord cards handed out
+		for c in ["sunce", "zhouyu", "wuguotai"]:
+			save.grant_card(c)
+		save.lord_forms = ["lord_south_armor", "lord_south_boat", "lord_south_plate"]
+		var lm := MapScreen.new()
+		show_screen(lm)
+		lm.call_deferred("_open_party")
+		(func():
+			await get_tree().process_frame
+			var lo: PartyOverlay = lm.get_node("Party")
+			lo._filter = "lord"
+			lo._sel = "lordform:lord_south_boat"
+			lo._rebuild()).call_deferred()
+		return
 	if name == "newgame":  # the 从零开始 confirmation (a save exists), then the name
 		show_screen(TitleScreen.new())
 		var d := NewGameDialog.new()

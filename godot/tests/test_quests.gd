@@ -1006,28 +1006,35 @@ func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:
 	check(seen.keys().any(func(k): return db.lord_forms[k]["route"] == "north") and seen.keys().any(func(k): return db.lord_forms[k]["route"] == "south"), "both routes' cards turn up")
 
 
-func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_they_add_up() -> void:
+func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
 	s.flags = ["出生：冀州无极"]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 11
-	var last_hp := int(s.lord()["hp"])
 	for k in 5:
 		s.lord_form_paid = ""
 		var got := Quests.grant_lord_form(db.quests[0], s, rng)
 		check(got != "", "chapter %d of the north route still hands one out" % (k + 1))
-		var hp := int(s.lord()["hp"])
-		check(hp > last_hp, "each card makes the lord stronger (they add up)")
-		last_hp = hp
+		check_eq(s.lord_form(), got, "the newest card is in use until another is picked")
 	check_eq(s.route_lord_forms().size(), 5)
+	var base := s.lord_with_form("")
+	var pick := "lord_north_guard"
+	s.lord_form_pick = pick
+	check_eq(s.lord_form(), pick, "a card picked in 整备 is the one in use")
+	var guard := s.lord()
+	check_eq(int(guard["hp"]), int(s.lord_with_form(pick)["hp"]))
+	check(guard["hp"] > base["hp"] and guard["at"] > base["at"], "its bonus counts")
+	var one: Dictionary = db.lord_forms[pick]["bonus"]
+	check_eq(int(guard["hp"]) - int(base["hp"]), int(one["hp"]), "and only its own (the others do not add)")
+	s.lord_form_pick = "base"
+	check_eq(s.lord_form(), "", "the plain lord can be put back")
 	var copies := s.lord_copies
 	s.lord_form_paid = ""
 	var again := Quests.grant_lord_form(db.quests[0], s, rng)
 	check(again != "" and s.lord_form_dupe, "all held: a random one again")
 	check_eq(s.lord_copies, copies + 1, "…which is another copy of the lord (a higher tier in time)")
-	check_eq(s.route_lord_forms().size(), 5, "the stats are not counted twice")
-	check_eq(s.lord_form(), "lord_north_silver", "the face is the newest card that has art")
+	check_eq(s.route_lord_forms().size(), 5, "the card list does not grow")
 
 
 func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:

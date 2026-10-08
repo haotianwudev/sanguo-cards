@@ -60,6 +60,7 @@ var play_level := 0  # the 难度 level chosen after the birthplace (0 = not cho
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
 var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
 var ended := false  # an ending was reached: this run is over (no 继续 on the title; a new 周目 or a chapter replay is what is left)
+var lord_form_pick := ""  # the lord card in use: "" = the newest this route has, "base" = the plain lord, else a lord_forms id
 var lord_form_dupe := false  # the last lord card handed out was one already held (it raised the lord's tier instead); not saved
 var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
@@ -67,7 +68,7 @@ var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -266,19 +267,25 @@ func route_lord_forms() -> Array:
 
 
 func lord_form() -> String:
-	## the lord's face: the newest of this route's cards that has its own art ("" = the base lord)
-	var db := _db()
+	## the lord card in use ("" = the plain lord): the one picked in 整备, else the newest this route has handed out
 	var mine := route_lord_forms()
-	for i in range(mine.size() - 1, -1, -1):
-		if db.lord_forms[mine[i]]["art"]:
-			return mine[i]
-	return ""
+	if lord_form_pick == "base":
+		return ""
+	if mine.has(lord_form_pick):
+		return lord_form_pick
+	return mine[-1] if not mine.is_empty() else ""
+
+
+func lord_with_form(form: String) -> Dictionary:
+	## the lord as he would be with that card (also used to show every lord card in 整备)
+	var db := _db()
+	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), form, [form] if form != "" else [])
 
 
 func lord() -> Dictionary:
 	## the lord's fighter at its tier; the north route starts in a different host body (own hair, no armor)
 	var db := _db()
-	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), lord_form(), route_lord_forms())
+	return lord_with_form(lord_form())
 
 
 func upgrade_copies() -> int:

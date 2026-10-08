@@ -132,6 +132,9 @@ func _rebuild() -> void:
 	if _sel.begins_with("relic:"):
 		if not save.relics.has(_sel.substr(6)):
 			_sel = "lord"
+	elif _sel.begins_with("lordform:"):
+		if not save.route_lord_forms().has(_sel.substr(9)) and _sel != "lordform:base":
+			_sel = "lord"
 	elif _sel != "lord" and not save.has_card(_sel):
 		_sel = "lord"
 
@@ -181,6 +184,8 @@ func _rebuild() -> void:
 		var tr: String = db.cards[cid]["troop"]
 		if not troops_owned.has(tr):
 			troops_owned.append(tr)
+	if not save.route_lord_forms().is_empty() and not troops_owned.has("lord"):
+		troops_owned.append("lord")  # the lord cards (版本) live under 主公
 	for tr in db.troops:
 		if troops_owned.has(tr):
 			tabs.append([tr, db.troops[tr]["name"]])
@@ -216,6 +221,13 @@ func _rebuild() -> void:
 		if _sort == "rarity" and rank.get(db.cards[a]["rarity"], 0) != rank.get(db.cards[b]["rarity"], 0):
 			return rank.get(db.cards[a]["rarity"], 0) > rank.get(db.cards[b]["rarity"], 0)
 		return power[a] > power[b])
+	if _filter == "lord":  # the plain lord and every lord card handed out: tap one to see it, tap again to use it
+		for fid in ["base"] + save.route_lord_forms():
+			var lv := CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if fid == "base" else fid})
+			lv.set_state(false, _sel == "lordform:" + fid)
+			lv.note = "使用中" if save.lord_form() == ("" if fid == "base" else fid) else ""
+			lv.pressed.connect(_tap.bind("lordform:" + fid))
+			_grid.add_child(lv)
 	for cid in ids:
 		var c: Dictionary = db.cards[cid]
 		var v := CardView.make(cid, Vector2(108, 151), {"skills": false, "count": save.copies(cid) if c["soldier"] else 0})
@@ -225,7 +237,7 @@ func _rebuild() -> void:
 	if _filter == "all":  # 宝物 are in the pool too
 		for rid in save.relics:
 			_grid.add_child(_relic_card(rid))
-	if ids.is_empty() and not (_filter == "all" and not save.relics.is_empty()):
+	if ids.is_empty() and _filter != "lord" and not (_filter == "all" and not save.relics.is_empty()):
 		_grid.add_child(Kit.label("这一类还没有卡。", Kit.FONT_BODY, "dim"))
 
 	_fill_detail()
@@ -364,9 +376,50 @@ func _stat_line(name: String, value: String) -> Control:
 	return row
 
 
+func _form_name(fid: String) -> String:
+	return "主公" if fid == "base" else GameData.get_db().lord_forms[fid]["name"]
+
+
+func _fill_lordform_detail(fid: String) -> void:
+	## a lord card: its face, what it adds, and the button that puts it in use
+	var save := Game.save
+	var form := "" if fid == "base" else fid
+	var f: Dictionary = save.lord_with_form(form)
+	var top := HBoxContainer.new()
+	top.add_theme_constant_override("separation", 12)
+	_detail.add_child(top)
+	top.add_child(CardView.make("lord", Vector2(130, 182), {"skills": false, "form": form}))
+	var info := VBoxContainer.new()
+	info.add_theme_constant_override("separation", 4)
+	top.add_child(info)
+	var nm := Kit.label(save.lord_name if form == "" else "%s · %s" % [save.lord_name, _form_name(fid)], Kit.FONT_BIG + 2, "gold")
+	nm.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	nm.custom_minimum_size = Vector2(196, 0)
+	info.add_child(nm)
+	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
+	var b: Dictionary = GameData.get_db().lord_forms[form]["bonus"] if form != "" else {}
+	info.add_child(_info_line("加成", ("攻 +%d · 兵 +%d" % [int(b.get("at", 0)), int(b.get("hp", 0))]) if form != "" else "没有（原本的主公）"))
+	var in_use := save.lord_form() == form
+	var act := Kit.button("使用中" if in_use else "换上这张主公卡", "gray" if in_use else "green")
+	act.disabled = in_use
+	act.custom_minimum_size = Vector2(340, 50)
+	act.pressed.connect(func():
+		save.lord_form_pick = fid
+		_msg.text = "主公换上了「%s」" % _form_name(fid)
+		_rebuild())
+	_detail.add_child(act)
+	var tip := Kit.label("每章通关会发一张主角卡（拿齐后再发一张，是主公的升级张数）。一次只能用一张，它的加成算在主公身上。", 14, "muted")
+	tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	tip.custom_minimum_size = Vector2(340, 0)
+	_detail.add_child(tip)
+
+
 func _fill_detail() -> void:
 	if _sel.begins_with("relic:"):
 		_fill_relic_detail(_sel.substr(6))
+		return
+	if _sel.begins_with("lordform:"):
+		_fill_lordform_detail(_sel.substr(9))
 		return
 	var save := Game.save
 	var db := GameData.get_db()
@@ -480,11 +533,20 @@ func _heading(text: String) -> Control:
 
 
 func _tap(cid: String) -> void:
+	if cid.begins_with("lordform:"):
+		if _sel == cid:  # a second tap puts the card in use
+			Game.save.lord_form_pick = cid.substr(9)
+			_msg.text = "主公换上了「%s」" % _form_name(cid.substr(9))
+		_sel = cid
+		_filter = "lord"
+		_rebuild()
+		return
 	if _sel == cid and cid != "lord":
 		_toggle(cid)
 		return
 	_sel = cid
-	_filter = GameData.get_db().cards[cid]["troop"]  # the pool jumps to that card's troop
+	if GameData.get_db().cards.has(cid):
+		_filter = GameData.get_db().cards[cid]["troop"]  # the pool jumps to that card's troop
 	_msg.text = ""
 	_rebuild()
 
