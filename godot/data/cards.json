@@ -7,6 +7,8 @@
     },
     "offer_size": 3,
     "_items": "宝物 are cards like in Rance X: each belongs to one troop's unit (relics.*.troop; lord = the lord's own), never as its leader, any number; worn ones work while that unit is out, or leave them in the pool",
+    "fielded_chance": 0.3,
+    "_fielded_chance": "招贤的每个位置、宝箱里的每张牌，有这个概率直接是你现在上场的牌（队长武将 / 出战兵种的兵卡），让常用的牌能升级",
     "lord_rate": 0.06,
     "lord_rarity": "SR",
     "_lap": "周目: a new playthrough keeps every card as it is; generals you have ever had (even story-only ones) join the recruit pool",

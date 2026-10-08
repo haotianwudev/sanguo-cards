@@ -350,7 +350,8 @@ func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 		var ids: Array = Quests.offer(q, s, rng(3)).map(func(c): return c["id"])
 		if sid == "draft":
 			check(ids.all(func(c): return c in q["recruit_pool"]), "征兵 only finds locals")
-		check(not ids.is_empty() and ids.all(func(c): return c in allowed), "%s %s" % [sid, ids])
+		var gd := GameData.get_db()
+		check(not ids.is_empty() and ids.all(func(c): return c in allowed or gd.is_public(c) or gd.card_chapters[c].has(q["id"])), "%s %s" % [sid, ids])
 	var chest := s.chest_after_battle(rng(1), 0.0, true, [], "", 0.0, q["id"])
 	var db := GameData.get_db()
 	check(chest.all(func(c): return not c["soldier"] or db.is_public(c["id"]) or db.card_chapters[c["id"]].has(q["id"]) or s.seen.has(c["id"])),

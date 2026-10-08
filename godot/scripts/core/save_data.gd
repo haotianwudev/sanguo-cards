@@ -316,6 +316,10 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 		rates = db.gacha["rates"]
 	var result: Array = []
 	for _i in n:
+		var mine := fielded_generals().filter(func(c): return not result.has(c))
+		if not mine.is_empty() and rng.randf() < fielded_chance():  # often a general you field: the ones you use get to level up
+			result.append(mine[rng.randi_range(0, mine.size() - 1)])
+			continue
 		if not maxed("lord") and not result.has(db.cards["lord"]) and rng.randf() < float(db.gacha.get("lord_rate", 0.0)):
 			result.append(db.cards["lord"])  # now and then the lord's own card turns up
 			continue
@@ -331,6 +335,36 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 		var p: Array = pools[rarity]
 		result.append(p[rng.randi_range(0, p.size() - 1)])
 	return result
+
+
+func fielded_chance() -> float:
+	return float(_db().gacha.get("fielded_chance", 0.0))
+
+
+func fielded_generals() -> Array:
+	## the generals leading a unit right now (not yet at the top tier): a pick or a chest leans towards them
+	var db := _db()
+	var out: Array = []
+	for cid in party:
+		if has_card(cid) and not maxed(cid):
+			out.append(db.cards[cid])
+	return out
+
+
+func fielded_soldiers(taken: Array = []) -> Array:
+	## the soldier cards of the troops in play (the lord's own retinue and each led troop), still brought along
+	var db := _db()
+	var troops := {"lord": true}
+	for cid in party:
+		if db.cards.has(cid):
+			troops[db.cards[cid]["troop"]] = true
+	var route := route()
+	var out: Array = []
+	for cid in soldiers:
+		var c: Dictionary = db.cards.get(cid, {})
+		if not c.is_empty() and troops.has(c["troop"]) and not benched.has(cid) and not taken.has(c) and c.get("scope", "") in ["", route]:
+			out.append(c)
+	return out
 
 
 func recruit_pool(rarity: String) -> Array:
@@ -444,6 +478,11 @@ func chest_mix(rng: RandomNumberGenerator, n: int, only: Array = [], chapter := 
 	var chance := chest_general_chance()
 	var out: Array = []
 	for _i in n:
+		if only.is_empty() and rng.randf() < fielded_chance():  # leans towards what you field, so those cards get copies
+			var mine: Array = fielded_generals().filter(func(c): return not out.has(c)) if rng.randf() < chance else fielded_soldiers(out)
+			if not mine.is_empty():
+				out.append(mine[rng.randi_range(0, mine.size() - 1)])
+				continue
 		var live: Array = []
 		for k in pools:
 			if not _chest_left(pools[k]["soldier"], out).is_empty() or not _chest_left(pools[k]["general"], out).is_empty():

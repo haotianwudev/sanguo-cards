@@ -567,3 +567,45 @@ func test_reaching_an_ending_closes_the_run_and_a_new_lap_reopens_it() -> void:
 	check(s.ended, "an ending ends the run (the title offers no 继续)")
 	check(not s.new_lap().ended, "a new 周目 starts open")
 
+
+func test_picks_and_chests_lean_towards_the_cards_you_field() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var cav := ""  # a soldier card of the troop sunce leads, and one of a troop nobody leads
+	var idle := ""
+	for c in db.cards.values():
+		if c["soldier"] and not c["beast"] and c.get("scope", "") in ["", "south"] and db.is_public(c["id"]):
+			if c["troop"] == "cavalry" and cav == "":
+				cav = c["id"]
+			elif c["troop"] == "archer" and idle == "":
+				idle = c["id"]
+	s.grant_card("sunce")
+	s.grant_card(cav)
+	s.grant_card(idle)
+	s.party = ["sunce"]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 5
+	var share := func() -> float:
+		var hit := 0
+		var total := 0
+		for _i in 300:
+			for c in s.recruit_offer(rng):
+				total += 1
+				hit += 1 if c["id"] == "sunce" else 0
+		return float(hit) / float(total)
+	var with: float = share.call()
+	var old: float = db.gacha["fielded_chance"]
+	db.gacha["fielded_chance"] = 0.0
+	var without: float = share.call()
+	db.gacha["fielded_chance"] = old
+	check(with > without + 0.05, "the general you field turns up more often in 招贤: %.2f vs %.2f" % [with, without])
+	var fielded := 0
+	var other := 0
+	for _i in 200:
+		for c in s.chest_mix(rng, 3):
+			if c["id"] == cav:
+				fielded += 1  # sunce leads the cavalry
+			elif c["id"] == idle:
+				other += 1
+	check(fielded > other, "the soldiers of a fielded troop come out of chests more than an idle one's: %d vs %d" % [fielded, other])
+
