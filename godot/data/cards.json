@@ -9010,8 +9010,7 @@
     "hs_bad_hall": {
       "name": "无极甄府·淳于琼",
       "turn_limit": 10,
-      "enemy": "chunyuqiong_boss",
-      "art": "hs_chunyuqiong"
+      "enemy": "chunyuqiong_boss"
     },
     "hs_quyi": {
       "name": "界桥·麹义先登营",
