@@ -73,3 +73,12 @@
 - [x] 2026-10-07 portrait `sunshangxiang_young` ← sunshangxiang_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-07 portrait `wuxian` ← wuxian.png · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-07 portrait `xiandi` ← xiandi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-07 battle `c3_gongshou` ← c3_gongshou.jpg · ok
+- [ ] 2026-10-07 battle `c3_mitan` ← c3_mitan.jpg · ok
+- [ ] 2026-10-07 battle `c3_qibing` ← c3_qibing.jpg · ok
+- [ ] 2026-10-07 battle `c3_xunluo` ← c3_xunluo.jpg · ok
+- [ ] 2026-10-07 portrait `huangchengyan` ← huangchengyan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-07 battle `jz_county_fight` ← jz_county_fight.jpg · ok
+- [ ] 2026-10-07 battle `jz_road_bandits` ← jz_road_bandits.jpg · ok
+- [ ] 2026-10-07 portrait `pangdegong` ← pangdegong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-07 portrait `simahui` ← simahui.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

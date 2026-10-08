@@ -207,5 +207,8 @@
   "yunliang_bing": {"file": "yunliang_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
   "sunshangxiang_young": {"file": "sunshangxiang_young.jpg", "face": [0.5, 0.22], "head": 0.22},
   "wuxian": {"file": "wuxian.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "xiandi": {"file": "xiandi.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "xiandi": {"file": "xiandi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "huangchengyan": {"file": "huangchengyan.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "pangdegong": {"file": "pangdegong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "simahui": {"file": "simahui.jpg", "face": [0.5, 0.22], "head": 0.22}
 }
