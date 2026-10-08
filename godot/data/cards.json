@@ -76,7 +76,7 @@
     "defend_ap": 2,
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
-    "enemy_hp_mult": 1.4,
+    "enemy_hp_mult": 1.55,
     "_lord_member_mult": "主公队的成员（亲卫、丫鬟绣娘这类 troop 为 lord 的卡）按这个比例计入主公队的体力 / 攻击",
     "lord_member_mult": 0.6,
     "_ramp": "难度：每通关一章，之后的敌人体力和攻击 +chapter_step；所选难度等级每高一级再 +ending_step（等级 1 不加）。难度等级靠解锁结局升：南 / 北线分开算，这条线每解锁一个新结局，开局时可选的最高难度 +1；可以选低于最高的，但结局解锁的后续剧情只在难度 ≥ 该结局的 level 时才触发（选低了就会重新走到同样的 badend）",
@@ -757,8 +757,8 @@
         "name": "主公·银甲",
         "route": "north",
         "bonus": {
-          "hp": 60,
-          "at": 12
+          "hp": 102,
+          "at": 20
         },
         "skills": [],
         "art": true
@@ -767,8 +767,8 @@
         "name": "主公·虎甲",
         "route": "south",
         "bonus": {
-          "hp": 60,
-          "at": 12
+          "hp": 102,
+          "at": 20
         },
         "skills": [],
         "art": true
@@ -777,8 +777,8 @@
         "name": "主公·雪裘",
         "route": "north",
         "bonus": {
-          "hp": 70,
-          "at": 6
+          "hp": 119,
+          "at": 10
         },
         "skills": [],
         "art": false
@@ -787,8 +787,8 @@
         "name": "主公·行军装",
         "route": "north",
         "bonus": {
-          "hp": 30,
-          "at": 14
+          "hp": 51,
+          "at": 24
         },
         "skills": [],
         "art": false
@@ -797,8 +797,8 @@
         "name": "主公·重甲",
         "route": "north",
         "bonus": {
-          "hp": 90,
-          "at": 4
+          "hp": 153,
+          "at": 7
         },
         "skills": [],
         "art": false
@@ -807,8 +807,8 @@
         "name": "主公·披挂",
         "route": "north",
         "bonus": {
-          "hp": 45,
-          "at": 10
+          "hp": 76,
+          "at": 17
         },
         "skills": [],
         "art": false
@@ -817,8 +817,8 @@
         "name": "主公·水战装",
         "route": "south",
         "bonus": {
-          "hp": 35,
-          "at": 14
+          "hp": 60,
+          "at": 24
         },
         "skills": [],
         "art": false
@@ -827,8 +827,8 @@
         "name": "主公·战袍",
         "route": "south",
         "bonus": {
-          "hp": 50,
-          "at": 9
+          "hp": 85,
+          "at": 15
         },
         "skills": [],
         "art": false
@@ -837,8 +837,8 @@
         "name": "主公·重铠",
         "route": "south",
         "bonus": {
-          "hp": 90,
-          "at": 4
+          "hp": 153,
+          "at": 7
         },
         "skills": [],
         "art": false
@@ -847,8 +847,8 @@
         "name": "主公·披风",
         "route": "south",
         "bonus": {
-          "hp": 40,
-          "at": 11
+          "hp": 68,
+          "at": 19
         },
         "skills": [],
         "art": false
@@ -961,8 +961,8 @@
     "lord": {
       "name": "主公",
       "short": "主",
-      "hp": 400,
-      "at": 80
+      "hp": 480,
+      "at": 100
     },
     "cavalry": {
       "name": "骑兵",
@@ -7331,8 +7331,8 @@
     "lvbu_hulao": {
       "name": "吕布",
       "portrait": "lvbu",
-      "hp": 30000,
-      "at": 650,
+      "hp": 40000,
+      "at": 780,
       "actions": 3,
       "phys_resist": 0.2,
       "moves": [
@@ -7470,7 +7470,7 @@
     "huangjinjun": {
       "name": "黄巾军·张角",
       "portrait": "zhangjiao",
-      "hp": 11000,
+      "hp": 13500,
       "at": 260,
       "actions": 2,
       "magic_resist": 0.3,
@@ -7515,8 +7515,8 @@
     "lvbu": {
       "name": "吕布",
       "portrait": "lvbu",
-      "hp": 12500,
-      "at": 600,
+      "hp": 13500,
+      "at": 640,
       "actions": 3,
       "phys_resist": 0.2,
       "moves": [
