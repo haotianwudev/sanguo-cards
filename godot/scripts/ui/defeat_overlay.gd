@@ -46,6 +46,9 @@ func _ready() -> void:
 	hint.size = Vector2(1280, 40)
 	hint.modulate.a = 0.0
 	add_child(hint)
+	for ch in get_children():  # only this control takes the tap: a child that stops the mouse would swallow it
+		if ch is Control:
+			ch.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var tw := create_tween()
 	tw.tween_property(pic, "modulate:a", 1.0, 0.9)
 	tw.tween_property(title, "modulate:a", 1.0, 0.5)
