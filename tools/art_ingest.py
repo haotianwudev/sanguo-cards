@@ -113,6 +113,35 @@ def crop(im: Image.Image, kind: str, anchor: str) -> Image.Image:
 HEAD = "# 美术入库记录\n\n`python tools/art_ingest.py add <图> <key>` 自动追加一行；`- [ ]` = 已入库、还没汇总进需求文档，`flush` 之后变 `- [x]`。\n"
 
 
+def knock_out_backdrop(im: Image.Image, tol: int = 28) -> Image.Image:
+    """Turn the near-white backdrop (reachable from the border) transparent, with a soft 1px edge."""
+    from PIL import ImageDraw, ImageFilter
+
+    small = im.convert("RGB")
+    w, h = small.size
+    marker = (255, 0, 255)
+    work = small.copy()
+    for pt in [(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1), (w // 2, 0), (w // 2, h - 1), (0, h // 2), (w - 1, h // 2)]:
+        if sum(work.getpixel(pt)) > 3 * (255 - tol):
+            ImageDraw.floodfill(work, pt, marker, thresh=tol * 2)
+    mask = np.all(np.asarray(work) == np.array(marker), axis=-1)
+    try:  # white pockets enclosed by the object (inside a bow, behind a flag's pole): large pure-white areas go too
+        from scipy import ndimage
+
+        pure = np.all(np.asarray(small) >= 250, axis=-1) & ~mask
+        lab, n = ndimage.label(pure)
+        if n:
+            sizes = ndimage.sum(pure, lab, range(1, n + 1))
+            big = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s >= max(1500, w * h // 1800)])
+            mask = mask | big
+    except ImportError:
+        pass
+    alpha = Image.fromarray(np.where(mask, 0, 255).astype("uint8")).filter(ImageFilter.GaussianBlur(1.2))
+    out = im.convert("RGBA")
+    out.putalpha(alpha)
+    return out
+
+
 def log_line(text: str) -> None:
     cur = LOG.read_text("utf-8") if LOG.exists() else HEAD
     LOG.write_text(cur.rstrip("\n") + "\n" + text + "\n", "utf-8", newline="\n")
@@ -152,6 +181,8 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
         return False
     if kind == "relic":  # a transparent icon: keep the alpha, shrink to 512, copy into the game
         icon = Image.open(src).convert("RGBA")
+        if np.asarray(icon)[..., 3].min() == 255:  # a flat picture (white backdrop): make the backdrop transparent
+            icon = knock_out_backdrop(icon)
         icon.thumbnail((512, 512), Image.LANCZOS)
         for d in (PICS / "source" / "relics", DATA / "art" / "relics"):
             d.mkdir(parents=True, exist_ok=True)
@@ -160,8 +191,7 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
         ph = PICS / "relic_placeholders.json"  # the key is real art now
         if ph.exists():
             keys = [k for k in json.loads(ph.read_text("utf-8")) if k != key]
-            ph.write_text(json.dumps(keys, ensure_ascii=False), "utf-8", newline="
-")
+            ph.write_text(json.dumps(keys, ensure_ascii=False), "utf-8")
         log_line(f"- [ ] {datetime.date.today()} relic `{key}` ← {src.name} · {'ok' if not warn else '⚠ ' + '；'.join(warn)}")
         print(f"✓ {key} [relic]  {'ok' if not warn else '⚠ ' + '；'.join(warn)}")
         return True

@@ -360,6 +360,8 @@
 | ⬜ 缺 | `shanzei_scout` | 山贼斥候（山贼斥候） |
 | ⬜ 缺 | `huangjin_vanguard` | 黄巾前锋（黄巾前锋） |
 | ✅ 已有 | `jz_road_bandits` | 官道 · 黑山散兵（黑山散兵） |
+| ⬜ 缺 | `hs_bad_hall` | 无极甄府·淳于琼（冀州大将·淳于琼） |
+| ⬜ 缺 | `hs_guotu` | 无极城外·郭图（督粮官·郭图） |
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -371,12 +373,16 @@
 | ✅ 已有 | `c3_encounter_ning` | 深山绝壁 |
 | ✅ 已有 | `c3_leave_ning` | 明哲保身 |
 | ✅ 已有 | `c3_save_ning` | 战白骑 |
-| ✅ 已有 | `end_fuchao` | 覆巢 |
 | ✅ 已有 | `c3_zhangyan_meet` | 黑山大寨 |
+| ⬜ 缺 | `c3_bad_return` | 空手而归 |
+| ✅ 已有 | `c3_guotu_raid` | 一年后 |
 | ✅ 已有 | `c3_alliance` | 黑山令 |
-| ✅ 已有 | `c3_guotu_raid` | 郭图寻仇 |
+| ⬜ 缺 | `c3_bad_night` | 最后一夜 |
+| ⬜ 缺 | `c3_bad_guotu` | 郭图亲临 |
 | ✅ 已有 | `c3_secret_path` | 黑山秘道 |
+| ✅ 已有 | `end_fuchao` | 覆巢 |
 | ✅ 已有 | `c3_breakout` | 府门突围 |
+| ⬜ 缺 | `c3_guotu_street` | 郭图拦街 |
 | ✅ 已有 | `c3_guojia_map` | 界桥前夜 |
 | ✅ 已有 | `c3_quyi_camp` | 先登死士 |
 | ✅ 已有 | `c3_save_zan` | 猛将文丑 |

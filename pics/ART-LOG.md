@@ -92,3 +92,32 @@
 - [x] 2026-10-07 portrait `lord_south_cloak` ← lord_south_cloak.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-07 portrait `lord_south_plate` ← lord_south_plate.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-07 portrait `lord_south_robe` ← lord_south_robe.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 relic `bazhen` ← bazhen.jpg · ok
+- [x] 2026-10-08 relic `beishui` ← beishui.jpg · ok
+- [x] 2026-10-08 relic `bingfa` ← bingfa.jpg · ok
+- [x] 2026-10-08 relic `bingfu` ← bingfu.jpg · ok
+- [x] 2026-10-08 relic `chitu` ← chitu.jpg · ok
+- [x] 2026-10-08 relic `chize` ← chize.jpg · ok
+- [x] 2026-10-08 relic `dilu` ← dilu.jpg · ok
+- [x] 2026-10-08 relic `dingxin` ← dingxin.jpg · ok
+- [x] 2026-10-08 relic `dunjia` ← dunjia.jpg · ok
+- [x] 2026-10-08 relic `fangtian` ← fangtian.jpg · ok
+- [x] 2026-10-08 relic `heishan` ← heishan.jpg · ok
+- [x] 2026-10-08 relic `huangjinfu` ← huangjinfu.jpg · ok
+- [x] 2026-10-08 relic `hushenfu` ← hushenfu.jpg · ok
+- [x] 2026-10-08 relic `jinfan` ← jinfan.jpg · ok
+- [x] 2026-10-08 relic `jiunang` ← jiunang.jpg · ok
+- [x] 2026-10-08 relic `jubaopen` ← jubaopen.jpg · ok
+- [x] 2026-10-08 relic `lizigao` ← lizigao.jpg · ok
+- [x] 2026-10-08 relic `mengde` ← mengde.jpg · ok
+- [x] 2026-10-08 relic `muniu` ← muniu.jpg · ok
+- [x] 2026-10-08 relic `qinggang` ← qinggang.jpg · ok
+- [x] 2026-10-08 relic `qinglong` ← qinglong.jpg · ok
+- [x] 2026-10-08 relic `shoushihe` ← shoushihe.jpg · ok
+- [x] 2026-10-08 relic `shuijing` ← shuijing.jpg · ok
+- [x] 2026-10-08 relic `taipingyaoshu` ← taipingyaoshu.jpg · ok
+- [x] 2026-10-08 relic `tengjia` ← tengjia.jpg · ok
+- [x] 2026-10-08 relic `xiangnang` ← xiangnang.jpg · ok
+- [x] 2026-10-08 relic `zhangba` ← zhangba.jpg · ok
+- [x] 2026-10-08 relic `zhongshan_banner` ← zhongshan_banner.jpg · ok
+- [x] 2026-10-08 relic `zhugenu` ← zhugenu.jpg · ok
