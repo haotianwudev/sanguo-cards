@@ -89,6 +89,7 @@ own `requires`/`unless` the way `quests_cleared` is.
 Demos walk square ids — when you insert or rename squares, update their walks (and `walk_to` in tests).
 Screenshots of overlays look washed out because the PNG keeps alpha; in the game the dim is dark.
 
+**"update stats"** → `python tools/chapter_stats.py --write` (refreshes squares / battles / CG columns and the date of `docs/CHAPTER-STATS.md`; the pools column and text are hand-written).
 **New art from the user → use the `sanguo-art-ingest` skill (`python tools/art_ingest.py add <path> <key>`): it checks, crops, installs and logs; docs are refreshed only by `flush` every ~20 images.**
 Art: put the original in `pics/source/...`, add/adjust the `pics/art.json` entry, run `sanguo-art` (from the repo root).
 Framing: `face` = face centre [x, y] as fractions; `head` = head height / image height. **Bigger head ⇒ smaller figure**;
