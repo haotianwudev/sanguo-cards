@@ -33,11 +33,11 @@ PICS = ROOT / "pics"
 LOG = PICS / "ART-LOG.md"
 DATA = ROOT / "godot" / "data"
 FLUSH_AT = 20
-SECTION = {"cg": "cgs", "battle": "battles", "map": "maps", "portrait": "portraits"}
+SECTION = {"cg": "cgs", "battle": "battles", "map": "maps", "portrait": "portraits", "relic": None}  # a relic icon has no art.json entry
 SRC_DIR = {"cg": "cg", "battle": "battles", "map": "map"}
 TARGET = 16 / 9  # cg / battle are cropped to this (portraits and the wide chapter maps are kept as they are)
-MIN_H = {"cg": 480, "battle": 480, "map": 480, "portrait": 400}  # hard fail below
-SOFT_H = {"cg": 560, "battle": 560, "map": 560, "portrait": 560}  # warn below
+MIN_H = {"cg": 480, "battle": 480, "map": 480, "portrait": 400, "relic": 128}  # hard fail below
+SOFT_H = {"cg": 560, "battle": 560, "map": 560, "portrait": 560, "relic": 256}  # warn below
 
 
 def _art() -> dict:
@@ -51,8 +51,10 @@ def infer_kind(key: str) -> str | None:
     if key in art_prompts.PORTRAITS:
         return "portrait"
     art = _art()
+    if key in json.loads((DATA / "cards.json").read_text("utf-8")).get("relics", {}):
+        return "relic"
     for kind, sec in SECTION.items():
-        if key in art.get(sec, {}):
+        if sec and key in art.get(sec, {}):
             return kind
     cards = json.loads((DATA / "cards.json").read_text("utf-8"))
     if key in cards.get("scenarios", {}):
@@ -120,7 +122,7 @@ def pending() -> int:
     return LOG.read_text("utf-8").count("- [ ] ") if LOG.exists() else 0
 
 
-def rebuild() -> None:
+def rebuild() -> None:  # (relics are copied straight in by add_one)
     from sanguo import art
 
     art.build()
@@ -148,6 +150,16 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
     if bad and not force:
         print(f"✗ {key} ({src.name}): " + "；".join(bad) + "  —— 加 --force 强制入库")
         return False
+    if kind == "relic":  # a transparent icon: keep the alpha, shrink to 512, copy into the game
+        icon = Image.open(src).convert("RGBA")
+        icon.thumbnail((512, 512), Image.LANCZOS)
+        for d in (PICS / "source" / "relics", DATA / "art" / "relics"):
+            d.mkdir(parents=True, exist_ok=True)
+            icon.save(d / f"{key}.png")
+        warn = [w for w in warn if "分辨率" not in w] if icon.size[1] >= 256 else warn
+        log_line(f"- [ ] {datetime.date.today()} relic `{key}` ← {src.name} · {'ok' if not warn else '⚠ ' + '；'.join(warn)}")
+        print(f"✓ {key} [relic]  {'ok' if not warn else '⚠ ' + '；'.join(warn)}")
+        return True
     out = crop(im, kind, anchor)
     cfg = _art()
     sec = SECTION[kind]
