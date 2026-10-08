@@ -1493,6 +1493,26 @@ UI_ART = {
 # the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
 # Order follows pics/ART-PLAN.md §5 (P0 portraits first).
 NEXT = [
+    # 宝物图标 · 现在只是程序生成的圆章（一个汉字），要换成真图（六件主角专属宝物不在内）：
+    ("relic", "muniu", "木牛流马（宝物图标，现为文字圆章）"),
+    ("relic", "beishui", "破釜（宝物图标，现为文字圆章）"),
+    ("relic", "dingxin", "定心丸（宝物图标，现为文字圆章）"),
+    ("relic", "jubaopen", "聚宝盆（宝物图标，现为文字圆章）"),
+    ("relic", "chitu", "赤兔马（宝物图标，现为文字圆章）"),
+    ("relic", "zhangba", "丈八蛇矛（宝物图标，现为文字圆章）"),
+    ("relic", "zhugenu", "诸葛连弩（宝物图标，现为文字圆章）"),
+    ("relic", "qinglong", "青龙偃月刀（宝物图标，现为文字圆章）"),
+    ("relic", "mengde", "孟德新书（宝物图标，现为文字圆章）"),
+    ("relic", "heishan", "黑山令（宝物图标，现为文字圆章）"),
+    ("relic", "taipingyaoshu", "太平要术（宝物图标，现为文字圆章）"),
+    ("relic", "qingnang", "青囊书（宝物图标，现为文字圆章）"),
+    ("relic", "huangjinfu", "黄巾符（宝物图标，现为文字圆章）"),
+    ("relic", "dilu", "的卢（宝物图标，现为文字圆章）"),
+    ("relic", "fangtian", "方天画戟（宝物图标，现为文字圆章）"),
+    ("relic", "tengjia", "藤甲（宝物图标，现为文字圆章）"),
+    ("relic", "lizigao", "栗子糕（宝物图标，现为文字圆章）"),
+    ("relic", "shuijing", "水镜（宝物图标，现为文字圆章）"),
+    ("relic", "zhongshan_banner", "中山甄记大旗（宝物图标，现为文字圆章）"),
     # 结局图鉴 · 每个结局一张象征画（不画人、不见血）+ 未解锁缩略图：
     ("cg", "end_tonggui", "结局二·同归（象征画）"),
     ("cg", "end_henhai", "结局三·恨海（象征画）"),
@@ -2044,7 +2064,10 @@ def main() -> None:
            "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
            ]
     maps_done = {k for k, v in art.get("maps", {}).items() if "程序生成" not in v.get("license", "")}
-    relics_done = {p.stem for p in (ROOT / "godot" / "data" / "art" / "relics").glob("*.png")}
+    # the 22 icons made by generate_ui_assets.py (a gold medallion with one character) are placeholders, not delivered art:
+    # pics/relic_placeholders.json lists them; `art_ingest.py` removes a key once its real icon arrives
+    _ph = set(json.loads((ROOT / "pics" / "relic_placeholders.json").read_text("utf-8"))) if (ROOT / "pics" / "relic_placeholders.json").exists() else set()
+    relics_done = {p.stem for p in (ROOT / "godot" / "data" / "art" / "relics").glob("*.png")} - _ph
     ui_done = {k for k in CHESTS if (ROOT / "godot" / "data" / "art" / "ui" / f"{k}.png").exists()}
     delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done,
                  "battle": set(art.get("battles", {})), "ui": ui_done}

@@ -157,6 +157,11 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
             d.mkdir(parents=True, exist_ok=True)
             icon.save(d / f"{key}.png")
         warn = [w for w in warn if "分辨率" not in w] if icon.size[1] >= 256 else warn
+        ph = PICS / "relic_placeholders.json"  # the key is real art now
+        if ph.exists():
+            keys = [k for k in json.loads(ph.read_text("utf-8")) if k != key]
+            ph.write_text(json.dumps(keys, ensure_ascii=False), "utf-8", newline="
+")
         log_line(f"- [ ] {datetime.date.today()} relic `{key}` ← {src.name} · {'ok' if not warn else '⚠ ' + '；'.join(warn)}")
         print(f"✓ {key} [relic]  {'ok' if not warn else '⚠ ' + '；'.join(warn)}")
         return True
