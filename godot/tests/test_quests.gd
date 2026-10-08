@@ -1124,7 +1124,8 @@ func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() 
 
 func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_lane_too() -> void:
 	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng"], "shouluoyang": ["wenji_tale", "plan", "xizi"],
-		"changan": ["caiyong", "yuexia", "xian"], "jingxiang": ["jx_diaochan", "jx_bubing", "jx_jinggao", "jx_xiangyang", "jx_mimou"]}
+		"changan": ["caiyong", "yuexia", "xian"], "jingxiang": ["jx_diaochan", "jx_bubing", "jx_jinggao", "jx_xiangyang", "jx_mimou"],
+		"dongui": ["zhongyao", "tuwei", "luan", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"]}
 	var db := GameData.get_db()
 	for q in db.quests:
 		for fid in forks.get(q["id"], []):
@@ -1141,6 +1142,8 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 				check(lane.size() >= 2, "%s/%s: lane %s is one square" % [q["id"], fid, first])
 				if lane.any(func(id): return sq[id]["type"] == "battle"):
 					fights += 1
+					if q["id"] in ["dongui", "jingxiang"]:
+						check(sq[lane[-1]].get("elite", false) or sq[lane[-1]].get("boss", false), "%s/%s: the fight lane ends on an elite (%s)" % [q["id"], fid, lane[-1]])
 			check_eq(fights, 1, "%s/%s: one lane fights, the other does not" % [q["id"], fid])
 
 

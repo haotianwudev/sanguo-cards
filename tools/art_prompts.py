@@ -1297,7 +1297,6 @@ MAPS = {
                 "grey winter sky; an open snowy road through farmland with a lone wandering old Taoist glimpsed at the roadside; a "
                 "narrowing mountain gorge climbing toward a firelit skirmish; at the far right the bandits' snow-wrapped cliffside "
                 "stronghold on a mountain, smoke rising from its gate, with a path turning back south at its foot",
-    "luoyang_n": "【需重画：地图已拉长到 38 列，旧底图是按 33 列画的】黄河古道到虎牢关再退回黄河渡口，自左向右依次：①左端（第 0–5 列）结冰的黄河古渡，粮车队，雪地里摔下马的红衣女将与她的营地；②（第 6–12 列）中山甄记的商旗、酸枣诸侯营里一面醒目的红色赞助旗，曹操借粮的帅帐，汴水边；③（第 13–19 列）西凉伏兵出没的林间小径，汴水败军的残旗和孤零零的将军帐，酸枣大营的宝箱与篝火；④（第 20–28 列）虎牢关灰暗的城墙与点点烽火，关前夜袭的火光，三英战吕布留下的一片烟尘，沿途散落的宝箱；⑤（第 29–34 列）洛阳方向天际被大火烧红，一条逆行的行军路，难民与星空下的路边；⑥右端（第 35–37 列）逃兵挤满的黄河渡口，丢弃的小船，岸边险路，渡口对岸是冀州方向。整体冷灰与火红对比，冬日雪气，俯视地图构图，中间一条主路，上下各留一条岔路位置（第 7、11、14、26、27、28、35 列有上/下岔点）",
     "yuxi": "【地图共 27 列，南线第三章·传国玉玺】自焚毁的洛阳向南到南阳鲁阳，自左向右依次：①左端洛阳废墟冒着黑烟，长长的难民队伍南行；②山丘间断粮的孙坚军营，炊烟稀薄；③鲁阳城墙与酒肆街，街口有行人与酒旗；④雨水浸透的农田，袁术军营连绵；⑤最右端大雨中的狭窄山口",
     "shouluoyang": "【地图共 22 列，南线第三章·收洛阳】重建中的洛阳，自左向右依次：①灰烬中的一堆篝火；②官眷被护送向西的官道；③山脚小路上的西凉粮队；④修复的宗庙与城墙，城头插着红底「孙」字旗；⑤太平的集市街；⑥最右端通向长安的西行大道",
     "changan": "【地图共 31 列，第三章·长安】冬日长安，自左向右依次：①宏伟的城门；②董卓华丽的府邸与庭院里的比武场；③带假山花园的宫殿；④朴素的书生宅；⑤司徒府；⑥荷塘边的凤仪亭；⑦最右端挂满红色喜庆灯笼的丞相府",
@@ -1555,7 +1554,6 @@ NEXT = [
     ("cg", "c1_era", "开场·凌晨三点选出生点（剧情 CG，南北线共用的第一张）"),
     # P0 · 北线主线（其他）：
     ("map", "prologue_north", "第一章北线·冀州风云地图底图"),
-    ("map", "luoyang_n", "第二章·洛阳烟云地图底图"),
     ("portrait", "zhaoyun", "赵云（换掉占位）"),
     ("portrait", "guojia", "郭嘉"),
     ("portrait", "lidamu", "李大目（北线第一章首领）"),
@@ -1975,7 +1973,6 @@ def main() -> None:
            "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
            ]
     maps_done = {k for k, v in art.get("maps", {}).items() if "程序生成" not in v.get("license", "")}
-    maps_done -= {"luoyang_n"}  # 二章拉长到 38 列，旧底图要重画；重画交付后删掉这一行
     relics_done = {p.stem for p in (ROOT / "godot" / "data" / "art" / "relics").glob("*.png")}
     ui_done = {k for k in CHESTS if (ROOT / "godot" / "data" / "art" / "ui" / f"{k}.png").exists()}
     delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done,
