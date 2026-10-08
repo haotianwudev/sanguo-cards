@@ -1369,6 +1369,12 @@ MAPS = {
 # Authentic ancient Chinese items, pure cut-outs on transparent backgrounds (no western circular medallion).
 # Excluded lord/protagonist relics per user instruction: jiujia, hupi, qixing, zhaoxianbang, yitian, yuxi.
 RELICS = {
+    "jiujia": "孙坚旧甲：一副保养得一丝不苟的汉代银色札甲，护肩上刻着虎纹，胸甲带细密的鳞片纹路，下摆内衬露出一角虎皮，肩甲边缘有岁月的磨损与几处旧刀痕，旁边叠着一件白毛滚边的黑色披风一角",
+    "hupi": "虎皮披风：一件孙坚同款的披风，整张金黄带黑纹的虎皮鞣制成披风形状，领口缀着一圈深色皮毛，用一根红色丝绳系住，边缘有磨损与缝补的针脚，披挂在木架上的样子",
+    "qixing": "七星宝刀：曹操献刀用的那把短刀，汉代环首短刀，鎏金刀鞘上镶嵌着七颗排成北斗形状的宝石（红、蓝、绿相间），刀柄缠着黑色丝绳，半出鞘露出一截寒光凛凛的刀身",
+    "zhaoxianbang": "招贤榜：一张贴在木板上的汉代告示，米黄色粗纸，上面是毛笔书写的大字榜文，盖着一方朱红印章，四角用铁钉固定，纸边微卷，旁边挂着一小串铜钱作为悬赏（文字用抽象的毛笔笔画表现，不要可读文字）",
+    "yitian": "倚天剑：曹操的佩剑，一柄修长的汉代双刃直剑，剑身泛着青白色的寒光、带细密的云纹，鎏金剑格与剑首刻着龙纹，黑漆剑鞘配着红色丝绦，剑身上隐约有一线冷冽的光芒",
+    "yuxi": "传国玉玺（诅咒）：一方青白色的玉玺，顶部盘着五条龙，缺了一角的地方用黄金镶补，印面朝上微露篆文，周身萦绕着一缕不祥的暗红色雾气，下面垫着一块旧黄绸",
     "lizigao": "一枚热腾腾的栗子糕（汉代风格的小点心）：切成方块的栗子糕，表面撒着少许糖霜与碎栗仁，放在一方折叠的浅粉色丝帕里，冒着淡淡的热气，丝帕一角绣着一个小小的甄字",
     "zhongshan_banner": "中山甄记大旗：一面略显破旧的大旗，赭红色底，中央用白色大字绣着「甄」，旗边缀着流苏与磨损的缺口，旗杆是深色的木杆，顶端带铜制矛尖",
     "shoushihe": "an exquisite Han dynasty Chinese lacquer jewelry box (汉代黑红髹漆妆奁), lid slightly ajar showing delicate jade hairpins, gold tassels and pearls inside",
@@ -1535,6 +1541,13 @@ NEXT = [
     ("relic", "lizigao", "栗子糕（宝物图标，现为文字圆章）"),
     ("relic", "shuijing", "水镜（宝物图标，现为文字圆章）"),
     ("relic", "zhongshan_banner", "中山甄记大旗（宝物图标，现为文字圆章）"),
+    # 主角专属宝物（现为文字圆章）：
+    ("relic", "jiujia", "孙坚旧甲（宝物图标，主角专属，现为文字圆章）"),
+    ("relic", "hupi", "虎皮披风（宝物图标，主角专属，现为文字圆章）"),
+    ("relic", "qixing", "七星宝刀（宝物图标，主角专属，现为文字圆章）"),
+    ("relic", "zhaoxianbang", "招贤榜（宝物图标，主角专属，现为文字圆章）"),
+    ("relic", "yitian", "倚天剑（宝物图标，主角专属，现为文字圆章）"),
+    ("relic", "yuxi", "传国玉玺（宝物图标，主角专属，现为文字圆章）"),
     # 结局图鉴 · 每个结局一张象征画（不画人、不见血）+ 未解锁缩略图：
     ("cg", "end_tonggui", "结局二·同归（象征画）"),
     ("cg", "end_henhai", "结局三·恨海（象征画）"),
