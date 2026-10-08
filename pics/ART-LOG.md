@@ -51,3 +51,25 @@
 - [x] 2026-10-06 cg `c3_quyi_camp` ← c3_quyi_camp.jpg · ok
 - [x] 2026-10-06 cg `end_fuchao` ← end_fuchao.jpg · ok
 - [x] 2026-10-06 portrait `xiandeng_sishi` ← xiandeng_sishi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 cg `c3_leave` ← c3_leave.png · ok
+- [x] 2026-10-07 cg `c3_warn` ← c3_warn.png · ok
+- [x] 2026-10-07 portrait `caoyun_shuishou` ← caoyun_shuishou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `danjia_bing` ← danjia_bing.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 cg `e_dice` ← e_dice.jpg · ok
+- [x] 2026-10-07 cg `e_tiger` ← e_tiger.jpg · ok
+- [x] 2026-10-07 cg `end_henhai` ← end_henhai.jpg · ok
+- [x] 2026-10-07 cg `end_tonggui` ← end_tonggui.jpg · ok
+- [x] 2026-10-07 cg `i2_duel` ← i2_duel.jpg · ok
+- [x] 2026-10-07 cg `i2_qin` ← i2_qin.jpg · ok
+- [x] 2026-10-07 cg `i2_yuxi` ← i2_yuxi.jpg · ok
+- [x] 2026-10-07 portrait `junxu_guan` ← junxu_guan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `junyi` ← junyi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `liniang` ← liniang.png · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `shangdui` ← shangdui.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `tiejiang` ← tiejiang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `tuoma_dui` ← tuoma_dui.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `yaonong` ← yaonong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `yunliang_bing` ← yunliang_bing.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `sunshangxiang_young` ← sunshangxiang_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `wuxian` ← wuxian.png · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-07 portrait `xiandi` ← xiandi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

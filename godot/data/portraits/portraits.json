@@ -194,5 +194,18 @@
   "wangyi": {"file": "wangyi.jpg", "face": [0.5, 0.22], "head": 0.22},
   "xinxianying": {"file": "xinxianying.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhurong": {"file": "zhurong.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "xiandeng_sishi": {"file": "xiandeng_sishi.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "xiandeng_sishi": {"file": "xiandeng_sishi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "caoyun_shuishou": {"file": "caoyun_shuishou.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "danjia_bing": {"file": "danjia_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "junxu_guan": {"file": "junxu_guan.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "junyi": {"file": "junyi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "liniang": {"file": "liniang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "shangdui": {"file": "shangdui.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "tiejiang": {"file": "tiejiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "tuoma_dui": {"file": "tuoma_dui.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "yaonong": {"file": "yaonong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "yunliang_bing": {"file": "yunliang_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "sunshangxiang_young": {"file": "sunshangxiang_young.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "wuxian": {"file": "wuxian.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "xiandi": {"file": "xiandi.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

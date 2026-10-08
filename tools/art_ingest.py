@@ -45,6 +45,11 @@ def _art() -> dict:
 
 
 def infer_kind(key: str) -> str | None:
+    sys.path.insert(0, str(ROOT / "tools"))
+    import art_prompts  # a key with a portrait prompt (even one with no card yet: a childhood version, an emperor…) is a portrait
+
+    if key in art_prompts.PORTRAITS:
+        return "portrait"
     art = _art()
     for kind, sec in SECTION.items():
         if key in art.get(sec, {}):

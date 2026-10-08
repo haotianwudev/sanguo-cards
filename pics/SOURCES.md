@@ -199,6 +199,19 @@
 | `xinxianying` | source/generals/xinxianying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhurong` | source/generals/zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xiandeng_sishi` | source/soldiers/xiandeng_sishi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caoyun_shuishou` | source/soldiers/caoyun_shuishou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `danjia_bing` | source/soldiers/danjia_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `junxu_guan` | source/soldiers/junxu_guan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `junyi` | source/soldiers/junyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `liniang` | source/generals/liniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `shangdui` | source/soldiers/shangdui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `tiejiang` | source/soldiers/tiejiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `tuoma_dui` | source/soldiers/tuoma_dui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yaonong` | source/soldiers/yaonong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yunliang_bing` | source/soldiers/yunliang_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunshangxiang_young` | source/generals/sunshangxiang_young.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wuxian` | source/generals/wuxian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiandi` | source/generals/xiandi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -319,3 +332,12 @@
 | `cg:c3_save_zan` | source/cg/c3_save_zan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_quyi_camp` | source/cg/c3_quyi_camp.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:end_fuchao` | source/cg/end_fuchao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_leave` | source/cg/c3_leave.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_warn` | source/cg/c3_warn.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_dice` | source/cg/e_dice.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_tiger` | source/cg/e_tiger.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_henhai` | source/cg/end_henhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_tonggui` | source/cg/end_tonggui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:i2_duel` | source/cg/i2_duel.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:i2_qin` | source/cg/i2_qin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:i2_yuxi` | source/cg/i2_yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

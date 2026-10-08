@@ -1781,6 +1781,123 @@
         0.22
       ],
       "head": 0.22
+    },
+    "caoyun_shuishou": {
+      "src": "source/soldiers/caoyun_shuishou.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "danjia_bing": {
+      "src": "source/soldiers/danjia_bing.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "junxu_guan": {
+      "src": "source/soldiers/junxu_guan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "junyi": {
+      "src": "source/soldiers/junyi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "liniang": {
+      "src": "source/generals/liniang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "shangdui": {
+      "src": "source/soldiers/shangdui.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "tiejiang": {
+      "src": "source/soldiers/tiejiang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "tuoma_dui": {
+      "src": "source/soldiers/tuoma_dui.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yaonong": {
+      "src": "source/soldiers/yaonong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yunliang_bing": {
+      "src": "source/soldiers/yunliang_bing.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "sunshangxiang_young": {
+      "src": "source/generals/sunshangxiang_young.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wuxian": {
+      "src": "source/generals/wuxian.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "xiandi": {
+      "src": "source/generals/xiandi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -2268,6 +2385,42 @@
     },
     "end_fuchao": {
       "src": "source/cg/end_fuchao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_leave": {
+      "src": "source/cg/c3_leave.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_warn": {
+      "src": "source/cg/c3_warn.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_dice": {
+      "src": "source/cg/e_dice.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_tiger": {
+      "src": "source/cg/e_tiger.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_henhai": {
+      "src": "source/cg/end_henhai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_tonggui": {
+      "src": "source/cg/end_tonggui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "i2_duel": {
+      "src": "source/cg/i2_duel.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "i2_qin": {
+      "src": "source/cg/i2_qin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "i2_yuxi": {
+      "src": "source/cg/i2_yuxi.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
