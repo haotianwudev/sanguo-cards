@@ -187,7 +187,7 @@ func swap(i: int, card_id: String) -> Array:
 	leaders[i] = u
 	roster.erase(new_ld)
 	_ev({"t": "swap", "unit": i, "card": card_id, "hp": party_hp, "max": party_max})
-	return ["%s 换下 %s（AP -%d）" % [new_ld["card"]["name"], old_ld["card"]["name"], swap_cost()]]
+	return ["%s 换下 %s%s" % [new_ld["card"]["name"], old_ld["card"]["name"], "（AP -%d）" % swap_cost() if swap_cost() > 0 else ""]]
 
 
 func carry_out() -> Array:

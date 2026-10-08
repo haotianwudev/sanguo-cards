@@ -422,7 +422,7 @@ func _open_skills(i: int) -> void:
 			_on_skill(i, sid))
 		col.add_child(btn)
 	if not b.swap_options(i).is_empty():
-		var sw := Kit.button("换人  AP%d%s" % [b.swap_cost(), "" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round()], "gold", Kit.FONT_BODY)
+		var sw := Kit.button("换人%s%s" % [("  AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "（不费 AP）", "" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round()], "gold", Kit.FONT_BODY)
 		sw.custom_minimum_size = Vector2(260, 48)
 		sw.disabled = not b.can_swap(i)
 		sw.pressed.connect(func():
@@ -445,7 +445,7 @@ func _open_swap(i: int) -> void:
 	opts = opts.slice(0, 5)  # five cards fit across the screen
 	var ids: Array = opts.map(func(ld): return ld["card"]["id"])
 	var o := PickOverlay.new()
-	o.title = "换谁上场？（AP%d · 攻击体力不变 · 换下的人本场不能再上）" % b.swap_cost()
+	o.title = "换谁上场？（%s · 攻击体力不变 · 换下的人本场不能再上）" % (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP")
 	o.card_ids = ids
 	o.captions = opts.map(func(ld): return "%s · %s" % [GameData.get_db().troops[ld["card"]["troop"]]["name"],
 		"、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"]))])
