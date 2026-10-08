@@ -8256,6 +8256,39 @@
       ],
       "card": "chunyuqiong"
     },
+    "guotu_enemy": {
+      "name": "督粮官·郭图",
+      "portrait": "guotu",
+      "hp": 9500,
+      "at": 230,
+      "actions": 2,
+      "phys_resist": 0.1,
+      "card": "jizhou_ji",
+      "moves": [
+        {
+          "name": "令箭督战",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "羽扇惑心",
+          "power": 0.6,
+          "weight": 2,
+          "confuse": 0.45
+        },
+        {
+          "name": "离间军心",
+          "power": 0,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "弩阵齐射",
+          "power": 1.6,
+          "weight": 1
+        }
+      ]
+    },
     "quyi_enemy": {
       "name": "先登主将·麹义",
       "portrait": "quyi",
@@ -9011,6 +9044,11 @@
       "name": "无极甄府·淳于琼",
       "turn_limit": 10,
       "enemy": "chunyuqiong_boss"
+    },
+    "hs_guotu": {
+      "name": "无极城外·郭图",
+      "turn_limit": 10,
+      "enemy": "guotu_enemy"
     },
     "hs_quyi": {
       "name": "界桥·麹义先登营",

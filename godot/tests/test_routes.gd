@@ -449,7 +449,7 @@ func test_north_chapter3_turning_your_back_plays_out_the_siege_before_ending_six
 	var q := quest_by_id("heishan")
 	var path := walk(q, s, [], 1, 0, 1)
 	for sid in ["hs_save_choice", "hs_ignore", "hs_bad_return", "hs_bad_skip", "hs_bad_wall", "hs_bad_gate", "hs_bad_street",
-			"hs_bad_night", "hs_bad_hall", "hs_bad_end"]:
+			"hs_bad_night", "hs_bad_hall", "hs_bad_guotu", "hs_bad_end"]:
 		check(path.has(sid), "覆巢 line passes " + sid)
 	for sid in ["hs_zhangyan", "hs_yudu", "hs_hm2"]:
 		check(not path.has(sid), "and never reaches " + sid)
@@ -460,5 +460,38 @@ func test_north_chapter3_turning_your_back_plays_out_the_siege_before_ending_six
 	s2.square = "hs_bad_hall"
 	s2.resolved = false
 	check(Quests.lose(q, s2), "losing the last stand is not a failed run: the story goes on")
-	check_eq(s2.square, "hs_bad_end", "…to the ending")
+	check_eq(s2.square, "hs_bad_guotu", "…to 郭图 himself")
+	s2.resolved = false
+	check(Quests.lose(q, s2), "and losing to him is not a failed run either")
+	check_eq(s2.square, "hs_bad_end", "…the ending")
 
+
+func test_north_chapter3_郭图_stands_in_the_way_of_the_escape_too() -> void:
+	var s := lap_save(["出生：冀州无极", "北线：班师冀州", "结局六 · 覆巢"], ["prologue", "luoyang_n"])  # 覆巢 seen once: the rescue option is open
+	var q := quest_by_id("heishan")
+	var r := rng(1)
+	Quests.begin(q, s, r)
+	var path: Array = [s.square]
+	for _step in 200:
+		var sq := Quests.here(q, s)
+		if sq["type"] == "mystery" and not s.resolved:
+			var ev := Quests.event_here(q, s, r)
+			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
+			Quests.choose_event(q, s, r, ok[0])
+		Quests.offer(q, s, r)
+		var pick_idx := -1
+		if sq["type"] == "choose":  # the first option that is not locked (救人 → 拔刀相助)
+			for i in sq["choose"].size():
+				if not Quests.option_locked(s, sq["choose"][i]):
+					pick_idx = i
+					break
+		Quests.resolve(q, s, r, pick_idx if sq["type"] == "choose" else (0 if not s.offer.is_empty() else -1))
+		s.offer = []
+		s.resolved = true
+		var opts := Quests.next_options(q, s)
+		if opts.is_empty():
+			break
+		Quests.move(q, s, opts[0]["id"])
+		path.append(opts[0]["id"])
+	for sid in ["hs_timeskip", "hs_breakout", "hs_guotu_fight", "hs_em1"]:
+		check(path.has(sid), "the rescue line passes " + sid)
