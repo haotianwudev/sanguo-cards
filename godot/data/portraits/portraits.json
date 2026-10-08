@@ -49,7 +49,7 @@
   "xuhuang": {"file": "xuhuang.jpg", "face": [0.51, 0.29], "head": 0.22},
   "xurong": {"file": "xurong.jpg", "face": [0.55, 0.23], "head": 0.25},
   "zhangjiao": {"file": "zhangjiao.jpg", "face": [0.52, 0.13], "head": 0.07, "placeholder": true},
-  "zhangliao": {"file": "zhangliao.jpg", "face": [0.27, 0.17], "head": 0.07},
+  "zhangliao": {"file": "zhangliao.jpg", "face": [0.52, 0.23], "head": 0.24},
   "zhaoyun": {"file": "zhaoyun.jpg", "face": [0.5, 0.25], "head": 0.26},
   "zhugeliang": {"file": "zhugeliang.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true},
   "langlijiao": {"file": "langlijiao.jpg", "face": [0.5, 0.23], "head": 0.22},
