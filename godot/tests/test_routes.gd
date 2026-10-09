@@ -390,6 +390,8 @@ func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
 		check_eq(p[-1], "hn_end")
 		for c in ["lusu", "chenwu", "daqiao"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
+		for r in ["wentai_shu", "zhou_pu", "weixi"]:
+			check(s.relics.has(r), "第六章 hands over the 宝物 " + r)
 		for line in ["南线：家书讨袁", "周家：解围", "鲁肃：指囷相赠", "陈武：入队", "二乔：解救", "冯夫人：交给吴夫人",
 				"南线：浮桥一瞥", "庐江：双婚"]:
 			check(s.run_records.has(line), "第六章 records " + line)

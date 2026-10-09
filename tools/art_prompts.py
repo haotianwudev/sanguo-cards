@@ -1200,6 +1200,10 @@ BATTLES = {
     "heishan_wai": "the snowy outer slope of a Taihang mountain pass at night: Black Mountain bandit scouts around torches, the stockade wall faint in the distance",
     "heishan_tan": "a grim cave altar stained with blood and scattered talismans: the sorcerer Xuanjizi turning with a sneer beside a bound girl",
     "heishan_zhai": "the gate of the Black Mountain stockade: Li Damu swinging his huge axe to block the gate, the stockade wall ablaze behind him",
+    "hn_liuxun": "皖城城头，新插的一排黄色「仲」字旗下，庐江太守刘勋（四十多岁的贪婪官吏，大腹便便，穿一身金漆还没干透的新铠甲，腋下夹着一本搜刮来的账簿）扶着垛口指挥守城，城下滚木礌石，城门紧闭",
+    "hn_leichen": "濡须口江面上两条吃水极深的破船，船舱里塞满金银箱子；雷薄（粗豪的中年武将，持长枪）与陈兰（瘦长的中年武将，持长枪）并肩站在船头，一脸「怎么又是你」的晦气表情；远处灊山云雾缭绕",
+    "hn_zhangxun": "寿春城南淝水最窄处，十几条高大的楼船用铁索连成一道水上城墙，最高的楼船上站着袁术大将张勋（三十多岁、神情严整的将军，黄色战袍，手按佩剑），船舷上弩手密布，远处是寿春城墙",
+    "hn_shouchun": "破晓时分的寿春南门水寨，黄色「仲」字大旗猎猎，仲氏禁军（金黄铠甲的禁卫长戟兵）在水门前列阵死守，城头倾泻火油；水门内几条载满金银箱子的快船正要冲出；远处东门北门火光冲天",
 }
 
 # story cg key: the scene
@@ -1344,6 +1348,14 @@ CGS = {
     "ln_camp": "夜里的马车内：主角用烈酒给吕玲绮腕上的伤口正骨包扎，张夫人掀帘探头满眼心疼，小甄宓踮脚递来一块热栗子糕",
     "ln_handhold": "虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外",
     "jz_end": "大雪官道上：主角身披鱼鳞甲与雪白貂裘、手握白蜡杆长枪居中，赵云银甲白马在左，郭嘉车中抿酒在右，张夫人怀抱账本骑矮脚马跟在队伍中，身后铁骑义勇新军相随",
+    "c9_letter": "襄阳府中冬夜的灯下：吴夫人（成年女性，温柔慈和的中年贵妇）手捧一封字迹又大又歪的家书，看着看着笑了；少年将军孙策探头凑过来想看，周瑜站在一旁，手里的账本合着；窗外汉江上停着荆州水师的战船",
+    "c9_granary": "舒县周家的大粮仓前，仓门上贴着黄色的「仲」字封条；周瑜（二十出头，俊秀书生气的年轻将军）背对众人站在仓门前，手里的账本第一次合着；主角和孙策站在他身后不远处；远处是被搜刮一空的庄子",
+    "c9_luxun": "舒城陆家旧宅，半边院墙被火烧得焦黑；门槛上坐着一个十四五岁的少年陆逊（清瘦的孩子，衣衫朴素，只画孩子该有的样子），一言不发地望着江上的荆州战船；门边停着一车粮食；远处船头，主角回头望着他",
+    "c9_lusu": "居巢金色的稻田边，两座高大的圆形粮囤：年轻豪强鲁肃（二十多岁，宽厚老实的面相，朴素衣衫，挽着裤腿，脚上沾着泥）笑着伸手指向其中一座粮囤；主角一脸震惊；周瑜在一旁拿着账本，想记又停住了笔",
+    "c9_qiao": "皖城江边驿馆前，一辆蒙着红布的车驾，车帘被掀开：车里坐着大乔（成年女性，二十岁上下，温婉）与小乔（成年女性，二十岁上下，灵动俏皮）；满脸是灰的少年将军孙策愣在车前，长枪掉在地上；周瑜站在后面，手中的账本正掉向江水",
+    "c9_bridge": "寿春城破的夜晚，火光映红了淮水：画面左边，南线主角站在荆州战船的船头；画面右边远处，淮水浮桥的另一头，一位骑马的北军主帅（和主角同一张脸，但头发束成发髻，穿河北式旧鱼鳞甲，披雪白貂裘）正抬手揉太阳穴；两人隔着河上的烟雾遥遥相望，像镜子的两面，神秘而略带超现实感",
+    "c9_coat": "庐江江边小院的黄昏：吴夫人（成年女性，慈和的中年贵妇）把一件旧冬衣递到冯夫人（成年女性，三十岁上下的美艳贵妇，华服有些凌乱）手里；冯夫人低着头抱着冬衣，脸上的笑僵住了；温暖而克制",
+    "c9_wedding": "庐江的喜堂，红烛高照：孙策（少年将军，大红喜服，手抖得把交杯酒洒了一半）与大乔（成年女性，凤冠霞帔）并肩；周瑜（大红喜服）把一本旧账本郑重地交到小乔（成年女性，凤冠霞帔，正好奇地翻看）手里；热闹喜庆，略带搞笑",
 }
 
 
@@ -1367,6 +1379,7 @@ MAPS = {
                "highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); "
                "Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three "
                "heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky",
+    "huainan_s": "【地图共 38 列，南线第六章·淮南折帝旗】自左向右依次：①冬日的襄阳城与汉江水寨；②顺江东下的长江江面；③庐江舒县，周家庄园与大粮仓、半边焦黑的陆家旧宅；④居巢金色的稻田与两座圆形粮囤；⑤皖城城郭与江边驿馆、画舫；⑥巢湖湖口的水贼破船与濡须口；⑦淝水两岸的芦苇荡；⑧寿春城与南门水寨、淮水浮桥；⑨最右端庐江挂满红灯笼的喜堂",
 }
 
 # relic icons (cards.json relics id -> the object itself)
@@ -1412,6 +1425,9 @@ RELICS = {
     "dilu": "Hex Mark's silver stirrup and bridle (的卢辔饰), refined white leather and silver-inlaid bridle and bit with tear-shaped silver ornaments and blue tassels",
     "fangtian": "the head of Lü Bu's Sky Piercer Halberd (方天画戟), a formidable four-pointed spearhead flanked by dual polished crescent moon side blades and red battle tassels",
     "tengjia": "the Southern Rattan Armor (藤甲), woven impenetrable dried wild mountain vine breastplate, treated with oil and bound with brass rivets",
+    "wentai_shu": "一封汉代家书：卷起的帛书系着一根红绳，字迹又大又歪、墨迹洇透纸背，旁边压着一块洛阳点心",
+    "zhou_pu": "一卷汉代竹简族谱，用青色丝绳编连，竹简上刻着工整的家族世系，最末一片竹简颜色明显更新",
+    "weixi": "一方假玉玺：通体洁白的玉印，印钮雕成盘龙，刻工极其精细，印面朱红，底座裂了一道细纹",
 }
 
 
@@ -1475,6 +1491,10 @@ EVENTS = {
     "yuxi_rumor": "a crowded teahouse, everyone whispering behind their hands",
     "tongyao": "children clapping and running along a road singing, in the background the silhouette of a huge fat man",
     "zhuhou_yan": "an envoy presenting an invitation card from the allied commander's camp, banquet tents in the background",
+    "hn_cangtou": "舒县城外一座被搬空的义仓，满头白发的老仓头抱着一把旧算盘坐在空仓门槛上，年轻的周瑜站在他面前愣住了；地上散落着几粒谷子",
+    "hn_longwang": "巢湖边一座破旧的龙王庙，香炉里青烟袅袅，泥塑的龙王披着褪色的红袍，供桌上一只装满铜钱的香油钱箱；少年将军孙策跪在蒲团上磕头，湖面雾气弥漫",
+    "hn_qianshan": "灊山云雾缭绕的山道上，背着柴担的老樵夫拄着扁担，指着远处山腰上冒着炊烟的贼寨；主角顺着他指的方向望去",
+    "hn_shizhe": "军帐中，一个风尘仆仆的洛阳信使捧上一只精致的食盒，盒里是洛阳点心，盒盖上压着一张字迹又大又歪的字条；少年将军孙策伸手就要拿，被主角一把拦住",
 }
 # 天命 pictures (cards.json fates id -> symbol); godot/data/art/fates/<id>.png, shown on the 天命 pick
 FATES = {

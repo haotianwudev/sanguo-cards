@@ -709,6 +709,41 @@
         "guard": 0.3,
         "hp": -0.1
       }
+    },
+    "wentai_shu": {
+      "name": "文台家书",
+      "troop": "lord",
+      "icon": "书",
+      "rarity": "story",
+      "desc": "孙坚的家书，字又大又歪，墨洇透了纸背。先骂人，再求人。攻击 +8%，每场开局 AP +1",
+      "mods": {
+        "at": 0.08,
+        "ap_start": 1
+      }
+    },
+    "zhou_pu": {
+      "name": "周家族谱",
+      "troop": "strategist",
+      "icon": "谱",
+      "rarity": "story",
+      "desc": "周家族老交给周瑜的族谱，最后一片竹简是新削的。策士部队：体力 +15%；回复 +15%（队里有策士才生效）",
+      "mods": {
+        "troop_hp": {
+          "strategist": 0.15
+        },
+        "heal": 0.15
+      }
+    },
+    "weixi": {
+      "name": "仲氏伪玺",
+      "troop": "lord",
+      "icon": "仲",
+      "rarity": "story",
+      "desc": "【诅咒】袁术刻的假玉玺，刻工比真的还精细。每回合 AP +1，但受到的伤害 +10%",
+      "mods": {
+        "ap_round": 1,
+        "guard": -0.1
+      }
     }
   },
   "_beasts": "野兽卡 (beast: true — 野猪, 白额虎): beasts, not soldiers or generals; for now they never drop or turn up in chests or pools",
