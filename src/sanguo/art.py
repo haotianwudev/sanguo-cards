@@ -261,7 +261,7 @@ def write_needs(pics: Path = PICS) -> None:
         "",
         "规格：竖版 5:7（≥ 1000×1400），人物居中、脸在上 1/3，半身到全身，背景简单。",
         "",
-        "状态：✅ 正式美术　🟡 占位图（清代绣像等公有领域图）　⬜ 缺",
+        "状态：🟡 占位图（清代绣像等公有领域图）　⬜ 缺。已到位的不列出，只在每张表下记一个数。",
     ]
     for q in story["quests"]:
         out += chapter(q)
@@ -269,7 +269,31 @@ def write_needs(pics: Path = PICS) -> None:
             if c.get("rarity", "N") != "N" and key_of(cid) not in seen]
     rest.sort(key=lambda r: {"SSR": 0, "SR": 1, "R": 2}.get(r[1][-3:-1].strip("（"), 3))
     out += ["", "## 其余武将（招募池，按需再画）", "", "| 状态 | key | 卡 |", "|---|---|---|"] + rows(rest)
-    (pics / "ART-NEEDS.md").write_text(NL.join(out) + NL, "utf-8", newline="\n")
+    (pics / "ART-NEEDS.md").write_text(NL.join(_drop_done(out)) + NL, "utf-8", newline="\n")
+
+
+def _drop_done(lines: list[str]) -> list[str]:
+    """Keep the doc short: drop every ✅ row; a table left with no rows becomes one 「全部到位」 line."""
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        if lines[i].startswith("| 状态 |") and i + 1 < len(lines) and lines[i + 1].startswith("|---"):
+            j = i + 2
+            body = []
+            while j < len(lines) and lines[j].startswith("|"):
+                body.append(lines[j])
+                j += 1
+            todo = [r for r in body if not r.startswith("| ✅")]
+            done = sum(1 for r in body if r.startswith("| ✅") and "| — |" not in r)
+            if todo:
+                out += [lines[i], lines[i + 1]] + todo + ([f"", f"（另有 {done} 项已到位）"] if done else [])
+            else:
+                out.append(f"✅ 全部到位（{done} 项）" if done else "✅ 没有")
+            i = j
+        else:
+            out.append(lines[i])
+            i += 1
+    return out
 
 
 def write_sources(pics: Path = PICS) -> None:

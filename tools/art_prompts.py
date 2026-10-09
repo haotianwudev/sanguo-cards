@@ -1343,7 +1343,7 @@ CGS = {
 
 
 # hand-written prompts that replace the template for a key (e.g. the owner's own prompt for a scene).
-# They are also kept after the art exists, in the archive section, so a redraw starts from the same prompt.
+# They stay here after the art exists (ART-PROMPTS.md only lists what is still missing), so a redraw starts from the same prompt.
 # chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
 MAPS = {
     "prologue_north": "winter Hebei, the road from the Zhen family's trading town to the Black Mountain bandit lair, left to "
@@ -2177,6 +2177,8 @@ def main() -> None:
         out += [f"### `{key}`", "", "```", ui_prompt(scene), "```", ""]
     out += ["## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）", ""]
     for key, obj in CHESTS.items():
+        if key in ui_done:
+            continue
         out += [f"### `{key}`", "", "```", f"游戏道具精灵图：{obj}。{NL}构图：方形 512x512，宝箱居中，略带四分之三视角，透明背景（PNG），不要阴影底框。{NL}"
                 f"画风：{STYLE}，彩绘道具，色彩浓郁，轮廓利落；不要文字。", "```", ""]
     out += ["## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）", ""]
@@ -2187,12 +2189,9 @@ def main() -> None:
     rarity = {k: v.get("rarity", "common") for k, v in json.loads((ROOT / "godot/data/cards.json").read_text("utf-8"))["relics"].items()}
     out += ["## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）", ""]
     for key, obj in RELICS.items():
+        if key in relics_done:
+            continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or relic_prompt(obj, rarity.get(key, "common")), "```", ""]
-    done_overrides = [k for k in OVERRIDES if k in art.get("cgs", {}) or k in art.get("battles", {}) or k in done]
-    if done_overrides:
-        out += ["## 已出图的提示词存档（重画时从这里开始）", ""]
-        for key in done_overrides:
-            out += [f"### `{key}` ✅", "", "```", OVERRIDES[key], "```", ""]
     (PICS / "ART-PROMPTS.md").write_text(NL.join(out), "utf-8", newline=NL)
     print(f"wrote {PICS / 'ART-PROMPTS.md'}")
 
