@@ -7372,6 +7372,7 @@
     },
     "shanzei_scout": {
       "name": "山贼斥候",
+      "portrait": "shanzei_bing",
       "hp": 2200,
       "at": 150,
       "actions": 2,
@@ -7450,6 +7451,7 @@
     },
     "shanzeituan": {
       "name": "山贼团",
+      "portrait": "lulin",
       "hp": 5200,
       "at": 190,
       "actions": 2,
