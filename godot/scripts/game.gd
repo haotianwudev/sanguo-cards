@@ -658,6 +658,10 @@ func demo(name: String) -> void:
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
 			show_screen(b)
+			if OS.get_cmdline_user_args().has("--boost"):  # a strengthened (BOOST) card must stand out
+				await get_tree().create_timer(0.5).timeout
+				b.b.leaders[1]["boosted"] = true
+				b._refresh()
 			if OS.get_cmdline_user_args().has("--longstatus"):  # every status line at once: the enemy panel must not grow
 				await get_tree().create_timer(0.5).timeout
 				var en: Dictionary = b.b.enemy

@@ -575,8 +575,38 @@ func _sync_fx() -> void:
 		if b.buff["layers"] > 0:
 			want["buff_%s" % id] = func(): return BattleFx.glow(self, r, BattleFx.GOLD)
 		_cards[i].modulate = Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE
+		_boost_pop(_cards[i], u["boosted"])
 	_fx_set(want)
 	_sync_badges()
+
+
+func _boost_pop(card: CardView, on: bool) -> void:
+	## a BOOSTed (strengthened) card takes the front: drawn over its neighbours, a little bigger, breathing — until it has acted
+	var old: Variant = card.get_meta("boost_tw") if card.has_meta("boost_tw") else null
+	if old is Tween and (old as Tween).is_valid():
+		(old as Tween).kill()
+	card.pivot_offset = card.size / 2
+	if not on:
+		card.set_meta("boost_tw", null)
+		card.z_index = 0
+		card.scale = Vector2.ONE
+		return
+	card.z_index = 46
+	var tw := card.create_tween().set_loops()
+	tw.tween_property(card, "scale", Vector2(1.07, 1.07), 0.55).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(card, "scale", Vector2(1.03, 1.03), 0.55).set_trans(Tween.TRANS_SINE)
+	card.set_meta("boost_tw", tw)
+
+
+func _boost_ribbon(rr: Rect2) -> Control:
+	## 「强化 ×1.5」 across the top of a boosted card, so nobody has to find the small corner badge
+	var l := Kit.label("强化 ×%s" % str(GameData.get_db().battle["boost_mult"]), Kit.FONT_BODY, "gold")
+	l.add_theme_color_override("font_color", Color.WHITE)
+	l.add_theme_stylebox_override("normal", Kit.box(Color(0.95, 0.45, 0.1, 0.95), 8, 2, Color(1.0, 0.85, 0.4), 4))
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.size = Vector2(rr.size.x - 24.0, 30.0)
+	l.position = Vector2(rr.position.x + 12.0, rr.position.y + rr.size.y * 0.42)
+	return l
 
 
 func _sync_badges() -> void:
@@ -623,6 +653,8 @@ func _sync_badges() -> void:
 			mine.append(BattleFx.badge("混", Color(0.62, 0.42, 0.95), -1, true))
 		if u["boosted"]:
 			mine.append(BattleFx.badge("强", Color(1.0, 0.5, 0.15)))
+			var rib := _boost_ribbon(rr)
+			_badge_add(rib)
 		for k in mine.size():
 			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
 			_badge_add(mine[k])
