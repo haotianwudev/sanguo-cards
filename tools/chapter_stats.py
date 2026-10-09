@@ -74,18 +74,21 @@ def card_section() -> str:
     for label, g in (("**武将合计**", gens), ("兵卡（N）", sols)):
         n, pool, story_only, r, art_n = split(g)
         out.append(f"| {label} | {n} | {pool} / {story_only} | {r['南']} / {r['北']} / {r['通用']} | {art_n}/{n} |")
-    # 主公卡: the starting lord card + the lord_forms (one dealt per cleared chapter, never in a pool)
+    # 主公卡: the starting lord card (drawable: recruit offers show it at gacha.lord_rate, a copy raises its tier)
+    # + the lord_forms (one dealt per cleared chapter, not in the pools)
     forms = cards.get("lord_forms", {}).get("forms", {})
     lr = {x: sum(1 for v in forms.values() if {"south": "南", "north": "北"}.get(v.get("route", ""), "通用") == x) for x in ("南", "北", "通用")}
     lr["通用"] += 1
     l_art = int("lord" in drawn) + sum(1 for k, v in forms.items() if v.get("art") and k in drawn)
     ln = 1 + len(forms)
-    out.append(f"| 主公卡（初始 1 + 通关形态 {len(forms)}） | {ln} | 0 / {ln} | {lr['南']} / {lr['北']} / {lr['通用']} | {l_art}/{ln} |")
+    out.append(f"| 主公卡（初始 1 + 通关形态 {len(forms)}） | {ln} | 1 / {len(forms)} | {lr['南']} / {lr['北']} / {lr['通用']} | {l_art}/{ln} |")
     n, pool, story_only, r, art_n = split(cs)
-    n, story_only, art_n = n + ln, story_only + ln, art_n + l_art
+    n, pool, story_only, art_n = n + ln, pool + 1, story_only + len(forms), art_n + l_art
     r = {x: r[x] + lr[x] for x in r}
     out.append(f"| **全部** | **{n}** | {pool} / {story_only} | {r['南']} / {r['北']} / {r['通用']} | {art_n}/{n} |")
-    out += ["", "主公卡初始那张南北共用（北线换束发立绘 `lord_north`），通关形态按 `lord_forms.forms` 的 `route` 分南北；立绘只算 `art: true` 且图已交付的。",
+    out += ["", f"主公卡：初始那张南北共用（北线换束发立绘 `lord_north`），在卡池里——招贤 / 抽卡时以 `gacha.lord_rate`"
+            f"（{float(cards['gacha'].get('lord_rate', 0)):.0%}）出现，抽到升铜 / 银 / 金；通关形态不进卡池，每通关一章发一张，按 `lord_forms.forms` 的 `route` 分南北。"
+            "立绘只算 `art: true` 且图已交付的。",
             "", "### 按兵种", "",
             "| 兵种 | 武将 SSR / SR / R | 武将合计 | 兵卡（其中精兵） | 南 / 北 / 通用（武将+兵卡） |", "|---|---:|---:|---:|---:|"]
     r_of = lambda group, x: sum(1 for c in group if route(c) == x)
