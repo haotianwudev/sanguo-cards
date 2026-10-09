@@ -658,6 +658,14 @@ func demo(name: String) -> void:
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
 			show_screen(b)
+			if OS.get_cmdline_user_args().has("--manyap"):  # more AP than usual + a combo: the party bar must still show them all
+				await get_tree().create_timer(0.5).timeout
+				b.b.mods["ap_max"] = 6
+				b.b.ap = b.b.ap_max()
+				b.b.combo = 5
+				b.b.round_no = b.b.turn_limit
+				b.b.ap_drain = 2
+				b._refresh()
 			if OS.get_cmdline_user_args().has("--lastround"):  # the round-limit warning: play the final round's alert
 				await get_tree().create_timer(0.5).timeout
 				b.b.round_no = b.b.turn_limit - 1

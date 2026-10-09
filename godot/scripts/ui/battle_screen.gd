@@ -224,7 +224,8 @@ func _build() -> void:
 	_party_box.add_child(pr)
 	pr.add_child(Kit.label("全军体力", Kit.FONT_BODY))
 	_party_hp = Kit.bar(b.party_hp, b.party_max, "green", 26)
-	_party_hp.custom_minimum_size = Vector2(420, 26)
+	_party_hp.custom_minimum_size = Vector2(120, 26)  # the bar gives way: AP pips, round and combo must always fit
+	_party_hp.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_party_hp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	pr.add_child(_party_hp)
 	_party_hp_label = Kit.label("", Kit.FONT_BODY)
@@ -237,6 +238,7 @@ func _build() -> void:
 	_round_label = Kit.label("", Kit.FONT_BODY)
 	pr.add_child(_round_label)
 	_combo_label = Kit.label("", Kit.FONT_BODY, "amber")
+	_combo_label.custom_minimum_size = Vector2(170, 0)  # room for 「N 连击 +NN%」 so it is never pushed off screen
 	pr.add_child(_combo_label)
 
 	# leaders (bottom-left) — skills live in a popup now (tap the card), not stacked buttons under it,
@@ -339,9 +341,11 @@ func _refresh() -> void:
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
 		ch.queue_free()
-	for k in b.ap_max():
+	var pips: int = b.ap_max()
+	var ps := 22 if pips <= 8 else maxi(10, int(22.0 * 8.0 / pips))  # more AP than 8: smaller pips, same total width
+	for k in pips:
 		var pip := Panel.new()
-		pip.custom_minimum_size = Vector2(22, 22)
+		pip.custom_minimum_size = Vector2(ps, ps)
 		pip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		pip.add_theme_stylebox_override("panel", Kit.box(Kit.c("gold") if k < b.ap else Kit.c("track"), 11, 2, Kit.c("gold"), 0))
 		_ap_row.add_child(pip)
