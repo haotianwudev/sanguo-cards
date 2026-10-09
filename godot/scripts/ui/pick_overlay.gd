@@ -200,4 +200,3 @@ func _select(i: int) -> void:
 		var tw := v.create_tween()
 		tw.tween_property(v, "position:y", -18.0 if j == i else 0.0, 0.12)
 	_confirm.disabled = false
-	_confirm.text = "带走 " + GameData.get_db().cards[card_ids[i]]["name"]
