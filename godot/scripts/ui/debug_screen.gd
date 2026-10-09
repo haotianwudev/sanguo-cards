@@ -22,6 +22,9 @@ const _CHAPTER_JUMPS := [
 		"flags": ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"]},
 	{"label": "第五章 · 荆襄风云", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"]},
+	{"label": "第六章 · 淮南折帝旗（南线）", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang"],
+		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "结局三 · 恨海", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓",
+			"南阳：袁术东逃", "贾诩：入队", "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督"]},
 ]
 
 

@@ -245,6 +245,10 @@ func demo(name: String) -> void:
 			save.flags = ["出生：冀州无极", "北线：班师冀州", "界桥：救下公孙瓒"]
 			save.quests_cleared = order.slice(0, order.find(want))
 			var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == want)[0]
+			var need: Variant = q.get("requires", [])  # the chapter's own gate (a south chapter needs its south flag)
+			for line in (need if need is Array else ([] if str(need) == "" else [str(need)])):
+				if not save.flags.has(line):
+					save.flags.append(line)
 			Quests.begin(q, save, rng)
 			show_screen(MapScreen.new())
 		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)

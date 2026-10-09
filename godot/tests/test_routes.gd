@@ -196,7 +196,7 @@ func reachable(q: Dictionary, s: SaveData) -> Dictionary:
 
 
 func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap() -> void:
-	for id in ["yuxi", "shouluoyang", "changan", "beihai", "dongui", "jingxiang"]:
+	for id in ["yuxi", "shouluoyang", "changan", "beihai", "dongui", "jingxiang", "huainan_s"]:
 		var q := quest_by_id(id)
 		var sq: Dictionary = q["squares"]
 		var lines := {}
@@ -319,7 +319,7 @@ func test_chapter5_after_ending_three_jiaxu_breaks_the_banquet() -> void:
 	check(s.has_card("kuaiyue"), "蒯越 joins")
 	check(s.run_records.has("荆襄：联蒯灭蔡") and s.run_records.has("貂蝉：全员生还"))
 	finish(q, s)
-	check(Quests.current_quest(s) == null, "未完待续 after 荆襄")
+	check_eq(Quests.current_quest(s)["id"], "huainan_s", "破局 route goes on to 第六章 · 淮南折帝旗")
 
 
 func test_chapter5_plays_with_real_fights_on_both_routes() -> void:
@@ -359,6 +359,73 @@ func test_chapter5_without_jiaxu_the_banquet_still_ends_in_ending_three() -> voi
 	var p := walk(quest_by_id("jingxiang"), s, [])
 	check(p.has("jx_qinggong") and p.has("jx_a_fuyan") and not p.has("jx_meng") and not p.has("jx_b_dingce"), "no 贾诩, no way out")
 	check_eq(p[-1], "jx_a_henhai")
+
+
+# ---- 南线第六章 · 淮南折帝旗 ---------------------------------------------------------------
+
+func ch6s_save() -> SaveData:
+	var s := ch5_save([E3, JX, "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督", "貂蝉：全员生还"])
+	s.quests_cleared.append("jingxiang")
+	for c in ["jiaxu", "kuaiyue", "ganning"]:
+		s.grant_card(c)
+	return s
+
+
+func test_south_chapter6_follows_the_good_jingxiang_ending_only() -> void:
+	check_eq(Quests.current_quest(ch6s_save())["id"], "huainan_s")
+	var bad := ch5_save([E3])
+	bad.quests_cleared.append("jingxiang")
+	check(Quests.current_quest(bad) == null, "恨海 stops the story: no 第六章")
+
+
+func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
+	for fork in [[], ["hn_m1", "hn_m2", "hn_m3", "hn_m4"]]:
+		var s := ch6s_save()
+		var q := quest_by_id("huainan_s")
+		var p := walk(q, s, fork)
+		for sid in ["hn_years", "hn_letter", "hn_shu", "hn_zhoujia", "hn_luxun", "hn_lusu", "hn_liuxun", "hn_wan_rest",
+				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_zhengbao", "hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng",
+				"hn_bridge", "hn_wedding", "hn_end"]:
+			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
+		check_eq(p[-1], "hn_end")
+		for c in ["lusu", "chenwu", "daqiao"]:
+			check(s.has_card(c), "%s joins in 第六章" % c)
+		for line in ["南线：家书讨袁", "周家：解围", "鲁肃：指囷相赠", "陈武：入队", "二乔：解救", "冯夫人：交给吴夫人",
+				"南线：浮桥一瞥", "庐江：双婚"]:
+			check(s.run_records.has(line), "第六章 records " + line)
+		finish(q, s)
+		check(Quests.current_quest(s) == null, "未完待续 after 第六章")
+
+
+func test_south_chapter6_plays_with_real_fights() -> void:
+	var s := ch6s_save()
+	var q := quest_by_id("huainan_s")
+	var r := rng(6)
+	Quests.begin(q, s, r)
+	var fights := 0
+	for _step in 200:
+		var sq := Quests.here(q, s)
+		if sq["type"] == "mystery" and not s.resolved:
+			var ev := Quests.event_here(q, s, r)
+			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
+			Quests.choose_event(q, s, r, ok[0])
+		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
+			var f := Quests.battle_here(q, s)
+			s.party = s.auto_party()
+			var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"])
+			bot_fight(b)
+			fights += 1
+			s.damage = 0
+		Quests.offer(q, s, r)
+		Quests.resolve(q, s, r, 0 if not s.offer.is_empty() else -1)
+		s.offer = []
+		s.resolved = true
+		var opts := Quests.next_options(q, s)
+		if opts.is_empty():
+			break
+		Quests.move(q, s, opts[0]["id"])
+	check_eq(s.square, "hn_end", "reached the end of 第六章")
+	check(fights >= 8, "fought the chapter's battles (%d)" % fights)
 
 
 func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:

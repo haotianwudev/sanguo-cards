@@ -8811,6 +8811,285 @@
         }
       ],
       "card": "inf_n"
+    },
+    "yuan_shuijun": {
+      "name": "袁军水军",
+      "portrait": "jingzhou_shuijun",
+      "hp": 12500,
+      "at": 360,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "船桨拍击",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "跳帮",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "撞船",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.3
+        }
+      ],
+      "card": "jingzhou_shuijun"
+    },
+    "yuan_shuibing": {
+      "name": "袁军税兵",
+      "portrait": "inf_n",
+      "hp": 11000,
+      "at": 350,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "棍棒",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "盘剥",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "抄家",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "inf_n"
+    },
+    "yuan_buzu6": {
+      "name": "袁军步卒",
+      "portrait": "inf_n",
+      "hp": 13000,
+      "at": 365,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长枪",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "盘查",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "围攻",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "inf_n"
+    },
+    "yuan_gongshou6": {
+      "name": "袁军弓手",
+      "portrait": "inf_n",
+      "hp": 11500,
+      "at": 370,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "射击",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "齐射",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "火箭",
+          "power": 0.6,
+          "weight": 1,
+          "burn_party": 0.05,
+          "turns": 2
+        }
+      ],
+      "card": "inf_n"
+    },
+    "liuxun_e": {
+      "name": "庐江太守刘勋",
+      "portrait": "liuxun",
+      "hp": 24000,
+      "at": 450,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "督战",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "据城死守",
+          "power": 0,
+          "weight": 1,
+          "heal": 0.06
+        },
+        {
+          "name": "搜刮民财",
+          "power": 0.6,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "滚木礌石·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "滚木礌石"
+        },
+        {
+          "name": "滚木礌石",
+          "power": 2.3,
+          "weight": 0,
+          "confuse": 0.4
+        }
+      ],
+      "card": "liuxun"
+    },
+    "zhengbao_e": {
+      "name": "巢湖水贼郑宝",
+      "portrait": "zhengbao",
+      "hp": 13500,
+      "at": 370,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "鬼头刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "收过湖钱",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "水底暗桩",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "zhengbao"
+    },
+    "leichen": {
+      "name": "雷薄陈兰",
+      "portrait": "leibo",
+      "hp": 17000,
+      "at": 400,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "双枪齐出",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "又是你",
+          "power": 0.7,
+          "weight": 1,
+          "confuse": 0.45
+        },
+        {
+          "name": "抢金银·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "夺船而逃"
+        },
+        {
+          "name": "夺船而逃",
+          "power": 2.2,
+          "weight": 0,
+          "pierce": true
+        }
+      ],
+      "card": "chenlan"
+    },
+    "zhangxun_e": {
+      "name": "袁术大将张勋",
+      "portrait": "zhangxun",
+      "hp": 18000,
+      "at": 410,
+      "actions": 2,
+      "phys_resist": 0.15,
+      "moves": [
+        {
+          "name": "楼船弩阵",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "铁索横江",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "拍竿",
+          "power": 1.5,
+          "weight": 1
+        }
+      ],
+      "card": "zhangxun"
+    },
+    "zhongshi_jinjun": {
+      "name": "仲氏禁军",
+      "portrait": "yuanshu",
+      "hp": 28000,
+      "at": 480,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "禁军长戟",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "水门火油",
+          "power": 0.8,
+          "weight": 1,
+          "burn_party": 0.08,
+          "turns": 3
+        },
+        {
+          "name": "伪诏惑众",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "死守水门·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "仲家天威"
+        },
+        {
+          "name": "仲家天威",
+          "power": 2.5,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "护驾",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "inf_n"
     }
   },
   "scenarios": {
@@ -9455,6 +9734,56 @@
       "name": "冀州强弩",
       "turn_limit": 8,
       "enemy": "jizhou_nushou"
+    },
+    "hn_xunchuan": {
+      "name": "江面·袁军巡船",
+      "turn_limit": 6,
+      "enemy": "yuan_shuijun",
+      "art": "jx_shuijun"
+    },
+    "hn_gongshou": {
+      "name": "袁军弓手",
+      "turn_limit": 6,
+      "enemy": "yuan_gongshou6",
+      "art": "c3_gongshou"
+    },
+    "hn_shuibing": {
+      "name": "舒县·袁军税兵",
+      "turn_limit": 6,
+      "enemy": "yuan_shuibing",
+      "art": "c3_xunluo"
+    },
+    "hn_buzu": {
+      "name": "袁军步卒",
+      "turn_limit": 6,
+      "enemy": "yuan_buzu6",
+      "art": "c3_xunluo"
+    },
+    "hn_liuxun": {
+      "name": "皖城·刘勋",
+      "turn_limit": 12,
+      "enemy": "liuxun_e"
+    },
+    "hn_zhengbao": {
+      "name": "巢湖·郑宝水寨",
+      "turn_limit": 6,
+      "enemy": "zhengbao_e",
+      "art": "shuizei_guard"
+    },
+    "hn_leichen": {
+      "name": "濡须口·雷薄陈兰",
+      "turn_limit": 8,
+      "enemy": "leichen"
+    },
+    "hn_zhangxun": {
+      "name": "淝水·张勋楼船",
+      "turn_limit": 8,
+      "enemy": "zhangxun_e"
+    },
+    "hn_shouchun": {
+      "name": "寿春南门·袁术水寨",
+      "turn_limit": 15,
+      "enemy": "zhongshi_jinjun"
     }
   }
 }
