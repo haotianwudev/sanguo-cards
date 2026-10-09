@@ -74,13 +74,27 @@ def card_section() -> str:
     for label, g in (("**武将合计**", gens), ("兵卡（N）", sols)):
         n, pool, story_only, r, art_n = split(g)
         out.append(f"| {label} | {n} | {pool} / {story_only} | {r['南']} / {r['北']} / {r['通用']} | {art_n}/{n} |")
+    # 主公卡: the starting lord card + the lord_forms (one dealt per cleared chapter, never in a pool)
+    forms = cards.get("lord_forms", {}).get("forms", {})
+    lr = {x: sum(1 for v in forms.values() if {"south": "南", "north": "北"}.get(v.get("route", ""), "通用") == x) for x in ("南", "北", "通用")}
+    lr["通用"] += 1
+    l_art = int("lord" in drawn) + sum(1 for k, v in forms.items() if v.get("art") and k in drawn)
+    ln = 1 + len(forms)
+    out.append(f"| 主公卡（初始 1 + 通关形态 {len(forms)}） | {ln} | 0 / {ln} | {lr['南']} / {lr['北']} / {lr['通用']} | {l_art}/{ln} |")
     n, pool, story_only, r, art_n = split(cs)
+    n, story_only, art_n = n + ln, story_only + ln, art_n + l_art
+    r = {x: r[x] + lr[x] for x in r}
     out.append(f"| **全部** | **{n}** | {pool} / {story_only} | {r['南']} / {r['北']} / {r['通用']} | {art_n}/{n} |")
-    out += ["", "### 按兵种", "",
+    out += ["", "主公卡初始那张南北共用（北线换束发立绘 `lord_north`），通关形态按 `lord_forms.forms` 的 `route` 分南北；立绘只算 `art: true` 且图已交付的。",
+            "", "### 按兵种", "",
             "| 兵种 | 武将 SSR / SR / R | 武将合计 | 兵卡（其中精兵） | 南 / 北 / 通用（武将+兵卡） |", "|---|---:|---:|---:|---:|"]
+    r_of = lambda group, x: sum(1 for c in group if route(c) == x)
     for tid, tr in troops.items():
         g = [c for c in gens.values() if c["troop"] == tid]
         s = [c for c in sols.values() if c["troop"] == tid]
+        if tid == "lord":
+            out.append(f"| 主公 | 主公卡 {ln} 张（不分稀有度） | {ln} | {len(s)}（亲卫：丫鬟、家丁等） | {lr['南'] + r_of(s, '南')} / {lr['北'] + r_of(s, '北')} / {lr['通用'] + r_of(s, '通用')} |")
+            continue
         if not g and not s:
             continue
         by = {x: sum(1 for c in g if c["rarity"] == x) for x in ("SSR", "SR", "R")}
