@@ -229,3 +229,13 @@
 - [x] 2026-10-09 battle `c6_lijue` ← c6_lijue.jpg · ok
 - [x] 2026-10-09 battle `c7_jiling` ← c7_jiling.jpg · ok
 - [x] 2026-10-09 battle `hs_quyi` ← hs_quyi.png · ok
+- [x] 2026-10-09 portrait `bashu_nu` ← bashu_nu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `bingzhou_nu` ← bingzhou_nu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 cg `end_locked` ← end_locked.jpg · ok
+- [x] 2026-10-09 map `huainan_s` ← huainan_s.jpg · ok
+- [x] 2026-10-09 portrait `huangxu` ← huangxu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `jizhou_nu` ← jizhou_nu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `loucuan_nushou` ← loucuan_nushou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `taihang_lieshou` ← taihang_lieshou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `wuhuan_sheshou` ← wuhuan_sheshou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 map `xuzhou` ← xuzhou.jpg · ok

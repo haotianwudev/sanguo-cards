@@ -299,6 +299,13 @@
 | `zhengbao` | source/generals/zhengbao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhoutai` | source/generals/zhoutai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yanbaihu` | source/generals/yanbaihu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bashu_nu` | source/soldiers/bashu_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bingzhou_nu` | source/soldiers/bingzhou_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huangxu` | source/generals/huangxu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jizhou_nu` | source/soldiers/jizhou_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `loucuan_nushou` | source/soldiers/loucuan_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `taihang_lieshou` | source/soldiers/taihang_lieshou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wuhuan_sheshou` | source/soldiers/wuhuan_sheshou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -310,6 +317,8 @@
 | `map:jingxiang` | source/map/jingxiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:shouluoyang` | source/map/shouluoyang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:yuxi` | source/map/yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:huainan_s` | source/map/huainan_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:xuzhou` | source/map/xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei_scout` | source/battles/shuizei_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei` | source/battles/shuizei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -453,3 +462,4 @@
 | `cg:c3_bad_return` | source/cg/c3_bad_return.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_guotu_street` | source/cg/c3_guotu_street.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c4_drink` | source/cg/c4_drink.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_locked` | source/cg/end_locked.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
