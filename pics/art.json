@@ -3003,6 +3003,62 @@
     "hs_quyi": {
       "src": "source/battles/hs_quyi.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "xz_xiahoudun": {
+      "src": "source/battles/xz_xiahoudun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "xz_lvbu": {
+      "src": "source/battles/xz_lvbu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_huangzu": {
+      "src": "source/battles/jx_huangzu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_caimao_a": {
+      "src": "source/battles/jx_caimao_a.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_caimao_b": {
+      "src": "source/battles/jx_caimao_b.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hn_liuxun": {
+      "src": "source/battles/hn_liuxun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hn_shouchun": {
+      "src": "source/battles/hn_shouchun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c6_fubing": {
+      "src": "source/battles/c6_fubing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_lijue_test": {
+      "src": "source/battles/c4_lijue_test.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c5_niufu": {
+      "src": "source/battles/c5_niufu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "bh_zhenghao": {
+      "src": "source/battles/bh_zhenghao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "bh_jiangqiao": {
+      "src": "source/battles/bh_jiangqiao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "bh_yanliang": {
+      "src": "source/battles/bh_yanliang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "xz_caobao": {
+      "src": "source/battles/xz_caobao.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",

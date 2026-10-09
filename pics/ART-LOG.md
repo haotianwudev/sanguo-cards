@@ -239,3 +239,17 @@
 - [x] 2026-10-09 portrait `taihang_lieshou` ← taihang_lieshou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-09 portrait `wuhuan_sheshou` ← wuhuan_sheshou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-09 map `xuzhou` ← xuzhou.jpg · ok
+- [x] 2026-10-09 battle `xz_xiahoudun` ← xz_xiahoudun_1791572368292.jpg · ok
+- [x] 2026-10-09 battle `xz_lvbu` ← xz_lvbu_1791572410384.jpg · ok
+- [x] 2026-10-09 battle `jx_huangzu` ← jx_huangzu_1791572454147.jpg · ok
+- [x] 2026-10-09 battle `jx_caimao_a` ← jx_caimao_a_1791572504816.jpg · ok
+- [x] 2026-10-09 battle `jx_caimao_b` ← jx_caimao_b_1791572544452.jpg · ok
+- [x] 2026-10-09 battle `hn_liuxun` ← hn_liuxun_1791572586107.jpg · ok
+- [x] 2026-10-09 battle `hn_shouchun` ← hn_shouchun_1791572627838.jpg · ok
+- [x] 2026-10-09 battle `c6_fubing` ← c6_fubing_1791572686865.jpg · ok
+- [x] 2026-10-09 battle `c4_lijue_test` ← c4_lijue_test_1791572802500.jpg · ok
+- [x] 2026-10-09 battle `c5_niufu` ← c5_niufu_1791572859197.jpg · ok
+- [x] 2026-10-09 battle `bh_zhenghao` ← bh_zhenghao_1791572911669.jpg · ok
+- [x] 2026-10-09 battle `bh_jiangqiao` ← bh_jiangqiao_1791572970469.jpg · ok
+- [x] 2026-10-09 battle `bh_yanliang` ← bh_yanliang_1791573022217.jpg · ok
+- [x] 2026-10-09 battle `xz_caobao` ← xz_caobao_1791573078731.jpg · ok
