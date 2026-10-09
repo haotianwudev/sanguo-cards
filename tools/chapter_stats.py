@@ -78,15 +78,16 @@ def card_section() -> str:
     # + the lord_forms (one dealt per cleared chapter, not in the pools)
     forms = cards.get("lord_forms", {}).get("forms", {})
     lr = {x: sum(1 for v in forms.values() if {"south": "南", "north": "北"}.get(v.get("route", ""), "通用") == x) for x in ("南", "北", "通用")}
-    lr["通用"] += 1
-    l_art = int("lord" in drawn) + sum(1 for k, v in forms.items() if v.get("art") and k in drawn)
-    ln = 1 + len(forms)
-    out.append(f"| 主公卡（初始 1 + 通关形态 {len(forms)}） | {ln} | 1 / {len(forms)} | {lr['南']} / {lr['北']} / {lr['通用']} | {l_art}/{ln} |")
+    lr["南"] += 1  # the starting lord is one card per route: south `lord`, north `lord_north` (own look, spear skills)
+    lr["北"] += 1
+    l_art = int("lord" in drawn) + int("lord_north" in drawn) + sum(1 for k, v in forms.items() if v.get("art") and k in drawn)
+    ln = 2 + len(forms)
+    out.append(f"| 主公卡（初始南北各 1 + 通关形态 {len(forms)}） | {ln} | 2 / {len(forms)} | {lr['南']} / {lr['北']} / {lr['通用']} | {l_art}/{ln} |")
     n, pool, story_only, r, art_n = split(cs)
-    n, pool, story_only, art_n = n + ln, pool + 1, story_only + len(forms), art_n + l_art
+    n, pool, story_only, art_n = n + ln, pool + 2, story_only + len(forms), art_n + l_art
     r = {x: r[x] + lr[x] for x in r}
     out.append(f"| **全部** | **{n}** | {pool} / {story_only} | {r['南']} / {r['北']} / {r['通用']} | {art_n}/{n} |")
-    out += ["", f"主公卡：初始那张南北共用（北线换束发立绘 `lord_north`），在卡池里——招贤 / 抽卡时以 `gacha.lord_rate`"
+    out += ["", f"主公卡：初始那张南北各一张（南线 `lord` 寸头旧银甲、扔刀；北线 `lord_north` 束发鱼鳞甲、夺命枪），都在卡池里——招贤 / 抽卡时以 `gacha.lord_rate`"
             f"（{float(cards['gacha'].get('lord_rate', 0)):.0%}）出现，抽到升铜 / 银 / 金；通关形态不进卡池，每通关一章发一张，按 `lord_forms.forms` 的 `route` 分南北。"
             "立绘只算 `art: true` 且图已交付的。",
             "", "### 按兵种", "",
