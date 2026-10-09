@@ -120,7 +120,7 @@ func _build() -> void:
 	# enemy (top-left)
 	var enemy_panel := PanelContainer.new()
 	enemy_panel.position = Vector2(20, 14)
-	enemy_panel.size = Vector2(880, 250) if not has_cg else Vector2(560, 0)
+	enemy_panel.size = Vector2(760, 250) if not has_cg else Vector2(560, 0)
 	var ebg := Kit.c("enemy_bg")
 	if has_cg:
 		ebg.a = 0.72
@@ -198,16 +198,16 @@ func _build() -> void:
 
 	# log (top-right)
 	var log_panel := PanelContainer.new()
-	log_panel.position = Vector2(916, 14) if not has_cg else Vector2(950, 14)
-	log_panel.size = Vector2(344, 250) if not has_cg else Vector2(310, 180)
+	log_panel.position = Vector2(796, 56) if not has_cg else Vector2(890, 56)  # below the 设置 button (top-right corner)
+	log_panel.size = Vector2(464, 208) if not has_cg else Vector2(370, 150)
 	if has_cg:  # a small see-through log so the painting shows
 		log_panel.add_theme_stylebox_override("panel", Kit.box(Color(0, 0, 0, 0.45), 10, 0, Color.TRANSPARENT, 8))
 	add_child(log_panel)
 	_log = RichTextLabel.new()
 	_log.bbcode_enabled = true
 	_log.scroll_following = true
-	_log.add_theme_font_size_override("normal_font_size", 16 if not has_cg else 14)
-	_log.add_theme_font_size_override("bold_font_size", 16 if not has_cg else 14)
+	_log.add_theme_font_size_override("normal_font_size", 21 if not has_cg else 18)
+	_log.add_theme_font_size_override("bold_font_size", 21 if not has_cg else 18)
 	log_panel.add_child(_log)
 
 	# party bar
