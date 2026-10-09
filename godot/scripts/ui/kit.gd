@@ -285,7 +285,7 @@ static func skill_desc(sk: Dictionary) -> String:
 			"boost":
 				parts.append({"all": "全军 BOOST", "random_idle": "随机让一个还没出手的队友 BOOST"}.get(e.get("target", ""), "自己 BOOST（下次出手 ×1.5）"))
 			"stun":
-				parts.append("%d%% 让敌人混乱一回合" % int(round(float(e["chance"]) * 100)))
+				parts.append("%d%% 让敌人眩晕一回合" % int(round(float(e["chance"]) * 100)))
 			"ap":
 				parts.append("AP +%d" % int(e["amount"]))
 			"burn":

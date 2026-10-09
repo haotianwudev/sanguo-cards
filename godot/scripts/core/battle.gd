@@ -385,7 +385,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			if rng.randf() < float(eff["chance"]) + float(mods.get("stun", 0.0)):
 				enemy["stunned"] = true
 				_ev({"t": "stun", "ok": true})
-				return ["  %s 陷入混乱！下回合无法行动" % ename]
+				return ["  %s 陷入眩晕！下回合无法行动" % ename]
 			_ev({"t": "stun", "ok": false})
 			return ["  %s 未受影响" % ename]
 		"break":
@@ -483,7 +483,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 	if enemy["stunned"]:
 		enemy["stunned"] = false
 		_ev({"t": "enemy_stunned"})
-		log.append("%s 混乱中，无法行动" % data["name"])
+		log.append("%s 眩晕中，无法行动" % data["name"])
 	else:
 		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0))) * (1.0 - minf(0.9, float(buff["def"])))
 		for _a in int(data["actions"]):

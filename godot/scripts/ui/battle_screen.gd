@@ -711,7 +711,7 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _party_center(), "BOOST", Kit.c("gold"), 34)
 				await get_tree().create_timer(0.3).timeout
 			"stun":
-				Kit.float_text(self, _enemy_center(), "混乱！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
+				Kit.float_text(self, _enemy_center(), "眩晕！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
 				if ev["ok"]:
 					BattleFx.stun_burst(self, _enemy_center() + Vector2(0, -50))
 				await get_tree().create_timer(0.3).timeout
@@ -726,7 +726,7 @@ func _play(events: Array) -> void:
 			"enemy_turn":
 				await _banner("%s 的行动" % b.enemy["data"]["name"], Kit.c("red"))
 			"enemy_stunned":
-				Kit.float_text(self, _enemy_center(), "混乱中，无法行动", Kit.c("purple"), 32)
+				Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
 				await get_tree().create_timer(0.45).timeout
 			"enemy_hit":
 				var x := _enemy_art.position.y
