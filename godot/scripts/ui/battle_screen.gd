@@ -121,6 +121,8 @@ func _build() -> void:
 	var enemy_panel := PanelContainer.new()
 	enemy_panel.position = Vector2(20, 14)
 	enemy_panel.size = Vector2(760, 250) if not has_cg else Vector2(560, 0)
+	enemy_panel.custom_maximum_size = Vector2(760, 250) if not has_cg else Vector2(560, 0)
+	enemy_panel.clip_contents = true
 	var ebg := Kit.c("enemy_bg")
 	if has_cg:
 		ebg.a = 0.72
@@ -175,7 +177,7 @@ func _build() -> void:
 	var info := VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.alignment = BoxContainer.ALIGNMENT_CENTER
-	info.add_theme_constant_override("separation", 10 if not has_cg else 4)
+	info.add_theme_constant_override("separation", 6 if not has_cg else 4)
 	er.add_child(info)
 	if has_cg:  # one line: name and stats, then the bar
 		var top := HBoxContainer.new()
@@ -190,10 +192,20 @@ func _build() -> void:
 	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 30 if not has_cg else 20)
 	info.add_child(_enemy_hp)
 	_enemy_hp_label = Kit.label("", Kit.FONT_BODY if not has_cg else Kit.FONT_SMALL)
-	info.add_child(_enemy_hp_label)
-	if not has_cg:
-		info.add_child(Kit.label("攻击 %d · 每回合行动 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
-	_enemy_status = Kit.label("", Kit.FONT_BODY if not has_cg else Kit.FONT_SMALL, "purple")
+	if not has_cg:  # HP and attack share a line: the status list below needs the height
+		var hp_row := HBoxContainer.new()
+		hp_row.add_theme_constant_override("separation", 18)
+		hp_row.add_child(_enemy_hp_label)
+		hp_row.add_child(Kit.label("攻击 %d · 每回合行动 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
+		info.add_child(hp_row)
+	else:
+		info.add_child(_enemy_hp_label)
+	_enemy_status = Kit.label("", Kit.FONT_SMALL, "purple")
+	# a long list of statuses must wrap, never widen the panel (it stretched the enemy HP bar behind the log)
+	_enemy_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_enemy_status.custom_minimum_size = Vector2(10, 0)
+	_enemy_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_enemy_status.max_lines_visible = 3
 	info.add_child(_enemy_status)
 
 	# log (top-right)

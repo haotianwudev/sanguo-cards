@@ -658,6 +658,23 @@ func demo(name: String) -> void:
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
 			show_screen(b)
+			if OS.get_cmdline_user_args().has("--longstatus"):  # every status line at once: the enemy panel must not grow
+				await get_tree().create_timer(0.5).timeout
+				var en: Dictionary = b.b.enemy
+				en["break_turns"] = 3
+				en["break_amount"] = 0.3
+				en["burn_turns"] = 3
+				en["burn_pct"] = 0.1
+				en["charging"] = "天下无双"
+				en["at"] = en["data"]["at"] * 1.6
+				b.b.buff["layers"] = 3
+				b.b.buff["atk"] = 0.3
+				b.b.buff["def"] = 0.2
+				b.b.buff["turns"] = 2
+				b.b.party_burn["turns"] = 2
+				b.b.party_burn["dmg"] = 120
+				b.b.ap_drain = 2
+				b._refresh()
 			if OS.get_cmdline_user_args().has("--manyap"):  # more AP than usual + a combo: the party bar must still show them all
 				await get_tree().create_timer(0.5).timeout
 				b.b.mods["ap_max"] = 6
