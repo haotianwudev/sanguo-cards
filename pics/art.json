@@ -2382,6 +2382,285 @@
         0.22
       ],
       "head": 0.22
+    },
+    "dongfeng": {
+      "src": "source/generals/dongfeng.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "fazheng": {
+      "src": "source/generals/fazheng.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "gongsunkang": {
+      "src": "source/generals/gongsunkang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "hansui": {
+      "src": "source/generals/hansui.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "jiangqin": {
+      "src": "source/generals/jiangqin.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "lidian": {
+      "src": "source/generals/lidian.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "liuxun": {
+      "src": "source/generals/liuxun.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "liuyao": {
+      "src": "source/generals/liuyao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "liuzhang": {
+      "src": "source/generals/liuzhang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "luxun": {
+      "src": "source/generals/luxun.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "luxun_young": {
+      "src": "source/generals/luxun_young.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "mateng": {
+      "src": "source/generals/mateng.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "menghuo": {
+      "src": "source/generals/menghuo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "pangde": {
+      "src": "source/generals/pangde.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "qiaoguolao": {
+      "src": "source/generals/qiaoguolao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "shenrong": {
+      "src": "source/generals/shenrong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "tadun": {
+      "src": "source/generals/tadun.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wanglang": {
+      "src": "source/generals/wanglang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "xiahoumao": {
+      "src": "source/generals/xiahoumao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "xiahouyuan": {
+      "src": "source/generals/xiahouyuan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yanyan": {
+      "src": "source/generals/yanyan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yujin": {
+      "src": "source/generals/yujin.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zangba": {
+      "src": "source/generals/zangba.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhanghe": {
+      "src": "source/generals/zhanghe.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhanglu": {
+      "src": "source/generals/zhanglu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhangren": {
+      "src": "source/generals/zhangren.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhangwei": {
+      "src": "source/generals/zhangwei.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhangxun": {
+      "src": "source/generals/zhangxun.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhangzhao": {
+      "src": "source/generals/zhangzhao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhengbao": {
+      "src": "source/generals/zhengbao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "zhoutai": {
+      "src": "source/generals/zhoutai.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",

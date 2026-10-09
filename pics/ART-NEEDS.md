@@ -150,11 +150,7 @@
 
 能拿到的卡
 
-| 状态 | key | 卡 |
-|---|---|---|
-| ⬜ 缺 | `zhanghe` | 张郃 |
-
-（另有 5 项已到位）
+✅ 全部到位（6 项）
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -348,11 +344,7 @@
 
 能拿到的卡
 
-| 状态 | key | 卡 |
-|---|---|---|
-| ⬜ 缺 | `jiangqin` | 蒋钦 |
-
-（另有 3 项已到位）
+✅ 全部到位（4 项）
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
@@ -461,15 +453,8 @@
 |---|---|---|
 | 🟡 占位 | `pangtong` | 庞统（SR） |
 | 🟡 占位 | `lvmeng` | 吕蒙（SR） |
-| ⬜ 缺 | `luxun` | 陆逊（SSR） |
 | 🟡 占位 | `zhangjiao` | 张角（SSR） |
-| ⬜ 缺 | `zhangren` | 张任（SR） |
-| ⬜ 缺 | `dongfeng` | 董奉（R） |
-| ⬜ 缺 | `zhangzhao` | 张昭（R） |
-| ⬜ 缺 | `qiaoguolao` | 乔国老（R） |
 | 🟡 占位 | `liaohua` | 廖化（R） |
-| ⬜ 缺 | `lidian` | 李典（R） |
 | 🟡 占位 | `jianyong` | 简雍（R） |
-| ⬜ 缺 | `yanyan` | 严颜（R） |
 
-（另有 39 项已到位）
+（另有 46 项已到位）
