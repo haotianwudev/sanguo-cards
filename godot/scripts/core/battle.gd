@@ -27,6 +27,7 @@ var combo := 0
 var guard_cut := 0.0
 var defend_streak := 0
 var result := ""  # "" | "win" | "lose"
+var lose_reason := ""  # why it was lost: "wiped" (party HP gone) | "turns" (round limit up, HP left) | "retreat"
 var overkill := 0.0  # excess damage on the killing blow, as a share of the enemy's max HP
 var opening: Array = []  # log lines from the first round start
 var mods: Dictionary = {}  # 宝物 / 险 (see cards.json relics) + enemy (险: enemy strength)
@@ -303,6 +304,7 @@ func defend() -> Array:
 
 func retreat() -> Array:
 	result = "lose"
+	lose_reason = "retreat"
 	return ["全军撤退！"]
 
 
@@ -537,6 +539,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 			enemy["break_amount"] = 0.0
 	if round_no >= turn_limit:
 		result = "lose"
+		lose_reason = "turns"
 		log.append("已到第 %d 回合上限 —— 撤退！" % round_no)
 		return log
 	log.append_array(_start_round())
@@ -656,3 +659,4 @@ func _check_end() -> void:
 		result = "win"
 	elif party_hp <= 0:
 		result = "lose"
+		lose_reason = "wiped"

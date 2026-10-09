@@ -347,7 +347,9 @@ func _refresh() -> void:
 		_ap_row.add_child(pip)
 	if b.ap_drain > 0:  # 夺气: the enemy will take AP next round
 		_ap_row.add_child(Kit.label("夺气 -%d" % b.ap_drain, Kit.FONT_BODY, "red"))
-	_round_label.text = "第 %d/%d 回合" % [b.round_no, b.turn_limit]
+	var left := b.turn_limit - b.round_no
+	_round_label.text = "最后回合！" if left <= 0 else "第 %d/%d 回合" % [b.round_no, b.turn_limit]
+	_round_label.add_theme_color_override("font_color", Kit.c("red") if left <= 1 else Kit.c("text"))
 	_combo_label.text = "%d 连击 +%d%%" % [b.combo, b.combo * 10] if b.combo > 0 else ""
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
@@ -860,7 +862,9 @@ func _finish() -> void:
 			save.take(chest[i]["id"])
 		Game.battle_finished(true)
 	else:
-		await _banner("战　败", Kit.c("red"))
+		# say why: running out of rounds with HP left is not the same as being wiped out
+		var why := {"turns": "回合用尽 —— 撤退", "retreat": "全军撤退"}.get(b.lose_reason, "战　败") as String
+		await _banner(why, Kit.c("red"))
 		await get_tree().create_timer(0.6).timeout
 		Game.battle_finished(false)
 
