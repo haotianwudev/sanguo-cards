@@ -224,3 +224,8 @@
 - [x] 2026-10-09 battle `bh_wolf2` ← bh_wolf2.png · ok
 - [x] 2026-10-09 battle `c4_gaoshun` ← c4_gaoshun.png · ok
 - [x] 2026-10-09 battle `c4_lvbu` ← c4_lvbu.png · ok
+- [x] 2026-10-09 battle `c4_guosi` ← c4_guosi.png · ok
+- [x] 2026-10-09 battle `c5_dongzhuo` ← c5_dongzhuo.jpg · ok
+- [x] 2026-10-09 battle `c6_lijue` ← c6_lijue.jpg · ok
+- [x] 2026-10-09 battle `c7_jiling` ← c7_jiling.jpg · ok
+- [x] 2026-10-09 battle `hs_quyi` ← hs_quyi.png · ok

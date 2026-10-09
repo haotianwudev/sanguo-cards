@@ -2912,6 +2912,26 @@
     "c4_lvbu": {
       "src": "source/battles/c4_lvbu.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c4_guosi": {
+      "src": "source/battles/c4_guosi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c5_dongzhuo": {
+      "src": "source/battles/c5_dongzhuo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c6_lijue": {
+      "src": "source/battles/c6_lijue.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c7_jiling": {
+      "src": "source/battles/c7_jiling.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hs_quyi": {
+      "src": "source/battles/hs_quyi.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
