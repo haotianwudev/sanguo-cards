@@ -149,3 +149,37 @@
 - [x] 2026-10-08 relic `yuxi` ← yuxi.jpg · ok
 - [x] 2026-10-08 relic `zhaoxianbang` ← zhaoxianbang.jpg · ok
 - [x] 2026-10-08 portrait `zhugeliang` ← zhugeliang.webp · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `caobao` ← caobao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `caoren` ← caoren.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `chendao` ← chendao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `chendeng` ← chendeng.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `chenglian` ← chenglian.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `chengong` ← chengong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `chengui` ← chengui.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `fanchou` ← fanchou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `guanping` ← guanping.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `guanxing` ← guanxing.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `huangzu` ← huangzu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `huzhen` ← huzhen.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `jiangwei` ← jiangwei.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `lingtong` ← lingtong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `lusu` ← lusu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `niufu` ← niufu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `taoqian` ← taoqian.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `wangping` ← wangping.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `weixu` ← weixu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `weiyan` ← weiyan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `wenpin` ← wenpin.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `xiahoudun` ← xiahoudun.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `xunyou` ← xunyou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `xunyu` ← xunyu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `yangang` ← yangang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `yiji` ← yiji.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zhangbao` ← zhangbao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zhangji` ← zhangji.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zhangxiu` ← zhangxiu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zhangzhongjing` ← zhangzhongjing.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zhongyao` ← zhongyao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zhoucang` ← zhoucang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `zoudan` ← zoudan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `caimao` ← caomao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

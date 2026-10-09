@@ -233,6 +233,40 @@
 | `sunqian` | source/generals/sunqian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `kuaiyue` | source/generals/kuaiyue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunquan` | source/generals/sunquan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caobao` | source/generals/caobao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caoren` | source/generals/caoren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chendao` | source/generals/chendao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chendeng` | source/generals/chendeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chenglian` | source/generals/chenglian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chengong` | source/generals/chengong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `chengui` | source/generals/chengui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `fanchou` | source/generals/fanchou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `guanping` | source/generals/guanping.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `guanxing` | source/generals/guanxing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huangzu` | source/generals/huangzu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huzhen` | source/generals/huzhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiangwei` | source/generals/jiangwei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lingtong` | source/generals/lingtong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lusu` | source/generals/lusu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `niufu` | source/generals/niufu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `taoqian` | source/generals/taoqian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wangping` | source/generals/wangping.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `weixu` | source/generals/weixu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `weiyan` | source/generals/weiyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wenpin` | source/generals/wenpin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiahoudun` | source/generals/xiahoudun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xunyou` | source/generals/xunyou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xunyu` | source/generals/xunyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yangang` | source/generals/yangang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yiji` | source/generals/yiji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangbao` | source/generals/zhangbao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangji` | source/generals/zhangji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangxiu` | source/generals/zhangxiu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangzhongjing` | source/generals/zhangzhongjing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhongyao` | source/generals/zhongyao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhoucang` | source/generals/zhoucang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zoudan` | source/generals/zoudan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caimao` | source/generals/caimao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
