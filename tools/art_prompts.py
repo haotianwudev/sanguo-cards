@@ -2061,11 +2061,8 @@ def cg_prompt(scene: str, key: str = None, is_event: bool = False) -> tuple[str,
 
 
 def render_item(header: str, zh_prompt: str, en_prompt: str = None) -> list[str]:
-    lines = [header, "", "```", zh_prompt, "```"]
-    if en_prompt and en_prompt.strip() != zh_prompt.strip():
-        lines += ["", "<details>", "<summary>English Prompt (英文备用)</summary>", "", "```", en_prompt, "```", "</details>"]
-    lines.append("")
-    return lines
+    # Chinese only: the English fallback was dropped to keep ART-PROMPTS.md short
+    return [header, "", "```", zh_prompt, "```", ""]
 
 
 def fate_prompt(sym: str) -> str:

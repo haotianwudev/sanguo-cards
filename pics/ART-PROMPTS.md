@@ -117,20 +117,6 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Dong Feng (董奉), the Jiangdong doctor of the apricot grove legend的竖版人物立绘。
-外貌：Gentle, ageless-looking man in his 30s with a serene smile.
-铠甲与服饰：Simple Taoist-style physician robes in light green, a straw hat on his back.
-武器：Standing under a blossoming apricot tree, a medicine gourd at his hip.
-背景：与人物身份相符的古风氛围场景，柔和自然光。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zhangzhao` ⬜ 缺
 
 ```
@@ -142,20 +128,6 @@ Dong Feng (董奉), the Jiangdong doctor of the apricot grove legend的竖版人
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhang Zhao (张昭), the stern chief steward of the Sun household的竖版人物立绘。
-外貌：Stern, upright man in his 30s with a severe frown and a well-kept beard.
-铠甲与服饰：Dark formal official robes and cap.
-武器：Holding a thick stack of ledgers and a writing brush, looking disapprovingly at the viewer.
-背景：与人物身份相符的古风氛围场景，柔和自然光。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `qiaoguolao` ⬜ 缺
 
@@ -169,20 +141,6 @@ Zhang Zhao (张昭), the stern chief steward of the Sun household的竖版人物
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Qiao Guolao (乔国老), the fussy old father of the Qiao sisters的竖版人物立绘。
-外貌：Plump, cheerful old man in his 60s with a long white beard and rosy cheeks.
-铠甲与服饰：Rich brocade robes of a retired gentleman.
-武器：Hugging a dowry chest overflowing with silks, looking both proud and reluctant.
-背景：与人物身份相符的古风氛围场景，柔和自然光。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zhangxun` ⬜ 缺
 
 ```
@@ -194,20 +152,6 @@ Qiao Guolao (乔国老), the fussy old father of the Qiao sisters的竖版人物
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhang Xun (张勋), Yuan Shu's chief general, commanding tower ships on the Fei River的竖版人物立绘。
-外貌：Square-faced, heavy-browed man around 40 who looks like a proper general.
-铠甲与服饰：Gaudy gold-trimmed armor gifted by Yuan Shu.
-武器：A long ji, standing at the prow of a tower ship.
-背景：tower ships and a water fort on the Fei River。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `liuxun` ⬜ 缺
 
@@ -221,20 +165,6 @@ Zhang Xun (张勋), Yuan Shu's chief general, commanding tower ships on the Fei 
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Liu Xun (刘勋), Yuan Shu's greedy governor of Lujiang的竖版人物立绘。
-外貌：Pale, plump, greedy man around 40 with narrow eyes and gold rings on every finger.
-铠甲与服饰：Lavish official robes under ill-fitting armor.
-武器：Holding a register of girls chosen for the 'imperial' harem.
-背景：the walls of Wan city。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `luxun_young` ⬜ 缺
 
 ```
@@ -246,20 +176,6 @@ Liu Xun (刘勋), Yuan Shu's greedy governor of Lujiang的竖版人物立绘。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-young Lu Xun (陆逊), a quiet boy of about fourteen from the ruined Lu family of Shu — a child, not an adult; this key is for his younger appearance only, separate from the adult `luxun` card的竖版人物立绘。
-外貌：A slender boy of about fourteen with calm, old-for-his-age eyes.
-铠甲与服饰：Plain cloth robes with a scorched hem.
-武器：Sitting quietly on a burnt doorstep, hands on his knees, no weapon.
-背景：the half-burnt old Lu family mansion in Shu county。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `zhengbao` ⬜ 缺
 
@@ -273,20 +189,6 @@ young Lu Xun (陆逊), a quiet boy of about fourteen from the ruined Lu family o
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zheng Bao (郑宝), the gold-toothed bandit boss of Lake Chao who charges a toll to cross的竖版人物立绘。
-外貌：Short, stocky, sun-darkened man around 40 with a gold tooth and a swaggering grin.
-铠甲与服饰：Bare-chested under a stolen brocade robe.
-武器：A water-splitting trident over his shoulder.
-背景：a bandit water fort at the mouth of Lake Chao。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zangba` ⬜ 缺
 
 ```
@@ -298,20 +200,6 @@ Zheng Bao (郑宝), the gold-toothed bandit boss of Lake Chao who charges a toll
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zang Ba (臧霸), the bandit lord of Mount Tai who taxes the mountain passes的竖版人物立绘。
-外貌：Burly man in his 30s with a full beard and shrewd, calculating eyes.
-铠甲与服饰：Leather armor of a local strongman under a worn brocade robe.
-武器：A heavy broadsword, one boot resting on a wooden barricade.
-背景：a toll barrier on a Mount Tai mountain road。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `shenrong` ⬜ 缺
 
@@ -325,20 +213,6 @@ Zang Ba (臧霸), the bandit lord of Mount Tai who taxes the mountain passes的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Shen Rong (审荣), the nervous young nephew left to hold Ye city的竖版人物立绘。
-外貌：Anxious young officer in his 20s, sweat on his brow, suspicious eyes.
-铠甲与服饰：Ji province officer's armor that fits a little too loosely.
-武器：One hand on his sword hilt, the other gripping a battlement.
-背景：the walls of Ye city in a thunderstorm at night。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `liuyao` ⬜ 缺
 
 ```
@@ -350,20 +224,6 @@ Shen Rong (审荣), the nervous young nephew left to hold Ye city的竖版人物
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Liu Yao (刘繇), the indecisive Inspector of Yang province的竖版人物立绘。
-外貌：A refined but hesitant official in his 40s with a worried frown.
-铠甲与服饰：Inspector's official robes and a scholar's cap.
-武器：Clutching a roster scroll, no weapon.
-背景：a riverside camp at Niuzhu on the Yangtze。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `yanbaihu` ⬜ 缺
 
@@ -377,20 +237,6 @@ Liu Yao (刘繇), the indecisive Inspector of Yang province的竖版人物立绘
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Yan Baihu (严白虎), the swaggering local warlord of Wu commandery who calls himself king的竖版人物立绘。
-外貌：Brutish man around 40 with a heavy face and a streak of white in his hair.
-铠甲与服饰：A white tiger pelt over leather armor.
-武器：A great axe over his shoulder.
-背景：a hill fort in the Wu commandery hills。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `wanglang` ⬜ 缺
 
 ```
@@ -402,20 +248,6 @@ Yan Baihu (严白虎), the swaggering local warlord of Wu commandery who calls h
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Wang Lang (王朗), the eloquent scholar-governor of Kuaiji的竖版人物立绘。
-外貌：Dignified scholar around 50 with a long white beard, mid-argument.
-铠甲与服饰：Wide governor's robes and an official cap.
-武器：Stroking his beard with one hand and pointing as if debating, no weapon.
-背景：the gate of the Kuaiji prefectural office。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `zhoutai` ⬜ 缺
 
@@ -429,20 +261,6 @@ Wang Lang (王朗), the eloquent scholar-governor of Kuaiji的竖版人物立绘
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhou Tai (周泰), the silent ex-river-pirate who became Sun Ce's bodyguard的竖版人物立绘。
-外貌：Quiet, powerfully built man in his 20s covered in scars on face and arms.
-铠甲与服饰：Half-worn Jiangdong leather armor over a bare scarred chest.
-武器：A broad saber held guard-ready in front of him.
-背景：pirate skiffs on the Yangtze。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `jiangqin` ⬜ 缺
 
 ```
@@ -454,20 +272,6 @@ Zhou Tai (周泰), the silent ex-river-pirate who became Sun Ce's bodyguard的�
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Jiang Qin (蒋钦), Zhou Tai's sharp-eyed partner from the river pirates的竖版人物立绘。
-外貌：Lean, alert, sun-darkened man in his 20s.
-铠甲与服饰：Short river-fighter's clothes under leather armor.
-武器：A short halberd, standing on a boat's prow.
-背景：the open Yangtze。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `mateng` ⬜ 缺
 
@@ -481,20 +285,6 @@ Jiang Qin (蒋钦), Zhou Tai's sharp-eyed partner from the river pirates的竖�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Ma Teng (马腾), the old Xiliang warlord, father of Ma Chao的竖版人物立绘。
-外貌：Tall, dignified veteran around 50 with a long grey beard, high nose and deep-set eyes.
-铠甲与服饰：Xiliang iron armor under an old war robe.
-武器：A hand on his sword hilt.
-背景：Xiliang tents beside the Yellow River。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `hansui` ⬜ 缺
 
 ```
@@ -506,20 +296,6 @@ Ma Teng (马腾), the old Xiliang warlord, father of Ma Chao的竖版人物立�
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Han Sui (韩遂), the wily old fox of Xiliang的竖版人物立绘。
-外貌：Lean, shrewd man in his 50s with narrowed smiling eyes and a thin beard.
-铠甲与服饰：Xiliang leather armor under a fur cloak.
-武器：Twirling his beard, a sheathed sword at his side.
-背景：a Xiliang camp on the steppe。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `pangde` ⬜ 缺
 
@@ -533,20 +309,6 @@ Han Sui (韩遂), the wily old fox of Xiliang的竖版人物立绘。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Pang De (庞德), the iron-willed Xiliang champion的竖版人物立绘。
-外貌：Dark, rugged man in his 30s with a full beard and an unbending stare.
-铠甲与服饰：Heavy Xiliang armor and a dark cape.
-武器：A great saber held across his body.
-背景：the burning camps at Yanjin。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `tadun` ⬜ 缺
 
 ```
@@ -558,20 +320,6 @@ Pang De (庞德), the iron-willed Xiliang champion的竖版人物立绘。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Tadun (蹋顿), the Wuhuan chieftain beyond the Great Wall的竖版人物立绘。
-外貌：Fierce steppe chieftain around 40 with a shaved head except a few locks, high cheekbones.
-铠甲与服饰：A heavy fur cloak with gold ornaments.
-武器：A curved saber, on a sturdy steppe horse.
-背景：the grasslands below White Wolf Mountain with Wuhuan riders。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `gongsunkang` ⬜ 缺
 
@@ -585,20 +333,6 @@ Tadun (蹋顿), the Wuhuan chieftain beyond the Great Wall的竖版人物立绘�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Gongsun Kang (公孙康), the cool, calculating lord of Liaodong的竖版人物立绘。
-外貌：Shrewd, cold-eyed man around 30.
-铠甲与服饰：Liaodong fur coat over official robes.
-武器：Holding a closed wooden box in both hands, no weapon.
-背景：the gate of Xiangping city in Liaodong。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `liuzhang` ⬜ 缺
 
 ```
@@ -610,20 +344,6 @@ Gongsun Kang (公孙康), the cool, calculating lord of Liaodong的竖版人物�
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Liu Zhang (刘璋), the soft, indecisive governor of Yi province的竖版人物立绘。
-外貌：Plump, mild man around 40 with hesitant eyes.
-铠甲与服饰：Lavish governor's robes.
-武器：Holding a sealed letter, no weapon.
-背景：the governor's hall in Chengdu。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `yanyan` ⬜ 缺
 
@@ -637,20 +357,6 @@ Liu Zhang (刘璋), the soft, indecisive governor of Yi province的竖版人物�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Yan Yan (严颜), the stubborn old general of Ba commandery的竖版人物立绘。
-外貌：Unbending veteran in his 60s with white hair and beard, head held high.
-铠甲与服饰：Old Shu iron armor and a red cape.
-武器：A great saber.
-背景：the walls of Jiangzhou above the river。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zhangren` ⬜ 缺
 
 ```
@@ -662,20 +368,6 @@ Yan Yan (严颜), the stubborn old general of Ba commandery的竖版人物立绘
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhang Ren (张任), Yi province's most stubborn defender的竖版人物立绘。
-外貌：Stern, intense man in his 30s with thin lips and sharp brows.
-铠甲与服饰：Fine Shu iron armor with a teal cape.
-武器：A long spear.
-背景：the Golden Goose Bridge outside Luo city。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `fazheng` ⬜ 缺
 
@@ -689,20 +381,6 @@ Zhang Ren (张任), Yi province's most stubborn defender的竖版人物立绘。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Fa Zheng (法正), the sharp-tongued strategist of Shu的竖版人物立绘。
-外貌：Lean, clever man around 30 with a faint cold smile and piercing eyes.
-铠甲与服饰：Dark scholar's robes.
-武器：A rolled map of Yi province in hand.
-背景：a misty Shu mountain road。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `menghuo` ⬜ 缺
 
 ```
@@ -714,20 +392,6 @@ Fa Zheng (法正), the sharp-tongued strategist of Shu的竖版人物立绘。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Meng Huo (孟获), the proud king of the Nanzhong tribes的竖版人物立绘。
-外貌：Huge, dark-skinned king around 40 with curly hair and a tiger-tooth necklace.
-铠甲与服饰：Rhinoceros-hide armor with bone ornaments.
-武器：A great saber over his shoulder, rattan-armored warriors behind him.
-背景：the Nanzhong jungle and Coiled Snake Valley。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `luxun` ⬜ 缺
 
@@ -741,20 +405,6 @@ Meng Huo (孟获), the proud king of the Nanzhong tribes的竖版人物立绘。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Lu Xun (陆逊), the calm young strategist of the Lu family, now a young man of about nineteen的竖版人物立绘。
-外貌：Refined young man of about nineteen with calm, steady eyes.
-铠甲与服饰：Scholar's robes under light armor.
-武器：A long sword at his side, a fan in hand.
-背景：a river camp on the Han River。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `yujin` ⬜ 缺
 
 ```
@@ -766,20 +416,6 @@ Lu Xun (陆逊), the calm young strategist of the Lu family, now a young man of 
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Yu Jin (于禁), Cao Cao's strict, by-the-book general的竖版人物立绘。
-外貌：Severe, meticulous man around 40.
-铠甲与服饰：Immaculate black Cao army armor.
-武器：A long saber, standing behind a row of chevaux-de-frise.
-背景：the deep trenches and ramparts of Guandu。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `lidian` ⬜ 缺
 
@@ -793,20 +429,6 @@ Yu Jin (于禁), Cao Cao's strict, by-the-book general的竖版人物立绘。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Li Dian (李典), Cao Cao's scholarly general的竖版人物立绘。
-外貌：Calm, bookish man around 30.
-铠甲与服饰：Light Cao army armor over a scholar's robe.
-武器：A command flag in hand.
-背景：a raised platform with heavy crossbows at Guandu。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `xiahouyuan` ⬜ 缺
 
 ```
@@ -818,20 +440,6 @@ Li Dian (李典), Cao Cao's scholarly general的竖版人物立绘。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Xiahou Yuan (夏侯渊), Cao Cao's lightning-fast cavalry commander的竖版人物立绘。
-外貌：Lean, quick man around 40 with hawk-like eyes.
-铠甲与服饰：Light cavalry armor and a dark cape.
-武器：Twisting in the saddle to loose an arrow from a galloping horse.
-背景：dust clouds over Baima slope。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `zhanghe` ⬜ 缺
 
@@ -845,20 +453,6 @@ Xiahou Yuan (夏侯渊), Cao Cao's lightning-fast cavalry commander的竖版人�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhang He (张郃), the capable Hebei general now serving Cao Cao的竖版人物立绘。
-外貌：Sharp, capable man in his 30s with a short beard.
-铠甲与服饰：Cao army iron armor and a crimson cape.
-武器：A long spear.
-背景：the gate towers of Hulao Pass。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zhanglu` ⬜ 缺
 
 ```
@@ -870,20 +464,6 @@ Zhang He (张郃), the capable Hebei general now serving Cao Cao的竖版人物�
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhang Lu (张鲁), the Celestial Master of the Five Pecks of Rice in Hanzhong的竖版人物立绘。
-外貌：Gentle, lean man in his 40s with a long beard.
-铠甲与服饰：Daoist cap and robes.
-武器：Holding a wooden rice measure, no weapon.
-背景：a free rice-kitchen shelter in Hanzhong。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ### `zhangwei` ⬜ 缺
 
@@ -897,20 +477,6 @@ Zhang Lu (张鲁), the Celestial Master of the Five Pecks of Rice in Hanzhong的
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhang Wei (张卫), Zhang Lu's hot-headed younger brother的竖版人物立绘。
-外貌：Fierce-eyed man in his 30s, harsher than his brother.
-铠甲与服饰：Hanzhong iron armor over a Daoist robe.
-武器：A long saber.
-背景：the walls of Yangping Pass under the Qinling cliffs。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `xiahoumao` ⬜ 缺
 
 ```
@@ -922,20 +488,6 @@ Zhang Wei (张卫), Zhang Lu's hot-headed younger brother的竖版人物立绘�
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的竖版人物立绘。
-外貌：Pale, well-fed man around 30 looking flustered.
-铠甲与服饰：Fancy gold-trimmed armor that does not fit.
-武器：Clutching a horse's reins, ready to flee.
-背景：the gates of Chang'an。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
 
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
@@ -1123,16 +675,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the ruins of Luoyang: a desperate mob of starving refugees with hoes and sticks surging over rubble toward the grain carts。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c5_qinbing`
 
 ```
@@ -1140,16 +682,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a lotus garden at night: Lü Bu's Bingzhou guards with ji searching between the pavilions with lanterns。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c6_fubing`
 
@@ -1159,16 +691,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a long Chang'an street before dawn: Wang Yun's house troops in a line with ji and crossbows。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c6_xianzhen`
 
 ```
@@ -1176,16 +698,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the square before the Xuanping Gate in snow: black-armored Trap-Breaking Camp infantry behind tall shields。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c4_gaoshun`
 
@@ -1195,16 +707,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the back gate of a scholar's mansion in Chang'an before dawn, the house burning behind: the grim, dark-faced Gao Shun standing like a post behind a wall of tall black shields bristling with halberds, his Trap-Breaking Camp utterly silent。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c4_lvbu`
 
 ```
@@ -1212,16 +714,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the great Xuanping Gate of Chang'an in falling snow at dawn: Lü Bu on the rearing Red Hare with his halberd raised high, Gao Shun's black shield wall behind him; a woman in a black cloak (Diaochan, adult) seated behind his saddle looking away。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c6_shaoka`
 
@@ -1231,16 +723,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the Qingming Gate of Chang'an at night: a row of torches, Han guards in red and black with halberds barring the road, their officer holding out a written order。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c6_fanchou`
 
 ```
@@ -1248,16 +730,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a narrow mountain road east of Chang'an: the loud, brash Xiliang general Fan Chou on horseback swinging a huge saber, laughing, Xiliang cavalry pouring down the slope。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c6_lijue`
 
@@ -1267,16 +739,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：Hangu Pass at sunset: the gaunt, cruel Li Jue on horseback before a huge 李 banner, his blade still stained, rows of Xiliang cavalry filling the pass behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c7_qiaorui`
 
 ```
@@ -1284,16 +746,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a Yuan army camp gate in Nanyang in summer: the stout Qiao Rui tossing away a chicken bone and drawing his broad saber, Yuan soldiers scrambling out of their tents。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c7_leibo`
 
@@ -1303,16 +755,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a mountain road outside Wancheng: Lei Bo with a scar on his chin leading light cavalry in a charge, arrows in the air。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c7_chenlan`
 
 ```
@@ -1320,16 +762,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the walls of Wancheng in Nanyang: the grey-bearded general Chen Lan on the gate tower pointing a long spear down, archers along the battlements, the 袁 banner above。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c7_jiling`
 
@@ -1339,16 +771,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the west gate of Wancheng at dawn, smoke rising in the city behind: Ji Ling alone on horseback in gilded armor with his three-pointed double-edged blade, holding the gate while Yuan Shu's carriages flee behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c6_zhangxiu`
 
 ```
@@ -1356,16 +778,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a stone bridge over the Wei river at dawn: the cocky young Zhang Xiu alone on the bridge spinning his long spear into a blur of spear-tip flowers, Xiliang cavalry under a 张 banner behind; far back a thin man on a mule sniffing a wine gourd。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c6_zhangji`
 
@@ -1375,16 +787,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a Xiliang camp gate on the Wei river bank: the steady general Zhang Ji on foot with his spear planted beside him, war drums behind, soldiers pouring out; a thin man sitting on a grain cart by the gate, sighing。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `jx_jinfan`
 
 ```
@@ -1392,16 +794,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a ferry landing on the Han river: brocade-sailed fast boats blocking the crossing, river pirates with bells at their waists leaping onto the jetty with short blades and grappling ropes。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `jx_zongzei`
 
@@ -1411,16 +803,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a fortified clan village (wubao) outside Xinye: clan bandits and armed farmhands pouring out of the rammed-earth gate with cleavers and torches, their chief on the wall。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `jx_ganning`
 
 ```
@@ -1428,16 +810,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the Han river at noon: the young, cocky Gan Ning standing on the prow of a brocade-sailed boat drawing a great bow, bronze bells at his waist, his pirates cheering behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `jx_bubing`
 
@@ -1447,16 +819,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the north bank of the Yu river in autumn: a line of Jingzhou infantry with round shields painted 刘 and a forest of spears, having just waded across, reeds behind them。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `jx_gongshou`
 
 ```
@@ -1464,16 +826,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a reed marsh along the Yu river: Jingzhou archers half-hidden in tall reeds loosing a volley across the water。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `jx_huangzu`
 
@@ -1483,16 +835,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the south bank of the Yu river under a big 黄 banner: the gaunt grey veteran Huang Zu on horseback raising his ghost-head broadsword, Jingzhou troops and river boats behind him, arrows in the air。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `jx_shuijun`
 
 ```
@@ -1500,16 +842,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a Jingzhou river fortress on the Han river: bare-chested Jingzhou marines leaping from a line of war boats onto the jetty with pikes and rattan shields, a huge tiered flagship behind。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `jx_nushou`
 
@@ -1519,16 +851,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：inside a burning lakeside pavilion full of smoke: Cai family crossbowmen behind torn silk curtains shooting blindly into the haze, an overturned bronze brazier spilling embers。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `jx_caimao_a`
 
 ```
@@ -1536,16 +858,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a half-burnt banquet pavilion on a rock above the Han river: the burly Cai Mao clutching his bleeding right eye with one hand and swinging a long sword with the other, death-sworn guards around him, flames and smoke。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `jx_caimao_b`
 
@@ -1555,16 +867,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a moonlit banquet pavilion on a rock above the Han river, overturned tables: the burly Cai Mao in brocade over gilded armor cornered at the railing with his sword drawn, his last guards around him, crossbows now aimed at him from the curtains。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c5_fanchou`
 
 ```
@@ -1572,16 +874,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a courtyard duel ring at a feast: Fan Chou swinging a huge saber, laughing Xiliang officers cheering from the tables。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c5_zhangji`
 
@@ -1591,16 +883,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a courtyard duel ring at a feast: the steady Zhang Ji with his spear levelled, lantern light。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c5_niufu`
 
 ```
@@ -1608,16 +890,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a courtyard duel ring at a feast: Niu Fu charging with a heavy saber, Dong Bai standing up at the table shouting, Dong Zhuo watching with narrowed eyes。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c5_huzhen`
 
@@ -1627,16 +899,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the chancellor's inner gate at night: Hu Zhen barring the way with a broad saber as the great doors swing shut behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c4_guosi`
 
 ```
@@ -1644,16 +906,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a looted village road: Guo Si on horseback over captured grain carts, soldiers loading the villagers' last sacks, an old man knocked down, Dong Bai smashing a cart wheel with her twin hammers。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ### `c5_hall`
 
@@ -1663,16 +915,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：a wedding hall turned trap: red lanterns and silk, the doors slammed shut, black-armored Flying Bear cavalry pouring in from behind the curtains。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
-
 ### `c5_dongzhuo`
 
 ```
@@ -1680,16 +922,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版战斗场景插画：the steps before the chancellor's mansion at night: the enormous Dong Zhuo with a drawn sword among his elite black-armored guards, wedding lanterns burning behind him。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
-</details>
 
 ## 剧情插图 CG（横版 16:9）
 
@@ -1744,17 +976,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: a half-open camp gate on a rainy night by the Luo river, a broken sky-piercer halberd in the mud, a torn red-horse saddle set and a tiger-head bracer; no people, no blood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `end_zhumie`
 
 ```
@@ -1763,17 +984,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: a burned-out white candle, a tipped bronze wine cup, a commander's seal and a white feather fan on a tent table; no people, no blood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `end_juefa`
 
@@ -1784,17 +994,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: two broken mountain stockade gates in snow with torn banners tangled together, a huge halberd planted in front; no people, no blood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `end_menhou`
 
 ```
@@ -1803,17 +1002,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: a closed vermilion government gate at night with warm light through the crack, discarded black banners and broken tally arrows; no people, no blood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `end_chibi`
 
@@ -1824,17 +1012,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: a line of burning chained warships on the Yangtze at night, a small boat with a white coffin drifting south; no people, no blood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `end_guandu`
 
 ```
@@ -1843,17 +1020,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: a halberd planted in the mud of the Guandu riverbank at dawn mist, a faded red scarf on its tip, half a broad saber beside it; no people, no blood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `end_tianming`
 
@@ -1864,17 +1030,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an ending card illustration, quiet and symbolic: a broad saber and a white-wax spear crossed back to back on one stone terrace at sunrise, the south and north banners flying side by side; no people。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `end_locked`
 
 ```
@@ -1884,17 +1039,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a dark ink-paper thumbnail with a faint cinnabar seal containing a large question mark, almost no detail。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c5_yuexia`
 
 ```
@@ -1903,17 +1047,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a moonlit garden behind the Minister's mansion, a round moon gate: Diaochan (adult, of great beauty) finishing a silent dance half a step from the hero, long sleeves still drifting in the night wind, an empty wine cup on the stone steps; her smile teasing and unreadable; silver-blue moonlight。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c4_mangshan`
 
@@ -1925,18 +1058,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：dawn on Mount Mang north of Luoyang, mist below: Dong Bai (adult, silver ponytail, purple fur-trimmed riding armor) on a chestnut horse glancing back with red ears after a quick kiss, galloping downhill; the hero on his horse behind her touching his cheek, stunned; the grey city far below in the sunrise。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c5_chuxi`
 
 ```
@@ -1947,18 +1068,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：New Year's Eve on the highest roof of the chancellor's mansion in Chang'an: Dong Bai (adult) asleep on the hero's shoulder with half a burnt flatbread in her hand, the hero sitting still and not daring to look down; below, the city glowing with bonfires of crackling bamboo, snow on the tiles。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c4_xizi`
 
 ```
@@ -1967,17 +1076,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：lamplight inside a small army tent at night: Cai Wenji (adult, in white) guiding the hero's hand over a brush, her hand over his, both leaning over a sheet of paper with wobbly characters; soft warm glow, tender and shy。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c5_snow`
 
@@ -1988,17 +1086,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a snowy back veranda of a scholar's house at night: Cai Wenji (adult, in white) playing a guqin on her knees with snow settling on the strings, the hero sitting beside her in a red wedding robe she has just fitted on him; lantern glow, quiet and bittersweet。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c7_stars`
 
 ```
@@ -2008,17 +1095,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a grassy hilltop above an army camp on a summer night under a sky full of low stars: Cai Wenji (adult, in white) playing a guqin across her knees, the short-haired hero lying back in the grass listening。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c4_zhujun`
 
 ```
@@ -2027,17 +1103,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：Sun Jian's camp in the ruins of Luoyang: the veteran general Zhu Jun (grey-bearded, straight-backed, hearty laugh) slapping the huge Sun Jian on the shoulder, Sun Jian bowing formally for once; Sun Ce behind them red-faced trying not to laugh。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c6_yizu`
 
@@ -2049,18 +1114,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the palace steps of Chang'an the day after Dong Zhuo's death: Dong Bai (adult) kneeling numbly on the stone, the short-haired hero standing in front of her with his blade half drawn, the white-haired Huangfu Song stepping to his side; high above, the small boy emperor clutching a pillar。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c6_warn`
 
 ```
@@ -2071,18 +1124,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：night at a window in Chang'an: Diaochan (adult) in a black cloak, pale but smiling, leaning in at the hero's window by candlelight; in the neighbouring window Dong Bai slamming her shutters。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c4_siege`
 
 ```
@@ -2091,17 +1132,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：before dawn, torches around a scholar's house in Chang'an: the elderly Cai Yong being led away without resisting, looking back; Cai Wenji (adult, in white) reaching after him, held back by the short-haired hero。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c4_dongjia`
 
@@ -2113,18 +1143,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) standing in the doorway with her twin hammers, grey-haired veterans only as silhouettes behind her; the hero looking up from the straw。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c7_feng`
 
 ```
@@ -2135,18 +1153,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingertips on his wrist; at the tent flap Dong Bai (adult) slamming a hammer down and Cai Wenji (adult, in white) with a snapped zither string, both glaring。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c6_jiaxu`
 
 ```
@@ -2155,17 +1161,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) tied up with rope and lounging comfortably on sacks in a grain cart, still sniffing a wine gourd; young Sun Ce, who just tied him, holding the rope end with a spear on his shoulder; the short-haired hero studying him; Zhou Yu frowning over his ledger; comic。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c8_xuexi`
 
@@ -2177,18 +1172,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the wall of Xiangyang in grey rain at dawn, the city below silent with gates shut: the short-haired hero standing stiff and blank-eyed in battered silver armor; Dong Bai (adult) standing before him, trembling but not stepping back, saying something bitter; behind them young Sun Ce pale and afraid; restrained and bleak, no gore, no bodies。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c8_zupu`
 
 ```
@@ -2197,17 +1180,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the steps of the Xiangyang governor's mansion in the morning: a row of white-bearded Cai clan elders kneeling, the eldest striking a name out of an open clan genealogy with a brush; the pale, long-bearded scholar Liu Biao hurrying up with his official cap askew, sweating; Zhou Yu reading a long list of offered troops and money with shining eyes; the short-haired hero looking on, unimpressed; a little comic。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c6_jiaxu_join`
 
@@ -2218,17 +1190,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an evening in a Luoyang house: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded robe, gourd flask at his belt) at a table with the first bowl of red-braised pork, sniffing a cup of wine the short-haired hero has just poured him with a respectful bow; Lady Wu (adult) setting down more dishes; young Sun Ce staring at the pork, not daring to reach; warm and comic。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c8_jiayan`
 
 ```
@@ -2237,17 +1198,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a family supper in the courtyard of the Wancheng governor's house on an autumn evening: Lady Wu (adult) handing the short-haired hero a big bowl of chicken soup and ruffling his cropped hair; Sun Ce hanging over the edge of the pot trying to snatch meat; warm lantern light。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c8_liuxian`
 
@@ -2258,17 +1208,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the bank of the Yu river at sunset: Diaochan (adult, of great beauty) in a light pale-jade southern 'liuxian' skirt sitting hugging her knees on the grass, laughing with her hand over her mouth; in the shallows Sun Ce slipping while grabbing at a fish; Zhou Yu on a rock writing in his ledger。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c8_caifuren`
 
 ```
@@ -2277,17 +1216,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lavish welcome banquet in Xiangyang: Lady Cai (adult, purple gold-embroidered silks, phoenix hairpin) holding Cai Wenji's (adult, in white) hands over an open clan genealogy book, all warm smiles; beside them Diaochan (adult) accepting a box of pearls with an equally sweet smile; the elderly scholar Cai Yong stroking his beard sceptically in the background。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c8_shuige`
 
@@ -2298,17 +1226,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lavish pavilion over the Han river, the only door sealed by a fallen iron portcullis, crossbowmen behind the curtains: Diaochan (adult) in a pale-jade skirt draining a gold beast-shaped wine cup before the burly Cai Mao, her other hand already reaching for the hairpin in her hair; the short-haired hero half-rising with his blade half drawn, shouting; tense, no gore。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c8_xiangxiao`
 
 ```
@@ -2317,17 +1234,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the smoking ruin of a pavilion on a rock above the Han river at dawn: the short-haired hero kneeling, holding Diaochan (adult, pale, in a scorched pale-jade skirt) in his arms; she smiles faintly and touches his cropped hair; restrained and elegiac, no gore。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c8_henhai`
 
@@ -2338,17 +1244,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a cold rainy night on the bank of the Han river: the short-haired hero alone, crouching at the water's edge washing a pale-jade woman's skirt, holding half of a broken hairpin; behind him in the rain a young man in white mourning clothes stepping closer; bleak, restrained, no gore。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c8_dress`
 
 ```
@@ -2357,17 +1252,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a bedroom in the Xiangyang guesthouse in the afternoon: Diaochan (adult) at a bronze mirror in her most beautiful pale-jade skirt embroidered with water patterns; Lady Wu (adult) pinning her hair; the short-haired hero crouching beside her tucking a strand of hair behind her ear; gentle and warm。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c8_grapes`
 
@@ -2378,17 +1262,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lamplit banquet pavilion over the Han river: Diaochan (adult, pale-jade skirt) had risen and started toward the burly Cai Mao, one hand already at the hairpin in her hair, ready to drink the poison for the hero — and the short-haired hero has caught her by the waist and pulled her back into his arms, his other hand sweeping a gold beast-shaped wine cup away across the table and pressing a mandarin orange into her hand; she looks up at him, startled; across the table Cai Mao going green in the face; tense and tender。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c8_louchuan`
 
 ```
@@ -2398,17 +1271,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the bow of a great tiered warship on the moonlit Han river, fishing lights receding along both banks: Diaochan (adult) in a pale-jade skirt fluttering in the wind leaning lightly on the short-haired hero's shoulder, their fingers interlaced; in her other hand a small paper packet of hot roasted chestnuts, one half-peeled; a huge full moon over the river, silver ripples; tender, romantic, quiet。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c7_flee`
 
 ```
@@ -2417,17 +1279,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the east gate of Wancheng in a cloud of dust: Lady Feng (adult) lifting the curtain of her palanquin as it hurries away behind a few loaded carts and glancing back with a faint smile; the hero watching from the captured wall under a 孙 banner。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c4_tonggui`
 
@@ -2439,18 +1290,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：dawn in falling snow before the closed Xuanping Gate of Chang'an, seen from behind: the short-haired hero in battered silver armor, Dong Bai (adult) with her notched twin hammers on his left, Cai Wenji (adult, in white) holding a broken guqin on his right, the three holding hands and stepping forward together; restrained and elegiac, no gore。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c6_fenghou`
 
 ```
@@ -2459,17 +1298,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the throne hall in Chang'an: the ten-year-old boy emperor leaning forward on a huge throne, insisting in a trembling voice; below him the white-haired Wang Yun bowing with a smile that doesn't reach his eyes。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c6_escape`
 
@@ -2481,18 +1309,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：night escape from Chang'an: a covered carriage racing through a burning city gate, the boy emperor peeking out clutching a small bundle; Dong Bai (adult) riding alongside with her twin hammers; the hero riding on the other side with Diaochan (adult) behind his saddle。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c6_huihe`
 
 ```
@@ -2501,17 +1317,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the restored gate of Luoyang at dawn: the huge Sun Jian in his tiger-pelt cape kneeling on one knee in the dust before the small boy emperor stepping down from a battered carriage。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c6_seal`
 
@@ -2522,17 +1327,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a makeshift throne hall in half-ruined Luoyang: the boy emperor on a simple throne asking quietly; the huge Sun Jian clutching a brocade box against his chest, not offering it; Zhou Yu writing in his ledger with lowered eyes; Lady Wu (adult) watching Sun Jian from the back。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c7_huangzhong`
 
 ```
@@ -2542,17 +1336,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a captured camp in Nanyang: Huang Zhong, a sturdy man in his 40s in rough soldier's clothes, rope marks on his wrists, drawing a heavy bow to full; his arrow snapping the banner pole with the character 袁 on the far camp gate; Sun Ce gaping, the hero grinning。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c5_garden`
 
 ```
@@ -2561,17 +1344,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：behind a rockery in the palace garden of Chang'an: the ten-year-old boy emperor, his heavy bead-curtained crown taken off and set on a stone, rubbing his neck and looking up hopefully at the short-haired hero in silver armor, who crouches to his eye level; a eunuch keeps watch at the corner; a gentle, melancholy mood。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c5_feast`
 
@@ -2583,18 +1355,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lavish welcome feast in Dong Zhuo's mansion: the enormous Dong Zhuo peeling shrimp for his granddaughter Dong Bai (adult), who laughs with her mouth full; he wipes his eye with his sleeve。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c5_dance`
 
 ```
@@ -2604,17 +1364,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lantern-lit banquet hall: Diaochan, an adult woman of great beauty, dancing with long silk sleeves; the enormous Dong Zhuo leaning forward spellbound with wine in his beard; Wang Yun at the host's seat with a knowing half-smile。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c5_fengyi`
 
 ```
@@ -2623,17 +1372,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the Phoenix Pavilion in a lotus garden: Diaochan (adult) weeping on Lü Bu's shoulder at the railing; behind them the furious Dong Zhuo hurling Lü Bu's halberd; Lü Bu twisting away; Diaochan's eyes glancing sideways toward the viewer with the ghost of a smile。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c5_rescue`
 
@@ -2645,17 +1383,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a long street at night: Lü Bu on the rearing Red Hare charging in with his halberd, Diaochan (adult) holding on behind his saddle with bloodied hands, shouting。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `c4_wenji`
 
 ```
@@ -2666,18 +1393,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：night by a campfire in ruined Luoyang: Cai Wenji, an adult woman in white, holding her guqin with a broken string, telling her story; Dong Bai listening with folded arms, Lady Wu wrapping a cloak around Cai Wenji。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c4_peace`
 
 ```
@@ -2686,17 +1401,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：Sun Jian's tent in ruined Luoyang: the envoy Li Ru waving a feather fan and offering peace with a gentle smile; the huge Sun Jian sitting with crossed arms, scowling。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c4_betroth`
 
@@ -2708,18 +1412,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a comedic betrothal in a tent: the short-haired hero pointing at himself in disbelief; Dong Bai (adult) beside him looking away with bright red ears; Sun Ce leaping up in refusal; Lady Wu (adult) laughing behind her sleeve。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c5_enter`
 
 ```
@@ -2730,18 +1422,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the gates of Chang'an: the enormous Dong Zhuo hugging his granddaughter Dong Bai (adult), who laughs; over her shoulder his smiling eyes are cold; behind him Lü Bu on Red Hare, silent。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c5_diaochan`
 
 ```
@@ -2750,17 +1430,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a moonlit garden: Diaochan, an adult woman of great beauty, kneeling before an incense burner praying to the moon; Wang Yun and the hero watching from the garden gate。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `c5_dress`
 
@@ -2772,18 +1441,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a bedroom in Chang'an: Dong Bai (adult) in a red wedding dress turning happily before a bronze mirror, the hero behind her with a troubled face。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c5_wedding`
 
 ```
@@ -2794,18 +1451,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the wedding trap in a hall of red lanterns: the enormous Dong Zhuo raising his cup with a cruel smile; beside him Dong Bai (adult) in a red wedding dress lifting her veil in shock, the hero pulling her behind him。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
-
 ### `c5_death`
 
 ```
@@ -2815,18 +1460,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 （董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the moment of mercy, restrained: Dong Bai (adult) in her red wedding dress kneeling with her arms spread wide to shield a fallen figure on the palace steps, looking up at Lü Bu towering on Red Hare with his halberd raised; no gore。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-（董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）。）
-```
-</details>
 
 ## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）
 
@@ -2948,17 +1581,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a thatched hut in a bamboo grove: the genial hermit Sima Hui sitting at his door with a round bronze mirror, smiling and nodding 'good, good'; young Sun Ce leaning in eagerly pointing at the short-haired hero。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_pangdegong`
 
 ```
@@ -2967,17 +1589,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：fields at the foot of Mount Xian by the Han river: the old recluse Pang Degong leaning on his hoe, his wife bringing a lunch basket along the field ridge, both bowing to each other politely; the short-haired hero watching, oddly uneasy。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_huangchengyan`
 
@@ -2988,17 +1599,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a riverside workshop on the Mian river: the grey-bearded inventor Huang Chengyan crouching beside a little self-walking wooden cart; the short-haired hero staring at it in amazement。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_ganning`
 
 ```
@@ -3007,17 +1607,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a brocade-sailed fast boat rowing up the Han river: the young pirate Gan Ning (early 20s, cocky grin, bronze bells at his waist, a great bow on his back) on the prow shouting at the shore, come down from Ba commandery to look Jingzhou over; Zhou Yu on the bank clutching his ledger and purse。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_ambush`
 
@@ -3028,17 +1617,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：river bandits bursting out of tall reeds with gongs and rusty sabers, shouting。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_snake`
 
 ```
@@ -3047,17 +1625,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：comic scene: the short-haired hero hopping on one leg clutching his thigh, a small green bamboo viper slithering away, Sun Ce and Zhou Yu doubled over laughing。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_zuoci`
 
@@ -3068,17 +1635,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a white-haired old Taoist grinning with two front teeth, sitting on a boulder with a bamboo staff, purple smoke curling from a gourd in his hand。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_chest`
 
 ```
@@ -3087,17 +1643,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a rusty iron chest half-buried by the roadside, carved with four small characters 非礼勿开。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_hero`
 
@@ -3108,17 +1653,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a burly man in a roadside tavern smashing a table with one fist, wine cups flying, drinkers scattering。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_refugees`
 
 ```
@@ -3127,17 +1661,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a column of ragged refugees on a dusty road, an old man collapsed, a mother holding a child out toward the viewer。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_washer`
 
@@ -3148,17 +1671,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a cheerful adult woman washing clothes at a mountain stream, sleeves rolled up, laughing, a basket of cloth beside her。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_fruit`
 
 ```
@@ -3167,17 +1679,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a tree heavy with glossy red fruit by an empty road, Zhou Yu raising a warning finger。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_risk`
 
@@ -3188,17 +1689,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a small boat in thick river fog, an old boatman squatting at the bow smoking a long pipe, dangerous rapids ahead。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_temple`
 
 ```
@@ -3207,17 +1697,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a crumbling mountain temple with a noseless earth-god statue, half a stick of incense still smoking in the censer。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_huatuo`
 
@@ -3228,17 +1707,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a lean middle-aged doctor treating a village woman at a roadside medicine stall, his box painted 沛国华佗。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_yuji`
 
 ```
@@ -3247,17 +1715,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a Taoist in white blocking the road, waving a banner reading 于吉仙师 符水治百病, followers kneeling。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_merchant`
 
@@ -3268,17 +1725,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a plump merchant with a donkey cart piled with exotic goods, spreading his arms in welcome。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_smith`
 
 ```
@@ -3287,17 +1733,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a roadside smithy with a roaring forge, a bare-chested old blacksmith hammering a glowing blade。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_tomb`
 
@@ -3308,17 +1743,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a half-collapsed ancient tomb in a mountain hollow, cold wind from the entrance, Sun Ce stepping in eagerly while Zhou Yu checks his ledger。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_guanlu`
 
 ```
@@ -3327,17 +1751,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a young diviner at a fortune-telling stall under a tree, sign reading 管辂神算。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_xushao`
 
@@ -3348,17 +1761,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：the famous critic Xu Shao holding court under a tree by the roadside, a crowd of hopeful men waiting for his one-line verdicts。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_qiao`
 
 ```
@@ -3367,17 +1769,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：two beautiful adult sisters washing clothes by a river, one gentle and one lively, Sun Ce and Zhou Yu frozen mid-step staring。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_drink`
 
@@ -3388,17 +1779,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a tavern drinking contest: Sun Ce slamming a wine jar on the table, a crowd of drinkers circling and cheering。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_deserters`
 
 ```
@@ -3407,17 +1787,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：ragged deserters without armour crouching by the road gnawing bark, shrinking back in fear。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_storm`
 
@@ -3428,17 +1797,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a sudden thunderstorm turning a road into mud, the army struggling through the rain。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_horse`
 
 ```
@@ -3447,17 +1805,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a horse dealer holding the reins of two horses — a white-faced one with an ominous look and a fiery red one。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_convoy`
 
@@ -3468,17 +1815,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a few Xiliang soldiers escorting grain carts with sacks stamped 董 along a road below a hill。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_surrender`
 
 ```
@@ -3487,17 +1823,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a small group of men in yellow headscarves carrying a white flag, kneeling on a road。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_shanzei`
 
@@ -3508,17 +1833,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a one-eyed bandit with a big axe jumping out at a mountain bend, his gang behind him。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_shanzhai`
 
 ```
@@ -3527,17 +1841,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a mountain bandit fort with a tattered 替天行道 banner, smoke of roasting meat rising, Sun Ce swallowing。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_jieying`
 
@@ -3548,17 +1851,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a night camp raid: dogs barking, a wall of torches coming out of the dark。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_hj_camp`
 
 ```
@@ -3567,17 +1859,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a Yellow Turban remnant camp in a valley: old people, children and women around a pot of wild greens, thin smoke。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_hj_medics`
 
@@ -3588,17 +1869,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a ruined temple where a woman in a yellow headscarf cleans a wounded soldier's wound, a Taiping talisman on her medicine box。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_hj_road`
 
 ```
@@ -3607,17 +1877,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：Yellow Turban remnants charging out of a forest with sticks and bamboo spears, shouting。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_yuan_tax`
 
@@ -3628,17 +1887,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a roadside toll shed where two soldiers in Yuan livery block the road with spears, demanding rice。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_black_market`
 
 ```
@@ -3647,17 +1895,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a narrow alley at night lit by a green lantern, a masked man opening his coat full of stolen treasures。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_jz_spy`
 
@@ -3668,17 +1905,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a suspicious peddler caught at a city gate, a map of the city defences falling out of his carrying pole。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_veterans`
 
 ```
@@ -3687,17 +1913,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：two old soldiers, one missing an arm, sunning themselves at a city gate and recognising Sun Ce with joy。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_plague`
 
@@ -3708,17 +1923,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a village entrance hung with white cloth, an old doctor raising his hand to stop the viewer。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_yuxi_rumor`
 
 ```
@@ -3727,17 +1931,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：a crowded teahouse, everyone whispering behind their hands。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ### `e_tongyao`
 
@@ -3748,17 +1941,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
 
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：children clapping and running along a road singing, in the background the silhouette of a huge fat man。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
-
 ### `e_zhuhou_yan`
 
 ```
@@ -3767,17 +1949,6 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
 ```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-横版剧情事件插画：an envoy presenting an invitation card from the allied commander's camp, banquet tents in the background。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的旧银甲（肩甲刻虎纹），内衬绿色战袍，披黑色白毛边斗篷（不是虎皮），铠甲下摆露出虎皮内衬，肩扛孙坚的巨大宽刃古锭刀。）
-```
-</details>
 
 ## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）
 
