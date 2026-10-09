@@ -495,13 +495,13 @@ func test_north_chapter5_without_military_law_ends_in_ending_eight() -> void:
 	var p := walk(q, s, [])
 	for sid in ["xz_start", "xz_muster", "xz_youqi", "xz_xiahoudun", "xz_rest1", "xz_seal", "xz_mifu", "xz_needle", "xz_chaos",
 			"xz_accuse", "xz_banquet", "xz_daofu", "xz_menhou"]:
-		check(p.has(sid), "门后之诛 route passes " + sid)
+		check(p.has(sid), "失律 route passes " + sid)
 	for sid in ["xz_muster_j", "xz_law", "xz_caobao", "xz_lvbu", "xz_wedding"]:
-		check(not p.has(sid), "门后之诛 route never reaches " + sid)
+		check(not p.has(sid), "失律 route never reaches " + sid)
 	check_eq(p[-1], "xz_menhou")
-	check(s.run_records.has("结局八 · 门后之诛"), "the run reaches 结局八")
+	check(s.run_records.has("结局八 · 失律"), "the run reaches 结局八")
 	finish(q, s)
-	check(s.flags.has("结局八 · 门后之诛"))
+	check(s.flags.has("结局八 · 失律"))
 	check(Quests.current_quest(s) == null, "the story stops at 结局八")
 
 
@@ -531,7 +531,7 @@ func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
 			check(s.relics.has(r), "第五章 hands over the 宝物 " + r)
 		for line in ["刘备：秒接徐州印", "陈家：倒向主角", "刘备：投曹", "徐州：接任徐州牧", "张辽高顺：入队", "陈宫：供起来了", "赵云：成婚"]:
 			check(s.run_records.has(line), "第五章 records " + line)
-		check(not s.run_records.has("结局八 · 门后之诛"))
+		check(not s.run_records.has("结局八 · 失律"))
 		finish(q, s)
 		check(Quests.current_quest(s) == null, "未完待续 after 铁纪徐州")
 

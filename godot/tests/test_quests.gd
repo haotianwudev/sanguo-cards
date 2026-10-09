@@ -1039,7 +1039,7 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 
 
 func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
-	## 夏侯兰 can only be taken on after 「结局八 · 门后之诛」, 张宁 only after 「结局六 · 覆巢」 (the 张夫人 badend)
+	## 夏侯兰 can only be taken on after 「结局八 · 失律」, 张宁 only after 「结局六 · 覆巢」 (the 张夫人 badend)
 	var db := GameData.get_db()
 	var q: Dictionary = {}
 	for x in db.quests:
@@ -1055,8 +1055,8 @@ func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
 	check(Quests.option_hint(save, rescue).contains("结局六 · 覆巢"), "and the button says what is needed: " + Quests.option_hint(save, rescue))
 	save.flags = ["出生：冀州无极", "结局六 · 覆巢"]
 	check(not Quests.option_locked(save, rescue) and Quests.option_locked(save, junfa), "覆巢 opens 张宁's rescue only")
-	save.flags = ["出生：冀州无极", "结局六 · 覆巢", "结局八 · 门后之诛"]
-	check(not Quests.option_locked(save, junfa), "门后之诛 opens 夏侯兰's martial law")
+	save.flags = ["出生：冀州无极", "结局六 · 覆巢", "结局八 · 失律"]
+	check(not Quests.option_locked(save, junfa), "失律 opens 夏侯兰's martial law")
 
 
 func test_endings_are_config_and_every_story_ending_is_in_it() -> void:
