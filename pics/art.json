@@ -281,16 +281,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "jianyong": {
-      "src": "source/public-domain/jianyong.jpg",
+      "src": "source/generals/jianyong.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.55,
-        0.12
+        0.5,
+        0.22
       ],
-      "head": 0.08,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg",
-      "license": "CC BY-SA 4.0",
-      "artist": "Morio"
+      "head": 0.22
     },
     "kongrong": {
       "src": "source/generals/kongrong.jpg",
@@ -302,16 +299,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "liaohua": {
-      "src": "source/public-domain/liaohua.jpg",
+      "src": "source/generals/liaohua.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.45,
-        0.25
+        0.5,
+        0.22
       ],
-      "head": 0.1,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg",
-      "license": "CC BY-SA 3.0",
-      "artist": "SamSpade21"
+      "head": 0.22
     },
     "liubei": {
       "src": "source/generals/liubei.jpg",
@@ -341,16 +335,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "lvmeng": {
-      "src": "source/public-domain/lvmeng.jpg",
+      "src": "source/generals/lvmeng.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.4,
-        0.17
+        0.5,
+        0.22
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Lu_Meng.jpg",
-      "license": "Public domain",
-      "artist": "不詳 (Unknown)"
+      "head": 0.22
     },
     "machao": {
       "src": "source/generals/machao.jpg",
@@ -389,16 +380,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "pangtong": {
-      "src": "source/public-domain/pangtong.jpg",
+      "src": "source/generals/pangtong.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.45,
-        0.12
+        0.5,
+        0.22
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:PangTong.jpg",
-      "license": "Public domain",
-      "artist": "Unknown authorUnknown author"
+      "head": 0.22
     },
     "sunshangxiang": {
       "src": "source/generals/sunshangxiang.jpg",
@@ -446,16 +434,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "zhangjiao": {
-      "src": "source/public-domain/zhangjiao.jpg",
+      "src": "source/generals/zhangjiao.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.52,
-        0.13
+        0.5,
+        0.22
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg",
-      "license": "Public domain",
-      "artist": "Unknown author"
+      "head": 0.22
     },
     "zhangliao": {
       "src": "source/generals/zhangliao.jpg",
@@ -2655,6 +2640,15 @@
     },
     "zhoutai": {
       "src": "source/generals/zhoutai.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yanbaihu": {
+      "src": "source/generals/yanbaihu.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.5,

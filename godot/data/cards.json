@@ -5274,6 +5274,16 @@
       "weight": 3,
       "scope": "north"
     },
+    "yanbaihu": {
+      "name": "严白虎",
+      "rarity": "R",
+      "troop": "bandit",
+      "bonus": {
+        "hp": 45,
+        "at": 14
+      },
+      "scope": "south"
+    },
     "caocao": {
       "name": "曹操",
       "rarity": "SSR",

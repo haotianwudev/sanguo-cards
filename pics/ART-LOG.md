@@ -214,3 +214,9 @@
 - [x] 2026-10-09 portrait `zhangzhao` ← zhangzhao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-09 portrait `zhengbao` ← zhengbao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-09 portrait `zhoutai` ← zhoutai.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `jianyong` ← jianyong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `liaohua` ← liaohua.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `lvmeng` ← lvmeng.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `pangtong` ← pangtong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `zhangjiao` ← zhangjiao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 portrait `yanbaihu` ← yanbaohu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

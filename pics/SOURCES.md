@@ -35,24 +35,24 @@
 | `jingzhou_shuijun` | source/soldiers/jingzhou_shuijun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guanyu` | source/generals/guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangzhong` | source/generals/huangzhong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `jianyong` | source/public-domain/jianyong.jpg | [链接](https://commons.wikimedia.org/wiki/File:Jian_Yong_2016_Han_Zhao_Lie_Miao.jpg) | CC BY-SA 4.0 | Morio |
+| `jianyong` | source/generals/jianyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `kongrong` | source/generals/kongrong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `liaohua` | source/public-domain/liaohua.jpg | [链接](https://commons.wikimedia.org/wiki/File:LiaoHuaPic.jpg) | CC BY-SA 3.0 | SamSpade21 |
+| `liaohua` | source/generals/liaohua.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `liubei` | source/generals/liubei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lvbu` | source/generals/lvbu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lvlingqi` | source/generals/lvlingqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `lvmeng` | source/public-domain/lvmeng.jpg | [链接](https://commons.wikimedia.org/wiki/File:Lu_Meng.jpg) | Public domain | 不詳 (Unknown) |
+| `lvmeng` | source/generals/lvmeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `machao` | source/generals/machao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `madai` | source/generals/madai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mifang` | source/generals/mifang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `mizhu` | source/generals/mizhu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `pangtong` | source/public-domain/pangtong.jpg | [链接](https://commons.wikimedia.org/wiki/File:PangTong.jpg) | Public domain | Unknown authorUnknown author |
+| `pangtong` | source/generals/pangtong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunshangxiang` | source/generals/sunshangxiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taishici` | source/generals/taishici.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xuchu` | source/generals/xuchu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xuhuang` | source/generals/xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `zhangjiao` | source/public-domain/zhangjiao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg) | Public domain | Unknown author |
+| `zhangjiao` | source/generals/zhangjiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangliao` | source/generals/zhangliao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhaoyun` | source/generals/zhaoyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhugeliang` | source/generals/zhugeliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -298,6 +298,7 @@
 | `zhangzhao` | source/generals/zhangzhao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhengbao` | source/generals/zhengbao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhoutai` | source/generals/zhoutai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yanbaihu` | source/generals/yanbaihu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
