@@ -385,7 +385,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
 		var p := walk(q, s, fork)
 		for sid in ["hn_years", "hn_letter", "hn_shu", "hn_zhoujia", "hn_luxun", "hn_lusu", "hn_liuxun", "hn_wan_rest",
 				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_zhengbao", "hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng",
-				"hn_bridge", "hn_wedding", "hn_end"]:
+				"hn_bridge", "hn_feng2", "hn_wedding", "hn_end"]:
 			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
 		check_eq(p[-1], "hn_end")
 		for c in ["lusu", "chenwu", "daqiao"]:
@@ -395,6 +395,15 @@ func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
 			check(s.run_records.has(line), "第六章 records " + line)
 		finish(q, s)
 		check(Quests.current_quest(s) == null, "未完待续 after 第六章")
+
+
+func test_south_chapter6_xiaoqiao_remembers_the_river_only_if_they_met_in_chapter1() -> void:
+	var met := ch6s_save()
+	met.flags.append("二乔：河边初见")
+	var p := walk(quest_by_id("huainan_s"), met, [])
+	check(p.has("hn_qiao_b") and not p.has("hn_qiao"), "met at the river in 第一章: 小乔 knows 周瑜")
+	var fresh := walk(quest_by_id("huainan_s"), ch6s_save(), [])
+	check(fresh.has("hn_qiao") and not fresh.has("hn_qiao_b"), "never met: a first meeting")
 
 
 func test_south_chapter6_plays_with_real_fights() -> void:

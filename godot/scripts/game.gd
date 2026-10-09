@@ -250,6 +250,11 @@ func demo(name: String) -> void:
 				if not save.flags.has(line):
 					save.flags.append(line)
 			Quests.begin(q, save, rng)
+			Quests.pick_fate(save, 0)
+			for a in OS.get_cmdline_user_args():  # --at=<square id>: start there instead (only its own text plays)
+				if a.begins_with("--at="):
+					save.square = a.substr(5)
+					save.visited.append(save.square)
 			show_screen(MapScreen.new())
 		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)
 			save.flags = ["出生：冀州无极"]
