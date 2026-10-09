@@ -3956,11 +3956,11 @@
     },
     "taishici": {
       "name": "太史慈",
-      "rarity": "SR",
+      "rarity": "SSR",
       "troop": "archer",
       "bonus": {
-        "hp": 60,
-        "at": 22
+        "hp": 85,
+        "at": 30
       },
       "skills": [
         "shenting"
@@ -4312,7 +4312,7 @@
     "mayunlu": {
       "name": "马云騄",
       "rarity": "SR",
-      "troop": "cavalry",
+      "troop": "archer",
       "bonus": {
         "hp": 60,
         "at": 21
@@ -4836,7 +4836,7 @@
     "quyi": {
       "name": "「先登死士」麹义",
       "rarity": "SR",
-      "troop": "infantry",
+      "troop": "archer",
       "person": "quyi",
       "bonus": {
         "hp": 60,
@@ -4866,7 +4866,7 @@
     "baima_yicong": {
       "name": "白马义从",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "archer",
       "bonus": {
         "hp": 25,
         "at": 12
@@ -5075,7 +5075,7 @@
     "zhangren": {
       "name": "张任",
       "rarity": "SR",
-      "troop": "spear",
+      "troop": "archer",
       "bonus": {
         "hp": 62,
         "at": 21
@@ -5713,6 +5713,85 @@
         "hp": 90,
         "at": 22
       }
+    },
+    "huangxu": {
+      "name": "黄叙",
+      "rarity": "R",
+      "troop": "archer",
+      "bonus": {
+        "hp": 40,
+        "at": 13
+      },
+      "scope": "south"
+    },
+    "bingzhou_nu": {
+      "name": "并州强弩手",
+      "rarity": "N",
+      "troop": "archer",
+      "bonus": {
+        "hp": 10,
+        "at": 12
+      },
+      "elite": true,
+      "weight": 1,
+      "scope": "north"
+    },
+    "jizhou_nu": {
+      "name": "冀州强弩手",
+      "rarity": "N",
+      "troop": "archer",
+      "bonus": {
+        "hp": 10,
+        "at": 10
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "taihang_lieshou": {
+      "name": "太行猎户",
+      "rarity": "N",
+      "troop": "archer",
+      "bonus": {
+        "hp": 5,
+        "at": 11
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "wuhuan_sheshou": {
+      "name": "乌桓骑射手",
+      "rarity": "N",
+      "troop": "archer",
+      "bonus": {
+        "hp": 15,
+        "at": 12
+      },
+      "elite": true,
+      "weight": 1,
+      "scope": "north"
+    },
+    "loucuan_nushou": {
+      "name": "楼船弩手",
+      "rarity": "N",
+      "troop": "archer",
+      "bonus": {
+        "hp": 15,
+        "at": 11
+      },
+      "elite": true,
+      "weight": 1,
+      "scope": "south"
+    },
+    "bashu_nu": {
+      "name": "巴蜀连弩手",
+      "rarity": "N",
+      "troop": "archer",
+      "bonus": {
+        "hp": 10,
+        "at": 12
+      },
+      "elite": true,
+      "weight": 1
     }
   },
   "enemies": {
