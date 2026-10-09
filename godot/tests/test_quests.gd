@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "shouluoyang", "changan", "beihai", "dongui", "jingxiang", "huainan_s"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "shouluoyang", "changan", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -1099,7 +1099,7 @@ func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() 
 	## one with fights, one without (？ / 宝箱 / 招募) — so the choice is "fight for it" or "look around", never one lonely square each
 	var db := GameData.get_db()
 	var forks := 0
-	for qid in ["luoyang_n", "heishan", "beihai"]:
+	for qid in ["luoyang_n", "heishan", "beihai", "xuzhou"]:
 		var q: Dictionary = {}
 		for x in db.quests:
 			if x["id"] == qid:

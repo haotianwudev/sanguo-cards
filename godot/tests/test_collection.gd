@@ -451,7 +451,7 @@ func test_the_two_routes_recruit_from_their_own_casts() -> void:
 			check(c.get("scope", "") != "south", "north run: %s is a south general" % c["id"])
 	var n_ids: Array = ["R", "SR", "SSR"].map(func(r): return north.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
 	var s_ids: Array = ["R", "SR", "SSR"].map(func(r): return south.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
-	check(n_ids.has("zhangliao") and not n_ids.has("zhoutai") and s_ids.has("zhoutai") and not s_ids.has("zhangliao"), "each side has its own: " + str(n_ids.size()))
+	check(n_ids.has("xiahouyuan") and not n_ids.has("zhoutai") and s_ids.has("zhoutai") and not s_ids.has("xiahouyuan"), "each side has its own: " + str(n_ids.size()))
 	check(n_ids.has("guanyu") and s_ids.has("guanyu"), "the ones both stories use are in both")
 	check(n_ids.size() >= 40 and s_ids.size() >= 40, "neither side is thin: %d / %d" % [n_ids.size(), s_ids.size()])
 	var north_history := SaveData.create()

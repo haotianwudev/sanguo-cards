@@ -24,11 +24,34 @@ HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，头发
 HERO_MODERN = "主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器"
 
 
+_NORTH_CGS: set = set()
+
+
+def _north_cgs() -> set:
+    ## every CG the north route shows: squares of north quests (event_scope north) and the north half of the prologue,
+    ## events scoped to the north or to a north quest, and north endings — read from the game data, not from key prefixes
+    if not _NORTH_CGS:
+        gd = ROOT / "godot" / "data"
+        story = json.loads((gd / "story.json").read_text("utf-8"))
+        north_q = {q["id"] for q in story["quests"] if q.get("event_scope") == "north"}
+        for q in story["quests"]:
+            for sid, s in q["squares"].items():
+                if s.get("cg") and (q["id"] in north_q or sid.startswith("jz_")):
+                    _NORTH_CGS.add(s["cg"])
+        for ev in story["events"].values():
+            if ev.get("cg") and ev.get("scope") in north_q | {"north"}:
+                _NORTH_CGS.add(ev["cg"])
+        for e in json.loads((gd / "endings.json").read_text("utf-8"))["endings"].values():
+            if e.get("cg") and e.get("route") == "north":
+                _NORTH_CGS.add(e["cg"])
+    return _NORTH_CGS
+
+
 def hero_note(key: str) -> str:
     ## which outfit line a CG gets: before the transmigration (the opening), the north route, or the south default
     if key in ("c1_era",):
         return HERO_MODERN
-    if key and (key.startswith(("jz_", "ln_")) or key.endswith("_north")):
+    if key and (key.startswith(("jz_", "ln_", "n5_")) or key.endswith("_north") or key in _north_cgs()):
         return HERO_NORTH
     return HERO
 STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
@@ -1204,6 +1227,9 @@ BATTLES = {
     "hn_leichen": "濡须口江面上两条吃水极深的破船，船舱里塞满金银箱子；雷薄（粗豪的中年武将，持长枪）与陈兰（瘦长的中年武将，持长枪）并肩站在船头，一脸「怎么又是你」的晦气表情；远处灊山云雾缭绕",
     "hn_zhangxun": "寿春城南淝水最窄处，十几条高大的楼船用铁索连成一道水上城墙，最高的楼船上站着袁术大将张勋（三十多岁、神情严整的将军，黄色战袍，手按佩剑），船舷上弩手密布，远处是寿春城墙",
     "hn_shouchun": "破晓时分的寿春南门水寨，黄色「仲」字大旗猎猎，仲氏禁军（金黄铠甲的禁卫长戟兵）在水门前列阵死守，城头倾泻火油；水门内几条载满金银箱子的快船正要冲出；远处东门北门火光冲天",
+    "xz_xiahoudun": "下邳城外的山坡上，曹军殿后军列阵，「曹」字大旗下，夏侯惇（三十多岁的悍将，两眼完好，神情冷峻，黑色铠甲，单手提一杆长枪）独自立马阵前，眼神像刀子；远处是下邳城墙",
+    "xz_caobao": "下邳城的街口，徐州大将曹豹（四十岁上下，满脸横肉、骄横跋扈，华丽铠甲）叉腰站在家兵中间，家兵们拔刀拦街，身后是他的府门；街边百姓躲在门后",
+    "xz_lvbu": "三更天的小沛城门轰然大开，火把照亮夜色：吕布（成年猛将，雉尾金冠，红色铠甲）骑着赤兔马单骑冲出城门，方天画戟横扫，身后城头一片混乱，城外北海军的哨卡火把连成一线",
 }
 
 # story cg key: the scene
@@ -1356,6 +1382,11 @@ CGS = {
     "c9_bridge": "寿春城破的夜晚，火光映红了淮水：画面左边，南线主角站在荆州战船的船头；画面右边远处，淮水浮桥的另一头，一位骑马的北军主帅（和主角同一张脸，但头发束成发髻，穿河北式旧鱼鳞甲，披雪白貂裘）正抬手揉太阳穴；两人隔着河上的烟雾遥遥相望，像镜子的两面，神秘而略带超现实感",
     "c9_coat": "庐江江边小院的黄昏：吴夫人（成年女性，慈和的中年贵妇）把一件旧冬衣递到冯夫人（成年女性，三十岁上下的美艳贵妇，华服有些凌乱）手里；冯夫人低着头抱着冬衣，脸上的笑僵住了；温暖而克制",
     "c9_wedding": "庐江的喜堂，红烛高照：孙策（少年将军，大红喜服，手抖得把交杯酒洒了一半）与大乔（成年女性，凤冠霞帔）并肩；周瑜（大红喜服）把一本旧账本郑重地交到小乔（成年女性，凤冠霞帔，正好奇地翻看）手里；热闹喜庆，略带搞笑",
+    "n5_seal": "徐州刺史府的病房里药味浓重：病榻上的陶谦（六十多岁的老人，面如金纸）颤巍巍地伸手；刘备（三十多岁，大耳垂肩，宽厚的面相）一步跨上前长跪，双手稳稳接过徐州牧大印；张飞（黑脸虬髯的猛将）在后面摸着后脑勺一脸发懵；主角站在一旁目瞪口呆",
+    "n5_mizhen": "下邳酒楼的接风宴上，红烛高照：糜贞（成年女性，二十岁上下的徐州千金，正红色织金襦裙）捧着白玉酒壶大大方方地给赵云斟酒；赵云（英俊的年轻将军，白袍银甲）端着酒杯耳根红透；郭嘉在后面捂嘴偷笑",
+    "n5_needle": "徐州刺史府的内堂，烛光昏黄：张宁（成年女性，二十岁上下的清秀医女，素衣）跪坐在陶谦病榻前施针，颈间露出一块刻着「太平」二字的黄玉佩；帘后站着年轻文士陈登，他身边的校尉盯着那块玉佩，脸色发白",
+    "n5_beat": "小沛城外的旷野：吕布骑着赤兔马冲出阵来，方天画戟劈向刘备的面门；刘备抱头鼠窜，鞋都跑丢了一只；关羽（红脸长髯，绿袍，青龙偃月刀）与张飞（黑脸虬髯，丈八蛇矛）拼死断后；热闹、略带搞笑",
+    "n5_wedding": "下邳十里红妆的喜堂：赵云（白袍换成大红锦袍）端着交杯酒手直抖，糜贞（成年女性，凤冠霞帔）低头含笑；少女甄宓（十几岁的孩子，只画孩子该有的样子）捧着凤冠跑过；吕玲绮（成年女性，短发女将）倚在门框上笑",
 }
 
 
@@ -1380,6 +1411,7 @@ MAPS = {
                "Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three "
                "heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky",
     "huainan_s": "【地图共 38 列，南线第六章·淮南折帝旗】自左向右依次：①冬日的襄阳城与汉江水寨；②顺江东下的长江江面；③庐江舒县，周家庄园与大粮仓、半边焦黑的陆家旧宅；④居巢金色的稻田与两座圆形粮囤；⑤皖城城郭与江边驿馆、画舫；⑥巢湖湖口的水贼破船与濡须口；⑦淝水两岸的芦苇荡；⑧寿春城与南门水寨、淮水浮桥；⑨最右端庐江挂满红灯笼的喜堂",
+    "xuzhou": "【地图共 32 列，北线第五章·铁纪徐州】自左向右依次：①北海城与屯田的田野；②南下的官道与泗水；③下邳城外的山坡战场；④下邳城、刺史府与热闹的市集、糜家酒楼；⑤小沛城与城外的营寨哨卡；⑥最右端挂满红绸的下邳喜堂",
 }
 
 # relic icons (cards.json relics id -> the object itself)
@@ -1428,6 +1460,9 @@ RELICS = {
     "wentai_shu": "一封汉代家书：卷起的帛书系着一根红绳，字迹又大又歪、墨迹洇透纸背，旁边压着一块洛阳点心",
     "zhou_pu": "一卷汉代竹简族谱，用青色丝绳编连，竹简上刻着工整的家族世系，最末一片竹简颜色明显更新",
     "weixi": "一方假玉玺：通体洁白的玉印，印钮雕成盘龙，刻工极其精细，印面朱红，底座裂了一道细纹",
+    "xuzhou_yin": "一方汉代徐州牧铜印，印钮为龟形，系着紫色绶带，印面朱红",
+    "mijia_chuan": "一艘精致的汉代商船模型，船帆上绣着一个「糜」字，船舱里堆着盐包",
+    "chen_mago": "一叠写满字的竹简与帛书草稿，字迹潦草激愤，边角卷起，被人用丝绳仔细捆好，像要裱起来收藏",
 }
 
 
@@ -1495,6 +1530,11 @@ EVENTS = {
     "hn_longwang": "巢湖边一座破旧的龙王庙，香炉里青烟袅袅，泥塑的龙王披着褪色的红袍，供桌上一只装满铜钱的香油钱箱；少年将军孙策跪在蒲团上磕头，湖面雾气弥漫",
     "hn_qianshan": "灊山云雾缭绕的山道上，背着柴担的老樵夫拄着扁担，指着远处山腰上冒着炊烟的贼寨；主角顺着他指的方向望去",
     "hn_shizhe": "军帐中，一个风尘仆仆的洛阳信使捧上一只精致的食盒，盒里是洛阳点心，盒盖上压着一张字迹又大又歪的字条；少年将军孙策伸手就要拿，被主角一把拦住",
+    "xz_shiji": "下邳热闹的市集，摊位上摆满东海的鱼、彭城的布、淮南的茶；少女甄宓（十几岁的孩子）拉着主角的袖子，指着一个卖泥老虎的摊子",
+    "xz_shangchuan": "泗水码头上停着一排大商船，船帆上绣着「糜」字；糜芳站在船头冲岸上招手，船上堆满盐包和货箱",
+    "xz_yanchang": "东海边白花花的盐场，盐工们在烈日下翻盐；张夫人（成年女性，富态精明的贵妇）蹲下来捏起一撮盐尝味道",
+    "xz_shuzhai": "陈家的书斋里书堆得比人还高，老人陈珪（六十多岁，精明的老狐狸，笑眯眯）坐在书堆中间，对着主角伸出一根手指出题",
+    "xz_liumin": "官道边一群逃难的徐州百姓坐在路旁，张宁（成年女性，清秀医女）蹲下来给一个发烧的孩子施针，旁边的老人拉着她的衣角",
 }
 # 天命 pictures (cards.json fates id -> symbol); godot/data/art/fates/<id>.png, shown on the 天命 pick
 FATES = {

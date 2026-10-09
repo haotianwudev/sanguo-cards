@@ -744,6 +744,42 @@
         "ap_round": 1,
         "guard": -0.1
       }
+    },
+    "xuzhou_yin": {
+      "name": "徐州牧印",
+      "troop": "lord",
+      "icon": "印",
+      "rarity": "story",
+      "desc": "陶谦遗表里交到你手上的大印。刘备捧过一回，没捧热。攻击 +6%，体力 +6%，受到的伤害 -5%",
+      "mods": {
+        "at": 0.06,
+        "hp": 0.06,
+        "guard": 0.05
+      }
+    },
+    "mijia_chuan": {
+      "name": "糜家海船",
+      "troop": "logistics",
+      "icon": "船",
+      "rarity": "story",
+      "desc": "糜贞的嫁妆：糜家的船队，东海的鱼盐一船一船往回运。开局回复 10% 体力；每打赢一场，回复 6% 体力",
+      "mods": {
+        "start_heal": 0.1
+      },
+      "after_win": 0.06
+    },
+    "chen_mago": {
+      "name": "陈先生的骂稿",
+      "troop": "strategist",
+      "icon": "骂",
+      "rarity": "story",
+      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士部队：攻击 +25%；但每场开局 AP -1",
+      "mods": {
+        "troop_at": {
+          "strategist": 0.25
+        },
+        "ap_start": -1
+      }
     }
   },
   "_beasts": "野兽卡 (beast: true — 野猪, 白额虎): beasts, not soldiers or generals; for now they never drop or turn up in chests or pools",
@@ -9125,6 +9161,256 @@
         }
       ],
       "card": "inf_n"
+    },
+    "cao_youqi": {
+      "name": "曹军游骑",
+      "portrait": "xiliang_bing",
+      "hp": 12000,
+      "at": 350,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "冲锋",
+          "power": 1.2,
+          "weight": 3
+        },
+        {
+          "name": "游斗",
+          "power": 0.8,
+          "weight": 1
+        },
+        {
+          "name": "劫掠",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        }
+      ],
+      "card": "xiliang_bing"
+    },
+    "cao_buzu": {
+      "name": "曹军步卒",
+      "portrait": "inf_n",
+      "hp": 13000,
+      "at": 360,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长枪",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "军阵",
+          "power": 0,
+          "weight": 1,
+          "heal": 0.05
+        },
+        {
+          "name": "围攻",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "inf_n"
+    },
+    "xiahoudun_e": {
+      "name": "曹军殿后·夏侯惇",
+      "portrait": "xiahoudun",
+      "hp": 23000,
+      "at": 440,
+      "actions": 2,
+      "phys_resist": 0.15,
+      "moves": [
+        {
+          "name": "长枪突刺",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "怒目",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "殿后军令",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "回马枪·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "回马枪"
+        },
+        {
+          "name": "回马枪",
+          "power": 2.3,
+          "weight": 0,
+          "pierce": true
+        }
+      ],
+      "card": "xiahoudun"
+    },
+    "caobao_jiabing": {
+      "name": "曹豹家兵",
+      "portrait": "caobao",
+      "hp": 16000,
+      "at": 390,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "家兵乱刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "仗势欺人",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "强抢",
+          "power": 1.4,
+          "weight": 1
+        }
+      ],
+      "card": "caobao"
+    },
+    "taofu_daofu": {
+      "name": "陶府刀斧手",
+      "portrait": "inf_n",
+      "hp": 60000,
+      "at": 700,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "刀斧齐下",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "金钟一响",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "毒弩",
+          "power": 0.8,
+          "weight": 1,
+          "burn_party": 0.1,
+          "turns": 3
+        },
+        {
+          "name": "封门",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "inf_n"
+    },
+    "langqi5": {
+      "name": "并州狼骑",
+      "portrait": "bingzhou",
+      "hp": 14500,
+      "at": 390,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "马刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "狼群冲阵",
+          "power": 1.5,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "回马箭",
+          "power": 1.2,
+          "weight": 1
+        }
+      ],
+      "card": "bingzhou"
+    },
+    "xianzhen5": {
+      "name": "陷阵营兵",
+      "portrait": "inf_n",
+      "hp": 15000,
+      "at": 400,
+      "actions": 2,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "长戟",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "盾墙",
+          "power": 0,
+          "weight": 1,
+          "heal": 0.06
+        },
+        {
+          "name": "推进",
+          "power": 1.4,
+          "weight": 1
+        }
+      ],
+      "card": "xianzhen"
+    },
+    "lvbu_xiaopei": {
+      "name": "吕布",
+      "portrait": "lvbu",
+      "hp": 32000,
+      "at": 580,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "方天画戟",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "赤兔冲阵",
+          "power": 1.3,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "无双·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "天下无双"
+        },
+        {
+          "name": "天下无双",
+          "power": 2.4,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "困兽",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "lvbu"
     }
   },
   "scenarios": {
@@ -9819,6 +10105,51 @@
       "name": "寿春南门·袁术水寨",
       "turn_limit": 15,
       "enemy": "zhongshi_jinjun"
+    },
+    "xz_youqi": {
+      "name": "曹军游骑",
+      "turn_limit": 6,
+      "enemy": "cao_youqi",
+      "art": "bh_jz_scout"
+    },
+    "xz_buzu": {
+      "name": "曹军步卒",
+      "turn_limit": 6,
+      "enemy": "cao_buzu",
+      "art": "bh_jz_inf"
+    },
+    "xz_xiahoudun": {
+      "name": "下邳城外·夏侯惇殿后军",
+      "turn_limit": 12,
+      "enemy": "xiahoudun_e"
+    },
+    "xz_caobao": {
+      "name": "下邳街头·曹豹家兵",
+      "turn_limit": 8,
+      "enemy": "caobao_jiabing"
+    },
+    "xz_daofu": {
+      "name": "陶府后堂·刀斧手",
+      "turn_limit": 8,
+      "enemy": "taofu_daofu",
+      "art": "c6_fubing"
+    },
+    "xz_langqi": {
+      "name": "小沛城外·并州狼骑",
+      "turn_limit": 6,
+      "enemy": "langqi5",
+      "art": "bh_wolf2"
+    },
+    "xz_xianzhen": {
+      "name": "小沛城下·陷阵营兵",
+      "turn_limit": 8,
+      "enemy": "xianzhen5",
+      "art": "c6_xianzhen"
+    },
+    "xz_lvbu": {
+      "name": "小沛城门·吕布突围",
+      "turn_limit": 12,
+      "enemy": "lvbu_xiaopei"
     }
   }
 }

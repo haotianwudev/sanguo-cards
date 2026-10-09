@@ -196,7 +196,7 @@ func reachable(q: Dictionary, s: SaveData) -> Dictionary:
 
 
 func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap() -> void:
-	for id in ["yuxi", "shouluoyang", "changan", "beihai", "dongui", "jingxiang", "huainan_s"]:
+	for id in ["yuxi", "shouluoyang", "changan", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s"]:
 		var q := quest_by_id(id)
 		var sq: Dictionary = q["squares"]
 		var lines := {}
@@ -459,6 +459,101 @@ func beihai_save() -> SaveData:
 	var s := lap_save(["出生：冀州无极", "界桥：救下公孙瓒"], ["prologue", "luoyang_n", "heishan"])
 	check_eq(Quests.current_quest(s)["id"], "beihai")
 	return s
+
+
+# ---- 北线第五章 · 铁纪徐州 ---------------------------------------------------------------
+
+func xuzhou_save(flags: Array) -> SaveData:
+	var s := lap_save(["出生：冀州无极", "界桥：救下公孙瓒", "郑姜：和好", "北线：北海相"] + flags,
+			["prologue", "luoyang_n", "heishan", "beihai"])
+	for c in ["zhaoyun", "guojia", "taishici", "lvlingqi", "zhangning", "zhenghao", "jiangqiao"]:
+		s.grant_card(c)
+	if flags.has("军纪：严明"):
+		s.grant_card("xiahoulan")
+	return s
+
+
+func test_north_chapter5_follows_beihai() -> void:
+	check_eq(Quests.current_quest(xuzhou_save([]))["id"], "xuzhou", "北海相 → 第五章 · 铁纪徐州")
+
+
+func test_north_chapter5_without_military_law_ends_in_ending_eight() -> void:
+	var s := xuzhou_save([])
+	var q := quest_by_id("xuzhou")
+	var p := walk(q, s, [])
+	for sid in ["xz_start", "xz_muster", "xz_youqi", "xz_xiahoudun", "xz_rest1", "xz_seal", "xz_mifu", "xz_needle", "xz_chaos",
+			"xz_accuse", "xz_banquet", "xz_daofu", "xz_menhou"]:
+		check(p.has(sid), "门后之诛 route passes " + sid)
+	for sid in ["xz_muster_j", "xz_law", "xz_caobao", "xz_lvbu", "xz_wedding"]:
+		check(not p.has(sid), "门后之诛 route never reaches " + sid)
+	check_eq(p[-1], "xz_menhou")
+	check(s.run_records.has("结局八 · 门后之诛"), "the run reaches 结局八")
+	finish(q, s)
+	check(s.flags.has("结局八 · 门后之诛"))
+	check(Quests.current_quest(s) == null, "the story stops at 结局八")
+
+
+func test_north_chapter5_losing_the_banquet_fight_is_ending_eight_too() -> void:
+	var s := xuzhou_save([])
+	var q := quest_by_id("xuzhou")
+	Quests.begin(q, s, rng(3))
+	s.square = "xz_daofu"
+	check(Quests.lose(q, s, rng(3)), "the 刀斧手 fight carries on into the ending")
+	check_eq(s.square, "xz_menhou")
+
+
+func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
+	for fork in [[], ["xz_m1", "xz_m2", "xz_m3"]]:
+		var s := xuzhou_save(["军纪：严明"])
+		var q := quest_by_id("xuzhou")
+		var p := walk(q, s, fork)
+		for sid in ["xz_muster_j", "xz_xiahoudun", "xz_seal", "xz_needle", "xz_law", "xz_caobao", "xz_chendeng", "xz_lvbu_come",
+				"xz_beat", "xz_fu", "xz_langqi", "xz_xianzhen", "xz_lvbu", "xz_will", "xz_bingzhou", "xz_chengong", "xz_wedding", "xz_end"]:
+			check(p.has(sid), "铁纪 route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["xz_muster", "xz_chaos", "xz_banquet", "xz_menhou"]:
+			check(not p.has(sid), "铁纪 route never reaches " + sid)
+		check_eq(p[-1], "xz_end")
+		for c in ["zhangliao", "gaoshun"]:
+			check(s.has_card(c), "%s joins in 第五章" % c)
+		for r in ["xuzhou_yin", "mijia_chuan", "chen_mago"]:
+			check(s.relics.has(r), "第五章 hands over the 宝物 " + r)
+		for line in ["刘备：秒接徐州印", "陈家：倒向主角", "刘备：投曹", "徐州：接任徐州牧", "张辽高顺：入队", "陈宫：供起来了", "赵云：成婚"]:
+			check(s.run_records.has(line), "第五章 records " + line)
+		check(not s.run_records.has("结局八 · 门后之诛"))
+		finish(q, s)
+		check(Quests.current_quest(s) == null, "未完待续 after 铁纪徐州")
+
+
+func test_north_chapter5_plays_with_real_fights() -> void:
+	for flags in [[], ["军纪：严明"]]:
+		var s := xuzhou_save(flags)
+		var q := quest_by_id("xuzhou")
+		var r := rng(7)
+		Quests.begin(q, s, r)
+		var fights := 0
+		for _step in 200:
+			var sq := Quests.here(q, s)
+			if sq["type"] == "mystery" and not s.resolved:
+				var ev := Quests.event_here(q, s, r)
+				var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
+				Quests.choose_event(q, s, r, ok[0])
+			if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
+				var f := Quests.battle_here(q, s)
+				s.party = s.auto_party()
+				var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"])
+				bot_fight(b)
+				fights += 1
+				s.damage = 0
+			Quests.offer(q, s, r)
+			Quests.resolve(q, s, r, 0 if not s.offer.is_empty() else -1)
+			s.offer = []
+			s.resolved = true
+			var opts := Quests.next_options(q, s)
+			if opts.is_empty():
+				break
+			Quests.move(q, s, opts[0]["id"])
+		check_eq(s.square, "xz_end" if flags.has("军纪：严明") else "xz_menhou", "reached the end of 第五章 %s" % str(flags))
+		check(fights >= 5, "fought the chapter's battles (%d)" % fights)
 
 
 func test_beihai_peace_route_wins_through_to_beihai() -> void:
