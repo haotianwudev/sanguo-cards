@@ -121,3 +121,18 @@
 - [x] 2026-10-08 relic `zhangba` ← zhangba.jpg · ok
 - [x] 2026-10-08 relic `zhongshan_banner` ← zhongshan_banner.jpg · ok
 - [x] 2026-10-08 relic `zhugenu` ← zhugenu.jpg · ok
+- [x] 2026-10-08 cg `c3_bad_guotu` ← c3_bad_guotu.png · ok
+- [x] 2026-10-08 cg `c3_bad_return` ← c3_bad_return.png · ok
+- [x] 2026-10-08 cg `c3_guotu_street` ← c3_guotu_street.png · ok
+- [x] 2026-10-08 portrait `daotong` ← daotong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `fangshi` ← fangshi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 battle `hs_bad_hall` ← hs_bad_hall.jpg · ok
+- [x] 2026-10-08 battle `hs_guotu` ← hs_guotu.jpg · ok
+- [x] 2026-10-08 battle `hs_wenchou` ← hs_wenchou.jpg · ok
+- [x] 2026-10-08 battle `hs_yudu` ← hs_yudu.jpg · ok
+- [x] 2026-10-08 battle `hs_zhangbaiqi` ← hs_zhangbaiqi.jpg · ok
+- [x] 2026-10-08 portrait `huangyueying` ← huangyueying.png · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `peiyuanshao` ← peiyuanshao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 relic `qingnang` ← qingnang.jpg · ok
+- [x] 2026-10-08 portrait `shuzuo` ← shuzuo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `sunqian` ← sunqian.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

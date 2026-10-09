@@ -220,5 +220,11 @@
   "lord_south_boat": {"file": "lord_south_boat.jpg", "face": [0.5, 0.22], "head": 0.22},
   "lord_south_cloak": {"file": "lord_south_cloak.jpg", "face": [0.5, 0.22], "head": 0.22},
   "lord_south_plate": {"file": "lord_south_plate.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "lord_south_robe": {"file": "lord_south_robe.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "lord_south_robe": {"file": "lord_south_robe.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "daotong": {"file": "daotong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "fangshi": {"file": "fangshi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "huangyueying": {"file": "huangyueying.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "peiyuanshao": {"file": "peiyuanshao.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "shuzuo": {"file": "shuzuo.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "sunqian": {"file": "sunqian.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

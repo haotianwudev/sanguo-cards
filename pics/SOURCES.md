@@ -225,6 +225,12 @@
 | `lord_south_cloak` | source/generals/lord_south_cloak.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_plate` | source/generals/lord_south_plate.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_robe` | source/generals/lord_south_robe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `daotong` | source/soldiers/daotong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `fangshi` | source/soldiers/fangshi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `huangyueying` | source/generals/huangyueying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `peiyuanshao` | source/generals/peiyuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `shuzuo` | source/soldiers/shuzuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunqian` | source/generals/sunqian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -278,6 +284,11 @@
 | `battle:c3_xunluo` | source/battles/c3_xunluo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jz_county_fight` | source/battles/jz_county_fight.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jz_road_bandits` | source/battles/jz_road_bandits.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hs_bad_hall` | source/battles/hs_bad_hall.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hs_guotu` | source/battles/hs_guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hs_wenchou` | source/battles/hs_wenchou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hs_yudu` | source/battles/hs_yudu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hs_zhangbaiqi` | source/battles/hs_zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -360,3 +371,6 @@
 | `cg:i2_duel` | source/cg/i2_duel.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:i2_qin` | source/cg/i2_qin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:i2_yuxi` | source/cg/i2_yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_bad_guotu` | source/cg/c3_bad_guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_bad_return` | source/cg/c3_bad_return.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_guotu_street` | source/cg/c3_guotu_street.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

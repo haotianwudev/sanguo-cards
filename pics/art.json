@@ -2013,6 +2013,60 @@
         0.22
       ],
       "head": 0.22
+    },
+    "daotong": {
+      "src": "source/soldiers/daotong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "fangshi": {
+      "src": "source/soldiers/fangshi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "huangyueying": {
+      "src": "source/generals/huangyueying.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "peiyuanshao": {
+      "src": "source/generals/peiyuanshao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "shuzuo": {
+      "src": "source/soldiers/shuzuo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "sunqian": {
+      "src": "source/generals/sunqian.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -2229,6 +2283,26 @@
     },
     "jz_road_bandits": {
       "src": "source/battles/jz_road_bandits.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hs_bad_hall": {
+      "src": "source/battles/hs_bad_hall.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hs_guotu": {
+      "src": "source/battles/hs_guotu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hs_wenchou": {
+      "src": "source/battles/hs_wenchou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hs_yudu": {
+      "src": "source/battles/hs_yudu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "hs_zhangbaiqi": {
+      "src": "source/battles/hs_zhangbaiqi.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -2560,6 +2634,18 @@
     },
     "i2_yuxi": {
       "src": "source/cg/i2_yuxi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_bad_guotu": {
+      "src": "source/cg/c3_bad_guotu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_bad_return": {
+      "src": "source/cg/c3_bad_return.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_guotu_street": {
+      "src": "source/cg/c3_guotu_street.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
