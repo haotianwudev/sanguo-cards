@@ -220,3 +220,7 @@
 - [x] 2026-10-09 portrait `pangtong` ← pangtong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-09 portrait `zhangjiao` ← zhangjiao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-09 portrait `yanbaihu` ← yanbaohu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-09 battle `bh_lubu` ← bh_lubu.png · ok
+- [x] 2026-10-09 battle `bh_wolf2` ← bh_wolf2.png · ok
+- [x] 2026-10-09 battle `c4_gaoshun` ← c4_gaoshun.png · ok
+- [x] 2026-10-09 battle `c4_lvbu` ← c4_lvbu.png · ok

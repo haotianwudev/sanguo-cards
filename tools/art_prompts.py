@@ -1506,389 +1506,102 @@ UI_ART = {
 }
 
 
-# the next batch for whoever draws (Gemini): in order; delivered ones drop off automatically
-# Order follows pics/ART-PLAN.md §5 (P0 portraits first).
-NEXT = [
-    # 最优先 · 游戏里在用、但还是占位图（清代绣像）的武将：
-    ("portrait", "zhangjiao", "张角（换掉占位，SSR + 黄巾首领战敌人）"),
-    ("portrait", "pangtong", "庞统（换掉占位）"),
-    ("portrait", "lvmeng", "吕蒙（换掉占位）"),
-    ("portrait", "liaohua", "廖化（换掉占位）"),
-    ("portrait", "jianyong", "简雍（换掉占位）"),
-    # 最优先 · 首领战斗 CG（每个首领一张横版 16:9 战斗图，没有它们首领战只有空底）：
-    ("battle", "hs_wenchou", "界桥血战·文丑（北线第三章首领）"),
-    ("battle", "hs_guotu", "无极城外·郭图（北线第三章，精英 / 覆巢线首领，新）"),
-    ("battle", "hs_bad_hall", "无极甄府·淳于琼（北线第三章覆巢线首领，新）"),
-    ("battle", "bh_lubu", "太行山口·吕布（北线第四章首领）"),
-    ("battle", "bh_guanhai", "北海解围·管亥（北线第四章首领）"),
-    ("battle", "c5_dongzhuo", "未央宫前·董卓（长安首领）"),
-    ("battle", "c6_lijue", "函谷关·李傕（南线第四章首领）"),
-    ("battle", "c7_jiling", "宛城·纪灵（南线第四章首领）"),
-    ("battle", "jx_huangzu", "淯水·黄祖（南线第五章首领）"),
-    ("battle", "jx_caimao_a", "水阁·独眼蔡瑁（南线第五章首领，恨海线）"),
-    ("battle", "jx_caimao_b", "水阁·蔡瑁（南线第五章首领，破局线）"),
-    ("cg", "c3_guotu_street", "北线第三章·郭图拦街（救下张宁线，剧情 CG）"),
-    ("cg", "c3_bad_guotu", "北线第三章覆巢线·郭图亲临（剧情 CG）"),
-    ("cg", "c3_bad_return", "北线第三章覆巢线·空手而归（剧情 CG）"),
-    # 宝物图标 · 现在只是程序生成的圆章（一个汉字），要换成真图（六件主角专属宝物不在内）：
-    ("relic", "muniu", "木牛流马（宝物图标，现为文字圆章）"),
-    ("relic", "beishui", "破釜（宝物图标，现为文字圆章）"),
-    ("relic", "dingxin", "定心丸（宝物图标，现为文字圆章）"),
-    ("relic", "jubaopen", "聚宝盆（宝物图标，现为文字圆章）"),
-    ("relic", "chitu", "赤兔马（宝物图标，现为文字圆章）"),
-    ("relic", "zhangba", "丈八蛇矛（宝物图标，现为文字圆章）"),
-    ("relic", "zhugenu", "诸葛连弩（宝物图标，现为文字圆章）"),
-    ("relic", "qinglong", "青龙偃月刀（宝物图标，现为文字圆章）"),
-    ("relic", "mengde", "孟德新书（宝物图标，现为文字圆章）"),
-    ("relic", "heishan", "黑山令（宝物图标，现为文字圆章）"),
-    ("relic", "taipingyaoshu", "太平要术（宝物图标，现为文字圆章）"),
-    ("relic", "qingnang", "青囊书（宝物图标，现为文字圆章）"),
-    ("relic", "huangjinfu", "黄巾符（宝物图标，现为文字圆章）"),
-    ("relic", "dilu", "的卢（宝物图标，现为文字圆章）"),
-    ("relic", "fangtian", "方天画戟（宝物图标，现为文字圆章）"),
-    ("relic", "tengjia", "藤甲（宝物图标，现为文字圆章）"),
-    ("relic", "lizigao", "栗子糕（宝物图标，现为文字圆章）"),
-    ("relic", "shuijing", "水镜（宝物图标，现为文字圆章）"),
-    ("relic", "zhongshan_banner", "中山甄记大旗（宝物图标，现为文字圆章）"),
-    # 主角专属宝物（现为文字圆章）：
-    ("relic", "jiujia", "孙坚旧甲（宝物图标，主角专属，现为文字圆章）"),
-    ("relic", "hupi", "虎皮披风（宝物图标，主角专属，现为文字圆章）"),
-    ("relic", "qixing", "七星宝刀（宝物图标，主角专属，现为文字圆章）"),
-    ("relic", "zhaoxianbang", "招贤榜（宝物图标，主角专属，现为文字圆章）"),
-    ("relic", "yitian", "倚天剑（宝物图标，主角专属，现为文字圆章）"),
-    ("relic", "yuxi", "传国玉玺（宝物图标，主角专属，现为文字圆章）"),
-    # 结局图鉴 · 每个结局一张象征画（不画人、不见血）+ 未解锁缩略图：
-    ("cg", "end_tonggui", "结局二·同归（象征画）"),
-    ("cg", "end_henhai", "结局三·恨海（象征画）"),
-    ("cg", "end_hushi", "结局四·虎噬（象征画，南线终章，尚未实装）"),
-    ("cg", "end_zhumie", "结局五·烛灭（象征画，北线终章，尚未实装）"),
-    ("cg", "end_juefa", "结局七·绝罚（象征画）"),
-    ("cg", "end_menhou", "结局八·门后之诛（象征画，尚未实装）"),
-    ("cg", "end_chibi", "南线结局·赤壁（象征画，尚未实装）"),
-    ("cg", "end_guandu", "北线结局·官渡（象征画，尚未实装）"),
-    ("cg", "end_tianming", "第十二章·天命归一（真结局，象征画，尚未实装）"),
-    ("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9，暗色印章问号）"),
-    # 最优先 · 章节地图底图（缺 6 张 + 长安占位，没有它们这些章节只有空底）：
-    ("map", "heishan", "北线第三章·黑山风云地图底图（40 列）"),
-    ("map", "beihai", "北线第四章·双凤乱太行地图底图（48 列）"),
-    ("map", "yuxi", "南线第三章·传国玉玺地图底图（27 列）"),
-    ("map", "shouluoyang", "南线第三章·收洛阳地图底图（22 列）"),
-    ("map", "changan", "第三章·长安地图底图（31 列，现为程序占位）"),
-    ("map", "dongui", "第四章·挟天子地图底图（37 列）"),
-    ("map", "jingxiang", "第五章·荆襄风云地图底图（31 列）"),
-    ("cg", "defeat_south", "阵亡 CG · 南线（主角倒在黄昏的泥泞战场上，古锭刀插在身旁，克制不见血）"),
-    ("cg", "defeat_north", "阵亡 CG · 北线（主角倒在黄昏的雪原上，白蜡杆长枪插在身旁，克制不见血）"),
-    ("portrait", "qinwei", "主公亲卫（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "jiading", "家丁（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "shutong", "书童（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "mafu", "马夫（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "shinv", "贴身侍女（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "fucong", "扈从骑（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "jiangdong_qinwei", "江东亲卫（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "changshan_qinwei", "常山亲卫（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "zhenfu_yahuan", "甄府丫鬟（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "zhenfu_xiunv", "甄府绣娘（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "zhenfu_chuniang", "甄府厨娘（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "zhenfu_jiading", "甄府家丁（主角队新增：亲卫 / 侍从）"),
-    ("portrait", "jiangwei", "姜维（新增枪兵卡）"),
-    ("portrait", "chendao", "陈到（新增枪兵卡）"),
-    ("portrait", "weiyan", "魏延（新增枪兵卡）"),
-    ("portrait", "guanping", "关平（新增枪兵卡）"),
-    ("portrait", "zhangbao", "张苞（新增枪兵卡）"),
-    ("portrait", "guanxing", "关兴（新增枪兵卡）"),
-    ("portrait", "chenglian", "成廉（新增枪兵卡）"),
-    ("portrait", "weixu", "魏续（新增枪兵卡）"),
-    ("portrait", "lingtong", "凌统（新增枪兵卡）"),
-    ("portrait", "yangang", "严纲（新增枪兵卡）"),
-    ("portrait", "gaolan", "高览（新增枪兵卡）"),
-    ("portrait", "zoudan", "邹丹（新增枪兵卡）"),
-    ("portrait", "youzhou_qiang", "幽州长枪兵（新增枪兵兵卡）"),
-    ("portrait", "bingzhou_qiang", "并州枪卫（新增枪兵兵卡）"),
-    ("portrait", "changshan_qiang", "常山枪兵（新增枪兵兵卡）"),
-    ("portrait", "jizhou_ji", "冀州长戟兵（新增枪兵兵卡）"),
-    ("portrait", "xiliang_maozi", "西凉长矛手（新增枪兵兵卡）"),
-    ("portrait", "danyang_qiang", "丹阳枪兵（新增枪兵兵卡）"),
-    ("portrait", "xuzhou_qiang", "徐州枪兵（新增枪兵兵卡）"),
-    ("portrait", "tengjia_qiang", "藤甲枪兵（新增枪兵兵卡）"),
-    ("portrait", "bashu_qiang", "巴蜀长枪兵（新增枪兵兵卡）"),
-    ("portrait", "yulin_lang", "羽林郎（新增枪兵兵卡）"),
-    ("portrait", "wudang_feijun", "无当飞军（新增枪兵兵卡）"),
-    ("portrait", "jinwei_ji", "禁卫长戟营（新增枪兵兵卡）"),
-    ("portrait", "chunyuqiong", "淳于琼（成年男性，袁绍大将）"),
-    ("portrait", "yudu", "于毒（成年男性，黑山叛党）"),
-    ("portrait", "quyi", "麹义（成年男性，先登主将）"),
-    ("portrait", "yunliang_bing", "运粮兵（新增后勤兵卡）"),
-    ("portrait", "junyi", "军医（新增后勤兵卡，精英）"),
-    ("portrait", "danjia_bing", "担架兵（新增后勤兵卡）"),
-    ("portrait", "tiejiang", "随军铁匠（新增后勤兵卡）"),
-    ("portrait", "tuoma_dui", "驮马队（新增后勤兵卡）"),
-    ("portrait", "junxu_guan", "军需官（新增后勤兵卡，精英）"),
-    ("portrait", "caoyun_shuishou", "漕运水手（新增后勤兵卡）"),
-    ("portrait", "yaonong", "太行药农（新增后勤兵卡）"),
-    ("portrait", "shangdui", "甄家商队（新增后勤兵卡）"),
-    ("portrait", "lord_south_boat", "主公·水战装（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_south_robe", "主公·战袍（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_south_plate", "主公·重铠（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_south_cloak", "主公·披风（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_north_cloak", "主公·雪裘（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_north_march", "主公·行军装（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_north_guard", "主公·重甲（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "lord_north_banner", "主公·披挂（主角卡，每章通关随机发一张；没有图时只加数值）"),
-    ("portrait", "sunshangxiang_young", "孙尚香·少女时期（十二三岁，南线第一章富春家中，木刀）"),
-    ("portrait", "xiandeng_sishi", "先登死士（北线新增兵卡，和麹义同风格：大铁盾后端强弩的老兵）"),
-    ("cg", "c3_recruit_board", "北线·真定发榜"),
-    ("cg", "c3_bribe_villager", "北线·和稀泥"),
-    ("cg", "c3_encounter_ning", "北线·深山绝壁"),
-    ("cg", "c3_leave_ning", "北线·明哲保身"),
-    ("cg", "c3_zhangyan_meet", "北线·黑山大寨"),
-    ("cg", "c3_guotu_raid", "北线·郭图寻仇"),
-    ("cg", "c3_secret_path", "北线·黑山秘道"),
-    ("cg", "c3_guojia_map", "北线·界桥前夜"),
-    ("cg", "c3_breakout", "北线·府门突围"),
-    ("cg", "c3_xiahoulan_law", "北线·夏侯兰军法（剧情 CG）"),
-    ("cg", "c3_save_ning", "北线·救张宁（剧情 CG）"),
-    ("cg", "c3_alliance", "北线·结盟张燕（剧情 CG）"),
-    ("cg", "c3_banma_flag", "北线·斑马大旗（剧情 CG）"),
-    ("cg", "c3_save_zan", "北线·赵云救公孙瓒（剧情 CG）"),
-    ("cg", "c3_quyi_camp", "北线·麹义先登营（剧情 CG）"),
-    ("cg", "end_fuchao", "结局卡·覆巢（剧情 CG）"),
+# 下一批（交给 Gemini）不再手写：每次运行都从游戏数据（cards.json / story.json / endings.json / interludes.json）里
+# 算出「游戏正在用、但还没交付」的图，按下面的优先级排。游戏里没用到的图不会出现在这里。
+# 优先级（越靠前越先画）：
+#   0 占位 / 缺失的立绘      —— 角色一出场就是占位图
+#   1 首领战斗图             —— 首领战没图只有空底；按章节顺序
+#   2 精英战斗图
+#   3 主线剧情 CG            —— 格子和幕间的 CG，按章节顺序、章内按格子位置
+#   4 常用战斗背景           —— 普通战斗；多个战斗共用同一张的、出现次数多的排前
+#   5 宝物图标               —— 现在是文字圆章；稀有的 / 诅咒 / 主角专属排前
+#   6 结局象征画             —— 已实装的结局
+#   7 奇遇插图（？格事件）    —— 随机抽到，缺了只是少一张图；通用事件排在章节专属事件前
+#   8 未实装内容             —— 还没做出来的结局等
+TIER_NAMES = {0: "立绘（占位 / 缺）", 1: "首领战斗图", 2: "精英战斗图", 3: "主线剧情 CG", 4: "普通战斗背景",
+              5: "宝物图标", 6: "结局象征画", 7: "奇遇插图", 8: "未实装内容"}
+EXTRA_NEXT = [("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9，暗色印章问号）", 8)]
 
-    # 红颜立绘优先：
-    ("portrait", "sunshangxiang", "孙尚香（成年女性，换掉占位）"),
-    ("portrait", "zhenmi", "甄宓（成年女性，洛神仙子）"),
-    ("portrait", "zhenghao", "郑好（成年女性，太行女寨主）"),
-    ("portrait", "jiangqiao", "姜巧（成年女性，太行巧手女将）"),
-    ("portrait", "mizhen", "糜贞（成年女性，徐州千金）"),
-    ("portrait", "guonvwang", "郭女王（成年女性，曹丕文德皇后）"),
-    ("portrait", "caifuren", "蔡夫人（成年女性，荆州蔡氏主母）"),
-    ("portrait", "bianfuren", "卞夫人（成年女性，曹操武宣皇后）"),
-    ("portrait", "yanfuren", "严夫人（成年女性，吕布正妻）"),
-    ("portrait", "zhurong", "祝融夫人（成年女性，南中女王）"),
-    ("portrait", "mayunlu", "马云騄（成年女性，西凉女将）"),
-    ("portrait", "wangyi", "王异（成年女性，智勇奇女）"),
-    ("portrait", "xinxianying", "辛宪英（成年女性，魏晋才女）"),
-    ("portrait", "bulianshi", "步练师（成年女性，江东贤女）"),
-    ("portrait", "wuxian", "吴苋（成年女性，蜀汉皇后）"),
-    ("portrait", "liniang", "黎娘（成年女性，山越女王）"),
-    ("portrait", "chuniang", "厨娘（成年女性，军中厨娘）"),
-    ("portrait", "chaniang", "茶娘（成年女性，茶楼掌柜）"),
-    ("portrait", "huansha", "浣纱女（成年女性，水乡浣纱）"),
-    ("portrait", "caisang", "采桑女（成年女性，桑园采桑）"),
-    ("cg", "e_yazhai", "压寨夫人（剧情 CG，胭脂虎指着主角）"),
 
-    # P0 · 南线第一章补的剧情 CG（孙策/周瑜初登场，之前漏画）：
-    ("cg", "c1_village", "南线·富春初遇孙策周瑜（剧情 CG）"),
+def build_next(delivered: dict) -> list:
+    """[(kind, key, what, tier)] still missing and used by the game, in drawing order."""
+    gd = ROOT / "godot" / "data"
+    cards = json.loads((gd / "cards.json").read_text("utf-8"))
+    story = json.loads((gd / "story.json").read_text("utf-8"))
+    endings = json.loads((gd / "endings.json").read_text("utf-8"))["endings"]
+    inter = json.loads((gd / "interludes.json").read_text("utf-8")).get("after", {})
+    sc, en = cards["scenarios"], cards["enemies"]
+    qidx = {q["id"]: i for i, q in enumerate(story["quests"])}
+    found: dict = {}  # (kind, key) -> (tier, sort tuple, what)
 
-    # P0 · 北线第一章剧情 CG（待画，最新核心需求）：
-    ("cg", "jz_wake", "北线·甄府醒来（剧情 CG）"),
-    ("cg", "jz_ledger", "北线·账房认亲（剧情 CG）"),
-    ("cg", "jz_county", "北线·县衙受辱（剧情 CG）"),
-    ("cg", "jz_guojia", "北线·街头结识（剧情 CG）"),
-    ("cg", "jz_boss", "北线·黑山破寨（剧情 CG）"),
+    def put(kind, key, tier, order, what):
+        if key in delivered[kind]:
+            return
+        old = found.get((kind, key))
+        if old is None or (tier, order) < (old[0], old[1]):
+            found[(kind, key)] = (tier, order, what)
 
-    ("cg", "c1_era", "开场·凌晨三点选出生点（剧情 CG，南北线共用的第一张）"),
-    # P0 · 北线主线（其他）：
-    ("map", "prologue_north", "第一章北线·冀州风云地图底图"),
-    ("portrait", "zhaoyun", "赵云（换掉占位）"),
-    ("portrait", "guojia", "郭嘉"),
-    ("portrait", "lidamu", "李大目（北线第一章首领）"),
-    ("portrait", "xuanjizi", "妖道玄机子"),
-    ("portrait", "zhangbaiqi", "张白骑"),
-    ("portrait", "yayi", "衙役（州衙拔刀相助一战的敌人）"),
-    ("battle", "jz_county_fight", "州衙·拔刀相助 战斗背景"),
-    ("battle", "jz_road_bandits", "官道·黑山散兵 战斗背景（选路分支，走官道那一边）"),
-    ("portrait", "guotu", "郭图"),
-    ("portrait", "hanfu", "韩馥"),
-    ("portrait", "heishan_bing", "黑山游骑（兵卡）"),
-    ("portrait", "changshan_tieqi", "常山铁骑（兵卡）"),
-    ("portrait", "taihang_yiyong", "太行义勇（兵卡）"),
-    # P1 · 北线第二、三章（故事方向已定）：
-    ("portrait", "xiahoulan", "夏侯兰"),
-    ("portrait", "zhangyan", "张燕"),
-    ("portrait", "wenchou", "文丑"),
-    ("portrait", "gongsunzan", "公孙瓒"),
-    ("portrait", "caohong", "曹洪（第二章）"),
-    ("portrait", "yudu", "于毒（第三章精英）"),
-    ("portrait", "quyi", "麹义（第三章精英）"),
-    # P2 · 北线第四、五章：
-    ("portrait", "zhenghao", "郑好（成年女性）"),
-    ("portrait", "jiangqiao", "姜巧（成年女性）"),
-    ("portrait", "taishici", "太史慈（换掉占位）"),
-    ("portrait", "guanhai", "管亥"),
-    ("portrait", "kongrong", "孔融"),
-    ("portrait", "taoqian", "陶谦"),
-    ("portrait", "mizhu", "糜竺（换掉占位）"),
-    ("portrait", "mifang", "糜芳"),
-    ("portrait", "mizhen", "糜贞（成年女性）"),
-    ("portrait", "chendeng", "陈登"),
-    ("portrait", "chengui", "陈珪"),
-    ("portrait", "caobao", "曹豹"),
-    ("portrait", "xiahoudun", "夏侯惇（第五章，两眼完好）"),
-    ("portrait", "xunyu", "荀彧（第六章）"),
-    ("portrait", "caoren", "曹仁（第六章）"),
-    ("portrait", "chengong", "陈宫"),
-    ("portrait", "zhangliao", "张辽（换掉占位）"),
+    uses: dict = {}  # battle art key -> number of squares / event fights using it
+    for q in story["quests"]:
+        for s in q["squares"].values():
+            if s.get("battle"):
+                k = sc[s["battle"]].get("art", s["battle"])
+                uses[k] = uses.get(k, 0) + 1
+    for q in story["quests"]:
+        qi = qidx[q["id"]]
+        for sid, s in q["squares"].items():
+            x = s.get("x", 0)
+            if s.get("battle"):
+                scn = sc[s["battle"]]
+                key = scn.get("art", s["battle"])
+                who = en[scn["enemy"]]["name"]
+                what = f"{q['title']}·{s.get('label', sid)}（{who}）"
+                if s.get("boss"):
+                    put("battle", key, 1, (qi, x), what + " 首领")
+                elif s.get("elite"):
+                    put("battle", key, 2, (qi, x), what + " 精英")
+                else:
+                    put("battle", key, 4, (-uses[key], qi, x), what)
+            if s.get("cg"):
+                put("cg", s["cg"], 3, (qi, x), f"{q['title']}·{s.get('label', sid)}")
+            for pk in s.get("portraits", []):
+                put("portrait", pk, 0, (qi, x), f"{q['title']}·{s.get('label', sid)} 里出场")
+        if q.get("ending"):
+            end = endings.get(q["ending"]) if isinstance(q["ending"], str) else q["ending"]
+            if end and end.get("cg"):
+                put("cg", end["cg"], 6, (qi,), f"结局卡·{end.get('title', '')}（象征画）")
+        for scene in inter.get(q["id"], []):
+            if scene.get("cg"):
+                put("cg", scene["cg"], 3, (qi, 10**6), f"{q['title']}·幕间「{scene.get('title', '')}」")
+    scope_rank = {"universal": 0}
+    for eid, ev in story["events"].items():
+        if ev.get("cg"):
+            sco = ev.get("scope", "south")
+            put("cg", ev["cg"], 7, (scope_rank.get(sco, 1), qidx.get(sco, 50), eid), f"奇遇「{ev.get('title', eid)}」")
+        for o in ev.get("options", ev.get("choose", [])):
+            for ef in o.get("effects", []):
+                if "battle" in ef:
+                    scn = sc[ef["battle"]]
+                    key = scn.get("art", ef["battle"])
+                    put("battle", key, 4, (-uses.get(key, 0), 99, 0), f"奇遇「{ev.get('title', eid)}」里的战斗（{en[scn['enemy']]['name']}）")
+    for eid, e in endings.items():
+        if e.get("cg"):
+            put("cg", e["cg"], 6 if e.get("built") else 8, (list(endings).index(eid),), f"结局「{e['title']}」（象征画{'' if e.get('built') else '，尚未实装'}）")
+    rank = {"story": 0, "curse": 1, "rare": 2, "common": 3}
+    for i, (rid, r) in enumerate(cards["relics"].items()):
+        put("relic", rid, 5, (rank.get(r.get("rarity", "common"), 3), i), f"{r['name']}（宝物图标）")
+    for cid, c in cards["cards"].items():
+        put("portrait", c.get("person", cid), 0, (-1, 0), f"{c['name']}（{c.get('rarity', 'N')} {cards['troops'][c['troop']]['name']}）")
+    for eid, e in en.items():
+        put("portrait", e.get("portrait") or eid, 0, (-1, 1), f"{e['name']}（敌人）")
+    for q in story["quests"]:  # chapter maps
+        for key in [q["id"]] + [o["map"] for o in q.get("map_overrides", []) if o.get("map")]:
+            put("map", key, 1, (-1, qidx[q["id"]]), f"{q['title']} 地图底图")
+    for kind, key, what, tier in EXTRA_NEXT:
+        put(kind, key, tier, (0,), what)
+    out = sorted(found.items(), key=lambda kv: (kv[1][0], kv[1][1]))
+    return [(k[0], k[1], v[2], v[0]) for k, v in out]
 
-    # P0 · 第三章·长安、第四章露脸的立绘（对话头像全程可见）：
-    ("portrait", "dongzhuo", "董卓（第三章·长安首领）"),
-    ("portrait", "wangyun", "王允"),
-    ("portrait", "caiyong", "蔡邕"),
-    ("portrait", "xiandi", "汉献帝（十岁左右的孩子，只画孩子该有的样子）"),
-    ("portrait", "huangfusong", "皇甫嵩"),
-    ("portrait", "lvlingqi", "吕玲绮（吕布之女，成年女性）"),
-    ("portrait", "gaoshun", "高顺"),
-    ("portrait", "xunyou", "荀攸"),
-    ("portrait", "zhongyao", "钟繇"),
-    ("portrait", "xuhuang", "徐晃（换掉占位）"),
-    ("portrait", "huangzhong", "黄忠（换掉占位，四十出头的军汉，不是老将）"),
-
-    # 第二章、第三章还没画完的：
-    ("battle", "xiliang_youqi", "西凉游骑（尘土飞扬的中原官道）"),
-    ("battle", "guosi", "郭汜（掠夺焚烧村落的西凉军寨）"),
-    ("battle", "liru", "李儒伏兵（峡谷险道两侧峭壁伏兵）"),
-    ("battle", "lijue", "洛阳城门·李傕（烈火焚城的洛阳门前，黑烟火星）"),
-    ("battle", "xiliang_scout", "截粮·西凉斥候（山脚运粮辎重车队）"),
-    ("cg", "c2_setout", "第二章开场：策马北上讨董（孙策跑偏、主角周瑜对视莞尔、吴夫人马车）"),
-    ("cg", "e_tangji", "破庙救唐姬"),
-    ("cg", "e_yazhai", "压寨夫人（胭脂虎指着主角）"),
-    ("portrait", "caiwenji", "蔡文姬"),
-    ("portrait", "fengfuren", "冯夫人（袁术的宠姬，成年女性）"),
-    ("portrait", "yuanshu", "袁术"),
-    ("portrait", "jiling", "纪灵"),
-    ("portrait", "leibo", "雷薄"),
-    ("portrait", "chenlan", "陈兰"),
-    ("portrait", "qiaorui", "桥蕤"),
-    ("portrait", "zhangxun", "张勋（南线第六章）"),
-    ("portrait", "liuxun", "刘勋（南线第六章）"),
-    ("portrait", "lusu", "鲁肃（南线第六章入队）"),
-    ("portrait", "zhengbao", "郑宝（南线第六章）"),
-    ("portrait", "luxun_young", "少年陆逊（十四五岁的孩子，只画孩子该有的样子）"),
-    # 第七—十章的新角色：
-    ("portrait", "zangba", "臧霸（北线第七章）"),
-    ("portrait", "yanliang", "颜良（北线第七章，和文丑一起出场）"),
-    ("portrait", "shenrong", "审荣（北线第七章）"),
-    ("portrait", "liuyao", "刘繇（南线第七章）"),
-    ("portrait", "yanbaihu", "严白虎（南线第七章）"),
-    ("portrait", "wanglang", "王朗（南线第七章）"),
-    ("portrait", "zhoutai", "周泰（南线第七章）"),
-    ("portrait", "jiangqin", "蒋钦（南线第七章）"),
-    ("portrait", "sunquan", "孙权（南线第七章，十九岁左右）"),
-    ("portrait", "sunshangxiang", "孙尚香（成年女性，换掉占位）"),
-    ("portrait", "guonvwang", "郭女王（北线第八章，成年女性）"),
-    ("portrait", "mateng", "马腾（北线第八、九章）"),
-    ("portrait", "hansui", "韩遂（北线第八章）"),
-    ("portrait", "machao", "马超（换掉占位）"),
-    ("portrait", "madai", "马岱（北线第九章）"),
-    ("portrait", "pangde", "庞德（北线第九章）"),
-    ("portrait", "tadun", "蹋顿（北线第九章）"),
-    ("portrait", "gongsunkang", "公孙康（北线第九章）"),
-    ("portrait", "liuzhang", "刘璋（南线第九章）"),
-    ("portrait", "yanyan", "严颜（南线第九章）"),
-    ("portrait", "zhangren", "张任（南线第九章）"),
-    ("portrait", "fazheng", "法正（南线第九章）"),
-    ("portrait", "wuxian", "吴苋（南线第九章，成年女性）"),
-    ("portrait", "menghuo", "孟获（南线第九章）"),
-    ("portrait", "luxun", "陆逊（成年，南线第九章）"),
-    ("portrait", "yujin", "于禁（北线第十章）"),
-    ("portrait", "lidian", "李典（北线第十章）"),
-    ("portrait", "xiahouyuan", "夏侯渊（北线第十章）"),
-    ("portrait", "xuchu", "许褚（换掉占位）"),
-    ("portrait", "zhanghe", "张郃（北线第十章）"),
-    ("portrait", "zhanglu", "张鲁（南线第十章）"),
-    ("portrait", "zhangwei", "张卫（南线第十章）"),
-    ("portrait", "xiahoumao", "夏侯楙（南线第十章）"),
-    ("portrait", "zhugeliang", "诸葛亮（换掉占位）"),
-    ("portrait", "dianwei", "典韦（第十一章南线）"),
-    ("battle", "c3_shanfei", "独眼匪首（第三章流民匪患）"),
-    ("battle", "c3_qiaorui", "城外·桥蕤（第三章南阳城外便装伏兵）"),
-    ("battle", "c3_jiling", "山口·纪灵（第三章大雨隘口决战）"),
-    ("battle", "c3_leibo", "山道追兵·雷薄（第三章清晨山道追击）"),
-    ("battle", "c3_chenlan", "夜袭·陈兰（第三章雨夜火把夜袭）"),
-    ("battle", "c3_yuanshu", "袁术（第三章金顶马车与大军）"),
-    ("cg", "c3_leave", "撤离洛阳（流民大队与孙家车队）"),
-    ("cg", "c3_wenji", "救蔡文姬（泥泞道边拾断弦琴）"),
-    ("cg", "c3_supply", "饥民与军粮"),
-    ("cg", "c3_slip", "酒肆说漏嘴（孙策拍桌吹牛，周瑜捂嘴）"),
-    ("cg", "c3_entrust", "托付玉玺（孙坚夜交锦盒于吴夫人）"),
-    ("cg", "c3_warn", "劝阻孙坚"),
-    ("cg", "c3_raid", "陈兰雨夜袭营"),
-    ("cg", "c3_news", "纪灵败退与噩耗"),
-    ("cg", "c3_end", "碎玺决战（吴夫人碎玉玺面袁术）"),
-
-    # P1 · 地图底图：
-
-    # P2 · 首领 / 精英战斗 CG 和结局卡：
-    ("battle", "c5_dongzhuo", "未央宫前·董卓（首领）"),
-    ("battle", "c4_lvbu", "雪中宣平门·吕布（结局二前的最后一战）"),
-    ("battle", "c7_jiling", "宛城西门·纪灵（首领）"),
-    ("battle", "c6_lijue", "函谷关·李傕（首领）"),
-    ("battle", "c4_gaoshun", "蔡府后门·高顺（精英）"),
-    ("battle", "c5_niufu", "比武·牛辅（精英）"),
-    ("battle", "c5_hall", "喜堂·飞熊军（精英）"),
-    ("battle", "dagu", "大谷·徐荣（精英）"),
-    ("cg", "end_yusui", "结局卡·玉碎（象征画，不画人）"),
-
-    # 第五章 · 荆襄风云：
-    ("portrait", "ganning", "甘宁（换掉公版绣像占位：年轻的锦帆贼、腰挂铜铃、背大弓）"),
-    ("portrait", "simahui", "司马徽（水镜先生，第五章事件）"),
-    ("portrait", "pangdegong", "庞德公（岘山老农，第五章事件）"),
-    ("portrait", "huangchengyan", "黄承彦（沔南名士，第五章事件）"),
-    ("portrait", "wenpin", "文聘（荆州大将，第五章招贤馆）"),
-    ("portrait", "yiji", "伊籍（第五章招贤馆）"),
-    ("portrait", "jingzhou_bu", "荆州步卒（兵卡）"),
-    ("portrait", "caifu_nu", "蔡府连弩手（精兵卡）"),
-    ("portrait", "zongzei", "宗贼（兵卡）"),
-    ("portrait", "jinfan_zei", "锦帆贼（精兵卡）"),
-    ("battle", "jx_jinfan", "汉水渡口·锦帆贼"),
-    ("battle", "jx_zongzei", "新野·宗贼"),
-    ("battle", "jx_ganning", "汉水·甘宁（事件战）"),
-    ("cg", "e_shuijing", "事件·水镜先生"),
-    ("cg", "e_pangdegong", "事件·岘山老农"),
-    ("cg", "e_huangchengyan", "事件·沔南名士"),
-    ("cg", "e_ganning", "事件·锦帆游侠"),
-    ("portrait", "jiaxu", "贾诩（毒士，长安接风宴露面、四周目第四章打败张济张绣后入队、第五章破局线核心）"),
-    ("portrait", "zhangxiu", "张绣（北地枪王，张济之侄）"),
-    ("cg", "c6_jiaxu", "绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）"),
-    ("battle", "c6_zhangxiu", "渭水桥·张绣"),
-    ("battle", "c6_zhangji", "渭水营·张济（精英）"),
-    ("portrait", "liubiao", "刘表（荆州牧，坐谈客）"),
-    ("portrait", "caimao", "蔡瑁（水军都督，骄横外戚）"),
-    ("portrait", "kuaiyue", "蒯越（荆襄谋主）"),
-    ("portrait", "huangzu", "黄祖（江夏太守）"),
-    ("portrait", "caifuren", "蔡夫人（荆州，成年女性）"),
-    ("portrait", "jingzhou_gong", "荆州弓手（兵卡）"),
-    ("portrait", "jingzhou_shuijun", "荆州水军（兵卡）"),
-    ("cg", "c8_shuige", "水阁·貂蝉代饮（结局三线的关键一幕）"),
-    ("cg", "c8_grapes", "水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）"),
-    ("cg", "c8_louchuan", "月下楼船·十指相扣、糖炒栗子"),
-    ("cg", "c8_zupu", "破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）"),
-    ("cg", "c8_xuexi", "恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）"),
-    ("cg", "c6_jiaxu_join", "四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）"),
-    ("portrait", "yizhe", "医者（兵卡，第五章兵卡池）"),
-    ("cg", "c8_liuxian", "留仙裙·淯水边"),
-    ("cg", "c8_caifuren", "蔡夫人认同宗、送明珠"),
-    ("cg", "c8_jiayan", "宛城家宴"),
-    ("cg", "c8_dress", "盛装（吴夫人给貂蝉梳头）"),
-    ("cg", "c8_xiangxiao", "香消（克制）"),
-    ("cg", "c8_henhai", "恨海·汉江冷雨（克制）"),
-    ("battle", "jx_huangzu", "淯水·黄祖（首领）"),
-    ("battle", "jx_caimao_a", "水阁·独眼蔡瑁（结局三线首领）"),
-    ("battle", "jx_caimao_b", "水阁·蔡瑁（破局线首领）"),
-    ("battle", "jx_shuijun", "水寨·荆州水军（精英）"),
-    ("battle", "jx_bubing", "淯水北岸·荆州步卒"),
-    ("battle", "jx_gongshou", "芦苇荡·荆州弓手"),
-    ("battle", "jx_nushou", "水阁·蔡府连弩手"),
-
-    # 兵卡：
-    ("portrait", "jiangdong_gong", "江东弓手（第一章缺失兵卡）"),
-    ("portrait", "liehu", "山中猎户（第一章缺失兵卡）"),
-    ("portrait", "yuenv_gong", "越女弓手（第一章缺失兵卡）"),
-    ("portrait", "chenwu", "陈武（R 弓兵）"),
-    ("portrait", "shanyue_nu", "山越弩手"),
-    ("portrait", "sunjing", "孙静"),
-    ("portrait", "sunben", "孙贲"),
-    ("portrait", "zhuzhi", "朱治"),
-]
 # the chest sprites the chest-opening animation uses (godot/data/art/ui/chest_<key>.png)
 CHESTS = {
     "chest_normal": "a sturdy wooden treasure chest with bronze corner caps and a heavy bronze padlock, Han-dynasty style, closed",
@@ -2112,13 +1825,23 @@ def main() -> None:
     ui_done = {k for k in CHESTS if (ROOT / "godot" / "data" / "art" / "ui" / f"{k}.png").exists()}
     delivered = {"portrait": done, "cg": set(art.get("cgs", {})), "map": maps_done, "relic": relics_done,
                  "battle": set(art.get("battles", {})), "ui": ui_done}
-    todo = [n for n in NEXT if n[1] not in delivered[n[0]]]
+    todo = build_next(delivered)
+    need = {(k, key) for k, key, _, _ in todo}  # the sections below list only what the game uses and still lacks
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
         if REDO:
             out += ["**先重画**（已交付但有地方不对）：", ""] + [f"- `{k}` — {why}" for k, why in REDO] + [""]
-        out += [f"{i}. `{key}` — {what}（{ {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物', 'battle': '战斗 CG', 'ui': '界面'}[kind] }）"
-                for i, (kind, key, what) in enumerate(todo, 1)]
+        kind_name = {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物', 'battle': '战斗 CG', 'ui': '界面'}
+        out += [f"共 {len(todo)} 张，按优先级分档（全部由游戏数据算出，游戏里没用到的不列）：", ""]
+        n = 0
+        last = None
+        for kind, key, what, tier in todo:
+            if tier != last:
+                last = tier
+                cnt = sum(1 for x in todo if x[3] == tier)
+                out += ["", f"**第 {tier} 档 · {TIER_NAMES[tier]}（{cnt}）**", ""]
+            n += 1
+            out.append(f"{n}. `{key}` — {what}（{kind_name[kind]}）")
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
     out += ["## 立绘（竖版 3:4）", ""]
     import re as _re
@@ -2129,6 +1852,8 @@ def main() -> None:
     for key, p in PORTRAITS.items():
         if key in done and key not in redo:
             continue
+        if ("portrait", key) not in need:
+            continue
         status = "🟡 换掉占位" if key in art["portraits"] else "⬜ 缺"
         hdr = f"### `{key}` {status}"
         if key in OVERRIDES:
@@ -2138,7 +1863,7 @@ def main() -> None:
             out += render_item(hdr, zh, en)
     out += ["## 战斗 CG（横版 16:9，每场战斗一张）", ""]
     for key, scene in BATTLES.items():
-        if key in art.get("battles", {}):
+        if key in art.get("battles", {}) or ("battle", key) not in need:
             continue
         hdr = f"### `{key}`"
         if key in OVERRIDES:
@@ -2148,7 +1873,7 @@ def main() -> None:
             out += render_item(hdr, zh, en)
     out += ["## 剧情插图 CG（横版 16:9）", ""]
     for key, scene in CGS.items():
-        if key in art.get("cgs", {}) and key not in redo:
+        if (key in art.get("cgs", {}) and key not in redo) or ("cg", key) not in need:
             continue
         hdr = f"### `{key}`"
         if key in OVERRIDES:
@@ -2159,7 +1884,7 @@ def main() -> None:
     out += ["## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）", ""]
     for eid, scene in EVENTS.items():
         key = "e_" + eid
-        if key in art.get("cgs", {}):
+        if key in art.get("cgs", {}) or ("cg", key) not in need:
             continue
         hdr = f"### `{key}`"
         if key in OVERRIDES:
@@ -2191,7 +1916,7 @@ def main() -> None:
                 f"画风：{STYLE}，彩绘道具，色彩浓郁，轮廓利落；不要文字。", "```", ""]
     out += ["## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）", ""]
     for key, scene in MAPS.items():
-        if "生成" not in art.get("maps", {}).get(key, {}).get("license", "生成"):
+        if ("map", key) not in need:
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or map_prompt(scene), "```", ""]
     rarity = {k: v.get("rarity", "common") for k, v in json.loads((ROOT / "godot/data/cards.json").read_text("utf-8"))["relics"].items()}

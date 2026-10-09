@@ -2896,6 +2896,22 @@
     "bh_guanhai": {
       "src": "source/battles/bh_guanhai.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "bh_lubu": {
+      "src": "source/battles/bh_lubu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "bh_wolf2": {
+      "src": "source/battles/bh_wolf2.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_gaoshun": {
+      "src": "source/battles/c4_gaoshun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_lvbu": {
+      "src": "source/battles/c4_lvbu.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",

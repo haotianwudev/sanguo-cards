@@ -125,7 +125,8 @@ present. For any other art a feature needs, don't wait for it: add the requireme
 every table entry you add are Chinese; old English entries get translated whenever you touch them). Add the subject to the tables in `tools/art_prompts.py`
 (portraits: name / appearance / armor & clothing / weapon; battles and story CGs: one scene line — composition and style
 are fixed templates so the set stays consistent; women are always written as adults) and run `python tools/art_prompts.py`
-to regenerate `pics/ART-PROMPTS.md`. Keep the prompt consistent with the brief in `CARD-DESIGN.md` §7 and the story text.
+to regenerate `pics/ART-PROMPTS.md`. Its 「下一批」 list is computed from the game data (what the game uses and still lacks, ranked by
+tier: 首领图 → 精英图 → 主线 CG → 普通战斗背景 → 宝物 → 奇遇 → 未实装), never hand-edited — wire a `cg` / battle into a square and it shows up. Keep the prompt consistent with the brief in `CARD-DESIGN.md` §7 and the story text.
 When the owner hands over a prompt of their own (often Chinese, with 【角色】 sections, a staging note and the gag),
 put it in `OVERRIDES` under its key — it replaces the template and stays in `art_prompts.py` after the art exists
 (`ART-PROMPTS.md` and `ART-NEEDS.md` list only what is still missing, to stay short).

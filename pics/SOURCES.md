@@ -358,6 +358,10 @@
 | `battle:hs_yudu` | source/battles/hs_yudu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:hs_zhangbaiqi` | source/battles/hs_zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:bh_guanhai` | source/battles/bh_guanhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:bh_lubu` | source/battles/bh_lubu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:bh_wolf2` | source/battles/bh_wolf2.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c4_gaoshun` | source/battles/c4_gaoshun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c4_lvbu` | source/battles/c4_lvbu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
