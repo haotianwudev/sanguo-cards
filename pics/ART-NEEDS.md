@@ -377,7 +377,6 @@
 | ⬜ 缺 | `c3_bad_return` | 空手而归 |
 | ✅ 已有 | `c3_guotu_raid` | 一年后 |
 | ✅ 已有 | `c3_alliance` | 黑山令 |
-| ⬜ 缺 | `c3_bad_night` | 最后一夜 |
 | ⬜ 缺 | `c3_bad_guotu` | 郭图亲临 |
 | ✅ 已有 | `c3_secret_path` | 黑山秘道 |
 | ✅ 已有 | `end_fuchao` | 覆巢 |
