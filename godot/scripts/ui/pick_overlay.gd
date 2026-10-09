@@ -19,6 +19,7 @@ var _confirm: Button
 
 
 func _ready() -> void:
+	z_index = 70  # above the map token (z 5), the recap panel (60) and the other map overlays
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var dim := ColorRect.new()
 	dim.color = Color(0, 0, 0, 0.72)
