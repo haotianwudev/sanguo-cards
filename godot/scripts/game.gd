@@ -662,6 +662,18 @@ func demo(name: String) -> void:
 				await get_tree().create_timer(0.5).timeout
 				b.b.leaders[1]["boosted"] = true
 				b._refresh()
+			if OS.get_cmdline_user_args().has("--endwin"):  # win with a boosted card and statuses up: nothing may stay over the 胜利 banner
+				await get_tree().create_timer(0.5).timeout
+				b.b.leaders[1]["boosted"] = true
+				b.b.enemy["burn_turns"] = 3
+				b.b.enemy["burn_pct"] = 0.1
+				b.b.buff["layers"] = 2
+				b._refresh()
+				await get_tree().create_timer(0.8).timeout
+				b.b.enemy["hp"] = 0
+				b.b.result = "win"
+				b._refresh()
+				b._finish()
 			if OS.get_cmdline_user_args().has("--longstatus"):  # every status line at once: the enemy panel must not grow
 				await get_tree().create_timer(0.5).timeout
 				var en: Dictionary = b.b.enemy

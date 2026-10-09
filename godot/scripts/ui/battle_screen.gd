@@ -552,7 +552,7 @@ func _fx_set(want: Dictionary) -> void:
 
 func _sync_fx() -> void:
 	## the statuses that last (灼烧 / 破防 / 眩晕 on the enemy, 灼烧 on us, 混乱 / BOOST / 战意 on the cards)
-	if b == null or _cards.is_empty():
+	if b == null or _cards.is_empty() or b.result != "":
 		return
 	var want := {}
 	var e := b.enemy
@@ -926,7 +926,21 @@ func _log_lines(lines: Array) -> void:
 
 # ---- end -----------------------------------------------------------------------
 
+func _clear_marks() -> void:
+	## the battle is over: every lasting effect (auras, status embers, corner badges, the boosted cards' lift) goes now,
+	## so nothing keeps floating above the 胜利 banner or the chest pick
+	_fx_set({})
+	for n in _badges:
+		if is_instance_valid(n):
+			n.queue_free()
+	_badges.clear()
+	for c in _cards:
+		_boost_pop(c, false)
+		c.modulate = Color.WHITE
+
+
 func _finish() -> void:
+	_clear_marks()
 	var save := Game.save
 	var won := b.result == "win"
 	if won:
