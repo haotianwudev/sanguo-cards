@@ -1109,6 +1109,11 @@ func _complete() -> void:
 	else:
 		lines.append("\n宝物、卡牌、战功、难度和你的选择都会带到下一章。")
 	text.text = "\n".join(lines)
+	if new_form != "":  # the lord card is the chapter's real prize: a full-screen moment over the recap
+		var reveal := LordReveal.new()
+		reveal.form = new_form
+		reveal.dupe = Game.save.lord_form_dupe
+		add_child(reveal)
 	var spend := HBoxContainer.new()
 	spend.alignment = BoxContainer.ALIGNMENT_CENTER
 	spend.add_theme_constant_override("separation", 16)

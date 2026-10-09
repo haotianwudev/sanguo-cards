@@ -256,6 +256,15 @@ func demo(name: String) -> void:
 					save.square = a.substr(5)
 					save.visited.append(save.square)
 			show_screen(MapScreen.new())
+		"lordreveal":  # the lord-card moment a cleared chapter gives: --demo=lordreveal [--dupe]
+			save.flags = ["出生：冀州无极"]
+			var rv := LordReveal.new()
+			var forms: Array = save.route_lord_forms()
+			rv.form = "lord_north_silver" if save.is_north() else "lord_south_armor"
+			save.lord_forms.append(rv.form)
+			rv.dupe = OS.get_cmdline_user_args().has("--dupe")
+			show_screen(MapScreen.new())
+			add_child(rv)
 		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)
 			save.flags = ["出生：冀州无极"]
 			save.quests_cleared = ["prologue", "taodong"]
