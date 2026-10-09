@@ -10,124 +10,112 @@
 按顺序画；交付后重跑本脚本，这一条会自动消失。
 
 1. `bh_lubu` — 太行山口·吕布（北线第四章首领）（战斗 CG）
-2. `bh_guanhai` — 北海解围·管亥（北线第四章首领）（战斗 CG）
-3. `c5_dongzhuo` — 未央宫前·董卓（长安首领）（战斗 CG）
-4. `c6_lijue` — 函谷关·李傕（南线第四章首领）（战斗 CG）
-5. `c7_jiling` — 宛城·纪灵（南线第四章首领）（战斗 CG）
-6. `jx_huangzu` — 淯水·黄祖（南线第五章首领）（战斗 CG）
-7. `jx_caimao_a` — 水阁·独眼蔡瑁（南线第五章首领，恨海线）（战斗 CG）
-8. `jx_caimao_b` — 水阁·蔡瑁（南线第五章首领，破局线）（战斗 CG）
-9. `jiujia` — 孙坚旧甲（宝物图标，主角专属，现为文字圆章）（宝物）
-10. `hupi` — 虎皮披风（宝物图标，主角专属，现为文字圆章）（宝物）
-11. `qixing` — 七星宝刀（宝物图标，主角专属，现为文字圆章）（宝物）
-12. `zhaoxianbang` — 招贤榜（宝物图标，主角专属，现为文字圆章）（宝物）
-13. `yitian` — 倚天剑（宝物图标，主角专属，现为文字圆章）（宝物）
-14. `yuxi` — 传国玉玺（宝物图标，主角专属，现为文字圆章）（宝物）
-15. `end_hushi` — 结局四·虎噬（象征画，南线终章，尚未实装）（剧情 CG）
-16. `end_zhumie` — 结局五·烛灭（象征画，北线终章，尚未实装）（剧情 CG）
-17. `end_juefa` — 结局七·绝罚（象征画）（剧情 CG）
-18. `end_menhou` — 结局八·门后之诛（象征画，尚未实装）（剧情 CG）
-19. `end_chibi` — 南线结局·赤壁（象征画，尚未实装）（剧情 CG）
-20. `end_guandu` — 北线结局·官渡（象征画，尚未实装）（剧情 CG）
-21. `end_tianming` — 第十二章·天命归一（真结局，象征画，尚未实装）（剧情 CG）
-22. `end_locked` — 结局图鉴「未解锁」缩略图（16:9，暗色印章问号）（剧情 CG）
-23. `jiangwei` — 姜维（新增枪兵卡）（立绘）
-24. `chendao` — 陈到（新增枪兵卡）（立绘）
-25. `weiyan` — 魏延（新增枪兵卡）（立绘）
-26. `guanping` — 关平（新增枪兵卡）（立绘）
-27. `zhangbao` — 张苞（新增枪兵卡）（立绘）
-28. `guanxing` — 关兴（新增枪兵卡）（立绘）
-29. `chenglian` — 成廉（新增枪兵卡）（立绘）
-30. `weixu` — 魏续（新增枪兵卡）（立绘）
-31. `lingtong` — 凌统（新增枪兵卡）（立绘）
-32. `yangang` — 严纲（新增枪兵卡）（立绘）
-33. `zoudan` — 邹丹（新增枪兵卡）（立绘）
-34. `taoqian` — 陶谦（立绘）
-35. `chendeng` — 陈登（立绘）
-36. `chengui` — 陈珪（立绘）
-37. `caobao` — 曹豹（立绘）
-38. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
-39. `xunyu` — 荀彧（第六章）（立绘）
-40. `caoren` — 曹仁（第六章）（立绘）
-41. `chengong` — 陈宫（立绘）
-42. `xunyou` — 荀攸（立绘）
-43. `zhongyao` — 钟繇（立绘）
-44. `zhangxun` — 张勋（南线第六章）（立绘）
-45. `liuxun` — 刘勋（南线第六章）（立绘）
-46. `lusu` — 鲁肃（南线第六章入队）（立绘）
-47. `zhengbao` — 郑宝（南线第六章）（立绘）
-48. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
-49. `zangba` — 臧霸（北线第七章）（立绘）
-50. `shenrong` — 审荣（北线第七章）（立绘）
-51. `liuyao` — 刘繇（南线第七章）（立绘）
-52. `yanbaihu` — 严白虎（南线第七章）（立绘）
-53. `wanglang` — 王朗（南线第七章）（立绘）
-54. `zhoutai` — 周泰（南线第七章）（立绘）
-55. `jiangqin` — 蒋钦（南线第七章）（立绘）
-56. `sunquan` — 孙权（南线第七章，十九岁左右）（立绘）
-57. `mateng` — 马腾（北线第八、九章）（立绘）
-58. `hansui` — 韩遂（北线第八章）（立绘）
-59. `pangde` — 庞德（北线第九章）（立绘）
-60. `tadun` — 蹋顿（北线第九章）（立绘）
-61. `gongsunkang` — 公孙康（北线第九章）（立绘）
-62. `liuzhang` — 刘璋（南线第九章）（立绘）
-63. `yanyan` — 严颜（南线第九章）（立绘）
-64. `zhangren` — 张任（南线第九章）（立绘）
-65. `fazheng` — 法正（南线第九章）（立绘）
-66. `menghuo` — 孟获（南线第九章）（立绘）
-67. `luxun` — 陆逊（成年，南线第九章）（立绘）
-68. `yujin` — 于禁（北线第十章）（立绘）
-69. `lidian` — 李典（北线第十章）（立绘）
-70. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
-71. `xuchu` — 许褚（换掉占位）（立绘）
-72. `zhanghe` — 张郃（北线第十章）（立绘）
-73. `zhanglu` — 张鲁（南线第十章）（立绘）
-74. `zhangwei` — 张卫（南线第十章）（立绘）
-75. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
-76. `zhugeliang` — 诸葛亮（换掉占位）（立绘）
-77. `dianwei` — 典韦（第十一章南线）（立绘）
-78. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
-79. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
-80. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
-81. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
-82. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
-83. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
-84. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
-85. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
-86. `yiji` — 伊籍（第五章招贤馆）（立绘）
-87. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
-88. `jx_zongzei` — 新野·宗贼（战斗 CG）
-89. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
-90. `e_shuijing` — 事件·水镜先生（剧情 CG）
-91. `e_pangdegong` — 事件·岘山老农（剧情 CG）
-92. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
-93. `e_ganning` — 事件·锦帆游侠（剧情 CG）
-94. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
-95. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
-96. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
-97. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
-98. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
-99. `kuaiyue` — 蒯越（荆襄谋主）（立绘）
-100. `huangzu` — 黄祖（江夏太守）（立绘）
-101. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
-102. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
-103. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
-104. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
-105. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
-106. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
-107. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
-108. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
-109. `c8_jiayan` — 宛城家宴（剧情 CG）
-110. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
-111. `c8_xiangxiao` — 香消（克制）（剧情 CG）
-112. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
-113. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
-114. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
-115. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
-116. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
-117. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
-118. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
-119. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
+2. `c5_dongzhuo` — 未央宫前·董卓（长安首领）（战斗 CG）
+3. `c6_lijue` — 函谷关·李傕（南线第四章首领）（战斗 CG）
+4. `c7_jiling` — 宛城·纪灵（南线第四章首领）（战斗 CG）
+5. `jx_huangzu` — 淯水·黄祖（南线第五章首领）（战斗 CG）
+6. `jx_caimao_a` — 水阁·独眼蔡瑁（南线第五章首领，恨海线）（战斗 CG）
+7. `jx_caimao_b` — 水阁·蔡瑁（南线第五章首领，破局线）（战斗 CG）
+8. `end_hushi` — 结局四·虎噬（象征画，南线终章，尚未实装）（剧情 CG）
+9. `end_zhumie` — 结局五·烛灭（象征画，北线终章，尚未实装）（剧情 CG）
+10. `end_juefa` — 结局七·绝罚（象征画）（剧情 CG）
+11. `end_menhou` — 结局八·门后之诛（象征画，尚未实装）（剧情 CG）
+12. `end_chibi` — 南线结局·赤壁（象征画，尚未实装）（剧情 CG）
+13. `end_guandu` — 北线结局·官渡（象征画，尚未实装）（剧情 CG）
+14. `end_tianming` — 第十二章·天命归一（真结局，象征画，尚未实装）（剧情 CG）
+15. `end_locked` — 结局图鉴「未解锁」缩略图（16:9，暗色印章问号）（剧情 CG）
+16. `jiangwei` — 姜维（新增枪兵卡）（立绘）
+17. `chendao` — 陈到（新增枪兵卡）（立绘）
+18. `weiyan` — 魏延（新增枪兵卡）（立绘）
+19. `guanping` — 关平（新增枪兵卡）（立绘）
+20. `zhangbao` — 张苞（新增枪兵卡）（立绘）
+21. `guanxing` — 关兴（新增枪兵卡）（立绘）
+22. `chenglian` — 成廉（新增枪兵卡）（立绘）
+23. `weixu` — 魏续（新增枪兵卡）（立绘）
+24. `lingtong` — 凌统（新增枪兵卡）（立绘）
+25. `yangang` — 严纲（新增枪兵卡）（立绘）
+26. `zoudan` — 邹丹（新增枪兵卡）（立绘）
+27. `taoqian` — 陶谦（立绘）
+28. `chendeng` — 陈登（立绘）
+29. `chengui` — 陈珪（立绘）
+30. `caobao` — 曹豹（立绘）
+31. `xiahoudun` — 夏侯惇（第五章，两眼完好）（立绘）
+32. `xunyu` — 荀彧（第六章）（立绘）
+33. `caoren` — 曹仁（第六章）（立绘）
+34. `chengong` — 陈宫（立绘）
+35. `xunyou` — 荀攸（立绘）
+36. `zhongyao` — 钟繇（立绘）
+37. `zhangxun` — 张勋（南线第六章）（立绘）
+38. `liuxun` — 刘勋（南线第六章）（立绘）
+39. `lusu` — 鲁肃（南线第六章入队）（立绘）
+40. `zhengbao` — 郑宝（南线第六章）（立绘）
+41. `luxun_young` — 少年陆逊（十四五岁的孩子，只画孩子该有的样子）（立绘）
+42. `zangba` — 臧霸（北线第七章）（立绘）
+43. `shenrong` — 审荣（北线第七章）（立绘）
+44. `liuyao` — 刘繇（南线第七章）（立绘）
+45. `yanbaihu` — 严白虎（南线第七章）（立绘）
+46. `wanglang` — 王朗（南线第七章）（立绘）
+47. `zhoutai` — 周泰（南线第七章）（立绘）
+48. `jiangqin` — 蒋钦（南线第七章）（立绘）
+49. `mateng` — 马腾（北线第八、九章）（立绘）
+50. `hansui` — 韩遂（北线第八章）（立绘）
+51. `pangde` — 庞德（北线第九章）（立绘）
+52. `tadun` — 蹋顿（北线第九章）（立绘）
+53. `gongsunkang` — 公孙康（北线第九章）（立绘）
+54. `liuzhang` — 刘璋（南线第九章）（立绘）
+55. `yanyan` — 严颜（南线第九章）（立绘）
+56. `zhangren` — 张任（南线第九章）（立绘）
+57. `fazheng` — 法正（南线第九章）（立绘）
+58. `menghuo` — 孟获（南线第九章）（立绘）
+59. `luxun` — 陆逊（成年，南线第九章）（立绘）
+60. `yujin` — 于禁（北线第十章）（立绘）
+61. `lidian` — 李典（北线第十章）（立绘）
+62. `xiahouyuan` — 夏侯渊（北线第十章）（立绘）
+63. `zhanghe` — 张郃（北线第十章）（立绘）
+64. `zhanglu` — 张鲁（南线第十章）（立绘）
+65. `zhangwei` — 张卫（南线第十章）（立绘）
+66. `xiahoumao` — 夏侯楙（南线第十章）（立绘）
+67. `c5_dongzhuo` — 未央宫前·董卓（首领）（战斗 CG）
+68. `c4_lvbu` — 雪中宣平门·吕布（结局二前的最后一战）（战斗 CG）
+69. `c7_jiling` — 宛城西门·纪灵（首领）（战斗 CG）
+70. `c6_lijue` — 函谷关·李傕（首领）（战斗 CG）
+71. `c4_gaoshun` — 蔡府后门·高顺（精英）（战斗 CG）
+72. `c5_niufu` — 比武·牛辅（精英）（战斗 CG）
+73. `c5_hall` — 喜堂·飞熊军（精英）（战斗 CG）
+74. `wenpin` — 文聘（荆州大将，第五章招贤馆）（立绘）
+75. `yiji` — 伊籍（第五章招贤馆）（立绘）
+76. `jx_jinfan` — 汉水渡口·锦帆贼（战斗 CG）
+77. `jx_zongzei` — 新野·宗贼（战斗 CG）
+78. `jx_ganning` — 汉水·甘宁（事件战）（战斗 CG）
+79. `e_shuijing` — 事件·水镜先生（剧情 CG）
+80. `e_pangdegong` — 事件·岘山老农（剧情 CG）
+81. `e_huangchengyan` — 事件·沔南名士（剧情 CG）
+82. `e_ganning` — 事件·锦帆游侠（剧情 CG）
+83. `zhangxiu` — 张绣（北地枪王，张济之侄）（立绘）
+84. `c6_jiaxu` — 绑走贾诩（五花大绑躺在粮车上还在闻酒葫芦）（剧情 CG）
+85. `c6_zhangxiu` — 渭水桥·张绣（战斗 CG）
+86. `c6_zhangji` — 渭水营·张济（精英）（战斗 CG）
+87. `caimao` — 蔡瑁（水军都督，骄横外戚）（立绘）
+88. `huangzu` — 黄祖（江夏太守）（立绘）
+89. `c8_shuige` — 水阁·貂蝉代饮（结局三线的关键一幕）（剧情 CG）
+90. `c8_grapes` — 水阁·貂蝉要舍身，被主角一把拽回怀里（破局线的关键一幕）（剧情 CG）
+91. `c8_louchuan` — 月下楼船·十指相扣、糖炒栗子（剧情 CG）
+92. `c8_zupu` — 破局线·蔡家族老划掉蔡瑁、刘表撇清（略搞笑）（剧情 CG）
+93. `c8_xuexi` — 恨海线·城头雨里董白「你越来越像我爷爷了」（克制，不见血）（剧情 CG）
+94. `c6_jiaxu_join` — 四周目·洛阳以礼相待贾诩（红烧肉、斟酒作揖）（剧情 CG）
+95. `c8_liuxian` — 留仙裙·淯水边（剧情 CG）
+96. `c8_caifuren` — 蔡夫人认同宗、送明珠（剧情 CG）
+97. `c8_jiayan` — 宛城家宴（剧情 CG）
+98. `c8_dress` — 盛装（吴夫人给貂蝉梳头）（剧情 CG）
+99. `c8_xiangxiao` — 香消（克制）（剧情 CG）
+100. `c8_henhai` — 恨海·汉江冷雨（克制）（剧情 CG）
+101. `jx_huangzu` — 淯水·黄祖（首领）（战斗 CG）
+102. `jx_caimao_a` — 水阁·独眼蔡瑁（结局三线首领）（战斗 CG）
+103. `jx_caimao_b` — 水阁·蔡瑁（破局线首领）（战斗 CG）
+104. `jx_shuijun` — 水寨·荆州水军（精英）（战斗 CG）
+105. `jx_bubing` — 淯水北岸·荆州步卒（战斗 CG）
+106. `jx_gongshou` — 芦苇荡·荆州弓手（战斗 CG）
+107. `jx_nushou` — 水阁·蔡府连弩手（战斗 CG）
 
 交图规则：
 
@@ -607,32 +595,6 @@ Cai Mao (蔡瑁), Lady Cai's younger brother and admiral of the Jingzhou navy �
 铠甲与服饰：An embroidered brocade robe worn over gilded scale armor, a gold belt, rings on his fingers.
 武器：One hand on the hilt of a long sword, the other raising a gold beast-shaped wine cup.
 背景：the deck of a great tiered warship on the Han river at dusk, rows of Jingzhou war boats behind。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
-### `kuaiyue` ⬜ 缺
-
-```
-蒯越（荆襄谋主，蒯家，第五章破局线入队）的竖版人物立绘。
-外貌：四十出头，短须整齐，目光沉稳像在掂量人，客气的浅笑
-铠甲与服饰：一丝不乱的浅灰儒服、黑色儒冠
-武器：拱手行礼，袖里揣一卷竹简
-背景：夜里襄阳书斋，案上一局没下完的棋。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Kuai Yue (蒯越), the far-sighted chief advisor of the Jingzhou gentry的竖版人物立绘。
-外貌：Composed scholar in his early 40s with a neat short beard, a calm, measuring gaze and a faint polite smile.
-铠甲与服饰：Immaculate pale-grey Confucian robe with layered collars, a simple black scholar's cap.
-武器：Hands folded in a formal bow, a closed folding bamboo scroll tucked into his sleeve.
-背景：a lamplit study at night in Xiangyang, a go board with an unfinished game on the low table。
 构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
 ```
@@ -1236,32 +1198,6 @@ Jiang Qin (蒋钦), Zhou Tai's sharp-eyed partner from the river pirates的竖�
 ```
 </details>
 
-### `sunquan` ⬜ 缺
-
-```
-孙权（孙坚次子，十九岁左右，南线第七章入队，管钱粮）的竖版人物立绘。
-外貌：十九岁上下，紫髯碧眼，少年老成，沉静
-铠甲与服饰：深紫色锦袍外罩轻甲
-武器：一手账册一手按剑
-背景：富春老宅的书房。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Sun Quan (孙权), Sun Jian's second son, a composed young man of about nineteen的竖版人物立绘。
-外貌：Calm young man of about nineteen with a purple-tinged beard and striking blue-green eyes, old beyond his years.
-铠甲与服饰：Dark purple brocade robe under light armor.
-武器：A ledger in one hand, the other resting on his sword.
-背景：a study in the old Sun family house at Fuchun。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `mateng` ⬜ 缺
 
 ```
@@ -1626,32 +1562,6 @@ Xiahou Yuan (夏侯渊), Cao Cao's lightning-fast cavalry commander的竖版人�
 ```
 </details>
 
-### `xuchu` 🟡 换掉占位
-
-```
-许褚·虎痴（曹操的贴身护卫，北线第十章荥阳和马超赤膊斗将）的竖版人物立绘。
-外貌：容貌端正，英气威严
-铠甲与服饰：赤膊（甲脱在地上）
-武器：三十多岁，虎背熊腰，憨厚又凶猛，光头或短发；扛一柄镔铁大砍刀
-背景：荥阳原野的尘土。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Xu Chu (许褚), Cao Cao's tiger-like bodyguard的竖版人物立绘。
-外貌：Massive, bear-like man in his 30s, simple-faced but ferocious, close-cropped hair.
-铠甲与服饰：Bare-chested, his armor thrown on the ground.
-武器：A huge iron broadsword over his shoulder.
-背景：the dusty plain of Xingyang。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ### `zhanghe` ⬜ 缺
 
 ```
@@ -1756,67 +1666,7 @@ Xiahou Mao (夏侯楙), Cao Cao's pampered son-in-law left to hold Chang'an的�
 ```
 </details>
 
-### `zhugeliang` 🟡 换掉占位
-
-```
-诸葛亮（青年卧龙，投了刘备，南线第八、十章的对手；第十一章黑化）的竖版人物立绘。
-外貌：二十岁上下，清俊高傲，眉目如画，眼神里有压着的锋芒
-铠甲与服饰：纶巾、白色鹤氅
-武器：手持白羽扇
-背景：洛水边的八卦阵和连弩。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Zhuge Liang (诸葛亮), the brilliant, proud young strategist serving Liu Bei的竖版人物立绘。
-外貌：Handsome, proud young man of about 21 with fine features and a restrained edge in his eyes.
-铠甲与服饰：A scholar's silk headscarf and a white crane-feather cloak.
-武器：A white feather fan.
-背景：an eight-trigram battle formation with repeating crossbows beside the Luo River。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
-### `dianwei` 🟡 换掉占位
-
-```
-典韦·恶来（曹操的贴身护卫，第十一章南线精英，突阵抢粮，为曹操、许褚战死）的竖版人物立绘。
-外貌：容貌端正，英气威严
-铠甲与服饰：破旧的曹军重甲、赤着一条胳膊
-武器：三十多岁，铁塔般的巨汉，黑脸虬髯，满身刀疤，眼神凶猛又忠厚；双手各握一柄沉重的大铁戟
-背景：洛阳南门、城下的吴军营寨和炊烟。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-
-<details>
-<summary>English Prompt (英文备用)</summary>
-
-```
-Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖版人物立绘。
-外貌：A towering, tower-like man in his 30s with a dark face, a thick curly beard, scars everywhere, fierce yet honest eyes.
-铠甲与服饰：Battered heavy Cao army armor with one arm bare.
-武器：A massive iron halberd in each hand.
-背景：the south gate of Luoyang with the enemy camp and its cooking smoke below the walls。
-构图：竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，带氛围的环境光，景深柔和，背景有景致但服从于人物。
-```
-</details>
-
 ## 战斗 CG（横版 16:9，每场战斗一张）
-
-### `bh_guanhai`
-
-```
-横版战斗场景插画：北海城下的决战：身材魁梧的黄巾大首领管亥扛着一柄巨大的鬼头刀，黄袍外罩简陋的皮甲，满脸狂热；身后黄巾军旗如林，数万饥民军队黑压压铺满城外原野，远处北海城头有孔融的守军弩手。
-构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
-```
 
 ### `bh_hj_duzhan`
 
@@ -2571,12 +2421,6 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 </details>
 
 ## 剧情插图 CG（横版 16:9）
-
-### `c4_drink`
-
-```
-16:9 横版故事剧情事件插画，视觉小说剧情 CG，兰斯10赛璐珞厚涂风格，精致清晰黑色墨线勾勒，华丽沉稳色彩。简陋的山寨大堂里，主角与两位年轻的女当家（郑好与姜巧）在火堆旁席地而坐，端起粗瓷大碗豪迈对饮，气氛热烈。
-```
 
 ### `c4_escape`
 
@@ -4731,57 +4575,3 @@ Dian Wei (典韦), Cao Cao's giant, loyal bodyguard, called the Evil-Comer的竖
 ```
 
 ## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）
-
-### `jiujia`
-
-```
-杰作级 1:1 方形游戏道具图标：孙坚旧甲：一副保养得一丝不苟的汉代银色札甲，护肩上刻着虎纹，胸甲带细密的鳞片纹路，下摆内衬露出一角虎皮，肩甲边缘有岁月的磨损与几处旧刀痕，旁边叠着一件白毛滚边的黑色披风一角。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```
-
-### `hupi`
-
-```
-杰作级 1:1 方形游戏道具图标：虎皮披风：一件孙坚同款的披风，整张金黄带黑纹的虎皮鞣制成披风形状，领口缀着一圈深色皮毛，用一根红色丝绳系住，边缘有磨损与缝补的针脚，披挂在木架上的样子。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```
-
-### `qixing`
-
-```
-杰作级 1:1 方形游戏道具图标：七星宝刀：曹操献刀用的那把短刀，汉代环首短刀，鎏金刀鞘上镶嵌着七颗排成北斗形状的宝石（红、蓝、绿相间），刀柄缠着黑色丝绳，半出鞘露出一截寒光凛凛的刀身。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```
-
-### `zhaoxianbang`
-
-```
-杰作级 1:1 方形游戏道具图标：招贤榜：一张贴在木板上的汉代告示，米黄色粗纸，上面是毛笔书写的大字榜文，盖着一方朱红印章，四角用铁钉固定，纸边微卷，旁边挂着一小串铜钱作为悬赏（文字用抽象的毛笔笔画表现，不要可读文字）。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```
-
-### `yitian`
-
-```
-杰作级 1:1 方形游戏道具图标：倚天剑：曹操的佩剑，一柄修长的汉代双刃直剑，剑身泛着青白色的寒光、带细密的云纹，鎏金剑格与剑首刻着龙纹，黑漆剑鞘配着红色丝绦，剑身上隐约有一线冷冽的光芒。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```
-
-### `yuxi`
-
-```
-杰作级 1:1 方形游戏道具图标：传国玉玺（诅咒）：一方青白色的玉玺，顶部盘着五条龙，缺了一角的地方用黄金镶补，印面朝上微露篆文，周身萦绕着一缕不祥的暗红色雾气，下面垫着一块旧黄绸。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```

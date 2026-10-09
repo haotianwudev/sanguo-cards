@@ -19,7 +19,7 @@
   "sunjing": {"file": "sunjing.jpg", "face": [0.5, 0.23], "head": 0.22},
   "wujing": {"file": "wujing.jpg", "face": [0.5, 0.2], "head": 0.2},
   "sunben": {"file": "sunben.jpg", "face": [0.5, 0.23], "head": 0.2},
-  "dianwei": {"file": "dianwei.jpg", "face": [0.45, 0.27], "head": 0.08, "placeholder": true},
+  "dianwei": {"file": "dianwei.jpg", "face": [0.5, 0.22], "head": 0.22},
   "caiwenji": {"file": "caiwenji.jpg", "face": [0.51, 0.24], "head": 0.23},
   "guonvwang": {"file": "guonvwang.jpg", "face": [0.5, 0.25], "head": 0.26},
   "diaochan": {"file": "diaochan.jpg", "face": [0.52, 0.27], "head": 0.24},
@@ -45,13 +45,13 @@
   "pangtong": {"file": "pangtong.jpg", "face": [0.45, 0.12], "head": 0.07, "placeholder": true},
   "sunshangxiang": {"file": "sunshangxiang.jpg", "face": [0.51, 0.23], "head": 0.25},
   "taishici": {"file": "taishici.jpg", "face": [0.5, 0.28], "head": 0.25},
-  "xuchu": {"file": "xuchu.jpg", "face": [0.48, 0.24], "head": 0.07, "placeholder": true},
+  "xuchu": {"file": "xuchu.jpg", "face": [0.5, 0.22], "head": 0.22},
   "xuhuang": {"file": "xuhuang.jpg", "face": [0.51, 0.29], "head": 0.22},
   "xurong": {"file": "xurong.jpg", "face": [0.55, 0.23], "head": 0.25},
   "zhangjiao": {"file": "zhangjiao.jpg", "face": [0.52, 0.13], "head": 0.07, "placeholder": true},
   "zhangliao": {"file": "zhangliao.jpg", "face": [0.52, 0.23], "head": 0.24},
   "zhaoyun": {"file": "zhaoyun.jpg", "face": [0.5, 0.25], "head": 0.26},
-  "zhugeliang": {"file": "zhugeliang.jpg", "face": [0.47, 0.12], "head": 0.07, "placeholder": true},
+  "zhugeliang": {"file": "zhugeliang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "langlijiao": {"file": "langlijiao.jpg", "face": [0.5, 0.23], "head": 0.22},
   "yaodao": {"file": "yaodao.jpg", "face": [0.5, 0.3], "head": 0.25},
   "heyi": {"file": "heyi.jpg", "face": [0.53, 0.25], "head": 0.22},
@@ -226,5 +226,7 @@
   "huangyueying": {"file": "huangyueying.jpg", "face": [0.5, 0.22], "head": 0.22},
   "peiyuanshao": {"file": "peiyuanshao.jpg", "face": [0.5, 0.22], "head": 0.22},
   "shuzuo": {"file": "shuzuo.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "sunqian": {"file": "sunqian.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "sunqian": {"file": "sunqian.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "kuaiyue": {"file": "kuaiyue.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "sunquan": {"file": "sunquan.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

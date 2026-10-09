@@ -173,16 +173,13 @@
       "license": "Antigravity 生成"
     },
     "dianwei": {
-      "src": "source/public-domain/dianwei.jpg",
+      "src": "source/generals/dianwei.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.45,
-        0.27
+        0.5,
+        0.22
       ],
-      "head": 0.08,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg",
-      "license": "Public domain",
-      "artist": "Unknown author"
+      "head": 0.22
     },
     "caiwenji": {
       "src": "source/generals/caiwenji.jpg",
@@ -422,16 +419,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "xuchu": {
-      "src": "source/public-domain/xuchu.jpg",
+      "src": "source/generals/xuchu.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.48,
-        0.24
+        0.5,
+        0.22
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:Xu_Chu_Qing_illustration.jpg",
-      "license": "Public domain",
-      "artist": "Unknown author"
+      "head": 0.22
     },
     "xuhuang": {
       "src": "source/generals/xuhuang.jpg",
@@ -482,16 +476,13 @@
       "license": "用户提供（Gemini 生成）"
     },
     "zhugeliang": {
-      "src": "source/public-domain/zhugeliang.jpg",
+      "src": "source/generals/zhugeliang.jpg",
+      "license": "用户提供（Gemini 生成）",
       "face": [
-        0.47,
-        0.12
+        0.5,
+        0.22
       ],
-      "head": 0.07,
-      "placeholder": true,
-      "source": "https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg",
-      "license": "Public domain",
-      "artist": "Unknown authorUnknown author"
+      "head": 0.22
     },
     "langlijiao": {
       "src": "source/generals/langlijiao.jpg",
@@ -2067,6 +2058,24 @@
         0.22
       ],
       "head": 0.22
+    },
+    "kuaiyue": {
+      "src": "source/generals/kuaiyue.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "sunquan": {
+      "src": "source/generals/sunquan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -2303,6 +2312,10 @@
     },
     "hs_zhangbaiqi": {
       "src": "source/battles/hs_zhangbaiqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "bh_guanhai": {
+      "src": "source/battles/bh_guanhai.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -2646,6 +2659,10 @@
     },
     "c3_guotu_street": {
       "src": "source/cg/c3_guotu_street.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_drink": {
+      "src": "source/cg/c4_drink.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

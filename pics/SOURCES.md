@@ -23,7 +23,7 @@
 | `sunjing` | source/generals/sunjing.jpg | 用户提供 | Antigravity 生成 | — |
 | `wujing` | source/generals/wujing.jpg | 用户提供 | Antigravity 生成 | — |
 | `sunben` | source/generals/sunben.jpg | 用户提供 | Antigravity 生成 | — |
-| `dianwei` | source/public-domain/dianwei.jpg | [链接](https://commons.wikimedia.org/wiki/File:Dian_Wei_Qing_illustration.jpg) | Public domain | Unknown author |
+| `dianwei` | source/generals/dianwei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caiwenji` | source/generals/caiwenji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `guonvwang` | source/generals/guonvwang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `diaochan` | source/generals/diaochan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -49,13 +49,13 @@
 | `pangtong` | source/public-domain/pangtong.jpg | [链接](https://commons.wikimedia.org/wiki/File:PangTong.jpg) | Public domain | Unknown authorUnknown author |
 | `sunshangxiang` | source/generals/sunshangxiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taishici` | source/generals/taishici.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `xuchu` | source/public-domain/xuchu.jpg | [链接](https://commons.wikimedia.org/wiki/File:Xu_Chu_Qing_illustration.jpg) | Public domain | Unknown author |
+| `xuchu` | source/generals/xuchu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xuhuang` | source/generals/xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `xurong` | source/generals/xurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangjiao` | source/public-domain/zhangjiao.jpg | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Jue_Qing_portrait.jpg) | Public domain | Unknown author |
 | `zhangliao` | source/generals/zhangliao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhaoyun` | source/generals/zhaoyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `zhugeliang` | source/public-domain/zhugeliang.jpg | [链接](https://commons.wikimedia.org/wiki/File:%E6%98%8E%E4%BA%BA%E7%BB%98_%E3%80%8A%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%83%8F%E3%80%8B%EF%BC%88%E5%8D%97%E8%96%B0%E6%AE%BF%E6%9C%AC%EF%BC%89.jpg) | Public domain | Unknown authorUnknown author |
+| `zhugeliang` | source/generals/zhugeliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `langlijiao` | source/generals/langlijiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `yaodao` | source/generals/yaodao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `heyi` | source/generals/heyi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -231,6 +231,8 @@
 | `peiyuanshao` | source/generals/peiyuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `shuzuo` | source/soldiers/shuzuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunqian` | source/generals/sunqian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `kuaiyue` | source/generals/kuaiyue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunquan` | source/generals/sunquan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -289,6 +291,7 @@
 | `battle:hs_wenchou` | source/battles/hs_wenchou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:hs_yudu` | source/battles/hs_yudu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:hs_zhangbaiqi` | source/battles/hs_zhangbaiqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:bh_guanhai` | source/battles/bh_guanhai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -374,3 +377,4 @@
 | `cg:c3_bad_guotu` | source/cg/c3_bad_guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_bad_return` | source/cg/c3_bad_return.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_guotu_street` | source/cg/c3_guotu_street.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c4_drink` | source/cg/c4_drink.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

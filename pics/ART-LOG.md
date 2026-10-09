@@ -136,3 +136,16 @@
 - [x] 2026-10-08 relic `qingnang` ← qingnang.jpg · ok
 - [x] 2026-10-08 portrait `shuzuo` ← shuzuo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-08 portrait `sunqian` ← sunqian.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 battle `bh_guanhai` ← bh_guanhai.jpg · ok
+- [x] 2026-10-08 cg `c4_drink` ← c4_drink.jpg · ok
+- [x] 2026-10-08 portrait `dianwei` ← dianwei.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 relic `hupi` ← hupi.jpg · ok
+- [x] 2026-10-08 relic `jiujia` ← jiujia.jpg · ok
+- [x] 2026-10-08 portrait `kuaiyue` ← kuaiyue.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 relic `qixing` ← qixing.jpg · ok
+- [x] 2026-10-08 portrait `sunquan` ← sunquan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 portrait `xuchu` ← xuchu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-08 relic `yitian` ← yitian.jpg · ok
+- [x] 2026-10-08 relic `yuxi` ← yuxi.jpg · ok
+- [x] 2026-10-08 relic `zhaoxianbang` ← zhaoxianbang.jpg · ok
+- [x] 2026-10-08 portrait `zhugeliang` ← zhugeliang.webp · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
