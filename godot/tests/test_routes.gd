@@ -408,6 +408,18 @@ func test_south_chapter6_xiaoqiao_remembers_the_river_only_if_they_met_in_chapte
 	check(fresh.has("hn_qiao") and not fresh.has("hn_qiao_b"), "never met: a first meeting")
 
 
+func test_a_square_that_hands_over_a_relic_reports_it_for_the_reveal() -> void:
+	## the map screen shows a 宝物 card moment for every gained entry marked relic
+	var s := ch6s_save()
+	var q := quest_by_id("huainan_s")
+	Quests.begin(q, s, rng(2))
+	s.square = "hn_zhoujia"
+	var gained := Quests.resolve(q, s, rng(2), -1)
+	var relics: Array = gained.filter(func(c): return c.get("relic", false))
+	check_eq(relics.map(func(c): return c["id"]), ["zhou_pu"], "周家 hands over the 周家族谱 and says so")
+	check(s.relics.has("zhou_pu"))
+
+
 func test_south_chapter6_plays_with_real_fights() -> void:
 	var s := ch6s_save()
 	var q := quest_by_id("huainan_s")

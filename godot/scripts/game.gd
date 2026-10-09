@@ -265,6 +265,13 @@ func demo(name: String) -> void:
 			rv.dupe = OS.get_cmdline_user_args().has("--dupe")
 			show_screen(MapScreen.new())
 			add_child(rv)
+		"relicreveal":  # the 宝物 card moment: --demo=relicreveal [--many]
+			save.flags = ["出生：冀州无极"]
+			show_screen(MapScreen.new())
+			var rr := RelicReveal.new()
+			rr.relic_ids = ["wentai_shu", "zhou_pu", "weixi"] if OS.get_cmdline_user_args().has("--many") else ["xuzhou_yin"]
+			rr.title = "获得宝物"
+			add_child(rr)
 		"ln2":  # 北线第二章 at 虎牢关: the 吕布 fork (lower x = earlier square via --at=<id>)
 			save.flags = ["出生：冀州无极"]
 			save.quests_cleared = ["prologue", "taodong"]

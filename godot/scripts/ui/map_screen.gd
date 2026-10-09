@@ -860,9 +860,12 @@ func _choose_event(i: int) -> void:
 	var out := Quests.choose_event(q, Game.save, Game.rng, i)
 	Game.persist()
 	_refresh()
-	var cards: Array = out["gained"].filter(func(c): return not c.get("relic", false))  # 宝物 show in the top bar
+	var cards: Array = out["gained"].filter(func(c): return not c.get("relic", false))
+	var relics: Array = out["gained"].filter(func(c): return c.get("relic", false))
 	if not cards.is_empty():  # an event handed you cards: show them
 		await _reveal(cards, "获　得")
+	if not relics.is_empty():  # …and 宝物 get their own card moment (they also sit in the top bar afterwards)
+		await _reveal_relics(relics.map(func(c): return c["id"]))
 	if not Game.save.offer.is_empty():
 		_open_offer(Quests.here(q, Game.save))
 
@@ -877,12 +880,15 @@ func _resolve(choice := -1) -> void:
 	Game.persist()
 	if kind == "choose":  # a choice can open squares further on (requires / unless on this run's records)
 		_rebuild_map()
-	gained = gained.filter(func(c): return not c.get("relic", false))  # 宝物 show in the top bar, not here
+	var relics: Array = gained.filter(func(c): return c.get("relic", false))  # 宝物 get their own reveal below
+	gained = gained.filter(func(c): return not c.get("relic", false))
 	if choice < 0 and not gained.is_empty():  # the story hands you cards (picks already showed theirs)
 		await _reveal(gained, "入　队" if gained.any(func(c): return not c["soldier"]) else "获　得")
 	else:
 		for c in gained:
 			_show_toast("获得：" + c["name"])
+	if not relics.is_empty():
+		await _reveal_relics(relics.map(func(c): return c["id"]))
 	if kind == "mystery" or not Game.save.offer.is_empty():  # an event's outcome / a pick still to make: show it first
 		_refresh()
 		return
@@ -908,6 +914,17 @@ func _reveal(cards: Array, title: String) -> void:
 	o.title = title
 	o.card_ids = cards.map(func(c): return c["id"])
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(o)
+	await o.closed
+
+
+func _reveal_relics(ids: Array) -> void:
+	## the 宝物 card moment: big cards flip in, tap to go on
+	if ids.is_empty():
+		return
+	var o := RelicReveal.new()
+	o.relic_ids = ids
+	o.title = "获得宝物" if ids.size() == 1 else "获得 %d 件宝物" % ids.size()
 	add_child(o)
 	await o.closed
 
@@ -1027,8 +1044,10 @@ func _open_relics() -> void:
 	o.picked.connect(func(i):
 		var got := Quests.take_relic(Game.save, o.relic_ids[i])
 		Game.persist()
+		var taken: String = o.relic_ids[i]
 		o.queue_free()
-		_refresh())
+		_refresh()
+		_reveal_relics([taken]))
 	add_child(o)
 
 
