@@ -445,12 +445,11 @@ func _fill_detail() -> void:
 		var c: Dictionary = db.cards[_sel]
 		info.add_child(_info_line("稀有度", ("野兽" if c.get("beast", false) else Kit.rarity_label(c["rarity"])) + ("（精兵）" if c.get("elite", false) and not c.get("beast", false) else "")))
 		if c["soldier"]:
-			info.add_child(_info_line("张数", "×%d" % save.copies(_sel)))
+			info.add_child(_info_line("张数", "×%d（每多一张，当队长时多一名队员）" % save.copies(_sel)))
 		else:
-			var tiers: Array = db.gacha["tiers"]
-			var t := save.tier(_sel)
-			var nxt := "（已满）" if t >= tiers.size() - 1 else "（%d 张升%s）" % [int(tiers[t + 1]["copies"]), tiers[t + 1]["name"]]
-			info.add_child(_info_line("品阶", "%s %d 张%s" % [tiers[t]["name"], save.copies(_sel), nxt]))
+			info.add_child(_level_line(_sel))
+	else:
+		info.add_child(_level_line("lord"))
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
 	info.add_child(_info_line("当队长", "攻 %d · 兵 %d" % [ld["at"], ld["hp"]]))
 
@@ -516,6 +515,25 @@ func _fill_detail() -> void:
 			_msg.text = ("%s 编回部队" if left else "%s 留在卡池，不参战") % db.cards[sel]["name"]
 			_rebuild())
 		_detail.add_child(bring)
+
+
+func _level_line(cid: String) -> Control:
+	## 等级 Lv.N · 铜 / 银 / 金 / 神 (the tier by copies held), in the tier's colour, and what the next level needs
+	var save := Game.save
+	var tiers: Array = GameData.get_db().gacha["tiers"]
+	var t := save.tier(cid)
+	var n := save.copies(cid)
+	var col: Color = [Color(0.9, 0.58, 0.33), Color(0.82, 0.88, 0.96), Color(1.0, 0.84, 0.3), Color(0.82, 0.6, 1.0)][mini(t, 3)]
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 0)
+	var main := Kit.label("Lv.%d · %s　%d 张" % [t + 1, tiers[t]["name"], n], Kit.FONT_BODY)
+	main.add_theme_color_override("font_color", col)
+	box.add_child(main)
+	var nxt := "已满级" if t >= tiers.size() - 1 else "再 %d 张升 Lv.%d" % [maxi(0, int(tiers[t + 1]["copies"]) - n), t + 2]
+	var sub := Kit.label(nxt, 14)
+	sub.add_theme_color_override("font_color", Color(col, 0.75))
+	box.add_child(sub)
+	return box
 
 
 func _info_line(k: String, v: String) -> Control:

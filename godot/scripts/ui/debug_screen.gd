@@ -290,7 +290,9 @@ func _preview_card(cid: String) -> void:
 	var c: Dictionary = GameData.get_db().cards[cid]
 	var troops: Dictionary = GameData.get_db().troops
 	var troop: String = troops[c["troop"]]["name"] if troops.has(c["troop"]) else c["troop"]
-	var lbl := Kit.label("%s　·　%s　·　%s　·　%s" % [c["name"], cid, c["rarity"], troop], Kit.FONT_BODY, "gold")
+	var tiers: Array = GameData.get_db().gacha["tiers"]
+	var lv := Game.save.tier(cid) if Game.save != null and not c["soldier"] else 0
+	var lbl := Kit.label("%s　·　%s　·　%s　·　%s　·　Lv.%d %s" % [c["name"], cid, c["rarity"], troop, lv + 1, tiers[lv]["name"]], Kit.FONT_BODY, "gold")
 	lbl.position = Vector2(20, 14)
 	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(lbl)
