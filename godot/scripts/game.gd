@@ -642,10 +642,10 @@ func demo(name: String) -> void:
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
 			show_screen(b)
-			if OS.get_cmdline_user_args().has("--lastround"):  # the round-limit warning: jump to the final round
+			if OS.get_cmdline_user_args().has("--lastround"):  # the round-limit warning: play the final round's alert
 				await get_tree().create_timer(0.5).timeout
-				b.b.round_no = b.b.turn_limit
-				b._refresh()
+				b.b.round_no = b.b.turn_limit - 1
+				b._on_end_round()
 			if name == "fight":  # play a few actions to exercise the animations
 				await get_tree().create_timer(0.5).timeout
 				await b._on_skill(1, "bawang")

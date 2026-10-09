@@ -767,7 +767,13 @@ func _play(events: Array) -> void:
 				BattleFx.burst(self, _card_rect(ev["unit"]).get_center(), BattleFx.VIOLET, 10, 20.0, 110.0, 5.0)
 				await get_tree().create_timer(0.3).timeout
 			"round":
-				await _banner("第 %d 回合" % ev["n"], Kit.c("gold"))
+				var left: int = b.turn_limit - int(ev["n"])
+				if left <= 0:  # the last round: lose it and the run is lost — make it impossible to miss
+					await _alert("最后回合！", "击破 %s，否则撤退" % b.enemy["data"]["name"], Kit.c("red"), 1.3)
+				elif left == 1:
+					await _alert("还剩 2 回合", "", Kit.c("orange") if Kit.pal().has("orange") else Kit.c("gold"), 0.8)
+				else:
+					await _banner("第 %d 回合" % ev["n"], Kit.c("gold"))
 	_busy = false
 	_refresh()
 	if b.result != "":
@@ -797,6 +803,47 @@ func _banner(text: String, color: Color) -> void:
 	tw.tween_property(l, "modulate:a", 0.0, 0.18)
 	tw.tween_callback(l.queue_free)
 	await get_tree().create_timer(0.55).timeout
+
+
+func _alert(title: String, sub: String, color: Color, hold: float) -> void:
+	## a big centred warning: a coloured flash round the screen edge, a tall banner, a small line under the title
+	var flash := ColorRect.new()
+	flash.color = Color(color, 0.0)
+	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	flash.z_index = 38
+	add_child(flash)
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", Kit.box(Color(color, 0.92), 0, 0, Color.TRANSPARENT, 12))
+	panel.position = Vector2(0, 250)
+	panel.size = Vector2(1280, 190 if sub != "" else 130)
+	panel.z_index = 40
+	panel.modulate.a = 0.0
+	var col := VBoxContainer.new()
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
+	panel.add_child(col)
+	var big := Kit.label(title, 72)
+	big.add_theme_color_override("font_color", Color.WHITE)
+	big.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(big)
+	if sub != "":
+		var small := Kit.label(sub, Kit.FONT_BIG)
+		small.add_theme_color_override("font_color", Color.WHITE)
+		small.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		col.add_child(small)
+	add_child(panel)
+	var tw := panel.create_tween()
+	tw.tween_property(panel, "modulate:a", 1.0, 0.1)
+	tw.tween_interval(hold)
+	tw.tween_property(panel, "modulate:a", 0.0, 0.25)
+	tw.tween_callback(panel.queue_free)
+	var fw := flash.create_tween()
+	fw.tween_property(flash, "color:a", 0.32, 0.12)
+	fw.tween_property(flash, "color:a", 0.08, 0.2)
+	fw.tween_property(flash, "color:a", 0.28, 0.2)
+	fw.tween_property(flash, "color:a", 0.0, hold + 0.1)
+	fw.tween_callback(flash.queue_free)
+	await get_tree().create_timer(hold + 0.35).timeout
 
 
 func _tip(text: String) -> void:
@@ -863,8 +910,10 @@ func _finish() -> void:
 		Game.battle_finished(true)
 	else:
 		# say why: running out of rounds with HP left is not the same as being wiped out
-		var why := {"turns": "回合用尽 —— 撤退", "retreat": "全军撤退"}.get(b.lose_reason, "战　败") as String
-		await _banner(why, Kit.c("red"))
-		await get_tree().create_timer(0.6).timeout
+		var why := {"turns": "回合用尽", "retreat": "全军撤退"}.get(b.lose_reason, "战　败") as String
+		var more := {"turns": "时间到了——敌人还剩 %d%% 体力" % int(ceil(100.0 * float(b.enemy["hp"]) / float(b.enemy["max_hp"]))),
+				"retreat": "撤出战场，这一轮重新来过"}.get(b.lose_reason, "全军体力耗尽") as String
+		await _alert(why, more, Kit.c("red"), 1.6)
+		await get_tree().create_timer(0.3).timeout
 		Game.battle_finished(false)
 
