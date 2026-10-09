@@ -329,13 +329,15 @@
 
 | 状态 | key | 剧情格 |
 |---|---|---|
-| ⬜ 缺 | `end_juefa` | 结局七 |
+| ⬜ 缺 | `c4_bad_feud` | 后院起火 |
 | ⬜ 缺 | `c4_escape` | 金蝉脱壳 |
+| ⬜ 缺 | `c4_bad_lingqi` | 结局七 |
 | ⬜ 缺 | `c4_yanliang` | 渡口·颜良 |
 | ⬜ 缺 | `c4_million_hj` | 北海之围 |
 | ⬜ 缺 | `c4_taishici_break` | 太史慈 |
 | ⬜ 缺 | `c4_porridge` | 阵前熬粥 |
 | ⬜ 缺 | `c4_kongrong` | 让北海 |
+| ⬜ 缺 | `end_juefa` | 结局卡「结局七 · 绝罚」 |
 
 （另有 1 项已到位）
 
@@ -374,9 +376,11 @@
 | ⬜ 缺 | `n5_seal` | 让印 |
 | ⬜ 缺 | `n5_mizhen` | 糜府夜宴 |
 | ⬜ 缺 | `n5_needle` | 施针 |
+| ⬜ 缺 | `n5_banquet` | 谢恩宴 |
 | ⬜ 缺 | `n5_beat` | 小沛城外 |
-| ⬜ 缺 | `end_menhou` | 门后之诛 |
+| ⬜ 缺 | `n5_menhou` | 门后之诛 |
 | ⬜ 缺 | `n5_wedding` | 赵云大婚 |
+| ⬜ 缺 | `end_menhou` | 结局卡「结局八 · 门后之诛」 |
 
 奇遇插图（这一章第一次会抽到的「？」事件）
 
