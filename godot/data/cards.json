@@ -5273,6 +5273,365 @@
       },
       "weight": 3,
       "scope": "north"
+    },
+    "caocao": {
+      "name": "曹操",
+      "rarity": "SSR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 70,
+        "at": 32
+      },
+      "scope": "north"
+    },
+    "xiahouyuan": {
+      "name": "夏侯渊",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 65,
+        "at": 22
+      },
+      "scope": "north"
+    },
+    "caoren": {
+      "name": "曹仁",
+      "rarity": "SR",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 80,
+        "at": 20
+      },
+      "scope": "north"
+    },
+    "caohong": {
+      "name": "曹洪",
+      "rarity": "R",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 40,
+        "at": 13
+      },
+      "scope": "north"
+    },
+    "xunyu": {
+      "name": "荀彧",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 50,
+        "at": 20
+      },
+      "scope": "north"
+    },
+    "yujin": {
+      "name": "于禁",
+      "rarity": "SR",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 70,
+        "at": 20
+      },
+      "scope": "north"
+    },
+    "xiahoumao": {
+      "name": "夏侯楙",
+      "rarity": "R",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 30,
+        "at": 10
+      },
+      "scope": "north"
+    },
+    "caobao": {
+      "name": "曹豹",
+      "rarity": "R",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 40,
+        "at": 9
+      }
+    },
+    "taoqian": {
+      "name": "陶谦",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 40,
+        "at": 10
+      }
+    },
+    "chendeng": {
+      "name": "陈登",
+      "rarity": "R",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 40,
+        "at": 13
+      }
+    },
+    "chengui": {
+      "name": "陈珪",
+      "rarity": "R",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 35,
+        "at": 12
+      }
+    },
+    "chengong": {
+      "name": "陈宫",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 45,
+        "at": 19
+      }
+    },
+    "mifang": {
+      "name": "糜芳",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 35,
+        "at": 10
+      }
+    },
+    "mizhen": {
+      "name": "糜贞",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 40,
+        "at": 11
+      },
+      "pool": false
+    },
+    "zangba": {
+      "name": "臧霸",
+      "rarity": "SR",
+      "troop": "bandit",
+      "bonus": {
+        "hp": 60,
+        "at": 20
+      }
+    },
+    "zhengbao": {
+      "name": "郑宝",
+      "rarity": "R",
+      "troop": "bandit",
+      "bonus": {
+        "hp": 40,
+        "at": 12
+      },
+      "scope": "south"
+    },
+    "sunquan": {
+      "name": "孙权",
+      "rarity": "SR",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 60,
+        "at": 16
+      },
+      "scope": "south"
+    },
+    "zhoutai": {
+      "name": "周泰",
+      "rarity": "SR",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 90,
+        "at": 20
+      },
+      "scope": "south"
+    },
+    "zhangxun": {
+      "name": "张勋",
+      "rarity": "R",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 45,
+        "at": 10
+      },
+      "scope": "south"
+    },
+    "liuxun": {
+      "name": "刘勋",
+      "rarity": "R",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 35,
+        "at": 9
+      },
+      "scope": "south"
+    },
+    "liuyao": {
+      "name": "刘繇",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 35,
+        "at": 10
+      },
+      "scope": "south"
+    },
+    "wanglang": {
+      "name": "王朗",
+      "rarity": "R",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 35,
+        "at": 13
+      },
+      "scope": "south"
+    },
+    "yuanshao": {
+      "name": "袁绍",
+      "rarity": "SR",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 60,
+        "at": 16
+      },
+      "scope": "north"
+    },
+    "gongsunkang": {
+      "name": "公孙康",
+      "rarity": "R",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 40,
+        "at": 12
+      },
+      "scope": "north"
+    },
+    "tadun": {
+      "name": "蹋顿",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 65,
+        "at": 20
+      },
+      "scope": "north"
+    },
+    "shenrong": {
+      "name": "审荣",
+      "rarity": "R",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 35,
+        "at": 9
+      },
+      "scope": "north"
+    },
+    "guonvwang": {
+      "name": "郭照·女王",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 35,
+        "at": 10
+      },
+      "pool": false,
+      "scope": "north"
+    },
+    "fazheng": {
+      "name": "法正",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 45,
+        "at": 20
+      }
+    },
+    "liuzhang": {
+      "name": "刘璋",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 35,
+        "at": 9
+      }
+    },
+    "zhanglu": {
+      "name": "张鲁",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 45,
+        "at": 18
+      }
+    },
+    "zhangwei": {
+      "name": "张卫",
+      "rarity": "R",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 40,
+        "at": 10
+      }
+    },
+    "wuxian": {
+      "name": "吴苋",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 40,
+        "at": 10
+      },
+      "pool": false
+    },
+    "luxun_young": {
+      "name": "陆逊·少年",
+      "rarity": "R",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 35,
+        "at": 12
+      },
+      "pool": false
+    },
+    "pangde": {
+      "name": "庞德",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 70,
+        "at": 22
+      },
+      "scope": "north"
+    },
+    "mateng": {
+      "name": "马腾",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 65,
+        "at": 20
+      },
+      "scope": "north"
+    },
+    "hansui": {
+      "name": "韩遂",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 40,
+        "at": 18
+      },
+      "scope": "north"
+    },
+    "menghuo": {
+      "name": "孟获",
+      "rarity": "SR",
+      "troop": "infantry",
+      "bonus": {
+        "hp": 90,
+        "at": 22
+      }
     }
   },
   "enemies": {
