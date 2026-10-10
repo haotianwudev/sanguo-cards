@@ -306,6 +306,18 @@
 | `loucuan_nushou` | source/soldiers/loucuan_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taihang_lieshou` | source/soldiers/taihang_lieshou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wuhuan_sheshou` | source/soldiers/wuhuan_sheshou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `dufuren` | source/generals/dufuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `liuye` | source/generals/liuye.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xugong` | source/generals/xugong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `leixu` | source/generals/leixu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `yufan` | source/generals/yufan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiangdong_qi` | source/soldiers/jiangdong_qi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jiangdong_shuzuo` | source/soldiers/jiangdong_shuzuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiangyang_xuezi` | source/soldiers/xiangyang_xuezi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `jizhou_qi` | source/soldiers/jizhou_qi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `hebei_shuzuo` | source/soldiers/hebei_shuzuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `taishan_zei` | source/soldiers/taishan_zei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `heishan_louluo` | source/soldiers/heishan_louluo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |

@@ -451,3 +451,15 @@
 - [x] 2026-10-09 cg `end_chibi` ← end_chibi_gemini.jpg · ok
 - [x] 2026-10-09 cg `end_guandu` ← end_guandu_gemini.jpg · ok
 - [x] 2026-10-09 cg `end_tianming` ← end_tianming_gemini.jpg · ok
+- [x] 2026-10-10 portrait `dufuren` ← media_1791657021588_c2b3a948.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `liuye` ← liuye.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `xugong` ← xugong.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `leixu` ← leixu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `yufan` ← yufan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `jiangdong_qi` ← jiangdong_qi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `jiangdong_shuzuo` ← jiangdong_shuzuo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `xiangyang_xuezi` ← xiangyang_xuezi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `jizhou_qi` ← jizhou_qi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `hebei_shuzuo` ← hebei_shuzuo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `taishan_zei` ← taishan_zei.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 portrait `heishan_louluo` ← heishan_louluo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

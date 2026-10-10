@@ -2718,6 +2718,114 @@
         0.22
       ],
       "head": 0.22
+    },
+    "dufuren": {
+      "src": "source/generals/dufuren.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "liuye": {
+      "src": "source/generals/liuye.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.31
+      ],
+      "head": 0.25
+    },
+    "xugong": {
+      "src": "source/generals/xugong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "leixu": {
+      "src": "source/generals/leixu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yufan": {
+      "src": "source/generals/yufan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "jiangdong_qi": {
+      "src": "source/soldiers/jiangdong_qi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "jiangdong_shuzuo": {
+      "src": "source/soldiers/jiangdong_shuzuo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "xiangyang_xuezi": {
+      "src": "source/soldiers/xiangyang_xuezi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "jizhou_qi": {
+      "src": "source/soldiers/jizhou_qi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "hebei_shuzuo": {
+      "src": "source/soldiers/hebei_shuzuo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "taishan_zei": {
+      "src": "source/soldiers/taishan_zei.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "heishan_louluo": {
+      "src": "source/soldiers/heishan_louluo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",

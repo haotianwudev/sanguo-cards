@@ -301,5 +301,17 @@
   "jizhou_nu": {"file": "jizhou_nu.jpg", "face": [0.5, 0.22], "head": 0.22},
   "loucuan_nushou": {"file": "loucuan_nushou.jpg", "face": [0.5, 0.22], "head": 0.22},
   "taihang_lieshou": {"file": "taihang_lieshou.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "wuhuan_sheshou": {"file": "wuhuan_sheshou.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "wuhuan_sheshou": {"file": "wuhuan_sheshou.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "dufuren": {"file": "dufuren.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "liuye": {"file": "liuye.jpg", "face": [0.5, 0.31], "head": 0.25},
+  "xugong": {"file": "xugong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "leixu": {"file": "leixu.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "yufan": {"file": "yufan.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jiangdong_qi": {"file": "jiangdong_qi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jiangdong_shuzuo": {"file": "jiangdong_shuzuo.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "xiangyang_xuezi": {"file": "xiangyang_xuezi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "jizhou_qi": {"file": "jizhou_qi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "hebei_shuzuo": {"file": "hebei_shuzuo.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "taishan_zei": {"file": "taishan_zei.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "heishan_louluo": {"file": "heishan_louluo.jpg", "face": [0.5, 0.22], "head": 0.22}
 }
