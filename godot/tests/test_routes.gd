@@ -7,6 +7,7 @@ const E2 := "结局二 · 同归"
 const E3 := "结局三 · 恨海"
 const JX := "贾诩：入队"
 const E10 := "结局十 · 深锁"
+const E11 := "结局十一 · 匹夫"
 
 
 func rng(seed_value: int) -> RandomNumberGenerator:
@@ -367,7 +368,7 @@ func test_chapter5_without_jiaxu_the_banquet_still_ends_in_ending_three() -> voi
 func ch6s_save() -> SaveData:
 	var s := ch5_save([E3, JX, "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督", "貂蝉：全员生还"])
 	s.quests_cleared.append("jingxiang")
-	for c in ["jiaxu", "kuaiyue", "ganning"]:
+	for c in ["jiaxu", "kuaiyue"]:  # 甘宁 only joins in 第七章 now
 		s.grant_card(c)
 	return s
 
@@ -401,7 +402,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
 				"南线：浮桥一瞥", "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：双婚"]:
 			check(s.run_records.has(line), "第六章 records " + line)
 		finish(q, s)
-		check(Quests.current_quest(s) == null, "未完待续 after 第六章")
+		check_eq(Quests.current_quest(s)["id"], "jiangdong", "庐江：双婚 → 第七章 · 江东小霸王")
 
 
 func test_south_chapter6_xiaoqiao_remembers_the_river_only_if_they_met_in_chapter1() -> void:
@@ -814,3 +815,77 @@ func test_south_chapter6_losing_at_qianshan_is_ending_ten_too() -> void:
 	s.square = "hn_qs_bad"
 	check(Quests.lose(q, s, rng(3)), "the 灊山寨 fight carries on into the ending")
 	check_eq(s.square, "hn_shensuo")
+
+
+# ---- 南线第七章 · 江东小霸王 ---------------------------------------------------------------
+
+func ch7s_save(flags := []) -> SaveData:
+	var s := ch6s_save()
+	s.flags += [E10, "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：双婚"] + flags
+	s.quests_cleared.append("huainan_s")
+	for c in ["daqiao", "liuye", "lusu", "chenwu"]:
+		s.grant_card(c)
+	return s
+
+
+func test_south_chapter7_follows_the_double_wedding() -> void:
+	check_eq(Quests.current_quest(ch7s_save())["id"], "jiangdong")
+
+
+func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:
+	## 「收服义匪甘宁」 is greyed until 「结局十一 · 匹夫」; siding with 严白虎 against 锦帆贼 gets 孙策 shot by 许贡's men and 甘宁
+	var q := quest_by_id("jiangdong")
+	var opts: Array = q["squares"]["jd_ganning"]["choose"]
+	var s := ch7s_save()
+	check(Quests.option_locked(s, opts[0]), "收服义匪甘宁 greyed on a first run")
+	check(Quests.option_hint(s, opts[0]).contains(E11))
+	check(not Quests.option_locked(s, opts[1]), "联手严白虎 open")
+	var p := walk(q, s, [])
+	for sid in ["jd_start", "jd_shenting", "jd_moling", "jd_yeyan", "jd_ganning", "jd_b_ally", "jd_b_road", "jd_b_gan", "jd_b_rest",
+			"jd_b_hunt", "jd_b_menke", "jd_pifu"]:
+		check(p.has(sid), "匹夫 route passes " + sid)
+	for sid in ["jd_g_join", "jd_g_yan", "jd_g_zhoutai", "jd_wanglang", "jd_fuchun", "jd_end"]:
+		check(not p.has(sid), "匹夫 route never reaches " + sid)
+	check_eq(p[-1], "jd_pifu")
+	check(not s.has_card("ganning"), "甘宁 never joins on this route")
+	finish(q, s)
+	check(s.flags.has(E11))
+	check(Quests.current_quest(s) == null, "the story stops at 结局十一")
+	check(not Quests.option_locked(ch7s_save([E11]), opts[0]), "匹夫 opens 收服义匪甘宁")
+
+
+func test_south_chapter7_with_the_jinfan_men_takes_jiangdong() -> void:
+	for fork in [[], ["jd_n_m", "jd_s_m", "jd_k_m"]]:
+		var s := ch7s_save([E11])
+		var q := quest_by_id("jiangdong")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["jd_start", "jd_shenting", "jd_yeyan", "jd_ganning", "jd_g_join", "jd_g_road", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
+				"jd_g_menke", "jd_g_zhoutai", "jd_kuaiji", "jd_wanglang", "jd_wanglang_go", "jd_fuchun", "jd_end"]:
+			check(p.has(sid), "江东 route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["jd_b_ally", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
+			check(not p.has(sid), "江东 route never reaches " + sid)
+		check_eq(p[-1], "jd_end")
+		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "sunquan", "sunshangxiang"]:
+			check(s.has_card(c), "%s joins in 第七章" % c)
+		for line in ["南线：东取江东", "江东：收服锦帆", "甘宁：入队", "江东：周泰护主", "江东：会稽平定", "南线：江东平定"]:
+			check(s.run_records.has(line), "第七章 records " + line)
+		finish(q, s)
+		check(Quests.current_quest(s) == null, "未完待续 after 第七章")
+
+
+func test_south_chapter7_losing_at_dantu_is_ending_eleven_too() -> void:
+	var s := ch7s_save()
+	var q := quest_by_id("jiangdong")
+	Quests.begin(q, s, rng(3))
+	s.run_records.append("江东：联手严白虎")
+	s.square = "jd_b_menke"
+	check(Quests.lose(q, s, rng(3)), "the 丹徒山 ambush carries on into the ending")
+	check_eq(s.square, "jd_pifu")
+
+
+func test_ganning_no_longer_joins_in_chapter5() -> void:
+	## 甘宁 moved to 第七章: the 荆襄 event's 「劝他跟你走」 no longer offers his card, and no 招贤 list before 第七章 has him
+	var ev: Dictionary = GameData.get_db().events["ganning"]
+	check(not JSON.stringify(ev["options"][0]["effects"]).contains("offer"), "劝他跟你走 says goodbye instead")
+	for id in ["jingxiang", "huainan_s"]:
+		check(not quest_by_id(id)["recruit_pool"].has("ganning"), "%s 招贤 has no 甘宁" % id)

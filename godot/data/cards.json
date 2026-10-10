@@ -5521,6 +5521,17 @@
       "scope": "south",
       "name": "雷绪"
     },
+    "xugong": {
+      "name": "许贡",
+      "rarity": "R",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 36,
+        "at": 12
+      },
+      "pool": false,
+      "scope": "south"
+    },
     "mizhen": {
       "name": "糜贞",
       "rarity": "R",
@@ -9950,6 +9961,415 @@
       ],
       "card": "leixu"
     },
+    "jd_liu_shuijun": {
+      "name": "刘繇水军",
+      "portrait": "inf_n",
+      "hp": 14000,
+      "at": 380,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长矛",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "撞船",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "火箭",
+          "power": 0.6,
+          "weight": 1,
+          "burn_party": 0.05,
+          "turns": 2
+        }
+      ],
+      "card": "danyang"
+    },
+    "jd_liu_bu": {
+      "name": "刘繇步卒",
+      "portrait": "inf_n",
+      "hp": 14500,
+      "at": 380,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长枪",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "盘查",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "围攻",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "danyang"
+    },
+    "jd_fanneng": {
+      "name": "刘繇大将·樊能",
+      "portrait": "inf_n",
+      "hp": 21000,
+      "at": 450,
+      "actions": 2,
+      "phys_resist": 0.1,
+      "moves": [
+        {
+          "name": "大刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "一声大喝",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "结阵冲锋",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "刘繇督战",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "困兽",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "liuyao"
+    },
+    "jd_shuifei_e": {
+      "name": "太湖水匪",
+      "portrait": "inf_n",
+      "hp": 14000,
+      "at": 385,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "抢掠",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "放火",
+          "power": 0.6,
+          "weight": 1,
+          "burn_party": 0.06,
+          "turns": 2
+        },
+        {
+          "name": "围船",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "shuizei_bing"
+    },
+    "jd_jinfan_e": {
+      "name": "锦帆贼",
+      "portrait": "inf_n",
+      "hp": 14500,
+      "at": 390,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "短刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "铃响",
+          "power": 0.5,
+          "weight": 1,
+          "confuse": 0.3
+        },
+        {
+          "name": "跳帮",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "jinfan_zei"
+    },
+    "yanbaihu_e": {
+      "name": "「东吴德王」严白虎",
+      "portrait": "yanbaihu",
+      "hp": 28000,
+      "at": 490,
+      "actions": 2,
+      "phys_resist": 0.15,
+      "moves": [
+        {
+          "name": "虎头刀",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "德王令",
+          "power": 0.6,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "水寨火油",
+          "power": 0.8,
+          "weight": 1,
+          "burn_party": 0.08,
+          "turns": 3
+        },
+        {
+          "name": "白虎·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "白虎啸"
+        },
+        {
+          "name": "白虎啸",
+          "power": 2.6,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "跳湖",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "yanbaihu"
+    },
+    "ganning_b": {
+      "name": "「锦帆贼」甘宁",
+      "portrait": "ganning",
+      "hp": 28000,
+      "at": 500,
+      "actions": 2,
+      "phys_resist": 0.1,
+      "moves": [
+        {
+          "name": "铁胎弓",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "锦帆铃响",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "连珠箭",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "百骑劫营·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "劫营"
+        },
+        {
+          "name": "劫营",
+          "power": 2.6,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "周泰护主",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "jinfan_zei"
+    },
+    "xu_menke": {
+      "name": "许贡门客",
+      "portrait": "inf_n",
+      "hp": 21000,
+      "at": 460,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "冷箭",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "刺面",
+          "power": 1.5,
+          "weight": 1
+        },
+        {
+          "name": "伏林",
+          "power": 0.5,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "毒箭",
+          "power": 0.7,
+          "weight": 1,
+          "burn_party": 0.06,
+          "turns": 2
+        }
+      ],
+      "card": "inf_n"
+    },
+    "xu_menke_bad": {
+      "name": "丹徒山·许贡门客",
+      "portrait": "inf_n",
+      "hp": 65000,
+      "at": 730,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "冷箭",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "连珠冷箭",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "伏林",
+          "power": 0.5,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "毒箭",
+          "power": 0.8,
+          "weight": 1,
+          "burn_party": 0.1,
+          "turns": 3
+        },
+        {
+          "name": "刺面·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "匹夫一箭"
+        },
+        {
+          "name": "匹夫一箭",
+          "power": 2.8,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "渔村那一夜",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "inf_n"
+    },
+    "jd_kuaiji_bing": {
+      "name": "会稽守军",
+      "portrait": "inf_n",
+      "hp": 14500,
+      "at": 390,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "守城弩",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "滚木",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "闭门",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        }
+      ],
+      "card": "jiangdong_gong"
+    },
+    "wanglang_e": {
+      "name": "会稽太守·王朗",
+      "portrait": "wanglang",
+      "hp": 30000,
+      "at": 510,
+      "actions": 2,
+      "phys_resist": 0.1,
+      "moves": [
+        {
+          "name": "守城弩阵",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "引经据典",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "舌战",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "会稽水师",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "讲学·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "以理服人"
+        },
+        {
+          "name": "以理服人",
+          "power": 2.5,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "老夫有一言",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "wanglang"
+    },
     "lvbu_xiaopei": {
       "name": "吕布",
       "portrait": "lvbu",
@@ -10760,6 +11180,67 @@
       "turn_limit": 8,
       "enemy": "leixu_shan",
       "art": "hn_leixu_g"
+    },
+    "jd_niuzhu_a": {
+      "name": "牛渚·刘繇水军",
+      "turn_limit": 6,
+      "enemy": "jd_liu_shuijun",
+      "art": "jx_shuijun"
+    },
+    "jd_niuzhu_b": {
+      "name": "牛渚营·刘繇步卒",
+      "turn_limit": 6,
+      "enemy": "jd_liu_bu",
+      "art": "c3_xunluo"
+    },
+    "jd_shenting": {
+      "name": "神亭岭·刘繇军",
+      "turn_limit": 10,
+      "enemy": "jd_fanneng"
+    },
+    "jd_shuifei": {
+      "name": "太湖水匪",
+      "turn_limit": 6,
+      "enemy": "jd_shuifei_e",
+      "art": "shuizei"
+    },
+    "jd_jinfan": {
+      "name": "太湖·锦帆贼",
+      "turn_limit": 6,
+      "enemy": "jd_jinfan_e",
+      "art": "shuizei_scout"
+    },
+    "jd_yanbaihu": {
+      "name": "太湖水寨·严白虎",
+      "turn_limit": 12,
+      "enemy": "yanbaihu_e"
+    },
+    "jd_ganning": {
+      "name": "太湖·甘宁",
+      "turn_limit": 12,
+      "enemy": "ganning_b"
+    },
+    "jd_menke": {
+      "name": "丹徒山·许贡门客",
+      "turn_limit": 10,
+      "enemy": "xu_menke"
+    },
+    "jd_menke_bad": {
+      "name": "丹徒山·匹夫",
+      "turn_limit": 8,
+      "enemy": "xu_menke_bad",
+      "art": "jd_menke"
+    },
+    "jd_kuaiji": {
+      "name": "会稽守军",
+      "turn_limit": 6,
+      "enemy": "jd_kuaiji_bing",
+      "art": "c3_xunluo"
+    },
+    "jd_wanglang": {
+      "name": "会稽·王朗",
+      "turn_limit": 14,
+      "enemy": "wanglang_e"
     },
     "xz_xiahoudun": {
       "name": "下邳城外·夏侯惇殿后军",
