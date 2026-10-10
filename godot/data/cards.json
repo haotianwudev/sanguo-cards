@@ -5543,6 +5543,23 @@
       "pool": false,
       "scope": "south"
     },
+    "sunce_bawang": {
+      "name": "孙策·小霸王",
+      "rarity": "SSR",
+      "troop": "cavalry",
+      "person": "sunce",
+      "bonus": {
+        "hp": 105,
+        "at": 34
+      },
+      "skills": [
+        "xiaobawang",
+        "dujiang"
+      ],
+      "troop_skills": false,
+      "pool": false,
+      "scope": "south"
+    },
     "mizhen": {
       "name": "糜贞",
       "rarity": "R",
@@ -10389,17 +10406,17 @@
       "actions": 2,
       "moves": [
         {
-          "name": "射击",
+          "name": "短戟",
           "power": 1.0,
           "weight": 3
         },
         {
-          "name": "一声不吭的一箭",
+          "name": "一声不吭的一戟",
           "power": 1.4,
           "weight": 1
         },
         {
-          "name": "齐射",
+          "name": "火船",
           "power": 0.6,
           "weight": 1,
           "burn_party": 0.05,
