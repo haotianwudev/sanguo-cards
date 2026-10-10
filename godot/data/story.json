@@ -457,7 +457,7 @@
         "bh_zheng": {"x": 6, "y": 1, "type": "battle", "label": "郑好", "elite": true, "battle": "bh_zhenghao", "next": ["bh_jiang_trap"], "text": ["郑好刀法泼辣，招招都是不要命的强攻！"]},
         "bh_jiang_pre": {"x": 8, "y": 1, "type": "event", "label": "供出死敌", "next": ["bh_jiang"], "text": ["郑好被五花大绑押上来。她呸了一声：「有本事把隔壁姜家那个狐狸精也揍了！我就服你！」", "{lord}：「好说，带路。」"]},
         "bh_jiang": {"x": 9, "y": 1, "type": "battle", "label": "姜巧", "elite": true, "battle": "bh_jiangqiao", "next": ["bh_zj_choose"], "text": ["姜家寨前，大当家姜巧布下了满地的机关暗器。"]},
-        "bh_zj_choose": {"x": 10, "y": 1, "type": "choose", "label": "调解双凤", "text": ["两个女大当家都被绑在柱子上，还不忘互相吐口水对骂。你要怎么处置她们？"], "choose": [{"label": "把两人关一屋，调解到和好为止", "goto": "bh_zj_peace", "record": "郑姜：和好"}, {"label": "随她们去，各管各的", "goto": "bh_zj_fight", "record": "郑姜：内讧"}]},
+        "bh_zj_choose": {"x": 10, "y": 1, "type": "choose", "label": "调解双凤", "text": ["两个女大当家都被绑在柱子上，还不忘互相吐口水对骂。你要怎么处置她们？"], "choose": [{"label": "把两人关一屋，调解到和好为止", "goto": "bh_zj_peace", "record": "郑姜：和好", "requires": "结局七 · 绝罚"}, {"label": "随她们去，各管各的", "goto": "bh_zj_fight", "record": "郑姜：内讧"}]},
         "bh_zj_peace": {"x": 11, "y": 1, "type": "event", "next": ["bh_zj_join"], "text": ["你搬了把椅子坐在门口，听两人从吵架吵到对骂、从对骂吵到一起骂你。天亮时，两人勾着肩出来了。"]},
         "bh_zj_fight": {"x": 11, "y": 2, "type": "event", "next": ["bh_zj_join"], "text": ["你给两人松了绑。两人各自冷哼一声，带着自己的人守在不同的山头，谁也不肯替谁补位。"]},
         "bh_zj_join": {"x": 12, "y": 1, "type": "event", "label": "收服双凤", "cards": ["zhenghao", "jiangqiao", "zheng_daoshou", "jiang_jiguanshou"], "next": ["bh_rest1"], "text": ["随后在简陋的山寨大堂里，三人豪迈对饮。你收编了两寨人马做近卫，给她们赐名：郑家的叫郑好（「正好」），姜家的叫姜巧（「将巧」）。", "两人异口同声：「凭什么她的名字比我的好听？」", "（郑好、姜巧入队，获得兵卡：郑家刀手、姜家机关手）"], "cg": "c4_drink"},

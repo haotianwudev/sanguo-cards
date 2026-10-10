@@ -574,8 +574,22 @@ func test_north_chapter5_plays_with_real_fights() -> void:
 		check(fights >= 5, "fought the chapter's battles (%d)" % fights)
 
 
+func test_beihai_peace_is_locked_until_ending_seven_has_happened() -> void:
+	## 第一次走第四章，调解双凤是灰的：只能放任她们内讧，走到「结局七 · 绝罚」才会解锁和好
+	var q := quest_by_id("beihai")
+	var first := beihai_save()
+	var choose: Dictionary = q["squares"]["bh_zj_choose"]
+	var peace: Dictionary = choose["choose"][0]
+	check(Quests.option_locked(first, peace), "第一次：调解双凤被锁住")
+	check(not Quests.option_locked(first, choose["choose"][1]), "第一次：随她们去可选")
+	var again := beihai_save()
+	again.flags.append("结局七 · 绝罚")
+	check(not Quests.option_locked(again, peace), "吃过结局七之后：调解双凤解锁")
+
+
 func test_beihai_peace_route_wins_through_to_beihai() -> void:
 	var s := beihai_save()
+	s.flags.append("结局七 · 绝罚")  # peace needs ending seven first
 	var q := quest_by_id("beihai")
 	var path := walk(q, s, [], 1, 0, 0)
 	for sid in ["bh_zheng", "bh_jiang", "bh_zj_peace", "bh_zj_join", "bh_lubu", "bh_flee", "bh_guanhai", "bh_porridge", "bh_end"]:
