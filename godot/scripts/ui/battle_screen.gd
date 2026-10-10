@@ -692,7 +692,7 @@ func _play(events: Array) -> void:
 				if _boost_hits:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
-				await get_tree().create_timer(0.05).timeout
+				await get_tree().create_timer(0.02).timeout
 			"hit", "interrupt", "burn", "counter":
 				Kit.shake(_enemy_art, 9.0, 0.2)
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
