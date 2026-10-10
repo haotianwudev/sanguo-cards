@@ -273,3 +273,181 @@
 - [x] 2026-10-09 cg `jz_fireside` ← jz_fireside.jpg · ok
 - [x] 2026-10-09 cg `jz_reunite` ← jz_reunite.jpg · ok
 - [x] 2026-10-09 cg `jz_training` ← jz_training.jpg · ok
+- [x] 2026-10-09 battle `c6_fanchou` ← c6_fanchou_seedream.jpg · ok
+- [x] 2026-10-09 battle `c6_zhangji` ← c6_zhangji_seedream.jpg · ok
+- [x] 2026-10-09 battle `c5_hall` ← c5_hall_nano.jpg · ok
+- [x] 2026-10-09 battle `th_patrol` ← th_patrol_nano_lite.jpg · ok
+- [x] 2026-10-09 battle `bh_hj_qushuai` ← bh_hj_qushuai_dev.jpg · ok
+- [x] 2026-10-09 battle `bh_hj_duzhan` ← bh_hj_duzhan.jpg · ok
+- [x] 2026-10-09 battle `bh_jiang_trap` ← bh_jiang_trap.jpg · ok
+- [x] 2026-10-09 battle `bh_jz_inf` ← bh_jz_inf.jpg · ok
+- [x] 2026-10-09 battle `bh_jz_scout` ← bh_jz_scout.jpg · ok
+- [x] 2026-10-09 battle `bh_jz_spear` ← bh_jz_spear.jpg · ok
+- [x] 2026-10-09 battle `hs_chunyuqiong` ← hs_chunyuqiong.jpg · ok
+- [x] 2026-10-09 battle `hs_jieqiao_scout` ← hs_jieqiao_scout.jpg · ok
+- [x] 2026-10-09 battle `hs_jizhou_buzhu` ← hs_jizhou_buzhu.jpg · ok
+- [x] 2026-10-09 battle `hs_jizhou_nu` ← hs_jizhou_nu.jpg · ok
+- [x] 2026-10-09 battle `hs_jizhou_qiangbing` ← hs_jizhou_qiangbing.jpg · ok
+- [x] 2026-10-09 battle `hs_jizhou_qibing` ← hs_jizhou_qibing.jpg · ok
+- [x] 2026-10-09 battle `huangjin_vanguard` ← huangjin_vanguard.jpg · ok
+- [x] 2026-10-09 battle `shanzei_scout` ← shanzei_scout.jpg · ok
+- [x] 2026-10-09 battle `c4_liumin` ← c4_liumin.jpg · ok
+- [x] 2026-10-09 battle `c5_qinbing` ← c5_qinbing.jpg · ok
+- [x] 2026-10-09 battle `c6_xianzhen` ← c6_xianzhen.jpg · ok
+- [x] 2026-10-09 battle `c6_shaoka` ← c6_shaoka.jpg · ok
+- [x] 2026-10-09 battle `c7_qiaorui` ← c7_qiaorui.jpg · ok
+- [x] 2026-10-09 battle `c7_leibo` ← c7_leibo.jpg · ok
+- [x] 2026-10-09 battle `c7_chenlan` ← c7_chenlan.jpg · ok
+- [x] 2026-10-09 battle `c6_zhangxiu` ← c6_zhangxiu.jpg · ok
+- [x] 2026-10-09 battle `jx_jinfan` ← jx_jinfan.jpg · ok
+- [x] 2026-10-09 battle `jx_zongzei` ← jx_zongzei.jpg · ok
+- [x] 2026-10-09 battle `jx_ganning` ← jx_ganning.jpg · ok
+- [x] 2026-10-09 battle `jx_bubing` ← jx_bubing.jpg · ok
+- [x] 2026-10-09 battle `jx_gongshou` ← jx_gongshou.jpg · ok
+- [x] 2026-10-09 battle `jx_shuijun` ← jx_shuijun.jpg · ok
+- [x] 2026-10-09 battle `jx_nushou` ← jx_nushou.jpg · ok
+- [x] 2026-10-09 battle `c5_fanchou` ← c5_fanchou.jpg · ok
+- [x] 2026-10-09 battle `c5_zhangji` ← c5_zhangji.jpg · ok
+- [x] 2026-10-09 battle `c5_huzhen` ← c5_huzhen.jpg · ok
+- [x] 2026-10-09 battle `hn_leichen` ← hn_leichen.jpg · ok
+- [x] 2026-10-09 battle `hn_zhangxun` ← hn_zhangxun.jpg · ok
+- [x] 2026-10-09 cg `e_zuoci` ← e_zuoci_gpt_image_edit.png · ok
+- [x] 2026-10-09 cg `e_huatuo` ← e_huatuo_gpt_image_edit.png · ok
+- [x] 2026-10-09 cg `e_ambush` ← e_ambush_grok.jpg · ok
+- [x] 2026-10-09 cg `c4_wenji` ← c4_wenji_gemini_dev.jpg · ok
+- [x] 2026-10-09 cg `c4_wenji` ← c4_wenji_fixed.jpg · ok
+- [x] 2026-10-09 cg `c4_zhujun` ← c4_zhujun_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_xizi` ← c4_xizi_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_peace` ← c4_peace_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_chest` ← e_chest.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c4_betroth` ← c4_betroth_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_taihang_bear` ← e_taihang_bear.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c4_mangshan` ← c4_mangshan_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_shuijing` ← e_shuijing.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_ganning` ← e_ganning.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_huangchengyan` ← e_huangchengyan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_enter` ← c5_enter_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_snake` ← e_snake.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_hero` ← e_hero.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_washer` ← e_washer.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_refugees` ← e_refugees.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_feast` ← c5_feast_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_risk` ← e_risk.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_temple` ← e_temple.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_yuji` ← e_yuji.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_merchant` ← e_merchant.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_smith` ← e_smith.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_garden` ← c5_garden_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_tomb` ← e_tomb.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_guanlu` ← e_guanlu.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_xushao` ← e_xushao.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_qiao` ← e_qiao.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_drink` ← e_drink.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_deserters` ← e_deserters.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_storm` ← e_storm.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_horse` ← e_horse.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_convoy` ← e_convoy.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_surrender` ← e_surrender.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_shanzei` ← e_shanzei.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_shanzhai` ← e_shanzhai.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_jieying` ← e_jieying.jpg 裁 1536×1024→1536×864 · ⚠ 整体过暗
+- [x] 2026-10-09 cg `e_tongyao` ← e_tongyao.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_diaochan` ← c5_diaochan_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_zhuhou_yan` ← e_zhuhou_yan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_taihang_hunter` ← e_taihang_hunter.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_zhen_caravan` ← e_zhen_caravan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_hn_cangtou` ← e_hn_cangtou.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_hn_longwang` ← e_hn_longwang.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_yuexia` ← c5_yuexia_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_hn_qianshan` ← e_hn_qianshan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_hn_shizhe` ← e_hn_shizhe.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_xz_shiji` ← e_xz_shiji.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_xz_shangchuan` ← e_xz_shangchuan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_xz_yanchang` ← e_xz_yanchang.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_dance` ← c5_dance_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_xz_shuzhai` ← e_xz_shuzhai.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_xz_liumin` ← e_xz_liumin.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `e_fruit` ← e_fruit.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_fengyi` ← c5_fengyi_gemini.jpg · ok
+- [x] 2026-10-09 cg `c5_chuxi` ← c5_chuxi_gemini.jpg · ok
+- [x] 2026-10-09 cg `c5_dress` ← c5_dress_gemini.jpg · ok
+- [x] 2026-10-09 cg `c5_snow` ← c5_snow_gemini.jpg · ok
+- [x] 2026-10-09 battle `bh_jz_inf` ← bh_jz_inf.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `c5_fanchou` ← c5_fanchou.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `c6_shaoka` ← c6_shaoka.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c4_betroth` ← c4_betroth_gemini.jpg · ok
+- [x] 2026-10-09 battle `c7_chenlan` ← c7_chenlan.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `hn_liuxun` ← hn_liuxun.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `hn_leichen` ← hn_leichen.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `hn_zhangxun` ← hn_zhangxun.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `hs_jizhou_nu` ← hs_jizhou_nu.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `hs_jizhou_qibing` ← hs_jizhou_qibing.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `huangjin_vanguard` ← huangjin_vanguard.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `jx_shuijun` ← jx_shuijun.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 battle `jx_zongzei` ← jx_zongzei.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_wedding` ← c5_wedding_gemini.jpg · ok
+- [x] 2026-10-09 cg `e_hn_qianshan` ← e_hn_qianshan.png 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-09 cg `c5_rescue` ← c5_rescue_gemini.jpg · ok
+- [x] 2026-10-09 cg `c5_death` ← c5_death_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_bad_feud` ← c4_bad_feud_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_escape` ← c4_escape_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_bad_lingqi` ← c4_bad_lingqi_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_yanliang` ← c4_yanliang_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_million_hj` ← c4_million_hj_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_taishici_break` ← c4_taishici_break_gemini.jpg · ok
+- [x] 2026-10-09 relic `wentai_shu` ← relic_wentai_shu_1791593741863.jpg · ok
+- [x] 2026-10-09 cg `c4_porridge` ← c4_porridge_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_kongrong` ← c4_kongrong_gemini.jpg · ok
+- [x] 2026-10-09 relic `zhou_pu` ← relic_zhou_pu_1791593828419.jpg · ok
+- [x] 2026-10-09 relic `weixi` ← relic_weixi_1791593855561.jpg · ok
+- [x] 2026-10-09 relic `xuzhou_yin` ← relic_xuzhou_yin_1791593886808.jpg · ok
+- [x] 2026-10-09 relic `mijia_chuan` ← relic_mijia_chuan_1791593915813.jpg · ok
+- [x] 2026-10-09 relic `chen_mago` ← relic_chen_mago_1791593943057.jpg · ok
+- [x] 2026-10-09 cg `end_juefa` ← cg_end_juefa_1791593975648.jpg · ok
+- [x] 2026-10-09 cg `end_menhou` ← cg_end_menhou_1791594005312.jpg · ok
+- [x] 2026-10-09 cg `n5_seal` ← n5_seal_gemini.jpg · ok
+- [x] 2026-10-09 cg `n5_mizhen` ← n5_mizhen_gemini.jpg · ok
+- [x] 2026-10-09 cg `n5_needle` ← n5_needle_gemini.jpg · ok
+- [x] 2026-10-09 cg `n5_banquet` ← n5_banquet_gemini.jpg · ok
+- [x] 2026-10-09 cg `n5_beat` ← n5_beat_gemini.jpg · ok
+- [x] 2026-10-09 cg `n5_menhou` ← n5_menhou_gemini.jpg · ok
+- [x] 2026-10-09 cg `n5_wedding` ← n5_wedding_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_yizu` ← c6_yizu_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_fenghou` ← c6_fenghou_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_warn` ← c6_warn_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_siege` ← c4_siege_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_escape` ← c6_escape_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_dongjia` ← c4_dongjia_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_jiaxu` ← c6_jiaxu_gemini.jpg · ok
+- [x] 2026-10-09 cg `c4_tonggui` ← c4_tonggui_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_huihe` ← c6_huihe_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_jiaxu_join` ← c6_jiaxu_join_gemini.jpg · ok
+- [x] 2026-10-09 cg `c6_seal` ← c6_seal_gemini.jpg · ok
+- [x] 2026-10-09 cg `c7_huangzhong` ← c7_huangzhong_gemini.jpg · ok
+- [x] 2026-10-09 cg `c7_stars` ← c7_stars_gemini.jpg · ok
+- [x] 2026-10-09 cg `c7_feng` ← c7_feng_gemini.jpg · ok
+- [x] 2026-10-09 cg `c7_flee` ← c7_flee_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_jiayan` ← c8_jiayan_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_liuxian` ← c8_liuxian_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_caifuren` ← c8_caifuren_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_shuige` ← c8_shuige_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_dress` ← c8_dress_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_xiangxiao` ← c8_xiangxiao_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_grapes` ← c8_grapes_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_xuexi` ← c8_xuexi_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_henhai` ← c8_henhai_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_zupu` ← c8_zupu_gemini.jpg · ok
+- [x] 2026-10-09 cg `c8_louchuan` ← c8_louchuan_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_letter` ← c9_letter_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_granary` ← c9_granary_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_luxun` ← c9_luxun_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_lusu` ← c9_lusu_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_qiao` ← c9_qiao_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_bridge` ← c9_bridge_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_coat` ← c9_coat_gemini.jpg · ok
+- [x] 2026-10-09 cg `c9_wedding` ← c9_wedding_gemini.jpg · ok
+- [x] 2026-10-09 cg `end_hushi` ← end_hushi_gemini.jpg · ok
+- [x] 2026-10-09 cg `end_zhumie` ← end_zhumie_gemini.jpg · ok
+- [x] 2026-10-09 cg `end_chibi` ← end_chibi_gemini.jpg · ok
+- [x] 2026-10-09 cg `end_guandu` ← end_guandu_gemini.jpg · ok
+- [x] 2026-10-09 cg `end_tianming` ← end_tianming_gemini.jpg · ok

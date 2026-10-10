@@ -59,8 +59,11 @@ def upload_media(api_key: str, file_path: Path) -> str:
     )
     with urllib.request.urlopen(req) as resp:
         res = json.loads(resp.read().decode("utf-8"))
-        if res.get("code") == 200 and "url" in res.get("data", {}):
-            return res["data"]["url"]
+        data = res.get("data", {})
+        if "download_url" in data:
+            return data["download_url"]
+        if "url" in data:
+            return data["url"]
         if "url" in res:
             return res["url"]
         raise RuntimeError(f"Failed to upload media: {res}")
@@ -81,17 +84,49 @@ def generate_image_atlas(
         "User-Agent": "Mozilla/5.0",
     }
 
+    if "lite" in model and "banana" in model:
+        model = "google/nano-banana-2-lite/edit-developer" if ref_urls else "google/nano-banana-2-lite/text-to-image-developer"
+    elif ("developer" in model and "banana" in model) or model in ("nano-banana", "nano-banana-2"):
+        model = "google/nano-banana-2/reference-to-image-developer" if ref_urls else "google/nano-banana-2/text-to-image-developer"
+    elif "banana-2.1" in model or "google/nano-banana-2.1" in model:
+        model = "google/nano-banana-2.1/edit" if ref_urls else "google/nano-banana-2.1/text-to-image"
+    elif "gpt-image" in model:
+        model = "openai/gpt-image-2-developer/edit" if ref_urls else "openai/gpt-image-2-developer/text-to-image"
+    elif "grok" in model:
+        model = "xai/grok-imagine-image-2.0-developer/edit" if ref_urls else "xai/grok-imagine-image-2.0-developer/text-to-image"
+
+    is_seedream = "seedream" in model
+    is_nano = "nano-banana" in model
+    is_gpt = "gpt-image" in model
+    is_grok = "grok" in model
     payload = {
         "model": model,
         "prompt": prompt,
-        "enable_sync_mode": True,
     }
+    if not is_seedream and not is_nano and not is_gpt and not is_grok:
+        payload["enable_sync_mode"] = True
+    else:
+        payload["enable_sync_mode"] = False
+
     if "z-image" in model:
         payload["size"] = size
-    elif "nano-banana" in model:
-        payload["aspect_ratio"] = "16:9"
+    elif is_seedream:
+        payload["size"] = "2560*1440" if size == "1280*720" else size
+    elif is_gpt:
+        payload["size"] = "1536x1024" if size in ("1280*720", "1280x720") else size
         if ref_urls:
             payload["images"] = ref_urls
+    elif is_grok:
+        payload["aspect_ratio"] = "16:9"
+        payload["resolution"] = "1k"
+        if ref_urls:
+            payload["image_urls"] = ref_urls
+    elif is_nano:
+        payload["aspect_ratio"] = "16:9"
+        payload["resolution"] = "1k" if "lite" in model else "2k"
+        if ref_urls:
+            payload["images"] = ref_urls
+            payload["reference_images"] = ref_urls
 
     req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers)
     try:
@@ -134,26 +169,28 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate art using AtlasCloud")
     parser.add_argument("--key", required=True, help="Art key (e.g. c6_fanchou)")
     parser.add_argument("--prompt", required=True, help="Text prompt")
-    parser.add_argument("--model", default="z-image/turbo", help="Model ID (default: z-image/turbo)")
+    parser.add_argument("--model", default="gpt-image-2", help="Model ID (default: gpt-image-2)")
     parser.add_argument("--size", default="1280*720", help="Output size for z-image (default: 1280*720)")
-    parser.add_argument("--ref", help="Optional local path to reference image")
+    parser.add_argument("--ref", nargs="+", help="Optional local path(s) to reference image(s)")
     parser.add_argument("--out", help="Output local image path (default: pics/inbox/<key>.jpg)")
+    parser.add_argument("--kind", help="Art kind (e.g. battle, cg, portrait)")
     parser.add_argument("--ingest", action="store_true", help="Auto ingest via tools/art_ingest.py after generation")
     args = parser.parse_args()
 
     api_key = load_api_key()
     print(f"Generating for key: {args.key} using model: {args.model}")
 
-    ref_urls = None
+    ref_urls = []
     if args.ref:
-        ref_path = Path(args.ref)
-        if ref_path.exists():
-            print(f"Uploading reference image: {ref_path}")
-            url = upload_media(api_key, ref_path)
-            ref_urls = [url]
-            print(f"Reference uploaded: {url}")
-        else:
-            print(f"Warning: reference image not found: {args.ref}")
+        for r in args.ref:
+            ref_path = Path(r)
+            if ref_path.exists():
+                print(f"Uploading reference image: {ref_path}")
+                url = upload_media(api_key, ref_path)
+                ref_urls.append(url)
+                print(f"Reference uploaded: {url}")
+            else:
+                print(f"Warning: reference image not found: {r}")
 
     img_url = generate_image_atlas(api_key, args.prompt, model=args.model, size=args.size, ref_urls=ref_urls)
     print(f"Generated URL: {img_url}")
@@ -171,6 +208,8 @@ def main() -> None:
 
         print(f"Ingesting into game...")
         cmd = [sys.executable, str(ROOT / "tools" / "art_ingest.py"), "add", str(out_path), args.key]
+        if args.kind:
+            cmd.extend(["--kind", args.kind])
         subprocess.check_call(cmd)
 
 

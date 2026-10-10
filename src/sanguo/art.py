@@ -40,6 +40,18 @@ BATTLE_H = 720
 CG_OUT = ROOT / "godot" / "data" / "art" / "cg"
 
 
+def _save_with_retry(im: Image.Image, dst: Path, quality: int = 88) -> None:
+    import time
+    for attempt in range(5):
+        try:
+            im.save(dst, quality=quality)
+            return
+        except OSError:
+            if attempt == 4:
+                raise
+            time.sleep(0.05 * (attempt + 1))
+
+
 def _prep():
     import importlib.util
 
@@ -71,7 +83,7 @@ def build(pics: Path = PICS, out: Path = OUT) -> list[str]:
             im = im.convert("RGB")
             if im.height > MAX_H:
                 im = im.resize((round(im.width * MAX_H / im.height), MAX_H), Image.LANCZOS)
-            im.save(dst, quality=88)
+            _save_with_retry(im, dst, quality=88)
             built.append(key)
         elif not dst.exists():
             print(f"  ! {key}: {src.name} not found and no built copy — skipped")
@@ -99,7 +111,7 @@ def build_maps(pics: Path = PICS, out: Path = MAP_OUT, section: str = "maps", he
         im = Image.open(src).convert("RGB")
         if im.height > height:
             im = im.resize((round(im.width * height / im.height), height), Image.LANCZOS)
-        im.save(out / f"{key}.jpg", quality=88)
+        _save_with_retry(im, out / f"{key}.jpg", quality=88)
         built.append(key)
     return built
 
