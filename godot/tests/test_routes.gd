@@ -391,7 +391,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
 				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_wedding", "hn_end"]:
 			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
 		check_eq(p[-1], "hn_end")
-		for sid in ["hn_kaicang", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
+		for sid in ["hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
 			check(not p.has(sid), "刘晔 route never reaches " + sid)
 		for c in ["lusu", "chenwu", "daqiao", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
@@ -792,10 +792,9 @@ func test_south_chapter6_burning_the_clans_deeds_ends_in_ending_ten() -> void:
 	check(Quests.option_hint(s, opts[0]).contains("结局十 · 深锁"))
 	check(not Quests.option_locked(s, opts[1]), "开仓分田 open")
 	var p := walk(q, s, [])
-	for sid in ["hn_shizu", "hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_kc_rest", "hn_shouchun", "hn_bridge", "hn_jiangting",
-			"hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
+	for sid in ["hn_shizu", "hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
 		check(p.has(sid), "深锁 route passes " + sid)
-	for sid in ["hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_feng2", "hn_wedding", "hn_end"]:
+	for sid in ["hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_zhengbao", "hn_shouchun", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_wedding", "hn_end"]:
 		check(not p.has(sid), "深锁 route never reaches " + sid)
 	check_eq(p[-1], "hn_shensuo")
 	check(not s.has_card("liuye"), "刘晔 walks out")
