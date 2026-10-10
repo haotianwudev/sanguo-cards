@@ -183,19 +183,94 @@ func _card_ids(tab: String) -> Array:
 
 
 func _cards_panel() -> Control:
-	var tabs: Array = []
-	for t in _CARD_TABS:
-		tabs.append([t[0], "%s（%d）" % [t[1], _card_ids(t[0]).size()]])
-	return _gallery(tabs, func(tab: String) -> Control:
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	var row1 := HBoxContainer.new()
+	row1.add_theme_constant_override("separation", 6)
+	box.add_child(row1)
+	var row2 := HBoxContainer.new()
+	row2.add_theme_constant_override("separation", 6)
+	box.add_child(row2)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1224, 484)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	box.add_child(scroll)
+
+	var db := GameData.get_db()
+	var all_troops: Array = db.troops.keys()
+
+	var buttons1: Array = []
+	var buttons2: Array = []
+
+	var build_grid = func(cids: Array) -> void:
+		for ch in scroll.get_children():
+			ch.queue_free()
 		var grid := GridContainer.new()
 		grid.columns = 9
 		grid.add_theme_constant_override("h_separation", 6)
 		grid.add_theme_constant_override("v_separation", 6)
-		for cid in _card_ids(tab):
+		for cid in cids:
 			var v := CardView.make(cid, Vector2(126, 176), {"skills": false})
 			v.pressed.connect(_preview_card.bind(cid))
 			grid.add_child(v)
-		return grid)
+		scroll.add_child(grid)
+
+	var pick2 = func(i: int, cids: Array, sub_tabs: Array) -> void:
+		for j in buttons2.size():
+			buttons2[j].add_theme_color_override("font_color", Kit.c("gold") if j == i else Kit.c("text"))
+		var troop: String = sub_tabs[i][0]
+		var filter_cids := cids if troop == "all" else cids.filter(func(cid): return db.cards[cid]["troop"] == troop)
+		build_grid.call(filter_cids)
+
+	var pick1 = func(i: int) -> void:
+		for j in buttons1.size():
+			buttons1[j].add_theme_color_override("font_color", Kit.c("gold") if j == i else Kit.c("text"))
+		
+		var tab_id: String = _CARD_TABS[i][0]
+		var cids := _card_ids(tab_id)
+		
+		for ch in row2.get_children():
+			ch.queue_free()
+		buttons2.clear()
+		
+		var troops_in_tab := {}
+		for cid in cids:
+			var troop: String = db.cards[cid]["troop"]
+			if not troops_in_tab.has(troop):
+				troops_in_tab[troop] = []
+			troops_in_tab[troop].append(cid)
+		var sorted_troops := troops_in_tab.keys()
+		sorted_troops.sort_custom(func(a, b): return all_troops.find(a) < all_troops.find(b))
+		
+		var sub_tabs := [["all", "全部（%d）" % cids.size()]]
+		for troop in sorted_troops:
+			var count: int = troops_in_tab[troop].size()
+			var tname: String = db.troops[troop]["name"] if db.troops.has(troop) else troop
+			sub_tabs.append([troop, "%s（%d）" % [tname, count]])
+			
+		for j in sub_tabs.size():
+			var b := Kit.button(sub_tabs[j][1], "blue", 15)
+			b.custom_minimum_size = Vector2(0, 38)
+			b.pressed.connect(pick2.bind(j, cids, sub_tabs))
+			row2.add_child(b)
+			buttons2.append(b)
+			
+		if not sub_tabs.is_empty():
+			pick2.call(0, cids, sub_tabs)
+
+	for i in _CARD_TABS.size():
+		var tab_id: String = _CARD_TABS[i][0]
+		var count: int = _card_ids(tab_id).size()
+		var b := Kit.button("%s（%d）" % [_CARD_TABS[i][1], count], "blue", 15)
+		b.custom_minimum_size = Vector2(0, 38)
+		b.pressed.connect(pick1.bind(i))
+		row1.add_child(b)
+		buttons1.append(b)
+
+	if not _CARD_TABS.is_empty():
+		pick1.call(0)
+
+	return box
 
 
 func _cg_keys() -> Dictionary:
