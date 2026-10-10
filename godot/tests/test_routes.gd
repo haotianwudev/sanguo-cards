@@ -597,6 +597,7 @@ func test_beihai_peace_route_wins_through_to_beihai() -> void:
 	check(not path.has("bh_escape") and not path.has("bh_bad_end"), "winning against 吕布 skips the retreat scenes")
 	for c in ["zhenghao", "jiangqiao", "taishici", "beihai_tuntian"]:
 		check(s.has_card(c), "got " + c)
+	check(not path.has("bh_zj_apart") and not path.has("bh_zj_fight"), "和好线不经过内讧那一格")
 	var j := beihai_save()
 	Quests.begin(q, j)
 	j.square = "bh_zj_join"
@@ -625,6 +626,9 @@ func test_beihai_losing_to_lvbu_after_a_feud_is_ending_seven() -> void:
 	var q := quest_by_id("beihai")
 	var path := walk(q, s, [], 1, 0, 1)
 	check(path.has("bh_zj_fight") and path.has("bh_flee"), "feud route still wins through if you beat 吕布")
+	check(path.has("bh_zj_apart") and not path.has("bh_zj_join") and not path.has("bh_zj_peace"), "内讧线不经过和好 / 收服那两格")
+	for c in ["zhenghao", "jiangqiao", "zheng_daoshou", "jiang_jiguanshou"]:
+		check(not s.has_card(c), "内讧线收不到 " + c)
 	Quests.begin(q, s)
 	s.square = "bh_lubu"
 	s.resolved = false
