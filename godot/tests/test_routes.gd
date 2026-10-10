@@ -766,7 +766,7 @@ func test_north_chapter6_no_grain_and_a_mauled_rear_guard_end_at_the_broken_brid
 
 
 func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
-	for pair in [["hnn_bw3", "hnn_choose", ["曹操：借粮", "夏侯惇：放他回兖州"]], ["hnn_gongmen", "hnn_fire", ["曹操：没借", "夏侯惇：痛击殿后"]],
+	for pair in [["hnn_bw3", "hnn_choose_b", ["曹操：借粮", "夏侯惇：放他回兖州"]], ["hnn_gongmen", "hnn_fire", ["曹操：没借", "夏侯惇：痛击殿后"]],
 			["hnn_duanqiao", "hnn_caught", ["曹操：没借", "夏侯惇：痛击殿后"]]]:
 		var s := huainan_n_save(pair[2])
 		var q := quest_by_id("huainan_n")
