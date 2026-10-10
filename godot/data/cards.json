@@ -11401,14 +11401,12 @@
     "hnn_daofu": {
       "name": "宫中·曹军刀斧手",
       "turn_limit": 6,
-      "enemy": "cao_daofu",
-      "art": "c6_fubing"
+      "enemy": "cao_daofu"
     },
     "hnn_gongmen": {
       "name": "宫门·夏侯惇",
       "turn_limit": 8,
-      "enemy": "xiahoudun_gm",
-      "art": "xz_xiahoudun"
+      "enemy": "xiahoudun_gm"
     },
     "hnn_lvbu": {
       "name": "断桥·吕布",
@@ -11418,8 +11416,7 @@
     "hn_wanshui": {
       "name": "皖水·雷家部曲",
       "turn_limit": 8,
-      "enemy": "lei_buqu",
-      "art": "hn_liuxun"
+      "enemy": "lei_buqu"
     },
     "hn_leixu_g": {
       "name": "灊山·雷绪",
@@ -11441,8 +11438,7 @@
     "jd_niuzhu_b": {
       "name": "牛渚·刘繇骑卒",
       "turn_limit": 6,
-      "enemy": "jd_liu_bu",
-      "art": "c3_xunluo"
+      "enemy": "jd_liu_bu"
     },
     "jd_shenting": {
       "name": "神亭岭·刘繇军",
@@ -11458,8 +11454,7 @@
     "jd_jinfan": {
       "name": "太湖·锦帆贼",
       "turn_limit": 6,
-      "enemy": "jd_jinfan_e",
-      "art": "shuizei_scout"
+      "enemy": "jd_jinfan_e"
     },
     "jd_yanbaihu": {
       "name": "太湖水寨·严白虎",
@@ -11485,8 +11480,7 @@
     "jd_kuaiji": {
       "name": "会稽守军",
       "turn_limit": 6,
-      "enemy": "jd_kuaiji_bing",
-      "art": "c3_xunluo"
+      "enemy": "jd_kuaiji_bing"
     },
     "jd_wanglang": {
       "name": "会稽·王朗",
@@ -11502,8 +11496,7 @@
     "jd_zhoutai": {
       "name": "太湖·周泰",
       "turn_limit": 10,
-      "enemy": "zhoutai_e",
-      "art": "jd_ganning"
+      "enemy": "zhoutai_e"
     },
     "jd_yanyu": {
       "name": "水寨前·严舆",
