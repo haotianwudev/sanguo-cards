@@ -768,3 +768,11 @@ func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
 		s.square = pair[0]
 		check(Quests.lose(q, s, rng(3)), "losing %s is not a restart" % pair[0])
 		check_eq(s.square, pair[1])
+
+
+func test_north_chapter6_sparring_generals_drop_their_own_cards_and_stay_public() -> void:
+	## 比武 关羽 / 张飞 drop their own card (card_public): it doesn't make them chapter-only, both routes still recruit them
+	var db := GameData.get_db()
+	for pair in [["hnn_bw_zf", "zhangfei"], ["hnn_bw_gy", "guanyu"]]:
+		check_eq(db.enemies[db.scenarios[pair[0]]["enemy"]]["card"], pair[1], "%s drops %s" % pair)
+		check(db.is_public(pair[1]), "%s stays in the public pool" % pair[1])

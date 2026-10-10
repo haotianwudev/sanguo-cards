@@ -104,7 +104,7 @@ func _load(dir: String) -> void:
 		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
 			"actions": int(e["actions"]), "moves": e["moves"],
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)),
-			"portrait": e.get("portrait", ""), "card": e.get("card", "")}
+			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "card_public": e.get("card_public", false)}
 	for rid in raw.get("relics", {}):
 		var r: Dictionary = raw["relics"][rid]
 		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),
@@ -171,7 +171,8 @@ func _load(dir: String) -> void:
 
 func _index_card_chapters() -> void:
 	## a card is chapter-specific when a chapter hands it out: a square's `cards` / a choice's `card`, a quest's 招贤 list, or the
-	## `card` of an enemy fought on one of its squares. Everything else is 公共 (the chest's public pool).
+	## `card` of an enemy fought on one of its squares (unless that enemy says `card_public`: a famous general met as a sparring
+	## opponent — 比武 关羽 / 张飞 — drops his own card but stays in both routes' public pool). Everything else is 公共.
 	card_chapters = {}
 	var add := func(cid: String, qid: String):
 		if cid != "" and cards.has(cid):
@@ -191,7 +192,9 @@ func _index_card_chapters() -> void:
 			for o in s["choose"]:
 				add.call(o["card"], q["id"])
 			if s["type"] == "battle" and scenarios.has(s["battle"]):
-				add.call(enemies[scenarios[s["battle"]]["enemy"]]["card"], q["id"])
+				var foe: Dictionary = enemies[scenarios[s["battle"]]["enemy"]]
+				if not foe["card_public"]:
+					add.call(foe["card"], q["id"])
 
 
 func is_public(card_id: String) -> bool:

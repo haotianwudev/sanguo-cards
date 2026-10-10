@@ -9633,7 +9633,8 @@
           "pierce": true
         }
       ],
-      "card": "inf_n"
+      "card": "zhangfei",
+      "card_public": true
     },
     "bw_guanyu": {
       "name": "比武·关羽",
@@ -9675,7 +9676,8 @@
           "once": true
         }
       ],
-      "card": "inf_n"
+      "card": "guanyu",
+      "card_public": true
     },
     "cao_daofu": {
       "name": "曹军刀斧手",
