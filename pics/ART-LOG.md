@@ -463,3 +463,44 @@
 - [x] 2026-10-10 portrait `hebei_shuzuo` ← hebei_shuzuo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-10 portrait `taishan_zei` ← taishan_zei.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-10 portrait `heishan_louluo` ← heishan_louluo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-10 battle `hn_leixu_g` ← hn_leixu_g.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `hn_wanshui` ← hn_wanshui.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `hnn_bw_gy` ← hnn_bw_gy.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `hnn_daofu` ← hnn_daofu.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `hnn_gongmen` ← hnn_gongmen.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `hnn_lvbu` ← hnn_lvbu.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_niuzhu_b` ← jd_niuzhu_b.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_shenting` ← jd_shenting.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_ganning` ← jd_ganning.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_zhoutai` ← jd_zhoutai.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_yanbaihu` ← jd_yanbaihu.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_menke` ← jd_menke.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_kuaiji` ← jd_kuaiji.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_wanglang` ← jd_wanglang.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 battle `jd_jinfan` ← jd_jinfan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 cg `e_jd_yanchuan` ← e_jd_yanchuan.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 cg `e_jd_yucun` ← e_jd_yucun.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 cg `e_hnn_liumin` ← e_hnn_liumin.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 cg `e_hnn_shuili` ← e_hnn_shuili.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-10 relic `dujiu` ← dujiu_relic_icon_1791659186722.jpg · ok
+- [x] 2026-10-10 cg `end_shensuo` ← end_shensuo_cg_1791659201235.jpg · ok
+- [x] 2026-10-10 cg `end_pifu` ← end_pifu_cg_1791659214435.jpg · ok
+- [x] 2026-10-10 cg `end_duanqiao` ← end_duanqiao_cg_1791659229028.jpg · ok
+- [x] 2026-10-10 cg `c9_liuye` ← c9_liuye_story_cg_1791659468017.jpg · ok
+- [x] 2026-10-10 cg `c9_qiuche` ← c9_qiuche_story_cg_1791659528664.jpg · ok
+- [x] 2026-10-10 cg `c9_mishui` ← c9_mishui_1791659649045.jpg · ok
+- [x] 2026-10-10 cg `n6_dujiu` ← n6_dujiu_1791659701992.jpg · ok
+- [x] 2026-10-10 cg `n6_zhujiu` ← n6_zhujiu_1791659773308.jpg · ok
+- [x] 2026-10-10 cg `n6_choose` ← n6_choose_1791659813491.jpg · ok
+- [x] 2026-10-10 cg `n6_bad_fire` ← n6_bad_fire_1791659847416.jpg · ok
+- [x] 2026-10-10 cg `n6_bad_hall` ← n6_bad_hall_1791659875935.jpg · ok
+- [x] 2026-10-10 cg `c10_shenting` ← c10_shenting.jpg · ok
+- [x] 2026-10-10 cg `c10_yeyan` ← c10_yeyan.jpg · ok
+- [x] 2026-10-10 cg `c10_ganning` ← c10_ganning.jpg · ok
+- [x] 2026-10-10 cg `c10_pifu` ← c10_pifu.jpg · ok
+- [x] 2026-10-10 cg `c10_zhoutai` ← c10_zhoutai.jpg · ok
+- [x] 2026-10-10 cg `c10_wanglang` ← c10_wanglang.jpg · ok
+- [x] 2026-10-10 cg `c10_fuchun` ← c10_fuchun.jpg · ok
+- [x] 2026-10-10 cg `c10_fuchun` ← c10_fuchun.jpg · ok
+- [x] 2026-10-10 cg `c10_yeyan` ← c10_yeyan.jpg · ok
+- [x] 2026-10-10 cg `c10_wanglang` ← c10_wanglang.jpg · ok
