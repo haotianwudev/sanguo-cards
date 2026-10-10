@@ -121,7 +121,8 @@ func _build() -> void:
 	var enemy_panel := PanelContainer.new()
 	enemy_panel.position = Vector2(20, 14)
 	enemy_panel.size = Vector2(760, 250) if not has_cg else Vector2(560, 0)
-	enemy_panel.custom_maximum_size = Vector2(760, 250) if not has_cg else Vector2(560, 0)
+	# a max height of 0 is not "unlimited": with clip_contents it cut the whole CG-mode panel (name, HP bar) away
+	enemy_panel.custom_maximum_size = Vector2(760, 250) if not has_cg else Vector2(560, 200)
 	enemy_panel.clip_contents = true
 	var ebg := Kit.c("enemy_bg")
 	if has_cg:

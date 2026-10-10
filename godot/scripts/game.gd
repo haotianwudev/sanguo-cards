@@ -657,6 +657,9 @@ func demo(name: String) -> void:
 			save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
+			for a in OS.get_cmdline_user_args():  # --scenario=<id>: any battle, e.g. one with a battle CG
+				if a.begins_with("--scenario="):
+					b.scenario_id = a.trim_prefix("--scenario=")
 			show_screen(b)
 			if OS.get_cmdline_user_args().has("--boost"):  # a strengthened (BOOST) card must stand out
 				await get_tree().create_timer(0.5).timeout
