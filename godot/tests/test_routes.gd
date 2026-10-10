@@ -841,10 +841,10 @@ func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:
 	check(Quests.option_hint(s, opts[0]).contains(E11))
 	check(not Quests.option_locked(s, opts[1]), "联手严白虎 open")
 	var p := walk(q, s, [])
-	for sid in ["jd_start", "jd_shenting", "jd_moling", "jd_yeyan", "jd_ganning", "jd_b_ally", "jd_b_road", "jd_b_gan", "jd_b_rest",
+	for sid in ["jd_start", "jd_shenting", "jd_moling", "jd_yeyan", "jd_ganning", "jd_b_ally", "jd_b_road", "jd_b_zt", "jd_b_gan", "jd_b_rest",
 			"jd_b_hunt", "jd_b_menke", "jd_pifu"]:
 		check(p.has(sid), "匹夫 route passes " + sid)
-	for sid in ["jd_g_join", "jd_g_yan", "jd_g_zhoutai", "jd_wanglang", "jd_fuchun", "jd_end"]:
+	for sid in ["jd_g_meet", "jd_g_gn", "jd_g_join", "jd_g_yan", "jd_g_zhoutai", "jd_wanglang", "jd_fuchun", "jd_end"]:
 		check(not p.has(sid), "匹夫 route never reaches " + sid)
 	check_eq(p[-1], "jd_pifu")
 	check(not s.has_card("ganning"), "甘宁 never joins on this route")
@@ -859,10 +859,10 @@ func test_south_chapter7_with_the_jinfan_men_takes_jiangdong() -> void:
 		var s := ch7s_save([E11])
 		var q := quest_by_id("jiangdong")
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["jd_start", "jd_shenting", "jd_yeyan", "jd_ganning", "jd_g_join", "jd_g_road", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
+		for sid in ["jd_start", "jd_shenting", "jd_yeyan", "jd_ganning", "jd_g_meet", "jd_g_jq", "jd_g_zt", "jd_g_gn", "jd_g_join", "jd_g_road", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
 				"jd_g_menke", "jd_g_zhoutai", "jd_kuaiji", "jd_wanglang", "jd_wanglang_go", "jd_fuchun", "jd_end"]:
 			check(p.has(sid), "江东 route passes %s (forks %s)" % [sid, str(fork)])
-		for sid in ["jd_b_ally", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
+		for sid in ["jd_b_ally", "jd_b_zt", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
 			check(not p.has(sid), "江东 route never reaches " + sid)
 		check_eq(p[-1], "jd_end")
 		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "sunquan", "sunshangxiang"]:
@@ -889,3 +889,15 @@ func test_ganning_no_longer_joins_in_chapter5() -> void:
 	check(not JSON.stringify(ev["options"][0]["effects"]).contains("offer"), "劝他跟你走 says goodbye instead")
 	for id in ["jingxiang", "huainan_s"]:
 		check(not quest_by_id(id)["recruit_pool"].has("ganning"), "%s 招贤 has no 甘宁" % id)
+
+
+func test_south_chapter7_the_jinfan_trials_can_be_lost() -> void:
+	## 收服锦帆: 蒋钦, 周泰, 甘宁 one by one — 点到为止, losing one still moves on and they join all the same
+	var s := ch7s_save([E11])
+	var q := quest_by_id("jiangdong")
+	Quests.begin(q, s, rng(3))
+	s.run_records.append("江东：收服锦帆")
+	for pair in [["jd_g_jq", "jd_g_zt"], ["jd_g_zt", "jd_g_gn"], ["jd_g_gn", "jd_g_join"]]:
+		s.square = pair[0]
+		check(Quests.lose(q, s, rng(3)), "losing %s is not a restart" % pair[0])
+		check_eq(s.square, pair[1])

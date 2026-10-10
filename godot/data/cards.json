@@ -10370,6 +10370,80 @@
       ],
       "card": "wanglang"
     },
+    "jiangqin_e": {
+      "name": "锦帆贼·蒋钦",
+      "portrait": "jiangqin",
+      "hp": 16000,
+      "at": 400,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "射击",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "一声不吭的一箭",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "齐射",
+          "power": 0.6,
+          "weight": 1,
+          "burn_party": 0.05,
+          "turns": 2
+        }
+      ],
+      "card": "jinfan_zei"
+    },
+    "zhoutai_e": {
+      "name": "锦帆贼·周泰",
+      "portrait": "zhoutai",
+      "hp": 23000,
+      "at": 460,
+      "actions": 2,
+      "phys_resist": 0.15,
+      "moves": [
+        {
+          "name": "砍刀",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "挡刀",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "赤膊",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "浴血·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "十二创"
+        },
+        {
+          "name": "十二创",
+          "power": 2.4,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "越打越凶",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "jinfan_zei"
+    },
     "lvbu_xiaopei": {
       "name": "吕布",
       "portrait": "lvbu",
@@ -11241,6 +11315,18 @@
       "name": "会稽·王朗",
       "turn_limit": 14,
       "enemy": "wanglang_e"
+    },
+    "jd_jiangqin": {
+      "name": "太湖·蒋钦",
+      "turn_limit": 8,
+      "enemy": "jiangqin_e",
+      "art": "jd_ganning"
+    },
+    "jd_zhoutai": {
+      "name": "太湖·周泰",
+      "turn_limit": 10,
+      "enemy": "zhoutai_e",
+      "art": "jd_ganning"
     },
     "xz_xiahoudun": {
       "name": "下邳城外·夏侯惇殿后军",
