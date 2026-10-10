@@ -5532,6 +5532,17 @@
       "pool": false,
       "scope": "south"
     },
+    "yufan": {
+      "name": "虞翻",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 46,
+        "at": 18
+      },
+      "pool": false,
+      "scope": "south"
+    },
     "mizhen": {
       "name": "糜贞",
       "rarity": "R",
@@ -10444,6 +10455,77 @@
       ],
       "card": "jinfan_zei"
     },
+    "yanyu_e": {
+      "name": "严白虎之弟·严舆",
+      "portrait": "inf_n",
+      "hp": 22000,
+      "at": 470,
+      "actions": 2,
+      "phys_resist": 0.1,
+      "moves": [
+        {
+          "name": "双短戟",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "一边谈一边打",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "兄长令",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "戟雨",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "谈判·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "谈不拢"
+        },
+        {
+          "name": "谈不拢",
+          "power": 2.4,
+          "weight": 0,
+          "pierce": true
+        }
+      ],
+      "card": "yanbaihu"
+    },
+    "yufan_e": {
+      "name": "会稽功曹·虞翻",
+      "portrait": "yufan",
+      "hp": 16500,
+      "at": 400,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长矛",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "步行追马",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "直言",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        }
+      ],
+      "card": "jiangdong_gong"
+    },
     "lvbu_xiaopei": {
       "name": "吕布",
       "portrait": "lvbu",
@@ -11327,6 +11409,18 @@
       "turn_limit": 10,
       "enemy": "zhoutai_e",
       "art": "jd_ganning"
+    },
+    "jd_yanyu": {
+      "name": "水寨前·严舆",
+      "turn_limit": 10,
+      "enemy": "yanyu_e",
+      "art": "jd_yanbaihu"
+    },
+    "jd_yufan": {
+      "name": "会稽城门·虞翻",
+      "turn_limit": 8,
+      "enemy": "yufan_e",
+      "art": "jd_wanglang"
     },
     "xz_xiahoudun": {
       "name": "下邳城外·夏侯惇殿后军",

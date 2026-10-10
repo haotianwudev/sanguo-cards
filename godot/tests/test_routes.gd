@@ -859,13 +859,13 @@ func test_south_chapter7_with_the_jinfan_men_takes_jiangdong() -> void:
 		var s := ch7s_save([E11])
 		var q := quest_by_id("jiangdong")
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["jd_start", "jd_shenting", "jd_yeyan", "jd_ganning", "jd_g_meet", "jd_g_jq", "jd_g_zt", "jd_g_gn", "jd_g_join", "jd_g_road", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
-				"jd_g_menke", "jd_g_zhoutai", "jd_kuaiji", "jd_wanglang", "jd_wanglang_go", "jd_fuchun", "jd_end"]:
+		for sid in ["jd_start", "jd_shenting", "jd_yeyan", "jd_ganning", "jd_g_meet", "jd_g_jq", "jd_g_zt", "jd_g_gn", "jd_g_join", "jd_g_road", "jd_g_yanyu", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
+				"jd_g_menke", "jd_g_zhoutai", "jd_kuaiji", "jd_yufan", "jd_wanglang", "jd_wanglang_go", "jd_fuchun", "jd_end"]:
 			check(p.has(sid), "江东 route passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["jd_b_ally", "jd_b_zt", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
 			check(not p.has(sid), "江东 route never reaches " + sid)
 		check_eq(p[-1], "jd_end")
-		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "sunquan", "sunshangxiang"]:
+		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "sunquan", "sunshangxiang"]:
 			check(s.has_card(c), "%s joins in 第七章" % c)
 		for line in ["南线：东取江东", "江东：收服锦帆", "甘宁：入队", "江东：周泰护主", "江东：会稽平定", "南线：江东平定"]:
 			check(s.run_records.has(line), "第七章 records " + line)
