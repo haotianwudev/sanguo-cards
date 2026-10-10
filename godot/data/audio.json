@@ -93,9 +93,9 @@
     },
     "hit": {
       "files": [
-        "sfx/gen/hit_1.wav",
-        "sfx/gen/hit_2.wav",
-        "sfx/gen/hit_3.wav"
+        "sfx/hit_1.wav",
+        "sfx/hit_2.wav",
+        "sfx/hit_3.wav"
       ],
       "volume_db": 0,
       "pitch": [
@@ -105,7 +105,7 @@
     },
     "hit_heavy": {
       "files": [
-        "sfx/gen/hit_heavy.wav"
+        "sfx/hit_heavy.wav"
       ],
       "volume_db": 1,
       "pitch": [
@@ -125,7 +125,7 @@
     },
     "hit_pierce": {
       "files": [
-        "sfx/gen/hit_pierce.wav"
+        "sfx/hit_pierce.wav"
       ],
       "volume_db": -1,
       "pitch": [
@@ -135,9 +135,9 @@
     },
     "slash": {
       "files": [
-        "sfx/gen/slash.wav"
+        "sfx/slash.wav"
       ],
-      "volume_db": -3,
+      "volume_db": -2,
       "pitch": [
         0.94,
         1.06
@@ -145,18 +145,18 @@
     },
     "burn": {
       "files": [
-        "sfx/gen/burn.wav"
+        "sfx/burn.wav"
       ],
-      "volume_db": -5,
+      "volume_db": -4,
       "pitch": [
-        0.9,
-        1.1
+        0.95,
+        1.05
       ]
     },
     "enemy_hit": {
       "files": [
-        "sfx/gen/enemy_hit_1.wav",
-        "sfx/gen/enemy_hit_2.wav"
+        "sfx/enemy_hit_1.wav",
+        "sfx/enemy_hit_2.wav"
       ],
       "volume_db": 1,
       "pitch": [
@@ -176,12 +176,56 @@
     },
     "guard": {
       "files": [
-        "sfx/gen/guard.wav"
+        "sfx/guard.wav"
       ],
-      "volume_db": -4,
+      "volume_db": -3,
       "pitch": [
         0.96,
         1.04
+      ]
+    },
+    "shout_male": {
+      "files": [
+        "sfx/shout_male_1.wav",
+        "sfx/shout_male_2.wav",
+        "sfx/shout_male_3.wav"
+      ],
+      "volume_db": -1,
+      "pitch": [
+        0.96,
+        1.04
+      ]
+    },
+    "shout_female": {
+      "files": [
+        "sfx/shout_female_1.wav",
+        "sfx/shout_female_2.wav",
+        "sfx/shout_female_3.wav"
+      ],
+      "volume_db": -1,
+      "pitch": [
+        0.96,
+        1.04
+      ]
+    },
+    "shout_male_ultimate": {
+      "files": [
+        "sfx/shout_male_ult.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        1.0,
+        1.0
+      ]
+    },
+    "shout_female_ultimate": {
+      "files": [
+        "sfx/shout_female_ult.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        1.0,
+        1.0
       ]
     },
     "heal": {

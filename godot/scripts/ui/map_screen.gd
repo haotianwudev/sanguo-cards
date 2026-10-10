@@ -53,6 +53,7 @@ class MapLines extends Control:
 
 
 func _ready() -> void:
+	Bgm.play("map")
 	# top bar
 	var top := HBoxContainer.new()
 	top.position = Vector2(24, 14)

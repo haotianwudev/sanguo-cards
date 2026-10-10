@@ -38,6 +38,7 @@ var _boost_hits := false  # the blows now landing come from a BOOSTed leader
 
 
 func _ready() -> void:
+	Bgm.play("battle")
 	var save := Game.save
 	if carry:
 		var m := Quests.mods(save)
@@ -691,7 +692,7 @@ func _play(events: Array) -> void:
 				if _boost_hits:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
-				await get_tree().create_timer(0.12).timeout
+				await get_tree().create_timer(0.05).timeout
 			"hit", "interrupt", "burn", "counter":
 				Kit.shake(_enemy_art, 9.0, 0.2)
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
@@ -841,13 +842,36 @@ func _play(events: Array) -> void:
 		_finish()
 
 
+const FEMALE_NAMES := [
+	"貂蝉", "孙尚香", "大乔", "小乔", "黄月英", "甄姬", "祝融", "蔡琰",
+	"王异", "辛宪英", "吕玲绮", "步练师", "关银屏", "董白", "张春华", "邹氏",
+	"樊氏", "卞氏", "吴国太", "鲍三娘", "马云禄", "花鬘", "严氏"
+]
+
+
+func _is_female(card: Dictionary) -> bool:
+	var cname: String = card.get("name", "")
+	for f in FEMALE_NAMES:
+		if cname.begins_with(f):
+			return true
+	return false
+
+
 func _sfx_act(ev: Dictionary) -> void:
-	## 出招: a once-per-battle 大招 rings the gong; otherwise each troop has its own sound (data/audio.json "act_<troop>")
+	## 出招: 武将发招叫喊（分男女、普通出招与大招）+ 兵种动作音效 (act_<troop> / act_ultimate)
 	var skill: Dictionary = GameData.get_db().skills.get(ev.get("skill", ""), {})
-	if skill.get("uses", null) != null and int(skill["uses"]) == 1:
+	var is_ult := skill.get("uses", null) != null and int(skill["uses"]) == 1
+	var leader_obj: Dictionary = b.leaders[ev["unit"]].get("leader", {})
+	var leader_card: Dictionary = leader_obj.get("card", {})
+	var female := _is_female(leader_card)
+
+	if is_ult:
+		Sfx.play("shout_female_ultimate" if female else "shout_male_ultimate")
 		Sfx.play("act_ultimate")
 		return
-	var troop: String = b.leaders[ev["unit"]]["leader"]["card"]["troop"]
+
+	Sfx.play("shout_female" if female else "shout_male")
+	var troop: String = leader_card.get("troop", "infantry")
 	Sfx.play("act_" + troop if Sfx.has("act_" + troop) else "act_infantry")
 
 
@@ -981,6 +1005,7 @@ func _clear_marks() -> void:
 
 func _finish() -> void:
 	_clear_marks()
+	Bgm.stop(0.6)
 	var save := Game.save
 	var won := b.result == "win"
 	Sfx.play("win" if won else "lose")

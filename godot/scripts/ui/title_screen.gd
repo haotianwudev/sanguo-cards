@@ -6,6 +6,7 @@ var _col: VBoxContainer
 
 
 func _ready() -> void:
+	Bgm.play("title")
 	var art := Kit.ui_art("title")  # title picture, dimmed so the menu stays readable
 	if art != null:
 		var pic := TextureRect.new()

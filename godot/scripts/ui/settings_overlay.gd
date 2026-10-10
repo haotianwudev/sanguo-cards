@@ -109,6 +109,19 @@ func _options() -> void:
 	vol.drag_ended.connect(func(_changed): Sfx.play("hit"))  # hear the new level
 	vol_row.add_child(vol)
 	col.add_child(vol_row)
+	var bgm_row := HBoxContainer.new()
+	bgm_row.add_theme_constant_override("separation", 16)
+	bgm_row.add_child(Kit.label("音乐音量", Kit.FONT_BODY))
+	var bgm_vol := HSlider.new()
+	bgm_vol.min_value = 0.0
+	bgm_vol.max_value = 1.0
+	bgm_vol.step = 0.05
+	bgm_vol.value = float(Game.options.get("bgm_volume", 0.7))
+	bgm_vol.custom_minimum_size = Vector2(280, 44)
+	bgm_vol.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	bgm_vol.value_changed.connect(func(v): Game.set_option("bgm_volume", v))
+	bgm_row.add_child(bgm_vol)
+	col.add_child(bgm_row)
 	var inherit := CheckButton.new()
 	inherit.text = "新的开始继承全部卡牌（测试用）"
 	inherit.button_pressed = bool(Game.options["inherit_all"])

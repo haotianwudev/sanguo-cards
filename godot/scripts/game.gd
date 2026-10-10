@@ -6,7 +6,7 @@ var rng := RandomNumberGenerator.new()
 var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8}  # player options, kept in user://options.cfg (not in the save)
+var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7}  # player options, kept in user://options.cfg (not in the save)
 const OPTIONS_PATH := "user://options.cfg"
 
 
@@ -24,6 +24,10 @@ func set_option(key: String, value: Variant) -> void:
 	options[key] = value
 	if key == "fullscreen":
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if value else DisplayServer.WINDOW_MODE_WINDOWED)
+	elif key == "bgm_volume":
+		var bgm = get_node_or_null("/root/Bgm")
+		if bgm:
+			bgm.update_volume()
 	if persist_enabled:
 		var cfg := ConfigFile.new()
 		for k in options:
