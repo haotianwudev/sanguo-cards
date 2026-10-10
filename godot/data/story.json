@@ -894,7 +894,7 @@
         "jd_start": {"x": 0, "y": 1, "type": "event", "label": "东取江东", "next": ["jd_niuzhu"], "portraits": ["lusu", "sunce", "zhouyu"], "record": "南线：东取江东", "text": ["【建安二年 · 秋】庐江的喜酒还没醒透，鲁肃就把一张地图铺在了你面前。", "鲁肃：「江东六郡：刘繇占着曲阿，严白虎占着吴郡，王朗占着会稽。三家谁也不服谁。」", "{lord}：「虎子。」", "孙策：「在！」", "{lord}：「江东是你家。你去拿回来。」", "孙策愣了一下，把枪往肩上一扛，第一个跳上了船。", "——然后扶着船舷，吐了。", "周瑜：「二哥，这才刚离岸。」"], "prompt": "主角把江东交给了孙策。"},
         "jd_niuzhu": {"x": 1, "y": 1, "type": "event", "label": "牛渚", "next": ["jd_n_a", "jd_n_m"], "portraits": ["zhouyu", "sunce"], "text": ["大军在牛渚渡江。对岸是刘繇的营垒，营里的兵，一半是丹阳兵，一半是被拉来的渔民。", "周瑜：「强攻营垒，还是绕道江边的渔村？」"], "prompt": "牛渚渡江：强攻刘繇的营垒，还是绕道渔村？"},
         "jd_n_a": {"x": 2, "y": 0, "type": "battle", "label": "牛渚·刘繇水军", "next": ["jd_n_b"], "battle": "jd_niuzhu_a"},
-        "jd_n_b": {"x": 3, "y": 0, "type": "battle", "label": "牛渚营·刘繇步卒", "next": ["jd_shenting"], "battle": "jd_niuzhu_b"},
+        "jd_n_b": {"x": 3, "y": 0, "type": "battle", "label": "牛渚·刘繇骑卒", "next": ["jd_shenting"], "battle": "jd_niuzhu_b"},
         "jd_n_m": {"x": 2, "y": 2, "type": "mystery", "label": "江边渔村", "next": ["jd_n_t"]},
         "jd_n_t": {"x": 3, "y": 2, "type": "treasure", "label": "牛渚粮仓", "next": ["jd_shenting"]},
         "jd_shenting": {"x": 4, "y": 1, "type": "battle", "label": "神亭岭·刘繇军", "next": ["jd_moling"], "battle": "jd_shenting", "elite": true, "portraits": ["sunce"], "cg": "c10_shenting", "text": ["刘繇的大军退到了神亭岭。岭上扎着连营，领头的是他的大将樊能。", "{lord}（内心）：刘繇？樊能？……没听过，都没听过。", "孙策回头数了数身后的人：「十三个。够了。」", "{lord}：「虎子，十三个是人数，不是战术！」", "孙策已经冲出去了。"]},

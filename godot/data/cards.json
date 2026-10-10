@@ -2868,7 +2868,8 @@
       "bonus": {
         "hp": 30
       },
-      "weight": 2
+      "weight": 2,
+      "scope": "north"
     },
     "qingzhou": {
       "name": "青州兵",
@@ -5817,6 +5818,83 @@
       "weight": 1,
       "scope": "north"
     },
+    "jiangdong_qi": {
+      "name": "江东骑卒",
+      "rarity": "N",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 25,
+        "at": 6
+      },
+      "weight": 2,
+      "scope": "south"
+    },
+    "jiangdong_shuzuo": {
+      "name": "江东书佐",
+      "rarity": "N",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 15,
+        "at": 4
+      },
+      "weight": 2,
+      "scope": "south"
+    },
+    "xiangyang_xuezi": {
+      "name": "襄阳学子",
+      "rarity": "N",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 10,
+        "at": 6
+      },
+      "weight": 2,
+      "scope": "south"
+    },
+    "jizhou_qi": {
+      "name": "冀州骑卒",
+      "rarity": "N",
+      "troop": "cavalry",
+      "bonus": {
+        "hp": 25,
+        "at": 7
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "hebei_shuzuo": {
+      "name": "河北书佐",
+      "rarity": "N",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 15,
+        "at": 5
+      },
+      "weight": 2,
+      "scope": "north"
+    },
+    "heishan_louluo": {
+      "name": "黑山喽啰",
+      "rarity": "N",
+      "troop": "bandit",
+      "bonus": {
+        "hp": 15,
+        "at": 6
+      },
+      "weight": 3,
+      "scope": "north"
+    },
+    "taishan_zei": {
+      "name": "泰山贼",
+      "rarity": "N",
+      "troop": "bandit",
+      "bonus": {
+        "hp": 20,
+        "at": 7
+      },
+      "weight": 2,
+      "scope": "north"
+    },
     "jizhou_nu": {
       "name": "冀州强弩手",
       "rarity": "N",
@@ -8650,7 +8728,7 @@
           "weight": 1
         }
       ],
-      "card": "heishan_bing"
+      "card": "heishan_louluo"
     },
     "xuanjizi": {
       "name": "妖道玄机子",
@@ -8999,7 +9077,7 @@
           "weight": 1
         }
       ],
-      "card": "inf_n"
+      "card": "jizhou_ji"
     },
     "jizhou_qibing": {
       "name": "冀州轻骑",
@@ -9019,7 +9097,7 @@
           "weight": 1
         }
       ],
-      "card": "xiliang_bing"
+      "card": "jizhou_qi"
     },
     "jizhou_nushou": {
       "name": "冀州强弩",
@@ -9041,7 +9119,7 @@
           "turns": 2
         }
       ],
-      "card": "inf_n"
+      "card": "jizhou_nu"
     },
     "yuan_shuijun": {
       "name": "袁军水军",
@@ -10017,30 +10095,30 @@
       "card": "danyang"
     },
     "jd_liu_bu": {
-      "name": "刘繇步卒",
+      "name": "刘繇骑卒",
       "portrait": "inf_n",
       "hp": 14500,
       "at": 380,
       "actions": 2,
       "moves": [
         {
-          "name": "长枪",
+          "name": "马刀",
           "power": 1.0,
           "weight": 3
         },
         {
-          "name": "盘查",
+          "name": "掠阵",
           "power": 0.5,
           "weight": 1,
           "ap_drain": 1
         },
         {
-          "name": "围攻",
+          "name": "冲锋",
           "power": 1.3,
           "weight": 1
         }
       ],
-      "card": "danyang"
+      "card": "jiangdong_qi"
     },
     "jd_fanneng": {
       "name": "刘繇大将·樊能",
@@ -11361,7 +11439,7 @@
       "art": "jx_shuijun"
     },
     "jd_niuzhu_b": {
-      "name": "牛渚营·刘繇步卒",
+      "name": "牛渚·刘繇骑卒",
       "turn_limit": 6,
       "enemy": "jd_liu_bu",
       "art": "c3_xunluo"
