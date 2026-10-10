@@ -57,7 +57,11 @@ func _ready() -> void:
 	add_child(bg)
 	var title_text := "测试工具（不给玩家看）"
 	if Game.save != null:
-		title_text += " | 当前难度：%d" % Game.save.level()
+		var lvl := Game.save.effective_level()
+		if Game.save.difficulty > 0:
+			title_text += " | 当前难度：%d（局内 +%d）" % [lvl, Game.save.difficulty]
+		else:
+			title_text += " | 当前难度：%d" % lvl
 	var title := Kit.label(title_text, Kit.FONT_BIG + 2, "gold")
 	title.position = Vector2(28, 14)
 	add_child(title)

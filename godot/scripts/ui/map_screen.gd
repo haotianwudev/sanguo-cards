@@ -428,9 +428,12 @@ func _show_run() -> void:
 	var db := GameData.get_db()
 	var save := Game.save
 	if true:  # 难度 always shows: it starts at 1
-		var h := _chip("难度 %d" % save.level(), "purple" if save.difficulty > 0 else "gray")
-		h.tooltip_text = "难度 %d：敌人 +%d%%，宝箱每张卡有 %d%% 是武将（打赢虎牢关的吕布等可以提高难度）" % [save.level(),
-			int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100)), int(round(save.chest_general_chance() * 100))]
+		var lvl := save.effective_level()
+		var total_lvl := lvl + save.difficulty
+		var h := _chip("难度 %d" % total_lvl, "purple" if (lvl > 1 or save.difficulty > 0) else "gray")
+		var diff_step := int(round(((lvl - 1) * float(db.battle.get("ending_step", 0.15)) + save.difficulty * float(db.battle["difficulty_step"])) * 100))
+		h.tooltip_text = "难度 %d：敌人 +%d%%，宝箱每张卡有 %d%% 是武将" % [total_lvl,
+			diff_step, int(round(save.chest_general_chance() * 100))]
 		_run_box.add_child(h)
 	if save.danger > 0:
 		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
