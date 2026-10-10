@@ -65,18 +65,35 @@ godot/data/audio/
 4. **[Freesound.org](https://freesound.org/)**（筛选：**Creative Commons 0**）
    - 推荐搜索：`sword hit armor`、`flesh impact foley`、`shield block`、`spear pierce`。
 
-### B. 人物战斗叫喊 (Character Chinese Battle Shouts)
-1. **开源中文游戏语音数据集**（如 Hugging Face 角色语音集）：
-   - 提取角色出招发力音（Weapon Hit / Skill Cast），如主角、少年武将、英气女将的短促喝声（“哈！”、“喝！”、“接招！”）。
-2. **[爱给网 (aigei.com)](https://www.aigei.com/) / [耳聆网 (earleyst.com)](https://www.earleyst.com/)**：
-   - 搜索分类：`游戏人物 战斗呼喝`、`武将 战吼`、`技能 喊叫`、`释放技能 语音`。
-   - 包含国内配音演员录制的游戏免版税中文战斗语音包（粗犷猛将、威严儒将、清脆女将）。
-3. **AI 专属武将战吼生成**：
-   - 推荐工具：**ElevenLabs Voice Design**、**MiniMax**、**CosyVoice**。
-   - 提示词模板（英文后台）：
-     - 猛将：`[deep raspy warrior, shouting in rage, aggressive battle cry] "哈啊！受死吧！"`
-     - 儒将：`[commanding general, cold and majestic shout] "破！"`
-     - 女将：`[valiant female knight, sharp fierce shout] "看剑！休走！"`
+### B. AI 人物战斗语音全套生成规范 (AI Voice Generation Pipeline)
+
+项目内置了高保真神经语音生成与瞬态零延迟对齐工具链：
+**生成脚本**：`tools/generate_all_custom_voices.py`
+一键执行即可自动生成/更新全量武将与敌方语音：
+```bash
+python tools/generate_all_custom_voices.py
+```
+
+#### 角色声线矩阵与台词规范 (Voice Matrix)
+
+| 角色类别 | 设定与听感 | 神经声线 (Edge/Azure) | 语速/音高参数 | 核心台词与文件 |
+| :--- | :--- | :--- | :--- | :--- |
+| **主角** (现代穿越者) | 现代男青年、略带吐槽冲劲、年轻生动 | `zh-CN-YunxiNeural` | rate=`+15%`<br>pitch=`+6Hz` | **普攻**：「你妹！」(`shout_hero_1.wav`)、「去你的！」(`shout_hero_2.wav`)<br>**大招**：「砸不死你！」(`shout_hero_ult.wav`) |
+| **男武将** (名将) | 威风凛凛、刚猛雄浑、战场大将 | `zh-CN-YunjianNeural` | rate=`+10%`<br>pitch=`-2Hz` | **普攻**：「看招！」(`shout_male_1.wav`)、「休想跑！」(`shout_male_2.wav`)<br>**大招**：「万军莫当！」(`shout_male_ult.wav`)、「受死吧！」(`shout_male_3.wav`) |
+| **女武将** (巾帼) | 英姿飒爽、清脆刚健、英气蓬勃 | `zh-CN-XiaoyiNeural` | rate=`+10%`<br>pitch=`+2Hz` | **普攻**：「看招！」(`shout_female_1.wav`)、「休想跑！」(`shout_female_2.wav`)<br>**大招**：「看我破阵！」(`shout_female_ult.wav`)、「给我瞧好了！」(`shout_female_3.wav`) |
+| **军师** (谋士) | 深邃从容、儒雅沉着、谋定乾坤 | `zh-CN-YunyangNeural` | rate=`+6%`<br>pitch=`-3Hz` | **出招**：「破绽已现！」(`shout_strat_1.wav`)、「尽在掌握！」(`shout_strat_2.wav`)<br>**大招**：「计定乾坤！」(`shout_strat_ult.wav`) |
+| **治疗** (医仙/女眷) | 温婉柔美、轻语抚慰、安心治愈 | `zh-CN-XiaoxiaoNeural` | rate=`-6%`<br>pitch=`+2Hz` | **治愈**：「为你疗伤……」(`voice_heal_female_1.wav`)、「别怕，安心休养……」(`voice_heal_female_2.wav`)、「伤口……好些了吗？」(`voice_heal_female_3.wav`) |
+| **敌人/贼首** (反派男性) | 雄浑威严、凶悍暴戾（纯正成年大汉男声，无女声感） | `zh-CN-YunjianNeural` | rate=`+10~12%`<br>pitch=`-2~-3Hz` | **攻击**：「拿命来吧！！」(`shout_enemy_1.wav`)、「给我上！宰了他！」(`shout_enemy_2.wav`)、「拿命来！受死吧！」(`shout_enemy_3.wav`)<br>**蓄力/狂暴**：「都给我上！受死吧！」(`shout_enemy_roar.wav`) |
+| **女性敌将** (极少数女头目) | 泼辣刁蛮、英气高亢 | `zh-CN-XiaoyiNeural` | rate=`+12%`<br>pitch=`+2Hz` | **攻击**：「拿命来！」(`shout_enemy_female_1.wav`)、「给我上！」(`shout_enemy_female_2.wav`)<br>**狂暴**：「都给我上！」(`shout_enemy_female_roar.wav`) |
+
+#### 关键技术：统一声学通道 (Unified Acoustic Chain)、峰值标准化与纵深声场 (Soundstage Positioning)
+1. **同轨高保真声学空间**：所有角色语音（主角、武将、军师、敌将）必须通过**完全相同**的纯净 ffmpeg 通道转换输出（严禁针对个别角色强加重度 EQ 或动态压缩滤镜，否则会导致声染色脱节、“不在同一个音轨”）。
+2. **0ms 物理瞬态裁剪与尾部去静音**：以音频峰值 5% 能量作为门限，精确定位声波第一个瞬态波峰采样点（留 1ms 安全前导），切除前导空白并施加 2ms 渐强淡入；同时切除结尾冗余空白（保留 120ms 混响衰减尾音），杜绝音画脱节与爆音。
+3. **峰值标准化 (Peak Normalization to -0.8 dBFS)**：自动将各声源峰值放大统一至 29500 左右，彻底解决某些角色“录音电平低、听感软弱偏远”的声学距离感问题。
+4. **前后景混音纵深平衡 (Foreground vs Background)**：
+   - 主角（第一人称近场主角）：`volume_db: 2`（大招 `3`），声音最贴耳清晰、近在咫尺；
+   - 我方武将（近身战友）：`volume_db: 1`；
+   - 敌方首领（远端阵地迎击）：`volume_db: -1`（狂暴 `0`），形成自然的对峙声场纵深，杜绝“敌人贴着耳朵喊、主角反而偏远”的声学失衡。
 
 ### C. 古风战棋背景音乐 (BGM)
 1. **[Battle for Wesnoth](https://github.com/wesnoth/wesnoth)**（协议：**GPL / CC**）
@@ -89,24 +106,8 @@ godot/data/audio/
 ## 3. 音频转换与格式标准化
 
 Godot 4 对音频格式的最佳实践：
-- **SFX 音效**：**16-bit 单声道 PCM WAV (`.wav`)**，采样率 44100Hz（解码极快，多声道并发无 CPU 瓶颈）。
-- **BGM 音乐**：**Ogg Vorbis (`.ogg`)**，立体声，码率 128~192 kbps（文件小，支持流式加载与 Seamless Loop）。
-
-### 自动下载与转换脚本
-
-项目内提供了自动化拉取脚本 `tools/fetch_audio_assets.py`，依托项目已有的 `imageio_ffmpeg` 执行格式标准化：
-```bash
-python tools/fetch_audio_assets.py
-```
-如需转换任意外部音频文件（MP3 / FLAC / AIFF 等），可在 Python 中调用系统内置的 ffmpeg：
-```bash
-python -c "
-import imageio_ffmpeg, subprocess
-ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
-# 转单声道 44.1kHz 16-bit WAV
-subprocess.run([ffmpeg, '-y', '-i', 'input.mp3', '-ac', '1', '-ar', '44100', '-c:a', 'pcm_s16le', 'godot/data/audio/sfx/target.wav'])
-"
-```
+- **SFX 音效与人声叫喊**：**16-bit 单声道 PCM WAV (`.wav`)**，采样率 44100Hz（解码极快，多声道并发无 CPU 瓶颈）。
+- **BGM 音乐**：**Ogg Vorbis (`.ogg`)**，立体声，码率 128~192 kbps（文件小，支持流式加载与 Seamless Loop）。战斗 BGM 剪去前戏，从第 48 秒的高潮战斗交响处直奔主题，烘托紧迫感。
 
 ---
 
@@ -115,48 +116,42 @@ subprocess.run([ffmpeg, '-y', '-i', 'input.mp3', '-ac', '1', '-ar', '44100', '-c
 ### 步骤一：配置音效路由表 (`godot/data/audio.json`)
 在 `audio.json` 中的 `"sfx"` 字典中添加或修改事件：
 ```json
-"hit": {
-  "files": [
-    "sfx/hit_1.wav",
-    "sfx/hit_2.wav",
-    "sfx/hit_3.wav"
-  ],
-  "volume_db": 0,
-  "pitch": [0.92, 1.08]
+"shout_hero": {
+  "files": ["sfx/shout_hero_1.wav", "sfx/shout_hero_2.wav"],
+  "volume_db": 1,
+  "pitch": [0.98, 1.02]
 },
-"shout_male": {
-  "files": [
-    "sfx/shout_male_1.wav",
-    "sfx/shout_male_2.wav"
-  ],
-  "volume_db": -1,
+"shout_hero_ult": {
+  "files": ["sfx/shout_hero_ult.wav"],
+  "volume_db": 2,
+  "pitch": [1.0, 1.0]
+},
+"shout_enemy": {
+  "files": ["sfx/shout_enemy_1.wav", "sfx/shout_enemy_2.wav", "sfx/shout_enemy_3.wav"],
+  "volume_db": 1,
   "pitch": [0.96, 1.04]
+},
+"voice_heal_female": {
+  "files": ["sfx/voice_heal_female_1.wav", "sfx/voice_heal_female_2.wav", "sfx/voice_heal_female_3.wav"],
+  "volume_db": 1,
+  "pitch": [0.98, 1.02]
 }
 ```
 - `files`：相对 `godot/data/audio/` 的路径。多文件会在触发时**自动随机抽取**，避免连续出刀听感单调。
 - `volume_db`：相对基础音量的增益/衰减（负值表示调低）。
 - `pitch`：音高微调随机区间，使多次触发时自然微变。
 
-### 步骤二：武将发招叫喊接入逻辑 (`battle_screen.gd`)
+### 步骤二：武将出招叫喊与角色声线分流 (`battle_screen.gd`)
 在 `battle_screen.gd` 中：
-1. 维护女将判定列表 `FEMALE_NAMES`。
-2. 在 `_sfx_act(ev)` 中分流男女与大招/普攻：
-```gdscript
-func _sfx_act(ev: Dictionary) -> void:
-    var skill: Dictionary = GameData.get_db().skills.get(ev.get("skill", ""), {})
-    var is_ult := skill.get("uses", null) != null and int(skill["uses"]) == 1
-    var leader_card: Dictionary = b.leaders[ev["unit"]].get("leader", {}).get("card", {})
-    var female := _is_female(leader_card)
-
-    if is_ult:
-        Sfx.play("shout_female_ultimate" if female else "shout_male_ultimate")
-        Sfx.play("act_ultimate")
-        return
-
-    Sfx.play("shout_female" if female else "shout_male")
-    var troop: String = leader_card.get("troop", "infantry")
-    Sfx.play("act_" + troop if Sfx.has("act_" + troop) else "act_infantry")
-```
+1. 维护女将判定列表 `FEMALE_NAMES`，使用 `cname.contains(f)` 全面覆盖所有名将、女眷与亲随。
+2. 在 `_sfx_act(ev)` 中对执行卡牌进行身份判定分流：
+   - **女性治疗技能**：优先触发柔和医仙声线 `Sfx.play("voice_heal_female")`。
+   - **主角 (troop == "lord")**：大招触发 `shout_hero_ult`（「砸不死你！」），普攻触发 `shout_hero`（「你妹！」/「去你的！」）。
+   - **军师 (troop == "strategist")**：大招触发 `shout_strategist_ultimate`（「计定乾坤！」），普攻触发 `shout_strategist`（「破绽已现！」/「尽在掌握！」）。
+   - **女武将**：大招触发 `shout_female_ultimate`，普攻触发 `shout_female`（「看招！」/「休想跑！」）。
+   - **男武将**：大招触发 `shout_male_ultimate`，普攻触发 `shout_male`（「看招！」/「休想跑！」）。
+   - 同步叠加 `Sfx.play("slash")` 刀剑破风拟真音，增强动作力量感。
+3. 敌将行动时（`enemy_hit` / `enemy_charge`），自动触发狡黠狡猾声线的「拿命来！」和「给我上！」。
 
 ### 步骤三：BGM 场景联动与平滑过渡 (`bgm.gd`)
 在场景初始化时调用 `Bgm.play("<track_name>")`：

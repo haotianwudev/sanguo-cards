@@ -39,10 +39,26 @@
     "chest_cards_boss": 3,
     "_tiers": "generals can be drawn again: copies needed for each tier (铜/银/金) and the multiplier on the general's own stats",
     "tiers": [
-      {"name": "铜", "copies": 1, "mult": 1.0},
-      {"name": "银", "copies": 4, "mult": 1.3},
-      {"name": "金", "copies": 16, "mult": 1.75},
-      {"name": "神", "copies": 64, "mult": 2.4}
+      {
+        "name": "铜",
+        "copies": 1,
+        "mult": 1.0
+      },
+      {
+        "name": "银",
+        "copies": 4,
+        "mult": 1.3
+      },
+      {
+        "name": "金",
+        "copies": 16,
+        "mult": 1.75
+      },
+      {
+        "name": "神",
+        "copies": 64,
+        "mult": 2.4
+      }
     ],
     "_upgrade_copies": "点化（战功或事件）一次给这张卡加几张：3 张＝铜（1 张）一次到银（4 张）",
     "upgrade_copies": 3,
@@ -6028,7 +6044,7 @@
           "name": "狂热念咒",
           "power": 0.5,
           "weight": 1,
-          "heal": 0.1,
+          "heal": 0.075,
           "rage": 0.2
         },
         {
@@ -6138,7 +6154,7 @@
           "name": "符水",
           "power": 0,
           "weight": 1,
-          "heal": 0.08
+          "heal": 0.06
         },
         {
           "name": "妖言",
@@ -6196,7 +6212,7 @@
           "name": "抢了就跑",
           "power": 0.5,
           "weight": 1,
-          "heal": 0.08
+          "heal": 0.06
         }
       ],
       "card": "shanzei_bing"
@@ -6276,7 +6292,7 @@
           "name": "劫掠",
           "power": 0.8,
           "weight": 2,
-          "heal": 0.08
+          "heal": 0.06
         },
         {
           "name": "抢粮",
@@ -6312,7 +6328,7 @@
           "name": "结阵",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "熊冲·蓄力",
@@ -6480,7 +6496,7 @@
           "name": "抢人",
           "power": 0.8,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "乱砍",
@@ -6746,7 +6762,7 @@
           "name": "稳守",
           "power": 0.5,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "突刺",
@@ -6844,7 +6860,7 @@
           "name": "飞熊护驾",
           "power": 0.8,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "李儒毒计",
@@ -6952,7 +6968,7 @@
           "name": "劫掠",
           "power": 0.8,
           "weight": 1,
-          "heal": 0.08
+          "heal": 0.06
         },
         {
           "name": "焚城·蓄力",
@@ -6986,7 +7002,7 @@
           "name": "盾墙",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "陷阵·蓄力",
@@ -7161,7 +7177,7 @@
           "name": "抢了就跑",
           "power": 0.5,
           "weight": 1,
-          "heal": 0.08
+          "heal": 0.06
         }
       ],
       "card": "shanzei_bing"
@@ -7236,7 +7252,7 @@
           "name": "结阵",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "熊冲·蓄力",
@@ -7479,7 +7495,7 @@
           "name": "哭喊",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         }
       ],
       "card": "shanzei_bing"
@@ -7606,7 +7622,7 @@
           "name": "盾墙",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "推进",
@@ -7664,7 +7680,7 @@
           "name": "劫掠",
           "power": 0.8,
           "weight": 1,
-          "heal": 0.08
+          "heal": 0.06
         },
         {
           "name": "焚城·蓄力",
@@ -7703,7 +7719,7 @@
           "name": "仙师保佑",
           "power": 0,
           "weight": 1,
-          "heal": 0.1,
+          "heal": 0.075,
           "when": "half"
         }
       ],
@@ -7792,7 +7808,7 @@
           "name": "符水",
           "power": 0,
           "weight": 1,
-          "heal": 0.12
+          "heal": 0.09
         },
         {
           "name": "黄天当立",
@@ -7884,7 +7900,7 @@
           "name": "潜水",
           "power": 0,
           "weight": 1,
-          "heal": 0.1,
+          "heal": 0.075,
           "when": "half"
         },
         {
@@ -8175,7 +8191,7 @@
           "name": "大贤良师",
           "power": 0,
           "weight": 1,
-          "heal": 0.08
+          "heal": 0.06
         },
         {
           "name": "黄天当立·蓄力",
@@ -8250,7 +8266,7 @@
           "name": "盾阵",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         },
         {
           "name": "围攻",
@@ -8412,7 +8428,7 @@
           "name": "死士护主",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "困兽之斗",
@@ -8541,7 +8557,7 @@
           "name": "稳守",
           "power": 0.5,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "突刺",
@@ -8608,7 +8624,7 @@
           "name": "据坞死守",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "庄丁齐上",
@@ -8640,7 +8656,7 @@
           "name": "盾阵",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         },
         {
           "name": "围攻",
@@ -8897,7 +8913,7 @@
           "name": "坚甲防守",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         }
       ],
       "card": "chunyuqiong"
@@ -8925,7 +8941,7 @@
           "name": "坚甲防守",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         },
         {
           "name": "军令·围杀",
@@ -9053,7 +9069,7 @@
           "name": "军阵",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         }
       ],
       "card": "inf_n"
@@ -9242,7 +9258,7 @@
           "name": "据城死守",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "搜刮民财",
@@ -9442,7 +9458,7 @@
           "name": "军阵",
           "power": 0,
           "weight": 1,
-          "heal": 0.05
+          "heal": 0.038
         },
         {
           "name": "围攻",
@@ -9598,7 +9614,7 @@
           "name": "盾墙",
           "power": 0,
           "weight": 1,
-          "heal": 0.06
+          "heal": 0.045
         },
         {
           "name": "推进",
@@ -10665,15 +10681,46 @@
     }
   },
   "scenarios": {
-    "th_patrol": {"name": "太行巡山兵", "turn_limit": 6, "enemy": "th_patrol"},
-    "bh_jiang_trap": {"name": "姜家寨暗哨", "turn_limit": 6, "enemy": "liukou"},
-    "bh_wolf2": {"name": "并州精骑", "turn_limit": 6, "enemy": "bingzhou_langqi"},
-    "bh_jz_inf": {"name": "冀州步卒", "turn_limit": 6, "enemy": "jizhou_buzhu"},
-    "bh_jz_spear": {"name": "冀州长枪", "turn_limit": 6, "enemy": "jizhou_qiangbing"},
-    "bh_jz_scout": {"name": "冀州游骑", "turn_limit": 6, "enemy": "jizhou_qibing"},
-    "bh_jz_arch": {"name": "冀州强弩", "turn_limit": 6, "enemy": "jizhou_nushou"},
-    "bh_hj_duzhan": {"name": "黄巾督战队", "turn_limit": 6, "enemy": "huangjin_vanguard"},
-
+    "th_patrol": {
+      "name": "太行巡山兵",
+      "turn_limit": 6,
+      "enemy": "th_patrol"
+    },
+    "bh_jiang_trap": {
+      "name": "姜家寨暗哨",
+      "turn_limit": 6,
+      "enemy": "liukou"
+    },
+    "bh_wolf2": {
+      "name": "并州精骑",
+      "turn_limit": 6,
+      "enemy": "bingzhou_langqi"
+    },
+    "bh_jz_inf": {
+      "name": "冀州步卒",
+      "turn_limit": 6,
+      "enemy": "jizhou_buzhu"
+    },
+    "bh_jz_spear": {
+      "name": "冀州长枪",
+      "turn_limit": 6,
+      "enemy": "jizhou_qiangbing"
+    },
+    "bh_jz_scout": {
+      "name": "冀州游骑",
+      "turn_limit": 6,
+      "enemy": "jizhou_qibing"
+    },
+    "bh_jz_arch": {
+      "name": "冀州强弩",
+      "turn_limit": 6,
+      "enemy": "jizhou_nushou"
+    },
+    "bh_hj_duzhan": {
+      "name": "黄巾督战队",
+      "turn_limit": 6,
+      "enemy": "huangjin_vanguard"
+    },
     "bh_patrol": {
       "name": "太行伏兵",
       "turn_limit": 6,

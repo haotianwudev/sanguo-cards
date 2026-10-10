@@ -363,9 +363,8 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 	match s["type"]:
 		"event":
 			for cid in s["cards"]:
-				if db.cards[cid]["soldier"] or not save.has_card(cid):  # story cards don't stack
-					gained.append(db.cards[cid])
-					save.grant_card(cid, true)
+				gained.append(db.cards[cid])
+				save.grant_card(cid, true)
 			for rid in s["relics"]:
 				if not save.relics.has(rid):
 					save.relics.append(rid)
@@ -377,9 +376,8 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			save.choices[s["id"]] = opt["goto"]
 			record(save, opt["record"])
 			if opt["card"] != "":
-				if not save.has_card(opt["card"]):
-					gained.append(db.cards[opt["card"]])
-					save.grant_card(opt["card"], true)
+				gained.append(db.cards[opt["card"]])
+				save.grant_card(opt["card"], true)
 		"treasure", "recruit":
 			if not save.offer.is_empty() and choice >= 0:
 				gained.append(save.take(save.offer[choice]))
@@ -711,10 +709,9 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			out["log"].append("中毒！体力 -%d" % d)
 		if e.has("card"):
 			var c: Dictionary = db.cards[e["card"]]
-			if c["soldier"] or not save.has_card(c["id"]):
-				save.grant_card(c["id"])
-				out["gained"].append(c)
-				out["log"].append("获得：" + c["name"])
+			save.grant_card(c["id"])
+			out["gained"].append(c)
+			out["log"].append("获得：" + c["name"])
 		if e.has("soldier"):
 			var pool: Array = pools(q, save)["soldier_pool"]
 			if pool.is_empty():
@@ -832,6 +829,14 @@ static func lose(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nul
 
 
 static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
-	## Lost a battle: a new run from the start with full HP (宝物 and 险 gone, squares dealt again).
-	## Cards and choices are kept.
-	begin(q, save, rng)
+	## Lost a battle: automatically jump back to the previous point, allowing the player to try again.
+	## If at the first square, restart from the beginning.
+	if save.visited.size() <= 1:
+		begin(q, save, rng)
+	else:
+		save.visited.pop_back()
+		save.square = save.visited[-1]
+		save.resolved = true
+		save.offer = []
+		save.event_battle = {}
+		save.event_note = []

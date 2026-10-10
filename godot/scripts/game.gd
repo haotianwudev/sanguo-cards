@@ -120,8 +120,12 @@ func battle_finished(won: bool) -> void:
 		elif Quests.lose(q, save, rng):
 			note = "……打不过。就在这时——"
 		else:
-			failed = true
-			note = "任务失败 —— 新的一轮从头出发（卡和选择保留，宝物和险清空，格子重新洗牌）"
+			if save.resolved:
+				failed = false
+				note = "战斗失败 —— 已退回上一步（可更换部队重试，若仍打不过可在设置中重新开始）"
+			else:
+				failed = true
+				note = "任务失败 —— 新的一轮从头出发（卡和选择保留，宝物和险清空，格子重新洗牌）"
 	persist()
 	if failed:
 		await show_defeat()
@@ -198,7 +202,7 @@ func demo(name: String) -> void:
 		root.add_child(o)
 		return
 	if name.begins_with("battle:"):  # --demo=battle:<scenario_id>
-		save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
+		save.owned = ["sunce_zhong", "sunce_bawang", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 		save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
 		save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 		var b := BattleScreen.new()
@@ -580,7 +584,7 @@ func demo(name: String) -> void:
 			Quests.move(q, save, "plan")
 			show_screen(MapScreen.new())
 		"fx":  # --demo=fx --fx=<hit|magic|pierce|boosthit|claw|counter|burn|pburn|break|stun|confuse|boost|buff|cleanse|drain>: one effect mid-flight
-			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
+			save.owned = ["sunce_zhong", "sunce_bawang", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
 			save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 			var fb := BattleScreen.new()
@@ -655,8 +659,42 @@ func demo(name: String) -> void:
 				sb.b.round_no = 3
 				sb.b.ap = 4
 				sb._open_swap(1)
+		"defeatflow":  # a real quest battle lost for good: the 阵亡 picture, a click, and we must land back on the map
+			save.owned = ["sunce_bawang", "zhouyu_chibi", "sunjian"]
+			save.party = ["sunce_bawang", "zhouyu_chibi", "sunjian"]
+			Quests.ensure_started(save, rng)
+			var dq: Dictionary = {}
+			for qq in GameData.get_db().quests:
+				if qq["id"] == "prologue":
+					dq = qq
+			for sid in ["jz_arrive"] if false else dq["squares"]:
+				if dq["squares"][sid]["type"] == "battle" and dq["squares"][sid].get("lose_goto", "") == "" and not dq["squares"][sid].get("requires", ""):
+					save.square = sid
+					break
+			save.resolved = false
+			var bs: Dictionary = dq["squares"][save.square]
+			start_quest_battle(dq, bs)
+			var bsc: BattleScreen = root.get_child(root.get_child_count() - 1)
+			await get_tree().create_timer(0.6).timeout
+			bsc.b.result = "lose"
+			bsc.b.lose_reason = "wiped"
+			bsc._finish()
+			await get_tree().create_timer(4.0).timeout
+			var top: Node = root.get_child(root.get_child_count() - 1)
+			print("DEFEATFLOW before click: ", top.get_class(), " children=", root.get_child_count())
+			print("DEFEATFLOW overlay: ready_to_close=", top.get("_ready_to_close"), " filter=", top.mouse_filter, " size=", top.size, " z=", top.z_index, " script=", top.get_script().resource_path if top.get_script() else "none")
+			print("DEFEATFLOW hovered at centre: ", get_viewport().gui_get_hovered_control())
+			var ev := InputEventMouseButton.new()
+			ev.button_index = MOUSE_BUTTON_LEFT
+			ev.position = Vector2(640, 360)
+			ev.global_position = ev.position
+			ev.pressed = true
+			Input.parse_input_event(ev)
+			await get_tree().create_timer(1.5).timeout
+			top = root.get_child(root.get_child_count() - 1)
+			print("DEFEATFLOW after click: ", top.get_class(), " children=", root.get_child_count(), " names=", root.get_children().map(func(c): return c.get_class()))
 		"battle", "fight":
-			save.owned = ["sunce_zhong", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
+			save.owned = ["sunce_zhong", "sunce_bawang", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
 			save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 			var b := BattleScreen.new()
@@ -709,7 +747,31 @@ func demo(name: String) -> void:
 			if OS.get_cmdline_user_args().has("--lastround"):  # the round-limit warning: play the final round's alert
 				await get_tree().create_timer(0.5).timeout
 				b.b.round_no = b.b.turn_limit - 1
-				b._on_end_round()
+				await b._on_end_round()
+				print("LASTROUND-DEMO result=", b.b.result, " reason=", b.b.lose_reason, " busy=", b._busy)
+				await b._on_end_round()  # and play the final round out: the round limit is up, the battle is lost on turns
+				print("LASTROUND-DEMO final: result=", b.b.result, " reason=", b.b.lose_reason, " busy=", b._busy)
+				await get_tree().create_timer(6.0).timeout
+				print("LASTROUND-DEMO after 6s: screen=", root.get_child(root.get_child_count() - 1).get_class(), " busy=", b._busy if is_instance_valid(b) else "freed")
+			if OS.get_cmdline_user_args().has("--auto"):  # play the whole battle through the real UI (any skill, any round) — for hunting hangs
+				await get_tree().create_timer(0.4).timeout
+				for _round in 40:
+					if b.b.result != "":
+						break
+					for i in b.b.leaders.size():
+						if b.b.result != "" or not b.b.can_act(i):
+							continue
+						var u: Dictionary = b.b.leaders[i]
+						var best := ""
+						for sk in b.b.skills_of(u):
+							if b.b.usable(u, sk):
+								best = sk["id"]  # the last usable one: the strongest
+						if best != "":
+							await b._on_skill(i, best)
+					if b.b.result == "":
+						await b._on_end_round()
+				await get_tree().create_timer(5.0).timeout
+				print("AUTO-DEMO result=", b.b.result, " busy=", b._busy, " screen=", root.get_child(root.get_child_count() - 1).get_class())
 			if name == "fight":  # play a few actions to exercise the animations
 				await get_tree().create_timer(0.5).timeout
 				await b._on_skill(1, "bawang")

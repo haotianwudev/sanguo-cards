@@ -170,17 +170,17 @@
         "sfx/shout_enemy_2.wav",
         "sfx/shout_enemy_3.wav"
       ],
-      "volume_db": 1,
+      "volume_db": -1,
       "pitch": [
-        0.96,
-        1.04
+        0.98,
+        1.02
       ]
     },
     "shout_enemy_roar": {
       "files": [
         "sfx/shout_enemy_roar.wav"
       ],
-      "volume_db": 2,
+      "volume_db": 0,
       "pitch": [
         1.0,
         1.0
@@ -191,17 +191,17 @@
         "sfx/shout_enemy_female_1.wav",
         "sfx/shout_enemy_female_2.wav"
       ],
-      "volume_db": 1,
+      "volume_db": -1,
       "pitch": [
-        0.96,
-        1.04
+        0.98,
+        1.02
       ]
     },
     "shout_enemy_female_roar": {
       "files": [
         "sfx/shout_enemy_female_roar.wav"
       ],
-      "volume_db": 2,
+      "volume_db": 0,
       "pitch": [
         1.0,
         1.0
@@ -227,23 +227,31 @@
         1.04
       ]
     },
+    "shout_hero": {
+      "files": [
+        "sfx/shout_hero_1.wav",
+        "sfx/shout_hero_2.wav"
+      ],
+      "volume_db": 2,
+      "pitch": [
+        0.98,
+        1.02
+      ]
+    },
+    "shout_hero_ult": {
+      "files": [
+        "sfx/shout_hero_ult.wav"
+      ],
+      "volume_db": 3,
+      "pitch": [
+        1.0,
+        1.0
+      ]
+    },
     "shout_male": {
       "files": [
         "sfx/shout_male_1.wav",
-        "sfx/shout_male_2.wav",
-        "sfx/shout_male_3.wav"
-      ],
-      "volume_db": 1,
-      "pitch": [
-        0.96,
-        1.04
-      ]
-    },
-    "shout_female": {
-      "files": [
-        "sfx/shout_female_1.wav",
-        "sfx/shout_female_2.wav",
-        "sfx/shout_female_3.wav"
+        "sfx/shout_male_2.wav"
       ],
       "volume_db": 1,
       "pitch": [
@@ -253,11 +261,9 @@
     },
     "shout_male_ultimate": {
       "files": [
-        "sfx/shout_male_phrase_1.wav",
-        "sfx/shout_male_phrase_2.wav",
-        "sfx/shout_male_phrase_3.wav",
-        "sfx/shout_male_phrase_4.wav",
-        "sfx/shout_male_phrase_5.wav"
+        "sfx/shout_male_ult.wav",
+        "sfx/shout_male_3.wav",
+        "sfx/shout_male_phrase_1.wav"
       ],
       "volume_db": 2,
       "pitch": [
@@ -265,14 +271,59 @@
         1.02
       ]
     },
+    "shout_female": {
+      "files": [
+        "sfx/shout_female_1.wav",
+        "sfx/shout_female_2.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        0.96,
+        1.04
+      ]
+    },
     "shout_female_ultimate": {
       "files": [
-        "sfx/shout_female_ult.wav"
+        "sfx/shout_female_ult.wav",
+        "sfx/shout_female_3.wav"
+      ],
+      "volume_db": 2,
+      "pitch": [
+        0.98,
+        1.02
+      ]
+    },
+    "shout_strategist": {
+      "files": [
+        "sfx/shout_strat_1.wav",
+        "sfx/shout_strat_2.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        0.98,
+        1.02
+      ]
+    },
+    "shout_strategist_ultimate": {
+      "files": [
+        "sfx/shout_strat_ult.wav"
       ],
       "volume_db": 2,
       "pitch": [
         1.0,
         1.0
+      ]
+    },
+    "voice_heal_female": {
+      "files": [
+        "sfx/voice_heal_female_1.wav",
+        "sfx/voice_heal_female_2.wav",
+        "sfx/voice_heal_female_3.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        0.98,
+        1.02
       ]
     },
     "heal": {

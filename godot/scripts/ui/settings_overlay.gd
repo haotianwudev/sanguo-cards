@@ -71,6 +71,10 @@ func _menu() -> void:
 	var opts := Kit.button("选项", "blue")
 	opts.pressed.connect(_options)
 	col.add_child(opts)
+	if OS.is_debug_build():
+		var dbg := Kit.button("测试工具（开发者界面）", "purple")
+		dbg.pressed.connect(_open_debug)
+		col.add_child(dbg)
 	var home := Kit.button("回到主页", "red")
 	home.pressed.connect(_confirm_home)
 	col.add_child(home)
@@ -128,9 +132,18 @@ func _options() -> void:
 	inherit.add_theme_font_size_override("font_size", Kit.FONT_BODY)
 	inherit.toggled.connect(func(on): Game.set_option("inherit_all", on))
 	col.add_child(inherit)
+	if OS.is_debug_build():
+		var dbg := Kit.button("测试工具（开发者界面）", "purple")
+		dbg.pressed.connect(_open_debug)
+		col.add_child(dbg)
 	var back := Kit.button("返回", "gray")
 	back.pressed.connect(_menu)
 	col.add_child(back)
+
+
+func _open_debug() -> void:
+	var d := DebugScreen.new()
+	Game.root.add_child(d)
 
 
 func _confirm_home() -> void:

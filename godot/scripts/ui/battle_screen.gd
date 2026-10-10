@@ -35,6 +35,7 @@ var _has_cg := false
 var _fx := {}  # persistent status effects on screen: key -> node (see _sync_fx)
 var _badges: Array = []  # corner badges currently on screen (freed and rebuilt on every refresh)
 var _boost_hits := false  # the blows now landing come from a BOOSTed leader
+var _enemy_shouted_this_turn := false  # 敌人本回合是否已经战吼过（防止多段行动或灼烧连喊）
 
 
 func _ready() -> void:
@@ -784,22 +785,27 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP +%d" % ev["amount"], Kit.c("gold"), 34)
 				await get_tree().create_timer(0.25).timeout
 			"enemy_turn":
+				_enemy_shouted_this_turn = false
 				await _banner("%s 的行动" % b.enemy["data"]["name"], Kit.c("red"))
 			"enemy_stunned":
 				Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
 				await get_tree().create_timer(0.45).timeout
 			"enemy_hit":
 				var is_fem := _is_female(b.enemy.get("data", {}))
+				var is_fire: bool = ev.get("move", "") == "火"
 				var x := _enemy_art.position.y
 				var tw := _enemy_art.create_tween()
 				tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(_enemy_art, "position:y", x, 0.16)
-				Sfx.play("shout_enemy_female" if is_fem else "shout_enemy")
-				await get_tree().create_timer(0.04).timeout
-				Sfx.play("burn" if ev["move"] == "火" else "enemy_hit")
+				# 敌人一回合只喊一次战吼，且灼烧掉血绝不喊叫
+				if not is_fire and not _enemy_shouted_this_turn:
+					Sfx.play("shout_enemy_female" if is_fem else "shout_enemy")
+					_enemy_shouted_this_turn = true
+					await get_tree().create_timer(0.04).timeout
+				Sfx.play("burn" if is_fire else "enemy_hit")
 				Kit.shake(self, 10.0, 0.22)
 				_flash(_party_box, Color(1.6, 0.6, 0.6))
-				if ev["move"] == "火":
+				if is_fire:
 					BattleFx.flame_lick(self, _party_rect())
 				else:
 					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
@@ -809,7 +815,9 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.35).timeout
 			"enemy_charge":
 				var is_fem_ch := _is_female(b.enemy.get("data", {}))
-				Sfx.play("shout_enemy_female_roar" if is_fem_ch else "shout_enemy_roar")
+				if not _enemy_shouted_this_turn:
+					Sfx.play("shout_enemy_female_roar" if is_fem_ch else "shout_enemy_roar")
+					_enemy_shouted_this_turn = true
 				Sfx.play("charge")
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "蓄力！", Kit.c("red"), 44)
 				Kit.shake(_enemy_art, 5.0, 0.4)
@@ -817,7 +825,9 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.45).timeout
 			"enemy_rage":
 				var is_fem_rg := _is_female(b.enemy.get("data", {}))
-				Sfx.play("shout_enemy_female_roar" if is_fem_rg else "shout_enemy_roar")
+				if not _enemy_shouted_this_turn:
+					Sfx.play("shout_enemy_female_roar" if is_fem_rg else "shout_enemy_roar")
+					_enemy_shouted_this_turn = true
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "狂暴！", Kit.c("red"), 44)
 				_flash(_enemy_art, Color(1.8, 0.5, 0.5))
 				await get_tree().create_timer(0.4).timeout
@@ -849,34 +859,79 @@ func _play(events: Array) -> void:
 
 
 const FEMALE_NAMES := [
-	"貂蝉", "孙尚香", "大乔", "小乔", "黄月英", "甄姬", "祝融", "蔡琰",
-	"王异", "辛宪英", "吕玲绮", "步练师", "关银屏", "董白", "张春华", "邹氏",
-	"樊氏", "卞氏", "吴国太", "鲍三娘", "马云禄", "花鬘", "严氏"
+	"貂蝉", "孙尚香", "大乔", "小乔", "黄月英", "甄姬", "甄宓", "祝融", "蔡琰", "蔡文姬",
+	"王异", "辛宪英", "吕玲绮", "步练师", "关银屏", "董白", "张春华", "邹氏", "邹夫人",
+	"樊氏", "卞氏", "卞夫人", "吴国太", "吴夫人", "鲍三娘", "马云禄", "马云騄", "花鬘",
+	"严氏", "严夫人", "唐姬", "张宁", "郭照", "杜夫人", "糜贞", "吴苋", "姜巧", "黎娘",
+	"胭脂虎", "黄巾女医", "贴身侍女", "丫鬟", "厨娘", "绣娘", "浣纱女", "采桑女", "茶娘"
 ]
 
 
 func _is_female(card: Dictionary) -> bool:
 	var cname: String = card.get("name", "")
 	for f in FEMALE_NAMES:
-		if cname.begins_with(f):
+		if cname.contains(f):
 			return true
 	return false
 
 
 func _sfx_act(ev: Dictionary) -> void:
-	## 出招: 武将大招/BOOST说出名将金句台词；普通出招为清脆利刃破风（耐听不吵）
-	var skill: Dictionary = GameData.get_db().skills.get(ev.get("skill", ""), {})
-	var is_ult := skill.get("uses", null) != null and int(skill["uses"]) == 1
+	## 出招音效与角色台词
+	var skill_id: String = str(ev.get("skill", ""))
+	var skill: Dictionary = GameData.get_db().skills.get(skill_id, {})
+	var is_ult := bool(skill.get("special", false)) or (skill.get("uses", null) != null and int(skill["uses"]) == 1) or int(skill.get("cost", 0)) >= 3
 	var is_boost: bool = bool(ev.get("boost", false))
-	var leader_obj: Dictionary = b.leaders[ev["unit"]].get("leader", {})
-	var leader_card: Dictionary = leader_obj.get("card", {})
-	var female := _is_female(leader_card)
+	var is_big_move := is_ult or is_boost
 
-	if is_ult or is_boost:
-		Sfx.play("shout_female_ultimate" if female else "shout_male_ultimate")
-		return
+	var u_idx: int = int(ev.get("unit", -1))
+	var leader_card: Dictionary = {}
+	if u_idx >= 0 and u_idx < b.leaders.size():
+		leader_card = b.leaders[u_idx].get("leader", {}).get("card", {})
 
-	# 普通卡牌只带清脆兵刃出招声，不频繁复读叫喊
+	var troop: String = leader_card.get("troop", "")
+	var is_hero: bool = troop == "lord" or leader_card.get("id", "") == "lord" or u_idx == 0
+	var is_strat: bool = troop == "strategist"
+	var female: bool = _is_female(leader_card)
+
+	# 检查是否为治疗类技能
+	var is_heal_skill := false
+	for eff in skill.get("effects", []):
+		if eff.get("type", "") == "heal":
+			is_heal_skill = true
+			break
+
+	# 角色语音分流
+	if is_heal_skill and female:
+		# 女性治疗：柔美温婉抚慰
+		Sfx.play("voice_heal_female")
+	elif is_hero:
+		# 主角（现代男青年穿越者）
+		# 主角普攻是基础突击/突刺（tuji / tuci）；大招为扔刀（rengdao）、夺命枪（duomingqiang）、特殊技能、高费或BOOST
+		var is_hero_ult := is_big_move or (skill_id != "tuji" and skill_id != "tuci")
+		if is_hero_ult:
+			Sfx.play("shout_hero_ult")  # 砸不死你！
+		else:
+			Sfx.play("shout_hero")  # 你妹！/ 去你的！
+	elif is_strat:
+		# 军师谋士
+		if is_big_move:
+			Sfx.play("shout_strategist_ultimate")  # 计定乾坤！
+		else:
+			Sfx.play("shout_strategist")  # 破绽已现！/ 尽在掌握！
+	elif female:
+		# 女性武将
+		if is_big_move:
+			Sfx.play("shout_female_ultimate")  # 看我破阵！/ 给我瞧好了！
+		else:
+			Sfx.play("shout_female")  # 看招！/ 休想跑！
+	else:
+		# 男性武将
+		if is_big_move:
+			Sfx.play("shout_male_ultimate")  # 万军莫当！/ 受死吧！
+		else:
+			Sfx.play("shout_male")  # 看招！/ 休想跑！
+
+	# 配合兵刃破风声，让打击手感扎实
 	Sfx.play("slash")
 
 
@@ -1009,6 +1064,7 @@ func _clear_marks() -> void:
 
 
 func _finish() -> void:
+	_busy = true
 	_clear_marks()
 	Bgm.stop(0.6)
 	var save := Game.save

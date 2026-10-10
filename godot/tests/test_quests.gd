@@ -105,7 +105,7 @@ func test_a_once_only_skill_stays_spent_until_a_rest() -> void:
 	check(s.carry_uses.is_empty(), "a rest brings it back")
 
 
-func test_failing_restarts_but_keeps_choices_and_cards() -> void:
+func test_failing_steps_back_one_square() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
 	Quests.begin(q, s)
@@ -115,9 +115,9 @@ func test_failing_restarts_but_keeps_choices_and_cards() -> void:
 	Quests.resolve(q, s, rng(0), 1)
 	s.damage = 999
 	Quests.fail(q, s)
-	check(s.square == "era" and s.damage == 0 and s.has_card("zhouyu"))
-	check(s.resolved, "the birthplace choice stands")
-	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar", "raid"])
+	check(s.square == "raid" and s.damage == 999, "steps back to the previous square and keeps damage")
+	check(s.resolved, "the previous square remains resolved")
+	check(s.has_card("zhouyu"))
 	Quests.move(q, s, "plan")
 	check(s.resolved, "earlier plan stands")
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["zy_lure"])
@@ -724,7 +724,7 @@ func test_the_chapter_recap_remembers_the_run() -> void:
 	check(r["cards"].has(["zhouyu", 1]) and r["cards"].has(["gongnv", 2]) and not r["cards"].any(func(c): return c[0] == "sunce"), str(r["cards"]))
 	check_eq(r["relics"], ["hupi"])
 	Quests.fail(q, s)
-	check(Quests.recap(s)["records"].is_empty(), "a new run starts a clean recap")
+	check(not Quests.recap(s)["records"].is_empty(), "a setback keeps the run's recap")
 
 
 func test_merit_is_paid_once_per_chapter_and_spent_between_chapters() -> void:

@@ -49,13 +49,16 @@ const _CHAPTER_JUMPS := [
 
 
 func _ready() -> void:
-	z_index = 60
+	z_index = 90
 	size = Vector2(1280, 720)
 	var bg := ColorRect.new()
 	bg.color = Kit.c("bg")
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
-	var title := Kit.label("测试工具（不给玩家看）", Kit.FONT_BIG + 2, "gold")
+	var title_text := "测试工具（不给玩家看）"
+	if Game.save != null:
+		title_text += " | 当前难度：%d" % Game.save.level()
+	var title := Kit.label(title_text, Kit.FONT_BIG + 2, "gold")
 	title.position = Vector2(28, 14)
 	add_child(title)
 	var done := Kit.button("关闭", "gray", Kit.FONT_BODY)

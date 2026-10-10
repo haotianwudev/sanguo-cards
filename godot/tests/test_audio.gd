@@ -16,10 +16,13 @@ func test_sfx_battle_shouts_exist() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
 	var sfx: Dictionary = data.get("sfx", {})
 	for k in [
+		"shout_hero", "shout_hero_ult",
 		"shout_male", "shout_female", "shout_male_ultimate", "shout_female_ultimate",
+		"shout_strategist", "shout_strategist_ultimate", "voice_heal_female",
 		"shout_enemy", "shout_enemy_roar", "shout_enemy_female", "shout_enemy_female_roar"
 	]:
 		check(sfx.has(k), "audio.json must have shout: " + k)
 		for path in sfx[k]["files"]:
 			var full_path: String = "res://data/audio/%s" % str(path)
 			check(ResourceLoader.exists(full_path), "%s file exists: %s" % [k, full_path])
+
