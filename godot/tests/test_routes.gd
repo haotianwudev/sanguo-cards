@@ -621,11 +621,14 @@ func test_beihai_losing_to_lvbu_after_peace_escapes() -> void:
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["bh_escape"])
 
 
-func test_beihai_losing_to_lvbu_after_a_feud_is_ending_seven() -> void:
+func test_beihai_after_a_feud_ending_seven_comes_whether_you_win_or_lose_to_lvbu() -> void:
 	var s := beihai_save()
 	var q := quest_by_id("beihai")
 	var path := walk(q, s, [], 1, 0, 1)
-	check(path.has("bh_zj_fight") and path.has("bh_flee"), "feud route still wins through if you beat 吕布")
+	check(path.has("bh_zj_fight") and path.has("bh_win_feud") and path.has("bh_bad_end") and path.has("bh_bad_lingqi"), "内讧线打赢吕布也守不住：照样走结局七")
+	check(not path.has("bh_flee") and not path.has("bh_end"), "内讧线到不了千里突围和后面的章节")
+	check_eq(path[-1], "bh_bad_lingqi")
+	check(s.run_records.has("结局七 · 绝罚"), "打赢了也记结局七")
 	check(path.has("bh_zj_apart") and not path.has("bh_zj_join") and not path.has("bh_zj_peace"), "内讧线不经过和好 / 收服那两格")
 	for c in ["zhenghao", "jiangqiao", "zheng_daoshou", "jiang_jiguanshou"]:
 		check(not s.has_card(c), "内讧线收不到 " + c)
