@@ -475,7 +475,7 @@ static func tween_bar(bar_node: ProgressBar, to: float, duration := 0.35) -> voi
 # ---- faces for a whole scene ------------------------------------------------------------------------------------
 const FEMALE := ["wuguotai", "dongbai", "caiwenji", "diaochan", "fengfuren", "tangji", "zhangning", "yanzhihu", "gongnv",
 	"xiliang_nvbing", "daqiao", "xiaoqiao", "zhenmi", "sunshangxiang", "huangyueying", "bulianshi", "lvlingqi", "baosanniang",
-	"zhurong", "mayunlu", "wangyi", "xinxianying", "caifuren", "bianfuren", "yanfuren", "liniang", "huangjin_nvyi", "yuenv_gong",
+	"zhurong", "mayunlu", "wangyi", "xinxianying", "caifuren", "bianfuren", "yanfuren", "liniang", "huangjin_nvyi", "yuenv_gong", "dufuren",
 	"yahuan", "chuniang", "xiuniang", "huansha", "caisang", "chaniang", "guonvwang"]
 const _CLAUSE_END := "，。；！？…」、"  # not ——: 孙贲——孙策的堂兄——在旁边 is one clause
 static var _all_names: Dictionary = {}  # every name the story uses -> key (with or without art: a face only shows when drawn)

@@ -533,7 +533,7 @@ func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
 			check(s.run_records.has(line), "第五章 records " + line)
 		check(not s.run_records.has("结局八 · 失律"))
 		finish(q, s)
-		check(Quests.current_quest(s) == null, "未完待续 after 铁纪徐州")
+		check_eq(Quests.current_quest(s)["id"], "huainan_n", "赵云：成婚 → 第六章 · 淮南折帝旗")
 
 
 func test_north_chapter5_plays_with_real_fights() -> void:
@@ -684,3 +684,87 @@ func test_north_chapter3_郭图_stands_in_the_way_of_the_escape_too() -> void:
 		path.append(opts[0]["id"])
 	for sid in ["hs_timeskip", "hs_breakout", "hs_guotu_fight", "hs_em1"]:
 		check(path.has(sid), "the rescue line passes " + sid)
+
+
+func test_north_chapter5_sparing_xiahoudun_waits_for_ending_nine() -> void:
+	## 下邳城外「放他回兖州」is greyed until 「结局九 · 断桥」; 咬住尾巴 is always open and is the default
+	var q := quest_by_id("xuzhou")
+	var opts: Array = q["squares"]["xz_xiapi"]["choose"]
+	var s := xuzhou_save(["军纪：严明"])
+	check(Quests.option_locked(s, opts[0]), "放他回兖州 greyed on a first run")
+	check(not Quests.option_locked(s, opts[1]), "咬住尾巴 open")
+	var p := walk(q, s, [])
+	check(p.has("xz_bite") and p.has("xz_xiahoudun") and p.has("xz_rest1"), "the default bites the rear guard")
+	check(s.run_records.has("夏侯惇：痛击殿后"))
+	var s2 := xuzhou_save(["军纪：严明", "结局九 · 断桥"])
+	check(not Quests.option_locked(s2, opts[0]), "断桥 opens 放他回兖州")
+	var p2 := walk(q, s2, [], 1, 0, 0)
+	for sid in ["xz_spare", "xz_xiahoudun_f", "xz_rest1_f", "xz_end"]:
+		check(p2.has(sid), "the spare route passes " + sid)
+	check(not p2.has("xz_xiahoudun") and not p2.has("xz_bite"))
+	check(s2.run_records.has("夏侯惇：放他回兖州"))
+
+
+# ---- 北线第六章 · 淮南折帝旗 ---------------------------------------------------------------
+
+func huainan_n_save(flags: Array) -> SaveData:
+	var s := xuzhou_save(["军纪：严明", "赵云：成婚"] + flags)
+	s.quests_cleared.append("xuzhou")
+	for c in ["zhangliao", "gaoshun", "xiahoulan"]:
+		s.grant_card(c)
+	return s
+
+
+func test_north_chapter6_follows_xuzhou() -> void:
+	check_eq(Quests.current_quest(huainan_n_save(["曹操：借粮", "夏侯惇：痛击殿后"]))["id"], "huainan_n", "赵云：成婚 → 第六章 · 淮南折帝旗")
+
+
+func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
+	var cases := {"hnn_xj_a": ["曹操：借粮", "夏侯惇：放他回兖州"], "hnn_xj_b": ["曹操：借粮", "夏侯惇：痛击殿后"],
+		"hnn_xj_c": ["曹操：没借", "夏侯惇：放他回兖州"]}
+	for xj in cases:
+		for fork in [[], ["hnn_m1", "hnn_m2", "hnn_m3"]]:
+			var s := huainan_n_save(cases[xj])
+			var q := quest_by_id("huainan_n")
+			var p := walk(q, s, fork)
+			for sid in ["hnn_start", "hnn_letter", "hnn_jiu", "hnn_qiaorui", "hnn_jiling", "hnn_cheng", "hnn_zhujiu", "hnn_bw1",
+					"hnn_bw2", "hnn_bw3", "hnn_choose", "hnn_feast", xj, "hnn_du", "hnn_niaodun", "hnn_bridge", "hnn_news", "hnn_end"]:
+				check(p.has(sid), "%s: passes %s (forks %s)" % [xj, sid, str(fork)])
+			for sid in ["hnn_letter_bad", "hnn_trap", "hnn_gongmen", "hnn_duanqiao", "hnn_bad_end"]:
+				check(not p.has(sid), "%s: never reaches %s" % [xj, sid])
+			check_eq(p[-1], "hnn_end")
+			check(s.has_card("dufuren"), "杜夫人 joins")
+			for r in ["weixi", "dujiu"]:
+				check(s.relics.has(r), "第六章 hands over " + r)
+			for line in ["北线：奉诏讨袁", "吕布：降曹", "杜夫人：随军", "北线：浮桥一瞥", "北线：让寿春"]:
+				check(s.run_records.has(line), "第六章 records " + line)
+			check(not s.run_records.has("结局九 · 断桥"))
+			finish(q, s)
+			check(Quests.current_quest(s) == null, "未完待续 after 淮南折帝旗")
+
+
+func test_north_chapter6_no_grain_and_a_mauled_rear_guard_end_at_the_broken_bridge() -> void:
+	var s := huainan_n_save(["曹操：没借", "夏侯惇：痛击殿后"])
+	var q := quest_by_id("huainan_n")
+	var p := walk(q, s, [])
+	for sid in ["hnn_letter_bad", "hnn_zhujiu", "hnn_bw3", "hnn_feast", "hnn_trap", "hnn_maofang", "hnn_daofu", "hnn_gongmen",
+			"hnn_fire", "hnn_duanqiao", "hnn_caught", "hnn_bad_end"]:
+		check(p.has(sid), "断桥 route passes " + sid)
+	for sid in ["hnn_letter", "hnn_xj_a", "hnn_xj_b", "hnn_xj_c", "hnn_du", "hnn_bridge", "hnn_news", "hnn_end"]:
+		check(not p.has(sid), "断桥 route never reaches " + sid)
+	check_eq(p[-1], "hnn_bad_end")
+	check(not s.has_card("dufuren"), "杜夫人 never joins on this route")
+	finish(q, s)
+	check(s.flags.has("结局九 · 断桥"))
+	check(Quests.current_quest(s) == null, "the story stops at 结局九")
+
+
+func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
+	for pair in [["hnn_bw3", "hnn_choose", ["曹操：借粮", "夏侯惇：放他回兖州"]], ["hnn_gongmen", "hnn_fire", ["曹操：没借", "夏侯惇：痛击殿后"]],
+			["hnn_duanqiao", "hnn_caught", ["曹操：没借", "夏侯惇：痛击殿后"]]]:
+		var s := huainan_n_save(pair[2])
+		var q := quest_by_id("huainan_n")
+		Quests.begin(q, s, rng(3))
+		s.square = pair[0]
+		check(Quests.lose(q, s, rng(3)), "losing %s is not a restart" % pair[0])
+		check_eq(s.square, pair[1])

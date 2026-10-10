@@ -311,6 +311,11 @@ PORTRAITS = {
              "A brocade robe under light armor, spattered with blood.",
              "A sword in hand, out of breath.",
              "a refugee-choked road in Xuzhou"),
+    "dufuren": ("Lady Du (杜夫人), widow of Lü Bu's officer Qin Yilu, a gifted wine-brewer — an adult woman",
+             "A beautiful widow in her mid-20s, gentle but stubborn, a little tired around the eyes.",
+             "Plain undyed mourning robes, sleeves rolled up, a simple wooden hairpin.",
+             "Holding a wine ladle over a sealed jar.",
+             "A small winery yard full of wine jars."),
     "mizhen": ("Mi Zhen (糜贞), Mi Zhu's younger sister who marries Zhao Yun — an adult woman",
              "Graceful, poised adult woman around 20, confident and warm.",
              "A red brocade dress with pearl and jade hair ornaments.",
@@ -1237,6 +1242,8 @@ BATTLES = {
     "xz_xiahoudun": "下邳城外的山坡上，曹军殿后军列阵，「曹」字大旗下，夏侯惇（三十多岁的悍将，两眼完好，神情冷峻，黑色铠甲，单手提一杆长枪）独自立马阵前，眼神像刀子；远处是下邳城墙",
     "xz_caobao": "下邳城的街口，徐州大将曹豹（四十岁上下，满脸横肉、骄横跋扈，华丽铠甲）叉腰站在家兵中间，家兵们拔刀拦街，身后是他的府门；街边百姓躲在门后",
     "xz_lvbu": "三更天的小沛城门轰然大开，火把照亮夜色：吕布（成年猛将，雉尾金冠，红色铠甲）骑着赤兔马单骑冲出城门，方天画戟横扫，身后城头一片混乱，城外北海军的哨卡火把连成一线",
+    "hnn_bw_gy": "寿春宫前的校场上搭起比武台，四周插满「曹」字和黑白斑马「义」字两色旗帜；台上关羽（四十岁上下的威严猛将，红脸长髯、丹凤眼微眯，绿袍金甲，手提青龙偃月刀）横刀而立，台下席间坐满观战的将领，酒坛摆了一排；下方 35% 留白为开阔坚硬平整的夯土校场地面供我方出战卡牌陈列",
+    "hnn_lvbu": "深夜的淮水岸边，浮桥从中间被砍断，断木在黑水里漂着，河面映着火光；断桥头一排火把下，吕布（成年猛将，雉尾金冠、兽面吞头连环铠，手持方天画戟）骑在赤兔马上，身后是并州骑兵的剪影；远处河面上隐约一条荆州楼船的灯火；下方 35% 留白为开阔坚硬平整的泥泞河滩供我方出战卡牌陈列",
 }
 
 # story cg key: the scene
@@ -1255,6 +1262,7 @@ CGS = {
     "end_zhumie": "an ending card illustration, quiet and symbolic: a burned-out white candle, a tipped bronze wine cup, a commander's seal and a white feather fan on a tent table; no people, no blood",
     "end_juefa": "an ending card illustration, quiet and symbolic: two broken mountain stockade gates in snow with torn banners tangled together, a huge halberd planted in front; no people, no blood",
     "end_menhou": "an ending card illustration, quiet and symbolic: a closed vermilion government gate at night with warm light through the crack, discarded black banners and broken tally arrows; no people, no blood",
+    "end_duanqiao": "an ending card illustration, quiet and symbolic: a broken pontoon bridge over a dark river at dawn, a cracked wine jar floating among the planks, a white-ribboned spear shaft caught on a broken post; no people, no blood",
     "end_chibi": "an ending card illustration, quiet and symbolic: a line of burning chained warships on the Yangtze at night, a small boat with a white coffin drifting south; no people, no blood",
     "end_guandu": "an ending card illustration, quiet and symbolic: a halberd planted in the mud of the Guandu riverbank at dawn mist, a faded red scarf on its tip, half a broad saber beside it; no people, no blood",
     "end_tianming": "an ending card illustration, quiet and symbolic: a broad saber and a white-wax spear crossed back to back on one stone terrace at sunrise, the south and north banners flying side by side; no people",
@@ -1409,6 +1417,11 @@ CGS = {
     "c4_bad_lingqi": "大雪纷飞的太行山口：吕玲绮（成年女性，二十岁左右，长发高马尾，红黑铠甲，手持画戟）张开双臂挡在倒地的主角身前，仰头直面骑在赤兔马上的吕布（成年猛将，雉尾金冠，红色铠甲）高高举起的方天画戟；吕布的手在抖，神情复杂；地上是一杆折断的白蜡杆长枪，枪头系着红色平安结；克制，不见血，画面定格在戟落下之前",
     "n5_banquet": "徐州刺史府后堂，夜宴烛火通明，气氛却诡异安静：张宁（成年女性，清秀医女，鬓边插着一朵小白花，穿着干净的新衣裳）端坐席间，第一次被人宴请，神情羞涩欣喜；主角坐在她身旁举杯；屏风后面隐约露出刀斧手的影子和连弩的箭头；堂上悬着一口金钟；画面暖光中带着不祥的冷意",
     "n5_menhou": "徐州刺史府后堂，门窗全部落闩：主角（北线主角，持一杆折断的白蜡杆长枪）把张宁（成年女性，清秀医女，鬓边小白花）护在身后，四面屏风后连弩齐发，箭雨如织；张宁手里捏着几根金针，泪流满面；克制，不见血，只见满地箭矢与翻倒的酒案",
+    "n6_dujiu": "下邳甄府的后院酒坊，一排新封的酒坛；杜夫人（二十五六岁的成年女性，素色衣裙、袖子挽起、木簪绾发，温婉而倔强）手持酒提正在封坛，身边蹲着个五六岁的男孩偷偷拿手指蘸酒；张夫人（成年女性，精明富态的甄家主母）端着一碗酒递给主角；主角呛得直咳，表情滑稽；冬日黄昏的暖光",
+    "n6_zhujiu": "寿春宫（袁术的旧宫，金碧辉煌却有些俗气）殿上摆着酒席：曹操（四十岁上下，身量不高，目光锐利，黑色锦袍）举杯看着主角；旁边刘备（三十多岁，大耳垂肩，宽厚面相）手里的筷子正掉向地面，一脸慌张；杜夫人（成年女性，素净衣裙）捧着酒坛低头斟酒；主角愣在座上；背景里关羽的身影一动不动地看着斟酒的人",
+    "n6_choose": "寿春宫殿上，比武刚散，满堂寂静：主角站起身，挡在杜夫人（成年女性，素净衣裙，抬头直视前方，神情平静而坚定）身前半步；主座上的曹操（四十岁上下，黑色锦袍）笑容僵了一下；阶下关羽（红脸长髯，绿袍）一口喝干杯中酒；烛火通明",
+    "n6_bad_fire": "夜里的寿春宫门口，一只酒坛摔碎在地上，烈酒泼了一地，倒下的烛台点起一道熊熊火墙；火墙这边，赵云（白袍银甲）和张辽（并州武将）一左一右架着主角往外冲，主角回头伸手；火墙那边，杜夫人（成年女性，素净衣裙，发髻散乱）被几个曹兵按住，隔着火光喊他快走；火光映红宫门",
+    "n6_bad_hall": "寿春宫的大殿上，烛火昏暗：主角被五花大绑跪在殿中；阶下关羽（红脸长髯，绿袍）向主座一揖到地，主座上曹操（黑色锦袍）抚须不语；殿中间的杜夫人（成年女性，素净衣裙）站起身，望着被绑的主角，神情决绝，身后是一根朱红殿柱（只画她转身的一刻，不画撞柱的画面，克制）",
 }
 
 
@@ -1434,6 +1447,7 @@ MAPS = {
                "heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky",
     "huainan_s": "【地图共 38 列，南线第六章·淮南折帝旗】自左向右依次：①冬日的襄阳城与汉江水寨；②顺江东下的长江江面；③庐江舒县，周家庄园与大粮仓、半边焦黑的陆家旧宅；④居巢金色的稻田与两座圆形粮囤；⑤皖城城郭与江边驿馆、画舫；⑥巢湖湖口的水贼破船与濡须口；⑦淝水两岸的芦苇荡；⑧寿春城与南门水寨、淮水浮桥；⑨最右端庐江挂满红灯笼的喜堂",
     "xuzhou": "【地图共 32 列，北线第五章·铁纪徐州】自左向右依次：①北海城与屯田的田野；②南下的官道与泗水；③下邳城外的山坡战场；④下邳城、刺史府与热闹的市集、糜家酒楼；⑤小沛城与城外的营寨哨卡；⑥最右端挂满红绸的下邳喜堂",
+    "huainan_n": "【地图共 28 列，北线第六章·淮南折帝旗】自左向右依次：①冬日的下邳城与甄家后院酒坊；②淮北的平原与官道；③钟离城与洪泽湖的水道、糜家商船；④蕲阳城；⑤通往寿春的淮南小道；⑥寿春城下连绵的曹军营盘与东门；⑦金碧辉煌的寿春宫与宫前比武台；⑧淮水与横跨河面的浮桥；⑨北归的官道",
 }
 
 # relic icons (cards.json relics id -> the object itself)
@@ -1484,6 +1498,7 @@ RELICS = {
     "weixi": "一方假玉玺：通体洁白的玉印，印钮雕成盘龙，刻工极其精细，印面朱红，底座裂了一道细纹",
     "xuzhou_yin": "一方汉代徐州牧铜印，印钮为龟形，系着紫色绶带，印面朱红",
     "mijia_chuan": "一艘精致的汉代商船模型，船帆上绣着一个「糜」字，船舱里堆着盐包",
+    "dujiu": "一只粗陶酒坛，坛口用红布和麻绳封着，坛身贴一张写着「杜」字的红纸，旁边一把竹酒提",
     "chen_mago": "一叠写满字的竹简与帛书草稿，字迹潦草激愤，边角卷起，被人用丝绳仔细捆好，像要裱起来收藏",
 }
 
@@ -1555,6 +1570,8 @@ EVENTS = {
     "xz_shiji": "下邳热闹的市集，摊位上摆满东海的鱼、彭城的布、淮南的茶；少女甄宓（十几岁的孩子）拉着主角的袖子，指着一个卖泥老虎的摊子",
     "xz_shangchuan": "泗水码头上停着一排大商船，船帆上绣着「糜」字；糜芳站在船头冲岸上招手，船上堆满盐包和货箱",
     "xz_yanchang": "东海边白花花的盐场，盐工们在烈日下翻盐；张夫人（成年女性，富态精明的贵妇）蹲下来捏起一撮盐尝味道",
+    "hnn_liumin": "淮北的官道边挤着一群从寿春逃出来的流民，面黄肌瘦；张宁（成年女性，素白布衣、背着竹药箱的医女）蹲下来给一个孩子把脉；远处天边是寿春城的方向",
+    "hnn_shuili": "淮南的路口，一个穿着崭新官服的仲氏税吏举着一卷黄绢拦路，身边摆着一只税箱；郭嘉（醉醺醺的青年谋士，提着酒葫芦）凑过去眯着眼看黄绢上歪了的玉玺印，税吏一脸心虚",
     "xz_shuzhai": "陈家的书斋里书堆得比人还高，老人陈珪（六十多岁，精明的老狐狸，笑眯眯）坐在书堆中间，对着主角伸出一根手指出题",
     "xz_liumin": "官道边一群逃难的徐州百姓坐在路旁，张宁（成年女性，清秀医女）蹲下来给一个发烧的孩子施针，旁边的老人拉着她的衣角",
 }

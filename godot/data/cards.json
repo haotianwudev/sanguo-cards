@@ -757,6 +757,17 @@
         "guard": 0.05
       }
     },
+    "dujiu": {
+      "name": "杜家酒",
+      "troop": "logistics",
+      "icon": "酒",
+      "rarity": "story",
+      "desc": "杜夫人酿的酒，主角说有五十二度。后勤部队在场时：攻击 +8%，开局回复 5% 体力",
+      "mods": {
+        "at": 0.08,
+        "start_heal": 0.05
+      }
+    },
     "mijia_chuan": {
       "name": "糜家海船",
       "troop": "logistics",
@@ -5479,6 +5490,16 @@
         "at": 10
       }
     },
+    "dufuren": {
+      "name": "杜夫人",
+      "rarity": "R",
+      "troop": "logistics",
+      "bonus": {
+        "hp": 42,
+        "at": 12
+      },
+      "pool": false
+    },
     "mizhen": {
       "name": "糜贞",
       "rarity": "R",
@@ -9449,6 +9470,329 @@
       ],
       "card": "xianzhen"
     },
+    "qiaorui_n": {
+      "name": "蕲阳守将·桥蕤",
+      "portrait": "qiaorui",
+      "hp": 24000,
+      "at": 440,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "大刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "盯梢",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "胖子压顶",
+          "power": 1.5,
+          "weight": 1
+        },
+        {
+          "name": "鸡腿·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "泰山压顶"
+        },
+        {
+          "name": "泰山压顶",
+          "power": 2.3,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "喊人",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "qiaorui"
+    },
+    "jiling_n": {
+      "name": "仲氏大将·纪灵",
+      "portrait": "jiling",
+      "hp": 21000,
+      "at": 440,
+      "actions": 2,
+      "phys_resist": 0.15,
+      "moves": [
+        {
+          "name": "三尖两刃刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "连环三刀",
+          "power": 1.6,
+          "weight": 1
+        },
+        {
+          "name": "横扫",
+          "power": 1.3,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "破阵·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "破阵斩"
+        },
+        {
+          "name": "破阵斩",
+          "power": 2.8,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "战关羽三十合",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "jiling"
+    },
+    "bw_xiahoudun": {
+      "name": "比武·夏侯惇",
+      "portrait": "xiahoudun",
+      "hp": 20000,
+      "at": 430,
+      "actions": 2,
+      "phys_resist": 0.15,
+      "moves": [
+        {
+          "name": "长枪突刺",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "怒目",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "回马枪·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "回马枪"
+        },
+        {
+          "name": "回马枪",
+          "power": 2.3,
+          "weight": 0,
+          "pierce": true
+        }
+      ],
+      "card": "xiahoudun"
+    },
+    "bw_zhangfei": {
+      "name": "比武·张飞",
+      "portrait": "zhangfei",
+      "hp": 21000,
+      "at": 460,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "丈八蛇矛",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "燕人一声吼",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "连刺",
+          "power": 1.5,
+          "weight": 1
+        },
+        {
+          "name": "蛇矛·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "万人敌"
+        },
+        {
+          "name": "万人敌",
+          "power": 2.5,
+          "weight": 0,
+          "pierce": true
+        }
+      ],
+      "card": "inf_n"
+    },
+    "bw_guanyu": {
+      "name": "比武·关羽",
+      "portrait": "guanyu",
+      "hp": 30000,
+      "at": 520,
+      "actions": 2,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "青龙偃月刀",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "丹凤眼一睁",
+          "power": 0.6,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "拖刀·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "拖刀斩"
+        },
+        {
+          "name": "拖刀斩",
+          "power": 2.6,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "抚髯",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "inf_n"
+    },
+    "cao_daofu": {
+      "name": "曹军刀斧手",
+      "portrait": "inf_n",
+      "hp": 15000,
+      "at": 420,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "刀斧齐下",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "摔杯为号",
+          "power": 0.5,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "围杀",
+          "power": 1.3,
+          "weight": 1
+        }
+      ],
+      "card": "inf_n"
+    },
+    "xiahoudun_gm": {
+      "name": "宫门·夏侯惇",
+      "portrait": "xiahoudun",
+      "hp": 45000,
+      "at": 620,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "长枪突刺",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "怒目",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "堵门",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 2
+        },
+        {
+          "name": "回马枪·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "回马枪"
+        },
+        {
+          "name": "回马枪",
+          "power": 2.5,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "二十里",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "xiahoudun"
+    },
+    "lvbu_duanqiao": {
+      "name": "吕布",
+      "portrait": "lvbu",
+      "hp": 60000,
+      "at": 700,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "方天画戟",
+          "power": 1.0,
+          "weight": 4
+        },
+        {
+          "name": "赤兔冲阵",
+          "power": 1.3,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "无双·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "天下无双"
+        },
+        {
+          "name": "天下无双",
+          "power": 2.4,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "要活的",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "lvbu"
+    },
     "lvbu_xiaopei": {
       "name": "吕布",
       "portrait": "lvbu",
@@ -10196,6 +10540,52 @@
       "turn_limit": 6,
       "enemy": "cao_buzu",
       "art": "bh_jz_inf"
+    },
+    "hnn_qiaorui": {
+      "name": "蕲阳·桥蕤",
+      "turn_limit": 12,
+      "enemy": "qiaorui_n",
+      "art": "c3_qiaorui"
+    },
+    "hnn_jiling": {
+      "name": "寿春东门·纪灵",
+      "turn_limit": 10,
+      "enemy": "jiling_n",
+      "art": "c3_jiling"
+    },
+    "hnn_bw_xhd": {
+      "name": "比武·夏侯惇",
+      "turn_limit": 8,
+      "enemy": "bw_xiahoudun",
+      "art": "hnn_bw_gy"
+    },
+    "hnn_bw_zf": {
+      "name": "比武·张飞",
+      "turn_limit": 8,
+      "enemy": "bw_zhangfei",
+      "art": "hnn_bw_gy"
+    },
+    "hnn_bw_gy": {
+      "name": "比武·关羽",
+      "turn_limit": 12,
+      "enemy": "bw_guanyu"
+    },
+    "hnn_daofu": {
+      "name": "宫中·曹军刀斧手",
+      "turn_limit": 6,
+      "enemy": "cao_daofu",
+      "art": "c6_fubing"
+    },
+    "hnn_gongmen": {
+      "name": "宫门·夏侯惇",
+      "turn_limit": 8,
+      "enemy": "xiahoudun_gm",
+      "art": "xz_xiahoudun"
+    },
+    "hnn_lvbu": {
+      "name": "断桥·吕布",
+      "turn_limit": 8,
+      "enemy": "lvbu_duanqiao"
     },
     "xz_xiahoudun": {
       "name": "下邳城外·夏侯惇殿后军",
