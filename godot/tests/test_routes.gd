@@ -6,6 +6,7 @@ const E1 := "结局一 · 玉碎"
 const E2 := "结局二 · 同归"
 const E3 := "结局三 · 恨海"
 const JX := "贾诩：入队"
+const E10 := "结局十 · 深锁"
 
 
 func rng(seed_value: int) -> RandomNumberGenerator:
@@ -379,21 +380,25 @@ func test_south_chapter6_follows_the_good_jingxiang_ending_only() -> void:
 
 
 func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
+	## after 「结局十 · 深锁」: 刘晔 settles 庐江's clans, 雷家 is cut off and runs west, the double wedding goes ahead
 	for fork in [[], ["hn_m1", "hn_m2", "hn_m3", "hn_m4"]]:
 		var s := ch6s_save()
+		s.flags.append(E10)
 		var q := quest_by_id("huainan_s")
-		var p := walk(q, s, fork)
+		var p := walk(q, s, fork, 1, 0, 0)
 		for sid in ["hn_years", "hn_letter", "hn_shu", "hn_zhoujia", "hn_luxun", "hn_lusu", "hn_liuxun", "hn_wan_rest",
-				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_zhengbao", "hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng",
-				"hn_bridge", "hn_feng2", "hn_wedding", "hn_end"]:
+				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_shizu", "hn_liuye", "hn_zhengbao", "hn_leichen", "hn_zhangxun",
+				"hn_shouchun", "hn_feng", "hn_bridge", "hn_qs", "hn_leixu", "hn_leixu_go", "hn_feng2", "hn_wedding", "hn_end"]:
 			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
 		check_eq(p[-1], "hn_end")
-		for c in ["lusu", "chenwu", "daqiao"]:
+		for sid in ["hn_kaicang", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
+			check(not p.has(sid), "刘晔 route never reaches " + sid)
+		for c in ["lusu", "chenwu", "daqiao", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
 		for r in ["wentai_shu", "zhou_pu", "weixi"]:
 			check(s.relics.has(r), "第六章 hands over the 宝物 " + r)
 		for line in ["南线：家书讨袁", "周家：解围", "鲁肃：指囷相赠", "陈武：入队", "二乔：解救", "冯夫人：交给吴夫人",
-				"南线：浮桥一瞥", "庐江：双婚"]:
+				"南线：浮桥一瞥", "庐江：刘晔调停", "庐江：雷家西走", "庐江：双婚"]:
 			check(s.run_records.has(line), "第六章 records " + line)
 		finish(q, s)
 		check(Quests.current_quest(s) == null, "未完待续 after 第六章")
@@ -447,7 +452,7 @@ func test_south_chapter6_plays_with_real_fights() -> void:
 		if opts.is_empty():
 			break
 		Quests.move(q, s, opts[0]["id"])
-	check_eq(s.square, "hn_end", "reached the end of 第六章")
+	check_eq(s.square, "hn_shensuo", "the default (开仓分田) route plays through to 结局十")
 	check(fights >= 8, "fought the chapter's battles (%d)" % fights)
 
 
@@ -776,3 +781,36 @@ func test_north_chapter6_sparring_generals_drop_their_own_cards_and_stay_public(
 	for pair in [["hnn_bw_zf", "zhangfei"], ["hnn_bw_gy", "guanyu"]]:
 		check_eq(db.enemies[db.scenarios[pair[0]]["enemy"]]["card"], pair[1], "%s drops %s" % pair)
 		check(db.is_public(pair[1]), "%s stays in the public pool" % pair[1])
+
+
+func test_south_chapter6_burning_the_clans_deeds_ends_in_ending_ten() -> void:
+	## 「请刘晔居中」 is greyed until 「结局十 · 深锁」; 开仓分田 turns 庐江's clans to 袁术 and 雷家 carries off the 二乔
+	var q := quest_by_id("huainan_s")
+	var opts: Array = q["squares"]["hn_shizu"]["choose"]
+	var s := ch6s_save()
+	check(Quests.option_locked(s, opts[0]), "请刘晔居中 greyed on a first run")
+	check(Quests.option_hint(s, opts[0]).contains("结局十 · 深锁"))
+	check(not Quests.option_locked(s, opts[1]), "开仓分田 open")
+	var p := walk(q, s, [])
+	for sid in ["hn_shizu", "hn_kaicang", "hn_shouchun", "hn_bridge", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
+		check(p.has(sid), "深锁 route passes " + sid)
+	for sid in ["hn_liuye", "hn_qs", "hn_leixu", "hn_feng2", "hn_wedding", "hn_end"]:
+		check(not p.has(sid), "深锁 route never reaches " + sid)
+	check_eq(p[-1], "hn_shensuo")
+	check(not s.has_card("liuye"), "刘晔 walks out")
+	finish(q, s)
+	check(s.flags.has(E10))
+	check(Quests.current_quest(s) == null, "the story stops at 结局十")
+	var s2 := ch6s_save()
+	s2.flags.append(E10)
+	check(not Quests.option_locked(s2, opts[0]), "深锁 opens 请刘晔居中")
+
+
+func test_south_chapter6_losing_at_qianshan_is_ending_ten_too() -> void:
+	var s := ch6s_save()
+	var q := quest_by_id("huainan_s")
+	Quests.begin(q, s, rng(3))
+	s.run_records.append("庐江：开仓分田")
+	s.square = "hn_qs_bad"
+	check(Quests.lose(q, s, rng(3)), "the 灊山寨 fight carries on into the ending")
+	check_eq(s.square, "hn_shensuo")

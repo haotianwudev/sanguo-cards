@@ -5500,6 +5500,27 @@
       },
       "pool": false
     },
+    "liuye": {
+      "name": "刘晔",
+      "rarity": "SR",
+      "troop": "strategist",
+      "bonus": {
+        "hp": 48,
+        "at": 19
+      },
+      "pool": false,
+      "scope": "south"
+    },
+    "leixu": {
+      "rarity": "R",
+      "troop": "bandit",
+      "bonus": {
+        "hp": 40,
+        "at": 12
+      },
+      "scope": "south",
+      "name": "雷绪"
+    },
     "mizhen": {
       "name": "糜贞",
       "rarity": "R",
@@ -9795,6 +9816,140 @@
       ],
       "card": "lvbu"
     },
+    "lei_buqu": {
+      "name": "雷家部曲",
+      "portrait": "inf_n",
+      "hp": 18000,
+      "at": 410,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "佃户乱刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "族长令",
+          "power": 0.5,
+          "weight": 1,
+          "ap_drain": 1
+        },
+        {
+          "name": "结阵",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "火箭",
+          "power": 0.6,
+          "weight": 1,
+          "burn_party": 0.06,
+          "turns": 2
+        }
+      ],
+      "card": "inf_n"
+    },
+    "leixu_e": {
+      "name": "庐江豪帅·雷绪",
+      "portrait": "leixu",
+      "hp": 20000,
+      "at": 430,
+      "actions": 2,
+      "phys_resist": 0.1,
+      "moves": [
+        {
+          "name": "旧刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "族规",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.4
+        },
+        {
+          "name": "部曲围杀",
+          "power": 1.4,
+          "weight": 1
+        },
+        {
+          "name": "契券·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "祖宗家法"
+        },
+        {
+          "name": "祖宗家法",
+          "power": 2.5,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "困兽",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.25,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "leixu"
+    },
+    "leixu_shan": {
+      "name": "灊山寨·雷绪",
+      "portrait": "leixu",
+      "hp": 60000,
+      "at": 680,
+      "actions": 3,
+      "phys_resist": 0.2,
+      "moves": [
+        {
+          "name": "旧刀",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "双枪齐出",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "族规",
+          "power": 0.6,
+          "weight": 1,
+          "confuse": 0.5
+        },
+        {
+          "name": "寨墙箭雨",
+          "power": 0.8,
+          "weight": 1,
+          "burn_party": 0.08,
+          "turns": 3
+        },
+        {
+          "name": "契券·蓄力",
+          "power": 0,
+          "weight": 1,
+          "charge": "祖宗家法"
+        },
+        {
+          "name": "祖宗家法",
+          "power": 2.5,
+          "weight": 0,
+          "pierce": true
+        },
+        {
+          "name": "仲氏天威",
+          "power": 0,
+          "weight": 1,
+          "rage": 0.3,
+          "when": "half",
+          "once": true
+        }
+      ],
+      "card": "leixu"
+    },
     "lvbu_xiaopei": {
       "name": "吕布",
       "portrait": "lvbu",
@@ -10588,6 +10743,23 @@
       "name": "断桥·吕布",
       "turn_limit": 8,
       "enemy": "lvbu_duanqiao"
+    },
+    "hn_wanshui": {
+      "name": "皖水·雷家部曲",
+      "turn_limit": 8,
+      "enemy": "lei_buqu",
+      "art": "hn_liuxun"
+    },
+    "hn_leixu_g": {
+      "name": "灊山·雷绪",
+      "turn_limit": 10,
+      "enemy": "leixu_e"
+    },
+    "hn_leixu_bad": {
+      "name": "灊山寨·雷绪",
+      "turn_limit": 8,
+      "enemy": "leixu_shan",
+      "art": "hn_leixu_g"
     },
     "xz_xiahoudun": {
       "name": "下邳城外·夏侯惇殿后军",
