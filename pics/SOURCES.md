@@ -331,6 +331,8 @@
 | `map:yuxi` | source/map/yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:huainan_s` | source/map/huainan_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:xuzhou` | source/map/xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:huainan_n` | source/map/huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:jiangdong` | source/map/jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei_scout` | source/battles/shuizei_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei` | source/battles/shuizei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

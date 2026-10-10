@@ -789,11 +789,13 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
 				await get_tree().create_timer(0.45).timeout
 			"enemy_hit":
+				var is_fem := _is_female(b.enemy.get("data", {}))
 				var x := _enemy_art.position.y
 				var tw := _enemy_art.create_tween()
-				tw.tween_property(_enemy_art, "position:y", x + 28, 0.09).set_trans(Tween.TRANS_QUAD)
+				tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(_enemy_art, "position:y", x, 0.16)
-				await get_tree().create_timer(0.09).timeout
+				Sfx.play("shout_enemy_female" if is_fem else "shout_enemy")
+				await get_tree().create_timer(0.04).timeout
 				Sfx.play("burn" if ev["move"] == "火" else "enemy_hit")
 				Kit.shake(self, 10.0, 0.22)
 				_flash(_party_box, Color(1.6, 0.6, 0.6))
@@ -804,14 +806,18 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 44)
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
-				await get_tree().create_timer(0.4).timeout
+				await get_tree().create_timer(0.35).timeout
 			"enemy_charge":
+				var is_fem_ch := _is_female(b.enemy.get("data", {}))
+				Sfx.play("shout_enemy_female_roar" if is_fem_ch else "shout_enemy_roar")
 				Sfx.play("charge")
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "蓄力！", Kit.c("red"), 44)
 				Kit.shake(_enemy_art, 5.0, 0.4)
 				_refresh()
-				await get_tree().create_timer(0.5).timeout
+				await get_tree().create_timer(0.45).timeout
 			"enemy_rage":
+				var is_fem_rg := _is_female(b.enemy.get("data", {}))
+				Sfx.play("shout_enemy_female_roar" if is_fem_rg else "shout_enemy_roar")
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "狂暴！", Kit.c("red"), 44)
 				_flash(_enemy_art, Color(1.8, 0.5, 0.5))
 				await get_tree().create_timer(0.4).timeout
@@ -858,21 +864,20 @@ func _is_female(card: Dictionary) -> bool:
 
 
 func _sfx_act(ev: Dictionary) -> void:
-	## 出招: 武将发招叫喊（分男女、普通出招与大招）+ 兵种动作音效 (act_<troop> / act_ultimate)
+	## 出招: 武将大招/BOOST说出名将金句台词；普通出招为清脆利刃破风（耐听不吵）
 	var skill: Dictionary = GameData.get_db().skills.get(ev.get("skill", ""), {})
 	var is_ult := skill.get("uses", null) != null and int(skill["uses"]) == 1
+	var is_boost: bool = bool(ev.get("boost", false))
 	var leader_obj: Dictionary = b.leaders[ev["unit"]].get("leader", {})
 	var leader_card: Dictionary = leader_obj.get("card", {})
 	var female := _is_female(leader_card)
 
-	if is_ult:
+	if is_ult or is_boost:
 		Sfx.play("shout_female_ultimate" if female else "shout_male_ultimate")
-		Sfx.play("act_ultimate")
 		return
 
-	Sfx.play("shout_female" if female else "shout_male")
-	var troop: String = leader_card.get("troop", "infantry")
-	Sfx.play("act_" + troop if Sfx.has("act_" + troop) else "act_infantry")
+	# 普通卡牌只带清脆兵刃出招声，不频繁复读叫喊
+	Sfx.play("slash")
 
 
 func _sfx_hit(ev: Dictionary, big: bool) -> void:

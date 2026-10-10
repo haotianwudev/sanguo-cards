@@ -24,11 +24,13 @@ godot/data/audio/
 │   ├── slash.wav   # 锋刃斩击 / 反击
 │   ├── guard.wav   # 盾牌格挡
 │   ├── burn.wav    # 烈火灼烧
-│   ├── enemy_hit_1.wav # 敌方打击命中
-│   ├── shout_male_1.wav # 男武将短促出招呼喝（多变体）
+│   ├── enemy_hit_1.wav # 敌方打击命中（厚重破甲碎裂）
+│   ├── shout_male_1.wav # 男武将短促出招呼喝（多变体，0ms瞬态）
 │   ├── shout_male_ult.wav # 男武将大招爆发战吼
-│   ├── shout_female_1.wav # 女武将短促出招呼喝（多变体）
+│   ├── shout_female_1.wav # 女武将短促出招呼喝（多变体，0ms瞬态）
 │   ├── shout_female_ult.wav # 女武将大招爆发战吼
+│   ├── shout_enemy_1.wav # 敌将出招威严喝声（多变体）
+│   ├── shout_enemy_roar.wav # 敌将狂暴/蓄力暴怒战吼
 │   └── ...
 ├── sfx/gen/        # tools/generate_sfx.py 纯算法合成的占位音（供回退，不手改）
 ├── bgm/            # 背景音乐（Ogg Vorbis 格式，自动循环与平滑淡入淡出）

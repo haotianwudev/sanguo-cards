@@ -504,3 +504,5 @@
 - [x] 2026-10-10 cg `c10_fuchun` ← c10_fuchun.jpg · ok
 - [x] 2026-10-10 cg `c10_yeyan` ← c10_yeyan.jpg · ok
 - [x] 2026-10-10 cg `c10_wanglang` ← c10_wanglang.jpg · ok
+- [x] 2026-10-10 map `huainan_n` ← media_1791662188659_2df727fe.jpg · 强制：太小 1024×338（至少高 480）
+- [x] 2026-10-10 map `jiangdong` ← media_1791662188660_d057bb92.jpg · 强制：太小 1024×254（至少高 480）

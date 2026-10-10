@@ -2881,6 +2881,14 @@
     "xuzhou": {
       "src": "source/map/xuzhou.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "huainan_n": {
+      "src": "source/map/huainan_n.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jiangdong": {
+      "src": "source/map/jiangdong.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "battles": {
