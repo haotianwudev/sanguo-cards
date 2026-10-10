@@ -13,6 +13,7 @@ config/features=PackedStringArray("4.7")
 [autoload]
 
 Game="*res://scripts/game.gd"
+Sfx="*res://scripts/audio/sfx.gd"
 
 [display]
 

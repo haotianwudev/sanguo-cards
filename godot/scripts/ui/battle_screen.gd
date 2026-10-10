@@ -687,6 +687,7 @@ func _play(events: Array) -> void:
 				tw.tween_property(v, "position:y", y - 26, 0.1).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(v, "position:y", y, 0.14)
 				_boost_hits = bool(ev.get("boost", false))
+				_sfx_act(ev)
 				if _boost_hits:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
@@ -696,6 +697,7 @@ func _play(events: Array) -> void:
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
 				var big: bool = ev["dmg"] > b.enemy["max_hp"] * 0.08
 				var ratio := float(ev["dmg"]) / maxf(1.0, float(b.enemy["max_hp"]))
+				_sfx_hit(ev, big)
 				BattleFx.scale = _enemy_fx_scale()
 				match ev["t"]:
 					"hit":
@@ -727,6 +729,7 @@ func _play(events: Array) -> void:
 				Kit.pop(_cards[ev["unit"]], 1.08)
 				await get_tree().create_timer(0.35).timeout
 			"buff":
+				Sfx.play("buff")
 				Kit.float_text(self, _party_center(), "战意 ×%d" % ev["layers"], Kit.c("gold"), 36)
 				BattleFx.buff_cast(self, range(_cards.size()).map(func(i): return _card_rect(i).get_center()))
 				_refresh()
@@ -748,13 +751,16 @@ func _play(events: Array) -> void:
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.3).timeout
 			"heal":
+				Sfx.play("heal")
 				Kit.float_text(self, _party_center(), "+%d" % ev["amt"], Kit.c("green"))
 				Kit.tween_bar(_party_hp, ev["hp"])
 				await get_tree().create_timer(0.3).timeout
 			"guard", "defend":
+				Sfx.play("guard")
 				Kit.float_text(self, _party_center(), "减伤 %d%%" % int(round(ev["cut"] * 100)), Kit.c("blue"), 32)
 				await get_tree().create_timer(0.3).timeout
 			"boost":
+				Sfx.play("buff")
 				for k in ev["units"]:
 					Kit.pop(_cards[k], 1.08)
 					_flash(_cards[k], Color(1.5, 1.35, 0.7))
@@ -764,9 +770,11 @@ func _play(events: Array) -> void:
 			"stun":
 				Kit.float_text(self, _enemy_center(), "眩晕！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
 				if ev["ok"]:
+					Sfx.play("stun")
 					BattleFx.stun_burst(self, _enemy_center() + Vector2(0, -50))
 				await get_tree().create_timer(0.3).timeout
 			"break":
+				Sfx.play("break")
 				Kit.float_text(self, _enemy_center(), "破防 +%d%%" % int(round(ev["amount"] * 100)), Kit.c("amber"), 34)
 				var crack := BattleFx.break_flash(self, _enemy_rect())
 				crack.get_tree().create_timer(0.8).timeout.connect(crack.queue_free)
@@ -785,6 +793,7 @@ func _play(events: Array) -> void:
 				tw.tween_property(_enemy_art, "position:y", x + 28, 0.09).set_trans(Tween.TRANS_QUAD)
 				tw.tween_property(_enemy_art, "position:y", x, 0.16)
 				await get_tree().create_timer(0.09).timeout
+				Sfx.play("burn" if ev["move"] == "火" else "enemy_hit")
 				Kit.shake(self, 10.0, 0.22)
 				_flash(_party_box, Color(1.6, 0.6, 0.6))
 				if ev["move"] == "火":
@@ -796,6 +805,7 @@ func _play(events: Array) -> void:
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.4).timeout
 			"enemy_charge":
+				Sfx.play("charge")
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "蓄力！", Kit.c("red"), 44)
 				Kit.shake(_enemy_art, 5.0, 0.4)
 				_refresh()
@@ -805,6 +815,7 @@ func _play(events: Array) -> void:
 				_flash(_enemy_art, Color(1.8, 0.5, 0.5))
 				await get_tree().create_timer(0.4).timeout
 			"enemy_heal":
+				Sfx.play("heal")
 				Kit.float_text(self, _enemy_center(), "+%d" % ev["amt"], Kit.c("green"), 40)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
 				await get_tree().create_timer(0.35).timeout
@@ -828,6 +839,34 @@ func _play(events: Array) -> void:
 	if b.result != "":
 		await get_tree().create_timer(0.4).timeout
 		_finish()
+
+
+func _sfx_act(ev: Dictionary) -> void:
+	## 出招: a once-per-battle 大招 rings the gong; otherwise each troop has its own sound (data/audio.json "act_<troop>")
+	var skill: Dictionary = GameData.get_db().skills.get(ev.get("skill", ""), {})
+	if skill.get("uses", null) != null and int(skill["uses"]) == 1:
+		Sfx.play("act_ultimate")
+		return
+	var troop: String = b.leaders[ev["unit"]]["leader"]["card"]["troop"]
+	Sfx.play("act_" + troop if Sfx.has("act_" + troop) else "act_infantry")
+
+
+func _sfx_hit(ev: Dictionary, big: bool) -> void:
+	## 打击: magic / pierce / heavy / plain hits sound different; each step of a combo climbs a little in pitch
+	match ev["t"]:
+		"burn":
+			Sfx.play("burn")
+		"counter", "interrupt":
+			Sfx.play("slash")
+		_:
+			var key := "hit"
+			if ev.get("kind", "") == "magic":
+				key = "hit_magic"
+			elif ev.get("pierce", false):
+				key = "hit_pierce"
+			elif big:
+				key = "hit_heavy"
+			Sfx.play(key, 1.0 + 0.04 * minf(float(ev.get("combo", 1)) - 1.0, 8.0))
 
 
 func _flash(node: CanvasItem, color: Color) -> void:
@@ -944,6 +983,7 @@ func _finish() -> void:
 	_clear_marks()
 	var save := Game.save
 	var won := b.result == "win"
+	Sfx.play("win" if won else "lose")
 	if won:
 		save.record_win(scenario_id)
 		if carry:

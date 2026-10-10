@@ -6,7 +6,7 @@ var rng := RandomNumberGenerator.new()
 var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false, "inherit_all": false}  # player options, kept in user://options.cfg (not in the save)
+var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8}  # player options, kept in user://options.cfg (not in the save)
 const OPTIONS_PATH := "user://options.cfg"
 
 

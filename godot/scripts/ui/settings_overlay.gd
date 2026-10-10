@@ -95,6 +95,20 @@ func _options() -> void:
 		Game.set_option("fast", on)
 		Engine.time_scale = Game.battle_speed() if in_battle else 1.0)
 	col.add_child(fast)
+	var vol_row := HBoxContainer.new()
+	vol_row.add_theme_constant_override("separation", 16)
+	vol_row.add_child(Kit.label("音效音量", Kit.FONT_BODY))
+	var vol := HSlider.new()
+	vol.min_value = 0.0
+	vol.max_value = 1.0
+	vol.step = 0.05
+	vol.value = float(Game.options.get("sfx_volume", 0.8))
+	vol.custom_minimum_size = Vector2(280, 44)
+	vol.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	vol.value_changed.connect(func(v): Game.set_option("sfx_volume", v))
+	vol.drag_ended.connect(func(_changed): Sfx.play("hit"))  # hear the new level
+	vol_row.add_child(vol)
+	col.add_child(vol_row)
 	var inherit := CheckButton.new()
 	inherit.text = "新的开始继承全部卡牌（测试用）"
 	inherit.button_pressed = bool(Game.options["inherit_all"])

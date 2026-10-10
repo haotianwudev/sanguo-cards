@@ -1,0 +1,258 @@
+{
+  "_comment": "音效配置：事件名 → 文件（多个随机挑一个）、音量（dB，相对总音量）、音高随机范围。换音效只改这里：正式素材放进 audio/sfx/，把 files 指过去；sfx/gen/ 是 tools/generate_sfx.py 合成的占位音，重新生成会覆盖它们。",
+  "sfx": {
+    "act_cavalry": {
+      "files": [
+        "sfx/gen/act_cavalry.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_spear": {
+      "files": [
+        "sfx/gen/act_spear.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_archer": {
+      "files": [
+        "sfx/gen/act_archer.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_infantry": {
+      "files": [
+        "sfx/gen/act_infantry.wav"
+      ],
+      "volume_db": -3,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_lord": {
+      "files": [
+        "sfx/gen/act_lord.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_strategist": {
+      "files": [
+        "sfx/gen/act_strategist.wav"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_bandit": {
+      "files": [
+        "sfx/gen/act_bandit.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_logistics": {
+      "files": [
+        "sfx/gen/act_logistics.wav"
+      ],
+      "volume_db": -3,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "act_ultimate": {
+      "files": [
+        "sfx/gen/act_ultimate.wav"
+      ],
+      "volume_db": 0,
+      "pitch": [
+        1.0,
+        1.0
+      ]
+    },
+    "hit": {
+      "files": [
+        "sfx/gen/hit_1.wav",
+        "sfx/gen/hit_2.wav",
+        "sfx/gen/hit_3.wav"
+      ],
+      "volume_db": 0,
+      "pitch": [
+        0.92,
+        1.08
+      ]
+    },
+    "hit_heavy": {
+      "files": [
+        "sfx/gen/hit_heavy.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        0.95,
+        1.05
+      ]
+    },
+    "hit_magic": {
+      "files": [
+        "sfx/gen/hit_magic.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "hit_pierce": {
+      "files": [
+        "sfx/gen/hit_pierce.wav"
+      ],
+      "volume_db": -1,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "slash": {
+      "files": [
+        "sfx/gen/slash.wav"
+      ],
+      "volume_db": -3,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "burn": {
+      "files": [
+        "sfx/gen/burn.wav"
+      ],
+      "volume_db": -5,
+      "pitch": [
+        0.9,
+        1.1
+      ]
+    },
+    "enemy_hit": {
+      "files": [
+        "sfx/gen/enemy_hit_1.wav",
+        "sfx/gen/enemy_hit_2.wav"
+      ],
+      "volume_db": 1,
+      "pitch": [
+        0.94,
+        1.06
+      ]
+    },
+    "charge": {
+      "files": [
+        "sfx/gen/charge.wav"
+      ],
+      "volume_db": -3,
+      "pitch": [
+        1.0,
+        1.0
+      ]
+    },
+    "guard": {
+      "files": [
+        "sfx/gen/guard.wav"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.96,
+        1.04
+      ]
+    },
+    "heal": {
+      "files": [
+        "sfx/gen/heal.wav"
+      ],
+      "volume_db": -5,
+      "pitch": [
+        0.98,
+        1.02
+      ]
+    },
+    "buff": {
+      "files": [
+        "sfx/gen/buff.wav"
+      ],
+      "volume_db": -5,
+      "pitch": [
+        0.98,
+        1.02
+      ]
+    },
+    "stun": {
+      "files": [
+        "sfx/gen/stun.wav"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.96,
+        1.04
+      ]
+    },
+    "break": {
+      "files": [
+        "sfx/gen/break.wav"
+      ],
+      "volume_db": -3,
+      "pitch": [
+        0.96,
+        1.04
+      ]
+    },
+    "win": {
+      "files": [
+        "sfx/gen/win.wav"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        1.0,
+        1.0
+      ]
+    },
+    "lose": {
+      "files": [
+        "sfx/gen/lose.wav"
+      ],
+      "volume_db": -3,
+      "pitch": [
+        1.0,
+        1.0
+      ]
+    },
+    "step": {
+      "files": [
+        "sfx/gen/step.wav"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.9,
+        1.1
+      ]
+    }
+  }
+}

@@ -714,3 +714,16 @@ func test_the_army_doctor_heals_and_cleanses() -> void:
 	var f := GameData.get_db().build_fighter("junyi")
 	check_eq(f["skills"], ["baozha", "jiedu"], "包扎 + 解毒")
 
+
+
+func test_every_sound_in_the_audio_table_exists_and_every_troop_has_an_act_sound() -> void:
+	## data/audio.json: each entry points at real files, and each troop gets its own 出招 sound
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
+	for key in data["sfx"]:
+		check(not data["sfx"][key]["files"].is_empty(), "%s has a file" % key)
+		for path in data["sfx"][key]["files"]:
+			check(ResourceLoader.exists("res://data/audio/" + path), "%s: %s exists" % [key, path])
+	for troop in GameData.get_db().troops:
+		check(data["sfx"].has("act_" + troop), "a 出招 sound for " + troop)
+	for key in ["hit", "hit_heavy", "hit_magic", "hit_pierce", "slash", "burn", "enemy_hit", "win", "lose", "step"]:
+		check(data["sfx"].has(key), "a sound for " + key)

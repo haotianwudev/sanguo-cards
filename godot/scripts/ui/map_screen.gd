@@ -471,6 +471,7 @@ func _on_square(sid: String) -> void:
 	tw.tween_property(_token, "position", dest + Vector2(0, -18), 0.18).set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(_token, "position", dest, 0.14).set_trans(Tween.TRANS_BOUNCE)
 	await tw.finished
+	Sfx.play("step")  # the token lands
 	Quests.move(q, Game.save, sid)
 	Game.persist()
 	_busy = false
