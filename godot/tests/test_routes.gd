@@ -520,20 +520,20 @@ func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
 		var q := quest_by_id("xuzhou")
 		var p := walk(q, s, fork)
 		for sid in ["xz_muster_j", "xz_xiahoudun", "xz_seal", "xz_needle", "xz_law", "xz_caobao", "xz_chendeng", "xz_lvbu_come",
-				"xz_beat", "xz_fu", "xz_langqi", "xz_xianzhen", "xz_lvbu", "xz_will", "xz_bingzhou", "xz_chengong", "xz_wedding", "xz_end"]:
+				"xz_beat", "xz_fu", "xz_langqi", "xz_xianzhen", "xz_lvbu", "xz_will", "xz_bingzhou", "xz_chengong", "xz_feast", "xz_end"]:
 			check(p.has(sid), "铁纪 route passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["xz_muster", "xz_chaos", "xz_banquet", "xz_menhou"]:
 			check(not p.has(sid), "铁纪 route never reaches " + sid)
 		check_eq(p[-1], "xz_end")
 		for c in ["zhangliao", "gaoshun"]:
 			check(s.has_card(c), "%s joins in 第五章" % c)
-		for r in ["xuzhou_yin", "mijia_chuan", "chen_mago"]:
+		for r in ["xuzhou_yin", "chen_mago"]:
 			check(s.relics.has(r), "第五章 hands over the 宝物 " + r)
-		for line in ["刘备：秒接徐州印", "陈家：倒向主角", "刘备：投曹", "徐州：接任徐州牧", "张辽高顺：入队", "陈宫：供起来了", "赵云：成婚"]:
+		for line in ["刘备：秒接徐州印", "陈家：倒向主角", "刘备：投曹", "徐州：接任徐州牧", "张辽高顺：入队", "陈宫：供起来了"]:
 			check(s.run_records.has(line), "第五章 records " + line)
 		check(not s.run_records.has("结局八 · 失律"))
 		finish(q, s)
-		check_eq(Quests.current_quest(s)["id"], "huainan_n", "赵云：成婚 → 第六章 · 淮南折帝旗")
+		check_eq(Quests.current_quest(s)["id"], "huainan_n", "徐州：接任徐州牧 → 第六章 · 淮南折帝旗")
 
 
 func test_north_chapter5_plays_with_real_fights() -> void:
@@ -708,7 +708,7 @@ func test_north_chapter5_sparing_xiahoudun_waits_for_ending_nine() -> void:
 # ---- 北线第六章 · 淮南折帝旗 ---------------------------------------------------------------
 
 func huainan_n_save(flags: Array) -> SaveData:
-	var s := xuzhou_save(["军纪：严明", "赵云：成婚"] + flags)
+	var s := xuzhou_save(["军纪：严明", "徐州：接任徐州牧"] + flags)
 	s.quests_cleared.append("xuzhou")
 	for c in ["zhangliao", "gaoshun", "xiahoulan"]:
 		s.grant_card(c)
@@ -716,7 +716,7 @@ func huainan_n_save(flags: Array) -> SaveData:
 
 
 func test_north_chapter6_follows_xuzhou() -> void:
-	check_eq(Quests.current_quest(huainan_n_save(["曹操：借粮", "夏侯惇：痛击殿后"]))["id"], "huainan_n", "赵云：成婚 → 第六章 · 淮南折帝旗")
+	check_eq(Quests.current_quest(huainan_n_save(["曹操：借粮", "夏侯惇：痛击殿后"]))["id"], "huainan_n", "徐州：接任徐州牧 → 第六章 · 淮南折帝旗")
 
 
 func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
