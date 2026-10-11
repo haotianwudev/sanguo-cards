@@ -577,7 +577,8 @@ func _sync_fx() -> void:
 			want["boost_%s" % id] = func(): return BattleFx.boost_aura(self, r)
 		if b.buff["layers"] > 0:
 			want["buff_%s" % id] = func(): return BattleFx.glow(self, r, BattleFx.GOLD)
-		_cards[i].modulate = Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE
+		var tint := Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE  # a card that can't act stays grey (set_state dimmed it)
+		_cards[i].modulate = tint * Color(0.55, 0.55, 0.55) if _cards[i].dimmed else tint
 		_boost_pop(_cards[i], u["boosted"])
 	_fx_set(want)
 	_sync_badges()
