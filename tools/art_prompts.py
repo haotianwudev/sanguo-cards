@@ -19,7 +19,7 @@ PICS = ROOT / "pics"
 NL = "\n"
 
 DONGBAI = ("董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄巨大的青铜锤（她已交付的立绘和 CG 都是这个样子）")
-HERO = "主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的巨大宽刃古锭刀（形象以 pics/source/generals/lord_south_armor.jpg 为准）"
+HERO = "主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的巨大宽刃古锭刀"
 HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿甄宓亡父留下的河北式旧鱼鳞甲（素铁色，不要绿色和金色），外披雪白貂裘，手持白蜡杆长枪（枪头下系一个红色平安结）"
 HERO_MODERN = "主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器"
 
@@ -1659,7 +1659,7 @@ AFFIXES = {
 }
 # full-screen UI pictures: godot/data/art/ui/<key>.jpg
 UI_ART = {
-    "title": "the title screen: a wide panoramic scene of the Three Kingdoms era at dawn — the Yangtze river in the foreground with a small boat, the young short-haired hero in silver armor with a cape standing on the bank looking north toward distant burning cities and banners; the sky split between warm sunrise and war smoke; leave the centre third of the frame calm and darker (the menu sits there)",
+    "title": "the title screen: a wide panoramic scene of the Three Kingdoms era at dawn — the Yangtze river in the foreground with a small boat, the young short-haired hero in bronze-gilt scale armor over a crimson robe with a plain black cloak and a huge broad-bladed sword on his shoulder (reference: pics/source/generals/lord_south_armor.jpg) standing on the bank looking north toward distant burning cities and banners; the sky split between warm sunrise and war smoke; leave the centre third of the frame calm and darker (the menu sits there)",
 }
 
 
@@ -1703,7 +1703,7 @@ def build_next(delivered: dict) -> list:
     found: dict = {}  # (kind, key) -> (tier, sort tuple, what)
 
     def put(kind, key, tier, order, what):
-        if key in delivered[kind] and not (kind == "map" and key in map_redo()):
+        if key in delivered[kind] and not (kind == "map" and key in map_redo()) and key not in {r[0] for r in REDO}:
             return
         old = found.get((kind, key))
         if old is None or (tier, order) < (old[0], old[1]):
@@ -1776,7 +1776,18 @@ CHESTS = {
     "chest_grand": "a grand red-lacquered treasure chest painted with gold clouds and dragons, inset with jade, a faint golden glow leaking from the seam, closed",
 }
 # already delivered but wrong somewhere: redraw (listed above the batch)
+# (key, why, seen): `seen` = how many times art_ingest.py had already logged that key; one more delivery clears the entry
 REDO = [
+    ("title", "标题画面：主角换了新形象（古铜鎏金甲、朱红内衬、纯黑披风，肩扛大刀），参考 lord_south_armor", 0),
+    ("c1_armor", "旧甲：新铠甲（古铜鎏金），不再是银甲虎纹", 0),
+    ("c10_shenting", "主角换了新铠甲", 1),
+    ("c10_pifu", "主角换了新铠甲", 1),
+    ("c9_qiuche", "主角换了新铠甲", 1),
+    ("c8_xuexi", "主角换了新铠甲", 1),
+    ("c4_tonggui", "主角换了新铠甲", 1),
+    ("c6_fenghou", "主角换了新铠甲", 1),
+    ("c5_garden", "主角换了新铠甲", 1),
+    ("jiujia", "孙坚旧甲图标：改成古铜鎏金甲", 1),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
@@ -1979,6 +1990,10 @@ def ui_prompt(scene: str) -> str:
 def main() -> None:
     art = json.loads((PICS / "art.json").read_text("utf-8"))
     done = {k for k, v in art["portraits"].items() if not v.get("placeholder")}
+    import re as _re0
+    _log0 = ROOT / "pics" / "ART-LOG.md"  # art_ingest.py records what was delivered: a REDO entry replaced since is done
+    _txt0 = _log0.read_text("utf-8") if _log0.exists() else ""
+    REDO[:] = [r for r in REDO if len(_re0.findall(r"`" + r[0] + r"` ←", _txt0)) <= r[2]]
     out = ["# 出图提示词", "",
            "> 由 `python tools/art_prompts.py` 生成：每一条都能直接复制去出图。已有正式美术的会自动跳过。",
            "> 新角色 / 新战斗 / 新剧情插图：先在 `tools/art_prompts.py` 的表里加一行，再运行它。",
@@ -1998,7 +2013,7 @@ def main() -> None:
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
         if REDO or map_redo():
-            out += ["**先重画**（已交付但有地方不对）：", ""] + [f"- `{k}` — {why}" for k, why in REDO] + [f"- `{k}`（地图）— {why}" for k, why in map_redo().items()] + [""]
+            out += ["**先重画**（已交付但有地方不对）：", ""] + [f"- `{r[0]}` — {r[1]}" for r in REDO] + [f"- `{k}`（地图）— {why}" for k, why in map_redo().items()] + [""]
         kind_name = {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物', 'battle': '战斗 CG', 'ui': '界面'}
         out += [f"共 {len(todo)} 张，按优先级分档（全部由游戏数据算出，游戏里没用到的不列）：", ""]
         n = 0
@@ -2012,11 +2027,7 @@ def main() -> None:
             out.append(f"{n}. `{key}` — {what}（{kind_name[kind]}）")
         out += ["", "交图规则：", ""] + [f"- {r}" for r in NEXT_RULES] + [""]
     out += ["## 立绘（竖版 3:4）", ""]
-    import re as _re
-    _log = ROOT / "pics" / "ART-LOG.md"  # art_ingest.py records what was delivered: a REDO entry replaced since is done
-    ingested = set(_re.findall(r"`(\w+)` ←", _log.read_text("utf-8"))) if _log.exists() else set()
-    REDO[:] = [(k, w) for k, w in REDO if k not in ingested]
-    redo = {k for k, _ in REDO}
+    redo = {r[0] for r in REDO}
     for key, p in PORTRAITS.items():
         if key in done and key not in redo:
             continue
@@ -2073,7 +2084,7 @@ def main() -> None:
         out += [f"### `{key}`", "", "```", affix_prompt(sym), "```", ""]
     out += ["## 界面大图（横版 16:9 JPG，放 `godot/data/art/ui/<key>.jpg`）", ""]
     for key, scene in UI_ART.items():
-        if (art_dir / "ui" / f"{key}.jpg").exists():
+        if (art_dir / "ui" / f"{key}.jpg").exists() and key not in redo:
             continue
         out += [f"### `{key}`", "", "```", ui_prompt(scene), "```", ""]
     out += ["## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）", ""]
@@ -2090,7 +2101,7 @@ def main() -> None:
     rarity = {k: v.get("rarity", "common") for k, v in json.loads((ROOT / "godot/data/cards.json").read_text("utf-8"))["relics"].items()}
     out += ["## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）", ""]
     for key, obj in RELICS.items():
-        if key in relics_done:
+        if key in relics_done and key not in redo:
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or relic_prompt(obj, rarity.get(key, "common")), "```", ""]
     (PICS / "ART-PROMPTS.md").write_text(NL.join(out), "utf-8", newline=NL)
