@@ -350,6 +350,8 @@
       "desc": "左慈送的，喝不完。每打赢一场，回复 10% 体力",
       "after_win": 0.1
     },
+    "xunyou_qizi": {"name": "荀攸的黑棋", "troop": "strategist", "icon": "棋", "rarity": "story", "desc": "荀攸按在沙盘上的那枚黑棋。棋看三步，不会被伏兵偷袭（队里有策士才生效）", "mods": {"no_ambush": 1}},
+    "bandu_lingjian": {"name": "半渡令箭", "troop": "archer", "icon": "箭", "rarity": "story", "desc": "黄忠的令箭，号令一响第一支箭就要见血。每场第一击伤害翻倍（队里有弓手才生效）", "mods": {"first_hit": 1.0}},
     "bingfu": {
       "name": "虎符",
       "troop": "strategist",
