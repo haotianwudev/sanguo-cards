@@ -510,3 +510,4 @@
 - [x] 2026-10-11 portrait `dufuren` ← media_1791717118937_b524841f.jpg · ok
 - [ ] 2026-10-11 portrait `lord` ← Three Kingdoms Warrior Overlooking the Harbor.png · ok
 - [ ] 2026-10-11 portrait `lord_south_armor` ← Gemini_Generated_Image_xeuguxeuguxeugux.jpg · ok
+- [ ] 2026-10-11 cg `c1_armor` ← c1_armor_new.jpg · ok
