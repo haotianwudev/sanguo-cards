@@ -508,15 +508,15 @@
 - [x] 2026-10-10 map `jiangdong` ← media_1791662188660_d057bb92.jpg · 强制：太小 1024×254（至少高 480）
 - [x] 2026-10-10 map `yuxi` ← Gemini_Generated_Image_w8l428w8l428w8l4.jpg · ok
 - [x] 2026-10-11 portrait `dufuren` ← media_1791717118937_b524841f.jpg · ok
-- [ ] 2026-10-11 portrait `lord` ← Three Kingdoms Warrior Overlooking the Harbor.png · ok
-- [ ] 2026-10-11 portrait `lord_south_armor` ← Gemini_Generated_Image_xeuguxeuguxeugux.jpg · ok
-- [ ] 2026-10-11 cg `c1_armor` ← c1_armor_new.jpg · ok
-- [ ] 2026-10-11 cg `c10_shenting` ← c10_shenting_new.jpg · ok
-- [ ] 2026-10-11 cg `c10_pifu` ← c10_pifu_new.jpg · ok
-- [ ] 2026-10-11 cg `c10_shenting` ← c10_shenting_v4.jpg · ok
-- [ ] 2026-10-11 cg `c9_qiuche` ← c9_qiuche_new.jpg · ok
-- [ ] 2026-10-11 cg `c8_xuexi` ← c8_xuexi_v2.jpg · ok
-- [ ] 2026-10-11 cg `c4_tonggui` ← c4_tonggui_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_garden` ← c5_garden_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_v6.jpg · ok
+- [x] 2026-10-11 portrait `lord` ← Three Kingdoms Warrior Overlooking the Harbor.png · ok
+- [x] 2026-10-11 portrait `lord_south_armor` ← Gemini_Generated_Image_xeuguxeuguxeugux.jpg · ok
+- [x] 2026-10-11 cg `c1_armor` ← c1_armor_new.jpg · ok
+- [x] 2026-10-11 cg `c10_shenting` ← c10_shenting_new.jpg · ok
+- [x] 2026-10-11 cg `c10_pifu` ← c10_pifu_new.jpg · ok
+- [x] 2026-10-11 cg `c10_shenting` ← c10_shenting_v4.jpg · ok
+- [x] 2026-10-11 cg `c9_qiuche` ← c9_qiuche_new.jpg · ok
+- [x] 2026-10-11 cg `c8_xuexi` ← c8_xuexi_v2.jpg · ok
+- [x] 2026-10-11 cg `c4_tonggui` ← c4_tonggui_new.jpg · ok
+- [x] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_new.jpg · ok
+- [x] 2026-10-11 cg `c5_garden` ← c5_garden_new.jpg · ok
+- [x] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_v6.jpg · ok
