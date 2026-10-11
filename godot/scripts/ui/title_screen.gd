@@ -61,6 +61,12 @@ func _ready() -> void:
 				b._flags = saved.flags
 				Game.root.add_child(b))
 			col.add_child(book)
+			var cbook := Kit.button("卡牌收藏　%d 张" % saved.get_cleared_cards().size(), "blue", Kit.FONT_BODY)
+			cbook.pressed.connect(func():
+				var cb := CardsBook.new()
+				cb.save = saved
+				Game.root.add_child(cb))
+			col.add_child(cbook)
 		if saved != null and not saved.quests_cleared.is_empty():
 			if not (saved.ended and saved.replay == ""):  # (after an ending the 新的开始 button above is the way on)
 				var lap := Kit.button("新的开始（卡牌重置，结局与卡的级别保留）", "purple", Kit.FONT_BODY)

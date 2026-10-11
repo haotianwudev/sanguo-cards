@@ -609,3 +609,20 @@ func test_picks_and_chests_lean_towards_the_cards_you_field() -> void:
 				other += 1
 	check(fielded > other, "the soldiers of a fielded troop come out of chests more than an idle one's: %d vs %d" % [fielded, other])
 
+
+func test_cleared_cards_and_levels() -> void:
+	var s := SaveData.create()
+	check_eq(s.get_cleared_cards(), ["lord"], "a fresh run only has the lord in cleared cards")
+	s.grant_card("sunce")
+	s.dupes["sunce"] = 4  # 银阶
+	check_eq(s.get_cleared_cards(), ["lord"], "temporary cards in an unended run are not in cleared cards")
+	s.ended = true
+	check(s.get_cleared_cards().has("sunce"), "ended run counts held cards as cleared")
+	s.commit_history()
+	var next := s.new_lap()
+	check(next.get_cleared_cards().has("sunce"), "new lap preserves cleared cards")
+	var info := next.card_level_info("sunce")
+	check_eq(info["tier_name"], "银阶")
+	check_eq(info["copies"], 4)
+
+
