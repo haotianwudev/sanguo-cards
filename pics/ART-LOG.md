@@ -555,3 +555,9 @@
 - [ ] 2026-10-11 cg `c7_feng` ← c7_feng_new.jpg · ok
 - [ ] 2026-10-11 cg `c7_huangzhong` ← c7_huangzhong_new.jpg · ok
 - [ ] 2026-10-11 cg `c7_stars` ← c7_stars_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_jiaxu` ← c6_jiaxu_ns.jpg · ok
+- [ ] 2026-10-11 cg `c7_flee` ← c7_flee_ns.jpg · ok
+- [ ] 2026-10-11 cg `c6_yizu` ← c6_yizu_ns.jpg · ok
+- [ ] 2026-10-11 cg `c5_dress` ← c5_dress_ns.jpg · ok
+- [ ] 2026-10-11 cg `c4_mangshan` ← c4_mangshan_ns.jpg · ok
+- [ ] 2026-10-11 cg `c4_betroth` ← c4_betroth_ns.jpg · ok
