@@ -3985,6 +3985,7 @@
         "hp": 70,
         "at": 28
       },
+      "pool": false,
       "skills": [
         "baiyi"
       ],
@@ -4027,6 +4028,7 @@
         "hp": 70,
         "at": 32
       },
+      "pool": false,
       "skills": [
         "chibi"
       ],

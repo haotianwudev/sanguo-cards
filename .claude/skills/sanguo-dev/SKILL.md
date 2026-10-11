@@ -422,3 +422,5 @@ mid-edit: leave them alone. **Stage by path (`git add <your files>`), never `git
 Replacing art: overwriting `pics/source/<key>.jpg` with a new version is fine (git keeps the old one). If the new image
 has no title band, drop the entry's `prep` block and point `src` at the source file; re-check the framing. Never commit art that isn't ours (the old Rance placeholder was scrubbed
 from history for this reason).
+
+第七章补充：秣陵城外「辎重车里的少年」（`lm_fight` 战 → `lm_join` 入队）吕蒙十五六岁偷跟军；章末「小霸王」（`jd_rest`）孙策拿 `sunce_bawang`、周瑜拿 `zhouyu_chibi`（赤壁）；吕蒙、周瑜·赤壁都是 `pool: false`，只走剧情，不进抽卡池。
