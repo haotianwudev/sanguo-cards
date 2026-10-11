@@ -78,6 +78,15 @@
     "combo_bonus": 0.1,
     "variance": 0.2,
     "ambush_chance": 0.5,
+    "_scaling": "难度系数（systematic）：chapter = 每章（quest id）一个系数，乘到这章所有敌人的血量和攻击上；tier = 普通/精英/首领各一个系数；elite_floor = 精英的强度（血×攻×行动数）至少是本章普通战斗中位数的这么多倍；boss_floor / boss_over_elite = 首领至少是本章普通中位数的 boss_floor 倍、且至少是本章最强精英的 boss_over_elite 倍。in_chapter = 章内按格子的列线性递增（第一列乘 start，最后一列乘 end，prologue 不适用）；想整章调难度只改 chapter 里那一个数",
+    "scaling": {
+      "chapter": {"heishan": 1.3, "beihai": 1.5},
+      "tier": {"normal": 1.0, "elite": 1.0, "boss": 1.0},
+      "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},
+      "elite_floor": 2.0,
+      "boss_floor": 3.0,
+      "boss_over_elite": 1.1
+    },
     "boost_mult": 1.5,
     "boost_idle_rounds": 3,
     "boost_chance": 0.5,

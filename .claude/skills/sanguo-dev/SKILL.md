@@ -428,3 +428,5 @@ from history for this reason).
 卡牌张数规则：任何一次获得（抽卡、宝箱、剧情给）都只 +1 张；新周目再拿到以前通关过的卡，是「永久记录的张数 + 1」，即便已是银卡也只 +1，不会直接升一阶；只有点化（战功或事件）一次 +3 张（`gacha.upgrade_copies`）。通关结算 `commit_history` 对永久张数取最大值，不相加。
 
 埋伏：普通战斗（非首领、非精英）每局开章时按 `battle.ambush_chance`（0.5）随机抽一半成为埋伏，结果存 `save.ambushes`（随局保存、每局不同）；格子上写死的 `ambush: true` 仍然生效（如第二章「李儒伏兵」）。
+
+敌人强度系统（`cards.json` → `battle.scaling`，代码 `Quests.enemy_scale`）：强度 = 血量×攻击×行动数。每章一个系数 `chapter`（按 quest id，默认 1.0，乘到本章所有敌人的血量和攻击）× 章内按格子的列线性递增 `in_chapter`（第一列 ×start，最后一列 ×end）× 三档系数 `tier`；再有强度下限：精英至少是本章普通战中位数的 `elite_floor`（2）倍，首领至少是 `boss_floor`（3）倍、且至少是本章最强精英的 `boss_over_elite` 倍。调一整章难度只改 `chapter` 里的数；`tests/test_quests.gd` 有防倒挂测试。吕布这类 `lose_goto` 的演出战不吃下限，只吃 chapter 系数。

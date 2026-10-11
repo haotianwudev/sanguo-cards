@@ -75,7 +75,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	e["phys_resist"] = minf(0.8, float(e["phys_resist"]) + float(afx.get("phys_resist", 0.0)))
 	e["magic_resist"] = minf(0.8, float(e["magic_resist"]) + float(afx.get("magic_resist", 0.0)))
 	e["actions"] = int(e["actions"]) + int(afx.get("actions", 0))
-	var tough := 1.0 + float(mods.get("enemy", 0.0))
+	var tough := (1.0 + float(mods.get("enemy", 0.0))) * float(mods.get("enemy_scale", 1.0))
 	var max_hp := int(round(e["hp"] * float(b.db.battle.get("enemy_hp_mult", 1.0)) * tough * (1.0 + float(afx.get("hp", 0.0)))
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * tough * (1.0 + float(afx.get("at", 0.0))),

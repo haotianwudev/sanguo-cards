@@ -203,10 +203,93 @@ static func ramp(save: SaveData) -> float:
 	return chapters * float(db.battle.get("chapter_step", 0.0)) + (save.effective_level() - 1) * float(db.battle.get("ending_step", 0.0))
 
 
+static var _power_cache := {}  # quest id -> {normal: median power of its ordinary fights, elite: strongest elite's power after scaling}
+
+
+static func _enemy_power(battle_id: String) -> float:
+	var db := GameData.get_db()
+	var e: Dictionary = db.enemies[db.scenarios[battle_id]["enemy"]]
+	return float(e["hp"]) * float(e["at"]) * float(e["actions"])
+
+
+static func _position_scale(q: Dictionary, x: int) -> float:
+	## battle.scaling.in_chapter: a fight gets tougher along the chapter, linearly from `start` (first column) to `end` (last column)
+	var raw: Dictionary = q.get("_raw", q)
+	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {}).get("in_chapter", {})
+	if cfg.is_empty() or raw["id"] in cfg.get("except", []):
+		return 1.0
+	var max_x := 1
+	for s in raw["squares"].values():
+		max_x = maxi(max_x, int(s["x"]))
+	return lerpf(float(cfg["start"]), float(cfg["end"]), clampf(float(x) / float(max_x), 0.0, 1.0))
+
+
+static func _scale_for(tier: String, own: float, normal_median: float, elite_max: float, qid: String, pos := 1.0) -> float:
+	## battle.scaling in cards.json: one coefficient per chapter (`chapter`, by quest id) × one per tier (`tier`), then a floor so that an
+	## elite is never weaker than `elite_floor` × the chapter's ordinary fights and a boss never weaker than `boss_floor` × them or
+	## `boss_over_elite` × its strongest elite (power = hp × at × actions, scaling both hp and at by s multiplies it by s²)
+	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
+	var ch := float(cfg.get("chapter", {}).get(qid, 1.0))
+	var s := ch * float(cfg.get("tier", {}).get(tier, 1.0)) * pos
+	var target := 0.0
+	if tier == "elite":
+		target = normal_median * float(cfg.get("elite_floor", 0.0)) * ch * ch * pos * pos
+	elif tier == "boss":
+		target = maxf(normal_median * float(cfg.get("boss_floor", 0.0)) * ch * ch * pos * pos, elite_max * float(cfg.get("boss_over_elite", 0.0)))
+	if target > 0.0 and own * s * s < target:
+		s = sqrt(target / own)
+	return s
+
+
+static func _power_base(q: Dictionary) -> Dictionary:
+	var raw: Dictionary = q.get("_raw", q)
+	if _power_cache.has(raw["id"]):
+		return _power_cache[raw["id"]]
+	var normal: Array = []
+	for s in raw["squares"].values():
+		if s["type"] == "battle" and s["battle"] != "" and not s["boss"] and not s["elite"] and s["lose_goto"] == "":
+			normal.append(_enemy_power(s["battle"]))
+	normal.sort()
+	var med: float = normal[normal.size() / 2] if not normal.is_empty() else 0.0
+	var elite_max := 0.0
+	for s in raw["squares"].values():
+		if s["type"] == "battle" and s["battle"] != "" and s["elite"] and not s["boss"] and s["lose_goto"] == "":
+			var p := _enemy_power(s["battle"])
+			var k := _scale_for("elite", p, med, 0.0, raw["id"], _position_scale(raw, int(s["x"])))
+			elite_max = maxf(elite_max, p * k * k)
+	var out := {"normal": med, "elite": elite_max}
+	_power_cache[raw["id"]] = out
+	return out
+
+
+static func enemy_scale(save: SaveData) -> float:
+	## the chapter / tier coefficient of the fight on the current square (see _scale_for); 1.0 off a battle square
+	var db := GameData.get_db()
+	if save.quest == "" or db.battle.get("scaling", {}).is_empty():
+		return 1.0
+	for q in db.quests:
+		if q["id"] != save.quest:
+			continue
+		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		if sq.is_empty():
+			return 1.0
+		var bid: String = sq["battle"] if sq["battle"] != "" else str(save.event_battle.get("battle", ""))
+		if bid == "" or not db.scenarios.has(bid):
+			return 1.0
+		var tier := "boss" if sq["boss"] else ("elite" if sq["elite"] else "normal")
+		if sq["lose_goto"] != "":
+			tier = "normal"  # an unwinnable showpiece (吕布) is tuned by hand, only the chapter coefficient applies
+			return _scale_for(tier, _enemy_power(bid), 0.0, 0.0, q["id"])
+		var base := _power_base(q)
+		return _scale_for(tier, _enemy_power(bid), base["normal"], base["elite"], q["id"], _position_scale(q, int(sq["x"])))
+	return 1.0
+
+
 static func mods(save: SaveData) -> Dictionary:
 	## Battle modifiers for this run: every 宝物 carried by a unit, plus 险.
 	var db := GameData.get_db()
-	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"]) + ramp(save)}
+	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"]) + ramp(save),
+		"enemy_scale": enemy_scale(save)}
 	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
 	if save.fate != "" and db.fates.has(save.fate):
 		sources.append(db.fates[save.fate])  # 天命 of this run

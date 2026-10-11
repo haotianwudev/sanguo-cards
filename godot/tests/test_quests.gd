@@ -1266,3 +1266,32 @@ func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
 	var s2 := SaveData.create()
 	Quests.begin(q, s2, rng(6))
 	check(s.ambushes != s2.ambushes, "a different run rolls different ones")
+
+
+func test_enemy_strength_never_inverts_by_the_scaling_config() -> void:
+	## battle.scaling: elites are never weaker than the chapter's ordinary fights, bosses never weaker than its elites,
+	## and each route's ordinary fights get stronger chapter by chapter (吕布's showpiece fights are tuned by hand and left out)
+	var db := GameData.get_db()
+	var cfg: Dictionary = db.battle["scaling"]
+	var med := {}
+	for q in db.quests:
+		var base: Dictionary = Quests._power_base(q)
+		var ch := float(cfg["chapter"].get(q["id"], 1.0))
+		med[q["id"]] = base["normal"] * ch * ch
+		var elite_top := 0.0
+		for s in q["squares"].values():
+			if s["type"] != "battle" or s["battle"] == "" or s["lose_goto"] != "":
+				continue
+			var p := Quests._enemy_power(s["battle"])
+			var tier := "boss" if s["boss"] else ("elite" if s["elite"] else "normal")
+			var pos := Quests._position_scale(q, int(s["x"]))
+			var k := Quests._scale_for(tier, p, base["normal"], base["elite"], q["id"], pos)
+			var eff := p * k * k
+			if tier == "elite":
+				check(eff >= base["normal"] * ch * ch * pos * pos * float(cfg["elite_floor"]) * 0.999, "%s/%s: an elite stays above the chapter's ordinary fights" % [q["id"], s["id"]])
+				elite_top = maxf(elite_top, eff)
+			elif tier == "boss":
+				check(eff >= elite_top * 0.0 + base["elite"] * float(cfg["boss_over_elite"]) * 0.999, "%s/%s: a boss stays above the chapter's elites" % [q["id"], s["id"]])
+	for route in [["taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong"], ["luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"]]:
+		for i in range(1, route.size()):
+			check(med[route[i]] > med[route[i - 1]], "%s is tougher than %s" % [route[i], route[i - 1]])
