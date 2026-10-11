@@ -1680,6 +1680,17 @@ TIER_NAMES = {0: "立绘（占位 / 缺）", 1: "首领战斗图", 2: "精英战
 EXTRA_NEXT = [("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9，暗色印章问号）", 8)]
 
 
+# chapter maps already delivered but the chapter's squares changed since: redraw (key -> why). A redraw counts as done once
+# art_ingest.py has logged one more delivery of that map than `seen` here.
+MAP_REDO = {"yuxi": ("第三章并入驻守洛阳与长安，同一张图 58 列、两条路线并排（提示词已按新列数写好）", 1)}
+
+
+def map_redo() -> dict:
+    log = ROOT / "pics" / "ART-LOG.md"
+    text = log.read_text("utf-8") if log.exists() else ""
+    return {k: why for k, (why, seen) in MAP_REDO.items() if text.count(f"map `{k}` ←") <= seen}
+
+
 def build_next(delivered: dict) -> list:
     """[(kind, key, what, tier)] still missing and used by the game, in drawing order."""
     gd = ROOT / "godot" / "data"
@@ -1692,7 +1703,7 @@ def build_next(delivered: dict) -> list:
     found: dict = {}  # (kind, key) -> (tier, sort tuple, what)
 
     def put(kind, key, tier, order, what):
-        if key in delivered[kind]:
+        if key in delivered[kind] and not (kind == "map" and key in map_redo()):
             return
         old = found.get((kind, key))
         if old is None or (tier, order) < (old[0], old[1]):
@@ -1986,8 +1997,8 @@ def main() -> None:
     need = {(k, key) for k, key, _, _ in todo}  # the sections below list only what the game uses and still lacks
     if todo:
         out += ["## 下一批（交给 Gemini）", "", "按顺序画；交付后重跑本脚本，这一条会自动消失。", ""]
-        if REDO:
-            out += ["**先重画**（已交付但有地方不对）：", ""] + [f"- `{k}` — {why}" for k, why in REDO] + [""]
+        if REDO or map_redo():
+            out += ["**先重画**（已交付但有地方不对）：", ""] + [f"- `{k}` — {why}" for k, why in REDO] + [f"- `{k}`（地图）— {why}" for k, why in map_redo().items()] + [""]
         kind_name = {'portrait': '立绘', 'cg': '剧情 CG', 'map': '地图', 'relic': '宝物', 'battle': '战斗 CG', 'ui': '界面'}
         out += [f"共 {len(todo)} 张，按优先级分档（全部由游戏数据算出，游戏里没用到的不列）：", ""]
         n = 0
