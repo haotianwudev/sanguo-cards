@@ -517,3 +517,4 @@
 - [ ] 2026-10-11 cg `c9_qiuche` ← c9_qiuche_new.jpg · ok
 - [ ] 2026-10-11 cg `c8_xuexi` ← c8_xuexi_v2.jpg · ok
 - [ ] 2026-10-11 cg `c4_tonggui` ← c4_tonggui_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_new.jpg · ok
