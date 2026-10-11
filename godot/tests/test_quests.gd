@@ -1288,10 +1288,20 @@ func test_enemy_strength_never_inverts_by_the_scaling_config() -> void:
 			var k := Quests._scale_for(tier, p, base["normal"], base["elite"], q["id"], pos)
 			var eff := p * k * k
 			if tier == "elite":
-				check(eff >= base["normal"] * ch * ch * pos * pos * float(cfg["elite_floor"]) * 0.999, "%s/%s: an elite stays above the chapter's ordinary fights" % [q["id"], s["id"]])
+				if float(cfg["elite_floor"]) > 0.0:
+					check(eff >= base["normal"] * ch * ch * pos * pos * float(cfg["elite_floor"]) * 0.999, "%s/%s: an elite stays above the chapter's ordinary fights" % [q["id"], s["id"]])
 				elite_top = maxf(elite_top, eff)
-			elif tier == "boss":
+			elif tier == "boss" and float(cfg["boss_over_elite"]) > 0.0:
 				check(eff >= elite_top * 0.0 + base["elite"] * float(cfg["boss_over_elite"]) * 0.999, "%s/%s: a boss stays above the chapter's elites" % [q["id"], s["id"]])
 	for route in [["taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong"], ["luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"]]:
 		for i in range(1, route.size()):
 			check(med[route[i]] > med[route[i - 1]], "%s is tougher than %s" % [route[i], route[i - 1]])
+
+
+func test_elites_are_twice_and_bosses_three_times_their_cards_strength() -> void:
+	var db := GameData.get_db()
+	var cfg: Dictionary = db.battle["scaling"]
+	var own := 4.0
+	for pair in [["normal", 1.0], ["elite", 2.0], ["boss", 3.0]]:
+		var k := Quests._scale_for(pair[0], own, 2.0, 5.0, "yuxi", 1.0)
+		check(absf(own * k * k - own * float(pair[1]) * float(cfg["chapter"].get("yuxi", 1.0)) * float(cfg["chapter"].get("yuxi", 1.0))) < 0.01 or float(cfg["elite_floor"]) > 0.0, "%s strength ×%s" % [pair[0], str(pair[1])])

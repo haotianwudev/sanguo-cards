@@ -230,7 +230,7 @@ static func _scale_for(tier: String, own: float, normal_median: float, elite_max
 	## `boss_over_elite` × its strongest elite (power = hp × at × actions, scaling both hp and at by s multiplies it by s²)
 	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
 	var ch := float(cfg.get("chapter", {}).get(qid, 1.0))
-	var s := ch * float(cfg.get("tier", {}).get(tier, 1.0)) * pos
+	var s := ch * sqrt(float(cfg.get("tier", {}).get(tier, 1.0))) * pos  # tier = a strength (hp × at) multiplier: 精英 ×2, 首领 ×3
 	var target := 0.0
 	if tier == "elite":
 		target = normal_median * float(cfg.get("elite_floor", 0.0)) * ch * ch * pos * pos
