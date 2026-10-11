@@ -227,6 +227,12 @@ func tier(card_id: String, n := -1) -> int:
 	return t
 
 
+func next_tier_copies(n: int) -> int:
+	## the copies of the tier above the one n copies make (the top tier stays): getting a remembered card again is one level (品阶) up
+	var tiers: Array = _db().gacha["tiers"]
+	return int(tiers[mini(tier("", n) + 1, tiers.size() - 1)]["copies"])
+
+
 func maxed(card_id: String) -> bool:
 	var tiers: Array = _db().gacha["tiers"]
 	return not _db().cards[card_id]["soldier"] and copies(card_id) >= int(tiers[-1]["copies"])
@@ -667,9 +673,9 @@ func grant_card(card_id: String, from_story := false) -> void:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):
 		owned.append(card_id)
-		var base := permanent_copies(card_id)  # had in an earlier 周目: it comes back at that level, plus one for getting it again
+		var base := permanent_copies(card_id)  # had in an earlier 周目: it comes back at that level, one level (品阶) up for getting it again
 		if base > 0:
-			dupes[card_id] = mini(base + 1, int(_db().gacha["tiers"][-1]["copies"]))
+			dupes[card_id] = next_tier_copies(base)
 	else:
 		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":

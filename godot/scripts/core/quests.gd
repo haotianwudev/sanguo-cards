@@ -576,8 +576,10 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 	var held := save.lord_forms.has(pick)
 	save.lord_form_dupe = held or save.cleared_forms.has(pick)
 	save.lord_form_fresh = not held
-	if save.lord_form_dupe:
+	if held:
 		save.lord_copies += 1
+	elif save.lord_form_dupe:  # had in an earlier 周目: the lord goes one level (品阶) up
+		save.lord_copies = save.next_tier_copies(save.lord_copies)
 	if not held:
 		save.lord_forms.append(pick)
 	return pick

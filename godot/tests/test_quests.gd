@@ -1018,7 +1018,7 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	var again := Quests.move(q, lap2, "jz_arrive", rng)
 	check_eq(again[0]["form"], "lord_default", "the default card again on the next 周目's first step")
 	check(again[0]["dupe"] and again[0]["fresh"], "…the card is yours again, and the lord's level goes up with it")
-	check_eq(lap2.lord_copies, 2, "…by one on top of the level kept")
+	check_eq(lap2.lord_copies, GameData.get_db().gacha["tiers"][1]["copies"], "…to Lv.2 (银), one level above the one kept")
 	check_eq(lap2.lord_forms, ["lord_default"], "…and the card is in hand")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
