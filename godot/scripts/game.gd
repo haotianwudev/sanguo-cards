@@ -193,6 +193,17 @@ func demo(name: String) -> void:
 		book._flags = save.flags
 		root.add_child(book)
 		return
+	if name == "cardsbook":  # the 卡牌收藏 after an ending, on the 主角卡 tab: --demo=cardsbook [--north]
+		save.grant_card("sunce")
+		save.lord_forms = ["lord_south_armor", "lord_north_silver"]
+		save.lord_copies = 2
+		save.commit_history()
+		show_screen(TitleScreen.new())
+		var cb := CardsBook.new()
+		cb.save = save
+		cb._cur_type = "lord"
+		root.add_child(cb)
+		return
 	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
 		show_screen(TitleScreen.new())
 		var o := PickOverlay.new()

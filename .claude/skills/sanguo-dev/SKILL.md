@@ -64,7 +64,7 @@ timeout 900 $G --headless --path . --export-debug "Android" ../build/sanguo-card
 
 Demos (`Game.demo()` in `scripts/game.gd`): `title`, `map`, `pick`, `choose`, `event` (左慈 on a ？ square),
 `relics` (宝物 pick), `tiers` (铜/银/金 frames), `ch2` (虎牢关 fork), `battle`, `fight`, `cards:id1,id2,...`,
-`chest` / `grand_chest` (a loot chest over the map). Add `--north` to any `--demo=` to play as the north-route
+`chest` / `grand_chest` (a loot chest over the map). `cardsbook` (the 卡牌收藏 on its 主角卡 tab: remembered versions in colour, the rest greyed). Add `--north` to any `--demo=` to play as the north-route
 lord (appends 「出生：冀州无极」 to `run_records`) — for demos that call `Quests.begin` internally (`chest`,
 `grand_chest`, the chapter forks) that reset `run_records`, append the record again after the call, same as a
 real run would after walking past `era`.

@@ -124,6 +124,7 @@ func _ready() -> void:
 		["SR", "SR 良将 (%d)" % sr_count],
 		["R", "R 辅将 (%d)" % r_count],
 		["soldier", "部队兵卡 (%d)" % soldier_count],
+		["lord", "主角卡 (%d/%d)" % [save.cleared_forms.filter(func(f): return db.lord_forms.has(f)).size(), db.lord_forms.size()]],
 	]
 
 	for i in type_defs.size():
@@ -285,6 +286,9 @@ func _populate_grid() -> void:
 		ch.queue_free()
 
 	var db := GameData.get_db()
+	if _cur_type == "lord":
+		_populate_lord_forms()
+		return
 	var list: Array = []
 	for cid in _cleared_ids:
 		var c: Dictionary = db.cards.get(cid, {})
@@ -318,6 +322,30 @@ func _populate_grid() -> void:
 
 	for cid in list:
 		_grid.add_child(_card_cell(cid))
+
+
+func _populate_lord_forms() -> void:
+	## the lord's cards: the ones remembered from finished 周目 in colour, the rest greyed (getting one again is a level up for the lord)
+	var db := GameData.get_db()
+	for fid in db.lord_forms:
+		var route: String = db.lord_forms[fid]["route"]
+		if _cur_scope != "all" and route != "" and route != _cur_scope:
+			continue
+		if _cur_scope == "universal" and route != "":
+			continue
+		var known := save.cleared_forms.has(fid)
+		var cell := VBoxContainer.new()
+		cell.add_theme_constant_override("separation", 5)
+		cell.alignment = BoxContainer.ALIGNMENT_CENTER
+		var card_view := CardView.make("lord", Vector2(160, 224), {"skills": false, "form": fid, "tier": save.permanent_tier("lord")})
+		card_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card_view.modulate = Color.WHITE if known else Color(0.3, 0.3, 0.3, 0.9)
+		cell.add_child(card_view)
+		var lbl := Kit.label("%s　%s" % [db.lord_forms[fid]["name"], "已记住" if known else "未获得"], 12)
+		lbl.add_theme_color_override("font_color", Kit.c("gold") if known else Kit.c("muted"))
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cell.add_child(lbl)
+		_grid.add_child(cell)
 
 
 func _card_cell(cid: String) -> Control:
