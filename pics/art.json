@@ -4386,6 +4386,10 @@
     "c10_fuchun": {
       "src": "source/cg/c10_fuchun.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c6_xunyou": {
+      "src": "source/cg/c6_xunyou.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

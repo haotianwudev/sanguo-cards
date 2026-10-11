@@ -706,3 +706,4 @@
 | `cg:c10_zhoutai` | source/cg/c10_zhoutai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c10_wanglang` | source/cg/c10_wanglang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c10_fuchun` | source/cg/c10_fuchun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c6_xunyou` | source/cg/c6_xunyou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
