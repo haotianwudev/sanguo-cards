@@ -430,3 +430,5 @@ from history for this reason).
 埋伏：普通战斗（非首领、非精英）每局开章时按 `battle.ambush_chance`（0.5）随机抽一半成为埋伏，结果存 `save.ambushes`（随局保存、每局不同）；格子上写死的 `ambush: true` 仍然生效（如第二章「李儒伏兵」）。
 
 敌人强度系统（`cards.json` → `battle.scaling`，代码 `Quests.target_power` / `_scale_for` / `enemy_scale`）：强度 = 血量×攻击×行动数。**只有一个旋钮 `strength`**：第 N 章（`order` 里的序号，南北线同序）普通战斗的目标强度 = `strength × base × growth^N`，精英 = `tier.elite`（2）× 它，首领 = `tier.boss`（3）× 它；代码把本章每一档战斗强度的**中位数**拉到目标，每个敌人相对中位数的强弱仍随它自己的卡牌；章内再按格子列线性递增 `in_chapter`（第一列 ×start，最后一列 ×end，prologue 除外）。旧的「每通关一章 +10%」（`chapter_step`）已设为 0，由这条曲线取代；周目难度、险、词缀仍叠加在后面。`chapter` 是个别章节的手工微调（默认空）。吕布这类 `lose_goto` 的演出战不参与。`tests/test_quests.gd` 有防倒挂测试（按公式构造上不会倒挂）。**平衡模拟**：`SIM_RUNS=20 SIM_ROUTE=south|north godot --headless --path godot --script res://tests/sim_balance.gd`，用 bot 打完整一周目（真实流程、真实战斗、战功点化），按章按档输出胜率、剩余体力、回合数，拿来校准 `strength`。
+
+一周目通关率目标：约八成（bot 在 `SIM_GIVEUP=3` 即同一格连输 3 次算失败的口径下，一周目 3 章打完的比例）。当前 `base 0.44 / growth 2.0 / strength 1.0` 下 bot 约 78–80%（真人更高）；`strength` 0.3→96%、0.5→92%、0.7（等价 base 0.63）→79%。想一周目更易/更难，改 `strength`，用 `SIM_GIVEUP=3 SIM_LAPS=1 SIM_RUNS=30 godot --headless --path godot --script res://tests/sim_balance.gd` 复测。

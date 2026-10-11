@@ -11,6 +11,7 @@ var stats := {}  # "<order>|<quest>|<tier>" -> {n, wins, hp, wear, turns, limit}
 var stuck := {}
 var finished := 0
 var stuck_at := ""
+var giveup := int(OS.get_environment("SIM_GIVEUP")) if OS.get_environment("SIM_GIVEUP") != "" else 12  # losses in a row on one square before the run counts as not cleared
 var order: Array = []
 
 
@@ -142,14 +143,14 @@ func _fight(q: Dictionary, s: SaveData, rng: RandomNumberGenerator, fails_here: 
 	fails_here[here_id] = int(fails_here.get(here_id, 0)) + 1
 	if Quests.lose(q, s, rng):
 		return true  # a showpiece loss carries the story on
-	if int(fails_here[here_id]) > 12:
+	if int(fails_here[here_id]) > giveup:
 		stuck_at = q["id"] + ":" + here_id
 		return null
 	return false
 
 
 func _report(runs: int, route: String) -> void:
-	print("== sim_balance: %s route, %d runs, strength %s growth %s base %s, %d story ends reached" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["growth"]), str(GameData.get_db().battle["scaling"]["base"]), finished])
+	print("== sim_balance: %s route, %d runs, strength %s growth %s base %s, %d of %d runs cleared the lap" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["growth"]), str(GameData.get_db().battle["scaling"]["base"]), finished, runs])
 	var keys := stats.keys()
 	keys.sort()
 	for k in keys:
@@ -160,4 +161,4 @@ func _report(runs: int, route: String) -> void:
 			int(round(100.0 * st["wins"] / st["n"])), int(round(100.0 * st["hp"] / wins)), int(round(100.0 * st["wear"] / st["n"])),
 			st["turns"] / st["n"], st["limit"] / st["n"]])
 	if not stuck.is_empty():
-		print("runs given up (12 losses in a row on one square): " + str(stuck))
+		print("runs given up (%d losses in a row on one square): %s" % [giveup, str(stuck)])
