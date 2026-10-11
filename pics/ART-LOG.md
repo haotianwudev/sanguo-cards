@@ -508,3 +508,5 @@
 - [x] 2026-10-10 map `jiangdong` ← media_1791662188660_d057bb92.jpg · 强制：太小 1024×254（至少高 480）
 - [x] 2026-10-10 map `yuxi` ← Gemini_Generated_Image_w8l428w8l428w8l4.jpg · ok
 - [x] 2026-10-11 portrait `dufuren` ← media_1791717118937_b524841f.jpg · ok
+- [ ] 2026-10-11 portrait `lord` ← Three Kingdoms Warrior Overlooking the Harbor.png · ok
+- [ ] 2026-10-11 portrait `lord_south_armor` ← Gemini_Generated_Image_xeuguxeuguxeugux.jpg · ok

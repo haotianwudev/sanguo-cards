@@ -59,9 +59,9 @@
       "src": "source/generals/lord.jpg",
       "face": [
         0.52,
-        0.21
+        0.2
       ],
-      "head": 0.26,
+      "head": 0.22,
       "license": "用户提供（Gemini 生成）"
     },
     "lord_north": {
