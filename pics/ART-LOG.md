@@ -573,3 +573,8 @@
 - [x] 2026-10-11 cg `c9_bridge` ← c9_bridge_new.jpg · ok
 - [x] 2026-10-11 cg `c9_granary` ← c9_granary_new.jpg · ok
 - [x] 2026-10-11 cg `e_jd_yanchuan` ← e_jd_yanchuan_gpt.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-11 cg `c9_liuye` ← c9_liuye_new.jpg · ok
+- [x] 2026-10-11 cg `c9_lusu` ← c9_lusu_new.jpg · ok
+- [x] 2026-10-11 cg `c9_luxun` ← c9_luxun_new.jpg · ok
+- [x] 2026-10-11 cg `c10_yeyan` ← c10_yeyan_new.jpg · ok
+- [x] 2026-10-11 cg `c10_fuchun` ← c10_fuchun_new.jpg · ok
