@@ -531,3 +531,4 @@
 - [ ] 2026-10-11 cg `c3_raid` ← c3_raid_new.jpg · ok
 - [ ] 2026-10-11 cg `c3_entrust` ← c3_entrust_v2.jpg · ok
 - [ ] 2026-10-11 cg `c3_warn` ← c3_warn_v2.jpg · ok
+- [ ] 2026-10-11 cg `c3_feng` ← c3_feng_new.jpg · ok
