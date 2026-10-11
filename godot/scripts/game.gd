@@ -158,9 +158,10 @@ func demo(name: String) -> void:
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
 	if name == "lordcards":  # 整备 on the 主公 tab with three lord cards handed out
-		for c in ["sunce", "zhouyu", "wuguotai"]:
+		var few := OS.get_cmdline_user_args().has("--few")  # --few: only the lord, with the default card and one more
+		for c in ([] if few else ["sunce", "zhouyu", "wuguotai"]):
 			save.grant_card(c)
-		save.lord_forms = ["lord_south_armor", "lord_south_boat", "lord_south_plate"]
+		save.lord_forms = ["lord_default", "lord_south_armor"] if few else ["lord_south_armor", "lord_south_boat", "lord_south_plate"]
 		var lm := MapScreen.new()
 		show_screen(lm)
 		lm.call_deferred("_open_party")

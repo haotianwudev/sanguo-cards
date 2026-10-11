@@ -1029,6 +1029,15 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	check(fixed.lord_forms.is_empty(), "…and the collection stays empty")
 
 
+func test_the_default_lord_card_is_not_a_second_lord_in_the_party_screen() -> void:
+	var s := SaveData.create()
+	s.lord_forms = ["lord_default"]
+	check(s.route_lord_forms().is_empty(), "only the default card: nothing but the plain lord to show")
+	check_eq(s.lord_form(), "", "…and the plain lord is the one in use")
+	s.lord_forms = ["lord_default", "lord_south_armor"]
+	check_eq(s.route_lord_forms(), ["lord_south_armor"], "a real version joins the plain lord, the default does not count twice")
+
+
 func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:
 	var db := GameData.get_db()
 	var q: Dictionary = db.quests[0]
