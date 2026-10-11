@@ -270,12 +270,12 @@ func is_north() -> bool:
 
 
 func route_lord_forms() -> Array:
-	## the lord cards handed out so far that belong to this route (they all add up)
+	## the lord cards handed out so far that belong to this route, bar the default (= the plain lord) (they all add up)
 	var route := "north" if is_north() else "south"
 	var db := _db()
 	return lord_forms.filter(func(id):
 		var f: Dictionary = db.lord_forms.get(id, {})
-		return not f.is_empty() and (f["route"] == "" or f["route"] == route))
+		return id != db.lord_form_default and not f.is_empty() and (f["route"] == "" or f["route"] == route))  # the default card is the plain lord itself ("base" in 整备), not a second 主公
 
 
 func lord_form() -> String:
