@@ -6854,7 +6854,7 @@
     "dongzhuo": {
       "name": "董卓",
       "portrait": "dongzhuo",
-      "hp": 26000,
+      "hp": 24000,
       "at": 520,
       "actions": 3,
       "phys_resist": 0.15,
@@ -6868,7 +6868,7 @@
           "name": "飞熊护驾",
           "power": 0.8,
           "weight": 1,
-          "heal": 0.045
+          "heal": 0.02
         },
         {
           "name": "李儒毒计",
