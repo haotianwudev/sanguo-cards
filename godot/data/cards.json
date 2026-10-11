@@ -81,8 +81,8 @@
     "_scaling": "敌人强度公式（只调 strength 一个数）：强度 = 血×攻×行动数。第 N 章（order）普通战斗的目标强度 = strength × base × growth^N；精英 = tier.elite × 它，首领 = tier.boss × 它。代码把本章每一档战斗的中位数拉到目标，每个敌人相对中位数的强弱仍随它自己的卡牌；章内再按格子线性递增 in_chapter（第一列×start，最后一列×end，prologue 除外）。chapter = 个别章节的手工微调（默认空）。想整体变难/变易：只改 strength",
     "scaling": {
       "strength": 1.0,
-      "base": 0.9,
-      "growth": 1.5,
+      "base": 0.63,
+      "growth": 2.0,
       "tier": {"normal": 1.0, "elite": 2.0, "boss": 3.0},
       "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "jiangdong": 6},
       "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},

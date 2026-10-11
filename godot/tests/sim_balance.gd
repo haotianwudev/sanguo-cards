@@ -17,6 +17,10 @@ var order: Array = []
 func _init() -> void:
 	var runs := int(OS.get_environment("SIM_RUNS")) if OS.get_environment("SIM_RUNS") != "" else 10
 	var route := OS.get_environment("SIM_ROUTE") if OS.get_environment("SIM_ROUTE") != "" else "south"
+	if OS.get_environment("SIM_GROWTH") != "":
+		GameData.get_db().battle["scaling"]["growth"] = float(OS.get_environment("SIM_GROWTH"))
+	if OS.get_environment("SIM_BASE") != "":
+		GameData.get_db().battle["scaling"]["base"] = float(OS.get_environment("SIM_BASE"))
 	if OS.get_environment("SIM_STRENGTH") != "":
 		GameData.get_db().battle["scaling"]["strength"] = float(OS.get_environment("SIM_STRENGTH"))
 	for i in runs:
@@ -68,6 +72,8 @@ func _run(seed_value: int, route: String) -> void:
 					pick = open_idx[0] if route == "south" or sq["id"] != "era" else 1
 					if sq["id"] == "era":
 						pick = 0 if route == "south" else 1
+					elif sq["id"] == "fate" and open_idx.size() > 1:
+						pick = open_idx[1]  # keep 董白: the route that goes on to 长安
 				elif not s.offer.is_empty():
 					pick = 0
 				Quests.resolve(q, s, rng, pick)
@@ -143,7 +149,7 @@ func _fight(q: Dictionary, s: SaveData, rng: RandomNumberGenerator, fails_here: 
 
 
 func _report(runs: int, route: String) -> void:
-	print("== sim_balance: %s route, %d runs, strength %s, %d story ends reached" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), finished])
+	print("== sim_balance: %s route, %d runs, strength %s growth %s base %s, %d story ends reached" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["growth"]), str(GameData.get_db().battle["scaling"]["base"]), finished])
 	var keys := stats.keys()
 	keys.sort()
 	for k in keys:
