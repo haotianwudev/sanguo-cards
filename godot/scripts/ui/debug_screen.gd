@@ -306,36 +306,69 @@ func _cg_owners() -> Dictionary:
 	return out
 
 
-func _cg_group_label(g: String) -> String:
+func _parse_cg_group(g: String) -> Array:
+	if g == "c1": return ["第一章", "南线"]
+	if g == "jz": return ["第一章", "北线"]
 	if g.begins_with("q:"):
 		for q in GameData.get_db().quests:
 			if q["id"] == g.substr(2):
-				return "%s（%s）" % [q["title"], "北线" if q["event_scope"] == "north" else "南线"]
-	return _CG_GROUPS.get(g, g)
+				var title: String = q["title"]
+				var ch: String = title.split(" · ")[0] if " · " in title else title
+				var rt: String = "北线" if q.get("event_scope", "") == "north" else "南线"
+				return [ch, rt]
+	return ["其它", _CG_GROUPS.get(g, g)]
 
 
 func _cgs_panel() -> Control:
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	var row1 := HBoxContainer.new()
+	row1.add_theme_constant_override("separation", 6)
+	box.add_child(row1)
+	var row2 := HBoxContainer.new()
+	row2.add_theme_constant_override("separation", 6)
+	box.add_child(row2)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1224, 484)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	box.add_child(scroll)
+
 	var groups := _cg_keys()
-	var order: Array = []
-	for g in ["c1", "jz"]:  # the prologue is shared by both routes: its two halves lead
-		if groups.has(g):
-			order.append(g)
+	var cgs_by_chap := {}
+	var chap_order := []
+
+	var ordered_g := []
+	for g in ["c1", "jz"]:
+		if groups.has(g): ordered_g.append(g)
 	for q in GameData.get_db().quests:
-		if groups.has("q:" + q["id"]):
-			order.append("q:" + q["id"])
+		if groups.has("q:" + q["id"]): ordered_g.append("q:" + q["id"])
 	for g in _CG_GROUPS.keys():
-		if groups.has(g) and not order.has(g):
-			order.append(g)
-	for g in groups:  # a prefix nobody named yet still shows up, under its raw name
-		if not order.has(g):
-			order.append(g)
-	var tabs: Array = order.map(func(g): return [g, "%s（%d）" % [_cg_group_label(g), groups[g].size()]])
-	return _gallery(tabs, func(g: String) -> Control:
+		if groups.has(g) and not ordered_g.has(g): ordered_g.append(g)
+	for g in groups:
+		if not ordered_g.has(g): ordered_g.append(g)
+
+	for g in ordered_g:
+		var parsed: Array = _parse_cg_group(g)
+		var ch: String = parsed[0]
+		var rt: String = parsed[1]
+		if not cgs_by_chap.has(ch):
+			cgs_by_chap[ch] = {}
+			chap_order.append(ch)
+		if not cgs_by_chap[ch].has(rt):
+			cgs_by_chap[ch][rt] = []
+		cgs_by_chap[ch][rt].append_array(groups[g])
+
+	var buttons1: Array = []
+	var buttons2: Array = []
+
+	var build_grid = func(keys: Array) -> void:
+		for child in scroll.get_children():
+			child.queue_free()
 		var grid := GridContainer.new()
 		grid.columns = 5
 		grid.add_theme_constant_override("h_separation", 8)
 		grid.add_theme_constant_override("v_separation", 8)
-		for key in groups[g]:
+		for key in keys:
 			var col := VBoxContainer.new()
 			col.add_theme_constant_override("separation", 2)
 			var btn := TextureButton.new()
@@ -350,7 +383,49 @@ func _cgs_panel() -> Control:
 			lbl.custom_minimum_size = Vector2(228, 0)
 			col.add_child(lbl)
 			grid.add_child(col)
-		return grid)
+		scroll.add_child(grid)
+
+	var pick2 = func(rt: String, routes_dict: Dictionary, rt_list: Array) -> void:
+		for j in buttons2.size():
+			buttons2[j].add_theme_color_override("font_color", Kit.c("gold") if rt_list[j] == rt else Kit.c("text"))
+		build_grid.call(routes_dict[rt])
+
+	var pick1 = func(ch: String) -> void:
+		for j in buttons1.size():
+			buttons1[j].add_theme_color_override("font_color", Kit.c("gold") if chap_order[j] == ch else Kit.c("text"))
+		
+		for child in row2.get_children():
+			child.queue_free()
+		buttons2.clear()
+		
+		var routes_dict: Dictionary = cgs_by_chap[ch]
+		var rt_list: Array = routes_dict.keys()
+		
+		for rt in rt_list:
+			var count: int = routes_dict[rt].size()
+			var b := Kit.button("%s（%d）" % [rt, count], "blue", 15)
+			b.custom_minimum_size = Vector2(0, 38)
+			b.pressed.connect(pick2.bind(rt, routes_dict, rt_list))
+			row2.add_child(b)
+			buttons2.append(b)
+			
+		if not rt_list.is_empty():
+			pick2.call(rt_list[0], routes_dict, rt_list)
+
+	for ch in chap_order:
+		var count := 0
+		for rt in cgs_by_chap[ch]:
+			count += cgs_by_chap[ch][rt].size()
+		var b := Kit.button("%s（%d）" % [ch, count], "blue", 15)
+		b.custom_minimum_size = Vector2(0, 38)
+		b.pressed.connect(pick1.bind(ch))
+		row1.add_child(b)
+		buttons1.append(b)
+
+	if not chap_order.is_empty():
+		pick1.call(chap_order[0])
+
+	return box
 
 
 ## full-screen view over everything; tap anywhere to close (a fresh touch-down only — a card opens this on
