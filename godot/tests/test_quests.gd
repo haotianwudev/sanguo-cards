@@ -1296,3 +1296,39 @@ func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
 	strong = Quests._scale_for("normal", 1.0, 1.0, "yuxi")
 	cfg["strength"] = float(cfg["strength"]) / 2.0
 	check(absf(strong / weak - sqrt(2.0)) < 0.001, "strength x2 = power x2 (hp and attack x sqrt 2)")
+
+
+func test_mystery_events_are_dealt_up_front_and_resolved_by_chance() -> void:
+	var q: Dictionary = GameData.get_db().quests[4]
+	var s := SaveData.create()
+	Quests.begin(q, s, rng(11))
+	var ids: Array = q["squares"].values().filter(func(sq): return sq["type"] == "mystery" and sq["event"] == "")
+	check(not ids.is_empty(), "the chapter has ？ squares")
+	var met: Array = []
+	for sq in ids:
+		check(s.events.has(sq["id"]), "%s already holds its event when the run begins" % sq["id"])
+		met.append(s.events.get(sq["id"], ""))
+	var distinct := {}
+	for m in met:
+		distinct[m] = true
+	check(distinct.size() >= mini(met.size(), 8), "events are not repeated within a run")
+	var ev: Dictionary = GameData.get_db().events["bad_thief"]
+	var r := rng(3)
+	for _i in 30:
+		var i := Quests.random_option(s, ev, r)
+		check(Quests.option_blocked(s, ev["options"][i]) == "", "chance never picks an option that cannot be taken")
+	var seen := {}
+	s.relics = ["x"] if false else s.relics
+	for _i in 60:
+		seen[Quests.random_option(SaveData.create(), GameData.get_db().events["bad_stampede"], r)] = true
+	check(seen.size() == 2, "both outcomes can come up")
+
+
+func test_each_run_deals_different_events() -> void:
+	var q: Dictionary = GameData.get_db().quests[4]
+	var layouts := {}
+	for seed_value in 10:
+		var s := SaveData.create()
+		Quests.begin(q, s, rng(seed_value))
+		layouts[JSON.stringify(s.events)] = true
+	check(layouts.size() > 6, "the same chapter plays out with different events each run (%d of 10 differ)" % layouts.size())

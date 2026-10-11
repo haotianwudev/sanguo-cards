@@ -327,6 +327,8 @@ func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dict
 		var w: float = weights[i] if i < weights.size() else 1.0
 		hp += members[i]["hp"] * w
 		at += members[i]["at"] * w
+	hp *= float(battle.get("hp_mult", 1.0))  # global feel of the fights: more attack, less HP on both sides (battle.attack_mult / hp_mult)
+	at *= float(battle.get("attack_mult", 1.0))
 	return {"card": card, "members": members, "hp": int(round(hp)), "at": int(round(at))}
 
 

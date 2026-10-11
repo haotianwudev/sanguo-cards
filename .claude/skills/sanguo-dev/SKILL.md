@@ -434,3 +434,6 @@ from history for this reason).
 一周目通关率目标：约八成（bot 在 `SIM_GIVEUP=3` 即同一格连输 3 次算失败的口径下，一周目 3 章打完的比例）。当前 `base 0.44 / growth 2.0 / strength 1.0` 下 bot 约 78–80%（真人更高）；`strength` 0.3→96%、0.5→92%、0.7（等价 base 0.63）→79%。想一周目更易/更难，改 `strength`，用 `SIM_GIVEUP=3 SIM_LAPS=1 SIM_RUNS=30 godot --headless --path godot --script res://tests/sim_balance.gd` 复测。
 
 暴击：`cards.json` → `battle.crit`（player_chance 0.12 / player_mult 1.6 / enemy_chance 0.08 / enemy_mult 1.5），每一击单独掷骰；宝物可用 `mods.crit` / `mods.crit_mult` 加我方几率和倍数（还没有宝物用）。事件 `hit` / `enemy_hit` 带 `crit`，战斗界面显示金色「暴击」飘字。想更随机：加大几率或倍数。期望伤害：我方 +7%、敌方 +4%，模拟验证一周目通关率仍约 80%。
+
+测试与难度校准的完整流程（跑测试、截图、平衡模拟 `tests/sim_balance.gd`、`battle.scaling` 的唯一旋钮 `strength`）见 `.claude/skills/sanguo-test/SKILL.md`。
+？事件：开章时就给每个 ？ 格发好事件（地图上显示事件名，每局不同，`Quests._roll_events`），点「听天由命」后按 `weight` 从可触发的选项里随机一个执行（`battle.event_random`，`Quests.random_option`）；通用坏事件 14 个（`bad_*`，scope universal）。战斗手感 `battle.attack_mult` 1.25 / `hp_mult` 0.8（双方同时生效）。

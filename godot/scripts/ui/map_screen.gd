@@ -228,7 +228,8 @@ func _rebuild_map() -> void:
 		b.pivot_offset = Vector2(SQ, SQ) / 2
 		b.pressed.connect(_on_square.bind(s["id"]))
 		_layer.add_child(b)
-		var lbl := Kit.label(s["label"] if s["label"] != "" else _type_name(s), 16, "text")
+		var ev_known: Dictionary = _fixed_event(s) if s["type"] == "mystery" and s["label"] in ["", "？"] else {}
+		var lbl := Kit.label(ev_known.get("title", s["label"] if s["label"] != "" else _type_name(s)), 16, "text")
 		var pill := Kit.box(Kit.c("card").lerp(Color.TRANSPARENT, 0.15), 8, 0, Color.TRANSPARENT, 0)
 		pill.content_margin_left = 8
 		pill.content_margin_right = 8
@@ -290,8 +291,13 @@ func _icon_key(s: Dictionary) -> String:
 
 
 func _fixed_event(s: Dictionary) -> Dictionary:
-	## a ？ square holding a set event (险) shows that event's glyph and colour
-	return GameData.get_db().events[s["event"]] if s["event"] != "" else {}
+	## a ？ square holding a set event (险) — or an event dealt to it when the run began — shows that event's glyph and colour
+	var db := GameData.get_db()
+	if s["event"] != "":
+		return db.events[s["event"]]
+	if s["type"] == "mystery" and Game.save != null and Game.save.events.has(s["id"]) and db.events.has(Game.save.events[s["id"]]):
+		return db.events[Game.save.events[s["id"]]]
+	return {}
 
 
 func _type_name(s: Dictionary) -> String:
@@ -688,6 +694,12 @@ func _show_square(s: Dictionary) -> void:
 				open.pressed.connect(_open_offer.bind(s))
 				buttons.add_child(open)
 				Kit.focus(open)
+			elif GameData.get_db().battle.get("event_random", false):
+				text.text = body  # pure chance: no options to weigh, fate picks what happens
+				var fate := Kit.button("听天由命", "gold")
+				fate.pressed.connect(func(): _choose_event(Quests.random_option(Game.save, ev, Game.rng)))
+				buttons.add_child(fate)
+				Kit.focus(fate)
 			else:
 				text.text = body
 				var many: bool = ev["options"].size() > 3  # two columns so every option fits

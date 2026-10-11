@@ -164,8 +164,31 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.events = {}
 	save.event_battle = {}
 	save.event_note = []
+	if rng != null:
+		_roll_events(q, save, rng)  # which ？ event waits where is known from the start (the map names it); how it turns out is chance
 	reset_carry(save)
 	_auto_resolve(q, save)
+
+
+static func _roll_events(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> void:
+	## deal this run's ？ squares their events up front, none twice
+	var v: Dictionary = view(q, save)
+	var pool: Array = pools(v, save)["event_pool"]
+	var seen: Array = []
+	for s in v["squares"].values():
+		if s["event"] != "":
+			seen.append(s["event"])
+	var ids: Array = v["squares"].values().filter(func(s): return s["type"] == "mystery" and s["event"] == "")
+	ids.sort_custom(func(a, b): return a["x"] < b["x"] or (a["x"] == b["x"] and a["y"] < b["y"]))
+	for s in ids:
+		var fresh: Array = pool.filter(func(e): return not seen.has(e))
+		if fresh.is_empty():
+			fresh = pool
+		if fresh.is_empty():
+			return
+		var pick: String = fresh[rng.randi_range(0, fresh.size() - 1)]
+		save.events[s["id"]] = pick
+		seen.append(pick)
 
 
 static func reset_carry(save: SaveData) -> void:
@@ -562,6 +585,25 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 			fresh = ev_pool
 		save.events[s["id"]] = fresh[rng.randi_range(0, fresh.size() - 1)]
 	return GameData.get_db().events[save.events[s["id"]]]
+
+
+static func random_option(save: SaveData, ev: Dictionary, rng: RandomNumberGenerator) -> int:
+	## ？ events are pure chance (battle.event_random): fate picks one of the options that can be taken — each counts `weight` (default 1)
+	var total := 0.0
+	var open: Array = []
+	for i in ev["options"].size():
+		if option_blocked(save, ev["options"][i]) == "":
+			var w := float(ev["options"][i].get("weight", 1.0))
+			open.append([i, w])
+			total += w
+	if open.is_empty():
+		return 0
+	var r := rng.randf() * total
+	for o in open:
+		r -= float(o[1])
+		if r < 0.0:
+			return int(o[0])
+	return int(open[-1][0])
 
 
 static func option_locked(save: SaveData, o: Dictionary) -> bool:

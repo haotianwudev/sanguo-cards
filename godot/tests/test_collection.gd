@@ -73,7 +73,8 @@ func test_duplicate_soldiers_decay_but_new_types_count_fully() -> void:
 	mix.owned = ["zhangfei"]
 	mix.soldiers = {"spear_n": 1, "qingzhou": 1}
 	var spear: int = GameData.get_db().build_fighter("spear_n")["at"]
-	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * 1.6)))) <= 1, "second copy counts 60%")
+	var am := float(GameData.get_db().battle.get("attack_mult", 1.0))
+	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * 1.6 * am)))) <= 2, "second copy counts 60%")
 	check(mix.leader_for("zhangfei")["at"] > dup.leader_for("zhangfei")["at"], "a new soldier type beats a copy")
 
 
@@ -506,7 +507,8 @@ func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
 	var full := 0.0
 	for m in with["members"]:
 		full += m["at"]
-	check(absf(float(with["at"]) - (float(alone["at"]) + full * mult)) < 1.5, "each counts lord_member_mult of its strength: %d vs %d" % [with["at"], int(alone["at"] + full * mult)])
+	full *= float(db.battle.get("attack_mult", 1.0))
+	check(absf(float(with["at"]) - (float(alone["at"]) + full * mult)) < 2.5, "each counts lord_member_mult of its strength: %d vs %d" % [with["at"], int(alone["at"] + full * mult)])
 	check(s.validate_party(["qinwei"]) != "", "a retinue card can never lead a unit of its own")
 	for cid in ["yahuan", "xiuniang", "gongnv", "shinv", "qinwei"]:
 		check_eq(db.cards[cid]["troop"], "lord", cid + " serves the lord")
