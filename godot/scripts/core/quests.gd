@@ -439,7 +439,8 @@ static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNu
 	_auto_resolve(q, save)
 	# only in play (rng given, like the other rogue rolls): the route is known once the start square's birth choice is in
 	if rng != null and save.visited.size() == 2:
-		return grant_lord_form(q, save, rng, q["id"] == GameData.get_db().quests[0]["id"])
+		# a new 周目's first chapter gives the route's default card instead of a random one (the only card that step hands out)
+		return grant_lord_form(q, save, rng, save.lap > 1 and q["id"] == GameData.get_db().quests[0]["id"])
 	return ""
 
 

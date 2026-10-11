@@ -992,7 +992,7 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 
 func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
-	## the first chapter's first step gives the route's default card (the first of its grants), not a random one
+	## a new 周目's first chapter gives the route's default card (the first of its grants) instead of a random one; lap 1 is random like any chapter
 	var db := GameData.get_db()
 	var q: Dictionary = db.quests[0]
 	var rng := RandomNumberGenerator.new()
@@ -1003,9 +1003,17 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	s.choices["era"] = "jz_arrive"
 	s.resolved = true
 	var got := Quests.move(q, s, "jz_arrive", rng)
-	check_eq(got, "lord_north_silver", "the first step of the first chapter hands out the north default card")
-	check_eq(s.lord_forms, [got], "…and keeps it")
+	check(got != "" and db.lord_forms[got]["route"] == "north", "lap 1, first chapter: a north card: " + got)
+	check_eq(s.lord_forms, [got], "…one card only")
 	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
+	var lap2 := SaveData.create()
+	lap2.lap = 2
+	Quests.begin(q, lap2)
+	lap2.run_records.append("出生：冀州无极")
+	lap2.choices["era"] = "jz_arrive"
+	lap2.resolved = true
+	check_eq(Quests.move(q, lap2, "jz_arrive", rng), "lord_north_silver", "a new 周目's first chapter gives the default north card")
+	check_eq(lap2.lord_forms, ["lord_north_silver"], "…and that is the only card it gives")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
 	fixed.run_records.append("出生：冀州无极")
