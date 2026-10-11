@@ -990,6 +990,30 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	check(again.lord_forms.is_empty(), "a new lap starts without the lord cards")
 	check(s.new_lap(true).lord_forms.has("lord_north_silver"), "…unless the test option keeps the collection")
 
+func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
+	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
+	## the first chapter's first step gives the route's default card (the first of its grants), not a random one
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[0]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 3
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.run_records.append("出生：冀州无极")  # the birth choice is made on the start square (era), before the first step
+	s.choices["era"] = "jz_arrive"
+	s.resolved = true
+	var got := Quests.move(q, s, "jz_arrive", rng)
+	check_eq(got, "lord_north_silver", "the first step of the first chapter hands out the north default card")
+	check_eq(s.lord_forms, [got], "…and keeps it")
+	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
+	var fixed := SaveData.create()
+	Quests.begin(q, fixed)
+	fixed.run_records.append("出生：冀州无极")
+	fixed.choices["era"] = "jz_arrive"
+	fixed.resolved = true
+	check_eq(Quests.move(q, fixed, "jz_arrive"), "", "without an rng (tests) nothing is handed out")
+	check(fixed.lord_forms.is_empty(), "…and the collection stays empty")
+
 
 func test_the_lord_card_given_is_random_among_those_not_yet_had() -> void:
 	var db := GameData.get_db()
