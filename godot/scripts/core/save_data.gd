@@ -684,9 +684,9 @@ func grant_card(card_id: String, from_story := false) -> void:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):
 		owned.append(card_id)
-		var base := permanent_copies(card_id)  # had in an earlier 周目: it comes back at that level, one level (品阶) up for getting it again
+		var base := permanent_copies(card_id)  # had in an earlier 周目: it comes back at that level, plus the one copy for getting it again
 		if base > 0:
-			dupes[card_id] = next_tier_copies(base)
+			dupes[card_id] = base + 1  # one more copy on top of the kept level (点化 is the only +3)
 	else:
 		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":
