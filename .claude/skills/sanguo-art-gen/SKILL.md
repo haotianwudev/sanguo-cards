@@ -92,3 +92,31 @@ Guidelines and toolchains for generating and ingesting art into `sanguo-cards`.
      ```bash
      & "F:\workspace\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe" --headless --path "godot" --script res://tests/run_tests.gd
      ```
+
+---
+
+## 5. 重画已有图（主角换形象这类批量返工）的经验
+
+**流程：一张一张来，开图给用户看，点头再入库。**
+1. 生成到 scratchpad（`--out <scratchpad>/<key>_new.jpg`，**不要加 `--ingest`**），用 PowerShell `Start-Process "<path>"` 直接在用户屏幕上打开，再用 Read 自己看一遍。
+2. 汇报：换了什么、没变什么、还有什么小问题；让用户选「可以 / 再改哪里」。
+3. 用户说「可以」才 `python tools/art_ingest.py add <img> <key> --kind cg --force`（`--force` 因为已有旧图），然后 `git add` 这张图的三个文件（`godot/data/art/cg/<key>.jpg`、`pics/source/cg/<key>.jpg`、`pics/ART-LOG.md`）提交推送。只改美术不跑测试。紧接着 `git commit` 偶尔会遇到 `index.lock`，等 2 秒重试即可。
+4. 每批做完跑 `python tools/art_prompts.py` 和 `python tools/art_ingest.py flush` 刷新文档。
+
+**要重画的图先登记**：`tools/art_prompts.py` 的 `REDO = [(key, why, seen)]`（`seen` = 这个 key 在 `pics/ART-LOG.md` 里已有几条「`key` ←」入库记录，再多一条就自动算完成）。地图用 `MAP_REDO`。登记后 `ART-PROMPTS.md` 的「先重画」会列出，已交付的图也会出现在对应分节里。**描述改了，对应的提示词表（`CGS` / `CGS_ZH` / `HERO`）和 `CARD-DESIGN.md` 要一起改**，否则以后重出又变回旧样子。
+
+**参考图怎么给**（`--ref a b c ...`，提示词里按「参考图1/2/3」编号引用）：
+- 主角永远是**第 1 张**：`pics/source/generals/lord_south_armor.jpg`（全身、细节最多；南线形象以它为准）。
+- 要保留旧构图时，旧 CG 当一张参考图，并写明「构图沿用参考图N，只把主角换成参考图1」；其他有名字的人物各给一张立绘。
+- **旧图会把姿势、方向、道具一起带过来**：觉得旧图姿势/方向/构图本身不对（例如冲锋方向反了、跪姿别扭）时，**不要给旧图**，回到 `story.json` 里这一格的剧情原文，重写提示词，只给立绘做参考。
+- 想「只改姿势、其它完全不动」时，用**最早那版**当参考图，写「其余一切与参考图完全一致，只改 X」，比在已改过的版本上叠加稳定（叠加容易冒出头盔、多一个人）。
+
+**提示词写法**：
+- 主角外观每次都写全：黑色短发、不戴头盔、古铜鎏金札甲（金边勾勒、云纹浮雕胸甲与肩甲、鳞片甲裙）、朱红内衬战袍、纯黑无毛边披风、玉扣皮带；并写「不要绿色战袍、不要白毛领、不要虎皮」。
+- 人物每人只出现一次：重复出现（两个孙策、两个吕布）时写「每人只出现一次，不要重复人物」，其他武将要给出明显不同的脸、盔、甲色，必要时给他的立绘当参考图（如皇甫嵩）。
+- 姿势要写具体：跪坐 = 双膝并拢、臀坐脚后跟、背挺直、手按大腿；半跪 = 一膝着地、另一膝弯成直角、手搭膝上；并写「膝盖小腿结构正确，不要扭曲、不要多余的腿」。
+- 旗帜和文字：己方写什么旗（孙）、敌方写什么旗（刘/雷）要写明；其余「无文字无 UI」。
+- 冲锋/追击类：镜头在骑兵侧后方，所有马头朝向同一个目标，目标在画面深处。
+- 模型有时不听细节（古琴画成琵琶、人物姿势保留旧图）：看图时逐条核对提示词里的硬要求，没生效就如实告诉用户，让用户选「接受 / 再出一版」。
+
+**主角形象规格（南线）**：`lord.jpg`（海港背景半身，3:4）和 `lord_south_armor.jpg`（全身，参考用）；形态名「主公·铜甲」。孙坚的旧甲是古铜鎏金，不是银甲；虎皮披风是孙坚的，主角不穿。
