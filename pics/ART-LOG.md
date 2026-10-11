@@ -578,3 +578,4 @@
 - [x] 2026-10-11 cg `c9_luxun` ← c9_luxun_new.jpg · ok
 - [x] 2026-10-11 cg `c10_yeyan` ← c10_yeyan_new.jpg · ok
 - [x] 2026-10-11 cg `c10_fuchun` ← c10_fuchun_new.jpg · ok
+- [x] 2026-10-11 relic `jiujia` ← jiujia_new.png · ok

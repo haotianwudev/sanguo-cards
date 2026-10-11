@@ -5,54 +5,11 @@
 > 出好的图按 key 命名：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），战斗 CG 放 `pics/source/battles/`，
 > 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。
 
-## 下一批（交给 Gemini）
-
-按顺序画；交付后重跑本脚本，这一条会自动消失。
-
-**先重画**（已交付但有地方不对）：
-
-- `title` — 标题画面：主角换了新形象（古铜鎏金甲、朱红内衬、纯黑披风，肩扛大刀），参考 lord_south_armor
-- `jiujia` — 孙坚旧甲图标：改成古铜鎏金甲
-- `c10_wanglang` — 主角换了新铠甲（古铜鎏金甲、朱红内衬、纯黑披风，无白毛领、无虎皮）
-
-共 2 张，按优先级分档（全部由游戏数据算出，游戏里没用到的不列）：
-
-
-**第 3 档 · 主线剧情 CG（1）**
-
-1. `c10_wanglang` — 第七章 · 江东小霸王·辩经（剧情 CG）
-
-**第 5 档 · 宝物图标（1）**
-
-2. `jiujia` — 孙坚旧甲（宝物图标）（宝物）
-
-交图规则：
-
-- 每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。
-- 宝物：纯中式汉代古风器物，独立透明背景（纯白背景抠图，无圆盘边框，无西式奇幻符号），日系战术卡牌 RPG 赛璐珞道具插画风。
-- 女性角色一律画成成年人；董白不写年龄、不画成萝莉。
-- 卡牌立绘必须带背景：背景为符合人物身份与阵营的古风场景（军营、要塞、江岸、山林、宫室等，具自然景深与环境光影，不再使用纯白/摄影棚素底）。人物半身居中，面部在上方三分之一。
-- 文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。
-- 战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部。
-- 宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。
-- 立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。
-- **不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。
-- 提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。
-
 ## 立绘（竖版 3:4）
 
 ## 战斗 CG（横版 16:9，每场战斗一张）
 
 ## 剧情插图 CG（横版 16:9）
-
-### `c10_wanglang`
-
-```
-横版剧情事件插画：会稽太守府的大堂，王朗（五十多岁的经学大儒，峨冠博带，手捧竹书）站着滔滔不绝地讲学；孙策（少年将军）抱着枪站着睡着了；主角托着下巴一脸无奈；张昭（四十岁上下的端正文士，深色儒袍）站在门边微微颔首。
-构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
-（主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的古锭刀（巨大的宽刃厚背砍刀，刀身像一整块带锈斑的铁板，刀背平直、刀尖斜削上翘，没有刀鞘；短柄缠棕色皮绳，圆形金色回纹护手，柄尾圆金属头；整个画面只有这一把刀，不要背带背刀、不要另一把剑）。）
-```
 
 ## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）
 
@@ -62,26 +19,8 @@
 
 ## 界面大图（横版 16:9 JPG，放 `godot/data/art/ui/<key>.jpg`）
 
-### `title`
-
-```
-the title screen: a wide panoramic scene of the Three Kingdoms era at dawn — the Yangtze river in the foreground with a small boat, the young short-haired hero in bronze-gilt scale armor over a crimson robe with a plain black cloak and a huge broad-bladed sword on his shoulder (reference: pics/source/generals/lord_south_armor.jpg) standing on the bank looking north toward distant burning cities and banners; the sky split between warm sunrise and war smoke; leave the centre third of the frame calm and darker (the menu sits there)的横版主视觉插画。
-构图：横版 16:9，1920x1080；画面在菜单下方会被压暗显示。
-画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，史诗电影感光线，绘画感天空；不要文字、不要标志、不要 UI。
-（主角——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的古锭刀（巨大的宽刃厚背砍刀，刀身像一整块带锈斑的铁板，刀背平直、刀尖斜削上翘，没有刀鞘；短柄缠棕色皮绳，圆形金色回纹护手，柄尾圆金属头；整个画面只有这一把刀，不要背带背刀、不要另一把剑）。）
-```
-
 ## 宝箱图（开宝箱动画用，512×512 透明 PNG，放 `godot/data/art/ui/<key>.png`）
 
 ## 章节地图底图（横版宽图，放 `pics/source/map/bg_<key>.jpg`）
 
 ## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）
-
-### `jiujia`
-
-```
-杰作级 1:1 方形游戏道具图标：孙坚旧甲：一副保养得一丝不苟的汉代古铜色鎏金札甲，护肩与胸甲浮雕云纹、金边勾勒，肩甲带细密的鳞片纹路，下摆内衬露出一角朱红战袍，肩甲边缘有岁月的磨损与几处旧刀痕，旁边叠着一件纯黑色披风一角。
-构图：方形 256x256（按 1024x1024 绘制），道具单件独立展示，居中，带动感的斜角摆放。
-纯白底（#ffffff），干净抠图，无边框、无外框、无圆形奖章底、无符文、无西式奇幻元素。
-画风：纯正的中国三国古风器物质感，复古日系动漫 RPG 战术游戏道具插画，参考《兰斯10》画风，墨线干净利落，赛璐珞上色浓郁，金属高光细腻；不要文字。
-```
