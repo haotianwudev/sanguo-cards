@@ -83,6 +83,8 @@
       "strength": 1.0,
       "base": 0.44,
       "growth": 2.0,
+      "late_from": 3,
+      "late_growth": 1.0,
       "tier": {"normal": 1.0, "elite": 2.0, "boss": 3.0},
       "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "jiangdong": 6},
       "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},

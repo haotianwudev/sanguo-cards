@@ -22,6 +22,8 @@ func _init() -> void:
 	var route := OS.get_environment("SIM_ROUTE") if OS.get_environment("SIM_ROUTE") != "" else "south"
 	if OS.get_environment("SIM_GROWTH") != "":
 		GameData.get_db().battle["scaling"]["growth"] = float(OS.get_environment("SIM_GROWTH"))
+	if OS.get_environment("SIM_LATE") != "":
+		GameData.get_db().battle["scaling"]["late_growth"] = float(OS.get_environment("SIM_LATE"))
 	if OS.get_environment("SIM_BASE") != "":
 		GameData.get_db().battle["scaling"]["base"] = float(OS.get_environment("SIM_BASE"))
 	if OS.get_environment("SIM_STRENGTH") != "":

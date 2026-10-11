@@ -230,7 +230,9 @@ static func target_power(qid: String, tier: String) -> float:
 	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
 	if not cfg.get("order", {}).has(qid):
 		return 0.0
-	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(float(cfg["growth"]), float(cfg["order"][qid])) * float(cfg["tier"].get(tier, 1.0)) * float(cfg.get("chapter", {}).get(qid, 1.0))
+	var n := float(cfg["order"][qid])
+	var late := pow(float(cfg.get("late_growth", 1.0)), maxf(0.0, n - float(cfg.get("late_from", 99)) + 1.0))  # chapters from `late_from` on climb faster: the party outgrows the base curve
+	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(float(cfg["growth"]), n) * late * float(cfg["tier"].get(tier, 1.0)) * float(cfg.get("chapter", {}).get(qid, 1.0))
 
 
 static func _scale_for(tier: String, own: float, tier_median: float, qid: String, pos := 1.0) -> float:
