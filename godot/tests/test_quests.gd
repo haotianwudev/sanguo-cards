@@ -1381,3 +1381,27 @@ func test_after_four_chapters_the_lord_holds_four_cards_all_level_one() -> void:
 	for fid in s.lord_forms:
 		check_eq(s.form_copies_of(fid), 1, "%s is level 1 (铜)" % fid)
 		check_eq(s.form_tier(fid), 0, "…铜")
+
+
+func test_second_lap_chapter_one_levels_the_default_lord_card_to_two() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 9
+	var first := Quests.grant_lord_form(db.quests[0], s, rng, true)
+	check_eq(s.form_copies_of(first), 1, "lap 1: level 1")
+	s.lord_form_paid = ""
+	var second := Quests.grant_lord_form(db.quests[1], s, rng)
+	check_eq(s.form_copies_of(second), 1, "lap 1 chapter 2's card: level 1")
+	s.commit_history()
+	var n := s.new_lap()
+	var again := Quests.grant_lord_form(db.quests[0], n, rng, true)
+	check_eq(again, first)
+	check_eq(n.form_copies_of(again), 2, "lap 2 chapter 1: the card is handed out again — level 2")
+	n.lord_form_paid = ""
+	for _i in 12:  # the other card comes round again in lap 2 (the pool of cards not held yet runs out of the first-lap ones last)
+		n.lord_form_paid = ""
+		var got := Quests.grant_lord_form(db.quests[1], n, rng)
+		if got == second:
+			check_eq(n.form_copies_of(got), 2, "…and so does any other card of lap 1")
+			break
