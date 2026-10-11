@@ -533,3 +533,4 @@
 - [ ] 2026-10-11 cg `c3_warn` ← c3_warn_v2.jpg · ok
 - [ ] 2026-10-11 cg `c3_feng` ← c3_feng_new.jpg · ok
 - [ ] 2026-10-11 cg `c3_end` ← c3_end_new.jpg · ok
+- [ ] 2026-10-11 cg `c4_betroth` ← c4_betroth_new.jpg · ok
