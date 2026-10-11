@@ -585,3 +585,4 @@
 - [x] 2026-10-11 cg `c4_xizi` ← c4_xizi_v1.jpg · ok
 - [x] 2026-10-11 map `yuxi` ← yuxi_map_v2.jpg · ok
 - [x] 2026-10-11 cg `c5_death` ← c5_death_v1.jpg · ok
+- [x] 2026-10-11 cg `c6_xunyou` ← c6_xunyou_v1.jpg · ok

@@ -1183,7 +1183,7 @@ func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() 
 func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_lane_too() -> void:
 	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng", "wenji_tale", "plan", "xizi", "caiyong", "yuexia", "xian"],
 		"jingxiang": ["jx_diaochan", "jx_bubing", "jx_jinggao", "jx_xiangyang", "jx_mimou"],
-		"dongui": ["huiyin", "tuwei", "luan", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"]}
+		"dongui": ["route", "tuwei", "luan", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"]}
 	var db := GameData.get_db()
 	for q in db.quests:
 		for fid in forks.get(q["id"], []):

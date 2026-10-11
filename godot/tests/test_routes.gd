@@ -116,12 +116,12 @@ func test_lap2_route_b_runs_through_luoyang_and_changan_to_ending_two() -> void:
 	var d := quest_by_id("dongui")
 	check_eq(Quests.current_quest(s)["id"], "dongui", "then 第四章")
 	var p6 := walk(d, s, [])
-	for sid in ["yizu", "qingsun", "fenghou", "xunyou", "zhongyao", "jiashu", "huiyin", "chaohui", "gaoshun4", "tuwei", "langqi4", "pozi",
+	for sid in ["yizu", "qingsun", "fenghou", "jail", "xunyou", "route", "chaohui", "gaoshun4", "tuwei", "langqi4", "pozi",
 			"dongjia", "lvbu4", "tonggui"]:
 		check(p6.has(sid), "二周目 passes " + sid)
 	for sid in ["mimou", "luan", "gong", "huihe", "dongtao"]:
 		check(not p6.has(sid), "二周目 never reaches " + sid)
-	check(s.has_card("xunyou") and s.has_card("zhongyao") and s.has_card("xunyou") and s.has_card("xunyu"), "荀攸, 钟繇 and (via 荀攸's letter) 荀彧 all join")
+	check(s.has_card("xunyou") and not s.has_card("zhongyao") and not s.has_card("xunyu"), "荀攸 joins; 钟繇 and 荀彧 do not")
 	check(s.run_records.has(E2), "the run reaches 结局二")
 	finish(d, s)
 	check(s.flags.has(E2))
@@ -149,7 +149,7 @@ func test_lap3_chapter4_escapes_with_the_emperor_and_takes_nanyang() -> void:
 		var d := quest_by_id("dongui")
 		check_eq(Quests.current_quest(s)["id"], "dongui")
 		var p := walk(d, s, fork)
-		for sid in ["yizu", "fenghou", "xunyou", "zhongyao", "jiashu", "huiyin", "mimou", "luan", "gong", "shaoka", fork[0], "xuhuang", "lijue6",
+		for sid in ["yizu", "fenghou", "jail", "xunyou", "route", "mimou", "luan", "gong", "shaoka", fork[0], "xuhuang", "lijue6",
 				"huihe", "luoyang_rest", "fall", "seal", "paichi", "chuzheng", "qiao7", "huangzhong", "leibo7", "xingye", "chenlan7", "feng7",
 				"jiling7", "dongtao"]:
 			check(p.has(sid), "三周目 passes %s (fork %s)" % [sid, fork[0]])

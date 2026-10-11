@@ -330,7 +330,7 @@ instead of the 司徒府 pursuers / 樊稠; 张济 withdraws to 弘农 and the h
 with great respect — best room, first bowl of 红烧肉, clean wine — and 贾诩 shrugs 「……行吧」 and joins (「贾诩：入队」).
 第四章 · 挟天子 (quest `dongui`, one map; requires 「长安：吕布杀了董卓」): 王允 rules — the hero stops the 夷三族 of 董卓's house
 (the boy emperor backs him); asks 王允 to pardon the 西凉 army and bring 孙坚 into 长安 — refused; 论功: 吕布 温侯, 孙坚 吴侯,
-皇甫嵩 征西将军, and the emperor insists on the hero over 王允: **富春亭侯**; recruits 荀攸 (封侯后周瑜提起天牢里的荀攸) , 钟繇 (荀攸指路尚书台) and 荀彧 (荀攸夜里给叔父写「家书」，十天后荀彧以曹操使者身份到长安，留三个月入队；北线的荀彧始终在曹操那边) — 荀攸 (天牢: reads 王允 at once; his uncle 荀彧 is six years younger) and 钟繇 (尚书台: the emperor had him draw the escape route; 钟繇's map and 荀攸's calls run the escape, 荀攸 goes to 南阳, 钟繇 stays by the emperor);
+皇甫嵩 征西将军, and the emperor insists on the hero over 王允: **富春亭侯**; recruits 荀攸 (封侯后周瑜提起天牢里的荀攸 → 「天牢·狱卒」一战 → 天牢入队 CG c6_xunyou → 「路线图」: 荀攸替陛下画长安回洛阳的路；之后逃城指北岸、北掖门亮黄门腰牌、洛阳拟《奉迎天子还都表》；钟繇和荀彧不入队，钟繇的戏份全归荀攸) — 荀攸 (天牢: reads 王允 at once; his uncle 荀彧 is six years younger) and 钟繇 (尚书台: the emperor had him draw the escape route; 钟繇's map and 荀攸's calls run the escape, 荀攸 goes to 南阳, 钟繇 stays by the emperor);
 王允 plots with 吕布 to kill him. **First time through (no 「结局二 · 同归」 flag) nobody warns him** (貂蝉 is 吕布's now: she stands behind him at 封侯, no window-knock the night of 围府, rides behind him at 宣平门, and regrets it in 结局二's last lines — keep that thread): 吕布 and 高顺 surround
 蔡邕's house (蔡邕 arrested for sighing over 董卓), breakouts (高顺, 并州狼骑) with 孙策 and 周瑜 fighting alongside, 董白 brings
 what's left of the 董 household, 吕布 at 宣平门 (last stand, lose_goto); after it the hero holds the gap so 孙策 and 周瑜 can ride out → 结局二 · 同归 (the hero, 董白 and 蔡文姬 fall together,
