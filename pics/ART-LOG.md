@@ -568,7 +568,8 @@
 - [x] 2026-10-11 cg `c8_louchuan` ← c8_louchuan_new.jpg · ok
 - [x] 2026-10-11 cg `c8_henhai` ← c8_henhai_new.jpg · ok
 - [x] 2026-10-11 cg `c8_xiangxiao` ← c8_xiangxiao_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_yizu` ← c6_yizu_h2.jpg · ok
-- [ ] 2026-10-11 cg `c8_grapes` ← c8_grapes_ns.jpg · ok
-- [ ] 2026-10-11 cg `c9_bridge` ← c9_bridge_new.jpg · ok
-- [ ] 2026-10-11 cg `c9_granary` ← c9_granary_new.jpg · ok
+- [x] 2026-10-11 cg `c6_yizu` ← c6_yizu_h2.jpg · ok
+- [x] 2026-10-11 cg `c8_grapes` ← c8_grapes_ns.jpg · ok
+- [x] 2026-10-11 cg `c9_bridge` ← c9_bridge_new.jpg · ok
+- [x] 2026-10-11 cg `c9_granary` ← c9_granary_new.jpg · ok
+- [x] 2026-10-11 cg `e_jd_yanchuan` ← e_jd_yanchuan_gpt.jpg 裁 1536×1024→1536×864 · ok
