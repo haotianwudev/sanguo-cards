@@ -714,9 +714,12 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 	# same rule as every card: held now, or had in an earlier 周目 (only the level is kept) → getting it is one more copy for the lord (and a version never had before is one too)
 	var held := save.lord_forms.has(pick)
 	save.lord_form_fresh = not held
-	# every chapter's lord card gains one level (a copy of ITS OWN: the default card is the plain lord; a card had in an earlier 周目 comes back at the level it was cleared at, plus one)
+	# the usual rule, per card: a card never had starts at level 1 (铜); handed out again — held now, or had in an earlier 周目 (it comes back at
+	# the level it was cleared at) — it gains one. The default card is the plain lord (lord_copies, 1 from the start).
+	var had_before := held or save.cleared_forms.has(pick)
 	if pick == db.lord_form_default:
-		save.lord_copies += 1
+		if had_before:
+			save.lord_copies += 1
 	else:
 		save.form_copies[pick] = (int(save.form_copies.get(pick, 0)) if held else int(save.cleared_form_copies.get(pick, 0))) + 1
 	save.lord_form_dupe = true

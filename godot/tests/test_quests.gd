@@ -1349,12 +1349,12 @@ func test_every_chapter_levels_the_lord_card_it_hands_out_on_its_own() -> void:
 	s.lord_form_paid = ""
 	var first := Quests.grant_lord_form(db.quests[0], s, rng, true)  # chapter 1: the plain lord
 	check_eq(first, db.lord_form_default)
-	check_eq(s.lord_copies, 2, "the plain lord card +1")
+	check_eq(s.lord_copies, 1, "the plain lord card: a new card is level 1, not a level up")
 	s.lord_form_paid = ""
 	var second := Quests.grant_lord_form(db.quests[1], s, rng)
 	check(second != db.lord_form_default and second != "", "a new lord card")
 	check_eq(s.form_copies_of(second), 1, "a new card starts at level 1 (铜)")
-	check_eq(s.lord_copies, 2, "…and does not raise the plain lord")
+	check_eq(s.lord_copies, 1, "…and does not raise the plain lord")
 	var lord_a := s.lord_with_form(second)
 	var plain := s.lord_with_form("")
 	check(lord_a["hp"] > plain["hp"], "its bonus counts")
@@ -1367,3 +1367,17 @@ func test_every_chapter_levels_the_lord_card_it_hands_out_on_its_own() -> void:
 	var up := s.lord_with_form(second)
 	check(up["hp"] > lord_a["hp"], "the card's bonus grows with its own tier")
 
+
+
+func test_after_four_chapters_the_lord_holds_four_cards_all_level_one() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 21
+	for k in 4:
+		s.lord_form_paid = ""
+		Quests.grant_lord_form(db.quests[k], s, rng, k == 0)
+	check_eq(s.lord_forms.size(), 4, "four lord cards")
+	for fid in s.lord_forms:
+		check_eq(s.form_copies_of(fid), 1, "%s is level 1 (铜)" % fid)
+		check_eq(s.form_tier(fid), 0, "…铜")
