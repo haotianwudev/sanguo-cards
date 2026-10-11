@@ -1231,3 +1231,21 @@ func test_every_debug_chapter_jump_lands_on_a_real_square_of_its_chapter() -> vo
 			continue
 		check(q["squares"].has(s.square) and Quests.is_open(q["squares"][s.square], s), "%s: standing on an open square (%s)" % [jump["label"], s.square])
 		check(str(jump["label"]).begins_with(Quests.title(q, s).split(" · ")[0]), "%s: the chapter number matches (%s)" % [jump["label"], Quests.title(q, s)])
+
+
+func test_chapter_two_start_gives_only_the_one_not_picked_at_the_plan() -> void:
+	## 第一章 定计 already hands the picked one over (孙策 or 周瑜); 第二章's first square gives the other, not both again
+	var q: Dictionary = GameData.get_db().quests[1]  # 第二章 · 讨伐董卓
+	var s := SaveData.create()
+	s.flags = ["定计：孙策正面强攻"]
+	s.grant_card("sunce", true)  # what the choice gave
+	Quests.begin(q, s, rng(1))
+	Quests.resolve(q, s, rng(1))
+	check(s.has_card("zhouyu"), "周瑜 joins now")
+	check_eq(s.copies("sunce"), 1, "孙策 is not handed over a second time")
+	var s2 := SaveData.create()
+	s2.flags = ["定计：周瑜调虎离山"]
+	s2.grant_card("zhouyu", true)
+	Quests.begin(q, s2, rng(1))
+	Quests.resolve(q, s2, rng(1))
+	check(s2.has_card("sunce") and s2.copies("zhouyu") == 1, "the other way round")

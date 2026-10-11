@@ -369,6 +369,8 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 	match s["type"]:
 		"event":
 			for cid in s["cards"]:
+				if s["card_unless"].has(cid) and _flags_hold(s["card_unless"][cid], save, true):
+					continue  # already joined earlier through a choice (e.g. 定计 in 第一章)
 				gained.append(db.cards[cid])
 				save.grant_card(cid, true)
 			for rid in s["relics"]:

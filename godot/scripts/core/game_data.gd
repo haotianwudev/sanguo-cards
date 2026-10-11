@@ -144,7 +144,7 @@ func _load(dir: String) -> void:
 				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""),
 				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
 				"record_lose": s.get("record_lose", ""), "requires": s.get("requires", ""), "unless": s.get("unless", ""),
-				"cg": s.get("cg", ""), "prompt": s.get("prompt", ""), "ghost": s.get("ghost", false), "ghost_requires": s.get("ghost_requires", "")}
+				"cg": s.get("cg", ""), "prompt": s.get("prompt", ""), "card_unless": s.get("card_unless", {}), "ghost": s.get("ghost", false), "ghost_requires": s.get("ghost_requires", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "soldier_scope": q.get("soldier_scope", ""), "recruit_pool": q.get("recruit_pool", []),
 			"subtitle": q.get("subtitle", ""), "ending": _ending_card(q.get("ending", "")), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
