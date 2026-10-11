@@ -328,7 +328,7 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 		rates = db.gacha["rates"]
 	var result: Array = []
 	for _i in n:
-		var mine := fielded_generals().filter(func(c): return not result.has(c))
+		var mine := (fielded_generals() + ([db.cards["lord"]] if not maxed("lord") else [])).filter(func(c): return not result.has(c))  # the lord is always fielded
 		if not mine.is_empty() and rng.randf() < fielded_chance():  # often a general you field: the ones you use get to level up
 			result.append(mine[rng.randi_range(0, mine.size() - 1)])
 			continue
@@ -535,7 +535,25 @@ func take(card_id: String) -> Dictionary:
 	## Keep the one card picked from a recruit offer (a general: another copy if owned) or a chest (a soldier).
 	var card: Dictionary = _db().cards[card_id]
 	grant_card(card_id)
+	if card_id == "lord":  # drawing the lord also draws one of his cards had in an earlier 周目 (the level went up with the draw)
+		var form := _draw_lord_form()
+		if form != "":
+			return card.merged({"name": _db().lord_forms[form]["name"]}, true)
 	return card
+
+
+func _draw_lord_form() -> String:
+	## a random lord card this route remembers (cleared_forms) and does not hold now: now held ("" = none left)
+	var route := "north" if is_north() else "south"
+	var db := _db()
+	var pool: Array = cleared_forms.filter(func(f):
+		var info: Dictionary = db.lord_forms.get(f, {})
+		return not info.is_empty() and (info["route"] == "" or info["route"] == route) and not lord_forms.has(f))
+	if pool.is_empty():
+		return ""
+	var pick: String = pool[randi() % pool.size()]
+	lord_forms.append(pick)
+	return pick
 
 
 func commit_history() -> void:

@@ -15,10 +15,11 @@ func test_recruit_offers_unowned_generals_and_you_keep_one() -> void:
 	var ids := {}
 	for c in offer:
 		ids[c["id"]] = true
-		check(not c["soldier"] and c["in_pool"] and c["id"] != "guanyu", c["id"])
+		check(not c["soldier"] and (c["in_pool"] or c["id"] == "lord") and c["id"] != "guanyu", c["id"])  # the fielded lord can be offered too
 	check_eq(ids.size(), offer.size(), "no duplicates in an offer")
-	s.take(offer[1]["id"])
-	check_eq(s.owned, ["guanyu", offer[1]["id"]])
+	var generals: Array = offer.filter(func(c): return c["id"] != "lord")
+	s.take(generals[1]["id"])
+	check_eq(s.owned, ["guanyu", generals[1]["id"]])
 
 
 func _copies_for(tier_index: int) -> int:
@@ -240,6 +241,33 @@ func test_the_lord_card_can_be_drawn() -> void:
 	rng.seed = 5
 	for _i in 100:
 		check(not s.recruit_offer(rng).any(func(c): return c["id"] == "lord"))
+
+
+func test_the_fielded_lord_turns_up_in_offers_like_any_fielded_card() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var old: float = db.gacha["fielded_chance"]
+	var old_rate: float = db.gacha["lord_rate"]
+	db.gacha["fielded_chance"] = 1.0
+	db.gacha["lord_rate"] = 0.0
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 5
+	var seen := false
+	for _i in 20:
+		seen = seen or s.recruit_offer(rng).any(func(c): return c["id"] == "lord")
+	db.gacha["fielded_chance"] = old
+	db.gacha["lord_rate"] = old_rate
+	check(seen, "the lord is always fielded, so a fielded-card roll can offer him")
+
+
+func test_drawing_the_lord_brings_back_a_remembered_lord_card() -> void:
+	var s := SaveData.create()
+	s.cleared_forms = ["lord_south_armor", "lord_north_silver", "lord_default"]
+	var card := s.take("lord")
+	check_eq(s.lord_copies, 2, "the draw is one level up")
+	check_eq(s.lord_forms.size(), 1, "…and one remembered card of this route comes with it")
+	check(s.lord_forms[0] in ["lord_south_armor", "lord_default"], "…not the other route's")
+	check_eq(card["name"], GameData.get_db().lord_forms[s.lord_forms[0]]["name"], "the pick shows its name")
 
 
 func test_the_lord_starts_bronze_and_can_go_up() -> void:
