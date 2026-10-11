@@ -545,3 +545,8 @@
 - [ ] 2026-10-11 cg `c5_wedding` ← c5_wedding_new.jpg · ok
 - [ ] 2026-10-11 cg `c5_rescue` ← c5_rescue_new.jpg · ok
 - [ ] 2026-10-11 cg `c5_death` ← c5_death_new.jpg · ok
+- [ ] 2026-10-11 cg `c5_yuexia` ← c5_yuexia_new.jpg · ok
+- [ ] 2026-10-11 cg `c5_chuxi` ← c5_chuxi_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_escape` ← c6_escape_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_huihe` ← c6_huihe_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_seal` ← c6_seal_new.jpg · ok
