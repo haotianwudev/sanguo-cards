@@ -203,7 +203,7 @@ static func ramp(save: SaveData) -> float:
 	return chapters * float(db.battle.get("chapter_step", 0.0)) + (save.effective_level() - 1) * float(db.battle.get("ending_step", 0.0))
 
 
-static var _power_cache := {}  # quest id -> {normal: median power of its ordinary fights, elite: strongest elite's power after scaling}
+static var _power_cache := {}  # quest id -> {tier: median power of that tier's fights in the quest}
 
 
 static func _enemy_power(battle_id: String) -> float:
@@ -224,40 +224,37 @@ static func _position_scale(q: Dictionary, x: int) -> float:
 	return lerpf(float(cfg["start"]), float(cfg["end"]), clampf(float(x) / float(max_x), 0.0, 1.0))
 
 
-static func _scale_for(tier: String, own: float, normal_median: float, elite_max: float, qid: String, pos := 1.0) -> float:
-	## battle.scaling in cards.json: one coefficient per chapter (`chapter`, by quest id) × one per tier (`tier`), then a floor so that an
-	## elite is never weaker than `elite_floor` × the chapter's ordinary fights and a boss never weaker than `boss_floor` × them or
-	## `boss_over_elite` × its strongest elite (power = hp × at × actions, scaling both hp and at by s multiplies it by s²)
+static func target_power(qid: String, tier: String) -> float:
+	## battle.scaling — the one formula: a chapter's ordinary fights aim at `strength` × `base` × `growth`^(chapter order); an elite aims at
+	## tier.elite (2) × that, a boss at tier.boss (3) ×. `strength` is the only knob; 0 = no curve for this chapter
 	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
-	var ch := float(cfg.get("chapter", {}).get(qid, 1.0))
-	var s := ch * sqrt(float(cfg.get("tier", {}).get(tier, 1.0))) * pos  # tier = a strength (hp × at) multiplier: 精英 ×2, 首领 ×3
-	var target := 0.0
-	if tier == "elite":
-		target = normal_median * float(cfg.get("elite_floor", 0.0)) * ch * ch * pos * pos
-	elif tier == "boss":
-		target = maxf(normal_median * float(cfg.get("boss_floor", 0.0)) * ch * ch * pos * pos, elite_max * float(cfg.get("boss_over_elite", 0.0)))
-	if target > 0.0 and own * s * s < target:
-		s = sqrt(target / own)
-	return s
+	if not cfg.get("order", {}).has(qid):
+		return 0.0
+	return float(cfg["strength"]) * float(cfg["base"]) * pow(float(cfg["growth"]), float(cfg["order"][qid])) * float(cfg["tier"].get(tier, 1.0)) * float(cfg.get("chapter", {}).get(qid, 1.0))
+
+
+static func _scale_for(tier: String, own: float, tier_median: float, qid: String, pos := 1.0) -> float:
+	## the multiplier on an enemy's hp and attack (power goes with its square): the tier's median in this chapter is pulled to the target,
+	## every enemy keeps its own strength relative to that median (「随卡牌」); then the in-chapter position
+	var target := target_power(qid, tier)
+	if target <= 0.0 or tier_median <= 0.0:
+		return pos
+	return sqrt(target / tier_median) * pos
 
 
 static func _power_base(q: Dictionary) -> Dictionary:
 	var raw: Dictionary = q.get("_raw", q)
 	if _power_cache.has(raw["id"]):
 		return _power_cache[raw["id"]]
-	var normal: Array = []
+	var by_tier := {"normal": [], "elite": [], "boss": []}
 	for s in raw["squares"].values():
-		if s["type"] == "battle" and s["battle"] != "" and not s["boss"] and not s["elite"] and s["lose_goto"] == "":
-			normal.append(_enemy_power(s["battle"]))
-	normal.sort()
-	var med: float = normal[normal.size() / 2] if not normal.is_empty() else 0.0
-	var elite_max := 0.0
-	for s in raw["squares"].values():
-		if s["type"] == "battle" and s["battle"] != "" and s["elite"] and not s["boss"] and s["lose_goto"] == "":
-			var p := _enemy_power(s["battle"])
-			var k := _scale_for("elite", p, med, 0.0, raw["id"], _position_scale(raw, int(s["x"])))
-			elite_max = maxf(elite_max, p * k * k)
-	var out := {"normal": med, "elite": elite_max}
+		if s["type"] == "battle" and s["battle"] != "" and s["lose_goto"] == "":
+			by_tier["boss" if s["boss"] else ("elite" if s["elite"] else "normal")].append(_enemy_power(s["battle"]))
+	var out := {}
+	for tier in by_tier:
+		var v: Array = by_tier[tier]
+		v.sort()
+		out[tier] = v[v.size() / 2] if not v.is_empty() else 0.0
 	_power_cache[raw["id"]] = out
 	return out
 
@@ -278,10 +275,8 @@ static func enemy_scale(save: SaveData) -> float:
 			return 1.0
 		var tier := "boss" if sq["boss"] else ("elite" if sq["elite"] else "normal")
 		if sq["lose_goto"] != "":
-			tier = "normal"  # an unwinnable showpiece (吕布) is tuned by hand, only the chapter coefficient applies
-			return _scale_for(tier, _enemy_power(bid), 0.0, 0.0, q["id"])
-		var base := _power_base(q)
-		return _scale_for(tier, _enemy_power(bid), base["normal"], base["elite"], q["id"], _position_scale(q, int(sq["x"])))
+			return 1.0  # an unwinnable showpiece (吕布) is tuned by hand
+		return _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"])))
 	return 1.0
 
 

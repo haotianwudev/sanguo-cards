@@ -417,6 +417,7 @@ func test_elite_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
 	Quests.take_relic(s, s.offer[0])
 	check(s.relics.size() == 1 and s.offer.is_empty())
 	s.danger = 1
+	s.square = "oath"  # off a battle square the chapter curve does not move the fight
 	var calm := Battle.start("boar", s.party_leaders(), 1)
 	var risky := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, Quests.mods(s))
 	check(risky.enemy["max_hp"] > calm.enemy["max_hp"])
@@ -1268,40 +1269,30 @@ func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
 	check(s.ambushes != s2.ambushes, "a different run rolls different ones")
 
 
-func test_enemy_strength_never_inverts_by_the_scaling_config() -> void:
-	## battle.scaling: elites are never weaker than the chapter's ordinary fights, bosses never weaker than its elites,
-	## and each route's ordinary fights get stronger chapter by chapter (吕布's showpiece fights are tuned by hand and left out)
+func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
+	## battle.scaling: each chapter's ordinary / elite / boss fights are pulled to strength × base × growth^N × tier, so by construction
+	## no later chapter is easier, no elite is easier than the ordinary fights, no boss than the elites (吕布's showpieces are left alone)
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
-	var med := {}
+	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"]]
 	for q in db.quests:
 		var base: Dictionary = Quests._power_base(q)
-		var ch := float(cfg["chapter"].get(q["id"], 1.0))
-		med[q["id"]] = base["normal"] * ch * ch
-		var elite_top := 0.0
-		for s in q["squares"].values():
-			if s["type"] != "battle" or s["battle"] == "" or s["lose_goto"] != "":
+		for tier in ["normal", "elite", "boss"]:
+			if base[tier] <= 0.0:
 				continue
-			var p := Quests._enemy_power(s["battle"])
-			var tier := "boss" if s["boss"] else ("elite" if s["elite"] else "normal")
-			var pos := Quests._position_scale(q, int(s["x"]))
-			var k := Quests._scale_for(tier, p, base["normal"], base["elite"], q["id"], pos)
-			var eff := p * k * k
-			if tier == "elite":
-				if float(cfg["elite_floor"]) > 0.0:
-					check(eff >= base["normal"] * ch * ch * pos * pos * float(cfg["elite_floor"]) * 0.999, "%s/%s: an elite stays above the chapter's ordinary fights" % [q["id"], s["id"]])
-				elite_top = maxf(elite_top, eff)
-			elif tier == "boss" and float(cfg["boss_over_elite"]) > 0.0:
-				check(eff >= elite_top * 0.0 + base["elite"] * float(cfg["boss_over_elite"]) * 0.999, "%s/%s: a boss stays above the chapter's elites" % [q["id"], s["id"]])
-	for route in [["taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong"], ["luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"]]:
+			var k := Quests._scale_for(tier, base[tier], base[tier], q["id"])
+			check(absf(base[tier] * k * k - Quests.target_power(q["id"], tier)) < 0.001 * Quests.target_power(q["id"], tier), "%s %s median sits on the target" % [q["id"], tier])
+		if base["elite"] > 0.0:
+			check(Quests.target_power(q["id"], "elite") > Quests.target_power(q["id"], "normal"), "%s: elites above ordinary" % q["id"])
+		if base["boss"] > 0.0 and base["elite"] > 0.0:
+			check(Quests.target_power(q["id"], "boss") > Quests.target_power(q["id"], "elite"), "%s: bosses above elites" % q["id"])
+	for route in by_route:
 		for i in range(1, route.size()):
-			check(med[route[i]] > med[route[i - 1]], "%s is tougher than %s" % [route[i], route[i - 1]])
-
-
-func test_elites_are_twice_and_bosses_three_times_their_cards_strength() -> void:
-	var db := GameData.get_db()
-	var cfg: Dictionary = db.battle["scaling"]
-	var own := 4.0
-	for pair in [["normal", 1.0], ["elite", 2.0], ["boss", 3.0]]:
-		var k := Quests._scale_for(pair[0], own, 2.0, 5.0, "yuxi", 1.0)
-		check(absf(own * k * k - own * float(pair[1]) * float(cfg["chapter"].get("yuxi", 1.0)) * float(cfg["chapter"].get("yuxi", 1.0))) < 0.01 or float(cfg["elite_floor"]) > 0.0, "%s strength ×%s" % [pair[0], str(pair[1])])
+			for tier in ["normal", "elite", "boss"]:
+				check(Quests.target_power(route[i], tier) >= Quests.target_power(route[i - 1], tier), "%s %s is not easier than %s" % [route[i], tier, route[i - 1]])
+	var weak := Quests._scale_for("normal", 1.0, 1.0, "yuxi")
+	var strong := 0.0
+	cfg["strength"] = float(cfg["strength"]) * 2.0  # the one knob moves everything together
+	strong = Quests._scale_for("normal", 1.0, 1.0, "yuxi")
+	cfg["strength"] = float(cfg["strength"]) / 2.0
+	check(absf(strong / weak - sqrt(2.0)) < 0.001, "strength x2 = power x2 (hp and attack x sqrt 2)")
