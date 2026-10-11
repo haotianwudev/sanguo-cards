@@ -538,3 +538,4 @@
 - [ ] 2026-10-11 cg `c4_peace` ← c4_peace_new.jpg · ok
 - [ ] 2026-10-11 cg `c4_dongjia` ← c4_dongjia_new.jpg · ok
 - [ ] 2026-10-11 cg `c4_siege` ← c4_siege_new.jpg · ok
+- [ ] 2026-10-11 cg `c5_enter` ← c5_enter_new.jpg · ok
