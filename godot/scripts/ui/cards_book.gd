@@ -338,7 +338,7 @@ func _populate_lord_forms() -> void:
 		cell.add_theme_constant_override("separation", 5)
 		cell.alignment = BoxContainer.ALIGNMENT_CENTER
 		var card_view := CardView.make("lord", Vector2(160, 224), {"skills": false, "form": fid, "tier": save.permanent_tier("lord")})
-		card_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card_view.pressed.connect(_inspect_card.bind("lord", fid))
 		card_view.modulate = Color.WHITE if known else Color(0.3, 0.3, 0.3, 0.9)
 		cell.add_child(card_view)
 		var lbl := Kit.label("%s　%s" % [db.lord_forms[fid]["name"], "已记住" if known else "未获得"], 12)
@@ -393,7 +393,8 @@ func _card_cell(cid: String) -> Control:
 	return cell
 
 
-func _inspect_card(cid: String) -> void:
+func _inspect_card(cid: String, form := "") -> void:
+	## form != "": one of the lord's cards (cid is "lord")
 	var db := GameData.get_db()
 	var overlay := Control.new()
 	overlay.z_index = 85
@@ -419,7 +420,10 @@ func _inspect_card(cid: String) -> void:
 	modal.add_child(hbox)
 
 	var tier_val := save.permanent_tier(cid)
-	var big_card := CardView.make(cid, Vector2(280, 392), {"skills": false, "tier": tier_val})
+	var big_opts := {"skills": false, "tier": tier_val}
+	if form != "":
+		big_opts["form"] = form
+	var big_card := CardView.make(cid, Vector2(280, 392), big_opts)
 	big_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hbox.add_child(big_card)
 
@@ -435,6 +439,16 @@ func _inspect_card(cid: String) -> void:
 	var sc_name := _card_scope_label(cid)
 	var title_lbl := Kit.label("%s　[%s] %s · %s" % [c["name"], sc_name, troop.get("name", ""), c.get("rarity", "")], Kit.FONT_BIG, "gold")
 	right.add_child(title_lbl)
+	if form != "":
+		var f: Dictionary = db.lord_forms[form]
+		var route_name := "南线" if f["route"] == "south" else ("北线" if f["route"] == "north" else "通用")
+		title_lbl.text = "%s　[%s] %s" % [f["name"], route_name, "已记住" if save.cleared_forms.has(form) else "未获得"]
+		var bits: Array = []
+		if int(f["bonus"].get("hp", 0)) != 0:
+			bits.append("体力 +%d" % int(f["bonus"]["hp"]))
+		if int(f["bonus"].get("at", 0)) != 0:
+			bits.append("攻击 +%d" % int(f["bonus"]["at"]))
+		right.add_child(Kit.label("　".join(bits) + "（用着这张时加在主公身上；再次得到它，主公的品阶 +1）", 14, "muted"))
 
 	# Level progression panel
 	var prog_panel := PanelContainer.new()

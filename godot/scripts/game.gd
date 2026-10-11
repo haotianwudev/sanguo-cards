@@ -203,6 +203,8 @@ func demo(name: String) -> void:
 		cb.save = save
 		cb._cur_type = "lord"
 		root.add_child(cb)
+		if OS.get_cmdline_user_args().has("--inspect"):
+			cb.call_deferred("_inspect_card", "lord", "lord_north_silver")
 		return
 	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
 		show_screen(TitleScreen.new())
