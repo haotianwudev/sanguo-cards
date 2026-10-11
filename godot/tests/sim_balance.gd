@@ -115,9 +115,11 @@ func _fight(q: Dictionary, s: SaveData, rng: RandomNumberGenerator, fails_here: 
 		print("  [%s %s] party=%s hp=%d enemy=%s hp=%d at=%d relics=%s" % [q["id"], s.square, str(s.party), b.party_max, b.enemy["data"]["name"], b.enemy["max_hp"], int(b.enemy["at"]), str(s.active_relics())])
 	TC.bot_fight(b)
 	var key := "L%d %d|%s|%s" % [s.lap, order.find(q["id"]), q["id"], tier]
-	var st: Dictionary = stats.get(key, {"n": 0, "wins": 0, "hp": 0.0, "wear": 0.0, "turns": 0.0, "limit": 0.0})
+	var st: Dictionary = stats.get(key, {"n": 0, "wins": 0, "hp": 0.0, "wear": 0.0, "turns": 0.0, "limit": 0.0, "pmax": 0.0, "units": 0.0})
 	st["n"] += 1
 	st["wear"] += wear
+	st["pmax"] += b.party_max
+	st["units"] += b.leaders.size()
 	st["turns"] += b.round_no
 	st["limit"] += b.turn_limit
 	stats[key] = st
@@ -160,9 +162,9 @@ func _report(runs: int, route: String) -> void:
 		var st: Dictionary = stats[k]
 		var parts: PackedStringArray = k.split("|")
 		var wins := maxi(1, int(st["wins"]))
-		print("%s %-10s %-9s n=%-4d win=%3d%%  hp_left=%3d%%  wear_in=%3d%%  turns=%.1f/%.1f" % [parts[0], parts[1], parts[2], st["n"],
+		print("%s %-10s %-9s n=%-4d win=%3d%%  hp_left=%3d%%  wear_in=%3d%%  turns=%.1f/%.1f  party_hp=%d units=%.1f" % [parts[0], parts[1], parts[2], st["n"],
 			int(round(100.0 * st["wins"] / st["n"])), int(round(100.0 * st["hp"] / wins)), int(round(100.0 * st["wear"] / st["n"])),
-			st["turns"] / st["n"], st["limit"] / st["n"]])
+			st["turns"] / st["n"], st["limit"] / st["n"], int(st["pmax"] / st["n"]), st["units"] / st["n"]])
 	for lap in cleared_by_lap:
 		print("lap %d: %d of %d runs cleared it" % [lap, cleared_by_lap[lap], runs if lap == 1 else cleared_by_lap.get(lap - 1, 0)])
 	if not stuck.is_empty():
