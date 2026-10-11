@@ -1193,7 +1193,7 @@ func _complete() -> void:
 		var s := Game.save
 		have.text = "战功 %d" % s.merit
 		draw.disabled = s.merit < int(db.gacha["merit"]["draw"]) or s.pool_left() == 0
-		up.disabled = s.merit < int(db.gacha["merit"]["upgrade"]) or not s.owned.any(func(c): return not s.maxed(c))
+		up.disabled = s.merit < int(db.gacha["merit"]["upgrade"]) or s.upgradable().is_empty()
 	refresh_spend.call()
 	draw.pressed.connect(func():
 		if not Quests.spend_merit(Game.save, "draw"):
@@ -1204,10 +1204,8 @@ func _complete() -> void:
 	up.pressed.connect(func():
 		if not Quests.spend_merit(Game.save, "upgrade"):
 			return
-		var mine: Array = Game.save.owned.filter(func(c): return not Game.save.maxed(c))
-		mine.shuffle()
 		Game.persist()
-		_pick_then(mine.slice(0, 3), "用战功点化 —— 选一位武将加 %d 张" % Game.save.upgrade_copies(), "upgrade", refresh_spend))
+		_pick_then(Game.save.upgradable(), "用战功点化 —— 选一位武将加 %d 张" % Game.save.upgrade_copies(), "upgrade", refresh_spend))
 	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
 	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	go.custom_minimum_size = Vector2(320, 60)

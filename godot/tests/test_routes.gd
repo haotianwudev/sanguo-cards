@@ -108,7 +108,7 @@ func test_lap2_route_b_runs_through_luoyang_and_changan_to_ending_two() -> void:
 			"fengyi", "chuxi", "eve", "xueye", "wedding", "hall", "huzhen", "dongzhuo5", "kill_all", "death"]:
 		check(p3.has(sid), "长安 passes " + sid)
 	check(not p3.has("supply") and not p3.has("road_fight"), "the bandit road stays behind")
-	check(s.has_card("huangfusong"), "皇甫嵩 joins at 格杀勿论")
+	check(not s.has_card("huangfusong"), "皇甫嵩 arrives at 格杀勿论 but does not join")
 	finish(yuxi, s)
 	check(s.flags.has("路线：守洛阳") and s.flags.has("路线：长安"))
 	check(s.flags.has("长安：吕布杀了董卓"))

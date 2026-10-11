@@ -306,6 +306,17 @@ func lord() -> Dictionary:
 	return lord_with_form(lord_form())
 
 
+func upgradable() -> Array:
+	## 点化 can raise the lord and any general of yours that is not yet 金
+	var out: Array = []
+	if not maxed("lord"):
+		out.append("lord")
+	for c in owned:
+		if not maxed(c):
+			out.append(c)
+	return out
+
+
 func upgrade_copies() -> int:
 	return int(_db().gacha.get("upgrade_copies", 1))
 

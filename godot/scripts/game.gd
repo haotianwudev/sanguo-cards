@@ -408,6 +408,17 @@ func demo(name: String) -> void:
 			o.chest = "normal" if name == "chest" else "grand"
 			o.set_anchors_preset(Control.PRESET_FULL_RECT)
 			m.add_child(o)
+		"upgrade":  # 点化: every card of yours on offer, the row scrolls sideways
+			for c in ["sunce", "zhouyu", "huanggai", "taishici", "lvmeng", "ganning"]:
+				save.grant_card(c)
+			Quests.ensure_started(save, rng)
+			var m := MapScreen.new()
+			show_screen(m)
+			var o := PickOverlay.new()
+			o.title = "仙人点化 —— 选一位武将升级"
+			o.card_ids = save.upgradable()
+			o.set_anchors_preset(Control.PRESET_FULL_RECT)
+			m.add_child(o)
 		"fate", "affix":  # a run's start: pick a 天命 / an elite square with its 词缀
 			save.grant_card("sunce")
 			save.grant_card("zhouyu")

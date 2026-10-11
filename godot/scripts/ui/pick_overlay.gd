@@ -38,7 +38,15 @@ func _ready() -> void:
 	var row := HBoxContainer.new()
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
 	row.add_theme_constant_override("separation", 36)
-	col.add_child(row)
+	if card_ids.size() > 4:  # a long list (点化 offers every card of yours): scroll sideways
+		var sc := ScrollContainer.new()
+		sc.custom_minimum_size = Vector2(1240, 470)
+		sc.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		sc.add_child(row)
+		col.add_child(sc)
+	else:
+		col.add_child(row)
 	for i in card_ids.size():
 		var cell := VBoxContainer.new()
 		cell.add_theme_constant_override("separation", 10)
