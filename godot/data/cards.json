@@ -294,7 +294,7 @@
       "troop": "lord",
       "icon": "甲",
       "rarity": "story",
-      "desc": "文台年轻时的银甲，吴夫人亲手给你系上的。受到的伤害 -10%，体力 +5%",
+      "desc": "文台年轻时的铜甲，吴夫人亲手给你系上的。受到的伤害 -10%，体力 +5%",
       "mods": {
         "guard": 0.1,
         "hp": 0.05
@@ -870,7 +870,7 @@
         "art": true
       },
       "lord_south_armor": {
-        "name": "主公·虎甲",
+        "name": "主公·铜甲",
         "route": "south",
         "bonus": {
           "hp": 102,

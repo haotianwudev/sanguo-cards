@@ -87,7 +87,7 @@ def card_section() -> str:
     n, pool, story_only, art_n = n + ln, pool + 2, story_only + len(forms), art_n + l_art
     r = {x: r[x] + lr[x] for x in r}
     out.append(f"| **全部** | **{n}** | {pool} / {story_only} | {r['南']} / {r['北']} / {r['通用']} | {art_n}/{n} |")
-    out += ["", f"主公卡：初始那张南北各一张（南线 `lord` 寸头旧银甲、扔刀；北线 `lord_north` 束发鱼鳞甲、夺命枪），都在卡池里——招贤 / 抽卡时以 `gacha.lord_rate`"
+    out += ["", f"主公卡：初始那张南北各一张（南线 `lord` 寸头旧铜甲、扔刀；北线 `lord_north` 束发鱼鳞甲、夺命枪），都在卡池里——招贤 / 抽卡时以 `gacha.lord_rate`"
             f"（{float(cards['gacha'].get('lord_rate', 0)):.0%}）出现，抽到升铜 / 银 / 金；通关形态不进卡池，每通关一章发一张，按 `lord_forms.forms` 的 `route` 分南北。"
             "立绘只算 `art: true` 且图已交付的。",
             "", "### 按兵种", "",
