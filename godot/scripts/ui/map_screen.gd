@@ -480,12 +480,18 @@ func _on_square(sid: String) -> void:
 	var given := Quests.move(q, Game.save, sid, Game.rng)
 	Game.persist()
 	_busy = false
+	_pending_forms = given  # a chapter's first step hands out its lord cards: shown after the square's CG and story (_show_buttons), or now if it has none
 	_refresh()
-	if not given.is_empty():  # a chapter's first step hands out its lord cards: after the square's CG and story, or now if it has none
-		if (target.get("text", []) as Array).is_empty():
-			_show_lord_reveals(given)
-		else:
-			_pending_forms = given
+	if (target.get("text", []) as Array).is_empty():
+		_flush_lord_reveals()
+
+
+func _flush_lord_reveals() -> void:
+	if _pending_forms.is_empty():
+		return
+	var shown := _pending_forms
+	_pending_forms = []
+	_show_lord_reveals(shown)
 
 
 func _show_lord_reveals(list: Array) -> void:
@@ -719,6 +725,8 @@ func _show_square(s: Dictionary) -> void:
 func _show_buttons(box: Control, on: bool) -> void:
 	## transparent, not hidden: the options keep their room, so the text box never resizes or re-wraps when they appear
 	box.modulate.a = 1.0 if on else 0.0
+	if on and box == _dlg_buttons and not _pending_forms.is_empty():  # the square's story is through (read or skipped): now the lord cards
+		_flush_lord_reveals.call_deferred()
 	for b in box.find_children("*", "BaseButton", true, false):
 		if not b.has_meta("fm"):
 			b.set_meta("fm", b.focus_mode)
@@ -730,10 +738,6 @@ func _dialog_show() -> void:
 	var last := _dlg_i >= _dlg_lines.size() - 1
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
-	if last and not _pending_forms.is_empty():  # the first square's story is through: now the chapter's lord cards
-		var shown := _pending_forms
-		_pending_forms = []
-		_show_lord_reveals(shown)
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
 		if key == "lord":  # the north route (and any lord card in play) has its own face

@@ -193,6 +193,20 @@ func demo(name: String) -> void:
 		book._flags = save.flags
 		root.add_child(book)
 		return
+	if name == "firststep":  # chapter one, birth chosen: --demo=firststep steps onto the first square (its story, then the lord card moment; --skip skips the story)
+		var q1: Dictionary = GameData.get_db().quests[0]
+		Quests.begin(q1, save, rng)
+		save.run_records.append("出生：江东富春")
+		save.choices["era"] = "wake"
+		save.resolved = true
+		var fm := MapScreen.new()
+		show_screen(fm)
+		fm.call_deferred("_on_square", "wake")
+		if OS.get_cmdline_user_args().has("--skip"):
+			(func():
+				await get_tree().create_timer(1.5).timeout
+				fm._dialog_skip()).call_deferred()
+		return
 	if name == "cardsbook":  # the 卡牌收藏 after an ending, on the 主角卡 tab: --demo=cardsbook [--north]
 		save.grant_card("sunce")
 		save.lord_forms = ["lord_south_armor", "lord_north_silver"]
