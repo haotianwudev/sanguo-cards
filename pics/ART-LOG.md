@@ -513,3 +513,4 @@
 - [ ] 2026-10-11 cg `c1_armor` ← c1_armor_new.jpg · ok
 - [ ] 2026-10-11 cg `c10_shenting` ← c10_shenting_new.jpg · ok
 - [ ] 2026-10-11 cg `c10_pifu` ← c10_pifu_new.jpg · ok
+- [ ] 2026-10-11 cg `c10_shenting` ← c10_shenting_v4.jpg · ok
