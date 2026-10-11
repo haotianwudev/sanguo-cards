@@ -260,7 +260,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   are two separate files (they're separate *quests* so that was free; `prologue`'s two routes are one quest, hence this field).
 - **Event** (`story.json` events, for ？ squares; a square with `event` is fixed): `title, glyph, color, text,
   portraits, options [{label, effects, win}]` — effects `say, damage, heal, rest, poison (−⅓ HP), card, soldier,
-  offer {from | generals + rates | soldiers}, upgrade (true = pick, "random"), refresh, relic, danger (险, run),
+  offer {from | generals + rates | soldiers}, upgrade (true = pick one of `gacha.upgrade_offer` (3) random upgradable cards, the lord just one of them, no fixed option — the recap's 战功点化 does the same via `SaveData.upgrade_offer`; "random" = no pick), refresh, relic, danger (险, run),
   difficulty (whole campaign), drop_relic, lose_soldier (trades: give something up), battle + ambush, chance {then, else}`. Text uses `{lord}` for the player's name.
 
 - **Chapter recap**: finishing a chapter shows `Quests.recap(save)` — battles won, cards gained (collection diff since the

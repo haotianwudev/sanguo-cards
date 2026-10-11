@@ -346,6 +346,16 @@ func upgradable() -> Array:
 	return out
 
 
+func upgrade_offer(rng: RandomNumberGenerator) -> Array:
+	## 点化 shows gacha.upgrade_offer random cards from upgradable() (the lord is just one of them), pick one
+	var pool: Array = upgradable()
+	var n: int = int(_db().gacha.get("upgrade_offer", 3))
+	var out: Array = []
+	while out.size() < n and not pool.is_empty():
+		out.append(pool.pop_at(rng.randi_range(0, pool.size() - 1)))
+	return out
+
+
 func upgrade_copies() -> int:
 	return int(_db().gacha.get("upgrade_copies", 1))
 

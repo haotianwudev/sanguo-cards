@@ -62,6 +62,8 @@
     ],
     "_upgrade_copies": "点化（战功或事件）一次给这张卡加几张：3 张＝铜（1 张）一次到银（4 张）",
     "upgrade_copies": 3,
+    "_upgrade_offer": "点化（战功或事件）每次随机摆出几张可点化的牌（含主角，没有常驻选项），只能三选一",
+    "upgrade_offer": 3,
     "_merit": "战功: earned at the end of each chapter (per battle won, extra per boss/elite beaten), kept across chapters, spent in the recap",
     "merit": {
       "per_battle": 1,

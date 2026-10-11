@@ -183,8 +183,9 @@ func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
 	s.carry_extra = {"sunce": {"xiaobawang": 2}}
 	var labels: Array = GameData.get_db().events["zuoci"]["options"].map(func(o): return o["label"])
 	Quests.choose_event(q, s, rng(0), labels.find("求点化"))
-	check_eq(s.offer, ["lord", "sunce"])  # 点化 offers the lord and every general of yours
-	Quests.resolve(q, s, rng(0), 1)
+	check_eq(s.offer.size(), 2)  # 点化 offers up to gacha.upgrade_offer random cards: here the lord and 孙策, in either order
+	check(s.offer.has("lord") and s.offer.has("sunce"), "the lord and 孙策 are both offered")
+	Quests.resolve(q, s, rng(0), s.offer.find("sunce"))
 	check(s.copies("sunce") == 1 + s.upgrade_copies() and s.tier("sunce") == 1 and s.resolved and s.offer_kind == "", "点化: +3 copies, 铜 → 银")
 	var s2 := SaveData.create()
 	Quests.begin(q, s2)

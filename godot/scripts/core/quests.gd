@@ -851,8 +851,8 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
 				save.upgrade(cid)
 				out["log"].append("%s 升为%s卡！" % [db.cards[cid]["name"], db.gacha["tiers"][save.tier(cid)]["name"]])
-		elif e.has("upgrade"):  # pick any one of your cards (the lord too, not yet 金) to go up a tier
-			var ids: Array = save.upgradable()
+		elif e.has("upgrade"):  # pick one of a few random cards of yours (the lord too, not yet 金) to go up a tier
+			var ids: Array = save.upgrade_offer(rng)
 			save.offer = ids
 			save.offer_kind = "upgrade"
 			if ids.is_empty():

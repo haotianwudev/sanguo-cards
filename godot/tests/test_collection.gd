@@ -168,6 +168,23 @@ func test_upgrade_adds_the_configured_number_of_copies() -> void:
 	s2.upgrade("lvmeng", 9999)
 	check_eq(s2.copies("lvmeng"), _copies_for(GameData.get_db().gacha["tiers"].size() - 1), "never past the top tier")
 
+func test_upgrade_offer_is_a_random_few_of_the_upgradable_cards() -> void:
+	var s := SaveData.create()
+	for c in ["lvmeng", "sunce", "zhouyu", "huanggai", "taishici"]:
+		s.take(c)
+	var r := RandomNumberGenerator.new()
+	var n: int = int(GameData.get_db().gacha["upgrade_offer"])
+	var seen := {}
+	for seed_value in 30:
+		r.seed = seed_value
+		var offer := s.upgrade_offer(r)
+		check_eq(offer.size(), n, "点化 offers gacha.upgrade_offer cards")
+		check(offer.all(func(c): return s.upgradable().has(c)), "only upgradable cards are offered")
+		seen[offer.hash()] = true
+	check(seen.size() > 1, "the offer differs from run to run")
+	var s2 := SaveData.create()
+	check_eq(s2.upgrade_offer(r).size(), 1, "with only the lord to raise, the offer is just the lord")
+
 func test_dupes_survive_a_save_roundtrip() -> void:
 	var s := SaveData.create()
 	for _i in _copies_for(1):

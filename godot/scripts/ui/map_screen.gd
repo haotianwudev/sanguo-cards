@@ -1225,7 +1225,7 @@ func _complete() -> void:
 		if not Quests.spend_merit(Game.save, "upgrade"):
 			return
 		Game.persist()
-		_pick_then(Game.save.upgradable(), "用战功点化 —— 选一位武将加 %d 张" % Game.save.upgrade_copies(), "upgrade", refresh_spend))
+		_pick_then(Game.save.upgrade_offer(Game.rng), "用战功点化 —— 选一位武将加 %d 张" % Game.save.upgrade_copies(), "upgrade", refresh_spend))
 	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
 	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	go.custom_minimum_size = Vector2(320, 60)
