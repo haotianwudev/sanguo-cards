@@ -141,6 +141,7 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.fate = ""
 	save.fate_offer = []
 	save.affixes = {}
+	save.ambushes = {}
 	if rng != null:
 		var db := GameData.get_db()
 		var fs: Array = db.fates.keys()
@@ -152,6 +153,12 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 			for sid in laid:
 				if laid[sid]["boss"] or laid[sid]["elite"]:
 					save.affixes[sid] = afx[rng.randi_range(0, afx.size() - 1)]
+		var chance := float(db.battle.get("ambush_chance", 0.5))  # ordinary fights: about half are an 埋伏, different every run
+		var laid2: Dictionary = view(q, save)["squares"]
+		for sid in laid2:
+			var sq: Dictionary = laid2[sid]
+			if sq["type"] == "battle" and not sq["boss"] and not sq["elite"] and rng.randf() < chance:
+				save.ambushes[sid] = true
 	save.resolved = false
 	save.offer = []
 	save.events = {}
@@ -526,7 +533,7 @@ static func battle_here(q: Dictionary, save: SaveData) -> Dictionary:
 	if s["type"] == "mystery":
 		return {"battle": save.event_battle.get("battle", ""), "boss": false,
 			"ambush": save.event_battle.get("ambush", false)}
-	return {"battle": s["battle"], "boss": s["boss"] or s["elite"], "ambush": s["ambush"]}
+	return {"battle": s["battle"], "boss": s["boss"] or s["elite"], "ambush": s["ambush"] or save.ambushes.has(s["id"])}
 
 
 static func record(save: SaveData, line: String) -> void:

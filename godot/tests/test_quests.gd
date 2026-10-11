@@ -1249,3 +1249,20 @@ func test_chapter_two_start_gives_only_the_one_not_picked_at_the_plan() -> void:
 	Quests.begin(q, s2, rng(1))
 	Quests.resolve(q, s2, rng(1))
 	check(s2.has_card("sunce") and s2.copies("zhouyu") == 1, "the other way round")
+
+
+func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
+	var q: Dictionary = GameData.get_db().quests[4]  # 第三章 · 传国玉玺: lots of ordinary fights
+	var s := SaveData.create()
+	Quests.begin(q, s, rng(5))
+	var normal := 0
+	for sid in q["squares"]:
+		var sq: Dictionary = q["squares"][sid]
+		if sq["type"] == "battle" and not sq["boss"] and not sq["elite"]:
+			normal += 1
+		else:
+			check(not s.ambushes.has(sid), "%s is not an ordinary fight, never rolled" % sid)
+	check(s.ambushes.size() > normal / 4 and s.ambushes.size() < normal * 3 / 4, "about half of %d ordinary fights: %d" % [normal, s.ambushes.size()])
+	var s2 := SaveData.create()
+	Quests.begin(q, s2, rng(6))
+	check(s.ambushes != s2.ambushes, "a different run rolls different ones")
