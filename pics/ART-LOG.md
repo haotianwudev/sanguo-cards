@@ -520,3 +520,4 @@
 - [x] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_new.jpg · ok
 - [x] 2026-10-11 cg `c5_garden` ← c5_garden_new.jpg · ok
 - [x] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_v6.jpg · ok
+- [ ] 2026-10-11 cg `c1_north` ← c1_north_new.jpg · ok
