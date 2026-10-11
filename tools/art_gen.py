@@ -122,7 +122,7 @@ def generate_image_atlas(
         if ref_urls:
             payload["image_urls"] = ref_urls
     elif is_nano:
-        payload["aspect_ratio"] = "16:9"
+        payload["aspect_ratio"] = size if ":" in size else "16:9"  # --size 4:1 for an ultra-wide chapter map
         payload["resolution"] = "1k" if "lite" in model else "2k"
         if ref_urls:
             payload["images"] = ref_urls
