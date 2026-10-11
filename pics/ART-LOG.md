@@ -523,3 +523,4 @@
 - [ ] 2026-10-11 cg `c1_north` ← c1_north_new.jpg · ok
 - [ ] 2026-10-11 cg `c2_capture` ← c2_capture_v4.jpg · ok
 - [ ] 2026-10-11 cg `c2_counter` ← c2_counter_v2.jpg · ok
+- [ ] 2026-10-11 cg `c2_dongbai_join` ← c2_dongbai_join_v3.jpg · ok
