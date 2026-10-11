@@ -293,7 +293,7 @@ func test_a_new_lap_keeps_the_collection_and_raises_it() -> void:
 	var n := s.new_lap()
 	check_eq(n.lap, 2)
 	check(n.owned.is_empty() and n.soldiers.is_empty() and n.party.is_empty() and n.merit == 0, "a new lap starts with nothing: no cards, no 战功")
-	check(n.lord_name == "阿明" and n.seen.has("sunce") and n.seen.has("danyang"), "the name and the history of what you had are kept")
+	check(n.lord_name == "阿明" and n.seen.has("sunce") and not n.seen.has("danyang"), "the name and the history of the generals you had are kept — soldiers are not special")
 	check_eq(n.lord_copies, _copies_for(1) + 1, "the lord's level is kept: 银 + 1")
 	check_eq(n.tier("lord"), 1, "…still 银")
 	n.grant_card("lord")

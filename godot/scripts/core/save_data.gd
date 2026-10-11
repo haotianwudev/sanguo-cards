@@ -455,7 +455,7 @@ func chest_pools(chapter := "", only: Array = []) -> Dictionary:
 	## (a card's `scope`: south / north / "" = both):
 	##   public  — cards no chapter hands out (the pool shared by every chapter)
 	##   chapter — soldiers specific to this chapter (plus an explicit `only` list)
-	##   history — cards you have had before, in any 周目 (a new 周目 starts with nothing but may meet them again)
+	##   history — generals you have had before, in any 周目 (a new 周目 starts with nothing but may meet them again); soldiers are not remembered here
 	var db := _db()
 	var r := route()
 	var out := {"public": {"soldier": [], "general": []}, "chapter": {"soldier": [], "general": []}, "history": {"soldier": [], "general": []}}
@@ -476,8 +476,8 @@ func chest_pools(chapter := "", only: Array = []) -> Dictionary:
 			out["chapter"]["soldier"].append(c)
 	for cid in seen:
 		var c: Dictionary = db.cards.get(cid, {})
-		if not c.is_empty() and cid != "lord" and c.get("scope", "") in ["", r]:
-			out["history"]["soldier" if c["soldier"] else "general"].append(c)
+		if not c.is_empty() and cid != "lord" and not c["soldier"] and c.get("scope", "") in ["", r]:  # soldiers you had are not special: only the public pool and their own chapters
+			out["history"]["general"].append(c)
 	return out
 
 
@@ -561,7 +561,7 @@ func commit_history() -> void:
 	## 周目 can draw them again (chest_pools / recruit_pool). Nothing is remembered from a run that never reached an ending.
 	_sync()
 	for cid in owned + soldiers.keys():
-		if cid != "lord" and not story_cards.has(cid) and not seen.has(cid):
+		if cid != "lord" and not story_cards.has(cid) and not seen.has(cid) and not (_db().cards.has(cid) and _db().cards[cid]["soldier"]):
 			seen.append(cid)
 		if not cleared_cards.has(cid):
 			cleared_cards.append(cid)
