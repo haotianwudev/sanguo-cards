@@ -64,14 +64,16 @@ var lap := 1  # 周目: how many times the story has been started with the colle
 var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
 var ended := false  # an ending was reached: this run is over (no 继续 on the title; a new 周目 or a chapter replay is what is left)
 var lord_form_pick := ""  # the lord card in use: "" = the newest this route has, "base" = the plain lord, else a lord_forms id
-var lord_form_dupe := false  # the last lord card handed out was one already held (it raised the lord's tier instead); not saved
+var lord_form_dupe := false  # the last lord card handed out raised the lord's level (held, or had in an earlier 周目); not saved
+var lord_form_fresh := true  # …and it was also a card the lord did not hold yet; not saved
+var cleared_forms: Array = []  # lord cards held when reaching any ending: remembered across 周目 (the card is not kept, getting it again levels the lord)
 var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -103,9 +105,9 @@ func restore_run() -> void:
 
 
 func new_lap(inherit_all := false) -> SaveData:
-	## 新周目: everything starts over — the cards you own, 战功 — except what is remembered (the lord's cards too): every card you have
-	## had (`seen`: it can drop again, see chest_pools), how far each was levelled (`dupes`, `lord_copies`: a 银+1 card comes back
-	## as 银+1 and keeps levelling), the endings and the name. `inherit_all` (the test option in 设置) keeps the whole collection.
+	## 新周目: everything starts over — the cards you own (the lord's too), 战功 — except what is remembered: every card you have
+	## had (`seen`: it can drop again, see chest_pools) and how far each was levelled (`cleared_copies`, `lord_copies`): the card itself
+	## is not kept, but getting it again (a draw or the story) is one level up on top of that, and the card is yours again. The endings and the name stay too. `inherit_all` (the test option in 设置) keeps the whole collection.
 	_sync()
 	var s := SaveData.create()
 	s.lap = lap + 1
@@ -115,17 +117,18 @@ func new_lap(inherit_all := false) -> SaveData:
 		s.owned = owned.duplicate()
 		s.soldiers = soldiers.duplicate()
 		s.party = party.duplicate()
-	s.lord_forms = lord_forms.duplicate()  # the lord's cards (and, with lord_copies, their level) are remembered: the next lap starts with them
+		s.lord_forms = lord_forms.duplicate()
+		s.dupes = dupes.duplicate()
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
 	s.cleared_cards = cleared_cards.duplicate()
 	s.cleared_copies = cleared_copies.duplicate()
 	s.cleared_lord_copies = cleared_lord_copies
+	s.cleared_forms = cleared_forms.duplicate()
 	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
 	if inherit_all:
 		s.story_cards = story_cards.duplicate()
 	s.theme = theme
-	s.dupes = dupes.duplicate()
 	s.lord_copies = lord_copies
 	return s
 
@@ -554,6 +557,9 @@ func commit_history() -> void:
 	if not cleared_cards.has("lord"):
 		cleared_cards.append("lord")
 	cleared_lord_copies = maxi(cleared_lord_copies, lord_copies)
+	for fid in lord_forms:
+		if not cleared_forms.has(fid):
+			cleared_forms.append(fid)
 
 
 func get_cleared_cards() -> Array:
@@ -643,6 +649,9 @@ func grant_card(card_id: String, from_story := false) -> void:
 		soldiers[card_id] = soldiers.get(card_id, 0) + 1
 	elif not owned.has(card_id):
 		owned.append(card_id)
+		var base := permanent_copies(card_id)  # had in an earlier 周目: it comes back at that level, plus one for getting it again
+		if base > 0:
+			dupes[card_id] = mini(base + 1, int(_db().gacha["tiers"][-1]["copies"]))
 	else:
 		dupes[card_id] = copies(card_id) + 1
 	if not party.has(card_id) and validate_party(party + [card_id]) == "":

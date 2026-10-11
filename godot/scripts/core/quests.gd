@@ -426,7 +426,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 
 
 static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNumberGenerator = null) -> Array:
-	## returns the lord cards handed out by this step, each {form, dupe}: a chapter's first step gives its card (grant_lord_form) —
+	## returns the lord cards handed out by this step, each {form, dupe (the lord's level went up), fresh (a card it did not hold)}: a chapter's first step gives its card (grant_lord_form) —
 	## the first chapter's is the route's fixed default (every 周目), later chapters' are random; before it the lord has no card
 	q = view(q, save)
 	var ok := next_options(q, save).any(func(s): return s["id"] == square_id)
@@ -443,7 +443,7 @@ static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNu
 	if rng != null and save.visited.size() == 2:
 		var form := grant_lord_form(q, save, rng, q["id"] == GameData.get_db().quests[0]["id"])
 		if form != "":
-			given.append({"form": form, "dupe": save.lord_form_dupe})
+			given.append({"form": form, "dupe": save.lord_form_dupe, "fresh": save.lord_form_fresh})
 	return given
 
 
@@ -565,19 +565,20 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 		all.append(fid)
 		if not save.lord_forms.has(fid):
 			pool.append(fid)
-	save.lord_form_dupe = pool.is_empty()
 	if all.is_empty():
 		return ""
 	var pick: String = all[0] if default_pick else ""
-	if default_pick:
-		save.lord_form_dupe = save.lord_forms.has(pick)
-	else:
-		if pool.is_empty():  # every card of the route is held: a random one again — a repeat is another copy of the lord (raises its tier)
+	if not default_pick:
+		if pool.is_empty():  # every card of the route is held: a random one again
 			pool = all
 		pick = pool[rng.randi_range(0, pool.size() - 1)] if rng != null else pool[0]
+	# same rule as every card: held now, or had in an earlier 周目 (only the level is kept) → getting it is one level up for the lord
+	var held := save.lord_forms.has(pick)
+	save.lord_form_dupe = held or save.cleared_forms.has(pick)
+	save.lord_form_fresh = not held
 	if save.lord_form_dupe:
 		save.lord_copies += 1
-	else:
+	if not held:
 		save.lord_forms.append(pick)
 	return pick
 

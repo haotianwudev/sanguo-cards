@@ -495,6 +495,7 @@ func _show_lord_reveals(list: Array) -> void:
 	var reveal := LordReveal.new()
 	reveal.form = list[0]["form"]
 	reveal.dupe = list[0]["dupe"]
+	reveal.fresh = list[0]["fresh"]
 	reveal.closed.connect(func(): _show_lord_reveals(list.slice(1)))
 	add_child(reveal)
 

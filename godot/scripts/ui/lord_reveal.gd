@@ -6,7 +6,8 @@ extends Control
 signal closed
 
 var form := ""  # the lord_forms id just handed out
-var dupe := false  # a repeat: it raised the lord's 品阶 instead of adding a new card
+var dupe := false  # the lord's 品阶 went up with it (a repeat, or a card had in an earlier 周目)
+var fresh := true  # it is also a card the lord did not hold
 var _card: CardView
 var _ready_to_close := false
 
@@ -30,7 +31,7 @@ func _ready() -> void:
 	col.add_theme_constant_override("separation", 12)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(col)
-	var head := Kit.label("主角卡升级！" if dupe else "获得主角卡！", Kit.FONT_TITLE + 12, "gold")
+	var head := Kit.label("主角卡升级！" if dupe and not fresh else "获得主角卡！", Kit.FONT_TITLE + 12, "gold")
 	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	head.modulate.a = 0.0
 	col.add_child(head)
@@ -68,7 +69,7 @@ func _gain_text(info: Dictionary) -> String:
 	if dupe:
 		var tiers: Array = GameData.get_db().gacha["tiers"]
 		bits.append("品阶：%s（%d 张）" % [tiers[save.tier("lord")]["name"], save.copies("lord")])
-	else:
+	if fresh:
 		var b: Dictionary = info.get("bonus", {})
 		if int(b.get("hp", 0)) != 0:
 			bits.append("体力 +%d" % int(b["hp"]))

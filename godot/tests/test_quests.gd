@@ -986,7 +986,8 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	check_eq(lord["skills"], base["skills"], "north skills stay the spear's")
 	var south := SaveData.create()
 	check_eq(Quests.grant_lord_form(q, south), "lord_south_armor", "the south route has its own card")
-	check(s.new_lap().lord_forms.has("lord_north_silver"), "a new lap remembers the lord cards")
+	check(s.new_lap().lord_forms.is_empty(), "a new lap starts without the lord cards")
+	check(s.new_lap(true).lord_forms.has("lord_north_silver"), "…unless the test option keeps the collection")
 
 func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
@@ -1006,16 +1007,19 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	check_eq(got[0]["form"], "lord_north_silver", "…the fixed default one")
 	check_eq(s.lord_forms, ["lord_north_silver"], "…and kept")
 	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
+	s.commit_history()  # an ending was reached
 	var lap2 := s.new_lap()
-	check_eq(lap2.lord_forms, ["lord_north_silver"], "the next 周目 remembers it")
+	check(lap2.lord_forms.is_empty(), "the next 周目 does not keep the card itself…")
+	check(lap2.cleared_forms.has("lord_north_silver"), "…but remembers it")
 	Quests.begin(q, lap2)
 	lap2.run_records.append("出生：冀州无极")
 	lap2.choices["era"] = "jz_arrive"
 	lap2.resolved = true
 	var again := Quests.move(q, lap2, "jz_arrive", rng)
 	check_eq(again[0]["form"], "lord_north_silver", "the default card again on the next 周目's first step")
-	check(again[0]["dupe"], "…held already, so it is another copy of the lord")
-	check_eq(lap2.lord_copies, 2, "…which raises its level")
+	check(again[0]["dupe"] and again[0]["fresh"], "…the card is yours again, and the lord's level goes up with it")
+	check_eq(lap2.lord_copies, 2, "…by one on top of the level kept")
+	check_eq(lap2.lord_forms, ["lord_north_silver"], "…and the card is in hand")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
 	fixed.run_records.append("出生：冀州无极")
