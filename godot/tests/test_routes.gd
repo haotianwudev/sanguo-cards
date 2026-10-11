@@ -97,7 +97,7 @@ func test_losing_to_yuanshu_still_reaches_the_ending() -> void:
 func test_lap2_route_b_runs_through_luoyang_and_changan_to_ending_two() -> void:
 	var s := lap_save(["董白：留下", E1], ["prologue", "taodong"])
 	var yuxi := quest_by_id("yuxi")
-	var p3 := walk(yuxi, s, [])
+	var p3 := walk(yuxi, s, [], 1, 0, 0)
 	check(p3.has("wenji_seen") and p3.has("wenji_fight"), "二周目: 董白 spots 蔡文姬")
 	check_eq(p3[-1], "wenji_join", "saving her ends chapter 3 early")
 	check(s.has_card("caiwenji"), "蔡文姬 joins")

@@ -842,9 +842,11 @@ func test_chapter_three_branches_on_dongbai_and_ends_in_ending_one() -> void:
 	var again := SaveData.create()
 	again.flags = ["董白：留下", "结局一 · 玉碎"]
 	var sq: Dictionary = q["squares"]
-	check(Quests.is_open(sq["wenji_taken"], kept) and not Quests.is_open(sq["wenji_seen"], kept), "一周目: 蔡文姬 can't be saved")
-	check(Quests.is_open(sq["wenji_taken"], gone) and not Quests.is_open(sq["wenji_seen"], gone), "no 董白: she's taken")
-	check(Quests.is_open(sq["wenji_seen"], again) and not Quests.is_open(sq["wenji_taken"], again), "later 周目 with 董白: she can be saved")
+	var fork: Dictionary = sq["wenji_choice"]
+	check(Quests.option_locked(kept, fork["choose"][0]) and not Quests.option_locked(kept, fork["choose"][1]), "一周目: 蔡文姬 can't be saved, but she can be left to the bandits")
+	check(Quests.option_locked(gone, fork["choose"][0]) and not Quests.option_locked(gone, fork["choose"][1]), "no 董白: she's taken")
+	check(not Quests.option_locked(again, fork["choose"][0]) and not Quests.option_locked(again, fork["choose"][1]), "later 周目 with 董白: she can be saved, or still left behind")
+	check("结局一" in Quests.option_hint(kept, fork["choose"][0]) and "董白" not in Quests.option_hint(kept, fork["choose"][0]), "the greyed option says what is missing")
 	check(sq["wenji_join"]["cards"].has("caiwenji"), "saved, she joins")
 	check_eq(sq["yuanshu"]["lose_goto"], "end", "袁术 can't really be beaten: losing leads on to the ending")
 	check(q["ending"].get("title", "").begins_with("结局一"), "the chapter ends in 结局一")

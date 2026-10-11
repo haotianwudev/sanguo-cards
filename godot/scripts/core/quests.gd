@@ -471,12 +471,14 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 
 static func option_locked(save: SaveData, o: Dictionary) -> bool:
 	## a choose-square option that can't be picked: locked outright, or needing a lasting story flag (an ending reached earlier)
-	return o["locked"] or (o["requires"] != "" and not _flags_hold(o["requires"], save, false))
+	return o["locked"] or (not _as_list(o["requires"]).is_empty() and not _flags_hold(o["requires"], save, false))
 
 
 static func option_hint(save: SaveData, o: Dictionary) -> String:
 	## why a gated option is greyed ("" when it isn't, or when it is simply locked)
-	return "（需先触发「%s」）" % o["requires"] if o["requires"] != "" and option_locked(save, o) else ""
+	if _as_list(o["requires"]).is_empty() or not option_locked(save, o):
+		return ""
+	return "（需先触发「%s」）" % "」「".join(_as_list(o["requires"]).filter(func(l): return not _flags_hold(l, save, false)))
 
 
 static func option_blocked(save: SaveData, opt: Dictionary) -> String:
