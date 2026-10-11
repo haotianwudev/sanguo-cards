@@ -548,7 +548,7 @@ static func recap(save: SaveData) -> Dictionary:
 
 static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null, default_pick := false) -> String:
 	## each chapter hands out one lord card (version) at random from those of this route not yet had (all had: any of them, as another copy of the lord), once;
-	## default_pick (the first chapter, every 周目) gives the route's fixed default card instead: the first of its grants (already held: another copy of the lord).
+	## default_pick (the first chapter, every 周目) gives the fixed default card instead: the plain lord (lord_forms.default) (already held: another copy of the lord).
 	## returns its id ("" = none left / already given). Without an rng (tests) the first one.
 	q = q.get("_raw", q)
 	if save.lord_form_paid == q["id"] or save.replay != "":
@@ -567,7 +567,7 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 			pool.append(fid)
 	if all.is_empty():
 		return ""
-	var pick: String = all[0] if default_pick else ""
+	var pick: String = (db.lord_form_default if db.lord_form_default != "" else all[0]) if default_pick else ""
 	if not default_pick:
 		if pool.is_empty():  # every card of the route is held: a random one again
 			pool = all

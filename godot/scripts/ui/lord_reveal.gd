@@ -79,7 +79,7 @@ func _gain_text(info: Dictionary) -> String:
 		if not sk.is_empty():
 			bits.append("新技能：" + "、".join(sk.map(func(s): return str(GameData.get_db().skills.get(s, {}).get("name", s)))))
 		if bits.is_empty():
-			bits.append("主角变强了")
+			bits.append("你的默认主角卡" if form == GameData.get_db().lord_form_default else "主角变强了")
 	return "　".join(bits)
 
 

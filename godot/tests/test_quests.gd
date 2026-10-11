@@ -1004,22 +1004,22 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	s.resolved = true
 	var got := Quests.move(q, s, "jz_arrive", rng)
 	check_eq(got.size(), 1, "the first step: one card")
-	check_eq(got[0]["form"], "lord_north_silver", "…the fixed default one")
-	check_eq(s.lord_forms, ["lord_north_silver"], "…and kept")
+	check_eq(got[0]["form"], "lord_default", "…the fixed default one")
+	check_eq(s.lord_forms, ["lord_default"], "…and kept")
 	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
 	s.commit_history()  # an ending was reached
 	var lap2 := s.new_lap()
 	check(lap2.lord_forms.is_empty(), "the next 周目 does not keep the card itself…")
-	check(lap2.cleared_forms.has("lord_north_silver"), "…but remembers it")
+	check(lap2.cleared_forms.has("lord_default"), "…but remembers it")
 	Quests.begin(q, lap2)
 	lap2.run_records.append("出生：冀州无极")
 	lap2.choices["era"] = "jz_arrive"
 	lap2.resolved = true
 	var again := Quests.move(q, lap2, "jz_arrive", rng)
-	check_eq(again[0]["form"], "lord_north_silver", "the default card again on the next 周目's first step")
+	check_eq(again[0]["form"], "lord_default", "the default card again on the next 周目's first step")
 	check(again[0]["dupe"] and again[0]["fresh"], "…the card is yours again, and the lord's level goes up with it")
 	check_eq(lap2.lord_copies, 2, "…by one on top of the level kept")
-	check_eq(lap2.lord_forms, ["lord_north_silver"], "…and the card is in hand")
+	check_eq(lap2.lord_forms, ["lord_default"], "…and the card is in hand")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
 	fixed.run_records.append("出生：冀州无极")

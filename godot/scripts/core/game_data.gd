@@ -13,6 +13,7 @@ var battle: Dictionary
 var troops: Dictionary  # id -> {id, name, short, hp, at} (stats only — skills come from kits)
 var kits: Dictionary  # id -> {id, name, normal, special}: the default skills of normal / special units (cards.json kits)
 var lord_forms: Dictionary  # id -> {id, name, route, bonus, skills, art}: the lord's extra cards (cards.json lord_forms)
+var lord_form_default := ""  # the lord card the first chapter's first step gives (the plain lord, with his own default face)
 var lord_form_grants: Array  # form ids, handed out one per chapter cleared (in order, for the route that matches)
 var endings: Dictionary  # id -> {id, title, route, chapter, kind, who, quest, built, trigger, hint, unlock, cg, text} (data/endings.json)
 var ending_order: Array  # ending ids in file order
@@ -89,6 +90,7 @@ func _load(dir: String) -> void:
 		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "bonus": f.get("bonus", {}),
 			"skills": f.get("skills", []), "art": f.get("art", false) or ResourceLoader.exists("res://data/portraits/%s.jpg" % fid)}  # its own face once that portrait is delivered
 	lord_form_grants = raw.get("lord_forms", {}).get("grants", [])
+	lord_form_default = raw.get("lord_forms", {}).get("default", "")
 	for cid in raw["cards"]:
 		var c: Dictionary = raw["cards"][cid]
 		var bonus := {}
