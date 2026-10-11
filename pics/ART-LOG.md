@@ -541,23 +541,30 @@
 - [x] 2026-10-11 cg `c5_enter` ← c5_enter_new.jpg · ok
 - [x] 2026-10-11 cg `c5_feast` ← c5_feast_new.jpg · ok
 - [x] 2026-10-11 cg `c5_dress` ← c5_dress_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_diaochan` ← c5_diaochan_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_wedding` ← c5_wedding_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_rescue` ← c5_rescue_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_death` ← c5_death_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_yuexia` ← c5_yuexia_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_chuxi` ← c5_chuxi_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_escape` ← c6_escape_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_huihe` ← c6_huihe_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_seal` ← c6_seal_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_jiaxu_join` ← c6_jiaxu_join_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_warn` ← c6_warn_new.jpg · ok
-- [ ] 2026-10-11 cg `c7_feng` ← c7_feng_new.jpg · ok
-- [ ] 2026-10-11 cg `c7_huangzhong` ← c7_huangzhong_new.jpg · ok
-- [ ] 2026-10-11 cg `c7_stars` ← c7_stars_new.jpg · ok
-- [ ] 2026-10-11 cg `c6_jiaxu` ← c6_jiaxu_ns.jpg · ok
-- [ ] 2026-10-11 cg `c7_flee` ← c7_flee_ns.jpg · ok
-- [ ] 2026-10-11 cg `c6_yizu` ← c6_yizu_ns.jpg · ok
-- [ ] 2026-10-11 cg `c5_dress` ← c5_dress_ns.jpg · ok
-- [ ] 2026-10-11 cg `c4_mangshan` ← c4_mangshan_ns.jpg · ok
-- [ ] 2026-10-11 cg `c4_betroth` ← c4_betroth_ns.jpg · ok
+- [x] 2026-10-11 cg `c5_diaochan` ← c5_diaochan_new.jpg · ok
+- [x] 2026-10-11 cg `c5_wedding` ← c5_wedding_new.jpg · ok
+- [x] 2026-10-11 cg `c5_rescue` ← c5_rescue_new.jpg · ok
+- [x] 2026-10-11 cg `c5_death` ← c5_death_new.jpg · ok
+- [x] 2026-10-11 cg `c5_yuexia` ← c5_yuexia_new.jpg · ok
+- [x] 2026-10-11 cg `c5_chuxi` ← c5_chuxi_new.jpg · ok
+- [x] 2026-10-11 cg `c6_escape` ← c6_escape_new.jpg · ok
+- [x] 2026-10-11 cg `c6_huihe` ← c6_huihe_new.jpg · ok
+- [x] 2026-10-11 cg `c6_seal` ← c6_seal_new.jpg · ok
+- [x] 2026-10-11 cg `c6_jiaxu_join` ← c6_jiaxu_join_new.jpg · ok
+- [x] 2026-10-11 cg `c6_warn` ← c6_warn_new.jpg · ok
+- [x] 2026-10-11 cg `c7_feng` ← c7_feng_new.jpg · ok
+- [x] 2026-10-11 cg `c7_huangzhong` ← c7_huangzhong_new.jpg · ok
+- [x] 2026-10-11 cg `c7_stars` ← c7_stars_new.jpg · ok
+- [x] 2026-10-11 cg `c6_jiaxu` ← c6_jiaxu_ns.jpg · ok
+- [x] 2026-10-11 cg `c7_flee` ← c7_flee_ns.jpg · ok
+- [x] 2026-10-11 cg `c6_yizu` ← c6_yizu_ns.jpg · ok
+- [x] 2026-10-11 cg `c5_dress` ← c5_dress_ns.jpg · ok
+- [x] 2026-10-11 cg `c4_mangshan` ← c4_mangshan_ns.jpg · ok
+- [x] 2026-10-11 cg `c4_betroth` ← c4_betroth_ns.jpg · ok
+- [x] 2026-10-11 cg `c8_zupu` ← c8_zupu_new.jpg · ok
+- [x] 2026-10-11 cg `c8_dress` ← c8_dress_new.jpg · ok
+- [x] 2026-10-11 cg `c8_shuige` ← c8_shuige_new.jpg · ok
+- [x] 2026-10-11 cg `c8_jiayan` ← c8_jiayan_new.jpg · ok
+- [x] 2026-10-11 cg `c8_louchuan` ← c8_louchuan_new.jpg · ok
+- [x] 2026-10-11 cg `c8_henhai` ← c8_henhai_new.jpg · ok
+- [x] 2026-10-11 cg `c8_xiangxiao` ← c8_xiangxiao_new.jpg · ok
