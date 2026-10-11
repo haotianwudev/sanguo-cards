@@ -542,3 +542,6 @@
 - [x] 2026-10-11 cg `c5_feast` ← c5_feast_new.jpg · ok
 - [x] 2026-10-11 cg `c5_dress` ← c5_dress_new.jpg · ok
 - [ ] 2026-10-11 cg `c5_diaochan` ← c5_diaochan_new.jpg · ok
+- [ ] 2026-10-11 cg `c5_wedding` ← c5_wedding_new.jpg · ok
+- [ ] 2026-10-11 cg `c5_rescue` ← c5_rescue_new.jpg · ok
+- [ ] 2026-10-11 cg `c5_death` ← c5_death_new.jpg · ok
