@@ -582,3 +582,4 @@
 - [x] 2026-10-11 cg `c1_oath` ← c1_oath_v2.jpg · ok
 - [x] 2026-10-11 cg `c2_setout` ← c2_setout_new.jpg · ok
 - [x] 2026-10-11 cg `c2_mixin` ← c2_mixin_v2.jpg · ok
+- [x] 2026-10-11 cg `c4_xizi` ← c4_xizi_v1.jpg · ok
