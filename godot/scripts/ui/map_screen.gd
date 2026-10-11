@@ -36,7 +36,7 @@ var _dlg_raw: Array = []  # the lines before {lord} is filled in (for speaker lo
 var _dlg_prompt := ""  # the one-line summary shown at the choice (square / event "prompt")
 var _sheet_hidden := false
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
-var _pending_form := ""  # a lord card the chapter's first square handed out, shown once its story is through
+var _pending_forms: Array = []  # lord cards the chapter's first square handed out ({form, dupe}), shown once its story is through
 var _sheet_box: VBoxContainer
 var _hp_bar: ProgressBar
 var _hp_label: Label
@@ -477,21 +477,25 @@ func _on_square(sid: String) -> void:
 	tw.tween_property(_token, "position", dest, 0.14).set_trans(Tween.TRANS_BOUNCE)
 	await tw.finished
 	Sfx.play("step")  # the token lands
-	var form := Quests.move(q, Game.save, sid, Game.rng)
+	var given := Quests.move(q, Game.save, sid, Game.rng)
 	Game.persist()
 	_busy = false
 	_refresh()
-	if form != "":  # a chapter's first step hands out its lord card: after the square's CG and story, or now if it has none
+	if not given.is_empty():  # a chapter's first step hands out its lord cards: after the square's CG and story, or now if it has none
 		if (target.get("text", []) as Array).is_empty():
-			_show_lord_reveal(form)
+			_show_lord_reveals(given)
 		else:
-			_pending_form = form
+			_pending_forms = given
 
 
-func _show_lord_reveal(form: String) -> void:
+func _show_lord_reveals(list: Array) -> void:
+	## one full-screen moment per card, in turn
+	if list.is_empty():
+		return
 	var reveal := LordReveal.new()
-	reveal.form = form
-	reveal.dupe = Game.save.lord_form_dupe
+	reveal.form = list[0]["form"]
+	reveal.dupe = list[0]["dupe"]
+	reveal.closed.connect(func(): _show_lord_reveals(list.slice(1)))
 	add_child(reveal)
 
 
@@ -725,9 +729,10 @@ func _dialog_show() -> void:
 	var last := _dlg_i >= _dlg_lines.size() - 1
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
-	if last and _pending_form != "":  # the first square's story is through: now the chapter's lord card
-		_show_lord_reveal(_pending_form)
-		_pending_form = ""
+	if last and not _pending_forms.is_empty():  # the first square's story is through: now the chapter's lord cards
+		var shown := _pending_forms
+		_pending_forms = []
+		_show_lord_reveals(shown)
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
 		if key == "lord":  # the north route (and any lord card in play) has its own face

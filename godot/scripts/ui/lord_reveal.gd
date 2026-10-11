@@ -18,7 +18,7 @@ func _ready() -> void:
 	size = Vector2(1280, 720)  # full screen (the map screen is not a container: anchors alone leave it 0×0)
 	var db := GameData.get_db()
 	var save := Game.save
-	var info: Dictionary = db.lord_forms.get(form, {})
+	var info: Dictionary = db.lord_forms.get(form, {"name": "主公"} if form == "base" else {})  # "base" = the plain lord, one more copy
 	var dim := ColorRect.new()
 	dim.color = Color(0, 0, 0, 0.86)
 	dim.set_anchors_preset(Control.PRESET_FULL_RECT)

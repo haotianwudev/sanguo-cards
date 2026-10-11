@@ -992,7 +992,7 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 
 func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
-	## a new 周目's first chapter gives the route's default card (the first of its grants) instead of a random one; lap 1 is random like any chapter
+	## a new 周目's first chapter also gives the lord one more copy of itself (kept across 周目); lap 1 has nothing to add
 	var db := GameData.get_db()
 	var q: Dictionary = db.quests[0]
 	var rng := RandomNumberGenerator.new()
@@ -1003,8 +1003,10 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	s.choices["era"] = "jz_arrive"
 	s.resolved = true
 	var got := Quests.move(q, s, "jz_arrive", rng)
-	check(got != "" and db.lord_forms[got]["route"] == "north", "lap 1, first chapter: a north card: " + got)
-	check_eq(s.lord_forms, [got], "…one card only")
+	check_eq(got.size(), 1, "lap 1, first chapter: one card")
+	check(db.lord_forms[got[0]["form"]]["route"] == "north", "…of this route: " + str(got[0]["form"]))
+	check_eq(s.lord_forms, [got[0]["form"]], "…and kept")
+	check_eq(s.lord_copies, 1, "the lord itself is not raised on lap 1")
 	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
 	var lap2 := SaveData.create()
 	lap2.lap = 2
@@ -1012,14 +1014,18 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	lap2.run_records.append("出生：冀州无极")
 	lap2.choices["era"] = "jz_arrive"
 	lap2.resolved = true
-	check_eq(Quests.move(q, lap2, "jz_arrive", rng), "lord_north_silver", "a new 周目's first chapter gives the default north card")
-	check_eq(lap2.lord_forms, ["lord_north_silver"], "…and that is the only card it gives")
+	var two := Quests.move(q, lap2, "jz_arrive", rng)
+	check_eq(two.size(), 2, "a new 周目's first chapter: the lord's own copy, then the chapter's card")
+	check_eq(two[0]["form"], "base", "the lord copy comes first")
+	check_eq(lap2.lord_copies, 2, "the lord's tier counter went up")
+	check_eq(lap2.lord_forms.size(), 1, "one version card besides")
+	check_eq(lap2.new_lap().lord_copies, 2, "…and the next 周目 starts with it")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
 	fixed.run_records.append("出生：冀州无极")
 	fixed.choices["era"] = "jz_arrive"
 	fixed.resolved = true
-	check_eq(Quests.move(q, fixed, "jz_arrive"), "", "without an rng (tests) nothing is handed out")
+	check(Quests.move(q, fixed, "jz_arrive").is_empty(), "without an rng (tests) nothing is handed out")
 	check(fixed.lord_forms.is_empty(), "…and the collection stays empty")
 
 
