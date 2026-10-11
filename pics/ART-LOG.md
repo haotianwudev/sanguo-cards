@@ -529,3 +529,4 @@
 - [ ] 2026-10-11 cg `c2_triple` ← c2_triple_v2.jpg · ok
 - [ ] 2026-10-11 cg `c2_zumao_saved` ← c2_zumao_saved_v2.jpg · ok
 - [ ] 2026-10-11 cg `c3_raid` ← c3_raid_new.jpg · ok
+- [ ] 2026-10-11 cg `c3_entrust` ← c3_entrust_v2.jpg · ok
