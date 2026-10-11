@@ -7,6 +7,7 @@ signal finished
 var scenes: Array = []
 var next_title := ""  # "" when there is no next chapter yet
 var ending: Dictionary = {}  # {title, text}: an ending card instead of the next chapter's title
+var same_chapter := false  # the next map is the same 第N章 (a route that goes on): no title card
 var next_subtitle := ""  # time and place under the title (「半年后」)
 var _page := -1
 var _line := 0  # lines of the current scene shown so far
@@ -45,7 +46,7 @@ func _next() -> void:
 		_box.queue_free()
 	if _page < scenes.size():
 		_show_scene(scenes[_page])
-	elif _page == scenes.size():
+	elif _page == scenes.size() and not same_chapter:
 		_show_title()
 	else:
 		finished.emit()

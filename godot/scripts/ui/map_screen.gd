@@ -1236,6 +1236,11 @@ func _finish_chapter() -> void:
 	var nxt: Variant = Quests.current_quest(Game.save)
 	var o := InterludeOverlay.new()
 	o.scenes = Quests.interlude(done_id, Game.save)
+	o.same_chapter = ending.is_empty() and nxt != null and str(nxt["title"]).split(" · ")[0] == str(q["title"]).split(" · ")[0]
+	if o.same_chapter and o.scenes.is_empty():  # still 第三章: just walk on, no chapter card
+		_rebuild_map()
+		_refresh()
+		return
 	o.next_title = nxt["title"] if nxt != null else ""
 	o.next_subtitle = nxt.get("subtitle", "") if nxt != null else ""
 	o.ending = ending
