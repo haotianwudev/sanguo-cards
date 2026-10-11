@@ -58,7 +58,7 @@ SIM_RUNS=40 SIM_LAPS=2 SIM_GIVEUP=3 SIM_ROUTE=south \
 
 ## 4. 敌人强度只调一个旋钮
 
-`cards.json → battle.scaling`：目标强度（血×攻×行动数）= `1e6 × strength × base × growth^N × tier`（精英 ×2、首领 ×3），N 取 `order`；每章每档的中位数被拉到目标，敌人间相对强弱仍随卡牌；章内 `in_chapter` 0.85→1.2。**日常只改 `strength`**（或同比改 `base`）；`growth` 是曲线斜率，后面章节整体偏难 / 偏易时才动。`late_growth` 默认 1（关）。战斗手感 `battle.attack_mult` / `hp_mult`（双方同时生效，乘起来 1.0 时强度对比不变，战斗更短更起伏）；`crit`（暴击）、`ambush_chance`（埋伏）、`event_random`（？事件纯随机）也都在 `battle` 里。
+`cards.json → battle.scaling`：目标强度（血×攻×行动数）= `1e6 × strength × base × growth^N × tier`（精英 ×2、首领 ×3），N 取 `order`；每章每档的中位数被拉到目标，敌人间相对强弱仍随卡牌；章内 `in_chapter` 0.9→1.1。**日常只改 `strength`**（或同比改 `base`）；`growth` 是曲线斜率，后面章节整体偏难 / 偏易时才动。`late_growth` 默认 1（关）。战斗手感 `battle.attack_mult` / `hp_mult`（双方同时生效，乘起来 1.0 时强度对比不变，战斗更短更起伏）；`crit`（暴击）、`ambush_chance`（埋伏）、`event_random`（？事件纯随机）也都在 `battle` 里。
 一周目通关率目标 ≈ 80%：用上面的模拟扫 `SIM_STRENGTH`（0.5 / 1 / 1.5 / 2 / 3）看曲线，再把选定的值折进 `base`，保持 `strength = 1.0`。
 
 ## 5. 写新测试的习惯
