@@ -67,7 +67,7 @@ func _ready() -> void:
 				cb.save = saved
 				Game.root.add_child(cb))
 			col.add_child(cbook)
-		if saved != null and (not saved.quests_cleared.is_empty() or saved.lap > 1):  # a later 周目 can start over even before its first chapter is cleared
+		if saved != null:  # a new 周目 can be started at any time
 			if not (saved.ended and saved.replay == ""):  # (after an ending the 新的开始 button above is the way on)
 				var lap := Kit.button("新的开始（卡牌重置，结局与卡的级别保留）", "purple", Kit.FONT_BODY)
 				lap.pressed.connect(Game.new_lap)
