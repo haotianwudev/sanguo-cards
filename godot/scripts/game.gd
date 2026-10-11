@@ -155,6 +155,7 @@ func demo(name: String) -> void:
 	save.lord_name = "阿明"
 	if OS.get_cmdline_user_args().has("--north"):  # any --demo, played as the north-route lord
 		save.run_records.append("出生：冀州无极")
+	BattleScreen.auto_on = OS.get_cmdline_user_args().has("--auto")  # any --demo, with 自动战斗 already on
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
 	if name == "lordcards":  # 整备 on the 主公 tab with three lord cards handed out

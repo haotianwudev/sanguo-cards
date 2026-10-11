@@ -28,6 +28,9 @@ var _skill_popup_at := 0  # msec it opened: the finger-lift from the tap that op
 var _defend: Button
 var _retreat: Button
 var _end: Button
+var _auto_btn: Button
+static var auto_on := false  # 自动战斗: stays on from battle to battle until switched off
+var _auto_waiting := false
 var _party_box: Control
 var _row: HBoxContainer  # the leader cards (换人 swaps one in place)
 var _card_size := Vector2(240, 336)
@@ -58,6 +61,8 @@ func _ready() -> void:
 	_log_lines(b.opening)
 	b.take_events()
 	_refresh()
+	if auto_on:
+		_auto_step.call_deferred()
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
@@ -295,10 +300,19 @@ func _build() -> void:
 	_defend.custom_minimum_size = Vector2(190, 62) if not has_cg else Vector2(170, 52)
 	_defend.pressed.connect(_on_defend)
 	acts.add_child(_defend)
+	var low := HBoxContainer.new()
+	low.add_theme_constant_override("separation", 8)
+	acts.add_child(low)
 	_retreat = Kit.button("撤退", "gray", Kit.FONT_BODY)
 	var retreat := _retreat
+	retreat.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	retreat.pressed.connect(_on_retreat)
-	acts.add_child(retreat)
+	low.add_child(retreat)
+	_auto_btn = Kit.button("自动", "purple", Kit.FONT_BODY)
+	_auto_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_auto_btn.pressed.connect(_toggle_auto)
+	low.add_child(_auto_btn)
+	_sync_auto_btn()
 	var menu_btn := Kit.button("设置", "gray", Kit.FONT_SMALL)
 	menu_btn.custom_minimum_size = Vector2(84, 40)
 	menu_btn.position = Vector2(1186, 8)
@@ -486,6 +500,38 @@ func _on_swap(i: int, card_id: String) -> void:
 		return
 	_log_lines(b.swap(i, card_id))
 	await _play(b.take_events())
+
+
+func _toggle_auto() -> void:
+	auto_on = not auto_on
+	_sync_auto_btn()
+	if auto_on:
+		_close_skill_popup()
+		_auto_step()
+
+
+func _sync_auto_btn() -> void:
+	_auto_btn.text = "自动：开" if auto_on else "自动"
+	_auto_btn.add_theme_color_override("font_color", Kit.c("gold") if auto_on else Kit.c("text"))
+
+
+func _auto_step() -> void:
+	## 自动战斗: one action (or the end of the round) at a time, after the last one has played out
+	if _auto_waiting:
+		return
+	_auto_waiting = true
+	while auto_on and _busy and is_inside_tree():
+		await get_tree().process_frame
+	if auto_on and is_inside_tree():
+		await get_tree().create_timer(0.35).timeout  # a beat to see the board — and to switch it off
+	_auto_waiting = false
+	if not (auto_on and is_inside_tree()) or _busy or b.result != "":
+		return
+	var act := AutoPlayer.next(b)
+	if act.is_empty():
+		await _on_end_round()
+	else:
+		await _on_skill(act[0], act[1])
 
 
 func _on_skill(i: int, sid: String) -> void:
@@ -857,6 +903,8 @@ func _play(events: Array) -> void:
 	if b.result != "":
 		await get_tree().create_timer(0.4).timeout
 		_finish()
+	elif auto_on:
+		_auto_step.call_deferred()
 
 
 const FEMALE_NAMES := [

@@ -107,6 +107,23 @@ func test_win_when_enemy_hp_zero() -> void:
 	check_eq(b.result, "win")
 
 
+func test_auto_battle_plays_a_whole_fight_and_never_wastes_a_skill() -> void:
+	## 自动战斗: AutoPlayer picks the next action; with nothing worth doing the round ends
+	var b := new_battle()
+	var guard := 0
+	while b.result == "" and guard < 500:
+		guard += 1
+		var act := AutoPlayer.next(b)
+		if not act.is_empty():
+			var u: Dictionary = b.leaders[act[0]]
+			check(b.can_act(act[0]) and b.usable(u, b.db.skills[act[1]]), "it only picks what can be played: " + str(act[1]))
+			check(AutoPlayer.value(b, u, b.db.skills[act[1]]) > 0.0, "…and never an action that does nothing: " + str(act[1]))
+			b.act(act[0], act[1])
+		else:
+			b.end_round()
+	check(b.result != "", "the fight ends (win or lose) by itself")
+
+
 func test_carry_in_and_out() -> void:
 	var b := Battle.start("hulao", party(["bingzhou"]), 0, 1000, {"bingzhou": {"charge": 2}})
 	check_eq(b.party_hp, b.party_max - 1000)
