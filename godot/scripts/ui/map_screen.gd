@@ -15,6 +15,7 @@ var _layer: Control
 var _lines: MapLines
 var _bg: TextureRect
 var _token: Control
+var _labels: Array = []  # the name plates under the squares (not in _nodes), freed on every rebuild
 var _nodes: Dictionary = {}  # square id -> Button
 var _ghosts: Dictionary = {}  # square id -> true: a route not taken, drawn greyed
 var _y_off := 0  # the first row actually drawn (a chapter whose routes sit in separate row bands)
@@ -181,6 +182,12 @@ func _rebuild_map() -> void:
 	for n in _nodes.values():
 		n.queue_free()
 	_nodes.clear()
+	for l in _labels:
+		l.queue_free()
+	_labels.clear()
+	if _token != null:
+		_token.queue_free()
+		_token = null
 	if q == null:
 		return
 	_ghosts.clear()
@@ -240,6 +247,7 @@ func _rebuild_map() -> void:
 		lbl.size = Vector2(w, 22)
 		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_layer.add_child(lbl)
+		_labels.append(lbl)
 		_nodes[s["id"]] = b
 		if not Quests.is_open(s, Game.save):
 			_ghosts[s["id"]] = true
