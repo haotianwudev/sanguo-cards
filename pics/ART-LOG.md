@@ -520,23 +520,24 @@
 - [x] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_new.jpg · ok
 - [x] 2026-10-11 cg `c5_garden` ← c5_garden_new.jpg · ok
 - [x] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_v6.jpg · ok
-- [ ] 2026-10-11 cg `c1_north` ← c1_north_new.jpg · ok
-- [ ] 2026-10-11 cg `c2_capture` ← c2_capture_v4.jpg · ok
-- [ ] 2026-10-11 cg `c2_counter` ← c2_counter_v2.jpg · ok
-- [ ] 2026-10-11 cg `c2_dongbai_join` ← c2_dongbai_join_v3.jpg · ok
-- [ ] 2026-10-11 cg `c2_handover` ← c2_handover_new.jpg · ok
-- [ ] 2026-10-11 cg `c2_keep` ← c2_keep_new.jpg · ok
-- [ ] 2026-10-11 cg `c2_triple` ← c2_triple_v2.jpg · ok
-- [ ] 2026-10-11 cg `c2_zumao_saved` ← c2_zumao_saved_v2.jpg · ok
-- [ ] 2026-10-11 cg `c3_raid` ← c3_raid_new.jpg · ok
-- [ ] 2026-10-11 cg `c3_entrust` ← c3_entrust_v2.jpg · ok
-- [ ] 2026-10-11 cg `c3_warn` ← c3_warn_v2.jpg · ok
-- [ ] 2026-10-11 cg `c3_feng` ← c3_feng_new.jpg · ok
-- [ ] 2026-10-11 cg `c3_end` ← c3_end_new.jpg · ok
-- [ ] 2026-10-11 cg `c4_betroth` ← c4_betroth_new.jpg · ok
-- [ ] 2026-10-11 cg `c4_mangshan` ← c4_mangshan_new.jpg · ok
-- [ ] 2026-10-11 cg `c4_peace` ← c4_peace_new.jpg · ok
-- [ ] 2026-10-11 cg `c4_dongjia` ← c4_dongjia_new.jpg · ok
-- [ ] 2026-10-11 cg `c4_siege` ← c4_siege_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_enter` ← c5_enter_new.jpg · ok
-- [ ] 2026-10-11 cg `c5_feast` ← c5_feast_new.jpg · ok
+- [x] 2026-10-11 cg `c1_north` ← c1_north_new.jpg · ok
+- [x] 2026-10-11 cg `c2_capture` ← c2_capture_v4.jpg · ok
+- [x] 2026-10-11 cg `c2_counter` ← c2_counter_v2.jpg · ok
+- [x] 2026-10-11 cg `c2_dongbai_join` ← c2_dongbai_join_v3.jpg · ok
+- [x] 2026-10-11 cg `c2_handover` ← c2_handover_new.jpg · ok
+- [x] 2026-10-11 cg `c2_keep` ← c2_keep_new.jpg · ok
+- [x] 2026-10-11 cg `c2_triple` ← c2_triple_v2.jpg · ok
+- [x] 2026-10-11 cg `c2_zumao_saved` ← c2_zumao_saved_v2.jpg · ok
+- [x] 2026-10-11 cg `c3_raid` ← c3_raid_new.jpg · ok
+- [x] 2026-10-11 cg `c3_entrust` ← c3_entrust_v2.jpg · ok
+- [x] 2026-10-11 cg `c3_warn` ← c3_warn_v2.jpg · ok
+- [x] 2026-10-11 cg `c3_feng` ← c3_feng_new.jpg · ok
+- [x] 2026-10-11 cg `c3_end` ← c3_end_new.jpg · ok
+- [x] 2026-10-11 cg `c4_betroth` ← c4_betroth_new.jpg · ok
+- [x] 2026-10-11 cg `c4_mangshan` ← c4_mangshan_new.jpg · ok
+- [x] 2026-10-11 cg `c4_peace` ← c4_peace_new.jpg · ok
+- [x] 2026-10-11 cg `c4_dongjia` ← c4_dongjia_new.jpg · ok
+- [x] 2026-10-11 cg `c4_siege` ← c4_siege_new.jpg · ok
+- [x] 2026-10-11 cg `c5_enter` ← c5_enter_new.jpg · ok
+- [x] 2026-10-11 cg `c5_feast` ← c5_feast_new.jpg · ok
+- [x] 2026-10-11 cg `c5_dress` ← c5_dress_new.jpg · ok
