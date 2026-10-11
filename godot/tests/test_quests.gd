@@ -1019,10 +1019,11 @@ func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	lap2.run_records.append("出生：冀州无极")
 	lap2.choices["era"] = "jz_arrive"
 	lap2.resolved = true
+	var before := lap2.lord_copies
 	var again := Quests.move(q, lap2, "jz_arrive", rng)
 	check_eq(again[0]["form"], "lord_default", "the default card again on the next 周目's first step")
 	check(again[0]["dupe"] and again[0]["fresh"], "…the card is yours again, and the lord's level goes up with it")
-	check_eq(lap2.lord_copies, 2, "…one more copy of the lord (+1, not a whole tier)")
+	check_eq(lap2.lord_copies, before + 1, "…one more copy of the lord (+1, not a whole tier)")
 	check_eq(lap2.lord_forms, ["lord_default"], "…and the card is in hand")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
@@ -1078,7 +1079,8 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 	check_eq(int(guard["hp"]), int(s.lord_with_form(pick)["hp"]))
 	check(guard["hp"] > base["hp"] and guard["at"] > base["at"], "its bonus counts")
 	var one: Dictionary = db.lord_forms[pick]["bonus"]
-	check_eq(int(guard["hp"]) - int(base["hp"]), int(one["hp"]), "and only its own (the others do not add)")
+	var tier_mult := float(db.gacha["tiers"][s.tier("lord")]["mult"])
+	check(absi(int(guard["hp"]) - int(base["hp"]) - int(round(one["hp"] * tier_mult))) <= 2, "and only its own, at the lord's tier (the others do not add)")
 	s.lord_form_pick = "base"
 	check_eq(s.lord_form(), "", "the plain lord can be put back")
 	var copies := s.lord_copies
@@ -1332,3 +1334,31 @@ func test_each_run_deals_different_events() -> void:
 		Quests.begin(q, s, rng(seed_value))
 		layouts[JSON.stringify(s.events)] = true
 	check(layouts.size() > 6, "the same chapter plays out with different events each run (%d of 10 differ)" % layouts.size())
+
+
+func test_every_chapter_hands_the_lord_one_more_copy_even_for_a_new_version() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 5
+	var copies := s.lord_copies
+	for k in 4:
+		s.lord_form_paid = ""
+		var got := Quests.grant_lord_form(db.quests[0], s, rng)
+		check(got != "", "a card is handed out")
+		check_eq(s.lord_copies, copies + 1, "chapter %d: +1 copy of the lord (a 点化 would be +3)" % (k + 1))
+		copies = s.lord_copies
+
+
+func test_every_chapter_hands_the_lord_one_more_copy_even_for_a_new_version() -> void:
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 5
+	var copies := s.lord_copies
+	for k in 4:
+		s.lord_form_paid = ""
+		var got := Quests.grant_lord_form(db.quests[0], s, rng)
+		check(got != "", "a card is handed out")
+		check_eq(s.lord_copies, copies + 1, "chapter %d: +1 copy of the lord (a 点化 would be +3)" % (k + 1))
+		copies = s.lord_copies
