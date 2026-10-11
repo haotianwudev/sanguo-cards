@@ -10,6 +10,8 @@ const TC := preload("res://tests/test_case.gd")
 var stats := {}  # "<order>|<quest>|<tier>" -> {n, wins, hp, wear, turns, limit}
 var stuck := {}
 var finished := 0
+var cleared_by_lap := {}  # lap -> runs that got through it
+var started_by_lap := {}
 var stuck_at := ""
 var giveup := int(OS.get_environment("SIM_GIVEUP")) if OS.get_environment("SIM_GIVEUP") != "" else 12  # losses in a row on one square before the run counts as not cleared
 var order: Array = []
@@ -42,6 +44,7 @@ func _run(seed_value: int, route: String) -> void:
 		var q: Variant = Quests.current_quest(s)
 		if q == null:
 			finished += 1
+			cleared_by_lap[s.lap] = int(cleared_by_lap.get(s.lap, 0)) + 1
 			if s.lap >= max_laps:
 				return
 			s.run_records.clear()
@@ -160,5 +163,7 @@ func _report(runs: int, route: String) -> void:
 		print("%s %-10s %-9s n=%-4d win=%3d%%  hp_left=%3d%%  wear_in=%3d%%  turns=%.1f/%.1f" % [parts[0], parts[1], parts[2], st["n"],
 			int(round(100.0 * st["wins"] / st["n"])), int(round(100.0 * st["hp"] / wins)), int(round(100.0 * st["wear"] / st["n"])),
 			st["turns"] / st["n"], st["limit"] / st["n"]])
+	for lap in cleared_by_lap:
+		print("lap %d: %d of %d runs cleared it" % [lap, cleared_by_lap[lap], runs if lap == 1 else cleared_by_lap.get(lap - 1, 0)])
 	if not stuck.is_empty():
 		print("runs given up (%d losses in a row on one square): %s" % [giveup, str(stuck)])
