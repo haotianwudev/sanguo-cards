@@ -986,40 +986,36 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	check_eq(lord["skills"], base["skills"], "north skills stay the spear's")
 	var south := SaveData.create()
 	check_eq(Quests.grant_lord_form(q, south), "lord_south_armor", "the south route has its own card")
-	var again := s.new_lap()
-	check(again.lord_forms.is_empty(), "a new lap starts without the lord cards")
-	check(s.new_lap(true).lord_forms.has("lord_north_silver"), "…unless the test option keeps the collection")
+	check(s.new_lap().lord_forms.has("lord_north_silver"), "a new lap remembers the lord cards")
 
 func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
-	## a new 周目's first chapter also gives the lord one more copy of itself (kept across 周目); lap 1 has nothing to add
+	## the first chapter's is the route's fixed default (every 周目); the lord has no card before it, and the next 周目 remembers them
 	var db := GameData.get_db()
 	var q: Dictionary = db.quests[0]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 3
 	var s := SaveData.create()
 	Quests.begin(q, s)
+	check(s.lord_forms.is_empty(), "no lord card before the first square")
 	s.run_records.append("出生：冀州无极")  # the birth choice is made on the start square (era), before the first step
 	s.choices["era"] = "jz_arrive"
 	s.resolved = true
 	var got := Quests.move(q, s, "jz_arrive", rng)
-	check_eq(got.size(), 1, "lap 1, first chapter: one card")
-	check(db.lord_forms[got[0]["form"]]["route"] == "north", "…of this route: " + str(got[0]["form"]))
-	check_eq(s.lord_forms, [got[0]["form"]], "…and kept")
-	check_eq(s.lord_copies, 1, "the lord itself is not raised on lap 1")
+	check_eq(got.size(), 1, "the first step: one card")
+	check_eq(got[0]["form"], "lord_north_silver", "…the fixed default one")
+	check_eq(s.lord_forms, ["lord_north_silver"], "…and kept")
 	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
-	var lap2 := SaveData.create()
-	lap2.lap = 2
+	var lap2 := s.new_lap()
+	check_eq(lap2.lord_forms, ["lord_north_silver"], "the next 周目 remembers it")
 	Quests.begin(q, lap2)
 	lap2.run_records.append("出生：冀州无极")
 	lap2.choices["era"] = "jz_arrive"
 	lap2.resolved = true
-	var two := Quests.move(q, lap2, "jz_arrive", rng)
-	check_eq(two.size(), 2, "a new 周目's first chapter: the lord's own copy, then the chapter's card")
-	check_eq(two[0]["form"], "base", "the lord copy comes first")
-	check_eq(lap2.lord_copies, 2, "the lord's tier counter went up")
-	check_eq(lap2.lord_forms.size(), 1, "one version card besides")
-	check_eq(lap2.new_lap().lord_copies, 2, "…and the next 周目 starts with it")
+	var again := Quests.move(q, lap2, "jz_arrive", rng)
+	check_eq(again[0]["form"], "lord_north_silver", "the default card again on the next 周目's first step")
+	check(again[0]["dupe"], "…held already, so it is another copy of the lord")
+	check_eq(lap2.lord_copies, 2, "…which raises its level")
 	var fixed := SaveData.create()
 	Quests.begin(q, fixed)
 	fixed.run_records.append("出生：冀州无极")

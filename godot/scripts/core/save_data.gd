@@ -103,7 +103,7 @@ func restore_run() -> void:
 
 
 func new_lap(inherit_all := false) -> SaveData:
-	## 新周目: everything starts over — the cards you own, 战功, the lord's cards — except what is remembered: every card you have
+	## 新周目: everything starts over — the cards you own, 战功 — except what is remembered (the lord's cards too): every card you have
 	## had (`seen`: it can drop again, see chest_pools), how far each was levelled (`dupes`, `lord_copies`: a 银+1 card comes back
 	## as 银+1 and keeps levelling), the endings and the name. `inherit_all` (the test option in 设置) keeps the whole collection.
 	_sync()
@@ -115,7 +115,7 @@ func new_lap(inherit_all := false) -> SaveData:
 		s.owned = owned.duplicate()
 		s.soldiers = soldiers.duplicate()
 		s.party = party.duplicate()
-		s.lord_forms = lord_forms.duplicate()
+	s.lord_forms = lord_forms.duplicate()  # the lord's cards (and, with lord_copies, their level) are remembered: the next lap starts with them
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
 	s.cleared_cards = cleared_cards.duplicate()

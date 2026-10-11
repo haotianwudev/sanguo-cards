@@ -426,9 +426,8 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 
 
 static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNumberGenerator = null) -> Array:
-	## returns the lord cards handed out by this step, in order, each {form, dupe} (form "base" = one more copy of the lord itself):
-	## a chapter's first step gives its card (grant_lord_form); a new 周目's first chapter first gives the lord another copy, which
-	## stays across 周目, so every lap starts stronger than the last (lap 1 has nothing to add)
+	## returns the lord cards handed out by this step, each {form, dupe}: a chapter's first step gives its card (grant_lord_form) —
+	## the first chapter's is the route's fixed default (every 周目), later chapters' are random; before it the lord has no card
 	q = view(q, save)
 	var ok := next_options(q, save).any(func(s): return s["id"] == square_id)
 	assert(ok, "cannot move to " + square_id)
@@ -442,10 +441,7 @@ static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNu
 	# only in play (rng given, like the other rogue rolls): the route is known once the start square's birth choice is in
 	var given: Array = []
 	if rng != null and save.visited.size() == 2:
-		if save.lap > 1 and save.replay == "" and save.lord_form_paid != q["id"] and q["id"] == GameData.get_db().quests[0]["id"]:
-			save.upgrade("lord", 1)
-			given.append({"form": "base", "dupe": true})
-		var form := grant_lord_form(q, save, rng)
+		var form := grant_lord_form(q, save, rng, q["id"] == GameData.get_db().quests[0]["id"])
 		if form != "":
 			given.append({"form": form, "dupe": save.lord_form_dupe})
 	return given
@@ -550,8 +546,9 @@ static func recap(save: SaveData) -> Dictionary:
 		"records": save.run_records.duplicate(), "danger": save.danger, "difficulty": save.difficulty}
 
 
-static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> String:
+static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null, default_pick := false) -> String:
 	## each chapter hands out one lord card (version) at random from those of this route not yet had (all had: any of them, as another copy of the lord), once;
+	## default_pick (the first chapter, every 周目) gives the route's fixed default card instead: the first of its grants (already held: another copy of the lord).
 	## returns its id ("" = none left / already given). Without an rng (tests) the first one.
 	q = q.get("_raw", q)
 	if save.lord_form_paid == q["id"] or save.replay != "":
@@ -571,9 +568,13 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 	save.lord_form_dupe = pool.is_empty()
 	if all.is_empty():
 		return ""
-	if pool.is_empty():  # every card of the route is held: a random one again — a repeat is another copy of the lord (raises its tier)
-		pool = all
-	var pick: String = pool[rng.randi_range(0, pool.size() - 1)] if rng != null else pool[0]
+	var pick: String = all[0] if default_pick else ""
+	if default_pick:
+		save.lord_form_dupe = save.lord_forms.has(pick)
+	else:
+		if pool.is_empty():  # every card of the route is held: a random one again — a repeat is another copy of the lord (raises its tier)
+			pool = all
+		pick = pool[rng.randi_range(0, pool.size() - 1)] if rng != null else pool[0]
 	if save.lord_form_dupe:
 		save.lord_copies += 1
 	else:
