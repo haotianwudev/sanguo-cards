@@ -448,7 +448,8 @@ func _inspect_card(cid: String, form := "") -> void:
 			bits.append("体力 +%d" % int(f["bonus"]["hp"]))
 		if int(f["bonus"].get("at", 0)) != 0:
 			bits.append("攻击 +%d" % int(f["bonus"]["at"]))
-		right.add_child(Kit.label("　".join(bits) + "（用着这张时加在主公身上；再次得到它，主公多 1 张副本）", 14, "muted"))
+		right.add_child(Kit.label("　".join(bits) + "（用着这张时加在主公身上，按这张卡自己的品阶放大；每次得到它这张卡 +1 级）", 14, "muted"))
+		info = save.form_level_info(form)  # its own level, not the plain lord's
 
 	# Level progression panel
 	var prog_panel := PanelContainer.new()

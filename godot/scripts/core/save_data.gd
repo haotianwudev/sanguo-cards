@@ -69,12 +69,14 @@ var lord_form_dupe := false  # the last lord card handed out raised the lord's l
 var lord_form_fresh := true  # …and it was also a card the lord did not hold yet; not saved
 var cleared_forms: Array = []  # lord cards held when reaching any ending: remembered across 周目 (the card is not kept, getting it again levels the lord)
 var lord_form_paid := ""  # quest id whose lord card has been handed out (a reopened recap doesn't give twice)
+var form_copies: Dictionary = {}  # lord card (cards.json lord_forms id) -> its own level in copies, this run (the default card = the plain lord is lord_copies)
+var cleared_form_copies: Dictionary = {}  # …the levels confirmed at an ending, remembered across 周目
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -126,6 +128,7 @@ func new_lap(inherit_all := false) -> SaveData:
 	s.cleared_copies = cleared_copies.duplicate()
 	s.cleared_lord_copies = cleared_lord_copies
 	s.cleared_forms = cleared_forms.duplicate()
+	s.cleared_form_copies = cleared_form_copies.duplicate()
 	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
 	if inherit_all:
 		s.story_cards = story_cards.duplicate()
@@ -164,6 +167,13 @@ static func from_dict(d: Dictionary) -> SaveData:
 		s.dupes[k] = int(s.dupes[k])
 	for k in s.cleared_copies:
 		s.cleared_copies[k] = int(s.cleared_copies[k])
+	for k in s.form_copies:
+		s.form_copies[k] = int(s.form_copies[k])
+	for k in s.cleared_form_copies:
+		s.cleared_form_copies[k] = int(s.cleared_form_copies[k])
+	for fid in s.lord_forms:  # a save from before every lord card had its own level: each card held counts as one copy
+		if fid != GameData.get_db().lord_form_default and not s.form_copies.has(fid):
+			s.form_copies[fid] = 1
 	for table in [s.carry_extra, s.carry_uses]:
 		for cid in table:
 			for sk in table[cid]:
@@ -295,10 +305,28 @@ func lord_form() -> String:
 	return mine[-1] if not mine.is_empty() else ""
 
 
+func form_copies_of(fid: String) -> int:
+	## this run's level of a lord card, in copies — the default card is the plain lord (lord_copies); every other card levels on its own
+	if fid == "" or fid == _db().lord_form_default:
+		return lord_copies
+	return int(form_copies.get(fid, 0))
+
+
+func form_permanent_copies(fid: String) -> int:
+	if fid == "" or fid == _db().lord_form_default:
+		return cleared_lord_copies
+	return int(cleared_form_copies.get(fid, 1 if cleared_forms.has(fid) else 0))
+
+
+func form_tier(fid: String) -> int:
+	return tier("", maxi(0, form_copies_of(fid)))
+
+
 func lord_with_form(form: String) -> Dictionary:
-	## the lord as he would be with that card (also used to show every lord card in 整备)
+	## the lord as he would be with that card (also used to show every lord card in 整备): the plain lord at his own tier, the card's bonus at the card's own tier
 	var db := _db()
-	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), form, [form] if form != "" else [])
+	var form_mult := float(db.gacha["tiers"][form_tier(form)]["mult"]) if form != "" else 1.0
+	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), form, [form] if form != "" else [], form_mult)
 
 
 func lord() -> Dictionary:
@@ -596,6 +624,7 @@ func commit_history() -> void:
 	for fid in lord_forms:
 		if not cleared_forms.has(fid):
 			cleared_forms.append(fid)
+		cleared_form_copies[fid] = maxi(int(cleared_form_copies.get(fid, 0)), form_copies_of(fid))
 
 
 func get_cleared_cards() -> Array:
@@ -634,6 +663,17 @@ func permanent_tier(card_id: String) -> int:
 		if n >= int(tiers[i]["copies"]):
 			t = i
 	return t
+
+
+func form_level_info(fid: String) -> Dictionary:
+	## the same facts as card_level_info, for one lord card (cards.json lord_forms): its own permanent level
+	var db := _db()
+	var n := form_permanent_copies(fid)
+	var tiers: Array = db.gacha["tiers"]
+	var cur := tier("", n)
+	var nxt := cur + 1 < tiers.size()
+	return {"soldier": false, "copies": n, "tier": cur, "tier_name": str(tiers[cur]["name"]) + "阶", "mult": float(tiers[cur]["mult"]),
+		"next_copies": int(tiers[cur + 1]["copies"]) if nxt else 0, "next_tier_name": (str(tiers[cur + 1]["name"]) + "阶") if nxt else "", "maxed": not nxt}
 
 
 func card_level_info(card_id: String) -> Dictionary:

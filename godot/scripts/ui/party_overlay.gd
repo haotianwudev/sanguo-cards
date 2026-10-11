@@ -398,7 +398,11 @@ func _fill_lordform_detail(fid: String) -> void:
 	info.add_child(nm)
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
 	var b: Dictionary = GameData.get_db().lord_forms[form]["bonus"] if form != "" else {}
-	info.add_child(_info_line("加成", ("攻 +%d · 兵 +%d" % [int(b.get("at", 0)), int(b.get("hp", 0))]) if form != "" else "没有（原本的主公）"))
+	var tiers_list: Array = GameData.get_db().gacha["tiers"]
+	var fmult := float(tiers_list[save.form_tier(form)]["mult"]) if form != "" else 1.0
+	info.add_child(_info_line("加成", ("攻 +%d · 兵 +%d" % [int(round(int(b.get("at", 0)) * fmult)), int(round(int(b.get("hp", 0)) * fmult))]) if form != "" else "没有（原本的主公）"))
+	if form != "":
+		info.add_child(_info_line("品阶", "%s（%d 张）" % [tiers_list[save.form_tier(form)]["name"], save.form_copies_of(form)]))
 	var in_use := save.lord_form() == form
 	var act := Kit.button("使用中" if in_use else "换上这张主公卡", "gray" if in_use else "green")
 	act.disabled = in_use
@@ -408,7 +412,7 @@ func _fill_lordform_detail(fid: String) -> void:
 		_msg.text = "主公换上了「%s」" % _form_name(fid)
 		_rebuild())
 	_detail.add_child(act)
-	var tip := Kit.label("每章通关会发一张主角卡（拿齐后再发一张，是主公的升级张数）。一次只能用一张，它的加成算在主公身上。", 14, "muted")
+	var tip := Kit.label("每章通关会发一张主角卡，这张卡升 1 级（拿到同一张的再多一张也是 +1）；每张卡各有各的品阶。一次只能用一张，它的加成算在主公身上。", 14, "muted")
 	tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tip.custom_minimum_size = Vector2(340, 0)
 	_detail.add_child(tip)

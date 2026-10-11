@@ -66,9 +66,8 @@ func _ready() -> void:
 func _gain_text(info: Dictionary) -> String:
 	var save := Game.save
 	var bits: Array = []
-	if dupe:
-		var tiers: Array = GameData.get_db().gacha["tiers"]
-		bits.append("品阶：%s（%d 张）" % [tiers[save.tier("lord")]["name"], save.copies("lord")])
+	var tiers: Array = GameData.get_db().gacha["tiers"]
+	bits.append("品阶：%s（%d 张）" % [tiers[save.form_tier(form)]["name"], save.form_copies_of(form)])  # every card levels on its own
 	if fresh:
 		var b: Dictionary = info.get("bonus", {})
 		if int(b.get("hp", 0)) != 0:
