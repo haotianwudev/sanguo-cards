@@ -527,3 +527,4 @@
 - [ ] 2026-10-11 cg `c2_handover` ← c2_handover_new.jpg · ok
 - [ ] 2026-10-11 cg `c2_keep` ← c2_keep_new.jpg · ok
 - [ ] 2026-10-11 cg `c2_triple` ← c2_triple_v2.jpg · ok
+- [ ] 2026-10-11 cg `c2_zumao_saved` ← c2_zumao_saved_v2.jpg · ok
