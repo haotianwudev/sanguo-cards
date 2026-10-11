@@ -908,7 +908,7 @@ func test_dongbai_choice_reaches_the_right_luoyang_after_the_wait() -> void:
 	var db := GameData.get_db()
 	var q: Dictionary = db.quests[1]
 	var sq: Dictionary = q["squares"]
-	check(sq["give"]["next"] == ["wait"] and sq["keep"]["next"] == ["wait"], "both choices lead to the long wait")
+	check(sq["give_c"]["next"] == ["wait"] and sq["keep_c"]["next"] == ["wait"], "both choices lead to the long wait")
 	check_eq(sq["fire"]["next"], ["luoyang_a", "luoyang_b"])
 	var s := SaveData.create()
 	Quests.record(s, "董白：留下")  # chosen in this chapter
