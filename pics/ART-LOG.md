@@ -525,3 +525,4 @@
 - [ ] 2026-10-11 cg `c2_counter` ← c2_counter_v2.jpg · ok
 - [ ] 2026-10-11 cg `c2_dongbai_join` ← c2_dongbai_join_v3.jpg · ok
 - [ ] 2026-10-11 cg `c2_handover` ← c2_handover_new.jpg · ok
+- [ ] 2026-10-11 cg `c2_keep` ← c2_keep_new.jpg · ok
