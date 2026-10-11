@@ -550,3 +550,8 @@
 - [ ] 2026-10-11 cg `c6_escape` ← c6_escape_new.jpg · ok
 - [ ] 2026-10-11 cg `c6_huihe` ← c6_huihe_new.jpg · ok
 - [ ] 2026-10-11 cg `c6_seal` ← c6_seal_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_jiaxu_join` ← c6_jiaxu_join_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_warn` ← c6_warn_new.jpg · ok
+- [ ] 2026-10-11 cg `c7_feng` ← c7_feng_new.jpg · ok
+- [ ] 2026-10-11 cg `c7_huangzhong` ← c7_huangzhong_new.jpg · ok
+- [ ] 2026-10-11 cg `c7_stars` ← c7_stars_new.jpg · ok
