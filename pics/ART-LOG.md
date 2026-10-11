@@ -519,3 +519,4 @@
 - [ ] 2026-10-11 cg `c4_tonggui` ← c4_tonggui_new.jpg · ok
 - [ ] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_new.jpg · ok
 - [ ] 2026-10-11 cg `c5_garden` ← c5_garden_new.jpg · ok
+- [ ] 2026-10-11 cg `c6_fenghou` ← c6_fenghou_v6.jpg · ok
