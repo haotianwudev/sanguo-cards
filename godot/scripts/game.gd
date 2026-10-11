@@ -421,6 +421,15 @@ func demo(name: String) -> void:
 				save.visited.append("dongbai")
 				save.resolved = false
 			show_screen(MapScreen.new())
+		"fork":  # 第三章 at the 白衣抱琴 fork with 结局一 unlocked: both routes drawn
+			save.quests_cleared = ["prologue", "taodong"]
+			save.flags = ["董白：留下", "结局一 · 玉碎"]
+			save.grant_card("dongbai")
+			Quests.ensure_started(save)
+			save.square = "wenji_choice"
+			save.resolved = false
+			save.visited.append(save.square)
+			show_screen(MapScreen.new())
 		"ch4", "ch5":  # route B: 驻守洛阳 / 长安
 			save.quests_cleared = ["prologue", "taodong"]
 			save.flags = ["董白：留下"]

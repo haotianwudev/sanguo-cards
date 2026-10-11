@@ -916,3 +916,20 @@ func test_south_chapter7_the_jinfan_trials_can_be_lost() -> void:
 		s.square = pair[0]
 		check(Quests.lose(q, s, rng(3)), "losing %s is not a restart" % pair[0])
 		check_eq(s.square, pair[1])
+
+
+func test_third_chapter_unchosen_route_is_drawn_ghosted_only_when_unlocked() -> void:
+	## 第三章 draws both routes in their own row bands: the route not taken shows greyed, but a player who never opened
+	## 驻守洛阳 (no 结局一) sees only the 南阳 route
+	var q := quest_by_id("yuxi")
+	var tale: Dictionary = q["squares"]["wenji_tale"]
+	var supply: Dictionary = q["squares"]["supply"]
+	var s := SaveData.new()
+	Quests.begin(q, s, rng(3))
+	check(not Quests.is_ghost(tale, s), "locked-out route stays hidden")
+	check(Quests.is_open(supply, s), "南阳 route is open")
+	s.flags = ["董白：留下", "结局一 · 玉碎"]
+	check(Quests.is_ghost(tale, s), "unlocked route drawn greyed")
+	s.run_records.append("路线：守洛阳")
+	check(not Quests.is_ghost(tale, s) and Quests.is_open(tale, s), "taken route is open")
+	check(Quests.is_ghost(supply, s), "南阳 route greyed once 守洛阳 is taken")

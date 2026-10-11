@@ -251,6 +251,12 @@ static func is_open(s: Dictionary, save: SaveData) -> bool:
 	return _flags_hold(s["requires"], save, true) and (_as_list(s["unless"]).is_empty() or not _flags_hold(s["unless"], save, true))
 
 
+static func is_ghost(s: Dictionary, save: SaveData) -> bool:
+	## a square of a route not taken (or not yet) that the map still draws, greyed, so the fork is visible;
+	## ghost_requires (story flags) keeps a route the player has not unlocked from showing at all
+	return s["ghost"] and not is_open(s, save) and _flags_hold(s["ghost_requires"], save, false)
+
+
 static func _as_list(v: Variant) -> Array:
 	if v is Array:
 		return v

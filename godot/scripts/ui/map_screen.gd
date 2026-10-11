@@ -16,6 +16,8 @@ var _lines: MapLines
 var _bg: TextureRect
 var _token: Control
 var _nodes: Dictionary = {}  # square id -> Button
+var _ghosts: Dictionary = {}  # square id -> true: a route not taken, drawn greyed
+var _y_off := 0  # the first row actually drawn (a chapter whose routes sit in separate row bands)
 var _pulses: Array = []
 var _sheet: PanelContainer
 var _cg_view: TextureRect  # Rance X style: a story CG fills the screen, the text box sits over it
@@ -166,7 +168,11 @@ func _x_offset() -> int:
 
 
 func _pos(s: Dictionary) -> Vector2:
-	return Vector2(90 + (s["x"] - _x_offset()) * COL_W, MAP_TOP + 50 + s["y"] * LANE_H)
+	return Vector2(90 + (s["x"] - _x_offset()) * COL_W, MAP_TOP + 50 + (s["y"] - _y_off) * LANE_H)
+
+
+func _shown(s: Dictionary) -> bool:
+	return Quests.is_open(s, Game.save) or Quests.is_ghost(s, Game.save)
 
 
 func _rebuild_map() -> void:
@@ -177,24 +183,32 @@ func _rebuild_map() -> void:
 	_nodes.clear()
 	if q == null:
 		return
+	_ghosts.clear()
 	var offset := _x_offset()
 	var max_x := 0
+	var min_y := 99
+	var max_y := 0
 	for s in q["squares"].values():
 		if offset > 0 and s["x"] < offset:
 			continue
 		if offset == 0 and q["id"] == "prologue" and s["x"] >= 23:
 			continue
-		if not Quests.is_open(s, Game.save):  # a route not taken adds no width
+		if not _shown(s):  # a route that does not exist for this player adds no size
 			continue
 		max_x = maxi(max_x, s["x"] - offset)
-	_layer.custom_minimum_size = Vector2(180 + max_x * COL_W + 60, 360)
+		min_y = mini(min_y, s["y"])
+		max_y = maxi(max_y, s["y"])
+	_y_off = min_y if min_y < 99 else 0
+	var height := maxf(360.0, MAP_TOP + 50 + (max_y - _y_off) * LANE_H + 110)
+	_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO if height > 360.0 else ScrollContainer.SCROLL_MODE_DISABLED
+	_layer.custom_minimum_size = Vector2(180 + max_x * COL_W + 60, height)
 	_lines.size = _layer.custom_minimum_size
 	# chapter background: data/art/map/<quest id or map_overrides key>.jpg (built by `sanguo-art` from pics/art.json "maps")
 	var bg_path: String = "res://data/art/map/%s.jpg" % Quests.map_key(q, Game.save)
 	_bg.texture = load(bg_path) if ResourceLoader.exists(bg_path) else null
 	_bg.size = _layer.custom_minimum_size
 	for s in q["squares"].values():
-		if not Quests.is_open(s, Game.save):  # hidden by an earlier chapter's choices
+		if not _shown(s):  # hidden by an earlier chapter's choices
 			continue
 		if offset > 0 and s["x"] < offset:
 			continue
@@ -226,6 +240,9 @@ func _rebuild_map() -> void:
 		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_layer.add_child(lbl)
 		_nodes[s["id"]] = b
+		if not Quests.is_open(s, Game.save):
+			_ghosts[s["id"]] = true
+			lbl.modulate.a = 0.5
 	var token_tex: Texture2D = Kit.token_icon()
 	if token_tex != null:
 		var tr := TextureRect.new()
@@ -390,6 +407,9 @@ func _refresh() -> void:
 			var walked: bool = path.has(s["id"] + ">" + t)
 			var a := _pos(s)
 			var b := _pos(q["squares"][t])
+			if _ghosts.has(s["id"]) or _ghosts.has(t):  # a route not taken: a faint line
+				_lines.segs.append([a, b, Color(0.96, 0.93, 0.85, 0.3), 2.0])
+				continue
 			_lines.segs.append([a, b, Color(0.12, 0.09, 0.06, 0.55), 9.0 if walked else 6.0])
 			_lines.segs.append([a, b, Kit.c("gold") if walked else Color(0.96, 0.93, 0.85, 0.9), 5.0 if walked else 2.5])
 	_lines.queue_redraw()
@@ -407,6 +427,8 @@ func _refresh() -> void:
 		elif not ahead.has(sid):
 			state = "closed"
 		_style_square(b, s, state)
+		if _ghosts.has(sid):
+			b.modulate = Color(0.5, 0.5, 0.55, 0.55)
 		b.disabled = state != "reachable"
 		b.focus_mode = Control.FOCUS_ALL if state == "reachable" else Control.FOCUS_NONE
 		b.scale = Vector2.ONE
@@ -462,8 +484,10 @@ func _chip(text: String, color: String) -> Label:
 func _center_on(s: Dictionary) -> void:
 	await get_tree().process_frame
 	var target := int(_pos(s).x - 640)
-	var tw := create_tween()
+	var tw := create_tween().set_parallel()
 	tw.tween_property(_scroll, "scroll_horizontal", maxi(0, target), 0.35).set_trans(Tween.TRANS_CUBIC)
+	if _scroll.vertical_scroll_mode != ScrollContainer.SCROLL_MODE_DISABLED:
+		tw.tween_property(_scroll, "scroll_vertical", maxi(0, int(_pos(s).y - 186)), 0.35).set_trans(Tween.TRANS_CUBIC)
 
 
 # ---- moving --------------------------------------------------------------------
