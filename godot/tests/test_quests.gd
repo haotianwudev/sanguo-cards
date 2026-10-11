@@ -938,10 +938,9 @@ func test_route_b_goes_on_to_luoyang_and_changan_inside_chapter_three() -> void:
 	check_eq(Quests.title(q3, s), "第三章 · 传国玉玺")
 	s.run_records = ["路线：守洛阳"]
 	check_eq(Quests.title(q3, s), "第三章 · 驻守洛阳")
-	check_eq(Quests.map_key(q3, s), "shouluoyang")
+	check_eq(Quests.map_key(q3, s), "yuxi", "one map for the whole chapter, like every other chapter")
 	s.run_records.append("路线：长安")
-	check_eq(Quests.map_key(q3, s), "changan")
-	check_eq(Quests.map_from(q3, s), q3["squares"]["lijue_test"]["x"], "the 长安 map starts at the last 洛阳 square")
+	check_eq(Quests.map_key(q3, s), "yuxi")
 	s.run_records = []
 	s.quests_cleared.append("yuxi")
 	s.flags = ["长安：吕布杀了董卓"]
@@ -1221,3 +1220,14 @@ func test_difficulty_lasts_the_whole_lap_but_danger_is_this_chapters() -> void:
 	check(is_equal_approx(float(Quests.mods(s)["enemy"]), step), "so later chapters keep the one and not the other")
 	var lap2 := s.new_lap()
 	check_eq(lap2.difficulty, 0, "a new lap starts the 难度 again — from the lap head start (battle.lap_step) instead")
+
+
+func test_every_debug_chapter_jump_lands_on_a_real_square_of_its_chapter() -> void:
+	for jump in ChapterJumps.LIST:
+		var s := ChapterJumps.jump_save(jump)
+		var q: Variant = Quests.current_quest(s)
+		check(q != null, "%s: a chapter is open" % jump["label"])
+		if q == null:
+			continue
+		check(q["squares"].has(s.square) and Quests.is_open(q["squares"][s.square], s), "%s: standing on an open square (%s)" % [jump["label"], s.square])
+		check(str(jump["label"]).begins_with(Quests.title(q, s).split(" · ")[0]), "%s: the chapter number matches (%s)" % [jump["label"], Quests.title(q, s)])

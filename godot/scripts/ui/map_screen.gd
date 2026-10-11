@@ -162,7 +162,7 @@ func _ready() -> void:
 func _x_offset() -> int:
 	if q != null and Quests.map_key(q, Game.save) == "prologue_north":
 		return 23
-	return Quests.map_from(q, Game.save) if q != null else 0
+	return 0
 
 
 func _pos(s: Dictionary) -> Vector2:
