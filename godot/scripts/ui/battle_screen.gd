@@ -758,8 +758,11 @@ func _play(events: Array) -> void:
 					"interrupt":
 						BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
 				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center() + Vector2(0, -30), str(ev["dmg"]),
-					{"hit": Kit.c("amber"), "burn": Kit.c("red")}.get(ev["t"], Kit.c("purple")), 52 if big else 40)
+				var crit_hit: bool = ev.get("crit", false)
+				Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
+					Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
+				if crit_hit:
+					Kit.shake(self, 14.0, 0.2)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
 				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
 				if ev["t"] == "hit" and ev["combo"] >= 2:
@@ -856,7 +859,7 @@ func _play(events: Array) -> void:
 					BattleFx.flame_lick(self, _party_rect())
 				else:
 					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
-				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 44)
+				Kit.float_text(self, _party_center(), ("暴击 " if ev.get("crit", false) else "") + "-%d" % ev["dmg"], Kit.c("red"), 56 if ev.get("crit", false) else 44)
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.35).timeout

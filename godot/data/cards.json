@@ -78,6 +78,8 @@
     "combo_bonus": 0.1,
     "variance": 0.2,
     "ambush_chance": 0.5,
+    "_crit": "暴击：每次造成伤害各自掷一次——我方每一击 player_chance 几率造成 player_mult 倍伤害，敌人每一击 enemy_chance 几率 enemy_mult 倍；宝物 mods.crit / mods.crit_mult 加在我方上。想更随机就加大几率或倍数",
+    "crit": {"player_chance": 0.12, "player_mult": 1.6, "enemy_chance": 0.08, "enemy_mult": 1.5},
     "_scaling": "敌人强度公式（只调 strength 一个数）：强度 = 血×攻×行动数。第 N 章（order）普通战斗的目标强度 = strength × base × growth^N；精英 = tier.elite × 它，首领 = tier.boss × 它。代码把本章每一档战斗的中位数拉到目标，每个敌人相对中位数的强弱仍随它自己的卡牌；章内再按格子线性递增 in_chapter（第一列×start，最后一列×end，prologue 除外）。chapter = 个别章节的手工微调（默认空）。想整体变难/变易：只改 strength",
     "scaling": {
       "strength": 1.0,

@@ -744,3 +744,32 @@ func test_every_sound_in_the_audio_table_exists_and_every_troop_has_an_act_sound
 		check(data["sfx"].has("act_" + troop), "a 出招 sound for " + troop)
 	for key in ["hit", "hit_heavy", "hit_magic", "hit_pierce", "slash", "burn", "enemy_hit", "win", "lose", "step"]:
 		check(data["sfx"].has(key), "a sound for " + key)
+
+
+func test_crits_multiply_the_blow_and_are_configured_in_one_place() -> void:
+	var cfg: Dictionary = GameData.get_db().battle["crit"]
+	var saved: Dictionary = cfg.duplicate()
+	var saved_variance: float = GameData.get_db().battle["variance"]
+	GameData.get_db().battle["variance"] = 0.0  # so the two blows are comparable
+	cfg["player_chance"] = 0.0
+	var plain := new_battle()
+	plain.act(0, "tuji")
+	var d0: int = plain.take_events().filter(func(e): return e["t"] == "hit")[0]["dmg"]
+	cfg["player_chance"] = 1.0
+	cfg["player_mult"] = 2.0
+	var crit := new_battle()
+	crit.act(0, "tuji")
+	var hit1: Dictionary = crit.take_events().filter(func(e): return e["t"] == "hit")[0]
+	var d1: int = hit1["dmg"]
+	check(d0 > 0 and absf(float(d1) / float(d0) - 2.0) < 0.02, "a crit is player_mult times the same blow (%d vs %d)" % [d0, d1])
+	check(hit1.get("crit", false), "the hit event says crit")
+	cfg["player_chance"] = 0.0
+	cfg["enemy_chance"] = 1.0
+	cfg["enemy_mult"] = 3.0
+	var hurt := new_battle()
+	hurt.party_hp = hurt.party_max
+	hurt.end_round()
+	check(hurt.take_events().any(func(e): return e["t"] == "enemy_hit" and e.get("crit", false)), "the enemy can crit too")
+	for k in saved:
+		cfg[k] = saved[k]
+	GameData.get_db().battle["variance"] = saved_variance

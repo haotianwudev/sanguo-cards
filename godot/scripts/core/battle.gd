@@ -315,6 +315,18 @@ func _variance() -> float:
 	return rng.randf_range(1.0 - v, 1.0 + v)
 
 
+func _crit_roll(side: String) -> float:
+	## 暴击 (battle.crit in cards.json): returns the damage multiplier — 1.0 for no crit. `player_*` for our hits, `enemy_*` for theirs;
+	## mods.crit / mods.crit_mult (宝物) add to ours
+	var cfg: Dictionary = db.battle.get("crit", {})
+	var chance := float(cfg.get(side + "_chance", 0.0))
+	var mult := float(cfg.get(side + "_mult", 1.0))
+	if side == "player":
+		chance += float(mods.get("crit", 0.0))
+		mult += float(mods.get("crit_mult", 0.0))
+	return mult if chance > 0.0 and rng.randf() < chance else 1.0
+
+
 func _dmg(base: float, kind: String, pierce := false) -> int:
 	## pierce (弓兵 穿甲): this hit ignores the enemy's resist altogether
 	var data: Dictionary = enemy["data"]
@@ -345,12 +357,16 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				var fire := float(eff.get("burning_mult", 1.0)) if enemy["burn_turns"] > 0 else 1.0  # 火上浇油
 				var power: float = float(eff["power"]) + float(eff.get("per_combo", 0.0)) * combo  # 收尾 (骑兵)
 				var d := _dmg(at * power * mult * (1.0 + bonus) * fire, kind, bool(eff.get("pierce", false)))
+				var crit_mult := _crit_roll("player")
+				var crit := crit_mult > 1.0
+				if crit:
+					d = int(round(d * crit_mult))
 				if d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				enemy["hp"] = maxi(0, enemy["hp"] - d)
 				combo += 1
-				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": bool(eff.get("pierce", false))})
-				log.append("  %s 受到 %d 伤害（%d 连击）" % [ename, d, combo])
+				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": bool(eff.get("pierce", false)), "crit": crit})
+				log.append("  %s 受到 %d 伤害（%d 连击）%s" % [ename, d, combo, "[color=gold]　暴击！[/color]" if crit else ""])
 			return log
 		"heal":
 			var amt := mini(int(round(at * float(eff["power"]) * mult * (1.0 + float(mods.get("heal", 0.0))))),
@@ -500,10 +516,14 @@ func _enemy_phase(defend_cut: float) -> Array:
 			if float(mv["power"]) > 0.0:
 				var c: float = 0.0 if mv.get("pierce", false) else cut
 				var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - c))))
+				var ecrit := _crit_roll("enemy")
+				if ecrit > 1.0:
+					d = int(round(d * ecrit))
 				party_hp = maxi(0, party_hp - d)
-				_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": c, "hp": party_hp})
-				log.append("%s【%s】 我军受到 %d 伤害%s%s" % [data["name"], mv["name"], d,
-					("（减伤 %d%%）" % int(round(c * 100))) if c > 0.0 else "", "（无视防御！）" if mv.get("pierce", false) else ""])
+				_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": c, "hp": party_hp, "crit": ecrit > 1.0})
+				log.append("%s【%s】 我军受到 %d 伤害%s%s%s" % [data["name"], mv["name"], d,
+					("（减伤 %d%%）" % int(round(c * 100))) if c > 0.0 else "", "（无视防御！）" if mv.get("pierce", false) else "",
+					"[color=red]　暴击！[/color]" if ecrit > 1.0 else ""])
 				if party_hp > 0:
 					log.append_array(_counter_strike())
 			else:
