@@ -6422,8 +6422,8 @@
     "dongbai": {
       "name": "董白",
       "portrait": "dongbai",
-      "hp": 8000,
-      "at": 290,
+      "hp": 11000,
+      "at": 320,
       "actions": 2,
       "moves": [
         {
@@ -7668,8 +7668,8 @@
     "lijue": {
       "name": "李傕",
       "portrait": "lijue",
-      "hp": 10000,
-      "at": 310,
+      "hp": 14000,
+      "at": 350,
       "actions": 2,
       "moves": [
         {
@@ -7976,8 +7976,8 @@
     "xurong": {
       "name": "徐荣",
       "portrait": "xurong",
-      "hp": 8500,
-      "at": 300,
+      "hp": 12000,
+      "at": 340,
       "actions": 2,
       "moves": [
         {
