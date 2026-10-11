@@ -28,7 +28,7 @@ func _ready() -> void:
 	var title := Kit.label("重　开　三　国", Kit.FONT_TITLE + 16, "gold")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(title)
-	var sub := Kit.label("穿越江东 · 招兵买将", Kit.FONT_BIG, "muted")
+	var sub := Kit.label("南北两线 · 招兵买将", Kit.FONT_BIG, "muted")
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(sub)
 	col.add_child(Control.new())
