@@ -162,7 +162,7 @@ func _ready() -> void:
 func _x_offset() -> int:
 	if q != null and Quests.map_key(q, Game.save) == "prologue_north":
 		return 23
-	return 0
+	return Quests.map_from(q, Game.save) if q != null else 0
 
 
 func _pos(s: Dictionary) -> Vector2:
@@ -183,6 +183,8 @@ func _rebuild_map() -> void:
 		if offset > 0 and s["x"] < offset:
 			continue
 		if offset == 0 and q["id"] == "prologue" and s["x"] >= 23:
+			continue
+		if not Quests.is_open(s, Game.save):  # a route not taken adds no width
 			continue
 		max_x = maxi(max_x, s["x"] - offset)
 	_layer.custom_minimum_size = Vector2(180 + max_x * COL_W + 60, 360)

@@ -328,6 +328,14 @@ static func map_key(q: Dictionary, save: SaveData) -> String:
 	return q["id"]
 
 
+static func map_from(q: Dictionary, save: SaveData) -> int:
+	## the first column drawn on a swapped-in map (a route that goes on inside the same chapter shows only its own stretch)
+	for o in q["map_overrides"]:
+		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+			return int(o["from"])
+	return 0
+
+
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## Cards shown on the current recruit (generals) or treasure (soldiers) square — rolled once, then kept.
 	q = view(q, save)

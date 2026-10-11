@@ -25,24 +25,24 @@ const _CHAPTER_JUMPS := [
 		"flags": ["出生：冀州无极", "北线：班师冀州", "曹操：没借", "界桥：救下公孙瓒", "郑姜：和好", "北线：北海相", "军纪：严明",
 			"夏侯惇：痛击殿后", "徐州：接任徐州牧"]},
 	{"label": "第三章 · 传国玉玺", "cleared": ["prologue", "taodong"], "flags": []},
-	{"label": "第三章 · 驻守洛阳", "cleared": ["prologue", "taodong", "yuxi"],
-		"flags": ["董白：留下", "结局一 · 玉碎", "路线：守洛阳"]},
-	{"label": "第三章 · 长安", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang"],
-		"flags": ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安"]},
-	{"label": "第四章 · 挟天子", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan"],
+	{"label": "第三章 · 驻守洛阳（第三章地图内）", "cleared": ["prologue", "taodong"], "flags": ["董白：留下"],
+		"records": ["路线：守洛阳"], "at": "wenji_join"},
+	{"label": "第三章 · 长安（第三章地图内）", "cleared": ["prologue", "taodong"], "flags": ["董白：留下"],
+		"records": ["路线：守洛阳", "路线：长安"], "at": "lijue_test"},
+	{"label": "第四章 · 挟天子", "cleared": ["prologue", "taodong", "yuxi"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"]},
-	{"label": "第五章 · 荆襄风云", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui"],
+	{"label": "第五章 · 荆襄风云", "cleared": ["prologue", "taodong", "yuxi", "dongui"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"]},
-	{"label": "第六章 · 淮南折帝旗（南线）", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang"],
+	{"label": "第六章 · 淮南折帝旗（南线）", "cleared": ["prologue", "taodong", "yuxi", "dongui", "jingxiang"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "结局三 · 恨海", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓",
 			"南阳：袁术东逃", "贾诩：入队", "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督"]},
-	{"label": "第六章 · 淮南折帝旗（南线，结局十之后：刘晔线）", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang"],
+	{"label": "第六章 · 淮南折帝旗（南线，结局十之后：刘晔线）", "cleared": ["prologue", "taodong", "yuxi", "dongui", "jingxiang"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "结局三 · 恨海", "结局十 · 深锁", "路线：守洛阳", "路线：长安",
 			"长安：吕布杀了董卓", "南阳：袁术东逃", "贾诩：入队", "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督"]},
-	{"label": "第七章 · 江东小霸王（南线）", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang", "huainan_s"],
+	{"label": "第七章 · 江东小霸王（南线）", "cleared": ["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "结局三 · 恨海", "结局十 · 深锁", "路线：守洛阳", "路线：长安",
 			"长安：吕布杀了董卓", "南阳：袁术东逃", "贾诩：入队", "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督", "庐江：刘晔调停", "庐江：双婚"]},
-	{"label": "第七章 · 江东小霸王（南线，结局十一之后：收服锦帆）", "cleared": ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui", "jingxiang", "huainan_s"],
+	{"label": "第七章 · 江东小霸王（南线，结局十一之后：收服锦帆）", "cleared": ["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s"],
 		"flags": ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "结局三 · 恨海", "结局十 · 深锁", "结局十一 · 匹夫", "路线：守洛阳", "路线：长安",
 			"长安：吕布杀了董卓", "南阳：袁术东逃", "贾诩：入队", "荆襄：联蒯灭蔡", "荆襄：督荆襄九郡大都督", "庐江：刘晔调停", "庐江：双婚"]},
 ]
@@ -132,6 +132,12 @@ func _do_jump(jump: Dictionary) -> void:
 	save.flags = jump["flags"].duplicate()
 	Game.save = save
 	Quests.ensure_started(save, Game.rng)
+	if jump.has("at"):  # a stop inside a chapter: the records so far, standing on that square
+		save.run_records = jump["records"].duplicate()
+		save.square = jump["at"]
+		save.resolved = true
+		if not save.visited.has(jump["at"]):
+			save.visited.append(jump["at"])
 	Game.show_screen(MapScreen.new())
 
 

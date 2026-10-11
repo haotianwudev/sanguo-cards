@@ -155,7 +155,7 @@ func _load(dir: String) -> void:
 				"title_overrides": q.get("title_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
 					"unless": o.get("unless", ""), "title": o.get("title", "")}),
 				"map_overrides": q.get("map_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
-					"unless": o.get("unless", ""), "map": o.get("map", "")})})
+					"unless": o.get("unless", ""), "map": o.get("map", ""), "from": int(o.get("from", 0))})})
 	for eid in story.get("events", {}):
 		var ev: Dictionary = story["events"][eid]
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),

@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "shouluoyang", "changan", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "jiangdong"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "jiangdong"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -929,21 +929,23 @@ func test_the_marriage_offer_is_dongbai_either_way() -> void:
 	check("董白" in sq["heqin_k"]["text"][1] and "董白" in sq["heqin_g"]["text"][1], "the bride offered is 董白")
 
 
-func test_route_b_goes_on_to_luoyang_and_changan() -> void:
+func test_route_b_goes_on_to_luoyang_and_changan_inside_chapter_three() -> void:
 	var s := SaveData.create()
-	s.quests_cleared = ["prologue", "taodong", "yuxi"]
-	check(Quests.current_quest(s) == null, "route A: the story ends after chapter 3")
-	s.flags = ["路线：守洛阳"]
-	check_eq(Quests.current_quest(s)["id"], "shouluoyang", "saved 蔡文姬: chapter 4")
-	s.quests_cleared.append("shouluoyang")
-	s.flags.append("路线：长安")
-	check_eq(Quests.current_quest(s)["id"], "changan", "then 长安")
-	s.quests_cleared.append("changan")
-	check(Quests.current_quest(s) == null, "第四章 waits for 董卓's death")
-	s.flags.append("长安：吕布杀了董卓")
-	check_eq(Quests.current_quest(s)["id"], "dongui", "then 第四章 · 挟天子")
+	s.quests_cleared = ["prologue", "taodong"]
 	var q3: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "yuxi")[0]
-	check(q3["squares"]["wenji_join"]["next"].is_empty() and q3["squares"]["wenji_join"]["record"] == "路线：守洛阳", "saving her ends chapter 3 on route B")
+	check(q3["squares"]["wenji_join"]["next"] == ["wenji_tale"] and q3["squares"]["lijue_test"]["next"] == ["enter"], "saving her walks on to 洛阳, then 长安: same chapter")
+	check(GameData.get_db().quests.all(func(x): return x["id"] not in ["shouluoyang", "changan"]), "no chapters of their own")
+	check_eq(Quests.title(q3, s), "第三章 · 传国玉玺")
+	s.run_records = ["路线：守洛阳"]
+	check_eq(Quests.title(q3, s), "第三章 · 驻守洛阳")
+	check_eq(Quests.map_key(q3, s), "shouluoyang")
+	s.run_records.append("路线：长安")
+	check_eq(Quests.map_key(q3, s), "changan")
+	check_eq(Quests.map_from(q3, s), q3["squares"]["lijue_test"]["x"], "the 长安 map starts at the last 洛阳 square")
+	s.run_records = []
+	s.quests_cleared.append("yuxi")
+	s.flags = ["长安：吕布杀了董卓"]
+	check_eq(Quests.current_quest(s)["id"], "dongui", "then 第四章 · 挟天子")
 
 
 func test_chapter4_nobody_warns_you_until_ending_two() -> void:
@@ -1180,8 +1182,8 @@ func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() 
 
 
 func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_lane_too() -> void:
-	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng"], "shouluoyang": ["wenji_tale", "plan", "xizi"],
-		"changan": ["caiyong", "yuexia", "xian"], "jingxiang": ["jx_diaochan", "jx_bubing", "jx_jinggao", "jx_xiangyang", "jx_mimou"],
+	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng", "wenji_tale", "plan", "xizi", "caiyong", "yuexia", "xian"],
+		"jingxiang": ["jx_diaochan", "jx_bubing", "jx_jinggao", "jx_xiangyang", "jx_mimou"],
 		"dongui": ["zhongyao", "tuwei", "luan", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"]}
 	var db := GameData.get_db()
 	for q in db.quests:

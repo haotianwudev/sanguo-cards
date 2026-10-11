@@ -422,13 +422,17 @@ func demo(name: String) -> void:
 				save.resolved = false
 			show_screen(MapScreen.new())
 		"ch4", "ch5":  # route B: 驻守洛阳 / 长安
-			save.quests_cleared = ["prologue", "taodong", "yuxi"] + (["shouluoyang"] if name == "ch5" else [])
-			save.flags = ["董白：留下", "结局一 · 玉碎", "路线：守洛阳"] + (["路线：长安"] if name == "ch5" else [])
+			save.quests_cleared = ["prologue", "taodong"]
+			save.flags = ["董白：留下"]
 			save.grant_card("dongbai")
 			Quests.ensure_started(save)
+			save.run_records = ["路线：守洛阳"] + (["路线：长安"] if name == "ch5" else [])  # still inside 第三章, past the fork
+			save.square = "lijue_test" if name == "ch5" else "wenji_join"
+			save.resolved = true
+			save.visited.append(save.square)
 			show_screen(MapScreen.new())
 		"ch6", "ch6b", "ch6c":  # 第四章 · 挟天子: 二周目 (nobody warns you) / 三周目 (貂蝉 comes) / 四周目 (张济 张绣, 贾诩 joins); --at=<square> jumps ahead
-			save.quests_cleared = ["prologue", "taodong", "yuxi", "shouluoyang", "changan"]
+			save.quests_cleared = ["prologue", "taodong", "yuxi"]
 			save.flags = ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"]
 			if name != "ch6":
 				save.flags.append("结局二 · 同归")
@@ -444,7 +448,7 @@ func demo(name: String) -> void:
 					save.resolved = false
 			show_screen(MapScreen.new())
 		"ch8", "ch8b":  # 第五章 · 荆襄风云: first time (the banquet, 结局三) / after 结局三 with 贾诩 (he breaks it); --at=<square> jumps ahead
-			save.quests_cleared = ["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui"]
+			save.quests_cleared = ["prologue", "taodong", "yuxi", "dongui"]
 			save.flags = ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"]
 			if name == "ch8b":
 				save.flags.append_array(["结局三 · 恨海", "贾诩：入队"])

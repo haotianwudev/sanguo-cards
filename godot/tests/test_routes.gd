@@ -99,28 +99,18 @@ func test_lap2_route_b_runs_through_luoyang_and_changan_to_ending_two() -> void:
 	var yuxi := quest_by_id("yuxi")
 	var p3 := walk(yuxi, s, [], 1, 0, 0)
 	check(p3.has("wenji_seen") and p3.has("wenji_fight"), "二周目: 董白 spots 蔡文姬")
-	check_eq(p3[-1], "wenji_join", "saving her ends chapter 3 early")
 	check(s.has_card("caiwenji"), "蔡文姬 joins")
 	check(not s.run_records.has(E1), "no 玉碎 on this road")
-	finish(yuxi, s)
-	check(s.flags.has("路线：守洛阳"))
-
-	var luo := quest_by_id("shouluoyang")
-	check_eq(Quests.current_quest(s)["id"], "shouluoyang")
-	var p4 := walk(luo, s, [])
-	for sid in ["wenji_tale", "plan", "guosi4", "grain", "settle", "zhujun", "xizi", "peace", "betroth", "mangshan", "farewell"]:
-		check(p4.has(sid), "驻守洛阳 passes " + sid)
+	for sid in ["wenji_join", "wenji_tale", "plan", "guosi4", "grain", "settle", "zhujun", "xizi", "peace", "betroth", "mangshan", "farewell"]:
+		check(p3.has(sid), "驻守洛阳 passes " + sid)
 	check(s.has_card("zhujun"), "朱儁 joins")
-	finish(luo, s)
-
-	var ca := quest_by_id("changan")
-	check_eq(Quests.current_quest(s)["id"], "changan")
-	var p5 := walk(ca, s, [])
 	for sid in ["enter", "feast", "bw3", "passed", "chaojian", "caiyong", "wangyun", "diaochan", "xuhun", "yuexia", "xian",
 			"fengyi", "chuxi", "eve", "xueye", "wedding", "hall", "huzhen", "dongzhuo5", "kill_all", "death"]:
-		check(p5.has(sid), "长安 passes " + sid)
+		check(p3.has(sid), "长安 passes " + sid)
+	check(not p3.has("supply") and not p3.has("road_fight"), "the bandit road stays behind")
 	check(s.has_card("huangfusong"), "皇甫嵩 joins at 格杀勿论")
-	finish(ca, s)
+	finish(yuxi, s)
+	check(s.flags.has("路线：守洛阳") and s.flags.has("路线：长安"))
 	check(s.flags.has("长安：吕布杀了董卓"))
 
 	var d := quest_by_id("dongui")
@@ -141,7 +131,7 @@ func test_lap2_route_b_runs_through_luoyang_and_changan_to_ending_two() -> void:
 
 
 func test_lap2_losing_to_lvbu_still_reaches_ending_two() -> void:
-	var s := lap_save(["董白：留下", E1, "长安：吕布杀了董卓"], ["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+	var s := lap_save(["董白：留下", E1, "长安：吕布杀了董卓"], ["prologue", "taodong", "yuxi"])
 	var d := quest_by_id("dongui")
 	Quests.begin(d, s)
 	s.square = "lvbu4"
@@ -155,7 +145,7 @@ func test_lap2_losing_to_lvbu_still_reaches_ending_two() -> void:
 func test_lap3_chapter4_escapes_with_the_emperor_and_takes_nanyang() -> void:
 	for fork in [["zhuibing", "m1", "m2", "m7a"], ["fanchou6", "t1", "rest", "t7"]]:
 		var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"],
-				["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+				["prologue", "taodong", "yuxi"])
 		var d := quest_by_id("dongui")
 		check_eq(Quests.current_quest(s)["id"], "dongui")
 		var p := walk(d, s, fork)
@@ -198,7 +188,7 @@ func reachable(q: Dictionary, s: SaveData) -> Dictionary:
 
 
 func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap() -> void:
-	for id in ["yuxi", "shouluoyang", "changan", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s"]:
+	for id in ["yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s"]:
 		var q := quest_by_id(id)
 		var sq: Dictionary = q["squares"]
 		var lines := {}
@@ -220,8 +210,12 @@ func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap
 				var at := Vector2i(sq[sid]["x"], sq[sid]["y"])
 				check(not spots.has(at), "%s %s: %s and %s both open at %s" % [id, s.flags, sid, spots.get(at, ""), at])
 				spots[at] = sid
+			var mid_route := s.flags.any(func(f): return str(f).begins_with("路线："))  # a route already taken inside the chapter: its flag is a record made on the way
 			for sid in seen:  # no square leads only into hidden squares
 				var nexts: Array = sq[sid]["next"].filter(func(n): return Quests.is_open(sq[n], s))
+				var opens_by_record: bool = sq[sid]["record"] != "" and sq[sid]["next"].any(func(n): return Quests._as_list(sq[n]["requires"]).has(sq[sid]["record"]))
+				if mid_route or opens_by_record:
+					continue
 				check(not (nexts.is_empty() and not sq[sid]["next"].is_empty()), "%s %s: stuck at %s" % [id, s.flags, sid])
 		for sid in sq:
 			check(covered.has(sid), "%s: square %s is never reachable" % [id, sid])
@@ -231,7 +225,7 @@ func test_every_square_is_reachable_on_some_route_and_open_squares_never_overlap
 
 func test_lap3_chapter4_plays_with_real_fights() -> void:
 	var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"],
-			["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+			["prologue", "taodong", "yuxi"])
 	for c in ["caiwenji", "huangfusong", "zhujun", "sunjian", "chengpu", "huanggai", "handang"]:
 		if GameData.get_db().cards.has(c):
 			s.grant_card(c)
@@ -281,7 +275,7 @@ func test_the_bundled_font_has_every_character_the_game_prints() -> void:
 
 func ch5_save(flags: Array) -> SaveData:
 	var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"] + flags,
-			["prologue", "taodong", "yuxi", "shouluoyang", "changan", "dongui"])
+			["prologue", "taodong", "yuxi", "dongui"])
 	for c in ["diaochan", "xunyou", "huangzhong", "caiwenji"]:
 		s.grant_card(c)
 	return s
@@ -461,7 +455,7 @@ func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:
 	for flags in [[E3], []]:
 		for fork in [["m2"], ["rest"]]:
 			var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"] + flags,
-					["prologue", "taodong", "yuxi", "shouluoyang", "changan"])
+					["prologue", "taodong", "yuxi"])
 			var p := walk(quest_by_id("dongui"), s, fork)
 			for sid in ["zhangxiu6", "zhangji6", "jiaxu6"]:
 				check_eq(p.has(sid), not flags.is_empty(), "%s only on 四周目 %s %s" % [sid, str(flags), fork[0]])
