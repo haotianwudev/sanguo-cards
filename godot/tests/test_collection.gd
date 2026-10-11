@@ -614,15 +614,21 @@ func test_cleared_cards_and_levels() -> void:
 	var s := SaveData.create()
 	check_eq(s.get_cleared_cards(), ["lord"], "a fresh run only has the lord in cleared cards")
 	s.grant_card("sunce")
-	s.dupes["sunce"] = 4  # 银阶
+	s.dupes["sunce"] = 4  # 银阶 in current run
+	s.lord_copies = 4
 	check_eq(s.get_cleared_cards(), ["lord"], "temporary cards in an unended run are not in cleared cards")
-	s.ended = true
-	check(s.get_cleared_cards().has("sunce"), "ended run counts held cards as cleared")
+	check_eq(s.card_level_info("lord")["copies"], 1, "unended lord level is not reflected in cleared album yet")
 	s.commit_history()
+	check(s.get_cleared_cards().has("sunce"), "ended run counts held cards as cleared after commit_history")
+	var info_cleared := s.card_level_info("sunce")
+	check_eq(info_cleared["tier_name"], "银阶")
+	check_eq(info_cleared["copies"], 4)
+	check_eq(s.card_level_info("lord")["copies"], 4)
 	var next := s.new_lap()
 	check(next.get_cleared_cards().has("sunce"), "new lap preserves cleared cards")
 	var info := next.card_level_info("sunce")
 	check_eq(info["tier_name"], "银阶")
 	check_eq(info["copies"], 4)
+	check_eq(next.card_level_info("lord")["copies"], 4)
 
 

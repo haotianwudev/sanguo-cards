@@ -56,6 +56,8 @@ var unworn: Array = []  # 宝物 left in the card pool (not worn: no effect)
 var benched: Array = []  # cards left behind: not in any unit (never a leader)
 var seen: Array = []  # the history across 周目: cards you held when an ending was reached (not ones only the story gave you) — they can drop again
 var cleared_cards: Array = []  # cards held when reaching any ending across all 周目 (permanent collection)
+var cleared_copies: Dictionary = {}  # general card id -> copies permanently confirmed upon clearing an ending
+var cleared_lord_copies := 1  # lord copies permanently confirmed upon clearing an ending
 var story_cards: Array = []  # cards a story square handed out this 周目 (they never enter the history)
 var play_level := 0  # the 难度 level chosen after the birthplace (0 = not chosen: the route's highest); capped by what its endings have unlocked (route_max_level)
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
@@ -69,7 +71,7 @@ var party_slots := 4  # including the lord
 var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "party_slots", "theme",
 	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
@@ -117,6 +119,8 @@ func new_lap(inherit_all := false) -> SaveData:
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
 	s.cleared_cards = cleared_cards.duplicate()
+	s.cleared_copies = cleared_copies.duplicate()
+	s.cleared_lord_copies = cleared_lord_copies
 	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
 	if inherit_all:
 		s.story_cards = story_cards.duplicate()
@@ -148,11 +152,14 @@ static func from_dict(d: Dictionary) -> SaveData:
 	s.picks_left = int(s.picks_left)
 	s.party_slots = int(s.party_slots)
 	s.lord_copies = int(s.lord_copies)
+	s.cleared_lord_copies = int(s.cleared_lord_copies)
 	s.lap = int(s.lap)
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
 	for k in s.dupes:
 		s.dupes[k] = int(s.dupes[k])
+	for k in s.cleared_copies:
+		s.cleared_copies[k] = int(s.cleared_copies[k])
 	for table in [s.carry_extra, s.carry_uses]:
 		for cid in table:
 			for sk in table[cid]:
@@ -537,12 +544,21 @@ func commit_history() -> void:
 			seen.append(cid)
 		if not cleared_cards.has(cid):
 			cleared_cards.append(cid)
+		# Record confirmed permanent level/copies upon clearing an ending
+		if _db().cards.has(cid) and _db().cards[cid].get("soldier", false):
+			var cur_s: int = soldiers.get(cid, 0)
+			cleared_copies[cid] = maxi(cleared_copies.get(cid, 0), cur_s)
+		else:
+			var cur_d: int = dupes.get(cid, 1) if owned.has(cid) else 1
+			cleared_copies[cid] = maxi(cleared_copies.get(cid, 0), cur_d)
 	if not cleared_cards.has("lord"):
 		cleared_cards.append("lord")
+	cleared_lord_copies = maxi(cleared_lord_copies, lord_copies)
 
 
 func get_cleared_cards() -> Array:
 	## Cards that belong to the player's permanent collection: cards held when clearing an ending.
+	## Strictly only cards that have been recorded through cleared_cards (or seen from cleared runs).
 	var out: Array = ["lord"]
 	for cid in cleared_cards:
 		if not out.has(cid):
@@ -550,24 +566,21 @@ func get_cleared_cards() -> Array:
 	for cid in seen:
 		if not out.has(cid):
 			out.append(cid)
-	if ended:
-		for cid in owned + soldiers.keys():
-			if not out.has(cid):
-				out.append(cid)
 	return out
 
 
 func permanent_copies(card_id: String) -> int:
 	if card_id == "lord":
-		return lord_copies
+		return cleared_lord_copies
 	var db := _db()
 	if db.cards.has(card_id) and db.cards[card_id].get("soldier", false):
-		return soldiers.get(card_id, 1 if (seen.has(card_id) or cleared_cards.has(card_id)) else 0)
-	var d: int = dupes.get(card_id, 0)
+		return cleared_copies.get(card_id, 1 if (seen.has(card_id) or cleared_cards.has(card_id)) else 0)
+	var d: int = cleared_copies.get(card_id, 0)
 	if d > 0:
 		return d
-	if owned.has(card_id) or seen.has(card_id) or cleared_cards.has(card_id):
-		return 1
+	# Fallback if card was cleared in an earlier version before cleared_copies was tracked
+	if cleared_cards.has(card_id) or seen.has(card_id):
+		return dupes.get(card_id, 1)
 	return 0
 
 
