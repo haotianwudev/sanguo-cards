@@ -3803,8 +3803,8 @@
       "rarity": "R",
       "troop": "cavalry",
       "person": "sunce",
-      "hp": 56,
-      "at": 85,
+      "hp": 60,
+      "at": 80,
       "skills": [
         "tingqiang",
         "xiaobawang"
@@ -3817,8 +3817,8 @@
       "rarity": "R",
       "troop": "strategist",
       "person": "zhouyu",
-      "hp": 70,
-      "at": 65,
+      "hp": 80,
+      "at": 60,
       "skills": [
         "yehuo",
         "huoshang"
