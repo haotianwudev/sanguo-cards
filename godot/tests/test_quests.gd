@@ -1472,3 +1472,17 @@ func test_a_rolled_event_says_which_option_the_dice_landed_on() -> void:
 	var i := Quests.random_option(s, ev, rng(5))
 	Quests.choose_event(q, s, rng(5), i, true)
 	check(str(s.event_note[0]).begins_with("随机到了：") and str(s.event_note[0]).ends_with(str(ev["options"][i]["label"])), "the note names the option that was rolled: %s" % [s.event_note])
+
+
+func test_the_dice_land_when_the_square_is_reached_and_stay() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "zuoci"}
+	var ev: Dictionary = GameData.get_db().events["zuoci"]
+	var first := Quests.rolled_option(s, ev, rng(7))
+	for seed_value in 10:
+		check_eq(Quests.rolled_option(s, ev, rng(seed_value)), first, "the same option every time the square is shown")
+	check(s.event_rolls.has("road"), "and it is kept in the save")

@@ -720,9 +720,11 @@ func _show_square(s: Dictionary) -> void:
 				buttons.add_child(open)
 				Kit.focus(open)
 			elif GameData.get_db().battle.get("event_random", false):
-				text.text = body  # pure chance: no options to weigh, the roll picks what happens (the result names the option it landed on)
-				var fate := Kit.button("抽取结果", "gold")
-				fate.pressed.connect(func(): _choose_event(Quests.random_option(Game.save, ev, Game.rng), true))
+				text.text = body  # pure chance: the dice already landed on an option when the square was reached — the button IS that result
+				var rolled := Quests.rolled_option(Game.save, ev, Game.rng)
+				Game.persist()
+				var fate := Kit.button(str(ev["options"][rolled]["label"]), "gold")
+				fate.pressed.connect(func(): _choose_event(rolled, true))
 				buttons.add_child(fate)
 				Kit.focus(fate)
 			else:

@@ -25,6 +25,7 @@ var carry_uses: Dictionary = {}  # card id -> {skill: uses left}
 var choices: Dictionary = {}  # choose-square id -> goto (remembered across retries)
 var offer: Array = []  # cards shown on the current recruit/treasure square
 var events: Dictionary = {}  # ？ square id -> event id rolled for it this run
+var event_rolls: Dictionary = {}  # ？ square id -> the option the dice landed on (rolled when the square is reached, kept for the run)
 var event_battle: Dictionary = {}  # a fight an event started: {battle, ambush, win: [effects on victory]}
 var event_note: Array = []  # what the last event did, shown on its square
 var offer_kind := ""  # "upgrade": the offer lists your own generals, the pick goes up a tier
@@ -77,7 +78,7 @@ var theme := "light"
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
-	"events", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
+	"events", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
 
 
 static func create() -> SaveData:
@@ -87,7 +88,7 @@ static func create() -> SaveData:
 
 
 # the fields that make up one run of a quest (parked while a finished chapter is replayed)
-const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events",
+const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events", "event_rolls",
 	"event_battle", "event_note", "offer_kind", "relics", "danger", "picks_left", "offer_rates", "run_start",
 	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn", "fate", "fate_offer", "affixes", "ambushes"]
 

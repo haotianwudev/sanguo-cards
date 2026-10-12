@@ -162,6 +162,7 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.resolved = false
 	save.offer = []
 	save.events = {}
+	save.event_rolls = {}
 	save.event_battle = {}
 	save.event_note = []
 	if rng != null:
@@ -612,6 +613,13 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 			fresh = ev_pool
 		save.events[s["id"]] = fresh[rng.randi_range(0, fresh.size() - 1)]
 	return GameData.get_db().events[save.events[s["id"]]]
+
+
+static func rolled_option(save: SaveData, ev: Dictionary, rng: RandomNumberGenerator) -> int:
+	## the option the dice landed on for the ？ square the player stands on: rolled once when it is reached and kept, so the button can show it
+	if not save.event_rolls.has(save.square):
+		save.event_rolls[save.square] = random_option(save, ev, rng)
+	return int(save.event_rolls[save.square])
 
 
 static func random_option(save: SaveData, ev: Dictionary, rng: RandomNumberGenerator) -> int:
