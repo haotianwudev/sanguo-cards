@@ -89,7 +89,7 @@
       "id": "taodong",
       "title": "第二章 · 讨伐董卓",
       "start": "set_out",
-      "shuffle": [["box1", "box2", "box3"]],
+      "shuffle": [["box1", "box2", "box3"], ["scout2", "m_c2b"]],
       "event_pool": [],
       "subtitle": "初平元年 · 二月",
       "unless": "出生：冀州无极",
@@ -222,7 +222,7 @@
         "ln_rear_guard2": {"type": "battle", "label": "断后·追兵", "battle": "xiliang_scout", "next": ["ln_ferry"], "x": 39, "y": 0},
         "ln_bank_loot": {"type": "treasure", "label": "河岸辎重", "next": ["ln_ferry"], "x": 39, "y": 2}
       },
-      "shuffle": [["ln_box1", "ln_box2", "ln_box3"]]
+      "shuffle": [["ln_box1", "ln_box2", "ln_box3"], ["ln_ambush", "ln_mystery_forest"]]
     },
     {
       "id": "heishan",
@@ -234,7 +234,7 @@
       "soldier_scope": "north",
       "recruit_pool": ["yangang", "zoudan", "gaolan", "zhanghe"],
       "ending": "fuchao",
-      "shuffle": [],
+      "shuffle": [["hs_m2", "hs_bandit0"], ["hs_em2", "hs_pursuit0a"]],
       "squares": {
         "hs_start": {"cg": "c3_recruit_board", "type": "event", "label": "真定发榜", "next": ["hs_bandit0", "hs_m2"], "text": ["回到常山真定，主角拿着做赞助商赚来的家底，正式开始招兵买马。"], "x": 0, "y": 1},
         "hs_m2": {"type": "mystery", "label": "小路", "next": ["hs_m4"], "x": 1, "y": 2},
@@ -434,6 +434,7 @@
     },
     {
       "id": "beihai",
+      "shuffle": [["bh_m1", "bh_wai1"], ["bh_m5", "bh_fl1"]],
       "title": "第四章 · 双凤乱太行",
       "start": "bh_start",
       "subtitle": "初平三年 · 夏",
@@ -511,6 +512,7 @@
     },
     {
       "id": "xuzhou",
+      "shuffle": [["xz_d1", "xz_m3"]],
       "title": "第五章 · 铁纪徐州",
       "start": "xz_start",
       "subtitle": "兴平元年 · 夏",
@@ -574,6 +576,7 @@
     },
     {
       "id": "dongui",
+      "shuffle": [["m1", "d_b1"], ["m7a", "d_b7a"]],
       "title": "第四章 · 挟天子",
       "start": "yizu",
       "subtitle": "初平二年 — 三年",
@@ -668,7 +671,7 @@
       "_pools": "第五章：宝箱/战利品出 soldier_pool（荆州兵、宗贼、锦帆贼 + 自家兵），招贤馆出 recruit_pool（荆州的同期人物）",
       "soldier_pool": [],
       "recruit_pool": ["wenpin", "yiji"],
-      "shuffle": [["jx_gongshou", "m_jx2"], ["jx_jinfan", "m_jx4"], ["m_jx3", "t_jx3"], ["jx_chengfang", "jx_zhaoxian"], ["jx_zhuiji", "m_jx5"], ["jx_wubao", "m_jx6"], ["jx_yexi", "m_jx7"], ["jx_xizuo", "m_jx8"]],
+      "shuffle": [["jx_gongshou", "m_jx2", "jx_zhuiji", "m_jx5", "jx_jinfan", "m_jx4"], ["jx_wubao", "m_jx6", "jx_chengfang", "jx_zhaoxian", "jx_yexi", "m_jx7"]],
       "event_pool": [],
       "ending": "henhai",
       "event_scope": "south",
@@ -747,6 +750,7 @@
     },
     {
       "id": "huainan_s",
+      "shuffle": [["hn_jiang_a", "hn_m1"], ["hn_fs_a", "hn_m3"]],
       "title": "第六章 · 淮南折帝旗",
       "start": "hn_years",
       "subtitle": "兴平元年",
@@ -831,6 +835,7 @@
     },
     {
       "id": "huainan_n",
+      "shuffle": [["hnn_a1", "hnn_m1"], ["hnn_e1", "hnn_m3"]],
       "title": "第六章 · 淮南折帝旗",
       "start": "hnn_start",
       "subtitle": "建安元年 · 冬",
@@ -905,6 +910,7 @@
     },
     {
       "id": "jiangdong",
+      "shuffle": [["jd_n_a", "jd_n_m"], ["jd_s_a", "jd_s_m"]],
       "title": "第七章 · 江东小霸王",
       "start": "jd_start",
       "subtitle": "建安二年 · 秋",

@@ -89,6 +89,7 @@ own `requires`/`unless` the way `quests_cleared` is.
 Demos walk square ids — when you insert or rename squares, update their walks (and `walk_to` in tests).
 Screenshots of overlays look washed out because the PNG keeps alpha; in the game the dim is dark.
 
+**Stats are automated**: `git config core.hooksPath tools/hooks` (once per clone) installs a pre-commit hook that reruns `chapter_stats.py --write` and adds `docs/CHAPTER-STATS.md` whenever `story.json` / `cards.json` / `art.json` is in the commit; `python tools/chapter_stats.py --check` exits 1 when the doc is stale (use it in CI) or when a quest is missing from `CHAPTERS`. A new chapter's quest id goes into `CHAPTERS` in `tools/chapter_stats.py`.
 **"update stats"** → `python tools/chapter_stats.py --write` (refreshes squares / battles / CG columns and the date of `docs/CHAPTER-STATS.md`, plus the generated 南北线对比 table — south and north side by side per chapter; a new chapter or quest goes into `CHAPTERS` in `tools/chapter_stats.py`; the overview is split into a 南线 and a 北线 table; the pools column and text are hand-written).
 **New art from the user → use the `sanguo-art-ingest` skill (`python tools/art_ingest.py add <path> <key>`): it checks, crops, installs and logs; docs are refreshed only by `flush` every ~20 images.**
 Art: put the original in `pics/source/...`, add/adjust the `pics/art.json` entry, run `sanguo-art` (from the repo root).

@@ -178,9 +178,15 @@ def compare_section() -> str:
     return "\n".join(out)
 
 
-if "--write" in sys.argv:
+covered = {k for _ch, s, n in CHAPTERS for k in (s, n) if k}
+uncovered = [k for k in rows if k not in covered]
+if uncovered:  # a new chapter must be added to CHAPTERS or the 南北线对比 table silently misses it
+    print("!! quests missing from CHAPTERS (南北线对比): %s" % ", ".join(uncovered))
+
+if "--write" in sys.argv or "--check" in sys.argv:
     p = ROOT / "docs/CHAPTER-STATS.md"
     t = p.read_text("utf-8")
+    orig = t
     ids = {"prologue_s": "第一章 · 富春（南线）", "prologue_n": "第一章 · 冀州风云（北线）"}
     out = []
     for line in t.split("\n"):
@@ -224,5 +230,12 @@ if "--write" in sys.argv:
         t = t[:i] + "\n\n" + sec + "\n" + t[i:]
     import datetime
     t = re.sub(r"## 全局总览（\d{4}-\d{2}-\d{2}", "## 全局总览（%s" % datetime.date.today(), t, 1)
-    p.write_text(t, "utf-8", newline="\n")
-    print("overview updated")
+    if "--check" in sys.argv and "--write" not in sys.argv:  # CI / pre-commit: fail when the doc is stale (the date line is ignored)
+        day = lambda s: re.sub(r"## 全局总览（\d{4}-\d{2}-\d{2}", "## 全局总览（DATE", s, 1)
+        if day(t) != day(orig) or uncovered:
+            print("docs/CHAPTER-STATS.md is stale — run: python tools/chapter_stats.py --write")
+            sys.exit(1)
+        print("CHAPTER-STATS.md is up to date")
+    else:
+        p.write_text(t, "utf-8", newline="\n")
+        print("overview updated")
