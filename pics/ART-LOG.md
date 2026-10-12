@@ -586,3 +586,15 @@
 - [x] 2026-10-11 map `yuxi` ← yuxi_map_v2.jpg · ok
 - [x] 2026-10-11 cg `c5_death` ← c5_death_v1.jpg · ok
 - [x] 2026-10-11 cg `c6_xunyou` ← c6_xunyou_v1.jpg · ok
+- [x] 2026-10-11 cg `c8_laixi` ← c8_laixi_1791762107226.jpg · ok
+- [x] 2026-10-11 cg `c8_plan_xun` ← c8_plan_xun_1791762174668.jpg · ok
+- [x] 2026-10-11 cg `c8_plan_huang` ← c8_plan_huang_1791762199889.jpg · ok
+- [x] 2026-10-11 cg `c8_zhaoshu` ← c8_zhaoshu_1791762220077.jpg · ok
+- [x] 2026-10-11 cg `c8_meng` ← c8_meng_1791762249538.jpg · ok
+- [x] 2026-10-11 cg `c8_jinggao` ← c8_jinggao_1791762276801.jpg · ok
+- [x] 2026-10-11 cg `c8_mimou` ← c8_mimou_1791762307343.jpg · ok
+- [x] 2026-10-11 cg `c8_dingce` ← c8_dingce_1791762325741.jpg · ok
+- [x] 2026-10-11 cg `c8_kuaiyue` ← c8_kuaiyue_1791762354339.jpg · ok
+- [x] 2026-10-11 cg `c8_nushou` ← c8_nushou_1791762534475.jpg · ok
+- [x] 2026-10-11 cg `c8_zhashan` ← c8_zhashan_1791762606258.jpg · ok
+- [x] 2026-10-11 cg `c8_lanshang` ← c8_lanshang_1791762627946.jpg · ok

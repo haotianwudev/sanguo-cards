@@ -4390,6 +4390,54 @@
     "c6_xunyou": {
       "src": "source/cg/c6_xunyou.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c8_laixi": {
+      "src": "source/cg/c8_laixi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_plan_xun": {
+      "src": "source/cg/c8_plan_xun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_plan_huang": {
+      "src": "source/cg/c8_plan_huang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_zhaoshu": {
+      "src": "source/cg/c8_zhaoshu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_meng": {
+      "src": "source/cg/c8_meng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_jinggao": {
+      "src": "source/cg/c8_jinggao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_mimou": {
+      "src": "source/cg/c8_mimou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_dingce": {
+      "src": "source/cg/c8_dingce.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_kuaiyue": {
+      "src": "source/cg/c8_kuaiyue.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_nushou": {
+      "src": "source/cg/c8_nushou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_zhashan": {
+      "src": "source/cg/c8_zhashan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_lanshang": {
+      "src": "source/cg/c8_lanshang.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

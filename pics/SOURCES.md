@@ -707,3 +707,15 @@
 | `cg:c10_wanglang` | source/cg/c10_wanglang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c10_fuchun` | source/cg/c10_fuchun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c6_xunyou` | source/cg/c6_xunyou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_laixi` | source/cg/c8_laixi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_plan_xun` | source/cg/c8_plan_xun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_plan_huang` | source/cg/c8_plan_huang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_zhaoshu` | source/cg/c8_zhaoshu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_meng` | source/cg/c8_meng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_jinggao` | source/cg/c8_jinggao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_mimou` | source/cg/c8_mimou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_dingce` | source/cg/c8_dingce.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_kuaiyue` | source/cg/c8_kuaiyue.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_nushou` | source/cg/c8_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_zhashan` | source/cg/c8_zhashan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_lanshang` | source/cg/c8_lanshang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
