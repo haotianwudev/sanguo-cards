@@ -598,3 +598,5 @@
 - [x] 2026-10-11 cg `c8_nushou` ← c8_nushou_1791762534475.jpg · ok
 - [x] 2026-10-11 cg `c8_zhashan` ← c8_zhashan_1791762606258.jpg · ok
 - [x] 2026-10-11 cg `c8_lanshang` ← c8_lanshang_1791762627946.jpg · ok
+- [x] 2026-10-11 relic `xunyou_qizi` ← xunyou_qizi.jpg · ok
+- [x] 2026-10-11 relic `bandu_lingjian` ← bandu_lingjian.jpg · ok
