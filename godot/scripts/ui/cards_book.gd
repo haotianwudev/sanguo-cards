@@ -337,7 +337,7 @@ func _populate_lord_forms() -> void:
 		var cell := VBoxContainer.new()
 		cell.add_theme_constant_override("separation", 5)
 		cell.alignment = BoxContainer.ALIGNMENT_CENTER
-		var card_view := CardView.make("lord", Vector2(160, 224), {"skills": false, "form": fid, "tier": save.permanent_tier("lord")})
+		var card_view := CardView.make("lord", Vector2(160, 224), {"skills": false, "form": fid, "tier": int(save.form_level_info(fid)["tier"])})
 		card_view.pressed.connect(_inspect_card.bind("lord", fid))
 		card_view.modulate = Color.WHITE if known else Color(0.3, 0.3, 0.3, 0.9)
 		cell.add_child(card_view)
@@ -419,7 +419,7 @@ func _inspect_card(cid: String, form := "") -> void:
 	hbox.add_theme_constant_override("separation", 24)
 	modal.add_child(hbox)
 
-	var tier_val := save.permanent_tier(cid)
+	var tier_val := int(save.form_level_info(form)["tier"]) if form != "" else save.permanent_tier(cid)  # a lord card is framed by its own level
 	var big_opts := {"skills": false, "tier": tier_val}
 	if form != "":
 		big_opts["form"] = form

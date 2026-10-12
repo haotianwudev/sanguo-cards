@@ -43,7 +43,7 @@ func _ready() -> void:
 	var holder := CenterContainer.new()
 	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	col.add_child(holder)
-	_card = CardView.make("lord", Vector2(250, 360), {"form": form})
+	_card = CardView.make("lord", Vector2(250, 360), {"form": form, "tier": Game.save.form_tier(form)})
 	_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_card.modulate.a = 0.0
 	holder.add_child(_card)

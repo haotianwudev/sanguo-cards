@@ -31,7 +31,7 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 		v.fighter = db.build_fighter(card_id)
 	v.leader = opts.get("leader", {})
 	v.count = opts.get("count", 0)
-	v.tier = opts.get("tier", Game.save.tier(card_id) if Game.save != null else 0)
+	v.tier = opts.get("tier", Game.save.tier(card_id) if Game.save != null and card_id != "lord" else 0)  # the lord himself has no 品阶; only a lord card (opts.tier) and the other cards do
 	v.note = opts.get("note", "")
 	v.show_skills = opts.get("skills", true)
 	v.custom_minimum_size = size
