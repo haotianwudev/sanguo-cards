@@ -1459,3 +1459,16 @@ func test_a_chapters_lord_card_comes_with_its_first_square() -> void:
 	check_eq(given.size(), 1, "chapter two's lord card comes on arrival")
 	check(s2.lord_forms.has(given[0]["form"]), "…and is held")
 	check(Quests.start_grant(q2, s2, rng(3)).is_empty(), "only once per chapter")
+
+
+func test_a_rolled_event_says_which_option_the_dice_landed_on() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": "zuoci"}
+	var ev: Dictionary = GameData.get_db().events["zuoci"]
+	var i := Quests.random_option(s, ev, rng(5))
+	Quests.choose_event(q, s, rng(5), i, true)
+	check(str(s.event_note[0]).begins_with("随机到了：") and str(s.event_note[0]).ends_with(str(ev["options"][i]["label"])), "the note names the option that was rolled: %s" % [s.event_note])

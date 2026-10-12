@@ -720,9 +720,9 @@ func _show_square(s: Dictionary) -> void:
 				buttons.add_child(open)
 				Kit.focus(open)
 			elif GameData.get_db().battle.get("event_random", false):
-				text.text = body  # pure chance: no options to weigh, fate picks what happens
-				var fate := Kit.button("听天由命", "gold")
-				fate.pressed.connect(func(): _choose_event(Quests.random_option(Game.save, ev, Game.rng)))
+				text.text = body  # pure chance: no options to weigh, the roll picks what happens (the result names the option it landed on)
+				var fate := Kit.button("抽取结果", "gold")
+				fate.pressed.connect(func(): _choose_event(Quests.random_option(Game.save, ev, Game.rng), true))
 				buttons.add_child(fate)
 				Kit.focus(fate)
 			else:
@@ -950,8 +950,8 @@ func _fight_button(s: Dictionary, buttons: Control) -> void:
 	Kit.focus(fight)
 
 
-func _choose_event(i: int) -> void:
-	var out := Quests.choose_event(q, Game.save, Game.rng, i)
+func _choose_event(i: int, rolled := false) -> void:
+	var out := Quests.choose_event(q, Game.save, Game.rng, i, rolled)
 	Game.persist()
 	_refresh()
 	var cards: Array = out["gained"].filter(func(c): return not c.get("relic", false))

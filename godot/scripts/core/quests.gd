@@ -658,14 +658,14 @@ static func option_blocked(save: SaveData, opt: Dictionary) -> String:
 	return ""
 
 
-static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, i: int) -> Dictionary:
-	## Take option i of the current event. Returns {gained, log}. Afterwards the square is either resolved,
-	## waiting for a fight (save.event_battle) or waiting for a pick (save.offer).
+static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, i: int, rolled := false) -> Dictionary:
+	## Take option i of the current event (rolled: the dice picked it — random_option — and the note says so). Returns {gained, log}.
+	## Afterwards the square is either resolved, waiting for a fight (save.event_battle) or waiting for a pick (save.offer).
 	q = view(q, save)
 	var ev := event_here(q, save, rng)
 	var opt: Dictionary = ev["options"][i]
 	assert(option_blocked(save, opt) == "", "option %s is blocked: %s" % [opt["label"], option_blocked(save, opt)])
-	save.event_note = ["你选择了：" + opt["label"]]
+	save.event_note = [("随机到了：" if rolled else "你选择了：") + opt["label"]]
 	var out := _apply(opt["effects"], q, save, rng)
 	save.event_note.append_array(out["log"])
 	if not save.event_battle.is_empty():

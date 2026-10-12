@@ -452,4 +452,4 @@ from history for this reason).
 暴击：`cards.json` → `battle.crit`（player_chance 0.12 / player_mult 1.6 / enemy_chance 0.08 / enemy_mult 1.5），每一击单独掷骰；宝物可用 `mods.crit` / `mods.crit_mult` 加我方几率和倍数（还没有宝物用）。事件 `hit` / `enemy_hit` 带 `crit`，战斗界面显示金色「暴击」飘字。想更随机：加大几率或倍数。期望伤害：我方 +7%、敌方 +4%，模拟验证一周目通关率仍约 80%。
 
 测试与难度校准的完整流程（跑测试、截图、平衡模拟 `tests/sim_balance.gd`、`battle.scaling` 的唯一旋钮 `strength`）见 `.claude/skills/sanguo-test/SKILL.md`。
-？事件：开章时就给每个 ？ 格发好事件（地图上显示事件名，每局不同，`Quests._roll_events`），点「听天由命」后按 `weight` 从可触发的选项里随机一个执行（`battle.event_random`，`Quests.random_option`）；通用坏事件 14 个（`bad_*`，scope universal）。战斗手感 `battle.attack_mult` 1.1 / `hp_mult` 0.9（双方同时生效）。
+？事件：开章时就给每个 ？ 格发好事件（地图上显示事件名，每局不同，`Quests._roll_events`），点「抽取结果」后按 `weight` 从可触发的选项里真实随机一个执行（结果第一行写「随机到了：选项名」，不要写「听天由命」）（`battle.event_random`，`Quests.random_option`）；通用坏事件 14 个（`bad_*`，scope universal）。战斗手感 `battle.attack_mult` 1.1 / `hp_mult` 0.9（双方同时生效）。
