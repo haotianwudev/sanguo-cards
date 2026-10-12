@@ -17,7 +17,7 @@ extends RefCounted
 ## Rogue runs: every attempt at a quest is a run. 宝物 and 险 last for the run; `shuffle` groups of squares
 ## trade contents at the start of each run (the paths stay, what's on them moves).
 
-const CONTENT := ["type", "label", "battle", "boss", "elite", "ambush", "event"]  # what a shuffle moves
+const CONTENT := ["type", "label", "battle", "boss", "elite", "ambush", "event", "soldier_pool", "recruit_pool"]  # what a shuffle moves (a square's own pools belong to its place)
 static var _views := {}
 ## Damage and cumulative skill costs carry from battle to battle within a quest; they reset at a recover
 ## square or when the quest ends. Losing restarts the quest; choices already made are remembered.
@@ -391,7 +391,8 @@ static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
 	return true
 
 
-static func pools(q: Dictionary, save: SaveData) -> Dictionary:
+static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Dictionary:
+	## `sq` = the square the player stands on: its own soldier_pool / recruit_pool (a place's local cards) win over the chapter's.
 	## recruit_pool is swapped by the first matching entry in pool_overrides (requires / unless checked against
 	## this run's own records, e.g. a birthplace choice) — so one quest shared by two routes (south/north
 	## prologue) doesn't hand out the other route's generals. soldier_pool and event_pool resolve by scope
@@ -421,6 +422,11 @@ static func pools(q: Dictionary, save: SaveData) -> Dictionary:
 		if db.events[eid]["scope"] in ["universal", event_scope, q["id"]]:
 			event_pool.append(eid)
 	out["event_pool"] = event_pool
+	if not sq.is_empty():
+		if not sq.get("recruit_pool", []).is_empty():
+			out["recruit_pool"] = sq["recruit_pool"]
+		if not sq.get("soldier_pool", []).is_empty():
+			out["soldier_pool"] = sq["soldier_pool"]
 	return out
 
 
@@ -454,13 +460,23 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 	if not (kind in ["recruit", "treasure"]) or save.resolved:
 		return []
 	if save.offer.is_empty():
-		var p := pools(q, save)
+		var sq: Dictionary = here(q, save)
+		var p := pools(q, save, sq)
 		var cards: Array
 		if kind == "recruit" and not p["recruit_pool"].is_empty():
-			cards = p["recruit_pool"].map(func(c): return db.cards[c]).filter(
+			var left: Array = p["recruit_pool"].map(func(c): return db.cards[c]).filter(
 				func(c): return not save.maxed(c["id"]))
+			cards = []
+			if sq["recruit_pool"].is_empty():  # the chapter's whole list is shown (it is short)
+				cards = left
+			else:  # a place's own list: a few of them each visit
+				var n := int(db.gacha["offer_size"]) + save.offer_extra()
+				while not left.is_empty() and cards.size() < n:
+					cards.append(left.pop_at(rng.randi_range(0, left.size() - 1)))
 		elif kind == "recruit":
 			cards = save.recruit_offer(rng)
+		elif not sq["soldier_pool"].is_empty():  # a place's own soldiers
+			cards = SaveData.chest_offer(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), sq["soldier_pool"])
 		else:
 			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), [], q["id"])
 		save.offer = cards.map(func(c): return c["id"])
@@ -870,7 +886,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			out["gained"].append(c)
 			out["log"].append("获得：" + c["name"])
 		if e.has("soldier"):
-			var pool: Array = pools(q, save)["soldier_pool"]
+			var pool: Array = pools(q, save, here(q, save))["soldier_pool"]
 			if pool.is_empty():
 				pool = db.soldier_cards().map(func(c): return c["id"])
 			var c: Dictionary = db.cards[pool[rng.randi_range(0, pool.size() - 1)]]
@@ -891,7 +907,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				save.picks_left = int(o.get("times", 1)) - 1
 				save.offer_rates = o.get("rates", {})
 			else:
-				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)) + save.offer_extra(), pools(q, save)["soldier_pool"]).map(
+				ids = SaveData.chest_offer(rng, int(o.get("soldiers", 3)) + save.offer_extra(), pools(q, save, here(q, save))["soldier_pool"]).map(
 					func(c): return c["id"])
 			save.offer = ids
 			if ids.is_empty():

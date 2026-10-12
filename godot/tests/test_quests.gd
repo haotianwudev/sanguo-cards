@@ -1406,3 +1406,27 @@ func test_second_lap_chapter_one_levels_the_default_lord_card_to_two() -> void:
 		if got == second:
 			check_eq(n.form_copies_of(got), 2, "…and so does any other card of lap 1")
 			break
+
+
+func test_a_squares_own_pools_decide_what_its_chest_and_recruits_offer() -> void:
+	var db := GameData.get_db()
+	for qq in db.quests:
+		for s in qq["squares"].values():
+			for c in s["soldier_pool"]:
+				check(db.cards.has(c) and db.cards[c]["soldier"], "%s/%s: soldier_pool %s is a soldier card" % [qq["id"], s["id"], c])
+			for c in s["recruit_pool"]:
+				check(db.cards.has(c) and not db.cards[c]["soldier"], "%s/%s: recruit_pool %s is a general" % [qq["id"], s["id"], c])
+	var jx: Dictionary = db.quests.filter(func(x): return x["id"] == "jingxiang")[0]
+	var s := SaveData.create()
+	Quests.begin(jx, s)
+	s.square = "t_jx1"  # 袁术旧府: a chest of 宛城's own soldiers
+	s.resolved = false
+	var offer: Array = Quests.offer(jx, s, rng(1)).map(func(c): return c["id"])
+	check(not offer.is_empty() and offer.all(func(c): return jx["squares"]["t_jx1"]["soldier_pool"].has(c)), "the chest only holds this place's soldiers: %s" % [offer])
+	var yx: Dictionary = db.quests.filter(func(x): return x["id"] == "yuxi")[0]
+	var s2 := SaveData.create()
+	Quests.begin(yx, s2)
+	s2.square = "liukou3"  # 荒村·溃兵投军: a few of 孙坚's old guard
+	s2.resolved = false
+	var recruits: Array = Quests.offer(yx, s2, rng(2)).map(func(c): return c["id"])
+	check(not recruits.is_empty() and recruits.size() <= int(db.gacha["offer_size"]) and recruits.all(func(c): return yx["squares"]["liukou3"]["recruit_pool"].has(c)), "the recruits come from this place's own list: %s" % [recruits])
