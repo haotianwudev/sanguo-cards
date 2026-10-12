@@ -132,7 +132,7 @@ func _card_ids(tab: String) -> Array:
 	var out: Array = []
 	for cid in db.cards:
 		var c: Dictionary = db.cards[cid]
-		if cid == "lord":
+		if SaveData.is_lord_card(cid):  # the lord cards have their own tab (主角卡)
 			continue
 		var story: bool = not c["in_pool"]
 		if (tab == "story" and story) or (not story and tab == c["rarity"]):

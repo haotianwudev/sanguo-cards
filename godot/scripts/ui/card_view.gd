@@ -21,16 +21,18 @@ static func _default_tier(card_id: String, opts: Dictionary) -> int:
 	## a card's frame = its own tier; the lord is whichever lord card is in use (or the one asked for with opts.form), levelled like any other card
 	if Game.save == null:
 		return 0
-	if card_id == "lord":
-		return Game.save.form_tier(opts.get("form", Game.save.lord_form()))
+	if SaveData.is_lord_card(card_id):
+		return Game.save.form_tier(opts.get("form", SaveData.lord_card_form(card_id) if card_id != "lord" else Game.save.lord_form()))
 	return Game.save.tier(card_id)
 
 
 static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> CardView:
 	var db := GameData.get_db()
 	var v := CardView.new()
-	if card_id == "lord":
-		if opts.has("form") and Game.save != null:  # a specific lord card ("" = the plain lord)
+	if SaveData.is_lord_card(card_id):
+		if card_id != "lord" and Game.save != null:  # a lord card of its own ("lord:<form id>")
+			v.fighter = Game.save.lord_with_form(SaveData.lord_card_form(card_id))
+		elif opts.has("form") and Game.save != null:  # a specific lord card ("" = the plain lord)
 			v.fighter = Game.save.lord_with_form(opts["form"])
 		else:
 			v.fighter = Game.save.lord() if Game.save != null else db.build_lord(opts.get("lord_name", "主公"))

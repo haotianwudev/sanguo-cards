@@ -278,14 +278,27 @@ func test_the_fielded_lord_turns_up_in_offers_like_any_fielded_card() -> void:
 	check(seen, "the lord is always fielded, so a fielded-card roll can offer him")
 
 
-func test_drawing_the_lord_brings_back_a_remembered_lord_card() -> void:
+func test_lord_cards_are_cards_like_any_other_each_levels_on_its_own() -> void:
+	var db := GameData.get_db()
 	var s := SaveData.create()
 	s.cleared_forms = ["lord_south_armor", "lord_north_silver", "lord_default"]
-	var card := s.take("lord")
-	check_eq(s.lord_copies, 2, "the draw is one level up")
-	check_eq(s.lord_forms.size(), 1, "…and one remembered card of this route comes with it")
-	check(s.lord_forms[0] in ["lord_south_armor", "lord_default"], "…not the other route's")
-	check_eq(card["name"], GameData.get_db().lord_forms[s.lord_forms[0]]["name"], "the pick shows its name")
+	var drawable: Array = s.drawable_lord_cards()
+	check(drawable.has("lord") and drawable.has("lord:lord_south_armor"), "the plain lord and a remembered card of this route can be drawn")
+	check(not drawable.has("lord:lord_north_silver"), "…not the other route's")
+	var card := s.take("lord:lord_south_armor")  # a draw: that very card comes (back) and is at level 1
+	check_eq(card["name"], db.lord_forms["lord_south_armor"]["name"], "the pick shows the card's own name")
+	check(s.lord_forms.has("lord_south_armor") and s.form_copies_of("lord_south_armor") == 1 and s.lord_copies == 1, "the draw gave that card level 1 and left the plain lord alone")
+	s.take("lord:lord_south_armor")
+	check_eq(s.form_copies_of("lord_south_armor"), 2, "drawing it again is one more copy of this card")
+	check_eq(s.lord_copies, 1, "…and not of the others")
+	s.take("lord")
+	check_eq(s.lord_copies, 2, "drawing the plain lord card raises only the plain lord card")
+	# 点化 offers every lord card, and raises just the one picked
+	check(s.upgradable().has("lord") and s.upgradable().has("lord:lord_south_armor"), "every lord card can be 点化'd")
+	s.upgrade("lord:lord_south_armor")
+	check_eq(s.form_copies_of("lord_south_armor"), 2 + s.upgrade_copies(), "点化 adds copies to the picked lord card")
+	check_eq(s.lord_copies, 2, "…not to the plain lord card")
+	check_eq(s.tier("lord:lord_south_armor"), s.form_tier("lord_south_armor"), "tier() reads a lord card like any card")
 
 
 func test_the_lord_starts_bronze_and_can_go_up() -> void:

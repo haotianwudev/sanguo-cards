@@ -127,6 +127,11 @@ func _load(dir: String) -> void:
 	# copy raises its 铜/银/金 tier like a general's. Its fighter always comes from build_lord / SaveData.lord().
 	cards["lord"] = {"id": "lord", "name": "主公", "rarity": str(gacha.get("lord_rarity", "SR")), "troop": "lord",
 		"bonus": {}, "skills": [], "in_pool": false, "troop_skills": true, "person": "lord", "weight": 1, "soldier": false}
+	# every other lord card (版本) is a card too, id "lord:<form id>": the same card as any general (its own copies, tier, 点化, draws),
+	# only its fighter comes from SaveData.lord_with_form and it always leads the lord's unit when picked in 整备
+	for fid in lord_forms:
+		if fid != lord_form_default:
+			cards["lord:" + fid] = cards["lord"].merged({"id": "lord:" + fid, "name": lord_forms[fid]["name"], "lord_form": fid}, true)
 
 	var en: Dictionary = read_json(dir + "/endings.json")
 	for eid in en["endings"]:

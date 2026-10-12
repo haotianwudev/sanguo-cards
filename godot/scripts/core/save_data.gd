@@ -217,10 +217,43 @@ func has_card(card_id: String) -> bool:
 	return owned.has(card_id)
 
 
+static func is_lord_card(card_id: String) -> bool:
+	return card_id == "lord" or card_id.begins_with("lord:")
+
+
+static func lord_card_form(card_id: String) -> String:
+	## the lord card's version id ("" = the plain lord)
+	return "" if card_id == "lord" else card_id.substr(5)
+
+
+func lord_card_id(form: String) -> String:
+	return "lord" if form == "" else "lord:" + form
+
+
+func lord_cards() -> Array:
+	## the lord cards this run holds: the plain lord and every card of this route handed out so far
+	var out: Array = ["lord"]
+	for fid in route_lord_forms():
+		out.append("lord:" + fid)
+	return out
+
+
+func drawable_lord_cards() -> Array:
+	## the lord cards a draw can show: the ones held plus those of this route had in an earlier 周目, none of them 金 yet
+	var route := "north" if is_north() else "south"
+	var db := _db()
+	var out: Array = lord_cards()
+	for fid in cleared_forms:
+		var info: Dictionary = db.lord_forms.get(fid, {})
+		if not info.is_empty() and fid != db.lord_form_default and (info["route"] == "" or info["route"] == route) and not lord_forms.has(fid):
+			out.append("lord:" + fid)
+	return out.filter(func(c): return not maxed(c))
+
+
 func copies(card_id: String) -> int:
 	_sync()
-	if card_id == "lord":
-		return lord_copies
+	if is_lord_card(card_id):
+		return form_copies_of(lord_card_form(card_id))
 	if _db().cards[card_id]["soldier"]:
 		return soldiers.get(card_id, 0)
 	return dupes.get(card_id, 1) if owned.has(card_id) else 0
@@ -337,10 +370,11 @@ func lord() -> Dictionary:
 
 
 func upgradable() -> Array:
-	## 点化 can raise the lord and any general of yours that is not yet 金
+	## 点化 can raise any lord card or general of yours that is not yet 金
 	var out: Array = []
-	if not maxed("lord"):
-		out.append("lord")
+	for c in lord_cards():
+		if not maxed(c):
+			out.append(c)
 	for c in owned:
 		if not maxed(c):
 			out.append(c)
@@ -369,6 +403,9 @@ func upgrade(card_id: String, n := -1) -> void:
 	if card_id == "lord":
 		lord_copies = mini(lord_copies + n, top)
 		return
+	if is_lord_card(card_id):
+		form_copies[lord_card_form(card_id)] = mini(copies(card_id) + n, top)
+		return
 	dupes[card_id] = mini(copies(card_id) + n, top)
 
 
@@ -385,12 +422,14 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 		rates = db.gacha["rates"]
 	var result: Array = []
 	for _i in n:
-		var mine := (fielded_generals() + ([db.cards["lord"]] if not maxed("lord") else [])).filter(func(c): return not result.has(c))  # the lord is always fielded
+		var lord_in_use := lord_card_id(lord_form())
+		var mine := (fielded_generals() + ([db.cards[lord_in_use]] if not maxed(lord_in_use) else [])).filter(func(c): return not result.has(c))  # the lord card in use is always fielded
 		if not mine.is_empty() and rng.randf() < fielded_chance():  # often a general you field: the ones you use get to level up
 			result.append(mine[rng.randi_range(0, mine.size() - 1)])
 			continue
-		if not maxed("lord") and not result.has(db.cards["lord"]) and rng.randf() < float(db.gacha.get("lord_rate", 0.0)):
-			result.append(db.cards["lord"])  # now and then the lord's own card turns up
+		var lord_draw: Array = drawable_lord_cards().filter(func(c): return not result.has(db.cards[c]))
+		if not lord_draw.is_empty() and rng.randf() < float(db.gacha.get("lord_rate", 0.0)):
+			result.append(db.cards[lord_draw[rng.randi_range(0, lord_draw.size() - 1)]])  # now and then one of the lord cards turns up (the draw levels that very card)
 			continue
 		var live: Array = []
 		var pools := {}
@@ -517,7 +556,7 @@ func chest_pools(chapter := "", only: Array = []) -> Dictionary:
 	var r := route()
 	var out := {"public": {"soldier": [], "general": []}, "chapter": {"soldier": [], "general": []}, "history": {"soldier": [], "general": []}}
 	for c in db.cards.values():
-		if c["id"] == "lord" or c.get("beast", false) or not (c.get("scope", "") in ["", r]):
+		if is_lord_card(c["id"]) or c.get("beast", false) or not (c.get("scope", "") in ["", r]):
 			continue
 		var chapters: Array = db.card_chapters.get(c["id"], [])
 		if c["soldier"]:
@@ -591,11 +630,7 @@ func offer_extra() -> int:
 func take(card_id: String) -> Dictionary:
 	## Keep the one card picked from a recruit offer (a general: another copy if owned) or a chest (a soldier).
 	var card: Dictionary = _db().cards[card_id]
-	grant_card(card_id)
-	if card_id == "lord":  # drawing the lord also draws one of his cards had in an earlier 周目 (the level went up with the draw)
-		var form := _draw_lord_form()
-		if form != "":
-			return card.merged({"name": _db().lord_forms[form]["name"]}, true)
+	grant_card(card_id)  # a lord card is a card like any other: the draw raises that very card's level
 	return card
 
 
@@ -654,6 +689,8 @@ func get_cleared_cards() -> Array:
 func permanent_copies(card_id: String) -> int:
 	if card_id == "lord":
 		return cleared_lord_copies
+	if is_lord_card(card_id):
+		return form_permanent_copies(lord_card_form(card_id))
 	var db := _db()
 	if db.cards.has(card_id) and db.cards[card_id].get("soldier", false):
 		return cleared_copies.get(card_id, 1 if (seen.has(card_id) or cleared_cards.has(card_id)) else 0)
@@ -727,8 +764,16 @@ func card_level_info(card_id: String) -> Dictionary:
 func grant_card(card_id: String, from_story := false) -> void:
 	## Give a card (a story square: from_story, or a pick). Slots it into the party if there's room for its troop.
 	_sync()
-	if card_id == "lord":  # another copy of the lord: maybe a higher tier
+	if card_id == "lord":  # another copy of the plain lord card: maybe a higher tier
 		lord_copies += 1
+		return
+	if is_lord_card(card_id):  # a lord card: one more copy of this very card (a card held before only in an earlier 周目 comes back at its kept level)
+		var fid := lord_card_form(card_id)
+		if lord_forms.has(fid):
+			form_copies[fid] = form_copies_of(fid) + 1
+		else:
+			lord_forms.append(fid)
+			form_copies[fid] = int(cleared_form_copies.get(fid, 0)) + 1
 		return
 	if from_story and not story_cards.has(card_id):
 		story_cards.append(card_id)

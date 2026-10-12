@@ -204,8 +204,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   cards get only the plain move (精兵 marked `"elite": true` — 丹阳兵, 陷阵营, 白毦兵 … — get both); a general gets
   the plain move plus its own signature (or the troop's signature if it has none). Leader stat = 5 × own + troop members; soldier copies decay ×0.6; generals repeat → tiers
   铜 1 / 银 2 / 金 4 copies (`gacha.tiers`, frame `tier0/1/2` in ui.json).
-  The lord has tiers too (`lord_copies`, starts 铜); its card (`db.cards["lord"]`, added at load, never in pools)
-  turns up in recruit offers at `gacha.lord_rate`. **周目**: `SaveData.new_lap()` restarts the story keeping every card
+  **Lord cards are cards like any other** — the only difference: the lord's team must always field one, and it can be any lord card you hold (整备 picks it, `lord_form_pick`). Every lord card has its own copies and 铜/银/金 tier: the plain lord card is id `lord` (copies = `lord_copies`), every other one is id `lord:<form id>` (`db.cards`, registered at load from `lord_forms`; copies = `form_copies`). `SaveData.copies / tier / upgrade / grant_card / take` all take these ids: a draw or 点化 raises exactly that card's level (`upgradable()` lists every lord card you hold, `drawable_lord_cards()` adds those of this route you had in an earlier 周目; a recruit offer shows them at `gacha.lord_rate`). The lord in the fight is scaled by the tier of the lord card in use (`lord_with_form`). Never give the plain lord a level of his own; `CardView` frames a lord card by its own tier. **周目**: `SaveData.new_lap()` restarts the story keeping every card
   as it is — no gifts, no rarity shift, no other rule changes (the user wants those decided later); the only pool change
   is `recruit_pool()` adding every general ever owned via `seen`, story-only ones included.
   **难度** is shown from 1 (`SaveData.level()` = difficulty + 1; beating 虎牢关 吕布 → 2): enemies +difficulty_step per
