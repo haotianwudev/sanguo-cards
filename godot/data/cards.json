@@ -6001,7 +6001,11 @@
       },
       "elite": true,
       "weight": 1
-    }
+    },
+    "liubiao": {"name": "刘表·荆州牧", "rarity": "SR", "troop": "logistics", "bonus": {"hp": 80, "at": 12}, "pool": false},
+    "zhangyun": {"name": "张允·水军督将", "rarity": "R", "troop": "infantry", "bonus": {"hp": 48, "at": 14}, "pool": false},
+    "sufei": {"name": "苏飞·黄祖部将", "rarity": "R", "troop": "infantry", "bonus": {"hp": 50, "at": 14}, "pool": false},
+    "liupan": {"name": "刘磐·刘表之侄", "rarity": "SR", "troop": "cavalry", "bonus": {"hp": 75, "at": 20}, "pool": false}
   },
   "enemies": {
     "yanliang": {
@@ -10712,7 +10716,11 @@
         }
       ],
       "card": "lvbu"
-    }
+    },
+    "wenpin_e": {"name": "荆州大将文聘", "portrait": "wenpin", "hp": 20500, "at": 430, "actions": 2, "phys_resist": 0.15, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "盾阵", "power": 0, "weight": 1, "heal": 0.038}, {"name": "枪阵压境", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "雁行突刺·蓄力", "power": 0, "weight": 1, "charge": "雁行突刺"}, {"name": "雁行突刺", "power": 2.6, "weight": 0}, {"name": "老将的稳", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "wenpin"},
+    "zhangyun_e": {"name": "水军督将张允", "portrait": "zhangyun", "hp": 20000, "at": 430, "actions": 2, "phys_resist": 0.1, "moves": [{"name": "水军刀", "power": 1.0, "weight": 3}, {"name": "火船", "power": 0.4, "weight": 1, "burn_party": 0.05, "turns": 2}, {"name": "劝酒", "power": 0.3, "weight": 1, "ap_drain": 1}, {"name": "家酒·蓄力", "power": 0, "weight": 1, "charge": "家酒"}, {"name": "家酒", "power": 2.6, "weight": 0}, {"name": "外甥的醉意", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "zhangyun"},
+    "sufei_e": {"name": "江夏苏飞", "portrait": "sufei", "hp": 19500, "at": 425, "actions": 2, "phys_resist": 0.1, "moves": [{"name": "钩索", "power": 1.0, "weight": 3}, {"name": "钩索拖船", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "水卒围攻", "power": 1.4, "weight": 1}, {"name": "斩缆·蓄力", "power": 0, "weight": 1, "charge": "斩缆"}, {"name": "斩缆", "power": 2.6, "weight": 0}, {"name": "败将的不甘", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "sufei"},
+    "liupan_e": {"name": "荆州刘磐", "portrait": "liupan", "hp": 20000, "at": 440, "actions": 2, "phys_resist": 0.1, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "铁骑冲阵", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "枪挑·蓄力", "power": 0, "weight": 1, "charge": "枪挑"}, {"name": "枪挑", "power": 2.7, "weight": 0}, {"name": "少将军的傲气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "liupan"}
   },
   "scenarios": {
     "th_patrol": {
@@ -11623,6 +11631,18 @@
       "name": "小沛城门·吕布突围",
       "turn_limit": 12,
       "enemy": "lvbu_xiaopei"
-    }
+    },
+    "jx_wenpin": {"name": "淯水北岸·文聘", "turn_limit": 10, "enemy": "wenpin_e", "art": "jx_bubing"},
+    "jx_sufei": {"name": "汉水·苏飞", "turn_limit": 10, "enemy": "sufei_e", "art": "jx_huangzu"},
+    "jx_zhangyun": {"name": "襄阳城外·张允", "turn_limit": 10, "enemy": "zhangyun_e", "art": "jx_shuijun"},
+    "jx_zhuiji": {"name": "汉水北岸·追击溃兵", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
+    "jx_zhuiji_b": {"name": "汉水浅滩·黄祖死士", "turn_limit": 8, "enemy": "jing_gongshou", "art": "jx_gongshou"},
+    "jx_wubao": {"name": "新野·坞堡庄丁", "turn_limit": 8, "enemy": "zongzei_e", "art": "jx_zongzei"},
+    "jx_liupan": {"name": "新野·刘磐", "turn_limit": 10, "enemy": "liupan_e", "art": "jx_zongzei"},
+    "jx_xizuo": {"name": "宛城·荆州细作", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "jx_shaoka": {"name": "南下官道·荆州哨卡", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
+    "jx_menjin": {"name": "襄阳北门·盘查", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "jx_xunluo": {"name": "襄阳街头·蔡府巡卒", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "jx_yexi": {"name": "襄阳城外·蔡府部曲", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"}
   }
 }
