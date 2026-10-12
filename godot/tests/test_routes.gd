@@ -150,7 +150,7 @@ func test_lap3_chapter4_escapes_with_the_emperor_and_takes_nanyang() -> void:
 		check_eq(Quests.current_quest(s)["id"], "dongui")
 		var p := walk(d, s, fork)
 		for sid in ["yizu", "fenghou", "jail", "xunyou", "route", "mimou", "luan", "gong", "shaoka", fork[0], "xuhuang", "lijue6",
-				"huihe", "luoyang_rest", "fall", "seal", "paichi", "chuzheng", "qiao7", "huangzhong", "leibo7", "xingye", "chenlan7", "feng7",
+				"huihe", "luo_ruin", "luoyang_rest", "luo_rebuild", "fall", "seal", "paichi", "chuzheng", "qiao7", "huangzhong", "leibo7", "xingye", "chenlan7", "feng7",
 				"jiling7", "dongtao"]:
 			check(p.has(sid), "三周目 passes %s (fork %s)" % [sid, fork[0]])
 		for sid in ["chaohui", "tuwei", "dongjia", "lvbu4", "tonggui"]:
