@@ -76,6 +76,9 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	e["magic_resist"] = minf(0.8, float(e["magic_resist"]) + float(afx.get("magic_resist", 0.0)))
 	e["actions"] = int(e["actions"]) + int(afx.get("actions", 0))
 	var tough := (1.0 + float(mods.get("enemy", 0.0))) * float(mods.get("enemy_scale", 1.0))
+	var unit: Dictionary = b.db.battle.get("unit", {"hp": 1.0, "at": 1.0})  # the enemy table is in the old magnitude; cards are in card-face numbers
+	e["hp"] = float(e["hp"]) / float(unit["hp"])
+	e["at"] = float(e["at"]) / float(unit["at"])
 	var max_hp := int(round(e["hp"] * float(b.db.battle.get("enemy_hp_mult", 1.0)) * float(b.db.battle.get("hp_mult", 1.0)) * tough * (1.0 + float(afx.get("hp", 0.0)))
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * float(b.db.battle.get("attack_mult", 1.0)) * tough * (1.0 + float(afx.get("at", 0.0))),
@@ -332,7 +335,7 @@ func _dmg(base: float, kind: String, pierce := false) -> int:
 	var data: Dictionary = enemy["data"]
 	var resist: float = data["phys_resist"] if kind == "attack" else data["magic_resist"]
 	resist *= 0.0 if pierce else 1.0 - minf(1.0, float(mods.get("pierce", 0.0)))
-	var d: float = base * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
+	var d: float = base * float(db.battle.get("damage_mult", 1.0)) * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
 	return maxi(1, int(round(d * _variance())))
 
 
@@ -421,7 +424,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				enemy["burn_pct"] = maxf(enemy["burn_pct"], float(eff["pct"]) * mult)
 				_ev({"t": "burn_on", "pct": enemy["burn_pct"], "turns": enemy["burn_turns"]})
 				return ["  %s 陷入灼烧！每回合烧掉现有体力的 %d%%（%d 回合）" % [ename, int(round(enemy["burn_pct"] * 100)), enemy["burn_turns"]]]
-			var per := maxi(1, int(round(at * float(eff.get("power", 0.0)) * mult * (1.0 + bonus) * (1.0 - resist))))
+			var per := maxi(1, int(round(at * float(db.battle.get("damage_mult", 1.0)) * float(eff.get("power", 0.0)) * mult * (1.0 + bonus) * (1.0 - resist))))
 			enemy["burn_dmg"] = maxi(enemy["burn_dmg"], per)
 			_ev({"t": "burn_on", "dmg": enemy["burn_dmg"], "turns": enemy["burn_turns"]})
 			return ["  %s 陷入灼烧！每回合结算 -%d（%d 回合）" % [ename, enemy["burn_dmg"], enemy["burn_turns"]]]
@@ -515,7 +518,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 				enemy["used"].append(mv["name"])
 			if float(mv["power"]) > 0.0:
 				var c: float = 0.0 if mv.get("pierce", false) else cut
-				var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - c))))
+				var d := maxi(1, int(round(enemy["at"] * float(db.battle.get("damage_mult", 1.0)) * float(mv["power"]) * _variance() * (1.0 - c))))
 				var ecrit := _crit_roll("enemy")
 				if ecrit > 1.0:
 					d = int(round(d * ecrit))
@@ -607,7 +610,7 @@ func _ambush() -> Array:
 	var log: Array = ["[color=red]埋伏！%s 抢先出手[/color]" % data["name"]]
 	for _a in int(data["actions"]):
 		var mv: Dictionary = data["moves"][0]
-		var d := maxi(1, int(round(enemy["at"] * float(mv["power"]) * _variance() * (1.0 - float(mods.get("guard", 0.0))))))
+		var d := maxi(1, int(round(enemy["at"] * float(db.battle.get("damage_mult", 1.0)) * float(mv["power"]) * _variance() * (1.0 - float(mods.get("guard", 0.0))))))
 		party_hp = maxi(1, party_hp - d)
 		_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": 0.0, "hp": party_hp})
 		log.append("%s【%s】 我军受到 %d 伤害" % [data["name"], mv["name"], d])

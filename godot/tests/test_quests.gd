@@ -1079,12 +1079,10 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 	var guard := s.lord()
 	check_eq(int(guard["hp"]), int(s.lord_with_form(pick)["hp"]))
 	check(guard["hp"] > base["hp"] and guard["at"] > base["at"], "its bonus counts")
-	# stats = (base + this card's own bonus) × the card's tier × its rarity (R 1.0 / SR 1.15 / SSR 1.35), like any general; the others do not add
-	var one: Dictionary = db.lord_forms[pick]["bonus"]
+	# stats = this card's own face numbers × the card's tier, like any general; the others do not add
 	var tier_mult := float(db.gacha["tiers"][s.form_tier(pick)]["mult"])
-	var rar_mult := float(db.gacha["rarity_mult"][db.lord_forms[pick]["rarity"]])
-	var troop_hp := float(db.troops["lord"]["hp"])
-	check(absi(int(guard["hp"]) - int(round((troop_hp * tier_mult + one["hp"] * tier_mult) * rar_mult))) <= 2, "and only its own, at its own tier and rarity (the others do not add)")
+	check(absi(int(guard["hp"]) - int(round(float(db.lord_forms[pick]["hp"]) * tier_mult))) <= 1, "and only its own, at its own tier (the others do not add)")
+	check(absi(int(guard["at"]) - int(round(float(db.lord_forms[pick]["at"]) * tier_mult))) <= 1)
 	s.lord_form_pick = "base"
 	check_eq(s.lord_form(), "", "the plain lord can be put back")
 	var held_copies := s.form_copies.duplicate()
@@ -1293,9 +1291,9 @@ func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
 			var k := Quests._scale_for(tier, base[tier], base[tier], q["id"])
 			check(absf(base[tier] * k * k - Quests.target_power(q["id"], tier)) < 0.001 * Quests.target_power(q["id"], tier), "%s %s median sits on the target" % [q["id"], tier])
 		if base["elite"] > 0.0:
-			check(Quests.target_power(q["id"], "elite") > Quests.target_power(q["id"], "normal"), "%s: elites above ordinary" % q["id"])
+			check(Quests.target_power(q["id"], "elite") * pow(float(db.battle["enemy_coef"]["elite"]), 2) > Quests.target_power(q["id"], "normal") * pow(float(db.battle["enemy_coef"]["normal"]), 2), "%s: elites above ordinary" % q["id"])
 		if base["boss"] > 0.0 and base["elite"] > 0.0:
-			check(Quests.target_power(q["id"], "boss") > Quests.target_power(q["id"], "elite"), "%s: bosses above elites" % q["id"])
+			check(Quests.target_power(q["id"], "boss") * pow(float(db.battle["enemy_coef"]["boss"]), 2) > Quests.target_power(q["id"], "elite") * pow(float(db.battle["enemy_coef"]["elite"]), 2), "%s: bosses above elites" % q["id"])
 	for route in by_route:
 		for i in range(1, route.size()):
 			for tier in ["normal", "elite", "boss"]:

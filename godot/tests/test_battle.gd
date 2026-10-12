@@ -5,8 +5,11 @@ const STARTER := [["cav_n", "spear_n", "archer_n"], []]
 const SSR := [["guanyu", "zhaoyun", "diaochan"], ["machao", "madai", "cav_n", "zhangfei", "wangping", "daqiao", "mizhu"]]
 
 
+const BENCH := 1.3  # the benchmark boss (虎牢关 吕布, raw enemy table) is multiplied like a showpiece in the game: battle.enemy_coef
+
+
 func new_battle(scenario := "hulao", comp := REF, seed_value := 0) -> Battle:
-	return Battle.start(scenario, party(comp[0], comp[1]), seed_value)
+	return Battle.start(scenario, party(comp[0], comp[1]), seed_value, 0, {}, {}, false, {"enemy_scale": BENCH if scenario == "hulao" else 1.0})
 
 
 func test_one_shared_hp_bar_is_the_sum_of_leaders() -> void:
@@ -73,9 +76,9 @@ func test_combo_adds_ten_percent_per_hit() -> void:
 	var b := new_battle()
 	b.db.battle["variance"] = 0.0
 	b.combo = 0
-	var d0 := b._dmg(1000, "magic")
+	var d0 := b._dmg(10000, "magic")
 	b.combo = 5
-	check_eq(b._dmg(1000, "magic"), int(round(d0 * 1.5)))
+	check(absi(b._dmg(10000, "magic") - int(round(d0 * 1.5))) <= 1, "five combo steps = +50%")
 	b.db.battle["variance"] = 0.2
 
 
@@ -125,10 +128,10 @@ func test_auto_battle_plays_a_whole_fight_and_never_wastes_a_skill() -> void:
 
 
 func test_carry_in_and_out() -> void:
-	var b := Battle.start("hulao", party(["bingzhou"]), 0, 1000, {"bingzhou": {"charge": 2}})
-	check_eq(b.party_hp, b.party_max - 1000)
+	var b := Battle.start("hulao", party(["bingzhou"]), 0, 100, {"bingzhou": {"charge": 2}})
+	check_eq(b.party_hp, b.party_max - 100)
 	check_eq(b.cost(b.leaders[1], b.db.skills["charge"]), 4)
-	check_eq(b.carry_out()[0], 1000)
+	check_eq(b.carry_out()[0], 100)
 
 
 # ---- balance -------------------------------------------------------------------

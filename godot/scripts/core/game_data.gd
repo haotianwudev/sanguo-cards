@@ -87,17 +87,14 @@ func _load(dir: String) -> void:
 	kit_default = raw["kit_default"]
 	for fid in raw.get("lord_forms", {}).get("forms", {}):
 		var f: Dictionary = raw["lord_forms"]["forms"][fid]
-		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "rarity": str(f.get("rarity", raw["gacha"].get("lord_rarity", "R"))), "bonus": f.get("bonus", {}),
+		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "rarity": str(f.get("rarity", raw["gacha"].get("lord_rarity", "R"))), "hp": int(f.get("hp", 0)), "at": int(f.get("at", 0)),
 			"skills": f.get("skills", []), "art": f.get("art", false) or ResourceLoader.exists("res://data/portraits/%s.jpg" % fid)}  # its own face once that portrait is delivered
 	lord_form_grants = raw.get("lord_forms", {}).get("grants", [])
 	lord_form_default = raw.get("lord_forms", {}).get("default", "")
 	for cid in raw["cards"]:
 		var c: Dictionary = raw["cards"][cid]
-		var bonus := {}
-		for k in c.get("bonus", {}):
-			bonus[k] = int(c["bonus"][k])
 		cards[cid] = {"id": cid, "name": c["name"], "rarity": c["rarity"], "troop": c["troop"],
-			"bonus": bonus, "skills": c.get("skills", []), "in_pool": c.get("pool", true),
+			"hp": int(c["hp"]), "at": int(c["at"]), "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true), "kit": c.get("kit", ""),
 			"person": c.get("person", cid.trim_suffix("_card") if cid.ends_with("_card") else cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
 			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false)}
@@ -126,7 +123,7 @@ func _load(dir: String) -> void:
 	# the lord cards are cards in the same draw pool as the generals of their route (rarity gacha.lord_rarity, `scope` = the card's route);
 	# another copy raises that card's 铜/银/金 tier like a general's. Their fighter always comes from SaveData.lord_with_form.
 	cards["lord"] = {"id": "lord", "name": "主公", "rarity": str(gacha.get("lord_rarity", "SR")), "troop": "lord",
-		"bonus": {}, "skills": [], "in_pool": true, "troop_skills": true, "person": "lord", "weight": 1, "soldier": false}
+		"hp": int(troops["lord"]["hp"]), "at": int(troops["lord"]["at"]), "skills": [], "in_pool": true, "troop_skills": true, "person": "lord", "weight": 1, "soldier": false}
 	# every other lord card (版本) is a card too, id "lord:<form id>": the same card as any general (its own copies, tier, 点化, draws),
 	# only its fighter comes from SaveData.lord_with_form and it always leads the lord's unit when picked in 整备
 	for fid in lord_forms:
@@ -296,11 +293,9 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
-	var rkey: String = "N_elite" if c["soldier"] and c["elite"] else c["rarity"]  # an elite soldier is about a C general at 铜
-	mult *= float(gacha.get("rarity_mult", {}).get(rkey, 1.0))  # generals outclass soldiers of their troop
+	# the card's face numbers are its stats at 铜; the tier multiplies both (rarity is only where hp + at falls: cards.json gacha.rarity_bands)
 	return {"id": card_id, "name": c["name"], "troop": c["troop"], "person": c["person"],
-		"hp": int(round((t["hp"] + c["bonus"].get("hp", 0)) * mult)),
-		"at": int(round((t["at"] + c["bonus"].get("at", 0)) * mult)), "skills": sk, "rarity": c["rarity"]}
+		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "skills": sk, "rarity": c["rarity"]}
 
 
 func build_lord(lord_name: String, mult := 1.0, north := false, form := "", forms: Array = [], form_mult := -1.0) -> Dictionary:
@@ -309,11 +304,8 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 	var t: Dictionary = troops["lord"]
 	var skills: Array = kits["lord_north"]["special"] if north and kits.has("lord_north") else default_kit("lord", true)
 	var f: Dictionary = lord_forms.get(form, {})  # the lord card in use: its own stats, skills and (once drawn) face
-	var add_hp := int(f.get("bonus", {}).get("hp", 0))
-	var add_at := int(f.get("bonus", {}).get("at", 0))
 	var fm := form_mult if form_mult >= 0.0 else mult  # a lord card levels on its own (SaveData.form_tier); callers without one use the lord's tier
-	var rar: String = str(f.get("rarity", gacha.get("lord_rarity", "R")))  # R / SR / SSR like any general: it scales the card's stats too
-	var rm := float(gacha.get("rarity_mult", {}).get(rar, 1.0))
+	var rar: String = str(f.get("rarity", gacha.get("lord_rarity", "R")))
 	var extra: Array = f.get("skills", [])
 	var person := "lord_north" if north else "lord"
 	if not f.is_empty() and f["art"]:
@@ -323,8 +315,8 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 		if not sk.has(s):
 			sk.append(s)
 	return {"id": "lord", "person": person, "north": north, "form": form, "name": lord_name, "troop": "lord",
-		"hp": int(round((t["hp"] * mult + add_hp * fm) * rm)),
-		"at": int(round((t["at"] * mult + add_at * fm) * rm)), "skills": sk, "rarity": rar}
+		"hp": int(round(float(f["hp"]) * fm)) if not f.is_empty() else int(round(t["hp"] * mult)),
+		"at": int(round(float(f["at"]) * fm)) if not f.is_empty() else int(round(t["at"] * mult)), "skills": sk, "rarity": rar}
 
 
 func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:

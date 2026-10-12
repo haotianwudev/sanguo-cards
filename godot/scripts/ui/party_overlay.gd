@@ -400,10 +400,6 @@ func _fill_lordform_detail(fid: String) -> void:
 		info.add_child(_info_line("兵种", GameData.get_db().troops[f["troop"]]["name"]))
 	info.add_child(_level_box(save.form_tier(form), save.form_copies_of(form)))  # every lord card has its own level, like any other card
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
-	var b: Dictionary = GameData.get_db().lord_forms[form]["bonus"] if form != "" else {}
-	var tiers_list: Array = GameData.get_db().gacha["tiers"]
-	var fmult := float(tiers_list[save.form_tier(form)]["mult"]) if form != "" else 1.0
-	info.add_child(_info_line("加成", ("攻 +%d · 兵 +%d" % [int(round(int(b.get("at", 0)) * fmult)), int(round(int(b.get("hp", 0)) * fmult))]) if form != "" else "没有（原本的主公）"))
 	var in_use := save.lord_form() == form
 	var act := Kit.button("使用中" if in_use else "换上这张主公卡", "gray" if in_use else "green")
 	act.disabled = in_use

@@ -300,9 +300,10 @@ static func enemy_scale(save: SaveData) -> float:
 		if bid == "" or not db.scenarios.has(bid):
 			return 1.0
 		var tier := "boss" if sq["boss"] else ("elite" if sq["elite"] else "normal")
+		var coef: Dictionary = db.battle.get("enemy_coef", {})  # battle.enemy_coef: one more multiplier per tier on hp and attack
 		if sq["lose_goto"] != "":
-			return 1.0  # an unwinnable showpiece (吕布) is tuned by hand
-		return _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"])))
+			return float(coef.get("lose", 1.0))  # an unwinnable showpiece (吕布) is tuned by hand, and may be as strong as it likes
+		return _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"]))) * float(coef.get(tier, 1.0))
 	return 1.0
 
 

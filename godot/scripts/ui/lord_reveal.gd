@@ -69,11 +69,10 @@ func _gain_text(info: Dictionary) -> String:
 	var tiers: Array = GameData.get_db().gacha["tiers"]
 	bits.append("品阶：%s（%d 张）" % [tiers[save.form_tier(form)]["name"], save.form_copies_of(form)])  # every card levels on its own
 	if fresh:
-		var b: Dictionary = info.get("bonus", {})
-		if int(b.get("hp", 0)) != 0:
-			bits.append("体力 +%d" % int(b["hp"]))
-		if int(b.get("at", 0)) != 0:
-			bits.append("攻击 +%d" % int(b["at"]))
+		if int(info.get("hp", 0)) != 0:
+			bits.append("体力 %d" % int(info["hp"]))
+		if int(info.get("at", 0)) != 0:
+			bits.append("攻击 %d" % int(info["at"]))
 		var sk: Array = info.get("skills", [])
 		if not sk.is_empty():
 			bits.append("新技能：" + "、".join(sk.map(func(s): return str(GameData.get_db().skills.get(s, {}).get("name", s)))))

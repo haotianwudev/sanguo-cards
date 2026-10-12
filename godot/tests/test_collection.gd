@@ -754,3 +754,26 @@ func test_lord_cards_share_the_draw_pool_with_the_generals_of_their_route() -> v
 	# the chest pool holds them too
 	var chest_ids: Array = south.chest_pools()["public"]["general"].map(func(c): return c["id"])
 	check(chest_ids.has("lord:lord_south_armor"), "chests draw the same pool")
+
+
+func test_every_card_sits_in_its_rarity_band_and_in_40_to_100() -> void:
+	## cards.json gacha.rarity_bands: rarity is where (hp + at) falls; each number is 40..100; a fighter hits harder than he is tough,
+	## a clerk (策士 / 后勤) is the other way round
+	var db := GameData.get_db()
+	var bands: Dictionary = db.gacha["rarity_bands"]
+	var elite: Array = db.gacha["elite_soldier_band"]
+	for cid in db.cards:
+		var c: Dictionary = db.cards[cid]
+		if cid == "lord" or cid.begins_with("lord:"):
+			continue
+		var s: int = int(c["hp"]) + int(c["at"])
+		var band: Array = elite if (c["soldier"] and c["elite"]) else (bands["N"] if c["soldier"] else bands[c["rarity"]])
+		check(s >= int(band[0]) and s <= int(band[1]), "%s (%s) hp+at %d outside %s" % [cid, c["rarity"], s, str(band)])
+		check(c["hp"] >= 40 and c["hp"] <= 100 and c["at"] >= 40 and c["at"] <= 100, "%s: 40..100 each" % cid)
+		if not c["soldier"] and ["strategist", "logistics"].has(c["troop"]):
+			check(c["hp"] >= c["at"] - 10, "%s: a clerk is at least as tough as he is sharp" % cid)
+	for fid in db.lord_forms:
+		var f: Dictionary = db.lord_forms[fid]
+		var band: Array = bands[f["rarity"]]
+		check(int(f["hp"]) + int(f["at"]) >= int(band[0]) and int(f["hp"]) + int(f["at"]) <= int(band[1]), "lord card %s outside its band" % fid)
+	check_eq(int(db.troops["lord"]["hp"]) + int(db.troops["lord"]["at"]), 125, "the opening lord is the weakest R")
