@@ -279,6 +279,20 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
 After adding content: run tests, screenshot the relevant demo, fix layout overflow (e.g. three skills shrink the
 battle cards), commit, push.
 
+## Chapter design checklist (rogue density, bosses, pools, shuffles)
+
+What the owner asked for while 第三 / 四 / 五章 were reworked — apply it to every chapter, then compare with the other route in `docs/CHAPTER-STATS.md` 南北线对比:
+
+- **Fights per run, not per file.** The squares count adds up mutually exclusive routes; judge a chapter by its longest path (a quick DAG walk over `next` + `choose` + `requires`/`unless`). If normal fights dominate (第三章 长安线 had ~22), turn some into `recruit` / `treasure` / `mystery` squares instead of deleting the square (keep its `next`, drop `battle`).
+- **No long runs of story squares.** Three story squares in a row want a fight or a rogue stretch: add a **lane group** (2 columns: battle lane on top, rogue lane — `mystery` / `treasure` / `recruit` — below, both rejoin at a y1 trunk square; rows move ±1 per step, so a lane group must be followed by a y1 trunk square) or a **small fork** (1 column: one battle square + one treasure / mystery). Insert columns by shifting every later `x` with a script (assert unique `(x, y)` among open squares); update the fork-anchor list in `test_the_filler_forks_...` (`tests/test_quests.gd`) when you add or move a trunk square.
+- **Tier mix.** More normal than elite than boss on the longest path. A plain trunk fight may be normal; lane tops end on an elite or boss.
+- **Named generals as bosses.** Some early in the chapter (as the opener of a choice branch, e.g. 文聘 / 苏飞), some in the second half (张允, 蔡瑁), optional ones inside a lane (刘磐). A new enemy needs: a card (`pool: false`) + enemy with a move that confuses / drains AP / burns the party (a test checks elites and bosses) + a scenario (`art` reuses an existing battle picture) + a portrait brief in `CARD-DESIGN.md` §7 and `tools/art_prompts.py` PORTRAITS + an entry in `Kit.ALIASES` (`scripts/ui/kit.gd`). Use characters that already have a portrait when you can.
+- **Lead in to every fight.** A battle right after a story beat needs lead-in `text` (who the enemy is, why they are here) and a wired `cg`; a character's first appearance gets a CG. Look at delivered art and rewrite the lines to match it.
+- **Good ending = people join.** The best ending of a chapter hands over the defeated side's people (`cards` on the ending-adjacent event: 第五章 破局线 gives 蒯越, 刘表, 刘磐).
+- **Pools: at most two soldier pools and two recruit pools per chapter** (see *Local pools*); same place = same list.
+- **Shuffle groups: one or two per chapter** (`shuffle` in the quest). A group is a few lane-first squares of one fork family — a battle square and a `mystery` / `treasure` / `recruit` square with the same predecessor and the same `requires` / `unless`. Only `CONTENT` moves (type, label, battle, boss, elite, ambush, event, text, portraits, cg, prompt, soldier_pool, recruit_pool): never hang a `record`, `relics`, `cards`, `choose` or `lose_goto` on a shuffled square. Eight groups in one chapter (第五章 once) is too many.
+- **Stats.** After touching a chapter: run the tests, then `python tools/chapter_stats.py --write` (the pre-commit hook does it when story / cards / art data is committed). Only the generated columns and sections refresh; the 入队 / 分叉点 wording and each chapter's own section are hand-written — update them.
+
 ## Story voice
 
 Comic, mature, and frank: this is an adult game, so war, death, and adult romance/sexual tension between adult characters may be written directly, not softened or euphemised. The one hard line: nothing sexual or romantic-tinged touches a character under 18 (甄宓 before her adulthood, 孙尚香 as a child, 孙权, anyone in the 13–17 band). The hero is a 30-year-old office worker's soul in an **18-year-old** body in
