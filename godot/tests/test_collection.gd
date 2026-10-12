@@ -679,3 +679,21 @@ func test_cleared_cards_and_levels() -> void:
 	check_eq(next.card_level_info("lord")["copies"], 4)
 
 
+
+
+func test_a_lord_card_scales_the_lord_by_its_own_level() -> void:
+	## the lord is the lord card in use, levelled like any other card: another card's level does not leak into him
+	var db := GameData.get_db()
+	var fid := ""
+	for k in db.lord_forms:
+		if k != db.lord_form_default:
+			fid = k
+			break
+	check(fid != "", "there is a lord card besides the default one")
+	var s := SaveData.create()
+	s.form_copies[fid] = 1
+	var low: int = s.lord_with_form(fid)["at"]
+	s.lord_copies = _copies_for(2)  # the plain lord card goes 金
+	check_eq(s.lord_with_form(fid)["at"], low, "a 铜 lord card stays 铜 whatever the plain lord card's level")
+	s.form_copies[fid] = _copies_for(2)
+	check(s.lord_with_form(fid)["at"] > low, "its own level raises it")

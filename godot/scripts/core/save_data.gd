@@ -323,10 +323,11 @@ func form_tier(fid: String) -> int:
 
 
 func lord_with_form(form: String) -> Dictionary:
-	## the lord as he would be with that card (also used to show every lord card in 整备): the plain lord at his own tier, the card's bonus at the card's own tier
+	## the lord as he would be with that card (also used to show every lord card in 整备). The lord is the lord card in use,
+	## levelled like any other card: that card's own tier scales him and its bonus (the plain lord card's level = lord_copies)
 	var db := _db()
-	var form_mult := float(db.gacha["tiers"][form_tier(form)]["mult"]) if form != "" else 1.0
-	return db.build_lord(lord_name, float(db.gacha["tiers"][tier("lord")]["mult"]), is_north(), form, [form] if form != "" else [], form_mult)
+	var card_mult := float(db.gacha["tiers"][form_tier(form)]["mult"])
+	return db.build_lord(lord_name, card_mult, is_north(), form, [form] if form != "" else [], card_mult)
 
 
 func lord() -> Dictionary:

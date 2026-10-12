@@ -398,8 +398,7 @@ func _fill_lordform_detail(fid: String) -> void:
 	info.add_child(nm)
 	if GameData.get_db().troops.has(f.get("troop", "")):  # laid out like any other card: name, 兵种, Lv, 单卡
 		info.add_child(_info_line("兵种", GameData.get_db().troops[f["troop"]]["name"]))
-	if form != "":  # only a lord card has a level; the plain lord has none
-		info.add_child(_level_box(save.form_tier(form), save.form_copies_of(form)))
+	info.add_child(_level_box(save.form_tier(form), save.form_copies_of(form)))  # every lord card has its own level, like any other card
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
 	var b: Dictionary = GameData.get_db().lord_forms[form]["bonus"] if form != "" else {}
 	var tiers_list: Array = GameData.get_db().gacha["tiers"]
@@ -454,6 +453,8 @@ func _fill_detail() -> void:
 			info.add_child(_info_line("张数", "×%d（每多一张，当队长时多一名队员）" % save.copies(_sel)))
 		else:
 			info.add_child(_level_line(_sel))
+	else:  # the lord is the lord card in use, levelled like any other card
+		info.add_child(_level_box(save.form_tier(save.lord_form()), save.form_copies_of(save.lord_form())))
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
 	info.add_child(_info_line("当队长", "攻 %d · 兵 %d" % [ld["at"], ld["hp"]]))
 
@@ -522,8 +523,8 @@ func _fill_detail() -> void:
 
 
 func _form_card_tier(fid: String) -> int:
-	## the tier a lord card is drawn with: its own level (the plain lord has none: copper)
-	return 0 if fid == "base" or fid == "" else Game.save.form_tier(fid)
+	## the tier a lord card is drawn with: its own level (the plain lord card = lord_copies)
+	return Game.save.form_tier("" if fid == "base" else fid)
 
 
 func _level_line(cid: String) -> Control:

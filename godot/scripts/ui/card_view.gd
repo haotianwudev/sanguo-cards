@@ -17,6 +17,15 @@ var dimmed := false
 var selected := false
 
 
+static func _default_tier(card_id: String, opts: Dictionary) -> int:
+	## a card's frame = its own tier; the lord is whichever lord card is in use (or the one asked for with opts.form), levelled like any other card
+	if Game.save == null:
+		return 0
+	if card_id == "lord":
+		return Game.save.form_tier(opts.get("form", Game.save.lord_form()))
+	return Game.save.tier(card_id)
+
+
 static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> CardView:
 	var db := GameData.get_db()
 	var v := CardView.new()
@@ -31,7 +40,7 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 		v.fighter = db.build_fighter(card_id)
 	v.leader = opts.get("leader", {})
 	v.count = opts.get("count", 0)
-	v.tier = opts.get("tier", Game.save.tier(card_id) if Game.save != null and card_id != "lord" else 0)  # the lord himself has no 品阶; only a lord card (opts.tier) and the other cards do
+	v.tier = opts.get("tier", _default_tier(card_id, opts))
 	v.note = opts.get("note", "")
 	v.show_skills = opts.get("skills", true)
 	v.custom_minimum_size = size
