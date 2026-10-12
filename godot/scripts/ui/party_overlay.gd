@@ -223,7 +223,7 @@ func _rebuild() -> void:
 		return power[a] > power[b])
 	if _filter == "lord":  # the plain lord and every lord card handed out: tap one to see it, tap again to use it
 		for fid in ["base"] + save.route_lord_forms():
-			var lv := CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if fid == "base" else fid})
+			var lv := CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if fid == "base" else fid, "tier": _form_card_tier(fid)})
 			lv.set_state(false, _sel == "lordform:" + fid)
 			lv.note = "使用中" if save.lord_form() == ("" if fid == "base" else fid) else ""
 			lv.pressed.connect(_tap.bind("lordform:" + fid))
@@ -388,7 +388,7 @@ func _fill_lordform_detail(fid: String) -> void:
 	var top := HBoxContainer.new()
 	top.add_theme_constant_override("separation", 12)
 	_detail.add_child(top)
-	top.add_child(CardView.make("lord", Vector2(130, 182), {"skills": false, "form": form}))
+	top.add_child(CardView.make("lord", Vector2(130, 182), {"skills": false, "form": form, "tier": _form_card_tier(fid)}))
 	var info := VBoxContainer.new()
 	info.add_theme_constant_override("separation", 4)
 	top.add_child(info)
@@ -401,8 +401,11 @@ func _fill_lordform_detail(fid: String) -> void:
 	var tiers_list: Array = GameData.get_db().gacha["tiers"]
 	var fmult := float(tiers_list[save.form_tier(form)]["mult"]) if form != "" else 1.0
 	info.add_child(_info_line("加成", ("攻 +%d · 兵 +%d" % [int(round(int(b.get("at", 0)) * fmult)), int(round(int(b.get("hp", 0)) * fmult))]) if form != "" else "没有（原本的主公）"))
-	if form != "":
-		info.add_child(_info_line("品阶", "%s（%d 张）" % [tiers_list[save.form_tier(form)]["name"], save.form_copies_of(form)]))
+	if form != "":  # this card's own level, like any other card; the lord himself levels apart
+		info.add_child(_level_box(save.form_tier(form), save.form_copies_of(form)))
+		info.add_child(_info_line("主公本人", "%s（%d 张）" % [tiers_list[save.tier("lord")]["name"], save.copies("lord")]))
+	else:
+		info.add_child(_level_box(save.tier("lord"), save.copies("lord")))
 	var in_use := save.lord_form() == form
 	var act := Kit.button("使用中" if in_use else "换上这张主公卡", "gray" if in_use else "green")
 	act.disabled = in_use
@@ -521,12 +524,18 @@ func _fill_detail() -> void:
 		_detail.add_child(bring)
 
 
+func _form_card_tier(fid: String) -> int:
+	## the tier a lord card is drawn with: its own level (the plain lord = the lord's level)
+	return Game.save.tier("lord") if fid == "base" or fid == "" else Game.save.form_tier(fid)
+
+
 func _level_line(cid: String) -> Control:
+	return _level_box(Game.save.tier(cid), Game.save.copies(cid))
+
+
+func _level_box(t: int, n: int) -> Control:
 	## 等级 Lv.N · 铜 / 银 / 金 / 神 (the tier by copies held), in the tier's colour, and what the next level needs
-	var save := Game.save
 	var tiers: Array = GameData.get_db().gacha["tiers"]
-	var t := save.tier(cid)
-	var n := save.copies(cid)
 	var col: Color = [Color(0.9, 0.58, 0.33), Color(0.82, 0.88, 0.96), Color(1.0, 0.84, 0.3), Color(0.82, 0.6, 1.0)][mini(t, 3)]
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 0)
