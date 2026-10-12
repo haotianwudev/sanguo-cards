@@ -2,7 +2,7 @@ extends TestCase
 
 const REF := [["machao", "zhangfei", "daqiao"], ["madai", "cav_n", "wangping", "spear_n", "mizhu"]]
 const STARTER := [["cav_n", "spear_n", "archer_n"], []]
-const SSR := [["guanyu", "zhaoyun", "diaochan"], ["machao", "madai", "cav_n", "zhangfei", "wangping", "daqiao", "mizhu"]]
+const SSR := [["lvbu", "zhangfei", "daqiao"], ["machao", "madai", "cav_n", "wangping", "mizhu"]]
 
 
 const BENCH := 1.3  # the benchmark boss (虎牢关 吕布, raw enemy table) is multiplied like a showpiece in the game: battle.enemy_coef

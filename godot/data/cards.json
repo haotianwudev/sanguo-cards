@@ -24,6 +24,21 @@
       "SSR": [175, 200]
     },
     "elite_soldier_band": [100, 124],
+    "_versions": "一个人物有多张卡时的版本表（按成长顺序）：第一张一定是 R，之后的版本 SR / SSR 逐步更强（以后再设计）。现在只有一张卡的名将，也先放在 R，给后面的版本留出空间。一个测试核对：表里每个 id 存在、第一张是 R、稀有度只升不降、同属一个人物。",
+    "versions": {
+      "sunce": ["sunce", "sunce_bawang", "sunce_zhong"],
+      "zhouyu": ["zhouyu", "zhouyu_chibi"],
+      "luxun": ["luxun_young", "luxun"],
+      "zhaoyun": ["zhaoyun"],
+      "guanyu": ["guanyu"],
+      "guojia": ["guojia"],
+      "zhugeliang": ["zhugeliang"],
+      "caocao": ["caocao"],
+      "taishici": ["taishici"],
+      "sunshangxiang": ["sunshangxiang"],
+      "jiangwei": ["jiangwei"],
+      "diaochan": ["diaochan"]
+    },
     "chest_base": 0.5,
     "chest_overkill": 0.5,
     "_chest_chance": "after a normal fight: chest_base + chest_overkill × overkill (100% overkill = certain) + 宝物/天命 chest bonus; bosses and elites always drop",
@@ -3743,10 +3758,10 @@
     },
     "guanyu": {
       "name": "关羽",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 92,
-      "at": 98,
+      "hp": 64,
+      "at": 82,
       "skills": [
         "qinglong",
         "weizhen"
@@ -3754,10 +3769,10 @@
     },
     "zhaoyun": {
       "name": "赵云",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "spear",
-      "hp": 94,
-      "at": 95,
+      "hp": 68,
+      "at": 78,
       "skills": [
         "qiangpo",
         "changban"
@@ -3766,10 +3781,10 @@
     },
     "sunshangxiang": {
       "name": "孙尚香",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "archer",
-      "hp": 82,
-      "at": 95,
+      "hp": 54,
+      "at": 80,
       "skills": [
         "xiaoji",
         "gongyaoji"
@@ -3789,10 +3804,10 @@
     },
     "zhugeliang": {
       "name": "诸葛亮",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 98,
-      "at": 86,
+      "hp": 82,
+      "at": 62,
       "skills": [
         "huoji",
         "bazhen"
@@ -3851,10 +3866,10 @@
     },
     "taishici": {
       "name": "太史慈",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "archer",
-      "hp": 84,
-      "at": 97,
+      "hp": 56,
+      "at": 82,
       "skills": [
         "shenting"
       ],
@@ -4238,10 +4253,10 @@
     },
     "diaochan": {
       "name": "貂蝉",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 96,
-      "at": 80,
+      "hp": 82,
+      "at": 56,
       "skills": [
         "biyue"
       ]
@@ -4475,10 +4490,10 @@
     },
     "guojia": {
       "name": "郭嘉·鬼才",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 92,
-      "at": 84,
+      "hp": 78,
+      "at": 62,
       "skills": [
         "xianji",
         "shisheng"
@@ -4761,10 +4776,10 @@
     },
     "jiangwei": {
       "name": "姜维",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "spear",
-      "hp": 90,
-      "at": 92,
+      "hp": 66,
+      "at": 76,
       "skills": [
         "qiangpo",
         "jiufa"
@@ -5027,10 +5042,10 @@
     },
     "caocao": {
       "name": "曹操",
-      "rarity": "SSR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 98,
-      "at": 92,
+      "hp": 76,
+      "at": 66,
       "scope": "north"
     },
     "xiahouyuan": {
@@ -5331,10 +5346,10 @@
     },
     "luxun_young": {
       "name": "陆逊·少年",
-      "rarity": "C",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 64,
-      "at": 50,
+      "hp": 72,
+      "at": 54,
       "pool": false
     },
     "pangde": {

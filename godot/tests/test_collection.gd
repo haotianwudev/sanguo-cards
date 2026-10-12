@@ -521,11 +521,11 @@ func test_the_two_routes_recruit_from_their_own_casts() -> void:
 	var north_history := SaveData.create()
 	north_history.flags = ["出生：冀州无极"]
 	north_history.seen = ["zhaoyun"]  # given out by chapter one: not in the public pool, only in your history
-	check(not north.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "a chapter's own general is not in the public pool")
-	check(north_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "…but one you have had before can come again, on his route")
+	check(not north.recruit_pool("R").any(func(c): return c["id"] == "zhaoyun"), "a chapter's own general is not in the public pool")
+	check(north_history.recruit_pool("R").any(func(c): return c["id"] == "zhaoyun"), "…but one you have had before can come again, on his route")
 	var south_history := SaveData.create()
 	south_history.seen = ["zhaoyun"]
-	check(not south_history.recruit_pool("SSR").any(func(c): return c["id"] == "zhaoyun"), "and never on the other route")
+	check(not south_history.recruit_pool("R").any(func(c): return c["id"] == "zhaoyun"), "and never on the other route")
 
 
 func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
@@ -777,3 +777,21 @@ func test_every_card_sits_in_its_rarity_band_and_in_40_to_100() -> void:
 		var band: Array = bands[f["rarity"]]
 		check(int(f["hp"]) + int(f["at"]) >= int(band[0]) and int(f["hp"]) + int(f["at"]) <= int(band[1]), "lord card %s outside its band" % fid)
 	check_eq(int(db.troops["lord"]["hp"]) + int(db.troops["lord"]["at"]), 125, "the opening lord is the weakest R")
+
+
+func test_people_with_several_cards_start_at_r_and_only_climb() -> void:
+	## cards.json gacha.versions: the first card of a person is R, later versions are SR / SSR, never lower
+	var db := GameData.get_db()
+	var rank := {"C": 0, "R": 1, "SR": 2, "SSR": 3}
+	for who in db.gacha["versions"]:
+		var ids: Array = db.gacha["versions"][who]
+		var last := -1
+		for i in ids.size():
+			check(db.cards.has(ids[i]), "%s: no card %s" % [who, ids[i]])
+			if not db.cards.has(ids[i]):
+				continue
+			var r: int = rank[db.cards[ids[i]]["rarity"]]
+			if i == 0:
+				check_eq(db.cards[ids[i]]["rarity"], "R", "%s: the first card is R" % who)
+			check(r >= last, "%s: versions only climb (%s)" % [who, ids[i]])
+			last = r
