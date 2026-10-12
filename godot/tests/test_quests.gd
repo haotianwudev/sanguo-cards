@@ -1439,3 +1439,20 @@ func test_a_chapters_soldier_pool_holds_only_soldiers() -> void:
 	for qq in db.quests:
 		for c in Quests.pools(qq, s)["soldier_pool"]:
 			check(db.cards[c]["soldier"] and not db.cards[c]["beast"], "%s: soldier_pool holds a soldier, not %s" % [qq["id"], c])
+
+
+func test_a_chapters_lord_card_comes_with_its_first_square() -> void:
+	## chapters from the second on hand their lord card out on arrival at the first square (not after the first step); once
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	s.flags = ["董白：留下"]
+	var q1: Dictionary = db.quests[0]
+	Quests.begin(q1, s, rng(3))
+	check(Quests.start_grant(q1, s, rng(3)).is_empty(), "the first chapter's card waits for its first story square")
+	var q2: Dictionary = db.quests[1]
+	var s2 := SaveData.create()
+	Quests.begin(q2, s2, rng(3))
+	var given := Quests.start_grant(q2, s2, rng(3))
+	check_eq(given.size(), 1, "chapter two's lord card comes on arrival")
+	check(s2.lord_forms.has(given[0]["form"]), "…and is held")
+	check(Quests.start_grant(q2, s2, rng(3)).is_empty(), "only once per chapter")

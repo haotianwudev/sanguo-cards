@@ -581,6 +581,17 @@ static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNu
 	return given
 
 
+static func start_grant(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> Array:
+	## the lord card of a chapter from the second on is handed out on arrival at its first square (the first chapter's comes with its first
+	## story square, after the birth choice — see move()); same shape as move()'s result; once per chapter (lord_form_paid)
+	q = view(q, save)
+	var db := GameData.get_db()
+	if rng == null or save.visited.size() != 1 or q["id"] == db.quests[0]["id"]:
+		return []
+	var form := grant_lord_form(q, save, rng, false)
+	return [] if form == "" else [{"form": form, "dupe": save.lord_form_dupe, "fresh": save.lord_form_fresh}]
+
+
 # ---- ？ squares ------------------------------------------------------------------
 
 static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Dictionary:

@@ -155,7 +155,9 @@ func _ready() -> void:
 	_dlg_tools.add_child(hide_btn)
 
 	_rebuild_map()
+	_grant_chapter_card()
 	_refresh()
+	_flush_if_no_story()
 	if toast != "":
 		_show_toast(toast)
 
@@ -523,6 +525,21 @@ func _on_square(sid: String) -> void:
 	_pending_forms = given  # a chapter's first step hands out its lord cards: shown after the square's CG and story (_show_buttons), or now if it has none
 	_refresh()
 	if (target.get("text", []) as Array).is_empty():
+		_flush_lord_reveals()
+
+
+func _grant_chapter_card() -> void:
+	## a chapter's lord card arrives with its first square (shown after that square's story, see _show_buttons)
+	if q == null:
+		return
+	var given := Quests.start_grant(q, Game.save, Game.rng)
+	if not given.is_empty():
+		Game.persist()
+		_pending_forms = given
+
+
+func _flush_if_no_story() -> void:
+	if q != null and (q["squares"][Game.save.square].get("text", []) as Array).is_empty():
 		_flush_lord_reveals()
 
 
@@ -1299,7 +1316,9 @@ func _after_interlude() -> void:
 	Game.persist()
 	_show_toast("「%s」完成！" % Quests.title(q, Game.save))
 	_rebuild_map()
+	_grant_chapter_card()
 	_refresh()
+	_flush_if_no_story()
 
 
 func _show_end() -> void:
