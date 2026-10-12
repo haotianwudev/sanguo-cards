@@ -32,7 +32,6 @@
       "zhaoyun": ["zhaoyun"],
       "guanyu": ["guanyu"],
       "guojia": ["guojia"],
-      "zhugeliang": ["zhugeliang"],
       "caocao": ["caocao"],
       "taishici": ["taishici"],
       "sunshangxiang": ["sunshangxiang"],
@@ -3804,10 +3803,10 @@
     },
     "zhugeliang": {
       "name": "诸葛亮",
-      "rarity": "R",
+      "rarity": "SSR",
       "troop": "strategist",
-      "hp": 82,
-      "at": 62,
+      "hp": 100,
+      "at": 93,
       "skills": [
         "huoji",
         "bazhen"
