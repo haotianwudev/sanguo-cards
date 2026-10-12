@@ -29,7 +29,7 @@ func _copies_for(tier_index: int) -> int:
 
 func test_recruiting_everything_empties_the_pool() -> void:
 	var s := SaveData.create()
-	for r in ["R", "SR", "SSR"]:  # every general in the pool at the top tier
+	for r in ["C", "R", "SR", "SSR"]:  # every general in the pool at the top tier
 		for c in s.recruit_pool(r):
 			if SaveData.is_lord_card(c["id"]):  # a lord card levels on its own counters
 				s.grant_card(c["id"])
@@ -66,7 +66,7 @@ func test_chest_chance_follows_overkill() -> void:
 	check_between(drops, 150, 250, "about half without overkill")
 
 
-func test_duplicate_soldiers_decay_but_new_types_count_fully() -> void:
+func test_duplicate_soldiers_stack_and_new_types_count_too() -> void:
 	var one := SaveData.new()
 	one.owned = ["zhangfei"]
 	var base: int = one.leader_for("zhangfei")["at"]
@@ -78,8 +78,8 @@ func test_duplicate_soldiers_decay_but_new_types_count_fully() -> void:
 	mix.soldiers = {"spear_n": 1, "qingzhou": 1}
 	var spear: int = GameData.get_db().build_fighter("spear_n")["at"]
 	var am := float(GameData.get_db().battle.get("attack_mult", 1.0))
-	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * 1.6 * am)))) <= 2, "second copy counts 60%")
-	check(mix.leader_for("zhangfei")["at"] > dup.leader_for("zhangfei")["at"], "a new soldier type beats a copy")
+	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * 2.0 * am)))) <= 2, "the second copy counts in full (soldier_decay 1.0)")
+	check(mix.leader_for("zhangfei")["at"] >= dup.leader_for("zhangfei")["at"] - 2, "a new soldier type is at least as good as a copy")
 
 
 func test_soldier_can_lead_and_uses_one_copy() -> void:
@@ -508,13 +508,13 @@ func test_the_two_routes_recruit_from_their_own_casts() -> void:
 	var south := SaveData.create()
 	var north := SaveData.create()
 	north.flags = ["出生：冀州无极"]
-	for r in ["R", "SR", "SSR"]:
+	for r in ["C", "R", "SR", "SSR"]:
 		for c in south.recruit_pool(r):
 			check(c.get("scope", "") != "north", "south run: %s is a north general" % c["id"])
 		for c in north.recruit_pool(r):
 			check(c.get("scope", "") != "south", "north run: %s is a south general" % c["id"])
-	var n_ids: Array = ["R", "SR", "SSR"].map(func(r): return north.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
-	var s_ids: Array = ["R", "SR", "SSR"].map(func(r): return south.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
+	var n_ids: Array = ["C", "R", "SR", "SSR"].map(func(r): return north.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
+	var s_ids: Array = ["C", "R", "SR", "SSR"].map(func(r): return south.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
 	check(n_ids.has("xiahouyuan") and not n_ids.has("huanggai") and s_ids.has("huanggai") and not s_ids.has("xiahouyuan"), "each side has its own: " + str(n_ids.size()))
 	check(n_ids.has("guanyu") and s_ids.has("guanyu"), "the ones both stories use are in both")
 	check(n_ids.size() >= 40 and s_ids.size() >= 40, "neither side is thin: %d / %d" % [n_ids.size(), s_ids.size()])
@@ -719,7 +719,7 @@ func test_a_lord_card_scales_the_lord_by_its_own_level() -> void:
 
 func _pool_ids(s: SaveData) -> Array:
 	var out: Array = []
-	for r in ["R", "SR", "SSR"]:
+	for r in ["C", "R", "SR", "SSR"]:
 		out.append_array(s.recruit_pool(r).map(func(c): return c["id"]))
 	return out
 

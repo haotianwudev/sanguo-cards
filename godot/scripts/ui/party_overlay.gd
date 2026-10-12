@@ -216,7 +216,7 @@ func _rebuild() -> void:
 	var power := {}
 	for cid in ids:
 		power[cid] = SaveData.leader_power(save.leader_for(cid))
-	var rank := {"SSR": 4, "SR": 3, "R": 2, "N": 1}
+	var rank := {"SSR": 5, "SR": 4, "R": 3, "C": 2, "N": 1}
 	ids.sort_custom(func(a, b):
 		if _sort == "rarity" and rank.get(db.cards[a]["rarity"], 0) != rank.get(db.cards[b]["rarity"], 0):
 			return rank.get(db.cards[a]["rarity"], 0) > rank.get(db.cards[b]["rarity"], 0)

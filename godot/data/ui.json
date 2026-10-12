@@ -25,8 +25,8 @@
       "blue": "#1f6fb2", "purple": "#8e44ad", "gray": "#7a7a7a"
     }
   },
-  "rarity_labels": {"N": "兵", "R": "R", "SR": "SR", "SSR": "SSR", "lord": "主公"},
-  "rarity_colors": {"N": "gray", "R": "blue", "SR": "purple", "SSR": "gold", "lord": "red"},
+  "rarity_labels": {"N": "兵", "C": "C", "R": "R", "SR": "SR", "SSR": "SSR", "lord": "主公"},
+  "rarity_colors": {"N": "gray", "C": "green", "R": "blue", "SR": "purple", "SSR": "gold", "lord": "red"},
   "map": {
     "cell": 8,
     "glyphs": {"event": "事", "choose": "选", "battle": "战", "treasure": "宝", "recover": "休", "recruit": "募", "boss": "将", "elite": "精", "mystery": "？"},

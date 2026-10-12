@@ -116,6 +116,7 @@ func _ready() -> void:
 	var ssr_count := _cleared_ids.filter(func(c): return db.cards.has(c) and db.cards[c]["rarity"] == "SSR").size()
 	var sr_count := _cleared_ids.filter(func(c): return db.cards.has(c) and db.cards[c]["rarity"] == "SR").size()
 	var r_count := _cleared_ids.filter(func(c): return db.cards.has(c) and db.cards[c]["rarity"] == "R").size()
+	var c_count := _cleared_ids.filter(func(c): return db.cards.has(c) and db.cards[c]["rarity"] == "C").size()
 	var soldier_count := _cleared_ids.filter(func(c): return db.cards.has(c) and db.cards[c]["soldier"]).size()
 
 	var type_defs: Array = [
@@ -123,6 +124,7 @@ func _ready() -> void:
 		["SSR", "SSR 名将 (%d)" % ssr_count],
 		["SR", "SR 良将 (%d)" % sr_count],
 		["R", "R 辅将 (%d)" % r_count],
+		["C", "C 杂将 (%d)" % c_count],
 		["soldier", "部队兵卡 (%d)" % soldier_count],
 		["lord", "主角卡 (%d/%d)" % [save.cleared_forms.filter(func(f): return db.lord_forms.has(f)).size(), db.lord_forms.size()]],
 	]
@@ -307,7 +309,7 @@ func _populate_grid() -> void:
 				match_type = true
 			"soldier":
 				match_type = c.get("soldier", false)
-			"SSR", "SR", "R":
+			"SSR", "SR", "R", "C":
 				match_type = (not c.get("soldier", false) and c.get("rarity", "") == _cur_type)
 
 		if match_type:

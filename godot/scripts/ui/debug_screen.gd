@@ -94,7 +94,7 @@ func _do_jump(jump: Dictionary) -> void:
 	Game.show_screen(MapScreen.new())
 
 
-const _CARD_TABS := [["SSR", "SSR"], ["SR", "SR"], ["R", "R"], ["N", "兵卡"], ["story", "剧情 / 敌方卡"]]
+const _CARD_TABS := [["SSR", "SSR"], ["SR", "SR"], ["R", "R"], ["C", "C"], ["N", "兵卡"], ["story", "剧情 / 敌方卡"]]
 const _CG_GROUPS := {"c1": "第一章（南线）", "jz": "第一章（北线）", "e": "随机事件", "i": "幕间", "end": "结局"}  # prefix groups for what no quest square owns
 
 

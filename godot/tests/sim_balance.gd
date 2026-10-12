@@ -139,7 +139,7 @@ func _fight(q: Dictionary, s: SaveData, rng: RandomNumberGenerator, fails_here: 
 		var chest := s.chest_after_battle(rng, b.overkill, sq["boss"] or sq["elite"], [], b.enemy["data"]["card"], float(b.mods.get("chest", 0.0)), q["id"])
 		if not chest.is_empty():
 			var best := 0
-			var rank := {"SSR": 3, "SR": 2, "R": 1}
+			var rank := {"SSR": 4, "SR": 3, "R": 2, "C": 1}
 			for i in chest.size():
 				if int(rank.get(chest[i].get("rarity", ""), 0)) > int(rank.get(chest[best].get("rarity", ""), 0)):
 					best = i

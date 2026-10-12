@@ -296,7 +296,8 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
-	mult *= float(gacha.get("rarity_mult", {}).get(c["rarity"], 1.0))  # generals outclass soldiers of their troop
+	var rkey: String = "N_elite" if c["soldier"] and c["elite"] else c["rarity"]  # an elite soldier is about a C general at 铜
+	mult *= float(gacha.get("rarity_mult", {}).get(rkey, 1.0))  # generals outclass soldiers of their troop
 	return {"id": card_id, "name": c["name"], "troop": c["troop"], "person": c["person"],
 		"hp": int(round((t["hp"] + c["bonus"].get("hp", 0)) * mult)),
 		"at": int(round((t["at"] + c["bonus"].get("at", 0)) * mult)), "skills": sk, "rarity": c["rarity"]}
