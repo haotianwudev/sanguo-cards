@@ -1079,9 +1079,12 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 	var guard := s.lord()
 	check_eq(int(guard["hp"]), int(s.lord_with_form(pick)["hp"]))
 	check(guard["hp"] > base["hp"] and guard["at"] > base["at"], "its bonus counts")
+	# stats = (base + this card's own bonus) × the card's tier × its rarity (R 1.0 / SR 1.15 / SSR 1.35), like any general; the others do not add
 	var one: Dictionary = db.lord_forms[pick]["bonus"]
 	var tier_mult := float(db.gacha["tiers"][s.form_tier(pick)]["mult"])
-	check(absi(int(guard["hp"]) - int(base["hp"]) - int(round(one["hp"] * tier_mult))) <= 2, "and only its own, at the lord's tier (the others do not add)")
+	var rar_mult := float(db.gacha["rarity_mult"][db.lord_forms[pick]["rarity"]])
+	var troop_hp := float(db.troops["lord"]["hp"])
+	check(absi(int(guard["hp"]) - int(round((troop_hp * tier_mult + one["hp"] * tier_mult) * rar_mult))) <= 2, "and only its own, at its own tier and rarity (the others do not add)")
 	s.lord_form_pick = "base"
 	check_eq(s.lord_form(), "", "the plain lord can be put back")
 	var held_copies := s.form_copies.duplicate()

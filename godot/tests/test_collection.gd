@@ -145,6 +145,10 @@ func test_generals_repeat_and_climb_through_the_tiers() -> void:
 func test_recruit_offers_can_repeat_owned_but_not_gold_generals() -> void:
 	var s := SaveData.create()
 	for c in GameData.get_db().pool("R"):
+		if SaveData.is_lord_card(c["id"]):  # a lord card levels on its own counters
+			s.grant_card(c["id"])
+			s.upgrade(c["id"], 9999)
+			continue
 		s.owned.append(c["id"])
 		s.dupes[c["id"]] = _copies_for(GameData.get_db().gacha["tiers"].size() - 1)
 	var r := RandomNumberGenerator.new()
@@ -283,9 +287,9 @@ func test_lord_cards_are_cards_like_any_other_each_levels_on_its_own() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
 	s.cleared_forms = ["lord_south_armor", "lord_north_silver", "lord_default"]
-	var pool_ids: Array = db.pool("SR").filter(func(c): return c.get("scope", "") in ["", "south"]).map(func(c): return c["id"])
+	var pool_ids: Array = _pool_ids(s)
 	check(pool_ids.has("lord") and pool_ids.has("lord:lord_south_armor"), "the lord cards are in the same draw pool as the other generals of this route")
-	check(not s.recruit_pool("SR").any(func(c): return c["id"] == "lord:lord_north_silver"), "…and the other route's lord cards are not")
+	check(not pool_ids.has("lord:lord_north_silver"), "…and the other route's lord cards are not")
 	var card := s.take("lord:lord_south_armor")  # a draw: that very card comes (back) and is at level 1
 	check_eq(card["name"], db.lord_forms["lord_south_armor"]["name"], "the pick shows the card's own name")
 	check(s.lord_forms.has("lord_south_armor") and s.form_copies_of("lord_south_armor") == 1 and s.lord_copies == 1, "the draw gave that card level 1 and left the plain lord alone")
@@ -713,14 +717,33 @@ func test_a_lord_card_scales_the_lord_by_its_own_level() -> void:
 	check(s.lord_with_form(fid)["at"] > low, "its own level raises it")
 
 
+func _pool_ids(s: SaveData) -> Array:
+	var out: Array = []
+	for r in ["R", "SR", "SSR"]:
+		out.append_array(s.recruit_pool(r).map(func(c): return c["id"]))
+	return out
+
+
+func test_lord_cards_have_their_own_rarity_like_any_general() -> void:
+	var db := GameData.get_db()
+	var rarities := {}
+	for fid in db.lord_forms:
+		rarities[db.lord_forms[fid]["rarity"]] = true
+	check(rarities.has("R") and rarities.has("SR") and rarities.has("SSR"), "the lord cards come in R, SR and SSR")
+	check_eq(db.cards["lord:lord_south_armor"]["rarity"], "SSR")
+	var s := SaveData.create()
+	check_eq(s.lord_with_form("lord_south_armor")["rarity"], "SSR", "the fighter carries the card's rarity")
+	check(s.lord_with_form("lord_south_armor")["at"] > s.lord_with_form("lord_south_cloak")["at"], "a higher rarity hits harder at the same tier")
+
+
 func test_lord_cards_share_the_draw_pool_with_the_generals_of_their_route() -> void:
 	var south := SaveData.create()
-	var south_ids: Array = south.recruit_pool("SR").map(func(c): return c["id"])
+	var south_ids: Array = _pool_ids(south)
 	check(south_ids.has("lord") and south_ids.has("lord:lord_south_armor") and not south_ids.has("lord:lord_north_silver"), "south: the plain lord card and the south lord cards, one pool with the generals")
 	check(south_ids.has("huanggai"), "…next to the other generals")
 	var north := SaveData.create()
 	north.flags = ["出生：冀州无极"]
-	var north_ids: Array = north.recruit_pool("SR").map(func(c): return c["id"])
+	var north_ids: Array = _pool_ids(north)
 	check(north_ids.has("lord:lord_north_silver") and not north_ids.has("lord:lord_south_armor"), "north: the north lord cards")
 	var rng := RandomNumberGenerator.new()
 	var offered := false

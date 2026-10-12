@@ -87,7 +87,7 @@ func _load(dir: String) -> void:
 	kit_default = raw["kit_default"]
 	for fid in raw.get("lord_forms", {}).get("forms", {}):
 		var f: Dictionary = raw["lord_forms"]["forms"][fid]
-		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "bonus": f.get("bonus", {}),
+		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "rarity": str(f.get("rarity", raw["gacha"].get("lord_rarity", "R"))), "bonus": f.get("bonus", {}),
 			"skills": f.get("skills", []), "art": f.get("art", false) or ResourceLoader.exists("res://data/portraits/%s.jpg" % fid)}  # its own face once that portrait is delivered
 	lord_form_grants = raw.get("lord_forms", {}).get("grants", [])
 	lord_form_default = raw.get("lord_forms", {}).get("default", "")
@@ -131,7 +131,7 @@ func _load(dir: String) -> void:
 	# only its fighter comes from SaveData.lord_with_form and it always leads the lord's unit when picked in 整备
 	for fid in lord_forms:
 		if fid != lord_form_default:
-			cards["lord:" + fid] = cards["lord"].merged({"id": "lord:" + fid, "name": lord_forms[fid]["name"], "lord_form": fid, "scope": lord_forms[fid]["route"]}, true)
+			cards["lord:" + fid] = cards["lord"].merged({"id": "lord:" + fid, "name": lord_forms[fid]["name"], "lord_form": fid, "scope": lord_forms[fid]["route"], "rarity": lord_forms[fid]["rarity"]}, true)
 
 	var en: Dictionary = read_json(dir + "/endings.json")
 	for eid in en["endings"]:
@@ -311,6 +311,8 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 	var add_hp := int(f.get("bonus", {}).get("hp", 0))
 	var add_at := int(f.get("bonus", {}).get("at", 0))
 	var fm := form_mult if form_mult >= 0.0 else mult  # a lord card levels on its own (SaveData.form_tier); callers without one use the lord's tier
+	var rar: String = str(f.get("rarity", gacha.get("lord_rarity", "R")))  # R / SR / SSR like any general: it scales the card's stats too
+	var rm := float(gacha.get("rarity_mult", {}).get(rar, 1.0))
 	var extra: Array = f.get("skills", [])
 	var person := "lord_north" if north else "lord"
 	if not f.is_empty() and f["art"]:
@@ -320,8 +322,8 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 		if not sk.has(s):
 			sk.append(s)
 	return {"id": "lord", "person": person, "north": north, "form": form, "name": lord_name, "troop": "lord",
-		"hp": int(round(t["hp"] * mult + add_hp * fm)),
-		"at": int(round(t["at"] * mult + add_at * fm)), "skills": sk, "rarity": null}
+		"hp": int(round((t["hp"] * mult + add_hp * fm) * rm)),
+		"at": int(round((t["at"] * mult + add_at * fm) * rm)), "skills": sk, "rarity": rar}
 
 
 func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:
