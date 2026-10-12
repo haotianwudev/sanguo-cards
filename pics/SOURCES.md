@@ -723,3 +723,7 @@
 | `cg:c8_nushou` | source/cg/c8_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c8_zhashan` | source/cg/c8_zhashan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c8_lanshang` | source/cg/c8_lanshang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_luoyang_fire` | source/cg/c2_luoyang_fire.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c5_caiyong` | source/cg/c5_caiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c5_wangyun` | source/cg/c5_wangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c6_sneak` | source/cg/c6_sneak.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

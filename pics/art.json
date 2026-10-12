@@ -4474,6 +4474,22 @@
     "c8_lanshang": {
       "src": "source/cg/c8_lanshang.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_luoyang_fire": {
+      "src": "source/cg/c2_luoyang_fire.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c5_caiyong": {
+      "src": "source/cg/c5_caiyong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c5_wangyun": {
+      "src": "source/cg/c5_wangyun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c6_sneak": {
+      "src": "source/cg/c6_sneak.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

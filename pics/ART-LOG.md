@@ -604,3 +604,7 @@
 - [x] 2026-10-11 portrait `sufei` ← sufei.jpg · ok
 - [x] 2026-10-11 portrait `liupan` ← liupan.jpg · ok
 - [x] 2026-10-11 portrait `sunce_bawang` ← sunce_bawang.jpg · ok
+- [x] 2026-10-12 cg `c2_luoyang_fire` ← c2_luoyang_fire_1791804910383.jpg · ok
+- [x] 2026-10-12 cg `c5_caiyong` ← c5_caiyong_1791804933372.jpg · ok
+- [x] 2026-10-12 cg `c5_wangyun` ← c5_wangyun_1791804954491.jpg · ok
+- [x] 2026-10-12 cg `c6_sneak` ← c6_sneak_1791804979053.jpg · ok
