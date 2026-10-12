@@ -238,18 +238,6 @@ func lord_cards() -> Array:
 	return out
 
 
-func drawable_lord_cards() -> Array:
-	## the lord cards a draw can show: the ones held plus those of this route had in an earlier 周目, none of them 金 yet
-	var route := "north" if is_north() else "south"
-	var db := _db()
-	var out: Array = lord_cards()
-	for fid in cleared_forms:
-		var info: Dictionary = db.lord_forms.get(fid, {})
-		if not info.is_empty() and fid != db.lord_form_default and (info["route"] == "" or info["route"] == route) and not lord_forms.has(fid):
-			out.append("lord:" + fid)
-	return out.filter(func(c): return not maxed(c))
-
-
 func copies(card_id: String) -> int:
 	_sync()
 	if is_lord_card(card_id):
@@ -427,10 +415,6 @@ func recruit_offer(rng: RandomNumberGenerator, n: int = 0, rates: Dictionary = {
 		if not mine.is_empty() and rng.randf() < fielded_chance():  # often a general you field: the ones you use get to level up
 			result.append(mine[rng.randi_range(0, mine.size() - 1)])
 			continue
-		var lord_draw: Array = drawable_lord_cards().filter(func(c): return not result.has(db.cards[c]))
-		if not lord_draw.is_empty() and rng.randf() < float(db.gacha.get("lord_rate", 0.0)):
-			result.append(db.cards[lord_draw[rng.randi_range(0, lord_draw.size() - 1)]])  # now and then one of the lord cards turns up (the draw levels that very card)
-			continue
 		var live: Array = []
 		var pools := {}
 		for r in rates:
@@ -556,7 +540,7 @@ func chest_pools(chapter := "", only: Array = []) -> Dictionary:
 	var r := route()
 	var out := {"public": {"soldier": [], "general": []}, "chapter": {"soldier": [], "general": []}, "history": {"soldier": [], "general": []}}
 	for c in db.cards.values():
-		if is_lord_card(c["id"]) or c.get("beast", false) or not (c.get("scope", "") in ["", r]):
+		if c.get("beast", false) or not (c.get("scope", "") in ["", r]):
 			continue
 		var chapters: Array = db.card_chapters.get(c["id"], [])
 		if c["soldier"]:

@@ -15,9 +15,9 @@ func test_recruit_offers_unowned_generals_and_you_keep_one() -> void:
 	var ids := {}
 	for c in offer:
 		ids[c["id"]] = true
-		check(not c["soldier"] and (c["in_pool"] or c["id"] == "lord") and c["id"] != "guanyu", c["id"])  # the fielded lord can be offered too
+		check(not c["soldier"] and c["in_pool"] and c["id"] != "guanyu", c["id"])  # the lord cards are in the pool too
 	check_eq(ids.size(), offer.size(), "no duplicates in an offer")
-	var generals: Array = offer.filter(func(c): return c["id"] != "lord")
+	var generals: Array = offer.filter(func(c): return not SaveData.is_lord_card(c["id"]))
 	s.take(generals[1]["id"])
 	check_eq(s.owned, ["guanyu", generals[1]["id"]])
 
@@ -31,6 +31,10 @@ func test_recruiting_everything_empties_the_pool() -> void:
 	var s := SaveData.create()
 	for r in ["R", "SR", "SSR"]:  # every general in the pool at the top tier
 		for c in s.recruit_pool(r):
+			if SaveData.is_lord_card(c["id"]):  # a lord card levels on its own counters
+				s.grant_card(c["id"])
+				s.upgrade(c["id"], 9999)
+				continue
 			s.owned.append(c["id"])
 			s.dupes[c["id"]] = _copies_for(GameData.get_db().gacha["tiers"].size() - 1)
 	check_eq(s.pool_left(), 0)
@@ -265,16 +269,13 @@ func test_the_fielded_lord_turns_up_in_offers_like_any_fielded_card() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
 	var old: float = db.gacha["fielded_chance"]
-	var old_rate: float = db.gacha["lord_rate"]
 	db.gacha["fielded_chance"] = 1.0
-	db.gacha["lord_rate"] = 0.0
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 5
 	var seen := false
 	for _i in 20:
 		seen = seen or s.recruit_offer(rng).any(func(c): return c["id"] == "lord")
 	db.gacha["fielded_chance"] = old
-	db.gacha["lord_rate"] = old_rate
 	check(seen, "the lord is always fielded, so a fielded-card roll can offer him")
 
 
@@ -282,9 +283,9 @@ func test_lord_cards_are_cards_like_any_other_each_levels_on_its_own() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
 	s.cleared_forms = ["lord_south_armor", "lord_north_silver", "lord_default"]
-	var drawable: Array = s.drawable_lord_cards()
-	check(drawable.has("lord") and drawable.has("lord:lord_south_armor"), "the plain lord and a remembered card of this route can be drawn")
-	check(not drawable.has("lord:lord_north_silver"), "…not the other route's")
+	var pool_ids: Array = db.pool("SR").filter(func(c): return c.get("scope", "") in ["", "south"]).map(func(c): return c["id"])
+	check(pool_ids.has("lord") and pool_ids.has("lord:lord_south_armor"), "the lord cards are in the same draw pool as the other generals of this route")
+	check(not s.recruit_pool("SR").any(func(c): return c["id"] == "lord:lord_north_silver"), "…and the other route's lord cards are not")
 	var card := s.take("lord:lord_south_armor")  # a draw: that very card comes (back) and is at level 1
 	check_eq(card["name"], db.lord_forms["lord_south_armor"]["name"], "the pick shows the card's own name")
 	check(s.lord_forms.has("lord_south_armor") and s.form_copies_of("lord_south_armor") == 1 and s.lord_copies == 1, "the draw gave that card level 1 and left the plain lord alone")
@@ -710,3 +711,23 @@ func test_a_lord_card_scales_the_lord_by_its_own_level() -> void:
 	check_eq(s.lord_with_form(fid)["at"], low, "a 铜 lord card stays 铜 whatever the plain lord card's level")
 	s.form_copies[fid] = _copies_for(2)
 	check(s.lord_with_form(fid)["at"] > low, "its own level raises it")
+
+
+func test_lord_cards_share_the_draw_pool_with_the_generals_of_their_route() -> void:
+	var south := SaveData.create()
+	var south_ids: Array = south.recruit_pool("SR").map(func(c): return c["id"])
+	check(south_ids.has("lord") and south_ids.has("lord:lord_south_armor") and not south_ids.has("lord:lord_north_silver"), "south: the plain lord card and the south lord cards, one pool with the generals")
+	check(south_ids.has("huanggai"), "…next to the other generals")
+	var north := SaveData.create()
+	north.flags = ["出生：冀州无极"]
+	var north_ids: Array = north.recruit_pool("SR").map(func(c): return c["id"])
+	check(north_ids.has("lord:lord_north_silver") and not north_ids.has("lord:lord_south_armor"), "north: the north lord cards")
+	var rng := RandomNumberGenerator.new()
+	var offered := false
+	for seed_value in 200:
+		rng.seed = seed_value
+		offered = offered or south.recruit_offer(rng).any(func(c): return SaveData.is_lord_card(c["id"]))
+	check(offered, "a draw can show a lord card")
+	# the chest pool holds them too
+	var chest_ids: Array = south.chest_pools()["public"]["general"].map(func(c): return c["id"])
+	check(chest_ids.has("lord:lord_south_armor"), "chests draw the same pool")
