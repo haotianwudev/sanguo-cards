@@ -7705,6 +7705,58 @@
       ],
       "card": "xiliang_bing"
     },
+    "yulin_jun": {
+      "name": "御林军",
+      "portrait": "yulin_lang",
+      "hp": 9500,
+      "at": 315,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长戟",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "结阵",
+          "power": 1.3,
+          "weight": 1
+        },
+        {
+          "name": "宫禁令",
+          "power": 1.5,
+          "weight": 1
+        }
+      ],
+      "card": "yulin_lang"
+    },
+    "yulin_tongling": {
+      "name": "御林军统领",
+      "portrait": "yulin_lang",
+      "hp": 13000,
+      "at": 340,
+      "actions": 2,
+      "moves": [
+        {
+          "name": "长戟",
+          "power": 1.0,
+          "weight": 3
+        },
+        {
+          "name": "奉诏拿人",
+          "power": 1.5,
+          "weight": 2
+        },
+        {
+          "name": "弓弩齐发",
+          "power": 0.6,
+          "weight": 1,
+          "burn_party": 0.04,
+          "turns": 2
+        }
+      ],
+      "card": "yulin_lang"
+    },
     "lijue": {
       "name": "李傕",
       "portrait": "lijue",
@@ -11088,6 +11140,18 @@
       "name": "长街·司徒府兵",
       "turn_limit": 8,
       "enemy": "situ_fubing"
+    },
+    "c6_yulin": {
+      "name": "宫墙下·御林军",
+      "turn_limit": 8,
+      "enemy": "yulin_jun",
+      "art": "c6_yulin"
+    },
+    "c6_yulin_head": {
+      "name": "北掖门·御林军统领",
+      "turn_limit": 8,
+      "enemy": "yulin_tongling",
+      "art": "c6_yulin"
     },
     "c6_soubu": {
       "name": "破祠外·司徒府兵",
