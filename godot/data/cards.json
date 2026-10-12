@@ -3533,11 +3533,11 @@
     },
     "dongzhuo_card": {
       "name": "董卓·相国",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "infantry",
       "person": "dongzhuo",
-      "hp": 100,
-      "at": 98,
+      "hp": 92,
+      "at": 80,
       "skills": [
         "xiangguo"
       ],
@@ -3553,10 +3553,10 @@
     },
     "yuanshu": {
       "name": "袁术·仲家帝",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 90,
-      "at": 85,
+      "hp": 84,
+      "at": 70,
       "skills": [
         "mishui"
       ],
@@ -3793,10 +3793,10 @@
     },
     "dianwei": {
       "name": "典韦",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "infantry",
-      "hp": 100,
-      "at": 94,
+      "hp": 86,
+      "at": 86,
       "skills": [
         "shuangji"
       ],
@@ -3877,11 +3877,11 @@
     },
     "sunce_zhong": {
       "name": "孙策·中年",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "cavalry",
       "person": "sunce",
-      "hp": 90,
-      "at": 99,
+      "hp": 76,
+      "at": 94,
       "skills": [
         "bawang",
         "dujiang"
@@ -3903,10 +3903,10 @@
     },
     "luxun": {
       "name": "陆逊",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 94,
-      "at": 84,
+      "hp": 88,
+      "at": 78,
       "skills": [
         "lianying"
       ],
@@ -4134,19 +4134,19 @@
     },
     "zuoci": {
       "name": "左慈·乌角先生",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 92,
-      "at": 86,
+      "hp": 88,
+      "at": 76,
       "skills": [
         "zhibei"
       ]
     },
     "zhurong": {
       "name": "祝融·南中女王",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "archer",
-      "hp": 88,
+      "hp": 70,
       "at": 94,
       "skills": [
         "feidao",
@@ -4345,10 +4345,10 @@
     },
     "zhangjiao": {
       "name": "张角",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 94,
-      "at": 88,
+      "hp": 88,
+      "at": 80,
       "skills": [
         "taiping"
       ],
@@ -4378,10 +4378,10 @@
     },
     "jiaxu": {
       "name": "贾诩·毒士",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 96,
-      "at": 84,
+      "hp": 90,
+      "at": 78,
       "pool": false,
       "skills": [
         "xianji"
@@ -4625,11 +4625,11 @@
     },
     "wenchou": {
       "name": "「河北庭柱」文丑",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "cavalry",
       "person": "wenchou",
-      "hp": 90,
-      "at": 97,
+      "hp": 74,
+      "at": 92,
       "skills": [
         "tingzhu",
         "mengjiang"
@@ -4647,11 +4647,11 @@
     },
     "yanliang": {
       "name": "「河北庭柱」颜良",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "cavalry",
       "person": "yanliang",
-      "hp": 94,
-      "at": 96,
+      "hp": 78,
+      "at": 90,
       "skills": [
         "tingzhu",
         "mengjiang"
