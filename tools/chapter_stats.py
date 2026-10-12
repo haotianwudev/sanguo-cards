@@ -108,6 +108,50 @@ def card_section() -> str:
         out.append(f"| {'主公亲卫（丫鬟、家丁等，跟主公一队）' if tid == 'lord' else tr.get('name', tid)} | {by['SSR']} / {by['SR']} / {by['R']} | {len(g)} | {len(s)}（{elite}） | {r['南']} / {r['北']} / {r['通用']} |")
     return "\n".join(out)
 
+COMPARE_BEGIN, COMPARE_END = "<!-- compare:begin -->", "<!-- compare:end -->"
+# chapter -> (south row key, north row key); None = that route has nothing built for the chapter yet
+CHAPTERS = [
+    ("第一章", "prologue_s", "prologue_n"),
+    ("第二章", "taodong", "luoyang_n"),
+    ("第三章", "yuxi", "heishan"),
+    ("第四章", "dongui", "beihai"),
+    ("第五章", "jingxiang", "xuzhou"),
+    ("第六章", "huainan_s", "huainan_n"),
+    ("第七章", "jiangdong", None),
+]
+ROW_NAMES = {"prologue_s": "富春", "prologue_n": "冀州风云"}
+SUM_KEYS = ("n", "normal", "elite", "boss", "forks", "cg_have", "cg_all")
+
+
+def compare_section() -> str:
+    titles = {q["id"]: q["title"].split(" · ", 1)[-1] for q in story["quests"]}
+    titles.update(ROW_NAMES)
+
+    def cells(key):
+        if key is None:
+            return ["—（未实装）", "", "", "", ""]
+        r = rows[key]
+        return [titles[key], str(r["n"]), "%d / %d / %d" % (r["normal"], r["elite"], r["boss"]), str(r["forks"]), "%d/%d" % (r["cg_have"], r["cg_all"])]
+
+    out = ["## 南北线对比（`python tools/chapter_stats.py --write` 生成，别手改这一节）", "",
+           "同一章的南线、北线并排；口径同下方总览（格数含互斥分支，分叉＝`choose` + `lose_goto`）。", "",
+           "| 章 | 南线 | 格数 | 战斗 普/精/首 | 分叉 | CG | 北线 | 格数 | 战斗 普/精/首 | 分叉 | CG |",
+           "|---|---|---:|---:|---:|---:|---|---:|---:|---:|---:|"]
+    sums = {"s": dict.fromkeys(SUM_KEYS, 0), "n": dict.fromkeys(SUM_KEYS, 0)}
+    for ch, s, n in CHAPTERS:
+        out.append("| %s | %s | %s |" % (ch, " | ".join(cells(s)), " | ".join(cells(n))))
+        for side, key in (("s", s), ("n", n)):
+            if key:
+                for k in SUM_KEYS:
+                    sums[side][k] += rows[key][k]
+
+    def total(side):
+        d = sums[side]
+        return ["", "**%d**" % d["n"], "**%d / %d / %d**" % (d["normal"], d["elite"], d["boss"]), "**%d**" % d["forks"], "**%d/%d**" % (d["cg_have"], d["cg_all"])]
+    out.append("| **合计** | %s | %s |" % (" | ".join(total("s")), " | ".join(total("n"))))
+    return "\n".join(out)
+
+
 if "--write" in sys.argv:
     p = ROOT / "docs/CHAPTER-STATS.md"
     t = p.read_text("utf-8")
@@ -137,6 +181,12 @@ if "--write" in sys.argv:
             line = "|".join(cells)
         out.append(line)
     t = "\n".join(out)
+    csec = COMPARE_BEGIN + "\n" + compare_section() + "\n" + COMPARE_END
+    if COMPARE_BEGIN in t:
+        t = re.sub(re.escape(COMPARE_BEGIN) + ".*?" + re.escape(COMPARE_END), lambda m: csec, t, flags=re.S)
+    else:  # first run: just before the global overview
+        i = t.index("## 全局总览")
+        t = t[:i] + csec + "\n\n" + t[i:]
     sec = CARDS_BEGIN + "\n" + card_section() + "\n" + CARDS_END
     if CARDS_BEGIN in t:
         t = re.sub(re.escape(CARDS_BEGIN) + ".*?" + re.escape(CARDS_END), lambda m: sec, t, flags=re.S)
