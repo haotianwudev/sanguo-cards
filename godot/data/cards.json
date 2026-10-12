@@ -6066,13 +6066,13 @@
       "at": 330,
       "actions": 2,
       "moves": [
-        {"name": "弓手齐射", "power": 1.0, "weight": 3},
+        {"name": "家丁扁担", "power": 1.0, "weight": 3},
         {"name": "火油倾泻", "power": 0.5, "weight": 2, "burn_party": 0.05, "turns": 3},
         {"name": "假意招降", "power": 0.5, "weight": 1, "confuse": 0.5},
         {"name": "绣帕·拖延", "power": 0.6, "weight": 1, "ap_drain": 1},
-        {"name": "举扇·蓄力", "power": 0, "weight": 1, "charge": "万箭齐发"},
-        {"name": "万箭齐发", "power": 2.4, "weight": 0},
-        {"name": "夫君快走", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}
+        {"name": "招手唤弓手·蓄力", "power": 0, "weight": 1, "charge": "弓手赶到"},
+        {"name": "弓手赶到", "power": 2.4, "weight": 0},
+        {"name": "夫君等我", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}
       ],
       "card": "fengfuren"
     },
@@ -10806,7 +10806,7 @@
       "enemy": "chenlan"
     },
     "c7_fengfuren": {
-      "name": "宛城东门·瓮城",
+      "name": "宛城东门·遭遇冯夫人",
       "turn_limit": 8,
       "enemy": "fengfuren"
     },
