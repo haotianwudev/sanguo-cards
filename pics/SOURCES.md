@@ -318,6 +318,10 @@
 | `hebei_shuzuo` | source/soldiers/hebei_shuzuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taishan_zei` | source/soldiers/taishan_zei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `heishan_louluo` | source/soldiers/heishan_louluo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhangyun` | source/generals/zhangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sufei` | source/generals/sufei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `liupan` | source/generals/liupan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunce_bawang` | source/generals/sunce_bawang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |

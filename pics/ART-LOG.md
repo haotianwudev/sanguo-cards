@@ -600,3 +600,7 @@
 - [x] 2026-10-11 cg `c8_lanshang` ← c8_lanshang_1791762627946.jpg · ok
 - [x] 2026-10-11 relic `xunyou_qizi` ← xunyou_qizi.jpg · ok
 - [x] 2026-10-11 relic `bandu_lingjian` ← bandu_lingjian.jpg · ok
+- [x] 2026-10-11 portrait `zhangyun` ← zhangyun.jpg · ok
+- [x] 2026-10-11 portrait `sufei` ← sufei.jpg · ok
+- [x] 2026-10-11 portrait `liupan` ← liupan.jpg · ok
+- [x] 2026-10-11 portrait `sunce_bawang` ← sunce_bawang.jpg · ok

@@ -313,5 +313,9 @@
   "jizhou_qi": {"file": "jizhou_qi.jpg", "face": [0.5, 0.22], "head": 0.22},
   "hebei_shuzuo": {"file": "hebei_shuzuo.jpg", "face": [0.5, 0.22], "head": 0.22},
   "taishan_zei": {"file": "taishan_zei.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "heishan_louluo": {"file": "heishan_louluo.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "heishan_louluo": {"file": "heishan_louluo.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhangyun": {"file": "zhangyun.jpg", "face": [0.51, 0.23], "head": 0.22},
+  "sufei": {"file": "sufei.jpg", "face": [0.5, 0.28], "head": 0.23},
+  "liupan": {"file": "liupan.jpg", "face": [0.51, 0.28], "head": 0.22},
+  "sunce_bawang": {"file": "sunce_bawang.jpg", "face": [0.5, 0.28], "head": 0.24}
 }

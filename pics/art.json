@@ -2826,6 +2826,42 @@
         0.22
       ],
       "head": 0.22
+    },
+    "zhangyun": {
+      "src": "source/generals/zhangyun.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.51,
+        0.23
+      ],
+      "head": 0.22
+    },
+    "sufei": {
+      "src": "source/generals/sufei.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.23
+    },
+    "liupan": {
+      "src": "source/generals/liupan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.51,
+        0.28
+      ],
+      "head": 0.22
+    },
+    "sunce_bawang": {
+      "src": "source/generals/sunce_bawang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.28
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
