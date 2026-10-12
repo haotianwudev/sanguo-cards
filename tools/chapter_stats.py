@@ -108,7 +108,25 @@ def card_section() -> str:
         out.append(f"| {'主公亲卫（丫鬟、家丁等，跟主公一队）' if tid == 'lord' else tr.get('name', tid)} | {by['SSR']} / {by['SR']} / {by['R']} | {len(g)} | {len(s)}（{elite}） | {r['南']} / {r['北']} / {r['通用']} |")
     return "\n".join(out)
 
-COMPARE_BEGIN, COMPARE_END = "<!-- compare:begin -->", "<!-- compare:end -->"
+quests_by_id = {q["id"]: q for q in story["quests"] if q["id"] != "prologue"}
+
+
+def distinct_lists(q, field):
+    """how many different explicit card lists a chapter uses for `field` (soldier_pool / recruit_pool): its own plus the squares' local ones"""
+    found = set()
+    for src in [q] + list(q["squares"].values()):
+        if src.get(field):
+            found.add(tuple(sorted(src[field])))
+    return len(found)
+
+
+def pools_cell(q) -> str:
+    """兵卡池 / 招贤池 (distinct lists, local ones included) / 事件池 (events open to the chapter) / 洗牌组"""
+    events = sum(1 for e in story["events"].values() if e.get("scope") in ("universal", q.get("event_scope"), q["id"]))
+    return "%d / %d / %d / %d" % (distinct_lists(q, "soldier_pool"), distinct_lists(q, "recruit_pool"), events, len(q.get("shuffle", [])))
+
+
+COMPARE_BEGIN, COMPARE_END ="<!-- compare:begin -->", "<!-- compare:end -->"
 # chapter -> (south row key, north row key); None = that route has nothing built for the chapter yet
 CHAPTERS = [
     ("第一章", "prologue_s", "prologue_n"),
@@ -169,6 +187,8 @@ if "--write" in sys.argv:
                 m = re.search(r"`?(\w+)`?", cells[2])
                 qid = m.group(1) if m else None
             r = rows.get(qid)
+            if r and qid in quests_by_id:
+                cells[9] = re.sub(r"^\s*\d+ / \d+ / \d+ / \d+", " " + pools_cell(quests_by_id[qid]), cells[9], count=1)
             if r:
                 cells[4] = " %d%s " % (r["n"], "*" if cells[4].strip().endswith("*") else "")
                 cells[5] = " %d / %d / %d " % (r["normal"], r["elite"], r["boss"])

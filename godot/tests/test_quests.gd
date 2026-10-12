@@ -1430,3 +1430,12 @@ func test_a_squares_own_pools_decide_what_its_chest_and_recruits_offer() -> void
 	s2.resolved = false
 	var recruits: Array = Quests.offer(yx, s2, rng(2)).map(func(c): return c["id"])
 	check(not recruits.is_empty() and recruits.size() <= int(db.gacha["offer_size"]) and recruits.all(func(c): return yx["squares"]["liukou3"]["recruit_pool"].has(c)), "the recruits come from this place's own list: %s" % [recruits])
+
+
+func test_a_chapters_soldier_pool_holds_only_soldiers() -> void:
+	## the pool is picked by scope; generals share the scope but must never turn up in a soldier offer
+	var db := GameData.get_db()
+	var s := SaveData.create()
+	for qq in db.quests:
+		for c in Quests.pools(qq, s)["soldier_pool"]:
+			check(db.cards[c]["soldier"] and not db.cards[c]["beast"], "%s: soldier_pool holds a soldier, not %s" % [qq["id"], c])

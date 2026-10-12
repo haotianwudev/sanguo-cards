@@ -414,7 +414,7 @@ static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Diction
 				event_scope = o["event_scope"]
 	var db := GameData.get_db()
 	if soldier_scope != "":
-		out["soldier_pool"] = db.cards.values().filter(func(c): return c.get("scope", "") == soldier_scope).map(func(c): return c["id"])
+		out["soldier_pool"] = db.cards.values().filter(func(c): return c.get("scope", "") == soldier_scope and c["soldier"] and not c["beast"]).map(func(c): return c["id"])
 	else:
 		out["soldier_pool"] = q["soldier_pool"]
 	var event_pool: Array = []
