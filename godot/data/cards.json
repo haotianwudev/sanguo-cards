@@ -3549,6 +3549,14 @@
       "at": 72,
       "pool": false
     },
+    "fengfuren": {
+      "name": "冯夫人",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 74,
+      "at": 58,
+      "pool": false
+    },
     "yuanshu": {
       "name": "袁术·仲家帝",
       "rarity": "SR",
@@ -6050,6 +6058,22 @@
         }
       ],
       "card": "shanzei_bing"
+    },
+    "fengfuren": {
+      "name": "冯夫人",
+      "portrait": "fengfuren",
+      "hp": 14000,
+      "at": 330,
+      "actions": 2,
+      "moves": [
+        {"name": "团扇", "power": 1.0, "weight": 3},
+        {"name": "媚眼", "power": 0.5, "weight": 1, "confuse": 0.5},
+        {"name": "绣帕·拖延", "power": 0.6, "weight": 1, "ap_drain": 1},
+        {"name": "家丁齐上·蓄力", "power": 0, "weight": 1, "charge": "家丁齐上"},
+        {"name": "家丁齐上", "power": 2.4, "weight": 0},
+        {"name": "夫君快走", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}
+      ],
+      "card": "fengfuren"
     },
     "jiling": {
       "name": "纪灵",
@@ -10779,6 +10803,11 @@
       "name": "宛城城下·陈兰",
       "turn_limit": 8,
       "enemy": "chenlan"
+    },
+    "c7_fengfuren": {
+      "name": "宛城府门·冯夫人",
+      "turn_limit": 8,
+      "enemy": "fengfuren"
     },
     "c7_jiling": {
       "name": "宛城·纪灵",
