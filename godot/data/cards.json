@@ -4156,10 +4156,10 @@
     },
     "lvlingqi": {
       "name": "吕玲绮·温侯之女",
-      "rarity": "SSR",
+      "rarity": "SR",
       "troop": "cavalry",
-      "hp": 84,
-      "at": 96,
+      "hp": 68,
+      "at": 94,
       "skills": [
         "huaji"
       ],
