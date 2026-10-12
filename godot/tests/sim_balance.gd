@@ -1,6 +1,7 @@
 extends SceneTree
 ## Balance simulation (not a test): plays whole first-lap runs with the bot — real quest flow, real fights, the wear carried between
 ## battles, the best chest card taken, 战功 spent on 点化 between chapters — and reports per chapter and tier how the fights go.
+##   (knobs: SIM_STRENGTH SIM_BASE SIM_EXPONENT SIM_OFFSET SIM_ELITE SIM_BOSS)
 ##   SIM_RUNS=20 SIM_ROUTE=south godot --headless --path godot --script res://tests/sim_balance.gd
 ## Reading it: win% (per attempt), hp% = the party's HP left when a won fight ends, wear% = HP already lost going in,
 ## turns = rounds used of the limit. A healthy curve: normal ~85-95% win, elite ~70-85%, boss ~50-75%, and no chapter much easier than the one before.
@@ -20,10 +21,14 @@ var order: Array = []
 func _init() -> void:
 	var runs := int(OS.get_environment("SIM_RUNS")) if OS.get_environment("SIM_RUNS") != "" else 10
 	var route := OS.get_environment("SIM_ROUTE") if OS.get_environment("SIM_ROUTE") != "" else "south"
-	if OS.get_environment("SIM_GROWTH") != "":
-		GameData.get_db().battle["scaling"]["growth"] = float(OS.get_environment("SIM_GROWTH"))
-	if OS.get_environment("SIM_LATE") != "":
-		GameData.get_db().battle["scaling"]["late_growth"] = float(OS.get_environment("SIM_LATE"))
+	if OS.get_environment("SIM_EXPONENT") != "":
+		GameData.get_db().battle["scaling"]["exponent"] = float(OS.get_environment("SIM_EXPONENT"))
+	if OS.get_environment("SIM_OFFSET") != "":
+		GameData.get_db().battle["scaling"]["offset"] = float(OS.get_environment("SIM_OFFSET"))
+	if OS.get_environment("SIM_ELITE") != "":
+		GameData.get_db().battle["enemy_coef"]["elite"] = float(OS.get_environment("SIM_ELITE"))
+	if OS.get_environment("SIM_BOSS") != "":
+		GameData.get_db().battle["enemy_coef"]["boss"] = float(OS.get_environment("SIM_BOSS"))
 	if OS.get_environment("SIM_BASE") != "":
 		GameData.get_db().battle["scaling"]["base"] = float(OS.get_environment("SIM_BASE"))
 	if OS.get_environment("SIM_STRENGTH") != "":
@@ -157,7 +162,7 @@ func _fight(q: Dictionary, s: SaveData, rng: RandomNumberGenerator, fails_here: 
 
 
 func _report(runs: int, route: String) -> void:
-	print("== sim_balance: %s route, %d runs, strength %s growth %s base %s, %d of %d runs cleared the lap" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["growth"]), str(GameData.get_db().battle["scaling"]["base"]), finished, runs])
+	print("== sim_balance: %s route, %d runs, strength %s exponent %s base %s, %d of %d runs cleared the lap" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["exponent"]), str(GameData.get_db().battle["scaling"]["base"]), finished, runs])
 	var keys := stats.keys()
 	keys.sort()
 	for k in keys:

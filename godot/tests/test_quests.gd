@@ -1278,7 +1278,7 @@ func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
 
 
 func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
-	## battle.scaling: each chapter's ordinary / elite / boss fights are pulled to strength × base × growth^N × tier, so by construction
+	## battle.scaling: each chapter's ordinary / elite / boss fights are pulled to strength × base × (N + offset)^exponent × tier, so by construction
 	## no later chapter is easier, no elite is easier than the ordinary fights, no boss than the elites (吕布's showpieces are left alone)
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
