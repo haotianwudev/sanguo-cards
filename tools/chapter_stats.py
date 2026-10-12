@@ -109,6 +109,13 @@ def card_section() -> str:
     return "\n".join(out)
 
 quests_by_id = {q["id"]: q for q in story["quests"] if q["id"] != "prologue"}
+for _q in story["quests"]:
+    if _q["id"] == "prologue":  # one quest, two routes: the north route's pool_overrides entry replaces the south settings
+        quests_by_id["prologue_s"] = _q
+        _n = dict(_q)
+        for _o in _q.get("pool_overrides", []):
+            _n.update({k: v for k, v in _o.items() if k not in ("requires", "unless") and v})
+        quests_by_id["prologue_n"] = _n
 
 
 def distinct_lists(q, field):
@@ -123,7 +130,8 @@ def distinct_lists(q, field):
 def pools_cell(q) -> str:
     """兵卡池 / 招贤池 (distinct lists, local ones included) / 事件池 (events open to the chapter) / 洗牌组"""
     events = sum(1 for e in story["events"].values() if e.get("scope") in ("universal", q.get("event_scope"), q["id"]))
-    return "%d / %d / %d / %d" % (distinct_lists(q, "soldier_pool"), distinct_lists(q, "recruit_pool"), events, len(q.get("shuffle", [])))
+    soldier = distinct_lists(q, "soldier_pool") or (1 if q.get("soldier_scope") else 0)  # no explicit list: the route's scope pool counts as one
+    return "%d / %d / %d / %d" % (soldier, distinct_lists(q, "recruit_pool"), events, len(q.get("shuffle", [])))
 
 
 COMPARE_BEGIN, COMPARE_END ="<!-- compare:begin -->", "<!-- compare:end -->"
@@ -188,7 +196,8 @@ if "--write" in sys.argv:
                 qid = m.group(1) if m else None
             r = rows.get(qid)
             if r and qid in quests_by_id:
-                cells[9] = re.sub(r"^\s*\d+ / \d+ / \d+ / \d+", " " + pools_cell(quests_by_id[qid]), cells[9], count=1)
+                note = re.search(r"（兵卡池.*$", cells[9].strip())  # a hand-written note on which places the pools are for
+                cells[9] = " " + pools_cell(quests_by_id[qid]) + (note.group(0) if note else "") + " "
             if r:
                 cells[4] = " %d%s " % (r["n"], "*" if cells[4].strip().endswith("*") else "")
                 cells[5] = " %d / %d / %d " % (r["normal"], r["elite"], r["boss"])
