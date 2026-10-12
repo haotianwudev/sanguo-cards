@@ -608,3 +608,4 @@
 - [x] 2026-10-12 cg `c5_caiyong` ← c5_caiyong_1791804933372.jpg · ok
 - [x] 2026-10-12 cg `c5_wangyun` ← c5_wangyun_1791804954491.jpg · ok
 - [x] 2026-10-12 cg `c6_sneak` ← c6_sneak_1791804979053.jpg · ok
+- [x] 2026-10-12 battle `c6_yulin` ← c6_yulin.jpg 裁 1536×1024→1536×864 · ok

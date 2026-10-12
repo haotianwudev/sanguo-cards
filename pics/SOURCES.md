@@ -461,6 +461,7 @@
 | `battle:jd_kuaiji` | source/battles/jd_kuaiji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jd_wanglang` | source/battles/jd_wanglang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jd_jinfan` | source/battles/jd_jinfan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c6_yulin` | source/battles/c6_yulin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
