@@ -227,7 +227,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   (the plainest soldier is 40/40, full is 100/100); a fighter has `at` > `hp`, a clerk (策士 / 后勤) `hp` ≥ `at`. **Rarity is where hp + at falls**
   (`gacha.rarity_bands`): N soldier 80~99, elite soldier / C 杂将 100~124, R 125~149, SR 150~174, SSR 175~200; the opening lord is 65/60 = 125 (the weakest R).
   A test enforces it for every card and lord card. 升级 multiplies both by the tier (铜 1.0 / 银 1.3 / 金 1.75 / 神 2.4), so SR at 铜 ≈ C at 银 and
-  SSR at 铜 ≈ C at 金. Soldier copies stack without decay (`soldier_decay` 1.0) and join the unit as members. A hero who will have several cards (`gacha.versions`: 孙策 / 周瑜 / 赵云 / 郭嘉 / 关羽 / 诸葛亮 / 曹操 …) starts at **R**; later versions climb to SR (a test checks the table). **SSR is only for 吕布 / 诸葛亮 / 孙坚** — everyone else tops out at SR. A new card: pick the band for its rarity, split it
+  SSR at 铜 ≈ C at 金. Soldier copies stack without decay (`soldier_decay` 1.0) and join the unit as members. A hero who will have several cards (`gacha.versions`: 孙策 / 周瑜 / 赵云 / 郭嘉 / 关羽 / 诸葛亮 / 曹操 …) starts at **R**; later versions climb to SR / SSR (a test checks the table). A new card: pick the band for its rarity, split it
   by role, keep each number 40..100. In battle the enemy table (`enemies`) keeps its old magnitude and is converted on entry (`battle.unit` hp ÷ 9, at ÷ 1.4),
   every damage is × `battle.damage_mult` (0.1556), and enemies get one more coefficient per tier (`battle.enemy_coef`: normal 1 / elite 1.5 / boss 2,
   必败 `lose_goto` fights 4 — hp and attack both; `scaling.tier` is 1 so the two do not stack).
