@@ -456,7 +456,7 @@ func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:
 		for fork in [["m2"], ["rest"]]:
 			var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"] + flags,
 					["prologue", "taodong", "yuxi"])
-			var p := walk(quest_by_id("dongui"), s, fork)
+			var p := walk(quest_by_id("dongui"), s, fork, 1, 0, 0)
 			for sid in ["zhangxiu6", "zhangji6", "jiaxu6"]:
 				check_eq(p.has(sid), not flags.is_empty(), "%s only on 四周目 %s %s" % [sid, str(flags), fork[0]])
 			if not flags.is_empty():
@@ -464,6 +464,15 @@ func test_lap4_chapter4_beats_zhang_ji_and_zhang_xiu_and_jiaxu_joins() -> void:
 			check_eq(s.has_card("jiaxu"), not flags.is_empty())
 			check_eq(s.run_records.has(JX), not flags.is_empty())
 			check(p.has(fork[0]) and p.has("shaoka") and p.has("xuhuang") and p[-1] == "dongtao", "reaches 南阳 via " + fork[0])
+
+
+func test_lap4_chapter4_jiaxu_can_be_let_go_instead_of_bound() -> void:
+	var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", E3],
+			["prologue", "taodong", "yuxi"])
+	var p := walk(quest_by_id("dongui"), s, ["m2"], 1, 0, 1)
+	check(p.has("jiaxu6") and p.has("jiaxu6_free") and not p.has("jiaxu6_bind"), "放走 takes the free branch")
+	check(not s.has_card("jiaxu") and not s.run_records.has(JX), "a freed 贾诩 never joins")
+	check(p.has("luoyang_rest") and not p.has("luoyang_rest4"), "and the Luoyang rest is the plain one")
 
 
 # ---- 北线第四章 · 双凤乱太行 -----------------------------------------------------------------
