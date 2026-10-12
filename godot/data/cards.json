@@ -3547,7 +3547,7 @@
     "caiwenji": {
       "name": "蔡文姬",
       "rarity": "SR",
-      "troop": "strategist",
+      "troop": "logistics",
       "bonus": {
         "hp": 40,
         "at": 18

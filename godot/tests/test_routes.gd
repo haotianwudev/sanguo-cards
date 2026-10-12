@@ -933,3 +933,16 @@ func test_third_chapter_unchosen_route_is_drawn_ghosted_only_when_unlocked() -> 
 	s.run_records.append("路线：守洛阳")
 	check(not Quests.is_ghost(tale, s) and Quests.is_open(tale, s), "taken route is open")
 	check(Quests.is_ghost(supply, s), "南阳 route greyed once 守洛阳 is taken")
+
+
+func test_choosing_to_save_蔡文姬_takes_the_route_at_once() -> void:
+	## the map must show the chosen line solid and the other greyed right after the choice, not only once 蔡文姬 has joined
+	var q := quest_by_id("yuxi")
+	var s := SaveData.new()
+	s.flags = ["董白：留下", "结局一 · 玉碎"]
+	Quests.begin(q, s, rng(3))
+	s.square = "wenji_choice"
+	s.resolved = false
+	Quests.resolve(q, s, rng(3), 0)  # 出手相救
+	check(s.run_records.has("路线：守洛阳"), "the line is recorded at the choice")
+	check(Quests.is_open(q["squares"]["wenji_tale"], s) and Quests.is_ghost(q["squares"]["supply"], s), "the 蔡文姬 line is solid, the other greyed")
