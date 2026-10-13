@@ -1083,10 +1083,10 @@
     },
     "leibo": {
       "name": "雷薄",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
       "hp": 55,
-      "at": 82,
+      "at": 62,
       "pool": false
     },
     "fanchou": {
@@ -1126,7 +1126,7 @@
       "rarity": "SR",
       "troop": "infantry",
       "person": "dongzhuo",
-      "hp": 92,
+      "hp": 94,
       "at": 80,
       "skills": [
         "xiangguo"
@@ -1143,10 +1143,10 @@
     },
     "fengfuren": {
       "name": "冯夫人",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 74,
-      "at": 58,
+      "hp": 84,
+      "at": 68,
       "pool": false
     },
     "yuanshu": {
@@ -1218,8 +1218,8 @@
       "name": "马超",
       "rarity": "SR",
       "troop": "cavalry",
-      "hp": 64,
-      "at": 98,
+      "hp": 74,
+      "at": 96,
       "skills": [
         "xiliang"
       ],
@@ -1230,7 +1230,7 @@
       "rarity": "SR",
       "troop": "cavalry",
       "hp": 72,
-      "at": 96,
+      "at": 95,
       "skills": [
         "liaolai"
       ],
@@ -1240,8 +1240,8 @@
       "name": "张飞",
       "rarity": "SR",
       "troop": "spear",
-      "hp": 80,
-      "at": 92,
+      "hp": 70,
+      "at": 98,
       "skills": [
         "qiangpo",
         "roar"
@@ -1263,7 +1263,7 @@
       "rarity": "SR",
       "troop": "archer",
       "hp": 66,
-      "at": 96,
+      "at": 84,
       "skills": [
         "baibu"
       ],
@@ -1274,7 +1274,7 @@
       "rarity": "SR",
       "troop": "archer",
       "hp": 66,
-      "at": 95,
+      "at": 85,
       "skills": [
         "jinfan"
       ],
@@ -1295,8 +1295,8 @@
       "name": "刘备",
       "rarity": "SR",
       "troop": "infantry",
-      "hp": 88,
-      "at": 74,
+      "hp": 90,
+      "at": 84,
       "skills": [
         "rende"
       ]
@@ -1305,8 +1305,8 @@
       "name": "庞统",
       "rarity": "SR",
       "troop": "strategist",
-      "hp": 84,
-      "at": 80,
+      "hp": 95,
+      "at": 70,
       "skills": [
         "lianhuan"
       ],
@@ -1356,10 +1356,10 @@
     },
     "guanyu": {
       "name": "关羽",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "cavalry",
-      "hp": 64,
-      "at": 82,
+      "hp": 6476,
+      "at": 98,
       "skills": [
         "qinglong",
         "weizhen"
@@ -1393,8 +1393,8 @@
       "name": "典韦",
       "rarity": "SR",
       "troop": "infantry",
-      "hp": 86,
-      "at": 86,
+      "hp": 70,
+      "at": 99,
       "skills": [
         "shuangji"
       ],
