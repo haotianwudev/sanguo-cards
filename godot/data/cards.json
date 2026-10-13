@@ -61,9 +61,6 @@
       "zhaoyun": [
         "zhaoyun"
       ],
-      "guanyu": [
-        "guanyu"
-      ],
       "guojia": [
         "guojia"
       ],
@@ -1358,7 +1355,7 @@
       "name": "关羽",
       "rarity": "SR",
       "troop": "cavalry",
-      "hp": 6476,
+      "hp": 76,
       "at": 98,
       "skills": [
         "qinglong",
@@ -1366,7 +1363,7 @@
       ]
     },
     "zhaoyun": {
-      "name": "赵云",
+      "name": "赵云·青年",
       "rarity": "R",
       "troop": "spear",
       "hp": 68,
@@ -1412,7 +1409,7 @@
       ]
     },
     "sunce": {
-      "name": "孙策·少年",
+      "name": "孙策·青年",
       "rarity": "R",
       "troop": "cavalry",
       "person": "sunce",
@@ -1426,7 +1423,7 @@
       "pool": false
     },
     "zhouyu": {
-      "name": "周瑜·少年",
+      "name": "周瑜·青年",
       "rarity": "R",
       "troop": "strategist",
       "person": "zhouyu",
@@ -2123,7 +2120,7 @@
       "pool": false
     },
     "guojia": {
-      "name": "郭嘉·鬼才",
+      "name": "郭嘉·青年",
       "rarity": "R",
       "troop": "strategist",
       "hp": 78,

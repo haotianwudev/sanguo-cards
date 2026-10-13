@@ -197,7 +197,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
 **South and north are symmetric in structure and separate in everything else** (see `docs/design.md` 「南北线」): give every new card / event / CG / pool a route (`scope`: south / north / empty = both). Generals' `scope` filters `SaveData.recruit_pool` (and so chests and recruit squares) by `is_north()`; generals ever owned stay offered. The CG gallery groups by the chapter whose squares use the picture (story.json), new north CG files use the `n<chapter>_` prefix.
 **Story unlocks come from endings, not from the lap number.** A choose option can carry `"requires": "<flag>"` (an ending that must already be in the save's lasting `flags`): until then it is greyed and the button says 「（需先触发「…」）」 (`Quests.option_locked` / `option_hint`). 夏侯兰 (「请他执掌军法」 ← 「结局八 · 失律」, chapter 5, not built yet) and 张宁 (「拔刀相助」 ← 「结局六 · 覆巢」) are gated this way — a recruit that belongs to a badend is locked behind it, not behind a lap. A branch opens because the save carries an ending flag (`结局一 · 玉碎`, `结局二 · 同归`, `结局三 · 恨海`, … — they stay in `flags` across 周目); `requires` / `unless` read those flags. `lap` only drives the difficulty head start (`battle.lap_step`) and the title screen — never write a gate as "on lap N"; name the badend that must have happened, and call content "after 结局X" in docs and comments.
 
-- **Card** (`cards.json` cards): `name, rarity (N = soldier, C/R/SR/SSR = general; C 杂将 is the lowest, the opening trio 主公/孙策·少年/周瑜·少年 are R), troop, hp, at (face numbers, see Card stats), skills,
+- **Card** (`cards.json` cards): `name, rarity (N = soldier, C/R/SR/SSR = general; C 杂将 is the lowest, the opening trio 主公/孙策·青年/周瑜·青年 are R), troop, hp, at (face numbers, see Card stats), skills,
   person (shared portrait / one version in a party), pool (false = story or drop only), troop_skills (false = own skills
   replace the troop's)`. Every troop has two skills — a plain 1-AP move and a signature (骑 马刀/冲锋, 枪 刺击/枪阵,
   弓 射击/齐射, 刀 步战/举盾, 策 计略/献策 (+AP; 策士 took in the old 法师 troop — too few cards), 贼 劫掠/偷袭 (break), 勤 包扎/鼓舞) — soldier
@@ -422,7 +422,7 @@ Writing rules:
   the brief in `CARD-DESIGN.md` §7. When you write a new character's look, add/adjust their brief there; when new art
   arrives that differs, change the text (左慈: 「独眼瘸腿」 became 白发、竹杖、冒紫烟的葫芦 to match his portrait).
 - **Names.** A card name `A·B` shows **A on the name plate** and **B as the small tag** at the top of the card
-  (`孙策·少年`). So the real name goes first, the nickname / version second: `胡玉·浪里蛟`, `唐周·妖道` — never
+  (`孙策·青年`). So the real name goes first, the nickname / version second: `胡玉·浪里蛟`, `唐周·妖道` — never
   `浪里蛟·胡玉`. Enemy names are what the battle title and every log line print: keep them short (`「浪里蛟」胡玉`,
   `妖道唐周`, `黄巾渠帅何仪`), no double `·`.
 - **Real people are welcome when they fit** — look them up first (胡玉 really was the 钱塘 pirate 孙坚 scared off at 17).
