@@ -13,8 +13,9 @@
     "lord_rarity": "R",
     "_lap": "周目: a new playthrough keeps every card as it is; generals you have ever had (even story-only ones) join the recruit pool",
     "party_slots": 4,
-    "soldier_decay": 1.0,
-    "_soldier_decay": "duplicate soldier cards of a type: each extra copy counts ×this (1.0 = they simply stack, no decay)",
+    "soldier_decay": 0.8,
+    "soldier_decay_floor": 0.5,
+    "_soldier_decay": "duplicate soldier cards of a type: copy i (0 = the first) counts floor + (1 - floor) × decay^i — a smooth fall that never goes below the floor (decay 0.8, floor 0.5: 1, 0.90, 0.82, 0.76, 0.70, 0.66 … → 0.5)",
     "_rarity": "稀有度由卡面「攻 + 血」的总和决定（铜卡的数，升级再乘铜 / 银 / 金 / 神的倍率）：N 兵卡 80~99，精英兵 100~124（≈ C），C 杂将 100~124，R 125~149，SR 150~174，SSR 175~200（满）。主公起手卡是最弱的 R：血 65 攻 60。血和攻各自都在 40~100 之间（最普通的兵 40 / 40，满是 100 / 100）；武将攻高于血，文官（策士、后勤）血高于攻。一个测试会核对每张卡的总和落在自己稀有度的区间里。",
     "rarity_bands": {
       "N": [80, 99],

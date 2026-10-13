@@ -866,11 +866,12 @@ func validate_party(card_ids: Array) -> String:
 
 func troop_members(leader_id: String) -> Array:
 	## [members, weights]: other generals of the troop count fully; each soldier card type counts
-	## 1, decay, decay² … per copy (a soldier leader uses up one of its own copies).
+	## 1, then falling smoothly toward the floor (soldier_decay_floor) per copy (a soldier leader uses up one of its own copies).
 	_sync()
 	var db := _db()
 	var troop: String = db.cards[leader_id]["troop"]
 	var decay := float(db.gacha["soldier_decay"])
+	var floor_w := float(db.gacha["soldier_decay_floor"])
 	var members: Array = []
 	var weights: Array = []
 	for c in owned:
@@ -884,7 +885,7 @@ func troop_members(leader_id: String) -> Array:
 		var f := db.build_fighter(c)
 		for i in n:
 			members.append(f)
-			weights.append(pow(decay, i))
+			weights.append(floor_w + (1.0 - floor_w) * pow(decay, i))
 	return [members, weights]
 
 

@@ -78,7 +78,15 @@ func test_duplicate_soldiers_stack_and_new_types_count_too() -> void:
 	mix.soldiers = {"spear_n": 1, "qingzhou": 1}
 	var spear: int = GameData.get_db().build_fighter("spear_n")["at"]
 	var am := float(GameData.get_db().battle.get("attack_mult", 1.0))
-	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * 2.0 * am)))) <= 2, "the second copy counts in full (soldier_decay 1.0)")
+	var g: Dictionary = GameData.get_db().gacha
+	var w2: float = float(g["soldier_decay_floor"]) + (1.0 - float(g["soldier_decay_floor"])) * float(g["soldier_decay"])
+	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * (1.0 + w2) * am)))) <= 2, "the second copy counts a bit less (smooth decay)")
+	check(dup.leader_for("zhangfei")["at"] > one.leader_for("zhangfei")["at"], "but a copy still adds strength")
+	var many := SaveData.new()
+	many.owned = ["zhangfei"]
+	many.soldiers = {"spear_n": 60}
+	var ws: Array = many.troop_members("zhangfei")[1]
+	check(float(ws[ws.size() - 1]) >= float(g["soldier_decay_floor"]) - 0.001, "never below the floor")
 	check(mix.leader_for("zhangfei")["at"] >= dup.leader_for("zhangfei")["at"] - 2, "a new soldier type is at least as good as a copy")
 
 
