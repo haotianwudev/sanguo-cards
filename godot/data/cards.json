@@ -1970,6 +1970,34 @@
       "weight": 3,
       "scope": "south"
     },
+    "caifu_bing": {
+      "name": "蔡家府兵",
+      "rarity": "N",
+      "elite": true,
+      "troop": "infantry",
+      "hp": 50,
+      "at": 54,
+      "weight": 1,
+      "scope": "south"
+    },
+    "caifu_qi": {
+      "name": "蔡家骑兵",
+      "rarity": "N",
+      "elite": true,
+      "troop": "cavalry",
+      "hp": 44,
+      "at": 62,
+      "weight": 1,
+      "scope": "south"
+    },
+    "caihe": {
+      "name": "蔡和·连弩统领",
+      "rarity": "R",
+      "troop": "archer",
+      "hp": 58,
+      "at": 72,
+      "pool": false
+    },
     "caifu_nu": {
       "name": "蔡府连弩手",
       "rarity": "N",

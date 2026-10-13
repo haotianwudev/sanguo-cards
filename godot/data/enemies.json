@@ -2553,6 +2553,48 @@
       ],
       "card": "caimao"
     },
+    "caijia_fubing": {
+      "name": "蔡家府兵",
+      "portrait": "caifu_bing",
+      "hp": 12500,
+      "at": 390,
+      "actions": 2,
+      "moves": [
+        {"name": "刀盾", "power": 1.0, "weight": 3},
+        {"name": "盾墙", "power": 0.5, "weight": 1, "ap_drain": 1},
+        {"name": "合围", "power": 1.3, "weight": 1}
+      ],
+      "card": "caifu_bing"
+    },
+    "caijia_qibing": {
+      "name": "蔡家骑兵",
+      "portrait": "caifu_qi",
+      "hp": 13500,
+      "at": 430,
+      "actions": 2,
+      "moves": [
+        {"name": "马刀", "power": 1.0, "weight": 3},
+        {"name": "冲阵", "power": 1.5, "weight": 1},
+        {"name": "践踏", "power": 1.2, "weight": 1, "confuse": 0.3}
+      ],
+      "card": "caifu_qi"
+    },
+    "caihe_e": {
+      "name": "连弩统领蔡和",
+      "portrait": "caihe",
+      "hp": 18000,
+      "at": 420,
+      "actions": 2,
+      "moves": [
+        {"name": "连弩", "power": 1.0, "weight": 3},
+        {"name": "毒箭", "power": 0.5, "weight": 1, "burn_party": 0.06, "turns": 3},
+        {"name": "令旗·乱射", "power": 1.2, "weight": 1, "confuse": 0.3},
+        {"name": "万弩·蓄力", "power": 0, "weight": 1, "charge": "万弩齐发"},
+        {"name": "万弩齐发", "power": 2.5, "weight": 0},
+        {"name": "蔡家的狠劲", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}
+      ],
+      "card": "caihe"
+    },
     "caimao": {
       "name": "水军都督蔡瑁",
       "portrait": "caimao",

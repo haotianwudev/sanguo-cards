@@ -564,6 +564,26 @@
       "turn_limit": 8,
       "enemy": "caifu_nushou"
     },
+    "jx_b_fubing": {
+      "name": "水阁栈道·蔡家府兵",
+      "turn_limit": 8,
+      "enemy": "caijia_fubing"
+    },
+    "jx_b_qibing": {
+      "name": "水阁外·蔡家骑兵",
+      "turn_limit": 8,
+      "enemy": "caijia_qibing"
+    },
+    "jx_b_caihe": {
+      "name": "水阁楼上·蔡和",
+      "turn_limit": 10,
+      "enemy": "caihe_e"
+    },
+    "jx_b_zhangyun": {
+      "name": "水阁码头·张允",
+      "turn_limit": 10,
+      "enemy": "zhangyun_e"
+    },
     "jx_caimao_a": {
       "name": "水阁·独眼蔡瑁",
       "turn_limit": 10,
