@@ -506,13 +506,15 @@ func chest_chance(overkill: float, boss: bool, bonus := 0.0) -> float:
 func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool, only: Array = [],
 		enemy_card := "", bonus := 0.0, chapter := "") -> Array:
 	var g: Dictionary = _db().gacha
-	if rng.randf() >= chest_chance(overkill, boss, bonus):
+	# a card with `first_win` (吕布) is won only by beating its owner, and the first time ever (never held, in any 周目) that always drops — chest or not; after that it joins the history pool like any card you have had
+	var first_win: bool = enemy_card != "" and bool(_db().cards[enemy_card].get("first_win", false)) and not owned.has(enemy_card) and not seen.has(enemy_card)
+	if not first_win and rng.randf() >= chest_chance(overkill, boss, bonus):
 		return []
 	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only, chapter)
 	# the beaten enemy's own card may be in there (bosses and elites more often)
 	var db := _db()
 	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"])
-	if enemy_card != "" and not maxed(enemy_card) and not cards.has(db.cards[enemy_card]) and rng.randf() < card_chance:
+	if enemy_card != "" and not maxed(enemy_card) and not cards.has(db.cards[enemy_card]) and (first_win or rng.randf() < card_chance):
 		cards[cards.size() - 1] = db.cards[enemy_card]
 	return cards
 

@@ -51,6 +51,21 @@ func test_chest_shows_different_soldiers_and_only_the_pick_is_kept() -> void:
 	check_eq(s.copies(offer[0]["id"]), 1, "only the pick is kept")
 
 
+func test_a_first_win_card_drops_the_first_time_its_owner_is_beaten() -> void:
+	var s := SaveData.new()
+	var got := s.chest_after_battle(rng(3), 0.0, false, [], "lvbu")  # not a boss, no overkill: the chest alone would be 50%
+	check(got.any(func(c): return c["id"] == "lvbu"), "the first time, 吕布's card is always in the chest")
+	s.seen = ["lvbu"]  # held before, in an earlier 周目
+	check(s.chest_pools()["history"]["general"].any(func(c): return c["id"] == "lvbu"), "after that he is in the history pool like any card you have had")
+	var again := 0
+	for i in 40:
+		if s.chest_after_battle(rng(i), 0.0, false, [], "lvbu").any(func(c): return c["id"] == "lvbu"):
+			again += 1
+	check(again < 40, "once owned it is only a chance")
+	var pool := GameData.get_db().cards.values().filter(func(c): return c.get("first_win", false) and c["in_pool"])
+	check(pool.is_empty(), "a first_win card is not in the draw pool")
+
+
 func test_chest_chance_follows_overkill() -> void:
 	var s := SaveData.create()
 	check_eq(s.chest_chance(0.0, false), 0.5, "50% with no overkill")

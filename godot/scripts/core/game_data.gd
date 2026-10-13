@@ -103,7 +103,7 @@ func _load(dir: String) -> void:
 			"hp": int(c["hp"]), "at": int(c["at"]), "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true), "kit": c.get("kit", ""),
 			"person": c.get("person", cid.trim_suffix("_card") if cid.ends_with("_card") else cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
-			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false)}
+			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "beast": c.get("beast", false), "first_win": c.get("first_win", false)}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
 		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
