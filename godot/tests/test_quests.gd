@@ -407,6 +407,25 @@ func test_temple_upgrades_a_general() -> void:
 	check_eq(s.tier("zhouyu"), 1, "+3 copies: 铜 → 银")
 
 
+func test_every_lvbu_fight_uses_the_lose_coefficient() -> void:
+	var db := GameData.get_db()
+	var lose := float(db.battle["enemy_coef"]["lose"])
+	var seen_fights := 0
+	for q in db.quests:
+		var s := SaveData.create()
+		s.quest = q["id"]
+		for sid in q["squares"]:
+			var sq: Dictionary = q["squares"][sid]
+			if sq["battle"] == "" or not db.scenarios.has(sq["battle"]):
+				continue
+			if str(db.enemies[db.scenarios[sq["battle"]]["enemy"]].get("card", "")) != "lvbu":
+				continue
+			s.square = sid
+			check_eq(Quests.enemy_scale(s), lose, "%s / %s" % [q["id"], sid])
+			seen_fights += 1
+	check(seen_fights >= 3, "found the 吕布 fights (%d)" % seen_fights)
+
+
 func test_only_a_boss_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
