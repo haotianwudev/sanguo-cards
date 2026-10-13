@@ -2,7 +2,7 @@
 # Keep docs/CHAPTER-STATS.md in step with the data it summarises: whenever story / cards / art data is part of a commit,
 # regenerate the stats (squares, battles, CGs, pools, 南北线对比, 卡牌种类) and add the doc to the same commit.
 # Install once per clone:  git config core.hooksPath tools/hooks
-if git diff --cached --name-only | grep -qE '^godot/data/(story|cards)\.json$|^pics/art\.json$'; then
+if git diff --cached --name-only | grep -qE '^godot/data/(story|cards|enemies|scenarios|skills|relics|battle)\.json$|^pics/art\.json$'; then
 	python tools/chapter_stats.py --write >/dev/null || { echo "pre-commit: tools/chapter_stats.py failed — fix it (or the data JSON) first" >&2; exit 1; }
 	git add docs/CHAPTER-STATS.md
 fi

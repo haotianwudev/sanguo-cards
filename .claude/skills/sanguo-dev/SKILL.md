@@ -16,7 +16,7 @@ Balance is not a goal right now — don't spend turns tuning numbers unless aske
 | Path | What |
 |---|---|
 | `godot/` | **The game** (Godot 4.7, GDScript). `project.godot`, autoload `Game` = `scripts/game.gd` |
-| `godot/data/cards.json` | gacha / tiers, battle constants, troops, skills, cards, enemies (+ moves), scenarios, relics |
+| `godot/data/cards.json` (+ `enemies.json`, `scenarios.json`, `skills.json`, `relics.json`, `battle.json`) | the one card-data dict, split by top-level key: cards.json = gacha / tiers / troops / kits / lord_forms / cards; enemies.json = enemies (+ moves); scenarios.json = fights; skills.json = skills + budget; relics.json = relics / fates / relic_pick; battle.json = battle constants + difficulty. `GameData._load` merges them (a key may live in one file only); Python tools use `tools/gamedata.load_cards()` |
 | `godot/data/story.json` | quests (chapters: squares, pools, shuffle groups) and random events |
 | `godot/data/ui.json` | themes, map glyphs / colours, card frames, plates, badges |
 | `godot/scripts/core/` | pure logic: `game_data.gd` (load + validate), `battle.gd` (engine, emits events), `quests.gd` (maps, events, runs), `save_data.gd` |

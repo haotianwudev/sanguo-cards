@@ -1,0 +1,1689 @@
+{
+  "skill_budget": {
+    "_doc": "攻击 / 法术技能没写 rate 时的默认威力：rate_by_ap[AP] × AP（越贵每 AP 越值），限 1 的大招再乘 ultimate_mult；多段技能（hits ≥ 2）每一段 = multi_hit_rate × AP。技能自己写 rate（总威力 = rate × AP）或 hit_rate（每段 = hit_rate × AP）就覆盖默认。tolerance 是测试的容差；weights 把附带效果折成威力。special: true 的技能不参与检查；free: true 的技能允许 0 AP 攻击。",
+    "rate_by_ap": {
+      "1": 1.0,
+      "2": 1.1,
+      "3": 1.2,
+      "4": 1.3,
+      "5": 1.4
+    },
+    "multi_hit_rate": 0.45,
+    "ultimate_mult": 1.5,
+    "tolerance": 0.85,
+    "weights": {
+      "combo_layers": 3.0,
+      "guard": 2.5,
+      "break": 1.2,
+      "stun": 2.5,
+      "counter": 1.5,
+      "burn_pct": 15.0,
+      "boost_all": 3.0,
+      "boost_self": 1.5,
+      "ap": 1.0
+    }
+  },
+  "skills": {
+    "tuji": {
+      "name": "突击",
+      "cost": 0,
+      "free": true,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 1.0
+        }
+      ]
+    },
+    "haoling": {
+      "name": "号令",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "madao": {
+      "name": "马刀",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        }
+      ]
+    },
+    "cishi": {
+      "name": "刺击",
+      "cost": 2,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "sheji": {
+      "name": "射击",
+      "cost": 0,
+      "free": true,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 0.5,
+          "pierce": true
+        }
+      ]
+    },
+    "xiance": {
+      "name": "献策",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 2
+        }
+      ]
+    },
+    "touxi": {
+      "name": "偷袭",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        }
+      ]
+    },
+    "fuzhou": {
+      "name": "符咒",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "stun",
+          "chance": 0.4
+        }
+      ]
+    },
+    "zhiqun": {
+      "name": "指囷相赠",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 3
+        }
+      ]
+    },
+    "shanghan": {
+      "name": "伤寒杂病论",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 1.75
+        }
+      ]
+    },
+    "xinglin": {
+      "name": "杏林春暖",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 2.2
+        }
+      ]
+    },
+    "neishi": {
+      "name": "内事不决",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 1
+        },
+        {
+          "type": "guard",
+          "cut": 0.2
+        }
+      ]
+    },
+    "feidao": {
+      "name": "飞刀",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2,
+          "pierce": true
+        }
+      ]
+    },
+    "huoshen": {
+      "name": "火神之裔",
+      "cost": 3,
+      "uses": 1,
+      "special": true,
+      "effects": [
+        {
+          "type": "magic",
+          "rate": 0.5
+        },
+        {
+          "type": "burn",
+          "pct": 0.1,
+          "turns": 3
+        }
+      ]
+    },
+    "yunlu": {
+      "name": "云騄突阵",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "stun",
+          "chance": 0.35
+        }
+      ]
+    },
+    "huaji": {
+      "name": "画戟传承",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        }
+      ]
+    },
+    "jiuji": {
+      "name": "冀城九计",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        }
+      ]
+    },
+    "zhiji": {
+      "name": "知几",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 2
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "zhenbian": {
+      "name": "枕边风",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.4
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "quanfu": {
+      "name": "劝夫",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.4
+        }
+      ]
+    },
+    "xianhou": {
+      "name": "贤后",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.0
+        },
+        {
+          "type": "guard",
+          "cut": 0.3
+        }
+      ]
+    },
+    "dujian": {
+      "name": "毒箭",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "burn",
+          "pct": 0.05,
+          "turns": 3
+        }
+      ]
+    },
+    "qinse": {
+      "name": "琴瑟",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.3
+        },
+        {
+          "type": "ap",
+          "amount": 1
+        }
+      ]
+    },
+    "luoshen": {
+      "name": "洛神",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.4
+        },
+        {
+          "type": "break",
+          "amount": 0.2,
+          "turns": 2
+        }
+      ]
+    },
+    "annei": {
+      "name": "安内",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.3
+        },
+        {
+          "type": "ap",
+          "amount": 1
+        }
+      ]
+    },
+    "jiazhuang": {
+      "name": "乔公嫁妆",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 3
+        }
+      ]
+    },
+    "baozha": {
+      "name": "包扎",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 1.5
+        }
+      ]
+    },
+    "guwu": {
+      "name": "鼓舞",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "charge": {
+      "name": "冲锋",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "per_combo": 0.3
+        }
+      ]
+    },
+    "qiangzhen": {
+      "name": "枪阵",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.3
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
+    "volley": {
+      "name": "齐射",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "pierce": true
+        }
+      ]
+    },
+    "buzhan": {
+      "name": "步战",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "jushun": {
+      "name": "举盾",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.5
+        }
+      ]
+    },
+    "jinzhen": {
+      "name": "金针度穴",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 2.4
+        }
+      ]
+    },
+    "yanzhi": {
+      "name": "胭脂双刀",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        },
+        {
+          "type": "stun",
+          "chance": 0.25
+        }
+      ]
+    },
+    "mishui": {
+      "name": "蜜水",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 1.25
+        },
+        {
+          "type": "ap",
+          "amount": 2
+        }
+      ]
+    },
+    "xiangguo": {
+      "name": "相国之威",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.4
+        }
+      ]
+    },
+    "hujia": {
+      "name": "胡笳十八拍",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "all"
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "sanjian": {
+      "name": "三尖两刃",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.4
+        }
+      ]
+    },
+    "beige": {
+      "name": "悲歌",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.35
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 2
+        }
+      ]
+    },
+    "dujun": {
+      "name": "督军",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 2
+        }
+      ]
+    },
+    "hujie": {
+      "name": "护姐心切",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.3
+        },
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "jixi": {
+      "name": "急袭",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "shoujia": {
+      "name": "守家",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.45
+        }
+      ]
+    },
+    "tiji": {
+      "name": "铁脊蛇矛",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
+    "qishe": {
+      "name": "骑射",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2,
+          "pierce": true
+        }
+      ]
+    },
+    "yindi": {
+      "name": "引敌",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.4
+        },
+        {
+          "type": "stun",
+          "chance": 0.2
+        }
+      ]
+    },
+    "zhenjiu": {
+      "name": "鸩酒",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "burn",
+          "pct": 0.04,
+          "turns": 3
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "shuangchui": {
+      "name": "双锤",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        }
+      ]
+    },
+    "mafei": {
+      "name": "麻沸散",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 2.0
+        },
+        {
+          "type": "guard",
+          "cut": 0.2
+        }
+      ]
+    },
+    "rengdao": {
+      "name": "扔刀",
+      "cost": 3,
+      "special": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.0
+        }
+      ]
+    },
+    "duomingqiang": {
+      "name": "夺命枪",
+      "cost": 3,
+      "special": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.0
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
+    "huoshang": {
+      "name": "火上浇油",
+      "cost": 3,
+      "uses": 1,
+      "special": true,
+      "effects": [
+        {
+          "type": "magic",
+          "rate": 1.5,
+          "burning_mult": 2.0
+        }
+      ]
+    },
+    "huxiao": {
+      "name": "虎啸",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.4
+        }
+      ]
+    },
+    "fanjiang": {
+      "name": "翻江倒海",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        }
+      ]
+    },
+    "fushui_heal": {
+      "name": "符水",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 4.0
+        }
+      ]
+    },
+    "huangtian": {
+      "name": "黄天当立",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "fubing": {
+      "name": "伏兵",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        }
+      ]
+    },
+    "zhanjiang": {
+      "name": "斩将",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "taiping": {
+      "name": "苍天已死",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic",
+          "rate": 2.2
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "wushuang": {
+      "name": "天下无双",
+      "cost": 3,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 4
+        }
+      ]
+    },
+    "ploy": {
+      "name": "计略",
+      "cost": 3,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        }
+      ]
+    },
+    "supply": {
+      "name": "补给",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.0
+        }
+      ]
+    },
+    "jielue": {
+      "name": "劫掠",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "yaoshu": {
+      "name": "妖术",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "magic"
+        }
+      ]
+    },
+    "feiyan": {
+      "name": "飞燕",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        }
+      ]
+    },
+    "zhibei": {
+      "name": "掷杯戏曹",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "stun",
+          "chance": 1.0
+        }
+      ]
+    },
+    "fushui": {
+      "name": "符水",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "xiliang": {
+      "name": "西凉铁骑",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "per_combo": 0.3
+        }
+      ]
+    },
+    "liaolai": {
+      "name": "辽来辽来",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        }
+      ]
+    },
+    "roar": {
+      "name": "当阳怒吼",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.6
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
+    "duanliang": {
+      "name": "断粮",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "baibu": {
+      "name": "百步穿杨",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "pierce": true
+        }
+      ]
+    },
+    "jinfan": {
+      "name": "锦帆夜袭",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "pierce": true
+        },
+        {
+          "type": "stun",
+          "chance": 0.4
+        }
+      ]
+    },
+    "luoyi": {
+      "name": "裸衣",
+      "cost": 0,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "self"
+        }
+      ]
+    },
+    "rende": {
+      "name": "仁德",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.5
+        }
+      ]
+    },
+    "lianhuan": {
+      "name": "连环计",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "guose": {
+      "name": "国色",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 2.5
+        }
+      ]
+    },
+    "muniu": {
+      "name": "木牛流马",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 3
+        }
+      ]
+    },
+    "qinglong": {
+      "name": "青龙偃月斩",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "per_combo": 0.3
+        }
+      ]
+    },
+    "xiaoji": {
+      "name": "枭姬",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2,
+          "pierce": true
+        }
+      ]
+    },
+    "shuangji": {
+      "name": "古之恶来",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.5
+        }
+      ]
+    },
+    "huoji": {
+      "name": "火计",
+      "cost": 5,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic",
+          "rate": 2.5
+        }
+      ]
+    },
+    "bazhen": {
+      "name": "八阵图",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.9
+        }
+      ]
+    },
+    "biyue": {
+      "name": "闭月",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 1.0
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 2
+        }
+      ]
+    },
+    "xiaobawang": {
+      "name": "小霸王",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "per_combo": 0.3
+        }
+      ]
+    },
+    "tingqiang": {
+      "name": "挺枪",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        }
+      ]
+    },
+    "yehuo": {
+      "name": "火攻",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "burn",
+          "pct": 0.1,
+          "turns": 3
+        }
+      ]
+    },
+    "kurou": {
+      "name": "苦肉计",
+      "cost": 1,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "all"
+        },
+        {
+          "type": "hurt",
+          "pct": 0.1
+        }
+      ]
+    },
+    "cimu": {
+      "name": "慈母",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.0
+        }
+      ]
+    },
+    "bawang": {
+      "name": "霸王之怒",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        }
+      ]
+    },
+    "chibi": {
+      "name": "赤壁业火",
+      "cost": 5,
+      "uses": 1,
+      "special": true,
+      "effects": [
+        {
+          "type": "magic",
+          "rate": 2.5
+        },
+        {
+          "type": "burn",
+          "power": 1.5,
+          "turns": 3
+        }
+      ]
+    },
+    "lianying": {
+      "name": "火烧连营",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "baiyi": {
+      "name": "白衣渡江",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "menghu": {
+      "name": "江东猛虎",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.3
+        }
+      ]
+    },
+    "shenting": {
+      "name": "神亭酣战",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2,
+          "pierce": true
+        }
+      ]
+    },
+    "chijia": {
+      "name": "持家",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 2.5
+        },
+        {
+          "type": "guard",
+          "cut": 0.25
+        }
+      ]
+    },
+    "liaodong": {
+      "name": "遗计",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        }
+      ]
+    },
+    "mihun": {
+      "name": "摄魂咒",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.35
+        }
+      ]
+    },
+    "kaishan": {
+      "name": "开山",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        }
+      ]
+    },
+    "junfa": {
+      "name": "军法",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.2
+        }
+      ]
+    },
+    "jianshou": {
+      "name": "坚守",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.4
+        }
+      ]
+    },
+    "kuangbao": {
+      "name": "狂暴",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "xiandeng": {
+      "name": "先登",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.4
+        }
+      ]
+    },
+    "qiangnu": {
+      "name": "强弩",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "tingzhu": {
+      "name": "庭柱",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.35
+        },
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "mengjiang": {
+      "name": "猛将",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        }
+      ]
+    },
+    "weizhen": {
+      "name": "威震华夏",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.3
+        },
+        {
+          "type": "stun",
+          "chance": 0.4
+        }
+      ]
+    },
+    "dujiang": {
+      "name": "小霸王渡江",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.1
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "changban": {
+      "name": "长坂单骑",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.2
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
+    "guding": {
+      "name": "古锭刀",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.4
+        }
+      ]
+    },
+    "gongyaoji": {
+      "name": "弓腰姬",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.1,
+          "pierce": true
+        }
+      ]
+    },
+    "shisheng": {
+      "name": "十胜十败",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 3
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "jiangling": {
+      "name": "将令",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 0.5
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "caibo": {
+      "name": "财帛",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "tanxiao": {
+      "name": "谈笑风生",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 1
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "shuike": {
+      "name": "说客",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.4
+        },
+        {
+          "type": "break",
+          "amount": 0.2,
+          "turns": 2
+        }
+      ]
+    },
+    "jiedu": {
+      "name": "解毒",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "cleanse"
+        }
+      ]
+    },
+    "xianji": {
+      "name": "料敌先机",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "buff",
+          "atk": 0.1,
+          "def": 0.08,
+          "max": 4,
+          "turns": 3
+        }
+      ]
+    },
+    "qiangpo": {
+      "name": "枪破千军",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 1.5
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
+    "tuci": {
+      "name": "突刺",
+      "cost": 0,
+      "free": true,
+      "effects": [
+        {
+          "type": "attack",
+          "power": 1.0
+        }
+      ]
+    },
+    "jiufa": {
+      "name": "九伐中原",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.2
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "qiaobian": {
+      "name": "巧变",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.5
+        }
+      ]
+    },
+    "baimajiang": {
+      "name": "白马将军",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "luofeng": {
+      "name": "落凤",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "baierzhan": {
+      "name": "白毦死战",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
+    "ziwu": {
+      "name": "子午奇谋",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "ap",
+          "amount": 2
+        }
+      ]
+    },
+    "bashi": {
+      "name": "拔矢啖睛",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "boost",
+          "target": "self"
+        }
+      ]
+    }
+  }
+}

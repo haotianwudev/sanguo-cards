@@ -7,7 +7,11 @@ consistent); only the subject lines differ. Items that already have final art in
 Add new characters / battles / scenes to the tables below when you add them to the game.
 """
 import json
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gamedata import load_cards
 
 try:
     from tools.art_prompts_zh import OVERRIDES_ZH, PORTRAITS_ZH, BATTLES_ZH, CGS_ZH, EVENTS_ZH
@@ -1354,7 +1358,7 @@ CGS = {
     "c7_feng": "a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingertips on his wrist; at the tent flap Dong Bai (adult) slamming a hammer down and Cai Wenji (adult, in white) with a snapped zither string, both glaring",
     "c6_jiaxu": "an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) tied up with rope and lounging comfortably on sacks in a grain cart, still sniffing a wine gourd; young Sun Ce, who just tied him, holding the rope end with a spear on his shoulder; the short-haired hero studying him; Zhou Yu frowning over his ledger; comic",
     "c8_xuexi": "the wall of Xiangyang in grey rain at dawn, the city below silent with gates shut: the short-haired hero standing stiff and blank-eyed in battered silver armor; Dong Bai (adult) standing before him, trembling but not stepping back, saying something bitter; behind them young Sun Ce pale and afraid; restrained and bleak, no gore, no bodies",
-    "c8_zupu": "the steps of the Xiangyang governor's mansion in the morning: a row of white-bearded Cai clan elders kneeling, the eldest striking a name out of an open clan genealogy with a brush; the pale, long-bearded scholar Liu Biao hurrying up with his official cap askew, sweating; Zhou Yu reading a long list of offered troops and money with shining eyes; the short-haired hero looking on, unimpressed; a little comic",
+    "c8_zupu": "the steps of the Xiangyang governor's mansion in the morning: a row of white-bearded Cai clan elders kneeling, the eldest striking a name out of an open clan genealogy with a brush; the pale, long-bearded scholar Liu Biao hurrying up with his official cap askew, sweating; Zhou Yu reading a long list of offered troops and money with shining eyes; the short-haired hero in plain everyday robes (a dark civil gown with teal-gold trim, no armour) looking on unimpressed with empty hands; NO swords, broadswords or weapons anywhere in the picture; the kneelers are only the elderly Cai clan elders in a neat row, not soldiers or prisoners; a little comic",
     "c6_jiaxu_join": "an evening in a Luoyang house: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded robe, gourd flask at his belt) at a table with the first bowl of red-braised pork, sniffing a cup of wine the short-haired hero has just poured him with a respectful bow; Lady Wu (adult) setting down more dishes; young Sun Ce staring at the pork, not daring to reach; warm and comic",
     "c8_nushou": "水阁里火墙冲天、浓烟滚滚，帘后的连弩手在烟中乱射：董白（成年，银白高马尾、紫色毛边铠甲）双锤抡着，把一张翻倒的案几砸成两截当盾牌；蔡文姬（成年，白衣）半跪着一手搂着脸色苍白的貂蝉（成年，浅碧留仙裙，裙摆沾着烟灰）、一手横着断弦的琴挡箭；短发的主角（青金色铠甲）持刀冲在最前面",
     "c8_zhashan": "水阁栈道口，被撞飞的千斤闸砸在地上、尘土飞扬：孙策（少年将军，持长枪）一枪挑飞门口的死士，站在缺口中央；黄忠（四十出头，黄皮甲蓝战袍）半跪在后面开弓搭箭；水阁深处，独眼流血的蔡瑁（魁梧，锦袍罩鎏金鳞甲）捂着右眼，被逼到栏杆边拔剑",
@@ -1372,7 +1376,7 @@ CGS = {
     "c8_plan_xun": "夜里宛城议事厅的沙盘前：荀攸（三十多岁，清瘦文士，深蓝儒服）把一枚黑色棋子轻轻放进主角摊开的手心；主角（短发、青金色铠甲）低头看着棋子；旁边周瑜（青年）捏着账本在记一笔",
     "c8_plan_huang": "清晨宛城校场，箭靶旁：黄忠（四十出头，精壮军汉，黄皮甲蓝战袍、独角兽铜兽首护肩）把一支雕着小字的令箭拍在主角手里；孙策（少年将军）凑过去探头，被黄忠斜眼瞪着；主角（短发、青金色铠甲）掂着令箭",
     "c8_meng": "天未亮的宛城客房，一盏油灯：光着脚、只穿中衣的短发主角满头冷汗地站在门口，指尖还在发抖；贾诩（四十多岁，清瘦蜡黄）坐在灯下，正把一只酒杯凑近鼻子闻，抬眼看着他的光脚，似笑非笑",
-    "c8_dingce": "夜里宛城书房的案几前：贾诩（四十多岁，清瘦蜡黄，眯着眼）用手指蘸着茶水，在案上写下「蔡」「蒯」两个湿漉漉的字；手边放着一份请柬；短发的主角（青金色铠甲）盯着那两个字，若有所思",
+    "c8_dingce": "夜里宛城书房的案几前：贾诩（四十多岁，清瘦蜡黄，眯着眼）用手指蘸着茶水，在案上写下「蔡」「蒯」两个湿漉漉的字；手边放着一份请柬；短发的主角穿一身素色常服（青金色滚边的深色便袍，不穿盔甲），双手空着、身边没有任何刀剑兵器，盯着那两个字，若有所思",
     "c8_kuaiyue": "三更天蒯府后院的书房，一盏孤灯：蒯越（四十出头，浅灰儒服）披着外衣坐在灯下，站起身朝主角深深一揖；便服的主角（短发）站在门口；贾诩（四十多岁，清瘦蜡黄）侧立在一旁，把请柬放在案上",
     "c8_jiayan": "a family supper in the courtyard of the Wancheng governor's house on an autumn evening: Lady Wu (adult) handing the short-haired hero a big bowl of chicken soup and ruffling his cropped hair; Sun Ce hanging over the edge of the pot trying to snatch meat; warm lantern light",
     "c8_liuxian": "the bank of the Yu river at sunset: Diaochan (adult, of great beauty) in a light pale-jade southern 'liuxian' skirt sitting hugging her knees on the grass, laughing with her hand over her mouth; in the shallows Sun Ce slipping while grabbing at a fish; Zhou Yu on a rock writing in his ledger",
@@ -1721,7 +1725,7 @@ def map_redo() -> dict:
 def build_next(delivered: dict) -> list:
     """[(kind, key, what, tier)] still missing and used by the game, in drawing order."""
     gd = ROOT / "godot" / "data"
-    cards = json.loads((gd / "cards.json").read_text("utf-8"))
+    cards = load_cards(gd)
     story = json.loads((gd / "story.json").read_text("utf-8"))
     endings = json.loads((gd / "endings.json").read_text("utf-8"))["endings"]
     inter = json.loads((gd / "interludes.json").read_text("utf-8")).get("after", {})
@@ -2115,7 +2119,7 @@ def main() -> None:
         if ("map", key) not in need:
             continue
         out += [f"### `{key}`", "", "```", OVERRIDES.get(key) or map_prompt(scene), "```", ""]
-    rarity = {k: v.get("rarity", "common") for k, v in json.loads((ROOT / "godot/data/cards.json").read_text("utf-8"))["relics"].items()}
+    rarity = {k: v.get("rarity", "common") for k, v in load_cards()["relics"].items()}
     out += ["## 宝物图标（256×256 透明 PNG，放 `pics/source/relics/<key>.png`；现在是程序生成的占位）", ""]
     for key, obj in RELICS.items():
         if key in relics_done and key not in redo:

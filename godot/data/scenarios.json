@@ -1,0 +1,942 @@
+{
+  "scenarios": {
+    "th_patrol": {
+      "name": "太行巡山兵",
+      "turn_limit": 6,
+      "enemy": "th_patrol"
+    },
+    "bh_jiang_trap": {
+      "name": "姜家寨暗哨",
+      "turn_limit": 6,
+      "enemy": "liukou"
+    },
+    "bh_wolf2": {
+      "name": "并州精骑",
+      "turn_limit": 6,
+      "enemy": "bingzhou_langqi"
+    },
+    "bh_jz_inf": {
+      "name": "冀州步卒",
+      "turn_limit": 6,
+      "enemy": "jizhou_buzhu"
+    },
+    "bh_jz_spear": {
+      "name": "冀州长枪",
+      "turn_limit": 6,
+      "enemy": "jizhou_qiangbing"
+    },
+    "bh_jz_scout": {
+      "name": "冀州游骑",
+      "turn_limit": 6,
+      "enemy": "jizhou_qibing"
+    },
+    "bh_jz_arch": {
+      "name": "冀州强弩",
+      "turn_limit": 6,
+      "enemy": "jizhou_nushou"
+    },
+    "bh_hj_duzhan": {
+      "name": "黄巾督战队",
+      "turn_limit": 6,
+      "enemy": "huangjin_vanguard"
+    },
+    "bh_patrol": {
+      "name": "太行伏兵",
+      "turn_limit": 6,
+      "enemy": "th_patrol"
+    },
+    "bh_yanliang": {
+      "name": "渡口·颜良",
+      "turn_limit": 10,
+      "enemy": "yanliang"
+    },
+    "bh_hj_qushuai": {
+      "name": "青州渠帅",
+      "turn_limit": 8,
+      "enemy": "hj_qushuai"
+    },
+    "bh_guanhai": {
+      "name": "北海解围",
+      "turn_limit": 15,
+      "enemy": "guanhai"
+    },
+    "bh_lubu": {
+      "name": "太行山口·吕布",
+      "turn_limit": 8,
+      "enemy": "lvbu_hulao"
+    },
+    "bh_jiangqiao": {
+      "name": "姜家寨",
+      "turn_limit": 10,
+      "enemy": "jiangqiao"
+    },
+    "bh_zhenghao": {
+      "name": "郑家寨",
+      "turn_limit": 10,
+      "enemy": "zhenghao"
+    },
+    "c4_lijue_test": {
+      "name": "拦路迎亲",
+      "turn_limit": 6,
+      "enemy": "lijue"
+    },
+    "huangjin_remnant": {
+      "name": "黄巾余孽",
+      "turn_limit": 6,
+      "enemy": "huangjin_remnant"
+    },
+    "guanjun": {
+      "name": "官军",
+      "turn_limit": 6,
+      "enemy": "guanjun"
+    },
+    "shanzei_band": {
+      "name": "山贼",
+      "turn_limit": 6,
+      "enemy": "shanzei_band"
+    },
+    "yanzhihu": {
+      "name": "山寨·胭脂虎",
+      "turn_limit": 8,
+      "enemy": "yanzhihu"
+    },
+    "xiliang_youqi": {
+      "name": "西凉游骑",
+      "turn_limit": 6,
+      "enemy": "xiliang_youqi"
+    },
+    "guosi": {
+      "name": "郭汜",
+      "turn_limit": 8,
+      "enemy": "guosi"
+    },
+    "feixiong": {
+      "name": "飞熊军",
+      "turn_limit": 8,
+      "enemy": "feixiong"
+    },
+    "liru": {
+      "name": "李儒伏兵",
+      "turn_limit": 8,
+      "enemy": "liru"
+    },
+    "xiliang_scout": {
+      "name": "截粮",
+      "turn_limit": 6,
+      "enemy": "xiliang_scout"
+    },
+    "dongbai": {
+      "name": "董白",
+      "turn_limit": 8,
+      "enemy": "dongbai"
+    },
+    "lijue": {
+      "name": "洛阳城门·李傕",
+      "turn_limit": 8,
+      "enemy": "lijue"
+    },
+    "c3_shanfei": {
+      "name": "独眼匪首",
+      "turn_limit": 8,
+      "enemy": "shanfei_tou"
+    },
+    "c3_jiling": {
+      "name": "山口·纪灵",
+      "turn_limit": 9,
+      "enemy": "jiling"
+    },
+    "c3_qiaorui": {
+      "name": "城外·桥蕤",
+      "turn_limit": 8,
+      "enemy": "qiaorui"
+    },
+    "c3_leibo": {
+      "name": "山道追兵·雷薄",
+      "turn_limit": 8,
+      "enemy": "leibo"
+    },
+    "c3_chenlan": {
+      "name": "夜袭·陈兰",
+      "turn_limit": 8,
+      "enemy": "chenlan"
+    },
+    "c3_yuanshu": {
+      "name": "袁术",
+      "turn_limit": 6,
+      "enemy": "yuanshu"
+    },
+    "yuji_xintu": {
+      "name": "于吉信徒",
+      "turn_limit": 6,
+      "enemy": "yuji_xintu"
+    },
+    "boar": {
+      "name": "野猪林",
+      "turn_limit": 6,
+      "enemy": "boar"
+    },
+    "jz_county_fight": {
+      "name": "州衙 · 拔刀相助",
+      "turn_limit": 5,
+      "enemy": "yayi"
+    },
+    "jz_road_bandits": {
+      "name": "官道 · 黑山散兵",
+      "turn_limit": 6,
+      "enemy": "heishan_sanbing"
+    },
+    "tiger": {
+      "name": "打虎",
+      "turn_limit": 6,
+      "enemy": "tiger"
+    },
+    "yaodao": {
+      "name": "妖道唐周",
+      "turn_limit": 8,
+      "enemy": "huangjin_yaodao"
+    },
+    "shuizei_scout": {
+      "name": "水贼喽啰",
+      "turn_limit": 6,
+      "enemy": "shuizei_scout"
+    },
+    "shuizei_guard": {
+      "name": "看门水贼",
+      "turn_limit": 6,
+      "enemy": "shuizei_guard"
+    },
+    "shuizei": {
+      "name": "水寨·胡玉",
+      "turn_limit": 8,
+      "enemy": "shuizei"
+    },
+    "shuizei_main": {
+      "name": "水贼大寨",
+      "turn_limit": 8,
+      "enemy": "shuizei_main"
+    },
+    "xurong": {
+      "name": "梁东·徐荣",
+      "turn_limit": 8,
+      "enemy": "xurong"
+    },
+    "dagu": {
+      "name": "大谷·徐荣",
+      "turn_limit": 8,
+      "enemy": "xurong"
+    },
+    "ln_river": {
+      "name": "黄河渡口·西凉游骑",
+      "turn_limit": 6,
+      "enemy": "xiliang_youqi",
+      "art": "xiliang_youqi"
+    },
+    "ln_lvlingqi": {
+      "name": "黄河古道·吕玲绮",
+      "turn_limit": 8,
+      "enemy": "lvlingqi_duel"
+    },
+    "ln_pursuit": {
+      "name": "荥阳道·西凉追兵",
+      "turn_limit": 6,
+      "enemy": "xiliang_scout",
+      "art": "xiliang_scout"
+    },
+    "ln_xurong": {
+      "name": "汴水·徐荣",
+      "turn_limit": 10,
+      "enemy": "xurong_n",
+      "art": "dagu"
+    },
+    "ln_feixiong": {
+      "name": "虎牢前·飞熊军",
+      "turn_limit": 8,
+      "enemy": "feixiong",
+      "art": "feixiong"
+    },
+    "ln_langqi": {
+      "name": "劫营·并州狼骑",
+      "turn_limit": 8,
+      "enemy": "bingzhou_langqi",
+      "art": "c4_langqi"
+    },
+    "ln_lvbu": {
+      "name": "虎牢关前·吕布",
+      "turn_limit": 6,
+      "enemy": "lvbu_hulao",
+      "art": "hulao_ch1"
+    },
+    "ln_ferry": {
+      "name": "黄河渡口·溃兵",
+      "turn_limit": 6,
+      "enemy": "guanjun",
+      "art": "guanjun"
+    },
+    "c4_guosi": {
+      "name": "劫粮·郭汜",
+      "turn_limit": 8,
+      "enemy": "guosi"
+    },
+    "c5_hall": {
+      "name": "喜堂·飞熊军",
+      "turn_limit": 8,
+      "enemy": "feixiong"
+    },
+    "c5_fanchou": {
+      "name": "比武·樊稠",
+      "turn_limit": 8,
+      "enemy": "fanchou"
+    },
+    "c5_zhangji": {
+      "name": "比武·张济",
+      "turn_limit": 8,
+      "enemy": "zhangji"
+    },
+    "c5_niufu": {
+      "name": "比武·牛辅",
+      "turn_limit": 8,
+      "enemy": "niufu"
+    },
+    "c5_huzhen": {
+      "name": "内门·胡轸",
+      "turn_limit": 8,
+      "enemy": "huzhen"
+    },
+    "c5_dongzhuo": {
+      "name": "未央宫前·董卓",
+      "turn_limit": 10,
+      "enemy": "dongzhuo"
+    },
+    "c2_bingzhou": {
+      "name": "劫营·并州狼骑",
+      "turn_limit": 7,
+      "enemy": "bingzhou_youqi",
+      "art": "c4_langqi"
+    },
+    "c2_zonghuo": {
+      "name": "洛阳·西凉游骑",
+      "turn_limit": 7,
+      "enemy": "xiliang_zonghuo",
+      "art": "xiliang_youqi"
+    },
+    "c3_mitan": {
+      "name": "酒楼外·袁军密探",
+      "turn_limit": 7,
+      "enemy": "yuan_mitan"
+    },
+    "c3_qibing": {
+      "name": "雨夜·袁军骑兵",
+      "turn_limit": 7,
+      "enemy": "yuan_qibing"
+    },
+    "c4_kuibing": {
+      "name": "山谷·西凉游骑",
+      "turn_limit": 7,
+      "enemy": "xiliang_kuibing",
+      "art": "xiliang_youqi"
+    },
+    "c4_liumin": {
+      "name": "废墟·暴动流民",
+      "turn_limit": 7,
+      "enemy": "liumin_baodong"
+    },
+    "c5_zuibing": {
+      "name": "长安街头·西凉游骑",
+      "turn_limit": 7,
+      "enemy": "xiliang_zuibing",
+      "art": "xiliang_youqi"
+    },
+    "c5_qinbing": {
+      "name": "后园·吕布亲兵",
+      "turn_limit": 7,
+      "enemy": "lvbu_qinbing"
+    },
+    "c6_fubing": {
+      "name": "长街·司徒府兵",
+      "turn_limit": 8,
+      "enemy": "situ_fubing"
+    },
+    "c6_yulin": {
+      "name": "宫墙下·御林军",
+      "turn_limit": 8,
+      "enemy": "yulin_jun",
+      "art": "c6_yulin"
+    },
+    "c6_yulin_head": {
+      "name": "北掖门·御林军统领",
+      "turn_limit": 8,
+      "enemy": "yulin_tongling",
+      "art": "c6_yulin"
+    },
+    "c6_soubu": {
+      "name": "破祠外·司徒府兵",
+      "turn_limit": 8,
+      "enemy": "soubu_bing",
+      "art": "c6_fubing"
+    },
+    "c6_xianzhen": {
+      "name": "宣平门前·陷阵营兵",
+      "turn_limit": 8,
+      "enemy": "xianzhen_bing"
+    },
+    "c6_luanbing": {
+      "name": "北掖门外·西凉游骑",
+      "turn_limit": 8,
+      "enemy": "luanbing",
+      "art": "xiliang_youqi"
+    },
+    "c2_bubing": {
+      "name": "官道·西凉斥候",
+      "turn_limit": 7,
+      "enemy": "dong_bubing",
+      "art": "xiliang_scout"
+    },
+    "c2_gongqi": {
+      "name": "小路·西凉弓骑",
+      "turn_limit": 7,
+      "enemy": "xiliang_gongqi"
+    },
+    "c3_xunluo": {
+      "name": "城外·袁军步卒",
+      "turn_limit": 7,
+      "enemy": "yuan_xunluo"
+    },
+    "c3_liukou": {
+      "name": "荒村·山贼",
+      "turn_limit": 7,
+      "enemy": "liukou",
+      "art": "shanzei_band"
+    },
+    "c3_gongshou": {
+      "name": "岔路·袁军弓手",
+      "turn_limit": 7,
+      "enemy": "yuan_gongshou"
+    },
+    "c4_yaliang": {
+      "name": "山道·西凉斥候",
+      "turn_limit": 7,
+      "enemy": "xiliang_yaliang",
+      "art": "xiliang_scout"
+    },
+    "c5_xiangfu": {
+      "name": "相府·飞熊军",
+      "turn_limit": 7,
+      "enemy": "xiangfu_wei",
+      "art": "feixiong"
+    },
+    "c6_qianfeng": {
+      "name": "潼关道·西凉游骑",
+      "turn_limit": 8,
+      "enemy": "lijue_qianfeng",
+      "art": "xiliang_youqi"
+    },
+    "c7_yingbing": {
+      "name": "南阳道·袁军步卒",
+      "turn_limit": 8,
+      "enemy": "yuan_yingbing",
+      "art": "c3_xunluo"
+    },
+    "c7_gongnu": {
+      "name": "麦田·袁军弓手",
+      "turn_limit": 8,
+      "enemy": "yuan_gongnu",
+      "art": "c3_gongshou"
+    },
+    "biwu": {
+      "name": "擂台·鲍三娘",
+      "turn_limit": 8,
+      "enemy": "baosanniang"
+    },
+    "c4_gaoshun": {
+      "name": "后门·高顺",
+      "turn_limit": 8,
+      "enemy": "gaoshun"
+    },
+    "c4_langqi": {
+      "name": "长街·并州狼骑",
+      "turn_limit": 8,
+      "enemy": "bingzhou_langqi"
+    },
+    "c4_lvbu": {
+      "name": "宣平门·吕布",
+      "turn_limit": 6,
+      "enemy": "lvbu_hulao"
+    },
+    "c6_shaoka": {
+      "name": "清明门·哨卡",
+      "turn_limit": 8,
+      "enemy": "shaoka"
+    },
+    "c6_zhuibing": {
+      "name": "追兵·司徒府兵",
+      "turn_limit": 8,
+      "enemy": "situ_zhuibing",
+      "art": "c6_fubing"
+    },
+    "c6_fanchou": {
+      "name": "山道·樊稠",
+      "turn_limit": 8,
+      "enemy": "fanchou"
+    },
+    "c6_lijue": {
+      "name": "函谷关·李傕",
+      "turn_limit": 10,
+      "enemy": "lijue6"
+    },
+    "c7_qiaorui": {
+      "name": "营寨·桥蕤",
+      "turn_limit": 8,
+      "enemy": "qiaorui"
+    },
+    "c7_leibo": {
+      "name": "山道·雷薄",
+      "turn_limit": 8,
+      "enemy": "leibo"
+    },
+    "c7_chenlan": {
+      "name": "宛城城下·陈兰",
+      "turn_limit": 8,
+      "enemy": "chenlan"
+    },
+    "c7_fengfuren": {
+      "name": "宛城东门·遭遇冯夫人",
+      "turn_limit": 8,
+      "enemy": "fengfuren"
+    },
+    "c7_jiling": {
+      "name": "宛城·纪灵",
+      "turn_limit": 10,
+      "enemy": "jiling"
+    },
+    "c6_zhangxiu": {
+      "name": "渭水桥·张绣",
+      "turn_limit": 8,
+      "enemy": "zhangxiu"
+    },
+    "c6_zhangji": {
+      "name": "渭水营·张济",
+      "turn_limit": 8,
+      "enemy": "zhangji6"
+    },
+    "jx_jinfan": {
+      "name": "汉水渡口·锦帆贼",
+      "turn_limit": 8,
+      "enemy": "jinfan_e"
+    },
+    "jx_zongzei": {
+      "name": "新野·宗贼",
+      "turn_limit": 8,
+      "enemy": "zongzei_e"
+    },
+    "jx_chengfang": {
+      "name": "城防·荆州步卒",
+      "turn_limit": 8,
+      "enemy": "jing_sibing",
+      "art": "jx_bubing"
+    },
+    "jx_ganning": {
+      "name": "汉水·甘宁",
+      "turn_limit": 8,
+      "enemy": "ganning_e"
+    },
+    "jx_bubing": {
+      "name": "淯水北岸·荆州步卒",
+      "turn_limit": 8,
+      "enemy": "jing_bubing"
+    },
+    "jx_gongshou": {
+      "name": "芦苇荡·荆州弓手",
+      "turn_limit": 8,
+      "enemy": "jing_gongshou"
+    },
+    "jx_huangzu": {
+      "name": "淯水·黄祖",
+      "turn_limit": 10,
+      "enemy": "huangzu"
+    },
+    "jx_shuijun": {
+      "name": "水寨·荆州水军",
+      "turn_limit": 8,
+      "enemy": "jing_shuijun"
+    },
+    "jx_nushou": {
+      "name": "水阁·蔡府连弩手",
+      "turn_limit": 8,
+      "enemy": "caifu_nushou"
+    },
+    "jx_caimao_a": {
+      "name": "水阁·独眼蔡瑁",
+      "turn_limit": 10,
+      "enemy": "caimao_blind"
+    },
+    "jx_caimao_b": {
+      "name": "水阁·蔡瑁",
+      "turn_limit": 10,
+      "enemy": "caimao"
+    },
+    "hulao_ch1": {
+      "name": "追兵·吕布",
+      "turn_limit": 10,
+      "enemy": "lvbu_hulao"
+    },
+    "shanzei_scout": {
+      "name": "山贼斥候",
+      "turn_limit": 6,
+      "enemy": "shanzei_scout"
+    },
+    "huangjin_vanguard": {
+      "name": "黄巾前锋",
+      "turn_limit": 8,
+      "enemy": "huangjin_vanguard"
+    },
+    "huaxiong": {
+      "name": "汜水关·华雄",
+      "turn_limit": 8,
+      "enemy": "huaxiong"
+    },
+    "shanzei": {
+      "name": "剿灭山贼",
+      "turn_limit": 8,
+      "enemy": "shanzeituan"
+    },
+    "huangjin": {
+      "name": "黄巾之乱",
+      "turn_limit": 10,
+      "enemy": "huangjinjun"
+    },
+    "hulao": {
+      "name": "虎牢关之战",
+      "turn_limit": 10,
+      "enemy": "lvbu"
+    },
+    "heishan_wai": {
+      "name": "太行外围 · 黑山游骑",
+      "turn_limit": 6,
+      "enemy": "heishan_youji"
+    },
+    "heishan_tan": {
+      "name": "祭坛 · 玄机子",
+      "turn_limit": 8,
+      "enemy": "xuanjizi"
+    },
+    "heishan_zhai": {
+      "name": "黑山寨 · 李大目",
+      "turn_limit": 8,
+      "enemy": "lidamu"
+    },
+    "heishan_jie": {
+      "name": "峡谷断后 · 张白骑",
+      "turn_limit": 7,
+      "enemy": "zhangbaiqi",
+      "art": "heishan_wai"
+    },
+    "hs_zhangbaiqi": {
+      "name": "太行绝壁·张白骑",
+      "turn_limit": 10,
+      "enemy": "zhangbaiqi_elite"
+    },
+    "hs_yudu": {
+      "name": "黑山大寨·于毒",
+      "turn_limit": 10,
+      "enemy": "yudu"
+    },
+    "hs_chunyuqiong": {
+      "name": "太行山口·淳于琼",
+      "turn_limit": 10,
+      "enemy": "chunyuqiong_enemy"
+    },
+    "hs_bad_hall": {
+      "name": "无极甄府·淳于琼",
+      "turn_limit": 10,
+      "enemy": "chunyuqiong_boss"
+    },
+    "hs_guotu": {
+      "name": "无极城外·郭图",
+      "turn_limit": 10,
+      "enemy": "guotu_enemy"
+    },
+    "hs_quyi": {
+      "name": "界桥·麹义先登营",
+      "turn_limit": 12,
+      "enemy": "quyi_enemy"
+    },
+    "hs_wenchou": {
+      "name": "界桥血战·文丑",
+      "turn_limit": 15,
+      "enemy": "wenchou_boss"
+    },
+    "hs_jizhou_buzhu": {
+      "name": "无极突围·冀州步卒",
+      "turn_limit": 8,
+      "enemy": "jizhou_buzhu"
+    },
+    "hs_jizhou_qiangbing": {
+      "name": "秘道追兵·冀州枪阵",
+      "turn_limit": 8,
+      "enemy": "jizhou_qiangbing"
+    },
+    "hs_jieqiao_scout": {
+      "name": "界桥外围·游骑",
+      "turn_limit": 8,
+      "enemy": "jizhou_qibing"
+    },
+    "hs_jizhou_qibing": {
+      "name": "秘道追兵·冀州轻骑",
+      "turn_limit": 8,
+      "enemy": "jizhou_qibing"
+    },
+    "hs_jizhou_nu": {
+      "name": "冀州强弩",
+      "turn_limit": 8,
+      "enemy": "jizhou_nushou"
+    },
+    "hn_xunchuan": {
+      "name": "江面·袁军巡船",
+      "turn_limit": 6,
+      "enemy": "yuan_shuijun",
+      "art": "jx_shuijun"
+    },
+    "hn_gongshou": {
+      "name": "袁军弓手",
+      "turn_limit": 6,
+      "enemy": "yuan_gongshou6",
+      "art": "c3_gongshou"
+    },
+    "hn_shuibing": {
+      "name": "舒县·袁军税兵",
+      "turn_limit": 6,
+      "enemy": "yuan_shuibing",
+      "art": "c3_xunluo"
+    },
+    "hn_buzu": {
+      "name": "袁军步卒",
+      "turn_limit": 6,
+      "enemy": "yuan_buzu6",
+      "art": "c3_xunluo"
+    },
+    "hn_liuxun": {
+      "name": "皖城·刘勋",
+      "turn_limit": 12,
+      "enemy": "liuxun_e"
+    },
+    "hn_zhengbao": {
+      "name": "巢湖·郑宝水寨",
+      "turn_limit": 6,
+      "enemy": "zhengbao_e",
+      "art": "shuizei_guard"
+    },
+    "hn_leichen": {
+      "name": "濡须口·雷薄陈兰",
+      "turn_limit": 8,
+      "enemy": "leichen"
+    },
+    "hn_zhangxun": {
+      "name": "淝水·张勋楼船",
+      "turn_limit": 8,
+      "enemy": "zhangxun_e"
+    },
+    "hn_shouchun": {
+      "name": "寿春南门·袁术水寨",
+      "turn_limit": 15,
+      "enemy": "zhongshi_jinjun"
+    },
+    "xz_youqi": {
+      "name": "曹军游骑",
+      "turn_limit": 6,
+      "enemy": "cao_youqi",
+      "art": "bh_jz_scout"
+    },
+    "xz_buzu": {
+      "name": "曹军步卒",
+      "turn_limit": 6,
+      "enemy": "cao_buzu",
+      "art": "bh_jz_inf"
+    },
+    "hnn_qiaorui": {
+      "name": "蕲阳·桥蕤",
+      "turn_limit": 12,
+      "enemy": "qiaorui_n",
+      "art": "c3_qiaorui"
+    },
+    "hnn_jiling": {
+      "name": "寿春东门·纪灵",
+      "turn_limit": 10,
+      "enemy": "jiling_n",
+      "art": "c3_jiling"
+    },
+    "hnn_bw_xhd": {
+      "name": "比武·夏侯惇",
+      "turn_limit": 8,
+      "enemy": "bw_xiahoudun",
+      "art": "hnn_bw_gy"
+    },
+    "hnn_bw_zf": {
+      "name": "比武·张飞",
+      "turn_limit": 8,
+      "enemy": "bw_zhangfei",
+      "art": "hnn_bw_gy"
+    },
+    "hnn_bw_gy": {
+      "name": "比武·关羽",
+      "turn_limit": 12,
+      "enemy": "bw_guanyu"
+    },
+    "hnn_daofu": {
+      "name": "宫中·曹军刀斧手",
+      "turn_limit": 6,
+      "enemy": "cao_daofu"
+    },
+    "hnn_gongmen": {
+      "name": "宫门·夏侯惇",
+      "turn_limit": 8,
+      "enemy": "xiahoudun_gm"
+    },
+    "hnn_lvbu": {
+      "name": "断桥·吕布",
+      "turn_limit": 8,
+      "enemy": "lvbu_duanqiao"
+    },
+    "hn_wanshui": {
+      "name": "皖水·雷家部曲",
+      "turn_limit": 8,
+      "enemy": "lei_buqu"
+    },
+    "hn_leixu_g": {
+      "name": "灊山·雷绪",
+      "turn_limit": 10,
+      "enemy": "leixu_e"
+    },
+    "hn_leixu_bad": {
+      "name": "灊山寨·雷绪",
+      "turn_limit": 8,
+      "enemy": "leixu_shan",
+      "art": "hn_leixu_g"
+    },
+    "jd_niuzhu_a": {
+      "name": "牛渚·刘繇水军",
+      "turn_limit": 6,
+      "enemy": "jd_liu_shuijun",
+      "art": "jx_shuijun"
+    },
+    "jd_niuzhu_b": {
+      "name": "牛渚·刘繇骑卒",
+      "turn_limit": 6,
+      "enemy": "jd_liu_bu"
+    },
+    "jd_shenting": {
+      "name": "神亭岭·刘繇军",
+      "turn_limit": 10,
+      "enemy": "jd_fanneng"
+    },
+    "jd_shuifei": {
+      "name": "太湖水匪",
+      "turn_limit": 6,
+      "enemy": "jd_shuifei_e",
+      "art": "shuizei"
+    },
+    "jd_jinfan": {
+      "name": "太湖·锦帆贼",
+      "turn_limit": 6,
+      "enemy": "jd_jinfan_e"
+    },
+    "jd_yanbaihu": {
+      "name": "太湖水寨·严白虎",
+      "turn_limit": 12,
+      "enemy": "yanbaihu_e"
+    },
+    "jd_ganning": {
+      "name": "太湖·甘宁",
+      "turn_limit": 12,
+      "enemy": "ganning_b"
+    },
+    "jd_menke": {
+      "name": "丹徒山·许贡门客",
+      "turn_limit": 10,
+      "enemy": "xu_menke"
+    },
+    "jd_menke_bad": {
+      "name": "丹徒山·匹夫",
+      "turn_limit": 8,
+      "enemy": "xu_menke_bad",
+      "art": "jd_menke"
+    },
+    "jd_kuaiji": {
+      "name": "会稽守军",
+      "turn_limit": 6,
+      "enemy": "jd_kuaiji_bing"
+    },
+    "jd_wanglang": {
+      "name": "会稽·王朗",
+      "turn_limit": 14,
+      "enemy": "wanglang_e"
+    },
+    "jd_jiangqin": {
+      "name": "太湖·蒋钦",
+      "turn_limit": 8,
+      "enemy": "jiangqin_e",
+      "art": "jd_ganning"
+    },
+    "jd_zhoutai": {
+      "name": "太湖·周泰",
+      "turn_limit": 10,
+      "enemy": "zhoutai_e"
+    },
+    "jd_yanyu": {
+      "name": "水寨前·严舆",
+      "turn_limit": 10,
+      "enemy": "yanyu_e",
+      "art": "jd_yanbaihu"
+    },
+    "jd_yufan": {
+      "name": "会稽城门·虞翻",
+      "turn_limit": 8,
+      "enemy": "yufan_e",
+      "art": "jd_wanglang"
+    },
+    "xz_xiahoudun": {
+      "name": "下邳城外·夏侯惇殿后军",
+      "turn_limit": 12,
+      "enemy": "xiahoudun_e"
+    },
+    "xz_caobao": {
+      "name": "下邳街头·曹豹家兵",
+      "turn_limit": 8,
+      "enemy": "caobao_jiabing"
+    },
+    "xz_daofu": {
+      "name": "陶府后堂·刀斧手",
+      "turn_limit": 8,
+      "enemy": "taofu_daofu",
+      "art": "c6_fubing"
+    },
+    "xz_langqi": {
+      "name": "小沛城外·并州狼骑",
+      "turn_limit": 6,
+      "enemy": "langqi5",
+      "art": "bh_wolf2"
+    },
+    "xz_xianzhen": {
+      "name": "小沛城下·陷阵营兵",
+      "turn_limit": 8,
+      "enemy": "xianzhen5",
+      "art": "c6_xianzhen"
+    },
+    "xz_lvbu": {
+      "name": "小沛城门·吕布突围",
+      "turn_limit": 12,
+      "enemy": "lvbu_xiaopei"
+    },
+    "jx_wenpin": {"name": "淯水北岸·文聘", "turn_limit": 10, "enemy": "wenpin_e", "art": "jx_bubing"},
+    "jx_sufei": {"name": "汉水·苏飞", "turn_limit": 10, "enemy": "sufei_e", "art": "jx_huangzu"},
+    "jx_zhangyun": {"name": "襄阳城外·张允", "turn_limit": 10, "enemy": "zhangyun_e", "art": "jx_shuijun"},
+    "jx_zhuiji": {"name": "汉水北岸·追击溃兵", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
+    "jx_zhuiji_b": {"name": "汉水浅滩·黄祖死士", "turn_limit": 8, "enemy": "jing_gongshou", "art": "jx_gongshou"},
+    "jx_wubao": {"name": "新野·坞堡庄丁", "turn_limit": 8, "enemy": "zongzei_e", "art": "jx_zongzei"},
+    "jx_liupan": {"name": "新野·刘磐", "turn_limit": 10, "enemy": "liupan_e", "art": "jx_zongzei"},
+    "jx_xizuo": {"name": "宛城·荆州细作", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "jx_shaoka": {"name": "南下官道·荆州哨卡", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
+    "jx_menjin": {"name": "襄阳北门·盘查", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "jx_xunluo": {"name": "襄阳街头·蔡府巡卒", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "jx_yexi": {"name": "襄阳城外·蔡府部曲", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"}
+  }
+}

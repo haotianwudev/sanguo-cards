@@ -29,6 +29,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "tools"))
+from gamedata import load_cards
 PICS = ROOT / "pics"
 LOG = PICS / "ART-LOG.md"
 DATA = ROOT / "godot" / "data"
@@ -51,12 +53,12 @@ def infer_kind(key: str) -> str | None:
     if key in art_prompts.PORTRAITS:
         return "portrait"
     art = _art()
-    if key in json.loads((DATA / "cards.json").read_text("utf-8")).get("relics", {}):
+    if key in load_cards(DATA).get("relics", {}):
         return "relic"
     for kind, sec in SECTION.items():
         if sec and key in art.get(sec, {}):
             return kind
-    cards = json.loads((DATA / "cards.json").read_text("utf-8"))
+    cards = load_cards(DATA)
     if key in cards.get("scenarios", {}):
         return "battle"
     if key in cards.get("cards", {}) or key in cards.get("enemies", {}):
@@ -200,7 +202,7 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
     sec = SECTION[kind]
     e = cfg[sec].get(key, {})
     if kind == "portrait":
-        card = json.loads((DATA / "cards.json").read_text("utf-8")).get("cards", {}).get(key, {})
+        card = load_cards(DATA).get("cards", {}).get(key, {})
         rel = e.get("src") or f"source/{'soldiers' if card.get('rarity') == 'N' else 'generals'}/{key}.jpg"
         if e and "Gemini" not in str(e.get("license", "")):  # an old public-domain / stock picture is being replaced: its framing, licence and folder no longer apply
             rel = f"source/{'soldiers' if card.get('rarity') == 'N' else 'generals'}/{key}.jpg"

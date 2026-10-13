@@ -551,11 +551,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			if s["boss"] or s["elite"]:
 				save.run_bosses += 1
 			record(save, s["record_win"])
-			if s["elite"]:  # pick one of a few 宝物 (the map opens the pick)
+			if s["boss"]:  # only a boss drops 宝物: pick one of a few (the map opens the pick); elites and normal fights never do
 				save.offer = relic_offer(save, rng)
 				save.offer_kind = "relic"
-			elif rng.randf() < float(db.relic_pick["chest_chance"]):  # Rance X: chests hold items too
-				gained.append_array(_apply([{"relic": true}], q, save, rng)["gained"])
 	save.resolved = true
 	return gained
 

@@ -262,7 +262,7 @@ func test_the_bundled_font_has_every_character_the_game_prints() -> void:
 	## the font is a subset: new story text with a rare character needs `python tools/build_fonts.py`
 	var font: FontFile = load("res://data/fonts/body.ttf")
 	var missing := {}
-	for f in ["story.json", "cards.json", "interludes.json", "ui.json"]:
+	for f in ["story.json", "cards.json", "enemies.json", "scenarios.json", "skills.json", "relics.json", "battle.json", "interludes.json", "ui.json"]:
 		var text := FileAccess.get_file_as_string("res://data/" + f)
 		for i in text.length():
 			var c := text.unicode_at(i)

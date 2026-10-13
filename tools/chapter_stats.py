@@ -10,7 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 story = json.loads((ROOT / "godot/data/story.json").read_text("utf-8"))
 art = json.loads((ROOT / "pics/art.json").read_text("utf-8"))
 have_cg = set(art["cgs"])
-cards = json.loads((ROOT / "godot/data/cards.json").read_text("utf-8"))
+sys.path.insert(0, str(ROOT / "tools"))
+from gamedata import load_cards
+cards = load_cards()
 shuffle = lambda q: len(q.get("shuffle", []))
 
 

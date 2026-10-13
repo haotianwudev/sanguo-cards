@@ -129,7 +129,9 @@ def write_needs(pics: Path = PICS) -> None:
     NL = chr(10)
     cfg = json.loads((pics / "art.json").read_text("utf-8"))["portraits"]
     data = ROOT / "godot" / "data"
-    cards = json.loads((data / "cards.json").read_text("utf-8"))
+    cards = {}
+    for part in ("cards", "enemies", "scenarios", "skills", "relics", "battle"):
+        cards.update(json.loads((data / (part + ".json")).read_text("utf-8")))
     story = json.loads((data / "story.json").read_text("utf-8"))
     endings_cfg = json.loads((data / "endings.json").read_text("utf-8"))["endings"]
     names = {cid: c["name"] for cid, c in cards["cards"].items()}

@@ -407,11 +407,15 @@ func test_temple_upgrades_a_general() -> void:
 	check_eq(s.tier("zhouyu"), 1, "+3 copies: 铜 → 银")
 
 
-func test_elite_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
+func test_only_a_boss_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
 	Quests.begin(q, s)
-	s.square = "yaodao"
+	s.square = "yaodao"  # an elite: no 宝物
+	s.resolved = false
+	Quests.resolve(q, s, rng(0))
+	check(s.offer.is_empty() and s.relics.is_empty(), "an elite drops no 宝物")
+	s.square = "lair"  # the boss
 	s.resolved = false
 	Quests.resolve(q, s, rng(0))
 	check(s.offer_kind == "relic" and s.offer.size() == 3)

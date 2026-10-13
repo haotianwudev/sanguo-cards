@@ -5,6 +5,7 @@ extends RefCounted
 ## to lead it gets  AT = leader_mult × own AT + the rest of that troop's cards  (HP likewise).
 
 const DATA_DIR := "res://data"
+const DATA_PARTS := ["enemies.json", "scenarios.json", "skills.json", "relics.json", "battle.json"]  # split off cards.json (same top-level keys, merged on load)
 
 static var _inst: GameData
 
@@ -26,7 +27,7 @@ var scenarios: Dictionary  # id -> {id, name, turn_limit, enemy, art}
 var quests: Array  # [{id, title, start, squares: {id -> square}, soldier_pool, recruit_pool, event_pool}]
 var events: Dictionary  # random events for ？ squares: id -> {id, title, glyph, text, portraits, options}
 var relics: Dictionary  # 宝物: id -> {id, name, icon, rarity, desc, mods, after_win}
-var relic_pick: Dictionary  # elite reward: {n, weights by rarity}
+var relic_pick: Dictionary  # boss reward: {n, weights by rarity}
 var skill_budget: Dictionary  # what an attack skill of each AP cost should be worth (cards.json skill_budget; checked by the tests)
 var _raw_top: Dictionary = {}
 var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one picked per run)
@@ -50,6 +51,11 @@ static func read_json(path: String) -> Variant:
 
 func _load(dir: String) -> void:
 	var raw: Dictionary = read_json(dir + "/cards.json")
+	for part in DATA_PARTS:  # the rest of the game data lives in a few files beside it
+		var more: Dictionary = read_json(dir + "/" + part)
+		for k in more:
+			assert(not raw.has(k), "%s repeats %s" % [part, k])
+			raw[k] = more[k]
 	gacha = raw["gacha"]
 	battle = raw["battle"]
 	skill_budget = raw.get("skill_budget", {})
