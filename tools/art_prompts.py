@@ -1485,6 +1485,7 @@ CGS = {
     "ln_handhold": "虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外",
     "jz_end": "大雪官道上：主角身披鱼鳞甲与雪白貂裘、手握白蜡杆长枪居中，赵云银甲白马在左，郭嘉车中抿酒在右，张夫人怀抱账本骑矮脚马跟在队伍中，身后铁骑义勇新军相随",
     "c9_letter": "襄阳府中冬夜的灯下：吴夫人（成年女性，温柔慈和的中年贵妇）手捧一封字迹又大又歪的家书，看着看着笑了；少年将军孙策探头凑过来想看，周瑜站在一旁，手里的账本合着；窗外汉江上停着荆州水师的战船",
+    "c9_zhoujia": "the gate of the Zhou clan manor in Shu county after a three-day siege, the gate flung open: white-haired Zhou clan elders stumbling out in tears; the stately old Lady Zhou (Zhou Yu's mother) holding the hero's hand and looking him up and down; Zhou Yu (young man in scholar robes) standing behind with an account book under his arm, a little embarrassed; a clansman presenting the family genealogy scroll whose last bamboo slip is freshly cut; boats and a granary behind the walls, besiegers' abandoned banners on the ground; the hero in plain everyday robes",
     "c9_granary": "舒县周家的大粮仓前，仓门上贴着黄色的「仲」字封条；周瑜（二十出头，俊秀书生气的年轻将军）背对众人站在仓门前，手里的账本第一次合着；主角和孙策站在他身后不远处；远处是被搜刮一空的庄子",
     "c9_luxun": "舒城陆家旧宅，半边院墙被火烧得焦黑；门槛上坐着一个十四五岁的少年陆逊（清瘦的孩子，衣衫朴素，只画孩子该有的样子），一言不发地望着江上的荆州战船；门边停着一车粮食；远处船头，主角回头望着他",
     "c9_lusu": "居巢金色的稻田边，两座高大的圆形粮囤：年轻豪强鲁肃（二十多岁，宽厚老实的面相，朴素衣衫，挽着裤腿，脚上沾着泥）笑着伸手指向其中一座粮囤；主角一脸震惊；周瑜在一旁拿着账本，想记又停住了笔",
