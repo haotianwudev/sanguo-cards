@@ -422,6 +422,7 @@ func test_every_lvbu_fight_uses_the_lose_coefficient() -> void:
 				continue
 			s.square = sid
 			check_eq(Quests.enemy_scale(s), lose, "%s / %s" % [q["id"], sid])
+			check(sq["lose_goto"] != "", "losing to 吕布 is not the end: %s / %s carries on" % [q["id"], sid])
 			seen_fights += 1
 	check(seen_fights >= 3, "found the 吕布 fights (%d)" % seen_fights)
 
