@@ -1641,6 +1641,7 @@ EVENTS = {
     "risk": "a small boat in thick river fog, an old boatman squatting at the bow smoking a long pipe, dangerous rapids ahead",
     "temple": "a crumbling mountain temple with a noseless earth-god statue, half a stick of incense still smoking in the censer",
     "grand_chest": "a big gilded chest carved with the character 袁 in an army camp, a pompous lord forcing a smile",
+    "huangxu_sick": "a quiet army camp at dusk: Huang Zhong (middle-aged, stout, yellow leather armour with a blue war-robe) bowing deeply with both hands out, a heavy bow offered in thanks; before him Hua Tuo (lean middle-aged doctor, medicine box painted 沛国华佗) shouldering his box; in the background Huang Xu (pale teen in a plain robe, just out of his sickbed) sitting up on a cot, a little colour back in his face; the hero in plain everyday robes smiling",
     "huatuo": "a lean middle-aged doctor treating a village woman at a roadside medicine stall, his box painted 沛国华佗",
     "yuji": "a Taoist in white blocking the road, waving a banner reading 于吉仙师 符水治百病, followers kneeling",
     "merchant": "a plump merchant with a donkey cart piled with exotic goods, spreading his arms in welcome",
