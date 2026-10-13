@@ -612,3 +612,8 @@
 - [x] 2026-10-12 cg `c7_neiying` ← c7_neiying_1791849934920.jpg · ok
 - [x] 2026-10-12 cg `c6_ruin` ← c6_ruin_1791849965253.jpg · ok
 - [x] 2026-10-12 cg `c6_rebuild` ← c6_rebuild_1791849996440.jpg · ok
+- [x] 2026-10-12 cg `c8_fubing` ← c8_fubing_1791857041833.jpg · ok
+- [x] 2026-10-12 cg `c8_qibing` ← c8_qibing_1791857068485.jpg · ok
+- [x] 2026-10-12 cg `c8_caihe` ← c8_caihe_1791857097094.jpg · ok
+- [x] 2026-10-12 cg `c8_zhangyun` ← c8_zhangyun_1791857132604.jpg · ok
+- [x] 2026-10-12 cg `e_huangxu_sick` ← e_huangxu_sick_1791857165874.jpg · ok

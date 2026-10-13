@@ -4506,6 +4506,26 @@
     "c6_rebuild": {
       "src": "source/cg/c6_rebuild.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c8_fubing": {
+      "src": "source/cg/c8_fubing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_qibing": {
+      "src": "source/cg/c8_qibing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_caihe": {
+      "src": "source/cg/c8_caihe.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c8_zhangyun": {
+      "src": "source/cg/c8_zhangyun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_huangxu_sick": {
+      "src": "source/cg/e_huangxu_sick.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

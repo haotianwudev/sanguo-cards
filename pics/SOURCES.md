@@ -731,3 +731,8 @@
 | `cg:c7_neiying` | source/cg/c7_neiying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c6_ruin` | source/cg/c6_ruin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c6_rebuild` | source/cg/c6_rebuild.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_fubing` | source/cg/c8_fubing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_qibing` | source/cg/c8_qibing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_caihe` | source/cg/c8_caihe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_zhangyun` | source/cg/c8_zhangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_huangxu_sick` | source/cg/e_huangxu_sick.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

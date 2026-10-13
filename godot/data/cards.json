@@ -18,26 +18,70 @@
     "_soldier_decay": "duplicate soldier cards of a type: copy i (0 = the first) counts floor + (1 - floor) × decay^i — a smooth fall that never goes below the floor (decay 0.8, floor 0.5: 1, 0.90, 0.82, 0.76, 0.70, 0.66 … → 0.5)",
     "_rarity": "稀有度由卡面「攻 + 血」的总和决定（铜卡的数，升级再乘铜 / 银 / 金 / 神的倍率）：N 兵卡 80~99，精英兵 100~124（≈ C），C 杂将 100~124，R 125~149，SR 150~174，SSR 175~200（满）。主公起手卡是最弱的 R：血 65 攻 60。血和攻各自都在 40~100 之间（最普通的兵 40 / 40，满是 100 / 100）；武将攻高于血，文官（策士、后勤）血高于攻。一个测试会核对每张卡的总和落在自己稀有度的区间里。",
     "rarity_bands": {
-      "N": [80, 99],
-      "C": [100, 124],
-      "R": [125, 149],
-      "SR": [150, 174],
-      "SSR": [175, 200]
+      "N": [
+        80,
+        99
+      ],
+      "C": [
+        100,
+        124
+      ],
+      "R": [
+        125,
+        149
+      ],
+      "SR": [
+        150,
+        174
+      ],
+      "SSR": [
+        175,
+        200
+      ]
     },
-    "elite_soldier_band": [100, 124],
+    "elite_soldier_band": [
+      100,
+      124
+    ],
     "_versions": "一个人物有多张卡时的版本表（按成长顺序）：第一张一定是 R，之后的版本 SR / SSR 逐步更强（以后再设计）。现在只有一张卡的名将，也先放在 R，给后面的版本留出空间。一个测试核对：表里每个 id 存在、第一张是 R、稀有度只升不降、同属一个人物。",
     "versions": {
-      "sunce": ["sunce", "sunce_bawang", "sunce_zhong"],
-      "zhouyu": ["zhouyu", "zhouyu_chibi"],
-      "luxun": ["luxun_young", "luxun"],
-      "zhaoyun": ["zhaoyun"],
-      "guanyu": ["guanyu"],
-      "guojia": ["guojia"],
-      "caocao": ["caocao"],
-      "taishici": ["taishici"],
-      "sunshangxiang": ["sunshangxiang"],
-      "jiangwei": ["jiangwei"],
-      "diaochan": ["diaochan"]
+      "sunce": [
+        "sunce",
+        "sunce_bawang",
+        "sunce_zhong"
+      ],
+      "zhouyu": [
+        "zhouyu",
+        "zhouyu_chibi"
+      ],
+      "luxun": [
+        "luxun_young",
+        "luxun"
+      ],
+      "zhaoyun": [
+        "zhaoyun"
+      ],
+      "guanyu": [
+        "guanyu"
+      ],
+      "guojia": [
+        "guojia"
+      ],
+      "caocao": [
+        "caocao"
+      ],
+      "taishici": [
+        "taishici"
+      ],
+      "sunshangxiang": [
+        "sunshangxiang"
+      ],
+      "jiangwei": [
+        "jiangwei"
+      ],
+      "diaochan": [
+        "diaochan"
+      ]
     },
     "chest_base": 0.5,
     "chest_overkill": 0.5,
@@ -574,8 +618,8 @@
       "rarity": "N",
       "elite": true,
       "troop": "infantry",
-      "hp": 46,
-      "at": 56,
+      "hp": 64,
+      "at": 60,
       "weight": 1
     },
     "shuzuo": {
@@ -597,10 +641,10 @@
     },
     "lusu": {
       "name": "鲁肃",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
       "hp": 90,
-      "at": 68,
+      "at": 58,
       "skills": [
         "zhiqun"
       ],
@@ -608,10 +652,10 @@
     },
     "zhangzhongjing": {
       "name": "张仲景",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 92,
-      "at": 62,
+      "hp": 100,
+      "at": 40,
       "skills": [
         "shanghan",
         "jiedu"
@@ -633,8 +677,8 @@
       "name": "张昭",
       "rarity": "R",
       "troop": "logistics",
-      "hp": 67,
-      "at": 58,
+      "hp": 89,
+      "at": 50,
       "skills": [
         "neishi"
       ],
@@ -656,7 +700,7 @@
       "name": "甄宓",
       "rarity": "SR",
       "troop": "logistics",
-      "hp": 88,
+      "hp": 95,
       "at": 66,
       "skills": [
         "luoshen"
@@ -920,14 +964,14 @@
       "name": "周仓",
       "rarity": "C",
       "troop": "bandit",
-      "hp": 49,
+      "hp": 54,
       "at": 68
     },
     "liaohua": {
       "name": "廖化",
       "rarity": "C",
       "troop": "infantry",
-      "hp": 55,
+      "hp": 56,
       "at": 64,
       "skills": [
         "jiangling"
@@ -945,38 +989,38 @@
       "name": "王平",
       "rarity": "C",
       "troop": "spear",
-      "hp": 55,
+      "hp": 60,
       "at": 59
     },
     "lidian": {
       "name": "李典",
       "rarity": "C",
       "troop": "spear",
-      "hp": 55,
-      "at": 61,
+      "hp": 60,
+      "at": 63,
       "scope": "north"
     },
     "jiangqin": {
       "name": "蒋钦",
       "rarity": "C",
       "troop": "archer",
-      "hp": 44,
+      "hp": 54,
       "at": 67,
       "scope": "south"
     },
     "zhujun": {
       "name": "朱儁",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
-      "hp": 82,
+      "hp": 71,
       "at": 78,
       "pool": false
     },
     "huangfusong": {
       "name": "皇甫嵩",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 84,
+      "hp": 74,
       "at": 74,
       "pool": false
     },
@@ -984,7 +1028,7 @@
       "name": "荀攸",
       "rarity": "SR",
       "troop": "strategist",
-      "hp": 88,
+      "hp": 93,
       "at": 76,
       "pool": false,
       "skills": [
@@ -993,9 +1037,9 @@
     },
     "zhongyao": {
       "name": "钟繇",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 90,
+      "hp": 80,
       "at": 66,
       "pool": false
     },
@@ -1004,7 +1048,7 @@
       "rarity": "SR",
       "troop": "infantry",
       "hp": 80,
-      "at": 82,
+      "at": 72,
       "pool": false
     },
     "caiwenji": {
@@ -1031,10 +1075,10 @@
     },
     "qiaorui": {
       "name": "桥蕤",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
       "hp": 62,
-      "at": 74,
+      "at": 62,
       "pool": false
     },
     "leibo": {
@@ -3101,9 +3145,37 @@
       "elite": true,
       "weight": 1
     },
-    "liubiao": {"name": "刘表·荆州牧", "rarity": "SR", "troop": "logistics", "hp": 92, "at": 62, "pool": false},
-    "zhangyun": {"name": "张允·水军督将", "rarity": "R", "troop": "infantry", "hp": 62, "at": 74, "pool": false},
-    "sufei": {"name": "苏飞·黄祖部将", "rarity": "R", "troop": "infantry", "hp": 62, "at": 74, "pool": false},
-    "liupan": {"name": "刘磐·刘表之侄", "rarity": "SR", "troop": "cavalry", "hp": 66, "at": 96, "pool": false}
+    "liubiao": {
+      "name": "刘表·荆州牧",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 92,
+      "at": 62,
+      "pool": false
+    },
+    "zhangyun": {
+      "name": "张允·水军督将",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 62,
+      "at": 74,
+      "pool": false
+    },
+    "sufei": {
+      "name": "苏飞·黄祖部将",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 62,
+      "at": 74,
+      "pool": false
+    },
+    "liupan": {
+      "name": "刘磐·刘表之侄",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "hp": 66,
+      "at": 96,
+      "pool": false
+    }
   }
 }
