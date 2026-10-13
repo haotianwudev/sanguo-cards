@@ -317,5 +317,8 @@
   "zhangyun": {"file": "zhangyun.jpg", "face": [0.51, 0.23], "head": 0.22},
   "sufei": {"file": "sufei.jpg", "face": [0.5, 0.28], "head": 0.23},
   "liupan": {"file": "liupan.jpg", "face": [0.51, 0.28], "head": 0.22},
-  "sunce_bawang": {"file": "sunce_bawang.jpg", "face": [0.5, 0.28], "head": 0.24}
+  "sunce_bawang": {"file": "sunce_bawang.jpg", "face": [0.5, 0.28], "head": 0.24},
+  "caihe": {"file": "caihe.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "caifu_bing": {"file": "caifu_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "caifu_qi": {"file": "caifu_qi.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

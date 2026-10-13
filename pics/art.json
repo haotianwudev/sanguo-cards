@@ -2862,6 +2862,33 @@
         0.28
       ],
       "head": 0.24
+    },
+    "caihe": {
+      "src": "source/generals/caihe.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "caifu_bing": {
+      "src": "source/soldiers/caifu_bing.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "caifu_qi": {
+      "src": "source/soldiers/caifu_qi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -3426,6 +3453,26 @@
     },
     "c6_yulin": {
       "src": "source/battles/c6_yulin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c7_fengfuren": {
+      "src": "source/battles/c7_fengfuren.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_b_fubing": {
+      "src": "source/battles/jx_b_fubing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_b_qibing": {
+      "src": "source/battles/jx_b_qibing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_b_caihe": {
+      "src": "source/battles/jx_b_caihe.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jx_b_zhangyun": {
+      "src": "source/battles/jx_b_zhangyun.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },

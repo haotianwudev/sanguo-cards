@@ -617,3 +617,11 @@
 - [x] 2026-10-12 cg `c8_caihe` ← c8_caihe_1791857097094.jpg · ok
 - [x] 2026-10-12 cg `c8_zhangyun` ← c8_zhangyun_1791857132604.jpg · ok
 - [x] 2026-10-12 cg `e_huangxu_sick` ← e_huangxu_sick_1791857165874.jpg · ok
+- [x] 2026-10-12 battle `c7_fengfuren` ← c7_fengfuren.jpg · ok
+- [x] 2026-10-12 battle `jx_b_fubing` ← jx_b_fubing.jpg · ok
+- [x] 2026-10-12 battle `jx_b_qibing` ← jx_b_qibing.jpg · ok
+- [x] 2026-10-12 battle `jx_b_caihe` ← jx_b_caihe.jpg · ok
+- [x] 2026-10-12 battle `jx_b_zhangyun` ← jx_b_zhangyun.jpg · ok
+- [x] 2026-10-12 portrait `caihe` ← caihe.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-12 portrait `caifu_bing` ← caifu_bing.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-12 portrait `caifu_qi` ← caifu_qi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

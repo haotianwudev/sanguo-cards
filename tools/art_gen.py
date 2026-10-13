@@ -148,7 +148,7 @@ def generate_image_atlas(
 
     poll_url = f"https://api.atlascloud.ai/api/v1/model/prediction/{pred_id}"
     poll_req = urllib.request.Request(poll_url, headers=headers)
-    for _ in range(60):
+    for _ in range(150):
         time.sleep(2)
         with urllib.request.urlopen(poll_req) as resp:
             poll_res = json.loads(resp.read().decode("utf-8"))
@@ -162,7 +162,7 @@ def generate_image_atlas(
             if status in ("failed", "error"):
                 raise RuntimeError(f"Prediction failed: {p_data.get('error', poll_res)}")
 
-    raise TimeoutError(f"Generation timed out after 120s: {pred_id}")
+    raise TimeoutError(f"Generation timed out after 300s: {pred_id}")
 
 
 def main() -> None:

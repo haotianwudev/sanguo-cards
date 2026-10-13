@@ -322,6 +322,9 @@
 | `sufei` | source/generals/sufei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `liupan` | source/generals/liupan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunce_bawang` | source/generals/sunce_bawang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caihe` | source/generals/caihe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caifu_bing` | source/soldiers/caifu_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `caifu_qi` | source/soldiers/caifu_qi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -462,6 +465,11 @@
 | `battle:jd_wanglang` | source/battles/jd_wanglang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jd_jinfan` | source/battles/jd_jinfan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:c6_yulin` | source/battles/c6_yulin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:c7_fengfuren` | source/battles/c7_fengfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jx_b_fubing` | source/battles/jx_b_fubing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jx_b_qibing` | source/battles/jx_b_qibing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jx_b_caihe` | source/battles/jx_b_caihe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jx_b_zhangyun` | source/battles/jx_b_zhangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
