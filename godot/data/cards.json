@@ -1990,6 +1990,14 @@
       "weight": 1,
       "scope": "south"
     },
+    "huangxu": {
+      "name": "黄叙·少年射手",
+      "rarity": "C",
+      "troop": "archer",
+      "hp": 50,
+      "at": 64,
+      "pool": false
+    },
     "caihe": {
       "name": "蔡和·连弩统领",
       "rarity": "R",
