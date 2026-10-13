@@ -1992,10 +1992,10 @@
     },
     "huangxu": {
       "name": "黄叙·少年射手",
-      "rarity": "C",
+      "rarity": "SR",
       "troop": "archer",
-      "hp": 50,
-      "at": 64,
+      "hp": 70,
+      "at": 88,
       "pool": false
     },
     "caihe": {
