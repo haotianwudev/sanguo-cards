@@ -4494,6 +4494,18 @@
     "c6_sneak": {
       "src": "source/cg/c6_sneak.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c7_neiying": {
+      "src": "source/cg/c7_neiying.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c6_ruin": {
+      "src": "source/cg/c6_ruin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c6_rebuild": {
+      "src": "source/cg/c6_rebuild.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

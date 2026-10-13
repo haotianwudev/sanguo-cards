@@ -728,3 +728,6 @@
 | `cg:c5_caiyong` | source/cg/c5_caiyong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c5_wangyun` | source/cg/c5_wangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c6_sneak` | source/cg/c6_sneak.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c7_neiying` | source/cg/c7_neiying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c6_ruin` | source/cg/c6_ruin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c6_rebuild` | source/cg/c6_rebuild.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
