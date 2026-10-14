@@ -1,6 +1,7 @@
 extends SceneTree
 ## Balance simulation (not a test): plays whole first-lap runs with the bot — real quest flow, real fights, the wear carried between
 ## battles, the best chest card taken, 战功 spent on 点化 between chapters — and reports per chapter and tier how the fights go.
+##   (SIM_PATH=prologue,taodong,yuxi,dongui,jingxiang,huainan_s plays just those chapters, granting the flags they need)
 ##   (knobs: SIM_STRENGTH SIM_BASE SIM_EXPONENT SIM_OFFSET SIM_ELITE SIM_BOSS)
 ##   SIM_RUNS=20 SIM_ROUTE=south godot --headless --path godot --script res://tests/sim_balance.gd
 ## Reading it: win% (per attempt), hp% = the party's HP left when a won fight ends, wear% = HP already lost going in,
@@ -16,6 +17,7 @@ var started_by_lap := {}
 var stuck_at := ""
 var giveup := int(OS.get_environment("SIM_GIVEUP")) if OS.get_environment("SIM_GIVEUP") != "" else 12  # losses in a row on one square before the run counts as not cleared
 var order: Array = []
+var path: Array = Array(OS.get_environment("SIM_PATH").split(",")) if OS.get_environment("SIM_PATH") != "" else []  # e.g. prologue,taodong,yuxi,dongui,jingxiang,huainan_s
 
 
 func _init() -> void:
@@ -48,6 +50,14 @@ func _run(seed_value: int, route: String) -> void:
 	var max_laps := int(OS.get_environment("SIM_LAPS")) if OS.get_environment("SIM_LAPS") != "" else 1
 	while guard_q < 14 * max_laps:
 		guard_q += 1
+		for qid in path:  # SIM_PATH: the chapters to play in order — the flags the next one asks for are granted, so the bot's random walk can't lock it out
+			if not s.quests_cleared.has(qid):
+				for q2 in db.quests:
+					if q2["id"] == qid:
+						for line in Quests._as_list(q2.get("requires", "")):
+							if not s.flags.has(line):
+								s.flags.append(line)
+				break
 		var q: Variant = Quests.current_quest(s)
 		if q == null:
 			finished += 1
