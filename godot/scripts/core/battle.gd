@@ -76,12 +76,13 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	e["magic_resist"] = minf(0.8, float(e["magic_resist"]) + float(afx.get("magic_resist", 0.0)))
 	e["actions"] = int(e["actions"]) + int(afx.get("actions", 0))
 	var tough := (1.0 + float(mods.get("enemy", 0.0))) * float(mods.get("enemy_scale", 1.0))
+	var tough_at := sqrt(tough) if bool(mods.get("enemy_at_root", false)) else tough  # 必败 fights: attack grows only by the root of the coefficient
 	var unit: Dictionary = b.db.battle.get("unit", {"hp": 1.0, "at": 1.0})  # the enemy table is in the old magnitude; cards are in card-face numbers
 	e["hp"] = float(e["hp"]) / float(unit["hp"])
 	e["at"] = float(e["at"]) / float(unit["at"])
 	var max_hp := int(round(e["hp"] * float(b.db.battle.get("enemy_hp_mult", 1.0)) * float(b.db.battle.get("hp_mult", 1.0)) * tough * (1.0 + float(afx.get("hp", 0.0)))
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
-	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * float(b.db.battle.get("attack_mult", 1.0)) * tough * (1.0 + float(afx.get("at", 0.0))),
+	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * float(b.db.battle.get("attack_mult", 1.0)) * tough_at * (1.0 + float(afx.get("at", 0.0))),
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
 		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "charging": "", "charge_ready": false, "used": []}
 	b.party_burn = {"dmg": 0, "turns": 0}

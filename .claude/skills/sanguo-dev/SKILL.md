@@ -230,7 +230,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   SSR at 铜 ≈ C at 金. Soldier copies join the unit as members and fall off smoothly: copy i counts `floor + (1-floor)·decay^i` (`gacha.soldier_decay` 0.8, `soldier_decay_floor` 0.5 → 1, 0.9, 0.82, 0.76 … never below 0.5). A hero who will have several cards (`gacha.versions`: 孙策 / 周瑜 / 赵云 / 郭嘉 / 关羽 / 诸葛亮 / 曹操 …) starts at **R**; later versions climb to SR / SSR (a test checks the table). A card with `first_win` (吕布) is won only by beating its owner: the first time ever (not owned, not in `seen`) it is always in the chest; afterwards it is a normal history-pool card. A new card: pick the band for its rarity, split it
   by role, keep each number 40..100. In battle the enemy table (`enemies`) keeps its old magnitude and is converted on entry (`battle.unit` hp ÷ 9, at ÷ 1.4),
   every damage is × `battle.damage_mult` (0.1556), and enemies get one more coefficient per tier (`battle.enemy_coef`: normal 1 / elite 1.5 / boss 2,
-  必败 `lose_goto` fights 4 — hp and attack both; `scaling.tier` is 1 so the two do not stack).
+  必败 `lose_goto` fights (and every 吕布 fight) 8 — hp takes the whole coefficient, attack only its square root (`enemy_at_root`); `scaling.tier` is 1 so the two do not stack).
 - **Enemy**: `hp, at, actions, resists, portrait, card (its chest may hold it: 25%, bosses/elites 50%), moves[]` — move
   `power (0 = no hit), weight (0 = only after a charge), confuse, rage, heal, ap_drain, burn_party, pierce,
   charge (wind-up announced a turn ahead), when: "half", once`. Make fights strong; make their cards modest.

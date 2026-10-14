@@ -284,6 +284,27 @@ static func _power_base(q: Dictionary) -> Dictionary:
 	return out
 
 
+static func _is_lose_fight(sq: Dictionary, foe_card: String) -> bool:
+	var db := GameData.get_db()
+	return (sq["lose_goto"] != "" and not sq["beatable"]) or (foe_card != "" and db.cards[foe_card].get("first_win", false))
+
+
+static func enemy_at_root(save: SaveData) -> bool:
+	## true on a 必败 fight (and any fight against 吕布): its coefficient multiplies hp in full but attack only by its square root
+	var db := GameData.get_db()
+	for q in db.quests:
+		if q["id"] != save.quest:
+			continue
+		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		if sq.is_empty():
+			return false
+		var bid: String = sq["battle"] if sq["battle"] != "" else str(save.event_battle.get("battle", ""))
+		if bid == "" or not db.scenarios.has(bid):
+			return false
+		return _is_lose_fight(sq, str(db.enemies[db.scenarios[bid]["enemy"]].get("card", "")))
+	return false
+
+
 static func enemy_scale(save: SaveData) -> float:
 	## the chapter / tier coefficient of the fight on the current square (see _scale_for); 1.0 off a battle square
 	var db := GameData.get_db()
@@ -301,7 +322,7 @@ static func enemy_scale(save: SaveData) -> float:
 		var tier := "boss" if sq["boss"] else ("elite" if sq["elite"] else "normal")
 		var coef: Dictionary = db.battle.get("enemy_coef", {})  # battle.enemy_coef: one more multiplier per tier on hp and attack
 		var foe_card: String = str(db.enemies[db.scenarios[bid]["enemy"]].get("card", ""))
-		if (sq["lose_goto"] != "" and not sq["beatable"]) or (foe_card != "" and db.cards[foe_card].get("first_win", false)):
+		if _is_lose_fight(sq, foe_card):
 			return float(coef.get("lose", 1.0))  # an unwinnable showpiece, and every fight against 吕布 (a first_win card), is tuned by hand and may be as strong as it likes
 		return _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"]))) * float(coef.get(tier, 1.0))
 	return 1.0
@@ -311,7 +332,7 @@ static func mods(save: SaveData) -> Dictionary:
 	## Battle modifiers for this run: every 宝物 carried by a unit, plus 险.
 	var db := GameData.get_db()
 	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"]) + ramp(save),
-		"enemy_scale": enemy_scale(save)}
+		"enemy_scale": enemy_scale(save), "enemy_at_root": enemy_at_root(save)}
 	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
 	if save.fate != "" and db.fates.has(save.fate):
 		sources.append(db.fates[save.fate])  # 天命 of this run
