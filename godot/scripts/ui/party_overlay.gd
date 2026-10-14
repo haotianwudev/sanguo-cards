@@ -97,6 +97,7 @@ func _ready() -> void:
 	auto.custom_minimum_size = Vector2(180, 50)
 	auto.size = Vector2(180, 50)
 	auto.pressed.connect(func():
+		Game.save.lord_form_pick = Game.save.auto_lord_pick()  # the lord is a card too: the strongest one leads
 		Game.save.party = Game.save.auto_party()
 		_msg.text = "已按战力自动编成。"
 		_rebuild())

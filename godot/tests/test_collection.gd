@@ -818,3 +818,14 @@ func test_people_with_several_cards_start_at_r_and_only_climb() -> void:
 				check_eq(db.cards[ids[i]]["rarity"], "R", "%s: the first card is R" % who)
 			check(r >= last, "%s: versions only climb (%s)" % [who, ids[i]])
 			last = r
+
+
+func test_auto_party_picks_the_strongest_lord_card() -> void:
+	var s := SaveData.new()
+	s.lord_forms = ["lord_south_armor"]
+	s.lord_form_pick = "base"
+	var pick := s.auto_lord_pick()
+	for card in s.lord_cards():
+		var f := s.lord_with_form(SaveData.lord_card_form(card))
+		var best := s.lord_with_form("" if pick == "base" else pick)
+		check(best["at"] + best["hp"] / 5.0 >= f["at"] + f["hp"] / 5.0 - 0.01, "%s not stronger than %s" % [card, pick])

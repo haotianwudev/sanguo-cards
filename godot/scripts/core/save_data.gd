@@ -900,6 +900,20 @@ static func leader_power(ld: Dictionary) -> int:
 	return int(round(ld["at"] + ld["hp"] / 5.0))
 
 
+func auto_lord_pick() -> String:
+	## the strongest lord card this run holds, as a lord_form_pick ("base" = the plain lord)
+	var best := "base"
+	var best_power := -1
+	for card in lord_cards():
+		var fid := lord_card_form(card)
+		var f := lord_with_form(fid)
+		var power := int(round(f["at"] + f["hp"] / 5.0))
+		if power > best_power:
+			best_power = power
+			best = fid if fid != "" else "base"
+	return best
+
+
 func auto_party() -> Array:
 	## Best leader per troop (the strongest card leads), then the strongest troops that fit.
 	var ranked := owned_ids()
