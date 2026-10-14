@@ -149,7 +149,7 @@ func _load(dir: String) -> void:
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
 				"cards": s.get("cards", []), "relics": s.get("relics", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
-				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""),
+				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""), "beatable": s.get("beatable", false),
 				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
 				"record_lose": s.get("record_lose", ""), "requires": s.get("requires", ""), "unless": s.get("unless", ""),
 				"soldier_pool": s.get("soldier_pool", []), "recruit_pool": s.get("recruit_pool", []), "cg": s.get("cg", ""), "prompt": s.get("prompt", ""), "card_unless": s.get("card_unless", {}), "ghost": s.get("ghost", false), "ghost_requires": s.get("ghost_requires", "")}

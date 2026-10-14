@@ -589,7 +589,8 @@ func test_chapter_two_follows_the_dongbai_story() -> void:
 	var sq: Dictionary = q["squares"]
 	check_eq(q["start"], "set_out")
 	check(sq["set_out"]["cards"].has("sunce") and sq["set_out"]["cards"].has("zhouyu"), "both brothers now")
-	check(sq["huaxiong"]["boss"] and sq["huaxiong"]["lose_goto"] == "", "华雄 is a boss you can lose to, not a scripted defeat")
+	check_eq(sq["huaxiong"]["lose_goto"], "jian_hua")
+	check(sq["huaxiong"]["boss"] and sq["huaxiong"]["beatable"], "华雄 is a boss with normal scaling; losing still brings 孙坚 in")
 	check(sq["dongbai"]["elite"], "董白 is an elite fight")
 	var fate: Array = sq["fate"]["choose"].map(func(o): return o["goto"])
 	check_eq(fate, ["give", "keep"])

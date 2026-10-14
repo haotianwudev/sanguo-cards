@@ -273,7 +273,7 @@ static func _power_base(q: Dictionary) -> Dictionary:
 		return _power_cache[raw["id"]]
 	var by_tier := {"normal": [], "elite": [], "boss": []}
 	for s in raw["squares"].values():
-		if s["type"] == "battle" and s["battle"] != "" and s["lose_goto"] == "":
+		if s["type"] == "battle" and s["battle"] != "" and (s["lose_goto"] == "" or s["beatable"]):
 			by_tier["boss" if s["boss"] else ("elite" if s["elite"] else "normal")].append(_enemy_power(s["battle"]))
 	var out := {}
 	for tier in by_tier:
@@ -301,7 +301,7 @@ static func enemy_scale(save: SaveData) -> float:
 		var tier := "boss" if sq["boss"] else ("elite" if sq["elite"] else "normal")
 		var coef: Dictionary = db.battle.get("enemy_coef", {})  # battle.enemy_coef: one more multiplier per tier on hp and attack
 		var foe_card: String = str(db.enemies[db.scenarios[bid]["enemy"]].get("card", ""))
-		if sq["lose_goto"] != "" or (foe_card != "" and db.cards[foe_card].get("first_win", false)):
+		if (sq["lose_goto"] != "" and not sq["beatable"]) or (foe_card != "" and db.cards[foe_card].get("first_win", false)):
 			return float(coef.get("lose", 1.0))  # an unwinnable showpiece, and every fight against 吕布 (a first_win card), is tuned by hand and may be as strong as it likes
 		return _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"]))) * float(coef.get(tier, 1.0))
 	return 1.0

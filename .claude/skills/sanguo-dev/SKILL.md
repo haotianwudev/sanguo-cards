@@ -241,7 +241,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   square carrying the `relics` field instead, both branches rejoining the next common square).
 - **Local pools (按地点的池子)**: a `treasure` / `recruit` square can carry its own `soldier_pool` / `recruit_pool` (card ids) — `Quests.pools(q, save, sq)` lets the square's list win over the chapter's, a chest then holds only that place's soldiers (`SaveData.chest_offer`) and a recruit square shows `gacha.offer_size` random cards of its own list. They travel with a shuffle (`CONTENT`). Keep it to at most two soldier pools and two recruit pools per chapter (第五章: 宛城·汉水·新野 / 襄阳; 第三章: 鲁阳 / 洛阳·长安) — squares of one place share the same list; the stats table counts the distinct lists; a square with no list uses the chapter's pools as before. `test_a_squares_own_pools_...` checks the ids.
 - **Quest** (`story.json` quests): squares `{x, y, type, label, next, text, portraits, cards, relics, choose, battle, boss,
-  elite, ambush, event, lose_goto}`; types `event choose battle treasure recover recruit mystery`. Moves only go right,
+  elite, ambush, event, lose_goto, beatable}` (beatable: a lose_goto fight that is still a real, normally scaled fight — 华雄); types `event choose battle treasure recover recruit mystery`. Moves only go right,
   one row at a time (a test checks). `soldier_pool`, `recruit_pool`, `event_pool`, `shuffle` (groups that trade
   contents each run). A run = one attempt: losing restarts it (cards, choices, 难度 kept; 宝物, 险, layout reset).
   A quest itself can carry `requires`/`unless` (checked against `save.flags` only, i.e. earlier *completed* chapters —
