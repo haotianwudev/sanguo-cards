@@ -30,7 +30,9 @@ def test_art_config_builds_every_entry(tmp_path):
     from sanguo import art
 
     cfg = json.loads((art.PICS / "art.json").read_text("utf-8"))["portraits"]
-    index = portrait._index()
+    # sanguo-art writes the Godot project's index (art.OUT); the old terminal game's portrait._index() is a frozen subset
+    raw = json.loads((Path(art.OUT) / "portraits.json").read_text("utf-8"))
+    index = {k: v for k, v in raw.items() if not k.startswith("_")}
     assert set(k for k in cfg if not k.startswith("_")) == set(index)
     for k, e in cfg.items():
         if not k.startswith("_"):
