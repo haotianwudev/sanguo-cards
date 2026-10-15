@@ -388,7 +388,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 		check_eq(p[-1], "hn_end")
 		for sid in ["hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
 			check(not p.has(sid), "刘晔 route never reaches " + sid)
-		for c in ["lusu", "chenwu", "liuye"]:
+		for c in ["lusu", "zhugejin", "chenwu", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
 		check(not s.has_card("daqiao") and not p.has("hn_wedding"), "the double wedding (and 大乔) wait for 第七章")
 		for r in ["wentai_shu", "zhou_pu", "weixi"]:
@@ -848,7 +848,7 @@ func ch7s_save(flags := []) -> SaveData:
 	var s := ch6s_save()
 	s.flags += [E10, "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：喜期将近"] + flags
 	s.quests_cleared.append("huainan_s")
-	for c in ["liuye", "lusu", "chenwu"]:
+	for c in ["liuye", "lusu", "zhugejin", "chenwu"]:
 		s.grant_card(c)
 	return s
 
@@ -958,7 +958,7 @@ func test_south_chapter8_without_zhugejin_ends_in_ending_twelve() -> void:
 		for sid in ["m8_jin", "m8_nanyang_j", "m8_jin_read", "m8_baihe", "m8_xiongdi", "m8_bazhen", "m8_end"]:
 			check(not p.has(sid), "曲误 route never reaches " + sid)
 		check_eq(p[-1], "m8_quwu")
-		check(not s.has_card("zhugejin"))
+		check(not s.run_records.has("诸葛瑾：留下"), "诸葛瑾 goes off to 荆州 and misses 白河")
 		for line in ["南线：洛阳陷落", "孙坚战死", "易帜为吴", E12]:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
@@ -986,8 +986,7 @@ func test_south_chapter8_after_ending_twelve_zhugejin_saves_zhouyu() -> void:
 		for sid in ["m8_chaimen", "m8_nanyang", "m8_baihe_bad", "m8_quwu"]:
 			check(not p.has(sid), "good route never reaches " + sid)
 		check_eq(p[-1], "m8_end")
-		check(s.has_card("zhugejin"), "诸葛瑾 joins")
-		for line in ["诸葛瑾：入队", "孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"]:
+		for line in ["诸葛瑾：留下", "孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"]:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
 		check(Quests.current_quest(s) == null, "未完待续 after 第八章")
@@ -997,7 +996,7 @@ func test_south_chapter8_the_bazhen_fight_is_lost_and_carries_on() -> void:
 	var s := ch8s_save([E12])
 	var q := quest_by_id("menghu")
 	Quests.begin(q, s, rng(3))
-	s.run_records.append("诸葛瑾：入队")
+	s.run_records.append("诸葛瑾：留下")
 	s.square = "m8_bazhen"
 	check(Quests.lose(q, s, rng(3)), "八阵 is a retreat, not a restart")
 	check_eq(s.square, "m8_zhoutai")
