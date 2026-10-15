@@ -320,5 +320,9 @@
   "sunce_bawang": {"file": "sunce_bawang.jpg", "face": [0.5, 0.28], "head": 0.24},
   "caihe": {"file": "caihe.jpg", "face": [0.5, 0.22], "head": 0.22},
   "caifu_bing": {"file": "caifu_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "caifu_qi": {"file": "caifu_qi.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "caifu_qi": {"file": "caifu_qi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhugejin": {"file": "zhugejin.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "wu_nushou": {"file": "wu_nushou.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "bilan_shusheng": {"file": "bilan_shusheng.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "wu_canjun": {"file": "wu_canjun.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

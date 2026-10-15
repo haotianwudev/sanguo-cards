@@ -643,3 +643,35 @@
 - [x] 2026-10-14 cg `c9_kaicang` ← c9_kaicang.jpg · ok
 - [x] 2026-10-14 cg `c9_chengtou` ← c9_chengtou.jpg · ok
 - [x] 2026-10-14 cg `c9_jibao` ← c9_jibao.jpg · ok
+- [x] 2026-10-14 portrait `zhugejin` ← zhugejin_1792033363412.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 map `menghu` ← Gemini_Generated_Image_xoojboxoojboxooj.jpg · ok
+- [x] 2026-10-14 portrait `wu_nushou` ← wu_nushou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 portrait `bilan_shusheng` ← bilan_shusheng.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 map `huainan_s` ← Gemini_Generated_Image_y5uja1y5uja1y5uj.jpg · ok
+- [x] 2026-10-14 portrait `wu_canjun` ← wu_canjun.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 map `jiangdong` ← Gemini_Generated_Image_eya5oveya5oveya5.jpg · ok
+- [x] 2026-10-14 portrait `zhugejin` ← zhugejin.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 portrait `wu_nushou` ← wu_nushou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 portrait `bilan_shusheng` ← bilan_shusheng.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 portrait `wu_canjun` ← wu_canjun.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 battle `m8_xiahoudun` ← m8_xiahoudun_1792034014263.jpg · ok
+- [x] 2026-10-14 battle `m8_kongming` ← m8_kongming.jpg · ok
+- [x] 2026-10-14 battle `m8_guanyu` ← m8_guanyu.jpg · ok
+- [x] 2026-10-14 battle `m8_guanyu` ← m8_guanyu.jpg · ok
+- [x] 2026-10-14 battle `m8_caoren` ← m8_caoren.jpg · ok
+- [x] 2026-10-14 battle `m8_zhangfei` ← m8_zhangfei.jpg · ok
+- [x] 2026-10-14 cg `c11_bidao` ← c11_bidao.jpg · ok
+- [x] 2026-10-14 cg `c11_zhugejin` ← c11_zhugejin.jpg · ok
+- [x] 2026-10-14 cg `c11_modao` ← c11_modao.jpg · ok
+- [x] 2026-10-14 cg `c11_tuogu` ← c11_tuogu.jpg · ok
+- [x] 2026-10-14 cg `c11_yuye` ← c11_yuye.jpg · ok
+- [x] 2026-10-14 cg `c11_luoyang` ← c11_luoyang.jpg · ok
+- [x] 2026-10-14 cg `c11_nanyang` ← c11_nanyang.jpg · ok
+- [x] 2026-10-14 cg `c11_quyou` ← c11_quyou.jpg · ok
+- [x] 2026-10-14 cg `c11_quwu` ← c11_quwu.jpg · ok
+- [x] 2026-10-14 cg `c11_xiongdi` ← c11_xiongdi.jpg · ok
+- [x] 2026-10-14 cg `c11_liaochuang` ← c11_liaochuang.jpg · ok
+- [x] 2026-10-14 cg `end_quwu` ← end_quwu.jpg · ok
+- [x] 2026-10-14 cg `e_m8_yufu` ← e_m8_yufu.jpg · ok
+- [x] 2026-10-14 cg `e_m8_taobing` ← e_m8_taobing.jpg · ok
+- [x] 2026-10-14 cg `e_m8_liumin` ← e_m8_liumin.jpg · ok

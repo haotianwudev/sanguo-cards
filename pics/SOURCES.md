@@ -325,6 +325,10 @@
 | `caihe` | source/generals/caihe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caifu_bing` | source/soldiers/caifu_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caifu_qi` | source/soldiers/caifu_qi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zhugejin` | source/generals/zhugejin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wu_nushou` | source/soldiers/wu_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `bilan_shusheng` | source/soldiers/bilan_shusheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `wu_canjun` | source/soldiers/wu_canjun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -340,6 +344,7 @@
 | `map:xuzhou` | source/map/xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:huainan_n` | source/map/huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:jiangdong` | source/map/jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:menghu` | source/map/menghu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei_scout` | source/battles/shuizei_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei` | source/battles/shuizei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -470,6 +475,11 @@
 | `battle:jx_b_qibing` | source/battles/jx_b_qibing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jx_b_caihe` | source/battles/jx_b_caihe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jx_b_zhangyun` | source/battles/jx_b_zhangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_xiahoudun` | source/battles/m8_xiahoudun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_kongming` | source/battles/m8_kongming.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_guanyu` | source/battles/m8_guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_caoren` | source/battles/m8_caoren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_zhangfei` | source/battles/m8_zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -754,3 +764,18 @@
 | `cg:c9_kaicang` | source/cg/c9_kaicang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c9_chengtou` | source/cg/c9_chengtou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c9_jibao` | source/cg/c9_jibao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_bidao` | source/cg/c11_bidao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_zhugejin` | source/cg/c11_zhugejin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_modao` | source/cg/c11_modao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_tuogu` | source/cg/c11_tuogu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_yuye` | source/cg/c11_yuye.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_luoyang` | source/cg/c11_luoyang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_nanyang` | source/cg/c11_nanyang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_quyou` | source/cg/c11_quyou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_quwu` | source/cg/c11_quwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_xiongdi` | source/cg/c11_xiongdi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_liaochuang` | source/cg/c11_liaochuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_quwu` | source/cg/end_quwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_m8_yufu` | source/cg/e_m8_yufu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_m8_taobing` | source/cg/e_m8_taobing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_m8_liumin` | source/cg/e_m8_liumin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -144,9 +144,21 @@ def knock_out_backdrop(im: Image.Image, tol: int = 28) -> Image.Image:
     return out
 
 
+def _write_text_with_retry(path: Path, text: str) -> None:
+    import time
+    for attempt in range(5):
+        try:
+            path.write_text(text, "utf-8", newline="\n")
+            return
+        except OSError:
+            if attempt == 4:
+                raise
+            time.sleep(0.1 * (attempt + 1))
+
+
 def log_line(text: str) -> None:
     cur = LOG.read_text("utf-8") if LOG.exists() else HEAD
-    LOG.write_text(cur.rstrip("\n") + "\n" + text + "\n", "utf-8", newline="\n")
+    _write_text_with_retry(LOG, cur.rstrip("\n") + "\n" + text + "\n")
 
 
 def pending() -> int:
@@ -225,7 +237,7 @@ def add_one(src: Path, key: str, kind: str | None, force: bool, anchor: str, fac
             e["head"] = head
         e.pop("placeholder", None)
     cfg[sec][key] = e
-    (PICS / "art.json").write_text(json.dumps(cfg, ensure_ascii=False, indent=2) + "\n", "utf-8", newline="\n")
+    _write_text_with_retry(PICS / "art.json", json.dumps(cfg, ensure_ascii=False, indent=2) + "\n")
     flags = "；".join(warn) if warn else "ok"
     if warn:
         flags = "⚠ " + flags
