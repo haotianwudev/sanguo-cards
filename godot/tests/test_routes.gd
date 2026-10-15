@@ -388,7 +388,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 		var p := walk(q, s, fork, 1, 0, 0)
 		for sid in ["hn_years", "hn_letter", "hn_shu", "hn_zhoujia", "hn_luxun", "hn_lusu", "hn_liuxun", "hn_wan_rest",
 				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_shizu", "hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_zhengbao",
-				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_feast", "hn_end"]:
+				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_lvmeng", "hn_feng2", "hn_feast", "hn_end"]:
 			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
 		check_eq(p[-1], "hn_end")
 		for sid in ["hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
@@ -396,6 +396,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 		for c in ["lusu", "chenwu", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
 		check(not s.has_card("zhugejin"), "诸葛瑾 can't be asked along before 结局十二")
+		check(not s.has_card("lvmeng_qingnian"), "吕蒙 can't be recruited before 结局十一")
 		check(not s.has_card("daqiao") and not p.has("hn_wedding"), "the double wedding (and 大乔) wait for 第七章")
 		for r in ["wentai_shu", "zhou_pu", "weixi"]:
 			check(s.relics.has(r), "第六章 hands over the 宝物 " + r)
@@ -404,6 +405,17 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 			check(s.run_records.has(line), "第六章 records " + line)
 		finish(q, s)
 		check_eq(Quests.current_quest(s)["id"], "jiangdong", "庐江：喜期将近 → 第七章 · 江东小霸王")
+
+
+func test_south_chapter6_recruiting_lvmeng_after_ending_eleven() -> void:
+	var s := ch6s_save()
+	s.flags.append(E10)
+	s.flags.append(E11)
+	var q := quest_by_id("huainan_s")
+	var p := walk(q, s, [], 1, 0, 0)
+	check(p.has("hn_lvmeng"), "passes hn_lvmeng")
+	check(s.has_card("lvmeng_qingnian"), "吕蒙 joins after 结局十一")
+	check(s.run_records.has("吕蒙：入队"))
 
 
 func test_south_chapter6_xiaoqiao_remembers_the_river_only_if_they_met_in_chapter1() -> void:
@@ -856,6 +868,8 @@ func ch7s_save(flags := []) -> SaveData:
 	s.quests_cleared.append("huainan_s")
 	for c in ["liuye", "lusu", "chenwu"]:
 		s.grant_card(c)
+	if s.flags.has("吕蒙：入队"):
+		s.grant_card("lvmeng_qingnian")
 	return s
 
 
@@ -876,12 +890,12 @@ func test_south_chapter7_opens_with_the_double_wedding() -> void:
 
 
 func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:
-	## 「收服义匪甘宁」 is greyed until 「结局十一 · 匹夫」; siding with 严白虎 against 锦帆贼 gets 孙策 shot by 许贡's men and 甘宁
+	## 「收服义匪甘宁」 is greyed until 「吕蒙：入队」; siding with 严白虎 against 锦帆贼 gets 孙策 shot by 许贡's men and 甘宁
 	var q := quest_by_id("jiangdong")
 	var opts: Array = q["squares"]["jd_ganning"]["choose"]
 	var s := ch7s_save()
 	check(Quests.option_locked(s, opts[0]), "收服义匪甘宁 greyed on a first run")
-	check(Quests.option_hint(s, opts[0]).contains(E11))
+	check(Quests.option_hint(s, opts[0]).contains("吕蒙：入队"))
 	check(not Quests.option_locked(s, opts[1]), "联手严白虎 open")
 	var p := walk(q, s, [])
 	for sid in ["jd_start", "jd_shenting", "jd_moling", "jd_yeyan", "jd_ganning", "jd_b_ally", "jd_b_road", "jd_b_zt", "jd_b_gan", "jd_b_rest",
@@ -894,15 +908,15 @@ func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:
 	finish(q, s)
 	check(s.flags.has(E11))
 	check(Quests.current_quest(s) == null, "the story stops at 结局十一")
-	check(not Quests.option_locked(ch7s_save([E11]), opts[0]), "匹夫 opens 收服义匪甘宁")
+	check(not Quests.option_locked(ch7s_save(["吕蒙：入队"]), opts[0]), "吕蒙入队 opens 收服义匪甘宁")
 
 
 func test_south_chapter7_with_the_jinfan_men_takes_jiangdong() -> void:
 	for fork in [[], ["jd_n_m", "jd_s_m", "jd_k_m"]]:
-		var s := ch7s_save([E11])
+		var s := ch7s_save([E11, "吕蒙：入队"])
 		var q := quest_by_id("jiangdong")
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["jd_start", "jd_shenting", "lm_fight", "lm_join", "jd_yeyan", "jd_ganning", "jd_g_meet", "jd_g_jq", "jd_g_zt", "jd_g_gn", "jd_g_join", "jd_g_road", "jd_g_yanyu", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
+		for sid in ["jd_start", "jd_shenting", "lm_fight", "lm_join", "jd_yeyan", "jd_ganning_lm", "jd_g_meet", "jd_g_jq", "jd_g_zt", "jd_g_gn", "jd_g_join", "jd_g_road", "jd_g_yanyu", "jd_g_yan", "jd_g_rest", "jd_g_hunt",
 				"jd_g_menke", "jd_g_zhoutai", "jd_kuaiji", "jd_yufan", "jd_wanglang", "jd_wanglang_go", "jd_fuchun", "jd_end"]:
 			check(p.has(sid), "江东 route passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["jd_b_ally", "jd_b_zt", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
