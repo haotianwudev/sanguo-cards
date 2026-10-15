@@ -237,7 +237,15 @@ func demo(name: String) -> void:
 		var b := BattleScreen.new()
 		b.scenario_id = name.substr(7)
 		b.ambush = OS.get_cmdline_user_args().has("--ambush")  # --ambush: the enemy strikes first
+		if OS.get_cmdline_user_args().has("--solo"):  # --solo: the lord alone
+			save.party = []
 		show_screen(b)
+		for a in OS.get_cmdline_user_args():
+			if a.begins_with("--hp="):  # --hp=<n>: start on n HP and press 回合结束 (the enemy's first blow can end it)
+				await get_tree().create_timer(0.5).timeout
+				b.b.party_hp = int(a.substr(5))
+				b._refresh()
+				b._end.pressed.emit()
 		if OS.get_cmdline_user_args().has("--stun-end"):  # confuse the enemy, then press 回合结束
 			await get_tree().create_timer(0.5).timeout
 			b.b.enemy["stunned"] = true
@@ -292,7 +300,18 @@ func demo(name: String) -> void:
 				if a.begins_with("--at="):
 					save.square = a.substr(5)
 					save.visited.append(save.square)
+				if a.begins_with("--flag="):  # --flag=<line>: a story flag this run should already have (a route choice)
+					save.run_records.append(a.substr(7))
+				if a.begins_with("--dmg="):  # --dmg=<n>: wear carried in from earlier fights
+					save.damage = int(a.substr(6))
 			show_screen(MapScreen.new())
+			if OS.get_cmdline_user_args().has("--go"):  # --go: press 出战 on that square (the real quest-battle path)
+				await get_tree().create_timer(0.3).timeout
+				start_quest_battle(q, Quests.here(q, save))
+				if OS.get_cmdline_user_args().has("--end"):  # --end: then press 回合结束 once
+					await get_tree().create_timer(1.5).timeout
+					var bs: BattleScreen = root.get_children().filter(func(c): return c is BattleScreen and not c.is_queued_for_deletion())[0]
+					bs._end.pressed.emit()
 		"lordreveal":  # the lord-card moment a cleared chapter gives: --demo=lordreveal [--dupe]
 			save.flags = ["出生：冀州无极"]
 			var rv := LordReveal.new()

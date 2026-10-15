@@ -115,7 +115,7 @@ func test_failing_steps_back_one_square() -> void:
 	Quests.resolve(q, s, rng(0), 1)
 	s.damage = 999
 	Quests.fail(q, s)
-	check(s.square == "raid" and s.damage == 999, "steps back to the previous square and keeps damage")
+	check(s.square == "raid" and s.damage == 0, "steps back to the previous square at full HP (no 1-HP retry loop)")
 	check(s.resolved, "the previous square remains resolved")
 	check(s.has_card("zhouyu"))
 	Quests.move(q, s, "plan")

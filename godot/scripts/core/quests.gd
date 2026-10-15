@@ -1058,7 +1058,9 @@ static func lose(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nul
 
 static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
 	## Lost a battle: automatically jump back to the previous point, allowing the player to try again.
-	## If at the first square, restart from the beginning.
+	## If at the first square, restart from the beginning. Either way the party comes back at full HP with fresh skill uses:
+	## kept wear meant a party knocked to 1 HP walked back into the same fight and fell to the first blow, over and over.
+	reset_carry(save)
 	if save.visited.size() <= 1:
 		begin(q, save, rng)
 	else:
