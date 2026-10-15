@@ -374,8 +374,8 @@ func test_south_chapter6_follows_the_good_jingxiang_ending_only() -> void:
 	check(Quests.current_quest(bad) == null, "恨海 stops the story: no 第六章")
 
 
-func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
-	## after 「结局十 · 深锁」: 刘晔 settles 庐江's clans, 雷家 is cut off and runs west, the double wedding goes ahead
+func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding() -> void:
+	## after 「结局十 · 深锁」: 刘晔 settles 庐江's clans, 雷家 is cut off and runs west, the wedding date is set (the wedding itself opens 第七章)
 	for fork in [[], ["hn_m1", "hn_m2", "hn_m3", "hn_m4"]]:
 		var s := ch6s_save()
 		s.flags.append(E10)
@@ -383,20 +383,21 @@ func test_south_chapter6_walks_from_xiangyang_to_the_double_wedding() -> void:
 		var p := walk(q, s, fork, 1, 0, 0)
 		for sid in ["hn_years", "hn_letter", "hn_shu", "hn_zhoujia", "hn_luxun", "hn_lusu", "hn_liuxun", "hn_wan_rest",
 				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_shizu", "hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_zhengbao",
-				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_wedding", "hn_end"]:
+				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_feast", "hn_end"]:
 			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
 		check_eq(p[-1], "hn_end")
 		for sid in ["hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
 			check(not p.has(sid), "刘晔 route never reaches " + sid)
-		for c in ["lusu", "chenwu", "daqiao", "liuye"]:
+		for c in ["lusu", "chenwu", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
+		check(not s.has_card("daqiao") and not p.has("hn_wedding"), "the double wedding (and 大乔) wait for 第七章")
 		for r in ["wentai_shu", "zhou_pu", "weixi"]:
 			check(s.relics.has(r), "第六章 hands over the 宝物 " + r)
 		for line in ["南线：家书讨袁", "周家：解围", "鲁肃：指囷相赠", "陈武：入队", "二乔：解救", "冯夫人：交给吴夫人",
-				"南线：浮桥一瞥", "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：双婚"]:
+				"南线：浮桥一瞥", "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：喜期将近"]:
 			check(s.run_records.has(line), "第六章 records " + line)
 		finish(q, s)
-		check_eq(Quests.current_quest(s)["id"], "jiangdong", "庐江：双婚 → 第七章 · 江东小霸王")
+		check_eq(Quests.current_quest(s)["id"], "jiangdong", "庐江：喜期将近 → 第七章 · 江东小霸王")
 
 
 func test_south_chapter6_xiaoqiao_remembers_the_river_only_if_they_met_in_chapter1() -> void:
@@ -819,7 +820,7 @@ func test_south_chapter6_burning_the_clans_deeds_ends_in_ending_ten() -> void:
 	var p := walk(q, s, [])
 	for sid in ["hn_shizu", "hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
 		check(p.has(sid), "深锁 route passes " + sid)
-	for sid in ["hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_zhengbao", "hn_shouchun", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_wedding", "hn_end"]:
+	for sid in ["hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_zhengbao", "hn_shouchun", "hn_bridge", "hn_jiangting", "hn_feng2", "hn_end"]:
 		check(not p.has(sid), "深锁 route never reaches " + sid)
 	check_eq(p[-1], "hn_shensuo")
 	check(not s.has_card("liuye"), "刘晔 walks out")
@@ -845,15 +846,27 @@ func test_south_chapter6_losing_at_qianshan_is_ending_ten_too() -> void:
 
 func ch7s_save(flags := []) -> SaveData:
 	var s := ch6s_save()
-	s.flags += [E10, "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：双婚"] + flags
+	s.flags += [E10, "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：喜期将近"] + flags
 	s.quests_cleared.append("huainan_s")
-	for c in ["daqiao", "liuye", "lusu", "chenwu"]:
+	for c in ["liuye", "lusu", "chenwu"]:
 		s.grant_card(c)
 	return s
 
 
 func test_south_chapter7_follows_the_double_wedding() -> void:
 	check_eq(Quests.current_quest(ch7s_save())["id"], "jiangdong")
+
+
+func test_south_chapter7_opens_with_the_double_wedding() -> void:
+	var s := ch7s_save()
+	var q := quest_by_id("jiangdong")
+	var r := rng(1)
+	Quests.begin(q, s, r)
+	check_eq(s.square, "jd_wedding")
+	Quests.resolve(q, s, r, -1)
+	check(s.has_card("daqiao"), "大乔 joins at the wedding")
+	check(s.run_records.has("庐江：双婚"), "第七章 records the wedding")
+	check_eq(Quests.next_options(q, s).map(func(o): return o["id"]), ["jd_start"])
 
 
 func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:

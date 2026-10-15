@@ -897,7 +897,7 @@ func leader_for(card_id: String) -> Dictionary:
 
 
 static func leader_power(ld: Dictionary) -> int:
-	return int(round(ld["at"] + ld["hp"] / 5.0))
+	return int(round(ld["at"] + ld["hp"] / 2.0))  # card-face hp and at are the same scale now, so hp counts half
 
 
 func auto_lord_pick() -> String:
@@ -907,19 +907,41 @@ func auto_lord_pick() -> String:
 	for card in lord_cards():
 		var fid := lord_card_form(card)
 		var f := lord_with_form(fid)
-		var power := int(round(f["at"] + f["hp"] / 5.0))
+		var power := int(round(f["at"] + f["hp"] / 2.0))
 		if power > best_power:
 			best_power = power
 			best = fid if fid != "" else "base"
 	return best
 
 
+func relic_bonus(troop: String, power: float) -> float:
+	## what fielding `troop` is worth in extra power through the worn 宝物 that sit in it (they only work while that troop leads):
+	## attack / hp shares count as that share of `power` (party-wide ones for the whole team, a rough 3 units), troop shares for
+	## the unit alone; other effects don't count. Curses and ones left in the pool (unworn) are ignored
+	var db := _db()
+	var gain := 0.0
+	for rid in relics:
+		var r: Dictionary = db.relics[rid]
+		if r["troop"] != troop or unworn.has(rid) or r["rarity"] == "curse":
+			continue
+		var m: Dictionary = r["mods"]
+		var stat := 0.0
+		for k in ["at", "hp"]:
+			stat += float(m.get(k, 0.0)) * 3.0 * 0.5
+		for k in ["troop_at", "troop_hp"]:
+			for v in m.get(k, {}).values():
+				stat += float(v) * 0.5
+		gain += power * stat
+	return gain
+
+
 func auto_party() -> Array:
-	## Best leader per troop (the strongest card leads), then the strongest troops that fit.
+	## Best leader per troop (the strongest card leads, counting the 宝物 its troop would bring), then the strongest troops that fit.
 	var ranked := owned_ids()
 	var powers := {}
 	for c in ranked:
-		powers[c] = leader_power(leader_for(c))
+		var p := float(leader_power(leader_for(c)))
+		powers[c] = p + relic_bonus(unit_troop(c), p)
 	ranked.sort_custom(func(a, b): return powers[a] > powers[b])
 	var picked: Array = []
 	for cid in ranked:

@@ -24,6 +24,10 @@ NL = "\n"
 
 DONGBAI = ("董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄长柄青铜骨朵（木柄缠皮绳，一端是圆球瓜棱形的青铜骨朵头，不是圆筒锤、不是方锤）（她已交付的立绘和 CG 都是这个样子）")
 HERO = "主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的古锭刀（巨大的宽刃厚背砍刀，刀身像一整块带锈斑的铁板，刀背平直、刀尖斜削上翘，没有刀鞘；短柄缠棕色皮绳，圆形金色回纹护手，柄尾圆金属头；整个画面只有这一把刀，不要背带背刀、不要另一把剑）"
+import re as _re
+# the same lord without 古锭刀 on his shoulder, for scenes where he must be empty-handed (the generic line would otherwise put the broadsword back in)
+HERO_NOBLADE = _re.sub(r"，?肩扛孙坚的古锭刀（.*?）(?=。|$)", "；手里、肩上、背上都没有任何兵器，不要古锭刀、不要大刀、不要任何刀剑", HERO)
+NOBLADE_CGS = {"c8_fubing", "c8_qibing", "c8_caihe", "c8_zhangyun", "c8_zupu", "c8_shuige", "c9_changsha"}
 HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿甄宓亡父留下的河北式旧鱼鳞甲（素铁色，不要绿色和金色），外披雪白貂裘，手持白蜡杆长枪（枪头下系一个红色平安结）"
 HERO_MODERN = "主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器"
 
@@ -57,6 +61,8 @@ def hero_note(key: str) -> str:
         return HERO_MODERN
     if key and (key.startswith(("jz_", "ln_", "n5_")) or key.endswith("_north") or key in _north_cgs()):
         return HERO_NORTH
+    if key in NOBLADE_CGS:
+        return HERO_NOBLADE
     return HERO
 STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
 PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。")
@@ -1373,14 +1379,14 @@ CGS = {
     "c7_feng": "a lamplit army tent at night: the beautiful Lady Feng (adult) pouring wine for the hero and resting her fingertips on his wrist; at the tent flap Dong Bai (adult) slamming a hammer down and Cai Wenji (adult, in white) with a snapped zither string, both glaring",
     "c6_jiaxu": "an abandoned Xiliang camp on the Wei river after a battle: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded officer's robe, gourd flask at his belt) tied up with rope and lounging comfortably on sacks in a grain cart, still sniffing a wine gourd; young Sun Ce, who just tied him, holding the rope end with a spear on his shoulder; the short-haired hero studying him; Zhou Yu frowning over his ledger; comic",
     "c8_xuexi": "the wall of Xiangyang in grey rain at dawn, the city below silent with gates shut: the short-haired hero standing stiff and blank-eyed in battered silver armor; Dong Bai (adult) standing before him, trembling but not stepping back, saying something bitter; behind them young Sun Ce pale and afraid; restrained and bleak, no gore, no bodies",
-    "c8_fubing": "the plank-road of the lakeside pavilion in torchlight and smoke: a wall of Cai household soldiers in black-and-purple livery surging out of the corridors with shields; Sun Ce (teen general) charging in front with his spear, Dong Bai (adult, silver ponytail, twin hammers) smashing a table beside him; the hero in plain everyday robes with a dark teal-gold trim, no armour, empty hands",
-    "c8_qibing": "the long stone causeway over the Han river at night: Cai household cavalry thundering along it in black-and-purple cloaks; at the near end Huang Zhong (middle-aged, stout, yellow leather armour with a blue war-robe, bow drawn full) picking riders off their horses; the hero in plain everyday robes watching, no weapon in hand",
-    "c8_caihe": "a lamplit upper gallery of the lakeside pavilion: Cai He (adult warrior in black-and-purple Cai livery, holding a signal flag in one hand and a repeating crossbow in the other) shouting as rows of crossbows are levelled through the lattice windows behind him; below, the hero in plain everyday robes with empty hands looks up, Sun Ce beside him lifting his spear",
-    "c8_zhangyun": "a river pier at night: a line of Jingzhou war-boats with torches against the pier; on the lead bow Zhang Yun (red-faced, bloated eyes, purple-brown brocade robe over half-armour, a bronze wine flask and a ring of keys at his belt) speaking with a smirk to the hero, who stands in plain everyday robes with empty hands, Sun Ce and Huang Zhong at his sides; marines behind Zhang Yun with drawn blades",
+    "c8_fubing": "the plank-road of the lakeside pavilion in torchlight and smoke: a wall of Cai household soldiers in black-and-purple livery surging out of the corridors with shields; Sun Ce (teen general) charging in front with his spear, Dong Bai (adult, silver ponytail, twin hammers) smashing a table beside him; the hero in his signature bronze-and-gold cloud-patterned armour with a black cape over a red robe, empty hands, no weapons",
+    "c8_qibing": "the long stone causeway over the Han river at night: Cai household cavalry thundering along it in black-and-purple cloaks; at the near end Huang Zhong (middle-aged, stout, yellow leather armour with a blue war-robe, bow drawn full) picking riders off their horses; the hero in his signature bronze-and-gold cloud-patterned armour with a black cape over a red robe watching, no weapon in hand",
+    "c8_caihe": "a lamplit upper gallery of the lakeside pavilion: Cai He (adult warrior in black-and-purple Cai livery, holding a signal flag in one hand and a repeating crossbow in the other) shouting as rows of crossbows are levelled through the lattice windows behind him; below, the hero in his signature bronze-and-gold cloud-patterned armour with a black cape over a red robe with empty hands looks up, Sun Ce beside him lifting his spear",
+    "c8_zhangyun": "a river pier at night: a line of Jingzhou war-boats with torches against the pier; on the lead bow Zhang Yun (red-faced, bloated eyes, purple-brown brocade robe over half-armour, a bronze wine flask and a ring of keys at his belt) speaking with a smirk to the hero, who stands in the hero in his signature bronze-and-gold cloud-patterned armour with a black cape over a red robe, empty hands, Sun Ce and Huang Zhong at his sides; marines behind Zhang Yun with drawn blades",
     "c8_eve": "a lamplit window of the Xiangyang guesthouse at night: Diaochan (adult, in a pale-jade fairy skirt) tying a clumsy hand-sewn sachet to the hero's belt, her ears flushed red, a sewing basket with a half-finished piece on the table, dried osmanthus petals scattered; the hero in plain everyday robes with short hair looking down at her; warm lamp-glow, autumn night outside the paper window",
     "c8_qinggong": "the victory banquet in Wancheng, lanterns and banners: Sun Ce (teen general) standing on a table raising a bowl and shouting, Zhou Yu rubbing his temples, the hero grinning with a bowl; in the foreground Diaochan (adult, pale-jade fairy skirt) pouring a full cup of wine for the hero without spilling a drop",
     "c8_yiguan": "the kitchen window of the Xiangyang guesthouse in the afternoon: Madam Wu (the kind Sun family matriarch) stirring a pot of bream soup; at the window Diaochan (adult) trying on a new pale-jade fairy skirt and twirling; steam, warm light, a sealed invitation card lying on the table",
-    "c8_zupu": "the steps of the Xiangyang governor's mansion in the morning: a row of white-bearded Cai clan elders kneeling, the eldest striking a name out of an open clan genealogy with a brush; the pale, long-bearded scholar Liu Biao hurrying up with his official cap askew, sweating; Zhou Yu reading a long list of offered troops and money with shining eyes; the short-haired hero in plain everyday robes (a dark civil gown with teal-gold trim, no armour) looking on unimpressed with empty hands; NO swords, broadswords or weapons anywhere in the picture; the kneelers are only the elderly Cai clan elders in a neat row, not soldiers or prisoners; a little comic",
+    "c8_zupu": "the steps of the Xiangyang governor's mansion in the morning: a row of white-bearded Cai clan elders kneeling, the eldest striking a name out of an open clan genealogy with a brush; the pale, long-bearded scholar Liu Biao hurrying up with his official cap askew, sweating; Zhou Yu reading a long list of offered troops and money with shining eyes; the hero in his signature bronze-and-gold cloud-patterned armour with a black cape over a red robe, looking on unimpressed with empty hands; NO swords, broadswords or weapons anywhere in the picture, none on his back or shoulder; the kneelers are only the elderly Cai clan elders in a neat row, not soldiers or prisoners; a little comic",
     "c6_jiaxu_join": "an evening in a Luoyang house: the thin, sleepy-eyed strategist Jia Xu (mid-40s, loose faded robe, gourd flask at his belt) at a table with the first bowl of red-braised pork, sniffing a cup of wine the short-haired hero has just poured him with a respectful bow; Lady Wu (adult) setting down more dishes; young Sun Ce staring at the pork, not daring to reach; warm and comic",
     "c8_nushou": "水阁里火墙冲天、浓烟滚滚，帘后的连弩手在烟中乱射：董白（成年，银白高马尾、紫色毛边铠甲）双锤抡着，把一张翻倒的案几砸成两截当盾牌；蔡文姬（成年，白衣）半跪着一手搂着脸色苍白的貂蝉（成年，浅碧留仙裙，裙摆沾着烟灰）、一手横着断弦的琴挡箭；短发的主角（青金色铠甲）持刀冲在最前面",
     "c8_zhashan": "水阁栈道口，被撞飞的千斤闸砸在地上、尘土飞扬：孙策（少年将军，持长枪）一枪挑飞门口的死士，站在缺口中央；黄忠（四十出头，黄皮甲蓝战袍）半跪在后面开弓搭箭；水阁深处，独眼流血的蔡瑁（魁梧，锦袍罩鎏金鳞甲）捂着右眼，被逼到栏杆边拔剑",
@@ -1403,7 +1409,7 @@ CGS = {
     "c8_jiayan": "a family supper in the courtyard of the Wancheng governor's house on an autumn evening: Lady Wu (adult) handing the short-haired hero a big bowl of chicken soup and ruffling his cropped hair; Sun Ce hanging over the edge of the pot trying to snatch meat; warm lantern light",
     "c8_liuxian": "the bank of the Yu river at sunset: Diaochan (adult, of great beauty) in a light pale-jade southern 'liuxian' skirt sitting hugging her knees on the grass, laughing with her hand over her mouth; in the shallows Sun Ce slipping while grabbing at a fish; Zhou Yu on a rock writing in his ledger",
     "c8_caifuren": "a lavish welcome banquet in Xiangyang: Lady Cai (adult, purple gold-embroidered silks, phoenix hairpin) holding Cai Wenji's (adult, in white) hands over an open clan genealogy book, all warm smiles; beside them Diaochan (adult) accepting a box of pearls with an equally sweet smile; the elderly scholar Cai Yong stroking his beard sceptically in the background",
-    "c8_shuige": "a lavish pavilion over the Han river, the only door sealed by a fallen iron portcullis, crossbowmen behind the curtains: Diaochan (adult) in a pale-jade skirt draining a gold beast-shaped wine cup before the burly Cai Mao, her other hand already reaching for the hairpin in her hair; the short-haired hero half-rising with his blade half drawn, shouting; tense, no gore",
+    "c8_shuige": "a lavish pavilion over the Han river, the only door sealed by a fallen iron portcullis, crossbowmen behind the curtains: Diaochan (adult) in a pale-jade skirt draining a gold beast-shaped wine cup before the burly Cai Mao, her other hand already reaching for the hairpin in her hair; the short-haired hero in his signature bronze-and-gold armour half-rising from his seat with EMPTY hands, one arm stretched out towards her, shouting, NO sword, sabre or broadsword in his hands or anywhere on him or in the picture; tense, no gore",
     "c8_xiangxiao": "the smoking ruin of a pavilion on a rock above the Han river at dawn: the short-haired hero kneeling, holding Diaochan (adult, pale, in a scorched pale-jade skirt) in his arms; she smiles faintly and touches his cropped hair; restrained and elegiac, no gore",
     "c8_henhai": "a cold rainy night on the bank of the Han river: the short-haired hero alone, crouching at the water's edge washing a pale-jade woman's skirt, holding half of a broken hairpin; behind him in the rain a young man in white mourning clothes stepping closer; bleak, restrained, no gore",
     "c8_dress": "a bedroom in the Xiangyang guesthouse in the afternoon: Diaochan (adult) at a bronze mirror in her most beautiful pale-jade skirt embroidered with water patterns; Lady Wu (adult) pinning her hair; the short-haired hero crouching beside her tucking a strand of hair behind her ear; gentle and warm",
@@ -1488,6 +1494,7 @@ CGS = {
     "ln_handhold": "虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外",
     "jz_end": "大雪官道上：主角身披鱼鳞甲与雪白貂裘、手握白蜡杆长枪居中，赵云银甲白马在左，郭嘉车中抿酒在右，张夫人怀抱账本骑矮脚马跟在队伍中，身后铁骑义勇新军相随",
     "c9_letter": "襄阳府中冬夜的灯下：吴夫人（成年女性，温柔慈和的中年贵妇）手捧一封字迹又大又歪的家书，看着看着笑了；少年将军孙策探头凑过来想看，周瑜站在一旁，手里的账本合着；窗外汉江上停着荆州水师的战船",
+    "c9_changsha": "长沙郡守府门口的春日傍晚：吴夫人（成年女性，温柔慈和的中年贵妇，素色衣裙，手里一把油纸伞靠在门边）伸手轻轻摸着门口旧柱子上一排刀刻的身高印子，眼眶微红却带着笑；少年将军孙策站在柱子另一边，耳朵尖通红、窘迫地别过脸；主角站在她身后半步，抬手挠着自己的短发，一脸想笑又不敢笑；院里一棵老槐树，花瓣飘落；暖黄夕光，怀旧温柔；画面里没有兵器、没有士兵，主角不扛刀",
     "c9_zhoujia": "the gate of the Zhou clan manor in Shu county after a three-day siege, the gate flung open: white-haired Zhou clan elders stumbling out in tears; the stately old Lady Zhou (Zhou Yu's mother) holding the hero's hand and looking him up and down; Zhou Yu (young man in scholar robes) standing behind with an account book under his arm, a little embarrassed; a clansman presenting the family genealogy scroll whose last bamboo slip is freshly cut; boats and a granary behind the walls, besiegers' abandoned banners on the ground; the hero in plain everyday robes",
     "c9_chenwu": "the gate of Wan city at dawn swinging wide open: Chen Wu (burly Lujiang conscript in his 30s, rough patched armour, a broken saber in hand) grinning among a few dozen villagers in ragged army coats; the hero (short hair, teal-gold armour) and Sun Ce (teen general) striding in through the gate, morning light, Liu Xun's banners torn down",
     "c9_huafang": "a painted pleasure-boat on the river at dusk: Da Qiao (adult, elegant) playing the guqin; Sun Ce (teen general) sitting stock still, utterly absorbed, his wine bowl overturned over Old Qiao who is wiping his beard and smiling; at the stern Xiao Qiao (adult, lively) showing Zhou Yu how to dry a soaked account book while he listens more seriously than in battle; the hero in armour at the side, a hand over his face",
@@ -1557,8 +1564,8 @@ MAPS = {
                "highway with a burnt village; the battlefield before Sishui Pass where Hua Xiong fought (a mountain gap with a watchtower); "
                "Sun Jian's big army camp with palisades, tents and red banners; a barren windswept wasteland (Hulao Pass, where the three "
                "heroes fought Lü Bu); and at the far right the walls of Luoyang burning at dusk, smoke rising into an ember sky",
-    "huainan_s": "【地图共 49 列，南线第六章·淮南折帝旗】自左向右依次：①冬日的襄阳城与汉江水寨；②顺江东下的长江江面；③庐江舒县，周家庄园与大粮仓、半边焦黑的陆家旧宅；④居巢，鲁肃家的两座大粮仓和田埂；⑤皖城与江边驿馆、乔家的画舫；⑥皖城太守府；⑦云雾里的灊山（天柱山），山腰上的雷家木寨，山下流过皖水；⑧巢湖，湖心洲和破旧的龙王庙；⑨濡须口；⑩淝水上用铁索连起来的楼船；⑪寿春南门的水寨与淮水浮桥；⑫寿春城外荒凉的江亭；⑬回到庐江的江岸与张灯结彩的喜堂",
-    "jiangdong": "【地图共 40 列，南线第七章·江东小霸王】自左向右依次：①长江口与秋天的牛渚渡口、刘繇的营垒；②神亭岭的山坡连营；③秣陵城；④浩渺的太湖，芦苇荡、被烧过的渔村、水匪的快船；⑤吴郡城与太守府；⑥太湖深处挂着铜铃的锦帆水寨和挂「德王」匾的严家水寨；⑦吴郡城外的渔村；⑧丹徒山的密林；⑨会稽城、山阴道与查渎小道；⑩春天的富春江与孙家老宅",
+    "huainan_s": "【地图共 54 列，南线第六章·淮南折帝旗】自左向右依次：⓪（最左 6 列）荆南四郡：春日山路，零陵山口的坞堡、桂阳山林里的宗贼寨、长沙城门洞与郡守府门前的老槐树；①冬日的襄阳城与汉江水寨；②顺江东下的长江江面；③庐江舒县，周家庄园与大粮仓、半边焦黑的陆家旧宅；④居巢，鲁肃家的两座大粮仓和田埂；⑤皖城与江边驿馆、乔家的画舫；⑥皖城太守府；⑦云雾里的灊山（天柱山），山腰上的雷家木寨，山下流过皖水；⑧巢湖，湖心洲和破旧的龙王庙；⑨濡须口；⑩淝水上用铁索连起来的楼船；⑪寿春南门的水寨与淮水浮桥；⑫寿春城外荒凉的江亭；⑬回到庐江的江岸，江边挂着红绸（双婚在第七章）",
+    "jiangdong": "【地图共 41 列，南线第七章·江东小霸王】自左向右依次：⓪（最左 1 列）庐江张灯结彩的喜堂；①长江口与秋天的牛渚渡口、刘繇的营垒；②神亭岭的山坡连营；③秣陵城；④浩渺的太湖，芦苇荡、被烧过的渔村、水匪的快船；⑤吴郡城与太守府；⑥太湖深处挂着铜铃的锦帆水寨和挂「德王」匾的严家水寨；⑦吴郡城外的渔村；⑧丹徒山的密林；⑨会稽城、山阴道与查渎小道；⑩春天的富春江与孙家老宅",
     "xuzhou": "【地图共 32 列，北线第五章·铁纪徐州】自左向右依次：①北海城与屯田的田野；②南下的官道与泗水；③下邳城外的山坡战场；④下邳城、刺史府与热闹的市集、糜家酒楼；⑤小沛城与城外的营寨哨卡；⑥最右端挂满红绸的下邳喜堂",
     "huainan_n": "【地图共 36 列，北线第六章·淮南折帝旗】自左向右依次：①冬日的下邳城与甄家后院的酒坊；②淮北渡口的哨卡与平原官道；③钟离城与洪泽湖的水道、糜家商船；④蕲阳城；⑤通往寿春的淮南小道；⑥寿春城下连绵的曹军营盘与东门；⑦城破后的寿春街巷与仲氏国库；⑧金碧辉煌的寿春宫与宫前的比武台；⑨淮水渡口与横跨河面的浮桥；⑩北归的官道",
 }
@@ -1742,7 +1749,7 @@ EXTRA_NEXT = [("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9�
 
 # chapter maps already delivered but the chapter's squares changed since: redraw (key -> why). A redraw counts as done once
 # art_ingest.py has logged one more delivery of that map than `seen` here.
-MAP_REDO = {"yuxi": ("第三章两条路线上下分层（上 B 下 A），共 61 列 6 行（提示词已按新布局写好）", 1)}
+MAP_REDO = {"huainan_s": ("第六章南线开头新增 6 列荆南四郡（零陵 / 桂阳 / 长沙），结尾去掉双婚喜堂，共 54 列（提示词已按新布局写好）", 1), "jiangdong": ("第七章南线开头新增 1 列庐江喜堂（双婚），共 41 列（提示词已按新布局写好）", 1), "yuxi": ("第三章两条路线上下分层（上 B 下 A），共 61 列 6 行（提示词已按新布局写好）", 1)}
 
 
 def map_redo() -> dict:
@@ -1838,6 +1845,14 @@ CHESTS = {
 # already delivered but wrong somewhere: redraw (listed above the batch)
 # (key, why, seen): `seen` = how many times art_ingest.py had already logged that key; one more delivery clears the entry
 REDO = [
+    ("c8_fubing", "宴会段的主角要穿他标志性的古铜鎏金旧甲，现图穿的是素色常服", 1),
+    ("c8_qibing", "宴会段（黄忠射骑兵）的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
+    ("c8_caihe", "宴会段的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
+    ("c8_zhangyun", "宴会段的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
+    ("c8_zupu", "主角肩上扛着一把大刀要去掉：穿甲但双手空着，整个画面没有任何刀剑", 2),
+    ("c8_shuige", "貂蝉喝酒这张主角拿着大刀要去掉：穿甲但双手空着，不拿任何兵器", 2),
+    ("c6_seal", "孙坚手里捧着紫色龙纹盒子要去掉：他说不知玉玺下落，双手必须是空的，殿上也不能有任何盒子 / 锦盒 / 箱子", 2),
+    ("c6_warn", "窗外右侧偷看的董白要去掉：这一格董白已回郿坞，画面只能有貂蝉和主角两个人", 2),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",

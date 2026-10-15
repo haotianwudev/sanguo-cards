@@ -301,7 +301,7 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 			sk.append(s)
 	# the card's face numbers are its stats at 铜; the tier multiplies both (rarity is only where hp + at falls: cards.json gacha.rarity_bands)
 	return {"id": card_id, "name": c["name"], "troop": c["troop"], "person": c["person"],
-		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "skills": sk, "rarity": c["rarity"]}
+		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "base_hp": c["hp"], "base_at": c["at"], "skills": sk, "rarity": c["rarity"]}
 
 
 func build_lord(lord_name: String, mult := 1.0, north := false, form := "", forms: Array = [], form_mult := -1.0) -> Dictionary:
@@ -322,18 +322,24 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 			sk.append(s)
 	return {"id": "lord", "person": person, "north": north, "form": form, "name": lord_name, "troop": "lord",
 		"hp": int(round(float(f["hp"]) * fm)) if not f.is_empty() else int(round(t["hp"] * mult)),
-		"at": int(round(float(f["at"]) * fm)) if not f.is_empty() else int(round(t["at"] * mult)), "skills": sk, "rarity": rar}
+		"at": int(round(float(f["at"]) * fm)) if not f.is_empty() else int(round(t["at"] * mult)),
+		"base_hp": float(f["hp"]) if not f.is_empty() else float(t["hp"]), "base_at": float(f["at"]) if not f.is_empty() else float(t["at"]),
+		"skills": sk, "rarity": rar}
 
 
 func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dictionary:
-	## Rance X: leader stat = leader_mult × own stat + the rest of the troop (weighted: duplicate soldiers decay).
-	var m: int = int(battle["leader_mult"])
+	## unit stat = (leader_mult × leader's tier stat + the rest of the troop (weighted: duplicate soldiers decay))
+	## × the leader's 铜 stat / leader_base — hp by its 铜 hp, attack by its 铜 attack
+	var m: int = int(battle["lord_leader_mult"]) if card["troop"] == "lord" else int(battle["leader_mult"])  # 主角 ×5, everyone else ×3
 	var hp := float(m * card["hp"])
 	var at := float(m * card["at"])
 	for i in members.size():
 		var w: float = weights[i] if i < weights.size() else 1.0
 		hp += members[i]["hp"] * w
 		at += members[i]["at"] * w
+	var lb := float(battle.get("leader_base", 60))
+	hp *= float(card.get("base_hp", lb)) / lb
+	at *= float(card.get("base_at", lb)) / lb
 	hp *= float(battle.get("hp_mult", 1.0))  # global feel of the fights: more attack, less HP on both sides (battle.attack_mult / hp_mult)
 	at *= float(battle.get("attack_mult", 1.0))
 	return {"card": card, "members": members, "hp": int(round(hp)), "at": int(round(at))}

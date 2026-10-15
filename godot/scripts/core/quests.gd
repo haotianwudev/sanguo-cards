@@ -317,6 +317,25 @@ static func enemy_scales(save: SaveData) -> Array:
 	return [1.0, 1.0]
 
 
+static func enemy_tier(save: SaveData) -> String:
+	## "normal" / "elite" / "boss" / "lose" (same rule as enemy_scales) of the fight on the current square; "normal" off a battle square
+	var db := GameData.get_db()
+	for q in db.quests:
+		if q["id"] != save.quest:
+			continue
+		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		if sq.is_empty():
+			return "normal"
+		var bid: String = sq["battle"] if sq["battle"] != "" else str(save.event_battle.get("battle", ""))
+		if bid == "" or not db.scenarios.has(bid):
+			return "normal"
+		var foe_card: String = str(db.enemies[db.scenarios[bid]["enemy"]].get("card", ""))
+		if _is_lose_fight(sq, foe_card):
+			return "lose"
+		return "boss" if sq["boss"] else ("elite" if sq["elite"] else "normal")
+	return "normal"
+
+
 static func enemy_scale(save: SaveData) -> float:
 	return float(enemy_scales(save)[0])
 
@@ -325,7 +344,8 @@ static func mods(save: SaveData) -> Dictionary:
 	## Battle modifiers for this run: every 宝物 carried by a unit, plus 险.
 	var db := GameData.get_db()
 	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"]) + ramp(save),
-		"enemy_scale": enemy_scales(save)[0], "enemy_scale_at": enemy_scales(save)[1]}
+		"enemy_scale": enemy_scales(save)[0], "enemy_scale_at": enemy_scales(save)[1],
+		"enemy_tier": enemy_tier(save)}
 	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
 	if save.fate != "" and db.fates.has(save.fate):
 		sources.append(db.fates[save.fate])  # 天命 of this run

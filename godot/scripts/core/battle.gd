@@ -323,7 +323,10 @@ func _crit_roll(side: String) -> float:
 	## 暴击 (battle.crit in cards.json): returns the damage multiplier — 1.0 for no crit. `player_*` for our hits, `enemy_*` for theirs;
 	## mods.crit / mods.crit_mult (宝物) add to ours
 	var cfg: Dictionary = db.battle.get("crit", {})
-	var chance := float(cfg.get(side + "_chance", 0.0))
+	var raw: Variant = cfg.get(side + "_chance", 0.0)
+	if raw is Dictionary:  # per fight tier: normal / elite / boss / lose
+		raw = raw.get(str(mods.get("enemy_tier", "normal")), 0.0)
+	var chance := float(raw)
 	var mult := float(cfg.get(side + "_mult", 1.0))
 	if side == "player":
 		chance += float(mods.get("crit", 0.0))

@@ -15,11 +15,11 @@ func test_recruit_offers_unowned_generals_and_you_keep_one() -> void:
 	var ids := {}
 	for c in offer:
 		ids[c["id"]] = true
-		check(not c["soldier"] and c["in_pool"] and c["id"] != "guanyu", c["id"])  # the lord cards are in the pool too
+		check(not c["soldier"] and c["in_pool"], c["id"])  # the lord cards are in the pool too (and an owned general may come again: another copy raises the tier)
 	check_eq(ids.size(), offer.size(), "no duplicates in an offer")
 	var generals: Array = offer.filter(func(c): return not SaveData.is_lord_card(c["id"]))
 	s.take(generals[1]["id"])
-	check_eq(s.owned, ["guanyu", generals[1]["id"]])
+	check(s.owned.has(generals[1]["id"]), "the picked one is kept")
 
 
 func _copies_for(tier_index: int) -> int:
@@ -95,7 +95,7 @@ func test_duplicate_soldiers_stack_and_new_types_count_too() -> void:
 	var am := float(GameData.get_db().battle.get("attack_mult", 1.0))
 	var g: Dictionary = GameData.get_db().gacha
 	var w2: float = float(g["soldier_decay_floor"]) + (1.0 - float(g["soldier_decay_floor"])) * float(g["soldier_decay"])
-	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * (1.0 + w2) * am)))) <= 2, "the second copy counts a bit less (smooth decay)")
+	check(absi(dup.leader_for("zhangfei")["at"] - (base + int(round(spear * (1.0 + w2) * am * float(one.leader_for("zhangfei")["card"]["base_at"]) / 60.0)))) <= 2, "the second copy counts a bit less (smooth decay)")
 	check(dup.leader_for("zhangfei")["at"] > one.leader_for("zhangfei")["at"], "but a copy still adds strength")
 	var many := SaveData.new()
 	many.owned = ["zhangfei"]
@@ -566,6 +566,7 @@ func test_the_lords_unit_grows_with_his_retinue_and_servants() -> void:
 	for m in with["members"]:
 		full += m["at"]
 	full *= float(db.battle.get("attack_mult", 1.0))
+	full *= float(with["card"]["base_at"]) / float(db.battle["leader_base"])
 	check(absf(float(with["at"]) - (float(alone["at"]) + full * mult)) < 2.5, "each counts lord_member_mult of its strength: %d vs %d" % [with["at"], int(alone["at"] + full * mult)])
 	check(s.validate_party(["qinwei"]) != "", "a retinue card can never lead a unit of its own")
 	for cid in ["yahuan", "xiuniang", "gongnv", "shinv", "qinwei"]:

@@ -11,8 +11,8 @@
     "_feel": "战斗手感（双方同时生效）：attack_mult 乘所有人的攻击，hp_mult 乘所有人的血量；两个乘起来是 1.0 时双方强度对比不变，但打得更快、更起伏（单次伤害占血量的比例变大）",
     "attack_mult": 1.1,
     "hp_mult": 0.9,
-    "_crit": "暴击：每次造成伤害各自掷一次——我方每一击 player_chance 几率造成 player_mult 倍伤害，敌人每一击 enemy_chance 几率 enemy_mult 倍；宝物 mods.crit / mods.crit_mult 加在我方上。想更随机就加大几率或倍数",
-    "crit": {"player_chance": 0.12, "player_mult": 1.6, "enemy_chance": 0.08, "enemy_mult": 1.5},
+    "_crit": "暴击：每次造成伤害各自掷一次——我方每一击 player_chance 几率造成 player_mult 倍伤害，敌人每一击 enemy_chance（按关卡档位 normal / elite / boss / lose=必败）几率 enemy_mult 倍；宝物 mods.crit / mods.crit_mult 加在我方上。想更随机就加大几率或倍数",
+    "crit": {"player_chance": 0.05, "player_mult": 1.6, "enemy_chance": {"normal": 0.05, "elite": 0.10, "boss": 0.20, "lose": 0.20}, "enemy_mult": 1.5},
     "_scaling": "敌人强度公式（只调 strength 一个数）：强度 = 血×攻×行动数。第 N 章（order，从 0 起）普通战斗的目标强度 = strength × base × (N + offset)^exponent —— 一条曲线：强度 = 血×攻，血和攻各自按它的平方根走；指数大于 1 时强度越往后越陡，但我方队伍也在涨，所以难度（敌我之比）是前期陡、后期平（指数 0.5 就是平方根曲线）；精英 = tier.elite × 它，首领 = tier.boss × 它。代码把本章每一档战斗的中位数拉到目标，每个敌人相对中位数的强弱仍随它自己的卡牌；章内再按格子线性递增 in_chapter（第一列×start，最后一列×end，prologue 除外）。chapter = 个别章节的手工微调（默认空）。想整体变难/变易：只改 strength",
     "scaling": {
       "strength": 1.0,
@@ -33,7 +33,9 @@
     "boost_mult": 1.5,
     "boost_idle_rounds": 3,
     "boost_chance": 0.5,
-    "leader_mult": 5,
+    "leader_mult": 3,
+    "lord_leader_mult": 4,
+    "leader_base": 60,
     "interrupt_chance": 0.3,
     "interrupt_power": 2.0,
     "defend_cuts": [
@@ -59,7 +61,7 @@
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)",
     "danger_step": 0.2,
     "_difficulty": "难度: permanent (whole campaign) enemy strength per level, e.g. after beating 虎牢关 吕布",
-    "difficulty_step": 0.2,
+    "difficulty_step": 0.3,
     "_affixes": "词缀: every elite / boss square rolls one per run (shown on the map); hp / at are shares, resists add, actions adds, regen heals that share of max HP each enemy turn",
     "affixes": {
       "jianjia": {
