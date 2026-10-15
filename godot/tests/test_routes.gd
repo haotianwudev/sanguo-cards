@@ -388,7 +388,7 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 		var p := walk(q, s, fork, 1, 0, 0)
 		for sid in ["hn_years", "hn_letter", "hn_shu", "hn_zhoujia", "hn_luxun", "hn_lusu", "hn_liuxun", "hn_wan_rest",
 				"hn_chenwu", "hn_qiao", "hn_huafang", "hn_shizu", "hn_liuye", "hn_qs", "hn_leixu", "hn_fuzhu", "hn_zhengbao",
-				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_lvmeng", "hn_feng2", "hn_feast", "hn_end"]:
+				"hn_leichen", "hn_zhangxun", "hn_shouchun", "hn_feng", "hn_bridge", "hn_jiangting", "hn_t_kuibing", "hn_lvmeng", "hn_lvmeng_go", "hn_feng2", "hn_feast", "hn_end"]:
 			check(p.has(sid), "第六章 passes %s (forks %s)" % [sid, str(fork)])
 		check_eq(p[-1], "hn_end")
 		for sid in ["hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
@@ -413,7 +413,9 @@ func test_south_chapter6_recruiting_lvmeng_after_ending_eleven() -> void:
 	s.flags.append(E11)
 	var q := quest_by_id("huainan_s")
 	var p := walk(q, s, [], 1, 0, 0)
-	check(p.has("hn_lvmeng"), "passes hn_lvmeng")
+	for sid in ["hn_t_kuibing", "hn_lvmeng", "hn_lvmeng_take"]:
+		check(p.has(sid), "passes " + sid)
+	check(not p.has("hn_lvmeng_go"), "the 面饼 scene is only for sending him off")
 	check(s.has_card("lvmeng_qingnian"), "吕蒙 joins after 结局十一")
 	check(s.run_records.has("吕蒙：入队"))
 
@@ -898,10 +900,10 @@ func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:
 	check(Quests.option_hint(s, opts[0]).contains("吕蒙：入队"))
 	check(not Quests.option_locked(s, opts[1]), "联手严白虎 open")
 	var p := walk(q, s, [])
-	for sid in ["jd_start", "jd_shenting", "jd_moling", "jd_yeyan", "jd_ganning", "jd_b_ally", "jd_b_road", "jd_b_zt", "jd_b_gan", "jd_b_rest",
+	for sid in ["jd_start", "jd_shenting", "jd_moling", "lm_rest", "jd_yeyan", "jd_ganning", "jd_b_ally", "jd_b_road", "jd_b_zt", "jd_b_gan", "jd_b_rest",
 			"jd_b_hunt", "jd_b_menke", "jd_pifu"]:
 		check(p.has(sid), "匹夫 route passes " + sid)
-	for sid in ["jd_g_meet", "jd_g_gn", "jd_g_join", "jd_g_yan", "jd_g_zhoutai", "jd_wanglang", "jd_fuchun", "jd_end"]:
+	for sid in ["lm_join", "jd_ganning_lm", "jd_g_meet", "jd_g_gn", "jd_g_join", "jd_g_yan", "jd_g_zhoutai", "jd_wanglang", "jd_fuchun", "jd_end"]:
 		check(not p.has(sid), "匹夫 route never reaches " + sid)
 	check_eq(p[-1], "jd_pifu")
 	check(not s.has_card("ganning"), "甘宁 never joins on this route")
