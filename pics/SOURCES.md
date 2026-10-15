@@ -744,3 +744,13 @@
 | `cg:c8_caihe` | source/cg/c8_caihe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c8_zhangyun` | source/cg/c8_zhangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_huangxu_sick` | source/cg/e_huangxu_sick.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_qinggong` | source/cg/c8_qinggong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_yiguan` | source/cg/c8_yiguan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_eve` | source/cg/c8_eve.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_changsha` | source/cg/c9_changsha.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_zhoujia` | source/cg/c9_zhoujia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_chenwu` | source/cg/c9_chenwu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_huafang` | source/cg/c9_huafang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_kaicang` | source/cg/c9_kaicang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_chengtou` | source/cg/c9_chengtou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_jibao` | source/cg/c9_jibao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -625,3 +625,21 @@
 - [x] 2026-10-12 portrait `caihe` ← caihe.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-12 portrait `caifu_bing` ← caifu_bing.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-12 portrait `caifu_qi` ← caifu_qi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-14 cg `c6_warn` ← c6_warn.jpg · ok
+- [x] 2026-10-14 cg `c6_seal` ← c6_seal.jpg · ok
+- [x] 2026-10-14 cg `c8_shuige` ← c8_shuige.jpg · ok
+- [x] 2026-10-14 cg `c8_fubing` ← c8_fubing.jpg · ok
+- [x] 2026-10-14 cg `c8_qibing` ← c8_qibing.jpg · ok
+- [x] 2026-10-14 cg `c8_caihe` ← c8_caihe.jpg · ok
+- [x] 2026-10-14 cg `c8_zhangyun` ← c8_zhangyun.jpg · ok
+- [x] 2026-10-14 cg `c8_zupu` ← c8_zupu.jpg · ok
+- [x] 2026-10-14 cg `c8_qinggong` ← c8_qinggong.jpg · ok
+- [x] 2026-10-14 cg `c8_yiguan` ← c8_yiguan.jpg · ok
+- [x] 2026-10-14 cg `c8_eve` ← c8_eve.jpg · ok
+- [x] 2026-10-14 cg `c9_changsha` ← c9_changsha.jpg · ok
+- [x] 2026-10-14 cg `c9_zhoujia` ← c9_zhoujia.jpg · ok
+- [x] 2026-10-14 cg `c9_chenwu` ← c9_chenwu.jpg · ok
+- [x] 2026-10-14 cg `c9_huafang` ← c9_huafang.jpg · ok
+- [x] 2026-10-14 cg `c9_kaicang` ← c9_kaicang.jpg · ok
+- [x] 2026-10-14 cg `c9_chengtou` ← c9_chengtou.jpg · ok
+- [x] 2026-10-14 cg `c9_jibao` ← c9_jibao.jpg · ok
