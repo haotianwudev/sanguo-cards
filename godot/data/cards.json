@@ -3124,6 +3124,43 @@
       "weight": 1,
       "scope": "north"
     },
+    "zhugejin": {
+      "name": "诸葛瑾",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 78,
+      "at": 58,
+      "scope": "south",
+      "pool": false
+    },
+    "wu_nushou": {
+      "name": "吴军弩手",
+      "rarity": "N",
+      "troop": "archer",
+      "hp": 40,
+      "at": 46,
+      "weight": 2,
+      "scope": "south"
+    },
+    "bilan_shusheng": {
+      "name": "避乱书生",
+      "rarity": "N",
+      "troop": "strategist",
+      "hp": 44,
+      "at": 40,
+      "weight": 2,
+      "scope": "south"
+    },
+    "wu_canjun": {
+      "name": "吴军参军",
+      "rarity": "N",
+      "troop": "strategist",
+      "hp": 54,
+      "at": 50,
+      "elite": true,
+      "weight": 1,
+      "scope": "south"
+    },
     "loucuan_nushou": {
       "name": "楼船弩手",
       "rarity": "N",

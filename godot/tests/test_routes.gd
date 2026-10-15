@@ -902,12 +902,13 @@ func test_south_chapter7_with_the_jinfan_men_takes_jiangdong() -> void:
 		for sid in ["jd_b_ally", "jd_b_zt", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
 			check(not p.has(sid), "江东 route never reaches " + sid)
 		check_eq(p[-1], "jd_end")
-		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "sunquan", "sunshangxiang", "sunce_bawang", "zhouyu_chibi", "lvmeng"]:
+		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "sunce_bawang", "zhouyu_chibi", "lvmeng"]:
 			check(s.has_card(c), "%s joins in 第七章" % c)
+		check(not s.has_card("sunquan") and not s.has_card("sunshangxiang"), "孙权、孙尚香 wait for 第八章")
 		for line in ["南线：东取江东", "江东：收服锦帆", "甘宁：入队", "江东：周泰护主", "江东：会稽平定", "南线：江东平定"]:
 			check(s.run_records.has(line), "第七章 records " + line)
 		finish(q, s)
-		check(Quests.current_quest(s) == null, "未完待续 after 第七章")
+		check_eq(Quests.current_quest(s)["id"], "menghu", "南线：江东平定 → 第八章 · 猛虎之陨")
 
 
 func test_south_chapter7_losing_at_dantu_is_ending_eleven_too() -> void:
@@ -918,6 +919,88 @@ func test_south_chapter7_losing_at_dantu_is_ending_eleven_too() -> void:
 	s.square = "jd_b_menke"
 	check(Quests.lose(q, s, rng(3)), "the 丹徒山 ambush carries on into the ending")
 	check_eq(s.square, "jd_pifu")
+
+
+# ---- 南线第八章 · 猛虎之陨 ----------------------------------------------------------------
+
+const E12 := "结局十二 · 曲误"
+
+
+func ch8s_save(flags := []) -> SaveData:
+	var s := ch7s_save([E11])
+	s.flags += ["江东：收服锦帆", "甘宁：入队", "江东：会稽平定", "南线：江东平定"] + flags
+	s.quests_cleared.append("jiangdong")
+	for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "lvmeng"]:
+		s.grant_card(c)
+	return s
+
+
+func test_south_chapter8_follows_jiangdong_and_hands_over_sunquan_and_sunshangxiang() -> void:
+	var s := ch8s_save()
+	var q := quest_by_id("menghu")
+	check_eq(Quests.current_quest(s)["id"], "menghu")
+	var r := rng(1)
+	Quests.begin(q, s, r)
+	check_eq(s.square, "m8_start")
+	Quests.resolve(q, s, r, -1)
+	check(s.has_card("sunquan") and s.has_card("sunshangxiang"), "孙权、孙尚香 join at the start of 第八章")
+
+
+func test_south_chapter8_without_zhugejin_ends_in_ending_twelve() -> void:
+	## first time through: the door at 曲阿 is locked, nobody reads 诸葛亮's 「先火后水」, 周瑜 dies at 白河
+	for fork in [[], ["m8_q_m1", "m8_h_m1", "m8_d_m1", "m8_x_m1"]]:
+		var s := ch8s_save()
+		var q := quest_by_id("menghu")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["m8_start", "m8_bidao", "m8_qua", "m8_chaimen", "m8_news", "m8_modao", "m8_xianfeng", "m8_zhuibing", "m8_tuogu", "m8_yuye",
+				"m8_luoyang", "m8_nanyang", "m8_xiangyang", "m8_bowang", "m8_quyou", "m8_baihe_bad", "m8_quwu"]:
+			check(p.has(sid), "曲误 route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["m8_jin", "m8_nanyang_j", "m8_jin_read", "m8_baihe", "m8_xiongdi", "m8_bazhen", "m8_end"]:
+			check(not p.has(sid), "曲误 route never reaches " + sid)
+		check_eq(p[-1], "m8_quwu")
+		check(not s.has_card("zhugejin"))
+		for line in ["南线：洛阳陷落", "孙坚战死", "易帜为吴", E12]:
+			check(s.run_records.has(line), "第八章 records " + line)
+		finish(q, s)
+		check(s.flags.has(E12))
+		check(Quests.current_quest(s) == null, "the story stops at 结局十二")
+
+
+func test_south_chapter8_losing_at_baihe_is_ending_twelve_too() -> void:
+	var s := ch8s_save()
+	var q := quest_by_id("menghu")
+	Quests.begin(q, s, rng(3))
+	s.square = "m8_baihe_bad"
+	check(Quests.lose(q, s, rng(3)), "the 白河 fight carries on into the ending")
+	check_eq(s.square, "m8_quwu")
+
+
+func test_south_chapter8_after_ending_twelve_zhugejin_saves_zhouyu() -> void:
+	for fork in [[], ["m8_q_m1", "m8_h_m1", "m8_d_m1", "m8_x_m1", "m8_b_m1"]]:
+		var s := ch8s_save([E12])
+		var q := quest_by_id("menghu")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["m8_start", "m8_jin", "m8_tuogu", "m8_luoyang", "m8_nanyang_j", "m8_bowang", "m8_quyou", "m8_jin_read", "m8_baihe",
+				"m8_xiongdi", "m8_youcuo", "m8_bazhen", "m8_zhoutai", "m8_end"]:
+			check(p.has(sid), "白河 good route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["m8_chaimen", "m8_nanyang", "m8_baihe_bad", "m8_quwu"]:
+			check(not p.has(sid), "good route never reaches " + sid)
+		check_eq(p[-1], "m8_end")
+		check(s.has_card("zhugejin"), "诸葛瑾 joins")
+		for line in ["诸葛瑾：入队", "孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"]:
+			check(s.run_records.has(line), "第八章 records " + line)
+		finish(q, s)
+		check(Quests.current_quest(s) == null, "未完待续 after 第八章")
+
+
+func test_south_chapter8_the_bazhen_fight_is_lost_and_carries_on() -> void:
+	var s := ch8s_save([E12])
+	var q := quest_by_id("menghu")
+	Quests.begin(q, s, rng(3))
+	s.run_records.append("诸葛瑾：入队")
+	s.square = "m8_bazhen"
+	check(Quests.lose(q, s, rng(3)), "八阵 is a retreat, not a restart")
+	check_eq(s.square, "m8_zhoutai")
 
 
 func test_ganning_no_longer_joins_in_chapter5() -> void:
