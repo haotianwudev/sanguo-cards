@@ -33,7 +33,12 @@ func walk(q: Dictionary, s: SaveData, prefer: Array, seed_value := 1, pick_offer
 			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
 			Quests.choose_event(q, s, r, ok[0])
 		Quests.offer(q, s, r)
-		Quests.resolve(q, s, r, choose_idx if sq["type"] == "choose" else (pick_offer if not s.offer.is_empty() else -1))
+		var c := choose_idx
+		if sq["type"] == "choose" and c < 0:
+			c = sq["choose"].size() + c  # -1 = the last option, as an Array index
+		if sq["type"] == "choose" and Quests.option_locked(s, sq["choose"][c]):
+			c = range(sq["choose"].size()).filter(func(i): return not Quests.option_locked(s, sq["choose"][i]))[0]  # a gated option (居巢 诸葛瑾) falls back to the first open one
+		Quests.resolve(q, s, r, c if sq["type"] == "choose" else (pick_offer if not s.offer.is_empty() else -1))
 		s.offer = []
 		s.resolved = true
 		var opts := Quests.next_options(q, s)
@@ -388,8 +393,9 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 		check_eq(p[-1], "hn_end")
 		for sid in ["hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
 			check(not p.has(sid), "刘晔 route never reaches " + sid)
-		for c in ["lusu", "zhugejin", "chenwu", "liuye"]:
+		for c in ["lusu", "chenwu", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
+		check(not s.has_card("zhugejin"), "诸葛瑾 can't be asked along before 结局十二")
 		check(not s.has_card("daqiao") and not p.has("hn_wedding"), "the double wedding (and 大乔) wait for 第七章")
 		for r in ["wentai_shu", "zhou_pu", "weixi"]:
 			check(s.relics.has(r), "第六章 hands over the 宝物 " + r)
@@ -848,7 +854,7 @@ func ch7s_save(flags := []) -> SaveData:
 	var s := ch6s_save()
 	s.flags += [E10, "庐江：刘晔调停", "庐江：雷家覆灭", "庐江：喜期将近"] + flags
 	s.quests_cleared.append("huainan_s")
-	for c in ["liuye", "lusu", "zhugejin", "chenwu"]:
+	for c in ["liuye", "lusu", "chenwu"]:
 		s.grant_card(c)
 	return s
 
@@ -958,7 +964,7 @@ func test_south_chapter8_without_zhugejin_ends_in_ending_twelve() -> void:
 		for sid in ["m8_jin", "m8_nanyang_j", "m8_jin_read", "m8_baihe", "m8_xiongdi", "m8_bazhen", "m8_end"]:
 			check(not p.has(sid), "曲误 route never reaches " + sid)
 		check_eq(p[-1], "m8_quwu")
-		check(not s.run_records.has("诸葛瑾：留下"), "诸葛瑾 goes off to 荆州 and misses 白河")
+		check(not s.run_records.has("诸葛瑾：入队"), "诸葛瑾 goes off to 荆州 and misses 白河")
 		for line in ["南线：洛阳陷落", "孙坚战死", "易帜为吴", E12]:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
@@ -977,7 +983,8 @@ func test_south_chapter8_losing_at_baihe_is_ending_twelve_too() -> void:
 
 func test_south_chapter8_after_ending_twelve_zhugejin_saves_zhouyu() -> void:
 	for fork in [[], ["m8_q_m1", "m8_h_m1", "m8_d_m1", "m8_x_m1", "m8_b_m1"]]:
-		var s := ch8s_save([E12])
+		var s := ch8s_save([E12, "诸葛瑾：入队"])
+		s.grant_card("zhugejin")
 		var q := quest_by_id("menghu")
 		var p := walk(q, s, fork, 1, 0, 0)
 		for sid in ["m8_start", "m8_jin", "m8_tuogu", "m8_luoyang", "m8_nanyang_j", "m8_bowang", "m8_quyou", "m8_jin_read", "m8_baihe",
@@ -986,17 +993,16 @@ func test_south_chapter8_after_ending_twelve_zhugejin_saves_zhouyu() -> void:
 		for sid in ["m8_chaimen", "m8_nanyang", "m8_baihe_bad", "m8_quwu"]:
 			check(not p.has(sid), "good route never reaches " + sid)
 		check_eq(p[-1], "m8_end")
-		for line in ["诸葛瑾：留下", "孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"]:
+		for line in ["孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"]:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
 		check(Quests.current_quest(s) == null, "未完待续 after 第八章")
 
 
 func test_south_chapter8_the_bazhen_fight_is_lost_and_carries_on() -> void:
-	var s := ch8s_save([E12])
+	var s := ch8s_save([E12, "诸葛瑾：入队"])
 	var q := quest_by_id("menghu")
 	Quests.begin(q, s, rng(3))
-	s.run_records.append("诸葛瑾：留下")
 	s.square = "m8_bazhen"
 	check(Quests.lose(q, s, rng(3)), "八阵 is a retreat, not a restart")
 	check_eq(s.square, "m8_zhoutai")
@@ -1050,3 +1056,19 @@ func test_choosing_to_save_蔡文姬_takes_the_route_at_once() -> void:
 	Quests.resolve(q, s, rng(3), 0)  # 出手相救
 	check(s.run_records.has("路线：守洛阳"), "the line is recorded at the choice")
 	check(Quests.is_open(q["squares"]["wenji_tale"], s) and Quests.is_ghost(q["squares"]["supply"], s), "the 蔡文姬 line is solid, the other greyed")
+
+
+func test_south_chapter6_zhugejin_can_be_asked_along_only_after_ending_twelve() -> void:
+	var q := quest_by_id("huainan_s")
+	var opts: Array = q["squares"]["hn_lusu"]["choose"]
+	var first := ch6s_save()
+	check(Quests.option_locked(first, opts[0]), "first time through: 请子瑜同行 is greyed")
+	check(not Quests.option_locked(first, opts[1]))
+	var s := ch6s_save()
+	s.flags += [E10, "结局十二 · 曲误"]
+	check(not Quests.option_locked(s, opts[0]), "after 结局十二 the option opens")
+	var p := walk(q, s, [], 1, 0, 0)
+	check(p.has("hn_lusu") and p[-1] == "hn_end")
+	check(s.has_card("zhugejin") and s.has_card("lusu"), "诸葛瑾 joins with 鲁肃")
+	finish(q, s)
+	check(s.flags.has("诸葛瑾：入队"), "and 第八章 will know he came along")

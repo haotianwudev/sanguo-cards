@@ -545,6 +545,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			assert(not option_locked(save, opt), "locked choice")
 			save.choices[s["id"]] = opt["goto"]
 			record(save, opt["record"])
+			for cid in s["cards"]:  # the square's own joiners come whichever way you choose (居巢: 鲁肃)
+				gained.append(db.cards[cid])
+				save.grant_card(cid, true)
 			if opt["card"] != "":
 				gained.append(db.cards[opt["card"]])
 				save.grant_card(opt["card"], true)
