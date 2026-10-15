@@ -360,8 +360,8 @@ const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce",
 	"管亥": "guanhai",
 	"马超": "machao", "孟起": "machao",
 	"马岱": "madai",
-	"乔公": "qiaoguolao", "子敬": "lusu", "甄宓": "zhenmi_young", "孙尚香": "sunshangxiang", "香香": "sunshangxiang", "尚香": "sunshangxiang",
-	"阿蒙": "lvmeng", "吕子明": "lvmeng"}  # TODO: once a later chapter grows her up and wires the real `zhenmi` card, point this at that chapter's own squares only
+	"乔公": "qiaoguolao", "子敬": "lusu", "甄宓": "zhenmi_young", "孙尚香": "sunshangxiang", "香香": "sunshangxiang", "尚香": "sunshangxiang",  # TODO: once a later chapter grows her up and wires the real `zhenmi` card, point this at that chapter's own squares only
+	"吕蒙": "lvmeng_qingnian", "阿蒙": "lvmeng_qingnian", "吕子明": "lvmeng_qingnian"}  # the young one: the SR 吕蒙 (白衣渡江) isn't in the story yet
 static func enemy_portrait_key(enemy: Dictionary) -> String:
 	var key: String = enemy.get("portrait", "")
 	if key == "":
