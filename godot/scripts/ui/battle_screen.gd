@@ -61,7 +61,10 @@ func _ready() -> void:
 	_log_lines(b.opening)
 	b.take_events()
 	_refresh()
-	if auto_on:
+	if b.result != "":  # decided before anyone moved (round 1's 插入 finished a weak enemy): every button is shut, so settle it here
+		_busy = true
+		_finish_at_start.call_deferred()
+	elif auto_on:
 		_auto_step.call_deferred()
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
@@ -1113,6 +1116,11 @@ func _clear_marks() -> void:
 	for c in _cards:
 		_boost_pop(c, false)
 		c.modulate = Color.WHITE
+
+
+func _finish_at_start() -> void:
+	await get_tree().create_timer(1.0).timeout  # let the opening lines and HP bars show first
+	_finish()
 
 
 func _finish() -> void:
