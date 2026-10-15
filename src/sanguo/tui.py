@@ -508,7 +508,8 @@ async def mount_offer(parent, db: CardDB, cards: list, name_prefix: str = "pick"
 
 class GachaScreen(Screen):
     """招募: a few unowned generals are shown; keep one. Unlimited."""
-    BINDINGS = [Binding("escape", "app.pop_screen", "返回"), Binding("enter", "roll", "招募")] + \
+    # priority: Enter always rolls — routed through the focused 招募 button it was dropped while the button's press flash was on
+    BINDINGS = [Binding("escape", "app.pop_screen", "返回"), Binding("enter", "roll", "招募", priority=True)] + \
         [Binding(str(i), f"pick({i})", show=False) for i in range(1, 6)]
 
     def compose(self) -> ComposeResult:
