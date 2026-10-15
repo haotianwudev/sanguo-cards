@@ -1447,6 +1447,16 @@
       ],
       "scope": "south"
     },
+    "lvmeng_qingnian": {
+      "name": "吕蒙·青年",
+      "rarity": "R",
+      "troop": "infantry",
+      "person": "lvmeng",
+      "hp": 62,
+      "at": 78,
+      "pool": false,
+      "scope": "south"
+    },
     "lvmeng": {
       "name": "吕蒙",
       "rarity": "SR",

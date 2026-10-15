@@ -446,7 +446,7 @@ Replacing art: overwriting `pics/source/<key>.jpg` with a new version is fine (g
 has no title band, drop the entry's `prep` block and point `src` at the source file; re-check the framing. Never commit art that isn't ours (the old Rance placeholder was scrubbed
 from history for this reason).
 
-第七章补充：秣陵城外「辎重车里的少年」（`lm_fight` 战 → `lm_join` 入队）吕蒙十五六岁偷跟军；章末「小霸王」（`jd_rest`）孙策拿 `sunce_bawang`、周瑜拿 `zhouyu_chibi`（赤壁）；吕蒙、周瑜·赤壁都是 `pool: false`，只走剧情，不进抽卡池。
+第七章补充：秣陵城外「辎重车里的少年」（`lm_fight` 战 → `lm_join` 入队）吕蒙十五六岁偷跟军，入队拿 `lvmeng_qingnian`（吕蒙·青年 R，`person: lvmeng`）；原 `lvmeng`（SR、白衣渡江）留给以后成年的吕蒙，暂时没有发放点；章末「小霸王」（`jd_rest`）孙策拿 `sunce_bawang`、周瑜拿 `zhouyu_chibi`（赤壁）；吕蒙两张、周瑜·赤壁都是 `pool: false`，只走剧情，不进抽卡池。
 
 卡牌张数规则：任何一次获得（抽卡、宝箱、剧情给）都只 +1 张；新周目再拿到以前通关过的卡，是「永久记录的张数 + 1」，即便已是银卡也只 +1，不会直接升一阶；只有点化（战功或事件）一次 +3 张（`gacha.upgrade_copies`）。通关结算 `commit_history` 对永久张数取最大值，不相加。
 

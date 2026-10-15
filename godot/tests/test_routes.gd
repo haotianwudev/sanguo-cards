@@ -902,7 +902,7 @@ func test_south_chapter7_with_the_jinfan_men_takes_jiangdong() -> void:
 		for sid in ["jd_b_ally", "jd_b_zt", "jd_b_gan", "jd_b_menke", "jd_pifu"]:
 			check(not p.has(sid), "江东 route never reaches " + sid)
 		check_eq(p[-1], "jd_end")
-		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "sunce_bawang", "zhouyu_chibi", "lvmeng"]:
+		for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "sunce_bawang", "zhouyu_chibi", "lvmeng_qingnian"]:
 			check(s.has_card(c), "%s joins in 第七章" % c)
 		check(not s.has_card("sunquan") and not s.has_card("sunshangxiang"), "孙权、孙尚香 wait for 第八章")
 		for line in ["南线：东取江东", "江东：收服锦帆", "甘宁：入队", "江东：周泰护主", "江东：会稽平定", "南线：江东平定"]:
@@ -930,7 +930,7 @@ func ch8s_save(flags := []) -> SaveData:
 	var s := ch7s_save([E11])
 	s.flags += ["江东：收服锦帆", "甘宁：入队", "江东：会稽平定", "南线：江东平定"] + flags
 	s.quests_cleared.append("jiangdong")
-	for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "lvmeng"]:
+	for c in ["ganning", "zhoutai", "jiangqin", "zhangzhao", "yufan", "lvmeng_qingnian"]:
 		s.grant_card(c)
 	return s
 
