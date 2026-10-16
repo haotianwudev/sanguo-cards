@@ -658,8 +658,11 @@ func _show_square(s: Dictionary) -> void:
 			body = "[color=%s]已击破。[/color]" % Kit.c("green").to_html()
 		elif s["type"] == "recover":
 			body = "休整完毕，体力全满。"
-		elif s["type"] == "choose":
-			body = "已做出选择。"
+		elif s["type"] == "choose":  # a made pick: its summary, and a way to pick again
+			body = prompt if prompt != "" else "已做出选择。"
+			var again := Kit.button("重新选择", "gold")
+			again.pressed.connect(_choose_again)
+			buttons.add_child(again)
 		elif s["type"] == "mystery":
 			body = "\n".join(save.event_note)
 		elif s["type"] == "event":  # already read: a summary, never the scene again
@@ -1042,6 +1045,14 @@ func _resolve(choice := -1) -> void:
 		_refresh()
 		return
 	_advance()
+
+
+func _choose_again() -> void:
+	## a made choice shown again (a save left sitting on it): undo the pick and reopen the options
+	Quests.reopen_choice(Game.save, Game.rng)
+	Game.persist()
+	_rebuild_map()
+	_refresh()
 
 
 func _pick_level() -> void:

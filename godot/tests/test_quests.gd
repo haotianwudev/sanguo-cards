@@ -1606,6 +1606,23 @@ func test_stepping_back_reopens_the_xunyou_or_huangzhong_choice() -> void:
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["jx_plan_huang"])
 
 
+func test_a_save_left_on_a_made_choice_can_reopen_it() -> void:
+	## an older build stepped back onto the made pick and saved there: the map's 「重新选择」 reopens it
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	Quests.resolve(q, s, rng(0), 0)
+	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar", "raid"])
+	Quests.move(q, s, "plan")
+	Quests.resolve(q, s, rng(0), 1)
+	Quests.move(q, s, "zy_lure")
+	s.rewind_step()  # the old 重返上一格
+	check(s.square == "plan" and s.resolved, "sitting on the made choice")
+	Quests.reopen_choice(s)
+	check(s.square == "plan" and not s.resolved, "its options are open again")
+	check(not s.run_records.has("定计：周瑜调虎离山"), "the old pick is undone")
+
+
 func test_stepping_back_onto_the_first_square_choice_restarts_it() -> void:
 	var q := quest(0)
 	var s := SaveData.create()

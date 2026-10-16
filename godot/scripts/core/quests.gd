@@ -1077,6 +1077,12 @@ static func step_back(save: SaveData, rng: RandomNumberGenerator = null) -> void
 	## (a choose square moves on by itself the moment you pick). So landing on a made choice goes back to just before it:
 	## re-enter it from the square before (or, on a chapter's first square, from the chapter start) and pick again.
 	save.rewind_step()
+	reopen_choice(save, rng)
+
+
+static func reopen_choice(save: SaveData, rng: RandomNumberGenerator = null) -> void:
+	## Standing on a choose square whose pick is already made: undo the pick and enter the square again, unresolved.
+	## Also what the map's 「重新选择」 button calls, for a save that was left sitting on a made choice.
 	var q: Variant = current_quest(save)
 	if q == null or not save.resolved or here(view(q, save), save)["type"] != "choose":
 		return
