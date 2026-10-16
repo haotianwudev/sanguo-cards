@@ -1589,6 +1589,23 @@ func test_stepping_back_onto_a_made_choice_lets_you_choose_again() -> void:
 	check_eq(s.square, "raid", "once more goes past the choice to the square before it")
 
 
+func test_stepping_back_reopens_the_xunyou_or_huangzhong_choice() -> void:
+	## 第五章 刘表来袭: 听荀攸 / 听黄忠 — the pick (and its 宝物) is undone and can be made the other way
+	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "jingxiang")[0]
+	var s := SaveData.create()
+	s.replay = "jingxiang"  # so current_quest finds this chapter without the earlier ones' flags
+	Quests.begin(q, s)
+	Quests.resolve(q, s, rng(0), 0)
+	walk_to(q, s, ["jx_diaochan", "t_jx1", "t_jx1_b", "jx_laixi"])
+	walk_to(q, s, ["jx_plan_xun"])
+	check(s.relics.has("xunyou_qizi"))
+	Quests.step_back(s)
+	check(s.square == "jx_laixi" and not s.resolved, "one step back reopens the choice")
+	check(not s.relics.has("xunyou_qizi") and not s.run_records.has("议事：荀攸示弱诱敌"))
+	Quests.resolve(q, s, rng(0), 1)
+	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["jx_plan_huang"])
+
+
 func test_stepping_back_onto_the_first_square_choice_restarts_it() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
