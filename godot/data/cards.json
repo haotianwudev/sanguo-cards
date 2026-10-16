@@ -613,6 +613,15 @@
       "weight": 2,
       "scope": "south"
     },
+    "shanyue_daoke": {
+      "name": "山越刀客",
+      "rarity": "N",
+      "troop": "bandit",
+      "hp": 40,
+      "at": 54,
+      "weight": 1,
+      "scope": "south"
+    },
     "shanyue_nu": {
       "name": "山越弩手",
       "rarity": "N",
@@ -1672,6 +1681,16 @@
       "skills": [
         "qishe"
       ],
+      "scope": "south"
+    },
+    "zulang": {
+      "name": "祖郎·山越宗帅",
+      "rarity": "R",
+      "troop": "bandit",
+      "hp": 60,
+      "at": 78,
+      "skills": [],
+      "pool": false,
       "scope": "south"
     },
     "zhuzhi": {

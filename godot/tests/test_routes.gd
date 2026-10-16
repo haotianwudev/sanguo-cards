@@ -974,14 +974,15 @@ func test_south_chapter8_without_zhugejin_ends_in_ending_twelve() -> void:
 		var s := ch8s_save()
 		var q := quest_by_id("menghu")
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["m8_start", "m8_bidao", "m8_qua", "m8_chaimen", "m8_news", "m8_modao", "m8_xianfeng", "m8_zhuibing", "m8_tuogu", "m8_yuye",
+		for sid in ["m8_start", "m8_bidao", "m8_qua", "m8_chaimen", "m8_shankou", "m8_liniang", "m8_zulang", "m8_shanmeng", "m8_news", "m8_modao", "m8_xianfeng", "m8_zhuibing", "m8_tuogu", "m8_yuye",
 				"m8_luoyang", "m8_nanyang", "m8_xiangyang", "m8_bowang", "m8_quyou", "m8_baihe_bad", "m8_quwu"]:
 			check(p.has(sid), "曲误 route passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["m8_jin", "m8_nanyang_j", "m8_jin_read", "m8_baihe", "m8_xiongdi", "m8_bazhen", "m8_end"]:
 			check(not p.has(sid), "曲误 route never reaches " + sid)
 		check_eq(p[-1], "m8_quwu")
 		check(not s.run_records.has("诸葛瑾：入队"), "诸葛瑾 goes off to 荆州 and misses 白河")
-		for line in ["南线：洛阳陷落", "孙坚战死", "易帜为吴", E12]:
+		check(s.has_card("zulang") and s.has_card("liniang"), "祖郎、黎娘 join after the 山越")
+		for line in ["丹阳：山越归附", "南线：洛阳陷落", "孙坚战死", "易帜为吴", E12]:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
 		check(s.flags.has(E12))
@@ -1003,7 +1004,7 @@ func test_south_chapter8_after_ending_twelve_zhugejin_saves_zhouyu() -> void:
 		s.grant_card("zhugejin")
 		var q := quest_by_id("menghu")
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["m8_start", "m8_jin", "m8_tuogu", "m8_luoyang", "m8_nanyang_j", "m8_bowang", "m8_quyou", "m8_jin_read", "m8_baihe",
+		for sid in ["m8_start", "m8_jin", "m8_shankou", "m8_zulang", "m8_shanmeng", "m8_tuogu", "m8_luoyang", "m8_nanyang_j", "m8_bowang", "m8_quyou", "m8_jin_read", "m8_baihe",
 				"m8_xiongdi", "m8_youcuo", "m8_bazhen", "m8_zhoutai", "m8_end"]:
 			check(p.has(sid), "白河 good route passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["m8_chaimen", "m8_nanyang", "m8_baihe_bad", "m8_quwu"]:
