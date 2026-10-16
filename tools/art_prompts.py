@@ -1479,7 +1479,7 @@ CGS = {
     "c7_stars": "a grassy hilltop above an army camp on a summer night under a sky full of low stars: Cai Wenji (adult, in white) playing a guqin across her knees, the short-haired hero lying back in the grass listening",
     "c4_zhujun": "Sun Jian's camp in the ruins of Luoyang: the veteran general Zhu Jun (grey-bearded, straight-backed, hearty laugh) slapping the huge Sun Jian on the shoulder, Sun Jian bowing formally for once; Sun Ce behind them red-faced trying not to laugh",
     "c6_yizu": "the palace steps of Chang'an the day after Dong Zhuo's death: Dong Bai (adult) kneeling numbly on the stone, the short-haired hero standing in front of her with his blade half drawn, the white-haired Huangfu Song stepping to his side; high above, the small boy emperor clutching a pillar",
-    "c6_warn": "night at a window in Chang'an: Diaochan (adult) in a black cloak, pale but smiling, leaning in at the hero's window by candlelight; only these two people, no one else in the frame",
+    "c6_warn": "night at a window in Chang'an: Diaochan (adult) in a black cloak, pale but smiling, leaning in at the hero's window by candlelight; the hero has a short black buzz cut and wears plain everyday robes (no armor, at home at night), hands empty, no blade anywhere; only these two people, no one else in the frame",
     "c4_siege": "before dawn, torches around a scholar's house in Chang'an: the elderly Cai Yong being led away without resisting, looking back; Cai Wenji (adult, in white) reaching after him, held back by the short-haired hero",
     "c4_dongjia": "a ruined roadside shrine at dawn: the door kicked open, Dong Bai (adult) standing in the doorway with her twin hammers, grey-haired veterans only as silhouettes behind her; the hero looking up from the straw",
     "c7_neiying": "a dark corner at the foot of the city wall at night: a middle-aged Jiangdong veteran soldier with half of one ear missing has crawled out of a dog hole and kneels in front of the hero, his face drained of colour, shoulders shaking; Huang Zhong (middle-aged, stout, bow in hand) stands at the tent flap pointing out the lie and then crouches to take the veteran's coat; Zhou Yu (teen, holding an account book) stares, startled; torches on the wall above, mud and rain",
@@ -1975,7 +1975,7 @@ REDO = [
     ("c6_seal", "孙坚手里捧着紫色龙纹盒子要去掉：他说不知玉玺下落，双手必须是空的，殿上也不能有任何盒子 / 锦盒 / 箱子", 2),
     ("c9_lusu", "要加上诸葛瑾：第六章居巢这一格他在场（替鲁肃管粮仓的账），站在粮囤门口捧着账册；主角肩上扛的大刀也去掉（盔甲不用改），双手空着", 2),
     ("c10_ganning", "提灯笼的主角穿成了绿色长袍：要换成他的古铜鎏金旧甲、朱红内衬、纯黑披风、短寸头", 1),
-    ("c6_warn", "窗外右侧偷看的董白要去掉：这一格董白已回郿坞，画面只能有貂蝉和主角两个人", 2),
+    ("c6_warn", "主角要换成素色常服（深夜在自己屋里，不穿盔甲）、黑色短寸头（现图是盖眉的长刘海），肩上的大刀也去掉，双手空着；画面仍只有貂蝉和主角两个人", 3),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
