@@ -1219,7 +1219,7 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng", "wenji_tale", "plan", "xizi", "caiyong", "yuexia", "xian"],
 		"jingxiang": ["jx_diaochan", "jx_bubing", "jx_rest", "jx_shaoka", "jx_zongzei", "jx_xiangyang", "jx_xunluo", "jx_shuijun"],
 		"dongui": ["route", "tuwei", "luan", "luo_ruin", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"],
-		"menghu": ["m8_shankou", "m8_xunchuan", "m8_yuye", "m8_xiangyang", "m8_t_hanshui"]}
+		"menghu": ["m8_shankou", "m8_xianfeng", "m8_t_liu", "m8_bowang", "m8_xunchuan", "m8_yuye", "m8_xiangyang", "m8_t_hanshui"]}
 	var db := GameData.get_db()
 	for q in db.quests:
 		for fid in forks.get(q["id"], []):
@@ -1596,5 +1596,5 @@ func test_the_han_army_soldiers_only_come_from_fighting_liu_bei() -> void:
 		var e: Dictionary = db.enemies[eid]
 		var cid: String = e.get("card", "")
 		if cid != "" and db.cards[cid].get("faction", "") == "han":
-			check(e["name"].begins_with("汉军") or ["guanping", "chendao", "zhangfei", "guanyu", "zhugeliang"].has(e["portrait"]),
+			check(e["name"].begins_with("汉军") or ["guanping", "chendao", "zhangfei", "guanyu", "zhugeliang", "liubei"].has(e["portrait"]),
 				"%s drops a 汉军 card but isn't 刘备's (%s)" % [eid, e["name"]])
