@@ -1575,3 +1575,26 @@ func test_a_lost_fight_drops_its_step() -> void:
 	var n := s.steps.size()
 	Quests.fail(q, s)
 	check_eq(s.steps.size(), n - 1, "fail already stepped back: one step fewer to undo")
+
+
+func test_the_han_army_soldiers_only_come_from_fighting_liu_bei() -> void:
+	## 汉军 (刘备·诸葛亮): one 高级兵 (veteran, R-level face numbers) for every troop type, and nobody else's —
+	## faction "han" keeps them out of every public chest; they come only as a 汉军 enemy's or a 刘备 general's card
+	var db := GameData.get_db()
+	var han: Array = db.cards.values().filter(func(c): return c.get("faction", "") == "han")
+	var troops := {}
+	for c in han:
+		check(c["soldier"] and c["elite"] and c["veteran"], c["id"] + " is a 高级兵")
+		troops[c["troop"]] = true
+	check_eq(troops.keys().size(), db.troops.keys().size() - 1, "a 汉军 soldier for every troop but the lord's")
+	var s := SaveData.create()
+	for k in ["public", "chapter", "history"]:
+		for c in s.chest_pools("taodong")[k]["soldier"]:
+			check(c.get("faction", "") == "", "%s shows up in another chapter's chest" % c["id"])
+	check(db.soldier_cards().all(func(c): return c.get("faction", "") == ""), "no 汉军 card in the plain soldier list")
+	for eid in db.enemies:
+		var e: Dictionary = db.enemies[eid]
+		var cid: String = e.get("card", "")
+		if cid != "" and db.cards[cid].get("faction", "") == "han":
+			check(e["name"].begins_with("汉军") or ["guanping", "chendao", "zhangfei", "guanyu", "zhugeliang"].has(e["portrait"]),
+				"%s drops a 汉军 card but isn't 刘备's (%s)" % [eid, e["name"]])

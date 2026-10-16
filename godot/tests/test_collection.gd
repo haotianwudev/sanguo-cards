@@ -791,7 +791,7 @@ func test_every_card_sits_in_its_rarity_band_and_in_40_to_100() -> void:
 		if cid == "lord" or cid.begins_with("lord:"):
 			continue
 		var s: int = int(c["hp"]) + int(c["at"])
-		var band: Array = elite if (c["soldier"] and c["elite"]) else (bands["N"] if c["soldier"] else bands[c["rarity"]])
+		var band: Array = (db.gacha["veteran_soldier_band"] if c["veteran"] else elite) if (c["soldier"] and c["elite"]) else (bands["N"] if c["soldier"] else bands[c["rarity"]])
 		check(s >= int(band[0]) and s <= int(band[1]), "%s (%s) hp+at %d outside %s" % [cid, c["rarity"], s, str(band)])
 		check(c["hp"] >= 40 and c["hp"] <= 100 and c["at"] >= 40 and c["at"] <= 100, "%s: 40..100 each" % cid)
 		if not c["soldier"] and ["strategist", "logistics"].has(c["troop"]):

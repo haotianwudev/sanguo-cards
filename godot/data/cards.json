@@ -39,6 +39,11 @@
         200
       ]
     },
+    "_veteran": "高级兵（veteran: true）：一个敌对势力自己的精锐兵种（汉军），卡面总和在 R 的区间 125~149；带 faction 的兵卡不进公共宝箱，只能打这个势力掉。",
+    "veteran_soldier_band": [
+      125,
+      149
+    ],
     "elite_soldier_band": [
       100,
       124
@@ -572,9 +577,11 @@
       "name": "白毦兵",
       "rarity": "N",
       "elite": true,
+      "veteran": true,
+      "faction": "han",
       "troop": "spear",
-      "hp": 47,
-      "at": 53,
+      "hp": 64,
+      "at": 70,
       "weight": 1
     },
     "jingzhou_gong": {
@@ -629,6 +636,72 @@
       "troop": "archer",
       "hp": 40,
       "at": 60,
+      "weight": 1
+    },
+    "han_tuqi": {
+      "name": "汉军突骑",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "han",
+      "troop": "cavalry",
+      "hp": 62,
+      "at": 74,
+      "weight": 1
+    },
+    "han_nu": {
+      "name": "汉军连弩手",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "han",
+      "troop": "archer",
+      "hp": 56,
+      "at": 78,
+      "weight": 1
+    },
+    "han_chihou": {
+      "name": "汉军斥候",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "han",
+      "troop": "bandit",
+      "hp": 58,
+      "at": 76,
+      "weight": 1
+    },
+    "han_shuzuo": {
+      "name": "汉军书佐",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "han",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 62,
+      "weight": 1
+    },
+    "han_yigong": {
+      "name": "汉军医工",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "han",
+      "troop": "logistics",
+      "hp": 74,
+      "at": 56,
+      "weight": 1
+    },
+    "han_bazhen": {
+      "name": "汉军八阵兵",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "han",
+      "troop": "infantry",
+      "hp": 66,
+      "at": 68,
       "weight": 1
     },
     "liannu": {

@@ -597,7 +597,7 @@ func chest_pools(chapter := "", only: Array = []) -> Dictionary:
 			continue
 		var chapters: Array = db.card_chapters.get(c["id"], [])
 		if c["soldier"]:
-			if chapters.is_empty():
+			if chapters.is_empty() and c.get("faction", "") == "":  # a faction's own troops (汉军) never come from the public pool
 				out["public"]["soldier"].append(c)
 			elif chapter != "" and chapters.has(chapter):
 				out["chapter"]["soldier"].append(c)
