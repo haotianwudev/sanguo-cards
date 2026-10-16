@@ -107,6 +107,10 @@ square already names it, so an unwired prompt never shows up as missing in `ART-
 Story text plays one line per click (visual-novel style) on event / choose / ？ squares and in interludes; the
 buttons appear after the last line; 跳过 shows everything, 隐藏 (CG mode) hides the text box until the next click.
 Keep each story line short enough to read as one subtitle.
+CG mode's text box has a 「框」 tool button (next to 跳过 / 隐藏) cycling 自动 (as tall as its content — the biggest, the old behaviour) → 中 → 小
+(`Game.options.dlg_size`, kept in options.cfg; `DLG_H` / `DLG_FACE` in `map_screen.gd`). 中 / 小 keep no room for options that
+aren't showing yet (`_options_room`), 小 also drops the title line; when the options appear the box grows to fit them.
+Screenshot with `--dlg=auto|mid|small`, and `--skip` on any map demo plays the story through to its options.
 Never replay a scene at a choice or fork: give the square (or event) a `prompt` — one line that sums up the
 options (「孙策主张正面强攻，周瑜主张调虎离山。听谁的？」) — shown beside the buttons.
 A finished story square shows its prompt (or 「这一段已经看完了」), a pending pick shows only the outcome — nothing replays.

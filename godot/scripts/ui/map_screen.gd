@@ -38,6 +38,12 @@ var _dlg_after := ""  # shown under the last line (a battle's enemy info)  # the
 var _dlg_raw: Array = []  # the lines before {lord} is filled in (for speaker lookup)
 var _dlg_prompt := ""  # the one-line summary shown at the choice (square / event "prompt")
 var _sheet_hidden := false
+var _sheet_head: Control  # the square's title line (dropped in the 小 text box)
+var _sheet_buttons: Control  # the square's options
+const DLG_SIZES := ["auto", "mid", "small"]  # the CG text box: 自动 (as tall as its content, the biggest) / 中 / 小 — the 框 button cycles them
+const DLG_NAMES := {"auto": "框：自动", "mid": "框：中", "small": "框：小"}
+const DLG_H := {"mid": 132.0, "small": 100.0}  # fixed heights; options still push the box up when they appear
+const DLG_FACE := {"auto": 128.0, "mid": 96.0, "small": 72.0}
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _pending_forms: Array = []  # lord cards the chapter's first square handed out ({form, dupe}), shown once its story is through
 var _sheet_box: VBoxContainer
@@ -153,6 +159,11 @@ func _ready() -> void:
 	hide_btn.focus_mode = Control.FOCUS_NONE
 	hide_btn.pressed.connect(_hide_sheet)
 	_dlg_tools.add_child(hide_btn)
+	var size_btn := Kit.button(DLG_NAMES[_dlg_mode_opt()], "gray", Kit.FONT_SMALL)
+	size_btn.name = "Size"
+	size_btn.focus_mode = Control.FOCUS_NONE
+	size_btn.pressed.connect(_cycle_dlg_size)
+	_dlg_tools.add_child(size_btn)
 
 	_rebuild_map()
 	_grant_chapter_card()
@@ -589,6 +600,7 @@ func _show_square(s: Dictionary) -> void:
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var head := Kit.label("%s  %s" % [_glyph(s), title], Kit.FONT_BIG)
 	col.add_child(head)
+	_sheet_head = head
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 18)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -629,6 +641,7 @@ func _show_square(s: Dictionary) -> void:
 	buttons.custom_minimum_size = Vector2(250, 0)
 	buttons.alignment = BoxContainer.ALIGNMENT_BEGIN  # top-down, so several options always fit
 	row.add_child(buttons)
+	_sheet_buttons = buttons
 
 	var lines: Array = []
 	for t in ev.get("text", s["text"]):
@@ -784,12 +797,15 @@ func _show_square(s: Dictionary) -> void:
 		_show_buttons(buttons, false)
 		_dialog_show()
 	_update_tools()
-	_fit_sheet()
+	_apply_dlg_size()
 
 
 func _show_buttons(box: Control, on: bool) -> void:
 	## transparent, not hidden: the options keep their room, so the text box never resizes or re-wraps when they appear
 	box.modulate.a = 1.0 if on else 0.0
+	if box == _sheet_buttons and _dlg_mode() != "auto":  # a fixed-size box keeps no room for options not shown yet
+		_options_room(on)
+		_fit_sheet.call_deferred()
 	if on and box == _dlg_buttons and not _pending_forms.is_empty():  # the square's story is through (read or skipped): now the lord cards
 		_flush_lord_reveals.call_deferred()
 	for b in box.find_children("*", "BaseButton", true, false):
@@ -884,6 +900,43 @@ func _update_tools() -> void:
 	_dlg_tools.visible = not _sheet_hidden and (_dlg_i >= 0 or _cg_mode)
 	_dlg_tools.get_child(0).visible = _dlg_i >= 0
 	_dlg_tools.get_node("Hide").visible = _cg_mode
+	_dlg_tools.get_node("Size").visible = _cg_mode and not _sheet_hidden
+
+
+func _options_room(on: bool) -> void:
+	## the options' column keeps its width (the text never runs under the 跳过 / 隐藏 / 框 tools); only its height comes and goes
+	for ch in _sheet_buttons.get_children():
+		ch.visible = on
+	if is_instance_valid(_sheet_head):  # the 小 box drops the title line while the story plays; with the options it comes back above them
+		_sheet_head.visible = on or _dlg_mode() != "small"
+
+
+func _dlg_mode_opt() -> String:
+	var m := str(Game.options.get("dlg_size", "auto"))
+	return m if DLG_SIZES.has(m) else "auto"
+
+
+func _dlg_mode() -> String:
+	## the text box size in use: the player's pick over a CG; the map view always has the full box
+	return _dlg_mode_opt() if _cg_mode else "auto"
+
+
+func _cycle_dlg_size() -> void:
+	var i := DLG_SIZES.find(_dlg_mode_opt())
+	Game.set_option("dlg_size", DLG_SIZES[(i + 1) % DLG_SIZES.size()])
+	_apply_dlg_size()
+
+
+func _apply_dlg_size() -> void:
+	## resize in place (no rebuild: the story keeps its line)
+	var m := _dlg_mode()
+	(_dlg_tools.get_node("Size") as Button).text = DLG_NAMES[_dlg_mode_opt()]
+	if is_instance_valid(_dlg_face) and _cg_mode:
+		_dlg_face.custom_minimum_size = Vector2.ONE * float(DLG_FACE[m])
+	if is_instance_valid(_sheet_buttons):
+		_options_room(m == "auto" or _sheet_buttons.modulate.a > 0.5)
+	_fit_sheet()
+	_fit_sheet.call_deferred()  # again once the containers have taken the new minimum sizes
 
 
 func _battle_info(s: Dictionary, fight: Dictionary) -> String:
@@ -1076,7 +1129,7 @@ func _apply_cg_mode() -> void:
 	_scroll.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
 	# a CG gets the screen: the text box shrinks to a subtitle strip at the bottom
-	_fit_sheet()
+	_apply_dlg_size()
 	var bg := Kit.c("card")
 	if _cg_mode:
 		bg.a = 0.86
@@ -1087,10 +1140,11 @@ func _fit_sheet() -> void:
 	## the strip hugs the bottom edge and grows upward when its options need more room than the subtitle height
 	var h := 258.0
 	if _cg_mode:
-		h = maxf(156.0, _sheet.get_combined_minimum_size().y)
+		var m := _dlg_mode()
+		h = maxf(156.0 if m == "auto" else float(DLG_H[m]), _sheet.get_combined_minimum_size().y)
 	_sheet.size = Vector2(1232, h)
 	_sheet.position = Vector2(24, 708 - h) if _cg_mode else Vector2(24, 448)
-	_dlg_tools.position = Vector2(1040, _sheet.position.y + 8)
+	_dlg_tools.position = Vector2(1248 - _dlg_tools.get_combined_minimum_size().x, _sheet.position.y + 8)
 
 
 func _open_settings() -> void:

@@ -6,7 +6,7 @@ var rng := RandomNumberGenerator.new()
 var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7}  # player options, kept in user://options.cfg (not in the save)
+var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto"}  # player options, kept in user://options.cfg (not in the save)
 const OPTIONS_PATH := "user://options.cfg"
 
 
@@ -178,6 +178,10 @@ func demo(name: String) -> void:
 	if OS.get_cmdline_user_args().has("--north"):  # any --demo, played as the north-route lord
 		save.run_records.append("出生：冀州无极")
 	BattleScreen.auto_on = OS.get_cmdline_user_args().has("--auto")  # any --demo, with 自动战斗 already on
+	options["dlg_size"] = "auto"
+	for a in OS.get_cmdline_user_args():  # any --demo: --dlg=auto|mid|small, the CG text box size (the 框 button)
+		if a.begins_with("--dlg="):
+			options["dlg_size"] = a.trim_prefix("--dlg=")
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
 	if name == "lordcards":  # 整备 on the 主公 tab with three lord cards handed out
