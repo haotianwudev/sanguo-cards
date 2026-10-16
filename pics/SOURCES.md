@@ -334,6 +334,15 @@
 | `lord_north_sleep` | source/generals/lord_north_sleep.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_casual` | source/generals/lord_south_casual.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_north_casual` | source/generals/lord_north_casual.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `zulang` | source/generals/zulang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `dongzhou_bing` | source/soldiers/dongzhou_bing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `nanman_dao` | source/soldiers/nanman_dao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `nanman_xiang` | source/soldiers/nanman_xiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `shanyue_daoke` | source/soldiers/shanyue_daoke.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `han_tuqi` | source/soldiers/han_tuqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `han_shuzuo` | source/soldiers/han_shuzuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `han_yigong` | source/soldiers/han_yigong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `han_bazhen` | source/soldiers/han_bazhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -350,6 +359,7 @@
 | `map:huainan_n` | source/map/huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:jiangdong` | source/map/jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:menghu` | source/map/menghu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `map:tianfu` | source/map/tianfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:boar` | source/battles/boar.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei_scout` | source/battles/shuizei_scout.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:shuizei` | source/battles/shuizei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -485,6 +495,29 @@
 | `battle:m8_guanyu` | source/battles/m8_guanyu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:m8_caoren` | source/battles/m8_caoren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:m8_zhangfei` | source/battles/m8_zhangfei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_zulang` | source/battles/m8_zulang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_yanyan` | source/battles/m9_yanyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_liubei` | source/battles/m8_liubei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_zhangren` | source/battles/m9_zhangren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_menghuo` | source/battles/m9_menghuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_liaohua` | source/battles/m8_liaohua.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_guanping` | source/battles/m8_guanping.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_chendao` | source/battles/m8_chendao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_bazhen` | source/battles/m8_han_bazhen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_kuimen` | source/battles/m9_kuimen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_zhurong` | source/battles/m9_zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_dongzhou` | source/battles/m9_dongzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_nu` | source/battles/m8_han_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_bashu_nu` | source/battles/m9_bashu_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_bashu_qiang` | source/battles/m9_bashu_qiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_baier` | source/battles/m8_han_baier.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_wudang` | source/battles/m8_han_wudang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_tuqi` | source/battles/m8_han_tuqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_nanman_dao` | source/battles/m9_nanman_dao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_xiangbing` | source/battles/m9_xiangbing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m9_tengjia` | source/battles/m9_tengjia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_muniu` | source/battles/m8_han_muniu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_han_menshen` | source/battles/m8_han_menshen.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -790,3 +823,19 @@
 | `cg:c10_dushu` | source/cg/c10_dushu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c10_ganning_lm` | source/cg/c10_ganning_lm.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c10_jinfan` | source/cg/c10_jinfan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_liniang` | source/cg/c11_liniang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_liushou` | source/cg/c12_liushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_baihe_han` | source/cg/c11_baihe_han.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_liubei` | source/cg/c11_liubei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_hanqi` | source/cg/c11_hanqi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_tiesuo` | source/cg/c12_tiesuo.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_duishe` | source/cg/c12_duishe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_luocheng` | source/cg/c12_luocheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_wuxian` | source/cg/c12_wuxian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_zhurong` | source/cg/c12_zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_kanfeng` | source/cg/c12_kanfeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:end_xiangjin` | source/cg/end_xiangjin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_qiqin` | source/cg/c12_qiqin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_m8_gaoshi` | source/cg/e_m8_gaoshi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_t9_qianfu` | source/cg/e_t9_qianfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_t9_shujin` | source/cg/e_t9_shujin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -691,4 +691,56 @@
 - [x] 2026-10-15 portrait `lord_south_sleep` ← re_lord_south_sleep.jpg · ok
 - [x] 2026-10-15 portrait `lord_north_sleep` ← re_lord_north_sleep.jpg · ok
 - [x] 2026-10-15 portrait `lord_south_casual` ← re_lord_south_casual.jpg · ok
-- [ ] 2026-10-16 cg `c6_warn` ← c6_warn_new.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-16 cg `c6_warn` ← c6_warn_new.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-16 portrait `zulang` ← zulang_1792187751694.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `dongzhou_bing` ← dongzhou_bing_1792187813448.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `nanman_dao` ← nanman_dao_1792187830346.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `nanman_xiang` ← nanman_xiang_1792187849507.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `shanyue_daoke` ← shanyue_daoke_1792187865852.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `han_tuqi` ← han_tuqi_1792187885657.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `han_shuzuo` ← han_shuzuo_1792187906271.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `han_yigong` ← han_yigong_1792187927559.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 portrait `han_bazhen` ← han_bazhen.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-16 cg `c11_liniang` ← c11_liniang.jpg · ok
+- [x] 2026-10-16 cg `c12_liushou` ← c12_liushou.jpg · ok
+- [x] 2026-10-16 cg `c11_baihe_han` ← c11_baihe_han.jpg · ok
+- [x] 2026-10-16 cg `c11_liubei` ← c11_liubei.jpg · ok
+- [x] 2026-10-16 cg `c11_hanqi` ← c11_hanqi.jpg · ok
+- [x] 2026-10-16 cg `c12_tiesuo` ← c12_tiesuo.jpg · ok
+- [x] 2026-10-16 cg `c12_duishe` ← c12_duishe.jpg · ok
+- [x] 2026-10-16 cg `c12_luocheng` ← c12_luocheng.jpg · ok
+- [x] 2026-10-16 cg `c12_wuxian` ← c12_wuxian.jpg · ok
+- [x] 2026-10-16 cg `c12_zhurong` ← c12_zhurong.jpg · ok
+- [x] 2026-10-16 cg `c12_kanfeng` ← c12_kanfeng.jpg · ok
+- [x] 2026-10-16 cg `end_xiangjin` ← end_xiangjin.jpg · ok
+- [x] 2026-10-16 cg `c12_qiqin` ← c12_qiqin.jpg · ok
+- [x] 2026-10-16 cg `e_m8_gaoshi` ← e_m8_gaoshi.jpg · ok
+- [x] 2026-10-16 cg `e_t9_qianfu` ← e_t9_qianfu.jpg · ok
+- [x] 2026-10-16 cg `e_t9_shujin` ← e_t9_shujin.jpg · ok
+- [x] 2026-10-16 battle `m8_zulang` ← m8_zulang.jpg · ok
+- [x] 2026-10-16 battle `m9_yanyan` ← m9_yanyan.jpg · ok
+- [x] 2026-10-16 battle `m8_liubei` ← m8_liubei.jpg · ok
+- [x] 2026-10-16 battle `m9_zhangren` ← m9_zhangren.jpg · ok
+- [x] 2026-10-16 battle `m9_menghuo` ← m9_menghuo.jpg · ok
+- [x] 2026-10-16 battle `m8_liaohua` ← m8_liaohua.jpg · ok
+- [x] 2026-10-16 battle `m8_guanping` ← m8_guanping.jpg · ok
+- [x] 2026-10-16 battle `m8_chendao` ← m8_chendao.jpg · ok
+- [x] 2026-10-16 battle `m8_han_bazhen` ← m8_han_bazhen.jpg · ok
+- [x] 2026-10-16 battle `m9_kuimen` ← m9_kuimen.jpg · ok
+- [x] 2026-10-16 battle `m9_zhurong` ← m9_zhurong.jpg · ok
+- [x] 2026-10-16 battle `m9_dongzhou` ← m9_dongzhou.jpg · ok
+- [x] 2026-10-16 battle `m8_han_nu` ← m8_han_nu.jpg · ok
+- [x] 2026-10-16 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
+- [x] 2026-10-16 battle `m9_bashu_qiang` ← m9_bashu_qiang.jpg · ok
+- [x] 2026-10-16 battle `m8_han_baier` ← m8_han_baier.jpg · ok
+- [x] 2026-10-16 battle `m8_han_wudang` ← m8_han_wudang.jpg · ok
+- [x] 2026-10-16 battle `m8_han_tuqi` ← m8_han_tuqi.jpg · ok
+- [x] 2026-10-16 battle `m9_nanman_dao` ← m9_nanman_dao.jpg · ok
+- [x] 2026-10-16 battle `m9_xiangbing` ← m9_xiangbing.jpg · ok
+- [x] 2026-10-16 battle `m9_tengjia` ← m9_tengjia.jpg · ok
+- [x] 2026-10-16 battle `m8_han_muniu` ← m8_han_muniu.jpg · ok
+- [x] 2026-10-16 battle `m8_han_menshen` ← m8_han_menshen.jpg · ok
+- [x] 2026-10-16 map `menghu` ← menghu.jpg · ⚠ 分辨率偏低 2064×512
+- [x] 2026-10-16 map `tianfu` ← tianfu.jpg · ⚠ 分辨率偏低 2064×512
+- [x] 2026-10-16 map `menghu` ← menghu.jpg · ok
+- [x] 2026-10-16 map `tianfu` ← tianfu.jpg · ok

@@ -2970,6 +2970,87 @@
         0.2
       ],
       "head": 0.25
+    },
+    "zulang": {
+      "src": "source/generals/zulang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "dongzhou_bing": {
+      "src": "source/soldiers/dongzhou_bing.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "nanman_dao": {
+      "src": "source/soldiers/nanman_dao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "nanman_xiang": {
+      "src": "source/soldiers/nanman_xiang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "shanyue_daoke": {
+      "src": "source/soldiers/shanyue_daoke.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "han_tuqi": {
+      "src": "source/soldiers/han_tuqi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "han_shuzuo": {
+      "src": "source/soldiers/han_shuzuo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "han_yigong": {
+      "src": "source/soldiers/han_yigong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "han_bazhen": {
+      "src": "source/soldiers/han_bazhen.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -3036,6 +3117,10 @@
     },
     "menghu": {
       "src": "source/map/menghu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "tianfu": {
+      "src": "source/map/tianfu.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -3578,6 +3663,98 @@
     },
     "m8_zhangfei": {
       "src": "source/battles/m8_zhangfei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_zulang": {
+      "src": "source/battles/m8_zulang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_yanyan": {
+      "src": "source/battles/m9_yanyan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_liubei": {
+      "src": "source/battles/m8_liubei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_zhangren": {
+      "src": "source/battles/m9_zhangren.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_menghuo": {
+      "src": "source/battles/m9_menghuo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_liaohua": {
+      "src": "source/battles/m8_liaohua.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_guanping": {
+      "src": "source/battles/m8_guanping.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_chendao": {
+      "src": "source/battles/m8_chendao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_bazhen": {
+      "src": "source/battles/m8_han_bazhen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_kuimen": {
+      "src": "source/battles/m9_kuimen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_zhurong": {
+      "src": "source/battles/m9_zhurong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_dongzhou": {
+      "src": "source/battles/m9_dongzhou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_nu": {
+      "src": "source/battles/m8_han_nu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_bashu_nu": {
+      "src": "source/battles/m9_bashu_nu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_bashu_qiang": {
+      "src": "source/battles/m9_bashu_qiang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_baier": {
+      "src": "source/battles/m8_han_baier.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_wudang": {
+      "src": "source/battles/m8_han_wudang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_tuqi": {
+      "src": "source/battles/m8_han_tuqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_nanman_dao": {
+      "src": "source/battles/m9_nanman_dao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_xiangbing": {
+      "src": "source/battles/m9_xiangbing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m9_tengjia": {
+      "src": "source/battles/m9_tengjia.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_muniu": {
+      "src": "source/battles/m8_han_muniu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m8_han_menshen": {
+      "src": "source/battles/m8_han_menshen.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -4801,6 +4978,70 @@
     },
     "c10_jinfan": {
       "src": "source/cg/c10_jinfan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c11_liniang": {
+      "src": "source/cg/c11_liniang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_liushou": {
+      "src": "source/cg/c12_liushou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c11_baihe_han": {
+      "src": "source/cg/c11_baihe_han.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c11_liubei": {
+      "src": "source/cg/c11_liubei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c11_hanqi": {
+      "src": "source/cg/c11_hanqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_tiesuo": {
+      "src": "source/cg/c12_tiesuo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_duishe": {
+      "src": "source/cg/c12_duishe.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_luocheng": {
+      "src": "source/cg/c12_luocheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_wuxian": {
+      "src": "source/cg/c12_wuxian.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_zhurong": {
+      "src": "source/cg/c12_zhurong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_kanfeng": {
+      "src": "source/cg/c12_kanfeng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_xiangjin": {
+      "src": "source/cg/end_xiangjin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_qiqin": {
+      "src": "source/cg/c12_qiqin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_m8_gaoshi": {
+      "src": "source/cg/e_m8_gaoshi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_t9_qianfu": {
+      "src": "source/cg/e_t9_qianfu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_t9_shujin": {
+      "src": "source/cg/e_t9_shujin.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

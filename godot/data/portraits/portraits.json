@@ -329,5 +329,14 @@
   "lord_south_sleep": {"file": "lord_south_sleep.jpg", "face": [0.52, 0.19], "head": 0.22},
   "lord_north_sleep": {"file": "lord_north_sleep.jpg", "face": [0.51, 0.21], "head": 0.25},
   "lord_south_casual": {"file": "lord_south_casual.jpg", "face": [0.48, 0.23], "head": 0.23},
-  "lord_north_casual": {"file": "lord_north_casual.jpg", "face": [0.52, 0.2], "head": 0.25}
+  "lord_north_casual": {"file": "lord_north_casual.jpg", "face": [0.52, 0.2], "head": 0.25},
+  "zulang": {"file": "zulang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "dongzhou_bing": {"file": "dongzhou_bing.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "nanman_dao": {"file": "nanman_dao.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "nanman_xiang": {"file": "nanman_xiang.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "shanyue_daoke": {"file": "shanyue_daoke.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "han_tuqi": {"file": "han_tuqi.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "han_shuzuo": {"file": "han_shuzuo.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "han_yigong": {"file": "han_yigong.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "han_bazhen": {"file": "han_bazhen.jpg", "face": [0.5, 0.22], "head": 0.22}
 }
