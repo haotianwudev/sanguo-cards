@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "jiangdong", "menghu"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "jiangdong", "menghu", "tianfu"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -1219,6 +1219,7 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng", "wenji_tale", "plan", "xizi", "caiyong", "yuexia", "xian"],
 		"jingxiang": ["jx_diaochan", "jx_bubing", "jx_rest", "jx_shaoka", "jx_zongzei", "jx_xiangyang", "jx_xunluo", "jx_shuijun"],
 		"dongui": ["route", "tuwei", "luan", "luo_ruin", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"],
+		"tianfu": ["t9_yexi", "t9_yexi_lx", "t9_jiangzhou", "t9_wuxian", "t9_xizheng", "t9_kuimen", "t9_xiuzheng", "t9_zhangren", "t9_nanzhong", "t9_zhurong_join", "t9_yiqin"],
 		"menghu": ["m8_shankou", "m8_liniang", "m8_xianfeng", "m8_t_liu", "m8_bowang", "m8_xunchuan", "m8_yuye", "m8_xiangyang", "m8_t_hanshui"]}
 	var db := GameData.get_db()
 	for q in db.quests:

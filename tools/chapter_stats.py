@@ -147,6 +147,7 @@ CHAPTERS = [
     ("第六章", "huainan_s", "huainan_n"),
     ("第七章", "jiangdong", None),
     ("第八章", "menghu", None),
+    ("第九章", "tianfu", None),
 ]
 ROW_NAMES = {"prologue_s": "富春", "prologue_n": "冀州风云"}
 SUM_KEYS = ("n", "normal", "elite", "boss", "forks", "cg_have", "cg_all")

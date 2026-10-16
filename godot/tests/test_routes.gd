@@ -1013,7 +1013,7 @@ func test_south_chapter8_after_ending_twelve_zhugejin_saves_zhouyu() -> void:
 		for line in ["孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"]:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
-		check(Quests.current_quest(s) == null, "未完待续 after 第八章")
+		check_eq(Quests.current_quest(s)["id"], "tianfu", "第九章 follows the good 第八章")
 
 
 func test_south_chapter8_the_bazhen_fight_is_lost_and_carries_on() -> void:
@@ -1089,3 +1089,77 @@ func test_south_chapter6_zhugejin_can_be_asked_along_only_after_ending_twelve() 
 	check(s.has_card("zhugejin") and s.has_card("lusu"), "诸葛瑾 joins with 鲁肃")
 	finish(q, s)
 	check(s.flags.has("诸葛瑾：入队"), "and 第八章 will know he came along")
+
+
+# ---- 第九章 · 天府之国（南线）------------------------------------------------------------
+
+const E13 := "结局十三 · 香烬"
+
+
+func ch9s_save(flags := []) -> SaveData:
+	var s := ch8s_save([E12, "诸葛瑾：入队"])
+	s.flags += ["孙权、孙尚香：入队", "丹阳：山越归附", "南线：洛阳陷落", "孙坚战死", "易帜为吴", "白河：周瑜生还", "汉水相持"] + flags
+	s.quests_cleared.append("menghu")
+	for c in ["sunquan", "sunshangxiang", "zhugejin", "zulang", "liniang"]:
+		s.grant_card(c)
+	return s
+
+
+func test_south_chapter9_follows_the_good_menghu_ending_only() -> void:
+	check_eq(Quests.current_quest(ch9s_save())["id"], "tianfu")
+	var s := ch8s_save()
+	s.flags += ["孙坚战死", "易帜为吴", E12]
+	s.quests_cleared.append("menghu")
+	check(Quests.current_quest(s) == null, "结局十二 stops the story: no 第九章")
+
+
+func test_south_chapter9_without_luxun_ends_in_ending_thirteen() -> void:
+	for fork in [[], ["t9_a_m1", "t9_c_m1", "t9_e_m1", "t9_g_m1"]]:
+		var s := ch9s_save()
+		var q := quest_by_id("tianfu")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["t9_start", "t9_yexi", "t9_kuimen", "t9_yanyan", "t9_yanyan_join", "t9_luocheng", "t9_wuxian", "t9_zhurong", "t9_maoshi", "t9_panshe_bad", "t9_xiangjin"]:
+			check(p.has(sid), "香烬 route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["t9_yexi_lx", "t9_kanfeng", "t9_panshe", "t9_qiqin", "t9_end"]:
+			check(not p.has(sid), "香烬 route never reaches " + sid)
+		check_eq(p[-1], "t9_xiangjin")
+		for c in ["yanyan", "zhangren", "wuxian", "zhurong"]:
+			check(s.has_card(c), c + " joins on the way")
+		check(s.run_records.has(E13))
+		finish(q, s)
+		check(s.flags.has(E13))
+		check(Quests.current_quest(s) == null, "the story stops at 结局十三")
+
+
+func test_south_chapter9_losing_in_the_valley_is_ending_thirteen_too() -> void:
+	var s := ch9s_save()
+	var q := quest_by_id("tianfu")
+	Quests.begin(q, s, rng(3))
+	s.square = "t9_panshe_bad"
+	check(Quests.lose(q, s, rng(3)), "the 盘蛇谷 fire carries on into the ending")
+	check_eq(s.square, "t9_xiangjin")
+
+
+func test_south_chapter9_after_ending_thirteen_luxun_reads_the_wind() -> void:
+	for fork in [[], ["t9_b_m1", "t9_d_m1", "t9_f_m1"]]:
+		var s := ch9s_save([E13, "陆逊：入队"])
+		s.grant_card("luxun_young")
+		var q := quest_by_id("tianfu")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["t9_yexi_lx", "t9_kanfeng", "t9_panshe", "t9_qiqin", "t9_end"]:
+			check(p.has(sid), "good route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["t9_yexi", "t9_panshe_bad", "t9_xiangjin"]:
+			check(not p.has(sid), "good route never reaches " + sid)
+		check_eq(p[-1], "t9_end")
+		check(s.has_card("menghuo"))
+		check(s.run_records.has("南线：益州与南中") and not s.run_records.has(E13))
+
+
+func test_chapter6_luxun_can_only_study_under_zhouyu_after_ending_thirteen() -> void:
+	var opts: Array = quest_by_id("huainan_s")["squares"]["hn_luxun"]["choose"]
+	check_eq(opts[0]["requires"], E13)
+	check_eq(opts[0]["card"], "luxun_young")
+	var s := SaveData.create()
+	check(Quests.option_locked(s, opts[0]), "greyed until 结局十三")
+	s.flags.append(E13)
+	check(not Quests.option_locked(s, opts[0]))
