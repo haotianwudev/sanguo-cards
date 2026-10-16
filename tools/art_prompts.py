@@ -28,6 +28,9 @@ import re as _re
 # the same lord without 古锭刀 on his shoulder, for scenes where he must be empty-handed (the generic line would otherwise put the broadsword back in)
 HERO_NOBLADE = _re.sub(r"，?肩扛孙坚的古锭刀（.*?）(?=。|$)", "；手里、肩上、背上都没有任何兵器，不要古锭刀、不要大刀、不要任何刀剑", HERO)
 NOBLADE_CGS = {"c8_fubing", "c8_qibing", "c8_caihe", "c8_zhangyun", "c8_zupu", "c8_shuige", "c9_changsha"}
+# the same lord out of armor, for scenes whose own text says 常服 (at home, at a feast) — the armor line would otherwise put the armor and blade back
+HERO_CASUAL = "主角：年轻男子，深棕近黑的短寸头（两侧推短、头顶短发微微上翘，额头露出，不要盖眉的刘海；现代发型，在汉代很扎眼），穿常服（和立绘 lord_south_casual 一样：深棕色交领长袍，青绿色镶金边的衣领与袖口，白色内衬领，黑色宽腰带；不穿任何盔甲、不披披风），手里、肩上、背上都没有任何兵器，不要古锭刀、不要任何刀剑"
+HERO_NORTH_CASUAL = "北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿常服（和立绘 lord_north_casual 一样；不穿鱼鳞甲、不披貂裘），手里没有兵器"
 HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿甄宓亡父留下的河北式旧鱼鳞甲（素铁色，不要绿色和金色），外披雪白貂裘，手持白蜡杆长枪（枪头下系一个红色平安结）"
 HERO_MODERN = "主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器"
 
@@ -55,12 +58,15 @@ def _north_cgs() -> set:
     return _NORTH_CGS
 
 
-def hero_note(key: str) -> str:
+def hero_note(key: str, scene: str = "") -> str:
     ## which outfit line a CG gets: before the transmigration (the opening), the north route, or the south default
+    ## (out of armor when the scene says 常服)
     if key in ("c1_era",):
         return HERO_MODERN
     if key and (key.startswith(("jz_", "ln_", "n5_")) or key.endswith("_north") or key in _north_cgs()):
-        return HERO_NORTH
+        return HERO_NORTH_CASUAL if "常服" in scene else HERO_NORTH
+    if "常服" in scene:
+        return HERO_CASUAL
     if key in NOBLADE_CGS:
         return HERO_NOBLADE
     return HERO
@@ -1975,7 +1981,7 @@ REDO = [
     ("c6_seal", "孙坚手里捧着紫色龙纹盒子要去掉：他说不知玉玺下落，双手必须是空的，殿上也不能有任何盒子 / 锦盒 / 箱子", 2),
     ("c9_lusu", "要加上诸葛瑾：第六章居巢这一格他在场（替鲁肃管粮仓的账），站在粮囤门口捧着账册；主角肩上扛的大刀也去掉（盔甲不用改），双手空着", 2),
     ("c10_ganning", "提灯笼的主角穿成了绿色长袍：要换成他的古铜鎏金旧甲、朱红内衬、纯黑披风、短寸头", 1),
-    ("c6_warn", "主角要换成素色常服（深夜在自己屋里，不穿盔甲）、黑色短寸头（现图是盖眉的长刘海），肩上的大刀也去掉，双手空着；画面仍只有貂蝉和主角两个人", 3),
+    ("c6_warn", "主角要换成常服、短寸头（现图穿甲、扛大刀、盖眉长刘海）：参考立绘 `pics/source/generals/lord_south_casual.jpg`，双手空着；画面仍只有貂蝉和主角两个人", 3),
 ]
 NEXT_RULES = [
     "每张图都用下面对应小节的**完整提示词**；图上长相/器物必须和设定对得上（见 `CARD-DESIGN.md` 第 7 节）。",
@@ -1986,6 +1992,7 @@ NEXT_RULES = [
     "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部。",
     "宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。",
     "立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
+    "每条提示词下面的「参考立绘」列出画面里每个人物已交付的立绘文件，出图时一起上传给 Gemini；主角穿常服的场景参考 `lord_south_casual` / `lord_north_casual`，其余参考 `lord` / `lord_north`。",
     "**不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。",
     "提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。",
 ]
@@ -2147,8 +2154,52 @@ def cg_prompt(scene: str, key: str = None, is_event: bool = False) -> tuple[str,
                  f"构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。"
                  f"画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。{NL}"
                  f"画风：{STYLE}，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。{NL}"
-                 f"（主角出场时——{hero_note(key)}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in scene_zh or "Dong Bai" in scene_zh) else ""))
+                 f"（主角出场时——{hero_note(key, scene_zh)}。）" + (f"{NL}（{DONGBAI}。）" if ("董白" in _wanted(scene_zh) or "Dong Bai" in scene_zh) else ""))
     return zh_prompt, en_prompt
+
+
+_NAMES: dict = {}
+import re as _re2
+_NEG = _re2.compile(r"不要|没有|别画|去掉|不能|不出现")
+
+
+def _wanted(text: str) -> str:
+    ## the prompt minus its clauses about who/what must NOT be in the picture
+    return "，".join(s for s in _re2.split(r"[，。；、,;]", text) if not _NEG.search(s))
+
+
+def ref_portraits(text: str, key: str) -> list[str]:
+    ## the delivered portraits a scene should be drawn from: every card name the prompt mentions (clauses that say who must NOT be
+    ## there are skipped) plus the lord when 主角 appears — south `lord`, north `lord_north`, none before the transmigration
+    if not _NAMES:
+        portraits = json.loads((PICS / "art.json").read_text("utf-8"))["portraits"]
+        for cid, c in load_cards()["cards"].items():
+            pk = c.get("person") or cid
+            name = c["name"].split("·")[0]
+            if pk in portraits and not portraits[pk].get("placeholder") and not c.get("soldier") and name not in _NAMES:
+                _NAMES[name] = (pk, portraits[pk]["src"])
+        _NAMES["__lord"] = {k: (k, portraits[k]["src"]) for k in ("lord", "lord_north", "lord_south_casual", "lord_north_casual") if k in portraits}
+    keep = _wanted(text)
+    out, seen = [], set()
+    if "主角" in keep and key != "c1_era":
+        north = hero_note(key) == HERO_NORTH
+        lk = ("lord_north" if north else "lord") + ("_casual" if "常服" in keep else "")  # 常服 scenes: the casual portrait
+        lk = {"lord_casual": "lord_south_casual"}.get(lk, lk)
+        if lk in _NAMES["__lord"]:
+            out.append(f"主角 → `pics/{_NAMES['__lord'][lk][1]}`")
+            seen.add(lk)
+    for name in sorted((n for n in _NAMES if n != "__lord"), key=len, reverse=True):
+        pk, src = _NAMES[name]
+        if name in keep and pk not in seen:
+            seen.add(pk)
+            keep = keep.replace(name, "")
+            out.append(f"{name} → `pics/{src}`")
+    return out
+
+
+def ref_lines(text: str, key: str) -> list[str]:
+    refs = ref_portraits(text, key)
+    return [f"参考立绘（一起上传给 Gemini，保持长相一致）：{'；'.join(refs)}", ""] if refs else []
 
 
 def render_item(header: str, zh_prompt: str, en_prompt: str = None) -> list[str]:
@@ -2235,9 +2286,11 @@ def main() -> None:
         hdr = f"### `{key}`"
         if key in OVERRIDES:
             out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+            out += ref_lines(OVERRIDES[key], key)
         else:
             zh, en = battle_prompt(scene, key)
             out += render_item(hdr, zh, en)
+            out += ref_lines(zh.split(NL)[0], key)  # the scene line only: the appended outfit notes would match names
     out += ["## 剧情插图 CG（横版 16:9）", ""]
     for key, scene in CGS.items():
         if (key in art.get("cgs", {}) and key not in redo) or ("cg", key) not in need:
@@ -2245,9 +2298,11 @@ def main() -> None:
         hdr = f"### `{key}`"
         if key in OVERRIDES:
             out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+            out += ref_lines(OVERRIDES[key], key)
         else:
             zh, en = cg_prompt(scene, key)
             out += render_item(hdr, zh, en)
+            out += ref_lines(zh.split(NL)[0], key)  # the scene line only: the appended outfit notes would match names
     out += ["## 奇遇插图（？格事件，横版 16:9，key = e_<事件 id>，放 `pics/source/cg/`，和剧情 CG 一样登记）", ""]
     for eid, scene in EVENTS.items():
         key = "e_" + eid
@@ -2256,9 +2311,11 @@ def main() -> None:
         hdr = f"### `{key}`"
         if key in OVERRIDES:
             out += [hdr, "", "```", OVERRIDES[key], "```", ""]
+            out += ref_lines(OVERRIDES[key], key)
         else:
             zh, en = cg_prompt(scene, key, is_event=True)
             out += render_item(hdr, zh, en)
+            out += ref_lines(zh.split(NL)[0], key)  # the scene line only: the appended outfit notes would match names
     art_dir = ROOT / "godot" / "data" / "art"
     out += ["## 天命图（512×512 透明 PNG，放 `godot/data/art/fates/<key>.png`；没有图时显示一个汉字）", ""]
     for key, sym in FATES.items():
