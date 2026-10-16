@@ -90,7 +90,7 @@ def generate_image_atlas(
         model = "google/nano-banana-2/reference-to-image-developer" if ref_urls else "google/nano-banana-2/text-to-image-developer"
     elif "banana-2.1" in model or "google/nano-banana-2.1" in model:
         model = "google/nano-banana-2.1/edit" if ref_urls else "google/nano-banana-2.1/text-to-image"
-    elif "gpt-image" in model:
+    elif "gpt-image" in model and not model.startswith("openai/"):  # a full id (openai/gpt-image-2/edit) is used as given
         model = "openai/gpt-image-2-developer/edit" if ref_urls else "openai/gpt-image-2-developer/text-to-image"
     elif "grok" in model:
         model = "xai/grok-imagine-image-2.0-developer/edit" if ref_urls else "xai/grok-imagine-image-2.0-developer/text-to-image"
