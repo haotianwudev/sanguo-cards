@@ -1628,7 +1628,7 @@ CGS = {
 # They stay here after the art exists (ART-PROMPTS.md only lists what is still missing), so a redraw starts from the same prompt.
 # chapter map backgrounds (quest id -> what the scroll shows, left to right); the game scrolls it sideways under the squares
 MAPS = {
-    "menghu": "【地图共 46 列，南线第八章·猛虎之陨】自左向右依次：①（第 0–4 列）冬天下雪的吴郡大营与辕门、吴郡南边的山道、曲阿城外的竹林和一扇柴门小院；②（第 5–10 列）丹阳的深山：云雾里的山口、毛竹林、山腰的竹寨、山坳里的谷仓、山顶挂着兽骨的毛竹木寨；③（第 11–12 列）春天的吴郡大营，灯火通明，准备出兵；④（第 13–15 列）汉水的芦苇荡，锦帆快船和插赤底「汉」字旗的巡船；⑤（第 16–19 列）南阳道的官道和路边山林、一座破庙；⑥（第 20–25 列）暴雨中的汉水芦苇渡口、挂着「吴」字新旗的大船、雨后的荒村；⑦（第 26–31 列）夜里的篝火、汉水北岸的江滩、襄阳城；⑧（第 32–35 列）新野的田野、博望坡起火的山谷；⑨（第 36–41 列）白河上游的山林与营寨、白河两岸、上游的木闸；⑩（第 42–45 列）汉水北岸的乱石阵，南岸用铁索连成一排的楼船与营帐",
+    "menghu": "【地图共 48 列，南线第八章·猛虎之陨】自左向右依次：①（第 0–4 列）冬天下雪的吴郡大营与辕门、吴郡南边的山道、曲阿城外的竹林和一扇柴门小院；②（第 5–12 列）丹阳的深山：云雾里的山口、毛竹林、山腰的竹寨、山坳里的谷仓、陵阳的山道和一座山神庙、猎户的木屋、山顶挂着兽骨的毛竹木寨；③（第 13–14 列）春天的吴郡大营，灯火通明，准备出兵；④（第 15–17 列）汉水的芦苇荡，锦帆快船和插赤底「汉」字旗的巡船；⑤（第 18–21 列）南阳道的官道和路边山林、一座破庙；⑥（第 22–27 列）暴雨中的汉水芦苇渡口、挂着「吴」字新旗的大船、雨后的荒村；⑦（第 28–33 列）夜里的篝火、汉水北岸的江滩、襄阳城；⑧（第 34–37 列）新野的田野、博望坡起火的山谷；⑨（第 38–43 列）白河上游的山林与营寨、白河两岸、上游的木闸；⑩（第 44–47 列）汉水北岸的乱石阵，南岸用铁索连成一排的楼船与营帐",
     "prologue_north": "winter Hebei, the road from the Zhen family's trading town to the Black Mountain bandit lair, left to "
                 "right: a small stone-walled trading town under falling snow; a larger walled city with a government hall under a "
                 "grey winter sky; an open snowy road through farmland with a lone wandering old Taoist glimpsed at the roadside; a "
@@ -1832,7 +1832,7 @@ EXTRA_NEXT = [("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9�
 
 # chapter maps already delivered but the chapter's squares changed since: redraw (key -> why). A redraw counts as done once
 # art_ingest.py has logged one more delivery of that map than `seen` here.
-MAP_REDO = {"menghu": ("第八章南线开头新增 4 列丹阳深山讨伐山越，中段加 3 组岔路（南阳道、汉水北岸、白河上游），共 46 列（提示词已按新布局写好）", 1), "huainan_s": ("第六章南线开头新增 6 列荆南四郡（零陵 / 桂阳 / 长沙），结尾去掉双婚喜堂，共 54 列（提示词已按新布局写好）", 1), "jiangdong": ("第七章南线开头新增 1 列庐江喜堂（双婚），共 41 列（提示词已按新布局写好）", 1), "yuxi": ("第三章两条路线上下分层（上 B 下 A），共 61 列 6 行（提示词已按新布局写好）", 1)}
+MAP_REDO = {"menghu": ("第八章南线开头新增 6 列丹阳深山讨伐山越，中段加 3 组岔路（南阳道、汉水北岸、白河上游），共 48 列（提示词已按新布局写好）", 1), "huainan_s": ("第六章南线开头新增 6 列荆南四郡（零陵 / 桂阳 / 长沙），结尾去掉双婚喜堂，共 54 列（提示词已按新布局写好）", 1), "jiangdong": ("第七章南线开头新增 1 列庐江喜堂（双婚），共 41 列（提示词已按新布局写好）", 1), "yuxi": ("第三章两条路线上下分层（上 B 下 A），共 61 列 6 行（提示词已按新布局写好）", 1)}
 
 
 def map_redo() -> dict:
