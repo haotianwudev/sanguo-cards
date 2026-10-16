@@ -19,13 +19,14 @@ func _ready() -> void:
 			args[kv[0]] = kv[1] if kv.size() > 1 else ""
 	if args.has("demo"):
 		Game.demo(args["demo"])
-		if args.has("settings"):  # --settings[=cards|options|home]: open the pause menu (on that page) for a screenshot
+		if args.has("settings"):  # --settings[=cards|options|home|back|restart]: open the pause menu (on that page) for a screenshot
 			await get_tree().process_frame
 			var screen: Node = get_child(get_child_count() - 1)
 			screen._open_settings()
 			var o: SettingsOverlay = screen.get_node("Settings")
 			if args["settings"] != "":
-				o.call("_" + {"cards": "cards", "options": "options", "home": "confirm_home"}[args["settings"]])
+				o.call("_" + {"cards": "cards", "options": "options", "home": "confirm_home", "back": "confirm_step_back",
+						"restart": "confirm_restart"}[args["settings"]])
 	else:
 		Game.show_screen(TitleScreen.new())
 	if args.has("shot"):

@@ -96,6 +96,28 @@ func back_to_story() -> void:
 	show_screen(MapScreen.new())
 
 
+func restart_chapter() -> void:
+	## 设置 → 重打这一章 (on the map or mid-battle)
+	battle_ctx = {}
+	Engine.time_scale = 1.0
+	Quests.restart(save, rng)
+	persist()
+	var m := MapScreen.new()
+	m.toast = "这一章从头再来 —— 一切回到刚进本章时的样子"
+	show_screen(m)
+
+
+func step_back() -> void:
+	## 设置 → 重返上一格 (on the map or mid-battle)
+	battle_ctx = {}
+	Engine.time_scale = 1.0
+	save.rewind_step()
+	persist()
+	var m := MapScreen.new()
+	m.toast = "回到了上一格 —— 走这一步之后得到的、选过的都已退回"
+	show_screen(m)
+
+
 func start_quest_battle(q: Dictionary, sq: Dictionary) -> void:
 	battle_ctx = {"quest": q, "square": sq}
 	var b := BattleScreen.new()

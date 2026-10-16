@@ -123,6 +123,7 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.run_relics = []
 	save.run_records = []
 	save.layout = {}
+	save.steps = []
 	if rng != null:
 		for group in q["shuffle"]:
 			var dealt: Array = group.duplicate()
@@ -169,6 +170,9 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 		_roll_events(q, save, rng)  # which ？ event waits where is known from the start (the map names it); how it turns out is chance
 	reset_carry(save)
 	_auto_resolve(q, save)
+	# remember how the chapter began (once per chapter: a lost first square calls begin again and must not overwrite it)
+	if str(save.chapter_start.get("quest", "")) != q["id"] or str(save.chapter_start.get("replay", "")) != save.replay:
+		save.chapter_start = save.snapshot()
 
 
 static func _roll_events(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> void:
@@ -602,6 +606,7 @@ static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNu
 	q = view(q, save)
 	var ok := next_options(q, save).any(func(s): return s["id"] == square_id)
 	assert(ok, "cannot move to " + square_id)
+	save.steps.append(save.snapshot())
 	save.square = square_id
 	save.visited.append(square_id)
 	save.resolved = false
@@ -1056,6 +1061,17 @@ static func lose(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nul
 	return true
 
 
+static func restart(save: SaveData, rng: RandomNumberGenerator = null) -> void:
+	## 重打这一章 (设置): the save goes back to exactly how it stood when the chapter began (chapter_start: cards, copies,
+	## 战功, 宝物, the dealt map). An old save without that snapshot gets its cards back from run_start and a fresh deal.
+	var had := not save.chapter_start.is_empty()
+	save.rewind()
+	if not had:
+		var q: Variant = current_quest(save)
+		if q != null:
+			begin(q, save, rng)
+
+
 static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
 	## Lost a battle: automatically jump back to the previous point, allowing the player to try again.
 	## If at the first square, restart from the beginning. Either way the party comes back at full HP with fresh skill uses:
@@ -1066,6 +1082,8 @@ static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nul
 	else:
 		save.visited.pop_back()
 		save.square = save.visited[-1]
+		if not save.steps.is_empty():
+			save.steps.pop_back()  # that step is undone already
 		save.resolved = true
 		save.offer = []
 		save.event_battle = {}

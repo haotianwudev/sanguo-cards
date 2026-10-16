@@ -1511,3 +1511,67 @@ func test_the_dice_land_when_the_square_is_reached_and_stay() -> void:
 	for seed_value in 10:
 		check_eq(Quests.rolled_option(s, ev, rng(seed_value)), first, "the same option every time the square is shown")
 	check(s.event_rolls.has("road"), "and it is kept in the save")
+
+
+func test_restarting_a_chapter_goes_back_to_how_it_began() -> void:
+	var s := SaveData.create()
+	Quests.begin(quest(0), s, rng(3))
+	Quests.complete(quest(0), s)
+	s.grant_card("danyang")
+	Quests.begin(quest(1), s, rng(3))
+	var before: Dictionary = s.snapshot()
+	s.square = "counter"
+	s.visited.append("counter")
+	s.take("sunce")
+	s.grant_card("danyang")
+	s.relics.append("bingfu")
+	s.merit += 5
+	s.run_records.append("董白：留下")
+	Quests.fail(quest(1), s, rng(1))  # a lost fight must not overwrite the snapshot
+	Quests.restart(s, rng(9))
+	check_eq(s.snapshot(), before, "every field back to the chapter's start, the dealt map included")
+	check(not s.has_card("sunce") and s.copies("danyang") == 1)
+
+
+func test_restarting_an_old_save_without_a_snapshot_returns_the_cards() -> void:
+	var s := SaveData.create()
+	Quests.begin(quest(0), s)
+	s.chapter_start = {}  # a save from before the snapshot existed
+	s.grant_card("danyang")
+	s.take("sunce")
+	Quests.restart(s, rng(0))
+	check(not s.has_card("sunce") and s.copies("danyang") == 0, "cards gained this chapter are given back")
+	check_eq(s.square, quest(0)["start"])
+
+
+func test_stepping_back_undoes_one_square_at_a_time() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s, rng(3))
+	Quests.resolve(q, s, rng(0), 0)
+	var at_start: Dictionary = s.snapshot()
+	Quests.move(q, s, "wake")
+	Quests.resolve(q, s, rng(0), 0)
+	var at_wake: Dictionary = s.snapshot()
+	Quests.move(q, s, "bandage")
+	Quests.resolve(q, s, rng(0), 0)
+	s.grant_card("danyang")
+	s.relics.append("bingfu")
+	check_eq(s.steps.size(), 2)
+	s.rewind_step()
+	check_eq(s.snapshot(), at_wake, "back on 「wake」 as it was, before stepping on")
+	s.rewind_step()
+	check_eq(s.snapshot(), at_start, "and once more, to the first square")
+	check(s.steps.is_empty())
+	print("  snapshot size: %d bytes" % JSON.stringify(at_wake).length())
+
+
+func test_a_lost_fight_drops_its_step() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	Quests.resolve(q, s, rng(0), 0)
+	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar"])
+	var n := s.steps.size()
+	Quests.fail(q, s)
+	check_eq(s.steps.size(), n - 1, "fail already stepped back: one step fewer to undo")

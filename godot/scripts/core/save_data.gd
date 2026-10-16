@@ -75,10 +75,12 @@ var cleared_form_copies: Dictionary = {}  # …the levels confirmed at an ending
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
 var theme := "light"
+var chapter_start: Dictionary = {}  # the whole save as it stood when this chapter began (重打这一章 goes back to it)
+var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
-	"events", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash"]
+	"events", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps"]
 
 
 static func create() -> SaveData:
@@ -90,7 +92,7 @@ static func create() -> SaveData:
 # the fields that make up one run of a quest (parked while a finished chapter is replayed)
 const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events", "event_rolls",
 	"event_battle", "event_note", "offer_kind", "relics", "danger", "picks_left", "offer_rates", "run_start",
-	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn", "fate", "fate_offer", "affixes", "ambushes"]
+	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn", "fate", "fate_offer", "affixes", "ambushes", "chapter_start", "steps"]
 
 
 func stash_run() -> void:
@@ -106,6 +108,54 @@ func restore_run() -> void:
 	stash = {}
 	damage = int(damage)
 	danger = int(danger)
+
+
+func snapshot() -> Dictionary:
+	## the whole save as it stands, minus what a rewind must not touch (the parked main run, the snapshot itself, the theme)
+	var d: Dictionary = to_dict().duplicate(true)
+	for f in ["stash", "chapter_start", "steps", "theme"]:
+		d.erase(f)
+	return d
+
+
+func rewind_step() -> void:
+	## 重返上一格: back to just before the last step; again and again, as far as the chapter's first square
+	if steps.is_empty():
+		return
+	var rest := steps.duplicate()
+	var snap: Dictionary = rest.pop_back()
+	_restore(snap)
+	steps = rest
+
+
+func _restore(snap: Dictionary) -> void:
+	var s := SaveData.from_dict(snap.duplicate(true))  # from_dict turns JSON floats back into ints
+	for f in snap:
+		set(f, s.get(f))
+
+
+func rewind() -> void:
+	## 重打这一章: back to chapter_start. An old save without one gets its cards back from run_start (the copies held when the
+	## chapter began); everything else a chapter changes (宝物, the map) is reset by Quests.begin anyway.
+	if chapter_start.is_empty():
+		var db := _db()
+		owned = []
+		dupes = {}
+		soldiers = {}
+		for cid in run_start:
+			if not db.cards.has(cid):
+				continue
+			var n := int(run_start[cid])
+			if db.cards[cid]["soldier"]:
+				soldiers[cid] = n
+			else:
+				owned.append(cid)
+				if n > 1:
+					dupes[cid] = n
+		party = party.filter(func(c): return owned.has(c))
+		return
+	_restore(chapter_start)
+	steps = []
 
 
 func new_lap(inherit_all := false) -> SaveData:

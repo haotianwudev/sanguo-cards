@@ -75,6 +75,14 @@ func _menu() -> void:
 		var dbg := Kit.button("测试工具（开发者界面）", "purple")
 		dbg.pressed.connect(_open_debug)
 		col.add_child(dbg)
+	if Game.save != null and Game.save.quest != "" and not Game.save.steps.is_empty():
+		var back := Kit.button("重返上一格", "gold")
+		back.pressed.connect(_confirm_step_back)
+		col.add_child(back)
+	if Game.save != null and Game.save.quest != "":
+		var redo := Kit.button("重打这一章", "gold")
+		redo.pressed.connect(_confirm_restart)
+		col.add_child(redo)
 	var home := Kit.button("回到主页", "red")
 	home.pressed.connect(_confirm_home)
 	col.add_child(home)
@@ -144,6 +152,44 @@ func _options() -> void:
 func _open_debug() -> void:
 	var d := DebugScreen.new()
 	Game.root.add_child(d)
+
+
+func _confirm_step_back() -> void:
+	var col := _panel(520)
+	_title(col, "重返上一格？")
+	var l := Kit.label("回到走这一步之前：上一格的结果保留，这一格拿到的卡牌、宝物、做过的选择都会退回。\n可以一格一格往回退，最远到本章第一格。",
+			Kit.FONT_BODY, "muted")
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(l)
+	var ok := Kit.button("重返上一格", "gold")
+	ok.pressed.connect(func():
+		queue_free()
+		Game.step_back())
+	col.add_child(ok)
+	var no := Kit.button("取消", "gray")
+	no.pressed.connect(_menu)
+	col.add_child(no)
+	Kit.focus(no)
+
+
+func _confirm_restart() -> void:
+	var col := _panel(520)
+	_title(col, "重打这一章？")
+	var l := Kit.label("回到刚进本章时的样子，从第一格重新出发。\n本章拿到的卡牌、宝物、做过的选择都会退回。",
+			Kit.FONT_BODY, "muted")
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(l)
+	var ok := Kit.button("重打这一章", "gold")
+	ok.pressed.connect(func():
+		queue_free()
+		Game.restart_chapter())
+	col.add_child(ok)
+	var no := Kit.button("取消", "gray")
+	no.pressed.connect(_menu)
+	col.add_child(no)
+	Kit.focus(no)
 
 
 func _confirm_home() -> void:
