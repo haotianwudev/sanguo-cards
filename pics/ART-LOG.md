@@ -691,3 +691,4 @@
 - [x] 2026-10-15 portrait `lord_south_sleep` ← re_lord_south_sleep.jpg · ok
 - [x] 2026-10-15 portrait `lord_north_sleep` ← re_lord_north_sleep.jpg · ok
 - [x] 2026-10-15 portrait `lord_south_casual` ← re_lord_south_casual.jpg · ok
+- [ ] 2026-10-16 cg `c6_warn` ← c6_warn_new.jpg 裁 1536×1024→1536×864 · ok
