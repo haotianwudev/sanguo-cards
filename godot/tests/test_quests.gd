@@ -1091,12 +1091,13 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 	s.flags = ["出生：冀州无极"]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 11
-	for k in 5:
+	var north: int = db.lord_form_grants.filter(func(f): return db.lord_forms[f]["route"] == "north").size()
+	for k in north:
 		s.lord_form_paid = ""
 		var got := Quests.grant_lord_form(db.quests[0], s, rng)
 		check(got != "", "chapter %d of the north route still hands one out" % (k + 1))
 		check_eq(s.lord_form(), got, "the newest card is in use until another is picked")
-	check_eq(s.route_lord_forms().size(), 5)
+	check_eq(s.route_lord_forms().size(), north)
 	var base := s.lord_with_form("")
 	var pick := "lord_north_guard"
 	s.lord_form_pick = pick
@@ -1119,7 +1120,7 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 		check_eq(s.lord_copies, lord_before + 1, "…the plain lord card gains a level")
 	else:
 		check_eq(int(s.form_copies[again]), int(held_copies.get(again, 0)) + 1, "…which is one more level of that very card")
-	check_eq(s.route_lord_forms().size(), 5, "the card list does not grow")
+	check_eq(s.route_lord_forms().size(), north, "the card list does not grow")
 
 
 func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:

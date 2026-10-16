@@ -324,5 +324,9 @@
   "zhugejin": {"file": "zhugejin.jpg", "face": [0.5, 0.22], "head": 0.22},
   "wu_nushou": {"file": "wu_nushou.jpg", "face": [0.5, 0.22], "head": 0.22},
   "bilan_shusheng": {"file": "bilan_shusheng.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "wu_canjun": {"file": "wu_canjun.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "wu_canjun": {"file": "wu_canjun.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "lord_south_sleep": {"file": "lord_south_sleep.jpg", "face": [0.52, 0.19], "head": 0.22},
+  "lord_north_sleep": {"file": "lord_north_sleep.jpg", "face": [0.51, 0.21], "head": 0.25},
+  "lord_south_casual": {"file": "lord_south_casual.jpg", "face": [0.48, 0.23], "head": 0.23},
+  "lord_north_casual": {"file": "lord_north_casual.jpg", "face": [0.52, 0.2], "head": 0.25}
 }

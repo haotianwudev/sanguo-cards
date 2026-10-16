@@ -2925,6 +2925,42 @@
         0.22
       ],
       "head": 0.22
+    },
+    "lord_south_sleep": {
+      "src": "source/generals/lord_south_sleep.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.52,
+        0.19
+      ],
+      "head": 0.22
+    },
+    "lord_north_sleep": {
+      "src": "source/generals/lord_north_sleep.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.51,
+        0.21
+      ],
+      "head": 0.25
+    },
+    "lord_south_casual": {
+      "src": "source/generals/lord_south_casual.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.48,
+        0.23
+      ],
+      "head": 0.23
+    },
+    "lord_north_casual": {
+      "src": "source/generals/lord_north_casual.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.52,
+        0.2
+      ],
+      "head": 0.25
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",

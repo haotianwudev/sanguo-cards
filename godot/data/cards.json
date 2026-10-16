@@ -147,7 +147,11 @@
       "lord_south_boat",
       "lord_south_robe",
       "lord_south_plate",
-      "lord_south_cloak"
+      "lord_south_cloak",
+      "lord_south_casual",
+      "lord_south_sleep",
+      "lord_north_casual",
+      "lord_north_sleep"
     ],
     "forms": {
       "lord_default": {
@@ -246,6 +250,42 @@
         "rarity": "R",
         "hp": 67,
         "at": 81,
+        "skills": [],
+        "art": false
+      },
+      "lord_south_casual": {
+        "name": "主公·常服",
+        "route": "south",
+        "rarity": "R",
+        "hp": 66,
+        "at": 80,
+        "skills": [],
+        "art": false
+      },
+      "lord_south_sleep": {
+        "name": "主公·睡衣",
+        "route": "south",
+        "rarity": "R",
+        "hp": 62,
+        "at": 74,
+        "skills": [],
+        "art": false
+      },
+      "lord_north_casual": {
+        "name": "主公·常服",
+        "route": "north",
+        "rarity": "R",
+        "hp": 66,
+        "at": 80,
+        "skills": [],
+        "art": false
+      },
+      "lord_north_sleep": {
+        "name": "主公·睡衣",
+        "route": "north",
+        "rarity": "R",
+        "hp": 62,
+        "at": 74,
         "skills": [],
         "art": false
       }

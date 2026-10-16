@@ -329,6 +329,10 @@
 | `wu_nushou` | source/soldiers/wu_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `bilan_shusheng` | source/soldiers/bilan_shusheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wu_canjun` | source/soldiers/wu_canjun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_sleep` | source/generals/lord_south_sleep.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_sleep` | source/generals/lord_north_sleep.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_casual` | source/generals/lord_south_casual.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_casual` | source/generals/lord_north_casual.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
