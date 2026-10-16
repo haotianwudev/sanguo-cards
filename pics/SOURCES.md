@@ -329,6 +329,7 @@
 | `wu_nushou` | source/soldiers/wu_nushou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `bilan_shusheng` | source/soldiers/bilan_shusheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wu_canjun` | source/soldiers/wu_canjun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lvmeng_qingnian` | source/generals/lvmeng_qingnian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_sleep` | source/generals/lord_south_sleep.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_north_sleep` | source/generals/lord_north_sleep.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_casual` | source/generals/lord_south_casual.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -783,3 +784,9 @@
 | `cg:e_m8_yufu` | source/cg/e_m8_yufu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_m8_taobing` | source/cg/e_m8_taobing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:e_m8_liumin` | source/cg/e_m8_liumin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_lvmeng` | source/cg/c9_lvmeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c10_dujiang` | source/cg/c10_dujiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c10_hongying` | source/cg/c10_hongying.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c10_dushu` | source/cg/c10_dushu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c10_ganning_lm` | source/cg/c10_ganning_lm.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c10_jinfan` | source/cg/c10_jinfan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

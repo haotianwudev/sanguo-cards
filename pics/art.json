@@ -2926,6 +2926,15 @@
       ],
       "head": 0.22
     },
+    "lvmeng_qingnian": {
+      "src": "source/generals/lvmeng_qingnian.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
     "lord_south_sleep": {
       "src": "source/generals/lord_south_sleep.jpg",
       "license": "用户提供（Gemini 生成）",
@@ -4768,6 +4777,30 @@
     },
     "e_m8_liumin": {
       "src": "source/cg/e_m8_liumin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c9_lvmeng": {
+      "src": "source/cg/c9_lvmeng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_dujiang": {
+      "src": "source/cg/c10_dujiang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_hongying": {
+      "src": "source/cg/c10_hongying.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_dushu": {
+      "src": "source/cg/c10_dushu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_ganning_lm": {
+      "src": "source/cg/c10_ganning_lm.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_jinfan": {
+      "src": "source/cg/c10_jinfan.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

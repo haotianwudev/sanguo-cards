@@ -675,6 +675,15 @@
 - [x] 2026-10-14 cg `e_m8_yufu` ← e_m8_yufu.jpg · ok
 - [x] 2026-10-14 cg `e_m8_taobing` ← e_m8_taobing.jpg · ok
 - [x] 2026-10-14 cg `e_m8_liumin` ← e_m8_liumin.jpg · ok
+- [x] 2026-10-15 portrait `lvmeng_qingnian` ← lvmeng_qingnian_1792104150506.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-15 cg `c9_lusu` ← c9_lusu_1792104288023.jpg · ok
+- [x] 2026-10-15 cg `c10_ganning` ← c10_ganning_1792104469740.jpg · ok
+- [x] 2026-10-15 cg `c9_lvmeng` ← c9_lvmeng_1792104602721.jpg · ok
+- [x] 2026-10-15 cg `c10_dujiang` ← c10_dujiang_1792104728234.jpg · ok
+- [x] 2026-10-15 cg `c10_hongying` ← c10_hongying_1792104826089.jpg · ok
+- [x] 2026-10-15 cg `c10_dushu` ← c10_dushu_1792105041102.jpg · ok
+- [x] 2026-10-15 cg `c10_ganning_lm` ← c10_ganning_lm_1792105152724.jpg · ok
+- [x] 2026-10-15 cg `c10_jinfan` ← c10_jinfan_1792105290585.jpg · ok
 - [x] 2026-10-15 portrait `lord_south_sleep` ← lord_south_sleep.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-15 portrait `lord_north_sleep` ← lord_north_sleep.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [x] 2026-10-15 portrait `lord_south_casual` ← lord_south_casual_crop.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
