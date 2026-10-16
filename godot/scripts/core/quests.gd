@@ -1072,6 +1072,22 @@ static func restart(save: SaveData, rng: RandomNumberGenerator = null) -> void:
 			begin(q, save, rng)
 
 
+static func step_back(save: SaveData, rng: RandomNumberGenerator = null) -> void:
+	## 重返上一格 (设置). A step's snapshot is the square before it, already resolved — a choice made there would stay made
+	## (a choose square moves on by itself the moment you pick). So landing on a made choice goes back to just before it:
+	## re-enter it from the square before (or, on a chapter's first square, from the chapter start) and pick again.
+	save.rewind_step()
+	var q: Variant = current_quest(save)
+	if q == null or not save.resolved or here(view(q, save), save)["type"] != "choose":
+		return
+	var sid: String = save.square
+	if save.steps.is_empty():
+		restart(save, rng)
+		return
+	save.rewind_step()
+	move(q, save, sid, rng)
+
+
 static func fail(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
 	## Lost a battle: automatically jump back to the previous point, allowing the player to try again.
 	## If at the first square, restart from the beginning. Either way the party comes back at full HP with fresh skill uses:

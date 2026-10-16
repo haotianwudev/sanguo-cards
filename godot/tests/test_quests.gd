@@ -1567,6 +1567,38 @@ func test_stepping_back_undoes_one_square_at_a_time() -> void:
 	print("  snapshot size: %d bytes" % JSON.stringify(at_wake).length())
 
 
+func test_stepping_back_onto_a_made_choice_lets_you_choose_again() -> void:
+	## a choose square moves on by itself once picked: 重返上一格 from there lands before the pick, not on the made choice
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	Quests.resolve(q, s, rng(0), 0)
+	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar", "raid"])
+	Quests.move(q, s, "plan")
+	Quests.resolve(q, s, rng(0), 1)
+	Quests.move(q, s, "zy_lure")
+	Quests.step_back(s)
+	check(s.square == "plan" and not s.resolved, "back on 「plan」 with its options open again")
+	check(not s.choices.has("plan") and not s.run_records.has("定计：周瑜调虎离山"), "the old pick is undone")
+	Quests.resolve(q, s, rng(0), 0)
+	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["sc_gate"])
+	Quests.move(q, s, "sc_gate")
+	Quests.step_back(s)
+	check(s.square == "plan" and not s.resolved, "and again, after the other pick")
+	Quests.step_back(s)
+	check_eq(s.square, "raid", "once more goes past the choice to the square before it")
+
+
+func test_stepping_back_onto_the_first_square_choice_restarts_it() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	Quests.resolve(q, s, rng(0), 0)
+	Quests.move(q, s, "wake")
+	Quests.step_back(s)
+	check(s.square == "era" and not s.resolved, "the birth choice is open again")
+
+
 func test_a_lost_fight_drops_its_step() -> void:
 	var q := quest(0)
 	var s := SaveData.create()

@@ -284,7 +284,9 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   孙坚 had left home well before, and he meets the hero for the first time in chapter 2). The 部队 button on the map opens the party screen.
 - **重返上一格 / 重打这一章** (设置 menu, on the map and mid-battle): `Quests.move` pushes `SaveData.snapshot()` (the whole save minus
   `stash` / `chapter_start` / `steps` / `theme`) onto `save.steps` before every step; `rewind_step()` pops one, as far back as the
-  chapter's first square (`fail` pops the step it already undid). `Quests.begin` stores `save.chapter_start` once per chapter (not on a
+  chapter's first square (`fail` pops the step it already undid). The 设置 button calls `Quests.step_back`, not `rewind_step`
+  directly: a choose square moves on the moment you pick, so landing on a made choice goes back once more and re-enters it
+  unresolved (on a chapter's first square: `restart`) — otherwise the pick could never be changed. `Quests.begin` stores `save.chapter_start` once per chapter (not on a
   first-square loss) and clears `steps`; `Quests.restart` → `rewind()` puts every field back, dealt map included. An old save with no
   `chapter_start` gets its cards back from `run_start` and a fresh `begin`. Both fields are in `RUN_FIELDS`, so a replay parks them.
   A new save field is covered automatically (it's in `FIELDS`); only add it to the `snapshot()` erase list if a rewind must not touch it.

@@ -111,7 +111,7 @@ func step_back() -> void:
 	## 设置 → 重返上一格 (on the map or mid-battle)
 	battle_ctx = {}
 	Engine.time_scale = 1.0
-	save.rewind_step()
+	Quests.step_back(save, rng)
 	persist()
 	var m := MapScreen.new()
 	m.toast = "回到了上一格 —— 走这一步之后得到的、选过的都已退回"
