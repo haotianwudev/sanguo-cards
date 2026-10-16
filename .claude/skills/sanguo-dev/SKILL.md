@@ -424,8 +424,8 @@ Writing rules:
   recognised or 「没听过」, plus a modern jab that stays believable (袁绍 = the boss who loves meetings and never
   decides) — no forced office metaphors; famous people (孙坚) he simply knows. One per character; no historical detail he couldn't know; characters never cite 演义.
 - **Few soldier types per enemy faction (3–5)**: 西凉 游骑/斥候/弓骑/飞熊军, 袁术 步卒/弓手/骑兵/密探, 并州 狼骑/吕布亲兵/陷阵营兵,
-  司徒府 哨卡/府兵; **汉军 (刘备·诸葛亮)**: one 高级兵 per troop type — 突骑 `han_tuqi` / 白毦兵 `baier` / 连弩手 `han_nu` / 八阵兵 `han_bazhen` /
-  斥候 `han_chihou` / 书佐 `han_shuzuo` / 医工 `han_yigong` (cards `"veteran": true, "faction": "han"`: face numbers in
+  司徒府 哨卡/府兵; **汉军 (刘备·诸葛亮)**: one 高级兵 per troop type, each a famous name — 虎骑 `han_tuqi` / 白毦兵 `baier` / 连弩兵 `liannu` / 虎步军 `han_bazhen` /
+  无当飞军 `wudang_feijun` / 卧龙门生 `han_shuzuo` / 木牛流马营 `han_yigong` (cards `"veteran": true, "faction": "han"`: face numbers in
   `gacha.veteran_soldier_band` 125~149, the R band). One look for all (赤红战袍、玄黑札甲、铁盔赤缨, a red 「汉」 banner — never 「刘」).
   Every soldier fight on 刘备's side, from 第八章 to the final battle, uses these and only these; `faction` keeps them out of every
   public chest (`chest_pools`, `soldier_cards`), so they come only as a 汉军 enemy's or a 刘备 general's `card` (a test guards it).
