@@ -1165,11 +1165,16 @@ func test_chapter6_luxun_can_only_study_under_zhouyu_after_ending_thirteen() -> 
 	check(not Quests.option_locked(s, opts[0]))
 
 
-func test_south_chapter9_fazheng_joins_in_chengdu_on_every_route() -> void:
-	for flags in [[], [E13, "陆逊：入队"]]:
-		var s := ch9s_save(flags)
-		var p := walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
-		check(p.has("t9_fazheng") and s.has_card("fazheng"), "法正 joins after 雒城 (%s)" % str(flags))
+func test_south_chapter9_fazheng_only_comes_along_after_ending_fourteen() -> void:
+	var opts: Array = quest_by_id("tianfu")["squares"]["t9_fazheng"]["choose"]
+	check(Quests.option_locked(ch9s_save(), opts[0]), "first time through: 请他同行 is greyed")
+	var s := ch9s_save()
+	var p := walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
+	check(p.has("t9_fazheng_go") and not s.has_card("fazheng"), "first time through 法正 walks off")
+	s = ch9s_save([E13, "陆逊：入队", "结局十四 · 断栈"])
+	p = walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
+	check(p.has("t9_fazheng_take") and s.has_card("fazheng"), "after 结局十四 法正 joins")
+	check(s.run_records.has("法正：入队"))
 
 
 # ---- 第十章 · 奇袭关中（南线）------------------------------------------------------------
@@ -1179,10 +1184,12 @@ const E14 := "结局十四 · 断栈"
 
 func ch10s_save(flags := []) -> SaveData:
 	var s := ch9s_save([E13, "陆逊：入队"])
-	s.flags += ["严颜：入队", "张任：入队", "法正：入队", "吴苋：入队", "祝融：入队", "南线：益州与南中"] + flags
+	s.flags += ["严颜：入队", "张任：入队", "吴苋：入队", "祝融：入队", "南线：益州与南中"] + flags
 	s.quests_cleared.append("tianfu")
-	for c in ["luxun_young", "yanyan", "zhangren", "fazheng", "wuxian", "zhurong", "menghuo"]:
+	for c in ["luxun_young", "yanyan", "zhangren", "wuxian", "zhurong", "menghuo"]:
 		s.grant_card(c)
+	if s.flags.has("法正：入队"):
+		s.grant_card("fazheng")
 	return s
 
 
@@ -1195,13 +1202,15 @@ func test_south_chapter10_follows_the_good_tianfu_ending_only() -> void:
 
 func test_south_chapter10_first_time_the_ziwu_valley_ends_in_ending_fourteen() -> void:
 	var q := quest_by_id("guanzhong")
-	check(Quests.option_locked(ch10s_save(), q["squares"]["g10_junyi"]["choose"][0]), "first time through: 法正's plan is greyed")
+	for sq in q["squares"].values():  # 法正 may not have come along: nothing before the 军议 may need him
+		if sq["x"] < 15:
+			check(not JSON.stringify(sq).contains("法正") and not sq.get("portraits", []).has("fazheng"), "%s needs 法正" % sq["id"])
 	for fork in [[], ["g10_a_m1", "g10_c_m1", "g10_zw_m1"]]:
-		var s := ch10s_save()
+		var s := ch10s_save(["法正：不和"])
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["g10_start", "g10_yangang", "g10_zhangwei", "g10_zhanglu", "g10_xingye", "g10_dingjun", "g10_junyi", "g10_zw_start", "g10_zw_fire", "g10_zw_exit", "g10_duanzhan"]:
+		for sid in ["g10_start", "g10_yangang", "g10_zhangwei", "g10_zhanglu", "g10_xingye", "g10_dingjun", "g10_junyi", "g10_zw_start", "g10_zw_night", "g10_zw_fire", "g10_zw_liang", "g10_zw_exit", "g10_duanzhan"]:
 			check(p.has(sid), "子午谷 route passes %s (forks %s)" % [sid, str(fork)])
-		for sid in ["g10_fenbing", "g10_chencang", "g10_lijue", "g10_zhuge", "g10_end"]:
+		for sid in ["g10_junyi_f", "g10_fenbing", "g10_chencang", "g10_lijue", "g10_zhuge", "g10_end"]:
 			check(not p.has(sid), "子午谷 route never reaches " + sid)
 		check_eq(p[-1], "g10_duanzhan")
 		check(s.has_card("zhanglu") and s.has_card("yanpu"), "张鲁、阎圃 join in 汉中")
@@ -1220,13 +1229,19 @@ func test_south_chapter10_losing_at_the_valley_mouth_is_ending_fourteen_too() ->
 	check_eq(s.square, "g10_duanzhan")
 
 
+func test_south_chapter10_with_fazheng_the_valley_is_still_a_choice() -> void:
+	var s := ch10s_save([E14, "法正：入队"])
+	var p := walk(quest_by_id("guanzhong"), s, [], 1, 0, 1)
+	check(p.has("g10_junyi_f") and not p.has("g10_junyi"), "法正 speaks up at the 军议")
+	check_eq(p[-1], "g10_duanzhan", "and the player can still overrule him")
+
+
 func test_south_chapter10_after_ending_fourteen_fazheng_splits_the_army() -> void:
 	for fork in [[], ["g10_b_m1", "g10_fb_m1", "g10_d_m1", "g10_e_m1", "g10_f_m1"]]:
-		var s := ch10s_save([E14])
+		var s := ch10s_save([E14, "法正：入队"])
 		var q := quest_by_id("guanzhong")
-		check(not Quests.option_locked(s, q["squares"]["g10_junyi"]["choose"][0]), "after 结局十四 法正's plan opens")
 		var p := walk(q, s, fork, 1, 0, 0)
-		for sid in ["g10_fenbing", "g10_chencang", "g10_huzhen", "g10_chetui", "g10_guosi", "g10_xurong", "g10_lijue", "g10_lijue_end", "g10_liru",
+		for sid in ["g10_junyi_f", "g10_fenbing", "g10_chencang", "g10_huzhen", "g10_chetui", "g10_guosi", "g10_xurong", "g10_lijue", "g10_lijue_end", "g10_liru",
 				"g10_tongguan", "g10_zhangxiu", "g10_kongming", "g10_wangping", "g10_lianying", "g10_zhuge", "g10_zhuiji", "g10_zhuiji2", "g10_end"]:
 			check(p.has(sid), "兵分两路 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["g10_zw_start", "g10_zw_exit", "g10_duanzhan"]:
