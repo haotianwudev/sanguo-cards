@@ -1171,7 +1171,7 @@ func test_south_chapter9_fazheng_only_comes_along_after_ending_fourteen() -> voi
 	var s := ch9s_save()
 	var p := walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
 	check(p.has("t9_fazheng_go") and not s.has_card("fazheng"), "first time through 法正 walks off")
-	s = ch9s_save([E13, "陆逊：入队", "结局十四 · 断栈"])
+	s = ch9s_save([E13, "陆逊：入队", "结局十四 · 算尽"])
 	p = walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
 	check(p.has("t9_fazheng_take") and s.has_card("fazheng"), "after 结局十四 法正 joins")
 	check(s.run_records.has("法正：入队"))
@@ -1179,7 +1179,7 @@ func test_south_chapter9_fazheng_only_comes_along_after_ending_fourteen() -> voi
 
 # ---- 第十章 · 奇袭关中（南线）------------------------------------------------------------
 
-const E14 := "结局十四 · 断栈"
+const E14 := "结局十四 · 算尽"
 
 
 func ch10s_save(flags := []) -> SaveData:
