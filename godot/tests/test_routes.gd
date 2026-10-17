@@ -1336,45 +1336,46 @@ func test_north_chapter7_follows_huainan_n() -> void:
 	check_eq(Quests.current_quest(yecheng_save())["id"], "yecheng", "北线：让寿春 → 第七章 · 邺城惊雷")
 
 
-func test_north_chapter7_first_time_guo_tu_gets_away_and_zhao_yun_dies_at_the_well() -> void:
+func test_north_chapter7_without_chen_gong_guo_tu_gets_away_and_zhao_yun_dies_at_the_well() -> void:
 	for fork in [[], ["n7_t_m1", "n7_x_m1", "n7_s1_t", "n7_s2_t", "n7_f_m1", "n7_b_l_m1"]]:
 		var s := yecheng_save()
 		var q := quest_by_id("yecheng")
 		var p := walk(q, s, fork)
-		for sid in ["n7_start", "n7_zangba", "n7_tiqin", "n7_wedding", "n7_yijing", "n7_shishi", "n7_fukou", "n7_yuye", "n7_shenrong", "n7_guotu",
+		for sid in ["n7_start", "n7_zangba", "n7_tiqin", "n7_wedding", "n7_yijing", "n7_shishi", "n7_beishang", "n7_heibing", "n7_fukou", "n7_yuye", "n7_shenrong", "n7_guotu",
 				"n7_b_anmin", "n7_b_huijiu", "n7_b_tuwei", "n7_b_yanliang", "n7_b_qijin", "n7_b_wenchou", "n7_b_kujing"]:
 			check(p.has(sid), "放走郭图 passes %s (forks %s)" % [sid, str(fork)])
-		for sid in ["n7_g_zhui", "n7_g_wenchou", "n7_g_end"]:
+		for sid in ["n7_bieyuan", "n7_guotu_c", "n7_g_zhui", "n7_g_wenchou", "n7_g_end"]:
 			check(not p.has(sid), "放走郭图 never reaches " + sid)
 		check_eq(p[-1], "n7_b_kujing")
-		for c in ["mizhen", "chengong"]:
-			check(s.has_card(c), c + " joins")
-		check(s.relics.has("mijia_chuan"), "the wedding brings 糜家海船")
-		for line in ["赵云：成婚", "陈宫：入队", "邺城：放走郭图"]:
+		check(s.has_card("mizhen") and s.has_card("guonvwang") and s.has_card("zhangyan"), "糜贞, 郭女王, 张燕 join")
+		check(not s.has_card("chengong"), "陈宫 stays in his garden")
+		check(s.run_relics.has("mijia_chuan"), "the wedding brings 糜家海船")  # a ？ event may trade it away later
+		for line in ["赵云：成婚", "北线：义字旗", "邺城：放走郭图"]:
 			check(s.run_records.has(line), "第七章 records " + line)
 		finish(q, s)
 		check(s.flags.has(E15))
 		check(Quests.current_quest(s) == null, "the story stops at 结局十五")
 
 
-func test_north_chapter7_the_chase_is_shut_before_ending_fifteen_and_the_well_fight_cannot_be_won() -> void:
+func test_north_chapter7_the_visit_is_shut_before_ending_fifteen_and_the_well_fight_cannot_be_won() -> void:
 	var sq: Dictionary = quest_by_id("yecheng")["squares"]
-	check(Quests.option_locked(yecheng_save(), sq["n7_guotu"]["choose"][1]), "让子龙去追郭图 is shut before 结局十五")
+	check(Quests.option_locked(yecheng_save(), sq["n7_shishi"]["choose"][1]), "去别苑拜访陈宫 is shut before 结局十五")
+	check(str(sq["n7_guotu_c"]["requires"]).contains("陈宫：入队"), "only 陈宫 sends 赵云 after 郭图")
 	check_eq(sq["n7_b_wenchou"]["lose_goto"], "n7_b_kujing", "win or lose, the well")
 	check_eq(sq["n7_b_wenchou"]["next"], ["n7_b_kujing"])
 
 
-func test_north_chapter7_after_ending_fifteen_zhao_yun_catches_guo_tu_and_takes_hebei() -> void:
-	for fork in [[], ["n7_g_l_m1", "n7_g_s_t", "n7_g_s2_t"]]:
+func test_north_chapter7_after_ending_fifteen_chen_gong_joins_and_zhao_yun_catches_guo_tu() -> void:
+	for fork in [[], ["n7_g_l_m1", "n7_g_s2_t"]]:
 		var s := yecheng_save([E15])
 		var q := quest_by_id("yecheng")
 		var p := walk(q, s, fork)
-		for sid in ["n7_guotu", "n7_g_zhui", "n7_g_qin", "n7_g_jiyi", "n7_g_yanliang", "n7_g_juedi", "n7_g_wenchou", "n7_g_ouxue", "n7_g_end"]:
+		for sid in ["n7_shishi", "n7_bieyuan", "n7_guotu_c", "n7_g_zhui", "n7_g_qin", "n7_g_jiyi", "n7_g_zhanghe", "n7_g_yanliang", "n7_g_juedi", "n7_g_wenchou", "n7_g_ouxue", "n7_g_end"]:
 			check(p.has(sid), "追郭图 passes %s (forks %s)" % [sid, str(fork)])
-		for sid in ["n7_b_anmin", "n7_b_qijin", "n7_b_kujing"]:
+		for sid in ["n7_beishang", "n7_guotu", "n7_b_anmin", "n7_b_qijin", "n7_b_kujing"]:
 			check(not p.has(sid), "追郭图 never reaches " + sid)
 		check_eq(p[-1], "n7_g_end")
-		for c in ["mizhen", "chengong", "yanliang"]:
+		for c in ["mizhen", "chengong", "guonvwang", "yanliang", "zhanghe", "gaolan", "chunyuqiong"]:
 			check(s.has_card(c), c + " joins")
 		check(s.run_records.has("邺城：追郭图") and s.run_records.has("北线：夺邺城"))
 		finish(q, s)
