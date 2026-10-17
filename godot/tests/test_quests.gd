@@ -1688,3 +1688,15 @@ func test_the_wei_army_soldiers_only_come_from_fighting_cao_cao() -> void:
 		if cid != "" and db.cards[cid].get("faction", "") == "wei":
 			check(e["name"].begins_with("魏军") or ["xiahouyuan", "caoren", "xiahoudun", "caocao"].has(e["portrait"]),
 				"%s drops a 魏军 card but isn't 曹操's (%s)" % [eid, e["name"]])
+
+
+func test_the_yuan_army_soldiers_only_come_from_fighting_yuan_shao() -> void:
+	## 袁军 (冀州兵、先登): faction "yuan" keeps them out of every public chest; they come only from fighting 袁绍's army
+	var db := GameData.get_db()
+	var yuan: Array = db.cards.values().filter(func(c): return c.get("faction", "") == "yuan")
+	check_eq(yuan.map(func(c): return c["id"]).size(), 4, "冀州长戟、骑卒、强弩、先登死士")
+	check(db.soldier_cards().all(func(c): return c.get("faction", "") == ""), "no 袁军 card in the plain soldier list")
+	for c in yuan:
+		check(not db.card_chapters.get(c["id"], []).is_empty(), c["id"] + " is handed out somewhere")
+		for q in db.card_chapters.get(c["id"], []):
+			check(q in ["heishan", "beihai", "yecheng", "luoyang_n"], "%s comes from %s" % [c["id"], q])

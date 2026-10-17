@@ -2390,6 +2390,7 @@
       "hp": 46,
       "at": 55,
       "scope": "north",
+      "faction": "yuan",
       "weight": 1
     },
     "quyi": {
@@ -2484,7 +2485,8 @@
       "hp": 41,
       "at": 45,
       "weight": 2,
-      "scope": "north"
+      "scope": "north",
+      "faction": "yuan"
     },
     "xiliang_maozi": {
       "name": "西凉长矛手",
@@ -3092,6 +3094,15 @@
       "pool": false,
       "scope": "north"
     },
+    "tianyu": {
+      "name": "田豫",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "hp": 76,
+      "at": 82,
+      "pool": false,
+      "scope": "north"
+    },
     "jushou": {
       "name": "沮授",
       "rarity": "SR",
@@ -3357,7 +3368,8 @@
       "hp": 40,
       "at": 49,
       "weight": 2,
-      "scope": "north"
+      "scope": "north",
+      "faction": "yuan"
     },
     "hebei_shuzuo": {
       "name": "河北书佐",
@@ -3393,7 +3405,8 @@
       "hp": 40,
       "at": 40,
       "weight": 2,
-      "scope": "north"
+      "scope": "north",
+      "faction": "yuan"
     },
     "taihang_lieshou": {
       "name": "太行猎户",

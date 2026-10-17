@@ -1370,12 +1370,12 @@ func test_north_chapter7_after_ending_fifteen_chen_gong_joins_and_zhao_yun_catch
 		var s := yecheng_save([E15])
 		var q := quest_by_id("yecheng")
 		var p := walk(q, s, fork)
-		for sid in ["n7_shishi", "n7_bieyuan", "n7_guotu_c", "n7_g_zhui", "n7_g_qin", "n7_g_jiyi", "n7_g_zhanghe", "n7_g_yanliang", "n7_g_juedi", "n7_g_wenchou", "n7_g_ouxue", "n7_g_end"]:
+		for sid in ["n7_shishi", "n7_bieyuan", "n7_guotu_c", "n7_g_zhui", "n7_g_qin", "n7_g_jiyi", "n7_g_zhanghe", "n7_g_yanliang", "n7_g_juedi", "n7_g_wenchou", "n7_g_ouxue", "n7_g_zhaoxian", "n7_g_wuji", "n7_g_end"]:
 			check(p.has(sid), "将计就计 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n7_beishang", "n7_guotu", "n7_b_anmin", "n7_b_qijin", "n7_b_kujing"]:
 			check(not p.has(sid), "将计就计 never reaches " + sid)
 		check_eq(p[-1], "n7_g_end")
-		for c in ["mizhen", "chengong", "guonvwang", "yanliang", "zhanghe", "gaolan", "chunyuqiong", "jushou"]:
+		for c in ["mizhen", "chengong", "guonvwang", "zhanghe", "gaolan", "jushou", "tianyu", "baima_yicong"]:
 			check(s.has_card(c), c + " joins")
 		check(s.run_records.has("邺城：将计就计") and s.run_records.has("北线：夺邺城"))
 		finish(q, s)
