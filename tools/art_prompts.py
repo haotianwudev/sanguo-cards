@@ -74,7 +74,10 @@ def hero_note(key: str, scene: str = "") -> str:
         return HERO_NOBLADE
     return HERO
 STYLE = ("复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳")
-PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，人物居中，面部位于画面上方三分之一处。")
+PORTRAIT_COMPOSITION = ("竖版 3:4 比例，半身像，面部位于画面上方三分之一处。"
+                        "姿势要生动，不要呆板：禁止正面直立、双手垂在身侧、像证件照一样的站姿；"
+                        "身体要有扭转和重心（侧身回眸、半步前跨、微倾或拧腰），手上要有正在做的动作（握武器、整衣、抬手、指向某处），"
+                        "视线和神情随人物性格带戏，武器、披风、衣摆和发丝带出动势。")
 # Backgrounds are now atmospheric and character-specific per user directive
 
 # key: (name line, appearance, armor & clothing, weapon / pose)

@@ -157,6 +157,8 @@ put it in `OVERRIDES` under its key — it replaces the template and stays in `a
 (`ART-PROMPTS.md` and `ART-NEEDS.md` list only what is still missing, to stay short).
 When new art arrives, look at it and rewrite that scene's lines to match what's drawn.
 
+**立绘姿势不要呆板**（用户明确要求）：新立绘一律要有动势——身体扭转、重心偏移、手上有动作，禁止正面直立、双手垂身侧的证件照站姿。这条写在 `tools/art_prompts.py` 的 `PORTRAIT_COMPOSITION` 里，每张立绘提示词都会带上；已交付的老立绘不用重画，除非用户点名。
+
 Adding a portrait, checklist:
 1. File name = the portrait key the game looks up: a card's `person` (or its id), or an enemy's `portrait`
    (enemies reuse their card's key — check `cards.json` before inventing a new one). Generals/enemies go in
