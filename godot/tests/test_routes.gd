@@ -1392,3 +1392,61 @@ func test_north_chapter7_after_ending_sixteen_tian_feng_comes_out_of_the_cell() 
 	check(not p.has("n7_g_zhaoxian"), "the plain 招贤馆 is the other version")
 	check(s.has_card("tianfeng") and s.run_records.has("田丰：入队"), "田丰 joins")
 
+
+# ---- 北线第八章 · 北海龙虎 ---------------------------------------------------------------
+
+const E16 := "结局十六 · 遗策"
+
+
+func longhu_save(flags := []) -> SaveData:
+	var s := yecheng_save([E15, "赵云：成婚", "陈宫：入队", "北线：义字旗", "邺城：将计就计", "北线：夺邺城"] + flags)
+	s.quests_cleared.append("yecheng")
+	for c in ["mizhen", "chengong", "guonvwang", "zhanghe", "gaolan", "jushou", "tianyu"]:
+		s.grant_card(c)
+	return s
+
+
+func test_north_chapter8_follows_yecheng() -> void:
+	check_eq(Quests.current_quest(longhu_save())["id"], "longhu", "北线：夺邺城 → 第八章 · 北海龙虎")
+
+
+func test_north_chapter8_without_tian_feng_guo_jia_stays_north_and_the_lord_falls_at_beihai() -> void:
+	for fork in [[], ["n8_q_m1", "n8_y_m1", "n8_b_l_m1"]]:
+		var s := longhu_save()
+		var q := quest_by_id("longhu")
+		var p := walk(q, s, fork)
+		for sid in ["n8_start", "n8_yishi", "n8_weiping", "n8_yuantan", "n8_dumai", "n8_wuhuan", "n8_shenpei", "n8_chusai", "n8_dingbei",
+				"n8_liushou", "n8_b_nan", "n8_b_xin", "n8_b_chengyu", "n8_b_end"]:
+			check(p.has(sid), "郭嘉留守 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n8_yishi_t", "n8_liushou_t", "n8_g_nan", "n8_g_jincheng", "n8_g_end"]:
+			check(not p.has(sid), "郭嘉留守 never reaches " + sid)
+		check_eq(p[-1], "n8_b_end")
+		check(s.run_records.has("北线：郭嘉留守"))
+		finish(q, s)
+		check(s.flags.has(E16))
+		check(Quests.current_quest(s) == null, "the story stops at 结局十六")
+
+
+func test_north_chapter8_the_ambush_cannot_be_won_without_the_letter() -> void:
+	var sq: Dictionary = quest_by_id("longhu")["squares"]
+	check_eq(sq["n8_b_chengyu"]["lose_goto"], "n8_b_end", "win or lose, the stray arrow")
+	check_eq(sq["n8_b_chengyu"]["next"], ["n8_b_end"])
+	check_eq(str(sq["n8_liushou_t"]["requires"]), "田丰：入队", "only 田丰 stays north in 郭嘉's place")
+
+
+func test_north_chapter8_with_tian_feng_guo_jia_lives_and_beihai_holds() -> void:
+	for fork in [[], ["n8_q_m1", "n8_y_m1", "n8_g_l_m1", "n8_g_c_m1", "n8_g_h_m1"]]:
+		var s := longhu_save([E16, "田丰：入队"])
+		var q := quest_by_id("longhu")
+		var p := walk(q, s, fork)
+		for sid in ["n8_yishi_t", "n8_liushou_t", "n8_g_nan", "n8_g_shipo", "n8_g_xiahoudun", "n8_g_jincheng", "n8_g_lvbu", "n8_g_zhanlv",
+				"n8_g_zangba", "n8_g_tuijun", "n8_g_ma", "n8_g_mayunlu", "n8_g_machao", "n8_g_end"]:
+			check(p.has(sid), "田丰在 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n8_yishi", "n8_liushou", "n8_b_nan", "n8_b_end"]:
+			check(not p.has(sid), "田丰在 never reaches " + sid)
+		check_eq(p[-1], "n8_g_end")
+		check(s.has_card("mizhu"), "糜竺 joins at 北海")
+		for line in ["北线：郭嘉随军", "北线：郭嘉不死", "北线：北海守住", "北线：西凉默契"]:
+			check(s.run_records.has(line), "第八章 records " + line)
+		finish(q, s)
+
