@@ -1495,11 +1495,11 @@ func test_north_chapter9_the_letters_get_ma_yunlu_and_the_lord_killed_at_the_for
 
 
 func test_north_chapter9_pang_de_brings_the_ma_family_across() -> void:
-	for fork in [[], ["n9_z_m1", "n9_n_m1", "n9_g_l_m1", "n9_g_s_m1"]]:
+	for fork in [[], ["n9_z_m1", "n9_n_m1", "n9_g_l_m1", "n9_g_s_m1", "n9_g_d_m1"]]:
 		var s := xiliang_save([E17, "北线：不害马家"])
 		var q := quest_by_id("xiliang")
 		var p := walk(q, s, fork)
-		for sid in ["n9_yanjin_p", "n9_g_ludi", "n9_g_xiahoudun", "n9_g_xuezhan", "n9_g_lvbu", "n9_g_shi", "n9_g_lulong", "n9_g_tadun", "n9_g_end"]:
+		for sid in ["n9_yanjin_p", "n9_g_ludi", "n9_g_xiahoudun", "n9_g_xuezhan", "n9_g_lvbu", "n9_g_shi", "n9_g_yizheng", "n9_g_lulong", "n9_g_liucheng", "n9_g_tadun", "n9_g_zhanta", "n9_g_liaoshui", "n9_g_gaogouli", "n9_g_xiangping", "n9_g_end"]:
 			check(p.has(sid), "不害马家 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n9_yanjin_f", "n9_b_xunyu", "n9_b_end"]:
 			check(not p.has(sid), "不害马家 never reaches " + sid)

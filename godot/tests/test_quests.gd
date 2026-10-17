@@ -1223,7 +1223,7 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 		"guanzhong": ["g10_start", "g10_xiuzheng", "g10_jishi", "g10_zw_start", "g10_fenbing", "g10_huzhen", "g10_xurong", "g10_kongming"],
 		"yecheng": ["n7_start", "n7_tiqin", "n7_beishang", "n7_bieyuan", "n7_g_qin", "n7_b_anmin"],
 		"longhu": ["n8_yishi", "n8_yishi_t", "n8_dumai", "n8_b_nan", "n8_g_nan", "n8_g_jincheng", "n8_g_tuijun"],
-		"xiliang": ["n9_start", "n9_lunu", "n9_yanjin_f", "n9_yanjin_p", "n9_g_shi"],
+		"xiliang": ["n9_start", "n9_lunu", "n9_yanjin_f", "n9_yanjin_p", "n9_g_yizheng", "n9_g_zhanta"],
 		"luoyang_s": ["l11_start", "l11_chengxia", "l11_xiuzheng", "l11_yingzhan", "l11_yulin", "l11_b_xunyu", "l11_a_weicheng"],
 		"menghu": ["m8_shankou", "m8_liniang", "m8_xianfeng", "m8_t_liu", "m8_bowang", "m8_xunchuan", "m8_yuye", "m8_xiangyang", "m8_t_hanshui"]}
 	var db := GameData.get_db()
