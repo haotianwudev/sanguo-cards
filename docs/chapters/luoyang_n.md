@@ -1,0 +1,367 @@
+# 第二章 · 洛阳烟云（`luoyang_n`，北线）
+
+> `python tools/chapter_docs.py` 自动生成，别手改。改剧情去改 `godot/data/story.json`。
+
+## 概要
+
+| 项 | 内容 |
+|---|---|
+| 开启条件 | 出生：冀州无极 |
+| 副标题 | 初平元年 · 二月 |
+| 格数 / 列数 | 53 / 42（x 0–41） |
+| 战斗 普通 / 精英 / 首领 | 10 / 5 / 2 |
+| ？ 格 | 8 |
+| CG 已有 / 合计 | 15 / 15 |
+| 招贤池 | 西凉长矛手、冀州长戟兵、成廉、魏续 |
+| 兵池 / 兵卡范围 | — / north |
+| 事件范围 | north + 本章专属 |
+| 洗牌组 | ln_box1、ln_box2、ln_box3；ln_ambush、ln_mystery_forest |
+| 结局 | — |
+
+## 地图（按列）
+
+| x | y | 格子 | 类型 | 名字 | 条件 | 下一格 | 给什么 |
+|---:|---:|---|---|---|---|---|---|
+| 0 | 1 | `ln_cross` | 剧情 | 黄河古道 | — | ln_river | 入队 赵云·青年、郭嘉·青年 |
+| 1 | 1 | `ln_river` | 战斗·普通 | 黄河渡口 | — | ln_charge | — |
+| 2 | 1 | `ln_charge` | 剧情 | 夜奔的红衣姑娘 | — | ln_lvlingqi | — |
+| 3 | 1 | `ln_lvlingqi` | 战斗·精英 | 黄河古道 | — | ln_camp | — |
+| 4 | 1 | `ln_camp` | 剧情 | 半个闺女 | — | ln_rest1 | 入队 吕玲绮·温侯之女；宝物 lizigao；记「吕玲绮：入队」 |
+| 5 | 1 | `ln_rest1` | 休整 | 营地休整 | — | ln_loot1 | — |
+| 6 | 1 | `ln_loot1` | 宝箱 | 古道宝箱 | — | ln_mutiny_road、ln_mystery1 | — |
+| 7 | 0 | `ln_mutiny_road` | 战斗·普通 | 官道乱兵 | — | ln_mutiny2 | — |
+| 7 | 2 | `ln_mystery1` | ？ | 路旁？ | — | ln_road_loot | — |
+| 8 | 0 | `ln_mutiny2` | 战斗·普通 | 官道·溃兵 | — | ln_banner | — |
+| 8 | 2 | `ln_road_loot` | 宝箱 | 路旁行囊 | — | ln_banner | — |
+| 9 | 1 | `ln_banner` | 剧情 | 中山甄记 | — | ln_feast | 宝物 zhongshan_banner |
+| 10 | 1 | `ln_feast` | 剧情 | 诸侯宴 | — | ln_caocao | — |
+| 11 | 1 | `ln_caocao` | 选择 | 曹操借粮 | — | →ln_lend（借粮给他）、→ln_noLend（不借，自己的家底） | — |
+| 12 | 0 | `ln_lend` | 剧情 | 借粮 | — | ln_lend_c | 宝物 mengde；记「曹操：借粮」 |
+| 12 | 2 | `ln_noLend` | 剧情 | 不借 | — | ln_noLend_c | 记「曹操：没借」 |
+| 13 | 0 | `ln_lend_c` | ？ | ？ | — | ln_zhen | — |
+| 13 | 2 | `ln_noLend_c` | ？ | ？ | — | ln_zhen | — |
+| 14 | 1 | `ln_zhen` | 剧情 | 汴水 | — | ln_pursuit | — |
+| 15 | 1 | `ln_pursuit` | 战斗·普通 | 荥阳道 | — | ln_ambush、ln_mystery_forest | — |
+| 16 | 0 | `ln_ambush` | 战斗·普通 | 西凉伏兵 | — | ln_ambush2 | — |
+| 16 | 2 | `ln_mystery_forest` | ？ | 林地小径 | — | ln_forest_camp | — |
+| 17 | 0 | `ln_ambush2` | 战斗·精英 | 伏兵·头目 | — | ln_xurong | — |
+| 17 | 2 | `ln_forest_camp` | 招募 | 林间投军 | — | ln_xurong | — |
+| 18 | 1 | `ln_xurong` | 战斗·首领 | 汴水 | — | ln_rescue | — |
+| 19 | 1 | `ln_rescue` | 剧情 | 救曹操 | — | ln_rest2 | 记「汴水：救下曹操」 |
+| 20 | 1 | `ln_rest2` | 休整 | 酸枣强制休整 | — | ln_camp_raid、ln_loot2 | — |
+| 21 | 0 | `ln_camp_raid` | 战斗·普通 | 营外·游骑 | — | ln_camp_raid2 | — |
+| 21 | 2 | `ln_loot2` | 宝箱 | 酸枣宝箱 | — | ln_mystery2 | — |
+| 22 | 0 | `ln_camp_raid2` | 战斗·精英 | 营外·并州悍将 | — | ln_approach | — |
+| 22 | 2 | `ln_mystery2` | ？ | ？ | — | ln_approach | — |
+| 23 | 1 | `ln_approach` | 剧情 | 兵临虎牢 | — | ln_feixiong | — |
+| 24 | 1 | `ln_feixiong` | 战斗·普通 | 虎牢前 | — | ln_langqi | — |
+| 25 | 1 | `ln_langqi` | 战斗·精英 | 劫营 | — | ln_rest3 | — |
+| 26 | 1 | `ln_rest3` | 休整 | 虎牢关前休整 | — | ln_lvbu | — |
+| 27 | 1 | `ln_lvbu` | 战斗·首领 | 虎牢关前 | — | ln_triple、输→ln_sanying | — |
+| 28 | 1 | `ln_triple` | ？ | 惊退温侯 | — | ln_box1 | — |
+| 28 | 2 | `ln_sanying` | 剧情 | 三英战吕布 | — | ln_handhold | — |
+| 29 | 0 | `ln_box1` | ？ | 宝箱 | — | ln_box2 | — |
+| 30 | 1 | `ln_box2` | 宝箱 | 宝箱 | — | ln_box3 | — |
+| 31 | 2 | `ln_box3` | 宝箱 | 宝箱 | — | ln_handhold | — |
+| 32 | 1 | `ln_handhold` | 剧情 | 车帘后 | — | ln_blaze | 记「吕玲绮：车帘后牵手」 |
+| 33 | 1 | `ln_blaze` | 剧情 | 洛阳火 | — | ln_cao_march | — |
+| 34 | 1 | `ln_cao_march` | 剧情 | 逆行者 | — | ln_guosi | — |
+| 35 | 1 | `ln_guosi` | 战斗·精英 | 击败郭汜 | — | ln_refugees | — |
+| 36 | 1 | `ln_refugees` | 剧情 | 救助难民 | — | ln_night_talk | — |
+| 37 | 1 | `ln_night_talk` | 剧情 | 星下誓言 | — | ln_rear_guard、ln_mystery_retreat | 记「北线：义军之念」 |
+| 38 | 0 | `ln_rear_guard` | 战斗·普通 | 断后 | — | ln_rear_guard2 | — |
+| 38 | 2 | `ln_mystery_retreat` | ？ | 河岸险路 | — | ln_bank_loot | — |
+| 39 | 0 | `ln_rear_guard2` | 战斗·普通 | 断后·追兵 | — | ln_ferry | — |
+| 39 | 2 | `ln_bank_loot` | 宝箱 | 河岸辎重 | — | ln_ferry | — |
+| 40 | 1 | `ln_ferry` | 战斗·普通 | 黄河渡口 | — | ln_end | — |
+| 41 | 1 | `ln_end` | 剧情 | 回冀州 | — | （终点） | 记「北线：班师冀州」 |
+
+## 剧本（按地图顺序）
+
+### x0 · 剧情「黄河古道」`ln_cross`
+
+立绘：张夫人、赵云·青年、郭嘉·青年
+
+- 【初平元年 · 二月】出了常山，车队一路南下。袁绍在渤海起兵，传檄天下讨伐董卓，各路诸侯正往酸枣会盟——这一趟，是甄家要把三千匹战马、三千副铁甲和十万斛军粮，亲手送进联军大营。
+- 张夫人在车里把账本翻得哗哗响：「联军缺粮，诸侯们谁吃饱谁说话。咱们是头一个把粮送到的，就是头一个能在酸枣大营里坐下说话的。」{lord}是这支车队的总管，要把粮车平平安安带过黄河，再替甄家挣一个席位。
+- 张夫人掀帘看着黄河：「这河水，比无极的井水凉多了。」郭嘉裹着裘衣直打哆嗦：「大哥，咱这是去送粮，不是去打仗，能不能走官道？」
+- 赵云勒马环顾：「官道上全是溃兵和散勇，比山道还不太平。」
+- 赵云一身银甲护在车左，郭嘉抱着酒葫芦缩在车右——常山的粮放完了，酒也喝够了，这一路两个人谁也没打算回去。
+- {lord}（内心）：「十八路诸侯讨董卓」——这个我知道，游戏开场动画演过，气势挺唬人。可我们是押粮的，不是冲锋的，能不打就不打。
+
+### x2 · 剧情「夜奔的红衣姑娘」`ln_charge`
+
+立绘：赵云·青年
+
+- 古道上一骑红甲姑娘狂奔而来，满脸泪痕，看见车队当成了关东联军的斥候，戟尖直指前锋。
+- @lvlingqi 「滚开！天下男人没一个好东西！」
+- 赵云的白马迎了上去，枪花一卷就要震飞她的方天画戟。
+- {lord}（内心）：红黑甲、小号画戟……游戏里见过一张卡，叫吕玲绮，吕布的女儿。卡面上那股冷劲儿，跟眼前这个哭花了脸的，不太一样。
+
+### x3 · 战斗「黄河古道」`ln_lvlingqi`
+
+- 她拨马就逃，冻土打滑，连人带马摔出去好几丈。赵云的枪已经直取咽喉——
+- {lord}破锣嗓子一声吼：「子龙！住手！！是个姑娘！！！」挺枪一架，火星在她喉咙前半寸炸开。
+- 她瞪着{lord}：「你们……是来打虎牢关的？」{lord}把枪往地上一插，双手撑膝直喘气：「打什么虎牢关！我们是河北卖粮的，路过！你全责追尾，打不过还翻车！」
+
+### x4 · 剧情「半个闺女」`ln_camp`
+
+立绘：张夫人、zhenmi_young
+
+- {lord}把脚踝脱臼的她抱上马车，用烈酒洗她腕上的割伤，顺手正骨：「别动，忍着点——咔哒！」
+- 她这才说实话：吕布为讨好董卓，要把她嫁给董卓的侄子董璜，她砸窗逃了出来。
+- 张夫人掀开车帘，一听就掉了眼泪，把满脸是泥的她搂进怀里：「天杀的当爹的！拿亲闺女换官当！……不怕，到了甄家，就是娘的半个闺女。」
+- 甄宓把一块温热的栗子糕塞进她手里：「姐姐不哭，吃甜糕！」
+- {lord}递过一碗羊肉汤：「在我这儿，你不是吕奉先的女儿，你就是吕玲绮。疼了就哭，装什么天下无敌。」
+- 她捧着汤碗，哭得一塌糊涂，发誓死也不回虎牢关。
+
+### x7 · 战斗「官道乱兵」`ln_mutiny_road`
+
+- 官道上，一伙打着联军旗号的散兵游勇拦住了去路。为首的痞子眼冒绿光：「借两车粮花花！」
+
+### x9 · 剧情「中山甄记」`ln_banner`
+
+立绘：郭嘉·青年
+
+- 联军缺粮，杂牌军进营只会被当炮灰。{lord}的主意：当赞助商。
+- 郭嘉借着酒劲，在一面红锦大旗上写下八个金字【中山甄记 · 讨董慰劳义勇】，副旗「河北首富 · 倾情赞助」。
+- 守营小校看见几十车肥羊、好酒、白面，眼睛都绿了，一路敲锣把车队迎进了中军。
+
+### x10 · 剧情「诸侯宴」`ln_feast`
+
+- 十几路诸侯天天开会、开完就喝酒，一谈出兵就顾左右而言他。
+- {lord}（内心）：袁绍——爱开会、从不拍板的那种老板。
+- 郭嘉吃了一顿饭就出来了：「袁本初只学了周公礼贤下士的样子，不懂用人。」
+
+### x11 · 选择「曹操借粮」`ln_caocao`
+
+立绘：赵云·青年
+
+> 整个大营只有曹操拍桌子要打——可他兵少粮缺，厚着脸皮来借粮。借不借？
+
+- {lord}（内心）：曹操！这个我当然知道，「宁教我负天下人」那位……眼下看着倒像个被同事气得跳脚的项目经理。
+- **选项**「借粮给他」→ `ln_lend`
+- **选项**「不借，自己的家底」→ `ln_noLend`
+
+### x12 · 剧情「借粮」`ln_lend`
+
+- 曹操接过粮单，愣了一下，像是没料到真有人肯借：「……借粮不图回报？」
+- {lord}：「图，图你以后发达了别忘了我们甄家还有分号没开。」曹操大笑，回赠一卷手抄的《孟德新书》：「权当定钱。」
+
+### x12 · 剧情「不借」`ln_noLend`
+
+- {lord}：「甄家的粮是本钱，不是善款。」曹操盯着{lord}看了半晌，没说话，拨马走了。
+- 郭嘉摇头：「这笔账，他记下了。」
+
+### x14 · 剧情「汴水」`ln_zhen`
+
+立绘：赵云·青年
+
+- 曹操孤军西进，{lord}放心不下：「借出去的粮，总得看着它别打水漂。」带着常山铁骑远远跟着。
+- 荥阳道上，先撞上了一队西凉追兵。
+
+### x16 · 战斗「西凉伏兵」`ln_ambush`
+
+- 沿着大道急行，快到汴水时，树林里突然杀出一队西凉伏兵，专门截杀落单的联军！
+
+### x18 · 战斗「汴水」`ln_xurong`
+
+- 打退追兵，汴水边却是一片狼藉——曹操被董卓的老将徐荣打得大败，中了箭，马也没了。
+- {lord}（内心）：徐荣？没听过。……能把曹操打成这样的，不会是什么无名之辈。
+
+### x19 · 剧情「救曹操」`ln_rescue`
+
+立绘：赵云·青年
+
+- 打退徐荣之后，{lord}在乱军里找到曹操：曹洪正把自己的马让给他。
+- @caohong 「天下可无洪，不可无公！」
+- {lord}顺手又牵了一匹常山战马给曹洪：「两位都别客气，马管够。」
+- 曹操抹了把脸上的血，看着{lord}，没说谢字，只哼了一声：「欠你的，记下了。」
+
+### x23 · 剧情「兵临虎牢」`ln_approach`
+
+- 【初夏】联军磨磨蹭蹭开到虎牢关下。吕布出关搦战，连挑几员联军将领，嚣张得没人敢应。
+- 当夜，他又带着骑兵冲入了联军后方——不知道是来劫粮的，还是在追杀什么人。那面「中山甄记 · 倾情赞助」的大旗，在夜里亮得像个靶子。
+- 郭嘉苦笑：「……这旗，是我写的。」
+
+### x27 · 战斗「虎牢关前」`ln_lvbu`
+
+立绘：赵云·青年
+
+- 车厢里的吕玲绮浑身发抖——她认得那声咆哮。
+- {lord}（内心）：吕布！三国演义我不熟，可有一条常识人人都知道——人中吕布，马中赤兔，见到吕布赶紧跑！
+- {lord}一咬牙跳上马车，拉上厚棉帘挡在她前面：「别出声。他像是在追什么人，顺手来抢粮的。」
+- 吕玲绮低着头：「……我知道。他从来不是来找我的。」
+
+### x28 · 剧情「三英战吕布」`ln_sanying`
+
+- 吕布一戟劈开马车前室，{lord}死死护在车厢前，一枪刺出却被画戟轻松挑飞——「三姓家奴休走！燕人张飞在此！」
+- 张飞、关羽、刘备从斜刺里杀出，三人缠住吕布。
+- {lord}（内心）：这个我知道！电视剧里看过——红脸的关羽、黑脸的张飞、双剑的刘备……真人比电视里还吓人。
+- 吕布悻悻退回关里，连吕玲绮在车里都没敢再探头。
+
+### x32 · 剧情「车帘后」`ln_handhold`
+
+- 帘缝里，吕玲绮看着那个曾经崇拜的父亲拨马退回关里，连看都没往车里看一眼。
+- 一只手伸过来，把她冰凉发抖的手严严实实握住，十指相扣：「别看了。往后你不用再当谁的附属品——有我一口饭，就有你一口肉。」
+- 她反手扣紧，没再说话。
+
+### x33 · 剧情「洛阳火」`ln_blaze`
+
+- 西边的天烧红了——洛阳起火。传言一个比一个快：董卓烧了洛阳、挟着天子往长安跑；有人说孙坚孤军杀进了洛阳宫。
+- 联军大营里，诸侯们不仅不发兵救火，反而开始收拾行李——盟主袁绍急着回冀州抢韩馥的地盘，根本没人管洛阳百姓的死活。
+
+### x34 · 剧情「逆行者」`ln_cao_march`
+
+- 营门外，曹操带着几千残兵连夜拔营，往火光冲天的洛阳赶。
+- {lord}一挥手：「咱们运粮队也跟上！好歹带了这么多粮，能救几个算几个！」
+- 郭嘉灌了一口酒，破天荒地没说丧气话：「这满营诸侯，也就曹孟德还剩点良心。走！」
+
+### x35 · 战斗「击败郭汜」`ln_guosi`
+
+- 洛阳城外几十里，大批逃难的百姓正被一队西凉骑兵像赶羊一样劫掠。领头的正是董卓手下的悍将郭汜。
+- {lord}握紧了手里的长枪：「子龙！连人带粮，全给我抢回来！」
+
+### x36 · 剧情「救助难民」`ln_refugees`
+
+- 打跑了郭汜，甄家的几十大车军粮，全煮成了热乎乎的肉粥，分给了逃难的洛阳百姓。
+- 曹操在远处看着这边忙碌的「中山甄记」大旗，对身边的曹洪说：「这位小兄弟，以后不管做生意还是打仗，都是个可怕的对手。」
+- 几天后，袁绍正式下令解散联军，诸侯一哄而散。洛阳成了废墟，曹操也只得撤军回了陈留。
+
+### x37 · 剧情「星下誓言」`ln_night_talk`
+
+- 夜里，难民营的篝火渐渐熄灭。吕玲绮坐在车辕上，看着不远处熟睡的难民，转头看向你：「我爹说过，这世道人命如草芥。可你为了这些不认识的人，连命都敢拼。」
+- 她跳下车，走到你面前，火光映着她微红的脸颊。她突然伸出手，用力抱了你一下——虽然隔着冰冷的铠甲，你却能感觉到她狂跳的心音。
+- 「我这辈子，跟定你了。」她轻声说，随即又别过脸，强作镇定地擦了擦眼睛。「接下来你想干嘛？」
+- {lord}看着满地的难民和那面破损的「中山甄记」大旗，深吸了一口气：「回冀州。这世道，光做生意救不了人……也许，咱们也该有一支能保护乡亲、保护你的队伍了。」
+- 吕玲绮眼睛亮了：「你要自己拉队伍？好！要是真有那天，我给你当先锋大将！」
+
+### x38 · 战斗「断后」`ln_rear_guard`
+
+- 护送难民走大道撤退的路上，一队阴魂不散的西凉弓骑咬了上来。
+- 赵云长枪一横：「我来断后，主公护送乡亲们先走！」
+
+### x40 · 战斗「黄河渡口」`ln_ferry`
+
+- 队伍护着难民和甄家女眷撤到黄河渡口。渡口挤满了各家的溃兵乱卒，正为了抢船大打出手。
+
+### x41 · 剧情「回冀州」`ln_end`
+
+立绘：赵云·青年、郭嘉·青年、张夫人、zhenmi_young
+
+- 打退溃兵上了船。赵云问去哪。
+- {lord}跳上船头：「回冀州！袁绍解散联军回去抢地盘了，公孙瓒也盯着，河北马上要变成神仙打架的大戏台——更要紧的是，把乡亲们安顿好，把篱笆扎紧！」
+- 吕玲绮红着脸挥挥小画戟：「谁敢动甄家我第一个捅死他——回去你得顿顿给我烤肉吃。」
+- 张夫人摸着甄宓的头：「回无极，吃热乎汤面。」
+
+## 战斗
+
+| 格子 | 名字 | 档 | 敌人 | 回合 | 掉落 | 背景图 |
+|---|---|---|---|---:|---|---|
+| `ln_river` | 黄河渡口·西凉游骑 | 普通 | 西凉游骑（xiliang_youqi） | 6 | 西凉铁骑 | `xiliang_youqi` ✅ |
+| `ln_lvlingqi` | 黄河古道·吕玲绮 | 精英 | 吕玲绮（lvlingqi_duel） | 8 | 吕玲绮·温侯之女 | `ln_lvlingqi` ✅ |
+| `ln_mutiny_road` | 官军 | 普通 | 官军（guanjun） | 6 | 刀兵队 | `guanjun` ✅ |
+| `ln_mutiny2` | 官道·西凉斥候 | 普通 | 西凉斥候（dong_bubing） | 7 | 西凉铁骑 | `xiliang_scout` ✅ |
+| `ln_pursuit` | 荥阳道·西凉追兵 | 普通 | 西凉斥候（xiliang_scout） | 6 | 西凉铁骑 | `xiliang_scout` ✅ |
+| `ln_ambush` | 西凉游骑 | 普通 | 西凉游骑（xiliang_youqi） | 6 | 西凉铁骑 | `xiliang_youqi` ✅ |
+| `ln_ambush2` | 小路·西凉弓骑 | 精英 | 西凉弓骑（xiliang_gongqi） | 7 | 西凉铁骑 | `c2_gongqi` ✅ |
+| `ln_xurong` | 汴水·徐荣 | 首领 | 徐荣（xurong_n） | 10 | 徐荣 | `dagu` ✅ |
+| `ln_camp_raid` | 黄河渡口·西凉游骑 | 普通 | 西凉游骑（xiliang_youqi） | 6 | 西凉铁骑 | `xiliang_youqi` ✅ |
+| `ln_camp_raid2` | 劫营·并州狼骑 | 精英 | 并州狼骑（bingzhou_youqi） | 7 | 并州狼骑 | `c4_langqi` ✅ |
+| `ln_feixiong` | 虎牢前·飞熊军 | 普通 | 飞熊军（feixiong） | 8 | 飞熊军 | `feixiong` ✅ |
+| `ln_langqi` | 劫营·并州狼骑 | 精英 | 并州狼骑（bingzhou_langqi） | 8 | 并州狼骑 | `c4_langqi` ✅ |
+| `ln_lvbu` | 虎牢关前·吕布 | 首领 | 吕布（lvbu_hulao） | 6 | 吕布 | `hulao_ch1` ✅ |
+| `ln_guosi` | 郭汜 | 精英 | 郭汜（guosi） | 8 | 郭汜 | `guosi` ✅ |
+| `ln_rear_guard` | 小路·西凉弓骑 | 普通 | 西凉弓骑（xiliang_gongqi） | 7 | 西凉铁骑 | `c2_gongqi` ✅ |
+| `ln_rear_guard2` | 截粮 | 普通 | 西凉斥候（xiliang_scout） | 6 | 西凉铁骑 | `xiliang_scout` ✅ |
+| `ln_ferry` | 黄河渡口·溃兵 | 普通 | 官军（guanjun） | 6 | 刀兵队 | `guanjun` ✅ |
+
+敌人招式：
+
+- **西凉游骑** `xiliang_youqi`：血 5000 / 攻 240 / 行动 2；马刀、冲阵、回马箭
+- **吕玲绮** `lvlingqi_duel`：血 8500 / 攻 300 / 行动 2；画戟、翻身撩戟（confuse）、力竭（rage）
+- **官军** `guanjun`：血 4000 / 攻 210 / 行动 2；刀盾、弓弩齐发、军令如山（rage）
+- **西凉斥候** `dong_bubing`：血 5200 / 攻 235 / 行动 2；马刀、回马箭、呼哨（rage）
+- **西凉斥候** `xiliang_scout`：血 4500 / 攻 230 / 行动 2；马刀、回马箭、呼哨（rage）
+- **西凉弓骑** `xiliang_gongqi`：血 4800 / 攻 245 / 行动 2；骑射、回马箭、火箭（burn_party）
+- **徐荣** `xurong_n`：血 16000 / 攻 380 / 行动 2；西凉铁骑、伏兵四起、截粮（ap_drain）、连环箭
+- **并州狼骑** `bingzhou_youqi`：血 5500 / 攻 250 / 行动 2；马刀、狼群冲阵（confuse）、回马箭
+- **飞熊军** `feixiong`：血 9000 / 攻 270 / 行动 2；重甲冲锋、结阵（heal）、熊冲·蓄力（charge）、熊冲、飞熊震慑（confuse）
+- **并州狼骑** `bingzhou_langqi`：血 12000 / 攻 350 / 行动 2；马刀、狼群冲阵（confuse）、回马箭
+- **吕布** `lvbu_hulao`：血 40000 / 攻 780 / 行动 3；方天画戟、赤兔冲阵（confuse）、无双·蓄力（charge）、天下无双（pierce）、人中吕布（rage）
+- **郭汜** `guosi`：血 6500 / 攻 250 / 行动 2；马槊、劫掠（heal）、抢粮（ap_drain）、发狠（rage）
+
+## 本章专属 ？ 事件（2）
+
+### 酸枣酒商 `ln_wine`
+
+> 
+
+- 大营外支着个酒摊，摊主眼观六路：「十几路诸侯，天天开会不打仗，就我这酒摊生意最好。」
+- 他压低声音：「要不要来一壶？管够，就当……谢你们甄家那几车好羊。」
+- **选项**「喝一壶」：[{"say": "一壶下肚，浑身暖和，这一路的雪气总算散了。"}, {"heal": 0.08}]
+
+### 惊退温侯 `lvbu_beaten_n`
+
+> 
+
+- 吕布退回关里的消息传开，酸枣大营炸了锅——十几路诸侯这辈子头一回看见吕布的背影。
+- 袁绍派人送来一面锦旗，写着「义薄云天」，字是请人连夜代写的。
+- 只有曹操没凑这个热闹，负手站在一边，盯着那面「中山甄记」的破旗看了很久：「一个贩粮的，逼退了吕布。」
+- {lord}（内心）：曹操这人，心里肯定在记账——不过这次他记的，大概不是粮食。
+- 郭嘉冲他遥遥举了举酒葫芦，曹操的眼神沉了沉，转身走了。
+- **选项**「乘势扩编（难度 +1，带的兵更强，掉落更好）」：[{"difficulty": 1}, {"say": "常山铁骑、太行义勇连夜扩编，又有几十个游侠慕名来投。"}]
+
+## 人和兵
+
+- **剧情入队**：赵云·青年（`ln_cross`）、郭嘉·青年（`ln_cross`）、吕玲绮·温侯之女（`ln_camp`）
+- **掉落（打赢可能给）**：并州狼骑、飞熊军、郭汜、刀兵队、吕布、吕玲绮·温侯之女、西凉铁骑、徐荣
+- 全书的兵卡、武将来源见 `docs/ROSTER.md`。
+
+## CG（15）
+
+- `c2_ln_convoy` ✅ 已有
+  - 提示：初春黄河古道上，甄家的粮车队蜿蜒而行：一排排盖着「中山甄记」油布的大车，车上堆满粮袋与铁甲；张夫人（成年女性，富态精明的贵妇）掀开车帘望着滚滚黄河；赵云（白袍银甲）骑白马护在车左，郭嘉（裹着裘衣，抱着酒葫芦）缩在车右，主角骑马走在最前面
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；张夫人 → `pics/source/generals/zhangfuren.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`
+- `c2_ln_meet` ✅ 已有
+  - 提示：a frozen dirt road near the Yellow River: the red-armored girl Lu Lingqi falling from her horse in tears, Zhao Yun's silver spear at her throat, the hero blocking the spear with his own just in time
+  - 参考立绘：（没有可参考的立绘）
+- `ln_camp` ✅ 已有
+  - 提示：夜里的马车内：主角用烈酒给吕玲绮腕上的伤口正骨包扎，张夫人掀帘探头满眼心疼，小甄宓踮脚递来一块热栗子糕
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；吕玲绮 → `pics/source/generals/lvlingqi.jpg`；张夫人 → `pics/source/generals/zhangfuren.jpg`；甄宓 → `pics/source/generals/zhenmi_young.jpg`
+- `c2_ln_sponsor` ✅ 已有
+  - 提示：outside the Suanzao allied camp: Guo Jia drunkenly writing 'Zhongshan Zhen' on a huge red banner, the hero standing by proudly; in the background, dozens of carts of sheep and wine covered in red silk
+  - 参考立绘：（没有可参考的立绘）
+- `c2_ln_caocao` ✅ 已有
+  - 提示：outside a military tent in Suanzao: the short-statured Cao Cao slamming a table with red eyes in anger, turning to look at the exasperated hero to borrow grain
+  - 参考立绘：（没有可参考的立绘）
+- `c2_ln_lend` ✅ 已有
+  - 提示：酸枣联军大营前，曹操（三十多岁，精悍的乱世奸雄，黑色战袍，神情意外又欣赏）接过主角递来的粮单，微微一愣，随即大笑，手里递出一卷手抄的《孟德新书》竹简；主角笑着挠头；背景是堆成小山的粮车和联军营帐
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；曹操 → `pics/source/generals/caocao.jpg`
+- `c2_ln_nolend` ✅ 已有
+  - 提示：酸枣联军大营前，主角（神情平静，摇头）挡在粮车前；曹操（三十多岁，精悍的乱世奸雄，黑色战袍）盯着他看了半晌，一言不发地拨转马头走了，背影冷峻；郭嘉在一旁摇头叹气；气氛紧张
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`；曹操 → `pics/source/generals/caocao.jpg`
+- `c2_ln_bianshui` ✅ 已有
+  - 提示：the chaos of battle by the Bian river: Cao Cao exhausted and wounded by an arrow, Cao Hong offering him a horse, while the hero appears smiling with two large Changshan warhorses
+  - 参考立绘：（没有可参考的立绘）
+- `c2_sanying` ✅ 已有
+  - 提示：the legendary three heroes fighting Lü Bu in a storm of dust: Lü Bu on the rearing red horse Red Hare parrying with his crescent halberd, Guan Yu with the green-dragon crescent blade, Zhang Fei thrusting the serpent spear, Liu Bei with twin swords, sparks flying where the blades meet; in the foreground the onlookers frozen in awe — the hero sitting in the dust, Sun Ce gaping with his spear trembling, Zhou Yu's ledger fallen at his feet, Sun Jian with his arm in a sling narrowing his eyes, and the woman general Dong Bai (adult) tied across a horse staring wide-eyed
+  - 参考立绘：（没有可参考的立绘）
+- `ln_handhold` ✅ 已有
+  - 提示：虎牢关下夜袭的火光里，车厢帘缝之间：主角反手握紧吕玲绮冰凉发抖的手，十指相扣，她低着头没再看向帘外
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；吕玲绮 → `pics/source/generals/lvlingqi.jpg`
+- `c2_ln_blaze` ✅ 已有
+  - 提示：夜里的洛阳城火光冲天，浓烟滚滚，宫阙在烈焰中倒塌；远处联军大营里，诸侯们（背景人群）正收拾行李，无人动身；主角、赵云、郭嘉立在营外的高坡上远眺火光，神情凝重
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`
+- `c2_ln_march` ✅ 已有
+  - 提示：夜里联军营门外，曹操（三十多岁，黑色战袍，神情坚决）带着几千残兵逆着人流拔营向洛阳的火光赶去；主角挥手带着甄家的运粮队跟上，粮车在身后排成长龙；郭嘉提着酒葫芦，破天荒地一脸认真
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`；曹操 → `pics/source/generals/caocao.jpg`
+- `c2_ln_porridge` ✅ 已有
+  - 提示：洛阳废墟前的空地上，甄家的几十辆大车围成一圈，一口口大铁锅里煮着热腾腾的肉粥；逃难的洛阳百姓排着长队，捧着粗陶碗，有人喝着粥落了泪；主角挽着袖子亲自盛粥；远处，曹操带着曹洪望着这边，神情若有所思
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；曹操 → `pics/source/generals/caocao.jpg`；曹洪 → `pics/source/generals/caohong.jpg`
+- `c2_lingqi_oath` ✅ 已有
+  - 提示：⚠ `tools/art_prompts.py` 里还没写
+- `c2_ln_home` ✅ 已有
+  - 提示：黄河边的渡口，一条大船即将启航：主角（站在船头，指向北方，神情豪迈）、赵云（白袍银甲，握枪立在身后）、郭嘉（抱着酒葫芦靠着桅杆）；船舱口张夫人（成年女性，富态精明）摸着少女甄宓（十几岁的孩子，只画孩子该有的样子）的头；吕玲绮（成年女性，二十岁左右，长发高马尾，红黑铠甲）挥着小画戟笑；晨光映着河面
+  - 参考立绘：主角 → `pics/source/generals/lord_north.jpg`；吕玲绮 → `pics/source/generals/lvlingqi.jpg`；张夫人 → `pics/source/generals/zhangfuren.jpg`；甄宓 → `pics/source/generals/zhenmi_young.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`
+
