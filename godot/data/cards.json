@@ -2593,6 +2593,7 @@
         "qiangpo",
         "baimajiang"
       ],
+      "pool": false,
       "scope": "north"
     },
     "zhangren": {

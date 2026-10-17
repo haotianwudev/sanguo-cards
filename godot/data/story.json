@@ -439,7 +439,7 @@
       "start": "bh_start",
       "subtitle": "初平三年 · 夏",
       "requires": "界桥：救下公孙瓒",
-      "recruit_pool": ["gongsunzan", "zoudan", "bingzhou_qiang"],
+      "recruit_pool": ["zoudan", "bingzhou_qiang"],
       "ending": "juefa",
       "event_scope": "north",
       "soldier_scope": "north",

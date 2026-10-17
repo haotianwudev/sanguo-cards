@@ -1700,3 +1700,10 @@ func test_the_yuan_army_soldiers_only_come_from_fighting_yuan_shao() -> void:
 		check(not db.card_chapters.get(c["id"], []).is_empty(), c["id"] + " is handed out somewhere")
 		for q in db.card_chapters.get(c["id"], []):
 			check(q in ["heishan", "beihai", "yecheng", "luoyang_n"], "%s comes from %s" % [c["id"], q])
+
+
+func test_gongsun_zan_like_sun_jian_is_never_drawn() -> void:
+	## 公孙瓒 burns himself at 易京 (北线第七章): like 孙坚 he is a story figure, no chest or 招贤 ever offers him
+	var db := GameData.get_db()
+	check(not db.cards["gongsunzan"]["in_pool"], "公孙瓒 is out of the public pool")
+	check(db.card_chapters.get("gongsunzan", []).is_empty(), "no chapter hands 公孙瓒 out")
