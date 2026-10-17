@@ -1,4 +1,4 @@
-"""Generate one review file per chapter: docs/chapters/<quest>.md (第一章 is split into prologue_s / prologue_n).
+"""Generate one review file per chapter: docs/chapters/<NN>-<南线|北线>-<章名>.md, e.g. 07-北线-邺城惊雷.md (第一章 is split into its two routes).
    python tools/chapter_docs.py            # write every file
    python tools/chapter_docs.py --check    # exit 1 when any file is stale (pre-commit / CI)
 
@@ -181,9 +181,30 @@ for q in story["quests"]:
         docs["prologue_n"] = chapter_doc("prologue_n", q, (23, 10 ** 6), "北")
     else:
         docs[q["id"]] = chapter_doc(q["id"], q, None, "北" if q.get("event_scope") == "north" else "南")
+CN = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
+
+
+def chapter_number(cn: str) -> int:
+    ## 七 → 7, 十 → 10, 十一 → 11, 二十 → 20
+    if len(cn) == 1:
+        return CN[cn]
+    if cn.startswith("十"):
+        return 10 + CN[cn[1]]
+    return CN[cn[0]] * 10 + (CN[cn[2]] if len(cn) > 2 else 0)
+
+
+def file_name(doc: str) -> str:
+    ## 「07-北线-邺城惊雷」: the chapter number first so the folder sorts in reading order, then the route and the chapter name
+    head = doc.split("\n", 1)[0].lstrip("# ")  # 第七章 · 邺城惊雷（`yecheng`，北线）
+    title, rest = head.split("（", 1)
+    num, name = title.split(" · ", 1)
+    return "%02d-%s-%s" % (chapter_number(num.strip("第章")), "北线" if "北线" in rest else "南线", name.strip())
+
+
+docs = {file_name(d): d for d in docs.values()}
 index = ["# 每章检查文件（`python tools/chapter_docs.py` 自动生成，别手改）", "", "| 文件 | 章 |", "|---|---|"]
-for k, d in docs.items():
-    index.append("| [`%s.md`](%s.md) | %s |" % (k, k, d.split("\n", 1)[0].lstrip("# ")))
+for k in sorted(docs):
+    index.append("| [%s](%s.md) | %s |" % (k, k, docs[k].split("\n", 1)[0].lstrip("# ")))
 docs["README"] = "\n".join(index) + "\n"
 
 if "--check" in sys.argv:
