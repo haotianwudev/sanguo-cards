@@ -979,9 +979,9 @@ func test_chapter4_nobody_warns_you_until_ending_two() -> void:
 	var sq: Dictionary = q["squares"]
 	var s := SaveData.create()
 	check(Quests.is_open(sq["chaohui"], s) and not Quests.is_open(sq["mimou"], s), "first time: 围府, no 貂蝉")
-	check(sq["tonggui"]["record"] == q["ending"]["title"], "the trap ends in 结局二")
+	check(sq["tonggui"]["record"] == q["ending"]["title"], "the trap ends in 结局三")
 	s.flags = [q["ending"]["title"]]
-	check(Quests.is_open(sq["mimou"], s) and not Quests.is_open(sq["chaohui"], s), "after 结局二: 貂蝉 comes")
+	check(Quests.is_open(sq["mimou"], s) and not Quests.is_open(sq["chaohui"], s), "after 结局三: 貂蝉 comes")
 	check(Quests.is_open(sq["dongtao"], s), "and the chapter runs on to 南阳")
 
 
@@ -1124,7 +1124,7 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 
 
 func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
-	## 夏侯兰 can only be taken on after 「结局八 · 失律」, 张宁 only after 「结局六 · 覆巢」 (the 张夫人 badend)
+	## 夏侯兰 can only be taken on after 「结局六 · 失律」, 张宁 only after 「结局二 · 覆巢」 (the 张夫人 badend)
 	var db := GameData.get_db()
 	var q: Dictionary = {}
 	for x in db.quests:
@@ -1137,10 +1137,10 @@ func test_two_recruits_wait_for_the_badend_that_belongs_to_them() -> void:
 	var ignore: Dictionary = q["squares"]["hs_save_choice"]["choose"][1]
 	check(Quests.option_locked(save, junfa) and Quests.option_locked(save, rescue), "both greyed on a first run")
 	check(not Quests.option_locked(save, peiqian) and not Quests.option_locked(save, ignore), "the other options stay open")
-	check(Quests.option_hint(save, rescue).contains("结局六 · 覆巢"), "and the button says what is needed: " + Quests.option_hint(save, rescue))
-	save.flags = ["出生：冀州无极", "结局六 · 覆巢"]
+	check(Quests.option_hint(save, rescue).contains("结局二 · 覆巢"), "and the button says what is needed: " + Quests.option_hint(save, rescue))
+	save.flags = ["出生：冀州无极", "结局二 · 覆巢"]
 	check(not Quests.option_locked(save, rescue) and Quests.option_locked(save, junfa), "覆巢 opens 张宁's rescue only")
-	save.flags = ["出生：冀州无极", "结局六 · 覆巢", "结局八 · 失律"]
+	save.flags = ["出生：冀州无极", "结局二 · 覆巢", "结局六 · 失律"]
 	check(not Quests.option_locked(save, junfa), "失律 opens 夏侯兰's martial law")
 
 
@@ -1171,7 +1171,7 @@ func test_the_book_tracks_which_endings_were_reached() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
 	check_eq(s.endings_reached(), [], "none yet")
-	s.flags = ["结局六 · 覆巢", "董白：留下"]
+	s.flags = ["结局二 · 覆巢", "董白：留下"]
 	check_eq(s.endings_reached(), ["fuchao"])
 	s.run_records = ["结局一 · 玉碎"]
 	check_eq(s.endings_reached(), ["yusui", "fuchao"], "this run's own ending counts, in table order")

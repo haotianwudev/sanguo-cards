@@ -206,7 +206,7 @@ func demo(name: String) -> void:
 		root.add_child(d)
 		return
 	if name == "level":  # the 难度 pick after the birthplace, with two south endings reached
-		save.flags = ["结局一 · 玉碎", "结局二 · 同归"]
+		save.flags = ["结局一 · 玉碎", "结局三 · 同归"]
 		show_screen(TitleScreen.new())
 		var lo := LevelOverlay.new()
 		lo.route = "south"
@@ -215,7 +215,7 @@ func demo(name: String) -> void:
 		root.add_child(lo)
 		return
 	if name == "endings":  # the 结局图鉴 with two endings reached
-		save.flags = ["结局一 · 玉碎", "结局六 · 覆巢"]
+		save.flags = ["结局一 · 玉碎", "结局二 · 覆巢"]
 		show_screen(TitleScreen.new())
 		var book := EndingsBook.new()
 		book._flags = save.flags
@@ -500,9 +500,9 @@ func demo(name: String) -> void:
 			save.quests_cleared = ["prologue", "taodong", "yuxi"]
 			save.flags = ["董白：留下", "结局一 · 玉碎", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓"]
 			if name != "ch6":
-				save.flags.append("结局二 · 同归")
+				save.flags.append("结局三 · 同归")
 			if name == "ch6c":
-				save.flags.append("结局三 · 恨海")
+				save.flags.append("结局五 · 恨海")
 			for c in ["dongbai", "caiwenji", "huangfusong", "zhujun"]:
 				save.grant_card(c)
 			Quests.ensure_started(save)
@@ -512,11 +512,11 @@ func demo(name: String) -> void:
 					save.visited.append(save.square)
 					save.resolved = false
 			show_screen(MapScreen.new())
-		"ch8", "ch8b":  # 第五章 · 荆襄风云: first time (the banquet, 结局三) / after 结局三 with 贾诩 (he breaks it); --at=<square> jumps ahead
+		"ch8", "ch8b":  # 第五章 · 荆襄风云: first time (the banquet, 结局五) / after 结局五 with 贾诩 (he breaks it); --at=<square> jumps ahead
 			save.quests_cleared = ["prologue", "taodong", "yuxi", "dongui"]
-			save.flags = ["董白：留下", "结局一 · 玉碎", "结局二 · 同归", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"]
+			save.flags = ["董白：留下", "结局一 · 玉碎", "结局三 · 同归", "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"]
 			if name == "ch8b":
-				save.flags.append_array(["结局三 · 恨海", "贾诩：入队"])
+				save.flags.append_array(["结局五 · 恨海", "贾诩：入队"])
 				save.grant_card("jiaxu")
 			for c in ["dongbai", "caiwenji", "diaochan", "xunyou", "huangzhong", "huangfusong"]:
 				save.grant_card(c)

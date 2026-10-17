@@ -16,7 +16,7 @@
 | 兵池 / 兵卡范围 | — / north |
 | 事件范围 | north + 本章专属 |
 | 洗牌组 | hs_m2、hs_bandit0；hs_em2、hs_pursuit0a |
-| 结局 | 结局六 · 覆巢 |
+| 结局 | 结局二 · 覆巢 |
 
 ## 地图（按列）
 
@@ -63,7 +63,7 @@
 | 22 | 1 | `hs_timeskip` | 剧情 | 郭图寻仇 | — | hs_escape | — |
 | 22 | 2 | `hs_bad_guotu` | 战斗·首领 | 郭图亲临 | 要：张宁：没救 | hs_bad_end、输→hs_bad_end | — |
 | 23 | 1 | `hs_escape` | 剧情 | 黑山秘道 | — | hs_breakout | 记「郭图：扑空」 |
-| 23 | 2 | `hs_bad_end` | 剧情 | 覆巢 | 要：张宁：没救 | （终点） | 记「结局六 · 覆巢」 |
+| 23 | 2 | `hs_bad_end` | 剧情 | 覆巢 | 要：张宁：没救 | （终点） | 记「结局二 · 覆巢」 |
 | 24 | 1 | `hs_breakout` | 战斗·普通 | 府门突围 | — | hs_guotu_fight | — |
 | 25 | 1 | `hs_guotu_fight` | 战斗·精英 | 郭图拦街 | — | hs_em1 | — |
 | 26 | 1 | `hs_em1` | ？ | 峡谷 | — | hs_pursuit0a、hs_em2 | — |
@@ -99,7 +99,7 @@
 
 ### x5 · 选择「军法？」`hs_xiahoulan_choice`
 
-- **选项**「请他执掌军法」→ `hs_junfa`（要：结局八 · 失律）
+- **选项**「请他执掌军法」→ `hs_junfa`（要：结局六 · 失律）
 - **选项**「赔钱了事」→ `hs_peiqian`
 
 ### x6 · 剧情「军法如山」`hs_junfa`
@@ -130,7 +130,7 @@
 
 ### x13 · 选择「救人？」`hs_save_choice`
 
-- **选项**「拔刀相助」→ `hs_save_fight`（要：结局六 · 覆巢）
+- **选项**「拔刀相助」→ `hs_save_fight`（要：结局二 · 覆巢）
 - **选项**「绕道避险」→ `hs_ignore`
 
 ### x14 · 战斗「战白骑」`hs_save_fight`
@@ -496,7 +496,7 @@
   - 提示：a high ground at the Jieqiao battlefield: the hero and Lü Lingqi side by side on horseback, Lü Lingqi holding a giant black-and-white vertically striped 'Zebra' war banner whipping in the wind
   - 参考立绘：（没有可参考的立绘）
 
-## 结局：结局六 · 覆巢
+## 结局：结局二 · 覆巢
 
 - 谁：张夫人、张宁
 - 触发：太行山里见死不救：选了「绕道避险」，没救张宁，一年后郭图带冀州兵围了无极甄府

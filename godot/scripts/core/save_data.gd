@@ -195,11 +195,29 @@ func to_dict() -> Dictionary:
 	return d
 
 
+## 结局重新编号（南线单数、北线双数）之前的旧标题 → 新标题；老存档里的旗标和本局记录按它改名
+const ENDING_RENAMES := {
+	"结局二 · 同归": "结局三 · 同归", "结局三 · 恨海": "结局五 · 恨海", "结局四 · 虎噬": "结局十七 · 虎噬", "结局五 · 烛灭": "结局十八 · 烛灭",
+	"结局六 · 覆巢": "结局二 · 覆巢", "结局七 · 绝罚": "结局四 · 绝罚", "结局八 · 失律": "结局六 · 失律", "结局九 · 断桥": "结局八 · 断桥",
+	"结局十 · 深锁": "结局七 · 深锁", "结局十一 · 匹夫": "结局九 · 匹夫", "结局十二 · 曲误": "结局十一 · 曲误", "结局十四 · 算尽": "结局十五 · 算尽",
+	"结局十五 · 枯井": "结局十 · 枯井", "结局十六 · 遗策": "结局十二 · 遗策", "结局十七 · 断弦": "结局十四 · 断弦",
+}
+
+
+static func _renamed(lines: Array) -> Array:
+	var out: Array = []
+	for l in lines:
+		out.append(ENDING_RENAMES.get(str(l), l))
+	return out
+
+
 static func from_dict(d: Dictionary) -> SaveData:
 	var s := SaveData.new()
 	for f in FIELDS:
 		if d.has(f):
 			s.set(f, d[f])
+	s.flags = _renamed(s.flags)
+	s.run_records = _renamed(s.run_records)
 	# JSON has no ints: restore them
 	s.damage = int(s.damage)
 	s.danger = int(s.danger)

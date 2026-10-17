@@ -3,11 +3,11 @@ extends TestCase
 ## which chapter follows, which ending (if any) the run reaches.
 
 const E1 := "结局一 · 玉碎"
-const E2 := "结局二 · 同归"
-const E3 := "结局三 · 恨海"
+const E2 := "结局三 · 同归"
+const E3 := "结局五 · 恨海"
 const JX := "贾诩：入队"
-const E10 := "结局十 · 深锁"
-const E11 := "结局十一 · 匹夫"
+const E10 := "结局七 · 深锁"
+const E11 := "结局九 · 匹夫"
 
 
 func rng(seed_value: int) -> RandomNumberGenerator:
@@ -127,10 +127,10 @@ func test_lap2_route_b_runs_through_luoyang_and_changan_to_ending_two() -> void:
 	for sid in ["mimou", "luan", "gong", "huihe", "dongtao"]:
 		check(not p6.has(sid), "二周目 never reaches " + sid)
 	check(s.has_card("xunyou") and not s.has_card("zhongyao") and not s.has_card("xunyu"), "荀攸 joins; 钟繇 and 荀彧 do not")
-	check(s.run_records.has(E2), "the run reaches 结局二")
+	check(s.run_records.has(E2), "the run reaches 结局三")
 	finish(d, s)
 	check(s.flags.has(E2))
-	check(Quests.current_quest(s) == null, "the story stops at 结局二")
+	check(Quests.current_quest(s) == null, "the story stops at 结局三")
 	s.new_lap()
 	check(s.flags.has(E1) and s.flags.has(E2), "both endings survive into the next 周目")
 
@@ -276,7 +276,7 @@ func test_the_bundled_font_has_every_character_the_game_prints() -> void:
 	check(missing.is_empty(), "not in the font (run tools/build_fonts.py): %s" % str(missing))
 
 
-# ---- 第五章 · 荆襄风云: first time the banquet kills 貂蝉 (结局三); after it, 贾诩 (met in 长安, recruited in 第四章) breaks it ----
+# ---- 第五章 · 荆襄风云: first time the banquet kills 貂蝉 (结局五); after it, 贾诩 (met in 长安, recruited in 第四章) breaks it ----
 
 func ch5_save(flags: Array) -> SaveData:
 	var s := lap_save(["董白：留下", E1, E2, "路线：守洛阳", "路线：长安", "长安：吕布杀了董卓", "南阳：袁术东逃"] + flags,
@@ -299,11 +299,11 @@ func test_chapter5_first_time_the_banquet_ends_in_ending_three() -> void:
 		for sid in ["jx_meng", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_shuige", "jx_b_dianxing", "jx_b_louchuan"]:
 			check(not p.has(sid), "恨海 route never reaches " + sid)
 		check_eq(p[-1], "jx_a_henhai")
-		check(s.run_records.has(E3), "the run reaches 结局三")
+		check(s.run_records.has(E3), "the run reaches 结局五")
 		check(not s.has_card("kuaiyue"), "蒯越 never joins")
 		finish(q, s)
 		check(s.flags.has(E3))
-		check(Quests.current_quest(s) == null, "the story stops at 结局三")
+		check(Quests.current_quest(s) == null, "the story stops at 结局五")
 
 
 func test_chapter5_after_ending_three_jiaxu_breaks_the_banquet() -> void:
@@ -356,7 +356,7 @@ func test_chapter5_plays_with_real_fights_on_both_routes() -> void:
 
 
 func test_chapter5_without_jiaxu_the_banquet_still_ends_in_ending_three() -> void:
-	var s := ch5_save([E3])  # 结局三 reached, but 贾诩 was passed by in 第四章
+	var s := ch5_save([E3])  # 结局五 reached, but 贾诩 was passed by in 第四章
 	var p := walk(quest_by_id("jingxiang"), s, [])
 	check(p.has("jx_qinggong") and p.has("jx_a_fuyan") and not p.has("jx_meng") and not p.has("jx_b_dingce"), "no 贾诩, no way out")
 	check_eq(p[-1], "jx_a_henhai")
@@ -380,7 +380,7 @@ func test_south_chapter6_follows_the_good_jingxiang_ending_only() -> void:
 
 
 func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding() -> void:
-	## after 「结局十 · 深锁」: 刘晔 settles 庐江's clans, 雷家 is cut off and runs west, the wedding date is set (the wedding itself opens 第七章)
+	## after 「结局七 · 深锁」: 刘晔 settles 庐江's clans, 雷家 is cut off and runs west, the wedding date is set (the wedding itself opens 第七章)
 	for fork in [[], ["hn_m1", "hn_m2", "hn_m3", "hn_m4"]]:
 		var s := ch6s_save()
 		s.flags.append(E10)
@@ -395,8 +395,8 @@ func test_south_chapter6_walks_from_xiangyang_to_the_eve_of_the_double_wedding()
 			check(not p.has(sid), "刘晔 route never reaches " + sid)
 		for c in ["lusu", "chenwu", "liuye"]:
 			check(s.has_card(c), "%s joins in 第六章" % c)
-		check(not s.has_card("zhugejin"), "诸葛瑾 can't be asked along before 结局十二")
-		check(not s.has_card("lvmeng_qingnian"), "吕蒙 can't be recruited before 结局十一")
+		check(not s.has_card("zhugejin"), "诸葛瑾 can't be asked along before 结局十一")
+		check(not s.has_card("lvmeng_qingnian"), "吕蒙 can't be recruited before 结局九")
 		check(not s.has_card("daqiao") and not p.has("hn_wedding"), "the double wedding (and 大乔) wait for 第七章")
 		for r in ["wentai_shu", "zhou_pu", "weixi"]:
 			check(s.relics.has(r), "第六章 hands over the 宝物 " + r)
@@ -416,7 +416,7 @@ func test_south_chapter6_recruiting_lvmeng_after_ending_eleven() -> void:
 	for sid in ["hn_t_kuibing", "hn_lvmeng", "hn_lvmeng_take"]:
 		check(p.has(sid), "passes " + sid)
 	check(not p.has("hn_lvmeng_go"), "the 面饼 scene is only for sending him off")
-	check(s.has_card("lvmeng_qingnian"), "吕蒙 joins after 结局十一")
+	check(s.has_card("lvmeng_qingnian"), "吕蒙 joins after 结局九")
 	check(s.run_records.has("吕蒙：入队"))
 
 
@@ -468,7 +468,7 @@ func test_south_chapter6_plays_with_real_fights() -> void:
 		if opts.is_empty():
 			break
 		Quests.move(q, s, opts[0]["id"])
-	check_eq(s.square, "hn_shensuo", "the default (开仓分田) route plays through to 结局十")
+	check_eq(s.square, "hn_shensuo", "the default (开仓分田) route plays through to 结局七")
 	check(fights >= 8, "fought the chapter's battles (%d)" % fights)
 
 
@@ -529,10 +529,10 @@ func test_north_chapter5_without_military_law_ends_in_ending_eight() -> void:
 	for sid in ["xz_muster_j", "xz_law", "xz_caobao", "xz_lvbu", "xz_wedding"]:
 		check(not p.has(sid), "失律 route never reaches " + sid)
 	check_eq(p[-1], "xz_menhou")
-	check(s.run_records.has("结局八 · 失律"), "the run reaches 结局八")
+	check(s.run_records.has("结局六 · 失律"), "the run reaches 结局六")
 	finish(q, s)
-	check(s.flags.has("结局八 · 失律"))
-	check(Quests.current_quest(s) == null, "the story stops at 结局八")
+	check(s.flags.has("结局六 · 失律"))
+	check(Quests.current_quest(s) == null, "the story stops at 结局六")
 
 
 func test_north_chapter5_losing_the_banquet_fight_is_ending_eight_too() -> void:
@@ -561,7 +561,7 @@ func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
 			check(s.relics.has(r), "第五章 hands over the 宝物 " + r)
 		for line in ["刘备：秒接徐州印", "陈家：倒向主角", "刘备：投曹", "徐州：接任徐州牧", "张辽高顺：入队", "陈宫：供起来了"]:
 			check(s.run_records.has(line), "第五章 records " + line)
-		check(not s.run_records.has("结局八 · 失律"))
+		check(not s.run_records.has("结局六 · 失律"))
 		finish(q, s)
 		check_eq(Quests.current_quest(s)["id"], "huainan_n", "徐州：接任徐州牧 → 第六章 · 淮南折帝旗")
 
@@ -599,7 +599,7 @@ func test_north_chapter5_plays_with_real_fights() -> void:
 
 
 func test_beihai_peace_is_locked_until_ending_seven_has_happened() -> void:
-	## 第一次走第四章，调解双凤是灰的：只能放任她们内讧，走到「结局七 · 绝罚」才会解锁和好
+	## 第一次走第四章，调解双凤是灰的：只能放任她们内讧，走到「结局四 · 绝罚」才会解锁和好
 	var q := quest_by_id("beihai")
 	var first := beihai_save()
 	var choose: Dictionary = q["squares"]["bh_zj_choose"]
@@ -607,13 +607,13 @@ func test_beihai_peace_is_locked_until_ending_seven_has_happened() -> void:
 	check(Quests.option_locked(first, peace), "第一次：调解双凤被锁住")
 	check(not Quests.option_locked(first, choose["choose"][1]), "第一次：随她们去可选")
 	var again := beihai_save()
-	again.flags.append("结局七 · 绝罚")
-	check(not Quests.option_locked(again, peace), "吃过结局七之后：调解双凤解锁")
+	again.flags.append("结局四 · 绝罚")
+	check(not Quests.option_locked(again, peace), "吃过结局四之后：调解双凤解锁")
 
 
 func test_beihai_peace_route_wins_through_to_beihai() -> void:
 	var s := beihai_save()
-	s.flags.append("结局七 · 绝罚")  # peace needs ending seven first
+	s.flags.append("结局四 · 绝罚")  # peace needs ending seven first
 	var q := quest_by_id("beihai")
 	var path := walk(q, s, [], 1, 0, 0)
 	for sid in ["bh_zheng", "bh_jiang", "bh_zj_peace", "bh_zj_join", "bh_lubu", "bh_flee", "bh_guanhai", "bh_porridge", "bh_end"]:
@@ -649,10 +649,10 @@ func test_beihai_after_a_feud_ending_seven_comes_whether_you_win_or_lose_to_lvbu
 	var s := beihai_save()
 	var q := quest_by_id("beihai")
 	var path := walk(q, s, [], 1, 0, 1)
-	check(path.has("bh_zj_fight") and path.has("bh_win_feud") and path.has("bh_bad_end") and path.has("bh_bad_lingqi"), "内讧线打赢吕布也守不住：照样走结局七")
+	check(path.has("bh_zj_fight") and path.has("bh_win_feud") and path.has("bh_bad_end") and path.has("bh_bad_lingqi"), "内讧线打赢吕布也守不住：照样走结局四")
 	check(not path.has("bh_flee") and not path.has("bh_end"), "内讧线到不了千里突围和后面的章节")
 	check_eq(path[-1], "bh_bad_lingqi")
-	check(s.run_records.has("结局七 · 绝罚"), "打赢了也记结局七")
+	check(s.run_records.has("结局四 · 绝罚"), "打赢了也记结局四")
 	check(path.has("bh_zj_apart") and not path.has("bh_zj_join") and not path.has("bh_zj_peace"), "内讧线不经过和好 / 收服那两格")
 	for c in ["zhenghao", "jiangqiao", "zheng_daoshou", "jiang_jiguanshou"]:
 		check(not s.has_card(c), "内讧线收不到 " + c)
@@ -664,12 +664,12 @@ func test_beihai_after_a_feud_ending_seven_comes_whether_you_win_or_lose_to_lvbu
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["bh_bad_end"])
 	Quests.move(q, s, "bh_bad_end")
 	Quests.resolve(q, s, rng(1), -1)
-	check(not s.run_records.has("结局七 · 绝罚"), "the feud scene comes first")
+	check(not s.run_records.has("结局四 · 绝罚"), "the feud scene comes first")
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["bh_bad_lingqi"])
 	Quests.move(q, s, "bh_bad_lingqi")
 	Quests.resolve(q, s, rng(1), -1)
-	check(s.run_records.has("结局七 · 绝罚"), "ending seven recorded")
-	check_eq(q["ending"]["title"], "结局七 · 绝罚")
+	check(s.run_records.has("结局四 · 绝罚"), "ending seven recorded")
+	check_eq(q["ending"]["title"], "结局四 · 绝罚")
 	check(Quests.next_options(q, s).is_empty(), "the story stops")
 
 
@@ -693,7 +693,7 @@ func test_north_chapter3_turning_your_back_plays_out_the_siege_before_ending_six
 		check(path.has(sid), "覆巢 line passes " + sid)
 	for sid in ["hs_zhangyan", "hs_yudu", "hs_hm2"]:
 		check(not path.has(sid), "and never reaches " + sid)
-	check(s.run_records.has("结局六 · 覆巢"), "the run reaches 结局六")
+	check(s.run_records.has("结局二 · 覆巢"), "the run reaches 结局二")
 	var s2 := lap_save(["出生：冀州无极", "北线：班师冀州"], ["prologue", "luoyang_n"])
 	Quests.begin(q, s2)
 	s2.run_records.append("张宁：没救")
@@ -707,7 +707,7 @@ func test_north_chapter3_turning_your_back_plays_out_the_siege_before_ending_six
 
 
 func test_north_chapter3_郭图_stands_in_the_way_of_the_escape_too() -> void:
-	var s := lap_save(["出生：冀州无极", "北线：班师冀州", "结局六 · 覆巢"], ["prologue", "luoyang_n"])  # 覆巢 seen once: the rescue option is open
+	var s := lap_save(["出生：冀州无极", "北线：班师冀州", "结局二 · 覆巢"], ["prologue", "luoyang_n"])  # 覆巢 seen once: the rescue option is open
 	var q := quest_by_id("heishan")
 	var r := rng(1)
 	Quests.begin(q, s, r)
@@ -738,7 +738,7 @@ func test_north_chapter3_郭图_stands_in_the_way_of_the_escape_too() -> void:
 
 
 func test_north_chapter5_sparing_xiahoudun_waits_for_ending_nine() -> void:
-	## 下邳城外「放他回兖州」is greyed until 「结局九 · 断桥」; 咬住尾巴 is always open and is the default
+	## 下邳城外「放他回兖州」is greyed until 「结局八 · 断桥」; 咬住尾巴 is always open and is the default
 	var q := quest_by_id("xuzhou")
 	var opts: Array = q["squares"]["xz_xiapi"]["choose"]
 	var s := xuzhou_save(["军纪：严明"])
@@ -747,7 +747,7 @@ func test_north_chapter5_sparing_xiahoudun_waits_for_ending_nine() -> void:
 	var p := walk(q, s, [])
 	check(p.has("xz_bite") and p.has("xz_xiahoudun") and p.has("xz_rest1"), "the default bites the rear guard")
 	check(s.run_records.has("夏侯惇：痛击殿后"))
-	var s2 := xuzhou_save(["军纪：严明", "结局九 · 断桥"])
+	var s2 := xuzhou_save(["军纪：严明", "结局八 · 断桥"])
 	check(not Quests.option_locked(s2, opts[0]), "断桥 opens 放他回兖州")
 	var p2 := walk(q, s2, [], 1, 0, 0)
 	for sid in ["xz_spare", "xz_xiahoudun_f", "xz_rest1_f", "xz_end"]:
@@ -789,7 +789,7 @@ func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
 				check(s.relics.has(r), "第六章 hands over " + r)
 			for line in ["北线：奉诏讨袁", "吕布：降曹", "杜夫人：随军", "北线：浮桥一瞥", "北线：让寿春"]:
 				check(s.run_records.has(line), "第六章 records " + line)
-			check(not s.run_records.has("结局九 · 断桥"))
+			check(not s.run_records.has("结局八 · 断桥"))
 			finish(q, s)
 			check_eq(Quests.current_quest(s)["id"], "yecheng", "北线：让寿春 → 第七章 · 邺城惊雷")
 
@@ -806,8 +806,8 @@ func test_north_chapter6_no_grain_and_a_mauled_rear_guard_end_at_the_broken_brid
 	check_eq(p[-1], "hnn_bad_end")
 	check(not s.has_card("dufuren"), "杜夫人 never joins on this route")
 	finish(q, s)
-	check(s.flags.has("结局九 · 断桥"))
-	check(Quests.current_quest(s) == null, "the story stops at 结局九")
+	check(s.flags.has("结局八 · 断桥"))
+	check(Quests.current_quest(s) == null, "the story stops at 结局八")
 
 
 func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
@@ -830,12 +830,12 @@ func test_north_chapter6_sparring_generals_drop_their_own_cards_and_stay_public(
 
 
 func test_south_chapter6_burning_the_clans_deeds_ends_in_ending_ten() -> void:
-	## 「请刘晔居中」 is greyed until 「结局十 · 深锁」; 开仓分田 turns 庐江's clans to 袁术 and 雷家 carries off the 二乔
+	## 「请刘晔居中」 is greyed until 「结局七 · 深锁」; 开仓分田 turns 庐江's clans to 袁术 and 雷家 carries off the 二乔
 	var q := quest_by_id("huainan_s")
 	var opts: Array = q["squares"]["hn_shizu"]["choose"]
 	var s := ch6s_save()
 	check(Quests.option_locked(s, opts[0]), "请刘晔居中 greyed on a first run")
-	check(Quests.option_hint(s, opts[0]).contains("结局十 · 深锁"))
+	check(Quests.option_hint(s, opts[0]).contains("结局七 · 深锁"))
 	check(not Quests.option_locked(s, opts[1]), "开仓分田 open")
 	var p := walk(q, s, [])
 	for sid in ["hn_shizu", "hn_kaicang", "hn_kc_chase", "hn_kc_gate", "hn_jibao", "hn_wanshui", "hn_qs_bad", "hn_shensuo"]:
@@ -846,7 +846,7 @@ func test_south_chapter6_burning_the_clans_deeds_ends_in_ending_ten() -> void:
 	check(not s.has_card("liuye"), "刘晔 walks out")
 	finish(q, s)
 	check(s.flags.has(E10))
-	check(Quests.current_quest(s) == null, "the story stops at 结局十")
+	check(Quests.current_quest(s) == null, "the story stops at 结局七")
 	var s2 := ch6s_save()
 	s2.flags.append(E10)
 	check(not Quests.option_locked(s2, opts[0]), "深锁 opens 请刘晔居中")
@@ -909,7 +909,7 @@ func test_south_chapter7_siding_with_yan_baihu_ends_in_ending_eleven() -> void:
 	check(not s.has_card("ganning"), "甘宁 never joins on this route")
 	finish(q, s)
 	check(s.flags.has(E11))
-	check(Quests.current_quest(s) == null, "the story stops at 结局十一")
+	check(Quests.current_quest(s) == null, "the story stops at 结局九")
 	check(not Quests.option_locked(ch7s_save(["吕蒙：入队"]), opts[0]), "吕蒙入队 opens 收服义匪甘宁")
 
 
@@ -945,7 +945,7 @@ func test_south_chapter7_losing_at_dantu_is_ending_eleven_too() -> void:
 
 # ---- 南线第八章 · 猛虎之陨 ----------------------------------------------------------------
 
-const E12 := "结局十二 · 曲误"
+const E12 := "结局十一 · 曲误"
 
 
 func ch8s_save(flags := []) -> SaveData:
@@ -986,7 +986,7 @@ func test_south_chapter8_without_zhugejin_ends_in_ending_twelve() -> void:
 			check(s.run_records.has(line), "第八章 records " + line)
 		finish(q, s)
 		check(s.flags.has(E12))
-		check(Quests.current_quest(s) == null, "the story stops at 结局十二")
+		check(Quests.current_quest(s) == null, "the story stops at 结局十一")
 
 
 func test_south_chapter8_losing_at_baihe_is_ending_twelve_too() -> void:
@@ -1082,8 +1082,8 @@ func test_south_chapter6_zhugejin_can_be_asked_along_only_after_ending_twelve() 
 	check(Quests.option_locked(first, opts[0]), "first time through: 请子瑜同行 is greyed")
 	check(not Quests.option_locked(first, opts[1]))
 	var s := ch6s_save()
-	s.flags += [E10, "结局十二 · 曲误"]
-	check(not Quests.option_locked(s, opts[0]), "after 结局十二 the option opens")
+	s.flags += [E10, "结局十一 · 曲误"]
+	check(not Quests.option_locked(s, opts[0]), "after 结局十一 the option opens")
 	var p := walk(q, s, [], 1, 0, 0)
 	check(p.has("hn_lusu") and p[-1] == "hn_end")
 	check(s.has_card("zhugejin") and s.has_card("lusu"), "诸葛瑾 joins with 鲁肃")
@@ -1110,7 +1110,7 @@ func test_south_chapter9_follows_the_good_menghu_ending_only() -> void:
 	var s := ch8s_save()
 	s.flags += ["孙坚战死", "易帜为吴", E12]
 	s.quests_cleared.append("menghu")
-	check(Quests.current_quest(s) == null, "结局十二 stops the story: no 第九章")
+	check(Quests.current_quest(s) == null, "结局十一 stops the story: no 第九章")
 
 
 func test_south_chapter9_without_luxun_ends_in_ending_thirteen() -> void:
@@ -1171,15 +1171,15 @@ func test_south_chapter9_fazheng_only_comes_along_after_ending_fourteen() -> voi
 	var s := ch9s_save()
 	var p := walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
 	check(p.has("t9_fazheng_go") and not s.has_card("fazheng"), "first time through 法正 walks off")
-	s = ch9s_save([E13, "陆逊：入队", "结局十四 · 算尽"])
+	s = ch9s_save([E13, "陆逊：入队", "结局十五 · 算尽"])
 	p = walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
-	check(p.has("t9_fazheng_take") and s.has_card("fazheng"), "after 结局十四 法正 joins")
+	check(p.has("t9_fazheng_take") and s.has_card("fazheng"), "after 结局十五 法正 joins")
 	check(s.run_records.has("法正：入队"))
 
 
 # ---- 第十章 · 奇袭关中（南线）------------------------------------------------------------
 
-const E14 := "结局十四 · 算尽"
+const E14 := "结局十五 · 算尽"
 
 
 func ch10s_save(flags := []) -> SaveData:
@@ -1216,7 +1216,7 @@ func test_south_chapter10_first_time_the_ziwu_valley_ends_in_ending_fourteen() -
 		check(s.has_card("zhanglu") and s.has_card("yanpu"), "张鲁、阎圃 join in 汉中")
 		check(s.run_records.has(E14))
 		finish(q, s)
-		check(Quests.current_quest(s) == null, "the story stops at 结局十四")
+		check(Quests.current_quest(s) == null, "the story stops at 结局十五")
 
 
 func test_south_chapter10_losing_at_the_valley_mouth_is_ending_fourteen_too() -> void:
@@ -1254,7 +1254,7 @@ func test_south_chapter10_after_ending_fourteen_fazheng_splits_the_army() -> voi
 
 # ---- 第十一章 · 洛阳天倾（南线）------------------------------------------------------------
 
-const E4 := "结局四 · 虎噬"
+const E4 := "结局十七 · 虎噬"
 
 
 func ch11s_save(flags := []) -> SaveData:
@@ -1270,7 +1270,7 @@ func test_south_chapter11_follows_the_good_guanzhong_ending_only() -> void:
 	check_eq(Quests.current_quest(ch11s_save())["id"], "luoyang_s")
 	var s := ch10s_save([E14])
 	s.quests_cleared.append("guanzhong")
-	check(Quests.current_quest(s) == null, "结局十四 stops the story: no 第十一章")
+	check(Quests.current_quest(s) == null, "结局十五 stops the story: no 第十一章")
 
 
 func test_south_chapter11_first_time_lu_bu_opens_the_gate_and_you_drive_the_north_back() -> void:
@@ -1294,7 +1294,7 @@ func test_south_chapter11_the_gate_and_the_bridge_are_fights_you_may_lose() -> v
 	check_eq(sq["l11_zhangfei"]["lose_goto"], "l11_pingshou", "孙策 and 张飞 end even either way")
 	check_eq(sq["l11_guanyu"]["lose_goto"], "l11_yingzhan", "the 关羽 fight goes on to 关平 either way")
 	var opts: Array = sq["l11_yuanmen"]["choose"]
-	check(Quests.option_locked(ch11s_save(), opts[1]), "斩吕布 is shut before 结局四")
+	check(Quests.option_locked(ch11s_save(), opts[1]), "斩吕布 is shut before 结局十七")
 
 
 func test_south_chapter11_after_ending_four_you_kill_lu_bu_and_fall_back_to_nanyang() -> void:
@@ -1322,7 +1322,7 @@ func test_south_chapter11_with_both_true_endings_you_storm_the_city() -> void:
 
 # ---- 北线第七章 · 邺城惊雷 ---------------------------------------------------------------
 
-const E15 := "结局十五 · 枯井"
+const E15 := "结局十 · 枯井"
 
 
 func yecheng_save(flags := []) -> SaveData:
@@ -1354,14 +1354,14 @@ func test_north_chapter7_without_chen_gong_guo_tu_gets_away_and_zhao_yun_dies_at
 			check(s.run_records.has(line), "第七章 records " + line)
 		finish(q, s)
 		check(s.flags.has(E15))
-		check(Quests.current_quest(s) == null, "the story stops at 结局十五")
+		check(Quests.current_quest(s) == null, "the story stops at 结局十")
 
 
 func test_north_chapter7_the_visit_is_shut_before_ending_fifteen_and_the_well_fight_cannot_be_won() -> void:
 	var sq: Dictionary = quest_by_id("yecheng")["squares"]
-	check(Quests.option_locked(yecheng_save(), sq["n7_shishi"]["choose"][1]), "去别苑拜访陈宫 is shut before 结局十五")
+	check(Quests.option_locked(yecheng_save(), sq["n7_shishi"]["choose"][1]), "去别苑拜访陈宫 is shut before 结局十")
 	check(str(sq["n7_guotu_c"]["requires"]).contains("陈宫：入队"), "only 陈宫 sees 沮授 coming")
-	check(Quests.option_locked(yecheng_save([E15]), sq["n7_g_dalao"]["choose"][1]), "去大牢请田丰 is shut before 结局十六")
+	check(Quests.option_locked(yecheng_save([E15]), sq["n7_g_dalao"]["choose"][1]), "去大牢请田丰 is shut before 结局十二")
 	check_eq(sq["n7_b_wenchou"]["lose_goto"], "n7_b_kujing", "win or lose, the well")
 	check_eq(sq["n7_b_wenchou"]["next"], ["n7_b_kujing"])
 
@@ -1379,12 +1379,12 @@ func test_north_chapter7_after_ending_fifteen_chen_gong_joins_and_zhao_yun_catch
 		for c in ["mizhen", "chengong", "guonvwang", "zhanghe", "gaolan", "jushou", "tianyu", "baima_yicong"]:
 			check(s.has_card(c), c + " joins")
 		check(s.run_records.has("邺城：将计就计") and s.run_records.has("北线：夺邺城"))
-		check(not s.has_card("tianfeng") and not s.run_records.has("田丰：入队"), "田丰 stays in his cell before 结局十六")
+		check(not s.has_card("tianfeng") and not s.run_records.has("田丰：入队"), "田丰 stays in his cell before 结局十二")
 		finish(q, s)
 
 
 func test_north_chapter7_after_ending_sixteen_tian_feng_comes_out_of_the_cell() -> void:
-	var s := yecheng_save([E15, "结局十六 · 遗策"])
+	var s := yecheng_save([E15, "结局十二 · 遗策"])
 	var q := quest_by_id("yecheng")
 	var p := walk(q, s, ["n7_g_s2_t"])
 	for sid in ["n7_g_dalao", "n7_g_zhaoxian_t", "n7_g_wuji", "n7_g_end"]:
@@ -1395,7 +1395,7 @@ func test_north_chapter7_after_ending_sixteen_tian_feng_comes_out_of_the_cell() 
 
 # ---- 北线第八章 · 北海龙虎 ---------------------------------------------------------------
 
-const E16 := "结局十六 · 遗策"
+const E16 := "结局十二 · 遗策"
 
 
 func longhu_save(flags := []) -> SaveData:
@@ -1424,7 +1424,7 @@ func test_north_chapter8_without_tian_feng_guo_jia_stays_north_and_the_lord_fall
 		check(s.run_records.has("北线：郭嘉留守"))
 		finish(q, s)
 		check(s.flags.has(E16))
-		check(Quests.current_quest(s) == null, "the story stops at 结局十六")
+		check(Quests.current_quest(s) == null, "the story stops at 结局十二")
 
 
 func test_north_chapter8_the_ambush_cannot_be_won_without_the_letter() -> void:
@@ -1444,7 +1444,7 @@ func test_north_chapter8_with_tian_feng_guo_jia_lives_and_beihai_holds() -> void
 			check(p.has(sid), "田丰在 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n8_yishi", "n8_liushou", "n8_b_nan", "n8_b_end"]:
 			check(not p.has(sid), "田丰在 never reaches " + sid)
-		check_eq(p[-1], "n8_g_fanjian", "before 结局十七 陈登's plan goes ahead")
+		check_eq(p[-1], "n8_g_fanjian", "before 结局十四 陈登's plan goes ahead")
 		check(s.has_card("mizhu") and s.has_card("chendeng"), "糜竺, 陈登 join at 北海")
 		for line in ["北线：郭嘉随军", "北线：郭嘉不死", "北线：北海守住", "北线：西凉默契", "北线：反间马腾"]:
 			check(s.run_records.has(line), "第八章 records " + line)
@@ -1453,8 +1453,8 @@ func test_north_chapter8_with_tian_feng_guo_jia_lives_and_beihai_holds() -> void
 
 func test_north_chapter8_refusing_chen_dengs_plan_needs_ending_seventeen() -> void:
 	var sq: Dictionary = quest_by_id("longhu")["squares"]
-	check(Quests.option_locked(longhu_save([E16, "田丰：入队"]), sq["n8_g_chendeng"]["choose"][1]), "「不行，这会害了马家」 is shut before 结局十七")
-	var s := longhu_save([E16, "田丰：入队", "结局十七 · 断弦"])
+	check(Quests.option_locked(longhu_save([E16, "田丰：入队"]), sq["n8_g_chendeng"]["choose"][1]), "「不行，这会害了马家」 is shut before 结局十四")
+	var s := longhu_save([E16, "田丰：入队", "结局十四 · 断弦"])
 	var p := walk(quest_by_id("longhu"), s, [])
 	check_eq(p[-1], "n8_g_bujian")
 	check(s.run_records.has("北线：不害马家"))
@@ -1462,7 +1462,7 @@ func test_north_chapter8_refusing_chen_dengs_plan_needs_ending_seventeen() -> vo
 
 # ---- 北线第九章 · 西凉喋血 ---------------------------------------------------------------
 
-const E17 := "结局十七 · 断弦"
+const E17 := "结局十四 · 断弦"
 
 
 func xiliang_save(flags := []) -> SaveData:
@@ -1489,7 +1489,7 @@ func test_north_chapter9_the_letters_get_ma_yunlu_and_the_lord_killed_at_the_for
 		check(not s.has_card("pangde"), "庞德 never comes")
 		finish(q, s)
 		check(s.flags.has(E17))
-		check(Quests.current_quest(s) == null, "the story stops at 结局十七")
+		check(Quests.current_quest(s) == null, "the story stops at 结局十四")
 	var sq: Dictionary = quest_by_id("xiliang")["squares"]
 	check_eq(sq["n9_b_xiahoudun"]["lose_goto"], "n9_b_end", "win or lose, the broken string")
 

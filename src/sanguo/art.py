@@ -227,12 +227,12 @@ def write_needs(pics: Path = PICS) -> None:
             bg_rows.append(f"| {st} | `{f}` | {sc['name']}（{cards['enemies'][sc['enemy']]['name']}） |")
         art_cfg = json.loads((pics / "art.json").read_text("utf-8"))
         cgs_cfg = art_cfg.get("cgs", {})
-        route = {"结局二 · 同归": "三周目"}
+        route = {"结局三 · 同归": "三周目"}
         cg_rows = []
         for sid, s in sorted(q["squares"].items(), key=lambda kv: kv[1]["x"]):
             if s.get("cg") and s["cg"] not in seen_cg:
                 seen_cg.add(s["cg"])
-                tag = route.get(str(s.get("requires", "")), "") or ("二周目" if s.get("unless") == "结局二 · 同归" else "")
+                tag = route.get(str(s.get("requires", "")), "") or ("二周目" if s.get("unless") == "结局三 · 同归" else "")
                 cg_rows.append(f"| {'✅ 已有' if s['cg'] in cgs_cfg else '⬜ 缺'} | `{s['cg']}` | {s.get('label', sid)}{'（' + tag + '）' if tag else ''} |")
         end = q.get("ending", {})
         if isinstance(end, str):  # an id in data/endings.json

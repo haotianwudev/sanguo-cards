@@ -615,10 +615,10 @@ func test_difficulty_levels_are_unlocked_by_endings_and_each_route_counts_apart(
 	var fresh := SaveData.create()
 	check_eq(fresh.route_max_level(), 1, "a new save offers difficulty 1 only")
 	var south := SaveData.create()
-	south.flags = ["结局一 · 玉碎", "结局六 · 覆巢"]
+	south.flags = ["结局一 · 玉碎", "结局二 · 覆巢"]
 	check_eq(south.route_max_level(), 2, "south: 玉碎 opens 2 (覆巢 is the north's)")
 	var north := SaveData.create()
-	north.flags = ["出生：冀州无极", "结局一 · 玉碎", "结局六 · 覆巢", "结局七 · 绝罚"]
+	north.flags = ["出生：冀州无极", "结局一 · 玉碎", "结局二 · 覆巢", "结局四 · 绝罚"]
 	check_eq(north.route_max_level(), 3, "north: 覆巢 and 绝罚 open 3 (玉碎 is the south's)")
 	south.play_level = 2
 	check(is_equal_approx(Quests.mods(south)["enemy"], step), "difficulty 2: +ending_step")
@@ -634,17 +634,17 @@ func test_playing_below_the_level_an_ending_opens_keeps_its_story_shut() -> void
 	for x in db.quests:
 		if x["id"] == "heishan":
 			q = x
-	var rescue: Dictionary = q["squares"]["hs_save_choice"]["choose"][0]  # needs 「结局六 · 覆巢」 (level 2)
+	var rescue: Dictionary = q["squares"]["hs_save_choice"]["choose"][0]  # needs 「结局二 · 覆巢」 (level 2)
 	var s := SaveData.create()
-	s.flags = ["出生：冀州无极", "结局六 · 覆巢"]
+	s.flags = ["出生：冀州无极", "结局二 · 覆巢"]
 	s.play_level = 1
 	check(Quests.option_locked(s, rescue), "chosen difficulty 1: the flag is there but the story it opens does not run — the same badend again")
 	s.play_level = 2
 	check(not Quests.option_locked(s, rescue), "difficulty 2: it does")
 	s.play_level = 1
-	s.run_records = ["结局六 · 覆巢"]
+	s.run_records = ["结局二 · 覆巢"]
 	Quests.complete(db.quests[0], s)
-	check(s.flags.has("结局六 · 覆巢"), "the badend is recorded either way")
+	check(s.flags.has("结局二 · 覆巢"), "the badend is recorded either way")
 
 
 func test_reaching_an_ending_closes_the_run_and_a_new_lap_reopens_it() -> void:
