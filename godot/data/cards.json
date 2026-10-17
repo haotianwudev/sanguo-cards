@@ -3143,6 +3143,24 @@
       "pool": false,
       "scope": "north"
     },
+    "wangxiu": {
+      "name": "王修",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 68,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "wuanguo": {
+      "name": "武安国",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 64,
+      "at": 72,
+      "pool": false,
+      "scope": "north"
+    },
     "tianfeng": {
       "name": "田丰",
       "rarity": "SR",
