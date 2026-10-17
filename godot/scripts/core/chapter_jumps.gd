@@ -22,7 +22,7 @@ const LIST := [
 	{"label": "第七章 · 北线（邺城惊雷）", "cleared": ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"],
 		"flags": ["出生：冀州无极", "北线：班师冀州", "曹操：借粮", "界桥：救下公孙瓒", "郑姜：和好", "北线：北海相", "军纪：严明",
 			"夏侯惇：痛击殿后", "徐州：接任徐州牧", "北线：奉诏讨袁", "吕布：降曹", "杜夫人：随军", "北线：浮桥一瞥", "北线：让寿春"]},
-	{"label": "第七章 · 北线（结局十五之后：追郭图）", "cleared": ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"],
+	{"label": "第七章 · 北线（结局十五之后：将计就计）", "cleared": ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"],
 		"flags": ["出生：冀州无极", "北线：班师冀州", "曹操：借粮", "界桥：救下公孙瓒", "郑姜：和好", "北线：北海相", "军纪：严明",
 			"夏侯惇：痛击殿后", "徐州：接任徐州牧", "北线：奉诏讨袁", "吕布：降曹", "杜夫人：随军", "北线：浮桥一瞥", "北线：让寿春", "结局十五 · 枯井"]},
 	{"label": "第三章 · 传国玉玺", "cleared": ["prologue", "taodong"], "flags": []},

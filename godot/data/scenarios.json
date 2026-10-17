@@ -1072,7 +1072,7 @@
     "n7_g_zhanghe": {"name": "漳水·张郃", "turn_limit": 10, "enemy": "n7_zhanghe"},
     "n7_gaolan": {"name": "河北名将·高览", "turn_limit": 10, "enemy": "n7_gaolan"},
     "n7_shenrong": {"name": "邺城·审荣守军", "turn_limit": 12, "enemy": "n7_shenrong"},
-    "n7_g_guotu": {"name": "漳水夜追·郭图", "turn_limit": 10, "enemy": "n7_guotu"},
+    "n7_g_xinshi": {"name": "漳水夜截·沮授信使", "turn_limit": 10, "enemy": "n7_xinshi"},
     "n7_xiandeng": {"name": "漳水北岸·先登营", "turn_limit": 6, "enemy": "n7_xiandeng", "art": "hs_quyi"},
     "n7_yanliang": {"name": "漳水·颜良", "turn_limit": 10, "enemy": "n7_yanliang"},
     "n7_wenchou": {"name": "葫芦谷·文丑", "turn_limit": 12, "enemy": "n7_wenchou"},
