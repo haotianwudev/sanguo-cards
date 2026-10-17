@@ -3125,6 +3125,33 @@
       "pool": false,
       "scope": "north"
     },
+    "yanrou": {
+      "name": "阎柔",
+      "rarity": "R",
+      "troop": "cavalry",
+      "hp": 66,
+      "at": 70,
+      "pool": false,
+      "scope": "north"
+    },
+    "xianyufu": {
+      "name": "鲜于辅",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 70,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "qianzhao": {
+      "name": "牵招",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 64,
+      "at": 68,
+      "pool": false,
+      "scope": "north"
+    },
     "tianyu": {
       "name": "田豫",
       "rarity": "SR",
