@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "jiangdong", "menghu", "tianfu", "guanzhong", "luoyang_s"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "yecheng", "jiangdong", "menghu", "tianfu", "guanzhong", "luoyang_s"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -1221,6 +1221,7 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 		"dongui": ["route", "tuwei", "luan", "luo_ruin", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"],
 		"tianfu": ["t9_yexi", "t9_yexi_lx", "t9_jiangzhou", "t9_wuxian", "t9_xizheng", "t9_kuimen", "t9_xiuzheng", "t9_fazheng_take", "t9_fazheng_go", "t9_nanzhong", "t9_zhurong_join", "t9_yiqin"],
 		"guanzhong": ["g10_start", "g10_xiuzheng", "g10_jishi", "g10_zw_start", "g10_fenbing", "g10_huzhen", "g10_xurong", "g10_kongming"],
+		"yecheng": ["n7_start", "n7_tiqin", "n7_shishi", "n7_g_qin", "n7_b_anmin"],
 		"luoyang_s": ["l11_start", "l11_chengxia", "l11_xiuzheng", "l11_yingzhan", "l11_yulin", "l11_b_xunyu", "l11_a_weicheng"],
 		"menghu": ["m8_shankou", "m8_liniang", "m8_xianfeng", "m8_t_liu", "m8_bowang", "m8_xunchuan", "m8_yuye", "m8_xiangyang", "m8_t_hanshui"]}
 	var db := GameData.get_db()
@@ -1312,7 +1313,7 @@ func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
 	## no later chapter is easier, no elite is easier than the ordinary fights, no boss than the elites (吕布's showpieces are left alone)
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
-	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"]]
+	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng"]]
 	for q in db.quests:
 		var base: Dictionary = Quests._power_base(q)
 		for tier in ["normal", "elite", "boss"]:
