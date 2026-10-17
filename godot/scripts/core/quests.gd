@@ -453,8 +453,8 @@ static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Diction
 			if o["event_scope"] != "":
 				event_scope = o["event_scope"]
 	var db := GameData.get_db()
-	if soldier_scope != "":
-		out["soldier_pool"] = db.cards.values().filter(func(c): return c.get("scope", "") == soldier_scope and c["soldier"] and not c["beast"]).map(func(c): return c["id"])
+	if soldier_scope != "":  # this route's soldiers that may show up here: the public ones (no faction, no chapter) and this chapter's own
+		out["soldier_pool"] = db.cards.values().filter(func(c): return c["soldier"] and not c["beast"] and c.get("scope", "") in ["", soldier_scope] 				and (db.card_chapters.get(c["id"], []).has(q["id"]) or (c.get("faction", "") == "" and (db.is_public(c["id"]) or c.get("public", false))))).map(func(c): return c["id"])
 	else:
 		out["soldier_pool"] = q["soldier_pool"]
 	var event_pool: Array = []

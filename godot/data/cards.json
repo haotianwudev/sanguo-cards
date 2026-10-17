@@ -545,7 +545,7 @@
       "hp": 40,
       "at": 60,
       "weight": 1,
-      "scope": "north"
+      "faction": "xiliang"
     },
     "bingzhou": {
       "name": "并州狼骑",
@@ -554,7 +554,8 @@
       "troop": "cavalry",
       "hp": 40,
       "at": 60,
-      "weight": 1
+      "weight": 1,
+      "faction": "bingzhou"
     },
     "youzhou": {
       "name": "幽州突骑",
@@ -571,7 +572,8 @@
       "troop": "spear",
       "hp": 41,
       "at": 43,
-      "weight": 2
+      "weight": 2,
+      "faction": "huangjin"
     },
     "baier": {
       "name": "白毦兵",
@@ -591,7 +593,8 @@
       "hp": 40,
       "at": 40,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "jiangdong_gong": {
       "name": "江东弓手",
@@ -627,7 +630,8 @@
       "hp": 42,
       "at": 48,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "yizhou"
     },
     "nanman_dao": {
       "name": "南蛮刀手",
@@ -636,7 +640,8 @@
       "hp": 40,
       "at": 52,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "yizhou"
     },
     "nanman_xiang": {
       "name": "南中象兵",
@@ -646,7 +651,8 @@
       "hp": 50,
       "at": 56,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "yizhou"
     },
     "shanyue_daoke": {
       "name": "山越刀客",
@@ -655,7 +661,8 @@
       "hp": 40,
       "at": 54,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "shanyue"
     },
     "shanyue_nu": {
       "name": "山越弩手",
@@ -664,7 +671,8 @@
       "troop": "archer",
       "hp": 40,
       "at": 60,
-      "weight": 1
+      "weight": 1,
+      "faction": "shanyue"
     },
     "han_tuqi": {
       "name": "虎骑",
@@ -747,7 +755,8 @@
       "troop": "infantry",
       "hp": 64,
       "at": 60,
-      "weight": 1
+      "weight": 1,
+      "faction": "bingzhou"
     },
     "shuzuo": {
       "name": "书佐",
@@ -764,7 +773,8 @@
       "troop": "strategist",
       "hp": 51,
       "at": 49,
-      "weight": 1
+      "weight": 1,
+      "faction": "huangjin"
     },
     "lusu": {
       "name": "鲁肃",
@@ -1034,7 +1044,8 @@
       "rarity": "N",
       "troop": "bandit",
       "hp": 40,
-      "at": 40
+      "at": 40,
+      "faction": "zei"
     },
     "huangjin_lishi": {
       "name": "黄巾力士",
@@ -1042,7 +1053,8 @@
       "troop": "bandit",
       "hp": 40,
       "at": 40,
-      "weight": 2
+      "weight": 2,
+      "faction": "huangjin"
     },
     "lulin": {
       "name": "绿林好汉",
@@ -1051,7 +1063,8 @@
       "troop": "bandit",
       "hp": 40,
       "at": 60,
-      "weight": 1
+      "weight": 1,
+      "faction": "zei"
     },
     "shuizei_bing": {
       "name": "江东水贼",
@@ -1060,7 +1073,8 @@
       "hp": 40,
       "at": 41,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "zei"
     },
     "daotong": {
       "weight": 3,
@@ -1068,7 +1082,8 @@
       "rarity": "N",
       "troop": "strategist",
       "hp": 40,
-      "at": 40
+      "at": 40,
+      "faction": "huangjin"
     },
     "fushui_xintu": {
       "name": "符水信徒",
@@ -1076,7 +1091,8 @@
       "troop": "strategist",
       "hp": 40,
       "at": 40,
-      "weight": 2
+      "weight": 2,
+      "faction": "huangjin"
     },
     "huangjin_nanxia": {
       "name": "南下黄巾",
@@ -1085,7 +1101,7 @@
       "hp": 40,
       "at": 41,
       "weight": 2,
-      "scope": "south"
+      "faction": "huangjin"
     },
     "zhoucang": {
       "name": "周仓",
@@ -1729,7 +1745,8 @@
       "hp": 42,
       "at": 58,
       "weight": 1,
-      "pool": false
+      "pool": false,
+      "faction": "xiliang"
     },
     "zumao": {
       "name": "祖茂·老将",
@@ -1822,7 +1839,8 @@
       "troop": "lord",
       "hp": 46,
       "at": 53,
-      "weight": 2
+      "weight": 2,
+      "faction": "chaoting"
     },
     "xiliang_nvbing": {
       "name": "西凉女亲兵",
@@ -1832,7 +1850,8 @@
       "hp": 40,
       "at": 60,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "xiliang"
     },
     "tangji": {
       "name": "唐姬·弘农王妃",
@@ -2151,7 +2170,8 @@
       "hp": 41,
       "at": 45,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "jingzhou_bu": {
       "name": "荆州步卒",
@@ -2160,7 +2180,8 @@
       "hp": 40,
       "at": 43,
       "weight": 3,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "caifu_bing": {
       "name": "蔡家府兵",
@@ -2170,7 +2191,8 @@
       "hp": 50,
       "at": 54,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "caifu_qi": {
       "name": "蔡家骑兵",
@@ -2180,7 +2202,8 @@
       "hp": 44,
       "at": 62,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "huangxu": {
       "name": "黄叙·天才射手",
@@ -2206,7 +2229,8 @@
       "hp": 40,
       "at": 60,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "zongzei": {
       "name": "宗贼",
@@ -2215,7 +2239,8 @@
       "hp": 40,
       "at": 42,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "zei"
     },
     "jinfan_zei": {
       "name": "锦帆贼",
@@ -2225,7 +2250,8 @@
       "hp": 41,
       "at": 59,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "zei"
     },
     "wenpin": {
       "name": "文聘·荆州大将",
@@ -2495,7 +2521,7 @@
       "hp": 40,
       "at": 46,
       "weight": 2,
-      "scope": "north"
+      "faction": "xiliang"
     },
     "danyang_qiang": {
       "name": "丹阳枪兵",
@@ -2513,7 +2539,7 @@
       "hp": 40,
       "at": 45,
       "weight": 2,
-      "scope": "south"
+      "scope": "north"
     },
     "tengjia_qiang": {
       "name": "藤甲枪兵",
@@ -2521,7 +2547,8 @@
       "troop": "spear",
       "hp": 41,
       "at": 45,
-      "weight": 2
+      "weight": 2,
+      "faction": "yizhou"
     },
     "bashu_qiang": {
       "name": "巴蜀长枪兵",
@@ -2529,7 +2556,8 @@
       "troop": "spear",
       "hp": 40,
       "at": 46,
-      "weight": 2
+      "weight": 2,
+      "faction": "yizhou"
     },
     "yulin_lang": {
       "name": "羽林郎",
@@ -2538,7 +2566,8 @@
       "troop": "spear",
       "hp": 47,
       "at": 53,
-      "weight": 1
+      "weight": 1,
+      "faction": "chaoting"
     },
     "wudang_feijun": {
       "name": "无当飞军",
@@ -2558,7 +2587,8 @@
       "troop": "spear",
       "hp": 47,
       "at": 53,
-      "weight": 1
+      "weight": 1,
+      "faction": "chaoting"
     },
     "jiangwei": {
       "name": "姜维",
@@ -3198,7 +3228,8 @@
       "hp": 40,
       "at": 50,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "hanzhong"
     },
     "wudou_jijiu": {
       "name": "五斗米祭酒",
@@ -3207,7 +3238,8 @@
       "hp": 46,
       "at": 42,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "hanzhong"
     },
     "banshun_man": {
       "name": "板楯蛮",
@@ -3217,7 +3249,8 @@
       "hp": 48,
       "at": 60,
       "weight": 1,
-      "scope": "south"
+      "scope": "south",
+      "faction": "hanzhong"
     },
     "wei_hubao": {
       "name": "虎豹骑",
@@ -3378,7 +3411,8 @@
       "hp": 40,
       "at": 40,
       "weight": 2,
-      "scope": "south"
+      "scope": "south",
+      "faction": "jingzhou"
     },
     "jizhou_qi": {
       "name": "冀州骑卒",
@@ -3406,7 +3440,8 @@
       "hp": 40,
       "at": 42,
       "weight": 3,
-      "scope": "north"
+      "scope": "north",
+      "public": true
     },
     "taishan_zei": {
       "name": "泰山贼",
@@ -3415,7 +3450,8 @@
       "hp": 40,
       "at": 43,
       "weight": 2,
-      "scope": "north"
+      "scope": "north",
+      "faction": "zei"
     },
     "jizhou_nu": {
       "name": "冀州强弩手",
@@ -3444,7 +3480,8 @@
       "at": 60,
       "elite": true,
       "weight": 1,
-      "scope": "north"
+      "scope": "north",
+      "faction": "wuhuan"
     },
     "zhugejin": {
       "name": "诸葛瑾",
@@ -3500,7 +3537,8 @@
       "hp": 40,
       "at": 60,
       "elite": true,
-      "weight": 1
+      "weight": 1,
+      "faction": "yizhou"
     },
     "liubiao": {
       "name": "刘表·荆州牧",

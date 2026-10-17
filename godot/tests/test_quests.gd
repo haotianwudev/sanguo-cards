@@ -682,8 +682,8 @@ func test_luoyang_brings_palace_maids_and_dongbais_guards_follow_her() -> void:
 	var sq: Dictionary = quest(1)["squares"]
 	check(sq["luoyang_a"]["cards"].has("gongnv") and sq["luoyang_b"]["cards"].has("gongnv"), "宫女 either way")
 	check(sq["luoyang_b"]["cards"].has("xiliang_nvbing") and not sq["luoyang_a"]["cards"].has("xiliang_nvbing"), "女亲兵 only with 董白")
-	var soldiers: Array = GameData.get_db().soldier_cards().map(func(c): return c["id"])
-	check(soldiers.has("gongnv") and soldiers.has("xiliang_nvbing"), "both can turn up in chests")
+	var soldiers: Array = SaveData.create().chest_pools("taodong")["chapter"]["soldier"].map(func(c): return c["id"])
+	check(soldiers.has("gongnv") and soldiers.has("xiliang_nvbing"), "both can turn up in 讨董's chests")
 
 
 func test_tangji_can_be_escorted_and_join() -> void:
@@ -1662,7 +1662,7 @@ func test_the_han_army_soldiers_only_come_from_fighting_liu_bei() -> void:
 	var s := SaveData.create()
 	for k in ["public", "chapter", "history"]:
 		for c in s.chest_pools("taodong")[k]["soldier"]:
-			check(c.get("faction", "") == "", "%s shows up in another chapter's chest" % c["id"])
+			check(c.get("faction", "") != "han", "%s shows up in another chapter's chest" % c["id"])
 	check(db.soldier_cards().all(func(c): return c.get("faction", "") == ""), "no 汉军 card in the plain soldier list")
 	for eid in db.enemies:
 		var e: Dictionary = db.enemies[eid]
@@ -1727,4 +1727,26 @@ func test_a_mystery_square_picks_its_pool_first_then_an_event() -> void:
 		check(abs(seen[k] / 600.0 - float(w[k]) / total) < 0.08, "%s share %d/600 near its weight" % [k, seen[k]])
 	var only_universal: Array = pool.filter(func(e): return Quests.event_source(q, e) == "universal")
 	check_eq(Quests.event_source(q, Quests.pick_event(q, only_universal, r)), "universal", "an empty pool drops out")
+
+
+func test_a_chapter_hands_out_only_its_own_soldiers_and_the_routes_public_ones() -> void:
+	## a soldier with a faction, or one some chapter hands out, never turns up in another chapter (chests, event 「soldier」 / offers from the pool)
+	var db := GameData.get_db()
+	for q in db.quests:
+		var pool: Array = Quests.pools(q, SaveData.create())["soldier_pool"]
+		if q["soldier_scope"] == "":
+			continue
+		for cid in pool:
+			var c: Dictionary = db.cards[cid]
+			var own: bool = db.card_chapters.get(cid, []).has(q["id"])
+			check(own or (c.get("faction", "") == "" and (db.is_public(cid) or c.get("public", false))), "%s hands out %s (%s) from somewhere else" % [q["id"], cid, c.get("faction", "")])
+			check(c.get("scope", "") in ["", q["soldier_scope"]], "%s hands out %s from the other route" % [q["id"], cid])
+
+
+func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
+	## `public: true`: handed out in 第一章 and 第三章, yet it can turn up in any north chapter's chests
+	var s := SaveData.create()
+	s.flags.append("出生：冀州无极")
+	check(s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "heishan_louluo"), "黑山喽啰 in 第七章's public pool")
+	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
 

@@ -22,7 +22,9 @@ troops = db["troops"]
 enemies = db["enemies"]
 scenarios = db["scenarios"]
 story = json.loads((ROOT / "godot/data/story.json").read_text("utf-8"))
-FACTION = {"han": "汉军（刘备）", "wei": "魏军（曹操）", "yuan": "袁军（袁绍）"}
+FACTION = {"han": "汉军（刘备）", "wei": "魏军（曹操）", "yuan": "袁军（袁绍）", "xiliang": "西凉（董卓、李傕郭汜、马家）", "bingzhou": "并州（吕布）",
+           "chaoting": "洛阳朝廷", "huangjin": "黄巾", "zei": "山贼水贼", "jingzhou": "荆州", "shanyue": "山越", "yizhou": "益州、南中",
+           "hanzhong": "汉中", "wuhuan": "乌桓"}
 ROUTE = {"south": "南", "north": "北", "": "两线"}
 
 
@@ -118,14 +120,14 @@ def category(cid, c):
         return "野兽（不进宝箱）"
     if c.get("faction"):
         return "阵营 · " + FACTION.get(c["faction"], c["faction"])
-    if src.get(cid):
+    if src.get(cid) and not c.get("public"):
         return "章节限定（只在发它的章节出）"
     return "公共 · %s（这条线每章都可能出）" % route_of(c)
 
 
 out = ["# 武将与士兵名单（`python tools/roster.py --write` 自动生成，别手改）", "",
        "口径：", "",
-       "- **公共**：没有哪一章发、也没挂阵营的兵，按 `scope` 在这条线（或两线）**每一章的宝箱里都可能出**。",
+       "- **公共**：没有哪一章发、也没挂阵营的兵（或标了 `public: true` 的自家兵，如黑山喽啰），按 `scope` 在这条线（或两线）**每一章的宝箱里都可能出**。",
        "- **阵营**：挂了 `faction` 的兵，永远不进公共池，只从打它们的章节（敌人掉落）或写明的兵池里出。",
        "- **章节限定**：没挂阵营，但有章节发它（敌人掉落、剧情、招贤），只在那些章节的宝箱里出。",
        "- **兵池**：章节或格子的 `soldier_pool`，那个宝箱只出列表里的兵。",
@@ -145,7 +147,7 @@ for cat in sorted(cats, key=lambda x: (not x.startswith("阵营"), not x.startsw
     out.append("")
 
 # ---------------- soldiers per chapter ----------------
-public = {r: sorted(k for k, c in soldiers.items() if not c.get("beast") and not c.get("faction") and not src.get(k) and route_of(c) in ("两线", r))
+public = {r: sorted(k for k, c in soldiers.items() if not c.get("beast") and not c.get("faction") and (not src.get(k) or c.get("public")) and route_of(c) in ("两线", r))
           for r in ("南", "北")}
 out += ["## 二、每章能出的兵", "",
         "「本章」= 这一章打过的敌人掉的、剧情 / 招贤给的、兵池写的；另外这条线的公共兵每章都可能出（南线 %d 张、北线 %d 张，见上面公共类）。" % (len(public["南"]), len(public["北"])), ""]
