@@ -2244,7 +2244,6 @@ CHESTS = {
 # already delivered but wrong somewhere: redraw (listed above the batch)
 # (key, why, seen): `seen` = how many times art_ingest.py had already logged that key; one more delivery clears the entry
 REDO = [
-    ("guonvwang", "郭女王改成十四五岁的少女（郭嘉的义女）：现图是二十岁上下的成年女子，按新提示重画", 1),
     ("c8_fubing", "宴会段的主角要穿他标志性的古铜鎏金旧甲，现图穿的是素色常服", 1),
     ("c8_qibing", "宴会段（黄忠射骑兵）的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
     ("c8_caihe", "宴会段的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
