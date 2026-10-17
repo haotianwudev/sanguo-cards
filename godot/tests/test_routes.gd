@@ -1361,6 +1361,7 @@ func test_north_chapter7_the_visit_is_shut_before_ending_fifteen_and_the_well_fi
 	var sq: Dictionary = quest_by_id("yecheng")["squares"]
 	check(Quests.option_locked(yecheng_save(), sq["n7_shishi"]["choose"][1]), "去别苑拜访陈宫 is shut before 结局十五")
 	check(str(sq["n7_guotu_c"]["requires"]).contains("陈宫：入队"), "only 陈宫 sees 沮授 coming")
+	check(Quests.option_locked(yecheng_save([E15]), sq["n7_g_dalao"]["choose"][1]), "去大牢请田丰 is shut before 结局十六")
 	check_eq(sq["n7_b_wenchou"]["lose_goto"], "n7_b_kujing", "win or lose, the well")
 	check_eq(sq["n7_b_wenchou"]["next"], ["n7_b_kujing"])
 
@@ -1370,7 +1371,7 @@ func test_north_chapter7_after_ending_fifteen_chen_gong_joins_and_zhao_yun_catch
 		var s := yecheng_save([E15])
 		var q := quest_by_id("yecheng")
 		var p := walk(q, s, fork)
-		for sid in ["n7_shishi", "n7_bieyuan", "n7_guotu_c", "n7_g_zhui", "n7_g_qin", "n7_g_jiyi", "n7_g_zhanghe", "n7_g_yanliang", "n7_g_juedi", "n7_g_wenchou", "n7_g_ouxue", "n7_g_zhaoxian", "n7_g_wuji", "n7_g_end"]:
+		for sid in ["n7_shishi", "n7_bieyuan", "n7_guotu_c", "n7_g_zhui", "n7_g_qin", "n7_g_jiyi", "n7_g_zhanghe", "n7_g_yanliang", "n7_g_juedi", "n7_g_wenchou", "n7_g_ouxue", "n7_g_dalao", "n7_g_zhaoxian", "n7_g_wuji", "n7_g_end"]:
 			check(p.has(sid), "将计就计 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n7_beishang", "n7_guotu", "n7_b_anmin", "n7_b_qijin", "n7_b_kujing"]:
 			check(not p.has(sid), "将计就计 never reaches " + sid)
@@ -1378,6 +1379,16 @@ func test_north_chapter7_after_ending_fifteen_chen_gong_joins_and_zhao_yun_catch
 		for c in ["mizhen", "chengong", "guonvwang", "zhanghe", "gaolan", "jushou", "tianyu", "baima_yicong"]:
 			check(s.has_card(c), c + " joins")
 		check(s.run_records.has("邺城：将计就计") and s.run_records.has("北线：夺邺城"))
+		check(not s.has_card("tianfeng") and not s.run_records.has("田丰：入队"), "田丰 stays in his cell before 结局十六")
 		finish(q, s)
-		check(Quests.current_quest(s) == null, "未完待续 after 邺城惊雷")
+
+
+func test_north_chapter7_after_ending_sixteen_tian_feng_comes_out_of_the_cell() -> void:
+	var s := yecheng_save([E15, "结局十六 · 遗策"])
+	var q := quest_by_id("yecheng")
+	var p := walk(q, s, ["n7_g_s2_t"])
+	for sid in ["n7_g_dalao", "n7_g_zhaoxian_t", "n7_g_wuji", "n7_g_end"]:
+		check(p.has(sid), "请田丰 passes " + sid)
+	check(not p.has("n7_g_zhaoxian"), "the plain 招贤馆 is the other version")
+	check(s.has_card("tianfeng") and s.run_records.has("田丰：入队"), "田丰 joins")
 

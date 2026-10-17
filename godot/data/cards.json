@@ -3104,6 +3104,15 @@
       "pool": false,
       "scope": "north"
     },
+    "tianfeng": {
+      "name": "田丰",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 78,
+      "at": 80,
+      "pool": false,
+      "scope": "north"
+    },
     "jushou": {
       "name": "沮授",
       "rarity": "SR",

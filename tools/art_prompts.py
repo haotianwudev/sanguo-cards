@@ -967,6 +967,11 @@ PORTRAITS = {
         "White lamellar armor scorched black on one side, a white cloak, white-plumed helmet under his arm.",
         "A long spear in one hand, the reins of a white horse in the other.",
         "a road in Youzhou under a grey spring sky, a few hundred white horsemen behind him"),
+    "tianfeng": ("Tian Feng (田丰), Yuan Shao's blunt, incorruptible strategist, jailed for telling the truth — he later joins the hero",
+        "Gaunt, upright man around 50, beard half grey, sharp unflinching eyes, a stern mouth.",
+        "A plain grey scholar's robe, a little ragged from a year in prison, straw still clinging to the hem.",
+        "Hands clasped behind his back, standing very straight.",
+        "the open door of a dim prison cell in Ye, morning light falling in"),
     "jushou": ("Ju Shou (沮授), Yuan Shao's loyal, far-sighted chief strategist whose advice is never heeded — he later joins the hero",
         "Lean, upright man in his 40s with a neat beard, deep-set tired eyes and a grave, stubborn dignity.",
         "A dark Hebei official's robe, a little worn, black scholar's cap.",
@@ -1856,7 +1861,7 @@ MAPS = {
     "huainan_s": "【地图共 54 列，南线第六章·淮南折帝旗】自左向右依次：⓪（最左 6 列）荆南四郡：春日山路，零陵山口的坞堡、桂阳山林里的宗贼寨、长沙城门洞与郡守府门前的老槐树；①冬日的襄阳城与汉江水寨；②顺江东下的长江江面；③庐江舒县，周家庄园与大粮仓、半边焦黑的陆家旧宅；④居巢，鲁肃家的两座大粮仓和田埂；⑤皖城与江边驿馆、乔家的画舫；⑥皖城太守府；⑦云雾里的灊山（天柱山），山腰上的雷家木寨，山下流过皖水；⑧巢湖，湖心洲和破旧的龙王庙；⑨濡须口；⑩淝水上用铁索连起来的楼船；⑪寿春南门的水寨与淮水浮桥；⑫寿春城外荒凉的江亭；⑬回到庐江的江岸，江边挂着红绸（双婚在第七章）",
     "jiangdong": "【地图共 41 列，南线第七章·江东小霸王】自左向右依次：⓪（最左 1 列）庐江张灯结彩的喜堂；①长江口与秋天的牛渚渡口、刘繇的营垒；②神亭岭的山坡连营；③秣陵城；④浩渺的太湖，芦苇荡、被烧过的渔村、水匪的快船；⑤吴郡城与太守府；⑥太湖深处挂着铜铃的锦帆水寨和挂「德王」匾的严家水寨；⑦吴郡城外的渔村；⑧丹徒山的密林；⑨会稽城、山阴道与查渎小道；⑩春天的富春江与孙家老宅",
     "xuzhou": "【地图共 32 列，北线第五章·铁纪徐州】自左向右依次：①北海城与屯田的田野；②南下的官道与泗水；③下邳城外的山坡战场；④下邳城、刺史府与热闹的市集、糜家酒楼；⑤小沛城与城外的营寨哨卡；⑥最右端挂满红绸的下邳喜堂",
-    "yecheng": "【地图共 34 列，北线第七章·邺城惊雷】自左向右依次：①（第 0–3 列）夏天的下邳城、泰山的山道与山口的「臧」字寨；②（第 4–8 列）下邳糜府、东海上的糜家船队、张灯结彩的下邳城、琅邪山道；③（第 9–14 列）春天的下邳刺史府、青州平原、北征誓师的校场与城东的别苑、太行山道；④（第 15–20 列）太行山里满山火把的合兵夜营、滏口陉的关隘与悬崖、雷雨中的邺城东门、邺城州衙与刺史行辕；⑤（第 21–34 列）漳水两岸：上半是漳水边的渡船、河北的渔村、葫芦谷与上游的旧堤、邺城招贤馆的后院、春天正在重修的无极甄府、春天的漳水码头；下半是邺城街巷、漳水渡口烧着的村子和一口枯井",
+    "yecheng": "【地图共 35 列，北线第七章·邺城惊雷】自左向右依次：①（第 0–3 列）夏天的下邳城、泰山的山道与山口的「臧」字寨；②（第 4–8 列）下邳糜府、东海上的糜家船队、张灯结彩的下邳城、琅邪山道；③（第 9–14 列）春天的下邳刺史府、青州平原、北征誓师的校场与城东的别苑、太行山道；④（第 15–20 列）太行山里满山火把的合兵夜营、滏口陉的关隘与悬崖、雷雨中的邺城东门、邺城州衙与刺史行辕；⑤（第 21–35 列）漳水两岸：上半是漳水边的渡船、河北的渔村、葫芦谷与上游的旧堤、邺城的大牢、邺城招贤馆的后院、春天正在重修的无极甄府、春天的漳水码头；下半是邺城街巷、漳水渡口烧着的村子和一口枯井",
     "huainan_n": "【地图共 36 列，北线第六章·淮南折帝旗】自左向右依次：①冬日的下邳城与甄家后院的酒坊；②淮北渡口的哨卡与平原官道；③钟离城与洪泽湖的水道、糜家商船；④蕲阳城；⑤通往寿春的淮南小道；⑥寿春城下连绵的曹军营盘与东门；⑦城破后的寿春街巷与仲氏国库；⑧金碧辉煌的寿春宫与宫前的比武台；⑨淮水渡口与横跨河面的浮桥；⑩北归的官道",
 }
 
