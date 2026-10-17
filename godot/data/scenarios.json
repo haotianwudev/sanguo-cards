@@ -1010,7 +1010,7 @@
     "m10_banshun_hs": {"name": "定军山脚·魏军青州老兵", "turn_limit": 6, "enemy": "m10_wei_qingzhou"},
     "m10_ziwu_scout": {"name": "子午谷·西凉斥候", "turn_limit": 6, "enemy": "m10_scout", "art": "m10_scout"},
     "m10_ziwu_feixiong": {"name": "栈道·飞熊军", "turn_limit": 6, "enemy": "m10_feixiong", "art": "m10_feixiong"},
-    "m10_ziwu_exit": {"name": "子午谷口·李傕郭汜", "turn_limit": 12, "enemy": "m10_ziwu_exit"},
+    "m10_ziwu_exit": {"name": "突围·子午谷口", "turn_limit": 12, "enemy": "m10_ziwu_exit"},
     "m10_scout": {"name": "散关·西凉斥候", "turn_limit": 6, "enemy": "m10_scout"},
     "m10_feixiong": {"name": "故道·飞熊军", "turn_limit": 6, "enemy": "m10_feixiong"},
     "m10_youqi": {"name": "渭水·西凉游骑", "turn_limit": 6, "enemy": "m10_youqi"},
