@@ -147,7 +147,7 @@ CHAPTERS = [
     ("第六章", "huainan_s", "huainan_n"),
     ("第七章", "jiangdong", "yecheng"),
     ("第八章", "menghu", "longhu"),
-    ("第九章", "tianfu", None),
+    ("第九章", "tianfu", "xiliang"),
     ("第十章", "guanzhong", None),
     ("第十一章", "luoyang_s", None),
 ]

@@ -1440,13 +1440,71 @@ func test_north_chapter8_with_tian_feng_guo_jia_lives_and_beihai_holds() -> void
 		var q := quest_by_id("longhu")
 		var p := walk(q, s, fork)
 		for sid in ["n8_yishi_t", "n8_liushou_t", "n8_g_nan", "n8_g_shipo", "n8_g_xiahoudun", "n8_g_jincheng", "n8_g_lvbu", "n8_g_zhanlv",
-				"n8_g_zangba", "n8_g_tuijun", "n8_g_ma", "n8_g_mayunlu", "n8_g_machao", "n8_g_end"]:
+				"n8_g_zangba", "n8_g_tuijun", "n8_g_ma", "n8_g_mayunlu", "n8_g_machao", "n8_g_end", "n8_g_chendeng", "n8_g_fanjian"]:
 			check(p.has(sid), "田丰在 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n8_yishi", "n8_liushou", "n8_b_nan", "n8_b_end"]:
 			check(not p.has(sid), "田丰在 never reaches " + sid)
-		check_eq(p[-1], "n8_g_end")
-		check(s.has_card("mizhu"), "糜竺 joins at 北海")
-		for line in ["北线：郭嘉随军", "北线：郭嘉不死", "北线：北海守住", "北线：西凉默契"]:
+		check_eq(p[-1], "n8_g_fanjian", "before 结局十七 陈登's plan goes ahead")
+		check(s.has_card("mizhu") and s.has_card("chendeng"), "糜竺, 陈登 join at 北海")
+		for line in ["北线：郭嘉随军", "北线：郭嘉不死", "北线：北海守住", "北线：西凉默契", "北线：反间马腾"]:
 			check(s.run_records.has(line), "第八章 records " + line)
+		finish(q, s)
+
+
+func test_north_chapter8_refusing_chen_dengs_plan_needs_ending_seventeen() -> void:
+	var sq: Dictionary = quest_by_id("longhu")["squares"]
+	check(Quests.option_locked(longhu_save([E16, "田丰：入队"]), sq["n8_g_chendeng"]["choose"][1]), "「不行，这会害了马家」 is shut before 结局十七")
+	var s := longhu_save([E16, "田丰：入队", "结局十七 · 断弦"])
+	var p := walk(quest_by_id("longhu"), s, [])
+	check_eq(p[-1], "n8_g_bujian")
+	check(s.run_records.has("北线：不害马家"))
+
+
+# ---- 北线第九章 · 西凉喋血 ---------------------------------------------------------------
+
+const E17 := "结局十七 · 断弦"
+
+
+func xiliang_save(flags := []) -> SaveData:
+	var s := longhu_save([E16, "田丰：入队", "北线：郭嘉随军", "北线：郭嘉不死", "北线：北海守住", "北线：西凉默契"] + flags)
+	s.quests_cleared.append("longhu")
+	for c in ["tianfeng", "mizhu", "chendeng"]:
+		s.grant_card(c)
+	return s
+
+
+func test_north_chapter9_follows_longhu() -> void:
+	check_eq(Quests.current_quest(xiliang_save(["北线：反间马腾"]))["id"], "xiliang", "北线：西凉默契 → 第九章 · 西凉喋血")
+
+
+func test_north_chapter9_the_letters_get_ma_yunlu_and_the_lord_killed_at_the_ford() -> void:
+	for fork in [[], ["n9_z_m1", "n9_n_m1", "n9_b_l_m1"]]:
+		var s := xiliang_save(["北线：反间马腾"])
+		var q := quest_by_id("xiliang")
+		var p := walk(q, s, fork)
+		for sid in ["n9_start", "n9_wuji", "n9_lunu", "n9_nanpi", "n9_haikou", "n9_yanjin_f", "n9_b_xunyu", "n9_b_lvbu", "n9_b_jiuren", "n9_b_xiahoudun", "n9_b_end"]:
+			check(p.has(sid), "反间 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n9_yanjin_p", "n9_g_shi", "n9_g_end"]:
+			check(not p.has(sid), "反间 never reaches " + sid)
+		check(not s.has_card("pangde"), "庞德 never comes")
+		finish(q, s)
+		check(s.flags.has(E17))
+		check(Quests.current_quest(s) == null, "the story stops at 结局十七")
+	var sq: Dictionary = quest_by_id("xiliang")["squares"]
+	check_eq(sq["n9_b_xiahoudun"]["lose_goto"], "n9_b_end", "win or lose, the broken string")
+
+
+func test_north_chapter9_pang_de_brings_the_ma_family_across() -> void:
+	for fork in [[], ["n9_z_m1", "n9_n_m1", "n9_g_l_m1", "n9_g_s_m1"]]:
+		var s := xiliang_save([E17, "北线：不害马家"])
+		var q := quest_by_id("xiliang")
+		var p := walk(q, s, fork)
+		for sid in ["n9_yanjin_p", "n9_g_ludi", "n9_g_xiahoudun", "n9_g_xuezhan", "n9_g_lvbu", "n9_g_shi", "n9_g_lulong", "n9_g_tadun", "n9_g_end"]:
+			check(p.has(sid), "不害马家 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n9_yanjin_f", "n9_b_xunyu", "n9_b_end"]:
+			check(not p.has(sid), "不害马家 never reaches " + sid)
+		for c in ["machao", "mayunlu", "madai", "pangde"]:
+			check(s.has_card(c), c + " joins")
+		check(s.run_records.has("北线：西凉归附") and s.run_records.has("北线：北方一统"))
 		finish(q, s)
 
