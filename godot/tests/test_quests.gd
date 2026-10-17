@@ -1709,3 +1709,22 @@ func test_gongsun_zan_like_sun_jian_is_never_drawn() -> void:
 	var db := GameData.get_db()
 	check(not db.cards["gongsunzan"]["in_pool"], "公孙瓒 is out of the public pool")
 	check(db.card_chapters.get("gongsunzan", []).is_empty(), "no chapter hands 公孙瓒 out")
+
+
+func test_a_mystery_square_picks_its_pool_first_then_an_event() -> void:
+	## battle.event_sources: chapter-own, route and universal events each get a share of the ？ squares
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests.filter(func(qq): return qq["id"] == "xuzhou")[0]
+	var pool: Array = Quests.pools(q, SaveData.create())["event_pool"]
+	var seen := {"chapter": 0, "route": 0, "universal": 0}
+	var r := RandomNumberGenerator.new()
+	r.seed = 7
+	for i in 600:
+		seen[Quests.event_source(q, Quests.pick_event(q, pool, r))] += 1
+	var w: Dictionary = db.battle["event_sources"]
+	var total := float(w["chapter"] + w["route"] + w["universal"])
+	for k in seen:
+		check(abs(seen[k] / 600.0 - float(w[k]) / total) < 0.08, "%s share %d/600 near its weight" % [k, seen[k]])
+	var only_universal: Array = pool.filter(func(e): return Quests.event_source(q, e) == "universal")
+	check_eq(Quests.event_source(q, Quests.pick_event(q, only_universal, r)), "universal", "an empty pool drops out")
+

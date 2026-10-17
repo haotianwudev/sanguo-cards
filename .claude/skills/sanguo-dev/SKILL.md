@@ -265,7 +265,8 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   event in `story.json` carries a `scope` (`universal` / `south` / `north`); a quest's event pool is its own small `event_pool`
   (one-off cameos exclusive to that quest) UNION every event whose scope is `universal` or matches the quest's `event_scope` —
   config-based on purpose, so a new universal/south/north event is automatically available everywhere that scope applies, instead
-  of every quest hand-copying the same 30-item id list. See the "Editing gotchas" note below on picking an event's scope correctly.
+  of every quest hand-copying the same 30-item id list. A ？ square then draws in two steps (`Quests.pick_event`): first the pool by `battle.event_sources` weights
+  (`chapter` = scope is this quest's id, `route` = north / south, `universal`; an exhausted pool drops out), then one unmet event in it. See the "Editing gotchas" note below on picking an event's scope correctly.
   Same idea for the displayed chapter name:
   `title_overrides` (`[{requires, unless, title}]`, `Quests.title(q, save)`) swaps `q["title"]` for a route that shouldn't keep
   showing the other route's chapter name on the map header/recap/toast — `prologue` has one so the north route shows "第一章 ·

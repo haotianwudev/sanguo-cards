@@ -652,8 +652,30 @@ static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator
 		var fresh: Array = ev_pool.filter(func(e): return not seen.has(e))
 		if fresh.is_empty():
 			fresh = ev_pool
-		save.events[s["id"]] = fresh[rng.randi_range(0, fresh.size() - 1)]
+		save.events[s["id"]] = pick_event(q, fresh, rng)
 	return GameData.get_db().events[save.events[s["id"]]]
+
+
+static func event_source(q: Dictionary, eid: String) -> String:
+	## which pool a ？ event comes from: this chapter's own (scope = the quest id), the route's (north / south), or the shared one
+	var scope: String = GameData.get_db().events[eid]["scope"]
+	if scope == q["id"]:
+		return "chapter"
+	return "universal" if scope == "universal" else "route"
+
+
+static func pick_event(q: Dictionary, candidates: Array, rng: RandomNumberGenerator) -> String:
+	## battle.event_sources weights pick the pool first (chapter / route / universal), then one event in it at random;
+	## a pool with nothing left drops out of the draw
+	var by := {"chapter": [], "route": [], "universal": []}
+	for eid in candidates:
+		by[event_source(q, eid)].append(eid)
+	var weights: Dictionary = GameData.get_db().battle.get("event_sources", {"chapter": 1, "route": 1, "universal": 1})
+	var live: Array = by.keys().filter(func(k): return not by[k].is_empty() and float(weights.get(k, 0)) > 0)
+	if live.is_empty():
+		return candidates[rng.randi_range(0, candidates.size() - 1)]
+	var src: String = GameData.weighted_pick(rng, live, live.map(func(k): return float(weights.get(k, 0))))
+	return by[src][rng.randi_range(0, by[src].size() - 1)]
 
 
 static func rolled_option(save: SaveData, ev: Dictionary, rng: RandomNumberGenerator) -> int:
