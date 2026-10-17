@@ -1250,3 +1250,72 @@ func test_south_chapter10_after_ending_fourteen_fazheng_splits_the_army() -> voi
 		for c in ["zhanglu", "yanpu", "xurong_card", "zhangxiu"]:
 			check(s.has_card(c), c + " joins on the way")
 		check(s.run_records.has("南线：攻取长安") and not s.run_records.has(E14))
+
+
+# ---- 第十一章 · 洛阳天倾（南线）------------------------------------------------------------
+
+const E4 := "结局四 · 虎噬"
+
+
+func ch11s_save(flags := []) -> SaveData:
+	var s := ch10s_save([E14, "法正：入队"])
+	s.flags += ["关中：兵分两路", "张绣：入队", "南线：攻取长安"] + flags
+	s.quests_cleared.append("guanzhong")
+	for c in ["zhanglu", "yanpu", "xurong_card", "zhangxiu"]:
+		s.grant_card(c)
+	return s
+
+
+func test_south_chapter11_follows_the_good_guanzhong_ending_only() -> void:
+	check_eq(Quests.current_quest(ch11s_save())["id"], "luoyang_s")
+	var s := ch10s_save([E14])
+	s.quests_cleared.append("guanzhong")
+	check(Quests.current_quest(s) == null, "结局十四 stops the story: no 第十一章")
+
+
+func test_south_chapter11_first_time_lu_bu_opens_the_gate_and_you_drive_the_north_back() -> void:
+	for fork in [[], ["l11_h_m1", "l11_w_m1", "l11_c_m1", "l11_e_m1", "l11_g_m1", "l11_b_m1"]]:
+		var s := ch11s_save()
+		var q := quest_by_id("luoyang_s")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["l11_start", "l11_hangu", "l11_huishi", "l11_bazhen", "l11_zhangfei", "l11_guanyu", "l11_caoren", "l11_liubei", "l11_cicao", "l11_yulin",
+				"l11_shijun", "l11_yuanmen", "l11_b_gong", "l11_b_rucheng", "l11_b_xunyu", "l11_b_hebing", "l11_b_taishici", "l11_b_zhaoyun", "l11_b_end"]:
+			check(p.has(sid), "收下吕布 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["l11_a_luoshui", "l11_a_zhanlv", "l11_a_qianggong", "l11_a_end"]:
+			check(not p.has(sid), "收下吕布 never reaches " + sid)
+		check_eq(p[-1], "l11_b_end")
+		for c in ["lvbu", "xunyu", "xiahoudun", "caoren"]:
+			check(s.has_card(c), c + " joins")
+		check(s.run_records.has("洛阳：收下吕布") and s.run_records.has("南线：入主洛阳"))
+
+
+func test_south_chapter11_the_gate_and_the_bridge_are_fights_you_may_lose() -> void:
+	var sq: Dictionary = quest_by_id("luoyang_s")["squares"]
+	check_eq(sq["l11_zhangfei"]["lose_goto"], "l11_pingshou", "孙策 and 张飞 end even either way")
+	check_eq(sq["l11_guanyu"]["lose_goto"], "l11_yingzhan", "the 关羽 fight goes on to 关平 either way")
+	var opts: Array = sq["l11_yuanmen"]["choose"]
+	check(Quests.option_locked(ch11s_save(), opts[1]), "斩吕布 is shut before 结局四")
+
+
+func test_south_chapter11_after_ending_four_you_kill_lu_bu_and_fall_back_to_nanyang() -> void:
+	for fork in [[], ["l11_a_m1", "l11_a_s_t"]]:
+		var s := ch11s_save([E4])
+		var q := quest_by_id("luoyang_s")
+		var p := walk(q, s, fork, 1, 0, -1)
+		for sid in ["l11_yuanmen", "l11_a_luoshui", "l11_a_zhanlv", "l11_a_weicheng", "l11_a_jianlou", "l11_a_xiang", "l11_a_end"]:
+			check(p.has(sid), "斩吕布 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["l11_b_gong", "l11_b_end", "l11_a_qianggong"]:
+			check(not p.has(sid), "斩吕布 never reaches " + sid)
+		check_eq(p[-1], "l11_a_end")
+		for c in ["xunyu", "xiahoudun", "caoren"]:
+			check(s.has_card(c), c + " joins at 伊阙")
+		check(s.run_records.has("南线：退守南阳") and not s.run_records.has("洛阳：强攻入城"))
+
+
+func test_south_chapter11_with_both_true_endings_you_storm_the_city() -> void:
+	var s := ch11s_save([E4, "南线结局 · 赤壁", "北线结局 · 官渡"])
+	var p := walk(quest_by_id("luoyang_s"), s, [], 1, 0, -1)
+	check_eq(p[-1], "l11_a_qianggong", "不惜代价，强攻入城 ends the chapter")
+	check(s.run_records.has("洛阳：强攻入城"))
+	check(not p.has("l11_a_weicheng") and not p.has("l11_a_end"))
+
