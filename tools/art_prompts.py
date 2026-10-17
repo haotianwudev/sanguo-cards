@@ -50,9 +50,11 @@ def _north_cgs() -> set:
             for sid, s in q["squares"].items():
                 if s.get("cg") and (q["id"] in north_q or sid.startswith("jz_")):
                     _NORTH_CGS.add(s["cg"])
-        for ev in story["events"].values():
-            if ev.get("cg") and ev.get("scope") in north_q | {"north"}:
-                _NORTH_CGS.add(ev["cg"])
+        for eid, ev in story["events"].items():
+            if ev.get("scope") in north_q | {"north"}:
+                _NORTH_CGS.add(eid)  # an event's prompt is keyed by its id
+                if ev.get("cg"):
+                    _NORTH_CGS.add(ev["cg"])
         for e in json.loads((gd / "endings.json").read_text("utf-8"))["endings"].values():
             if e.get("cg") and e.get("route") == "north":
                 _NORTH_CGS.add(e["cg"])
@@ -2406,6 +2408,18 @@ def _wanted(text: str) -> str:
     return "，".join(s for s in _re2.split(r"[，。；、,;]", text) if not _NEG.search(s))
 
 
+_EARLY_NORTH = ("jz_", "ln_", "c2_ln", "c3_", "c4_", "hs_", "bh_", "xz_", "n5_", "hnn_", "n6_", "taihang_", "zhen_caravan")
+
+
+def _young_zhenmi(text: str, key: str) -> bool:
+    ## 甄宓 is a child until 北线第七章: an age note next to her name, or an early north scene without 成年, means the young portrait
+    i = text.find("甄宓")
+    near = text[i:i + 24] if i >= 0 else ""
+    if "成年" in near:
+        return False
+    return any(w in near for w in ("十几岁", "少女", "孩子", "小姑娘", "十三", "十四")) or key.startswith(_EARLY_NORTH)
+
+
 def ref_portraits(text: str, key: str) -> list[str]:
     ## the delivered portraits a scene should be drawn from: every card name the prompt mentions (clauses that say who must NOT be
     ## there are skipped) plus the lord when 主角 appears — south `lord`, north `lord_north`, none before the transmigration
@@ -2413,11 +2427,16 @@ def ref_portraits(text: str, key: str) -> list[str]:
         portraits = json.loads((PICS / "art.json").read_text("utf-8"))["portraits"]
         for cid, c in load_cards()["cards"].items():
             pk = c.get("person") or cid
-            name = c["name"].split("·")[0]
+            name = _re2.sub(r"「[^」]*」", "", c["name"]).split("·")[0]  # 「河北庭柱」颜良 → 颜良
             if (pk in portraits or pk in PORTRAITS) and not c.get("soldier") and name not in _NAMES:
                 src = portraits[pk]["src"] if pk in portraits else f"source/{'soldiers' if c.get('rarity') == 'N' else 'generals'}/{pk}.jpg"
                 _NAMES[name] = (pk, src)
+        for pk, brief in PORTRAITS.items():  # portraits with no card of their own (enemies such as 郭图 / 袁谭 / 审配)
+            m = _re2.search(r"[（(]([一-鿿]{2,4})[)）]", brief[0] if isinstance(brief, (tuple, list)) else str(brief))
+            if m and m.group(1) not in _NAMES:
+                _NAMES[m.group(1)] = (pk, portraits[pk]["src"] if pk in portraits else f"source/generals/{pk}.jpg")
         _NAMES["__lord"] = {k: (k, portraits[k]["src"]) for k in ("lord", "lord_north", "lord_south_casual", "lord_north_casual") if k in portraits}
+        _NAMES["__young"] = {k: portraits[k]["src"] for k in ("zhenmi_young",) if k in portraits}
     keep = _wanted(text)
     out, seen = [], set()
     if "主角" in keep and key != "c1_era":
@@ -2427,8 +2446,10 @@ def ref_portraits(text: str, key: str) -> list[str]:
         if lk in _NAMES["__lord"]:
             out.append(f"主角 → `pics/{_NAMES['__lord'][lk][1]}`")
             seen.add(lk)
-    for name in sorted((n for n in _NAMES if n != "__lord"), key=len, reverse=True):
+    for name in sorted((n for n in _NAMES if not n.startswith("__")), key=len, reverse=True):
         pk, src = _NAMES[name]
+        if pk == "zhenmi" and _young_zhenmi(keep, key) and "zhenmi_young" in _NAMES["__young"]:
+            pk, src = "zhenmi_young", _NAMES["__young"]["zhenmi_young"]
         if name in keep and pk not in seen:
             seen.add(pk)
             keep = keep.replace(name, "")

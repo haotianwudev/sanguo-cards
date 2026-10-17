@@ -787,6 +787,8 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
+参考立绘（一起上传给 Gemini，保持长相一致）：淳于琼 → `pics/source/generals/chunyuqiong.jpg`
+
 ### `n7_g_zhanghe`
 
 ```
@@ -833,6 +835,8 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
+参考立绘（一起上传给 Gemini，保持长相一致）：颜良 → `pics/source/generals/yanliang.jpg`
+
 ### `n7_wenchou`
 
 ```
@@ -841,6 +845,8 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
+参考立绘（一起上传给 Gemini，保持长相一致）：文丑 → `pics/source/generals/wenchou.jpg`
+
 ### `n7_b_wenchou`
 
 ```
@@ -848,6 +854,8 @@
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
+
+参考立绘（一起上传给 Gemini，保持长相一致）：文丑 → `pics/source/generals/wenchou.jpg`
 
 ### `n8_wuhuan`
 
@@ -865,6 +873,8 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
+参考立绘（一起上传给 Gemini，保持长相一致）：袁谭 → `pics/source/generals/yuantan.jpg`
+
 ### `n8_shenpei`
 
 ```
@@ -872,6 +882,8 @@
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
+
+参考立绘（一起上传给 Gemini，保持长相一致）：审配 → `pics/source/generals/shenpei.jpg`
 
 ### `n8_qingzhou`
 
@@ -890,6 +902,8 @@
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
+
+参考立绘（一起上传给 Gemini，保持长相一致）：程昱 → `pics/source/generals/chengyu.jpg`
 
 ### `n8_g_xiahoudun`
 
@@ -977,7 +991,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：张夫人 → `pics/source/generals/zhangfuren.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：张夫人 → `pics/source/generals/zhangfuren.jpg`；审配 → `pics/source/generals/shenpei.jpg`
 
 ### `n9_yuantan`
 
@@ -986,6 +1000,8 @@
 构图：横版 16:9，1920x1080，戏剧性低机位；敌人大而居中，位于画面中上部（头 / 脸距顶部约 30%–45%）。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
+
+参考立绘（一起上传给 Gemini，保持长相一致）：袁谭 → `pics/source/generals/yuantan.jpg`
 
 ### `n9_b_xiahoudun`
 
@@ -1015,7 +1031,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，戏剧化战斗光影，如《兰斯10》的战斗 CG；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：蹋顿 → `pics/source/generals/tadun.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：蹋顿 → `pics/source/generals/tadun.jpg`；审配 → `pics/source/generals/shenpei.jpg`
 
 ### `n9_g_liucheng`
 
@@ -1408,7 +1424,7 @@
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的古锭刀（巨大的宽刃厚背砍刀，刀身像一整块带锈斑的铁板，刀背平直、刀尖斜削上翘，没有刀鞘；短柄缠棕色皮绳，圆形金色回纹护手，柄尾圆金属头；整个画面只有这一把刀，不要背带背刀、不要另一把剑）。）
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：主角 → `pics/source/generals/lord.jpg`；诸葛亮 → `pics/source/generals/zhugeliang.jpg`；吕布 → `pics/source/generals/lvbu.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：主角 → `pics/source/generals/lord.jpg`；北线主角 → `pics/source/generals/lord_north.jpg`；诸葛亮 → `pics/source/generals/zhugeliang.jpg`；吕布 → `pics/source/generals/lvbu.jpg`
 
 ### `c14_zhanlv`
 
@@ -1442,7 +1458,7 @@
 （主角出场时——主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的古锭刀（巨大的宽刃厚背砍刀，刀身像一整块带锈斑的铁板，刀背平直、刀尖斜削上翘，没有刀鞘；短柄缠棕色皮绳，圆形金色回纹护手，柄尾圆金属头；整个画面只有这一把刀，不要背带背刀、不要另一把剑）。）
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：主角 → `pics/source/generals/lord.jpg`；诸葛亮 → `pics/source/generals/zhugeliang.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：主角 → `pics/source/generals/lord.jpg`；北线主角 → `pics/source/generals/lord_north.jpg`；诸葛亮 → `pics/source/generals/zhugeliang.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`
 
 ### `c14_xiang`
 
@@ -1504,7 +1520,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：甄宓 → `pics/source/generals/zhenmi.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`；陈宫 → `pics/source/generals/chengong.jpg`；糜贞 → `pics/source/generals/mizhen.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：夏侯兰 → `pics/source/generals/xiahoulan.jpg`；甄宓 → `pics/source/generals/zhenmi.jpg`；赵云 → `pics/source/generals/zhaoyun.jpg`；陈宫 → `pics/source/generals/chengong.jpg`；糜贞 → `pics/source/generals/mizhen.jpg`
 
 ### `n7_yijing`
 
@@ -1586,7 +1602,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`；颜良 → `pics/source/generals/yanliang.jpg`
 
 ### `n7_ouxue`
 
@@ -1596,7 +1612,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`；袁绍 → `pics/source/generals/yuanshao.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`；文丑 → `pics/source/generals/wenchou.jpg`；袁绍 → `pics/source/generals/yuanshao.jpg`
 
 ### `n7_wuji`
 
@@ -1637,7 +1653,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`；袁谭 → `pics/source/generals/yuantan.jpg`
 
 ### `n8_chusai`
 
@@ -1646,6 +1662,8 @@
 构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
+
+参考立绘（一起上传给 Gemini，保持长相一致）：审配 → `pics/source/generals/shenpei.jpg`
 
 ### `n8_dingbei`
 
@@ -1792,7 +1810,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：赵云 → `pics/source/generals/zhaoyun.jpg`；袁谭 → `pics/source/generals/yuantan.jpg`
 
 ### `n9_yanjin`
 
@@ -1896,7 +1914,7 @@
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：张辽 → `pics/source/generals/zhangliao.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：张辽 → `pics/source/generals/zhangliao.jpg`；审配 → `pics/source/generals/shenpei.jpg`
 
 ### `n9_liaoshui`
 
