@@ -232,7 +232,7 @@
       "requires": ["北线：班师冀州"],
       "event_scope": "north",
       "soldier_scope": "north",
-      "recruit_pool": ["yangang", "zoudan", "gaolan"],
+      "recruit_pool": ["yangang", "zoudan"],
       "ending": "fuchao",
       "shuffle": [["hs_m2", "hs_bandit0"], ["hs_em2", "hs_pursuit0a"]],
       "squares": {
