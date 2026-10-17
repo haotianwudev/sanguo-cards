@@ -1043,7 +1043,6 @@
     "m11_guanyu": {"name": "城东南·关羽", "turn_limit": 10, "enemy": "m11_guanyu"},
     "m11_hubao": {"name": "曹营外·魏军虎豹骑", "turn_limit": 6, "enemy": "m11_hubao", "art": "m10_hubao"},
     "m11_wei_huwei": {"name": "曹营辕门·魏军虎卫军", "turn_limit": 6, "enemy": "m11_wei_huwei"},
-    "m11_dianwei": {"name": "中军帐前·典韦", "turn_limit": 10, "enemy": "m11_dianwei"},
     "n9_yanxing": {"name": "马营西门·阎行", "turn_limit": 10, "enemy": "n9_yanxing"},
     "m11_caoren": {"name": "曹营·曹仁", "turn_limit": 10, "enemy": "m11_caoren"},
     "m11_han_baier": {"name": "洛水岸·汉军白毦兵", "turn_limit": 6, "enemy": "m11_han_baier", "art": "m8_han_baier"},
