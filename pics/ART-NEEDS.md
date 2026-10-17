@@ -430,7 +430,7 @@
 | ⬜ 缺 | `c13_ziwu` | 子午谷 |
 | ⬜ 缺 | `c13_zhandao` | 栈道 |
 | ⬜ 缺 | `c13_zhandaohuo` | 栈道起火 |
-| ⬜ 缺 | `c13_canzhang` | 断栈 |
+| ⬜ 缺 | `c13_canzhang` | 算尽 |
 | ⬜ 缺 | `c13_yexiao` | 夜宵 |
 | ⬜ 缺 | `c13_chetui` | 曹纯走了 |
 | ⬜ 缺 | `c13_jiuzhang` | 旧账 |
