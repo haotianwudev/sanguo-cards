@@ -3097,7 +3097,8 @@
       "rarity": "SR",
       "troop": "strategist",
       "hp": 82,
-      "at": 80
+      "at": 80,
+      "pool": false
     },
     "liuzhang": {
       "name": "刘璋",
@@ -3109,9 +3110,13 @@
     "zhanglu": {
       "name": "张鲁",
       "rarity": "SR",
-      "troop": "strategist",
+      "troop": "logistics",
       "hp": 80,
-      "at": 72
+      "at": 72,
+      "skills": [
+        "fushui_heal"
+      ],
+      "pool": false
     },
     "zhangwei": {
       "name": "张卫",
@@ -3127,6 +3132,130 @@
       "hp": 67,
       "at": 58,
       "pool": false
+    },
+    "yanpu": {
+      "name": "阎圃",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 72,
+      "at": 58,
+      "skills": [
+        "xianji"
+      ],
+      "pool": false
+    },
+    "yang_ang": {
+      "name": "杨昂",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 52,
+      "at": 62,
+      "pool": false
+    },
+    "wudou_guizu": {
+      "name": "五斗米鬼卒",
+      "rarity": "N",
+      "troop": "bandit",
+      "hp": 40,
+      "at": 50,
+      "weight": 2,
+      "scope": "south"
+    },
+    "wudou_jijiu": {
+      "name": "五斗米祭酒",
+      "rarity": "N",
+      "troop": "strategist",
+      "hp": 46,
+      "at": 42,
+      "weight": 2,
+      "scope": "south"
+    },
+    "banshun_man": {
+      "name": "板楯蛮",
+      "rarity": "N",
+      "elite": true,
+      "troop": "infantry",
+      "hp": 48,
+      "at": 60,
+      "weight": 1,
+      "scope": "south"
+    },
+    "wei_hubao": {
+      "name": "虎豹骑",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "cavalry",
+      "hp": 58,
+      "at": 72,
+      "weight": 1
+    },
+    "wei_qingzhou": {
+      "name": "青州老兵",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "spear",
+      "hp": 60,
+      "at": 70,
+      "weight": 1
+    },
+    "wei_pili": {
+      "name": "霹雳车营",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "archer",
+      "hp": 56,
+      "at": 74,
+      "weight": 1
+    },
+    "wei_huwei": {
+      "name": "虎卫军",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "infantry",
+      "hp": 64,
+      "at": 66,
+      "weight": 1
+    },
+    "wei_xiaoshi": {
+      "name": "校事府密探",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 60,
+      "weight": 1
+    },
+    "wei_tuntian": {
+      "name": "屯田兵",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "logistics",
+      "hp": 76,
+      "at": 54,
+      "weight": 1
+    },
+    "wei_mojin": {
+      "name": "摸金校尉",
+      "rarity": "N",
+      "elite": true,
+      "veteran": true,
+      "faction": "wei",
+      "troop": "bandit",
+      "hp": 56,
+      "at": 74,
+      "weight": 1
     },
     "luxun_young": {
       "name": "陆逊·少年",

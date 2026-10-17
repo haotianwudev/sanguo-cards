@@ -1163,3 +1163,75 @@ func test_chapter6_luxun_can_only_study_under_zhouyu_after_ending_thirteen() -> 
 	check(Quests.option_locked(s, opts[0]), "greyed until 结局十三")
 	s.flags.append(E13)
 	check(not Quests.option_locked(s, opts[0]))
+
+
+func test_south_chapter9_fazheng_joins_in_chengdu_on_every_route() -> void:
+	for flags in [[], [E13, "陆逊：入队"]]:
+		var s := ch9s_save(flags)
+		var p := walk(quest_by_id("tianfu"), s, [], 1, 0, 0)
+		check(p.has("t9_fazheng") and s.has_card("fazheng"), "法正 joins after 雒城 (%s)" % str(flags))
+
+
+# ---- 第十章 · 奇袭关中（南线）------------------------------------------------------------
+
+const E14 := "结局十四 · 断栈"
+
+
+func ch10s_save(flags := []) -> SaveData:
+	var s := ch9s_save([E13, "陆逊：入队"])
+	s.flags += ["严颜：入队", "张任：入队", "法正：入队", "吴苋：入队", "祝融：入队", "南线：益州与南中"] + flags
+	s.quests_cleared.append("tianfu")
+	for c in ["luxun_young", "yanyan", "zhangren", "fazheng", "wuxian", "zhurong", "menghuo"]:
+		s.grant_card(c)
+	return s
+
+
+func test_south_chapter10_follows_the_good_tianfu_ending_only() -> void:
+	check_eq(Quests.current_quest(ch10s_save())["id"], "guanzhong")
+	var s := ch9s_save([E13])
+	s.quests_cleared.append("tianfu")
+	check(Quests.current_quest(s) == null, "结局十三 stops the story: no 第十章")
+
+
+func test_south_chapter10_first_time_the_ziwu_valley_ends_in_ending_fourteen() -> void:
+	var q := quest_by_id("guanzhong")
+	check(Quests.option_locked(ch10s_save(), q["squares"]["g10_junyi"]["choose"][0]), "first time through: 法正's plan is greyed")
+	for fork in [[], ["g10_a_m1", "g10_c_m1", "g10_zw_m1"]]:
+		var s := ch10s_save()
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["g10_start", "g10_yangang", "g10_zhangwei", "g10_zhanglu", "g10_xingye", "g10_dingjun", "g10_junyi", "g10_zw_start", "g10_zw_fire", "g10_zw_exit", "g10_duanzhan"]:
+			check(p.has(sid), "子午谷 route passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["g10_fenbing", "g10_chencang", "g10_lijue", "g10_zhuge", "g10_end"]:
+			check(not p.has(sid), "子午谷 route never reaches " + sid)
+		check_eq(p[-1], "g10_duanzhan")
+		check(s.has_card("zhanglu") and s.has_card("yanpu"), "张鲁、阎圃 join in 汉中")
+		check(s.run_records.has(E14))
+		finish(q, s)
+		check(Quests.current_quest(s) == null, "the story stops at 结局十四")
+
+
+func test_south_chapter10_losing_at_the_valley_mouth_is_ending_fourteen_too() -> void:
+	var s := ch10s_save()
+	var q := quest_by_id("guanzhong")
+	Quests.begin(q, s, rng(3))
+	s.run_records.append("关中：子午谷")
+	s.square = "g10_zw_exit"
+	check(Quests.lose(q, s, rng(3)), "the 谷口 fight carries on into the ending")
+	check_eq(s.square, "g10_duanzhan")
+
+
+func test_south_chapter10_after_ending_fourteen_fazheng_splits_the_army() -> void:
+	for fork in [[], ["g10_b_m1", "g10_fb_m1", "g10_d_m1", "g10_e_m1", "g10_f_m1"]]:
+		var s := ch10s_save([E14])
+		var q := quest_by_id("guanzhong")
+		check(not Quests.option_locked(s, q["squares"]["g10_junyi"]["choose"][0]), "after 结局十四 法正's plan opens")
+		var p := walk(q, s, fork, 1, 0, 0)
+		for sid in ["g10_fenbing", "g10_chencang", "g10_huzhen", "g10_chetui", "g10_guosi", "g10_xurong", "g10_lijue", "g10_lijue_end", "g10_liru",
+				"g10_tongguan", "g10_zhangxiu", "g10_kongming", "g10_wangping", "g10_lianying", "g10_zhuge", "g10_zhuiji", "g10_zhuiji2", "g10_end"]:
+			check(p.has(sid), "兵分两路 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["g10_zw_start", "g10_zw_exit", "g10_duanzhan"]:
+			check(not p.has(sid), "兵分两路 never reaches " + sid)
+		check_eq(p[-1], "g10_end")
+		for c in ["zhanglu", "yanpu", "xurong_card", "zhangxiu"]:
+			check(s.has_card(c), c + " joins on the way")
+		check(s.run_records.has("南线：攻取长安") and not s.run_records.has(E14))
