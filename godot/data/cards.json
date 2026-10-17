@@ -3092,6 +3092,15 @@
       "pool": false,
       "scope": "north"
     },
+    "jushou": {
+      "name": "沮授",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 80,
+      "at": 78,
+      "pool": false,
+      "scope": "north"
+    },
     "fazheng": {
       "name": "法正",
       "rarity": "SR",

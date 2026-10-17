@@ -1375,7 +1375,7 @@ func test_north_chapter7_after_ending_fifteen_chen_gong_joins_and_zhao_yun_catch
 		for sid in ["n7_beishang", "n7_guotu", "n7_b_anmin", "n7_b_qijin", "n7_b_kujing"]:
 			check(not p.has(sid), "将计就计 never reaches " + sid)
 		check_eq(p[-1], "n7_g_end")
-		for c in ["mizhen", "chengong", "guonvwang", "yanliang", "zhanghe", "gaolan", "chunyuqiong"]:
+		for c in ["mizhen", "chengong", "guonvwang", "yanliang", "zhanghe", "gaolan", "chunyuqiong", "jushou"]:
 			check(s.has_card(c), c + " joins")
 		check(s.run_records.has("邺城：将计就计") and s.run_records.has("北线：夺邺城"))
 		finish(q, s)

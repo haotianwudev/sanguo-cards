@@ -957,11 +957,16 @@ PORTRAITS = {
         "Red lamellar armor with red bound sleeves.",
         "A carved bow in hand, a short sword at her hip.",
         "a training ground beside the Fuchun River"),
-    "guonvwang": ("Guo Zhao (郭照, called Nüwang), a clever Hebei orphan, Guo Jia's adopted daughter, who nurses him and sorts his reports — a teenage girl of about fifteen",
+    "guonvwang": ("Guo Zhao (郭照, called Nüwang), a clever Hebei orphan, Guo Jia's adopted daughter, who keeps his accounts and confiscates his wine — a teenage girl of about fifteen",
         "Calm, slender teenage girl of about fifteen with a serious face and intelligent eyes.",
         "A plain dark robe and simple hair bun, medicine stains on her sleeve.",
         "A bowl of medicine in one hand, a bundle of military reports in the other.",
         "a war tent on a snowy night in You province"),
+    "jushou": ("Ju Shou (沮授), Yuan Shao's loyal, far-sighted chief strategist whose advice is never heeded — he later joins the hero",
+        "Lean, upright man in his 40s with a neat beard, deep-set tired eyes and a grave, stubborn dignity.",
+        "A dark Hebei official's robe, a little worn, black scholar's cap.",
+        "A sealed letter in one hand, a writing brush in the other, standing straight.",
+        "the bank of the Zhang River at dusk, an abandoned Yuan army camp behind him"),
     "mateng": ("Ma Teng (马腾), the old Xiliang warlord, father of Ma Chao",
         "Tall, dignified veteran around 50 with a long grey beard, high nose and deep-set eyes.",
         "Xiliang iron armor under an old war robe.",
@@ -2130,6 +2135,7 @@ CHESTS = {
 # already delivered but wrong somewhere: redraw (listed above the batch)
 # (key, why, seen): `seen` = how many times art_ingest.py had already logged that key; one more delivery clears the entry
 REDO = [
+    ("guonvwang", "郭女王改成十四五岁的少女（郭嘉的义女）：现图是二十岁上下的成年女子，按新提示重画", 1),
     ("c8_fubing", "宴会段的主角要穿他标志性的古铜鎏金旧甲，现图穿的是素色常服", 1),
     ("c8_qibing", "宴会段（黄忠射骑兵）的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
     ("c8_caihe", "宴会段的主角要穿古铜鎏金旧甲，现图穿的是素色常服", 1),
