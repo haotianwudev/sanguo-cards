@@ -3104,6 +3104,15 @@
       "pool": false,
       "scope": "north"
     },
+    "kongrong": {
+      "name": "孔融",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 76,
+      "at": 78,
+      "pool": false,
+      "scope": "north"
+    },
     "tianfeng": {
       "name": "田丰",
       "rarity": "SR",

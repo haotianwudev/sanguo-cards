@@ -1545,12 +1545,12 @@
 ### `n8_liushou_t`
 
 ```
-横版剧情事件插画：蓟城的厅堂，地图摊在案上：郭嘉（清瘦病容的谋士，裹着厚裘衣）站在地图前，手指着南方，神情笃定；田丰（五十岁上下的清瘦老谋士，胡须半白，灰色儒袍）和沮授（四十多岁的端正谋士，深色官袍）并肩站着点头；张辽（三十多岁的并州名将）抱拳，张燕（精悍的黑山首领）咧嘴笑；郭照（十四五岁的瘦削少女，披着灰蓝外袍）在后面松了一口气。
+横版剧情事件插画：蓟城的厅堂，地图摊在案上：郭嘉（清瘦病容的谋士，裹着厚裘衣）站在地图前，手指着南方，神情笃定；田丰（五十岁上下的清瘦老谋士，胡须半白，灰色儒袍）和沮授（四十多岁的端正谋士，深色官袍）并肩站着点头；张辽（三十多岁的并州名将）抱拳，张燕（精悍的黑山首领）咧嘴笑。
 构图：横版 16:9，1920x1080，主要人物位于画面上部三分之二以上。画面中重点人物最多四位；无名的背景人物（士兵、人群）不限。
 画风：复古日系战术动漫 RPG 卡牌插画，参考《兰斯10》画风，赛璐珞上色，墨线干净利落，色彩浓郁鲜艳，视觉小说事件 CG，表情生动，暖色电影感光线；不要文字、不要 UI。
 ```
 
-参考立绘（一起上传给 Gemini，保持长相一致）：张辽 → `pics/source/generals/zhangliao.jpg`；张燕 → `pics/source/generals/zhangyan.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`；郭照 → `pics/source/generals/guonvwang.jpg`；田丰 → `pics/source/generals/tianfeng.jpg`；沮授 → `pics/source/generals/jushou.jpg`
+参考立绘（一起上传给 Gemini，保持长相一致）：张辽 → `pics/source/generals/zhangliao.jpg`；张燕 → `pics/source/generals/zhangyan.jpg`；郭嘉 → `pics/source/generals/guojia.jpg`；田丰 → `pics/source/generals/tianfeng.jpg`；沮授 → `pics/source/generals/jushou.jpg`
 
 ### `n8_b_xin`
 

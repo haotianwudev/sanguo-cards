@@ -619,7 +619,7 @@ func test_beihai_peace_route_wins_through_to_beihai() -> void:
 	for sid in ["bh_zheng", "bh_jiang", "bh_zj_peace", "bh_zj_join", "bh_lubu", "bh_flee", "bh_guanhai", "bh_porridge", "bh_end"]:
 		check(path.has(sid), "passes " + sid)
 	check(not path.has("bh_escape") and not path.has("bh_bad_end"), "winning against 吕布 skips the retreat scenes")
-	for c in ["zhenghao", "jiangqiao", "taishici", "beihai_tuntian"]:
+	for c in ["zhenghao", "jiangqiao", "taishici", "beihai_tuntian", "kongrong"]:
 		check(s.has_card(c), "got " + c)
 	check(not path.has("bh_zj_apart") and not path.has("bh_zj_fight"), "和好线不经过内讧那一格")
 	var j := beihai_save()
