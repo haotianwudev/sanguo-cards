@@ -2335,10 +2335,10 @@
       "scope": "north"
     },
     "xuanjizi_card": {
-      "name": "玄机子·妖道",
+      "name": "于吉·妖道",
       "rarity": "C",
       "troop": "strategist",
-      "person": "xuanjizi",
+      "person": "yuji",
       "hp": 63,
       "at": 50,
       "skills": [

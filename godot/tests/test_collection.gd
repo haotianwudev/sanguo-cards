@@ -477,13 +477,13 @@ func test_generals_outclass_soldiers_of_their_troop() -> void:
 
 
 func test_boss_cards_and_xuanjizi_have_portraits() -> void:
-	check_eq(Kit.portrait_key("xuanjizi_card"), "xuanjizi")
+	check_eq(Kit.portrait_key("xuanjizi_card"), "yuji")
 	check_eq(Kit.portrait_key("lidamu_card"), "lidamu")
 	check_eq(Kit.portrait_key("yaodao_card"), "yaodao")
 	check_eq(Kit.portrait_key("dongzhuo_card"), "dongzhuo")
 	check_eq(Kit.portrait_key("wenchou"), "wenchou")
 	var fighter := GameData.get_db().build_fighter("xuanjizi_card")
-	check_eq(fighter.get("person"), "xuanjizi")
+	check_eq(fighter.get("person"), "yuji")
 
 
 
