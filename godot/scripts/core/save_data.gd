@@ -180,7 +180,7 @@ func new_lap(inherit_all := false) -> SaveData:
 	s.cleared_lord_copies = cleared_lord_copies
 	s.cleared_forms = cleared_forms.duplicate()
 	s.cleared_form_copies = cleared_form_copies.duplicate()
-	s.flags = flags.filter(func(f): return str(f).begins_with("结局"))  # endings reached stay known (later 周目 may branch on them)
+	s.flags = flags.filter(func(f): return str(f).contains("结局"))  # endings reached stay known (later 周目 may branch on them; 南线结局 / 北线结局 / 真结局 too)
 	if inherit_all:
 		s.story_cards = story_cards.duplicate()
 	s.theme = theme

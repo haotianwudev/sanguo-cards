@@ -150,6 +150,9 @@ CHAPTERS = [
     ("第九章", "tianfu", "xiliang"),
     ("第十章", "guanzhong", "sanfang"),
     ("第十一章", "luoyang_s", "tianqing"),
+    ("第十二章（世界一）", "beifa", "guandu"),
+    ("第十二章（世界二）", "chibi", "dujiang"),
+    ("第十二章（归一）", "guiyi", "guiyi"),
 ]
 ROW_NAMES = {"prologue_s": "富春", "prologue_n": "冀州风云"}
 SUM_KEYS = ("n", "normal", "elite", "boss", "forks", "cg_have", "cg_all")

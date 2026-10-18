@@ -1618,3 +1618,83 @@ func test_north_chapter11_keeping_zhuge_liang_falls_back_to_xuchang() -> void:
 		check(s.run_records.has("北线：扣下诸葛") and s.run_records.has("北线：识破诸葛"))
 		check(s.has_card("guanyu") and s.has_card("zhangfei"), "关羽、张飞 come over at 许昌")
 		finish(q, s)
+
+
+# ---- 终章 ---------------------------------------------------------------------------------------------
+
+func finale(qid: String, s: SaveData, ending: String) -> Array:
+	check_eq(Quests.current_quest(s)["id"], qid, "the story goes on to " + qid)
+	var q := quest_by_id(qid)
+	var p := walk(q, s, [])
+	finish(q, s)
+	check(s.flags.has(ending), qid + " ends at " + ending)
+	check(Quests.current_quest(s) == null, "nothing after " + ending)
+	return p
+
+
+func test_finale_world_one_south_takes_lu_bu_and_dies_by_him() -> void:
+	var s := ch11s_save()
+	var q := quest_by_id("luoyang_s")
+	walk(q, s, [], 1, 0, 0)
+	finish(q, s)
+	var p := finale("beifa", s, "结局十七 · 虎噬")
+	for sid in ["s12w_yujin", "s12w_gaoshun", "s12w_zhaoyun", "s12w_meng", "s12w_hushi"]:
+		check(p.has(sid), "北伐 passes " + sid)
+
+
+func test_finale_world_two_south_falls_back_to_the_yangtze_and_burns_chibi() -> void:
+	var s := ch11s_save(["结局十七 · 虎噬"])
+	var q := quest_by_id("luoyang_s")
+	walk(q, s, [], 1, 0, -1)
+	finish(q, s)
+	var p := finale("chibi", s, "南线结局 · 赤壁")
+	for sid in ["s12c_machao", "s12c_sang", "s12c_pangtong", "s12c_kurou", "s12c_dongfeng", "s12c_lian", "s12c_kongming", "s12c_guan", "s12c_end"]:
+		check(p.has(sid), "赤壁 passes " + sid)
+
+
+func test_finale_world_one_north_holds_guandu_against_a_mad_lu_bu() -> void:
+	var s := tianqing_save([E18_N])
+	var q := quest_by_id("tianqing")
+	walk(q, s, [])
+	finish(q, s)
+	var p := finale("guandu", s, "北线结局 · 官渡")
+	for sid in ["n12g_xiahoudun", "n12g_caoren", "n12g_sunce", "n12g_huo", "n12g_lvbu", "n12g_jiaozhang", "n12g_end"]:
+		check(p.has(sid), "官渡 passes " + sid)
+
+
+func test_finale_world_two_north_crosses_with_zhuge_liang_and_the_candle_goes_out() -> void:
+	var s := tianqing_save()
+	var q := quest_by_id("tianqing")
+	walk(q, s, [])
+	finish(q, s)
+	var p := finale("dujiang", s, E18_N)
+	for sid in ["n12d_huangzhong", "n12d_guojia", "n12d_zhouyu", "n12d_qianye", "n12d_end"]:
+		check(p.has(sid), "渡江 passes " + sid)
+
+
+func test_finale_both_endings_open_the_way_into_the_city_from_either_side() -> void:
+	var both := ["南线结局 · 赤壁", "北线结局 · 官渡"]
+	var n := tianqing_save([E18_N] + both)
+	var qn := quest_by_id("tianqing")
+	var pn := walk(qn, n, ["n11_g_jin"])
+	check_eq(pn[-1], "n11_g_jin", "北线：不退，进城 ends the chapter")
+	finish(qn, n)
+	finale("guiyi", n, "真结局 · 归一")
+	var s := ch11s_save(["结局十七 · 虎噬"] + both)
+	var qs := quest_by_id("luoyang_s")
+	walk(qs, s, [], 1, 0, -1)
+	finish(qs, s)
+	var p := finale("guiyi", s, "真结局 · 归一")
+	for sid in ["tm_zhangfei", "tm_xiangjian", "tm_guanyu", "tm_digong", "tm_jinggao", "tm_guiyi", "tm_end"]:
+		check(p.has(sid), "归一 passes " + sid)
+	check(not quest_by_id("tianqing")["squares"]["n11_g_jin"].is_empty())
+	check(Quests.current_quest(tianqing_save([E18_N])) != null)
+
+
+func test_endings_outside_the_numbered_ones_survive_a_new_lap() -> void:
+	var s := SaveData.create()
+	s.flags = ["南线结局 · 赤壁", "北线结局 · 官渡", "真结局 · 归一", "结局十七 · 虎噬", "南线：入主洛阳"]
+	var t := s.new_lap()
+	for f in ["南线结局 · 赤壁", "北线结局 · 官渡", "真结局 · 归一", "结局十七 · 虎噬"]:
+		check(t.flags.has(f), f + " is remembered on the next lap")
+	check(not t.flags.has("南线：入主洛阳"), "a route record is not")

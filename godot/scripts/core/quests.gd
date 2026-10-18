@@ -424,7 +424,7 @@ static func _ending_active(title: String, save: SaveData) -> bool:
 static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
 	## every line in v is a story flag (or, with this_run, a line recorded earlier in this run)
 	for line in _as_list(v):
-		if str(line).begins_with("结局") and not _ending_active(str(line), save):
+		if str(line).contains("结局") and not _ending_active(str(line), save):
 			return false  # played below the 难度 this ending opens: what it unlocks stays shut
 		if not (save.flags.has(line) or (this_run and save.run_records.has(line))):
 			return false
@@ -1055,7 +1055,7 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 		return
 	if not save.quests_cleared.has(q["id"]):
 		save.quests_cleared.append(q["id"])
-	if save.run_records.any(func(l): return str(l).begins_with("结局")):
+	if save.run_records.any(func(l): return str(l).contains("结局")):
 		save.commit_history()  # an ending: what you hold (bar story gifts) can be drawn again next 周目
 		save.ended = true
 	for line in save.run_records:  # this run's choices become lasting story flags

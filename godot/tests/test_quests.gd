@@ -24,7 +24,7 @@ func test_maps_only_move_forward_one_row_at_a_time() -> void:
 
 
 func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "yecheng", "jiangdong", "longhu", "menghu", "xiliang", "tianfu", "guanzhong", "luoyang_s", "sanfang", "tianqing"])
+	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "yecheng", "jiangdong", "longhu", "menghu", "xiliang", "tianfu", "guanzhong", "luoyang_s", "sanfang", "tianqing", "beifa", "chibi", "guandu", "dujiang", "guiyi"])
 
 
 func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
@@ -1317,7 +1317,7 @@ func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
 	## no later chapter is easier, no elite is easier than the ordinary fights, no boss than the elites (吕布's showpieces are left alone)
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
-	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang", "sanfang", "tianqing"]]
+	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang", "sanfang", "tianqing", "guandu"]]
 	for q in db.quests:
 		var base: Dictionary = Quests._power_base(q)
 		for tier in ["normal", "elite", "boss"]:

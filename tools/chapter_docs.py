@@ -180,7 +180,7 @@ for q in story["quests"]:
         docs["prologue_s"] = chapter_doc("prologue_s", q, (0, 22), "南")
         docs["prologue_n"] = chapter_doc("prologue_n", q, (23, 10 ** 6), "北")
     else:
-        docs[q["id"]] = chapter_doc(q["id"], q, None, "北" if q.get("event_scope") == "north" else "南")
+        docs[q["id"]] = chapter_doc(q["id"], q, None, {"north": "北", "universal": "南北"}.get(q.get("event_scope"), "南"))
 CN = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
 
 
@@ -198,7 +198,7 @@ def file_name(doc: str) -> str:
     head = doc.split("\n", 1)[0].lstrip("# ")  # 第七章 · 邺城惊雷（`yecheng`，北线）
     title, rest = head.split("（", 1)
     num, name = title.split(" · ", 1)
-    return "%02d-%s-%s" % (chapter_number(num.strip("第章")), "北线" if "北线" in rest else "南线", name.strip())
+    return "%02d-%s-%s" % (chapter_number(num.strip("第章")), "南北" if "南北线" in rest else "北线" if "北线" in rest else "南线", name.strip())
 
 
 docs = {file_name(d): d for d in docs.values()}
