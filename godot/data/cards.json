@@ -3197,6 +3197,602 @@
       "pool": false,
       "scope": "south"
     },
+    "wangyun": {
+      "name": "王允",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 72,
+      "at": 64,
+      "pool": false,
+      "scope": "south"
+    },
+    "xiandi": {
+      "name": "汉献帝",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 74,
+      "at": 56,
+      "pool": false,
+      "scope": "south"
+    },
+    "guotu": {
+      "name": "郭图",
+      "rarity": "C",
+      "troop": "strategist",
+      "hp": 62,
+      "at": 56,
+      "pool": false
+    },
+    "yuantan": {
+      "name": "袁谭",
+      "rarity": "R",
+      "troop": "cavalry",
+      "hp": 64,
+      "at": 70,
+      "pool": false,
+      "scope": "north"
+    },
+    "yuanshang": {
+      "name": "袁尚",
+      "rarity": "R",
+      "troop": "cavalry",
+      "hp": 62,
+      "at": 72,
+      "pool": false,
+      "scope": "north"
+    },
+    "caiyong": {
+      "name": "蔡邕",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 74,
+      "at": 58,
+      "pool": false,
+      "scope": "south"
+    },
+    "shenpei": {
+      "name": "审配",
+      "rarity": "SR",
+      "troop": "spear",
+      "hp": 80,
+      "at": 84,
+      "pool": false,
+      "scope": "north"
+    },
+    "caochun": {
+      "name": "曹纯",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "hp": 76,
+      "at": 84,
+      "pool": false
+    },
+    "yuanxi": {
+      "name": "袁熙",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 60,
+      "at": 58,
+      "pool": false,
+      "scope": "north"
+    },
+    "xinping": {
+      "name": "辛评",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 68,
+      "at": 60,
+      "pool": false,
+      "scope": "north"
+    },
+    "qiaogong": {
+      "name": "乔公",
+      "rarity": "C",
+      "troop": "logistics",
+      "hp": 62,
+      "at": 48,
+      "pool": false,
+      "scope": "south"
+    },
+    "xinpi": {
+      "name": "辛毗",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 64,
+      "pool": false,
+      "scope": "north"
+    },
+    "manchong": {
+      "name": "满宠",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 72,
+      "at": 66,
+      "pool": false,
+      "scope": "north"
+    },
+    "huangchengyan": {
+      "name": "黄承彦",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 62,
+      "pool": false
+    },
+    "yanyu": {
+      "name": "严舆",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 58,
+      "at": 62,
+      "pool": false,
+      "scope": "south"
+    },
+    "zanghong": {
+      "name": "臧洪",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 72,
+      "at": 66,
+      "pool": false,
+      "scope": "north"
+    },
+    "simahui": {
+      "name": "司马徽",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 84,
+      "at": 70,
+      "pool": false
+    },
+    "guanlu": {
+      "name": "管辂",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 66,
+      "at": 64,
+      "pool": false
+    },
+    "chengyu": {
+      "name": "程昱",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 82,
+      "at": 76,
+      "pool": false,
+      "scope": "north"
+    },
+    "houcheng": {
+      "name": "侯成",
+      "rarity": "C",
+      "troop": "cavalry",
+      "hp": 58,
+      "at": 64,
+      "pool": false,
+      "scope": "north"
+    },
+    "zhangrao": {
+      "name": "张饶",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 60,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "pangdegong": {
+      "name": "庞德公",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 84,
+      "at": 68,
+      "pool": false
+    },
+    "xushao": {
+      "name": "许劭",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 68,
+      "at": 62,
+      "pool": false
+    },
+    "fanneng": {
+      "name": "樊能",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 58,
+      "at": 62,
+      "pool": false,
+      "scope": "south"
+    },
+    "yangsong": {
+      "name": "杨松",
+      "rarity": "C",
+      "troop": "logistics",
+      "hp": 64,
+      "at": 48,
+      "pool": false,
+      "scope": "south"
+    },
+    "maliang": {
+      "name": "马良",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 72,
+      "at": 64,
+      "pool": false,
+      "scope": "south"
+    },
+    "xuyou": {
+      "name": "许攸",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 64,
+      "at": 70,
+      "pool": false,
+      "scope": "north"
+    },
+    "hanfu": {
+      "name": "韩馥",
+      "rarity": "C",
+      "troop": "logistics",
+      "hp": 64,
+      "at": 50,
+      "pool": false,
+      "scope": "north"
+    },
+    "changxi": {
+      "name": "昌豨",
+      "rarity": "R",
+      "troop": "bandit",
+      "hp": 64,
+      "at": 70,
+      "pool": false,
+      "scope": "north"
+    },
+    "lingcao": {
+      "name": "凌操",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 64,
+      "at": 72,
+      "pool": false,
+      "scope": "south"
+    },
+    "qinyilu": {
+      "name": "秦宜禄",
+      "rarity": "C",
+      "troop": "logistics",
+      "hp": 60,
+      "at": 48,
+      "pool": false,
+      "scope": "north"
+    },
+    "gongsundu": {
+      "name": "公孙度",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 70,
+      "at": 66,
+      "pool": false,
+      "scope": "north"
+    },
+    "dongxi": {
+      "name": "董袭",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 70,
+      "at": 68,
+      "pool": false,
+      "scope": "south"
+    },
+    "xusheng": {
+      "name": "徐盛",
+      "rarity": "R",
+      "troop": "spear",
+      "hp": 64,
+      "at": 74,
+      "pool": false,
+      "scope": "south"
+    },
+    "panzhang": {
+      "name": "潘璋",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 62,
+      "at": 74,
+      "pool": false,
+      "scope": "south"
+    },
+    "mengda": {
+      "name": "孟达",
+      "rarity": "R",
+      "troop": "cavalry",
+      "hp": 64,
+      "at": 70,
+      "pool": false,
+      "scope": "south"
+    },
+    "haomeng": {
+      "name": "郝萌",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 58,
+      "at": 64,
+      "pool": false,
+      "scope": "north"
+    },
+    "zhanghong": {
+      "name": "张纮",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 72,
+      "at": 62,
+      "pool": false,
+      "scope": "south"
+    },
+    "lvfan": {
+      "name": "吕范",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 72,
+      "at": 58,
+      "pool": false,
+      "scope": "south"
+    },
+    "kuailiang": {
+      "name": "蒯良",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 64,
+      "pool": false,
+      "scope": "south"
+    },
+    "zhangsong": {
+      "name": "张松",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 64,
+      "pool": false,
+      "scope": "south"
+    },
+    "yongkai": {
+      "name": "雍闿",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 60,
+      "at": 62,
+      "pool": false,
+      "scope": "south"
+    },
+    "songxian": {
+      "name": "宋宪",
+      "rarity": "C",
+      "troop": "cavalry",
+      "hp": 58,
+      "at": 64,
+      "pool": false,
+      "scope": "north"
+    },
+    "tiankai": {
+      "name": "田楷",
+      "rarity": "R",
+      "troop": "cavalry",
+      "hp": 64,
+      "at": 68,
+      "pool": false,
+      "scope": "north"
+    },
+    "shanjing": {
+      "name": "单经",
+      "rarity": "C",
+      "troop": "cavalry",
+      "hp": 60,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "liuyu": {
+      "name": "刘虞",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 74,
+      "at": 56,
+      "pool": false,
+      "scope": "north"
+    },
+    "bairao": {
+      "name": "白绕",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 62,
+      "at": 60,
+      "pool": false,
+      "scope": "north"
+    },
+    "suigu": {
+      "name": "眭固",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 58,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "yangfeng": {
+      "name": "杨凤",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 60,
+      "at": 58,
+      "pool": false,
+      "scope": "north"
+    },
+    "baotao": {
+      "name": "鲍韬",
+      "rarity": "C",
+      "troop": "cavalry",
+      "hp": 56,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "chenrong": {
+      "name": "陈容",
+      "rarity": "C",
+      "troop": "logistics",
+      "hp": 62,
+      "at": 50,
+      "pool": false,
+      "scope": "north"
+    },
+    "wangkuang": {
+      "name": "王匡",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 66,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
+    },
+    "liudai": {
+      "name": "刘岱",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 60,
+      "at": 58,
+      "pool": false,
+      "scope": "north"
+    },
+    "kongzhou": {
+      "name": "孔伷",
+      "rarity": "C",
+      "troop": "strategist",
+      "hp": 60,
+      "at": 52,
+      "pool": false,
+      "scope": "north"
+    },
+    "qiaomao": {
+      "name": "乔瑁",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 58,
+      "at": 56,
+      "pool": false,
+      "scope": "north"
+    },
+    "yuejin": {
+      "name": "乐进",
+      "rarity": "SR",
+      "troop": "infantry",
+      "hp": 74,
+      "at": 84,
+      "pool": false,
+      "scope": "north"
+    },
+    "zhangbao_hj": {
+      "name": "张宝",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 68,
+      "at": 64,
+      "pool": false,
+      "scope": "north"
+    },
+    "zhangliang": {
+      "name": "张梁",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 64,
+      "at": 72,
+      "pool": false,
+      "scope": "north"
+    },
+    "lukang": {
+      "name": "陆康",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 72,
+      "at": 58,
+      "pool": false,
+      "scope": "south"
+    },
+    "mifuren": {
+      "name": "糜夫人",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 72,
+      "at": 56,
+      "pool": false,
+      "scope": "north"
+    },
+    "caoxing": {
+      "name": "曹性",
+      "rarity": "R",
+      "troop": "archer",
+      "hp": 62,
+      "at": 72,
+      "pool": false,
+      "scope": "north"
+    },
+    "dingfeng": {
+      "name": "丁奉",
+      "rarity": "R",
+      "troop": "spear",
+      "hp": 62,
+      "at": 72,
+      "pool": false,
+      "scope": "south"
+    },
+    "xizhicai": {
+      "name": "戏志才",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 70,
+      "at": 70,
+      "pool": false,
+      "scope": "north"
+    },
+    "zoushi": {
+      "name": "邹氏",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 74,
+      "at": 56,
+      "pool": false,
+      "scope": "south"
+    },
+    "liupi": {
+      "name": "刘辟",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 60,
+      "at": 62,
+      "pool": false,
+      "scope": "south"
+    },
+    "gongdu": {
+      "name": "龚都",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 58,
+      "at": 64,
+      "pool": false,
+      "scope": "south"
+    },
+    "huangshao": {
+      "name": "黄邵",
+      "rarity": "C",
+      "troop": "bandit",
+      "hp": 62,
+      "at": 60,
+      "pool": false,
+      "scope": "south"
+    },
     "tianyu": {
       "name": "田豫",
       "rarity": "SR",
