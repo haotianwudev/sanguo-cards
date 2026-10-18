@@ -1137,3 +1137,4 @@
 - [x] 2026-10-18 map `guandu` ← map_guandu.jpg · ok
 - [x] 2026-10-18 map `dujiang` ← map_dujiang.jpg · ok
 - [x] 2026-10-18 map `guiyi` ← map_guiyi.jpg · ok
+- [ ] 2026-10-18 portrait `sunquan_young` ← sunquan_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）

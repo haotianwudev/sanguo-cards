@@ -222,7 +222,7 @@ func _rebuild() -> void:
 		if _sort == "rarity" and rank.get(db.cards[a]["rarity"], 0) != rank.get(db.cards[b]["rarity"], 0):
 			return rank.get(db.cards[a]["rarity"], 0) > rank.get(db.cards[b]["rarity"], 0)
 		return power[a] > power[b])
-	if _filter == "lord":  # the plain lord and every lord card handed out: tap one to see it, tap again to use it
+	if _filter == "lord" or _filter == "all":  # the plain lord and every lord card handed out: tap one to see it, tap again to use it
 		for fid in ["base"] + save.route_lord_forms():
 			var lv := CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if fid == "base" else fid, "tier": _form_card_tier(fid)})
 			lv.set_state(false, _sel == "lordform:" + fid)
