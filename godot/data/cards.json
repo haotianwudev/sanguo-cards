@@ -3179,6 +3179,24 @@
       "pool": false,
       "scope": "north"
     },
+    "huangquan": {
+      "name": "黄权",
+      "rarity": "R",
+      "troop": "strategist",
+      "hp": 68,
+      "at": 62,
+      "pool": false,
+      "scope": "south"
+    },
+    "liyan": {
+      "name": "李严",
+      "rarity": "R",
+      "troop": "infantry",
+      "hp": 68,
+      "at": 68,
+      "pool": false,
+      "scope": "south"
+    },
     "tianyu": {
       "name": "田豫",
       "rarity": "SR",

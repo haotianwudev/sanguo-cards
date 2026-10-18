@@ -345,7 +345,7 @@ static func portrait_key(card_id: String) -> String:
 const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce", "公瑾": "zhouyu", "周瑜": "zhouyu", "文台": "sunjian", "孙坚": "sunjian", "主公": "lord",
 	"左慈": "zuoci", "诸葛亮": "zhugeliang", "孔明": "zhugeliang", "诸葛瑾": "zhugejin", "子瑜": "zhugejin", "曹仁": "caoren", "夏侯惇": "xiahoudun", "胡玉": "langlijiao", "唐周": "yaodao", "何仪": "heyi", "董白": "dongbai", "刘备": "liubei",
 	"关羽": "guanyu", "张飞": "zhangfei", "吕布": "lvbu", "华佗": "huatuo", "于吉": "yuji", "祖茂": "zumao",
-	"王修": "wangxiu", "叔治": "wangxiu", "武安国": "wuanguo", "阎柔": "yanrou", "鲜于辅": "xianyufu", "牵招": "qianzhao", "张邈": "zhangmiao", "孟卓": "zhangmiao", "鲍信": "baoxin", "阎行": "yanxing", "彦明": "yanxing",
+	"王修": "wangxiu", "叔治": "wangxiu", "武安国": "wuanguo", "阎柔": "yanrou", "鲜于辅": "xianyufu", "牵招": "qianzhao", "张邈": "zhangmiao", "孟卓": "zhangmiao", "鲍信": "baoxin", "阎行": "yanxing", "彦明": "yanxing", "黄权": "huangquan", "公衡": "huangquan", "李严": "liyan", "正方": "liyan",
 	# how the story first describes people before their names come up
 	"美妇": "wuguotai", "浓眉少年": "sunce", "俊秀少年": "zhouyu", "瘦老头": "sunjing", "渠帅": "heyi", "孙静": "sunjing",
 	"女当家": "yanzhihu", "胭脂虎": "yanzhihu", "张宁": "zhangning", "白衣道人": "yuji", "华雄": "huaxiong", "纪灵": "jiling",
