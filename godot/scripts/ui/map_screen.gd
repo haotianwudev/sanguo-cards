@@ -165,6 +165,11 @@ func _ready() -> void:
 	size_btn.focus_mode = Control.FOCUS_NONE
 	size_btn.pressed.connect(_cycle_dlg_size)
 	_dlg_tools.add_child(size_btn)
+	var log_btn := Kit.button("记录", "gray", Kit.FONT_SMALL)
+	log_btn.name = "Log"
+	log_btn.focus_mode = Control.FOCUS_NONE
+	log_btn.pressed.connect(_open_log)
+	_dlg_tools.add_child(log_btn)
 
 	_rebuild_map()
 	_grant_chapter_card()
@@ -898,6 +903,52 @@ func _fake_click() -> InputEventMouseButton:
 	return ev
 
 
+func _open_log() -> void:
+	## 记录: every line of this scene read so far, scrollable (narration dimmed, speech bright)
+	if get_node_or_null("DlgLog") != null or _dlg_lines.is_empty():
+		return
+	var upto: int = _dlg_lines.size() if _dlg_i < 0 else _dlg_i + 1
+	var root := Control.new()
+	root.name = "DlgLog"
+	root.z_index = 70
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(root)
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.6)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.gui_input.connect(func(e): if e is InputEventMouseButton and e.pressed: root.queue_free())
+	root.add_child(dim)
+	var panel := PanelContainer.new()
+	panel.position = Vector2(190, 60)
+	panel.size = Vector2(900, 600)
+	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 18, 3, Kit.c("gold"), 28))
+	root.add_child(panel)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 14)
+	panel.add_child(col)
+	var title := Kit.label("字幕记录", Kit.FONT_BIG + 6, "gold")
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(title)
+	var text := RichTextLabel.new()
+	text.bbcode_enabled = true
+	text.scroll_active = true
+	text.scroll_following = true
+	text.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
+	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
+	text.add_theme_color_override("default_color", Kit.c("text"))
+	col.add_child(text)
+	var dim_hex := Kit.c("dim").to_html()
+	var out: Array = []
+	for i in upto:
+		var spoken: bool = i < _dlg_keys.size() and str(_dlg_keys[i]) != ""
+		out.append(str(_dlg_lines[i]) if spoken else "[color=%s]%s[/color]" % [dim_hex, _dlg_lines[i]])
+	text.text = "\n\n".join(out)
+	var close := Kit.button("关闭", "blue")
+	close.pressed.connect(root.queue_free)
+	col.add_child(close)
+
+
 func _hide_sheet() -> void:
 	## Rance X style: hide the text box to look at the whole CG; any click brings it back
 	_sheet_hidden = true
@@ -910,6 +961,7 @@ func _update_tools() -> void:
 	_dlg_tools.get_child(0).visible = _dlg_i >= 0
 	_dlg_tools.get_node("Hide").visible = _cg_mode
 	_dlg_tools.get_node("Size").visible = _cg_mode and not _sheet_hidden
+	_dlg_tools.get_node("Log").visible = not _dlg_lines.is_empty()
 
 
 func _options_room(on: bool) -> void:
