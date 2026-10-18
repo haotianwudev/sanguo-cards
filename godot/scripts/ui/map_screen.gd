@@ -32,6 +32,8 @@ var _dlg_text: RichTextLabel
 var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
 var _dlg_dump := false  # 跳过 dumped every line into the box: it scrolls in a fixed height instead of growing past the screen
+var _dlg_log := false  # 记录 is open: the text box lists every line read so far
+var _log_saved := {}
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
 var _dlg_keys: Array = []  # the speaker of each line (Kit.speakers)
@@ -168,7 +170,7 @@ func _ready() -> void:
 	var log_btn := Kit.button("记录", "gray", Kit.FONT_SMALL)
 	log_btn.name = "Log"
 	log_btn.focus_mode = Control.FOCUS_NONE
-	log_btn.pressed.connect(_open_log)
+	log_btn.pressed.connect(_toggle_log)
 	_dlg_tools.add_child(log_btn)
 
 	_rebuild_map()
@@ -654,6 +656,7 @@ func _show_square(s: Dictionary) -> void:
 		lines.append(Kit.strip_tag(t).replace("{lord}", "[color=%s][b]%s[/b][/color]" % [Kit.c("red").to_html(), save.lord_name]))
 	var body := "\n\n".join(lines)
 	_dlg_lines = []
+	_dlg_log = false
 	_dlg_i = -1
 	_update_tools()
 	var prompt: String = ev.get("prompt", s["prompt"]).replace("{lord}", save.lord_name)
@@ -854,6 +857,8 @@ func _dialog_show() -> void:
 
 
 func _dialog_skip() -> void:
+	if _dlg_log:
+		_toggle_log()
 	if _dlg_i < 0:
 		return
 	_dlg_dump = false
@@ -885,6 +890,9 @@ func _on_story_click(e: InputEvent) -> void:
 		_sheet.visible = true
 		_update_tools()
 		return
+	if _dlg_log:
+		_toggle_log()
+		return
 	if _dlg_i >= 0:
 		_dlg_i += 1
 		_dialog_show()
@@ -903,50 +911,40 @@ func _fake_click() -> InputEventMouseButton:
 	return ev
 
 
-func _open_log() -> void:
-	## 记录: every line of this scene read so far, scrollable (narration dimmed, speech bright)
-	if get_node_or_null("DlgLog") != null or _dlg_lines.is_empty():
+func _toggle_log() -> void:
+	## 记录: the same text box shows every line of this scene read so far, scrollable (narration dimmed, speech bright);
+	## pressed again (or a click on the picture) it goes back to the line it was on
+	if _dlg_text == null or not is_instance_valid(_dlg_text) or _dlg_lines.is_empty():
 		return
+	var btn := _dlg_tools.get_node("Log") as Button
+	if _dlg_log:
+		_dlg_log = false
+		btn.text = "记录"
+		_dlg_text.text = _log_saved["text"]
+		_dlg_text.scroll_active = _log_saved["scroll"]
+		_dlg_text.scroll_following = _log_saved["follow"]
+		_dlg_text.add_theme_font_size_override("normal_font_size", _log_saved["font"])
+		_dlg_text.add_theme_font_size_override("bold_font_size", _log_saved["font"])
+		_apply_dlg_size()
+		return
+	_log_saved = {"text": _dlg_text.text, "scroll": _dlg_text.scroll_active, "follow": _dlg_text.scroll_following,
+		"font": _dlg_text.get_theme_font_size("normal_font_size")}
+	_dlg_log = true
+	btn.text = "返回"
 	var upto: int = _dlg_lines.size() if _dlg_i < 0 else _dlg_i + 1
-	var root := Control.new()
-	root.name = "DlgLog"
-	root.z_index = 70
-	root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(root)
-	var dim := ColorRect.new()
-	dim.color = Color(0, 0, 0, 0.6)
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.gui_input.connect(func(e): if e is InputEventMouseButton and e.pressed: root.queue_free())
-	root.add_child(dim)
-	var panel := PanelContainer.new()
-	panel.position = Vector2(190, 60)
-	panel.size = Vector2(900, 600)
-	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 18, 3, Kit.c("gold"), 28))
-	root.add_child(panel)
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 14)
-	panel.add_child(col)
-	var title := Kit.label("字幕记录", Kit.FONT_BIG + 6, "gold")
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	col.add_child(title)
-	var text := RichTextLabel.new()
-	text.bbcode_enabled = true
-	text.scroll_active = true
-	text.scroll_following = true
-	text.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
-	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
-	text.add_theme_color_override("default_color", Kit.c("text"))
-	col.add_child(text)
 	var dim_hex := Kit.c("dim").to_html()
 	var out: Array = []
 	for i in upto:
 		var spoken: bool = i < _dlg_keys.size() and str(_dlg_keys[i]) != ""
 		out.append(str(_dlg_lines[i]) if spoken else "[color=%s]%s[/color]" % [dim_hex, _dlg_lines[i]])
-	text.text = "\n\n".join(out)
-	var close := Kit.button("关闭", "blue")
-	close.pressed.connect(root.queue_free)
-	col.add_child(close)
+	_dlg_text.text = "
+
+".join(out)
+	_dlg_text.scroll_active = true
+	_dlg_text.scroll_following = true  # land on the newest line
+	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
+	_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
+	_apply_dlg_size()
 
 
 func _hide_sheet() -> void:
@@ -962,6 +960,7 @@ func _update_tools() -> void:
 	_dlg_tools.get_node("Hide").visible = _cg_mode
 	_dlg_tools.get_node("Size").visible = _cg_mode and not _sheet_hidden
 	_dlg_tools.get_node("Log").visible = not _dlg_lines.is_empty()
+	(_dlg_tools.get_node("Log") as Button).text = "返回" if _dlg_log else "记录"
 
 
 func _options_room(on: bool) -> void:
@@ -1215,7 +1214,9 @@ func _fit_sheet() -> void:
 	if _cg_mode:
 		var m := _dlg_mode()
 		h = maxf(156.0 if m == "auto" else float(DLG_H[m]), _sheet.get_combined_minimum_size().y)
-		if m == "auto" and is_instance_valid(_dlg_text) and not _dlg_dump and _dlg_text.is_inside_tree() and _dlg_text.size.x > 300.0:
+		if _dlg_log:
+			h = maxf(h, 400.0)
+		if m == "auto" and is_instance_valid(_dlg_text) and not _dlg_dump and not _dlg_log and _dlg_text.is_inside_tree() and _dlg_text.size.x > 300.0:
 			# 自动 = as tall as the line needs (else a long line is cut off): the box's own chrome plus the text's height
 			var top := _dlg_text.global_position.y - _sheet.global_position.y  # the title above the text
 			h = maxf(h, minf(top + _dlg_text.get_content_height() + 20.0, 420.0))
