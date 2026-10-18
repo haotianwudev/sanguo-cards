@@ -295,7 +295,7 @@ static func _is_lose_fight(sq: Dictionary, foe_card: String) -> bool:
 
 static func enemy_scales(save: SaveData) -> Array:
 	## [hp, attack] coefficients of the fight on the current square: the chapter / position scaling (see _scale_for) times battle.enemy_coef
-	## of its tier — 普通 / 精英 / 首领 / 必败 (lose_goto, and every 吕布 fight) alike. hp takes the whole coefficient, attack only its square root.
+	## of its tier — 普通 / 精英 / 首领 / 必败 (lose_goto, and every 吕布 fight). hp and attack both take the whole tier coefficient, except 必败 / 吕布 (attack only its square root).
 	## [1.0, 1.0] off a battle square
 	var db := GameData.get_db()
 	if save.quest == "" or db.battle.get("scaling", {}).is_empty():
@@ -318,7 +318,7 @@ static func enemy_scales(save: SaveData) -> Array:
 		var c := float(coef.get(tier, 1.0))
 		var base := _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"])))
 		var rf := float(db.battle.get("scaling", {}).get("route", {}).get(q["id"], {}).get("north" if save.is_north() else "south", 1.0))  # one chapter, two routes (第一章): each route's own level
-		return [base * c * rf, base * sqrt(c) * sqrt(rf)]
+		return [base * c * rf, base * c * sqrt(rf)]  # hp and attack both take the tier coefficient (精英 / 首领 hit as hard as they are tough); the chapter / route part grows attack only by its root
 	return [1.0, 1.0]
 
 
