@@ -95,7 +95,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	b.party_max = b._max_hp_for(hp)
 	b.party_hp = maxi(1, hp - damage)
 	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"]) + int(mods.get("ap_start", 0))
-	b.turn_limit = int(b.scenario["turn_limit"]) + int(mods.get("turns", 0))
+	b.turn_limit = int(b.scenario["turn_limit"]) + int(mods.get("turns", 0)) + (int(b.db.battle.get("boss_extra_turns", 0)) if str(mods.get("enemy_tier", "")) == "boss" else 0)
 	b.opening = []
 	if ambush and mods.get("no_ambush", 0) > 0:
 		b.opening.append("锦帆铃叮当一响——识破了埋伏！")

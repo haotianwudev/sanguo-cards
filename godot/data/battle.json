@@ -11,7 +11,7 @@
     "_event_sources": "？ 格先按这几个权重抽「从哪个池子出」，再在那个池子里随机抽一个还没遇到过的事件：chapter = 只属于这一章的事件（scope 是章节 id），route = 这条线的事件（scope 是 north / south），universal = 两线公共事件。某个池子空了（或都遇到过了）就从剩下的里按权重抽。",
     "event_sources": {"chapter": 4, "route": 3, "universal": 3},
     "_feel": "战斗手感（双方同时生效）：attack_mult 乘所有人的攻击，hp_mult 乘所有人的血量；两个乘起来是 1.0 时双方强度对比不变，但打得更快、更起伏（单次伤害占血量的比例变大）",
-    "attack_mult": 1.1,
+    "attack_mult": 1.21,
     "hp_mult": 0.9,
     "_crit": "暴击：每次造成伤害各自掷一次——我方每一击 player_chance 几率造成 player_mult 倍伤害，敌人每一击 enemy_chance（按关卡档位 normal / elite / boss / lose=必败）几率 enemy_mult 倍；宝物 mods.crit / mods.crit_mult 加在我方上。想更随机就加大几率或倍数",
     "crit": {"player_chance": 0.05, "player_mult": 1.6, "enemy_chance": {"normal": 0.05, "elite": 0.10, "boss": 0.20, "lose": 0.20}, "enemy_mult": 1.5},
@@ -26,7 +26,7 @@
       "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},
       "chapter": {},
       "_route": "同一章里南 / 北线各自的强度系数（体力 × 系数，攻击 × 其平方根），只有第一章（prologue）用：两条线共用一章，但队伍不同（北线有赵云、郭嘉），用它把两条线的机器人胜率都调到 60% 左右",
-      "route": {"prologue": {"south": 1.04, "north": 1.5}}
+      "route": {"prologue": {"south": 1.32, "north": 1.75}}
     },
     "_unit": "卡面数字就是战斗数字。敌人表里的 hp / at 还是旧量级，进战斗时 hp ÷ unit.hp、at ÷ unit.at；每一次伤害再乘 damage_mult（= unit.at ÷ unit.hp），所以双方强度对比与旧版一致。",
     "unit": {"hp": 9.0, "at": 1.4},
@@ -51,7 +51,9 @@
     "defend_ap": 2,
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
-    "enemy_hp_mult": 1.55,
+    "enemy_hp_mult": 1.395,
+    "_boss_extra_turns": "首领战（battle.enemy_tier = boss）的回合上限再加这么多：首领血厚，原来的回合数常常差一点点打不死",
+    "boss_extra_turns": 2,
     "_enemy_from_card": "敌人的体力 / 攻击 = 它那张卡的卡面数字 × 这两个换算（旧敌人表的量级）。强度再乘 scaling：关卡（章节 + 章内位置）和档位（普通 / 精英 / 首领）。没有卡的敌人（野猪、老虎）在 enemies.json 里自己写 hp / at",
     "enemy_from_card": {"hp": 150, "at": 3.5},
     "_lord_member_mult": "主公队的成员（亲卫、丫鬟绣娘这类 troop 为 lord 的卡）按这个比例计入主公队的体力 / 攻击",

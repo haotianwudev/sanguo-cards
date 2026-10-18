@@ -1753,3 +1753,4 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
 
 
+
