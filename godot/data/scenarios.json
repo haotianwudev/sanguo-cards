@@ -175,12 +175,6 @@
       "turn_limit": 6,
       "enemy": "boar"
     },
-    "jz_night_raid": {
-          "name": "粮仓夜袭 · 郭图家丁",
-          "turn_limit": 5,
-          "enemy": "guotu_jiading",
-          "art": "jz_county_fight"
-    },
     "jz_county_fight": {
       "name": "州衙 · 拔刀相助",
       "turn_limit": 5,
