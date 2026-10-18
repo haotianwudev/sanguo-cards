@@ -624,7 +624,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = true
 	_apply_cg_mode()
 	var raw_lines: Array = ev.get("text", s["text"])
-	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle"] \
+	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover"] \
 		or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()))
 	_dlg_face = null
 	if talking:  # a face for whoever is speaking, changed line by line
