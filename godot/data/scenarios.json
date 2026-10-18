@@ -1147,6 +1147,26 @@
     "jx_shaoka": {"name": "南下官道·荆州哨卡", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
     "jx_menjin": {"name": "襄阳北门·盘查", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
     "jx_xunluo": {"name": "襄阳街头·蔡府巡卒", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
-    "jx_yexi": {"name": "襄阳城外·蔡府部曲", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"}
+    "jx_yexi": {"name": "襄阳城外·蔡府部曲", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
+    "n10_wei_qingzhou": {"name": "白马津·魏军青州老兵", "turn_limit": 6, "enemy": "n10_wei_qingzhou", "art": "n8_qingzhou"},
+    "n10_hanhao": {"name": "延津·韩浩", "turn_limit": 6, "enemy": "n10_hanhao"},
+    "n10_xiahoudun": {"name": "官渡·夏侯惇", "turn_limit": 10, "enemy": "n10_xiahoudun"},
+    "n10_wei_tuntian": {"name": "许县外·魏军屯田客", "turn_limit": 6, "enemy": "n10_wei_tuntian", "art": "n8_qingzhou"},
+    "n10_wei_huwei": {"name": "许都北门·魏军虎卫军", "turn_limit": 6, "enemy": "n10_wei_huwei", "art": "m11_wei_huwei"},
+    "n10_xuchu": {"name": "许都城下·许褚", "turn_limit": 10, "enemy": "n10_xuchu"},
+    "n10_yujin": {"name": "许都内城·于禁", "turn_limit": 12, "enemy": "n10_yujin"},
+    "n10_yuejin": {"name": "中牟·乐进", "turn_limit": 6, "enemy": "n10_yuejin"},
+    "n10_lidian": {"name": "荥阳·李典", "turn_limit": 6, "enemy": "n10_lidian"},
+    "n10_caoren": {"name": "荥阳防线·曹仁", "turn_limit": 10, "enemy": "n10_caoren"},
+    "n10_wei_pili": {"name": "虎牢关外·魏军霹雳车营", "turn_limit": 6, "enemy": "n10_wei_pili", "art": "n8_pili"},
+    "n10_bingzhou_nu": {"name": "虎牢关墙·并州强弩手", "turn_limit": 6, "enemy": "n10_bingzhou_nu", "art": "n8_langqi"},
+    "n10_hulao_lvbu": {"name": "虎牢关·吕布", "turn_limit": 12, "enemy": "n10_hulao_lvbu", "art": "n10_hulao"},
+    "n10_wei_xunhe": {"name": "洛水浅滩·魏军巡河卒", "turn_limit": 6, "enemy": "n10_wei_xunhe", "art": "n10_luoshui_nu"},
+    "n10_b_luoshui": {"name": "洛水伏阵·曹操", "turn_limit": 10, "enemy": "n10_b_luoshui", "art": "n10_luoshui_nu"},
+    "n10_wei_qingzhou_d": {"name": "洛口水栅·魏军青州老兵", "turn_limit": 6, "enemy": "n10_wei_qingzhou_d", "art": "n8_qingzhou"},
+    "n10_g_caohong": {"name": "巩县渡口·曹洪", "turn_limit": 10, "enemy": "n10_g_caohong", "art": "n10_g_dukou"},
+    "n10_bingzhou_lang": {"name": "旋门道·并州狼骑", "turn_limit": 6, "enemy": "n10_bingzhou_lang", "art": "n8_langqi"},
+    "n10_wei_hubao": {"name": "虎牢西门·魏军虎豹骑", "turn_limit": 6, "enemy": "n10_wei_hubao", "art": "n8_hubao"},
+    "n10_g_lvbu": {"name": "虎牢关下·吕布", "turn_limit": 12, "enemy": "n10_g_lvbu", "art": "n10_hulao"}
   }
 }

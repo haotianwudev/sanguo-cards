@@ -1508,3 +1508,60 @@ func test_north_chapter9_pang_de_brings_the_ma_family_across() -> void:
 		check(s.run_records.has("北线：西凉归附") and s.run_records.has("北线：北方一统"))
 		finish(q, s)
 
+
+# ---- 北线第十章 · 再战虎牢 --------------------------------------------------------------
+
+const E16_N := "结局十六 · 洛殇"
+
+
+func sanfang_save(flags := []) -> SaveData:
+	var s := xiliang_save([E17, "北线：不害马家", "北线：西凉归附", "北线：北方一统"] + flags)
+	s.quests_cleared.append("xiliang")
+	for c in ["machao", "mayunlu", "madai", "pangde"]:
+		s.grant_card(c)
+	return s
+
+
+func test_north_chapter10_follows_xiliang() -> void:
+	check_eq(Quests.current_quest(sanfang_save())["id"], "sanfang", "北线：北方一统 → 第十章 · 再战虎牢")
+
+
+func test_north_chapter10_without_pang_tong_zhen_mi_falls_on_the_luo_river() -> void:
+	for fork in [[], ["n10_a_m1", "n10_b_m1", "n10_c_m1", "n10_d_m1", "n10_bw_t1"]]:
+		var s := sanfang_save()
+		var q := quest_by_id("sanfang")
+		var p := walk(q, s, fork)
+		for sid in ["n10_start", "n10_xiahoudun", "n10_qiandu", "n10_xuchu", "n10_yujin", "n10_xudu", "n10_pangtong", "n10_pt_houqin",
+				"n10_xiuzheng", "n10_caoren", "n10_hulao", "n10_shouzu", "n10_b_plan", "n10_b_luoshui", "n10_b_ambush", "n10_b_end"]:
+			check(p.has(sid), "庞统管后勤 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n10_pt_take", "n10_g_plan", "n10_g_dukou", "n10_g_lvbu", "n10_g_end"]:
+			check(not p.has(sid), "庞统管后勤 never reaches " + sid)
+		check(s.has_card("yujin") and s.has_card("zhenmi"), "于禁, 甄宓 join")
+		check(not s.has_card("pangtong"), "庞统 is sent to logistics")
+		check(s.run_records.has("庞统：管后勤"))
+		finish(q, s)
+		check(s.flags.has(E16_N))
+		check(Quests.current_quest(s) == null, "the story stops at 结局十六 · 洛殇")
+	var sq: Dictionary = quest_by_id("sanfang")["squares"]
+	check(Quests.option_locked(sanfang_save(), sq["n10_pangtong"]["choose"][1]), "留任军师，向他问计 is shut before 结局十六")
+	check_eq(sq["n10_hulao"]["lose_goto"], "n10_shouzu", "win or lose at 虎牢关, the army stalls")
+	check_eq(sq["n10_b_luoshui"]["lose_goto"], "n10_b_ambush", "win or lose on the Luo River, 洛殇")
+
+
+func test_north_chapter10_with_pang_tong_the_fire_ships_take_hulao_pass() -> void:
+	for fork in [[], ["n10_a_m1", "n10_b_m1", "n10_c_m1", "n10_d_m1", "n10_g_e_t1", "n10_g_f_m1"]]:
+		var s := sanfang_save([E16_N])
+		var q := quest_by_id("sanfang")
+		var p := walk(q, s, fork)
+		for sid in ["n10_start", "n10_xiahoudun", "n10_qiandu", "n10_xuchu", "n10_yujin", "n10_xudu", "n10_pangtong", "n10_pt_take",
+				"n10_xiuzheng", "n10_caoren", "n10_hulao", "n10_shouzu", "n10_g_plan", "n10_g_dukou", "n10_g_shangchuan", "n10_g_lvbu", "n10_g_end"]:
+			check(p.has(sid), "庞统入队 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n10_pt_houqin", "n10_b_plan", "n10_b_luoshui", "n10_b_ambush", "n10_b_end"]:
+			check(not p.has(sid), "庞统入队 never reaches " + sid)
+		for c in ["yujin", "pangtong", "zhenmi"]:
+			check(s.has_card(c), c + " joins")
+		check(s.run_records.has("庞统：入队") and s.run_records.has("北线：破虎牢"))
+		finish(q, s)
+
+
+

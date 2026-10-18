@@ -1453,7 +1453,7 @@
       "skills": [
         "lianhuan"
       ],
-      "scope": "south"
+      "scope": "north"
     },
     "daqiao": {
       "name": "大乔",
@@ -3792,6 +3792,15 @@
       "at": 60,
       "pool": false,
       "scope": "south"
+    },
+    "hanhao": {
+      "name": "韩浩",
+      "rarity": "R",
+      "troop": "logistics",
+      "hp": 70,
+      "at": 62,
+      "pool": false,
+      "scope": "north"
     },
     "tianyu": {
       "name": "田豫",

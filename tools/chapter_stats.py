@@ -148,7 +148,7 @@ CHAPTERS = [
     ("第七章", "jiangdong", "yecheng"),
     ("第八章", "menghu", "longhu"),
     ("第九章", "tianfu", "xiliang"),
-    ("第十章", "guanzhong", None),
+    ("第十章", "guanzhong", "sanfang"),
     ("第十一章", "luoyang_s", None),
 ]
 ROW_NAMES = {"prologue_s": "富春", "prologue_n": "冀州风云"}
