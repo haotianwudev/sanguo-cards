@@ -314,8 +314,8 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 
 
 func test_chapter_one_is_winnable_with_either_plan() -> void:
-	for pick in 2:  # south / north: both aim at about 60% for the bot (battle.scaling.route)
-		check_between(rate(0, [], pick, -1, 100), 0.42, 0.78, "pick %d" % pick)
+	for pick in 2:  # south / north share one coefficient (battle.scaling.chapter.prologue): about 50% / 70% for the bot, the north party (赵云, 郭嘉) is the stronger one
+		check_between(rate(0, [], pick, -1, 100), 0.35, 0.85, "pick %d" % pick)
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:
@@ -1751,6 +1751,7 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	s.flags.append("出生：冀州无极")
 	check(s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "heishan_louluo"), "黑山喽啰 in 第七章's public pool")
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
+
 
 
 

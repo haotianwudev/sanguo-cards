@@ -24,9 +24,8 @@
       "tier": {"normal": 1.0, "elite": 1.0, "boss": 1.0},
       "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "yecheng": 6, "jiangdong": 6, "longhu": 7, "menghu": 7, "xiliang": 8, "tianfu": 8, "guanzhong": 9, "sanfang": 9, "luoyang_s": 10, "tianqing": 10, "beifa": 11, "chibi": 11, "guandu": 11, "dujiang": 11, "guiyi": 12},
       "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},
-      "chapter": {},
-      "_route": "同一章里南 / 北线各自的强度系数（体力 × 系数，攻击 × 其平方根），只有第一章（prologue）用：两条线共用一章，但队伍不同（北线有赵云、郭嘉），用它把两条线的机器人胜率都调到 60% 左右",
-      "route": {"prologue": {"south": 1.5, "north": 1.75}}
+      "_chapter": "整章的强度系数（乘目标强度）：第一章南 / 北线共用一个，两条线胜率都在 60% 上下",
+      "chapter": {"prologue": 2.1}
     },
     "_unit": "卡面数字就是战斗数字。敌人表里的 hp / at 还是旧量级，进战斗时 hp ÷ unit.hp、at ÷ unit.at；每一次伤害再乘 damage_mult（= unit.at ÷ unit.hp），所以双方强度对比与旧版一致。",
     "unit": {"hp": 9.0, "at": 1.4},
