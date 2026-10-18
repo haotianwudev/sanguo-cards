@@ -317,7 +317,8 @@ static func enemy_scales(save: SaveData) -> Array:
 			return [lc, sqrt(lc)]
 		var c := float(coef.get(tier, 1.0))
 		var base := _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"])))
-		return [base * c, base * sqrt(c)]
+		var rf := float(db.battle.get("scaling", {}).get("route", {}).get(q["id"], {}).get("north" if save.is_north() else "south", 1.0))  # one chapter, two routes (第一章): each route's own level
+		return [base * c * rf, base * sqrt(c) * sqrt(rf)]
 	return [1.0, 1.0]
 
 

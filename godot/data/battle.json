@@ -24,7 +24,9 @@
       "tier": {"normal": 1.0, "elite": 1.0, "boss": 1.0},
       "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "yecheng": 6, "jiangdong": 6, "longhu": 7, "menghu": 7, "xiliang": 8, "tianfu": 8, "guanzhong": 9, "sanfang": 9, "luoyang_s": 10, "tianqing": 10, "beifa": 11, "chibi": 11, "guandu": 11, "dujiang": 11, "guiyi": 12},
       "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},
-      "chapter": {}
+      "chapter": {},
+      "_route": "同一章里南 / 北线各自的强度系数（体力 × 系数，攻击 × 其平方根），只有第一章（prologue）用：两条线共用一章，但队伍不同（北线有赵云、郭嘉），用它把两条线的机器人胜率都调到 60% 左右",
+      "route": {"prologue": {"south": 1.04, "north": 1.5}}
     },
     "_unit": "卡面数字就是战斗数字。敌人表里的 hp / at 还是旧量级，进战斗时 hp ÷ unit.hp、at ÷ unit.at；每一次伤害再乘 damage_mult（= unit.at ÷ unit.hp），所以双方强度对比与旧版一致。",
     "unit": {"hp": 9.0, "at": 1.4},
@@ -50,6 +52,8 @@
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
     "enemy_hp_mult": 1.55,
+    "_enemy_from_card": "敌人的体力 / 攻击 = 它那张卡的卡面数字 × 这两个换算（旧敌人表的量级）。强度再乘 scaling：关卡（章节 + 章内位置）和档位（普通 / 精英 / 首领）。没有卡的敌人（野猪、老虎）在 enemies.json 里自己写 hp / at",
+    "enemy_from_card": {"hp": 150, "at": 3.5},
     "_lord_member_mult": "主公队的成员（亲卫、丫鬟绣娘这类 troop 为 lord 的卡）按这个比例计入主公队的体力 / 攻击",
     "lord_member_mult": 0.6,
     "_ramp": "难度：每通关一章，之后的敌人体力和攻击 +chapter_step；所选难度等级每高一级再 +ending_step（等级 1 不加）。难度等级靠解锁结局升：南 / 北线分开算，这条线每解锁一个新结局，开局时可选的最高难度 +1；可以选低于最高的，但结局解锁的后续剧情只在难度 ≥ 该结局的 level 时才触发（选低了就会重新走到同样的 badend）",

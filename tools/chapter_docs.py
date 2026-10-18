@@ -145,7 +145,10 @@ def chapter_doc(key, q, xr, route):
         for m in e.get("moves", []):
             tags = [t for t in ("confuse", "ap_drain", "burn_party", "heal", "rage", "charge", "pierce") if t in m]
             mv.append(m["name"] + ("（%s）" % "、".join(tags) if tags else ""))
-        out.append("- **%s** `%s`：血 %s / 攻 %s / 行动 %s；%s" % (e.get("name"), en, e.get("hp"), e.get("at"), e.get("actions"), "、".join(mv)))
+        cd = cards.get(e.get("card", ""))  # an enemy with a card takes its hp / at from the card face (battle.enemy_from_card); hand-tuned ones write their own
+        hp = e["hp"] if "hp" in e or not cd else "卡面%s" % cd["hp"]
+        at = e["at"] if "at" in e or not cd else "卡面%s" % cd["at"]
+        out.append("- **%s** `%s`：血 %s / 攻 %s / 行动 %s；%s" % (e.get("name"), en, hp, at, e.get("actions"), "、".join(mv)))
     out.append("")
     # ---- events ----
     own = {eid: ev for eid, ev in story["events"].items() if ev.get("scope") == q["id"]}

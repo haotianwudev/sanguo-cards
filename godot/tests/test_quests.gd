@@ -290,7 +290,7 @@ func play_quest(q: Dictionary, s: SaveData, pick: int, fork: int, seed_value: in
 func fight(q: Dictionary, s: SaveData, r: RandomNumberGenerator) -> bool:
 	var f := Quests.battle_here(q, s)
 	s.party = s.auto_party()
-	var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"])
+	var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"], Quests.mods(s))
 	if bot_fight(b) != "win":
 		return false
 	var carry := b.carry_out()
@@ -314,8 +314,8 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 
 
 func test_chapter_one_is_winnable_with_either_plan() -> void:
-	for pick in 2:
-		check_between(rate(0, [], pick), 0.12, 1.01, "pick %d" % pick)  # an easy first chapter is fine
+	for pick in 2:  # south / north: both aim at about 60% for the bot (battle.scaling.route)
+		check_between(rate(0, [], pick, -1, 100), 0.42, 0.78, "pick %d" % pick)
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:
@@ -1751,4 +1751,5 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	s.flags.append("出生：冀州无极")
 	check(s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "heishan_louluo"), "黑山喽啰 in 第七章's public pool")
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
+
 

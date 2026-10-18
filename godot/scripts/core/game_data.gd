@@ -106,7 +106,11 @@ func _load(dir: String) -> void:
 			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "veteran": c.get("veteran", false), "faction": c.get("faction", ""), "public": c.get("public", false), "beast": c.get("beast", false), "first_win": c.get("first_win", false)}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
-		enemies[eid] = {"id": eid, "name": e["name"], "hp": int(e["hp"]), "at": int(e["at"]),
+		var foe_card: Dictionary = cards.get(str(e.get("card", "")), {}) if not e.has("hp") else {}  # its stats are its card's face numbers (battle.enemy_from_card converts them); an enemy that writes its own hp / at (野猪, 吕布 and the other hand-tuned showpieces) keeps them
+		var fc: Dictionary = battle.get("enemy_from_card", {"hp": 1.0, "at": 1.0})
+		enemies[eid] = {"id": eid, "name": e["name"],
+			"hp": int(round(float(foe_card["hp"]) * float(fc["hp"]))) if not foe_card.is_empty() else int(e["hp"]),
+			"at": int(round(float(foe_card["at"]) * float(fc["at"]))) if not foe_card.is_empty() else int(e["at"]),
 			"actions": int(e["actions"]), "moves": e["moves"],
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)),
 			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "card_public": e.get("card_public", false)}
