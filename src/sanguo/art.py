@@ -221,8 +221,13 @@ def write_needs(pics: Path = PICS) -> None:
                     for o in ev.get("options", ev.get("choose", [])):
                         fights_here += [e["battle"] for e in o.get("effects", []) if "battle" in e]
         bg_rows = []
-        for f in dict.fromkeys(cards["scenarios"][x].get("art", x) for x in fights_here):
-            sc = cards["scenarios"][f]
+        seen_bg: set[str] = set()
+        for x in fights_here:
+            f = cards["scenarios"][x].get("art", x)
+            if f in seen_bg:
+                continue
+            seen_bg.add(f)
+            sc = cards["scenarios"].get(f, cards["scenarios"][x])
             st = "✅ 已有" if f in battles_cfg else "⬜ 缺"
             bg_rows.append(f"| {st} | `{f}` | {sc['name']}（{cards['enemies'][sc['enemy']]['name']}） |")
         art_cfg = json.loads((pics / "art.json").read_text("utf-8"))
