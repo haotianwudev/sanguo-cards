@@ -2165,7 +2165,7 @@
     "lvbu": {
       "name": "吕布",
       "portrait": "lvbu",
-      "hp": 13500,
+      "hp": 16900,
       "at": 640,
       "actions": 3,
       "phys_resist": 0.2,
