@@ -138,6 +138,8 @@
         "hp": 0.05
       }
     },
+    "zhen_yulinjia": {"name": "甄父鱼鳞甲", "troop": "lord", "icon": "甲", "rarity": "story", "desc": "宓儿她爹留下的鱼鳞甲，张夫人亲手给你披上的。受到的伤害 -10%，体力 +5%", "mods": {"guard": 0.1, "hp": 0.05}},
+    "zhen_diaopi": {"name": "雪貂披风", "troop": "lord", "icon": "氅", "rarity": "story", "desc": "张夫人亲手系上的雪白貂皮披风，里子缝得比账本还密。攻击 +5%，受到的伤害 -5%", "mods": {"at": 0.05, "guard": 0.05}},
     "hupi": {
       "name": "虎皮披风",
       "troop": "lord",
