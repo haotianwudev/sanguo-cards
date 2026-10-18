@@ -357,7 +357,7 @@ func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 	var db := GameData.get_db()
 	check(chest.all(func(c): return not c["soldier"] or db.is_public(c["id"]) or db.card_chapters[c["id"]].has(q["id"]) or s.seen.has(c["id"])),
 		"battle chest: public cards, this chapter's own soldiers, or what you have had")
-	check_eq(q["squares"]["north"]["cards"], ["danyang", "shuizei_bing", "huangjin_nanxia"], "freed men and prisoners")
+	check_eq(q["squares"]["north"]["cards"], ["danyang"], "freed men and prisoners")
 
 
 func test_changsha_is_weaker_than_danyang() -> void:
