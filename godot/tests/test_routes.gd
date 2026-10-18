@@ -1585,7 +1585,7 @@ func test_north_chapter10_with_pang_tong_leads_on_to_luoyang() -> void:
 	check_eq(Quests.current_quest(s)["id"], "tianqing", "北线：破虎牢 → 第十一章 · 洛阳天倾")
 
 
-func test_north_chapter11_handing_over_the_seal_ends_at_the_candle() -> void:
+func test_north_chapter11_handing_over_the_seal_marches_south_with_zhuge_liang() -> void:
 	for fork in [[], ["n11_a_m1", "n11_b_m1", "n11_c_m1", "n11_ad_m1", "n11_ae_m1"]]:
 		var s := tianqing_save()
 		var q := quest_by_id("tianqing")
@@ -1595,11 +1595,10 @@ func test_north_chapter11_handing_over_the_seal_ends_at_the_candle() -> void:
 			check(p.has(sid), "交印 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n11_g_kou", "n11_gd_a1", "n11_g_lvbu", "n11_g_tuishou", "n11_g_guanzhang", "n11_g_end"]:
 			check(not p.has(sid), "交印 never reaches " + sid)
-		check(s.run_records.has("诸葛亮：拜军师"))
+		check(s.run_records.has("诸葛亮：拜军师") and s.run_records.has("北线：随诸葛南征"))
 		check(not s.has_card("guanyu"), "关羽 does not join when 诸葛亮 holds the seal")
 		finish(q, s)
-		check(s.flags.has(E18_N))
-		check(Quests.current_quest(s) == null, "the story stops at 结局十八 · 烛灭")
+		check(not s.flags.has(E18_N), "结局十八 · 烛灭 now comes in the final chapter")
 	var sq: Dictionary = quest_by_id("tianqing")["squares"]
 	check(Quests.option_locked(tianqing_save(), sq["n11_choose"]["choose"][1]), "先别交 is shut before 结局十八")
 	check_eq(sq["n11_dianwei_du"]["lose_goto"], "n11_gehe", "win or lose, 典韦 holds the ferry the first time")
