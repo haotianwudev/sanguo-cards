@@ -3860,79 +3860,6 @@
       ],
       "card": "jiling"
     },
-    "bw_xiahoudun": {
-      "name": "比武·夏侯惇",
-      "portrait": "xiahoudun",
-      "hp": 20000,
-      "at": 430,
-      "actions": 2,
-      "phys_resist": 0.15,
-      "moves": [
-        {
-          "name": "长枪突刺",
-          "power": 1.0,
-          "weight": 4
-        },
-        {
-          "name": "怒目",
-          "power": 0.6,
-          "weight": 1,
-          "confuse": 0.4
-        },
-        {
-          "name": "回马枪·蓄力",
-          "power": 0,
-          "weight": 1,
-          "charge": "回马枪"
-        },
-        {
-          "name": "回马枪",
-          "power": 2.3,
-          "weight": 0,
-          "pierce": true
-        }
-      ],
-      "card": "xiahoudun"
-    },
-    "bw_zhangfei": {
-      "name": "比武·张飞",
-      "portrait": "zhangfei",
-      "hp": 21000,
-      "at": 460,
-      "actions": 2,
-      "moves": [
-        {
-          "name": "丈八蛇矛",
-          "power": 1.0,
-          "weight": 3
-        },
-        {
-          "name": "燕人一声吼",
-          "power": 0.6,
-          "weight": 1,
-          "confuse": 0.5
-        },
-        {
-          "name": "连刺",
-          "power": 1.5,
-          "weight": 1
-        },
-        {
-          "name": "蛇矛·蓄力",
-          "power": 0,
-          "weight": 1,
-          "charge": "万人敌"
-        },
-        {
-          "name": "万人敌",
-          "power": 2.5,
-          "weight": 0,
-          "pierce": true
-        }
-      ],
-      "card": "zhangfei",
-      "card_public": true
-    },
     "bw_guanyu": {
       "name": "比武·关羽",
       "portrait": "guanyu",
@@ -4900,6 +4827,8 @@
     "n6_zhangxun": {"name": "仲氏大将军·张勋", "portrait": "zhangxun", "hp": 19000, "at": 410, "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "大将军令", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "金甲", "power": 0, "weight": 1, "heal": 0.05}, {"name": "冲阵", "power": 1.4, "weight": 1}], "card": "zhangxun"},
     "n6_leibo": {"name": "仲氏将军·雷薄", "portrait": "leibo", "hp": 18000, "at": 420, "actions": 2, "moves": [{"name": "大斧", "power": 1.0, "weight": 3}, {"name": "劈山", "power": 1.5, "weight": 1}, {"name": "不耐烦", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "要喝酒", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "leibo"},
     "n9_yanxing": {"name": "韩遂之婿·阎行", "portrait": "yanxing", "hp": 26000, "at": 470, "actions": 2, "moves": [{"name": "长矛", "power": 1.0, "weight": 3}, {"name": "刺颈", "power": 1.6, "weight": 1}, {"name": "军报", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "狼骑合围", "power": 1.2, "weight": 1}], "card": "yanxing"},
+    "bw_xuchu": {"name": "比武·许褚", "portrait": "xuchu", "hp": 23000, "at": 480, "actions": 2, "phys_resist": 0.2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "裸衣", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "虎痴扑击", "power": 1.5, "weight": 1}, {"name": "一把抱住", "power": 0.5, "weight": 1, "ap_drain": 1}], "card": "xuchu", "card_public": true},
+    "bw_dianwei": {"name": "比武·典韦", "portrait": "dianwei", "hp": 22000, "at": 470, "actions": 2, "phys_resist": 0.15, "moves": [{"name": "双铁戟", "power": 1.0, "weight": 3}, {"name": "掷戟", "power": 1.4, "weight": 1}, {"name": "虎吼", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "古之恶来·蓄力", "power": 0, "weight": 1, "charge": "恶来"}, {"name": "恶来", "power": 2.4, "weight": 0, "pierce": true}], "card": "dianwei", "card_public": true},
     "n6_chenlan": {"name": "仲氏宫门·陈兰", "portrait": "chenlan", "hp": 19500, "at": 410, "actions": 2, "phys_resist": 0.15, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "禁军结阵", "power": 0, "weight": 1, "heal": 0.05}, {"name": "宫在大仲在", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "死守", "power": 1.3, "weight": 1}], "card": "chenlan"},
     "n5_taishan": {"name": "泰山贼", "portrait": "shanzei_bing", "hp": 9000, "at": 300, "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.06}], "card": "shanzei_bing"},
     "n5_changxi": {"name": "泰山贼·昌豨", "portrait": "shanzei_bing", "hp": 15000, "at": 360, "actions": 2, "moves": [{"name": "鬼头刀", "power": 1.0, "weight": 3}, {"name": "山口滚石", "power": 1.3, "weight": 1}, {"name": "泰山规矩", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "见好就收", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}], "card": "shanzei_bing"},
