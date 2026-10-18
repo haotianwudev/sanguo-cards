@@ -147,7 +147,7 @@ func _load(dir: String) -> void:
 			var s: Dictionary = q["squares"][sq_id]
 			squares[sq_id] = {"id": sq_id, "x": int(s["x"]), "y": int(s["y"]), "type": s["type"],
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
-				"cards": s.get("cards", []), "relics": s.get("relics", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
+				"cards": s.get("cards", []), "cards_public": s.get("cards_public", false), "relics": s.get("relics", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
 				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""), "beatable": s.get("beatable", false),
 				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
@@ -182,7 +182,8 @@ func _load(dir: String) -> void:
 func _index_card_chapters() -> void:
 	## a card is chapter-specific when a chapter hands it out: a square's `cards` / a choice's `card`, a quest's 招贤 list, or the
 	## `card` of an enemy fought on one of its squares (unless that enemy says `card_public`: a famous general met as a sparring
-	## opponent — 比武 关羽 / 张飞 — drops his own card but stays in both routes' public pool). Everything else is 公共.
+	## opponent — 比武 关羽 / 张飞 — drops his own card but stays in both routes' public pool; likewise a square with `cards_public`).
+	## Everything else is 公共.
 	card_chapters = {}
 	var add := func(cid: String, qid: String):
 		if cid != "" and cards.has(cid):
@@ -197,8 +198,9 @@ func _index_card_chapters() -> void:
 			for c in o["recruit_pool"]:
 				add.call(c, q["id"])
 		for s in q["squares"].values():
-			for c in s["cards"]:
-				add.call(c, q["id"])
+			if not s.get("cards_public", false):  # 关张来投：名将入队，但两线的公共池里照样有
+				for c in s["cards"]:
+					add.call(c, q["id"])
 			for o in s["choose"]:
 				add.call(o["card"], q["id"])
 			if s["type"] == "battle" and scenarios.has(s["battle"]):
