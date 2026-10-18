@@ -843,6 +843,7 @@ func _dialog_show() -> void:
 			Kit.focus(b)
 			break
 	_update_tools()
+	_apply_dlg_size()  # the new line may need a taller (or shorter) box
 
 
 func _dialog_skip() -> void:
@@ -864,6 +865,7 @@ func _dialog_skip() -> void:
 	_show_buttons(_dlg_buttons, true)
 	_dlg_i = -1
 	_update_tools()
+	_apply_dlg_size()
 
 
 func _on_story_click(e: InputEvent) -> void:
@@ -938,6 +940,8 @@ func _apply_dlg_size() -> void:
 		_dlg_face.custom_minimum_size = Vector2.ONE * float(DLG_FACE[m])
 	if is_instance_valid(_sheet_buttons):
 		_options_room(m == "auto" or _sheet_buttons.modulate.a > 0.5)
+	if is_instance_valid(_dlg_text):  # 自动 = as tall as the line needs (else a long line is cut off); 中 / 小 keep their fixed height
+		_dlg_text.fit_content = m == "auto"
 	_fit_sheet()
 	_fit_sheet.call_deferred()  # again once the containers have taken the new minimum sizes
 
