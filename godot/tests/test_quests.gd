@@ -953,7 +953,7 @@ func test_the_marriage_offer_is_dongbai_either_way() -> void:
 	var gone := SaveData.create()
 	Quests.record(gone, "董白：交给袁绍")
 	check(Quests.is_open(sq["heqin_g"], gone) and not Quests.is_open(sq["heqin_k"], gone), "she's dead")
-	check("董白" in sq["heqin_k"]["text"][1] and "董白" in sq["heqin_g"]["text"][1], "the bride offered is 董白")
+	check(sq["heqin_k"]["text"].any(func(l): return "董白" in str(l)) and sq["heqin_g"]["text"].any(func(l): return "董白" in str(l)), "the bride offered is 董白")
 
 
 func test_route_b_goes_on_to_luoyang_and_changan_inside_chapter_three() -> void:

@@ -509,6 +509,9 @@ static func speakers(lines: Array, cast: Array = []) -> Array:
 	var last := ""
 	for raw in lines:
 		var line := str(raw)
+		if line.begins_with("@_ "):  # "@_ " = narration that must show no face (even when its words read like someone speaking)
+			out.append("")
+			continue
 		if line.begins_with("@") and line.find(" ") > 0:
 			var tag := line.substr(1, line.find(" ") - 1)
 			out.append(tag)
