@@ -22,7 +22,7 @@
       "exponent": 1.5,
       "offset": 0.6,
       "tier": {"normal": 1.0, "elite": 1.0, "boss": 1.0},
-      "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "yecheng": 6, "jiangdong": 6, "longhu": 7, "menghu": 7, "xiliang": 8, "tianfu": 8, "guanzhong": 9, "sanfang": 9, "luoyang_s": 10},
+      "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "yecheng": 6, "jiangdong": 6, "longhu": 7, "menghu": 7, "xiliang": 8, "tianfu": 8, "guanzhong": 9, "sanfang": 9, "luoyang_s": 10, "tianqing": 10},
       "in_chapter": {"start": 0.85, "end": 1.2, "except": ["prologue"]},
       "chapter": {}
     },

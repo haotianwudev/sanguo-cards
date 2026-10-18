@@ -1564,4 +1564,55 @@ func test_north_chapter10_with_pang_tong_the_fire_ships_take_hulao_pass() -> voi
 		finish(q, s)
 
 
+# ---- 北线第十一章 · 洛阳天倾 ---------------------------------------------------------------
 
+const E18_N := "结局十八 · 烛灭"
+
+
+func tianqing_save(flags := []) -> SaveData:
+	var s := sanfang_save([E16_N, "北线：破虎牢"] + flags)
+	s.quests_cleared.append("sanfang")
+	for c in ["yujin", "pangtong", "zhenmi"]:
+		s.grant_card(c)
+	return s
+
+
+func test_north_chapter10_with_pang_tong_leads_on_to_luoyang() -> void:
+	var s := sanfang_save([E16_N])
+	var q := quest_by_id("sanfang")
+	walk(q, s, [])
+	finish(q, s)
+	check_eq(Quests.current_quest(s)["id"], "tianqing", "北线：破虎牢 → 第十一章 · 洛阳天倾")
+
+
+func test_north_chapter11_trusting_zhuge_liang_ends_at_the_candle() -> void:
+	for fork in [[], ["n11_a_m1", "n11_b_m1", "n11_c_m1", "n11_d_m1", "n11_e_m1"]]:
+		var s := tianqing_save()
+		var q := quest_by_id("tianqing")
+		var p := walk(q, s, fork)
+		for sid in ["n11_start", "n11_caoren", "n11_beidu", "n11_dianwei_du", "n11_gehe", "n11_qiye", "n11_kongming", "n11_dianwei", "n11_zhanli",
+				"n11_xiaoxi", "n11_beimen", "n11_jianlou", "n11_yinzhang", "n11_choose", "n11_zm_bai", "n11_zm_tang", "n11_zm_end"]:
+			check(p.has(sid), "交印 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n11_g_nushang", "n11_guanzhang", "n11_chushi", "n11_g_end"]:
+			check(not p.has(sid), "交印 never reaches " + sid)
+		check(s.run_records.has("诸葛亮：拜军师"))
+		finish(q, s)
+		check(s.flags.has(E18_N))
+		check(Quests.current_quest(s) == null, "the story stops at 结局十八 · 烛灭")
+	var sq: Dictionary = quest_by_id("tianqing")["squares"]
+	check(Quests.option_locked(tianqing_save(), sq["n11_choose"]["choose"][1]), "先别交 is shut before 结局十八")
+	check_eq(sq["n11_dianwei_du"]["lose_goto"], "n11_gehe", "win or lose, 典韦 holds the ferry the first time")
+	check_eq(sq["n11_dianwei"]["lose_goto"], "n11_zhanli", "win or lose, 典韦 dies standing")
+
+
+func test_north_chapter11_after_the_candle_the_fan_is_taken() -> void:
+	for fork in [[], ["n11_a_m1", "n11_b_m1", "n11_c_m1", "n11_d_m1", "n11_e_m1", "n11_f_m1"]]:
+		var s := tianqing_save([E18_N])
+		var q := quest_by_id("tianqing")
+		var p := walk(q, s, fork)
+		for sid in ["n11_yinzhang", "n11_choose", "n11_g_nushang", "n11_guanzhang", "n11_chushi", "n11_g_end"]:
+			check(p.has(sid), "扣下诸葛 passes %s (forks %s)" % [sid, str(fork)])
+		for sid in ["n11_zm_bai", "n11_zm_tang", "n11_zm_end"]:
+			check(not p.has(sid), "扣下诸葛 never reaches " + sid)
+		check(s.run_records.has("北线：扣下诸葛") and s.run_records.has("北线：识破诸葛"))
+		finish(q, s)

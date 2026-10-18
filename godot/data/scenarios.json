@@ -1167,6 +1167,22 @@
     "n10_g_caohong": {"name": "巩县渡口·曹洪", "turn_limit": 10, "enemy": "n10_g_caohong", "art": "n10_g_dukou"},
     "n10_bingzhou_lang": {"name": "旋门道·并州狼骑", "turn_limit": 6, "enemy": "n10_bingzhou_lang", "art": "n8_langqi"},
     "n10_wei_hubao": {"name": "虎牢西门·魏军虎豹骑", "turn_limit": 6, "enemy": "n10_wei_hubao", "art": "n8_hubao"},
-    "n10_g_lvbu": {"name": "虎牢关下·吕布", "turn_limit": 12, "enemy": "n10_g_lvbu", "art": "n10_hulao"}
+    "n10_g_lvbu": {"name": "虎牢关下·吕布", "turn_limit": 12, "enemy": "n10_g_lvbu", "art": "n10_hulao"},
+    "n11_qingzhou": {"name": "偃师道·魏军青州老兵", "turn_limit": 6, "enemy": "m11_wei_qingzhou", "art": "n8_qingzhou"},
+    "n11_pili": {"name": "首阳山下·魏军霹雳车营", "turn_limit": 6, "enemy": "m11_wei_pili", "art": "n8_pili"},
+    "n11_caoren": {"name": "首阳山·曹仁", "turn_limit": 10, "enemy": "n11_caoren"},
+    "n11_xunhe": {"name": "河阳·魏军巡河哨", "turn_limit": 6, "enemy": "n10_wei_xunhe", "art": "n10_luoshui_nu"},
+    "n11_tuntian": {"name": "温县·魏军屯田兵", "turn_limit": 6, "enemy": "n10_wei_tuntian", "art": "n8_qingzhou"},
+    "n11_dianwei_du": {"name": "孟津渡·典韦", "turn_limit": 10, "enemy": "n11_dianwei_du"},
+    "n11_huwei": {"name": "夜渡·魏军虎卫军", "turn_limit": 6, "enemy": "m11_wei_huwei", "art": "m11_wei_huwei"},
+    "n11_hubao": {"name": "孟津南岸·魏军虎豹骑", "turn_limit": 6, "enemy": "m11_hubao", "art": "n8_hubao"},
+    "n11_dianwei": {"name": "孟津·典韦", "turn_limit": 12, "enemy": "n11_dianwei"},
+    "n11_langqi": {"name": "邙山·并州狼骑", "turn_limit": 6, "enemy": "n10_bingzhou_lang", "art": "n8_langqi"},
+    "n11_liannu": {"name": "北门外·汉军连弩兵", "turn_limit": 6, "enemy": "m11_han_nu", "art": "m8_han_nu"},
+    "n11_bingzhou_nu": {"name": "宫城北门·并州强弩手", "turn_limit": 6, "enemy": "n10_bingzhou_nu", "art": "n8_langqi"},
+    "n11_baier": {"name": "南宫外·汉军白毦兵", "turn_limit": 6, "enemy": "m11_han_baier", "art": "m8_han_baier"},
+    "n11_menshen": {"name": "夜·后帐外·汉军卧龙门生", "turn_limit": 6, "enemy": "m11_han_menshen", "art": "m8_han_menshen"},
+    "n11_huqi": {"name": "夜·北宫·汉军虎骑", "turn_limit": 6, "enemy": "m11_han_tuqi", "art": "m8_han_tuqi"},
+    "n11_guanzhang": {"name": "后帐·关羽、张飞", "turn_limit": 12, "enemy": "n11_guanzhang"}
   }
 }
