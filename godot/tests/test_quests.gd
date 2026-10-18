@@ -846,8 +846,8 @@ func test_wu_gives_the_hero_sun_jians_old_armor() -> void:
 	Quests.begin(q, s)
 	s.square = "armor"
 	s.resolved = false
-	Quests.choose_event(q, s, rng(0), 0)
-	check(s.relics.has("jiujia") and s.run_records.has("穿上了孙坚的旧甲"))
+	Quests.resolve(q, s, rng(0))
+	check(s.relics.has("jiujia") and s.run_records.has("穿上了孙坚的旧甲"), "handed over directly, no choice to make")
 	for seed_value in 20:
 		check(not Quests.relic_offer(s, rng(seed_value)).has("jiujia"), "never offered at random")
 
