@@ -594,9 +594,9 @@ func demo(name: String) -> void:
 				# 定计 fork: the 赵云 branch by default; --at= on a 郭嘉-only square walks the 郭嘉 branch
 				var guo: bool = at in ["jz_fire", "jz_gj_back", "jz_rescue", "jz_reunite_g"]
 				var branch: Array = ["jz_fire", "jz_gj_back", "jz_rescue"] if guo else ["jz_zy_gate", "jz_zy_road", "jz_zy_altar"]
-				var path: Array = ["jz_ledger", "jz_road", "jz_county", "jz_help", "jz_guojia", "jz_integrity", "jz_relief", "jz_route"] \
-					+ route_branch + ["jz_zuoci", "jz_ambush", "jz_breakout", "jz_plan"] \
-					+ branch + ["jz_recover", "jz_boss", "jz_loot", "jz_reunite_g" if guo else "jz_reunite", "jz_almsgiving", "jz_training", "jz_night", "jz_end"]
+				var path: Array = ["jz_ledger", "jz_road", "jz_county", "jz_help", "jz_guojia", "jz_integrity", "jz_mystery2", "jz_relief", "jz_route"] \
+					+ route_branch + ["jz_zuoci", "jz_mystery3", "jz_ambush", "jz_breakout", "jz_plan"] \
+					+ branch + ["jz_recover", "jz_boss", "jz_loot", "jz_reunite_g" if guo else "jz_reunite", "jz_mystery4", "jz_almsgiving", "jz_recruit", "jz_training", "jz_night", "jz_end"]
 				for sid in path:
 					var pick: int = 0
 					if Quests.here(q, save)["type"] == "choose":
