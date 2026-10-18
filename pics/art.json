@@ -3051,6 +3051,213 @@
         0.22
       ],
       "head": 0.22
+    },
+    "banshun_man": {
+      "src": "source/soldiers/banshun_man.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "chengyu": {
+      "src": "source/generals/chengyu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "jushou": {
+      "src": "source/generals/jushou.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "shenpei": {
+      "src": "source/generals/shenpei.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "tianfeng": {
+      "src": "source/generals/tianfeng.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "tianyu": {
+      "src": "source/generals/tianyu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_hubao": {
+      "src": "source/soldiers/wei_hubao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_huwei": {
+      "src": "source/soldiers/wei_huwei.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_mojin": {
+      "src": "source/soldiers/wei_mojin.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_pili": {
+      "src": "source/soldiers/wei_pili.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_qingzhou": {
+      "src": "source/soldiers/wei_qingzhou.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_tuntian": {
+      "src": "source/soldiers/wei_tuntian.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wei_xiaoshi": {
+      "src": "source/soldiers/wei_xiaoshi.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wudou_guizu": {
+      "src": "source/soldiers/wudou_guizu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wudou_jijiu": {
+      "src": "source/soldiers/wudou_jijiu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yang_ang": {
+      "src": "source/generals/yang_ang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yanpu": {
+      "src": "source/generals/yanpu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yuantan": {
+      "src": "source/generals/yuantan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "qianzhao": {
+      "src": "source/generals/qianzhao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wangxiu": {
+      "src": "source/generals/wangxiu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "wuanguo": {
+      "src": "source/generals/wuanguo.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "xianyufu": {
+      "src": "source/generals/xianyufu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
+    },
+    "yanrou": {
+      "src": "source/generals/yanrou.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.22
+      ],
+      "head": 0.22
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -3121,6 +3328,26 @@
     },
     "tianfu": {
       "src": "source/map/tianfu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "guanzhong": {
+      "src": "source/map/guanzhong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "longhu": {
+      "src": "source/map/longhu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "luoyang_s": {
+      "src": "source/map/luoyang_s.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "xiliang": {
+      "src": "source/map/xiliang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "yecheng": {
+      "src": "source/map/yecheng.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -3755,6 +3982,290 @@
     },
     "m8_han_menshen": {
       "src": "source/battles/m8_han_menshen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_banshun": {
+      "src": "source/battles/m10_banshun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_banshun_hs": {
+      "src": "source/battles/m10_banshun_hs.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_feixiong": {
+      "src": "source/battles/m10_feixiong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_guizu": {
+      "src": "source/battles/m10_guizu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_guizu_mc": {
+      "src": "source/battles/m10_guizu_mc.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_guosi": {
+      "src": "source/battles/m10_guosi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_hubao": {
+      "src": "source/battles/m10_hubao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_huzhen": {
+      "src": "source/battles/m10_huzhen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_jijiu": {
+      "src": "source/battles/m10_jijiu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_lijue": {
+      "src": "source/battles/m10_lijue.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_scout": {
+      "src": "source/battles/m10_scout.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_wangping": {
+      "src": "source/battles/m10_wangping.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_xiahouyuan": {
+      "src": "source/battles/m10_xiahouyuan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_yangang": {
+      "src": "source/battles/m10_yangang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_youqi": {
+      "src": "source/battles/m10_youqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_zhangwei": {
+      "src": "source/battles/m10_zhangwei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_zhangxiu": {
+      "src": "source/battles/m10_zhangxiu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_zhugeliang": {
+      "src": "source/battles/m10_zhugeliang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m10_ziwu_exit": {
+      "src": "source/battles/m10_ziwu_exit.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_bazhen": {
+      "src": "source/battles/m11_bazhen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_bei_nu": {
+      "src": "source/battles/m11_bei_nu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_bei_tieqi": {
+      "src": "source/battles/m11_bei_tieqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_caoren": {
+      "src": "source/battles/m11_caoren.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_guanyu": {
+      "src": "source/battles/m11_guanyu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_liubei": {
+      "src": "source/battles/m11_liubei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_lvbu": {
+      "src": "source/battles/m11_lvbu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_taishici": {
+      "src": "source/battles/m11_taishici.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_wei_huwei": {
+      "src": "source/battles/m11_wei_huwei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_wei_pili": {
+      "src": "source/battles/m11_wei_pili.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_zhangfei": {
+      "src": "source/battles/m11_zhangfei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_zhangliao": {
+      "src": "source/battles/m11_zhangliao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "m11_zhaoyun": {
+      "src": "source/battles/m11_zhaoyun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_b_wenchou": {
+      "src": "source/battles/n7_b_wenchou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_fukou": {
+      "src": "source/battles/n7_fukou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_g_xinshi": {
+      "src": "source/battles/n7_g_xinshi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_g_zhanghe": {
+      "src": "source/battles/n7_g_zhanghe.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_gaolan": {
+      "src": "source/battles/n7_gaolan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_shenrong": {
+      "src": "source/battles/n7_shenrong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_wenchou": {
+      "src": "source/battles/n7_wenchou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_yanliang": {
+      "src": "source/battles/n7_yanliang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_zangba": {
+      "src": "source/battles/n7_zangba.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_b_chengyu": {
+      "src": "source/battles/n8_b_chengyu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_g_lvbu": {
+      "src": "source/battles/n8_g_lvbu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_g_machao": {
+      "src": "source/battles/n8_g_machao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_g_mayunlu": {
+      "src": "source/battles/n8_g_mayunlu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_g_xiahoudun": {
+      "src": "source/battles/n8_g_xiahoudun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_g_zangba": {
+      "src": "source/battles/n8_g_zangba.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_hubao": {
+      "src": "source/battles/n8_hubao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_langqi": {
+      "src": "source/battles/n8_langqi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_pili": {
+      "src": "source/battles/n8_pili.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_qingzhou": {
+      "src": "source/battles/n8_qingzhou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_shenpei": {
+      "src": "source/battles/n8_shenpei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_wuhuan": {
+      "src": "source/battles/n8_wuhuan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_yuantan": {
+      "src": "source/battles/n8_yuantan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_b_xiahoudun": {
+      "src": "source/battles/n9_b_xiahoudun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_g_gaogouli": {
+      "src": "source/battles/n9_g_gaogouli.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_g_gongsunkang": {
+      "src": "source/battles/n9_g_gongsunkang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_g_liucheng": {
+      "src": "source/battles/n9_g_liucheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_g_lvbu": {
+      "src": "source/battles/n9_g_lvbu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_g_tadun": {
+      "src": "source/battles/n9_g_tadun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_gaogouli_gong": {
+      "src": "source/battles/n9_gaogouli_gong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_liaodong": {
+      "src": "source/battles/n9_liaodong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_shenpei": {
+      "src": "source/battles/n9_shenpei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_yuantan": {
+      "src": "source/battles/n9_yuantan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n4_houcheng": {
+      "src": "source/battles/n4_houcheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n4_wuanguo": {
+      "src": "source/battles/n4_wuanguo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_yanxiao": {
+      "src": "source/battles/n5_yanxiao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_yanxiao_tou": {
+      "src": "source/battles/n5_yanxiao_tou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_chenlan": {
+      "src": "source/battles/n6_chenlan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_leibo": {
+      "src": "source/battles/n6_leibo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_zhangxun": {
+      "src": "source/battles/n6_zhangxun.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -5042,6 +5553,454 @@
     },
     "e_t9_shujin": {
       "src": "source/cg/e_t9_shujin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_canzhang": {
+      "src": "source/cg/c13_canzhang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_changan": {
+      "src": "source/cg/c13_changan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_chetui": {
+      "src": "source/cg/c13_chetui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_chuzheng": {
+      "src": "source/cg/c13_chuzheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_duanshui": {
+      "src": "source/cg/c13_duanshui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_jiuzhang": {
+      "src": "source/cg/c13_jiuzhang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_junyi": {
+      "src": "source/cg/c13_junyi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_junyi_f": {
+      "src": "source/cg/c13_junyi_f.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_lianying": {
+      "src": "source/cg/c13_lianying.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_liru": {
+      "src": "source/cg/c13_liru.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_xingye": {
+      "src": "source/cg/c13_xingye.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_yexiao": {
+      "src": "source/cg/c13_yexiao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_yushan": {
+      "src": "source/cg/c13_yushan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_zhandao": {
+      "src": "source/cg/c13_zhandao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_zhandaohuo": {
+      "src": "source/cg/c13_zhandaohuo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_zhanglu": {
+      "src": "source/cg/c13_zhanglu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_ziwu": {
+      "src": "source/cg/c13_ziwu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_beiwang": {
+      "src": "source/cg/c14_beiwang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_chengxia": {
+      "src": "source/cg/c14_chengxia.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_cicao": {
+      "src": "source/cg/c14_cicao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_dongchu": {
+      "src": "source/cg/c14_dongchu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_hebing": {
+      "src": "source/cg/c14_hebing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_huishi": {
+      "src": "source/cg/c14_huishi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_hujia": {
+      "src": "source/cg/c14_hujia.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_jianlou": {
+      "src": "source/cg/c14_jianlou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_nanyang": {
+      "src": "source/cg/c14_nanyang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_pingshou": {
+      "src": "source/cg/c14_pingshou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_qianggong": {
+      "src": "source/cg/c14_qianggong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_rucheng": {
+      "src": "source/cg/c14_rucheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_xiang": {
+      "src": "source/cg/c14_xiang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_xunyu": {
+      "src": "source/cg/c14_xunyu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_yingzhan": {
+      "src": "source/cg/c14_yingzhan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_yuanmen": {
+      "src": "source/cg/c14_yuanmen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_yulin": {
+      "src": "source/cg/c14_yulin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_yushui": {
+      "src": "source/cg/c14_yushui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_zhanlv": {
+      "src": "source/cg/c14_zhanlv.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_zhenqian": {
+      "src": "source/cg/c14_zhenqian.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c14_zhenyan": {
+      "src": "source/cg/c14_zhenyan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_flee": {
+      "src": "source/cg/c4_flee.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_lubu_rage": {
+      "src": "source/cg/c4_lubu_rage.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_lubu_start": {
+      "src": "source/cg/c4_lubu_start.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_seal": {
+      "src": "source/cg/c4_seal.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_wuanguo": {
+      "src": "source/cg/c4_wuanguo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c4_zj_room": {
+      "src": "source/cg/c4_zj_room.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_duanxian": {
+      "src": "source/cg/end_duanxian.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_kujing": {
+      "src": "source/cg/end_kujing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_suanjin": {
+      "src": "source/cg/end_suanjin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "end_yice": {
+      "src": "source/cg/end_yice.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_end": {
+      "src": "source/cg/n7_end.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_heibing": {
+      "src": "source/cg/n7_heibing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_jiyi": {
+      "src": "source/cg/n7_jiyi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_juedi": {
+      "src": "source/cg/n7_juedi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_kujing": {
+      "src": "source/cg/n7_kujing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_ouxue": {
+      "src": "source/cg/n7_ouxue.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_qijin": {
+      "src": "source/cg/n7_qijin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_qin": {
+      "src": "source/cg/n7_qin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_shishi": {
+      "src": "source/cg/n7_shishi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_wedding": {
+      "src": "source/cg/n7_wedding.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_wuji": {
+      "src": "source/cg/n7_wuji.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_xingyuan": {
+      "src": "source/cg/n7_xingyuan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_yijing": {
+      "src": "source/cg/n7_yijing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_yuye": {
+      "src": "source/cg/n7_yuye.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_b_xin": {
+      "src": "source/cg/n8_b_xin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_chusai": {
+      "src": "source/cg/n8_chusai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_dingbei": {
+      "src": "source/cg/n8_dingbei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_dumai": {
+      "src": "source/cg/n8_dumai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_end": {
+      "src": "source/cg/n8_end.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_jincheng": {
+      "src": "source/cg/n8_jincheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_liushi": {
+      "src": "source/cg/n8_liushi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_liushou": {
+      "src": "source/cg/n8_liushou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_liushou_t": {
+      "src": "source/cg/n8_liushou_t.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_ma": {
+      "src": "source/cg/n8_ma.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_shipo": {
+      "src": "source/cg/n8_shipo.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_start": {
+      "src": "source/cg/n8_start.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_tuijun": {
+      "src": "source/cg/n8_tuijun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_zhanlv": {
+      "src": "source/cg/n8_zhanlv.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_duanxian": {
+      "src": "source/cg/n9_duanxian.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_end": {
+      "src": "source/cg/n9_end.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_haikou": {
+      "src": "source/cg/n9_haikou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_jiuren": {
+      "src": "source/cg/n9_jiuren.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_liaoshui": {
+      "src": "source/cg/n9_liaoshui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_ludi": {
+      "src": "source/cg/n9_ludi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_lulong": {
+      "src": "source/cg/n9_lulong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_lunu": {
+      "src": "source/cg/n9_lunu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_pangde": {
+      "src": "source/cg/n9_pangde.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_shi": {
+      "src": "source/cg/n9_shi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_start": {
+      "src": "source/cg/n9_start.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_xuezhan": {
+      "src": "source/cg/n9_xuezhan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_xunyu": {
+      "src": "source/cg/n9_xunyu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_yanjin": {
+      "src": "source/cg/n9_yanjin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_yizheng": {
+      "src": "source/cg/n9_yizheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n9_zhanta": {
+      "src": "source/cg/n9_zhanta.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_liubei": {
+      "src": "source/cg/c2_ln_liubei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_yuanshu": {
+      "src": "source/cg/c2_ln_yuanshu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_zhangliao": {
+      "src": "source/cg/c2_ln_zhangliao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_bandeng": {
+      "src": "source/cg/n5_bandeng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_bingzhou": {
+      "src": "source/cg/n5_bingzhou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_chengong": {
+      "src": "source/cg/n5_chengong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_chenjia": {
+      "src": "source/cg/n5_chenjia.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_guonian": {
+      "src": "source/cg/n5_guonian.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_law": {
+      "src": "source/cg/n5_law.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_nifu": {
+      "src": "source/cg/n5_nifu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_qiuyuan": {
+      "src": "source/cg/n5_qiuyuan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_xiahoudun": {
+      "src": "source/cg/n5_xiahoudun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_beimen": {
+      "src": "source/cg/n6_beimen.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_beiwang": {
+      "src": "source/cg/n6_beiwang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_biwu": {
+      "src": "source/cg/n6_biwu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_erjiu": {
+      "src": "source/cg/n6_erjiu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_lingqi_go": {
+      "src": "source/cg/n6_lingqi_go.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_qiaorui": {
+      "src": "source/cg/n6_qiaorui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_shouchun": {
+      "src": "source/cg/n6_shouchun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n6_zhaoshu": {
+      "src": "source/cg/n6_zhaoshu.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

@@ -744,3 +744,230 @@
 - [x] 2026-10-16 map `tianfu` ← tianfu.jpg · ⚠ 分辨率偏低 2064×512
 - [x] 2026-10-16 map `menghu` ← menghu.jpg · ok
 - [x] 2026-10-16 map `tianfu` ← tianfu.jpg · ok
+- [x] 2026-10-17 portrait `banshun_man` ← banshun_man.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `chengyu` ← chengyu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `guonvwang` ← guonvwang.jpg · ok
+- [x] 2026-10-17 portrait `jushou` ← jushou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `shenpei` ← shenpei.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `tianfeng` ← tianfeng.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `tianyu` ← tianyu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_hubao` ← wei_hubao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_huwei` ← wei_huwei.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_mojin` ← wei_mojin.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_pili` ← wei_pili.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_qingzhou` ← wei_qingzhou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_tuntian` ← wei_tuntian.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wei_xiaoshi` ← wei_xiaoshi.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wudou_guizu` ← wudou_guizu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wudou_jijiu` ← wudou_jijiu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `yang_ang` ← yang_ang.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `yanpu` ← yanpu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `yuantan` ← yuantan.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 battle `m10_banshun` ← m10_banshun.jpg · ok
+- [x] 2026-10-17 battle `m10_banshun_hs` ← m10_banshun_hs.jpg · ok
+- [x] 2026-10-17 battle `m10_feixiong` ← m10_feixiong.jpg · ok
+- [x] 2026-10-17 battle `m10_guizu` ← m10_guizu.jpg · ok
+- [x] 2026-10-17 battle `m10_guizu_mc` ← m10_guizu_mc.jpg · ok
+- [x] 2026-10-17 battle `m10_guosi` ← m10_guosi.jpg · ok
+- [x] 2026-10-17 battle `m10_hubao` ← m10_hubao.jpg · ok
+- [x] 2026-10-17 battle `m10_huzhen` ← m10_huzhen.jpg · ok
+- [x] 2026-10-17 battle `m10_jijiu` ← m10_jijiu.jpg · ok
+- [x] 2026-10-17 battle `m10_lijue` ← m10_lijue.jpg · ok
+- [x] 2026-10-17 battle `m10_scout` ← m10_scout.jpg · ok
+- [x] 2026-10-17 battle `m10_wangping` ← m10_wangping.jpg · ok
+- [x] 2026-10-17 battle `m10_xiahouyuan` ← m10_xiahouyuan.jpg · ok
+- [x] 2026-10-17 battle `m10_yangang` ← m10_yangang.jpg · ok
+- [x] 2026-10-17 battle `m10_youqi` ← m10_youqi.jpg · ok
+- [x] 2026-10-17 battle `m10_zhangwei` ← m10_zhangwei.jpg · ok
+- [x] 2026-10-17 battle `m10_zhangxiu` ← m10_zhangxiu.jpg · ok
+- [x] 2026-10-17 battle `m10_zhugeliang` ← m10_zhugeliang.jpg · ok
+- [x] 2026-10-17 battle `m10_ziwu_exit` ← m10_ziwu_exit.jpg · ok
+- [x] 2026-10-17 battle `m11_bazhen` ← m11_bazhen.jpg · ok
+- [x] 2026-10-17 battle `m11_bei_nu` ← m11_bei_nu.jpg · ok
+- [x] 2026-10-17 battle `m11_bei_tieqi` ← m11_bei_tieqi.jpg · ok
+- [x] 2026-10-17 battle `m11_caoren` ← m11_caoren.jpg · ok
+- [x] 2026-10-17 battle `m11_guanyu` ← m11_guanyu.jpg · ok
+- [x] 2026-10-17 battle `m11_liubei` ← m11_liubei.jpg · ok
+- [x] 2026-10-17 battle `m11_lvbu` ← m11_lvbu.jpg · ok
+- [x] 2026-10-17 battle `m11_taishici` ← m11_taishici.jpg · ok
+- [x] 2026-10-17 battle `m11_wei_huwei` ← m11_wei_huwei.jpg · ok
+- [x] 2026-10-17 battle `m11_wei_pili` ← m11_wei_pili.jpg · ok
+- [x] 2026-10-17 battle `m11_zhangfei` ← m11_zhangfei.jpg · ok
+- [x] 2026-10-17 battle `m11_zhangliao` ← m11_zhangliao.jpg · ok
+- [x] 2026-10-17 battle `m11_zhaoyun` ← m11_zhaoyun.jpg · ok
+- [x] 2026-10-17 battle `n7_b_wenchou` ← n7_b_wenchou.jpg · ok
+- [x] 2026-10-17 battle `n7_fukou` ← n7_fukou.jpg · ok
+- [x] 2026-10-17 battle `n7_g_xinshi` ← n7_g_xinshi.jpg · ok
+- [x] 2026-10-17 battle `n7_g_zhanghe` ← n7_g_zhanghe.jpg · ok
+- [x] 2026-10-17 battle `n7_gaolan` ← n7_gaolan.jpg · ok
+- [x] 2026-10-17 battle `n7_shenrong` ← n7_shenrong.jpg · ok
+- [x] 2026-10-17 battle `n7_wenchou` ← n7_wenchou.jpg · ok
+- [x] 2026-10-17 battle `n7_yanliang` ← n7_yanliang.jpg · ok
+- [x] 2026-10-17 battle `n7_zangba` ← n7_zangba.jpg · ok
+- [x] 2026-10-17 battle `n8_b_chengyu` ← n8_b_chengyu.jpg · ok
+- [x] 2026-10-17 battle `n8_g_lvbu` ← n8_g_lvbu.jpg · ok
+- [x] 2026-10-17 battle `n8_g_machao` ← n8_g_machao.jpg · ok
+- [x] 2026-10-17 battle `n8_g_mayunlu` ← n8_g_mayunlu.jpg · ok
+- [x] 2026-10-17 battle `n8_g_xiahoudun` ← n8_g_xiahoudun.jpg · ok
+- [x] 2026-10-17 battle `n8_g_zangba` ← n8_g_zangba.jpg · ok
+- [x] 2026-10-17 battle `n8_hubao` ← n8_hubao.jpg · ok
+- [x] 2026-10-17 battle `n8_langqi` ← n8_langqi.jpg · ok
+- [x] 2026-10-17 battle `n8_pili` ← n8_pili.jpg · ok
+- [x] 2026-10-17 battle `n8_qingzhou` ← n8_qingzhou.jpg · ok
+- [x] 2026-10-17 battle `n8_shenpei` ← n8_shenpei.jpg · ok
+- [x] 2026-10-17 battle `n8_wuhuan` ← n8_wuhuan.jpg · ok
+- [x] 2026-10-17 battle `n8_yuantan` ← n8_yuantan.jpg · ok
+- [x] 2026-10-17 battle `n9_b_xiahoudun` ← n9_b_xiahoudun.jpg · ok
+- [x] 2026-10-17 battle `n9_g_gaogouli` ← n9_g_gaogouli.jpg · ok
+- [x] 2026-10-17 battle `n9_g_gongsunkang` ← n9_g_gongsunkang.jpg · ok
+- [x] 2026-10-17 battle `n9_g_liucheng` ← n9_g_liucheng.jpg · ok
+- [x] 2026-10-17 battle `n9_g_lvbu` ← n9_g_lvbu.jpg · ok
+- [x] 2026-10-17 battle `n9_g_tadun` ← n9_g_tadun.jpg · ok
+- [x] 2026-10-17 battle `n9_gaogouli_gong` ← n9_gaogouli_gong.jpg · ok
+- [x] 2026-10-17 battle `n9_liaodong` ← n9_liaodong.jpg · ok
+- [x] 2026-10-17 battle `n9_shenpei` ← n9_shenpei.jpg · ok
+- [x] 2026-10-17 battle `n9_yuantan` ← n9_yuantan.jpg · ok
+- [x] 2026-10-17 cg `c13_canzhang` ← c13_canzhang.jpg · ok
+- [x] 2026-10-17 cg `c13_changan` ← c13_changan.jpg · ok
+- [x] 2026-10-17 cg `c13_chetui` ← c13_chetui.jpg · ok
+- [x] 2026-10-17 cg `c13_chuzheng` ← c13_chuzheng.jpg · ok
+- [x] 2026-10-17 cg `c13_duanshui` ← c13_duanshui.jpg · ok
+- [x] 2026-10-17 cg `c13_jiuzhang` ← c13_jiuzhang.jpg · ok
+- [x] 2026-10-17 cg `c13_junyi` ← c13_junyi.jpg · ok
+- [x] 2026-10-17 cg `c13_junyi_f` ← c13_junyi_f.jpg · ok
+- [x] 2026-10-17 cg `c13_lianying` ← c13_lianying.jpg · ok
+- [x] 2026-10-17 cg `c13_liru` ← c13_liru.jpg · ok
+- [x] 2026-10-17 cg `c13_xingye` ← c13_xingye.jpg · ok
+- [x] 2026-10-17 cg `c13_yexiao` ← c13_yexiao.jpg · ok
+- [x] 2026-10-17 cg `c13_yushan` ← c13_yushan.jpg · ok
+- [x] 2026-10-17 cg `c13_zhandao` ← c13_zhandao.jpg · ok
+- [x] 2026-10-17 cg `c13_zhandaohuo` ← c13_zhandaohuo.jpg · ok
+- [x] 2026-10-17 cg `c13_zhanglu` ← c13_zhanglu.jpg · ok
+- [x] 2026-10-17 cg `c13_ziwu` ← c13_ziwu.jpg · ok
+- [x] 2026-10-17 cg `c14_beiwang` ← c14_beiwang.jpg · ok
+- [x] 2026-10-17 cg `c14_chengxia` ← c14_chengxia.jpg · ok
+- [x] 2026-10-17 cg `c14_cicao` ← c14_cicao.jpg · ok
+- [x] 2026-10-17 cg `c14_dongchu` ← c14_dongchu.jpg · ok
+- [x] 2026-10-17 cg `c14_hebing` ← c14_hebing.jpg · ok
+- [x] 2026-10-17 cg `c14_huishi` ← c14_huishi.jpg · ok
+- [x] 2026-10-17 cg `c14_hujia` ← c14_hujia.jpg · ok
+- [x] 2026-10-17 cg `c14_jianlou` ← c14_jianlou.jpg · ok
+- [x] 2026-10-17 cg `c14_nanyang` ← c14_nanyang.jpg · ok
+- [x] 2026-10-17 cg `c14_pingshou` ← c14_pingshou.jpg · ok
+- [x] 2026-10-17 cg `c14_qianggong` ← c14_qianggong.jpg · ok
+- [x] 2026-10-17 cg `c14_rucheng` ← c14_rucheng.jpg · ok
+- [x] 2026-10-17 cg `c14_xiang` ← c14_xiang.jpg · ok
+- [x] 2026-10-17 cg `c14_xunyu` ← c14_xunyu.jpg · ok
+- [x] 2026-10-17 cg `c14_yingzhan` ← c14_yingzhan.jpg · ok
+- [x] 2026-10-17 cg `c14_yuanmen` ← c14_yuanmen.jpg · ok
+- [x] 2026-10-17 cg `c14_yulin` ← c14_yulin.jpg · ok
+- [x] 2026-10-17 cg `c14_yushui` ← c14_yushui.jpg · ok
+- [x] 2026-10-17 cg `c14_zhanlv` ← c14_zhanlv.jpg · ok
+- [x] 2026-10-17 cg `c14_zhenqian` ← c14_zhenqian.jpg · ok
+- [x] 2026-10-17 cg `c14_zhenyan` ← c14_zhenyan.jpg · ok
+- [x] 2026-10-17 cg `c4_flee` ← c4_flee.jpg · ok
+- [x] 2026-10-17 cg `c4_lubu_rage` ← c4_lubu_rage.jpg · ok
+- [x] 2026-10-17 cg `c4_lubu_start` ← c4_lubu_start.jpg · ok
+- [x] 2026-10-17 cg `c4_seal` ← c4_seal.jpg · ok
+- [x] 2026-10-17 cg `c4_wuanguo` ← c4_wuanguo.jpg · ok
+- [x] 2026-10-17 cg `c4_zj_room` ← c4_zj_room.jpg · ok
+- [x] 2026-10-17 cg `end_duanxian` ← end_duanxian.jpg · ok
+- [x] 2026-10-17 cg `end_kujing` ← end_kujing.jpg · ok
+- [x] 2026-10-17 cg `end_suanjin` ← end_suanjin.jpg · ok
+- [x] 2026-10-17 cg `end_yice` ← end_yice.jpg · ok
+- [x] 2026-10-17 cg `n7_end` ← n7_end.jpg · ok
+- [x] 2026-10-17 cg `n7_heibing` ← n7_heibing.jpg · ok
+- [x] 2026-10-17 cg `n7_jiyi` ← n7_jiyi.jpg · ok
+- [x] 2026-10-17 cg `n7_juedi` ← n7_juedi.jpg · ok
+- [x] 2026-10-17 cg `n7_kujing` ← n7_kujing.jpg · ok
+- [x] 2026-10-17 cg `n7_ouxue` ← n7_ouxue.jpg · ok
+- [x] 2026-10-17 cg `n7_qijin` ← n7_qijin.jpg · ok
+- [x] 2026-10-17 cg `n7_qin` ← n7_qin.jpg · ok
+- [x] 2026-10-17 cg `n7_shishi` ← n7_shishi.jpg · ok
+- [x] 2026-10-17 cg `n7_wedding` ← n7_wedding.jpg · ok
+- [x] 2026-10-17 cg `n7_wuji` ← n7_wuji.jpg · ok
+- [x] 2026-10-17 cg `n7_xingyuan` ← n7_xingyuan.jpg · ok
+- [x] 2026-10-17 cg `n7_yijing` ← n7_yijing.jpg · ok
+- [x] 2026-10-17 cg `n7_yuye` ← n7_yuye.jpg · ok
+- [x] 2026-10-17 cg `n8_b_xin` ← n8_b_xin.jpg · ok
+- [x] 2026-10-17 cg `n8_chusai` ← n8_chusai.jpg · ok
+- [x] 2026-10-17 cg `n8_dingbei` ← n8_dingbei.jpg · ok
+- [x] 2026-10-17 cg `n8_dumai` ← n8_dumai.jpg · ok
+- [x] 2026-10-17 cg `n8_end` ← n8_end.jpg · ok
+- [x] 2026-10-17 cg `n8_jincheng` ← n8_jincheng.jpg · ok
+- [x] 2026-10-17 cg `n8_liushi` ← n8_liushi.jpg · ok
+- [x] 2026-10-17 cg `n8_liushou` ← n8_liushou.jpg · ok
+- [x] 2026-10-17 cg `n8_liushou_t` ← n8_liushou_t.jpg · ok
+- [x] 2026-10-17 cg `n8_ma` ← n8_ma.jpg · ok
+- [x] 2026-10-17 cg `n8_shipo` ← n8_shipo.jpg · ok
+- [x] 2026-10-17 cg `n8_start` ← n8_start.jpg · ok
+- [x] 2026-10-17 cg `n8_tuijun` ← n8_tuijun.jpg · ok
+- [x] 2026-10-17 cg `n8_zhanlv` ← n8_zhanlv.jpg · ok
+- [x] 2026-10-17 cg `n9_duanxian` ← n9_duanxian.jpg · ok
+- [x] 2026-10-17 cg `n9_end` ← n9_end.jpg · ok
+- [x] 2026-10-17 cg `n9_haikou` ← n9_haikou.jpg · ok
+- [x] 2026-10-17 cg `n9_jiuren` ← n9_jiuren.jpg · ok
+- [x] 2026-10-17 cg `n9_liaoshui` ← n9_liaoshui.jpg · ok
+- [x] 2026-10-17 cg `n9_ludi` ← n9_ludi.jpg · ok
+- [x] 2026-10-17 cg `n9_lulong` ← n9_lulong.jpg · ok
+- [x] 2026-10-17 cg `n9_lunu` ← n9_lunu.jpg · ok
+- [x] 2026-10-17 cg `n9_pangde` ← n9_pangde.jpg · ok
+- [x] 2026-10-17 cg `n9_shi` ← n9_shi.jpg · ok
+- [x] 2026-10-17 cg `n9_start` ← n9_start.jpg · ok
+- [x] 2026-10-17 cg `n9_xuezhan` ← n9_xuezhan.jpg · ok
+- [x] 2026-10-17 cg `n9_xunyu` ← n9_xunyu.jpg · ok
+- [x] 2026-10-17 cg `n9_yanjin` ← n9_yanjin.jpg · ok
+- [x] 2026-10-17 cg `n9_yizheng` ← n9_yizheng.jpg · ok
+- [x] 2026-10-17 cg `n9_zhanta` ← n9_zhanta.jpg · ok
+- [x] 2026-10-17 battle `m11_bei_tieqi` ← m11_bei_tieqi.jpg · ok
+- [x] 2026-10-17 battle `m11_bei_nu` ← m11_bei_nu.jpg · ok
+- [x] 2026-10-17 battle `n8_langqi` ← n8_langqi.jpg · ok
+- [x] 2026-10-17 battle `n8_g_lvbu` ← n8_g_lvbu.jpg · ok
+- [x] 2026-10-17 cg `n8_zhanlv` ← n8_zhanlv.jpg · ok
+- [x] 2026-10-17 cg `n8_tuijun` ← n8_tuijun.jpg · ok
+- [x] 2026-10-17 cg `n7_heibing` ← n7_heibing.jpg · ok
+- [x] 2026-10-17 cg `n7_wuji` ← n7_wuji.jpg · ok
+- [x] 2026-10-17 cg `n7_end` ← n7_end.jpg · ok
+- [x] 2026-10-17 cg `c4_wuanguo` ← c4_wuanguo.jpg · ok
+- [x] 2026-10-17 cg `c4_flee` ← c4_flee.jpg · ok
+- [x] 2026-10-17 cg `n9_lunu` ← n9_lunu.jpg · ok
+- [x] 2026-10-17 cg `c14_beiwang` ← c14_beiwang.jpg · ok
+- [x] 2026-10-17 cg `c14_jianlou` ← c14_jianlou.jpg · ok
+- [x] 2026-10-17 portrait `qianzhao` ← qianzhao.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wangxiu` ← wangxiu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `wuanguo` ← wuanguo.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `xianyufu` ← xianyufu.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 portrait `yanrou` ← yanrou.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-17 battle `n4_houcheng` ← n4_houcheng.jpg · ok
+- [x] 2026-10-17 battle `n4_wuanguo` ← n4_wuanguo.jpg · ok
+- [x] 2026-10-17 battle `n5_yanxiao` ← n5_yanxiao.jpg · ok
+- [x] 2026-10-17 battle `n5_yanxiao_tou` ← n5_yanxiao_tou.jpg · ok
+- [x] 2026-10-17 battle `n6_chenlan` ← n6_chenlan.jpg · ok
+- [x] 2026-10-17 battle `n6_leibo` ← n6_leibo.jpg · ok
+- [x] 2026-10-17 battle `n6_zhangxun` ← n6_zhangxun.jpg · ok
+- [x] 2026-10-17 cg `c2_ln_liubei` ← c2_ln_liubei.jpg · ok
+- [x] 2026-10-17 cg `c2_ln_yuanshu` ← c2_ln_yuanshu.jpg · ok
+- [x] 2026-10-17 cg `c2_ln_zhangliao` ← c2_ln_zhangliao.jpg · ok
+- [x] 2026-10-17 cg `n5_bandeng` ← n5_bandeng.jpg · ok
+- [x] 2026-10-17 cg `n5_bingzhou` ← n5_bingzhou.jpg · ok
+- [x] 2026-10-17 cg `n5_chengong` ← n5_chengong.jpg · ok
+- [x] 2026-10-17 cg `n5_chenjia` ← n5_chenjia.jpg · ok
+- [x] 2026-10-17 cg `n5_guonian` ← n5_guonian.jpg · ok
+- [x] 2026-10-17 cg `n5_law` ← n5_law.jpg · ok
+- [x] 2026-10-17 cg `n5_nifu` ← n5_nifu.jpg · ok
+- [x] 2026-10-17 cg `n5_qiuyuan` ← n5_qiuyuan.jpg · ok
+- [x] 2026-10-17 cg `n5_xiahoudun` ← n5_xiahoudun.jpg · ok
+- [x] 2026-10-17 cg `n6_beimen` ← n6_beimen.jpg · ok
+- [x] 2026-10-17 cg `n6_beiwang` ← n6_beiwang.jpg · ok
+- [x] 2026-10-17 cg `n6_biwu` ← n6_biwu.jpg · ok
+- [x] 2026-10-17 cg `n6_erjiu` ← n6_erjiu.jpg · ok
+- [x] 2026-10-17 cg `n6_lingqi_go` ← n6_lingqi_go.jpg · ok
+- [x] 2026-10-17 cg `n6_qiaorui` ← n6_qiaorui.jpg · ok
+- [x] 2026-10-17 cg `n6_shouchun` ← n6_shouchun.jpg · ok
+- [x] 2026-10-17 cg `n6_zhaoshu` ← n6_zhaoshu.jpg · ok
+- [x] 2026-10-17 map `guanzhong` ← guanzhong.jpg · ok
+- [x] 2026-10-17 map `longhu` ← longhu.jpg · ok
+- [x] 2026-10-17 map `luoyang_s` ← luoyang_s.jpg · ok
+- [x] 2026-10-17 map `tianfu` ← tianfu.jpg · ok
+- [x] 2026-10-17 map `xiliang` ← xiliang.jpg · ok
+- [x] 2026-10-17 map `yecheng` ← yecheng.jpg · ok
