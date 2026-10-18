@@ -445,6 +445,14 @@ extra fights 汉水渡口·锦帆贼, 新野·宗贼 (周瑜 recalls 蒯越 kill
 **Long-range story direction**: `docs/STORY.md` (南北双线 through 第十二章; 第十一章洛阳 is the fork: each line has one trap choice — south 收吕布 → 结局十七 虎噬, north 信诸葛亮、交出帅印 → he poisons the hero that night and stages it as a drunken fall from the wall; the south just wins at 赤壁 (no body, no note — only an old guard muttering 「只有军师进过帐」) → 结局十八 烛灭; done right, the ending depends on the *other* line's record in the save: 南线结局 赤壁 / 北线结局 官渡, or both right → 第十二章 天命归一). It is a direction only — the game is built one chapter at a time,
 the implemented chapter (`story.json`) wins, and the outline is synced afterwards. Don't build unbuilt chapters from it or change the game to match it unless asked.
 
+## Story text rules (新写的剧情都要照这几条；`tests/test_story_text.gd` 会拦)
+
+1. **旁白和对话分行。** 一行只写一件事：要么是旁白，要么是一句话。`她叹了口气：「走吧。」` 要拆成两行：旁白 `她叹了口气。` + 对话 `@zhangfuren 「走吧。」`。「名字：」「{lord}（内心）：」这种前缀可以留在对话行里；一行里不能有两句 `「…」`，也不能在引号后面再接旁白。
+2. **每句有头像的对话都标说话人**：行首 `@<portrait key> `（key 是 `portraits.json` 里的人物 key，主角用 `@lord`，北线主角的脸由代码换）。标签不显示。主角的内心独白 `{lord}（内心）：…` 也标 `@lord`。
+3. **没有头像的人**（路人、士兵、乡勇）：不标，或标 `@_ `。`@_ ` = 这一行不显示头像，旁白读起来像有人在说话时也用它（比如旁白里带了带标点的引号、或带「：」）。旁白不要写成 `X：…`，也别在旁白里放有标点的「…」引号，否则会被认成有人说话而显示头像。
+4. **北线的称呼**：同伴（赵云、郭嘉、张辽、庞德、太史慈、马超、张宁、吕玲绮、郭照……）叫主角「大哥」，不叫「主公」「头儿」「先生」。别家的主公（曹操、袁绍、吕布、刘备）照常叫主公，说书人讲故事也可以。南线孙策等本来就叫大哥。UI 里的「主公」（主公卡、主公部队）指玩家这个角色，不是称呼，不改。
+5. 每个有名有姓的人物首次出场，主角心里写「认出来 / 没听过」一句；见 Writing rules 下面几条。
+
 Writing rules:
 - **Timeline** — the whole story so far spans about a year; each chapter opens with a `【年号 · 月】` line:
   ch1 富春 初平元年正月 → ch2 sets out 二月 (a month on the road), reaches 中原 in spring, two months of waiting,
