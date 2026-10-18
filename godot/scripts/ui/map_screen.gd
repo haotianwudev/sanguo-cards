@@ -944,10 +944,12 @@ func _apply_dlg_size() -> void:
 		_dlg_face.custom_minimum_size = Vector2.ONE * float(DLG_FACE[m])
 	if is_instance_valid(_sheet_buttons):
 		_options_room(m == "auto" or _sheet_buttons.modulate.a > 0.5)
-	if is_instance_valid(_dlg_text):  # 自动 = as tall as the line needs (else a long line is cut off); 中 / 小 keep their fixed height
-		_dlg_text.fit_content = m == "auto" and not _dlg_dump
 	_fit_sheet()
 	_fit_sheet.call_deferred()  # again once the containers have taken the new minimum sizes
+	await get_tree().process_frame  # and once more after the text has been laid out at its real width (自动 sizes off that)
+	_fit_sheet()
+	await get_tree().process_frame
+	_fit_sheet()
 
 
 func _battle_info(s: Dictionary, fight: Dictionary) -> String:
@@ -1161,6 +1163,10 @@ func _fit_sheet() -> void:
 	if _cg_mode:
 		var m := _dlg_mode()
 		h = maxf(156.0 if m == "auto" else float(DLG_H[m]), _sheet.get_combined_minimum_size().y)
+		if m == "auto" and is_instance_valid(_dlg_text) and not _dlg_dump and _dlg_text.is_inside_tree() and _dlg_text.size.x > 300.0:
+			# 自动 = as tall as the line needs (else a long line is cut off): the box's own chrome plus the text's height
+			var top := _dlg_text.global_position.y - _sheet.global_position.y  # the title above the text
+			h = maxf(h, minf(top + _dlg_text.get_content_height() + 20.0, 420.0))
 	_sheet.size = Vector2(1232, h)
 	_sheet.position = Vector2(24, 708 - h) if _cg_mode else Vector2(24, 448)
 	_dlg_tools.position = Vector2(1248 - _dlg_tools.get_combined_minimum_size().x, _sheet.position.y + 8)
