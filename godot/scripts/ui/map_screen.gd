@@ -925,12 +925,16 @@ func _toggle_log() -> void:
 		_dlg_text.scroll_following = _log_saved["follow"]
 		_dlg_text.add_theme_font_size_override("normal_font_size", _log_saved["font"])
 		_dlg_text.add_theme_font_size_override("bold_font_size", _log_saved["font"])
+		if is_instance_valid(_dlg_face):
+			_dlg_face.visible = _dlg_face.texture != null
 		_apply_dlg_size()
 		return
 	_log_saved = {"text": _dlg_text.text, "scroll": _dlg_text.scroll_active, "follow": _dlg_text.scroll_following,
 		"font": _dlg_text.get_theme_font_size("normal_font_size")}
 	_dlg_log = true
 	btn.text = "返回"
+	if is_instance_valid(_dlg_face):  # a list of many voices: no single face
+		_dlg_face.visible = false
 	var upto: int = _dlg_lines.size() if _dlg_i < 0 else _dlg_i + 1
 	var dim_hex := Kit.c("dim").to_html()
 	var out: Array = []
