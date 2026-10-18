@@ -1865,7 +1865,8 @@
       "pool": false
     },
     "yanzhihu": {
-      "name": "胭脂虎·压寨夫人",
+      "name": "王异·压寨夫人",
+      "person": "wangyi",
       "rarity": "R",
       "troop": "bandit",
       "hp": 55,

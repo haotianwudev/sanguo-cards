@@ -1325,7 +1325,7 @@ PORTRAITS = {
                "Plain coarse cloth dress that cannot hide her dignity, hair loosely tied.",
                "Clutching a jade hairpin to her chest.",
                "A desolate ruined palace hall in burned Luoyang, with blackened wooden pillars, crumbling brick walls, and moonlight shining through broken ceiling tiles"),
-    "yanzhihu": ("'Rouge Tiger' (胭脂虎), the fierce bandit queen of a mountain fort",
+    "yanzhihu": ("'Rouge Tiger' (王异), the fierce bandit queen of a mountain fort",
                  "A curvy adult woman in her thirties with a bold, teasing grin, fiery eyes and a confident swagger.",
                  "Red bandit leather vest and trousers, a sash at the waist, bangles.",
                  "Hands on hips with twin sabers tucked in her sash, standing on a fort wall.",
