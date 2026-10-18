@@ -31,6 +31,7 @@ var _dlg_i := -1
 var _dlg_text: RichTextLabel
 var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
+var _dlg_dump := false  # 跳过 dumped every line into the box: it scrolls in a fixed height instead of growing past the screen
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
 var _dlg_keys: Array = []  # the speaker of each line (Kit.speakers)
@@ -819,6 +820,7 @@ func _show_buttons(box: Control, on: bool) -> void:
 
 
 func _dialog_show() -> void:
+	_dlg_dump = false
 	if _dlg_recap and _dlg_i >= _dlg_lines.size():  # a choice: every line read (the last one too), now the summary beside the options
 		_dialog_skip()
 		return
@@ -849,11 +851,13 @@ func _dialog_show() -> void:
 func _dialog_skip() -> void:
 	if _dlg_i < 0:
 		return
+	_dlg_dump = false
 	if _dlg_recap and _dlg_prompt != "":  # at a choice: the summary, not the scene again
 		_dlg_text.text = _dlg_prompt
 	elif _dlg_recap:  # no summary written: the last line (it usually poses the choice)
 		_dlg_text.text = str(_dlg_lines[-1])
 	else:
+		_dlg_dump = true
 		_dlg_text.text = "\n".join(_dlg_lines) if _dlg_recap else "\n\n".join(_dlg_lines)
 		if _dlg_after != "":
 			_dlg_text.text += "\n\n" + _dlg_after
@@ -941,7 +945,7 @@ func _apply_dlg_size() -> void:
 	if is_instance_valid(_sheet_buttons):
 		_options_room(m == "auto" or _sheet_buttons.modulate.a > 0.5)
 	if is_instance_valid(_dlg_text):  # 自动 = as tall as the line needs (else a long line is cut off); 中 / 小 keep their fixed height
-		_dlg_text.fit_content = m == "auto"
+		_dlg_text.fit_content = m == "auto" and not _dlg_dump
 	_fit_sheet()
 	_fit_sheet.call_deferred()  # again once the containers have taken the new minimum sizes
 
