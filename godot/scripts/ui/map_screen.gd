@@ -819,7 +819,10 @@ func _show_buttons(box: Control, on: bool) -> void:
 
 
 func _dialog_show() -> void:
-	var last := _dlg_i >= _dlg_lines.size() - 1
+	if _dlg_recap and _dlg_i >= _dlg_lines.size():  # a choice: every line read (the last one too), now the summary beside the options
+		_dialog_skip()
+		return
+	var last := _dlg_i >= _dlg_lines.size() - 1 and not _dlg_recap
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	if _dlg_face != null:
@@ -829,8 +832,6 @@ func _dialog_show() -> void:
 		_dlg_face.texture = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
 		_dlg_face.visible = _dlg_face.texture != null
 	if last:
-		# a choice shows its own last line next to the options (it often is the choice — 出生点's 「北方」);
-		# the prompt summary is only for 跳过 and coming back later
 		if _dlg_after != "":  # before a fight: the last line, then what you're up against
 			_dlg_text.text = str(_dlg_lines[_dlg_i]) + "\n\n" + _dlg_after
 			_dlg_text.scroll_active = true
