@@ -89,7 +89,7 @@ func _jump_panel() -> Control:
 
 func _do_jump(jump: Dictionary) -> void:
 	Game.persist_enabled = false  # a jump is a sandbox: the real save file is never overwritten
-	var base := SaveData.read()
+	var base: SaveData = Game.any_save()
 	Game.save = ChapterJumps.jump_save(jump, base if base != null else Game.save, Game.rng)
 	Game.show_screen(MapScreen.new())
 

@@ -1091,8 +1091,20 @@ func _resolve(choice := -1) -> void:
 	## resolve the square, then go straight on (no replay of what was just read)
 	var kind: String = Quests.here(q, Game.save)["type"]
 	var was_era: bool = Quests.here(q, Game.save)["id"] == "era"
+	if was_era and choice >= 0 and Game.save_path == "" and Game.persist_enabled:  # a new journey takes its route's slot: ask before it overwrites one
+		var born := str(Quests.here(q, Game.save)["choose"][choice].get("record", ""))
+		var rid := "north" if born.contains("冀州") else "south"
+		if FileAccess.file_exists(SaveData.slot_path(rid)):
+			var ask := ConfirmOverlay.new()
+			ask.title = "%s已有存档" % ("北线" if rid == "north" else "南线")
+			ask.message = "从这里出发，会覆盖那条线现在的存档（结局和卡牌收藏保留）。\n想两条线一起玩的话，请选另一个出生点。"
+			ask.yes_text = "覆盖并出发"
+			add_child(ask)
+			if not await ask.answered:
+				return
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
 	if was_era:  # the birthplace is chosen: south and north count apart, so only now can the 难度 be picked
+		Game.assign_slot()
 		await _pick_level()
 	Game.persist()
 	if kind == "choose":  # a choice can open squares further on (requires / unless on this run's records)

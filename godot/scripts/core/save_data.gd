@@ -7,7 +7,11 @@ extends RefCounted
 ##   soldiers (N, 兵卡)  — stackable; come from battle chests (pick 1 of a few). Copies of the same soldier
 ##                         card back their troop with diminishing returns (×soldier_decay per extra copy).
 
-const SAVE_PATH := "user://save.json"
+const SAVE_PATH := "user://save.json"  # the old single save: moved into its route's slot on the first start (see migrate_legacy)
+const SHARED_PATH := "user://shared.json"  # what the two routes' saves know in common: the endings and the card collection
+const PENDING_PATH := "user://save_pending.json"  # a new journey until its birthplace is chosen (the route then decides the slot)
+const SHARED_LISTS := ["seen", "cleared_cards", "cleared_forms"]
+const SHARED_MAXES := ["cleared_copies", "cleared_form_copies"]
 
 var owned: Array = []  # general card ids, no duplicates
 var dupes: Dictionary = {}  # general card id -> copies owned when more than one (铜 1 / 银 2 / 金 4)
@@ -260,6 +264,85 @@ static func read(path: String = SAVE_PATH) -> SaveData:
 	if not FileAccess.file_exists(path):
 		return null
 	return from_dict(GameData.read_json(path))
+
+
+## ---- two saves, one per route: south and north can be played side by side ----------------------------------
+
+static func slot_path(route_id: String) -> String:
+	return "user://save_%s.json" % route_id
+
+
+static func read_slot(route_id: String) -> SaveData:
+	## a route's save, with what both routes share folded in
+	var s := read(slot_path(route_id))
+	if s != null:
+		s.apply_shared()
+	return s
+
+
+static func _read_shared() -> Dictionary:
+	if not FileAccess.file_exists(SHARED_PATH):
+		return {}
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(SHARED_PATH))
+	return d if d is Dictionary else {}
+
+
+func write_shared() -> void:
+	## the endings reached and the card collection are common to both routes: every save adds what it knows to one shared file
+	var d := _read_shared()
+	for f in SHARED_LISTS:
+		var cur: Array = d.get(f, [])
+		for v in get(f):
+			if not cur.has(v):
+				cur.append(v)
+		d[f] = cur
+	for f in SHARED_MAXES:
+		var cur: Dictionary = d.get(f, {})
+		var mine: Dictionary = get(f)
+		for k in mine:
+			cur[k] = maxi(int(cur.get(k, 0)), int(mine[k]))
+		d[f] = cur
+	d["cleared_lord_copies"] = maxi(int(d.get("cleared_lord_copies", 1)), cleared_lord_copies)
+	var ends: Array = d.get("endings", [])
+	for fl in flags:
+		if str(fl).contains("结局") and not ends.has(fl):
+			ends.append(fl)
+	d["endings"] = ends
+	var out := FileAccess.open(SHARED_PATH, FileAccess.WRITE)
+	out.store_string(JSON.stringify(d, " "))
+
+
+func apply_shared() -> void:
+	## ...and the other way round: what the other route's save added shows up in this one
+	var d := _read_shared()
+	for f in SHARED_LISTS:
+		var mine: Array = get(f)
+		for v in d.get(f, []):
+			if not mine.has(v):
+				mine.append(v)
+	for f in SHARED_MAXES:
+		var mine: Dictionary = get(f)
+		var theirs: Dictionary = d.get(f, {})
+		for k in theirs:
+			mine[k] = maxi(int(mine.get(k, 0)), int(theirs[k]))
+	cleared_lord_copies = maxi(cleared_lord_copies, int(d.get("cleared_lord_copies", 1)))
+	for e in d.get("endings", []):
+		if not flags.has(e):
+			flags.append(e)
+
+
+static func migrate_legacy() -> void:
+	## the old single save moves into the slot of the route it was on (a journey that had not chosen its birthplace yet stays pending)
+	if not FileAccess.file_exists(SAVE_PATH):
+		return
+	var s := read(SAVE_PATH)
+	if s != null:
+		var born := s.run_records.has("出生：冀州无极") or s.run_records.has("出生：江东富春") or s.flags.has("出生：冀州无极") or s.flags.has("出生：江东富春") or not s.quests_cleared.is_empty()
+		var target := slot_path(s.route()) if born else PENDING_PATH
+		if not FileAccess.file_exists(target):
+			s.write(target)
+			s.write_shared()
+	DirAccess.rename_absolute(SAVE_PATH, SAVE_PATH + ".bak")
 
 
 func _db() -> GameData:

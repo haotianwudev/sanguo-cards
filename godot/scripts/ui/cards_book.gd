@@ -52,7 +52,7 @@ func _ready() -> void:
 	add_child(dim)
 
 	if save == null:
-		save = Game.save if Game.save != null else SaveData.read()
+		save = Game.save if Game.save != null else Game.any_save()
 	if save == null:
 		save = SaveData.create()
 

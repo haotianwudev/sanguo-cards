@@ -5,6 +5,7 @@ var save: SaveData
 var rng := RandomNumberGenerator.new()
 var root: Control  # the main scene; screens are its children
 var persist_enabled := true
+var save_path := ""  # the file the current save lives in: a route slot, or "" for a journey still choosing its birthplace
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
 var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto"}  # player options, kept in user://options.cfg (not in the save)
 const OPTIONS_PATH := "user://options.cfg"
@@ -12,6 +13,10 @@ const OPTIONS_PATH := "user://options.cfg"
 
 func _ready() -> void:
 	rng.randomize()
+	if DisplayServer.get_name() == "headless":  # the test runner never touches the player's save files
+		persist_enabled = false
+	if persist_enabled:
+		SaveData.migrate_legacy()
 	var cfg := ConfigFile.new()
 	if persist_enabled and cfg.load(OPTIONS_PATH) == OK:
 		for k in options:
@@ -48,7 +53,31 @@ func go_home() -> void:
 
 func persist() -> void:
 	if persist_enabled and save != null:
-		save.write()
+		save.write(save_path if save_path != "" else SaveData.PENDING_PATH)
+		save.write_shared()
+
+
+func assign_slot() -> void:
+	## the birthplace is chosen: this journey now lives in its route's slot (the pending file goes)
+	if save_path != "":
+		return
+	save_path = SaveData.slot_path(save.route())
+	if persist_enabled and FileAccess.file_exists(SaveData.PENDING_PATH):
+		DirAccess.remove_absolute(SaveData.PENDING_PATH)
+
+
+func load_slot(route_id: String) -> SaveData:
+	save_path = SaveData.slot_path(route_id)
+	return SaveData.read_slot(route_id)
+
+
+func any_save() -> SaveData:
+	## whichever route's save exists (the south one first): for what both share, the books
+	for r in ["south", "north"]:
+		var s := SaveData.read_slot(r)
+		if s != null:
+			return s
+	return null
 
 
 func show_screen(screen: Control) -> void:
@@ -59,29 +88,42 @@ func show_screen(screen: Control) -> void:
 
 
 func new_game(lord_name: String) -> void:
+	save_path = ""
 	save = SaveData.create()
+	var shared := SaveData.create()  # the endings and the collection already earned come along into the new journey
+	shared.apply_shared()
+	for f in SaveData.SHARED_LISTS + SaveData.SHARED_MAXES:
+		save.set(f, shared.get(f))
+	save.cleared_lord_copies = shared.cleared_lord_copies
+	save.flags = shared.flags.duplicate()
 	save.lord_name = lord_name if lord_name.strip_edges() != "" else "主公"
 	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
 
 
-func new_lap() -> void:
+func new_lap(route_id: String) -> void:
 	## 新周目: the story from the top; the collection starts over (cards ever had can drop again), unless the 设置 test option keeps it
-	save = SaveData.read().new_lap(bool(options["inherit_all"]))
+	save = load_slot(route_id).new_lap(bool(options["inherit_all"]))
 	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
 
 
-func continue_game() -> void:
-	save = SaveData.read()
+func continue_pending() -> void:
+	save_path = ""
+	save = SaveData.read(SaveData.PENDING_PATH)
 	show_screen(MapScreen.new())
 
 
-func replay_chapter(quest_id: String) -> void:
+func continue_game(route_id: String) -> void:
+	save = load_slot(route_id)
+	show_screen(MapScreen.new())
+
+
+func replay_chapter(route_id: String, quest_id: String) -> void:
 	## Replay a finished chapter for cards and 战功; each clear makes it harder (进阶).
-	save = SaveData.read()
+	save = load_slot(route_id)
 	for q in GameData.get_db().quests:
 		if q["id"] == quest_id:
 			Quests.start_replay(q, save, rng)
@@ -89,8 +131,8 @@ func replay_chapter(quest_id: String) -> void:
 	show_screen(MapScreen.new())
 
 
-func back_to_story() -> void:
-	save = SaveData.read()
+func back_to_story(route_id: String) -> void:
+	save = load_slot(route_id)
 	Quests.stop_replay(save)
 	persist()
 	show_screen(MapScreen.new())
