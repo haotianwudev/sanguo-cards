@@ -4,16 +4,16 @@ extends RefCounted
 ##
 ## A quest is a map of squares in columns (x) and rows (y). The party stands on one square, resolves it,
 ## then steps forward to one of its `next` squares — never back.
-##   event    story text (+ portraits, + reward cards)
+##   event    story text (+ portraits, + reward cards / relics, + `difficulty` raised on arrival)
 ##   choose   pick one card; that card joins and the path continues at the option's `goto`
 ##   battle   must win to continue (`boss: true` marks the big one)
 ##   treasure a chest: several soldier cards shown, keep one
 ##   recover  restore the shared HP bar and reset cumulative AP costs / once-per-battle skills
-##   recruit  a few unowned generals shown, keep one
+##   recruit  a few unowned generals shown, keep one (the square may have lines of its own first, and its own recruit_pool / prompt)
 ##   mystery  ？: a random event from the quest's event_pool, rolled on arrival (a new roll every run).
 ##            Its options can fight (maybe an ambush), hurt, poison (lose a third of HP), heal, give cards or open a pick-one.
 ## Battle squares may be `elite` (精: tougher, always drops a 3-card chest and a 宝物) or `ambush` (enemy strikes first).
-## A ？ square with a fixed `event` always holds that event (险 squares).
+## A ？ square with a fixed `event` always holds that event (only the designed 高级宝箱 now; story beats are plain `event` squares).
 ## Rogue runs: every attempt at a quest is a run. 宝物 and 险 last for the run; `shuffle` groups of squares
 ## trade contents at the start of each run (the paths stay, what's on them moves).
 

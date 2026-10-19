@@ -268,6 +268,21 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   `choose` option can't do this — it only has `label/goto/record/card` — so route the option to a one-line event
   square carrying the `relics` field instead, both branches rejoining the next common square).
 - **Local pools (按地点的池子)**: a `treasure` / `recruit` square can carry its own `soldier_pool` / `recruit_pool` (card ids) — `Quests.pools(q, save, sq)` lets the square's list win over the chapter's, a chest then holds only that place's soldiers (`SaveData.chest_offer`) and a recruit square shows `gacha.offer_size` random cards of its own list. They travel with a shuffle (`CONTENT`). Keep it to at most two soldier pools and two recruit pools per chapter (第五章: 宛城·汉水·新野 / 襄阳; 第三章: 鲁阳 / 洛阳·长安) — squares of one place share the same list; the stats table counts the distinct lists; a square with no list uses the chapter's pools as before. `test_a_squares_own_pools_...` checks the ids.
+- **Square types (格子种类)**: 7 种 `type`（`ui.json map.glyphs / type_names / type_colors`；`Quests.TYPES`），再加战斗的两个变体，地图上共 9 种图标：
+
+  | type | 地图字 / 色 | 玩家看到什么 | 常用字段 |
+  |---|---|---|---|
+  | `event` 剧情 | 事 | 台词一行一击；`cards` / `relics` / `difficulty` 进格自动给，没有选项 | `text` `portraits` `cg` `cards` `relics` `difficulty` `record` |
+  | `choose` 抉择 | 选 | 台词后选一个选项，选项的 `card` 入队，`goto` 决定走哪条路 | `choose [{label, goto, card, record}]` `prompt` |
+  | `battle` 战斗 | 战（红） | 台词（可有）→ 战斗，赢了才能继续；`boss` 变「将」（紫）、`elite` 变「精」（红） | `battle` `boss` `elite` `ambush` `lose_goto` `beatable` `record_win` |
+  | `treasure` 宝箱 | 宝（金） | 几张兵卡，只能拿一张；有 `soldier_pool` 就只出这个地点的兵 | `soldier_pool` |
+  | `recover` 回复 | 休（蓝） | 台词（可有）→ 体力回满，累积技能 AP 加价和限 1 次技能重置 | `text` `portraits` |
+  | `recruit` 招贤 | 募（绿） | 台词（可有）→ 接见豪杰，只能收一位；有 `recruit_pool` 就只出这个名单（每次随机几位），`prompt` 可改提示 | `recruit_pool` `text` `portraits` `prompt` |
+  | `mystery` 奇遇 | ？（蓝） | 进格时从事件池抽一个随机事件（`event_pool` + `event_scope` + 本章 scope + universal，每次重抽，本轮不重复），事件里有选项（打架、受伤、给卡、给宝物…） | `event`（固定事件，见下） |
+
+  `mystery` 带 `event` = 固定事件：地图上显示该事件自己的字和颜色（险 / 威 / 庙 …），**只给确实是设计好的固定入口用**——现在只剩第二章的「高级宝箱」（三个箱子里恰好一个是高级的，测试守着）。故事性的固定剧情一律用 `event` 格（`cards` / `relics` / `difficulty` 写在格子上），要选人用 `recruit` 格（借将）；其余「可有可无」的事件让它随机。一个只属于某一章的事件，`scope` 写那一章的 quest id，别写 `south` / `north`（否则别的章节也会抽到，救祖茂在第一章冒出来就是这样）。
+  战斗格的 `lose_goto`：输了转去的格子（吕布 / 华雄的必败戏）；`beatable` = 仍是正常强度的战斗。`shuffle` 组只搬 `CONTENT`（type / label / battle / event / text …），不搬 `cards` / `relics` / `choose`。
+
 - **Quest** (`story.json` quests): squares `{x, y, type, label, next, text, portraits, cards, relics, choose, battle, boss,
   elite, ambush, event, lose_goto, beatable}` (beatable: a lose_goto fight that is still a real, normally scaled fight — 华雄); types `event choose battle treasure recover recruit mystery`. Moves only go right,
   one row at a time (a test checks). `soldier_pool`, `recruit_pool`, `event_pool`, `shuffle` (groups that trade
