@@ -181,6 +181,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate art using AtlasCloud")
     parser.add_argument("--key", required=True, help="Art key (e.g. c6_fanchou)")
     parser.add_argument("--prompt", required=True, help="Text prompt")
+    parser.add_argument("--allow-text", action="store_true", help="the picture may carry lettering (default: none)")
+    parser.add_argument("--allow-flags", action="store_true", help="the picture may show flags / banners (default: none)")
     parser.add_argument("--model", default="nano-banana-2", help="Model ID (default: nano-banana-2; nano-banana-lite is the cheap 1k one, gpt-image-2 the fallback)")
     parser.add_argument("--size", default="1280*720", help="Output size for z-image (default: 1280*720)")
     parser.add_argument("--ref", nargs="+", help="Optional local path(s) to reference image(s)")
@@ -204,6 +206,13 @@ def main() -> None:
             else:
                 print(f"Warning: reference image not found: {r}")
 
+    rules = []
+    if not args.allow_text:
+        rules.append("画面里不得出现任何文字、字母、数字或符号（招牌、布帛、麻袋、旗面、刀剑上都不要）")
+    if not args.allow_flags:
+        rules.append("不画任何旗帜、旗幡、横幅")
+    if rules:
+        args.prompt += " 严格要求：" + "；".join(rules) + "。"
     img_url = generate_image_atlas(api_key, args.prompt, model=args.model, size=args.size, ref_urls=ref_urls)
     print(f"Generated URL: {img_url}")
 

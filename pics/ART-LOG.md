@@ -1141,3 +1141,4 @@
 - [ ] 2026-10-19 cg `c2_ln_triple` ← c2_ln_triple.jpg 裁 1536×1024→1536×864 · ok
 - [ ] 2026-10-19 relic `zhen_diaopi` ← zhen_diaopi.jpg · ok
 - [ ] 2026-10-19 cg `c2_ln_lend` ← c2_ln_lend.jpg · ok
+- [ ] 2026-10-19 cg `c2_ln_meet` ← c2_ln_meet.jpg 裁 2528×1696→2528×1422 · ok
