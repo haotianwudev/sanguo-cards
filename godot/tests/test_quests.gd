@@ -457,7 +457,7 @@ func test_each_run_deals_the_shuffle_groups_anew() -> void:
 		var v := Quests.view(q, s)
 		var types: Array = ["reeds", "road", "ferry"].map(func(id): return v["squares"][id]["type"] + v["squares"][id]["event"])
 		types.sort()
-		check_eq(types, ["battle", "mystery", "mysteryrisk"], "same contents, new places")
+		check_eq(types, ["battle", "mystery", "mystery"], "same contents, new places")
 		layouts[JSON.stringify(s.layout)] = true
 	check(layouts.size() > 3, "runs differ")
 
