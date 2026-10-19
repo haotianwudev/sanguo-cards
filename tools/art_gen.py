@@ -1,7 +1,7 @@
 """Generate art using AtlasCloud API fallback when built-in generator is unavailable or exhausted.
 
 Usage:
-    python tools/art_gen.py --key <art_key> --prompt "<prompt>" [--model z-image/turbo] [--size 1280*720] [--ingest]
+    python tools/art_gen.py --key <art_key> --prompt "<prompt>" [--model nano-banana-2] [--size 1280*720] [--ingest]
 
 Reads ATLASCLOUD_API_KEY from .env in project root.
 """
@@ -69,6 +69,18 @@ def upload_media(api_key: str, file_path: Path) -> str:
         raise RuntimeError(f"Failed to upload media: {res}")
 
 
+def _aspect(size: str) -> str:
+    """'4:1' as given; 'WxH' / 'W*H' -> the nearest ratio the nano models accept; anything else 16:9."""
+    if ":" in size:
+        return size
+    for sep in ("x", "*"):
+        if sep in size:
+            w, h = (float(v) for v in size.split(sep, 1))
+            ratios = {"1:1": 1.0, "2:3": 2 / 3, "3:2": 1.5, "3:4": 0.75, "4:3": 4 / 3, "9:16": 9 / 16, "16:9": 16 / 9}
+            return min(ratios, key=lambda k: abs(ratios[k] - w / h))
+    return "16:9"
+
+
 def generate_image_atlas(
     api_key: str,
     prompt: str,
@@ -122,7 +134,7 @@ def generate_image_atlas(
         if ref_urls:
             payload["image_urls"] = ref_urls
     elif is_nano:
-        payload["aspect_ratio"] = size if ":" in size else "16:9"  # --size 4:1 for an ultra-wide chapter map
+        payload["aspect_ratio"] = _aspect(size)  # --size 4:1 for an ultra-wide chapter map; 1024x1536 / 1536x1024 / 1024x1024 map to 2:3 / 3:2 / 1:1
         payload["resolution"] = "1k" if "lite" in model else "2k"
         if ref_urls:
             payload["images"] = ref_urls
@@ -169,7 +181,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate art using AtlasCloud")
     parser.add_argument("--key", required=True, help="Art key (e.g. c6_fanchou)")
     parser.add_argument("--prompt", required=True, help="Text prompt")
-    parser.add_argument("--model", default="gpt-image-2", help="Model ID (default: gpt-image-2)")
+    parser.add_argument("--model", default="nano-banana-2", help="Model ID (default: nano-banana-2; nano-banana-lite is the cheap 1k one, gpt-image-2 the fallback)")
     parser.add_argument("--size", default="1280*720", help="Output size for z-image (default: 1280*720)")
     parser.add_argument("--ref", nargs="+", help="Optional local path(s) to reference image(s)")
     parser.add_argument("--out", help="Output local image path (default: pics/inbox/<key>.jpg)")

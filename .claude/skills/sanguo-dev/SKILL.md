@@ -107,6 +107,8 @@ Screenshots of overlays look washed out because the PNG keeps alpha; in the game
 
 **Roster is automated too**: `python tools/roster.py --write` regenerates `docs/ROSTER.md` (every soldier by 阵营 / 章节限定 / 公共, which soldiers each chapter can hand out — ⚠ marks a soldier whose `scope` doesn't match the chapter's route — and every general with where it joins / is recruited / drops); the pre-commit hook runs it with the stats, `--check` exits 1 when stale. Never hand-edit that file.
 **"update stats"** → `python tools/chapter_stats.py --write` (rewrites the whole of `docs/CHAPTER-STATS.md`, nothing in it is hand-written: 南北线对比 with the per-type square counts, and 卡牌种类; a new chapter or quest goes into `CHAPTERS` in `tools/chapter_stats.py`). Per-chapter detail lives in `docs/chapters/`, where each card comes from in `docs/ROSTER.md`.
+**Generating art: `python tools/art_gen.py --key <k> --prompt "<p>" --size 1536x1024 --ref <portraits / relic icon…>` — default model is `nano-banana-2` (user decision; `nano-banana-lite` only when asked, `gpt-image-2` is the fallback when the API rate-limits). Always pass the delivered portraits and any relic icon that appears in the picture as `--ref`, then open the result and check it against the prompt (no stray text, props match their icons) before showing it.**
+
 **New art from the user → use the `sanguo-art-ingest` skill (`python tools/art_ingest.py add <path> <key>`): it checks, crops, installs and logs; docs are refreshed only by `flush` every ~20 images.**
 Art: put the original in `pics/source/...`, add/adjust the `pics/art.json` entry, run `sanguo-art` (from the repo root).
 Framing: `face` = face centre [x, y] as fractions; `head` = head height / image height. **Bigger head ⇒ smaller figure**;
