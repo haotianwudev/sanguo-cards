@@ -603,7 +603,8 @@ func test_saving_zumao_gives_the_red_headscarf() -> void:
 	Quests.begin(q, s)
 	s.square = "save_zumao"
 	s.resolved = false
-	Quests.choose_event(q, s, rng(0), 0)
+	check_eq(q["squares"]["save_zumao"]["type"], "event", "a plain story square, not a ？")
+	Quests.resolve(q, s, rng(0))
 	check(s.relics.has("chize") and s.resolved)
 	check(s.has_card("zumao"), "祖茂 follows you")
 	check(GameData.get_db().skills["yindi"]["effects"].any(func(e): return e["type"] == "guard"), "引敌 draws fire")
@@ -615,8 +616,9 @@ func test_handing_dongbai_over_pays_a_relic() -> void:
 	Quests.begin(q, s)
 	s.square = "give"
 	s.resolved = false
-	Quests.choose_event(q, s, rng(0), 0)
-	check_eq(s.relics.size(), 1)
+	check_eq(q["squares"]["give"]["type"], "event", "a plain story square, not a ？")
+	Quests.resolve(q, s, rng(0))
+	check_eq(s.relics, ["jubaopen"])
 
 
 func test_trades_take_something_away() -> void:
