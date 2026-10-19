@@ -1,7 +1,7 @@
-"""Print per-chapter numbers for docs/CHAPTER-STATS.md: squares, battles (normal/elite/boss), forks, CGs (have/total), rogue pools.
+"""Per-chapter numbers: squares (and how many of each of the 7 types), battles (normal/elite/boss), forks, CGs (have/total), rogue pools.
    python tools/chapter_stats.py            # table
-   python tools/chapter_stats.py --write    # also refresh squares / battles / CG columns of the overview table in the doc (pools and text stay hand-written)
-                                            # and the generated 卡牌种类 section (generals / soldiers by rarity, troop, route)"""
+   python tools/chapter_stats.py --write    # rewrite docs/CHAPTER-STATS.md (all generated: 南北线对比 + 卡牌种类)
+   python tools/chapter_stats.py --check    # exit 1 when the doc is stale"""
 import io, json, re, sys
 from pathlib import Path
 
@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 from gamedata import load_cards
 cards = load_cards()
 shuffle = lambda q: len(q.get("shuffle", []))
+TYPE_ORDER = ["event", "choose", "battle", "treasure", "recover", "recruit", "mystery"]  # 事 选 战 宝 休 募 ？
 
 
 def stats(q, xs=None):
@@ -25,7 +26,8 @@ def stats(q, xs=None):
     normal = len(b) - boss - elite
     forks = sum(1 for v in sq.values() if v["type"] == "choose" or v.get("lose_goto"))
     cgs = {v["cg"] for v in sq.values() if v.get("cg")}
-    return dict(n=n, normal=normal, elite=elite, boss=boss, forks=forks, cg_have=len(cgs & have_cg), cg_all=len(cgs),
+    types = [sum(1 for v in sq.values() if v["type"] == ty) for ty in TYPE_ORDER]
+    return dict(n=n, types=types, normal=normal, elite=elite, boss=boss, forks=forks, cg_have=len(cgs & have_cg), cg_all=len(cgs),
                 pools="%d / %d / %d / %d" % (len(q.get("soldier_pool", [])), len(q.get("recruit_pool", [])), len(q.get("event_pool", [])), shuffle(q)))
 
 
@@ -156,6 +158,7 @@ CHAPTERS = [
 ]
 ROW_NAMES = {"prologue_s": "富春", "prologue_n": "冀州风云"}
 SUM_KEYS = ("n", "normal", "elite", "boss", "forks", "cg_have", "cg_all")
+TYPE_HEAD = "事/选/战/宝/休/募/？"
 
 
 def compare_section() -> str:
@@ -164,25 +167,32 @@ def compare_section() -> str:
 
     def cells(key):
         if key is None:
-            return ["—（未实装）", "", "", "", ""]
+            return ["—（未实装）", "", "", "", "", ""]
         r = rows[key]
-        return [titles[key], str(r["n"]), "%d / %d / %d" % (r["normal"], r["elite"], r["boss"]), str(r["forks"]), "%d/%d" % (r["cg_have"], r["cg_all"])]
+        return [titles[key], str(r["n"]), " / ".join(str(x) for x in r["types"]), "%d / %d / %d" % (r["normal"], r["elite"], r["boss"]), str(r["forks"]), "%d/%d" % (r["cg_have"], r["cg_all"])]
 
     out = ["## 南北线对比（`python tools/chapter_stats.py --write` 生成，别手改这一节）", "",
-           "同一章的南线、北线并排；口径同下方总览（格数含互斥分支，分叉＝`choose` + `lose_goto`）。", "",
-           "| 章 | 南线 | 格数 | 战斗 普/精/首 | 分叉 | CG | 北线 | 格数 | 战斗 普/精/首 | 分叉 | CG |",
-           "|---|---|---:|---:|---:|---:|---|---:|---:|---:|---:|"]
+           "同一章的南线、北线并排。口径：", "",
+           "- **格数**＝quest 里 `squares` 的总数，含互斥分支（所以比玩家一轮实际走的格子多）。",
+           "- **%s**＝七种格子各有几个：事＝剧情 `event`、选＝抉择 `choose`、战＝战斗 `battle`、宝＝宝箱 `treasure`、休＝回复 `recover`、募＝招贤 `recruit`、？＝奇遇 `mystery`（每种的玩法见 `sanguo-dev` skill 的「Square types」）。" % TYPE_HEAD,
+           "- **战斗 普/精/首**＝普通 / 精英（`elite`）/ 首领（`boss`）三档战斗格数，它们合起来就是「战」那一项。",
+           "- **分叉**＝`choose` 格 + 有 `lose_goto` 的战斗格。",
+           "- **CG**＝格子挂了 `cg` 的张数 / 其中 `pics/art.json` 已交付的张数。第一章是一个 quest 的两条线，按 x 坐标分开（南 0–22，北 23 起）。", "",
+           "| 章 | 南线 | 格数 | %s | 战斗 普/精/首 | 分叉 | CG | 北线 | 格数 | %s | 战斗 普/精/首 | 分叉 | CG |" % (TYPE_HEAD, TYPE_HEAD),
+           "|---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|"]
     sums = {"s": dict.fromkeys(SUM_KEYS, 0), "n": dict.fromkeys(SUM_KEYS, 0)}
+    tsums = {"s": [0] * len(TYPE_ORDER), "n": [0] * len(TYPE_ORDER)}
     for ch, s, n in CHAPTERS:
         out.append("| %s | %s | %s |" % (ch, " | ".join(cells(s)), " | ".join(cells(n))))
         for side, key in (("s", s), ("n", n)):
             if key:
                 for k in SUM_KEYS:
                     sums[side][k] += rows[key][k]
+                tsums[side] = [a + b for a, b in zip(tsums[side], rows[key]["types"])]
 
     def total(side):
         d = sums[side]
-        return ["", "**%d**" % d["n"], "**%d / %d / %d**" % (d["normal"], d["elite"], d["boss"]), "**%d**" % d["forks"], "**%d/%d**" % (d["cg_have"], d["cg_all"])]
+        return ["", "**%d**" % d["n"], "**%s**" % " / ".join(str(x) for x in tsums[side]), "**%d / %d / %d**" % (d["normal"], d["elite"], d["boss"]), "**%d**" % d["forks"], "**%d/%d**" % (d["cg_have"], d["cg_all"])]
     out.append("| **合计** | %s | %s |" % (" | ".join(total("s")), " | ".join(total("n"))))
     return "\n".join(out)
 
@@ -192,59 +202,23 @@ uncovered = [k for k in rows if k not in covered]
 if uncovered:  # a new chapter must be added to CHAPTERS or the 南北线对比 table silently misses it
     print("!! quests missing from CHAPTERS (南北线对比): %s" % ", ".join(uncovered))
 
+HEADER = """# 重开三国 · 章节数据统计
+
+**这份文档全部是生成的，别手改**：`python tools/chapter_stats.py --write` 重写它（提交前钩子会在改了 `story.json` / `cards.json` / `art.json` 等数据时自动跑），`--check` 在文档过期时退出 1。
+每章逐格的剧本、战斗、CG 提示词等细节在 `docs/chapters/`，每张卡来自哪里在 `docs/ROSTER.md`。
+
+"""
+
 if "--write" in sys.argv or "--check" in sys.argv:
-    p = ROOT / "docs/CHAPTER-STATS.md"
-    t = p.read_text("utf-8")
-    orig = t
-    ids = {"prologue_s": "第一章 · 富春（南线）", "prologue_n": "第一章 · 冀州风云（北线）"}
-    out = []
-    for line in t.split("\n"):
-        cells = line.split("|")
-        if len(cells) >= 11 and cells[1].strip().startswith("第") and cells[1].strip().find("·") > 0:
-            name = cells[1].strip()
-            qid = None
-            for k, v in ids.items():
-                if name.startswith(v):
-                    qid = k
-            if qid is None:
-                m = re.search(r"`?(\w+)`?", cells[2])
-                qid = m.group(1) if m else None
-            r = rows.get(qid)
-            if r and qid in quests_by_id:
-                note = re.search(r"（兵卡池.*$", cells[9].strip())  # a hand-written note on which places the pools are for
-                cells[9] = " " + pools_cell(quests_by_id[qid]) + (note.group(0) if note else "") + " "
-            if r:
-                cells[4] = " %d%s " % (r["n"], "*" if cells[4].strip().endswith("*") else "")
-                cells[5] = " %d / %d / %d " % (r["normal"], r["elite"], r["boss"])
-                cells[8] = " %d/%d " % (r["cg_have"], r["cg_all"])
-                line = "|".join(cells)
-        elif line.startswith("| **合计"):
-            cells[4] = " **%d** " % tot["n"]
-            cells[5] = " **%d / %d / %d**（共 %d 场战斗） " % (tot["normal"], tot["elite"], tot["boss"], tot["normal"] + tot["elite"] + tot["boss"])
-            cells[8] = " **%d/%d** " % (tot["cg_have"], tot["cg_all"])
-            line = "|".join(cells)
-        out.append(line)
-    t = "\n".join(out)
-    csec = COMPARE_BEGIN + "\n" + compare_section() + "\n" + COMPARE_END
-    if COMPARE_BEGIN in t:
-        t = re.sub(re.escape(COMPARE_BEGIN) + ".*?" + re.escape(COMPARE_END), lambda m: csec, t, flags=re.S)
-    else:  # first run: just before the global overview
-        i = t.index("## 全局总览")
-        t = t[:i] + csec + "\n\n" + t[i:]
-    sec = CARDS_BEGIN + "\n" + card_section() + "\n" + CARDS_END
-    if CARDS_BEGIN in t:
-        t = re.sub(re.escape(CARDS_BEGIN) + ".*?" + re.escape(CARDS_END), lambda m: sec, t, flags=re.S)
-    else:  # first run: right after the overview table's footnote, before the first chapter
-        i = t.index("\n---\n")
-        t = t[:i] + "\n\n" + sec + "\n" + t[i:]
     import datetime
-    t = re.sub(r"## 全局总览（\d{4}-\d{2}-\d{2}", "## 全局总览（%s" % datetime.date.today(), t, 1)
-    if "--check" in sys.argv and "--write" not in sys.argv:  # CI / pre-commit: fail when the doc is stale (the date line is ignored)
-        day = lambda s: re.sub(r"## 全局总览（\d{4}-\d{2}-\d{2}", "## 全局总览（DATE", s, 1)
-        if day(t) != day(orig) or uncovered:
+    p = ROOT / "docs/CHAPTER-STATS.md"
+    orig = p.read_text("utf-8") if p.exists() else ""
+    body = HEADER + COMPARE_BEGIN + "\n" + compare_section() + "\n" + COMPARE_END + "\n\n" + CARDS_BEGIN + "\n" + card_section() + "\n" + CARDS_END + "\n"
+    if "--check" in sys.argv and "--write" not in sys.argv:  # CI / pre-commit: fail when the doc is stale
+        if body != orig or uncovered:
             print("docs/CHAPTER-STATS.md is stale — run: python tools/chapter_stats.py --write")
             sys.exit(1)
         print("CHAPTER-STATS.md is up to date")
     else:
-        p.write_text(t, "utf-8", newline="\n")
-        print("overview updated")
+        p.write_text(body, "utf-8", newline="\n")
+        print("CHAPTER-STATS.md rewritten")
