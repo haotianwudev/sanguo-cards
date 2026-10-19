@@ -668,6 +668,7 @@ func test_sunjian_lends_you_one_of_his_old_generals() -> void:
 	Quests.begin(q, s)
 	s.square = "borrow"
 	s.resolved = false
+	s.events["borrow"] = "borrow_general"  # 借将 is one of 第二章's random ？ events now
 	Quests.choose_event(q, s, rng(0), 0)
 	check_eq(s.offer.size(), 3)
 	check(s.offer.all(func(c): return c in ["chengpu", "handang", "huanggai", "zhuzhi", "wujing", "sunben"]), "孙家的将领")
@@ -703,18 +704,6 @@ func test_bandits_turn_up_everywhere() -> void:
 		var pool: Array = Quests.pools(quest(qi), SaveData.create())["event_pool"]
 		for eid in ["shanzei", "yazhai", "shanzhai", "jieying"]:
 			check(pool.has(eid), "chapter %d: %s" % [qi + 1, eid])
-	check_eq(quest(1)["squares"]["road2"]["event"], "yazhai", "the road to 孙坚 passes her fort")
-
-
-func test_a_fixed_event_is_not_rolled_again() -> void:
-	var q := quest(1)
-	for seed_value in 30:
-		var s := SaveData.create()
-		Quests.begin(q, s)
-		s.square = "road1"
-		s.resolved = false
-		s.events = {}
-		check(Quests.event_here(q, s, rng(seed_value))["id"] != "yazhai", "seed %d" % seed_value)
 
 
 func test_beating_the_bandit_queen_brings_her_along() -> void:
@@ -1754,9 +1743,3 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	s.flags.append("出生：冀州无极")
 	check(s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "heishan_louluo"), "黑山喽啰 in 第七章's public pool")
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
-
-
-
-
-
-
