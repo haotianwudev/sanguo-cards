@@ -2205,14 +2205,6 @@
       "scope": "south",
       "faction": "jingzhou"
     },
-    "huangxu": {
-      "name": "黄叙·天才射手",
-      "rarity": "SR",
-      "troop": "archer",
-      "hp": 70,
-      "at": 88,
-      "pool": false
-    },
     "caihe": {
       "name": "蔡和·连弩统领",
       "rarity": "R",
@@ -4064,11 +4056,11 @@
       "at": 84
     },
     "huangxu": {
-      "name": "黄叙",
-      "rarity": "R",
+      "name": "黄叙·天才射手",
+      "rarity": "SR",
       "troop": "archer",
-      "hp": 52,
-      "at": 79,
+      "hp": 70,
+      "at": 88,
       "scope": "south"
     },
     "bingzhou_nu": {
@@ -4248,14 +4240,14 @@
       "rarity": "R",
       "troop": "infantry",
       "hp": 62,
-      "at": 74,
+      "at": 64,
       "pool": false
     },
     "sufei": {
       "name": "苏飞·黄祖部将",
       "rarity": "R",
       "troop": "infantry",
-      "hp": 62,
+      "hp": 52,
       "at": 74,
       "pool": false
     },
@@ -4264,7 +4256,7 @@
       "rarity": "SR",
       "troop": "cavalry",
       "hp": 66,
-      "at": 96,
+      "at": 86,
       "pool": false
     }
   }
