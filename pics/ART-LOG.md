@@ -1140,3 +1140,4 @@
 - [ ] 2026-10-18 portrait `sunquan_young` ← sunquan_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
 - [ ] 2026-10-19 cg `c2_ln_triple` ← c2_ln_triple.jpg 裁 1536×1024→1536×864 · ok
 - [ ] 2026-10-19 relic `zhen_diaopi` ← zhen_diaopi.jpg · ok
+- [ ] 2026-10-19 cg `c2_ln_lend` ← c2_ln_lend.jpg · ok
