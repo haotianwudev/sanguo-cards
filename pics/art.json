@@ -6977,6 +6977,10 @@
     "n11_guanzhang": {
       "src": "source/cg/n11_guanzhang.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c2_ln_triple": {
+      "src": "source/cg/c2_ln_triple.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

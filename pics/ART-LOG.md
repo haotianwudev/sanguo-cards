@@ -1138,3 +1138,4 @@
 - [x] 2026-10-18 map `dujiang` ← map_dujiang.jpg · ok
 - [x] 2026-10-18 map `guiyi` ← map_guiyi.jpg · ok
 - [ ] 2026-10-18 portrait `sunquan_young` ← sunquan_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [ ] 2026-10-19 cg `c2_ln_triple` ← c2_ln_triple.jpg 裁 1536×1024→1536×864 · ok
