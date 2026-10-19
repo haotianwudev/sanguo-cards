@@ -138,6 +138,7 @@
         "hp": 0.05
       }
     },
+    "cao_jiejv": {"name": "曹操借据", "troop": "logistics", "icon": "据", "rarity": "story", "desc": "曹操在酸枣大营按了手印的借粮字据，利息一分，三年为期。战后宝箱几率 +10%", "mods": {"chest": 0.1}},
     "zhen_diaopi": {"name": "雪貂披风", "troop": "lord", "icon": "氅", "rarity": "story", "desc": "张夫人亲手系上的雪白貂皮披风，里子缝得比账本还密。攻击 +6%，受到的伤害 -8%", "mods": {"at": 0.06, "guard": 0.08}},
     "hupi": {
       "name": "虎皮披风",
