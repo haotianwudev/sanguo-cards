@@ -611,6 +611,21 @@ func test_saving_zumao_gives_the_red_headscarf() -> void:
 	check(GameData.get_db().skills["yindi"]["effects"].any(func(e): return e["type"] == "guard"), "引敌 draws fire")
 
 
+func test_lending_grain_to_caocao_costs_a_quarter_of_hp_and_pays_the_seven_star_blade() -> void:
+	var q: Dictionary
+	for x in GameData.get_db().quests:
+		if x["id"] == "luoyang_n":
+			q = x
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "ln_lend"
+	s.resolved = false
+	var top := Quests.party_max(s)
+	Quests.resolve(q, s, rng(0))
+	check(s.relics.has("qixing") and not s.relics.has("mengde"), "the blade, not a book written years later")
+	check_eq(s.damage, int(round(top * 0.25)), "lending costs 1/4 of the party's HP")
+
+
 func test_handing_dongbai_over_pays_a_relic() -> void:
 	var q := quest(1)
 	var s := SaveData.create()

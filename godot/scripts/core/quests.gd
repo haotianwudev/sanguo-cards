@@ -544,6 +544,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 					save.relics.append(rid)
 					save.run_relics.append(rid)
 					gained.append({"id": rid, "name": "宝物·" + db.relics[rid]["name"], "relic": true})
+			if s["damage"] > 0.0:  # 借粮: a share of the party's full HP lost on arrival (like an event's `damage`)
+				var top := party_max(save)
+				save.damage += mini(int(round(top * s["damage"])), maxi(0, top - 1 - save.damage))
 			save.difficulty += int(s["difficulty"])  # 威震诸侯 / 惊退温侯: beating 吕布 makes the rest harder, no choice
 		"choose":
 			var opt: Dictionary = s["choose"][choice]
