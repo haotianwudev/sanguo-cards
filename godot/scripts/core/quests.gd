@@ -544,6 +544,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 					save.relics.append(rid)
 					save.run_relics.append(rid)
 					gained.append({"id": rid, "name": "宝物·" + db.relics[rid]["name"], "relic": true})
+			save.difficulty += int(s["difficulty"])  # 威震诸侯 / 惊退温侯: beating 吕布 makes the rest harder, no choice
 		"choose":
 			var opt: Dictionary = s["choose"][choice]
 			assert(not option_locked(save, opt), "locked choice")

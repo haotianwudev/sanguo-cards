@@ -509,8 +509,9 @@ func test_beating_lvbu_leads_past_three_chests_one_of_them_grand() -> void:
 	Quests.resolve(q, s, rng(0))  # won
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["triple"])
 	Quests.move(q, s, "triple")
-	Quests.choose_event(q, s, rng(1), 0)
-	check_eq(s.difficulty, 1)
+	check_eq(q["squares"]["triple"]["type"], "event", "a plain story square, not a ？")
+	Quests.resolve(q, s, rng(1))
+	check_eq(s.difficulty, 1, "beating 吕布 raises the 难度 by itself")
 	check(Quests.mods(s)["enemy"] > 0.0, "every enemy is tougher now")
 	var db := GameData.get_db()
 	for seed_value in 10:

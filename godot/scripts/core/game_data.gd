@@ -151,7 +151,7 @@ func _load(dir: String) -> void:
 			var s: Dictionary = q["squares"][sq_id]
 			squares[sq_id] = {"id": sq_id, "x": int(s["x"]), "y": int(s["y"]), "type": s["type"],
 				"next": s.get("next", []), "text": s.get("text", []), "portraits": s.get("portraits", []),
-				"cards": s.get("cards", []), "cards_public": s.get("cards_public", false), "relics": s.get("relics", []), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
+				"cards": s.get("cards", []), "cards_public": s.get("cards_public", false), "relics": s.get("relics", []), "difficulty": int(s.get("difficulty", 0)), "choose": s.get("choose", []).map(_choose_option), "battle": s.get("battle", ""),
 				"boss": s.get("boss", false), "elite": s.get("elite", false), "ambush": s.get("ambush", false),
 				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""), "beatable": s.get("beatable", false),
 				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
