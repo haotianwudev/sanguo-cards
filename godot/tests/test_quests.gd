@@ -668,8 +668,8 @@ func test_sunjian_lends_you_one_of_his_old_generals() -> void:
 	Quests.begin(q, s)
 	s.square = "borrow"
 	s.resolved = false
-	s.events["borrow"] = "borrow_general"  # 借将 is one of 第二章's random ？ events now
-	Quests.choose_event(q, s, rng(0), 0)
+	check_eq(q["squares"]["borrow"]["type"], "recruit", "a plain story square: lines, then pick one old general")
+	Quests.offer(q, s, rng(0))
 	check_eq(s.offer.size(), 3)
 	check(s.offer.all(func(c): return c in ["chengpu", "handang", "huanggai", "zhuzhi", "wujing", "sunben"]), "孙家的将领")
 	Quests.resolve(q, s, rng(0), 1)

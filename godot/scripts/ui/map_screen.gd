@@ -624,7 +624,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = true
 	_apply_cg_mode()
 	var raw_lines: Array = ev.get("text", s["text"])
-	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover"] \
+	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover", "recruit"] \
 		or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()))
 	_dlg_face = null
 	if talking:  # a face for whoever is speaking, changed line by line
@@ -776,7 +776,7 @@ func _show_square(s: Dictionary) -> void:
 		"treasure", "recruit":
 			var is_chest: bool = s["type"] == "treasure"
 			text.text = "宝箱里有几张兵卡，只能拿一张。同种兵卡越多部队越强，但重复的会衰减——缺什么拿什么。" if is_chest \
-				else "闻名而来的豪杰，只能收下一位。"
+				else (s["prompt"] if s["prompt"] != "" else "闻名而来的豪杰，只能收下一位。")
 			var open := Kit.button("打开宝箱" if is_chest else "接见豪杰", "gold")
 			open.pressed.connect(_open_offer.bind(s))
 			buttons.add_child(open)
@@ -789,7 +789,7 @@ func _show_square(s: Dictionary) -> void:
 			Kit.focus(rest)
 	# narrative text: one line per click, then the buttons
 	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()) \
-		or (s["type"] in ["battle", "recover"] and not save.resolved)  # a battle / rest with lines of its own plays them first
+		or (s["type"] in ["battle", "recover", "recruit"] and not save.resolved)  # a battle / rest / recruit with lines of its own plays them first
 	_dlg_after = _battle_info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
 	if s["type"] == "recover" and not save.resolved:  # after a rest's own lines, what resting does
 		_dlg_after = text.text
