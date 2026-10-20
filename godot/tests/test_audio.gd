@@ -87,20 +87,37 @@ func test_a_voices_cgs_are_real_story_pictures() -> void:
 	check(bad.is_empty(), "voices.cgs naming a CG no scene shows: %s" % str(bad))
 
 
-func test_every_lvbu_fight_has_his_entrance_line() -> void:
-	## 吕布 says 「谁敢与我一战！」 when the fight starts — every enemy drawn with his face resolves to the lvbu voice
+func test_every_fight_against_a_voiced_general_uses_his_voice() -> void:
+	## a general with his own voice (吕布, 赵云 …) sounds like himself in every fight against him — every enemy drawn
+	## with his face resolves to his voice, even one that drops a soldier card (吕布 dropping 并州兵, 赵云 常山亲卫)
 	var db := GameData.get_db()
 	var bad: Array = []
+	var checked := 0
 	for eid in db.enemies:
 		var e: Dictionary = db.enemies[eid]
-		if str(e.get("portrait", "")) != "lvbu":
-			continue
-		var card: Dictionary = db.cards.get(str(e.get("card", "")), {})
 		var face: Dictionary = db.cards.get(str(e.get("portrait", "")), {})
+		if str(face.get("voice", "")) == "":
+			continue
+		checked += 1
+		var card: Dictionary = db.cards.get(str(e.get("card", "")), {})
 		var own := ""
 		for v in [e.get("voice", ""), card.get("voice", ""), face.get("voice", "")]:
 			if str(v) != "" and own == "":
 				own = str(v)
-		if own != "lvbu":
-			bad.append(eid)
-	check(bad.is_empty(), "吕布 enemies without his voice: %s" % str(bad))
+		if own != str(face["voice"]):
+			bad.append("%s → %s" % [eid, own])
+	check(checked >= 12, "expected the 吕布 / 赵云 fights to be found (%d)" % checked)
+	check(bad.is_empty(), "enemies not using their general's voice: %s" % str(bad))
+
+
+func test_no_cg_says_two_entrance_lines() -> void:
+	## a CG plays one profile's intro: the same key in two profiles' cgs would silently lose one
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
+	var owner := {}
+	var bad: Array = []
+	for prof in data["voices"]:
+		for key in data["voices"][prof].get("cgs", []):
+			if owner.has(key):
+				bad.append("%s: %s / %s" % [key, owner[key], prof])
+			owner[key] = prof
+	check(bad.is_empty(), "CGs listed under two voices: %s" % str(bad))

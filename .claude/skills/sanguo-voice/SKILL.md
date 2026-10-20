@@ -76,6 +76,8 @@ timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg �
 3. **用户选定后**：本地版——把选中的 `ref_<n>.wav` 复制到 `audio_src/voice/<角色>_ref_<说明>.wav`，声线写 `engine: indextts`、`ref`、`emo`；MiniMax 版——声线写 `engine: minimax`、`voice`、`emotion`（`gen_voices.py` 会重新念一遍，MiniMax 每次结果略有不同，不满意就再跑或改用 `src` 存下试音里那条）。都写上 `source`（来历）和台词；卡牌写 `"voice"`；名将登场 CG 写进 `cgs`（只挑他威风登场的画面，投降、垂死、温情戏不要）。
 4. `gen_voices.py --prune` → `--import` → 跑测试 → 截一场有他的战斗看没报错（`--demo=fight --scenario=<id>`）→ 按路径 `git add`（`audio_src/voice/`、`godot/data/audio/voice/`、`audio.json`、`cards.json`）→ 提交、推送。
 
+**用户直接给一条自己生成的 AI 语音**（Fish Audio 等）：当 `src` 录音入库——复制进 `audio_src/voice/<角色>_<说明>.wav`（先转写确认台词，剪掉头尾杂音），`source` 写清是用户用什么生成的，再按上面第 3、4 步接进游戏。这类不用再试音。
+
 ## 三种声音来源
 
 | 来源 | 什么时候用 | 要点 |
@@ -96,6 +98,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 ### 现在的声线
 - `hero` 主角：本地 IndexTTS 2，参考音 `hero_ref_unrestrained.wav`（当时是 MiniMax「狂放青年」念的，规则定下之前做的，用户已认可），愤怒 100。
 - `lvbu` 吕布：MiniMax 直出的一条录音（`src`），intro / ultimate / roar 同一句。
+- `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句；`cgs` 是他出手、登场的 9 张（悲情和温情戏不放）。
 - 其余（男将 / 女将 / 军师 / 敌将）：edge-tts。
 
 ## 和配音相关的其他东西

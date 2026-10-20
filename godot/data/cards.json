@@ -1518,7 +1518,8 @@
         "qiangpo",
         "changban"
       ],
-      "scope": "north"
+      "scope": "north",
+      "voice": "zhaoyun"
     },
     "sunshangxiang": {
       "name": "孙尚香",

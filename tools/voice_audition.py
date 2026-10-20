@@ -81,6 +81,8 @@ def main() -> None:
     ap.add_argument("--voice", action="append", required=True, help="an edge-tts voice (local) or MiniMax voice id (minimax)")
     ap.add_argument("--emo", default="0,100,0,0,0,0,0,0", help="local: emotion, 8 ints 0..100 (default: full anger)")
     ap.add_argument("--emotion", default="angry", help="minimax: angry / happy / sad / surprised / calm / auto …")
+    ap.add_argument("--speed", type=int, default=105, help="minimax: speed ×100 (105 = 1.05×)")
+    ap.add_argument("--pitch", type=int, default=0, help="minimax: pitch in semitones (-12..12)")
     ap.add_argument("--out", default="", help="output folder (default: a new temp folder)")
     ap.add_argument("--no-open", action="store_true")
     args = ap.parse_args()
@@ -92,7 +94,7 @@ def main() -> None:
         key = _key()
         jobs = [(i, j, v, t) for i, v in enumerate(args.voice) for j, t in enumerate(args.line)]
         with ThreadPoolExecutor(4) as ex:
-            list(ex.map(lambda x: minimax(x[3], x[2], cand(x[0], x[1]), key, args.emotion), jobs))
+            list(ex.map(lambda x: minimax(x[3], x[2], cand(x[0], x[1]), key, args.emotion, args.speed / 100.0, args.pitch), jobs))
     else:
         if not args.ref_text:
             sys.exit("--ref-text is needed for the local engine")

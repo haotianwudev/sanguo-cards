@@ -224,6 +224,40 @@
         "n10_hulao",
         "c14_hujia"
       ]
+    },
+    "zhaoyun": {
+      "name": "赵云",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-19），剪掉了结尾 0.3 秒的杂音",
+      "volume_db": 2,
+      "intro": [
+        {
+          "text": "常山赵子龙在此！",
+          "src": "zhaoyun_changshan.wav"
+        }
+      ],
+      "ultimate": [
+        {
+          "text": "常山赵子龙在此！",
+          "src": "zhaoyun_changshan.wav"
+        }
+      ],
+      "roar": [
+        {
+          "text": "常山赵子龙在此！",
+          "src": "zhaoyun_changshan.wav"
+        }
+      ],
+      "cgs": [
+        "jz_county",
+        "jz_rescue",
+        "jz_boss",
+        "c3_save_zan",
+        "n7_yuye",
+        "n7_qijin",
+        "n7_ouxue",
+        "n10_guandu",
+        "n10_jiaji"
+      ]
     }
   },
   "sfx": {
