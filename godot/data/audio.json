@@ -338,6 +338,29 @@
           "src": "zhouyu_jieqing_v2.wav"
         }
       ]
+    },
+    "guojia": {
+      "name": "郭嘉",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-19，用的是 Fish 里周瑜的音色），剪掉了结尾的静音",
+      "volume_db": 2,
+      "intro": [
+        {
+          "text": "这一局，早就算好了。",
+          "src": "guojia_suanhao.wav"
+        }
+      ],
+      "ultimate": [
+        {
+          "text": "这一局，早就算好了。",
+          "src": "guojia_suanhao.wav"
+        }
+      ],
+      "roar": [
+        {
+          "text": "这一局，早就算好了。",
+          "src": "guojia_suanhao.wav"
+        }
+      ]
     }
   },
   "sfx": {

@@ -2304,7 +2304,8 @@
         "xianji",
         "shisheng"
       ],
-      "scope": "north"
+      "scope": "north",
+      "voice": "guojia"
     },
     "changshan_tieqi": {
       "name": "常山铁骑",
