@@ -44,13 +44,16 @@ func _ready() -> void:
 
 static func voice_file(profile: String, moment: String, line: Variant, p: Dictionary) -> String:
 	## res:// path of one voice line — the same name tools/gen_voices.py writes: a hash of voice|rate|pitch|text (edge-tts)
-	## or indextts|ref|emo|text (IndexTTS 2, `p.engine`); a line made from a recording, {"src": "x.wav"}, is x.ogg
+	## indextts|ref|emo|text (IndexTTS 2) or minimax|voice|emotion|speed|pitch|text (`p.engine`); a recording, {"src": "x.wav"}, is x.ogg
 	var d: Dictionary = line if line is Dictionary else {}
 	if d.has("src"):
 		return "res://data/audio/voice/%s.ogg" % str(d["src"]).get_basename()
 	var text: String = line if line is String else str(d["text"])
 	var parts := PackedStringArray()
-	if str(p.get("engine", "edge")) == "indextts":
+	if str(p.get("engine", "edge")) == "minimax":
+		parts = PackedStringArray(["minimax", str(p["voice"]), str(d.get("emotion", p.get("emotion", "auto"))),
+			str(int(p.get("speed", 100))), str(int(p.get("pitch", 0)))])
+	elif str(p.get("engine", "edge")) == "indextts":
 		var emo := PackedStringArray()
 		for x in d.get("emo", p.get("emo", [0, 0, 0, 0, 0, 0, 0, 0])):
 			emo.append(str(int(x)))

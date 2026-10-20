@@ -5,9 +5,13 @@ Where a line's audio comes from, per profile (or per line):
 - `"engine": "indextts"`: IndexTTS 2 run locally (checkout at INDEXTTS_DIR, default F:/workspace/tts/index-tts) — it
   speaks in the timbre of the profile's `ref` recording (audio_src/voice/) with the emotion `emo` (8 ints 0..100:
   happy, angry, sad, afraid, disgusted, melancholic, surprised, calm), the line's own `emo` winning;
-- `"src": "<file>.wav"` on a line: that recording in audio_src/voice/ as is (made elsewhere, e.g. MiniMax).
+- `"engine": "minimax"`: MiniMax Speech 2.6 Turbo through AtlasCloud (ATLASCLOUD_API_KEY in .env) speaking the line
+  itself — `voice` (a MiniMax voice id), `emotion` (angry / happy / … / auto), `speed` and `pitch` as ints (105 = 1.05×,
+  -3 semitones); a line's own `emotion` wins. Used when the local model isn't good enough (no local pass on top);
+- `"src": "<file>.wav"` on a line: that recording in audio_src/voice/ as is (made elsewhere, or hand-edited).
 Every line is trimmed to its onset, peak-normalised and saved as mono OGG Vorbis. The file name is
-<profile>_<moment>_<hash> over what made it (voice|rate|pitch|text, or indextts|ref|emo|text; a recording keeps its own
+<profile>_<moment>_<hash> over what made it (voice|rate|pitch|text, indextts|ref|emo|text or
+minimax|voice|emotion|speed|pitch|text; a recording keeps its own
 name) — `Sfx.voice_file` in scripts/audio/sfx.gd computes the same name, so there is no manifest: change a line, its
 voice or its emotion and it gets a new file. Existing files are kept (rerunning is cheap).
 
@@ -36,7 +40,8 @@ MOMENTS = ("attack", "ultimate", "heal", "roar", "intro")
 
 
 def voice_lines(data: dict) -> list[tuple[str, str, str, tuple]]:
-    """[(profile, moment, text, spec), ...] — spec is ("edge", voice, rate, pitch) / ("indextts", ref, emo) / ("src", file)."""
+    """[(profile, moment, text, spec), ...] — spec is ("edge", voice, rate, pitch) / ("indextts", ref, emo) /
+    ("minimax", voice, emotion, speed, pitch) / ("src", file)."""
     out = []
     for prof, p in data.get("voices", {}).items():
         for moment in MOMENTS:
@@ -45,6 +50,8 @@ def voice_lines(data: dict) -> list[tuple[str, str, str, tuple]]:
                 text = line if isinstance(line, str) else line["text"]
                 if "src" in d:
                     spec = ("src", d["src"])
+                elif p.get("engine", "edge") == "minimax":
+                    spec = ("minimax", p["voice"], d.get("emotion", p.get("emotion", "auto")), int(p.get("speed", 100)), int(p.get("pitch", 0)))
                 elif p.get("engine", "edge") == "indextts":
                     spec = ("indextts", p["ref"], tuple(int(x) for x in d.get("emo", p.get("emo", [0] * 8))))
                 else:
@@ -58,6 +65,8 @@ def file_name(prof: str, moment: str, text: str, spec: tuple) -> str:
         return Path(spec[1]).stem + ".ogg"
     if spec[0] == "indextts":
         parts = ["indextts", spec[1], ",".join(str(x) for x in spec[2])]
+    elif spec[0] == "minimax":
+        parts = [str(x) for x in spec]
     else:
         parts = list(spec[1:])
     h = hashlib.md5("|".join([*parts, text]).encode("utf-8")).hexdigest()[:10]
@@ -109,6 +118,15 @@ def _indextts(jobs: list[tuple[str, tuple, Path]]) -> None:
         os.unlink(f.name)
 
 
+def _minimax(text: str, voice: str, emotion: str, speed: int, pitch: int) -> bytes:
+    import tempfile as _t
+    from voice_audition import _key, minimax
+    with _t.TemporaryDirectory() as tmp:
+        out = Path(tmp) / "m.wav"
+        minimax(text, voice, out, _key(), emotion, speed / 100.0, pitch)
+        return out.read_bytes()
+
+
 def _encode(audio: bytes, text: str, out: Path) -> None:
     import numpy as np
     ff = _ffmpeg()
@@ -143,6 +161,8 @@ async def main() -> int:
                 audio = (SRC_DIR / spec[1]).read_bytes()
             elif spec[0] == "indextts":
                 audio = (Path(tmp) / f"{n}.wav").read_bytes()
+            elif spec[0] == "minimax":
+                audio = _minimax(text, *spec[1:])
             else:
                 audio = await _edge(text, *spec[1:])
             _encode(audio, text, VOICE_DIR / n)

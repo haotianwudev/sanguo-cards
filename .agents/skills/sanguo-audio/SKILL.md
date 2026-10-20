@@ -60,40 +60,9 @@ godot/data/audio/
 4. **[Freesound.org](https://freesound.org/)**（筛选：**Creative Commons 0**）
    - 推荐搜索：`sword hit armor`、`flesh impact foley`、`shield block`、`spear pierce`。
 
-### B. 战斗配音（配置驱动：`audio.json` 的 `voices` 表 + `tools/gen_voices.py`）
+### B. 战斗配音
 
-**配音只用自己生成的 TTS**（edge-tts）。以前有一段脚本从别的游戏的配音数据集里扒喊声，那些文件已经删了——仓库是公开的，不是我们的素材不进库。
-
-`godot/data/audio.json`：
-- `voices`：每个**声线**（profile）一条：`name`、`tts` = `[声音, 语速, 音高]`、`volume_db`，以及各个时机的台词列表——`attack` 普通出招 / `ultimate` 大招·BOOST / `heal` 治疗 / `roar` 敌人蓄力·狂暴。台词可以是字符串，或 `{"text": …, "tts": […]}` 给这一句单独换音色（女声的治疗台词就是这样换成 Xiaoxiao）。
-- `voice_defaults`：身份 → 默认声线（`lord` / `strategist` / `female` / `male` / `enemy_female` / `enemy_male`）。
-- `female_names`：判断女性的名字片段（以前写死在 `battle_screen.gd`）。
-
-**时机 `intro` 登场**：这个声线当敌人的战斗开打时喊一次（`battle_screen._ready`）；声线的 `cgs` 列出的 CG 出现时也喊（地图上第一次到达那一格、过场 interlude），同一声线 20 秒内不重复（CG 后紧接着开打不会喊两遍）。**现成录音**：台词写 `{"text": …, "src": "x.wav", "source": "来历"}`，录音放 `audio_src/voice/`（在 godot/ 外面，不进安装包），`gen_voices.py` 把它裁剪、标准化成 `voice/x.ogg`。吕布（`lvbu`）就是这样：MiniMax Speech 2.6 Turbo（AtlasCloud，音色 `Chinese (Mandarin)_Reliable_Executive`，angry）念「哈！谁敢与我一战！」再剪掉「哈」，intro / ultimate / roar 都用这一句。AtlasCloud 的 MiniMax 只有预设音色，没有声音克隆；`voice_id` 填 MiniMax 的中文音色 ID 也能用，要加 `language_boost: Chinese`。
-
-谁用哪个声线：卡牌（`cards.json`）或敌人（`enemies.json`）写 `"voice": "<声线>"`；敌人没写就看它的 `card` 的 `voice`，再看它立绘那张卡的（掉并州兵卡的吕布战也算吕布）。卡牌的 `voice` 由 `game_data.gd` 带进 `db.cards` 和战斗里的卡。没写的、或自己的声线缺这个时机的，落回 `voice_defaults` 的默认声线。时机的兜底顺序：治疗技能 `heal → (ultimate) → attack`，大招 `ultimate → attack`，敌人蓄力 / 狂暴 `roar → attack`。所以给某个名将配专属台词，只写他有的那几句就行。
-
-生成：
-```bash
-python tools/gen_voices.py           # 只生成缺的（文件名 = 声线_时机_哈希，哈希取 声音|语速|音高|台词，改了台词或音色就是新文件）
-python tools/gen_voices.py --prune   # 顺便删掉没人用的旧文件
-python tools/gen_voices.py --check   # 缺文件 exit 1
-timeout 120 $G --headless --path godot --import
-```
-产物在 `godot/data/audio/voice/*.ogg`（单声道 OGG，比 WAV 小一个量级）。`Sfx.voice_file()` 用同一个哈希算路径，没有清单文件。edge-tts 报 403 就 `pip install -U edge-tts`（微软换了握手）。
-
-运行时：`Sfx.voice(profiles, moments)` 按顺序找第一个有台词的（时机在外层、声线在内层），`battle_screen.gd` 的 `_sfx_act`（我方）和 `_enemy_voices()`（敌方，一回合只喊一次）只负责挑时机和声线，不写死任何台词。
-
-#### 默认声线（`voices` 里现在的内容）
-
-| 声线 | 设定 | 音色 | 台词 |
-| :--- | :--- | :--- | :--- |
-| `hero` 主角 | 现代男青年、吐槽 | `zh-CN-YunxiNeural` +15% +6Hz | 出招「你妹！」「去你的！」；大招「砸不死你！」（主角除突击 / 突刺以外的技能都算大招） |
-| `male` 男武将 | 刚猛 | `zh-CN-YunjianNeural` +10% -2Hz | 「看招！」「休想跑！」；「万军莫当！」「受死吧！」 |
-| `female` 女武将 | 英气 | `zh-CN-XiaoyiNeural` +10% +2Hz | 「看招！」「休想跑！」；「看我破阵！」「给我瞧好了！」；治疗（Xiaoxiao -6% +2Hz）「为你疗伤……」「别怕，安心休养……」「伤口……好些了吗？」 |
-| `strategist` 军师 | 从容 | `zh-CN-YunyangNeural` +6% -3Hz | 「破绽已现！」「尽在掌握！」；「计定乾坤！」 |
-| `enemy_male` 敌将 | 凶悍 | `zh-CN-YunjianNeural` +10% -2Hz | 「拿命来吧！」「给我上！宰了他！」「拿命来！受死吧！」；roar「都给我上！受死吧！」 |
-| `enemy_female` 女敌将 | 泼辣 | `zh-CN-XiaoyiNeural` +12% +2Hz | 「拿命来！」「给我上！」；roar「都给我上！」 |
+**配音的一切（配置、三种引擎、试音、生成、接进战斗和 CG）见 `sanguo-voice` skill**（`.claude/skills/sanguo-voice/SKILL.md`，`.agents/skills/sanguo-voice/` 是同一份）。这里只留音频处理的通用规则。
 
 #### 关键技术：统一声学通道 (Unified Acoustic Chain)、峰值标准化与纵深声场 (Soundstage Positioning)
 1. **同轨高保真声学空间**：所有角色语音（主角、武将、军师、敌将）必须通过**完全相同**的纯净 ffmpeg 通道转换输出（严禁针对个别角色强加重度 EQ 或动态压缩滤镜，否则会导致声染色脱节、“不在同一个音轨”）。
