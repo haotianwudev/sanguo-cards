@@ -43,6 +43,9 @@ func test_default_voices_cover_every_role() -> void:
 	check(sfx.has_voice(str(defaults["female"]), "heal"), "the female default keeps the healing lines")
 	for role in ["enemy_female", "enemy_male"]:
 		check(sfx.has_voice(str(defaults[role]), "roar"), "%s needs a roar (charge / rage)" % role)
+	for troop in data.get("troop_voices", {}):  # a troop voice names a real profile and a real troop
+		check(data["voices"].has(str(data["troop_voices"][troop])), "troop_voices.%s names no profile" % troop)
+		check(GameData.get_db().troops.has(troop), "troop_voices: no troop %s" % troop)
 	sfx.free()
 
 

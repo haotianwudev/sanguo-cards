@@ -1,6 +1,6 @@
 {
   "_comment": "音效配置：事件名 → 文件（多个随机挑一个）、音量（dB，相对总音量）、音高随机范围。换音效只改这里：正式素材放进 audio/sfx/，把 files 指过去；sfx/gen/ 是 tools/generate_sfx.py 合成的占位音，重新生成会覆盖它们。",
-  "_voices_comment": "战斗配音：voices 里每个声线（profile）写 tts 音色 [声音, 语速, 音高] 和各个时机的台词——attack 普通出招 / ultimate 大招·BOOST / heal 治疗 / roar 敌人蓄力·狂暴 / intro 登场（他当敌人的战斗开打时喊一次；cgs 里列的 CG 出现时也喊，20 秒内不重复）。台词可以是字符串，或 {text, tts} 单独换音色，或 {text, src} 用 audio_src/voice/ 里现成的录音（别处生成的，比如 MiniMax；source 写清来历）。卡牌或敌人写 \"voice\": \"<声线>\" 用自己的声线（敌人没写就看它的 card，再看它立绘那张卡），缺的时机落回默认声线：voice_defaults 按身份挑（主角 / 军师 / 女 / 男 / 敌方女 / 敌方男），女性看 female_names。改完台词跑 python tools/gen_voices.py 生成 audio/voice/*.ogg（文件名是台词和音色的哈希，改了就重新生成；--prune 删掉没人用的旧文件），再 --import。",
+  "_voices_comment": "战斗配音：voices 里每个声线（profile）写 tts 音色 [声音, 语速, 音高] 和各个时机的台词——attack 普通出招 / ultimate 大招·BOOST / heal 治疗 / roar 敌人蓄力·狂暴 / intro 登场（他当敌人的战斗开打时喊一次；cgs 里列的 CG 出现时也喊，20 秒内不重复）。台词可以是字符串，或 {text, tts} 单独换音色，或 {text, src} 用 audio_src/voice/ 里现成的录音（别处生成的，比如 MiniMax；source 写清来历）。卡牌或敌人写 \"voice\": \"<声线>\" 用自己的声线（敌人没写就看它的 card，再看它立绘那张卡），缺的时机先看 troop_voices（兵种 → 声线，男性才用），再落回默认声线：voice_defaults 按身份挑（主角 / 军师 / 女 / 男 / 敌方女 / 敌方男），女性看 female_names。改完台词跑 python tools/gen_voices.py 生成 audio/voice/*.ogg（文件名是台词和音色的哈希，改了就重新生成；--prune 删掉没人用的旧文件），再 --import。",
   "voice_defaults": {
     "lord": "hero",
     "strategist": "strategist",
@@ -8,6 +8,9 @@
     "male": "male",
     "enemy_female": "enemy_female",
     "enemy_male": "enemy_male"
+  },
+  "troop_voices": {
+    "spear": "spear"
   },
   "female_names": [
     "貂蝉",
@@ -257,6 +260,17 @@
         "n7_ouxue",
         "n10_guandu",
         "n10_jiaji"
+      ]
+    },
+    "spear": {
+      "name": "枪兵（男）",
+      "source": "用户用 Fish Audio 生成的 AI 语音（赵云的声音，2026-10-19），剪掉了结尾的静音",
+      "volume_db": 1,
+      "attack": [
+        {
+          "text": "看枪！",
+          "src": "spear_kanqiang.wav"
+        }
       ]
     }
   },

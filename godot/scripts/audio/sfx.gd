@@ -10,6 +10,7 @@ const INTRO_GAP_MS := 20000  # an entrance line (CG, then the fight right after 
 var _entries: Dictionary = {}
 var voice_defaults: Dictionary = {}  # audio.json voice_defaults: role (lord / strategist / female / male / enemy_*) → profile
 var female_names: Array = []
+var troop_voices: Dictionary = {}  # audio.json troop_voices: troop → profile (e.g. 枪兵「看枪！」), for men only
 var _voice_vol: Dictionary = {}  # profile → volume_db
 var _voice_streams: Dictionary = {}  # "profile/moment" → Array[AudioStream]
 var _cg_voice: Dictionary = {}  # CG key → profile whose intro plays when that picture comes up (the profile's `cgs`)
@@ -68,6 +69,7 @@ static func voice_file(profile: String, moment: String, line: Variant, p: Dictio
 func _load_voices(data: Dictionary) -> void:
 	voice_defaults = data.get("voice_defaults", {})
 	female_names = data.get("female_names", [])
+	troop_voices = data.get("troop_voices", {})
 	var profiles: Dictionary = data.get("voices", {})
 	for prof in profiles:
 		var p: Dictionary = profiles[prof]

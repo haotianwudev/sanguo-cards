@@ -1118,7 +1118,9 @@ func _sfx_act(ev: Dictionary) -> void:
 		if eff.get("type", "") == "heal":
 			moments.push_front("heal")
 			break
-	Sfx.voice([str(leader_card.get("voice", "")), str(Sfx.voice_defaults.get(role, role))], moments)
+	# own voice → the troop's (men only: 枪兵「看枪！」) → the default for the role
+	var troop_voice := str(Sfx.troop_voices.get(troop, "")) if role == "male" else ""
+	Sfx.voice([str(leader_card.get("voice", "")), troop_voice, str(Sfx.voice_defaults.get(role, role))], moments)
 
 	# 配合兵刃破风声，让打击手感扎实
 	Sfx.play("slash")

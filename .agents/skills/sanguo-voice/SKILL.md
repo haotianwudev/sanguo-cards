@@ -16,6 +16,7 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
 ```jsonc
 "voice_defaults": {"lord": "hero", "strategist": "strategist", "female": "female", "male": "male",
                    "enemy_female": "enemy_female", "enemy_male": "enemy_male"},   // 身份 → 默认声线
+"troop_voices": {"spear": "spear"},                                             // 兵种 → 声线（只给男性用）
 "female_names": ["貂蝉", "孙尚香", …],                                         // 判断女性用的名字片段
 "voices": {
   "hero": {                                  // 一个「声线」
@@ -43,7 +44,7 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
 - **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `intro` 登场（他当敌人的战斗开打时；`cgs` 里的 CG 第一次出现时，地图和过场都算；同一声线 20 秒内不重复）。
 - **三种引擎**（声线的 `engine`）：不写 = edge-tts（`tts`）；`indextts` = 本地模型（`ref` 参考音 + `emo` 语气）；`minimax` = MiniMax 直接念（`voice` 音色 ID、`emotion`、`speed`、`pitch`）。
 - **一句台词**的写法：字符串；`{"text", "tts"}` / `{"text", "emo"}` / `{"text", "emotion"}`（单句换音色或语气）；`{"text", "src": "x.wav"}`（`audio_src/voice/` 里的现成录音，比如剪过的，游戏里叫 `x.ogg`）。
-- **谁用哪个声线**：卡牌（`cards.json`）写 `"voice": "<声线>"`。敌人按顺序找：自己的 `voice` → `card` 那张卡的 → 立绘那张卡的（掉并州兵卡的吕布战也是吕布）→ 按性别的默认。`game_data.gd` 把 `voice` 带进 `db.cards` 和战斗卡。
+- **谁用哪个声线**：卡牌（`cards.json`）写 `"voice": "<声线>"`。我方出招按顺序找：卡牌自己的 → 兵种的（`troop_voices`，男性才用；枪兵「看枪！」）→ 按身份的默认。敌人按顺序找：自己的 `voice` → `card` 那张卡的 → 立绘那张卡的（掉并州兵卡的吕布战也是吕布）→ 按性别的默认。`game_data.gd` 把 `voice` 带进 `db.cards` 和战斗卡。
 - **兜底**：缺的时机落回默认声线，顺序：治疗 `heal → (ultimate) → attack`，大招 `ultimate → attack`，敌人 `roar → attack`。所以给名将配专属，只写他有的那几句。
 - **文件名**：`<声线>_<时机>_<哈希>.ogg`，哈希取「音色|语速|音高|台词」/「indextts|参考音|语气|台词」/「minimax|音色|情绪|语速|音高|台词」——改了任何一样就是新文件。`gen_voices.py` 和 `Sfx.voice_file`（`scripts/audio/sfx.gd`）各算一遍，两边规则必须一致；没有清单文件。
 
@@ -98,6 +99,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 ### 现在的声线
 - `hero` 主角：本地 IndexTTS 2，参考音 `hero_ref_unrestrained.wav`（当时是 MiniMax「狂放青年」念的，规则定下之前做的，用户已认可），愤怒 100。
 - `lvbu` 吕布：MiniMax 直出的一条录音（`src`），intro / ultimate / roar 同一句。
+- `spear` 枪兵（男）：Fish Audio 生成的「看枪！」（赵云的声音），只配了 attack，大招落回男将默认。
 - `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句；`cgs` 是他出手、登场的 9 张（悲情和温情戏不放）。
 - 其余（男将 / 女将 / 军师 / 敌将）：edge-tts。
 
