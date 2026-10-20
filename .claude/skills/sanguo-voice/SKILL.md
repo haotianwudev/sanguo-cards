@@ -8,6 +8,7 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
 **原则**：配音全部由配置驱动——台词、音色、语气都写在 `godot/data/audio.json` 的 `voices` 里，战斗代码里不写任何台词。
 只用我们自己生成的声音（edge-tts / MiniMax / 本地 IndexTTS 2 / 用户自己录的），**不用别家游戏、影视的配音，也不拿真人演员的声音当参考音**——仓库是公开的（以前扒过《原神》的喊声，已删）。
 **先本地、不好再 MiniMax（用户定）**：先用本地 IndexTTS 2 试（参考音用免费的 edge-tts 生成）；用户觉得不好，再用 MiniMax 直接念台词——用了 MiniMax 就不要再套一层本地模型，没必要。
+**用户给一段别人的录音（素材网站、游戏、影视）说「做个类似的」**：只当风格参照——转写出台词、量时长 / 节奏 / 音高走向 / 哪里加重（`faster-whisper` 用 `device="cpu"`，本机的 CUDA 库不全），再用我们自己的音色按这个风格生成。**原录音不喂给任何模型**（不当 `ref`、不当 IndexTTS 的情绪参考），也不进仓库；对比时可以把它放在第 0 个给用户听。下载的文件放在草稿目录里单独的文件夹。
 新声音都要用户先听过、点头再进游戏；试音文件直接在他电脑上打开（`start "" x.wav`），一次给一个对比文件，不要一句一句开。
 
 ## 配置（`godot/data/audio.json`）
@@ -66,7 +67,7 @@ timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg �
    python tools/voice_audition.py --ref-text "<他用自己口吻说的一段话，约 8 秒>"        --line "<台词1>" --line "<台词2>"        --voice zh-CN-YunjianNeural --voice zh-CN-YunyangNeural --voice zh-CN-YunxiNeural        --emo 0,100,0,0,0,0,0,0
    ```
    每个候选 edge-tts 音色先念参考话，再由本地 IndexTTS 2 用这个音色、这个语气念台词，拼成 `compare.wav` 自动打开。告诉用户顺序（第 1 个 = 哪个音色）。
-   edge-tts 中文男声：`zh-CN-YunjianNeural`（刚猛）、`zh-CN-YunyangNeural`（沉稳）、`zh-CN-YunxiNeural`（年轻）、`zh-CN-YunxiaNeural`（少年）、`zh-CN-liaoning-YunxiNeural`（东北味）；女声：`zh-CN-XiaoxiaoNeural`、`zh-CN-XiaoyiNeural`、`zh-CN-liaoning-XiaobeiNeural`。
+   edge-tts 普通话男声只有四个：`zh-CN-YunjianNeural`（刚猛）、`zh-CN-YunyangNeural`（沉稳）、`zh-CN-YunxiNeural`（年轻）、`zh-CN-YunxiaNeural`（少年）；女声：`zh-CN-XiaoxiaoNeural`、`zh-CN-XiaoyiNeural`、`zh-CN-liaoning-XiaobeiNeural`（东北）、`zh-CN-shaanxi-XiaoniNeural`（陕西）。用 `edge_tts.list_voices()` 查最新的——不存在的音色报 `NoAudioReceived`。
    **不好再 MiniMax**（按字收费）：
    ```bash
    python tools/voice_audition.py --engine minimax --line "<台词>"        --voice male-qn-jingying --voice "Chinese (Mandarin)_Reliable_Executive" --emotion angry
