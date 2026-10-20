@@ -1111,7 +1111,7 @@ func _sfx_act(ev: Dictionary) -> void:
 	var is_hero: bool = troop == "lord" or leader_card.get("id", "") == "lord" or u_idx == 0  # unit 0 is always the lord's own
 	if is_hero and skill_id != "tuji" and skill_id != "tuci":
 		is_big_move = true  # the lord has one plain move (突击 / 突刺); everything else he shouts as a big one
-	var role := "lord" if is_hero else "strategist" if troop == "strategist" else "female" if _is_female(leader_card) else "male"
+	var role := "lord" if is_hero else "female" if _is_female(leader_card) else "strategist" if troop == "strategist" else "male"  # 女策士（蔡文姬…）走女声
 
 	var moments: Array = ["ultimate", "attack"] if is_big_move else ["attack"]
 	for eff in skill.get("effects", []):

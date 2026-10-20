@@ -106,7 +106,8 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `cavalry` 骑兵（男）：Fish Audio 生成的「冲锋！」「突击！」（吕布的声音，随机挑一句），只配了 attack。
 - `spear` 枪兵（男）：Fish Audio 生成的「看枪！」「刺！」（赵云的声音，随机挑一句），只配了 attack，大招落回男将默认。
 - `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句；`cgs` 是他出手、登场的 9 张（悲情和温情戏不放）。
-- 其余（男将 / 女将 / 军师 / 敌将）：edge-tts。
+- `strategist` 策士（男）：Fish Audio 生成的「大局已定。」「谋定乾坤。」（周瑜的音色，随机挑一句），只配了 attack，大招也落到这两句。女策士（蔡文姬、黄月英）不走它，走女将默认。
+- 其余（男将 / 女将 / 敌将）：edge-tts。
 
 ## 和配音相关的其他东西
 

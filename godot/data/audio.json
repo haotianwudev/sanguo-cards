@@ -148,19 +148,18 @@
       ]
     },
     "strategist": {
-      "name": "军师（通用）",
-      "tts": [
-        "zh-CN-YunyangNeural",
-        "+6%",
-        "-3Hz"
-      ],
-      "volume_db": 1,
+      "name": "策士（男，通用）",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，用的是 Fish 里周瑜的音色），剪掉了结尾静音",
+      "volume_db": 2,
       "attack": [
-        "破绽已现！",
-        "尽在掌握！"
-      ],
-      "ultimate": [
-        "计定乾坤！"
+        {
+          "text": "大局已定。",
+          "src": "strategist_dajuyiding.wav"
+        },
+        {
+          "text": "谋定乾坤。",
+          "src": "strategist_moudingqiankun.wav"
+        }
       ]
     },
     "enemy_male": {
