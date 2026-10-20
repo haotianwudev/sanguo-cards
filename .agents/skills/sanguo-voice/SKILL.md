@@ -63,7 +63,7 @@ timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg �
 
 ## 给一个角色做配音（流程）
 
-1. **定台词**：短、一口气喊完（出招 1～2 句、大招 1 句；名将加 `intro`）。台词要符合人设（主角是逗比：「你妹的！」；吕布狂：「谁敢与我一战！」）。
+1. **定台词**：**每个角色就一句**（用户定）——一句招牌台词，`intro` / `ultimate` / `roar` 都用它；普通出招不配专属台词，走兵种的（`troop_voices`）或按身份的默认。只给用户推荐一句，不列一堆备选。短、一口气喊完。台词要符合人设（主角是逗比：「你妹的！」；吕布狂：「谁敢与我一战！」）。
 2. **先本地试**（免费）：
    ```bash
    python tools/voice_audition.py --ref-text "<他用自己口吻说的一段话，约 8 秒>"        --line "<台词1>" --line "<台词2>"        --voice zh-CN-YunjianNeural --voice zh-CN-YunyangNeural --voice zh-CN-YunxiNeural        --emo 0,100,0,0,0,0,0,0
