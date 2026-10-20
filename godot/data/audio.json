@@ -201,20 +201,19 @@
       "intro": [
         {
           "text": "谁敢与我一战！",
-          "src": "lvbu_intro_shuigan.wav",
-          "source": "MiniMax Speech 2.6 Turbo（AtlasCloud），音色 Chinese (Mandarin)_Reliable_Executive，emotion angry，speed 1.05，pitch -3；念的是「哈！谁敢与我一战！」，剪掉了「哈」（原始录音 lvbu_intro_take.wav）"
+          "src": "lvbu_shuigan_fish.wav"
         }
       ],
       "ultimate": [
         {
           "text": "谁敢与我一战！",
-          "src": "lvbu_intro_shuigan.wav"
+          "src": "lvbu_shuigan_fish.wav"
         }
       ],
       "roar": [
         {
           "text": "谁敢与我一战！",
-          "src": "lvbu_intro_shuigan.wav"
+          "src": "lvbu_shuigan_fish.wav"
         }
       ],
       "cgs": [
@@ -226,7 +225,8 @@
         "n8_zhanlv",
         "n10_hulao",
         "c14_hujia"
-      ]
+      ],
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-19），剪掉了结尾的静音；替换了原来的 MiniMax 版"
     },
     "zhaoyun": {
       "name": "赵云",
