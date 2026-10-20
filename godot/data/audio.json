@@ -315,6 +315,29 @@
           "src": "sunce_xiaobawang.wav"
         }
       ]
+    },
+    "zhouyu": {
+      "name": "周瑜",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-19），剪掉了结尾的静音（「这笔账」后的停顿保留）",
+      "volume_db": 2,
+      "intro": [
+        {
+          "text": "这笔账，一把火结清。",
+          "src": "zhouyu_jieqing.wav"
+        }
+      ],
+      "ultimate": [
+        {
+          "text": "这笔账，一把火结清。",
+          "src": "zhouyu_jieqing.wav"
+        }
+      ],
+      "roar": [
+        {
+          "text": "这笔账，一把火结清。",
+          "src": "zhouyu_jieqing.wav"
+        }
+      ]
     }
   },
   "sfx": {

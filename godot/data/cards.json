@@ -1582,7 +1582,8 @@
         "huoshang"
       ],
       "troop_skills": false,
-      "pool": false
+      "pool": false,
+      "voice": "zhouyu"
     },
     "huanggai": {
       "name": "黄盖",
@@ -1653,7 +1654,8 @@
       "skills": [
         "chibi"
       ],
-      "scope": "south"
+      "scope": "south",
+      "voice": "zhouyu"
     },
     "luxun": {
       "name": "陆逊",
