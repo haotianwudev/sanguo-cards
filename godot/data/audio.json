@@ -264,12 +264,16 @@
     },
     "spear": {
       "name": "枪兵（男）",
-      "source": "用户用 Fish Audio 生成的 AI 语音（赵云的声音，2026-10-19），剪掉了结尾的静音",
+      "source": "用户用 Fish Audio 生成的 AI 语音（赵云的声音，2026-10-19），剪掉了结尾的静音和杂音；两句随机挑一句",
       "volume_db": 1,
       "attack": [
         {
           "text": "看枪！",
           "src": "spear_kanqiang.wav"
+        },
+        {
+          "text": "刺！",
+          "src": "spear_ci.wav"
         }
       ]
     }
