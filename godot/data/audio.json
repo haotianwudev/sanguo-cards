@@ -286,6 +286,10 @@
         {
           "text": "冲锋！",
           "src": "cavalry_chongfeng.wav"
+        },
+        {
+          "text": "突击！",
+          "src": "cavalry_tuji.wav"
         }
       ]
     }
