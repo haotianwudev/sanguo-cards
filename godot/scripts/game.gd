@@ -7,7 +7,7 @@ var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var save_path := ""  # the file the current save lives in: a route slot, or "" for a journey still choosing its birthplace
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto"}  # player options, kept in user://options.cfg (not in the save)
+var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto", "auto_speed": "fast"}  # player options, kept in user://options.cfg (not in the save)
 const OPTIONS_PATH := "user://options.cfg"
 
 
@@ -912,7 +912,18 @@ func demo(name: String) -> void:
 						await b._on_end_round()
 				await get_tree().create_timer(5.0).timeout
 				print("AUTO-DEMO result=", b.b.result, " busy=", b._busy, " screen=", root.get_child(root.get_child_count() - 1).get_class())
-			if name == "fight" and not BattleScreen.auto_on:  # play a few actions to exercise the animations (with --auto the auto player already acts)
+			if name == "fight" and OS.get_cmdline_user_args().has("--ult-enemy"):  # the enemy's 大招 cut-in: its charged move lands now
+				await get_tree().create_timer(0.5).timeout
+				for m in b.b.enemy["data"]["moves"]:
+					if float(m.get("weight", 1.0)) <= 0.0:
+						b.b.enemy["charging"] = m["name"]
+						break
+				await b._on_end_round()
+			elif name == "fight" and OS.get_cmdline_user_args().has("--ult"):  # the 大招 cut-in: 周瑜·赤壁's 赤壁业火, AP topped up
+				await get_tree().create_timer(0.5).timeout
+				b.b.ap = b.b.ap_max()
+				await b._on_skill(2, "chibi")
+			elif name == "fight" and not BattleScreen.auto_on:  # play a few actions to exercise the animations (with --auto the auto player already acts)
 				await get_tree().create_timer(0.5).timeout
 				await b._on_skill(1, "bawang")
 				await b._on_skill(0, "tuji")

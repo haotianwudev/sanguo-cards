@@ -140,6 +140,14 @@ def main():
     save("win", mix((0, sweep(140, 70, 0.2, 14)), (0.18, sweep(140, 70, 0.2, 14)), (0.36, sweep(160, 80, 0.2, 14)), (0.5, ring([131, 196, 262, 392, 523], 1.6, 1.8))))
     save("lose", mix((0, ring([196, 294], 0.6, 3)), (0.4, ring([175, 262], 0.6, 3)), (0.8, ring([131, 196], 1.2, 2))))
     save("step", mix((0, ring([880, 1560], 0.09, 45)), (0, 0.4 * sweep(300, 180, 0.05, 60))), 0.6)
+    # ---- added later: own seed, so everything above stays byte-identical
+    rng2 = np.random.default_rng(11)
+    # 点卡牌: a crisp card flick — a short papery noise snap plus a small wooden tick
+    save("card_tap", mix((0, 0.8 * highpass(noise(0.03, rng2, 120), 2500)), (0.004, 0.5 * ring([1900, 2850], 0.07, 55))), 0.55)
+    # 大招 cut-in: a long rising whoosh into a deep slam with a rumble tail
+    save("ult_cutin", mix((0, 0.9 * whoosh(0.55, rng2, 250, 3500, 0.85)),
+                          (0.5, sweep(95, 32, 1.0, 3.5)), (0.5, 0.8 * lowpass(noise(0.9, rng2, 4), 900)),
+                          (0.5, 0.35 * highpass(noise(0.08, rng2, 40), 2500))))
     print("wrote", len(list(OUT.glob("*.wav"))), "files to", OUT)
 
 

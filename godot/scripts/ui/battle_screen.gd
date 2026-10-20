@@ -38,6 +38,7 @@ var _has_cg := false
 var _fx := {}  # persistent status effects on screen: key -> node (see _sync_fx)
 var _badges: Array = []  # corner badges currently on screen (freed and rebuilt on every refresh)
 var _boost_hits := false  # the blows now landing come from a BOOSTed leader
+var _intro_wait := 0.0  # seconds of the enemy's entrance line, so 自动 doesn't talk over it
 var _enemy_shouted_this_turn := false  # 敌人本回合是否已经战吼过（防止多段行动或灼烧连喊）
 
 
@@ -54,7 +55,7 @@ func _ready() -> void:
 	else:
 		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), 0, {}, {}, ambush, {}, save.swap_roster())
 	_build()
-	Engine.time_scale = Game.battle_speed()
+	_apply_speed()
 	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])
 	if b.mods.has("affix"):
 		_log_lines(["[color=red]【词缀·%s】%s[/color]" % [b.mods["affix"]["name"], b.mods["affix"]["desc"]]])
@@ -66,7 +67,7 @@ func _ready() -> void:
 		_finish_at_start.call_deferred()
 	elif auto_on:
 		_auto_step.call_deferred()
-	Sfx.voice(_enemy_voices(), ["intro"])  # a named foe's entrance line (吕布「谁敢与我一战！」); generic enemies have none
+	_intro_wait = Sfx.voice(_enemy_voices(), ["intro"])  # a named foe's entrance line (吕布「谁敢与我一战！」); generic enemies have none
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
@@ -507,15 +508,32 @@ func _on_swap(i: int, card_id: String) -> void:
 
 
 func _toggle_auto() -> void:
-	auto_on = not auto_on
+	## the 自动 button cycles 关 → 快 → 慢 → 关 (the speed is kept in options.cfg)
+	if not auto_on:
+		auto_on = true
+		Game.set_option("auto_speed", "fast")
+	elif str(Game.options.get("auto_speed", "fast")) == "fast":
+		Game.set_option("auto_speed", "slow")
+	else:
+		auto_on = false
+	_apply_speed()
 	_sync_auto_btn()
 	if auto_on:
 		_close_skill_popup()
 		_auto_step()
 
 
+func _auto_slow() -> bool:
+	return auto_on and str(Game.options.get("auto_speed", "fast")) == "slow"
+
+
+func _apply_speed() -> void:
+	## 慢速自动: animations at plain speed (even with 快速 on) and a long beat between actions, to watch the fight
+	Engine.time_scale = 1.0 if _auto_slow() else Game.battle_speed()
+
+
 func _sync_auto_btn() -> void:
-	_auto_btn.text = "自动：开" if auto_on else "自动"
+	_auto_btn.text = ("自动：慢" if _auto_slow() else "自动：快") if auto_on else "自动"
 	_auto_btn.add_theme_color_override("font_color", Kit.c("gold") if auto_on else Kit.c("text"))
 
 
@@ -527,7 +545,8 @@ func _auto_step() -> void:
 	while auto_on and _busy and is_inside_tree():
 		await get_tree().process_frame
 	if auto_on and is_inside_tree():
-		await get_tree().create_timer(0.35).timeout  # a beat to see the board — and to switch it off
+		await get_tree().create_timer(maxf(_intro_wait, 1.3 if _auto_slow() else 0.35)).timeout
+		_intro_wait = 0.0  # the first move waits for the enemy's entrance line to finish  # a beat to see the board — and to switch it off
 	_auto_waiting = false
 	if not (auto_on and is_inside_tree()) or _busy or b.result != "":
 		return
@@ -741,6 +760,8 @@ func _play(events: Array) -> void:
 				tw.tween_property(v, "position:y", y, 0.14)
 				_boost_hits = bool(ev.get("boost", false))
 				_sfx_act(ev)
+				if _is_ult(GameData.get_db().skills.get(str(ev.get("skill", "")), {})):
+					await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
 				if _boost_hits:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
@@ -846,6 +867,11 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.45).timeout
 			"enemy_hit":
 				var is_fire: bool = ev.get("move", "") == "火"
+				if not is_fire and _enemy_big_move(str(ev.get("move", ""))):  # the wound-up 大招 lands: cut-in, and it roars
+					var ed: Dictionary = b.enemy.get("data", {})
+					Sfx.voice(_enemy_voices(), ["roar", "attack"])
+					_enemy_shouted_this_turn = true
+					await _cutin(str(ed.get("name", "")), str(ed.get("portrait", "")), str(ev.get("move", "")), true)
 				var x := _enemy_art.position.y
 				var tw := _enemy_art.create_tween()
 				tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
@@ -935,12 +961,146 @@ func _enemy_voices() -> Array:
 	return [own, str(Sfx.voice_defaults.get(role, role))]
 
 
+static func _is_ult(skill: Dictionary) -> bool:
+	## 大招: special, once per stretch (限1) or 3+ AP
+	return bool(skill.get("special", false)) or (skill.get("uses", null) != null and int(skill["uses"]) == 1) or int(skill.get("cost", 0)) >= 3
+
+
+func _ult_cutin(i: int, skill_id: String) -> void:
+	var card: Dictionary = b.leaders[i].get("leader", {}).get("card", {})
+	var skill: Dictionary = GameData.get_db().skills.get(skill_id, {})
+	if not bool(skill.get("cutin", true)):  # skills.json "cutin": false = no cut-in for this one
+		return
+	await _cutin(str(card.get("name", "")).split("·")[0], Kit.portrait_key(str(card.get("person", card.get("id", "")))),
+		str(skill.get("name", "")), false, str(skill.get("cutin_sfx", "ult_cutin")))
+
+
+func _enemy_big_move(move_name: String) -> bool:
+	## the enemy's 大招: a charged move (weight 0 — it only lands after a 蓄力 turn)
+	for m in b.enemy.get("data", {}).get("moves", []):
+		if str(m.get("name", "")) == move_name:
+			return float(m.get("weight", 1.0)) <= 0.0
+	return false
+
+
+func _cutin(who_name: String, key: String, move_name: String, enemy_side: bool, sfx := "ult_cutin") -> void:
+	## 大招 cut-in (Rance style, slow and loud): the screen darkens, speed lines, the portrait swings in big over a coloured
+	## band, the move's name slams down with a flash and a shake, a slow drift — then everything sweeps off and the hits land.
+	## Ours come in from the left on red; the enemy's mirror it from the right on near-black.
+	var layer := Control.new()
+	layer.size = Vector2(1280, 720)
+	layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.z_index = 60
+	add_child(layer)
+	if sfx != "":
+		Sfx.play(sfx)
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0)
+	dim.size = layer.size
+	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(dim)
+	dim.create_tween().tween_property(dim, "color:a", 0.72, 0.25)
+	# the band the portrait sits on: grows out from the left edge, gold rims chase it
+	var band := ColorRect.new()
+	band.color = Color(0.12, 0.03, 0.08, 0.97) if enemy_side else Color(0.42, 0.07, 0.05, 0.97)
+	band.position = Vector2(0, 205)
+	band.size = Vector2(1280, 310)
+	band.scale = Vector2(0, 1)
+	band.pivot_offset = Vector2(1280 if enemy_side else 0, 0)
+	band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(band)
+	band.create_tween().tween_property(band, "scale:x", 1.0, 0.22).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	for y in [200, 515]:
+		var rim := ColorRect.new()
+		rim.color = Kit.c("gold")
+		rim.size = Vector2(1280, 6)
+		rim.position = Vector2(1280 if enemy_side else -1280, y)
+		rim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		layer.add_child(rim)
+		rim.create_tween().tween_property(rim, "position:x", 0.0, 0.26).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	# speed lines streaking across the band all through the cut-in
+	for k in 18:
+		var ln := ColorRect.new()
+		ln.color = Color(1, 0.95, 0.8, randf_range(0.25, 0.6))
+		ln.size = Vector2(randf_range(160, 420), randf_range(2, 5))
+		ln.position = Vector2(1300 if enemy_side else -ln.size.x, randf_range(215, 505))
+		ln.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		layer.add_child(ln)
+		var lt := ln.create_tween().set_loops(3)
+		lt.tween_interval(randf_range(0.0, 0.4))
+		if enemy_side:
+			lt.tween_property(ln, "position:x", -ln.size.x, randf_range(0.22, 0.38)).from(1300.0)
+		else:
+			lt.tween_property(ln, "position:x", 1300.0, randf_range(0.22, 0.38)).from(-ln.size.x)
+	# the portrait: swings in from the left, then drifts slowly (the slow-motion beat), then whips off to the right
+	var frame := ColorRect.new()  # a gold frame that travels with the portrait
+	frame.color = Kit.c("gold")
+	frame.size = Vector2(432, 537)
+	var xs: Array = [1326.0, 754.0, 704.0, -530.0] if enemy_side else [-526.0, 104.0, 154.0, 1394.0]  # off, in, drift, out
+	frame.position = Vector2(xs[0], 144)
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(frame)
+	var pic := TextureRect.new()
+	pic.texture = Kit.portrait(key, 0.8, 3.2) if key != "" else null
+	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	pic.size = Vector2(420, 525)
+	pic.position = Vector2(xs[0] + 6, 150)
+	pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(pic)
+	var pt := pic.create_tween()
+	for node in [frame, pic]:
+		var off: float = 0.0 if node == frame else 6.0
+		var tw: Tween = node.create_tween()
+		tw.tween_property(node, "position:x", xs[1] + off, 0.32).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tw.tween_property(node, "position:x", xs[2] + off, 1.05)
+		tw.tween_property(node, "position:x", xs[3] + off, 0.22).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	# who, then the skill name slamming down from huge: gold with a thick black outline
+	var who := Kit.label(who_name, Kit.FONT_BIG)
+	who.add_theme_color_override("font_color", Color.WHITE)
+	who.add_theme_constant_override("outline_size", 8)
+	who.add_theme_color_override("font_outline_color", Color.BLACK)
+	who.position = Vector2(60 if enemy_side else 600, 262)
+	who.modulate.a = 0.0
+	layer.add_child(who)
+	who.create_tween().tween_property(who, "modulate:a", 1.0, 0.2).set_delay(0.2)
+	var name_l := Kit.label(move_name, 96)
+	name_l.add_theme_color_override("font_color", Color(1.0, 0.35, 0.3) if enemy_side else Kit.c("gold"))
+	name_l.add_theme_constant_override("outline_size", 16)
+	name_l.add_theme_color_override("font_outline_color", Color.BLACK)
+	name_l.position = Vector2(40 if enemy_side else 580, 310)
+	name_l.size = Vector2(660, 130)
+	name_l.pivot_offset = name_l.size / 2
+	name_l.scale = Vector2(2.8, 2.8)
+	name_l.modulate.a = 0.0
+	layer.add_child(name_l)
+	var nt := name_l.create_tween()
+	nt.tween_interval(0.28)
+	nt.tween_property(name_l, "modulate:a", 1.0, 0.06)
+	nt.parallel().tween_property(name_l, "scale", Vector2.ONE, 0.26).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	nt.tween_property(name_l, "scale", Vector2(1.08, 1.08), 0.9)
+	await get_tree().create_timer(0.54).timeout
+	# the slam: a white flash and a big shake
+	var white := ColorRect.new()
+	white.color = Color(1, 1, 1, 0.75)
+	white.size = layer.size
+	white.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(white)
+	white.create_tween().tween_property(white, "color:a", 0.0, 0.3)
+	Kit.shake(self, 16.0, 0.4)
+	await get_tree().create_timer(0.85).timeout
+	# sweep everything off; the hits start while it fades
+	var out := layer.create_tween()
+	out.tween_property(layer, "modulate:a", 0.0, 0.25)
+	out.tween_callback(layer.queue_free)
+	await get_tree().create_timer(0.12).timeout
+
+
 func _sfx_act(ev: Dictionary) -> void:
 	## 出招音效与角色台词：台词和声线全在 audio.json voices，这里只挑时机（heal / ultimate / attack）和声线（卡牌的 voice，再按身份兜底）
 	var skill_id: String = str(ev.get("skill", ""))
 	var skill: Dictionary = GameData.get_db().skills.get(skill_id, {})
-	var is_ult := bool(skill.get("special", false)) or (skill.get("uses", null) != null and int(skill["uses"]) == 1) or int(skill.get("cost", 0)) >= 3
-	var is_big_move := is_ult or bool(ev.get("boost", false))
+	var is_big_move := _is_ult(skill) or bool(ev.get("boost", false))
 
 	var u_idx: int = int(ev.get("unit", -1))
 	var leader_card: Dictionary = {}

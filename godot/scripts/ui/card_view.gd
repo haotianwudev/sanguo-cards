@@ -63,6 +63,9 @@ func _gui_input(event: InputEvent) -> void:
 	var tap: bool = event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT
 	var accept: bool = event.is_action_pressed("ui_accept")
 	if tap or accept:
+		var sfx := get_node_or_null("/root/Sfx")  # looked up at runtime: tests load this script without the autoloads
+		if sfx:
+			sfx.play("card_tap")
 		pressed.emit()
 		accept_event()
 

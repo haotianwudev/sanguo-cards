@@ -82,11 +82,12 @@ func has_voice(profile: String, moment: String) -> bool:
 	return _voice_streams.has("%s/%s" % [profile, moment])
 
 
-func voice(profiles: Array, moments: Array) -> void:
+func voice(profiles: Array, moments: Array) -> float:
 	## Say one line: the first moment (in order) that any profile (in order) has — e.g. [own, default] × [heal, attack].
+	## Returns how long it runs (0 = nothing said).
 	var vol := _volume()
 	if vol <= 0.0 or _players.is_empty():
-		return
+		return 0.0
 	for m in moments:
 		for prof in profiles:
 			var list: Array = _voice_streams.get("%s/%s" % [prof, m], [])
@@ -95,7 +96,7 @@ func voice(profiles: Array, moments: Array) -> void:
 			if m == "intro":
 				var now := Time.get_ticks_msec()
 				if _intro_at.has(prof) and now - int(_intro_at[prof]) < INTRO_GAP_MS:
-					return
+					return 0.0
 				_intro_at[prof] = now
 			var pl := _players[_next]
 			_next = (_next + 1) % _players.size()
@@ -103,7 +104,8 @@ func voice(profiles: Array, moments: Array) -> void:
 			pl.pitch_scale = randf_range(0.98, 1.02)
 			pl.volume_db = linear_to_db(vol) + float(_voice_vol.get(prof, 0.0))
 			pl.play()
-			return
+			return pl.stream.get_length()
+	return 0.0
 
 
 func cg_voice(cg_key: String) -> void:

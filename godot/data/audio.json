@@ -471,6 +471,26 @@
         0.9,
         1.1
       ]
+    },
+    "card_tap": {
+      "files": [
+        "sfx/gen/card_tap.wav"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.94,
+        1.08
+      ]
+    },
+    "ult_cutin": {
+      "files": [
+        "sfx/gen/ult_cutin.wav"
+      ],
+      "volume_db": 0,
+      "pitch": [
+        1.0,
+        1.0
+      ]
     }
   }
 }
