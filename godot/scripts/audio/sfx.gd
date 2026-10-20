@@ -4,13 +4,16 @@ extends Node
 ## Volume is the player option Game.options["sfx_volume"] (0–1; 0 = muted).
 
 const VOICES := 10  # sounds that may overlap (a 3-hit combo plus the enemy's answer)
-const MOMENTS := ["attack", "ultimate", "heal", "roar"]
+const MOMENTS := ["attack", "ultimate", "heal", "roar", "intro"]
+const INTRO_GAP_MS := 20000  # an entrance line (CG, then the fight right after it) isn't said twice in a row
 
 var _entries: Dictionary = {}
 var voice_defaults: Dictionary = {}  # audio.json voice_defaults: role (lord / strategist / female / male / enemy_*) → profile
 var female_names: Array = []
 var _voice_vol: Dictionary = {}  # profile → volume_db
 var _voice_streams: Dictionary = {}  # "profile/moment" → Array[AudioStream]
+var _cg_voice: Dictionary = {}  # CG key → profile whose intro plays when that picture comes up (the profile's `cgs`)
+var _intro_at: Dictionary = {}  # profile → Time.get_ticks_msec() of its last intro
 var _streams: Dictionary = {}  # event → Array[AudioStream], loaded once up front (no first-play lag on phones)
 var _players: Array[AudioStreamPlayer] = []
 var _next := 0
@@ -40,7 +43,10 @@ func _ready() -> void:
 
 
 static func voice_file(profile: String, moment: String, line: Variant, tts: Array) -> String:
-	## res:// path of one voice line — the same name tools/gen_voices.py writes (hash of voice|rate|pitch|text)
+	## res:// path of one voice line — the same name tools/gen_voices.py writes (hash of voice|rate|pitch|text;
+	## a line made from a recording, {"src": "x.wav"}, is x.ogg)
+	if line is Dictionary and line.has("src"):
+		return "res://data/audio/voice/%s.ogg" % str(line["src"]).get_basename()
 	var text: String = line if line is String else str(line["text"])
 	var t: Array = tts if line is String else line.get("tts", tts)
 	var h := "|".join(PackedStringArray([str(t[0]), str(t[1]), str(t[2]), text])).md5_text().left(10)
@@ -54,6 +60,8 @@ func _load_voices(data: Dictionary) -> void:
 	for prof in profiles:
 		var p: Dictionary = profiles[prof]
 		_voice_vol[prof] = float(p.get("volume_db", 0.0))
+		for key in p.get("cgs", []):
+			_cg_voice[key] = prof
 		for moment in MOMENTS:
 			var list: Array = []
 			for line in p.get(moment, []):
@@ -84,6 +92,11 @@ func voice(profiles: Array, moments: Array) -> void:
 			var list: Array = _voice_streams.get("%s/%s" % [prof, m], [])
 			if list.is_empty():
 				continue
+			if m == "intro":
+				var now := Time.get_ticks_msec()
+				if _intro_at.has(prof) and now - int(_intro_at[prof]) < INTRO_GAP_MS:
+					return
+				_intro_at[prof] = now
 			var pl := _players[_next]
 			_next = (_next + 1) % _players.size()
 			pl.stream = list[randi() % list.size()]
@@ -91,6 +104,12 @@ func voice(profiles: Array, moments: Array) -> void:
 			pl.volume_db = linear_to_db(vol) + float(_voice_vol.get(prof, 0.0))
 			pl.play()
 			return
+
+
+func cg_voice(cg_key: String) -> void:
+	## a story CG just came up: whoever it introduces (audio.json voices.<profile>.cgs) says their entrance line
+	if _cg_voice.has(cg_key):
+		voice([_cg_voice[cg_key]], ["intro"])
 
 
 func has(key: String) -> bool:

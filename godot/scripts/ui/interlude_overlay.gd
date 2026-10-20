@@ -60,6 +60,7 @@ func _show_scene(sc: Dictionary) -> void:
 	add_child(_box)
 	var art := Kit.cg(sc.get("cg", ""))
 	if art != null:  # full-screen illustration, text over a dark band at the bottom
+		Sfx.cg_voice(str(sc.get("cg", "")))
 		var pic := TextureRect.new()
 		pic.texture = art
 		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

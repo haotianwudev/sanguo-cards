@@ -66,6 +66,7 @@ func _ready() -> void:
 		_finish_at_start.call_deferred()
 	elif auto_on:
 		_auto_step.call_deferred()
+	Sfx.voice(_enemy_voices(), ["intro"])  # a named foe's entrance line (吕布「谁敢与我一战！」); generic enemies have none
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
@@ -919,12 +920,19 @@ func _is_female(card: Dictionary) -> bool:
 
 
 func _enemy_voices() -> Array:
-	## the enemy's voice profiles, most specific first: its own `voice`, its card's, then the default by gender (audio.json)
+	## the enemy's voice profiles, most specific first: its own `voice`, its card's, the card its portrait belongs to (a 吕布
+	## fight that drops 并州 soldiers is still 吕布), then the default by gender (audio.json)
 	var e: Dictionary = b.enemy.get("data", {})
 	var db := GameData.get_db()
 	var card: Dictionary = db.cards.get(str(e.get("card", "")), {})
+	var face: Dictionary = db.cards.get(str(e.get("portrait", "")), {})
+	var own := ""
+	for v in [e.get("voice", ""), card.get("voice", ""), face.get("voice", "")]:  # the first one that is set
+		if str(v) != "":
+			own = str(v)
+			break
 	var role := "enemy_female" if _is_female(e) or _is_female(card) else "enemy_male"
-	return [str(e.get("voice", card.get("voice", ""))), str(Sfx.voice_defaults.get(role, role))]
+	return [own, str(Sfx.voice_defaults.get(role, role))]
 
 
 func _sfx_act(ev: Dictionary) -> void:

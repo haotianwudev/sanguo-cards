@@ -103,7 +103,7 @@ func _load(dir: String) -> void:
 			"hp": int(c["hp"]), "at": int(c["at"]), "skills": c.get("skills", []), "in_pool": c.get("pool", true),
 			"troop_skills": c.get("troop_skills", true), "kit": c.get("kit", ""),
 			"person": c.get("person", cid.trim_suffix("_card") if cid.ends_with("_card") else cid), "weight": int(c.get("weight", 1)), "scope": c.get("scope", ""),
-			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "veteran": c.get("veteran", false), "faction": c.get("faction", ""), "public": c.get("public", false), "beast": c.get("beast", false), "first_win": c.get("first_win", false)}
+			"soldier": c["rarity"] == "N", "elite": c.get("elite", false), "veteran": c.get("veteran", false), "faction": c.get("faction", ""), "public": c.get("public", false), "beast": c.get("beast", false), "first_win": c.get("first_win", false), "voice": c.get("voice", "")}
 	for eid in raw["enemies"]:
 		var e: Dictionary = raw["enemies"][eid]
 		var foe_card: Dictionary = cards.get(str(e.get("card", "")), {}) if not e.has("hp") else {}  # its stats are its card's face numbers (battle.enemy_from_card converts them); an enemy that writes its own hp / at (野猪, 吕布 and the other hand-tuned showpieces) keeps them
@@ -307,7 +307,7 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 			sk.append(s)
 	# the card's face numbers are its stats at 铜; the tier multiplies both (rarity is only where hp + at falls: cards.json gacha.rarity_bands)
 	return {"id": card_id, "name": c["name"], "troop": c["troop"], "person": c["person"],
-		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "base_hp": c["hp"], "base_at": c["at"], "skills": sk, "rarity": c["rarity"]}
+		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "base_hp": c["hp"], "base_at": c["at"], "skills": sk, "rarity": c["rarity"], "voice": c.get("voice", "")}
 
 
 func build_lord(lord_name: String, mult := 1.0, north := false, form := "", forms: Array = [], form_mult := -1.0) -> Dictionary:

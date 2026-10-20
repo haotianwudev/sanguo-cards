@@ -622,6 +622,8 @@ func _show_square(s: Dictionary) -> void:
 	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
 		_cg_square = s["id"]
 		_cg_mode = true
+		if not save.resolved:  # first time through, not on the way back from its battle
+			Sfx.cg_voice(ev.get("cg", s["cg"]))
 	_apply_cg_mode()
 	var raw_lines: Array = ev.get("text", s["text"])
 	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover", "recruit"] \

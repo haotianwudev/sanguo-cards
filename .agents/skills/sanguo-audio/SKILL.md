@@ -69,7 +69,9 @@ godot/data/audio/
 - `voice_defaults`：身份 → 默认声线（`lord` / `strategist` / `female` / `male` / `enemy_female` / `enemy_male`）。
 - `female_names`：判断女性的名字片段（以前写死在 `battle_screen.gd`）。
 
-谁用哪个声线：卡牌（`cards.json`）或敌人（`enemies.json`）写 `"voice": "<声线>"`；敌人没写就看它的 `card` 的 `voice`。没写的、或自己的声线缺这个时机的，落回 `voice_defaults` 的默认声线。时机的兜底顺序：治疗技能 `heal → (ultimate) → attack`，大招 `ultimate → attack`，敌人蓄力 / 狂暴 `roar → attack`。所以给某个名将配专属台词，只写他有的那几句就行。
+**时机 `intro` 登场**：这个声线当敌人的战斗开打时喊一次（`battle_screen._ready`）；声线的 `cgs` 列出的 CG 出现时也喊（地图上第一次到达那一格、过场 interlude），同一声线 20 秒内不重复（CG 后紧接着开打不会喊两遍）。**现成录音**：台词写 `{"text": …, "src": "x.wav", "source": "来历"}`，录音放 `audio_src/voice/`（在 godot/ 外面，不进安装包），`gen_voices.py` 把它裁剪、标准化成 `voice/x.ogg`。吕布（`lvbu`）就是这样：MiniMax Speech 2.6 Turbo（AtlasCloud，音色 `Chinese (Mandarin)_Reliable_Executive`，angry）念「哈！谁敢与我一战！」再剪掉「哈」，intro / ultimate / roar 都用这一句。AtlasCloud 的 MiniMax 只有预设音色，没有声音克隆；`voice_id` 填 MiniMax 的中文音色 ID 也能用，要加 `language_boost: Chinese`。
+
+谁用哪个声线：卡牌（`cards.json`）或敌人（`enemies.json`）写 `"voice": "<声线>"`；敌人没写就看它的 `card` 的 `voice`，再看它立绘那张卡的（掉并州兵卡的吕布战也算吕布）。卡牌的 `voice` 由 `game_data.gd` 带进 `db.cards` 和战斗里的卡。没写的、或自己的声线缺这个时机的，落回 `voice_defaults` 的默认声线。时机的兜底顺序：治疗技能 `heal → (ultimate) → attack`，大招 `ultimate → attack`，敌人蓄力 / 狂暴 `roar → attack`。所以给某个名将配专属台词，只写他有的那几句就行。
 
 生成：
 ```bash

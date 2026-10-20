@@ -1,6 +1,6 @@
 {
   "_comment": "音效配置：事件名 → 文件（多个随机挑一个）、音量（dB，相对总音量）、音高随机范围。换音效只改这里：正式素材放进 audio/sfx/，把 files 指过去；sfx/gen/ 是 tools/generate_sfx.py 合成的占位音，重新生成会覆盖它们。",
-  "_voices_comment": "战斗配音：voices 里每个声线（profile）写 tts 音色 [声音, 语速, 音高] 和各个时机的台词——attack 普通出招 / ultimate 大招·BOOST / heal 治疗 / roar 敌人蓄力·狂暴。台词可以是字符串，或 {text, tts} 单独换音色。卡牌或敌人写 \"voice\": \"<声线>\" 用自己的声线（敌人没写就看它的 card），缺的时机落回默认声线：voice_defaults 按身份挑（主角 / 军师 / 女 / 男 / 敌方女 / 敌方男），女性看 female_names。改完台词跑 python tools/gen_voices.py 生成 audio/voice/*.ogg（文件名是台词和音色的哈希，改了就重新生成；--prune 删掉没人用的旧文件），再 --import。",
+  "_voices_comment": "战斗配音：voices 里每个声线（profile）写 tts 音色 [声音, 语速, 音高] 和各个时机的台词——attack 普通出招 / ultimate 大招·BOOST / heal 治疗 / roar 敌人蓄力·狂暴 / intro 登场（他当敌人的战斗开打时喊一次；cgs 里列的 CG 出现时也喊，20 秒内不重复）。台词可以是字符串，或 {text, tts} 单独换音色，或 {text, src} 用 audio_src/voice/ 里现成的录音（别处生成的，比如 MiniMax；source 写清来历）。卡牌或敌人写 \"voice\": \"<声线>\" 用自己的声线（敌人没写就看它的 card，再看它立绘那张卡），缺的时机落回默认声线：voice_defaults 按身份挑（主角 / 军师 / 女 / 男 / 敌方女 / 敌方男），女性看 female_names。改完台词跑 python tools/gen_voices.py 生成 audio/voice/*.ogg（文件名是台词和音色的哈希，改了就重新生成；--prune 删掉没人用的旧文件），再 --import。",
   "voice_defaults": {
     "lord": "hero",
     "strategist": "strategist",
@@ -182,6 +182,39 @@
       ],
       "roar": [
         "都给我上！"
+      ]
+    },
+    "lvbu": {
+      "name": "吕布",
+      "volume_db": 2,
+      "intro": [
+        {
+          "text": "谁敢与我一战！",
+          "src": "lvbu_intro_shuigan.wav",
+          "source": "MiniMax Speech 2.6 Turbo（AtlasCloud），音色 Chinese (Mandarin)_Reliable_Executive，emotion angry，speed 1.05，pitch -3；念的是「哈！谁敢与我一战！」，剪掉了「哈」（原始录音 lvbu_intro_take.wav）"
+        }
+      ],
+      "ultimate": [
+        {
+          "text": "谁敢与我一战！",
+          "src": "lvbu_intro_shuigan.wav"
+        }
+      ],
+      "roar": [
+        {
+          "text": "谁敢与我一战！",
+          "src": "lvbu_intro_shuigan.wav"
+        }
+      ],
+      "cgs": [
+        "c2_raid",
+        "c2_sanying",
+        "c5_rescue",
+        "c4_lubu_rage",
+        "n5_beat",
+        "n8_zhanlv",
+        "n10_hulao",
+        "c14_hujia"
       ]
     }
   },

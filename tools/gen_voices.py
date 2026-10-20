@@ -1,6 +1,7 @@
 """Battle voice lines: build godot/data/audio/voice/*.ogg from the `voices` table in godot/data/audio.json.
 
-Each line is synthesised with edge-tts (voice / rate / pitch from the profile's `tts`, or the line's own), trimmed to
+Each line is synthesised with edge-tts (voice / rate / pitch from the profile's `tts`, or the line's own) — or, for a
+line with `"src": "<file>.wav"`, taken from that recording in audio_src/voice/ (made elsewhere, e.g. MiniMax) — trimmed to
 its onset, peak-normalised and saved as mono OGG Vorbis. The file name is <profile>_<moment>_<hash>, the hash taken
 over voice|rate|pitch|text — `Sfx` in scripts/audio/sfx.gd computes the same name, so there is no manifest: change a
 line or its voice and it gets a new file. Existing files are kept (rerunning is cheap).
@@ -21,23 +22,29 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIO_JSON = ROOT / "godot/data/audio.json"
+SRC_DIR = ROOT / "audio_src/voice"  # recorded / externally generated lines (kept out of godot/ so they don't ship)
 VOICE_DIR = ROOT / "godot/data/audio/voice"
-MOMENTS = ("attack", "ultimate", "heal", "roar")
+MOMENTS = ("attack", "ultimate", "heal", "roar", "intro")
 
 
-def voice_lines(data: dict) -> list[tuple[str, str, str, list[str]]]:
-    """[(profile, moment, text, [voice, rate, pitch]), ...] for every line in the table."""
+def voice_lines(data: dict) -> list[tuple[str, str, str, list[str] | str]]:
+    """[(profile, moment, text, [voice, rate, pitch] or "src.wav"), ...] for every line in the table."""
     out = []
     for prof, p in data.get("voices", {}).items():
         for moment in MOMENTS:
             for line in p.get(moment, []):
                 text = line if isinstance(line, str) else line["text"]
+                if isinstance(line, dict) and "src" in line:
+                    out.append((prof, moment, text, line["src"]))
+                    continue
                 tts = p["tts"] if isinstance(line, str) else line.get("tts", p["tts"])
                 out.append((prof, moment, text, list(tts)))
     return out
 
 
-def file_name(prof: str, moment: str, text: str, tts: list[str]) -> str:
+def file_name(prof: str, moment: str, text: str, tts: list[str] | str) -> str:
+    if isinstance(tts, str):  # a recording: the game file is named after it
+        return Path(tts).stem + ".ogg"
     h = hashlib.md5("|".join([*tts, text]).encode("utf-8")).hexdigest()[:10]
     return f"{prof}_{moment}_{h}.ogg"
 
@@ -63,17 +70,21 @@ def _trim(pcm, sr: int = 44100):
     return np.clip(out, -32767, 32767).astype(np.int16)
 
 
-async def _synth(text: str, tts: list[str], out: Path) -> None:
-    import edge_tts
+async def _synth(text: str, tts: list[str] | str, out: Path) -> None:
     import numpy as np
-    voice, rate, pitch = tts
-    mp3 = bytearray()
-    async for chunk in edge_tts.Communicate(text, voice, rate=rate, pitch=pitch).stream():
-        if chunk["type"] == "audio":
-            mp3.extend(chunk["data"])
     ff = _ffmpeg()
+    if isinstance(tts, str):  # a recording in audio_src/voice
+        audio = (SRC_DIR / tts).read_bytes()
+    else:
+        import edge_tts
+        voice, rate, pitch = tts
+        mp3 = bytearray()
+        async for chunk in edge_tts.Communicate(text, voice, rate=rate, pitch=pitch).stream():
+            if chunk["type"] == "audio":
+                mp3.extend(chunk["data"])
+        audio = bytes(mp3)
     raw = subprocess.run([ff, "-y", "-i", "pipe:0", "-f", "s16le", "-ac", "1", "-ar", "44100", "pipe:1"],
-                         input=bytes(mp3), stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=True).stdout
+                         input=audio, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=True).stdout
     pcm = _trim(np.frombuffer(raw, dtype=np.int16))
     subprocess.run([ff, "-y", "-f", "s16le", "-ac", "1", "-ar", "44100", "-i", "pipe:0", "-c:a", "libvorbis", "-q:a", "5", str(out)],
                    input=pcm.tobytes(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
