@@ -65,27 +65,23 @@
   "voices": {
     "hero": {
       "name": "主角（现代穿越者）",
-      "engine": "indextts",
-      "tempo": 82,
-      "ref": "hero_ref_unrestrained.wav",
-      "emo": [
-        0,
-        100,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "source": "IndexTTS 2 本地生成；音色参考 hero_ref_unrestrained.wav = MiniMax Speech 2.6 Turbo（AtlasCloud）Chinese (Mandarin)_Unrestrained_Young_Man 念的一段 9 秒主角独白；愤怒拉满（用户定）",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，东北口音音色），替换了原来的 IndexTTS 版",
       "volume_db": 2,
       "attack": [
-        "你妹的！",
-        "去你的！"
+        {
+          "text": "你妹的！",
+          "src": "hero_nimeide.wav"
+        },
+        {
+          "text": "去你的！",
+          "src": "hero_qunide.wav"
+        }
       ],
       "ultimate": [
-        "砸不死你！"
+        {
+          "text": "砸不死你！",
+          "src": "hero_zabusini.wav"
+        }
       ]
     },
     "male": {

@@ -99,7 +99,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 `tools/indextts_job.py` 是 `gen_voices.py` / `voice_audition.py` 在 IndexTTS 自己的环境里调用的批处理（模型只加载一次），不手动跑。
 
 ### 现在的声线
-- `hero` 主角：本地 IndexTTS 2，参考音 `hero_ref_unrestrained.wav`（当时是 MiniMax「狂放青年」念的，规则定下之前做的，用户已认可），愤怒 100，`tempo` 82（用户觉得原速太快；新文件是从认可的那版直接变速的，没重跑模型——重跑会换一个 take）。
+- `hero` 主角：用户用 Fish Audio 生成的东北口音「你妹的！」「去你的！」（attack，随机）和「砸不死你！」（ultimate）（`src`，2026-10-20 替换了本地 IndexTTS 版；那版的参考音 `hero_ref_unrestrained.wav` 还留在 audio_src/voice/，上面配置示例里的 `tempo` 82 也是那版用过的）。
 - `lvbu` 吕布：用户用 Fish Audio 生成的「谁敢与我一战！」（`src`，替换了原来的 MiniMax 版），intro / ultimate / roar 同一句。
 - `sunce` 孙策（三张卡都挂）：Fish Audio 生成的「小霸王在此，谁敢挡我！」（中间停顿压短了），intro / ultimate / roar；普通出招还没有专属台词，暂时走骑兵的。
 - `zhouyu` 周瑜（两张卡都挂）：Fish Audio 生成的「这笔账，一把火结清。」，intro / ultimate / roar；普通出招暂时走军师默认。
