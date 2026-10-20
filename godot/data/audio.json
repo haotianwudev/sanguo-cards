@@ -61,14 +61,22 @@
   "voices": {
     "hero": {
       "name": "主角（现代穿越者）",
-      "tts": [
-        "zh-CN-YunxiNeural",
-        "+15%",
-        "+6Hz"
+      "engine": "indextts",
+      "ref": "hero_ref_unrestrained.wav",
+      "emo": [
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
+      "source": "IndexTTS 2 本地生成；音色参考 hero_ref_unrestrained.wav = MiniMax Speech 2.6 Turbo（AtlasCloud）Chinese (Mandarin)_Unrestrained_Young_Man 念的一段 9 秒主角独白；愤怒拉满（用户定）",
       "volume_db": 2,
       "attack": [
-        "你妹！",
+        "你妹的！",
         "去你的！"
       ],
       "ultimate": [

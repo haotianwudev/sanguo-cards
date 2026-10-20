@@ -42,15 +42,24 @@ func _ready() -> void:
 		_players.append(pl)
 
 
-static func voice_file(profile: String, moment: String, line: Variant, tts: Array) -> String:
-	## res:// path of one voice line — the same name tools/gen_voices.py writes (hash of voice|rate|pitch|text;
-	## a line made from a recording, {"src": "x.wav"}, is x.ogg)
-	if line is Dictionary and line.has("src"):
-		return "res://data/audio/voice/%s.ogg" % str(line["src"]).get_basename()
-	var text: String = line if line is String else str(line["text"])
-	var t: Array = tts if line is String else line.get("tts", tts)
-	var h := "|".join(PackedStringArray([str(t[0]), str(t[1]), str(t[2]), text])).md5_text().left(10)
-	return "res://data/audio/voice/%s_%s_%s.ogg" % [profile, moment, h]
+static func voice_file(profile: String, moment: String, line: Variant, p: Dictionary) -> String:
+	## res:// path of one voice line — the same name tools/gen_voices.py writes: a hash of voice|rate|pitch|text (edge-tts)
+	## or indextts|ref|emo|text (IndexTTS 2, `p.engine`); a line made from a recording, {"src": "x.wav"}, is x.ogg
+	var d: Dictionary = line if line is Dictionary else {}
+	if d.has("src"):
+		return "res://data/audio/voice/%s.ogg" % str(d["src"]).get_basename()
+	var text: String = line if line is String else str(d["text"])
+	var parts := PackedStringArray()
+	if str(p.get("engine", "edge")) == "indextts":
+		var emo := PackedStringArray()
+		for x in d.get("emo", p.get("emo", [0, 0, 0, 0, 0, 0, 0, 0])):
+			emo.append(str(int(x)))
+		parts = PackedStringArray(["indextts", str(p["ref"]), ",".join(emo)])
+	else:
+		var t: Array = d.get("tts", p.get("tts", []))
+		parts = PackedStringArray([str(t[0]), str(t[1]), str(t[2])])
+	parts.append(text)
+	return "res://data/audio/voice/%s_%s_%s.ogg" % [profile, moment, "|".join(parts).md5_text().left(10)]
 
 
 func _load_voices(data: Dictionary) -> void:
@@ -65,7 +74,7 @@ func _load_voices(data: Dictionary) -> void:
 		for moment in MOMENTS:
 			var list: Array = []
 			for line in p.get(moment, []):
-				var path := voice_file(prof, moment, line, p.get("tts", []))
+				var path := voice_file(prof, moment, line, p)
 				if ResourceLoader.exists(path):
 					list.append(load(path))
 			if not list.is_empty():
