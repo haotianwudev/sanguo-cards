@@ -664,7 +664,7 @@ func _boost_pop(card: CardView, on: bool) -> void:
 		card.z_index = 0
 		card.scale = Vector2.ONE
 		return
-	card.z_index = 46
+	card.z_index = 20  # over its neighbours (0), under banners (40) and every overlay (60+)
 	var tw := card.create_tween().set_loops()
 	tw.tween_property(card, "scale", Vector2(1.07, 1.07), 0.55).set_trans(Tween.TRANS_SINE)
 	tw.tween_property(card, "scale", Vector2(1.03, 1.03), 0.55).set_trans(Tween.TRANS_SINE)

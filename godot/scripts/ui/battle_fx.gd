@@ -245,11 +245,14 @@ static func boost_cast(parent: Control, rect: Rect2) -> void:
 
 static func boost_aura(parent: Control, rect: Rect2) -> Node2D:
 	## a BOOSTed leader: flames licking up the card and an orange pulse, until it has acted
+	## z: just over the BOOSTed card (BattleScreen._boost_pop lifts it to 20) and under banners (40), the skill popup and
+	## cut-ins (60) and the pick / settings overlays (70). The holder sets it; its children's own z must not add on top
+	## (z is relative: glow 44 + embers 46 inside a 44 holder came out at 88-90, over every overlay).
 	var holder := Node2D.new()
-	holder.z_index = 44
+	holder.z_index = 21
 	parent.add_child(holder)
-	glow(holder, rect, Color(1.0, 0.55, 0.15))
-	embers(holder, Rect2(rect.position + Vector2(8, rect.size.y * 0.6), Vector2(rect.size.x - 16, rect.size.y * 0.4)), Color(1.0, 0.62, 0.18, 0.9), 20, 120.0)
+	glow(holder, rect, Color(1.0, 0.55, 0.15)).z_index = 0
+	embers(holder, Rect2(rect.position + Vector2(8, rect.size.y * 0.6), Vector2(rect.size.x - 16, rect.size.y * 0.4)), Color(1.0, 0.62, 0.18, 0.9), 20, 120.0).z_index = 0
 	return holder
 
 
