@@ -119,30 +119,15 @@
       ],
       "heal": [
         {
-          "text": "为你疗伤……",
-          "tts": [
-            "zh-CN-XiaoxiaoNeural",
-            "-6%",
-            "+2Hz"
-          ]
+          "text": "别怕……",
+          "src": "heal_female_biepa.wav"
         },
         {
-          "text": "别怕，安心休养……",
-          "tts": [
-            "zh-CN-XiaoxiaoNeural",
-            "-6%",
-            "+2Hz"
-          ]
-        },
-        {
-          "text": "伤口……好些了吗？",
-          "tts": [
-            "zh-CN-XiaoxiaoNeural",
-            "-6%",
-            "+2Hz"
-          ]
+          "text": "安心休养……",
+          "src": "heal_female_anxin.wav"
         }
-      ]
+      ],
+      "source": "治疗台词：用户用 Fish Audio 生成的 AI 语音（2026-10-20，貂蝉音色），一条「别怕，安心修养」剪成两句；其余是 edge-tts"
     },
     "strategist": {
       "name": "策士（男，通用）",
