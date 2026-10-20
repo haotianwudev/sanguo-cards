@@ -352,6 +352,30 @@
           "text": "让小女为将军跳上一舞。",
           "src": "diaochan_tiaowu.wav"
         }
+      ],
+      "intro": [
+        {
+          "text": "让小女为将军跳上一舞。",
+          "src": "diaochan_tiaowu.wav"
+        }
+      ],
+      "cgs": [
+        "c5_diaochan",
+        "c5_yuexia",
+        "c5_fengyi",
+        "c6_warn",
+        "c6_sneak",
+        "c8_liuxian",
+        "c8_plan_xun",
+        "c8_plan_huang",
+        "c8_qinggong",
+        "c8_jinggao",
+        "c8_caifuren",
+        "c8_eve",
+        "c8_shuige",
+        "c8_dress",
+        "c8_grapes",
+        "c8_louchuan"
       ]
     }
   },
