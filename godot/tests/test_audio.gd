@@ -26,7 +26,7 @@ func test_every_voice_line_has_its_file() -> void:
 				if not ResourceLoader.exists(path):
 					missing.append("%s/%s %s" % [prof, moment, str(line)])
 		for key in voices[prof]:
-			check(key in SfxScript.MOMENTS or key in ["name", "tts", "volume_db", "cgs", "engine", "ref", "emo", "source", "voice", "emotion", "speed", "pitch"], "voice %s: unknown field %s" % [prof, key])
+			check(key in SfxScript.MOMENTS or key in ["name", "tts", "volume_db", "cgs", "engine", "ref", "emo", "source", "voice", "emotion", "speed", "pitch", "tempo"], "voice %s: unknown field %s" % [prof, key])
 	check(missing.is_empty(), "voice lines without a file (run python tools/gen_voices.py, then --import): %s" % str(missing.slice(0, 6)))
 
 

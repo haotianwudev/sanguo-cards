@@ -9,6 +9,7 @@ Where a line's audio comes from, per profile (or per line):
   itself — `voice` (a MiniMax voice id), `emotion` (angry / happy / … / auto), `speed` and `pitch` as ints (105 = 1.05×,
   -3 semitones); a line's own `emotion` wins. Used when the local model isn't good enough (no local pass on top);
 - `"src": "<file>.wav"` on a line: that recording in audio_src/voice/ as is (made elsewhere, or hand-edited).
+A profile's `"tempo"` (int, 82 = 0.82× — slower, same pitch) stretches its generated lines afterwards; it joins the hash.
 Every line is trimmed to its onset, peak-normalised and saved as mono OGG Vorbis. The file name is
 <profile>_<moment>_<hash> over what made it (voice|rate|pitch|text, indextts|ref|emo|text or
 minimax|voice|emotion|speed|pitch|text; a recording keeps its own
@@ -56,6 +57,8 @@ def voice_lines(data: dict) -> list[tuple[str, str, str, tuple]]:
                     spec = ("indextts", p["ref"], tuple(int(x) for x in d.get("emo", p.get("emo", [0] * 8))))
                 else:
                     spec = ("edge", *d.get("tts", p["tts"]))
+                if "src" not in d and int(p.get("tempo", 100)) != 100:
+                    spec = (*spec, f"tempo{int(p['tempo'])}")
                 out.append((prof, moment, text, spec))
     return out
 
@@ -64,7 +67,7 @@ def file_name(prof: str, moment: str, text: str, spec: tuple) -> str:
     if spec[0] == "src":  # a recording: the game file is named after it
         return Path(spec[1]).stem + ".ogg"
     if spec[0] == "indextts":
-        parts = ["indextts", spec[1], ",".join(str(x) for x in spec[2])]
+        parts = ["indextts", spec[1], ",".join(str(x) for x in spec[2]), *spec[3:]]
     elif spec[0] == "minimax":
         parts = [str(x) for x in spec]
     else:
@@ -127,10 +130,15 @@ def _minimax(text: str, voice: str, emotion: str, speed: int, pitch: int) -> byt
         return out.read_bytes()
 
 
-def _encode(audio: bytes, text: str, out: Path) -> None:
+def _tempo(spec: tuple) -> int:
+    return int(spec[-1][5:]) if isinstance(spec[-1], str) and spec[-1].startswith("tempo") else 100
+
+
+def _encode(audio: bytes, text: str, out: Path, tempo: int = 100) -> None:
     import numpy as np
     ff = _ffmpeg()
-    raw = subprocess.run([ff, "-y", "-i", "pipe:0", "-f", "s16le", "-ac", "1", "-ar", "44100", "pipe:1"],
+    af = ["-af", f"atempo={tempo / 100.0}"] if tempo != 100 else []
+    raw = subprocess.run([ff, "-y", "-i", "pipe:0", *af, "-f", "s16le", "-ac", "1", "-ar", "44100", "pipe:1"],
                          input=audio, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=True).stdout
     pcm = _trim(np.frombuffer(raw, dtype=np.int16))
     subprocess.run([ff, "-y", "-f", "s16le", "-ac", "1", "-ar", "44100", "-i", "pipe:0", "-c:a", "libvorbis", "-q:a", "5", str(out)],
@@ -162,10 +170,10 @@ async def main() -> int:
             elif spec[0] == "indextts":
                 audio = (Path(tmp) / f"{n}.wav").read_bytes()
             elif spec[0] == "minimax":
-                audio = _minimax(text, *spec[1:])
+                audio = _minimax(text, *spec[1:6])
             else:
-                audio = await _edge(text, *spec[1:])
-            _encode(audio, text, VOICE_DIR / n)
+                audio = await _edge(text, *spec[1:4])
+            _encode(audio, text, VOICE_DIR / n, _tempo(spec))
     if args.prune:
         for f in VOICE_DIR.glob("*.ogg"):
             if f.name not in wanted:

@@ -66,6 +66,7 @@
     "hero": {
       "name": "主角（现代穿越者）",
       "engine": "indextts",
+      "tempo": 82,
       "ref": "hero_ref_unrestrained.wav",
       "emo": [
         0,

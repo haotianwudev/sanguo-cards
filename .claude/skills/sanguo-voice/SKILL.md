@@ -24,6 +24,7 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
     "engine": "indextts",                    // 不写 = edge-tts
     "ref": "hero_ref_unrestrained.wav",      // indextts：音色参考音，在 audio_src/voice/
     "emo": [0, 100, 0, 0, 0, 0, 0, 0],       // indextts：语气，8 个 0..100（喜 怒 哀 惧 厌恶 忧郁 惊讶 平静）
+    "tempo": 82,                             // 可选：生成后变速不变调，82 = 0.82 倍（慢一点）；录音 src 不受影响
     "source": "来历：谁生成的、参考音怎么来的",
     "volume_db": 2,
     "attack":   ["你妹的！", "去你的！"],     // 普通出招
@@ -98,7 +99,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 `tools/indextts_job.py` 是 `gen_voices.py` / `voice_audition.py` 在 IndexTTS 自己的环境里调用的批处理（模型只加载一次），不手动跑。
 
 ### 现在的声线
-- `hero` 主角：本地 IndexTTS 2，参考音 `hero_ref_unrestrained.wav`（当时是 MiniMax「狂放青年」念的，规则定下之前做的，用户已认可），愤怒 100。
+- `hero` 主角：本地 IndexTTS 2，参考音 `hero_ref_unrestrained.wav`（当时是 MiniMax「狂放青年」念的，规则定下之前做的，用户已认可），愤怒 100，`tempo` 82（用户觉得原速太快；新文件是从认可的那版直接变速的，没重跑模型——重跑会换一个 take）。
 - `lvbu` 吕布：用户用 Fish Audio 生成的「谁敢与我一战！」（`src`，替换了原来的 MiniMax 版），intro / ultimate / roar 同一句。
 - `sunce` 孙策（三张卡都挂）：Fish Audio 生成的「小霸王在此，谁敢挡我！」（中间停顿压短了），intro / ultimate / roar；普通出招还没有专属台词，暂时走骑兵的。
 - `zhouyu` 周瑜（两张卡都挂）：Fish Audio 生成的「这笔账，一把火结清。」，intro / ultimate / roar；普通出招暂时走军师默认。

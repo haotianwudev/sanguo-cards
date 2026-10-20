@@ -45,7 +45,8 @@ func _ready() -> void:
 
 static func voice_file(profile: String, moment: String, line: Variant, p: Dictionary) -> String:
 	## res:// path of one voice line — the same name tools/gen_voices.py writes: a hash of voice|rate|pitch|text (edge-tts)
-	## indextts|ref|emo|text (IndexTTS 2) or minimax|voice|emotion|speed|pitch|text (`p.engine`); a recording, {"src": "x.wav"}, is x.ogg
+	## indextts|ref|emo|text (IndexTTS 2) or minimax|voice|emotion|speed|pitch|text (`p.engine`), with |tempoNN before the text
+	## when the profile sets `tempo`; a recording, {"src": "x.wav"}, is x.ogg
 	var d: Dictionary = line if line is Dictionary else {}
 	if d.has("src"):
 		return "res://data/audio/voice/%s.ogg" % str(d["src"]).get_basename()
@@ -62,6 +63,8 @@ static func voice_file(profile: String, moment: String, line: Variant, p: Dictio
 	else:
 		var t: Array = d.get("tts", p.get("tts", []))
 		parts = PackedStringArray([str(t[0]), str(t[1]), str(t[2])])
+	if int(p.get("tempo", 100)) != 100:  # stretched afterwards (82 = 0.82×), part of what made it
+		parts.append("tempo%d" % int(p["tempo"]))
 	parts.append(text)
 	return "res://data/audio/voice/%s_%s_%s.ogg" % [profile, moment, "|".join(parts).md5_text().left(10)]
 
