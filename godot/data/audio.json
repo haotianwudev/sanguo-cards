@@ -292,6 +292,29 @@
           "src": "cavalry_tuji.wav"
         }
       ]
+    },
+    "sunce": {
+      "name": "孙策",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-19）；两段之间的停顿从 0.46 秒压到约 0.15 秒",
+      "volume_db": 2,
+      "intro": [
+        {
+          "text": "小霸王在此，谁敢挡我！",
+          "src": "sunce_xiaobawang.wav"
+        }
+      ],
+      "ultimate": [
+        {
+          "text": "小霸王在此，谁敢挡我！",
+          "src": "sunce_xiaobawang.wav"
+        }
+      ],
+      "roar": [
+        {
+          "text": "小霸王在此，谁敢挡我！",
+          "src": "sunce_xiaobawang.wav"
+        }
+      ]
     }
   },
   "sfx": {

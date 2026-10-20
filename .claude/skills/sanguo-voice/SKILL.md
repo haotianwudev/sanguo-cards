@@ -100,6 +100,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 ### 现在的声线
 - `hero` 主角：本地 IndexTTS 2，参考音 `hero_ref_unrestrained.wav`（当时是 MiniMax「狂放青年」念的，规则定下之前做的，用户已认可），愤怒 100。
 - `lvbu` 吕布：用户用 Fish Audio 生成的「谁敢与我一战！」（`src`，替换了原来的 MiniMax 版），intro / ultimate / roar 同一句。
+- `sunce` 孙策（三张卡都挂）：Fish Audio 生成的「小霸王在此，谁敢挡我！」（中间停顿压短了），intro / ultimate / roar；普通出招还没有专属台词，暂时走骑兵的。
 - `cavalry` 骑兵（男）：Fish Audio 生成的「冲锋！」「突击！」（吕布的声音，随机挑一句），只配了 attack。
 - `spear` 枪兵（男）：Fish Audio 生成的「看枪！」「刺！」（赵云的声音，随机挑一句），只配了 attack，大招落回男将默认。
 - `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句；`cgs` 是他出手、登场的 9 张（悲情和温情戏不放）。

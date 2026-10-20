@@ -1567,7 +1567,8 @@
         "xiaobawang"
       ],
       "troop_skills": false,
-      "pool": false
+      "pool": false,
+      "voice": "sunce"
     },
     "zhouyu": {
       "name": "周瑜·青年",
@@ -1638,7 +1639,8 @@
         "bawang",
         "dujiang"
       ],
-      "scope": "south"
+      "scope": "south",
+      "voice": "sunce"
     },
     "zhouyu_chibi": {
       "name": "周瑜·赤壁",
@@ -3005,7 +3007,8 @@
       ],
       "troop_skills": false,
       "pool": false,
-      "scope": "south"
+      "scope": "south",
+      "voice": "sunce"
     },
     "mizhen": {
       "name": "糜贞",
