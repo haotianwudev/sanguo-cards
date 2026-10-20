@@ -912,7 +912,7 @@ func demo(name: String) -> void:
 						await b._on_end_round()
 				await get_tree().create_timer(5.0).timeout
 				print("AUTO-DEMO result=", b.b.result, " busy=", b._busy, " screen=", root.get_child(root.get_child_count() - 1).get_class())
-			if name == "fight":  # play a few actions to exercise the animations
+			if name == "fight" and not BattleScreen.auto_on:  # play a few actions to exercise the animations (with --auto the auto player already acts)
 				await get_tree().create_timer(0.5).timeout
 				await b._on_skill(1, "bawang")
 				await b._on_skill(0, "tuji")
