@@ -10,7 +10,8 @@
     "enemy_male": "enemy_male"
   },
   "troop_voices": {
-    "spear": "spear"
+    "spear": "spear",
+    "cavalry": "cavalry"
   },
   "female_names": [
     "貂蝉",
@@ -274,6 +275,17 @@
         {
           "text": "刺！",
           "src": "spear_ci.wav"
+        }
+      ]
+    },
+    "cavalry": {
+      "name": "骑兵（男）",
+      "source": "用户用 Fish Audio 生成的 AI 语音（吕布的声音，2026-10-19），剪掉了结尾的静音；多句时随机挑一句",
+      "volume_db": 1,
+      "attack": [
+        {
+          "text": "冲锋！",
+          "src": "cavalry_chongfeng.wav"
         }
       ]
     }
