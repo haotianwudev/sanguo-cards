@@ -47,6 +47,7 @@ const DLG_SIZES := ["auto", "mid", "small"]  # the CG text box: 自动 (as tall 
 const DLG_NAMES := {"auto": "框：自动", "mid": "框：中", "small": "框：小"}
 const DLG_H := {"mid": 132.0, "small": 100.0}  # fixed heights; options still push the box up when they appear
 const DLG_FACE := {"auto": 128.0, "mid": 96.0, "small": 72.0}
+var _dlg_cg := ""  # the CG whose lines are being stepped through ("" = none)
 var _cg_square := ""  # the square whose CG was last shown (a new one switches to the CG again)
 var _pending_forms: Array = []  # lord cards the chapter's first square handed out ({form, dupe}), shown once its story is through
 var _sheet_box: VBoxContainer
@@ -615,6 +616,8 @@ func _show_square(s: Dictionary) -> void:
 	col.add_child(row)
 
 	var art := Kit.cg(ev.get("cg", s["cg"]))
+	var cg_new := ""
+	_dlg_cg = ""
 	_cg_view.texture = art
 	_cg_tab.visible = art != null
 	if art == null:
@@ -622,8 +625,8 @@ func _show_square(s: Dictionary) -> void:
 	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
 		_cg_square = s["id"]
 		_cg_mode = true
-		if not save.resolved:  # first time through, not on the way back from its battle
-			Sfx.cg_voice(ev.get("cg", s["cg"]))
+		if not save.resolved:  # first time through, not on the way back from its battle: said once the lines are set up
+			cg_new = str(ev.get("cg", s["cg"]))
 	_apply_cg_mode()
 	var raw_lines: Array = ev.get("text", s["text"])
 	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover", "recruit"] \
@@ -809,7 +812,10 @@ func _show_square(s: Dictionary) -> void:
 		text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 4)
 		text.mouse_filter = Control.MOUSE_FILTER_PASS
 		_show_buttons(buttons, false)
+		_dlg_cg = cg_new
 		_dialog_show()
+	if cg_new != "":  # each voiced person it introduces speaks on his own first line (Sfx.cg_line from _dialog_show)
+		Sfx.cg_voice(cg_new, _dlg_keys if _dlg_cg != "" else [])
 	_update_tools()
 	_apply_dlg_size()
 
@@ -837,6 +843,7 @@ func _dialog_show() -> void:
 	var last := _dlg_i >= _dlg_lines.size() - 1 and not _dlg_recap
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
+	Sfx.cg_line(_dlg_cg, _dlg_i)
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
 		if key == "lord":  # the north route (and any lord card in play) has its own face

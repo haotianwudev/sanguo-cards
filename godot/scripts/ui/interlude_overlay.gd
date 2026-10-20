@@ -13,6 +13,7 @@ var _page := -1
 var _line := 0  # lines of the current scene shown so far
 var _scene_lines: Array = []
 var _scene_text: RichTextLabel
+var _scene_cg := ""  # the scene's CG ("" = none): its entrance lines wait for the speaker's first line
 var _box: Control
 
 
@@ -60,7 +61,6 @@ func _show_scene(sc: Dictionary) -> void:
 	add_child(_box)
 	var art := Kit.cg(sc.get("cg", ""))
 	if art != null:  # full-screen illustration, text over a dark band at the bottom
-		Sfx.cg_voice(str(sc.get("cg", "")))
 		var pic := TextureRect.new()
 		pic.texture = art
 		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -104,6 +104,8 @@ func _show_scene(sc: Dictionary) -> void:
 	_scene_lines = sc.get("text", []).map(func(t): return Kit.strip_tag(t).replace("{lord}", lord))
 	_scene_text = text
 	_line = 0
+	_scene_cg = str(sc.get("cg", "")) if art != null else ""
+	Sfx.cg_voice(_scene_cg, Kit.speakers(sc.get("text", []), sc.get("portraits", [])))
 	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 6)
 	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 6)
 	_box.add_child(text)
@@ -121,6 +123,7 @@ func _show_line() -> void:
 		return
 	var more := _line < _scene_lines.size() - 1
 	_scene_text.text = str(_scene_lines[_line]) + ("　[color=#d9a441]▼[/color]" if more else "")
+	Sfx.cg_line(_scene_cg, _line)
 
 
 func _show_title() -> void:

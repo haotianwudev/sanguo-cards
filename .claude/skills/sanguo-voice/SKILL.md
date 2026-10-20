@@ -38,12 +38,12 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
     "intro":    [{"text": "谁敢与我一战！", "src": "lvbu_shuigan_fish.wav"}],   // 现成录音
     "ultimate": [{"text": "谁敢与我一战！", "src": "lvbu_shuigan_fish.wav"}],
     "roar":     [{"text": "谁敢与我一战！", "src": "lvbu_shuigan_fish.wav"}],
-    "cgs": ["c2_raid", "c2_sanying", …]      // 这些 CG 出现时喊 intro
+    "cgs": ["c2_raid", "c2_sanying", …]      // 这些 CG 里他第一次开口时喊 intro
   }
 }
 ```
 
-- **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `intro` 登场（他当敌人的战斗开打时；`cgs` 里的 CG 第一次出现时，地图和过场都算；同一声线 20 秒内不重复）。
+- **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `intro` 登场（他当敌人的战斗开打时；`cgs` 里的 CG 第一次出现时——不是画面一出来就喊，而是等这场戏里**他自己第一次说话**那一行（谁在说话用 `Kit.speakers` 判断，和对话框头像同一套）；他在这场戏里不说话就画面出来时喊。地图和过场都算；一张 CG 可以挂几个人，各喊各的；同一声线 20 秒内不重复）。
 - **三种引擎**（声线的 `engine`）：不写 = edge-tts（`tts`）；`indextts` = 本地模型（`ref` 参考音 + `emo` 语气）；`minimax` = MiniMax 直接念（`voice` 音色 ID、`emotion`、`speed`、`pitch`）。
 - **一句台词**的写法：字符串；`{"text", "tts"}` / `{"text", "emo"}` / `{"text", "emotion"}`（单句换音色或语气）；`{"text", "src": "x.wav"}`（`audio_src/voice/` 里的现成录音，比如剪过的，游戏里叫 `x.ogg`）。
 - **谁用哪个声线**：卡牌（`cards.json`）写 `"voice": "<声线>"`。我方出招按顺序找：卡牌自己的 → 兵种的（`troop_voices`，男性才用；枪兵「看枪！」）→ 按身份的默认。敌人按顺序找：自己的 `voice` → `card` 那张卡的 → 立绘那张卡的（掉并州兵卡的吕布战也是吕布）→ 按性别的默认。`game_data.gd` 把 `voice` 带进 `db.cards` 和战斗卡。
@@ -60,7 +60,7 @@ python tools/gen_voices.py --check    # 缺文件 exit 1
 G=/f/workspace/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe
 timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg 和 .ogg.import 一起提交
 ```
-测试（`tests/test_audio.gd`）：每句都有文件、默认声线覆盖每个身份、卡牌 / 敌人的 `voice` 存在、`cgs` 都是真在用的 CG、每场吕布战都解析到吕布。
+测试（`tests/test_audio.gd`）：每句都有文件、默认声线覆盖每个身份、卡牌 / 敌人的 `voice` 存在、`cgs` 都是真在用的 CG、CG 配音等到说话人第一句才喊、每场吕布战都解析到吕布。
 
 ## 给一个角色做配音（流程）
 

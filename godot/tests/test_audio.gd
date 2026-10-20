@@ -113,14 +113,20 @@ func test_every_fight_against_a_voiced_general_uses_his_voice() -> void:
 	check(bad.is_empty(), "enemies not using their general's voice: %s" % str(bad))
 
 
-func test_no_cg_says_two_entrance_lines() -> void:
-	## a CG plays one profile's intro: the same key in two profiles' cgs would silently lose one
+func test_a_cg_voice_waits_for_its_speakers_first_line() -> void:
+	## 「凤仪亭」: 吕布 and 貂蝉 each say their entrance line on their own first line of the scene, not when the picture comes up
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
-	var owner := {}
-	var bad: Array = []
-	for prof in data["voices"]:
-		for key in data["voices"][prof].get("cgs", []):
-			if owner.has(key):
-				bad.append("%s: %s / %s" % [key, owner[key], prof])
-			owner[key] = prof
-	check(bad.is_empty(), "CGs listed under two voices: %s" % str(bad))
+	var sq: Dictionary = {}
+	for q in GameData.get_db().quests:
+		for sid in q["squares"]:
+			if str(q["squares"][sid].get("cg", "")) == "c5_fengyi":
+				sq = q["squares"][sid]
+	check(not sq.is_empty(), "the 凤仪亭 square is gone")
+	var keys := Kit.speakers(sq.get("text", []), sq.get("portraits", []))
+	var sfx: Node = SfxScript.new()
+	sfx._load_voices(data)
+	sfx.cg_voice("c5_fengyi", keys)
+	check(keys.find("diaochan") > 0 and sfx._cg_wait.get(keys.find("diaochan"), "") == "diaochan", "貂蝉 waits for her first line: %s" % str(sfx._cg_wait))
+	sfx.cg_line("c5_fengyi", keys.find("diaochan"))
+	check(not sfx._cg_wait.values().has("diaochan"), "said once her line is up")
+	sfx.free()
