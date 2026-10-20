@@ -361,7 +361,7 @@ const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce",
 	"管亥": "guanhai",
 	"马超": "machao", "孟起": "machao",
 	"马岱": "madai",
-	"乔公": "qiaoguolao", "子敬": "lusu", "甄宓": "zhenmi_young", "孙尚香": "sunshangxiang", "香香": "sunshangxiang", "尚香": "sunshangxiang",  # TODO: once a later chapter grows her up and wires the real `zhenmi` card, point this at that chapter's own squares only
+	"乔公": "qiaoguolao", "子敬": "lusu", "甄宓": "zhenmi_young","孙尚香": "sunshangxiang", "香香": "sunshangxiang", "尚香": "sunshangxiang",  # 甄宓: young face by default; speakers() swaps in the adult `zhenmi` when the square's portraits cast her (北线第七章起)
 	"吕蒙": "lvmeng_qingnian", "阿蒙": "lvmeng_qingnian", "吕子明": "lvmeng_qingnian"}  # the young one: the SR 吕蒙 (白衣渡江) isn't in the story yet
 static func enemy_portrait_key(enemy: Dictionary) -> String:
 	var key: String = enemy.get("portrait", "")
@@ -540,6 +540,9 @@ static func speakers(lines: Array, cast: Array = []) -> Array:
 		var seg := after.substr(seg_start + 1, last_q - seg_start - 1) if last_q > 0 and seg_start >= 0 else ""
 		var later := _subjects(_unquote(seg), recent) if seg != "" else ""
 		last = later if later != "" else who
+	# 「甄宓」 resolves to the young portrait; a square that casts the adult one (北线第七章起) means her grown-up face
+	if cast.has("zhenmi") and not cast.has("zhenmi_young"):
+		out = out.map(func(k): return "zhenmi" if k == "zhenmi_young" else k)
 	return out
 
 

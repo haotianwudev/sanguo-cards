@@ -85,6 +85,27 @@ func test_every_tagged_line_names_a_known_portrait_or_no_face() -> void:
 	check(bad.is_empty(), "speaker tags that match no portrait: %s" % str(bad.slice(0, 8)))
 
 
+func test_grown_up_zhenmi_never_shows_the_young_face() -> void:
+	## 甄宓 is an adult from 北线第七章 on: no @zhenmi_young there, and 「甄宓：」 lines resolve to the adult portrait
+	var late := ["yecheng", "longhu", "xiliang", "sanfang", "tianqing", "guandu", "dujiang", "guiyi"]
+	var bad: Array = []
+	for q in GameData.get_db().quests:
+		if not late.has(q["id"]):
+			continue
+		for sid in q["squares"]:
+			var s: Dictionary = q["squares"][sid]
+			var lines: Array = s.get("text", [])
+			var who: Array = Kit.speakers(lines, s.get("portraits", []))
+			for i in who.size():
+				if who[i] == "zhenmi_young":
+					bad.append("%s/%s: %s" % [q["id"], sid, str(lines[i]).left(20)])
+	for eid in GameData.get_db().events:
+		var e: Dictionary = GameData.get_db().events[eid]
+		if late.has(str(e.get("scope", ""))) and str(e.get("text", [])).contains("@zhenmi_young "):
+			bad.append("event/%s" % eid)
+	check(bad.is_empty(), "adult 甄宓 shown with the young portrait: %s" % str(bad.slice(0, 8)))
+
+
 func test_in_the_north_route_followers_call_the_hero_dage() -> void:
 	var bad: Array = []
 	for t in _texts():
