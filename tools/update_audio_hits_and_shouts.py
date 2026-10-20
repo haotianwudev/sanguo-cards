@@ -1,5 +1,5 @@
 """Update game audio:
-1. Fix character voice lines to genuine ATTACK shouts (Chongyun male, Beidou female) instead of hurt grunts.
+1. (removed: battle voice lines — they are built by tools/gen_voices.py)
 2. Replace hit sounds with crisp, punchy, immediate cold weapon blade & clash sounds (CC0 StarNinjas).
 3. Zero-latency trimming: ensure impact transient starts within 5ms of file start.
 """
@@ -110,28 +110,8 @@ def main():
         # hit_pierce: sharp thrust / pierce impact
         convert_and_save(read_zip_member(z_slash, "sword.3.ogg"), SFX_DIR / "hit_pierce.wav", trim=True)
 
-    print("\n=== 2. Fetching Real Attack Shouts (Male Chongyun, Female Beidou) ===")
-    chongyun_url = "https://huggingface.co/datasets/simon3000/genshin-voice/resolve/main/speaker-archives/Chinese/501-plus/Chongyun.zip"
-    beidou_url = "https://huggingface.co/datasets/simon3000/genshin-voice/resolve/main/speaker-archives/Chinese/501-plus/Beidou.zip"
-
-    chongyun_bytes = requests.get(chongyun_url, headers={"User-Agent": "Mozilla/5.0"}).content
-    beidou_bytes = requests.get(beidou_url, headers={"User-Agent": "Mozilla/5.0"}).content
-
-    with zipfile.ZipFile(io.BytesIO(chongyun_bytes)) as z_male:
-        # Male genuine attack grunts
-        convert_and_save(read_zip_member(z_male, "7f4ea2dcaebf29bb.wav"), SFX_DIR / "shout_male_1.wav", trim=False)
-        convert_and_save(read_zip_member(z_male, "a9c6d4f42872a8c4.wav"), SFX_DIR / "shout_male_2.wav", trim=False)
-        convert_and_save(read_zip_member(z_male, "2bbb0eebe541d255.wav"), SFX_DIR / "shout_male_3.wav", trim=False)
-        # Male ultimate war cry ("束手伏诛吧！")
-        convert_and_save(read_zip_member(z_male, "2b68075f1969fd5b.wav"), SFX_DIR / "shout_male_ult.wav", trim=False)
-
-    with zipfile.ZipFile(io.BytesIO(beidou_bytes)) as z_female:
-        # Female genuine attack grunts
-        convert_and_save(read_zip_member(z_female, "6efe3275d9181624.wav"), SFX_DIR / "shout_female_1.wav", trim=False)
-        convert_and_save(read_zip_member(z_female, "1b6a9e850f9abec6.wav"), SFX_DIR / "shout_female_2.wav", trim=False)
-        convert_and_save(read_zip_member(z_female, "18fbac13081a3da3.wav"), SFX_DIR / "shout_female_3.wav", trim=False)
-        # Female ultimate war cry ("给我瞧好了！")
-        convert_and_save(read_zip_member(z_female, "54fa8a2fa84b9872.wav"), SFX_DIR / "shout_female_ult.wav", trim=False)
+    # Battle shouts used to be pulled from a commercial game's voice dataset here — not ours to ship in a public repo.
+    # Voice lines now come only from tools/gen_voices.py (the `voices` table in audio.json).
 
     print("\n=== Audio replacement complete! ===")
 

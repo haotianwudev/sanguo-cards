@@ -1,5 +1,190 @@
 {
   "_comment": "音效配置：事件名 → 文件（多个随机挑一个）、音量（dB，相对总音量）、音高随机范围。换音效只改这里：正式素材放进 audio/sfx/，把 files 指过去；sfx/gen/ 是 tools/generate_sfx.py 合成的占位音，重新生成会覆盖它们。",
+  "_voices_comment": "战斗配音：voices 里每个声线（profile）写 tts 音色 [声音, 语速, 音高] 和各个时机的台词——attack 普通出招 / ultimate 大招·BOOST / heal 治疗 / roar 敌人蓄力·狂暴。台词可以是字符串，或 {text, tts} 单独换音色。卡牌或敌人写 \"voice\": \"<声线>\" 用自己的声线（敌人没写就看它的 card），缺的时机落回默认声线：voice_defaults 按身份挑（主角 / 军师 / 女 / 男 / 敌方女 / 敌方男），女性看 female_names。改完台词跑 python tools/gen_voices.py 生成 audio/voice/*.ogg（文件名是台词和音色的哈希，改了就重新生成；--prune 删掉没人用的旧文件），再 --import。",
+  "voice_defaults": {
+    "lord": "hero",
+    "strategist": "strategist",
+    "female": "female",
+    "male": "male",
+    "enemy_female": "enemy_female",
+    "enemy_male": "enemy_male"
+  },
+  "female_names": [
+    "貂蝉",
+    "孙尚香",
+    "大乔",
+    "小乔",
+    "黄月英",
+    "甄姬",
+    "甄宓",
+    "祝融",
+    "蔡琰",
+    "蔡文姬",
+    "王异",
+    "辛宪英",
+    "吕玲绮",
+    "步练师",
+    "关银屏",
+    "董白",
+    "张春华",
+    "邹氏",
+    "邹夫人",
+    "樊氏",
+    "卞氏",
+    "卞夫人",
+    "吴国太",
+    "吴夫人",
+    "鲍三娘",
+    "马云禄",
+    "马云騄",
+    "花鬘",
+    "严氏",
+    "严夫人",
+    "唐姬",
+    "张宁",
+    "郭照",
+    "杜夫人",
+    "糜贞",
+    "吴苋",
+    "姜巧",
+    "黎娘",
+    "王悦",
+    "黄巾女医",
+    "贴身侍女",
+    "丫鬟",
+    "厨娘",
+    "绣娘",
+    "浣纱女",
+    "采桑女",
+    "茶娘"
+  ],
+  "voices": {
+    "hero": {
+      "name": "主角（现代穿越者）",
+      "tts": [
+        "zh-CN-YunxiNeural",
+        "+15%",
+        "+6Hz"
+      ],
+      "volume_db": 2,
+      "attack": [
+        "你妹！",
+        "去你的！"
+      ],
+      "ultimate": [
+        "砸不死你！"
+      ]
+    },
+    "male": {
+      "name": "男武将（通用）",
+      "tts": [
+        "zh-CN-YunjianNeural",
+        "+10%",
+        "-2Hz"
+      ],
+      "volume_db": 1,
+      "attack": [
+        "看招！",
+        "休想跑！"
+      ],
+      "ultimate": [
+        "万军莫当！",
+        "受死吧！"
+      ]
+    },
+    "female": {
+      "name": "女武将（通用）",
+      "tts": [
+        "zh-CN-XiaoyiNeural",
+        "+10%",
+        "+2Hz"
+      ],
+      "volume_db": 1,
+      "attack": [
+        "看招！",
+        "休想跑！"
+      ],
+      "ultimate": [
+        "看我破阵！",
+        "给我瞧好了！"
+      ],
+      "heal": [
+        {
+          "text": "为你疗伤……",
+          "tts": [
+            "zh-CN-XiaoxiaoNeural",
+            "-6%",
+            "+2Hz"
+          ]
+        },
+        {
+          "text": "别怕，安心休养……",
+          "tts": [
+            "zh-CN-XiaoxiaoNeural",
+            "-6%",
+            "+2Hz"
+          ]
+        },
+        {
+          "text": "伤口……好些了吗？",
+          "tts": [
+            "zh-CN-XiaoxiaoNeural",
+            "-6%",
+            "+2Hz"
+          ]
+        }
+      ]
+    },
+    "strategist": {
+      "name": "军师（通用）",
+      "tts": [
+        "zh-CN-YunyangNeural",
+        "+6%",
+        "-3Hz"
+      ],
+      "volume_db": 1,
+      "attack": [
+        "破绽已现！",
+        "尽在掌握！"
+      ],
+      "ultimate": [
+        "计定乾坤！"
+      ]
+    },
+    "enemy_male": {
+      "name": "敌将（男，通用）",
+      "tts": [
+        "zh-CN-YunjianNeural",
+        "+10%",
+        "-2Hz"
+      ],
+      "volume_db": -1,
+      "attack": [
+        "拿命来吧！",
+        "给我上！宰了他！",
+        "拿命来！受死吧！"
+      ],
+      "roar": [
+        "都给我上！受死吧！"
+      ]
+    },
+    "enemy_female": {
+      "name": "敌将（女，通用）",
+      "tts": [
+        "zh-CN-XiaoyiNeural",
+        "+12%",
+        "+2Hz"
+      ],
+      "volume_db": -1,
+      "attack": [
+        "拿命来！",
+        "给我上！"
+      ],
+      "roar": [
+        "都给我上！"
+      ]
+    }
+  },
   "sfx": {
     "act_cavalry": {
       "files": [
@@ -164,49 +349,6 @@
         1.06
       ]
     },
-    "shout_enemy": {
-      "files": [
-        "sfx/shout_enemy_1.wav",
-        "sfx/shout_enemy_2.wav",
-        "sfx/shout_enemy_3.wav"
-      ],
-      "volume_db": -1,
-      "pitch": [
-        0.98,
-        1.02
-      ]
-    },
-    "shout_enemy_roar": {
-      "files": [
-        "sfx/shout_enemy_roar.wav"
-      ],
-      "volume_db": 0,
-      "pitch": [
-        1.0,
-        1.0
-      ]
-    },
-    "shout_enemy_female": {
-      "files": [
-        "sfx/shout_enemy_female_1.wav",
-        "sfx/shout_enemy_female_2.wav"
-      ],
-      "volume_db": -1,
-      "pitch": [
-        0.98,
-        1.02
-      ]
-    },
-    "shout_enemy_female_roar": {
-      "files": [
-        "sfx/shout_enemy_female_roar.wav"
-      ],
-      "volume_db": 0,
-      "pitch": [
-        1.0,
-        1.0
-      ]
-    },
     "charge": {
       "files": [
         "sfx/gen/charge.wav"
@@ -225,105 +367,6 @@
       "pitch": [
         0.96,
         1.04
-      ]
-    },
-    "shout_hero": {
-      "files": [
-        "sfx/shout_hero_1.wav",
-        "sfx/shout_hero_2.wav"
-      ],
-      "volume_db": 2,
-      "pitch": [
-        0.98,
-        1.02
-      ]
-    },
-    "shout_hero_ult": {
-      "files": [
-        "sfx/shout_hero_ult.wav"
-      ],
-      "volume_db": 3,
-      "pitch": [
-        1.0,
-        1.0
-      ]
-    },
-    "shout_male": {
-      "files": [
-        "sfx/shout_male_1.wav",
-        "sfx/shout_male_2.wav"
-      ],
-      "volume_db": 1,
-      "pitch": [
-        0.96,
-        1.04
-      ]
-    },
-    "shout_male_ultimate": {
-      "files": [
-        "sfx/shout_male_ult.wav",
-        "sfx/shout_male_3.wav",
-        "sfx/shout_male_phrase_1.wav"
-      ],
-      "volume_db": 2,
-      "pitch": [
-        0.98,
-        1.02
-      ]
-    },
-    "shout_female": {
-      "files": [
-        "sfx/shout_female_1.wav",
-        "sfx/shout_female_2.wav"
-      ],
-      "volume_db": 1,
-      "pitch": [
-        0.96,
-        1.04
-      ]
-    },
-    "shout_female_ultimate": {
-      "files": [
-        "sfx/shout_female_ult.wav",
-        "sfx/shout_female_3.wav"
-      ],
-      "volume_db": 2,
-      "pitch": [
-        0.98,
-        1.02
-      ]
-    },
-    "shout_strategist": {
-      "files": [
-        "sfx/shout_strat_1.wav",
-        "sfx/shout_strat_2.wav"
-      ],
-      "volume_db": 1,
-      "pitch": [
-        0.98,
-        1.02
-      ]
-    },
-    "shout_strategist_ultimate": {
-      "files": [
-        "sfx/shout_strat_ult.wav"
-      ],
-      "volume_db": 2,
-      "pitch": [
-        1.0,
-        1.0
-      ]
-    },
-    "voice_heal_female": {
-      "files": [
-        "sfx/voice_heal_female_1.wav",
-        "sfx/voice_heal_female_2.wav",
-        "sfx/voice_heal_female_3.wav"
-      ],
-      "volume_db": 1,
-      "pitch": [
-        0.98,
-        1.02
       ]
     },
     "heal": {
