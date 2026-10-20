@@ -2022,6 +2022,7 @@
     },
     "diaochan": {
       "name": "貂蝉",
+      "voice": "diaochan",
       "rarity": "R",
       "troop": "logistics",
       "hp": 82,
