@@ -4,7 +4,7 @@ extends Node
 ## Volume is the player option Game.options["sfx_volume"] (0–1; 0 = muted).
 
 const VOICES := 10  # sounds that may overlap (a 3-hit combo plus the enemy's answer)
-const MOMENTS := ["attack", "ultimate", "heal", "roar", "intro"]
+const MOMENTS := ["attack", "ultimate", "heal", "roar", "intro", "guard"]  # guard: 防御 / a defence-only skill
 const INTRO_GAP_MS := 20000  # an entrance line (CG, then the fight right after it) isn't said twice in a row
 
 var _entries: Dictionary = {}

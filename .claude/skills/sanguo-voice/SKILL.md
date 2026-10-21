@@ -42,7 +42,7 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
 }
 ```
 
-- **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `intro` 登场（他当敌人的战斗开打时；以及**任何一张 CG 的戏里他开口的那一行**：戏里有他亲口说出这句台词（去掉标点比对）的那一行就在那一行喊，没有就在他第一次开口时喊——全自动，不用列表、不挑场景：卡牌挂了 `voice`、声线有 `intro`，就在每张有他说话的 CG 里喊。谁在说话用 `Kit.speakers` 判断，和对话框头像同一套；他不说话就不喊；一张 CG 里几个人各喊各的；地图和过场都算；同一声线 20 秒内不重复）。**整备**里点一张卡（第一次点，选中时）他也说一句：`Sfx.card_voice`，先 `intro`（专属台词），没有就按战斗里同一套声线喊 heal（有治疗招）/ ultimate / attack；再点别的卡会打断上一句。演示：`--demo=party --voices`。
+- **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `guard` 防御（点「防御」按钮时喊 `voice_defaults.guard` 那句；男将放纯防御招——只有 guard 没有攻击和治疗，如举盾、守家——也喊它，女将照常喊自己的）· `intro` 登场（他当敌人的战斗开打时；以及**任何一张 CG 的戏里他开口的那一行**：戏里有他亲口说出这句台词（去掉标点比对）的那一行就在那一行喊，没有就在他第一次开口时喊——全自动，不用列表、不挑场景：卡牌挂了 `voice`、声线有 `intro`，就在每张有他说话的 CG 里喊。谁在说话用 `Kit.speakers` 判断，和对话框头像同一套；他不说话就不喊；一张 CG 里几个人各喊各的；地图和过场都算；同一声线 20 秒内不重复）。**整备**里点一张卡（第一次点，选中时）他也说一句：`Sfx.card_voice`，先 `intro`（专属台词），没有就按战斗里同一套声线喊 heal（有治疗招）/ ultimate / attack；再点别的卡会打断上一句。演示：`--demo=party --voices`。
 - **三种引擎**（声线的 `engine`）：不写 = edge-tts（`tts`）；`indextts` = 本地模型（`ref` 参考音 + `emo` 语气）；`minimax` = MiniMax 直接念（`voice` 音色 ID、`emotion`、`speed`、`pitch`）。
 - **一句台词**的写法：字符串；`{"text", "tts"}` / `{"text", "emo"}` / `{"text", "emotion"}`（单句换音色或语气）；`{"text", "src": "x.wav"}`（`audio_src/voice/` 里的现成录音，比如剪过的，游戏里叫 `x.ogg`）。
 - **谁用哪个声线**：卡牌（`cards.json`）写 `"voice": "<声线>"`。我方出招按顺序找：卡牌自己的 → 兵种的（`troop_voices`，男性才用；枪兵「看枪！」）→ 按身份的默认。敌人按顺序找：自己的 `voice` → `card` 那张卡的 → 立绘那张卡的（掉并州兵卡的吕布战也是吕布）→ 按性别的默认。`game_data.gd` 把 `voice` 带进 `db.cards` 和战斗卡。
@@ -114,6 +114,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `sunshangxiang` 孙尚香：Fish Audio 生成的「兄长，咱们比一比！」（和吕玲绮同一个 Fish 音色），attack + intro；剧情里在「富春还乡」说。
 - `caiwenji` 蔡文姬：Fish Audio 生成的《胡笳十八拍》首两句「天不仁兮降乱离，地不仁兮使我逢此时！」（7.3 秒）作 intro（CG、整备）；战斗嫌长，attack 只用剪下来的前半句「天不仁兮降乱离！」。剧情里在「蔡文姬」（c4_wenji）讲完走散后吟出。
 - `huaxiong` 华雄（`huaxiong_card`，敌将）：Fish Audio 生成的「吃我一刀！」，attack + intro；华雄战开打时喊，剧情里在「阵前」（c2_zumao）。
+- `infantry` 刀兵（男）：Fish Audio 生成的「看刀！」（华雄音色）作 attack；同一声线的 guard「举盾！」也是 `voice_defaults.guard`，所有防御都喊它。演示：`--demo=fight --defend`。
 - `female` 女将（所有兵种通用）：出招是 Fish Audio 生成的「看我的厉害！」「给我瞧好了！」（孙尚香音色，随机），没有单独的 ultimate，大招也喊这两句；治疗（后勤女）是一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑。
 - 其余（男将 / 敌将）：edge-tts。
 

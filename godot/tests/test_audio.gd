@@ -41,6 +41,7 @@ func test_default_voices_cover_every_role() -> void:
 		check(data["voices"].has(prof), "voice_defaults.%s names no profile" % role)
 		check(sfx.has_voice(prof, "attack"), "default voice %s has no attack line" % prof)
 	check(sfx.has_voice(str(defaults["female"]), "heal"), "the female default keeps the healing lines")
+	check(sfx.has_voice(str(defaults.get("guard", "")), "guard"), "voice_defaults.guard says 「举盾！」 on 防御")
 	for role in ["enemy_female", "enemy_male"]:
 		check(sfx.has_voice(str(defaults[role]), "roar"), "%s needs a roar (charge / rage)" % role)
 	for troop in data.get("troop_voices", {}):  # a troop voice names a real profile and a real troop

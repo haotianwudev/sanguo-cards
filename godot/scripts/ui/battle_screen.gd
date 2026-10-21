@@ -834,6 +834,8 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.3).timeout
 			"guard", "defend":
 				Sfx.play("guard")
+				if ev["t"] == "defend":  # the 防御 button: the whole party raises shields (audio.json voice_defaults.guard)
+					Sfx.voice([str(Sfx.voice_defaults.get("guard", ""))], ["guard"])
 				Kit.float_text(self, _party_center(), "减伤 %d%%" % int(round(ev["cut"] * 100)), Kit.c("blue"), 32)
 				await get_tree().create_timer(0.3).timeout
 			"boost":
@@ -1110,13 +1112,15 @@ func _sfx_act(ev: Dictionary) -> void:
 	var role := "lord" if is_hero else "female" if _is_female(leader_card) else "strategist" if troop == "strategist" else "male"  # 女策士（蔡文姬…）走女声
 
 	var moments: Array = ["ultimate", "attack"] if is_big_move else ["attack"]
-	for eff in skill.get("effects", []):
-		if eff.get("type", "") == "heal":
-			moments.push_front("heal")
-			break
-	# own voice → the troop's (men only: 枪兵「看枪！」) → the default for the role
+	var kinds: Array = skill.get("effects", []).map(func(e): return str(e.get("type", "")))
+	if "heal" in kinds:
+		moments.push_front("heal")
+	elif "guard" in kinds and not "attack" in kinds:  # a defence-only skill (举盾, 守家 …): 「举盾！」, men only
+		moments.push_front("guard")
+	# own voice → the troop's (men only: 枪兵「看枪！」) → the guard voice (men) → the default for the role
 	var troop_voice := str(Sfx.troop_voices.get(troop, "")) if role == "male" else ""
-	Sfx.voice([str(leader_card.get("voice", "")), troop_voice, str(Sfx.voice_defaults.get(role, role))], moments)
+	var guard_voice := str(Sfx.voice_defaults.get("guard", "")) if role == "male" else ""
+	Sfx.voice([str(leader_card.get("voice", "")), troop_voice, guard_voice, str(Sfx.voice_defaults.get(role, role))], moments)
 
 	# 配合兵刃破风声，让打击手感扎实
 	Sfx.play("slash")

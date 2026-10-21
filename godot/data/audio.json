@@ -7,11 +7,13 @@
     "female": "female",
     "male": "male",
     "enemy_female": "enemy_female",
-    "enemy_male": "enemy_male"
+    "enemy_male": "enemy_male",
+    "guard": "infantry"
   },
   "troop_voices": {
     "spear": "spear",
-    "cavalry": "cavalry"
+    "cavalry": "cavalry",
+    "infantry": "infantry"
   },
   "female_names": [
     "貂蝉",
@@ -435,6 +437,23 @@
         {
           "text": "吃我一刀！",
           "src": "huaxiong_chiwo.wav"
+        }
+      ]
+    },
+    "infantry": {
+      "name": "刀兵（男）",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，华雄音色）",
+      "volume_db": 1,
+      "attack": [
+        {
+          "text": "看刀！",
+          "src": "infantry_kandao.wav"
+        }
+      ],
+      "guard": [
+        {
+          "text": "举盾！",
+          "src": "guard_jushun.wav"
         }
       ]
     }

@@ -937,4 +937,6 @@ func demo(name: String) -> void:
 				await get_tree().create_timer(0.5).timeout
 				await b._on_skill(1, "bawang")
 				await b._on_skill(0, "tuji")
+				if OS.get_cmdline_user_args().has("--defend"):  # 防御: 「举盾！」
+					await b._on_defend()
 				b._on_end_round()
