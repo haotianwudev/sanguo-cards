@@ -1523,6 +1523,7 @@
     },
     "sunshangxiang": {
       "name": "孙尚香",
+      "voice": "sunshangxiang",
       "rarity": "R",
       "troop": "archer",
       "hp": 54,

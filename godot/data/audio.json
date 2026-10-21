@@ -389,6 +389,23 @@
           "src": "lvlingqi_dadao.wav"
         }
       ]
+    },
+    "sunshangxiang": {
+      "name": "孙尚香",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，孙尚香音色，和吕玲绮同一个）",
+      "volume_db": 2,
+      "attack": [
+        {
+          "text": "兄长，咱们比一比！",
+          "src": "sunshangxiang_biyibi.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "兄长，咱们比一比！",
+          "src": "sunshangxiang_biyibi.wav"
+        }
+      ]
     }
   },
   "sfx": {
