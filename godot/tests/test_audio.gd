@@ -26,7 +26,7 @@ func test_every_voice_line_has_its_file() -> void:
 				if not ResourceLoader.exists(path):
 					missing.append("%s/%s %s" % [prof, moment, str(line)])
 		for key in voices[prof]:
-			check(key in SfxScript.MOMENTS or key in ["name", "tts", "volume_db", "cgs", "engine", "ref", "emo", "source", "voice", "emotion", "speed", "pitch", "tempo"], "voice %s: unknown field %s" % [prof, key])
+			check(key in SfxScript.MOMENTS or key in ["name", "tts", "volume_db", "engine", "ref", "emo", "source", "voice", "emotion", "speed", "pitch", "tempo"], "voice %s: unknown field %s" % [prof, key])
 	check(missing.is_empty(), "voice lines without a file (run python tools/gen_voices.py, then --import): %s" % str(missing.slice(0, 6)))
 
 
@@ -67,29 +67,6 @@ func test_cards_and_enemies_name_existing_voices() -> void:
 
 
 
-func test_a_voices_cgs_are_real_story_pictures() -> void:
-	## voices.<profile>.cgs: every key is a CG some square, event or interlude actually shows (so the line can play)
-	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
-	var used := {}
-	var db := GameData.get_db()
-	for q in db.quests:
-		for sid in q["squares"]:
-			used[str(q["squares"][sid].get("cg", ""))] = true
-	for eid in db.events:
-		used[str(db.events[eid].get("cg", ""))] = true
-	for k in db.interludes:
-		for sc in db.interludes[k]:
-			used[str(sc.get("cg", ""))] = true
-	var bad: Array = []
-	for prof in data["voices"]:
-		var p: Dictionary = data["voices"][prof]
-		for key in p.get("cgs", []):
-			if not used.has(key):
-				bad.append("%s: %s" % [prof, key])
-		check(p.get("cgs", []).is_empty() or p.has("intro"), "voice %s lists cgs but has no intro line" % prof)
-	check(bad.is_empty(), "voices.cgs naming a CG no scene shows: %s" % str(bad))
-
-
 func test_every_fight_against_a_voiced_general_uses_his_voice() -> void:
 	## a general with his own voice (吕布, 赵云 …) sounds like himself in every fight against him — every enemy drawn
 	## with his face resolves to his voice, even one that drops a soldier card (吕布 dropping 并州兵, 赵云 常山亲卫)
@@ -114,7 +91,7 @@ func test_every_fight_against_a_voiced_general_uses_his_voice() -> void:
 
 
 func test_a_cg_voice_waits_for_its_speakers_first_line() -> void:
-	## 「凤仪亭」: 吕布 and 貂蝉 each say their entrance line on their own first line of the scene, not when the picture comes up
+	## 「凤仪亭」: 吕布 and 貂蝉 (everyone with a voice of his own, no list) each say their entrance line on their own first line of the scene, not when the picture comes up
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
 	var sq: Dictionary = {}
 	for q in GameData.get_db().quests:
@@ -126,6 +103,7 @@ func test_a_cg_voice_waits_for_its_speakers_first_line() -> void:
 	var sfx: Node = SfxScript.new()
 	sfx._load_voices(data)
 	sfx.cg_voice("c5_fengyi", keys)
+	check(sfx._cg_wait.values().has("lvbu") or keys.find("lvbu") == 0, "吕布 too: %s" % str(sfx._cg_wait))
 	check(keys.find("diaochan") > 0 and sfx._cg_wait.get(keys.find("diaochan"), "") == "diaochan", "貂蝉 waits for her first line: %s" % str(sfx._cg_wait))
 	sfx.cg_line("c5_fengyi", keys.find("diaochan"))
 	check(not sfx._cg_wait.values().has("diaochan"), "said once her line is up")

@@ -13,8 +13,7 @@ var female_names: Array = []
 var troop_voices: Dictionary = {}  # audio.json troop_voices: troop → profile (e.g. 枪兵「看枪！」), for men only
 var _voice_vol: Dictionary = {}  # profile → volume_db
 var _voice_streams: Dictionary = {}  # "profile/moment" → Array[AudioStream]
-var _cg_voice: Dictionary = {}  # CG key → profiles whose intro that picture plays (each profile's `cgs`)
-var _people: Dictionary = {}  # profile → story speaker keys that are him (the cards and persons carrying that voice)
+var _speaker_voice: Dictionary = {}  # story speaker key (card id / person) → his own voice profile (the card's `voice`)
 var _cg_wait: Dictionary = {}  # the CG on screen: line index → profile, said when that line (his first) comes up
 var _cg_on := ""
 var _intro_at: Dictionary = {}  # profile → Time.get_ticks_msec() of its last intro
@@ -80,10 +79,6 @@ func _load_voices(data: Dictionary) -> void:
 	for prof in profiles:
 		var p: Dictionary = profiles[prof]
 		_voice_vol[prof] = float(p.get("volume_db", 0.0))
-		for key in p.get("cgs", []):
-			if not _cg_voice.has(key):
-				_cg_voice[key] = []
-			_cg_voice[key].append(prof)
 		for moment in MOMENTS:
 			var list: Array = []
 			for line in p.get(moment, []):
@@ -130,41 +125,40 @@ func voice(profiles: Array, moments: Array) -> float:
 	return 0.0
 
 
-func cg_voice(cg_key: String, speakers: Array = []) -> void:
-	## a story CG just came up (`speakers`: Kit.speakers of its lines, [] when they show all at once). Whoever it
-	## introduces (audio.json voices.<profile>.cgs) says their entrance line on their own first line of it — now, if
-	## that is the first line or they never speak there.
+func cg_voice(cg_key: String, speakers: Array, stepped := true) -> void:
+	## a story CG just came up (`speakers`: Kit.speakers of its lines). Everyone in it with a voice of his own says his
+	## entrance line on his own first line — now if that is the first line, or if the lines show all at once (`stepped` false).
 	_cg_on = cg_key
 	_cg_wait = {}
-	for prof in _cg_voice.get(cg_key, []):
-		var at := -1
-		for i in speakers.size():
-			if str(speakers[i]) in _speakers_of(prof):
-				at = i
-				break
-		if at <= 0:
+	var seen := {}
+	for i in speakers.size():
+		var prof := speaker_voice(str(speakers[i]))
+		if prof == "" or seen.has(prof):
+			continue
+		seen[prof] = true
+		if i == 0 or not stepped:
 			voice([prof], ["intro"])
 		else:
-			_cg_wait[at] = prof
+			_cg_wait[i] = prof
 
 
 func cg_line(cg_key: String, i: int) -> void:
 	## line `i` of the CG's scene is on screen: the entrance line of whoever speaks first there
-	if cg_key == _cg_on and _cg_wait.has(i):
+	if cg_key != "" and cg_key == _cg_on and _cg_wait.has(i):
 		voice([_cg_wait[i]], ["intro"])
 		_cg_wait.erase(i)
 
 
-func _speakers_of(prof: String) -> Array:
-	if _people.is_empty():
+func speaker_voice(key: String) -> String:
+	## the voice profile with an entrance line that a story speaker has of his own ("" = none)
+	if _speaker_voice.is_empty():
 		var cards: Dictionary = GameData.get_db().cards
 		for cid in cards:
 			var v := str(cards[cid].get("voice", ""))
-			if v != "":
-				if not _people.has(v):
-					_people[v] = []
-				_people[v].append_array([cid, str(cards[cid].get("person", cid))])
-	return _people.get(prof, [])
+			if v != "" and _voice_streams.has("%s/intro" % v):
+				_speaker_voice[cid] = v
+				_speaker_voice[str(cards[cid].get("person", cid))] = v
+	return str(_speaker_voice.get(key, ""))
 
 
 func has(key: String) -> bool:

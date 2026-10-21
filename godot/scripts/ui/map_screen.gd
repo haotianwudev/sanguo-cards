@@ -814,8 +814,8 @@ func _show_square(s: Dictionary) -> void:
 		_show_buttons(buttons, false)
 		_dlg_cg = cg_new
 		_dialog_show()
-	if cg_new != "":  # each voiced person it introduces speaks on his own first line (Sfx.cg_line from _dialog_show)
-		Sfx.cg_voice(cg_new, _dlg_keys if _dlg_cg != "" else [])
+	if cg_new != "":  # everyone in it with a voice of his own speaks it on his own first line (Sfx.cg_line from _dialog_show)
+		Sfx.cg_voice(cg_new, Kit.speakers(raw_lines, s.get("portraits", [])), _dlg_cg != "")
 	_update_tools()
 	_apply_dlg_size()
 

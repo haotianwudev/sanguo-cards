@@ -198,17 +198,6 @@
           "src": "lvbu_shuigan_fish.wav"
         }
       ],
-      "cgs": [
-        "c2_raid",
-        "c2_sanying",
-        "c5_rescue",
-        "c4_lubu_rage",
-        "n5_beat",
-        "n8_zhanlv",
-        "n10_hulao",
-        "c14_hujia",
-        "c5_fengyi"
-      ],
       "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-19），剪掉了结尾的静音；替换了原来的 MiniMax 版"
     },
     "zhaoyun": {
@@ -232,17 +221,6 @@
           "text": "常山赵子龙在此！",
           "src": "zhaoyun_changshan.wav"
         }
-      ],
-      "cgs": [
-        "jz_county",
-        "jz_rescue",
-        "jz_boss",
-        "c3_save_zan",
-        "n7_yuye",
-        "n7_qijin",
-        "n7_ouxue",
-        "n10_guandu",
-        "n10_jiaji"
       ]
     },
     "spear": {
@@ -359,24 +337,6 @@
           "text": "让小女为将军跳上一舞。",
           "src": "diaochan_tiaowu.wav"
         }
-      ],
-      "cgs": [
-        "c5_diaochan",
-        "c5_yuexia",
-        "c5_fengyi",
-        "c6_warn",
-        "c6_sneak",
-        "c8_liuxian",
-        "c8_plan_xun",
-        "c8_plan_huang",
-        "c8_qinggong",
-        "c8_jinggao",
-        "c8_caifuren",
-        "c8_eve",
-        "c8_shuige",
-        "c8_dress",
-        "c8_grapes",
-        "c8_louchuan"
       ]
     }
   },

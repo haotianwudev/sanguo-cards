@@ -38,12 +38,11 @@ description: 给《重开三国》(sanguo-cards) 的角色做战斗配音——�
     "intro":    [{"text": "谁敢与我一战！", "src": "lvbu_shuigan_fish.wav"}],   // 现成录音
     "ultimate": [{"text": "谁敢与我一战！", "src": "lvbu_shuigan_fish.wav"}],
     "roar":     [{"text": "谁敢与我一战！", "src": "lvbu_shuigan_fish.wav"}],
-    "cgs": ["c2_raid", "c2_sanying", …]      // 这些 CG 里他第一次开口时喊 intro
   }
 }
 ```
 
-- **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `intro` 登场（他当敌人的战斗开打时；`cgs` 里的 CG 第一次出现时——不是画面一出来就喊，而是等这场戏里**他自己第一次说话**那一行（谁在说话用 `Kit.speakers` 判断，和对话框头像同一套）；他在这场戏里不说话就画面出来时喊。地图和过场都算；一张 CG 可以挂几个人，各喊各的；同一声线 20 秒内不重复）。
+- **时机**：`attack` 普通出招 · `ultimate` 大招（3 AP 以上 / 限 1 / special）和 BOOST · `heal` 治疗 · `roar` 敌人蓄力、狂暴、放蓄力招 · `intro` 登场（他当敌人的战斗开打时；以及**任何一张 CG 的戏里他第一次开口的那一行**——全自动，不用列表、不挑场景：卡牌挂了 `voice`、声线有 `intro`，就在每张有他说话的 CG 里喊。谁在说话用 `Kit.speakers` 判断，和对话框头像同一套；他不说话就不喊；一张 CG 里几个人各喊各的；地图和过场都算；同一声线 20 秒内不重复）。
 - **三种引擎**（声线的 `engine`）：不写 = edge-tts（`tts`）；`indextts` = 本地模型（`ref` 参考音 + `emo` 语气）；`minimax` = MiniMax 直接念（`voice` 音色 ID、`emotion`、`speed`、`pitch`）。
 - **一句台词**的写法：字符串；`{"text", "tts"}` / `{"text", "emo"}` / `{"text", "emotion"}`（单句换音色或语气）；`{"text", "src": "x.wav"}`（`audio_src/voice/` 里的现成录音，比如剪过的，游戏里叫 `x.ogg`）。
 - **谁用哪个声线**：卡牌（`cards.json`）写 `"voice": "<声线>"`。我方出招按顺序找：卡牌自己的 → 兵种的（`troop_voices`，男性才用；枪兵「看枪！」）→ 按身份的默认。敌人按顺序找：自己的 `voice` → `card` 那张卡的 → 立绘那张卡的（掉并州兵卡的吕布战也是吕布）→ 按性别的默认。`game_data.gd` 把 `voice` 带进 `db.cards` 和战斗卡。
@@ -60,7 +59,7 @@ python tools/gen_voices.py --check    # 缺文件 exit 1
 G=/f/workspace/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe
 timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg 和 .ogg.import 一起提交
 ```
-测试（`tests/test_audio.gd`）：每句都有文件、默认声线覆盖每个身份、卡牌 / 敌人的 `voice` 存在、`cgs` 都是真在用的 CG、CG 配音等到说话人第一句才喊、每场吕布战都解析到吕布。
+测试（`tests/test_audio.gd`）：每句都有文件、默认声线覆盖每个身份、卡牌 / 敌人的 `voice` 存在、CG 配音等到说话人第一句才喊、每场吕布战都解析到吕布。
 
 ## 给一个角色做配音（流程）
 
@@ -76,7 +75,7 @@ timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg �
    python tools/voice_audition.py --engine minimax --line "<台词>"        --voice male-qn-jingying --voice "Chinese (Mandarin)_Reliable_Executive" --emotion angry
    ```
    MiniMax 直接念台词，不套本地模型。语气还不够冲时，可以在台词前加个「哈！」生成、再剪掉，存成 `src` 录音（吕布最早那版就是这样做的，后来换成了 Fish Audio 的）。
-3. **用户选定后**：本地版——把选中的 `ref_<n>.wav` 复制到 `audio_src/voice/<角色>_ref_<说明>.wav`，声线写 `engine: indextts`、`ref`、`emo`；MiniMax 版——声线写 `engine: minimax`、`voice`、`emotion`（`gen_voices.py` 会重新念一遍，MiniMax 每次结果略有不同，不满意就再跑或改用 `src` 存下试音里那条）。都写上 `source`（来历）和台词；卡牌写 `"voice"`；名将登场 CG 写进 `cgs`（只挑他威风登场的画面，投降、垂死、温情戏不要）。
+3. **用户选定后**：本地版——把选中的 `ref_<n>.wav` 复制到 `audio_src/voice/<角色>_ref_<说明>.wav`，声线写 `engine: indextts`、`ref`、`emo`；MiniMax 版——声线写 `engine: minimax`、`voice`、`emotion`（`gen_voices.py` 会重新念一遍，MiniMax 每次结果略有不同，不满意就再跑或改用 `src` 存下试音里那条）。都写上 `source`（来历）和台词；卡牌写 `"voice"`；有 `intro` 就自动在他开口的 CG 里喊，不用再配。
 4. `gen_voices.py --prune` → `--import` → 跑测试 → 截一场有他的战斗看没报错（`--demo=fight --scenario=<id>`）→ 按路径 `git add`（`audio_src/voice/`、`godot/data/audio/voice/`、`audio.json`、`cards.json`）→ 提交、推送。
 
 **用户直接给一条自己生成的 AI 语音**（Fish Audio 等）：当 `src` 录音入库——复制进 `audio_src/voice/<角色>_<说明>.wav`（先转写确认台词，剪掉头尾杂音），`source` 写清是用户用什么生成的，再按上面第 3、4 步接进游戏。这类不用再试音。
@@ -106,9 +105,9 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `guojia` 郭嘉：Fish Audio 生成的「这一局，早就算好了。」（用的是 Fish 里周瑜的音色），intro / ultimate / roar。
 - `cavalry` 骑兵（男）：Fish Audio 生成的「冲锋！」「突击！」（吕布的声音，随机挑一句），只配了 attack。
 - `spear` 枪兵（男）：Fish Audio 生成的「看枪！」「刺！」（赵云的声音，随机挑一句），只配了 attack，大招落回男将默认。
-- `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句；`cgs` 是他出手、登场的 9 张（悲情和温情戏不放）。
+- `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句。
 - `strategist` 策士（男）：Fish Audio 生成的「大局已定。」「谋定乾坤。」（周瑜的音色，随机挑一句），只配了 attack，大招也落到这两句。女策士（蔡文姬、黄月英）不走它，走女将默认。
-- `diaochan` 貂蝉：Fish Audio 生成的「让小女为将军跳上一舞。」，attack + intro（大招、怒吼落回 attack）；`cgs` 是她开口说话的 16 张（香消、同归、噩梦这类悲情戏不放；凤仪亭前的「格杀勿论」归吕布）。没有她当敌人的战斗。
+- `diaochan` 貂蝉：Fish Audio 生成的「让小女为将军跳上一舞。」，attack + intro（大招、怒吼落回 attack）。没有她当敌人的战斗。
 - `female` 女将的治疗（后勤女）：Fish Audio 生成的一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑；女将的 attack / ultimate 还是 edge-tts。
 - 其余（男将 / 女将 / 敌将）：edge-tts。
 
