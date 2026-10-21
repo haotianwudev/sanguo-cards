@@ -78,8 +78,6 @@ timeout 120 $G --headless --path godot --import    # 新 .ogg 要导入；.ogg �
 3. **用户选定后**：本地版——把选中的 `ref_<n>.wav` 复制到 `audio_src/voice/<角色>_ref_<说明>.wav`，声线写 `engine: indextts`、`ref`、`emo`；MiniMax 版——声线写 `engine: minimax`、`voice`、`emotion`（`gen_voices.py` 会重新念一遍，MiniMax 每次结果略有不同，不满意就再跑或改用 `src` 存下试音里那条）。都写上 `source`（来历）和台词；卡牌写 `"voice"`；有 `intro` 就自动在他开口的 CG 里喊，不用再配。**再把这句台词写进剧情**：挑一场有 CG、合他身份的戏，加一行 `@<他> 「台词」`（旁白和台词分两行，`test_story_text` 管），测试 `test_every_entrance_line_is_said_in_some_cg_scene` 会查。
 4. `gen_voices.py --prune` → `--import` → 跑测试 → 截一场有他的战斗看没报错（`--demo=fight --scenario=<id>`）→ 按路径 `git add`（`audio_src/voice/`、`godot/data/audio/voice/`、`audio.json`、`cards.json`）→ 提交、推送。
 
-**Fish 社区音色的风险（2026-10-20 用户已知情并接受）**：很多 Fish 社区音色以王者荣耀英雄命名（孙尚香、黄忠、貂蝉、安琪拉……），可能是克隆的游戏原声。用户说「风险可以接受」，照常收；`source` 里注明音色名。
-
 **用户直接给一条自己生成的 AI 语音**（Fish Audio 等）：当 `src` 录音入库——复制进 `audio_src/voice/<角色>_<说明>.wav`（先转写确认台词，剪掉头尾杂音），`source` 写清是用户用什么生成的，再按上面第 3、4 步接进游戏。这类不用再试音。
 
 ## 三种声音来源
@@ -119,7 +117,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `infantry` 刀兵（男）：Fish Audio 生成的「看刀！」（华雄音色）作 attack；同一声线的 guard「举盾！」也是 `voice_defaults.guard`，所有防御都喊它。演示：`--demo=fight --defend`。
 - `huangzhong` 黄忠：Fish Audio 生成的「百步之外，取尔性命！」，attack + intro；北线三场黄忠战（敌人用他的头像）开打时喊；剧情里在「水阁外·蔡家骑兵」（c8_qibing，两条支线都有）。
 - `archer` 弓兵（男）：Fish Audio 生成的「中！」「发射！」（黄忠音色，随机挑一句），只配 attack，大招也落回它。
-- `dongbai` 董白：Fish Audio 社区音色「安琪拉」生成的「石头剪刀布！」（intro，剧情里她本来就喊）和「吃我两锤！」（attack 两句随机）；她的招也改名「石头剪刀布」；南线董白战开打时喊。
+- `dongbai` 董白：Fish Audio 生成的「石头剪刀布！」（intro，剧情里她本来就喊）和「吃我两锤！」（attack 两句随机）；她的招也改名「石头剪刀布」；南线董白战开打时喊。
 - `female` 女将（所有兵种通用）：出招是 Fish Audio 生成的「看我的厉害！」「给我瞧好了！」（孙尚香音色，随机），没有单独的 ultimate，大招也喊这两句；治疗（后勤女）是一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑。
 - 其余（男将 / 敌将）：edge-tts。
 
