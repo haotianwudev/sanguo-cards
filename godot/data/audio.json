@@ -372,6 +372,23 @@
           "src": "zhangfuren_jizhang.wav"
         }
       ]
+    },
+    "lvlingqi": {
+      "name": "吕玲绮",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，孙尚香音色）",
+      "volume_db": 2,
+      "attack": [
+        {
+          "text": "总有一天，我要打倒父亲。",
+          "src": "lvlingqi_dadao.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "总有一天，我要打倒父亲。",
+          "src": "lvlingqi_dadao.wav"
+        }
+      ]
     }
   },
   "sfx": {

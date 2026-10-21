@@ -110,6 +110,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `diaochan` 貂蝉：Fish Audio 生成的「让小女为将军跳上一舞。」，attack + intro（大招、怒吼落回 attack）。没有她当敌人的战斗。
 - `wuguotai` 吴夫人：Fish Audio 生成的「多大的人了，还怕疼。」（「温柔」音色），heal + intro（她只有「慈母」一招治疗）。
 - `zhangfuren` 张夫人：Fish Audio 生成的「这账咱们得记着。」（「温柔」音色，剪掉结尾杂音），heal + intro（她只有「持家」一招，带治疗）。
+- `lvlingqi` 吕玲绮：Fish Audio 生成的「总有一天，我要打倒父亲。」（孙尚香音色），attack + intro（大招、怒吼落回 attack）；北线单挑她那场开打时也喊。
 - `female` 女将的治疗（后勤女）：Fish Audio 生成的一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑；女将的 attack / ultimate 还是 edge-tts。
 - 其余（男将 / 女将 / 敌将）：edge-tts。
 
