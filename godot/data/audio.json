@@ -13,7 +13,8 @@
   "troop_voices": {
     "spear": "spear",
     "cavalry": "cavalry",
-    "infantry": "infantry"
+    "infantry": "infantry",
+    "archer": "archer"
   },
   "female_names": [
     "貂蝉",
@@ -471,6 +472,17 @@
         {
           "text": "百步之外，取尔性命！",
           "src": "huangzhong_baibu.wav"
+        }
+      ]
+    },
+    "archer": {
+      "name": "弓兵（男）",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，黄忠音色）",
+      "volume_db": 1,
+      "attack": [
+        {
+          "text": "中！",
+          "src": "archer_zhong.wav"
         }
       ]
     }
