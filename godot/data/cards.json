@@ -1682,6 +1682,7 @@
     },
     "wuguotai": {
       "name": "吴夫人·慈母",
+      "voice": "wuguotai",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 96,

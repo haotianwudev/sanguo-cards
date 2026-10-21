@@ -108,6 +108,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `zhaoyun` 赵云：用户自己用 **Fish Audio** 生成的「常山赵子龙在此！」（`src`，剪掉了结尾杂音），intro / ultimate / roar 同一句。
 - `strategist` 策士（男）：Fish Audio 生成的「大局已定。」「谋定乾坤。」（周瑜的音色，随机挑一句），只配了 attack，大招也落到这两句。女策士（蔡文姬、黄月英）不走它，走女将默认。
 - `diaochan` 貂蝉：Fish Audio 生成的「让小女为将军跳上一舞。」，attack + intro（大招、怒吼落回 attack）。没有她当敌人的战斗。
+- `wuguotai` 吴夫人：Fish Audio 生成的「多大的人了，还怕疼。」（「温柔」音色），heal + intro（她只有「慈母」一招治疗）。
 - `female` 女将的治疗（后勤女）：Fish Audio 生成的一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑；女将的 attack / ultimate 还是 edge-tts。
 - 其余（男将 / 女将 / 敌将）：edge-tts。
 

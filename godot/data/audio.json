@@ -338,6 +338,23 @@
           "src": "diaochan_tiaowu.wav"
         }
       ]
+    },
+    "wuguotai": {
+      "name": "吴夫人",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，「温柔」音色）",
+      "volume_db": 2,
+      "heal": [
+        {
+          "text": "多大的人了，还怕疼。",
+          "src": "wuguotai_paoteng.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "多大的人了，还怕疼。",
+          "src": "wuguotai_paoteng.wav"
+        }
+      ]
     }
   },
   "sfx": {
