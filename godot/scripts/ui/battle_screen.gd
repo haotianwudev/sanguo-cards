@@ -67,7 +67,7 @@ func _ready() -> void:
 		_finish_at_start.call_deferred()
 	elif auto_on:
 		_auto_step.call_deferred()
-	_intro_wait = Sfx.voice(_enemy_voices(), ["intro"])  # a named foe's entrance line (吕布「谁敢与我一战！」); generic enemies have none
+	_intro_wait = Sfx.voice(_enemy_voices(), ["intro", "roar"])  # a named foe's entrance line (吕布「谁敢与我一战！」); a generic enemy opens with its battle cry
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
