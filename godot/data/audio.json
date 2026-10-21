@@ -146,20 +146,24 @@
     },
     "enemy_male": {
       "name": "敌将（男，通用）",
-      "tts": [
-        "zh-CN-YunjianNeural",
-        "+10%",
-        "-2Hz"
-      ],
       "volume_db": -1,
       "attack": [
-        "拿命来吧！",
-        "给我上！宰了他！",
-        "拿命来！受死吧！"
+        {
+          "text": "宰了他！",
+          "src": "enemy_male_zaile.wav"
+        },
+        {
+          "text": "拿命来吧！",
+          "src": "enemy_male_naming.wav"
+        }
       ],
       "roar": [
-        "都给我上！受死吧！"
-      ]
+        {
+          "text": "都给我上！",
+          "src": "enemy_male_dougei.wav"
+        }
+      ],
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，「土匪」音色）"
     },
     "enemy_female": {
       "name": "敌将（女，通用）",
