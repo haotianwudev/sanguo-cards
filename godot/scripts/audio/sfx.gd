@@ -13,6 +13,7 @@ var female_names: Array = []
 var troop_voices: Dictionary = {}  # audio.json troop_voices: troop → profile (e.g. 枪兵「看枪！」), for men only
 var _voice_vol: Dictionary = {}  # profile → volume_db
 var _voice_streams: Dictionary = {}  # "profile/moment" → Array[AudioStream]
+var _intro_text: Dictionary = {}  # profile → the words of his entrance line, without punctuation (to find it in a scene)
 var _speaker_voice: Dictionary = {}  # story speaker key (card id / person) → his own voice profile (the card's `voice`)
 var _cg_wait: Dictionary = {}  # the CG on screen: line index → profile, said when that line (his first) comes up
 var _cg_on := ""
@@ -87,6 +88,9 @@ func _load_voices(data: Dictionary) -> void:
 					list.append(load(path))
 			if not list.is_empty():
 				_voice_streams["%s/%s" % [prof, moment]] = list
+				if moment == "intro":
+					var l: Variant = p["intro"][0]
+					_intro_text[prof] = _bare(l if l is String else str(l["text"]))
 
 
 func _volume() -> float:
@@ -125,21 +129,32 @@ func voice(profiles: Array, moments: Array) -> float:
 	return 0.0
 
 
-func cg_voice(cg_key: String, speakers: Array, stepped := true) -> void:
-	## a story CG just came up (`speakers`: Kit.speakers of its lines). Everyone in it with a voice of his own says his
-	## entrance line on his own first line — now if that is the first line, or if the lines show all at once (`stepped` false).
+func cg_voice(cg_key: String, lines: Array, speakers: Array, stepped := true) -> void:
+	## a story CG just came up (`lines` and their `speakers`, from Kit.speakers). Everyone in it with a voice of his own
+	## says his entrance line on the line where he says those very words, else on his own first line — now if that is
+	## the first line, or if the lines show all at once (`stepped` false).
 	_cg_on = cg_key
 	_cg_wait = {}
-	var seen := {}
+	var at := {}  # profile → line index
 	for i in speakers.size():
 		var prof := speaker_voice(str(speakers[i]))
-		if prof == "" or seen.has(prof):
+		if prof == "":
 			continue
-		seen[prof] = true
-		if i == 0 or not stepped:
+		if not at.has(prof):
+			at[prof] = i
+		elif i < lines.size() and _bare(str(lines[i])).contains(_intro_text.get(prof, "?")) 				and not _bare(str(lines[at[prof]])).contains(_intro_text.get(prof, "?")):
+			at[prof] = i
+	for prof in at:
+		if at[prof] == 0 or not stepped:
 			voice([prof], ["intro"])
 		else:
-			_cg_wait[i] = prof
+			_cg_wait[at[prof]] = prof
+
+
+static func _bare(t: String) -> String:
+	for c in "，。！？、…—「」：；　 ":
+		t = t.replace(c, "")
+	return t
 
 
 func cg_line(cg_key: String, i: int) -> void:

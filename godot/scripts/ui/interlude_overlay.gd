@@ -106,7 +106,7 @@ func _show_scene(sc: Dictionary) -> void:
 	_line = 0
 	_scene_cg = str(sc.get("cg", "")) if art != null else ""
 	if _scene_cg != "":
-		Sfx.cg_voice(_scene_cg, Kit.speakers(sc.get("text", []), sc.get("portraits", [])))
+		Sfx.cg_voice(_scene_cg, sc.get("text", []), Kit.speakers(sc.get("text", []), sc.get("portraits", [])))
 	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 6)
 	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 6)
 	_box.add_child(text)

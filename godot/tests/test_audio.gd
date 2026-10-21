@@ -102,9 +102,34 @@ func test_a_cg_voice_waits_for_its_speakers_first_line() -> void:
 	var keys := Kit.speakers(sq.get("text", []), sq.get("portraits", []))
 	var sfx: Node = SfxScript.new()
 	sfx._load_voices(data)
-	sfx.cg_voice("c5_fengyi", keys)
+	sfx.cg_voice("c5_fengyi", sq.get("text", []), keys)
 	check(sfx._cg_wait.values().has("lvbu") or keys.find("lvbu") == 0, "吕布 too: %s" % str(sfx._cg_wait))
 	check(keys.find("diaochan") > 0 and sfx._cg_wait.get(keys.find("diaochan"), "") == "diaochan", "貂蝉 waits for her first line: %s" % str(sfx._cg_wait))
 	sfx.cg_line("c5_fengyi", keys.find("diaochan"))
 	check(not sfx._cg_wait.values().has("diaochan"), "said once her line is up")
+	sfx.free()
+
+
+func test_every_entrance_line_is_said_in_some_cg_scene() -> void:
+	## each voice of one's own (吕布, 郭嘉, 张夫人 …) has his line written into at least one CG scene, and it plays on that line
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
+	var sfx: Node = SfxScript.new()
+	sfx._load_voices(data)
+	var found := {}
+	for q in GameData.get_db().quests:
+		for sid in q["squares"]:
+			var sq: Dictionary = q["squares"][sid]
+			if str(sq.get("cg", "")) == "":
+				continue
+			var lines: Array = sq.get("text", [])
+			var keys := Kit.speakers(lines, sq.get("portraits", []))
+			sfx.cg_voice(str(sq["cg"]), lines, keys)
+			for i in sfx._cg_wait:
+				if SfxScript._bare(str(lines[i])).contains(sfx._intro_text[sfx._cg_wait[i]]):
+					found[sfx._cg_wait[i]] = true
+	var missing: Array = []
+	for prof in sfx._intro_text:
+		if sfx._speaker_voice.values().has(prof) and not found.has(prof):
+			missing.append(prof)
+	check(missing.is_empty(), "entrance lines no CG scene says (write one in): %s" % str(missing))
 	sfx.free()
