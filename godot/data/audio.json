@@ -493,6 +493,23 @@
           "src": "archer_fashe.wav"
         }
       ]
+    },
+    "dongbai": {
+      "name": "董白",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，吕玲绮音色）",
+      "volume_db": 2,
+      "attack": [
+        {
+          "text": "石头剪刀布！",
+          "src": "dongbai_caiquan.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "石头剪刀布！",
+          "src": "dongbai_caiquan.wav"
+        }
+      ]
     }
   },
   "sfx": {

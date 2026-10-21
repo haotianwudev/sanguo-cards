@@ -654,7 +654,7 @@
       ]
     },
     "shuangchui": {
-      "name": "双锤",
+      "name": "石头剪刀布",
       "cost": 2,
       "cumulative": true,
       "effects": [

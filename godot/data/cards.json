@@ -1707,6 +1707,7 @@
     },
     "dongbai": {
       "name": "董白·双锤",
+      "voice": "dongbai",
       "rarity": "SR",
       "troop": "infantry",
       "hp": 66,
