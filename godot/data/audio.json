@@ -355,6 +355,23 @@
           "src": "wuguotai_paoteng.wav"
         }
       ]
+    },
+    "zhangfuren": {
+      "name": "张夫人",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，「温柔」音色），剪掉了结尾杂音",
+      "volume_db": 2,
+      "heal": [
+        {
+          "text": "这账咱们得记着。",
+          "src": "zhangfuren_jizhang.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "这账咱们得记着。",
+          "src": "zhangfuren_jizhang.wav"
+        }
+      ]
     }
   },
   "sfx": {

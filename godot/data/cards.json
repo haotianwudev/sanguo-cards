@@ -2287,6 +2287,7 @@
     },
     "zhangfuren": {
       "name": "张夫人",
+      "voice": "zhangfuren",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 90,
