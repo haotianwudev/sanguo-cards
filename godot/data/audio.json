@@ -420,6 +420,23 @@
           "src": "caiwenji_hujia.wav"
         }
       ]
+    },
+    "huaxiong": {
+      "name": "华雄",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，华雄音色）；之前那条爱给网的只用来参考过风格，没进游戏",
+      "volume_db": 2,
+      "attack": [
+        {
+          "text": "吃我一刀！",
+          "src": "huaxiong_chiwo.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "吃我一刀！",
+          "src": "huaxiong_chiwo.wav"
+        }
+      ]
     }
   },
   "sfx": {

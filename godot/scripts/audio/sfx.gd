@@ -199,6 +199,7 @@ func speaker_voice(key: String) -> String:
 			if v != "" and _voice_streams.has("%s/intro" % v):
 				_speaker_voice[cid] = v
 				_speaker_voice[str(cards[cid].get("person", cid))] = v
+				_speaker_voice[str(cid).trim_suffix("_card")] = v  # huaxiong_card speaks in the story as huaxiong
 	return str(_speaker_voice.get(key, ""))
 
 

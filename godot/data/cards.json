@@ -2107,6 +2107,7 @@
     },
     "huaxiong_card": {
       "name": "华雄",
+      "voice": "huaxiong",
       "rarity": "SR",
       "troop": "infantry",
       "person": "huaxiong",
