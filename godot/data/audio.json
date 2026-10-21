@@ -103,19 +103,16 @@
     },
     "female": {
       "name": "女武将（通用）",
-      "tts": [
-        "zh-CN-XiaoyiNeural",
-        "+10%",
-        "+2Hz"
-      ],
       "volume_db": 1,
       "attack": [
-        "看招！",
-        "休想跑！"
-      ],
-      "ultimate": [
-        "看我破阵！",
-        "给我瞧好了！"
+        {
+          "text": "看我的厉害！",
+          "src": "female_lihai.wav"
+        },
+        {
+          "text": "给我瞧好了！",
+          "src": "female_qiaohao.wav"
+        }
       ],
       "heal": [
         {
@@ -127,7 +124,7 @@
           "src": "heal_female_anxin.wav"
         }
       ],
-      "source": "治疗台词：用户用 Fish Audio 生成的 AI 语音（2026-10-20，貂蝉音色），一条「别怕，安心修养」剪成两句；其余是 edge-tts"
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20）：出招两句是孙尚香音色（所有兵种的女将通用，大招也落回这两句），治疗是貂蝉音色的一条剪成两句"
     },
     "strategist": {
       "name": "策士（男，通用）",
