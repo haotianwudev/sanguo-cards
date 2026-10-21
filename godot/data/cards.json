@@ -1196,6 +1196,7 @@
     },
     "caiwenji": {
       "name": "蔡文姬",
+      "voice": "caiwenji",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 92,

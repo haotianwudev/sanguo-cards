@@ -403,6 +403,23 @@
           "src": "sunshangxiang_biyibi.wav"
         }
       ]
+    },
+    "caiwenji": {
+      "name": "蔡文姬",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，蔡文姬音色）：《胡笳十八拍》首两句；战斗里只用前半句（剪在两句之间的停顿处）",
+      "volume_db": 2,
+      "attack": [
+        {
+          "text": "天不仁兮降乱离！",
+          "src": "caiwenji_hujia_1.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "天不仁兮降乱离，地不仁兮使我逢此时！",
+          "src": "caiwenji_hujia.wav"
+        }
+      ]
     }
   },
   "sfx": {

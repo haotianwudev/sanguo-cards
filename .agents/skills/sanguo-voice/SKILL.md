@@ -112,6 +112,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `zhangfuren` 张夫人：Fish Audio 生成的「这账咱们得记着。」（「温柔」音色，剪掉结尾杂音），heal + intro（她只有「持家」一招，带治疗）。
 - `lvlingqi` 吕玲绮：Fish Audio 生成的「总有一天，我要打倒父亲。」（孙尚香音色），attack + intro（大招、怒吼落回 attack）；北线单挑她那场开打时也喊。
 - `sunshangxiang` 孙尚香：Fish Audio 生成的「兄长，咱们比一比！」（和吕玲绮同一个 Fish 音色），attack + intro；剧情里在「富春还乡」说。
+- `caiwenji` 蔡文姬：Fish Audio 生成的《胡笳十八拍》首两句「天不仁兮降乱离，地不仁兮使我逢此时！」（7.3 秒）作 intro（CG、整备）；战斗嫌长，attack 只用剪下来的前半句「天不仁兮降乱离！」。剧情里在「蔡文姬」（c4_wenji）讲完走散后吟出。
 - `female` 女将（所有兵种通用）：出招是 Fish Audio 生成的「看我的厉害！」「给我瞧好了！」（孙尚香音色，随机），没有单独的 ultimate，大招也喊这两句；治疗（后勤女）是一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑。
 - 其余（男将 / 敌将）：edge-tts。
 
