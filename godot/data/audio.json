@@ -483,6 +483,10 @@
         {
           "text": "中！",
           "src": "archer_zhong.wav"
+        },
+        {
+          "text": "发射！",
+          "src": "archer_fashe.wav"
         }
       ]
     }
