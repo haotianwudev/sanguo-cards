@@ -112,7 +112,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `zhangfuren` 张夫人：Fish Audio 生成的「这账咱们得记着。」（「温柔」音色，剪掉结尾杂音），heal + intro（她只有「持家」一招，带治疗）。
 - `lvlingqi` 吕玲绮：Fish Audio 生成的「总有一天，我要打倒父亲。」（孙尚香音色），attack + intro（大招、怒吼落回 attack）；北线单挑她那场开打时也喊。
 - `sunshangxiang` 孙尚香：Fish Audio 生成的「兄长，咱们比一比！」（和吕玲绮同一个 Fish 音色），attack + intro；剧情里在「富春还乡」说。
-- `caiwenji` 蔡文姬：Fish Audio 生成的《胡笳十八拍》首两句「天不仁兮降乱离，地不仁兮使我逢此时！」（7.3 秒）作 intro（CG、整备）；战斗嫌长，attack 只用剪下来的前半句「天不仁兮降乱离！」。剧情里在「蔡文姬」（c4_wenji）讲完走散后吟出。
+- `caiwenji` 蔡文姬：Fish Audio 生成的《胡笳十八拍》首两句「天不仁兮降乱离，地不仁兮使我逢此时！」（7.3 秒）作 intro（CG、整备）；战斗嫌长，attack 在停顿处剪成「天不仁兮降乱离！」「地不仁兮使我逢此时！」两半，随机喊一句。剧情里在「蔡文姬」（c4_wenji）讲完走散后吟出。
 - `huaxiong` 华雄（`huaxiong_card`，敌将）：Fish Audio 生成的「吃我一刀！」，attack + intro；华雄战开打时喊，剧情里在「阵前」（c2_zumao）。
 - `infantry` 刀兵（男）：Fish Audio 生成的「看刀！」（华雄音色）作 attack；同一声线的 guard「举盾！」也是 `voice_defaults.guard`，所有防御都喊它。演示：`--demo=fight --defend`。
 - `huangzhong` 黄忠：Fish Audio 生成的「百步之外，取尔性命！」，attack + intro；北线三场黄忠战（敌人用他的头像）开打时喊；剧情里在「水阁外·蔡家骑兵」（c8_qibing，两条支线都有）。
