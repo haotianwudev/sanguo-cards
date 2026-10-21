@@ -118,9 +118,10 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `huangzhong` 黄忠：Fish Audio 生成的「百步之外，取尔性命！」，attack + intro；北线三场黄忠战（敌人用他的头像）开打时喊；剧情里在「水阁外·蔡家骑兵」（c8_qibing，两条支线都有）。
 - `archer` 弓兵（男）：Fish Audio 生成的「中！」「发射！」（黄忠音色，随机挑一句），只配 attack，大招也落回它。
 - `dongbai` 董白：Fish Audio 生成的「石头剪刀布！」（intro，剧情里她本来就喊）和「吃我两锤！」（attack 两句随机）；她的招也改名「石头剪刀布」；南线董白战开打时喊。
-- `enemy_male` 敌将（男，通用）：Fish Audio 生成的「土匪」音色，出手「宰了他！」「拿命来吧！」随机，怒吼（蓄力、狂暴）「都给我上！」；女敌将还是电脑合成。
+- `enemy_male` 敌将（男，通用）：Fish Audio 生成的「土匪」音色，出手「宰了他！」「拿命来吧！」随机，怒吼（蓄力、狂暴）「都给我上！」。
+- `enemy_female` 敌将（女，通用）：Fish Audio 生成的「土匪女」音色，出手「往哪里跑！」「拿命来！」随机，怒吼「给我杀了他！」。
 - `female` 女将（所有兵种通用）：出招是 Fish Audio 生成的「看我的厉害！」「给我瞧好了！」（孙尚香音色，随机），没有单独的 ultimate，大招也喊这两句；治疗（后勤女）是一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑。
-- 其余（男将 / 女敌将）：edge-tts。
+- 其余（男将）：edge-tts。
 
 ## 和配音相关的其他东西
 

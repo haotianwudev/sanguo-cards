@@ -167,19 +167,24 @@
     },
     "enemy_female": {
       "name": "敌将（女，通用）",
-      "tts": [
-        "zh-CN-XiaoyiNeural",
-        "+12%",
-        "+2Hz"
-      ],
       "volume_db": -1,
       "attack": [
-        "拿命来！",
-        "给我上！"
+        {
+          "text": "往哪里跑！",
+          "src": "enemy_female_naner.wav"
+        },
+        {
+          "text": "拿命来！",
+          "src": "enemy_female_naming.wav"
+        }
       ],
       "roar": [
-        "都给我上！"
-      ]
+        {
+          "text": "给我杀了他！",
+          "src": "enemy_female_shale.wav"
+        }
+      ],
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，「土匪女」音色）"
     },
     "lvbu": {
       "name": "吕布",
