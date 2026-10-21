@@ -1404,6 +1404,7 @@
     },
     "huangzhong": {
       "name": "黄忠·中年",
+      "voice": "huangzhong",
       "rarity": "SR",
       "troop": "archer",
       "hp": 66,

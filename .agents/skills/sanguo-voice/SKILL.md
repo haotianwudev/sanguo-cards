@@ -115,6 +115,7 @@ python -m uv run hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 - `caiwenji` 蔡文姬：Fish Audio 生成的《胡笳十八拍》首两句「天不仁兮降乱离，地不仁兮使我逢此时！」（7.3 秒）作 intro（CG、整备）；战斗嫌长，attack 只用剪下来的前半句「天不仁兮降乱离！」。剧情里在「蔡文姬」（c4_wenji）讲完走散后吟出。
 - `huaxiong` 华雄（`huaxiong_card`，敌将）：Fish Audio 生成的「吃我一刀！」，attack + intro；华雄战开打时喊，剧情里在「阵前」（c2_zumao）。
 - `infantry` 刀兵（男）：Fish Audio 生成的「看刀！」（华雄音色）作 attack；同一声线的 guard「举盾！」也是 `voice_defaults.guard`，所有防御都喊它。演示：`--demo=fight --defend`。
+- `huangzhong` 黄忠：Fish Audio 生成的「百步之外，取尔性命！」，attack + intro；北线三场黄忠战（敌人用他的头像）开打时喊；剧情里在「水阁外·蔡家骑兵」（c8_qibing，两条支线都有）。
 - `female` 女将（所有兵种通用）：出招是 Fish Audio 生成的「看我的厉害！」「给我瞧好了！」（孙尚香音色，随机），没有单独的 ultimate，大招也喊这两句；治疗（后勤女）是一条「别怕，安心修养」（貂蝉音色）在停顿处剪成「别怕……」「安心休养……」两句，随机挑。
 - 其余（男将 / 敌将）：edge-tts。
 

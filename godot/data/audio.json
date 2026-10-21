@@ -456,6 +456,23 @@
           "src": "guard_jushun.wav"
         }
       ]
+    },
+    "huangzhong": {
+      "name": "黄忠",
+      "source": "用户用 Fish Audio 生成的 AI 语音（2026-10-20，黄忠音色）",
+      "volume_db": 2,
+      "attack": [
+        {
+          "text": "百步之外，取尔性命！",
+          "src": "huangzhong_baibu.wav"
+        }
+      ],
+      "intro": [
+        {
+          "text": "百步之外，取尔性命！",
+          "src": "huangzhong_baibu.wav"
+        }
+      ]
     }
   },
   "sfx": {
