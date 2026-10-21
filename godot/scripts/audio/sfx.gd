@@ -17,6 +17,7 @@ var _intro_text: Dictionary = {}  # profile → the words of his entrance line, 
 var _speaker_voice: Dictionary = {}  # story speaker key (card id / person) → his own voice profile (the card's `voice`)
 var _cg_wait: Dictionary = {}  # the CG on screen: line index → profile, said when that line (his first) comes up
 var _cg_on := ""
+var _card_pl: AudioStreamPlayer  # the line a tapped card is saying (cut off by the next tap)
 var _intro_at: Dictionary = {}  # profile → Time.get_ticks_msec() of its last intro
 var _streams: Dictionary = {}  # event → Array[AudioStream], loaded once up front (no first-play lag on phones)
 var _players: Array[AudioStreamPlayer] = []
@@ -127,6 +128,31 @@ func voice(profiles: Array, moments: Array) -> float:
 			pl.play()
 			return pl.stream.get_length()
 	return 0.0
+
+
+func card_voice(card: Dictionary) -> void:
+	## a card tapped in 整备 says his line: his own entrance line, else what he shouts in battle — the same voice
+	## the battle screen gives him (his own → his troop's, men only → the default for his role)
+	var troop := str(card.get("troop", ""))
+	var role := "lord" if troop == "lord" or str(card.get("id", "")) == "lord" else "female" if is_female(card) 		else "strategist" if troop == "strategist" else "male"
+	var moments: Array = ["intro", "ultimate", "attack"]
+	for sid in card.get("skills", []):
+		for eff in GameData.get_db().skills.get(sid, {}).get("effects", []):
+			if eff.get("type", "") == "heal":
+				moments = ["intro", "heal", "ultimate", "attack"]
+	if _card_pl != null:
+		_card_pl.stop()
+	var troop_voice := str(troop_voices.get(troop, "")) if role == "male" else ""
+	if voice([str(card.get("voice", "")), troop_voice, str(voice_defaults.get(role, role))], moments) > 0.0:
+		_card_pl = _players[(_next + _players.size() - 1) % _players.size()]
+
+
+func is_female(card: Dictionary) -> bool:
+	var cname: String = card.get("name", "")
+	for f in female_names:
+		if cname.contains(f):
+			return true
+	return false
 
 
 func cg_voice(cg_key: String, lines: Array, speakers: Array, stepped := true) -> void:

@@ -938,11 +938,7 @@ func _play(events: Array) -> void:
 
 
 func _is_female(card: Dictionary) -> bool:
-	var cname: String = card.get("name", "")
-	for f in Sfx.female_names:
-		if cname.contains(f):
-			return true
-	return false
+	return Sfx.is_female(card)
 
 
 func _enemy_voices() -> Array:

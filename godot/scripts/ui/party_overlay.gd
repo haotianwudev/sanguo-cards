@@ -563,6 +563,8 @@ func _tap(cid: String) -> void:
 		if _sel == cid:  # a second tap puts the card in use
 			Game.save.lord_form_pick = cid.substr(9)
 			_msg.text = "主公换上了「%s」" % _form_name(cid.substr(9))
+		else:
+			Sfx.card_voice({"id": "lord", "troop": "lord"})
 		_sel = cid
 		_filter = "lord"
 		_rebuild()
@@ -573,6 +575,9 @@ func _tap(cid: String) -> void:
 	_sel = cid
 	if GameData.get_db().cards.has(cid):
 		_filter = GameData.get_db().cards[cid]["troop"]  # the pool jumps to that card's troop
+		var card: Dictionary = GameData.get_db().cards[cid].duplicate()
+		card["id"] = cid
+		Sfx.card_voice(card)  # he says his line, as in battle
 	_msg.text = ""
 	_rebuild()
 

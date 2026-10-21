@@ -459,6 +459,14 @@ func demo(name: String) -> void:
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_open_party")
+			if OS.get_cmdline_user_args().has("--voices"):  # tap 孙策, 吴夫人, 黄盖, a soldier and the lord: each says his line
+				(func():
+					await get_tree().create_timer(0.5).timeout
+					var o: PartyOverlay = m.get_node("Party")
+					for cid in ["sunce", "wuguotai", "huanggai", "danyang", "lord"]:
+						o._tap(cid)
+						print("tapped ", cid)
+						await get_tree().create_timer(2.6).timeout).call()
 			if name == "party_pick":  # a general selected: the detail panel with unit and skills
 				(func():
 					await get_tree().process_frame
