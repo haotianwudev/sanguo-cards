@@ -104,9 +104,9 @@ func has_voice(profile: String, moment: String) -> bool:
 	return _voice_streams.has("%s/%s" % [profile, moment])
 
 
-func voice(profiles: Array, moments: Array) -> float:
+func voice(profiles: Array, moments: Array, force := false) -> float:
 	## Say one line: the first moment (in order) that any profile (in order) has — e.g. [own, default] × [heal, attack].
-	## Returns how long it runs (0 = nothing said).
+	## Returns how long it runs (0 = nothing said). `force`: a CG scene says it even right after another intro (a chapter's last scene, then the next one).
 	var vol := _volume()
 	if vol <= 0.0 or _players.is_empty():
 		return 0.0
@@ -117,7 +117,7 @@ func voice(profiles: Array, moments: Array) -> float:
 				continue
 			if m == "intro":
 				var now := Time.get_ticks_msec()
-				if _intro_at.has(prof) and now - int(_intro_at[prof]) < INTRO_GAP_MS:
+				if not force and _intro_at.has(prof) and now - int(_intro_at[prof]) < INTRO_GAP_MS:
 					return 0.0
 				_intro_at[prof] = now
 			var pl := _players[_next]
@@ -172,7 +172,7 @@ func cg_voice(cg_key: String, lines: Array, speakers: Array, stepped := true) ->
 			at[prof] = i
 	for prof in at:
 		if at[prof] == 0 or not stepped:
-			voice([prof], ["intro"])
+			voice([prof], ["intro"], true)
 		else:
 			_cg_wait[at[prof]] = prof
 
@@ -186,7 +186,7 @@ static func _bare(t: String) -> String:
 func cg_line(cg_key: String, i: int) -> void:
 	## line `i` of the CG's scene is on screen: the entrance line of whoever speaks first there
 	if cg_key != "" and cg_key == _cg_on and _cg_wait.has(i):
-		voice([_cg_wait[i]], ["intro"])
+		voice([_cg_wait[i]], ["intro"], true)
 		_cg_wait.erase(i)
 
 
