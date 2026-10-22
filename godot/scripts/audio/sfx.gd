@@ -114,11 +114,6 @@ func voice(profiles: Array, moments: Array) -> float:
 			var list: Array = _voice_streams.get("%s/%s" % [prof, m], [])
 			if list.is_empty():
 				continue
-			if m == "intro":
-				var now := Time.get_ticks_msec()
-				if not force and _intro_at.has(prof) and now - int(_intro_at[prof]) < INTRO_GAP_MS:
-					return 0.0
-				_intro_at[prof] = now
 			var pl := _players[_next]
 			_next = (_next + 1) % _players.size()
 			pl.stream = list[randi() % list.size()]
