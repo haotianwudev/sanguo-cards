@@ -516,10 +516,10 @@
       "troop": "lord",
       "icon": "玺",
       "rarity": "curse",
-      "desc": "【诅咒】每回合 AP +1，但体力上限 -15%",
+      "desc": "【诅咒】每回合 AP +1，但体力上限 -8%",
       "mods": {
         "ap_round": 1,
-        "hp": -0.15
+        "hp": -0.08
       }
     },
     "huangjinfu": {
@@ -527,10 +527,10 @@
       "troop": "strategist",
       "icon": "黄",
       "rarity": "curse",
-      "desc": "【诅咒】法术伤害 +20%，但受到的伤害 +10%",
+      "desc": "【诅咒】法术伤害 +20%，但受到的伤害 +5%",
       "mods": {
         "magic": 0.2,
-        "guard": -0.1
+        "guard": -0.05
       }
     },
     "dilu": {
@@ -538,11 +538,11 @@
       "troop": "cavalry",
       "icon": "卢",
       "rarity": "curse",
-      "desc": "【诅咒】妨主之马。回合上限 +1、开战全军 BOOST，但开战先掉 10% 体力",
+      "desc": "【诅咒】妨主之马。回合上限 +1、开战全军 BOOST，但开战先掉 5% 体力",
       "mods": {
         "turns": 1,
         "boost_start": 1,
-        "start_heal": -0.1
+        "start_heal": -0.05
       }
     },
     "fangtian": {
@@ -550,10 +550,10 @@
       "troop": "cavalry",
       "icon": "戟",
       "rarity": "curse",
-      "desc": "【诅咒】吕布的戟，太重了。攻击 +15%，但受到的伤害 +15%",
+      "desc": "【诅咒】吕布的戟，太重了。攻击 +15%，但受到的伤害 +8%",
       "mods": {
         "at": 0.15,
-        "guard": -0.15
+        "guard": -0.08
       }
     },
     "tengjia": {
@@ -561,10 +561,10 @@
       "troop": "bandit",
       "icon": "藤",
       "rarity": "curse",
-      "desc": "【诅咒】刀枪不入，就怕火。受到的伤害 -15%，但体力上限 -10%",
+      "desc": "【诅咒】刀枪不入，就怕火。受到的伤害 -15%，但体力上限 -5%",
       "mods": {
         "guard": 0.15,
-        "hp": -0.1
+        "hp": -0.05
       }
     },
     "wentai_shu": {
@@ -596,10 +596,10 @@
       "troop": "lord",
       "icon": "仲",
       "rarity": "story",
-      "desc": "【诅咒】袁术刻的假玉玺，刻工比真的还精细。每回合 AP +1，但受到的伤害 +10%",
+      "desc": "【诅咒】袁术刻的假玉玺，刻工比真的还精细。每回合 AP +1，但受到的伤害 +5%",
       "mods": {
         "ap_round": 1,
-        "guard": -0.1
+        "guard": -0.05
       }
     },
     "xuzhou_yin": {
