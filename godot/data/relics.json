@@ -538,11 +538,11 @@
       "troop": "cavalry",
       "icon": "卢",
       "rarity": "curse",
-      "desc": "【诅咒】妨主之马。回合上限 +1、开战全军 BOOST，但开战先掉 10% 体力",
+      "desc": "【诅咒】妨主之马。回合上限 +1、开战全军 BOOST，但开战先掉 5% 体力",
       "mods": {
         "turns": 1,
         "boost_start": 1,
-        "start_heal": -0.1
+        "start_heal": -0.05
       }
     },
     "fangtian": {
