@@ -486,13 +486,10 @@
       "troop": "strategist",
       "icon": "太",
       "rarity": "rare",
-      "desc": "张角的天书，南下黄巾一直在找它。策士部队：攻击 +10%，体力 +5%（队里有策士才生效）",
+      "desc": "张角的天书，南下黄巾一直在找它。策士部队：体力 +15%（队里有策士才生效）",
       "mods": {
-        "troop_at": {
-          "strategist": 0.1
-        },
         "troop_hp": {
-          "strategist": 0.05
+          "strategist": 0.15
         }
       }
     },
@@ -501,13 +498,10 @@
       "troop": "logistics",
       "icon": "囊",
       "rarity": "common",
-      "desc": "华佗的医书，差点被狱卒的老婆烧了。后勤部队：攻击 +10%，体力 +5%（队里有后勤才生效）",
+      "desc": "华佗的医书，差点被狱卒的老婆烧了。后勤部队：体力 +15%（队里有后勤才生效）",
       "mods": {
-        "troop_at": {
-          "logistics": 0.1
-        },
         "troop_hp": {
-          "logistics": 0.05
+          "logistics": 0.15
         }
       }
     },
@@ -641,9 +635,9 @@
       "troop": "strategist",
       "icon": "骂",
       "rarity": "story",
-      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士部队：攻击 +12%；但每场开局 AP -1",
+      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士部队：体力 +12%；但每场开局 AP -1",
       "mods": {
-        "troop_at": {
+        "troop_hp": {
           "strategist": 0.12
         },
         "ap_start": -1
