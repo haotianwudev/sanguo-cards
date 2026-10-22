@@ -120,7 +120,12 @@ func _make_unit(ld: Dictionary) -> Dictionary:
 	var u_left := {}
 	var u_extra := {}
 	for s in ld["card"]["skills"]:
-		u_left[s] = st["uses_left"].get(s, db.skills[s]["uses"]) if st.has("uses_left") else _carry_uses.get(cid, {}).get(s, db.skills[s]["uses"])
+		if db.skills[s]["per_battle"]:  # 每场限 1 次: fresh every fight (a swap within the fight keeps what the bench saved)
+			u_left[s] = st["uses_left"].get(s, 1) if st.has("uses_left") else 1
+		elif st.has("uses_left"):
+			u_left[s] = st["uses_left"].get(s, db.skills[s]["uses"])
+		else:
+			u_left[s] = _carry_uses.get(cid, {}).get(s, db.skills[s]["uses"])
 		u_extra[s] = st["extra_cost"].get(s, 0) if st.has("extra_cost") else _carry_extra.get(cid, {}).get(s, 0)
 	return {"leader": ld, "uses_left": u_left, "extra_cost": u_extra, "acted": false,
 		"idle_rounds": 0, "boosted": false, "confused": false, "confuse_next": false}
@@ -203,7 +208,7 @@ func carry_out() -> Array:
 		extra[cid] = bench_states[cid]["extra_cost"].duplicate()
 		var left := {}
 		for s in bench_states[cid]["uses_left"]:
-			if bench_states[cid]["uses_left"][s] != null:
+			if bench_states[cid]["uses_left"][s] != null and not db.skills[s]["per_battle"]:
 				left[s] = bench_states[cid]["uses_left"][s]
 		uses[cid] = left
 	for u in leaders:
@@ -211,7 +216,7 @@ func carry_out() -> Array:
 		extra[cid] = u["extra_cost"].duplicate()
 		var left := {}
 		for s in u["uses_left"]:
-			if u["uses_left"][s] != null:
+			if u["uses_left"][s] != null and not db.skills[s]["per_battle"]:  # 每场限 1 次 doesn't carry
 				left[s] = u["uses_left"][s]
 		uses[cid] = left
 	return [party_max - party_hp, extra, uses]

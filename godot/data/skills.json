@@ -683,10 +683,11 @@
       "name": "扔刀",
       "cost": 3,
       "special": true,
+      "per_battle": true,
       "effects": [
         {
           "type": "attack",
-          "rate": 1.5
+          "rate": 3.6
         }
       ]
     },
@@ -694,10 +695,11 @@
       "name": "夺命枪",
       "cost": 3,
       "special": true,
+      "per_battle": true,
       "effects": [
         {
           "type": "attack",
-          "rate": 1.5
+          "rate": 3.6
         },
         {
           "type": "counter",

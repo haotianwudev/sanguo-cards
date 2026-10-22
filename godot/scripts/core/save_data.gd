@@ -939,6 +939,16 @@ func unit_troop(unit: String) -> String:
 	return "lord" if unit == "lord" else _db().cards[unit]["troop"]
 
 
+func spent_skills(cid: String) -> Array:
+	## names of this card's 本章限 N 次 skills (the 大招) that are used up until the next 休整格
+	var out: Array = []
+	var left: Dictionary = carry_uses.get(cid, {})
+	for sid in left:
+		if int(left[sid]) <= 0 and _db().skills.has(sid):
+			out.append(_db().skills[sid]["name"])
+	return out
+
+
 func relic_unit(rid: String) -> String:
 	## the unit a worn 宝物 sits in (its troop's leader, or the lord); "" when it's left in the pool or its troop
 	## isn't out

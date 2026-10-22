@@ -450,7 +450,7 @@ func _open_skills(i: int) -> void:
 	col.add_child(Kit.label(u["leader"]["card"]["name"], Kit.FONT_BODY + 2, "gold"))
 	for sid in u["leader"]["card"]["skills"]:
 		var sk: Dictionary = GameData.get_db().skills[sid]
-		var tag := "限1" if sk["uses"] == 1 else ("累积" if sk["cumulative"] else "")
+		var tag := "每场1次" if sk["per_battle"] else "限1" if sk["uses"] == 1 else ("累积" if sk["cumulative"] else "")
 		var btn := Kit.button("%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""], "blue", Kit.FONT_BODY)
 		btn.icon = Kit.skill_icon(sk)
 		btn.expand_icon = false
@@ -961,7 +961,7 @@ func _enemy_voices() -> Array:
 
 static func _is_ult(skill: Dictionary) -> bool:
 	## 大招: special, once per stretch (限1) or 3+ AP
-	return bool(skill.get("special", false)) or (skill.get("uses", null) != null and int(skill["uses"]) == 1) or int(skill.get("cost", 0)) >= 3
+	return bool(skill.get("special", false)) or bool(skill.get("per_battle", false)) or (skill.get("uses", null) != null and int(skill["uses"]) == 1) or int(skill.get("cost", 0)) >= 3
 
 
 func _ult_cutin(i: int, skill_id: String) -> void:

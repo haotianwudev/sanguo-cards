@@ -69,7 +69,7 @@ func _load(dir: String) -> void:
 			var cost := int(s["cost"])
 			var hits := int(e.get("hits", 1))
 			if e["type"] in ["attack", "magic"] and cost > 0 and not (e.has("power") or e.has("rate") or e.has("hit_rate")):
-				var ult := float(skill_budget.get("ultimate_mult", 1.0)) if s.get("uses") != null else 1.0
+				var ult := float(skill_budget.get("ultimate_mult", 1.0)) if s.get("uses") != null or s.get("per_battle", false) else 1.0
 				if hits > 1:
 					e["hit_rate"] = float(skill_budget["multi_hit_rate"]) * ult
 				else:
@@ -81,7 +81,8 @@ func _load(dir: String) -> void:
 				e["power"] = float(e["rate"]) * cost / hits
 		skills[sid] = {"id": sid, "name": s["name"], "cost": int(s["cost"]),
 			"cumulative": s.get("cumulative", false),
-			"uses": null if s.get("uses") == null else int(s["uses"]),
+			"uses": null if s.get("uses") == null else int(s["uses"]),  # 本章限 N 次（休整格恢复）
+			"per_battle": bool(s.get("per_battle", false)),  # 每场限 1 次（下一场自动恢复）
 			"special": s.get("special", false), "free": s.get("free", false),
 			"effects": s["effects"]}
 	for tid in raw["troops"]:

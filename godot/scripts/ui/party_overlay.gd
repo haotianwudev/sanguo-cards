@@ -232,6 +232,7 @@ func _rebuild() -> void:
 	for cid in ids:
 		var c: Dictionary = db.cards[cid]
 		var v := CardView.make(cid, Vector2(108, 151), {"skills": false, "count": save.copies(cid) if c["soldier"] else 0})
+		v.note = "大招已用" if not save.spent_skills(cid).is_empty() else ""
 		v.set_state(save.benched.has(cid), _sel == cid)  # left behind: greyed
 		v.pressed.connect(_tap.bind(cid))
 		_grid.add_child(v)
@@ -251,6 +252,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	if cid == "lord":
 		opts["lord_name"] = Game.save.lord_name
 	var v := CardView.make(cid, Vector2(150, 196), opts)
+	v.note = "大招已用" if not Game.save.spent_skills(cid).is_empty() else ""
 	v.set_state(false, _sel == cid)
 	v.pressed.connect(_tap.bind(cid))
 	box.add_child(v)
@@ -494,6 +496,8 @@ func _fill_detail() -> void:
 		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		d.custom_minimum_size = Vector2(340, 0)
 		_detail.add_child(d)
+		if save.spent_skills(_sel).has(sk["name"]):
+			_detail.add_child(Kit.label("已用完，到休整格才恢复", 15, "red"))
 
 	# the actions: lead the troop / step down; bring along or leave behind
 	var act: Button
