@@ -635,12 +635,12 @@
       "troop": "strategist",
       "icon": "骂",
       "rarity": "story",
-      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士部队：体力 +12%；但每场开局 AP -1",
+      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士部队：体力 +12%；但受到的伤害 +5%",
       "mods": {
         "troop_hp": {
           "strategist": 0.12
         },
-        "ap_start": -1
+        "guard": -0.05
       }
     }
   }
