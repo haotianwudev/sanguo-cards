@@ -314,7 +314,7 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 
 
 func test_chapter_one_is_winnable_with_either_plan() -> void:
-	for pick in 2:  # south / north share one coefficient (battle.scaling.chapter.prologue): deliberately easy now (主公的大招每场只一次): one 大招 takes ~90% of a normal soldier
+	for pick in 2:  # south / north share one coefficient (battle.scaling.chapter.prologue): 主公的大招每场只一次，所以第一章比以前容易
 		check_between(rate(0, [], pick, -1, 100), 0.35, 1.01, "pick %d" % pick)
 
 
