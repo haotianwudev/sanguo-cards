@@ -17,6 +17,7 @@ var _intro_text: Dictionary = {}  # profile → the words of his entrance line, 
 var _speaker_voice: Dictionary = {}  # story speaker key (card id / person) → his own voice profile (the card's `voice`)
 var _cg_wait: Dictionary = {}  # the CG on screen: line index → profile, said when that line (his first) comes up
 var _cg_on := ""
+var _cg_said: Dictionary = {}  # profiles whose CG entrance line was said this game: once is enough
 var _card_pl: AudioStreamPlayer  # the line a tapped card is saying (cut off by the next tap)
 var _intro_at: Dictionary = {}  # profile → Time.get_ticks_msec() of its last intro
 var _streams: Dictionary = {}  # event → Array[AudioStream], loaded once up front (no first-play lag on phones)
@@ -172,7 +173,7 @@ func cg_voice(cg_key: String, lines: Array, speakers: Array, stepped := true) ->
 			at[prof] = i
 	for prof in at:
 		if at[prof] == 0 or not stepped:
-			voice([prof], ["intro"], true)
+			_cg_say(prof)
 		else:
 			_cg_wait[at[prof]] = prof
 
@@ -183,10 +184,16 @@ static func _bare(t: String) -> String:
 	return t
 
 
+func _cg_say(prof: String) -> void:
+	## a CG's entrance line, once per game
+	if not _cg_said.has(prof) and voice([prof], ["intro"], true) > 0.0:
+		_cg_said[prof] = true
+
+
 func cg_line(cg_key: String, i: int) -> void:
 	## line `i` of the CG's scene is on screen: the entrance line of whoever speaks first there
 	if cg_key != "" and cg_key == _cg_on and _cg_wait.has(i):
-		voice([_cg_wait[i]], ["intro"], true)
+		_cg_say(_cg_wait[i])
 		_cg_wait.erase(i)
 
 
