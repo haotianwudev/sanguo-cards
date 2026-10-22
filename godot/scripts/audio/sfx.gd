@@ -5,7 +5,6 @@ extends Node
 
 const VOICES := 10  # sounds that may overlap (a 3-hit combo plus the enemy's answer)
 const MOMENTS := ["attack", "ultimate", "heal", "roar", "intro", "guard"]  # guard: 防御 / a defence-only skill
-const INTRO_GAP_MS := 20000  # an entrance line (CG, then the fight right after it) isn't said twice in a row
 
 var _entries: Dictionary = {}
 var voice_defaults: Dictionary = {}  # audio.json voice_defaults: role (lord / strategist / female / male / enemy_*) → profile
@@ -19,7 +18,6 @@ var _cg_wait: Dictionary = {}  # the CG on screen: line index → profile, said 
 var _cg_on := ""
 var _cg_said: Dictionary = {}  # profiles whose CG entrance line was said this game: once is enough
 var _card_pl: AudioStreamPlayer  # the line a tapped card is saying (cut off by the next tap)
-var _intro_at: Dictionary = {}  # profile → Time.get_ticks_msec() of its last intro
 var _streams: Dictionary = {}  # event → Array[AudioStream], loaded once up front (no first-play lag on phones)
 var _players: Array[AudioStreamPlayer] = []
 var _next := 0
@@ -105,9 +103,9 @@ func has_voice(profile: String, moment: String) -> bool:
 	return _voice_streams.has("%s/%s" % [profile, moment])
 
 
-func voice(profiles: Array, moments: Array, force := false) -> float:
+func voice(profiles: Array, moments: Array) -> float:
 	## Say one line: the first moment (in order) that any profile (in order) has — e.g. [own, default] × [heal, attack].
-	## Returns how long it runs (0 = nothing said). `force`: a CG scene says it even right after another intro (a chapter's last scene, then the next one).
+	## Returns how long it runs (0 = nothing said).
 	var vol := _volume()
 	if vol <= 0.0 or _players.is_empty():
 		return 0.0
@@ -186,7 +184,7 @@ static func _bare(t: String) -> String:
 
 func _cg_say(prof: String) -> void:
 	## a CG's entrance line, once per game
-	if not _cg_said.has(prof) and voice([prof], ["intro"], true) > 0.0:
+	if not _cg_said.has(prof) and voice([prof], ["intro"]) > 0.0:
 		_cg_said[prof] = true
 
 
