@@ -473,7 +473,7 @@ func test_famous_weapons() -> void:
 	var hp1: int = plain.enemy["hp"]
 	b.act(0, "tuji")
 	plain.act(0, "tuji")
-	check(hp0 - b.enemy["hp"] > (hp1 - plain.enemy["hp"]) * 1.6, "七星宝刀 doubles the first hit")
+	check(hp0 - b.enemy["hp"] > (hp1 - plain.enemy["hp"]) * 1.3, "七星宝刀 adds half again to the first hit")
 	var d1 := b.defend()
 	check(b.take_events().any(func(e): return e["t"] == "defend" and e["cut"] > 0.3), "八阵图 deepens defend")
 
