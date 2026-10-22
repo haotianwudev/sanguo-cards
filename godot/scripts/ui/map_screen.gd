@@ -495,17 +495,27 @@ func _show_run() -> void:
 		var diff_step := int(round(((lvl - 1) * float(db.battle.get("ending_step", 0.15)) + save.difficulty * float(db.battle["difficulty_step"])) * 100))
 		h.tooltip_text = "难度 %d：敌人 +%d%%，宝箱每张卡有 %d%% 是武将" % [total_lvl,
 			diff_step, int(round(save.chest_general_chance() * 100))]
+		_tap_detail(h, h.tooltip_text)
 		_run_box.add_child(h)
 	if save.danger > 0:
 		var d := _chip("险 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)), "red")
 		d.tooltip_text = "本轮的敌人体力和攻击都变强了"
+		_tap_detail(d, d.tooltip_text)
 		_run_box.add_child(d)
 	if save.fate != "" and db.fates.has(save.fate):
 		var f: Dictionary = db.fates[save.fate]
 		var fc := _chip("命 " + f["name"], "purple")
 		fc.tooltip_text = "天命：" + f["desc"]
+		_tap_detail(fc, "天命·%s：%s" % [f["name"], f["desc"]])
 		_run_box.add_child(fc)
 	# 宝物 aren't listed here: they're cards, see 整备
+
+
+func _tap_detail(chip: Control, detail: String) -> void:
+	## a chip's tooltip never shows on a phone: tapping it says the same
+	chip.gui_input.connect(func(ev: InputEvent):
+		if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
+			_show_toast(detail, 3.0))
 
 
 func _chip(text: String, color: String) -> Label:
@@ -1485,8 +1495,9 @@ func _show_end() -> void:
 	_sheet_box.add_child(Kit.label("剧情暂时到此为止。后续章节制作中。", Kit.FONT_BIG))
 
 
-func _show_toast(msg: String) -> void:
+func _show_toast(msg: String, secs := 1.6) -> void:
 	var l := Kit.label(msg, Kit.FONT_BIG)
+	l.autowrap_mode = TextServer.AUTOWRAP_ARBITRARY
 	l.add_theme_color_override("font_color", Color.WHITE)
 	l.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.75), 12, 0, Color.TRANSPARENT, 14))
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -1495,6 +1506,6 @@ func _show_toast(msg: String) -> void:
 	l.z_index = 60
 	add_child(l)
 	var tw := l.create_tween()
-	tw.tween_interval(1.6)
+	tw.tween_interval(secs)
 	tw.tween_property(l, "modulate:a", 0.0, 0.4)
 	tw.tween_callback(l.queue_free)
