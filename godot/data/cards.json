@@ -159,6 +159,15 @@
       "lord_north_sleep"
     ],
     "forms": {
+      "lord_north_snow": {
+        "name": "主公·初雪",
+        "route": "north",
+        "rarity": "SR",
+        "hp": 84,
+        "at": 84,
+        "skills": [],
+        "art": true
+      },
       "lord_default": {
         "name": "主公",
         "route": "",
@@ -2569,6 +2578,18 @@
       "at": 96,
       "skills": [
         "yunlu"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
+    "rc_sanfang": {
+      "name": "甄宓·热汤面",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 98,
+      "at": 66,
+      "skills": [
+        "luoshen"
       ],
       "pool": false,
       "scope": "north"

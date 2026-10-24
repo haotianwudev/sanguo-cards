@@ -2045,6 +2045,38 @@ func test_mayunlu_page_needs_the_ma_family_and_the_card_waits_for_luoshang() -> 
 	check(s.owned.has("rc_xiliang"), "那只羊 hands over 马云騄·那只羊")
 
 
+func test_zhenmi_page_needs_hulao_broken_and_the_card_waits_for_zhumie() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang", "sanfang"]
+	check_eq(Quests.chapter_page("sanfang", s).get("cg", ""), "", "no 甄宓 picture on the 洛殇 route")
+	s.run_records.append("北线：破虎牢")
+	check_eq(Quests.chapter_page("sanfang", s).get("cg", ""), "rc_sanfang")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局十六 · 洛殇"]
+	check(not ids.call().has("s_rc_sanfang"), "洛殇 is what brings 庞统: not enough")
+	s.flags.append("结局十八 · 烛灭")
+	check(ids.call().has("s_rc_sanfang"), "烛灭 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_sanfang")
+	check(s.owned.has("rc_sanfang"), "热汤面 hands over 甄宓·热汤面")
+
+
+func test_the_hero_himself_closes_the_north_and_his_lord_card_waits_for_guandu() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang", "sanfang", "tianqing"]
+	check_eq(Quests.chapter_page("tianqing", s).get("cg", ""), "rc_tianqing")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局十八 · 烛灭"]
+	check(not ids.call().has("s_rc_tianqing"), "not before the north's own ending")
+	s.flags.append("北线结局 · 官渡")
+	check(ids.call().has("s_rc_tianqing"), "官渡 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_tianqing")
+	check(s.lord_forms.has("lord_north_snow"), "初雪 hands over the lord card 主公·初雪")
+
+
 
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()

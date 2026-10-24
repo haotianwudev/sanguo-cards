@@ -1280,3 +1280,4 @@
 | `cg:rc_yuqiao` | source/cg/rc_yuqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_sanfang` | source/cg/rc_sanfang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_tianqing` | source/cg/rc_tianqing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_luoyang_s` | source/cg/rc_luoyang_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
