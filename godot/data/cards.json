@@ -2313,6 +2313,7 @@
         "xianji",
         "shisheng"
       ],
+      "troop_skills": false,
       "scope": "north",
       "voice": "guojia"
     },
