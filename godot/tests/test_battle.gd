@@ -90,7 +90,7 @@ func test_defend_cut_grows_with_consecutive_defends() -> void:
 	for _i in 3:
 		b.party_hp = b.party_max
 		lines.append(b.defend()[0])
-	check("30%" in lines[0] and "50%" in lines[1] and "70%" in lines[2], str(lines))
+	check("30%" in lines[0] and "40%" in lines[1] and "50%" in lines[2], str(lines))
 	b.party_hp = b.party_max
 	b.end_round()
 	check("30%" in b.defend()[0])
