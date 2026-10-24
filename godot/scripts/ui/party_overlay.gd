@@ -5,6 +5,8 @@ extends Control
 ## The lord always leads; up to party_slots - 1 more leaders, one per troop. Soldier cards and benched generals
 ## of a leader's troop fight in that leader's unit automatically.
 ## Tap a card to see it; tap it again (or the button on the right) to send it out / bring it back.
+## Or drag: a pool card onto the party row (onto a leader = take his place), a leader back to the pool (下阵) or onto
+## another leader (swap places), a lord card onto the lord, a 宝物 onto the party (装上) or back to the pool (不装).
 ## 宝物 are cards too (in the pool, and the 宝物 tab): each belongs to one troop's unit (never as its leader) and
 ## works while worn and that unit is out. Any card (generals, soldiers, 宝物) can also be left behind.
 
@@ -33,13 +35,14 @@ func _ready() -> void:
 	var title := Kit.label("整　备", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(28, 10)
 	add_child(title)
-	var hint := Kit.label("点卡查看 · 再点一次出阵 / 下阵 · 每个兵种只能一人当队长，同兵种的兵卡和武将自动编进他的部队", 15)
+	var hint := Kit.label("点卡查看 · 再点一次出阵 / 下阵 · 也可以拖：拖上去出阵（拖到队长身上替换），拖回卡池下阵，队长之间拖动换位置", 15)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
 	hint.position = Vector2(170, 22)
 	add_child(hint)
 
 	# the party: lord + leaders, with a summary box
 	var party_box := _panel(Vector2(20, 58), Vector2(850, 262))
+	_dnd(party_box, {}, "party")  # dropped on empty room in the party box: send out / move to the end
 	_party_row = HBoxContainer.new()
 	_party_row.position = Vector2(14, 6)
 	_party_row.add_theme_constant_override("separation", 12)
@@ -52,6 +55,7 @@ func _ready() -> void:
 
 	# the pool
 	var pool_box := _panel(Vector2(20, 330), Vector2(850, 318))
+	_dnd(pool_box, {}, "pool")  # dropped back on the pool: 下阵 / 不装
 	_tabs = HBoxContainer.new()
 	_tabs.position = Vector2(12, 8)
 	_tabs.add_theme_constant_override("separation", 6)
@@ -69,6 +73,7 @@ func _ready() -> void:
 	scroll.size = Vector2(830, 248)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	pool_box.add_child(scroll)
+	_dnd(scroll, {}, "pool")
 	_grid = GridContainer.new()
 	_grid.columns = 7
 	_grid.add_theme_constant_override("h_separation", 8)
@@ -228,6 +233,8 @@ func _rebuild() -> void:
 			lv.set_state(false, _sel == "lordform:" + fid)
 			lv.note = "使用中" if save.lord_form() == ("" if fid == "base" else fid) else ""
 			lv.pressed.connect(_tap.bind("lordform:" + fid))
+			lv.tap_on_release = true
+			_dnd(lv, {"kind": "form", "id": fid}, "pool")
 			_grid.add_child(lv)
 	for cid in ids:
 		var c: Dictionary = db.cards[cid]
@@ -235,6 +242,8 @@ func _rebuild() -> void:
 		v.note = "大招已用" if not save.spent_skills(cid).is_empty() else ""
 		v.set_state(save.benched.has(cid), _sel == cid)  # left behind: greyed
 		v.pressed.connect(_tap.bind(cid))
+		v.tap_on_release = true
+		_dnd(v, {"kind": "card", "id": cid, "from": "party" if save.party.has(cid) else "pool"}, "pool")
 		_grid.add_child(v)
 	if _filter == "all":  # 宝物 are in the pool too
 		for rid in save.relics:
@@ -255,6 +264,8 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	v.note = "大招已用" if not Game.save.spent_skills(cid).is_empty() else ""
 	v.set_state(false, _sel == cid)
 	v.pressed.connect(_tap.bind(cid))
+	v.tap_on_release = true
+	_dnd(v, {} if cid == "lord" else {"kind": "card", "id": cid, "from": "party"}, "slot:" + cid)
 	box.add_child(v)
 	var n: int = ld["members"].size()
 	var l := Kit.label(role + ("  · 部队 %d" % (n + 1) if n > 0 else ""), 14, "gold")
@@ -274,6 +285,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 		b.custom_minimum_size = Vector2(26, 26)
 		b.tooltip_text = GameData.get_db().relics[rid]["name"]
 		b.pressed.connect(_tap.bind("relic:" + rid))
+		_dnd(b, {"kind": "relic", "id": rid}, "slot:" + cid)
 		items.add_child(b)
 	box.add_child(items)
 	return box
@@ -291,6 +303,7 @@ func _relic_card(rid: String) -> Control:
 	b.add_theme_stylebox_override("hover", Kit.box(Kit.c("card_hover"), 10, 2, Kit.c(col), 6))
 	b.add_theme_stylebox_override("pressed", Kit.box(Kit.c("card_hover"), 10, 2, Kit.c(col), 6))
 	b.pressed.connect(_tap.bind("relic:" + rid))
+	_dnd(b, {"kind": "relic", "id": rid}, "pool")
 	var v := VBoxContainer.new()
 	v.set_anchors_preset(Control.PRESET_FULL_RECT)
 	v.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -603,17 +616,22 @@ func _toggle(cid: String) -> void:
 		_add(cid)
 
 
-func _add(cid: String) -> void:
+func _add(cid: String, at := "") -> void:
+	## send cid out as a leader; `at` = the leader it was dropped on, who makes way and whose place it takes
 	var save := Game.save
 	var db := GameData.get_db()
 	var card: Dictionary = db.cards[cid]
 	# whoever led the same troop (or was another version of the same person) makes way
-	var next: Array = save.party.filter(func(p): return db.cards[p]["troop"] != card["troop"] and db.cards[p]["person"] != card["person"])
+	var next: Array = save.party.filter(func(p): return db.cards[p]["troop"] != card["troop"] and db.cards[p]["person"] != card["person"] and p != at)
 	var replaced: Array = save.party.filter(func(p): return not next.has(p))
 	if next.size() >= save.party_slots - 1:
 		_msg.text = "部队满了（最多 %d 位队长）。先让一位下阵。" % (save.party_slots - 1)
 		return
-	next.append(cid)
+	var spot := save.party.find(at)
+	if spot >= 0:
+		next.insert(mini(spot, next.size()), cid)
+	else:
+		next.append(cid)
 	var why := save.validate_party(next)
 	if why != "":
 		_msg.text = why
@@ -629,3 +647,89 @@ func _remove(cid: String) -> void:
 	Game.save.party.erase(cid)
 	_msg.text = "%s 下阵，编进同兵种部队或留在后方。" % GameData.get_db().cards[cid]["name"]
 	_rebuild()
+
+
+# ---- drag and drop (Godot's own: set_drag_forwarding on the cards, the leaders and the two panels)
+
+func _dnd(ctrl: Control, data: Dictionary, target: String) -> void:
+	## ctrl can be dragged (when data isn't empty) and takes drops as `target`: "party", "pool" or "slot:<leader id>"
+	ctrl.set_drag_forwarding(
+		func(_at: Vector2) -> Variant: return null if data.is_empty() else _start_drag(ctrl, data),
+		func(_at: Vector2, d: Variant) -> bool: return _can_drop(target, d),
+		func(_at: Vector2, d: Variant) -> void: _drop(target, d))
+
+
+func _start_drag(ctrl: Control, data: Dictionary) -> Dictionary:
+	var face: Control
+	match data["kind"]:
+		"card":
+			face = CardView.make(data["id"], Vector2(108, 151), {"skills": false})
+		"form":
+			face = CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if data["id"] == "base" else data["id"], "tier": _form_card_tier(data["id"])})
+		_:
+			var ic := TextureRect.new()
+			ic.texture = Kit.relic_icon(data["id"])
+			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			ic.size = Vector2(72, 72)
+			face = ic
+	face.position = -face.size / 2  # held by its middle, under the finger
+	face.modulate.a = 0.85
+	var pv := Control.new()
+	pv.add_child(face)
+	ctrl.set_drag_preview(pv)
+	_msg.text = {"card": "拖到上面出阵，拖到队长身上替换他；拖回卡池就下阵" if data.get("from", "") == "pool" else "拖回卡池下阵，拖到另一位队长身上换位置",
+		"form": "拖到主公身上换上这张主公卡",
+		"relic": "拖到上面装上，拖回卡池不装"}[data["kind"]]
+	return data
+
+
+func _can_drop(target: String, d: Variant) -> bool:
+	if not d is Dictionary or not d.has("kind"):
+		return false
+	var on_party := target == "party" or target.begins_with("slot:")
+	match d["kind"]:
+		"card":
+			return on_party or d["from"] == "party"  # a pool card dropped back on the pool does nothing
+		"form":
+			return on_party
+		"relic":
+			return true
+	return false
+
+
+func _drop(target: String, d: Dictionary) -> void:
+	var save := Game.save
+	var on_party := target == "party" or target.begins_with("slot:")
+	var at := target.substr(5) if target.begins_with("slot:") else ""
+	match d["kind"]:
+		"form":
+			save.lord_form_pick = d["id"]
+			_msg.text = "主公换上了「%s」" % _form_name(d["id"])
+			_sel = "lordform:" + d["id"]
+			_filter = "lord"
+			_rebuild()
+		"relic":
+			var rid: String = d["id"]
+			_sel = "relic:" + rid
+			if on_party == save.unworn.has(rid):  # not where it was dropped yet: 装上 / 不装
+				_toggle("relic:" + rid)
+			else:
+				_rebuild()
+		"card":
+			var cid: String = d["id"]
+			_sel = cid
+			if not save.party.has(cid):
+				_add(cid, "" if at == "lord" else at)
+			elif target == "pool":
+				_remove(cid)
+			elif at != "" and at != "lord" and at != cid:  # leader onto leader: swap places
+				var i := save.party.find(cid)
+				var j := save.party.find(at)
+				save.party[i] = at
+				save.party[j] = cid
+				_msg.text = "%s 和 %s 换了位置" % [GameData.get_db().cards[cid]["name"], GameData.get_db().cards[at]["name"]]
+				_rebuild()
+			else:
+				_msg.text = ""
+				_rebuild()

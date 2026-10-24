@@ -15,6 +15,8 @@ var note := ""
 var show_skills := true
 var dimmed := false
 var selected := false
+var tap_on_release := false  # true = `pressed` fires on lift, and not at all when the press turned into a drag (整备)
+var _armed := false
 
 
 static func _default_tier(card_id: String, opts: Dictionary) -> int:
@@ -59,8 +61,20 @@ func _ready() -> void:
 	focus_exited.connect(queue_redraw)
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_BEGIN:
+		_armed = false  # the press became a drag: no tap on lift
+
+
 func _gui_input(event: InputEvent) -> void:
 	var tap: bool = event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT
+	if tap_on_release and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_armed = true
+			accept_event()
+			return
+		tap = _armed and Rect2(Vector2.ZERO, size).has_point(event.position)
+		_armed = false
 	var accept: bool = event.is_action_pressed("ui_accept")
 	if tap or accept:
 		var sfx := get_node_or_null("/root/Sfx")  # looked up at runtime: tests load this script without the autoloads

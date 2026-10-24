@@ -251,6 +251,10 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   sits in that troop's fielded unit (never as leader, any number) and only works while that unit is out
   (`SaveData.relic_unit / active_relics`, `Quests.mods` uses active ones). The player can leave a 宝物 in the pool
   (`unworn`) and leave any card behind (`benched`: joins no unit; a leader is always brought). Both in 整备.
+  整备 also drags (Godot's `set_drag_forwarding`, `PartyOverlay._dnd`): pool card → party row (onto a leader = take his place, `_add(cid, at)`),
+  leader → pool (下阵) or onto another leader (swap), lord card → lord, 宝物 → party (装上) / pool (不装). Its cards use `CardView.tap_on_release`
+  (`pressed` on lift, none after a drag) — the default fires on touch-down, and 整备 rebuilds on every tap, which would free the card before a drag could start.
+  To drive it with fake mouse events, set `InputEventMouseMotion.relative` — Godot starts a drag from the accumulated relative motion.
 - **Skill**: `cost, cumulative (+1 AP per use), uses (N = 本章限 N 次，休整格恢复), per_battle (true = 每场限 1 次，下一场自动恢复；主公的扔刀 / 夺命枪), effects[]` — `attack/magic {power, hits, burning_mult}`,
   `heal`, `guard {cut}`, `boost`, `stun {chance}`, `break`, `ap`, `burn {pct | power, turns}` (one fire at a time: a new one keeps the bigger and restarts the count; 周瑜's 火攻 is 10%/turn at a flat 1 AP). Once-per-battle damage
   skills (大招) cost ≥ 3 AP (a test enforces it). **Heals**: an everyday heal is cumulative (+1 AP each use); a big heal is a once-only 大招. Few generals heal (doctors, 刘备, the mother figures, 后勤 troops) — give the rest statuses (guard / boost / ap / break / stun). Tests enforce both. **Once-only skills (限1) are once per stretch of map**, not per battle: used up they stay spent until a 休整 square (or a 重置技能 event) — so players rotate cards. Put a mandatory 休整 after a chapter's mid-map boss.
