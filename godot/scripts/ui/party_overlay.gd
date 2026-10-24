@@ -269,7 +269,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	var opts := {"leader": ld, "skills": false}
 	if cid == "lord":
 		opts["lord_name"] = Game.save.lord_name
-	var v := CardView.make(cid, Vector2(150, 196), opts)
+	var v := CardView.make(cid, DRAG_SIZE, opts)
 	v.note = "大招已用" if not Game.save.spent_skills(cid).is_empty() else ""
 	v.set_state(false, _sel == cid)
 	v.pressed.connect(_tap.bind(cid))
@@ -681,13 +681,16 @@ func _may_lift(ctrl: Control) -> bool:
 	return not (ctrl is CardView and ctrl.long_press and _touch() and not ctrl.held)
 
 
+const DRAG_SIZE := Vector2(150, 196)  # a carried card is as big as one in the line-up (_slot)
+
+
 func _start_drag(ctrl: Control, data: Dictionary, forced := false) -> Dictionary:
 	var face: Control
 	match data["kind"]:
 		"card":
-			face = CardView.make(data["id"], Vector2(108, 151), {"skills": false})
+			face = CardView.make(data["id"], DRAG_SIZE, {"skills": false})
 		"form":
-			face = CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if data["id"] == "base" else data["id"], "tier": _form_card_tier(data["id"])})
+			face = CardView.make("lord", DRAG_SIZE, {"skills": false, "form": "" if data["id"] == "base" else data["id"], "tier": _form_card_tier(data["id"])})
 		_:
 			var ic := TextureRect.new()
 			ic.texture = Kit.relic_icon(data["id"])
@@ -710,7 +713,7 @@ func _start_drag(ctrl: Control, data: Dictionary, forced := false) -> Dictionary
 	else:
 		ctrl.set_drag_preview(pv)
 	var tw := face.create_tween().set_parallel(true)
-	tw.tween_property(face, "scale", Vector2.ONE * 1.12, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(face, "scale", Vector2.ONE, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tw.tween_property(face, "rotation_degrees", -5.0, 0.14)
 	_drag_src = ctrl
 	ctrl.modulate.a = 0.35  # the card left behind fades while it is carried

@@ -38,6 +38,8 @@
     "frames": {"N": "wood", "R": "bronze", "SR": "silver", "SSR": "ssr", "lord": "gold", "enemy": "iron",
                "tier0": "bronze", "tier1": "silver", "tier2": "gold", "tier3": "ssr"},
     "_frames": "generals use tierN (铜/银/金 by copies owned); soldiers use their rarity",
+    "_glows": "the aura round a card, per frame: [colour, strength (how far and how bright), breathes]. Frames not listed (wood, iron) get none. ssr shifts through the rainbow like its frame and throws sparkles",
+    "glows": {"bronze": ["#c8834a", 0.3, false], "silver": ["#d4e4ff", 0.6, true], "gold": ["#ffc94a", 0.9, true], "ssr": ["#ffffff", 1.4, true]},
     "plate": [0.29, 0.902, 0.42, 0.074],
     "_plates": "per-frame name plate [x, y, w, h] as fractions of the card; frames without a plate get a drawn band",
     "plates": {"wood": [0.30, 0.892, 0.40, 0.078], "bronze": [0.30, 0.892, 0.40, 0.078], "silver": [0.30, 0.892, 0.40, 0.078],

@@ -290,6 +290,15 @@ func demo(name: String) -> void:
 		if OS.get_cmdline_user_args().has("--inspect"):
 			cb.call_deferred("_inspect_card", "lord", "lord_north_silver")
 		return
+	if name == "glows":  # --demo=glows: one card per frame (木 / 铜 / 银 / 金 / 神) to check the auras
+		show_screen(TitleScreen.new())
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 60)
+		row.position = Vector2(80, 200)
+		root.add_child(row)
+		for spec in [["cav_n", 0], ["guanyu", 0], ["zhaoyun", 1], ["sunce_bawang", 2], ["lvbu", 3]]:
+			row.add_child(CardView.make(spec[0], Vector2(150, 196), {"skills": false, "tier": spec[1]}))
+		return
 	if name.begins_with("cards:"):  # --demo=cards:id1,id2,id3 shows those cards in a pick overlay
 		show_screen(TitleScreen.new())
 		var o := PickOverlay.new()
