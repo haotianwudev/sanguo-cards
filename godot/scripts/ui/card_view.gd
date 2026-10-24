@@ -16,7 +16,13 @@ var show_skills := true
 var dimmed := false
 var selected := false
 var tap_on_release := false  # true = `pressed` fires on lift, and not at all when the press turned into a drag (整备)
+var long_press := false  # on a touch screen a drag may only start after holding still (HOLD_SECS): a plain swipe scrolls the list it sits in
+var held := false  # the finger has held still long enough: the card is lifted and may be dragged
 var _armed := false
+var _press_pos := Vector2.ZERO
+var _press_id := 0
+const HOLD_SECS := 0.3
+const MOVE_SLOP := 14.0  # a press that wanders further than this is a swipe / drag, not a tap
 
 
 static func _default_tier(card_id: String, opts: Dictionary) -> int:
@@ -53,7 +59,8 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 
 
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	# a card that taps on release lets the press through too, so the ScrollContainer it sits in can still scroll on a touch screen
+	mouse_filter = Control.MOUSE_FILTER_PASS if tap_on_release else Control.MOUSE_FILTER_STOP
 	focus_mode = Control.FOCUS_ALL
 	_build()
 	resized.connect(_build)
@@ -64,6 +71,22 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_BEGIN:
 		_armed = false  # the press became a drag: no tap on lift
+	elif what == NOTIFICATION_DRAG_END and held:
+		held = false
+		_lift(false)
+
+
+func _lift(up: bool) -> void:
+	## picked up by a long press: the card rises a little; put back: it settles
+	pivot_offset = size / 2
+	var tw := create_tween()
+	tw.tween_property(self, "scale", Vector2.ONE * (1.08 if up else 1.0), 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func _hold_check(id: int) -> void:
+	if _armed and id == _press_id and is_inside_tree():
+		held = true
+		_lift(true)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -71,10 +94,19 @@ func _gui_input(event: InputEvent) -> void:
 	if tap_on_release and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			_armed = true
-			accept_event()
-			return
+			held = false
+			_press_pos = event.position
+			_press_id += 1
+			if long_press:
+				get_tree().create_timer(HOLD_SECS).timeout.connect(_hold_check.bind(_press_id))
+			return  # not accepted: the list underneath sees the press too and can scroll
 		tap = _armed and Rect2(Vector2.ZERO, size).has_point(event.position)
 		_armed = false
+		if held:
+			held = false
+			_lift(false)
+	if tap_on_release and event is InputEventMouseMotion and _armed and event.position.distance_to(_press_pos) > MOVE_SLOP and not held:
+		_armed = false  # moved before the hold: a swipe (scroll) or a drag, never a tap
 	var accept: bool = event.is_action_pressed("ui_accept")
 	if tap or accept:
 		var sfx := get_node_or_null("/root/Sfx")  # looked up at runtime: tests load this script without the autoloads

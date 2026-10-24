@@ -23,6 +23,11 @@ var _sort_btn: Button
 var _filter := "all"  # all / <troop id> / relic
 var _sort := "power"  # power / rarity
 var _sel := "lord"  # the card shown on the right ("lord" for the lord, "relic:<id>" for a 宝物)
+var _party_box: Panel
+var _pool_box: Panel
+var _drag_src: Control  # the card being dragged (dimmed in place until the drag ends)
+var _hover_ctrl: Control  # the leader a drag is held over (it grows a little)
+var _hover_panel: Panel  # the box a drag is held over (its border lights up)
 
 
 func _ready() -> void:
@@ -42,6 +47,7 @@ func _ready() -> void:
 
 	# the party: lord + leaders, with a summary box
 	var party_box := _panel(Vector2(20, 58), Vector2(850, 262))
+	_party_box = party_box
 	_dnd(party_box, {}, "party")  # dropped on empty room in the party box: send out / move to the end
 	_party_row = HBoxContainer.new()
 	_party_row.position = Vector2(14, 6)
@@ -55,6 +61,7 @@ func _ready() -> void:
 
 	# the pool
 	var pool_box := _panel(Vector2(20, 330), Vector2(850, 318))
+	_pool_box = pool_box
 	_dnd(pool_box, {}, "pool")  # dropped back on the pool: 下阵 / 不装
 	_tabs = HBoxContainer.new()
 	_tabs.position = Vector2(12, 8)
@@ -234,6 +241,7 @@ func _rebuild() -> void:
 			lv.note = "使用中" if save.lord_form() == ("" if fid == "base" else fid) else ""
 			lv.pressed.connect(_tap.bind("lordform:" + fid))
 			lv.tap_on_release = true
+			lv.long_press = true  # in the scrolling pool a touch drag starts with a long press; a swipe scrolls
 			_dnd(lv, {"kind": "form", "id": fid}, "pool")
 			_grid.add_child(lv)
 	for cid in ids:
@@ -243,6 +251,7 @@ func _rebuild() -> void:
 		v.set_state(save.benched.has(cid), _sel == cid)  # left behind: greyed
 		v.pressed.connect(_tap.bind(cid))
 		v.tap_on_release = true
+		v.long_press = true
 		_dnd(v, {"kind": "card", "id": cid, "from": "party" if save.party.has(cid) else "pool"}, "pool")
 		_grid.add_child(v)
 	if _filter == "all":  # 宝物 are in the pool too
@@ -654,9 +663,18 @@ func _remove(cid: String) -> void:
 func _dnd(ctrl: Control, data: Dictionary, target: String) -> void:
 	## ctrl can be dragged (when data isn't empty) and takes drops as `target`: "party", "pool" or "slot:<leader id>"
 	ctrl.set_drag_forwarding(
-		func(_at: Vector2) -> Variant: return null if data.is_empty() else _start_drag(ctrl, data),
-		func(_at: Vector2, d: Variant) -> bool: return _can_drop(target, d),
+		func(_at: Vector2) -> Variant: return null if data.is_empty() or not _may_lift(ctrl) else _start_drag(ctrl, data),
+		func(_at: Vector2, d: Variant) -> bool: return _can_drop(target, d, ctrl),
 		func(_at: Vector2, d: Variant) -> void: _drop(target, d))
+
+
+static func _touch() -> bool:
+	return DisplayServer.is_touchscreen_available()
+
+
+func _may_lift(ctrl: Control) -> bool:
+	## a pool card on a touch screen is picked up by a long press (a plain swipe scrolls the pool); everything else drags at once
+	return not (ctrl is CardView and ctrl.long_press and _touch() and not ctrl.held)
 
 
 func _start_drag(ctrl: Control, data: Dictionary) -> Dictionary:
@@ -673,18 +691,71 @@ func _start_drag(ctrl: Control, data: Dictionary) -> Dictionary:
 			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			ic.size = Vector2(72, 72)
 			face = ic
-	face.position = -face.size / 2  # held by its middle, under the finger
-	face.modulate.a = 0.85
+	# held by its middle — on a touch screen above the finger, so the finger doesn't hide it; it grows and tilts as it comes up
+	face.position = -face.size / 2 - (Vector2(0, 70) if _touch() else Vector2.ZERO)
+	face.pivot_offset = face.size / 2
+	face.modulate.a = 0.92
+	face.scale = Vector2.ONE * 0.9
 	var pv := Control.new()
 	pv.add_child(face)
 	ctrl.set_drag_preview(pv)
+	var tw := face.create_tween().set_parallel(true)
+	tw.tween_property(face, "scale", Vector2.ONE * 1.12, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(face, "rotation_degrees", -5.0, 0.14)
+	_drag_src = ctrl
+	ctrl.modulate.a = 0.35  # the card left behind fades while it is carried
 	_msg.text = {"card": "拖到上面出阵，拖到队长身上替换他；拖回卡池就下阵" if data.get("from", "") == "pool" else "拖回卡池下阵，拖到另一位队长身上换位置",
 		"form": "拖到主公身上换上这张主公卡",
 		"relic": "拖到上面装上，拖回卡池不装"}[data["kind"]]
 	return data
 
 
-func _can_drop(target: String, d: Variant) -> bool:
+func _can_drop(target: String, d: Variant, ctrl: Control = null) -> bool:
+	var ok := _drop_ok(target, d)
+	_hover(target if ok else "", ctrl if ok and target.begins_with("slot:") else null)
+	return ok
+
+
+func _hover(target: String, ctrl: Control) -> void:
+	## light up the box under the drag (and grow the leader it is over); "" clears it
+	var panel: Panel = null if target == "" else (_pool_box if target == "pool" else _party_box)
+	if panel != _hover_panel:
+		for b in [_party_box, _pool_box]:
+			var lit: bool = b == panel
+			b.add_theme_stylebox_override("panel", Kit.box(Kit.c("panel"), 10, 4 if lit else 2, Kit.c("gold") if lit else Kit.c("border"), 0))
+		_hover_panel = panel
+	if ctrl != _hover_ctrl:
+		if is_instance_valid(_hover_ctrl):
+			_hover_ctrl.create_tween().tween_property(_hover_ctrl, "scale", Vector2.ONE, 0.1)
+		if ctrl != null:
+			ctrl.pivot_offset = ctrl.size / 2
+			ctrl.create_tween().tween_property(ctrl, "scale", Vector2.ONE * 1.06, 0.1)
+		_hover_ctrl = ctrl
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END:  # dropped or let go anywhere: clear the highlights, the carried card comes back
+		_hover("", null)
+		if is_instance_valid(_drag_src) and not _drag_src.is_queued_for_deletion():
+			_drag_src.modulate.a = 1.0
+			if _drag_src is CardView:
+				_drag_src.set_state(_drag_src.dimmed, _drag_src.selected)
+		_drag_src = null
+
+
+func _pop(cid: String) -> void:
+	## the card lands in its new place with a little bounce
+	for n in _party_row.find_children("*", "CardView", true, false) + _grid.find_children("*", "CardView", true, false):
+		var v: CardView = n
+		if v.is_queued_for_deletion() or str(v.fighter.get("id", "")) != cid:
+			continue
+		v.pivot_offset = v.size / 2
+		v.scale = Vector2.ONE * 1.25
+		v.create_tween().tween_property(v, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		return
+
+
+func _drop_ok(target: String, d: Variant) -> bool:
 	if not d is Dictionary or not d.has("kind"):
 		return false
 	var on_party := target == "party" or target.begins_with("slot:")
@@ -699,6 +770,8 @@ func _can_drop(target: String, d: Variant) -> bool:
 
 
 func _drop(target: String, d: Dictionary) -> void:
+	if d["kind"] == "card":
+		_pop.call_deferred(str(d["id"]))
 	var save := Game.save
 	var on_party := target == "party" or target.begins_with("slot:")
 	var at := target.substr(5) if target.begins_with("slot:") else ""
