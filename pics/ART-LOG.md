@@ -1177,3 +1177,13 @@
 - [ ] 2026-10-23 battle `m11_guanyu` ← m11_guanyu.jpg · ok
 - [ ] 2026-10-23 battle `m11_taishici` ← m11_taishici.jpg · ok
 - [ ] 2026-10-23 battle `m8_han_muniu` ← m8_han_muniu.jpg · ok
+- [ ] 2026-10-24 battle `guanjun` ← guanjun.jpg · ok
+- [ ] 2026-10-24 battle `guosi` ← guosi.jpg · ok
+- [ ] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
+- [ ] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
+- [ ] 2026-10-24 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
+- [ ] 2026-10-24 battle `guanjun` ← guanjun.jpg · ok
+- [ ] 2026-10-24 battle `guosi` ← guosi.jpg · ok
+- [ ] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
+- [ ] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
+- [ ] 2026-10-24 battle `c6_fubing` ← c6_fubing.jpg · ok
