@@ -207,7 +207,7 @@ Adding a portrait, checklist:
   swapping to `"lord_north"` before calling `Kit.portrait()` (which, unlike `Kit.portrait_key()`, does its own index
   lookup and has no south fallback — only safe because `lord_north` is already a real entry in `portraits.json`).
   North's lord troop also diverges from south in combat now: `cards.json`'s `"lord"` troop carries a
-  `"skills_north"` override (`tuji` stays shared, `rengdao`/扔刀 swapped for `duomingqiang`/夺命枪 — same cost/power,
+  `"skills_north"` override (`tuji` stays shared, `rengdao`/扔刀 swapped for `huimaqiang`/回马枪 (named in 北线第一章 `jz_training`: 赵云 can't do it, works it out, the hero never gets the turn of the horse — only the turn-and-stab, hence the counter) — same cost/power,
   just spear-flavored instead of blade-flavored, matching the established "主角从此改用枪" north identity) that
   `build_lord(name, mult, north)` in `game_data.gd` reads via `t.get("skills_north", t["skills"]) if north else ...`.
   Any other north/south lord divergence (new portrait-keyed surface, another stat/skill split) needs the same

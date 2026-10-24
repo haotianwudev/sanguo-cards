@@ -1143,3 +1143,4 @@
 - [ ] 2026-10-19 cg `c2_ln_lend` ← c2_ln_lend.jpg · ok
 - [ ] 2026-10-19 cg `c2_ln_meet` ← c2_ln_meet.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-20 cg `c2_ln_liubei` ← new1.jpg · ok
+- [ ] 2026-10-23 cg `c2_daofa` ← c2_daofa.jpg · ok

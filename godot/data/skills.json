@@ -691,8 +691,8 @@
         }
       ]
     },
-    "duomingqiang": {
-      "name": "夺命枪",
+    "huimaqiang": {
+      "name": "回马枪",
       "cost": 3,
       "special": true,
       "per_battle": true,

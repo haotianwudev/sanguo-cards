@@ -722,8 +722,8 @@ func test_the_north_lord_fights_with_a_spear_not_the_blade() -> void:
 	var south := db.build_lord("阿明")
 	var north := db.build_lord("阿明", 1.0, true)
 	check_eq(south["skills"], ["tuji", "rengdao"])
-	check_eq(north["skills"], ["tuci", "duomingqiang"])
-	check(db.skills["duomingqiang"]["effects"].any(func(e): return e["type"] == "counter"), "the spear answers every blow; the thrown blade does not")
+	check_eq(north["skills"], ["tuci", "huimaqiang"])
+	check(db.skills["huimaqiang"]["effects"].any(func(e): return e["type"] == "counter"), "the spear answers every blow; the thrown blade does not")
 	check(not db.skills["rengdao"]["effects"].any(func(e): return e["type"] == "counter"), "the thrown blade is plain damage")
 	check(db.skills["tuci"]["cost"] == 0 and db.skills["tuci"]["free"], "突刺 is the hero's free strike too")
 
