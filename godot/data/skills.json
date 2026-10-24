@@ -186,12 +186,12 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 0.5
+          "rate": 2.0
         },
         {
           "type": "burn",
           "pct": 0.1,
-          "turns": 3
+          "turns": 1
         }
       ]
     },
@@ -302,8 +302,10 @@
           "type": "attack"
         },
         {
-          "type": "burn",
-          "pct": 0.05,
+          "type": "poison",
+          "stacks": 1,
+          "pct": 0.02,
+          "max": 5,
           "turns": 3
         }
       ]
@@ -644,8 +646,10 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "burn",
-          "pct": 0.04,
+          "type": "poison",
+          "stacks": 1,
+          "pct": 0.02,
+          "max": 5,
           "turns": 3
         },
         {
