@@ -259,7 +259,7 @@ static func target_power(qid: String, tier: String) -> float:
 	if not cfg.get("order", {}).has(qid):
 		return 0.0
 	var n := float(cfg["order"][qid])
-	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(n + float(cfg.get("offset", 1.0)), float(cfg["exponent"])) * float(cfg["tier"].get(tier, 1.0)) * float(cfg.get("chapter", {}).get(qid, 1.0))
+	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(n + float(cfg.get("offset", 1.0)), float(cfg["exponent"])) * float(cfg["tier"].get(tier, 1.0)) * float(cfg.get("chapter", {}).get(qid, cfg.get("chapter_default", 1.0)))
 
 
 static func _scale_for(tier: String, own: float, tier_median: float, qid: String, pos := 1.0) -> float:
