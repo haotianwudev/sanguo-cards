@@ -7017,6 +7017,34 @@
     "c3_chunyuqiong": {
       "src": "source/cg/c3_chunyuqiong.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "b_hanfu": {
+      "src": "source/cg/b_hanfu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_yijing": {
+      "src": "source/cg/b_yijing.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_wangyun": {
+      "src": "source/cg/b_wangyun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_fuhu": {
+      "src": "source/cg/b_fuhu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_lamei": {
+      "src": "source/cg/b_lamei.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_xuduye": {
+      "src": "source/cg/b_xuduye.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_majia": {
+      "src": "source/cg/b_majia.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

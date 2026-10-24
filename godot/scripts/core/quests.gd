@@ -919,6 +919,9 @@ static func read_side(save: SaveData, id: String) -> String:
 	if int(reward.get("merit", 0)) > 0:
 		save.merit += int(reward["merit"])
 		got.append("战功 +%d" % int(reward["merit"]))
+	for cid in reward.get("cards", []):  # a card the story hands over (often one the pool never offers: 王允, 程昱 …)
+		save.grant_card(cid, true)
+		got.append("得到「%s」" % GameData.get_db().cards[cid]["name"])
 	return "、".join(got)
 
 

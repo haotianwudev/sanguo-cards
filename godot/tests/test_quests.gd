@@ -1833,3 +1833,12 @@ func test_side_story_portraits_and_requires_exist() -> void:
 				check(FileAccess.file_exists("res://data/art/portraits/%s.jpg" % key) or Kit.portrait(key, 0.75, 5.0) != null, "%s: portrait %s" % [st["id"], key])
 			for f in [st.get("requires", ""), st.get("unless", "")]:
 				check(f == "" or recs.contains("\"%s\"" % f), "%s: no story line records %s" % [st["id"], f])
+
+
+func test_a_side_story_can_hand_over_a_card() -> void:
+	var s := SaveData.create()
+	s.flags = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan"]
+	check(not s.owned.has("hanfu"))
+	var got := Quests.read_side(s, "b_hanfu")
+	check(s.owned.has("hanfu") and got.contains("韩馥"), "韩馥的印 hands over 韩馥: %s" % got)

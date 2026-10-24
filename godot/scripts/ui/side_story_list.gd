@@ -71,7 +71,7 @@ func _ready() -> void:
 	var title := Kit.label("？ 小故事", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(40, 22)
 	add_child(title)
-	var hint := Kit.label("各章打完以后的小插曲，和主线不一定有关。第一次看有一点战功。", Kit.FONT_BODY)
+	var hint := Kit.label("各章打完以后的小插曲：日常趣事，也有主线背后发生的事。第一次看有奖励——战功，有的还送卡。", Kit.FONT_BODY)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
 	hint.position = Vector2(250, 34)
 	add_child(hint)

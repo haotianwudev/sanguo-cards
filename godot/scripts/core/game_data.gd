@@ -201,6 +201,8 @@ func _load(dir: String) -> void:
 				assert(not ids.has(st["id"]), "side_stories: id %s used twice" % st["id"])
 				ids[st["id"]] = true
 				assert(not st.get("text", []).is_empty(), "side story %s: no text" % st["id"])
+				for cid in st.get("reward", {}).get("cards", []):
+					assert(cards.has(cid), "side story %s: unknown card %s" % [st["id"], cid])
 
 
 func _index_card_chapters() -> void:

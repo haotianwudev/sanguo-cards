@@ -1217,3 +1217,10 @@
 - [x] 2026-10-24 cg `c3_yudu` ← c3_yudu.jpg · ok
 - [x] 2026-10-24 cg `c3_chunyuqiong` ← c3_chunyuqiong.jpg · ok
 - [x] 2026-10-24 cg `end_fuchao` ← end_fuchao.jpg · ok
+- [x] 2026-10-24 cg `b_hanfu` ← b_hanfu.jpg · ok
+- [x] 2026-10-24 cg `b_yijing` ← b_yijing.jpg · ok
+- [x] 2026-10-24 cg `b_wangyun` ← b_wangyun.jpg · ok
+- [x] 2026-10-24 cg `b_fuhu` ← b_fuhu.jpg · ok
+- [x] 2026-10-24 cg `b_lamei` ← b_lamei.jpg · ok
+- [x] 2026-10-24 cg `b_xuduye` ← b_xuduye.jpg · ok
+- [x] 2026-10-24 cg `b_majia` ← b_majia.jpg · ok

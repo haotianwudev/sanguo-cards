@@ -1225,3 +1225,10 @@
 | `cg:c3_last_night` | source/cg/c3_last_night.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_yudu` | source/cg/c3_yudu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_chunyuqiong` | source/cg/c3_chunyuqiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_hanfu` | source/cg/b_hanfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_yijing` | source/cg/b_yijing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_wangyun` | source/cg/b_wangyun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_fuhu` | source/cg/b_fuhu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_lamei` | source/cg/b_lamei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_xuduye` | source/cg/b_xuduye.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_majia` | source/cg/b_majia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
