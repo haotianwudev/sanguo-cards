@@ -437,6 +437,20 @@ func demo(name: String) -> void:
 			save.offer = ["shoushihe", "bingfa", "dunjia"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
+		"recap1":  # the chapter-end page of the south's first chapter: its picture, the menu, the picture's card
+			var q1: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q1, save)
+			Quests.record(save, "出生：江东富春")
+			save.grant_card("sunce")
+			save.grant_card("zhouyu")
+			save.run_battles = 6
+			save.run_bosses = 2
+			save.merit = 1
+			save.square = "north"
+			save.resolved = true
+			var m1 := MapScreen.new()
+			show_screen(m1)
+			m1.call_deferred("_complete")
 		"recap":  # the chapter recap at the end of chapter 2
 			save.quests_cleared = ["prologue"]
 			var q: Dictionary = GameData.get_db().quests[1]

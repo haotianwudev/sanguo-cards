@@ -33,6 +33,7 @@ var _raw_top: Dictionary = {}
 var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one picked per run)
 var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
 var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 once that chapter is done: {id, title, portraits, text, cg, requires, unless, reward}]
+var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the chapter-end page's picture (its card comes from a ？小故事)
 var side_cost := 5  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
 var ui: Dictionary
 
@@ -193,6 +194,10 @@ func _load(dir: String) -> void:
 		var ss: Dictionary = read_json(dir + "/side_stories.json")
 		side_stories = ss.get("after", {})
 		side_cost = int(ss.get("cost", 5))
+		chapter_pages = ss.get("chapters", {})
+		for qid in chapter_pages:
+			for pg in chapter_pages[qid]:
+				assert(pg.get("card", "") == "" or cards.has(pg["card"]), "chapter page %s: unknown card %s" % [qid, pg.get("card")])
 		var ids := {}
 		var qids: Array = quests.map(func(q): return q["id"])
 		for qid in side_stories:

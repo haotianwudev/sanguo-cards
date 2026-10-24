@@ -1,8 +1,8 @@
 class_name SideStoryList
 extends Control
 ## ？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, that open once their
-## chapter is done (data/side_stories.json). Opened from 整备 and from the chapter recap; unread ones show as a big ？,
-## read ones by their title (they can be read again, free). Opening one the first time in a 周目 costs 战功 (side_stories.json
+## chapter is done (data/side_stories.json). Opened from 整备 and from the chapter-end page; every tile shows its name,
+## price and reward (unread ones in gold) (they can be read again, free). Opening one the first time in a 周目 costs 战功 (side_stories.json
 ## cost) and pays its reward (点化 / 宝物 / 卡), both shown on the tile before you open it.
 
 signal changed  # something was read: the opener refreshes (战功, the unread count)
@@ -127,7 +127,7 @@ func _fill() -> void:
 		col.alignment = BoxContainer.ALIGNMENT_CENTER
 		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(col)
-		var big := Kit.label("？" if unread else str(st["title"]), (Kit.FONT_BIG + 16) if unread else (Kit.FONT_BODY + 4), "gold" if unread else "text")
+		var big := Kit.label(("？ " if unread else "") + str(st["title"]), Kit.FONT_BODY + 6, "gold" if unread else "text")  # every story shows its name and price (user rule)
 		big.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		big.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_child(big)
@@ -146,18 +146,27 @@ func _fill() -> void:
 		_grid.add_child(tile)
 
 
-func _play(st: Dictionary) -> void:
-	var r := Quests.open_side(Game.save, st["id"])  # pays and rewards on opening (a re-read is free)
+static func play(st: Dictionary, parent: Node, done: Callable) -> bool:
+	## Open a story (pays its 战功 and reward the first time, free after) and play it over `parent`; done(got) when it ends.
+	## false = not enough 战功 (nothing happens).
+	var r := Quests.open_side(Game.save, st["id"])
 	if not r["ok"]:
-		_note.text = "战功不够：打开「？」要 %d 战功，现在有 %d。多打几场再来。" % [Quests.side_cost(st), Game.save.merit]
-		return
+		return false
 	Game.persist()
-	_fill()
-	changed.emit()
 	var o := InterludeOverlay.new()
 	o.scenes = [st]
 	o.same_chapter = true  # no chapter title card afterwards
-	o.z_index = 90
-	o.finished.connect(func():
-		_note.text = "「%s」%s" % [st["title"], "　得到：" + r["got"] if r["got"] != "" else "　读完了"])
-	add_child(o)
+	o.finished.connect(func(): done.call(r["got"]))
+	parent.add_child(o)
+	return true
+
+
+func _play(st: Dictionary) -> void:
+	var ok := SideStoryList.play(st, self, func(got: String):
+		_note.text = "「%s」%s" % [st["title"], "　得到：" + got if got != "" else "　读完了"]
+		_fill()
+		changed.emit())
+	if not ok:
+		_note.text = "战功不够：「%s」要 %d 战功，现在有 %d。多打几场再来。" % [st["title"], Quests.side_cost(st), Game.save.merit]
+	else:
+		_fill()

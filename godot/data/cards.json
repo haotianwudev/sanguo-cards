@@ -2297,6 +2297,19 @@
       "at": 73,
       "pool": false
     },
+    "rc_fuchun": {
+      "name": "富春·慈母与儿女",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 100,
+      "at": 64,
+      "skills": [
+        "cimu",
+        "gongyaoji"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

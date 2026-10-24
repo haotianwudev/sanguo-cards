@@ -424,5 +424,6 @@
   "gongdu": {"file": "gongdu.jpg", "face": [0.5, 0.22], "head": 0.22},
   "huangshao": {"file": "huangshao.jpg", "face": [0.5, 0.22], "head": 0.22},
   "hanhao": {"file": "hanhao.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "sunquan_young": {"file": "sunquan_young.jpg", "face": [0.5, 0.22], "head": 0.22}
+  "sunquan_young": {"file": "sunquan_young.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "rc_fuchun": {"file": "rc_fuchun.jpg", "face": [0.45, 0.42], "head": 0.21}
 }

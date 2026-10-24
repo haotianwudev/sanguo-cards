@@ -904,6 +904,16 @@ static func side_unread(save: SaveData, also := "") -> int:
 	return side_stories(save, also).filter(func(s): return not s["read"]).size()
 
 
+static func chapter_page(quest_id: String, save: SaveData) -> Dictionary:
+	## the chapter-end page's {cg} for this route ({} = none drawn yet)
+	var have: Array = save.flags + save.run_records
+	for pg in GameData.get_db().chapter_pages.get(quest_id, []):
+		if (pg.has("requires") and not have.has(pg["requires"])) or (pg.has("unless") and have.has(pg["unless"])):
+			continue
+		return pg
+	return {}
+
+
 static func side_cost(st: Dictionary) -> int:
 	return int(st.get("cost", GameData.get_db().side_cost))
 

@@ -3,8 +3,31 @@
   "cost": 5,
   "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 5 — like a draw; a 点化 is 10); a story can still set its own `cost`; reading it again is free",
   "_reward": "every story names its reward, paid when it is opened: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
+  "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless pick the route for the shared first chapter.",
+  "chapters": {
+    "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}]
+  },
   "after": {
     "prologue": [
+      {"id": "s_rc_fuchun", "title": "针脚", "portraits": ["wuguotai", "sunquan_young", "sunshangxiang_young"], "requires": "结局一 · 玉碎", "unless": "出生：冀州无极", "reward": {"cards": ["rc_fuchun"]}, "cg": "rc_fuchun", "text": [
+        "你做了一个梦。",
+        "梦里是南阳，下着雨。一方玉玺砸在石头上，碎成了好几块。有个人背对着你，没有回头。",
+        "你醒过来的时候，天刚擦黑，枕头湿了一片。你不记得梦里那个人是谁，只记得心口疼得厉害。",
+        "你走到廊下。",
+        "吴夫人坐在竹椅上，膝上摊着一件缝了一半的小衣裳，正低头穿针。孙权跪在她身边，两只手撑着一团红线帮她绕，绕得一脸不耐烦。",
+        "孙尚香趴在她腿边，抱着一把小木弓，仰着头看娘笑。",
+        "@sunshangxiang_young 孙尚香：「娘，这件是给我的吗？」",
+        "@wuguotai 吴夫人：「给你二哥的。你的那件，娘明天缝。」",
+        "@sunquan_young 孙权：「……我不要红的。」",
+        "@wuguotai 吴夫人：「红的喜庆。你大哥小时候也穿红的。」",
+        "江上的晚霞一点一点暗下去，几只鸟往对岸飞。",
+        "你站在门口，没有走过去。",
+        "@lord {lord}（内心）：……不知道为什么，我想把这一幕记住。一针一线，都记住。",
+        "@lord {lord}（内心）：要是哪天这些都没了，至少还有一个人记得，富春江边，有过这样一个傍晚。",
+        "吴夫人抬起头，看见了你，笑着招了招手。",
+        "@wuguotai 吴夫人：「站在那儿做什么？过来，袖子给我比一比。」",
+        "你走过去，伸出了胳膊。"
+      ]},
       {"id": "s_jiujiu", "title": "九九歌", "portraits": ["sunce", "zhouyu"], "unless": "出生：冀州无极", "reward": {"upgrade": {"sunce": 2}}, "text": [
         "富春的晚上没有手机，你闲得发慌，就在院子里教孙策背九九乘法表。",
         "@lord {lord}：「三七？」",

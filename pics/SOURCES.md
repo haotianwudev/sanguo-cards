@@ -429,6 +429,7 @@
 | `huangshao` | source/generals/huangshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `hanhao` | source/generals/hanhao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `sunquan_young` | source/generals/sunquan_young.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_fuchun` | source/generals/rc_fuchun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -1232,3 +1233,4 @@
 | `cg:b_lamei` | source/cg/b_lamei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:b_xuduye` | source/cg/b_xuduye.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:b_majia` | source/cg/b_majia.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_fuchun` | source/cg/rc_fuchun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

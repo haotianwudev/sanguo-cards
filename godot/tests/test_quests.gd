@@ -1870,3 +1870,22 @@ func test_a_side_story_can_hand_over_a_card() -> void:
 	var r := Quests.open_side(s, "b_hanfu")
 	check(s.owned.has("hanfu") and str(r["got"]).contains("韩馥"), "韩馥的印 hands over 韩馥: %s" % r)
 	check_eq(s.merit, 0, "every story costs 5")
+
+
+func test_the_chapter_page_card_comes_from_a_story_after_the_next_bad_end() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue"]
+	check_eq(Quests.chapter_page("prologue", s).get("cg", ""), "rc_fuchun")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	check(not ids.call().has("s_rc_fuchun"), "not before 结局一 · 玉碎")
+	s.flags = ["结局一 · 玉碎"]
+	check(ids.call().has("s_rc_fuchun"), "opens once 玉碎 has been reached")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_fuchun")
+	check(s.owned.has("rc_fuchun"), "针脚 hands over 富春·慈母与儿女")
+	var n := SaveData.create()
+	n.run_records = ["出生：冀州无极"]
+	n.flags = ["结局一 · 玉碎"]
+	n.quests_cleared = ["prologue"]
+	check(not Quests.side_stories(n).map(func(x): return x["id"]).has("s_rc_fuchun"), "not in a north 周目")

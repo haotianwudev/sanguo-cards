@@ -3825,6 +3825,15 @@
         0.22
       ],
       "head": 0.22
+    },
+    "rc_fuchun": {
+      "src": "source/generals/rc_fuchun.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.45,
+        0.42
+      ],
+      "head": 0.21
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -7044,6 +7053,10 @@
     },
     "b_majia": {
       "src": "source/cg/b_majia.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_fuchun": {
+      "src": "source/cg/rc_fuchun.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
