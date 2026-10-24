@@ -452,8 +452,23 @@ func demo(name: String) -> void:
 			var m1 := MapScreen.new()
 			show_screen(m1)
 			m1.call_deferred("_complete")
-		"recap":  # the chapter recap at the end of chapter 2
+		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云)
 			save.quests_cleared = ["prologue"]
+			if OS.get_cmdline_user_args().has("--north"):
+				Quests.begin(GameData.get_db().quests.filter(func(x): return x["id"] == "luoyang_n")[0], save)
+				Quests.record(save, "出生：冀州无极")
+				save.flags = ["出生：冀州无极"]
+				for c in ["zhaoyun", "guojia", "lvlingqi"]:
+					save.grant_card(c)
+				save.run_battles = 7
+				save.run_bosses = 2
+				save.merit = 4
+				save.square = "ln_end"
+				save.resolved = true
+				var mn := MapScreen.new()
+				show_screen(mn)
+				mn.call_deferred("_complete")
+				return
 			var q: Dictionary = GameData.get_db().quests[1]
 			Quests.begin(q, save)
 			save.grant_card("sunce")
