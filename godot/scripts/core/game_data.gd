@@ -242,6 +242,7 @@ func _index_card_chapters() -> void:
 				var foe: Dictionary = enemies[scenarios[s["battle"]]["enemy"]]
 				if not foe["card_public"]:
 					add.call(foe["card"], q["id"])
+					add.call(foe["drop"], q["id"])  # what beating it actually hands over (先登营 → 先登死士)
 
 
 func is_public(card_id: String) -> bool:

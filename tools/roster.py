@@ -75,8 +75,9 @@ for key, title, rt, q, xr in chapters:
             pool_src[c][key].add("「%s」" % s.get("label", ""))
         if s.get("type") == "battle" and s.get("battle") in scenarios:
             foe = enemies[scenarios[s["battle"]]["enemy"]]
-            if not foe.get("card_public") and foe.get("card"):
-                src[foe["card"]][key].add("掉落")
+            if not foe.get("card_public"):
+                for c in {foe.get("card", ""), foe.get("drop", "")} - {""}:
+                    src[c][key].add("掉落")
 
 event_offer = defaultdict(set)
 
