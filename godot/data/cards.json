@@ -2164,8 +2164,10 @@
       "at": 78,
       "pool": false,
       "skills": [
-        "xianji"
-      ]
+        "duji",
+        "luanwu"
+      ],
+      "troop_skills": false
     },
     "zhangxiu": {
       "name": "张绣·北地枪王",

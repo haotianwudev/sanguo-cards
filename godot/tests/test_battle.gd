@@ -728,6 +728,35 @@ func test_war_spirit_stacks_four_layers_lifts_attack_and_cuts_damage_then_fades(
 	check(GameData.get_db().build_fighter("guojia")["skills"].has("xianji"), "郭嘉 has it as his skill")
 
 
+func test_poison_stacks_ignores_resists_and_can_kill() -> void:
+	## 贾诩 走毒: 毒计 adds a layer (up to 5), each layer takes 2% of the enemy's max HP a turn, whatever its armor
+	var b := Battle.start("hulao", party(["jiaxu"]), 3)
+	b.db.battle["variance"] = 0.0
+	b.enemy["data"]["magic_resist"] = 0.8
+	b.enemy["data"]["phys_resist"] = 0.8
+	var j := 1
+	check(b.leaders[j]["leader"]["card"]["id"] == "jiaxu", "贾诩 leads his unit")
+	check(b.skills_of(b.leaders[j]).map(func(s): return s["id"]).has("duji"), "贾诩 has 毒计")
+	b.ap = 8
+	b.act(j, "duji")
+	check_eq(b.enemy["poison"], 1)
+	var hp0: int = b.enemy["hp"]
+	b.end_round()
+	var ticks: Array = b.take_events().filter(func(e): return e["t"] == "poison")
+	check(not ticks.is_empty() and ticks[0]["dmg"] == int(round(b.enemy["max_hp"] * 0.02)), "one layer: 2% of max HP, resists ignored")
+	check(b.enemy["hp"] < hp0)
+	for _i in 6:
+		b.enemy["poison_turns"] = 3
+		b.leaders[j]["acted"] = false
+		b.ap = 8
+		b.act(j, "duji")
+	check_eq(b.enemy["poison"], 5, "five layers at most")
+	b.enemy["hp"] = 1
+	b.result = ""
+	b.end_round()
+	check_eq(b.result, "win", "unlike the fire, poison can finish the enemy")
+
+
 func test_war_spirit_adds_magic_to_physical_blows() -> void:
 	## 料敌先机: each layer of 战意 makes every physical blow carry 20% more as magic damage (20 / 40 / 60 / 80%)
 	var b := Battle.start("hulao", party(["guojia", "cav_n"]), 3)

@@ -15,6 +15,9 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 				v += at * float(e["power"]) * (1.5 if b.party_hp < 0.4 * b.party_max else 0.0)  # healing only pays when hurt
 			"stun":
 				v += float(e["chance"]) * b.enemy["data"]["at"] * 2
+			"poison":  # what the new layers take over the turns left, while there is room to stack
+				var room := mini(int(e.get("stacks", 1)), int(e.get("max", 5)) - int(b.enemy["poison"]))
+				v += float(b.enemy["max_hp"]) * float(e["pct"]) * maxi(0, room) * int(e.get("turns", 3)) * 0.5
 			"boost":  # BOOST on a waiting ally: its next skill hits boost_mult times as hard
 				var best_ally := 0.0
 				for t in b.leaders:

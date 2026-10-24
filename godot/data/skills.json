@@ -1603,6 +1603,41 @@
         }
       ]
     },
+    "duji": {
+      "name": "毒计",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "poison",
+          "stacks": 1,
+          "pct": 0.02,
+          "max": 5,
+          "turns": 3
+        }
+      ]
+    },
+    "luanwu": {
+      "name": "乱武",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic",
+          "rate": 1.8
+        },
+        {
+          "type": "poison",
+          "stacks": 2,
+          "pct": 0.02,
+          "max": 5,
+          "turns": 3
+        },
+        {
+          "type": "stun",
+          "chance": 1
+        }
+      ]
+    },
     "xianji": {
       "name": "料敌先机",
       "cost": 1,

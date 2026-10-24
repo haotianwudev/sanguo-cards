@@ -370,6 +370,8 @@ func _refresh() -> void:
 			st.append("🔥 灼烧 现有体力 -%d%%/回合（%d 回合）" % [int(round(e["burn_pct"] * 100)), e["burn_turns"]])
 		else:
 			st.append("🔥 灼烧 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
+	if e["poison_turns"] > 0:
+		st.append("☠ 中毒 ×%d 最大体力 -%d%%/回合（%d 回合）" % [e["poison"], int(round(e["poison_pct"] * e["poison"] * 100)), e["poison_turns"]])
 	if e["charging"] != "":
 		st.append("⚠ 蓄力中：下回合【%s】！" % e["charging"])
 	if e["at"] > e["data"]["at"] * 1.01:
@@ -654,6 +656,8 @@ func _sync_fx() -> void:
 	var e := b.enemy
 	if e["burn_turns"] > 0:
 		want["e_burn"] = func(): return BattleFx.embers(self, _enemy_rect(), BattleFx.EMBER, 22, 70.0)
+	if e["poison_turns"] > 0:
+		want["e_poison"] = func(): return BattleFx.embers(self, _enemy_rect(), Color(0.45, 0.95, 0.35, 0.85), 18, 40.0)
 	if e["break_turns"] > 0:
 		want["e_break"] = func(): return BattleFx.cracks(self, _enemy_rect(), Color(1.0, 0.82, 0.35, 0.8))
 	if e["stunned"]:
@@ -717,6 +721,8 @@ func _sync_badges() -> void:
 	var row: Array = []
 	if e["burn_turns"] > 0:
 		row.append(BattleFx.badge("灼", Color(1.0, 0.5, 0.15), e["burn_turns"]))
+	if e["poison_turns"] > 0:
+		row.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), e["poison"]))
 	if e["break_turns"] > 0:
 		row.append(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]))
 	if e["stunned"]:
@@ -792,7 +798,7 @@ func _play(events: Array) -> void:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
 				await get_tree().create_timer(0.02).timeout
-			"hit", "interrupt", "burn", "counter":
+			"hit", "interrupt", "burn", "counter", "poison":
 				Kit.shake(_enemy_art, 9.0, 0.2)
 				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
 				var big: bool = ev["dmg"] > b.enemy["max_hp"] * 0.08
@@ -810,12 +816,14 @@ func _play(events: Array) -> void:
 						BattleFx.counter(self, _enemy_center())
 					"burn":
 						BattleFx.flame_lick(self, _enemy_rect())
+					"poison":
+						BattleFx.burst(self, _enemy_center(), Color(0.45, 0.95, 0.35), 12, 14.0, 100.0, 5.0, 0.35)
 					"interrupt":
 						BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
 				BattleFx.scale = 1.0
 				var crit_hit: bool = ev.get("crit", false)
 				Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
-					Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
+					Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
 				if crit_hit:
 					Kit.shake(self, 14.0, 0.2)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
@@ -1161,7 +1169,7 @@ func _sfx_act(ev: Dictionary) -> void:
 func _sfx_hit(ev: Dictionary, big: bool) -> void:
 	## 打击: magic / pierce / heavy / plain hits sound different; each step of a combo climbs a little in pitch
 	match ev["t"]:
-		"burn":
+		"burn", "poison":
 			Sfx.play("burn")
 		"counter", "interrupt":
 			Sfx.play("slash")
