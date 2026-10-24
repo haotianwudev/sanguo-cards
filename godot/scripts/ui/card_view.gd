@@ -14,6 +14,8 @@ var leader: Dictionary = {}  # when shown as a party leader: uses leader AT/HP a
 var count := 0  # soldier copies (0 = hide)
 var note := ""
 var show_skills := true
+var glow := true  # the rarity aura round the card (opts.glow = false turns it off)
+const GLOW := {"SSR": [1.0, true], "SR": [0.75, true], "R": [0.55, false], "C": [0.35, false]}  # rarity -> [strength, breathes]
 var dimmed := false
 var selected := false
 var tap_on_release := false  # true = `pressed` fires on lift, and not at all when the press turned into a drag (整备)
@@ -54,6 +56,7 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 	v.tier = opts.get("tier", _default_tier(card_id, opts))
 	v.note = opts.get("note", "")
 	v.show_skills = opts.get("skills", true)
+	v.glow = opts.get("glow", true)
 	v.custom_minimum_size = size
 	v.size = size
 	return v
@@ -341,8 +344,44 @@ func _build() -> void:
 		_add(cnt, Vector2(w - 46, card_h - 34), Vector2(44, 28))
 
 
+func _glow_spec() -> Array:
+	## [colour, strength, breathes] of this card's aura, or [] for none (soldiers, glow off)
+	if not glow or fighter.is_empty():
+		return []
+	var r := str(fighter.get("rarity", ""))
+	if not GLOW.has(r):
+		return []
+	return [Kit.rarity_color(r), float(GLOW[r][0]), bool(GLOW[r][1])]
+
+
+func _process(_delta: float) -> void:
+	queue_redraw()  # only on while a breathing aura (SR / SSR) is shown
+
+
 func _draw() -> void:
 	var card_h := minf(size.y, size.x * 1.4)
+	var g := _glow_spec()
+	set_process(not g.is_empty() and g[2] and is_visible_in_tree())
+	if not g.is_empty():  # the aura: soft rounded rings spreading out behind the frame, SR / SSR slowly breathing
+		var col: Color = g[0]
+		var k: float = g[1]
+		if g[2]:
+			k *= 0.75 + 0.25 * sin(Time.get_ticks_msec() / 1000.0 * 2.4 + float(get_instance_id() % 97))
+		var layers := 8
+		var reach := 6.0 + 16.0 * float(g[1])  # how far the light spreads past the card's edge
+		for i in layers:
+			var f := float(i + 1) / layers
+			var grow := reach * f
+			var sb := StyleBoxFlat.new()
+			sb.bg_color = Color(col.r, col.g, col.b, 0.42 * k * pow(1.0 - f + 1.0 / layers, 1.4))
+			sb.set_corner_radius_all(int(8.0 + grow))
+			draw_style_box(sb, Rect2(Vector2(-grow, -grow), Vector2(size.x + grow * 2.0, card_h + grow * 2.0)))
+		var rim := StyleBoxFlat.new()  # a thin bright edge right on the frame
+		rim.bg_color = Color(0, 0, 0, 0)
+		rim.border_color = Color(col.r, col.g, col.b, 0.85 * k)
+		rim.set_border_width_all(2)
+		rim.set_corner_radius_all(8)
+		draw_style_box(rim, Rect2(Vector2(-2, -2), Vector2(size.x + 4.0, card_h + 4.0)))
 	if selected:
 		draw_rect(Rect2(Vector2(-5, -5), Vector2(size.x + 10, card_h + 10)), Kit.c("gold"), false, 5.0)
 	elif has_focus():
