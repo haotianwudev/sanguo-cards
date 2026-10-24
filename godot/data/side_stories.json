@@ -1,7 +1,7 @@
 {
   "_comment": "？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, keyed by the chapter (quest id) after which they open. They are read from 整备 (the ？ button) or the chapter recap, any time after; unread ones show as a big ？. Each: id (unique), title, portraits, text (story.json line style: @speaker / {lord}), optional cg, requires / unless (a recorded line, like interludes), cost (战功 to open it, default `cost` below) and reward (what opening it gives). Use only people who are in the party by the end of that chapter; anyone who joins by a choice needs that choice's line in requires.",
-  "cost": 3,
-  "_cost": "战功 to open a story the first time this 周目 (a story can set its own: 5 for a rare 宝物 or a card the pool never offers); reading it again is free",
+  "cost": 5,
+  "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 5 — like a draw; a 点化 is 10); a story can still set its own `cost`; reading it again is free",
   "_reward": "every story names its reward, paid when it is opened: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
   "after": {
     "prologue": [
@@ -53,7 +53,7 @@
       ]}
     ],
     "taodong": [
-      {"id": "s_zumao", "title": "祖茂的头巾", "portraits": ["zumao", "sunce"], "cost": 5, "reward": {"relics": ["chize"]}, "text": [
+      {"id": "s_zumao", "title": "祖茂的头巾", "portraits": ["zumao", "sunce"], "reward": {"relics": ["chize"]}, "text": [
         "祖茂每天早上都要洗一块红头巾。洗得都发白了，还是天天洗。",
         "孙策问他，那块破布有什么好洗的。",
         "@zumao 祖茂：「这是主公的赤帻。那年在阳人被围，我戴着它把追兵引开——他们以为我是主公。」",
@@ -99,7 +99,7 @@
       ]}
     ],
     "heishan": [
-      {"id": "b_hanfu", "title": "韩馥的印", "portraits": ["hanfu", "jushou", "guotu"], "cost": 5, "reward": {"cards": ["hanfu"]}, "cg": "b_hanfu", "text": [
+      {"id": "b_hanfu", "title": "韩馥的印", "portraits": ["hanfu", "jushou", "guotu"], "reward": {"cards": ["hanfu"]}, "cg": "b_hanfu", "text": [
         "【初平二年 · 秋】邺城，冀州牧府。",
         "郭图站在堂下，摇着扇子，说话不紧不慢。",
         "@guotu 郭图：「公孙瓒南下，袁本初东来，冀州夹在中间，早晚是块肉。韩使君不如把冀州让给袁公——袁公念旧，必有厚报。」",
@@ -114,7 +114,7 @@
         "至于韩馥——他让出了冀州，却总觉得袁绍要杀他。有一天，袁绍的使者在张邈耳边说了几句悄悄话，他起身去了后院，再也没有回来。",
         "@lord {lord}（内心）：……一个人把整个冀州让了出去，换来的是一辈子的害怕。郭图那本账，原来是从这里翻开的。"
       ]},
-      {"id": "b_yijing", "title": "易京", "portraits": ["gongsunzan"], "requires": "界桥：救下公孙瓒", "cost": 5, "reward": {"cards": ["gongsunzan"]}, "cg": "b_yijing", "text": [
+      {"id": "b_yijing", "title": "易京", "portraits": ["gongsunzan"], "requires": "界桥：救下公孙瓒", "reward": {"cards": ["gongsunzan"]}, "cg": "b_yijing", "text": [
         "界桥一战之后，公孙瓒退回了幽州。",
         "他在易水边上修了一座城，叫易京。城外挖了十道壕沟，壕沟里面堆了几百座土山，每座土山上都盖着高楼。",
         "他自己住在最高的那座楼里，楼下囤了三百万斛粮食。",
@@ -137,7 +137,7 @@
         "当天夜里，营里很安静。只有赵云的帐篷里，隐隐传出一点哼歌的声音，调子有点像「我们都是好孩子」。",
         "夏侯兰在帐篷外站了很久，最后把那一条，改成了「主公及赵子龙不得在营中高歌」。"
       ]},
-      {"id": "s_yaopu", "title": "药圃", "portraits": ["zhangning", "lvlingqi", "zhenmi_young"], "requires": "张宁：救下", "cost": 5, "reward": {"relics": ["taipingyaoshu"]}, "text": [
+      {"id": "s_yaopu", "title": "药圃", "portraits": ["zhangning", "lvlingqi", "zhenmi_young"], "requires": "张宁：救下", "reward": {"relics": ["taipingyaoshu"]}, "text": [
         "张宁在甄家后园开了一小块地，种药。",
         "甄宓天天去浇水，吕玲绮说要帮忙，拿着画戟把杂草一口气全割了。",
         "张宁蹲在地里，看着一地断了的苗，半天没说话。",
@@ -150,7 +150,7 @@
       ]}
     ],
     "yuxi": [
-      {"id": "s_wuziqi", "title": "五子棋", "portraits": ["zhujun"], "cost": 5, "reward": {"relics": ["bazhen"]}, "text": [
+      {"id": "s_wuziqi", "title": "五子棋", "portraits": ["zhujun"], "reward": {"relics": ["bazhen"]}, "text": [
         "朱儁老将军闲下来就要下围棋，营里没人下得过他。",
         "他拉着你坐下。你看着那张十九路的棋盘，想了想。",
         "@lord {lord}：「老将军，咱们换个下法。五个子连成一条线，就算赢。」",
@@ -219,7 +219,7 @@
       ]}
     ],
     "dongui": [
-      {"id": "b_wangyun", "title": "宣平门上", "portraits": ["wangyun", "lvbu"], "requires": "洛阳：天子到了", "cost": 5, "reward": {"cards": ["wangyun"]}, "cg": "b_wangyun", "text": [
+      {"id": "b_wangyun", "title": "宣平门上", "portraits": ["wangyun", "lvbu"], "requires": "洛阳：天子到了", "reward": {"cards": ["wangyun"]}, "cg": "b_wangyun", "text": [
         "【初平二年 · 夏】长安。李傕、郭汜的西凉兵，已经到了城下。",
         "王允坐在司徒府里写字。写的是「董卓既诛，天下当安」。写完一遍，揉了，又写一遍。",
         "宫门外马蹄声急。吕布浑身是血，勒马停在府门口。",
@@ -257,7 +257,7 @@
       ]}
     ],
     "jingxiang": [
-      {"id": "s_quwu", "title": "曲有误", "portraits": ["zhouyu"], "cost": 5, "reward": {"relics": ["yushan"]}, "text": [
+      {"id": "s_quwu", "title": "曲有误", "portraits": ["zhouyu"], "reward": {"relics": ["yushan"]}, "text": [
         "听说周瑜精通音律，弹错一个音，他就会回头看。你不信。",
         "宴席上，乐师在弹琴。你偷偷塞给乐师一串钱，让他故意弹错一个音。",
         "琴声一错，周瑜放下酒杯，回头看了一眼。",
@@ -281,7 +281,7 @@
       ]}
     ],
     "huainan_s": [
-      {"id": "b_fuhu", "title": "缚虎", "portraits": ["caocao", "lvbu", "liubei", "xunyu"], "cost": 5, "reward": {"relics": ["qixing"]}, "cg": "b_fuhu", "text": [
+      {"id": "b_fuhu", "title": "缚虎", "portraits": ["caocao", "lvbu", "liubei", "xunyu"], "reward": {"relics": ["qixing"]}, "cg": "b_fuhu", "text": [
         "寿春城下，吕布被五花大绑，押进了曹操的大帐。",
         "@lvbu 吕布：「绑得太紧了，松一松。」",
         "@caocao 曹操：「绑老虎，不得不紧。」",
@@ -327,7 +327,7 @@
         "@zhangfuren 张夫人：「那就少说话。」",
         "当天夜里，酒缸边上多了一个人影。第二天早上，杜夫人发现酒缸里少了三碗，缸边留着三碗的酒钱，压在一张纸条下面：「借明日之三碗。」"
       ]},
-      {"id": "s_toutong", "title": "头疼", "portraits": ["guojia"], "requires": "曹操：借粮", "cost": 5, "reward": {"relics": ["yitian"]}, "text": [
+      {"id": "s_toutong", "title": "头疼", "portraits": ["guojia"], "requires": "曹操：借粮", "reward": {"relics": ["yitian"]}, "text": [
         "曹操派人送来一封信，谢你当年借粮。信写得很长，后半封全在说自己头疼。",
         "@guojia 郭嘉：「曹孟德这个头疼，是多年的老毛病了。」",
         "@lord {lord}：「我们那儿有一种药，叫布洛芬。一片下去，半个时辰就不疼了。」",
@@ -385,7 +385,7 @@
       ]}
     ],
     "longhu": [
-      {"id": "b_xuduye", "title": "许都夜议", "portraits": ["caocao", "xunyu", "chengyu"], "cost": 5, "reward": {"cards": ["chengyu"]}, "cg": "b_xuduye", "text": [
+      {"id": "b_xuduye", "title": "许都夜议", "portraits": ["caocao", "xunyu", "chengyu"], "reward": {"cards": ["chengyu"]}, "cg": "b_xuduye", "text": [
         "许都相府，夜里点着一盏灯。曹操的头又疼了。",
         "@chengyu 程昱：「北海相的兵，全压在青州打袁谭。徐州只剩一个糜竺守着粮仓。明公，这是天给的。」",
         "@xunyu 荀彧：「明公和北海有盟约在先。讨袁术那一回，两家是并肩打的仗。」",
@@ -424,7 +424,7 @@
       ]}
     ],
     "menghu": [
-      {"id": "b_lamei", "title": "腊月那一夜", "portraits": ["caocao", "sunjian", "xunyu"], "cost": 5, "reward": {"relics": ["gudingdao"]}, "cg": "b_lamei", "text": [
+      {"id": "b_lamei", "title": "腊月那一夜", "portraits": ["caocao", "sunjian", "xunyu"], "reward": {"relics": ["gudingdao"]}, "cg": "b_lamei", "text": [
         "【建安四年 · 腊月】曹操进京朝贺。他只带了几百个亲兵。",
         "孙坚亲自到城门口接他。十八路诸侯里，真敢跟董卓拼命的，就他们俩——一个在汴水，一个在阳人。",
         "德阳殿的宴席摆到半夜。曹操举起酒杯。",
@@ -463,7 +463,7 @@
       ]}
     ],
     "xiliang": [
-      {"id": "b_majia", "title": "马家", "portraits": ["mateng", "xuchu"], "requires": "北线：西凉归附", "cost": 5, "reward": {"cards": ["mateng"]}, "cg": "b_majia", "text": [
+      {"id": "b_majia", "title": "马家", "portraits": ["mateng", "xuchu"], "requires": "北线：西凉归附", "reward": {"cards": ["mateng"]}, "cg": "b_majia", "text": [
         "许都城南有一座大宅子，住着马腾一家两百多口。名义上是入朝做官，其实是人质。",
         "那天夜里，马腾在灯下给马超写信。",
         "「孟起：西凉的马，比我们马家的人金贵。守住马，就守住了西凉。」",
@@ -568,7 +568,7 @@
       ]}
     ],
     "luoyang_s": [
-      {"id": "s_chitu", "title": "赤兔的饭量", "portraits": ["lvbu"], "requires": "洛阳：收下吕布", "cost": 5, "reward": {"relics": ["chitu"]}, "text": [
+      {"id": "s_chitu", "title": "赤兔的饭量", "portraits": ["lvbu"], "requires": "洛阳：收下吕布", "reward": {"relics": ["chitu"]}, "text": [
         "吕布一顿饭，吃十斤肉、三斗米。军需官愁得睡不着觉。",
         "后来军需官发现，吕布不算什么。赤兔一顿，要吃五斗豆子。",
         "@lord {lord}：「温侯，赤兔能不能少吃点？」",
@@ -591,7 +591,7 @@
       ]}
     ],
     "tianqing": [
-      {"id": "s_xunang", "title": "胡子的袋子", "portraits": ["guanyu", "zhangfei"], "requires": "关羽、张飞：入队", "cost": 5, "reward": {"relics": ["qinglong"]}, "text": [
+      {"id": "s_xunang", "title": "胡子的袋子", "portraits": ["guanyu", "zhangfei"], "requires": "关羽、张飞：入队", "reward": {"relics": ["qinglong"]}, "text": [
         "关羽的胡子长二尺，冬天怕冻，夏天怕乱，晚上睡觉要用一个锦囊装起来。",
         "可那个锦囊用了十几年，已经破了好几个洞。",
         "张飞看不下去，说要给他二哥缝一个新的。他拿着针线，在帐篷里折腾了一夜，扎破了十个手指头。",

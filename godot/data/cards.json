@@ -133,7 +133,7 @@
       "per_battle": 1,
       "per_boss": 2,
       "draw": 5,
-      "upgrade": 8
+      "upgrade": 10
     }
   },
   "_beasts": "野兽卡 (beast: true — 野猪, 白额虎): beasts, not soldiers or generals; for now they never drop or turn up in chests or pools",

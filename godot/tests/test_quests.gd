@@ -1817,10 +1817,10 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine"]), "the south birth gets only the south prologue stories")
 	s.quests_cleared = ["prologue"]
 	s.grant_card("sunce")
-	s.merit = 2
-	check(not Quests.open_side(s, "s_jiujiu")["ok"], "3 战功 to open: 2 is not enough")
+	s.merit = 4
+	check(not Quests.open_side(s, "s_jiujiu")["ok"], "5 战功 to open: 4 is not enough")
 	check_eq(Quests.side_unread(s), south.size())
-	s.merit = 5
+	s.merit = 7
 	var before := s.copies("sunce")
 	var r := Quests.open_side(s, "s_jiujiu")
 	check(r["ok"] and r["got"] != "", "opened: %s" % r)
@@ -1828,7 +1828,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	check_eq(s.copies("sunce"), before + 2, "九九歌 点化 孙策 +2")
 	check_eq(Quests.open_side(s, "s_jiujiu"), {"ok": true, "got": ""}, "a re-read is free and gives nothing")
 	check_eq(s.merit, 2)
-	s.merit = 3
+	s.merit = 5
 	Quests.open_side(s, "s_firstwine")  # 酒囊
 	check(s.kept_relics.has("jiunang") and s.relics.has("jiunang"), "a 宝物 stays for the rest of the 周目")
 
@@ -1839,9 +1839,9 @@ func test_a_held_relic_pays_the_cost_back() -> void:
 	s.quests_cleared = ["prologue"]
 	s.relics = ["jiunang"]
 	s.kept_relics = ["jiunang"]
-	s.merit = 3
+	s.merit = 5
 	Quests.open_side(s, "s_firstwine")
-	check_eq(s.merit, 3, "already had 酒囊: the 3 战功 come back")
+	check_eq(s.merit, 5, "already had 酒囊: the 5 战功 come back")
 
 
 func test_every_side_story_has_a_reward() -> void:
@@ -1869,4 +1869,4 @@ func test_a_side_story_can_hand_over_a_card() -> void:
 	check(not s.owned.has("hanfu"))
 	var r := Quests.open_side(s, "b_hanfu")
 	check(s.owned.has("hanfu") and str(r["got"]).contains("韩馥"), "韩馥的印 hands over 韩馥: %s" % r)
-	check_eq(s.merit, 0, "a 幕后 story costs 5")
+	check_eq(s.merit, 0, "every story costs 5")
