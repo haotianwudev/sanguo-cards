@@ -287,7 +287,7 @@ static func skill_desc(sk: Dictionary) -> String:
 				parts.append("战意 +1 层：全军攻击 +%d%%、受到伤害 -%d%%%s，最多 %d 层，持续 %d 回合（再用刷新）" % [int(round(float(e["atk"]) * 100)), int(round(float(e["def"]) * 100)),
 					("、物理攻击附带 %d%% 法术伤害" % int(round(float(e["magic"]) * 100))) if e.has("magic") else "", int(e.get("max", 4)), int(e.get("turns", 3))])
 			"poison":
-				parts.append("中毒 +%d 层：每层每回合损失最大体力的 %d%%，最多 %d 层，%d 回合（无视抗性，再中刷新）" % [int(e.get("stacks", 1)), int(round(float(e["pct"]) * 100)), int(e.get("max", 5)), int(e.get("turns", 3))])
+				parts.append("中毒 +%d 层：每层每回合损失最大体力的 %d%%，最多 %d 层，%d 回合（吃法抗，再中刷新）" % [int(e.get("stacks", 1)), int(round(float(e["pct"]) * 100)), int(e.get("max", 5)), int(e.get("turns", 3))])
 			"cleanse":
 				parts.append("解除我军的异常状态（混乱、灼烧、AP 被夺）")
 			"counter":

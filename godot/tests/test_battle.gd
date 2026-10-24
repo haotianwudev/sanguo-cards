@@ -527,6 +527,7 @@ func test_skill_power_is_the_per_ap_rate_times_its_cost() -> void:
 
 func test_a_burn_takes_a_share_of_current_hp_and_never_kills() -> void:
 	var b := Battle.start("boar", party(["zhouyu"]), 5)
+	b.enemy["data"]["magic_resist"] = 0.0  # 野猪's 皮毛 is weak to fire: take the resist out, this is about the share and the floor
 	b.enemy["burn_turns"] = 3
 	b.enemy["burn_pct"] = 0.1
 	b.enemy["hp"] = 1000
@@ -729,11 +730,10 @@ func test_war_spirit_stacks_four_layers_lifts_attack_and_cuts_damage_then_fades(
 
 
 func test_poison_stacks_ignores_resists_and_can_kill() -> void:
-	## 贾诩 走毒: 毒计 adds a layer (up to 5), each layer takes 2% of the enemy's max HP a turn, whatever its armor
+	## 贾诩 走毒: 毒计 adds a layer (up to 5), each layer takes 2% of the enemy's max HP a turn, cut by its magic resist (shared with the fire)
 	var b := Battle.start("hulao", party(["jiaxu"]), 3)
 	b.db.battle["variance"] = 0.0
-	b.enemy["data"]["magic_resist"] = 0.8
-	b.enemy["data"]["phys_resist"] = 0.8
+	b.enemy["data"]["magic_resist"] = 0.5
 	var j := 1
 	check(b.leaders[j]["leader"]["card"]["id"] == "jiaxu", "贾诩 leads his unit")
 	check(b.skills_of(b.leaders[j]).map(func(s): return s["id"]).has("duji"), "贾诩 has 毒计")
@@ -743,7 +743,12 @@ func test_poison_stacks_ignores_resists_and_can_kill() -> void:
 	var hp0: int = b.enemy["hp"]
 	b.end_round()
 	var ticks: Array = b.take_events().filter(func(e): return e["t"] == "poison")
-	check(not ticks.is_empty() and ticks[0]["dmg"] == int(round(b.enemy["max_hp"] * 0.02)), "one layer: 2% of max HP, resists ignored")
+	check(not ticks.is_empty() and ticks[0]["dmg"] == int(round(b.enemy["max_hp"] * 0.02 * 0.5)), "one layer: 2% of max HP, halved by 50% magic resist")
+	b.enemy["data"]["magic_resist"] = -1.0
+	b.enemy["poison_turns"] = 3
+	b.end_round()
+	var weak: Array = b.take_events().filter(func(e): return e["t"] == "poison")
+	check(not weak.is_empty() and weak[0]["dmg"] == int(round(b.enemy["max_hp"] * 0.02 * 2.0)), "a magic weakness (藤甲) doubles it")
 	check(b.enemy["hp"] < hp0)
 	for _i in 6:
 		b.enemy["poison_turns"] = 3

@@ -339,6 +339,11 @@ func _crit_roll(side: String) -> float:
 	return mult if chance > 0.0 and rng.randf() < chance else 1.0
 
 
+func _dot_resist() -> float:
+	## 灼烧 and 中毒 share one resist, the enemy's magic resist (a weakness below 0 makes them bite harder); 宝物 pierce eats into it
+	return float(enemy["data"]["magic_resist"]) * (1.0 - minf(1.0, float(mods.get("pierce", 0.0))))
+
+
 func _dmg(base: float, kind: String, pierce := false) -> int:
 	## pierce (弓兵 穿甲): this hit ignores the enemy's resist altogether
 	var data: Dictionary = enemy["data"]
@@ -430,7 +435,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
 		"burn":  # 火攻: the enemy loses HP before each of its turns; one fire at a time — a new one keeps the bigger, restarts the count
 			# "pct": a share of the enemy's CURRENT HP each turn (so it eases off as it burns); "power": a flat amount,
-			# × the caster's attack. Resists never touch fire or poison (user rule). Either way the fire never takes the last HP.
+			# × the caster's attack. Fire and poison share the magic resist, taken when they tick (`_dot_resist`). Either way the fire never takes the last HP.
 			var bonus := float(mods.get("at", 0.0)) + float(mods.get("magic", 0.0))
 			enemy["burn_turns"] = maxi(enemy["burn_turns"], int(eff["turns"]))
 			if eff.has("pct"):
@@ -446,7 +451,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			enemy["poison_pct"] = maxf(float(enemy["poison_pct"]), float(eff["pct"]) * mult)
 			enemy["poison_turns"] = maxi(int(enemy["poison_turns"]), int(eff.get("turns", 3)))
 			_ev({"t": "poison_on", "layers": enemy["poison"], "turns": enemy["poison_turns"]})
-			return ["  %s 中毒 ×%d：每回合损失最大体力的 %d%%（%d 回合，无视抗性）" % [ename, enemy["poison"],
+			return ["  %s 中毒 ×%d：每回合损失最大体力的 %d%%（%d 回合）" % [ename, enemy["poison"],
 				int(round(enemy["poison_pct"] * enemy["poison"] * 100)), enemy["poison_turns"]]]
 		"counter":  # 反击: until the round ends, every hit the enemy lands is answered with ×power of this leader's attack
 			counters.append({"name": unit_name(u), "at": at * mult, "power": float(eff["power"])})
@@ -496,7 +501,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 	var log: Array = []
 	if enemy["poison_turns"] > 0:  # 中毒 first: it can finish the enemy off, unlike the fire
 		enemy["poison_turns"] -= 1
-		var pd: int = clampi(int(round(enemy["max_hp"] * enemy["poison_pct"] * enemy["poison"])), 1, enemy["hp"])
+		var pd: int = clampi(int(round(enemy["max_hp"] * enemy["poison_pct"] * enemy["poison"] * (1.0 - _dot_resist()))), 1, enemy["hp"])
 		enemy["hp"] -= pd
 		_ev({"t": "poison", "dmg": pd, "hp": enemy["hp"], "turns": enemy["poison_turns"]})
 		log.append("%s 毒发，损失 %d 体力" % [data["name"], pd])
@@ -508,7 +513,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 			return log
 	if enemy["burn_turns"] > 0:
 		enemy["burn_turns"] -= 1
-		var d: int = clampi(maxi(enemy["burn_dmg"], int(round(enemy["hp"] * enemy["burn_pct"]))), 0, enemy["hp"] - 1)  # never lethal
+		var d: int = clampi(int(round(maxf(float(enemy["burn_dmg"]), enemy["hp"] * enemy["burn_pct"]) * (1.0 - _dot_resist()))), 0, enemy["hp"] - 1)  # never lethal
 		enemy["hp"] -= d
 		_ev({"t": "burn", "dmg": d, "hp": enemy["hp"], "turns": enemy["burn_turns"]})
 		log.append("%s 灼烧结算，损失 %d 体力" % [data["name"], d])
