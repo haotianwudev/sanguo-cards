@@ -728,6 +728,27 @@ func test_war_spirit_stacks_four_layers_lifts_attack_and_cuts_damage_then_fades(
 	check(GameData.get_db().build_fighter("guojia")["skills"].has("xianji"), "郭嘉 has it as his skill")
 
 
+func test_war_spirit_adds_magic_to_physical_blows() -> void:
+	## 料敌先机: each layer of 战意 makes every physical blow carry 20% more as magic damage (20 / 40 / 60 / 80%)
+	var b := Battle.start("hulao", party(["guojia", "cav_n"]), 3)
+	b.db.battle["variance"] = 0.0
+	b.ap = 8
+	var g := b.leaders.find(b.leaders.filter(func(u): return u["leader"]["card"]["id"] == "guojia")[0])
+	b.act(g, "xianji")
+	check(is_equal_approx(b.buff["magic"], 0.2), "one layer: 20%")
+	b.take_events()
+	var c := b.leaders.find(b.leaders.filter(func(u): return u["leader"]["card"]["id"] == "cav_n")[0])
+	b.act(c, "madao")
+	var hits: Array = b.take_events().filter(func(e): return e["t"] == "hit")
+	var riders: Array = hits.filter(func(e): return e.get("rider", false))
+	check(not riders.is_empty() and riders.size() * 2 == hits.size(), "every physical hit brings a magic rider")
+	check(riders.all(func(e): return e["kind"] == "magic"), "the rider is magic")
+	for _i in 3:
+		b.leaders[g]["acted"] = false
+		b.act(g, "xianji")
+	check(is_equal_approx(b.buff["magic"], 0.8), "four layers: 80% (the cap)")
+
+
 func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
 	## user rule: an SSR card (general or lord card) brings three skills, one of them a once-only 大招 of 5+ AP that hits hard
 	var db := GameData.get_db()

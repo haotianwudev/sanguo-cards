@@ -40,7 +40,7 @@ var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: the ski
 var swaps_done := 0  # this round
 var _carry_extra: Dictionary = {}
 var _carry_uses: Dictionary = {}
-var buff := {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0}  # 战意 (军师): stacked layers, rounds left, summed attack bonus / damage cut
+var buff := {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0, "magic": 0.0}  # 战意 (军师): stacked layers, rounds left, summed attack bonus / damage cut / magic rider on physical blows
 var counters: Array = []  # 反击 (枪兵): [{name, at, power}] — each enemy hit this round is answered by every entry
 ## Structured events for the UI to animate, appended as things happen; the UI drains them with take_events().
 ## {"t": "act"|"hit"|"heal"|"guard"|"boost"|"stun"|"break"|"ap"|"defend"|"enemy_turn"|"enemy_stunned"|
@@ -379,6 +379,11 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				combo += 1
 				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": bool(eff.get("pierce", false)), "crit": crit})
 				log.append("  %s 受到 %d 伤害（%d 连击）%s" % [ename, d, combo, "[color=gold]　暴击！[/color]" if crit else ""])
+				if kind == "attack" and float(buff.get("magic", 0.0)) > 0.0 and enemy["hp"] > 0:  # 战意: each layer adds a share of the blow as magic (magic resist applies)
+					var md := _dmg(at * power * mult * (1.0 + bonus) * fire * float(buff["magic"]), "magic")
+					enemy["hp"] = maxi(0, enemy["hp"] - md)
+					_ev({"t": "hit", "dmg": md, "combo": combo, "kind": "magic", "hp": enemy["hp"], "pierce": false, "crit": false, "rider": true})
+					log.append("  [color=#c9a2ff]战意附带法术 %d[/color]" % md)
 			return log
 		"heal":
 			var amt := mini(int(round(at * float(eff["power"]) * mult * (1.0 + float(mods.get("heal", 0.0))))),
@@ -445,9 +450,11 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				buff["layers"] += 1
 				buff["atk"] += float(eff.get("atk", 0.0))
 				buff["def"] += float(eff.get("def", 0.0))
+				buff["magic"] = float(buff.get("magic", 0.0)) + float(eff.get("magic", 0.0))
 			buff["turns"] = int(eff.get("turns", 3))
 			_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
-			return ["  战意 ×%d：全军攻击 +%d%%，受到伤害 -%d%%（%d 回合）" % [buff["layers"], int(round(buff["atk"] * 100)), int(round(buff["def"] * 100)), buff["turns"]]]
+			return ["  战意 ×%d：全军攻击 +%d%%，受到伤害 -%d%%%s（%d 回合）" % [buff["layers"], int(round(buff["atk"] * 100)), int(round(buff["def"] * 100)),
+				("，物理攻击附带 %d%% 法术伤害" % int(round(buff["magic"] * 100))) if buff["magic"] > 0.0 else "", buff["turns"]]]
 		"cleanse":  # 解状态: confusion, the enemy's fire on us and the AP it drained are all lifted
 			var n := 0
 			for t in leaders:
@@ -662,7 +669,7 @@ func _start_round() -> Array:
 	if buff["turns"] > 0:
 		buff["turns"] -= 1
 		if buff["turns"] == 0:
-			buff = {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0}
+			buff = {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0, "magic": 0.0}
 	_ev({"t": "round", "n": round_no, "ap": ap})
 	var log: Array = ["─── 第 %d 回合 ───" % round_no]
 	for u in leaders:

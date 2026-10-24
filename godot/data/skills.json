@@ -1611,6 +1611,7 @@
           "type": "buff",
           "atk": 0.1,
           "def": 0.08,
+          "magic": 0.2,
           "max": 4,
           "turns": 3
         }
