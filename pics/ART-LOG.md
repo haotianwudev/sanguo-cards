@@ -1226,3 +1226,4 @@
 - [x] 2026-10-24 cg `b_majia` ← b_majia.jpg · ok
 - [x] 2026-10-24 cg `rc_fuchun` ← rc_fuchun.jpg · ok
 - [x] 2026-10-24 portrait `rc_fuchun` ← rc_fuchun_card.jpg · ok
+- [x] 2026-10-24 portrait `rc_fuchun` ← rc_fuchun.jpg · ok

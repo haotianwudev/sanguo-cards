@@ -3830,10 +3830,10 @@
       "src": "source/generals/rc_fuchun.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
-        0.45,
+        0.555,
         0.42
       ],
-      "head": 0.21
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
