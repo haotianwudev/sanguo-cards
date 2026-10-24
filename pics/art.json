@@ -3951,6 +3951,15 @@
         0.42
       ],
       "head": 0.24
+    },
+    "rc_yecheng": {
+      "src": "source/generals/rc_yecheng.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.52,
+        0.42
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -7226,6 +7235,10 @@
     },
     "rc_huainan_n": {
       "src": "source/cg/rc_huainan_n.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_yecheng": {
+      "src": "source/cg/rc_yecheng.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

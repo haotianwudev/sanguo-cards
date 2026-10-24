@@ -1996,6 +1996,21 @@ func test_dufuren_page_and_card_after_her_own_duanqiao() -> void:
 	check(s.owned.has("rc_huainan_n"), "新酒 hands over 杜夫人·新酒")
 
 
+func test_zhaoyun_mizhen_page_and_card_after_yice() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng"]
+	check_eq(Quests.chapter_page("yecheng", s).get("cg", ""), "rc_yecheng")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局十 · 枯井"]
+	check(not ids.call().has("s_rc_yecheng"), "枯井 is what opens this page's route: not enough")
+	s.flags.append("结局十二 · 遗策")
+	check(ids.call().has("s_rc_yecheng"), "遗策 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_yecheng")
+	check(s.owned.has("rc_yecheng"), "黎阳的船 hands over 赵云·黎阳的船")
+
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]

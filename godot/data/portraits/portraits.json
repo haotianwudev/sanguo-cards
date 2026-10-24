@@ -438,5 +438,6 @@
   "rc_xuzhou": {"file": "rc_xuzhou.jpg", "face": [0.47, 0.42], "head": 0.24},
   "rc_jiangdong": {"file": "rc_jiangdong.jpg", "face": [0.53, 0.42], "head": 0.24},
   "rc_menghu": {"file": "rc_menghu.jpg", "face": [0.53, 0.42], "head": 0.24},
-  "rc_huainan_n": {"file": "rc_huainan_n.jpg", "face": [0.48, 0.42], "head": 0.24}
+  "rc_huainan_n": {"file": "rc_huainan_n.jpg", "face": [0.48, 0.42], "head": 0.24},
+  "rc_yecheng": {"file": "rc_yecheng.jpg", "face": [0.52, 0.42], "head": 0.24}
 }

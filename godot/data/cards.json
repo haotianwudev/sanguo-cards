@@ -2473,6 +2473,19 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_yecheng": {
+      "name": "赵云·黎阳的船",
+      "rarity": "SR",
+      "troop": "spear",
+      "hp": 72,
+      "at": 96,
+      "skills": [
+        "qiangpo",
+        "changban"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",
