@@ -733,7 +733,7 @@ func test_north_chapter3_郭图_stands_in_the_way_of_the_escape_too() -> void:
 			break
 		Quests.move(q, s, opts[0]["id"])
 		path.append(opts[0]["id"])
-	for sid in ["hs_timeskip", "hs_breakout", "hs_guotu_fight", "hs_em1"]:
+	for sid in ["hs_timeskip", "hs_guotu", "hs_breakout", "hs_guotu_fight", "hs_em1"]:
 		check(path.has(sid), "the rescue line passes " + sid)
 
 
