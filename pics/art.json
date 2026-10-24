@@ -7001,6 +7001,22 @@
     "c3_valley": {
       "src": "source/cg/c3_valley.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c3_banner_sew": {
+      "src": "source/cg/c3_banner_sew.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_last_night": {
+      "src": "source/cg/c3_last_night.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_yudu": {
+      "src": "source/cg/c3_yudu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c3_chunyuqiong": {
+      "src": "source/cg/c3_chunyuqiong.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

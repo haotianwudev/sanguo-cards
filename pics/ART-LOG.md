@@ -1212,3 +1212,8 @@
 - [x] 2026-10-24 cg `c13_junyi` ← c13_junyi.jpg · ok
 - [x] 2026-10-24 cg `c14_dongchu` ← c14_dongchu.jpg · ok
 - [x] 2026-10-24 cg `c3_valley` ← c3_valley.jpg · ok
+- [x] 2026-10-24 cg `c3_banner_sew` ← c3_banner_sew.jpg · ok
+- [x] 2026-10-24 cg `c3_last_night` ← c3_last_night.jpg · ok
+- [x] 2026-10-24 cg `c3_yudu` ← c3_yudu.jpg · ok
+- [x] 2026-10-24 cg `c3_chunyuqiong` ← c3_chunyuqiong.jpg · ok
+- [x] 2026-10-24 cg `end_fuchao` ← end_fuchao.jpg · ok

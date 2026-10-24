@@ -1221,3 +1221,7 @@
 | `cg:c3_bandage` | source/cg/c3_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_wall_night` | source/cg/c3_wall_night.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_valley` | source/cg/c3_valley.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_banner_sew` | source/cg/c3_banner_sew.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_last_night` | source/cg/c3_last_night.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_yudu` | source/cg/c3_yudu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_chunyuqiong` | source/cg/c3_chunyuqiong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

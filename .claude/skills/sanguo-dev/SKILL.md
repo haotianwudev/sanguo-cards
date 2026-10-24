@@ -399,7 +399,7 @@ seal in a tavern (桥蕤 overhears); 孙坚 entrusts it to 吴夫人 and marches
 30 rounds), is the chapter boss at the last pass and, beaten, tells 吴夫人 孙坚 fell at 岘山; 袁术 himself is an unbeatable
 last stand (lose_goto, not the boss) → 结局一 · 玉碎 (吴夫人 smashes the seal on a stone and refuses capture — written restrained,
 never explicit; the hero covers 孙策 and 周瑜's escape and falls). A quest `ending` {title, text} shows an ending card
-and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
+(its `end_*` CG is always a quiet symbolic still life — objects left behind, **no people**, no blood; user rule) and returns to the title (new 周目); reached endings stay in `flags` across 周目. Other routes are the user's call — wait.
 Route B (once the badend 「结局一 · 玉碎」 has been reached — flag 「结局一 · 玉碎」 — with 董白 kept): 蔡文姬 can be saved, which ends chapter 3 early
 (「路线：守洛阳」). On route B 驻守洛阳 and 长安 are NOT separate quests any more: they are squares of the `yuxi` quest (requires 「路线：守洛阳」/「路线：长安」, recorded at `wenji_join` / `lijue_test`; route A's later squares carry `unless 路线：守洛阳`), with `title_overrides` (「第三章 · 驻守洛阳」「第三章 · 长安」) and `map_overrides` {map, from} swapping the map art and the first column drawn. **Rule: a route that goes on inside the same chapter is a branch in that chapter's quest, never a new quest/chapter-start card.** (`map_from`, `InterludeOverlay.same_chapter` handle the rest.) 驻守洛阳 (quest requires that flag): 蔡文姬's story (郭汜 escorting the officials' families,
 plundering), 周瑜's plan to rob his grain carts, 郭汜 fought off (no 蔡邕), 孙坚 holds 洛阳, the coalition disperses,
