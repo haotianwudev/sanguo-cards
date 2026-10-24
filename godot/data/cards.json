@@ -2361,6 +2361,32 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_dongui": {
+      "name": "关中·晨光车驾",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 90,
+      "at": 66,
+      "skills": [
+        "biyue",
+        "shuangchui"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_heishan": {
+      "name": "甄府·一起碾药",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 98,
+      "at": 66,
+      "skills": [
+        "jinzhen",
+        "luoshen"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

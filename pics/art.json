@@ -3870,6 +3870,24 @@
         0.42
       ],
       "head": 0.24
+    },
+    "rc_dongui": {
+      "src": "source/generals/rc_dongui.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.57,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_heishan": {
+      "src": "source/generals/rc_heishan.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.42
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -7109,6 +7127,14 @@
     },
     "rc_luoyang_n": {
       "src": "source/cg/rc_luoyang_n.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_dongui": {
+      "src": "source/cg/rc_dongui.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_heishan": {
+      "src": "source/cg/rc_heishan.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

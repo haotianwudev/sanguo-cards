@@ -434,6 +434,8 @@
 | `rc_taodong` | source/generals/rc_taodong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_yuxi` | source/generals/rc_yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_luoyang_n` | source/generals/rc_luoyang_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_dongui` | source/generals/rc_dongui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_heishan` | source/generals/rc_heishan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -1242,3 +1244,5 @@
 | `cg:rc_taodong` | source/cg/rc_taodong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_yuxi` | source/cg/rc_yuxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_luoyang_n` | source/cg/rc_luoyang_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_dongui` | source/cg/rc_dongui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_heishan` | source/cg/rc_heishan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

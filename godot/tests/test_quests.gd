@@ -1935,6 +1935,23 @@ func test_lvlingqi_page_and_card_need_her_own_bad_end() -> void:
 	check(s.owned.has("rc_luoyang_n"), "树枝筷子 hands over 甄府·树枝筷子")
 
 
+func test_zhangning_page_and_card_need_her_saved_and_shilv() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan"]
+	check_eq(Quests.chapter_page("heishan", s).get("cg", ""), "", "no 张宁 picture when she was not saved")
+	s.run_records.append("张宁：救下")
+	check_eq(Quests.chapter_page("heishan", s).get("cg", ""), "rc_heishan")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局二 · 覆巢"]
+	check(not ids.call().has("s_rc_heishan"), "覆巢 alone is not enough: it is what lets her join")
+	s.flags = ["结局二 · 覆巢", "结局六 · 失律"]
+	check(ids.call().has("s_rc_heishan"), "失律 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_heishan")
+	check(s.owned.has("rc_heishan"), "一起碾药 hands over 甄府·一起碾药")
+
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]
@@ -1947,4 +1964,18 @@ func test_wenji_page_and_card() -> void:
 	s.merit = 5
 	Quests.open_side(s, "s_rc_yuxi")
 	check(s.owned.has("rc_yuxi"))
+
+
+func test_diaochan_page_and_card() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春", "董白：留下"]
+	s.quests_cleared = ["prologue", "taodong", "yuxi", "dongui"]
+	check_eq(Quests.chapter_page("dongui", s).get("cg", ""), "", "貂蝉 only joins after 结局三 · 同归")
+	s.flags = ["结局三 · 同归"]
+	check_eq(Quests.chapter_page("dongui", s).get("cg", ""), "rc_dongui")
+	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_dongui"), "not before 结局五 · 恨海")
+	s.flags.append("结局五 · 恨海")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_dongui")
+	check(s.owned.has("rc_dongui"))
 

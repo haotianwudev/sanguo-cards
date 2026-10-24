@@ -96,11 +96,11 @@ Endings live in `godot/data/endings.json`; their titles are the flag lines (kept
 ## Who is on each page
 
 Done: 南1 `rc_fuchun` 吴夫人、孙权、孙尚香 (sewing on the 富春 porch) · 北1 `rc_wuji` 张夫人、小甄宓 (abacus, snowy
-night) · 南2 `rc_taodong` 董白 + 宫女 (石头剪刀布 by the river; needs 董白：留下; gift after 结局三 · 同归, her own; dream = the 长安 snow outside the gate, her hammers and a broken-stringed 琴). · 南3 `rc_yuxi` 蔡文姬 teaching 董白 to write her name under the peach blossoms (page needs 董白：留下 + 结局一 · 玉碎 = 蔡文姬 joined; gift also 结局三 · 同归, hers). · 北2 `rc_luoyang_n` 吕玲绮 practising twig chopsticks on a stone, 小甄宓 correcting her grip (甄府 back porch, autumn moon; gift after 结局四 · 绝罚, hers; dream = the fallen 斑马旗 and her 画戟 in the 太行 snow; demo `--demo=recap --north`).
+night) · 南2 `rc_taodong` 董白 + 宫女 (石头剪刀布 by the river; needs 董白：留下; gift after 结局三 · 同归, her own; dream = the 长安 snow outside the gate, her hammers and a broken-stringed 琴). · 南3 `rc_yuxi` 蔡文姬 teaching 董白 to write her name under the peach blossoms (page needs 董白：留下 + 结局一 · 玉碎 = 蔡文姬 joined; gift also 结局三 · 同归, hers). · 南4 `rc_dongui` dawn after fleeing 长安: 小皇帝 asleep on 董白's shoulder, 貂蝉 laughing on the cart shaft (page needs 结局三 · 同归 = 貂蝉 joined + 董白：留下; gift also 结局五 · 恨海, 貂蝉's). · 北2 `rc_luoyang_n` 吕玲绮 practising twig chopsticks on a stone, 小甄宓 correcting her grip (甄府 back porch, autumn moon; gift after 结局四 · 绝罚, hers; dream = the fallen 斑马旗 and her 画戟 in the 太行 snow; demo `--demo=recap --north`).
 
 Plan for the rest (check each against the chapter text; ask only if the chapter has no obvious warm pair):
 北3 张宁 grinding herbs with 甄宓
-in her shop · 南4 貂蝉 (user's pick; e.g. with 董白 over tea, 「白妹妹」) · 北4 郑好、姜巧 cooking breakfast, 太史慈 · 南5 黄忠 and 黄叙 ·
+in her shop · 北4 郑好、姜巧 cooking breakfast, 太史慈 · 南5 貂蝉 again (user's pick) ·
 北5 甄宓 and 赵云 sharing a 徐州 烧饼 · 南6 大乔、小乔 before the double wedding · 北6 杜夫人 brewing, 郭嘉 sniffing ·
 南7 孙策 and 大乔 · 北7 赵云 and 糜贞 · 南8 吴夫人 with grown 孙权、孙尚香 (an echo of 南1) · 北8 郭嘉 and 郭照 ·
 南9 祝融、孟获 · 北9 马超、马云騄、马岱 by the horses · 南10 吴苋 · 北10 grown 甄宓 cooking for the army, 庞统 ·
