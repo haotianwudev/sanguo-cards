@@ -1,7 +1,7 @@
 {
   "_comment": "？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, keyed by the chapter (quest id) after which they open. They are read from 整备 (the ？ button) or the chapter recap, any time after; unread ones show as a big ？. Each: id (unique), title, portraits, text (story.json line style: @speaker / {lord}), optional cg, requires / unless (a recorded line, like interludes), cost (战功 to open it, default `cost` below) and reward (what opening it gives). Use only people who are in the party by the end of that chapter; anyone who joins by a choice needs that choice's line in requires.",
-  "cost": 5,
-  "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 5 — like a draw; a 点化 is 10); a story can still set its own `cost`; reading it again is free",
+  "cost": 10,
+  "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 10 — like a 点化; a draw is 5); a story can still set its own `cost`; reading it again is free",
   "_reward": "every story names its reward, paid when it is opened: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
   "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless (a line or a list of lines, all must hold) pick the route for the shared first chapter, or need the people in it (董白：留下).",
   "chapters": {
@@ -239,18 +239,6 @@
         "后来，郭图因为劝降有功，当上了冀州的督粮官。他上任以后翻的第一本账，是无极甄家的。",
         "至于韩馥——他让出了冀州，却总觉得袁绍要杀他。有一天，袁绍的使者在张邈耳边说了几句悄悄话，他起身去了后院，再也没有回来。",
         "@lord {lord}（内心）：……一个人把整个冀州让了出去，换来的是一辈子的害怕。郭图那本账，原来是从这里翻开的。"
-      ]},
-      {"id": "b_yijing", "title": "易京", "portraits": ["gongsunzan"], "requires": "界桥：救下公孙瓒", "reward": {"cards": ["gongsunzan"]}, "cg": "b_yijing", "text": [
-        "界桥一战之后，公孙瓒退回了幽州。",
-        "他在易水边上修了一座城，叫易京。城外挖了十道壕沟，壕沟里面堆了几百座土山，每座土山上都盖着高楼。",
-        "他自己住在最高的那座楼里，楼下囤了三百万斛粮食。",
-        "@gongsunzan 公孙瓒：「兵法说，百楼不攻。等到天下人都打累了、饿死了，我还有三百万斛。」",
-        "有一天，他在楼上听人说起界桥救他的那支兵。领头的是个商人，身边有个使枪的白马将军，常山人。",
-        "@gongsunzan 公孙瓒：「常山人……当年我的白马义从从常山城外过，路边好多小孩子追着看。里头说不定就有他。」",
-        "他沉默了很久。",
-        "@gongsunzan 公孙瓒：「那时候我要是停下马，问一句那孩子叫什么……」",
-        "他没有说完。楼外刮起了风，十道壕沟里的水，一道一道地起了波纹。",
-        "@lord {lord}（内心）：我记得他的结局：被袁绍围在楼里，最后放了一把火。……三百万斛粮食，喂不饱一个不肯出门的人。"
       ]},
       {"id": "s_lvshu", "title": "军规第十八条", "portraits": ["xiahoulan", "zhaoyun"], "requires": "军纪：严明", "reward": {"upgrade": {"xiahoulan": 2}}, "cg": "ss_lvshu", "text": [
         "夏侯兰熬了三个通宵，写出一本军规，一共十七条。",
@@ -655,6 +643,32 @@
         "@guojia 郭嘉：「……为什么是叔？」",
         "@zhangyan 张燕：「叔可以随便喝，弟弟要听大哥的。」",
         "郭嘉想了一会儿，觉得很有道理，当场认了。从那以后，黑山的人见了郭嘉，都叫他「郭四叔」。"
+      ]},
+      {"id": "b_yijing", "title": "易京", "portraits": ["gongsunzan", "tianyu"], "requires": "北线：夺邺城", "reward": {"cards": ["gongsunzan"]}, "cg": "b_yijing", "text": [
+        "界桥一战之后，公孙瓒退回了幽州。",
+        "他在易水边上修了一座城，叫易京。城外挖了十道壕沟，壕沟里面堆了几百座土山，每座土山上都盖着高楼。",
+        "他自己住在最高的那座楼里，楼下囤了三百万斛粮食。",
+        "@gongsunzan 公孙瓒：「兵法说，百楼不攻。等到天下人都打累了、饿死了，我还有三百万斛。」",
+        "有一天，他在楼上听人说起界桥救他的那支兵。领头的是个商人，身边有个使枪的白马将军，常山人。",
+        "@gongsunzan 公孙瓒：「常山人……当年我的白马义从从常山城外过，路边好多小孩子追着看。里头说不定就有他。」",
+        "他沉默了很久。",
+        "@gongsunzan 公孙瓒：「那时候我要是停下马，问一句那孩子叫什么……」",
+        "他没有说完。楼外刮起了风，十道壕沟里的水，一道一道地起了波纹。",
+        "【建安三年 · 冬】袁绍的兵围了易京一年。",
+        "土山上的高楼一座一座地倒了。不是攻下来的——袁绍的兵在地底下挖洞，挖到楼脚，拿木头撑住，再一把火烧了木头。",
+        "公孙瓒站在最高那座楼上，听着脚底下咚、咚地响，知道他们挖到这里了。",
+        "田豫跪在楼梯口。",
+        "@tianyu 田豫：「将军，北门还有一条路。白马还剩三百骑，冲得出去。」",
+        "公孙瓒没有回头。",
+        "@gongsunzan 公孙瓒：「冲出去，去哪？」",
+        "@gongsunzan 公孙瓒：「我在界桥跑过一回。跑了二里地，摔在土里，回头一看，身边一个人都没有。」",
+        "@gongsunzan 公孙瓒：「是一个不认识的人，把我从土里拉起来的。」",
+        "他把腰上的佩剑解下来，扔给田豫。",
+        "@gongsunzan 「剩下的兄弟，去找北海那个人。……告诉他，伯珪这回没跑。」",
+        "田豫下了楼。他走到北门的时候，回头看了一眼。",
+        "最高那座楼烧起来了。火是从楼顶往下烧的。",
+        "@lord {lord}（内心）：田豫说这些的时候，一直低着头。三百万斛粮食，最后一斛也没吃完。",
+        "@lord {lord}（内心）：……那天在界桥，我要是多跟他说两句话就好了。说什么都行。"
       ]}
     ],
     "jiangdong": [

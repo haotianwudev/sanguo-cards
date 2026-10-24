@@ -34,7 +34,7 @@ var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one
 var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
 var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 once that chapter is done: {id, title, portraits, text, cg, requires, unless, reward}]
 var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the chapter-end page's picture (its card comes from a ？小故事)
-var side_cost := 5  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
+var side_cost := 10  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
 var ui: Dictionary
 
 
@@ -193,7 +193,7 @@ func _load(dir: String) -> void:
 	if FileAccess.file_exists(dir + "/side_stories.json"):
 		var ss: Dictionary = read_json(dir + "/side_stories.json")
 		side_stories = ss.get("after", {})
-		side_cost = int(ss.get("cost", 5))
+		side_cost = int(ss.get("cost", 10))
 		chapter_pages = ss.get("chapters", {})
 		for qid in chapter_pages:
 			for pg in chapter_pages[qid]:

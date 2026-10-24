@@ -1817,10 +1817,10 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine"]), "the south birth gets only the south prologue stories")
 	s.quests_cleared = ["prologue"]
 	s.grant_card("sunce")
-	s.merit = 4
-	check(not Quests.open_side(s, "s_jiujiu")["ok"], "5 战功 to open: 4 is not enough")
+	s.merit = 9
+	check(not Quests.open_side(s, "s_jiujiu")["ok"], "10 战功 to open: 9 is not enough")
 	check_eq(Quests.side_unread(s), south.size())
-	s.merit = 7
+	s.merit = 12
 	var before := s.copies("sunce")
 	var r := Quests.open_side(s, "s_jiujiu")
 	check(r["ok"] and r["got"] != "", "opened: %s" % r)
@@ -1828,7 +1828,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	check_eq(s.copies("sunce"), before + 2, "九九歌 点化 孙策 +2")
 	check_eq(Quests.open_side(s, "s_jiujiu")["got"], "", "a re-read in its chapter is free and gives nothing")
 	check_eq(s.merit, 2)
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_firstwine")  # 酒囊
 	check(s.kept_relics.has("jiunang") and s.relics.has("jiunang"), "a 宝物 stays for the rest of the 周目")
 
@@ -1839,9 +1839,9 @@ func test_a_held_relic_pays_the_cost_back() -> void:
 	s.quests_cleared = ["prologue"]
 	s.relics = ["jiunang"]
 	s.kept_relics = ["jiunang"]
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_firstwine")
-	check_eq(s.merit, 5, "already had 酒囊: the 5 战功 come back")
+	check_eq(s.merit, 10, "already had 酒囊: the 10 战功 come back")
 
 
 func test_every_side_story_has_a_reward() -> void:
@@ -1865,11 +1865,11 @@ func test_a_side_story_can_hand_over_a_card() -> void:
 	var s := SaveData.create()
 	s.flags = ["出生：冀州无极"]
 	s.quests_cleared = ["prologue", "luoyang_n", "heishan"]
-	s.merit = 5
+	s.merit = 10
 	check(not s.owned.has("hanfu"))
 	var r := Quests.open_side(s, "b_hanfu")
 	check(s.owned.has("hanfu") and str(r["got"]).contains("韩馥"), "韩馥的印 hands over 韩馥: %s" % r)
-	check_eq(s.merit, 0, "every story costs 5")
+	check_eq(s.merit, 0, "every story costs 10")
 
 
 func test_the_chapter_page_card_comes_from_a_story_after_the_next_bad_end() -> void:
@@ -1881,7 +1881,7 @@ func test_the_chapter_page_card_comes_from_a_story_after_the_next_bad_end() -> v
 	check(not ids.call().has("s_rc_fuchun"), "not before 结局一 · 玉碎")
 	s.flags = ["结局一 · 玉碎"]
 	check(ids.call().has("s_rc_fuchun"), "opens once 玉碎 has been reached")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_fuchun")
 	check(s.owned.has("rc_fuchun"), "针脚 hands over 富春·慈母与儿女")
 	var n := SaveData.create()
@@ -1898,7 +1898,7 @@ func test_the_north_first_page_and_its_card_after_fuchao() -> void:
 	check_eq(Quests.chapter_page("prologue", s).get("cg", ""), "rc_wuji")
 	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_wuji"), "not before 结局二 · 覆巢")
 	s.flags = ["结局二 · 覆巢"]
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_wuji")
 	check(s.owned.has("rc_wuji"), "雪夜算盘 hands over 无极·商母与幼女")
 
@@ -1915,7 +1915,7 @@ func test_dongbai_page_and_card_need_her_kept_and_her_own_bad_end() -> void:
 	check(not ids.call().has("s_rc_taodong"), "another bad end is not hers")
 	s.flags = ["结局三 · 同归"]
 	check(ids.call().has("s_rc_taodong"), "both lines hold: open")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_taodong")
 	check(s.owned.has("rc_taodong"))
 
@@ -1930,7 +1930,7 @@ func test_lvlingqi_page_and_card_need_her_own_bad_end() -> void:
 	check(not ids.call().has("s_rc_luoyang_n"), "another bad end is not hers")
 	s.flags = ["结局四 · 绝罚"]
 	check(ids.call().has("s_rc_luoyang_n"), "绝罚 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_luoyang_n")
 	check(s.owned.has("rc_luoyang_n"), "树枝筷子 hands over 吕玲绮·树枝筷子")
 
@@ -1947,7 +1947,7 @@ func test_zhangning_page_and_card_need_her_saved_and_shilv() -> void:
 	check(not ids.call().has("s_rc_heishan"), "覆巢 alone is not enough: it is what lets her join")
 	s.flags = ["结局二 · 覆巢", "结局六 · 失律"]
 	check(ids.call().has("s_rc_heishan"), "失律 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_heishan")
 	check(s.owned.has("rc_heishan"), "一起碾药 hands over 张宁·一起碾药")
 
@@ -1962,7 +1962,7 @@ func test_zheng_jiang_page_and_card_need_them_reconciled_and_shilv() -> void:
 	check(not ids.call().has("s_rc_beihai"), "绝罚 is what reconciles them: not enough")
 	s.flags = ["结局四 · 绝罚", "结局六 · 失律"]
 	check(ids.call().has("s_rc_beihai"), "失律 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_beihai")
 	check(s.owned.has("rc_beihai"), "双凤早饭 hands over 郑姜·双凤早饭")
 
@@ -1977,7 +1977,7 @@ func test_zhangning_new_year_page_and_card_after_duanqiao() -> void:
 	check(not ids.call().has("s_rc_xuzhou"), "her own bad ends come before this page: not enough")
 	s.flags.append("结局八 · 断桥")
 	check(ids.call().has("s_rc_xuzhou"), "断桥 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_xuzhou")
 	check(s.owned.has("rc_xuzhou"), "除夕香囊 hands over 张宁·除夕香囊")
 
@@ -1991,7 +1991,7 @@ func test_dufuren_page_and_card_after_her_own_duanqiao() -> void:
 	check(not ids.call().has("s_rc_huainan_n"), "not before 断桥")
 	s.flags = ["结局八 · 断桥"]
 	check(ids.call().has("s_rc_huainan_n"), "her own 断桥 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_huainan_n")
 	check(s.owned.has("rc_huainan_n"), "新酒 hands over 杜夫人·新酒")
 
@@ -2006,7 +2006,7 @@ func test_zhaoyun_mizhen_page_and_card_after_yice() -> void:
 	check(not ids.call().has("s_rc_yecheng"), "枯井 is what opens this page's route: not enough")
 	s.flags.append("结局十二 · 遗策")
 	check(ids.call().has("s_rc_yecheng"), "遗策 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_yecheng")
 	check(s.owned.has("rc_yecheng"), "黎阳的船 hands over 赵云·黎阳的船")
 
@@ -2023,7 +2023,7 @@ func test_guojia_page_needs_him_alive_and_the_card_waits_for_duanxian() -> void:
 	check(not ids.call().has("s_rc_longhu"), "遗策 is what keeps him alive: not enough")
 	s.flags.append("结局十四 · 断弦")
 	check(ids.call().has("s_rc_longhu"), "断弦 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_longhu")
 	check(s.owned.has("rc_longhu"), "最后一个葫芦 hands over 郭嘉·最后一个葫芦")
 
@@ -2040,7 +2040,7 @@ func test_mayunlu_page_needs_the_ma_family_and_the_card_waits_for_luoshang() -> 
 	check(not ids.call().has("s_rc_xiliang"), "断弦 is what saves the 马 family: not enough")
 	s.flags.append("结局十六 · 洛殇")
 	check(ids.call().has("s_rc_xiliang"), "洛殇 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_xiliang")
 	check(s.owned.has("rc_xiliang"), "那只羊 hands over 马云騄·那只羊")
 
@@ -2057,7 +2057,7 @@ func test_zhenmi_page_needs_hulao_broken_and_the_card_waits_for_zhumie() -> void
 	check(not ids.call().has("s_rc_sanfang"), "洛殇 is what brings 庞统: not enough")
 	s.flags.append("结局十八 · 烛灭")
 	check(ids.call().has("s_rc_sanfang"), "烛灭 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_sanfang")
 	check(s.owned.has("rc_sanfang"), "热汤面 hands over 甄宓·热汤面")
 
@@ -2072,7 +2072,7 @@ func test_the_hero_himself_closes_the_north_and_his_lord_card_waits_for_guandu()
 	check(not ids.call().has("s_rc_tianqing"), "not before the north's own ending")
 	s.flags.append("北线结局 · 官渡")
 	check(ids.call().has("s_rc_tianqing"), "官渡 opens it")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_tianqing")
 	check(s.lord_forms.has("lord_north_snow"), "初雪 hands over the lord card 主公·初雪")
 
@@ -2087,7 +2087,7 @@ func test_wenji_page_and_card() -> void:
 	check_eq(Quests.chapter_page("yuxi", s).get("cg", ""), "rc_yuxi")
 	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_yuxi"), "not before her own 结局三 · 同归")
 	s.flags.append("结局三 · 同归")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_yuxi")
 	check(s.owned.has("rc_yuxi"))
 
@@ -2101,7 +2101,7 @@ func test_diaochan_page_and_card() -> void:
 	check_eq(Quests.chapter_page("dongui", s).get("cg", ""), "rc_dongui")
 	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_dongui"), "not before 结局五 · 恨海")
 	s.flags.append("结局五 · 恨海")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_dongui")
 	check(s.owned.has("rc_dongui"))
 
@@ -2114,7 +2114,7 @@ func test_diaochan_jingxiang_page_and_card() -> void:
 	s.flags = ["结局三 · 同归"]
 	check_eq(Quests.chapter_page("jingxiang", s).get("cg", ""), "rc_jingxiang")
 	s.flags.append("结局五 · 恨海")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_jingxiang")
 	check(s.owned.has("rc_jingxiang"))
 
@@ -2127,7 +2127,7 @@ func test_erqiao_page_and_card() -> void:
 	s.run_records.append("二乔：解救")
 	check_eq(Quests.chapter_page("huainan_s", s).get("cg", ""), "rc_huainan_s")
 	s.flags = ["结局七 · 深锁"]
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_huainan_s")
 	check(s.owned.has("rc_huainan_s"))
 
@@ -2142,12 +2142,12 @@ func test_sunce_daqiao_and_zhouyu_xiaoqiao_pages_and_cards() -> void:
 	check(ids.call().has("s_sunce_baozi"), "孙策 alone is an ordinary story now")
 	check(not ids.call().has("s_rc_ceqiao"), "the pair card waits for 结局九 · 匹夫")
 	s.flags = ["结局九 · 匹夫", "结局十一 · 曲误"]
-	s.merit = 10
+	s.merit = 20
 	Quests.open_side(s, "s_rc_ceqiao")
 	Quests.open_side(s, "s_sunce_baozi")
 	check(s.owned.has("rc_ceqiao") and s.owned.has("rc_jiangdong"))
 	s.quests_cleared.append("menghu")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_yuqiao")
 	check(s.owned.has("rc_yuqiao"))
 
@@ -2160,12 +2160,12 @@ func test_shangxiang_wuxian_and_zhurong() -> void:
 	s.flags = ["孙权、孙尚香：入队", "吴苋：入队", "祝融：入队", "结局十三 · 香烬", "结局十五 · 算尽"]
 	check_eq(Quests.chapter_page("tianfu", s).get("cg", ""), "rc_tianfu")
 	check_eq(Quests.chapter_page("guanzhong", s).get("cg", ""), "rc_guanzhong")
-	s.merit = 10
+	s.merit = 20
 	Quests.open_side(s, "s_rc_tianfu")
 	Quests.open_side(s, "s_zhurong")
 	check(s.owned.has("rc_tianfu") and s.owned.has("sx_zhurong"))
 	s.quests_cleared.append("guanzhong")
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_guanzhong")
 	check(s.owned.has("rc_guanzhong"))
 
@@ -2179,7 +2179,7 @@ func test_a_story_shows_in_one_chapter_only_and_stays_read_across_laps() -> void
 	s.quests_cleared.append("taodong")
 	check(not ids.call(s).has("s_jiujiu"), "missed: gone once the next chapter is done")
 	check(ids.call(s).has("s_zumao"))
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_zumao")
 	s.quests_cleared.append("yuxi")
 	check(not ids.call(s).has("s_zumao"), "read or not, it is gone once its chapter window has passed")
@@ -2187,7 +2187,7 @@ func test_a_story_shows_in_one_chapter_only_and_stays_read_across_laps() -> void
 	check(n.side_seen.has("s_zumao") and not n.side_read.has("s_zumao"), "remembered as 看过 in the next 周目")
 	n.run_records = ["出生：江东富春"]
 	n.quests_cleared = ["prologue", "taodong"]
-	n.merit = 5
+	n.merit = 10
 	check(Quests.open_side(n, "s_zumao")["got"] != "" and n.merit == 0, "back in its chapter: paid and rewarded again")
 
 
@@ -2198,7 +2198,7 @@ func test_south_last_page_is_the_hero_and_his_lord_card() -> void:
 	check_eq(Quests.chapter_page("luoyang_s", s).get("cg", ""), "rc_luoyang_s")
 	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_luoyang_s"), "not before 南线结局 · 赤壁")
 	s.flags = ["南线结局 · 赤壁"]
-	s.merit = 5
+	s.merit = 10
 	Quests.open_side(s, "s_rc_luoyang_s")
 	check(s.lord_forms.has("lord_south_river"), "洛水夜船 hands over the lord card 主公·洛水夜船")
 
