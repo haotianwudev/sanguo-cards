@@ -1231,3 +1231,7 @@
 - [x] 2026-10-24 portrait `rc_wuji` ← rc_wuji_card.jpg · ok
 - [x] 2026-10-24 cg `rc_taodong` ← rc_taodong.jpg · ok
 - [x] 2026-10-24 portrait `rc_taodong` ← rc_taodong_card.jpg · ok
+- [x] 2026-10-24 cg `rc_yuxi` ← rc_yuxi.jpg · ok
+- [x] 2026-10-24 cg `rc_luoyang_n` ← rc_luoyang_n.jpg · ok
+- [x] 2026-10-24 portrait `rc_yuxi` ← rc_yuxi_card.jpg · ok
+- [x] 2026-10-24 portrait `rc_luoyang_n` ← rc_luoyang_n_card.jpg · ok

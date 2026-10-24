@@ -2335,6 +2335,32 @@
       "pool": false,
       "scope": "south"
     },
+    "rc_yuxi": {
+      "name": "洛阳·文姬教字",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 94,
+      "at": 70,
+      "skills": [
+        "hujia",
+        "shuangchui"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_luoyang_n": {
+      "name": "甄府·树枝筷子",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "hp": 70,
+      "at": 96,
+      "skills": [
+        "huaji",
+        "luoshen"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

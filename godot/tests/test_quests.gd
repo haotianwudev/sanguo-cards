@@ -1919,3 +1919,32 @@ func test_dongbai_page_and_card_need_her_kept_and_her_own_bad_end() -> void:
 	Quests.open_side(s, "s_rc_taodong")
 	check(s.owned.has("rc_taodong"))
 
+
+func test_lvlingqi_page_and_card_need_her_own_bad_end() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n"]
+	check_eq(Quests.chapter_page("luoyang_n", s).get("cg", ""), "rc_luoyang_n")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局二 · 覆巢"]
+	check(not ids.call().has("s_rc_luoyang_n"), "another bad end is not hers")
+	s.flags = ["结局四 · 绝罚"]
+	check(ids.call().has("s_rc_luoyang_n"), "绝罚 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_luoyang_n")
+	check(s.owned.has("rc_luoyang_n"), "树枝筷子 hands over 甄府·树枝筷子")
+
+
+func test_wenji_page_and_card() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春", "董白：留下"]
+	s.quests_cleared = ["prologue", "taodong", "yuxi"]
+	check_eq(Quests.chapter_page("yuxi", s).get("cg", ""), "", "no 蔡文姬 on the first way through")
+	s.flags = ["结局一 · 玉碎"]
+	check_eq(Quests.chapter_page("yuxi", s).get("cg", ""), "rc_yuxi")
+	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_yuxi"), "not before her own 结局三 · 同归")
+	s.flags.append("结局三 · 同归")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_yuxi")
+	check(s.owned.has("rc_yuxi"))
+

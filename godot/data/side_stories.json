@@ -6,7 +6,9 @@
   "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless (a line or a list of lines, all must hold) pick the route for the shared first chapter, or need the people in it (董白：留下).",
   "chapters": {
     "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}, {"requires": "出生：冀州无极", "cg": "rc_wuji"}],
-    "taodong": [{"requires": "董白：留下", "cg": "rc_taodong"}]
+    "taodong": [{"requires": "董白：留下", "cg": "rc_taodong"}],
+    "yuxi": [{"requires": ["董白：留下", "结局一 · 玉碎"], "cg": "rc_yuxi"}],
+    "luoyang_n": [{"cg": "rc_luoyang_n"}]
   },
   "after": {
     "prologue": [
@@ -139,6 +141,26 @@
       ]}
     ],
     "luoyang_n": [
+      {"id": "s_rc_luoyang_n", "title": "树枝筷子", "portraits": ["lvlingqi", "zhenmi_young"], "requires": "结局四 · 绝罚", "reward": {"cards": ["rc_luoyang_n"]}, "cg": "rc_luoyang_n", "text": [
+        "你做了一个梦。",
+        "梦里是太行山口，下着大雪。一面黑白条纹的大旗倒在雪里，旁边插着一杆画戟，戟杆上缠着一根红发带。",
+        "你醒过来的时候，月亮挂在窗棂上。你不记得梦里还有谁，只记得那根发带，红得扎眼。",
+        "你披上衣服，走到后院。",
+        "廊下挂着一盏灯笼。吕玲绮盘腿坐在台阶上，手里捏着两根树枝，正对着一颗石子较劲。",
+        "甄宓跪在她旁边，一只手捧着栗子糕，一只手扳着她的手指。",
+        "@zhenmi_young 甄宓：「不对不对，姐姐，这根不动，动上面那根。……对！夹！」",
+        "石子夹起来半寸，又掉了下去。",
+        "@lvlingqi 吕玲绮：「……这比画戟难多了。」",
+        "@zhenmi_young 甄宓：「夹起来一颗，我就给你一块栗子糕。我娘说的，有功就要赏。」",
+        "吕玲绮咬着嘴唇，又试了一回。这一回，石子稳稳地离开了台阶。",
+        "@zhenmi_young 甄宓：「夹起来了！」",
+        "她把栗子糕塞进吕玲绮嘴里。吕玲绮鼓着腮帮子，笑得像个小孩。",
+        "你站在柿子树后面，没有走过去。",
+        "@lord {lord}（内心）：……不知道为什么，我想把这一幕记住。她没穿甲，没拿戟，就是一个在学用筷子的姑娘。",
+        "@lord {lord}（内心）：太行的雪还没下。至少今晚，她只用跟一颗石子较劲。",
+        "吕玲绮一抬头，看见了你，树枝一抖，石子掉回了台阶上。",
+        "@lvlingqi 吕玲绮：「……看什么看！你、你过来，夹一颗给我看看！」"
+      ]},
       {"id": "s_lingqi_meal", "title": "吃饭的规矩", "portraits": ["lvlingqi", "zhenmi_young", "zhangfuren"], "reward": {"upgrade": {"lvlingqi": 2}}, "text": [
         "吕玲绮第一次在甄家吃饭，一手抓饼，一手抓肉，三口一碗，吃得像在行军。",
         "满桌的人都停下了筷子。",
@@ -215,6 +237,26 @@
       ]}
     ],
     "yuxi": [
+      {"id": "s_rc_yuxi", "title": "写名字", "portraits": ["caiwenji", "dongbai"], "requires": ["董白：留下", "结局一 · 玉碎", "结局三 · 同归"], "reward": {"cards": ["rc_yuxi"]}, "cg": "rc_yuxi", "text": [
+        "你做了一个梦。",
+        "梦里是长安，下着那年最后一场雪。雪地上有一把琴，弦全断了；旁边扔着一对铜锤。雪地上的脚印，只有进去的，没有出来的。",
+        "你醒过来的时候，窗外的桃花开了。屋里很暖，你却出了一身冷汗。",
+        "你走到廊下。",
+        "廊下摆着一张矮书案。蔡文姬跪坐在董白身后，握着她的手，一笔一画地教她写字。",
+        "@caiwenji 蔡文姬：「这是『董』。草字头，下面一个『重』。」",
+        "@dongbai 董白：「……怎么这么多笔！我爷爷的姓，怎么这么麻烦！」",
+        "@caiwenji 蔡文姬：「那先学『白』。五笔，比你抡一回锤子还快。」",
+        "董白攥着笔，咬着嘴唇，写了一个歪歪扭扭的「白」。写完，她盯着看了半天，偷偷笑了一下。",
+        "蔡文姬转身去调琴弦。董白趁她不注意，在纸角上又写了两个字，写完赶紧用袖子盖住。",
+        "袖子上蹭了一道墨，脸上也蹭了一道。",
+        "你站在门口，没有走进去。",
+        "@lord {lord}（内心）：……不知道为什么，我想把这一幕记住。一个教，一个学；一张琴，一对锤子。",
+        "@lord {lord}（内心）：那场雪还没来。在它来之前，我想多看一会儿。",
+        "蔡文姬抬起头，看见了你，又低头看了看董白的袖子，抿嘴一笑。",
+        "@caiwenji 蔡文姬：「将军方才写了两个字，说是要送人的。」",
+        "@dongbai 董白：「我、我没有！你别听她的！」",
+        "董白一把把纸揉成团，塞进了怀里。你后来再也没有见过那张纸。"
+      ]},
       {"id": "s_wuziqi", "title": "五子棋", "portraits": ["zhujun"], "reward": {"relics": ["bazhen"]}, "text": [
         "朱儁老将军闲下来就要下围棋，营里没人下得过他。",
         "他拉着你坐下。你看着那张十九路的棋盘，想了想。",
