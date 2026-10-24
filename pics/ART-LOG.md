@@ -1145,3 +1145,9 @@
 - [ ] 2026-10-20 cg `c2_ln_liubei` ← new1.jpg · ok
 - [ ] 2026-10-23 cg `c2_daofa` ← c2_daofa.jpg · ok
 - [ ] 2026-10-23 battle `n11_a_huangzhong` ← n11_a_huangzhong_v2.jpg · ok
+- [ ] 2026-10-23 battle `n12d_huangzhong` ← n12d_huangzhong.jpg · ok
+- [ ] 2026-10-23 battle `m10_wangping` ← m10_wangping.jpg · ok
+- [ ] 2026-10-23 battle `m10_zhangxiu` ← m10_zhangxiu.jpg · ok
+- [ ] 2026-10-23 battle `m11_liubei` ← m11_liubei.jpg · ok
+- [ ] 2026-10-23 battle `m9_kuimen` ← m9_kuimen.jpg · ok
+- [ ] 2026-10-23 battle `n4_houcheng` ← n4_houcheng.jpg · ok
