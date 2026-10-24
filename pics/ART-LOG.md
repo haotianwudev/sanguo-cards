@@ -1165,3 +1165,9 @@
 - [x] 2026-10-23 battle `jx_ganning` ← jx_ganning.jpg · ok
 - [ ] 2026-10-23 battle `m11_bazhen` ← m11_bazhen_v2.jpg · ok
 - [ ] 2026-10-23 battle `m11_liubei` ← m11_liubei_v2.jpg · ok
+- [ ] 2026-10-23 battle `m8_kongming` ← m8_kongming.jpg · ok
+- [ ] 2026-10-23 battle `m8_han_baier` ← m8_han_baier.jpg · ok
+- [ ] 2026-10-23 battle `m8_chendao` ← m8_chendao.jpg · ok
+- [ ] 2026-10-23 battle `m10_banshun_hs` ← m10_banshun_hs.jpg · ok
+- [ ] 2026-10-23 battle `dagu` ← dagu.jpg · ok
+- [ ] 2026-10-23 battle `liru` ← liru.jpg · ok
