@@ -1,9 +1,9 @@
 class_name SideStoryList
 extends Control
 ## ？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, that open once their
-## chapter is done (data/side_stories.json). Opened from 整备 and from the chapter-end page; every tile shows its name,
-## price and reward (unread ones in gold) (they can be read again, free). Opening one the first time in a 周目 costs 战功 (side_stories.json
-## cost) and pays its reward (点化 / 宝物 / 卡), both shown on the tile before you open it.
+## chapter is done (data/side_stories.json). Opened from 整备 and from the chapter-end page; every tile shows its name
+## and price, never its reward (user rule; unread ones in gold) (they can be read again, free). Opening one the first time in a 周目 costs 战功 (side_stories.json
+## cost) and pays its reward (点化 / 宝物 / 卡) — the reward is only told after it is opened.
 
 signal changed  # something was read: the opener refreshes (战功, the unread count)
 
@@ -73,7 +73,7 @@ func _ready() -> void:
 	var title := Kit.label("？ 小故事", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(40, 22)
 	add_child(title)
-	var hint := Kit.label("打开要花战功，奖励写在卡上；看过的免费重看。", Kit.FONT_BODY)
+	var hint := Kit.label("打开要花战功，看过的免费重看。", Kit.FONT_BODY)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
 	hint.position = Vector2(250, 34)
 	add_child(hint)
@@ -114,7 +114,7 @@ func _fill() -> void:
 	_merit.text = "战功 %d" % Game.save.merit
 	for st in Quests.side_stories(Game.save, also):
 		var tile := Button.new()
-		tile.custom_minimum_size = Vector2(286, 150)
+		tile.custom_minimum_size = Vector2(286, 120)
 		var unread: bool = not st["read"]
 		var cost := Quests.side_cost(st)
 		var short: bool = unread and Game.save.merit < cost
@@ -136,10 +136,6 @@ func _fill() -> void:
 		sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		sub.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_child(sub)
-		var prize := Kit.label(Quests.side_reward_text(st), Kit.FONT_BODY - 2, "red" if short else "amber")
-		prize.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		prize.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		col.add_child(prize)
 		if short:
 			tile.modulate = Color(0.7, 0.7, 0.7)
 		tile.pressed.connect(_play.bind(st))
