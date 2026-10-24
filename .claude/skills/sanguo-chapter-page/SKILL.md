@@ -16,8 +16,8 @@ chapter-end page (`MapScreen._complete`). One chapter per request; show the resu
    sits there with **no panel behind it**.
 2. **A playable card** with the same id (cards.json, `pool: false`, `scope` = route). Its portrait is the CG's left part.
 3. **A gift ？小故事** `s_rc_<quest>` in that chapter's `side_stories.json` list. It is the **only** way to get the card —
-   never handed over on the page. It opens only once the route's **next bad end** has been reached (see the table) and,
-   like every story, costs 5 战功. Its CG is the page's picture.
+   never handed over on the page. It opens only once **the bad end that belongs to the card's people** has been reached
+   (user rule: 董白's card waits for 结局三 · 同归, hers — not just the route's next one), and like every story costs 5 战功. Its CG is the page's picture.
 
 The page itself (already built — don't redo): CG full screen; right side rows with only name + 战功, no reward text:
 本章回顾 (free) → that chapter's ？小故事 (5) → 抽一次卡 (5) → 点化 (10) → 进入下一章. Rewards are never shown before
@@ -53,9 +53,9 @@ opening; after a story they flip in (`SideStoryList.reveal`).
 6. **Page entry** in `side_stories.json` → `chapters`: `"<quest>": [{"cg": "rc_X", "requires": ... / "unless": ...}]`
    (prologue uses `unless 出生：冀州无极` / `requires 出生：冀州无极` to split routes).
 7. **Gift story** at the top of that chapter's `after` list: `{"id": "s_rc_X", "title", "portraits", "requires":
-   [<the chapter's people line if any>, "<next bad end>"], "unless": <the other route's birth line if needed>,
+   [<the chapter's people line if any>, "<their bad end>"], "unless": <the other route's birth line if needed>,
    "reward": {"cards": ["rc_X"]}, "cg": "rc_X", "text": [...]}`. Shape used so far: the hero, in a new 周目, **dreams
-   of that bad end** (an object from its ending CG — the broken seal, the doll in the puddle); wakes; finds exactly the
+   of that bad end** (an object from its ending CG — the broken seal, the doll in the puddle, the hammers in the snow); wakes; finds exactly the
    page's scene; **stands at the door / behind a tree and doesn't go in** — he wants to remember it (why he isn't in the
    picture); someone notices him and calls him over. Tie a line back to that chapter's small stories where it fits
    (甄宓's 37 pieces of candy). Keep 12–19 lines.
@@ -70,14 +70,17 @@ opening; after a story they flip in (`SideStoryList.reveal`).
     path (the pre-commit hook regenerates docs/CHAPTER-STATS / ROSTER / chapters — add them; if `index.lock` exists,
     wait and retry), push, build the APK.
 
-## Next bad end per chapter (the gift story's condition)
+## Which bad end opens the gift story
 
-"下一章 badend": the next chapter's bad end, or the first one after it on that route.
+Look the card's people up in `godot/data/endings.json` (`who`): if one of them has a bad end of their own, use that
+(吴夫人 → 玉碎, 张夫人 → 覆巢, 董白 → 同归, 吕玲绮 → 绝罚, 张宁 → 覆巢 / 失律, 二乔 → 深锁, 杜夫人 → 断桥, 孙策 → 匹夫,
+赵云 / 糜贞 → 枯井, 周瑜 / 小乔 → 曲误, 郭嘉 / 郭照 → 遗策, 孙尚香 → 香烬, 马云騄 → 断弦, 吴苋 → 算尽, 甄宓 → 洛殇,
+吕布 → 虎噬 …). Only when nobody on the card has one, fall back to the route's next bad end (table).
 
 | 南线 | gift opens after | 北线 | gift opens after |
 |---|---|---|---|
 | 1 富春 | 结局一 · 玉碎 | 1 冀州风云 | 结局二 · 覆巢 |
-| 2 讨伐董卓 | 结局一 · 玉碎 | 2 洛阳烟云 | 结局二 · 覆巢 |
+| 2 讨伐董卓 | 结局一 · 玉碎（董白的卡用 同归） | 2 洛阳烟云 | 结局二 · 覆巢 |
 | 3 传国玉玺 | 结局三 · 同归 | 3 黑山风云 | 结局四 · 绝罚 |
 | 4 挟天子 | 结局五 · 恨海 | 4 双凤乱太行 | 结局六 · 失律 |
 | 5 荆襄风云 | 结局七 · 深锁 | 5 铁纪徐州 | 结局八 · 断桥 |
@@ -93,7 +96,7 @@ Endings live in `godot/data/endings.json`; their titles are the flag lines (kept
 ## Who is on each page
 
 Done: 南1 `rc_fuchun` 吴夫人、孙权、孙尚香 (sewing on the 富春 porch) · 北1 `rc_wuji` 张夫人、小甄宓 (abacus, snowy
-night) · 南2 `rc_taodong` 董白 + 宫女 (石头剪刀布 by the river; needs 董白：留下).
+night) · 南2 `rc_taodong` 董白 + 宫女 (石头剪刀布 by the river; needs 董白：留下; gift after 结局三 · 同归, her own; dream = the 长安 snow outside the gate, her hammers and a broken-stringed 琴).
 
 Plan for the rest (check each against the chapter text; ask only if the chapter has no obvious warm pair):
 北2 吕玲绮 learning chopsticks with 甄宓 · 南3 孙坚、吴夫人、孙策 at a family meal · 北3 张宁 grinding herbs with 甄宓

@@ -1903,7 +1903,7 @@ func test_the_north_first_page_and_its_card_after_fuchao() -> void:
 	check(s.owned.has("rc_wuji"), "雪夜算盘 hands over 无极·商母与幼女")
 
 
-func test_dongbai_page_and_card_need_her_kept_and_yusui() -> void:
+func test_dongbai_page_and_card_need_her_kept_and_her_own_bad_end() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春"]
 	s.quests_cleared = ["prologue", "taodong"]
@@ -1911,8 +1911,9 @@ func test_dongbai_page_and_card_need_her_kept_and_yusui() -> void:
 	s.run_records.append("董白：留下")
 	check_eq(Quests.chapter_page("taodong", s).get("cg", ""), "rc_taodong")
 	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
-	check(not ids.call().has("s_rc_taodong"), "not before 结局一 · 玉碎")
 	s.flags = ["结局一 · 玉碎"]
+	check(not ids.call().has("s_rc_taodong"), "another bad end is not hers")
+	s.flags = ["结局三 · 同归"]
 	check(ids.call().has("s_rc_taodong"), "both lines hold: open")
 	s.merit = 5
 	Quests.open_side(s, "s_rc_taodong")
