@@ -452,7 +452,7 @@ func demo(name: String) -> void:
 			var m1 := MapScreen.new()
 			show_screen(m1)
 			m1.call_deferred("_complete")
-		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --chapter=heishan|beihai: a later north chapter's page)
+		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --chapter=heishan|beihai|xuzhou: a later north chapter's page)
 			save.quests_cleared = ["prologue"]
 			if OS.get_cmdline_user_args().has("--north"):
 				# quest: [the chapters before it, the flags they left, this run's records, its last square]
@@ -460,6 +460,7 @@ func demo(name: String) -> void:
 					"luoyang_n": [[], [], [], "ln_end"],
 					"heishan": [["luoyang_n"], ["北线：班师冀州"], ["张宁：救下"], "hs_end"],
 					"beihai": [["luoyang_n", "heishan"], ["北线：班师冀州", "界桥：救下公孙瓒"], ["张宁：救下", "郑姜：和好"], "bh_end"],
+					"xuzhou": [["luoyang_n", "heishan", "beihai"], ["北线：班师冀州", "界桥：救下公孙瓒", "北线：北海相"], ["军纪：严明"], "xz_end"],
 				}
 				var qid := "luoyang_n"
 				for a in OS.get_cmdline_user_args():

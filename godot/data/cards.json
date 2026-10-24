@@ -2349,14 +2349,13 @@
       "scope": "south"
     },
     "rc_luoyang_n": {
-      "name": "甄府·树枝筷子",
+      "name": "吕玲绮·树枝筷子",
       "rarity": "SR",
       "troop": "cavalry",
       "hp": 70,
       "at": 96,
       "skills": [
-        "huaji",
-        "luoshen"
+        "huaji"
       ],
       "pool": false,
       "scope": "north"
@@ -2374,14 +2373,14 @@
       "scope": "south"
     },
     "rc_heishan": {
-      "name": "甄府·一起碾药",
+      "name": "张宁·一起碾药",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 98,
       "at": 66,
       "skills": [
         "jinzhen",
-        "luoshen"
+        "jiedu"
       ],
       "pool": false,
       "scope": "north"
@@ -2399,7 +2398,7 @@
       "scope": "south"
     },
     "rc_beihai": {
-      "name": "北海·双凤早饭",
+      "name": "郑姜·双凤早饭",
       "rarity": "SR",
       "troop": "infantry",
       "hp": 72,
@@ -2423,6 +2422,19 @@
       ],
       "pool": false,
       "scope": "south"
+    },
+    "rc_xuzhou": {
+      "name": "张宁·除夕香囊",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 100,
+      "at": 64,
+      "skills": [
+        "jinzhen",
+        "jiedu"
+      ],
+      "pool": false,
+      "scope": "north"
     },
     "zhangfuren": {
       "name": "张夫人",

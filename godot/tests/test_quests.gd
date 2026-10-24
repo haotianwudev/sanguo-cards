@@ -1932,7 +1932,7 @@ func test_lvlingqi_page_and_card_need_her_own_bad_end() -> void:
 	check(ids.call().has("s_rc_luoyang_n"), "绝罚 opens it")
 	s.merit = 5
 	Quests.open_side(s, "s_rc_luoyang_n")
-	check(s.owned.has("rc_luoyang_n"), "树枝筷子 hands over 甄府·树枝筷子")
+	check(s.owned.has("rc_luoyang_n"), "树枝筷子 hands over 吕玲绮·树枝筷子")
 
 
 func test_zhangning_page_and_card_need_her_saved_and_shilv() -> void:
@@ -1949,7 +1949,7 @@ func test_zhangning_page_and_card_need_her_saved_and_shilv() -> void:
 	check(ids.call().has("s_rc_heishan"), "失律 opens it")
 	s.merit = 5
 	Quests.open_side(s, "s_rc_heishan")
-	check(s.owned.has("rc_heishan"), "一起碾药 hands over 甄府·一起碾药")
+	check(s.owned.has("rc_heishan"), "一起碾药 hands over 张宁·一起碾药")
 
 
 func test_zheng_jiang_page_and_card_need_them_reconciled_and_shilv() -> void:
@@ -1964,7 +1964,22 @@ func test_zheng_jiang_page_and_card_need_them_reconciled_and_shilv() -> void:
 	check(ids.call().has("s_rc_beihai"), "失律 opens it")
 	s.merit = 5
 	Quests.open_side(s, "s_rc_beihai")
-	check(s.owned.has("rc_beihai"), "双凤早饭 hands over 北海·双凤早饭")
+	check(s.owned.has("rc_beihai"), "双凤早饭 hands over 郑姜·双凤早饭")
+
+
+func test_zhangning_new_year_page_and_card_after_duanqiao() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou"]
+	check_eq(Quests.chapter_page("xuzhou", s).get("cg", ""), "rc_xuzhou")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局二 · 覆巢", "结局四 · 绝罚", "结局六 · 失律"]
+	check(not ids.call().has("s_rc_xuzhou"), "her own bad ends come before this page: not enough")
+	s.flags.append("结局八 · 断桥")
+	check(ids.call().has("s_rc_xuzhou"), "断桥 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_xuzhou")
+	check(s.owned.has("rc_xuzhou"), "除夕香囊 hands over 张宁·除夕香囊")
 
 
 func test_wenji_page_and_card() -> void:
