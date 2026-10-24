@@ -1187,3 +1187,9 @@
 - [ ] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
 - [ ] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
 - [ ] 2026-10-24 battle `c6_fubing` ← c6_fubing.jpg · ok
+- [ ] 2026-10-24 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
+- [ ] 2026-10-24 battle `m9_dongzhou` ← m9_dongzhou.jpg · ok
+- [ ] 2026-10-24 battle `m9_xiangbing` ← m9_xiangbing.jpg · ok
+- [ ] 2026-10-24 battle `n5_yanxiao_tou` ← n5_yanxiao_tou.jpg · ok
+- [ ] 2026-10-24 battle `n6_leibo` ← n6_leibo.jpg · ok
+- [ ] 2026-10-24 battle `n6_zhangxun` ← n6_zhangxun.jpg · ok
