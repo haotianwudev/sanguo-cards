@@ -891,13 +891,20 @@ static func side_stories(save: SaveData, also := "") -> Array:
 	var out: Array = []
 	for qid in done:
 		for st in db.side_stories.get(qid, []):
-			if (st.has("requires") and not have.has(st["requires"])) or (st.has("unless") and have.has(st["unless"])):
+			if not _story_open(st, have):
 				continue
 			var s: Dictionary = st.duplicate()
 			s["quest"] = qid
 			s["read"] = save.side_read.has(st["id"])
 			out.append(s)
 	return out
+
+
+static func _story_open(st: Dictionary, have: Array) -> bool:
+	## requires: a recorded line, or a list of them (all must hold); unless: a line (or list) none of which may hold
+	var req: Array = st["requires"] if st.get("requires") is Array else ([st["requires"]] if st.has("requires") else [])
+	var bar: Array = st["unless"] if st.get("unless") is Array else ([st["unless"]] if st.has("unless") else [])
+	return req.all(func(f): return have.has(f)) and not bar.any(func(f): return have.has(f))
 
 
 static func side_unread(save: SaveData, also := "") -> int:
@@ -908,7 +915,7 @@ static func chapter_page(quest_id: String, save: SaveData) -> Dictionary:
 	## the chapter-end page's {cg} for this route ({} = none drawn yet)
 	var have: Array = save.flags + save.run_records
 	for pg in GameData.get_db().chapter_pages.get(quest_id, []):
-		if (pg.has("requires") and not have.has(pg["requires"])) or (pg.has("unless") and have.has(pg["unless"])):
+		if not _story_open(pg, have):
 			continue
 		return pg
 	return {}

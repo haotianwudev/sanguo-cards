@@ -3,9 +3,10 @@
   "cost": 5,
   "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 5 — like a draw; a 点化 is 10); a story can still set its own `cost`; reading it again is free",
   "_reward": "every story names its reward, paid when it is opened: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
-  "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless pick the route for the shared first chapter.",
+  "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless (a line or a list of lines, all must hold) pick the route for the shared first chapter, or need the people in it (董白：留下).",
   "chapters": {
-    "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}, {"requires": "出生：冀州无极", "cg": "rc_wuji"}]
+    "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}, {"requires": "出生：冀州无极", "cg": "rc_wuji"}],
+    "taodong": [{"requires": "董白：留下", "cg": "rc_taodong"}]
   },
   "after": {
     "prologue": [
@@ -97,6 +98,26 @@
       ]}
     ],
     "taodong": [
+      {"id": "s_rc_taodong", "title": "石头剪刀布", "portraits": ["dongbai"], "requires": ["董白：留下", "结局一 · 玉碎"], "reward": {"cards": ["rc_taodong"]}, "cg": "rc_taodong", "text": [
+        "你做了一个梦。",
+        "梦里是南阳，下着雨。有人砸碎了一方玉玺，有人没能回来。梦的最后，有个银白头发的姑娘站在雨里，手里攥着一对铜锤，一直在等什么人。",
+        "你醒过来的时候，太阳快落山了。营里很吵，可你半天没起身。",
+        "你去河边打水。",
+        "河边的草地上，董白盘腿坐着，那对大铜锤随手扔在草里。她对面跪着一个小宫女，两个人正在玩石头剪刀布——那是你教她的。",
+        "@dongbai 董白：「剪刀！又是我赢！」",
+        "小宫女看着自己的拳头，一脸懊恼。",
+        "@dongbai 董白：「你怎么老出石头？……算了，这把不算，再来！」",
+        "@dongbai 「输了的人，今晚替我去伙房偷一个蜜饼！」",
+        "小宫女又出了石头。董白这回出的是布，笑得前仰后合，笑完了，自己偷偷把手改成了剪刀。",
+        "@dongbai 董白：「……哎呀，我出错了。你赢了。蜜饼我自己去偷。」",
+        "夕阳落在河面上，对岸是联军的营帐和炊烟。",
+        "你站在柳树后面，没有走过去。",
+        "@lord {lord}（内心）：……不知道为什么，我想把这一幕记住。她笑的样子，她故意输的样子。",
+        "@lord {lord}（内心）：郿坞、长安、她爷爷……那些事还没来。至少今天，她只是个在河边耍赖的小姑娘。",
+        "董白一回头，看见了你，脸一下子红了。",
+        "@dongbai 董白：「……你、你站在那儿多久了？！」",
+        "@dongbai 董白：「过来！跟我比一把！输了你去偷蜜饼！」"
+      ]},
       {"id": "s_zumao", "title": "祖茂的头巾", "portraits": ["zumao", "sunce"], "reward": {"relics": ["chize"]}, "text": [
         "祖茂每天早上都要洗一块红头巾。洗得都发白了，还是天天洗。",
         "孙策问他，那块破布有什么好洗的。",

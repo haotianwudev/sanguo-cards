@@ -1857,7 +1857,7 @@ func test_side_story_portraits_and_requires_exist() -> void:
 		for st in list:
 			for key in st.get("portraits", []):
 				check(FileAccess.file_exists("res://data/art/portraits/%s.jpg" % key) or Kit.portrait(key, 0.75, 5.0) != null, "%s: portrait %s" % [st["id"], key])
-			for f in [st.get("requires", ""), st.get("unless", "")]:
+			for f in ((st["requires"] if st.get("requires") is Array else [st.get("requires", "")]) + (st["unless"] if st.get("unless") is Array else [st.get("unless", "")])):
 				check(f == "" or recs.contains("\"%s\"" % f), "%s: no story line records %s" % [st["id"], f])
 
 
@@ -1901,4 +1901,20 @@ func test_the_north_first_page_and_its_card_after_fuchao() -> void:
 	s.merit = 5
 	Quests.open_side(s, "s_rc_wuji")
 	check(s.owned.has("rc_wuji"), "雪夜算盘 hands over 无极·商母与幼女")
+
+
+func test_dongbai_page_and_card_need_her_kept_and_yusui() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue", "taodong"]
+	check_eq(Quests.chapter_page("taodong", s).get("cg", ""), "", "no 董白 picture when she was not kept")
+	s.run_records.append("董白：留下")
+	check_eq(Quests.chapter_page("taodong", s).get("cg", ""), "rc_taodong")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	check(not ids.call().has("s_rc_taodong"), "not before 结局一 · 玉碎")
+	s.flags = ["结局一 · 玉碎"]
+	check(ids.call().has("s_rc_taodong"), "both lines hold: open")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_taodong")
+	check(s.owned.has("rc_taodong"))
 

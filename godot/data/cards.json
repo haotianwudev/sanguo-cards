@@ -2323,6 +2323,18 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_taodong": {
+      "name": "汜水·董白的剪刀",
+      "rarity": "SR",
+      "troop": "infantry",
+      "hp": 72,
+      "at": 98,
+      "skills": [
+        "shuangchui"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

@@ -3843,6 +3843,15 @@
         0.42
       ],
       "head": 0.24
+    },
+    "rc_taodong": {
+      "src": "source/generals/rc_taodong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.58,
+        0.42
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -7070,6 +7079,10 @@
     },
     "rc_wuji": {
       "src": "source/cg/rc_wuji.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_taodong": {
+      "src": "source/cg/rc_taodong.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

@@ -426,5 +426,6 @@
   "hanhao": {"file": "hanhao.jpg", "face": [0.5, 0.22], "head": 0.22},
   "sunquan_young": {"file": "sunquan_young.jpg", "face": [0.5, 0.22], "head": 0.22},
   "rc_fuchun": {"file": "rc_fuchun.jpg", "face": [0.555, 0.42], "head": 0.24},
-  "rc_wuji": {"file": "rc_wuji.jpg", "face": [0.567, 0.42], "head": 0.24}
+  "rc_wuji": {"file": "rc_wuji.jpg", "face": [0.567, 0.42], "head": 0.24},
+  "rc_taodong": {"file": "rc_taodong.jpg", "face": [0.58, 0.42], "head": 0.24}
 }
