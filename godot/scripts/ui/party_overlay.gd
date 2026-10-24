@@ -696,6 +696,8 @@ func _start_drag(ctrl: Control, data: Dictionary, forced := false) -> Dictionary
 			ic.size = Vector2(72, 72)
 			face = ic
 	# held by its middle — on a touch screen above the finger, so the finger doesn't hide it; it grows and tilts as it comes up
+	if face is CardView:
+		face.glow_boost = 1.7  # the carried card glows harder and breathes
 	face.position = -face.size / 2 - (Vector2(0, 70) if _touch() else Vector2.ZERO)
 	face.pivot_offset = face.size / 2
 	face.modulate.a = 0.92

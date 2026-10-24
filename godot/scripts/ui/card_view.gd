@@ -15,6 +15,7 @@ var count := 0  # soldier copies (0 = hide)
 var note := ""
 var show_skills := true
 var glow := true  # the rarity aura round the card (opts.glow = false turns it off)
+var glow_boost := 1.0  # > 1: a carried card (整备 drag) — a stronger aura that always breathes, gold for cards that have none
 const GLOW := {"SSR": [1.0, true], "SR": [0.75, true], "R": [0.55, false], "C": [0.35, false]}  # rarity -> [strength, breathes]
 var dimmed := false
 var selected := false
@@ -350,8 +351,8 @@ func _glow_spec() -> Array:
 		return []
 	var r := str(fighter.get("rarity", ""))
 	if not GLOW.has(r):
-		return []
-	return [Kit.rarity_color(r), float(GLOW[r][0]), bool(GLOW[r][1])]
+		return [Kit.c("gold"), 0.6 * glow_boost, true] if glow_boost > 1.0 else []
+	return [Kit.rarity_color(r), float(GLOW[r][0]) * glow_boost, bool(GLOW[r][1]) or glow_boost > 1.0]
 
 
 func _process(_delta: float) -> void:
