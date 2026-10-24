@@ -687,7 +687,11 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2
+          "rate": 3
+        },
+        {
+          "type": "stun",
+          "chance": 1
         }
       ]
     },
@@ -699,7 +703,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2
+          "rate": 2.5
         },
         {
           "type": "counter",
