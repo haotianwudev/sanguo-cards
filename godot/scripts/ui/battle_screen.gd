@@ -1317,7 +1317,7 @@ func _finish() -> void:
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
 		var bonus := float(b.mods.get("chest", 0.0))
 		var chance := save.chest_chance(b.overkill, boss, bonus)
-		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, [], b.enemy["data"]["card"], bonus, str(q.get("id", "")))
+		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, [], b.enemy["data"]["drop"], bonus, str(q.get("id", "")))
 		var odds := "首领必掉" if boss else "溢出伤害 %d%% · 宝箱几率 %d%%" % [int(round(b.overkill * 100)), int(round(chance * 100))]
 		if chest.is_empty():
 			await _banner("%s —— 这次没有宝箱" % odds, Kit.c("gray"))

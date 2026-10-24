@@ -1556,7 +1556,9 @@
       "skills": [
         "huoji",
         "bazhen"
-      ]
+      ],
+      "pool": false,
+      "first_win": true
     },
     "sunce": {
       "name": "孙策·青年",
@@ -1959,7 +1961,8 @@
       "at": 88,
       "skills": [
         "qiangpo"
-      ]
+      ],
+      "pool": false
     },
     "wangyi": {
       "name": "王异",

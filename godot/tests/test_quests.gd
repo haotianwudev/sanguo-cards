@@ -1017,6 +1017,26 @@ func _event_text(x: Variant) -> String:
 	return ""
 
 
+func test_lvbu_zhugeliang_and_baosanniang_are_never_drawn_the_first_time() -> void:
+	## user rule: the first 吕布 / 诸葛亮 comes only from beating him (his fights drop him) or the story (he joins); 鲍三娘 only from her
+	## event — never a random draw or chest. Once had, they come back through the history pool like any other card
+	var db := GameData.get_db()
+	for cid in ["lvbu", "zhugeliang", "baosanniang"]:
+		check(not db.cards[cid]["in_pool"], cid + " is not in the public pool")
+		var s := SaveData.create()
+		check(not s.recruit_pool(db.cards[cid]["rarity"]).any(func(c): return c["id"] == cid), cid + " can't be drawn before you have had it")
+		check(not s.chest_pools("", [])["public"]["general"].any(func(c): return c["id"] == cid), cid + " isn't in a chest before you have had it")
+		s.seen = [cid]
+		check(s.recruit_pool(db.cards[cid]["rarity"]).any(func(c): return c["id"] == cid), cid + " can be drawn again once you have had it")
+	for cid in ["lvbu", "zhugeliang"]:
+		var drops: Array = db.enemies.values().filter(func(e): return e["drop"] == cid)
+		check(drops.size() >= 5, "%s drops from his own fights (%d)" % [cid, drops.size()])
+	check(db.enemies["m8_kongming"]["card"] != "zhugeliang", "the fight keeps its own stats card")
+	var s2 := SaveData.create()
+	var got: Array = s2.chest_after_battle(RandomNumberGenerator.new(), 0.0, true, [], "zhugeliang", 0.0, "")
+	check(got.any(func(c): return c["id"] == "zhugeliang"), "the first win always hands him over")
+
+
 func test_the_north_birth_never_draws_a_south_event() -> void:
 	## prologue is one quest for both births: its chapter-only events (二乔, 于吉) carry "route": "south" and stay out of the north pool
 	var db := GameData.get_db()

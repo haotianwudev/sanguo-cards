@@ -540,7 +540,7 @@ func test_the_two_routes_recruit_from_their_own_casts() -> void:
 	var s_ids: Array = ["C", "R", "SR", "SSR"].map(func(r): return south.recruit_pool(r).map(func(c): return c["id"])).reduce(func(a, b): return a + b)
 	check(n_ids.has("xiahouyuan") and not n_ids.has("huanggai") and s_ids.has("huanggai") and not s_ids.has("xiahouyuan"), "each side has its own: " + str(n_ids.size()))
 	check(n_ids.has("guanyu") and s_ids.has("guanyu"), "the ones both stories use are in both")
-	check(n_ids.size() >= 40 and s_ids.size() >= 40, "neither side is thin: %d / %d" % [n_ids.size(), s_ids.size()])
+	check(n_ids.size() >= 38 and s_ids.size() >= 38, "neither side is thin: %d / %d" % [n_ids.size(), s_ids.size()])  # 吕布 / 诸葛亮 / 鲍三娘 are never drawn the first time
 	var north_history := SaveData.create()
 	north_history.flags = ["出生：冀州无极"]
 	north_history.seen = ["zhaoyun"]  # given out by chapter one: not in the public pool, only in your history

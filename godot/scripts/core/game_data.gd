@@ -114,7 +114,7 @@ func _load(dir: String) -> void:
 			"at": int(round(float(foe_card["at"]) * float(fc["at"]))) if not foe_card.is_empty() else int(e["at"]),
 			"actions": int(e["actions"]), "moves": e["moves"],
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)), "armor": str(e.get("armor", "")),
-			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "card_public": e.get("card_public", false)}
+			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "drop": e.get("drop", e.get("card", "")), "card_public": e.get("card_public", false)}
 		if e.has("armor"):  # 护甲类型 (battle.armors): its resists replace the enemy's own
 			assert(battle.get("armors", {}).has(e["armor"]), "enemy %s: unknown armor %s" % [eid, e["armor"]])
 			var arm: Dictionary = battle["armors"][e["armor"]]
@@ -246,6 +246,8 @@ static func _choose_option(o: Dictionary) -> Dictionary:
 
 
 func _validate() -> void:
+	for en in enemies.values():
+		assert(en["drop"] == "" or cards.has(en["drop"]), "enemy %s: unknown drop %s" % [en["id"], en["drop"]])
 	for sk in skills.values():
 		for e in sk["effects"]:
 			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison"],
