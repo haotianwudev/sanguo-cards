@@ -2298,7 +2298,7 @@
       "pool": false
     },
     "rc_fuchun": {
-      "name": "富春·慈母与儿女",
+      "name": "吴夫人·慈母与儿女",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 100,
@@ -2311,7 +2311,7 @@
       "scope": "south"
     },
     "rc_wuji": {
-      "name": "无极·商母与幼女",
+      "name": "张夫人·雪夜算盘",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 98,
@@ -2324,7 +2324,7 @@
       "scope": "north"
     },
     "rc_taodong": {
-      "name": "汜水·董白的剪刀",
+      "name": "董白·石头剪刀布",
       "rarity": "SR",
       "troop": "infantry",
       "hp": 72,
@@ -2336,7 +2336,7 @@
       "scope": "south"
     },
     "rc_yuxi": {
-      "name": "洛阳·文姬教字",
+      "name": "蔡文姬·教字",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 94,
@@ -2361,7 +2361,7 @@
       "scope": "north"
     },
     "rc_dongui": {
-      "name": "关中·晨光车驾",
+      "name": "貂蝉·晨光车驾",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 90,
@@ -2386,7 +2386,7 @@
       "scope": "north"
     },
     "rc_jingxiang": {
-      "name": "淯水·留仙裙",
+      "name": "貂蝉·留仙裙",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 88,
@@ -2411,7 +2411,7 @@
       "scope": "north"
     },
     "rc_huainan_s": {
-      "name": "庐江·二乔",
+      "name": "二乔·红缨",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 92,
@@ -2437,27 +2437,29 @@
       "scope": "north"
     },
     "rc_jiangdong": {
-      "name": "吴郡·城头包子",
+      "name": "孙策·城头包子",
       "rarity": "SR",
       "troop": "cavalry",
       "hp": 74,
       "at": 98,
       "skills": [
         "xiaobawang",
-        "dujiang"
+        "dujiang",
+        "guose"
       ],
       "troop_skills": false,
       "pool": false,
       "scope": "south"
     },
     "rc_menghu": {
-      "name": "长江·月下琴",
+      "name": "周瑜·月下琴",
       "rarity": "SR",
       "troop": "strategist",
       "hp": 88,
       "at": 80,
       "skills": [
-        "chibi"
+        "chibi",
+        "qinse"
       ],
       "pool": false,
       "scope": "south"
