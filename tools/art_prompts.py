@@ -2360,7 +2360,7 @@ UI_ART = {
 }
 
 
-# 下一批（交给 Gemini）不再手写：每次运行都从游戏数据（cards.json / story.json / endings.json / interludes.json）里
+# 下一批（交给 Gemini）不再手写：每次运行都从游戏数据（cards.json / story.json / endings.json / interludes.json / side_stories.json）里
 # 算出「游戏正在用、但还没交付」的图，按下面的优先级排。游戏里没用到的图不会出现在这里。
 # 优先级（越靠前越先画）：
 #   0 占位 / 缺失的立绘      —— 角色一出场就是占位图
@@ -2370,10 +2370,10 @@ UI_ART = {
 #   4 常用战斗背景           —— 普通战斗；多个战斗共用同一张的、出现次数多的排前
 #   5 宝物图标               —— 现在是文字圆章；稀有的 / 诅咒 / 主角专属排前
 #   6 结局象征画             —— 已实装的结局
-#   7 奇遇插图（？格事件）    —— 随机抽到，缺了只是少一张图；通用事件排在章节专属事件前
+#   7 奇遇插图（？格事件）、小故事插图 —— 随机抽到 / 可选的，缺了只是少一张图；小故事排在奇遇前
 #   8 未实装内容             —— 还没做出来的结局等
 TIER_NAMES = {0: "立绘（占位 / 缺）", 1: "首领战斗图", 2: "精英战斗图", 3: "主线剧情 CG", 4: "普通战斗背景",
-              5: "宝物图标", 6: "结局象征画", 7: "奇遇插图", 8: "未实装内容"}
+              5: "宝物图标", 6: "结局象征画", 7: "奇遇 / 小故事插图", 8: "未实装内容"}
 EXTRA_NEXT = [("cg", "end_locked", "结局图鉴「未解锁」缩略图（16:9，暗色印章问号）", 8)]
 
 
@@ -2395,6 +2395,7 @@ def build_next(delivered: dict) -> list:
     story = json.loads((gd / "story.json").read_text("utf-8"))
     endings = json.loads((gd / "endings.json").read_text("utf-8"))["endings"]
     inter = json.loads((gd / "interludes.json").read_text("utf-8")).get("after", {})
+    side = json.loads((gd / "side_stories.json").read_text("utf-8")) if (gd / "side_stories.json").exists() else {}
     sc, en = cards["scenarios"], cards["enemies"]
     qidx = {q["id"]: i for i, q in enumerate(story["quests"])}
     found: dict = {}  # (kind, key) -> (tier, sort tuple, what)
@@ -2438,6 +2439,14 @@ def build_next(delivered: dict) -> list:
         for scene in inter.get(q["id"], []):
             if scene.get("cg"):
                 put("cg", scene["cg"], 3, (qi, 10**6), f"{q['title']}·幕间「{scene.get('title', '')}」")
+        for pg in side.get("chapters", {}).get(q["id"], []):  # the chapter-end page's picture (also that card's portrait)
+            if pg.get("cg"):
+                put("cg", pg["cg"], 3, (qi, 10**6 + 1), f"{q['title']}·章末页面（过场 CG，也是卡）")
+        for st in side.get("after", {}).get(q["id"], []):  # ？小故事: optional, like the 奇遇 pictures
+            if st.get("cg"):
+                put("cg", st["cg"], 7, (-1, qi, st["id"]), f"{q['title']}·小故事「{st.get('title', '')}」")
+            for pk in st.get("portraits", []):
+                put("portrait", pk, 0, (qi, 10**6), f"{q['title']}·小故事「{st.get('title', '')}」里出场")
     scope_rank = {"universal": 0}
     for eid, ev in story["events"].items():
         if ev.get("cg"):
