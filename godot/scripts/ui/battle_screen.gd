@@ -443,8 +443,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _sync_skill_bars() -> void:
-	## every leader who can act shows his skills as a row of big buttons in his card's column, just above the party bar (the cards keep their place and size,
-	## the enemy's side may be covered): one tap plays it.
+	## every leader who can act shows his skills as a column of wide buttons in his card's column, stacked up from just above the party bar (the cards keep
+	## their place and size, the enemy's side may be covered): one tap plays it.
 	## Hidden while anything plays out, in 自动, and once the fight is decided; tapping the card itself still opens the full panel (换人)
 	if _skill_layer == null:
 		return
@@ -461,28 +461,28 @@ func _sync_skill_bars() -> void:
 		var v: CardView = _cards[i]
 		var u: Dictionary = b.leaders[i]
 		var r := v.get_global_rect()
-		var bar := HBoxContainer.new()  # side by side: name on top, AP under it
-		bar.add_theme_constant_override("separation", 3)
-		var bh := 70.0 if small else 80.0  # big buttons; they reach up over the enemy's side, which is fine (user call)
+		var bar := VBoxContainer.new()  # stacked, one wide button per skill, in this leader's column
+		bar.add_theme_constant_override("separation", 4)
+		var bh := 44.0 if small else 50.0  # wide, tall enough for a thumb; the column reaches up over the enemy's side, which is fine (user call)
 		var skills: Array = u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
 			var ult := _is_ult(sk)
 			var btn := Button.new()
-			btn.text = "%s
-AP%d" % [sk["name"], b.cost(u, sk)]
-			var nlen: int = str(sk["name"]).length()  # long names step down so they still fit three to a card
-			btn.add_theme_font_size_override("font_size", ([18, 14, 12] if small else [22, 18, 15])[clampi(nlen - 3, 0, 2)])
-			btn.add_theme_constant_override("line_spacing", -2)
+			btn.text = "%s　AP%d" % [sk["name"], b.cost(u, sk)]
+			btn.add_theme_font_size_override("font_size", 17 if small else 20)
+			btn.icon = Kit.skill_icon(sk)
+			btn.expand_icon = true
+			btn.add_theme_constant_override("icon_max_width", 22 if small else 26)
+			btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			btn.clip_text = true
 			btn.focus_mode = Control.FOCUS_NONE
-			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			btn.custom_minimum_size = Vector2(0, bh)
 			var edge: Color = Kit.c("gold") if ult else Color(1, 1, 1, 0.35)
-			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.94), 8, 2 if ult else 1, edge, 2))
-			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.95), 8, 2, Kit.c("gold"), 2))
-			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 2))
-			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.94), 8, 1, Color(1, 1, 1, 0.15), 2))  # opaque: the card's own tags must not show through
+			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.94), 8, 2 if ult else 1, edge, 10))
+			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.95), 8, 2, Kit.c("gold"), 10))
+			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 10))
+			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.94), 8, 1, Color(1, 1, 1, 0.15), 10))  # opaque: nothing underneath shows through
 			btn.add_theme_color_override("font_color", Kit.c("gold") if ult else Color(1, 1, 1))
 			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
 			btn.disabled = not b.usable(u, sk)
@@ -490,9 +490,10 @@ AP%d" % [sk["name"], b.cost(u, sk)]
 				_close_skill_popup()
 				_on_skill(i, sid))
 			bar.add_child(btn)
-		# in the card's column, just above the party bar: the cards and the HP / AP line stay clear, the enemy's side may be covered
-		bar.position = Vector2(r.position.x - global_position.x, _party_box.position.y - bh - 6)
-		bar.size = Vector2(r.size.x, bh)
+		# in the card's column, stacked up from just above the party bar: the cards and the HP / AP line stay clear, the enemy's side may be covered
+		var h := skills.size() * bh + (skills.size() - 1) * 4.0
+		bar.position = Vector2(r.position.x - global_position.x, _party_box.position.y - h - 6)
+		bar.size = Vector2(r.size.x, h)
 		_skill_layer.add_child(bar)
 
 
