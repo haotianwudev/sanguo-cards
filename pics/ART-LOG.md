@@ -1163,40 +1163,40 @@
 - [x] 2026-10-23 battle `m10_jijiu` ← m10_jijiu.jpg · ok
 - [x] 2026-10-23 battle `m10_ziwu_exit` ← m10_ziwu_exit.jpg · ok
 - [x] 2026-10-23 battle `jx_ganning` ← jx_ganning.jpg · ok
-- [ ] 2026-10-23 battle `m11_bazhen` ← m11_bazhen_v2.jpg · ok
-- [ ] 2026-10-23 battle `m11_liubei` ← m11_liubei_v2.jpg · ok
-- [ ] 2026-10-23 battle `m8_kongming` ← m8_kongming.jpg · ok
-- [ ] 2026-10-23 battle `m8_han_baier` ← m8_han_baier.jpg · ok
-- [ ] 2026-10-23 battle `m8_chendao` ← m8_chendao.jpg · ok
-- [ ] 2026-10-23 battle `m10_banshun_hs` ← m10_banshun_hs.jpg · ok
-- [ ] 2026-10-23 battle `dagu` ← dagu.jpg · ok
-- [ ] 2026-10-23 battle `liru` ← liru.jpg · ok
-- [ ] 2026-10-23 battle `m8_guanping` ← m8_guanping.jpg · ok
-- [ ] 2026-10-23 battle `m8_han_wudang` ← m8_han_wudang.jpg · ok
-- [ ] 2026-10-23 battle `m8_liaohua` ← m8_liaohua.jpg · ok
-- [ ] 2026-10-23 battle `m11_guanyu` ← m11_guanyu.jpg · ok
-- [ ] 2026-10-23 battle `m11_taishici` ← m11_taishici.jpg · ok
-- [ ] 2026-10-23 battle `m8_han_muniu` ← m8_han_muniu.jpg · ok
-- [ ] 2026-10-24 battle `guanjun` ← guanjun.jpg · ok
-- [ ] 2026-10-24 battle `guosi` ← guosi.jpg · ok
-- [ ] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
-- [ ] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
-- [ ] 2026-10-24 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
-- [ ] 2026-10-24 battle `guanjun` ← guanjun.jpg · ok
-- [ ] 2026-10-24 battle `guosi` ← guosi.jpg · ok
-- [ ] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
-- [ ] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
-- [ ] 2026-10-24 battle `c6_fubing` ← c6_fubing.jpg · ok
-- [ ] 2026-10-24 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
-- [ ] 2026-10-24 battle `m9_dongzhou` ← m9_dongzhou.jpg · ok
-- [ ] 2026-10-24 battle `m9_xiangbing` ← m9_xiangbing.jpg · ok
-- [ ] 2026-10-24 battle `n5_yanxiao_tou` ← n5_yanxiao_tou.jpg · ok
-- [ ] 2026-10-24 battle `n6_leibo` ← n6_leibo.jpg · ok
-- [ ] 2026-10-24 battle `n6_zhangxun` ← n6_zhangxun.jpg · ok
-- [ ] 2026-10-24 battle `n7_fukou` ← n7_fukou.jpg · ok
-- [ ] 2026-10-24 battle `n7_g_zhanghe` ← n7_g_zhanghe.jpg · ok
-- [ ] 2026-10-24 battle `n7_gaolan` ← n7_gaolan.jpg · ok
-- [ ] 2026-10-24 battle `n8_b_chengyu` ← n8_b_chengyu.jpg · ok
-- [ ] 2026-10-24 battle `n7_zangba` ← n7_zangba.jpg · ok
-- [ ] 2026-10-24 cg `c3_guotu_raid` ← c3_guotu_raid.jpg · ok
-- [ ] 2026-10-24 cg `c3_home` ← c3_home.jpg · ok
+- [x] 2026-10-23 battle `m11_bazhen` ← m11_bazhen_v2.jpg · ok
+- [x] 2026-10-23 battle `m11_liubei` ← m11_liubei_v2.jpg · ok
+- [x] 2026-10-23 battle `m8_kongming` ← m8_kongming.jpg · ok
+- [x] 2026-10-23 battle `m8_han_baier` ← m8_han_baier.jpg · ok
+- [x] 2026-10-23 battle `m8_chendao` ← m8_chendao.jpg · ok
+- [x] 2026-10-23 battle `m10_banshun_hs` ← m10_banshun_hs.jpg · ok
+- [x] 2026-10-23 battle `dagu` ← dagu.jpg · ok
+- [x] 2026-10-23 battle `liru` ← liru.jpg · ok
+- [x] 2026-10-23 battle `m8_guanping` ← m8_guanping.jpg · ok
+- [x] 2026-10-23 battle `m8_han_wudang` ← m8_han_wudang.jpg · ok
+- [x] 2026-10-23 battle `m8_liaohua` ← m8_liaohua.jpg · ok
+- [x] 2026-10-23 battle `m11_guanyu` ← m11_guanyu.jpg · ok
+- [x] 2026-10-23 battle `m11_taishici` ← m11_taishici.jpg · ok
+- [x] 2026-10-23 battle `m8_han_muniu` ← m8_han_muniu.jpg · ok
+- [x] 2026-10-24 battle `guanjun` ← guanjun.jpg · ok
+- [x] 2026-10-24 battle `guosi` ← guosi.jpg · ok
+- [x] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
+- [x] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
+- [x] 2026-10-24 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
+- [x] 2026-10-24 battle `guanjun` ← guanjun.jpg · ok
+- [x] 2026-10-24 battle `guosi` ← guosi.jpg · ok
+- [x] 2026-10-24 battle `c3_yuanshu` ← c3_yuanshu.jpg · ok
+- [x] 2026-10-24 battle `heishan_tan` ← heishan_tan.jpg · ok
+- [x] 2026-10-24 battle `c6_fubing` ← c6_fubing.jpg · ok
+- [x] 2026-10-24 battle `m9_bashu_nu` ← m9_bashu_nu.jpg · ok
+- [x] 2026-10-24 battle `m9_dongzhou` ← m9_dongzhou.jpg · ok
+- [x] 2026-10-24 battle `m9_xiangbing` ← m9_xiangbing.jpg · ok
+- [x] 2026-10-24 battle `n5_yanxiao_tou` ← n5_yanxiao_tou.jpg · ok
+- [x] 2026-10-24 battle `n6_leibo` ← n6_leibo.jpg · ok
+- [x] 2026-10-24 battle `n6_zhangxun` ← n6_zhangxun.jpg · ok
+- [x] 2026-10-24 battle `n7_fukou` ← n7_fukou.jpg · ok
+- [x] 2026-10-24 battle `n7_g_zhanghe` ← n7_g_zhanghe.jpg · ok
+- [x] 2026-10-24 battle `n7_gaolan` ← n7_gaolan.jpg · ok
+- [x] 2026-10-24 battle `n8_b_chengyu` ← n8_b_chengyu.jpg · ok
+- [x] 2026-10-24 battle `n7_zangba` ← n7_zangba.jpg · ok
+- [x] 2026-10-24 cg `c3_guotu_raid` ← c3_guotu_raid.jpg · ok
+- [x] 2026-10-24 cg `c3_home` ← c3_home.jpg · ok
