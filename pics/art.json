@@ -7379,6 +7379,10 @@
     "rc_luoyang_s": {
       "src": "source/cg/rc_luoyang_s.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "n4_zhenghao": {
+      "src": "source/cg/n4_zhenghao.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
