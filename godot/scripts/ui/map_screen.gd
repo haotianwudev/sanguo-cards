@@ -1424,7 +1424,7 @@ func _fill_recap() -> void:
 	## the chapter-end page's rows; refilled after anything is bought or read
 	var db := GameData.get_db()
 	var s := Game.save
-	_recap_merit.text = "打赢 %d 场 · 本章战功 +%d · 现有战功 %d" % [_recap_r["battles"], Quests.merit_earned(s), s.merit]
+	_recap_merit.text = "本章战功 +%d · 现有战功 %d" % [Quests.merit_earned(s), s.merit]
 	for ch in _recap_list.get_children():
 		ch.queue_free()
 	var draw_cost := int(db.gacha["merit"]["draw"])
