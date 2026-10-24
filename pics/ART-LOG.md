@@ -1206,3 +1206,8 @@
 - [ ] 2026-10-24 cg `c3_supply` ← c3_supply.jpg · ok
 - [ ] 2026-10-24 cg `c4_dongjia` ← c4_dongjia.jpg · ok
 - [ ] 2026-10-24 cg `e_jieying` ← e_jieying.jpg · ok
+- [ ] 2026-10-24 cg `c2_captive` ← c2_captive.jpg · ok
+- [ ] 2026-10-24 cg `c2_ln_sponsor` ← c2_ln_sponsor.jpg · ok
+- [ ] 2026-10-24 cg `c13_chuzheng` ← c13_chuzheng.jpg · ok
+- [ ] 2026-10-24 cg `c13_junyi` ← c13_junyi.jpg · ok
+- [ ] 2026-10-24 cg `c14_dongchu` ← c14_dongchu.jpg · ok
