@@ -478,6 +478,9 @@ func demo(name: String) -> void:
 				save.flags = ["出生：冀州无极"] + page[1]
 				for r in ["出生：冀州无极"] + page[2]:
 					Quests.record(save, r)
+				if OS.get_cmdline_user_args().has("--ending"):  # --ending: this run reached the chapter's bad end (its settlement page)
+					var qd: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == qid)[0]
+					Quests.record(save, qd.get("_raw", qd).get("ending", {}).get("title", ""))
 				for c in ["zhaoyun", "guojia", "lvlingqi", "zhangning", "zhenghao", "jiangqiao"]:
 					save.grant_card(c)
 				save.run_battles = 7

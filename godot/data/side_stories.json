@@ -15,6 +15,7 @@
     "menghu": [{"cg": "rc_yuqiao"}],
     "tianfu": [{"requires": "孙权、孙尚香：入队", "cg": "rc_tianfu"}],
     "guanzhong": [{"requires": "吴苋：入队", "cg": "rc_guanzhong"}],
+    "luoyang_s": [{"cg": "rc_luoyang_s"}],
     "luoyang_n": [{"cg": "rc_luoyang_n"}],
     "heishan": [{"requires": "张宁：救下", "cg": "rc_heishan"}],
     "beihai": [{"requires": "郑姜：和好", "cg": "rc_beihai"}],
@@ -1045,6 +1046,24 @@
       ]}
     ],
     "luoyang_s": [
+      {"id": "s_rc_luoyang_s", "title": "洛水夜船", "portraits": ["lord", "sunshangxiang"], "requires": "南线结局 · 赤壁", "reward": {"cards": ["lord:lord_south_river"]}, "cg": "rc_luoyang_s", "text": [
+        "你做了一个梦。",
+        "梦里是赤壁，整条江都在烧。一条小船漂在火光里，船头点着一盏灯，船上放着一口白棺材。",
+        "你走过去，推开棺盖。里面躺着的那个人，和你长得一模一样。",
+        "你醒过来的时候，船停在洛水上，天快黑了。你在船舱里坐了很久，才想起来自己在哪儿。",
+        "你走到船头，扶着栏杆，看远处的洛阳城一点一点亮起灯来。",
+        "风很大，把斗篷吹开了。",
+        "孙尚香从舱里出来，看了你一眼，什么也没问，走过来踮起脚，替你把斗篷的带子系上。",
+        "@sunshangxiang 孙尚香：「脸白成这样，又做噩梦了？」",
+        "@lord {lord}：「梦见……另一个我。」",
+        "@sunshangxiang 孙尚香：「另一个你，也会让我给他系斗篷吗？」",
+        "你想了想。",
+        "@lord {lord}：「不会。他那边，没有你。」",
+        "孙尚香的手停了一下，系了个死结，用力拽了拽。",
+        "@sunshangxiang 孙尚香：「那就好。……系死了，解不开，你就老老实实穿着。」",
+        "船头的灯笼晃了晃。洛阳城的灯一盏一盏亮起来，倒映在水里，像一条不会烧起来的江。",
+        "@lord {lord}（内心）：……这一幕，我也想记住。这一回，我就在画里。"
+      ]},
       {"id": "s_chitu", "title": "赤兔的饭量", "portraits": ["lvbu"], "requires": "洛阳：收下吕布", "reward": {"relics": ["chitu"]}, "text": [
         "吕布一顿饭，吃十斤肉、三斗米。军需官愁得睡不着觉。",
         "后来军需官发现，吕布不算什么。赤兔一顿，要吃五斗豆子。",

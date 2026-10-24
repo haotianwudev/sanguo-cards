@@ -2189,3 +2189,16 @@ func test_a_story_shows_in_one_chapter_only_and_stays_read_across_laps() -> void
 	n.quests_cleared = ["prologue", "taodong"]
 	n.merit = 5
 	check(Quests.open_side(n, "s_zumao")["got"] != "" and n.merit == 0, "back in its chapter: paid and rewarded again")
+
+
+func test_south_last_page_is_the_hero_and_his_lord_card() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue", "luoyang_s"]
+	check_eq(Quests.chapter_page("luoyang_s", s).get("cg", ""), "rc_luoyang_s")
+	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_luoyang_s"), "not before 南线结局 · 赤壁")
+	s.flags = ["南线结局 · 赤壁"]
+	s.merit = 5
+	Quests.open_side(s, "s_rc_luoyang_s")
+	check(s.lord_forms.has("lord_south_river"), "洛水夜船 hands over the lord card 主公·洛水夜船")
+

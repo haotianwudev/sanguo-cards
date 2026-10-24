@@ -107,10 +107,29 @@ Endings live in `godot/data/endings.json`; their titles are the flag lines (kept
 Done: 南1 `rc_fuchun` 吴夫人、孙权、孙尚香 (sewing on the 富春 porch) · 北1 `rc_wuji` 张夫人、小甄宓 (abacus, snowy
 night) · 南2 `rc_taodong` 董白 + 宫女 (石头剪刀布 by the river; needs 董白：留下; gift after 结局三 · 同归, her own; dream = the 长安 snow outside the gate, her hammers and a broken-stringed 琴). · 南3 `rc_yuxi` 蔡文姬 teaching 董白 to write her name under the peach blossoms (page needs 董白：留下 + 结局一 · 玉碎 = 蔡文姬 joined; gift also 结局三 · 同归, hers). · 南4 `rc_dongui` dawn after fleeing 长安: 小皇帝 asleep on 董白's shoulder, 貂蝉 laughing on the cart shaft (page needs 结局三 · 同归 = 貂蝉 joined + 董白：留下; gift also 结局五 · 恨海, 貂蝉's). · 南5 `rc_jingxiang` 貂蝉 in the light 留仙裙 laughing on a rock while 孙策 falls in the 淯水 with a carp (redrawn so 貂蝉 is the 主角, 孙策 tiny in the river behind; page needs 结局三 · 同归; gift also 结局五 · 恨海; story: he buys her the 糖炒栗子 she never bought) · 南6 `rc_huainan_s` 双人牌 二乔: 小乔 tying 孙策's red tassel on 大乔's wrist (page needs 二乔：解救; gift also 结局七 · 深锁, theirs — the tassel on the wrist through the cage bars). · 南7 `rc_jiangdong` 孙策 eating 包子 on the 吴郡 wall at dusk, 大乔 small behind (gift after 结局九 · 匹夫; he promises to skip tomorrow's hunt) · 南8 `rc_menghu` 周瑜 playing the 琴 on a moonlit river boat, 小乔 small in the cabin door (gift after 结局十一 · 曲误; the note he plays wrong on purpose). · 北2 `rc_luoyang_n` 吕玲绮 practising twig chopsticks on a stone, 小甄宓 correcting her grip (甄府 back porch, autumn moon; gift after 结局四 · 绝罚, hers; dream = the fallen 斑马旗 and her 画戟 in the 太行 snow; demo `--demo=recap --north`). · 北3 `rc_heishan` 张宁 and 小甄宓 pushing an iron 药碾 together in the 甄府 herb room at sunset (page needs 张宁：救下; gift after 结局六 · 失律 — not 覆巢, which is what lets her join; dream = the 下邳 back hall, her golden needles in the blood, the 太平 pendant; demo `--demo=recap --north --chapter=heishan`). · 北4 `rc_beihai` 郑好 chopping 葱 with a cleaver, 姜巧 working a little geared bellows at the stove, bickering over breakfast in a 北海 courtyard at dawn (page needs 郑姜：和好; their own bad end 绝罚 is what reconciles them, so the gift falls back to the table: 结局六 · 失律; dream = the shut 徐州 gate, dropped black flags, snapped 令箭; demo `--demo=recap --north --chapter=beihai`). · 北5 `rc_xuzhou` 张宁 sewing 药香囊 by the brazier on New Year's Eve in 下邳, 吕玲绮 gripping the needle like a 戟 (gift after 结局八 · 断桥 — her own two come before this page; dream = the broken 淮水 pontoon and smashed wine jars; demo `--demo=recap --north --chapter=xuzhou`). · 北6 `rc_huainan_n` 杜夫人·新酒: she ties down a new wine jar under the pear blossom, 朗儿 sneaks a finger of wine in front of her, 郭嘉 small in the doorway sniffing a jar (gift after 结局八 · 断桥, hers; dream = a 寿春 pillar with smashed jars at its foot; demo `--demo=recap --north --chapter=huainan_n`). · 北7 `rc_yecheng` 赵云·黎阳的船: he jumps onto 糜贞's grain ship and doesn't know where to put his hands, she straightens his collar (gift after 结局十二 · 遗策). · 北8 `rc_longhu` 郭嘉·最后一个葫芦: by the 黄河 at night he hands 郭照 his last wine gourd (page needs 北线：郭嘉随军; gift after 结局十四 · 断弦). · 北9 `rc_xiliang` 马云騄·那只羊: 辽东 snow, she turns a roast lamb, 吕玲绮 behind her with a wine jar (page needs 北线：西凉归附; gift after 结局十六 · 洛殇). · 北10 `rc_sanfang` 甄宓·热汤面: grown 甄宓 cooking noodles on the grain-ship deck, 庞统 behind her with an empty bowl (page needs 北线：破虎牢; gift after 结局十八 · 烛灭). · 北11 `rc_tianqing` **the hero himself** (user's pick, the one exception to "the hero never appears"): first snow on a city wall, he rubs his temple looking west, 甄宓 straightens his collar; the card is a **lord card version** `lord_north_snow` 主公·初雪 in `lord_forms.forms` (not in `grants`; the story rewards `lord:lord_north_snow`; its portrait key is the form id), gift after 北线结局 · 官渡. The north is done; demo `--demo=recap --north --chapter=<quest>` for every north page.
 
-Plan for the rest (check each against the chapter text; ask only if the chapter has no obvious warm pair):
+Plan for the rest — all done now except as noted (check each against the chapter text):
 北4 郑好、姜巧 cooking breakfast, 太史慈 ·
 北6 杜夫人 brewing, 郭嘉 sniffing ·
 北7 赵云 and 糜贞 · 北8 郭嘉 and 郭照 ·
 南9 祝融、孟获 · 北9 马超、马云騄、马岱 by the horses · 南10 吴苋 · 北10 grown 甄宓 cooking for the army, 庞统 ·
 南11 吕布 teaching 董白 to ride · 北11 关羽、张飞 (the beard bag).
 Chapter 12 ends in an ending — no page.
+
+## Later user rules (2026-10-24)
+
+- **Story window**: a ？小故事 is listed only for its own chapter — on that chapter's end page and through the next
+  chapter's 整备 (`Quests.side_stories`: `also`, else `quests_cleared[-1]`); missed, it waits for the next 周目. The first
+  open in a 周目 costs 5 and rewards; re-opening it in the window is free, no second reward. `save.side_seen` remembers
+  stories across 周目 (shown as 看过); a new 周目 pays again in that chapter. Tests: put the chapter last in quests_cleared.
+- **Pairs**: 南7 / 南8 pages are pairs (`rc_ceqiao` 孙策大乔, `rc_yuqiao` 周瑜小乔). The single 孙策 / 周瑜 pictures and
+  祝融 (`sx_zhurong`) are ordinary stories that give their cards (`s_sunce_baozi`, `s_zhouyu_qin`, `s_zhurong`).
+- **南9 孙尚香** (`rc_tianfu`, gift after 香烬), **南10 吴苋** (`rc_guanzhong`, gift after 算尽).
+- **Chapter 11 is the hero himself** (the only page with him): 北 `rc_tianqing` with 甄宓 on a snowy wall, 南 `rc_luoyang_s`
+  with 孙尚香 on a boat on the 洛水 (南船北马). The card is a **lord card** in `lord_forms` (`lord_north_snow` 主公·初雪,
+  `lord_south_river` 主公·洛水夜船; SR 84/84, `art: true`, portrait key = the form id), handed over by `"lord:<form>"`;
+  gift after the route's final end (北线结局 · 官渡 / 南线结局 · 赤壁).
+- **Endings**: a bad end or a final end gets the same settlement page with that ending's symbolic picture (no people)
+  and only 本章回顾 / 抽卡 / 点化 — no ？小故事; button 进入结局 (`MapScreen._recap_end`). Demo:
+  `--demo=recap --north --chapter=heishan --ending`.
+- The north pages were made by another session in parallel — edit cards.json / side_stories.json in place, never
+  regenerate them from an older read.

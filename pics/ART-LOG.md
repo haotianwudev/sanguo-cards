@@ -1278,3 +1278,5 @@
 - [x] 2026-10-24 cg `rc_tianqing` ← rc_tianqing.jpg · ok
 - [x] 2026-10-24 portrait `lord_north_snow` ← lord_north_snow.jpg · ok
 - [x] 2026-10-24 cg `rc_luoyang_s` ← rc_luoyang_s.jpg · ok
+- [x] 2026-10-24 portrait `rc_luoyang_s` ← rc_luoyang_s_card.jpg · ok
+- [x] 2026-10-24 portrait `lord_south_river` ← rc_luoyang_s_card.jpg · ok

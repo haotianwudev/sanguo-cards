@@ -1355,7 +1355,8 @@ func _offer_caption(c: Dictionary) -> String:
 func _complete() -> void:
 	## The chapter-end page: this chapter's picture on the left (its people are all on the left side), the menu on the right.
 	## Every row is a 故事 with its name and 战功 cost, no reward written (user rule): 本章回顾 (free) and the ？小故事 first,
-	## then 抽一次卡 and 点化; 进入下一章 at the bottom. No panel behind the menu: the rows sit on the picture's empty right side. (The picture is also a card, but an extra ？小故事 hands it over, after the route's next bad end.)
+	## then 抽一次卡 and 点化; 进入下一章 at the bottom. No panel behind the menu: the rows sit on the picture's empty right side. (The picture is also a card, but an extra ？小故事 hands it over, after a bad end.)
+	## A bad end or the final end gets the same settlement page with that ending's symbolic picture and no ？小故事.
 	if get_node_or_null("Recap") != null:
 		return
 	var db := GameData.get_db()
@@ -1363,6 +1364,11 @@ func _complete() -> void:
 	_recap_r = Quests.recap(Game.save)
 	_recap_earned = Quests.pay_merit(q, Game.save)
 	var page := Quests.chapter_page(_recap_qid, Game.save)
+	_recap_end = q.get("_raw", q).get("ending", {})  # a bad end / final end this run reached: its symbolic picture, no ？小故事
+	if not Game.save.run_records.has(_recap_end.get("title", "")):
+		_recap_end = {}
+	if not _recap_end.is_empty():
+		page = {"cg": _recap_end.get("cg", "")}
 	Game.persist()
 	var root := Control.new()
 	root.name = "Recap"
@@ -1387,7 +1393,7 @@ func _complete() -> void:
 	col.size = Vector2(440, 684)
 	col.add_theme_constant_override("separation", 8)
 	root.add_child(col)
-	var title := Kit.label("「%s」完" % Quests.title(q, Game.save), Kit.FONT_BIG + 4, "gold")
+	var title := Kit.label(("「%s」" % _recap_end["title"]) if not _recap_end.is_empty() else ("「%s」完" % Quests.title(q, Game.save)), Kit.FONT_BIG + 4, "gold")
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	col.add_child(title)
 	_recap_merit = Kit.label("", Kit.FONT_BODY, "text")
@@ -1403,7 +1409,7 @@ func _complete() -> void:
 	_recap_list.custom_minimum_size = Vector2(430, 0)
 	_recap_list.add_theme_constant_override("separation", 8)
 	scroll.add_child(_recap_list)
-	var go := Kit.button("进入下一章 ▶", "green", Kit.FONT_BIG)
+	var go := Kit.button("进入结局 ▶" if not _recap_end.is_empty() else "进入下一章 ▶", "green", Kit.FONT_BIG)
 	go.custom_minimum_size = Vector2(440, 60)
 	go.pressed.connect(func():
 		root.queue_free()
@@ -1414,6 +1420,7 @@ func _complete() -> void:
 
 
 var _recap_qid := ""
+var _recap_end: Dictionary = {}  # the ending this chapter-end page settles, or {} for an ordinary chapter end
 var _recap_r: Dictionary = {}
 var _recap_earned := 0
 var _recap_list: VBoxContainer
@@ -1430,7 +1437,7 @@ func _fill_recap() -> void:
 	var draw_cost := int(db.gacha["merit"]["draw"])
 	var up_cost := int(db.gacha["merit"]["upgrade"])
 	_recap_row("本章回顾", "免费", true, _show_recap_detail)
-	for st in Quests.side_stories(s, _recap_qid):
+	for st in ([] if not _recap_end.is_empty() else Quests.side_stories(s, _recap_qid)):  # an ending's page has no ？小故事 (user rule)
 		var read: bool = st["read"]
 		var cost := Quests.side_cost(st)
 		_recap_row(str(st["title"]) + ("（看过）" if st["seen"] and not read else ""), "免费" if read else "%d 战功" % cost, read or s.merit >= cost, func():

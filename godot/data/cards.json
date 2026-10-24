@@ -159,6 +159,15 @@
       "lord_north_sleep"
     ],
     "forms": {
+      "lord_south_river": {
+        "name": "主公·洛水夜船",
+        "route": "south",
+        "rarity": "SR",
+        "hp": 84,
+        "at": 84,
+        "skills": [],
+        "art": true
+      },
       "lord_north_snow": {
         "name": "主公·初雪",
         "route": "north",

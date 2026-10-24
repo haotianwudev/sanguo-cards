@@ -448,5 +448,7 @@
   "rc_ceqiao": {"file": "rc_ceqiao.jpg", "face": [0.45, 0.42], "head": 0.24},
   "rc_yuqiao": {"file": "rc_yuqiao.jpg", "face": [0.48, 0.42], "head": 0.24},
   "rc_sanfang": {"file": "rc_sanfang.jpg", "face": [0.38, 0.42], "head": 0.24},
-  "lord_north_snow": {"file": "lord_north_snow.jpg", "face": [0.5, 0.42], "head": 0.24}
+  "lord_north_snow": {"file": "lord_north_snow.jpg", "face": [0.5, 0.42], "head": 0.24},
+  "rc_luoyang_s": {"file": "rc_luoyang_s.jpg", "face": [0.48, 0.42], "head": 0.24},
+  "lord_south_river": {"file": "lord_south_river.jpg", "face": [0.48, 0.42], "head": 0.24}
 }

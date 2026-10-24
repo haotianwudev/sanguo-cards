@@ -453,6 +453,8 @@
 | `rc_yuqiao` | source/generals/rc_yuqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_sanfang` | source/generals/rc_sanfang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_north_snow` | source/generals/lord_north_snow.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_luoyang_s` | source/generals/rc_luoyang_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_river` | source/generals/lord_south_river.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
