@@ -1163,3 +1163,5 @@
 - [x] 2026-10-23 battle `m10_jijiu` ← m10_jijiu.jpg · ok
 - [x] 2026-10-23 battle `m10_ziwu_exit` ← m10_ziwu_exit.jpg · ok
 - [x] 2026-10-23 battle `jx_ganning` ← jx_ganning.jpg · ok
+- [ ] 2026-10-23 battle `m11_bazhen` ← m11_bazhen_v2.jpg · ok
+- [ ] 2026-10-23 battle `m11_liubei` ← m11_liubei_v2.jpg · ok
