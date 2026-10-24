@@ -25,6 +25,7 @@ var _log: RichTextLabel
 var _cards: Array = []  # CardView per leader
 var _skill_popup: Control  # open skill-picker for whichever leader was last tapped, or null
 var _skill_layer: Control  # the skill buttons laid over each leader who can act (tap one to play it straight away)
+var _skill_hide_btn: Button  # 隐藏技能 / 显示技能
 var _skill_popup_at := 0  # msec it opened: the finger-lift from the tap that opened it must not close it
 var _defend: Button
 var _retreat: Button
@@ -248,7 +249,7 @@ func _build() -> void:
 
 	# party bar
 	_party_box = PanelContainer.new()
-	_party_box.position = Vector2(20, 276) if not has_cg else Vector2(20, 346)  # with a CG it sits higher: the skill strip goes between it and the cards
+	_party_box.position = Vector2(20, 276) if not has_cg else Vector2(20, 390)
 	_party_box.size = Vector2(1240, 70) if not has_cg else Vector2(1240, 48)
 	var pbg := Kit.c("party_bg")
 	if has_cg:
@@ -283,10 +284,10 @@ func _build() -> void:
 	var row := HBoxContainer.new()
 	_row = row
 	_has_cg = has_cg
-	row.position = Vector2(20, 396) if not has_cg else Vector2(20, 440)  # room above each card for its skill strip
+	row.position = Vector2(20, 340) if not has_cg else Vector2(20, 440)
 	row.add_theme_constant_override("separation", 2)
 	add_child(row)
-	var card_size := Vector2(226, 318) if not has_cg else Vector2(190, 266)
+	var card_size := Vector2(240, 336) if not has_cg else Vector2(190, 266)
 	_card_size = card_size
 	var locked_w := 70.0
 	for i in b.leaders.size():
@@ -333,6 +334,13 @@ func _build() -> void:
 	_auto_btn.pressed.connect(_toggle_auto)
 	low.add_child(_auto_btn)
 	_sync_auto_btn()
+	_skill_hide_btn = Kit.button("隐藏技能", "gray", Kit.FONT_SMALL)  # next to 设置: the strips float over the cards, this clears them away
+	_skill_hide_btn.focus_mode = Control.FOCUS_NONE
+	_skill_hide_btn.custom_minimum_size = Vector2(112, 40)
+	_skill_hide_btn.position = Vector2(1066, 8)
+	_skill_hide_btn.z_index = 5
+	_skill_hide_btn.pressed.connect(_toggle_skill_bars)
+	add_child(_skill_hide_btn)
 	var menu_btn := Kit.button("设置", "gray", Kit.FONT_SMALL)
 	menu_btn.custom_minimum_size = Vector2(84, 40)
 	menu_btn.position = Vector2(1186, 8)
@@ -435,13 +443,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _sync_skill_bars() -> void:
-	## every leader who can act shows his skills in a strip right above his card (never over the portrait): one tap plays it.
+	## every leader who can act shows his skills in a strip floating over the top of his card (the cards keep their own place and size): one tap plays it.
 	## Hidden while anything plays out, in 自动, and once the fight is decided; tapping the card itself still opens the full panel (换人)
 	if _skill_layer == null:
 		return
 	for ch in _skill_layer.get_children():
 		ch.queue_free()
-	if _busy or auto_on or b.result != "":
+	if _skill_hide_btn != null:
+		_skill_hide_btn.text = "显示技能" if _skills_hidden() else "隐藏技能"
+	if _busy or auto_on or b.result != "" or _skills_hidden():
 		return
 	var small := _has_cg
 	for i in b.leaders.size():
@@ -452,7 +462,7 @@ func _sync_skill_bars() -> void:
 		var r := v.get_global_rect()
 		var bar := HBoxContainer.new()  # side by side: name on top, AP under it
 		bar.add_theme_constant_override("separation", 3)
-		var bh := 40.0
+		var bh := 50.0 if small else 58.0  # big enough to hit with a thumb; it may overlap the frame's top edge and the party bar a little
 		var skills: Array = u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
@@ -460,27 +470,38 @@ func _sync_skill_bars() -> void:
 			var btn := Button.new()
 			btn.text = "%s
 AP%d" % [sk["name"], b.cost(u, sk)]
-			btn.add_theme_font_size_override("font_size", (10 if str(sk["name"]).length() >= 5 else 12) if small else 14)  # a five-character name still fits the narrow CG cards
+			var nlen: int = str(sk["name"]).length()  # long names step down so they still fit three to a card
+			btn.add_theme_font_size_override("font_size", ([15, 13, 12] if small else [18, 16, 14])[clampi(nlen - 3, 0, 2)])
 			btn.add_theme_constant_override("line_spacing", -2)
 			btn.clip_text = true
 			btn.focus_mode = Control.FOCUS_NONE
 			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			btn.custom_minimum_size = Vector2(0, bh)
 			var edge: Color = Kit.c("gold") if ult else Color(1, 1, 1, 0.35)
-			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.9), 8, 2 if ult else 1, edge, 2))
+			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.94), 8, 2 if ult else 1, edge, 2))
 			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.95), 8, 2, Kit.c("gold"), 2))
 			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 2))
-			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.07, 0.05, 0.04, 0.6), 8, 1, Color(1, 1, 1, 0.15), 2))
+			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.94), 8, 1, Color(1, 1, 1, 0.15), 2))  # opaque: the card's own tags must not show through
 			btn.add_theme_color_override("font_color", Kit.c("gold") if ult else Color(1, 1, 1))
-			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.35))
+			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
 			btn.disabled = not b.usable(u, sk)
 			btn.pressed.connect(func():
 				_close_skill_popup()
 				_on_skill(i, sid))
 			bar.add_child(btn)
-		bar.position = r.position - global_position + Vector2(0, -bh - 4)
-		bar.size = Vector2(r.size.x, bh)
+		bar.position = r.position - global_position + Vector2(4, 4)  # floats over the card's top: the party bar above stays clear
+		bar.size = Vector2(r.size.x - 8, bh)
 		_skill_layer.add_child(bar)
+
+
+func _skills_hidden() -> bool:
+	return bool(Game.options.get("hide_skill_bars", false))
+
+
+func _toggle_skill_bars() -> void:
+	## 隐藏技能: the strips go away to show the whole cards (tap a card for its skills); kept in options.cfg
+	Game.set_option("hide_skill_bars", not _skills_hidden())
+	_sync_skill_bars()
 
 
 func _close_skill_popup() -> void:
