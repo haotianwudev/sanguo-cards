@@ -212,8 +212,17 @@ func _build() -> void:
 		hp_row.add_child(_enemy_hp_label)
 		hp_row.add_child(Kit.label("攻击 %d · 每回合行动 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
 		info.add_child(hp_row)
-	else:
-		info.add_child(_enemy_hp_label)
+		var arm_l := _armor_label(e)
+		if arm_l != null:
+			info.add_child(arm_l)
+	else:  # the HP numbers share their line with the 护甲
+		var hp_line := HBoxContainer.new()
+		hp_line.add_theme_constant_override("separation", 16)
+		hp_line.add_child(_enemy_hp_label)
+		var arm_cg := _armor_label(e)
+		if arm_cg != null:
+			hp_line.add_child(arm_cg)
+		info.add_child(hp_line)
 	_enemy_status = Kit.label("", Kit.FONT_SMALL, "purple")
 	# a long list of statuses must wrap, never widen the panel (it stretched the enemy HP bar behind the log)
 	_enemy_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -589,6 +598,18 @@ func _on_retreat() -> void:
 
 
 # ---- animation ---------------------------------------------------------------
+
+func _armor_label(e: Dictionary) -> Label:
+	## the enemy's 护甲 and resists in one short line (「藤甲：物理抗性 80%　法术弱点 +100%」), or null when it has neither
+	var res := Kit.resist_text(e, false, true)
+	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
+	if res == "" and arm.is_empty():
+		return null
+	var l := Kit.label(("%s：" % arm["name"] if not arm.is_empty() else "") + res, Kit.FONT_SMALL, "amber")
+	if not arm.is_empty():
+		l.tooltip_text = arm["hint"]
+	return l
+
 
 func _enemy_fx_scale() -> float:
 	return clampf(_enemy_art.size.x / 340.0, 0.5, 1.5)

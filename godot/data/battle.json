@@ -48,6 +48,18 @@
       0.6
     ],
     "defend_ap": 2,
+    "_armors": "护甲类型：敌人写 \"armor\": \"<id>\" 就用这里的物抗 / 法抗（覆盖它自己写的 phys_resist / magic_resist）。负数 = 弱点，-1.0 即受到两倍伤害；灼烧也吃法抗。战前情报和战斗界面都显示护甲名和抗性。",
+    "armors": {
+      "tengjia": {"name": "藤甲", "phys": 0.8, "magic": -1.0, "hint": "刀枪不入，一点就着"},
+      "zhongjia": {"name": "重甲", "phys": 0.5, "magic": -0.25, "hint": "铁甲挡得住刀枪，挡不住火"},
+      "muqi": {"name": "木器", "phys": 0.6, "magic": -0.8, "hint": "木头架子砍不动，烧得旺"},
+      "manjia": {"name": "蛮甲", "phys": 0.35, "magic": -0.4, "hint": "兽皮硬甲，怕火"},
+      "huoshen": {"name": "火神", "phys": -0.25, "magic": 0.7, "hint": "火烧不动，近身就软"},
+      "daoshu": {"name": "道术", "phys": -0.3, "magic": 0.6, "hint": "符咒挡法术，挡不住刀"},
+      "moushi": {"name": "谋士", "phys": -0.2, "magic": 0.5, "hint": "算得到计策，算不到拳头"},
+      "fushui": {"name": "符水", "phys": -0.2, "magic": 0.35, "hint": "喝了符水不怕邪，皮肉照样疼"},
+      "pimao": {"name": "皮毛", "phys": 0.2, "magic": -0.5, "hint": "野兽皮厚，见火就跑"}
+    },
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
     "enemy_hp_mult": 1.24,

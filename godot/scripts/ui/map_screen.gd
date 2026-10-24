@@ -1051,12 +1051,14 @@ func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 
 
 func _resists(e: Dictionary) -> String:
+	## the 护甲 (if any) and both resists, a weakness (negative resist) in red: 「藤甲（刀枪不入，一点就着）　物理抗性 80%　法术弱点 +100%」
 	var r := ""
-	if e["phys_resist"] > 0.0:
-		r += "　物理抗性 %d%%" % int(round(e["phys_resist"] * 100))
-	if e["magic_resist"] > 0.0:
-		r += "　法术抗性 %d%%" % int(round(e["magic_resist"] * 100))
-	return r
+	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
+	if not arm.is_empty():
+		r += "
+[color=%s][b]护甲·%s[/b]（%s）[/color]" % [Kit.c("amber").to_html(), arm["name"], arm["hint"]]
+	var t := Kit.resist_text(e)
+	return r + ("　" + t if t != "" else "")
 
 
 func _moves_text(e: Dictionary) -> String:

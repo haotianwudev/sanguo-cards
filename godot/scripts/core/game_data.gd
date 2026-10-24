@@ -113,8 +113,13 @@ func _load(dir: String) -> void:
 			"hp": int(round(float(foe_card["hp"]) * float(fc["hp"]))) if not foe_card.is_empty() else int(e["hp"]),
 			"at": int(round(float(foe_card["at"]) * float(fc["at"]))) if not foe_card.is_empty() else int(e["at"]),
 			"actions": int(e["actions"]), "moves": e["moves"],
-			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)),
+			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)), "armor": str(e.get("armor", "")),
 			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "card_public": e.get("card_public", false)}
+		if e.has("armor"):  # 护甲类型 (battle.armors): its resists replace the enemy's own
+			assert(battle.get("armors", {}).has(e["armor"]), "enemy %s: unknown armor %s" % [eid, e["armor"]])
+			var arm: Dictionary = battle["armors"][e["armor"]]
+			enemies[eid]["phys_resist"] = float(arm["phys"])
+			enemies[eid]["magic_resist"] = float(arm["magic"])
 	for rid in raw.get("relics", {}):
 		var r: Dictionary = raw["relics"][rid]
 		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),

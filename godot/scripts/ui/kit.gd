@@ -218,6 +218,19 @@ static func icon(key: String) -> Texture2D:
 	return _textures[k]
 
 
+static func resist_text(e: Dictionary, bbcode := true, short := false) -> String:
+	## 「物理抗性 80%　法术弱点 +100%」: a resist above 0 cuts that kind of damage, below 0 is a weakness (the enemy takes more)
+	var parts: Array = []
+	for k in [["phys_resist", "物理"], ["magic_resist", "法术"]]:
+		var v := float(e.get(k[0], 0.0))
+		if v > 0.0:
+			parts.append(("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))]) if short else ("%s抗性 %d%%" % [k[1], int(round(v * 100))]))
+		elif v < 0.0:
+			var w := "%s弱点 +%d%%" % [k[1], int(round(-v * 100))]
+			parts.append(("[color=%s]%s[/color]" % [c("red").to_html(), w]) if bbcode else w)
+	return (" · " if short else "　").join(parts)
+
+
 const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
 	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap",
 	"counter": "guard", "hurt": "heal", "cleanse": "heal", "buff": "boost"}
