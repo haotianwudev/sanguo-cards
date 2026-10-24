@@ -58,7 +58,8 @@
       "daoshu": {"name": "道术", "phys": -0.3, "magic": 0.6, "hint": "符咒挡法术，挡不住刀"},
       "moushi": {"name": "谋士", "phys": -0.2, "magic": 0.5, "hint": "算得到计策，算不到拳头"},
       "fushui": {"name": "符水", "phys": -0.2, "magic": 0.35, "hint": "喝了符水不怕邪，皮肉照样疼"},
-      "pimao": {"name": "皮毛", "phys": 0.2, "magic": -0.5, "hint": "野兽皮厚，见火就跑"}
+      "pimao": {"name": "皮毛", "phys": 0.2, "magic": -0.5, "hint": "野兽皮厚，见火就跑"},
+      "wushuang": {"name": "无双", "phys": 0.4, "magic": -0.5, "hint": "万夫不当，一中计就乱"}
     },
     "enemy_hp_per_extra_leader": 0.083,
     "_enemy_hp_mult": "全局系数：技能体系 v2 让每 AP 的伤害更高（docs/skills.md），敌人血量整体乘它；只动血量、不动攻击",
