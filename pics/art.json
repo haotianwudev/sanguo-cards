@@ -7383,6 +7383,14 @@
     "n4_zhenghao": {
       "src": "source/cg/n4_zhenghao.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "n4_jiangqiao": {
+      "src": "source/cg/n4_jiangqiao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n4_zj_apart": {
+      "src": "source/cg/n4_zj_apart.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

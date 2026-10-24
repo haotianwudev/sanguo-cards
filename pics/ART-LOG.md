@@ -1281,3 +1281,5 @@
 - [x] 2026-10-24 portrait `rc_luoyang_s` ← rc_luoyang_s_card.jpg · ok
 - [x] 2026-10-24 portrait `lord_south_river` ← rc_luoyang_s_card.jpg · ok
 - [ ] 2026-10-24 cg `n4_zhenghao` ← n4_zhenghao.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-24 cg `n4_jiangqiao` ← n4_jiangqiao.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-24 cg `n4_zj_apart` ← n4_zj_apart.jpg 裁 2528×1696→2528×1422 · ok
