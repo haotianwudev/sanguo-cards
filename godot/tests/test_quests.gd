@@ -1979,3 +1979,16 @@ func test_diaochan_page_and_card() -> void:
 	Quests.open_side(s, "s_rc_dongui")
 	check(s.owned.has("rc_dongui"))
 
+
+func test_diaochan_jingxiang_page_and_card() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue", "taodong", "yuxi", "dongui", "jingxiang"]
+	check_eq(Quests.chapter_page("jingxiang", s).get("cg", ""), "")
+	s.flags = ["结局三 · 同归"]
+	check_eq(Quests.chapter_page("jingxiang", s).get("cg", ""), "rc_jingxiang")
+	s.flags.append("结局五 · 恨海")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_jingxiang")
+	check(s.owned.has("rc_jingxiang"))
+

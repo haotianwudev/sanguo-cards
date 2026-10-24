@@ -2387,6 +2387,19 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_jingxiang": {
+      "name": "淯水·留仙裙",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 88,
+      "at": 72,
+      "skills": [
+        "biyue",
+        "xiaobawang"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",
