@@ -6,6 +6,7 @@ extends Control
 ## Without frame art it falls back to a drawn frame.
 
 signal pressed
+signal held_down  # a long press lifted the card (long_press): the screen may start a drag right away
 
 var tier := 0  # generals: 0 铜 / 1 银 / 2 金 (picks the frame)
 var fighter: Dictionary
@@ -87,6 +88,7 @@ func _hold_check(id: int) -> void:
 	if _armed and id == _press_id and is_inside_tree():
 		held = true
 		_lift(true)
+		held_down.emit()
 
 
 func _gui_input(event: InputEvent) -> void:

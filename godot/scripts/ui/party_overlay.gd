@@ -666,6 +666,10 @@ func _dnd(ctrl: Control, data: Dictionary, target: String) -> void:
 		func(_at: Vector2) -> Variant: return null if data.is_empty() or not _may_lift(ctrl) else _start_drag(ctrl, data),
 		func(_at: Vector2, d: Variant) -> bool: return _can_drop(target, d, ctrl),
 		func(_at: Vector2, d: Variant) -> void: _drop(target, d))
+	if ctrl is CardView and ctrl.long_press and not data.is_empty():  # touch: the long press itself picks the card up — a finger that wobbled a little still drags
+		ctrl.held_down.connect(func():
+			if _touch() and not get_viewport().gui_is_dragging():
+				_start_drag(ctrl, data, true))
 
 
 static func _touch() -> bool:
@@ -677,7 +681,7 @@ func _may_lift(ctrl: Control) -> bool:
 	return not (ctrl is CardView and ctrl.long_press and _touch() and not ctrl.held)
 
 
-func _start_drag(ctrl: Control, data: Dictionary) -> Dictionary:
+func _start_drag(ctrl: Control, data: Dictionary, forced := false) -> Dictionary:
 	var face: Control
 	match data["kind"]:
 		"card":
@@ -697,8 +701,12 @@ func _start_drag(ctrl: Control, data: Dictionary) -> Dictionary:
 	face.modulate.a = 0.92
 	face.scale = Vector2.ONE * 0.9
 	var pv := Control.new()
+	pv.z_index = 4000  # above the 整备 screen (z 60): the preview used to be drawn under it and the carried card was invisible
 	pv.add_child(face)
-	ctrl.set_drag_preview(pv)
+	if forced:  # picked up by a long press: start the drag now, whatever the finger did before
+		ctrl.force_drag(data, pv)
+	else:
+		ctrl.set_drag_preview(pv)
 	var tw := face.create_tween().set_parallel(true)
 	tw.tween_property(face, "scale", Vector2.ONE * 1.12, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tw.tween_property(face, "rotation_degrees", -5.0, 0.14)
