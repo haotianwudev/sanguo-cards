@@ -174,7 +174,7 @@
         "rarity": "SSR",
         "hp": 100,
         "at": 100,
-        "skills": [],
+        "skills": ["qianglong"],
         "art": true
       },
       "lord_south_armor": {
@@ -183,7 +183,7 @@
         "rarity": "SSR",
         "hp": 100,
         "at": 100,
-        "skills": [],
+        "skills": ["tongjia_huxiao"],
         "art": true
       },
       "lord_north_cloak": {
@@ -2138,7 +2138,8 @@
       "hp": 88,
       "at": 100,
       "skills": [
-        "wushuang"
+        "wushuang",
+        "fangtian"
       ],
       "first_win": true,
       "pool": false,

@@ -728,6 +728,31 @@ func test_war_spirit_stacks_four_layers_lifts_attack_and_cuts_damage_then_fades(
 	check(GameData.get_db().build_fighter("guojia")["skills"].has("xianji"), "郭嘉 has it as his skill")
 
 
+func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
+	## user rule: an SSR card (general or lord card) brings three skills, one of them a once-only 大招 of 5+ AP that hits hard
+	var db := GameData.get_db()
+	var seen := 0
+	for cid in db.cards:
+		var c: Dictionary = db.cards[cid]
+		if c["rarity"] != "SSR":
+			continue
+		seen += 1
+		var f: Dictionary
+		if c.has("lord_form"):
+			var fid: String = c["lord_form"]
+			f = db.build_lord("阿明", 1.0, db.lord_forms[fid]["route"] == "north", fid, [fid])
+		else:
+			f = db.build_fighter(cid)
+		check_eq(f["skills"].size(), 3, cid + " has three skills")
+		var ult: Array = f["skills"].filter(func(sid):
+			var sk: Dictionary = db.skills[sid]
+			return sk["cost"] >= 5 and sk["uses"] == 1 and sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]))
+		check(not ult.is_empty(), cid + " has a once-only 大招 of 5+ AP")
+		for sid in ult:
+			check(_attack_value(db.skills[sid]) >= 15.0, "%s: %s is strong enough (%.1f)" % [cid, sid, _attack_value(db.skills[sid])])
+	check(seen >= 5, "the SSR cards were found")
+
+
 func test_the_north_lord_fights_with_a_spear_not_the_blade() -> void:
 	var db := GameData.get_db()
 	var south := db.build_lord("阿明")

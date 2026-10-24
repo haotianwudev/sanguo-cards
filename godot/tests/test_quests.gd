@@ -1020,7 +1020,7 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	var lord := s.lord()
 	check(lord["hp"] > base["hp"] and lord["at"] > base["at"], "the card makes the lord stronger")
 	check_eq(lord["person"], "lord_north_silver", "and brings its own face")
-	check_eq(lord["skills"], base["skills"], "north skills stay the spear's")
+	check_eq(lord["skills"].slice(0, base["skills"].size()), base["skills"], "north keeps the spear's skills (an SSR card adds its own 大招)")
 	var south := SaveData.create()
 	check_eq(Quests.grant_lord_form(q, south), "lord_south_armor", "the south route has its own card")
 	check(s.new_lap().lord_forms.is_empty(), "a new lap starts without the lord cards")
