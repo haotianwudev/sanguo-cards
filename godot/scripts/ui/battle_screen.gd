@@ -551,7 +551,9 @@ func _auto_step() -> void:
 	if not (auto_on and is_inside_tree()) or _busy or b.result != "":
 		return
 	var act := AutoPlayer.next(b)
-	if act.is_empty():
+	if act.is_empty() and AutoPlayer.ends_with_defend(b):  # AP full: guard rather than let it spill
+		await _on_defend()
+	elif act.is_empty():
 		await _on_end_round()
 	else:
 		await _on_skill(act[0], act[1])

@@ -1,7 +1,7 @@
 class_name AutoPlayer
 extends RefCounted
 ## 自动战斗: picks the next action for the player's side — the usable skill with the best value per AP, once-only skills a little
-## less eagerly, a skill that would do nothing never. BOOST counts: a boosted unit's skills are worth boost_mult× (and lean towards its biggest), and a boost skill is worth what it adds to the best waiting ally. Nothing usable = the caller ends the round. Never defends or swaps.
+## less eagerly, a skill that would do nothing never. BOOST counts: a boosted unit's skills are worth boost_mult× (and lean towards its biggest), and a boost skill is worth what it adds to the best waiting ally. Nothing usable = the caller ends the round — or defends, when AP is already full (the round's AP would be wasted anyway: `ends_with_defend`). Never swaps.
 
 
 static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
@@ -26,6 +26,11 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 	if u["boosted"]:  # a boosted unit's next skill is worth boost_mult times (the boost is spent on whatever it plays)
 		v *= float(b.db.battle["boost_mult"])
 	return v
+
+
+static func ends_with_defend(b: Battle) -> bool:
+	## nothing left to play and AP at its cap: guard instead of a plain end of round (the AP the next round brings would only spill over)
+	return b.ap >= b.ap_max() and b.can_defend()
 
 
 static func next(b: Battle) -> Array:

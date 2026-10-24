@@ -124,9 +124,20 @@ func test_auto_battle_plays_a_whole_fight_and_never_wastes_a_skill() -> void:
 			check(b.can_act(act[0]) and b.usable(u, b.db.skills[act[1]]), "it only picks what can be played: " + str(act[1]))
 			check(AutoPlayer.value(b, u, b.db.skills[act[1]]) > 0.0, "…and never an action that does nothing: " + str(act[1]))
 			b.act(act[0], act[1])
+		elif AutoPlayer.ends_with_defend(b):
+			b.defend()
 		else:
 			b.end_round()
 	check(b.result != "", "the fight ends (win or lose) by itself")
+
+
+func test_auto_battle_defends_when_ap_is_full() -> void:
+	## nothing worth playing and AP at its cap: 自动 guards instead of ending the round
+	var b := new_battle()
+	b.ap = b.ap_max()
+	check(AutoPlayer.ends_with_defend(b), "full AP: defend")
+	b.ap = b.ap_max() - 1
+	check(not AutoPlayer.ends_with_defend(b), "AP not full: a plain end of round")
 
 
 func test_carry_in_and_out() -> void:
