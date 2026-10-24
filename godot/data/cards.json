@@ -2310,6 +2310,19 @@
       "pool": false,
       "scope": "south"
     },
+    "rc_wuji": {
+      "name": "无极·商母与幼女",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 98,
+      "at": 64,
+      "skills": [
+        "chijia",
+        "luoshen"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

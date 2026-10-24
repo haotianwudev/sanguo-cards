@@ -440,13 +440,14 @@ func demo(name: String) -> void:
 		"recap1":  # the chapter-end page of the south's first chapter: its picture, the menu, the picture's card
 			var q1: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q1, save)
-			Quests.record(save, "出生：江东富春")
-			save.grant_card("sunce")
-			save.grant_card("zhouyu")
+			var north1 := OS.get_cmdline_user_args().has("--north")  # --north: the north's first chapter
+			Quests.record(save, "出生：冀州无极" if north1 else "出生：江东富春")
+			save.grant_card("zhaoyun" if north1 else "sunce")
+			save.grant_card("guojia" if north1 else "zhouyu")
 			save.run_battles = 6
 			save.run_bosses = 2
 			save.merit = 1
-			save.square = "north"
+			save.square = "jz_end" if north1 else "north"
 			save.resolved = true
 			var m1 := MapScreen.new()
 			show_screen(m1)

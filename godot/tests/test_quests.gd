@@ -1889,3 +1889,16 @@ func test_the_chapter_page_card_comes_from_a_story_after_the_next_bad_end() -> v
 	n.flags = ["结局一 · 玉碎"]
 	n.quests_cleared = ["prologue"]
 	check(not Quests.side_stories(n).map(func(x): return x["id"]).has("s_rc_fuchun"), "not in a north 周目")
+
+
+func test_the_north_first_page_and_its_card_after_fuchao() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue"]
+	check_eq(Quests.chapter_page("prologue", s).get("cg", ""), "rc_wuji")
+	check(not Quests.side_stories(s).map(func(x): return x["id"]).has("s_rc_wuji"), "not before 结局二 · 覆巢")
+	s.flags = ["结局二 · 覆巢"]
+	s.merit = 5
+	Quests.open_side(s, "s_rc_wuji")
+	check(s.owned.has("rc_wuji"), "雪夜算盘 hands over 无极·商母与幼女")
+

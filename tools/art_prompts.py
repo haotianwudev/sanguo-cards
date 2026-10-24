@@ -1820,6 +1820,7 @@ CGS = {
     "b_lamei": "幕后·腊月那一夜",
     "b_xuduye": "幕后·许都夜议",
     "b_majia": "幕后·马家",
+    "rc_wuji": "北线第一章章末：雪夜甄府书房，炭火盆边张夫人扶着算盘，小甄宓跪在身边拨珠子；人物都在左边，右边是圆窗外的雪和红梅",
     "rc_fuchun": "南线第一章章末：富春江边廊下，吴夫人缝小衣裳，少年孙权帮她绕线，小孙尚香抱着小木弓趴在她腿边；人物都在左边，右边是江面晚霞",
     "c3_home": "回到无极：春雨里商队回到甄府门口，甄宓光着脚扑进北线主角怀里，张夫人从马车上下来笑着看，张宁背着药篓局促地站在队尾粮车旁",
     "c3_guotu_raid": "outside the gates of the Zhen manor in Wuji: the sinister Guo Tu laughing on horseback with a fan, as heavy Jizhou infantry smash open the manor's great doors",

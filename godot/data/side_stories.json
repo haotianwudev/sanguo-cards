@@ -5,10 +5,31 @@
   "_reward": "every story names its reward, paid when it is opened: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
   "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless pick the route for the shared first chapter.",
   "chapters": {
-    "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}]
+    "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}, {"requires": "出生：冀州无极", "cg": "rc_wuji"}]
   },
   "after": {
     "prologue": [
+      {"id": "s_rc_wuji", "title": "雪夜算盘", "portraits": ["zhangfuren", "zhenmi_young"], "requires": "结局二 · 覆巢", "unless": "出生：江东富春", "reward": {"cards": ["rc_wuji"]}, "cg": "rc_wuji", "text": [
+        "你做了一个梦。",
+        "梦里下着冬雨，甄府的大门烧成了焦炭。台阶上有一把摔断的算盘，算珠滚了一地，积水里泡着一个粉色的小布娃娃。",
+        "你醒过来的时候，窗外在下雪。你不记得梦里还有谁，只记得那个布娃娃，心里空了一块。",
+        "你披上衣服，走到书房门口。",
+        "屋里点着灯笼，炭火盆烧得通红。张夫人坐在矮榻上，膝上放着一把算盘。甄宓跪在她身边，伸着小手一颗一颗地拨珠子。",
+        "@zhenmi_young 甄宓：「三上三，五去二……娘，七减四是几？」",
+        "@zhangfuren 张夫人：「你自己拨。拨出来，就是几。」",
+        "@zhenmi_young 甄宓：「……三！」",
+        "@zhangfuren 张夫人：「那哥哥欠你的糖，三十七块，还了四块，还剩几块？」",
+        "甄宓拨了半天，抬起头，一脸委屈。",
+        "@zhenmi_young 甄宓：「……还剩好多好多。」",
+        "张夫人笑出了声，伸手替她把散下来的头发抿到耳后。窗外的雪落在红梅上，一点声音都没有。",
+        "你站在门口，没有走进去。",
+        "@lord {lord}（内心）：……不知道为什么，我想把这一幕记住。炭火，算盘，还有她笑的样子。",
+        "@lord {lord}（内心）：要是哪天这些都没了，至少还有一个人记得，无极下雪的晚上，有过这样一间亮着灯的屋子。",
+        "甄宓看见了你，从榻上跳下来，光着脚跑到门口。",
+        "@zhenmi_young 甄宓：「哥哥！你欠我三十三块糖！娘算的！」",
+        "张夫人没抬头，只把算盘往旁边推了推，给你让出半张榻。",
+        "@zhangfuren 张夫人：「进来坐。外头冷。」"
+      ]},
       {"id": "s_rc_fuchun", "title": "针脚", "portraits": ["wuguotai", "sunquan_young", "sunshangxiang_young"], "requires": "结局一 · 玉碎", "unless": "出生：冀州无极", "reward": {"cards": ["rc_fuchun"]}, "cg": "rc_fuchun", "text": [
         "你做了一个梦。",
         "梦里是南阳，下着雨。一方玉玺砸在石头上，碎成了好几块。有个人背对着你，没有回头。",

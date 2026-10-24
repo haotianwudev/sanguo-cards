@@ -3834,6 +3834,15 @@
         0.42
       ],
       "head": 0.24
+    },
+    "rc_wuji": {
+      "src": "source/generals/rc_wuji.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.567,
+        0.42
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -7057,6 +7066,10 @@
     },
     "rc_fuchun": {
       "src": "source/cg/rc_fuchun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_wuji": {
+      "src": "source/cg/rc_wuji.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
