@@ -38,6 +38,7 @@ var _has_cg := false
 var _fx := {}  # persistent status effects on screen: key -> node (see _sync_fx)
 var _badges: Array = []  # corner badges currently on screen (freed and rebuilt on every refresh)
 var _boost_hits := false  # the blows now landing come from a BOOSTed leader
+var _ult_hits := false  # the blows of a physical 大招 play as the big curved cut (BattleFx.ult_slash)
 var _intro_wait := 0.0  # seconds of the enemy's entrance line, so 自动 doesn't talk over it
 var _enemy_shouted_this_turn := false  # 敌人本回合是否已经战吼过（防止多段行动或灼烧连喊）
 
@@ -762,7 +763,9 @@ func _play(events: Array) -> void:
 				tw.tween_property(v, "position:y", y, 0.14)
 				_boost_hits = bool(ev.get("boost", false))
 				_sfx_act(ev)
-				if _is_ult(GameData.get_db().skills.get(str(ev.get("skill", "")), {})):
+				var used: Dictionary = GameData.get_db().skills.get(str(ev.get("skill", "")), {})
+				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] == "attack")  # a physical 大招: its blows are the big cuts
+				if _is_ult(used):
 					await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
 				if _boost_hits:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
@@ -777,7 +780,11 @@ func _play(events: Array) -> void:
 				BattleFx.scale = _enemy_fx_scale()
 				match ev["t"]:
 					"hit":
-						BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits)
+						if _ult_hits and ev["kind"] != "magic":
+							BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
+							Kit.shake(self, 22.0, 0.3)
+						else:
+							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits)
 					"counter":
 						BattleFx.counter(self, _enemy_center())
 					"burn":
@@ -798,6 +805,8 @@ func _play(events: Array) -> void:
 				if big:
 					Kit.shake(self, 6.0 + 24.0 * minf(ratio, 0.3), 0.18)
 					await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
+				if _ult_hits and ev["t"] == "hit":
+					await get_tree().create_timer(0.22).timeout  # let the big cut finish before the next blow
 				await get_tree().create_timer(0.16).timeout
 			"swap":
 				_rebuild_card(ev["unit"])

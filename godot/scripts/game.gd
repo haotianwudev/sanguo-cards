@@ -929,6 +929,10 @@ func demo(name: String) -> void:
 						b.b.enemy["charging"] = m["name"]
 						break
 				await b._on_end_round()
+			elif name == "fight" and OS.get_cmdline_user_args().has("--ult-lord"):  # a physical 大招: the lord's 扔刀 as the big curved cut
+				await get_tree().create_timer(0.5).timeout
+				b.b.ap = b.b.ap_max()
+				await b._on_skill(0, "rengdao")
 			elif name == "fight" and OS.get_cmdline_user_args().has("--ult"):  # the 大招 cut-in: 周瑜·赤壁's 赤壁业火, AP topped up
 				await get_tree().create_timer(0.5).timeout
 				b.b.ap = b.b.ap_max()

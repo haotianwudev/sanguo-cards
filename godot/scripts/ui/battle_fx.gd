@@ -120,6 +120,82 @@ static func hit(parent: Control, at: Vector2, kind: String, combo: int, dmg_rati
 		ring(parent, p, Color(1.0, 0.55, 0.3), 14.0, 150.0, 0.36, 7)
 
 
+static func _crescent(c: Vector2, r: float, a0: float, a1: float, w: float, n := 24) -> PackedVector2Array:
+	## a blade-arc: an arc of radius r around c from angle a0 to a1, w thick in the middle, tapering to points at both ends
+	var outer := PackedVector2Array()
+	var inner := PackedVector2Array()
+	for i in n + 1:
+		var k := float(i) / n
+		var ang := lerpf(a0, a1, k)
+		var half := w * 0.5 * sin(PI * k)
+		outer.append(c + Vector2.from_angle(ang) * (r + half))
+		inner.append(c + Vector2.from_angle(ang) * (r - half))
+	inner.reverse()
+	return outer + inner
+
+
+static func arc_slash(parent: Control, at: Vector2, mid_deg: float, r: float, w: float, color: Color, core: Color, delay := 0.0, flip := false) -> void:
+	## one big curved cut whose middle passes through `at`: the arc sweeps open (0.11 s), a red after-image lingers, then it fades
+	r *= scale
+	w *= scale
+	var mid := deg_to_rad(mid_deg)
+	var c := at - Vector2.from_angle(mid) * r
+	var a0 := mid + (0.62 if flip else -0.62)  # ~70° of arc: a long sweeping cut that still stays on the enemy
+	var a1 := mid + (-0.62 if flip else 0.62)
+	var holder := Node2D.new()
+	holder.z_index = 47
+	holder.modulate.a = 0.0
+	parent.add_child(holder)
+	var trail := Polygon2D.new()  # the after-image, wider and red, under the blade
+	trail.color = Color(1.0, 0.3, 0.15, 0.55)
+	holder.add_child(trail)
+	var edge := Polygon2D.new()
+	edge.color = color
+	holder.add_child(edge)
+	var heart := Polygon2D.new()  # the white-hot core of the cut
+	heart.color = core
+	holder.add_child(heart)
+	var draw := func(p: float) -> void:
+		var e := lerpf(a0, a1, p)
+		trail.polygon = _crescent(c, r, a0, e, w * 1.6)
+		edge.polygon = _crescent(c, r, a0, e, w)
+		heart.polygon = _crescent(c, r, a0, e, w * 0.38)
+	draw.call(0.02)
+	var tw := holder.create_tween()
+	tw.tween_interval(delay)
+	tw.tween_property(holder, "modulate:a", 1.0, 0.01)
+	tw.tween_method(draw, 0.02, 1.0, 0.11).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(0.12)
+	tw.tween_property(holder, "modulate:a", 0.0, 0.32)
+	tw.tween_callback(holder.queue_free)
+
+
+static func flash(parent: Control, color := Color(1, 1, 1, 0.7), secs := 0.16) -> void:
+	## the whole screen blinks
+	var f := ColorRect.new()
+	f.color = color
+	f.size = parent.size
+	f.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	f.z_index = 48
+	parent.add_child(f)
+	var tw := f.create_tween()
+	tw.tween_property(f, "modulate:a", 0.0, secs)
+	tw.tween_callback(f.queue_free)
+
+
+static func ult_slash(parent: Control, at: Vector2, combo: int, dmg_ratio: float) -> void:
+	## 大招劈砍: a huge curved cut across the enemy, then a reverse cut crossing it, a white flash, sparks and a shockwave
+	var mirror := combo % 2 == 0  # multi-hit ultimates alternate the side the first cut comes from
+	# the arc's tangent at `at` is its mid angle − 90°: mid 125° cuts top-left → bottom-right, mid 55° top-right → bottom-left
+	arc_slash(parent, at, 55.0 if mirror else 125.0, 300.0, 44.0, Color(1.0, 0.86, 0.45), Color(1, 1, 1), 0.0, mirror)
+	arc_slash(parent, at + Vector2(0, 10) * scale, 125.0 if mirror else 55.0, 270.0, 30.0, Color(1.0, 0.62, 0.3), Color(1, 0.97, 0.88), 0.09, not mirror)
+	flash(parent, Color(1, 1, 1, 0.6), 0.18)
+	burst(parent, at, Color(1.0, 0.85, 0.45), 18, 20.0, 190.0, 6.0, 0.4)
+	ring(parent, at, Color(1.0, 0.92, 0.6), 20.0, 210.0, 0.38, 9)
+	if dmg_ratio > 0.15:
+		ring(parent, at, Color(1.0, 0.45, 0.25), 30.0, 280.0, 0.48, 6)
+
+
 static func counter(parent: Control, at: Vector2) -> void:
 	## 反击: a cold teal cut, thrown back
 	slash(parent, at, Color(0.45, 0.95, 0.9), 20.0, 260.0, 12.0)
