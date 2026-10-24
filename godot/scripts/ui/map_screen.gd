@@ -33,6 +33,9 @@ var _dlg_buttons: Control
 var _dlg_tools: HBoxContainer  # 跳过 / 隐藏
 var _dlg_dump := false  # 跳过 dumped every line into the box: it scrolls in a fixed height instead of growing past the screen
 var _dlg_log := false  # 记录 is open: the text box lists every line read so far
+var _touch_down := false  # a press on the story box / picture is held: a drag scrolls the text, a still lift is the tap
+var _touch_travel := 0.0
+const TAP_SLOP := 14.0
 var _log_saved := {}
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
@@ -902,15 +905,28 @@ func _dialog_skip() -> void:
 
 
 func _on_story_click(e: InputEvent) -> void:
+	# a finger dragged over the box scrolls a scrollable text (记录, 跳过's full scene) — on a phone a press must not close it at once
+	if e is InputEventMouseMotion and _touch_down:
+		_touch_travel += absf(e.relative.x) + absf(e.relative.y)
+		if is_instance_valid(_dlg_text) and _dlg_text.scroll_active:
+			_dlg_text.get_v_scroll_bar().value -= e.relative.y
+		return
+	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and not e.pressed:
+		var was_tap := _touch_down and _touch_travel <= TAP_SLOP
+		_touch_down = false
+		if was_tap and _dlg_log:  # 记录 closes on a tap, decided on the lift (a swipe only scrolls it)
+			_toggle_log()
+		return
 	if not (e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT):
 		return
+	_touch_down = true
+	_touch_travel = 0.0
 	if _sheet_hidden:  # a click on the picture brings the text back
 		_sheet_hidden = false
 		_sheet.visible = true
 		_update_tools()
 		return
-	if _dlg_log:
-		_toggle_log()
+	if _dlg_log:  # wait for the lift: a tap closes it, a drag scrolls
 		return
 	if _dlg_i >= 0:
 		_dlg_i += 1
@@ -918,7 +934,10 @@ func _on_story_click(e: InputEvent) -> void:
 
 
 func _unhandled_input(e: InputEvent) -> void:
-	if e.is_action_pressed("ui_accept") and (_dlg_i >= 0 or _sheet_hidden):
+	if e.is_action_pressed("ui_accept") and _dlg_log:  # the keyboard closes 记录 straight away
+		get_viewport().set_input_as_handled()
+		_toggle_log()
+	elif e.is_action_pressed("ui_accept") and (_dlg_i >= 0 or _sheet_hidden):
 		get_viewport().set_input_as_handled()
 		_on_story_click(_fake_click())
 
