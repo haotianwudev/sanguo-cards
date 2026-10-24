@@ -295,7 +295,7 @@ func _build() -> void:
 		row.add_child(v)
 		_cards.append(v)
 	_skill_layer = Control.new()
-	_skill_layer.z_index = 4
+	_skill_layer.z_index = 70  # over the opening tip and the enemy's side
 	_skill_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_skill_layer)
 	var locked := PanelContainer.new()  # one slim slot for a future 5th party member
@@ -443,7 +443,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _sync_skill_bars() -> void:
-	## every leader who can act shows his skills in a strip floating over the top of his card (the cards keep their own place and size): one tap plays it.
+	## every leader who can act shows his skills as a row of big buttons in his card's column, just above the party bar (the cards keep their place and size,
+	## the enemy's side may be covered): one tap plays it.
 	## Hidden while anything plays out, in 自动, and once the fight is decided; tapping the card itself still opens the full panel (换人)
 	if _skill_layer == null:
 		return
@@ -462,7 +463,7 @@ func _sync_skill_bars() -> void:
 		var r := v.get_global_rect()
 		var bar := HBoxContainer.new()  # side by side: name on top, AP under it
 		bar.add_theme_constant_override("separation", 3)
-		var bh := 50.0 if small else 58.0  # big enough to hit with a thumb; it may overlap the frame's top edge and the party bar a little
+		var bh := 70.0 if small else 80.0  # big buttons; they reach up over the enemy's side, which is fine (user call)
 		var skills: Array = u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
@@ -471,7 +472,7 @@ func _sync_skill_bars() -> void:
 			btn.text = "%s
 AP%d" % [sk["name"], b.cost(u, sk)]
 			var nlen: int = str(sk["name"]).length()  # long names step down so they still fit three to a card
-			btn.add_theme_font_size_override("font_size", ([15, 13, 12] if small else [18, 16, 14])[clampi(nlen - 3, 0, 2)])
+			btn.add_theme_font_size_override("font_size", ([18, 14, 12] if small else [22, 18, 15])[clampi(nlen - 3, 0, 2)])
 			btn.add_theme_constant_override("line_spacing", -2)
 			btn.clip_text = true
 			btn.focus_mode = Control.FOCUS_NONE
@@ -489,8 +490,9 @@ AP%d" % [sk["name"], b.cost(u, sk)]
 				_close_skill_popup()
 				_on_skill(i, sid))
 			bar.add_child(btn)
-		bar.position = r.position - global_position + Vector2(4, 4)  # floats over the card's top: the party bar above stays clear
-		bar.size = Vector2(r.size.x - 8, bh)
+		# in the card's column, just above the party bar: the cards and the HP / AP line stay clear, the enemy's side may be covered
+		bar.position = Vector2(r.position.x - global_position.x, _party_box.position.y - bh - 6)
+		bar.size = Vector2(r.size.x, bh)
 		_skill_layer.add_child(bar)
 
 
