@@ -80,12 +80,13 @@ var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it aga
 var party_slots := 4  # including the lord
 var theme := "light"
 var chapter_start: Dictionary = {}  # the whole save as it stood when this chapter began (重打这一章 goes back to it)
-var side_read: Array = []  # ？小故事 ids read this 周目 (their reward is paid the first time)
+var side_read: Array = []  # ？小故事 ids opened this 周目 (their reward is paid the first time)
+var side_seen: Array = []  # ？小故事 ids read in any 周目 (shown as 看过; a new 周目 pays for them again in their chapter)
 var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
-	"events", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read"]
+	"events", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
 static func create() -> SaveData:
@@ -180,6 +181,7 @@ func new_lap(inherit_all := false) -> SaveData:
 		s.dupes = dupes.duplicate()
 	s.clears = clears.duplicate()
 	s.seen = seen.duplicate()
+	s.side_seen = side_seen.duplicate()  # remembered as 看过; they come back in their own chapter, to be paid for again
 	s.cleared_cards = cleared_cards.duplicate()
 	s.cleared_copies = cleared_copies.duplicate()
 	s.cleared_lord_copies = cleared_lord_copies

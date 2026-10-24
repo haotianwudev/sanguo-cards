@@ -73,7 +73,7 @@ func _ready() -> void:
 	var title := Kit.label("？ 小故事", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(40, 22)
 	add_child(title)
-	var hint := Kit.label("打开要花战功，看过的免费重看。", Kit.FONT_BODY)
+	var hint := Kit.label("只在这一章出现，错过要等下一周目。打开要花战功，看过的这一章内可以免费再看。", Kit.FONT_BODY)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
 	hint.position = Vector2(250, 34)
 	add_child(hint)
@@ -131,7 +131,7 @@ func _fill() -> void:
 		big.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		big.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_child(big)
-		var sub := Kit.label(titles.get(st["quest"], "") + ("　· %d 战功" % cost if unread else "　· 已读"), Kit.FONT_BODY - 2)
+		var sub := Kit.label(titles.get(st["quest"], "") + (("　· %d 战功" % cost) + ("（以前看过）" if st["seen"] else "") if unread else "　· 已读 · 免费"), Kit.FONT_BODY - 2)
 		sub.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
 		sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		sub.mouse_filter = Control.MOUSE_FILTER_IGNORE

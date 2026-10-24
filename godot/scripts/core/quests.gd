@@ -881,21 +881,21 @@ static func interlude(quest_id: String, save: SaveData) -> Array:
 
 
 static func side_stories(save: SaveData, also := "") -> Array:
-	## The ？小故事 open to the player: those of every chapter finished this 周目 (plus `also`, the chapter whose recap is showing),
-	## filtered by story flags like the interludes. Each comes back with "quest" (its chapter) and "read".
+	## The ？小故事 to list (user rule: each story appears in one chapter only — missed, it waits for the next 周目): those of
+	## the chapter just finished (`also` on its end page, else the last chapter cleared — so through the next chapter's 整备).
+	## Each comes back with "quest", "read" (opened this 周目: free to read again, no second reward) and "seen" (read in some 周目).
 	var db := GameData.get_db()
-	var done: Array = save.quests_cleared.duplicate()
-	if also != "" and not done.has(also):
-		done.append(also)
+	var now := also if also != "" else (str(save.quests_cleared[-1]) if not save.quests_cleared.is_empty() else "")
 	var have: Array = save.flags + save.run_records
 	var out: Array = []
-	for qid in done:
-		for st in db.side_stories.get(qid, []):
-			if not _story_open(st, have):
+	for qid in db.side_stories:
+		for st in db.side_stories[qid]:
+			if qid != now or not _story_open(st, have):
 				continue
 			var s: Dictionary = st.duplicate()
 			s["quest"] = qid
 			s["read"] = save.side_read.has(st["id"])
+			s["seen"] = save.side_seen.has(st["id"])
 			out.append(s)
 	return out
 
@@ -942,8 +942,9 @@ static func side_reward_text(st: Dictionary) -> String:
 
 
 static func open_side(save: SaveData, id: String) -> Dictionary:
-	## Open a ？小故事: the first time in a 周目 it costs 战功 and pays its reward then and there (so quitting mid-story loses
-	## nothing); after that it is free. Returns {ok, got}: ok false = not enough 战功; got = what it gave ("" on a re-read).
+	## Open a ？小故事: the first time in a 周目 it costs 战功 and pays its reward then and there (quitting mid-story loses
+	## nothing); after that, while it is still listed, it is free and gives nothing (user rule). Returns {ok, got, cards, relics}:
+	## ok false = not enough 战功.
 	if save.side_read.has(id):
 		return {"ok": true, "got": "", "cards": [], "relics": []}
 	var db := GameData.get_db()
@@ -957,6 +958,8 @@ static func open_side(save: SaveData, id: String) -> Dictionary:
 		return {"ok": false, "got": "", "cards": [], "relics": []}
 	save.merit -= cost
 	save.side_read.append(id)
+	if not save.side_seen.has(id):
+		save.side_seen.append(id)
 	var rw: Dictionary = st.get("reward", {})
 	var got: Array = []
 	var shown_cards: Array = []  # for the reveal after the story: the same 入队 / 宝物 card moments as anywhere else

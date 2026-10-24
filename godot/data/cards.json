@@ -2444,8 +2444,7 @@
       "at": 98,
       "skills": [
         "xiaobawang",
-        "dujiang",
-        "guose"
+        "dujiang"
       ],
       "troop_skills": false,
       "pool": false,
@@ -2458,8 +2457,7 @@
       "hp": 88,
       "at": 80,
       "skills": [
-        "chibi",
-        "qinse"
+        "chibi"
       ],
       "pool": false,
       "scope": "south"
@@ -2485,6 +2483,69 @@
       ],
       "pool": false,
       "scope": "north"
+    },
+    "rc_tianfu": {
+      "name": "孙尚香·芙蓉",
+      "rarity": "SR",
+      "troop": "archer",
+      "hp": 70,
+      "at": 92,
+      "skills": [
+        "huojian",
+        "gongyaoji"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_guanzhong": {
+      "name": "吴苋·灯下算盘",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 92,
+      "at": 64,
+      "skills": [],
+      "pool": false,
+      "scope": "south"
+    },
+    "sx_zhurong": {
+      "name": "祝融·篝火夜",
+      "rarity": "SR",
+      "troop": "archer",
+      "hp": 80,
+      "at": 94,
+      "skills": [
+        "feidao",
+        "huoshen"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_ceqiao": {
+      "name": "孙策大乔·同心",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "hp": 78,
+      "at": 96,
+      "skills": [
+        "xiaobawang",
+        "guose"
+      ],
+      "troop_skills": false,
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_yuqiao": {
+      "name": "周瑜小乔·琴瑟",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 90,
+      "at": 80,
+      "skills": [
+        "chibi",
+        "qinse"
+      ],
+      "pool": false,
+      "scope": "south"
     },
     "rc_longhu": {
       "name": "郭嘉·最后一个葫芦",

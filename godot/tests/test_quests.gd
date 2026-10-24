@@ -1826,7 +1826,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	check(r["ok"] and r["got"] != "", "opened: %s" % r)
 	check_eq(s.merit, 2)
 	check_eq(s.copies("sunce"), before + 2, "九九歌 点化 孙策 +2")
-	check_eq(Quests.open_side(s, "s_jiujiu")["got"], "", "a re-read is free and gives nothing")
+	check_eq(Quests.open_side(s, "s_jiujiu")["got"], "", "a re-read in its chapter is free and gives nothing")
 	check_eq(s.merit, 2)
 	s.merit = 5
 	Quests.open_side(s, "s_firstwine")  # 酒囊
@@ -2045,6 +2045,7 @@ func test_mayunlu_page_needs_the_ma_family_and_the_card_waits_for_luoshang() -> 
 	check(s.owned.has("rc_xiliang"), "那只羊 hands over 马云騄·那只羊")
 
 
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]
@@ -2099,17 +2100,60 @@ func test_erqiao_page_and_card() -> void:
 	check(s.owned.has("rc_huainan_s"))
 
 
-func test_sunce_and_zhouyu_pages_and_cards() -> void:
+func test_sunce_daqiao_and_zhouyu_xiaoqiao_pages_and_cards() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春"]
-	s.quests_cleared = ["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"]
-	check_eq(Quests.chapter_page("jiangdong", s).get("cg", ""), "rc_jiangdong")
-	check_eq(Quests.chapter_page("menghu", s).get("cg", ""), "rc_menghu")
+	s.quests_cleared = ["prologue", "jiangdong"]
+	check_eq(Quests.chapter_page("jiangdong", s).get("cg", ""), "rc_ceqiao")
+	check_eq(Quests.chapter_page("menghu", s).get("cg", ""), "rc_yuqiao")
 	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
-	check(not ids.call().has("s_rc_jiangdong") and not ids.call().has("s_rc_menghu"))
+	check(ids.call().has("s_sunce_baozi"), "孙策 alone is an ordinary story now")
+	check(not ids.call().has("s_rc_ceqiao"), "the pair card waits for 结局九 · 匹夫")
 	s.flags = ["结局九 · 匹夫", "结局十一 · 曲误"]
 	s.merit = 10
-	Quests.open_side(s, "s_rc_jiangdong")
-	Quests.open_side(s, "s_rc_menghu")
-	check(s.owned.has("rc_jiangdong") and s.owned.has("rc_menghu"))
+	Quests.open_side(s, "s_rc_ceqiao")
+	Quests.open_side(s, "s_sunce_baozi")
+	check(s.owned.has("rc_ceqiao") and s.owned.has("rc_jiangdong"))
+	s.quests_cleared.append("menghu")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_yuqiao")
+	check(s.owned.has("rc_yuqiao"))
 
+
+func test_shangxiang_wuxian_and_zhurong() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue", "tianfu"]
+	check_eq(Quests.chapter_page("tianfu", s).get("cg", ""), "")
+	s.flags = ["孙权、孙尚香：入队", "吴苋：入队", "祝融：入队", "结局十三 · 香烬", "结局十五 · 算尽"]
+	check_eq(Quests.chapter_page("tianfu", s).get("cg", ""), "rc_tianfu")
+	check_eq(Quests.chapter_page("guanzhong", s).get("cg", ""), "rc_guanzhong")
+	s.merit = 10
+	Quests.open_side(s, "s_rc_tianfu")
+	Quests.open_side(s, "s_zhurong")
+	check(s.owned.has("rc_tianfu") and s.owned.has("sx_zhurong"))
+	s.quests_cleared.append("guanzhong")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_guanzhong")
+	check(s.owned.has("rc_guanzhong"))
+
+
+func test_a_story_shows_in_one_chapter_only_and_stays_read_across_laps() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue"]
+	var ids := func(sv): return Quests.side_stories(sv).map(func(x): return x["id"])
+	check(ids.call(s).has("s_jiujiu"), "open after its chapter")
+	s.quests_cleared.append("taodong")
+	check(not ids.call(s).has("s_jiujiu"), "missed: gone once the next chapter is done")
+	check(ids.call(s).has("s_zumao"))
+	s.merit = 5
+	Quests.open_side(s, "s_zumao")
+	s.quests_cleared.append("yuxi")
+	check(not ids.call(s).has("s_zumao"), "read or not, it is gone once its chapter window has passed")
+	var n := s.new_lap()
+	check(n.side_seen.has("s_zumao") and not n.side_read.has("s_zumao"), "remembered as 看过 in the next 周目")
+	n.run_records = ["出生：江东富春"]
+	n.quests_cleared = ["prologue", "taodong"]
+	n.merit = 5
+	check(Quests.open_side(n, "s_zumao")["got"] != "" and n.merit == 0, "back in its chapter: paid and rewarded again")

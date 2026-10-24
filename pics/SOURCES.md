@@ -443,6 +443,16 @@
 | `rc_jiangdong` | source/generals/rc_jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_menghu` | source/generals/rc_menghu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_huainan_n` | source/generals/rc_huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_yecheng` | source/generals/rc_yecheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_tianfu` | source/generals/rc_tianfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_longhu` | source/generals/rc_longhu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_guanzhong` | source/generals/rc_guanzhong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_xiliang` | source/generals/rc_xiliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sx_zhurong` | source/generals/sx_zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_ceqiao` | source/generals/rc_ceqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_yuqiao` | source/generals/rc_yuqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_sanfang` | source/generals/rc_sanfang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_snow` | source/generals/lord_north_snow.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -1260,3 +1270,13 @@
 | `cg:rc_jiangdong` | source/cg/rc_jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_menghu` | source/cg/rc_menghu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_huainan_n` | source/cg/rc_huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_yecheng` | source/cg/rc_yecheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_tianfu` | source/cg/rc_tianfu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_longhu` | source/cg/rc_longhu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_guanzhong` | source/cg/rc_guanzhong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_xiliang` | source/cg/rc_xiliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:sx_zhurong` | source/cg/sx_zhurong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_ceqiao` | source/cg/rc_ceqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_yuqiao` | source/cg/rc_yuqiao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_sanfang` | source/cg/rc_sanfang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_tianqing` | source/cg/rc_tianqing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

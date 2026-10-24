@@ -3961,6 +3961,15 @@
       ],
       "head": 0.24
     },
+    "rc_tianfu": {
+      "src": "source/generals/rc_tianfu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.4,
+        0.42
+      ],
+      "head": 0.24
+    },
     "rc_longhu": {
       "src": "source/generals/rc_longhu.jpg",
       "license": "用户提供（Gemini 生成）",
@@ -3970,11 +3979,65 @@
       ],
       "head": 0.24
     },
+    "rc_guanzhong": {
+      "src": "source/generals/rc_guanzhong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.44,
+        0.42
+      ],
+      "head": 0.24
+    },
     "rc_xiliang": {
       "src": "source/generals/rc_xiliang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.47,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "sx_zhurong": {
+      "src": "source/generals/sx_zhurong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.42,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_ceqiao": {
+      "src": "source/generals/rc_ceqiao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.45,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_yuqiao": {
+      "src": "source/generals/rc_yuqiao.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.48,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_sanfang": {
+      "src": "source/generals/rc_sanfang.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.38,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "lord_north_snow": {
+      "src": "source/generals/lord_north_snow.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
         0.42
       ],
       "head": 0.24
@@ -7259,12 +7322,40 @@
       "src": "source/cg/rc_yecheng.jpg",
       "license": "用户提供（Gemini 生成）"
     },
+    "rc_tianfu": {
+      "src": "source/cg/rc_tianfu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
     "rc_longhu": {
       "src": "source/cg/rc_longhu.jpg",
       "license": "用户提供（Gemini 生成）"
     },
+    "rc_guanzhong": {
+      "src": "source/cg/rc_guanzhong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
     "rc_xiliang": {
       "src": "source/cg/rc_xiliang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "sx_zhurong": {
+      "src": "source/cg/sx_zhurong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_ceqiao": {
+      "src": "source/cg/rc_ceqiao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_yuqiao": {
+      "src": "source/cg/rc_yuqiao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_sanfang": {
+      "src": "source/cg/rc_sanfang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_tianqing": {
+      "src": "source/cg/rc_tianqing.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

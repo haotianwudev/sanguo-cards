@@ -440,6 +440,13 @@
   "rc_menghu": {"file": "rc_menghu.jpg", "face": [0.53, 0.42], "head": 0.24},
   "rc_huainan_n": {"file": "rc_huainan_n.jpg", "face": [0.48, 0.42], "head": 0.24},
   "rc_yecheng": {"file": "rc_yecheng.jpg", "face": [0.52, 0.42], "head": 0.24},
+  "rc_tianfu": {"file": "rc_tianfu.jpg", "face": [0.4, 0.42], "head": 0.24},
   "rc_longhu": {"file": "rc_longhu.jpg", "face": [0.45, 0.42], "head": 0.24},
-  "rc_xiliang": {"file": "rc_xiliang.jpg", "face": [0.47, 0.42], "head": 0.24}
+  "rc_guanzhong": {"file": "rc_guanzhong.jpg", "face": [0.44, 0.42], "head": 0.24},
+  "rc_xiliang": {"file": "rc_xiliang.jpg", "face": [0.47, 0.42], "head": 0.24},
+  "sx_zhurong": {"file": "sx_zhurong.jpg", "face": [0.42, 0.42], "head": 0.24},
+  "rc_ceqiao": {"file": "rc_ceqiao.jpg", "face": [0.45, 0.42], "head": 0.24},
+  "rc_yuqiao": {"file": "rc_yuqiao.jpg", "face": [0.48, 0.42], "head": 0.24},
+  "rc_sanfang": {"file": "rc_sanfang.jpg", "face": [0.38, 0.42], "head": 0.24},
+  "lord_north_snow": {"file": "lord_north_snow.jpg", "face": [0.5, 0.42], "head": 0.24}
 }

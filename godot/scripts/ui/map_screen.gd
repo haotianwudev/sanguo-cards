@@ -1433,7 +1433,7 @@ func _fill_recap() -> void:
 	for st in Quests.side_stories(s, _recap_qid):
 		var read: bool = st["read"]
 		var cost := Quests.side_cost(st)
-		_recap_row(str(st["title"]), "已读" if read else "%d 战功" % cost, read or s.merit >= cost, func():
+		_recap_row(str(st["title"]) + ("（看过）" if st["seen"] and not read else ""), "免费" if read else "%d 战功" % cost, read or s.merit >= cost, func():
 			SideStoryList.play(st, self, func(_got: String): _fill_recap()))  # what it gave flips in after the story (SideStoryList.reveal)
 	_recap_row("抽一次卡", "%d 战功" % draw_cost, s.merit >= draw_cost and s.pool_left() > 0, func():
 		if not Quests.spend_merit(s, "draw"):
