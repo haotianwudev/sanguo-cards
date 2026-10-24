@@ -1283,3 +1283,4 @@
 - [ ] 2026-10-24 cg `n4_zhenghao` ← n4_zhenghao.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-24 cg `n4_jiangqiao` ← n4_jiangqiao.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-24 cg `n4_zj_apart` ← n4_zj_apart.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-24 cg `n3_baima` ← n3_baima.jpg 裁 2528×1696→2528×1422 · ok
