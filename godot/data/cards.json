@@ -2400,6 +2400,19 @@
       "pool": false,
       "scope": "south"
     },
+    "rc_beihai": {
+      "name": "北海·双凤早饭",
+      "rarity": "SR",
+      "troop": "infantry",
+      "hp": 72,
+      "at": 94,
+      "skills": [
+        "jushun",
+        "volley"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

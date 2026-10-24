@@ -1952,6 +1952,21 @@ func test_zhangning_page_and_card_need_her_saved_and_shilv() -> void:
 	check(s.owned.has("rc_heishan"), "一起碾药 hands over 甄府·一起碾药")
 
 
+func test_zheng_jiang_page_and_card_need_them_reconciled_and_shilv() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极", "郑姜：和好"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai"]
+	check_eq(Quests.chapter_page("beihai", s).get("cg", ""), "rc_beihai")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局四 · 绝罚"]
+	check(not ids.call().has("s_rc_beihai"), "绝罚 is what reconciles them: not enough")
+	s.flags = ["结局四 · 绝罚", "结局六 · 失律"]
+	check(ids.call().has("s_rc_beihai"), "失律 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_beihai")
+	check(s.owned.has("rc_beihai"), "双凤早饭 hands over 北海·双凤早饭")
+
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]

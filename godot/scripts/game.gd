@@ -452,23 +452,31 @@ func demo(name: String) -> void:
 			var m1 := MapScreen.new()
 			show_screen(m1)
 			m1.call_deferred("_complete")
-		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --heishan: 黑山风云 with 张宁 saved)
+		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --chapter=heishan|beihai: a later north chapter's page)
 			save.quests_cleared = ["prologue"]
 			if OS.get_cmdline_user_args().has("--north"):
-				var hs := OS.get_cmdline_user_args().has("--heishan")
-				if hs:
-					save.quests_cleared = ["prologue", "luoyang_n"]
-				Quests.begin(GameData.get_db().quests.filter(func(x): return x["id"] == ("heishan" if hs else "luoyang_n"))[0], save)
-				Quests.record(save, "出生：冀州无极")
-				save.flags = ["出生：冀州无极", "北线：班师冀州"] if hs else ["出生：冀州无极"]
-				if hs:
-					Quests.record(save, "张宁：救下")
-				for c in ["zhaoyun", "guojia", "lvlingqi"] + (["zhangning"] if hs else []):
+				# quest: [the chapters before it, the flags they left, this run's records, its last square]
+				var north_pages := {
+					"luoyang_n": [[], [], [], "ln_end"],
+					"heishan": [["luoyang_n"], ["北线：班师冀州"], ["张宁：救下"], "hs_end"],
+					"beihai": [["luoyang_n", "heishan"], ["北线：班师冀州", "界桥：救下公孙瓒"], ["张宁：救下", "郑姜：和好"], "bh_end"],
+				}
+				var qid := "luoyang_n"
+				for a in OS.get_cmdline_user_args():
+					if a.begins_with("--chapter="):
+						qid = a.trim_prefix("--chapter=")
+				var page: Array = north_pages[qid]
+				save.quests_cleared = ["prologue"] + page[0]
+				Quests.begin(GameData.get_db().quests.filter(func(x): return x["id"] == qid)[0], save)
+				save.flags = ["出生：冀州无极"] + page[1]
+				for r in ["出生：冀州无极"] + page[2]:
+					Quests.record(save, r)
+				for c in ["zhaoyun", "guojia", "lvlingqi", "zhangning", "zhenghao", "jiangqiao"]:
 					save.grant_card(c)
 				save.run_battles = 7
 				save.run_bosses = 2
 				save.merit = 4
-				save.square = "hs_end" if hs else "ln_end"
+				save.square = page[3]
 				save.resolved = true
 				var mn := MapScreen.new()
 				show_screen(mn)
