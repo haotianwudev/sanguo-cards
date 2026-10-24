@@ -1807,7 +1807,7 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
 
 
-func test_side_stories_open_after_their_chapter_and_pay_once() -> void:
+func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> void:
 	var db := GameData.get_db()
 	check(db.side_stories.size() >= 20, "every chapter has ？小故事")
 	var s := SaveData.create()
@@ -1816,12 +1816,38 @@ func test_side_stories_open_after_their_chapter_and_pay_once() -> void:
 	var south := Quests.side_stories(s, "prologue")
 	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine"]), "the south birth gets only the south prologue stories")
 	s.quests_cleared = ["prologue"]
+	s.grant_card("sunce")
+	s.merit = 2
+	check(not Quests.open_side(s, "s_jiujiu")["ok"], "3 战功 to open: 2 is not enough")
 	check_eq(Quests.side_unread(s), south.size())
-	var m := s.merit
-	check(Quests.read_side(s, "s_jiujiu") != "", "the first read pays")
-	check_eq(s.merit, m + int(db.side_reward["merit"]))
-	check_eq(Quests.read_side(s, "s_jiujiu"), "", "a second read pays nothing")
-	check_eq(Quests.side_unread(s), south.size() - 1)
+	s.merit = 5
+	var before := s.copies("sunce")
+	var r := Quests.open_side(s, "s_jiujiu")
+	check(r["ok"] and r["got"] != "", "opened: %s" % r)
+	check_eq(s.merit, 2)
+	check_eq(s.copies("sunce"), before + 2, "九九歌 点化 孙策 +2")
+	check_eq(Quests.open_side(s, "s_jiujiu"), {"ok": true, "got": ""}, "a re-read is free and gives nothing")
+	check_eq(s.merit, 2)
+	s.merit = 3
+	Quests.open_side(s, "s_firstwine")  # 酒囊
+	check(s.kept_relics.has("jiunang") and s.relics.has("jiunang"), "a 宝物 stays for the rest of the 周目")
+
+
+func test_a_held_relic_pays_the_cost_back() -> void:
+	var s := SaveData.create()
+	s.flags = ["出生：江东富春"]
+	s.quests_cleared = ["prologue"]
+	s.relics = ["jiunang"]
+	s.kept_relics = ["jiunang"]
+	s.merit = 3
+	Quests.open_side(s, "s_firstwine")
+	check_eq(s.merit, 3, "already had 酒囊: the 3 战功 come back")
+
+
+func test_every_side_story_has_a_reward() -> void:
+	for list in GameData.get_db().side_stories.values():
+		for st in list:
+			check(Quests.side_reward_text(st) != "", "%s: no reward" % st["id"])
 
 
 func test_side_story_portraits_and_requires_exist() -> void:
@@ -1839,6 +1865,8 @@ func test_a_side_story_can_hand_over_a_card() -> void:
 	var s := SaveData.create()
 	s.flags = ["出生：冀州无极"]
 	s.quests_cleared = ["prologue", "luoyang_n", "heishan"]
+	s.merit = 5
 	check(not s.owned.has("hanfu"))
-	var got := Quests.read_side(s, "b_hanfu")
-	check(s.owned.has("hanfu") and got.contains("韩馥"), "韩馥的印 hands over 韩馥: %s" % got)
+	var r := Quests.open_side(s, "b_hanfu")
+	check(s.owned.has("hanfu") and str(r["got"]).contains("韩馥"), "韩馥的印 hands over 韩馥: %s" % r)
+	check_eq(s.merit, 0, "a 幕后 story costs 5")

@@ -2,13 +2,15 @@ class_name SideStoryList
 extends Control
 ## ？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, that open once their
 ## chapter is done (data/side_stories.json). Opened from 整备 and from the chapter recap; unread ones show as a big ？,
-## read ones by their title (they can be read again). The first read in a 周目 pays a little (side_stories.json reward).
+## read ones by their title (they can be read again, free). Opening one the first time in a 周目 costs 战功 (side_stories.json
+## cost) and pays its reward (点化 / 宝物 / 卡), both shown on the tile before you open it.
 
 signal changed  # something was read: the opener refreshes (战功, the unread count)
 
 var also := ""  # the chapter whose recap is showing (not in quests_cleared yet)
 var _grid: GridContainer
 var _note: Label
+var _merit: Label
 
 
 class SideButton extends Button:
@@ -71,7 +73,7 @@ func _ready() -> void:
 	var title := Kit.label("？ 小故事", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(40, 22)
 	add_child(title)
-	var hint := Kit.label("各章打完以后的小插曲：日常趣事，也有主线背后发生的事。第一次看有奖励——战功，有的还送卡。", Kit.FONT_BODY)
+	var hint := Kit.label("打开要花战功，奖励写在卡上；看过的免费重看。", Kit.FONT_BODY)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
 	hint.position = Vector2(250, 34)
 	add_child(hint)
@@ -85,8 +87,13 @@ func _ready() -> void:
 	_grid.add_theme_constant_override("h_separation", 16)
 	_grid.add_theme_constant_override("v_separation", 16)
 	scroll.add_child(_grid)
+	_merit = Kit.label("", Kit.FONT_BIG, "gold")
+	_merit.position = Vector2(820, 652)
+	add_child(_merit)
 	_note = Kit.label("", Kit.FONT_BODY, "amber")
 	_note.position = Vector2(40, 650)
+	_note.size = Vector2(760, 50)
+	_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(_note)
 	var close := Kit.button("返回", "green", Kit.FONT_BODY + 2)
 	close.position = Vector2(1060, 644)
@@ -104,10 +111,13 @@ func _fill() -> void:
 	var titles := {}
 	for q in db.quests:
 		titles[q["id"]] = str(q["title"]).split(" · ")[0]
+	_merit.text = "战功 %d" % Game.save.merit
 	for st in Quests.side_stories(Game.save, also):
 		var tile := Button.new()
-		tile.custom_minimum_size = Vector2(286, 128)
+		tile.custom_minimum_size = Vector2(286, 150)
 		var unread: bool = not st["read"]
+		var cost := Quests.side_cost(st)
+		var short: bool = unread and Game.save.merit < cost
 		var edge := Kit.c("gold") if unread else Kit.c("border")
 		tile.add_theme_stylebox_override("normal", Kit.box(Kit.c("panel"), 12, 3 if unread else 2, edge, 10))
 		tile.add_theme_stylebox_override("hover", Kit.box(Kit.c("panel").lightened(0.08), 12, 3, Kit.c("gold"), 10))
@@ -117,28 +127,37 @@ func _fill() -> void:
 		col.alignment = BoxContainer.ALIGNMENT_CENTER
 		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tile.add_child(col)
-		var big := Kit.label("？" if unread else str(st["title"]), (Kit.FONT_BIG + 22) if unread else (Kit.FONT_BODY + 4), "gold" if unread else "text")
+		var big := Kit.label("？" if unread else str(st["title"]), (Kit.FONT_BIG + 16) if unread else (Kit.FONT_BODY + 4), "gold" if unread else "text")
 		big.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		big.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_child(big)
-		var sub := Kit.label(titles.get(st["quest"], "") + ("　· 新" if unread else "　· 已读"), Kit.FONT_BODY - 2)
+		var sub := Kit.label(titles.get(st["quest"], "") + ("　· %d 战功" % cost if unread else "　· 已读"), Kit.FONT_BODY - 2)
 		sub.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
 		sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		sub.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_child(sub)
+		var prize := Kit.label(Quests.side_reward_text(st), Kit.FONT_BODY - 2, "red" if short else "amber")
+		prize.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		prize.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_child(prize)
+		if short:
+			tile.modulate = Color(0.7, 0.7, 0.7)
 		tile.pressed.connect(_play.bind(st))
 		_grid.add_child(tile)
 
 
 func _play(st: Dictionary) -> void:
+	var r := Quests.open_side(Game.save, st["id"])  # pays and rewards on opening (a re-read is free)
+	if not r["ok"]:
+		_note.text = "战功不够：打开「？」要 %d 战功，现在有 %d。多打几场再来。" % [Quests.side_cost(st), Game.save.merit]
+		return
+	Game.persist()
+	_fill()
+	changed.emit()
 	var o := InterludeOverlay.new()
 	o.scenes = [st]
 	o.same_chapter = true  # no chapter title card afterwards
 	o.z_index = 90
 	o.finished.connect(func():
-		var got := Quests.read_side(Game.save, st["id"])
-		Game.persist()
-		_note.text = "「%s」%s" % [st["title"], "：" + got if got != "" else "读完了"]
-		_fill()
-		changed.emit())
+		_note.text = "「%s」%s" % [st["title"], "　得到：" + r["got"] if r["got"] != "" else "　读完了"])
 	add_child(o)

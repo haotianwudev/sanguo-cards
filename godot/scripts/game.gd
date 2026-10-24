@@ -467,6 +467,7 @@ func demo(name: String) -> void:
 			save.relics = save.kept_relics.duplicate()
 			save.quests_cleared = ["prologue", "taodong"]  # the ？小故事 of those chapters are open
 			save.flags = ["出生：江东富春"]
+			save.merit = 4  # enough for one 3-战功 story, not for the 5-战功 ones
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_open_party")

@@ -904,25 +904,69 @@ static func side_unread(save: SaveData, also := "") -> int:
 	return side_stories(save, also).filter(func(s): return not s["read"]).size()
 
 
-static func read_side(save: SaveData, id: String) -> String:
-	## Mark a ？小故事 read; the first time in a 周目 it pays its reward. Returns what it gave ("" = nothing).
+static func side_cost(st: Dictionary) -> int:
+	return int(st.get("cost", GameData.get_db().side_cost))
+
+
+static func side_reward_text(st: Dictionary) -> String:
+	## what opening it gives, shown on its tile before it is opened (「点化 孙策」「宝物 赤帻」「卡 王允」)
+	var db := GameData.get_db()
+	var rw: Dictionary = st.get("reward", {})
+	var parts: Array = []
+	for cid in rw.get("upgrade", {}):
+		parts.append("点化 %s" % str(db.cards[cid]["name"]).split("·")[0])
+	for rid in rw.get("relics", []):
+		parts.append("宝物 %s" % db.relics[rid]["name"])
+	for cid in rw.get("cards", []):
+		parts.append("卡 %s" % str(db.cards[cid]["name"]).split("·")[0])
+	if int(rw.get("merit", 0)) > 0:
+		parts.append("战功 +%d" % int(rw["merit"]))
+	return "、".join(parts)
+
+
+static func open_side(save: SaveData, id: String) -> Dictionary:
+	## Open a ？小故事: the first time in a 周目 it costs 战功 and pays its reward then and there (so quitting mid-story loses
+	## nothing); after that it is free. Returns {ok, got}: ok false = not enough 战功; got = what it gave ("" on a re-read).
 	if save.side_read.has(id):
-		return ""
-	save.side_read.append(id)
+		return {"ok": true, "got": ""}
+	var db := GameData.get_db()
 	var st: Dictionary = {}
-	for list in GameData.get_db().side_stories.values():
-		for s in list:
-			if s["id"] == id:
-				st = s
-	var reward: Dictionary = st.get("reward", GameData.get_db().side_reward)
+	for list in db.side_stories.values():
+		for x in list:
+			if x["id"] == id:
+				st = x
+	var cost := side_cost(st)
+	if save.merit < cost:
+		return {"ok": false, "got": ""}
+	save.merit -= cost
+	save.side_read.append(id)
+	var rw: Dictionary = st.get("reward", {})
 	var got: Array = []
-	if int(reward.get("merit", 0)) > 0:
-		save.merit += int(reward["merit"])
-		got.append("战功 +%d" % int(reward["merit"]))
-	for cid in reward.get("cards", []):  # a card the story hands over (often one the pool never offers: 王允, 程昱 …)
+	for cid in rw.get("upgrade", {}):  # 点化 the story's lead (handed over first if not held)
+		var n := int(rw["upgrade"][cid])
+		if not save.owned.has(cid):
+			save.grant_card(cid, true)
+			n -= 1
+		if n > 0:
+			save.upgrade(cid, n)
+		got.append("%s +%d 张" % [str(db.cards[cid]["name"]).split("·")[0], int(rw["upgrade"][cid])])
+	for rid in rw.get("relics", []):  # kept for the rest of the 周目, like any 宝物 brought from a finished chapter
+		if save.relics.has(rid) or save.kept_relics.has(rid):
+			save.merit += cost
+			got.append("「%s」已经有了，战功退回 %d" % [db.relics[rid]["name"], cost])
+			continue
+		save.relics.append(rid)
+		save.kept_relics.append(rid)
+		if not save.run_relics.has(rid):
+			save.run_relics.append(rid)
+		got.append("宝物「%s」" % db.relics[rid]["name"])
+	for cid in rw.get("cards", []):  # a card the story hands over (often one the pool never offers: 王允, 程昱 …)
 		save.grant_card(cid, true)
-		got.append("得到「%s」" % GameData.get_db().cards[cid]["name"])
-	return "、".join(got)
+		got.append("「%s」" % db.cards[cid]["name"])
+	if int(rw.get("merit", 0)) > 0:
+		save.merit += int(rw["merit"])
+		got.append("战功 +%d" % int(rw["merit"]))
+	return {"ok": true, "got": "、".join(got)}
 
 
 static func after_win(save: SaveData) -> void:
