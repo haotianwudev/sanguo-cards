@@ -6997,6 +6997,10 @@
     "c3_wall_night": {
       "src": "source/cg/c3_wall_night.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c3_valley": {
+      "src": "source/cg/c3_valley.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

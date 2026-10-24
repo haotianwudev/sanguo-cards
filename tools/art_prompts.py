@@ -1808,6 +1808,7 @@ CGS = {
     "c3_zhangyan_meet": "the Black Mountain stronghold at the peak of Taihang: the bandit king Zhang Yan landing lightly from a high cliff before the hero; surrounding cliffs filled with thousands of bandits holding torches",
     "c3_bandage": "山寨休整：军帐里张宁跪坐着给北线主角重新包扎手背，吕玲绮抱戟靠在帐口冷眼看着",
     "c3_wall_night": "大寨夜话：星空下寨墙顶上，张宁把一包草药放进北线主角手心，山下营火点点",
+    "c3_valley": "太行落脚：夜里隐秘山谷，张夫人坐在粮车车辕上对着账本，甄宓靠在她怀里睡着，张燕蹲着添柴，浴血的北线主角站在一旁",
     "c3_home": "回到无极：春雨里商队回到甄府门口，甄宓光着脚扑进北线主角怀里，张夫人从马车上下来笑着看，张宁背着药篓局促地站在队尾粮车旁",
     "c3_guotu_raid": "outside the gates of the Zhen manor in Wuji: the sinister Guo Tu laughing on horseback with a fan, as heavy Jizhou infantry smash open the manor's great doors",
     "c3_secret_path": "the entrance of a secret mountain tunnel at night: Lady Zhang leading the young girl Zhen Mi into the dark cave guided by Black Mountain bandits with torches; Zhen Mi looking back at distant fires in Wuji",
