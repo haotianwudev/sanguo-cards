@@ -440,6 +440,9 @@
 | `rc_beihai` | source/generals/rc_beihai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_huainan_s` | source/generals/rc_huainan_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_xuzhou` | source/generals/rc_xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_jiangdong` | source/generals/rc_jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_menghu` | source/generals/rc_menghu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `rc_huainan_n` | source/generals/rc_huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -1254,3 +1257,6 @@
 | `cg:rc_beihai` | source/cg/rc_beihai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_huainan_s` | source/cg/rc_huainan_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:rc_xuzhou` | source/cg/rc_xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_jiangdong` | source/cg/rc_jiangdong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_menghu` | source/cg/rc_menghu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:rc_huainan_n` | source/cg/rc_huainan_n.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

@@ -1249,3 +1249,9 @@
 - [x] 2026-10-24 portrait `rc_jingxiang` ← rc_jingxiang_card.jpg · ok
 - [x] 2026-10-24 cg `rc_xuzhou` ← rc_xuzhou.jpg · ok
 - [x] 2026-10-24 portrait `rc_xuzhou` ← rc_xuzhou_card.jpg · ok
+- [x] 2026-10-24 cg `rc_jiangdong` ← rc_jiangdong.jpg · ok
+- [x] 2026-10-24 portrait `rc_jiangdong` ← rc_jiangdong_card.jpg · ok
+- [x] 2026-10-24 cg `rc_menghu` ← rc_menghu.jpg · ok
+- [x] 2026-10-24 portrait `rc_menghu` ← rc_menghu_card.jpg · ok
+- [x] 2026-10-24 cg `rc_huainan_n` ← rc_huainan_n.jpg · ok
+- [x] 2026-10-24 portrait `rc_huainan_n` ← rc_huainan_n_card.jpg · ok

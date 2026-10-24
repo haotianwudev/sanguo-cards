@@ -1982,6 +1982,20 @@ func test_zhangning_new_year_page_and_card_after_duanqiao() -> void:
 	check(s.owned.has("rc_xuzhou"), "除夕香囊 hands over 张宁·除夕香囊")
 
 
+func test_dufuren_page_and_card_after_her_own_duanqiao() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"]
+	check_eq(Quests.chapter_page("huainan_n", s).get("cg", ""), "rc_huainan_n")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	check(not ids.call().has("s_rc_huainan_n"), "not before 断桥")
+	s.flags = ["结局八 · 断桥"]
+	check(ids.call().has("s_rc_huainan_n"), "her own 断桥 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_huainan_n")
+	check(s.owned.has("rc_huainan_n"), "新酒 hands over 杜夫人·新酒")
+
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]
@@ -2034,4 +2048,19 @@ func test_erqiao_page_and_card() -> void:
 	s.merit = 5
 	Quests.open_side(s, "s_rc_huainan_s")
 	check(s.owned.has("rc_huainan_s"))
+
+
+func test_sunce_and_zhouyu_pages_and_cards() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"]
+	check_eq(Quests.chapter_page("jiangdong", s).get("cg", ""), "rc_jiangdong")
+	check_eq(Quests.chapter_page("menghu", s).get("cg", ""), "rc_menghu")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	check(not ids.call().has("s_rc_jiangdong") and not ids.call().has("s_rc_menghu"))
+	s.flags = ["结局九 · 匹夫", "结局十一 · 曲误"]
+	s.merit = 10
+	Quests.open_side(s, "s_rc_jiangdong")
+	Quests.open_side(s, "s_rc_menghu")
+	check(s.owned.has("rc_jiangdong") and s.owned.has("rc_menghu"))
 

@@ -2436,6 +2436,41 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_jiangdong": {
+      "name": "吴郡·城头包子",
+      "rarity": "SR",
+      "troop": "cavalry",
+      "hp": 74,
+      "at": 98,
+      "skills": [
+        "xiaobawang",
+        "dujiang"
+      ],
+      "troop_skills": false,
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_menghu": {
+      "name": "长江·月下琴",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 88,
+      "at": 80,
+      "skills": [
+        "chibi"
+      ],
+      "pool": false,
+      "scope": "south"
+    },
+    "rc_huainan_n": {
+      "name": "杜夫人·新酒",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 94,
+      "at": 66,
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",

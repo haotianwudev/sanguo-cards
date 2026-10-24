@@ -3924,6 +3924,33 @@
         0.42
       ],
       "head": 0.24
+    },
+    "rc_jiangdong": {
+      "src": "source/generals/rc_jiangdong.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.53,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_menghu": {
+      "src": "source/generals/rc_menghu.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.53,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_huainan_n": {
+      "src": "source/generals/rc_huainan_n.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.48,
+        0.42
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
@@ -7187,6 +7214,18 @@
     },
     "rc_xuzhou": {
       "src": "source/cg/rc_xuzhou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_jiangdong": {
+      "src": "source/cg/rc_jiangdong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_menghu": {
+      "src": "source/cg/rc_menghu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_huainan_n": {
+      "src": "source/cg/rc_huainan_n.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
