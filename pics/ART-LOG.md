@@ -1198,3 +1198,4 @@
 - [ ] 2026-10-24 battle `n7_gaolan` ← n7_gaolan.jpg · ok
 - [ ] 2026-10-24 battle `n8_b_chengyu` ← n8_b_chengyu.jpg · ok
 - [ ] 2026-10-24 battle `n7_zangba` ← n7_zangba.jpg · ok
+- [ ] 2026-10-24 cg `c3_guotu_raid` ← c3_guotu_raid.jpg · ok
