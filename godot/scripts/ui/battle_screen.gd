@@ -24,6 +24,7 @@ var _combo_label: Label
 var _log: RichTextLabel
 var _cards: Array = []  # CardView per leader
 var _skill_popup: Control  # open skill-picker for whichever leader was last tapped, or null
+var _skill_layer: Control  # the skill buttons laid over each leader who can act (tap one to play it straight away)
 var _skill_popup_at := 0  # msec it opened: the finger-lift from the tap that opened it must not close it
 var _defend: Button
 var _retreat: Button
@@ -72,7 +73,7 @@ func _ready() -> void:
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
-		_tip("点队长卡选技能出手 · AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
+		_tip("点卡上的技能直接出手（点卡可换人）· AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
 			int(GameData.get_db().battle["ap_per_round"]), b.ap_max()])
 
 
@@ -292,6 +293,10 @@ func _build() -> void:
 		var v := _make_card(i)
 		row.add_child(v)
 		_cards.append(v)
+	_skill_layer = Control.new()
+	_skill_layer.z_index = 4
+	_skill_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_skill_layer)
 	var locked := PanelContainer.new()  # one slim slot for a future 5th party member
 	locked.custom_minimum_size = Vector2(locked_w, card_size.y)
 	locked.add_theme_stylebox_override("panel", Kit.box(Kit.c("card").darkened(0.5), 10, 2, Kit.c("gray"), 0))
@@ -411,6 +416,7 @@ func _refresh() -> void:
 	_defend.disabled = _busy or not b.can_defend()
 	_retreat.disabled = _busy
 	_sync_fx()
+	_sync_skill_bars.call_deferred()  # after the row has laid itself out
 	if not _busy:
 		var first_card: CardView = _cards.filter(func(v): return v.focus_mode == Control.FOCUS_ALL).front() if _cards.any(func(v): return v.focus_mode == Control.FOCUS_ALL) else null
 		Kit.focus(first_card if first_card != null else _end)
@@ -426,6 +432,57 @@ func _unhandled_input(event: InputEvent) -> void:
 			_on_end_round()
 		KEY_D:
 			_on_defend()
+
+
+func _sync_skill_bars() -> void:
+	## every leader who can act shows his skills right on the card (over the lower portrait, above the AT / HP strip): one tap plays it.
+	## Hidden while anything plays out, in 自动, and once the fight is decided; tapping the card itself still opens the full panel (换人)
+	if _skill_layer == null:
+		return
+	for ch in _skill_layer.get_children():
+		ch.queue_free()
+	if _busy or auto_on or b.result != "":
+		return
+	var small := _has_cg
+	for i in b.leaders.size():
+		if i >= _cards.size() or not b.can_act(i):
+			continue
+		var v: CardView = _cards[i]
+		var u: Dictionary = b.leaders[i]
+		var r := v.get_global_rect()
+		var card_h := minf(r.size.y, r.size.x * 1.4)
+		var bar := VBoxContainer.new()
+		bar.add_theme_constant_override("separation", 3)
+		var bh := 28.0 if small else 34.0
+		var skills: Array = u["leader"]["card"]["skills"]
+		for sid in skills:
+			var sk: Dictionary = GameData.get_db().skills[sid]
+			var ult := _is_ult(sk)
+			var btn := Button.new()
+			btn.text = "%s  AP%d" % [sk["name"], b.cost(u, sk)]
+			btn.add_theme_font_size_override("font_size", 14 if small else 16)
+			btn.icon = Kit.skill_icon(sk)
+			btn.expand_icon = true
+			btn.add_theme_constant_override("icon_max_width", 16 if small else 20)
+			btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			btn.focus_mode = Control.FOCUS_NONE
+			btn.custom_minimum_size = Vector2(0, bh)
+			var edge: Color = Kit.c("gold") if ult else Color(1, 1, 1, 0.35)
+			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.82), 8, 2 if ult else 1, edge, 6))
+			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.9), 8, 2, Kit.c("gold"), 6))
+			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 6))
+			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.07, 0.05, 0.04, 0.55), 8, 1, Color(1, 1, 1, 0.15), 6))
+			btn.add_theme_color_override("font_color", Kit.c("gold") if ult else Color(1, 1, 1))
+			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.35))
+			btn.disabled = not b.usable(u, sk)
+			btn.pressed.connect(func():
+				_close_skill_popup()
+				_on_skill(i, sid))
+			bar.add_child(btn)
+		var h := skills.size() * bh + (skills.size() - 1) * 3.0
+		bar.position = r.position - global_position + Vector2(8, card_h * 0.66 - h - 4)
+		bar.size = Vector2(r.size.x - 16, h)
+		_skill_layer.add_child(bar)
 
 
 func _close_skill_popup() -> void:
@@ -530,6 +587,7 @@ func _toggle_auto() -> void:
 		auto_on = false
 	_apply_speed()
 	_sync_auto_btn()
+	_sync_skill_bars()
 	if auto_on:
 		_close_skill_popup()
 		_auto_step()
