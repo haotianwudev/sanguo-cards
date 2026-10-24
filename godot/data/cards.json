@@ -2366,10 +2366,9 @@
       "rarity": "SR",
       "troop": "logistics",
       "hp": 90,
-      "at": 66,
+      "at": 62,
       "skills": [
-        "biyue",
-        "shuangchui"
+        "biyue"
       ],
       "pool": false,
       "scope": "south"
@@ -2392,10 +2391,9 @@
       "rarity": "SR",
       "troop": "logistics",
       "hp": 88,
-      "at": 72,
+      "at": 64,
       "skills": [
-        "biyue",
-        "xiaobawang"
+        "biyue"
       ],
       "pool": false,
       "scope": "south"
@@ -2412,6 +2410,19 @@
       ],
       "pool": false,
       "scope": "north"
+    },
+    "rc_huainan_s": {
+      "name": "庐江·二乔",
+      "rarity": "SR",
+      "troop": "logistics",
+      "hp": 92,
+      "at": 66,
+      "skills": [
+        "guose",
+        "qinse"
+      ],
+      "pool": false,
+      "scope": "south"
     },
     "zhangfuren": {
       "name": "张夫人",

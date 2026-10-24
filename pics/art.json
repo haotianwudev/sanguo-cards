@@ -3893,7 +3893,7 @@
       "src": "source/generals/rc_jingxiang.jpg",
       "license": "用户提供（Gemini 生成）",
       "face": [
-        0.58,
+        0.48,
         0.42
       ],
       "head": 0.24
@@ -3903,6 +3903,24 @@
       "license": "用户提供（Gemini 生成）",
       "face": [
         0.53,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_huainan_s": {
+      "src": "source/generals/rc_huainan_s.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.52,
+        0.42
+      ],
+      "head": 0.24
+    },
+    "rc_xuzhou": {
+      "src": "source/generals/rc_xuzhou.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.47,
         0.42
       ],
       "head": 0.24
@@ -7161,6 +7179,14 @@
     },
     "rc_beihai": {
       "src": "source/cg/rc_beihai.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_huainan_s": {
+      "src": "source/cg/rc_huainan_s.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "rc_xuzhou": {
+      "src": "source/cg/rc_xuzhou.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

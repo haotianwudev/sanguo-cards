@@ -2007,3 +2007,16 @@ func test_diaochan_jingxiang_page_and_card() -> void:
 	Quests.open_side(s, "s_rc_jingxiang")
 	check(s.owned.has("rc_jingxiang"))
 
+
+func test_erqiao_page_and_card() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：江东富春"]
+	s.quests_cleared = ["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s"]
+	check_eq(Quests.chapter_page("huainan_s", s).get("cg", ""), "")
+	s.run_records.append("二乔：解救")
+	check_eq(Quests.chapter_page("huainan_s", s).get("cg", ""), "rc_huainan_s")
+	s.flags = ["结局七 · 深锁"]
+	s.merit = 5
+	Quests.open_side(s, "s_rc_huainan_s")
+	check(s.owned.has("rc_huainan_s"))
+
