@@ -830,7 +830,6 @@
     "ploy": {
       "name": "计略",
       "cost": 2,
-      "cumulative": true,
       "effects": [
         {
           "type": "magic"
@@ -1510,6 +1509,21 @@
           "hits": 5,
           "hit_rate": 0.66,
           "pierce": true
+        }
+      ]
+    },
+    "huojian": {
+      "name": "火箭",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "burn",
+          "pct": 0.1,
+          "turns": 1
         }
       ]
     },
