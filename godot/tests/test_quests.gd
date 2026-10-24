@@ -2028,6 +2028,23 @@ func test_guojia_page_needs_him_alive_and_the_card_waits_for_duanxian() -> void:
 	check(s.owned.has("rc_longhu"), "最后一个葫芦 hands over 郭嘉·最后一个葫芦")
 
 
+func test_mayunlu_page_needs_the_ma_family_and_the_card_waits_for_luoshang() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang"]
+	check_eq(Quests.chapter_page("xiliang", s).get("cg", ""), "", "no 马云騄 picture on the 断弦 route")
+	s.run_records.append("北线：西凉归附")
+	check_eq(Quests.chapter_page("xiliang", s).get("cg", ""), "rc_xiliang")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局十四 · 断弦"]
+	check(not ids.call().has("s_rc_xiliang"), "断弦 is what saves the 马 family: not enough")
+	s.flags.append("结局十六 · 洛殇")
+	check(ids.call().has("s_rc_xiliang"), "洛殇 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_xiliang")
+	check(s.owned.has("rc_xiliang"), "那只羊 hands over 马云騄·那只羊")
+
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]

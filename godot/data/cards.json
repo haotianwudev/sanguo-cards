@@ -2500,6 +2500,18 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_xiliang": {
+      "name": "马云騄·那只羊",
+      "rarity": "SR",
+      "troop": "archer",
+      "hp": 70,
+      "at": 96,
+      "skills": [
+        "yunlu"
+      ],
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",
