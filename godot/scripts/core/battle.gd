@@ -454,7 +454,9 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			return ["  %s 中毒 ×%d：每回合损失最大体力的 %d%%（%d 回合）" % [ename, enemy["poison"],
 				int(round(enemy["poison_pct"] * enemy["poison"] * 100)), enemy["poison_turns"]]]
 		"counter":  # 反击: until the round ends, every hit the enemy lands is answered with ×power of this leader's attack
-			counters.append({"name": unit_name(u), "at": at * mult, "power": float(eff["power"])})
+			var slot := leaders.find(u)
+			counters.append({"name": unit_name(u), "at": at * mult, "power": float(eff["power"]), "unit": slot})
+			_ev({"t": "counter_on", "unit": slot, "power": float(eff["power"])})
 			return ["  %s 架起拒马：本回合敌人每打中一次，还击 ×%s" % [unit_name(u), str(eff["power"])]]
 		"buff":  # 战意: +1 layer (up to max) of attack and damage-taken cut for the whole party; recasting refreshes the timer
 			if buff["layers"] < int(eff.get("max", 4)):
@@ -569,6 +571,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 				if party_hp > 0:
 					log.append_array(_counter_strike())
 			else:
+				_ev({"t": "enemy_move", "move": mv["name"]})
 				log.append("%s【%s】" % [data["name"], mv["name"]])
 			if mv.has("rage"):
 				enemy["at"] *= 1.0 + float(mv["rage"])
@@ -581,9 +584,11 @@ func _enemy_phase(defend_cut: float) -> Array:
 				log.append("  %s 回复了 %d 体力" % [data["name"], h])
 			if mv.has("ap_drain"):
 				ap_drain += int(mv["ap_drain"])
+				_ev({"t": "enemy_ap_drain", "amount": int(mv["ap_drain"])})
 				log.append("[color=red]  下回合我军 AP -%d[/color]" % int(mv["ap_drain"]))
 			if mv.has("burn_party"):
 				party_burn = {"dmg": int(round(party_max * float(mv["burn_party"]))), "turns": int(mv.get("turns", 3))}
+				_ev({"t": "enemy_burn_party", "dmg": party_burn["dmg"], "turns": party_burn["turns"]})
 				log.append("[color=red]  我军陷入灼烧！每回合 -%d（%d 回合）[/color]" % [party_burn["dmg"], party_burn["turns"]])
 			if mv.has("confuse") and mods.get("calm", 0) <= 0 and rng.randf() < float(mv["confuse"]):
 				var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
@@ -622,9 +627,11 @@ func _affix_status() -> Array:
 		var dmg := int(round(party_max * float(afx["burn_party"])))
 		if party_burn["turns"] == 0 or dmg > party_burn["dmg"]:
 			party_burn = {"dmg": dmg, "turns": int(afx.get("turns", 3))}
+			_ev({"t": "enemy_burn_party", "dmg": dmg, "turns": party_burn["turns"]})
 			log.append("[color=red]  【%s】我军灼烧！每回合 -%d（%d 回合）[/color]" % [nm, dmg, party_burn["turns"]])
 	if afx.has("ap_drain"):
 		ap_drain += int(afx["ap_drain"])
+		_ev({"t": "enemy_ap_drain", "amount": int(afx["ap_drain"])})
 		log.append("[color=red]  【%s】下回合我军 AP -%d[/color]" % [nm, int(afx["ap_drain"])])
 	return log
 
@@ -637,7 +644,7 @@ func _counter_strike() -> Array:
 			break
 		var d := _dmg(float(c["at"]) * float(c["power"]) * (1.0 + float(buff["atk"])), "attack")
 		enemy["hp"] = maxi(0, enemy["hp"] - d)
-		_ev({"t": "counter", "unit": c["name"], "dmg": d, "hp": enemy["hp"]})
+		_ev({"t": "counter", "unit": c["name"], "slot": int(c.get("unit", -1)), "dmg": d, "hp": enemy["hp"]})
 		log.append("  %s 反击，造成 %d 伤害" % [c["name"], d])
 	_check_end()
 	return log

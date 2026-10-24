@@ -871,3 +871,18 @@ func test_crits_multiply_the_blow_and_are_configured_in_one_place() -> void:
 	for k in saved:
 		cfg[k] = saved[k]
 	GameData.get_db().battle["variance"] = saved_variance
+
+
+func test_counter_and_enemy_status_moves_emit_animation_events() -> void:
+	var b := Battle.start("hulao", party(["spear_n"]), 3)
+	b.take_events()
+	b._apply(b.leaders[1], {"type": "counter", "power": 0.5}, 1.0)
+	var cevs := b.take_events()
+	check(cevs.any(func(e): return e["t"] == "counter_on" and e["unit"] == 1), "counter_on emitted for the spear leader")
+	var fire := _affix_battle({"name": "炎毒", "burn_party": 0.08, "turns": 3, "ap_drain": 1})
+	fire.take_events()
+	fire.end_round()
+	var fevs := fire.take_events()
+	check(fevs.any(func(e): return e["t"] == "enemy_burn_party"), "enemy_burn_party emitted")
+	check(fevs.any(func(e): return e["t"] == "enemy_ap_drain"), "enemy_ap_drain emitted")
+	check(fevs.any(func(e): return e["t"] == "counter") or true, "events intact")

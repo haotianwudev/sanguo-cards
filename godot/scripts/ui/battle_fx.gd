@@ -196,6 +196,94 @@ static func ult_slash(parent: Control, at: Vector2, combo: int, dmg_ratio: float
 		ring(parent, at, Color(1.0, 0.45, 0.25), 30.0, 280.0, 0.48, 6)
 
 
+static func ult_magic(parent: Control, at: Vector2, combo: int, dmg_ratio: float) -> void:
+	## 法术大招: a descending arcane-fire pillar, spinning rune stars, twin shockwave rings and a crimson-violet flash
+	var beam_w := 140.0 * scale
+	var pillar := Polygon2D.new()
+	pillar.polygon = PackedVector2Array([Vector2(-beam_w * 0.5, -360), Vector2(beam_w * 0.5, -360), Vector2(beam_w * 0.72, 110), Vector2(-beam_w * 0.72, 110)])
+	pillar.color = Color(1.0, 0.42, 0.18, 0.72) if combo % 2 == 1 else Color(0.75, 0.42, 1.0, 0.72)
+	pillar.position = at
+	pillar.scale = Vector2(0.15, 1.0)
+	pillar.z_index = 46
+	parent.add_child(pillar)
+	var core := Polygon2D.new()
+	core.polygon = PackedVector2Array([Vector2(-beam_w * 0.22, -360), Vector2(beam_w * 0.22, -360), Vector2(beam_w * 0.32, 110), Vector2(-beam_w * 0.32, 110)])
+	core.color = Color(1.0, 0.96, 0.88, 0.95)
+	pillar.add_child(core)
+	var ptw := pillar.create_tween()
+	ptw.tween_property(pillar, "scale:x", 1.15, 0.09).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	ptw.tween_property(pillar, "scale:x", 0.0, 0.26).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	ptw.parallel().tween_property(pillar, "modulate:a", 0.0, 0.26)
+	ptw.tween_callback(pillar.queue_free)
+	for k in 2:
+		var sigil := Polygon2D.new()
+		sigil.polygon = _star((130.0 if k == 0 else 86.0) * scale, (62.0 if k == 0 else 40.0) * scale)
+		sigil.color = Color(1.0, 0.84, 0.4, 0.85) if k == 0 else Color(0.88, 0.62, 1.0, 0.9)
+		sigil.position = at
+		sigil.scale = Vector2(0.2, 0.12)
+		sigil.z_index = 47
+		parent.add_child(sigil)
+		var stw := sigil.create_tween().set_parallel(true)
+		stw.tween_property(sigil, "scale", Vector2(1.15, 0.65), 0.34).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		stw.tween_property(sigil, "rotation", (1.2 if k == 0 else -1.5), 0.38)
+		stw.tween_property(sigil, "modulate:a", 0.0, 0.38)
+		stw.chain().tween_callback(sigil.queue_free)
+	for i in 3:
+		slash(parent, at + Vector2((i - 1) * 52.0 * scale, -20.0 * scale), Color(1.0, 0.88, 0.55), 78.0 + (i - 1) * 12.0, 320.0, 14.0, i * 0.04)
+	flash(parent, Color(1.0, 0.65, 0.35, 0.52), 0.2)
+	burst(parent, at, Color(1.0, 0.72, 0.32), 20, 18.0, 200.0, 6.0, 0.42)
+	burst(parent, at, VIOLET, 14, 14.0, 150.0, 4.0, 0.34)
+	ring(parent, at, Color(1.0, 0.85, 0.42), 24.0, 220.0, 0.4, 8)
+	ring(parent, at, VIOLET, 16.0, 160.0, 0.3, 6)
+	if dmg_ratio > 0.12:
+		embers(parent, Rect2(at - Vector2(140, 90) * scale, Vector2(280, 180) * scale), EMBER, 34, 120.0, true)
+
+
+static func rider_hit(parent: Control, at: Vector2) -> void:
+	## 战意追击: a crisp violet-gold star flare that rides right behind a physical blow
+	var p := at + Vector2(randf_range(-28, 28), randf_range(-20, 20))
+	var s := Polygon2D.new()
+	s.polygon = _star(36.0 * scale, 14.0 * scale)
+	s.color = Color(0.88, 0.72, 1.0, 0.95)
+	s.position = p
+	s.scale = Vector2(0.2, 0.2)
+	s.z_index = 47
+	parent.add_child(s)
+	var tw := s.create_tween().set_parallel(true)
+	tw.tween_property(s, "scale", Vector2.ONE, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(s, "rotation", 1.1, 0.24)
+	tw.tween_property(s, "modulate:a", 0.0, 0.24)
+	tw.chain().tween_callback(s.queue_free)
+	burst(parent, p, VIOLET, 8, 10.0, 74.0, 3.5, 0.22)
+	ring(parent, p, GOLD, 8.0, 64.0, 0.22, 4)
+
+
+static func interrupt_slash(parent: Control, from_pos: Vector2, to_pos: Vector2) -> void:
+	## 插入突袭: a golden-steel lance streak launches from the unit's card straight into the enemy
+	var bolt := Polygon2D.new()
+	bolt.polygon = PackedVector2Array([Vector2(-70, 0), Vector2(0, -8), Vector2(70, 0), Vector2(0, 8)])
+	bolt.color = Color(1.0, 0.92, 0.58, 0.95)
+	bolt.position = from_pos
+	bolt.rotation = (to_pos - from_pos).angle()
+	bolt.z_index = 47
+	parent.add_child(bolt)
+	var tw := bolt.create_tween()
+	tw.tween_property(bolt, "position", to_pos, 0.11).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.tween_property(bolt, "modulate:a", 0.0, 0.08)
+	tw.tween_callback(bolt.queue_free)
+
+
+static func kill_blow(parent: Control, at: Vector2) -> void:
+	## 致命一击: a dramatic X-cross execution slash, dual shockwaves and a white-gold flash when the enemy's HP hits 0
+	slash(parent, at, Color(1, 1, 1), -28.0, 420.0, 22.0)
+	slash(parent, at, GOLD, 28.0, 420.0, 18.0, 0.04)
+	flash(parent, Color(1.0, 0.95, 0.82, 0.68), 0.26)
+	burst(parent, at, GOLD, 22, 20.0, 220.0, 7.0, 0.45)
+	burst(parent, at, BLOOD, 14, 16.0, 160.0, 5.0, 0.38)
+	ring(parent, at, Color(1, 1, 1), 20.0, 250.0, 0.42, 10)
+	ring(parent, at, GOLD, 14.0, 180.0, 0.32, 6)
+
+
 static func counter(parent: Control, at: Vector2) -> void:
 	## 反击: a cold teal cut, thrown back
 	slash(parent, at, Color(0.45, 0.95, 0.9), 20.0, 260.0, 12.0)
@@ -308,6 +396,85 @@ static func flame_lick(parent: Control, rect: Rect2) -> void:
 	## a burn tick: a quick gust of flame over whatever is burning
 	embers(parent, rect, EMBER, 30, 90.0, true)
 	ring(parent, rect.position + rect.size / 2, Color(1.0, 0.55, 0.15, 0.9), 16.0, minf(rect.size.x, 220.0) * 0.5, 0.3, 4)
+
+
+static func poison_cloud(parent: Control, rect: Rect2) -> void:
+	## 施毒 / 毒发: rising toxic green-violet droplets and two expanding miasma rings
+	var c := rect.position + rect.size * 0.5
+	embers(parent, rect, Color(0.45, 0.95, 0.35, 0.92), 28, 70.0, true)
+	ring(parent, c, Color(0.45, 0.95, 0.35, 0.88), 16.0, minf(rect.size.x, 220.0) * 0.52, 0.34, 5)
+	ring(parent, c, VIOLET, 10.0, minf(rect.size.x, 170.0) * 0.4, 0.26, 4)
+	burst(parent, c, Color(0.55, 1.0, 0.45), 10, 12.0, 95.0, 4.0, 0.3)
+
+
+static func heal_wave(parent: Control, rect: Rect2) -> void:
+	## 回复: emerald sparkles and bright crosses rising across the party bar
+	var c := rect.position + rect.size * 0.5
+	embers(parent, rect, Color(GREEN, 0.92), 28, 75.0, true)
+	ring(parent, c, GREEN, 16.0, 140.0, 0.36, 5)
+	for i in 5:
+		var cross := Polygon2D.new()
+		cross.polygon = PackedVector2Array([
+			Vector2(-3, -11), Vector2(3, -11), Vector2(3, -3), Vector2(11, -3), Vector2(11, 3), Vector2(3, 3),
+			Vector2(3, 11), Vector2(-3, 11), Vector2(-3, 3), Vector2(-11, 3), Vector2(-11, -3), Vector2(-3, -3)])
+		cross.color = GREEN
+		cross.position = rect.position + Vector2(rect.size.x * (0.2 + 0.15 * i), rect.size.y * 0.5)
+		cross.z_index = 47
+		parent.add_child(cross)
+		var tw := cross.create_tween().set_parallel(true)
+		tw.tween_property(cross, "position:y", cross.position.y - 68.0, 0.52).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_delay(i * 0.04)
+		tw.tween_property(cross, "modulate:a", 0.0, 0.52).set_delay(i * 0.04)
+		tw.chain().tween_callback(cross.queue_free)
+
+
+static func shield_wall(parent: Control, rect: Rect2, strong := false) -> void:
+	## 举盾 / 全军防御: an azure-gold barrier flashes over the party bar with rising shield chevrons
+	var wall := Panel.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.28, 0.62, 1.0, 0.28 if strong else 0.18)
+	sb.border_color = Color(0.65, 0.88, 1.0, 0.95)
+	sb.set_border_width_all(4 if strong else 3)
+	sb.set_corner_radius_all(14)
+	wall.add_theme_stylebox_override("panel", sb)
+	wall.position = rect.position - Vector2(6, 6)
+	wall.size = rect.size + Vector2(12, 12)
+	wall.pivot_offset = wall.size * 0.5
+	wall.scale = Vector2(1.06, 1.25)
+	wall.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wall.z_index = 46
+	parent.add_child(wall)
+	var tw := wall.create_tween().set_parallel(true)
+	tw.tween_property(wall, "scale", Vector2.ONE, 0.16).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(wall, "modulate:a", 0.0, 0.42).set_delay(0.12)
+	tw.chain().tween_callback(wall.queue_free)
+	var c := rect.position + rect.size * 0.5
+	ring(parent, c, Color(0.55, 0.82, 1.0), 20.0, 150.0 if strong else 110.0, 0.34, 6)
+
+
+static func counter_stance(parent: Control, rect: Rect2) -> void:
+	## 架起反击: crossed teal lance glints and a sharp ring over the leader card
+	var c := rect.position + rect.size * 0.5
+	var col := Color(0.45, 0.95, 0.9)
+	slash(parent, c, col, -38.0, 220.0, 11.0)
+	slash(parent, c, Color(0.82, 1.0, 0.98), 38.0, 220.0, 9.0, 0.04)
+	ring(parent, c, col, 16.0, 120.0, 0.32, 5)
+	burst(parent, c, col, 10, 14.0, 96.0, 4.0, 0.28)
+
+
+static func ap_gain(parent: Control, pips: Array) -> void:
+	## 回 AP: each gained AP pip pops and throws golden sparks
+	for k in pips.size():
+		var pip: Control = pips[k]
+		if not is_instance_valid(pip):
+			continue
+		pip.pivot_offset = pip.size * 0.5
+		pip.scale = Vector2(0.4, 0.4)
+		var tw := pip.create_tween()
+		tw.tween_interval(k * 0.05)
+		tw.tween_property(pip, "scale", Vector2(1.45, 1.45), 0.11).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tw.tween_property(pip, "scale", Vector2.ONE, 0.1)
+		var at := pip.global_position - parent.global_position + pip.size * 0.5
+		burst(parent, at, GOLD, 6, 4.0, 34.0, 3.0, 0.26)
 
 
 static func boost_cast(parent: Control, rect: Rect2) -> void:
@@ -466,3 +633,14 @@ static func glow(parent: Node, rect: Rect2, color: Color) -> Panel:
 	tw.tween_property(p, "modulate:a", 1.0, 0.8).set_trans(Tween.TRANS_SINE)
 	tw.tween_property(p, "modulate:a", 0.4, 0.8).set_trans(Tween.TRANS_SINE)
 	return p
+
+
+static func charge_aura(parent: Node, rect: Rect2, show_frame := true) -> Node2D:
+	## 蓄力中: a pulsing crimson warning aura and rising blood-red sparks around an enemy winding up its ultimate
+	var holder := Node2D.new()
+	holder.z_index = 45
+	parent.add_child(holder)
+	if show_frame:
+		glow(holder, rect, BLOOD).z_index = 0
+	embers(holder, rect, Color(1.0, 0.22, 0.18, 0.9), 28, 115.0).z_index = 0
+	return holder

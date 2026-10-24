@@ -743,6 +743,9 @@ func _sync_fx() -> void:
 		want["e_break"] = func(): return BattleFx.cracks(self, _enemy_rect(), Color(1.0, 0.82, 0.35, 0.8))
 	if e["stunned"]:
 		want["e_stun"] = func(): return BattleFx.orbit(self, _enemy_center() + Vector2(0, -80), 80.0, 22.0, 4, BattleFx.GOLD, 11.0)
+	if e["charging"] != "":
+		var cr := _enemy_rect() if _has_cg else Rect2(_enemy_art.global_position - global_position, _enemy_art.size)
+		want["e_charge"] = func(): return BattleFx.charge_aura(self, cr, not _has_cg)
 	if b.party_burn["turns"] > 0:
 		want["p_burn"] = func(): return BattleFx.embers(self, _party_rect(), BattleFx.EMBER, 26, 50.0)
 	for i in b.leaders.size():
@@ -839,6 +842,8 @@ func _sync_badges() -> void:
 			mine.append(BattleFx.badge("强", Color(1.0, 0.5, 0.15)))
 			var rib := _boost_ribbon(rr)
 			_badge_add(rib)
+		if b.counters.any(func(c): return int(c.get("unit", -1)) == i):
+			mine.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78)))
 		for k in mine.size():
 			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
 			_badge_add(mine[k])
@@ -858,6 +863,44 @@ func _party_center() -> Vector2:
 	return _party_hp.global_position + _party_hp.size / 2 - global_position
 
 
+func _card_lunge(v: CardView, big := false) -> void:
+	## 出招前冲: crouch slightly, spring up toward the enemy with a warm flash, then settle back into the row
+	v.pivot_offset = v.size / 2
+	var y0 := 0.0
+	var jump := -44.0 if big else -32.0
+	var sc := 1.14 if big else 1.08
+	var tw := v.create_tween()
+	tw.tween_property(v, "position:y", y0 + 8.0, 0.05)
+	tw.parallel().tween_property(v, "scale", Vector2(0.95, 0.95), 0.05)
+	tw.tween_property(v, "position:y", y0 + jump, 0.09).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(v, "scale", Vector2(sc, sc), 0.09).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(v, "position:y", y0, 0.16).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(v, "scale", Vector2.ONE, 0.16)
+	_flash(v, Color(1.35, 1.28, 1.05))
+
+
+func _enemy_move_tag(move_name: String) -> void:
+	## 敌方招式条: a sleek crimson-bordered plaque popping up below the enemy so every move is readable without the log
+	if move_name == "" or move_name == "火":
+		return
+	var l := Kit.label("【%s】" % move_name, Kit.FONT_BIG)
+	l.add_theme_color_override("font_color", Color(1.0, 0.92, 0.82))
+	l.add_theme_stylebox_override("normal", Kit.box(Color(0.14, 0.03, 0.03, 0.92), 10, 2, Kit.c("red"), 10))
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.size = Vector2(260, 48)
+	l.pivot_offset = l.size * 0.5
+	l.position = Vector2(510, 260) if _has_cg else Vector2(270, 212)
+	l.scale = Vector2(0.5, 0.5)
+	l.z_index = 49
+	add_child(l)
+	var tw := l.create_tween()
+	tw.tween_property(l, "scale", Vector2(1.08, 1.08), 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(l, "scale", Vector2.ONE, 0.08)
+	tw.tween_interval(0.32)
+	tw.tween_property(l, "modulate:a", 0.0, 0.18)
+	tw.tween_callback(l.queue_free)
+
+
 func _play(events: Array) -> void:
 	_busy = true
 	_refresh()
@@ -865,14 +908,11 @@ func _play(events: Array) -> void:
 		match ev["t"]:
 			"act":
 				var v: CardView = _cards[ev["unit"]]
-				var y := v.position.y
-				var tw := v.create_tween()
-				tw.tween_property(v, "position:y", y - 26, 0.1).set_trans(Tween.TRANS_QUAD)
-				tw.tween_property(v, "position:y", y, 0.14)
 				_boost_hits = bool(ev.get("boost", false))
-				_sfx_act(ev)
 				var used: Dictionary = GameData.get_db().skills.get(str(ev.get("skill", "")), {})
-				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] == "attack")  # a physical 大招: its blows are the big cuts
+				_card_lunge(v, _is_ult(used) or _boost_hits)
+				_sfx_act(ev)
+				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] in ["attack", "magic"])  # 大招: physical or magic ultimate blows
 				if _is_ult(used):
 					await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
 				if _boost_hits:
@@ -880,16 +920,32 @@ func _play(events: Array) -> void:
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
 				await get_tree().create_timer(0.02).timeout
 			"hit", "interrupt", "burn", "counter", "poison":
-				Kit.shake(_enemy_art, 9.0, 0.2)
-				_flash(_enemy_art, Color(1.6, 0.6, 0.6))
-				var big: bool = ev["dmg"] > b.enemy["max_hp"] * 0.08
+				var is_rider: bool = ev.get("rider", false)
+				if ev["t"] == "interrupt" and int(ev.get("unit", -1)) >= 0 and int(ev["unit"]) < _cards.size():
+					var iu: int = int(ev["unit"])
+					_card_lunge(_cards[iu], false)
+					Kit.float_text(self, _card_rect(iu).get_center() + Vector2(0, -54), "%s 突袭！" % str(ev.get("member", "部队")), Kit.c("gold"), 30)
+					BattleFx.interrupt_slash(self, _card_rect(iu).get_center(), _enemy_center())
+					await get_tree().create_timer(0.09).timeout
+				elif ev["t"] == "counter" and int(ev.get("slot", -1)) >= 0 and int(ev["slot"]) < _cards.size():
+					var cs: int = int(ev["slot"])
+					_card_lunge(_cards[cs], false)
+					Kit.float_text(self, _card_rect(cs).get_center() + Vector2(0, -54), "反击！", Color(0.45, 0.95, 0.9), 32)
+				Kit.shake(_enemy_art, 5.0 if is_rider else 9.0, 0.14 if is_rider else 0.2)
+				_flash(_enemy_art, Color(1.4, 0.9, 1.7) if is_rider else Color(1.6, 0.6, 0.6))
+				var big: bool = not is_rider and ev["dmg"] > b.enemy["max_hp"] * 0.08
 				var ratio := float(ev["dmg"]) / maxf(1.0, float(b.enemy["max_hp"]))
 				_sfx_hit(ev, big)
 				BattleFx.scale = _enemy_fx_scale()
 				match ev["t"]:
 					"hit":
-						if _ult_hits and ev["kind"] != "magic":
-							BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
+						if is_rider:
+							BattleFx.rider_hit(self, _enemy_center())
+						elif _ult_hits:
+							if ev["kind"] == "magic":
+								BattleFx.ult_magic(self, _enemy_center(), ev["combo"], ratio)
+							else:
+								BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
 							Kit.shake(self, 22.0, 0.3)
 						else:
 							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits)
@@ -898,26 +954,62 @@ func _play(events: Array) -> void:
 					"burn":
 						BattleFx.flame_lick(self, _enemy_rect())
 					"poison":
-						BattleFx.burst(self, _enemy_center(), Color(0.45, 0.95, 0.35), 12, 14.0, 100.0, 5.0, 0.35)
+						BattleFx.poison_cloud(self, _enemy_rect())
 					"interrupt":
 						BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
 				BattleFx.scale = 1.0
 				var crit_hit: bool = ev.get("crit", false)
-				Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
-					Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
+				if is_rider:
+					Kit.float_text(self, _enemy_center() + Vector2(54, -18), "战意 +%d" % ev["dmg"], Color(0.88, 0.72, 1.0), 36)
+				else:
+					Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
+						Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
 				if crit_hit:
 					Kit.shake(self, 14.0, 0.2)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
 				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
-				if ev["t"] == "hit" and ev["combo"] >= 2:
+				if ev["t"] == "hit" and not is_rider and ev["combo"] >= 2:
 					_combo_label.text = "%d 连击 +%d%%" % [ev["combo"], ev["combo"] * 10]
 					Kit.pop(_combo_label, 1.3)
-				if big:
+				if int(ev.get("hp", 1)) <= 0:
+					BattleFx.scale = _enemy_fx_scale()
+					BattleFx.kill_blow(self, _enemy_center())
+					BattleFx.scale = 1.0
+					_flash(_enemy_art, Color(2.2, 2.0, 1.8))
+					Kit.shake(self, 20.0, 0.32)
+					await get_tree().create_timer(0.18).timeout
+				elif big:
 					Kit.shake(self, 6.0 + 24.0 * minf(ratio, 0.3), 0.18)
 					await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
-				if _ult_hits and ev["t"] == "hit":
+				if _ult_hits and ev["t"] == "hit" and not is_rider:
 					await get_tree().create_timer(0.22).timeout  # let the big cut finish before the next blow
-				await get_tree().create_timer(0.16).timeout
+				await get_tree().create_timer(0.07 if is_rider else 0.16).timeout
+			"burn_on":
+				Sfx.play("burn")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.flame_lick(self, _enemy_rect())
+				BattleFx.scale = 1.0
+				_flash(_enemy_art, Color(1.8, 0.75, 0.35))
+				Kit.float_text(self, _enemy_center() + Vector2(0, -30), "灼烧！", Kit.c("red"), 40)
+				_refresh()
+				await get_tree().create_timer(0.26).timeout
+			"poison_on":
+				Sfx.play("burn")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.poison_cloud(self, _enemy_rect())
+				BattleFx.scale = 1.0
+				_flash(_enemy_art, Color(0.65, 1.5, 0.65))
+				Kit.float_text(self, _enemy_center() + Vector2(0, -30), "中毒 ×%d" % int(ev.get("layers", 1)), Kit.c("green"), 40)
+				_refresh()
+				await get_tree().create_timer(0.26).timeout
+			"counter_on":
+				Sfx.play("guard")
+				var cu: int = int(ev.get("unit", 0))
+				BattleFx.counter_stance(self, _card_rect(cu))
+				Kit.pop(_cards[cu], 1.08)
+				Kit.float_text(self, _card_rect(cu).get_center() + Vector2(0, -40), "反击架势", Color(0.45, 0.95, 0.9), 34)
+				_refresh()
+				await get_tree().create_timer(0.26).timeout
 			"swap":
 				_rebuild_card(ev["unit"])
 				_party_hp.max_value = ev["max"]
@@ -944,19 +1036,25 @@ func _play(events: Array) -> void:
 				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP -%d" % ev["amount"], Kit.c("red"), 34)
 				await get_tree().create_timer(0.35).timeout
 			"hurt":
+				_flash(_party_box, Color(1.6, 0.5, 0.5))
+				Kit.shake(_party_box, 7.0, 0.18)
+				BattleFx.slash(self, _party_center(), BattleFx.BLOOD, -25.0, 180.0, 10.0)
 				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.3).timeout
 			"heal":
 				Sfx.play("heal")
+				BattleFx.heal_wave(self, _party_rect())
 				Kit.float_text(self, _party_center(), "+%d" % ev["amt"], Kit.c("green"))
 				Kit.tween_bar(_party_hp, ev["hp"])
+				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.3).timeout
 			"guard", "defend":
 				Sfx.play("guard")
 				if ev["t"] == "defend":  # the 防御 button: the whole party raises shields (audio.json voice_defaults.guard)
 					Sfx.voice([str(Sfx.voice_defaults.get("guard", ""))], ["guard"])
+				BattleFx.shield_wall(self, _party_rect(), ev["t"] == "defend")
 				Kit.float_text(self, _party_center(), "减伤 %d%%" % int(round(ev["cut"] * 100)), Kit.c("blue"), 32)
 				await get_tree().create_timer(0.3).timeout
 			"boost":
@@ -980,6 +1078,11 @@ func _play(events: Array) -> void:
 				crack.get_tree().create_timer(0.8).timeout.connect(crack.queue_free)
 				await get_tree().create_timer(0.3).timeout
 			"ap":
+				_refresh()
+				var all_pips: Array = _ap_row.get_children().filter(func(n): return n is Panel)
+				var top_ap: int = int(ev.get("ap", b.ap))
+				var gained: Array = all_pips.slice(maxi(0, top_ap - int(ev["amount"])), top_ap)
+				BattleFx.ap_gain(self, gained)
 				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP +%d" % ev["amount"], Kit.c("gold"), 34)
 				await get_tree().create_timer(0.25).timeout
 			"enemy_turn":
@@ -988,13 +1091,31 @@ func _play(events: Array) -> void:
 			"enemy_stunned":
 				Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
 				await get_tree().create_timer(0.45).timeout
+			"enemy_move":
+				_enemy_move_tag(str(ev.get("move", "")))
+				await get_tree().create_timer(0.18).timeout
+			"enemy_burn_party":
+				Sfx.play("burn")
+				BattleFx.flame_lick(self, _party_rect())
+				Kit.float_text(self, _party_center(), "我军灼烧！", Kit.c("red"), 38)
+				_refresh()
+				await get_tree().create_timer(0.28).timeout
+			"enemy_ap_drain":
+				Sfx.play("break")
+				BattleFx.ring(self, _party_center() + Vector2(300, 0), BattleFx.BLOOD, 14.0, 95.0, 0.3, 5)
+				Kit.float_text(self, _party_center() + Vector2(300, 0), "夺气 -%d" % int(ev.get("amount", 1)), Kit.c("red"), 36)
+				_refresh()
+				await get_tree().create_timer(0.26).timeout
 			"enemy_hit":
 				var is_fire: bool = ev.get("move", "") == "火"
-				if not is_fire and _enemy_big_move(str(ev.get("move", ""))):  # the wound-up 大招 lands: cut-in, and it roars
+				var mv_name := str(ev.get("move", ""))
+				if not is_fire and _enemy_big_move(mv_name):  # the wound-up 大招 lands: cut-in, and it roars
 					var ed: Dictionary = b.enemy.get("data", {})
 					Sfx.voice(_enemy_voices(), ["roar", "attack"])
 					_enemy_shouted_this_turn = true
-					await _cutin(str(ed.get("name", "")), str(ed.get("portrait", "")), str(ev.get("move", "")), true)
+					await _cutin(str(ed.get("name", "")), str(ed.get("portrait", "")), mv_name, true)
+				elif not is_fire:
+					_enemy_move_tag(mv_name)
 				var x := _enemy_art.position.y
 				var tw := _enemy_art.create_tween()
 				tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
@@ -1011,6 +1132,8 @@ func _play(events: Array) -> void:
 					BattleFx.flame_lick(self, _party_rect())
 				else:
 					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
+					for c in _cards:
+						Kit.shake(c, 5.0, 0.16)
 				Kit.float_text(self, _party_center(), ("暴击 " if ev.get("crit", false) else "") + "-%d" % ev["dmg"], Kit.c("red"), 56 if ev.get("crit", false) else 44)
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
@@ -1033,8 +1156,12 @@ func _play(events: Array) -> void:
 				await get_tree().create_timer(0.4).timeout
 			"enemy_heal":
 				Sfx.play("heal")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.heal_wave(self, _enemy_rect())
+				BattleFx.scale = 1.0
 				Kit.float_text(self, _enemy_center(), "+%d" % ev["amt"], Kit.c("green"), 40)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
+				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
 				await get_tree().create_timer(0.35).timeout
 			"confuse":
 				Kit.pop(_cards[ev["unit"]], 1.06)

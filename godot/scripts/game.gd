@@ -748,30 +748,61 @@ func demo(name: String) -> void:
 			fb.scenario_id = "hulao"
 			show_screen(fb)
 			await get_tree().create_timer(0.25).timeout
+			fb._busy = true
+			fb._sync_skill_bars()
 			var want := "hit"
 			for a in OS.get_cmdline_user_args():
 				if a.begins_with("--fx="):
 					want = a.substr(5)
 			var eng: Battle = fb.b
-			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "pierce", "boosthit", "counter", "burn", "break"] else 1.0
+			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "pierce", "boosthit", "counter", "burn", "break", "ultmagic", "rider", "poison", "kill"] else 1.0
 			match want:
 				"hit":
 					BattleFx.hit(fb, fb._enemy_center(), "attack", 3, 0.12)
 				"magic":
 					BattleFx.hit(fb, fb._enemy_center(), "magic", 1, 0.05)
+				"ultmagic":
+					BattleFx.ult_magic(fb, fb._enemy_center(), 1, 0.2)
+					Kit.tween_bar(fb._enemy_hp, fb.b.enemy["max_hp"] * 0.6)
+					Kit.float_text(fb, fb._enemy_center() + Vector2(0, -30), "暴击 2480", Kit.c("gold"), 64)
+				"rider":
+					BattleFx.rider_hit(fb, fb._enemy_center())
+					Kit.float_text(fb, fb._enemy_center() + Vector2(54, -18), "战意 +420", Color(0.88, 0.72, 1.0), 36)
+				"kill":
+					BattleFx.kill_blow(fb, fb._enemy_center())
 				"pierce":
 					BattleFx.hit(fb, fb._enemy_center(), "attack", 1, 0.05, true)
 				"boosthit":
 					BattleFx.hit(fb, fb._enemy_center(), "attack", 2, 0.15, false, true)
 				"claw":
 					BattleFx.claw(fb, fb._cards_rect().get_center(), 0.12, 0.5)
+					fb._enemy_move_tag("方天画戟")
 				"counter":
 					BattleFx.counter(fb, fb._enemy_center())
+				"counter_on":
+					eng.counters.append({"name": "孙策", "at": 100, "power": 1.0, "unit": 1})
+					fb._refresh()
+					BattleFx.counter_stance(fb, fb._card_rect(1))
 				"burn":
 					eng.enemy["burn_turns"] = 3
 					eng.enemy["burn_pct"] = 0.1
 					fb._refresh()
 					BattleFx.flame_lick(fb, fb._enemy_rect())
+				"poison":
+					eng.enemy["poison"] = 3
+					eng.enemy["poison_pct"] = 0.02
+					eng.enemy["poison_turns"] = 3
+					fb._refresh()
+					BattleFx.poison_cloud(fb, fb._enemy_rect())
+				"charge":
+					eng.enemy["charging"] = "天下无双"
+					fb._refresh()
+				"heal":
+					BattleFx.heal_wave(fb, fb._party_rect())
+					Kit.float_text(fb, fb._party_center(), "+680", Kit.c("green"), 44)
+				"shield":
+					BattleFx.shield_wall(fb, fb._party_rect(), true)
+					Kit.float_text(fb, fb._party_center(), "减伤 50%", Kit.c("blue"), 34)
 				"pburn":
 					eng.party_burn = {"dmg": 300, "turns": 2}
 					fb._refresh()

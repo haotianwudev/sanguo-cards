@@ -123,7 +123,18 @@ static func bar(value: float, max_value: float, color_name := "green", height :=
 	p.value = value
 	p.show_percentage = false
 	p.custom_minimum_size = Vector2(0, height)
-	p.add_theme_stylebox_override("background", box(c("track"), height / 2, 0, Color.TRANSPARENT, 0))
+	var trail := ProgressBar.new()  # damage-trail underbar: holds briefly on a hit so the chunk lost shows in bright ivory
+	trail.name = "Trail"
+	trail.show_behind_parent = true
+	trail.set_anchors_preset(Control.PRESET_FULL_RECT)
+	trail.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	trail.max_value = max_value
+	trail.value = value
+	trail.show_percentage = false
+	trail.add_theme_stylebox_override("background", box(c("track"), height / 2, 0, Color.TRANSPARENT, 0))
+	trail.add_theme_stylebox_override("fill", box(Color(1.0, 0.93, 0.76, 0.92), height / 2, 0, Color.TRANSPARENT, 0))
+	p.add_child(trail)
+	p.add_theme_stylebox_override("background", box(Color.TRANSPARENT, height / 2, 0, Color.TRANSPARENT, 0))
 	p.add_theme_stylebox_override("fill", box(c(color_name), height / 2, 0, Color.TRANSPARENT, 0))
 	return p
 
@@ -447,24 +458,38 @@ static func focus(node: Control) -> void:
 
 
 # ---- motion ------------------------------------------------------------------
+static var _last_float_at := Vector2.ZERO
+static var _last_float_ms := 0
+static var _float_step := 0
+
 
 static func float_text(parent: Control, at: Vector2, text: String, color: Color, size := 40) -> void:
-	## A number that pops up and drifts away (damage, heals).
+	## A number that pops up and drifts away (damage, heals); rapid multi-hits fan out so numbers never stack on one spot.
+	var now := Time.get_ticks_msec()
+	if now - _last_float_ms < 320 and at.distance_to(_last_float_at) < 90.0:
+		_float_step = (_float_step + 1) % 5
+	else:
+		_float_step = 0
+	_last_float_at = at
+	_last_float_ms = now
+	var fan_x: float = [0.0, -48.0, 48.0, -28.0, 28.0][_float_step]
+	var fan_y: float = [0.0, -18.0, -10.0, -34.0, -26.0][_float_step]
 	var l := Label.new()
 	l.text = text
 	l.add_theme_font_size_override("font_size", size)
 	l.add_theme_color_override("font_color", color)
-	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.7))
-	l.add_theme_constant_override("outline_size", 8)
-	l.position = at - Vector2(40, 20)
+	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.82))
+	l.add_theme_constant_override("outline_size", 10 if size >= 52 else 8)
+	l.position = at - Vector2(40, 20) + Vector2(fan_x, fan_y)
 	l.z_index = 50
 	parent.add_child(l)
 	l.pivot_offset = Vector2(40, 20)
-	l.scale = Vector2(0.4, 0.4)
+	var punch := 1.42 if size >= 56 else (1.24 if size >= 48 else 1.15)
+	l.scale = Vector2(0.35, 0.35)
 	var tw := l.create_tween()
-	tw.tween_property(l, "scale", Vector2(1.15, 1.15), 0.12).set_trans(Tween.TRANS_BACK)
-	tw.tween_property(l, "scale", Vector2.ONE, 0.08)
-	tw.parallel().tween_property(l, "position", l.position + Vector2(randf_range(-30, 30), -70), 0.7)
+	tw.tween_property(l, "scale", Vector2(punch, punch), 0.11).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(l, "scale", Vector2.ONE, 0.09)
+	tw.parallel().tween_property(l, "position", l.position + Vector2(fan_x * 0.35 + randf_range(-18, 18), -74), 0.72).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tw.tween_property(l, "modulate:a", 0.0, 0.25)
 	tw.tween_callback(l.queue_free)
 
@@ -488,6 +513,23 @@ static func pop(node: Control, to := 1.08, duration := 0.12) -> void:
 
 
 static func tween_bar(bar_node: ProgressBar, to: float, duration := 0.35) -> void:
+	var trail := bar_node.get_node_or_null("Trail") as ProgressBar
+	if trail != null:
+		trail.max_value = bar_node.max_value
+		var old_tw: Variant = trail.get_meta("trail_tw") if trail.has_meta("trail_tw") else null
+		if old_tw is Tween and (old_tw as Tween).is_valid():
+			(old_tw as Tween).kill()
+		if to < bar_node.value:
+			var ttw := trail.create_tween()
+			ttw.tween_interval(0.18)
+			ttw.tween_property(trail, "value", to, duration + 0.14).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+			trail.set_meta("trail_tw", ttw)
+			var fast_tw := bar_node.create_tween()
+			fast_tw.tween_property(bar_node, "value", to, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+			return
+		var htw := trail.create_tween()
+		htw.tween_property(trail, "value", to, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		trail.set_meta("trail_tw", htw)
 	var tw := bar_node.create_tween()
 	tw.tween_property(bar_node, "value", to, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
