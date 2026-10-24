@@ -1137,17 +1137,29 @@
 - [x] 2026-10-18 map `guandu` ← map_guandu.jpg · ok
 - [x] 2026-10-18 map `dujiang` ← map_dujiang.jpg · ok
 - [x] 2026-10-18 map `guiyi` ← map_guiyi.jpg · ok
-- [ ] 2026-10-18 portrait `sunquan_young` ← sunquan_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
-- [ ] 2026-10-19 cg `c2_ln_triple` ← c2_ln_triple.jpg 裁 1536×1024→1536×864 · ok
-- [ ] 2026-10-19 relic `zhen_diaopi` ← zhen_diaopi.jpg · ok
-- [ ] 2026-10-19 cg `c2_ln_lend` ← c2_ln_lend.jpg · ok
-- [ ] 2026-10-19 cg `c2_ln_meet` ← c2_ln_meet.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-20 cg `c2_ln_liubei` ← new1.jpg · ok
-- [ ] 2026-10-23 cg `c2_daofa` ← c2_daofa.jpg · ok
-- [ ] 2026-10-23 battle `n11_a_huangzhong` ← n11_a_huangzhong_v2.jpg · ok
-- [ ] 2026-10-23 battle `n12d_huangzhong` ← n12d_huangzhong.jpg · ok
-- [ ] 2026-10-23 battle `m10_wangping` ← m10_wangping.jpg · ok
-- [ ] 2026-10-23 battle `m10_zhangxiu` ← m10_zhangxiu.jpg · ok
-- [ ] 2026-10-23 battle `m11_liubei` ← m11_liubei.jpg · ok
-- [ ] 2026-10-23 battle `m9_kuimen` ← m9_kuimen.jpg · ok
-- [ ] 2026-10-23 battle `n4_houcheng` ← n4_houcheng.jpg · ok
+- [x] 2026-10-18 portrait `sunquan_young` ← sunquan_young.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-10-19 cg `c2_ln_triple` ← c2_ln_triple.jpg 裁 1536×1024→1536×864 · ok
+- [x] 2026-10-19 relic `zhen_diaopi` ← zhen_diaopi.jpg · ok
+- [x] 2026-10-19 cg `c2_ln_lend` ← c2_ln_lend.jpg · ok
+- [x] 2026-10-19 cg `c2_ln_meet` ← c2_ln_meet.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-20 cg `c2_ln_liubei` ← new1.jpg · ok
+- [x] 2026-10-23 cg `c2_daofa` ← c2_daofa.jpg · ok
+- [x] 2026-10-23 battle `n11_a_huangzhong` ← n11_a_huangzhong_v2.jpg · ok
+- [x] 2026-10-23 battle `n12d_huangzhong` ← n12d_huangzhong.jpg · ok
+- [x] 2026-10-23 battle `m10_wangping` ← m10_wangping.jpg · ok
+- [x] 2026-10-23 battle `m10_zhangxiu` ← m10_zhangxiu.jpg · ok
+- [x] 2026-10-23 battle `m11_liubei` ← m11_liubei.jpg · ok
+- [x] 2026-10-23 battle `m9_kuimen` ← m9_kuimen.jpg · ok
+- [x] 2026-10-23 battle `n4_houcheng` ← n4_houcheng.jpg · ok
+- [x] 2026-10-23 battle `n6_chenlan` ← n6_chenlan.jpg · ok
+- [x] 2026-10-23 battle `n7_b_wenchou` ← n7_b_wenchou.jpg · ok
+- [x] 2026-10-23 battle `n7_wenchou` ← n7_wenchou.jpg · ok
+- [x] 2026-10-23 battle `n8_g_machao` ← n8_g_machao.jpg · ok
+- [x] 2026-10-23 battle `n9_g_gongsunkang` ← n9_g_gongsunkang.jpg · ok
+- [x] 2026-10-23 battle `m11_bei_tieqi` ← m11_bei_tieqi.jpg · ok
+- [x] 2026-10-23 battle `jd_yanbaihu` ← jd_yanbaihu.jpg · ok
+- [x] 2026-10-23 battle `m10_guosi` ← m10_guosi.jpg · ok
+- [x] 2026-10-23 battle `m11_bazhen` ← m11_bazhen.jpg · ok
+- [x] 2026-10-23 battle `m10_jijiu` ← m10_jijiu.jpg · ok
+- [x] 2026-10-23 battle `m10_ziwu_exit` ← m10_ziwu_exit.jpg · ok
+- [x] 2026-10-23 battle `jx_ganning` ← jx_ganning.jpg · ok

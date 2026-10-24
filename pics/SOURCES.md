@@ -428,6 +428,7 @@
 | `gongdu` | source/generals/gongdu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `huangshao` | source/generals/huangshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `hanhao` | source/generals/hanhao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunquan_young` | source/generals/sunquan_young.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
@@ -1214,3 +1215,5 @@
 | `cg:n11_tuishou` | source/cg/n11_tuishou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n11_g_xiaoxi` | source/cg/n11_g_xiaoxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n11_guanzhang` | source/cg/n11_guanzhang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_ln_triple` | source/cg/c2_ln_triple.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c2_daofa` | source/cg/c2_daofa.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
