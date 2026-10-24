@@ -248,7 +248,7 @@ func _build() -> void:
 
 	# party bar
 	_party_box = PanelContainer.new()
-	_party_box.position = Vector2(20, 276) if not has_cg else Vector2(20, 390)
+	_party_box.position = Vector2(20, 276) if not has_cg else Vector2(20, 346)  # with a CG it sits higher: the skill strip goes between it and the cards
 	_party_box.size = Vector2(1240, 70) if not has_cg else Vector2(1240, 48)
 	var pbg := Kit.c("party_bg")
 	if has_cg:
@@ -283,10 +283,10 @@ func _build() -> void:
 	var row := HBoxContainer.new()
 	_row = row
 	_has_cg = has_cg
-	row.position = Vector2(20, 340) if not has_cg else Vector2(20, 440)
+	row.position = Vector2(20, 396) if not has_cg else Vector2(20, 440)  # room above each card for its skill strip
 	row.add_theme_constant_override("separation", 2)
 	add_child(row)
-	var card_size := Vector2(240, 336) if not has_cg else Vector2(190, 266)
+	var card_size := Vector2(226, 318) if not has_cg else Vector2(190, 266)
 	_card_size = card_size
 	var locked_w := 70.0
 	for i in b.leaders.size():
@@ -435,7 +435,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _sync_skill_bars() -> void:
-	## every leader who can act shows his skills right on the card (over the lower portrait, above the AT / HP strip): one tap plays it.
+	## every leader who can act shows his skills in a strip right above his card (never over the portrait): one tap plays it.
 	## Hidden while anything plays out, in 自动, and once the fight is decided; tapping the card itself still opens the full panel (换人)
 	if _skill_layer == null:
 		return
@@ -450,28 +450,27 @@ func _sync_skill_bars() -> void:
 		var v: CardView = _cards[i]
 		var u: Dictionary = b.leaders[i]
 		var r := v.get_global_rect()
-		var card_h := minf(r.size.y, r.size.x * 1.4)
-		var bar := VBoxContainer.new()
+		var bar := HBoxContainer.new()  # side by side: name on top, AP under it
 		bar.add_theme_constant_override("separation", 3)
-		var bh := 28.0 if small else 34.0
+		var bh := 40.0
 		var skills: Array = u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
 			var ult := _is_ult(sk)
 			var btn := Button.new()
-			btn.text = "%s  AP%d" % [sk["name"], b.cost(u, sk)]
-			btn.add_theme_font_size_override("font_size", 14 if small else 16)
-			btn.icon = Kit.skill_icon(sk)
-			btn.expand_icon = true
-			btn.add_theme_constant_override("icon_max_width", 16 if small else 20)
-			btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			btn.text = "%s
+AP%d" % [sk["name"], b.cost(u, sk)]
+			btn.add_theme_font_size_override("font_size", (10 if str(sk["name"]).length() >= 5 else 12) if small else 14)  # a five-character name still fits the narrow CG cards
+			btn.add_theme_constant_override("line_spacing", -2)
+			btn.clip_text = true
 			btn.focus_mode = Control.FOCUS_NONE
+			btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			btn.custom_minimum_size = Vector2(0, bh)
 			var edge: Color = Kit.c("gold") if ult else Color(1, 1, 1, 0.35)
-			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.82), 8, 2 if ult else 1, edge, 6))
-			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.9), 8, 2, Kit.c("gold"), 6))
-			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 6))
-			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.07, 0.05, 0.04, 0.55), 8, 1, Color(1, 1, 1, 0.15), 6))
+			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.9), 8, 2 if ult else 1, edge, 2))
+			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.95), 8, 2, Kit.c("gold"), 2))
+			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 2))
+			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.07, 0.05, 0.04, 0.6), 8, 1, Color(1, 1, 1, 0.15), 2))
 			btn.add_theme_color_override("font_color", Kit.c("gold") if ult else Color(1, 1, 1))
 			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.35))
 			btn.disabled = not b.usable(u, sk)
@@ -479,9 +478,8 @@ func _sync_skill_bars() -> void:
 				_close_skill_popup()
 				_on_skill(i, sid))
 			bar.add_child(btn)
-		var h := skills.size() * bh + (skills.size() - 1) * 3.0
-		bar.position = r.position - global_position + Vector2(8, card_h * 0.66 - h - 4)
-		bar.size = Vector2(r.size.x - 16, h)
+		bar.position = r.position - global_position + Vector2(0, -bh - 4)
+		bar.size = Vector2(r.size.x, bh)
 		_skill_layer.add_child(bar)
 
 
