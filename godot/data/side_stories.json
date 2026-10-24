@@ -69,7 +69,7 @@
         "@wuguotai 吴夫人：「站在那儿做什么？过来，袖子给我比一比。」",
         "你走过去，伸出了胳膊。"
       ]},
-      {"id": "s_jiujiu", "title": "九九歌", "portraits": ["sunce", "zhouyu"], "unless": "出生：冀州无极", "reward": {"upgrade": {"sunce": 2}}, "text": [
+      {"id": "s_jiujiu", "title": "九九歌", "portraits": ["sunce", "zhouyu"], "unless": "出生：冀州无极", "reward": {"upgrade": {"sunce": 2}}, "cg": "ss_jiujiu", "text": [
         "富春的晚上没有手机，你闲得发慌，就在院子里教孙策背九九乘法表。",
         "@lord {lord}：「三七？」",
         "@sunce 孙策：「二十一！」",
@@ -82,7 +82,7 @@
         "@zhouyu 周瑜：「吴夫人一天只做三顿。剩下那三顿，是你半夜去厨房偷的。」",
         "第二天，吴夫人把厨房的门上了锁。孙策站在门口，把九九乘法表从头到尾背了一遍，一个都没错。"
       ]},
-      {"id": "s_firstwine", "title": "一杯倒", "portraits": ["sunce", "zhouyu", "wuguotai"], "unless": "出生：冀州无极", "reward": {"relics": ["jiunang"]}, "text": [
+      {"id": "s_firstwine", "title": "一杯倒", "portraits": ["sunce", "zhouyu", "wuguotai"], "unless": "出生：冀州无极", "reward": {"relics": ["jiunang"]}, "cg": "ss_firstwine", "text": [
         "孙策搬来一坛米酒，说江东男儿，不会喝酒不算长大。",
         "@lord {lord}：「我在我们那儿，酒量是出了名的好。」",
         "@lord {lord}（内心）：……出了名的一瓶啤酒就倒。",
@@ -94,7 +94,7 @@
         "孙策顶着坛子，小声问周瑜：「公瑾，娘是不是对他比对我们好？」",
         "@zhouyu 周瑜：「……一直都是。」"
       ]},
-      {"id": "s_suanpan", "title": "甄家的算盘", "portraits": ["zhangfuren", "zhenmi_young"], "requires": "出生：冀州无极", "reward": {"upgrade": {"zhangfuren": 2}}, "text": [
+      {"id": "s_suanpan", "title": "甄家的算盘", "portraits": ["zhangfuren", "zhenmi_young"], "requires": "出生：冀州无极", "reward": {"upgrade": {"zhangfuren": 2}}, "cg": "ss_suanpan", "text": [
         "张夫人把一本旧账本推到你面前，说甄家的人，先要学会算账。",
         "她拨了一上午算盘，你拿炭条在纸上画了一张大表：横着是月份，竖着是货名，最后一行一列加总。",
         "张夫人看了半天，伸手把表转了一圈。",
@@ -105,7 +105,7 @@
         "那天下午，甄宓趴在桌边，学着你的样子，在纸上画了一张歪歪扭扭的表。横着写「糖」，竖着写「哥哥欠我的」。",
         "最后一格写着：三十七块。"
       ]},
-      {"id": "s_baima", "title": "白马", "portraits": ["zhaoyun", "guojia"], "requires": "出生：冀州无极", "reward": {"upgrade": {"zhaoyun": 2}}, "text": [
+      {"id": "s_baima", "title": "白马", "portraits": ["zhaoyun", "guojia"], "requires": "出生：冀州无极", "reward": {"upgrade": {"zhaoyun": 2}}, "cg": "ss_baima", "text": [
         "赵云的白马在马厩里吃草，雪一样白，你看着眼馋。",
         "趁赵云不在，你踩着马镫翻了上去。白马回头看了你一眼，然后——你在空中看见了常山的蓝天。",
         "郭嘉蹲在草堆边，晃着酒葫芦笑得直不起腰。",
@@ -137,7 +137,7 @@
         "@dongbai 董白：「……你、你站在那儿多久了？！」",
         "@dongbai 董白：「过来！跟我比一把！输了你去偷蜜饼！」"
       ]},
-      {"id": "s_zumao", "title": "祖茂的头巾", "portraits": ["zumao", "sunce"], "reward": {"relics": ["chize"]}, "text": [
+      {"id": "s_zumao", "title": "祖茂的头巾", "portraits": ["zumao", "sunce"], "reward": {"relics": ["chize"]}, "cg": "ss_zumao", "text": [
         "祖茂每天早上都要洗一块红头巾。洗得都发白了，还是天天洗。",
         "孙策问他，那块破布有什么好洗的。",
         "@zumao 祖茂：「这是主公的赤帻。那年在阳人被围，我戴着它把追兵引开——他们以为我是主公。」",
@@ -147,7 +147,7 @@
         "第二天早上，河边多了一个人，蹲在祖茂旁边，帮他一起洗那块头巾。",
         "@lord {lord}（内心）：……这孩子，以后会是个好主公。"
       ]},
-      {"id": "s_huoshi", "title": "联军伙食", "portraits": ["sunce", "zhouyu"], "reward": {"upgrade": {"zhouyu": 2}}, "text": [
+      {"id": "s_huoshi", "title": "联军伙食", "portraits": ["sunce", "zhouyu"], "reward": {"upgrade": {"zhouyu": 2}}, "cg": "ss_huoshi", "text": [
         "十八路诸侯会盟，营盘连了几十里。你和孙策溜出去，挨个营地蹭饭。",
         "曹操营里吃的是麦饭，管饱，就是剌嗓子。刘备营里吃的是草鞋——不对，是刘备在编草鞋，饭是关羽煮的，有点咸。",
         "袁术营里，人人捧着一碗蜜水。",
@@ -178,7 +178,7 @@
         "吕玲绮一抬头，看见了你，树枝一抖，石子掉回了台阶上。",
         "@lvlingqi 吕玲绮：「……看什么看！你、你过来，夹一颗给我看看！」"
       ]},
-      {"id": "s_lingqi_meal", "title": "吃饭的规矩", "portraits": ["lvlingqi", "zhenmi_young", "zhangfuren"], "reward": {"upgrade": {"lvlingqi": 2}}, "text": [
+      {"id": "s_lingqi_meal", "title": "吃饭的规矩", "portraits": ["lvlingqi", "zhenmi_young", "zhangfuren"], "reward": {"upgrade": {"lvlingqi": 2}}, "cg": "ss_lingqi_meal", "text": [
         "吕玲绮第一次在甄家吃饭，一手抓饼，一手抓肉，三口一碗，吃得像在行军。",
         "满桌的人都停下了筷子。",
         "甄宓放下碗，一本正经地走过去，把筷子塞进她手里。",
@@ -189,7 +189,7 @@
         "@zhangfuren 张夫人：「在甄家，吃饱最要紧。规矩，慢慢学。」",
         "那天晚上，你看见吕玲绮一个人坐在院子里，拿着两根树枝，夹一块石头。夹起来，掉下去，再夹起来。"
       ]},
-      {"id": "s_guojia_tab", "title": "郭嘉的酒账", "portraits": ["guojia", "zhangfuren"], "reward": {"relics": ["jiunang"]}, "text": [
+      {"id": "s_guojia_tab", "title": "郭嘉的酒账", "portraits": ["guojia", "zhangfuren"], "reward": {"relics": ["jiunang"]}, "cg": "ss_guojia_tab", "text": [
         "洛阳城里七家酒馆，同时派人来甄家要账。账上写的都是同一个名字：{lord}。",
         "@lord {lord}：「我不喝酒。」",
         "@guojia 郭嘉：「大哥不喝，我替大哥喝。大哥的面子，比我的值钱。」",
@@ -252,7 +252,7 @@
         "他没有说完。楼外刮起了风，十道壕沟里的水，一道一道地起了波纹。",
         "@lord {lord}（内心）：我记得他的结局：被袁绍围在楼里，最后放了一把火。……三百万斛粮食，喂不饱一个不肯出门的人。"
       ]},
-      {"id": "s_lvshu", "title": "军规第十八条", "portraits": ["xiahoulan", "zhaoyun"], "requires": "军纪：严明", "reward": {"upgrade": {"xiahoulan": 2}}, "text": [
+      {"id": "s_lvshu", "title": "军规第十八条", "portraits": ["xiahoulan", "zhaoyun"], "requires": "军纪：严明", "reward": {"upgrade": {"xiahoulan": 2}}, "cg": "ss_lvshu", "text": [
         "夏侯兰熬了三个通宵，写出一本军规，一共十七条。",
         "第十八条是第四天加的：「主公不得在营中高歌，扰乱军心。」",
         "@lord {lord}：「我唱得有那么难听？」",
@@ -263,7 +263,7 @@
         "当天夜里，营里很安静。只有赵云的帐篷里，隐隐传出一点哼歌的声音，调子有点像「我们都是好孩子」。",
         "夏侯兰在帐篷外站了很久，最后把那一条，改成了「主公及赵子龙不得在营中高歌」。"
       ]},
-      {"id": "s_yaopu", "title": "药圃", "portraits": ["zhangning", "lvlingqi", "zhenmi_young"], "requires": "张宁：救下", "reward": {"relics": ["taipingyaoshu"]}, "text": [
+      {"id": "s_yaopu", "title": "药圃", "portraits": ["zhangning", "lvlingqi", "zhenmi_young"], "requires": "张宁：救下", "reward": {"relics": ["taipingyaoshu"]}, "cg": "ss_yaopu", "text": [
         "张宁在甄家后园开了一小块地，种药。",
         "甄宓天天去浇水，吕玲绮说要帮忙，拿着画戟把杂草一口气全割了。",
         "张宁蹲在地里，看着一地断了的苗，半天没说话。",
@@ -296,7 +296,7 @@
         "@dongbai 董白：「我、我没有！你别听她的！」",
         "董白一把把纸揉成团，塞进了怀里。你后来再也没有见过那张纸。"
       ]},
-      {"id": "s_wuziqi", "title": "五子棋", "portraits": ["zhujun"], "reward": {"relics": ["bazhen"]}, "text": [
+      {"id": "s_wuziqi", "title": "五子棋", "portraits": ["zhujun"], "reward": {"relics": ["bazhen"]}, "cg": "ss_wuziqi", "text": [
         "朱儁老将军闲下来就要下围棋，营里没人下得过他。",
         "他拉着你坐下。你看着那张十九路的棋盘，想了想。",
         "@lord {lord}：「老将军，咱们换个下法。五个子连成一条线，就算赢。」",
@@ -306,7 +306,7 @@
         "那天晚上，帐篷里的灯一直亮到天亮。第二天早上，传令兵进来报告军情，看见老将军趴在棋盘上睡着了，棋盘上摆着两条四连。",
         "从那以后，朱儁逢人就说，五子棋是兵法——「先手四连，后手必救，围魏救赵，也不过如此。」"
       ]},
-      {"id": "s_yuxi_he", "title": "玉玺放哪儿", "portraits": ["wuguotai", "sunce"], "reward": {"upgrade": {"wuguotai": 2}}, "text": [
+      {"id": "s_yuxi_he", "title": "玉玺放哪儿", "portraits": ["wuguotai", "sunce"], "reward": {"upgrade": {"wuguotai": 2}}, "cg": "ss_yuxi_he", "text": [
         "传国玉玺到手的第一天晚上，营里没人睡得着。",
         "孙策要把它枕在头底下，周瑜说不安全；周瑜要把它锁在箱子里，孙策说太显眼。",
         "最后吴夫人把它拿走了，谁也不知道放在哪儿。",
@@ -339,7 +339,7 @@
         "@jiangqiao 姜巧：「当家的醒了。……来，尝一口，看是谁的手艺。」",
         "@zhenghao 郑好：「尝什么尝！先洗手！……碗在那边，自己拿。」"
       ]},
-      {"id": "s_zaofan", "title": "谁做早饭", "portraits": ["zhenghao", "jiangqiao", "taishici"], "requires": "郑姜：和好", "reward": {"upgrade": {"taishici": 2}}, "text": [
+      {"id": "s_zaofan", "title": "谁做早饭", "portraits": ["zhenghao", "jiangqiao", "taishici"], "requires": "郑姜：和好", "reward": {"upgrade": {"taishici": 2}}, "cg": "ss_zaofan", "text": [
         "郑好和姜巧和好以后，又为一件事吵起来：明天早上，谁给全营做早饭。",
         "最后两个人各做了一锅。郑好的锅里是一整头烤羊，外头焦了，里头还是生的。姜巧的锅里是一个会自己搅拌的木头机关，粥熬得很匀，就是机关的螺丝掉了一颗在里面。",
         "全营的人都看着锅，谁也不敢先动筷子。",
@@ -350,7 +350,7 @@
         "@taishici 太史慈：「……我去巡营。」",
         "他走的时候，从嘴里吐出了一颗螺丝。"
       ]},
-      {"id": "s_rangli", "title": "让梨", "portraits": ["kongrong"], "reward": {"upgrade": {"kongrong": 2}}, "text": [
+      {"id": "s_rangli", "title": "让梨", "portraits": ["kongrong"], "reward": {"upgrade": {"kongrong": 2}}, "cg": "ss_rangli", "text": [
         "孔融请你吃梨。你拿起最大的那个，又放下，换了最小的。",
         "孔融愣了一下，哈哈大笑。",
         "@kongrong 孔融：「你也知道这个故事？」",
@@ -385,7 +385,7 @@
         "@zhangning 张宁：「……站在雪里干什么。进来，你的那个，最后一针了。」",
         "吕玲绮把那个歪香囊飞快地藏到了身后。"
       ]},
-      {"id": "s_gaoshun", "title": "高顺说话了", "portraits": ["gaoshun", "zhangliao", "guojia"], "requires": "张辽高顺：入队", "reward": {"upgrade": {"gaoshun": 2}}, "text": [
+      {"id": "s_gaoshun", "title": "高顺说话了", "portraits": ["gaoshun", "zhangliao", "guojia"], "requires": "张辽高顺：入队", "reward": {"upgrade": {"gaoshun": 2}}, "cg": "ss_gaoshun", "text": [
         "营里开了个赌局：高顺一整天，能不能说出一句话。",
         "郭嘉坐庄，赌他不说，一赔三。",
         "高顺早上练兵，没说话。中午吃饭，没说话。下午有个新兵在操练时摔断了腿，他把人背去了军医那里，还是没说话。",
@@ -396,7 +396,7 @@
         "@guojia 郭嘉：「文远，你跟他说了什么？」",
         "@zhangliao 张辽：「我说，郭先生在营里开赌。」"
       ]},
-      {"id": "s_xuzhou_bing", "title": "徐州烧饼", "portraits": ["zhenmi_young", "zhaoyun"], "reward": {"relics": ["lizigao"]}, "text": [
+      {"id": "s_xuzhou_bing", "title": "徐州烧饼", "portraits": ["zhenmi_young", "zhaoyun"], "reward": {"relics": ["lizigao"]}, "cg": "ss_xuzhou_bing", "text": [
         "徐州街头有一家烧饼铺，饼又大又脆，甄宓一口气吃了三个。",
         "她拉着赵云的袖子不放：「子龙哥哥，再买一个！」",
         "@zhaoyun 赵云：「小姐，夫人说一天只能吃两个。」",
@@ -442,7 +442,7 @@
         "@wangyun 王允：「……老夫算了一辈子人。董卓算准了，吕布算准了，唯独那个短毛，算不准。」",
         "那一天，宣平门上的人，一直站到了最后。"
       ]},
-      {"id": "s_yangsheng", "title": "贾诩养生", "portraits": ["jiaxu", "sunce"], "requires": "贾诩：入队", "reward": {"upgrade": {"jiaxu": 2}}, "text": [
+      {"id": "s_yangsheng", "title": "贾诩养生", "portraits": ["jiaxu", "sunce"], "requires": "贾诩：入队", "reward": {"upgrade": {"jiaxu": 2}}, "cg": "ss_yangsheng", "text": [
         "贾诩每天辰时起床，先喝一碗温水，再打一套五禽戏，晚上戌时一到，准时睡觉。",
         "孙策看不下去：「打仗的人，哪有你这么惜命的？」",
         "@jiaxu 贾诩：「惜命，才能活着看到仗打完。」",
@@ -453,7 +453,7 @@
         "@lord {lord}（内心）：我记得的东西不多。可贾诩活到七十多岁这一条，我偏偏记得。……而孙策……",
         "那天晚上，你去找贾诩，学了半套五禽戏。第二天，你拉着孙策一起打。孙策打到一半，跑去追兔子了。"
       ]},
-      {"id": "s_roujiamo", "title": "肉夹馍", "portraits": ["sunce", "zhouyu"], "reward": {"relics": ["jubaopen"]}, "text": [
+      {"id": "s_roujiamo", "title": "肉夹馍", "portraits": ["sunce", "zhouyu"], "reward": {"relics": ["jubaopen"]}, "cg": "ss_roujiamo", "text": [
         "长安城外，你想起了一样东西。",
         "你买了白面，自己揉了饼，在炉子上烤得两面焦黄，横着一刀切开，塞进炖得稀烂的腊汁肉。",
         "@sunce 孙策：「这叫什么？」",
@@ -485,7 +485,7 @@
         "@diaochan 貂蝉：「……公子怎么知道，妾身想吃这个？」",
         "@zhouyu 不远处，周瑜翻开账本：「{lord}：糖炒栗子一包，十二文（貂蝉）。」"
       ]},
-      {"id": "s_quwu", "title": "曲有误", "portraits": ["zhouyu"], "reward": {"relics": ["yushan"]}, "text": [
+      {"id": "s_quwu", "title": "曲有误", "portraits": ["zhouyu"], "reward": {"relics": ["yushan"]}, "cg": "ss_quwu", "text": [
         "听说周瑜精通音律，弹错一个音，他就会回头看。你不信。",
         "宴席上，乐师在弹琴。你偷偷塞给乐师一串钱，让他故意弹错一个音。",
         "琴声一错，周瑜放下酒杯，回头看了一眼。",
@@ -496,7 +496,7 @@
         "@lord {lord}：「……你怎么知道是我？」",
         "@zhouyu 周瑜：「乐师弹错的时候，在看你。」"
       ]},
-      {"id": "s_jiashu", "title": "家书", "portraits": ["wuguotai", "sunce"], "reward": {"relics": ["shoushihe"]}, "text": [
+      {"id": "s_jiashu", "title": "家书", "portraits": ["wuguotai", "sunce"], "reward": {"relics": ["shoushihe"]}, "cg": "ss_jiashu", "text": [
         "吴夫人从江东寄来一封家书，给孙策的。",
         "孙策拆开看了一眼，又递给你：「草书，看不懂。你念。」",
         "你念：「策儿，天冷加衣，不许空腹喝酒，不许半夜去伙房，不许打赢了仗就不睡觉……」",
@@ -545,7 +545,7 @@
         "@xunyu 荀彧：「比明公还会算。」",
         "曹操按着额角，笑了很久。笑完了，他的头又开始疼。"
       ]},
-      {"id": "s_lvmeng_book", "title": "有图的书", "portraits": ["lvmeng_qingnian", "lusu"], "requires": "吕蒙：入队", "reward": {"relics": ["mengde"]}, "text": [
+      {"id": "s_lvmeng_book", "title": "有图的书", "portraits": ["lvmeng_qingnian", "lusu"], "requires": "吕蒙：入队", "reward": {"relics": ["mengde"]}, "cg": "ss_lvmeng_book", "text": [
         "吕蒙一个大字不识，一拿起书就犯困。",
         "你翻遍了行李，找出一本自己画的兵法图解：一页一幅画，火攻画着火，水攻画着水，伏兵画着草堆里露出半个屁股的小人。",
         "吕蒙两眼放光：「这书有图！」",
@@ -554,7 +554,7 @@
         "@lusu 鲁肃：「这……还是那个阿蒙？」",
         "@lord {lord}（内心）：士别三日，当刮目相待。这句话我小时候背过，没想到是我亲手造出来的。"
       ]},
-      {"id": "s_lusu_grain", "title": "两座粮仓", "portraits": ["lusu"], "requires": "鲁肃：指囷相赠", "reward": {"upgrade": {"lusu": 2}}, "text": [
+      {"id": "s_lusu_grain", "title": "两座粮仓", "portraits": ["lusu"], "requires": "鲁肃：指囷相赠", "reward": {"upgrade": {"lusu": 2}}, "cg": "ss_lusu_grain", "text": [
         "鲁肃家有两座粮仓，每座三千斛。你开口借粮，他指着其中一座，说：「这一座，送你。」",
         "后来你忍不住问他，为什么。",
         "@lusu 鲁肃：「乱世里，粮食放在仓里，只会招贼。放在你这儿，能招人。」",
@@ -589,7 +589,7 @@
         "杜夫人这才抬起头，脸一下子红了，又规规矩矩行了个礼。",
         "@dufuren 杜夫人：「……使君来得正好。尝尝，看还是不是五十二度。」"
       ]},
-      {"id": "s_jiufang", "title": "酒坊", "portraits": ["dufuren", "guojia", "zhangfuren"], "requires": "杜夫人：随军", "reward": {"relics": ["dujiu"]}, "text": [
+      {"id": "s_jiufang", "title": "酒坊", "portraits": ["dufuren", "guojia", "zhangfuren"], "requires": "杜夫人：随军", "reward": {"relics": ["dujiu"]}, "cg": "ss_jiufang", "text": [
         "杜夫人随军以后，在营后支起了一口酒缸。",
         "第三天，酒香飘满了整个营盘。郭嘉像丢了魂一样，围着酒缸转了一整天。",
         "@dufuren 杜夫人：「郭先生，还没酿好。」",
@@ -599,7 +599,7 @@
         "@zhangfuren 张夫人：「那就少说话。」",
         "当天夜里，酒缸边上多了一个人影。第二天早上，杜夫人发现酒缸里少了三碗，缸边留着三碗的酒钱，压在一张纸条下面：「借明日之三碗。」"
       ]},
-      {"id": "s_toutong", "title": "头疼", "portraits": ["guojia"], "requires": "曹操：借粮", "reward": {"relics": ["yitian"]}, "text": [
+      {"id": "s_toutong", "title": "头疼", "portraits": ["guojia"], "requires": "曹操：借粮", "reward": {"relics": ["yitian"]}, "cg": "ss_toutong", "text": [
         "曹操派人送来一封信，谢你当年借粮。信写得很长，后半封全在说自己头疼。",
         "@guojia 郭嘉：「曹孟德这个头疼，是多年的老毛病了。」",
         "@lord {lord}：「我们那儿有一种药，叫布洛芬。一片下去，半个时辰就不疼了。」",
@@ -634,7 +634,7 @@
         "@zhaoyun 赵云：「……大哥。粮船，到了。」",
         "@mizhen 糜贞：「大哥也上来吧。船上有热汤，管够。」"
       ]},
-      {"id": "s_chengong_tea", "title": "甜茶", "portraits": ["chengong"], "requires": "陈宫：入队", "reward": {"upgrade": {"chengong": 2}}, "text": [
+      {"id": "s_chengong_tea", "title": "甜茶", "portraits": ["chengong"], "requires": "陈宫：入队", "reward": {"upgrade": {"chengong": 2}}, "cg": "ss_chengong_tea", "text": [
         "陈宫每天都板着一张脸，好像全天下都欠他一座城。",
         "你请他喝茶，特意在茶里放了一勺蜂蜜。",
         "陈宫喝了一口，把茶碗放下。",
@@ -645,7 +645,7 @@
         "喝完一壶，他站起来，把一张写满了字的纸放在桌上——是冀州每一座城的城防，哪里能攻，哪里不能。",
         "@chengong 陈宫：「……茶钱。」"
       ]},
-      {"id": "s_sandi", "title": "排行", "portraits": ["zhangyan", "zhaoyun", "guojia"], "reward": {"relics": ["heishan"]}, "text": [
+      {"id": "s_sandi", "title": "排行", "portraits": ["zhangyan", "zhaoyun", "guojia"], "reward": {"relics": ["heishan"]}, "cg": "ss_sandi", "text": [
         "张燕来营里，当着所有人的面，一巴掌拍在你肩膀上：「二弟！」",
         "全营的人都看着你。赵云犹豫了一下，走过来。",
         "@zhaoyun 赵云：「那……我呢？」",
@@ -689,7 +689,7 @@
         "孙策愣了一下，看了看你的脸，没问为什么。",
         "@sunce_bawang 孙策：「……行。那明天你陪我吃包子。」"
       ]},
-      {"id": "s_lingdang", "title": "铃铛", "portraits": ["ganning"], "requires": "甘宁：入队", "reward": {"relics": ["jinfan"]}, "text": [
+      {"id": "s_lingdang", "title": "铃铛", "portraits": ["ganning"], "requires": "甘宁：入队", "reward": {"relics": ["jinfan"]}, "cg": "ss_lingdang", "text": [
         "甘宁身上挂着铃铛，走到哪儿响到哪儿。",
         "@lord {lord}：「兴霸，今晚夜袭，铃铛摘了吧。」",
         "@ganning 甘宁：「不摘。」",
@@ -699,7 +699,7 @@
         "@ganning 甘宁：「看见没？这叫名声。」",
         "@lord {lord}（内心）：……这叫品牌效应。"
       ]},
-      {"id": "s_zhangzhao", "title": "打猎", "portraits": ["zhangzhao", "sunce_bawang"], "reward": {"upgrade": {"sunce_bawang": 2}}, "text": [
+      {"id": "s_zhangzhao", "title": "打猎", "portraits": ["zhangzhao", "sunce_bawang"], "reward": {"upgrade": {"sunce_bawang": 2}}, "cg": "ss_zhangzhao", "text": [
         "张昭拦在马前，说了半个时辰：主公是江东之主，不该轻身出猎，山里有猛兽，林子里有刺客。",
         "孙策在马上听得直打哈欠。",
         "@sunce_bawang 孙策：「张公，我从小在山里打猎，老虎都怕我。」",
@@ -749,7 +749,7 @@
         "荀彧回到府里，给郭嘉写了一封信。信很短，只有两个字：小心。",
         "那封信写好了，他看了一夜。天亮的时候，他把信放进了灯里。"
       ]},
-      {"id": "s_yuhui", "title": "鱼脍", "portraits": ["chendeng"], "requires": "陈家：倒向主角", "reward": {"upgrade": {"chendeng": 2}}, "text": [
+      {"id": "s_yuhui", "title": "鱼脍", "portraits": ["chendeng"], "requires": "陈家：倒向主角", "reward": {"upgrade": {"chendeng": 2}}, "cg": "ss_yuhui", "text": [
         "陈登最爱吃生鱼脍，一顿能吃一大盘，切得薄如蝉翼，蘸着姜醋。",
         "你看着他那一盘生鱼，眉头越皱越紧。",
         "@lord {lord}：「元龙，这鱼……能不能煮熟了再吃？」",
@@ -760,7 +760,7 @@
         "@lord {lord}（内心）：我是在一本书里见过。书里说，你后来就是因为这个……",
         "那天以后，陈登的鱼脍少了一半。另一半，他让厨子在锅里过了一下水。他吃着半熟的鱼，一脸嫌弃，可一口没剩。"
       ]},
-      {"id": "s_jiezhou", "title": "少一碗", "portraits": ["guojia", "zhaoyun"], "reward": {"upgrade": {"guojia": 2}}, "text": [
+      {"id": "s_jiezhou", "title": "少一碗", "portraits": ["guojia", "zhaoyun"], "reward": {"upgrade": {"guojia": 2}}, "cg": "ss_jiezhou", "text": [
         "你在郭嘉的帐篷里，数出了十七个空酒坛。",
         "@lord {lord}：「奉孝，少喝点。」",
         "@guojia 郭嘉：「大哥，我这身子骨，不喝酒也活不长。喝了，至少活得高兴。」",
@@ -823,7 +823,7 @@
         "@caocao 曹操：「会说孤挟天子以令诸侯。……就让他们说。」",
         "他放下酒杯，伸手按住了额角。"
       ]},
-      {"id": "s_shangxiang_bow", "title": "比箭", "portraits": ["sunshangxiang"], "requires": "孙权、孙尚香：入队", "reward": {"upgrade": {"sunshangxiang": 2}}, "text": [
+      {"id": "s_shangxiang_bow", "title": "比箭", "portraits": ["sunshangxiang"], "requires": "孙权、孙尚香：入队", "reward": {"upgrade": {"sunshangxiang": 2}}, "cg": "ss_shangxiang_bow", "text": [
         "孙尚香拎着弓来找你：「听说你是大哥的大哥？比一场。」",
         "第一箭，她正中靶心。第二箭，她把第一箭劈成了两半。",
         "你拉开弓，箭飞出去，落在靶子前面三步远的地上。",
@@ -834,7 +834,7 @@
         "她不知道八百米是什么，但听起来很可怕。第二天，她让你绕着校场跑了八百步，跑完了，又让你背了一下午的箭筒。",
         "傍晚的时候，她教了你一招：拉弓的时候，别憋气。"
       ]},
-      {"id": "s_biyan", "title": "碧眼", "portraits": ["sunquan"], "requires": "孙权、孙尚香：入队", "reward": {"upgrade": {"sunquan": 2}}, "text": [
+      {"id": "s_biyan", "title": "碧眼", "portraits": ["sunquan"], "requires": "孙权、孙尚香：入队", "reward": {"upgrade": {"sunquan": 2}}, "cg": "ss_biyan", "text": [
         "孙权的眼睛是碧绿色的，胡子带点紫。营里有人背地里叫他「碧眼儿」。",
         "他自己不说，可每次照镜子，都会多看两眼。",
         "@lord {lord}：「在我们那儿，这种眼睛，好多人想要还要不来。」",
@@ -883,7 +883,7 @@
         "这封信，后来辗转到了马超手里。信上写的话，他一个字也没有听。",
         "@lord {lord}（内心）：……可最后那一句，我听进去了。"
       ]},
-      {"id": "s_jinmachao", "title": "谁更俊", "portraits": ["machao", "zhaoyun", "zhenmi_young"], "requires": "北线：西凉归附", "reward": {"upgrade": {"machao": 2}}, "text": [
+      {"id": "s_jinmachao", "title": "谁更俊", "portraits": ["machao", "zhaoyun", "zhenmi_young"], "requires": "北线：西凉归附", "reward": {"upgrade": {"machao": 2}}, "cg": "ss_jinmachao", "text": [
         "马超每天出门前，要照半个时辰的镜子。他说，西凉人都叫他「锦马超」。",
         "营里有人说，论俊，还是常山赵子龙。",
         "马超听说了，当天就提着枪去找赵云。赵云正在刷马，抬头看了他一眼。",
@@ -894,7 +894,7 @@
         "@zhenmi_young 甄宓：「我哥哥最俊。」",
         "马超和赵云一起转头看你。你正蹲在地上啃烧饼，满嘴芝麻。"
       ]},
-      {"id": "s_yunlu_spar", "title": "两杆枪", "portraits": ["mayunlu", "lvlingqi"], "requires": "北线：西凉归附", "reward": {"upgrade": {"mayunlu": 2}}, "text": [
+      {"id": "s_yunlu_spar", "title": "两杆枪", "portraits": ["mayunlu", "lvlingqi"], "requires": "北线：西凉归附", "reward": {"upgrade": {"mayunlu": 2}}, "cg": "ss_yunlu_spar", "text": [
         "马云騄和吕玲绮在校场上比武，从早上打到中午，不分胜负。",
         "两个人都累得拄着兵器喘气，谁也不肯先认输。",
         "@mayunlu 马云騄：「你……还能打吗？」",
@@ -939,7 +939,7 @@
         "祝融看见了你，从腰间抽出一把飞刀，「嗖」地钉在你脚边的木桩上，刀柄上串着一块烤肉。",
         "@zhurong 祝融：「站那儿干嘛？过来吃肉！」"
       ]},
-      {"id": "s_feidao", "title": "惧内", "portraits": ["zhurong", "menghuo"], "requires": "祝融：入队", "reward": {"upgrade": {"zhurong": 2}}, "text": [
+      {"id": "s_feidao", "title": "惧内", "portraits": ["zhurong", "menghuo"], "requires": "祝融：入队", "reward": {"upgrade": {"zhurong": 2}}, "cg": "ss_feidao", "text": [
         "孟获是南中最勇猛的大王，打过七回仗，一回都没服过。",
         "可只要祝融一叫他的名字，他就站得笔直。",
         "@lord {lord}：「孟大王，你怕夫人？」",
@@ -951,7 +951,7 @@
         "@zhurong 祝融：「吃饭了。」",
         "孟获乖乖跟在她身后走了。走了两步，回头冲你挤了挤眼睛：「看见没？这叫让着她。」"
       ]},
-      {"id": "s_xiaobenzi", "title": "法正的小本子", "portraits": ["fazheng"], "requires": "法正：入队", "reward": {"upgrade": {"fazheng": 2}}, "text": [
+      {"id": "s_xiaobenzi", "title": "法正的小本子", "portraits": ["fazheng"], "requires": "法正：入队", "reward": {"upgrade": {"fazheng": 2}}, "cg": "ss_xiaobenzi", "text": [
         "法正有一个小本子，从不离身。",
         "有一回他喝醉了，本子掉在地上。你捡起来一看，每一页都写着人名和事情：谁请他吃过饭，谁在背后说过他坏话。",
         "请过饭的，后面画个圈。说过坏话的，后面画个叉。",
@@ -979,7 +979,7 @@
         "@wuxian 吴苋：「……这一碗，要记在谁的账上？」",
         "@lord {lord}：「记我账上。周公瑾会帮我算利息。」"
       ]},
-      {"id": "s_beidi", "title": "北地枪王", "portraits": ["zhangxiu", "sunce_bawang"], "requires": "张绣：入队", "reward": {"upgrade": {"zhangxiu": 2}}, "text": [
+      {"id": "s_beidi", "title": "北地枪王", "portraits": ["zhangxiu", "sunce_bawang"], "requires": "张绣：入队", "reward": {"upgrade": {"zhangxiu": 2}}, "cg": "ss_beidi", "text": [
         "孙策听说张绣是「北地枪王」，当天就拎着枪找上门。",
         "@sunce_bawang 孙策：「枪王？我也是使枪的！」",
         "两个人在校场上打了一百多个回合。孙策的枪大开大合，张绣的枪又快又刁。",
@@ -989,7 +989,7 @@
         "两个人同时笑了。那天晚上，他们喝了三坛酒，第二天早上一起顶着黑眼圈去点卯。",
         "@lord {lord}（内心）：男人的友谊，有时候就是一场打不赢的架。"
       ]},
-      {"id": "s_yimi", "title": "五斗米", "portraits": ["zhanglu"], "requires": "汉中：张鲁出降", "reward": {"relics": ["muniu"]}, "text": [
+      {"id": "s_yimi", "title": "五斗米", "portraits": ["zhanglu"], "requires": "汉中：张鲁出降", "reward": {"relics": ["muniu"]}, "cg": "ss_yimi", "text": [
         "汉中的路边，每隔几十里就有一间「义舍」，里头摆着米和肉，过路的人可以随便吃。",
         "@lord {lord}：「随便吃，不要钱？」",
         "@zhanglu 张鲁：「不要钱。可吃多了，鬼神会让你生病。」",
@@ -1024,7 +1024,7 @@
         "她伸手替你理了理领子，皱了皱眉。",
         "@zhenmi 「又歪了。」"
       ]},
-      {"id": "s_dazhonglian", "title": "大众脸", "portraits": ["pangtong"], "requires": "庞统：入队", "reward": {"upgrade": {"pangtong": 2}}, "text": [
+      {"id": "s_dazhonglian", "title": "大众脸", "portraits": ["pangtong"], "requires": "庞统：入队", "reward": {"upgrade": {"pangtong": 2}}, "cg": "ss_dazhonglian", "text": [
         "庞统入营的第三天，卫兵还是不认识他。",
         "他去伙房，伙夫问他哪个营的。他去军帐，卫兵拦着要他报名号。他回自己的帐篷，有人说他走错了。",
         "@pangtong 庞统：「我是庞统。凤雏。」",
@@ -1034,7 +1034,7 @@
         "第二天，全营的人都认识他了。第三天，营里有十几个人挂着一模一样的木牌去伙房领双份饭。",
         "庞统看着那十几个人，叹了口气：「……这个，我早就算到了。」"
       ]},
-      {"id": "s_zhenmi_cook", "title": "一百零三天", "portraits": ["zhenmi"], "requires": "甄宓：入队", "reward": {"upgrade": {"zhenmi": 2}}, "text": [
+      {"id": "s_zhenmi_cook", "title": "一百零三天", "portraits": ["zhenmi"], "requires": "甄宓：入队", "reward": {"upgrade": {"zhenmi": 2}}, "cg": "ss_zhenmi_cook", "text": [
         "甄宓长大了。她第一次跟着大军出征，亲手做了一桌菜。",
         "菜很好吃。你吃到一半，她忽然问：「哥哥，你还记得一百零三天吗？」",
         "@lord {lord}：「记得。那次从太行回来，你说你天天数。我说你有一天睡过头了，只有一百零二天。」",
@@ -1064,7 +1064,7 @@
         "船头的灯笼晃了晃。洛阳城的灯一盏一盏亮起来，倒映在水里，像一条不会烧起来的江。",
         "@lord {lord}（内心）：……这一幕，我也想记住。这一回，我就在画里。"
       ]},
-      {"id": "s_chitu", "title": "赤兔的饭量", "portraits": ["lvbu"], "requires": "洛阳：收下吕布", "reward": {"relics": ["chitu"]}, "text": [
+      {"id": "s_chitu", "title": "赤兔的饭量", "portraits": ["lvbu"], "requires": "洛阳：收下吕布", "reward": {"relics": ["chitu"]}, "cg": "ss_chitu", "text": [
         "吕布一顿饭，吃十斤肉、三斗米。军需官愁得睡不着觉。",
         "后来军需官发现，吕布不算什么。赤兔一顿，要吃五斗豆子。",
         "@lord {lord}：「温侯，赤兔能不能少吃点？」",
@@ -1074,7 +1074,7 @@
         "赤兔看了看，把肉拱了出来，接着吃豆子。",
         "@lvbu 吕布：「……看见没，连马都知道，什么是自己的。」"
       ]},
-      {"id": "s_liuxiang", "title": "荀令留香", "portraits": ["xunyu", "sunce"], "requires": "荀彧：入队", "reward": {"relics": ["xiangnang"]}, "text": [
+      {"id": "s_liuxiang", "title": "荀令留香", "portraits": ["xunyu", "sunce"], "requires": "荀彧：入队", "reward": {"relics": ["xiangnang"]}, "cg": "ss_liuxiang", "text": [
         "荀彧走过的地方，香味三天不散。营里都说，荀令君留香。",
         "孙策闻了闻自己的袖子，一股马汗味儿。",
         "@sunce 孙策：「荀先生，你这香是哪儿买的？」",
@@ -1110,7 +1110,7 @@
         "@zhenmi 「找着了。在这儿呢。」",
         "@lord {lord}（内心）：……不管那边那个是谁。至少这一个，有人等他下城。"
       ]},
-      {"id": "s_xunang", "title": "胡子的袋子", "portraits": ["guanyu", "zhangfei"], "requires": "关羽、张飞：入队", "reward": {"relics": ["qinglong"]}, "text": [
+      {"id": "s_xunang", "title": "胡子的袋子", "portraits": ["guanyu", "zhangfei"], "requires": "关羽、张飞：入队", "reward": {"relics": ["qinglong"]}, "cg": "ss_xunang", "text": [
         "关羽的胡子长二尺，冬天怕冻，夏天怕乱，晚上睡觉要用一个锦囊装起来。",
         "可那个锦囊用了十几年，已经破了好几个洞。",
         "张飞看不下去，说要给他二哥缝一个新的。他拿着针线，在帐篷里折腾了一夜，扎破了十个手指头。",

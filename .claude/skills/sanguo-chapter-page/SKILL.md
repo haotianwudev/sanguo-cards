@@ -133,3 +133,5 @@ Chapter 12 ends in an ending — no page.
   `--demo=recap --north --chapter=heishan --ending`.
 - The north pages were made by another session in parallel — edit cards.json / side_stories.json in place, never
   regenerate them from an older read.
+- Every ？小故事 has a `cg` key: everyday stories use a planned `ss_<id>` (prompt in OVERRIDES_ZH, shows up in
+  `pics/ART-PROMPTS.md`'s next batch); add the key and prompt whenever a story is added.
