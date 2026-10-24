@@ -490,6 +490,9 @@ func demo(name: String) -> void:
 					await get_tree().create_timer(0.5).timeout
 					var o: PartyOverlay = m.get_node("Party")
 					o._side_btn.pressed.emit()
+					if OS.get_cmdline_user_args().has("--reveal"):  # what a story gave, flipping in (as after reading 九九歌)
+						await get_tree().create_timer(0.3).timeout
+						SideStoryList.reveal({"cards": ["sunce"], "relics": []}, o)
 					if OS.get_cmdline_user_args().has("--read"):
 						await get_tree().create_timer(0.3).timeout
 						for n in get_tree().root.get_children():

@@ -152,9 +152,30 @@ static func play(st: Dictionary, parent: Node, done: Callable) -> bool:
 	var o := InterludeOverlay.new()
 	o.scenes = [st]
 	o.same_chapter = true  # no chapter title card afterwards
-	o.finished.connect(func(): done.call(r["got"]))
+	o.finished.connect(func():
+		await reveal(r, parent)
+		done.call(r["got"]))
 	parent.add_child(o)
 	return true
+
+
+static func reveal(r: Dictionary, parent: Node) -> void:
+	## after the story: what it gave, with the game's usual moments — cards flip in (入队 / 点化), then the 宝物 cards
+	if not r["cards"].is_empty():
+		var c := CardReveal.new()
+		c.title = "获　得"
+		c.card_ids = r["cards"]
+		c.set_anchors_preset(Control.PRESET_FULL_RECT)
+		c.z_index = 95
+		parent.add_child(c)
+		await c.closed
+	if not r["relics"].is_empty():
+		var w := RelicReveal.new()
+		w.relic_ids = r["relics"]
+		w.title = "获得宝物" if r["relics"].size() == 1 else "获得 %d 件宝物" % r["relics"].size()
+		w.z_index = 95
+		parent.add_child(w)
+		await w.closed
 
 
 func _play(st: Dictionary) -> void:

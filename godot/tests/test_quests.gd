@@ -1826,7 +1826,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	check(r["ok"] and r["got"] != "", "opened: %s" % r)
 	check_eq(s.merit, 2)
 	check_eq(s.copies("sunce"), before + 2, "九九歌 点化 孙策 +2")
-	check_eq(Quests.open_side(s, "s_jiujiu"), {"ok": true, "got": ""}, "a re-read is free and gives nothing")
+	check_eq(Quests.open_side(s, "s_jiujiu")["got"], "", "a re-read is free and gives nothing")
 	check_eq(s.merit, 2)
 	s.merit = 5
 	Quests.open_side(s, "s_firstwine")  # 酒囊

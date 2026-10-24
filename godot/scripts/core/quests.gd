@@ -938,7 +938,7 @@ static func open_side(save: SaveData, id: String) -> Dictionary:
 	## Open a ？小故事: the first time in a 周目 it costs 战功 and pays its reward then and there (so quitting mid-story loses
 	## nothing); after that it is free. Returns {ok, got}: ok false = not enough 战功; got = what it gave ("" on a re-read).
 	if save.side_read.has(id):
-		return {"ok": true, "got": ""}
+		return {"ok": true, "got": "", "cards": [], "relics": []}
 	var db := GameData.get_db()
 	var st: Dictionary = {}
 	for list in db.side_stories.values():
@@ -947,11 +947,13 @@ static func open_side(save: SaveData, id: String) -> Dictionary:
 				st = x
 	var cost := side_cost(st)
 	if save.merit < cost:
-		return {"ok": false, "got": ""}
+		return {"ok": false, "got": "", "cards": [], "relics": []}
 	save.merit -= cost
 	save.side_read.append(id)
 	var rw: Dictionary = st.get("reward", {})
 	var got: Array = []
+	var shown_cards: Array = []  # for the reveal after the story: the same 入队 / 宝物 card moments as anywhere else
+	var shown_relics: Array = []
 	for cid in rw.get("upgrade", {}):  # 点化 the story's lead (handed over first if not held)
 		var n := int(rw["upgrade"][cid])
 		if not save.owned.has(cid):
@@ -960,6 +962,7 @@ static func open_side(save: SaveData, id: String) -> Dictionary:
 		if n > 0:
 			save.upgrade(cid, n)
 		got.append("%s +%d 张" % [str(db.cards[cid]["name"]).split("·")[0], int(rw["upgrade"][cid])])
+		shown_cards.append(cid)
 	for rid in rw.get("relics", []):  # kept for the rest of the 周目, like any 宝物 brought from a finished chapter
 		if save.relics.has(rid) or save.kept_relics.has(rid):
 			save.merit += cost
@@ -970,13 +973,15 @@ static func open_side(save: SaveData, id: String) -> Dictionary:
 		if not save.run_relics.has(rid):
 			save.run_relics.append(rid)
 		got.append("宝物「%s」" % db.relics[rid]["name"])
+		shown_relics.append(rid)
 	for cid in rw.get("cards", []):  # a card the story hands over (often one the pool never offers: 王允, 程昱 …)
 		save.grant_card(cid, true)
 		got.append("「%s」" % db.cards[cid]["name"])
+		shown_cards.append(cid)
 	if int(rw.get("merit", 0)) > 0:
 		save.merit += int(rw["merit"])
 		got.append("战功 +%d" % int(rw["merit"]))
-	return {"ok": true, "got": "、".join(got)}
+	return {"ok": true, "got": "、".join(got), "cards": shown_cards, "relics": shown_relics}
 
 
 static func after_win(save: SaveData) -> void:
