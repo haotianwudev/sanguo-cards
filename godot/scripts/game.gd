@@ -452,18 +452,23 @@ func demo(name: String) -> void:
 			var m1 := MapScreen.new()
 			show_screen(m1)
 			m1.call_deferred("_complete")
-		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云)
+		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --heishan: 黑山风云 with 张宁 saved)
 			save.quests_cleared = ["prologue"]
 			if OS.get_cmdline_user_args().has("--north"):
-				Quests.begin(GameData.get_db().quests.filter(func(x): return x["id"] == "luoyang_n")[0], save)
+				var hs := OS.get_cmdline_user_args().has("--heishan")
+				if hs:
+					save.quests_cleared = ["prologue", "luoyang_n"]
+				Quests.begin(GameData.get_db().quests.filter(func(x): return x["id"] == ("heishan" if hs else "luoyang_n"))[0], save)
 				Quests.record(save, "出生：冀州无极")
-				save.flags = ["出生：冀州无极"]
-				for c in ["zhaoyun", "guojia", "lvlingqi"]:
+				save.flags = ["出生：冀州无极", "北线：班师冀州"] if hs else ["出生：冀州无极"]
+				if hs:
+					Quests.record(save, "张宁：救下")
+				for c in ["zhaoyun", "guojia", "lvlingqi"] + (["zhangning"] if hs else []):
 					save.grant_card(c)
 				save.run_battles = 7
 				save.run_bosses = 2
 				save.merit = 4
-				save.square = "ln_end"
+				save.square = "hs_end" if hs else "ln_end"
 				save.resolved = true
 				var mn := MapScreen.new()
 				show_screen(mn)
