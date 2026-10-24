@@ -6985,6 +6985,10 @@
     "c2_daofa": {
       "src": "source/cg/c2_daofa.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c3_home": {
+      "src": "source/cg/c3_home.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

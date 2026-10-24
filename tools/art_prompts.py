@@ -32,8 +32,8 @@ NOBLADE_CGS = {"c8_fubing", "c8_qibing", "c8_caihe", "c8_zhangyun", "c8_zupu", "
                "s12_beifa", "s12_hushi", "s12_nanyang", "s12_sang", "s12_pangtong", "s12_kurou", "s12_guan", "tm_digong"}
 # the same lord out of armor, for scenes whose own text says 常服 (at home, at a feast) — the armor line would otherwise put the armor and blade back
 HERO_CASUAL = "主角：年轻男子，深棕近黑的短寸头（两侧推短、头顶短发微微上翘，额头露出，不要盖眉的刘海；现代发型，在汉代很扎眼），穿常服（和立绘 lord_south_casual 一样：深棕色交领长袍，青绿色镶金边的衣领与袖口，白色内衬领，黑色宽腰带；不穿任何盔甲、不披披风），手里、肩上、背上都没有任何兵器，不要古锭刀、不要任何刀剑"
-HERO_NORTH_CASUAL = "北线主角：二十出头的年轻男子，干净斯文，棕黑色长发用布巾半束成发髻（不是现代短发），穿常服（和立绘 lord_north_casual 一样：灰蓝色交领长袍，外披雪白狐裘，不穿任何鱼鳞甲或铁甲），手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑"
-HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，头发用布巾束成发髻（不是现代短发），穿甄宓亡父留下的河北式旧鱼鳞甲（素铁色，不要绿色和金色），外披雪白貂裘，手持白蜡杆长枪（枪头下系一个红色平安结）"
+HERO_NORTH_CASUAL = "北线主角：二十出头的年轻男子，干净斯文，浅棕色长发，头顶挽一个小发髻，其余长发披在肩背上，额前有碎刘海（不是现代短发，不缠布巾、不戴头带），穿常服（和立绘 lord_north_casual 一样：灰蓝色交领长袍，外披雪白狐裘，不穿任何鱼鳞甲或铁甲），手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑"
+HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，浅棕色长发，头顶挽一个小发髻，其余长发披在肩背上，额前有碎刘海（不是现代短发，不缠布巾、不戴头带），穿甄宓亡父留下的河北式旧札甲（银灰色，不要绿色和金色），外披雪白毛领貂裘大氅（和立绘 lord_north 一样），手持白蜡杆长枪（枪头下系一个红色平安结）"
 HERO_NORTH_NOBLADE = _re.sub(r"，?手持白蜡杆长枪（.*?）(?=。|$)", "；手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑", HERO_NORTH)
 NORTH_NOBLADE_CGS = {
     "n10_zhenmi", "n10_lianhuan", "n10_luoshui_bad", "n10_luoshang", "n10_huitou",
