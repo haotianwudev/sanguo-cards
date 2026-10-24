@@ -452,7 +452,7 @@ func demo(name: String) -> void:
 			var m1 := MapScreen.new()
 			show_screen(m1)
 			m1.call_deferred("_complete")
-		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --chapter=heishan|beihai|xuzhou|huainan_n|yecheng: a later north chapter's page)
+		"recap":  # the chapter recap at the end of chapter 2 (--north: the north's 洛阳烟云; --north --chapter=heishan|beihai|xuzhou|huainan_n|yecheng|longhu: a later north chapter's page)
 			save.quests_cleared = ["prologue"]
 			if OS.get_cmdline_user_args().has("--north"):
 				# quest: [the chapters before it, the flags they left, this run's records, its last square]
@@ -463,6 +463,7 @@ func demo(name: String) -> void:
 					"xuzhou": [["luoyang_n", "heishan", "beihai"], ["北线：班师冀州", "界桥：救下公孙瓒", "北线：北海相"], ["军纪：严明"], "xz_end"],
 					"huainan_n": [["luoyang_n", "heishan", "beihai", "xuzhou"], ["北线：班师冀州", "界桥：救下公孙瓒", "北线：北海相", "徐州：接任徐州牧"], [], "hnn_end"],
 					"yecheng": [["luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n"], ["北线：班师冀州", "界桥：救下公孙瓒", "北线：北海相", "徐州：接任徐州牧", "北线：让寿春"], ["陈宫：入队", "邺城：将计就计"], "n7_g_end"],
+					"longhu": [["luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng"], ["北线：班师冀州", "界桥：救下公孙瓒", "北线：北海相", "徐州：接任徐州牧", "北线：让寿春", "北线：夺邺城"], ["田丰：入队", "北线：郭嘉随军"], "n8_g_bujian"],
 				}
 				var qid := "luoyang_n"
 				for a in OS.get_cmdline_user_args():

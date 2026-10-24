@@ -2011,6 +2011,23 @@ func test_zhaoyun_mizhen_page_and_card_after_yice() -> void:
 	check(s.owned.has("rc_yecheng"), "黎阳的船 hands over 赵云·黎阳的船")
 
 
+func test_guojia_page_needs_him_alive_and_the_card_waits_for_duanxian() -> void:
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quests_cleared = ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu"]
+	check_eq(Quests.chapter_page("longhu", s).get("cg", ""), "", "no 郭嘉 picture on the 遗策 route")
+	s.run_records.append("北线：郭嘉随军")
+	check_eq(Quests.chapter_page("longhu", s).get("cg", ""), "rc_longhu")
+	var ids := func(): return Quests.side_stories(s).map(func(x): return x["id"])
+	s.flags = ["结局十二 · 遗策"]
+	check(not ids.call().has("s_rc_longhu"), "遗策 is what keeps him alive: not enough")
+	s.flags.append("结局十四 · 断弦")
+	check(ids.call().has("s_rc_longhu"), "断弦 opens it")
+	s.merit = 5
+	Quests.open_side(s, "s_rc_longhu")
+	check(s.owned.has("rc_longhu"), "最后一个葫芦 hands over 郭嘉·最后一个葫芦")
+
+
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]

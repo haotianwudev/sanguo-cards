@@ -2486,6 +2486,20 @@
       "pool": false,
       "scope": "north"
     },
+    "rc_longhu": {
+      "name": "郭嘉·最后一个葫芦",
+      "rarity": "SR",
+      "troop": "strategist",
+      "hp": 96,
+      "at": 66,
+      "skills": [
+        "xianji",
+        "shisheng"
+      ],
+      "troop_skills": false,
+      "pool": false,
+      "scope": "north"
+    },
     "zhangfuren": {
       "name": "张夫人",
       "voice": "zhangfuren",
