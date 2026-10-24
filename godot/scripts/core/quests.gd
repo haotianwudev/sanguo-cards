@@ -880,6 +880,48 @@ static func interlude(quest_id: String, save: SaveData) -> Array:
 			and not (sc.has("unless") and save.flags.has(sc["unless"])))
 
 
+static func side_stories(save: SaveData, also := "") -> Array:
+	## The ？小故事 open to the player: those of every chapter finished this 周目 (plus `also`, the chapter whose recap is showing),
+	## filtered by story flags like the interludes. Each comes back with "quest" (its chapter) and "read".
+	var db := GameData.get_db()
+	var done: Array = save.quests_cleared.duplicate()
+	if also != "" and not done.has(also):
+		done.append(also)
+	var have: Array = save.flags + save.run_records
+	var out: Array = []
+	for qid in done:
+		for st in db.side_stories.get(qid, []):
+			if (st.has("requires") and not have.has(st["requires"])) or (st.has("unless") and have.has(st["unless"])):
+				continue
+			var s: Dictionary = st.duplicate()
+			s["quest"] = qid
+			s["read"] = save.side_read.has(st["id"])
+			out.append(s)
+	return out
+
+
+static func side_unread(save: SaveData, also := "") -> int:
+	return side_stories(save, also).filter(func(s): return not s["read"]).size()
+
+
+static func read_side(save: SaveData, id: String) -> String:
+	## Mark a ？小故事 read; the first time in a 周目 it pays its reward. Returns what it gave ("" = nothing).
+	if save.side_read.has(id):
+		return ""
+	save.side_read.append(id)
+	var st: Dictionary = {}
+	for list in GameData.get_db().side_stories.values():
+		for s in list:
+			if s["id"] == id:
+				st = s
+	var reward: Dictionary = st.get("reward", GameData.get_db().side_reward)
+	var got: Array = []
+	if int(reward.get("merit", 0)) > 0:
+		save.merit += int(reward["merit"])
+		got.append("战功 +%d" % int(reward["merit"]))
+	return "、".join(got)
+
+
 static func after_win(save: SaveData) -> void:
 	## 宝物 that act after every victory (酒囊: heal a share of HP).
 	var db := GameData.get_db()

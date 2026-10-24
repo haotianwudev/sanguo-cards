@@ -465,9 +465,21 @@ func demo(name: String) -> void:
 				save.grant_card(c)
 			save.kept_relics = ["shoushihe", "jiunang", "bingfu", "bingfa", "gudingdao", "dunjia"]  # a run starts with these
 			save.relics = save.kept_relics.duplicate()
+			save.quests_cleared = ["prologue", "taodong"]  # the ？小故事 of those chapters are open
+			save.flags = ["出生：江东富春"]
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_open_party")
+			if OS.get_cmdline_user_args().has("--side"):  # --side: open the ？小故事 list (and with --read, the first story)
+				(func():
+					await get_tree().create_timer(0.5).timeout
+					var o: PartyOverlay = m.get_node("Party")
+					o._side_btn.pressed.emit()
+					if OS.get_cmdline_user_args().has("--read"):
+						await get_tree().create_timer(0.3).timeout
+						for n in get_tree().root.get_children():
+							if n is SideStoryList:
+								n._play(Quests.side_stories(save)[0])).call()
 			if OS.get_cmdline_user_args().has("--voices"):  # tap 孙策, 吴夫人, 黄盖, a soldier and the lord: each says his line
 				(func():
 					await get_tree().create_timer(0.5).timeout

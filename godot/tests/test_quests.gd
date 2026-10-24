@@ -1805,3 +1805,31 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	s.flags.append("出生：冀州无极")
 	check(s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "heishan_louluo"), "黑山喽啰 in 第七章's public pool")
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
+
+
+func test_side_stories_open_after_their_chapter_and_pay_once() -> void:
+	var db := GameData.get_db()
+	check(db.side_stories.size() >= 20, "every chapter has ？小故事")
+	var s := SaveData.create()
+	s.flags = ["出生：江东富春"]
+	check(Quests.side_stories(s).is_empty(), "nothing before a chapter is done")
+	var south := Quests.side_stories(s, "prologue")
+	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine"]), "the south birth gets only the south prologue stories")
+	s.quests_cleared = ["prologue"]
+	check_eq(Quests.side_unread(s), south.size())
+	var m := s.merit
+	check(Quests.read_side(s, "s_jiujiu") != "", "the first read pays")
+	check_eq(s.merit, m + int(db.side_reward["merit"]))
+	check_eq(Quests.read_side(s, "s_jiujiu"), "", "a second read pays nothing")
+	check_eq(Quests.side_unread(s), south.size() - 1)
+
+
+func test_side_story_portraits_and_requires_exist() -> void:
+	var db := GameData.get_db()
+	var recs := FileAccess.get_file_as_string("res://data/story.json")
+	for list in db.side_stories.values():
+		for st in list:
+			for key in st.get("portraits", []):
+				check(FileAccess.file_exists("res://data/art/portraits/%s.jpg" % key) or Kit.portrait(key, 0.75, 5.0) != null, "%s: portrait %s" % [st["id"], key])
+			for f in [st.get("requires", ""), st.get("unless", "")]:
+				check(f == "" or recs.contains("\"%s\"" % f), "%s: no story line records %s" % [st["id"], f])

@@ -1416,9 +1416,12 @@ func _complete() -> void:
 	var up := Kit.button("点化一位武将 +%d 张（%d 战功）" % [Game.save.upgrade_copies(), int(db.gacha["merit"]["upgrade"])], "purple")
 	spend.add_child(draw)
 	spend.add_child(up)
+	var side := SideStoryList.button(Vector2.ZERO, func(): have.text = "战功 %d" % Game.save.merit, q.get("_raw", q)["id"])  # this chapter's ？小故事 open right here
+	spend.add_child(side)
 	var refresh_spend := func():
 		var s := Game.save
 		have.text = "战功 %d" % s.merit
+		side.call("refresh")
 		draw.disabled = s.merit < int(db.gacha["merit"]["draw"]) or s.pool_left() == 0
 		up.disabled = s.merit < int(db.gacha["merit"]["upgrade"]) or s.upgradable().is_empty()
 	refresh_spend.call()

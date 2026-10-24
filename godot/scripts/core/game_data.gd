@@ -32,6 +32,8 @@ var skill_budget: Dictionary  # what an attack skill of each AP cost should be w
 var _raw_top: Dictionary = {}
 var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one picked per run)
 var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
+var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 once that chapter is done: {id, title, portraits, text, cg, requires, unless, reward}]
+var side_reward: Dictionary = {}  # what a ？小故事 gives the first time it is read in a 周目, unless it names its own reward
 var ui: Dictionary
 
 
@@ -187,6 +189,18 @@ func _load(dir: String) -> void:
 	if FileAccess.file_exists(dir + "/interludes.json"):
 		var il: Dictionary = read_json(dir + "/interludes.json")
 		interludes = il.get("after", {})
+	if FileAccess.file_exists(dir + "/side_stories.json"):
+		var ss: Dictionary = read_json(dir + "/side_stories.json")
+		side_stories = ss.get("after", {})
+		side_reward = ss.get("reward", {})
+		var ids := {}
+		var qids: Array = quests.map(func(q): return q["id"])
+		for qid in side_stories:
+			assert(qids.has(qid), "side_stories: unknown quest %s" % qid)
+			for st in side_stories[qid]:
+				assert(not ids.has(st["id"]), "side_stories: id %s used twice" % st["id"])
+				ids[st["id"]] = true
+				assert(not st.get("text", []).is_empty(), "side story %s: no text" % st["id"])
 
 
 func _index_card_chapters() -> void:

@@ -15,6 +15,7 @@ signal closed
 
 var _party_row: HBoxContainer
 var _summary: VBoxContainer
+var _side_btn: Control  # ？小故事 (Rance 式的整备问号): hidden when this 周目 has none yet
 var _tabs: HBoxContainer
 var _grid: GridContainer
 var _detail: VBoxContainer
@@ -124,6 +125,8 @@ func _ready() -> void:
 		queue_free())
 	add_child(done)
 	Kit.focus(done)
+	_side_btn = SideStoryList.button(Vector2(1104, 8), func(): _side_btn.call("refresh"))
+	add_child(_side_btn)
 	_rebuild()
 
 
