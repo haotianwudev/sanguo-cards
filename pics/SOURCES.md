@@ -1218,3 +1218,5 @@
 | `cg:c2_ln_triple` | source/cg/c2_ln_triple.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c2_daofa` | source/cg/c2_daofa.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c3_home` | source/cg/c3_home.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_bandage` | source/cg/c3_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_wall_night` | source/cg/c3_wall_night.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

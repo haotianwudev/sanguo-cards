@@ -1200,3 +1200,6 @@
 - [x] 2026-10-24 battle `n7_zangba` ← n7_zangba.jpg · ok
 - [x] 2026-10-24 cg `c3_guotu_raid` ← c3_guotu_raid.jpg · ok
 - [x] 2026-10-24 cg `c3_home` ← c3_home.jpg · ok
+- [x] 2026-10-24 cg `c3_bandage` ← c3_bandage.jpg · ok
+- [x] 2026-10-24 cg `c3_wall_night` ← c3_wall_night.jpg · ok
+- [x] 2026-10-24 cg `c3_home` ← c3_home.jpg · ok
