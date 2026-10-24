@@ -1007,6 +1007,33 @@ func test_mengde_makes_strategist_skills_cheaper() -> void:
 	check_eq(b.cost(lord, db.skills["rengdao"]), 3, "not a 策士: no discount")
 
 
+func _event_text(x: Variant) -> String:
+	if x is String:
+		return x
+	if x is Array:
+		return " ".join(x.map(func(i): return _event_text(i)))
+	if x is Dictionary:
+		return " ".join(x.values().map(func(v): return _event_text(v)))
+	return ""
+
+
+func test_the_north_birth_never_draws_a_south_event() -> void:
+	## prologue is one quest for both births: its chapter-only events (二乔, 于吉) carry "route": "south" and stay out of the north pool
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[0]
+	check_eq(q["id"], "prologue")
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	var north: Array = Quests.pools(q, s)["event_pool"]
+	check(not north.has("qiao") and not north.has("yuji"), "no 二乔 / 于吉 after the north birth")
+	for eid in north:
+		var text := _event_text(db.events[eid]) + _event_text(GameData.get_db().events[eid]["options"])
+		for w in ["孙策", "周瑜", "孙坚", "吴夫人", "二乔", "大乔", "小乔", "伯符", "公瑾"]:
+			check(not text.contains(w), "north prologue event %s mentions %s" % [eid, w])
+	var south: Array = Quests.pools(q, SaveData.create())["event_pool"]
+	check(south.has("qiao") and south.has("yuji"), "the south birth still meets them")
+
+
 func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()

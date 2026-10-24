@@ -459,7 +459,8 @@ static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Diction
 		out["soldier_pool"] = q["soldier_pool"]
 	var event_pool: Array = []
 	for eid in db.events:
-		if db.events[eid]["scope"] in ["universal", event_scope, q["id"]]:
+		# a chapter-only event in a quest both routes share (prologue) also names its route: 二乔 must not turn up after the north birth
+		if db.events[eid]["scope"] in ["universal", event_scope, q["id"]] and db.events[eid]["route"] in ["", event_scope]:
 			event_pool.append(eid)
 	out["event_pool"] = event_pool
 	if not sq.is_empty():

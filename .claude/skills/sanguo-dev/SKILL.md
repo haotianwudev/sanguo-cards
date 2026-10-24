@@ -289,7 +289,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   | `recruit` 招贤 | 募（绿） | 台词（可有）→ 接见豪杰，只能收一位；有 `recruit_pool` 就只出这个名单（每次随机几位），`prompt` 可改提示 | `recruit_pool` `text` `portraits` `prompt` |
   | `mystery` 奇遇 | ？（蓝） | 进格时从事件池抽一个随机事件（`event_pool` + `event_scope` + 本章 scope + universal，每次重抽，本轮不重复），事件里有选项（打架、受伤、给卡、给宝物…） | `event`（固定事件，见下） |
 
-  `mystery` 带 `event` = 固定事件：地图上显示该事件自己的字和颜色（险 / 威 / 庙 …），**只给确实是设计好的固定入口用**——现在只剩第二章的「高级宝箱」（三个箱子里恰好一个是高级的，测试守着）。故事性的固定剧情一律用 `event` 格（`cards` / `relics` / `difficulty` 写在格子上），要选人用 `recruit` 格（借将）；其余「可有可无」的事件让它随机。一个只属于某一章的事件，`scope` 写那一章的 quest id，别写 `south` / `north`（否则别的章节也会抽到，救祖茂在第一章冒出来就是这样）。
+  `mystery` 带 `event` = 固定事件：地图上显示该事件自己的字和颜色（险 / 威 / 庙 …），**只给确实是设计好的固定入口用**——现在只剩第二章的「高级宝箱」（三个箱子里恰好一个是高级的，测试守着）。故事性的固定剧情一律用 `event` 格（`cards` / `relics` / `difficulty` 写在格子上），要选人用 `recruit` 格（借将）；其余「可有可无」的事件让它随机。一个只属于某一章的事件，`scope` 写那一章的 quest id，别写 `south` / `north`（否则别的章节也会抽到，救祖茂在第一章冒出来就是这样）。第一章 `prologue` 是南北共用的一个 quest：只属于这一章的事件还要写 `"route": "south"` / `"north"`，不然北方出生也会抽到（二乔、于吉在北线冒出来就是这样；`test_the_north_birth_never_draws_a_south_event` 守着）。
   战斗格的 `lose_goto`：输了转去的格子（吕布 / 华雄的必败戏）；`beatable` = 仍是正常强度的战斗。`shuffle` 组只搬 `CONTENT`（type / label / battle / event / text …），不搬 `cards` / `relics` / `choose`。
 
 - **Quest** (`story.json` quests): squares `{x, y, type, label, next, text, portraits, cards, relics, choose, battle, boss,
