@@ -829,7 +829,7 @@
     },
     "ploy": {
       "name": "计略",
-      "cost": 3,
+      "cost": 2,
       "cumulative": true,
       "effects": [
         {
