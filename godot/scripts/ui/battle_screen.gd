@@ -462,27 +462,28 @@ func _sync_skill_bars() -> void:
 		var u: Dictionary = b.leaders[i]
 		var r := v.get_global_rect()
 		var bar := VBoxContainer.new()  # stacked, one wide button per skill, in this leader's column
-		bar.add_theme_constant_override("separation", 4)
-		var bh := 44.0 if small else 50.0  # wide, tall enough for a thumb; the column reaches up over the enemy's side, which is fine (user call)
+		bar.add_theme_constant_override("separation", 5)
+		var bh := 62.0 if small else 72.0  # big for a thumb; the column sits on the card and reaches up over the HP bar and the enemy, which is fine (user call)
 		var skills: Array = u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
 			var ult := _is_ult(sk)
 			var btn := Button.new()
-			btn.text = "%s　AP%d" % [sk["name"], b.cost(u, sk)]
-			btn.add_theme_font_size_override("font_size", 17 if small else 20)
+			btn.text = "%s  AP%d" % [sk["name"], b.cost(u, sk)]
+			var long_name: bool = str(sk["name"]).length() >= 5  # 「小霸王渡江」 still shows its AP
+			btn.add_theme_font_size_override("font_size", (16 if long_name else 20) if small else (20 if long_name else 24))
 			btn.icon = Kit.skill_icon(sk)
 			btn.expand_icon = true
-			btn.add_theme_constant_override("icon_max_width", 22 if small else 26)
+			btn.add_theme_constant_override("icon_max_width", 28 if small else 32)
 			btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			btn.clip_text = true
 			btn.focus_mode = Control.FOCUS_NONE
 			btn.custom_minimum_size = Vector2(0, bh)
 			var edge: Color = Kit.c("gold") if ult else Color(1, 1, 1, 0.35)
-			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.94), 8, 2 if ult else 1, edge, 10))
+			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 1.0), 8, 2 if ult else 1, edge, 10))
 			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.95), 8, 2, Kit.c("gold"), 10))
 			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 10))
-			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.94), 8, 1, Color(1, 1, 1, 0.15), 10))  # opaque: nothing underneath shows through
+			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 1.0), 8, 1, Color(1, 1, 1, 0.15), 10))  # opaque: nothing underneath shows through
 			btn.add_theme_color_override("font_color", Kit.c("gold") if ult else Color(1, 1, 1))
 			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
 			btn.disabled = not b.usable(u, sk)
@@ -490,9 +491,9 @@ func _sync_skill_bars() -> void:
 				_close_skill_popup()
 				_on_skill(i, sid))
 			bar.add_child(btn)
-		# in the card's column, stacked up from just above the party bar: the cards and the HP / AP line stay clear, the enemy's side may be covered
-		var h := skills.size() * bh + (skills.size() - 1) * 4.0
-		bar.position = Vector2(r.position.x - global_position.x, _party_box.position.y - h - 6)
+		# in the card's column, stacked up from the card's top edge (the card itself stays clear; the HP bar and the enemy may be covered)
+		var h := skills.size() * bh + (skills.size() - 1) * 5.0
+		bar.position = Vector2(r.position.x - global_position.x, r.position.y - global_position.y - h - 2)
 		bar.size = Vector2(r.size.x, h)
 		_skill_layer.add_child(bar)
 
