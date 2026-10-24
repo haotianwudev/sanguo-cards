@@ -1354,8 +1354,8 @@ func _offer_caption(c: Dictionary) -> String:
 
 func _complete() -> void:
 	## The chapter-end page: this chapter's picture on the left (its people are all on the left side), the menu on the right.
-	## Every row is a 故事 with its name and 战功 cost (user rule): 本章回顾 (free), 抽一次卡, 点化, then the ？小故事;
-	## 进入下一章 at the bottom. (The picture is also a card, but an extra ？小故事 hands it over, after the route's next bad end.)
+	## Every row is a 故事 with its name and 战功 cost, no reward written (user rule): 本章回顾 (free) and the ？小故事 first,
+	## then 抽一次卡 and 点化; 进入下一章 at the bottom. No panel behind the menu: the rows sit on the picture's empty right side. (The picture is also a card, but an extra ？小故事 hands it over, after the route's next bad end.)
 	if get_node_or_null("Recap") != null:
 		return
 	var db := GameData.get_db()
@@ -1382,11 +1382,6 @@ func _complete() -> void:
 		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 		pic.size = root.size
 		root.add_child(pic)
-	var band := Panel.new()  # the menu's dark band over the picture's empty right side
-	band.position = Vector2(800, 0)
-	band.size = Vector2(480, 720)
-	band.add_theme_stylebox_override("panel", Kit.box(Color(0.06, 0.05, 0.04, 0.84), 0, 0, Color.TRANSPARENT, 0))
-	root.add_child(band)
 	var col := VBoxContainer.new()
 	col.position = Vector2(822, 18)
 	col.size = Vector2(440, 684)
@@ -1397,6 +1392,9 @@ func _complete() -> void:
 	col.add_child(title)
 	_recap_merit = Kit.label("", Kit.FONT_BODY, "text")
 	col.add_child(_recap_merit)
+	for l in [title, _recap_merit]:  # no panel behind the menu (user rule): an outline keeps the words readable on the picture
+		l.add_theme_constant_override("outline_size", 8)
+		l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -1431,50 +1429,44 @@ func _fill_recap() -> void:
 		ch.queue_free()
 	var draw_cost := int(db.gacha["merit"]["draw"])
 	var up_cost := int(db.gacha["merit"]["upgrade"])
-	_recap_row("本章回顾", "免费", "打了几场、得了什么、关键选择", true, _show_recap_detail)
-	_recap_row("抽一次卡", "%d 战功" % draw_cost, "招募三选一", s.merit >= draw_cost and s.pool_left() > 0, func():
+	_recap_row("本章回顾", "免费", true, _show_recap_detail)
+	for st in Quests.side_stories(s, _recap_qid):
+		var read: bool = st["read"]
+		var cost := Quests.side_cost(st)
+		_recap_row(str(st["title"]), "已读" if read else "%d 战功" % cost, read or s.merit >= cost, func():
+			SideStoryList.play(st, self, func(got: String):
+				if got != "":
+					_show_toast("「%s」得到：%s" % [st["title"], got])
+				_fill_recap()))
+	_recap_row("抽一次卡", "%d 战功" % draw_cost, s.merit >= draw_cost and s.pool_left() > 0, func():
 		if not Quests.spend_merit(s, "draw"):
 			return
 		var drawn := s.recruit_offer(Game.rng)
 		Game.persist()
 		_pick_then(drawn.map(func(c): return c["id"]), "用战功招募 —— 选一位", "draw", _fill_recap))
-	_recap_row("点化一位武将", "%d 战功" % up_cost, "三选一，+%d 张" % s.upgrade_copies(), s.merit >= up_cost and not s.upgradable().is_empty(), func():
+	_recap_row("点化一位武将", "%d 战功" % up_cost, s.merit >= up_cost and not s.upgradable().is_empty(), func():
 		if not Quests.spend_merit(s, "upgrade"):
 			return
 		Game.persist()
 		_pick_then(s.upgrade_offer(Game.rng), "用战功点化 —— 选一位武将加 %d 张" % s.upgrade_copies(), "upgrade", _fill_recap))
-	for st in Quests.side_stories(s, _recap_qid):
-		var read: bool = st["read"]
-		var cost := Quests.side_cost(st)
-		_recap_row(str(st["title"]), "已读" if read else "%d 战功" % cost, Quests.side_reward_text(st), read or s.merit >= cost, func():
-			SideStoryList.play(st, self, func(got: String):
-				if got != "":
-					_show_toast("「%s」得到：%s" % [st["title"], got])
-				_fill_recap()))
 
 
-func _recap_row(row_name: String, cost: String, sub: String, enabled: bool, act: Callable) -> void:
-	## one row of the chapter-end menu: name and what it gives on the left, its 战功 on the right
+func _recap_row(row_name: String, cost: String, enabled: bool, act: Callable) -> void:
+	## one row of the chapter-end menu: its name on the left, its 战功 on the right
 	var b := Button.new()
-	b.custom_minimum_size = Vector2(430, 70)
+	b.custom_minimum_size = Vector2(430, 58)
 	b.add_theme_stylebox_override("normal", Kit.box(Kit.c("panel"), 10, 2, Kit.c("gold") if enabled else Kit.c("border"), 10))
 	b.add_theme_stylebox_override("hover", Kit.box(Kit.c("panel").lightened(0.08), 10, 2, Kit.c("gold"), 10))
 	b.add_theme_stylebox_override("pressed", Kit.box(Kit.c("panel").darkened(0.1), 10, 2, Kit.c("gold"), 10))
 	b.add_theme_stylebox_override("disabled", Kit.box(Kit.c("panel").darkened(0.2), 10, 2, Kit.c("border"), 10))
 	b.disabled = not enabled
 	var nm := Kit.label(row_name, Kit.FONT_BODY + 2, "gold" if enabled else "text")
-	nm.position = Vector2(16, 8)
+	nm.position = Vector2(16, 12)
 	nm.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	b.add_child(nm)
-	var sl := Kit.label(sub, Kit.FONT_BODY - 4, "amber" if enabled else "text")
-	sl.position = Vector2(16, 40)
-	sl.size = Vector2(300, 24)
-	sl.clip_text = true
-	sl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	b.add_child(sl)
 	var cl := Kit.label(cost, Kit.FONT_BODY, "gold" if enabled else "red")
-	cl.position = Vector2(300, 20)
-	cl.size = Vector2(116, 30)
+	cl.position = Vector2(290, 14)
+	cl.size = Vector2(126, 30)
 	cl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	cl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	b.add_child(cl)
