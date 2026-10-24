@@ -1203,3 +1203,6 @@
 - [x] 2026-10-24 cg `c3_bandage` ← c3_bandage.jpg · ok
 - [x] 2026-10-24 cg `c3_wall_night` ← c3_wall_night.jpg · ok
 - [x] 2026-10-24 cg `c3_home` ← c3_home.jpg · ok
+- [ ] 2026-10-24 cg `c3_supply` ← c3_supply.jpg · ok
+- [ ] 2026-10-24 cg `c4_dongjia` ← c4_dongjia.jpg · ok
+- [ ] 2026-10-24 cg `e_jieying` ← e_jieying.jpg · ok
