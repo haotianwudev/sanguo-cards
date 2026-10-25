@@ -29,7 +29,7 @@ import re as _re
 HERO_NOBLADE = _re.sub(r"，?肩扛孙坚的古锭刀（.*?）(?=。|$)", "；手里、肩上、背上都没有任何兵器，不要古锭刀、不要大刀、不要任何刀剑", HERO)
 NOBLADE_CGS = {"c8_fubing", "c8_qibing", "c8_caihe", "c8_zhangyun", "c8_zupu", "c8_shuige", "c9_changsha",
                "c11_hanqi", "c11_baihe_han", "c11_zhugejin", "c11_modao", "c11_liaochuang", "c12_liushou", "c12_qiqin", "c13_zhanglu",
-               "s12_beifa", "s12_hushi", "s12_nanyang", "s12_sang", "s12_pangtong", "s12_kurou", "s12_guan", "tm_digong"}
+               "s12_beifa", "s12_hushi", "s12_nanyang", "s12_sang", "s12_pangtong", "s12_kurou", "s12_dongfeng", "s12_guan", "tm_digong"}
 # the same lord out of armor, for scenes whose own text says 常服 (at home, at a feast) — the armor line would otherwise put the armor and blade back
 HERO_CASUAL = "主角：年轻男子，深棕近黑的短寸头（两侧推短、头顶短发微微上翘，额头露出，不要盖眉的刘海；现代发型，在汉代很扎眼），穿常服（和立绘 lord_south_casual 一样：深棕色交领长袍，青绿色镶金边的衣领与袖口，白色内衬领，黑色宽腰带；不穿任何盔甲、不披披风），手里、肩上、背上都没有任何兵器，不要古锭刀、不要任何刀剑"
 HERO_NORTH_CASUAL = "北线主角：二十出头的年轻男子，干净斯文，浅棕色长发，头顶挽一个小发髻，其余长发披在肩背上，额前有碎刘海（不是现代短发，不缠布巾、不戴头带），穿常服（和立绘 lord_north_casual 一样：灰蓝色交领长袍，外披雪白狐裘，不穿任何鱼鳞甲或铁甲），手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑"
@@ -1713,6 +1713,7 @@ BATTLES = {
 CGS = {
     "c11_bidao": "冬日吴郡大营的辕门外，雪地：孙尚香（十九岁的成年女子，一身红甲，英气明艳）追着主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风）满营跑，手里的刀举得老高；围观的士兵笑成一团，孙策（二十出头的少年将军，红袍金甲）在一旁押注起哄；远处辕门上挂着「孙」字旗",
     "c11_liniang": "冬日丹阳深山的竹林山道，薄雾：黎娘（二十五六岁的成年女子，山越女王，齐肩短发，脸颊和手臂刺着青色部族纹，兽皮树皮编甲，串珠项链，赤足裹布）挽着竹弓，刚射出的一支绿羽箭钉在竹子上；孙尚香（十九岁的成年女子，一身红甲，英气明艳）反手挥刀，把半空中的第二支箭劈成两截；主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，肩扛古锭刀）站在后面，张着嘴看呆了",
+    "c11_xiongxun": "丹阳深山里黎娘的寨子，春天的清晨，竹楼前：一个孙坚的亲兵（满身泥血，背上插着两支折断的箭）扑跪在地上，仰头喘着气报信；主角刚从竹楼里冲出来，愣在原地；孙尚香（十九岁的成年女子，一身红甲）手里的刀掉在了地上；黎娘（脸颊刺着青纹的山越女子，背竹弓）扶着亲兵；远处雾气沉沉的竹林",
     "c12_liushou": "春雨里的汉水岸边，楼船泊在江上：周瑜（二十多岁的俊美儒将，白袍银甲）摊开一张蜀道图；孙策（二十出头的英武青年，红色头巾，提长枪）把枪往地上一戳，一脸不服；孙尚香（十九岁的成年女子，一身红甲，英气明艳）已经牵着马站在后面；主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，双手空着、不扛大刀）站在中间",
     "c12_tiesuo": "瞿塘峡口夔门，两岸绝壁：江面横着三道挂满铃铛的铁索，周泰（三十岁上下的魁梧猛将，满身旧伤疤）把刀咬在嘴里跃进翻滚的江水，甘宁（二十多岁的悍勇青年，腰挂铜铃）在船头拉满了弓",
     "c12_duishe": "江州城下的护城河，夕阳：城头上严颜（须发全白的老将，川军铁甲）拉满长弓，城下黄忠（四十来岁的壮实老将，背硬弓）骑马拉弓对射，两人中间的空中交错着箭，箭都射偏了；两人的嘴角都带着一点笑",
@@ -1720,6 +1721,7 @@ CGS = {
     "c12_wuxian": "成都行辕的书房，深夜，一盏油灯：吴苋（二十岁上下的成年女子，蜀中闺秀，清秀聪慧，淡青色的蜀锦衣裙）坐在案前，一手拨着算盘，一手按着账本，抬眼看着短发的主角（穿素色常服，不穿盔甲，双手空着、身边没有任何刀剑兵器），神情像在挑他的错；窗外院子里，孙尚香（十九岁的成年女子，一身红甲，英气明艳）在月光下练刀",
     "c12_zhurong": "泸水渡口：祝融夫人（二十多岁的成年女将，南中王后，赤红藤甲战裙，背负五口飞刀）扬手掷出一口飞刀，飞刀钉在主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，肩扛古锭刀）脚尖前的地上，他低头看着，愣住了",
     "c12_kanfeng": "盘蛇谷口，傍晚：陆逊（十八九岁的清秀青年，白袍轻甲）站在谷口，抬手试着风向，看着谷里的草和烟；孙尚香（十九岁的成年女子，一身红甲，英气明艳）在他身边，抱着刀，侧头听他说话",
+    "c12_xiangjin": "盘蛇谷，深夜，火海中：主角跪在烧焦的谷地上，怀里抱着孙尚香（十九岁的成年女子，红甲被烟熏黑，手里还握着卷了刃的刀），她仰头看着他，嘴角带一点笑；四周是倒伏的藤甲和翻卷的火焰，风向着谷口倒卷。克制、悲伤，不要血腥特写",
     "c12_qiqin": "南中的大帐前：孟获（四十岁上下的南中蛮王，魁梧，藤甲兽皮，头插雉尾）跪在帐前，低着头；祝融夫人（成年女将，赤红藤甲战裙）在旁边拍着他的背；主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，双手空着、不扛刀）坐在帐前，一脸「这句台词我听过」的表情",
     "c13_chuzheng": "成都行辕的大堂，窗外桃花盛开：荀攸（三十多岁的清瘦文士，深蓝儒服）把一张旧地图铺在案上，手指从汉中划到长安；董白（成年女将，银白色长发高马尾，紫色毛边皮甲）把骨朵往地上一顿；吴苋（二十岁上下的成年女子，蜀中闺秀，清秀聪慧，淡青色的蜀锦衣裙）在一旁拨着算盘；主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风）站在案前看地图",
     "c13_duanshui": "夜里阳平关后山的绝壁：黄忠（四十出头的精壮军汉，黄皮甲衬蓝战袍，背着弓）和甘宁（二十出头，晒得黝黑，精瘦，头发上插一根羽毛，腰上的铃铛用布缠着）带着一队兵攀着绳索往上爬；山下远处是阳平关的关墙；贾诩（四十多岁，清瘦蜡黄，眯着眼）在山脚举着火把仰头看",
@@ -1960,6 +1962,7 @@ CGS = {
     "c4_tonggui": "dawn in falling snow before the closed Xuanping Gate of Chang'an, seen from behind: the short-haired hero in battered silver armor, Dong Bai (adult) with her notched twin hammers on his left, Cai Wenji (adult, in white) holding a broken guqin on his right, the three holding hands and stepping forward together; restrained and elegiac, no gore",
     "c6_fenghou": "the throne hall in Chang'an: the ten-year-old boy emperor leaning forward on a huge throne, insisting in a trembling voice; below him the white-haired Wang Yun bowing with a smile that doesn't reach his eyes",
     "c6_xunyou": "a dim Han-dynasty prison cell in Chang'an, the iron door just swung open and torchlight pouring in: the lean, pale scholar Xun You (thirties, plain robe) sitting cross-legged on straw playing a go game alone on a board scratched on a stone slab, calmly looking up; the hero in bronze-gilt armor holding a torch in the doorway, jailers sprawled behind him",
+    "c6_xuhuang": "华阴以东的山口官道，午后：一员黑脸大将徐晃（三十多岁，魁梧，玄黑铁甲，开山大斧）翻身下马，把大斧横放在地上，单膝跪在路边；他身后的杨奉部兵卒放下了兵器；路中间停着一辆旧马车，车帘被主角掀起，车里探出小皇帝（十岁左右的男孩，只画孩子该有的样子，素色袍子，抱着一个小包袱）；荀攸（三十多岁的清瘦文士）站在两军之间",
     "c6_escape": "night escape from Chang'an: a covered carriage racing through a burning city gate, the boy emperor peeking out clutching a small bundle; Dong Bai (adult) riding alongside with her twin hammers; the hero riding on the other side with Diaochan (adult) behind his saddle",
     "c6_huihe": "the restored gate of Luoyang at dawn: the huge Sun Jian in his tiger-pelt cape kneeling on one knee in the dust before the small boy emperor stepping down from a battered carriage",
     "c6_seal": "a makeshift throne hall in half-ruined Luoyang: the boy emperor on a simple throne asking quietly; the huge Sun Jian bowing with a calm face while his hand hanging at his side is clenched white, no box anywhere in the hall; Zhou Yu writing in his ledger with lowered eyes; Lady Wu (adult) watching Sun Jian anxiously from the back",
@@ -2062,6 +2065,7 @@ CGS = {
     "c9_qiuche": "黎明前灊山脚下的山道，雾气和火把：前景里主角（南线主角，短寸头，残破的古铜鎏金甲）倒在泥地里，手伸向前方；山道上两辆蒙着红布的木笼囚车正往北驶去，红布被风掀起一角，木笼里大乔（成年女性，温婉，红色锦裙）隔着木栏沉默地回望，小乔（成年女性，灵动，红衣）抓着木栏呼喊；刘勋（四十岁上下，白胖贪婪，眯缝眼，手指戴满金戒指，华丽官袍外套不合身的铠甲）骑马走在囚车边仰头大笑；两旁是雷家部曲和「雷」字旗；山道尽头的北方天边，隐约是寿春的方向",
     "c9_liuye": "皖城太守府的大堂，刘勋丢下的公文散了一地；刘晔（二十多岁的清瘦文士，目光锐利，深色儒袍，腰间一块汉室宗亲的玉佩）安坐在堂上喝茶，抬眼看着走进门的主角；主角身后跟着周瑜和乔公（白须老者）；午后的光从门外斜照进来",
     "c9_lvmeng": "淮南的土路边，一辆装满粮袋的牛车，地上倒着几个袁军溃兵，远处有逃散的难民：少年吕蒙（十五六岁，个子不高但结实，脸上带泥，眼神倔强凶狠，不合身的旧皮甲、红布带、草鞋，身上两道血口子）拄着一把比他个头还长的豁口大刀，挡在牛车前喘气；孙策（二十出头的少年将军，红色战袍、金兽肩甲）刚翻身下马，伸手去拎他的后领；周瑜（俊秀的青年文武，白衣）收剑站在一旁打量地上的溃兵；主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风）骑在马上低头看着这个少年；黄昏，尘土飞扬",
+    "c9_weiyan": "长沙城门洞里，黄昏：魏延（三十岁上下，赤红面庞，浓眉，荆州牙门将的旧铁甲，手里拄着一杆折断的长枪）满脸是汗，单膝跪地；主角弯腰伸手把他拉起来；城门洞外是长沙的城墙和夕阳，城头上一个文官（太守韩玄）探出半个脑袋，双手把太守印举过头顶。轻松里带一点敬意",
     "c9_mishui": "寿春城外八十里一座破败的江亭，冷风灌进来：袁术（四十多岁，面容浮肿憔悴，胡须凌乱，穿着沾满泥污、看不出颜色的黄色龙袍）瘫坐在一张破床上，手里捧着一只空碗，嘴角挂着血；亭外一个粗布厨子拎着水桶摇头；亭柱上斜靠着一面残破的「仲」字旗；天色灰暗，远处是淮南灰黄的原野",
     "n5_seal": "徐州刺史府的病房里药味浓重：病榻上的陶谦（六十多岁的老人，面如金纸）颤巍巍地伸手；刘备（三十多岁，大耳垂肩，宽厚的面相）一步跨上前长跪，双手稳稳接过徐州牧大印；张飞（黑脸虬髯的猛将）在后面摸着后脑勺一脸发懵；主角站在一旁目瞪口呆",
     "n5_mizhen": "下邳酒楼的接风宴上，红烛高照：糜贞（成年女性，二十岁上下的徐州千金，正红色织金襦裙）捧着白玉酒壶大大方方地给赵云斟酒；赵云（英俊的年轻将军，白袍银甲）端着酒杯耳根红透；郭嘉在后面捂嘴偷笑",
@@ -2201,6 +2205,7 @@ CGS = {
     "s12_sang": "夏口的江边，夜里：南线主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，双手空着、不扛大刀）独自坐在江边的石头上，一手拿着一张白纸黑字的檄文，一手抬手揉着太阳穴；对岸一片漆黑，什么都没有",
     "s12_pangtong": "夏口城外的营门口：庞统（黑脸短须的大众脸书生，袍子上全是泥，怀里揣着空酒葫芦）递出一张皱巴巴的纸条；周瑜（青袍）接过纸条，南线主角（短寸头，古铜鎏金旧甲，双手空着、不扛大刀）站在一旁",
     "s12_kurou": "南军大帐外的空地上，甘宁（赤膊，腰挂铜铃）背上鞭痕累累却咧嘴冲南线主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，双手空着、不扛大刀）笑；周瑜板着脸站在一旁，手里还拿着鞭子；远处江边十条船上堆满干柴和油",
+    "s12_dongfeng": "夏口江边，冬至前一天的傍晚：陆逊（十八九岁的清秀青年，白袍轻甲）气喘吁吁地指着江面，衣角被突然转向的风吹向西北；主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，双手空着、不扛大刀）和周瑜（二十多岁，俊美，青色锦袍，手里一卷水图）回头看着他；江对岸乌林连成一片的北军船影和营火",
     "s12_lian": "火光冲天的乌林江岸：赵云（白袍银甲）枪尖停在南线主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，手持古锭刀）胸前一寸，手在抖；一个满脸烟灰的北将（夏侯兰，铁面军法官）跪在泥里仰望南线主角；周围的北兵一个个放下了刀",
     "s12_zhui": "天快亮的赤壁江面，到处是烧黑的船板：诸葛亮（白衣，羽扇已经断了）往后仰，落向江水；孙策（红头巾）站在撞过来的船头，伸着手",
     "s12_guan": "江边营门前：赵云（白袍缟素）扶着一口打开的棺木，夏侯兰、张辽、马超人人缟素站在后面；南线主角（短寸头，古铜鎏金旧甲、朱红内衬、纯黑披风，双手扶棺、不扛大刀）俯身看棺材里，棺中躺着北线主角（束发，穿河北风格旧鱼鳞甲，和南线主角长着同一张脸，神情平静，双手空着）",
