@@ -1332,3 +1332,4 @@
 - [ ] 2026-10-24 cg `c3_bad_fuchao` ← c3_bad_fuchao.jpg · ok
 - [ ] 2026-10-24 cg `n7_tianfeng` ← n7_tianfeng.jpg · ok
 - [ ] 2026-10-24 cg `n8_danjing` ← n8_danjing.jpg · ok
+- [x] 2026-10-24 cg `ss_lubu_yuan` ← ss_lubu_yuan.jpg 裁 2528×1696→2528×1422 · ok
