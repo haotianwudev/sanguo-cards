@@ -453,6 +453,7 @@
       "name": "金针度穴",
       "cost": 1,
       "cumulative": true,
+      "special": true,
       "effects": [
         {
           "type": "heal",
@@ -692,7 +693,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 3
+          "rate": 2.5
         },
         {
           "type": "stun",
@@ -708,7 +709,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2.5
+          "rate": 2
         },
         {
           "type": "counter",

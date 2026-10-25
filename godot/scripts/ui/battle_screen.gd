@@ -1361,8 +1361,11 @@ func _sfx_act(ev: Dictionary) -> void:
 
 	var moments: Array = ["ultimate", "attack"] if is_big_move else ["attack"]
 	var kinds: Array = skill.get("effects", []).map(func(e): return str(e.get("type", "")))
-	if "heal" in kinds:
-		moments.push_front("heal")
+	if "heal" in kinds or "cleanse" in kinds:  # 解毒 is a heal too; a heal that is itself a big move (金针度穴) shouts its ultimate line first
+		if _is_ult(skill):
+			moments.insert(1, "heal")
+		else:
+			moments.push_front("heal")
 	elif "guard" in kinds and not "attack" in kinds:  # a defence-only skill (举盾, 守家 …): 「举盾！」, men only
 		moments.push_front("guard")
 	# own voice → the troop's (men only: 枪兵「看枪！」) → the guard voice (men) → the default for the role

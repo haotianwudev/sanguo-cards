@@ -4,7 +4,7 @@ extends Node
 ## Volume is the player option Game.options["sfx_volume"] (0–1; 0 = muted).
 
 const VOICES := 10  # sounds that may overlap (a 3-hit combo plus the enemy's answer)
-const MOMENTS := ["attack", "ultimate", "heal", "roar", "intro", "guard"]  # guard: 防御 / a defence-only skill
+const MOMENTS := ["attack", "ultimate", "heal", "roar", "intro", "guard", "default"]  # guard: 防御 / a defence-only skill; default: any skill moment the profile has no line for (attack / heal / guard / ultimate — never intro / roar)
 
 var _entries: Dictionary = {}
 var voice_defaults: Dictionary = {}  # audio.json voice_defaults: role (lord / strategist / female / male / enemy_*) → profile
@@ -112,6 +112,8 @@ func voice(profiles: Array, moments: Array) -> float:
 	for m in moments:
 		for prof in profiles:
 			var list: Array = _voice_streams.get("%s/%s" % [prof, m], [])
+			if list.is_empty() and m in ["attack", "ultimate", "heal", "guard"]:
+				list = _voice_streams.get("%s/default" % prof, [])
 			if list.is_empty():
 				continue
 			var pl := _players[_next]
@@ -132,7 +134,7 @@ func card_voice(card: Dictionary) -> void:
 	var moments: Array = ["intro", "ultimate", "attack"]
 	for sid in card.get("skills", []):
 		for eff in GameData.get_db().skills.get(sid, {}).get("effects", []):
-			if eff.get("type", "") == "heal":
+			if eff.get("type", "") in ["heal", "cleanse"]:
 				moments = ["intro", "heal", "ultimate", "attack"]
 	if _card_pl != null:
 		_card_pl.stop()

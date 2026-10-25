@@ -1220,6 +1220,7 @@
       "hp": 92,
       "at": 68,
       "skills": [
+        "baozha",
         "hujia"
       ],
       "pool": false
@@ -1916,6 +1917,7 @@
     },
     "zhangning": {
       "name": "张宁·医仙",
+      "voice": "zhangning",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 90,
@@ -2355,6 +2357,7 @@
     },
     "rc_yuxi": {
       "name": "蔡文姬·教字",
+      "voice": "caiwenji",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 94,
@@ -2392,6 +2395,7 @@
     },
     "rc_heishan": {
       "name": "张宁·一起碾药",
+      "voice": "zhangning",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 98,
@@ -2443,6 +2447,7 @@
     },
     "rc_xuzhou": {
       "name": "张宁·除夕香囊",
+      "voice": "zhangning",
       "rarity": "SR",
       "troop": "logistics",
       "hp": 100,

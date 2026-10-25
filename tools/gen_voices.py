@@ -37,7 +37,7 @@ AUDIO_JSON = ROOT / "godot/data/audio.json"
 SRC_DIR = ROOT / "audio_src/voice"  # recordings and reference voices (kept out of godot/ so they don't ship)
 VOICE_DIR = ROOT / "godot/data/audio/voice"
 INDEXTTS_DIR = Path(os.environ.get("INDEXTTS_DIR", "F:/workspace/tts/index-tts"))
-MOMENTS = ("attack", "ultimate", "heal", "roar", "intro", "guard")
+MOMENTS = ("attack", "ultimate", "heal", "roar", "intro", "guard", "default")
 
 
 def voice_lines(data: dict) -> list[tuple[str, str, str, tuple]]:
