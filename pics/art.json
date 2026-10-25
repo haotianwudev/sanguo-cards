@@ -7619,6 +7619,34 @@
     "ss_caocao_tuibing": {
       "src": "source/cg/ss_caocao_tuibing.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "ss_cash": {
+      "src": "source/cg/ss_cash.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_boast": {
+      "src": "source/cg/ss_boast.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_river": {
+      "src": "source/cg/ss_river.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_fame": {
+      "src": "source/cg/ss_fame.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_home": {
+      "src": "source/cg/ss_home.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_rule": {
+      "src": "source/cg/ss_rule.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_news": {
+      "src": "source/cg/ss_news.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

@@ -1578,8 +1578,7 @@ func _pick_then(ids: Array, title: String, kind: String, after: Callable) -> voi
 
 
 func _finish_chapter() -> void:
-	## flags saved, then the interlude and the next chapter's title card, then the next chapter's map
-	var done_id: String = q.get("_raw", q)["id"]
+	## flags saved, then the next chapter's title card, then the next chapter's map
 	var ending: Dictionary = q.get("_raw", q).get("ending", {})
 	if not Game.save.run_records.has(ending.get("title", "")):  # the ending only if this run reached it
 		ending = {}
@@ -1593,9 +1592,8 @@ func _finish_chapter() -> void:
 		return
 	var nxt: Variant = Quests.current_quest(Game.save)
 	var o := InterludeOverlay.new()
-	o.scenes = [] if not ending.is_empty() else Quests.interlude(done_id, Game.save)  # a bad / final end: straight to its card, no between-chapter scenes
 	o.same_chapter = ending.is_empty() and nxt != null and str(nxt["title"]).split(" · ")[0] == str(q["title"]).split(" · ")[0]
-	if o.same_chapter and o.scenes.is_empty():  # still 第三章: just walk on, no chapter card
+	if o.same_chapter:  # still 第三章: just walk on, no chapter card
 		_rebuild_map()
 		_refresh()
 		return

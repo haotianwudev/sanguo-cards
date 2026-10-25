@@ -595,7 +595,6 @@ func demo(name: String) -> void:
 			save.flags = ["董白：留下", "唐姬：护送"]
 			show_screen(TitleScreen.new())
 			var o := InterludeOverlay.new()
-			o.scenes = Quests.interlude("taodong", save)
 			root.add_child(o)
 		"reveal":  # the 入队 overlay: 孙策 and 周瑜 join
 			var m := MapScreen.new()

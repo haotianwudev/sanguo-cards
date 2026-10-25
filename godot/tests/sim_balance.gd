@@ -24,7 +24,7 @@ func _init() -> void:
 	var runs := int(OS.get_environment("SIM_RUNS")) if OS.get_environment("SIM_RUNS") != "" else 10
 	var route := OS.get_environment("SIM_ROUTE") if OS.get_environment("SIM_ROUTE") != "" else "south"
 	if OS.get_environment("SIM_EXPONENT") != "":
-		GameData.get_db().battle["scaling"]["exponent"] = float(OS.get_environment("SIM_EXPONENT"))
+		GameData.get_db().battle["scaling"]["exponent_first"] = float(OS.get_environment("SIM_EXPONENT"))
 	if OS.get_environment("SIM_OFFSET") != "":
 		GameData.get_db().battle["scaling"]["offset"] = float(OS.get_environment("SIM_OFFSET"))
 	if OS.get_environment("SIM_ELITE") != "":
@@ -172,7 +172,7 @@ func _fight(q: Dictionary, s: SaveData, rng: RandomNumberGenerator, fails_here: 
 
 
 func _report(runs: int, route: String) -> void:
-	print("== sim_balance: %s route, %d runs, strength %s exponent %s base %s, %d of %d runs cleared the lap" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["exponent"]), str(GameData.get_db().battle["scaling"]["base"]), finished, runs])
+	print("== sim_balance: %s route, %d runs, strength %s exponent %s base %s, %d of %d runs cleared the lap" % [route, runs, str(GameData.get_db().battle["scaling"]["strength"]), str(GameData.get_db().battle["scaling"]["exponent_first"]), str(GameData.get_db().battle["scaling"]["base"]), finished, runs])
 	var keys := stats.keys()
 	keys.sort()
 	for k in keys:

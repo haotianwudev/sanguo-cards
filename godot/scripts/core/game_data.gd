@@ -31,7 +31,6 @@ var relic_pick: Dictionary  # boss reward: {n, weights by rarity}
 var skill_budget: Dictionary  # what an attack skill of each AP cost should be worth (cards.json skill_budget; checked by the tests)
 var _raw_top: Dictionary = {}
 var fates: Dictionary  # 天命: id -> {id, name, icon, rarity, desc, mods} (one picked per run)
-var interludes: Dictionary  # quest id -> [scenes shown after it: {title, portraits, text, requires, unless}]
 var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 once that chapter is done: {id, title, portraits, text, cg, requires, unless, reward}]
 var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the chapter-end page's picture (its card comes from a ？小故事)
 var side_cost := 10  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
@@ -187,9 +186,6 @@ func _load(dir: String) -> void:
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")
-	if FileAccess.file_exists(dir + "/interludes.json"):
-		var il: Dictionary = read_json(dir + "/interludes.json")
-		interludes = il.get("after", {})
 	if FileAccess.file_exists(dir + "/side_stories.json"):
 		var ss: Dictionary = read_json(dir + "/side_stories.json")
 		side_stories = ss.get("after", {})

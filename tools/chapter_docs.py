@@ -21,7 +21,6 @@ story = json.loads((ROOT / "godot/data/story.json").read_text("utf-8"))
 endings = json.loads((ROOT / "godot/data/endings.json").read_text("utf-8"))["endings"]
 art = json.loads((ROOT / "pics/art.json").read_text("utf-8"))
 side = json.loads((ROOT / "godot/data/side_stories.json").read_text("utf-8"))
-interludes = json.loads((ROOT / "godot/data/interludes.json").read_text("utf-8"))["after"]
 OUT = ROOT / "docs/chapters"
 TYPE = {"event": "剧情", "battle": "战斗", "choose": "选择", "treasure": "宝箱", "recruit": "招募", "recover": "休整", "mystery": "？"}
 
@@ -106,7 +105,7 @@ def side_cg(key, shown):
 
 
 def side_docs(key, qid):
-    ## the chapter-end page CG(s), every ？小故事 that opens after this chapter, and the interlude scenes between it and the next
+    ## the chapter-end page CG(s), every ？小故事 that opens after this chapter
     out, shown = [], set()
     pages = [p for p in side.get("chapters", {}).get(qid, []) if on_route(p, key)]
     stories = [st for st in side.get("after", {}).get(qid, []) if on_route(st, key)]
@@ -126,19 +125,6 @@ def side_docs(key, qid):
         out += ["- " + t for t in st.get("text", [])] + [""]
     if not stories:
         out += ["（这一章之后没有小故事。）", ""]
-    scenes = [sc for sc in interludes.get(qid, []) if on_route(sc, key)]
-    out += ["## 章间过场（%d 段，打完本章、进下一章之前）" % len(scenes), ""]
-    for sc in scenes:
-        out += ["### %s" % sc.get("title", ""), ""]
-        if flags(sc):
-            out += ["*%s*" % flags(sc), ""]
-        if sc.get("portraits"):
-            out += ["立绘：" + "、".join(cname(p) if p in cards else p for p in sc["portraits"]), ""]
-        if sc.get("cg"):
-            out += side_cg(sc["cg"], shown) + [""]
-        out += ["- " + t for t in sc.get("text", [])] + [""]
-    if not scenes:
-        out += ["（没有过场，直接进下一章。）", ""]
     return out
 
 

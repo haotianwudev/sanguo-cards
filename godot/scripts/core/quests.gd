@@ -239,11 +239,17 @@ static func _enemy_power(battle_id: String) -> float:
 
 static func _chapter_power(order: float, qid: String) -> float:
 	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
-	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(order + float(cfg.get("offset", 1.0)), float(cfg["exponent"])) * float(cfg.get("chapter", {}).get(qid, cfg.get("chapter_default", 1.0)))
+	var off := float(cfg.get("offset", 1.0))
+	var last := float(cfg["exponent_chapters"])
+	var power := float(cfg["base"])  # chapter 0's first column; each chapter on multiplies by its own growth
+	for k in range(1, int(order) + 1):
+		var e := lerpf(float(cfg["exponent_first"]), float(cfg["exponent_last"]), minf(float(k), last) / last)  # the exponent eases from first to last
+		power *= pow((k + off) / (k - 1 + off), e)
+	return 1000000.0 * float(cfg["strength"]) * power * float(cfg.get("chapter", {}).get(qid, cfg.get("chapter_default", 1.0)))
 
 
 static func target_power(qid: String, t := 0.0) -> float:
-	## battle.scaling — the one formula, which only sets the overall difficulty: a chapter's first column sits on 1e6 × `strength` × `base` × (chapter order + `offset`)^`exponent`
+	## battle.scaling — the one formula, which only sets the overall difficulty: a chapter's first column sits on 1e6 × `strength` × `base` × the product over the chapters so far of ((k + `offset`) / (k - 1 + `offset`))^exponent_k, the exponent easing from `exponent_first` to `exponent_last`
 	## (× the chapter's coefficient), its last column on the same formula one chapter later, and the columns between them are interpolated (`t` = 0..1 along the chapter),
 	## so a chapter ends where the next one begins (the 序章 climbs too). 0 = no curve for this chapter
 	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
@@ -853,14 +859,6 @@ static func stop_replay(save: SaveData) -> void:
 	if save.replay != "":
 		save.replay = ""
 		save.restore_run()
-
-
-static func interlude(quest_id: String, save: SaveData) -> Array:
-	## The scenes to play after finishing a quest, filtered by the player's story flags.
-	var scenes: Array = GameData.get_db().interludes.get(quest_id, [])
-	return scenes.filter(func(sc):
-		return (not sc.has("requires") or save.flags.has(sc["requires"])) \
-			and not (sc.has("unless") and save.flags.has(sc["unless"])))
 
 
 static func side_stories(save: SaveData, also := "") -> Array:

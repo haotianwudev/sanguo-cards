@@ -863,18 +863,19 @@ func test_beating_a_boss_or_elite_counts_for_merit() -> void:
 	check_eq(s.run_bosses, 1)
 
 
-func test_finished_chapters_leave_story_flags_that_pick_the_interlude() -> void:
+func test_finished_chapters_leave_story_flags_that_pick_the_side_stories() -> void:
 	var q := quest(1)
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	Quests.record(s, "董白：留下")
 	Quests.complete(q, s)
 	check(s.flags.has("董白：留下"))
-	var titles: Array = Quests.interlude("taodong", s).map(func(sc): return sc["title"])
+	var titles: Array = Quests.side_stories(s).map(func(st): return st["title"])
 	check(titles.has("玉玺") and titles.has("单挑") and not titles.has("河边"), str(titles))
 	var s2 := SaveData.create()
 	s2.flags = ["董白：交给袁绍"]
-	var t2: Array = Quests.interlude("taodong", s2).map(func(sc): return sc["title"])
+	s2.quests_cleared = ["taodong"]
+	var t2: Array = Quests.side_stories(s2).map(func(st): return st["title"])
 	check(t2.has("河边") and not t2.has("单挑"), str(t2))
 	Quests.begin(quest(0), s)
 	check(s.flags.has("董白：留下"), "flags outlive a new run")
@@ -1443,7 +1444,7 @@ func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
 
 
 func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
-	## battle.scaling: a chapter's first column sits on strength × base × (N + offset)^exponent, its last column on the same formula one chapter later and the
+	## battle.scaling: a chapter's first column sits on strength × base × the chapters' growth so far (exponent easing first → last), its last column on the same formula one chapter later and the
 	## columns between are interpolated, so no later column is easier than an earlier one on a route and a chapter ends where the next one begins
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
@@ -1452,7 +1453,11 @@ func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
 		var qid: String = q["id"]
 		if not cfg["order"].has(qid):
 			continue
-		check(absf(Quests.target_power(qid, 0.0) - 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(float(cfg["order"][qid]) + float(cfg["offset"]), float(cfg["exponent"])) * float(cfg["chapter"].get(qid, cfg["chapter_default"]))) < 1.0, "%s starts on the formula" % qid)
+		var want := float(cfg["base"])
+		for k in range(1, int(cfg["order"][qid]) + 1):
+			want *= pow((k + float(cfg["offset"])) / (k - 1 + float(cfg["offset"])), lerpf(float(cfg["exponent_first"]), float(cfg["exponent_last"]), minf(float(k), float(cfg["exponent_chapters"])) / float(cfg["exponent_chapters"])))
+		want *= 1000000.0 * float(cfg["strength"]) * float(cfg["chapter"].get(qid, cfg["chapter_default"]))
+		check(absf(Quests.target_power(qid, 0.0) - want) < 1.0, "%s starts on the formula" % qid)
 		check(Quests.target_power(qid, 0.5) >= Quests.target_power(qid, 0.0) and Quests.target_power(qid, 1.0) >= Quests.target_power(qid, 0.5), "%s never gets easier along the chapter" % qid)
 	for route in by_route:
 		for i in range(1, route.size()):
@@ -1897,7 +1902,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	s.flags = ["出生：江东富春"]
 	check(Quests.side_stories(s).is_empty(), "nothing before a chapter is done")
 	var south := Quests.side_stories(s, "prologue")
-	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine"]), "the south birth gets only the south prologue stories")
+	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine", "s_i_sewing"]), "the south birth gets only the south prologue stories")
 	s.quests_cleared = ["prologue"]
 	s.grant_card("sunce")
 	s.merit = 9
