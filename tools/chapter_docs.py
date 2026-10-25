@@ -59,11 +59,33 @@ def as_list(v):
     return v if isinstance(v, list) else [v] if v else []
 
 
+def _prologue_records():
+    ## which lines each birth's half of 第一章 records (south x ≤ 22, north x ≥ 23)
+    q = next(x for x in story["quests"] if x["id"] == "prologue")
+    rec = {"s": set(), "n": set()}
+    for s in q["squares"].values():
+        side_ = "n" if s.get("x", 0) >= 23 else "s"
+        for f in ("record", "record_win", "record_lose"):
+            if s.get(f):
+                rec[side_].add(s[f])
+        for o in s.get("choose", []):
+            if o.get("record"):
+                rec[side_].add(o["record"])
+    return rec
+
+
+PROLOGUE_REC = _prologue_records()
+
+
 def on_route(entry, key):
-    ## 第一章 is one quest for both births: a south-only entry needs 江东富春 or excludes 冀州无极, a north-only one the reverse
+    ## 第一章 is one quest for both births: a south-only entry needs 江东富春 or excludes 冀州无极 (or needs a line only the
+    ## south half records, e.g. 「定计：孙策正面强攻」), a north-only one the reverse; an event may also say "route"
     req, unl = as_list(entry.get("requires")), as_list(entry.get("unless"))
-    north = "出生：冀州无极" in req or "出生：江东富春" in unl
-    south = "出生：江东富春" in req or "出生：冀州无极" in unl
+    births = {"出生：冀州无极", "出生：江东富春"}  # recorded on the shared birth square, not one half's own lines
+    only_s = PROLOGUE_REC["s"] - PROLOGUE_REC["n"] - births
+    only_n = PROLOGUE_REC["n"] - PROLOGUE_REC["s"] - births
+    north = "出生：冀州无极" in req or "出生：江东富春" in unl or any(r in only_n for r in req) or entry.get("route") == "north"
+    south = "出生：江东富春" in req or "出生：冀州无极" in unl or any(r in only_s for r in req) or entry.get("route") == "south"
     return not (key == "prologue_s" and north or key == "prologue_n" and south)
 
 
@@ -75,19 +97,22 @@ def reward_text(r):
     return "；".join(out) or "⚠ 没写奖励"
 
 
-def side_cg(key):
+def side_cg(key, shown):
+    if key in shown:  # the page CG is usually also the story's picture: list its prompt once
+        return ["- `%s`（同上）" % key]
+    shown.add(key)
     scene = AP.OVERRIDES.get(key) or AP.CGS.get(key)
     return cg_block(key, scene if isinstance(scene, str) else None)
 
 
 def side_docs(key, qid):
     ## the chapter-end page CG(s), every ？小故事 that opens after this chapter, and the interlude scenes between it and the next
-    out = []
+    out, shown = [], set()
     pages = [p for p in side.get("chapters", {}).get(qid, []) if on_route(p, key)]
     stories = [st for st in side.get("after", {}).get(qid, []) if on_route(st, key)]
     out += ["## 章末页与 ？小故事（%d 篇）" % len(stories), ""]
     for p in pages:
-        out += ["**章末页 CG**" + ("（%s）" % flags(p) if flags(p) else "") + "：", ""] + side_cg(p["cg"]) + [""]
+        out += ["**章末页 CG**" + ("（%s）" % flags(p) if flags(p) else "") + "：", ""] + side_cg(p["cg"], shown) + [""]
     for st in stories:
         out += ["### ？「%s」`%s`" % (st.get("title", ""), st["id"]), ""]
         meta = ["价格：%d 战功" % st.get("cost", side.get("cost", 0)), "奖励：" + reward_text(st.get("reward", {}))]
@@ -97,7 +122,7 @@ def side_docs(key, qid):
         if st.get("portraits"):
             out += ["立绘：" + "、".join(cname(p) if p in cards else p for p in st["portraits"]), ""]
         if st.get("cg"):
-            out += side_cg(st["cg"]) + [""]
+            out += side_cg(st["cg"], shown) + [""]
         out += ["- " + t for t in st.get("text", [])] + [""]
     if not stories:
         out += ["（这一章之后没有小故事。）", ""]
@@ -110,7 +135,7 @@ def side_docs(key, qid):
         if sc.get("portraits"):
             out += ["立绘：" + "、".join(cname(p) if p in cards else p for p in sc["portraits"]), ""]
         if sc.get("cg"):
-            out += side_cg(sc["cg"]) + [""]
+            out += side_cg(sc["cg"], shown) + [""]
         out += ["- " + t for t in sc.get("text", [])] + [""]
     if not scenes:
         out += ["（没有过场，直接进下一章。）", ""]
@@ -215,7 +240,7 @@ def chapter_doc(key, q, xr, route):
         out.append("- **%s** `%s`：血 %s / 攻 %s / 行动 %s；%s" % (e.get("name"), en, hp, at, e.get("actions"), "、".join(mv)))
     out.append("")
     # ---- events ----
-    own = {eid: ev for eid, ev in story["events"].items() if ev.get("scope") == q["id"]}
+    own = {eid: ev for eid, ev in story["events"].items() if ev.get("scope") == q["id"] and on_route(ev, key)}
     out += ["## 本章专属 ？ 事件（%d）" % len(own), ""]
     for eid, ev in own.items():
         out += ["### %s `%s`" % (ev.get("title", eid), eid), "", "> " + ev.get("prompt", ""), ""] + ["- " + t for t in ev.get("text", [])]
