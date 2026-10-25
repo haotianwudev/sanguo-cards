@@ -1328,4 +1328,7 @@
 - [x] 2026-10-24 cg `ss_chitu` ← ss_chitu.jpg · ok
 - [x] 2026-10-24 cg `ss_liuxiang` ← ss_liuxiang.jpg · ok
 - [x] 2026-10-24 cg `ss_xunang` ← ss_xunang.jpg · ok
+- [ ] 2026-10-24 cg `n7_tiqin` ← n7_tiqin.jpg · ok
 - [ ] 2026-10-24 cg `c3_bad_fuchao` ← c3_bad_fuchao.jpg · ok
+- [ ] 2026-10-24 cg `n7_tianfeng` ← n7_tianfeng.jpg · ok
+- [ ] 2026-10-24 cg `n8_danjing` ← n8_danjing.jpg · ok

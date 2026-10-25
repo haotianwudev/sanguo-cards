@@ -7568,8 +7568,20 @@
       "src": "source/cg/ss_xunang.jpg",
       "license": "用户提供（Gemini 生成）"
     },
+    "n7_tiqin": {
+      "src": "source/cg/n7_tiqin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
     "c3_bad_fuchao": {
       "src": "source/cg/c3_bad_fuchao.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_tianfeng": {
+      "src": "source/cg/n7_tianfeng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_danjing": {
+      "src": "source/cg/n8_danjing.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
