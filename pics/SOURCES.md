@@ -1330,3 +1330,16 @@
 | `cg:ss_chitu` | source/cg/ss_chitu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_liuxiang` | source/cg/ss_liuxiang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_xunang` | source/cg/ss_xunang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_tiqin` | source/cg/n7_tiqin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c3_bad_fuchao` | source/cg/c3_bad_fuchao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_tianfeng` | source/cg/n7_tianfeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n8_danjing` | source/cg/n8_danjing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n10_yujin` | source/cg/n10_yujin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c6_xuhuang` | source/cg/c6_xuhuang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c9_weiyan` | source/cg/c9_weiyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c12_xiangjin` | source/cg/c12_xiangjin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c11_xiongxun` | source/cg/c11_xiongxun.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_lubu_yuan` | source/cg/ss_lubu_yuan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:s12_dongfeng` | source/cg/s12_dongfeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_lubu_xuzhou` | source/cg/ss_lubu_xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_caocao_tuibing` | source/cg/ss_caocao_tuibing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

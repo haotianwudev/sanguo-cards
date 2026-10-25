@@ -1328,8 +1328,18 @@
 - [x] 2026-10-24 cg `ss_chitu` ← ss_chitu.jpg · ok
 - [x] 2026-10-24 cg `ss_liuxiang` ← ss_liuxiang.jpg · ok
 - [x] 2026-10-24 cg `ss_xunang` ← ss_xunang.jpg · ok
-- [ ] 2026-10-24 cg `n7_tiqin` ← n7_tiqin.jpg · ok
-- [ ] 2026-10-24 cg `c3_bad_fuchao` ← c3_bad_fuchao.jpg · ok
-- [ ] 2026-10-24 cg `n7_tianfeng` ← n7_tianfeng.jpg · ok
-- [ ] 2026-10-24 cg `n8_danjing` ← n8_danjing.jpg · ok
+- [x] 2026-10-24 cg `n7_tiqin` ← n7_tiqin.jpg · ok
+- [x] 2026-10-24 cg `c3_bad_fuchao` ← c3_bad_fuchao.jpg · ok
+- [x] 2026-10-24 cg `n7_tianfeng` ← n7_tianfeng.jpg · ok
+- [x] 2026-10-24 cg `n8_danjing` ← n8_danjing.jpg · ok
+- [x] 2026-10-24 cg `n10_yujin` ← n10_yujin.jpg · ok
+- [x] 2026-10-24 cg `c6_xuhuang` ← c6_xuhuang.jpg · ok
+- [x] 2026-10-24 cg `jz_county` ← jz_county_new2.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `c9_weiyan` ← c9_weiyan.jpg · ok
+- [x] 2026-10-24 cg `jz_county` ← jz_county_new6.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `c12_xiangjin` ← c12_xiangjin.jpg · ok
+- [x] 2026-10-24 cg `c11_xiongxun` ← c11_xiongxun.jpg · ok
 - [x] 2026-10-24 cg `ss_lubu_yuan` ← ss_lubu_yuan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `s12_dongfeng` ← s12_dongfeng.jpg · ok
+- [x] 2026-10-24 cg `ss_lubu_xuzhou` ← ss_lubu_xuzhou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `ss_caocao_tuibing` ← ss_caocao_tuibing.jpg 裁 2528×1696→2528×1422 · ok
