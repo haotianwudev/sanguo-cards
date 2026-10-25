@@ -1344,3 +1344,5 @@
 - [x] 2026-10-24 cg `ss_lubu_xuzhou` ← ss_lubu_xuzhou.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-24 cg `ss_caocao_tuibing` ← ss_caocao_tuibing.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-25 portrait `zhenfu_yahuan` ← zhenfu_yahuan.jpg · ok
+- [x] 2026-10-25 cg `c3_yudu` ← c3_yudu.jpg 裁 2528×1696→2528×1422 · ok；按立绘重画（于毒、张燕、主角全部照参考图）
+- [x] 2026-10-25 cg `c3_zhangyan_meet` ← c3_zhangyan_meet.jpg 裁 2528×1696→2528×1422 · ok；加上张宁，张燕抱拳落地
