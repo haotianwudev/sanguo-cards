@@ -389,9 +389,12 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 	return float(wins) / n
 
 
+const START_LINEUP := [["sunce", "zhouyu"], ["zhaoyun", "guojia", "xiahoulan"]]  # who walks into the prologue: the south / north birth's own people (the curve starts at 0.4 and climbs to 3.9, so it is meant for a party with its lead generals)
+
+
 func test_chapter_one_is_winnable_with_either_plan() -> void:
 	for pick in 2:  # south / north share one coefficient (battle.scaling.chapter.prologue): 主公的大招每场只一次，所以第一章比以前容易
-		check_between(rate(0, [], pick, -1, 100), 0.35, 1.01, "pick %d" % pick)
+		check_between(rate(0, START_LINEUP[pick], pick, -1, 100), 0.35, 1.01, "pick %d" % pick)
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:
@@ -399,6 +402,7 @@ func campaign_rate(pick: int, fork: int, n := 60) -> float:
 	var wins := 0
 	for seed_value in n:
 		var s := SaveData.create()
+		s.owned = START_LINEUP[pick].duplicate()
 		if play_quest(quest(0), s, pick, -1, seed_value) and play_quest(quest(1), s, 0, fork, seed_value + 1000):
 			wins += 1
 	return float(wins) / n
@@ -2289,4 +2293,3 @@ func test_south_last_page_is_the_hero_and_his_lord_card() -> void:
 	s.merit = 10
 	Quests.open_side(s, "s_rc_luoyang_s")
 	check(s.lord_forms.has("lord_south_river"), "洛水夜船 hands over the lord card 主公·洛水夜船")
-
