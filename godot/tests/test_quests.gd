@@ -1367,30 +1367,26 @@ func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
 
 
 func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
-	## battle.scaling: each chapter's ordinary / elite / boss fights are pulled to strength × base × (N + offset)^exponent × tier, so by construction
-	## no later chapter is easier, no elite is easier than the ordinary fights, no boss than the elites (吕布's showpieces are left alone)
+	## battle.scaling: a chapter's first column sits on strength × base × (N + offset)^exponent, its last column on the same formula one chapter later and the
+	## columns between are interpolated, so no later column is easier than an earlier one on a route and a chapter ends where the next one begins
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
 	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang", "sanfang", "tianqing", "guandu"]]
 	for q in db.quests:
-		var base: Dictionary = Quests._power_base(q)
-		for tier in ["normal", "elite", "boss"]:
-			if base[tier] <= 0.0:
-				continue
-			var k := Quests._scale_for(tier, base[tier], base[tier], q["id"])
-			check(absf(base[tier] * k * k - Quests.target_power(q["id"], tier)) < 0.001 * Quests.target_power(q["id"], tier), "%s %s median sits on the target" % [q["id"], tier])
-		if base["elite"] > 0.0:
-			check(Quests.target_power(q["id"], "elite") * pow(float(db.battle["enemy_coef"]["elite"]), 2) > Quests.target_power(q["id"], "normal") * pow(float(db.battle["enemy_coef"]["normal"]), 2), "%s: elites above ordinary" % q["id"])
-		if base["boss"] > 0.0 and base["elite"] > 0.0:
-			check(Quests.target_power(q["id"], "boss") * pow(float(db.battle["enemy_coef"]["boss"]), 2) > Quests.target_power(q["id"], "elite") * pow(float(db.battle["enemy_coef"]["elite"]), 2), "%s: bosses above elites" % q["id"])
+		var qid: String = q["id"]
+		if not cfg["order"].has(qid):
+			continue
+		check(absf(Quests.target_power(qid, 0.0) - 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(float(cfg["order"][qid]) + float(cfg["offset"]), float(cfg["exponent"])) * float(cfg["chapter"].get(qid, cfg["chapter_default"]))) < 1.0, "%s starts on the formula" % qid)
+		check(Quests.target_power(qid, 0.5) >= Quests.target_power(qid, 0.0) and Quests.target_power(qid, 1.0) >= Quests.target_power(qid, 0.5), "%s never gets easier along the chapter" % qid)
 	for route in by_route:
 		for i in range(1, route.size()):
-			for tier in ["normal", "elite", "boss"]:
-				check(Quests.target_power(route[i], tier) >= Quests.target_power(route[i - 1], tier), "%s %s is not easier than %s" % [route[i], tier, route[i - 1]])
-	var weak := Quests._scale_for("normal", 1.0, 1.0, "yuxi")
-	var strong := 0.0
+			check(Quests.target_power(route[i], 0.0) >= Quests.target_power(route[i - 1], 0.0), "%s is not easier than %s" % [route[i], route[i - 1]])
+			if route[i - 1] != "prologue" and cfg["chapter"].get(route[i], cfg["chapter_default"]) == cfg["chapter"].get(route[i - 1], cfg["chapter_default"]) and cfg["order"][route[i]] == cfg["order"][route[i - 1]] + 1:
+				check(absf(Quests.target_power(route[i - 1], 1.0) - Quests.target_power(route[i], 0.0)) < 1.0, "%s ends where %s begins" % [route[i - 1], route[i]])
+	check(Quests.target_power("yuxi", 0.0) > Quests.target_power("taodong", 1.0) - 1.0, "chapter 3 opens no easier than chapter 2 ends")
+	var weak := Quests._scale_for("yuxi", 0.0, 1.0)
 	cfg["strength"] = float(cfg["strength"]) * 2.0  # the one knob moves everything together
-	strong = Quests._scale_for("normal", 1.0, 1.0, "yuxi")
+	var strong := Quests._scale_for("yuxi", 0.0, 1.0)
 	cfg["strength"] = float(cfg["strength"]) / 2.0
 	check(absf(strong / weak - sqrt(2.0)) < 0.001, "strength x2 = power x2 (hp and attack x sqrt 2)")
 

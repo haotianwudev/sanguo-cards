@@ -58,8 +58,30 @@ SIM_RUNS=40 SIM_LAPS=2 SIM_GIVEUP=3 SIM_ROUTE=south \
 
 ## 4. 敌人强度只调一个旋钮
 
-`cards.json → battle.scaling`：目标强度（血×攻×行动数）= `1e6 × strength × base × growth^N × tier`（精英 ×2、首领 ×3），N 取 `order`；每章每档的中位数被拉到目标，敌人间相对强弱仍随卡牌；章内 `in_chapter` 0.9→1.1。**日常只改 `strength`**（或同比改 `base`）；`growth` 是曲线斜率，后面章节整体偏难 / 偏易时才动。`late_growth` 默认 1（关）。战斗手感 `battle.attack_mult` / `hp_mult`（双方同时生效，乘起来 1.0 时强度对比不变，战斗更短更起伏）；`crit`（暴击）、`ambush_chance`（埋伏）、`event_random`（？事件纯随机）也都在 `battle` 里。
+`battle.json → battle.scaling`：目标强度（血×攻×行动数）= `1e6 × strength × base × (N + offset)^exponent × 章系数`，N 取 `order`；一章的第一列落在第 N 章、最后一列落在第 N+1 章，中间线性插值，每场普通战斗直接对准这条线（不随卡牌），精英 / 首领 / 必败再乘 `enemy_coef`。**日常只改 `strength`**（或 `chapter_default`）；`exponent` 是曲线斜率，后面章节整体偏难 / 偏易时才动。
 一周目通关率目标 ≈ 80%：用上面的模拟扫 `SIM_STRENGTH`（0.5 / 1 / 1.5 / 2 / 3）看曲线，再把选定的值折进 `base`，保持 `strength = 1.0`。
+
+### 怎么校准整条难度曲线（用户给「某章开头多少」时）
+
+曲线是一条幂函数：**第 N 章开头的强度 = `base × (N + offset)^exponent`**（`strength` 与 `chapter_default` 保持 1，不要用它们凑数），第 N 章最后一列 = 第 N+1 章开头，章内线性插值。N 是 `order`：序章 / 第一章 = 0，第二章 = 1，第三章 = 2……（南北线同序）。强度单位是 1e6，所以「第三章开头 8」就是 `curve(2) = 8`。
+
+用户一般会给三个数：一个指数、一个起点、一个远点。三个参数刚好对上：
+
+1. 记 `exponent = e`，起点 `curve(0) = a`，远点 `curve(m) = b`（m 是那一章的序号）。
+2. `offset = m / ((b / a)^(1/e) − 1)`，`base = a / offset^e`。
+3. 用下面这段脚本把每章的开头列出来，**先给用户看表确认，再改文件**：
+
+```python
+e, a, m, b = 1.4, 0.4, 2, 8          # 用户给的
+r = (b / a) ** (1 / e); o = m / (r - 1); k = a / o ** e
+print("offset=%.3f base=%.2f" % (o, k), [round(k * (n + o) ** e, 1) for n in range(13)])   # 第 1..13 章开头
+```
+
+- 用户给的是「几个章节的边界值」而不是指数时：幂函数只有三个参数，增量只会越来越大，**拟合不出先加快再放缓的 S 形**；扫 `(exponent, offset)`，每组把 `base` 取成最小二乘（或用两端点定 `base`）选误差最小的，再把算出来的整张表（第一章到第十二章）给用户看，后期往往会变陡，要和用户确认。
+- 改 `battle.json → scaling` 的 `base` / `exponent` / `offset`，`chapter_default` 设 1，`chapter` 留空，同时更新那里的注释和 `sanguo-dev` 里「敌人强度系统」一段写的数字。
+- 精英 / 首领 / 必败不在这条曲线里，在 `enemy_coef`（1.25 / 1.45 / 2）。
+- 每场普通战斗**直接对准曲线**（不随卡牌），所以同一列的小兵强度一样；曲线数字就是真实的强度，用战斗里的血 × 攻 × 行动数核对。
+- 曲线整体一变，机器人模拟的通关率会变：`test_chapter_one_is_winnable_with_either_plan`（0.35 起）和 `test_dongzhuo_chapter_is_fair_after_chapter_one`（0.2 起）会随第一章末尾强度变化而掉到 0；这是难度改了，不是 bug。先问用户要不要放宽这两条的下限，别自己改。
 
 ## 5. 写新测试的习惯
 

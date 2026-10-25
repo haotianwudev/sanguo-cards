@@ -231,61 +231,44 @@ static func ramp(save: SaveData) -> float:
 	return chapters * float(db.battle.get("chapter_step", 0.0)) + (save.effective_level() - 1) * float(db.battle.get("ending_step", 0.0))
 
 
-static var _power_cache := {}  # quest id -> {tier: median power of that tier's fights in the quest}
-
-
 static func _enemy_power(battle_id: String) -> float:
 	var db := GameData.get_db()
 	var e: Dictionary = db.enemies[db.scenarios[battle_id]["enemy"]]
 	return float(e["hp"]) * float(e["at"]) * float(e["actions"])
 
 
-static func _position_scale(q: Dictionary, x: int) -> float:
-	## battle.scaling.in_chapter: a fight gets tougher along the chapter, linearly from `start` (first column) to `end` (last column)
-	var raw: Dictionary = q.get("_raw", q)
-	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {}).get("in_chapter", {})
-	if cfg.is_empty() or raw["id"] in cfg.get("except", []):
-		return 1.0
-	var max_x := 1
-	for s in raw["squares"].values():
-		max_x = maxi(max_x, int(s["x"]))
-	return lerpf(float(cfg["start"]), float(cfg["end"]), clampf(float(x) / float(max_x), 0.0, 1.0))
+static func _chapter_power(order: float, qid: String) -> float:
+	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
+	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(order + float(cfg.get("offset", 1.0)), float(cfg["exponent"])) * float(cfg.get("chapter", {}).get(qid, cfg.get("chapter_default", 1.0)))
 
 
-static func target_power(qid: String, tier: String) -> float:
-	## battle.scaling — the one formula: a chapter's ordinary fights aim at 1e6 × `strength` × `base` × (chapter order + `offset`)^`exponent`; an elite aims at
-	## tier.elite (2) × that, a boss at tier.boss (3) ×. `strength` is the only knob; 0 = no curve for this chapter
+static func target_power(qid: String, t := 0.0) -> float:
+	## battle.scaling — the one formula, which only sets the overall difficulty: a chapter's first column sits on 1e6 × `strength` × `base` × (chapter order + `offset`)^`exponent`
+	## (× the chapter's coefficient), its last column on the same formula one chapter later, and the columns between them are interpolated (`t` = 0..1 along the chapter),
+	## so a chapter ends where the next one begins (the 序章 climbs too). 0 = no curve for this chapter
 	var cfg: Dictionary = GameData.get_db().battle.get("scaling", {})
 	if not cfg.get("order", {}).has(qid):
 		return 0.0
 	var n := float(cfg["order"][qid])
-	return 1000000.0 * float(cfg["strength"]) * float(cfg["base"]) * pow(n + float(cfg.get("offset", 1.0)), float(cfg["exponent"])) * float(cfg["tier"].get(tier, 1.0)) * float(cfg.get("chapter", {}).get(qid, cfg.get("chapter_default", 1.0)))
+	return lerpf(_chapter_power(n, qid), _chapter_power(n + 1.0, qid), clampf(t, 0.0, 1.0))
 
 
-static func _scale_for(tier: String, own: float, tier_median: float, qid: String, pos := 1.0) -> float:
-	## the multiplier on an enemy's hp and attack (power goes with its square): the tier's median in this chapter is pulled to the target,
-	## every enemy keeps its own strength relative to that median (「随卡牌」); then the in-chapter position
-	var target := target_power(qid, tier)
-	if target <= 0.0 or tier_median <= 0.0:
-		return pos
-	return sqrt(target / tier_median) * pos
-
-
-static func _power_base(q: Dictionary) -> Dictionary:
+static func _position_t(q: Dictionary, x: int) -> float:
+	## how far along the chapter column `x` is, 0 (first column) .. 1 (last)
 	var raw: Dictionary = q.get("_raw", q)
-	if _power_cache.has(raw["id"]):
-		return _power_cache[raw["id"]]
-	var by_tier := {"normal": [], "elite": [], "boss": []}
+	var max_x := 1
 	for s in raw["squares"].values():
-		if s["type"] == "battle" and s["battle"] != "" and (s["lose_goto"] == "" or s["beatable"]):
-			by_tier["boss" if s["boss"] else ("elite" if s["elite"] else "normal")].append(_enemy_power(s["battle"]))
-	var out := {}
-	for tier in by_tier:
-		var v: Array = by_tier[tier]
-		v.sort()
-		out[tier] = v[v.size() / 2] if not v.is_empty() else 0.0
-	_power_cache[raw["id"]] = out
-	return out
+		max_x = maxi(max_x, int(s["x"]))
+	return clampf(float(x) / float(max_x), 0.0, 1.0)
+
+
+static func _scale_for(qid: String, t: float, own: float) -> float:
+	## the multiplier on an enemy's hp and attack (power goes with its square) that puts its strength (hp × attack × actions) on the curve at this column: the card
+	## itself and the tier (battle.enemy_coef, applied on top) are not part of the formula
+	var target := target_power(qid, t)
+	if target <= 0.0 or own <= 0.0:
+		return 1.0
+	return sqrt(target / own)
 
 
 static func _is_lose_fight(sq: Dictionary, foe_card: String) -> bool:
@@ -316,7 +299,7 @@ static func enemy_scales(save: SaveData) -> Array:
 			var lc := float(coef.get("lose", 1.0))
 			return [lc, sqrt(lc)]
 		var c := float(coef.get(tier, 1.0))
-		var base := _scale_for(tier, _enemy_power(bid), _power_base(q)[tier], q["id"], _position_scale(q, int(sq["x"])))
+		var base := _scale_for(q["id"], _position_t(q, int(sq["x"])), _enemy_power(bid))
 		return [base * c, base * c]  # hp and attack both take the tier coefficient: 精英 / 首领 hit as hard as they are tough
 	return [1.0, 1.0]
 

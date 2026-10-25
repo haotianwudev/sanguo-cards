@@ -172,7 +172,7 @@
   "zhenfu_chuniang": {"file": "zhenfu_chuniang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhenfu_jiading": {"file": "zhenfu_jiading.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhenfu_xiunv": {"file": "zhenfu_xiunv.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "zhenfu_yahuan": {"file": "zhenfu_yahuan.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "zhenfu_yahuan": {"file": "zhenfu_yahuan.jpg", "face": [0.52, 0.3], "head": 0.2},
   "bashu_qiang": {"file": "bashu_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "bingzhou_qiang": {"file": "bingzhou_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "changshan_qiang": {"file": "changshan_qiang.jpg", "face": [0.5, 0.22], "head": 0.22},
