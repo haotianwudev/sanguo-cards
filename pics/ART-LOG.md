@@ -1328,3 +1328,4 @@
 - [x] 2026-10-24 cg `ss_chitu` ← ss_chitu.jpg · ok
 - [x] 2026-10-24 cg `ss_liuxiang` ← ss_liuxiang.jpg · ok
 - [x] 2026-10-24 cg `ss_xunang` ← ss_xunang.jpg · ok
+- [ ] 2026-10-24 cg `c3_bad_fuchao` ← c3_bad_fuchao.jpg · ok

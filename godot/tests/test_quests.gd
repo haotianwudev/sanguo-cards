@@ -1807,6 +1807,17 @@ func test_heishan_louluo_is_the_north_routes_own_soldier() -> void:
 	check(not s.chest_pools("yecheng")["public"]["soldier"].any(func(c): return c["id"] == "zheng_daoshou"), "郑家刀手 stays with 第四章")
 
 
+func test_a_bad_end_lists_no_side_stories() -> void:
+	## 结局二 · 覆巢 closes the 周目: the chapter it ended is in quests_cleared, but its ？小故事 wait for the next 周目
+	var s := SaveData.create()
+	s.flags = ["出生：冀州无极", "北线：班师冀州"]
+	s.quests_cleared = ["prologue", "luoyang_n"]
+	s.run_records = ["张宁：没救", "结局二 · 覆巢"]
+	Quests.complete(GameData.get_db().quests.filter(func(x): return x["id"] == "heishan")[0], s)
+	check(s.ended, "the bad end closed the 周目")
+	check(Quests.side_stories(s).is_empty(), "no ？小故事 after a bad end: %s" % [Quests.side_stories(s).map(func(x): return x["id"])])
+
+
 func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> void:
 	var db := GameData.get_db()
 	check(db.side_stories.size() >= 20, "every chapter has ？小故事")

@@ -885,6 +885,8 @@ static func side_stories(save: SaveData, also := "") -> Array:
 	## the chapter just finished (`also` on its end page, else the last chapter cleared — so through the next chapter's 整备).
 	## Each comes back with "quest", "read" (opened this 周目: free to read again, no second reward) and "seen" (read in some 周目).
 	var db := GameData.get_db()
+	if save.ended and save.replay == "":  # an ending closed this 周目: its stories wait for the next one
+		return []
 	var now := also if also != "" else (str(save.quests_cleared[-1]) if not save.quests_cleared.is_empty() else "")
 	var have: Array = save.flags + save.run_records
 	var out: Array = []
