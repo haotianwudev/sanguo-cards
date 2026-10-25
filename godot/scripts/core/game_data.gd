@@ -182,7 +182,7 @@ func _load(dir: String) -> void:
 		events[eid] = {"id": eid, "title": ev["title"], "glyph": ev.get("glyph", "？"), "color": ev.get("color", "blue"),
 			"text": ev.get("text", []), "cg": ev.get("cg", ""), "prompt": ev.get("prompt", ""), "scope": ev.get("scope", "south"), "route": ev.get("route", ""),
 			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
-				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", []), "needs": o.get("needs", {})})}
+				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", []), "needs": o.get("needs", {}), "weight": float(o.get("weight", 1.0))})}
 	_index_card_chapters()
 	Quests.validate(self)
 

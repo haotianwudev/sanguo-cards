@@ -123,6 +123,14 @@ func test_failing_steps_back_one_square() -> void:
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["zy_lure"])
 
 
+func test_every_event_colour_is_in_the_palette() -> void:
+	## the map paints a dealt ？ square in its event's colour via Kit.c — a name the theme lacks ("yellow") crashed the map
+	var pal: Dictionary = Kit.pal()
+	for eid in GameData.get_db().events:
+		var col := str(GameData.get_db().events[eid].get("color", "blue"))
+		check(pal.has(col), "event %s: colour %s is not in the palette" % [eid, col])
+
+
 func test_every_event_option_resolves_or_leads_somewhere() -> void:
 	var q := quest(0)
 	var all: Array = []
@@ -198,7 +206,7 @@ func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
 	check(s2.carry_extra.is_empty() and s2.damage == 100, "skills reset, HP untouched")
 
 
-func test_poison_costs_a_third_of_the_hp() -> void:
+func test_poison_costs_the_configured_share_of_the_hp() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
 	Quests.begin(q, s)
@@ -206,7 +214,75 @@ func test_poison_costs_a_third_of_the_hp() -> void:
 	s.resolved = false
 	s.events = {"road": "snake"}
 	Quests.choose_event(q, s, rng(0), 1)  # squeeze the venom out yourself: always poisoned
-	check_eq(s.damage, int(round(Quests.party_max(s) / 3.0)))
+	check_eq(s.damage, int(round(Quests.party_max(s) * float(GameData.get_db().battle["event_scale"]["poison"]))))
+
+
+func test_events_can_lower_difficulty_danger_and_merit_but_not_past_the_floor() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	var floor_lvl := int(GameData.get_db().battle["difficulty_min"])
+	for _n in 5:
+		Quests._apply([{"difficulty": -1}, {"danger": -1}, {"merit": -3}], q, s, rng(0))
+	check_eq(s.difficulty, floor_lvl, "难度 stops at difficulty_min")
+	check_eq(s.danger, 0, "险 never goes negative")
+	check_eq(s.merit, 0, "战功 never goes negative")
+	Quests._apply([{"difficulty": 2}, {"danger": 1}, {"merit": 5}], q, s, rng(0))
+	check_eq(s.difficulty, floor_lvl + 2)
+	check_eq(s.danger, 1)
+	check_eq(s.merit, 5)
+
+
+func test_events_can_change_the_fate_drop_a_tier_and_set_every_ambush() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	var db := GameData.get_db()
+	s.fate = db.fates.keys()[0]
+	Quests._apply([{"fate": "curse"}], q, s, rng(0))
+	check_eq(db.fates[s.fate]["rarity"], "curse", "a cursed 天命")
+	var cursed := s.fate
+	Quests._apply([{"fate": "good"}], q, s, rng(0))
+	check(s.fate != cursed and db.fates[s.fate]["rarity"] in ["common", "rare"], "a good 天命 replaces it")
+	Quests._apply([{"fate": "bad"}], q, s, rng(0))
+	check_eq(db.fates[s.fate]["rarity"], "bad", "a 凶 天命")
+	for seed_value in 30:
+		var t := SaveData.create()
+		Quests.begin(q, t, rng(seed_value))
+		check(t.fate_offer.all(func(f): return not db.fates[f]["rarity"] in ["bad", "divine"]), "凶 / 天授 天命 are never offered at the start")
+	Quests._apply([{"fate": "divine"}], q, s, rng(0))
+	check_eq(db.fates[s.fate]["rarity"], "divine", "a 天授 天命")
+	for seed_value in 30:
+		Quests._apply([{"fate": true}], q, s, rng(seed_value))
+		check(db.fates[s.fate]["rarity"] != "divine", "a plain 改命 never lands on 天授")
+	var opts: Array = db.events["fate_shift"]["options"]
+	check(opts.any(func(o): return o["weight"] < 1.0), "an option's weight survives loading (天命所归 is the rare one)")
+	var cid: String = db.cards.values().filter(func(c): return not c["soldier"] and c.get("person", "") != "lord")[0]["id"]
+	s.grant_card(cid)
+	s.upgrade(cid)
+	check_eq(s.tier(cid), 1, "银 after one 点化")
+	Quests._apply([{"downgrade": 1}], q, s, rng(0))
+	check_eq(s.tier(cid), 0, "back to 铜")
+	Quests._apply([{"downgrade": 1}], q, s, rng(0))
+	check(s.has_card(cid), "a 铜 card stays in the party")
+	Quests._apply([{"ambush_all": true}], q, s, rng(0))
+	var laid: Dictionary = Quests.view(q, s)["squares"]
+	var fights: Array = laid.keys().filter(func(sid): return laid[sid]["type"] == "battle" and not laid[sid]["boss"])
+	check(not fights.is_empty() and fights.all(func(sid): return s.ambushes.has(sid)), "every fight is an 埋伏")
+	Quests._apply([{"ambush_all": false}], q, s, rng(0))
+	check(s.ambushes.is_empty(), "and then none")
+
+
+func test_a_party_change_keeps_the_hp_share() -> void:
+	var s := SaveData.create()
+	s.damage = 50
+	Quests.rescale_hp(s, 100, 150)
+	check_eq(150 - s.damage, 75, "half HP stays half when the bar grows")
+	Quests.rescale_hp(s, 150, 60)
+	check_eq(60 - s.damage, 30, "…and when it shrinks")
+	s.damage = 0
+	Quests.rescale_hp(s, 60, 200)
+	check_eq(s.damage, 0, "full stays full")
 
 
 func test_hero_can_be_anyone() -> void:
@@ -1414,7 +1490,7 @@ func test_mystery_events_are_dealt_up_front_and_resolved_by_chance() -> void:
 	s.relics = ["x"] if false else s.relics
 	for _i in 60:
 		seen[Quests.random_option(SaveData.create(), GameData.get_db().events["bad_stampede"], r)] = true
-	check(seen.size() == 2, "both outcomes can come up")
+	check_eq(seen.size(), GameData.get_db().events["bad_stampede"]["options"].size(), "every outcome can come up")
 
 
 func test_each_run_deals_different_events() -> void:

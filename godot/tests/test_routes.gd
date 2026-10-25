@@ -31,7 +31,8 @@ func walk(q: Dictionary, s: SaveData, prefer: Array, seed_value := 1, pick_offer
 		if sq["type"] == "mystery" and not s.resolved:
 			var ev := Quests.event_here(q, s, r)
 			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
-			Quests.choose_event(q, s, r, ok[0])
+			var keep: Array = ok.filter(func(i): return not JSON.stringify(ev["options"][i]).contains("drop_relic"))
+			Quests.choose_event(q, s, r, (keep if not keep.is_empty() else ok)[0])  # a 小偷 taking a story 宝物 would fail the relic checks by chance
 		Quests.offer(q, s, r)
 		var c := choose_idx
 		if sq["type"] == "choose" and c < 0:
@@ -243,7 +244,8 @@ func test_lap3_chapter4_plays_with_real_fights() -> void:
 		if sq["type"] == "mystery" and not s.resolved:
 			var ev := Quests.event_here(q, s, r)
 			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
-			Quests.choose_event(q, s, r, ok[0])
+			var keep: Array = ok.filter(func(i): return not JSON.stringify(ev["options"][i]).contains("drop_relic"))
+			Quests.choose_event(q, s, r, (keep if not keep.is_empty() else ok)[0])  # a 小偷 taking a story 宝物 would fail the relic checks by chance
 		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
 			var f := Quests.battle_here(q, s)
 			s.party = s.auto_party()
@@ -452,7 +454,8 @@ func test_south_chapter6_plays_with_real_fights() -> void:
 		if sq["type"] == "mystery" and not s.resolved:
 			var ev := Quests.event_here(q, s, r)
 			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
-			Quests.choose_event(q, s, r, ok[0])
+			var keep: Array = ok.filter(func(i): return not JSON.stringify(ev["options"][i]).contains("drop_relic"))
+			Quests.choose_event(q, s, r, (keep if not keep.is_empty() else ok)[0])  # a 小偷 taking a story 宝物 would fail the relic checks by chance
 		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
 			var f := Quests.battle_here(q, s)
 			s.party = s.auto_party()
@@ -717,7 +720,8 @@ func test_north_chapter3_郭图_stands_in_the_way_of_the_escape_too() -> void:
 		if sq["type"] == "mystery" and not s.resolved:
 			var ev := Quests.event_here(q, s, r)
 			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
-			Quests.choose_event(q, s, r, ok[0])
+			var keep: Array = ok.filter(func(i): return not JSON.stringify(ev["options"][i]).contains("drop_relic"))
+			Quests.choose_event(q, s, r, (keep if not keep.is_empty() else ok)[0])  # a 小偷 taking a story 宝物 would fail the relic checks by chance
 		Quests.offer(q, s, r)
 		var pick_idx := -1
 		if sq["type"] == "choose":  # the first option that is not locked (救人 → 拔刀相助)

@@ -610,7 +610,7 @@ func _open_swap(i: int) -> void:
 	opts = opts.slice(0, 5)  # five cards fit across the screen
 	var ids: Array = opts.map(func(ld): return ld["card"]["id"])
 	var o := PickOverlay.new()
-	o.title = "换谁上场？（%s · 攻击体力不变 · 换下的人本场不能再上）" % (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP")
+	o.title = "换谁上场？（%s · 攻击按新人和他的部队 · 体力按比例 · 换下的人本场不能再上）" % (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP")
 	o.card_ids = ids
 	o.captions = opts.map(func(ld): return "%s · %s" % [GameData.get_db().troops[ld["card"]["troop"]]["name"],
 		"、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"]))])
@@ -1555,6 +1555,7 @@ func _finish() -> void:
 		if carry:
 			var out := b.carry_out()
 			save.damage = out[0]
+			Quests.rescale_hp(save, b.party_max, Quests.party_max(save))  # a 换人 resized the bar: the map's bar keeps the share
 			save.carry_extra.merge(out[1], true)
 			save.carry_uses.merge(out[2], true)
 		await _banner("胜　利", Kit.c("gold"))

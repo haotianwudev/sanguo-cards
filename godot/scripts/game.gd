@@ -415,9 +415,9 @@ func demo(name: String) -> void:
 			for a in OS.get_cmdline_user_args():
 				if a.begins_with("--at="):
 					at = a.substr(5)
-			var path := ["ln_river", "ln_charge", "ln_lvlingqi", "ln_camp", "ln_rest1", "ln_loot1", "ln_mystery1", "ln_road_loot",
+			var path := ["ln_river", "ln_charge", "ln_lvlingqi", "ln_camp", "ln_rest1", "ln_mutiny_road", "ln_mutiny2",
 				"ln_banner", "ln_feast", "ln_caocao", "ln_lend", "ln_zhen", "ln_pursuit", "ln_ambush", "ln_ambush2", "ln_xurong", "ln_rescue",
-				"ln_rest2", "ln_loot2", "ln_mystery2", "ln_approach", "ln_feixiong", "ln_langqi", "ln_rest3", "ln_lvbu",
+				"ln_rest2", "ln_camp_raid", "ln_camp_raid2", "ln_approach", "ln_feixiong", "ln_langqi", "ln_rest3", "ln_lvbu",
 				"ln_triple", "ln_box1", "ln_box2", "ln_box3", "ln_handhold", "ln_wait", "ln_blaze", "ln_ferry", "ln_end"]
 			for sid in path:
 				Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
@@ -437,6 +437,32 @@ func demo(name: String) -> void:
 			save.offer = ["shoushihe", "bingfa", "dunjia"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
+		"eventfx":  # a ？ event's animated outcome (EventFx); --fx=a,b picks the sample cards (hp, diff, fate, divine, tier, ambush, merit, lose)
+			var q: Dictionary = GameData.get_db().quests[0]
+			Quests.begin(q, save)
+			save.fate = "jiangxing"
+			save.grant_card("sunce")
+			save.upgrade("sunce")
+			show_screen(MapScreen.new())
+			var samples := {
+				"hp": {"k": "hp", "n": -38, "left": 62, "top": 100},
+				"diff": {"k": "difficulty", "from": 2, "to": 1, "pct": -30},
+				"fate": {"k": "fate", "from": "jiangxing", "to": "xiongxing"},
+				"divine": {"k": "fate", "from": "jiangxing", "to": "tianmingsuogui"},
+				"tier": {"k": "tier", "card": "sunce", "from": 1, "to": 0},
+				"ambush": {"k": "ambush", "on": true},
+				"merit": {"k": "merit", "n": 5, "total": 12},
+				"lose": {"k": "lose_soldier", "card": "danyang"},
+			}
+			var pick: Array = ["hp", "diff", "fate", "tier"]
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--fx="):
+					pick = Array(a.trim_prefix("--fx=").split(","))
+			(func():
+				await get_tree().create_timer(0.3).timeout
+				var o := EventFx.new()
+				o.fx = pick.map(func(k): return samples[k])
+				root.get_child(root.get_child_count() - 1).add_child(o)).call()
 		"recap1":  # the chapter-end page of the south's first chapter: its picture, the menu, the picture's card
 			var q1: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q1, save)
@@ -537,6 +563,15 @@ func demo(name: String) -> void:
 						for n in get_tree().root.get_children():
 							if n is SideStoryList:
 								n._play(Quests.side_stories(save)[0])).call()
+			if OS.get_cmdline_user_args().has("--hurt"):  # --hurt: half HP, then the first leader steps down (the HP keeps its share)
+				(func():
+					await get_tree().create_timer(0.5).timeout
+					var o: PartyOverlay = m.get_node("Party")
+					save.damage = int(Quests.party_max(save) / 2.0)
+					o._rebuild()
+					print("HURT before: ", Quests.party_max(save) - save.damage, " / ", Quests.party_max(save))
+					o._remove(save.party[0])
+					print("HURT after: ", Quests.party_max(save) - save.damage, " / ", Quests.party_max(save))).call()
 			if OS.get_cmdline_user_args().has("--voices"):  # tap 孙策, 吴夫人, 黄盖, a soldier and the lord: each says his line
 				(func():
 					await get_tree().create_timer(0.5).timeout

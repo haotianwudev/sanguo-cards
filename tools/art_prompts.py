@@ -2426,6 +2426,15 @@ FATES = {
     "beishui": "broken cauldrons and a burning boat at a riverbank, soldiers facing the enemy with no way back",
     "luanshi": "a blood-red sky over burning cities, fortune favouring the bold",
     "jijin": "cavalry charging forward at full gallop in a blur of speed",
+    # 凶 (only forced on by ？ events)
+    "shuairuo": "一副空荡荡的汉代札甲（甲片用皮绳串成）和一顶汉式兜鍪靠在枯树下，没有人穿，落叶堆在脚边",
+    "huansan": "折断的汉军军旗倒在泥地里，几个穿汉代札甲的士兵背影朝不同方向散去",
+    "pojia": "一面汉代长方形木盾（上圆下方，漆红底黑纹）被长戟捅穿，裂纹向四周蔓延，碎甲片散落",
+    "cuoshi": "一只汉代青铜漏壶（多级铜壶滴漏，不是沙漏）里的水已经漏干，旁边的石日晷被乌云吞没",
+    "duanliang": "翻倒的空粮袋和裂开的陶瓮，地上只剩几粒米，一只乌鸦在啄",
+    "xiongxing": "血红的天空中一颗拖着长尾的凶星，下面是黑压压的敌军营火",
+    # 天授 (rarest, only from ？ events)
+    "tianmingsuogui": "云开处一道金光直落，金光中悬着一方传国玉玺，龙形云气盘绕四周",
 }
 # 词缀 badges (cards.json battle.affixes id -> symbol); godot/data/art/affixes/<id>.png, shown in the battle info
 AFFIXES = {

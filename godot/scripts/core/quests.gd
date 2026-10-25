@@ -145,7 +145,7 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.ambushes = {}
 	if rng != null:
 		var db := GameData.get_db()
-		var fs: Array = db.fates.keys()
+		var fs: Array = db.fates.keys().filter(func(f): return not db.fates[f]["rarity"] in ["bad", "divine"])  # 凶 / 天授 fates only come from events
 		for _i in mini(int(db.raw_int("fate_offer", 3)), fs.size()):
 			save.fate_offer.append(fs.pop_at(rng.randi_range(0, fs.size() - 1)))
 		var afx: Array = db.battle.get("affixes", {}).keys()
@@ -997,6 +997,14 @@ static func party_max(save: SaveData) -> int:
 	return int(round(hp * (1.0 + float(m.get("hp", 0.0)))))
 
 
+static func rescale_hp(save: SaveData, old_top: int, new_top: int) -> void:
+	## the party changed (整备): HP stays the same share of the bar, e.g. 50 / 100 → 75 / 150
+	if old_top <= 0 or new_top <= 0:
+		return
+	var share := float(old_top - save.damage) / old_top
+	save.damage = clampi(new_top - int(round(share * new_top)), 0, new_top - 1)
+
+
 static func relic_offer(save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## A few 宝物 not held yet, drawn by rarity weight (relic_pick in cards.json).
 	var db := GameData.get_db()
@@ -1026,32 +1034,39 @@ static func take_relic(save: SaveData, rid: String) -> Dictionary:
 static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Dictionary:
 	## Event effects, in order. damage / heal are fractions of the party's full HP.
 	var db := GameData.get_db()
-	var out := {"gained": [], "log": []}
+	var out := {"gained": [], "log": [], "fx": []}  # fx: what the map screen animates (EventFx), one entry per visible change
 	var top := party_max(save)
+	var scale: Dictionary = db.battle.get("event_scale", {})  # battle.json: makes every event hit harder
 	for e in effects:
 		if e.has("record"):
 			record(save, str(e["record"]))
 		if e.has("say"):
 			out["log"].append(str(e["say"]).replace("{lord}", save.lord_name))
 		if e.has("damage"):
-			var d := mini(int(round(top * float(e["damage"]))), maxi(0, top - 1 - save.damage))
+			var d := mini(int(round(top * float(e["damage"]) * float(scale.get("damage", 1.0)))), maxi(0, top - 1 - save.damage))
 			save.damage += d
 			out["log"].append("体力 -%d" % d)
+			out["fx"].append({"k": "hp", "n": -d, "left": top - save.damage, "top": top})
 		if e.has("heal"):
-			var h := mini(save.damage, int(round(top * float(e["heal"]))))
+			var h := mini(save.damage, int(round(top * float(e["heal"]) * float(scale.get("heal", 1.0)))))
 			save.damage -= h
 			out["log"].append("体力 +%d" % h)
+			if h > 0:
+				out["fx"].append({"k": "hp", "n": h, "left": top - save.damage, "top": top})
 		if e.has("refresh"):  # 重置技能: cumulative AP costs and once-per-battle skills, HP untouched
 			save.carry_extra = {}
 			save.carry_uses = {}
 			out["log"].append("技能重置：累积加价清零，限 1 次技能可以再用")
+			out["fx"].append({"k": "refresh"})
 		if e.has("upgrade") and str(e["upgrade"]) == "random":  # a random general of yours goes up a tier
 			var pool: Array = save.upgradable()
 			if pool.is_empty():
 				out["log"].append("……你还没有能升级的武将。")
 			else:
 				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
+				var t0 := save.tier(cid)
 				save.upgrade(cid)
+				out["fx"].append({"k": "tier", "card": cid, "from": t0, "to": save.tier(cid)})
 				out["log"].append("%s 升为%s卡！" % [db.cards[cid]["name"], db.gacha["tiers"][save.tier(cid)]["name"]])
 		elif e.has("upgrade"):  # pick one of a few random cards of yours (the lord too, not yet 金) to go up a tier
 			var ids: Array = save.upgrade_offer(rng)
@@ -1062,10 +1077,12 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 		if e.has("rest"):
 			reset_carry(save)
 			out["log"].append("体力全满，技能次数恢复")
-		if e.has("poison"):  # 中毒: lose a third of full HP
-			var d := mini(int(round(top / 3.0)), maxi(0, top - 1 - save.damage))
+			out["fx"].append({"k": "rest"})
+		if e.has("poison"):  # 中毒: lose a share of full HP (battle.event_scale.poison)
+			var d := mini(int(round(top * float(scale.get("poison", 1.0 / 3.0)))), maxi(0, top - 1 - save.damage))
 			save.damage += d
 			out["log"].append("中毒！体力 -%d" % d)
+			out["fx"].append({"k": "hp", "n": -d, "left": top - save.damage, "top": top, "poison": true})
 		if e.has("card"):
 			var c: Dictionary = db.cards[e["card"]]
 			save.grant_card(c["id"])
@@ -1118,8 +1135,9 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 		if e.has("drop_relic") and not save.relics.is_empty():  # trade away a random 宝物
 			var gone: String = save.relics.pop_at(rng.randi_range(0, save.relics.size() - 1))
 			out["log"].append("失去宝物：" + db.relics[gone]["name"])
+			out["fx"].append({"k": "lose_relic", "id": gone})
 		if e.has("lose_soldier"):  # lose soldier copies at random
-			for _n in int(e["lose_soldier"]):
+			for _n in int(e["lose_soldier"]) * int(scale.get("lose_soldier", 1)):
 				var have: Array = save.soldiers.keys().filter(func(c): return save.soldiers[c] > 0)
 				if have.is_empty():
 					break
@@ -1129,18 +1147,79 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 					save.soldiers.erase(cid)
 					save.party.erase(cid)
 				out["log"].append("失去兵卡：" + db.cards[cid]["name"])
-		if e.has("difficulty"):
-			save.difficulty += int(e["difficulty"])
-			out["log"].append("难度上升到 %d！今后所有敌人 +%d%%，宝箱里的武将也更多了" % [save.level(),
-				int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100))])
-		if e.has("danger"):
-			save.danger += int(e["danger"])
-			out["log"].append("险！本轮之后的敌人体力和攻击 +%d%%" % int(round(save.danger * float(db.battle["danger_step"]) * 100)))
+				out["fx"].append({"k": "lose_soldier", "card": cid})
+		if e.has("difficulty"):  # whole campaign; may go down, but not below battle.difficulty_min
+			var was := save.difficulty
+			save.difficulty = maxi(int(db.battle.get("difficulty_min", 0)), save.difficulty + int(e["difficulty"]))
+			var pct := int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100))
+			if save.difficulty != was:
+				out["fx"].append({"k": "difficulty", "from": save.effective_level() + was, "to": save.effective_level() + save.difficulty, "pct": pct})  # as the map's 难度 chip counts
+			if save.difficulty > was:
+				out["log"].append("难度上升到 %d！今后所有敌人 %+d%%，宝箱里的武将也更多了" % [save.level(), pct])
+			elif save.difficulty < was:
+				out["log"].append("难度下降到 %d！今后所有敌人 %+d%%，宝箱里的武将也少了些" % [save.level(), pct])
+			else:
+				out["log"].append("……难度已经到底了，没有变化。")
+		if e.has("danger"):  # this chapter only; may go down to 0
+			var was_d := save.danger
+			save.danger = maxi(0, save.danger + int(e["danger"]))
+			var pct_d := int(round(save.danger * float(db.battle["danger_step"]) * 100))
+			if save.danger != was_d:
+				out["fx"].append({"k": "danger", "from": was_d, "to": save.danger, "pct": pct_d})
+			if save.danger > was_d:
+				out["log"].append("险！本轮之后的敌人体力和攻击 +%d%%" % pct_d)
+			elif save.danger < was_d:
+				out["log"].append("险情缓解：本轮敌人加成降到 +%d%%" % pct_d)
+			else:
+				out["log"].append("……本轮没有险情可解。")
+		if e.has("fate"):  # 天命 changes for the rest of the run: "good" (吉 / 大吉), "curse" (double-edged), "bad" (凶), "divine" (天授), or true (any other but 天授)
+			var want := str(e["fate"])
+			var kinds: Array = {"good": ["common", "rare"], "curse": ["curse"], "bad": ["bad"], "divine": ["divine"]}.get(want, ["common", "rare", "curse", "bad"])
+			var fs: Array = db.fates.keys().filter(func(f): return f != save.fate and db.fates[f]["rarity"] in kinds)
+			if fs.is_empty():
+				out["log"].append("……天命没有变。")
+			else:
+				var was_f: String = save.fate
+				save.fate = fs[rng.randi_range(0, fs.size() - 1)]
+				save.fate_offer = []
+				var nf: Dictionary = db.fates[save.fate]
+				out["fx"].append({"k": "fate", "from": was_f, "to": save.fate})
+				out["log"].append("天命变了！%s→「%s」：%s" % ["「%s」" % db.fates[was_f]["name"] if db.fates.has(was_f) else "", nf["name"], nf["desc"]])
+		if e.has("downgrade"):  # n random generals of yours (not the lord) drop one tier, 银 → 铜, 金 → 银
+			var tiers: Array = db.gacha["tiers"]
+			for _n in int(e["downgrade"]):
+				var pool: Array = save.owned.filter(func(c): return save.tier(c) > 0)
+				if pool.is_empty():
+					out["log"].append("……你的武将都还是铜卡，降无可降。")
+					break
+				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
+				out["fx"].append({"k": "tier", "card": cid, "from": save.tier(cid), "to": save.tier(cid) - 1})
+				save.dupes[cid] = int(tiers[save.tier(cid) - 1]["copies"])
+				if save.dupes[cid] <= 1:
+					save.dupes.erase(cid)
+				out["log"].append("%s 降为%s卡……" % [db.cards[cid]["name"], tiers[save.tier(cid)]["name"]])
+		if e.has("ambush_all"):  # true: every fight left in this chapter (bar bosses) is an 埋伏; false: none of them is
+			var laid: Dictionary = view(q, save)["squares"]
+			for sid in laid:
+				if laid[sid]["type"] == "battle" and not laid[sid]["boss"] and not save.visited.has(sid):
+					if e["ambush_all"]:
+						save.ambushes[sid] = true
+					else:
+						save.ambushes.erase(sid)
+			out["log"].append("本章之后的战斗全都会被埋伏！" if e["ambush_all"] else "戒备森严：本章之后的战斗不会再被埋伏。")
+			out["fx"].append({"k": "ambush", "on": bool(e["ambush_all"])})
+		if e.has("merit"):  # 战功 (spent between chapters), never below 0
+			var m := maxi(-save.merit, int(e["merit"]))
+			save.merit += m
+			out["log"].append("战功 %+d（现有 %d）" % [m, save.merit])
+			if m != 0:
+				out["fx"].append({"k": "merit", "n": m, "total": save.merit})
 		if e.has("chance"):
 			var branch: Array = e.get("then", []) if rng.randf() < float(e["chance"]) else e.get("else", [])
 			var sub := _apply(branch, q, save, rng)
 			out["gained"].append_array(sub["gained"])
 			out["log"].append_array(sub["log"])
+			out["fx"].append_array(sub["fx"])
 	return out
 
 

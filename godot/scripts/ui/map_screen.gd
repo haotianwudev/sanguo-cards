@@ -496,7 +496,7 @@ func _show_run() -> void:
 		var total_lvl := lvl + save.difficulty
 		var h := _chip("难度 %d" % total_lvl, "purple" if (lvl > 1 or save.difficulty > 0) else "gray")
 		var diff_step := int(round(((lvl - 1) * float(db.battle.get("ending_step", 0.15)) + save.difficulty * float(db.battle["difficulty_step"])) * 100))
-		h.tooltip_text = "难度 %d：敌人 +%d%%，宝箱每张卡有 %d%% 是武将" % [total_lvl,
+		h.tooltip_text = "难度 %d：敌人 %+d%%，宝箱每张卡有 %d%% 是武将" % [total_lvl,
 			diff_step, int(round(save.chest_general_chance() * 100))]
 		_tap_detail(h, h.tooltip_text)
 		_run_box.add_child(h)
@@ -507,7 +507,7 @@ func _show_run() -> void:
 		_run_box.add_child(d)
 	if save.fate != "" and db.fates.has(save.fate):
 		var f: Dictionary = db.fates[save.fate]
-		var fc := _chip("命 " + f["name"], "purple")
+		var fc := _chip("命 " + f["name"], "red" if f["rarity"] in ["curse", "bad"] else ("gold" if f["rarity"] == "divine" else "purple"))
 		fc.tooltip_text = "天命：" + f["desc"]
 		_tap_detail(fc, "天命·%s：%s" % [f["name"], f["desc"]])
 		_run_box.add_child(fc)
@@ -1119,6 +1119,11 @@ func _choose_event(i: int, rolled := false) -> void:
 	_refresh()
 	var cards: Array = out["gained"].filter(func(c): return not c.get("relic", false))
 	var relics: Array = out["gained"].filter(func(c): return c.get("relic", false))
+	if not out.get("fx", []).is_empty():  # every other change (体力, 难度, 天命, 降阶 …) gets its animated card first
+		var o := EventFx.new()
+		o.fx = out["fx"]
+		add_child(o)
+		await o.closed
 	if not cards.is_empty():  # an event handed you cards: show them
 		await _reveal(cards, "获　得")
 	if not relics.is_empty():  # …and 宝物 get their own card moment (they also sit in the top bar afterwards)

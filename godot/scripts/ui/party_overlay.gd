@@ -29,6 +29,7 @@ var _pool_box: Panel
 var _drag_src: Control  # the card being dragged (dimmed in place until the drag ends)
 var _hover_ctrl: Control  # the leader a drag is held over (it grows a little)
 var _hover_panel: Panel  # the box a drag is held over (its border lights up)
+var _hp_top := -1  # the shared HP bar's full size at the last rebuild: a change of party keeps the HP share, not the HP lost
 
 
 func _ready() -> void:
@@ -171,7 +172,11 @@ func _rebuild() -> void:
 	var at_sum := 0
 	for ld in leaders:
 		at_sum += int(ld["at"])
-	_summary.add_child(_stat_line("全军体力", str(Quests.party_max(save))))
+	var top := Quests.party_max(save)
+	if _hp_top > 0 and top != _hp_top:  # someone came in or went out: the HP bar keeps its share (攻击 simply follows who is out)
+		Quests.rescale_hp(save, _hp_top, top)
+	_hp_top = top
+	_summary.add_child(_stat_line("全军体力", "%d / %d" % [maxi(1, top - save.damage), top]))
 	_summary.add_child(_stat_line("攻击合计", str(at_sum)))
 	_summary.add_child(_stat_line("出阵", "%d / %d 队" % [leaders.size(), save.party_slots]))
 	if not save.relics.is_empty():

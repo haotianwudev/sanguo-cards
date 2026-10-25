@@ -86,6 +86,10 @@
         {
           "type": "ap",
           "amount": 2
+        },
+        {
+          "type": "guard",
+          "cut": 0.1
         }
       ]
     },
@@ -243,11 +247,11 @@
       "effects": [
         {
           "type": "ap",
-          "amount": 2
+          "amount": 3
         },
         {
           "type": "stun",
-          "chance": 0.3
+          "chance": 0.6
         }
       ]
     },
@@ -1305,12 +1309,15 @@
     },
     "mihun": {
       "name": "摄魂咒",
-      "cost": 1,
-      "cumulative": true,
+      "cost": 3,
+      "uses": 1,
       "effects": [
         {
+          "type": "magic"
+        },
+        {
           "type": "stun",
-          "chance": 0.35
+          "chance": 0.5
         }
       ]
     },
