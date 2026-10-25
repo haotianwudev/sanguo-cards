@@ -66,7 +66,7 @@ def infer_kind(key: str) -> str | None:
     story = json.loads((DATA / "story.json").read_text("utf-8"))
     if key in [q["id"] for q in story["quests"]]:
         return "map"
-    text = (DATA / "story.json").read_text("utf-8") + (DATA / "endings.json").read_text("utf-8") + (ROOT / "tools" / "art_prompts.py").read_text("utf-8")
+    text = (DATA / "story.json").read_text("utf-8") + (DATA / "endings.json").read_text("utf-8") + (DATA / "side_stories.json").read_text("utf-8") + (ROOT / "tools" / "art_prompts.py").read_text("utf-8")
     if re.search(r'"%s"' % re.escape(key), text):
         return "cg"
     return None

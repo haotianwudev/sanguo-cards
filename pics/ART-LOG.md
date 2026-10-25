@@ -1280,7 +1280,51 @@
 - [x] 2026-10-24 cg `rc_luoyang_s` ← rc_luoyang_s.jpg · ok
 - [x] 2026-10-24 portrait `rc_luoyang_s` ← rc_luoyang_s_card.jpg · ok
 - [x] 2026-10-24 portrait `lord_south_river` ← rc_luoyang_s_card.jpg · ok
-- [ ] 2026-10-24 cg `n4_zhenghao` ← n4_zhenghao.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-24 cg `n4_jiangqiao` ← n4_jiangqiao.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-24 cg `n4_zj_apart` ← n4_zj_apart.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-24 cg `n3_baima` ← n3_baima.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `ss_baima` ← ss_baima.jpg · ok
+- [x] 2026-10-24 cg `ss_firstwine` ← ss_firstwine.jpg · ok
+- [x] 2026-10-24 cg `ss_jiujiu` ← ss_jiujiu.jpg · ok
+- [x] 2026-10-24 cg `ss_suanpan` ← ss_suanpan.jpg · ok
+- [x] 2026-10-24 cg `ss_zumao` ← ss_zumao.jpg · ok
+- [x] 2026-10-24 cg `ss_huoshi` ← ss_huoshi.jpg · ok
+- [x] 2026-10-24 cg `ss_lingqi_meal` ← ss_lingqi_meal.jpg · ok
+- [x] 2026-10-24 cg `ss_guojia_tab` ← ss_guojia_tab.jpg · ok
+- [x] 2026-10-24 cg `ss_lvshu` ← ss_lvshu.jpg · ok
+- [x] 2026-10-24 cg `ss_yaopu` ← ss_yaopu.jpg · ok
+- [x] 2026-10-24 cg `ss_wuziqi` ← ss_wuziqi.jpg · ok
+- [x] 2026-10-24 cg `ss_yuxi_he` ← ss_yuxi_he.jpg · ok
+- [x] 2026-10-24 cg `ss_zaofan` ← ss_zaofan.jpg · ok
+- [x] 2026-10-24 cg `ss_rangli` ← ss_rangli.jpg · ok
+- [x] 2026-10-24 cg `ss_gaoshun` ← ss_gaoshun.jpg · ok
+- [x] 2026-10-24 cg `ss_xuzhou_bing` ← ss_xuzhou_bing.jpg · ok
+- [x] 2026-10-24 cg `ss_yangsheng` ← ss_yangsheng.jpg · ok
+- [x] 2026-10-24 cg `ss_roujiamo` ← ss_roujiamo.jpg · ok
+- [x] 2026-10-24 cg `ss_quwu` ← ss_quwu.jpg · ok
+- [x] 2026-10-24 cg `ss_jiashu` ← ss_jiashu.jpg · ok
+- [x] 2026-10-24 cg `ss_lvmeng_book` ← ss_lvmeng_book.jpg · ok
+- [x] 2026-10-24 cg `ss_lusu_grain` ← ss_lusu_grain.jpg · ok
+- [x] 2026-10-24 cg `ss_jiufang` ← ss_jiufang.jpg · ok
+- [x] 2026-10-24 cg `ss_toutong` ← ss_toutong.jpg · ok
+- [x] 2026-10-24 cg `ss_chengong_tea` ← ss_chengong_tea.jpg · ok
+- [x] 2026-10-24 cg `ss_sandi` ← ss_sandi.jpg · ok
+- [x] 2026-10-24 cg `ss_lingdang` ← ss_lingdang.jpg · ok
+- [x] 2026-10-24 cg `ss_zhangzhao` ← ss_zhangzhao.jpg · ok
+- [x] 2026-10-24 cg `ss_yuhui` ← ss_yuhui.jpg · ok
+- [x] 2026-10-24 cg `ss_jiezhou` ← ss_jiezhou.jpg · ok
+- [x] 2026-10-24 cg `ss_shangxiang_bow` ← ss_shangxiang_bow.jpg · ok
+- [x] 2026-10-24 cg `ss_biyan` ← ss_biyan.jpg · ok
+- [x] 2026-10-24 cg `ss_jinmachao` ← ss_jinmachao.jpg · ok
+- [x] 2026-10-24 cg `ss_yunlu_spar` ← ss_yunlu_spar.jpg · ok
+- [x] 2026-10-24 cg `ss_feidao` ← ss_feidao.jpg · ok
+- [x] 2026-10-24 cg `n4_zhenghao` ← n4_zhenghao.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `ss_xiaobenzi` ← ss_xiaobenzi.jpg · ok
+- [x] 2026-10-24 cg `n4_jiangqiao` ← n4_jiangqiao.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `ss_beidi` ← ss_beidi.jpg · ok
+- [x] 2026-10-24 cg `n4_zj_apart` ← n4_zj_apart.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `n4_jiangqiao` ← n4_jiangqiao.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `ss_yimi` ← ss_yimi.jpg · ok
+- [x] 2026-10-24 cg `ss_dazhonglian` ← ss_dazhonglian.jpg · ok
+- [x] 2026-10-24 cg `n3_baima` ← n3_baima.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-24 cg `ss_zhenmi_cook` ← ss_zhenmi_cook.jpg · ok
+- [x] 2026-10-24 cg `ss_chitu` ← ss_chitu.jpg · ok
+- [x] 2026-10-24 cg `ss_liuxiang` ← ss_liuxiang.jpg · ok
+- [x] 2026-10-24 cg `ss_xunang` ← ss_xunang.jpg · ok

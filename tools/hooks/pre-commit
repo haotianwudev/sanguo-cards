@@ -4,7 +4,7 @@
 # where it comes from, which soldiers each chapter hands out) and the per-chapter review files (docs/chapters/*.md),
 # and add them all to the same commit. The list of every generated file is in .claude/skills/sanguo-dev/SKILL.md.
 # Install once per clone:  git config core.hooksPath tools/hooks
-if git diff --cached --name-only | grep -qE '^godot/data/(story|cards|enemies|scenarios|skills|relics|battle|endings)\.json$|^pics/art\.json$|^tools/(art_prompts|art_prompts_zh|chapter_docs|roster|chapter_stats)\.py$'; then
+if git diff --cached --name-only | grep -qE '^godot/data/(story|cards|enemies|scenarios|skills|relics|battle|endings|side_stories|interludes)\.json$|^pics/art\.json$|^tools/(art_prompts|art_prompts_zh|chapter_docs|roster|chapter_stats)\.py$'; then
 	python tools/chapter_stats.py --write >/dev/null || { echo "pre-commit: tools/chapter_stats.py failed — fix it (or the data JSON) first" >&2; exit 1; }
 	git add docs/CHAPTER-STATS.md
 	python tools/roster.py --write >/dev/null || { echo "pre-commit: tools/roster.py failed — fix it (or the data JSON) first" >&2; exit 1; }
