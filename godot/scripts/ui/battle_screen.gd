@@ -26,6 +26,7 @@ var _cards: Array = []  # CardView per leader
 var _skill_popup: Control  # open skill-picker for whichever leader was last tapped, or null
 var _skill_layer: Control  # the skill buttons laid over each leader who can act (tap one to play it straight away)
 var _skill_hide_btn: Button  # 隐藏技能 / 显示技能
+var _bar_open := -1  # with 隐藏技能 on: the leader whose skill column was summoned by tapping his card (-1 = none)
 var _skill_popup_at := 0  # msec it opened: the finger-lift from the tap that opened it must not close it
 var _defend: Button
 var _retreat: Button
@@ -452,11 +453,19 @@ func _sync_skill_bars() -> void:
 		ch.queue_free()
 	if _skill_hide_btn != null:
 		_skill_hide_btn.text = "显示技能" if _skills_hidden() else "隐藏技能"
-	if _busy or auto_on or b.result != "" or _skills_hidden():
+	if _busy or auto_on or b.result != "":
+		_bar_open = -1
 		return
+	if not _skills_hidden():
+		_bar_open = -1
 	var small := _has_cg
 	for i in b.leaders.size():
-		if i >= _cards.size() or not b.can_act(i):
+		if i >= _cards.size():
+			continue
+		if _skills_hidden():  # 隐藏技能: only the column of the leader whose card was just tapped, the same strip as when shown
+			if i != _bar_open or not (b.can_act(i) or b.can_swap(i)):
+				continue
+		elif not b.can_act(i):
 			continue
 		var v: CardView = _cards[i]
 		var u: Dictionary = b.leaders[i]
@@ -480,19 +489,39 @@ func _sync_skill_bars() -> void:
 			btn.focus_mode = Control.FOCUS_NONE
 			btn.custom_minimum_size = Vector2(0, bh)
 			var edge: Color = Kit.c("gold") if ult else Color(1, 1, 1, 0.35)
-			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 1.0), 8, 2 if ult else 1, edge, 10))
-			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.95), 8, 2, Kit.c("gold"), 10))
-			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.95), 8, 2, Kit.c("gold"), 10))
-			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 1.0), 8, 1, Color(1, 1, 1, 0.15), 10))  # opaque: nothing underneath shows through
+			btn.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.82), 8, 2 if ult else 1, edge, 10))
+			btn.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.88), 8, 2, Kit.c("gold"), 10))
+			btn.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.88), 8, 2, Kit.c("gold"), 10))
+			btn.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.82), 8, 1, Color(1, 1, 1, 0.15), 10))  # a little see-through (user call): the card and the fight stay visible behind
 			btn.add_theme_color_override("font_color", Kit.c("gold") if ult else Color(1, 1, 1))
 			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
 			btn.disabled = not b.usable(u, sk)
 			btn.pressed.connect(func():
 				_close_skill_popup()
+				_bar_open = -1
 				_on_skill(i, sid))
 			bar.add_child(btn)
+		if _skills_hidden() and not b.swap_options(i).is_empty():  # the popup's 换人 lives on the summoned column too
+			var sw := Button.new()
+			sw.text = "换人%s" % (("  AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "（不费 AP）") + ("" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round())
+			sw.add_theme_font_size_override("font_size", 16 if small else 20)
+			sw.focus_mode = Control.FOCUS_NONE
+			sw.custom_minimum_size = Vector2(0, bh)
+			sw.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.82), 8, 1, Kit.c("gold"), 10))
+			sw.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.88), 8, 2, Kit.c("gold"), 10))
+			sw.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.88), 8, 2, Kit.c("gold"), 10))
+			sw.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.82), 8, 1, Color(1, 1, 1, 0.15), 10))
+			sw.add_theme_color_override("font_color", Kit.c("gold"))
+			sw.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
+			sw.disabled = not b.can_swap(i)
+			sw.pressed.connect(func():
+				_bar_open = -1
+				_sync_skill_bars()
+				_open_swap(i))
+			bar.add_child(sw)
 		# in the card's column, stacked up from the card's top edge (the card itself stays clear; the HP bar and the enemy may be covered)
-		var h := skills.size() * bh + (skills.size() - 1) * 5.0
+		var n := bar.get_child_count()
+		var h := n * bh + (n - 1) * 5.0
 		bar.position = Vector2(r.position.x - global_position.x, r.position.y - global_position.y - h - 2)
 		bar.size = Vector2(r.size.x, h)
 		_skill_layer.add_child(bar)
@@ -518,6 +547,10 @@ func _open_skills(i: int) -> void:
 	if _busy or b.result != "" or not (b.can_act(i) or b.can_swap(i)):
 		return
 	_close_skill_popup()
+	if _skills_hidden():  # skills hidden: tapping a card summons its column (the same strip, above the card) instead of the old diagonal popup; tap again to put it away
+		_bar_open = -1 if _bar_open == i else i
+		_sync_skill_bars()
+		return
 	var u: Dictionary = b.leaders[i]
 	var overlay := Control.new()
 	overlay.z_index = 60
