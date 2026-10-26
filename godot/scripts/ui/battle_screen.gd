@@ -564,7 +564,7 @@ func _hold_detail(btn: Button, sk: Dictionary) -> void:
 func _show_skill_detail(sk: Dictionary) -> void:
 	_close_skill_popup()
 	var overlay := Control.new()
-	overlay.z_index = 65
+	overlay.z_index = 75  # above the skill strip (_skill_layer, 70): at 65 its buttons were drawn over this panel
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	var dim := Button.new()  # a fresh touch-down anywhere closes it

@@ -217,6 +217,17 @@ func test_poison_costs_the_configured_share_of_the_hp() -> void:
 	check_eq(s.damage, int(round(Quests.party_max(s) * float(GameData.get_db().battle["event_scale"]["poison"]))))
 
 
+func test_an_event_never_kills_the_party_it_leaves_1_hp() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	var top := Quests.party_max(s)
+	Quests._apply([{"damage": 5.0}], q, s, rng(0))  # far more than the whole bar
+	check_eq(top - s.damage, 1, "a huge hit leaves exactly 1 HP")
+	Quests._apply([{"damage": 0.5}, {"poison": true}], q, s, rng(0))
+	check_eq(top - s.damage, 1, "further hits and poison on 1 HP take nothing more")
+
+
 func test_events_can_lower_difficulty_danger_and_merit_but_not_past_the_floor() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
@@ -2042,6 +2053,24 @@ func test_zhangning_page_and_card_need_her_saved_and_shilv() -> void:
 	s.merit = 10
 	Quests.open_side(s, "s_rc_heishan")
 	check(s.owned.has("rc_heishan"), "一起碾药 hands over 张宁·一起碾药")
+
+
+func test_zhangning_joins_at_the_rest_after_her_bandage_cg_not_on_arriving() -> void:
+	var q: Dictionary = {}
+	for x in GameData.get_db().quests:
+		if x["id"] == "heishan":
+			q = x
+	var s := SaveData.create()
+	s.run_records = ["出生：冀州无极"]
+	s.quest = "heishan"
+	s.square = "hs_zhangyan"
+	s.resolved = false
+	Quests.resolve(q, s, rng(0), -1)
+	check(not s.owned.has("zhangning"), "not yet on the 黑山大寨 square")
+	s.square = "hs_rest1"
+	s.resolved = false
+	var gained := Quests.resolve(q, s, rng(0), -1)
+	check(s.owned.has("zhangning") and gained.size() == 1, "she joins when you rest, after the 包扎 CG")
 
 
 func test_zheng_jiang_page_and_card_need_them_reconciled_and_shilv() -> void:

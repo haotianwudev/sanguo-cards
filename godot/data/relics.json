@@ -228,11 +228,13 @@
     },
     "jiunang": {
       "name": "酒囊",
-      "troop": "logistics",
+      "troop": "strategist",
       "icon": "酒",
       "rarity": "common",
-      "desc": "左慈送的，喝不完。每打赢一场，回复 5% 体力",
-      "after_win": 0.05
+      "desc": "左慈送的，喝不完。酒后出奇谋：全队暴击率 +8%",
+      "mods": {
+        "crit": 0.08
+      }
     },
     "xunyou_qizi": {"name": "荀攸的黑棋", "troop": "strategist", "icon": "棋", "rarity": "story", "desc": "荀攸按在沙盘上的那枚黑棋。棋看三步，不会被伏兵偷袭（队里有策士才生效）", "mods": {"no_ambush": 1}},
     "bandu_lingjian": {"name": "半渡令箭", "troop": "archer", "icon": "箭", "rarity": "story", "desc": "黄忠的令箭，号令一响第一支箭就要见血。每场第一击伤害 +50%（队里有弓手才生效）", "mods": {"first_hit": 0.5}},
@@ -550,13 +552,13 @@
     },
     "taipingyaoshu": {
       "name": "太平要术",
-      "troop": "strategist",
+      "troop": "logistics",
       "icon": "太",
       "rarity": "rare",
-      "desc": "张角的天书，南下黄巾一直在找它。策士部队：体力 +15%（队里有策士才生效）",
+      "desc": "张角的天书，南下黄巾一直在找它。后勤部队：体力 +15%（队里有后勤才生效）",
       "mods": {
         "troop_hp": {
-          "strategist": 0.15
+          "logistics": 0.15
         }
       }
     },

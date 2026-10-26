@@ -586,6 +586,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			save.picks_left = 0
 		"recover":
 			reset_carry(save)
+			for cid in s["cards"]:  # a rest can bring someone in too (张宁 after the 包扎 CG)
+				gained.append(db.cards[cid])
+				save.grant_card(cid, true)
 		"battle":  # called after a win
 			after_win(save)
 			if s["boss"] or s["elite"]:
