@@ -1560,10 +1560,10 @@
     "sunshangxiang": {
       "name": "孙尚香",
       "voice": "sunshangxiang",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "archer",
-      "hp": 62,
-      "at": 87,
+      "hp": 66,
+      "at": 84,
       "skills": [
         "huojian",
         "gongyaoji"
@@ -2067,10 +2067,10 @@
     "diaochan": {
       "name": "貂蝉",
       "voice": "diaochan",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "logistics",
-      "hp": 80,
-      "at": 69,
+      "hp": 90,
+      "at": 78,
       "skills": [
         "biyue"
       ]
@@ -2935,10 +2935,10 @@
     },
     "jiangwei": {
       "name": "姜维",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "spear",
-      "hp": 68,
-      "at": 81,
+      "hp": 76,
+      "at": 86,
       "skills": [
         "qiangpo",
         "jiufa"

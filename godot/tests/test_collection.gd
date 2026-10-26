@@ -803,8 +803,8 @@ func test_every_card_sits_in_its_rarity_band_and_in_40_to_100() -> void:
 	check_eq(int(db.troops["lord"]["hp"]) + int(db.troops["lord"]["at"]), 125, "the opening lord is the weakest R")
 
 
-func test_people_with_several_cards_start_at_r_and_only_climb() -> void:
-	## cards.json gacha.versions: the first card of a person is R, later versions are SR / SSR, never lower
+func test_people_with_several_cards_only_climb() -> void:
+	## cards.json gacha.versions: later versions of a person are never lower than the one before (the first card can be any rarity)
 	var db := GameData.get_db()
 	var rank := {"C": 0, "R": 1, "SR": 2, "SSR": 3}
 	for who in db.gacha["versions"]:
@@ -815,8 +815,6 @@ func test_people_with_several_cards_start_at_r_and_only_climb() -> void:
 			if not db.cards.has(ids[i]):
 				continue
 			var r: int = rank[db.cards[ids[i]]["rarity"]]
-			if i == 0 and ids.size() > 1:  # a person with one card so far (曹操) can be any rarity
-				check_eq(db.cards[ids[i]]["rarity"], "R", "%s: the first card is R" % who)
 			check(r >= last, "%s: versions only climb (%s)" % [who, ids[i]])
 			last = r
 
