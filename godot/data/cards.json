@@ -484,18 +484,18 @@
   "cards": {
     "zhenghao": {
       "name": "郑好",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
-      "hp": 70,
-      "at": 84,
+      "hp": 64,
+      "at": 82,
       "pool": false
     },
     "jiangqiao": {
       "name": "姜巧",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "archer",
-      "hp": 60,
-      "at": 94,
+      "hp": 56,
+      "at": 84,
       "pool": false
     },
     "zheng_daoshou": {
@@ -833,10 +833,10 @@
     },
     "dongfeng": {
       "name": "董奉",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "logistics",
-      "hp": 67,
-      "at": 58,
+      "hp": 60,
+      "at": 60,
       "skills": [
         "xinglin",
         "jiedu"
@@ -1242,10 +1242,10 @@
     },
     "jiling": {
       "name": "纪灵",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
-      "hp": 72,
-      "at": 90,
+      "hp": 64,
+      "at": 82,
       "skills": [
         "sanjian"
       ],
@@ -1285,17 +1285,17 @@
     },
     "niufu": {
       "name": "牛辅",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
-      "hp": 72,
-      "at": 80,
+      "hp": 64,
+      "at": 74,
       "pool": false
     },
     "huzhen": {
       "name": "胡轸",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
+      "hp": 52,
       "at": 72,
       "pool": false
     },
@@ -1313,26 +1313,26 @@
     },
     "chenlan": {
       "name": "陈兰",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
+      "hp": 52,
       "at": 72,
       "pool": false
     },
     "fengfuren": {
       "name": "冯夫人",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 68,
+      "hp": 74,
+      "at": 60,
       "pool": false
     },
     "yuanshu": {
       "name": "袁术·仲家帝",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 70,
+      "hp": 74,
+      "at": 62,
       "skills": [
         "mishui"
       ],
@@ -1525,10 +1525,10 @@
     },
     "yuji": {
       "name": "于吉",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 86,
-      "at": 70,
+      "hp": 74,
+      "at": 62,
       "skills": [
         "fushui"
       ]
@@ -1562,8 +1562,8 @@
       "voice": "sunshangxiang",
       "rarity": "R",
       "troop": "archer",
-      "hp": 54,
-      "at": 80,
+      "hp": 62,
+      "at": 87,
       "skills": [
         "huojian",
         "gongyaoji"
@@ -1722,10 +1722,10 @@
     "wuguotai": {
       "name": "吴夫人·慈母",
       "voice": "wuguotai",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 96,
-      "at": 60,
+      "hp": 86,
+      "at": 52,
       "skills": [
         "cimu"
       ],
@@ -1755,10 +1755,10 @@
     },
     "lijue": {
       "name": "李傕",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 66,
-      "at": 90,
+      "hp": 60,
+      "at": 84,
       "skills": [
         "fubing"
       ],
@@ -1774,10 +1774,10 @@
     },
     "liru": {
       "name": "李儒",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 82,
-      "at": 74,
+      "hp": 72,
+      "at": 64,
       "skills": [
         "zhenjiu"
       ],
@@ -1796,10 +1796,10 @@
     },
     "zumao": {
       "name": "祖茂·老将",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 63,
-      "at": 73,
+      "hp": 54,
+      "at": 64,
       "skills": [
         "yindi"
       ],
@@ -1839,19 +1839,19 @@
     },
     "zhuzhi": {
       "name": "朱治·君理",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 73,
-      "at": 58,
+      "hp": 64,
+      "at": 50,
       "skills": [],
       "scope": "south"
     },
     "wujing": {
       "name": "吴景",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
-      "hp": 56,
-      "at": 80,
+      "hp": 48,
+      "at": 70,
       "skills": [
         "hujie"
       ],
@@ -1859,10 +1859,10 @@
     },
     "sunben": {
       "name": "孙贲",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
-      "at": 72,
+      "hp": 52,
+      "at": 62,
       "skills": [
         "jixi"
       ],
@@ -1870,10 +1870,10 @@
     },
     "sunjing": {
       "name": "孙静",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "logistics",
-      "hp": 68,
-      "at": 58,
+      "hp": 58,
+      "at": 48,
       "skills": [
         "shoujia"
       ],
@@ -2001,10 +2001,10 @@
     },
     "wangyi": {
       "name": "王异",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 82,
-      "at": 72,
+      "hp": 72,
+      "at": 62,
       "skills": [
         "jiuji"
       ],
@@ -2012,20 +2012,20 @@
     },
     "xinxianying": {
       "name": "辛宪英",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 70,
+      "hp": 74,
+      "at": 60,
       "skills": [
         "zhiji"
       ]
     },
     "caifuren": {
       "name": "蔡夫人·荆州",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 80,
-      "at": 72,
+      "hp": 70,
+      "at": 62,
       "skills": [
         "zhenbian"
       ],
@@ -2033,10 +2033,10 @@
     },
     "bianfuren": {
       "name": "卞夫人",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 92,
-      "at": 62,
+      "hp": 82,
+      "at": 52,
       "skills": [
         "xianhou"
       ],
@@ -2069,18 +2069,18 @@
       "voice": "diaochan",
       "rarity": "R",
       "troop": "logistics",
-      "hp": 82,
-      "at": 56,
+      "hp": 80,
+      "at": 69,
       "skills": [
         "biyue"
       ]
     },
     "baie_hu": {
       "name": "白额虎",
-      "rarity": "R",
+      "rarity": "N",
       "troop": "cavalry",
-      "hp": 56,
-      "at": 81,
+      "hp": 44,
+      "at": 55,
       "skills": [
         "huxiao"
       ],
@@ -2124,10 +2124,10 @@
     },
     "heyi": {
       "name": "何仪·渠帅",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 78,
-      "at": 74,
+      "hp": 70,
+      "at": 64,
       "skills": [
         "huangtian"
       ],
@@ -2135,11 +2135,11 @@
     },
     "xurong_card": {
       "name": "徐荣",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
       "person": "xurong",
-      "hp": 66,
-      "at": 88,
+      "hp": 58,
+      "at": 76,
       "skills": [
         "fubing"
       ],
@@ -2185,10 +2185,10 @@
     },
     "kuaiyue": {
       "name": "蒯越",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 74,
+      "hp": 74,
+      "at": 64,
       "pool": false,
       "skills": [
         "xianji"
@@ -2262,10 +2262,10 @@
     },
     "caihe": {
       "name": "蔡和·连弩统领",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "archer",
-      "hp": 58,
-      "at": 72,
+      "hp": 48,
+      "at": 62,
       "pool": false
     },
     "caifu_nu": {
@@ -2318,10 +2318,10 @@
     },
     "huangzu": {
       "name": "黄祖·江夏太守",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
-      "hp": 76,
-      "at": 78,
+      "hp": 66,
+      "at": 72,
       "pool": false
     },
     "caimao": {
@@ -2723,11 +2723,11 @@
     },
     "xiahoulan": {
       "name": "「铁面军法」夏侯兰",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
       "person": "xiahoulan",
-      "hp": 66,
-      "at": 90,
+      "hp": 56,
+      "at": 80,
       "skills": [
         "junfa"
       ],
@@ -2812,11 +2812,11 @@
     },
     "chunyuqiong": {
       "name": "「乌巢守将」淳于琼",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
       "person": "chunyuqiong",
-      "hp": 76,
-      "at": 82,
+      "hp": 66,
+      "at": 72,
       "pool": false
     },
     "youzhou_qiang": {
@@ -2937,8 +2937,8 @@
       "name": "姜维",
       "rarity": "R",
       "troop": "spear",
-      "hp": 66,
-      "at": 76,
+      "hp": 68,
+      "at": 81,
       "skills": [
         "qiangpo",
         "jiufa"
@@ -2982,10 +2982,10 @@
     },
     "chendao": {
       "name": "陈到",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "spear",
-      "hp": 76,
-      "at": 90,
+      "hp": 66,
+      "at": 80,
       "skills": [
         "qiangpo",
         "baierzhan"
@@ -3044,18 +3044,18 @@
     },
     "chenglian": {
       "name": "成廉",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
-      "at": 72,
+      "hp": 53,
+      "at": 62,
       "scope": "north"
     },
     "weixu": {
       "name": "魏续",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
-      "at": 72,
+      "hp": 53,
+      "at": 62,
       "scope": "north"
     },
     "lingtong": {
@@ -3068,26 +3068,26 @@
     },
     "yangang": {
       "name": "严纲",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
-      "at": 72,
+      "hp": 53,
+      "at": 62,
       "scope": "north"
     },
     "gaolan": {
       "name": "高览",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
-      "at": 73,
+      "hp": 53,
+      "at": 63,
       "scope": "north"
     },
     "zoudan": {
       "name": "邹丹",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 63,
-      "at": 72,
+      "hp": 53,
+      "at": 62,
       "scope": "north"
     },
     "qinwei": {
@@ -3204,8 +3204,8 @@
       "name": "曹操",
       "rarity": "R",
       "troop": "strategist",
-      "hp": 76,
-      "at": 66,
+      "hp": 82,
+      "at": 67,
       "scope": "north"
     },
     "xiahouyuan": {
@@ -3226,9 +3226,9 @@
     },
     "caohong": {
       "name": "曹洪",
-      "rarity": "C",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 50,
+      "hp": 60,
       "at": 74,
       "scope": "north"
     },
@@ -3308,10 +3308,10 @@
     },
     "liuye": {
       "name": "刘晔",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 74,
+      "hp": 74,
+      "at": 64,
       "pool": false,
       "scope": "south"
     },
@@ -3334,10 +3334,10 @@
     },
     "yufan": {
       "name": "虞翻",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 82,
-      "at": 72,
+      "hp": 72,
+      "at": 62,
       "pool": false,
       "scope": "south"
     },
@@ -3367,10 +3367,10 @@
     },
     "zangba": {
       "name": "臧霸",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "bandit",
-      "hp": 68,
-      "at": 90
+      "hp": 60,
+      "at": 88
     },
     "zhengbao": {
       "name": "郑宝",
@@ -3446,10 +3446,10 @@
     },
     "tadun": {
       "name": "蹋顿",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 66,
-      "at": 92,
+      "hp": 58,
+      "at": 88,
       "scope": "north"
     },
     "shenrong": {
@@ -3480,54 +3480,54 @@
     },
     "xianyufu": {
       "name": "鲜于辅",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 70,
+      "hp": 50,
       "at": 62,
       "pool": false,
       "scope": "north"
     },
     "qianzhao": {
       "name": "牵招",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 64,
-      "at": 68,
+      "hp": 54,
+      "at": 58,
       "pool": false,
       "scope": "north"
     },
     "zhangmiao": {
       "name": "张邈",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 66,
+      "hp": 56,
       "at": 64,
       "pool": false,
       "scope": "north"
     },
     "baoxin": {
       "name": "鲍信",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
-      "hp": 64,
-      "at": 70,
+      "hp": 54,
+      "at": 60,
       "pool": false,
       "scope": "north"
     },
     "yanxing": {
       "name": "阎行",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
-      "hp": 62,
-      "at": 74,
+      "hp": 52,
+      "at": 64,
       "pool": false,
       "scope": "north"
     },
     "huangquan": {
       "name": "黄权",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 68,
+      "hp": 58,
       "at": 62,
       "pool": false,
       "scope": "south"
@@ -3543,45 +3543,45 @@
     },
     "wangyun": {
       "name": "王允",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 72,
-      "at": 64,
+      "hp": 82,
+      "at": 74,
       "pool": false,
       "scope": "south"
     },
     "xiandi": {
       "name": "汉献帝",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "logistics",
-      "hp": 74,
-      "at": 56,
+      "hp": 94,
+      "at": 66,
       "pool": false,
       "scope": "south"
     },
     "guotu": {
       "name": "郭图",
-      "rarity": "C",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 62,
-      "at": 56,
+      "hp": 72,
+      "at": 64,
       "pool": false
     },
     "yuantan": {
       "name": "袁谭",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
-      "hp": 64,
-      "at": 70,
+      "hp": 54,
+      "at": 60,
       "pool": false,
       "scope": "north"
     },
     "yuanshang": {
       "name": "袁尚",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
-      "hp": 62,
-      "at": 72,
+      "hp": 52,
+      "at": 62,
       "pool": false,
       "scope": "north"
     },
@@ -3596,19 +3596,19 @@
     },
     "shenpei": {
       "name": "审配",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "spear",
-      "hp": 80,
-      "at": 84,
+      "hp": 72,
+      "at": 72,
       "pool": false,
       "scope": "north"
     },
     "caochun": {
       "name": "曹纯",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 76,
-      "at": 84,
+      "hp": 67,
+      "at": 82,
       "pool": false
     },
     "yuanxi": {
@@ -3622,10 +3622,10 @@
     },
     "xinping": {
       "name": "辛评",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 68,
-      "at": 60,
+      "hp": 56,
+      "at": 50,
       "pool": false,
       "scope": "north"
     },
@@ -3995,10 +3995,10 @@
     },
     "wangkuang": {
       "name": "王匡",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 66,
-      "at": 62,
+      "hp": 56,
+      "at": 52,
       "pool": false,
       "scope": "north"
     },
@@ -4031,10 +4031,10 @@
     },
     "yuejin": {
       "name": "乐进",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "infantry",
       "hp": 74,
-      "at": 84,
+      "at": 74,
       "pool": false,
       "scope": "north"
     },
@@ -4058,10 +4058,10 @@
     },
     "lukang": {
       "name": "陆康",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "logistics",
-      "hp": 72,
-      "at": 58,
+      "hp": 62,
+      "at": 48,
       "pool": false,
       "scope": "south"
     },
@@ -4076,10 +4076,10 @@
     },
     "caoxing": {
       "name": "曹性",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "archer",
-      "hp": 62,
-      "at": 72,
+      "hp": 52,
+      "at": 62,
       "pool": false,
       "scope": "north"
     },
@@ -4094,10 +4094,10 @@
     },
     "xizhicai": {
       "name": "戏志才",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 70,
-      "at": 70,
+      "hp": 80,
+      "at": 44,
       "pool": false,
       "scope": "north"
     },
@@ -4139,64 +4139,64 @@
     },
     "hanhao": {
       "name": "韩浩",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "logistics",
-      "hp": 70,
-      "at": 62,
+      "hp": 62,
+      "at": 52,
       "pool": false,
       "scope": "north"
     },
     "tianyu": {
       "name": "田豫",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 76,
-      "at": 82,
+      "hp": 66,
+      "at": 72,
       "pool": false,
       "scope": "north"
     },
     "kongrong": {
       "name": "孔融",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 76,
-      "at": 78,
+      "hp": 80,
+      "at": 54,
       "pool": false,
       "scope": "north"
     },
     "wangxiu": {
       "name": "王修",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 68,
-      "at": 62,
+      "hp": 70,
+      "at": 52,
       "pool": false,
       "scope": "north"
     },
     "wuanguo": {
       "name": "武安国",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 64,
+      "hp": 52,
       "at": 72,
       "pool": false,
       "scope": "north"
     },
     "tianfeng": {
       "name": "田丰",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 78,
-      "at": 80,
+      "hp": 80,
+      "at": 64,
       "pool": false,
       "scope": "north"
     },
     "jushou": {
       "name": "沮授",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 80,
-      "at": 78,
+      "hp": 82,
+      "at": 60,
       "pool": false,
       "scope": "north"
     },
@@ -4217,10 +4217,10 @@
     },
     "zhanglu": {
       "name": "张鲁",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 80,
-      "at": 72,
+      "hp": 84,
+      "at": 56,
       "skills": [
         "fushui_heal"
       ],
@@ -4235,10 +4235,10 @@
     },
     "wuxian": {
       "name": "吴苋",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "logistics",
-      "hp": 67,
-      "at": 58,
+      "hp": 90,
+      "at": 65,
       "pool": false
     },
     "yanpu": {
@@ -4394,10 +4394,10 @@
     },
     "hansui": {
       "name": "韩遂",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 80,
-      "at": 74,
+      "hp": 70,
+      "at": 78,
       "scope": "north"
     },
     "menghuo": {
@@ -4581,10 +4581,10 @@
     },
     "liubiao": {
       "name": "刘表·荆州牧",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "logistics",
-      "hp": 92,
-      "at": 62,
+      "hp": 82,
+      "at": 64,
       "pool": false
     },
     "zhangyun": {
@@ -4605,9 +4605,9 @@
     },
     "liupan": {
       "name": "刘磐·刘表之侄",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "cavalry",
-      "hp": 66,
+      "hp": 64,
       "at": 84,
       "pool": false
     }
