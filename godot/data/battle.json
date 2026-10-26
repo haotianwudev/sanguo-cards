@@ -28,6 +28,8 @@
       "order": {"prologue": 0, "taodong": 1, "luoyang_n": 1, "heishan": 2, "yuxi": 2, "beihai": 3, "dongui": 3, "xuzhou": 4, "jingxiang": 4, "huainan_s": 5, "huainan_n": 5, "yecheng": 6, "jiangdong": 6, "longhu": 7, "menghu": 7, "xiliang": 8, "tianfu": 8, "guanzhong": 9, "sanfang": 9, "luoyang_s": 10, "tianqing": 10, "beifa": 11, "chibi": 11, "guandu": 11, "dujiang": 11, "guiyi": 12},
       "_chapter": "整章的强度系数（乘公式，血和攻各乘它的平方根）：表里没写的章节用 chapter_default。第一章南 / 北线共用一个，保持 1；其他章 1（强度曲线：base 0.1 = 第一章开头，指数 2.0 → 0.8，offset 0.206：第三章开头 8.5、第四章 16.1、第十二章 84.8）",
       "chapter": {},
+      "_spans": "章内位置的起止列（[第一场战斗所在列, 本线最后一列]，该线战斗从曲线起点算起）：第一章南北线共用一个 quest，各写一段；没写的章节按整章 0..最大列算",
+      "spans": {"prologue": [[5, 22], [27, 53]]},
       "chapter_default": 1
     },
     "_unit": "卡面数字就是战斗数字。敌人表里的 hp / at 还是旧量级，进战斗时 hp ÷ unit.hp、at ÷ unit.at；每一次伤害再乘 damage_mult（= unit.at ÷ unit.hp），所以双方强度对比与旧版一致。",

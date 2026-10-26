@@ -261,6 +261,10 @@ static func target_power(qid: String, t := 0.0) -> float:
 
 static func _position_t(q: Dictionary, x: int) -> float:
 	## how far along the chapter column `x` is, 0 (first column) .. 1 (last)
+	var spans: Array = GameData.get_db().battle.get("scaling", {}).get("spans", {}).get(q["id"], [])
+	for span in spans:  # a chapter shared by two routes (the prologue) climbs along each route's own [first fight, last column]
+		if x >= int(span[0]) and x <= int(span[1]):
+			return clampf(float(x - int(span[0])) / maxf(1.0, float(int(span[1]) - int(span[0]))), 0.0, 1.0)
 	var raw: Dictionary = q.get("_raw", q)
 	var max_x := 1
 	for s in raw["squares"].values():
