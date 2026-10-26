@@ -815,7 +815,7 @@ func test_people_with_several_cards_start_at_r_and_only_climb() -> void:
 			if not db.cards.has(ids[i]):
 				continue
 			var r: int = rank[db.cards[ids[i]]["rarity"]]
-			if i == 0:
+			if i == 0 and ids.size() > 1:  # a person with one card so far (曹操) can be any rarity
 				check_eq(db.cards[ids[i]]["rarity"], "R", "%s: the first card is R" % who)
 			check(r >= last, "%s: versions only climb (%s)" % [who, ids[i]])
 			last = r

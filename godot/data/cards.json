@@ -3202,10 +3202,10 @@
     },
     "caocao": {
       "name": "曹操",
-      "rarity": "R",
+      "rarity": "SR",
       "troop": "strategist",
-      "hp": 82,
-      "at": 67,
+      "hp": 90,
+      "at": 80,
       "scope": "north"
     },
     "xiahouyuan": {
