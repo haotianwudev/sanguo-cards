@@ -2293,3 +2293,21 @@ func test_south_last_page_is_the_hero_and_his_lord_card() -> void:
 	s.merit = 10
 	Quests.open_side(s, "s_rc_luoyang_s")
 	check(s.lord_forms.has("lord_south_river"), "洛水夜船 hands over the lord card 主公·洛水夜船")
+
+
+func test_upgrade_never_offers_a_soldier() -> void:
+	## 点化 is for generals and lord cards: a soldier id that slipped into `owned` (白马义从, handed out by the story) is not on the list
+	var s := SaveData.create()
+	s.owned = ["sunce", "baima_yicong"]
+	check(not s.upgradable().has("baima_yicong"), "no soldier to 点化: %s" % [s.upgradable()])
+	check(s.upgradable().has("sunce"), "the general is still there")
+
+
+func test_upgrade_never_offers_a_soldier() -> void:
+	## 点化 is for generals and lord cards: 白马义从 (handed out by the story) is a soldier card, so it never shows up on the list
+	var s := SaveData.create()
+	s.grant_card("sunce")
+	s.grant_card("baima_yicong", true)
+	check(s.soldiers.get("baima_yicong", 0) == 1, "it is a soldier copy")
+	check(not s.upgradable().has("baima_yicong"), "no soldier to 点化: %s" % [s.upgradable()])
+	check(s.upgradable().has("sunce"), "the general is still there")

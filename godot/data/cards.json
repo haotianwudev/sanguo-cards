@@ -2785,7 +2785,8 @@
     },
     "baima_yicong": {
       "name": "白马义从",
-      "rarity": "C",
+      "rarity": "N",
+      "elite": true,
       "troop": "archer",
       "hp": 44,
       "at": 68,
