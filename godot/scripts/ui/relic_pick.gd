@@ -9,7 +9,7 @@ var relic_ids: Array = []
 var source := "relics"  # or "fates" (天命 at the start of a run)
 
 const RARITY := {"common": ["普通", "blue"], "rare": ["稀有", "purple"], "curse": ["诅咒", "red"]}
-const FATE_RARITY := {"common": ["吉", "blue"], "rare": ["大吉", "purple"], "curse": ["险中求", "red"]}
+const FATE_RARITY := {"common": ["吉", "blue"], "rare": ["大吉", "purple"], "curse": ["险中求", "red"], "bad": ["凶", "red"], "divine": ["天授", "gold"]}
 
 
 func _ready() -> void:

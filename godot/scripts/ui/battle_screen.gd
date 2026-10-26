@@ -478,7 +478,8 @@ func _sync_skill_bars() -> void:
 			var sk: Dictionary = GameData.get_db().skills[sid]
 			var ult := _is_ult(sk)
 			var btn := Button.new()
-			btn.text = "%s  AP%d" % [sk["name"], b.cost(u, sk)]
+			var tag := Kit.skill_tag(sk)
+			btn.text = "%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""]
 			var long_name: bool = str(sk["name"]).length() >= 5  # 「小霸王渡江」 still shows its AP
 			btn.add_theme_font_size_override("font_size", (16 if long_name else 20) if small else (20 if long_name else 24))
 			btn.icon = Kit.skill_icon(sk)
@@ -497,9 +498,13 @@ func _sync_skill_bars() -> void:
 			btn.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
 			btn.disabled = not b.usable(u, sk)
 			btn.pressed.connect(func():
+				if _held_skill:
+					_held_skill = false
+					return
 				_close_skill_popup()
 				_bar_open = -1
 				_on_skill(i, sid))
+			_hold_detail(btn, sk)
 			bar.add_child(btn)
 		if _skills_hidden() and not b.swap_options(i).is_empty():  # the popup's 换人 lives on the summoned column too
 			var sw := Button.new()
@@ -543,6 +548,53 @@ func _close_skill_popup() -> void:
 		_skill_popup = null
 
 
+var _held_skill := false  # a long press just showed the detail: the release that follows must not play the skill
+
+
+func _hold_detail(btn: Button, sk: Dictionary) -> void:
+	## hold a skill button for 0.45 s to read what it does (Kit.skill_desc) instead of playing it
+	btn.button_down.connect(func():
+		_held_skill = false
+		await get_tree().create_timer(0.45).timeout
+		if is_instance_valid(btn) and btn.button_pressed:
+			_held_skill = true
+			_show_skill_detail(sk))
+
+
+func _show_skill_detail(sk: Dictionary) -> void:
+	_close_skill_popup()
+	var overlay := Control.new()
+	overlay.z_index = 65
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	var dim := Button.new()  # a fresh touch-down anywhere closes it
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.focus_mode = Control.FOCUS_NONE
+	for st in ["normal", "hover", "pressed", "focus"]:
+		dim.add_theme_stylebox_override(st, Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+	dim.button_down.connect(func():
+		if Time.get_ticks_msec() - _skill_popup_at > 350:
+			_close_skill_popup())
+	overlay.add_child(dim)
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 14, 3, Kit.c("gold"), 16))
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 8)
+	col.custom_minimum_size = Vector2(460, 0)
+	panel.add_child(col)
+	var tag := Kit.skill_tag(sk)
+	col.add_child(Kit.label("%s　AP%d%s" % [sk["name"], int(sk["cost"]), ("　［%s］" % tag) if tag != "" else ""], Kit.FONT_BODY + 2, "gold"))
+	var d := Kit.label(Kit.skill_desc(sk), Kit.FONT_BODY)
+	d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	d.custom_minimum_size = Vector2(460, 0)
+	col.add_child(d)
+	overlay.add_child(panel)
+	add_child(overlay)
+	panel.position = Vector2(400, 220)
+	_skill_popup = overlay
+	_skill_popup_at = Time.get_ticks_msec()
+
+
 func _open_skills(i: int) -> void:
 	if _busy or b.result != "" or not (b.can_act(i) or b.can_swap(i)):
 		return
@@ -575,7 +627,7 @@ func _open_skills(i: int) -> void:
 	col.add_child(Kit.label(u["leader"]["card"]["name"], Kit.FONT_BODY + 2, "gold"))
 	for sid in u["leader"]["card"]["skills"]:
 		var sk: Dictionary = GameData.get_db().skills[sid]
-		var tag := "每场1次" if sk["per_battle"] else "限1" if sk["uses"] == 1 else ("累积" if sk["cumulative"] else "")
+		var tag := Kit.skill_tag(sk)
 		var btn := Kit.button("%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""], "blue", Kit.FONT_BODY)
 		btn.icon = Kit.skill_icon(sk)
 		btn.expand_icon = false
@@ -583,8 +635,12 @@ func _open_skills(i: int) -> void:
 		btn.custom_minimum_size = Vector2(260, 48)
 		btn.disabled = not b.usable(u, sk)
 		btn.pressed.connect(func():
+			if _held_skill:
+				_held_skill = false
+				return
 			_close_skill_popup()
 			_on_skill(i, sid))
+		_hold_detail(btn, sk)
 		col.add_child(btn)
 	if not b.swap_options(i).is_empty():
 		var sw := Kit.button("换人%s%s" % [("  AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "（不费 AP）", "" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round()], "gold", Kit.FONT_BODY)
@@ -610,7 +666,7 @@ func _open_swap(i: int) -> void:
 	opts = opts.slice(0, 5)  # five cards fit across the screen
 	var ids: Array = opts.map(func(ld): return ld["card"]["id"])
 	var o := PickOverlay.new()
-	o.title = "换谁上场？（%s · 攻击体力不变 · 换下的人本场不能再上）" % (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP")
+	o.title = "换谁上场？（%s · 攻击按新人和他的部队 · 体力按比例 · 换下的人本场不能再上）" % (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP")
 	o.card_ids = ids
 	o.captions = opts.map(func(ld): return "%s · %s" % [GameData.get_db().troops[ld["card"]["troop"]]["name"],
 		"、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"]))])
@@ -1555,6 +1611,7 @@ func _finish() -> void:
 		if carry:
 			var out := b.carry_out()
 			save.damage = out[0]
+			Quests.rescale_hp(save, b.party_max, Quests.party_max(save))  # a 换人 resized the bar: the map's bar keeps the share
 			save.carry_extra.merge(out[1], true)
 			save.carry_uses.merge(out[2], true)
 		await _banner("胜　利", Kit.c("gold"))

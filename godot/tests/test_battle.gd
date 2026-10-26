@@ -583,17 +583,19 @@ func test_swapping_costs_ap_and_the_card_that_left_cannot_return() -> void:
 	b.ap = 6
 	b.party_hp = b.party_max
 	check(b.can_swap(slot), "AP and a same-troop card to bring in")
+	b.party_hp = b.party_max / 2
 	var ap0 := b.ap
-	var at0: int = b.leaders[slot]["leader"]["at"]
-	var max0 := b.party_max
-	var hp0 := b.party_hp
+	var madai: Dictionary = b.roster.filter(func(ld): return ld["card"]["id"] == "madai")[0]
+	var share0 := float(b.party_hp) / b.party_max
 	b.swap(slot, "madai")
 	check_eq(b.ap, ap0 - b.swap_cost(), "swap_ap")
-	check_eq(b.leaders[slot]["leader"]["at"], at0, "the slot keeps its attack")
-	check(b.party_max == max0 and b.party_hp == hp0, "and the shared HP is untouched")
+	check_eq(b.leaders[slot]["leader"]["at"], madai["at"], "the slot fights with the newcomer's own attack (his unit)")
+	check_eq(b.party_max, b._max_hp_for(b._leaders_hp()), "the shared bar is the new party's")
+	check_between(float(b.party_hp) / b.party_max, share0 - 0.01, share0 + 0.01, "…and keeps its share")
 	check_eq(b.leaders[slot]["leader"]["card"]["id"], "madai")
 	check(not b.can_act(slot), "the newcomer waits for next round")
 	check(not b.can_swap(slot), "one swap a round")
+	b.party_hp = b.party_max  # (the enemy's turn must not end the fight)
 	b.end_round()
 	b.ap = 6
 	check(b.can_act(slot), "…and acts then")

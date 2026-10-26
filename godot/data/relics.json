@@ -1,6 +1,6 @@
 {
   "_relics": "宝物: kept for one run (a chapter attempt). rarity: common / rare / curse (strong with a cost). mods: at, magic, heal, hp, guard (damage taken cut), combo (extra per combo step), desperate (attack when below half HP), ap_start, ap_round, ap_max, turns, start_heal, boost_start, stun_start, calm, no_ambush, chest, offer_extra, pierce (ignore resists), first_hit (first hit each battle), defend (extra defend cut), stun (confuse chance), troop_at / troop_hp {troop: share} (Rance X faction items), troop_cost {troop: AP off each skill, min 1}; after_win: heal this share of HP after every win",
-  "_fates": "天命: every run of a chapter starts by picking one of fate_offer fates; its mods (same keys as relics) last the run. common = 吉, rare = 大吉, curse = double-edged",
+  "_fates": "天命: every run of a chapter starts by picking one of fate_offer fates; its mods (same keys as relics) last the run. common = 吉, rare = 大吉, curse = double-edged, bad = 凶 (pure drawback), divine = 天授 (far stronger than the rest) — neither is offered at the start, only a ？ event's `fate` hands them out",
   "fate_offer": 3,
   "fates": {
     "jiangxing": {
@@ -114,6 +114,73 @@
       "mods": {
         "ap_start": 2,
         "turns": -2
+      }
+    },
+    "shuairuo": {
+      "name": "衰弱",
+      "icon": "衰",
+      "rarity": "bad",
+      "desc": "凶。本轮全军体力 -20%",
+      "mods": {
+        "hp": -0.2
+      }
+    },
+    "huansan": {
+      "name": "涣散",
+      "icon": "涣",
+      "rarity": "bad",
+      "desc": "凶。军心涣散，本轮全军攻击 -15%",
+      "mods": {
+        "at": -0.15
+      }
+    },
+    "pojia": {
+      "name": "破甲",
+      "icon": "破",
+      "rarity": "bad",
+      "desc": "凶。本轮受到的伤害 +15%",
+      "mods": {
+        "guard": -0.15
+      }
+    },
+    "cuoshi": {
+      "name": "错失天时",
+      "icon": "失",
+      "rarity": "bad",
+      "desc": "凶。每场战斗少 2 个回合",
+      "mods": {
+        "turns": -2
+      }
+    },
+    "duanliang": {
+      "name": "断粮",
+      "icon": "饥",
+      "rarity": "bad",
+      "desc": "凶。回复技能 -50%，战后宝箱概率 -20%",
+      "mods": {
+        "heal": -0.5,
+        "chest": -0.2
+      }
+    },
+    "xiongxing": {
+      "name": "凶星",
+      "icon": "凶",
+      "rarity": "bad",
+      "desc": "凶。本轮敌人体力和攻击 +15%",
+      "mods": {
+        "enemy": 0.15
+      }
+    },
+    "tianmingsuogui": {
+      "name": "天命所归",
+      "icon": "天",
+      "rarity": "divine",
+      "desc": "天授。本轮全军攻击 +30%、体力 +30%，受到的伤害 -15%，每场战斗开局全军 BOOST",
+      "mods": {
+        "at": 0.3,
+        "hp": 0.3,
+        "guard": 0.15,
+        "boost_start": 1
       }
     }
   },

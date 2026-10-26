@@ -284,6 +284,17 @@ static func skill_panel(skill_ids: Array, width: float) -> VBoxContainer:
 	return box
 
 
+static func skill_tag(sk: Dictionary) -> String:
+	## the skill's type in a word, shown beside its name in battle: 每场1次 / 限N / 累积 (empty for a plain skill)
+	if sk.get("per_battle", false):
+		return "每场1次"
+	if sk.get("uses", null) != null:
+		return "限%d" % int(sk["uses"])
+	if sk.get("cumulative", false):
+		return "累积"
+	return ""
+
+
 static func skill_desc(sk: Dictionary) -> String:
 	## one line on what a skill does, from its effects (for the 整备 detail panel)
 	var parts: Array = []

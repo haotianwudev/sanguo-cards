@@ -123,6 +123,14 @@ func test_failing_steps_back_one_square() -> void:
 	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["zy_lure"])
 
 
+func test_every_event_colour_is_in_the_palette() -> void:
+	## the map paints a dealt ？ square in its event's colour via Kit.c — a name the theme lacks ("yellow") crashed the map
+	var pal: Dictionary = Kit.pal()
+	for eid in GameData.get_db().events:
+		var col := str(GameData.get_db().events[eid].get("color", "blue"))
+		check(pal.has(col), "event %s: colour %s is not in the palette" % [eid, col])
+
+
 func test_every_event_option_resolves_or_leads_somewhere() -> void:
 	var q := quest(0)
 	var all: Array = []
@@ -198,7 +206,7 @@ func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
 	check(s2.carry_extra.is_empty() and s2.damage == 100, "skills reset, HP untouched")
 
 
-func test_poison_costs_a_third_of_the_hp() -> void:
+func test_poison_costs_the_configured_share_of_the_hp() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
 	Quests.begin(q, s)
@@ -206,7 +214,75 @@ func test_poison_costs_a_third_of_the_hp() -> void:
 	s.resolved = false
 	s.events = {"road": "snake"}
 	Quests.choose_event(q, s, rng(0), 1)  # squeeze the venom out yourself: always poisoned
-	check_eq(s.damage, int(round(Quests.party_max(s) / 3.0)))
+	check_eq(s.damage, int(round(Quests.party_max(s) * float(GameData.get_db().battle["event_scale"]["poison"]))))
+
+
+func test_events_can_lower_difficulty_danger_and_merit_but_not_past_the_floor() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	var floor_lvl := int(GameData.get_db().battle["difficulty_min"])
+	for _n in 5:
+		Quests._apply([{"difficulty": -1}, {"danger": -1}, {"merit": -3}], q, s, rng(0))
+	check_eq(s.difficulty, floor_lvl, "难度 stops at difficulty_min")
+	check_eq(s.danger, 0, "险 never goes negative")
+	check_eq(s.merit, 0, "战功 never goes negative")
+	Quests._apply([{"difficulty": 2}, {"danger": 1}, {"merit": 5}], q, s, rng(0))
+	check_eq(s.difficulty, floor_lvl + 2)
+	check_eq(s.danger, 1)
+	check_eq(s.merit, 5)
+
+
+func test_events_can_change_the_fate_drop_a_tier_and_set_every_ambush() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	var db := GameData.get_db()
+	s.fate = db.fates.keys()[0]
+	Quests._apply([{"fate": "curse"}], q, s, rng(0))
+	check_eq(db.fates[s.fate]["rarity"], "curse", "a cursed 天命")
+	var cursed := s.fate
+	Quests._apply([{"fate": "good"}], q, s, rng(0))
+	check(s.fate != cursed and db.fates[s.fate]["rarity"] in ["common", "rare"], "a good 天命 replaces it")
+	Quests._apply([{"fate": "bad"}], q, s, rng(0))
+	check_eq(db.fates[s.fate]["rarity"], "bad", "a 凶 天命")
+	for seed_value in 30:
+		var t := SaveData.create()
+		Quests.begin(q, t, rng(seed_value))
+		check(t.fate_offer.all(func(f): return not db.fates[f]["rarity"] in ["bad", "divine"]), "凶 / 天授 天命 are never offered at the start")
+	Quests._apply([{"fate": "divine"}], q, s, rng(0))
+	check_eq(db.fates[s.fate]["rarity"], "divine", "a 天授 天命")
+	for seed_value in 30:
+		Quests._apply([{"fate": true}], q, s, rng(seed_value))
+		check(db.fates[s.fate]["rarity"] != "divine", "a plain 改命 never lands on 天授")
+	var opts: Array = db.events["fate_shift"]["options"]
+	check(opts.any(func(o): return o["weight"] < 1.0), "an option's weight survives loading (天命所归 is the rare one)")
+	var cid: String = db.cards.values().filter(func(c): return not c["soldier"] and c.get("person", "") != "lord")[0]["id"]
+	s.grant_card(cid)
+	s.upgrade(cid)
+	check_eq(s.tier(cid), 1, "银 after one 点化")
+	Quests._apply([{"downgrade": 1}], q, s, rng(0))
+	check_eq(s.tier(cid), 0, "back to 铜")
+	Quests._apply([{"downgrade": 1}], q, s, rng(0))
+	check(s.has_card(cid), "a 铜 card stays in the party")
+	Quests._apply([{"ambush_all": true}], q, s, rng(0))
+	var laid: Dictionary = Quests.view(q, s)["squares"]
+	var fights: Array = laid.keys().filter(func(sid): return laid[sid]["type"] == "battle" and not laid[sid]["boss"])
+	check(not fights.is_empty() and fights.all(func(sid): return s.ambushes.has(sid)), "every fight is an 埋伏")
+	Quests._apply([{"ambush_all": false}], q, s, rng(0))
+	check(s.ambushes.is_empty(), "and then none")
+
+
+func test_a_party_change_keeps_the_hp_share() -> void:
+	var s := SaveData.create()
+	s.damage = 50
+	Quests.rescale_hp(s, 100, 150)
+	check_eq(150 - s.damage, 75, "half HP stays half when the bar grows")
+	Quests.rescale_hp(s, 150, 60)
+	check_eq(60 - s.damage, 30, "…and when it shrinks")
+	s.damage = 0
+	Quests.rescale_hp(s, 60, 200)
+	check_eq(s.damage, 0, "full stays full")
 
 
 func test_hero_can_be_anyone() -> void:
@@ -313,9 +389,12 @@ func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
 	return float(wins) / n
 
 
+const START_LINEUP := [["sunce", "zhouyu"], ["zhaoyun", "guojia", "xiahoulan"]]  # who walks into the prologue: the south / north birth's own people (the curve starts at 0.4 and climbs to 3.9, so it is meant for a party with its lead generals)
+
+
 func test_chapter_one_is_winnable_with_either_plan() -> void:
 	for pick in 2:  # south / north share one coefficient (battle.scaling.chapter.prologue): 主公的大招每场只一次，所以第一章比以前容易
-		check_between(rate(0, [], pick, -1, 100), 0.35, 1.01, "pick %d" % pick)
+		check_between(rate(0, START_LINEUP[pick], pick, -1, 100), 0.35, 1.01, "pick %d" % pick)
 
 
 func campaign_rate(pick: int, fork: int, n := 60) -> float:
@@ -323,6 +402,7 @@ func campaign_rate(pick: int, fork: int, n := 60) -> float:
 	var wins := 0
 	for seed_value in n:
 		var s := SaveData.create()
+		s.owned = START_LINEUP[pick].duplicate()
 		if play_quest(quest(0), s, pick, -1, seed_value) and play_quest(quest(1), s, 0, fork, seed_value + 1000):
 			wins += 1
 	return float(wins) / n
@@ -787,18 +867,19 @@ func test_beating_a_boss_or_elite_counts_for_merit() -> void:
 	check_eq(s.run_bosses, 1)
 
 
-func test_finished_chapters_leave_story_flags_that_pick_the_interlude() -> void:
+func test_finished_chapters_leave_story_flags_that_pick_the_side_stories() -> void:
 	var q := quest(1)
 	var s := SaveData.create()
 	Quests.begin(q, s)
 	Quests.record(s, "董白：留下")
 	Quests.complete(q, s)
 	check(s.flags.has("董白：留下"))
-	var titles: Array = Quests.interlude("taodong", s).map(func(sc): return sc["title"])
+	var titles: Array = Quests.side_stories(s).map(func(st): return st["title"])
 	check(titles.has("玉玺") and titles.has("单挑") and not titles.has("河边"), str(titles))
 	var s2 := SaveData.create()
 	s2.flags = ["董白：交给袁绍"]
-	var t2: Array = Quests.interlude("taodong", s2).map(func(sc): return sc["title"])
+	s2.quests_cleared = ["taodong"]
+	var t2: Array = Quests.side_stories(s2).map(func(st): return st["title"])
 	check(t2.has("河边") and not t2.has("单挑"), str(t2))
 	Quests.begin(quest(0), s)
 	check(s.flags.has("董白：留下"), "flags outlive a new run")
@@ -1367,30 +1448,30 @@ func test_about_half_of_the_ordinary_fights_are_a_random_ambush() -> void:
 
 
 func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
-	## battle.scaling: each chapter's ordinary / elite / boss fights are pulled to strength × base × (N + offset)^exponent × tier, so by construction
-	## no later chapter is easier, no elite is easier than the ordinary fights, no boss than the elites (吕布's showpieces are left alone)
+	## battle.scaling: a chapter's first column sits on strength × base × the chapters' growth so far (exponent easing first → last), its last column on the same formula one chapter later and the
+	## columns between are interpolated, so no later column is easier than an earlier one on a route and a chapter ends where the next one begins
 	var db := GameData.get_db()
 	var cfg: Dictionary = db.battle["scaling"]
 	var by_route := [["prologue", "taodong", "yuxi", "dongui", "jingxiang", "huainan_s", "jiangdong", "menghu"], ["prologue", "luoyang_n", "heishan", "beihai", "xuzhou", "huainan_n", "yecheng", "longhu", "xiliang", "sanfang", "tianqing", "guandu"]]
 	for q in db.quests:
-		var base: Dictionary = Quests._power_base(q)
-		for tier in ["normal", "elite", "boss"]:
-			if base[tier] <= 0.0:
-				continue
-			var k := Quests._scale_for(tier, base[tier], base[tier], q["id"])
-			check(absf(base[tier] * k * k - Quests.target_power(q["id"], tier)) < 0.001 * Quests.target_power(q["id"], tier), "%s %s median sits on the target" % [q["id"], tier])
-		if base["elite"] > 0.0:
-			check(Quests.target_power(q["id"], "elite") * pow(float(db.battle["enemy_coef"]["elite"]), 2) > Quests.target_power(q["id"], "normal") * pow(float(db.battle["enemy_coef"]["normal"]), 2), "%s: elites above ordinary" % q["id"])
-		if base["boss"] > 0.0 and base["elite"] > 0.0:
-			check(Quests.target_power(q["id"], "boss") * pow(float(db.battle["enemy_coef"]["boss"]), 2) > Quests.target_power(q["id"], "elite") * pow(float(db.battle["enemy_coef"]["elite"]), 2), "%s: bosses above elites" % q["id"])
+		var qid: String = q["id"]
+		if not cfg["order"].has(qid):
+			continue
+		var want := float(cfg["base"])
+		for k in range(1, int(cfg["order"][qid]) + 1):
+			want *= pow((k + float(cfg["offset"])) / (k - 1 + float(cfg["offset"])), lerpf(float(cfg["exponent_first"]), float(cfg["exponent_last"]), minf(float(k), float(cfg["exponent_chapters"])) / float(cfg["exponent_chapters"])))
+		want *= 1000000.0 * float(cfg["strength"]) * float(cfg["chapter"].get(qid, cfg["chapter_default"]))
+		check(absf(Quests.target_power(qid, 0.0) - want) < 1.0, "%s starts on the formula" % qid)
+		check(Quests.target_power(qid, 0.5) >= Quests.target_power(qid, 0.0) and Quests.target_power(qid, 1.0) >= Quests.target_power(qid, 0.5), "%s never gets easier along the chapter" % qid)
 	for route in by_route:
 		for i in range(1, route.size()):
-			for tier in ["normal", "elite", "boss"]:
-				check(Quests.target_power(route[i], tier) >= Quests.target_power(route[i - 1], tier), "%s %s is not easier than %s" % [route[i], tier, route[i - 1]])
-	var weak := Quests._scale_for("normal", 1.0, 1.0, "yuxi")
-	var strong := 0.0
+			check(Quests.target_power(route[i], 0.0) >= Quests.target_power(route[i - 1], 0.0), "%s is not easier than %s" % [route[i], route[i - 1]])
+			if route[i - 1] != "prologue" and cfg["chapter"].get(route[i], cfg["chapter_default"]) == cfg["chapter"].get(route[i - 1], cfg["chapter_default"]) and cfg["order"][route[i]] == cfg["order"][route[i - 1]] + 1:
+				check(absf(Quests.target_power(route[i - 1], 1.0) - Quests.target_power(route[i], 0.0)) < 1.0, "%s ends where %s begins" % [route[i - 1], route[i]])
+	check(Quests.target_power("yuxi", 0.0) > Quests.target_power("taodong", 1.0) - 1.0, "chapter 3 opens no easier than chapter 2 ends")
+	var weak := Quests._scale_for("yuxi", 0.0, 1.0)
 	cfg["strength"] = float(cfg["strength"]) * 2.0  # the one knob moves everything together
-	strong = Quests._scale_for("normal", 1.0, 1.0, "yuxi")
+	var strong := Quests._scale_for("yuxi", 0.0, 1.0)
 	cfg["strength"] = float(cfg["strength"]) / 2.0
 	check(absf(strong / weak - sqrt(2.0)) < 0.001, "strength x2 = power x2 (hp and attack x sqrt 2)")
 
@@ -1418,7 +1499,7 @@ func test_mystery_events_are_dealt_up_front_and_resolved_by_chance() -> void:
 	s.relics = ["x"] if false else s.relics
 	for _i in 60:
 		seen[Quests.random_option(SaveData.create(), GameData.get_db().events["bad_stampede"], r)] = true
-	check(seen.size() == 2, "both outcomes can come up")
+	check_eq(seen.size(), GameData.get_db().events["bad_stampede"]["options"].size(), "every outcome can come up")
 
 
 func test_each_run_deals_different_events() -> void:
@@ -1825,7 +1906,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	s.flags = ["出生：江东富春"]
 	check(Quests.side_stories(s).is_empty(), "nothing before a chapter is done")
 	var south := Quests.side_stories(s, "prologue")
-	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine"]), "the south birth gets only the south prologue stories")
+	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine", "s_i_sewing"]), "the south birth gets only the south prologue stories")
 	s.quests_cleared = ["prologue"]
 	s.grant_card("sunce")
 	s.merit = 9
@@ -2212,4 +2293,3 @@ func test_south_last_page_is_the_hero_and_his_lord_card() -> void:
 	s.merit = 10
 	Quests.open_side(s, "s_rc_luoyang_s")
 	check(s.lord_forms.has("lord_south_river"), "洛水夜船 hands over the lord card 主公·洛水夜船")
-

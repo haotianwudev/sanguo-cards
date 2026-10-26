@@ -680,7 +680,7 @@ func level() -> int:
 
 func chest_general_chance() -> float:
 	var cg: Dictionary = _db().gacha.get("chest_general", {})
-	return minf(0.9, float(cg.get("base", 0.0)) + float(cg.get("per_level", 0.0)) * difficulty)
+	return clampf(float(cg.get("base", 0.0)) + float(cg.get("per_level", 0.0)) * difficulty, 0.0, 0.9)
 
 
 func route() -> String:

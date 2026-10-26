@@ -1835,6 +1835,13 @@ CGS = {
     "ss_firstwine": "小故事「一杯倒」：清晨孙家门口，孙策和周瑜一人头顶一个酒坛跪在地上，吴夫人叉腰站在门里",
     "ss_suanpan": "小故事「甄家的算盘」：甄府书房，张夫人拿着一张画满格子的大表格仔细端详，小甄宓趴在桌边学着画歪歪扭扭的格子",
     "ss_baima": "小故事「白马」：马厩里，赵云牵着雪白的骏马，郭嘉蹲在草堆边晃着酒葫芦大笑，草堆里露出一双摔倒的人的靴子",
+    "ss_cash": "小故事：私房钱",
+    "ss_boast": "小故事：吹牛",
+    "ss_river": "小故事：河边",
+    "ss_fame": "小故事：名号",
+    "ss_home": "小故事：安家",
+    "ss_rule": "小故事：第一条军规",
+    "ss_news": "小故事：山外的消息",
     "ss_zumao": "小故事「祖茂的头巾」：清晨河边，老将祖茂和少年孙策并排蹲着，一起搓洗一块洗得发白的红头巾",
     "ss_huoshi": "小故事「联军伙食」：讨董联军大营门口，孙策抱着半罐蜂蜜，被拦在门口的周瑜伸手讨要，两人嘴角都沾着蜜",
     "ss_lingqi_meal": "小故事「吃饭的规矩」：甄家饭桌上，吕玲绮笨拙地握着一双筷子夹肉，肉掉了，小甄宓一本正经地示范，张夫人给她盛了一大碗",
@@ -2426,6 +2433,15 @@ FATES = {
     "beishui": "broken cauldrons and a burning boat at a riverbank, soldiers facing the enemy with no way back",
     "luanshi": "a blood-red sky over burning cities, fortune favouring the bold",
     "jijin": "cavalry charging forward at full gallop in a blur of speed",
+    # 凶 (only forced on by ？ events)
+    "shuairuo": "一副空荡荡的汉代札甲（甲片用皮绳串成）和一顶汉式兜鍪靠在枯树下，没有人穿，落叶堆在脚边",
+    "huansan": "折断的汉军军旗倒在泥地里，几个穿汉代札甲的士兵背影朝不同方向散去",
+    "pojia": "一面汉代长方形木盾（上圆下方，漆红底黑纹）被长戟捅穿，裂纹向四周蔓延，碎甲片散落",
+    "cuoshi": "一只汉代青铜漏壶（多级铜壶滴漏，不是沙漏）里的水已经漏干，旁边的石日晷被乌云吞没",
+    "duanliang": "翻倒的空粮袋和裂开的陶瓮，地上只剩几粒米，一只乌鸦在啄",
+    "xiongxing": "血红的天空中一颗拖着长尾的凶星，下面是黑压压的敌军营火",
+    # 天授 (rarest, only from ？ events)
+    "tianmingsuogui": "云开处一道金光直落，金光中悬着一方传国玉玺，龙形云气盘绕四周",
 }
 # 词缀 badges (cards.json battle.affixes id -> symbol); godot/data/art/affixes/<id>.png, shown in the battle info
 AFFIXES = {
@@ -2442,7 +2458,7 @@ UI_ART = {
 }
 
 
-# 下一批（交给 Gemini）不再手写：每次运行都从游戏数据（cards.json / story.json / endings.json / interludes.json / side_stories.json）里
+# 下一批（交给 Gemini）不再手写：每次运行都从游戏数据（cards.json / story.json / endings.json / side_stories.json）里
 # 算出「游戏正在用、但还没交付」的图，按下面的优先级排。游戏里没用到的图不会出现在这里。
 # 优先级（越靠前越先画）：
 #   0 占位 / 缺失的立绘      —— 角色一出场就是占位图
@@ -2476,7 +2492,6 @@ def build_next(delivered: dict) -> list:
     cards = load_cards(gd)
     story = json.loads((gd / "story.json").read_text("utf-8"))
     endings = json.loads((gd / "endings.json").read_text("utf-8"))["endings"]
-    inter = json.loads((gd / "interludes.json").read_text("utf-8")).get("after", {})
     side = json.loads((gd / "side_stories.json").read_text("utf-8")) if (gd / "side_stories.json").exists() else {}
     sc, en = cards["scenarios"], cards["enemies"]
     qidx = {q["id"]: i for i, q in enumerate(story["quests"])}
@@ -2518,9 +2533,6 @@ def build_next(delivered: dict) -> list:
             end = endings.get(q["ending"]) if isinstance(q["ending"], str) else q["ending"]
             if end and end.get("cg"):
                 put("cg", end["cg"], 6, (qi,), f"结局卡·{end.get('title', '')}（象征画）")
-        for scene in inter.get(q["id"], []):
-            if scene.get("cg"):
-                put("cg", scene["cg"], 3, (qi, 10**6), f"{q['title']}·幕间「{scene.get('title', '')}」")
         for pg in side.get("chapters", {}).get(q["id"], []):  # the chapter-end page's picture (also that card's portrait)
             if pg.get("cg"):
                 put("cg", pg["cg"], 3, (qi, 10**6 + 1), f"{q['title']}·章末页面（过场 CG，也是卡）")

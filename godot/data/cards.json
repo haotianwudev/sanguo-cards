@@ -385,6 +385,17 @@
         "ploy"
       ]
     },
+    "strategist_mage": {
+      "_comment": "攻击型策士（妖道、术士）：第一技能是计略（法术攻击），不献策",
+      "name": "策士（攻）",
+      "normal": [
+        "ploy"
+      ],
+      "special": [
+        "ploy",
+        "xiance"
+      ]
+    },
     "bandit": {
       "name": "贼",
       "normal": [
@@ -2667,6 +2678,7 @@
       "person": "xuanjizi",
       "hp": 63,
       "at": 50,
+      "kit": "strategist_mage",
       "skills": [
         "mihun"
       ],
