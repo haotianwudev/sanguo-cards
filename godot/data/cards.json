@@ -3833,28 +3833,28 @@
     },
     "xusheng": {
       "name": "徐盛",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "spear",
-      "hp": 64,
-      "at": 74,
+      "hp": 54,
+      "at": 64,
       "pool": false,
       "scope": "south"
     },
     "panzhang": {
       "name": "潘璋",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 62,
-      "at": 74,
+      "hp": 52,
+      "at": 64,
       "pool": false,
       "scope": "south"
     },
     "mengda": {
       "name": "孟达",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "cavalry",
-      "hp": 64,
-      "at": 70,
+      "hp": 54,
+      "at": 60,
       "pool": false,
       "scope": "south"
     },
@@ -3878,10 +3878,10 @@
     },
     "lvfan": {
       "name": "吕范",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "logistics",
-      "hp": 72,
-      "at": 58,
+      "hp": 62,
+      "at": 48,
       "pool": false,
       "scope": "south"
     },
@@ -3896,10 +3896,10 @@
     },
     "zhangsong": {
       "name": "张松",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 70,
-      "at": 64,
+      "hp": 60,
+      "at": 54,
       "pool": false,
       "scope": "south"
     },
