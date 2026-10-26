@@ -78,16 +78,20 @@ func _ready() -> void:
 		_rebuild())
 	pool_box.add_child(_sort_btn)
 	var scroll := ScrollContainer.new()
-	scroll.position = Vector2(12, 62)
-	scroll.size = Vector2(830, 248)
+	scroll.position = Vector2(6, 56)  # the scroll clips its content: a 6px margin all round keeps the edge cards' aura / selection box from being cut off
+	scroll.size = Vector2(842, 260)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	pool_box.add_child(scroll)
 	_dnd(scroll, {}, "pool")
+	var pad := MarginContainer.new()
+	for side in ["left", "top", "right", "bottom"]:
+		pad.add_theme_constant_override("margin_" + side, 6)
+	scroll.add_child(pad)
 	_grid = GridContainer.new()
 	_grid.columns = 7
 	_grid.add_theme_constant_override("h_separation", 8)
 	_grid.add_theme_constant_override("v_separation", 8)
-	scroll.add_child(_grid)
+	pad.add_child(_grid)
 
 	# the detail panel
 	var detail_box := _panel(Vector2(880, 58), Vector2(380, 590))
