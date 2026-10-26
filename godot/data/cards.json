@@ -192,7 +192,9 @@
         "rarity": "SSR",
         "hp": 100,
         "at": 100,
-        "skills": ["qianglong"],
+        "skills": [
+          "qianglong"
+        ],
         "art": true
       },
       "lord_south_armor": {
@@ -201,7 +203,9 @@
         "rarity": "SSR",
         "hp": 100,
         "at": 100,
-        "skills": ["tongjia_huxiao"],
+        "skills": [
+          "tongjia_huxiao"
+        ],
         "art": true
       },
       "lord_north_cloak": {
@@ -3636,10 +3640,10 @@
     },
     "xinpi": {
       "name": "辛毗",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 70,
-      "at": 64,
+      "hp": 74,
+      "at": 40,
       "pool": false,
       "scope": "north"
     },
@@ -3654,10 +3658,10 @@
     },
     "huangchengyan": {
       "name": "黄承彦",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 70,
-      "at": 62,
+      "hp": 74,
+      "at": 42,
       "pool": false
     },
     "yanyu": {
@@ -3680,18 +3684,18 @@
     },
     "simahui": {
       "name": "司马徽",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 70,
+      "hp": 78,
+      "at": 60,
       "pool": false
     },
     "guanlu": {
       "name": "管辂",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
       "hp": 66,
-      "at": 64,
+      "at": 54,
       "pool": false
     },
     "chengyu": {
@@ -3723,18 +3727,18 @@
     },
     "pangdegong": {
       "name": "庞德公",
-      "rarity": "SR",
+      "rarity": "R",
       "troop": "strategist",
-      "hp": 84,
-      "at": 68,
+      "hp": 74,
+      "at": 58,
       "pool": false
     },
     "xushao": {
       "name": "许劭",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "strategist",
-      "hp": 68,
-      "at": 62,
+      "hp": 78,
+      "at": 42,
       "pool": false
     },
     "fanneng": {
@@ -3784,19 +3788,19 @@
     },
     "changxi": {
       "name": "昌豨",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "bandit",
-      "hp": 64,
-      "at": 70,
+      "hp": 54,
+      "at": 60,
       "pool": false,
       "scope": "north"
     },
     "lingcao": {
       "name": "凌操",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 64,
-      "at": 72,
+      "hp": 54,
+      "at": 62,
       "pool": false,
       "scope": "south"
     },
@@ -3811,19 +3815,19 @@
     },
     "gongsundu": {
       "name": "公孙度",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 70,
-      "at": 66,
+      "hp": 60,
+      "at": 56,
       "pool": false,
       "scope": "north"
     },
     "dongxi": {
       "name": "董袭",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 70,
-      "at": 68,
+      "hp": 60,
+      "at": 58,
       "pool": false,
       "scope": "south"
     },
@@ -4585,18 +4589,18 @@
     },
     "zhangyun": {
       "name": "张允·水军督将",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 62,
+      "hp": 52,
       "at": 64,
       "pool": false
     },
     "sufei": {
       "name": "苏飞·黄祖部将",
-      "rarity": "R",
+      "rarity": "C",
       "troop": "infantry",
-      "hp": 52,
-      "at": 74,
+      "hp": 42,
+      "at": 64,
       "pool": false
     },
     "liupan": {
@@ -4604,7 +4608,7 @@
       "rarity": "SR",
       "troop": "cavalry",
       "hp": 66,
-      "at": 86,
+      "at": 84,
       "pool": false
     }
   }
