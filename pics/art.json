@@ -7647,6 +7647,10 @@
     "ss_news": {
       "src": "source/cg/ss_news.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "c4_cimu": {
+      "src": "source/cg/c4_cimu.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }

@@ -619,7 +619,7 @@ func test_beihai_peace_route_wins_through_to_beihai() -> void:
 	s.flags.append("结局四 · 绝罚")  # peace needs ending seven first
 	var q := quest_by_id("beihai")
 	var path := walk(q, s, [], 1, 0, 0)
-	for sid in ["bh_zheng", "bh_jiang", "bh_zj_peace", "bh_zj_join", "bh_lubu", "bh_flee", "bh_guanhai", "bh_porridge", "bh_end"]:
+	for sid in ["bh_zheng", "bh_jiang", "bh_zj_peace", "bh_zj_join", "bh_lubu", "bh_flee", "bh_guanhai", "bh_porridge", "bh_cimu", "bh_end"]:
 		check(path.has(sid), "passes " + sid)
 	check(not path.has("bh_escape") and not path.has("bh_bad_end"), "winning against 吕布 skips the retreat scenes")
 	for c in ["zhenghao", "jiangqiao", "taishici", "beihai_tuntian", "kongrong"]:
