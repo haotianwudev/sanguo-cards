@@ -114,6 +114,10 @@ static func ensure_started(save: SaveData, rng: RandomNumberGenerator = null) ->
 static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> void:
 	## Start a run. With an rng the shuffle groups are dealt anew; without one the map is as written (tests).
 	q = q.get("_raw", q)
+	# the ？ events are dealt once per chapter: starting it again (重打 / a lost first square) keeps the same seed, so the same events and outcomes
+	var same_chapter: bool = str(save.chapter_start.get("quest", "")) == q["id"] and str(save.chapter_start.get("replay", "")) == save.replay
+	if rng != null and not (same_chapter and save.event_seed != 0):
+		save.event_seed = rng.randi() | 1
 	# relics brought from finished chapters start every run; ones found in this chapter reset on a restart
 	save.relics = save.kept_relics.filter(func(r): return GameData.get_db().relics.has(r))
 	save.danger = int(save.clears.get(q["id"], 0)) if save.replay == q["id"] else 0  # 进阶: replays get harder
@@ -125,10 +129,11 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.layout = {}
 	save.steps = []
 	if rng != null:
+		var deal_rng := event_rng(save, "shuffle", rng)  # the map is dealt the same on a restart too, or the ？ events would land elsewhere
 		for group in q["shuffle"]:
 			var dealt: Array = group.duplicate()
 			for i in range(dealt.size() - 1, 0, -1):
-				var j := rng.randi_range(0, i)
+				var j := deal_rng.randi_range(0, i)
 				var tmp = dealt[i]
 				dealt[i] = dealt[j]
 				dealt[j] = tmp
@@ -167,12 +172,21 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.event_battle = {}
 	save.event_note = []
 	if rng != null:
-		_roll_events(q, save, rng)  # which ？ event waits where is known from the start (the map names it); how it turns out is chance
+		_roll_events(q, save, event_rng(save, "deal", rng))  # which ？ event waits where is known from the start (the map names it); how it turns out is chance
 	reset_carry(save)
 	_auto_resolve(q, save)
 	# remember how the chapter began (once per chapter: a lost first square calls begin again and must not overwrite it)
 	if str(save.chapter_start.get("quest", "")) != q["id"] or str(save.chapter_start.get("replay", "")) != save.replay:
 		save.chapter_start = save.snapshot()
+
+
+static func event_rng(save: SaveData, key: String, fallback: RandomNumberGenerator) -> RandomNumberGenerator:
+	## a dice of its own for one ？ matter of this chapter: the same every time the chapter is played (without a seed, the game's rng)
+	if save.event_seed == 0:
+		return fallback
+	var r := RandomNumberGenerator.new()
+	r.seed = hash([save.event_seed, key])
+	return r
 
 
 static func _roll_events(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> void:
@@ -682,7 +696,7 @@ static func pick_event(q: Dictionary, candidates: Array, rng: RandomNumberGenera
 static func rolled_option(save: SaveData, ev: Dictionary, rng: RandomNumberGenerator) -> int:
 	## the option the dice landed on for the ？ square the player stands on: rolled once when it is reached and kept, so the button can show it
 	if not save.event_rolls.has(save.square):
-		save.event_rolls[save.square] = random_option(save, ev, rng)
+		save.event_rolls[save.square] = random_option(save, ev, event_rng(save, "roll " + save.square, rng))
 	return int(save.event_rolls[save.square])
 
 
@@ -738,7 +752,7 @@ static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerat
 	var opt: Dictionary = ev["options"][i]
 	assert(option_blocked(save, opt) == "", "option %s is blocked: %s" % [opt["label"], option_blocked(save, opt)])
 	save.event_note = [("随机到了：" if rolled else "你选择了：") + opt["label"]]
-	var out := _apply(opt["effects"], q, save, rng)
+	var out := _apply(opt["effects"], q, save, event_rng(save, "apply %s %d" % [save.square, i], rng))
 	save.event_note.append_array(out["log"])
 	if not save.event_battle.is_empty():
 		save.event_battle["win"] = opt["win"]
@@ -800,13 +814,18 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 		var f: Dictionary = db.lord_forms.get(fid, {})
 		if f.is_empty() or (f["route"] != "" and f["route"] != route):
 			continue
+		if fid in db.lord_form_fixed.values():  # the SSR cards come only from their own chapter
+			continue
 		all.append(fid)
 		if not save.lord_forms.has(fid):
 			pool.append(fid)
-	if all.is_empty():
+	var fixed: String = str(db.lord_form_fixed.get(q["id"], ""))
+	if all.is_empty() and fixed == "":
 		return ""
 	var pick: String = (db.lord_form_default if db.lord_form_default != "" else all[0]) if default_pick else ""
-	if not default_pick:
+	if fixed != "" and db.lord_forms.has(fixed) and (db.lord_forms[fixed]["route"] in ["", route]):
+		pick = fixed
+	elif not default_pick:
 		if pool.is_empty():  # every card of the route is held: a random one again
 			pool = all
 		pick = pool[rng.randi_range(0, pool.size() - 1)] if rng != null else pool[0]
@@ -1190,19 +1209,22 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				var nf: Dictionary = db.fates[save.fate]
 				out["fx"].append({"k": "fate", "from": was_f, "to": save.fate})
 				out["log"].append("天命变了！%s→「%s」：%s" % ["「%s」" % db.fates[was_f]["name"] if db.fates.has(was_f) else "", nf["name"], nf["desc"]])
-		if e.has("downgrade"):  # n random generals of yours (not the lord) drop one tier, 银 → 铜, 金 → 银
+		if e.has("downgrade"):  # n random generals of yours (not the lord) lose 1-2 levels (copies), never below level 1
 			var tiers: Array = db.gacha["tiers"]
 			for _n in int(e["downgrade"]):
-				var pool: Array = save.owned.filter(func(c): return save.tier(c) > 0)
+				var pool: Array = save.owned.filter(func(c): return not save.is_lord_card(c) and save.copies(c) > 1)
 				if pool.is_empty():
-					out["log"].append("……你的武将都还是铜卡，降无可降。")
+					out["log"].append("……你的武将都还是 1 级，降无可降。")
 					break
 				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
-				out["fx"].append({"k": "tier", "card": cid, "from": save.tier(cid), "to": save.tier(cid) - 1})
-				save.dupes[cid] = int(tiers[save.tier(cid) - 1]["copies"])
-				if save.dupes[cid] <= 1:
+				var lv := save.copies(cid)
+				var to_lv := maxi(1, lv - rng.randi_range(1, 2))
+				var t_from := save.tier(cid)
+				save.dupes[cid] = to_lv
+				if to_lv <= 1:
 					save.dupes.erase(cid)
-				out["log"].append("%s 降为%s卡……" % [db.cards[cid]["name"], tiers[save.tier(cid)]["name"]])
+				out["fx"].append({"k": "tier", "card": cid, "from": t_from, "to": save.tier(cid), "lv_from": lv, "lv_to": to_lv})
+				out["log"].append("%s 降了 %d 级（%d → %d）……" % [db.cards[cid]["name"], lv - to_lv, lv, to_lv])
 		if e.has("ambush_all"):  # true: every fight left in this chapter (bar bosses) is an 埋伏; false: none of them is
 			var laid: Dictionary = view(q, save)["squares"]
 			for sid in laid:

@@ -290,12 +290,16 @@ func _one(f: Dictionary) -> void:
 			await tw2.finished
 		"tier":
 			var up: bool = int(f["to"]) > int(f["from"])
+			var lv_drop: bool = f.has("lv_to") and int(f["lv_to"]) < int(f["lv_from"])  # 降级: levels lost, the tier may stay
 			var c := _cell(GOOD if up else BAD)
 			var v := CardView.make(f["card"], Vector2(96, 170))
 			v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			c["holder"].add_child(v)
-			c["title"].text = "升　阶" if up else "降　阶"
+			c["title"].text = "升　阶" if up else ("降　级" if lv_drop else "降　阶")
 			c["detail"].text = "%s\n%s → %s" % [str(db.cards[f["card"]]["name"]), tiers[int(f["from"])]["name"], tiers[int(f["to"])]["name"]]
+			if lv_drop:
+				c["detail"].text = "%s
+%d 级 → %d 级" % [str(db.cards[f["card"]]["name"]), int(f["lv_from"]), int(f["lv_to"])]
 			await _pop(c["cell"])
 			if up:
 				_good_burst(c["cell"])

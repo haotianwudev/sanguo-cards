@@ -29,6 +29,7 @@ var carry_uses: Dictionary = {}  # card id -> {skill: uses left}
 var choices: Dictionary = {}  # choose-square id -> goto (remembered across retries)
 var offer: Array = []  # cards shown on the current recruit/treasure square
 var events: Dictionary = {}  # ？ square id -> event id rolled for it this run
+var event_seed := 0  # fixes every ？ event of this chapter (which one, and how it turns out); kept when the chapter is restarted
 var event_rolls: Dictionary = {}  # ？ square id -> the option the dice landed on (rolled when the square is reached, kept for the run)
 var event_battle: Dictionary = {}  # a fight an event started: {battle, ambush, win: [effects on victory]}
 var event_note: Array = []  # what the last event did, shown on its square
@@ -86,7 +87,7 @@ var steps: Array = []  # the save just before each step on the map this chapter,
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
 	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
-	"events", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
+	"events", "event_seed", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
 static func create() -> SaveData:
@@ -96,7 +97,7 @@ static func create() -> SaveData:
 
 
 # the fields that make up one run of a quest (parked while a finished chapter is replayed)
-const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events", "event_rolls",
+const RUN_FIELDS := ["quest", "square", "visited", "resolved", "damage", "carry_extra", "carry_uses", "offer", "events", "event_seed", "event_rolls",
 	"event_battle", "event_note", "offer_kind", "relics", "danger", "picks_left", "offer_rates", "run_start",
 	"run_battles", "run_relics", "run_bosses", "run_records", "layout", "merit_paid", "unworn", "fate", "fate_offer", "affixes", "ambushes", "chapter_start", "steps"]
 
@@ -658,19 +659,25 @@ func chest_chance(overkill: float, boss: bool, bonus := 0.0) -> float:
 
 
 func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool, only: Array = [],
-		enemy_card := "", bonus := 0.0, chapter := "") -> Array:
+		enemy_card := "", bonus := 0.0, chapter := "", extra_cards := 0) -> Array:
 	var g: Dictionary = _db().gacha
 	# a card with `first_win` (吕布) is won only by beating its owner, and the first time ever (never held, in any 周目) that always drops — chest or not; after that it joins the history pool like any card you have had
 	var first_win: bool = enemy_card != "" and bool(_db().cards[enemy_card].get("first_win", false)) and not owned.has(enemy_card) and not seen.has(enemy_card)
 	if not first_win and rng.randf() >= chest_chance(overkill, boss, bonus):
 		return []
-	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra(), only, chapter)
+	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra() + extra_cards, only, chapter)
 	# the beaten enemy's own card may be in there (bosses and elites more often)
 	var db := _db()
 	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"])
 	if enemy_card != "" and not maxed(enemy_card) and not cards.has(db.cards[enemy_card]) and (first_win or rng.randf() < card_chance):
 		cards[cards.size() - 1] = db.cards[enemy_card]
 	return cards
+
+
+func bonus_chest(rng: RandomNumberGenerator, boss: bool, only: Array = [], chapter := "", extra_cards := 0) -> Array:
+	## 劫掠: a second chest on top of the usual drop, no overkill roll and no enemy card in it
+	var g: Dictionary = _db().gacha
+	return chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra() + extra_cards, only, chapter)
 
 
 func level() -> int:

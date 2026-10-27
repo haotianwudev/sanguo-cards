@@ -994,6 +994,11 @@ func demo(name: String) -> void:
 				if a.begins_with("--scenario="):
 					b.scenario_id = a.trim_prefix("--scenario=")
 			show_screen(b)
+			if OS.get_cmdline_user_args().has("--swapui"):  # 换人: the 整备 screen in swap mode, for the second leader
+				await get_tree().create_timer(0.5).timeout
+				b.b.round_no = b.b.swap_from_round()
+				b._refresh()
+				b._open_swap(1)
 			if OS.get_cmdline_user_args().has("--boost"):  # a strengthened (BOOST) card must stand out
 				await get_tree().create_timer(0.5).timeout
 				b.b.leaders[1]["boosted"] = true

@@ -11,6 +11,15 @@ extends Control
 ## works while worn and that unit is out. Any card (generals, soldiers, 宝物) can also be left behind.
 
 signal closed
+signal swap_picked(card_id: String)  # swap mode: the card chosen to come on
+
+## 换人 in a battle opens this same screen in swap mode: the line-up on the field on top (the slot to be replaced marked), only the cards
+## that may come on in the pool, the usual card details, and 上场 for the one picked. Nothing of the party is changed here.
+var swap_mode := false
+var swap_slot := -1  # the field slot whose leader comes off
+var swap_field: Array = []  # card ids on the field, by slot
+var swap_ids: Array = []  # the cards that may come on
+var swap_note := ""  # what the swap costs
 
 
 var _party_row: HBoxContainer
@@ -33,18 +42,21 @@ var _hp_top := -1  # the shared HP bar's full size at the last rebuild: a change
 
 
 func _ready() -> void:
-	z_index = 60
+	if swap_mode and not swap_ids.is_empty():
+		_sel = swap_ids[0]  # the strongest candidate is shown first
+	z_index = 80 if swap_mode else 60  # a battle's skill strip is at 70
 	size = Vector2(1280, 720)
 	var bg := ColorRect.new()
 	bg.color = Kit.c("bg")
 	bg.size = size
 	add_child(bg)
-	var title := Kit.label("整　备", Kit.FONT_BIG + 8, "gold")
+	var title := Kit.label("换　人" if swap_mode else "整　备", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(28, 10)
 	add_child(title)
 	var hint := Kit.label("点卡查看 · 再点一次出阵 / 下阵 · 也可以拖：拖上去出阵（拖到队长身上替换），拖回卡池下阵，队长之间拖动换位置", 15)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
 	hint.position = Vector2(170, 22)
+	hint.text = "点卡查看 · 选好后按「上场」· 换下的人本场不能再上" if swap_mode else hint.text
 	add_child(hint)
 
 	# the party: lord + leaders, with a summary box
@@ -119,18 +131,21 @@ func _ready() -> void:
 		Game.save.party = Game.save.auto_party()
 		_msg.text = "已按战力自动编成。"
 		_rebuild())
+	auto.visible = not swap_mode
 	add_child(auto)
-	var done := Kit.button("完成", "green", Kit.FONT_BODY + 4)
+	var done := Kit.button("返回战斗" if swap_mode else "完成", "green", Kit.FONT_BODY + 4)
 	done.position = Vector2(1040, 652)
 	done.custom_minimum_size = Vector2(220, 50)
 	done.size = Vector2(220, 50)
 	done.pressed.connect(func():
-		Game.persist()
+		if not swap_mode:
+			Game.persist()
 		closed.emit()
 		queue_free())
 	add_child(done)
 	Kit.focus(done)
 	_side_btn = SideStoryList.button(Vector2(1104, 8), func(): _side_btn.call("refresh"))
+	_side_btn.visible = not swap_mode
 	add_child(_side_btn)
 	_rebuild()
 
@@ -148,6 +163,9 @@ func _rebuild() -> void:
 	for box in [_party_row, _summary, _tabs, _grid, _detail]:
 		for ch in box.get_children():
 			ch.queue_free()
+	if swap_mode:
+		_rebuild_swap()
+		return
 	var save := Game.save
 	var db := GameData.get_db()
 	if _sel.begins_with("relic:"):
@@ -272,6 +290,56 @@ func _rebuild() -> void:
 	if ids.is_empty() and _filter != "lord" and not (_filter == "all" and not save.relics.is_empty()):
 		_grid.add_child(Kit.label("这一类还没有卡。", Kit.FONT_BODY, "dim"))
 
+	_fill_detail()
+
+
+func _rebuild_swap() -> void:
+	var save := Game.save
+	var db := GameData.get_db()
+	if _sel != "lord" and not save.has_card(_sel):
+		_sel = "lord"
+	for k in swap_field.size():
+		var cid: String = swap_field[k]
+		var box := _slot(cid, save.leader_for(cid) if cid != "lord" else save.party_leaders()[0], "换下" if k == swap_slot else "场上")
+		if k == swap_slot:
+			box.get_child(0).note = "将换下"
+		_party_row.add_child(box)
+	_summary.add_child(_stat_line("费用", swap_note))
+	_summary.add_child(_stat_line("可上场", "%d 位" % swap_ids.size()))
+	var troops: Array = []
+	for cid in swap_ids:
+		var tr: String = db.cards[cid]["troop"]
+		if not troops.has(tr):
+			troops.append(tr)
+	var tabs: Array = [["all", "全部"]]
+	for tr in db.troops:
+		if troops.has(tr):
+			tabs.append([tr, db.troops[tr]["name"]])
+	if not tabs.any(func(tb): return tb[0] == _filter):
+		_filter = "all"
+	for tb in tabs:
+		var b := Kit.button(tb[1], "gold" if _filter == tb[0] else "blue", 15)
+		b.custom_minimum_size = Vector2(64, 36)
+		b.pressed.connect(func():
+			_filter = tb[0]
+			_rebuild())
+		_tabs.add_child(b)
+	_sort_btn.text = "按战力 ▼" if _sort == "power" else "按稀有度 ▼"
+	var ids: Array = swap_ids.filter(func(cid): return _filter == "all" or db.cards[cid]["troop"] == _filter)
+	var rank := {"SSR": 5, "SR": 4, "R": 3, "C": 2, "N": 1}
+	var power := {}
+	for cid in ids:
+		power[cid] = SaveData.leader_power(save.leader_for(cid))
+	ids.sort_custom(func(a, b):
+		if _sort == "rarity" and rank.get(db.cards[a]["rarity"], 0) != rank.get(db.cards[b]["rarity"], 0):
+			return rank.get(db.cards[a]["rarity"], 0) > rank.get(db.cards[b]["rarity"], 0)
+		return power[a] > power[b])
+	for cid in ids:
+		var v := CardView.make(cid, Vector2(108, 151), {"skills": false})
+		v.set_state(false, _sel == cid)
+		v.pressed.connect(_tap.bind(cid))
+		v.tap_on_release = true
+		_grid.add_child(v)
 	_fill_detail()
 
 
@@ -500,7 +568,7 @@ func _fill_detail() -> void:
 	for n in names:
 		parts.append(n + ("×%d" % names[n] if names[n] > 1 else ""))
 	var where := ""
-	if not is_lord and not save.party.has(_sel):
+	if not is_lord and not save.party.has(_sel) and not swap_mode:
 		var lead := save.relic_unit_for_troop(f["troop"])
 		where = ("没带：不参战。\n" if save.benched.has(_sel) else
 			("现在编在 %s 里。\n" % _unit_name(lead) if lead != "" else "这个兵种没人当队长，现在不参战。\n"))
@@ -534,6 +602,19 @@ func _fill_detail() -> void:
 			_detail.add_child(Kit.label("已用完，到休整格才恢复", 15, "red"))
 
 	# the actions: lead the troop / step down; bring along or leave behind
+	if swap_mode:
+		var go: Button
+		if swap_ids.has(_sel):
+			go = Kit.button("上　场（换下 %s）" % db.cards[swap_field[swap_slot]]["name"].split("·")[0], "green")
+			go.pressed.connect(func():
+				swap_picked.emit(_sel)
+				queue_free())
+		else:
+			go = Kit.button("场上的人", "gray")
+			go.disabled = true
+		go.custom_minimum_size = Vector2(340, 50)
+		_detail.add_child(go)
+		return
 	var act: Button
 	if is_lord:
 		act = Kit.button("主公固定出阵", "blue")
@@ -597,6 +678,14 @@ func _heading(text: String) -> Control:
 
 
 func _tap(cid: String) -> void:
+	if swap_mode:  # only look: 上场 is the button on the right
+		_sel = cid
+		if GameData.get_db().cards.has(cid):
+			var card: Dictionary = GameData.get_db().cards[cid].duplicate()
+			card["id"] = cid
+			Sfx.card_voice(card)
+		_rebuild()
+		return
 	if cid.begins_with("lordform:"):
 		if _sel == cid:  # a second tap puts the card in use
 			Game.save.lord_form_pick = cid.substr(9)
@@ -674,6 +763,8 @@ func _remove(cid: String) -> void:
 
 func _dnd(ctrl: Control, data: Dictionary, target: String) -> void:
 	## ctrl can be dragged (when data isn't empty) and takes drops as `target`: "party", "pool" or "slot:<leader id>"
+	if swap_mode:
+		return
 	ctrl.set_drag_forwarding(
 		func(_at: Vector2) -> Variant: return null if data.is_empty() or not _may_lift(ctrl) else _start_drag(ctrl, data),
 		func(_at: Vector2, d: Variant) -> bool: return _can_drop(target, d, ctrl),

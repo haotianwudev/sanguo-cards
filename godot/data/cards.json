@@ -142,6 +142,11 @@
   "lord_forms": {
     "_doc": "主角卡（版本）：每章发一张——第一章在第二格（出生选择之后的第一个剧情格，CG 与剧情看完之后），其他章在第一格（进章节就发，剧情看完后弹出）：第一章（每个周目）发固定的默认卡 default（普通主公、默认立绘），之前没有主角卡；周目结束后记住卡和等级，下一周目不继承卡本身，但等级保留，再次得到（抽到或剧情）时升一个品阶（Lv.1→Lv.2）、卡也拿到（主公的等级是 lord_copies，得到记得的主角卡时升一个品阶）；第二章起每章从 grants 里当前路线 route 对得上、还没拿过的卡里随机发一张；整备里可以自己换，一次只用一张：用着的这张的 bonus 加在主角的体力 / 攻击上，skills 追加到主角技能里，脸是它自己的立绘（art 为 true 时；立绘交付后自动，没有图时用主角原本的脸）。每张的加成各有侧重（重甲偏体力、行军装偏攻击）。每条线的卡数要不少于该线的章数。",
     "default": "lord_default",
+    "_fixed": "SSR 主角卡不进随机池，只在固定的一章发（倒数第二章 · 围攻洛阳的第一格）：章节 id → 卡 id",
+    "fixed": {
+      "luoyang_s": "lord_south_armor",
+      "tianqing": "lord_north_silver"
+    },
     "grants": [
       "lord_north_silver",
       "lord_south_armor",
@@ -485,23 +490,31 @@
     "zhenghao": {
       "name": "郑好",
       "rarity": "R",
-      "troop": "infantry",
+      "troop": "bandit",
       "hp": 64,
       "at": 82,
+      "skills": [
+        "yazhai_pi",
+        "kaishan_yazhai"
+      ],
       "pool": false
     },
     "jiangqiao": {
       "name": "姜巧",
       "rarity": "R",
-      "troop": "archer",
+      "troop": "bandit",
       "hp": 56,
       "at": 84,
+      "skills": [
+        "liannu",
+        "mantiji"
+      ],
       "pool": false
     },
     "zheng_daoshou": {
       "name": "郑家刀手",
       "rarity": "N",
-      "troop": "infantry",
+      "troop": "bandit",
       "hp": 40,
       "at": 48,
       "scope": "north"
@@ -509,9 +522,12 @@
     "jiang_jiguanshou": {
       "name": "姜家机关手",
       "rarity": "N",
-      "troop": "archer",
+      "troop": "bandit",
       "hp": 40,
       "at": 40,
+      "skills": [
+        "chufa_jiguan"
+      ],
       "scope": "north"
     },
     "beihai_tuntian": {
@@ -2437,12 +2453,12 @@
     "rc_beihai": {
       "name": "郑姜·双凤早饭",
       "rarity": "SR",
-      "troop": "infantry",
+      "troop": "bandit",
       "hp": 72,
       "at": 94,
       "skills": [
         "jushun",
-        "volley"
+        "shuangfeng"
       ],
       "pool": false,
       "scope": "north"

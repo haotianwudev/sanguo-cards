@@ -858,6 +858,11 @@
       "effects": [
         {
           "type": "attack"
+        },
+        {
+          "type": "loot",
+          "chest": 0.1,
+          "card": 0.1
         }
       ]
     },
@@ -1801,6 +1806,108 @@
         {
           "type": "boost",
           "target": "self"
+        }
+      ]
+    },
+    "yazhai_pi": {
+      "name": "压寨劈砍",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "pierce": true
+        }
+      ]
+    },
+    "kaishan_yazhai": {
+      "name": "开山压寨",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 1.9,
+          "pierce": true
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        },
+        {
+          "type": "loot",
+          "chest": 0.25,
+          "card": 0.25
+        }
+      ]
+    },
+    "liannu": {
+      "name": "连弩",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3,
+          "pierce": true
+        }
+      ]
+    },
+    "mantiji": {
+      "name": "满地机关",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 1.6,
+          "pierce": true
+        },
+        {
+          "type": "burn",
+          "pct": 0.03,
+          "turns": 3
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "shuangfeng": {
+      "name": "双凤合璧",
+      "cost": 5,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "rate": 2.0,
+          "pierce": true
+        },
+        {
+          "type": "break",
+          "amount": 0.25,
+          "turns": 3
+        },
+        {
+          "type": "stun",
+          "chance": 0.25
+        }
+      ]
+    },
+    "chufa_jiguan": {
+      "name": "触发机关",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "pierce": true
+        },
+        {
+          "type": "stun",
+          "chance": 0.2
         }
       ]
     }

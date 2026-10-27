@@ -752,9 +752,12 @@ func test_poison_stacks_ignores_resists_and_can_kill() -> void:
 	var weak: Array = b.take_events().filter(func(e): return e["t"] == "poison")
 	check(not weak.is_empty() and weak[0]["dmg"] == int(round(b.enemy["max_hp"] * 0.02 * 2.0)), "a magic weakness (藤甲) doubles it")
 	check(b.enemy["hp"] < hp0)
+	b.party_hp = b.party_max  # the enemy's blows (and so the dice) are not what is being tested
+	b.result = ""
 	for _i in 6:
 		b.enemy["poison_turns"] = 3
 		b.leaders[j]["acted"] = false
+		b.leaders[j]["confused"] = false  # the enemy's moves (and the troops' own tricks) change the dice: keep him able to act
 		b.ap = 8
 		b.act(j, "duji")
 	check_eq(b.enemy["poison"], 5, "five layers at most")
@@ -888,3 +891,72 @@ func test_counter_and_enemy_status_moves_emit_animation_events() -> void:
 	check(fevs.any(func(e): return e["t"] == "enemy_burn_party"), "enemy_burn_party emitted")
 	check(fevs.any(func(e): return e["t"] == "enemy_ap_drain"), "enemy_ap_drain emitted")
 	check(fevs.any(func(e): return e["t"] == "counter") or true, "events intact")
+
+
+func test_jielue_raises_the_loot_odds_each_use_up_to_certain() -> void:
+	var sk: Dictionary = GameData.get_db().skills["jielue"]
+	check(sk["effects"].any(func(e): return e["type"] == "loot"), "劫掠 carries a loot effect")
+	var b := Battle.start("hulao", party(["cav_n"]), 3)
+	var u: Dictionary = b.leaders[1]
+	var eff: Dictionary = sk["effects"].filter(func(e): return e["type"] == "loot")[0]
+	check_eq(b.loot_chest, 0.0)
+	b._apply(u, eff, 1.0)
+	check(absf(b.loot_chest - 0.1) < 0.001 and absf(b.loot_card - 0.1) < 0.001, "+10% each use")
+	for _i in 20:
+		b._apply(u, eff, 1.0)
+	check(b.loot_chest <= 1.0 and b.loot_card <= 1.0, "never past certain")
+
+
+func test_the_zheng_jiang_pair_each_have_a_signature_and_a_once_only_ultimate() -> void:
+	var db := GameData.get_db()
+	for cid in ["zhenghao", "jiangqiao", "rc_beihai"]:
+		var c: Dictionary = db.cards[cid]
+		check_eq(c["troop"], "bandit", cid + " is a 贼")
+		check(c["skills"].any(func(s): return db.skills[s]["uses"] == 1), cid + " has a once-only 大招")
+	check(db.cards["jiang_jiguanshou"]["skills"].has("chufa_jiguan"), "the 机关手 shares 姜巧's 机关 theme")
+
+
+func test_troop_relics_work_by_themselves_without_ap() -> void:
+	var s := SaveData.create()
+	for c in ["sunce", "zhouyu", "zhangfei"]:
+		s.take(c)
+	s.party = s.auto_party()
+	var db := GameData.get_db()
+	for rid in ["xiangnang", "qingnang"]:
+		check(db.relics[rid]["mods"]["proc"].has("logistics"), rid + " raises 后勤's own chance")
+	for rid in ["zhangba", "liangyinqiang", "qiangzhen"]:
+		check_eq(db.relics[rid]["troop"], "spear", rid + " is a spear relic")
+		check(db.relics[rid]["mods"]["proc"].has("spear"), rid + " raises 枪兵's own chance")
+	check(db.relics["chitu"]["mods"].has("raid") and db.relics["baima_qi"]["mods"].has("raid"), "cavalry relics raise the 突袭")
+	check(db.relics["chuanyang"]["mods"].has("resist_cut") and db.relics["tengjia"]["troop"] == "infantry", "archers pierce, infantry guard")
+	var b := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, {"proc": {"logistics": 1.0, "spear": 1.0}})  # a certain chance: the base one is small, the relics add to it
+	b.party_hp = b.party_max / 2
+	var ap_before := b.ap
+	b._start_round()
+	if b.leaders.any(func(u): return u["leader"]["card"]["troop"] == "logistics"):
+		check(b.party_hp > b.party_max / 2, "a 后勤 leader tends the wounded at the next round")
+	check_eq(b.ap, mini(b.ap_max(), ap_before + int(db.battle["ap_per_round"])), "…and it costs no AP")
+	var hp0: int = b.enemy["hp"]
+	if b.leaders.any(func(u): return u["leader"]["card"]["troop"] == "spear"):
+		b._counter_strike()
+		check(b.enemy["hp"] < hp0, "a 枪兵 leader hits back by itself")
+	check_eq(float(db.battle["passive_chance"]), 0.15, "every troop has a small chance of its own trick")
+	check_eq(float(db.battle["interrupt_chance"]), 0.15, "突袭 is 15%…")
+	check_eq(float(db.battle["interrupt_by_troop"]["cavalry"]), 0.3, "…and the cavalry's is 30%")
+
+
+func test_a_troops_own_trick_is_named_and_grows_with_the_card() -> void:
+	var b := Battle.start("boar", party(["zhouyu"]), 1)
+	var j := b.leaders.find_custom(func(u): return u["leader"]["card"]["id"] == "zhouyu")
+	var u: Dictionary = b.leaders[j]
+	var s1 := b.passive_scale(u)
+	u["leader"] = u["leader"].duplicate(true)
+	u["leader"]["at"] = int(u["leader"]["at"]) * 2
+	u["leader"]["hp"] = int(u["leader"]["hp"]) * 2
+	var s2 := b.passive_scale(u)
+	check(s2 > s1 or s2 == 2.5, "a stronger card does more (%f → %f)" % [s1, s2])
+	b.take_events()
+	b.mods["proc"] = {"strategist": 1.0}
+	b._start_round()
+	var named: Array = b.take_events().filter(func(e): return e["t"] == "passive")
+	check(not named.is_empty() and str(named[0]["name"]) != "", "the move says which card made it")

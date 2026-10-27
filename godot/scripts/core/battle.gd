@@ -33,6 +33,8 @@ var opening: Array = []  # log lines from the first round start
 var mods: Dictionary = {}  # 宝物 / 险 (see cards.json relics) + enemy (险: enemy strength)
 var turn_limit := 0
 var first_hit_done := false
+var loot_chest := 0.0  # 劫掠: chance of a second chest after this win, +chest per use
+var loot_card := 0.0  # 劫掠: chance of one more card to pick from in the chests, +card per use
 var party_burn := {}  # the enemy's fire on us: {dmg, turns}
 var ap_drain := 0  # AP the enemy takes away at the next round start
 var roster: Array = []  # leader dicts that can be tagged in mid-battle (SaveData.swap_roster): any owned card not leading
@@ -84,7 +86,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * float(b.db.battle.get("attack_mult", 1.0)) * tough_at * (1.0 + float(afx.get("at", 0.0))),
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
-		"break_amount": 0.0, "break_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "poison": 0, "poison_pct": 0.0, "poison_turns": 0, "charging": "", "charge_ready": false, "used": []}
+		"break_amount": 0.0, "break_turns": 0, "resist_down": 0.0, "resist_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "poison": 0, "poison_pct": 0.0, "poison_turns": 0, "charging": "", "charge_ready": false, "used": []}
 	b.party_burn = {"dmg": 0, "turns": 0}
 	b.roster = roster.duplicate()
 	b._carry_extra = extra
@@ -345,14 +347,19 @@ func _crit_roll(side: String) -> float:
 
 func _dot_resist() -> float:
 	## 灼烧 and 中毒 share one resist, the enemy's magic resist (a weakness below 0 makes them bite harder); 宝物 pierce eats into it
-	return float(enemy["data"]["magic_resist"]) * (1.0 - minf(1.0, float(mods.get("pierce", 0.0))))
+	return float(enemy["data"]["magic_resist"]) * (1.0 - minf(1.0, float(mods.get("pierce", 0.0)))) - _resist_cut()
+
+
+func _resist_cut() -> float:
+	## 弓兵: both resists (物抗 and 法抗) are lowered — by the archers' own 破甲 for a few turns, and for good by 宝物 (mods.resist_cut)
+	return float(enemy.get("resist_down", 0.0)) + float(mods.get("resist_cut", 0.0))
 
 
 func _dmg(base: float, kind: String, pierce := false) -> int:
 	## pierce (弓兵 穿甲): this hit ignores the enemy's resist altogether
 	var data: Dictionary = enemy["data"]
 	var resist: float = data["phys_resist"] if kind == "attack" else data["magic_resist"]
-	resist *= 0.0 if pierce else 1.0 - minf(1.0, float(mods.get("pierce", 0.0)))
+	resist = 0.0 if pierce else resist * (1.0 - minf(1.0, float(mods.get("pierce", 0.0)))) - _resist_cut()
 	var d: float = base * float(db.battle.get("damage_mult", 1.0)) * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
 	return maxi(1, int(round(d * _variance())))
 
@@ -492,6 +499,10 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			party_hp -= lost
 			_ev({"t": "hurt", "dmg": lost, "hp": party_hp})
 			return ["  我军折损 %d 体力" % lost]
+		"loot":  # 劫掠: every use raises the odds of a bigger haul when the fight is won
+			loot_chest = minf(1.0, loot_chest + float(eff["chest"]))
+			loot_card = minf(1.0, loot_card + float(eff["card"]))
+			return ["  战利品：多一个宝箱 %d%%，宝箱多一张卡 %d%%" % [int(round(loot_chest * 100)), int(round(loot_card * 100))]]
 		"ap":
 			ap = mini(ap_max(), ap + int(eff["amount"]))
 			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
@@ -608,6 +619,10 @@ func _enemy_phase(defend_cut: float) -> Array:
 		enemy["break_turns"] -= 1
 		if enemy["break_turns"] == 0:
 			enemy["break_amount"] = 0.0
+	if enemy["resist_turns"] > 0:
+		enemy["resist_turns"] -= 1
+		if enemy["resist_turns"] == 0:
+			enemy["resist_down"] = 0.0
 	if round_no >= turn_limit:
 		result = "lose"
 		lose_reason = "turns"
@@ -640,6 +655,17 @@ func _affix_status() -> Array:
 	return log
 
 
+func passive_scale(u: Dictionary) -> float:
+	## a troop trick is as big as the card behind it: 1.0 at battle.passive_ref_power (攻 + 体力 / 2), in proportion above and below
+	var ref := maxf(1.0, float(db.battle.get("passive_ref_power", 500)))
+	return clampf(float(SaveData.leader_power(u["leader"])) / ref, 0.4, 2.5)
+
+
+func proc_chance(troop: String) -> float:
+	## a troop's own small chance (battle.passive_chance) plus what 宝物 add for it (mods.proc {troop: share})
+	return float(db.battle.get("passive_chance", 0.15)) + float(mods.get("proc", {}).get(troop, 0.0))
+
+
 func _counter_strike() -> Array:
 	## 反击: answer one enemy hit with every counter set up this round
 	var log: Array = []
@@ -650,6 +676,16 @@ func _counter_strike() -> Array:
 		enemy["hp"] = maxi(0, enemy["hp"] - d)
 		_ev({"t": "counter", "unit": c["name"], "slot": int(c.get("unit", -1)), "dmg": d, "hp": enemy["hp"]})
 		log.append("  %s 反击，造成 %d 伤害" % [c["name"], d])
+	for k in leaders.size():  # 枪兵: a spear leader sometimes hits back by itself (宝物 raise the chance), no AP
+		var u: Dictionary = leaders[k]
+		if enemy["hp"] <= 0:
+			break
+		if u["leader"]["card"]["troop"] == "spear" and not u["confused"] and rng.randf() < proc_chance("spear"):
+			_ev({"t": "passive", "unit": k, "name": unit_name(u), "text": "顺势反击"})
+			var d2 := _dmg(float(SaveData.leader_power(u["leader"])) * float(db.battle.get("counter_power", 0.3)) * (1.0 + float(buff["atk"])), "attack")
+			enemy["hp"] = maxi(0, enemy["hp"] - d2)
+			_ev({"t": "counter", "unit": unit_name(u), "slot": k, "dmg": d2, "hp": enemy["hp"]})
+			log.append("  %s 顺势反击，造成 %d 伤害" % [unit_name(u), d2])
 	_check_end()
 	return log
 
@@ -706,6 +742,50 @@ func _start_round() -> Array:
 			buff = {"layers": 0, "turns": 0, "atk": 0.0, "def": 0.0, "magic": 0.0}
 	_ev({"t": "round", "n": round_no, "ap": ap})
 	var log: Array = ["─── 第 %d 回合 ───" % round_no]
+	for k in leaders.size():  # each troop's own small-chance trick (battle.json passive_chance + 宝物), no AP
+		var pu: Dictionary = leaders[k]
+		var ptr: String = pu["leader"]["card"]["troop"]
+		if ptr in ["lord", "cavalry", "spear"] or rng.randf() >= proc_chance(ptr):
+			continue
+		var pname := unit_name(pu)
+		var ps := passive_scale(pu)  # the card's whole strength (攻 + 体力) sets how much it does
+		match ptr:
+			"logistics":
+				if party_hp > 0 and party_hp < party_max:
+					var rh := mini(int(round(party_max * float(db.battle.get("regen_power", 0.03)) * ps)), party_max - party_hp)
+					_ev({"t": "passive", "unit": k, "name": pname, "text": "照料伤兵"})
+					party_hp += rh
+					_ev({"t": "heal", "amt": rh, "hp": party_hp})
+					log.append("[color=#7fd88a]  %s 照料伤兵，回复 %d 体力[/color]" % [pname, rh])
+			"infantry":
+				var gc := minf(0.6, float(db.battle.get("guard_cut", 0.15)) * ps)
+				_ev({"t": "passive", "unit": k, "name": pname, "text": "举盾列阵"})
+				guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - gc)
+				_ev({"t": "guard", "cut": guard_cut})
+				log.append("  %s 举盾列阵：本回合受到伤害 -%d%%" % [pname, int(round(guard_cut * 100))])
+			"bandit":
+				if not pu["boosted"]:
+					pu["boosted"] = true
+					_ev({"t": "passive", "unit": k, "name": pname, "text": "一声唿哨"})
+					_ev({"t": "boost", "units": [k], "idle": true})
+					log.append("  %s 一声唿哨，BOOST！" % pname)
+			"strategist":
+				var sb: Dictionary = db.battle.get("strategist_buff", {})
+				_ev({"t": "passive", "unit": k, "name": pname, "text": "出谋划策"})
+				if buff["layers"] < 4:
+					buff["layers"] += 1
+					buff["atk"] += minf(0.2, float(sb.get("atk", 0.0)) * ps)
+					buff["def"] += minf(0.2, float(sb.get("def", 0.0)) * ps)
+				buff["turns"] = maxi(int(buff["turns"]), int(sb.get("turns", 2)))
+				_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
+				log.append("  %s 出谋划策：全军攻防上升（战意 ×%d）" % [pname, buff["layers"]])
+			"archer":
+				var ab: Dictionary = db.battle.get("archer_resist", {})
+				_ev({"t": "passive", "unit": k, "name": pname, "text": "射穿甲缝"})
+				enemy["resist_down"] = maxf(enemy["resist_down"], minf(0.4, float(ab.get("amount", 0.1)) * ps))
+				enemy["resist_turns"] = maxi(enemy["resist_turns"], int(ab.get("turns", 2)))
+				_ev({"t": "resist_down", "amount": enemy["resist_down"], "turns": enemy["resist_turns"]})
+				log.append("  %s 一箭射穿甲缝：%s 的物抗、法抗各 -%d%%（%d 回合）" % [pname, enemy["data"]["name"], int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]])
 	for u in leaders:
 		u["acted"] = false
 		u["confused"] = u["confuse_next"]
@@ -716,7 +796,8 @@ func _start_round() -> Array:
 			log.append("%s 蓄势已久 —— BOOST！" % unit_name(u))
 	for u in leaders:
 		var members: Array = u["leader"]["members"]
-		if not members.is_empty() and enemy["hp"] > 0 and rng.randf() < float(cfg["interrupt_chance"]):
+		var raid := float(cfg.get("interrupt_by_troop", {}).get(u["leader"]["card"]["troop"], cfg["interrupt_chance"])) + (float(mods.get("raid", 0.0)) if u["leader"]["card"]["troop"] == "cavalry" else 0.0)  # 突袭 (宝物 raise the cavalry's)
+		if not members.is_empty() and enemy["hp"] > 0 and rng.randf() < raid:
 			var m: Dictionary = members[rng.randi_range(0, members.size() - 1)]
 			var d := _dmg(m["at"] * float(cfg["interrupt_power"]), "attack")
 			enemy["hp"] = maxi(0, enemy["hp"] - d)

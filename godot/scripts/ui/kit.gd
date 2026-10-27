@@ -326,6 +326,8 @@ static func skill_desc(sk: Dictionary) -> String:
 				parts.append("%d%% 让敌人眩晕一回合" % int(round(float(e["chance"]) * 100)))
 			"ap":
 				parts.append("AP +%d" % int(e["amount"]))
+			"loot":
+				parts.append("战利品：每用一次，打赢后多掉一个宝箱的几率 +%d%%，宝箱里多一张可选卡的几率 +%d%%（本场累计）" % [int(round(float(e["chest"]) * 100)), int(round(float(e["card"]) * 100))])
 			"burn":
 				if e.has("pct"):
 					parts.append("灼烧：每回合烧掉敌人现有体力的 %d%%（烧不死），%d 回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])

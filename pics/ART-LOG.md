@@ -1353,3 +1353,4 @@
 - [x] 2026-10-25 cg `ss_home` ← ss_home.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
 - [x] 2026-10-25 cg `ss_rule` ← ss_rule.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
 - [x] 2026-10-25 cg `ss_news` ← ss_news.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
+- [ ] 2026-10-25 cg `c3_guotu_street` ← c3_guotu_street.jpg · ok

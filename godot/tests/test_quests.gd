@@ -272,10 +272,13 @@ func test_events_can_change_the_fate_drop_a_tier_and_set_every_ambush() -> void:
 	s.grant_card(cid)
 	s.upgrade(cid)
 	check_eq(s.tier(cid), 1, "银 after one 点化")
+	var before := s.copies(cid)
 	Quests._apply([{"downgrade": 1}], q, s, rng(0))
-	check_eq(s.tier(cid), 0, "back to 铜")
-	Quests._apply([{"downgrade": 1}], q, s, rng(0))
-	check(s.has_card(cid), "a 铜 card stays in the party")
+	check(s.copies(cid) < before and s.copies(cid) >= before - 2 and s.copies(cid) >= 1, "降级 takes 1-2 levels, not a whole tier")
+	for _i in 6:
+		Quests._apply([{"downgrade": 1}], q, s, rng(0))
+	check_eq(s.copies(cid), 1, "level 1 is the floor")
+	check(s.has_card(cid), "a level-1 card stays in the party")
 	Quests._apply([{"ambush_all": true}], q, s, rng(0))
 	var laid: Dictionary = Quests.view(q, s)["squares"]
 	var fights: Array = laid.keys().filter(func(sid): return laid[sid]["type"] == "battle" and not laid[sid]["boss"])
@@ -462,9 +465,9 @@ func test_changsha_is_weaker_than_danyang() -> void:
 
 func test_relics_change_battles() -> void:
 	var s := SaveData.create()
-	for c in ["sunce", "zhouyu", "sunjian"]:  # 谋士 and 刀兵 units carry 兵符 / 兵法 and 赤帻 / 战鼓
+	for c in ["sunce", "zhouyu", "sunjian", "zhenghao"]:  # 谋士, 刀兵 and 贼 units carry 兵符 / 兵法, 赤帻 and 战鼓
 		s.take(c)
-	s.party = s.auto_party()
+	s.party = ["zhouyu", "sunjian", "zhenghao"]
 	var plain := Battle.start("boar", s.party_leaders(), 1)
 	s.relics = ["bingfu", "bingfa", "yuxi", "chize", "zhangu"]
 	var m := Quests.mods(s)
@@ -1154,16 +1157,15 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	var base := db.build_lord("阿明", 1.0, true)
 	check_eq(s.lord_form(), "", "no lord card yet")
 	var q: Dictionary = db.quests[0]
-	check_eq(Quests.grant_lord_form(q, s), "lord_north_silver", "the first chapter clear hands out the first card")
+	check_eq(Quests.grant_lord_form(q, s), "lord_north_cloak", "the first chapter clear hands out the first card of the random draw (no SSR)")
 	check_eq(Quests.grant_lord_form(q, s), "", "once per chapter")
 	var lord := s.lord()
 	check(lord["hp"] > base["hp"] and lord["at"] > base["at"], "the card makes the lord stronger")
-	check_eq(lord["person"], "lord_north_silver", "and brings its own face")
-	check_eq(lord["skills"].slice(0, base["skills"].size()), base["skills"], "north keeps the spear's skills (an SSR card adds its own 大招)")
+	check_eq(lord["person"], "lord_north_cloak", "and brings its own face")
 	var south := SaveData.create()
-	check_eq(Quests.grant_lord_form(q, south), "lord_south_armor", "the south route has its own card")
+	check_eq(Quests.grant_lord_form(q, south), "lord_south_boat", "the south route has its own card")
 	check(s.new_lap().lord_forms.is_empty(), "a new lap starts without the lord cards")
-	check(s.new_lap(true).lord_forms.has("lord_north_silver"), "…unless the test option keeps the collection")
+	check(s.new_lap(true).lord_forms.has("lord_north_cloak"), "…unless the test option keeps the collection")
 
 func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
 	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
@@ -1237,7 +1239,7 @@ func test_every_chapter_of_a_route_has_a_lord_card_to_give_and_one_is_in_use() -
 	s.flags = ["出生：冀州无极"]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 11
-	var north: int = db.lord_form_grants.filter(func(f): return db.lord_forms[f]["route"] == "north").size()
+	var north: int = db.lord_form_grants.filter(func(f): return db.lord_forms[f]["route"] == "north" and not f in db.lord_form_fixed.values()).size()
 	for k in north:
 		s.lord_form_paid = ""
 		var got := Quests.grant_lord_form(db.quests[0], s, rng)
@@ -1491,7 +1493,7 @@ func test_mystery_events_are_dealt_up_front_and_resolved_by_chance() -> void:
 	var q: Dictionary = GameData.get_db().quests[4]
 	var s := SaveData.create()
 	Quests.begin(q, s, rng(11))
-	var ids: Array = q["squares"].values().filter(func(sq): return sq["type"] == "mystery" and sq["event"] == "")
+	var ids: Array = Quests.view(q, s)["squares"].values().filter(func(sq): return sq["type"] == "mystery" and sq["event"] == "")
 	check(not ids.is_empty(), "the chapter has ？ squares")
 	var met: Array = []
 	for sq in ids:
@@ -1540,7 +1542,7 @@ func test_every_chapter_levels_the_lord_card_it_hands_out_on_its_own() -> void:
 	check_eq(s.lord_copies, 1, "…and does not raise the plain lord")
 	var lord_a := s.lord_with_form(second)
 	var plain := s.lord_with_form("")
-	check(lord_a["hp"] > plain["hp"], "its bonus counts")
+	check(lord_a["hp"] > plain["hp"] or lord_a["at"] > plain["at"], "its bonus counts (an R card may trade hp for attack)")
 	# hand the same card out again: that card levels
 	for _i in 3:
 		s.lord_form_paid = ""
@@ -2332,3 +2334,44 @@ func test_upgrade_never_offers_a_soldier() -> void:
 	check(s.soldiers.get("baima_yicong", 0) == 1, "it is a soldier copy")
 	check(not s.upgradable().has("baima_yicong"), "no soldier to 点化: %s" % [s.upgradable()])
 	check(s.upgradable().has("sunce"), "the general is still there")
+
+
+func test_a_chapters_events_and_outcomes_stay_the_same_when_it_is_restarted() -> void:
+	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "prologue")[0]
+	var s := SaveData.create()
+	Quests.begin(q, s, rng(1))
+	var events: Dictionary = s.events.duplicate()
+	check(not events.is_empty(), "the chapter has ？ squares with events")
+	for seed_value in [2, 3, 4]:
+		Quests.begin(q, s, rng(seed_value))
+		check_eq(s.events, events, "restarting deals the same events")
+	var sid: String = events.keys()[0]
+	var ev: Dictionary = GameData.get_db().events[events[sid]]
+	s.square = sid
+	var a := Quests.rolled_option(s, ev, rng(10))
+	s.event_rolls = {}
+	check_eq(Quests.rolled_option(s, ev, rng(99)), a, "…and the dice land the same")
+
+
+func test_ssr_lord_cards_come_only_from_their_fixed_chapter() -> void:
+	var db := GameData.get_db()
+	var ssr: Array = db.lord_forms.keys().filter(func(f): return db.lord_forms[f]["rarity"] == "SSR" and f in db.lord_form_grants)
+	check(not ssr.is_empty(), "there are SSR lord cards")
+	var rng := RandomNumberGenerator.new()
+	for k in 30:
+		rng.seed = k
+		var s := SaveData.create()
+		s.flags = ["出生：冀州无极"] if k % 2 == 0 else []
+		for qi in db.quests.size():
+			var q: Dictionary = db.quests[qi]
+			if db.lord_form_fixed.has(q["id"]):
+				continue
+			s.lord_form_paid = ""
+			var got := Quests.grant_lord_form(q, s, rng)
+			check(not got in ssr, "chapter %s never hands out an SSR card (%s)" % [q["id"], got])
+	for qid in db.lord_form_fixed:
+		var q2: Dictionary = db.quests.filter(func(x): return x["id"] == qid)[0]
+		var north: bool = db.lord_forms[db.lord_form_fixed[qid]]["route"] == "north"
+		var s2 := SaveData.create()
+		s2.flags = ["出生：冀州无极"] if north else []
+		check_eq(Quests.grant_lord_form(q2, s2, rng), db.lord_form_fixed[qid], "%s always gives its SSR card" % qid)

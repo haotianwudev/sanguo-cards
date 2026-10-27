@@ -15,6 +15,7 @@ var troops: Dictionary  # id -> {id, name, short, hp, at} (stats only — skills
 var kits: Dictionary  # id -> {id, name, normal, special}: the default skills of normal / special units (cards.json kits)
 var lord_forms: Dictionary  # id -> {id, name, route, bonus, skills, art}: the lord's extra cards (cards.json lord_forms)
 var lord_form_default := ""  # the lord card the first chapter's first step gives (the plain lord, with his own default face)
+var lord_form_fixed: Dictionary  # chapter id -> the lord card that chapter always gives (the SSR ones; they are not in the random draw)
 var lord_form_grants: Array  # form ids, handed out one per chapter cleared (in order, for the route that matches)
 var endings: Dictionary  # id -> {id, title, route, chapter, kind, who, quest, built, trigger, hint, unlock, cg, text} (data/endings.json)
 var ending_order: Array  # ending ids in file order
@@ -99,6 +100,7 @@ func _load(dir: String) -> void:
 		lord_forms[fid] = {"id": fid, "name": f["name"], "route": f.get("route", ""), "rarity": str(f.get("rarity", raw["gacha"].get("lord_rarity", "R"))), "hp": int(f.get("hp", 0)), "at": int(f.get("at", 0)),
 			"skills": f.get("skills", []), "art": f.get("art", false) or ResourceLoader.exists("res://data/portraits/%s.jpg" % fid)}  # its own face once that portrait is delivered
 	lord_form_grants = raw.get("lord_forms", {}).get("grants", [])
+	lord_form_fixed = raw.get("lord_forms", {}).get("fixed", {})
 	lord_form_default = raw.get("lord_forms", {}).get("default", "")
 	for cid in raw["cards"]:
 		var c: Dictionary = raw["cards"][cid]
@@ -272,7 +274,7 @@ func _validate() -> void:
 		assert(en["drop"] == "" or cards.has(en["drop"]), "enemy %s: unknown drop %s" % [en["id"], en["drop"]])
 	for sk in skills.values():
 		for e in sk["effects"]:
-			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison"],
+			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot"],
 				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
 	for c in cards.values():
 		assert(troops.has(c["troop"]), "card %s: bad troop" % c["id"])

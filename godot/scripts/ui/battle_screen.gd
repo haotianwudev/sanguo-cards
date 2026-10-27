@@ -379,6 +379,8 @@ func _refresh() -> void:
 		st.append("混乱：下回合无法行动")
 	if e["break_turns"] > 0:
 		st.append("破防 +%d%%（%d 回合）" % [int(round(e["break_amount"] * 100)), e["break_turns"]])
+	if e["resist_turns"] > 0:
+		st.append("降抗 双抗 -%d%%（%d 回合）" % [int(round(e["resist_down"] * 100)), e["resist_turns"]])
 	if e["burn_turns"] > 0:
 		if e["burn_pct"] > 0.0:
 			st.append("🔥 灼烧 现有体力 -%d%%/回合（%d 回合）" % [int(round(e["burn_pct"] * 100)), e["burn_turns"]])
@@ -506,16 +508,18 @@ func _sync_skill_bars() -> void:
 				_on_skill(i, sid))
 			_hold_detail(btn, sk)
 			bar.add_child(btn)
-		if _skills_hidden() and not b.swap_options(i).is_empty():  # the popup's 换人 lives on the summoned column too
+		if not b.swap_options(i).is_empty():  # 换人 is the last button of the column (nearest the card), shown or summoned
 			var sw := Button.new()
-			sw.text = "换人%s" % (("  AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "（不费 AP）") + ("" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round())
+			sw.text = "换人" + (("  AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "") + ("" if b.round_no >= b.swap_from_round() else " · 第%d回合起" % b.swap_from_round())  # short: it has to fit one card's column
+			sw.clip_text = true
+			sw.alignment = HORIZONTAL_ALIGNMENT_CENTER
 			sw.add_theme_font_size_override("font_size", 16 if small else 20)
 			sw.focus_mode = Control.FOCUS_NONE
 			sw.custom_minimum_size = Vector2(0, bh)
-			sw.add_theme_stylebox_override("normal", Kit.box(Color(0.07, 0.05, 0.04, 0.82), 8, 1, Kit.c("gold"), 10))
-			sw.add_theme_stylebox_override("hover", Kit.box(Color(0.2, 0.14, 0.08, 0.88), 8, 2, Kit.c("gold"), 10))
-			sw.add_theme_stylebox_override("pressed", Kit.box(Color(0.3, 0.2, 0.08, 0.88), 8, 2, Kit.c("gold"), 10))
-			sw.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.82), 8, 1, Color(1, 1, 1, 0.15), 10))
+			sw.add_theme_stylebox_override("normal", Kit.box(Color(0.16, 0.11, 0.03, 0.5), 8, 1, Kit.c("gold").darkened(0.15), 10))  # a shade apart from the skills and more see-through
+			sw.add_theme_stylebox_override("hover", Kit.box(Color(0.28, 0.2, 0.06, 0.62), 8, 2, Kit.c("gold"), 10))
+			sw.add_theme_stylebox_override("pressed", Kit.box(Color(0.36, 0.25, 0.08, 0.7), 8, 2, Kit.c("gold"), 10))
+			sw.add_theme_stylebox_override("disabled", Kit.box(Color(0.1, 0.09, 0.08, 0.45), 8, 1, Color(1, 1, 1, 0.12), 10))
 			sw.add_theme_color_override("font_color", Kit.c("gold"))
 			sw.add_theme_color_override("font_disabled_color", Color(1, 1, 1, 0.4))
 			sw.disabled = not b.can_swap(i)
@@ -523,7 +527,7 @@ func _sync_skill_bars() -> void:
 				_bar_open = -1
 				_sync_skill_bars()
 				_open_swap(i))
-			bar.add_child(sw)
+			bar.add_child(sw)  # last, right above the card
 		# in the card's column, stacked up from the card's top edge (the card itself stays clear; the HP bar and the enemy may be covered)
 		var n := bar.get_child_count()
 		var h := n * bh + (n - 1) * 5.0
@@ -659,25 +663,17 @@ func _open_skills(i: int) -> void:
 
 
 func _open_swap(i: int) -> void:
-	## 换人: the same pick-a-card screen as recruiting; whoever comes off is out for the rest of the battle
+	## 换人: opens the 整备 screen in swap mode (the same cards, details and sorting); whoever comes off is out for the rest of the battle
 	_close_skill_popup()
 	var opts: Array = b.swap_options(i)
 	opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
-	opts = opts.slice(0, 5)  # five cards fit across the screen
-	var ids: Array = opts.map(func(ld): return ld["card"]["id"])
-	var o := PickOverlay.new()
-	o.title = "换谁上场？（%s · 攻击按新人和他的部队 · 体力按比例 · 换下的人本场不能再上）" % (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP")
-	o.card_ids = ids
-	o.captions = opts.map(func(ld): return "%s · %s" % [GameData.get_db().troops[ld["card"]["troop"]]["name"],
-		"、".join(ld["card"]["skills"].map(func(s): return GameData.get_db().skills[s]["name"]))])
-	o.confirm_text = "上场"
-	o.cancelable = true
-	o.z_index = 70
-	o.set_anchors_preset(Control.PRESET_FULL_RECT)
-	o.picked.connect(func(k):
-		o.queue_free()
-		_on_swap(i, ids[k]))
-	o.cancelled.connect(func(): o.queue_free())
+	var o := PartyOverlay.new()
+	o.swap_mode = true
+	o.swap_slot = i
+	o.swap_field = b.leaders.map(func(u): return "lord" if u["leader"]["card"]["troop"] == "lord" else u["leader"]["card"]["id"])
+	o.swap_ids = opts.map(func(ld): return ld["card"]["id"])
+	o.swap_note = ("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP"
+	o.swap_picked.connect(func(cid): _on_swap(i, cid))
 	add_child(o)
 
 
@@ -898,6 +894,8 @@ func _sync_badges() -> void:
 		row.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), e["poison"]))
 	if e["break_turns"] > 0:
 		row.append(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]))
+	if e["resist_turns"] > 0:
+		row.append(BattleFx.badge("抗", Color(0.45, 0.8, 0.95), e["resist_turns"]))
 	if e["stunned"]:
 		row.append(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)))
 	if e["at"] > e["data"]["at"] * 1.01:
@@ -1008,6 +1006,12 @@ func _play(events: Array) -> void:
 					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
 					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
 				await get_tree().create_timer(0.02).timeout
+			"passive":  # another card's own move (a troop's small-chance trick): its name over the card
+				var pu: int = int(ev.get("unit", -1))
+				if pu >= 0 and pu < _cards.size():
+					_card_lunge(_cards[pu], false)
+					Kit.float_text(self, _card_rect(pu).get_center() + Vector2(0, -70), "%s：%s！" % [str(ev["name"]).split("·")[0], str(ev["text"])], Kit.c("gold"), 28)
+					await get_tree().create_timer(0.35).timeout
 			"hit", "interrupt", "burn", "counter", "poison":
 				var is_rider: bool = ev.get("rider", false)
 				if ev["t"] == "interrupt" and int(ev.get("unit", -1)) >= 0 and int(ev["unit"]) < _cards.size():
@@ -1599,6 +1603,18 @@ func _finish_at_start() -> void:
 	_finish()
 
 
+func _pick_chest(title: String, chest: Array) -> void:
+	var o := PickOverlay.new()
+	o.title = title
+	o.chest = "grand" if boss else "normal"
+	o.card_ids = chest.map(func(c): return c["id"])
+	o.counts = chest.map(func(c): return Game.save.copies(c["id"]))
+	o.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(o)
+	var i: int = await o.picked
+	Game.save.take(chest[i]["id"])
+
+
 func _finish() -> void:
 	_busy = true
 	_clear_marks()
@@ -1618,21 +1634,18 @@ func _finish() -> void:
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
 		var bonus := float(b.mods.get("chest", 0.0))
 		var chance := save.chest_chance(b.overkill, boss, bonus)
-		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, [], b.enemy["data"]["drop"], bonus, str(q.get("id", "")))
+		var extra_card := 1 if Game.rng.randf() < b.loot_card else 0  # 劫掠: one more card to pick from in every chest
+		var chest := save.chest_after_battle(Game.rng, b.overkill, boss, [], b.enemy["data"]["drop"], bonus, str(q.get("id", "")), extra_card)
 		var odds := "首领必掉" if boss else "溢出伤害 %d%% · 宝箱几率 %d%%" % [int(round(b.overkill * 100)), int(round(chance * 100))]
+		if extra_card > 0:
+			odds += " · 劫掠：多一张卡"
 		if chest.is_empty():
 			await _banner("%s —— 这次没有宝箱" % odds, Kit.c("gray"))
 			await get_tree().create_timer(0.5).timeout
 		else:
-			var o := PickOverlay.new()
-			o.title = "宝箱！（%s）选一张卡带走" % odds
-			o.chest = "grand" if boss else "normal"
-			o.card_ids = chest.map(func(c): return c["id"])
-			o.counts = chest.map(func(c): return save.copies(c["id"]))
-			o.set_anchors_preset(Control.PRESET_FULL_RECT)
-			add_child(o)
-			var i: int = await o.picked
-			save.take(chest[i]["id"])
+			await _pick_chest("宝箱！（%s）选一张卡带走" % odds, chest)
+		if Game.rng.randf() < b.loot_chest:  # 劫掠: a second chest
+			await _pick_chest("劫掠！多出一个宝箱，再选一张卡带走", save.bonus_chest(Game.rng, boss, [], str(q.get("id", "")), extra_card))
 		Game.battle_finished(true)
 	else:
 		# say why: running out of rounds with HP left is not the same as being wiped out
