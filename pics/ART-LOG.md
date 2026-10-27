@@ -1356,3 +1356,4 @@
 - [ ] 2026-10-25 cg `c3_guotu_street` ← c3_guotu_street.jpg · ok
 - [ ] 2026-10-26 cg `c4_wuanguo` ← c4_wuanguo.jpg · ok
 - [ ] 2026-10-26 cg `c4_cimu` ← c4_cimu.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-26 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok

@@ -7651,6 +7651,10 @@
     "c4_cimu": {
       "src": "source/cg/c4_cimu.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "n4_qinggong": {
+      "src": "source/cg/n4_qinggong.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
