@@ -246,6 +246,7 @@
   "lusu": {"file": "lusu.jpg", "face": [0.5, 0.22], "head": 0.22},
   "niufu": {"file": "niufu.jpg", "face": [0.5, 0.22], "head": 0.22},
   "taoqian": {"file": "taoqian.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "sunguan": {"file": "sunguan.jpg", "face": [0.5, 0.22], "head": 0.22},
   "wangping": {"file": "wangping.jpg", "face": [0.5, 0.22], "head": 0.22},
   "weixu": {"file": "weixu.jpg", "face": [0.5, 0.22], "head": 0.22},
   "weiyan": {"file": "weiyan.jpg", "face": [0.5, 0.22], "head": 0.22},

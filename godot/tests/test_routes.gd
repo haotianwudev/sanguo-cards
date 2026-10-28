@@ -527,7 +527,8 @@ func test_north_chapter5_without_military_law_ends_in_ending_eight() -> void:
 	var q := quest_by_id("xuzhou")
 	var p := walk(q, s, [])
 	for sid in ["xz_start", "xz_muster", "xz_youqi", "xz_xiahoudun", "xz_rest1", "xz_seal", "xz_mifu", "xz_needle", "xz_chaos",
-			"xz_accuse", "xz_banquet", "xz_daofu", "xz_menhou"]:
+			"xz_sx_a1", "xz_sx_a2", "xz_mimou", "xz_banquet", "xz_daofu", "xz_sunguan", "xz_sx_zhangfei", "xz_sx_rest",
+			"xz_sx_guanyu", "xz_sx_liubei", "xz_sx_taoqian", "xz_menhou"]:
 		check(p.has(sid), "失律 route passes " + sid)
 	for sid in ["xz_muster_j", "xz_law", "xz_caobao", "xz_lvbu", "xz_wedding"]:
 		check(not p.has(sid), "失律 route never reaches " + sid)
@@ -558,7 +559,7 @@ func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
 		for sid in ["xz_muster", "xz_chaos", "xz_banquet", "xz_menhou"]:
 			check(not p.has(sid), "铁纪 route never reaches " + sid)
 		check_eq(p[-1], "xz_end")
-		for c in ["zhangliao", "gaoshun"]:
+		for c in ["zhangliao", "gaoshun", "sunguan"]:
 			check(s.has_card(c), "%s joins in 第五章" % c)
 		for r in ["xuzhou_yin", "chen_mago"]:
 			check(s.relics.has(r), "第五章 hands over the 宝物 " + r)

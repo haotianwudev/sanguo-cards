@@ -1357,3 +1357,11 @@
 - [ ] 2026-10-26 cg `c4_wuanguo` ← c4_wuanguo.jpg · ok
 - [ ] 2026-10-26 cg `c4_cimu` ← c4_cimu.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-26 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 portrait `sunguan` ← sunguan.jpg · ok
+- [ ] 2026-10-27 cg `n5_needle` ← n5_needle.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 cg `n5_chaos` ← n5_chaos.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 cg `n5_mimou` ← n5_mimou.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 cg `n5_banquet` ← n5_banquet.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 cg `n5_sunguan` ← n5_sunguan.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 cg `n5_menhou` ← n5_menhou.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-27 cg `end_menhou` ← end_menhou.jpg 裁 2528×1696→2528×1422 · ok

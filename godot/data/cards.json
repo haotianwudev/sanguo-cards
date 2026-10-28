@@ -3293,6 +3293,15 @@
       "hp": 74,
       "at": 58
     },
+    "sunguan": {
+      "name": "孙观",
+      "rarity": "C",
+      "troop": "infantry",
+      "hp": 62,
+      "at": 60,
+      "pool": false,
+      "scope": "north"
+    },
     "chengui": {
       "name": "陈珪",
       "rarity": "C",
