@@ -165,7 +165,7 @@ def write_needs(pics: Path = PICS) -> None:
 
     seen: set[str] = set()
     seen_cg: set[str] = set()
-    interludes = json.loads((data / "interludes.json").read_text("utf-8")).get("after", {})
+    side_after = json.loads((data / "side_stories.json").read_text("utf-8")).get("after", {})  # the old interludes.json, merged into the ？小故事
 
     def rows(items: list[tuple[str, str]]) -> list[str]:
         out = []
@@ -246,10 +246,10 @@ def write_needs(pics: Path = PICS) -> None:
         if end.get("cg") and end["cg"] not in seen_cg:
             seen_cg.add(end["cg"])
             cg_rows.append(f"| {'✅ 已有' if end['cg'] in cgs_cfg else '⬜ 缺'} | `{end['cg']}` | 结局卡「{end['title']}」 |")
-        for sc in interludes.get(q["id"], []):
+        for sc in side_after.get(q["id"], []):
             if sc.get("cg") and sc["cg"] not in seen_cg:
                 seen_cg.add(sc["cg"])
-                cg_rows.append(f"| {'✅ 已有' if sc['cg'] in cgs_cfg else '⬜ 缺'} | `{sc['cg']}` | 幕间「{sc['title']}」 |")
+                cg_rows.append(f"| {'✅ 已有' if sc['cg'] in cgs_cfg else '⬜ 缺'} | `{sc['cg']}` | 小故事「{sc['title']}」 |")
         ev_rows = []
         for eid in event_pool_of(q):
             ev = story["events"][eid]

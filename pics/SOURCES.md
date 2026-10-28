@@ -250,6 +250,7 @@
 | `lusu` | source/generals/lusu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `niufu` | source/generals/niufu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `taoqian` | source/generals/taoqian.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `sunguan` | source/generals/sunguan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `wangping` | source/generals/wangping.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `weixu` | source/generals/weixu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `weiyan` | source/generals/weiyan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -1343,3 +1344,15 @@
 | `cg:s12_dongfeng` | source/cg/s12_dongfeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_lubu_xuzhou` | source/cg/ss_lubu_xuzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_caocao_tuibing` | source/cg/ss_caocao_tuibing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_cash` | source/cg/ss_cash.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_boast` | source/cg/ss_boast.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_river` | source/cg/ss_river.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_fame` | source/cg/ss_fame.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_home` | source/cg/ss_home.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_rule` | source/cg/ss_rule.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_news` | source/cg/ss_news.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c4_cimu` | source/cg/c4_cimu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n4_qinggong` | source/cg/n4_qinggong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n5_chaos` | source/cg/n5_chaos.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n5_mimou` | source/cg/n5_mimou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n5_sunguan` | source/cg/n5_sunguan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
