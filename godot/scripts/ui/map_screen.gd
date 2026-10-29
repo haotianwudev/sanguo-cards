@@ -88,12 +88,18 @@ func _ready() -> void:
 	sp.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(sp)
 	top.add_child(Kit.label("体力", Kit.FONT_BODY, "muted"))
-	_hp_bar = Kit.bar(1, 1, "green", 22)
-	_hp_bar.custom_minimum_size = Vector2(300, 22)
+	_hp_bar = Kit.bar(1, 1, "green", 30)
+	_hp_bar.custom_minimum_size = Vector2(300, 30)
 	_hp_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top.add_child(_hp_bar)
-	_hp_label = Kit.label("", Kit.FONT_BODY)
-	top.add_child(_hp_label)
+	_hp_label = Kit.label("", Kit.FONT_SMALL)  # the numbers sit on the bar itself (user rule), outlined to read over green and dark
+	_hp_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_hp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_hp_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_hp_label.add_theme_constant_override("outline_size", 6)
+	_hp_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	_hp_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hp_bar.add_child(_hp_label)
 	_run_box = HBoxContainer.new()  # 宝物 and 险 this run
 	_run_box.add_theme_constant_override("separation", 6)
 	top.add_child(_run_box)
@@ -524,7 +530,7 @@ func _fit_top() -> void:
 	_hp_bar.custom_minimum_size.x = 300
 	var over := _top.get_combined_minimum_size().x - 1232.0
 	if over > 0.0:
-		_hp_bar.custom_minimum_size.x = maxf(80.0, 300.0 - over)
+		_hp_bar.custom_minimum_size.x = maxf(140.0, 300.0 - over)  # still wide enough for "2116 / 3197" on it
 		over -= 300.0 - _hp_bar.custom_minimum_size.x
 	if over > 0.0:  # still too wide: tighten the gaps
 		_top.add_theme_constant_override("separation", maxi(4, 18 - int(ceil(over / maxf(1.0, _top.get_child_count() - 1)))))
