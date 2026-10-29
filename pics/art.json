@@ -7676,6 +7676,10 @@
     "n5_sunguan": {
       "src": "source/cg/n5_sunguan.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "n4_mifang": {
+      "src": "source/cg/n4_mifang.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
