@@ -3464,7 +3464,7 @@
     "gongsunkang": {
       "name": "公孙康",
       "rarity": "C",
-      "troop": "cavalry",
+      "troop": "archer",
       "hp": 50,
       "at": 73,
       "scope": "north"
