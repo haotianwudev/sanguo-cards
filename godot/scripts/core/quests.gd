@@ -775,6 +775,32 @@ static func battle_here(q: Dictionary, save: SaveData) -> Dictionary:
 static func record(save: SaveData, line: String) -> void:
 	if line != "" and not save.run_records.has(line):
 		save.run_records.append(line)
+		_redeal_events(save)
+
+
+static func _redeal_events(save: SaveData) -> void:
+	## a new line can switch the chapter's event pool (第一章's birth: 出生：冀州无极 → the north pool): a ？ square not yet
+	## reached whose dealt event is no longer in the pool gets a fresh one from it, so the north never meets 孙策's 斗酒
+	if save.events.is_empty():
+		return
+	var q: Dictionary = {}
+	for x in GameData.get_db().quests:
+		if x["id"] == save.quest:
+			q = x
+	if q.is_empty():
+		return
+	var pool: Array = pools(view(q, save), save)["event_pool"]
+	for sid in save.events.keys():
+		if save.visited.has(sid) or pool.has(save.events[sid]):
+			continue
+		var fresh: Array = pool.filter(func(e): return not save.events.values().has(e))
+		if fresh.is_empty():
+			fresh = pool
+		if fresh.is_empty():
+			save.events.erase(sid)
+			continue
+		var rng := event_rng(save, "redeal " + sid, RandomNumberGenerator.new())
+		save.events[sid] = fresh[rng.randi_range(0, fresh.size() - 1)]
 
 
 static func collection(save: SaveData) -> Dictionary:

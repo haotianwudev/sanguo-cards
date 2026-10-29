@@ -1149,6 +1149,23 @@ func test_the_north_birth_never_draws_a_south_event() -> void:
 	check(south.has("qiao") and south.has("yuji"), "the south birth still meets them")
 
 
+func test_the_north_birth_redeals_the_events_dealt_before_it() -> void:
+	## the ？ squares are dealt when 第一章 begins, before the birth is picked (the south pool then): picking the north
+	## birth must swap every south event still waiting (孙策's 斗酒 showed up in the north once)
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[0]
+	for seed in range(1, 30):
+		var s := SaveData.create()
+		var rng := RandomNumberGenerator.new()
+		rng.seed = seed
+		Quests.begin(q, s, rng)
+		s.events["jz_mystery1"] = "drink"  # as the south deal could leave it
+		Quests.record(s, "出生：冀州无极")
+		var north: Array = Quests.pools(q, s)["event_pool"]
+		for sid in s.events:
+			check(north.has(s.events[sid]), "seed %d: %s keeps the south event %s" % [seed, sid, s.events[sid]])
+
+
 func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
