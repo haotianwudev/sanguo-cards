@@ -1003,8 +1003,6 @@ func demo(name: String) -> void:
 				await get_tree().create_timer(0.5).timeout
 				b.b.leaders[1]["boosted"] = true
 				b._refresh()
-				if OS.get_cmdline_user_args().has("--popup"):  # the skill popup must cover the BOOST flames
-					b._open_skills(0)
 			if OS.get_cmdline_user_args().has("--endwin"):  # win with a boosted card and statuses up: nothing may stay over the 胜利 banner
 				await get_tree().create_timer(0.5).timeout
 				b.b.leaders[1]["boosted"] = true

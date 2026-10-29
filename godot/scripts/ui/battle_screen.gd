@@ -75,7 +75,7 @@ func _ready() -> void:
 	if ambush and not b.opening.is_empty() and str(b.opening[0]).contains("埋伏"):
 		_banner("埋伏！%s 抢先出手" % b.enemy["data"]["name"], Kit.c("red"))
 	if save.cleared.is_empty() and not carry or (carry and save.visited.size() <= 4):
-		_tip("点卡上的技能直接出手（点卡可换人）· AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
+		_tip("点卡上方的技能直接出手（换人也在那一列）· AP 每回合 +%d（最多 %d）· 每位队长每回合行动一次 · 全军共用一条体力" % [
 			int(GameData.get_db().battle["ap_per_round"]), b.ap_max()])
 
 
@@ -448,7 +448,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _sync_skill_bars() -> void:
 	## every leader who can act shows his skills as a column of wide buttons in his card's column, stacked up from just above the party bar (the cards keep
 	## their place and size, the enemy's side may be covered): one tap plays it.
-	## Hidden while anything plays out, in 自动, and once the fight is decided; tapping the card itself still opens the full panel (换人)
+	## Hidden while anything plays out, in 自动, and once the fight is decided; 换人 is the column's last button
 	if _skill_layer == null:
 		return
 	for ch in _skill_layer.get_children():
@@ -600,66 +600,13 @@ func _show_skill_detail(sk: Dictionary) -> void:
 
 
 func _open_skills(i: int) -> void:
-	if _busy or b.result != "" or not (b.can_act(i) or b.can_swap(i)):
+	## tapping a card: with 隐藏技能 on it summons that card's column (tap again to put it away); with the skills shown the
+	## column is already there (skills + 换人), so the tap does nothing — the old popup only repeated it (user call)
+	if _busy or b.result != "" or not (b.can_act(i) or b.can_swap(i)) or not _skills_hidden():
 		return
 	_close_skill_popup()
-	if _skills_hidden():  # skills hidden: tapping a card summons its column (the same strip, above the card) instead of the old diagonal popup; tap again to put it away
-		_bar_open = -1 if _bar_open == i else i
-		_sync_skill_bars()
-		return
-	var u: Dictionary = b.leaders[i]
-	var overlay := Control.new()
-	overlay.z_index = 60
-	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
-	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	var dim := Button.new()  # a borderless full-screen button: click anywhere outside the panel to cancel
-	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
-	dim.focus_mode = Control.FOCUS_NONE
-	for st in ["normal", "hover", "pressed", "focus"]:  # not flat: a flat Button skips its stylebox, so nothing dims
-		dim.add_theme_stylebox_override(st, Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
-	dim.button_down.connect(func():  # a fresh touch-down only: the lift from the tap that opened it must not close it
-		if Time.get_ticks_msec() - _skill_popup_at > 350:
-			_close_skill_popup())
-	overlay.add_child(dim)
-	var card_x: float = _cards[i].global_position.x
-	var card_top: float = _cards[i].global_position.y
-	var panel := PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", Kit.box(Kit.c("card"), 14, 3, Kit.c("gold"), 14))
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 8)
-	panel.add_child(col)
-	col.add_child(Kit.label(u["leader"]["card"]["name"], Kit.FONT_BODY + 2, "gold"))
-	for sid in u["leader"]["card"]["skills"]:
-		var sk: Dictionary = GameData.get_db().skills[sid]
-		var tag := Kit.skill_tag(sk)
-		var btn := Kit.button("%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""], "blue", Kit.FONT_BODY)
-		btn.icon = Kit.skill_icon(sk)
-		btn.expand_icon = false
-		btn.add_theme_constant_override("icon_max_width", 28)
-		btn.custom_minimum_size = Vector2(260, 48)
-		btn.disabled = not b.usable(u, sk)
-		btn.pressed.connect(func():
-			if _held_skill:
-				_held_skill = false
-				return
-			_close_skill_popup()
-			_on_skill(i, sid))
-		_hold_detail(btn, sk)
-		col.add_child(btn)
-	if not b.swap_options(i).is_empty():
-		var sw := Kit.button("换人%s%s" % [("  AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "（不费 AP）", "" if b.round_no >= b.swap_from_round() else "（第 %d 回合起）" % b.swap_from_round()], "gold", Kit.FONT_BODY)
-		sw.custom_minimum_size = Vector2(260, 48)
-		sw.disabled = not b.can_swap(i)
-		sw.pressed.connect(func():
-			_close_skill_popup()
-			_open_swap(i))
-		col.add_child(sw)
-	overlay.add_child(panel)
-	add_child(overlay)
-	panel.position = Vector2(clampf(card_x, 10, 1280 - 280), clampf(card_top - 10, 10, 720) - panel.size.y if card_top > 300 else card_top + _cards[i].size.y + 10)
-	_skill_popup = overlay
-	_skill_popup_at = Time.get_ticks_msec()
-	Kit.focus(col.get_child(1) if col.get_child_count() > 1 else null)
+	_bar_open = -1 if _bar_open == i else i
+	_sync_skill_bars()
 
 
 func _open_swap(i: int) -> void:
