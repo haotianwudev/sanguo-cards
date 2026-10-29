@@ -950,6 +950,10 @@ func demo(name: String) -> void:
 				sb.b.round_no = 3
 				sb.b.ap = 4
 				sb._open_swap(1)
+				if OS.get_cmdline_user_args().has("--drop"):  # drag 马云騄 onto 张飞 (not the slot it was opened on): he comes off
+					await get_tree().create_timer(0.5).timeout
+					var po: PartyOverlay = sb.get_children().filter(func(c): return c is PartyOverlay)[0]
+					po._drop("slot:zhangfei", {"kind": "card", "id": "mayunlu", "from": "pool"})
 		"defeatflow":  # a real quest battle lost for good: the 阵亡 picture, a click, and we must land back on the map
 			save.owned = ["sunce_bawang", "zhouyu_chibi", "sunjian"]
 			save.party = ["sunce_bawang", "zhouyu_chibi", "sunjian"]

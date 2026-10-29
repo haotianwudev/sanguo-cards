@@ -3243,7 +3243,7 @@
     "caohong": {
       "name": "曹洪",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "infantry",
       "hp": 60,
       "at": 74,
       "scope": "north"

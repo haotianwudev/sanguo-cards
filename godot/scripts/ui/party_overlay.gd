@@ -11,7 +11,7 @@ extends Control
 ## works while worn and that unit is out. Any card (generals, soldiers, 宝物) can also be left behind.
 
 signal closed
-signal swap_picked(card_id: String)  # swap mode: the card chosen to come on
+signal swap_picked(card_id: String, slot: int)  # swap mode: the card chosen to come on, and the field slot it replaces
 
 ## 换人 in a battle opens this same screen in swap mode: the line-up on the field on top (the slot to be replaced marked), only the cards
 ## that may come on in the pool, the usual card details, and 上场 for the one picked. Nothing of the party is changed here.
@@ -19,6 +19,7 @@ var swap_mode := false
 var swap_slot := -1  # the field slot whose leader comes off
 var swap_field: Array = []  # card ids on the field, by slot
 var swap_ids: Array = []  # the cards that may come on
+var swap_ok: Dictionary = {}  # field slot -> the card ids that may replace it (only slots that can swap now): where a dragged card may land
 var swap_note := ""  # what the swap costs
 
 
@@ -56,7 +57,7 @@ func _ready() -> void:
 	var hint := Kit.label("点卡查看 · 再点一次出阵 / 下阵 · 也可以拖：拖上去出阵（拖到队长身上替换），拖回卡池下阵，队长之间拖动换位置", 15)
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
 	hint.position = Vector2(170, 22)
-	hint.text = "点卡查看 · 选好后按「上场」· 换下的人本场不能再上" if swap_mode else hint.text
+	hint.text = "点卡查看 · 按「上场」，或把卡拖到场上的人身上换下他 · 换下的人本场不能再上" if swap_mode else hint.text
 	add_child(hint)
 
 	# the party: lord + leaders, with a summary box
@@ -339,6 +340,8 @@ func _rebuild_swap() -> void:
 		v.set_state(false, _sel == cid)
 		v.pressed.connect(_tap.bind(cid))
 		v.tap_on_release = true
+		v.long_press = true  # as in 整备: a touch drag starts with a long press, a swipe scrolls
+		_dnd(v, {"kind": "card", "id": cid, "from": "pool"}, "pool")
 		_grid.add_child(v)
 	_fill_detail()
 
@@ -354,7 +357,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	v.set_state(false, _sel == cid)
 	v.pressed.connect(_tap.bind(cid))
 	v.tap_on_release = true
-	_dnd(v, {} if cid == "lord" else {"kind": "card", "id": cid, "from": "party"}, "slot:" + cid)
+	_dnd(v, {} if cid == "lord" or swap_mode else {"kind": "card", "id": cid, "from": "party"}, "slot:" + cid)  # 换人: the field only takes drops
 	box.add_child(v)
 	var n: int = ld["members"].size()
 	var l := Kit.label(role + ("  · 部队 %d" % (n + 1) if n > 0 else ""), 14, "gold")
@@ -606,14 +609,13 @@ func _fill_detail() -> void:
 		var go: Button
 		if swap_ids.has(_sel):
 			go = Kit.button("上　场（换下 %s）" % db.cards[swap_field[swap_slot]]["name"].split("·")[0], "green")
-			go.pressed.connect(func():
-				swap_picked.emit(_sel)
-				queue_free())
+			go.pressed.connect(_swap_go.bind(_sel, swap_slot))
 		else:
 			go = Kit.button("场上的人", "gray")
 			go.disabled = true
 		go.custom_minimum_size = Vector2(340, 50)
 		_detail.add_child(go)
+		_detail.move_child(go, 0)  # on top, not under the skills (user call)
 		return
 	var act: Button
 	if is_lord:
@@ -763,8 +765,8 @@ func _remove(cid: String) -> void:
 
 func _dnd(ctrl: Control, data: Dictionary, target: String) -> void:
 	## ctrl can be dragged (when data isn't empty) and takes drops as `target`: "party", "pool" or "slot:<leader id>"
-	if swap_mode:
-		return
+	if swap_mode and data.get("kind", "card") != "card":  # 换人 moves cards only: no 宝物, no lord card
+		data = {}
 	ctrl.set_drag_forwarding(
 		func(_at: Vector2) -> Variant: return null if data.is_empty() or not _may_lift(ctrl) else _start_drag(ctrl, data),
 		func(_at: Vector2, d: Variant) -> bool: return _can_drop(target, d, ctrl),
@@ -874,6 +876,8 @@ func _pop(cid: String) -> void:
 func _drop_ok(target: String, d: Variant) -> bool:
 	if not d is Dictionary or not d.has("kind"):
 		return false
+	if swap_mode:
+		return d["kind"] == "card" and _swap_target(target, str(d["id"])) >= 0
 	var on_party := target == "party" or target.begins_with("slot:")
 	match d["kind"]:
 		"card":
@@ -885,7 +889,21 @@ func _drop_ok(target: String, d: Variant) -> bool:
 	return false
 
 
+func _swap_target(target: String, cid: String) -> int:
+	## 换人: the field slot a card dropped on `target` would replace (-1: not there) — a leader it may replace, or the box = the slot 换人 opened on
+	var k := swap_slot if target == "party" else (swap_field.find(target.substr(5)) if target.begins_with("slot:") else -1)
+	return k if k >= 0 and swap_ok.get(k, []).has(cid) else -1
+
+
+func _swap_go(cid: String, k: int) -> void:
+	swap_picked.emit(cid, k)
+	queue_free()
+
+
 func _drop(target: String, d: Dictionary) -> void:
+	if swap_mode:
+		_swap_go(str(d["id"]), _swap_target(target, str(d["id"])))
+		return
 	if d["kind"] == "card":
 		_pop.call_deferred(str(d["id"]))
 	var save := Game.save

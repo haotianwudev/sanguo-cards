@@ -620,7 +620,10 @@ func _open_swap(i: int) -> void:
 	o.swap_field = b.leaders.map(func(u): return "lord" if u["leader"]["card"]["troop"] == "lord" else u["leader"]["card"]["id"])
 	o.swap_ids = opts.map(func(ld): return ld["card"]["id"])
 	o.swap_note = ("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP"
-	o.swap_picked.connect(func(cid): _on_swap(i, cid))
+	for k in b.leaders.size():  # a card dragged onto another leader replaces that one instead
+		if b.can_swap(k):
+			o.swap_ok[k] = b.swap_options(k).map(func(ld): return ld["card"]["id"])
+	o.swap_picked.connect(func(cid, k): _on_swap(k, cid))
 	add_child(o)
 
 
