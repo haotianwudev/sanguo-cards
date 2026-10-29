@@ -3101,7 +3101,7 @@
     "zoudan": {
       "name": "邹丹",
       "rarity": "C",
-      "troop": "spear",
+      "troop": "infantry",
       "hp": 53,
       "at": 62,
       "scope": "north"
