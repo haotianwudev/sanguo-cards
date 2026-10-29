@@ -57,6 +57,7 @@ var _sheet_box: VBoxContainer
 var _hp_bar: ProgressBar
 var _hp_label: Label
 var _run_box: HBoxContainer
+var _top: HBoxContainer
 var _title: Label
 var _busy := false
 
@@ -73,6 +74,7 @@ func _ready() -> void:
 	Bgm.play("map")
 	# top bar
 	var top := HBoxContainer.new()
+	_top = top
 	top.position = Vector2(24, 14)
 	top.size = Vector2(1232, 48)
 	top.add_theme_constant_override("separation", 18)
@@ -488,6 +490,7 @@ func _refresh() -> void:
 
 func _show_run() -> void:
 	for ch in _run_box.get_children():
+		_run_box.remove_child(ch)  # out of the bar now, so _fit_top measures only the new chips
 		ch.queue_free()
 	var db := GameData.get_db()
 	var save := Game.save
@@ -512,6 +515,20 @@ func _show_run() -> void:
 		_tap_detail(fc, "天命·%s：%s" % [f["name"], f["desc"]])
 		_run_box.add_child(fc)
 	# 宝物 aren't listed here: they're cards, see 整备
+	_fit_top.call_deferred()
+
+
+func _fit_top() -> void:
+	## the top bar must never push 设置 off the screen (险 / 命 chips + 查看地图 in a CG): the HP bar gives up the room first
+	_top.add_theme_constant_override("separation", 18)
+	_hp_bar.custom_minimum_size.x = 300
+	var over := _top.get_combined_minimum_size().x - 1232.0
+	if over > 0.0:
+		_hp_bar.custom_minimum_size.x = maxf(80.0, 300.0 - over)
+		over -= 300.0 - _hp_bar.custom_minimum_size.x
+	if over > 0.0:  # still too wide: tighten the gaps
+		_top.add_theme_constant_override("separation", maxi(4, 18 - int(ceil(over / maxf(1.0, _top.get_child_count() - 1)))))
+	_top.size = Vector2(1232, _top.size.y)
 
 
 func _tap_detail(chip: Control, detail: String) -> void:
@@ -1261,6 +1278,7 @@ func _apply_cg_mode() -> void:
 		_sheet.visible = true
 	_scroll.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
+	_fit_top.call_deferred()
 	# a CG gets the screen: the text box shrinks to a subtitle strip at the bottom
 	_apply_dlg_size()
 	var bg := Kit.c("card")
