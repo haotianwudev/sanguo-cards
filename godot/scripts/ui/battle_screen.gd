@@ -396,6 +396,8 @@ func _refresh() -> void:
 		st.append("战意 ×%d：攻击 +%d%% 受伤 -%d%%（%d 回合）" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), int(round(b.buff["def"] * 100)), b.buff["turns"]])
 	if b.party_burn["turns"] > 0:
 		st.append("我军灼烧 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
+	if b.party_poison["turns"] > 0:
+		st.append("我军中毒 ×%d 最大体力 -%d%%/回合（%d 回合）" % [b.party_poison["layers"], int(round(b.party_poison["pct"] * b.party_poison["layers"] * 100)), b.party_poison["turns"]])
 	if b.ap_drain > 0:
 		st.append("下回合 AP -%d" % b.ap_drain)
 	_enemy_status.text = "　".join(st)
@@ -783,6 +785,8 @@ func _sync_fx() -> void:
 		want["e_charge"] = func(): return BattleFx.charge_aura(self, cr, not _has_cg)
 	if b.party_burn["turns"] > 0:
 		want["p_burn"] = func(): return BattleFx.embers(self, _party_rect(), BattleFx.EMBER, 26, 50.0)
+	if b.party_poison["turns"] > 0:
+		want["p_poison"] = func(): return BattleFx.embers(self, _party_rect(), Color(0.45, 0.95, 0.35, 0.85), 18, 40.0)
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
 		var id: String = u["leader"]["card"]["id"]
@@ -861,6 +865,8 @@ func _sync_badges() -> void:
 		party.append(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]))
 	if b.party_burn["turns"] > 0:
 		party.append(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]))
+	if b.party_poison["turns"] > 0:
+		party.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]))
 	if b.ap_drain > 0:
 		party.append(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain))
 	var pr := _party_rect()
@@ -1141,6 +1147,12 @@ func _play(events: Array) -> void:
 				Sfx.play("burn")
 				BattleFx.flame_lick(self, _party_rect())
 				Kit.float_text(self, _party_center(), "我军灼烧！", Kit.c("red"), 38)
+				_refresh()
+				await get_tree().create_timer(0.28).timeout
+			"enemy_poison_party":
+				Sfx.play("burn")
+				BattleFx.poison_cloud(self, _party_rect())
+				Kit.float_text(self, _party_center(), "我军中毒 ×%d！" % int(ev.get("layers", 1)), Kit.c("green"), 38)
 				_refresh()
 				await get_tree().create_timer(0.28).timeout
 			"enemy_ap_drain":

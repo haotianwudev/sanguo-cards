@@ -648,6 +648,38 @@ func test_cleanse_lifts_confusion_fire_and_drained_ap() -> void:
 	check(GameData.get_db().skills["jiedu"]["effects"][0]["type"] == "cleanse", "解毒 is the cleanse skill")
 
 
+func test_an_enemy_blow_with_pct_takes_a_share_of_our_max_hp_on_top() -> void:
+	## 大招 掉 X% + 攻击: a big party does not shrug a boss's charged blow off
+	var b := Battle.start("hulao", party(["cav_n", "spear_n"]), 9)
+	b.db.battle["variance"] = 0.0
+	b.party_max = 100000
+	b.party_hp = 100000
+	b.enemy["data"]["moves"] = [{"name": "斩", "power": 0.0, "weight": 1, "pct": 0.1}]
+	b.enemy["data"]["actions"] = 1
+	b.end_round()
+	var hits: Array = b.take_events().filter(func(e): return e["t"] == "enemy_hit" and e["move"] == "斩")
+	check(not hits.is_empty() and hits[0]["dmg"] >= 9000 and hits[0]["dmg"] <= 10000 * 2, "about 10%% of 100000: %s" % str(hits))
+	b.db.battle["variance"] = 0.2
+
+
+func test_enemy_poison_stacks_on_us_and_cleanse_lifts_it() -> void:
+	var b := Battle.start("hulao", party(["daqiao"]), 9)
+	b.enemy["data"]["moves"] = [{"name": "毒箭", "power": 0.0, "weight": 1, "poison_party": 0.03, "turns": 3}]
+	b.enemy["data"]["actions"] = 1
+	for _i in 5:
+		b.party_hp = b.party_max
+		b.result = ""
+		b.end_round()
+	check_eq(b.party_poison["layers"], 3, "three layers at most")
+	b.party_hp = b.party_max
+	b.take_events()
+	b.end_round()
+	var ticks: Array = b.take_events().filter(func(e): return e["t"] == "enemy_hit" and e["move"] == "毒")
+	check(not ticks.is_empty() and ticks[0]["dmg"] == int(round(b.party_max * 0.09)), "3 layers × 3%% of the max HP: %s" % str(ticks))
+	b._apply(b.leaders[1], {"type": "cleanse"}, 1.0)
+	check_eq(b.party_poison["turns"], 0, "解毒 lifts it")
+
+
 func _affix_battle(afx: Dictionary) -> Battle:
 	return Battle.start("hulao", party(["cav_n", "spear_n"]), 9, 0, {}, {}, false, {"affix": afx})
 
@@ -680,7 +712,7 @@ func test_every_elite_and_boss_can_put_a_status_on_us() -> void:
 				if checked.has(eid):
 					continue
 				checked[eid] = true
-				check(db.enemies[eid]["moves"].any(func(m): return m.has("confuse") or m.has("ap_drain") or m.has("burn_party")),
+				check(db.enemies[eid]["moves"].any(func(m): return m.has("confuse") or m.has("ap_drain") or m.has("burn_party") or m.has("poison_party")),
 					"%s (%s) has no status move" % [eid, sid])
 	check(checked.size() > 30, "found the elites and bosses")
 

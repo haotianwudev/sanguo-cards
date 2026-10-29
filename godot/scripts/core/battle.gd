@@ -36,6 +36,7 @@ var first_hit_done := false
 var loot_chest := 0.0  # 劫掠: chance of a second chest after this win, +chest per use
 var loot_card := 0.0  # 劫掠: chance of one more card to pick from in the chests, +card per use
 var party_burn := {}  # the enemy's fire on us: {dmg, turns}
+var party_poison := {}  # the enemy's poison on us: {layers, pct (of our MAX HP a layer a turn), turns}
 var ap_drain := 0  # AP the enemy takes away at the next round start
 var roster: Array = []  # leader dicts that can be tagged in mid-battle (SaveData.swap_roster): any owned card not leading
 var bench_states: Dictionary = {}  # card id -> {uses_left, extra_cost}: the skill state of cards swapped out (only handed on to the next fight)
@@ -88,6 +89,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
 		"break_amount": 0.0, "break_turns": 0, "resist_down": 0.0, "resist_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "poison": 0, "poison_pct": 0.0, "poison_turns": 0, "charging": "", "charge_ready": false, "used": []}
 	b.party_burn = {"dmg": 0, "turns": 0}
+	b.party_poison = {"layers": 0, "pct": 0.0, "turns": 0}
 	b.roster = roster.duplicate()
 	b._carry_extra = extra
 	b._carry_uses = uses
@@ -489,6 +491,9 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			if party_burn["turns"] > 0:
 				n += 1
 				party_burn = {"dmg": 0, "turns": 0}
+			if party_poison["turns"] > 0:
+				n += 1
+				party_poison = {"layers": 0, "pct": 0.0, "turns": 0}
 			if ap_drain > 0:
 				n += 1
 				ap_drain = 0
@@ -548,6 +553,17 @@ func _enemy_phase(defend_cut: float) -> Array:
 		_check_end()
 		if result != "":
 			return log
+	if party_poison["turns"] > 0:  # 中毒 on us: every layer takes its share of our MAX HP, so a bigger bar does not shrug it off
+		party_poison["turns"] -= 1
+		var pd := int(round(party_max * float(party_poison["pct"]) * int(party_poison["layers"])))
+		party_hp = maxi(0, party_hp - pd)
+		_ev({"t": "enemy_hit", "dmg": pd, "move": "毒", "cut": 0.0, "hp": party_hp})
+		log.append("[color=red]我军中毒 ×%d，损失 %d 体力[/color]" % [party_poison["layers"], pd])
+		if party_poison["turns"] == 0:
+			party_poison = {"layers": 0, "pct": 0.0, "turns": 0}
+		_check_end()
+		if result != "":
+			return log
 	_ev({"t": "enemy_turn"})
 	log.append("—— %s 的行动 ——" % data["name"])
 	if enemy.get("regen", 0.0) > 0.0 and enemy["hp"] < enemy["max_hp"]:  # 词缀·再生
@@ -572,9 +588,11 @@ func _enemy_phase(defend_cut: float) -> Array:
 				continue  # the wind-up costs this action only
 			if mv.get("once", false):
 				enemy["used"].append(mv["name"])
-			if float(mv["power"]) > 0.0:
+			if float(mv["power"]) > 0.0 or mv.has("pct"):
 				var c: float = 0.0 if mv.get("pierce", false) else cut
-				var d := maxi(1, int(round(enemy["at"] * float(db.battle.get("damage_mult", 1.0)) * float(mv["power"]) * _variance() * (1.0 - c))))
+				# pct: the blow also takes that share of our MAX HP (a 大招 that keeps hurting however big the party grows); the guard cuts it too
+				var d := maxi(1, int(round((enemy["at"] * float(db.battle.get("damage_mult", 1.0)) * float(mv["power"]) * _variance()
+					+ party_max * float(mv.get("pct", 0.0))) * (1.0 - c))))
 				var ecrit := _crit_roll("enemy")
 				if ecrit > 1.0:
 					d = int(round(d * ecrit))
@@ -605,6 +623,13 @@ func _enemy_phase(defend_cut: float) -> Array:
 				party_burn = {"dmg": int(round(party_max * float(mv["burn_party"]))), "turns": int(mv.get("turns", 3))}
 				_ev({"t": "enemy_burn_party", "dmg": party_burn["dmg"], "turns": party_burn["turns"]})
 				log.append("[color=red]  我军陷入灼烧！每回合 -%d（%d 回合）[/color]" % [party_burn["dmg"], party_burn["turns"]])
+			if mv.has("poison_party"):  # stacks up to poison_max layers; a new dose refreshes the count
+				party_poison["layers"] = mini(int(mv.get("poison_max", 3)), int(party_poison["layers"]) + 1)
+				party_poison["pct"] = maxf(float(party_poison["pct"]), float(mv["poison_party"]))
+				party_poison["turns"] = maxi(int(party_poison["turns"]), int(mv.get("turns", 3)))
+				_ev({"t": "enemy_poison_party", "layers": party_poison["layers"], "turns": party_poison["turns"]})
+				log.append("[color=red]  我军中毒 ×%d！每回合 -%d%% 最大体力（%d 回合）[/color]" % [party_poison["layers"],
+					int(round(float(party_poison["pct"]) * party_poison["layers"] * 100)), party_poison["turns"]])
 			if mv.has("confuse") and mods.get("calm", 0) <= 0 and rng.randf() < float(mv["confuse"]):
 				var victim: Dictionary = leaders[rng.randi_range(0, leaders.size() - 1)]
 				victim["confuse_next"] = true
