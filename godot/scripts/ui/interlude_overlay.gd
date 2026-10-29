@@ -28,11 +28,25 @@ func _ready() -> void:
 	gui_input.connect(func(e):
 		if e is InputEventMouseButton and e.pressed and e.button_index == MOUSE_BUTTON_LEFT:
 			_next())
+	var menu_btn := Kit.button("设置", "gray")  # the pause menu reaches over a CG too (user rule), same place as on the map
+	menu_btn.position = Vector2(1180, 14)
+	menu_btn.z_index = 1  # above the scene pages added later
+	menu_btn.focus_mode = Control.FOCUS_NONE
+	menu_btn.pressed.connect(_open_settings)
+	add_child(menu_btn)
 	_next()
 
 
+func _open_settings() -> void:
+	if get_node_or_null("Settings") != null:
+		return
+	var o := SettingsOverlay.new()
+	o.name = "Settings"
+	add_child(o)
+
+
 func _unhandled_input(e: InputEvent) -> void:
-	if e.is_action_pressed("ui_accept"):
+	if e.is_action_pressed("ui_accept") and get_node_or_null("Settings") == null:
 		_next()
 
 
