@@ -343,11 +343,11 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   衰弱 涣散 破甲 错失天时 断粮 凶星) and **divine 天授** (天命所归, far stronger) never are — only an event's `fate: "bad"` / `"divine"` hands them out
   (`fate: true` = any but 天授). 天命所归 is 改命's `weight: 0.25` option. An option's `weight` is kept by `GameData` since then (it used to be dropped,
   so every option was equally likely). **Event outcomes are animated** (user rule: 随机事件最终效果应尽量动画化): `_apply` returns `out["fx"]`
-  (one entry per visible change: hp / difficulty / danger / merit / fate / tier / lose_soldier / lose_relic / ambush / refresh / rest), and
+  (one entry per visible change: hp / difficulty / danger / merit / fate / level (升级 / 降级 shown in 级, never 阶) / lose_soldier / lose_relic / ambush / refresh / rest), and
   `MapScreen._choose_event` plays them in `EventFx` (scripts/ui/event_fx.gd) before the CardReveal / RelicReveal. A new effect = an fx entry in
   `_apply` + a case in `EventFx._one`.
   **整备 keeps the HP share** (user rule): `save.damage` is HP lost in points, so a party change in `PartyOverlay` (in / out / swap / 自动编成 /
-  宝物 worn) calls `Quests.rescale_hp` from `_rebuild` — 50 % stays 50 % of the new bar; 攻击 just follows who is out. `--demo=party --hurt` checks it. `--demo=eventfx [--fx=hp,diff,fate,divine,tier,ambush,merit,lose]` shows it. Fate emblems: 512 px transparent PNG in `godot/data/art/fates/<id>.png`, prompt via `FATES` in `art_prompts.py`.
+  宝物 worn) calls `Quests.rescale_hp` from `_rebuild` — 50 % stays 50 % of the new bar; 攻击 just follows who is out. `--demo=party --hurt` checks it. `--demo=eventfx [--fx=hp,diff,fate,divine,level,ambush,merit,lose]` shows it. Fate emblems: 512 px transparent PNG in `godot/data/art/fates/<id>.png`, prompt via `FATES` in `art_prompts.py`.
 
 - **Chapter recap**: finishing a chapter shows `Quests.recap(save)` — battles won, cards gained (collection diff since the
   run began), relics picked up, and the run's key lines. Mark what matters with `record` (square, when resolved),

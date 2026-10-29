@@ -437,7 +437,7 @@ func demo(name: String) -> void:
 			save.offer = ["shoushihe", "bingfa", "dunjia"]
 			save.offer_kind = "relic"
 			show_screen(MapScreen.new())
-		"eventfx":  # a ？ event's animated outcome (EventFx); --fx=a,b picks the sample cards (hp, diff, fate, divine, tier, ambush, merit, lose)
+		"eventfx":  # a ？ event's animated outcome (EventFx); --fx=a,b picks the sample cards (hp, diff, fate, divine, level, ambush, merit, lose)
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
 			save.fate = "jiangxing"
@@ -449,12 +449,12 @@ func demo(name: String) -> void:
 				"diff": {"k": "difficulty", "from": 2, "to": 1, "pct": -30},
 				"fate": {"k": "fate", "from": "jiangxing", "to": "xiongxing"},
 				"divine": {"k": "fate", "from": "jiangxing", "to": "tianmingsuogui"},
-				"tier": {"k": "tier", "card": "sunce", "from": 1, "to": 0},
+				"level": {"k": "level", "card": "sunce", "lv_from": 5, "lv_to": 3},
 				"ambush": {"k": "ambush", "on": true},
 				"merit": {"k": "merit", "n": 5, "total": 12},
 				"lose": {"k": "lose_soldier", "card": "danyang"},
 			}
-			var pick: Array = ["hp", "diff", "fate", "tier"]
+			var pick: Array = ["hp", "diff", "fate", "level"]
 			for a in OS.get_cmdline_user_args():
 				if a.begins_with("--fx="):
 					pick = Array(a.trim_prefix("--fx=").split(","))

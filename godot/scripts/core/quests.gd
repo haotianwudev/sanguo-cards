@@ -585,8 +585,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			if not save.offer.is_empty() and choice >= 0:
 				var cid: String = save.offer[choice]
 				if save.offer_kind == "upgrade":
+					var lv0 := save.copies(cid)
 					save.upgrade(cid)
-					save.event_note.append("%s 升为%s卡！" % [db.cards[cid]["name"], db.gacha["tiers"][save.tier(cid)]["name"]])
+					save.event_note.append("%s 升了 %d 级（%d → %d）！" % [db.cards[cid]["name"], save.copies(cid) - lv0, lv0, save.copies(cid)])
 				else:
 					gained.append(save.take(cid))
 					save.event_note.append("获得：" + db.cards[cid]["name"])
@@ -1082,17 +1083,17 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			save.carry_uses = {}
 			out["log"].append("技能重置：累积加价清零，限 1 次技能可以再用")
 			out["fx"].append({"k": "refresh"})
-		if e.has("upgrade") and str(e["upgrade"]) == "random":  # a random general of yours goes up a tier
+		if e.has("upgrade") and str(e["upgrade"]) == "random":  # a random general of yours goes up some levels (copies)
 			var pool: Array = save.upgradable()
 			if pool.is_empty():
 				out["log"].append("……你还没有能升级的武将。")
 			else:
 				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
-				var t0 := save.tier(cid)
+				var lv0 := save.copies(cid)
 				save.upgrade(cid)
-				out["fx"].append({"k": "tier", "card": cid, "from": t0, "to": save.tier(cid)})
-				out["log"].append("%s 升为%s卡！" % [db.cards[cid]["name"], db.gacha["tiers"][save.tier(cid)]["name"]])
-		elif e.has("upgrade"):  # pick one of a few random cards of yours (the lord too, not yet 金) to go up a tier
+				out["fx"].append({"k": "level", "card": cid, "lv_from": lv0, "lv_to": save.copies(cid)})
+				out["log"].append("%s 升了 %d 级（%d → %d）！" % [db.cards[cid]["name"], save.copies(cid) - lv0, lv0, save.copies(cid)])
+		elif e.has("upgrade"):  # pick one of a few random cards of yours (the lord too, not yet 金) to go up some levels
 			var ids: Array = save.upgrade_offer(rng)
 			save.offer = ids
 			save.offer_kind = "upgrade"
@@ -1210,7 +1211,6 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				out["fx"].append({"k": "fate", "from": was_f, "to": save.fate})
 				out["log"].append("天命变了！%s→「%s」：%s" % ["「%s」" % db.fates[was_f]["name"] if db.fates.has(was_f) else "", nf["name"], nf["desc"]])
 		if e.has("downgrade"):  # n random generals of yours (not the lord) lose 1-2 levels (copies), never below level 1
-			var tiers: Array = db.gacha["tiers"]
 			for _n in int(e["downgrade"]):
 				var pool: Array = save.owned.filter(func(c): return not save.is_lord_card(c) and save.copies(c) > 1)
 				if pool.is_empty():
@@ -1219,11 +1219,10 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 				var cid: String = pool[rng.randi_range(0, pool.size() - 1)]
 				var lv := save.copies(cid)
 				var to_lv := maxi(1, lv - rng.randi_range(1, 2))
-				var t_from := save.tier(cid)
 				save.dupes[cid] = to_lv
 				if to_lv <= 1:
 					save.dupes.erase(cid)
-				out["fx"].append({"k": "tier", "card": cid, "from": t_from, "to": save.tier(cid), "lv_from": lv, "lv_to": to_lv})
+				out["fx"].append({"k": "level", "card": cid, "lv_from": lv, "lv_to": to_lv})
 				out["log"].append("%s 降了 %d 级（%d → %d）……" % [db.cards[cid]["name"], lv - to_lv, lv, to_lv])
 		if e.has("ambush_all"):  # true: every fight left in this chapter (bar bosses) is an 埋伏; false: none of them is
 			var laid: Dictionary = view(q, save)["squares"]
