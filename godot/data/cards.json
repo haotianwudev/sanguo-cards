@@ -1187,7 +1187,7 @@
     "lidian": {
       "name": "李典",
       "rarity": "C",
-      "troop": "spear",
+      "troop": "archer",
       "hp": 60,
       "at": 63,
       "scope": "north"
