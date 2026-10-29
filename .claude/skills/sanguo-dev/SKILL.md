@@ -347,7 +347,7 @@ Battle visuals: `BattleFx` (scripts/ui/battle_fx.gd) draws every hit / status / 
   `MapScreen._choose_event` plays them in `EventFx` (scripts/ui/event_fx.gd) before the CardReveal / RelicReveal. A new effect = an fx entry in
   `_apply` + a case in `EventFx._one`.
   **整备 keeps the HP share** (user rule): `save.damage` is HP lost in points, so a party change in `PartyOverlay` (in / out / swap / 自动编成 /
-  宝物 worn) calls `Quests.rescale_hp` from `_rebuild` — 50 % stays 50 % of the new bar; 攻击 just follows who is out. `--demo=party --hurt` checks it. `--demo=eventfx [--fx=hp,diff,fate,divine,level,ambush,merit,lose]` shows it. Fate emblems: 512 px transparent PNG in `godot/data/art/fates/<id>.png`, prompt via `FATES` in `art_prompts.py`.
+  宝物 worn) calls `Quests.rescale_hp` from `_rebuild` — 50 % stays 50 % of the new bar; 攻击 just follows who is out. `--demo=party --hurt` checks it. **自动编成** (`SaveData.auto_party`): generals with their 大招 left first, then ones whose 大招 is spent, soldiers last — a spent general makes way for a fresh general, never for a soldier (user rule). `--demo=eventfx [--fx=hp,diff,fate,divine,level,ambush,merit,lose]` shows it. Fate emblems: 512 px transparent PNG in `godot/data/art/fates/<id>.png`, prompt via `FATES` in `art_prompts.py`.
 
 - **Chapter recap**: finishing a chapter shows `Quests.recap(save)` — battles won, cards gained (collection diff since the
   run began), relics picked up, and the run's key lines. Mark what matters with `record` (square, when resolved),

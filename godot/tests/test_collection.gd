@@ -135,6 +135,20 @@ func test_auto_party_uses_benched_cards_as_backing() -> void:
 			check_eq(ids.keys().size(), 2, "cav_n + madai back 关羽 up")
 
 
+func test_auto_party_benches_a_spent_general_for_a_fresh_one_never_for_a_soldier() -> void:
+	## user rule: 自动编成 swaps out a general whose 大招 is used up (until the next 休整格) — for another general, not a soldier
+	var s := SaveData.new()
+	s.party_slots = 2
+	s.owned = ["guanyu", "madai"]
+	check_eq(s.auto_party(), ["guanyu"], "the stronger one leads while his 大招 is there")
+	var sid: String = GameData.get_db().cards["guanyu"]["skills"][0]
+	s.carry_uses = {"guanyu": {sid: 0}}
+	check_eq(s.auto_party(), ["madai"], "spent: the fresh general goes out instead")
+	s.owned = ["guanyu"]
+	s.soldiers = {"cav_n": 3.0}
+	check_eq(s.auto_party(), ["guanyu"], "but a soldier never takes a general's place")
+
+
 func test_removed_cards_are_dropped_and_save_roundtrips() -> void:
 	var d := {"owned": ["guanyu", "gone_card"], "soldiers": {"dangyang": 2.0, "cav_n": 1.0}, "party": ["gone_card"],
 		"damage": 12.0, "lord_name": "阿明"}

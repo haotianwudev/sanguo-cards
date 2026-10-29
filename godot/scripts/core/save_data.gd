@@ -1108,12 +1108,16 @@ func relic_bonus(troop: String, power: float) -> float:
 
 func auto_party() -> Array:
 	## Best leader per troop (the strongest card leads, counting the 宝物 its troop would bring), then the strongest troops that fit.
+	## Generals whose 大招 is still there come first, then the ones whose 大招 is spent (until the next 休整格), soldiers last
+	## (user rule): a spent general makes way for a fresh one, never for a soldier.
 	var ranked := owned_ids()
 	var powers := {}
+	var rank := {}
 	for c in ranked:
 		var p := float(leader_power(leader_for(c)))
 		powers[c] = p + relic_bonus(unit_troop(c), p)
-	ranked.sort_custom(func(a, b): return powers[a] > powers[b])
+		rank[c] = 2 if _db().cards[c]["soldier"] else (1 if not spent_skills(c).is_empty() else 0)
+	ranked.sort_custom(func(a, b): return rank[a] < rank[b] or (rank[a] == rank[b] and powers[a] > powers[b]))
 	var picked: Array = []
 	for cid in ranked:
 		if picked.size() == party_slots - 1:

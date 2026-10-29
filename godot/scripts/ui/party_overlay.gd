@@ -129,7 +129,7 @@ func _ready() -> void:
 	auto.pressed.connect(func():
 		Game.save.lord_form_pick = Game.save.auto_lord_pick()  # the lord is a card too: the strongest one leads
 		Game.save.party = Game.save.auto_party()
-		_msg.text = "已按战力自动编成。"
+		_msg.text = "已按战力自动编成（大招已用的武将让给大招还在的，不换兵卡）。"
 		_rebuild())
 	auto.visible = not swap_mode
 	add_child(auto)
