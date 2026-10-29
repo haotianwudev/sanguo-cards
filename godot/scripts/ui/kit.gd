@@ -404,7 +404,8 @@ const ALIASES := {"吴夫人": "wuguotai", "伯符": "sunce", "孙策": "sunce",
 	"马超": "machao", "孟起": "machao",
 	"马岱": "madai",
 	"乔公": "qiaoguolao", "子敬": "lusu", "甄宓": "zhenmi_young","孙尚香": "sunshangxiang", "香香": "sunshangxiang", "尚香": "sunshangxiang",  # 甄宓: young face by default; speakers() swaps in the adult `zhenmi` when the square's portraits cast her (北线第七章起)
-	"吕蒙": "lvmeng_qingnian", "阿蒙": "lvmeng_qingnian", "吕子明": "lvmeng_qingnian"}  # the young one: the SR 吕蒙 (白衣渡江) isn't in the story yet
+	"吕蒙": "lvmeng_qingnian", "阿蒙": "lvmeng_qingnian", "吕子明": "lvmeng_qingnian",
+	"郑大王": "zhenghao", "姜寨主": "jiangqiao"}  # 北线第四章：入队、主角起名之前只叫郑氏 / 姜氏  # the young one: the SR 吕蒙 (白衣渡江) isn't in the story yet
 static func enemy_portrait_key(enemy: Dictionary) -> String:
 	var key: String = enemy.get("portrait", "")
 	if key == "":

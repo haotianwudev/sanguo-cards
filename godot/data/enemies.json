@@ -113,7 +113,7 @@
       "card": "guanhai"
     },
     "jiangqiao": {
-      "name": "姜巧",
+      "name": "姜寨主",
       "portrait": "jiangqiao",
       "actions": 3,
       "moves": [
@@ -152,7 +152,7 @@
       "drop": "jiang_jiguanshou"
     },
     "zhenghao": {
-      "name": "郑好",
+      "name": "郑大王",
       "portrait": "zhenghao",
       "actions": 2,
       "moves": [
@@ -4591,7 +4591,7 @@
     "n6_chenlan": {"name": "仲氏宫门·陈兰", "portrait": "chenlan", "actions": 2, "phys_resist": 0.15, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "禁军结阵", "power": 0, "weight": 1, "heal": 0.05}, {"name": "宫在大仲在", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "死守", "power": 1.3, "weight": 1}], "card": "chenlan"},
     "n5_taishan": {"name": "泰山贼", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.06}], "card": "shanzei_bing"},
     "n5_changxi": {"name": "泰山贼·昌豨", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "鬼头刀", "power": 1.0, "weight": 3}, {"name": "山口滚石", "power": 1.3, "weight": 1}, {"name": "泰山规矩", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "见好就收", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}], "card": "shanzei_bing"},
-    "n5_sx_zhangfei": {"hp": 70, "at": 98, "name": "刺史府外·张飞", "portrait": "zhangfei", "actions": 2, "moves": [{"name": "丈八蛇矛", "power": 1.0, "weight": 3}, {"name": "燕人一声吼", "power": 0.6, "weight": 1, "confuse": 0.5}, {"name": "火把围堵", "power": 0.8, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "蛇矛·蓄力", "power": 0, "weight": 1, "charge": "万人敌"}, {"name": "万人敌", "power": 2.2, "weight": 0}], "card": "inf_n"},
+    "n5_sx_zhangfei": {"hp": 100, "at": 112, "name": "刺史府外·张飞", "portrait": "zhangfei", "actions": 2, "phys_resist": 0.15, "moves": [{"name": "丈八蛇矛", "power": 1.0, "weight": 3}, {"name": "燕人一声吼", "power": 0.6, "weight": 1, "confuse": 0.5}, {"name": "火把围堵", "power": 0.8, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "蛇矛·蓄力", "power": 0, "weight": 1, "charge": "万人敌"}, {"name": "万人敌", "power": 2.8, "weight": 0}], "card": "inf_n"},
     "n5_sx_guanyu": {"hp": 76, "at": 98, "name": "下邳长街·关羽", "portrait": "guanyu", "actions": 2, "phys_resist": 0.2, "moves": [{"name": "青龙偃月刀", "power": 1.0, "weight": 4}, {"name": "丹凤眼一睁", "power": 0.6, "weight": 1, "ap_drain": 2}, {"name": "拖刀·蓄力", "power": 0, "weight": 1, "charge": "拖刀斩"}, {"name": "拖刀斩", "power": 2.4, "weight": 0, "pierce": true}, {"name": "抚髯", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}], "card": "inf_n"},
     "n5_sx_liubei": {"hp": 90, "at": 84, "name": "白门·刘备", "portrait": "liubei", "actions": 2, "phys_resist": 0.1, "moves": [{"name": "双股剑", "power": 1.0, "weight": 4}, {"name": "仁义之师", "power": 0, "weight": 1, "heal": 0.05}, {"name": "以泪服人", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "双剑·蓄力", "power": 0, "weight": 1, "charge": "双剑斩"}, {"name": "双剑斩", "power": 2.3, "weight": 0}, {"name": "汉室容不得", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "inf_n"},
     "n5_sx_taoqian": {"hp": 67, "at": 58, "name": "白门城楼·陶谦", "portrait": "taoqian", "actions": 3, "moves": [{"name": "万弩齐发", "power": 1.2, "weight": 3}, {"name": "毒箭", "power": 0.8, "weight": 1, "burn_party": 0.1, "turns": 3}, {"name": "令旗一挥", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "咳血", "power": 0, "weight": 1, "heal": 0.03}], "card": "inf_n"},

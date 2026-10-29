@@ -2152,7 +2152,7 @@
     "xurong_card": {
       "name": "徐荣",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "archer",
       "person": "xurong",
       "hp": 58,
       "at": 76,
@@ -2740,7 +2740,7 @@
     "xiahoulan": {
       "name": "「铁面军法」夏侯兰",
       "rarity": "R",
-      "troop": "cavalry",
+      "troop": "infantry",
       "person": "xiahoulan",
       "hp": 56,
       "at": 80,

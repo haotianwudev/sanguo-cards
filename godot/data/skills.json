@@ -787,12 +787,16 @@
     },
     "fubing": {
       "name": "伏兵",
-      "cost": 2,
-      "cumulative": true,
+      "cost": 4,
       "effects": [
         {
           "type": "attack",
-          "hits": 3
+          "hits": 3,
+          "hit_rate": 0.6
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
         }
       ]
     },
@@ -1343,15 +1347,15 @@
     },
     "junfa": {
       "name": "军法",
-      "cost": 1,
-      "cumulative": true,
+      "cost": 3,
       "effects": [
         {
-          "type": "attack"
+          "type": "attack",
+          "rate": 1.5
         },
         {
           "type": "guard",
-          "cut": 0.2
+          "cut": 0.4
         }
       ]
     },
