@@ -1356,3 +1356,5 @@
 | `cg:n5_chaos` | source/cg/n5_chaos.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n5_mimou` | source/cg/n5_mimou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n5_sunguan` | source/cg/n5_sunguan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n4_mifang` | source/cg/n4_mifang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n5_meet` | source/cg/n5_meet.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

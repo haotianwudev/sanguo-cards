@@ -1343,7 +1343,7 @@
 - [x] 2026-10-24 cg `s12_dongfeng` ← s12_dongfeng.jpg · ok
 - [x] 2026-10-24 cg `ss_lubu_xuzhou` ← ss_lubu_xuzhou.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-24 cg `ss_caocao_tuibing` ← ss_caocao_tuibing.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-25 portrait `zhenfu_yahuan` ← zhenfu_yahuan.jpg · ok
+- [x] 2026-10-25 portrait `zhenfu_yahuan` ← zhenfu_yahuan.jpg · ok
 - [x] 2026-10-25 cg `c3_yudu` ← c3_yudu.jpg 裁 2528×1696→2528×1422 · ok；按立绘重画（于毒、张燕、主角全部照参考图）
 - [x] 2026-10-25 cg `c3_zhangyan_meet` ← c3_zhangyan_meet.jpg 裁 2528×1696→2528×1422 · ok；加上张宁，张燕抱拳落地
 - [x] 2026-10-25 cg `ss_cash` ← ss_cash.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
@@ -1353,21 +1353,22 @@
 - [x] 2026-10-25 cg `ss_home` ← ss_home.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
 - [x] 2026-10-25 cg `ss_rule` ← ss_rule.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
 - [x] 2026-10-25 cg `ss_news` ← ss_news.jpg 裁 2528×1696→2528×1422 · ok；章间过场并入小故事，补的 CG
-- [ ] 2026-10-25 cg `c3_guotu_street` ← c3_guotu_street.jpg · ok
-- [ ] 2026-10-26 cg `c4_wuanguo` ← c4_wuanguo.jpg · ok
-- [ ] 2026-10-26 cg `c4_cimu` ← c4_cimu.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-26 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 portrait `sunguan` ← sunguan.jpg · ok
-- [ ] 2026-10-27 cg `n5_needle` ← n5_needle.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 cg `n5_chaos` ← n5_chaos.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 cg `n5_mimou` ← n5_mimou.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 cg `n5_banquet` ← n5_banquet.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 cg `n5_sunguan` ← n5_sunguan.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 cg `n5_menhou` ← n5_menhou.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-27 cg `end_menhou` ← end_menhou.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-29 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-29 cg `n4_mifang` ← n4_mifang.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-29 cg `n5_law` ← n5_law.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-29 cg `n5_meet` ← n5_meet.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-29 cg `n5_qiuyuan` ← n5_qiuyuan.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-29 cg `n5_bandeng` ← n5_bandeng.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-25 cg `c3_guotu_street` ← c3_guotu_street.jpg · ok
+- [x] 2026-10-26 cg `c4_wuanguo` ← c4_wuanguo.jpg · ok
+- [x] 2026-10-26 cg `c4_cimu` ← c4_cimu.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-26 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 portrait `sunguan` ← sunguan.jpg · ok
+- [x] 2026-10-27 cg `n5_needle` ← n5_needle.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 cg `n5_chaos` ← n5_chaos.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 cg `n5_mimou` ← n5_mimou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 cg `n5_banquet` ← n5_banquet.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 cg `n5_sunguan` ← n5_sunguan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 cg `n5_menhou` ← n5_menhou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-27 cg `end_menhou` ← end_menhou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n4_mifang` ← n4_mifang.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n5_law` ← n5_law.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n5_meet` ← n5_meet.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n5_qiuyuan` ← n5_qiuyuan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n5_bandeng` ← n5_bandeng.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-29 cg `n5_chenjia` ← n5_chenjia.jpg 裁 2528×1696→2528×1422 · ok
