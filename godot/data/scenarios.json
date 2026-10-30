@@ -784,8 +784,8 @@
       "enemy": "jiling_n",
       "art": "c3_jiling"
     },
-    "hnn_bw_xc": {"name": "比武·许褚", "turn_limit": 8, "enemy": "bw_xuchu", "art": "hnn_bw_gy"},
-    "hnn_bw_dw": {"name": "比武·典韦", "turn_limit": 8, "enemy": "bw_dianwei", "art": "hnn_bw_gy"},
+    "hnn_bw_xc": {"name": "比武·许褚", "turn_limit": 8, "enemy": "bw_xuchu", "art": "hnn_bw_xc"},
+    "hnn_bw_dw": {"name": "比武·典韦", "turn_limit": 8, "enemy": "bw_dianwei", "art": "hnn_bw_dw"},
     "hnn_bw_gy": {
       "name": "比武·关羽",
       "turn_limit": 12,
