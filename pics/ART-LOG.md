@@ -1381,3 +1381,12 @@
 - [x] 2026-10-29 cg `n6_biwu` ← n6_biwu.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-29 cg `n6_choose` ← n6_choose.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-29 cg `n6_bad_fire` ← n6_bad_fire.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_xingyuan` ← n7_xingyuan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_wedding` ← n7_wedding.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_shishi` ← n7_shishi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_qin` ← n7_qin.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_jiyi` ← n7_jiyi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_heibing` ← n7_heibing.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n7_juedi` ← n7_juedi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n5_guonian` ← n5_guonian.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n6_beiwang` ← n6_beiwang.jpg 裁 2528×1696→2528×1422 · ok
