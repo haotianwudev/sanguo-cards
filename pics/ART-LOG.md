@@ -1401,3 +1401,4 @@
 - [x] 2026-10-30 cg `n8_jincheng` ← n8_jincheng.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n8_dumai` ← n8_dumai.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-30 battle `hnn_bw_dw` ← hnn_bw_dw.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-30 battle `hnn_bw_xc` ← hnn_bw_xc.jpg 裁 2528×1696→2528×1422 · ok
