@@ -784,7 +784,7 @@ func test_north_chapter6_both_debts_of_gratitude_let_you_walk_out() -> void:
 			var q := quest_by_id("huainan_n")
 			var p := walk(q, s, fork)
 			for sid in ["hnn_start", "hnn_letter", "hnn_jiu", "hnn_qiaorui", "hnn_jiling", "hnn_cheng", "hnn_zhujiu", "hnn_bw1",
-					"hnn_bw2", "hnn_bw3", "hnn_choose", "hnn_feast", xj, "hnn_du", "hnn_niaodun", "hnn_bridge", "hnn_news", "hnn_end"]:
+					"hnn_bw2", "hnn_bw_zf", "hnn_bw3", "hnn_choose", "hnn_feast", xj, "hnn_du", "hnn_niaodun", "hnn_bridge", "hnn_news", "hnn_ts_road", "hnn_end"]:
 				check(p.has(sid), "%s: passes %s (forks %s)" % [xj, sid, str(fork)])
 			for sid in ["hnn_letter_bad", "hnn_xj_b", "hnn_xj_c", "hnn_trap", "hnn_gongmen", "hnn_gongmen_f", "hnn_duanqiao", "hnn_bad_end"]:
 				check(not p.has(sid), "%s: never reaches %s" % [xj, sid])
@@ -831,9 +831,9 @@ func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
 
 
 func test_north_chapter6_sparring_generals_drop_their_own_cards_and_stay_public() -> void:
-	## 比武 典韦 / 许褚 / 关羽 drop their own card (card_public): it doesn't make them chapter-only, both routes still recruit them
+	## 比武 典韦 / 许褚 / 张飞 / 关羽 drop their own card (card_public): it doesn't make them chapter-only, both routes still recruit them
 	var db := GameData.get_db()
-	for pair in [["hnn_bw_dw", "dianwei"], ["hnn_bw_xc", "xuchu"], ["hnn_bw_gy", "guanyu"]]:
+	for pair in [["hnn_bw_dw", "dianwei"], ["hnn_bw_xc", "xuchu"], ["hnn_bw_zf", "zhangfei"], ["hnn_bw_gy", "guanyu"]]:
 		check_eq(db.enemies[db.scenarios[pair[0]]["enemy"]]["card"], pair[1], "%s drops %s" % pair)
 		check(db.is_public(pair[1]), "%s stays in the public pool" % pair[1])
 
