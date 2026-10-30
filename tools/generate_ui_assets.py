@@ -332,115 +332,314 @@ MAP_ICON_STYLES = {
 }
 
 def generate_map_icon(key: str, out_path: Path):
-    cfg = MAP_ICON_STYLES[key]
-    rim_pal = RIM_PALETTES[cfg["rim"]]
-    
     S = 512
     img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-    center = S / 2.0
+    cx, cy = S / 2.0, S / 2.0
     
-    # Shadow
-    shadow_img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-    sdraw = ImageDraw.Draw(shadow_img)
-    sdraw.ellipse([center - 220, center - 220 + 16, center + 220, center + 220 + 16], fill=(0, 0, 0, 170))
-    shadow_img = shadow_img.filter(ImageFilter.GaussianBlur(14))
-    img.alpha_composite(shadow_img)
+    # Common palettes
+    gold = (255, 225, 120, 255)
+    light_gold = (255, 245, 180, 255)
+    mid_gold = (212, 165, 54, 255)
+    dark_gold = (130, 95, 25, 255)
+    shadow_gold = (65, 45, 10, 255)
     
-    r_outer = 226
-    r_inner = 176
+    steel_bright = (245, 250, 255, 255)
+    steel_mid = (195, 210, 230, 255)
+    steel_dark = (90, 110, 135, 255)
     
-    rim_layer = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-    rpixels = rim_layer.load()
+    wood_col = (135, 75, 35, 255)
+    wood_dark = (75, 38, 15, 255)
     
-    bg_inner_col = hex_to_rgb(cfg["bg_inner"])
-    bg_outer_col = hex_to_rgb(cfg["bg_outer"])
+    crimson = (225, 30, 30, 255)
+    dark_red = (125, 15, 15, 255)
+    bright_red = (255, 60, 60, 255)
     
-    for y in range(S):
-        dy = y - center
-        for x in range(S):
-            dx = x - center
-            dist = math.sqrt(dx * dx + dy * dy)
-            if dist > r_outer + 1:
-                continue
-                
-            alpha = 255
-            if dist > r_outer - 1:
-                alpha = int(255 * (r_outer + 1 - dist) / 2.0)
-                alpha = max(0, min(255, alpha))
-                
-            if dist >= r_inner:
-                norm_d = (dist - r_inner) / (r_outer - r_inner)
-                angle = math.atan2(dy, dx)
-                light_factor = (math.cos(angle + math.pi * 0.75) + 1.0) / 2.0
-                
-                if light_factor > 0.5:
-                    t = (light_factor - 0.5) * 2.0
-                    base = lerp_color(rim_pal["mid"], rim_pal["light"], t)
-                else:
-                    t = light_factor * 2.0
-                    base = lerp_color(rim_pal["dark"], rim_pal["mid"], t)
-                    
-                if norm_d < 0.2:
-                    base = lerp_color(base, rim_pal["light"], (0.2 - norm_d) / 0.2 * 0.5)
-                elif norm_d > 0.85:
-                    base = lerp_color(base, rim_pal["shadow"], (norm_d - 0.85) / 0.15 * 0.7)
-                    
-                rpixels[x, y] = (base[0], base[1], base[2], alpha)
-            else:
-                glow_dx = dx + 35
-                glow_dy = dy + 35
-                glow_dist = math.sqrt(glow_dx * glow_dx + glow_dy * glow_dy)
-                glow_norm = min(1.0, glow_dist / (r_inner * 1.5))
-                
-                col = lerp_color(bg_inner_col, bg_outer_col, glow_norm)
-                if dist > r_inner - 16:
-                    inset_t = (dist - (r_inner - 16)) / 16.0
-                    col = lerp_color(col, (8, 8, 8), inset_t * 0.65)
-                    
-                rpixels[x, y] = (col[0], col[1], col[2], 255)
-                
-    img.alpha_composite(rim_layer)
-    draw = ImageDraw.Draw(img)
+    jade = (140, 230, 180, 255)
+    jade_dark = (45, 120, 85, 255)
     
-    # Stamp inner double rings
-    draw.ellipse([center - r_inner - 2, center - r_inner - 2, center + r_inner + 2, center + r_inner + 2],
-                 outline=rim_pal["mid"] + (180,), width=3)
-    draw.ellipse([center - r_inner + 6, center - r_inner + 6, center + r_inner - 6, center + r_inner - 6],
-                 outline=rim_pal["light"] + (120,), width=2)
-                 
-    # 4 cardinal studs
-    for ang in [0, math.pi * 0.5, math.pi, math.pi * 1.5]:
-        mid_r = (r_outer + r_inner) / 2.0
-        sx = center + mid_r * math.cos(ang)
-        sy = center + mid_r * math.sin(ang)
-        draw.ellipse([sx - 8, sy - 8, sx + 8, sy + 8], fill=rim_pal["light"] + (255,))
-        draw.ellipse([sx - 8, sy - 8, sx + 8, sy + 8], outline=rim_pal["shadow"] + (220,), width=2)
-        
-    # Seal calligraphy glyph
-    font_size = 236
-    font = ImageFont.truetype(FONT_KAITI, font_size)
-    char = cfg["glyph"]
-    bbox = font.getbbox(char)
-    bw = bbox[2] - bbox[0]
-    bh = bbox[3] - bbox[1]
-    cx = center - bw / 2.0 - bbox[0]
-    cy = center - bh / 2.0 - bbox[1] - 8
+    content = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(content)
     
-    char_shadow = hex_to_rgb(cfg["char_shadow"])
-    char_color = hex_to_rgb(cfg["char_color"])
+    if key == "battle":
+        # Han Dynasty Martial Shield with Crossed Steel Blades & Red Tassels
+        pts_shield = [
+            (cx - 150, cy - 130), (cx - 70, cy - 155), (cx, cy - 145), (cx + 70, cy - 155), (cx + 150, cy - 130),
+            (cx + 140, cy + 20), (cx + 90, cy + 120), (cx, cy + 185), (cx - 90, cy + 120), (cx - 140, cy + 20)
+        ]
+        draw.polygon(pts_shield, fill=(125, 20, 20, 255), outline=gold, width=8)
+        pts_inner = [
+            (cx - 130, cy - 115), (cx - 60, cy - 135), (cx, cy - 128), (cx + 60, cy - 135), (cx + 130, cy - 115),
+            (cx + 120, cy + 15), (cx + 75, cy + 105), (cx, cy + 160), (cx - 75, cy + 105), (cx - 120, cy + 15)
+        ]
+        draw.polygon(pts_inner, fill=(75, 10, 10, 255), outline=mid_gold, width=4)
+        for flip in [-1, 1]:
+            p_blade = [
+                (cx + flip * 15, cy - 10), (cx + flip * 165, cy - 160),
+                (cx + flip * 175, cy - 145), (cx + flip * 25, cy + 5)
+            ]
+            draw.polygon(p_blade, fill=steel_mid, outline=steel_dark, width=3)
+            draw.line([(cx + flip * 20, cy - 2), (cx + flip * 170, cy - 152)], fill=steel_bright, width=4)
+            gx, gy = cx + flip * 32, cy + 15
+            draw.polygon([
+                (gx - flip * 16, gy + 16), (gx + flip * 16, gy - 16),
+                (gx + flip * 28, gy), (gx, gy + flip * 28)
+            ], fill=gold, outline=shadow_gold, width=3)
+            hx, hy = gx + flip * 55, gy + 55
+            draw.line([(gx + flip * 10, gy + 10), (hx, hy)], fill=wood_col, width=14)
+            draw.ellipse([hx - 12, hy - 12, hx + 12, hy + 12], fill=gold, outline=shadow_gold, width=3)
+            draw.polygon([(hx, hy), (hx + flip * 15, hy + 40), (hx - flip * 5, hy + 48)], fill=bright_red)
+        draw.ellipse([cx - 28, cy - 28, cx + 28, cy + 28], fill=gold, outline=shadow_gold, width=4)
+        draw.polygon([(cx, cy - 24), (cx + 8, cy - 6), (cx + 24, cy), (cx + 8, cy + 6),
+                      (cx, cy + 24), (cx - 8, cy + 6), (cx - 24, cy), (cx - 8, cy - 6)], fill=light_gold)
+        draw.ellipse([cx - 6, cy - 6, cx + 6, cy + 6], fill=crimson)
+
+    elif key == "elite":
+        # Fierce Spiked Crest with Flaming Dragon Halberds
+        pts_crest = [
+            (cx, cy - 180), (cx + 60, cy - 110), (cx + 175, cy - 60), (cx + 130, cy + 25), (cx + 160, cy + 105),
+            (cx + 70, cy + 120), (cx, cy + 185), (cx - 70, cy + 120), (cx - 160, cy + 105), (cx - 130, cy + 25),
+            (cx - 175, cy - 60), (cx - 60, cy - 110)
+        ]
+        draw.polygon(pts_crest, fill=(160, 45, 10, 255), outline=gold, width=8)
+        pts_in = [
+            (cx, cy - 150), (cx + 140, cy - 45), (cx + 125, cy + 85),
+            (cx, cy + 155), (cx - 125, cy + 85), (cx - 140, cy - 45)
+        ]
+        draw.polygon(pts_in, fill=(80, 15, 5, 255), outline=mid_gold, width=4)
+        for flip in [-1, 1]:
+            draw.line([(cx - flip * 110, cy + 150), (cx + flip * 115, cy - 150)], fill=steel_dark, width=10)
+            draw.line([(cx - flip * 110, cy + 150), (cx + flip * 115, cy - 150)], fill=steel_mid, width=5)
+            tip_x, tip_y = cx + flip * 115, cy - 150
+            draw.polygon([(tip_x, tip_y), (tip_x - flip * 20, tip_y + 45), (tip_x + flip * 6, tip_y + 35)], fill=steel_bright, outline=gold, width=2)
+            bx, by = cx + flip * 75, cy - 100
+            draw.arc([bx - 45, by - 45, bx + 45, by + 45], -140 if flip > 0 else -40, 40 if flip > 0 else 140, fill=steel_bright, width=10)
+            draw.polygon([(bx + flip * 35, by - 15), (bx + flip * 65, by - 40), (bx + flip * 30, by - 32)], fill=(255, 120, 0, 255))
+            draw.polygon([(bx + flip * 30, by + 15), (bx + flip * 55, by + 35), (bx + flip * 25, by + 25)], fill=(255, 210, 40, 255))
+        draw.polygon([(cx, cy - 45), (cx + 35, cy), (cx, cy + 45), (cx - 35, cy)], fill=gold, outline=dark_gold, width=4)
+        draw.polygon([(cx, cy - 35), (cx + 25, cy), (cx, cy + 35), (cx - 25, cy)], fill=(255, 100, 10, 255))
+        draw.polygon([(cx, cy - 20), (cx + 14, cy), (cx, cy + 20), (cx - 14, cy)], fill=(255, 230, 80, 255))
+
+    elif key == "boss":
+        # Towering Warlord Horned Mask Crown Crest
+        pts_back = [
+            (cx, cy - 195), (cx + 85, cy - 145), (cx + 180, cy - 90), (cx + 160, cy + 70), (cx + 85, cy + 150),
+            (cx, cy + 195), (cx - 85, cy + 150), (cx - 160, cy + 70), (cx - 180, cy - 90), (cx - 85, cy - 145)
+        ]
+        draw.polygon(pts_back, fill=(65, 15, 85, 255), outline=gold, width=8)
+        pts_bin = [
+            (cx, cy - 170), (cx + 155, cy - 75), (cx + 135, cy + 60),
+            (cx, cy + 170), (cx - 135, cy + 60), (cx - 155, cy - 75)
+        ]
+        draw.polygon(pts_bin, fill=(35, 6, 48, 255), outline=mid_gold, width=4)
+        for flip in [-1, 1]:
+            pts_horn = [
+                (cx + flip * 40, cy - 40), (cx + flip * 105, cy - 65), (cx + flip * 165, cy - 130),
+                (cx + flip * 148, cy - 165), (cx + flip * 130, cy - 150), (cx + flip * 80, cy - 80), (cx + flip * 35, cy - 60)
+            ]
+            draw.polygon(pts_horn, fill=gold, outline=shadow_gold, width=4)
+            for t in [0.35, 0.55, 0.75]:
+                rx = cx + flip * (40 + (148 - 40) * t)
+                ry = cy - (40 + (165 - 40) * t)
+                draw.line([(rx - 8, ry + 8), (rx + 8, ry - 8)], fill=shadow_gold, width=3)
+        draw.polygon([(cx - 35, cy - 95), (cx, cy - 180), (cx + 35, cy - 95)], fill=crimson, outline=dark_red, width=3)
+        draw.line([(cx, cy - 95), (cx, cy - 175)], fill=(255, 180, 180, 255), width=4)
+        draw.pieslice([cx - 75, cy - 90, cx + 75, cy + 45], 180, 360, fill=(48, 42, 58, 255), outline=gold, width=4)
+        draw.polygon([(cx - 65, cy - 15), (cx + 65, cy - 15), (cx + 50, cy + 75), (cx, cy + 105), (cx - 50, cy + 75)],
+                     fill=(28, 24, 34, 255), outline=gold, width=4)
+        draw.polygon([(cx, cy - 65), (cx + 25, cy - 30), (cx, cy - 15), (cx - 25, cy - 30)], fill=gold)
+        for flip in [-1, 1]:
+            draw.polygon([(cx + flip * 15, cy + 15), (cx + flip * 46, cy + 8), (cx + flip * 40, cy + 24)], fill=crimson)
+            draw.line([(cx + flip * 20, cy + 16), (cx + flip * 44, cy + 10)], fill=(255, 235, 170, 255), width=3)
+        for ox in [-25, -8, 8, 25]:
+            draw.line([(cx + ox, cy + 55), (cx + ox, cy + 78)], fill=steel_mid, width=4)
+
+    elif key == "treasure":
+        # 3D Gilded Han Dynasty Treasure Chest
+        for ang in [-70, -50, -30, -10, 10, 30, 50, 70]:
+            rad = math.radians(ang - 90)
+            lx = cx + 180 * math.cos(rad)
+            ly = cy - 40 + 180 * math.sin(rad)
+            draw.line([(cx, cy - 40), (lx, ly)], fill=(255, 235, 120, 130), width=10)
+        bx1, by1, bx2, by2 = cx - 140, cy - 30, cx + 140, cy + 115
+        draw.rectangle([bx1, by1, bx2, by2], fill=wood_col, outline=wood_dark, width=6)
+        draw.rectangle([bx1, by1, bx1 + 28, by2], fill=gold, outline=shadow_gold, width=3)
+        draw.rectangle([bx2 - 28, by1, bx2, by2], fill=gold, outline=shadow_gold, width=3)
+        draw.rectangle([bx1, by2 - 24, bx2, by2], fill=gold, outline=shadow_gold, width=3)
+        draw.rectangle([cx - 22, by1, cx + 22, by2], fill=gold, outline=shadow_gold, width=3)
+        pts_lid = [(bx1 - 8, by1 - 5), (bx2 + 8, by1 - 5), (bx2 + 14, by1 - 75), (bx1 - 14, by1 - 75)]
+        draw.polygon(pts_lid, fill=wood_col, outline=gold, width=5)
+        draw.rectangle([bx1 - 14, by1 - 75, bx2 + 14, by1 - 55], fill=gold, outline=shadow_gold, width=2)
+        draw.rectangle([bx1 + 15, by1 - 15, bx2 - 15, by1 + 6], fill=(255, 245, 170, 240))
+        draw.rectangle([cx - 25, by1 + 10, cx + 25, by1 + 55], fill=gold, outline=shadow_gold, width=3)
+        draw.ellipse([cx - 12, by1 + 20, cx + 12, by1 + 44], fill=crimson, outline=(100, 10, 10, 255), width=2)
+        draw.ellipse([cx - 5, by1 + 24, cx + 2, by1 + 32], fill=(255, 200, 200, 255))
+        for ox, oy in [(-90, 110), (-45, 122), (0, 126), (45, 120), (95, 112), (-25, 115), (25, 114)]:
+            draw.ellipse([cx + ox - 20, cy + oy - 12, cx + ox + 20, cy + oy + 12], fill=(255, 215, 0, 255), outline=shadow_gold, width=3)
+        draw.ellipse([cx + 60, cy + 95, cx + 105, cy + 135], fill=jade, outline=jade_dark, width=3)
+        draw.ellipse([cx + 78, cy + 110, cx + 88, cy + 120], fill=crimson)
+
+    elif key == "recover":
+        # Military Pavilion Tent with Campfire & Banner
+        tx1, ty1 = cx - 145, cy + 90
+        tx2, ty2 = cx + 55, cy + 90
+        top_x, top_y = cx - 45, cy - 110
+        draw.polygon([(tx1, ty1), (top_x, top_y), (tx2, ty2)], fill=(32, 68, 115, 255), outline=gold, width=6)
+        draw.polygon([(cx - 85, cy + 90), (top_x, top_y + 25), (cx - 5, cy + 90)], fill=(240, 230, 205, 255), outline=wood_dark, width=3)
+        draw.line([(tx1, ty1), (tx1 - 25, ty1 + 20)], fill=wood_col, width=4)
+        draw.line([(tx2, ty2), (tx2 + 25, ty2 + 20)], fill=wood_col, width=4)
+        draw.line([(cx + 80, cy - 130), (cx + 80, cy + 105)], fill=wood_dark, width=8)
+        draw.polygon([(cx + 80, cy - 130), (cx + 145, cy - 105), (cx + 80, cy - 80)], fill=crimson, outline=dark_red, width=3)
+        draw.polygon([(cx + 74, cy - 140), (cx + 86, cy - 140), (cx + 80, cy - 155)], fill=gold)
+        fx, fy = cx + 85, cy + 75
+        draw.line([(fx - 35, fy + 20), (fx + 35, fy - 10)], fill=wood_dark, width=10)
+        draw.line([(fx - 35, fy - 10), (fx + 35, fy + 20)], fill=wood_dark, width=10)
+        draw.polygon([(fx - 30, fy + 12), (fx - 8, fy - 55), (fx + 14, fy - 25), (fx + 30, fy + 12)], fill=(255, 120, 20, 255))
+        draw.polygon([(fx - 16, fy + 12), (fx, fy - 35), (fx + 16, fy + 12)], fill=(255, 235, 80, 255))
+        for sx, sy in [(-10, -65), (20, -55), (0, -80), (30, -40)]:
+            draw.ellipse([fx + sx - 4, fy + sy - 4, fx + sx + 4, fy + sy + 4], fill=(255, 245, 140, 255))
+
+    elif key == "event":
+        # Classical Bamboo Slip Scroll with Jade Bi
+        for i in range(8):
+            ox = (i - 3.5) * 26
+            draw.polygon([(cx + ox - 75, cy - 105), (cx + ox + 55, cy + 75), (cx + ox + 75, cy + 60), (cx + ox - 55, cy - 120)],
+                         fill=(245 - i*7, 225 - i*7, 180 - i*7, 255), outline=(135, 95, 45, 255), width=3)
+        draw.polygon([(cx - 35, cy - 25), (cx + 40, cy + 40), (cx + 56, cy + 24), (cx - 19, cy - 41)], fill=crimson, outline=dark_red, width=3)
+        jx, jy = cx + 42, cy + 42
+        draw.ellipse([jx - 24, jy - 24, jx + 24, jy + 24], fill=jade, outline=jade_dark, width=4)
+        draw.ellipse([jx - 8, jy - 8, jx + 8, jy + 8], fill=crimson)
+        bx1, by1 = cx - 120, cy + 90
+        bx2, by2 = cx + 105, cy - 105
+        draw.line([(bx1, by1), (bx2, by2)], fill=wood_col, width=10)
+        draw.polygon([(bx1, by1), (bx1 - 20, by1 + 18), (bx1 - 8, by1 - 10)], fill=(30, 30, 30, 255))
+        draw.rectangle([bx1 - 4, by1 - 4, bx1 + 10, by1 + 10], fill=gold)
+
+    elif key == "choose":
+        # Divergent Direction Placards
+        draw.rectangle([cx - 14, cy - 120, cx + 14, cy + 120], fill=wood_col, outline=wood_dark, width=4)
+        draw.polygon([(cx - 50, cy - 80), (cx + 90, cy - 80), (cx + 130, cy - 55), (cx + 90, cy - 30), (cx - 50, cy - 30)],
+                     fill=crimson, outline=gold, width=4)
+        draw.polygon([(cx + 65, cy - 67), (cx + 100, cy - 55), (cx + 65, cy - 43)], fill=gold)
+        draw.polygon([(cx + 50, cy - 10), (cx - 90, cy - 10), (cx - 130, cy + 15), (cx - 90, cy + 40), (cx + 50, cy + 40)],
+                     fill=(28, 28, 35, 255), outline=gold, width=4)
+        draw.polygon([(cx - 65, cy + 3), (cx - 100, cy + 15), (cx - 65, cy + 27)], fill=gold)
+        draw.ellipse([cx - 38, cy - 30, cx + 38, cy + 46], fill=gold, outline=shadow_gold, width=4)
+        draw.pieslice([cx - 28, cy - 20, cx + 28, cy + 36], -90, 90, fill=(245, 245, 245, 255))
+        draw.pieslice([cx - 28, cy - 20, cx + 28, cy + 36], 90, 270, fill=(25, 25, 25, 255))
+
+    elif key == "recruit":
+        # Han Dynasty Bronze Tiger Tally on Silk Cushion
+        draw.polygon([(cx - 140, cy + 45), (cx + 140, cy + 45), (cx + 110, cy + 95), (cx - 110, cy + 95)], fill=(30, 90, 45, 255), outline=gold, width=4)
+        draw.polygon([(cx - 130, cy + 35), (cx - 100, cy - 55), (cx, cy - 95), (cx + 105, cy - 55),
+                      (cx + 135, cy + 35), (cx + 70, cy + 65), (cx - 70, cy + 65)],
+                     fill=mid_gold, outline=shadow_gold, width=6)
+        draw.line([(cx, cy - 95), (cx, cy + 65)], fill=(50, 30, 10, 255), width=8)
+        for ox in [-55, 55]:
+            draw.line([(cx + ox - 20, cy), (cx + ox + 20, cy)], fill=(255, 250, 210, 255), width=4)
+            draw.line([(cx + ox, cy - 20), (cx + ox, cy + 20)], fill=(255, 250, 210, 255), width=4)
+        draw.ellipse([cx - 90, cy - 40, cx - 75, cy - 25], fill=(40, 20, 5, 255))
+        draw.ellipse([cx + 75, cy - 40, cx + 90, cy - 25], fill=(40, 20, 5, 255))
+
+    elif key == "mystery":
+        # Octagonal Bagua Divination Mirror & Radiant "?"
+        pts_oct = []
+        for i in range(8):
+            ang = i * math.pi / 4.0 + math.pi / 8.0
+            pts_oct.append((cx + 145 * math.cos(ang), cy + 145 * math.sin(ang)))
+        draw.polygon(pts_oct, fill=(18, 48, 85, 255), outline=gold, width=8)
+        for i in range(8):
+            ang = i * math.pi / 4.0
+            rx = cx + 115 * math.cos(ang)
+            ry = cy + 115 * math.sin(ang)
+            draw.circle((rx, ry), 8, fill=gold)
+        draw.arc([cx - 50, cy - 85, cx + 50, cy + 15], 180, 360, fill=(120, 240, 255, 255), width=22)
+        draw.arc([cx - 50, cy - 85, cx + 50, cy + 15], 180, 360, fill=(255, 255, 255, 255), width=10)
+        draw.line([(cx + 46, cy - 35), (cx, cy + 25)], fill=(120, 240, 255, 255), width=20)
+        draw.line([(cx + 46, cy - 35), (cx, cy + 25)], fill=(255, 255, 255, 255), width=8)
+        draw.ellipse([cx - 14, cy + 50, cx + 14, cy + 78], fill=(120, 240, 255, 255))
+        draw.ellipse([cx - 7, cy + 57, cx + 7, cy + 71], fill=(255, 255, 255, 255))
+
+    elif key == "hazard":
+        # Jagged Rocky Gorge & Turbulent Waters
+        draw.polygon([(cx - 130, cy + 80), (cx - 60, cy - 100), (cx + 10, cy + 80)], fill=(65, 70, 80, 255), outline=(30, 35, 40, 255), width=4)
+        draw.polygon([(cx - 20, cy + 80), (cx + 70, cy - 120), (cx + 130, cy + 80)], fill=(85, 90, 100, 255), outline=(30, 35, 40, 255), width=4)
+        draw.line([(cx - 60, cy - 100), (cx - 20, cy + 30)], fill=(210, 220, 235, 255), width=4)
+        draw.line([(cx + 70, cy - 120), (cx + 100, cy + 20)], fill=(210, 220, 235, 255), width=4)
+        for ox in [-90, -30, 30, 90]:
+            draw.arc([cx + ox - 30, cy + 60, cx + ox + 30, cy + 105], 180, 360, fill=(180, 225, 255, 255), width=6)
+        # Warning badge
+        draw.polygon([(cx, cy - 40), (cx + 25, cy + 10), (cx - 25, cy + 10)], fill=crimson, outline=gold, width=3)
+        draw.line([(cx, cy - 25), (cx, cy - 5)], fill=gold, width=4)
+        draw.circle((cx, cy + 4), 3, fill=gold)
+
+    elif key == "glory":
+        # Imperial Golden Dragon War Horn
+        draw.polygon([(cx - 100, cy + 65), (cx - 40, cy - 20), (cx + 65, cy - 80), (cx + 105, cy - 100),
+                      (cx + 120, cy - 55), (cx + 60, cy + 25), (cx - 30, cy + 80)],
+                     fill=gold, outline=shadow_gold, width=5)
+        draw.ellipse([cx + 75, cy - 110, cx + 125, cy - 50], fill=mid_gold, outline=shadow_gold, width=4)
+        draw.ellipse([cx + 86, cy - 96, cx + 114, cy - 64], fill=(80, 30, 10, 255))
+        for r in [35, 65]:
+            draw.arc([cx + 100 - r, cy - 80 - r, cx + 100 + r, cy - 80 + r], -75, 15, fill=(255, 240, 150, 255), width=4)
+        # Banners
+        draw.polygon([(cx - 80, cy + 70), (cx - 140, cy + 120), (cx - 70, cy + 105)], fill=crimson)
+
+    elif key == "temple":
+        # Ancient Han Temple Pavilion Roof & Incense Smoke
+        pts_roof = [
+            (cx - 135, cy - 20), (cx - 105, cy - 60), (cx, cy - 95), (cx + 105, cy - 60), (cx + 135, cy - 20),
+            (cx + 95, cy - 30), (cx, cy - 50), (cx - 95, cy - 30)
+        ]
+        draw.polygon(pts_roof, fill=mid_gold, outline=shadow_gold, width=5)
+        draw.rectangle([cx - 72, cy - 20, cx - 54, cy + 85], fill=crimson, outline=dark_red, width=3)
+        draw.rectangle([cx + 54, cy - 20, cx + 72, cy + 85], fill=crimson, outline=dark_red, width=3)
+        draw.polygon([(cx - 42, cy + 25), (cx + 42, cy + 25), (cx + 30, cy + 85), (cx - 30, cy + 85)], fill=shadow_gold, outline=gold, width=3)
+        draw.arc([cx - 22, cy - 20, cx + 8, cy + 25], 180, 360, fill=(240, 245, 255, 190), width=4)
+        draw.arc([cx - 8, cy - 55, cx + 22, cy - 10], 0, 180, fill=(240, 245, 255, 190), width=4)
+
+    elif key == "physician":
+        # Turquoise Jade Medicine Gourd & Healing Needles
+        draw.ellipse([cx - 65, cy - 10, cx + 65, cy + 95], fill=jade, outline=jade_dark, width=5)
+        draw.ellipse([cx - 42, cy - 85, cx + 42, cy + 5], fill=jade, outline=jade_dark, width=5)
+        draw.rectangle([cx - 12, cy - 105, cx + 12, cy - 80], fill=gold)
+        draw.line([(cx - 36, cy - 3), (cx + 36, cy - 3)], fill=crimson, width=8)
+        for ox, oy in [(-55, -55), (55, -55), (0, -115)]:
+            draw.polygon([(cx + ox, cy + oy - 12), (cx + ox + 5, cy + oy), (cx + ox, cy + oy + 12), (cx + ox - 5, cy + oy)], fill=(255, 255, 255, 255))
+
+    elif key == "curse":
+        # Dark Daoist Cursed Talisman with Demonic Eye
+        draw.polygon([(cx - 70, cy - 115), (cx + 70, cy - 115), (cx + 85, cy + 90), (cx, cy + 130), (cx - 85, cy + 90)],
+                     fill=(45, 20, 60, 255), outline=(180, 50, 220, 255), width=5)
+        draw.polygon([(cx - 45, cy - 90), (cx + 45, cy - 90), (cx + 58, cy + 70), (cx, cy + 100), (cx - 58, cy + 70)],
+                     outline=crimson, width=3)
+        draw.ellipse([cx - 38, cy - 22, cx + 38, cy + 22], fill=(120, 20, 180, 255), outline=(255, 50, 200, 255), width=3)
+        draw.ellipse([cx - 12, cy - 18, cx + 12, cy + 18], fill=(255, 20, 50, 255))
+        draw.ellipse([cx - 5, cy - 9, cx + 5, cy + 9], fill=(255, 255, 100, 255))
+
+    elif key == "red_turban":
+        # Sun Jian's Scarlet Headscarf & Iron Helm
+        draw.pieslice([cx - 75, cy - 60, cx + 75, cy + 75], 180, 360, fill=steel_dark, outline=gold, width=4)
+        draw.rectangle([cx - 72, cy + 8, cx + 72, cy + 52], fill=steel_mid, outline=steel_dark, width=3)
+        draw.ellipse([cx - 30, cy - 38, cx + 30, cy + 8], fill=crimson, outline=dark_red, width=3)
+        pts_scarf1 = [(cx + 15, cy - 22), (cx + 115, cy - 95), (cx + 135, cy - 65), (cx + 38, cy - 8)]
+        draw.polygon(pts_scarf1, fill=crimson, outline=dark_red, width=3)
+        pts_scarf2 = [(cx + 22, cy - 8), (cx + 130, cy - 38), (cx + 105, cy + 8), (cx + 30, cy + 15)]
+        draw.polygon(pts_scarf2, fill=bright_red)
+
+    else:
+        # Fallback to battle shield
+        generate_map_icon("battle", out_path)
+        return
+
+    # Soft ambient drop shadow under the die-cut icon
+    alpha_mask = content.split()[3]
+    shadow = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    black = Image.new("RGBA", (S, S), (0, 0, 0, 210))
+    shadow.paste(black, (0, 14), alpha_mask)
+    shadow = shadow.filter(ImageFilter.GaussianBlur(12))
     
-    # Carved 3D shadow
-    for off in [(0, 7), (3, 6), (5, 5), (-2, 6), (0, 5)]:
-        draw.text((cx + off[0], cy + off[1]), char, font=font, fill=char_shadow + (210,))
-        
-    # Gold edge rim
-    for ox in [-3, -2, -1, 0, 1, 2, 3]:
-        for oy in [-3, -2, -1, 0, 1, 2, 3]:
-            if ox*ox + oy*oy <= 9 and (ox != 0 or oy != 0):
-                draw.text((cx + ox, cy + oy), char, font=font, fill=rim_pal["light"] + (110,))
-                
-    draw.text((cx, cy), char, font=font, fill=char_color + (255,))
-    draw.text((cx - 1, cy - 2), char, font=font, fill=(255, 255, 255, 120))
+    img.alpha_composite(shadow)
+    img.alpha_composite(content)
     
     final_img = img.resize((256, 256), Image.LANCZOS)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -453,40 +652,37 @@ def generate_map_icon(key: str, out_path: Path):
 def generate_commander_token(out_path: Path):
     S = 256
     img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
-    center = S / 2.0
+    cx, cy = S / 2.0, S / 2.0 + 10
     
     # Drop shadow
     shadow_img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     sdraw = ImageDraw.Draw(shadow_img)
-    sdraw.ellipse([center - 110, center - 110 + 10, center + 110, center + 110 + 10], fill=(0, 0, 0, 180))
+    sdraw.ellipse([cx - 85, cy + 25, cx + 85, cy + 65], fill=(0, 0, 0, 180))
     shadow_img = shadow_img.filter(ImageFilter.GaussianBlur(10))
     img.alpha_composite(shadow_img)
     
     draw = ImageDraw.Draw(img)
-    # Golden dragon bezel
-    draw.ellipse([center - 112, center - 112, center + 112, center + 112], fill=(212, 165, 54, 255), outline=(120, 85, 18, 255), width=4)
-    draw.ellipse([center - 100, center - 100, center + 100, center + 100], fill=(255, 240, 160, 255))
-    draw.ellipse([center - 92, center - 92, center + 92, center + 92], fill=(160, 20, 20, 255), outline=(90, 10, 10, 255), width=3)
+    # Lacquered Round Pedestal
+    draw.ellipse([cx - 80, cy + 15, cx + 80, cy + 55], fill=(130, 20, 20, 255), outline=(212, 165, 54, 255), width=4)
+    draw.ellipse([cx - 70, cy + 20, cx + 70, cy + 48], fill=(180, 30, 30, 255))
+    draw.ellipse([cx - 55, cy + 25, cx + 55, cy + 42], fill=(212, 165, 54, 255))
     
-    # 8 golden studs
-    for i in range(8):
-        ang = i * math.pi / 4.0
-        sx = center + 104 * math.cos(ang)
-        sy = center + 104 * math.sin(ang)
-        draw.ellipse([sx - 4, sy - 4, sx + 4, sy + 4], fill=(255, 250, 210, 255))
-        
-    # Commander flag/seal character "帅" or "主"
-    font = ImageFont.truetype(FONT_KAITI, 128)
-    char = "主"
-    bbox = font.getbbox(char)
-    bw = bbox[2] - bbox[0]
-    bh = bbox[3] - bbox[1]
-    cx = center - bw / 2.0 - bbox[0]
-    cy = center - bh / 2.0 - bbox[1] - 4
-    
-    draw.text((cx + 2, cy + 3), char, font=font, fill=(40, 5, 5, 200))
-    draw.text((cx, cy), char, font=font, fill=(255, 235, 140, 255))
-    draw.text((cx - 1, cy - 1), char, font=font, fill=(255, 255, 255, 150))
+    # Commander General Helmet (Gold & Crimson)
+    hx, hy = cx, cy - 20
+    # Crimson Feather Plume blowing to upper right
+    draw.polygon([(hx, hy - 45), (hx + 35, hy - 95), (hx + 55, hy - 65), (hx + 10, hy - 35)], fill=(225, 30, 30, 255))
+    draw.line([(hx + 5, hy - 40), (hx + 45, hy - 85)], fill=(255, 180, 180, 255), width=3)
+    # Helmet Dome (Gold)
+    draw.pieslice([hx - 45, hy - 50, hx + 45, hy + 25], 180, 360, fill=(245, 200, 70, 255), outline=(140, 95, 20, 255), width=3)
+    # Dragon Crest Forehead Plate
+    draw.polygon([(hx, hy - 45), (hx + 16, hy - 25), (hx, hy - 15), (hx - 16, hy - 25)], fill=(255, 245, 170, 255), outline=(120, 80, 10, 255), width=2)
+    # Visor band & cheek guards
+    draw.rectangle([hx - 42, hy - 15, hx + 42, hy - 2], fill=(160, 25, 25, 255), outline=(120, 80, 10, 255), width=2)
+    draw.polygon([(hx - 38, hy - 2), (hx - 30, hy + 28), (hx - 15, hy + 25), (hx - 22, hy - 2)], fill=(245, 200, 70, 255), outline=(120, 80, 10, 255), width=2)
+    draw.polygon([(hx + 38, hy - 2), (hx + 30, hy + 28), (hx + 15, hy + 25), (hx + 22, hy - 2)], fill=(245, 200, 70, 255), outline=(120, 80, 10, 255), width=2)
+    # Glowing heroic eyes
+    draw.ellipse([hx - 18, hy + 4, hx - 8, hy + 12], fill=(255, 255, 255, 255))
+    draw.ellipse([hx + 8, hy + 4, hx + 18, hy + 12], fill=(255, 255, 255, 255))
     
     final_img = img.resize((128, 128), Image.LANCZOS)
     out_path.parent.mkdir(parents=True, exist_ok=True)

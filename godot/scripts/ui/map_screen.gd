@@ -6,7 +6,7 @@ extends Control
 const COL_W := 150.0
 const LANE_H := 104.0
 const SQ := 74.0
-const MAP_TOP := 6.0
+const MAP_TOP := 22.0
 
 var toast := ""
 var q: Dictionary
@@ -60,14 +60,179 @@ var _run_box: HBoxContainer
 var _top: HBoxContainer
 var _title: Label
 var _busy := false
+var _bob: Tween
+var _progress: ProgressBar
+
+
+class MapNode extends Control:
+	## High-fidelity Rance X style battlefield token:
+	## Distinct die-cut icons (martial shield, spiked crest, boss warlord mask, gilded chest, camp tent, bamboo scroll...),
+	## with atmospheric aura for elite/boss, smooth interaction states,
+	## and authentic cinnabar seal on victory.
+	var icon_tex: Texture2D = null
+	var glyph := ""
+	var col := Color.WHITE
+	var kind := ""  # boss / elite / …
+	var state := "open"
+	var show_glyph_on_icon := false
+
+	func _draw() -> void:
+		var big := kind == "boss" or kind == "elite"
+		var s := size
+		var center := s / 2.0
+		
+		# 1. Atmospheric Back Aura for Boss / Elite
+		if kind == "boss" and state != "visited":
+			var aura_rad := s.x * 0.60
+			draw_circle(center, aura_rad + 4.0, Color(0.75, 0.12, 0.10, 0.35))
+			draw_circle(center, aura_rad, Color(0.95, 0.35, 0.10, 0.25))
+			draw_arc(center, aura_rad + 2.0, 0, TAU, 32, Color(1.0, 0.85, 0.40, 0.65), 2.2, true)
+		elif kind == "elite" and state != "visited":
+			var aura_rad := s.x * 0.52
+			draw_circle(center, aura_rad, Color(0.95, 0.45, 0.05, 0.28))
+			draw_arc(center, aura_rad + 1.0, 0, TAU, 28, Color(1.0, 0.75, 0.25, 0.55), 1.5, true)
+		
+		# 2. Render Icon Texture
+		if icon_tex != null:
+			var icon_size := s.x if not big else (s.x * 1.18)
+			var rect := Rect2(center - Vector2(icon_size, icon_size) * 0.5, Vector2(icon_size, icon_size))
+			
+			var icon_mod := Color.WHITE
+			match state:
+				"visited":
+					icon_mod = Color(0.62, 0.58, 0.55, 0.85)  # Historical muted ink/sepia
+				"closed":
+					icon_mod = Color(0.40, 0.40, 0.45, 0.55)  # Faint closed path
+				"reachable":
+					icon_mod = Color(1.08, 1.05, 1.0)        # Crisp glowing active
+				"current":
+					icon_mod = Color(1.15, 1.10, 0.95)       # Heroic highlight
+			
+			draw_texture_rect(icon_tex, rect, false, icon_mod)
+
+			# If this node displays a glyph over the icon (e.g. random_event jade plaque)
+			if show_glyph_on_icon and glyph != "":
+				var font_size := 22
+				var f: Font = Kit.name_font(font_size, 0)
+				var gs := f.get_string_size(glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+				# Center of the cream jade medallion is at center.y + s.y * 0.065
+				var text_center := center + Vector2(0, s.y * 0.065)
+				var at := Vector2(text_center.x - gs.x * 0.5, text_center.y + font_size * 0.35)
+				
+				# Engraved ambient shadow
+				var shadow_ink := Color(0.72, 0.62, 0.50, 0.85) if state != "visited" else Color(0.35, 0.32, 0.30, 0.5)
+				draw_string(f, at + Vector2(0, 1.2), glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, shadow_ink)
+				
+				# Deep calligraphy ink
+				var text_ink := Color(0.16, 0.10, 0.06) if state != "visited" else Color(0.42, 0.38, 0.35)
+				if state == "closed":
+					text_ink = Color(0.35, 0.32, 0.30, 0.6)
+				draw_string(f, at, glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, text_ink)
+		else:
+			# Custom Glyph Medallion (e.g. 马, 沼, 寨, 甲):
+			# Rich dark lacquer disc with gold bezel and 3D carved calligraphy
+			var radius := s.x * 0.44
+			# Drop shadow
+			draw_circle(center + Vector2(0, 4), radius + 2.0, Color(0, 0, 0, 0.45))
+			# Outer gold bezel
+			draw_circle(center, radius, Color(0.85, 0.70, 0.38))
+			draw_circle(center, radius - 2.5, Color(0.14, 0.10, 0.08))
+			# Inner lacquer disc with faction/event tint
+			var disc_col := col.darkened(0.65)
+			if disc_col.get_luminance() < 0.08:
+				disc_col = Color(0.12, 0.10, 0.09)
+			if state == "visited":
+				disc_col = Color(0.18, 0.16, 0.15)
+			elif state == "closed":
+				disc_col = disc_col.darkened(0.4)
+			draw_circle(center, radius - 4.5, disc_col)
+			# Top specular highlight
+			draw_arc(center, radius - 3.5, -PI * 0.75, -PI * 0.25, 16, Color(1, 1, 1, 0.25 if state != "visited" else 0.08), 1.2, true)
+			# 3D carved calligraphy
+			var f: Font = Kit.name_font(30, 0)
+			var gs := f.get_string_size(glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30)
+			var at := Vector2(center.x - gs.x * 0.5, center.y + 30 * 0.35)
+			draw_string(f, at + Vector2(0, 2), glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color(0, 0, 0, 0.85))
+			var glyph_ink := Color(1.0, 0.94, 0.82) if state != "visited" else Color(0.65, 0.62, 0.58)
+			draw_string(f, at, glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30, glyph_ink)
+
+		# 3. Visited Victory Stamp: Cinnabar vermilion seal in bottom-right corner
+		if state == "visited":
+			var c := center + Vector2(s.x * 0.28, s.y * 0.28)
+			draw_circle(c, 11, Color(0.82, 0.18, 0.12, 0.95))
+			draw_arc(c, 11, 0, TAU, 24, Color(1, 0.88, 0.78, 0.9), 1.2, true)
+			var sf: Font = Kit.name_font(13, 0)
+			var seal_txt := "胜" if (kind == "boss" or kind == "elite" or kind == "battle") else "通"
+			var ss := sf.get_string_size(seal_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 13)
+			draw_string(sf, c + Vector2(-ss.x * 0.5, 4.5), seal_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1, 0.96, 0.9))
 
 
 class MapLines extends Control:
-	var segs: Array = []  # [from, to, color, width]
+	## Rance X style roads: gently curved paths (walked = solid gold, ahead = dashed ivory, routes not taken = faint),
+	## a pulsing halo under every square you can step onto, a soft ring under the current square
+	var segs: Array = []  # [from, to, kind] kind: "walked" / "ahead" / "closed" / "ghost"
+	var halos: Array = []  # reachable square centres
+	var here := Vector2(-999, -999)
+	var t := 0.0
+
+	func _process(delta: float) -> void:
+		t += delta
+		if not halos.is_empty() or here.x > -900:
+			queue_redraw()
+
+	static func _curve(a: Vector2, b: Vector2) -> PackedVector2Array:
+		var pts := PackedVector2Array()
+		var dy := b.y - a.y
+		for i in 17:
+			var k := i / 16.0
+			var e := k * k * (3.0 - 2.0 * k)  # smoothstep: lanes bend like a road, not a zigzag
+			pts.append(Vector2(lerpf(a.x, b.x, k), a.y + dy * e))
+		return pts
+
+	func _dashed(pts: PackedVector2Array, col: Color, w: float, dash := 10.0, gap := 8.0, phase := 0.0) -> void:
+		var on := true
+		var left := dash - fmod(phase, dash + gap)
+		if left < 0.0:
+			on = false
+			left += gap
+		for i in pts.size() - 1:
+			var a := pts[i]
+			var b := pts[i + 1]
+			var seg := a.distance_to(b)
+			var pos := 0.0
+			while pos < seg:
+				var step := minf(left, seg - pos)
+				if on:
+					draw_line(a.lerp(b, pos / seg), a.lerp(b, (pos + step) / seg), col, w, true)
+				pos += step
+				left -= step
+				if left <= 0.0:
+					on = not on
+					left = dash if on else gap
 
 	func _draw() -> void:
 		for s in segs:
-			draw_line(s[0], s[1], s[2], s[3], true)
+			var pts := _curve(s[0], s[1])
+			match s[2]:
+				"ghost":
+					_dashed(pts, Color(0.96, 0.93, 0.85, 0.22), 2.0, 6.0, 8.0)
+				"closed":
+					draw_polyline(pts, Color(0.1, 0.07, 0.05, 0.35), 6.0, true)
+					_dashed(pts, Color(0.85, 0.8, 0.7, 0.45), 2.0, 6.0, 7.0)
+				"walked":
+					draw_polyline(pts, Color(0.12, 0.08, 0.04, 0.6), 11.0, true)
+					draw_polyline(pts, Color(0.88, 0.7, 0.35), 6.0, true)
+					draw_polyline(pts, Color(1.0, 0.92, 0.7, 0.8), 2.0, true)
+				_:  # ahead: marching dashes towards the next squares
+					draw_polyline(pts, Color(0.1, 0.07, 0.05, 0.5), 8.0, true)
+					_dashed(pts, Color(0.98, 0.95, 0.86, 0.95), 3.5, 12.0, 8.0, -t * 18.0)
+		var p := 0.5 + 0.5 * sin(t * 3.2)
+		for c in halos:
+			draw_circle(c, 46.0 + 6.0 * p, Color(1.0, 0.85, 0.4, 0.10 + 0.10 * p))
+			draw_arc(c, 42.0 + 6.0 * p, 0, TAU, 48, Color(1.0, 0.88, 0.5, 0.55 - 0.3 * p), 3.0, true)
+		if here.x > -900:
+			draw_circle(here, 44.0, Color(0.9, 0.2, 0.15, 0.18))
+			draw_arc(here, 44.0, t * 1.5, t * 1.5 + TAU * 0.8, 40, Color(1.0, 0.8, 0.4, 0.9), 3.0, true)
 
 
 func _ready() -> void:
@@ -255,50 +420,69 @@ func _rebuild_map() -> void:
 		if offset == 0 and q["id"] == "prologue" and s["x"] >= 23:
 			continue
 		var b := Button.new()
-		var icon_tex: Texture2D = Kit.map_icon(_icon_key(s))
-		if icon_tex != null:
-			b.icon = icon_tex
-			b.expand_icon = true
-			b.flat = true
-		else:
-			b.text = _glyph(s)
-			b.add_theme_font_size_override("font_size", 30)
+		b.name = s["id"]
 		b.size = Vector2(SQ, SQ)
 		b.position = _pos(s) - Vector2(SQ, SQ) / 2
 		b.pivot_offset = Vector2(SQ, SQ) / 2
+		b.flat = true
 		b.pressed.connect(_on_square.bind(s["id"]))
+		
+		# Lacquered tile / badge node custom drawn
+		var node_view := MapNode.new()
+		node_view.name = "Tile"
+		node_view.size = Vector2(SQ, SQ)
+		node_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var ikey := _icon_key(s)
+		node_view.icon_tex = Kit.map_icon(ikey)
+		node_view.glyph = _glyph(s)
+		node_view.show_glyph_on_icon = (ikey == "random_event")
+		node_view.col = _type_color(s)
+		node_view.kind = _kind(s)
+		b.add_child(node_view)
+
 		_layer.add_child(b)
 		var ev_known: Dictionary = _fixed_event(s) if s["type"] == "mystery" and s["label"] in ["", "？"] else {}
-		var lbl := Kit.label(ev_known.get("title", s["label"] if s["label"] != "" else _type_name(s)), 16, "text")
-		var pill := Kit.box(Kit.c("card").lerp(Color.TRANSPARENT, 0.15), 8, 0, Color.TRANSPARENT, 0)
-		pill.content_margin_left = 8
-		pill.content_margin_right = 8
-		lbl.add_theme_stylebox_override("normal", pill)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x + 16
-		lbl.position = _pos(s) + Vector2(-w / 2, SQ / 2 + 2)
-		lbl.size = Vector2(w, 22)
-		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		_layer.add_child(lbl)
-		_labels.append(lbl)
+		var title: String = ev_known.get("title", s["label"])
+		var needs_plaque: bool = title != "" or s["boss"] or s["elite"] or s["type"] in ["event", "choose", "temple", "physician", "curse", "red_turban", "glory", "hazard"]
+		
+		var full_title: String = title if title != "" else _type_name(s)
+		b.tooltip_text = full_title
+		
+		if needs_plaque:
+			var lbl := Kit.label(full_title, 13, "text")
+			lbl.add_theme_color_override("font_color", Color(1.0, 0.95, 0.85))
+			var plaque := Kit.box(Color(0.12, 0.08, 0.06, 0.92), 3, 1, Color(0.82, 0.68, 0.38, 0.9), 0)
+			plaque.content_margin_left = 6
+			plaque.content_margin_right = 6
+			plaque.content_margin_top = 1
+			plaque.content_margin_bottom = 2
+			lbl.add_theme_stylebox_override("normal", plaque)
+			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x + 14
+			lbl.position = _pos(s) + Vector2(-w / 2.0, SQ / 2.0 + 3)
+			lbl.size = Vector2(w, 20)
+			lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			_layer.add_child(lbl)
+			_labels.append(lbl)
+			if not Quests.is_open(s, Game.save):
+				lbl.modulate.a = 0.5
 		_nodes[s["id"]] = b
 		if not Quests.is_open(s, Game.save):
 			_ghosts[s["id"]] = true
-			lbl.modulate.a = 0.5
 	var token_tex: Texture2D = Kit.token_icon()
 	if token_tex != null:
 		var tr := TextureRect.new()
 		tr.texture = token_tex
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.size = Vector2(34, 34)
+		tr.size = Vector2(48, 48)
 		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tr.z_index = 5
 		_token = tr
 	else:
 		var p := Panel.new()
 		p.add_theme_stylebox_override("panel", Kit.box(Kit.c("red"), 14, 3, Color.WHITE, 0))
-		p.size = Vector2(28, 28)
+		p.size = Vector2(30, 30)
 		p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		p.z_index = 5
 		_token = p
@@ -327,7 +511,7 @@ func _icon_key(s: Dictionary) -> String:
 			"赤": return "red_turban"
 			"宝": return "treasure"
 			"将": return "boss"
-			_: return ""  # no icon drawn for this glyph (交、甲、寨): the square shows the glyph itself
+			_: return "random_event"
 	return _kind(s)
 
 
@@ -351,52 +535,22 @@ func _type_color(s: Dictionary) -> Color:
 
 
 func _style_square(b: Button, s: Dictionary, state: String) -> void:
-	if b.icon != null:
-		var empty_sb := StyleBoxEmpty.new()
-		for st in ["normal", "hover", "pressed", "disabled"]:
-			b.add_theme_stylebox_override(st, empty_sb)
-		var focus_sb := Kit.box(Color.TRANSPARENT, int(SQ / 2), 3, Kit.c("amber"), 0)
-		b.add_theme_stylebox_override("focus", focus_sb)
-		for st in ["icon_normal_color", "icon_hover_color", "icon_pressed_color", "icon_focus_color", "icon_disabled_color"]:
-			b.add_theme_color_override(st, Color.WHITE)  # a disabled button would fade its icon to 40%
-		match state:
-			"current":
-				b.modulate = Color(1.15, 1.1, 0.95)
-			"reachable":
-				b.modulate = Color.WHITE
-			"visited":  # been there: greyed
-				b.modulate = Color(0.6, 0.6, 0.6)
-			"closed":  # not reachable yet: still readable
-				b.modulate = Color(0.92, 0.92, 0.92)
-		return
-	var r := int(SQ / 2)
-	var bg := Kit.c("card")
-	var fg := _type_color(s)
-	var border := _type_color(s)
+	var empty_sb := StyleBoxEmpty.new()
+	for st in ["normal", "hover", "pressed", "disabled", "focus"]:
+		b.add_theme_stylebox_override(st, empty_sb)
+	var node_view := b.get_node_or_null("Tile") as MapNode
+	if node_view != null:
+		node_view.state = state
+		node_view.queue_redraw()
 	match state:
 		"current":
-			bg = Kit.c("gold")
-			fg = Color.WHITE
-			border = Color.WHITE
+			b.modulate = Color(1.15, 1.1, 0.95)
 		"reachable":
-			bg = Kit.c("green")
-			fg = Color.WHITE
-			border = Color.WHITE
+			b.modulate = Color.WHITE
 		"visited":
-			bg = Kit.c("track")
-			fg = Kit.c("dim")
-			border = Kit.c("track")
+			b.modulate = Color(0.75, 0.75, 0.75)
 		"closed":
-			bg = Kit.c("panel")
-			fg = Kit.c("dim")
-			border = Kit.c("border")
-	for st in ["normal", "hover", "pressed", "disabled", "focus"]:
-		var sb := Kit.box(bg if st != "hover" else bg.lightened(0.1), r, 4, border, 0)
-		if st == "focus":
-			sb = Kit.box(bg, r, 5, Kit.c("amber"), 0)
-		b.add_theme_stylebox_override(st, sb)
-	for fc in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color", "font_disabled_color"]:
-		b.add_theme_color_override(fc, fg)
+			b.modulate = Color(0.85, 0.85, 0.85)
 
 
 func _refresh() -> void:
@@ -455,11 +609,17 @@ func _refresh() -> void:
 			var a := _pos(s)
 			var b := _pos(q["squares"][t])
 			if _ghosts.has(s["id"]) or _ghosts.has(t):  # a route not taken: a faint line
-				_lines.segs.append([a, b, Color(0.96, 0.93, 0.85, 0.3), 2.0])
+				_lines.segs.append([a, b, "ghost"])
 				continue
-			_lines.segs.append([a, b, Color(0.12, 0.09, 0.06, 0.55), 9.0 if walked else 6.0])
-			_lines.segs.append([a, b, Kit.c("gold") if walked else Color(0.96, 0.93, 0.85, 0.9), 5.0 if walked else 2.5])
+			var kind := "walked" if walked else ("ahead" if (ahead.has(t) and (ahead.has(s["id"]) or s["id"] == save.square)) else "closed")
+			_lines.segs.append([a, b, kind])
+	_lines.halos = []
+	for sid in reachable:
+		if _nodes.has(sid):
+			_lines.halos.append(_pos(q["squares"][sid]))
+	_lines.here = _pos(q["squares"][save.square]) if _nodes.has(save.square) else Vector2(-999, -999)
 	_lines.queue_redraw()
+	_update_progress(ahead)
 
 	for sid in _nodes:
 		var s: Dictionary = q["squares"][sid]
@@ -485,13 +645,48 @@ func _refresh() -> void:
 			tw.tween_property(b, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_SINE)
 			_pulses.append(tw)
 	var here: Dictionary = q["squares"][save.square]
-	_token.position = _pos(here) - Vector2(_token.size.x / 2.0, SQ / 2.0 + _token.size.y - 8)
+	_token.position = _token_dest(here)
+	_bob_token()
 	_center_on(here)
 	_show_square(here)
 	if save.fate == "" and not save.fate_offer.is_empty():
 		_open_fates()
 	if save.offer_kind == "relic" and not save.offer.is_empty():
 		_open_relics.call_deferred()
+
+
+func _bob_token() -> void:
+	## the party token breathes on its square (killed while it walks)
+	if _bob != null and _bob.is_valid():
+		_bob.kill()
+	var base := _token.position
+	_bob = _token.create_tween().set_loops()
+	_bob.tween_property(_token, "position:y", base.y - 6, 0.6).set_trans(Tween.TRANS_SINE)
+	_bob.tween_property(_token, "position:y", base.y, 0.6).set_trans(Tween.TRANS_SINE)
+
+
+func _update_progress(ahead: Dictionary) -> void:
+	## a thin march strip under the map: how far along this chapter the party is (by column)
+	if _progress == null:
+		_progress = ProgressBar.new()
+		_progress.show_percentage = false
+		_progress.position = Vector2(0, 436)
+		_progress.size = Vector2(1280, 8)
+		_progress.custom_minimum_size = Vector2(0, 8)
+		_progress.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_progress.add_theme_stylebox_override("background", Kit.box(Color(0, 0, 0, 0.55), 0, 0, Color.TRANSPARENT, 0))
+		_progress.add_theme_stylebox_override("fill", Kit.box(Kit.c("gold"), 0, 0, Color.TRANSPARENT, 0))
+		add_child(_progress)
+	var start_x: int = int(q["squares"][q.get("_raw", q)["start"]]["x"]) if _x_offset() == 0 else _x_offset()
+	var cur_x: int = int(q["squares"][Game.save.square]["x"])
+	var end_x := cur_x
+	for sid in ahead:
+		if _nodes.has(sid):
+			end_x = maxi(end_x, int(q["squares"][sid]["x"]))
+	_progress.max_value = maxf(1.0, end_x - start_x)
+	_progress.visible = not _cg_mode
+	Kit.tween_bar(_progress, cur_x - start_x)
+	_progress.tooltip_text = "本章进度 %d%%" % int(round(100.0 * (cur_x - start_x) / _progress.max_value))
 
 
 func _show_run() -> void:
@@ -564,16 +759,25 @@ func _center_on(s: Dictionary) -> void:
 
 # ---- moving --------------------------------------------------------------------
 
+func _token_dest(s: Dictionary) -> Vector2:
+	return _pos(s) - Vector2(_token.size.x / 2.0, SQ * 0.40 + _token.size.y * 0.55)
+
+
 func _on_square(sid: String) -> void:
 	if _busy:
 		return
 	_busy = true
 	var target: Dictionary = q["squares"][sid]
+	if _bob != null and _bob.is_valid():
+		_bob.kill()
 	var tw := create_tween()
-	var dest := _pos(target) - Vector2(_token.size.x / 2.0, SQ / 2.0 + _token.size.y - 8)
-	tw.tween_property(_token, "position", dest + Vector2(0, -18), 0.18).set_trans(Tween.TRANS_QUAD)
+	var dest := _token_dest(target)
+	tw.tween_property(_token, "position", (_token.position + dest) / 2.0 + Vector2(0, -34), 0.16).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.tween_property(_token, "position", dest + Vector2(0, -10), 0.14).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tw.tween_property(_token, "position", dest, 0.14).set_trans(Tween.TRANS_BOUNCE)
 	await tw.finished
+	if _nodes.has(sid):
+		Kit.pop(_nodes[sid], 1.2, 0.1)
 	Sfx.play("step")  # the token lands
 	var given := Quests.move(q, Game.save, sid, Game.rng)
 	Game.persist()
@@ -1283,6 +1487,8 @@ func _apply_cg_mode() -> void:
 		_sheet_hidden = false
 		_sheet.visible = true
 	_scroll.visible = not _cg_mode
+	if _progress != null:
+		_progress.visible = not _cg_mode
 	_cg_tab.text = "查看地图" if _cg_mode else "查看 CG"
 	_fit_top.call_deferred()
 	# a CG gets the screen: the text box shrinks to a subtitle strip at the bottom
