@@ -559,7 +559,7 @@ func test_north_chapter5_with_military_law_takes_xuzhou() -> void:
 		for sid in ["xz_muster", "xz_chaos", "xz_banquet", "xz_menhou"]:
 			check(not p.has(sid), "铁纪 route never reaches " + sid)
 		check_eq(p[-1], "xz_end")
-		for c in ["zhangliao", "gaoshun", "sunguan"]:
+		for c in ["zhangliao", "gaoshun", "sunguan", "dufuren"]:
 			check(s.has_card(c), "%s joins in 第五章" % c)
 		for r in ["xuzhou_yin", "chen_mago"]:
 			check(s.relics.has(r), "第五章 hands over the 宝物 " + r)
@@ -766,7 +766,7 @@ func test_north_chapter5_sparing_xiahoudun_waits_for_ending_nine() -> void:
 func huainan_n_save(flags: Array) -> SaveData:
 	var s := xuzhou_save(["军纪：严明", "徐州：接任徐州牧"] + flags)
 	s.quests_cleared.append("xuzhou")
-	for c in ["zhangliao", "gaoshun", "xiahoulan"]:
+	for c in ["zhangliao", "gaoshun", "xiahoulan", "dufuren"]:
 		s.grant_card(c)
 	return s
 
@@ -789,7 +789,7 @@ func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
 			for sid in ["hnn_letter_bad", "hnn_trap", "hnn_gongmen", "hnn_duanqiao", "hnn_bad_end"]:
 				check(not p.has(sid), "%s: never reaches %s" % [xj, sid])
 			check_eq(p[-1], "hnn_end")
-			check(s.has_card("dufuren"), "杜夫人 joins")
+			check(s.has_card("dufuren"), "杜夫人 is with you (she joined in 第五章)")
 			for r in ["weixi", "dujiu"]:
 				check(s.relics.has(r), "第六章 hands over " + r)
 			for line in ["北线：奉诏讨袁", "吕布：降曹", "杜夫人：随军", "北线：浮桥一瞥", "北线：让寿春"]:
@@ -809,7 +809,6 @@ func test_north_chapter6_no_grain_and_a_mauled_rear_guard_end_at_the_broken_brid
 	for sid in ["hnn_letter", "hnn_xj_a", "hnn_xj_b", "hnn_xj_c", "hnn_du", "hnn_bridge", "hnn_news", "hnn_end"]:
 		check(not p.has(sid), "断桥 route never reaches " + sid)
 	check_eq(p[-1], "hnn_bad_end")
-	check(not s.has_card("dufuren"), "杜夫人 never joins on this route")
 	finish(q, s)
 	check(s.flags.has("结局八 · 断桥"))
 	check(Quests.current_quest(s) == null, "the story stops at 结局八")
