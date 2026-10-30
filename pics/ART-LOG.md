@@ -1373,3 +1373,4 @@
 - [x] 2026-10-29 cg `n5_bandeng` ← n5_bandeng.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-29 cg `n5_chenjia` ← n5_chenjia.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-29 cg `n5_beat` ← n5_beat.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-29 cg `n5_guonian` ← n5_guonian.jpg 裁 2528×1696→2528×1422 · ok
