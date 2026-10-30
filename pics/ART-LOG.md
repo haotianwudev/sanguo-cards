@@ -1367,3 +1367,5 @@
 - [ ] 2026-10-27 cg `end_menhou` ← end_menhou.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-29 cg `n4_qinggong` ← n4_qinggong.jpg 裁 2528×1696→2528×1422 · ok
 - [ ] 2026-10-29 cg `n4_mifang` ← n4_mifang.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-29 cg `n5_law` ← n5_law.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-29 cg `n5_meet` ← n5_meet.jpg 裁 2528×1696→2528×1422 · ok
