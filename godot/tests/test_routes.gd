@@ -775,9 +775,9 @@ func test_north_chapter6_follows_xuzhou() -> void:
 	check_eq(Quests.current_quest(huainan_n_save(["曹操：借粮", "夏侯惇：痛击殿后"]))["id"], "huainan_n", "徐州：接任徐州牧 → 第六章 · 淮南折帝旗")
 
 
-func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
-	var cases := {"hnn_xj_a": ["曹操：借粮", "夏侯惇：放他回兖州"], "hnn_xj_b": ["曹操：借粮", "夏侯惇：痛击殿后"],
-		"hnn_xj_c": ["曹操：没借", "夏侯惇：放他回兖州"]}
+func test_north_chapter6_both_debts_of_gratitude_let_you_walk_out() -> void:
+	## only grain lent at 酸枣 AND 夏侯惇 spared at 下邳 is the main line (放 opens after 结局八, so the first time always ends there)
+	var cases := {"hnn_xj_a": ["曹操：借粮", "夏侯惇：放他回兖州"]}
 	for xj in cases:
 		for fork in [[], ["hnn_m1", "hnn_m2", "hnn_m3"]]:
 			var s := huainan_n_save(cases[xj])
@@ -786,7 +786,7 @@ func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
 			for sid in ["hnn_start", "hnn_letter", "hnn_jiu", "hnn_qiaorui", "hnn_jiling", "hnn_cheng", "hnn_zhujiu", "hnn_bw1",
 					"hnn_bw2", "hnn_bw3", "hnn_choose", "hnn_feast", xj, "hnn_du", "hnn_niaodun", "hnn_bridge", "hnn_news", "hnn_end"]:
 				check(p.has(sid), "%s: passes %s (forks %s)" % [xj, sid, str(fork)])
-			for sid in ["hnn_letter_bad", "hnn_trap", "hnn_gongmen", "hnn_duanqiao", "hnn_bad_end"]:
+			for sid in ["hnn_letter_bad", "hnn_xj_b", "hnn_xj_c", "hnn_trap", "hnn_gongmen", "hnn_gongmen_f", "hnn_duanqiao", "hnn_bad_end"]:
 				check(not p.has(sid), "%s: never reaches %s" % [xj, sid])
 			check_eq(p[-1], "hnn_end")
 			check(s.has_card("dufuren"), "杜夫人 is with you (she joined in 第五章)")
@@ -799,19 +799,24 @@ func test_north_chapter6_a_debt_of_gratitude_lets_you_walk_out() -> void:
 			check_eq(Quests.current_quest(s)["id"], "yecheng", "北线：让寿春 → 第七章 · 邺城惊雷")
 
 
-func test_north_chapter6_no_grain_and_a_mauled_rear_guard_end_at_the_broken_bridge() -> void:
-	var s := huainan_n_save(["曹操：没借", "夏侯惇：痛击殿后"])
-	var q := quest_by_id("huainan_n")
-	var p := walk(q, s, [])
-	for sid in ["hnn_letter_bad", "hnn_zhujiu", "hnn_bw3", "hnn_feast", "hnn_trap", "hnn_maofang", "hnn_daofu", "hnn_gongmen",
-			"hnn_fire", "hnn_duanqiao", "hnn_caught", "hnn_bad_end"]:
-		check(p.has(sid), "断桥 route passes " + sid)
-	for sid in ["hnn_letter", "hnn_xj_a", "hnn_xj_b", "hnn_xj_c", "hnn_du", "hnn_bridge", "hnn_news", "hnn_end"]:
-		check(not p.has(sid), "断桥 route never reaches " + sid)
-	check_eq(p[-1], "hnn_bad_end")
-	finish(q, s)
-	check(s.flags.has("结局八 · 断桥"))
-	check(Quests.current_quest(s) == null, "the story stops at 结局八")
+func test_north_chapter6_a_missing_debt_ends_at_the_broken_bridge() -> void:
+	## [records, the 坏账 square, the 宫门 square]: one favour short is as bad as none
+	var cases := [[["曹操：没借", "夏侯惇：痛击殿后"], "hnn_trap", "hnn_gongmen"],
+		[["曹操：借粮", "夏侯惇：痛击殿后"], "hnn_xj_b", "hnn_gongmen"],
+		[["曹操：没借", "夏侯惇：放他回兖州"], "hnn_xj_c", "hnn_gongmen_f"]]
+	for c in cases:
+		var s := huainan_n_save(c[0])
+		var q := quest_by_id("huainan_n")
+		var p := walk(q, s, [])
+		for sid in ["hnn_letter_bad", "hnn_zhujiu", "hnn_bw3", "hnn_feast", c[1], "hnn_maofang", "hnn_daofu", c[2],
+				"hnn_fire", "hnn_duanqiao", "hnn_caught", "hnn_bad_end"]:
+			check(p.has(sid), "%s: 断桥 route passes %s" % [str(c[0]), sid])
+		for sid in ["hnn_letter", "hnn_xj_a", "hnn_du", "hnn_bridge", "hnn_news", "hnn_end"]:
+			check(not p.has(sid), "%s: 断桥 route never reaches %s" % [str(c[0]), sid])
+		check_eq(p[-1], "hnn_bad_end")
+		finish(q, s)
+		check(s.flags.has("结局八 · 断桥"))
+		check(Quests.current_quest(s) == null, "the story stops at 结局八")
 
 
 func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
