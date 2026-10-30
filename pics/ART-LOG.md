@@ -1390,13 +1390,13 @@
 - [x] 2026-10-30 cg `n7_juedi` ← n7_juedi.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n5_guonian` ← n5_guonian.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n6_beiwang` ← n6_beiwang.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_liushou` ← n8_liushou.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_b_xin` ← n8_b_xin.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_dingbei` ← n8_dingbei.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_liushou_t` ← n8_liushou_t.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_zhanlv` ← n8_zhanlv.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_tuijun` ← n8_tuijun.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_ma` ← n8_ma.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_end` ← n8_end.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_jincheng` ← n8_jincheng.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n8_dumai` ← n8_dumai.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_liushou` ← n8_liushou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_b_xin` ← n8_b_xin.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_dingbei` ← n8_dingbei.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_liushou_t` ← n8_liushou_t.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_zhanlv` ← n8_zhanlv.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_tuijun` ← n8_tuijun.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_ma` ← n8_ma.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_end` ← n8_end.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_jincheng` ← n8_jincheng.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n8_dumai` ← n8_dumai.jpg 裁 2528×1696→2528×1422 · ok
