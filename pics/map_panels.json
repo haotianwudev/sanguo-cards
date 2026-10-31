@@ -106,5 +106,32 @@
        "scene": "初春：北海城内，城墙环绕，屋舍整齐，桃花初开。",
        "spots": [["bh_porridge", "城门口冒着热气的粥棚"], ["bh_kongrong", "北海相府的大堂"], ["bh_feast", "相府里设宴的厅堂"], ["bh_cimu", "城外一间小农家院"], ["bh_seal", "城门外来的使节车驾"], ["bh_end", "北海相府的门楼"]]}
     ]
+  },
+  "xuzhou": {
+    "quest": "xuzhou",
+    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/beihai_8.jpg"],
+    "panels": [
+      {"src": "source/map/panels/xuzhou_1.jpg", "from": 0, "place": "北海出兵、琅邪道（兴平元年夏）",
+       "scene": "盛夏：从青州北海南下徐州的路，丘陵和田野。",
+       "spots": [["xz_start", "北海城的城门"], ["xz_muster", "城外的点兵校场"], ["xz_l1_a2", "琅邪道上的山岗"], ["xz_l1_m1", "丘陵间的小村子"], ["xz_xiapi", "远处平原上一座大城的城墙"]]},
+      {"src": "source/map/panels/xuzhou_2.jpg", "from": 6, "place": "泗水、曹军后队、下邳城外夏侯惇",
+       "scene": "盛夏：泗水河边的平原，右边是徐州下邳城高大的城墙。",
+       "spots": [["xz_a2", "曹军营地的营帐和木栅"], ["xz_m1", "泗水河岸"], ["xz_xiahoudun", "城外一片开阔的战场"], ["xz_rest1", "下邳城的城门"], ["xz_meet", "城里的州牧府"]]},
+      {"src": "source/map/panels/xuzhou_3.jpg", "from": 12, "place": "下邳城内外、让印、曹豹府、糜府",
+       "scene": "夏末：徐州下邳城里，街巷纵横的大城。",
+       "spots": [["xz_m2", "热闹的市集"], ["xz_seal", "州牧府的大堂"], ["xz_l2_a2", "一座大宅（曹豹府）"], ["xz_l2_m1", "街边的酒楼"], ["xz_mifu", "张灯结彩的富商大宅（糜府）"]]},
+      {"src": "source/map/panels/xuzhou_4.jpg", "from": 18, "place": "施针、泗水码头、军棍、曹豹家兵、陈家",
+       "scene": "秋天：下邳城东，城墙外是泗水码头，城里是街巷和宅院。",
+       "spots": [["xz_needle", "一间安静的医馆小院"], ["xz_l3_a2", "泗水码头的盐船和货栈"], ["xz_law", "军营里的校场"], ["xz_caobao", "下邳的一条长街"], ["xz_chendeng", "一座气派的士族宅院（陈家）"]]},
+      {"src": "source/map/panels/xuzhou_5.jpg", "from": 24, "place": "谢恩宴、小沛城外 / 陶府（兴平二年春）",
+       "scene": "早春：画面左边是城里的府邸，向右出城，右边是另一座城池小沛的城墙和城外原野。",
+       "spots": [["xz_xieyan", "设宴的府邸厅堂"], ["xz_beat", "城外的大路"], ["xz_fu", "城外一座军营的营门"], ["xz_langqi", "原野上骑兵驰过的开阔地"], ["xz_xianzhen", "城墙下的营垒"]]},
+      {"src": "source/map/panels/xuzhou_6.jpg", "from": 30, "place": "小沛围城、吕布突围 / 白门、陶谦遗表（兴平二年冬）",
+       "scene": "秋末到初冬：一座被围的城池，城外连营，向右是平原上的州府。",
+       "spots": [["xz_rest2", "围城的连营营帐"], ["xz_lvbu", "城池的城门（城门洞开）"], ["xz_lvbu_gone", "城外向远方延伸的大路"], ["xz_bingzhou", "一座新扎的骑兵营地（汉代方形军帐和马厩，不要蒙古包、不要圆顶帐篷）"], ["xz_will", "州牧府的灵堂（白幡）"]]},
+      {"src": "source/map/panels/xuzhou_7.jpg", "from": 36, "place": "吕布残部、陈先生别苑、城郊、过年、南望淮南",
+       "scene": "隆冬下雪：下邳城郊，农家、园林和粮仓，最后是一座远眺南方的高坡。",
+       "spots": [["xz_l4_t1", "被丢弃的辎重车"], ["xz_chengong", "竹林里一座清静的小园林"], ["xz_d2", "城郊的田野"], ["xz_t3", "城郊的粮仓"], ["xz_feast", "挂满红灯笼的院落"], ["xz_end", "一座可以眺望南方的高坡"]]}
+    ]
   }
 }
