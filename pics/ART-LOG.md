@@ -1416,3 +1416,11 @@
 - [x] 2026-10-30 cg `n9_lulong` ← n9_lulong.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n9_end` ← n9_end.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n9_pangde` ← n9_pangde.jpg · ok
+- [x] 2026-10-31 cg `n10_guandu` ← n10_guandu.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n10_qiandu` ← n10_qiandu.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 portrait `lord_south_q` ← lord_south_q.jpg · ok
+- [x] 2026-10-31 cg `n10_pangtong` ← n10_pangtong.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 portrait `lord_north_q` ← lord_north_q.jpg · ok
+- [x] 2026-10-31 cg `n10_zhenmi` ← n10_zhenmi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n10_hulao` ← n10_hulao.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n10_lianhuan` ← n10_lianhuan.jpg 裁 2528×1696→2528×1422 · ok
