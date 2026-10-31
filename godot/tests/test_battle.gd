@@ -162,6 +162,30 @@ func test_archers_stack_a_resist_cut_that_stops_at_minus_25() -> void:
 	check(is_equal_approx(b._cut(-0.4), -0.4), "a weakness already below -25% is left as it is")
 
 
+func test_late_elites_and_bosses_wear_heavier_armor() -> void:
+	## battle.late_armor: past 黄忠 / 太史慈's join (and from 第五章 on) an elite / boss without its own 护甲 takes its troop's heavy one — 物抗 up
+	var db := GameData.get_db()
+	var inf := ""
+	for eid in db.enemies:
+		var e: Dictionary = db.enemies[eid]
+		if not e["armor_own"] and str(db.cards.get(str(e["card"]), {}).get("troop", "")) == "infantry":
+			inf = eid
+			break
+	check(inf != "", "an infantry enemy with the troop armor")
+	check_eq(db.enemies[inf]["armor"], "dunjia")
+	check_eq(Quests.late_armor("dongui", {"x": 20, "elite": true}, inf), "", "before 黄忠 joins: the troop's own")
+	check_eq(Quests.late_armor("dongui", {"x": 45, "elite": true}, inf), "zhongjia", "after 黄忠 joins: 重甲")
+	check_eq(Quests.late_armor("beihai", {"x": 50, "boss": true}, inf), "zhongjia", "after 太史慈 joins: 重甲")
+	check_eq(Quests.late_armor("jingxiang", {"x": 3}, inf), "", "a plain fight keeps the troop armor")
+	check_eq(Quests.late_armor("jingxiang", {"x": 3, "boss": true}, inf), "zhongjia", "第五章 on: every elite / boss")
+	var heavy := Quests.with_armor(db.enemies[inf], "zhongjia")
+	check(float(heavy["phys_resist"]) > float(db.enemies[inf]["phys_resist"]), "物抗 goes up")
+	for eid in db.enemies:
+		if db.enemies[eid]["armor_own"]:
+			check_eq(Quests.late_armor("jingxiang", {"x": 3, "boss": true}, eid), "", "a hand-set armor stays")
+			break
+
+
 func test_auto_battle_defends_when_ap_is_full() -> void:
 	## nothing worth playing and AP at its cap: 自动 guards instead of ending the round
 	var b := new_battle()

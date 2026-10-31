@@ -1378,7 +1378,7 @@ func _apply_dlg_size() -> void:
 func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 	var db := GameData.get_db()
 	var sc: Dictionary = db.scenarios[fight["battle"]]
-	var e: Dictionary = db.enemies[sc["enemy"]]
+	var e: Dictionary = Quests.with_armor(db.enemies[sc["enemy"]], Quests.late_armor(Game.save.quest, s, sc["enemy"]))
 	var tags := ""
 	if s["boss"]:
 		tags += "[color=%s][b]首领战[/b][/color]　" % Kit.c("purple").to_html()

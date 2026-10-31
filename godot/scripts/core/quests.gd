@@ -328,6 +328,50 @@ static func enemy_scales(save: SaveData) -> Array:
 	return [1.0, 1.0]
 
 
+static func late_armor(qid: String, sq: Dictionary, enemy_id: String) -> String:
+	## the 护甲 a late elite / boss fight swaps in (battle.late_armor: from chapter `from_order`, or past `from_x` of that chapter — 太史慈 / 黄忠
+	## join there); "" when it keeps its own: not an elite / boss, too early, the enemy writes its own `armor`, or its troop is not in the table
+	var db := GameData.get_db()
+	var cfg: Dictionary = db.battle.get("late_armor", {})
+	if cfg.is_empty() or not (sq.get("boss", false) or sq.get("elite", false)) or not db.enemies.has(enemy_id):
+		return ""
+	var e: Dictionary = db.enemies[enemy_id]
+	if e.get("armor_own", false):
+		return ""
+	var order := int(db.battle.get("scaling", {}).get("order", {}).get(qid, -1))
+	var fx: Dictionary = cfg.get("from_x", {})
+	if not (order >= int(cfg.get("from_order", 99)) or (fx.has(qid) and int(sq.get("x", 0)) >= int(fx[qid]))):
+		return ""
+	var troop := str(db.cards.get(str(e.get("card", "")), {}).get("troop", ""))
+	return str(cfg.get("troop", {}).get(troop, ""))
+
+
+static func with_armor(e: Dictionary, armor: String) -> Dictionary:
+	## the enemy with that 护甲's resists in place of its own (the same dict when armor is "")
+	if armor == "":
+		return e
+	var a: Dictionary = GameData.get_db().battle["armors"][armor]
+	var out := e.duplicate(true)
+	out["armor"] = armor
+	out["phys_resist"] = float(a["phys"])
+	out["magic_resist"] = float(a["magic"])
+	return out
+
+
+static func armor_here(save: SaveData) -> String:
+	## late_armor of the fight on the current square
+	var db := GameData.get_db()
+	for q in db.quests:
+		if q["id"] != save.quest:
+			continue
+		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		var bid: String = str(sq.get("battle", "")) if str(sq.get("battle", "")) != "" else str(save.event_battle.get("battle", ""))
+		if sq.is_empty() or bid == "" or not db.scenarios.has(bid):
+			return ""
+		return late_armor(q["id"], sq, str(db.scenarios[bid]["enemy"]))
+	return ""
+
+
 static func enemy_tier(save: SaveData) -> String:
 	## "normal" / "elite" / "boss" / "lose" (same rule as enemy_scales) of the fight on the current square; "normal" off a battle square
 	var db := GameData.get_db()
@@ -356,7 +400,7 @@ static func mods(save: SaveData) -> Dictionary:
 	var db := GameData.get_db()
 	var out := {"enemy": save.danger * float(db.battle["danger_step"]) + save.difficulty * float(db.battle["difficulty_step"]) + ramp(save),
 		"enemy_scale": enemy_scales(save)[0], "enemy_scale_at": enemy_scales(save)[1],
-		"enemy_tier": enemy_tier(save)}
+		"enemy_tier": enemy_tier(save), "armor": armor_here(save)}
 	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
 	if save.fate != "" and db.fates.has(save.fate):
 		sources.append(db.fates[save.fate])  # 天命 of this run

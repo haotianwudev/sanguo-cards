@@ -78,8 +78,12 @@
       "zhajia": {"name": "札甲", "phys": 0.25, "magic": -0.25, "hint": "铁札甲挡刀枪，挡不住火"},
       "qingqi": {"name": "轻骑", "phys": -0.25, "magic": 0.25, "hint": "马快，计谋追不上；近身一刀就落马"},
       "qingzhuang": {"name": "轻装", "phys": -0.3, "magic": 0.2, "hint": "躲在后排放箭，近身就慌"},
-      "buyi": {"name": "布衣", "phys": -0.3, "magic": 0.0, "hint": "破衣烂衫，挨一刀就倒"}
+      "buyi": {"name": "布衣", "phys": -0.3, "magic": 0.0, "hint": "破衣烂衫，挨一刀就倒"},
+      "jingjia": {"name": "精甲", "phys": 0.4, "magic": -0.4, "hint": "精锐披甲，刀箭难伤；怕火怕计"}
     },
+    "_late_armor": "后期的精英 / 首领（用户要求：太史慈、黄忠入队之后，抗性要明显，尤其物抗）：第 from_order 章（scaling.order）起，以及 from_x 里那一章入队格之后的列，精英 / 首领战的敌人没写 armor 的，按兵种换成这里的护甲；写了 armor 的照旧",
+    "late_armor": {"from_order": 4, "from_x": {"dongui": 39, "beihai": 47},
+      "troop": {"infantry": "zhongjia", "spear": "zhongjia", "cavalry": "jingjia", "archer": "jingjia", "logistics": "jingjia", "bandit": "manjia", "strategist": "moushi"}},
     "_troop_armor": "没写 armor 的敌人按它那张卡的兵种拿护甲（用户要求：抗性要鲜明，带盾的步兵物抗至少 25%、怕法术）；写了 armor 的照旧；没有卡或兵种不在表里的（野兽、主公兵）用自己写的 phys_resist / magic_resist",
     "troop_armor": {"infantry": "dunjia", "spear": "zhajia", "cavalry": "qingqi", "archer": "qingzhuang", "bandit": "buyi", "logistics": "buyi", "strategist": "moushi"},
     "enemy_hp_per_extra_leader": 0.083,

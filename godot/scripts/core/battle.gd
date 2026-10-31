@@ -74,6 +74,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	b.scenario = b.db.scenarios[scenario_id]
 	var e: Dictionary = b.db.enemies[b.scenario["enemy"]].duplicate(true)
 	b.mods = mods
+	e = Quests.with_armor(e, str(mods.get("armor", "")))  # a late elite / boss's 护甲 (battle.late_armor)
 	var afx: Dictionary = mods.get("affix", {})  # 词缀 on an elite / boss (see Quests.affix_here)
 	e["phys_resist"] = minf(0.8, float(e["phys_resist"]) + float(afx.get("phys_resist", 0.0)))
 	e["magic_resist"] = minf(0.8, float(e["magic_resist"]) + float(afx.get("magic_resist", 0.0)))
