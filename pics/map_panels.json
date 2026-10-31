@@ -25,14 +25,29 @@
   },
   "luoyang_n": {
     "quest": "luoyang_n",
+    "style_refs": ["godot/data/art/map/yecheng.jpg", "godot/data/art/map/luoyang_n.jpg"],
     "panels": [
-      {"src": "source/map/panels/luoyang_n_1.jpg", "from": 0, "place": "黄河古道、渡口、车队营地（早春）"},
-      {"src": "source/map/panels/luoyang_n_2.jpg", "from": 6, "place": "酸枣会盟大营、诸侯宴、曹操借粮"},
-      {"src": "source/map/panels/luoyang_n_3.jpg", "from": 12, "place": "荥阳道、林地、汴水"},
-      {"src": "source/map/panels/luoyang_n_4.jpg", "from": 19, "place": "酸枣废营、兵临虎牢"},
-      {"src": "source/map/panels/luoyang_n_5.jpg", "from": 25, "place": "虎牢关前、车帘后"},
-      {"src": "source/map/panels/luoyang_n_6.jpg", "from": 31, "place": "驻军、洛阳火、难民（初夏）"},
-      {"src": "source/map/panels/luoyang_n_7.jpg", "from": 37, "place": "河岸险路、黄河渡口、回冀州"}
+      {"src": "source/map/panels/luoyang_n_1.jpg", "from": 0, "place": "黄河古道、渡口、车队营地（早春）",
+       "scene": "早春（冰雪刚化，草色返青）：黄河北岸的古道和渡口，浑黄的黄河在画面上方横过。",
+       "spots": [["ln_river", "黄河边的木码头和几条渡船"], ["ln_lvlingqi", "古道边一道黄土坡"], ["ln_camp", "粮车围成一圈的车队营地和篝火"], ["ln_loot1", "古道边一座破旧的驿亭"]]},
+      {"src": "source/map/panels/luoyang_n_2.jpg", "from": 6, "place": "酸枣会盟大营、诸侯宴、曹操借粮",
+       "scene": "春天：酸枣诸侯会盟，原野上连绵的营帐。",
+       "spots": [["ln_mutiny_road", "官道上翻倒的粮车"], ["ln_banner", "一座商号的大帐和一排货车"], ["ln_feast", "土筑的会盟高台和宴饮的大帐"], ["ln_caocao", "一座单独的营寨，营帐整齐"]]},
+      {"src": "source/map/panels/luoyang_n_3.jpg", "from": 12, "place": "荥阳道、林地、汴水",
+       "scene": "春天：荥阳道，大路穿过丘陵和树林，通到汴水河边。",
+       "spots": [["ln_pursuit", "路边起伏的丘陵"], ["ln_ambush", "茂密的树林"], ["ln_mystery_forest", "林间小路和一间猎户木屋"], ["ln_xurong", "汴水河岸的芦苇荡"], ["ln_rescue", "河边的一片小树林"]]},
+      {"src": "source/map/panels/luoyang_n_4.jpg", "from": 19, "place": "酸枣废营、兵临虎牢",
+       "scene": "暮春：从酸枣通往虎牢关的平原，远处山口隐约是关城。",
+       "spots": [["ln_rest2", "联军的营地"], ["ln_rest2_t", "一座残破的旧营寨"], ["ln_camp_raid", "营外的木栅栏和拒马"], ["ln_feixiong", "关前的土坡营垒"], ["ln_langqi", "一片着火冒烟的营帐"]]},
+      {"src": "source/map/panels/luoyang_n_5.jpg", "from": 25, "place": "虎牢关前、车帘后",
+       "scene": "暮春：虎牢关，关城卡在两山之间的山口。",
+       "spots": [["ln_rest3", "关前的小营地"], ["ln_lvbu", "雄伟的虎牢关关城和关楼"], ["ln_box2", "关前散落的辎重堆"]]},
+      {"src": "source/map/panels/luoyang_n_6.jpg", "from": 31, "place": "驻军、洛阳火、难民（初夏）",
+       "scene": "初夏：远方地平线上洛阳城正在燃烧，天空被火光映红、浓烟滚滚。",
+       "spots": [["ln_handhold", "路边一辆带车帘的马车"], ["ln_wait", "联军驻扎的营地"], ["ln_blaze", "远处燃烧的洛阳城（火光和浓烟）"], ["ln_guosi", "西凉军的营栅"], ["ln_refugees", "逃难百姓的推车和篝火"]]},
+      {"src": "source/map/panels/luoyang_n_7.jpg", "from": 37, "place": "河岸险路、黄河渡口、回冀州",
+       "scene": "初夏：黄河南岸，河滩和渡口，对岸大路通向冀州。",
+       "spots": [["ln_night_talk", "小土丘上的一堆篝火"], ["ln_rear_guard", "河岸的高坡"], ["ln_mystery_retreat", "河滩上的险路和乱石"], ["ln_ferry", "黄河渡口的码头和渡船"], ["ln_end", "北岸通向远方平原的大路"]]}
     ]
   }
 }
