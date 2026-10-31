@@ -4068,6 +4068,24 @@
         0.42
       ],
       "head": 0.24
+    },
+    "lord_south_q": {
+      "src": "source/generals/lord_south_q.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.47,
+        0.27
+      ],
+      "head": 0.24
+    },
+    "lord_north_q": {
+      "src": "source/generals/lord_north_q.jpg",
+      "license": "用户提供（Gemini 生成）",
+      "face": [
+        0.5,
+        0.25
+      ],
+      "head": 0.24
     }
   },
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",

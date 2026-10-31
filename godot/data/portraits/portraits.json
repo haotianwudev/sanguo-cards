@@ -451,5 +451,7 @@
   "rc_sanfang": {"file": "rc_sanfang.jpg", "face": [0.38, 0.42], "head": 0.24},
   "lord_north_snow": {"file": "lord_north_snow.jpg", "face": [0.5, 0.42], "head": 0.24},
   "rc_luoyang_s": {"file": "rc_luoyang_s.jpg", "face": [0.48, 0.42], "head": 0.24},
-  "lord_south_river": {"file": "lord_south_river.jpg", "face": [0.48, 0.42], "head": 0.24}
+  "lord_south_river": {"file": "lord_south_river.jpg", "face": [0.48, 0.42], "head": 0.24},
+  "lord_south_q": {"file": "lord_south_q.jpg", "face": [0.47, 0.27], "head": 0.24},
+  "lord_north_q": {"file": "lord_north_q.jpg", "face": [0.5, 0.25], "head": 0.24}
 }

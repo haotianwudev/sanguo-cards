@@ -7,6 +7,10 @@ const COL_W := 150.0
 const LANE_H := 104.0
 const SQ := 74.0
 const MAP_TOP := 22.0
+const LABEL_FS := 15  # square name plates: 13 was too small on a phone
+const TOKEN := Vector2(80, 80)  # the chibi hero
+## where the hero stands relative to a square's centre: just left of the icon, so it never covers it
+const TOKEN_FOOT := Vector2(-SQ * 0.62, SQ * 0.30)
 
 var toast := ""
 var q: Dictionary
@@ -61,6 +65,7 @@ var _top: HBoxContainer
 var _title: Label
 var _busy := false
 var _bob: Tween
+var _token_spr: Control
 var _progress: ProgressBar
 
 
@@ -156,15 +161,24 @@ class MapNode extends Control:
 			var glyph_ink := Color(1.0, 0.94, 0.82) if state != "visited" else Color(0.65, 0.62, 0.58)
 			draw_string(f, at, glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30, glyph_ink)
 
-		# 3. Visited Victory Stamp: Cinnabar vermilion seal in bottom-right corner
-		if state == "visited":
+		# 3. Victory stamp: a cinnabar 胜 seal on won battles only (a passed story square is just greyed)
+		if state == "visited" and kind in ["boss", "elite", "battle"]:
 			var c := center + Vector2(s.x * 0.28, s.y * 0.28)
 			draw_circle(c, 11, Color(0.82, 0.18, 0.12, 0.95))
 			draw_arc(c, 11, 0, TAU, 24, Color(1, 0.88, 0.78, 0.9), 1.2, true)
 			var sf: Font = Kit.name_font(13, 0)
-			var seal_txt := "胜" if (kind == "boss" or kind == "elite" or kind == "battle") else "通"
+			var seal_txt := "胜"
 			var ss := sf.get_string_size(seal_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 13)
 			draw_string(sf, c + Vector2(-ss.x * 0.5, 4.5), seal_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1, 0.96, 0.9))
+
+
+class MapToken extends Control:
+	## the hero's holder: draws a soft ground shadow under the feet (the sprite child bobs above it)
+	func _draw() -> void:
+		var c := Vector2(size.x / 2.0, size.y - 3.0)
+		draw_set_transform(c, 0.0, Vector2(1.0, 0.32))
+		draw_circle(Vector2.ZERO, size.x * 0.30, Color(0, 0, 0, 0.38))
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 
 class MapLines extends Control:
@@ -176,6 +190,8 @@ class MapLines extends Control:
 	var t := 0.0
 
 	func _process(delta: float) -> void:
+		if not is_visible_in_tree():  # CG mode hides the map: don't redraw roads nobody sees
+			return
 		t += delta
 		if not halos.is_empty() or here.x > -900:
 			queue_redraw()
@@ -449,7 +465,7 @@ func _rebuild_map() -> void:
 		b.tooltip_text = full_title
 		
 		if needs_plaque:
-			var lbl := Kit.label(full_title, 13, "text")
+			var lbl := Kit.label(full_title, LABEL_FS, "text")
 			lbl.add_theme_color_override("font_color", Color(1.0, 0.95, 0.85))
 			var plaque := Kit.box(Color(0.12, 0.08, 0.06, 0.92), 3, 1, Color(0.82, 0.68, 0.38, 0.9), 0)
 			plaque.content_margin_left = 6
@@ -458,9 +474,9 @@ func _rebuild_map() -> void:
 			plaque.content_margin_bottom = 2
 			lbl.add_theme_stylebox_override("normal", plaque)
 			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x + 14
+			var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, LABEL_FS).x + 14
 			lbl.position = _pos(s) + Vector2(-w / 2.0, SQ / 2.0 + 3)
-			lbl.size = Vector2(w, 20)
+			lbl.size = Vector2(w, LABEL_FS + 8)
 			lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			_layer.add_child(lbl)
 			_labels.append(lbl)
@@ -469,23 +485,30 @@ func _rebuild_map() -> void:
 		_nodes[s["id"]] = b
 		if not Quests.is_open(s, Game.save):
 			_ghosts[s["id"]] = true
-	var token_tex: Texture2D = Kit.token_icon()
+	# the hero token: a holder (moves along the road) with a ground shadow and the chibi sprite (waddles / breathes)
+	var holder := MapToken.new()
+	holder.size = TOKEN
+	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	holder.z_index = 5
+	var token_tex: Texture2D = Kit.token_icon(Game.save.is_north())
+	var spr: Control
 	if token_tex != null:
 		var tr := TextureRect.new()
 		tr.texture = token_tex
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.size = Vector2(48, 48)
-		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		tr.z_index = 5
-		_token = tr
+		spr = tr
 	else:
 		var p := Panel.new()
 		p.add_theme_stylebox_override("panel", Kit.box(Kit.c("red"), 14, 3, Color.WHITE, 0))
-		p.size = Vector2(30, 30)
-		p.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		p.z_index = 5
-		_token = p
+		spr = p
+	spr.name = "Sprite"
+	spr.size = TOKEN
+	spr.pivot_offset = Vector2(TOKEN.x / 2.0, TOKEN.y)  # rock on the feet
+	spr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	holder.add_child(spr)
+	_token = holder
+	_token_spr = spr
 	_layer.add_child(_token)
 
 
@@ -656,13 +679,15 @@ func _refresh() -> void:
 
 
 func _bob_token() -> void:
-	## the party token breathes on its square (killed while it walks)
+	## the hero breathes on its square (squash and stretch on the feet; killed while it walks)
 	if _bob != null and _bob.is_valid():
 		_bob.kill()
-	var base := _token.position
-	_bob = _token.create_tween().set_loops()
-	_bob.tween_property(_token, "position:y", base.y - 6, 0.6).set_trans(Tween.TRANS_SINE)
-	_bob.tween_property(_token, "position:y", base.y, 0.6).set_trans(Tween.TRANS_SINE)
+	_token_spr.rotation = 0.0
+	_token_spr.position = Vector2.ZERO
+	_token_spr.scale = Vector2.ONE
+	_bob = _token_spr.create_tween().set_loops()
+	_bob.tween_property(_token_spr, "scale", Vector2(0.97, 1.04), 0.7).set_trans(Tween.TRANS_SINE)
+	_bob.tween_property(_token_spr, "scale", Vector2.ONE, 0.7).set_trans(Tween.TRANS_SINE)
 
 
 func _update_progress(ahead: Dictionary) -> void:
@@ -760,7 +785,58 @@ func _center_on(s: Dictionary) -> void:
 # ---- moving --------------------------------------------------------------------
 
 func _token_dest(s: Dictionary) -> Vector2:
-	return _pos(s) - Vector2(_token.size.x / 2.0, SQ * 0.40 + _token.size.y * 0.55)
+	## the holder's top-left for the hero standing at square s (feet at TOKEN_FOOT from its centre)
+	return _foot_to_pos(_pos(s) + TOKEN_FOOT)
+
+
+func _foot_to_pos(foot: Vector2) -> Vector2:
+	return foot - Vector2(TOKEN.x / 2.0, TOKEN.y)
+
+
+func _walk_to(target: Dictionary) -> void:
+	## the chibi hero walks the curved road to the target square: waddling, a hop on every step, a squash on landing
+	if _bob != null and _bob.is_valid():
+		_bob.kill()
+	_token_spr.position = Vector2.ZERO
+	_token_spr.scale = Vector2.ONE
+	var from: Vector2 = _token.position + Vector2(TOKEN.x / 2.0, TOKEN.y)
+	var to: Vector2 = _pos(target) + TOKEN_FOOT
+	var cur: Dictionary = q["squares"].get(Game.save.square, {})
+	var pts: PackedVector2Array
+	if not cur.is_empty() and _pos(cur) + TOKEN_FOOT == from:
+		pts = MapLines._curve(from, to)  # follow the road's own bend
+	else:
+		pts = PackedVector2Array([from, to])
+	var length := 0.0
+	for i in pts.size() - 1:
+		length += pts[i].distance_to(pts[i + 1])
+	var secs := clampf(length / 260.0, 0.35, 1.1)
+	var steps := maxf(2.0, round(length / 38.0))  # one hop per ~38 px of road
+	var tw := create_tween()
+	tw.tween_method(func(k: float) -> void:
+		_token.position = _foot_to_pos(_along(pts, length, k))
+		var ph := k * steps * PI
+		_token_spr.rotation = sin(ph) * 0.13
+		_token_spr.position.y = -absf(sin(ph)) * 7.0
+	, 0.0, 1.0, secs)
+	await tw.finished
+	_token_spr.rotation = 0.0
+	_token_spr.position.y = 0.0
+	var land := create_tween()
+	land.tween_property(_token_spr, "scale", Vector2(1.12, 0.86), 0.07)
+	land.tween_property(_token_spr, "scale", Vector2.ONE, 0.16).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	await land.finished
+
+
+static func _along(pts: PackedVector2Array, length: float, k: float) -> Vector2:
+	## the point a fraction k of the way along a polyline
+	var want := length * k
+	for i in pts.size() - 1:
+		var seg := pts[i].distance_to(pts[i + 1])
+		if want <= seg or i == pts.size() - 2:
+			return pts[i].lerp(pts[i + 1], clampf(want / maxf(seg, 0.001), 0.0, 1.0))
+		want -= seg
+	return pts[pts.size() - 1]
 
 
 func _on_square(sid: String) -> void:
@@ -768,14 +844,7 @@ func _on_square(sid: String) -> void:
 		return
 	_busy = true
 	var target: Dictionary = q["squares"][sid]
-	if _bob != null and _bob.is_valid():
-		_bob.kill()
-	var tw := create_tween()
-	var dest := _token_dest(target)
-	tw.tween_property(_token, "position", (_token.position + dest) / 2.0 + Vector2(0, -34), 0.16).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tw.tween_property(_token, "position", dest + Vector2(0, -10), 0.14).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tw.tween_property(_token, "position", dest, 0.14).set_trans(Tween.TRANS_BOUNCE)
-	await tw.finished
+	await _walk_to(target)
 	if _nodes.has(sid):
 		Kit.pop(_nodes[sid], 1.2, 0.1)
 	Sfx.play("step")  # the token lands

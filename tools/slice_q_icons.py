@@ -6,7 +6,7 @@ import numpy as np
 from scipy.ndimage import label, binary_dilation
 
 SHEET_PATH = Path("F:/workspace/sanguo-cards/pics/inbox/ui_map_icons_sheet.png")
-OUT_DIR = Path("C:/Users/lswht/.gemini/antigravity/brain/bf8bf3b1-0945-4ff8-a79c-7122d8ed5099/scratch/icons_preview")
+OUT_DIR = Path(__file__).resolve().parents[1] / "pics" / "inbox" / "_icons_preview"  # previews only, not shipped
 GODOT_DIR = Path("F:/workspace/sanguo-cards/godot/data/art/map/icons")
 PICS_DIR = Path("F:/workspace/sanguo-cards/pics/source/map/icons")
 OUT_DIR.mkdir(parents=True, exist_ok=True)

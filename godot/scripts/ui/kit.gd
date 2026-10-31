@@ -212,11 +212,17 @@ static func map_icon(kind: String) -> Texture2D:
 	return _textures[key]
 
 
-static func token_icon() -> Texture2D:
-	var key := "token:lord"
+static func token_icon(north := false) -> Texture2D:
+	## the chibi hero who walks the map: token_lord_<route>.png, else the old generic token_lord.png
+	var route := "north" if north else "south"
+	var key := "token:" + route
 	if not _textures.has(key):
-		var path := "res://data/art/map/token_lord.png"
-		_textures[key] = load(path) if ResourceLoader.exists(path) else null
+		var tex: Texture2D = null
+		for path in ["res://data/art/map/token_lord_%s.png" % route, "res://data/art/map/token_lord.png"]:
+			if ResourceLoader.exists(path):
+				tex = load(path)
+				break
+		_textures[key] = tex
 	return _textures[key]
 
 

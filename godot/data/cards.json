@@ -161,7 +161,9 @@
       "lord_south_casual",
       "lord_south_sleep",
       "lord_north_casual",
-      "lord_north_sleep"
+      "lord_north_sleep",
+      "lord_south_q",
+      "lord_north_q"
     ],
     "forms": {
       "lord_south_river": {
@@ -320,6 +322,24 @@
         "at": 74,
         "skills": [],
         "art": false
+      },
+      "lord_south_q": {
+        "name": "主公·Q版",
+        "route": "south",
+        "rarity": "R",
+        "hp": 68,
+        "at": 74,
+        "skills": [],
+        "art": true
+      },
+      "lord_north_q": {
+        "name": "主公·Q版",
+        "route": "north",
+        "rarity": "R",
+        "hp": 68,
+        "at": 74,
+        "skills": [],
+        "art": true
       }
     }
   },
