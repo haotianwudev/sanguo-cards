@@ -416,9 +416,10 @@ func demo(name: String) -> void:
 				if a.begins_with("--at="):
 					at = a.substr(5)
 			var path := ["ln_river", "ln_charge", "ln_lvlingqi", "ln_camp", "ln_rest1", "ln_mutiny_road", "ln_mutiny2",
-				"ln_banner", "ln_feast", "ln_caocao", "ln_lend", "ln_zhen", "ln_pursuit", "ln_ambush", "ln_ambush2", "ln_xurong", "ln_rescue",
+				"ln_banner", "ln_feast", "ln_caocao", "ln_lend", "ln_lend_c", "ln_zhen", "ln_pursuit", "ln_ambush", "ln_ambush2", "ln_xurong", "ln_rescue",
 				"ln_rest2", "ln_camp_raid", "ln_camp_raid2", "ln_approach", "ln_feixiong", "ln_langqi", "ln_rest3", "ln_lvbu",
-				"ln_triple", "ln_box1", "ln_box2", "ln_box3", "ln_handhold", "ln_wait", "ln_blaze", "ln_ferry", "ln_end"]
+				"ln_triple", "ln_box1", "ln_box2", "ln_box3", "ln_handhold", "ln_wait", "ln_blaze", "ln_cao_march", "ln_guosi",
+				"ln_refugees", "ln_night_talk", "ln_rear_guard", "ln_rear_guard2", "ln_ferry", "ln_end"]
 			for sid in path:
 				Quests.resolve(q, save, rng, 0 if Quests.here(q, save)["type"] == "choose" else -1)
 				Quests.move(q, save, sid)
