@@ -1237,6 +1237,35 @@
         }
       ]
     },
+    "taiguan_sishou": {
+      "name": "抬棺死守",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        },
+        {
+          "type": "counter",
+          "power": 0.4
+        }
+      ]
+    },
+    "juesi_yizhan": {
+      "name": "决死一斩",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "counter",
+          "power": 0.5
+        }
+      ]
+    },
     "huoji": {
       "name": "火计",
       "cost": 6,

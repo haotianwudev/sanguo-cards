@@ -4439,7 +4439,11 @@
     "pangde": {
       "name": "庞德",
       "rarity": "SR",
-      "troop": "cavalry",
+      "troop": "infantry",
+      "skills": [
+        "taiguan_sishou",
+        "juesi_yizhan"
+      ],
       "hp": 68,
       "at": 96,
       "scope": "north"
