@@ -1424,3 +1424,17 @@
 - [x] 2026-10-31 cg `n10_zhenmi` ← n10_zhenmi.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-31 cg `n10_hulao` ← n10_hulao.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-31 cg `n10_lianhuan` ← n10_lianhuan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 map `prologue_north` ← prologue_north_strip.jpg · ok
+- [x] 2026-10-31 map `luoyang_n` ← luoyang_n_strip.jpg · ⚠ 分辨率偏低 8192×500
+- [x] 2026-10-31 map `prologue_north` ← prologue_north_strip.jpg · ok
+- [x] 2026-10-31 map `luoyang_n` ← luoyang_n_strip.jpg · ⚠ 分辨率偏低 8192×500
+- [x] 2026-10-31 map `heishan` ← heishan_strip.jpg · 强制：太小 8192×478（至少高 480）
+- [x] 2026-10-31 map `beihai` ← beihai_strip.jpg · 强制：太小 8192×421（至少高 480）
+- [x] 2026-10-31 map `xuzhou` ← xuzhou_strip.jpg · ⚠ 分辨率偏低 8192×500
+- [x] 2026-10-31 cg `n11_start` ← n11_start.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n11_huishi` ← n11_huishi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n11_kongming` ← n11_kongming.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n11_beimen` ← n11_beimen.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n11_jianlou` ← n11_jianlou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n11_g_xiaoxi` ← n11_g_xiaoxi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-31 cg `n11_guanzhang` ← n11_guanzhang.jpg 裁 2528×1696→2528×1422 · ok
