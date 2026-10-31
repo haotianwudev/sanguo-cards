@@ -41,6 +41,7 @@ func test_public_generals_need_a_perk_from_the_second_lap() -> void:
 	var first := SaveData.create()
 	check(first.public_open(), "the first 周目 has the public pool")
 	var n := _lap2()
+	n.apply_prep()
 	check(not n.public_open(), "a later 周目 starts without it")
 	var public_ids := func(s: SaveData) -> Array:
 		var out: Array = []
@@ -58,6 +59,7 @@ func test_public_generals_need_a_perk_from_the_second_lap() -> void:
 func test_all_generals_opens_story_only_ones() -> void:
 	var db := GameData.get_db()
 	var n := _lap2()
+	n.apply_prep()
 	n.perks["all_generals"] = 1
 	var story_only := db.cards.values().filter(func(c): return not c["soldier"] and not c.get("beast", false) and not db.is_public(c["id"]) \
 			and not SaveData.is_lord_card(c["id"]) and c.get("scope", "") in ["", n.route()])
@@ -199,3 +201,32 @@ func test_relics_can_be_bought_and_are_worn_from_the_start() -> void:
 	check(n.kept_relics.has(a) and n.kept_relics.has(b), "kept from the first chapter on")
 	Quests.begin(db.quests[0], n)
 	check(n.relics.has(b), "a chapter starts with them")
+
+
+func test_an_old_save_loads_without_the_new_fields() -> void:
+	## a 周目 2 save written before 前尘整备 existed: none of the new fields are in it
+	var old := _lap2()
+	old.owned = ["machao", "zhaoyun"]
+	old.party = ["machao", "zhaoyun"]
+	var d := old.to_dict()
+	for f in ["perks", "prep_cards", "prep_relics", "prep_pending", "lord_out", "extra_pick_open"]:
+		d.erase(f)
+	var s := SaveData.from_dict(JSON.parse_string(JSON.stringify(d)))
+	check_eq(s.lap, 2)
+	check(s.lord_fields() and s.field_leaders().size() == s.party_leaders().size(), "the lord still fields")
+	check_eq(s.prep_spent(), 0)
+	check_eq(s.offer_extra(), 0)
+	check(not s.pick_again("x"))
+	var m := Quests.mods(s)
+	check(not m.has("ap_max") and not m.has("ap_round"), "no perk mods")
+
+
+func test_perks_survive_a_save_and_load() -> void:
+	var n := _lap2()
+	n.perks = {"ap_max": 2, "lord_bench": 1}
+	n.prep_relics = ["jiunang"]
+	n.apply_prep()
+	n.lord_out = true
+	var s := SaveData.from_dict(JSON.parse_string(JSON.stringify(n.to_dict())))
+	check(s.perk("ap_max") == 2 and typeof(s.perks["ap_max"]) == TYPE_INT, "perk counts come back as ints")
+	check(s.lord_out and s.prep_relics == ["jiunang"] and s.kept_relics.has("jiunang"))
