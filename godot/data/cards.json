@@ -1182,7 +1182,7 @@
     "liaohua": {
       "name": "廖化",
       "rarity": "C",
-      "troop": "infantry",
+      "troop": "bandit",
       "hp": 56,
       "at": 64,
       "skills": [
@@ -2999,11 +2999,10 @@
     "gongsunzan": {
       "name": "公孙瓒",
       "rarity": "SR",
-      "troop": "spear",
+      "troop": "archer",
       "hp": 72,
       "at": 92,
       "skills": [
-        "qiangpo",
         "baimajiang"
       ],
       "pool": false,
@@ -3251,7 +3250,7 @@
     "xiahouyuan": {
       "name": "夏侯渊",
       "rarity": "SR",
-      "troop": "cavalry",
+      "troop": "archer",
       "hp": 64,
       "at": 96,
       "scope": "north"
