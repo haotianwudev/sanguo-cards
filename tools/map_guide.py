@@ -42,10 +42,16 @@ def chapter(key):
     return cfg, quest
 
 
-def square_pos(quest, x_min, x_max):
+def square_pos(quest, x_min, x_max, key=""):
     sq = {k: s for k, s in quest["squares"].items() if s["x"] >= x_min and (x_max is None or s["x"] <= x_max)}
     min_y = min(s["y"] for s in sq.values())
-    return {k: (90 + (s["x"] - x_min) * COL_W, MAP_TOP + 50 + (s["y"] - min_y) * LANE_H) for k, s in sq.items()}, sq
+    nudge = json.loads((ROOT / "godot/data/map_nudge.json").read_text(encoding="utf-8")).get(key, {})
+
+    def at(k, s):  # same as map_screen._pos, hand nudges included
+        dx, dy = (max(-70, min(70, v)) for v in nudge.get(k, [0, 0]))
+        return (90 + (s["x"] - x_min) * COL_W + dx, MAP_TOP + 50 + (s["y"] - min_y) * LANE_H + dy)
+
+    return {k: at(k, s) for k, s in sq.items()}, sq
 
 
 def edges(sq):
@@ -71,7 +77,7 @@ def sketches(key):
     cfg, quest = chapter(key)
     x_min = cfg.get("x_min", 0)
     gw, gh = geometry(quest, x_min, cfg.get("x_max"))
-    pos, sq = square_pos(quest, x_min, cfg.get("x_max"))
+    pos, sq = square_pos(quest, x_min, cfg.get("x_max"), key)
     panels = sorted(cfg["panels"], key=lambda p: p["from"])
     cuts = [0] + [90 + (p["from"] - x_min) * COL_W - COL_W / 2 for p in panels[1:]] + [gw]
     OUT.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,18 @@
+{
+  "_doc": "地图格子的像素微调：{地图 key: {格子 id: [dx, dy]}}，把格子挪到背景里对应的地标上（map_screen._pos 读，±70 以内，不会越出自己那一列）。图标、名字牌、道路、小人都跟着走；tools/map_guide.py 画草图时也用这里的位置。",
+  "prologue_north": {
+    "jz_ambush": [0, 25],
+    "jz_zuoci": [-20, 60],
+    "jz_zy_gate": [-45, 15],
+    "jz_zy_altar": [50, -10],
+    "jz_reunite": [10, 60],
+    "jz_reunite_g": [10, 60]
+  },
+  "luoyang_n": {
+    "ln_feixiong": [-30, 30],
+    "ln_langqi": [-50, -35],
+    "ln_handhold": [0, 60],
+    "ln_blaze": [40, -60],
+    "ln_refugees": [0, 60]
+  }
+}
