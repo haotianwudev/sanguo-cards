@@ -576,6 +576,15 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 	return save.offer.map(func(c): return db.cards[c])
 
 
+static func offer_rerollable(q: Dictionary, save: SaveData) -> bool:
+	## 三顾茅庐: a 招贤 square whose offer is dealt at random (not a chapter's short list shown whole), not yet dealt again
+	q = view(q, save)
+	var sq := here(q, save)
+	if sq["type"] != "recruit" or save.perk("reroll") <= 0 or save.offer_rerolled or save.offer_kind != "":
+		return false
+	return pools(q, save, sq)["recruit_pool"].is_empty() or not sq["recruit_pool"].is_empty()
+
+
 static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, choice: int = -1) -> Array:
 	## Resolve the current square (battles: only after a win). Returns the cards gained.
 	q = view(q, save)
@@ -620,6 +629,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 					return gained
 			save.offer = []
 			save.extra_pick_open = false
+			save.offer_rerolled = false
 		"mystery":
 			# called after the event's fight was won, or with the pick from the pick-one it opened
 			if not save.event_battle.is_empty():
@@ -927,7 +937,8 @@ static func grant_lord_form(q: Dictionary, save: SaveData, rng: RandomNumberGene
 
 static func merit_earned(save: SaveData) -> int:
 	var m: Dictionary = GameData.get_db().gacha["merit"]
-	return save.run_battles * int(m["per_battle"]) + save.run_bosses * int(m["per_boss"])
+	var n := save.run_battles * int(m["per_battle"]) + save.run_bosses * int(m["per_boss"])
+	return int(round(n * (1.5 if save.perk("merit_up") > 0 else 1.0)))  # 前尘整备「功成名就」
 
 
 static func pay_merit(q: Dictionary, save: SaveData) -> int:

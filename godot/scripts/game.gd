@@ -229,6 +229,9 @@ func demo(name: String) -> void:
 	for a in OS.get_cmdline_user_args():  # any --demo: --dlg=auto|mid|small, the CG text box size (the 框 button)
 		if a.begins_with("--dlg="):
 			options["dlg_size"] = a.trim_prefix("--dlg=")
+		if a.begins_with("--perk="):  # any --demo: --perk=reroll,foresight buys those 前尘整备 perks
+			for pid in a.trim_prefix("--perk=").split(","):
+				save.perks[pid] = 1
 	if OS.get_cmdline_user_args().has("--forms"):  # any --demo, with every lord card handed out
 		save.lord_forms = GameData.get_db().lord_forms.keys()
 	if name == "lordcards":  # 整备 on the 主公 tab with three lord cards handed out
@@ -852,7 +855,10 @@ func demo(name: String) -> void:
 			save.damage = 900
 			if name == "pick":
 				Quests.move(q, save, "draft")
-			show_screen(MapScreen.new())
+			var ms := MapScreen.new()
+			show_screen(ms)
+			if name == "pick" and OS.get_cmdline_user_args().has("--open"):  # --open: the 招贤 pick already up
+				ms.call_deferred("_open_offer", Quests.here(Quests.ensure_started(save), save))
 		"choose":
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)

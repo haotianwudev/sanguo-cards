@@ -230,3 +230,47 @@ func test_perks_survive_a_save_and_load() -> void:
 	var s := SaveData.from_dict(JSON.parse_string(JSON.stringify(n.to_dict())))
 	check(s.perk("ap_max") == 2 and typeof(s.perks["ap_max"]) == TYPE_INT, "perk counts come back as ints")
 	check(s.lord_out and s.prep_relics == ["jiunang"] and s.kept_relics.has("jiunang"))
+
+
+func test_merit_up_and_befriend() -> void:
+	var n := _lap2()
+	n.run_battles = 4
+	n.run_bosses = 1
+	var base := Quests.merit_earned(n)
+	n.perks["merit_up"] = 1
+	check_eq(Quests.merit_earned(n), int(round(base * 1.5)), "功成名就: 战功 +50%")
+	var r := RandomNumberGenerator.new()
+	var drops := [0, 0]
+	for k in 2:
+		n.perks["befriend"] = k
+		for sd in 300:
+			r.seed = sd
+			var chest := n.chest_after_battle(r, 0.0, false, [], "zhangren")
+			if chest.any(func(c): return c["id"] == "zhangren"):
+				drops[k] += 1
+	check(drops[1] > drops[0], "化敌为友: the beaten enemy's card more often (%d > %d)" % [drops[1], drops[0]])
+
+
+func test_reroll_only_where_the_offer_is_random() -> void:
+	var db := GameData.get_db()
+	var q: Dictionary = db.quests[0]
+	var n := _lap2()
+	n.perks["reroll"] = 1
+	Quests.begin(q, n)
+	n.square = "draft"  # 江东征兵: the chapter's whole short list, the same every time
+	check(not Quests.offer_rerollable(q, n), "nothing to deal again on a fixed list")
+
+
+func test_some_recruit_squares_can_be_dealt_again() -> void:
+	var db := GameData.get_db()
+	var n := _lap2()
+	n.perks["reroll"] = 1
+	var found := ""
+	for q in db.quests:
+		for sid in q["squares"]:
+			if q["squares"][sid]["type"] == "recruit" and found == "":
+				n.quest = q["id"]
+				n.square = sid
+				if Quests.offer_rerollable(q, n):
+					found = "%s/%s" % [q["id"], sid]
+	check(found != "", "a random 招贤 square exists for 三顾茅庐")

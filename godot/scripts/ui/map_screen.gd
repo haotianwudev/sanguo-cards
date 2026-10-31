@@ -1092,7 +1092,7 @@ func _show_square(s: Dictionary) -> void:
 				open.pressed.connect(_open_offer.bind(s))
 				buttons.add_child(open)
 				Kit.focus(open)
-			elif GameData.get_db().battle.get("event_random", false):
+			elif GameData.get_db().battle.get("event_random", false) and Game.save.perk("foresight") <= 0:  # 未卜先知: choose it yourself
 				text.text = body  # pure chance: the dice already landed on an option when the square was reached — the button IS that result
 				var rolled := Quests.rolled_option(Game.save, ev, Game.rng)
 				Game.persist()
@@ -1581,6 +1581,13 @@ func _open_offer(s: Dictionary) -> void:
 		o.title = "仙人点化 —— 选一位武将升级"
 	elif s["type"] == "treasure" or s.get("event", "") == "grand_chest" or Game.save.events.get(s["id"], "") in ["chest", "grand_chest"]:
 		o.chest = "grand" if s.get("event", "") == "grand_chest" else "normal"
+	if Quests.offer_rerollable(q, Game.save):
+		o.reroll_text = "三顾茅庐 · 重摆"  # 前尘整备: once per 招贤 square
+		o.reroll.connect(func():
+			Game.save.offer = []
+			Game.save.offer_rerolled = true
+			o.queue_free()
+			_open_offer(s))
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
 	add_child(o)

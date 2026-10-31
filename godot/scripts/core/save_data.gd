@@ -84,6 +84,7 @@ var prep_cards: Array = []  # 前尘整备: remembered cards brought into this �
 var extra_pick_open := false  # 兼收并蓄: the second pick of this offer is on
 var prep_relics: Array = []  # 前尘整备: 宝物 bought for this 周目
 var prep_pending: Array = []  # 前尘整备 cards of one route only: handed out once the birthplace is chosen (route_prep_cards)
+var offer_rerolled := false  # 三顾茅庐: this 招贤 square has been dealt again already
 var lord_out := false  # 坐镇中军: the lord stays in camp (only with the perk; see lord_fields)
 var theme := "light"
 var chapter_start: Dictionary = {}  # the whole save as it stood when this chapter began (重打这一章 goes back to it)
@@ -92,7 +93,7 @@ var side_seen: Array = []  # ？小故事 ids read in any 周目 (shown as 看�
 var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out", "prep_pending", "prep_relics",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out", "prep_pending", "prep_relics", "offer_rerolled",
 	"events", "event_seed", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
@@ -829,7 +830,7 @@ func chest_after_battle(rng: RandomNumberGenerator, overkill: float, boss: bool,
 	var cards := chest_mix(rng, int(g["chest_cards_boss"] if boss else g["chest_cards"]) + offer_extra() + extra_cards, only, chapter)
 	# the beaten enemy's own card may be in there (bosses and elites more often)
 	var db := _db()
-	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"])
+	var card_chance := float(db.battle["enemy_card_chance_boss" if boss else "enemy_card_chance"]) + 0.25 * perk("befriend")  # 化敌为友
 	if enemy_card != "" and not maxed(enemy_card) and not cards.has(db.cards[enemy_card]) and (first_win or rng.randf() < card_chance):
 		cards[cards.size() - 1] = db.cards[enemy_card]
 	return cards

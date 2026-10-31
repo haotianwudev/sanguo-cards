@@ -5,6 +5,7 @@ extends Control
 
 signal picked(index: int)
 signal cancelled
+signal reroll  # the reroll_text button: the caller deals a new offer
 
 var title := ""
 var card_ids: Array = []
@@ -12,6 +13,7 @@ var captions: Array = []  # optional text under each card
 var counts: Array = []  # optional copy counts (chests)
 var confirm_text := "选一张"
 var cancelable := false  # a 取消 button next to the confirm one (emits cancelled)
+var reroll_text := ""  # a button to deal the offer again (前尘整备「三顾茅庐」; emits reroll)
 var chest := ""  # "" = cards just flip in; "normal" / "grand" = a chest pops, bursts open and deals them face down
 var _views: Array = []
 var _selected := -1
@@ -72,6 +74,11 @@ func _ready() -> void:
 		cancel.custom_minimum_size = Vector2(200, 64)
 		cancel.pressed.connect(func(): cancelled.emit())
 		bottom.add_child(cancel)
+	if reroll_text != "":
+		var again := Kit.button(reroll_text, "purple", Kit.FONT_BIG)
+		again.custom_minimum_size = Vector2(260, 64)
+		again.pressed.connect(func(): reroll.emit())
+		bottom.add_child(again)
 	_confirm = Kit.button(confirm_text, "gold", Kit.FONT_BIG)
 	_confirm.custom_minimum_size = Vector2(260, 64)
 	_confirm.disabled = true
