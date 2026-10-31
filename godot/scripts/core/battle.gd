@@ -441,6 +441,12 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				return ["  %s 陷入眩晕！下回合无法行动" % ename]
 			_ev({"t": "stun", "ok": false})
 			return ["  %s 未受影响" % ename]
+		"shred":  # 弓兵 射穿甲缝: both resists down, stacking with every use (and with the passive) up to battle.archer_resist.max; the count restarts
+			var cap := float(db.battle.get("archer_resist", {}).get("max", 0.5))
+			enemy["resist_down"] = minf(cap, float(enemy["resist_down"]) + float(eff.get("amount", 0.1)) * mult)
+			enemy["resist_turns"] = maxi(int(enemy["resist_turns"]), int(eff.get("turns", 3)))
+			_ev({"t": "resist_down", "amount": enemy["resist_down"], "turns": enemy["resist_turns"]})
+			return ["  射穿甲缝：%s 的物抗、法抗累计 -%d%%（%d 回合）" % [ename, int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]]]
 		"break":
 			enemy["break_amount"] = maxf(enemy["break_amount"], float(eff["amount"]))
 			enemy["break_turns"] = maxi(enemy["break_turns"], int(eff["turns"]))
@@ -807,10 +813,10 @@ func _start_round() -> Array:
 			"archer":
 				var ab: Dictionary = db.battle.get("archer_resist", {})
 				_ev({"t": "passive", "unit": k, "name": pname, "text": "射穿甲缝"})
-				enemy["resist_down"] = maxf(enemy["resist_down"], minf(0.4, float(ab.get("amount", 0.1)) * ps))
+				enemy["resist_down"] = minf(float(ab.get("max", 0.5)), float(enemy["resist_down"]) + float(ab.get("amount", 0.1)) * ps)  # stacks, like the archers' shred
 				enemy["resist_turns"] = maxi(enemy["resist_turns"], int(ab.get("turns", 2)))
 				_ev({"t": "resist_down", "amount": enemy["resist_down"], "turns": enemy["resist_turns"]})
-				log.append("  %s 一箭射穿甲缝：%s 的物抗、法抗各 -%d%%（%d 回合）" % [pname, enemy["data"]["name"], int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]])
+				log.append("  %s 一箭射穿甲缝：%s 的物抗、法抗累计 -%d%%（%d 回合）" % [pname, enemy["data"]["name"], int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]])
 	for u in leaders:
 		u["acted"] = false
 		u["confused"] = u["confuse_next"]

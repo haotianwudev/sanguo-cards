@@ -75,7 +75,8 @@
           "type": "attack",
           "power": 0.5,
           "pierce": true
-        }
+        },
+        {"type": "shred", "amount": 0.08, "turns": 3}
       ]
     },
     "xiance": {
@@ -430,7 +431,8 @@
         {
           "type": "attack",
           "pierce": true
-        }
+        },
+        {"type": "shred", "amount": 0.12, "turns": 3}
       ]
     },
     "buzhan": {

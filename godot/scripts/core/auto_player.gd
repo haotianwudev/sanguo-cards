@@ -24,6 +24,12 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 					if t != u and not t["acted"] and not t["boosted"] and not t["confused"]:
 						best_ally = maxf(best_ally, float(t["leader"]["at"]))
 				v += (float(b.db.battle["boost_mult"]) - 1.0) * best_ally * 2.0
+			"shred":  # 射穿甲缝: the party's blows over its turns hit that much harder (until the cap)
+				var room := maxf(0.0, float(b.db.battle.get("archer_resist", {}).get("max", 0.5)) - float(b.enemy["resist_down"]))
+				var pat := 0.0
+				for t in b.leaders:
+					pat += float(t["leader"]["at"])
+				v += minf(room, float(e.get("amount", 0.1))) * pat * int(e.get("turns", 3)) * 0.5
 			"buff":  # 战意 (军师 1 AP): what the whole party gains over the rounds it lasts — more damage dealt (atk + magic rider) and less taken (def)
 				var turns := mini(int(e.get("turns", 3)), maxi(1, b.turn_limit - b.round_no + 1))
 				var share := 1.0 if b.buff["layers"] < int(e.get("max", 4)) else (1.0 if int(b.buff["turns"]) <= 1 else 0.0)  # at max layers only a refresh before it runs out is worth anything

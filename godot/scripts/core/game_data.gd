@@ -124,6 +124,14 @@ func _load(dir: String) -> void:
 			var arm: Dictionary = battle["armors"][e["armor"]]
 			enemies[eid]["phys_resist"] = float(arm["phys"])
 			enemies[eid]["magic_resist"] = float(arm["magic"])
+		else:  # no armor of its own: its card's troop sets one (battle.troop_armor)
+			var troop := str(cards.get(str(e.get("card", "")), {}).get("troop", ""))
+			var ta := str(battle.get("troop_armor", {}).get(troop, ""))
+			if ta != "":
+				assert(battle["armors"].has(ta), "troop_armor %s: unknown armor %s" % [troop, ta])
+				enemies[eid]["armor"] = ta
+				enemies[eid]["phys_resist"] = float(battle["armors"][ta]["phys"])
+				enemies[eid]["magic_resist"] = float(battle["armors"][ta]["magic"])
 	for rid in raw.get("relics", {}):
 		var r: Dictionary = raw["relics"][rid]
 		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),
@@ -274,7 +282,7 @@ func _validate() -> void:
 		assert(en["drop"] == "" or cards.has(en["drop"]), "enemy %s: unknown drop %s" % [en["id"], en["drop"]])
 	for sk in skills.values():
 		for e in sk["effects"]:
-			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot"],
+			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot", "shred"],
 				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
 	for c in cards.values():
 		assert(troops.has(c["troop"]), "card %s: bad troop" % c["id"])

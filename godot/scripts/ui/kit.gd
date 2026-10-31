@@ -250,7 +250,7 @@ static func resist_text(e: Dictionary, bbcode := true, short := false) -> String
 
 const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
 	"boost": "boost", "stun": "confuse", "break": "break", "ap": "ap",
-	"counter": "guard", "hurt": "heal", "cleanse": "heal", "buff": "boost", "poison": "magic"}
+	"counter": "guard", "shred": "break", "hurt": "heal", "cleanse": "heal", "buff": "boost", "poison": "magic"}
 
 
 static func skill_icon(skill: Dictionary) -> Texture2D:
@@ -339,6 +339,8 @@ static func skill_desc(sk: Dictionary) -> String:
 					parts.append("灼烧：每回合烧掉敌人现有体力的 %d%%（烧不死），%d 回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])
 				else:
 					parts.append("灼烧 ×%s，%d 回合" % [_num(e["power"]), int(e["turns"])])
+			"shred":
+				parts.append("射穿甲缝：敌人物抗、法抗 -%d%%，可叠加（最多 -%d%%），%d 回合" % [int(round(float(e.get("amount", 0.1)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("max", 0.5)) * 100)), int(e.get("turns", 3))])
 			"break":
 				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
 	var tags: Array = []
