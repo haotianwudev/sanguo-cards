@@ -526,6 +526,7 @@ func _rebuild_map() -> void:
 		tr.texture = token_tex
 		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.flip_h = true  # the chibi art strides to the left; the story runs left to right
 		spr = tr
 	else:
 		var p := Panel.new()
@@ -836,6 +837,8 @@ func _walk_to(target: Dictionary) -> void:
 		pts = MapLines._curve(from, to)  # follow the road's own bend
 	else:
 		pts = PackedVector2Array([from, to])
+	if _token_spr is TextureRect and absf(to.x - from.x) > 1.0:
+		(_token_spr as TextureRect).flip_h = to.x > from.x  # face the way it walks
 	var length := 0.0
 	for i in pts.size() - 1:
 		length += pts[i].distance_to(pts[i + 1])
