@@ -82,6 +82,8 @@ var party_slots := 4  # including the lord
 var perks: Dictionary = {}  # 前尘整备: perk id (battle.json prep.perks) -> how many bought for this 周目
 var prep_cards: Array = []  # 前尘整备: remembered cards brought into this 周目
 var extra_pick_open := false  # 兼收并蓄: the second pick of this offer is on
+var prep_relics: Array = []  # 前尘整备: 宝物 bought for this 周目
+var prep_pending: Array = []  # 前尘整备 cards of one route only: handed out once the birthplace is chosen (route_prep_cards)
 var lord_out := false  # 坐镇中军: the lord stays in camp (only with the perk; see lord_fields)
 var theme := "light"
 var chapter_start: Dictionary = {}  # the whole save as it stood when this chapter began (重打这一章 goes back to it)
@@ -90,7 +92,7 @@ var side_seen: Array = []  # ？小故事 ids read in any 周目 (shown as 看�
 var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out", "prep_pending", "prep_relics",
 	"events", "event_seed", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
@@ -199,6 +201,7 @@ func new_lap(inherit_all := false) -> SaveData:
 	s.lord_copies = lord_copies
 	s.perks = perks.duplicate()  # last 周目's 前尘整备 is the starting choice (the page trims what no longer fits)
 	s.prep_cards = prep_cards.duplicate()
+	s.prep_relics = prep_relics.duplicate()
 	return s
 
 
@@ -226,6 +229,16 @@ func prep_named() -> Dictionary:
 	return out
 
 
+func prep_relic_choices() -> Array:
+	## the 宝物 on sale: every one with a price for its rarity (story ones are not sold)
+	var costs: Dictionary = prep_cfg().get("relic_cost", {})
+	return _db().relics.keys().filter(func(r): return costs.has(str(_db().relics[r].get("rarity", ""))))
+
+
+func prep_relic_cost(rid: String) -> int:
+	return int(prep_cfg().get("relic_cost", {}).get(str(_db().relics[rid].get("rarity", "")), 99))
+
+
 func prep_card_cost(card_id: String) -> int:
 	var named := prep_named()
 	if named.has(card_id):
@@ -241,6 +254,9 @@ func prep_spent() -> int:
 	for cid in prep_cards:
 		if _db().cards.has(cid):
 			n += prep_card_cost(cid)
+	for rid in prep_relics:
+		if prep_relic_choices().has(rid):
+			n += prep_relic_cost(rid)
 	return n
 
 
@@ -265,10 +281,31 @@ func apply_prep() -> void:
 	## the 整备 page was confirmed: the cards brought along join, the bigger party and the 余财 are paid now
 	var ok := prep_card_choices() + prep_named().keys()
 	prep_cards = prep_cards.filter(func(c): return ok.has(c))
+	prep_pending = []
 	for cid in prep_cards:
-		grant_card(cid)
+		if str(_db().cards[cid].get("scope", "")) == "":
+			grant_card(cid)
+		else:
+			prep_pending.append(cid)  # a north / south card waits for the birthplace
 	party_slots += perk("slot")
 	merit += 5 * perk("merit")
+	prep_relics = prep_relics.filter(func(r): return prep_relic_choices().has(r))
+	for rid in prep_relics:  # carried from the first chapter on, like a 宝物 brought from a finished chapter
+		if not kept_relics.has(rid):
+			kept_relics.append(rid)
+		if not relics.has(rid):
+			relics.append(rid)
+
+
+func route_prep_cards() -> Array:
+	## the birthplace is chosen: the waiting route-only cards of this route join (the other route's are gone)
+	var out: Array = []
+	for cid in prep_pending:
+		if str(_db().cards[cid].get("scope", "")) == route():
+			grant_card(cid)
+			out.append(_db().cards[cid])
+	prep_pending = []
+	return out
 
 
 func prep_chest(rng: RandomNumberGenerator) -> Array:

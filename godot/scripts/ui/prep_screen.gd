@@ -10,6 +10,7 @@ var _points: Label
 var _go: Button
 var _rows := {}  # perk id -> {count: Label, minus: Button, plus: Button}
 var _card_btns := {}  # card id -> Button
+var _relic_btns := {}  # relic id -> Button
 
 
 func _ready() -> void:
@@ -54,6 +55,7 @@ func _ready() -> void:
 	clear.pressed.connect(func():
 		save.perks = {}
 		save.prep_cards = []
+		save.prep_relics = []
 		_sync())
 	foot.add_child(clear)
 	_go = Kit.button("出　发", "green", Kit.FONT_BIG)
@@ -68,6 +70,10 @@ static func _trim(save: SaveData) -> void:
 	## last 周目's choice may no longer fit (or name cards no longer remembered): drop cards, then perks, until it does
 	var choices := save.prep_card_choices() + save.prep_named().keys()
 	save.prep_cards = save.prep_cards.filter(func(c): return choices.has(c))
+	var rel := save.prep_relic_choices()
+	save.prep_relics = save.prep_relics.filter(func(r): return rel.has(r))
+	while save.prep_spent() > save.prep_points() and not save.prep_relics.is_empty():
+		save.prep_relics.pop_back()
 	var cfg: Array = save.prep_cfg().get("perks", [])
 	for p in cfg:
 		if save.perk(p["id"]) > int(p["max"]):
@@ -141,8 +147,8 @@ func _perk_column(save: SaveData) -> Control:
 
 func _card_column(save: SaveData) -> Control:
 	var cfg := save.prep_cfg()
-	var pc := _panel("带卡入局")
-	var tip := Kit.label("名将 / 名兵：按标价带入。%s：记得的兵卡 %d 点 / 张　%s：记得的武将 %d 点 / 张（等级照记得的算，再加一级）" % [
+	var pc := _panel("带卡入局 · 宝物")
+	var tip := Kit.label("名将 / 名兵：按标价带入（标了北线 / 南线的，选了那条线的出生地才到）。%s：记得的兵卡 %d 点 / 张　%s：记得的武将 %d 点 / 张（等级照记得的算，再加一级）" % [
 		cfg.get("card_soldier_name", ""), int(cfg.get("card_soldier", 1)),
 		cfg.get("card_general_name", ""), int(cfg.get("card_general", 2))], 14, "muted")
 	tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -166,7 +172,9 @@ func _card_column(save: SaveData) -> Control:
 		flow.add_theme_constant_override("v_separation", 6)
 		list.add_child(flow)
 		for cid in ids:
-			_card_button(flow, cid, "%s · %s　%d 点" % [named[cid]["name"], db.cards[cid]["name"], int(named[cid]["cost"])])
+			var sc := str(db.cards[cid].get("scope", ""))
+			_card_button(flow, cid, "%s · %s%s　%d 点" % [named[cid]["name"], db.cards[cid]["name"],
+				{"north": "（北线）", "south": "（南线）"}.get(sc, ""), int(named[cid]["cost"])])
 	var choices := save.prep_card_choices()
 	var order := ["SSR", "SR", "R", "C", "N"]
 	choices.sort_custom(func(a, b): return order.find(db.cards[a]["rarity"]) < order.find(db.cards[b]["rarity"]))
@@ -183,6 +191,31 @@ func _card_column(save: SaveData) -> Control:
 			_card_button(flow, cid, "%s %s" % [db.cards[cid]["name"], Kit.rarity_label(db.cards[cid]["rarity"])])
 	if choices.is_empty():
 		list.add_child(Kit.label("还没有记得的卡：走到结局时手上的卡才会被记住。", 15, "muted"))
+	# 宝物: bought by rarity, worn from the first chapter on
+	var rdb := db.relics
+	var rarity_name := {"rare": "稀有", "common": "普通", "curse": "诅咒"}
+	for rar in ["rare", "common", "curse"]:
+		var rids: Array = save.prep_relic_choices().filter(func(r): return str(rdb[r].get("rarity", "")) == rar)
+		if rids.is_empty():
+			continue
+		list.add_child(Kit.label("宝物 · %s（%d 点）" % [rarity_name[rar], save.prep_relic_cost(rids[0])], Kit.FONT_BODY, "gold"))
+		var flow := HFlowContainer.new()
+		flow.add_theme_constant_override("h_separation", 6)
+		flow.add_theme_constant_override("v_separation", 6)
+		list.add_child(flow)
+		for rid in rids:
+			var b := Kit.button(rdb[rid]["name"], "gray", 15)
+			b.toggle_mode = true
+			b.custom_minimum_size = Vector2(0, 40)
+			b.tooltip_text = str(rdb[rid].get("desc", ""))
+			b.toggled.connect(func(on):
+				if on and not save.prep_relics.has(rid):
+					save.prep_relics.append(rid)
+				elif not on:
+					save.prep_relics.erase(rid)
+				_sync())
+			flow.add_child(b)
+			_relic_btns[rid] = b
 	return pc[0]
 
 
@@ -239,3 +272,9 @@ func _sync() -> void:
 		b.set_pressed_no_signal(on)
 		b.modulate = Color(1.0, 0.85, 0.4) if on else Color.WHITE
 		b.disabled = not on and save.prep_card_cost(cid) > left
+	for rid in _relic_btns:
+		var b: Button = _relic_btns[rid]
+		var on := save.prep_relics.has(rid)
+		b.set_pressed_no_signal(on)
+		b.modulate = Color(1.0, 0.85, 0.4) if on else Color.WHITE
+		b.disabled = not on and save.prep_relic_cost(rid) > left

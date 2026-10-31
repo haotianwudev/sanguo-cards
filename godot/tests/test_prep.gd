@@ -73,7 +73,8 @@ func test_confirming_brings_the_cards_and_pays_the_perks() -> void:
 	n.prep_cards = ["sunce", "danyang", "not_a_card"]
 	n.perks = {"slot": 0, "merit": 2}
 	n.apply_prep()
-	check(n.owned.has("sunce") and n.soldiers.has("danyang"), "the remembered cards are in hand")
+	check(n.owned.has("sunce"), "the remembered cards are in hand")
+	check(n.prep_pending.has("danyang"), "…a south-only one waits for the birthplace")
 	check(not n.prep_cards.has("not_a_card"), "a card not remembered is dropped")
 	check_eq(n.merit, 10, "余财 ×2")
 	check_eq(n.party_slots, slots)
@@ -147,3 +148,36 @@ func test_start_chest_stays_off_either_route() -> void:
 	var chest := n.prep_chest(r)
 	check(not chest.is_empty(), "开门大吉 deals a chest")
 	check(chest.all(func(c): return c.get("scope", "") == ""), "no route-only cards before the route is chosen")
+
+
+func test_named_cards_are_not_main_story_people() -> void:
+	var db := GameData.get_db()
+	for e in db.battle["prep"]["cards"]:
+		if not db.cards[e["id"]]["soldier"]:
+			check(not db.card_chapters.has(e["id"]), "%s is handed out by a chapter: the main story has them" % e["id"])
+
+
+func test_route_only_named_cards_wait_for_the_birthplace() -> void:
+	var n := _lap2()
+	n.prep_cards = ["wangyi", "bulianshi"]  # 北线 / 南线
+	n.apply_prep()
+	check(not n.owned.has("wangyi") and not n.owned.has("bulianshi"), "not before the route is known")
+	n.flags.append("出生：冀州无极")
+	var got := n.route_prep_cards()
+	check(n.owned.has("wangyi") and not n.owned.has("bulianshi"), "the north one joins on the north route")
+	check_eq(got.size(), 1)
+	check(n.prep_pending.is_empty())
+
+
+func test_relics_can_be_bought_and_are_worn_from_the_start() -> void:
+	var db := GameData.get_db()
+	var n := _lap2(8)
+	var sale := n.prep_relic_choices()
+	check(sale.has("bingfu") and sale.has("yushan"), "common and rare 宝物 are on sale")
+	check(not sale.has("jiujia"), "story 宝物 are not")
+	n.prep_relics = ["bingfu", "yushan"]
+	check_eq(n.prep_spent(), n.prep_relic_cost("bingfu") + n.prep_relic_cost("yushan"))
+	n.apply_prep()
+	check(n.kept_relics.has("bingfu") and n.kept_relics.has("yushan"), "kept from the first chapter on")
+	Quests.begin(db.quests[0], n)
+	check(n.relics.has("yushan"), "a chapter starts with them")

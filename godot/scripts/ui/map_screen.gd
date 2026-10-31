@@ -1480,6 +1480,7 @@ func _resolve(choice := -1) -> void:
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
 	if was_era:  # the birthplace is chosen: south and north count apart, so only now can the 难度 be picked
 		Game.assign_slot()
+		gained.append_array(Game.save.route_prep_cards())  # 前尘整备: this route's named cards join now
 		await _pick_level()
 	Game.persist()
 	if kind == "choose":  # a choice can open squares further on (requires / unless on this run's records)
