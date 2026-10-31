@@ -24,6 +24,21 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 					if t != u and not t["acted"] and not t["boosted"] and not t["confused"]:
 						best_ally = maxf(best_ally, float(t["leader"]["at"]))
 				v += (float(b.db.battle["boost_mult"]) - 1.0) * best_ally * 2.0
+			"buff":  # 战意 (军师 1 AP): what the whole party gains over the rounds it lasts — more damage dealt (atk + magic rider) and less taken (def)
+				var turns := mini(int(e.get("turns", 3)), maxi(1, b.turn_limit - b.round_no + 1))
+				var share := 1.0 if b.buff["layers"] < int(e.get("max", 4)) else (1.0 if int(b.buff["turns"]) <= 1 else 0.0)  # at max layers only a refresh before it runs out is worth anything
+				if b.buff["layers"] >= int(e.get("max", 4)):
+					share *= 0.5  # a refresh adds no layer
+				var party_at := 0.0
+				for t in b.leaders:
+					party_at += float(t["leader"]["at"])
+				var hit := float(e.get("atk", 0.0)) + float(e.get("magic", 0.0))
+				var guard := float(e.get("def", 0.0)) * float(b.enemy["data"]["at"]) * int(b.enemy["data"].get("actions", 1))
+				var waiting := 0  # cast before the others move, their blows this very round take it too: 自动 plays it first
+				for t in b.leaders:
+					if t != u and not t["acted"]:
+						waiting += 1
+				v += share * turns * (hit * party_at + guard) * (1.0 + 0.25 * waiting)
 			_:
 				v += 0.2 * at
 	if u["boosted"]:  # a boosted unit's next skill is worth boost_mult times (the boost is spent on whatever it plays)

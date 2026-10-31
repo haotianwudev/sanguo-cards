@@ -131,6 +131,21 @@ func test_auto_battle_plays_a_whole_fight_and_never_wastes_a_skill() -> void:
 	check(b.result != "", "the fight ends (win or lose) by itself")
 
 
+func test_auto_battle_casts_the_strategists_war_spirit() -> void:
+	## 自动战斗 opens with 郭嘉's 1 AP 战意 (料敌先机) — it pays for the whole party over its turns — and stops once it is stacked full
+	var b := Battle.start("huangjin", party(["guojia", "zhaoyun", "cav_n"], []), 0, 0, {}, {}, false, {"enemy_scale": BENCH_HUANGJIN})
+	var gi := -1
+	for i in b.leaders.size():
+		if b.leaders[i]["leader"]["card"]["id"] == "guojia":
+			gi = i
+	check(gi >= 0, "郭嘉 leads a unit")
+	var act := AutoPlayer.next(b)
+	check_eq(act, [gi, "xianji"])
+	b.buff["layers"] = 4
+	b.buff["turns"] = 3
+	check(AutoPlayer.value(b, b.leaders[gi], b.db.skills["xianji"]) <= 0.0, "full layers, plenty of turns left: not worth recasting")
+
+
 func test_auto_battle_defends_when_ap_is_full() -> void:
 	## nothing worth playing and AP at its cap: 自动 guards instead of ending the round
 	var b := new_battle()
