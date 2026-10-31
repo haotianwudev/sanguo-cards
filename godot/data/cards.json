@@ -2033,6 +2033,10 @@
       "troop": "bandit",
       "hp": 66,
       "at": 88,
+      "skills": [
+        "biwu_zhaoqin",
+        "sanniang_pozhen"
+      ],
       "pool": false
     },
     "wangyi": {

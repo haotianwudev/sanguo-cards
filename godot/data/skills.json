@@ -1266,6 +1266,37 @@
         }
       ]
     },
+    "biwu_zhaoqin": {
+      "name": "比武招亲",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "sanniang_pozhen": {
+      "name": "三娘破阵",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
     "huoji": {
       "name": "火计",
       "cost": 6,
