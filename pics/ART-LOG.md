@@ -1400,6 +1400,19 @@
 - [x] 2026-10-30 cg `n8_end` ← n8_end.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n8_jincheng` ← n8_jincheng.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-30 cg `n8_dumai` ← n8_dumai.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 battle `hnn_bw_dw` ← hnn_bw_dw.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 battle `hnn_bw_xc` ← hnn_bw_xc.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-30 cg `n6_xueye` ← n6_xueye.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 battle `hnn_bw_dw` ← hnn_bw_dw.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 battle `hnn_bw_xc` ← hnn_bw_xc.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n6_xueye` ← n6_xueye.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_start` ← n9_start.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_lunu` ← n9_lunu.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_haikou` ← n9_haikou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_yanjin` ← n9_yanjin.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_xunyu` ← n9_xunyu.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_jiuren` ← n9_jiuren.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_duanxian` ← n9_duanxian.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_ludi` ← n9_ludi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_xuezhan` ← n9_xuezhan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_shi` ← n9_shi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_lulong` ← n9_lulong.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_end` ← n9_end.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-10-30 cg `n9_pangde` ← n9_pangde.jpg · ok
