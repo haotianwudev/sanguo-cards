@@ -1502,7 +1502,8 @@
       "hp": 86,
       "at": 88,
       "skills": [
-        "luoyi"
+        "luoyi",
+        "huwei"
       ],
       "scope": "north"
     },
@@ -1613,7 +1614,8 @@
       "hp": 70,
       "at": 99,
       "skills": [
-        "shuangji"
+        "shuangji",
+        "sishou_yingmen"
       ],
       "scope": "north"
     },
@@ -1837,7 +1839,8 @@
       "hp": 54,
       "at": 64,
       "skills": [
-        "yindi"
+        "yindi",
+        "chize"
       ],
       "scope": "south"
     },
@@ -3019,11 +3022,11 @@
     "chendao": {
       "name": "陈到",
       "rarity": "R",
-      "troop": "spear",
+      "troop": "infantry",
       "hp": 66,
       "at": 80,
       "skills": [
-        "qiangpo",
+        "baier_hujia",
         "baierzhan"
       ]
     },
@@ -3256,6 +3259,10 @@
       "name": "曹仁",
       "rarity": "SR",
       "troop": "infantry",
+      "skills": [
+        "tiebi_shoucheng",
+        "bamen_jinsuo"
+      ],
       "hp": 90,
       "at": 76,
       "scope": "north"
@@ -3264,6 +3271,10 @@
       "name": "曹洪",
       "rarity": "R",
       "troop": "infantry",
+      "skills": [
+        "rangma",
+        "xingyang_duanhou"
+      ],
       "hp": 60,
       "at": 74,
       "scope": "north"
@@ -3437,6 +3448,10 @@
       "name": "周泰",
       "rarity": "SR",
       "troop": "infantry",
+      "skills": [
+        "fenshen_huzhu",
+        "shierchuang"
+      ],
       "hp": 88,
       "at": 84,
       "scope": "south"

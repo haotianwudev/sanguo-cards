@@ -1098,6 +1098,145 @@
         }
       ]
     },
+    "huwei": {
+      "name": "虎卫",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        },
+        {
+          "type": "counter",
+          "power": 0.4
+        }
+      ]
+    },
+    "sishou_yingmen": {
+      "name": "死守营门",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
+    "fenshen_huzhu": {
+      "name": "奋身护主",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        }
+      ]
+    },
+    "shierchuang": {
+      "name": "十二创",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "counter",
+          "power": 0.6
+        }
+      ]
+    },
+    "baier_hujia": {
+      "name": "白毦护驾",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        },
+        {
+          "type": "counter",
+          "power": 0.3
+        }
+      ]
+    },
+    "chize": {
+      "name": "赤帻诱敌",
+      "cost": 2,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "tiebi_shoucheng": {
+      "name": "铁壁守城",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        }
+      ]
+    },
+    "bamen_jinsuo": {
+      "name": "八门金锁",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "rangma": {
+      "name": "让马护主",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.8
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
+    "xingyang_duanhou": {
+      "name": "荥阳断后",
+      "cost": 2,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.3
+        }
+      ]
+    },
     "huoji": {
       "name": "火计",
       "cost": 6,
