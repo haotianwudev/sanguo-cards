@@ -152,9 +152,15 @@ func test_start_chest_stays_off_either_route() -> void:
 
 func test_named_cards_are_not_main_story_people() -> void:
 	var db := GameData.get_db()
+	var story_files := {}
+	for f in ["story.json", "side_stories.json", "enemies.json", "endings.json"]:
+		story_files[f] = FileAccess.get_file_as_string("res://data/" + f)
 	for e in db.battle["prep"]["cards"]:
 		if not db.cards[e["id"]]["soldier"]:
 			check(not db.card_chapters.has(e["id"]), "%s is handed out by a chapter: the main story has them" % e["id"])
+			var who: String = str(db.cards[e["id"]]["name"]).split("·")[0]
+			for f in story_files:
+				check(not story_files[f].contains(who), "%s appears in %s: the main story has them" % [who, f])
 			check_eq(db.cards[e["id"]]["rarity"], "SR", e["id"] + " is SR")
 	var troops := {}
 	for e in db.battle["prep"]["cards"]:
@@ -166,12 +172,12 @@ func test_named_cards_are_not_main_story_people() -> void:
 
 func test_route_only_named_cards_wait_for_the_birthplace() -> void:
 	var n := _lap2()
-	n.prep_cards = ["luxun", "jiangwei"]  # 南线 / both
+	n.prep_cards = ["danyang", "jiangwei"]  # remembered 南线 soldier / both routes
 	n.apply_prep()
-	check(not n.owned.has("luxun") and n.owned.has("jiangwei"), "a south-only card waits for the route")
+	check(not n.soldiers.has("danyang") and n.owned.has("jiangwei"), "a south-only card waits for the route")
 	n.flags.append("出生：冀州无极")
 	var got := n.route_prep_cards()
-	check(not n.owned.has("luxun"), "the north route does not get the south one")
+	check(not n.soldiers.has("danyang"), "the north route does not get the south one")
 	check_eq(got.size(), 0)
 	check(n.prep_pending.is_empty())
 
