@@ -54,10 +54,10 @@ func _ready() -> void:
 		var afx := Quests.affix_here(save)
 		if not afx.is_empty():
 			m["affix"] = afx
-		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
+		b = Battle.start(scenario_id, save.field_leaders(), Game.rng.randi(), save.damage, save.carry_extra, save.carry_uses,
 			ambush, m, save.swap_roster())
 	else:
-		b = Battle.start(scenario_id, save.party_leaders(), Game.rng.randi(), 0, {}, {}, ambush, {}, save.swap_roster())
+		b = Battle.start(scenario_id, save.field_leaders(), Game.rng.randi(), 0, {}, {}, ambush, {}, save.swap_roster())
 	_build()
 	_apply_speed()
 	_log_lines(["[b]【%s】[/b] %d 回合内击破 %s。" % [b.scenario["name"], b.turn_limit, b.enemy["data"]["name"]]])

@@ -157,7 +157,7 @@ func swap_cost() -> int:
 func swap_options(i: int) -> Array:
 	## leader dicts that could replace slot i: any troop (the slot takes the newcomer's troop), but never a troop another
 	## slot already leads, never one already out, never two versions of one person; the lord has no stand-in
-	if leaders[i]["leader"]["card"]["troop"] == "lord" and not mods.get("lord_swap", 0):  # 前尘整备「主公退阵」lets him go
+	if leaders[i]["leader"]["card"]["troop"] == "lord":
 		return []
 	var out_ids: Array = leaders.map(func(u): return u["leader"]["card"]["id"])
 	var people := {}

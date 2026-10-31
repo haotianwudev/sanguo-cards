@@ -26,11 +26,14 @@ func test_every_perk_has_a_name_and_fits_the_page() -> void:
 	var cfg: Dictionary = GameData.get_db().battle["prep"]
 	var ids := {}
 	for p in cfg["perks"]:
-		check(str(p.get("name", "")) != "" and str(p.get("desc", "")) != "", str(p))
+		check(str(p.get("name", "")).length() == 4 and str(p.get("desc", "")) != "", "四字 name: " + str(p))
 		check(int(p["cost"]) > 0 and int(p["max"]) > 0, p["id"])
 		check(not ids.has(p["id"]), "unique id " + p["id"])
 		ids[p["id"]] = true
-	check(str(cfg.get("card_soldier_name", "")) != "" and str(cfg.get("card_general_name", "")) != "", "the card perks are named too")
+	check(str(cfg.get("card_soldier_name", "")).length() == 4 and str(cfg.get("card_general_name", "")).length() == 4, "the card perks are named too")
+	for e in cfg["cards"]:
+		check(GameData.get_db().cards.has(e["id"]), "named card exists: " + e["id"])
+		check(str(e["name"]).length() == 4 and int(e["cost"]) > 0, e["id"])
 
 
 func test_public_generals_need_a_perk_from_the_second_lap() -> void:
@@ -82,11 +85,10 @@ func test_confirming_brings_the_cards_and_pays_the_perks() -> void:
 
 func test_perks_reach_the_battle_mods() -> void:
 	var n := _lap2()
-	n.perks = {"ap_max": 2, "hp": 1, "lord_swap": 1, "offer_extra": 1, "general_rate": 1}
+	n.perks = {"ap_max": 2, "hp": 1, "offer_extra": 1, "general_rate": 1}
 	var m := Quests.mods(n)
 	check_eq(int(m.get("ap_max", 0)), 2)
 	check(is_equal_approx(float(m.get("hp", 0.0)), 0.1), "厚积")
-	check(int(m.get("lord_swap", 0)) == 1, "主公退阵")
 	check_eq(n.offer_extra(), 1)
 	var base := SaveData.create()
 	check(n.chest_general_chance() > base.chest_general_chance(), "慧眼")
@@ -112,14 +114,36 @@ func test_last_laps_choice_carries_over() -> void:
 	check_eq(m.prep_cards, ["sunce"])
 
 
-func test_lord_swap_lets_the_lord_leave_the_field() -> void:
-	var s := SaveData.new()
-	s.owned = ["machao", "zhaoyun", "madai", "zhangfei", "daqiao"]
-	s.party = ["machao", "zhaoyun"]
-	var b := Battle.start("hulao", s.party_leaders(), 1, 0, {}, {}, false, {"lord_swap": 1}, s.swap_roster())
-	b.round_no = b.swap_from_round()
-	check(not b.swap_options(0).is_empty(), "主公退阵: the lord has stand-ins")
-	b.ap = 6
-	var cid: String = b.swap_options(0)[0]["card"]["id"]
-	b.swap(0, cid)
-	check_eq(b.leaders[0]["leader"]["card"]["id"], cid, "the lord is off the field")
+func test_lord_bench_keeps_the_lord_off_the_field() -> void:
+	var n := _lap2()
+	n.owned = ["machao", "zhaoyun", "daqiao", "zhangfei"]
+	n.party = ["machao", "zhaoyun", "daqiao"]
+	n.lord_out = true
+	check(n.lord_fields(), "no perk: the lord always fields")
+	check(n.validate_party(n.party + ["guanyu"]) != "", "…and takes a place")
+	n.perks["lord_bench"] = 1
+	check(not n.lord_fields(), "坐镇中军: he stays in camp")
+	check_eq(n.field_leaders().size(), n.party.size(), "only the generals fight")
+	check(n.field_leaders().all(func(ld): return ld["card"]["troop"] != "lord"))
+	n.owned.append("guanyu")
+	check_eq(n.validate_party(n.party + ["guanyu"]), "", "his place goes to a general")
+	n.party = []
+	check(n.lord_fields(), "with nobody else out, the lord fights after all")
+
+
+func test_named_cards_need_no_memory_and_cost_their_price() -> void:
+	var n := _lap2()
+	check(not n.prep_card_choices().has("jiangwei"), "a named card is not in the remembered list")
+	check_eq(n.prep_card_cost("jiangwei"), int(n.prep_named()["jiangwei"]["cost"]))
+	n.prep_cards = ["jiangwei", "wei_hubao"]
+	n.apply_prep()
+	check(n.owned.has("jiangwei") and n.soldiers.has("wei_hubao"), "姜维 and 虎豹骑 join without having been met")
+
+
+func test_start_chest_stays_off_either_route() -> void:
+	var n := _lap2()
+	var r := RandomNumberGenerator.new()
+	r.seed = 4
+	var chest := n.prep_chest(r)
+	check(not chest.is_empty(), "开门大吉 deals a chest")
+	check(chest.all(func(c): return c.get("scope", "") == ""), "no route-only cards before the route is chosen")

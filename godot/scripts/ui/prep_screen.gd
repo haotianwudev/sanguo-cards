@@ -2,8 +2,9 @@ class_name PrepScreen
 extends Control
 ## 前尘整备 (Rance X style 周目 perks): shown before every 周目 from the second on. 前尘点 = different endings reached (battle.json
 ## prep.per_ending each); they are not spent for good — every 周目 shares them out again, starting from last time's choice.
-## Left: the perks (battle.json prep.perks, a name each, bought in copies up to max). Right: remembered cards to bring along
-## (旧部归营 soldiers / 故人相随 generals). 出发 applies it all (SaveData.apply_prep) and starts the map.
+## Left: the perks (battle.json prep.perks, a 四字 name each, bought in copies up to max). Right: cards to bring along — the named
+## 名将 / 名兵 (prep.cards, each with its own 四字 name and price) and the remembered ones (招兵买马 soldiers / 旧雨重逢 generals).
+## 出发 applies it all (SaveData.apply_prep), opens the 开门大吉 chests, then starts the map.
 
 var _points: Label
 var _go: Button
@@ -57,7 +58,7 @@ func _ready() -> void:
 	foot.add_child(clear)
 	_go = Kit.button("出　发", "green", Kit.FONT_BIG)
 	_go.custom_minimum_size = Vector2(260, 56)
-	_go.pressed.connect(Game.start_lap)
+	_go.pressed.connect(_depart)
 	foot.add_child(_go)
 	Kit.focus(_go)
 	_sync()
@@ -65,7 +66,7 @@ func _ready() -> void:
 
 static func _trim(save: SaveData) -> void:
 	## last 周目's choice may no longer fit (or name cards no longer remembered): drop cards, then perks, until it does
-	var choices := save.prep_card_choices()
+	var choices := save.prep_card_choices() + save.prep_named().keys()
 	save.prep_cards = save.prep_cards.filter(func(c): return choices.has(c))
 	var cfg: Array = save.prep_cfg().get("perks", [])
 	for p in cfg:
@@ -141,9 +142,11 @@ func _perk_column(save: SaveData) -> Control:
 func _card_column(save: SaveData) -> Control:
 	var cfg := save.prep_cfg()
 	var pc := _panel("带卡入局")
-	pc[1].add_child(Kit.label("%s：兵卡 %d 点 / 张　　%s：武将 %d 点 / 张（等级照记得的算，再加一级）" % [
-		cfg.get("card_soldier_name", "旧部归营"), int(cfg.get("card_soldier", 1)),
-		cfg.get("card_general_name", "故人相随"), int(cfg.get("card_general", 2))], 14, "muted"))
+	var tip := Kit.label("名将 / 名兵：按标价带入。%s：记得的兵卡 %d 点 / 张　%s：记得的武将 %d 点 / 张（等级照记得的算，再加一级）" % [
+		cfg.get("card_soldier_name", ""), int(cfg.get("card_soldier", 1)),
+		cfg.get("card_general_name", ""), int(cfg.get("card_general", 2))], 14, "muted")
+	tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	pc[1].add_child(tip)
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -152,6 +155,18 @@ func _card_column(save: SaveData) -> Control:
 	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(list)
 	var db := GameData.get_db()
+	var named := save.prep_named()
+	for soldier in [false, true]:  # 名将 / 名兵: bought at their own price, remembered or not
+		var ids: Array = named.keys().filter(func(c): return db.cards[c]["soldier"] == soldier)
+		if ids.is_empty():
+			continue
+		list.add_child(Kit.label("名兵" if soldier else "名将", Kit.FONT_BODY, "gold"))
+		var flow := HFlowContainer.new()
+		flow.add_theme_constant_override("h_separation", 6)
+		flow.add_theme_constant_override("v_separation", 6)
+		list.add_child(flow)
+		for cid in ids:
+			_card_button(flow, cid, "%s · %s　%d 点" % [named[cid]["name"], db.cards[cid]["name"], int(named[cid]["cost"])])
 	var choices := save.prep_card_choices()
 	var order := ["SSR", "SR", "R", "C", "N"]
 	choices.sort_custom(func(a, b): return order.find(db.cards[a]["rarity"]) < order.find(db.cards[b]["rarity"]))
@@ -165,21 +180,47 @@ func _card_column(save: SaveData) -> Control:
 		flow.add_theme_constant_override("v_separation", 6)
 		list.add_child(flow)
 		for cid in ids:
-			var c: Dictionary = db.cards[cid]
-			var b := Kit.button("%s %s" % [c["name"], Kit.rarity_label(c["rarity"])], "gray", 15)
-			b.toggle_mode = true
-			b.custom_minimum_size = Vector2(0, 40)
-			b.toggled.connect(func(on):
-				if on and not save.prep_cards.has(cid):
-					save.prep_cards.append(cid)
-				elif not on:
-					save.prep_cards.erase(cid)
-				_sync())
-			flow.add_child(b)
-			_card_btns[cid] = b
+			_card_button(flow, cid, "%s %s" % [db.cards[cid]["name"], Kit.rarity_label(db.cards[cid]["rarity"])])
 	if choices.is_empty():
 		list.add_child(Kit.label("还没有记得的卡：走到结局时手上的卡才会被记住。", 15, "muted"))
 	return pc[0]
+
+
+func _card_button(flow: Control, cid: String, text: String) -> void:
+	var save := Game.save
+	var b := Kit.button(text, "gray", 15)
+	b.toggle_mode = true
+	b.custom_minimum_size = Vector2(0, 40)
+	b.toggled.connect(func(on):
+		if on and not save.prep_cards.has(cid):
+			save.prep_cards.append(cid)
+		elif not on:
+			save.prep_cards.erase(cid)
+		_sync())
+	flow.add_child(b)
+	_card_btns[cid] = b
+
+
+func _depart() -> void:
+	## 出发: 开门大吉 opens its chests first (pick one card each), then the story
+	_go.disabled = true
+	var save := Game.save
+	save.apply_prep()
+	for _i in save.perk("start_chest"):
+		var chest := save.prep_chest(Game.rng)
+		if chest.is_empty():
+			break
+		var o := PickOverlay.new()
+		o.title = "开门大吉 —— 选一张卡带走"
+		o.chest = "normal"
+		o.card_ids = chest.map(func(c): return c["id"])
+		o.counts = chest.map(func(c): return save.copies(c["id"]))
+		o.set_anchors_preset(Control.PRESET_FULL_RECT)
+		add_child(o)
+		var i: int = await o.picked
+		save.take(chest[i]["id"])
+		o.queue_free()
+	Game.start_lap()
 
 
 func _sync() -> void:

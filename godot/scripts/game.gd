@@ -109,8 +109,7 @@ func new_lap(route_id: String) -> void:
 
 
 func start_lap() -> void:
-	## 前尘整备 → 出发: the chosen perks and cards take effect, the story starts
-	save.apply_prep()
+	## 前尘整备 → 出发 (PrepScreen has applied the perks and cards and opened its chests): the story starts
 	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
@@ -827,7 +826,7 @@ func demo(name: String) -> void:
 			save.flags = db.ending_order.slice(0, 6).map(func(id): return db.endings[id]["title"])
 			save.commit_history()
 			save = save.new_lap()
-			save.perks = {"ap_max": 1, "public": 1}
+			save.perks = {"ap_max": 1, "public": 1, "lord_bench": 1}
 			show_screen(PrepScreen.new())
 		"title":
 			show_screen(TitleScreen.new())

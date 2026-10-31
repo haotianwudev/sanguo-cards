@@ -1095,7 +1095,7 @@ static func party_max(save: SaveData) -> int:
 	## the shared HP bar's full size, 宝物 included (传国玉玺, troop items)
 	var m := mods(save)
 	var hp := 0
-	for ld in save.party_leaders():
+	for ld in save.field_leaders():
 		hp += int(round(ld["hp"] * (1.0 + float(m.get("troop_hp", {}).get(ld["card"]["troop"], 0.0)))))
 	return int(round(hp * (1.0 + float(m.get("hp", 0.0)))))
 

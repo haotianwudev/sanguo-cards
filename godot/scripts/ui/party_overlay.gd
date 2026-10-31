@@ -180,10 +180,13 @@ func _rebuild() -> void:
 
 	# ---- party row
 	var leaders := save.party_leaders()
-	_party_row.add_child(_slot("lord", leaders[0], "主公"))
+	var lord_slot := _slot("lord", leaders[0], "主公" if save.lord_fields() else "主公 · 坐镇中军")
+	if not save.lord_fields():
+		lord_slot.modulate = Color(1, 1, 1, 0.45)  # 坐镇中军: shown, but not fighting
+	_party_row.add_child(lord_slot)
 	for cid in save.party:
 		_party_row.add_child(_slot(cid, save.leader_for(cid), "%s队长" % db.troops[db.cards[cid]["troop"]]["name"]))
-	for _i in save.party_slots - 1 - save.party.size():
+	for _i in save.party_slots - (1 if not (save.lord_out and save.perk("lord_bench") > 0) else 0) - save.party.size():
 		var empty := Label.new()
 		empty.text = "空　位\n\n从下面\n选一张"
 		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -193,7 +196,7 @@ func _rebuild() -> void:
 		empty.add_theme_stylebox_override("normal", Kit.box(Color(1, 1, 1, 0.04), 10, 2, Color(1, 1, 1, 0.22), 8))
 		_party_row.add_child(empty)
 	var at_sum := 0
-	for ld in leaders:
+	for ld in save.field_leaders():
 		at_sum += int(ld["at"])
 	var top := Quests.party_max(save)
 	if _hp_top > 0 and top != _hp_top:  # someone came in or went out: the HP bar keeps its share (攻击 simply follows who is out)
@@ -201,7 +204,7 @@ func _rebuild() -> void:
 	_hp_top = top
 	_summary.add_child(_stat_line("全军体力", "%d / %d" % [maxi(1, top - save.damage), top]))
 	_summary.add_child(_stat_line("攻击合计", str(at_sum)))
-	_summary.add_child(_stat_line("出阵", "%d / %d 队" % [leaders.size(), save.party_slots]))
+	_summary.add_child(_stat_line("出阵", "%d / %d 队" % [save.field_leaders().size(), save.party_slots]))
 	if not save.relics.is_empty():
 		_summary.add_child(_stat_line("宝物", "%d / %d 生效" % [save.active_relics().size(), save.relics.size()]))
 	var used := {}
@@ -559,6 +562,15 @@ func _fill_detail() -> void:
 			info.add_child(_level_line(_sel))
 	else:  # the lord is the lord card in use, levelled like any other card
 		info.add_child(_level_box(save.form_tier(save.lord_form()), save.form_copies_of(save.lord_form())))
+		if save.perk("lord_bench") > 0 and not swap_mode:  # 前尘整备「坐镇中军」: the lord may sit the fights out
+			var stay := Kit.button("主公上场" if save.lord_out else "坐镇中军（不上场）", "green" if save.lord_out else "purple")
+			stay.pressed.connect(func():
+				if save.lord_out and save.party.size() > save.party_slots - 1:
+					return  # the field is full: take someone off first
+				save.lord_out = not save.lord_out
+				Game.persist()
+				_rebuild())
+			info.add_child(stay)
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
 	info.add_child(_info_line("当队长", "攻 %d · 兵 %d" % [ld["at"], ld["hp"]]))
 

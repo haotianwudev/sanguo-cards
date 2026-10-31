@@ -82,6 +82,7 @@ var party_slots := 4  # including the lord
 var perks: Dictionary = {}  # 前尘整备: perk id (battle.json prep.perks) -> how many bought for this 周目
 var prep_cards: Array = []  # 前尘整备: remembered cards brought into this 周目
 var extra_pick_open := false  # 兼收并蓄: the second pick of this offer is on
+var lord_out := false  # 坐镇中军: the lord stays in camp (only with the perk; see lord_fields)
 var theme := "light"
 var chapter_start: Dictionary = {}  # the whole save as it stood when this chapter began (重打这一章 goes back to it)
 var side_read: Array = []  # ？小故事 ids opened this 周目 (their reward is paid the first time)
@@ -89,7 +90,7 @@ var side_seen: Array = []  # ？小故事 ids read in any 周目 (shown as 看�
 var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out",
 	"events", "event_seed", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
@@ -216,7 +217,19 @@ func prep_points() -> int:
 	return _db().endings_reached(flags).size() * int(prep_cfg().get("per_ending", 1))
 
 
+func prep_named() -> Dictionary:
+	## the named cards on offer (battle.json prep.cards): card id -> {name (四字), cost}; ids not in cards.json are skipped
+	var out := {}
+	for e in prep_cfg().get("cards", []):
+		if _db().cards.has(e["id"]):
+			out[e["id"]] = e
+	return out
+
+
 func prep_card_cost(card_id: String) -> int:
+	var named := prep_named()
+	if named.has(card_id):
+		return int(named[card_id]["cost"])
 	var c: Dictionary = _db().cards[card_id]
 	return int(prep_cfg().get("card_soldier" if c["soldier"] else "card_general", 1))
 
@@ -234,7 +247,8 @@ func prep_spent() -> int:
 func prep_card_choices() -> Array:
 	## the remembered cards that can be brought in: held at an ending in any 周目 (no lord cards, no beasts)
 	var db := _db()
-	return cleared_cards.filter(func(cid): return db.cards.has(cid) and cid != "lord" and not is_lord_card(cid) and not db.cards[cid].get("beast", false))
+	var named := prep_named()
+	return cleared_cards.filter(func(cid): return db.cards.has(cid) and cid != "lord" and not is_lord_card(cid) and not db.cards[cid].get("beast", false) 			and not named.has(cid))  # a named card is bought at its own price
 
 
 func prep_mods() -> Array:
@@ -244,18 +258,37 @@ func prep_mods() -> Array:
 		for _i in perk(p["id"]):
 			if p.has("mods"):
 				out.append({"mods": p["mods"]})
-	if perk("lord_swap") > 0:
-		out.append({"mods": {"lord_swap": 1}})
 	return out
 
 
 func apply_prep() -> void:
 	## the 整备 page was confirmed: the cards brought along join, the bigger party and the 余财 are paid now
-	prep_cards = prep_cards.filter(func(c): return prep_card_choices().has(c))
+	var ok := prep_card_choices() + prep_named().keys()
+	prep_cards = prep_cards.filter(func(c): return ok.has(c))
 	for cid in prep_cards:
 		grant_card(cid)
 	party_slots += perk("slot")
 	merit += 5 * perk("merit")
+
+
+func prep_chest(rng: RandomNumberGenerator) -> Array:
+	## 开门大吉: a chest before the story starts (the route is not chosen yet: cards of either route stay out)
+	var out: Array = []
+	for c in chest_mix(rng, int(_db().gacha["chest_cards"]) + offer_extra() + 2):
+		if c.get("scope", "") == "" and out.size() < int(_db().gacha["chest_cards"]) + offer_extra():
+			out.append(c)
+	return out
+
+
+func lord_fields() -> bool:
+	## the lord leads his own unit unless 坐镇中军 keeps him in camp (and someone else is out to fight)
+	return not (lord_out and perk("lord_bench") > 0 and not party.is_empty())
+
+
+func field_leaders() -> Array:
+	## who actually fights: party_leaders, minus the lord when he sits this one out
+	var all := party_leaders()
+	return all if lord_fields() else all.slice(1)
 
 
 func public_open() -> bool:
@@ -1111,8 +1144,9 @@ func owned_ids() -> Array:
 func validate_party(card_ids: Array) -> String:
 	## "" if the party is legal, otherwise the reason.
 	var db := _db()
-	if card_ids.size() > party_slots - 1:
-		return "最多 %d 张卡（主公固定占一位）" % (party_slots - 1)
+	var room := party_slots if lord_out and perk("lord_bench") > 0 else party_slots - 1
+	if card_ids.size() > room:
+		return "最多 %d 张卡（主公固定占一位）" % room if room < party_slots else "最多 %d 张卡" % room
 	var troops_seen := {}
 	var people := {}
 	for cid in card_ids:
