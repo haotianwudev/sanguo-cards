@@ -86,10 +86,11 @@ func test_confirming_brings_the_cards_and_pays_the_perks() -> void:
 
 func test_perks_reach_the_battle_mods() -> void:
 	var n := _lap2()
-	n.perks = {"ap_max": 2, "hp": 1, "offer_extra": 1, "general_rate": 1}
+	var before := float(Quests.mods(n)["enemy"])
+	n.perks = {"ap_max": 2, "easy": 1, "offer_extra": 1, "general_rate": 1}
 	var m := Quests.mods(n)
 	check_eq(int(m.get("ap_max", 0)), 2)
-	check(is_equal_approx(float(m.get("hp", 0.0)), 0.1), "厚积")
+	check(is_equal_approx(float(m["enemy"]), before - 0.15), "化险为夷: one 难度 level easier")
 	check_eq(n.offer_extra(), 1)
 	var base := SaveData.create()
 	check(n.chest_general_chance() > base.chest_general_chance(), "慧眼")
