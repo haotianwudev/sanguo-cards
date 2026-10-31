@@ -657,7 +657,7 @@ func test_after_fuchun_you_follow_zhouyu_uphill_or_sunce_to_the_boars() -> void:
 func test_huatuo_heals_joins_or_leaves_his_book() -> void:
 	var db := GameData.get_db()
 	check(Quests.pools(quest(0), SaveData.create())["event_pool"].has("huatuo"))
-	check(db.cards["huatuo"]["troop"] == "logistics" and db.cards["huatuo"]["skills"] == ["mafei"])
+	check(db.cards["huatuo"]["troop"] == "logistics" and db.cards["huatuo"]["skills"] == ["mafei", "guagu_liaodu"])
 	var joined := 0
 	var book := 0
 	for seed_value in 20:

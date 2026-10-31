@@ -909,7 +909,8 @@
       "hp": 95,
       "at": 66,
       "skills": [
-        "luoshen"
+        "luoshen",
+        "lingbo_weibu"
       ],
       "scope": "north"
     },
@@ -1244,7 +1245,8 @@
       "at": 76,
       "pool": false,
       "skills": [
-        "xianji"
+        "xianji",
+        "shier_qice"
       ]
     },
     "zhongyao": {
@@ -1261,6 +1263,9 @@
       "troop": "infantry",
       "hp": 80,
       "at": 72,
+      "skills": [
+        "xianzhen_zhi"
+      ],
       "pool": false
     },
     "caiwenji": {
@@ -1446,7 +1451,8 @@
       "hp": 72,
       "at": 95,
       "skills": [
-        "liaolai"
+        "liaolai",
+        "weizhen_xiaoyao"
       ],
       "scope": "north"
     },
@@ -1468,7 +1474,8 @@
       "hp": 78,
       "at": 88,
       "skills": [
-        "duanliang"
+        "duanliang",
+        "changqu_zhiru"
       ],
       "scope": "north"
     },
@@ -1480,7 +1487,8 @@
       "hp": 66,
       "at": 84,
       "skills": [
-        "baibu"
+        "baibu",
+        "dingjun_zhanjiang"
       ],
       "scope": "south"
     },
@@ -1514,7 +1522,8 @@
       "hp": 90,
       "at": 84,
       "skills": [
-        "rende"
+        "rende",
+        "xiemin_dujiang"
       ]
     },
     "pangtong": {
@@ -1556,7 +1565,8 @@
       "hp": 66,
       "at": 90,
       "skills": [
-        "feiyan"
+        "feiyan",
+        "heishan_baiwan"
       ],
       "scope": "north"
     },
@@ -1776,7 +1786,8 @@
       "hp": 94,
       "at": 62,
       "skills": [
-        "mafei"
+        "mafei",
+        "guagu_liaodu"
       ]
     },
     "dongbai": {
@@ -1787,7 +1798,8 @@
       "hp": 66,
       "at": 96,
       "skills": [
-        "shuangchui"
+        "shuangchui",
+        "xiliang_shuangchui"
       ],
       "pool": false
     },
@@ -1945,7 +1957,8 @@
       "hp": 90,
       "at": 62,
       "skills": [
-        "beige"
+        "beige",
+        "hongnong_beige"
       ],
       "pool": false
     },
@@ -2012,7 +2025,8 @@
       "hp": 68,
       "at": 94,
       "skills": [
-        "huaji"
+        "huaji",
+        "wenhou_huaji"
       ],
       "scope": "north"
     },
@@ -2023,7 +2037,8 @@
       "hp": 62,
       "at": 92,
       "skills": [
-        "yunlu"
+        "yunlu",
+        "xiliang_nvjiang"
       ],
       "scope": "north"
     },
@@ -2194,7 +2209,8 @@
       "hp": 70,
       "at": 92,
       "skills": [
-        "zhanjiang"
+        "zhanjiang",
+        "zhanjiang_duoqi"
       ],
       "pool": false
     },
@@ -2244,8 +2260,7 @@
       "skills": [
         "duji",
         "luanwu"
-      ],
-      "troop_skills": false
+      ]
     },
     "zhangxiu": {
       "name": "张绣·北地枪王",
@@ -2255,7 +2270,8 @@
       "at": 94,
       "pool": false,
       "skills": [
-        "qiangpo"
+        "qiangpo",
+        "beidi_qiangwang"
       ]
     },
     "jingzhou_shuijun": {
@@ -2405,7 +2421,8 @@
       "hp": 72,
       "at": 98,
       "skills": [
-        "shuangchui"
+        "shuangchui",
+        "xiliang_shuangchui"
       ],
       "pool": false,
       "scope": "south"
@@ -2431,7 +2448,8 @@
       "hp": 70,
       "at": 96,
       "skills": [
-        "huaji"
+        "huaji",
+        "wenhou_huaji"
       ],
       "pool": false,
       "scope": "north"
@@ -2524,7 +2542,6 @@
         "xiaobawang",
         "dujiang"
       ],
-      "troop_skills": false,
       "pool": false,
       "scope": "south"
     },
@@ -2546,6 +2563,9 @@
       "troop": "logistics",
       "hp": 94,
       "at": 66,
+      "skills": [
+        "xinjiu"
+      ],
       "pool": false,
       "scope": "north"
     },
@@ -2581,7 +2601,9 @@
       "troop": "logistics",
       "hp": 92,
       "at": 64,
-      "skills": [],
+      "skills": [
+        "dengxia_suanpan"
+      ],
       "pool": false,
       "scope": "south"
     },
@@ -2608,7 +2630,6 @@
         "xiaobawang",
         "guose"
       ],
-      "troop_skills": false,
       "pool": false,
       "scope": "south"
     },
@@ -2635,7 +2656,6 @@
         "xianji",
         "shisheng"
       ],
-      "troop_skills": false,
       "pool": false,
       "scope": "north"
     },
@@ -2646,7 +2666,8 @@
       "hp": 70,
       "at": 96,
       "skills": [
-        "yunlu"
+        "yunlu",
+        "xiliang_nvjiang"
       ],
       "pool": false,
       "scope": "north"
@@ -2658,7 +2679,8 @@
       "hp": 98,
       "at": 66,
       "skills": [
-        "luoshen"
+        "luoshen",
+        "lingbo_weibu"
       ],
       "pool": false,
       "scope": "north"
@@ -3245,6 +3267,9 @@
       "troop": "strategist",
       "hp": 90,
       "at": 80,
+      "skills": [
+        "xietianzi"
+      ],
       "scope": "north"
     },
     "xiahouyuan": {
@@ -3253,6 +3278,9 @@
       "troop": "archer",
       "hp": 64,
       "at": 96,
+      "skills": [
+        "shensu"
+      ],
       "scope": "north"
     },
     "caoren": {
@@ -3285,6 +3313,9 @@
       "troop": "strategist",
       "hp": 90,
       "at": 76,
+      "skills": [
+        "quhu_tunlang"
+      ],
       "scope": "north"
     },
     "yujin": {
@@ -3293,6 +3324,9 @@
       "troop": "archer",
       "hp": 82,
       "at": 80,
+      "skills": [
+        "yizhong"
+      ],
       "scope": "north"
     },
     "xiahoumao": {
@@ -3345,7 +3379,10 @@
       "rarity": "SR",
       "troop": "strategist",
       "hp": 86,
-      "at": 76
+      "at": 76,
+      "skills": [
+        "puyang_huoji"
+      ]
     },
     "mifang": {
       "name": "糜芳",
@@ -3408,7 +3445,6 @@
         "xiaobawang",
         "dujiang"
       ],
-      "troop_skills": false,
       "pool": false,
       "scope": "south",
       "voice": "sunce"
@@ -3442,6 +3478,9 @@
       "troop": "logistics",
       "hp": 90,
       "at": 76,
+      "skills": [
+        "zuoduan_dongnan"
+      ],
       "scope": "south"
     },
     "zhoutai": {
@@ -3494,6 +3533,9 @@
       "troop": "logistics",
       "hp": 92,
       "at": 72,
+      "skills": [
+        "sishi_sangong"
+      ],
       "scope": "north"
     },
     "gongsunkang": {
@@ -3607,6 +3649,9 @@
       "troop": "strategist",
       "hp": 82,
       "at": 74,
+      "skills": [
+        "lianhuan"
+      ],
       "pool": false,
       "scope": "south"
     },
@@ -3616,6 +3661,9 @@
       "troop": "logistics",
       "hp": 94,
       "at": 66,
+      "skills": [
+        "yidaizhao"
+      ],
       "pool": false,
       "scope": "south"
     },
@@ -3764,6 +3812,9 @@
       "troop": "strategist",
       "hp": 82,
       "at": 76,
+      "skills": [
+        "shimian_maifu"
+      ],
       "pool": false,
       "scope": "north"
     },
@@ -4266,6 +4317,9 @@
       "troop": "strategist",
       "hp": 82,
       "at": 80,
+      "skills": [
+        "dingjunshan"
+      ],
       "pool": false
     },
     "liuzhang": {
@@ -4299,6 +4353,9 @@
       "troop": "logistics",
       "hp": 90,
       "at": 65,
+      "skills": [
+        "dengxia_suanpan"
+      ],
       "pool": false
     },
     "yanpu": {
@@ -4454,6 +4511,9 @@
       "troop": "cavalry",
       "hp": 72,
       "at": 88,
+      "skills": [
+        "fubo_yifeng"
+      ],
       "scope": "north"
     },
     "hansui": {
@@ -4469,7 +4529,10 @@
       "rarity": "SR",
       "troop": "infantry",
       "hp": 86,
-      "at": 84
+      "at": 84,
+      "skills": [
+        "qiqin_bufu"
+      ]
     },
     "huangxu": {
       "name": "黄叙·天才射手",
@@ -4477,6 +4540,9 @@
       "troop": "archer",
       "hp": 70,
       "at": 88,
+      "skills": [
+        "tiancai_yijian"
+      ],
       "scope": "south"
     },
     "bingzhou_nu": {

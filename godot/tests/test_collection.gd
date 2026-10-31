@@ -445,8 +445,8 @@ func test_soldiers_have_only_the_plain_move() -> void:
 	var cs := db.build_fighter("changsha")  # 刀兵 soldier
 	check_eq(cs["skills"], db.default_kit("infantry"), "a soldier card: the troop's plain move only")
 	check_eq(db.build_fighter("danyang")["skills"], db.default_kit("infantry", true), "精兵 丹阳兵: both")
-	var hz := db.build_fighter("huangzhong")  # 弓兵 general with his own 百步穿杨
-	check_eq(hz["skills"], db.default_kit("archer") + ["baibu"], "a general: the plain move + his own")
+	var hz := db.build_fighter("huangzhong")  # 弓兵 general with his own 百步穿杨 and 大招 定军斩将
+	check_eq(hz["skills"], db.default_kit("archer") + ["baibu", "dingjun_zhanjiang"], "a general: the plain move + his own")
 	var jq := db.build_fighter("jiangqin")  # no skill of his own
 	check_eq(jq["skills"], db.default_kit("archer", true), "no own skill: the troop's signature instead")
 
@@ -508,9 +508,9 @@ func test_skills_come_from_kits_not_troops_and_a_card_can_name_its_own() -> void
 		check(not db.default_kit(tid).is_empty() and not db.default_kit(tid, true).is_empty(), "%s: default kit" % tid)
 	var before: String = db.cards["gaoshun"]["kit"]
 	db.cards["gaoshun"]["kit"] = "spear"  # an infantry card drawing a spear kit
-	check_eq(db.build_fighter("gaoshun")["skills"], db.kits["spear"]["special"], "the card's own kit wins over its troop's default")
+	check_eq(db.build_fighter("gaoshun")["skills"], db.kits["spear"]["special"] + ["xianzhen_zhi"], "the card's own kit wins over its troop's default")
 	db.cards["gaoshun"]["kit"] = before
-	check_eq(db.build_fighter("gaoshun")["skills"], db.default_kit("infantry", true), "back on the troop default")
+	check_eq(db.build_fighter("gaoshun")["skills"], db.default_kit("infantry", true) + ["xianzhen_zhi"], "back on the troop default")
 
 
 func test_the_spear_troop_is_a_big_one_with_a_shared_signature() -> void:

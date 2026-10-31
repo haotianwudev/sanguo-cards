@@ -875,6 +875,17 @@ func test_war_spirit_adds_magic_to_physical_blows() -> void:
 	check(is_equal_approx(b.buff["magic"], 0.8), "four layers: 80% (the cap)")
 
 
+func test_every_sr_general_has_three_skills() -> void:
+	## user rule: SR (like SSR) brings three skills — the troop's shared moves first, then its own 大招 (cards that already had three of their own kind stay as they are)
+	var db := GameData.get_db()
+	for cid in db.cards:
+		var c: Dictionary = db.cards[cid]
+		if c["rarity"] != "SR" or c["troop"] == "lord" or c.has("lord_form"):
+			continue
+		var f: Dictionary = db.build_fighter(cid)
+		check_eq(f["skills"].size(), 3, "%s (%s) has three skills: %s" % [cid, c["name"], str(f["skills"])])
+
+
 func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
 	## user rule: an SSR card (general or lord card) brings three skills, one of them a once-only 大招 of 5+ AP that hits hard
 	var db := GameData.get_db()

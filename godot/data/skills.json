@@ -1297,6 +1297,442 @@
         }
       ]
     },
+    "xianzhen_zhi": {
+      "name": "陷阵之志",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "xietianzi": {
+      "name": "挟天子以令诸侯",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 2
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "shensu": {
+      "name": "神速",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        }
+      ]
+    },
+    "quhu_tunlang": {
+      "name": "驱虎吞狼",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "yizhong": {
+      "name": "毅重",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "guard",
+          "cut": 0.6
+        }
+      ]
+    },
+    "puyang_huoji": {
+      "name": "濮阳火计",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "shimian_maifu": {
+      "name": "十面埋伏",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic",
+          "hits": 2
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "dingjunshan": {
+      "name": "定军山",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic"
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "fubo_yifeng": {
+      "name": "伏波遗风",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "qiqin_bufu": {
+      "name": "七擒不服",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.6
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
+    "tiancai_yijian": {
+      "name": "天才一箭",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "xinjiu": {
+      "name": "新酒",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.0
+        },
+        {
+          "type": "ap",
+          "amount": 1
+        }
+      ]
+    },
+    "dengxia_suanpan": {
+      "name": "灯下算盘",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "ap",
+          "amount": 3
+        }
+      ]
+    },
+    "zuoduan_dongnan": {
+      "name": "坐断东南",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.5
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "sishi_sangong": {
+      "name": "四世三公",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "all"
+        },
+        {
+          "type": "ap",
+          "amount": 1
+        }
+      ]
+    },
+    "yidaizhao": {
+      "name": "衣带诏",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "boost",
+          "target": "all"
+        },
+        {
+          "type": "guard",
+          "cut": 0.3
+        }
+      ]
+    },
+    "lingbo_weibu": {
+      "name": "凌波微步",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "stun",
+          "chance": 0.6
+        },
+        {
+          "type": "guard",
+          "cut": 0.4
+        }
+      ]
+    },
+    "shier_qice": {
+      "name": "十二奇策",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "magic",
+          "hits": 2
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "weizhen_xiaoyao": {
+      "name": "威震逍遥津",
+      "cost": 5,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 4
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "changqu_zhiru": {
+      "name": "长驱直入",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2,
+          "pierce": true
+        }
+      ]
+    },
+    "dingjun_zhanjiang": {
+      "name": "定军斩将",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.3
+        }
+      ]
+    },
+    "xiemin_dujiang": {
+      "name": "携民渡江",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.0
+        },
+        {
+          "type": "guard",
+          "cut": 0.5
+        }
+      ]
+    },
+    "heishan_baiwan": {
+      "name": "黑山百万",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        },
+        {
+          "type": "loot",
+          "chest": 0.25,
+          "card": 0.25
+        }
+      ]
+    },
+    "guagu_liaodu": {
+      "name": "刮骨疗毒",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "heal",
+          "rate": 3.0
+        },
+        {
+          "type": "cleanse"
+        }
+      ]
+    },
+    "xiliang_shuangchui": {
+      "name": "西凉双锤",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "hongnong_beige": {
+      "name": "弘农悲歌",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.5
+        },
+        {
+          "type": "ap",
+          "amount": 2
+        }
+      ]
+    },
+    "wenhou_huaji": {
+      "name": "温侯画戟",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 3
+        },
+        {
+          "type": "break",
+          "amount": 0.3,
+          "turns": 3
+        }
+      ]
+    },
+    "xiliang_nvjiang": {
+      "name": "西凉女将",
+      "cost": 3,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "boost",
+          "target": "all"
+        }
+      ]
+    },
+    "zhanjiang_duoqi": {
+      "name": "斩将夺旗",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack"
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
+    "beidi_qiangwang": {
+      "name": "北地枪王",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack",
+          "hits": 2
+        },
+        {
+          "type": "counter",
+          "power": 1.0
+        }
+      ]
+    },
     "huoji": {
       "name": "火计",
       "cost": 6,

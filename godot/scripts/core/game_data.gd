@@ -345,6 +345,8 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	for s in c["skills"]:
 		if not sk.has(s):
 			sk.append(s)
+	if c["rarity"] in ["SR", "SSR"] and not c["soldier"] and c["troop"] != "lord" and c["troop_skills"] and sk.size() < 3 and kit["special"].size() > 1 and not sk.has(kit["special"][1]):
+		sk.insert(1, kit["special"][1])  # SR / SSR bring three skills (user rule): short of that, the troop's signature joins as the 2nd, before the card's own 大招
 	# the card's face numbers are its stats at 铜; the tier multiplies both (rarity is only where hp + at falls: cards.json gacha.rarity_bands)
 	return {"id": card_id, "name": c["name"], "troop": c["troop"], "person": c["person"],
 		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "base_hp": c["hp"], "base_at": c["at"], "skills": sk, "rarity": c["rarity"], "voice": c.get("voice", "")}
