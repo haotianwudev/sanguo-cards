@@ -409,11 +409,17 @@ func _rebuild_map() -> void:
 	var max_x := 0
 	var min_y := 99
 	var max_y := 0
+	var all_max_x := 0  # the whole chapter, every route: the background is painted to this size (tools/map_strip.py)
+	var all_min_y := 99
+	var all_max_y := 0
 	for s in q["squares"].values():
 		if offset > 0 and s["x"] < offset:
 			continue
 		if offset == 0 and q["id"] == "prologue" and s["x"] >= 23:
 			continue
+		all_max_x = maxi(all_max_x, s["x"] - offset)
+		all_min_y = mini(all_min_y, s["y"])
+		all_max_y = maxi(all_max_y, s["y"])
 		if not _shown(s):  # a route that does not exist for this player adds no size
 			continue
 		max_x = maxi(max_x, s["x"] - offset)
@@ -427,7 +433,12 @@ func _rebuild_map() -> void:
 	# chapter background: data/art/map/<quest id or map_overrides key>.jpg (built by `sanguo-art` from pics/art.json "maps")
 	var bg_path: String = "res://data/art/map/%s.jpg" % Quests.map_key(q, Game.save)
 	_bg.texture = load(bg_path) if ResourceLoader.exists(bg_path) else null
-	_bg.size = _layer.custom_minimum_size
+	# sized to the whole chapter (not just the routes this save shows), so a strip stitched to the chapter's
+	# exact width lands column for column and is never cropped or stretched
+	if all_min_y == 99:
+		all_min_y = _y_off
+	_bg.size = Vector2(180 + all_max_x * COL_W + 60, maxf(360.0, MAP_TOP + 50 + (all_max_y - all_min_y) * LANE_H + 110))
+	_bg.position = Vector2(0, (all_min_y - _y_off) * LANE_H)
 	for s in q["squares"].values():
 		if not _shown(s):  # hidden by an earlier chapter's choices
 			continue

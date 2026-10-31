@@ -1,0 +1,14 @@
+{
+  "_doc": "长章节地图的分段背景：一章按剧情地点切成几段，每段一张 21:9 宽幅图（pics/source/map/panels/），from = 这一段从第几列（square 的 x）开始。python tools/map_strip.py <key> 把它们按游戏里的列宽拼成一整条（相邻两段交界渐变），写到 pics/source/map/<key>_strip.jpg，再用 art_ingest 装成 <key> 地图。quest / x_min / x_max 选这张地图用到的格子（第一章南北共用一个 quest，北线是 x ≥ 23）。",
+  "prologue_north": {
+    "quest": "prologue",
+    "x_min": 23,
+    "panels": [
+      {"src": "source/map/panels/prologue_north_1.jpg", "from": 23, "place": "无极甄府 → 邺城"},
+      {"src": "source/map/panels/prologue_north_2.jpg", "from": 29, "place": "邺城城外、赈济、分岔"},
+      {"src": "source/map/panels/prologue_north_3.jpg", "from": 35, "place": "太行山脚、土地庙、峡谷"},
+      {"src": "source/map/panels/prologue_north_4.jpg", "from": 41, "place": "黑山寨"},
+      {"src": "source/map/panels/prologue_north_5.jpg", "from": 47, "place": "回冀州、放粮、教枪、南下"}
+    ]
+  }
+}
