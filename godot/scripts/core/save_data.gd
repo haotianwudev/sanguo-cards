@@ -79,6 +79,9 @@ var form_copies: Dictionary = {}  # lord card (cards.json lord_forms id) -> its 
 var cleared_form_copies: Dictionary = {}  # …the levels confirmed at an ending, remembered across 周目
 var lord_copies := 1  # the lord's card starts 铜 like everyone; drawing it again (or upgrade("lord")) raises the tier
 var party_slots := 4  # including the lord
+var perks: Dictionary = {}  # 前尘整备: perk id (battle.json prep.perks) -> how many bought for this 周目
+var prep_cards: Array = []  # 前尘整备: remembered cards brought into this 周目
+var extra_pick_open := false  # 兼收并蓄: the second pick of this offer is on
 var theme := "light"
 var chapter_start: Dictionary = {}  # the whole save as it stood when this chapter began (重打这一章 goes back to it)
 var side_read: Array = []  # ？小故事 ids opened this 周目 (their reward is paid the first time)
@@ -86,7 +89,7 @@ var side_seen: Array = []  # ？小故事 ids read in any 周目 (shown as 看�
 var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open",
 	"events", "event_seed", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
@@ -193,7 +196,87 @@ func new_lap(inherit_all := false) -> SaveData:
 		s.story_cards = story_cards.duplicate()
 	s.theme = theme
 	s.lord_copies = lord_copies
+	s.perks = perks.duplicate()  # last 周目's 前尘整备 is the starting choice (the page trims what no longer fits)
+	s.prep_cards = prep_cards.duplicate()
 	return s
+
+
+# ---- 前尘整备 (Rance X style 周目 perks) ------------------------------------------
+
+func prep_cfg() -> Dictionary:
+	return _db().battle.get("prep", {})
+
+
+func perk(id: String) -> int:
+	return int(perks.get(id, 0))
+
+
+func prep_points() -> int:
+	## 前尘点: one per different ending ever reached (not spent: every 周目 shares them out again)
+	return _db().endings_reached(flags).size() * int(prep_cfg().get("per_ending", 1))
+
+
+func prep_card_cost(card_id: String) -> int:
+	var c: Dictionary = _db().cards[card_id]
+	return int(prep_cfg().get("card_soldier" if c["soldier"] else "card_general", 1))
+
+
+func prep_spent() -> int:
+	var n := 0
+	for p in prep_cfg().get("perks", []):
+		n += perk(p["id"]) * int(p["cost"])
+	for cid in prep_cards:
+		if _db().cards.has(cid):
+			n += prep_card_cost(cid)
+	return n
+
+
+func prep_card_choices() -> Array:
+	## the remembered cards that can be brought in: held at an ending in any 周目 (no lord cards, no beasts)
+	var db := _db()
+	return cleared_cards.filter(func(cid): return db.cards.has(cid) and cid != "lord" and not is_lord_card(cid) and not db.cards[cid].get("beast", false))
+
+
+func prep_mods() -> Array:
+	## the perks' battle modifiers (mods in battle.json prep.perks, once per copy bought), for Quests.mods
+	var out: Array = []
+	for p in prep_cfg().get("perks", []):
+		for _i in perk(p["id"]):
+			if p.has("mods"):
+				out.append({"mods": p["mods"]})
+	if perk("lord_swap") > 0:
+		out.append({"mods": {"lord_swap": 1}})
+	return out
+
+
+func apply_prep() -> void:
+	## the 整备 page was confirmed: the cards brought along join, the bigger party and the 余财 are paid now
+	prep_cards = prep_cards.filter(func(c): return prep_card_choices().has(c))
+	for cid in prep_cards:
+		grant_card(cid)
+	party_slots += perk("slot")
+	merit += 5 * perk("merit")
+
+
+func public_open() -> bool:
+	## the 公共 generals in the recruit offers and chests: always in the first 周目, afterwards only with 广纳贤才 (or 天下英雄)
+	return lap < 2 or perk("public") > 0 or perk("all_generals") > 0
+
+
+func all_generals(rarity := "") -> Array:
+	## 天下英雄: every general of this route (story-only ones too), no lord cards or beasts
+	var r := route()
+	return _db().cards.values().filter(func(c): return not c["soldier"] and not c.get("beast", false) and not is_lord_card(c["id"]) and c["id"] != "lord" 			and c.get("scope", "") in ["", r] and (rarity == "" or c["rarity"] == rarity))
+
+
+func pick_again(card_id: String) -> bool:
+	## 兼收并蓄: after the first card of an offer, the rest stay up for one more pick
+	if perk("pick_extra") <= 0 or extra_pick_open or offer.size() < 2:
+		extra_pick_open = false
+		return false
+	offer.erase(card_id)
+	extra_pick_open = true
+	return true
 
 
 func to_dict() -> Dictionary:
@@ -238,6 +321,8 @@ static func from_dict(d: Dictionary) -> SaveData:
 	s.lord_copies = int(s.lord_copies)
 	s.cleared_lord_copies = int(s.cleared_lord_copies)
 	s.lap = int(s.lap)
+	for k in s.perks:
+		s.perks[k] = int(s.perks[k])
 	for k in s.soldiers:
 		s.soldiers[k] = int(s.soldiers[k])
 	for k in s.dupes:
@@ -620,7 +705,11 @@ func recruit_pool(rarity: String) -> Array:
 	## plus the ones you have had before on this route (story-only ones too, like 董白 or 孙坚)
 	var db := _db()
 	var route := route()
-	var p: Array = db.pool(rarity).filter(func(c): return c.get("scope", "") in ["", route] and db.is_public(c["id"]))
+	var p: Array = db.pool(rarity).filter(func(c): return c.get("scope", "") in ["", route] and db.is_public(c["id"])) if public_open() else []
+	if perk("all_generals") > 0:
+		for c in all_generals(rarity):
+			if not p.has(c):
+				p.append(c)
 	for cid in seen + owned:  # history (only this route's cards) and whatever you hold
 		var c: Dictionary = db.cards.get(cid, {})
 		if not c.is_empty() and c["rarity"] == rarity and not c["soldier"] and not p.has(c) \
@@ -687,7 +776,7 @@ func level() -> int:
 
 func chest_general_chance() -> float:
 	var cg: Dictionary = _db().gacha.get("chest_general", {})
-	return clampf(float(cg.get("base", 0.0)) + float(cg.get("per_level", 0.0)) * difficulty, 0.0, 0.9)
+	return clampf(float(cg.get("base", 0.0)) + float(cg.get("per_level", 0.0)) * difficulty + 0.15 * perk("general_rate"), 0.0, 0.9)
 
 
 func route() -> String:
@@ -712,8 +801,12 @@ func chest_pools(chapter := "", only: Array = []) -> Dictionary:
 				out["public"]["soldier"].append(c)
 			elif chapter != "" and chapters.has(chapter):
 				out["chapter"]["soldier"].append(c)
-		elif c["in_pool"] and chapters.is_empty():
+		elif c["in_pool"] and chapters.is_empty() and public_open():
 			out["public"]["general"].append(c)
+	if perk("all_generals") > 0:
+		for c in all_generals():
+			if not out["public"]["general"].has(c):
+				out["public"]["general"].append(c)
 	for cid in only:
 		var c: Dictionary = db.cards.get(cid, {})
 		if not c.is_empty() and c["soldier"] and not out["chapter"]["soldier"].has(c) and c.get("scope", "") in ["", r]:
@@ -769,7 +862,7 @@ func _chest_left(pool: Array, taken: Array) -> Array:
 
 func offer_extra() -> int:
 	## 招贤榜: one more card on every pick-one
-	var n := 0
+	var n := perk("offer_extra")
 	for rid in active_relics():
 		n += int(_db().relics[rid]["mods"].get("offer_extra", 0))
 	return n

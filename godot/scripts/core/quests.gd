@@ -404,6 +404,7 @@ static func mods(save: SaveData) -> Dictionary:
 	var sources: Array = save.active_relics().map(func(r): return db.relics[r])
 	if save.fate != "" and db.fates.has(save.fate):
 		sources.append(db.fates[save.fate])  # 天命 of this run
+	sources.append_array(save.prep_mods())  # 前尘整备
 	for src in sources:
 		var m: Dictionary = src["mods"]
 		for k in m:
@@ -613,8 +614,12 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				save.grant_card(opt["card"], true)
 		"treasure", "recruit":
 			if not save.offer.is_empty() and choice >= 0:
-				gained.append(save.take(save.offer[choice]))
+				var cid0: String = save.offer[choice]
+				gained.append(save.take(cid0))
+				if save.pick_again(cid0):  # 兼收并蓄: one more from the same offer
+					return gained
 			save.offer = []
+			save.extra_pick_open = false
 		"mystery":
 			# called after the event's fight was won, or with the pick from the pick-one it opened
 			if not save.event_battle.is_empty():
@@ -635,6 +640,8 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				else:
 					gained.append(save.take(cid))
 					save.event_note.append("获得：" + db.cards[cid]["name"])
+					if save.offer_kind != "relic" and save.pick_again(cid):  # 兼收并蓄: one more from the same offer
+						return gained
 				if save.picks_left > 0:  # 三连抽: another pick-one straight away
 					save.picks_left -= 1
 					save.offer = save.recruit_offer(rng, 0, save.offer_rates).map(func(c): return c["id"])
@@ -643,6 +650,7 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 			save.offer = []
 			save.offer_kind = ""
 			save.picks_left = 0
+			save.extra_pick_open = false
 		"recover":
 			reset_carry(save)
 			for cid in s["cards"]:  # a rest can bring someone in too (张宁 after the 包扎 CG)

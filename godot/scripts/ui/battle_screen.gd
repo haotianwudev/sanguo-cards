@@ -1575,6 +1575,19 @@ func _pick_chest(title: String, chest: Array) -> void:
 	add_child(o)
 	var i: int = await o.picked
 	Game.save.take(chest[i]["id"])
+	if Game.save.perk("pick_extra") > 0 and chest.size() > 1:  # 前尘整备「兼收并蓄」: one more from the same chest
+		var rest := chest.duplicate()
+		o.visible = false
+		rest.remove_at(i)
+		var o2 := PickOverlay.new()
+		o2.title = "兼收并蓄 —— 再选一张"
+		o2.chest = o.chest
+		o2.card_ids = rest.map(func(c): return c["id"])
+		o2.counts = rest.map(func(c): return Game.save.copies(c["id"]))
+		o2.set_anchors_preset(Control.PRESET_FULL_RECT)
+		add_child(o2)
+		var j: int = await o2.picked
+		Game.save.take(rest[j]["id"])
 
 
 func _finish() -> void:

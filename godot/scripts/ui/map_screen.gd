@@ -1493,6 +1493,9 @@ func _resolve(choice := -1) -> void:
 			_show_toast("获得：" + c["name"])
 	if not relics.is_empty():
 		await _reveal_relics(relics.map(func(c): return c["id"]))
+	if Game.save.extra_pick_open and not Game.save.offer.is_empty():  # 兼收并蓄: the same offer again for the second card
+		_open_offer(Quests.here(q, Game.save))
+		return
 	if kind == "mystery" or not Game.save.offer.is_empty():  # an event's outcome / a pick still to make: show it first
 		_refresh()
 		return

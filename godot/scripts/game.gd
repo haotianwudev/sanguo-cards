@@ -105,6 +105,12 @@ func new_game(lord_name: String) -> void:
 func new_lap(route_id: String) -> void:
 	## 新周目: the story from the top; the collection starts over (cards ever had can drop again), unless the 设置 test option keeps it
 	save = load_slot(route_id).new_lap(bool(options["inherit_all"]))
+	show_screen(PrepScreen.new())  # 前尘整备 first (nothing is saved until 出发: backing out leaves the old save as it was)
+
+
+func start_lap() -> void:
+	## 前尘整备 → 出发: the chosen perks and cards take effect, the story starts
+	save.apply_prep()
 	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())
@@ -813,6 +819,16 @@ func demo(name: String) -> void:
 			o.captions = ["1 张 · 铜", "4 张 · 银", "16 张 · 金", "64 张 · 神"]
 			o.set_anchors_preset(Control.PRESET_FULL_RECT)
 			root.add_child(o)
+		"prep":  # 前尘整备 at the start of a second 周目: 6 endings reached, a few cards remembered
+			var db := GameData.get_db()
+			for cid in ["sunce", "zhouyu", "taishici", "ganning", "danyang", "jiefan"]:
+				if db.cards.has(cid):
+					save.grant_card(cid)
+			save.flags = db.ending_order.slice(0, 6).map(func(id): return db.endings[id]["title"])
+			save.commit_history()
+			save = save.new_lap()
+			save.perks = {"ap_max": 1, "public": 1}
+			show_screen(PrepScreen.new())
 		"title":
 			show_screen(TitleScreen.new())
 		"debug":  # --at=jump/cards/cgs picks the opening tab
