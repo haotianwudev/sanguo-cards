@@ -1573,7 +1573,7 @@
     "guanyu": {
       "name": "关羽",
       "rarity": "SR",
-      "troop": "cavalry",
+      "troop": "infantry",
       "hp": 76,
       "at": 98,
       "skills": [
@@ -2342,7 +2342,7 @@
     "wenpin": {
       "name": "文聘·荆州大将",
       "rarity": "R",
-      "troop": "spear",
+      "troop": "archer",
       "hp": 63,
       "at": 73,
       "scope": "south"
@@ -3056,7 +3056,7 @@
     "guanping": {
       "name": "关平",
       "rarity": "R",
-      "troop": "spear",
+      "troop": "infantry",
       "hp": 63,
       "at": 72
     },
@@ -3070,7 +3070,7 @@
     "guanxing": {
       "name": "关兴",
       "rarity": "R",
-      "troop": "spear",
+      "troop": "infantry",
       "hp": 63,
       "at": 72
     },
@@ -3290,7 +3290,7 @@
     "yujin": {
       "name": "于禁",
       "rarity": "SR",
-      "troop": "infantry",
+      "troop": "archer",
       "hp": 82,
       "at": 80,
       "scope": "north"
@@ -3894,7 +3894,7 @@
     "xusheng": {
       "name": "徐盛",
       "rarity": "C",
-      "troop": "spear",
+      "troop": "archer",
       "hp": 54,
       "at": 64,
       "pool": false,

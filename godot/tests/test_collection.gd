@@ -113,8 +113,8 @@ func test_soldier_can_lead_and_uses_one_copy() -> void:
 
 func test_party_rules() -> void:
 	var s := SaveData.new()
-	s.owned = ["machao", "guanyu", "zhangfei", "sunce", "sunce_zhong"]
-	check("兵种重复" in s.validate_party(["machao", "guanyu"]))
+	s.owned = ["machao", "zhangliao", "zhangfei", "sunce", "sunce_zhong"]
+	check("兵种重复" in s.validate_party(["machao", "zhangliao"]))
 	check("不同版本" in s.validate_party(["sunce", "sunce_zhong"]))
 	check_eq(s.validate_party(["machao", "zhangfei"]), "")
 	check("未拥有" in s.validate_party(["zhaoyun"]))
@@ -122,17 +122,17 @@ func test_party_rules() -> void:
 
 func test_auto_party_uses_benched_cards_as_backing() -> void:
 	var s := SaveData.new()
-	s.owned = ["cav_n", "madai", "guanyu", "spear_n", "archer_n", "log_n"]
+	s.owned = ["cav_n", "madai", "machao", "spear_n", "archer_n", "log_n"]
 	s.party = s.auto_party()
-	check(s.party.has("guanyu") and not s.party.has("madai"), str(s.party))
+	check(s.party.has("machao") and not s.party.has("madai"), str(s.party))
 	var leaders := s.party_leaders()
 	check_eq(leaders.size(), 4)
 	for ld in leaders:
-		if ld["card"]["id"] == "guanyu":
+		if ld["card"]["id"] == "machao":
 			var ids := {}
 			for m in ld["members"]:
 				ids[m["id"]] = true
-			check_eq(ids.keys().size(), 2, "cav_n + madai back 关羽 up")
+			check_eq(ids.keys().size(), 2, "cav_n + madai back 马超 up")
 
 
 func test_auto_party_benches_a_spent_general_for_a_fresh_one_never_for_a_soldier() -> void:
@@ -518,7 +518,7 @@ func test_the_spear_troop_is_a_big_one_with_a_shared_signature() -> void:
 	var spear: Array = db.cards.values().filter(func(c): return c["troop"] == "spear")
 	var soldiers: Array = spear.filter(func(c): return c["soldier"])
 	var generals: Array = spear.filter(func(c): return not c["soldier"])
-	check(soldiers.size() >= 15 and generals.size() >= 30, "%d soldiers, %d generals" % [soldiers.size(), generals.size()])
+	check(soldiers.size() >= 15 and generals.size() >= 25, "%d soldiers, %d generals" % [soldiers.size(), generals.size()])
 	for c in generals:
 		if c["rarity"] in ["SR", "SSR"] and c["id"] != "xuhuang":
 			var own: Array = c["skills"].filter(func(s): return s != "qiangpo")
