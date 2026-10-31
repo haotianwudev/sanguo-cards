@@ -364,7 +364,8 @@ func demo(name: String) -> void:
 				if a.begins_with("--id="):
 					want = a.substr(5)
 			var order: Array = GameData.get_db().quests.map(func(x): return x["id"])
-			save.flags = ["出生：冀州无极", "北线：班师冀州", "界桥：救下公孙瓒"]
+			# --south: a south-route chapter (no north birth, or current_quest() walks back onto the north route)
+			save.flags = [] if OS.get_cmdline_user_args().has("--south") else ["出生：冀州无极", "北线：班师冀州", "界桥：救下公孙瓒"]
 			save.quests_cleared = order.slice(0, order.find(want))
 			var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == want)[0]
 			var need: Variant = q.get("requires", [])  # the chapter's own gate (a south chapter needs its south flag)
@@ -379,6 +380,8 @@ func demo(name: String) -> void:
 					save.visited.append(save.square)
 				if a.begins_with("--flag="):  # --flag=<line>: a story flag this run should already have (a route choice)
 					save.run_records.append(a.substr(7))
+					if "结局" in a.substr(7):  # an ending is a lasting flag (it gates routes from save.flags)
+						save.flags.append(a.substr(7))
 				if a.begins_with("--dmg="):  # --dmg=<n>: wear carried in from earlier fights
 					save.damage = int(a.substr(6))
 			show_screen(MapScreen.new())

@@ -4,134 +4,2170 @@
     "quest": "prologue",
     "x_min": 23,
     "season": "隆冬，大雪覆盖，色调灰白带一点暖色。",
-    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/prologue_north_2.jpg"],
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/prologue_north_2.jpg"
+    ],
     "panels": [
-      {"src": "source/map/panels/prologue_north_1.jpg", "from": 23, "place": "无极甄府 → 邺城",
-       "scene": "冀州中山无极到冀州治所邺城。",
-       "spots": [["jz_arrive", "甄府大宅（高墙大院、几进院落）"], ["jz_ledger", "甄府的账房和粮仓小院"], ["jz_county", "邺城的城门和城墙"], ["jz_guojia", "邺城城里的街巷屋顶"]]},
-      {"src": "source/map/panels/prologue_north_2.jpg", "from": 29, "place": "邺城城外、赈济、分岔",
-       "scene": "邺城城外，开仓赈济，道路分岔伸向太行山。",
-       "spots": [["jz_mystery2", "城外的集市街巷"], ["jz_relief", "冒着热气的粥棚和一排粮车"], ["jz_road_fight", "开阔的官道路口"], ["jz_loot_path", "积雪的树林"]]},
-      {"src": "source/map/panels/prologue_north_3.jpg", "from": 35, "place": "太行山脚、土地庙、峡谷",
-       "scene": "太行山脚，山道进入峡谷，远处山腰是山贼的木寨。",
-       "spots": [["jz_zuoci", "路边一座小土地庙和一棵枯树"], ["jz_ambush", "两壁陡峭的峡谷谷口"], ["jz_zy_gate", "山贼木寨的寨门和箭楼"], ["jz_fire", "山坡上的枯树林"]]},
-      {"src": "source/map/panels/prologue_north_4.jpg", "from": 41, "place": "黑山寨",
-       "scene": "太行山里的黑山寨，建在悬崖台地上。",
-       "spots": [["jz_zy_road", "寨子里的木头营房"], ["jz_zy_altar", "冒着红色妖光的石祭坛"], ["jz_rescue", "山壁上一个幽深的水洞"], ["jz_boss", "黑山寨的聚义大厅（最大的木楼）"], ["jz_reunite", "寨门外的空地和下山的路口"]]},
-      {"src": "source/map/panels/prologue_north_5.jpg", "from": 47, "place": "回冀州、放粮、教枪、南下",
-       "scene": "回到冀州常山脚下的雪原村庄，最后大路向南。",
-       "spots": [["jz_almsgiving", "打开的粮仓和排队的粮车"], ["jz_recruit", "村口的募兵棚"], ["jz_training", "插着长枪的练兵校场"], ["jz_night", "夜里亮着炉火的农家院落"], ["jz_end", "一条向南延伸到地平线的大路"]]}
+      {
+        "src": "source/map/panels/prologue_north_1.jpg",
+        "from": 23,
+        "place": "无极甄府 → 邺城",
+        "scene": "冀州中山无极到冀州治所邺城。",
+        "spots": [
+          [
+            "jz_arrive",
+            "甄府大宅（高墙大院、几进院落）"
+          ],
+          [
+            "jz_ledger",
+            "甄府的账房和粮仓小院"
+          ],
+          [
+            "jz_county",
+            "邺城的城门和城墙"
+          ],
+          [
+            "jz_guojia",
+            "邺城城里的街巷屋顶"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_north_2.jpg",
+        "from": 29,
+        "place": "邺城城外、赈济、分岔",
+        "scene": "邺城城外，开仓赈济，道路分岔伸向太行山。",
+        "spots": [
+          [
+            "jz_mystery2",
+            "城外的集市街巷"
+          ],
+          [
+            "jz_relief",
+            "冒着热气的粥棚和一排粮车"
+          ],
+          [
+            "jz_road_fight",
+            "开阔的官道路口"
+          ],
+          [
+            "jz_loot_path",
+            "积雪的树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_north_3.jpg",
+        "from": 35,
+        "place": "太行山脚、土地庙、峡谷",
+        "scene": "太行山脚，山道进入峡谷，远处山腰是山贼的木寨。",
+        "spots": [
+          [
+            "jz_zuoci",
+            "路边一座小土地庙和一棵枯树"
+          ],
+          [
+            "jz_ambush",
+            "两壁陡峭的峡谷谷口"
+          ],
+          [
+            "jz_zy_gate",
+            "山贼木寨的寨门和箭楼"
+          ],
+          [
+            "jz_fire",
+            "山坡上的枯树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_north_4.jpg",
+        "from": 41,
+        "place": "黑山寨",
+        "scene": "太行山里的黑山寨，建在悬崖台地上。",
+        "spots": [
+          [
+            "jz_zy_road",
+            "寨子里的木头营房"
+          ],
+          [
+            "jz_zy_altar",
+            "冒着红色妖光的石祭坛"
+          ],
+          [
+            "jz_rescue",
+            "山壁上一个幽深的水洞"
+          ],
+          [
+            "jz_boss",
+            "黑山寨的聚义大厅（最大的木楼）"
+          ],
+          [
+            "jz_reunite",
+            "寨门外的空地和下山的路口"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_north_5.jpg",
+        "from": 47,
+        "place": "回冀州、放粮、教枪、南下",
+        "scene": "回到冀州常山脚下的雪原村庄，最后大路向南。",
+        "spots": [
+          [
+            "jz_almsgiving",
+            "打开的粮仓和排队的粮车"
+          ],
+          [
+            "jz_recruit",
+            "村口的募兵棚"
+          ],
+          [
+            "jz_training",
+            "插着长枪的练兵校场"
+          ],
+          [
+            "jz_night",
+            "夜里亮着炉火的农家院落"
+          ],
+          [
+            "jz_end",
+            "一条向南延伸到地平线的大路"
+          ]
+        ]
+      }
     ]
   },
   "luoyang_n": {
     "quest": "luoyang_n",
-    "style_refs": ["godot/data/art/map/yecheng.jpg", "godot/data/art/map/luoyang_n.jpg"],
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "godot/data/art/map/luoyang_n.jpg"
+    ],
     "panels": [
-      {"src": "source/map/panels/luoyang_n_1.jpg", "from": 0, "place": "黄河古道、渡口、车队营地（早春）",
-       "scene": "早春（冰雪刚化，草色返青）：黄河北岸的古道和渡口，浑黄的黄河在画面上方横过。",
-       "spots": [["ln_river", "黄河边的木码头和几条渡船"], ["ln_lvlingqi", "古道边一道黄土坡"], ["ln_camp", "粮车围成一圈的车队营地和篝火"], ["ln_loot1", "古道边一座破旧的驿亭"]]},
-      {"src": "source/map/panels/luoyang_n_2.jpg", "from": 6, "place": "酸枣会盟大营、诸侯宴、曹操借粮",
-       "scene": "春天：酸枣诸侯会盟，原野上连绵的营帐。",
-       "spots": [["ln_mutiny_road", "官道上翻倒的粮车"], ["ln_banner", "一座商号的大帐和一排货车"], ["ln_feast", "土筑的会盟高台和宴饮的大帐"], ["ln_caocao", "一座单独的营寨，营帐整齐"]]},
-      {"src": "source/map/panels/luoyang_n_3.jpg", "from": 12, "place": "荥阳道、林地、汴水",
-       "scene": "春天：荥阳道，大路穿过丘陵和树林，通到汴水河边。",
-       "spots": [["ln_pursuit", "路边起伏的丘陵"], ["ln_ambush", "茂密的树林"], ["ln_mystery_forest", "林间小路和一间猎户木屋"], ["ln_xurong", "汴水河岸的芦苇荡"], ["ln_rescue", "河边的一片小树林"]]},
-      {"src": "source/map/panels/luoyang_n_4.jpg", "from": 19, "place": "酸枣废营、兵临虎牢",
-       "scene": "暮春：从酸枣通往虎牢关的平原，远处山口隐约是关城。",
-       "spots": [["ln_rest2", "联军的营地"], ["ln_rest2_t", "一座残破的旧营寨"], ["ln_camp_raid", "营外的木栅栏和拒马"], ["ln_feixiong", "关前的土坡营垒"], ["ln_langqi", "一片着火冒烟的营帐"]]},
-      {"src": "source/map/panels/luoyang_n_5.jpg", "from": 25, "place": "虎牢关前、车帘后",
-       "scene": "暮春：虎牢关，关城卡在两山之间的山口。",
-       "spots": [["ln_rest3", "关前的小营地"], ["ln_lvbu", "雄伟的虎牢关关城和关楼"], ["ln_box2", "关前散落的辎重堆"]]},
-      {"src": "source/map/panels/luoyang_n_6.jpg", "from": 31, "place": "驻军、洛阳火、难民（初夏）",
-       "scene": "初夏：远方地平线上洛阳城正在燃烧，天空被火光映红、浓烟滚滚。",
-       "spots": [["ln_handhold", "路边一辆带车帘的马车"], ["ln_wait", "联军驻扎的营地"], ["ln_blaze", "远处燃烧的洛阳城（火光和浓烟）"], ["ln_guosi", "西凉军的营栅"], ["ln_refugees", "逃难百姓的推车和篝火"]]},
-      {"src": "source/map/panels/luoyang_n_7.jpg", "from": 37, "place": "河岸险路、黄河渡口、回冀州",
-       "scene": "初夏：黄河南岸，河滩和渡口，对岸大路通向冀州。",
-       "spots": [["ln_night_talk", "小土丘上的一堆篝火"], ["ln_rear_guard", "河岸的高坡"], ["ln_mystery_retreat", "河滩上的险路和乱石"], ["ln_ferry", "黄河渡口的码头和渡船"], ["ln_end", "北岸通向远方平原的大路"]]}
+      {
+        "src": "source/map/panels/luoyang_n_1.jpg",
+        "from": 0,
+        "place": "黄河古道、渡口、车队营地（早春）",
+        "scene": "早春（冰雪刚化，草色返青）：黄河北岸的古道和渡口，浑黄的黄河在画面上方横过。",
+        "spots": [
+          [
+            "ln_river",
+            "黄河边的木码头和几条渡船"
+          ],
+          [
+            "ln_lvlingqi",
+            "古道边一道黄土坡"
+          ],
+          [
+            "ln_camp",
+            "粮车围成一圈的车队营地和篝火"
+          ],
+          [
+            "ln_loot1",
+            "古道边一座破旧的驿亭"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/luoyang_n_2.jpg",
+        "from": 6,
+        "place": "酸枣会盟大营、诸侯宴、曹操借粮",
+        "scene": "春天：酸枣诸侯会盟，原野上连绵的营帐。",
+        "spots": [
+          [
+            "ln_mutiny_road",
+            "官道上翻倒的粮车"
+          ],
+          [
+            "ln_banner",
+            "一座商号的大帐和一排货车"
+          ],
+          [
+            "ln_feast",
+            "土筑的会盟高台和宴饮的大帐"
+          ],
+          [
+            "ln_caocao",
+            "一座单独的营寨，营帐整齐"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/luoyang_n_3.jpg",
+        "from": 12,
+        "place": "荥阳道、林地、汴水",
+        "scene": "春天：荥阳道，大路穿过丘陵和树林，通到汴水河边。",
+        "spots": [
+          [
+            "ln_pursuit",
+            "路边起伏的丘陵"
+          ],
+          [
+            "ln_ambush",
+            "茂密的树林"
+          ],
+          [
+            "ln_mystery_forest",
+            "林间小路和一间猎户木屋"
+          ],
+          [
+            "ln_xurong",
+            "汴水河岸的芦苇荡"
+          ],
+          [
+            "ln_rescue",
+            "河边的一片小树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/luoyang_n_4.jpg",
+        "from": 19,
+        "place": "酸枣废营、兵临虎牢",
+        "scene": "暮春：从酸枣通往虎牢关的平原，远处山口隐约是关城。",
+        "spots": [
+          [
+            "ln_rest2",
+            "联军的营地"
+          ],
+          [
+            "ln_rest2_t",
+            "一座残破的旧营寨"
+          ],
+          [
+            "ln_camp_raid",
+            "营外的木栅栏和拒马"
+          ],
+          [
+            "ln_feixiong",
+            "关前的土坡营垒"
+          ],
+          [
+            "ln_langqi",
+            "一片着火冒烟的营帐"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/luoyang_n_5.jpg",
+        "from": 25,
+        "place": "虎牢关前、车帘后",
+        "scene": "暮春：虎牢关，关城卡在两山之间的山口。",
+        "spots": [
+          [
+            "ln_rest3",
+            "关前的小营地"
+          ],
+          [
+            "ln_lvbu",
+            "雄伟的虎牢关关城和关楼"
+          ],
+          [
+            "ln_box2",
+            "关前散落的辎重堆"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/luoyang_n_6.jpg",
+        "from": 31,
+        "place": "驻军、洛阳火、难民（初夏）",
+        "scene": "初夏：远方地平线上洛阳城正在燃烧，天空被火光映红、浓烟滚滚。",
+        "spots": [
+          [
+            "ln_handhold",
+            "路边一辆带车帘的马车"
+          ],
+          [
+            "ln_wait",
+            "联军驻扎的营地"
+          ],
+          [
+            "ln_blaze",
+            "远处燃烧的洛阳城（火光和浓烟）"
+          ],
+          [
+            "ln_guosi",
+            "西凉军的营栅"
+          ],
+          [
+            "ln_refugees",
+            "逃难百姓的推车和篝火"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/luoyang_n_7.jpg",
+        "from": 37,
+        "place": "河岸险路、黄河渡口、回冀州",
+        "scene": "初夏：黄河南岸，河滩和渡口，对岸大路通向冀州。",
+        "spots": [
+          [
+            "ln_night_talk",
+            "小土丘上的一堆篝火"
+          ],
+          [
+            "ln_rear_guard",
+            "河岸的高坡"
+          ],
+          [
+            "ln_mystery_retreat",
+            "河滩上的险路和乱石"
+          ],
+          [
+            "ln_ferry",
+            "黄河渡口的码头和渡船"
+          ],
+          [
+            "ln_end",
+            "北岸通向远方平原的大路"
+          ]
+        ]
+      }
     ]
   },
   "heishan": {
     "quest": "heishan",
-    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/luoyang_n_3.jpg"],
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/luoyang_n_3.jpg"
+    ],
     "panels": [
-      {"src": "source/map/panels/heishan_1.jpg", "from": 0, "place": "真定城、城外、兵营（初平元年夏）",
-       "scene": "盛夏：常山真定县城和城外的田野，远处是太行山。",
-       "spots": [["hs_start", "真定县城的城门和城墙"], ["hs_bandit1", "城外的破落街口"], ["hs_m4", "路边翻倒的商队货车"], ["hs_xiahoulan_pre", "一座军营的营门"]]},
-      {"src": "source/map/panels/heishan_2.jpg", "from": 6, "place": "军法、进山、太行黄巾",
-       "scene": "盛夏：太行山脚，山道从平原进入深山。",
-       "spots": [["hs_junfa", "军营里的校场和点将台"], ["hs_mountain_start", "山口的石阶小路"], ["hs_tm3", "山坡上黄巾残兵的破营帐"], ["hs_tm4", "山路边的采药人草棚"]]},
-      {"src": "source/map/panels/heishan_3.jpg", "from": 12, "place": "深山绝壁、黑山大寨（上）、空手而归（下）",
-       "scene": "夏末：太行深山。画面上半是山里，画面下半山脚是另一条通回平原的路。",
-       "spots": [["hs_encounter", "陡峭的悬崖绝壁"], ["hs_zhangyan", "建在山顶的黑山大寨寨门"], ["hs_rest1", "山寨里的营房"], ["hs_bad_skip", "山脚下一条孤零零的下山路"], ["hs_bad_wall", "远处平原上无极县城的城墙"]]},
-      {"src": "source/map/panels/heishan_4.jpg", "from": 18, "place": "黑山寨内营（上）、无极甄府（下）",
-       "scene": "秋天：画面上半是太行山里的黑山大寨内营，画面下半山脚是无极县城和甄府大宅。",
-       "spots": [["hs_hm1b", "山寨里的演武场"], ["hs_yudu", "山寨里一座营垒"], ["hs_alliance", "山寨的聚义大厅"], ["hs_bad_gate", "甄府的大门"], ["hs_bad_hall", "甄府的中庭院落"], ["hs_timeskip", "下山回无极的大路"], ["hs_guotu", "无极县城的街口"]]},
-      {"src": "source/map/panels/heishan_5.jpg", "from": 24, "place": "秘道、府门突围、郭图拦街、峡谷（初平二年冬）",
-       "scene": "隆冬雪夜：画面左边是无极县城的街巷，向右出城进入太行山的峡谷。",
-       "spots": [["hs_escape", "院墙下一个隐蔽的地道口"], ["hs_breakout", "府门前的街道"], ["hs_guotu_fight", "县城的城门"], ["hs_em1", "雪中的峡谷入口"], ["hs_pursuit0", "峡谷里的一片开阔雪地"]]},
-      {"src": "source/map/panels/heishan_6.jpg", "from": 30, "place": "追兵、太行山口、太行落脚、界桥前夜",
-       "scene": "冬末到早春：太行山里的山道，积雪开始融化。",
-       "spots": [["hs_pursuit1", "山道边的一片坡地"], ["hs_pursuit2", "山道旁的乱石岗"], ["hs_chunyuqiong", "两山夹峙的太行山口关隘"], ["hs_valley", "山谷里的小村落"], ["hs_jieqiao_eve", "山谷出口的营地和篝火"]]},
-      {"src": "source/map/panels/heishan_7.jpg", "from": 36, "place": "界桥（初平三年春）",
-       "scene": "早春：冀州平原上的磐河，河上一座木桥（界桥），两岸是战场。",
-       "spots": [["hs_jieqiao_scout", "河边的开阔草地"], ["hs_jm_loot", "被丢弃的营帐和辎重"], ["hs_rest3", "河岸的小营地"], ["hs_quyi", "桥头的盾阵营垒"], ["hs_wenchou", "横跨磐河的木桥（界桥）"], ["hs_end", "河对岸的大片营地"]]}
+      {
+        "src": "source/map/panels/heishan_1.jpg",
+        "from": 0,
+        "place": "真定城、城外、兵营（初平元年夏）",
+        "scene": "盛夏：常山真定县城和城外的田野，远处是太行山。",
+        "spots": [
+          [
+            "hs_start",
+            "真定县城的城门和城墙"
+          ],
+          [
+            "hs_bandit1",
+            "城外的破落街口"
+          ],
+          [
+            "hs_m4",
+            "路边翻倒的商队货车"
+          ],
+          [
+            "hs_xiahoulan_pre",
+            "一座军营的营门"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/heishan_2.jpg",
+        "from": 6,
+        "place": "军法、进山、太行黄巾",
+        "scene": "盛夏：太行山脚，山道从平原进入深山。",
+        "spots": [
+          [
+            "hs_junfa",
+            "军营里的校场和点将台"
+          ],
+          [
+            "hs_mountain_start",
+            "山口的石阶小路"
+          ],
+          [
+            "hs_tm3",
+            "山坡上黄巾残兵的破营帐"
+          ],
+          [
+            "hs_tm4",
+            "山路边的采药人草棚"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/heishan_3.jpg",
+        "from": 12,
+        "place": "深山绝壁、黑山大寨（上）、空手而归（下）",
+        "scene": "夏末：太行深山。画面上半是山里，画面下半山脚是另一条通回平原的路。",
+        "spots": [
+          [
+            "hs_encounter",
+            "陡峭的悬崖绝壁"
+          ],
+          [
+            "hs_zhangyan",
+            "建在山顶的黑山大寨寨门"
+          ],
+          [
+            "hs_rest1",
+            "山寨里的营房"
+          ],
+          [
+            "hs_bad_skip",
+            "山脚下一条孤零零的下山路"
+          ],
+          [
+            "hs_bad_wall",
+            "远处平原上无极县城的城墙"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/heishan_4.jpg",
+        "from": 18,
+        "place": "黑山寨内营（上）、无极甄府（下）",
+        "scene": "秋天：画面上半是太行山里的黑山大寨内营，画面下半山脚是无极县城和甄府大宅。",
+        "spots": [
+          [
+            "hs_hm1b",
+            "山寨里的演武场"
+          ],
+          [
+            "hs_yudu",
+            "山寨里一座营垒"
+          ],
+          [
+            "hs_alliance",
+            "山寨的聚义大厅"
+          ],
+          [
+            "hs_bad_gate",
+            "甄府的大门"
+          ],
+          [
+            "hs_bad_hall",
+            "甄府的中庭院落"
+          ],
+          [
+            "hs_timeskip",
+            "下山回无极的大路"
+          ],
+          [
+            "hs_guotu",
+            "无极县城的街口"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/heishan_5.jpg",
+        "from": 24,
+        "place": "秘道、府门突围、郭图拦街、峡谷（初平二年冬）",
+        "scene": "隆冬雪夜：画面左边是无极县城的街巷，向右出城进入太行山的峡谷。",
+        "spots": [
+          [
+            "hs_escape",
+            "院墙下一个隐蔽的地道口"
+          ],
+          [
+            "hs_breakout",
+            "府门前的街道"
+          ],
+          [
+            "hs_guotu_fight",
+            "县城的城门"
+          ],
+          [
+            "hs_em1",
+            "雪中的峡谷入口"
+          ],
+          [
+            "hs_pursuit0",
+            "峡谷里的一片开阔雪地"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/heishan_6.jpg",
+        "from": 30,
+        "place": "追兵、太行山口、太行落脚、界桥前夜",
+        "scene": "冬末到早春：太行山里的山道，积雪开始融化。",
+        "spots": [
+          [
+            "hs_pursuit1",
+            "山道边的一片坡地"
+          ],
+          [
+            "hs_pursuit2",
+            "山道旁的乱石岗"
+          ],
+          [
+            "hs_chunyuqiong",
+            "两山夹峙的太行山口关隘"
+          ],
+          [
+            "hs_valley",
+            "山谷里的小村落"
+          ],
+          [
+            "hs_jieqiao_eve",
+            "山谷出口的营地和篝火"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/heishan_7.jpg",
+        "from": 36,
+        "place": "界桥（初平三年春）",
+        "scene": "早春：冀州平原上的磐河，河上一座木桥（界桥），两岸是战场。",
+        "spots": [
+          [
+            "hs_jieqiao_scout",
+            "河边的开阔草地"
+          ],
+          [
+            "hs_jm_loot",
+            "被丢弃的营帐和辎重"
+          ],
+          [
+            "hs_rest3",
+            "河岸的小营地"
+          ],
+          [
+            "hs_quyi",
+            "桥头的盾阵营垒"
+          ],
+          [
+            "hs_wenchou",
+            "横跨磐河的木桥（界桥）"
+          ],
+          [
+            "hs_end",
+            "河对岸的大片营地"
+          ]
+        ]
+      }
     ]
   },
   "beihai": {
     "quest": "beihai",
-    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/heishan_2.jpg"],
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/heishan_2.jpg"
+    ],
     "panels": [
-      {"src": "source/map/panels/beihai_1.jpg", "from": 0, "place": "太行外围（初平三年夏）",
-       "scene": "盛夏：太行山外围的山脚，山林茂密。",
-       "spots": [["bh_start", "山脚下的一处小营地"], ["bh_wai1", "山坡上的哨塔"], ["bh_bandit", "山路边的乱石滩"], ["bh_patrol", "林间山道"], ["bh_zheng_pre", "远处山腰上一座山寨的寨墙"]]},
-      {"src": "source/map/panels/beihai_2.jpg", "from": 6, "place": "郑家寨、姜家寨、调解双凤",
-       "scene": "盛夏：太行山里相邻的两座山头，各有一座山寨，中间隔着一道山谷。",
-       "spots": [["bh_zheng", "左边山头上的郑家山寨"], ["bh_jiang_trap", "山谷里的木栅拦路"], ["bh_jiang", "右边山头上的姜家山寨"], ["bh_zj_choose", "两寨之间山谷里的一座木亭"], ["bh_zj_peace", "山坳里一间独立的木屋"]]},
-      {"src": "source/map/panels/beihai_3.jpg", "from": 12, "place": "收服双凤、太行休整、于毒、吕布北来",
-       "scene": "秋末到初冬：画面左边是太行山里的山寨，向右山势渐低，右边山外是开阔的平原，平原上开始积薄雪。",
-       "spots": [["bh_zj_join", "两寨合一的大山寨"], ["bh_rest1", "山寨里的营房"], ["bh_ta2", "山坡上的叛军营垒"], ["bh_m4", "山脚的招贤木棚"], ["bh_lubu_start", "山口外平原上扬起的尘土"]]},
-      {"src": "source/map/panels/beihai_4.jpg", "from": 18, "place": "并州狼骑、陷阵营、吕布（初平三年冬）",
-       "scene": "隆冬：太行山外的雪原战场，远处是太行山。",
-       "spots": [["bh_wolf2", "雪原上骑兵的蹄印和倒下的拒马"], ["bh_gaoshun", "一座严整的方形营垒"], ["bh_lubu_face", "雪原上一棵孤零零的大树"], ["bh_lubu", "雪原上一大片开阔的战场"], ["bh_lubu_check", "被冲垮的木栅阵线"], ["bh_bad_end", "山脚下一座着火的山寨"]]},
-      {"src": "source/map/panels/beihai_5.jpg", "from": 24, "place": "千里突围、冀州追兵、渡口颜良",
-       "scene": "隆冬：冀州的雪原，大路向右通到一条大河的渡口，河边芦苇荡。",
-       "spots": [["bh_flee", "雪原上的大路"], ["bh_fl2", "路边的小树林"], ["bh_jz_inf", "冀州军的汉代方形军帐和木栅（不要蒙古包、不要圆顶帐篷）"], ["bh_reed_loot", "积雪的芦苇荡"], ["bh_yanliang", "河边的渡口码头"]]},
-      {"src": "source/map/panels/beihai_6.jpg", "from": 30, "place": "渡河、北海之围、城外黄巾、太史慈",
-       "scene": "冬末：画面左边是一条大河和渡船，向右是青州北海的原野，远处北海城被黄巾军的营帐包围。",
-       "spots": [["bh_cross", "大河上的渡船"], ["bh_beihai_start", "原野上远望北海城的高坡"], ["bh_hj_a2", "黄巾军的营帐"], ["bh_hj_out", "北海城外的护城河和吊桥"], ["bh_taishici_meet", "城外的一片树林"]]},
-      {"src": "source/map/panels/beihai_7.jpg", "from": 36, "place": "北海城门、黄巾大营、管亥",
-       "scene": "早春：北海城的城门前，城外漫山遍野的黄巾军大营。",
-       "spots": [["bh_hj_gate", "北海城的城门"], ["bh_hj_qushuai", "黄巾大营的营门"], ["bh_beihai_zhao", "城墙下的招贤木棚"], ["bh_rest2", "城门内的营地"], ["bh_guanhai", "城外黄巾的中军大帐"]]},
-      {"src": "source/map/panels/beihai_8.jpg", "from": 42, "place": "北海城内（初平四年春）",
-       "scene": "初春：北海城内，城墙环绕，屋舍整齐，桃花初开。",
-       "spots": [["bh_porridge", "城门口冒着热气的粥棚"], ["bh_kongrong", "北海相府的大堂"], ["bh_feast", "相府里设宴的厅堂"], ["bh_cimu", "城外一间小农家院"], ["bh_seal", "城门外来的使节车驾"], ["bh_end", "北海相府的门楼"]]}
+      {
+        "src": "source/map/panels/beihai_1.jpg",
+        "from": 0,
+        "place": "太行外围（初平三年夏）",
+        "scene": "盛夏：太行山外围的山脚，山林茂密。",
+        "spots": [
+          [
+            "bh_start",
+            "山脚下的一处小营地"
+          ],
+          [
+            "bh_wai1",
+            "山坡上的哨塔"
+          ],
+          [
+            "bh_bandit",
+            "山路边的乱石滩"
+          ],
+          [
+            "bh_patrol",
+            "林间山道"
+          ],
+          [
+            "bh_zheng_pre",
+            "远处山腰上一座山寨的寨墙"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_2.jpg",
+        "from": 6,
+        "place": "郑家寨、姜家寨、调解双凤",
+        "scene": "盛夏：太行山里相邻的两座山头，各有一座山寨，中间隔着一道山谷。",
+        "spots": [
+          [
+            "bh_zheng",
+            "左边山头上的郑家山寨"
+          ],
+          [
+            "bh_jiang_trap",
+            "山谷里的木栅拦路"
+          ],
+          [
+            "bh_jiang",
+            "右边山头上的姜家山寨"
+          ],
+          [
+            "bh_zj_choose",
+            "两寨之间山谷里的一座木亭"
+          ],
+          [
+            "bh_zj_peace",
+            "山坳里一间独立的木屋"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_3.jpg",
+        "from": 12,
+        "place": "收服双凤、太行休整、于毒、吕布北来",
+        "scene": "秋末到初冬：画面左边是太行山里的山寨，向右山势渐低，右边山外是开阔的平原，平原上开始积薄雪。",
+        "spots": [
+          [
+            "bh_zj_join",
+            "两寨合一的大山寨"
+          ],
+          [
+            "bh_rest1",
+            "山寨里的营房"
+          ],
+          [
+            "bh_ta2",
+            "山坡上的叛军营垒"
+          ],
+          [
+            "bh_m4",
+            "山脚的招贤木棚"
+          ],
+          [
+            "bh_lubu_start",
+            "山口外平原上扬起的尘土"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_4.jpg",
+        "from": 18,
+        "place": "并州狼骑、陷阵营、吕布（初平三年冬）",
+        "scene": "隆冬：太行山外的雪原战场，远处是太行山。",
+        "spots": [
+          [
+            "bh_wolf2",
+            "雪原上骑兵的蹄印和倒下的拒马"
+          ],
+          [
+            "bh_gaoshun",
+            "一座严整的方形营垒"
+          ],
+          [
+            "bh_lubu_face",
+            "雪原上一棵孤零零的大树"
+          ],
+          [
+            "bh_lubu",
+            "雪原上一大片开阔的战场"
+          ],
+          [
+            "bh_lubu_check",
+            "被冲垮的木栅阵线"
+          ],
+          [
+            "bh_bad_end",
+            "山脚下一座着火的山寨"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_5.jpg",
+        "from": 24,
+        "place": "千里突围、冀州追兵、渡口颜良",
+        "scene": "隆冬：冀州的雪原，大路向右通到一条大河的渡口，河边芦苇荡。",
+        "spots": [
+          [
+            "bh_flee",
+            "雪原上的大路"
+          ],
+          [
+            "bh_fl2",
+            "路边的小树林"
+          ],
+          [
+            "bh_jz_inf",
+            "冀州军的汉代方形军帐和木栅（不要蒙古包、不要圆顶帐篷）"
+          ],
+          [
+            "bh_reed_loot",
+            "积雪的芦苇荡"
+          ],
+          [
+            "bh_yanliang",
+            "河边的渡口码头"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_6.jpg",
+        "from": 30,
+        "place": "渡河、北海之围、城外黄巾、太史慈",
+        "scene": "冬末：画面左边是一条大河和渡船，向右是青州北海的原野，远处北海城被黄巾军的营帐包围。",
+        "spots": [
+          [
+            "bh_cross",
+            "大河上的渡船"
+          ],
+          [
+            "bh_beihai_start",
+            "原野上远望北海城的高坡"
+          ],
+          [
+            "bh_hj_a2",
+            "黄巾军的营帐"
+          ],
+          [
+            "bh_hj_out",
+            "北海城外的护城河和吊桥"
+          ],
+          [
+            "bh_taishici_meet",
+            "城外的一片树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_7.jpg",
+        "from": 36,
+        "place": "北海城门、黄巾大营、管亥",
+        "scene": "早春：北海城的城门前，城外漫山遍野的黄巾军大营。",
+        "spots": [
+          [
+            "bh_hj_gate",
+            "北海城的城门"
+          ],
+          [
+            "bh_hj_qushuai",
+            "黄巾大营的营门"
+          ],
+          [
+            "bh_beihai_zhao",
+            "城墙下的招贤木棚"
+          ],
+          [
+            "bh_rest2",
+            "城门内的营地"
+          ],
+          [
+            "bh_guanhai",
+            "城外黄巾的中军大帐"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/beihai_8.jpg",
+        "from": 42,
+        "place": "北海城内（初平四年春）",
+        "scene": "初春：北海城内，城墙环绕，屋舍整齐，桃花初开。",
+        "spots": [
+          [
+            "bh_porridge",
+            "城门口冒着热气的粥棚"
+          ],
+          [
+            "bh_kongrong",
+            "北海相府的大堂"
+          ],
+          [
+            "bh_feast",
+            "相府里设宴的厅堂"
+          ],
+          [
+            "bh_cimu",
+            "城外一间小农家院"
+          ],
+          [
+            "bh_seal",
+            "城门外来的使节车驾"
+          ],
+          [
+            "bh_end",
+            "北海相府的门楼"
+          ]
+        ]
+      }
     ]
   },
   "xuzhou": {
     "quest": "xuzhou",
-    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/beihai_8.jpg"],
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/beihai_8.jpg"
+    ],
     "panels": [
-      {"src": "source/map/panels/xuzhou_1.jpg", "from": 0, "place": "北海出兵、琅邪道（兴平元年夏）",
-       "scene": "盛夏：从青州北海南下徐州的路，丘陵和田野。",
-       "spots": [["xz_start", "北海城的城门"], ["xz_muster", "城外的点兵校场"], ["xz_l1_a2", "琅邪道上的山岗"], ["xz_l1_m1", "丘陵间的小村子"], ["xz_xiapi", "远处平原上一座大城的城墙"]]},
-      {"src": "source/map/panels/xuzhou_2.jpg", "from": 6, "place": "泗水、曹军后队、下邳城外夏侯惇",
-       "scene": "盛夏：泗水河边的平原，右边是徐州下邳城高大的城墙。",
-       "spots": [["xz_a2", "曹军营地的营帐和木栅"], ["xz_m1", "泗水河岸"], ["xz_xiahoudun", "城外一片开阔的战场"], ["xz_rest1", "下邳城的城门"], ["xz_meet", "城里的州牧府"]]},
-      {"src": "source/map/panels/xuzhou_3.jpg", "from": 12, "place": "下邳城内外、让印、曹豹府、糜府",
-       "scene": "夏末：徐州下邳城里，街巷纵横的大城。",
-       "spots": [["xz_m2", "热闹的市集"], ["xz_seal", "州牧府的大堂"], ["xz_l2_a2", "一座大宅（曹豹府）"], ["xz_l2_m1", "街边的酒楼"], ["xz_mifu", "张灯结彩的富商大宅（糜府）"]]},
-      {"src": "source/map/panels/xuzhou_4.jpg", "from": 18, "place": "施针、泗水码头、军棍、曹豹家兵、陈家",
-       "scene": "秋天：下邳城东，城墙外是泗水码头，城里是街巷和宅院。",
-       "spots": [["xz_needle", "一间安静的医馆小院"], ["xz_l3_a2", "泗水码头的盐船和货栈"], ["xz_law", "军营里的校场"], ["xz_caobao", "下邳的一条长街"], ["xz_chendeng", "一座气派的士族宅院（陈家）"]]},
-      {"src": "source/map/panels/xuzhou_5.jpg", "from": 24, "place": "谢恩宴、小沛城外 / 陶府（兴平二年春）",
-       "scene": "早春：画面左边是城里的府邸，向右出城，右边是另一座城池小沛的城墙和城外原野。",
-       "spots": [["xz_xieyan", "设宴的府邸厅堂"], ["xz_beat", "城外的大路"], ["xz_fu", "城外一座军营的营门"], ["xz_langqi", "原野上骑兵驰过的开阔地"], ["xz_xianzhen", "城墙下的营垒"]]},
-      {"src": "source/map/panels/xuzhou_6.jpg", "from": 30, "place": "小沛围城、吕布突围 / 白门、陶谦遗表（兴平二年冬）",
-       "scene": "秋末到初冬：一座被围的城池，城外连营，向右是平原上的州府。",
-       "spots": [["xz_rest2", "围城的连营营帐"], ["xz_lvbu", "城池的城门（城门洞开）"], ["xz_lvbu_gone", "城外向远方延伸的大路"], ["xz_bingzhou", "一座新扎的骑兵营地（汉代方形军帐和马厩，不要蒙古包、不要圆顶帐篷）"], ["xz_will", "州牧府的灵堂（白幡）"]]},
-      {"src": "source/map/panels/xuzhou_7.jpg", "from": 36, "place": "吕布残部、陈先生别苑、城郊、过年、南望淮南",
-       "scene": "隆冬下雪：下邳城郊，农家、园林和粮仓，最后是一座远眺南方的高坡。",
-       "spots": [["xz_l4_t1", "被丢弃的辎重车"], ["xz_chengong", "竹林里一座清静的小园林"], ["xz_d2", "城郊的田野"], ["xz_t3", "城郊的粮仓"], ["xz_feast", "挂满红灯笼的院落"], ["xz_end", "一座可以眺望南方的高坡"]]}
+      {
+        "src": "source/map/panels/xuzhou_1.jpg",
+        "from": 0,
+        "place": "北海出兵、琅邪道（兴平元年夏）",
+        "scene": "盛夏：从青州北海南下徐州的路，丘陵和田野。",
+        "spots": [
+          [
+            "xz_start",
+            "北海城的城门"
+          ],
+          [
+            "xz_muster",
+            "城外的点兵校场"
+          ],
+          [
+            "xz_l1_a2",
+            "琅邪道上的山岗"
+          ],
+          [
+            "xz_l1_m1",
+            "丘陵间的小村子"
+          ],
+          [
+            "xz_xiapi",
+            "远处平原上一座大城的城墙"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/xuzhou_2.jpg",
+        "from": 6,
+        "place": "泗水、曹军后队、下邳城外夏侯惇",
+        "scene": "盛夏：泗水河边的平原，右边是徐州下邳城高大的城墙。",
+        "spots": [
+          [
+            "xz_a2",
+            "曹军营地的营帐和木栅"
+          ],
+          [
+            "xz_m1",
+            "泗水河岸"
+          ],
+          [
+            "xz_xiahoudun",
+            "城外一片开阔的战场"
+          ],
+          [
+            "xz_rest1",
+            "下邳城的城门"
+          ],
+          [
+            "xz_meet",
+            "城里的州牧府"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/xuzhou_3.jpg",
+        "from": 12,
+        "place": "下邳城内外、让印、曹豹府、糜府",
+        "scene": "夏末：徐州下邳城里，街巷纵横的大城。",
+        "spots": [
+          [
+            "xz_m2",
+            "热闹的市集"
+          ],
+          [
+            "xz_seal",
+            "州牧府的大堂"
+          ],
+          [
+            "xz_l2_a2",
+            "一座大宅（曹豹府）"
+          ],
+          [
+            "xz_l2_m1",
+            "街边的酒楼"
+          ],
+          [
+            "xz_mifu",
+            "张灯结彩的富商大宅（糜府）"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/xuzhou_4.jpg",
+        "from": 18,
+        "place": "施针、泗水码头、军棍、曹豹家兵、陈家",
+        "scene": "秋天：下邳城东，城墙外是泗水码头，城里是街巷和宅院。",
+        "spots": [
+          [
+            "xz_needle",
+            "一间安静的医馆小院"
+          ],
+          [
+            "xz_l3_a2",
+            "泗水码头的盐船和货栈"
+          ],
+          [
+            "xz_law",
+            "军营里的校场"
+          ],
+          [
+            "xz_caobao",
+            "下邳的一条长街"
+          ],
+          [
+            "xz_chendeng",
+            "一座气派的士族宅院（陈家）"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/xuzhou_5.jpg",
+        "from": 24,
+        "place": "谢恩宴、小沛城外 / 陶府（兴平二年春）",
+        "scene": "早春：画面左边是城里的府邸，向右出城，右边是另一座城池小沛的城墙和城外原野。",
+        "spots": [
+          [
+            "xz_xieyan",
+            "设宴的府邸厅堂"
+          ],
+          [
+            "xz_beat",
+            "城外的大路"
+          ],
+          [
+            "xz_fu",
+            "城外一座军营的营门"
+          ],
+          [
+            "xz_langqi",
+            "原野上骑兵驰过的开阔地"
+          ],
+          [
+            "xz_xianzhen",
+            "城墙下的营垒"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/xuzhou_6.jpg",
+        "from": 30,
+        "place": "小沛围城、吕布突围 / 白门、陶谦遗表（兴平二年冬）",
+        "scene": "秋末到初冬：一座被围的城池，城外连营，向右是平原上的州府。",
+        "spots": [
+          [
+            "xz_rest2",
+            "围城的连营营帐"
+          ],
+          [
+            "xz_lvbu",
+            "城池的城门（城门洞开）"
+          ],
+          [
+            "xz_lvbu_gone",
+            "城外向远方延伸的大路"
+          ],
+          [
+            "xz_bingzhou",
+            "一座新扎的骑兵营地（汉代方形军帐和马厩，不要蒙古包、不要圆顶帐篷）"
+          ],
+          [
+            "xz_will",
+            "州牧府的灵堂（白幡）"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/xuzhou_7.jpg",
+        "from": 36,
+        "place": "吕布残部、陈先生别苑、城郊、过年、南望淮南",
+        "scene": "隆冬下雪：下邳城郊，农家、园林和粮仓，最后是一座远眺南方的高坡。",
+        "spots": [
+          [
+            "xz_l4_t1",
+            "被丢弃的辎重车"
+          ],
+          [
+            "xz_chengong",
+            "竹林里一座清静的小园林"
+          ],
+          [
+            "xz_d2",
+            "城郊的田野"
+          ],
+          [
+            "xz_t3",
+            "城郊的粮仓"
+          ],
+          [
+            "xz_feast",
+            "挂满红灯笼的院落"
+          ],
+          [
+            "xz_end",
+            "一座可以眺望南方的高坡"
+          ]
+        ]
+      }
+    ]
+  },
+  "prologue": {
+    "quest": "prologue",
+    "x_max": 22,
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/luoyang_n_3.jpg"
+    ],
+    "panels": [
+      {
+        "src": "source/map/panels/prologue_1.jpg",
+        "from": 0,
+        "place": "富春：醒来、换药、孙家、后山、野猪林（初平元年正月）",
+        "scene": "江南早春正月（不下雪，田野微黄，柳树刚冒芽）：吴郡富春，富春江边的小县城和村庄，背后是青山。",
+        "spots": [
+          [
+            "wake",
+            "一座江南白墙黛瓦的大宅院（孙家）"
+          ],
+          [
+            "village",
+            "江边的村子和小石桥"
+          ],
+          [
+            "zy_hill",
+            "村后的竹林山坡"
+          ],
+          [
+            "sc_home",
+            "一个练武的小院"
+          ],
+          [
+            "boar",
+            "一片幽深的树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_2.jpg",
+        "from": 6,
+        "place": "夜袭、定计、江上水寨",
+        "scene": "江南早春：富春江的河湾，江上一座水贼的木水寨，岸边芦苇。",
+        "spots": [
+          [
+            "raid",
+            "江边被抢过的渔村"
+          ],
+          [
+            "sc_gate",
+            "水寨的木寨门和箭楼"
+          ],
+          [
+            "zy_lure",
+            "岸边的芦苇荡"
+          ],
+          [
+            "sc_hall",
+            "水寨中间的大木楼（建在水上）"
+          ],
+          [
+            "rescue",
+            "江边的码头"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_3.jpg",
+        "from": 12,
+        "place": "压惊宴、征兵、芦苇荡、妖道、江心洲",
+        "scene": "江南早春：富春江下游，宽阔的江面，江心有一座小洲。",
+        "spots": [
+          [
+            "dinner",
+            "江边一座摆宴的大院"
+          ],
+          [
+            "muster",
+            "空地上的征兵校场"
+          ],
+          [
+            "reeds",
+            "江边茂密的芦苇荡"
+          ],
+          [
+            "yaodao",
+            "山坡上一座冒着青烟的破道观"
+          ],
+          [
+            "camp",
+            "江滩上的营地和篝火"
+          ],
+          [
+            "isle",
+            "江心的小洲"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/prologue_4.jpg",
+        "from": 18,
+        "place": "何仪大寨、宝库、旧甲、结义、北上",
+        "scene": "江南早春：江边山上的黄巾大寨，往右是开阔的江岸，江边停着北上的船队。",
+        "spots": [
+          [
+            "lair",
+            "山上黄巾军的木寨"
+          ],
+          [
+            "vault",
+            "山寨后面的石砌库房"
+          ],
+          [
+            "armor",
+            "孙家的祠堂"
+          ],
+          [
+            "oath",
+            "江边的一块大石和一棵老树"
+          ],
+          [
+            "north",
+            "江边码头和准备北上的船队"
+          ]
+        ]
+      }
+    ]
+  },
+  "taodong": {
+    "quest": "taodong",
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/luoyang_n_3.jpg"
+    ],
+    "panels": [
+      {
+        "src": "source/map/panels/taodong_1.jpg",
+        "from": 0,
+        "place": "北上、官道、汜水关前战华雄（初平元年二月）",
+        "scene": "早春：中原的官道通向汜水关，关前是联军的营地和战场。",
+        "spots": [
+          [
+            "set_out",
+            "联军营地的营门"
+          ],
+          [
+            "road1",
+            "平原上的官道"
+          ],
+          [
+            "guosi",
+            "山间的小寨"
+          ],
+          [
+            "zumao",
+            "关前列阵的空地"
+          ],
+          [
+            "huaxiong",
+            "汜水关雄伟的关城"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/taodong_2.jpg",
+        "from": 6,
+        "place": "收拢士卒、西凉斥候、借将、华雄营",
+        "scene": "早春：汜水关外的原野，散落着营寨。",
+        "spots": [
+          [
+            "counter",
+            "一座小营地"
+          ],
+          [
+            "bubing2",
+            "官道边的哨卡"
+          ],
+          [
+            "gongqi2",
+            "小路边的树林"
+          ],
+          [
+            "borrow",
+            "孙坚军的大营（方形军帐）"
+          ],
+          [
+            "spoils",
+            "被攻破的西凉营寨"
+          ],
+          [
+            "liru",
+            "山坡下的伏兵树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/taodong_3.jpg",
+        "from": 12,
+        "place": "董白、俘虏、大营、截粮",
+        "scene": "春天：联军的大营连绵，营外是运粮的道路。",
+        "spots": [
+          [
+            "dongbai",
+            "开阔的草原（骑兵交战的地方）"
+          ],
+          [
+            "capture",
+            "大营里的营帐"
+          ],
+          [
+            "dongbai_rest",
+            "大营中间的大帐"
+          ],
+          [
+            "scout2",
+            "路上被截的粮车"
+          ],
+          [
+            "m_c2b",
+            "营外的小树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/taodong_4.jpg",
+        "from": 18,
+        "place": "吕布劫营、追兵、三英、宝箱（虎牢关前）",
+        "scene": "暮春：虎牢关前的平原，远处山口是虎牢关。",
+        "spots": [
+          [
+            "raid_camp",
+            "着火的营帐"
+          ],
+          [
+            "bingzhou2",
+            "被冲垮的营栅"
+          ],
+          [
+            "lvbu",
+            "开阔的战场"
+          ],
+          [
+            "triple",
+            "远处雄伟的虎牢关"
+          ],
+          [
+            "box2",
+            "散落的辎重堆"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/taodong_5.jpg",
+        "from": 24,
+        "place": "董白的命运、交人 / 藏人、驻军、和亲",
+        "scene": "初夏：酸枣联军的大营，连绵的营帐，中间一座最大的中军帐。",
+        "spots": [
+          [
+            "fate",
+            "最大的中军大帐"
+          ],
+          [
+            "give",
+            "营中的木牢"
+          ],
+          [
+            "keep",
+            "营地角落的一辆马车"
+          ],
+          [
+            "wait",
+            "联军营地里摆宴的地方"
+          ],
+          [
+            "heqin_k",
+            "营门外的空地"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/taodong_6.jpg",
+        "from": 30,
+        "place": "官道 / 荒村、大谷徐荣、密信、火光",
+        "scene": "初夏：往洛阳去的道路，丘陵和山谷，远方地平线上有火光。",
+        "spots": [
+          [
+            "way_a",
+            "官道"
+          ],
+          [
+            "way_b",
+            "荒废的村子"
+          ],
+          [
+            "inn",
+            "废弃的驿站"
+          ],
+          [
+            "dagu",
+            "两山之间的山谷"
+          ],
+          [
+            "mixin",
+            "路边的一棵大树"
+          ],
+          [
+            "glow",
+            "远方映红天空的火光"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/taodong_7.jpg",
+        "from": 36,
+        "place": "焚城洛阳、李傕、井中玉玺、来投",
+        "scene": "初夏：正在燃烧的洛阳城，浓烟滚滚，宫殿倒塌。",
+        "spots": [
+          [
+            "zonghuo2",
+            "洛阳城外的街道"
+          ],
+          [
+            "fire",
+            "洛阳的城门（着火）"
+          ],
+          [
+            "luoyang_a",
+            "城里烧毁的街巷"
+          ],
+          [
+            "jing",
+            "宫殿废墟里的一口古井"
+          ],
+          [
+            "heroes",
+            "城外的营地"
+          ]
+        ]
+      }
+    ]
+  },
+  "yuxi": {
+    "quest": "yuxi",
+    "aspect": "3:2",
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/luoyang_n_3.jpg"
+    ],
+    "panels": [
+      {
+        "src": "source/map/panels/yuxi_1.jpg",
+        "from": 0,
+        "place": "出洛阳、白衣抱琴、乱民小道（初平元年夏）",
+        "scene": "盛夏：洛阳城外。画面上半是洛阳城外的废墟和难民走的大路，画面下半是往南去的山路。",
+        "spots": [
+          [
+            "leave",
+            "被烧毁的洛阳城门"
+          ],
+          [
+            "wenji_fight",
+            "路边土匪的破营"
+          ],
+          [
+            "wenji_tale",
+            "一处小营地"
+          ],
+          [
+            "road_s",
+            "往南的乱民小道"
+          ],
+          [
+            "road_fight",
+            "山路边的山贼窝棚"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_2.jpg",
+        "from": 6,
+        "place": "上：洛阳郊外劫粮；下：南下鲁阳",
+        "scene": "夏天。画面上半是洛阳郊外的田野和官道，画面下半是南阳郡鲁阳的山地。",
+        "spots": [
+          [
+            "way1",
+            "洛阳郊外的田野"
+          ],
+          [
+            "plan",
+            "郊外的一处营帐"
+          ],
+          [
+            "road2",
+            "被丢弃的辎重车"
+          ],
+          [
+            "r1",
+            "山路"
+          ],
+          [
+            "nanyang",
+            "鲁阳城（孙坚的大营）"
+          ],
+          [
+            "slip",
+            "城里的酒楼"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_3.jpg",
+        "from": 12,
+        "place": "上：郭汜粮车、驻守洛阳；下：鲁阳托玺、岔路",
+        "scene": "夏末。画面上半是山谷里的运粮道和远处洛阳城墙，画面下半是鲁阳城外的岔路。",
+        "spots": [
+          [
+            "guosi4",
+            "山谷里的粮车队"
+          ],
+          [
+            "grain",
+            "路边翻倒的粮车"
+          ],
+          [
+            "settle",
+            "洛阳残破的城墙"
+          ],
+          [
+            "mitan3",
+            "鲁阳的街巷"
+          ],
+          [
+            "entrust",
+            "鲁阳的一座宅院"
+          ],
+          [
+            "gongshou3",
+            "岔路口的树林"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_4.jpg",
+        "from": 18,
+        "place": "上：洛阳废墟、朱儁、灯下习字；下：冯夫人、夜袭",
+        "scene": "初秋。画面上半是洛阳城里的废墟和修复中的宅院，画面下半是鲁阳城郊的农舍和夜里的营地。",
+        "spots": [
+          [
+            "liumin4",
+            "洛阳的废墟"
+          ],
+          [
+            "zhujun",
+            "洛阳城里修好的一座院子"
+          ],
+          [
+            "xizi",
+            "亮着灯的书房小院"
+          ],
+          [
+            "feng",
+            "城郊的一座农家院"
+          ],
+          [
+            "m2",
+            "山路边的树林"
+          ],
+          [
+            "jiling",
+            "山坳里的营地和篝火"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_5.jpg",
+        "from": 24,
+        "place": "上：求和、定亲、邙山跑马、去长安；下：雷薄、纪灵、绝境",
+        "scene": "深秋。画面上半是洛阳城北的邙山和西去长安的大路，画面下半是陡峭的山口和悬崖。",
+        "spots": [
+          [
+            "peace",
+            "洛阳城外的亭子"
+          ],
+          [
+            "mangshan",
+            "邙山的山坡（草地开阔）"
+          ],
+          [
+            "farewell",
+            "向西延伸的大路"
+          ],
+          [
+            "lijue_test",
+            "大路上一处关卡"
+          ],
+          [
+            "pass",
+            "陡峭的山口关隘"
+          ],
+          [
+            "yuanshu",
+            "悬崖边的绝路"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_6.jpg",
+        "from": 29,
+        "place": "入长安、接风宴、比武（初平元年冬）；下：玉碎",
+        "scene": "初冬。画面上半是长安城的城门和街道，画面下半是城外荒凉的山野。",
+        "spots": [
+          [
+            "end",
+            "山路边一块孤零零的大石头"
+          ],
+          [
+            "enter",
+            "长安巍峨的城门"
+          ],
+          [
+            "zuibing5",
+            "长安的街道"
+          ],
+          [
+            "feast",
+            "相府的大厅"
+          ],
+          [
+            "bw1",
+            "相府里的演武场"
+          ],
+          [
+            "bw3",
+            "演武场边的看台"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_7.jpg",
+        "from": 35,
+        "place": "过关、朝见、蔡邕、西市、王允",
+        "scene": "冬天：长安城里，整幅画都是长安城的街坊和宫殿。",
+        "spots": [
+          [
+            "passed",
+            "相府的大门"
+          ],
+          [
+            "chaojian",
+            "未央宫的大殿"
+          ],
+          [
+            "caiyong",
+            "一座清雅的书香宅院（蔡府）"
+          ],
+          [
+            "ca1",
+            "热闹的西市"
+          ],
+          [
+            "ca2",
+            "宫墙外的大街"
+          ],
+          [
+            "wangyun",
+            "司徒府的大门"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_8.jpg",
+        "from": 41,
+        "place": "貂蝉、许婚、月下、密室、献貂蝉",
+        "scene": "冬天：长安城里，司徒府的庭院和花园。",
+        "spots": [
+          [
+            "diaochan",
+            "司徒府的后花园"
+          ],
+          [
+            "xuhun",
+            "司徒府的正堂"
+          ],
+          [
+            "yuexia",
+            "花园里的池塘和亭子"
+          ],
+          [
+            "sp1",
+            "府里一间隐秘的小屋"
+          ],
+          [
+            "sp2",
+            "蔡府的院子"
+          ],
+          [
+            "xian",
+            "相府的大门"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_9.jpg",
+        "from": 47,
+        "place": "长安街市、凤仪亭、后园、除夕、大婚前夜",
+        "scene": "隆冬下雪：长安城里，相府的后园和街市，挂起了灯笼。",
+        "spots": [
+          [
+            "e1",
+            "长安的街市"
+          ],
+          [
+            "e2",
+            "蔡府的后院"
+          ],
+          [
+            "fengyi",
+            "后园里一座精美的亭子（凤仪亭）"
+          ],
+          [
+            "qinbing5",
+            "后园的回廊"
+          ],
+          [
+            "chuxi",
+            "挂满灯笼的院子"
+          ],
+          [
+            "eve",
+            "相府里的一座小楼"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/yuxi_10.jpg",
+        "from": 53,
+        "place": "雪夜、大婚、相府飞熊军、董卓之死（初平二年正月）",
+        "scene": "隆冬雪夜：长安相府，张灯结彩的喜堂和层层院落。",
+        "spots": [
+          [
+            "xueye",
+            "雪中的小院"
+          ],
+          [
+            "wedding",
+            "挂满红绸的喜堂"
+          ],
+          [
+            "xiangfu5",
+            "相府的长廊"
+          ],
+          [
+            "huzhen",
+            "相府的内门"
+          ],
+          [
+            "dongzhuo5",
+            "相府的正殿"
+          ],
+          [
+            "death",
+            "正殿前的台阶"
+          ]
+        ]
+      }
+    ]
+  },
+  "dongui": {
+    "quest": "dongui",
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/luoyang_n_3.jpg"
+    ],
+    "panels": [
+      {
+        "src": "source/map/panels/dongui_1.jpg",
+        "from": 0,
+        "place": "长安：夷族、封侯、天牢、路线图（初平二年正月）",
+        "scene": "冬末：长安城里的宫殿和官署。",
+        "spots": [
+          [
+            "yizu",
+            "董府的大门"
+          ],
+          [
+            "qingsun",
+            "司徒府"
+          ],
+          [
+            "fenghou",
+            "未央宫的大殿"
+          ],
+          [
+            "jail",
+            "天牢的高墙"
+          ],
+          [
+            "route",
+            "一间堆满地图的书房"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_2.jpg",
+        "from": 6,
+        "place": "长安街头、围府 / 报信、高顺、突围",
+        "scene": "早春：长安的街巷，宫城的北墙。",
+        "spots": [
+          [
+            "d_b1",
+            "长安的大街"
+          ],
+          [
+            "m1",
+            "市井小巷"
+          ],
+          [
+            "mimou",
+            "一座宅院（蔡邕府）"
+          ],
+          [
+            "gaoshun4",
+            "宅院的后门小巷"
+          ],
+          [
+            "tuwei",
+            "被火光照亮的街口"
+          ],
+          [
+            "d_b4",
+            "宫城北面的城门（北掖门）"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_3.jpg",
+        "from": 12,
+        "place": "北掖门、清明门、渭水桥、宣平门",
+        "scene": "早春：画面左边是长安东边的城门，向右出城，是渭水和河上的一座桥。",
+        "spots": [
+          [
+            "gong",
+            "宫城的北掖门"
+          ],
+          [
+            "shaoka",
+            "长安东面的城门"
+          ],
+          [
+            "pozi",
+            "城外的破祠堂"
+          ],
+          [
+            "zhangxiu6",
+            "渭水上的木桥"
+          ],
+          [
+            "zhangji6",
+            "渭水边的营地"
+          ],
+          [
+            "jiaxu6",
+            "路边的粮车"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_4.jpg",
+        "from": 18,
+        "place": "徐晃、潼关道、函谷关李傕、到洛阳",
+        "scene": "早春：从渭水往东的道路，经过险要的关隘，到达残破的洛阳。",
+        "spots": [
+          [
+            "xuhuang",
+            "道路边的一座军营"
+          ],
+          [
+            "qianfeng6",
+            "山间的道路"
+          ],
+          [
+            "lijue6",
+            "险峻的函谷关"
+          ],
+          [
+            "huihe",
+            "残破的洛阳城门"
+          ],
+          [
+            "luo_ruin",
+            "洛阳城里的废墟"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_5.jpg",
+        "from": 24,
+        "place": "洛阳城外、武库、重建、休整（初平二年三月）",
+        "scene": "暮春：洛阳城里城外，废墟中开始重建，搭着脚手架。",
+        "spots": [
+          [
+            "d_b5",
+            "城外的道路"
+          ],
+          [
+            "d_m5",
+            "重新开张的街市"
+          ],
+          [
+            "d_t5",
+            "洛阳的武库"
+          ],
+          [
+            "luo_rebuild",
+            "搭着脚手架正在重建的宫殿"
+          ],
+          [
+            "luoyang_rest",
+            "城里的营地"
+          ],
+          [
+            "d_b9",
+            "洛阳北郊的原野"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_6.jpg",
+        "from": 30,
+        "place": "长安陷落、玉玺、排挤、出征（初平三年夏）",
+        "scene": "夏天：洛阳的宫城和南门，大军从南门出征。",
+        "spots": [
+          [
+            "fall",
+            "宫城的城楼"
+          ],
+          [
+            "seal",
+            "宫殿里的大殿"
+          ],
+          [
+            "paichi",
+            "一座冷清的府邸"
+          ],
+          [
+            "chuzheng",
+            "洛阳的南城门"
+          ],
+          [
+            "yingbing7",
+            "往南阳去的大路"
+          ],
+          [
+            "qiao7",
+            "路边的袁军营寨"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_7.jpg",
+        "from": 36,
+        "place": "南阳郊外、黄忠、麦田、雷薄",
+        "scene": "盛夏：南阳郡的平原，一望无际的金色麦田，远处是山。",
+        "spots": [
+          [
+            "d_b7a",
+            "南阳郊外的田野"
+          ],
+          [
+            "t7",
+            "袁军的粮仓"
+          ],
+          [
+            "huangzhong",
+            "麦田边的一间农舍"
+          ],
+          [
+            "gongnu7",
+            "金黄的麦田"
+          ],
+          [
+            "d_b7c",
+            "麦田边的小树林"
+          ],
+          [
+            "leibo7",
+            "山间的道路"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/dongui_8.jpg",
+        "from": 42,
+        "place": "黄忠家、宛城、陈兰、冯夫人、纪灵、袁术东逃",
+        "scene": "夏末：南阳宛城，高大的城墙和城里的街巷。",
+        "spots": [
+          [
+            "r7",
+            "山脚的农家小院"
+          ],
+          [
+            "d_b7e",
+            "宛城的外城墙"
+          ],
+          [
+            "xingye",
+            "城外的营地"
+          ],
+          [
+            "chenlan7",
+            "宛城的城门"
+          ],
+          [
+            "feng7",
+            "城里的一座宅院"
+          ],
+          [
+            "jiling7",
+            "宛城的大街"
+          ],
+          [
+            "dongtao",
+            "向东延伸的大路"
+          ]
+        ]
+      }
+    ]
+  },
+  "jingxiang": {
+    "quest": "jingxiang",
+    "style_refs": [
+      "godot/data/art/map/yecheng.jpg",
+      "pics/source/map/panels/luoyang_n_3.jpg"
+    ],
+    "panels": [
+      {
+        "src": "source/map/panels/jingxiang_1.jpg",
+        "from": 0,
+        "place": "宛城小聚、留仙裙、市集、刘表来袭（初平四年春）",
+        "scene": "春天：南阳宛城里，桃花盛开，街巷热闹。",
+        "spots": [
+          [
+            "jx_wan",
+            "一座温馨的宅院"
+          ],
+          [
+            "jx_diaochan",
+            "宅院里的花园"
+          ],
+          [
+            "m_jx1",
+            "热闹的市集"
+          ],
+          [
+            "t_jx1",
+            "一座旧府邸"
+          ],
+          [
+            "jx_laixi",
+            "将军府的议事厅"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_2.jpg",
+        "from": 6,
+        "place": "淯水：文聘、苏飞、芦苇荡、黄祖",
+        "scene": "春天：淯水两岸，河边芦苇荡，河上有战船。",
+        "spots": [
+          [
+            "jx_wenpin",
+            "河北岸的高地"
+          ],
+          [
+            "jx_sufei",
+            "汉水边的渡口"
+          ],
+          [
+            "jx_gongshou",
+            "茂密的芦苇荡"
+          ],
+          [
+            "m_jx2",
+            "河岸"
+          ],
+          [
+            "jx_huangzu",
+            "河上的战船"
+          ],
+          [
+            "jx_rest",
+            "宛城的城门"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_3.jpg",
+        "from": 12,
+        "place": "汉水北岸、诏书、细作、庆功 / 噩梦、鸿门宴",
+        "scene": "初夏：汉水北岸的浅滩，往右是宛城的官署。",
+        "spots": [
+          [
+            "jx_zhuiji",
+            "汉水边的浅滩"
+          ],
+          [
+            "m_jx5_b",
+            "岸边的破船"
+          ],
+          [
+            "jx_tianshi",
+            "官署的大堂"
+          ],
+          [
+            "jx_xizuo",
+            "城里的小巷"
+          ],
+          [
+            "jx_qinggong",
+            "夜里亮着灯的宅院"
+          ],
+          [
+            "jx_jinggao",
+            "宅院的正厅"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_4.jpg",
+        "from": 18,
+        "place": "南下官道、汉水渡口锦帆贼、樊城、新野、刘磐",
+        "scene": "夏天：南下的官道，汉水的渡口，对岸是樊城和新野。",
+        "spots": [
+          [
+            "jx_shaoka",
+            "官道上的哨卡"
+          ],
+          [
+            "jx_jinfan",
+            "汉水渡口的船只"
+          ],
+          [
+            "m_jx4",
+            "樊城的城墙"
+          ],
+          [
+            "jx_zongzei",
+            "新野的坞堡"
+          ],
+          [
+            "m_jx6",
+            "新野的集市"
+          ],
+          [
+            "jx_liupan",
+            "坞堡的大门"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_5.jpg",
+        "from": 24,
+        "place": "襄阳、北门盘查、蔡府密谋、街头（初平四年秋）",
+        "scene": "秋天：荆州襄阳城，汉江边的大城，城墙高大。",
+        "spots": [
+          [
+            "jx_xiangyang",
+            "襄阳的城门"
+          ],
+          [
+            "m_jx3",
+            "襄阳城里的街道"
+          ],
+          [
+            "t_jx3",
+            "襄阳的武库"
+          ],
+          [
+            "jx_menjin",
+            "襄阳北门的关卡"
+          ],
+          [
+            "jx_mimou",
+            "一座华丽的大宅（蔡府）"
+          ],
+          [
+            "jx_xunluo",
+            "街头的巡逻岗亭"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_6.jpg",
+        "from": 30,
+        "place": "城防、招贤馆、水寨、城外、张允、驿馆",
+        "scene": "秋天：襄阳城外的汉江边，江上有水军的水寨和楼船。",
+        "spots": [
+          [
+            "jx_chengfang",
+            "城墙上的城防"
+          ],
+          [
+            "jx_zhaoxian",
+            "城里的招贤馆"
+          ],
+          [
+            "jx_shuijun",
+            "江上的水寨和楼船"
+          ],
+          [
+            "jx_yexi",
+            "城外的庄园"
+          ],
+          [
+            "m_jx7",
+            "夜市的灯火"
+          ],
+          [
+            "jx_yiguan",
+            "一座驿馆"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_7.jpg",
+        "from": 36,
+        "place": "赴宴前夜、万山水阁、栈道、骑兵",
+        "scene": "深秋夜晚：汉江边的万山脚下，一座建在水边的华丽水阁，木栈道连到岸边。",
+        "spots": [
+          [
+            "jx_a_eve",
+            "驿馆的院子"
+          ],
+          [
+            "jx_a_fuyan",
+            "山脚下水边的华丽水阁"
+          ],
+          [
+            "jx_a_nushou",
+            "水阁的回廊"
+          ],
+          [
+            "jx_a_fubing",
+            "水上的木栈道"
+          ],
+          [
+            "jx_a_qibing",
+            "岸边的空地"
+          ],
+          [
+            "jx_a_caihe",
+            "水阁的楼上"
+          ]
+        ]
+      },
+      {
+        "src": "source/map/panels/jingxiang_8.jpg",
+        "from": 42,
+        "place": "水阁码头、蔡瑁、香消 / 典刑、恨海 / 楼船",
+        "scene": "深秋月夜：汉江水面，水阁的码头，江上一艘楼船，月光洒在江面上。",
+        "spots": [
+          [
+            "jx_a_zhangyun",
+            "水阁的码头"
+          ],
+          [
+            "jx_a_caimao",
+            "水阁的主楼"
+          ],
+          [
+            "jx_a_xiangxiao",
+            "水边的台阶"
+          ],
+          [
+            "jx_a_xuexi",
+            "岸上的街道"
+          ],
+          [
+            "jx_a_henhai",
+            "月光下江上的楼船"
+          ]
+        ]
+      }
     ]
   }
 }

@@ -4091,7 +4091,7 @@
   "_maps": "chapter map backgrounds, keyed by quest id; wide landscape, scaled to 800px high into godot/data/art/map/",
   "maps": {
     "prologue": {
-      "src": "source/map/bg_prologue.jpg",
+      "src": "source/map/prologue.jpg",
       "license": "用户提供"
     },
     "prologue_north": {
@@ -4099,7 +4099,7 @@
       "license": "用户提供"
     },
     "taodong": {
-      "src": "source/map/bg_taodong.jpg",
+      "src": "source/map/taodong.jpg",
       "license": "用户提供"
     },
     "changan": {

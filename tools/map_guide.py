@@ -10,11 +10,13 @@ paints the 甄府 where the 甄府 squares are instead of anywhere.
     python tools/map_guide.py prologue_north --gen      # also generates every panel (art_gen, nano-banana-2)
     python tools/map_guide.py prologue_north --gen 3    # only panel 3
 """
+import colorsys
 import json
 import subprocess
 import sys
 from pathlib import Path
 
+import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -22,13 +24,13 @@ from map_strip import BLEND, COL_W, LANE_H, MAP_TOP, geometry  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "pics/inbox/_map_guides"
-IW, IH = 3168, 1344  # nano-banana-2 21:9 at 2k
+SIZES = {"21:9": (3168, 1344), "3:2": (2528, 1696)}  # nano-banana-2 at 2k; a chapter picks one with "aspect" (tall chapters with 4+ rows: 3:2)
 COLOURS = [("红色", (220, 60, 50)), ("蓝色", (50, 100, 220)), ("绿色", (40, 160, 70)), ("紫色", (150, 70, 190)),
            ("橙色", (240, 140, 30)), ("青色", (30, 170, 180)), ("粉色", (230, 110, 170)), ("黄色", (225, 200, 40))]
 
 COMMON = ("中国传统国风手绘鸟瞰地图长卷中的一段，画风和后面几张参考图完全一样：淡彩水墨线稿、斜45度俯瞰、远山与云雾。"
           "画面一直铺满到四条边：绝对不要卷轴、不要卷轴木轴、不要纸张边缘、不要边框、不要留白条。"
-          "左右两端要能和相邻画卷衔接。不要人物特写、不要任何文字、不要旗帜。")
+          "左右两端要能和相邻画卷衔接。不要人物特写、不要任何文字、不要旗帜。营帐都是汉代的方形军帐，不要蒙古包。")
 SKETCH = ("第一张参考图是这幅画的构图草图，必须严格按它的位置作画：草图里浅褐色的粗线是道路，在同样的位置画成手绘的土路或大路（有车辙、有路边的草和石头，线条和整幅画一致，不要画成一条平涂的色带）；"
           "草图里每个彩色圆块标出一个地标的位置，在圆块所在的位置画出对应的地标（大小和圆块差不多）：{spots}。"
           "草图里空白的地方画开阔平坦的地面（原野、雪地或河滩），不要放建筑和高山。画面最上方一窄条可以画远山和天空。"
@@ -75,6 +77,7 @@ def curve(a, b, n=24):
 
 def sketches(key):
     cfg, quest = chapter(key)
+    IW, IH = SIZES[cfg.get("aspect", "21:9")]
     x_min = cfg.get("x_min", 0)
     gw, gh = geometry(quest, x_min, cfg.get("x_max"))
     pos, sq = square_pos(quest, x_min, cfg.get("x_max"), key)
@@ -83,6 +86,7 @@ def sketches(key):
     OUT.mkdir(parents=True, exist_ok=True)
     jobs = []
     for i, p in enumerate(panels):
+        blobs = []
         l = max(0, cuts[i] - (BLEND / 2 if i else 0))
         r = min(gw, cuts[i + 1] + (BLEND / 2 if i < len(panels) - 1 else 0))
         w, h = r - l, gh
@@ -104,28 +108,87 @@ def sketches(key):
             rad = 58 / k
             d.ellipse((cx - rad * 1.3, cy - rad, cx + rad * 1.3, cy + rad), fill=rgb)
             spot_words.append(f"{name}圆块处画{what}")
+            blobs.append((cx / IW, cy / IH, rad * 1.3 / IW, rad / IH, rgb))
         guide = OUT / f"{Path(p['src']).stem}.png"
         im.save(guide)
         prompt = f"{cfg.get('season', '')}{p['scene']} " + SKETCH.format(spots="；".join(spot_words)) + COMMON
-        jobs.append((p, guide, prompt))
+        jobs.append((p, guide, prompt, blobs))
     return cfg, jobs
 
 
+def leaked(path, blobs):
+    """the model sometimes copies the sketch's blobs into the picture (solid, as a halo, or as a thin ring round
+    the landmark). Two measures in a window round every blob, each scaled so 1.0 = redraw:
+    - exact: share of pixels within 55 of the blob's sketch colour (> 3%; fires / red glow reach ~2.4%)
+    - hue: for colours nature rarely paints saturated (blue, purple, pink, cyan), share of pixels of that hue with
+      saturation > 0.35 (> 1%; clean panels score 0, thin rings ~2.5–5%)
+    Returns the worst score."""
+    im = Image.open(path).convert("RGB")
+    W, H = im.size
+    arr = np.asarray(im, dtype=np.int16)
+    hsv = np.asarray(im.convert("HSV"), dtype=np.float32) / 255.0
+    worst = 0.0
+    for fx, fy, frx, fry, rgb in blobs:
+        x0, x1 = int(max(0, (fx - frx * 1.4) * W)), int(min(W, (fx + frx * 1.4) * W))
+        y0, y1 = int(max(0, (fy - fry * 1.4) * H)), int(min(H, (fy + fry * 1.4) * H))
+        win = arr[y0:y1, x0:x1].reshape(-1, 3)
+        if win.size == 0:
+            continue
+        exact = float((np.abs(win - np.array(rgb)).max(axis=1) < 55).mean()) / 0.03
+        h = colorsys.rgb_to_hsv(*[c / 255 for c in rgb])[0]
+        hue = 0.0
+        if not (h * 360 < 50 or 80 < h * 360 < 160):  # skip red / orange / yellow / green: fires, fields, trees
+            hw = hsv[y0:y1, x0:x1].reshape(-1, 3)
+            dh = np.abs(hw[:, 0] - h)
+            dh = np.minimum(dh, 1 - dh)
+            hue = float(((dh < 0.035) & (hw[:, 1] > 0.35) & (hw[:, 2] > 0.3)).mean()) / 0.01
+        worst = max(worst, exact, hue)
+    return worst
+
+
 def main():
+    """--gen: generate the panels in parallel, then check each for copied sketch blobs and regenerate those
+    (up to 2 more rounds). --check: only report the blob check for the existing panels."""
     key = sys.argv[1]
     gen = "--gen" in sys.argv
     only = [int(a) for a in sys.argv[2:] if a.isdigit()]
     cfg, jobs = sketches(key)
-    procs = []
-    for n, (p, guide, prompt) in enumerate(jobs, 1):
+    todo = []
+    for n, (p, guide, prompt, blobs) in enumerate(jobs, 1):
         print(f"--- {n} {p['src']}\n{guide.relative_to(ROOT)}\n{prompt}\n")
-        if gen and (not only or n in only):
+        if not only or n in only:
+            todo.append(n)
+    if "--check" in sys.argv:
+        for n in todo:
+            p, _, _, blobs = jobs[n - 1]
+            print(f"check {n}: {leaked(ROOT / 'pics' / p['src'], blobs):.2f}")
+        return
+    rounds = 0
+    while gen and todo and rounds < 3:
+        procs = []
+        for n in todo:
+            p, guide, prompt, _ = jobs[n - 1]
             refs = [str(guide)] + [str(ROOT / r) for r in cfg.get("style_refs", [])]
             procs.append(subprocess.Popen([sys.executable, str(ROOT / "tools/art_gen.py"), "--key", Path(p["src"]).stem,
-                                           "--size", "21:9", "--out", str(ROOT / "pics" / p["src"]), "--prompt", prompt,
-                                           "--ref", *refs], cwd=ROOT))
-    for pr in procs:
-        pr.wait()
+                                           "--size", cfg.get("aspect", "21:9"), "--out", str(ROOT / "pics" / p["src"]),
+                                           "--prompt", prompt, "--ref", *refs], cwd=ROOT,
+                                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
+        for pr in procs:
+            pr.wait()
+        bad = []
+        for n in todo:
+            p, _, _, blobs = jobs[n - 1]
+            share = leaked(ROOT / "pics" / p["src"], blobs)
+            print(f"round {rounds + 1} panel {n}: blob score {share:.2f}" + ("  -> redo" if share > LEAK else ""))
+            if share > LEAK:
+                bad.append(n)
+        todo = bad
+        rounds += 1
+    if todo:
+        print("still showing sketch blobs:", todo)
+
+
+LEAK = 1.0  # leaked() score above which a panel is redrawn (see its docstring for the two thresholds)
 
 
 if __name__ == "__main__":
