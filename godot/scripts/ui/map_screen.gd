@@ -540,6 +540,8 @@ func _rebuild_map() -> void:
 	_token = holder
 	_token_spr = spr
 	_layer.add_child(_token)
+	if q["squares"].has(Game.save.square):  # stand on the current square at once: a rebuild after a choice walks on without a _refresh
+		_token.position = _token_dest(q["squares"][Game.save.square])
 
 
 func _glyph(s: Dictionary) -> String:
