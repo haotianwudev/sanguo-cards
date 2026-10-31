@@ -323,7 +323,7 @@ static func skill_desc(sk: Dictionary) -> String:
 			"hurt":
 				parts.append("自损全军 %d%% 体力" % int(round(float(e["pct"]) * 100)))
 			"heal":
-				parts.append("回复全军体力 ×%s" % _num(e["power"]))
+				parts.append("回复全军体力 ×%s" % _num(float(e["power"]) * float(GameData.get_db().battle.get("heal_mult", 1.0))))
 			"guard":
 				parts.append("本回合受到伤害 -%d%%" % int(round(float(e["cut"]) * 100)))
 			"boost":

@@ -105,7 +105,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		b.opening.append("锦帆铃叮当一响——识破了埋伏！")
 	elif ambush:
 		b.opening = b._ambush()
-	b.party_hp = mini(b.party_max, b.party_hp + int(round(b.party_max * float(mods.get("start_heal", 0.0)))))
+	b.party_hp = mini(b.party_max, b.party_hp + int(round(b.party_max * float(mods.get("start_heal", 0.0)) * float(b.db.battle.get("heal_mult", 1.0)))))
 	if mods.get("boost_start", 0) > 0:
 		for u in b.leaders:
 			u["boosted"] = true
@@ -404,7 +404,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 					log.append("  [color=#c9a2ff]战意附带法术 %d[/color]" % md)
 			return log
 		"heal":
-			var amt := mini(int(round(at * float(eff["power"]) * mult * (1.0 + float(mods.get("heal", 0.0))))),
+			var amt := mini(int(round(at * float(eff["power"]) * mult * (1.0 + float(mods.get("heal", 0.0))) * float(db.battle.get("heal_mult", 1.0)))),
 				party_max - party_hp)
 			party_hp += amt
 			_ev({"t": "heal", "amt": amt, "hp": party_hp})
@@ -777,7 +777,7 @@ func _start_round() -> Array:
 		match ptr:
 			"logistics":
 				if party_hp > 0 and party_hp < party_max:
-					var rh := mini(int(round(party_max * float(db.battle.get("regen_power", 0.03)) * ps)), party_max - party_hp)
+					var rh := mini(int(round(party_max * float(db.battle.get("regen_power", 0.03)) * ps * float(db.battle.get("heal_mult", 1.0)))), party_max - party_hp)
 					_ev({"t": "passive", "unit": k, "name": pname, "text": "照料伤兵"})
 					party_hp += rh
 					_ev({"t": "heal", "amt": rh, "hp": party_hp})
