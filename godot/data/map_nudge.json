@@ -17,5 +17,9 @@
   },
   "heishan": {
     "hs_chunyuqiong": [-40, 0]
+  },
+  "xuzhou": {
+    "xz_law": [0, -28],
+    "xz_chaos": [0, 42]
   }
 }
