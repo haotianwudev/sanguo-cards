@@ -76,5 +76,35 @@
        "scene": "早春：冀州平原上的磐河，河上一座木桥（界桥），两岸是战场。",
        "spots": [["hs_jieqiao_scout", "河边的开阔草地"], ["hs_jm_loot", "被丢弃的营帐和辎重"], ["hs_rest3", "河岸的小营地"], ["hs_quyi", "桥头的盾阵营垒"], ["hs_wenchou", "横跨磐河的木桥（界桥）"], ["hs_end", "河对岸的大片营地"]]}
     ]
+  },
+  "beihai": {
+    "quest": "beihai",
+    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/heishan_2.jpg"],
+    "panels": [
+      {"src": "source/map/panels/beihai_1.jpg", "from": 0, "place": "太行外围（初平三年夏）",
+       "scene": "盛夏：太行山外围的山脚，山林茂密。",
+       "spots": [["bh_start", "山脚下的一处小营地"], ["bh_wai1", "山坡上的哨塔"], ["bh_bandit", "山路边的乱石滩"], ["bh_patrol", "林间山道"], ["bh_zheng_pre", "远处山腰上一座山寨的寨墙"]]},
+      {"src": "source/map/panels/beihai_2.jpg", "from": 6, "place": "郑家寨、姜家寨、调解双凤",
+       "scene": "盛夏：太行山里相邻的两座山头，各有一座山寨，中间隔着一道山谷。",
+       "spots": [["bh_zheng", "左边山头上的郑家山寨"], ["bh_jiang_trap", "山谷里的木栅拦路"], ["bh_jiang", "右边山头上的姜家山寨"], ["bh_zj_choose", "两寨之间山谷里的一座木亭"], ["bh_zj_peace", "山坳里一间独立的木屋"]]},
+      {"src": "source/map/panels/beihai_3.jpg", "from": 12, "place": "收服双凤、太行休整、于毒、吕布北来",
+       "scene": "秋末到初冬：画面左边是太行山里的山寨，向右山势渐低，右边山外是开阔的平原，平原上开始积薄雪。",
+       "spots": [["bh_zj_join", "两寨合一的大山寨"], ["bh_rest1", "山寨里的营房"], ["bh_ta2", "山坡上的叛军营垒"], ["bh_m4", "山脚的招贤木棚"], ["bh_lubu_start", "山口外平原上扬起的尘土"]]},
+      {"src": "source/map/panels/beihai_4.jpg", "from": 18, "place": "并州狼骑、陷阵营、吕布（初平三年冬）",
+       "scene": "隆冬：太行山外的雪原战场，远处是太行山。",
+       "spots": [["bh_wolf2", "雪原上骑兵的蹄印和倒下的拒马"], ["bh_gaoshun", "一座严整的方形营垒"], ["bh_lubu_face", "雪原上一棵孤零零的大树"], ["bh_lubu", "雪原上一大片开阔的战场"], ["bh_lubu_check", "被冲垮的木栅阵线"], ["bh_bad_end", "山脚下一座着火的山寨"]]},
+      {"src": "source/map/panels/beihai_5.jpg", "from": 24, "place": "千里突围、冀州追兵、渡口颜良",
+       "scene": "隆冬：冀州的雪原，大路向右通到一条大河的渡口，河边芦苇荡。",
+       "spots": [["bh_flee", "雪原上的大路"], ["bh_fl2", "路边的小树林"], ["bh_jz_inf", "冀州军的汉代方形军帐和木栅（不要蒙古包、不要圆顶帐篷）"], ["bh_reed_loot", "积雪的芦苇荡"], ["bh_yanliang", "河边的渡口码头"]]},
+      {"src": "source/map/panels/beihai_6.jpg", "from": 30, "place": "渡河、北海之围、城外黄巾、太史慈",
+       "scene": "冬末：画面左边是一条大河和渡船，向右是青州北海的原野，远处北海城被黄巾军的营帐包围。",
+       "spots": [["bh_cross", "大河上的渡船"], ["bh_beihai_start", "原野上远望北海城的高坡"], ["bh_hj_a2", "黄巾军的营帐"], ["bh_hj_out", "北海城外的护城河和吊桥"], ["bh_taishici_meet", "城外的一片树林"]]},
+      {"src": "source/map/panels/beihai_7.jpg", "from": 36, "place": "北海城门、黄巾大营、管亥",
+       "scene": "早春：北海城的城门前，城外漫山遍野的黄巾军大营。",
+       "spots": [["bh_hj_gate", "北海城的城门"], ["bh_hj_qushuai", "黄巾大营的营门"], ["bh_beihai_zhao", "城墙下的招贤木棚"], ["bh_rest2", "城门内的营地"], ["bh_guanhai", "城外黄巾的中军大帐"]]},
+      {"src": "source/map/panels/beihai_8.jpg", "from": 42, "place": "北海城内（初平四年春）",
+       "scene": "初春：北海城内，城墙环绕，屋舍整齐，桃花初开。",
+       "spots": [["bh_porridge", "城门口冒着热气的粥棚"], ["bh_kongrong", "北海相府的大堂"], ["bh_feast", "相府里设宴的厅堂"], ["bh_cimu", "城外一间小农家院"], ["bh_seal", "城门外来的使节车驾"], ["bh_end", "北海相府的门楼"]]}
+    ]
   }
 }
