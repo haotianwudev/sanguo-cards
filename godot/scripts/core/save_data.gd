@@ -230,13 +230,15 @@ func prep_named() -> Dictionary:
 
 
 func prep_relic_choices() -> Array:
-	## the 宝物 on sale: every one with a price for its rarity (story ones are not sold)
-	var costs: Dictionary = prep_cfg().get("relic_cost", {})
-	return _db().relics.keys().filter(func(r): return costs.has(str(_db().relics[r].get("rarity", ""))))
+	## the few 宝物 on sale (battle.json prep.relics)
+	return prep_cfg().get("relics", []).map(func(e): return str(e["id"])).filter(func(r): return _db().relics.has(r))
 
 
 func prep_relic_cost(rid: String) -> int:
-	return int(prep_cfg().get("relic_cost", {}).get(str(_db().relics[rid].get("rarity", "")), 99))
+	for e in prep_cfg().get("relics", []):
+		if e["id"] == rid:
+			return int(e["cost"])
+	return 99
 
 
 func prep_card_cost(card_id: String) -> int:

@@ -191,20 +191,17 @@ func _card_column(save: SaveData) -> Control:
 			_card_button(flow, cid, "%s %s" % [db.cards[cid]["name"], Kit.rarity_label(db.cards[cid]["rarity"])])
 	if choices.is_empty():
 		list.add_child(Kit.label("还没有记得的卡：走到结局时手上的卡才会被记住。", 15, "muted"))
-	# 宝物: bought by rarity, worn from the first chapter on
+	# 宝物: a few on sale, worn from the first chapter on
 	var rdb := db.relics
-	var rarity_name := {"rare": "稀有", "common": "普通", "curse": "诅咒"}
-	for rar in ["rare", "common", "curse"]:
-		var rids: Array = save.prep_relic_choices().filter(func(r): return str(rdb[r].get("rarity", "")) == rar)
-		if rids.is_empty():
-			continue
-		list.add_child(Kit.label("宝物 · %s（%d 点）" % [rarity_name[rar], save.prep_relic_cost(rids[0])], Kit.FONT_BODY, "gold"))
+	var rids := save.prep_relic_choices()
+	if not rids.is_empty():
+		list.add_child(Kit.label("宝物", Kit.FONT_BODY, "gold"))
 		var flow := HFlowContainer.new()
 		flow.add_theme_constant_override("h_separation", 6)
 		flow.add_theme_constant_override("v_separation", 6)
 		list.add_child(flow)
 		for rid in rids:
-			var b := Kit.button(rdb[rid]["name"], "gray", 15)
+			var b := Kit.button("%s　%d 点" % [rdb[rid]["name"], save.prep_relic_cost(rid)], "gray", 15)
 			b.toggle_mode = true
 			b.custom_minimum_size = Vector2(0, 40)
 			b.tooltip_text = str(rdb[rid].get("desc", ""))

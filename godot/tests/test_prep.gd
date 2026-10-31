@@ -155,17 +155,24 @@ func test_named_cards_are_not_main_story_people() -> void:
 	for e in db.battle["prep"]["cards"]:
 		if not db.cards[e["id"]]["soldier"]:
 			check(not db.card_chapters.has(e["id"]), "%s is handed out by a chapter: the main story has them" % e["id"])
+			check_eq(db.cards[e["id"]]["rarity"], "SR", e["id"] + " is SR")
+	var troops := {}
+	for e in db.battle["prep"]["cards"]:
+		var key := "%s/%s" % [db.cards[e["id"]]["troop"], db.cards[e["id"]]["soldier"]]
+		check(not troops.has(key), "one per troop: " + key)
+		troops[key] = true
+		check_eq(int(e["cost"]), 1 if db.cards[e["id"]]["soldier"] else 2, e["id"])
 
 
 func test_route_only_named_cards_wait_for_the_birthplace() -> void:
 	var n := _lap2()
-	n.prep_cards = ["wangyi", "bulianshi"]  # 北线 / 南线
+	n.prep_cards = ["luxun", "jiangwei"]  # 南线 / both
 	n.apply_prep()
-	check(not n.owned.has("wangyi") and not n.owned.has("bulianshi"), "not before the route is known")
+	check(not n.owned.has("luxun") and n.owned.has("jiangwei"), "a south-only card waits for the route")
 	n.flags.append("出生：冀州无极")
 	var got := n.route_prep_cards()
-	check(n.owned.has("wangyi") and not n.owned.has("bulianshi"), "the north one joins on the north route")
-	check_eq(got.size(), 1)
+	check(not n.owned.has("luxun"), "the north route does not get the south one")
+	check_eq(got.size(), 0)
 	check(n.prep_pending.is_empty())
 
 
@@ -173,11 +180,13 @@ func test_relics_can_be_bought_and_are_worn_from_the_start() -> void:
 	var db := GameData.get_db()
 	var n := _lap2(8)
 	var sale := n.prep_relic_choices()
-	check(sale.has("bingfu") and sale.has("yushan"), "common and rare 宝物 are on sale")
-	check(not sale.has("jiujia"), "story 宝物 are not")
-	n.prep_relics = ["bingfu", "yushan"]
-	check_eq(n.prep_spent(), n.prep_relic_cost("bingfu") + n.prep_relic_cost("yushan"))
+	check(sale.size() <= 8 and sale.all(func(r): return n.prep_relic_cost(r) in [1, 2]), "a few 宝物, 1–2 点 each")
+	check(not sale.has("jiujia"), "story 宝物 are not sold")
+	var a: String = sale[0]
+	var b: String = sale[-1]
+	n.prep_relics = [a, b]
+	check_eq(n.prep_spent(), n.prep_relic_cost(a) + n.prep_relic_cost(b))
 	n.apply_prep()
-	check(n.kept_relics.has("bingfu") and n.kept_relics.has("yushan"), "kept from the first chapter on")
+	check(n.kept_relics.has(a) and n.kept_relics.has(b), "kept from the first chapter on")
 	Quests.begin(db.quests[0], n)
-	check(n.relics.has("yushan"), "a chapter starts with them")
+	check(n.relics.has(b), "a chapter starts with them")
