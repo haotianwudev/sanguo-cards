@@ -1,14 +1,26 @@
 {
-  "_doc": "长章节地图的分段背景：一章按剧情地点切成几段，每段一张 21:9 宽幅图（pics/source/map/panels/），from = 这一段从第几列（square 的 x）开始。python tools/map_strip.py <key> 把它们按游戏里的列宽拼成一整条（相邻两段交界渐变），写到 pics/source/map/<key>_strip.jpg，再用 art_ingest 装成 <key> 地图。quest / x_min / x_max 选这张地图用到的格子（第一章南北共用一个 quest，北线是 x ≥ 23）。",
+  "_doc": "长章节地图的分段背景：一章按剧情地点切成几段，每段一张 21:9 宽幅图（pics/source/map/panels/），from = 这一段从第几列（square 的 x）开始。python tools/map_strip.py <key> 把它们按游戏里的列宽拼成一整条（相邻两段交界渐变），写到 pics/source/map/<key>_strip.jpg，再用 art_ingest 装成 <key> 地图。quest / x_min / x_max 选这张地图用到的格子（第一章南北共用一个 quest，北线是 x ≥ 23）。生成：python tools/map_guide.py <key> --gen —— 按游戏坐标画构图草图（道路 = 格子之间的连线，spots = [格子 id, 在它上方画什么] 的彩色圆块），连同 season + scene 拼成提示词，style_refs 当画风参考。",
   "prologue_north": {
     "quest": "prologue",
     "x_min": 23,
+    "season": "隆冬，大雪覆盖，色调灰白带一点暖色。",
+    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/prologue_north_2.jpg"],
     "panels": [
-      {"src": "source/map/panels/prologue_north_1.jpg", "from": 23, "place": "无极甄府 → 邺城"},
-      {"src": "source/map/panels/prologue_north_2.jpg", "from": 29, "place": "邺城城外、赈济、分岔"},
-      {"src": "source/map/panels/prologue_north_3.jpg", "from": 35, "place": "太行山脚、土地庙、峡谷"},
-      {"src": "source/map/panels/prologue_north_4.jpg", "from": 41, "place": "黑山寨"},
-      {"src": "source/map/panels/prologue_north_5.jpg", "from": 47, "place": "回冀州、放粮、教枪、南下"}
+      {"src": "source/map/panels/prologue_north_1.jpg", "from": 23, "place": "无极甄府 → 邺城",
+       "scene": "冀州中山无极到冀州治所邺城。",
+       "spots": [["jz_arrive", "甄府大宅（高墙大院、几进院落）"], ["jz_ledger", "甄府的账房和粮仓小院"], ["jz_county", "邺城的城门和城墙"], ["jz_guojia", "邺城城里的街巷屋顶"]]},
+      {"src": "source/map/panels/prologue_north_2.jpg", "from": 29, "place": "邺城城外、赈济、分岔",
+       "scene": "邺城城外，开仓赈济，道路分岔伸向太行山。",
+       "spots": [["jz_mystery2", "城外的集市街巷"], ["jz_relief", "冒着热气的粥棚和一排粮车"], ["jz_road_fight", "开阔的官道路口"], ["jz_loot_path", "积雪的树林"]]},
+      {"src": "source/map/panels/prologue_north_3.jpg", "from": 35, "place": "太行山脚、土地庙、峡谷",
+       "scene": "太行山脚，山道进入峡谷，远处山腰是山贼的木寨。",
+       "spots": [["jz_zuoci", "路边一座小土地庙和一棵枯树"], ["jz_ambush", "两壁陡峭的峡谷谷口"], ["jz_zy_gate", "山贼木寨的寨门和箭楼"], ["jz_fire", "山坡上的枯树林"]]},
+      {"src": "source/map/panels/prologue_north_4.jpg", "from": 41, "place": "黑山寨",
+       "scene": "太行山里的黑山寨，建在悬崖台地上。",
+       "spots": [["jz_zy_road", "寨子里的木头营房"], ["jz_zy_altar", "冒着红色妖光的石祭坛"], ["jz_rescue", "山壁上一个幽深的水洞"], ["jz_boss", "黑山寨的聚义大厅（最大的木楼）"], ["jz_reunite", "寨门外的空地和下山的路口"]]},
+      {"src": "source/map/panels/prologue_north_5.jpg", "from": 47, "place": "回冀州、放粮、教枪、南下",
+       "scene": "回到冀州常山脚下的雪原村庄，最后大路向南。",
+       "spots": [["jz_almsgiving", "打开的粮仓和排队的粮车"], ["jz_recruit", "村口的募兵棚"], ["jz_training", "插着长枪的练兵校场"], ["jz_night", "夜里亮着炉火的农家院落"], ["jz_end", "一条向南延伸到地平线的大路"]]}
     ]
   },
   "luoyang_n": {
