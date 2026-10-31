@@ -2030,12 +2030,9 @@
     "baosanniang": {
       "name": "鲍三娘",
       "rarity": "SR",
-      "troop": "spear",
+      "troop": "bandit",
       "hp": 66,
       "at": 88,
-      "skills": [
-        "qiangpo"
-      ],
       "pool": false
     },
     "wangyi": {
