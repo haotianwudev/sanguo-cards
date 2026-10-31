@@ -10,5 +10,17 @@
       {"src": "source/map/panels/prologue_north_4.jpg", "from": 41, "place": "黑山寨"},
       {"src": "source/map/panels/prologue_north_5.jpg", "from": 47, "place": "回冀州、放粮、教枪、南下"}
     ]
+  },
+  "luoyang_n": {
+    "quest": "luoyang_n",
+    "panels": [
+      {"src": "source/map/panels/luoyang_n_1.jpg", "from": 0, "place": "黄河古道、渡口、车队营地（早春）"},
+      {"src": "source/map/panels/luoyang_n_2.jpg", "from": 6, "place": "酸枣会盟大营、诸侯宴、曹操借粮"},
+      {"src": "source/map/panels/luoyang_n_3.jpg", "from": 12, "place": "荥阳道、林地、汴水"},
+      {"src": "source/map/panels/luoyang_n_4.jpg", "from": 19, "place": "酸枣废营、兵临虎牢"},
+      {"src": "source/map/panels/luoyang_n_5.jpg", "from": 25, "place": "虎牢关前、车帘后"},
+      {"src": "source/map/panels/luoyang_n_6.jpg", "from": 31, "place": "驻军、洛阳火、难民（初夏）"},
+      {"src": "source/map/panels/luoyang_n_7.jpg", "from": 37, "place": "河岸险路、黄河渡口、回冀州"}
+    ]
   }
 }
