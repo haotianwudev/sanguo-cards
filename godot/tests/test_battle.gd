@@ -146,6 +146,22 @@ func test_auto_battle_casts_the_strategists_war_spirit() -> void:
 	check(AutoPlayer.value(b, b.leaders[gi], b.db.skills["xianji"]) <= 0.0, "full layers, plenty of turns left: not worth recasting")
 
 
+func test_archers_stack_a_resist_cut_that_stops_at_minus_25() -> void:
+	## 弓兵 射击 / 齐射 lower both resists a little more with every shot, but never push one below battle.archer_resist.floor (-25%)
+	var b := new_battle()
+	b.enemy["data"]["phys_resist"] = 0.3
+	b.enemy["data"]["magic_resist"] = -0.4
+	b.mods.erase("pierce")
+	b._apply(b.leaders[0], {"type": "shred", "amount": 0.2, "turns": 3}, 1.0)
+	b._apply(b.leaders[0], {"type": "shred", "amount": 0.2, "turns": 3}, 1.0)
+	check(is_equal_approx(float(b.enemy["resist_down"]), 0.4), "two shots stack: -40%")
+	check(is_equal_approx(b._cut(0.3), -0.1), "30% 物抗 -40% = -10%")
+	b._apply(b.leaders[0], {"type": "shred", "amount": 0.2, "turns": 3}, 1.0)
+	check(is_equal_approx(float(b.enemy["resist_down"]), 0.5), "the stack stops at -50%")
+	check(is_equal_approx(b._cut(0.1), -0.25), "10% 物抗 -50% stops at -25%")
+	check(is_equal_approx(b._cut(-0.4), -0.4), "a weakness already below -25% is left as it is")
+
+
 func test_auto_battle_defends_when_ap_is_full() -> void:
 	## nothing worth playing and AP at its cap: 自动 guards instead of ending the round
 	var b := new_battle()
@@ -337,7 +353,7 @@ func test_each_troop_has_its_own_plain_move() -> void:
 	check_eq(plain["spear"]["cost"], 2)
 	check(float(plain["spear"]["effects"][0]["power"]) >= 2.0, "刺击 is the heavy one")
 	check_eq(plain["archer"]["cost"], 0)
-	check(plain["archer"]["effects"][0].get("pierce", false), "射击 pierces")
+	check(not plain["archer"]["effects"][0].get("pierce", false) and plain["archer"]["effects"].any(func(e): return e["type"] == "shred"), "射击 does not pierce; it shreds the resists instead")
 	check(not plain["strategist"]["effects"].any(func(e): return e["type"] in ["attack", "magic"]), "策士 plain move has no attack")
 	check(plain["logistics"]["effects"][0]["type"] == "heal", "后勤 heals")
 	for tid in ["infantry", "bandit"]:

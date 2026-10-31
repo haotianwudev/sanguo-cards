@@ -340,7 +340,7 @@ static func skill_desc(sk: Dictionary) -> String:
 				else:
 					parts.append("灼烧 ×%s，%d 回合" % [_num(e["power"]), int(e["turns"])])
 			"shred":
-				parts.append("射穿甲缝：敌人物抗、法抗 -%d%%，可叠加（最多 -%d%%），%d 回合" % [int(round(float(e.get("amount", 0.1)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("max", 0.5)) * 100)), int(e.get("turns", 3))])
+				parts.append("射穿甲缝：敌人物抗、法抗 -%d%%，可叠加（最多 -%d%%，抗性最低打到 %d%%），%d 回合" % [int(round(float(e.get("amount", 0.1)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("max", 0.5)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("floor", -0.25)) * 100)), int(e.get("turns", 3))])
 			"break":
 				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
 	var tags: Array = []

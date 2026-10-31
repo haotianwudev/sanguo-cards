@@ -349,7 +349,7 @@ func _crit_roll(side: String) -> float:
 
 func _dot_resist() -> float:
 	## 灼烧 and 中毒 share one resist, the enemy's magic resist (a weakness below 0 makes them bite harder); 宝物 pierce eats into it
-	return float(enemy["data"]["magic_resist"]) * (1.0 - minf(1.0, float(mods.get("pierce", 0.0)))) - _resist_cut()
+	return _cut(float(enemy["data"]["magic_resist"]) * (1.0 - minf(1.0, float(mods.get("pierce", 0.0)))))
 
 
 func _resist_cut() -> float:
@@ -357,11 +357,17 @@ func _resist_cut() -> float:
 	return float(enemy.get("resist_down", 0.0)) + float(mods.get("resist_cut", 0.0))
 
 
+func _cut(resist: float) -> float:
+	## a resist after the archers' cut: never pushed below battle.archer_resist.floor (-0.25, user rule); a weakness already deeper than that stays as it is
+	var floor_v := float(db.battle.get("archer_resist", {}).get("floor", -0.25))
+	return minf(resist, maxf(resist - _resist_cut(), floor_v))
+
+
 func _dmg(base: float, kind: String, pierce := false) -> int:
 	## pierce (弓兵 穿甲): this hit ignores the enemy's resist altogether
 	var data: Dictionary = enemy["data"]
 	var resist: float = data["phys_resist"] if kind == "attack" else data["magic_resist"]
-	resist = 0.0 if pierce else resist * (1.0 - minf(1.0, float(mods.get("pierce", 0.0)))) - _resist_cut()
+	resist = 0.0 if pierce else _cut(resist * (1.0 - minf(1.0, float(mods.get("pierce", 0.0)))))
 	var d: float = base * float(db.battle.get("damage_mult", 1.0)) * (1.0 + (float(db.battle["combo_bonus"]) + float(mods.get("combo", 0.0))) * combo) * (1.0 + enemy["break_amount"]) * (1.0 - resist)
 	return maxi(1, int(round(d * _variance())))
 

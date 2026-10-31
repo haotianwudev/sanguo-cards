@@ -71,12 +71,11 @@
       "cost": 0,
       "free": true,
       "effects": [
+        {"type": "shred", "amount": 0.08, "turns": 3},
         {
           "type": "attack",
-          "power": 0.5,
-          "pierce": true
-        },
-        {"type": "shred", "amount": 0.08, "turns": 3}
+          "power": 0.5
+        }
       ]
     },
     "xiance": {
@@ -178,8 +177,7 @@
       "effects": [
         {
           "type": "attack",
-          "hits": 2,
-          "pierce": true
+          "hits": 2
         }
       ]
     },
@@ -428,11 +426,10 @@
       "cost": 2,
       "cumulative": true,
       "effects": [
+        {"type": "shred", "amount": 0.12, "turns": 3},
         {
-          "type": "attack",
-          "pierce": true
-        },
-        {"type": "shred", "amount": 0.12, "turns": 3}
+          "type": "attack"
+        }
       ]
     },
     "buzhan": {
@@ -627,8 +624,7 @@
       "effects": [
         {
           "type": "attack",
-          "hits": 2,
-          "pierce": true
+          "hits": 2
         }
       ]
     },
@@ -984,8 +980,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack",
-          "pierce": true
+          "type": "attack"
         }
       ]
     },
@@ -995,8 +990,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "attack",
-          "pierce": true
+          "type": "attack"
         },
         {
           "type": "stun",
@@ -1284,8 +1278,7 @@
       "effects": [
         {
           "type": "attack",
-          "hits": 2,
-          "pierce": true
+          "hits": 2
         }
       ]
     },
@@ -1555,8 +1548,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 2.1,
-          "pierce": true
+          "rate": 2.1
         }
       ]
     },
