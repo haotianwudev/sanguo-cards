@@ -14,5 +14,8 @@
     "ln_handhold": [0, 60],
     "ln_blaze": [40, -60],
     "ln_refugees": [0, 60]
+  },
+  "heishan": {
+    "hs_chunyuqiong": [-40, 0]
   }
 }

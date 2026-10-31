@@ -962,7 +962,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = false
 	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
 		_cg_square = s["id"]
-		_cg_mode = true
+		_cg_mode = not OS.get_cmdline_user_args().has("--map")  # --map: screenshots of the map itself, even on a CG square
 		if not save.resolved:  # first time through, not on the way back from its battle: said once the lines are set up
 			cg_new = str(ev.get("cg", s["cg"]))
 	_apply_cg_mode()

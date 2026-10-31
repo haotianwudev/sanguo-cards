@@ -49,5 +49,32 @@
        "scene": "初夏：黄河南岸，河滩和渡口，对岸大路通向冀州。",
        "spots": [["ln_night_talk", "小土丘上的一堆篝火"], ["ln_rear_guard", "河岸的高坡"], ["ln_mystery_retreat", "河滩上的险路和乱石"], ["ln_ferry", "黄河渡口的码头和渡船"], ["ln_end", "北岸通向远方平原的大路"]]}
     ]
+  },
+  "heishan": {
+    "quest": "heishan",
+    "style_refs": ["godot/data/art/map/yecheng.jpg", "pics/source/map/panels/luoyang_n_3.jpg"],
+    "panels": [
+      {"src": "source/map/panels/heishan_1.jpg", "from": 0, "place": "真定城、城外、兵营（初平元年夏）",
+       "scene": "盛夏：常山真定县城和城外的田野，远处是太行山。",
+       "spots": [["hs_start", "真定县城的城门和城墙"], ["hs_bandit1", "城外的破落街口"], ["hs_m4", "路边翻倒的商队货车"], ["hs_xiahoulan_pre", "一座军营的营门"]]},
+      {"src": "source/map/panels/heishan_2.jpg", "from": 6, "place": "军法、进山、太行黄巾",
+       "scene": "盛夏：太行山脚，山道从平原进入深山。",
+       "spots": [["hs_junfa", "军营里的校场和点将台"], ["hs_mountain_start", "山口的石阶小路"], ["hs_tm3", "山坡上黄巾残兵的破营帐"], ["hs_tm4", "山路边的采药人草棚"]]},
+      {"src": "source/map/panels/heishan_3.jpg", "from": 12, "place": "深山绝壁、黑山大寨（上）、空手而归（下）",
+       "scene": "夏末：太行深山。画面上半是山里，画面下半山脚是另一条通回平原的路。",
+       "spots": [["hs_encounter", "陡峭的悬崖绝壁"], ["hs_zhangyan", "建在山顶的黑山大寨寨门"], ["hs_rest1", "山寨里的营房"], ["hs_bad_skip", "山脚下一条孤零零的下山路"], ["hs_bad_wall", "远处平原上无极县城的城墙"]]},
+      {"src": "source/map/panels/heishan_4.jpg", "from": 18, "place": "黑山寨内营（上）、无极甄府（下）",
+       "scene": "秋天：画面上半是太行山里的黑山大寨内营，画面下半山脚是无极县城和甄府大宅。",
+       "spots": [["hs_hm1b", "山寨里的演武场"], ["hs_yudu", "山寨里一座营垒"], ["hs_alliance", "山寨的聚义大厅"], ["hs_bad_gate", "甄府的大门"], ["hs_bad_hall", "甄府的中庭院落"], ["hs_timeskip", "下山回无极的大路"], ["hs_guotu", "无极县城的街口"]]},
+      {"src": "source/map/panels/heishan_5.jpg", "from": 24, "place": "秘道、府门突围、郭图拦街、峡谷（初平二年冬）",
+       "scene": "隆冬雪夜：画面左边是无极县城的街巷，向右出城进入太行山的峡谷。",
+       "spots": [["hs_escape", "院墙下一个隐蔽的地道口"], ["hs_breakout", "府门前的街道"], ["hs_guotu_fight", "县城的城门"], ["hs_em1", "雪中的峡谷入口"], ["hs_pursuit0", "峡谷里的一片开阔雪地"]]},
+      {"src": "source/map/panels/heishan_6.jpg", "from": 30, "place": "追兵、太行山口、太行落脚、界桥前夜",
+       "scene": "冬末到早春：太行山里的山道，积雪开始融化。",
+       "spots": [["hs_pursuit1", "山道边的一片坡地"], ["hs_pursuit2", "山道旁的乱石岗"], ["hs_chunyuqiong", "两山夹峙的太行山口关隘"], ["hs_valley", "山谷里的小村落"], ["hs_jieqiao_eve", "山谷出口的营地和篝火"]]},
+      {"src": "source/map/panels/heishan_7.jpg", "from": 36, "place": "界桥（初平三年春）",
+       "scene": "早春：冀州平原上的磐河，河上一座木桥（界桥），两岸是战场。",
+       "spots": [["hs_jieqiao_scout", "河边的开阔草地"], ["hs_jm_loot", "被丢弃的营帐和辎重"], ["hs_rest3", "河岸的小营地"], ["hs_quyi", "桥头的盾阵营垒"], ["hs_wenchou", "横跨磐河的木桥（界桥）"], ["hs_end", "河对岸的大片营地"]]}
+    ]
   }
 }
