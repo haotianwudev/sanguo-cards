@@ -191,6 +191,7 @@
         {"id": "easy", "name": "化险为夷", "cost": 5, "max": 2, "desc": "敌人强度 −15%（等于降一级难度，但难度解锁的剧情照样触发）", "mods": {"enemy": -0.15}},
         {"id": "lord_bench", "name": "坐镇中军", "cost": 5, "max": 1, "desc": "主公可以不上场，把位置让给武将（整备里切换）"},
         {"id": "pick_extra", "name": "兼收并蓄", "cost": 8, "max": 1, "desc": "每次选卡（宝箱、招贤）可以多拿一张"},
+        {"id": "ap_round", "name": "源源不断", "cost": 10, "max": 1, "desc": "战斗中每回合多回 1 AP", "mods": {"ap_round": 1}},
         {"id": "slot", "name": "猛将如云", "cost": 10, "max": 1, "desc": "多一个出战格子"},
         {"id": "all_generals", "name": "天下归心", "cost": 15, "max": 1, "desc": "所有武将都能抽到（包括别章、剧情才出的）"}
       ],
