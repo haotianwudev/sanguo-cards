@@ -248,7 +248,7 @@ func test_merit_up_and_befriend() -> void:
 			var chest := n.chest_after_battle(r, 0.0, false, [], "zhangren")
 			if chest.any(func(c): return c["id"] == "zhangren"):
 				drops[k] += 1
-	check(drops[1] > drops[0], "化敌为友: the beaten enemy's card more often (%d > %d)" % [drops[1], drops[0]])
+	check(drops[1] == 300 and drops[0] < 300, "化敌为友: the beaten enemy's card every time (%d vs %d)" % [drops[1], drops[0]])
 
 
 func test_reroll_on_a_fixed_list_lays_it_out_again() -> void:
