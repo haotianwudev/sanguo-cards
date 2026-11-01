@@ -1494,7 +1494,7 @@ func _resolve(choice := -1) -> void:
 			_show_toast("获得：" + c["name"])
 	if not relics.is_empty():
 		await _reveal_relics(relics.map(func(c): return c["id"]))
-	if Game.save.extra_pick_open and not Game.save.offer.is_empty():  # 兼收并蓄: the same offer again for the second card
+	if (Game.save.extra_pick_open or Game.save.offer_rerolled) and not Game.save.offer.is_empty():  # 兼收并蓄 / 三顾茅庐: the offer again for another card
 		_open_offer(Quests.here(q, Game.save))
 		return
 	if kind == "mystery" or not Game.save.offer.is_empty():  # an event's outcome / a pick still to make: show it first
@@ -1581,6 +1581,8 @@ func _open_offer(s: Dictionary) -> void:
 		o.title = "仙人点化 —— 选一位武将升级"
 	elif s["type"] == "treasure" or s.get("event", "") == "grand_chest" or Game.save.events.get(s["id"], "") in ["chest", "grand_chest"]:
 		o.chest = "grand" if s.get("event", "") == "grand_chest" else "normal"
+	if Game.save.offer_rerolled and not Quests.fixed_list(q, Game.save).is_empty():
+		o.title = "三顾茅庐 —— 名单再摆一次，再选一张"
 	if Quests.offer_rerollable(q, Game.save):
 		o.reroll_text = "三顾茅庐 · 重摆"  # 前尘整备: once per 招贤 square
 		o.reroll.connect(func():

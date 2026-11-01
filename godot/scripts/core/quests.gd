@@ -577,12 +577,22 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 
 
 static func offer_rerollable(q: Dictionary, save: SaveData) -> bool:
-	## 三顾茅庐: a 招贤 square whose offer is dealt at random (not a chapter's short list shown whole), not yet dealt again
+	## 三顾茅庐 on a 招贤 square dealt at random: one 重摆 button (a chapter's short list instead comes round again
+	## after the pick — see fixed_list())
 	q = view(q, save)
 	var sq := here(q, save)
 	if sq["type"] != "recruit" or save.perk("reroll") <= 0 or save.offer_rerolled or save.offer_kind != "":
 		return false
-	return pools(q, save, sq)["recruit_pool"].is_empty() or not sq["recruit_pool"].is_empty()
+	return fixed_list(q, save).is_empty()
+
+
+static func fixed_list(q: Dictionary, save: SaveData) -> Array:
+	## the card ids of a 招贤 square that shows its chapter's whole short list (江东征兵), [] for a random one
+	q = view(q, save)
+	var sq := here(q, save)
+	if sq["type"] != "recruit" or not sq["recruit_pool"].is_empty():
+		return []
+	return pools(q, save, sq)["recruit_pool"].filter(func(c): return not save.maxed(c))
 
 
 static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, choice: int = -1) -> Array:
@@ -627,6 +637,11 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				gained.append(save.take(cid0))
 				if save.pick_again(cid0):  # 兼收并蓄: one more from the same offer
 					return gained
+				if save.perk("reroll") > 0 and not save.offer_rerolled:  # 三顾茅庐 on a short list: the same list once more
+					save.offer_rerolled = true
+					save.offer = fixed_list(q, save)
+					if not save.offer.is_empty():
+						return gained
 			save.offer = []
 			save.extra_pick_open = false
 			save.offer_rerolled = false
