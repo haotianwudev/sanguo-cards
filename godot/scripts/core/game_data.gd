@@ -282,8 +282,11 @@ func _validate() -> void:
 		assert(en["drop"] == "" or cards.has(en["drop"]), "enemy %s: unknown drop %s" % [en["id"], en["drop"]])
 	for sk in skills.values():
 		for e in sk["effects"]:
-			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot", "shred"],
+			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot", "shred", "interrupt"],
 				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
+			for cond in e.get("vs", {}):
+				assert(cond in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance"], "skill %s: unknown vs %s" % [sk["id"], cond])
+			assert(not e.has("crit_if") or e["crit_if"] in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance"], "skill %s: unknown crit_if" % sk["id"])
 	for c in cards.values():
 		assert(troops.has(c["troop"]), "card %s: bad troop" % c["id"])
 		assert(c["troop"] != "lord" or c["soldier"], "card %s: only soldier cards can be of the lord's own troop (亲卫 / 侍从)" % c["id"])
@@ -304,6 +307,12 @@ func _validate() -> void:
 		var names: Array = e["moves"].map(func(m): return m["name"])
 		for m in e["moves"]:
 			assert(not m.has("charge") or names.has(m["charge"]), "enemy %s: charges an unknown move" % e["id"])
+			assert(not m.has("chain") or names.has(m["chain"]), "enemy %s: chains an unknown move" % e["id"])
+			assert(not m.has("stance") or float(m["stance"].get("power", 0.0)) > 0.0, "enemy %s: a stance needs power" % e["id"])
+			assert(not m.has("summon") or (m["summon"].has("name") and float(m["summon"].get("hp_pct", 0.0)) > 0.0), "enemy %s: a summon needs name and hp_pct" % e["id"])
+			var pref: Variant = m.get("prefer", [])
+			for cond in (pref if pref is Array else [pref]):
+				assert(cond in Battle.PREFERS, "enemy %s: unknown prefer %s" % [e["id"], cond])
 
 
 # ---- cards -------------------------------------------------------------------

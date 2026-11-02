@@ -621,7 +621,6 @@ func _swap_battle() -> Battle:
 	s.owned = ["machao", "madai", "mayunlu"]
 	s.party = ["machao"]
 	var b := Battle.start("hulao", s.party_leaders(), 1, 0, {}, {}, false, {}, s.swap_roster())
-	b.round_no = b.swap_from_round()  # the first rounds are closed to swapping (see the test below)
 	return b
 
 
@@ -648,26 +647,188 @@ func test_swapping_costs_ap_and_the_card_that_left_cannot_return() -> void:
 	check_eq(b.party_max, b._max_hp_for(b._leaders_hp()), "the shared bar is the new party's")
 	check_between(float(b.party_hp) / b.party_max, share0 - 0.01, share0 + 0.01, "…and keeps its share")
 	check_eq(b.leaders[slot]["leader"]["card"]["id"], "madai")
-	check(not b.can_act(slot), "the newcomer waits for next round")
+	check(b.can_act(slot), "the newcomer can act the round he comes in")
 	check(not b.can_swap(slot), "one swap a round")
 	b.party_hp = b.party_max  # (the enemy's turn must not end the fight)
 	b.end_round()
 	b.ap = 6
-	check(b.can_act(slot), "…and acts then")
+	check(b.can_act(slot), "…and next round too")
 	var back := b.swap_options(slot).map(func(ld): return ld["card"]["id"])
 	check(back.has("mayunlu") and not back.has("machao") and not back.has("madai"), "machao is out for the battle: " + str(back))
 
 
-func test_no_swapping_in_the_first_two_rounds() -> void:
+func test_swap_from_round_one_but_only_an_unacted_leader() -> void:
 	var b := _swap_battle()
 	var slot := _slot_of(b, "machao")
 	b.ap = 6
-	b.round_no = 1
-	check(not b.can_swap(slot), "round 1")
-	b.round_no = 2
-	check(not b.can_swap(slot), "round 2")
-	b.round_no = 3
-	check(b.can_swap(slot), "round 3")
+	check_eq(b.round_no, 1)
+	check(b.can_swap(slot), "round 1 is open")
+	check_eq(b.swap_cost(), 1, "a swap costs 1 AP")
+	b.act(slot, b.leaders[slot]["leader"]["card"]["skills"][0])
+	check(not b.can_swap(slot), "a leader who acted this round cannot be swapped out (no two turns for one slot)")
+
+
+func test_swap_fires_the_troops_trick_for_sure() -> void:
+	var s := SaveData.new()
+	s.owned = ["machao", "zhaoyun", "madai", "zhangfei", "daqiao", "danyang"]
+	s.party = ["machao"]
+	var b := Battle.start("hulao", s.party_leaders(), 3, 0, {}, {}, false, {}, s.swap_roster())
+	b.ap = 8
+	var slot := _slot_of(b, "machao")
+	b.party_hp = b.party_max / 2
+	var hp0 := b.party_hp
+	b.swap(slot, "daqiao")
+	check(b.party_hp > hp0, "后勤 登场: 照料伤兵 heals for sure")
+	var c := Battle.start("hulao", s.party_leaders(), 3, 0, {}, {}, false, {}, s.swap_roster())
+	c.ap = 8
+	var ehp := int(c.enemy["hp"])
+	c.swap(_slot_of(c, "machao"), "madai")
+	check(int(c.enemy["hp"]) < ehp, "骑兵 登场: a 突袭 lands for sure")
+	var d := Battle.start("hulao", s.party_leaders(), 3, 0, {}, {}, false, {}, s.swap_roster())
+	d.ap = 8
+	var dslot := _slot_of(d, "machao")
+	d.swap(dslot, "zhaoyun")
+	check(d.leaders[dslot].get("sure_counter", false), "枪兵 登场: a sure counter this round")
+
+
+func test_interrupt_breaks_a_charge_refunds_ap_and_cancels_it() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 5)
+	b.enemy["charging"] = "天下无双"
+	b._plan_intents()
+	b.ap = 3
+	b.enemy["hp"] = b.enemy["max_hp"]
+	var log: Array = b._apply(b.leaders[0], {"type": "interrupt"}, 1.0)
+	check_eq(b.enemy["charging"], "", "the charge is gone")
+	check_eq(b.ap, 4, "AP +1")
+	check(float(b.enemy["break_amount"]) >= 0.25, "an opening")
+	check(str(log).contains("破招"), str(log))
+	check(not b.enemy["intents"].any(func(m): return m["name"] == "天下无双"), "the plan no longer holds the blow")
+
+
+func test_a_plain_stun_only_delays_a_charge() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 5)
+	b.enemy["charging"] = "天下无双"
+	b._apply(b.leaders[0], {"type": "stun", "chance": 1.0}, 1.0)
+	check_eq(b.enemy["charging"], "天下无双", "still wound up")
+	check(b.enemy["intents"].is_empty(), "a stunned enemy plans nothing")
+
+
+func test_both_lords_carry_an_interrupt() -> void:
+	var db := GameData.get_db()
+	for sid in ["rengdao", "huimaqiang"]:
+		check(db.skills[sid]["effects"].any(func(e): return e["type"] == "interrupt"), sid + " interrupts")
+
+
+func test_intents_are_planned_at_round_start_and_played_in_order() -> void:
+	var b := Battle.start("hulao", party(["cav_n", "spear_n"]), 7)
+	b.party_hp = b.party_max
+	check_eq(b.enemy["intents"].size(), int(b.enemy["data"]["actions"]), "one planned move per action")
+	check(b.intent_text() != "", "there is something to show")
+	var planned: Array = b.enemy["intents"].map(func(m): return m["name"])
+	b.take_events()
+	b.end_round()
+	var played: Array = []
+	for e in b.take_events():
+		if e["t"] in ["enemy_hit", "enemy_move"] and not e.get("guard", false):
+			played.append(e["move"])
+		elif e["t"] == "enemy_charge":
+			played.append("charge")
+	check_eq(played.size() > 0, true, "the enemy acted")
+	for k in played.size():
+		if played[k] != "charge":
+			check_eq(played[k], planned[k], "played in the planned order")
+
+
+func test_a_smart_enemy_never_heals_at_full_hp() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 1, 0, {}, {}, false, {"enemy_tier": "boss"})
+	b.enemy["data"]["moves"] = [{"name": "斩", "power": 1.0, "weight": 1}, {"name": "疗", "power": 0.0, "weight": 5, "heal": 0.3}]
+	b.enemy["hp"] = b.enemy["max_hp"]
+	for _i in 50:
+		check_eq(b._pick_move([])["name"], "斩", "no heal at full HP")
+	b.enemy["hp"] = b.enemy["max_hp"] / 5
+	var heals := 0
+	for _i in 100:
+		if b._pick_move([])["name"] == "疗":
+			heals += 1
+	check(heals > 80, "a hurt boss heals: %d" % heals)
+
+
+func test_an_enemy_holds_its_charge_while_the_player_can_interrupt() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 1, 0, {}, {}, false, {"enemy_tier": "boss"})
+	b.enemy["data"]["moves"] = [{"name": "斩", "power": 1.0, "weight": 1}, {"name": "聚", "power": 0.0, "weight": 1, "charge": "爆"}, {"name": "爆", "power": 3.0, "weight": 0}]
+	var with_lord := 0
+	for _i in 400:
+		if b._pick_move([]).has("charge"):
+			with_lord += 1
+	b.leaders[0]["uses_left"]["rengdao"] = 0  # the lord's 扔刀 is spent
+	var spent := 0
+	for _i in 400:
+		if b._pick_move([]).has("charge"):
+			spent += 1
+	check(spent > with_lord * 1.5, "winds up far more once the 打断 is spent: %d vs %d" % [spent, with_lord])
+
+
+func test_a_chain_follows_up_in_the_same_round() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 1, 0, {}, {}, false, {"enemy_tier": "boss"})
+	b.enemy["data"]["moves"] = [{"name": "提刀", "power": 0.5, "weight": 1, "chain": "春秋刀法"}, {"name": "春秋刀法", "power": 2.0, "weight": 0}]
+	b.enemy["data"]["actions"] = 2
+	b.enemy["charging"] = ""
+	b._plan_intents()
+	check_eq(b.enemy["intents"].map(func(m): return m["name"]), ["提刀", "春秋刀法"])
+
+
+func test_a_stance_answers_physical_skills_not_magic() -> void:
+	var b := Battle.start("hulao", party(["zhouyu"]), 2)
+	b.enemy["stance"] = {"name": "画戟架势", "power": 1.0, "turns": 1}
+	b.enemy["hp"] = b.enemy["max_hp"]
+	b.ap = 8
+	b.party_hp = b.party_max
+	var zy: int = b.leaders.size() - 1
+	var magic_sk := ""
+	var phys_sk := ""
+	for sid in b.leaders[zy]["leader"]["card"]["skills"]:
+		var sk: Dictionary = b.db.skills[sid]
+		if sk["effects"].any(func(e): return e["type"] == "magic") and magic_sk == "":
+			magic_sk = sid
+	for sid in b.leaders[0]["leader"]["card"]["skills"]:
+		var sk: Dictionary = b.db.skills[sid]
+		if sk["effects"].any(func(e): return e["type"] == "attack") and phys_sk == "" and b.usable(b.leaders[0], sk):
+			phys_sk = sid
+	if magic_sk != "":
+		var hp0 := b.party_hp
+		b.act(zy, magic_sk)
+		check_eq(b.party_hp, hp0, "magic is not answered")
+	var hp1 := b.party_hp
+	b.act(0, phys_sk)
+	check(b.party_hp < hp1, "a physical skill is answered")
+
+
+func test_a_summoned_guard_soaks_physical_but_not_magic_or_pierce() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.enemy["guard"] = {"name": "虎卫军", "hp": 999999, "max_hp": 999999, "strike": 0.5}
+	var ehp := int(b.enemy["hp"])
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	check_eq(int(b.enemy["hp"]), ehp, "a plain blow hits the guard")
+	check(int(b.enemy["guard"]["hp"]) < 999999, "…which takes it")
+	b._apply(b.leaders[0], {"type": "magic", "power": 1.0}, 1.0)
+	check(int(b.enemy["hp"]) < ehp, "magic goes over it")
+	var ehp2 := int(b.enemy["hp"])
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0, "pierce": true}, 1.0)
+	check(int(b.enemy["hp"]) < ehp2, "so does 穿甲")
+	b.enemy["guard"]["hp"] = 1
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	check(b.enemy["guard"].is_empty(), "a guard at 0 is gone")
+
+
+func test_crit_if_stunned_always_crits() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.enemy["stunned"] = true
+	b.enemy["hp"] = b.enemy["max_hp"]
+	b.take_events()
+	for _i in 10:
+		b._apply(b.leaders[0], {"type": "attack", "power": 0.1, "crit_if": "stunned"}, 1.0)
+	var hits := b.take_events().filter(func(e): return e["t"] == "hit")
+	check(hits.all(func(e): return e["crit"]), "every blow on a stunned enemy is a crit")
 
 
 func test_swap_can_bring_in_another_troop_but_never_a_troop_already_leading() -> void:

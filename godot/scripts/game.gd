@@ -7,7 +7,8 @@ var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var save_path := ""  # the file the current save lives in: a route slot, or "" for a journey still choosing its birthplace
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto", "auto_speed": "fast"}  # player options, kept in user://options.cfg (not in the save)
+var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto", "auto_speed": "fast",
+	"tactics": {"preset": "smart", "auto_swap": false, "rows": {}}}  # player options, kept in user://options.cfg (not in the save); tactics = 军令, shared by every save and lap
 const OPTIONS_PATH := "user://options.cfg"
 
 
@@ -1097,7 +1098,30 @@ func demo(name: String) -> void:
 						await b._on_end_round()
 				await get_tree().create_timer(5.0).timeout
 				print("AUTO-DEMO result=", b.b.result, " busy=", b._busy, " screen=", root.get_child(root.get_child_count() - 1).get_class())
-			if name == "fight" and OS.get_cmdline_user_args().has("--ult-enemy"):  # the enemy's 大招 cut-in: its charged move lands now
+			if OS.get_cmdline_user_args().has("--tactics"):  # v3 军令 panel, with a sample rule on the lord
+				await get_tree().create_timer(0.5).timeout
+				var tac: Dictionary = options.get("tactics", {}).duplicate(true)
+				if not tac.get("rows", {}).has("lord"):
+					tac["rows"] = {"lord": [{"skill": "rengdao", "cond": "enemy_charging", "reserve": true}, {"skill": "tuji", "cond": "always", "reserve": false}]}
+				options["tactics"] = tac
+				b._open_tactics()
+			if OS.get_cmdline_user_args().has("--guard"):  # v3: a 前卫 and a 架势 on the enemy, the planned moves shown
+				await get_tree().create_timer(0.5).timeout
+				var gm: int = int(round(b.b.enemy["max_hp"] * 0.15))
+				b.b.enemy["guard"] = {"name": "虎卫军", "hp": gm * 2 / 3, "max_hp": gm, "strike": 0.6}
+				b.b.enemy["stance"] = {"name": "画戟架势", "power": 0.9, "turns": 1}
+				b._refresh()
+			if name == "fight" and OS.get_cmdline_user_args().has("--break"):  # v3 破招: the lord's 扔刀 on a wound-up enemy
+				await get_tree().create_timer(0.5).timeout
+				b.b.enemy["charging"] = "天下无双"
+				b.b._plan_intents()
+				b.b.ap = 5
+				b._refresh()
+				await get_tree().create_timer(0.3).timeout
+				await b._on_skill(0, "rengdao")
+			elif name == "fight" and (OS.get_cmdline_user_args().has("--guard") or OS.get_cmdline_user_args().has("--tactics")):
+				pass
+			elif name == "fight" and OS.get_cmdline_user_args().has("--ult-enemy"):  # the enemy's 大招 cut-in: its charged move lands now
 				await get_tree().create_timer(0.5).timeout
 				for m in b.b.enemy["data"]["moves"]:
 					if float(m.get("weight", 1.0)) <= 0.0:

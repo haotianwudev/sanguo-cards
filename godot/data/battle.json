@@ -100,11 +100,27 @@
     "_ramp": "难度：每通关一章，之后的敌人体力和攻击 +chapter_step；所选难度等级每高一级再 +ending_step（等级 1 不加）。难度等级靠解锁结局升：南 / 北线分开算，这条线每解锁一个新结局，开局时可选的最高难度 +1；可以选低于最高的，但结局解锁的后续剧情只在难度 ≥ 该结局的 level 时才触发（选低了就会重新走到同样的 badend）",
     "chapter_step": 0.0,
     "ending_step": 0.15,
-    "_swap": "换人：战斗中把同兵种的另一张卡换上场（现在不花 AP：swap_ap = 0；填大于 0 就要花）；前两回合不能换（swap_from_round 起可换），每回合最多 swap_per_round 次；swap_ready = 换上来的人本回合就能行动（默认 false：下一回合才能动手）；换下的人本场不能再上",
-    "swap_ap": 0,
+    "_swap": "换人（v3）：花 swap_ap（1）AP 把替补换上场；swap_from_round 起可换（1 = 第一回合就能换），每回合最多 swap_per_round 次；只能换本回合还没出手的队长；swap_ready = 换上来的人本回合就能放技能；登场时必定触发一次他兵种的小技（骑兵突袭、枪兵本回合必还击、后勤照料伤兵、刀兵举盾、弓兵射穿甲缝、贼唿哨、策士出谋，算法同每回合的小概率版）；换下的人本场不能再上",
+    "swap_ap": 1,
     "swap_per_round": 1,
-    "swap_from_round": 3,
-    "swap_ready": false,
+    "swap_from_round": 1,
+    "swap_ready": true,
+    "_charge_break": "打断蓄力：带 interrupt 效果的技能（主公扔刀 / 回马枪等）打在正在蓄力的敌人身上，蓄力作废，我方回 ap_reward AP，敌人破防 break_bonus（break_turns 回合）。普通眩晕不打断蓄力，只让敌人跳过一回合（蓄力顺延）",
+    "charge_break": {"ap_reward": 1, "break_bonus": 0.25, "break_turns": 2},
+    "_tactics": "军令（自动战斗）：presets = 三档预设（interrupt 敌人蓄力时先打断；defend_charge 有蓄力杀招要落地又打断不了就防御；reserve 允许个人军令的「留气」；ults always = 大招照放 / boss = 只在首领战放限 1 大招）；conditions = 个人军令可选的条件（代码 AutoPlayer.cond_holds）；max_rows = 每人最多几行",
+    "tactics": {
+      "presets": {
+        "smart": {"name": "拆招", "desc": "先打断蓄力，挡得住的绝招就防御", "interrupt": true, "defend_charge": true, "reserve": true, "ults": "always"},
+        "aggro": {"name": "猛攻", "desc": "只管输出，不防御、不留气", "interrupt": false, "defend_charge": false, "reserve": false, "ults": "always"},
+        "save": {"name": "省技", "desc": "限 1 大招留到首领战", "interrupt": true, "defend_charge": true, "reserve": true, "ults": "boss"}
+      },
+      "conditions": {
+        "always": "总是", "enemy_charging": "敌人蓄力", "enemy_charging_heal": "敌人蓄力回血", "enemy_charging_summon": "敌人蓄力叫援",
+        "enemy_stance": "敌人架势", "enemy_guard": "敌有前卫", "enemy_stunned": "敌人眩晕", "enemy_broken": "敌人破防", "enemy_low_hp": "敌体力<30%",
+        "boss_fight": "首领战", "party_low_hp": "我军体力<40%", "party_status": "我军有异常", "ap_full": "AP 已满", "ap_6": "AP≥6"
+      },
+      "max_rows": 4
+    },
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)",
     "danger_step": 0.2,
     "_difficulty": "难度: permanent (whole campaign) enemy strength per level, e.g. after beating 虎牢关 吕布",

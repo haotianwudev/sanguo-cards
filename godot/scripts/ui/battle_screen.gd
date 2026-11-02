@@ -16,6 +16,10 @@ var _enemy_art: Control
 var _enemy_hp: ProgressBar
 var _enemy_hp_label: Label
 var _enemy_status: Label
+var _intent_label: Label  # v3 意图
+var _guard_row: HBoxContainer  # v3 前卫
+var _guard_label: Label
+var _guard_bar: ProgressBar
 var _party_hp: ProgressBar
 var _party_hp_label: Label
 var _ap_row: HBoxContainer
@@ -208,6 +212,20 @@ func _build() -> void:
 		info.add_child(Kit.label(e["name"], Kit.FONT_TITLE, "red"))
 	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 30 if not has_cg else 20)
 	info.add_child(_enemy_hp)
+	_guard_row = HBoxContainer.new()  # 前卫 (summon): a thin second bar under the boss's, hidden while there is none
+	_guard_row.add_theme_constant_override("separation", 10)
+	_guard_label = Kit.label("", Kit.FONT_SMALL, "amber")
+	_guard_bar = Kit.bar(1, 1, "amber", 12)
+	_guard_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_guard_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_guard_row.add_child(_guard_label)
+	_guard_row.add_child(_guard_bar)
+	_guard_row.visible = false
+	info.add_child(_guard_row)
+	_intent_label = Kit.label("", Kit.FONT_SMALL if has_cg else Kit.FONT_BODY, "red")  # 意图: what the enemy will do this round
+	_intent_label.clip_text = true
+	_intent_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	info.add_child(_intent_label)
 	_enemy_hp_label = Kit.label("", Kit.FONT_BODY if not has_cg else Kit.FONT_SMALL)
 	if not has_cg:  # HP and attack share a line: the status list below needs the height
 		var hp_row := HBoxContainer.new()
@@ -342,6 +360,13 @@ func _build() -> void:
 	_skill_hide_btn.z_index = 5
 	_skill_hide_btn.pressed.connect(_toggle_skill_bars)
 	add_child(_skill_hide_btn)
+	var tac_btn := Kit.button("军令", "purple", Kit.FONT_SMALL)  # v3 军令: how 自动 plays
+	tac_btn.focus_mode = Control.FOCUS_NONE
+	tac_btn.custom_minimum_size = Vector2(84, 40)
+	tac_btn.position = Vector2(974, 8)
+	tac_btn.z_index = 5
+	tac_btn.pressed.connect(_open_tactics)
+	add_child(tac_btn)
 	var menu_btn := Kit.button("设置", "gray", Kit.FONT_SMALL)
 	menu_btn.custom_minimum_size = Vector2(84, 40)
 	menu_btn.position = Vector2(1186, 8)
@@ -389,7 +414,9 @@ func _refresh() -> void:
 	if e["poison_turns"] > 0:
 		st.append("☠ 中毒 ×%d 最大体力 -%d%%/回合（%d 回合）" % [e["poison"], int(round(e["poison_pct"] * e["poison"] * 100)), e["poison_turns"]])
 	if e["charging"] != "":
-		st.append("⚠ 蓄力中：下回合【%s】！" % e["charging"])
+		st.append("⚠ 蓄力中：下回合【%s】——打断技能可破" % e["charging"])
+	if not e["stance"].is_empty():
+		st.append("【反】%s：物理攻击会被反击" % e["stance"]["name"])
 	if e["at"] > e["data"]["at"] * 1.01:
 		st.append("狂暴 攻击 %d" % int(round(e["at"])))
 	if b.buff["layers"] > 0:
@@ -402,6 +429,14 @@ func _refresh() -> void:
 		st.append("下回合 AP -%d" % b.ap_drain)
 	_enemy_status.text = "　".join(st)
 	_enemy_status.visible = not st.is_empty()  # no empty line under the enemy bar
+	var it := b.intent_text() if b.result == "" else ""
+	_intent_label.text = ("意图：" + it) if it != "" else ""
+	_intent_label.visible = it != ""
+	_guard_row.visible = not e["guard"].is_empty()
+	if _guard_row.visible:
+		_guard_label.text = "前卫：%s %d/%d" % [e["guard"]["name"], e["guard"]["hp"], e["guard"]["max_hp"]]
+		_guard_bar.max_value = e["guard"]["max_hp"]
+		_guard_bar.value = e["guard"]["hp"]
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
 		ch.queue_free()
@@ -480,7 +515,7 @@ func _sync_skill_bars() -> void:
 		var skills: Array = u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
-			var ult := _is_ult(sk)
+			var ult: bool = _is_ult(sk) or (b.enemy_state("charging") and sk["effects"].any(func(e): return e["type"] == "interrupt"))  # 打断 lights up while the enemy winds up
 			var btn := Button.new()
 			var tag := Kit.skill_tag(sk)
 			btn.text = "%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""]
@@ -621,7 +656,7 @@ func _open_swap(i: int) -> void:
 	o.swap_slot = i
 	o.swap_field = b.leaders.map(func(u): return "lord" if u["leader"]["card"]["troop"] == "lord" else u["leader"]["card"]["id"])
 	o.swap_ids = opts.map(func(ld): return ld["card"]["id"])
-	o.swap_note = ("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP"
+	o.swap_note = (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP") + "，登场必定触发兵种小技，当回合可出手"
 	for k in b.leaders.size():  # a card dragged onto another leader replaces that one instead
 		if b.can_swap(k):
 			o.swap_ok[k] = b.swap_options(k).map(func(ld): return ld["card"]["id"])
@@ -634,6 +669,16 @@ func _on_swap(i: int, card_id: String) -> void:
 		return
 	_log_lines(b.swap(i, card_id))
 	await _play(b.take_events())
+
+
+func _open_tactics() -> void:
+	## 军令: the leaders on the field and on the bench, each with up to max_rows rules for 自动
+	_close_skill_popup()
+	var cards: Array = b.leaders.map(func(u): return u["leader"]["card"])
+	cards.append_array(b.roster.map(func(ld): return ld["card"]))
+	var o := TacticsOverlay.new()
+	o.cards = cards
+	add_child(o)
 
 
 func _toggle_auto() -> void:
@@ -680,13 +725,16 @@ func _auto_step() -> void:
 	_auto_waiting = false
 	if not (auto_on and is_inside_tree()) or _busy or b.result != "":
 		return
-	var act := AutoPlayer.next(b)
-	if act.is_empty() and AutoPlayer.ends_with_defend(b):  # AP full: guard rather than let it spill
-		await _on_defend()
-	elif act.is_empty():
-		await _on_end_round()
-	else:
-		await _on_skill(act[0], act[1])
+	var step := AutoPlayer.plan(b, Game.options.get("tactics", {}))  # 军令
+	match str(step["kind"]):
+		"act":
+			await _on_skill(int(step["unit"]), str(step["skill"]))
+		"swap":
+			await _on_swap(int(step["unit"]), str(step["card"]))
+		"defend":
+			await _on_defend()
+		_:
+			await _on_end_round()
 
 
 func _on_skill(i: int, sid: String) -> void:
@@ -1171,10 +1219,19 @@ func _play(events: Array) -> void:
 					await _cutin(str(ed.get("name", "")), str(ed.get("portrait", "")), mv_name, true)
 				elif not is_fire:
 					_enemy_move_tag(mv_name)
-				var x := _enemy_art.position.y
-				var tw := _enemy_art.create_tween()
-				tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
-				tw.tween_property(_enemy_art, "position:y", x, 0.16)
+				var heavy_mv: Dictionary = b._move_named(mv_name)
+				if not is_fire and (_enemy_big_move(mv_name) or float(heavy_mv.get("power", 0.0)) >= 1.5):  # a heavy blow: winds back, then lunges at the camera
+					_enemy_art.pivot_offset = _enemy_art.size / 2.0
+					var tws := _enemy_art.create_tween()
+					tws.tween_property(_enemy_art, "scale", Vector2(0.93, 0.93), 0.12).set_trans(Tween.TRANS_QUAD)
+					tws.tween_property(_enemy_art, "scale", Vector2(1.18, 1.18), 0.08).set_trans(Tween.TRANS_BACK)
+					tws.tween_property(_enemy_art, "scale", Vector2.ONE, 0.18)
+					await get_tree().create_timer(0.2).timeout
+				else:
+					var x := _enemy_art.position.y
+					var tw := _enemy_art.create_tween()
+					tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
+					tw.tween_property(_enemy_art, "position:y", x, 0.16)
 				# 敌人一回合只喊一次战吼，且灼烧掉血绝不喊叫
 				if not is_fire and not _enemy_shouted_this_turn:
 					Sfx.voice(_enemy_voices(), ["attack"])
@@ -1224,6 +1281,53 @@ func _play(events: Array) -> void:
 					"混乱", Kit.c("purple"), 32)
 				BattleFx.stun_burst(self, _card_rect(ev["unit"]).position + Vector2(_card_rect(ev["unit"]).size.x / 2, 30))
 				BattleFx.burst(self, _card_rect(ev["unit"]).get_center(), BattleFx.VIOLET, 10, 20.0, 110.0, 5.0)
+				await get_tree().create_timer(0.3).timeout
+			"charge_break":  # 破招: the wind-up shatters, an AP flies back
+				Sfx.play("break")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.burst(self, _enemy_center(), Kit.c("gold"), 22, 30.0, 220.0, 6.0)
+				BattleFx.scale = 1.0
+				_flash(_enemy_art, Color(2.0, 1.8, 0.9))
+				Kit.shake(self, 16.0, 0.26)
+				await _alert("破招！", "【%s】被打断　AP +%d" % [ev["move"], int(ev.get("gain", 1))], Kit.c("gold"), 0.9)
+				_refresh()
+				var pips2: Array = _ap_row.get_children().filter(func(n): return n is Panel)
+				var top2: int = int(ev.get("ap", b.ap))
+				BattleFx.ap_gain(self, pips2.slice(maxi(0, top2 - int(ev.get("gain", 1))), top2))
+				await get_tree().create_timer(0.2).timeout
+			"stance_on":
+				Sfx.play("guard")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.counter_stance(self, _enemy_rect())
+				BattleFx.scale = 1.0
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势！物理会被反击", Kit.c("red"), 38)
+				_refresh()
+				await get_tree().create_timer(0.4).timeout
+			"stance_hit":  # the enemy answers the card that struck it
+				var su: int = int(ev.get("unit", 0))
+				Sfx.play("enemy_hit")
+				if su >= 0 and su < _cards.size():
+					BattleFx.claw(self, _card_rect(su).get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), 0.0)
+					Kit.shake(_cards[su], 8.0, 0.2)
+				Kit.float_text(self, _party_center(), "反击 -%d" % ev["dmg"], Kit.c("red"), 40)
+				Kit.tween_bar(_party_hp, ev["hp"])
+				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
+				await get_tree().create_timer(0.3).timeout
+			"stance_off":
+				_refresh()
+			"guard_on":
+				Sfx.play("charge")
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "前卫：%s！" % ev["name"], Kit.c("amber"), 40)
+				_refresh()
+				Kit.pop(_guard_row, 1.1)
+				await get_tree().create_timer(0.45).timeout
+			"guard_hit":
+				_guard_bar.max_value = ev["max"]
+				Kit.tween_bar(_guard_bar, ev["hp"])
+			"guard_down":
+				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "%s 溃散！" % ev["name"], Kit.c("gold"), 40)
+				Kit.shake(self, 10.0, 0.2)
+				_refresh()
 				await get_tree().create_timer(0.3).timeout
 			"round":
 				var left: int = b.turn_limit - int(ev["n"])

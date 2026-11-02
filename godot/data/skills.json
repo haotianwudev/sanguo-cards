@@ -99,7 +99,8 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack"
+          "type": "attack",
+          "crit_if": "stunned"
         },
         {
           "type": "break",
@@ -684,6 +685,9 @@
         {
           "type": "guard",
           "cut": 0.2
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -700,6 +704,9 @@
         {
           "type": "stun",
           "chance": 1
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -716,6 +723,9 @@
         {
           "type": "counter",
           "power": 0.5
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -929,7 +939,10 @@
       "effects": [
         {
           "type": "attack",
-          "per_combo": 0.3
+          "per_combo": 0.3,
+          "vs": {
+            "broken": 1.4
+          }
         }
       ]
     },
@@ -941,6 +954,9 @@
         {
           "type": "attack",
           "hits": 3
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -959,6 +975,9 @@
         {
           "type": "counter",
           "power": 0.5
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -980,7 +999,11 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack"
+          "type": "attack",
+          "crit_if": "charging"
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -995,6 +1018,9 @@
         {
           "type": "stun",
           "chance": 0.4
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -1068,7 +1094,10 @@
       "effects": [
         {
           "type": "attack",
-          "per_combo": 0.3
+          "per_combo": 0.3,
+          "vs": {
+            "broken": 1.4
+          }
         }
       ]
     },
@@ -1145,7 +1174,10 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "attack"
+          "type": "attack",
+          "vs": {
+            "broken": 1.4
+          }
         },
         {
           "type": "counter",
@@ -1394,6 +1426,9 @@
         {
           "type": "stun",
           "chance": 0.3
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -1554,6 +1589,9 @@
           "type": "break",
           "amount": 0.3,
           "turns": 3
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },
@@ -1580,7 +1618,10 @@
         {
           "type": "attack",
           "hits": 2,
-          "pierce": true
+          "pierce": true,
+          "vs": {
+            "broken": 1.4
+          }
         }
       ]
     },
@@ -2072,6 +2113,9 @@
         {
           "type": "stun",
           "chance": 0.4
+        },
+        {
+          "type": "interrupt"
         }
       ]
     },

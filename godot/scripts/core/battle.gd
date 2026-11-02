@@ -88,7 +88,8 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * float(b.db.battle.get("attack_mult", 1.0)) * tough_at * (1.0 + float(afx.get("at", 0.0))),
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
-		"break_amount": 0.0, "break_turns": 0, "resist_down": 0.0, "resist_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "poison": 0, "poison_pct": 0.0, "poison_turns": 0, "charging": "", "charge_ready": false, "used": []}
+		"break_amount": 0.0, "break_turns": 0, "resist_down": 0.0, "resist_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "poison": 0, "poison_pct": 0.0, "poison_turns": 0, "charging": "", "charge_ready": false, "used": [],
+		"intents": [], "stance": {}, "guard": {}}  # v3: this round's planned moves (意图), 反击架势 {name, power, turns}, 前卫 {name, hp, max_hp, strike}
 	b.party_burn = {"dmg": 0, "turns": 0}
 	b.party_poison = {"layers": 0, "pct": 0.0, "turns": 0}
 	b.roster = roster.duplicate()
@@ -176,7 +177,8 @@ func swap_from_round() -> int:
 
 func can_swap(i: int) -> bool:
 	## a confused leader (or one about to be) cannot be pulled out: swapping is no way to shake the status
-	return result == "" and not leaders[i]["confused"] and not leaders[i]["confuse_next"] and round_no >= swap_from_round() and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
+	## and only a leader who has not acted this round: the newcomer may act at once, so an acted slot would get two turns
+	return result == "" and not leaders[i]["acted"] and not leaders[i]["confused"] and not leaders[i]["confuse_next"] and round_no >= swap_from_round() and ap >= swap_cost() and swaps_done < int(db.battle.get("swap_per_round", 1)) and not swap_options(i).is_empty()
 
 
 func swap(i: int, card_id: String) -> Array:
@@ -206,7 +208,26 @@ func swap(i: int, card_id: String) -> Array:
 	if party_max != was_max:
 		party_burn["dmg"] = int(round(int(party_burn.get("dmg", 0)) * float(party_max) / maxf(1.0, float(was_max))))  # a burn on the bar is a share of it too
 	_ev({"t": "swap", "unit": i, "card": card_id, "hp": party_hp, "max": party_max})
-	return ["%s 换下 %s%s" % [new_ld["card"]["name"], old_ld["card"]["name"], "（AP -%d）" % swap_cost() if swap_cost() > 0 else ""]]
+	var log: Array = ["%s 换下 %s%s" % [new_ld["card"]["name"], old_ld["card"]["name"], "（AP -%d）" % swap_cost() if swap_cost() > 0 else ""]]
+	log.append_array(_entry_trick(i))
+	_check_end()
+	return log
+
+
+func _entry_trick(k: int) -> Array:
+	## 登场: the newcomer's troop trick fires for sure — the same trick and formula as the small per-round chance (`_troop_trick` / `_raid`),
+	## the spear's is a sure counter for the rest of this round
+	var u: Dictionary = leaders[k]
+	match str(u["leader"]["card"]["troop"]):
+		"cavalry":
+			return _raid(k, "登场！")
+		"spear":
+			u["sure_counter"] = true
+			_ev({"t": "passive", "unit": k, "name": unit_name(u), "text": "严阵以待"})
+			return ["登场！%s 严阵以待：本回合敌人每打中一次必定还击" % unit_name(u)]
+		_:
+			var log := _troop_trick(k)
+			return log.map(func(l): return "登场！" + str(l).strip_edges())
 
 
 func carry_out() -> Array:
@@ -289,6 +310,8 @@ func act(i: int, skill_id: String) -> Array:
 	u["boosted"] = false
 	for eff in sk["effects"]:
 		log.append_array(_apply(u, eff, mult))
+	if enemy["hp"] > 0 and sk["effects"].any(func(e): return e["type"] == "attack"):
+		log.append_array(_stance_strike(i))  # 反击架势: a physical skill is answered once
 	_check_end()
 	return log
 
@@ -324,6 +347,255 @@ func retreat() -> Array:
 	result = "lose"
 	lose_reason = "retreat"
 	return ["全军撤退！"]
+
+
+# ---- v3: 追击 / 必暴 / 前卫 / 反击架势 ------------------------------------------------
+
+func enemy_state(cond: String) -> bool:
+	## the enemy conditions skills (vs / crit_if) and 军令 read
+	match cond:
+		"broken":
+			return int(enemy["break_turns"]) > 0
+		"burning":
+			return int(enemy["burn_turns"]) > 0
+		"poisoned":
+			return int(enemy["poison_turns"]) > 0
+		"stunned":
+			return bool(enemy["stunned"])
+		"charging":
+			return str(enemy["charging"]) != ""
+		"guarded":
+			return not enemy["guard"].is_empty()
+		"stance":
+			return not enemy["stance"].is_empty()
+	return false
+
+
+func vs_mult(eff: Dictionary) -> float:
+	## 追击: `vs` {condition: ×} multiplies the blow for every condition that holds; the old `burning_mult` reads as vs.burning
+	var m := 1.0
+	var vs: Dictionary = eff.get("vs", {})
+	if eff.has("burning_mult") and not vs.has("burning"):
+		vs = vs.duplicate()
+		vs["burning"] = eff["burning_mult"]
+	for cond in vs:
+		if enemy_state(str(cond)):
+			m *= float(vs[cond])
+	return m
+
+
+func crit_if_holds(eff: Dictionary) -> bool:
+	return eff.has("crit_if") and enemy_state(str(eff["crit_if"]))
+
+
+func guard_takes(kind: String, pierce: bool) -> bool:
+	## 前卫 (summon) in the way: a plain physical blow lands on it; magic and 穿甲 go over it to the boss
+	return not enemy["guard"].is_empty() and kind == "attack" and not pierce
+
+
+func _land(d: int, kind: String, pierce: bool) -> int:
+	## put a computed blow on whoever takes it (the 前卫, or the enemy itself); returns the damage dealt
+	if guard_takes(kind, pierce):
+		var g: Dictionary = enemy["guard"]
+		var dealt := mini(d, int(g["hp"]))
+		g["hp"] = int(g["hp"]) - dealt
+		_ev({"t": "guard_hit", "dmg": dealt, "hp": g["hp"], "max": g["max_hp"]})
+		if int(g["hp"]) <= 0:
+			_ev({"t": "guard_down", "name": g["name"]})
+			enemy["guard"] = {}
+		return dealt
+	enemy["hp"] = maxi(0, int(enemy["hp"]) - d)
+	return d
+
+
+func _player_cut() -> float:
+	## our whole damage cut this round outside a defend: guards, 宝物, 战意
+	return 1.0 - (1.0 - guard_cut) * (1.0 - float(mods.get("guard", 0.0))) * (1.0 - minf(0.9, float(buff["def"])))
+
+
+func _stance_strike(k: int) -> Array:
+	## 反击架势: the enemy answers a physical skill with one blow of power × its attack (our guards cut it)
+	if enemy["stance"].is_empty() or party_hp <= 0:
+		return []
+	var st: Dictionary = enemy["stance"]
+	var d := maxi(1, int(round(float(enemy["at"]) * float(db.battle.get("damage_mult", 1.0)) * float(st["power"]) * _variance() * (1.0 - _player_cut()))))
+	party_hp = maxi(0, party_hp - d)
+	_ev({"t": "stance_hit", "unit": k, "dmg": d, "hp": party_hp, "move": st["name"]})
+	return ["[color=red]  %s【%s】迎面反击，我军受到 %d 伤害[/color]" % [enemy["data"]["name"], st["name"], d]]
+
+
+func _drop_stance() -> Array:
+	if enemy["stance"].is_empty():
+		return []
+	var nm := str(enemy["stance"]["name"])
+	enemy["stance"] = {}
+	_ev({"t": "stance_off"})
+	return ["  [color=gold]%s 的【%s】被打散了[/color]" % [enemy["data"]["name"], nm]]
+
+
+# ---- v3: 意图 (the enemy's moves for this round, planned at its start) and the smart pick ----
+
+func _move_named(nm: String) -> Dictionary:
+	for m in enemy["data"]["moves"]:
+		if m["name"] == nm:
+			return m
+	return {}
+
+
+func charge_target(mv: Dictionary) -> Dictionary:
+	## the move a wind-up (`charge`) announces
+	return _move_named(str(mv["charge"])) if mv.has("charge") else {}
+
+
+func smart() -> bool:
+	## elites, bosses and the 必败 showpieces read the fight; plain enemies only keep the common sense
+	return str(mods.get("enemy_tier", "normal")) in ["elite", "boss", "lose"]
+
+
+func party_interrupts_left() -> int:
+	## how many 打断 skills the party still has a use of (for the enemy's read and for 军令)
+	var n := 0
+	for u in leaders:
+		for sk in skills_of(u):
+			if sk["effects"].any(func(e): return e["type"] == "interrupt"):
+				var left: Variant = u["uses_left"][sk["id"]]
+				if left == null or int(left) > 0:
+					n += 1
+	return n
+
+
+func prefer_holds(cond: String) -> bool:
+	match cond:
+		"player_high_ap":
+			return ap >= 6
+		"player_buffed":
+			return int(buff["layers"]) >= 2 or leaders.filter(func(u): return u["boosted"]).size() >= 2
+		"player_low_hp":
+			return party_hp * 100 < party_max * 45
+		"party_burning":
+			return int(party_burn.get("turns", 0)) > 0
+		"party_poisoned":
+			return int(party_poison.get("turns", 0)) > 0
+		"first_round":
+			return round_no <= 1
+		"self_low_hp":
+			return int(enemy["hp"]) * 2 < int(enemy["max_hp"])
+	return false
+
+
+const PREFERS := ["player_high_ap", "player_buffed", "player_low_hp", "party_burning", "party_poisoned", "first_round", "self_low_hp"]
+
+
+func _move_weight(m: Dictionary, planned: Array) -> float:
+	## weight × common sense (every enemy) × reading the fight (elites / bosses: prefer, the player's 打断)
+	var w := float(m["weight"])
+	if w <= 0.0:
+		return 0.0
+	if m.get("when", "") == "half" and int(enemy["hp"]) * 2 >= int(enemy["max_hp"]):
+		return 0.0
+	if m.get("once", false) and (enemy["used"].has(m["name"]) or planned.any(func(p): return p["name"] == m["name"])):
+		return 0.0
+	if m.has("charge") and (str(enemy["charging"]) != "" or planned.any(func(p): return p.has("charge"))):
+		return 0.0
+	var eff: Dictionary = charge_target(m) if m.has("charge") else m  # a wind-up is judged by what it winds up to
+	var hp_share := float(enemy["hp"]) / maxf(1.0, float(enemy["max_hp"]))
+	if eff.has("heal") and float(eff.get("power", 0.0)) <= 0.0 and hp_share > 0.8:
+		return 0.0  # never heals at (near) full HP
+	if eff.has("stance") and not enemy["stance"].is_empty():
+		return 0.0
+	if eff.has("summon") and not enemy["guard"].is_empty():
+		return 0.0
+	if eff.has("burn_party") and int(party_burn.get("turns", 0)) >= 2:
+		w *= 0.15
+	if eff.has("poison_party") and int(party_poison.get("layers", 0)) >= int(eff.get("poison_max", 3)) and int(party_poison.get("turns", 0)) >= 2:
+		w *= 0.15
+	if eff.has("ap_drain") and ap <= 1:
+		w *= 0.2
+	if float(eff.get("power", 0.0)) <= 0.0 and planned.any(func(p): return p["name"] == m["name"]):
+		w *= 0.2  # no two of the same pure status move in one round
+	if not smart():
+		return w
+	if eff.has("heal") and hp_share < 0.35:
+		w *= 3.0
+	if eff.has("ap_drain") and prefer_holds("player_high_ap"):
+		w *= 2.0  # the player is saving up for a 大招: take the AP away
+	if eff.has("confuse") and prefer_holds("player_buffed"):
+		w *= 2.0
+	if (eff.get("pierce", false) or float(eff.get("power", 0.0)) >= 1.5) and prefer_holds("player_low_hp"):
+		w *= 2.0  # goes for the kill
+	var pref: Variant = m.get("prefer", [])
+	for cond in (pref if pref is Array else [pref]):
+		if prefer_holds(str(cond)):
+			w *= 3.0
+	if m.has("charge"):  # reads the player's 打断: holds a wind-up while one is ready, winds up when none is left
+		w *= 0.5 if party_interrupts_left() > 0 else 1.8
+	return w
+
+
+func _pick_move(planned: Array) -> Dictionary:
+	## one move for the next action: the charged move first, then a 连段 (chain) the last planned move names, else a weighted smart pick
+	var moves: Array = enemy["data"]["moves"]
+	if planned.is_empty() and str(enemy["charging"]) != "":
+		var cm := _move_named(str(enemy["charging"]))
+		if not cm.is_empty():
+			return cm
+	if not planned.is_empty() and planned[-1].has("chain"):
+		var nx := _move_named(str(planned[-1]["chain"]))
+		if not nx.is_empty():
+			return nx
+	var ws: Array = moves.map(func(m): return _move_weight(m, planned))
+	if ws.all(func(x): return x <= 0.0):
+		var plain: Array = moves.filter(func(m): return float(m["weight"]) > 0.0 and not m.has("charge"))
+		return plain[0] if not plain.is_empty() else moves[0]
+	return GameData.weighted_pick(rng, moves, ws)
+
+
+func _plan_intents() -> void:
+	## 意图: the enemy's moves for its next turn, shown to the player; a stunned enemy plans nothing (it skips its turn)
+	var planned: Array = []
+	if not enemy["stunned"] and int(enemy["hp"]) > 0:
+		for _a in int(enemy["data"]["actions"]):
+			planned.append(_pick_move(planned))
+	enemy["intents"] = planned
+
+
+func intent_label(mv: Dictionary, first := false) -> String:
+	## a short word for a planned move: 绝招【X】 / 蓄力·回血 / 重击+施毒 …
+	if first and str(enemy["charging"]) != "" and mv["name"] == enemy["charging"]:
+		return "绝招【%s】" % mv["name"]
+	if mv.has("charge"):
+		var t := charge_target(mv)
+		var kind := "杀招"
+		if t.has("summon"):
+			kind = "叫援"
+		elif t.has("heal") and float(t.get("power", 0.0)) <= 0.0:
+			kind = "回血"
+		elif t.has("rage") and float(t.get("power", 0.0)) <= 0.0:
+			kind = "狂暴"
+		return "蓄力·" + kind
+	var parts: Array = []
+	if mv.has("stance"):
+		parts.append("架势")
+	if mv.has("summon"):
+		parts.append("唤援")
+	var p := float(mv.get("power", 0.0))
+	if p >= 1.5 or mv.get("pierce", false) or mv.has("pct"):
+		parts.append("重击")
+	elif p > 0.0:
+		parts.append("攻击")
+	for pair in [["poison_party", "施毒"], ["burn_party", "烈火"], ["confuse", "惑乱"], ["ap_drain", "夺气"], ["heal", "回血"], ["rage", "狂暴"]]:
+		if mv.has(pair[0]):
+			parts.append(pair[1])
+	return "+".join(parts) if not parts.is_empty() else mv["name"]
+
+
+func intent_text() -> String:
+	if enemy["stunned"]:
+		return "眩晕"
+	var out: Array = []
+	for k in enemy["intents"].size():
+		out.append(intent_label(enemy["intents"][k], k == 0))
+	return " · ".join(out)
 
 
 # ---- internals ---------------------------------------------------------------
@@ -391,19 +663,26 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				if not first_hit_done:  # 七星宝刀
 					bonus += float(mods.get("first_hit", 0.0))
 					first_hit_done = true
-				var fire := float(eff.get("burning_mult", 1.0)) if enemy["burn_turns"] > 0 else 1.0  # 火上浇油
+				var fire := vs_mult(eff)  # 火上浇油 (burning_mult) and every other 追击 (vs: broken / burning / poisoned / stunned / guarded)
 				var power: float = float(eff["power"]) + float(eff.get("per_combo", 0.0)) * combo  # 收尾 (骑兵)
-				var d := _dmg(at * power * mult * (1.0 + bonus) * fire, kind, bool(eff.get("pierce", false)))
+				var pierce := bool(eff.get("pierce", false))
+				var d := _dmg(at * power * mult * (1.0 + bonus) * fire, kind, pierce)
 				var crit_mult := _crit_roll("player")
+				if crit_if_holds(eff):  # 破绽必暴: the condition holds, the blow is a crit for sure
+					crit_mult = maxf(crit_mult, float(db.battle.get("crit", {}).get("player_mult", 1.6)) + float(mods.get("crit_mult", 0.0)))
 				var crit := crit_mult > 1.0
 				if crit:
 					d = int(round(d * crit_mult))
-				if d > enemy["hp"]:
+				var on_guard := guard_takes(kind, pierce)
+				var target_name: String = str(enemy["guard"]["name"]) if on_guard else ename
+				if not on_guard and d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
-				enemy["hp"] = maxi(0, enemy["hp"] - d)
+				d = _land(d, kind, pierce)
 				combo += 1
-				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": bool(eff.get("pierce", false)), "crit": crit})
-				log.append("  %s 受到 %d 伤害（%d 连击）%s" % [ename, d, combo, "[color=gold]　暴击！[/color]" if crit else ""])
+				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": pierce, "crit": crit, "guard": on_guard})
+				log.append("  %s 受到 %d 伤害（%d 连击）%s" % [target_name, d, combo, "[color=gold]　暴击！[/color]" if crit else ""])
+				if on_guard and enemy["guard"].is_empty():
+					log.append("  [color=gold]前卫被击溃！[/color]")
 				if kind == "attack" and float(buff.get("magic", 0.0)) > 0.0 and enemy["hp"] > 0:  # 战意: each layer adds a share of the blow as magic (magic resist applies)
 					var md := _dmg(at * power * mult * (1.0 + bonus) * fire * float(buff["magic"]), "magic")
 					enemy["hp"] = maxi(0, enemy["hp"] - md)
@@ -445,7 +724,10 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			if rng.randf() < float(eff["chance"]) + float(mods.get("stun", 0.0)):
 				enemy["stunned"] = true
 				_ev({"t": "stun", "ok": true})
-				return ["  %s 陷入眩晕！下回合无法行动" % ename]
+				var slog: Array = ["  %s 陷入眩晕！下回合无法行动%s" % [ename, "（蓄力顺延）" if enemy["charging"] != "" else ""]]
+				slog.append_array(_drop_stance())
+				_plan_intents()
+				return slog
 			_ev({"t": "stun", "ok": false})
 			return ["  %s 未受影响" % ename]
 		"shred":  # 弓兵 射穿甲缝: both resists down, stacking with every use (and with the passive) up to battle.archer_resist.max; the count restarts
@@ -525,6 +807,23 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			ap = mini(ap_max(), ap + int(eff["amount"]))
 			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
 			return ["  AP +%d" % int(eff["amount"])]
+		"interrupt":  # 打断 (扔刀 / 回马枪 …): a charge in progress is spent for nothing; AP back and an opening (battle.charge_break)
+			if enemy["charging"] == "":
+				return ["  （%s 没有在蓄力）" % ename]
+			var cname: String = enemy["charging"]
+			enemy["charging"] = ""
+			enemy["charge_ready"] = false
+			var cb: Dictionary = db.battle.get("charge_break", {})
+			var gain := mini(int(cb.get("ap_reward", 1)), ap_max() - ap)
+			ap += gain
+			enemy["break_amount"] = maxf(float(enemy["break_amount"]), float(cb.get("break_bonus", 0.25)))
+			enemy["break_turns"] = maxi(int(enemy["break_turns"]), int(cb.get("break_turns", 2)))
+			_ev({"t": "charge_break", "move": cname, "ap": ap, "gain": gain})
+			var ilog: Array = ["  [color=gold]破招！%s 的【%s】被打断，AP +%d，破绽大开：受到伤害 +%d%%（%d 回合）[/color]" % [ename, cname, gain,
+				int(round(float(enemy["break_amount"]) * 100)), enemy["break_turns"]]]
+			ilog.append_array(_drop_stance())
+			_plan_intents()
+			return ilog
 	assert(false, "unknown effect " + kind)
 	return []
 
@@ -584,23 +883,48 @@ func _enemy_phase(defend_cut: float) -> Array:
 		enemy["hp"] += h
 		_ev({"t": "enemy_heal", "amt": h, "hp": enemy["hp"]})
 		log.append("[color=red]  %s 再生，回复 %d 体力[/color]" % [data["name"], h])
-	enemy["charge_ready"] = enemy["charging"] != ""  # wound up last turn: it lands now
+	if not enemy["stance"].is_empty():  # 反击架势 runs out (it was up through the player's round)
+		enemy["stance"]["turns"] = int(enemy["stance"]["turns"]) - 1
+		if int(enemy["stance"]["turns"]) <= 0:
+			enemy["stance"] = {}
+			_ev({"t": "stance_off"})
 	var was_stunned: bool = enemy["stunned"]
+	var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0))) * (1.0 - minf(0.9, float(buff["def"])))
 	if enemy["stunned"]:
 		enemy["stunned"] = false
 		_ev({"t": "enemy_stunned"})
 		log.append("%s 眩晕中，无法行动" % data["name"])
 	else:
-		var cut := 1.0 - (1.0 - guard_cut) * (1.0 - defend_cut) * (1.0 - float(mods.get("guard", 0.0))) * (1.0 - minf(0.9, float(buff["def"])))
-		for _a in int(data["actions"]):
-			var mv := _enemy_move()
+		var queue: Array = enemy["intents"].duplicate()
+		if str(enemy["charging"]) != "" and (queue.is_empty() or queue[0]["name"] != enemy["charging"]):
+			queue = []  # a charge set from outside the plan (demos, tests): plan again so it lands first
+		if queue.any(func(m): return not data["moves"].has(m)):
+			queue = []  # the move list changed under the plan (tests, demos)
+		if queue.is_empty():
+			for _a in int(data["actions"]):
+				queue.append(_pick_move(queue))
+		for mv in queue:
 			if mv.has("charge"):  # winds up: next turn opens with the big one
 				enemy["charging"] = mv["charge"]
-				_ev({"t": "enemy_charge", "move": mv["charge"]})
+				_ev({"t": "enemy_charge", "move": mv["charge"], "kind": intent_label(mv)})
 				log.append("[color=red]%s 正在蓄力……下回合【%s】！[/color]" % [data["name"], mv["charge"]])
 				continue  # the wind-up costs this action only
+			if str(enemy["charging"]) != "" and mv["name"] == enemy["charging"]:
+				enemy["charging"] = ""  # the charged move lands
+				enemy["charge_ready"] = false
 			if mv.get("once", false):
 				enemy["used"].append(mv["name"])
+			if mv.has("stance"):  # 反击架势: physical skills get answered until it runs out (or a stun / 打断 breaks it)
+				var st: Dictionary = mv["stance"]
+				enemy["stance"] = {"name": str(st.get("name", mv["name"])), "power": float(st.get("power", 0.8)), "turns": int(st.get("turns", 1))}
+				_ev({"t": "stance_on", "move": mv["name"]})
+				log.append("[color=red]  %s 摆开【%s】：物理攻击会被反击（法术、毒火不会）[/color]" % [data["name"], enemy["stance"]["name"]])
+			if mv.has("summon"):  # 前卫: plain physical blows land on it until it falls
+				var sm: Dictionary = mv["summon"]
+				var ghp := maxi(1, int(round(float(enemy["max_hp"]) * float(sm.get("hp_pct", 0.15)))))
+				enemy["guard"] = {"name": str(sm["name"]), "hp": ghp, "max_hp": ghp, "strike": float(sm.get("strike", 0.5))}
+				_ev({"t": "guard_on", "name": sm["name"], "hp": ghp})
+				log.append("[color=red]  %s 唤来【%s】挡在身前（物理攻击先打它；法术、穿甲可以越过）[/color]" % [data["name"], sm["name"]])
 			if float(mv["power"]) > 0.0 or mv.has("pct"):
 				var c: float = 0.0 if mv.get("pierce", false) else cut
 				# pct: the blow also takes that share of our MAX HP (a 大招 that keeps hurting however big the party grows); the guard cuts it too
@@ -651,6 +975,18 @@ func _enemy_phase(defend_cut: float) -> Array:
 			_check_end()
 			if result != "":
 				return log
+	enemy["intents"] = []
+	if not enemy["guard"].is_empty() and result == "":  # the 前卫 strikes too, every enemy turn (even with its boss stunned)
+		var g: Dictionary = enemy["guard"]
+		var gd := maxi(1, int(round(float(enemy["at"]) * float(db.battle.get("damage_mult", 1.0)) * float(g["strike"]) * _variance() * (1.0 - cut))))
+		party_hp = maxi(0, party_hp - gd)
+		_ev({"t": "enemy_hit", "dmg": gd, "move": g["name"], "cut": cut, "hp": party_hp, "guard": true})
+		log.append("%s 跟着砍了一刀，我军受到 %d 伤害" % [g["name"], gd])
+		if party_hp > 0:
+			log.append_array(_counter_strike())
+		_check_end()
+		if result != "":
+			return log
 	if not was_stunned and result == "":
 		log.append_array(_affix_status())
 	if enemy["break_turns"] > 0:
@@ -710,18 +1046,16 @@ func _counter_strike() -> Array:
 	for c in counters:
 		if enemy["hp"] <= 0:
 			break
-		var d := _dmg(float(c["at"]) * float(c["power"]) * (1.0 + float(buff["atk"])), "attack")
-		enemy["hp"] = maxi(0, enemy["hp"] - d)
+		var d := _land(_dmg(float(c["at"]) * float(c["power"]) * (1.0 + float(buff["atk"])), "attack"), "attack", false)
 		_ev({"t": "counter", "unit": c["name"], "slot": int(c.get("unit", -1)), "dmg": d, "hp": enemy["hp"]})
 		log.append("  %s 反击，造成 %d 伤害" % [c["name"], d])
 	for k in leaders.size():  # 枪兵: a spear leader sometimes hits back by itself (宝物 raise the chance), no AP
 		var u: Dictionary = leaders[k]
 		if enemy["hp"] <= 0:
 			break
-		if u["leader"]["card"]["troop"] == "spear" and not u["confused"] and rng.randf() < proc_chance("spear"):
+		if u["leader"]["card"]["troop"] == "spear" and not u["confused"] and (u.get("sure_counter", false) or rng.randf() < proc_chance("spear")):
 			_ev({"t": "passive", "unit": k, "name": unit_name(u), "text": "顺势反击"})
-			var d2 := _dmg(float(SaveData.leader_power(u["leader"])) * float(db.battle.get("counter_power", 0.3)) * (1.0 + float(buff["atk"])), "attack")
-			enemy["hp"] = maxi(0, enemy["hp"] - d2)
+			var d2 := _land(_dmg(float(SaveData.leader_power(u["leader"])) * float(db.battle.get("counter_power", 0.3)) * (1.0 + float(buff["atk"])), "attack"), "attack", false)
 			_ev({"t": "counter", "unit": unit_name(u), "slot": k, "dmg": d2, "hp": enemy["hp"]})
 			log.append("  %s 顺势反击，造成 %d 伤害" % [unit_name(u), d2])
 	_check_end()
@@ -739,23 +1073,6 @@ func _ambush() -> Array:
 		_ev({"t": "enemy_hit", "dmg": d, "move": mv["name"], "cut": 0.0, "hp": party_hp})
 		log.append("%s【%s】 我军受到 %d 伤害" % [data["name"], mv["name"], d])
 	return log
-
-
-func _enemy_move() -> Dictionary:
-	## A charged move first; otherwise a weighted pick among the moves allowed now.
-	var moves: Array = enemy["data"]["moves"]
-	if enemy["charging"] != "" and enemy["charge_ready"]:
-		enemy["charge_ready"] = false
-		var name: String = enemy["charging"]
-		enemy["charging"] = ""
-		for m in moves:
-			if m["name"] == name:
-				return m
-	var ok: Array = moves.filter(func(m):
-		return float(m["weight"]) > 0.0 \
-			and not (m.get("when", "") == "half" and enemy["hp"] * 2 >= enemy["max_hp"]) \
-			and not (m.get("once", false) and enemy["used"].has(m["name"])) 			and not (m.has("charge") and enemy["charging"] != ""))
-	return GameData.weighted_pick(rng, ok, ok.map(func(m): return float(m["weight"])))
 
 
 func _start_round() -> Array:
@@ -785,64 +1102,85 @@ func _start_round() -> Array:
 		var ptr: String = pu["leader"]["card"]["troop"]
 		if ptr in ["lord", "cavalry", "spear"] or rng.randf() >= proc_chance(ptr):
 			continue
-		var pname := unit_name(pu)
-		var ps := passive_scale(pu)  # the card's whole strength (攻 + 体力) sets how much it does
-		match ptr:
-			"logistics":
-				if party_hp > 0 and party_hp < party_max:
-					var rh := mini(int(round(party_max * float(db.battle.get("regen_power", 0.03)) * ps * float(db.battle.get("heal_mult", 1.0)))), party_max - party_hp)
-					_ev({"t": "passive", "unit": k, "name": pname, "text": "照料伤兵"})
-					party_hp += rh
-					_ev({"t": "heal", "amt": rh, "hp": party_hp})
-					log.append("[color=#7fd88a]  %s 照料伤兵，回复 %d 体力[/color]" % [pname, rh])
-			"infantry":
-				var gc := minf(0.6, float(db.battle.get("guard_cut", 0.15)) * ps)
-				_ev({"t": "passive", "unit": k, "name": pname, "text": "举盾列阵"})
-				guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - gc)
-				_ev({"t": "guard", "cut": guard_cut})
-				log.append("  %s 举盾列阵：本回合受到伤害 -%d%%" % [pname, int(round(guard_cut * 100))])
-			"bandit":
-				if not pu["boosted"]:
-					pu["boosted"] = true
-					_ev({"t": "passive", "unit": k, "name": pname, "text": "一声唿哨"})
-					_ev({"t": "boost", "units": [k], "idle": true})
-					log.append("  %s 一声唿哨，BOOST！" % pname)
-			"strategist":
-				var sb: Dictionary = db.battle.get("strategist_buff", {})
-				_ev({"t": "passive", "unit": k, "name": pname, "text": "出谋划策"})
-				if buff["layers"] < 4:
-					buff["layers"] += 1
-					buff["atk"] += minf(0.2, float(sb.get("atk", 0.0)) * ps)
-					buff["def"] += minf(0.2, float(sb.get("def", 0.0)) * ps)
-				buff["turns"] = maxi(int(buff["turns"]), int(sb.get("turns", 2)))
-				_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
-				log.append("  %s 出谋划策：全军攻防上升（战意 ×%d）" % [pname, buff["layers"]])
-			"archer":
-				var ab: Dictionary = db.battle.get("archer_resist", {})
-				_ev({"t": "passive", "unit": k, "name": pname, "text": "射穿甲缝"})
-				enemy["resist_down"] = minf(float(ab.get("max", 0.5)), float(enemy["resist_down"]) + float(ab.get("amount", 0.1)) * ps)  # stacks, like the archers' shred
-				enemy["resist_turns"] = maxi(enemy["resist_turns"], int(ab.get("turns", 2)))
-				_ev({"t": "resist_down", "amount": enemy["resist_down"], "turns": enemy["resist_turns"]})
-				log.append("  %s 一箭射穿甲缝：%s 的物抗、法抗累计 -%d%%（%d 回合）" % [pname, enemy["data"]["name"], int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]])
+		log.append_array(_troop_trick(k))
 	for u in leaders:
 		u["acted"] = false
+		u["sure_counter"] = false
 		u["confused"] = u["confuse_next"]
 		u["confuse_next"] = false
 		if not u["boosted"] and u["idle_rounds"] >= int(cfg["boost_idle_rounds"]) and rng.randf() < float(cfg["boost_chance"]):
 			u["boosted"] = true
 			_ev({"t": "boost", "units": [leaders.find(u)], "idle": true})
 			log.append("%s 蓄势已久 —— BOOST！" % unit_name(u))
-	for u in leaders:
-		var members: Array = u["leader"]["members"]
+	for k in leaders.size():
+		var u: Dictionary = leaders[k]
 		var raid := float(cfg.get("interrupt_by_troop", {}).get(u["leader"]["card"]["troop"], cfg["interrupt_chance"])) + (float(mods.get("raid", 0.0)) if u["leader"]["card"]["troop"] == "cavalry" else 0.0)  # 突袭 (宝物 raise the cavalry's)
-		if not members.is_empty() and enemy["hp"] > 0 and rng.randf() < raid:
-			var m: Dictionary = members[rng.randi_range(0, members.size() - 1)]
-			var d := _dmg(m["at"] * float(cfg["interrupt_power"]), "attack")
-			enemy["hp"] = maxi(0, enemy["hp"] - d)
-			combo += 1
-			_ev({"t": "interrupt", "unit": leaders.find(u), "member": m["name"], "dmg": d, "hp": enemy["hp"]})
-			log.append("插入！%s部队的 %s 突袭，造成 %d 伤害" % [unit_name(u), m["name"], d])
+		if not u["leader"]["members"].is_empty() and enemy["hp"] > 0 and rng.randf() < raid:
+			log.append_array(_raid(k))
 	_check_end()
+	if result == "":
+		_plan_intents()
+	return log
+
+
+func _raid(k: int, lead := "插入！") -> Array:
+	## 突袭: one member of the unit (the leader himself when it has none) strikes for interrupt_power × its attack, +1 连击
+	var u: Dictionary = leaders[k]
+	if enemy["hp"] <= 0:
+		return []
+	var members: Array = u["leader"]["members"]
+	var m: Dictionary = members[rng.randi_range(0, members.size() - 1)] if not members.is_empty() \
+		else {"name": unit_name(u), "at": u["leader"]["at"]}
+	var d := _dmg(float(m["at"]) * float(db.battle["interrupt_power"]), "attack")
+	d = _land(d, "attack", false)
+	combo += 1
+	_ev({"t": "interrupt", "unit": k, "member": m["name"], "dmg": d, "hp": enemy["hp"]})
+	return ["%s%s部队的 %s 突袭，造成 %d 伤害" % [lead, unit_name(u), m["name"], d]]
+
+
+func _troop_trick(k: int) -> Array:
+	## a troop's small trick (no AP): rolled each round by `_start_round`, sure on a 登场 (`_entry_trick`). Its size follows the card (passive_scale)
+	var pu: Dictionary = leaders[k]
+	var pname := unit_name(pu)
+	var ps := passive_scale(pu)  # the card's whole strength (攻 + 体力) sets how much it does
+	var log: Array = []
+	match str(pu["leader"]["card"]["troop"]):
+		"logistics":
+			if party_hp > 0 and party_hp < party_max:
+				var rh := mini(int(round(party_max * float(db.battle.get("regen_power", 0.03)) * ps * float(db.battle.get("heal_mult", 1.0)))), party_max - party_hp)
+				_ev({"t": "passive", "unit": k, "name": pname, "text": "照料伤兵"})
+				party_hp += rh
+				_ev({"t": "heal", "amt": rh, "hp": party_hp})
+				log.append("[color=#7fd88a]  %s 照料伤兵，回复 %d 体力[/color]" % [pname, rh])
+		"infantry":
+			var gc := minf(0.6, float(db.battle.get("guard_cut", 0.15)) * ps)
+			_ev({"t": "passive", "unit": k, "name": pname, "text": "举盾列阵"})
+			guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - gc)
+			_ev({"t": "guard", "cut": guard_cut})
+			log.append("  %s 举盾列阵：本回合受到伤害 -%d%%" % [pname, int(round(guard_cut * 100))])
+		"bandit":
+			if not pu["boosted"]:
+				pu["boosted"] = true
+				_ev({"t": "passive", "unit": k, "name": pname, "text": "一声唿哨"})
+				_ev({"t": "boost", "units": [k], "idle": true})
+				log.append("  %s 一声唿哨，BOOST！" % pname)
+		"strategist":
+			var sb: Dictionary = db.battle.get("strategist_buff", {})
+			_ev({"t": "passive", "unit": k, "name": pname, "text": "出谋划策"})
+			if buff["layers"] < 4:
+				buff["layers"] += 1
+				buff["atk"] += minf(0.2, float(sb.get("atk", 0.0)) * ps)
+				buff["def"] += minf(0.2, float(sb.get("def", 0.0)) * ps)
+			buff["turns"] = maxi(int(buff["turns"]), int(sb.get("turns", 2)))
+			_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
+			log.append("  %s 出谋划策：全军攻防上升（战意 ×%d）" % [pname, buff["layers"]])
+		"archer":
+			var ab: Dictionary = db.battle.get("archer_resist", {})
+			_ev({"t": "passive", "unit": k, "name": pname, "text": "射穿甲缝"})
+			enemy["resist_down"] = minf(float(ab.get("max", 0.5)), float(enemy["resist_down"]) + float(ab.get("amount", 0.1)) * ps)  # stacks, like the archers' shred
+			enemy["resist_turns"] = maxi(enemy["resist_turns"], int(ab.get("turns", 2)))
+			_ev({"t": "resist_down", "amount": enemy["resist_down"], "turns": enemy["resist_turns"]})
+			log.append("  %s 一箭射穿甲缝：%s 的物抗、法抗累计 -%d%%（%d 回合）" % [pname, enemy["data"]["name"], int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]])
 	return log
 
 

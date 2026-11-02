@@ -301,6 +301,9 @@ static func skill_tag(sk: Dictionary) -> String:
 	return ""
 
 
+const _COND_WORDS := {"broken": "破防", "burning": "灼烧", "poisoned": "中毒", "stunned": "眩晕", "charging": "蓄力", "guarded": "有前卫", "stance": "摆架势"}
+
+
 static func skill_desc(sk: Dictionary) -> String:
 	## one line on what a skill does, from its effects (for the 整备 detail panel)
 	var parts: Array = []
@@ -343,6 +346,13 @@ static func skill_desc(sk: Dictionary) -> String:
 				parts.append("射穿甲缝：敌人物抗、法抗 -%d%%，可叠加（最多 -%d%%，抗性最低打到 %d%%），%d 回合" % [int(round(float(e.get("amount", 0.1)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("max", 0.5)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("floor", -0.25)) * 100)), int(e.get("turns", 3))])
 			"break":
 				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
+			"interrupt":
+				parts.append("打断蓄力：敌人正在蓄力时让它作废，AP +1，敌人破绽大开")
+		if e.has("crit_if"):
+			parts.append("敌人%s时必定暴击" % _COND_WORDS.get(str(e["crit_if"]), str(e["crit_if"])))
+		var vs: Dictionary = e.get("vs", {})
+		for cond in vs:
+			parts.append("对%s的敌人 ×%s" % [_COND_WORDS.get(str(cond), str(cond)), _num(vs[cond])])
 	var tags: Array = []
 	if sk.get("per_battle", false):
 		tags.append("每场限 1 次")
