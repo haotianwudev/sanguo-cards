@@ -24,6 +24,12 @@ func _ready() -> void:
 			var ms: Node = get_child(get_child_count() - 1)
 			if ms is MapScreen:
 				ms._dialog_skip()
+		if args.has("pickfate"):  # --pickfate: the 天命 pick answered (its first card), then the first square plays
+			await get_tree().create_timer(0.5).timeout
+			var ms: Node = get_child(get_child_count() - 1)
+			var fp: Node = ms.get_node_or_null("FatePick")
+			if fp != null:
+				fp.picked.emit(0)
 		if args.has("line") and args["demo"] != "interlude":  # --line=N: N taps into the square's lines (a speaker's face and name plate)
 			await get_tree().create_timer(0.5).timeout
 			var ms: Node = get_child(get_child_count() - 1)

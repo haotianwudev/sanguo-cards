@@ -713,6 +713,12 @@ func _refresh() -> void:
 		_clear_sheet()
 		_dlg_i = -1
 		_dlg_lines = []
+		var art := Kit.cg(here.get("cg", ""))  # the square's CG still fills the screen behind the pick, only its story waits
+		if art != null and not OS.get_cmdline_user_args().has("--map"):
+			_cg_view.texture = art
+			_cg_tab.visible = true
+			_cg_mode = true
+			_apply_cg_mode()
 		_open_fates()
 		return
 	_show_square(here)
