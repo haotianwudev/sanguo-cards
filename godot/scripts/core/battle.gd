@@ -101,7 +101,7 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 	b.party_max = b._max_hp_for(hp)
 	b.party_hp = maxi(1, hp - damage)
 	b.ap = int(b.db.battle["ap_start"]) - int(b.db.battle["ap_per_round"]) + int(mods.get("ap_start", 0))
-	b.turn_limit = int(b.scenario["turn_limit"]) + int(b.db.battle.get("turn_bonus", 0)) + int(mods.get("turns", 0)) + (int(b.db.battle.get("boss_extra_turns", 0)) if str(mods.get("enemy_tier", "")) == "boss" else 0)
+	b.turn_limit = turns_for(b.db, b.scenario, str(mods.get("enemy_tier", ""))) + int(mods.get("turns", 0))
 	b.opening = []
 	if ambush and mods.get("no_ambush", 0) > 0:
 		b.opening.append("锦帆铃叮当一响——识破了埋伏！")
@@ -117,6 +117,11 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		b.opening.append("%s 盯着赤帻发愣——第一回合无法行动" % e["name"])
 	b.opening.append_array(b._start_round())
 	return b
+
+
+static func turns_for(gd: GameData, sc: Dictionary, tier: String) -> int:
+	## a fight's round limit: the scenario's own + battle.turn_bonus (every fight) + battle.tier_extra_turns[tier] (精英 / 首领); 宝物 come on top
+	return int(sc["turn_limit"]) + int(gd.battle.get("turn_bonus", 0)) + int(gd.battle.get("tier_extra_turns", {}).get(tier, 0))
 
 
 func _make_unit(ld: Dictionary) -> Dictionary:

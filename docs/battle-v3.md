@@ -64,7 +64,7 @@ v2 之后，「每 AP 打最高伤害」的贪心机器人就能拿到目标胜�
 
 ## 7b. 回合数
 
-所有战斗的回合上限统一 +2（`battle.json turn_bonus`，用户要求；加在关卡自己的 `turn_limit` 上，首领战的 `boss_extra_turns` 照旧另加）。
+所有战斗的回合上限统一 +2（`battle.json turn_bonus`），精英战再 +2、首领战再 +5（`tier_extra_turns`，取代旧的 `boss_extra_turns`）——都是用户要求，加在关卡自己的 `turn_limit` 上（`Battle.turns_for`，地图战前情报同一个数）。
 
 ## 8. 界面
 

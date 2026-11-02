@@ -1396,7 +1396,7 @@ func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 			tags += "[img=28]%s[/img]" % afx_img
 		tags += "[color=%s][b]词缀·%s[/b]（%s）[/color]　" % [Kit.c("amber").to_html(), afx["name"], afx["desc"]]
 	return "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次%s\n招式：%s\n%d 回合内击破。任务中体力不会自动回满。" % [
-		tags, e["name"], e["hp"], e["at"], e["actions"], _resists(e), _moves_text(e), int(sc["turn_limit"]) + int(db.battle.get("turn_bonus", 0))]
+		tags, e["name"], e["hp"], e["at"], e["actions"], _resists(e), _moves_text(e), Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))]
 
 
 func _resists(e: Dictionary) -> String:
