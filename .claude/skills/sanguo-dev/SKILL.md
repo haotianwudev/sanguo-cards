@@ -136,6 +136,18 @@ CG mode's text box has a 「框」 tool button (next to 跳过 / 隐藏) cycling
 (`Game.options.dlg_size`, kept in options.cfg; `DLG_H` / `DLG_FACE` in `map_screen.gd`). 中 / 小 keep no room for options that
 aren't showing yet (`_options_room`), 小 also drops the title line; when the options appear the box grows to fit them.
 Screenshot with `--dlg=auto|mid|small`, and `--skip` on any map demo plays the story through to its options.
+**Story box rules (2026-11-01 pass, user asked for each):** the speaker's face sits in a fixed dark-gold frame (`_make_face_slot`) —
+a narration line only fades the face out, so the text's left edge never jumps; a name plate (`Kit.speaker_name(key)`: card name
+before 「·」, else the first real `Kit.ALIASES` name, `Kit.NOT_NAMES` skips descriptions like 美妇) sits on the frame's bottom, and
+记录 prefixes bare 「…」 lines with the speaker (`Kit.named_line`). The tools are `Kit.tool_button` pills (32 px, never `Kit.button`).
+Options that appear after the last line fade in and ignore taps for `TAP_GUARD` 0.3 s (`_show_buttons`) — keep that for any new
+option path. Full-screen picks (天命 / 宝物 / 选卡) call `_cover(o)`: the text box and tools hide under them; a pending 天命 opens
+before the chapter's first square is shown at all (its CG voice waits). `RelicPick` is select + 选定 (or a second tap), like
+`PickOverlay`. Before a fight the frame shows the enemy, the intel is `_bb_chip` tags (3–4 lines, no scroll) and 整备 sits beside
+出战; coming back from 整备 / 部队 to a square whose lines were read (`_story_read`) shows its options, not the scene again.
+`InterludeOverlay` (？小故事, endings) has the same 跳过 (this scene) / 隐藏 (CG only) / 记录, a name plate, and without a CG lights
+the speaker's portrait (others 0.55). Screenshot flags: `--line=N` (N taps into a map square), `--log` (记录 open, after `--skip`
+too), `--demo=interlude --id=<story> --line=N [--nocg] [--log|--hide]`, `--demo=relics --sel`, `--demo=fate`.
 Never replay a scene at a choice or fork: give the square (or event) a `prompt` — one line that sums up the
 options (「孙策主张正面强攻，周瑜主张调虎离山。听谁的？」) — shown beside the buttons.
 A finished story square shows its prompt (or 「这一段已经看完了」), a pending pick shows only the outcome — nothing replays.

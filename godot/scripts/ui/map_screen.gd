@@ -44,6 +44,12 @@ const TAP_SLOP := 14.0
 var _log_saved := {}
 var _dlg_recap := false  # a choice follows: once the lines are read, sum them up beside the options
 var _dlg_face: TextureRect  # the speaker of the current line
+var _dlg_slot: PanelContainer  # the face's frame: it keeps its place on narration lines (the face fades), so the text never jumps sideways
+var _dlg_name: Label  # the speaker's name plate, over the bottom of the face
+var _btn_gen := 0  # bumps whenever the options are shown / hidden: a stale tap guard timer does nothing
+const TAP_GUARD := 0.3  # options that just appeared ignore taps this long (the thumb that read the last line keeps tapping)
+var _covered := 0  # full-screen picks (天命 / 宝物 / 选卡) open: the text box and its tools stay hidden under them
+var _story_read := ""  # the square whose lines were read through: coming back to it (整备) shows its options, not the scene again
 var _dlg_keys: Array = []  # the speaker of each line (Kit.speakers)
 var _dlg_after := ""  # shown under the last line (a battle's enemy info)  # the last named speaker in this scene (for 他 / 她 lines)
 var _dlg_raw: Array = []  # the lines before {lord} is filled in (for speaker lookup)
@@ -347,21 +353,21 @@ func _ready() -> void:
 	_dlg_tools.add_theme_constant_override("separation", 8)
 	_dlg_tools.z_index = 5
 	add_child(_dlg_tools)
-	var skip := Kit.button("跳过", "gray", Kit.FONT_SMALL)
+	var skip := Kit.tool_button("跳过")
 	skip.focus_mode = Control.FOCUS_NONE
 	skip.pressed.connect(_dialog_skip)
 	_dlg_tools.add_child(skip)
-	var hide_btn := Kit.button("隐藏", "gray", Kit.FONT_SMALL)
+	var hide_btn := Kit.tool_button("隐藏")
 	hide_btn.name = "Hide"
 	hide_btn.focus_mode = Control.FOCUS_NONE
 	hide_btn.pressed.connect(_hide_sheet)
 	_dlg_tools.add_child(hide_btn)
-	var size_btn := Kit.button(DLG_NAMES[_dlg_mode_opt()], "gray", Kit.FONT_SMALL)
+	var size_btn := Kit.tool_button(DLG_NAMES[_dlg_mode_opt()])
 	size_btn.name = "Size"
 	size_btn.focus_mode = Control.FOCUS_NONE
 	size_btn.pressed.connect(_cycle_dlg_size)
 	_dlg_tools.add_child(size_btn)
-	var log_btn := Kit.button("记录", "gray", Kit.FONT_SMALL)
+	var log_btn := Kit.tool_button("记录")
 	log_btn.name = "Log"
 	log_btn.focus_mode = Control.FOCUS_NONE
 	log_btn.pressed.connect(_toggle_log)
@@ -703,11 +709,31 @@ func _refresh() -> void:
 	_token.position = _token_dest(here)
 	_bob_token()
 	_center_on(here)
-	_show_square(here)
-	if save.fate == "" and not save.fate_offer.is_empty():
+	if _fate_pending():  # 天命 first: the square's CG, lines and voice wait until it is picked (_open_fates → _refresh)
+		_clear_sheet()
+		_dlg_i = -1
+		_dlg_lines = []
 		_open_fates()
+		return
+	_show_square(here)
 	if save.offer_kind == "relic" and not save.offer.is_empty():
 		_open_relics.call_deferred()
+
+
+func _fate_pending() -> bool:
+	return Game.save.fate == "" and not Game.save.fate_offer.is_empty()
+
+
+func _cover(o: Control) -> void:
+	## a full-screen pick is up: the text box and its tools hide under it (no half-drawn story box behind the cards)
+	_covered += 1
+	_sheet.visible = false
+	_update_tools()
+	o.tree_exiting.connect(func():
+		_covered = maxi(0, _covered - 1)
+		if _covered == 0:
+			_sheet.visible = not _sheet_hidden
+			_update_tools())
 
 
 func _bob_token() -> void:
@@ -877,6 +903,7 @@ func _on_square(sid: String) -> void:
 	if _busy:
 		return
 	_busy = true
+	_story_read = ""
 	var target: Dictionary = q["squares"][sid]
 	await _walk_to(target)
 	if _nodes.has(sid):
@@ -902,7 +929,7 @@ func _grant_chapter_card() -> void:
 
 
 func _flush_if_no_story() -> void:
-	if q != null and (q["squares"][Game.save.square].get("text", []) as Array).is_empty():
+	if q != null and not _fate_pending() and (q["squares"][Game.save.square].get("text", []) as Array).is_empty():
 		_flush_lord_reveals()
 
 
@@ -975,13 +1002,15 @@ func _show_square(s: Dictionary) -> void:
 	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover", "recruit"] \
 		or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()))
 	_dlg_face = null
-	if talking:  # a face for whoever is speaking, changed line by line
-		_dlg_face = TextureRect.new()
-		_dlg_face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		_dlg_face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		_dlg_face.custom_minimum_size = Vector2(128, 128) if art != null else Vector2(172, 230)
-		_dlg_face.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		outer.add_child(_dlg_face)
+	_dlg_slot = null
+	_dlg_name = null
+	var fight_ahead: bool = s["type"] == "battle" and not save.resolved
+	if s["id"] != _story_read:
+		_story_read = ""
+	if _story_read != "":  # back from 整备 (or the party screen) with the lines already read: straight to the options
+		talking = false
+	if talking or fight_ahead:  # a face for whoever is speaking, changed line by line (before a fight: the enemy's at the end)
+		_make_face_slot(outer, Vector2(128, 128) if art != null else Vector2(172, 230))
 	outer.add_child(col)
 	var text := RichTextLabel.new()
 	text.bbcode_enabled = true
@@ -1082,6 +1111,7 @@ func _show_square(s: Dictionary) -> void:
 		"battle":
 			text.text = _battle_info(s, Quests.battle_here(q, save))
 			_fight_button(s, buttons)
+			_enemy_face(s)
 		"mystery":
 			if not save.event_battle.is_empty():
 				text.text = "\n".join(save.event_note) + "\n\n" + _battle_info(s, Quests.battle_here(q, save))
@@ -1141,7 +1171,7 @@ func _show_square(s: Dictionary) -> void:
 	_dlg_after = _battle_info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
 	if s["type"] == "recover" and not save.resolved:  # after a rest's own lines, what resting does
 		_dlg_after = text.text
-	if narrative and lines.size() > 1:
+	if narrative and lines.size() > 1 and _story_read == "":
 		_dlg_lines = lines
 		_dlg_raw = raw_lines
 		_dlg_text = text
@@ -1157,15 +1187,92 @@ func _show_square(s: Dictionary) -> void:
 		_show_buttons(buttons, false)
 		_dlg_cg = cg_new
 		_dialog_show()
+	elif narrative and lines.size() > 1:  # read already (back from 整备): the summary and the options, never the scene again
+		if s["type"] in ["choose", "mystery", "event"]:
+			text.text = prompt if prompt != "" else str(lines[-1])
+		elif fight_ahead:
+			_enemy_face(s)
 	if cg_new != "":  # everyone in it with a voice of his own says it on his line (Sfx.cg_line from _dialog_show)
 		Sfx.cg_voice(cg_new, raw_lines, Kit.speakers(raw_lines, s.get("portraits", [])), _dlg_cg != "")
 	_update_tools()
 	_apply_dlg_size()
 
 
+func _make_face_slot(parent: Control, at: Vector2) -> void:
+	## the speaker's frame (soft dark-gold, rounded): it stays put line after line — a narration line only fades the face out —
+	## so the text's left edge never moves; the name plate sits over its bottom edge
+	_dlg_slot = PanelContainer.new()
+	var edge := Kit.c("gold").darkened(0.35)
+	edge.a = 0.8
+	_dlg_slot.add_theme_stylebox_override("panel", Kit.box(Color(0.1, 0.08, 0.06, 0.55), 12, 2, edge, 3))
+	_dlg_slot.custom_minimum_size = at
+	_dlg_slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(_dlg_slot)
+	var stack := Control.new()
+	stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	stack.clip_contents = true
+	_dlg_slot.add_child(stack)
+	_dlg_face = TextureRect.new()
+	_dlg_face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_dlg_face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_dlg_face.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_dlg_face.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_dlg_face.modulate.a = 0.0
+	stack.add_child(_dlg_face)
+	_dlg_name = Kit.label("", Kit.FONT_SMALL - 2, "gold")
+	_dlg_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_dlg_name.clip_text = true
+	_dlg_name.add_theme_stylebox_override("normal", Kit.box(Color(0.05, 0.04, 0.03, 0.78), 0, 0, Color.TRANSPARENT, 2))
+	_dlg_name.add_theme_constant_override("outline_size", 4)
+	_dlg_name.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	_dlg_name.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	_dlg_name.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_dlg_name.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_dlg_name.visible = false
+	stack.add_child(_dlg_name)
+
+
+func _set_face(key: String, shown_name := "") -> void:
+	## the face and name plate for one line: "" = narration (the face fades out, its frame stays)
+	if not is_instance_valid(_dlg_face):
+		return
+	if key == "lord":  # the north route (and any lord card in play) has its own face
+		key = Game.save.lord()["person"]
+	var tex: Texture2D = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
+	if _dlg_face.has_meta("tw"):
+		(_dlg_face.get_meta("tw") as Tween).kill()
+	if tex != null:
+		_dlg_face.texture = tex
+	var tw := _dlg_face.create_tween()
+	tw.tween_property(_dlg_face, "modulate:a", 1.0 if tex != null else 0.0, 0.12)
+	_dlg_face.set_meta("tw", tw)
+	var n := shown_name if shown_name != "" else Kit.speaker_name(key, Game.save.lord_name)
+	_dlg_name.text = n
+	_dlg_name.visible = tex != null and n != ""
+
+
+func _enemy_face(s: Dictionary) -> void:
+	## before a fight: the enemy you're up against in the speaker's frame, its name on the plate
+	if not is_instance_valid(_dlg_face) or s.get("type", "") != "battle":
+		return
+	var db := GameData.get_db()
+	var sc: Dictionary = db.scenarios.get(Quests.battle_here(q, Game.save).get("battle", ""), {})
+	if sc.is_empty():
+		return
+	var e: Dictionary = db.enemies[sc["enemy"]]
+	_set_face(Kit.enemy_portrait_key(e), str(e["name"]))
+
+
 func _show_buttons(box: Control, on: bool) -> void:
-	## transparent, not hidden: the options keep their room, so the text box never resizes or re-wraps when they appear
-	box.modulate.a = 1.0 if on else 0.0
+	## transparent, not hidden: the options keep their room, so the text box never resizes or re-wraps when they appear.
+	## Shown, they fade in and ignore taps for TAP_GUARD: the thumb that tapped through the last line must not land on an option.
+	_btn_gen += 1
+	var gen := _btn_gen
+	if on and box.modulate.a < 0.5:
+		box.modulate.a = 0.0
+		box.create_tween().tween_property(box, "modulate:a", 1.0, 0.25).set_trans(Tween.TRANS_SINE)
+	else:
+		box.modulate.a = 1.0 if on else 0.0
 	if box == _sheet_buttons and _dlg_mode() != "auto":  # a fixed-size box keeps no room for options not shown yet
 		_options_room(on)
 		_fit_sheet.call_deferred()
@@ -1174,8 +1281,19 @@ func _show_buttons(box: Control, on: bool) -> void:
 	for b in box.find_children("*", "BaseButton", true, false):
 		if not b.has_meta("fm"):
 			b.set_meta("fm", b.focus_mode)
-		b.mouse_filter = Control.MOUSE_FILTER_STOP if on else Control.MOUSE_FILTER_IGNORE
-		b.focus_mode = b.get_meta("fm") if on else Control.FOCUS_NONE
+		b.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.focus_mode = Control.FOCUS_NONE
+	if on:
+		get_tree().create_timer(TAP_GUARD).timeout.connect(func():
+			if gen != _btn_gen or not is_instance_valid(box):
+				return
+			var first := true
+			for b in box.find_children("*", "BaseButton", true, false):
+				b.mouse_filter = Control.MOUSE_FILTER_STOP
+				b.focus_mode = b.get_meta("fm")
+				if first and not (b as BaseButton).disabled:
+					Kit.focus(b)
+					first = false)
 
 
 func _dialog_show() -> void:
@@ -1189,21 +1307,17 @@ func _dialog_show() -> void:
 	Sfx.cg_line(_dlg_cg, _dlg_i)
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
-		if key == "lord":  # the north route (and any lord card in play) has its own face
-			key = Game.save.lord()["person"]
-		_dlg_face.texture = null if key == "" else (Kit.portrait(key, 1.0, 2.4) if _cg_mode else Kit.portrait(key, 0.75, 5.0))
-		_dlg_face.visible = _dlg_face.texture != null
+		_set_face(key)
 	if last:
+		_story_read = Game.save.square
 		if _dlg_after != "":  # before a fight: the last line, then what you're up against
+			_enemy_face(q["squares"][Game.save.square])
 			_dlg_text.text = str(_dlg_lines[_dlg_i]) + "\n\n" + _dlg_after
 			_dlg_text.scroll_active = true
 			_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
 			_dlg_text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
 		_show_buttons(_dlg_buttons, true)
 		_dlg_i = -1
-		for b in _dlg_buttons.find_children("*", "Button", true, false):
-			Kit.focus(b)
-			break
 	_update_tools()
 	_apply_dlg_size()  # the new line may need a taller (or shorter) box
 
@@ -1214,6 +1328,9 @@ func _dialog_skip() -> void:
 	if _dlg_i < 0:
 		return
 	_dlg_dump = false
+	_story_read = Game.save.square
+	if _dlg_after != "":  # before a fight: the enemy's face over its intel
+		_enemy_face(q["squares"][Game.save.square])
 	if _dlg_recap and _dlg_prompt != "":  # at a choice: the summary, not the scene again
 		_dlg_text.text = _dlg_prompt
 	elif _dlg_recap:  # no summary written: the last line (it usually poses the choice)
@@ -1293,22 +1410,23 @@ func _toggle_log() -> void:
 		_dlg_text.scroll_following = _log_saved["follow"]
 		_dlg_text.add_theme_font_size_override("normal_font_size", _log_saved["font"])
 		_dlg_text.add_theme_font_size_override("bold_font_size", _log_saved["font"])
-		if is_instance_valid(_dlg_face):
-			_dlg_face.visible = _dlg_face.texture != null
+		if is_instance_valid(_dlg_slot):
+			_dlg_slot.modulate.a = 1.0
 		_apply_dlg_size()
 		return
 	_log_saved = {"text": _dlg_text.text, "scroll": _dlg_text.scroll_active, "follow": _dlg_text.scroll_following,
 		"font": _dlg_text.get_theme_font_size("normal_font_size")}
 	_dlg_log = true
 	btn.text = "返回"
-	if is_instance_valid(_dlg_face):  # a list of many voices: no single face
-		_dlg_face.visible = false
+	if is_instance_valid(_dlg_slot):  # a list of many voices: no single face (the slot keeps its place, the text doesn't move)
+		_dlg_slot.modulate.a = 0.0
 	var upto: int = _dlg_lines.size() if _dlg_i < 0 else _dlg_i + 1
 	var dim_hex := Kit.c("dim").to_html()
 	var out: Array = []
 	for i in upto:
 		var spoken: bool = i < _dlg_keys.size() and str(_dlg_keys[i]) != ""
-		out.append(str(_dlg_lines[i]) if spoken else "[color=%s]%s[/color]" % [dim_hex, _dlg_lines[i]])
+		out.append(Kit.named_line(str(_dlg_lines[i]), str(_dlg_keys[i]), Game.save.lord_name) if spoken \
+			else "[color=%s]%s[/color]" % [dim_hex, _dlg_lines[i]])
 	_dlg_text.text = "
 
 ".join(out)
@@ -1327,7 +1445,7 @@ func _hide_sheet() -> void:
 
 
 func _update_tools() -> void:
-	_dlg_tools.visible = not _sheet_hidden and (_dlg_i >= 0 or _cg_mode)
+	_dlg_tools.visible = _covered == 0 and not _sheet_hidden and (_dlg_i >= 0 or _cg_mode)
 	_dlg_tools.get_child(0).visible = _dlg_i >= 0
 	_dlg_tools.get_node("Hide").visible = _cg_mode
 	_dlg_tools.get_node("Size").visible = _cg_mode and not _sheet_hidden
@@ -1363,8 +1481,8 @@ func _apply_dlg_size() -> void:
 	## resize in place (no rebuild: the story keeps its line)
 	var m := _dlg_mode()
 	(_dlg_tools.get_node("Size") as Button).text = DLG_NAMES[_dlg_mode_opt()]
-	if is_instance_valid(_dlg_face) and _cg_mode:
-		_dlg_face.custom_minimum_size = Vector2.ONE * float(DLG_FACE[m])
+	if is_instance_valid(_dlg_slot) and _cg_mode:
+		_dlg_slot.custom_minimum_size = Vector2.ONE * float(DLG_FACE[m])
 	if is_instance_valid(_sheet_buttons):
 		_options_room(m == "auto" or _sheet_buttons.modulate.a > 0.5)
 	_fit_sheet()
@@ -1376,50 +1494,65 @@ func _apply_dlg_size() -> void:
 
 
 func _battle_info(s: Dictionary, fight: Dictionary) -> String:
+	## the intel before a fight, three short lines of tags instead of a wall of text:
+	## 1 what kind of fight + the enemy's numbers; 2 its armor, resists and weaknesses; 3 its moves (a charged one says: bring an interrupt)
 	var db := GameData.get_db()
 	var sc: Dictionary = db.scenarios[fight["battle"]]
 	var e: Dictionary = Quests.with_armor(db.enemies[sc["enemy"]], Quests.late_armor(Game.save.quest, s, sc["enemy"]))
-	var tags := ""
+	var tags: Array = []
 	if s["boss"]:
-		tags += "[color=%s][b]首领战[/b][/color]　" % Kit.c("purple").to_html()
+		tags.append(_bb_chip("首领战", "purple"))
 	if s["lose_goto"] != "":
-		tags += "[color=%s]打不赢也不会失败[/color]　" % Kit.c("green").to_html()
+		tags.append(_bb_chip("打不赢也不会失败", "green"))
 	elif s["elite"]:
-		tags += "[color=%s][b]精英战[/b]（必掉宝箱，三选一）[/color]　" % Kit.c("red").to_html()
+		tags.append(_bb_chip("精英战 · 必掉宝箱", "red"))
 	if fight["ambush"]:
-		tags += "[color=%s][b]埋伏！敌人先手[/b][/color]　" % Kit.c("red").to_html()
+		tags.append(_bb_chip("埋伏！敌人先手", "red"))
 	var afx_id: String = Game.save.affixes.get(s["id"], "")
 	if afx_id != "" and db.battle.get("affixes", {}).has(afx_id):  # this run's 词缀
 		var afx: Dictionary = db.battle["affixes"][afx_id]
 		var afx_img := Kit.affix_icon_path(afx_id)
-		if afx_img != "":
-			tags += "[img=28]%s[/img]" % afx_img
-		tags += "[color=%s][b]词缀·%s[/b]（%s）[/color]　" % [Kit.c("amber").to_html(), afx["name"], afx["desc"]]
-	return "%s敌军：[b]%s[/b]\n体力 %d　攻击 %d　每回合行动 %d 次%s\n招式：%s\n%d 回合内击破。任务中体力不会自动回满。" % [
-		tags, e["name"], e["hp"], e["at"], e["actions"], _resists(e), _moves_text(e), Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))]
+		tags.append(("[img=26]%s[/img]" % afx_img if afx_img != "" else "") + _bb_chip("词缀·%s：%s" % [afx["name"], afx["desc"]], "amber"))
+	var turns := Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))
+	var dim := Kit.c("dim").to_html()
+	var head := ("　".join(tags) + "\n" if not tags.is_empty() else "") + "[b]%s[/b]　体力 %d · 攻击 %d · 每回合 %d 次 · %d 回合内击破　[color=%s]体力不会自动回满[/color]" % [
+		e["name"], e["hp"], e["at"], e["actions"], turns, dim]
+	var res := _resists(e)
+	return "[font_size=%d]%s%s\n%s[/font_size]" % [Kit.FONT_SMALL, head, ("\n" + res if res != "" else ""), _moves_text(e)]
+
+
+func _bb_chip(text: String, color_name: String) -> String:
+	## a coloured tag inside rich text (the intel's badges)
+	var bg := Kit.c(color_name)
+	var fg := Color(0.1, 0.07, 0.04) if bg.get_luminance() > 0.55 else Color(1, 1, 1)
+	bg.a = 0.85
+	return "[bgcolor=%s][color=%s] %s [/color][/bgcolor]" % [bg.to_html(), fg.to_html(), text]
 
 
 func _resists(e: Dictionary) -> String:
-	## the 护甲 (if any) and both resists, a weakness (negative resist) in red: 「藤甲（刀枪不入，一点就着）　物理抗性 80%　法术弱点 +100%」
-	var r := ""
+	## the 护甲 and both resists as tags — a weakness (negative resist) in red, so a 法术弱点 jumps out: 「藤甲（刀枪不入，一点就着）」「物抗 80%」「法术弱点 +100%」
+	var out: Array = []
 	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
 	if not arm.is_empty():
-		r += "
-[color=%s][b]护甲·%s[/b]（%s）[/color]" % [Kit.c("amber").to_html(), arm["name"], arm["hint"]]
-	var t := Kit.resist_text(e)
-	return r + ("　" + t if t != "" else "")
+		out.append(_bb_chip("护甲·%s" % arm["name"], "amber") + " [color=%s]%s[/color]" % [Kit.c("muted").to_html(), arm["hint"]])
+	for k in [["phys_resist", "物理"], ["magic_resist", "法术"]]:
+		var v := float(e.get(k[0], 0.0))
+		if v > 0.0:
+			out.append(_bb_chip("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))], "gray"))
+		elif v < 0.0:
+			out.append(_bb_chip("%s弱点 +%d%%" % [k[1], int(round(-v * 100))], "red"))
+	return "　".join(out)
 
 
 func _moves_text(e: Dictionary) -> String:
-	## the enemy's moves with what makes them dangerous, so the player can plan (the wind-up itself is skipped)
+	## the enemy's moves with what makes them dangerous, so the player can plan (the wind-up itself is skipped);
+	## the charged move is a gold tag that says what answers it: an interrupt (扔刀、回马枪 …)
 	var parts: Array = []
 	var charged: Array = e["moves"].filter(func(m): return m.has("charge")).map(func(m): return m["charge"])
 	for m in e["moves"]:
 		if m.has("charge"):
 			continue
 		var tags: Array = []
-		if charged.has(m["name"]):
-			tags.append("蓄力大招")
 		if m.get("pierce", false):
 			tags.append("无视防御")
 		if m.has("confuse"):
@@ -1432,14 +1565,26 @@ func _moves_text(e: Dictionary) -> String:
 			tags.append("夺AP")
 		if m.has("burn_party"):
 			tags.append("火烧全军")
-		parts.append(m["name"] + ("（%s）" % "·".join(tags) if not tags.is_empty() else ""))
-	return " · ".join(parts)
+		var label: String = m["name"] + ("（%s）" % "·".join(tags) if not tags.is_empty() else "")
+		if charged.has(m["name"]):
+			parts.append(_bb_chip("蓄力大招 %s · 带打断技能" % label, "gold"))
+		else:
+			parts.append(_bb_chip(label, "red" if not tags.is_empty() else "blue"))
+	return "招式 " + " ".join(parts)
 
 
 func _fight_button(s: Dictionary, buttons: Control) -> void:
+	## 出战, with 整备 right beside it: seeing a weakness or a charged move, change the line-up in one tap
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	buttons.add_child(row)
+	var prep := Kit.button("整备", "gold")
+	prep.pressed.connect(_open_party)
+	row.add_child(prep)
 	var fight := Kit.button("⚔ 出战", "red", Kit.FONT_BIG)
+	fight.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	fight.pressed.connect(func(): Game.start_quest_battle(q, s))
-	buttons.add_child(fight)
+	row.add_child(fight)
 	Kit.focus(fight)
 
 
@@ -1564,6 +1709,7 @@ func _open_choose(s: Dictionary) -> void:
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
 	add_child(o)
+	_cover(o)
 
 
 func _open_offer(s: Dictionary) -> void:
@@ -1593,6 +1739,7 @@ func _open_offer(s: Dictionary) -> void:
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i): o.queue_free(); _resolve(i))
 	add_child(o)
+	_cover(o)
 
 
 func _apply_cg_mode() -> void:
@@ -1627,8 +1774,10 @@ func _fit_sheet() -> void:
 			# 自动 = as tall as the line needs (else a long line is cut off): the box's own chrome plus the text's height
 			var top := _dlg_text.global_position.y - _sheet.global_position.y  # the title above the text
 			h = maxf(h, minf(top + _dlg_text.get_content_height() + 20.0, 420.0))
+	elif _dlg_log:  # 记录 on the map: the box grows upward over the map, as it does over a CG
+		h = 400.0
 	_sheet.size = Vector2(1232, h)
-	_sheet.position = Vector2(24, 708 - h) if _cg_mode else Vector2(24, 448)
+	_sheet.position = Vector2(24, 708 - h) if _cg_mode else Vector2(24, 706 - h)
 	_dlg_tools.position = Vector2(1248 - _dlg_tools.get_combined_minimum_size().x, _sheet.position.y + 8)
 
 
@@ -1664,8 +1813,10 @@ func _open_fates() -> void:
 		Game.persist()
 		o.queue_free()
 		_refresh()
+		_flush_if_no_story()
 		_show_toast("天命：" + f["name"]))
 	add_child(o)
+	_cover(o)
 
 
 func _open_relics() -> void:
@@ -1684,6 +1835,7 @@ func _open_relics() -> void:
 		_refresh()
 		_reveal_relics([taken]))
 	add_child(o)
+	_cover(o)
 
 
 func _offer_caption(c: Dictionary) -> String:

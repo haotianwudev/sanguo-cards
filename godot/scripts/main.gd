@@ -24,6 +24,18 @@ func _ready() -> void:
 			var ms: Node = get_child(get_child_count() - 1)
 			if ms is MapScreen:
 				ms._dialog_skip()
+		if args.has("line") and args["demo"] != "interlude":  # --line=N: N taps into the square's lines (a speaker's face and name plate)
+			await get_tree().create_timer(0.5).timeout
+			var ms: Node = get_child(get_child_count() - 1)
+			if ms is MapScreen:
+				for _i in int(args["line"]):
+					ms._on_story_click(ms._fake_click())
+					ms._touch_down = false
+		if args.has("log") and args["demo"] != "interlude":  # --log: 记录 open over the square's lines (after --skip: all of them)
+			await get_tree().create_timer(0.6).timeout
+			var ms: Node = get_child(get_child_count() - 1)
+			if ms is MapScreen:
+				ms._toggle_log()
 		if args.has("settings"):  # --settings[=cards|options|home|back|restart]: open the pause menu (on that page) for a screenshot
 			await get_tree().process_frame
 			var screen: Node = get_child(get_child_count() - 1)

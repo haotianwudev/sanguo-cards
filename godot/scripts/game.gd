@@ -449,7 +449,13 @@ func demo(name: String) -> void:
 			save.danger = 1
 			save.offer = ["shoushihe", "bingfa", "dunjia"]
 			save.offer_kind = "relic"
-			show_screen(MapScreen.new())
+			var m := MapScreen.new()
+			show_screen(m)
+			if OS.get_cmdline_user_args().has("--sel"):  # the second plaque tapped once: lifted, 选定 lit
+				m.get_tree().create_timer(0.3).timeout.connect(func():
+					var rp := m.get_node_or_null("RelicPick")
+					if rp != null:
+						rp._select(1))
 		"eventfx":  # a ？ event's animated outcome (EventFx); --fx=a,b picks the sample cards (hp, diff, fate, divine, level, ambush, merit, lose)
 			var q: Dictionary = GameData.get_db().quests[0]
 			Quests.begin(q, save)
@@ -603,12 +609,33 @@ func demo(name: String) -> void:
 						o._sel = "relic:gudingdao"
 						o._filter = "relic"
 					o._rebuild()).call_deferred()
-		"interlude":  # after chapter 2, with 董白 spared
+		"interlude":  # a ？小故事 in the reader: --id=<story id> (default the first), --line=N steps N lines in,
+			# --nocg drops its picture (the portraits side by side, the speaker lit), --log opens 记录, --hide hides the text
 			save.quests_cleared = ["prologue", "taodong"]
 			save.flags = ["董白：留下", "唐姬：护送"]
 			show_screen(TitleScreen.new())
 			var o := InterludeOverlay.new()
+			var want := ""
+			var steps := 0
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--id="):
+					want = a.substr(5)
+				elif a.begins_with("--line="):
+					steps = int(a.substr(7))
+			for qid in GameData.get_db().side_stories:
+				for st in GameData.get_db().side_stories[qid]:
+					if o.scenes.is_empty() and (want == "" or st["id"] == want):
+						o.scenes = [st.duplicate()]
+			if OS.get_cmdline_user_args().has("--nocg") and not o.scenes.is_empty():
+				o.scenes[0]["cg"] = ""
+			o.same_chapter = true
 			root.add_child(o)
+			for _i in steps:
+				o._next()
+			if OS.get_cmdline_user_args().has("--log"):
+				o._toggle_log()
+			elif OS.get_cmdline_user_args().has("--hide"):
+				o._hide_text()
 		"reveal":  # the 入队 overlay: 孙策 and 周瑜 join
 			var m := MapScreen.new()
 			show_screen(m)

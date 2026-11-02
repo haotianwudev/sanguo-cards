@@ -109,6 +109,29 @@ static func button(text: String, color_name := "blue", size := FONT_BODY) -> But
 	return b
 
 
+static func tool_button(text: String) -> Button:
+	## a small translucent pill for the story tools (跳过 / 隐藏 / 框 / 记录): 32 px tall, so it never crowds the options below
+	var b := Button.new()
+	b.text = text
+	b.focus_mode = Control.FOCUS_NONE
+	b.add_theme_font_size_override("font_size", FONT_SMALL - 2)
+	var base := Color(0.08, 0.07, 0.06, 0.55)
+	var edge := c("gold")
+	edge.a = 0.45
+	for st in ["normal", "hover", "pressed", "disabled"]:
+		var bg := base.lightened(0.15) if st == "hover" else (base.darkened(0.2) if st == "pressed" else base)
+		var sb := box(bg, 16, 1, edge, 0)
+		sb.content_margin_left = 14
+		sb.content_margin_right = 14
+		sb.content_margin_top = 3
+		sb.content_margin_bottom = 3
+		b.add_theme_stylebox_override(st, sb)
+	for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		b.add_theme_color_override(st, Color(0.95, 0.92, 0.85, 0.92))
+	b.custom_minimum_size = Vector2(0, 32)
+	return b
+
+
 static func label(text: String, size := FONT_BODY, color_name := "text") -> Label:
 	var l := Label.new()
 	l.text = text
@@ -573,6 +596,44 @@ const FEMALE := ["wuguotai", "wuxian", "dongbai", "caiwenji", "diaochan", "fengf
 	"yahuan", "chuniang", "xiuniang", "huansha", "caisang", "chaniang", "guonvwang"]
 const _CLAUSE_END := "，。；！？…」、"  # not ——: 孙贲——孙策的堂兄——在旁边 is one clause
 static var _all_names: Dictionary = {}  # every name the story uses -> key (with or without art: a face only shows when drawn)
+
+
+## descriptions the story uses before a name comes up: never shown as a speaker's name plate
+const NOT_NAMES := ["美妇", "浓眉少年", "俊秀少年", "瘦老头", "渠帅", "女当家", "白衣道人", "黑脸大汉", "大耳朵", "虎皮披风", "一员虎将",
+	"摇羽扇的文士", "小皇帝", "主公", "郑大王", "姜寨主", "香香"]
+static var _key_names: Dictionary = {}
+
+
+static func speaker_name(key: String, lord_name := "") -> String:
+	## the name plate for a speaker key (Kit.speakers / an @tag): the card's name before its 「·」, else the first real alias; "" = none
+	if key == "" or key == "_":
+		return ""
+	if key == "lord" or key.begins_with("lord_"):
+		return lord_name
+	if _key_names.is_empty():
+		var cards: Dictionary = GameData.get_db().cards
+		for cid in cards:
+			var c: Dictionary = cards[cid]
+			var n: String = str(c["name"]).split("·")[0]
+			for k in [cid, str(c.get("person", "")), portrait_key(cid)]:
+				if k != "" and not _key_names.has(k):
+					_key_names[k] = n
+		for n in ALIASES:
+			if not NOT_NAMES.has(n) and not _key_names.has(ALIASES[n]):
+				_key_names[ALIASES[n]] = n
+	if _key_names.has(key):
+		return _key_names[key]
+	if key.ends_with("_young"):  # sunquan_young / sunshangxiang_young: the person's own name
+		return speaker_name(key.trim_suffix("_young"), lord_name)
+	return ""
+
+
+static func named_line(line: String, key: String, lord_name := "") -> String:
+	## a line for 记录: a bare quote gets its speaker in front (孙策：「……」); lines that already name someone stay as written
+	var n := speaker_name(key, lord_name)
+	if n == "" or not line.begins_with("「"):
+		return line
+	return "[color=%s]%s[/color]：%s" % [c("gold").to_html(), n, line]
 
 
 static func strip_tag(line: String) -> String:
