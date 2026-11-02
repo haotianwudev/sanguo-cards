@@ -102,7 +102,7 @@ func test_turn_limit_loses() -> void:
 		b.party_hp = b.party_max
 		b.end_round()
 	check_eq(b.result, "lose")
-	check_eq(b.round_no, b.scenario["turn_limit"])
+	check_eq(b.round_no, b.scenario["turn_limit"] + int(b.db.battle.get("turn_bonus", 0)), "the scenario's limit plus battle.turn_bonus")
 
 
 func test_win_when_enemy_hp_zero() -> void:

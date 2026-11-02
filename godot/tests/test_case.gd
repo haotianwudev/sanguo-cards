@@ -50,7 +50,7 @@ static func bot_fight(b: Battle) -> String:
 	## Spend AP on the best value-per-AP action until nothing is usable; never defends.
 	## SIM_BOT=tactics plays under the default 军令 (拆招: interrupts, defends against charged blows) instead — to compare.
 	if OS.get_environment("SIM_BOT") == "tactics":
-		var t := {"preset": OS.get_environment("SIM_PRESET") if OS.get_environment("SIM_PRESET") != "" else "smart", "auto_swap": false, "rows": {}}
+		var t := {"preset": OS.get_environment("SIM_PRESET") if OS.get_environment("SIM_PRESET") != "" else "smart", "party_rows": [], "rows": {}}
 		var steps := 0
 		while b.result == "" and steps < 2000:
 			steps += 1

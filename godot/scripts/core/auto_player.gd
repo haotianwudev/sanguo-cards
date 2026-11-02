@@ -1,15 +1,15 @@
 class_name AutoPlayer
 extends RefCounted
 ## 自动战斗 + 军令 (v3, docs/battle-v3.md). Each step picks one action for the player's side, in this order:
+## Three layers of 军令 (user rule): 整体 (preset + 中军 party_rows), 兵种 (troop_rows[troop]: a kind of skill), 武将 (rows[card id]: a skill).
 ##   1. 破招 — the enemy is winding up and someone can play an 打断 skill (preset `interrupt`);
-##   2. 个人军令 — each leader's own rows `[skill, condition, reserve]` (Game.options.tactics.rows[card id]), first row that holds;
-##   3. 自动换人 (tactics.auto_swap) — 架势 on the enemy and nobody fields magic → bring in a 策士; our fire / poison / confusion
-##      with no cleanse on the field → bring in a 后勤;
+##   1b. 中军军令 — party_rows `[condition (+ cond2) → defend / end / swap_<troop> / swap_fresh]` — the 换人 rules live here;
+##   2. 武将军令 then 兵种军令 — per leader: its card's rows `[skill, condition, reserve]`, then its troop's rows `[kind, condition]`;
 ##   4. 留气 — a reserve row whose skill only lacks AP keeps the others to 0 AP / AP-giving skills;
 ##   5. the old greedy pick (best value per AP), adjusted for 架势 / 前卫 / 打断;
 ##   6. nothing worth doing → defend when a charged blow is coming (preset `defend_charge`) or AP is full, else end the round.
-## `tactics` = {"preset": "smart" | "aggro" | "save", "auto_swap": bool, "rows": {card id: [{skill, cond, reserve}]}}; presets
-## and the condition list live in battle.json `tactics`.
+## `tactics` = {"preset": "smart" | "aggro" | "save", "party_rows": [{act, cond, cond2}], "troop_rows": {troop: [{act, cond, cond2}]},
+## "rows": {card id: [{skill, cond, cond2, reserve}]}}; presets, conditions and the action lists live in battle.json `tactics`.
 
 
 static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
@@ -76,7 +76,20 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 # ---- 军令 ---------------------------------------------------------------------
 
 static func default_tactics() -> Dictionary:
-	return {"preset": "smart", "auto_swap": false, "rows": {}}
+	## the 中军 rows a new player starts with: the two 换人 rules the old 自动换人 switch used to hide
+	return {"preset": "smart", "troop_rows": {}, "rows": {}, "party_rows": [
+		{"act": "swap_strategist", "cond": "enemy_stance", "cond2": "field_no_magic"},
+		{"act": "swap_logistics", "cond": "party_status", "cond2": "field_no_cleanse"}]}
+
+
+static func with_defaults(t: Variant) -> Dictionary:
+	## the saved 军令 (Game.options.tactics) with every missing layer filled from default_tactics (an old options.cfg has fewer keys)
+	var out := default_tactics()
+	if t is Dictionary:
+		for k in out:
+			if t.has(k) and typeof(t[k]) == typeof(out[k]):
+				out[k] = t[k]
+	return out.duplicate(true)
 
 
 static func preset(b: Battle, tactics: Dictionary) -> Dictionary:
@@ -129,7 +142,20 @@ static func cond_holds(b: Battle, cond: String) -> bool:
 			return b.ap >= b.ap_max()
 		"ap_6":
 			return b.ap >= 6
+		"field_no_magic":  # 换人 rules: nobody out there can cast
+			return not b.leaders.any(func(u): return b.skills_of(u).any(func(sk): return sk["effects"].any(func(e): return e["type"] == "magic")))
+		"field_no_cleanse":
+			return not b.leaders.any(func(u): return not u["acted"] and b.skills_of(u).any(func(sk): return b.usable(u, sk) and sk["effects"].any(func(e): return e["type"] == "cleanse")))
+		"field_no_interrupt":
+			return b.party_interrupts_left() == 0
+		"leader_spent":
+			return b.leaders.any(func(u): return _spent(b, u))
 	return false
+
+
+static func row_holds(b: Battle, row: Dictionary) -> bool:
+	## a 军令 row's two conditions (cond2 optional): both must hold
+	return cond_holds(b, str(row.get("cond", "always"))) and cond_holds(b, str(row.get("cond2", "always")))
 
 
 static func _is_ult(sk: Dictionary) -> bool:
@@ -181,13 +207,15 @@ static func _reserve_need(b: Battle, tactics: Dictionary) -> int:
 			if left != null and int(left) == 0:
 				continue
 			var c := b.cost(u, sk)
-			if c > b.ap and c <= b.ap_max() and cond_holds(b, str(row.get("cond", "always"))):
+			if c > b.ap and c <= b.ap_max() and row_holds(b, row):
 				return c
 	return 0
 
 
 static func _row_act(b: Battle, tactics: Dictionary) -> Array:
+	## 武将军令 (rows[card id]: a named skill) first, then 兵种军令 (troop_rows[troop]: a kind of skill, matched to the leader's own)
 	var rows: Dictionary = tactics.get("rows", {})
+	var troop_rows: Dictionary = tactics.get("troop_rows", {})
 	for i in b.leaders.size():
 		if not b.can_act(i):
 			continue
@@ -197,32 +225,103 @@ static func _row_act(b: Battle, tactics: Dictionary) -> Array:
 			if not u["leader"]["card"]["skills"].has(sid):
 				continue
 			var sk: Dictionary = b.db.skills[sid]
-			if b.usable(u, sk) and cond_holds(b, str(row.get("cond", "always"))):
+			if b.usable(u, sk) and row_holds(b, row):
 				return [i, sid]
+		for row in troop_rows.get(str(u["leader"]["card"]["troop"]), []):
+			if not row_holds(b, row):
+				continue
+			var sid2 := skill_of_kind(b, u, str(row.get("act", "")))
+			if sid2 != "":
+				return [i, sid2]
 	return []
 
 
-static func _swap_act(b: Battle, tactics: Dictionary) -> Array:
-	## 自动换人: [slot, card id] or []
-	if not tactics.get("auto_swap", false):
-		return []
-	var want := ""
-	if b.enemy_state("stance") and not b.leaders.any(func(u): return b.skills_of(u).any(func(sk): return sk["effects"].any(func(e): return e["type"] == "magic"))):
-		want = "strategist"
-	elif cond_holds(b, "party_status") and not b.leaders.any(func(u): return not u["acted"] and b.skills_of(u).any(func(sk): return b.usable(u, sk) and sk["effects"].any(func(e): return e["type"] == "cleanse"))):
-		want = "logistics"
-	if want == "":
-		return []
+static func skill_kind(sk: Dictionary) -> Array:
+	## which 兵种军令 kinds a skill answers to: basic 普通技 / signature 招牌技 / ult 大招 / interrupt 打断技 / heal 治疗解除 / support 增益防守
+	var types: Array = sk["effects"].map(func(e): return e["type"])
+	var kinds: Array = []
+	var hits: bool = types.has("attack") or types.has("magic")
+	if types.has("interrupt"):
+		kinds.append("interrupt")
+	if types.has("heal") or types.has("cleanse"):
+		kinds.append("heal")
+	if hits and _is_ult(sk):
+		kinds.append("ult")
+	elif hits:
+		kinds.append("signature" if int(sk["cost"]) >= 2 else "basic")
+	if not hits and not kinds.has("heal"):
+		kinds.append("support")
+	return kinds
+
+
+static func skill_of_kind(b: Battle, u: Dictionary, kind: String) -> String:
+	## the leader's usable skill of that kind (basic: the cheapest; the others: the dearest, i.e. the strongest)
+	var best := ""
+	var best_cost := -1
+	for sk in b.skills_of(u):
+		if not b.usable(u, sk) or not skill_kind(sk).has(kind):
+			continue
+		var c := b.cost(u, sk)
+		if best == "" or (kind == "basic" and c < best_cost) or (kind != "basic" and c > best_cost):
+			best = sk["id"]
+			best_cost = c
+	return best
+
+
+static func _party_act(b: Battle, tactics: Dictionary) -> Dictionary:
+	## 中军军令 (party_rows): [condition → defend / end (keep the AP) / swap_<troop>], top to bottom
+	for row in tactics.get("party_rows", []):
+		if not row_holds(b, row):
+			continue
+		var act := str(row.get("act", ""))
+		if act == "defend" and b.can_defend():
+			return {"kind": "defend"}
+		if act == "end":
+			return {"kind": "end"}
+		if act == "swap_fresh":
+			var sf := _swap_fresh(b)
+			if not sf.is_empty():
+				return {"kind": "swap", "unit": sf[0], "card": sf[1]}
+		elif act.begins_with("swap_"):
+			var sw := _swap_to(b, act.trim_prefix("swap_"))
+			if not sw.is_empty():
+				return {"kind": "swap", "unit": sw[0], "card": sw[1]}
+	return {}
+
+
+static func _swap_to(b: Battle, troop: String) -> Array:
+	## [slot, card id]: the strongest bench card of that troop in for the weakest leader who may be swapped (and isn't of that troop)
 	var best: Array = []
 	var weakest := INF
 	for i in b.leaders.size():
-		if not b.can_swap(i):
+		if not b.can_swap(i) or str(b.leaders[i]["leader"]["card"]["troop"]) == troop:
 			continue
-		for ld in b.swap_options(i):
-			if str(ld["card"]["troop"]) == want and float(b.leaders[i]["leader"]["at"]) < weakest:
-				weakest = float(b.leaders[i]["leader"]["at"])
-				best = [i, ld["card"]["id"]]
+		var opts: Array = b.swap_options(i).filter(func(ld): return str(ld["card"]["troop"]) == troop)
+		if opts.is_empty():
+			continue
+		opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
+		if float(b.leaders[i]["leader"]["at"]) < weakest:
+			weakest = float(b.leaders[i]["leader"]["at"])
+			best = [i, opts[0]["card"]["id"]]
 	return best
+
+
+static func _spent(b: Battle, u: Dictionary) -> bool:
+	## a leader whose 大招 are all used up (and who has at least one)
+	var ults: Array = b.skills_of(u).filter(func(sk): return _is_ult(sk))
+	return not ults.is_empty() and ults.all(func(sk): return u["uses_left"][sk["id"]] != null and int(u["uses_left"][sk["id"]]) == 0)
+
+
+static func _swap_fresh(b: Battle) -> Array:
+	## 换下大招用尽的: [slot, card id] — the spent leader out, the strongest bench card that still has its 大招 in
+	for i in b.leaders.size():
+		if not b.can_swap(i) or not _spent(b, b.leaders[i]):
+			continue
+		var opts: Array = b.swap_options(i)
+		opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
+		if not opts.is_empty():
+			return [i, opts[0]["card"]["id"]]
+	return []
 
 
 static func _greedy(b: Battle, pre: Dictionary, reserve: int) -> Array:
@@ -260,12 +359,12 @@ static func plan(b: Battle, tactics: Dictionary = {}) -> Dictionary:
 		var ia := _interrupt_act(b)
 		if not ia.is_empty():
 			return {"kind": "act", "unit": ia[0], "skill": ia[1]}
+	var pa := _party_act(b, tactics)
+	if not pa.is_empty():
+		return pa
 	var ra := _row_act(b, tactics)
 	if not ra.is_empty():
 		return {"kind": "act", "unit": ra[0], "skill": ra[1]}
-	var sw := _swap_act(b, tactics)
-	if not sw.is_empty():
-		return {"kind": "swap", "unit": sw[0], "card": sw[1]}
 	var reserve := _reserve_need(b, tactics) if pre.get("reserve", true) else 0
 	var ga := _greedy(b, pre, reserve)
 	if not ga.is_empty():

@@ -93,6 +93,8 @@
     "heal_mult": 0.667,
     "_boss_extra_turns": "首领战（battle.enemy_tier = boss）的回合上限再加这么多：首领血厚，原来的回合数常常差一点点打不死",
     "boss_extra_turns": 2,
+    "_turn_bonus": "所有战斗的回合上限统一再加这么多（用户要求 v3 起 +2：读招、打断、换人都要回合）",
+    "turn_bonus": 2,
     "_enemy_from_card": "敌人的体力 / 攻击 = 它那张卡的卡面数字 × 这两个换算（旧敌人表的量级）。强度再乘 scaling：关卡（章节 + 章内位置）和档位（普通 / 精英 / 首领）。没有卡的敌人（野猪、老虎）在 enemies.json 里自己写 hp / at",
     "enemy_from_card": {"hp": 150, "at": 3.5},
     "_lord_member_mult": "主公队的成员（亲卫、丫鬟绣娘这类 troop 为 lord 的卡）按这个比例计入主公队的体力 / 攻击",
@@ -107,7 +109,7 @@
     "swap_ready": true,
     "_charge_break": "打断蓄力：带 interrupt 效果的技能（主公扔刀 / 回马枪等）打在正在蓄力的敌人身上，蓄力作废，我方回 ap_reward AP，敌人破防 break_bonus（break_turns 回合）。普通眩晕不打断蓄力，只让敌人跳过一回合（蓄力顺延）",
     "charge_break": {"ap_reward": 1, "break_bonus": 0.25, "break_turns": 2},
-    "_tactics": "军令（自动战斗）：presets = 三档预设（interrupt 敌人蓄力时先打断；defend_charge 有蓄力杀招要落地又打断不了就防御；reserve 允许个人军令的「留气」；ults always = 大招照放 / boss = 只在首领战放限 1 大招）；conditions = 个人军令可选的条件（代码 AutoPlayer.cond_holds）；max_rows = 每人最多几行",
+    "_tactics": "军令（自动战斗）三层：整体（presets 三档预设 + 中军军令 party_acts：防御 / 留 AP / 换人）、兵种（troop_acts：按技能类别，对应到每位队长自己的技能）、武将（具体技能）。presets：interrupt 敌人蓄力时先打断；defend_charge 有蓄力杀招要落地又打断不了就防御；reserve 允许武将军令的「留气」；ults always = 大招照放 / boss = 只在首领战放限 1 大招。conditions = 每条军令可选的条件（两格，都成立才算；代码 AutoPlayer.cond_holds）；max_rows = 每层每项最多几条",
     "tactics": {
       "presets": {
         "smart": {"name": "拆招", "desc": "先打断蓄力，挡得住的绝招就防御", "interrupt": true, "defend_charge": true, "reserve": true, "ults": "always"},
@@ -117,8 +119,15 @@
       "conditions": {
         "always": "总是", "enemy_charging": "敌人蓄力", "enemy_charging_heal": "敌人蓄力回血", "enemy_charging_summon": "敌人蓄力叫援",
         "enemy_stance": "敌人架势", "enemy_guard": "敌有前卫", "enemy_stunned": "敌人眩晕", "enemy_broken": "敌人破防", "enemy_low_hp": "敌体力<30%",
-        "boss_fight": "首领战", "party_low_hp": "我军体力<40%", "party_status": "我军有异常", "ap_full": "AP 已满", "ap_6": "AP≥6"
+        "boss_fight": "首领战", "party_low_hp": "我军体力<40%", "party_status": "我军有异常", "ap_full": "AP 已满", "ap_6": "AP≥6",
+        "field_no_magic": "场上没人会法术", "field_no_cleanse": "场上没人能解状态", "field_no_interrupt": "打断技能用光", "leader_spent": "有队长大招用尽"
       },
+      "party_acts": {
+        "defend": "全军防御", "end": "结束回合（留 AP）", "swap_fresh": "换下大招用尽的",
+        "swap_strategist": "换上策士", "swap_logistics": "换上后勤", "swap_infantry": "换上刀兵", "swap_spear": "换上枪兵",
+        "swap_cavalry": "换上骑兵", "swap_archer": "换上弓兵", "swap_bandit": "换上贼兵"
+      },
+      "troop_acts": {"basic": "普通技", "signature": "招牌技", "ult": "大招", "interrupt": "打断技", "heal": "治疗 / 解除", "support": "增益 / 防守"},
       "max_rows": 4
     },
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)",

@@ -71,10 +71,49 @@ func test_auto_swap_brings_a_strategist_against_a_stance() -> void:
 	var b := Battle.start("hulao", s.party_leaders(), 4, 0, {}, {}, false, {}, s.swap_roster())
 	b.enemy["stance"] = {"name": "画戟架势", "power": 0.9, "turns": 1}
 	b.ap = 1
-	var p := AutoPlayer.plan(b, {"preset": "smart", "auto_swap": true, "rows": {}})
-	check_eq(p["kind"], "swap", str(p))
+	var p := AutoPlayer.plan(b, AutoPlayer.default_tactics())
+	check_eq(p["kind"], "swap", "the default 中军 rows hold the 换人 rule: " + str(p))
 	check_eq(p.get("card", ""), "zhouyu")
-	check_eq(AutoPlayer.plan(b, {"preset": "smart", "auto_swap": false, "rows": {}})["kind"] != "swap", true, "off: no swap")
+	check(AutoPlayer.plan(b, {"preset": "smart", "party_rows": [], "rows": {}})["kind"] != "swap", "no 中军 row: no swap")
+
+
+func test_a_party_row_swaps_out_a_spent_leader() -> void:
+	var s := SaveData.new()
+	s.owned = ["machao", "zhaoyun"]
+	s.party = ["machao"]
+	var b := Battle.start("hulao", s.party_leaders(), 4, 0, {}, {}, false, {}, s.swap_roster())
+	var slot := 1
+	for sk in b.skills_of(b.leaders[slot]):
+		if sk["uses"] == 1 or sk["per_battle"]:
+			b.leaders[slot]["uses_left"][sk["id"]] = 0
+	b.ap = 3
+	var t := {"preset": "aggro", "party_rows": [{"act": "swap_fresh", "cond": "leader_spent", "cond2": "always"}], "rows": {}}
+	var p := AutoPlayer.plan(b, t)
+	check_eq([p["kind"], p.get("unit", -1), p.get("card", "")], ["swap", slot, "zhaoyun"])
+
+
+func test_a_party_row_with_two_conditions_needs_both() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 4)
+	b.ap = 4
+	var t := {"preset": "aggro", "party_rows": [{"act": "defend", "cond": "enemy_charging", "cond2": "boss_fight"}], "rows": {}}
+	b.enemy["charging"] = "天下无双"
+	check(AutoPlayer.plan(b, t)["kind"] != "defend", "charging but not a boss fight")
+	b.mods["enemy_tier"] = "boss"
+	check_eq(AutoPlayer.plan(b, t)["kind"], "defend")
+
+
+func test_a_troop_row_picks_the_leaders_own_skill_of_that_kind() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 4)
+	b.ap = 8
+	var troop: String = b.leaders[1]["leader"]["card"]["troop"]
+	var t := {"preset": "aggro", "troop_rows": {troop: [{"act": "basic", "cond": "always"}]}, "rows": {}}
+	var p := AutoPlayer.plan(b, t)
+	check_eq(p.get("unit", -1), 1, str(p))
+	check(AutoPlayer.skill_kind(b.db.skills[p["skill"]]).has("basic"), "a 普通技")
+	var t2 := {"preset": "aggro", "troop_rows": {troop: [{"act": "basic", "cond": "always"}]},
+		"rows": {str(b.leaders[1]["leader"]["card"]["id"]): [{"skill": b.leaders[1]["leader"]["card"]["skills"][-1], "cond": "always"}]}}
+	b.ap = 8
+	check_eq(AutoPlayer.plan(b, t2).get("skill", ""), b.leaders[1]["leader"]["card"]["skills"][-1], "the card's own row comes before its troop's")
 
 
 func test_every_condition_and_preset_is_known() -> void:
@@ -90,7 +129,8 @@ func test_every_condition_and_preset_is_known() -> void:
 
 func test_a_whole_fight_under_tactics_ends() -> void:
 	var b := Battle.start("hulao", party(["machao", "zhouyu", "zhaoyun"]), 9, 0, {}, {}, false, {"enemy_tier": "boss"})
-	var t := {"preset": "smart", "auto_swap": true, "rows": {"lord": [{"skill": "rengdao", "cond": "enemy_charging", "reserve": true}]}}
+	var t := AutoPlayer.default_tactics()
+	t["rows"] = {"lord": [{"skill": "rengdao", "cond": "enemy_charging", "reserve": true}]}
 	var guard := 0
 	while b.result == "" and guard < 600:
 		guard += 1

@@ -8,7 +8,7 @@ var persist_enabled := true
 var save_path := ""  # the file the current save lives in: a route slot, or "" for a journey still choosing its birthplace
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
 var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto", "auto_speed": "fast",
-	"tactics": {"preset": "smart", "auto_swap": false, "rows": {}}}  # player options, kept in user://options.cfg (not in the save); tactics = 军令, shared by every save and lap
+	"tactics": {}}  # player options, kept in user://options.cfg (not in the save); tactics = 军令 (三层), shared by every save and lap — read it through AutoPlayer.with_defaults
 const OPTIONS_PATH := "user://options.cfg"
 
 
@@ -1100,11 +1100,16 @@ func demo(name: String) -> void:
 				print("AUTO-DEMO result=", b.b.result, " busy=", b._busy, " screen=", root.get_child(root.get_child_count() - 1).get_class())
 			if OS.get_cmdline_user_args().has("--tactics"):  # v3 军令 panel, with a sample rule on the lord
 				await get_tree().create_timer(0.5).timeout
-				var tac: Dictionary = options.get("tactics", {}).duplicate(true)
-				if not tac.get("rows", {}).has("lord"):
+				var tac: Dictionary = AutoPlayer.with_defaults(options.get("tactics", {}))
+				if not tac["rows"].has("lord"):
 					tac["rows"] = {"lord": [{"skill": "rengdao", "cond": "enemy_charging", "reserve": true}, {"skill": "tuji", "cond": "always", "reserve": false}]}
+				if tac["troop_rows"].is_empty():
+					tac["troop_rows"] = {"logistics": [{"act": "heal", "cond": "party_low_hp"}], "cavalry": [{"act": "signature", "cond": "enemy_broken"}]}
 				options["tactics"] = tac
 				b._open_tactics()
+				for a in OS.get_cmdline_user_args():  # --tab=party|troop|card
+					if a.begins_with("--tab="):
+						b.get_children().filter(func(n): return n is TacticsOverlay).back().show_tab(a.trim_prefix("--tab="))
 			if OS.get_cmdline_user_args().has("--guard"):  # v3: a 前卫 and a 架势 on the enemy, the planned moves shown
 				await get_tree().create_timer(0.5).timeout
 				var gm: int = int(round(b.b.enemy["max_hp"] * 0.15))

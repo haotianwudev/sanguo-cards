@@ -725,7 +725,7 @@ func _auto_step() -> void:
 	_auto_waiting = false
 	if not (auto_on and is_inside_tree()) or _busy or b.result != "":
 		return
-	var step := AutoPlayer.plan(b, Game.options.get("tactics", {}))  # 军令
+	var step := AutoPlayer.plan(b, AutoPlayer.with_defaults(Game.options.get("tactics", {})))  # 军令
 	match str(step["kind"]):
 		"act":
 			await _on_skill(int(step["unit"]), str(step["skill"]))
