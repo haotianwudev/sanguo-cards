@@ -3441,6 +3441,7 @@
       "card": "xiahoudun"
     },
     "caobao_jiabing": {
+      "drop": "xuzhou_qiang",
       "name": "曹豹家兵",
       "portrait": "caobao",
       "actions": 2,
