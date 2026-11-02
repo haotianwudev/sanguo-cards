@@ -51,6 +51,14 @@ that no two open squares ever share a spot; keep it green when you add squares.
 **存档：南线、北线各一个，可以同时玩。** `user://save_south.json` / `save_north.json`（路径见 `SaveData.slot_path`），新旅程在选完出生点前写在 `save_pending.json`，选定后 `Game.assign_slot()` 把它挪进对应路线的槽位；那条线已有存档时，`map_screen._resolve` 先弹 `ConfirmOverlay` 问要不要覆盖。结局、卡牌收藏（`SHARED_LISTS` / `SHARED_MAXES` / 结局旗标）两边共享，写在 `user://shared.json`：每次 `Game.persist()` 顺手 `write_shared()`，读档时 `apply_shared()` 合并（所以天命归一能同时看到南线赤壁、北线官渡）。旧的单存档 `save.json` 第一次启动时由 `migrate_legacy()` 搬进对应槽位。`Game.persist_enabled` 在 headless（测试）下强制为 false，测试不会碰真存档。读存档一律走 `Game.load_slot(route)` / `Game.any_save()`，别直接 `SaveData.read()`。
 
 Fonts are bundled subsets (`godot/data/fonts/body.ttf` 思源黑体, `name.ttf` 霞鹜文楷), used by `Kit.make_theme` / `Kit.name_font`.
+**UI material (user rule, 2026-11-01):** titles use 文楷 via `Kit.title_label` / `Kit.calligraphy` (title screen, chapter / ending /
+scene titles, panel titles, the story box's square title, enemy names, card names in 整备); body text, numbers and button text stay 黑体.
+Buttons are two materials only (`Kit.button_styles`): gold / green / amber → 琥珀金 plaque, red → 朱砂 plaque (both with a 2 px light
+edge and a drop shadow), everything else (blue / gray / purple / plain `Button`) → dark 玄漆 with a thin dark-gold edge — don't add
+new flat colours. Every `Kit.button` / `tool_button` sinks to 0.97 when pressed (`Kit.press_bounce`). `Kit.bar` carries a glaze strip
+and a dark groove (children `Shine` / `Groove` above the fill). `Game.show_screen` dips through black (into a battle: steel blue),
+skipped headless; full-screen CGs get `Kit.ken_burns` (1.035 → 1.0 over 4 s, once per square). The title picture is never dimmed —
+only `_centre_shade()` behind the menu.
 **Story text with a rare character** (not in the common GB2312 set) shows as a box on phones until you rerun `python tools/build_fonts.py`
 (it rescans `godot/data` + `godot/scripts`), then `--import`. `test_the_bundled_font_has_every_character_the_game_prints` fails when you forget.
 UI icons (badges, map squares, relics, card back, stat/skill icons) are generated placeholders from `tools/generate_ui_assets.py` (the map token is drawn art now, see *Map screen*);

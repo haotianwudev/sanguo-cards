@@ -60,25 +60,12 @@ static func make_theme() -> Theme:
 		ThemeDB.fallback_font = body
 	t.set_color("font_color", "Label", c("text"))
 	t.set_color("default_color", "RichTextLabel", c("text"))
-	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
-		var bg := c("blue")
-		match state:
-			"hover":
-				bg = c("blue").lightened(0.12)
-			"pressed":
-				bg = c("blue").darkened(0.15)
-			"disabled":
-				bg = c("track")
-		var sb := box(bg, 10, 0, Color.TRANSPARENT, 14)
-		sb.content_margin_top = 10
-		sb.content_margin_bottom = 10
-		if state == "focus":
-			sb = box(Color.TRANSPARENT, 10, 3, c("gold"), 14)
-		t.set_stylebox(state, "Button", sb)
-	t.set_color("font_color", "Button", Color.WHITE)
-	t.set_color("font_hover_color", "Button", Color.WHITE)
-	t.set_color("font_pressed_color", "Button", Color.WHITE)
-	t.set_color("font_focus_color", "Button", Color.WHITE)
+	var lacquer := button_styles("blue")  # every plain Button: the dark 玄漆 one (Kit.button picks plaques for main actions)
+	for state in ["normal", "hover", "pressed", "disabled"]:
+		t.set_stylebox(state, "Button", lacquer[state])
+	t.set_stylebox("focus", "Button", box(Color.TRANSPARENT, 10, 3, c("gold"), 14))
+	for k in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		t.set_color(k, "Button", lacquer["font"])
 	t.set_color("font_disabled_color", "Button", c("dim"))
 	t.set_stylebox("panel", "PanelContainer", box(c("card"), 14, 1, c("border"), 16))
 	t.set_stylebox("normal", "LineEdit", box(c("card"), 10, 2, c("border"), 12))
@@ -93,20 +80,109 @@ static func make_theme() -> Theme:
 	return t
 
 
+## Buttons come in two materials (user rule: no flat multi-coloured blocks next to the metal card frames):
+## a lacquer plaque — 琥珀金 (gold / green / amber) or 朱砂 (red) — for the main actions, and dark 玄漆 with a thin
+## dark-gold edge for everything else (blue, gray, purple and the theme default).
+const PLAQUE_GOLD := ["gold", "green", "amber"]
+const PLAQUE_RED := ["red"]
+
+
+static func button_styles(color_name: String) -> Dictionary:
+	## {state: StyleBoxFlat} and the font colour for a Kit.button of that colour
+	var out := {}
+	var plaque := PLAQUE_GOLD.has(color_name) or PLAQUE_RED.has(color_name)
+	var base: Color
+	var edge: Color
+	var font: Color
+	if PLAQUE_GOLD.has(color_name):
+		base = Color("#c99a45")
+		edge = Color("#f3d58c")
+		font = Color(0.13, 0.08, 0.03)
+	elif PLAQUE_RED.has(color_name):
+		base = Color("#9e3326")
+		edge = Color("#e0a35a")
+		font = Color(1.0, 0.95, 0.86)
+	else:
+		base = Color(0.10, 0.08, 0.06, 0.86)
+		edge = Color("#a8823f")
+		edge.a = 0.75
+		font = Color(0.95, 0.91, 0.82)
+	for st in ["normal", "hover", "pressed", "disabled"]:
+		var bg := base
+		if st == "hover":
+			bg = base.lightened(0.10)
+		elif st == "pressed":
+			bg = base.darkened(0.18)
+		elif st == "disabled":
+			bg = Color(0.16, 0.14, 0.12, 0.85)
+		var sb := box(bg, 10, 2 if plaque else 1, edge if st != "disabled" else Color(0.4, 0.35, 0.28, 0.6), 14)
+		sb.content_margin_top = 8
+		sb.content_margin_bottom = 8
+		if plaque and st != "pressed" and st != "disabled":  # a plaque sits on the page: a soft shadow under it
+			sb.shadow_color = Color(0, 0, 0, 0.45)
+			sb.shadow_size = 4
+			sb.shadow_offset = Vector2(0, 3)
+		out[st] = sb
+	out["font"] = font
+	return out
+
+
 static func button(text: String, color_name := "blue", size := FONT_BODY) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.add_theme_font_size_override("font_size", size)
-	if color_name != "blue":
-		var base := c(color_name)
-		b.add_theme_stylebox_override("normal", box(base, 10, 0, Color.TRANSPARENT, 14))
-		b.add_theme_stylebox_override("hover", box(base.lightened(0.12), 10, 0, Color.TRANSPARENT, 14))
-		b.add_theme_stylebox_override("pressed", box(base.darkened(0.15), 10, 0, Color.TRANSPARENT, 14))
-		if base.get_luminance() > 0.5:  # light buttons (gold) get dark text
-			for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-				b.add_theme_color_override(st, Color(0.1, 0.07, 0.04))
+	var s := button_styles(color_name)
+	for st in ["normal", "hover", "pressed", "disabled"]:
+		b.add_theme_stylebox_override(st, s[st])
+	for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		b.add_theme_color_override(st, s["font"])
+	b.add_theme_color_override("font_disabled_color", Color(0.6, 0.55, 0.47))
 	b.custom_minimum_size = Vector2(0, 56)
+	press_bounce(b)
 	return b
+
+
+static func press_bounce(b: BaseButton) -> void:
+	## pressed: the button sinks to 0.97 and its edge brightens; let go, it springs back (matches the cards' drag feel)
+	b.button_down.connect(func():
+		b.pivot_offset = b.size / 2.0
+		var tw := b.create_tween().set_parallel()
+		tw.tween_property(b, "scale", Vector2(0.97, 0.97), 0.06)
+		tw.tween_property(b, "self_modulate", Color(1.12, 1.08, 1.0), 0.06))
+	b.button_up.connect(func():
+		b.pivot_offset = b.size / 2.0
+		var tw := b.create_tween().set_parallel()
+		tw.tween_property(b, "scale", Vector2.ONE, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tw.tween_property(b, "self_modulate", Color.WHITE, 0.18))
+
+
+static func ken_burns(pic: Control, from := 1.035, secs := 4.0) -> void:
+	## a full-screen CG breathes in: a slow, restrained push from `from` back to 1.0 (sine ease-out), once per arrival
+	if pic.has_meta("kb"):
+		(pic.get_meta("kb") as Tween).kill()
+	pic.pivot_offset = Vector2(640, 360) if pic.size == Vector2.ZERO else pic.size / 2.0
+	pic.scale = Vector2(from, from)
+	var tw := pic.create_tween()
+	tw.tween_property(pic, "scale", Vector2.ONE, secs).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	pic.set_meta("kb", tw)
+
+
+static func calligraphy(l: Control, size: int, spacing := 1, outline := 6) -> Control:
+	## titles in the bundled 霞鹜文楷 with a dark outline and a soft shadow (body text, numbers and buttons stay 思源黑体)
+	l.add_theme_font_override("font" if l is Label else "normal_font", name_font(size, spacing))
+	l.add_theme_font_size_override("font_size" if l is Label else "normal_font_size", size)
+	l.add_theme_constant_override("outline_size", outline)
+	l.add_theme_color_override("font_outline_color", Color(0.05, 0.03, 0.02, 0.85))
+	l.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.55))
+	l.add_theme_constant_override("shadow_offset_x", 0)
+	l.add_theme_constant_override("shadow_offset_y", 3)
+	return l
+
+
+static func title_label(text: String, size := FONT_BIG, color_name := "gold") -> Label:
+	var l := label(text, size, color_name)
+	calligraphy(l, size)
+	return l
 
 
 static func tool_button(text: String) -> Button:
@@ -129,6 +205,7 @@ static func tool_button(text: String) -> Button:
 	for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
 		b.add_theme_color_override(st, Color(0.95, 0.92, 0.85, 0.92))
 	b.custom_minimum_size = Vector2(0, 32)
+	press_bounce(b)
 	return b
 
 
@@ -159,6 +236,25 @@ static func bar(value: float, max_value: float, color_name := "green", height :=
 	p.add_child(trail)
 	p.add_theme_stylebox_override("background", box(Color.TRANSPARENT, height / 2, 0, Color.TRANSPARENT, 0))
 	p.add_theme_stylebox_override("fill", box(c(color_name), height / 2, 0, Color.TRANSPARENT, 0))
+	# over the fill: a bright strip along the top (the glaze) and a dark metal groove all round
+	var shine := Panel.new()
+	shine.name = "Shine"
+	shine.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	shine.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	shine.offset_left = height * 0.3
+	shine.offset_right = -height * 0.3
+	shine.offset_top = 2
+	shine.offset_bottom = maxf(3.0, height * 0.32)
+	shine.add_theme_stylebox_override("panel", box(Color(1, 1, 1, 0.16), int(height * 0.2), 0, Color.TRANSPARENT, 0))
+	p.add_child(shine)
+	var groove := Panel.new()
+	groove.name = "Groove"
+	groove.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	groove.set_anchors_preset(Control.PRESET_FULL_RECT)
+	var g := box(Color.TRANSPARENT, height / 2, 2, Color(0.05, 0.04, 0.03, 0.9), 0)
+	g.draw_center = false
+	groove.add_theme_stylebox_override("panel", g)
+	p.add_child(groove)
 	return p
 
 

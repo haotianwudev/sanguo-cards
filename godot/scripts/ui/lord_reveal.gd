@@ -31,7 +31,7 @@ func _ready() -> void:
 	col.add_theme_constant_override("separation", 12)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(col)
-	var head := Kit.label("主角卡升级！" if dupe and not fresh else "获得主角卡！", Kit.FONT_TITLE + 12, "gold")
+	var head := Kit.title_label("主角卡升级！" if dupe and not fresh else "获得主角卡！", Kit.FONT_TITLE + 12, "gold")
 	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	head.modulate.a = 0.0
 	col.add_child(head)

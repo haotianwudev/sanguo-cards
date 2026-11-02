@@ -31,7 +31,7 @@ func _ready() -> void:
 	col.add_theme_constant_override("separation", 22)
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(col)
-	var head := Kit.label(title, Kit.FONT_TITLE + 6, "gold")
+	var head := Kit.title_label(title, Kit.FONT_TITLE + 6, "gold")
 	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(head)
 	var row := HBoxContainer.new()

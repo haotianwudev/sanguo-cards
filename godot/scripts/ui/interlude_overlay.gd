@@ -186,6 +186,7 @@ func _show_scene(sc: Dictionary) -> void:
 		pic.size = size
 		pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_box.add_child(pic)
+		Kit.ken_burns(pic)
 		var band := ColorRect.new()
 		band.color = Color(0, 0, 0, 0.62)
 		band.position = Vector2(0, 400)
@@ -209,7 +210,7 @@ func _show_scene(sc: Dictionary) -> void:
 		_box.add_child(tr)
 		_pics[key] = tr
 		x += 230
-	var title := Kit.label(sc.get("title", ""), Kit.FONT_BIG + 8, "gold")
+	var title := Kit.title_label(sc.get("title", ""), Kit.FONT_BIG + 10, "gold")
 	title.position = Vector2(60, 40)
 	title.add_theme_constant_override("outline_size", 8)
 	title.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
@@ -223,7 +224,7 @@ func _show_scene(sc: Dictionary) -> void:
 	text.add_theme_color_override("default_color", Color(0.95, 0.92, 0.85))
 	text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	text.set_meta("text_layer", true)
-	_name_lbl = Kit.label("", Kit.FONT_BODY, "gold")  # who is speaking, just above the line
+	_name_lbl = Kit.title_label("", Kit.FONT_BODY + 2, "gold")  # who is speaking, just above the line
 	_name_lbl.position = Vector2(60, text.position.y - 38)
 	_name_lbl.add_theme_constant_override("outline_size", 6)
 	_name_lbl.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
@@ -305,7 +306,7 @@ func _show_title() -> void:
 			pic.modulate = Color(0.55, 0.55, 0.55)
 			pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			_box.add_child(pic)
-		var e := Kit.label(ending.get("title", ""), 64, "gold")
+		var e := Kit.title_label(ending.get("title", ""), 68, "gold")
 		e.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		e.position = Vector2(0, 250)
 		e.size = Vector2(1280, 110)
@@ -326,7 +327,7 @@ func _show_title() -> void:
 		_box.modulate.a = 0.0
 		_box.create_tween().tween_property(_box, "modulate:a", 1.0, 1.6)
 		return
-	var t := Kit.label(next_title if next_title != "" else "未完待续", 72, "gold")
+	var t := Kit.title_label(next_title if next_title != "" else "未完待续", 76, "gold")
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	t.position = Vector2(0, 280)
 	t.size = Vector2(1280, 120)

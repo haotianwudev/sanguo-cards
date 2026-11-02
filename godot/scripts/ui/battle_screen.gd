@@ -203,13 +203,13 @@ func _build() -> void:
 	if has_cg:  # one line: name and stats, then the bar
 		var top := HBoxContainer.new()
 		top.add_theme_constant_override("separation", 14)
-		top.add_child(Kit.label(e["name"], Kit.FONT_BIG, "red"))
+		top.add_child(Kit.title_label(e["name"], Kit.FONT_BIG + 2, "red"))
 		var st := Kit.label("攻击 %d · 每回合 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted")
 		st.size_flags_vertical = Control.SIZE_SHRINK_END
 		top.add_child(st)
 		info.add_child(top)
 	else:
-		info.add_child(Kit.label(e["name"], Kit.FONT_TITLE, "red"))
+		info.add_child(Kit.title_label(e["name"], Kit.FONT_TITLE, "red"))
 	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 30 if not has_cg else 20)
 	info.add_child(_enemy_hp)
 	_guard_row = HBoxContainer.new()  # 前卫 (summon): a thin second bar under the boss's, hidden while there is none

@@ -32,7 +32,7 @@ func _ready() -> void:
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.add_theme_constant_override("separation", 22)
 	add_child(col)
-	var t := Kit.label(title, Kit.FONT_BIG + 4)
+	var t := Kit.title_label(title, Kit.FONT_BIG + 6, "text")
 	t.add_theme_color_override("font_color", Color.WHITE)
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(t)

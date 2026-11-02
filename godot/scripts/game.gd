@@ -82,10 +82,37 @@ func any_save() -> SaveData:
 
 
 func show_screen(screen: Control) -> void:
+	var swap := root.get_child_count() > 0  # from one screen to another (not the first one at start-up)
 	for ch in root.get_children():
 		ch.queue_free()
 	screen.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.add_child(screen)
+	if swap:
+		_curtain(screen is BattleScreen)
+
+
+var _veil: ColorRect  # the screen-change curtain (on a CanvasLayer above everything)
+
+
+func _curtain(to_battle: bool) -> void:
+	## a screen change dips through black (0.18 s) instead of a hard cut; into a battle the dip is a cold steel blue.
+	## Skipped headless (tests).
+	if DisplayServer.get_name() == "headless":
+		return
+	if _veil == null:
+		var layer := CanvasLayer.new()
+		layer.layer = 100
+		add_child(layer)
+		_veil = ColorRect.new()
+		_veil.set_anchors_preset(Control.PRESET_FULL_RECT)
+		_veil.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		layer.add_child(_veil)
+	if _veil.has_meta("tw"):
+		(_veil.get_meta("tw") as Tween).kill()
+	_veil.color = Color(0.06, 0.09, 0.13, 1.0) if to_battle else Color(0, 0, 0, 1.0)
+	var tw := _veil.create_tween()
+	tw.tween_property(_veil, "color:a", 0.0, 0.28 if to_battle else 0.18).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_veil.set_meta("tw", tw)
 
 
 func new_game(lord_name: String) -> void:

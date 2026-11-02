@@ -7,15 +7,15 @@ var _col: VBoxContainer
 
 func _ready() -> void:
 	Bgm.play("title")
-	var art := Kit.ui_art("title")  # title picture, dimmed so the menu stays readable
+	var art := Kit.ui_art("title")  # title picture in full colour; only the middle, behind the menu, is shaded (user rule)
 	if art != null:
 		var pic := TextureRect.new()
 		pic.texture = art
 		pic.set_anchors_preset(Control.PRESET_FULL_RECT)
 		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		pic.modulate = Color(0.5, 0.5, 0.5)
 		add_child(pic)
+		add_child(_centre_shade())
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(center)
@@ -25,10 +25,11 @@ func _ready() -> void:
 	col.custom_minimum_size = Vector2(420, 0)
 	center.add_child(col)
 
-	var title := Kit.label("重　开　三　国", Kit.FONT_TITLE + 16, "gold")
+	var title := Kit.title_label("重　开　三　国", Kit.FONT_TITLE + 24, "gold")
+	Kit.calligraphy(title, Kit.FONT_TITLE + 24, 2, 10)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(title)
-	var sub := Kit.label("穿越三国 · 你想去哪", Kit.FONT_BIG, "muted")
+	var sub := Kit.title_label("穿越三国 · 你想去哪", Kit.FONT_BIG, "muted")
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(sub)
 	col.add_child(Control.new())
@@ -82,7 +83,7 @@ func _ready() -> void:
 		pend.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		col.add_child(pend)
 
-	var start := Kit.button("新的旅程" if not has_save else "新的旅程（选出生点，占用对应路线的存档）", "blue", Kit.FONT_BIG if not has_save else Kit.FONT_BODY)
+	var start := Kit.button("新的旅程" if not has_save else "新的旅程（选出生点，占用对应路线的存档）", "gold", Kit.FONT_BIG if not has_save else Kit.FONT_BODY)
 	start.pressed.connect(func():
 		var d := NewGameDialog.new()
 		Game.root.add_child(d))
@@ -98,6 +99,25 @@ func _ready() -> void:
 		dbg.custom_minimum_size = Vector2(0, 32)
 		dbg.pressed.connect(func(): Game.root.add_child(DebugScreen.new()))
 		col.add_child(dbg)
+
+
+func _centre_shade() -> Control:
+	## a soft dark band down the middle (behind the title and the buttons), fading out to both sides, so the two heroes keep their colour
+	var g := Gradient.new()
+	g.offsets = PackedFloat32Array([0.0, 0.3, 0.5, 0.7, 1.0])
+	g.colors = PackedColorArray([Color(0, 0, 0, 0), Color(0.03, 0.02, 0.01, 0.45), Color(0.03, 0.02, 0.01, 0.62),
+		Color(0.03, 0.02, 0.01, 0.45), Color(0, 0, 0, 0)])
+	var gt := GradientTexture2D.new()
+	gt.gradient = g
+	gt.width = 256
+	gt.height = 4
+	var shade := TextureRect.new()
+	shade.texture = gt
+	shade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	shade.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	shade.stretch_mode = TextureRect.STRETCH_SCALE
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return shade
 
 
 func _slot_block(col: VBoxContainer, r: String, saved: SaveData, focus_first: bool) -> void:

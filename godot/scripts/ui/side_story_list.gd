@@ -45,12 +45,16 @@ static func button(pos: Vector2, on_change: Callable, also_quest := "") -> SideB
 	b.text = "？ 小故事"
 	b.add_theme_font_size_override("font_size", Kit.FONT_BODY + 2)
 	var base := Kit.c("gold")
-	b.add_theme_stylebox_override("normal", Kit.box(base, 10, 0, Color.TRANSPARENT, 14))
-	b.add_theme_stylebox_override("hover", Kit.box(base.lightened(0.12), 10, 0, Color.TRANSPARENT, 14))
-	b.add_theme_stylebox_override("pressed", Kit.box(base.darkened(0.15), 10, 0, Color.TRANSPARENT, 14))
+	var s := Kit.button_styles("gold")  # a gold plaque like the other main buttons, kept low (≤ 44 px) so it clears the 整备 panels under it
+	for st in ["normal", "hover", "pressed", "disabled"]:
+		var sb: StyleBoxFlat = s[st].duplicate()
+		sb.content_margin_top = 4
+		sb.content_margin_bottom = 4
+		b.add_theme_stylebox_override(st, sb)
 	for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		b.add_theme_color_override(st, Color(0.1, 0.07, 0.04))
-	b.custom_minimum_size = Vector2(140, 46)
+		b.add_theme_color_override(st, s["font"])
+	b.custom_minimum_size = Vector2(140, 42)
+	Kit.press_bounce(b)
 	b.position = pos
 	b.pressed.connect(func():
 		var o := SideStoryList.new()
@@ -70,7 +74,7 @@ func _ready() -> void:
 	bg.color = Color(0.05, 0.04, 0.03, 0.94)
 	bg.size = size
 	add_child(bg)
-	var title := Kit.label("？ 小故事", Kit.FONT_BIG + 8, "gold")
+	var title := Kit.title_label("？ 小故事", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(40, 22)
 	add_child(title)
 	var hint := Kit.label("只在这一章出现，错过要等下一周目。打开要花战功，看过的这一章内可以免费再看。", Kit.FONT_BODY)

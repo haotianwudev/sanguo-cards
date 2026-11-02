@@ -51,7 +51,7 @@ func _ready() -> void:
 	bg.color = Kit.c("bg")
 	bg.size = size
 	add_child(bg)
-	var title := Kit.label("换　人" if swap_mode else "整　备", Kit.FONT_BIG + 8, "gold")
+	var title := Kit.title_label("换　人" if swap_mode else "整　备", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(28, 10)
 	add_child(title)
 	var hint := Kit.label("点卡查看 · 再点一次出阵 / 下阵 · 也可以拖：拖上去出阵（拖到队长身上替换），拖回卡池下阵，队长之间拖动换位置", 15)
@@ -91,14 +91,14 @@ func _ready() -> void:
 		_rebuild())
 	pool_box.add_child(_sort_btn)
 	var scroll := ScrollContainer.new()
-	scroll.position = Vector2(6, 56)  # the scroll clips its content: a 6px margin all round keeps the edge cards' aura / selection box from being cut off
-	scroll.size = Vector2(842, 260)
+	scroll.position = Vector2(6, 70)  # under the 56 px filter tabs (+6 gap); the scroll clips its content, so the pad below keeps the edge cards' aura / badges in
+	scroll.size = Vector2(842, 244)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	pool_box.add_child(scroll)
 	_dnd(scroll, {}, "pool")
 	var pad := MarginContainer.new()
 	for side in ["left", "top", "right", "bottom"]:
-		pad.add_theme_constant_override("margin_" + side, 6)
+		pad.add_theme_constant_override("margin_" + side, 12 if side == "top" else 6)  # the troop badge pokes out above a card
 	scroll.add_child(pad)
 	_grid = GridContainer.new()
 	_grid.columns = 7
@@ -202,7 +202,7 @@ func _rebuild() -> void:
 	if _hp_top > 0 and top != _hp_top:  # someone came in or went out: the HP bar keeps its share (攻击 simply follows who is out)
 		Quests.rescale_hp(save, _hp_top, top)
 	_hp_top = top
-	_summary.add_child(_stat_line("全军体力", "%d / %d" % [maxi(1, top - save.damage), top]))
+	_summary.add_child(_stat_line("全军体力", "%d/%d" % [maxi(1, top - save.damage), top]))
 	_summary.add_child(_stat_line("攻击合计", str(at_sum)))
 	_summary.add_child(_stat_line("出阵", "%d / %d 队" % [save.field_leaders().size(), save.party_slots]))
 	if not save.relics.is_empty():
@@ -451,7 +451,7 @@ func _fill_relic_detail(rid: String) -> void:
 	top.add_child(ic)
 	var info := VBoxContainer.new()
 	top.add_child(info)
-	info.add_child(Kit.label(r["name"], Kit.FONT_BIG + 2, "gold"))
+	info.add_child(Kit.title_label(r["name"], Kit.FONT_BIG + 2, "gold"))
 	info.add_child(_info_line("种类", {"rare": "稀有", "curse": "诅咒", "story": "传家宝"}.get(r["rarity"], "普通")))
 	var unit := save.relic_unit(rid)
 	info.add_child(_info_line("属于", _team_name(rid)))
@@ -479,11 +479,14 @@ func _fill_relic_detail(rid: String) -> void:
 
 func _stat_line(name: String, value: String) -> Control:
 	var row := HBoxContainer.new()
-	var a := Kit.label(name, 15)
+	var a := Kit.label(name, 14)
 	a.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
-	a.custom_minimum_size = Vector2(76, 0)
+	a.custom_minimum_size = Vector2(62, 0)
 	row.add_child(a)
-	row.add_child(Kit.label(value, Kit.FONT_BODY + 2, "gold"))
+	var v := Kit.label(value, Kit.FONT_BODY if value.length() <= 8 else Kit.FONT_SMALL + 1, "gold")  # long values (体力 1216/1216) step down a size
+	v.clip_text = true
+	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(v)
 	return row
 
 
@@ -503,7 +506,7 @@ func _fill_lordform_detail(fid: String) -> void:
 	var info := VBoxContainer.new()
 	info.add_theme_constant_override("separation", 4)
 	top.add_child(info)
-	var nm := Kit.label(save.lord_name if form == "" else "%s · %s" % [save.lord_name, _form_name(fid)], Kit.FONT_BIG + 2, "gold")
+	var nm := Kit.title_label(save.lord_name if form == "" else "%s · %s" % [save.lord_name, _form_name(fid)], Kit.FONT_BIG + 2, "gold")
 	nm.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	nm.custom_minimum_size = Vector2(196, 0)
 	info.add_child(nm)
@@ -548,7 +551,7 @@ func _fill_detail() -> void:
 	var info := VBoxContainer.new()
 	info.add_theme_constant_override("separation", 4)
 	top.add_child(info)
-	var name_l := Kit.label(f["name"], Kit.FONT_BIG + 2, "gold")
+	var name_l := Kit.title_label(f["name"], Kit.FONT_BIG + 2, "gold")
 	name_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	name_l.custom_minimum_size = Vector2(196, 0)
 	info.add_child(name_l)

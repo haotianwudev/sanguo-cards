@@ -267,7 +267,7 @@ func _ready() -> void:
 	top.size = Vector2(1232, 48)
 	top.add_theme_constant_override("separation", 18)
 	add_child(top)
-	_title = Kit.label("", Kit.FONT_BIG, "gold")
+	_title = Kit.title_label("", Kit.FONT_BIG, "gold")
 	top.add_child(_title)
 	var party_btn := Kit.button("部队", "gold")
 	party_btn.pressed.connect(_open_party)
@@ -719,11 +719,19 @@ func _refresh() -> void:
 			_cg_tab.visible = true
 			_cg_mode = true
 			_apply_cg_mode()
+			_cg_push(here["id"])
 		_open_fates()
 		return
 	_show_square(here)
 	if save.offer_kind == "relic" and not save.offer.is_empty():
 		_open_relics.call_deferred()
+
+
+func _cg_push(sid: String) -> void:
+	## the CG's slow push-in, once per square (the 天命 pick shows the first square's CG before its story: no second push after it)
+	if str(_cg_view.get_meta("kb_for", "")) != sid:
+		_cg_view.set_meta("kb_for", sid)
+		Kit.ken_burns(_cg_view)
 
 
 func _fate_pending() -> bool:
@@ -983,7 +991,7 @@ func _show_square(s: Dictionary) -> void:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 6)
 	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var head := Kit.label("%s  %s" % [_glyph(s), title], Kit.FONT_BIG)
+	var head := Kit.title_label("%s  %s" % [_glyph(s), title], Kit.FONT_BIG, "text")
 	col.add_child(head)
 	_sheet_head = head
 	var row := HBoxContainer.new()
@@ -1000,6 +1008,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = false
 	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
 		_cg_square = s["id"]
+		_cg_push(s["id"])
 		_cg_mode = not OS.get_cmdline_user_args().has("--map")  # --map: screenshots of the map itself, even on a CG square
 		if not save.resolved:  # first time through, not on the way back from its battle: said once the lines are set up
 			cg_new = str(ev.get("cg", s["cg"]))
@@ -1902,7 +1911,7 @@ func _complete() -> void:
 	col.size = Vector2(440, 684)
 	col.add_theme_constant_override("separation", 8)
 	root.add_child(col)
-	var title := Kit.label(("「%s」" % _recap_end["title"]) if not _recap_end.is_empty() else ("「%s」完" % Quests.title(q, Game.save)), Kit.FONT_BIG + 4, "gold")
+	var title := Kit.title_label(("「%s」" % _recap_end["title"]) if not _recap_end.is_empty() else ("「%s」完" % Quests.title(q, Game.save)), Kit.FONT_BIG + 6, "gold")
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	col.add_child(title)
 	_recap_merit = Kit.label("", Kit.FONT_BODY, "text")
@@ -2010,7 +2019,7 @@ func _show_recap_detail() -> void:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 14)
 	panel.add_child(col)
-	var title := Kit.label("「%s」回顾" % Quests.title(q, Game.save), Kit.FONT_BIG + 6, "gold")
+	var title := Kit.title_label("「%s」回顾" % Quests.title(q, Game.save), Kit.FONT_BIG + 6, "gold")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(title)
 	var text := RichTextLabel.new()

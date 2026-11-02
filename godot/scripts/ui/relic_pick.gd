@@ -32,7 +32,7 @@ func _ready() -> void:
 	col.position = Vector2(90, 40)
 	col.size = Vector2(1100, 640)
 	add_child(col)
-	var t := Kit.label(title, Kit.FONT_BIG + 4)
+	var t := Kit.title_label(title, Kit.FONT_BIG + 6, "text")
 	t.add_theme_color_override("font_color", Color.WHITE)
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(t)
