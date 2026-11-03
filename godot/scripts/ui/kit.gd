@@ -81,16 +81,17 @@ static func make_theme() -> Theme:
 
 
 ## Buttons come in two materials (user rule: no flat multi-coloured blocks next to the metal card frames):
-## a lacquer plaque — 琥珀金 (gold / green / amber) or 朱砂 (red) — for the main actions, and dark 玄漆 with a thin
+## a lacquer plaque — 琥珀金 (gold / amber), 翠漆 (green: 继续, user call) or 朱砂 (red) — for the main actions, and dark 玄漆 with a thin
 ## dark-gold edge for everything else (blue, gray, purple and the theme default).
-const PLAQUE_GOLD := ["gold", "green", "amber"]
+const PLAQUE_GOLD := ["gold", "amber"]
+const PLAQUE_GREEN := ["green"]
 const PLAQUE_RED := ["red"]
 
 
 static func button_styles(color_name: String) -> Dictionary:
 	## {state: StyleBoxFlat} and the font colour for a Kit.button of that colour
 	var out := {}
-	var plaque := PLAQUE_GOLD.has(color_name) or PLAQUE_RED.has(color_name)
+	var plaque := PLAQUE_GOLD.has(color_name) or PLAQUE_GREEN.has(color_name) or PLAQUE_RED.has(color_name)
 	var base: Color
 	var edge: Color
 	var font: Color
@@ -98,6 +99,10 @@ static func button_styles(color_name: String) -> Dictionary:
 		base = Color("#c99a45")
 		edge = Color("#f3d58c")
 		font = Color(0.13, 0.08, 0.03)
+	elif PLAQUE_GREEN.has(color_name):
+		base = Color("#3d7a3f")
+		edge = Color("#e3cf86")
+		font = Color(1.0, 0.97, 0.88)
 	elif PLAQUE_RED.has(color_name):
 		base = Color("#9e3326")
 		edge = Color("#e0a35a")
