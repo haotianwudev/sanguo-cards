@@ -128,7 +128,308 @@
         "swap_cavalry": "换上骑兵", "swap_archer": "换上弓兵", "swap_bandit": "换上贼兵"
       },
       "troop_acts": {"basic": "普通技", "signature": "招牌技", "ult": "大招", "interrupt": "打断技", "heal": "治疗 / 解除", "support": "增益 / 防守"},
-      "max_rows": 4
+      "max_rows": 4,
+      "defaults": {
+        "_defaults": "军令出厂设置（用户要求：主要角色、兵种、整体都要有）。都是带条件的——平常交给预设估值，只在这些场面替玩家做对的事。玩家改过的那一项以玩家为准（AutoPlayer.with_defaults）。",
+        "party_rows": [
+          {
+            "cond": "enemy_stance",
+            "cond2": "field_no_magic",
+            "act": "swap_strategist"
+          },
+          {
+            "cond": "party_status",
+            "cond2": "field_no_cleanse",
+            "act": "swap_logistics"
+          },
+          {
+            "cond": "party_low_hp",
+            "cond2": "field_no_cleanse",
+            "act": "swap_logistics"
+          }
+        ],
+        "troop_rows": {
+          "logistics": [
+            {
+              "cond": "party_status",
+              "cond2": "always",
+              "act": "heal"
+            },
+            {
+              "cond": "party_low_hp",
+              "cond2": "always",
+              "act": "heal"
+            }
+          ],
+          "strategist": [
+            {
+              "cond": "enemy_guard",
+              "cond2": "always",
+              "act": "signature"
+            },
+            {
+              "cond": "enemy_stance",
+              "cond2": "always",
+              "act": "signature"
+            },
+            {
+              "cond": "enemy_guard",
+              "cond2": "boss_fight",
+              "act": "ult"
+            }
+          ],
+          "infantry": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "field_no_interrupt",
+              "act": "support"
+            }
+          ],
+          "spear": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "field_no_interrupt",
+              "act": "support"
+            }
+          ],
+          "cavalry": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "act": "ult"
+            }
+          ],
+          "archer": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "act": "ult"
+            }
+          ]
+        },
+        "rows": {
+          "zhaoyun": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "skill": "changban",
+              "reserve": false
+            }
+          ],
+          "rc_yecheng": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "skill": "changban",
+              "reserve": false
+            }
+          ],
+          "guojia": [
+            {
+              "cond": "boss_fight",
+              "cond2": "always",
+              "skill": "shisheng",
+              "reserve": false
+            }
+          ],
+          "rc_longhu": [
+            {
+              "cond": "boss_fight",
+              "cond2": "always",
+              "skill": "shisheng",
+              "reserve": false
+            }
+          ],
+          "zhouyu": [
+            {
+              "cond": "enemy_guard",
+              "cond2": "always",
+              "skill": "huoshang",
+              "reserve": false
+            },
+            {
+              "cond": "enemy_stance",
+              "cond2": "always",
+              "skill": "yehuo",
+              "reserve": false
+            }
+          ],
+          "zhouyu_chibi": [
+            {
+              "cond": "enemy_guard",
+              "cond2": "always",
+              "skill": "chibi",
+              "reserve": false
+            },
+            {
+              "cond": "enemy_stance",
+              "cond2": "boss_fight",
+              "skill": "chibi",
+              "reserve": false
+            }
+          ],
+          "sunce_bawang": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "skill": "dujiang",
+              "reserve": false
+            }
+          ],
+          "sunce_zhong": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "skill": "dujiang",
+              "reserve": false
+            }
+          ],
+          "rc_jiangdong": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "boss_fight",
+              "skill": "dujiang",
+              "reserve": false
+            }
+          ],
+          "machao": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "always",
+              "skill": "xiliang",
+              "reserve": false
+            }
+          ],
+          "xuhuang": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "always",
+              "skill": "changqu_zhiru",
+              "reserve": false
+            }
+          ],
+          "guanyu": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "always",
+              "skill": "qinglong",
+              "reserve": false
+            }
+          ],
+          "zhoutai": [
+            {
+              "cond": "enemy_broken",
+              "cond2": "always",
+              "skill": "shierchuang",
+              "reserve": false
+            }
+          ],
+          "zhangliao": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "field_no_interrupt",
+              "skill": "weizhen_xiaoyao",
+              "reserve": false
+            }
+          ],
+          "zhenmi": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "field_no_interrupt",
+              "skill": "luoshen",
+              "reserve": false
+            }
+          ],
+          "rc_sanfang": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "field_no_interrupt",
+              "skill": "luoshen",
+              "reserve": false
+            }
+          ],
+          "huatuo": [
+            {
+              "cond": "party_status",
+              "cond2": "always",
+              "skill": "guagu_liaodu",
+              "reserve": false
+            },
+            {
+              "cond": "party_low_hp",
+              "cond2": "always",
+              "skill": "mafei",
+              "reserve": false
+            }
+          ],
+          "zhangning": [
+            {
+              "cond": "party_status",
+              "cond2": "always",
+              "skill": "jiedu",
+              "reserve": false
+            },
+            {
+              "cond": "party_low_hp",
+              "cond2": "always",
+              "skill": "jinzhen",
+              "reserve": false
+            }
+          ],
+          "rc_heishan": [
+            {
+              "cond": "party_status",
+              "cond2": "always",
+              "skill": "jiedu",
+              "reserve": false
+            },
+            {
+              "cond": "party_low_hp",
+              "cond2": "always",
+              "skill": "jinzhen",
+              "reserve": false
+            }
+          ],
+          "rc_xuzhou": [
+            {
+              "cond": "party_status",
+              "cond2": "always",
+              "skill": "jiedu",
+              "reserve": false
+            },
+            {
+              "cond": "party_low_hp",
+              "cond2": "always",
+              "skill": "jinzhen",
+              "reserve": false
+            }
+          ],
+          "xiaoqiao": [
+            {
+              "cond": "party_status",
+              "cond2": "always",
+              "skill": "jiedu",
+              "reserve": false
+            }
+          ],
+          "zhugeliang": [
+            {
+              "cond": "enemy_guard",
+              "cond2": "boss_fight",
+              "skill": "huoji",
+              "reserve": false
+            }
+          ],
+          "sunquan": [
+            {
+              "cond": "party_low_hp",
+              "cond2": "boss_fight",
+              "skill": "zuoduan_dongnan",
+              "reserve": false
+            }
+          ]
+        }
+      }
     },
     "_danger": "险: each accepted risk makes the rest of the run's enemies this much stronger (HP and attack)",
     "danger_step": 0.2,

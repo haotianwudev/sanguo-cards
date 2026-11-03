@@ -179,6 +179,13 @@ func _build_party() -> void:
 		if on:
 			desc = str(p.get("desc", ""))
 	pre_row.add_child(Kit.label(desc, Kit.FONT_SMALL, "muted"))
+	var reset := Kit.button("恢复默认", "gray", Kit.FONT_SMALL)  # every layer back to battle.json tactics.defaults
+	reset.custom_minimum_size = Vector2(110, 46)
+	reset.pressed.connect(func():
+		_t = AutoPlayer.default_tactics()
+		_save()
+		_build())
+	pre_row.add_child(reset)
 	right.add_child(pre_row)
 	var holder := VBoxContainer.new()
 	holder.add_theme_constant_override("separation", 10)

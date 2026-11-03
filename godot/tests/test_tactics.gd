@@ -145,3 +145,42 @@ func test_a_whole_fight_under_tactics_ends() -> void:
 			_:
 				b.end_round()
 	check(b.result != "", "the fight ends by itself")
+
+
+func test_the_default_tactics_are_valid() -> void:
+	## battle.json tactics.defaults (user call: main characters, troops and the whole army): every row names a known condition
+	## and act, a 武将 row names one of that card's own skills, and no default row is unconditional (the preset plays ordinary turns)
+	var db := GameData.get_db()
+	var cfg: Dictionary = db.battle["tactics"]
+	var d := AutoPlayer.default_tactics()
+	check(d["party_rows"].size() <= int(cfg["max_rows"]), "中军 fits")
+	for row in d["party_rows"]:
+		check(cfg["party_acts"].has(row["act"]), "中军 act %s" % row["act"])
+		check(cfg["conditions"].has(row["cond"]) and cfg["conditions"].has(row["cond2"]), "中军 conds %s" % str(row))
+		check(row["cond"] != "always", "中军 row has a condition")
+	for tid in d["troop_rows"]:
+		check(db.troops.has(tid), "troop %s" % tid)
+		check(d["troop_rows"][tid].size() <= int(cfg["max_rows"]), "%s fits" % tid)
+		for row in d["troop_rows"][tid]:
+			check(cfg["troop_acts"].has(row["act"]), "%s act %s" % [tid, row["act"]])
+			check(cfg["conditions"].has(row["cond"]) and cfg["conditions"].has(row["cond2"]), "%s conds" % tid)
+			check(row["cond"] != "always", "%s row has a condition" % tid)
+	check(d["rows"].size() >= 10, "the main characters have rows")
+	for cid in d["rows"]:
+		check(db.cards.has(cid), "card %s" % cid)
+		for row in d["rows"][cid]:
+			check(db.cards[cid]["skills"].has(row["skill"]), "%s owns %s" % [cid, row["skill"]])
+			check(cfg["conditions"].has(row["cond"]) and cfg["conditions"].has(row["cond2"]), "%s conds" % cid)
+			check(row["cond"] != "always", "%s row has a condition" % cid)
+
+
+func test_saved_tactics_win_over_the_defaults_per_troop_and_card() -> void:
+	var d := AutoPlayer.default_tactics()
+	var saved := {"preset": "aggro", "troop_rows": {"logistics": []}, "rows": {"machao": [{"skill": "xiliang", "cond": "boss_fight", "cond2": "always"}]}}
+	var t := AutoPlayer.with_defaults(saved)
+	check_eq(t["preset"], "aggro", "the saved preset")
+	check(t["troop_rows"]["logistics"].is_empty(), "a troop the player cleared stays cleared")
+	check_eq(t["troop_rows"]["strategist"], d["troop_rows"]["strategist"], "an untouched troop keeps its default")
+	check_eq(t["rows"]["machao"][0]["cond"], "boss_fight", "the player's own card row")
+	check_eq(t["rows"]["zhaoyun"], d["rows"]["zhaoyun"], "an untouched card keeps its default")
+	check_eq(t["party_rows"], d["party_rows"], "no saved 中军 = the default 中军")

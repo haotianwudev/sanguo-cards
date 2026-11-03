@@ -76,18 +76,25 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 # ---- 军令 ---------------------------------------------------------------------
 
 static func default_tactics() -> Dictionary:
-	## the 中军 rows a new player starts with: the two 换人 rules the old 自动换人 switch used to hide
-	return {"preset": "smart", "troop_rows": {}, "rows": {}, "party_rows": [
-		{"act": "swap_strategist", "cond": "enemy_stance", "cond2": "field_no_magic"},
-		{"act": "swap_logistics", "cond": "party_status", "cond2": "field_no_cleanse"}]}
+	## the 军令 a new player starts with (battle.json tactics.defaults, user call: main characters, troops and the whole army
+	## each get some): every row is conditional, so the preset still plays the ordinary turns
+	var d: Dictionary = GameData.get_db().battle.get("tactics", {}).get("defaults", {})
+	return {"preset": "smart", "party_rows": d.get("party_rows", []).duplicate(true),
+		"troop_rows": d.get("troop_rows", {}).duplicate(true), "rows": d.get("rows", {}).duplicate(true)}
 
 
 static func with_defaults(t: Variant) -> Dictionary:
-	## the saved 军令 (Game.options.tactics) with every missing layer filled from default_tactics (an old options.cfg has fewer keys)
+	## the saved 军令 (Game.options.tactics) over the defaults: a layer the player saved replaces the default, and in the
+	## 兵种 / 武将 layers each troop / card the player never touched keeps its default rows (an empty list = cleared on purpose)
 	var out := default_tactics()
 	if t is Dictionary:
 		for k in out:
-			if t.has(k) and typeof(t[k]) == typeof(out[k]):
+			if not t.has(k) or typeof(t[k]) != typeof(out[k]):
+				continue
+			if t[k] is Dictionary:
+				for key in t[k]:
+					out[k][key] = t[k][key]
+			else:
 				out[k] = t[k]
 	return out.duplicate(true)
 
@@ -225,7 +232,7 @@ static func _row_act(b: Battle, tactics: Dictionary) -> Array:
 			if not u["leader"]["card"]["skills"].has(sid):
 				continue
 			var sk: Dictionary = b.db.skills[sid]
-			if b.usable(u, sk) and row_holds(b, row):
+			if b.usable(u, sk) and row_holds(b, row) and value(b, u, sk) > 0.0:  # never a skill that would do nothing now
 				return [i, sid]
 		for row in troop_rows.get(str(u["leader"]["card"]["troop"]), []):
 			if not row_holds(b, row):
@@ -259,7 +266,7 @@ static func skill_of_kind(b: Battle, u: Dictionary, kind: String) -> String:
 	var best := ""
 	var best_cost := -1
 	for sk in b.skills_of(u):
-		if not b.usable(u, sk) or not skill_kind(sk).has(kind):
+		if not b.usable(u, sk) or not skill_kind(sk).has(kind) or value(b, u, sk) <= 0.0:  # (a heal at full HP does nothing)
 			continue
 		var c := b.cost(u, sk)
 		if best == "" or (kind == "basic" and c < best_cost) or (kind != "basic" and c > best_cost):

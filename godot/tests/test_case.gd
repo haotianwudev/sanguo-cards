@@ -48,9 +48,17 @@ static func expected_value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 
 static func bot_fight(b: Battle) -> String:
 	## Spend AP on the best value-per-AP action until nothing is usable; never defends.
-	## SIM_BOT=tactics plays under the default 军令 (拆招: interrupts, defends against charged blows) instead — to compare.
+	## SIM_BOT=tactics plays under the 拆招 preset (interrupts, defends against charged blows) instead — to compare; + SIM_DEFAULTS=1 adds the default rows.
 	if OS.get_environment("SIM_BOT") == "tactics":
 		var t := {"preset": OS.get_environment("SIM_PRESET") if OS.get_environment("SIM_PRESET") != "" else "smart", "party_rows": [], "rows": {}}
+		var only := OS.get_environment("SIM_DEFAULTS")  # 1: with the default 军令 rows (battle.json tactics.defaults); party_rows / troop_rows / rows: that layer only
+		if only != "":
+			var d := AutoPlayer.with_defaults({"preset": t["preset"]})
+			for k in ["party_rows", "troop_rows", "rows"]:
+				if only == "1" or k in only.split(","):
+					t[k] = d[k]
+			if OS.get_environment("SIM_TROOP") != "":  # SIM_TROOP=<troop>: of the 兵种 layer, only that troop's default rows
+				t["troop_rows"] = {OS.get_environment("SIM_TROOP"): d["troop_rows"].get(OS.get_environment("SIM_TROOP"), [])}
 		var steps := 0
 		while b.result == "" and steps < 2000:
 			steps += 1
