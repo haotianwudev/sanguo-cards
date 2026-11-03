@@ -596,13 +596,13 @@ func _fill_detail() -> void:
 	var opts := {"skills": false}
 	if is_lord:
 		opts["lord_name"] = save.lord_name
-	top.add_child(CardView.make(_sel, Vector2(130, 182), opts))
+	top.add_child(CardView.make(_sel, Vector2(170, 238), opts))
 	var info := VBoxContainer.new()
 	info.add_theme_constant_override("separation", 4)
 	top.add_child(info)
 	var name_l := Kit.title_label(f["name"], Kit.FONT_BIG + 2, "gold")
 	name_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	name_l.custom_minimum_size = Vector2(196, 0)
+	name_l.custom_minimum_size = Vector2(150, 0)
 	info.add_child(name_l)
 	info.add_child(_info_line("兵种", db.troops[f["troop"]]["name"]))
 	if not is_lord:
