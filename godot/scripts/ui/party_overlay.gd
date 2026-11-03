@@ -710,12 +710,8 @@ const DETAIL_CARD := Vector2(196, 274)  # the card in the detail panel (user: bi
 
 
 func _detail_head(title: String, card: Control) -> Array:
-	## the detail panel's head: the name across the top, then the big card with a narrow column of facts beside it.
+	## the detail panel's head: the big card, and beside it a narrow column — the name on top, then the facts (user call).
 	## Returns [the row, the facts column].
-	var name_l := Kit.title_label(title, Kit.FONT_BIG + 2, "gold")
-	name_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	name_l.custom_minimum_size = Vector2(340, 0)
-	_detail.add_child(name_l)
 	var top := HBoxContainer.new()
 	top.add_theme_constant_override("separation", 10)
 	_detail.add_child(top)
@@ -724,6 +720,10 @@ func _detail_head(title: String, card: Control) -> Array:
 	info.add_theme_constant_override("separation", 8)
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(info)
+	var name_l := Kit.title_label(title, Kit.FONT_BIG if title.length() <= 4 else Kit.FONT_BODY + 2, "gold")
+	name_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	name_l.custom_minimum_size = Vector2(130, 0)
+	info.add_child(name_l)
 	return [top, info]
 
 
