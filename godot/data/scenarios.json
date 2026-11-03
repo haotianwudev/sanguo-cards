@@ -1070,7 +1070,7 @@
     "n5_yanxiao": {"name": "泗水码头·盐枭", "turn_limit": 6, "enemy": "n5_yanxiao"},
     "n5_yanxiao_tou": {"name": "泗水码头·盐枭头子", "turn_limit": 10, "enemy": "n5_yanxiao_tou"},
     "n5_yujin": {"name": "曹军后队·于禁", "turn_limit": 10, "enemy": "n5_yujin", "art": "xz_xiahoudun"},
-    "n5_zhangliao": {"name": "小沛城外·张辽", "turn_limit": 10, "enemy": "n5_zhangliao", "art": "bh_wolf2"},
+    "n5_zhangliao": {"name": "小沛城外·张辽", "turn_limit": 10, "enemy": "n5_zhangliao"},
     "n5_gaoshun": {"name": "小沛城下·高顺", "turn_limit": 10, "enemy": "n5_gaoshun", "art": "c4_gaoshun"},
     "n5_canbing": {"name": "小沛城外·吕布残兵", "turn_limit": 6, "enemy": "n5_canbing", "art": "bh_wolf2"},
     "n5_kuibing": {"name": "小沛城外·并州溃兵", "turn_limit": 6, "enemy": "n5_kuibing", "art": "c6_xianzhen"},
