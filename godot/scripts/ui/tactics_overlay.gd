@@ -3,7 +3,8 @@ extends Control
 ## 军令 (v3): how 自动 plays, in three layers (user rule) — 整体 (a preset + 中军 rows: 防御 / 留 AP / 换人 rules),
 ## 兵种 (per troop: a kind of skill, matched to each leader's own), 武将 (per card: a named skill, 留气). Every row has two
 ## conditions that must both hold; rows are tried top to bottom (AutoPlayer.plan). Kept in Game.options.tactics (every save,
-## route and lap). Opened from the battle screen (军令) — `cards` = the card dicts the 武将 tab lists.
+## route and lap). Opened from 整备 (全军军令 / a party slot's 军令 / a card's 军令, via focus()) and from the battle
+## screen (军令) — `cards` = the card dicts the 武将 tab lists.
 
 var cards: Array = []
 var _tab := "party"
@@ -52,6 +53,19 @@ func _ready() -> void:
 	_build()
 
 
+func focus(tab: String, key := "") -> void:
+	## open on a tab with one entry picked: "troop" + a troop id, "card" + a card id (callable before it is added)
+	_tab = tab
+	if tab == "troop" and key != "":
+		_sel_troop = maxi(0, _troops().find(key))
+	elif tab == "card" and key != "":
+		for k in cards.size():
+			if str(cards[k]["id"]) == key:
+				_sel_card = k
+	if is_node_ready():
+		_build()
+
+
 func show_tab(tab: String) -> void:
 	_tab = tab
 	_build()
@@ -74,7 +88,7 @@ func _build() -> void:
 		ch.queue_free()
 	for pair in [["party", "整体"], ["troop", "兵种"], ["card", "武将"]]:
 		var on: bool = _tab == pair[0]
-		var tb := Kit.button(pair[1], "purple" if on else "gray", Kit.FONT_BODY)
+		var tb := Kit.button(pair[1], "gold" if on else "gray", Kit.FONT_BODY)
 		tb.custom_minimum_size = Vector2(110, 48)
 		tb.pressed.connect(func(): show_tab(pair[0]))
 		_tabs.add_child(tb)

@@ -121,7 +121,7 @@ func _ready() -> void:
 	# bottom bar
 	_msg = Kit.label("", Kit.FONT_BODY, "amber")
 	_msg.position = Vector2(28, 664)
-	_msg.size = Vector2(760, 40)
+	_msg.size = Vector2(600, 40)
 	add_child(_msg)
 	var auto := Kit.button("自动编成", "blue")
 	auto.position = Vector2(830, 652)
@@ -133,6 +133,13 @@ func _ready() -> void:
 		_msg.text = "已按战力自动编成（大招已用的武将让给大招还在的，不换兵卡）。"
 		_rebuild())
 	auto.visible = not swap_mode
+	var all_t := Kit.button("全军军令", "purple")
+	all_t.position = Vector2(640, 652)
+	all_t.custom_minimum_size = Vector2(176, 50)
+	all_t.size = Vector2(176, 50)
+	all_t.pressed.connect(_open_tactics.bind("party", ""))
+	all_t.visible = not swap_mode
+	add_child(all_t)
 	add_child(auto)
 	var done := Kit.button("返回战斗" if swap_mode else "完成", "green", Kit.FONT_BODY + 4)
 	done.position = Vector2(1040, 652)
@@ -392,8 +399,39 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 		b.pressed.connect(_tap.bind("relic:" + rid))
 		_dnd(b, {"kind": "relic", "id": rid}, "slot:" + cid)
 		items.add_child(b)
+	if not swap_mode:  # this unit's 军令 (the 兵种 layer: its troop)
+		var tr: String = str(ld["card"]["troop"])
+		var tb := Kit.tool_button("军令" + _rows_note(AutoPlayer.with_defaults(Game.options.get("tactics", {}))["troop_rows"].get(tr, [])))
+		tb.add_theme_font_size_override("font_size", 13)
+		tb.custom_minimum_size = Vector2(0, 26)
+		for st in ["normal", "hover", "pressed", "disabled"]:
+			var sb: StyleBoxFlat = tb.get_theme_stylebox(st)
+			sb.content_margin_top = 0
+			sb.content_margin_bottom = 0
+			sb.content_margin_left = 8
+			sb.content_margin_right = 8
+		tb.tooltip_text = "%s队 的军令（兵种）" % GameData.get_db().troops[tr]["name"] if tr != "lord" else "主公队 的军令"
+		tb.pressed.connect(_open_tactics.bind("troop", tr))
+		items.add_child(tb)
 	box.add_child(items)
 	return box
+
+
+func _rows_note(rows: Array) -> String:
+	return (" %d" % rows.size()) if not rows.is_empty() else ""
+
+
+func _open_tactics(tab: String, key: String) -> void:
+	## 军令 from 整备: the leaders on the field (and the card asked about) in the 武将 tab
+	var db := GameData.get_db()
+	var cards: Array = Game.save.party_leaders().map(func(ld): return ld["card"])
+	if tab == "card" and not cards.any(func(c): return str(c["id"]) == key):
+		cards.append(Game.save.leader_for(key)["card"] if db.cards.has(key) else db.cards.get(key, {}))
+	var o := TacticsOverlay.new()
+	o.cards = cards
+	o.focus(tab, key)
+	o.tree_exited.connect(func(): if is_inside_tree(): _rebuild())  # the counts on the buttons
+	add_child(o)
 
 
 func _relic_card(rid: String) -> Control:
@@ -642,6 +680,13 @@ func _fill_detail() -> void:
 		_detail.add_child(go)
 		_detail.move_child(go, 0)  # on top, not under the skills (user call)
 		return
+	if not (not is_lord and db.cards[_sel]["soldier"]):  # a general (or the lord): its own 军令 (the 武将 layer)
+		var cid := str(f["id"])
+		var n: int = AutoPlayer.with_defaults(Game.options.get("tactics", {}))["rows"].get(cid, []).size()
+		var tb := Kit.button("%s 的军令%s" % ["主公" if is_lord else str(f["name"]).split("·")[0], ("（%d 条）" % n) if n > 0 else "", ], "purple")
+		tb.custom_minimum_size = Vector2(340, 44)
+		tb.pressed.connect(_open_tactics.bind("card", cid))
+		_detail.add_child(tb)
 	var act: Button
 	if is_lord:
 		act = Kit.button("主公固定出阵", "blue")

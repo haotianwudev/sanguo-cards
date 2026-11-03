@@ -635,7 +635,11 @@ func demo(name: String) -> void:
 					if OS.get_cmdline_user_args().has("--relics"):  # the 宝物 tab, 古锭刀 selected
 						o._sel = "relic:gudingdao"
 						o._filter = "relic"
-					o._rebuild()).call_deferred()
+					o._rebuild()
+					for a in OS.get_cmdline_user_args():  # --tactics=party|troop:<troop>|card:<card id>: 军令 opened from 整备
+						if a.begins_with("--tactics="):
+							var v := a.trim_prefix("--tactics=").split(":")
+							o._open_tactics(v[0], v[1] if v.size() > 1 else "")).call_deferred()
 		"interlude":  # a ？小故事 in the reader: --id=<story id> (default the first), --line=N steps N lines in,
 			# --nocg drops its picture (the portraits side by side, the speaker lit), --log opens 记录, --hide hides the text
 			save.quests_cleared = ["prologue", "taodong"]
