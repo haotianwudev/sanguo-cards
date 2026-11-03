@@ -1024,7 +1024,8 @@ func _show_square(s: Dictionary) -> void:
 		_story_read = ""
 	if _story_read != "":  # back from 整备 (or the party screen) with the lines already read: straight to the options
 		talking = false
-	if talking or fight_ahead:  # a face for whoever is speaking, changed line by line (before a fight: the enemy's at the end)
+	if (talking and _any_face(Kit.speakers(raw_lines, s.get("portraits", [])))) or (fight_ahead and _enemy_has_face(s)):
+		# a face for whoever is speaking, changed line by line (before a fight: the enemy's at the end); no faces drawn → no frame
 		_make_face_slot(outer, Vector2(128, 128) if art != null else Vector2(172, 230))
 	outer.add_child(col)
 	var text := RichTextLabel.new()
@@ -1245,6 +1246,22 @@ func _make_face_slot(parent: Control, at: Vector2) -> void:
 	_dlg_name.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_dlg_name.visible = false
 	stack.add_child(_dlg_name)
+
+
+func _any_face(keys: Array) -> bool:
+	## does anyone speaking in these lines have a portrait drawn?
+	for k in keys:
+		var key := str(k)
+		if key == "lord":
+			key = Game.save.lord()["person"]
+		if key != "" and Kit.portrait(key, 1.0, 2.4) != null:
+			return true
+	return false
+
+
+func _enemy_has_face(s: Dictionary) -> bool:
+	var sc: Dictionary = GameData.get_db().scenarios.get(Quests.battle_here(q, Game.save).get("battle", ""), {})
+	return not sc.is_empty() and Kit.enemy_portrait_key(GameData.get_db().enemies[sc["enemy"]]) != ""
 
 
 func _near_speaker(i: int) -> String:
