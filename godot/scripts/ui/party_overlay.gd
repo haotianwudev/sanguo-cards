@@ -261,15 +261,25 @@ func _rebuild() -> void:
 			"soldier": return c["soldier"]
 		return c["troop"] == _filter)
 	var power := {}
+	var rarity := {}
 	for cid in ids:
 		power[cid] = SaveData.leader_power(save.leader_for(cid))
+		rarity[cid] = str(db.cards[cid]["rarity"])
+	if _filter == "lord" or _filter == "all":  # the plain lord and every lord card handed out sort in with the rest
+		for fid in ["base"] + save.route_lord_forms():
+			var f: Dictionary = save.lord_with_form("" if fid == "base" else fid)
+			var key: String = "lordform:" + str(fid)
+			ids.append(key)
+			power[key] = SaveData.leader_power(f)
+			rarity[key] = str(f.get("rarity", "R"))
 	var rank := {"SSR": 5, "SR": 4, "R": 3, "C": 2, "N": 1}
 	ids.sort_custom(func(a, b):
-		if _sort == "rarity" and rank.get(db.cards[a]["rarity"], 0) != rank.get(db.cards[b]["rarity"], 0):
-			return rank.get(db.cards[a]["rarity"], 0) > rank.get(db.cards[b]["rarity"], 0)
+		if _sort == "rarity" and rank.get(rarity[a], 0) != rank.get(rarity[b], 0):
+			return rank.get(rarity[a], 0) > rank.get(rarity[b], 0)
 		return power[a] > power[b])
-	if _filter == "lord" or _filter == "all":  # the plain lord and every lord card handed out: tap one to see it, tap again to use it
-		for fid in ["base"] + save.route_lord_forms():
+	for cid in ids:
+		if str(cid).begins_with("lordform:"):  # a lord card: tap one to see it, tap again to use it
+			var fid := str(cid).substr(9)
 			var lv := CardView.make("lord", Vector2(108, 151), {"skills": false, "form": "" if fid == "base" else fid, "tier": _form_card_tier(fid)})
 			lv.set_state(false, _sel == "lordform:" + fid)
 			lv.note = "使用中" if save.lord_form() == ("" if fid == "base" else fid) else ""
@@ -278,7 +288,7 @@ func _rebuild() -> void:
 			lv.long_press = true  # in the scrolling pool a touch drag starts with a long press; a swipe scrolls
 			_dnd(lv, {"kind": "form", "id": fid}, "pool")
 			_grid.add_child(lv)
-	for cid in ids:
+			continue
 		var c: Dictionary = db.cards[cid]
 		var v := CardView.make(cid, Vector2(108, 151), {"skills": false, "count": save.copies(cid) if c["soldier"] else 0})
 		v.note = "大招已用" if not save.spent_skills(cid).is_empty() else ""
