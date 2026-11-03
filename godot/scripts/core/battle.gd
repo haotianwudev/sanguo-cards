@@ -434,7 +434,7 @@ func _drop_stance() -> Array:
 		return []
 	var nm := str(enemy["stance"]["name"])
 	enemy["stance"] = {}
-	_ev({"t": "stance_off"})
+	_ev({"t": "stance_off", "broken": true})
 	return ["  [color=gold]%s 的【%s】被打散了[/color]" % [enemy["data"]["name"], nm]]
 
 
@@ -684,7 +684,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
 				d = _land(d, kind, pierce)
 				combo += 1
-				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": pierce, "crit": crit, "guard": on_guard})
+				_ev({"t": "hit", "dmg": d, "combo": combo, "kind": kind, "hp": enemy["hp"], "pierce": pierce, "crit": crit, "guard": on_guard, "vs": fire})
 				log.append("  %s 受到 %d 伤害（%d 连击）%s" % [target_name, d, combo, "[color=gold]　暴击！[/color]" if crit else ""])
 				if on_guard and enemy["guard"].is_empty():
 					log.append("  [color=gold]前卫被击溃！[/color]")
@@ -807,6 +807,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 		"loot":  # 劫掠: every use raises the odds of a bigger haul when the fight is won
 			loot_chest = minf(1.0, loot_chest + float(eff["chest"]))
 			loot_card = minf(1.0, loot_card + float(eff["card"]))
+			_ev({"t": "loot", "chest": loot_chest, "card": loot_card})
 			return ["  战利品：多一个宝箱 %d%%，宝箱多一张卡 %d%%" % [int(round(loot_chest * 100)), int(round(loot_card * 100))]]
 		"ap":
 			ap = mini(ap_max(), ap + int(eff["amount"]))

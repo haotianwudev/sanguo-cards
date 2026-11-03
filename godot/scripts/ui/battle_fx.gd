@@ -95,11 +95,19 @@ static func ring(parent: Control, at: Vector2, color: Color, r0 := 12.0, r1 := 9
 	_free_after(p, secs + 0.05)
 
 
-static func hit(parent: Control, at: Vector2, kind: String, combo: int, dmg_ratio: float, pierce := false, boosted := false) -> void:
+static func hit(parent: Control, at: Vector2, kind: String, combo: int, dmg_ratio: float, pierce := false, boosted := false, elem := "") -> void:
 	## our blow landing on the enemy: 物理 = crossing slashes (the combo adds the cross), 法术 = violet burst + rune ring,
 	## 穿甲 = one long thin lance streak; a big hit (share of the enemy's max HP) adds a shockwave
 	var p := at + Vector2(randf_range(-34, 34), randf_range(-26, 26))
-	if kind == "magic":
+	if kind == "magic" and elem == "fire":  # 火计 / 业火: a red-gold blaze instead of the violet ring
+		embers(parent, Rect2(p - Vector2(90, 70), Vector2(180, 140)), EMBER, 26, 110.0, true)
+		burst(parent, p, Color(1.0, 0.6, 0.15), 14, 16.0, 120.0, 5.0)
+		ring(parent, p, GOLD, 10.0, 96.0, 0.3, 5)
+	elif kind == "magic" and elem == "poison":  # 施毒: green-violet miasma
+		burst(parent, p, Color(0.55, 1.0, 0.45), 12, 14.0, 100.0, 4.0)
+		ring(parent, p, Color(0.45, 0.95, 0.35), 10.0, 82.0, 0.34, 5)
+		ring(parent, p, VIOLET, 6.0, 52.0, 0.24, 3)
+	elif kind == "magic":
 		burst(parent, p, VIOLET, 12, 14.0, 100.0, 4.0)
 		ring(parent, p, Color(0.85, 0.75, 1.0), 10.0, 78.0, 0.32, 4)
 		ring(parent, p, VIOLET, 6.0, 52.0, 0.22, 3)
@@ -602,6 +610,21 @@ static func cracks(parent: Control, rect: Rect2, color: Color, n := 5) -> Node2D
 		ln.points = pts
 		holder.add_child(ln)
 	return holder
+
+
+static func crit_star(parent: Control, at: Vector2) -> void:
+	## 暴击: a gold four-point cross flare with a white core ring
+	slash(parent, at, Color(1.0, 0.95, 0.7), 0.0, 300.0, 10.0)
+	slash(parent, at, Color(1.0, 0.95, 0.7), 90.0, 220.0, 10.0)
+	slash(parent, at, GOLD, 45.0, 150.0, 6.0, 0.03)
+	slash(parent, at, GOLD, -45.0, 150.0, 6.0, 0.03)
+	ring(parent, at, Color(1, 1, 1, 0.9), 8.0, 70.0, 0.2, 5)
+
+
+static func guard_spark(parent: Control, at: Vector2) -> void:
+	## a blow taken by the 前卫: metal-on-metal sparks, short and white-blue
+	burst(parent, at, STEEL, 12, 6.0, 70.0, 3.0, 0.18)
+	burst(parent, at, Color(1.0, 0.85, 0.4), 6, 4.0, 46.0, 2.0, 0.14)
 
 
 static func glow(parent: Node, rect: Rect2, color: Color) -> Panel:

@@ -831,6 +831,10 @@ func _sync_fx() -> void:
 	if e["charging"] != "":
 		var cr := _enemy_rect() if _has_cg else Rect2(_enemy_art.global_position - global_position, _enemy_art.size)
 		want["e_charge"] = func(): return BattleFx.charge_aura(self, cr, not _has_cg)
+	if not e["stance"].is_empty():
+		want["e_stance"] = func(): return BattleFx.glow(self, _enemy_rect(), Color(0.45, 0.95, 0.9, 0.8))
+	if b.party_hp * 4 < b.party_max:  # 残血: the party bar pulses red until healed
+		want["p_low"] = func(): return BattleFx.glow(self, _party_rect(), Color(1.0, 0.2, 0.15))
 	if b.party_burn["turns"] > 0:
 		want["p_burn"] = func(): return BattleFx.embers(self, _party_rect(), BattleFx.EMBER, 26, 50.0)
 	if b.party_poison["turns"] > 0:
@@ -904,6 +908,8 @@ func _sync_badges() -> void:
 		row.append(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)))
 	if e["charging"] != "":
 		row.append(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false))
+	if not e["stance"].is_empty():
+		row.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))))
 	var at := _enemy_hp.global_position - global_position + Vector2(_enemy_hp.size.x - 40.0, -40.0)
 	for k in row.size():
 		row[k].position = at - Vector2(k * 38.0, 0)
@@ -917,6 +923,8 @@ func _sync_badges() -> void:
 		party.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]))
 	if b.ap_drain > 0:
 		party.append(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain))
+	if b.loot_chest > 0.0:  # 劫掠: the chance of a second chest so far (%)
+		party.append(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(b.loot_chest * 100))))
 	var pr := _party_rect()
 	for k in party.size():
 		party[k].position = Vector2(pr.end.x - 40.0 - k * 38.0, pr.position.y - 20.0)
@@ -972,7 +980,7 @@ func _card_lunge(v: CardView, big := false) -> void:
 
 func _enemy_move_tag(move_name: String) -> void:
 	## 敌方招式条: a sleek crimson-bordered plaque popping up below the enemy so every move is readable without the log
-	if move_name == "" or move_name == "火":
+	if move_name == "" or move_name == "火" or move_name == "毒":
 		return
 	var l := Kit.label("【%s】" % move_name, Kit.FONT_BIG)
 	l.add_theme_color_override("font_color", Color(1.0, 0.92, 0.82))
@@ -992,6 +1000,9 @@ func _enemy_move_tag(move_name: String) -> void:
 	tw.tween_callback(l.queue_free)
 
 
+var _act_elem := ""  # the acting skill's element (fire / poison): its magic blows change colour
+
+
 func _play(events: Array) -> void:
 	_busy = true
 	_refresh()
@@ -1003,6 +1014,8 @@ func _play(events: Array) -> void:
 				var used: Dictionary = GameData.get_db().skills.get(str(ev.get("skill", "")), {})
 				_card_lunge(v, _is_ult(used) or _boost_hits)
 				_sfx_act(ev)
+				var kinds: Array = used.get("effects", []).map(func(e): return str(e.get("type", "")))
+				_act_elem = "fire" if ("burn" in kinds or "火" in str(used.get("name", ""))) else "poison" if "poison" in kinds else ""
 				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] in ["attack", "magic"])  # 大招: physical or magic ultimate blows
 				if _is_ult(used):
 					await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
@@ -1028,8 +1041,13 @@ func _play(events: Array) -> void:
 					var cs: int = int(ev["slot"])
 					_card_lunge(_cards[cs], false)
 					Kit.float_text(self, _card_rect(cs).get_center() + Vector2(0, -54), "反击！", Color(0.45, 0.95, 0.9), 32)
-				Kit.shake(_enemy_art, 5.0 if is_rider else 9.0, 0.14 if is_rider else 0.2)
-				_flash(_enemy_art, Color(1.4, 0.9, 1.7) if is_rider else Color(1.6, 0.6, 0.6))
+				var on_guard: bool = ev.get("guard", false) and _guard_row.visible
+				if on_guard:  # the 前卫 takes the blow: sparks on its bar, the boss stands still
+					Kit.shake(_guard_row, 6.0, 0.16)
+					BattleFx.guard_spark(self, _guard_row.global_position - global_position + _guard_row.size / 2.0)
+				else:
+					Kit.shake(_enemy_art, 5.0 if is_rider else 9.0, 0.14 if is_rider else 0.2)
+					_flash(_enemy_art, Color(1.4, 0.9, 1.7) if is_rider else Color(1.6, 0.6, 0.6))
 				var big: bool = not is_rider and ev["dmg"] > b.enemy["max_hp"] * 0.08
 				var ratio := float(ev["dmg"]) / maxf(1.0, float(b.enemy["max_hp"]))
 				_sfx_hit(ev, big)
@@ -1045,7 +1063,7 @@ func _play(events: Array) -> void:
 								BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
 							Kit.shake(self, 22.0, 0.3)
 						else:
-							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits)
+							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits, _act_elem)
 					"counter":
 						BattleFx.counter(self, _enemy_center())
 					"burn":
@@ -1063,11 +1081,19 @@ func _play(events: Array) -> void:
 						Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
 				if crit_hit:
 					Kit.shake(self, 14.0, 0.2)
+					BattleFx.scale = _enemy_fx_scale()
+					BattleFx.crit_star(self, _enemy_center())
+					BattleFx.scale = 1.0
+					await _hit_stop(0.05)
+				if float(ev.get("vs", 1.0)) > 1.01 and not is_rider:  # 追击: the combo worked (vs broken / burning / stunned …)
+					Kit.float_text(self, _enemy_center() + Vector2(0, -92), "破绽追击！×%s" % str(snappedf(float(ev["vs"]), 0.1)), Color(1.0, 0.6, 0.25), 32)
+					BattleFx.ring(self, _enemy_center(), Color(1.0, 0.6, 0.25), 20.0, 170.0, 0.34, 4)
 				Kit.tween_bar(_enemy_hp, ev["hp"])
 				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
 				if ev["t"] == "hit" and not is_rider and ev["combo"] >= 2:
 					_combo_label.text = "%d 连击 +%d%%" % [ev["combo"], ev["combo"] * 10]
-					Kit.pop(_combo_label, 1.3)
+					_combo_heat(int(ev["combo"]))
+					Kit.pop(_combo_label, 1.3 if ev["combo"] < 8 else 1.5)
 				if int(ev.get("hp", 1)) <= 0:
 					BattleFx.scale = _enemy_fx_scale()
 					BattleFx.kill_blow(self, _enemy_center())
@@ -1081,6 +1107,23 @@ func _play(events: Array) -> void:
 				if _ult_hits and ev["t"] == "hit" and not is_rider:
 					await get_tree().create_timer(0.22).timeout  # let the big cut finish before the next blow
 				await get_tree().create_timer(0.07 if is_rider else 0.16).timeout
+			"resist_down":  # 射穿甲缝: a steel arrow streak through the armour, 双抗 down
+				Sfx.play("break")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.slash(self, _enemy_center(), BattleFx.STEEL, -12.0, 420.0, 6.0)
+				BattleFx.burst(self, _enemy_center(), Color(0.45, 0.8, 0.95), 12, 10.0, 96.0, 3.0, 0.24)
+				BattleFx.scale = 1.0
+				_flash(_enemy_art, Color(0.8, 1.2, 1.6))
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "甲缝洞穿　双抗 -%d%%" % int(round(float(ev["amount"]) * 100)), Color(0.55, 0.85, 1.0), 34)
+				_refresh()
+				await get_tree().create_timer(0.3).timeout
+			"loot":  # 劫掠: gold scatters, the haul odds float up
+				Sfx.play("buff")
+				BattleFx.burst(self, _enemy_center(), BattleFx.GOLD, 16, 12.0, 130.0, 5.0, 0.32)
+				BattleFx.embers(self, _enemy_rect(), BattleFx.GOLD, 18, 80.0, true)
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "劫掠！宝箱 %d%%　多卡 %d%%" % [int(round(float(ev["chest"]) * 100)), int(round(float(ev["card"]) * 100))], Kit.c("gold"), 32)
+				_refresh()
+				await get_tree().create_timer(0.3).timeout
 			"burn_on":
 				Sfx.play("burn")
 				BattleFx.scale = _enemy_fx_scale()
@@ -1210,8 +1253,8 @@ func _play(events: Array) -> void:
 				_refresh()
 				await get_tree().create_timer(0.26).timeout
 			"enemy_hit":
-				var is_fire: bool = ev.get("move", "") == "火"
 				var mv_name := str(ev.get("move", ""))
+				var is_fire: bool = mv_name in ["火", "毒"]  # a burn / poison tick on us: no move plaque, no lunge, no war cry
 				if not is_fire and _enemy_big_move(mv_name):  # the wound-up 大招 lands: cut-in, and it roars
 					var ed: Dictionary = b.enemy.get("data", {})
 					Sfx.voice(_enemy_voices(), ["roar", "attack"])
@@ -1239,8 +1282,12 @@ func _play(events: Array) -> void:
 					await get_tree().create_timer(0.04).timeout
 				Sfx.play("burn" if is_fire else "enemy_hit")
 				Kit.shake(self, 10.0, 0.22)
-				_flash(_party_box, Color(1.6, 0.6, 0.6))
-				if is_fire:
+				if mv_name != "毒":
+					_flash(_party_box, Color(1.6, 0.6, 0.6))
+				if mv_name == "毒":
+					BattleFx.poison_cloud(self, _party_rect())
+					_flash(_party_box, Color(0.7, 1.5, 0.8))
+				elif is_fire:
 					BattleFx.flame_lick(self, _party_rect())
 				else:
 					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
@@ -1265,6 +1312,11 @@ func _play(events: Array) -> void:
 					_enemy_shouted_this_turn = true
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "狂暴！", Kit.c("red"), 44)
 				_flash(_enemy_art, Color(1.8, 0.5, 0.5))
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.ring(self, _enemy_center(), BattleFx.BLOOD, 20.0, 200.0, 0.4, 7)
+				BattleFx.embers(self, _enemy_rect(), Color(1.0, 0.25, 0.2, 0.9), 22, 90.0, true)
+				BattleFx.scale = 1.0
+				_refresh()
 				await get_tree().create_timer(0.4).timeout
 			"enemy_heal":
 				Sfx.play("heal")
@@ -1314,10 +1366,22 @@ func _play(events: Array) -> void:
 				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
 				await get_tree().create_timer(0.3).timeout
 			"stance_off":
+				if ev.get("broken", false):  # 眩晕 / 破招 shattered it (not just run out)
+					Sfx.play("break")
+					BattleFx.scale = _enemy_fx_scale()
+					BattleFx.slash(self, _enemy_center(), Color(0.45, 0.95, 0.9), -38.0, 260.0, 10.0)
+					BattleFx.burst(self, _enemy_center(), Color(0.82, 1.0, 0.98), 16, 14.0, 150.0, 4.0, 0.3)
+					BattleFx.scale = 1.0
+					Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势击破！", Kit.c("gold"), 42)
+					Kit.shake(self, 10.0, 0.2)
+					await get_tree().create_timer(0.35).timeout
 				_refresh()
 			"guard_on":
 				Sfx.play("charge")
 				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "前卫：%s！" % ev["name"], Kit.c("amber"), 40)
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.shield_wall(self, _enemy_rect())
+				BattleFx.scale = 1.0
 				_refresh()
 				Kit.pop(_guard_row, 1.1)
 				await get_tree().create_timer(0.45).timeout
@@ -1327,6 +1391,9 @@ func _play(events: Array) -> void:
 			"guard_down":
 				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "%s 溃散！" % ev["name"], Kit.c("gold"), 40)
 				Kit.shake(self, 10.0, 0.2)
+				var gc := _guard_row.global_position - global_position + _guard_row.size / 2.0
+				BattleFx.ring(self, gc, BattleFx.STEEL, 10.0, 180.0, 0.36, 6)
+				BattleFx.burst(self, gc, Color(1.0, 0.85, 0.4), 14, 10.0, 120.0, 4.0, 0.3)
 				_refresh()
 				await get_tree().create_timer(0.3).timeout
 			"round":
@@ -1447,13 +1514,15 @@ func _cutin(who_name: String, key: String, move_name: String, enemy_side: bool, 
 	layer.add_child(frame)
 	var pic := TextureRect.new()
 	pic.texture = Kit.portrait(key, 0.8, 3.2) if key != "" else null
+	if pic.texture == null:  # no portrait drawn: no empty gold frame sliding across
+		frame.visible = false
+		pic.visible = false
 	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	pic.size = Vector2(420, 525)
 	pic.position = Vector2(xs[0] + 6, 150)
 	pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	layer.add_child(pic)
-	var pt := pic.create_tween()
 	for node in [frame, pic]:
 		var off: float = 0.0 if node == frame else 6.0
 		var tw: Tween = node.create_tween()
@@ -1470,6 +1539,7 @@ func _cutin(who_name: String, key: String, move_name: String, enemy_side: bool, 
 	layer.add_child(who)
 	who.create_tween().tween_property(who, "modulate:a", 1.0, 0.2).set_delay(0.2)
 	var name_l := Kit.label(move_name, 96)
+	Kit.calligraphy(name_l, 96, 4, 16)
 	name_l.add_theme_color_override("font_color", Color(1.0, 0.35, 0.3) if enemy_side else Kit.c("gold"))
 	name_l.add_theme_constant_override("outline_size", 16)
 	name_l.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -1493,6 +1563,9 @@ func _cutin(who_name: String, key: String, move_name: String, enemy_side: bool, 
 	layer.add_child(white)
 	white.create_tween().tween_property(white, "color:a", 0.0, 0.3)
 	Kit.shake(self, 16.0, 0.4)
+	var sc := name_l.position + name_l.size / 2.0
+	BattleFx.burst(layer, sc, Kit.c("gold"), 18, 40.0, 260.0, 4.0, 0.4)
+	BattleFx.embers(layer, Rect2(sc - Vector2(300, 60), Vector2(600, 120)), BattleFx.EMBER, 30, 120.0, true)
 	await get_tree().create_timer(0.85).timeout
 	# sweep everything off; the hits start while it fades
 	var out := layer.create_tween()
@@ -1532,8 +1605,15 @@ func _sfx_act(ev: Dictionary) -> void:
 	var guard_voice := str(Sfx.voice_defaults.get("guard", "")) if role == "male" else ""
 	Sfx.voice([str(leader_card.get("voice", "")), troop_voice, guard_voice, str(Sfx.voice_defaults.get(role, role))], moments)
 
-	# 配合兵刃破风声，让打击手感扎实
-	Sfx.play("slash")
+	# 出招声按技能分：兵刃破风（攻击 / 打断）、治疗、守御、法术（命中时另有法术声）、其余增益
+	if "attack" in kinds or "interrupt" in kinds:
+		Sfx.play("slash")
+	elif "heal" in kinds or "cleanse" in kinds:
+		Sfx.play("heal")
+	elif "guard" in kinds or "counter" in kinds:
+		Sfx.play("guard")
+	elif not "magic" in kinds:
+		Sfx.play("buff")
 
 
 func _sfx_hit(ev: Dictionary, big: bool) -> void:
@@ -1552,6 +1632,32 @@ func _sfx_hit(ev: Dictionary, big: bool) -> void:
 			elif big:
 				key = "hit_heavy"
 			Sfx.play(key, 1.0 + 0.04 * minf(float(ev.get("combo", 1)) - 1.0, 8.0))
+
+
+func _hit_stop(secs: float) -> void:
+	## 顿帧: the world nearly freezes for a beat (skipped headless)
+	if DisplayServer.get_name() == "headless":
+		return
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(secs, true, false, true).timeout
+	Engine.time_scale = 1.0
+
+
+func _combo_heat(n: int) -> void:
+	## the combo counter warms up: amber → orange (5) → red-gold (8) → red with sparks (10+)
+	var col := Kit.c("amber")
+	if n >= 10:
+		col = Color(1.0, 0.3, 0.2)
+	elif n >= 8:
+		col = Color(1.0, 0.5, 0.2)
+	elif n >= 5:
+		col = Color(1.0, 0.72, 0.25)
+	_combo_label.add_theme_color_override("font_color", col)
+	_combo_label.add_theme_constant_override("outline_size", 4 if n >= 5 else 0)
+	_combo_label.add_theme_color_override("font_outline_color", Color(0.3, 0.05, 0.0))
+	if n >= 8:
+		var c := _combo_label.global_position - global_position + _combo_label.size / 2.0
+		BattleFx.burst(self, c, Color(1.0, 0.6, 0.2), 8 if n < 10 else 12, 6.0, 50.0, 2.0, 0.22)
 
 
 func _flash(node: CanvasItem, color: Color) -> void:

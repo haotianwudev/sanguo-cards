@@ -64,6 +64,8 @@ only `_centre_shade()` behind the menu.
 UI icons (badges, map squares, relics, card back, stat/skill icons) are generated placeholders from `tools/generate_ui_assets.py` (the map token is drawn art now, see *Map screen*);
 once any is replaced by drawn art, don't rerun that script — it overwrites them all.
 
+**Battle feedback (2026-11-02):** every mechanic event has a show in `BattleScreen._play`: `resist_down` (steel streak + 「双抗 -X%」), `loot` (gold + odds; party badge 掠 = second-chest %), `stance_off` with `broken` (「架势击破！」; plain expiry is silent), enemy badge 反 + teal glow while a stance is up, `guard_on` shield wall, hits with `guard` spark on the 前卫 bar (boss art stays still), `guard_down` shockwave, `enemy_rage` blood ring. Our poison tick is `enemy_hit` with move 「毒」 and, like 「火」, gets no move plaque / lunge / war cry (poison cloud instead). Hit events carry `vs` (the 追击 multiplier) → 「破绽追击！×N」. Crit = `BattleFx.crit_star` + 50 ms hit-stop (`_hit_stop`, Engine.time_scale, skipped headless). Magic hits take the acting skill's element (`_act_elem`: burn / 火 name → fire, poison → green). Party HP < 25% → red pulsing glow. Combo label warms at 5 / 8 / 10 (`_combo_heat`). Cut-in move names are 文楷 with sparks; no portrait → no empty frame. `_sfx_act` picks slash / heal / guard / buff by the skill's effects (magic: only its hit sound).
+
 Android APK (debug, arm64; preset in `godot/export_presets.cfg`, templates in `%APPDATA%/Godot/export_templates/4.7.2.stable`,
 SDK / JDK / debug keystore set in the editor settings):
 
