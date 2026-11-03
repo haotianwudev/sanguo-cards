@@ -1048,7 +1048,7 @@ func test_every_sr_general_has_three_skills() -> void:
 
 
 func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
-	## user rule: an SSR card (general or lord card) brings three skills, one of them a once-only 大招 of 5+ AP that hits hard
+	## user rule: an SSR card (general or lord card) brings three skills, one of them a once-only 大招 of 5+ AP (at least the weak 大招 level)
 	var db := GameData.get_db()
 	var seen := 0
 	for cid in db.cards:
@@ -1069,7 +1069,8 @@ func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
 		check(not ult.is_empty(), cid + " has a once-only 大招 of 5+ AP")
 		for sid in ult:
 			if not db.skills[sid]["special"]:
-				check(_attack_value(db.skills[sid]) >= 15.0, "%s: %s is strong enough (%.1f)" % [cid, sid, _attack_value(db.skills[sid])])
+				var floor_v := 1.2 * float(db.skills[sid]["cost"])  # user rule 2026-11-02: a weak 大招 = 1.2 per AP (5 AP → 6); 温侯画戟 is normal, 方天乱舞 strong
+				check(_attack_value(db.skills[sid]) >= floor_v, "%s: %s is strong enough (%.1f, wants >= %.1f)" % [cid, sid, _attack_value(db.skills[sid]), floor_v])
 	check(seen >= 5, "the SSR cards were found")
 
 
