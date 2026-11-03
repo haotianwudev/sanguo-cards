@@ -227,8 +227,7 @@ func _build() -> void:
 		_add(frame, Vector2.ZERO, Vector2(w, card_h))
 
 	# name, engraved on the frame's plate (style per frame in ui.json); a variant (孙策·中年) gets a tag
-	var full: String = fighter["name"]
-	var parts := full.split("·", true, 1)
+	var parts: Array = Kit.split_name(str(fighter["name"]))
 	var main_name: String = parts[0]
 	var plate := Rect2(win.position.x, win.end.y + 2, win.size.x, 30)
 	var style := Kit.name_style("none")
@@ -252,7 +251,7 @@ func _build() -> void:
 	nm.add_theme_color_override("font_color", Color(style["color"]))
 	if style.has("outline"):
 		nm.add_theme_color_override("font_outline_color", Color(style["outline"]))
-		nm.add_theme_constant_override("outline_size", maxi(3, fs / 5))
+		nm.add_theme_constant_override("outline_size", maxi(4, fs / 4))
 	if style.has("shadow"):
 		nm.add_theme_color_override("font_shadow_color", Color(style["shadow"], 0.85))
 		nm.add_theme_constant_override("shadow_offset_x", 0)
@@ -260,7 +259,7 @@ func _build() -> void:
 	nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_add(nm, plate.position - Vector2(8, 2), plate.size + Vector2(16, 4))
-	if parts.size() > 1:
+	if parts[1] != "":
 		var tag := Label.new()
 		tag.text = parts[1]
 		tag.add_theme_font_override("font", Kit.name_font(14, 1))
@@ -268,7 +267,7 @@ func _build() -> void:
 		tag.add_theme_color_override("font_color", Color("#ffe7a0"))
 		tag.add_theme_stylebox_override("normal", Kit.box(Color(0.1, 0.06, 0.02, 0.78), 6, 1, Color("#c9a14a"), 3))
 		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		var tw := 18.0 * parts[1].length() + 14
+		var tw := 18.0 * str(parts[1]).length() + 14
 		# straddles the top edge of the portrait window, on the frame, clear of the figure's head
 		_add(tag, Vector2(win.position.x + (win.size.x - tw) / 2, win.position.y - 13), Vector2(tw, 22))
 
@@ -332,9 +331,17 @@ func _build() -> void:
 			_add(chip, Vector2(8, y), Vector2(w - 16, 22))
 			y += 26
 	if note != "":
-		var n := Kit.label(note, 15, "gold")
+		# a solid tag across the portrait (it used to sit on the name plate in gold and neither could be read)
+		var n := Label.new()
+		n.text = note
+		n.add_theme_font_size_override("font_size", 15)
+		n.add_theme_color_override("font_color", Color.WHITE)
+		var nb := Kit.c("red")
+		nb.a = 0.92
+		n.add_theme_stylebox_override("normal", Kit.box(nb, 6, 1, Color("#ffd27a"), 2))
 		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_add(n, Vector2(0, size.y - 22), Vector2(w, 22))
+		n.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_add(n, Vector2(w * 0.12, card_h * 0.42), Vector2(w * 0.76, 26))
 	if count > 0:
 		var cnt := Label.new()
 		cnt.text = "×%d" % count

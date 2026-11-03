@@ -285,6 +285,15 @@ static func frame(kind: String) -> Dictionary:
 	return out
 
 
+static func split_name(full: String) -> Array:
+	## [person's name, tag]: 「河北庭柱」颜良 → [颜良, 河北庭柱], 孙策·中年 → [孙策, 中年], 孙坚 → [孙坚, ""]
+	if full.begins_with("「") and full.find("」") > 0:
+		var close := full.find("」")
+		return [full.substr(close + 1), full.substr(1, close - 1)]
+	var parts := full.split("·", true, 1)
+	return [parts[0], parts[1] if parts.size() > 1 else ""]
+
+
 static func name_style(frame_name: String) -> Dictionary:
 	var styles: Dictionary = GameData.get_db().ui.get("card", {}).get("name_styles", {})
 	return styles.get(frame_name, styles.get("none", {"color": "#ffffff", "outline": "#000000"}))
@@ -709,7 +718,7 @@ static func speaker_name(key: String, lord_name := "") -> String:
 		var cards: Dictionary = GameData.get_db().cards
 		for cid in cards:
 			var c: Dictionary = cards[cid]
-			var n: String = str(c["name"]).split("·")[0]
+			var n: String = split_name(str(c["name"]))[0]
 			for k in [cid, str(c.get("person", "")), portrait_key(cid)]:
 				if k != "" and not _key_names.has(k):
 					_key_names[k] = n
@@ -749,7 +758,7 @@ static func speakers(lines: Array, cast: Array = []) -> Array:
 		for cid in GameData.get_db().cards:
 			var c: Dictionary = GameData.get_db().cards[cid]
 			var key := portrait_key(cid)
-			_all_names[c["name"].split("·")[0]] = key if key != "" else str(c.get("person", cid))
+			_all_names[split_name(str(c["name"]))[0]] = key if key != "" else str(c.get("person", cid))
 		for n in ALIASES:
 			_all_names[n] = ALIASES[n]
 	var out: Array = []

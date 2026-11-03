@@ -52,11 +52,11 @@
     "_name_styles": "name text per frame: engraved (dark text + light shadow) on metal, light text + dark outline on dark plates",
     "name_styles": {
       "wood":   {"color": "#f6e7c8", "outline": "#3a2412"},
-      "bronze": {"color": "#2e1a08", "shadow": "#f3cf98"},
-      "silver": {"color": "#1d2533", "shadow": "#ffffff"},
-      "gold":   {"color": "#4a2a00", "shadow": "#fff3c4"},
+      "bronze": {"color": "#fff1d0", "outline": "#2a1606"},
+      "silver": {"color": "#ffffff", "outline": "#141a26"},
+      "gold":   {"color": "#fff4c8", "outline": "#3a2000"},
       "ssr":    {"color": "#ffe7a0", "outline": "#1b1640"},
-      "iron":   {"color": "#1c1f24", "shadow": "#eef1f5"},
+      "iron":   {"color": "#f2f4f7", "outline": "#101214"},
       "none":   {"color": "#ffffff", "outline": "#000000"}
     }
   },
