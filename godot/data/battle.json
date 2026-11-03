@@ -149,6 +149,20 @@
           }
         ],
         "troop_rows": {
+          "lord": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "always",
+              "act": "interrupt"
+            }
+          ],
+          "bandit": [
+            {
+              "cond": "enemy_stunned",
+              "cond2": "ap_full",
+              "act": "basic"
+            }
+          ],
           "logistics": [
             {
               "cond": "party_status",
