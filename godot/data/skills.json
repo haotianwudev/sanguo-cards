@@ -11,6 +11,8 @@
     },
     "multi_hit_rate": 0.45,
     "ultimate_mult": 1.4,
+    "_rider_share": "普通技能（非大招、没写 rate / hit_rate / power 的）带附带效果时，伤害按这些份额扣掉（相加，最多扣 max）：用户 2026-11-02「减伤、打断等特效的技能攻击要大幅降低，2 AP 打断打 1 就够」。guard / stun 按 cut / chance 乘系数。",
+    "rider_share": {"interrupt": 0.4, "guard": 0.6, "stun": 0.6, "break": 0.3, "counter": 0.3, "burn": 0.3, "poison": 0.3, "boost": 0.3, "shred": 0.2, "loot": 0.2, "ap": 0.3, "cleanse": 0.2, "heal": 0.4, "buff": 0.3, "max": 0.7},
     "tolerance": 0.85,
     "weights": {
       "combo_layers": 3.0,
@@ -2373,7 +2375,7 @@
       "effects": [
         {
           "type": "attack",
-          "rate": 0.9
+          "rate": 0.6
         },
         {
           "type": "counter",

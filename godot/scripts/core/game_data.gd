@@ -75,6 +75,8 @@ func _load(dir: String) -> void:
 			if e["type"] in ["attack", "magic"] and cost > 0 and not (e.has("power") or e.has("rate") or e.has("hit_rate")):
 				var is_ult: bool = s.get("uses") != null or s.get("per_battle", false)
 				var ult := float(skill_budget.get("ultimate_mult", 1.0)) if is_ult else 1.0
+				if not is_ult:  # a regular skill with a rider (减伤 / 打断 / 眩晕 …) hits for much less (user rule)
+					ult = 1.0 - rider_share(s["effects"], skill_budget)
 				if hits > 1:  # multi-hit: the single-hit total split over the hits, less what its own combo adds (user rule)
 					var tiers1: Dictionary = skill_budget["rate_by_ap"]
 					var combo_gain := 1.0 + float(battle.get("combo_bonus", 0.1)) * (hits - 1) / 2.0
@@ -404,6 +406,23 @@ func build_leader(card: Dictionary, members: Array, weights: Array = []) -> Dict
 	hp *= float(battle.get("hp_mult", 1.0))  # global feel of the fights: more attack, less HP on both sides (battle.attack_mult / hp_mult)
 	at *= float(battle.get("attack_mult", 1.0))
 	return {"card": card, "members": members, "hp": int(round(hp)), "at": int(round(at))}
+
+
+static func rider_share(effects: Array, budget: Dictionary) -> float:
+	## the share of a regular skill's damage its riders take (skill_budget.rider_share; guard / stun scale with cut / chance)
+	var w: Dictionary = budget.get("rider_share", {})
+	var share := 0.0
+	for e in effects:
+		var k: String = str(e["type"])
+		if k in ["attack", "magic"] or not w.has(k):
+			continue
+		var x := float(w[k])
+		if k == "guard":
+			x *= float(e.get("cut", 0.5))
+		elif k == "stun":
+			x *= float(e.get("chance", 1.0))
+		share += x
+	return minf(share, float(w.get("max", 0.7)))
 
 
 static func _power(hp: float, at: float, n_skills: int) -> int:

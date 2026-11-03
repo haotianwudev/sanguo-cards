@@ -222,14 +222,27 @@ func test_huangjin_is_beatable_with_starter_troops() -> void:
 
 
 func test_hulao_is_hard_for_naive_play() -> void:
-	check_between(win_rate("hulao", REF), 0.02, 0.95, "hulao ref")  # (floor 0.02 since heals were cut by 1/3, battle.heal_mult) the reference team is strong, and 扔刀 stuns 吕布 for a turn every fight
+	# user rule 2026-11-02: regular skills hit much less than 大招 and the enemies stay as hard (enemy_hp_mult kept) — the naive
+	# bot may not beat 吕布 at all any more; this only guards that 虎牢关 never turns easy
+	check(win_rate("hulao", REF) <= 0.95, "hulao ref is not a walkover")
+
+
+func hp_left(scenario: String, comp: Array, n := 60) -> float:
+	## the enemy's HP share left after the bot's fight, averaged (0 = always killed)
+	var left := 0.0
+	for s in n:
+		var bt := new_battle(scenario, comp, s)
+		bot_fight(bt)
+		left += float(maxi(0, bt.enemy["hp"])) / float(bt.enemy["max_hp"])
+	return left / n
 
 
 func test_better_cards_win_more() -> void:
-	var a := win_rate("hulao", STARTER)
-	var b := win_rate("hulao", REF)
-	var c := win_rate("hulao", SSR)
-	check(a < b and b <= c + 0.25, "%.2f < %.2f <= %.2f (+ noise)" % [a, b, c])  # the lord is strong now: a full SSR team adds little over the reference one (and with the ×3 leader formula 吕布 leading instead of 马超 is no stronger)
+	# measured as how much of 吕布 each team takes down (the naive bot rarely wins 虎牢关 now, so win rates are all ~0)
+	var a := hp_left("hulao", STARTER)
+	var b := hp_left("hulao", REF)
+	var c := hp_left("hulao", SSR)
+	check(a > b and b >= c - 0.05, "吕布 HP left: starter %.2f > ref %.2f >= ssr %.2f (+ noise)" % [a, b, c])
 
 
 func test_events_describe_what_happened() -> void:
@@ -433,7 +446,7 @@ func test_the_dearer_the_attack_the_more_each_ap_buys() -> void:
 		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not tiers.has(str(sk["cost"])) \
 				or sk["effects"].any(func(e): return int(e.get("hits", 1)) > 1):  # multi-hit skills: split and combo-scaled (game_data)
 			continue
-		var lo: float = float(tiers[str(sk["cost"])]) * sk["cost"] * (float(cfg["ultimate_mult"]) if sk["uses"] == 1 else 1.0) * float(cfg["tolerance"])
+		var lo: float = float(tiers[str(sk["cost"])]) * sk["cost"] * (float(cfg["ultimate_mult"]) if sk["uses"] == 1 else 1.0 - GameData.rider_share(sk["effects"], cfg)) * float(cfg["tolerance"])
 		check(_attack_value(sk) >= lo, "%s (%d AP) is worth %.2f, wants >= %.2f" % [sk["name"], sk["cost"], _attack_value(sk), lo])
 
 
