@@ -57,7 +57,7 @@ Buttons are two materials only (`Kit.button_styles`): gold / green / amber → �
 edge and a drop shadow), everything else (blue / gray / purple / plain `Button`) → dark 玄漆 with a thin dark-gold edge — don't add
 new flat colours. Every `Kit.button` / `tool_button` sinks to 0.97 when pressed (`Kit.press_bounce`). `Kit.bar` carries a glaze strip
 and a dark groove (children `Shine` / `Groove` above the fill). `Game.show_screen` dips through black (into a battle: steel blue),
-skipped headless; full-screen CGs get `Kit.ken_burns` (1.035 → 1.0 over 4 s, once per square). The title picture is never dimmed —
+skipped headless; full-screen CGs get `Kit.ken_burns` (1.012 → 1.0 over 2.5 s, once per square — user: 1.035 made them dizzy). The title picture is never dimmed —
 only `_centre_shade()` behind the menu.
 **Story text with a rare character** (not in the common GB2312 set) shows as a box on phones until you rerun `python tools/build_fonts.py`
 (it rescans `godot/data` + `godot/scripts`), then `--import`. `test_the_bundled_font_has_every_character_the_game_prints` fails when you forget.

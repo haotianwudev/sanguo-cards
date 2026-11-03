@@ -156,7 +156,7 @@ static func press_bounce(b: BaseButton) -> void:
 		tw.tween_property(b, "self_modulate", Color.WHITE, 0.18))
 
 
-static func ken_burns(pic: Control, from := 1.035, secs := 4.0) -> void:
+static func ken_burns(pic: Control, from := 1.012, secs := 2.5) -> void:
 	## a full-screen CG breathes in: a slow, restrained push from `from` back to 1.0 (sine ease-out), once per arrival
 	if pic.has_meta("kb"):
 		(pic.get_meta("kb") as Tween).kill()
