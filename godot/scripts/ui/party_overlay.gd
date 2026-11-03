@@ -380,8 +380,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	_dnd(v, {} if cid == "lord" or swap_mode else {"kind": "card", "id": cid, "from": "party"}, "slot:" + cid)  # 换人: the field only takes drops
 	v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER  # never stretched by a wide row under it
 	box.add_child(v)
-	var n: int = ld["members"].size()
-	var l := Kit.label(role + ("  · 部队 %d" % (n + 1) if n > 0 else ""), 14, "gold")
+	var l := Kit.label(role, 14, "gold")
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.custom_minimum_size = Vector2(150, 20)
 	box.add_child(l)

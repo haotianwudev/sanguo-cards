@@ -210,13 +210,6 @@ func _build() -> void:
 		stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		stats.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_add(stats, strip.position, strip.size)
-	if leader.has("members") and not leader["members"].is_empty():
-		var troop_l := Label.new()
-		troop_l.text = "部队%d" % (leader["members"].size() + 1)
-		troop_l.add_theme_font_size_override("font_size", 14)
-		troop_l.add_theme_color_override("font_color", Color.WHITE)
-		troop_l.add_theme_stylebox_override("normal", Kit.box(Color(0, 0, 0, 0.55), 6, 0, Color.TRANSPARENT, 3))
-		_add(troop_l, Vector2(win.end.x - 60, win.end.y - strip_h - 25), Vector2(58, 22))
 
 	# frame art on top of the portrait
 	if not fr.is_empty():
