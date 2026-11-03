@@ -923,12 +923,12 @@ func demo(name: String) -> void:
 				Quests.resolve(q, save, rng)
 			Quests.move(q, save, "plan")
 			show_screen(MapScreen.new())
-		"fx":  # --demo=fx --fx=<hit|magic|pierce|boosthit|claw|counter|burn|pburn|break|stun|confuse|boost|buff|cleanse|drain>: one effect mid-flight
+		"fx":  # --demo=fx --fx=<hit|archer|volley|spear|cavalry|bandit|ultarrow|enemyult|swap|stance|magic|pierce|boosthit|claw|counter|burn|pburn|break|stun|confuse|boost|buff|cleanse|drain>: one effect mid-flight
 			save.owned = ["sunce_zhong", "sunce_bawang", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 			save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
 			save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
 			var fb := BattleScreen.new()
-			fb.scenario_id = "hulao"
+			fb.scenario_id = "ln_lvlingqi"  # a CG enemy: the effects at full size
 			show_screen(fb)
 			await get_tree().create_timer(0.25).timeout
 			fb._busy = true
@@ -938,10 +938,28 @@ func demo(name: String) -> void:
 				if a.begins_with("--fx="):
 					want = a.substr(5)
 			var eng: Battle = fb.b
-			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "pierce", "boosthit", "counter", "burn", "break", "ultmagic", "rider", "poison", "kill"] else 1.0
+			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "pierce", "boosthit", "counter", "burn", "break", "ultmagic", "rider", "poison", "kill", "archer", "volley", "spear", "cavalry", "bandit", "ultarrow"] else 1.0
 			match want:
 				"hit":
 					BattleFx.hit(fb, fb._enemy_center(), "attack", 3, 0.12)
+				"archer", "volley", "spear", "cavalry", "bandit":  # the troop-shaped plain blows
+					BattleFx.troop_hit(fb, fb._enemy_center(), "archer" if want == "volley" else want, 5 if want == "volley" else 2)
+				"ultarrow":
+					BattleFx.ult_arrow(fb, fb._enemy_center())
+				"enemyult":
+					BattleFx.enemy_ult_slash(fb, fb._cards_rect())
+				"swap":  # 换人 through the real event (slot 1 → 关羽)
+					eng.round_no = eng.swap_from_round()
+					eng.ap = 8
+					var opts: Array = eng.swap_options(1)
+					if not opts.is_empty():
+						eng.swap(1, opts[0]["card"]["id"])
+						fb._play(eng.take_events())
+				"stance":
+					eng.enemy["stance"] = {"name": "以逸待劳", "turns": 2}
+					eng.party_hp = int(eng.party_max * 0.2)
+					fb._refresh()
+					fb._sync_fx()
 				"magic":
 					BattleFx.hit(fb, fb._enemy_center(), "magic", 1, 0.05)
 				"ultmagic":

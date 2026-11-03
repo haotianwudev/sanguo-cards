@@ -612,6 +612,131 @@ static func cracks(parent: Control, rect: Rect2, color: Color, n := 5) -> Node2D
 	return holder
 
 
+# ---- 兵种打击形态 / 敌方绝招 / 收尾 ------------------------------------------------------------------------------
+
+static func arrow(parent: Control, from_pos: Vector2, to_pos: Vector2, color := Color(1.0, 0.95, 0.8), delay := 0.0, size := 1.0) -> void:
+	## one fletched arrow streaking from `from_pos` into `to_pos`, a small spark where it lands
+	var a := Node2D.new()
+	a.position = from_pos
+	a.rotation = (to_pos - from_pos).angle()
+	a.z_index = 47
+	a.modulate.a = 0.0
+	parent.add_child(a)
+	var l := 64.0 * size * scale
+	var shaft := Polygon2D.new()
+	shaft.polygon = PackedVector2Array([Vector2(-l, -1.5 * size), Vector2(l * 0.7, -1.5 * size), Vector2(l * 0.7, 1.5 * size), Vector2(-l, 1.5 * size)])
+	shaft.color = Color(color, 0.85)
+	a.add_child(shaft)
+	var head := Polygon2D.new()
+	head.polygon = PackedVector2Array([Vector2(l * 0.7, -6 * size), Vector2(l, 0), Vector2(l * 0.7, 6 * size)])
+	head.color = Color(1, 1, 1)
+	a.add_child(head)
+	var fl := Polygon2D.new()  # the fletching
+	fl.polygon = PackedVector2Array([Vector2(-l, 0), Vector2(-l - 14 * size, -7 * size), Vector2(-l + 12 * size, 0), Vector2(-l - 14 * size, 7 * size)])
+	fl.color = Color(color, 0.7)
+	a.add_child(fl)
+	var tw := a.create_tween()
+	tw.tween_interval(delay)
+	tw.tween_property(a, "modulate:a", 1.0, 0.01)
+	tw.tween_property(a, "position", to_pos, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.tween_callback(func(): burst(parent, to_pos, color, 6, 4.0, 40.0 * size, 2.5, 0.16))
+	tw.tween_property(a, "modulate:a", 0.0, 0.06)
+	tw.tween_callback(a.queue_free)
+
+
+static func troop_hit(parent: Control, at: Vector2, troop: String, combo: int) -> bool:
+	## a plain physical blow shaped by who struck it; false = no special shape (the generic crossing slashes)
+	var p := at + Vector2(randf_range(-30, 30), randf_range(-24, 24))
+	match troop:
+		"archer":  # 翎羽箭: one to three arrows from low left; a long combo turns into a volley from above
+			if combo >= 4:
+				for k in 6:
+					var to := p + Vector2(randf_range(-110, 110), randf_range(-60, 60)) * scale
+					arrow(parent, to + Vector2(-140, -360) * scale, to, Color(1.0, 0.93, 0.75), k * 0.03, 1.2)
+			else:
+				for k in 2 + int(combo >= 2):
+					var to := p + Vector2(randf_range(-26, 26), (k - 1) * 22.0) * scale
+					arrow(parent, to + Vector2(-420, 240) * scale, to, Color(1.0, 0.93, 0.75), k * 0.04, 1.6)
+			return true
+		"spear":  # 枪芒: a fast silver thrust cone from the left and a ring of torn air around the tip
+			var tip := p + Vector2(60, 0) * scale
+			var cone := Polygon2D.new()
+			var L := 340.0 * scale
+			cone.polygon = PackedVector2Array([Vector2(-L, -3), Vector2(0, -16 * scale), Vector2(40 * scale, 0), Vector2(0, 16 * scale), Vector2(-L, 3)])
+			cone.color = Color(0.9, 0.96, 1.0, 0.95)
+			cone.position = tip
+			cone.rotation_degrees = randf_range(-14.0, -4.0)
+			cone.scale = Vector2(0.2, 1.0)
+			cone.z_index = 47
+			parent.add_child(cone)
+			var tw := cone.create_tween()
+			tw.tween_property(cone, "scale", Vector2.ONE, 0.06).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+			tw.tween_property(cone, "modulate:a", 0.0, 0.16)
+			tw.tween_callback(cone.queue_free)
+			ring(parent, tip, STEEL, 8.0, 64.0, 0.2, 3)
+			burst(parent, tip, Color(1, 1, 1), 8, 6.0, 60.0, 2.5, 0.18)
+			return true
+		"cavalry":  # 冲锋重斩: one wide heavy arc, speed lines streaking past behind it
+			arc_slash(parent, p, 120.0 if combo % 2 == 1 else 60.0, 220.0, 30.0, Color(1.0, 0.88, 0.6), Color(1, 1, 1), 0.0, combo % 2 == 0)
+			for k in 5:
+				slash(parent, p + Vector2(randf_range(-160, 60), randf_range(-70, 70)) * scale, Color(1.0, 0.95, 0.85, 0.55), 0.0, randf_range(180, 300), 3.0, k * 0.02)
+			burst(parent, p, Color(1.0, 0.8, 0.45), 10, 14.0, 110.0, 4.5)
+			return true
+		"bandit":  # 双刃十字: two quick shadow cuts crossing
+			slash(parent, p, Color(0.55, 0.35, 0.75), -45.0, 230.0, 12.0)
+			slash(parent, p, Color(0.95, 0.9, 1.0), 45.0, 230.0, 9.0, 0.04)
+			burst(parent, p, Color(0.45, 0.25, 0.6), 8, 8.0, 70.0, 3.5, 0.2)
+			return true
+	return false
+
+
+static func ult_arrow(parent: Control, at: Vector2) -> void:
+	## 弓系大招（百步穿杨 …）: one huge gold arrow punching straight through, a sun-flare and a long trail behind it
+	arrow(parent, at + Vector2(-760, 120) * scale, at, GOLD, 0.0, 3.0)
+	slash(parent, at + Vector2(-200, 32) * scale, Color(1.0, 0.9, 0.5, 0.8), -9.0, 760.0, 10.0, 0.06)
+	var hit := func():
+		flash(parent, Color(1.0, 0.92, 0.6, 0.6), 0.2)
+		burst(parent, at, GOLD, 20, 20.0, 220.0, 6.0, 0.42)
+		ring(parent, at, Color(1, 1, 1), 16.0, 200.0, 0.36, 8)
+		ring(parent, at, GOLD, 24.0, 280.0, 0.46, 5)
+	parent.get_tree().create_timer(0.1).timeout.connect(hit)
+
+
+static func enemy_ult_slash(parent: Control, rect: Rect2) -> void:
+	## the enemy's 绝招 lands: a huge black-red cut right across our whole line, a red flash and a dark vignette
+	var c := rect.get_center()
+	arc_slash(parent, c, 100.0, 900.0, 70.0, Color(0.25, 0.02, 0.04, 0.95), Color(1.0, 0.25, 0.2), 0.0)
+	arc_slash(parent, c + Vector2(0, 24), 80.0, 860.0, 40.0, Color(0.6, 0.05, 0.05, 0.9), Color(1.0, 0.7, 0.6), 0.08, true)
+	flash(parent, Color(0.8, 0.0, 0.0, 0.42), 0.3)
+	burst(parent, c, BLOOD, 20, 30.0, 300.0, 6.0, 0.45)
+	vignette(parent, Color(0.25, 0.0, 0.0), 0.9)
+
+
+static func vignette(parent: Control, color: Color, secs := 0.8) -> void:
+	## dark edges closing in round the screen, then easing off
+	var g := Gradient.new()
+	g.set_color(0, Color(color, 0.0))
+	g.set_color(1, Color(color, 0.9))
+	g.add_point(0.55, Color(color, 0.0))
+	var t := GradientTexture2D.new()
+	t.gradient = g
+	t.fill = GradientTexture2D.FILL_RADIAL
+	t.fill_from = Vector2(0.5, 0.5)
+	t.fill_to = Vector2(1.05, 0.5)
+	t.width = 256
+	t.height = 144
+	var r := TextureRect.new()
+	r.texture = t
+	r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	r.size = parent.size
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	r.z_index = 47
+	parent.add_child(r)
+	var tw := r.create_tween()
+	tw.tween_property(r, "modulate:a", 0.0, secs).set_delay(0.15).set_trans(Tween.TRANS_SINE)
+	tw.tween_callback(r.queue_free)
+
+
 static func crit_star(parent: Control, at: Vector2) -> void:
 	## 暴击: a gold four-point cross flare with a white core ring
 	slash(parent, at, Color(1.0, 0.95, 0.7), 0.0, 300.0, 10.0)

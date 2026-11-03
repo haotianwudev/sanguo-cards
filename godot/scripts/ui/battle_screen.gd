@@ -1001,6 +1001,7 @@ func _enemy_move_tag(move_name: String) -> void:
 
 
 var _act_elem := ""  # the acting skill's element (fire / poison): its magic blows change colour
+var _act_troop := ""  # the acting card's troop: its plain blows take that troop's shape (arrows, thrust, heavy arc, cross cut)
 
 
 func _play(events: Array) -> void:
@@ -1015,6 +1016,7 @@ func _play(events: Array) -> void:
 				_card_lunge(v, _is_ult(used) or _boost_hits)
 				_sfx_act(ev)
 				var kinds: Array = used.get("effects", []).map(func(e): return str(e.get("type", "")))
+				_act_troop = str(b.leaders[int(ev["unit"])].get("leader", {}).get("card", {}).get("troop", "")) if int(ev["unit"]) < b.leaders.size() else ""
 				_act_elem = "fire" if ("burn" in kinds or "火" in str(used.get("name", ""))) else "poison" if "poison" in kinds else ""
 				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] in ["attack", "magic"])  # 大招: physical or magic ultimate blows
 				if _is_ult(used):
@@ -1059,11 +1061,15 @@ func _play(events: Array) -> void:
 						elif _ult_hits:
 							if ev["kind"] == "magic":
 								BattleFx.ult_magic(self, _enemy_center(), ev["combo"], ratio)
+							elif _act_troop == "archer":
+								BattleFx.ult_arrow(self, _enemy_center())
 							else:
 								BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
 							Kit.shake(self, 22.0, 0.3)
-						else:
+						elif ev["kind"] == "magic" or _boost_hits or ev.get("pierce", false) or not BattleFx.troop_hit(self, _enemy_center(), _act_troop, int(ev["combo"])):
 							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits, _act_elem)
+						elif ratio > 0.08:
+							BattleFx.ring(self, _enemy_center(), Color(1.0, 0.55, 0.3), 14.0, 150.0, 0.36, 7)
 					"counter":
 						BattleFx.counter(self, _enemy_center())
 					"burn":
@@ -1100,7 +1106,7 @@ func _play(events: Array) -> void:
 					BattleFx.scale = 1.0
 					_flash(_enemy_art, Color(2.2, 2.0, 1.8))
 					Kit.shake(self, 20.0, 0.32)
-					await get_tree().create_timer(0.18).timeout
+					await _kill_freeze()
 				elif big:
 					Kit.shake(self, 6.0 + 24.0 * minf(ratio, 0.3), 0.18)
 					await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
@@ -1151,11 +1157,30 @@ func _play(events: Array) -> void:
 				_refresh()
 				await get_tree().create_timer(0.26).timeout
 			"swap":
+				var leaving: CardView = _cards[ev["unit"]]
+				var ot := leaving.create_tween().set_parallel()
+				ot.tween_property(leaving, "modulate:a", 0.0, 0.18)
+				ot.tween_property(leaving, "position:y", leaving.position.y + 40.0, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+				await get_tree().create_timer(0.18).timeout
 				_rebuild_card(ev["unit"])
+				await get_tree().process_frame  # the row lays the new card out first, then it leaps in from below
+				var arriving: CardView = _cards[ev["unit"]]
+				var home := arriving.position
+				arriving.position.y = home.y + 140.0
+				arriving.modulate.a = 0.0
+				var nt := arriving.create_tween().set_parallel()
+				nt.tween_property(arriving, "position:y", home.y, 0.26).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+				nt.tween_property(arriving, "modulate:a", 1.0, 0.12)
+				await get_tree().create_timer(0.24).timeout
+				Sfx.play("guard")
+				var arc := _card_rect(ev["unit"])
+				BattleFx.ring(self, arc.get_center(), BattleFx.GOLD, 20.0, 170.0, 0.34, 6)
+				BattleFx.burst(self, Vector2(arc.get_center().x, arc.end.y - 20.0), BattleFx.GOLD, 12, 10.0, 110.0, 4.0, 0.3)
+				Kit.shake(arriving, 4.0, 0.12)
 				_party_hp.max_value = ev["max"]
 				Kit.tween_bar(_party_hp, ev["hp"])
 				_party_hp_label.text = "%d / %d" % [ev["hp"], ev["max"]]
-				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "换人", Kit.c("gold"), 36)
+				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "登场！", Kit.c("gold"), 40)
 				Kit.pop(_cards[ev["unit"]], 1.08)
 				await get_tree().create_timer(0.35).timeout
 			"buff":
@@ -1289,6 +1314,11 @@ func _play(events: Array) -> void:
 					_flash(_party_box, Color(0.7, 1.5, 0.8))
 				elif is_fire:
 					BattleFx.flame_lick(self, _party_rect())
+				elif _enemy_big_move(mv_name):
+					BattleFx.enemy_ult_slash(self, _cards_rect())
+					Kit.shake(self, 22.0, 0.4)
+					for c in _cards:
+						Kit.shake(c, 9.0, 0.3)
 				else:
 					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
 					for c in _cards:
@@ -1634,6 +1664,61 @@ func _sfx_hit(ev: Dictionary, big: bool) -> void:
 			Sfx.play(key, 1.0 + 0.04 * minf(float(ev.get("combo", 1)) - 1.0, 8.0))
 
 
+func _kill_freeze() -> void:
+	## 击破: a beat of slow motion on the killing blow; the enemy darkens, cracks and sinks a little
+	var art := _enemy_art
+	BattleFx.cracks(self, _enemy_rect(), Color(1.0, 0.95, 0.85, 0.85), 7)
+	var tw := art.create_tween().set_parallel()
+	tw.tween_property(art, "modulate", Color(0.5, 0.45, 0.45), 0.5)
+	tw.tween_property(art, "position:y", art.position.y + 14.0, 0.5).set_trans(Tween.TRANS_QUAD)
+	if DisplayServer.get_name() != "headless":
+		Engine.time_scale = 0.25
+		await get_tree().create_timer(0.15, true, false, true).timeout
+		Engine.time_scale = 1.0
+	await get_tree().create_timer(0.18).timeout
+
+
+func _victory_plaque(overkill: float) -> void:
+	## 胜利: a gold-rimmed lacquer plaque in 文楷 pops in with gold sparks; a big overkill gets its own line
+	var p := PanelContainer.new()
+	var sb := Kit.box(Color(0.42, 0.07, 0.05, 0.96), 14, 3, Kit.c("gold"), 0)
+	sb.content_margin_left = 80
+	sb.content_margin_right = 80
+	sb.content_margin_top = 18
+	sb.content_margin_bottom = 18
+	sb.shadow_color = Color(0, 0, 0, 0.5)
+	sb.shadow_size = 12
+	p.add_theme_stylebox_override("panel", sb)
+	p.z_index = 50  # over the kill cracks (45)
+	var col := VBoxContainer.new()
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
+	p.add_child(col)
+	var t := Kit.title_label("胜　利", 84, "gold")
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(t)
+	if overkill > 0.05:
+		var s := Kit.label("溢出伤害 %d%%　宝箱几率提升" % int(round(overkill * 100)), Kit.FONT_BODY, "gold")
+		s.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		col.add_child(s)
+	add_child(p)
+	p.reset_size()
+	p.position = (Vector2(1280, 720) - p.size) / 2.0
+	p.pivot_offset = p.size / 2.0
+	p.scale = Vector2(1.6, 1.6)
+	p.modulate.a = 0.0
+	var tw := p.create_tween()
+	tw.tween_property(p, "modulate:a", 1.0, 0.1)
+	tw.parallel().tween_property(p, "scale", Vector2.ONE, 0.28).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(0.9)
+	tw.tween_property(p, "modulate:a", 0.0, 0.25)
+	tw.tween_callback(p.queue_free)
+	await get_tree().create_timer(0.2).timeout
+	BattleFx.burst(self, Vector2(640, 360), BattleFx.GOLD, 24, 60.0, 360.0, 5.0, 0.5)
+	BattleFx.embers(self, Rect2(240, 260, 800, 200), BattleFx.GOLD, 40, 140.0, true)
+	Kit.shake(self, 8.0, 0.2)
+	await get_tree().create_timer(1.0).timeout
+
+
 func _hit_stop(secs: float) -> void:
 	## 顿帧: the world nearly freezes for a beat (skipped headless)
 	if DisplayServer.get_name() == "headless":
@@ -1815,7 +1900,7 @@ func _finish() -> void:
 			Quests.rescale_hp(save, b.party_max, Quests.party_max(save))  # a 换人 resized the bar: the map's bar keeps the share
 			save.carry_extra.merge(out[1], true)
 			save.carry_uses.merge(out[2], true)
-		await _banner("胜　利", Kit.c("gold"))
+		await _victory_plaque(b.overkill)
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
 		var bonus := float(b.mods.get("chest", 0.0))
 		var chance := save.chest_chance(b.overkill, boss, bonus)
