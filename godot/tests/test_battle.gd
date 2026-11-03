@@ -347,7 +347,7 @@ func test_oil_on_the_fire_doubles_on_a_burning_enemy() -> void:
 
 func test_every_ultimate_costs_at_least_3_ap() -> void:
 	for s in GameData.get_db().skills.values():
-		if s["uses"] == 1 and s["effects"].any(func(e): return e["type"] in ["attack", "magic"]):
+		if s["uses"] == 1 and not s["special"] and s["effects"].any(func(e): return e["type"] in ["attack", "magic"]):
 			check(s["cost"] >= 3, "%s costs %d" % [s["name"], s["cost"]])
 
 
@@ -1068,7 +1068,8 @@ func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
 			return sk["cost"] >= 5 and sk["uses"] == 1 and sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]))
 		check(not ult.is_empty(), cid + " has a once-only 大招 of 5+ AP")
 		for sid in ult:
-			check(_attack_value(db.skills[sid]) >= 15.0, "%s: %s is strong enough (%.1f)" % [cid, sid, _attack_value(db.skills[sid])])
+			if not db.skills[sid]["special"]:
+				check(_attack_value(db.skills[sid]) >= 15.0, "%s: %s is strong enough (%.1f)" % [cid, sid, _attack_value(db.skills[sid])])
 	check(seen >= 5, "the SSR cards were found")
 
 

@@ -2831,8 +2831,8 @@
       "hp": 66,
       "at": 96,
       "skills": [
-        "xiandeng",
-        "qiangnu"
+        "qiangnu",
+        "xiandeng"
       ],
       "pool": false
     },

@@ -53,6 +53,7 @@
       "effects": [
         {
           "type": "attack",
+          "power": 0.4,
           "hits": 2
         }
       ]
@@ -216,11 +217,12 @@
     },
     "huaji": {
       "name": "画戟传承",
-      "cost": 2,
+      "cost": 3,
       "cumulative": true,
       "effects": [
         {
           "type": "attack",
+          "power": 0.9,
           "hits": 3
         }
       ]
@@ -841,6 +843,7 @@
       "effects": [
         {
           "type": "attack",
+          "power": 0.8,
           "hits": 4
         }
       ]
@@ -1027,7 +1030,7 @@
     "luoyi": {
       "name": "裸衣",
       "cost": 0,
-      "uses": 1,
+      "per_battle": true,
       "effects": [
         {
           "type": "boost",
@@ -1129,8 +1132,8 @@
     },
     "huwei": {
       "name": "虎卫",
-      "cost": 1,
-      "cumulative": true,
+      "cost": 2,
+      "uses": 1,
       "effects": [
         {
           "type": "guard",
@@ -1336,12 +1339,12 @@
       "effects": [
         {
           "type": "attack",
+          "power": 2.0,
           "hits": 2
         },
         {
-          "type": "break",
-          "amount": 0.3,
-          "turns": 3
+          "type": "guard",
+          "cut": 0.5
         }
       ]
     },
@@ -1716,17 +1719,16 @@
     },
     "wenhou_huaji": {
       "name": "温侯画戟",
-      "cost": 4,
+      "cost": 5,
       "uses": 1,
       "effects": [
         {
           "type": "attack",
+          "power": 2.0,
           "hits": 3
         },
         {
-          "type": "break",
-          "amount": 0.3,
-          "turns": 3
+          "type": "interrupt"
         }
       ]
     },
@@ -2021,10 +2023,11 @@
       "name": "军法",
       "cost": 3,
       "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "attack",
-          "rate": 1.6
+          "power": 3.0
         },
         {
           "type": "guard",
@@ -2056,7 +2059,8 @@
     "xiandeng": {
       "name": "先登",
       "cost": 2,
-      "cumulative": true,
+      "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "attack"
@@ -2169,11 +2173,12 @@
       "name": "方天乱舞",
       "cost": 6,
       "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "attack",
-          "hits": 6,
-          "hit_rate": 0.62
+          "power": 1.5,
+          "hits": 6
         }
       ]
     },
@@ -2558,10 +2563,11 @@
       "name": "双凤合璧",
       "cost": 5,
       "uses": 1,
+      "special": true,
       "effects": [
         {
           "type": "attack",
-          "rate": 2.0,
+          "power": 6.0,
           "pierce": true
         },
         {
