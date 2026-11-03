@@ -424,62 +424,61 @@ const _COND_WORDS := {"broken": "破防", "burning": "灼烧", "poisoned": "中�
 
 
 static func skill_desc(sk: Dictionary) -> String:
-	## one line on what a skill does, from its effects (for the 整备 detail panel)
+	## what a skill does, as short tags from its effects — no explanations (user call: the old sentences were too long)
 	var parts: Array = []
 	for e in sk.get("effects", []):
 		match e["type"]:
 			"attack":
-				parts.append("物理攻击 ×%s%s%s%s" % [_num(e["power"]), ("，%d 连击" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else "",
-					("，每层连击威力 +%s（收尾）" % _num(e["per_combo"])) if e.has("per_combo") else "", "，穿甲（无视物抗）" if e.get("pierce", false) else ""])
+				parts.append("物理 ×%s%s%s%s" % [_num(e["power"]), (" %d连" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else "",
+					(" 连击+%s" % _num(e["per_combo"])) if e.has("per_combo") else "", " 穿甲" if e.get("pierce", false) else ""])
 			"magic":
-				parts.append("法术攻击 ×%s%s" % [_num(e["power"]), ("（对灼烧中的敌人 ×%s）" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
+				parts.append("法术 ×%s%s" % [_num(e["power"]), (" 对灼烧×%s" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
 			"buff":
-				parts.append("战意 +1 层：全军攻击 +%d%%、受到伤害 -%d%%%s，最多 %d 层，持续 %d 回合（再用刷新）" % [int(round(float(e["atk"]) * 100)), int(round(float(e["def"]) * 100)),
-					("、物理攻击附带 %d%% 法术伤害" % int(round(float(e["magic"]) * 100))) if e.has("magic") else "", int(e.get("max", 4)), int(e.get("turns", 3))])
+				parts.append("战意+1（攻+%d%% 减伤%d%%%s）" % [int(round(float(e["atk"]) * 100)), int(round(float(e["def"]) * 100)),
+					(" 附法伤%d%%" % int(round(float(e["magic"]) * 100))) if e.has("magic") else ""])
 			"poison":
-				parts.append("中毒 +%d 层：每层每回合损失最大体力的 %d%%，最多 %d 层，%d 回合（吃法抗，再中刷新）" % [int(e.get("stacks", 1)), int(round(float(e["pct"]) * 100)), int(e.get("max", 5)), int(e.get("turns", 3))])
+				parts.append("中毒+%d（每层%d%%）" % [int(e.get("stacks", 1)), int(round(float(e["pct"]) * 100))])
 			"cleanse":
-				parts.append("解除我军的异常状态（混乱、灼烧、AP 被夺）")
+				parts.append("解除异常")
 			"counter":
-				parts.append("反击：本回合敌人每打中一次，还击 ×%s" % _num(e["power"]))
+				parts.append("反击 ×%s" % _num(e["power"]))
 			"hurt":
-				parts.append("自损全军 %d%% 体力" % int(round(float(e["pct"]) * 100)))
+				parts.append("自损%d%%" % int(round(float(e["pct"]) * 100)))
 			"heal":
-				parts.append("回复全军体力 ×%s" % _num(float(e["power"]) * float(GameData.get_db().battle.get("heal_mult", 1.0))))
+				parts.append("回复 ×%s" % _num(float(e["power"]) * float(GameData.get_db().battle.get("heal_mult", 1.0))))
 			"guard":
-				parts.append("本回合受到伤害 -%d%%" % int(round(float(e["cut"]) * 100)))
+				parts.append("减伤%d%%" % int(round(float(e["cut"]) * 100)))
 			"boost":
-				parts.append({"all": "全军 BOOST", "random_idle": "随机让一个还没出手的队友 BOOST"}.get(e.get("target", ""), "自己 BOOST（下次出手 ×1.5）"))
+				parts.append({"all": "全军BOOST", "random_idle": "队友BOOST"}.get(e.get("target", ""), "BOOST"))
 			"stun":
-				parts.append("%d%% 让敌人眩晕一回合" % int(round(float(e["chance"]) * 100)))
+				parts.append("眩晕%d%%" % int(round(float(e["chance"]) * 100)))
 			"ap":
-				parts.append("AP +%d" % int(e["amount"]))
+				parts.append("AP+%d" % int(e["amount"]))
 			"loot":
-				parts.append("战利品：每用一次，打赢后多掉一个宝箱的几率 +%d%%，宝箱里多一张可选卡的几率 +%d%%（本场累计）" % [int(round(float(e["chest"]) * 100)), int(round(float(e["card"]) * 100))])
+				parts.append("宝箱+%d%%" % int(round(float(e["chest"]) * 100)))
 			"burn":
 				if e.has("pct"):
-					parts.append("灼烧：每回合烧掉敌人现有体力的 %d%%（烧不死），%d 回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])
+					parts.append("灼烧%d%%·%d回合" % [int(round(float(e["pct"]) * 100)), int(e["turns"])])
 				else:
-					parts.append("灼烧 ×%s，%d 回合" % [_num(e["power"]), int(e["turns"])])
+					parts.append("灼烧 ×%s·%d回合" % [_num(e["power"]), int(e["turns"])])
 			"shred":
-				parts.append("射穿甲缝：敌人物抗、法抗 -%d%%，可叠加（最多 -%d%%，抗性最低打到 %d%%），%d 回合" % [int(round(float(e.get("amount", 0.1)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("max", 0.5)) * 100)), int(round(float(GameData.get_db().battle.get("archer_resist", {}).get("floor", -0.25)) * 100)), int(e.get("turns", 3))])
+				parts.append("破甲-%d%%" % int(round(float(e.get("amount", 0.1)) * 100)))
 			"break":
-				parts.append("破防：敌人受到伤害 +%d%%，%d 回合" % [int(round(float(e["amount"]) * 100)), int(e["turns"])])
+				parts.append("破防+%d%%" % int(round(float(e["amount"]) * 100)))
 			"interrupt":
-				parts.append("打断蓄力：敌人正在蓄力时让它作废，AP +1，敌人破绽大开")
+				parts.append("打断蓄力")
 		if e.has("crit_if"):
-			parts.append("敌人%s时必定暴击" % _COND_WORDS.get(str(e["crit_if"]), str(e["crit_if"])))
+			parts.append("%s必暴" % _COND_WORDS.get(str(e["crit_if"]), str(e["crit_if"])))
 		var vs: Dictionary = e.get("vs", {})
 		for cond in vs:
-			parts.append("对%s的敌人 ×%s" % [_COND_WORDS.get(str(cond), str(cond)), _num(vs[cond])])
-	var tags: Array = []
+			parts.append("对%s×%s" % [_COND_WORDS.get(str(cond), str(cond)), _num(vs[cond])])
 	if sk.get("per_battle", false):
-		tags.append("每场限 1 次")
+		parts.append("每场1次")
 	elif sk.get("uses", null) != null:
-		tags.append("本章限 %d 次，到休整格才恢复" % int(sk["uses"]))
+		parts.append("本章%d次" % int(sk["uses"]))
 	if sk.get("cumulative", false):
-		tags.append("每用一次 AP +1")
-	return "；".join(parts) + (("（%s）" % "，".join(tags)) if not tags.is_empty() else "")
+		parts.append("越用越贵")
+	return " · ".join(parts)
 
 
 static func _num(x: Variant) -> String:

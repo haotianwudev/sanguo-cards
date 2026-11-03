@@ -420,7 +420,11 @@ func demo(name: String) -> void:
 						save.flags.append(a.substr(7))
 				if a.begins_with("--dmg="):  # --dmg=<n>: wear carried in from earlier fights
 					save.damage = int(a.substr(6))
-			show_screen(MapScreen.new())
+			var qm := MapScreen.new()
+			show_screen(qm)
+			if OS.get_cmdline_user_args().has("--skip"):  # --skip: skip that square's story lines (to see a fight's intel)
+				await get_tree().create_timer(1.0).timeout
+				qm._dialog_skip()
 			if OS.get_cmdline_user_args().has("--go"):  # --go: press 出战 on that square (the real quest-battle path)
 				await get_tree().create_timer(0.3).timeout
 				start_quest_battle(q, Quests.here(q, save))

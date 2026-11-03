@@ -1550,22 +1550,20 @@ func _battle_info(s: Dictionary, fight: Dictionary) -> String:
 	var e: Dictionary = Quests.with_armor(db.enemies[sc["enemy"]], Quests.late_armor(Game.save.quest, s, sc["enemy"]))
 	var tags: Array = []
 	if s["boss"]:
-		tags.append(_bb_chip("首领战", "purple"))
+		tags.append(_bb_chip("首领", "purple"))
 	if s["lose_goto"] != "":
-		tags.append(_bb_chip("打不赢也不会失败", "green"))
+		tags.append(_bb_chip("输了也能过", "green"))
 	elif s["elite"]:
-		tags.append(_bb_chip("精英战 · 必掉宝箱", "red"))
+		tags.append(_bb_chip("精英", "red"))
 	if fight["ambush"]:
-		tags.append(_bb_chip("埋伏！敌人先手", "red"))
+		tags.append(_bb_chip("埋伏", "red"))
 	var afx_id: String = Game.save.affixes.get(s["id"], "")
 	if afx_id != "" and db.battle.get("affixes", {}).has(afx_id):  # this run's 词缀
 		var afx: Dictionary = db.battle["affixes"][afx_id]
 		var afx_img := Kit.affix_icon_path(afx_id)
-		tags.append(("[img=26]%s[/img]" % afx_img if afx_img != "" else "") + _bb_chip("词缀·%s：%s" % [afx["name"], afx["desc"]], "amber"))
+		tags.append(("[img=26]%s[/img]" % afx_img if afx_img != "" else "") + _bb_chip("%s：%s" % [afx["name"], afx["desc"]], "amber"))
 	var turns := Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))
-	var dim := Kit.c("dim").to_html()
-	var head := ("　".join(tags) + "\n" if not tags.is_empty() else "") + "[b]%s[/b]　体力 %d · 攻击 %d · 每回合 %d 次 · %d 回合内击破　[color=%s]体力不会自动回满[/color]" % [
-		e["name"], e["hp"], e["at"], e["actions"], turns, dim]
+	var head := ("　".join(tags) + "　" if not tags.is_empty() else "") + "体力 %d · 攻 %d · %d 动 · %d 回合" % [e["hp"], e["at"], e["actions"], turns]
 	var res := _resists(e)
 	return "[font_size=%d]%s%s\n%s[/font_size]" % [Kit.FONT_SMALL, head, ("\n" + res if res != "" else ""), _moves_text(e)]
 
@@ -1583,13 +1581,13 @@ func _resists(e: Dictionary) -> String:
 	var out: Array = []
 	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
 	if not arm.is_empty():
-		out.append(_bb_chip("护甲·%s" % arm["name"], "amber") + " [color=%s]%s[/color]" % [Kit.c("muted").to_html(), arm["hint"]])
+		out.append(_bb_chip(str(arm["name"]), "amber"))
 	for k in [["phys_resist", "物理"], ["magic_resist", "法术"]]:
 		var v := float(e.get(k[0], 0.0))
 		if v > 0.0:
 			out.append(_bb_chip("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))], "gray"))
 		elif v < 0.0:
-			out.append(_bb_chip("%s弱点 +%d%%" % [k[1], int(round(-v * 100))], "red"))
+			out.append(_bb_chip("%s弱 +%d%%" % [k[1].left(1), int(round(-v * 100))], "red"))
 	return "　".join(out)
 
 
@@ -1613,13 +1611,17 @@ func _moves_text(e: Dictionary) -> String:
 		if m.has("ap_drain"):
 			tags.append("夺AP")
 		if m.has("burn_party"):
-			tags.append("火烧全军")
-		var label: String = m["name"] + ("（%s）" % "·".join(tags) if not tags.is_empty() else "")
+			tags.append("火烧")
+		if m.has("summon"):
+			tags.append("叫援")
+		if m.has("stance"):
+			tags.append("架势")
+		var label: String = m["name"] + ("·%s" % "·".join(tags) if not tags.is_empty() else "")
 		if charged.has(m["name"]):
-			parts.append(_bb_chip("蓄力大招 %s · 带打断技能" % label, "gold"))
+			parts.append(_bb_chip("蓄力 " + label, "gold"))
 		else:
 			parts.append(_bb_chip(label, "red" if not tags.is_empty() else "blue"))
-	return "招式 " + " ".join(parts)
+	return " ".join(parts)
 
 
 func _fight_button(s: Dictionary, buttons: Control) -> void:
