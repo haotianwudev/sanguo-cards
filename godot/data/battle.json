@@ -208,6 +208,20 @@
           ]
         },
         "rows": {
+          "lord": [
+            {
+              "cond": "enemy_charging",
+              "cond2": "always",
+              "skill": "rengdao",
+              "reserve": true
+            },
+            {
+              "cond": "enemy_charging",
+              "cond2": "always",
+              "skill": "huimaqiang",
+              "reserve": true
+            }
+          ],
           "zhaoyun": [
             {
               "cond": "enemy_broken",

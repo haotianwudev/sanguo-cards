@@ -169,7 +169,8 @@ func test_the_default_tactics_are_valid() -> void:
 	for cid in d["rows"]:
 		check(db.cards.has(cid), "card %s" % cid)
 		for row in d["rows"][cid]:
-			check(db.cards[cid]["skills"].has(row["skill"]), "%s owns %s" % [cid, row["skill"]])
+			var owns: Array = db.kits["lord"]["special"] + db.kits["lord_north"]["special"] if cid == "lord" else db.cards[cid]["skills"]
+			check(owns.has(row["skill"]), "%s owns %s" % [cid, row["skill"]])  # the lord's skills come with the route
 			check(cfg["conditions"].has(row["cond"]) and cfg["conditions"].has(row["cond2"]), "%s conds" % cid)
 			check(row["cond"] != "always", "%s row has a condition" % cid)
 
