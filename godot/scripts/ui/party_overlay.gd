@@ -548,17 +548,8 @@ func _fill_lordform_detail(fid: String) -> void:
 	var save := Game.save
 	var form := "" if fid == "base" else fid
 	var f: Dictionary = save.lord_with_form(form)
-	var top := HBoxContainer.new()
-	top.add_theme_constant_override("separation", 12)
-	_detail.add_child(top)
-	top.add_child(CardView.make("lord", Vector2(130, 182), {"skills": false, "form": form, "tier": _form_card_tier(fid)}))
-	var info := VBoxContainer.new()
-	info.add_theme_constant_override("separation", 4)
-	top.add_child(info)
-	var nm := Kit.title_label(save.lord_name if form == "" else "%s · %s" % [save.lord_name, _form_name(fid)], Kit.FONT_BIG + 2, "gold")
-	nm.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	nm.custom_minimum_size = Vector2(196, 0)
-	info.add_child(nm)
+	var info: VBoxContainer = _detail_head(save.lord_name if form == "" else "%s · %s" % [save.lord_name, _form_name(fid)],
+		CardView.make("lord", DETAIL_CARD, {"skills": false, "form": form, "tier": _form_card_tier(fid)}))[1]
 	if GameData.get_db().troops.has(f.get("troop", "")):  # laid out like any other card: name, 兵种, Lv, 单卡
 		info.add_child(_info_line("兵种", GameData.get_db().troops[f["troop"]]["name"]))
 	info.add_child(_level_box(save.form_tier(form), save.form_copies_of(form)))  # every lord card has its own level, like any other card
@@ -590,26 +581,18 @@ func _fill_detail() -> void:
 	var is_lord := _sel == "lord"
 	var ld: Dictionary = save.party_leaders()[0] if is_lord else save.leader_for(_sel)
 	var f: Dictionary = ld["card"]
-	var top := HBoxContainer.new()
-	top.add_theme_constant_override("separation", 12)
-	_detail.add_child(top)
 	var opts := {"skills": false}
 	if is_lord:
 		opts["lord_name"] = save.lord_name
-	top.add_child(CardView.make(_sel, Vector2(170, 238), opts))
-	var info := VBoxContainer.new()
-	info.add_theme_constant_override("separation", 4)
-	top.add_child(info)
-	var name_l := Kit.title_label(f["name"], Kit.FONT_BIG + 2, "gold")
-	name_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	name_l.custom_minimum_size = Vector2(150, 0)
-	info.add_child(name_l)
+	var head := _detail_head(f["name"], CardView.make(_sel, DETAIL_CARD, opts))
+	var top: Control = head[0]
+	var info: VBoxContainer = head[1]
 	info.add_child(_info_line("兵种", db.troops[f["troop"]]["name"]))
 	if not is_lord:
 		var c: Dictionary = db.cards[_sel]
 		info.add_child(_info_line("稀有度", ("野兽" if c.get("beast", false) else Kit.rarity_label(c["rarity"])) + ("（精兵）" if c.get("elite", false) and not c.get("beast", false) else "")))
 		if c["soldier"]:
-			info.add_child(_info_line("张数", "×%d（每多一张，当队长时多一名队员）" % save.copies(_sel)))
+			info.add_child(_info_line("张数", "×%d" % save.copies(_sel)))
 		else:
 			info.add_child(_level_line(_sel))
 	else:  # the lord is the lord card in use, levelled like any other card
@@ -622,29 +605,10 @@ func _fill_detail() -> void:
 				save.lord_out = not save.lord_out
 				Game.persist()
 				_rebuild())
-			info.add_child(stay)
+			stay.custom_minimum_size = Vector2(340, 44)
+			_detail.add_child(stay)
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
 	info.add_child(_info_line("当队长", "攻 %d · 兵 %d" % [ld["at"], ld["hp"]]))
-
-	# the unit that fights under this card
-	_detail.add_child(_heading("部　队"))
-	var names := {}
-	for m in ld["members"]:
-		names[m["name"]] = names.get(m["name"], 0) + 1
-	var parts: Array = []
-	for n in names:
-		parts.append(n + ("×%d" % names[n] if names[n] > 1 else ""))
-	var where := ""
-	if not is_lord and not save.party.has(_sel) and not swap_mode:
-		var lead := save.relic_unit_for_troop(f["troop"])
-		where = ("没带：不参战。\n" if save.benched.has(_sel) else
-			("现在编在 %s 里。\n" % _unit_name(lead) if lead != "" else "这个兵种没人当队长，现在不参战。\n"))
-	var unit := Kit.label(where + (("当队长时编入：" + "、".join(parts)) if not parts.is_empty()
-		else ("主公单独成队。" if is_lord else "同兵种没有别的卡，一人成队。")), 15)
-	unit.add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
-	unit.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	unit.custom_minimum_size = Vector2(340, 0)
-	_detail.add_child(unit)
 
 	# skills, explained
 	_detail.add_child(_heading("技　能"))
@@ -742,12 +706,38 @@ func _level_box(t: int, n: int) -> Control:
 	return box
 
 
+const DETAIL_CARD := Vector2(196, 274)  # the card in the detail panel (user: bigger portrait, layout redone)
+
+
+func _detail_head(title: String, card: Control) -> Array:
+	## the detail panel's head: the name across the top, then the big card with a narrow column of facts beside it.
+	## Returns [the row, the facts column].
+	var name_l := Kit.title_label(title, Kit.FONT_BIG + 2, "gold")
+	name_l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	name_l.custom_minimum_size = Vector2(340, 0)
+	_detail.add_child(name_l)
+	var top := HBoxContainer.new()
+	top.add_theme_constant_override("separation", 10)
+	_detail.add_child(top)
+	top.add_child(card)
+	var info := VBoxContainer.new()
+	info.add_theme_constant_override("separation", 8)
+	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top.add_child(info)
+	return [top, info]
+
+
 func _info_line(k: String, v: String) -> Control:
-	var l := Kit.label("%s　%s" % [k, v], 15)
-	l.add_theme_color_override("font_color", Color(1, 1, 1, 0.85))
+	## one fact as a small key over its value (the column beside the card is narrow)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 0)
+	box.add_child(Kit.label(k, 13, "muted"))
+	var l := Kit.label(v, 15)
+	l.add_theme_color_override("font_color", Color(1, 1, 1, 0.9))
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	l.custom_minimum_size = Vector2(176, 0)
-	return l
+	l.custom_minimum_size = Vector2(130, 0)
+	box.add_child(l)
+	return box
 
 
 func _heading(text: String) -> Control:
