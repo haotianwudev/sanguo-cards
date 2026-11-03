@@ -145,7 +145,7 @@ CG mode's text box has a 「框」 tool button (next to 跳过 / 隐藏) cycling
 aren't showing yet (`_options_room`), 小 also drops the title line; when the options appear the box grows to fit them.
 Screenshot with `--dlg=auto|mid|small`, and `--skip` on any map demo plays the story through to its options.
 **Story box rules (2026-11-01 pass, user asked for each):** the speaker's face sits in a fixed dark-gold frame (`_make_face_slot`) —
-a narration line only fades the face out, so the text's left edge never jumps; a name plate (`Kit.speaker_name(key)`: card name
+a narration line keeps the nearest speaker's face dimmed (0.55) with no name plate (`_near_speaker`; no face blinking out between lines), so the text's left edge never jumps; a name plate (`Kit.speaker_name(key)`: card name
 before 「·」, else the first real `Kit.ALIASES` name, `Kit.NOT_NAMES` skips descriptions like 美妇) sits on the frame's bottom, and
 记录 prefixes bare 「…」 lines with the speaker (`Kit.named_line`). The tools are `Kit.tool_button` pills (32 px, never `Kit.button`).
 Options that appear after the last line fade in and ignore taps for `TAP_GUARD` 0.3 s (`_show_buttons`) — keep that for any new

@@ -1247,8 +1247,19 @@ func _make_face_slot(parent: Control, at: Vector2) -> void:
 	stack.add_child(_dlg_name)
 
 
-func _set_face(key: String, shown_name := "") -> void:
-	## the face and name plate for one line: "" = narration (the face fades out, its frame stays)
+func _near_speaker(i: int) -> String:
+	## the speaker of the nearest line before i (else after it); "" when nobody in the scene speaks
+	for j in range(mini(i, _dlg_keys.size()) - 1, -1, -1):
+		if str(_dlg_keys[j]) != "":
+			return str(_dlg_keys[j])
+	for j in range(i + 1, _dlg_keys.size()):
+		if str(_dlg_keys[j]) != "":
+			return str(_dlg_keys[j])
+	return ""
+
+
+func _set_face(key: String, shown_name := "", dim := false) -> void:
+	## the face and name plate for one line: "" = nobody (the face fades out, its frame stays); dim = narration beside them
 	if not is_instance_valid(_dlg_face):
 		return
 	if key == "lord":  # the north route (and any lord card in play) has its own face
@@ -1259,11 +1270,14 @@ func _set_face(key: String, shown_name := "") -> void:
 	if tex != null:
 		_dlg_face.texture = tex
 	var tw := _dlg_face.create_tween()
-	tw.tween_property(_dlg_face, "modulate:a", 1.0 if tex != null else 0.0, 0.12)
+	if tex != null:
+		tw.tween_property(_dlg_face, "modulate", Color(0.55, 0.55, 0.55, 1.0) if dim else Color.WHITE, 0.12)
+	else:
+		tw.tween_property(_dlg_face, "modulate:a", 0.0, 0.12)
 	_dlg_face.set_meta("tw", tw)
 	var n := shown_name if shown_name != "" else Kit.speaker_name(key, Game.save.lord_name)
 	_dlg_name.text = n
-	_dlg_name.visible = tex != null and n != ""
+	_dlg_name.visible = tex != null and n != "" and not dim
 
 
 func _enemy_face(s: Dictionary) -> void:
@@ -1321,8 +1335,11 @@ func _dialog_show() -> void:
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	Sfx.cg_line(_dlg_cg, _dlg_i)
 	if _dlg_face != null:
-		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""  # narration: no face
-		_set_face(key)
+		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""
+		if key != "":
+			_set_face(key)
+		else:  # narration: the nearest speaker stays in the frame, dimmed and unnamed (no face blinking out and back between lines)
+			_set_face(_near_speaker(_dlg_i), "", true)
 	if last:
 		_story_read = Game.save.square
 		if _dlg_after != "":  # before a fight: the last line, then what you're up against
