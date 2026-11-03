@@ -360,13 +360,6 @@ func _build() -> void:
 	_skill_hide_btn.z_index = 5
 	_skill_hide_btn.pressed.connect(_toggle_skill_bars)
 	add_child(_skill_hide_btn)
-	var tac_btn := Kit.button("军令", "purple", Kit.FONT_SMALL)  # v3 军令: how 自动 plays
-	tac_btn.focus_mode = Control.FOCUS_NONE
-	tac_btn.custom_minimum_size = Vector2(84, 40)
-	tac_btn.position = Vector2(974, 8)
-	tac_btn.z_index = 5
-	tac_btn.pressed.connect(_open_tactics)
-	add_child(tac_btn)
 	var menu_btn := Kit.button("设置", "gray", Kit.FONT_SMALL)
 	menu_btn.custom_minimum_size = Vector2(84, 40)
 	menu_btn.position = Vector2(1186, 8)
@@ -672,7 +665,7 @@ func _on_swap(i: int, card_id: String) -> void:
 
 
 func _open_tactics() -> void:
-	## 军令: the leaders on the field and on the bench, each with up to max_rows rules for 自动
+	## 军令 over a battle (only the --tactics screenshot demo now: players set 军令 in 整备)
 	_close_skill_popup()
 	var cards: Array = b.leaders.map(func(u): return u["leader"]["card"])
 	cards.append_array(b.roster.map(func(ld): return ld["card"]))
