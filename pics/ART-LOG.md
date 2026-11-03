@@ -1438,3 +1438,18 @@
 - [x] 2026-10-31 cg `n11_jianlou` ← n11_jianlou.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-31 cg `n11_g_xiaoxi` ← n11_g_xiaoxi.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-31 cg `n11_guanzhang` ← n11_guanzhang.jpg 裁 2528×1696→2528×1422 · ok
+- [ ] 2026-10-31 map `prologue` ← prologue_strip.jpg · ok
+- [ ] 2026-10-31 map `taodong` ← taodong_strip.jpg · ⚠ 分辨率偏低 8192×512
+- [ ] 2026-10-31 map `yuxi` ← yuxi_strip.jpg · ok
+- [ ] 2026-10-31 map `dongui` ← dongui_strip.jpg · 强制：太小 8192×413（至少高 480）
+- [ ] 2026-10-31 map `jingxiang` ← jingxiang_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [ ] 2026-10-31 map `dongui` ← dongui_strip.jpg · ok
+- [ ] 2026-10-31 map `jingxiang` ← jingxiang_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [ ] 2026-10-31 map `huainan_n` ← huainan_n_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [ ] 2026-11-02 battle `n5_caobao_ren` ← n5_caobao_ren.jpg · ok
+- [ ] 2026-11-02 battle `n5_caobao_jiulou` ← n5_caobao_jiulou.jpg · ok
+- [ ] 2026-11-02 battle `n5_caobao` ← n5_caobao.jpg · ok
+- [ ] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok
+- [ ] 2026-11-02 battle `m11_zhangliao` ← m11_zhangliao.jpg · ok
+- [ ] 2026-11-02 battle `s12c_zhangliao` ← s12c_zhangliao.jpg · ok
+- [ ] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok

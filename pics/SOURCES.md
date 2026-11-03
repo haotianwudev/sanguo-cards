@@ -456,11 +456,13 @@
 | `lord_north_snow` | source/generals/lord_north_snow.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `rc_luoyang_s` | source/generals/rc_luoyang_s.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_river` | source/generals/lord_south_river.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_south_q` | source/generals/lord_south_q.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `lord_north_q` | source/generals/lord_north_q.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
-| `map:prologue_north` | source/map/bg_prologue_north.jpg | 用户提供 | 用户提供 | — |
+| `map:prologue_north` | source/map/prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
 | `map:changan` | source/map/changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `map:luoyang_n` | source/map/bg_luoyang_n.jpg | 用户提供 | 用户提供 | — |
+| `map:luoyang_n` | source/map/luoyang_n.jpg | 用户提供 | 用户提供 | — |
 | `map:beihai` | source/map/beihai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:dongui` | source/map/dongui.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:heishan` | source/map/heishan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -754,6 +756,8 @@
 | `battle:n10_luoshui_nu` | source/battles/n10_luoshui_nu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:n10_g_dukou` | source/battles/n10_g_dukou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:jd_shuifei` | source/battles/jd_shuifei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hnn_bw_dw` | source/battles/hnn_bw_dw.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hnn_bw_xc` | source/battles/hnn_bw_xc.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -1358,3 +1362,4 @@
 | `cg:n5_sunguan` | source/cg/n5_sunguan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n4_mifang` | source/cg/n4_mifang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n5_meet` | source/cg/n5_meet.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n6_xueye` | source/cg/n6_xueye.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
