@@ -721,15 +721,15 @@ func _level_line(cid: String) -> Control:
 
 
 func _level_box(t: int, n: int) -> Control:
-	## 等级 Lv.N · 铜 / 银 / 金 / 神 (the tier by copies held), in the tier's colour, and what the next level needs
+	## 品阶 铜 / 银 / 金 / 神 (the tier by copies held), in the tier's colour, and what the next level needs
 	var tiers: Array = GameData.get_db().gacha["tiers"]
 	var col: Color = [Color(0.9, 0.58, 0.33), Color(0.82, 0.88, 0.96), Color(1.0, 0.84, 0.3), Color(0.82, 0.6, 1.0)][mini(t, 3)]
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 0)
-	var main := Kit.label("Lv.%d · %s　%d 张" % [t + 1, tiers[t]["name"], n], Kit.FONT_BODY)
+	var main := Kit.label("%s　%d 张" % [tiers[t]["name"], n], Kit.FONT_BODY)
 	main.add_theme_color_override("font_color", col)
 	box.add_child(main)
-	var nxt := "已满级" if t >= tiers.size() - 1 else "再 %d 张升 Lv.%d" % [maxi(0, int(tiers[t + 1]["copies"]) - n), t + 2]
+	var nxt := "已满级" if t >= tiers.size() - 1 else "再 %d 张升%s" % [maxi(0, int(tiers[t + 1]["copies"]) - n), tiers[t + 1]["name"]]
 	var sub := Kit.label(nxt, 14)
 	sub.add_theme_color_override("font_color", Color(col, 0.75))
 	box.add_child(sub)
