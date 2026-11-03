@@ -1029,13 +1029,13 @@ func test_poison_stacks_ignores_resists_and_can_kill() -> void:
 
 
 func test_war_spirit_adds_magic_to_physical_blows() -> void:
-	## 料敌先机: each layer of 战意 makes every physical blow carry 20% more as magic damage (20 / 40 / 60 / 80%)
+	## 料敌先机: each layer of 战意 makes every physical blow carry 10% more as magic damage (10 / 20 / 30 / 40%)
 	var b := Battle.start("hulao", party(["guojia", "cav_n"]), 3)
 	b.db.battle["variance"] = 0.0
 	b.ap = 8
 	var g := b.leaders.find(b.leaders.filter(func(u): return u["leader"]["card"]["id"] == "guojia")[0])
 	b.act(g, "xianji")
-	check(is_equal_approx(b.buff["magic"], 0.2), "one layer: 20%")
+	check(is_equal_approx(b.buff["magic"], 0.1), "one layer: 10%")
 	b.take_events()
 	var c := b.leaders.find(b.leaders.filter(func(u): return u["leader"]["card"]["id"] == "cav_n")[0])
 	b.act(c, "madao")
@@ -1046,7 +1046,7 @@ func test_war_spirit_adds_magic_to_physical_blows() -> void:
 	for _i in 3:
 		b.leaders[g]["acted"] = false
 		b.act(g, "xianji")
-	check(is_equal_approx(b.buff["magic"], 0.8), "four layers: 80% (the cap)")
+	check(is_equal_approx(b.buff["magic"], 0.4), "four layers: 40% (the cap)")
 
 
 func test_every_sr_general_has_three_skills() -> void:
