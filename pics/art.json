@@ -5291,6 +5291,18 @@
     "hnn_bw_xc": {
       "src": "source/battles/hnn_bw_xc.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "n5_caobao_ren": {
+      "src": "source/battles/n5_caobao_ren.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_caobao_jiulou": {
+      "src": "source/battles/n5_caobao_jiulou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n5_caobao": {
+      "src": "source/battles/n5_caobao.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
