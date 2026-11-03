@@ -67,20 +67,18 @@ func _load(dir: String) -> void:
 		# power per AP: an effect with a `rate` hits for rate × AP cost in total (split over its hits), `hit_rate` gives each hit
 		# hit_rate × AP; so a 3 AP skill at rate 1.2 is worth 3.6, a hero's 3 AP at rate 2.0 is worth 6. An attack / magic effect
 		# with neither (nor a literal `power`) takes the default for its AP tier from skill_budget: rate_by_ap (dearer = more
-		# per AP), multi_hit_rate for each hit of a multi-hit skill, × ultimate_mult for a once-only 大招. A multi-hit 大招 deals the
-		# single-hit 大招's total split over its hits, divided by the combo its own hits add (so more hits ≠ more damage).
+		# per AP), × ultimate_mult for a once-only 大招. A multi-hit skill deals the single-hit total of its AP split over its
+		# hits, divided by the combo its own hits add (so more hits ≠ more damage).
 		for e in s["effects"]:
 			var cost := int(s["cost"])
 			var hits := int(e.get("hits", 1))
 			if e["type"] in ["attack", "magic"] and cost > 0 and not (e.has("power") or e.has("rate") or e.has("hit_rate")):
 				var is_ult: bool = s.get("uses") != null or s.get("per_battle", false)
 				var ult := float(skill_budget.get("ultimate_mult", 1.0)) if is_ult else 1.0
-				if hits > 1 and is_ult:  # a multi-hit 大招: the single-hit 大招's total, less what its own combo adds (user rule)
+				if hits > 1:  # multi-hit: the single-hit total split over the hits, less what its own combo adds (user rule)
 					var tiers1: Dictionary = skill_budget["rate_by_ap"]
 					var combo_gain := 1.0 + float(battle.get("combo_bonus", 0.1)) * (hits - 1) / 2.0
 					e["hit_rate"] = float(tiers1.get(str(cost), tiers1[str(tiers1.size())])) * ult / hits / combo_gain
-				elif hits > 1:
-					e["hit_rate"] = float(skill_budget["multi_hit_rate"]) * ult
 				else:
 					var tiers: Dictionary = skill_budget["rate_by_ap"]
 					e["rate"] = float(tiers.get(str(cost), tiers[str(tiers.size())])) * ult

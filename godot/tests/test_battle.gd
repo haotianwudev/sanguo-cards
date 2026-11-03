@@ -375,7 +375,7 @@ func test_each_troop_has_its_own_plain_move() -> void:
 	check_eq(plain["cavalry"]["cost"], 1)
 	check_eq(int(plain["cavalry"]["effects"][0]["hits"]), 2)
 	check_eq(plain["spear"]["cost"], 2)
-	check(float(plain["spear"]["effects"][0]["power"]) >= 2.0, "刺击 is the heavy one")
+	check(float(plain["spear"]["effects"][0]["power"]) >= 2.0 * float(db.skill_budget["rate_by_ap"]["1"]), "刺击 is the heavy one (at least two 1 AP strikes)")
 	check_eq(plain["archer"]["cost"], 0)
 	check(not plain["archer"]["effects"][0].get("pierce", false) and plain["archer"]["effects"].any(func(e): return e["type"] == "shred"), "射击 does not pierce; it shreds the resists instead")
 	check(not plain["strategist"]["effects"].any(func(e): return e["type"] in ["attack", "magic"]), "策士 plain move has no attack")
@@ -431,7 +431,7 @@ func test_the_dearer_the_attack_the_more_each_ap_buys() -> void:
 		if sk["special"]:
 			continue
 		if not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]) or not tiers.has(str(sk["cost"])) \
-				or sk["effects"].any(func(e): return int(e.get("hits", 1)) > 1):  # multi-hit skills follow multi_hit_rate
+				or sk["effects"].any(func(e): return int(e.get("hits", 1)) > 1):  # multi-hit skills: split and combo-scaled (game_data)
 			continue
 		var lo: float = float(tiers[str(sk["cost"])]) * sk["cost"] * (float(cfg["ultimate_mult"]) if sk["uses"] == 1 else 1.0) * float(cfg["tolerance"])
 		check(_attack_value(sk) >= lo, "%s (%d AP) is worth %.2f, wants >= %.2f" % [sk["name"], sk["cost"], _attack_value(sk), lo])
