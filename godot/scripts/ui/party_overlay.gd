@@ -681,13 +681,16 @@ func _fill_detail() -> void:
 		_detail.add_child(go)
 		_detail.move_child(go, 0)  # on top, not under the skills (user call)
 		return
+	var btn_at := top.get_index() + 1  # the buttons go right under the card header, above 部队 / 技能 (user call)
 	if not (not is_lord and db.cards[_sel]["soldier"]):  # a general (or the lord): its own 军令 (the 武将 layer)
 		var cid := str(f["id"])
 		var n: int = AutoPlayer.with_defaults(Game.options.get("tactics", {}))["rows"].get(cid, []).size()
-		var tb := Kit.button("%s 的军令%s" % ["主公" if is_lord else str(f["name"]).split("·")[0], ("（%d 条）" % n) if n > 0 else "", ], "purple")
+		var tb := Kit.button("%s 的军令%s" % ["主公" if is_lord else str(Kit.split_name(str(f["name"]))[0]), ("（%d 条）" % n) if n > 0 else "", ], "purple")
 		tb.custom_minimum_size = Vector2(340, 44)
 		tb.pressed.connect(_open_tactics.bind("card", cid))
 		_detail.add_child(tb)
+		_detail.move_child(tb, btn_at)
+		btn_at += 1
 	var act: Button
 	if is_lord:
 		act = Kit.button("主公固定出阵", "blue")
@@ -699,6 +702,8 @@ func _fill_detail() -> void:
 	act.custom_minimum_size = Vector2(340, 50)
 	act.pressed.connect(_toggle.bind(_sel))
 	_detail.add_child(act)
+	_detail.move_child(act, btn_at)
+	btn_at += 1
 	if not is_lord and not save.party.has(_sel):
 		var sel := _sel
 		var left := save.benched.has(sel)
@@ -709,6 +714,7 @@ func _fill_detail() -> void:
 			_msg.text = ("%s 编回部队" if left else "%s 留在卡池，不参战") % db.cards[sel]["name"]
 			_rebuild())
 		_detail.add_child(bring)
+		_detail.move_child(bring, btn_at)
 
 
 func _form_card_tier(fid: String) -> int:
