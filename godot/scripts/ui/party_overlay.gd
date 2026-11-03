@@ -378,6 +378,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	v.pressed.connect(_tap.bind(cid))
 	v.tap_on_release = true
 	_dnd(v, {} if cid == "lord" or swap_mode else {"kind": "card", "id": cid, "from": "party"}, "slot:" + cid)  # 换人: the field only takes drops
+	v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER  # never stretched by a wide row under it
 	box.add_child(v)
 	var n: int = ld["members"].size()
 	var l := Kit.label(role + ("  · 部队 %d" % (n + 1) if n > 0 else ""), 14, "gold")
@@ -389,19 +390,24 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	items.alignment = BoxContainer.ALIGNMENT_CENTER
 	items.add_theme_constant_override("separation", 4)
 	items.custom_minimum_size = Vector2(150, 26)
-	for rid in Game.save.unit_relics(cid):
-		var b := TextureButton.new()  # fixed 26px: a Button would grow to the icon's own size
+	var carried: Array = Game.save.unit_relics(cid)
+	# the icons share the 150 px with the 军令 chip: many 宝物 → smaller icons, never a wider slot
+	var room := 150.0 - (48.0 if not swap_mode else 0.0)
+	var icon := clampf(floorf((room - 4.0 * maxf(0.0, carried.size() - 1.0)) / maxf(1.0, carried.size())), 12.0, 26.0)
+	for rid in carried:
+		var b := TextureButton.new()  # fixed size: a Button would grow to the icon's own size
 		b.texture_normal = Kit.relic_icon(rid)
 		b.ignore_texture_size = true
 		b.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-		b.custom_minimum_size = Vector2(26, 26)
+		b.custom_minimum_size = Vector2(icon, icon)
+		b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		b.tooltip_text = GameData.get_db().relics[rid]["name"]
 		b.pressed.connect(_tap.bind("relic:" + rid))
 		_dnd(b, {"kind": "relic", "id": rid}, "slot:" + cid)
 		items.add_child(b)
 	if not swap_mode:  # this unit's 军令 (the 兵种 layer: its troop)
 		var tr: String = str(ld["card"]["troop"])
-		var tb := Kit.tool_button("军令" + _rows_note(AutoPlayer.with_defaults(Game.options.get("tactics", {}))["troop_rows"].get(tr, [])))
+		var tb := Kit.tool_button("军令")  # no count on it: a fixed narrow chip, so the 宝物 icons keep their room
 		tb.add_theme_font_size_override("font_size", 13)
 		tb.custom_minimum_size = Vector2(0, 26)
 		for st in ["normal", "hover", "pressed", "disabled"]:
@@ -415,10 +421,6 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 		items.add_child(tb)
 	box.add_child(items)
 	return box
-
-
-func _rows_note(rows: Array) -> String:
-	return (" %d" % rows.size()) if not rows.is_empty() else ""
 
 
 func _open_tactics(tab: String, key: String) -> void:

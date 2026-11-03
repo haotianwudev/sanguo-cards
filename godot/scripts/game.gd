@@ -594,9 +594,20 @@ func demo(name: String) -> void:
 				save.grant_card(c)
 			save.kept_relics = ["shoushihe", "jiunang", "bingfu", "bingfa", "gudingdao", "dunjia"]  # a run starts with these
 			save.relics = save.kept_relics.duplicate()
+			if OS.get_cmdline_user_args().has("--manyrelics"):  # a late-run pile of 宝物 (the slots' icon rows must not widen the cards)
+				for rid in GameData.get_db().relics.keys().slice(0, 16):
+					if not save.relics.has(rid):
+						save.relics.append(rid)
+						save.kept_relics.append(rid)
 			save.quests_cleared = ["prologue", "taodong"]  # the ？小故事 of those chapters are open
 			save.flags = ["出生：江东富春"]
 			save.merit = 7  # enough for one story (5), not two
+			if OS.get_cmdline_user_args().has("--spent"):  # --spent: every owned card's 本章限 N 次 大招 used up (the 「大招已用」 tag)
+				for cid in save.owned:
+					for sid in GameData.get_db().cards.get(cid, {}).get("skills", []):
+						if GameData.get_db().skills[sid].get("uses", null) != null:
+							save.carry_uses[cid] = save.carry_uses.get(cid, {})
+							save.carry_uses[cid][sid] = 0
 			var m := MapScreen.new()
 			show_screen(m)
 			m.call_deferred("_open_party")
