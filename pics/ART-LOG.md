@@ -1453,3 +1453,5 @@
 - [ ] 2026-11-02 battle `m11_zhangliao` ← m11_zhangliao.jpg · ok
 - [ ] 2026-11-02 battle `s12c_zhangliao` ← s12c_zhangliao.jpg · ok
 - [ ] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok
+- [ ] 2026-11-03 cg `n6_beimen` ← n6_beimen2.jpg · ok
+- [ ] 2026-11-03 cg `n6_zhujiu` ← n6_zhujiu.jpg · ok
