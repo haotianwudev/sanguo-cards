@@ -946,7 +946,13 @@ func _badge_add(n: Control) -> void:
 
 
 func _enemy_center() -> Vector2:
-	return _enemy_art.global_position + _enemy_art.size / 2 - global_position
+	## where blows land on the enemy: a battle CG fills the screen, so not its middle (that is behind the skill strip and
+	## the cards) but the upper body in the open part above the party bar; a portrait box: a little above its middle (the chest)
+	var r := Rect2(_enemy_art.global_position - global_position, _enemy_art.size)
+	if _has_cg and _party_hp != null and _party_hp.is_inside_tree():
+		var floor_y := _party_hp.global_position.y - global_position.y
+		return Vector2(r.get_center().x, clampf(floor_y * 0.5, r.position.y + 60.0, r.end.y))
+	return r.get_center() - Vector2(0, r.size.y * 0.12)
 
 
 func _party_center() -> Vector2:
