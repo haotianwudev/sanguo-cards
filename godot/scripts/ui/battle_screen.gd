@@ -512,7 +512,7 @@ func _sync_skill_bars() -> void:
 		if _skills_hidden():  # 隐藏技能: only the column of the leader whose card was just tapped, the same strip as when shown
 			if i != _bar_open or not (b.can_act(i) or b.can_swap(i)):
 				continue
-		elif not b.can_act(i):
+		elif not (b.can_act(i) or (b.leaders[i].get("slain", false) and b.can_swap(i))):  # 被点名打倒: only 换人 is left in his column
 			continue
 		var v: CardView = _cards[i]
 		var u: Dictionary = b.leaders[i]
@@ -520,7 +520,7 @@ func _sync_skill_bars() -> void:
 		var bar := VBoxContainer.new()  # stacked, one wide button per skill, in this leader's column
 		bar.add_theme_constant_override("separation", 5)
 		var bh := 62.0 if small else 72.0  # big for a thumb; the column sits on the card and reaches up over the HP bar and the enemy, which is fine (user call)
-		var skills: Array = u["leader"]["card"]["skills"]
+		var skills: Array = [] if u.get("slain", false) else u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
 			var ult: bool = _is_ult(sk) or (b.enemy_state("charging") and sk["effects"].any(func(e): return e["type"] == "interrupt"))  # 打断 lights up while the enemy winds up
