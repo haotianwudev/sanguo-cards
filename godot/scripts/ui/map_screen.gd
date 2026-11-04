@@ -260,6 +260,7 @@ class MapLines extends Control:
 
 func _ready() -> void:
 	Bgm.play("map")
+	_warm_party_portraits.call_deferred()
 	# top bar
 	var top := HBoxContainer.new()
 	_top = top
@@ -1838,6 +1839,20 @@ func _open_settings() -> void:
 	var o := SettingsOverlay.new()
 	o.name = "Settings"
 	add_child(o)
+
+
+func _warm_party_portraits() -> void:
+	## the 整备 pool shows every owned card's portrait: load them in the background now, so it opens without a stall
+	if Game.save == null:
+		return
+	var db := GameData.get_db()
+	var keys: Array = [Kit.portrait_key("lord_north" if Game.save.is_north() else "lord")]
+	for cid in Game.save.owned_ids() + Game.save.route_lord_forms():
+		keys.append(Kit.portrait_key(str(cid)))
+		var person: String = str(db.cards.get(cid, {}).get("person", ""))
+		if person != "":
+			keys.append(Kit.portrait_key(person))
+	Kit.warm_portraits(keys)
 
 
 func _open_party() -> void:

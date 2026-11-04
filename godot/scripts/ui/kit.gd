@@ -587,12 +587,29 @@ static func cg(key: String) -> Texture2D:
 	return load(path) if key != "" and ResourceLoader.exists(path) else null
 
 
+static var _warming := {}  # portrait key -> path, loading on a background thread
+
+
+static func warm_portraits(keys: Array) -> void:
+	## start loading these portraits off the main thread, so a screen that shows them all (整备) opens without the
+	## first-time disk read; portrait() picks them up
+	for key in keys:
+		if key == "" or _textures.has(key) or _warming.has(key) or not _portrait_index().has(key):
+			continue
+		var path: String = "res://data/portraits/" + _portrait_index()[key]["file"]
+		if ResourceLoader.load_threaded_request(path) == OK:
+			_warming[key] = path
+
+
 static func portrait(key: String, aspect: float, heads: float) -> Texture2D:
 	## A crop of the portrait around the face: `aspect` = width/height of the box, `heads` = head-heights tall.
 	if key == "" or not _portrait_index().has(key):  # no art yet
 		return null
 	var entry: Dictionary = _portrait_index()[key]
 	var tex: Texture2D = _textures.get(key)
+	if tex == null and _warming.has(key):  # warm_portraits() started it in the background: take it (waits if not done yet)
+		tex = ResourceLoader.load_threaded_get(_warming[key]) as Texture2D
+		_warming.erase(key)
 	if tex == null:
 		tex = load("res://data/portraits/" + entry["file"])
 		_textures[key] = tex
