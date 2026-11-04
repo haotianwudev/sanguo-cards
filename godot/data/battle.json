@@ -108,7 +108,7 @@
     "swap_from_round": 1,
     "swap_ready": true,
     "_charge_break": "打断蓄力：带 interrupt 效果的技能（主公扔刀 / 回马枪等）打在正在蓄力的敌人身上，蓄力作废，我方回 ap_reward AP，敌人破防 break_bonus（break_turns 回合）。普通眩晕不打断蓄力，只让敌人跳过一回合（蓄力顺延）",
-    "_mark_pct": "点名（敌人招式 mark）：被点名的队长下回合还在阵上，我军就损失体力上限的这么多（防御、减伤都不管用）；换下他就扑空（用户要求：1/4）。主公也能换人——换成他的另一张主公卡",
+    "_mark_pct": "点名（敌人招式 mark）：被点名的队长下回合还在阵上，他被打倒（变灰，本场不能行动，可以换下），我军还损失体力上限的这么多（防御、减伤都不管用）；换下他就扑空（用户要求：1/4）。主公也能换人——换成他的另一张主公卡",
     "mark_pct": 0.25,
     "charge_break": {"ap_reward": 1, "break_bonus": 0.25, "break_turns": 2},
     "_tactics": "军令（自动战斗）三层：整体（presets 三档预设 + 中军军令 party_acts：防御 / 留 AP / 换人）、兵种（troop_acts：按技能类别，对应到每位队长自己的技能）、武将（具体技能）。presets：interrupt 敌人蓄力时先打断；defend_charge 有蓄力杀招要落地又打断不了就防御；reserve 允许武将军令的「留气」；ults always = 大招照放 / boss = 只在首领战放限 1 大招。conditions = 每条军令可选的条件（两格，都成立才算；代码 AutoPlayer.cond_holds）；max_rows = 每层每项最多几条",
@@ -125,7 +125,7 @@
         "field_no_magic": "场上没人会法术", "field_no_cleanse": "场上没人能解状态", "field_no_interrupt": "打断技能用光", "leader_spent": "有队长大招用尽"
       },
       "party_acts": {
-        "defend": "全军防御", "end": "结束回合（留 AP）", "swap_fresh": "换下大招用尽的", "swap_marked": "换下被点名的",
+        "defend": "全军防御", "end": "结束回合（留 AP）", "swap_fresh": "换下大招用尽的", "swap_marked": "换下被点名 / 被打倒的",
         "swap_strategist": "换上策士", "swap_logistics": "换上后勤", "swap_infantry": "换上刀兵", "swap_spear": "换上枪兵",
         "swap_cavalry": "换上骑兵", "swap_archer": "换上弓兵", "swap_bandit": "换上贼兵"
       },

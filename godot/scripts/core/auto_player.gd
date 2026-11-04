@@ -117,7 +117,7 @@ static func marked_unit(b: Battle) -> int:
 	if b.enemy["mark"].is_empty():
 		return -1
 	for k in b.leaders.size():
-		if str(b.leaders[k]["leader"]["card"]["id"]) == str(b.enemy["mark"]["card"]):
+		if Battle.swap_key(b.leaders[k]["leader"]) == str(b.enemy["mark"]["card"]):
 			return k
 	return -1
 
@@ -307,8 +307,13 @@ static func _party_act(b: Battle, tactics: Dictionary) -> Dictionary:
 			return {"kind": "defend"}
 		if act == "end":
 			return {"kind": "end"}
-		if act == "swap_marked":  # 换下被点名的: the strongest bench card in for the marked leader (the blow then misses)
+		if act == "swap_marked":  # 换下被点名的: the strongest bench card in for the marked leader (the blow then misses), else for one already 被打倒
 			var mk := marked_unit(b)
+			if mk < 0:
+				for k in b.leaders.size():
+					if b.leaders[k].get("slain", false) and b.can_swap(k):
+						mk = k
+						break
 			if mk >= 0 and b.can_swap(mk):
 				var opts: Array = b.swap_options(mk)
 				opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))

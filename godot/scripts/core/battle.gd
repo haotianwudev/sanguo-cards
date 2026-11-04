@@ -144,7 +144,7 @@ func _make_unit(ld: Dictionary) -> Dictionary:
 			u_left[s] = _carry_uses.get(cid, {}).get(s, db.skills[s]["uses"])
 		u_extra[s] = st["extra_cost"].get(s, 0) if st.has("extra_cost") else _carry_extra.get(cid, {}).get(s, 0)
 	return {"leader": ld, "uses_left": u_left, "extra_cost": u_extra, "acted": false,
-		"idle_rounds": 0, "boosted": false, "confused": false, "confuse_next": false}
+		"idle_rounds": 0, "boosted": false, "confused": false, "confuse_next": false, "slain": false}  # slain: 点名 landed on him — grey, out of action this fight (swap him out)
 
 
 func _leaders_hp() -> int:
@@ -214,7 +214,7 @@ func swap(i: int, card_id: String) -> Array:
 	var old: Dictionary = leaders[i]
 	var old_ld: Dictionary = old["leader"]
 	bench_states[swap_key(old_ld)] = {"uses_left": old["uses_left"].duplicate(), "extra_cost": old["extra_cost"].duplicate()}
-	if str(old_ld["card"]["troop"]) == "lord":
+	if str(old_ld["card"]["troop"]) == "lord" and not old.get("slain", false):
 		roster.append(old_ld)  # a lord card swapped out can come back (he never leaves the field, only changes card)
 	var u := _make_unit(new_ld)  # the newcomer's own attack and unit
 	var share := float(party_hp) / maxf(1.0, float(party_max))
@@ -326,7 +326,7 @@ func usable(u: Dictionary, sk: Dictionary) -> bool:
 
 func can_act(i: int) -> bool:
 	var u: Dictionary = leaders[i]
-	if result != "" or u["acted"] or u["confused"]:
+	if result != "" or u["acted"] or u["confused"] or u.get("slain", false):
 		return false
 	for sk in skills_of(u):
 		if usable(u, sk):
@@ -614,11 +614,14 @@ const SEAL_NAMES := {"ultimate": "大招", "magic": "法术", "attack": "物理�
 
 
 func mark_pick() -> int:
-	## 点名: the hardest hitter on the field (a smart enemy) or anyone
+	## 点名: the hardest hitter on the field (a smart enemy) or anyone — never one already slain (-1: nobody left to mark)
+	var alive: Array = range(leaders.size()).filter(func(k): return not leaders[k].get("slain", false))
+	if alive.is_empty():
+		return -1
 	if not smart():
-		return rng.randi_range(0, leaders.size() - 1)
-	var best := 0
-	for k in leaders.size():
+		return alive[rng.randi_range(0, alive.size() - 1)]
+	var best: int = alive[0]
+	for k in alive:
 		if float(leaders[k]["leader"]["at"]) > float(leaders[best]["leader"]["at"]):
 			best = k
 	return best
@@ -832,13 +835,13 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			if eff["target"] == "all":
 				var who: Array = []
 				for t in leaders:
-					if t != u:
+					if t != u and not t.get("slain", false):
 						t["boosted"] = true
 						who.append(leaders.find(t))
 				_ev({"t": "boost", "units": who})
 				return ["  全军进入 BOOST（下次行动 ×%s）" % bm]
 			if eff["target"] == "random_idle":  # 鼓舞一个还没出手的友军
-				var idle: Array = leaders.filter(func(t): return t != u and not t["acted"] and not t["boosted"] and not t["confused"])
+				var idle: Array = leaders.filter(func(t): return t != u and not t["acted"] and not t["boosted"] and not t["confused"] and not t.get("slain", false))
 				if idle.is_empty():
 					return ["  没有可以鼓舞的人"]
 				var pick: Dictionary = idle[rng.randi_range(0, idle.size() - 1)]
@@ -1055,10 +1058,12 @@ func _enemy_phase(defend_cut: float) -> Array:
 				continue  # the wind-up costs this action only
 			if mv.has("mark"):  # 点名: picks one of our leaders; next turn opens with the blow at him (换下他 = it misses; else battle.mark_pct of our max HP, no guard cuts it)
 				var tk := mark_pick()
+				if tk < 0:
+					continue
 				var tu: Dictionary = leaders[tk]
-				enemy["mark"] = {"card": str(tu["leader"]["card"]["id"]), "who": unit_name(tu), "move": str(mv["mark"])}
+				enemy["mark"] = {"card": swap_key(tu["leader"]), "who": unit_name(tu), "move": str(mv["mark"])}  # swap_key: a lord swapping to another lord card dodges too
 				_ev({"t": "mark_on", "unit": tk, "move": mv["mark"]})
-				log.append("[color=red]%s【%s】点名 %s……下回合【%s】！（换下他就扑空，否则我军损失体力上限的 1/4）[/color]" % [data["name"], mv["name"], unit_name(tu), mv["mark"]])
+				log.append("[color=red]%s【%s】点名 %s……下回合【%s】！（换下他就扑空；不换，他被打倒、本场不能再行动，我军还损失体力上限的 1/4）[/color]" % [data["name"], mv["name"], unit_name(tu), mv["mark"]])
 				continue
 			var marked_k := -2  # -2: not the 点名 blow
 			if not enemy["mark"].is_empty() and mv["name"] == enemy["mark"]["move"]:
@@ -1066,7 +1071,7 @@ func _enemy_phase(defend_cut: float) -> Array:
 				enemy["mark"] = {}
 				marked_k = -1
 				for k in leaders.size():
-					if str(leaders[k]["leader"]["card"]["id"]) == mk["card"]:
+					if swap_key(leaders[k]["leader"]) == mk["card"] and not leaders[k].get("slain", false):
 						marked_k = k
 				if marked_k < 0:  # the marked one was swapped out
 					_ev({"t": "mark_miss", "move": mv["name"], "who": mk["who"]})
@@ -1108,7 +1113,13 @@ func _enemy_phase(defend_cut: float) -> Array:
 				var md := maxi(1, int(round(party_max * float(db.battle.get("mark_pct", 0.25)))))
 				party_hp = maxi(0, party_hp - md)
 				_ev({"t": "enemy_hit", "dmg": md, "move": mv["name"], "cut": 0.0, "hp": party_hp, "mark": marked_k})
-				log.append("[color=red]%s【%s】直取 %s，我军受到 %d 伤害（体力上限的 1/4）[/color]" % [data["name"], mv["name"], unit_name(leaders[marked_k]), md])
+				var su: Dictionary = leaders[marked_k]
+				su["slain"] = true  # 被斩: grey for the rest of the fight (he can still be swapped out)
+				su["boosted"] = false
+				su["confused"] = false
+				su["confuse_next"] = false
+				_ev({"t": "slain", "unit": marked_k, "move": mv["name"]})
+				log.append("[color=red]%s【%s】直取 %s！%s 被打倒，本场不能再行动；我军受到 %d 伤害（体力上限的 1/4）[/color]" % [data["name"], mv["name"], unit_name(su), unit_name(su), md])
 			elif float(mv["power"]) > 0.0 or mv.has("pct"):
 				var c: float = 0.0 if mv.get("pierce", false) else cut
 				# pct: the blow also takes that share of our MAX HP (a 大招 that keeps hurting however big the party grows); the guard cuts it too
@@ -1238,7 +1249,7 @@ func _counter_strike() -> Array:
 		var u: Dictionary = leaders[k]
 		if enemy["hp"] <= 0:
 			break
-		if u["leader"]["card"]["troop"] == "spear" and not u["confused"] and (u.get("sure_counter", false) or rng.randf() < proc_chance("spear")):
+		if u["leader"]["card"]["troop"] == "spear" and not u["confused"] and not u.get("slain", false) and (u.get("sure_counter", false) or rng.randf() < proc_chance("spear")):
 			_ev({"t": "passive", "unit": k, "name": unit_name(u), "text": "顺势反击"})
 			var d2 := _land(_dmg(float(SaveData.leader_power(u["leader"])) * float(db.battle.get("counter_power", 0.3)) * (1.0 + float(buff["atk"])), "attack"), "attack", false)
 			_ev({"t": "counter", "unit": unit_name(u), "slot": k, "dmg": d2, "hp": enemy["hp"]})
@@ -1285,7 +1296,7 @@ func _start_round() -> Array:
 	for k in leaders.size():  # each troop's own small-chance trick (battle.json passive_chance + 宝物), no AP
 		var pu: Dictionary = leaders[k]
 		var ptr: String = pu["leader"]["card"]["troop"]
-		if ptr in ["lord", "cavalry", "spear"] or rng.randf() >= proc_chance(ptr):
+		if ptr in ["lord", "cavalry", "spear"] or pu.get("slain", false) or rng.randf() >= proc_chance(ptr):
 			continue
 		log.append_array(_troop_trick(k))
 	for u in leaders:
@@ -1293,14 +1304,14 @@ func _start_round() -> Array:
 		u["sure_counter"] = false
 		u["confused"] = u["confuse_next"]
 		u["confuse_next"] = false
-		if not u["boosted"] and u["idle_rounds"] >= int(cfg["boost_idle_rounds"]) and rng.randf() < float(cfg["boost_chance"]):
+		if not u["boosted"] and not u.get("slain", false) and u["idle_rounds"] >= int(cfg["boost_idle_rounds"]) and rng.randf() < float(cfg["boost_chance"]):
 			u["boosted"] = true
 			_ev({"t": "boost", "units": [leaders.find(u)], "idle": true})
 			log.append("%s 蓄势已久 —— BOOST！" % unit_name(u))
 	for k in leaders.size():
 		var u: Dictionary = leaders[k]
 		var raid := float(cfg.get("interrupt_by_troop", {}).get(u["leader"]["card"]["troop"], cfg["interrupt_chance"])) + (float(mods.get("raid", 0.0)) if u["leader"]["card"]["troop"] == "cavalry" else 0.0)  # 突袭 (宝物 raise the cavalry's)
-		if not u["leader"]["members"].is_empty() and enemy["hp"] > 0 and rng.randf() < raid:
+		if not u["leader"]["members"].is_empty() and not u.get("slain", false) and enemy["hp"] > 0 and rng.randf() < raid:
 			log.append_array(_raid(k))
 	_check_end()
 	if result == "":

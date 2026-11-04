@@ -417,7 +417,7 @@ func _refresh() -> void:
 	if not e["stance"].is_empty():
 		st.append("【反】%s：物理攻击会被反击" % e["stance"]["name"])
 	if not e["mark"].is_empty():
-		st.append("⚠ 点名 %s：下回合【%s】——换下他就扑空，防御免重创" % [e["mark"]["who"], e["mark"]["move"]])
+		st.append("⚠ 点名 %s：下回合【%s】——换下他就扑空；不换，他被打倒（本场不能行动）、我军掉体力上限 1/4" % [e["mark"]["who"], e["mark"]["move"]])
 	if not e["shield"].is_empty():
 		st.append("【盾】%s %d/%d：挡物理（弓兵、法术、大招穿透）" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
 	if not e["form"].is_empty():
@@ -849,12 +849,15 @@ func _sync_fx() -> void:
 			want["conf_%s" % id] = func(): return BattleFx.orbit(self, r.position + Vector2(r.size.x / 2, 8), 56.0, 14.0, 3, BattleFx.VIOLET, 10.0)
 		if u["boosted"]:
 			want["boost_%s" % id] = func(): return BattleFx.boost_aura(self, r)
-		if not e["mark"].is_empty() and id == str(e["mark"]["card"]):  # 点名: the marked card pulses red until the blow comes
-			want["mark_%s" % id] = func(): return BattleFx.glow(self, r, Color(1.0, 0.15, 0.1))
+		var key := Battle.swap_key(u["leader"])
+		if not e["mark"].is_empty() and key == str(e["mark"]["card"]) and not u.get("slain", false):  # 点名: the marked card burns red until the blow comes
+			want["mark_%s" % key] = func(): return BattleFx.charge_aura(self, r)
+		if u.get("slain", false):  # 被斩: cracked and dark for the rest of the fight
+			want["slain_%s" % key] = func(): return BattleFx.cracks(self, r, Color(0.9, 0.2, 0.15, 0.85), 6, true)
 		if b.buff["layers"] > 0:
 			want["buff_%s" % id] = func(): return BattleFx.glow(self, r, BattleFx.GOLD)
 		var tint := Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE  # a card that can't act stays grey (set_state dimmed it)
-		_cards[i].modulate = tint * Color(0.55, 0.55, 0.55) if _cards[i].dimmed else tint
+		_cards[i].modulate = Color(0.3, 0.3, 0.3) if u.get("slain", false) else (tint * Color(0.55, 0.55, 0.55) if _cards[i].dimmed else tint)
 		_boost_pop(_cards[i], u["boosted"])
 	_fx_set(want)
 	_sync_badges()
@@ -955,7 +958,9 @@ func _sync_badges() -> void:
 			_badge_add(rib)
 		if b.counters.any(func(c): return int(c.get("unit", -1)) == i):
 			mine.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78)))
-		if not e["mark"].is_empty() and str(u["leader"]["card"]["id"]) == str(e["mark"]["card"]):
+		if u.get("slain", false):
+			mine.append(BattleFx.badge("倒", Color(0.45, 0.45, 0.45)))
+		elif not e["mark"].is_empty() and Battle.swap_key(u["leader"]) == str(e["mark"]["card"]):
 			mine.append(BattleFx.badge("点", Color(0.9, 0.15, 0.15)))
 		for k in mine.size():
 			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
@@ -1339,6 +1344,15 @@ func _play(events: Array) -> void:
 					Kit.shake(self, 22.0, 0.4)
 					for c in _cards:
 						Kit.shake(c, 9.0, 0.3)
+				elif int(ev.get("mark", -1)) >= 0 and int(ev["mark"]) < _cards.size():  # 点名 lands: an X cut across the marked card
+					var mr := _card_rect(int(ev["mark"]))
+					BattleFx.slash(self, mr.get_center(), Color(1.0, 0.15, 0.1), -40.0, mr.size.length() * 1.1, 16.0)
+					BattleFx.slash(self, mr.get_center(), Color(1.0, 0.85, 0.75), 40.0, mr.size.length() * 1.1, 10.0, 0.1)
+					BattleFx.burst(self, mr.get_center(), Color(1.0, 0.25, 0.15), 16, 20.0, 170.0, 6.0, 0.35)
+					_flash(_cards[int(ev["mark"])], Color(2.2, 0.5, 0.45))
+					Kit.shake(_cards[int(ev["mark"])], 16.0, 0.35)
+					Kit.shake(self, 14.0, 0.3)
+					BattleFx.vignette(self, Color(0.8, 0.0, 0.0, 0.5), 0.6)
 				else:
 					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
 					for c in _cards:
@@ -1442,10 +1456,20 @@ func _play(events: Array) -> void:
 				Sfx.play("charge")
 				var mu: int = int(ev.get("unit", 0))
 				if mu >= 0 and mu < _cards.size():
-					BattleFx.ring(self, _card_rect(mu).get_center(), Color(1.0, 0.2, 0.15), 20.0, 150.0, 0.45, 6)
-					Kit.pop(_cards[mu], 1.08)
-					Kit.float_text(self, _card_rect(mu).get_center() + Vector2(0, -60), "被点名！", Kit.c("red"), 40)
-				await _alert("点名", "下回合【%s】→ %s　换下他或防御" % [ev["move"], b.unit_name(b.leaders[mu]) if mu < b.leaders.size() else ""], Kit.c("red"), 0.8)
+					BattleFx.arrow(self, _enemy_center(), _card_rect(mu).get_center(), Color(1.0, 0.25, 0.15), 0.0, 1.6)
+					await get_tree().create_timer(0.18).timeout
+					await _mark_stamp(mu)
+				await _alert("点名", "下回合【%s】→ %s　换下他就扑空，不换就被打倒" % [ev["move"], b.unit_name(b.leaders[mu]) if mu < b.leaders.size() else ""], Kit.c("red"), 0.9)
+				_refresh()
+			"slain":  # 点名 landed: the card goes dark and cracks, out of action this fight
+				var xu: int = int(ev.get("unit", 0))
+				if xu >= 0 and xu < _cards.size():
+					Sfx.play("break")
+					var xc: Control = _cards[xu]
+					xc.create_tween().tween_property(xc, "modulate", Color(0.3, 0.3, 0.3), 0.45)
+					BattleFx.burst(self, _card_rect(xu).get_center(), Color(0.55, 0.5, 0.5), 12, 20.0, 130.0, 4.0, 0.3)
+					Kit.float_text(self, _card_rect(xu).get_center() + Vector2(0, -40), "被打倒！", Kit.c("red"), 44)
+					await get_tree().create_timer(0.6).timeout
 				_refresh()
 			"mark_miss":
 				Sfx.play("guard")
@@ -1840,6 +1864,38 @@ func _banner(text: String, color: Color) -> void:
 	tw.tween_property(l, "modulate:a", 0.0, 0.18)
 	tw.tween_callback(l.queue_free)
 	await get_tree().create_timer(0.55).timeout
+
+
+func _mark_stamp(i: int) -> void:
+	## 点名: a big red 「点」 seal slams onto the card, the card jolts and flushes red
+	var r := _card_rect(i)
+	var l := Kit.label("点", 120, "red")
+	l.add_theme_color_override("font_color", Color(1.0, 0.18, 0.12))
+	l.add_theme_color_override("font_outline_color", Color(0.15, 0.0, 0.0))
+	l.add_theme_constant_override("outline_size", 14)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	l.size = Vector2(180, 180)
+	l.position = r.get_center() - l.size / 2.0
+	l.pivot_offset = l.size / 2.0
+	l.scale = Vector2(3.0, 3.0)
+	l.modulate.a = 0.0
+	l.z_index = 60
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(l)
+	var tw := l.create_tween()
+	tw.tween_property(l, "modulate:a", 1.0, 0.08)
+	tw.parallel().tween_property(l, "scale", Vector2.ONE, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	await tw.finished
+	Sfx.play("enemy_hit")
+	BattleFx.ring(self, r.get_center(), Color(1.0, 0.2, 0.15), 20.0, 170.0, 0.45, 7)
+	_flash(_cards[i], Color(2.0, 0.6, 0.55))
+	Kit.shake(_cards[i], 12.0, 0.3)
+	var out := l.create_tween()
+	out.tween_interval(0.45)
+	out.tween_property(l, "modulate:a", 0.0, 0.3)
+	out.tween_callback(l.queue_free)
+	await get_tree().create_timer(0.35).timeout
 
 
 func _alert(title: String, sub: String, color: Color, hold: float) -> void:

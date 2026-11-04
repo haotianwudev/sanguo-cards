@@ -1211,7 +1211,7 @@ func demo(name: String) -> void:
 				await get_tree().create_timer(0.5).timeout
 				var sm: int = int(round(b.b.enemy["max_hp"] * 0.12))
 				b.b.enemy["data"]["moves"].append({"name": "画戟斩将", "power": 0, "weight": 0})
-				b.b.enemy["mark"] = {"card": str(b.b.leaders[1]["leader"]["card"]["id"]), "who": Battle.unit_name(b.b.leaders[1]), "move": "画戟斩将"}
+				b.b.enemy["mark"] = {"card": Battle.swap_key(b.b.leaders[1]["leader"]), "who": Battle.unit_name(b.b.leaders[1]), "move": "画戟斩将"}
 				b.b.enemy["shield"] = {"name": "相国铁甲", "hp": sm * 2 / 3, "max_hp": sm}
 				b.b.enemy["form"] = {"name": "八门金锁·休门", "vs": "attack", "cut": 0.6, "turns": 2}
 				b.b.seal = {"name": "反间计", "kind": "ultimate", "turns": 1}
@@ -1219,6 +1219,15 @@ func demo(name: String) -> void:
 				b._refresh()
 				b._sync_fx()
 				b._sync_skill_bars()
+				if OS.get_cmdline_user_args().has("--slain"):  # the 点名 blow lands: X cut, the card goes dark (--markon: the 「点」 stamp instead)
+					await get_tree().create_timer(0.3).timeout
+					b.b.enemy["shield"] = {}
+					b.b.enemy["form"] = {}
+					b.b.seal = {}
+					b._on_end_round()
+				elif OS.get_cmdline_user_args().has("--markon"):
+					await get_tree().create_timer(0.3).timeout
+					b._play([{"t": "mark_on", "unit": 1, "move": "画戟斩将"}])
 			if name == "fight" and OS.get_cmdline_user_args().has("--break"):  # v3 破招: the lord's 扔刀 on a wound-up enemy
 				await get_tree().create_timer(0.5).timeout
 				b.b.enemy["charging"] = "天下无双"

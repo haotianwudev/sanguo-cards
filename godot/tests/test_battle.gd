@@ -1238,10 +1238,10 @@ func test_a_troops_own_trick_is_named_and_grows_with_the_card() -> void:
 
 # ---- 点名 / 护盾 / 变阵 / 封技 (user rules 2026-11-03) ----------------------------------------------
 
-func test_a_mark_takes_a_quarter_of_max_hp_unless_the_marked_one_is_swapped_out() -> void:
+func test_a_mark_takes_a_quarter_of_max_hp_and_fells_the_marked_one_unless_swapped_out() -> void:
 	var b := Battle.start("hulao", party(["machao", "zhaoyun"]), 2)
 	b.enemy["data"]["moves"].append({"name": "画戟斩将", "power": 0, "weight": 0})
-	b.enemy["mark"] = {"card": str(b.leaders[1]["leader"]["card"]["id"]), "who": "x", "move": "画戟斩将"}
+	b.enemy["mark"] = {"card": Battle.swap_key(b.leaders[1]["leader"]), "who": "x", "move": "画戟斩将"}
 	b.enemy["intents"] = []
 	b.party_hp = b.party_max
 	b.take_events()
@@ -1249,6 +1249,10 @@ func test_a_mark_takes_a_quarter_of_max_hp_unless_the_marked_one_is_swapped_out(
 	var hit := b.take_events().filter(func(e): return e["t"] == "enemy_hit" and e.has("mark"))
 	check(hit.size() == 1 and int(hit[0]["dmg"]) == int(round(b.party_max * 0.25)), "the marked one still there: 1/4 of max HP")
 	check(b.enemy["mark"].is_empty(), "the mark is spent")
+	check(b.leaders[1]["slain"] and not b.can_act(1), "the marked one is felled: grey, out of action this fight")
+	b._start_round()
+	check(not b.can_act(1), "still out next round")
+	check(b.mark_pick() != 1, "a felled one is never marked again")
 	b.enemy["mark"] = {"card": "nobody_here", "who": "x", "move": "画戟斩将"}
 	b.enemy["intents"] = []
 	b.end_round()
@@ -1316,3 +1320,9 @@ func test_the_lord_swaps_only_for_another_lord_card() -> void:
 	b.swap(0, "lordform:test_form")
 	check_eq(str(b.leaders[0]["leader"]["card"]["form"]), "test_form")
 	check(b.swap_options(0).any(func(ld): return Battle.swap_key(ld) == "lordform:base"), "the card he had can come back")
+	b.enemy["data"]["moves"].append({"name": "斩", "power": 0, "weight": 0})
+	b.enemy["mark"] = {"card": "lordform:base", "who": "主公", "move": "斩"}
+	b.enemy["intents"] = []
+	b.take_events()
+	b.end_round()
+	check(b.take_events().any(func(e): return e["t"] == "mark_miss"), "a lord marked on one lord card dodges by swapping to another")

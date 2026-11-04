@@ -590,7 +590,8 @@ static func orbit(parent: Control, center: Vector2, rx := 60.0, ry := 18.0, n :=
 	return holder
 
 
-static func cracks(parent: Control, rect: Rect2, color: Color, n := 5) -> Node2D:
+static func cracks(parent: Control, rect: Rect2, color: Color, n := 5, inside := false) -> Node2D:
+	## inside: steps sized to the rect and every point kept within it (a card's cracks never run onto its neighbours)
 	var holder := Node2D.new()
 	holder.z_index = 46
 	parent.add_child(holder)
@@ -605,7 +606,9 @@ static func cracks(parent: Control, rect: Rect2, color: Color, n := 5) -> Node2D
 		var pts := PackedVector2Array([pt])
 		for s in 5:
 			dir = dir.rotated(rng.randf_range(-0.7, 0.7))
-			pt += dir * rng.randf_range(24.0, 46.0)
+			pt += dir * (rng.randf_range(0.08, 0.15) * rect.size.x if inside else rng.randf_range(24.0, 46.0))
+			if inside:
+				pt = pt.clamp(rect.position + Vector2(6, 6), rect.end - Vector2(6, 6))
 			pts.append(pt)
 		ln.points = pts
 		holder.add_child(ln)
