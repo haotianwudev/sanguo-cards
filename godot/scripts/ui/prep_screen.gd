@@ -32,7 +32,7 @@ func _ready() -> void:
 	var head := HBoxContainer.new()
 	head.add_theme_constant_override("separation", 24)
 	root.add_child(head)
-	head.add_child(Kit.title_label("前尘整备 · 第 %d 周目" % save.lap, Kit.FONT_TITLE, "gold"))
+	head.add_child(Kit.title_label("前尘整备", Kit.FONT_TITLE, "gold"))  # no 周目 number (user call)
 	_points = Kit.label("", Kit.FONT_BIG, "text")
 	head.add_child(_points)
 	var tip := Kit.label("每走到一个不同的结局，记起一点前尘。点数不会用掉：每个周目开始时重新分配。", 15, "muted")

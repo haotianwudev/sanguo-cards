@@ -128,7 +128,7 @@ func _slot_block(col: VBoxContainer, r: String, saved: SaveData, focus_first: bo
 		if q["id"] == saved.quest:
 			where = Quests.title(q, saved)
 	var over: bool = saved.ended and saved.replay == ""
-	var head := Kit.label("%s　第 %d 周目　%s" % [route_name, saved.lap, "（已有结局）" if over else where], Kit.FONT_BODY + 2, "gold")
+	var head := Kit.label("%s　%s" % [route_name, "（已有结局）" if over else where], Kit.FONT_BODY + 2, "gold")  # no 周目 number (user call)
 	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(head)
 	if over:  # an ending was reached: nothing to continue, only a new 周目
