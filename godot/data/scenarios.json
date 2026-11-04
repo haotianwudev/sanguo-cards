@@ -1059,7 +1059,7 @@
     "n6_leibo": {"name": "寿春城外·雷薄", "turn_limit": 10, "enemy": "n6_leibo"},
     "n6_chenlan": {"name": "宫墙下·陈兰", "turn_limit": 10, "enemy": "n6_chenlan"},
     "n5_taishan": {"name": "琅邪道·泰山贼", "turn_limit": 6, "enemy": "n5_taishan", "art": "shanzei_band"},
-    "n5_changxi": {"name": "琅邪道·昌豨", "turn_limit": 10, "enemy": "n5_changxi", "art": "shanzei_band"},
+    "n5_changxi": {"name": "琅邪道·昌豨", "turn_limit": 10, "enemy": "n5_changxi"},
     "xz_sx_zhangfei": {"name": "刺史府外·张飞", "turn_limit": 10, "enemy": "n5_sx_zhangfei", "art": "m11_zhangfei"},
     "xz_sx_guanyu": {"name": "下邳长街·关羽", "turn_limit": 10, "enemy": "n5_sx_guanyu", "art": "m11_guanyu"},
     "xz_sx_liubei": {"name": "白门·刘备", "turn_limit": 10, "enemy": "n5_sx_liubei", "art": "m11_liubei"},
