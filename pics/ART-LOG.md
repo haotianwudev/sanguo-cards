@@ -1457,3 +1457,4 @@
 - [ ] 2026-11-03 cg `n6_zhujiu` ← n6_zhujiu.jpg · ok
 - [ ] 2026-11-03 battle `hnn_bw_zf` ← hnn_bw_zf.jpg · ok
 - [ ] 2026-11-03 battle `n5_changxi` ← n5_changxi.jpg · ok
+- [ ] 2026-11-03 cg `n7_xingyuan` ← n7_xingyuan.jpg · ok
