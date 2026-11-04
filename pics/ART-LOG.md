@@ -1458,3 +1458,11 @@
 - [ ] 2026-11-03 battle `hnn_bw_zf` ← hnn_bw_zf.jpg · ok
 - [ ] 2026-11-03 battle `n5_changxi` ← n5_changxi.jpg · ok
 - [ ] 2026-11-03 cg `n7_xingyuan` ← n7_xingyuan.jpg · ok
+- [ ] 2026-11-03 cg `n7_jiufang` ← n7_jiufang.jpg · ok
+- [ ] 2026-11-03 cg `n7_start` ← n7_start.jpg · ok
+- [ ] 2026-11-03 cg `n7_beishang` ← n7_beishang.jpg · ok
+- [ ] 2026-11-03 cg `n7_rucheng` ← n7_rucheng.jpg · ok
+- [ ] 2026-11-03 cg `n7_b_anmin` ← n7_b_anmin.jpg · ok
+- [ ] 2026-11-03 cg `n7_b_huijiu` ← n7_b_huijiu.jpg · ok
+- [ ] 2026-11-03 cg `n7_g_dalao` ← n7_g_dalao.jpg · ok
+- [ ] 2026-11-03 battle `n7_guotu` ← n7_guotu.jpg · ok

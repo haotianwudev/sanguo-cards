@@ -5315,6 +5315,10 @@
     "n5_changxi": {
       "src": "source/battles/n5_changxi.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "n7_guotu": {
+      "src": "source/battles/n7_guotu.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
@@ -7737,6 +7741,34 @@
     },
     "n6_xueye": {
       "src": "source/cg/n6_xueye.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_jiufang": {
+      "src": "source/cg/n7_jiufang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_start": {
+      "src": "source/cg/n7_start.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_beishang": {
+      "src": "source/cg/n7_beishang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_rucheng": {
+      "src": "source/cg/n7_rucheng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_b_anmin": {
+      "src": "source/cg/n7_b_anmin.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_b_huijiu": {
+      "src": "source/cg/n7_b_huijiu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n7_g_dalao": {
+      "src": "source/cg/n7_g_dalao.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
