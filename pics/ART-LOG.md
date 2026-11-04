@@ -1466,3 +1466,4 @@
 - [ ] 2026-11-03 cg `n7_b_huijiu` ← n7_b_huijiu.jpg · ok
 - [ ] 2026-11-03 cg `n7_g_dalao` ← n7_g_dalao.jpg · ok
 - [ ] 2026-11-03 battle `n7_guotu` ← n7_guotu.jpg · ok
+- [ ] 2026-11-03 map `yecheng` ← yecheng_strip.jpg · ok
