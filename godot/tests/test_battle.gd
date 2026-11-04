@@ -1234,3 +1234,85 @@ func test_a_troops_own_trick_is_named_and_grows_with_the_card() -> void:
 	b._start_round()
 	var named: Array = b.take_events().filter(func(e): return e["t"] == "passive")
 	check(not named.is_empty() and str(named[0]["name"]) != "", "the move says which card made it")
+
+
+# ---- 点名 / 护盾 / 变阵 / 封技 (user rules 2026-11-03) ----------------------------------------------
+
+func test_a_mark_takes_a_quarter_of_max_hp_unless_the_marked_one_is_swapped_out() -> void:
+	var b := Battle.start("hulao", party(["machao", "zhaoyun"]), 2)
+	b.enemy["data"]["moves"].append({"name": "画戟斩将", "power": 0, "weight": 0})
+	b.enemy["mark"] = {"card": str(b.leaders[1]["leader"]["card"]["id"]), "who": "x", "move": "画戟斩将"}
+	b.enemy["intents"] = []
+	b.party_hp = b.party_max
+	b.take_events()
+	b.end_round()
+	var hit := b.take_events().filter(func(e): return e["t"] == "enemy_hit" and e.has("mark"))
+	check(hit.size() == 1 and int(hit[0]["dmg"]) == int(round(b.party_max * 0.25)), "the marked one still there: 1/4 of max HP")
+	check(b.enemy["mark"].is_empty(), "the mark is spent")
+	b.enemy["mark"] = {"card": "nobody_here", "who": "x", "move": "画戟斩将"}
+	b.enemy["intents"] = []
+	b.end_round()
+	var ev := b.take_events()
+	check(ev.any(func(e): return e["t"] == "mark_miss") and not ev.any(func(e): return e["t"] == "enemy_hit" and e.has("mark")), "swapped out: it misses")
+
+
+func test_a_shield_soaks_plain_blows_but_not_magic_archers_or_ultimates() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.enemy["shield"] = {"name": "铁甲", "hp": 999999, "max_hp": 999999}
+	var ehp := int(b.enemy["hp"])
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	check_eq(int(b.enemy["hp"]), ehp, "a plain blow is soaked")
+	b._apply(b.leaders[0], {"type": "magic", "power": 1.0}, 1.0)
+	check(int(b.enemy["hp"]) < ehp, "magic goes through")
+	var ehp2 := int(b.enemy["hp"])
+	b._through_shield = true  # a 弓兵's skill or a 大招
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	b._through_shield = false
+	check(int(b.enemy["hp"]) < ehp2, "an archer / 大招 blow goes through")
+	b.enemy["shield"]["hp"] = 1
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	check(b.enemy["shield"].is_empty(), "a broken shield is gone")
+
+
+func test_a_formation_cuts_one_kind_of_damage_and_a_stun_breaks_it() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.db.battle["variance"] = 0.0
+	var base := b._dmg(100.0, "attack")
+	b.enemy["form"] = {"name": "八门金锁·休门", "vs": "attack", "cut": 0.6, "turns": 2}
+	check(abs(b._dmg(100.0, "attack") - base * 0.4) <= 1, "physical cut by 60%")
+	check(abs(b._dmg(100.0, "magic") - b._dmg(100.0, "magic")) == 0 and b.form_mult("magic") == 1.0, "magic goes in full")
+	b._apply(b.leaders[0], {"type": "stun", "chance": 1.0}, 1.0)
+	check(b.enemy["form"].is_empty(), "a stun breaks the formation")
+	b.db.battle["variance"] = 0.2
+
+
+func test_a_seal_locks_that_kind_of_skill_until_cleansed() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.ap = 8
+	var ult := {}
+	var u: Dictionary = {}
+	for t in b.leaders:
+		for sk in b.skills_of(t):
+			if Battle.is_ult(sk) and ult.is_empty():
+				ult = sk
+				u = t
+	check(not ult.is_empty(), "someone has a 大招")
+	check(b.usable(u, ult), "usable before")
+	b.seal = {"name": "封", "kind": "ultimate", "turns": 1}
+	check(not b.usable(u, ult), "sealed")
+	b._apply(b.leaders[0], {"type": "cleanse"}, 1.0)
+	check(b.usable(u, ult) and b.seal.is_empty(), "解状态 lifts it")
+
+
+func test_the_lord_swaps_only_for_another_lord_card() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	var other: Dictionary = b.leaders[0]["leader"].duplicate(true)
+	other["card"]["form"] = "test_form"
+	b.roster.append(other)
+	b.round_no = b.swap_from_round()
+	b.ap = 8
+	check_eq(b.swap_options(0).map(func(ld): return Battle.swap_key(ld)), ["lordform:test_form"])
+	check(not b.swap_options(1).any(func(ld): return str(ld["card"]["troop"]) == "lord"), "a lord card never stands in for a general")
+	b.swap(0, "lordform:test_form")
+	check_eq(str(b.leaders[0]["leader"]["card"]["form"]), "test_form")
+	check(b.swap_options(0).any(func(ld): return Battle.swap_key(ld) == "lordform:base"), "the card he had can come back")

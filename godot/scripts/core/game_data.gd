@@ -291,8 +291,8 @@ func _validate() -> void:
 			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot", "shred", "interrupt"],
 				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
 			for cond in e.get("vs", {}):
-				assert(cond in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance"], "skill %s: unknown vs %s" % [sk["id"], cond])
-			assert(not e.has("crit_if") or e["crit_if"] in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance"], "skill %s: unknown crit_if" % sk["id"])
+				assert(cond in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance", "marking", "shielded", "formation"], "skill %s: unknown vs %s" % [sk["id"], cond])
+			assert(not e.has("crit_if") or e["crit_if"] in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance", "marking", "shielded", "formation"], "skill %s: unknown crit_if" % sk["id"])
 	for c in cards.values():
 		assert(troops.has(c["troop"]), "card %s: bad troop" % c["id"])
 		assert(c["troop"] != "lord" or c["soldier"], "card %s: only soldier cards can be of the lord's own troop (亲卫 / 侍从)" % c["id"])
@@ -314,6 +314,10 @@ func _validate() -> void:
 		for m in e["moves"]:
 			assert(not m.has("charge") or names.has(m["charge"]), "enemy %s: charges an unknown move" % e["id"])
 			assert(not m.has("chain") or names.has(m["chain"]), "enemy %s: chains an unknown move" % e["id"])
+			assert(not m.has("mark") or names.has(m["mark"]), "enemy %s: marks with an unknown move" % e["id"])
+			assert(not m.has("seal") or m["seal"] in ["ultimate", "magic", "attack"], "enemy %s: unknown seal %s" % [e["id"], m.get("seal")])
+			assert(not m.has("formation") or str(m["formation"].get("vs", "")) in ["attack", "magic"], "enemy %s: a formation needs vs attack / magic" % e["id"])
+			assert(not m.has("shield") or float(m["shield"].get("hp_pct", 0.0)) > 0.0, "enemy %s: a shield needs hp_pct" % e["id"])
 			assert(not m.has("stance") or float(m["stance"].get("power", 0.0)) > 0.0, "enemy %s: a stance needs power" % e["id"])
 			assert(not m.has("summon") or (m["summon"].has("name") and float(m["summon"].get("hp_pct", 0.0)) > 0.0), "enemy %s: a summon needs name and hp_pct" % e["id"])
 			var pref: Variant = m.get("prefer", [])

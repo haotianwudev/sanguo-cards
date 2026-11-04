@@ -374,8 +374,10 @@ func _build() -> void:
 
 func _make_card(i: int) -> CardView:
 	var u: Dictionary = b.leaders[i]
-	var v := CardView.make(u["leader"]["card"]["id"], _card_size, {"leader": u["leader"], "skills": false,
-		"lord_name": Game.save.lord_name})
+	var opts := {"leader": u["leader"], "skills": false, "lord_name": Game.save.lord_name}
+	if str(u["leader"]["card"]["troop"]) == "lord":
+		opts["form"] = str(u["leader"]["card"].get("form", ""))  # whichever lord card he fights with (换人 can change it)
+	var v := CardView.make(u["leader"]["card"]["id"], _card_size, opts)
 	if _has_cg:
 		v.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	v.focus_mode = Control.FOCUS_NONE
@@ -414,6 +416,15 @@ func _refresh() -> void:
 		st.append("⚠ 蓄力中：下回合【%s】——打断技能可破" % e["charging"])
 	if not e["stance"].is_empty():
 		st.append("【反】%s：物理攻击会被反击" % e["stance"]["name"])
+	if not e["mark"].is_empty():
+		st.append("⚠ 点名 %s：下回合【%s】——换下他就扑空，防御免重创" % [e["mark"]["who"], e["mark"]["move"]])
+	if not e["shield"].is_empty():
+		st.append("【盾】%s %d/%d：挡物理（弓兵、法术、大招穿透）" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
+	if not e["form"].is_empty():
+		st.append("【阵】%s：%s伤害 -%d%%（%d 回合，眩晕可破）" % [e["form"]["name"], "物理" if e["form"]["vs"] == "attack" else "法术",
+			int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]])
+	if not b.seal.is_empty():
+		st.append("我军%s被封（%d 回合，解除状态可解）" % [Battle.SEAL_NAMES.get(b.seal["kind"], "技能"), b.seal["turns"]])
 	if e["at"] > e["data"]["at"] * 1.01:
 		st.append("狂暴 攻击 %d" % int(round(e["at"])))
 	if b.buff["layers"] > 0:
@@ -652,11 +663,11 @@ func _open_swap(i: int) -> void:
 	o.swap_mode = true
 	o.swap_slot = i
 	o.swap_field = b.leaders.map(func(u): return "lord" if u["leader"]["card"]["troop"] == "lord" else u["leader"]["card"]["id"])
-	o.swap_ids = opts.map(func(ld): return ld["card"]["id"])
+	o.swap_ids = opts.map(func(ld): return Battle.swap_key(ld))  # a lord card is lordform:<form>
 	o.swap_note = (("AP%d" % b.swap_cost()) if b.swap_cost() > 0 else "不费 AP") + "，登场必定触发兵种小技，当回合可出手"
 	for k in b.leaders.size():  # a card dragged onto another leader replaces that one instead
 		if b.can_swap(k):
-			o.swap_ok[k] = b.swap_options(k).map(func(ld): return ld["card"]["id"])
+			o.swap_ok[k] = b.swap_options(k).map(func(ld): return Battle.swap_key(ld))
 	o.swap_picked.connect(func(cid, k): _on_swap(k, cid))
 	add_child(o)
 
@@ -838,6 +849,8 @@ func _sync_fx() -> void:
 			want["conf_%s" % id] = func(): return BattleFx.orbit(self, r.position + Vector2(r.size.x / 2, 8), 56.0, 14.0, 3, BattleFx.VIOLET, 10.0)
 		if u["boosted"]:
 			want["boost_%s" % id] = func(): return BattleFx.boost_aura(self, r)
+		if not e["mark"].is_empty() and id == str(e["mark"]["card"]):  # 点名: the marked card pulses red until the blow comes
+			want["mark_%s" % id] = func(): return BattleFx.glow(self, r, Color(1.0, 0.15, 0.1))
 		if b.buff["layers"] > 0:
 			want["buff_%s" % id] = func(): return BattleFx.glow(self, r, BattleFx.GOLD)
 		var tint := Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE  # a card that can't act stays grey (set_state dimmed it)
@@ -901,6 +914,12 @@ func _sync_badges() -> void:
 		row.append(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false))
 	if not e["stance"].is_empty():
 		row.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))))
+	if not e["shield"].is_empty():
+		row.append(BattleFx.badge("盾", Color(0.55, 0.62, 0.72)))
+	if not e["form"].is_empty():
+		row.append(BattleFx.badge("阵", Color(0.3, 0.55, 0.95) if e["form"]["vs"] == "magic" else Color(0.85, 0.55, 0.2), int(e["form"]["turns"])))
+	if not e["mark"].is_empty():
+		row.append(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false))
 	var at := _enemy_hp.global_position - global_position + Vector2(_enemy_hp.size.x - 40.0, -40.0)
 	for k in row.size():
 		row[k].position = at - Vector2(k * 38.0, 0)
@@ -914,6 +933,8 @@ func _sync_badges() -> void:
 		party.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]))
 	if b.ap_drain > 0:
 		party.append(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain))
+	if not b.seal.is_empty():
+		party.append(BattleFx.badge("封", Color(0.45, 0.3, 0.6), int(b.seal["turns"])))
 	if b.loot_chest > 0.0:  # 劫掠: the chance of a second chest so far (%)
 		party.append(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(b.loot_chest * 100))))
 	var pr := _party_rect()
@@ -934,6 +955,8 @@ func _sync_badges() -> void:
 			_badge_add(rib)
 		if b.counters.any(func(c): return int(c.get("unit", -1)) == i):
 			mine.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78)))
+		if not e["mark"].is_empty() and str(u["leader"]["card"]["id"]) == str(e["mark"]["card"]):
+			mine.append(BattleFx.badge("点", Color(0.9, 0.15, 0.15)))
 		for k in mine.size():
 			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
 			_badge_add(mine[k])
@@ -1079,7 +1102,7 @@ func _play(events: Array) -> void:
 				var crit_hit: bool = ev.get("crit", false)
 				if is_rider:
 					Kit.float_text(self, _enemy_center() + Vector2(54, -18), "战意 +%d" % ev["dmg"], Color(0.88, 0.72, 1.0), 36)
-				else:
+				elif not (int(ev["dmg"]) == 0 and int(ev.get("shield", 0)) > 0):  # all soaked by the 护盾: only its 「盾 -N」 shows
 					Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
 						Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
 				if crit_hit:
@@ -1357,7 +1380,7 @@ func _play(events: Array) -> void:
 			"confuse":
 				Kit.pop(_cards[ev["unit"]], 1.06)
 				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60),
-					"混乱", Kit.c("purple"), 32)
+					"重创" if ev.get("mark", false) else "混乱", Kit.c("red") if ev.get("mark", false) else Kit.c("purple"), 32)
 				BattleFx.stun_burst(self, _card_rect(ev["unit"]).position + Vector2(_card_rect(ev["unit"]).size.x / 2, 30))
 				BattleFx.burst(self, _card_rect(ev["unit"]).get_center(), BattleFx.VIOLET, 10, 20.0, 110.0, 5.0)
 				await get_tree().create_timer(0.3).timeout
@@ -1415,6 +1438,59 @@ func _play(events: Array) -> void:
 			"guard_hit":
 				_guard_bar.max_value = ev["max"]
 				Kit.tween_bar(_guard_bar, ev["hp"])
+			"mark_on":  # 点名: a red line from the enemy to the marked card
+				Sfx.play("charge")
+				var mu: int = int(ev.get("unit", 0))
+				if mu >= 0 and mu < _cards.size():
+					BattleFx.ring(self, _card_rect(mu).get_center(), Color(1.0, 0.2, 0.15), 20.0, 150.0, 0.45, 6)
+					Kit.pop(_cards[mu], 1.08)
+					Kit.float_text(self, _card_rect(mu).get_center() + Vector2(0, -60), "被点名！", Kit.c("red"), 40)
+				await _alert("点名", "下回合【%s】→ %s　换下他或防御" % [ev["move"], b.unit_name(b.leaders[mu]) if mu < b.leaders.size() else ""], Kit.c("red"), 0.8)
+				_refresh()
+			"mark_miss":
+				Sfx.play("guard")
+				Kit.float_text(self, _party_center() + Vector2(0, -50), "扑空！", Kit.c("gold"), 44)
+				await get_tree().create_timer(0.35).timeout
+			"seal_on":
+				Sfx.play("break")
+				BattleFx.ring(self, _party_center(), Color(0.6, 0.4, 0.9), 20.0, 260.0, 0.4, 6)
+				Kit.float_text(self, _party_center() + Vector2(0, -50), "%s被封！" % Battle.SEAL_NAMES.get(str(ev["kind"]), "技能"), Kit.c("purple"), 40)
+				_refresh()
+				await get_tree().create_timer(0.4).timeout
+			"seal_off":
+				_refresh()
+			"form_on":
+				Sfx.play("guard")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.ring(self, _enemy_center(), Color(0.3, 0.55, 0.95) if ev["vs"] == "magic" else Color(0.85, 0.55, 0.2), 30.0, 220.0, 0.45, 7)
+				BattleFx.scale = 1.0
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "变阵【%s】：%s" % [ev["name"], "挡法术" if ev["vs"] == "magic" else "挡物理"], Kit.c("amber"), 38)
+				_refresh()
+				await get_tree().create_timer(0.4).timeout
+			"form_off":
+				if ev.get("broken", false):
+					Sfx.play("break")
+					Kit.float_text(self, _enemy_center() + Vector2(0, -40), "阵型大乱！", Kit.c("gold"), 42)
+					Kit.shake(self, 8.0, 0.18)
+					await get_tree().create_timer(0.3).timeout
+				_refresh()
+			"shield_on":
+				Sfx.play("guard")
+				BattleFx.scale = _enemy_fx_scale()
+				BattleFx.shield_wall(self, _enemy_rect(), true)
+				BattleFx.scale = 1.0
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "护盾【%s】%d" % [ev["name"], ev["hp"]], Kit.c("amber"), 38)
+				_refresh()
+				await get_tree().create_timer(0.4).timeout
+			"shield_hit":
+				BattleFx.guard_spark(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)))
+				Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 -%d" % ev["dmg"], Color(0.75, 0.82, 0.95), 28)
+			"shield_down":
+				Sfx.play("break")
+				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "护盾碎了！", Kit.c("gold"), 42)
+				BattleFx.burst(self, _enemy_center(), Color(0.8, 0.88, 1.0), 16, 14.0, 170.0, 4.0, 0.3)
+				Kit.shake(self, 8.0, 0.18)
+				_refresh()
 			"guard_down":
 				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "%s 溃散！" % ev["name"], Kit.c("gold"), 40)
 				Kit.shake(self, 10.0, 0.2)

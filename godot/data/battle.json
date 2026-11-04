@@ -108,6 +108,8 @@
     "swap_from_round": 1,
     "swap_ready": true,
     "_charge_break": "打断蓄力：带 interrupt 效果的技能（主公扔刀 / 回马枪等）打在正在蓄力的敌人身上，蓄力作废，我方回 ap_reward AP，敌人破防 break_bonus（break_turns 回合）。普通眩晕不打断蓄力，只让敌人跳过一回合（蓄力顺延）",
+    "_mark_pct": "点名（敌人招式 mark）：被点名的队长下回合还在阵上，我军就损失体力上限的这么多（防御、减伤都不管用）；换下他就扑空（用户要求：1/4）。主公也能换人——换成他的另一张主公卡",
+    "mark_pct": 0.25,
     "charge_break": {"ap_reward": 1, "break_bonus": 0.25, "break_turns": 2},
     "_tactics": "军令（自动战斗）三层：整体（presets 三档预设 + 中军军令 party_acts：防御 / 留 AP / 换人）、兵种（troop_acts：按技能类别，对应到每位队长自己的技能）、武将（具体技能）。presets：interrupt 敌人蓄力时先打断；defend_charge 有蓄力杀招要落地又打断不了就防御；reserve 允许武将军令的「留气」；ults always = 大招照放 / boss = 只在首领战放限 1 大招。conditions = 每条军令可选的条件（两格，都成立才算；代码 AutoPlayer.cond_holds）；max_rows = 每层每项最多几条",
     "tactics": {
@@ -118,12 +120,12 @@
       },
       "conditions": {
         "always": "总是", "enemy_charging": "敌人蓄力", "enemy_charging_heal": "敌人蓄力回血", "enemy_charging_summon": "敌人蓄力叫援",
-        "enemy_stance": "敌人架势", "enemy_guard": "敌有前卫", "enemy_stunned": "敌人眩晕", "enemy_broken": "敌人破防", "enemy_low_hp": "敌体力<30%",
-        "boss_fight": "首领战", "party_low_hp": "我军体力<40%", "party_status": "我军有异常", "ap_full": "AP 已满", "ap_6": "AP≥6",
+        "enemy_stance": "敌人架势", "enemy_guard": "敌有前卫", "enemy_marking": "敌人点名", "enemy_shield": "敌有护盾", "enemy_form_attack": "敌阵挡物理", "enemy_form_magic": "敌阵挡法术", "enemy_stunned": "敌人眩晕", "enemy_broken": "敌人破防", "enemy_low_hp": "敌体力<30%",
+        "boss_fight": "首领战", "party_low_hp": "我军体力<40%", "party_status": "我军有异常（含封技）", "ap_full": "AP 已满", "ap_6": "AP≥6",
         "field_no_magic": "场上没人会法术", "field_no_cleanse": "场上没人能解状态", "field_no_interrupt": "打断技能用光", "leader_spent": "有队长大招用尽"
       },
       "party_acts": {
-        "defend": "全军防御", "end": "结束回合（留 AP）", "swap_fresh": "换下大招用尽的",
+        "defend": "全军防御", "end": "结束回合（留 AP）", "swap_fresh": "换下大招用尽的", "swap_marked": "换下被点名的",
         "swap_strategist": "换上策士", "swap_logistics": "换上后勤", "swap_infantry": "换上刀兵", "swap_spear": "换上枪兵",
         "swap_cavalry": "换上骑兵", "swap_archer": "换上弓兵", "swap_bandit": "换上贼兵"
       },
@@ -132,6 +134,11 @@
       "defaults": {
         "_defaults": "军令出厂设置（用户要求：主要角色、兵种、整体都要有）。都是带条件的——平常交给预设估值，只在这些场面替玩家做对的事。玩家改过的那一项以玩家为准（AutoPlayer.with_defaults）。",
         "party_rows": [
+          {
+            "cond": "enemy_marking",
+            "cond2": "always",
+            "act": "swap_marked"
+          },
           {
             "cond": "enemy_stance",
             "cond2": "field_no_magic",

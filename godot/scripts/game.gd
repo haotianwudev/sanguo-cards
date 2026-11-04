@@ -1119,7 +1119,7 @@ func demo(name: String) -> void:
 				await get_tree().create_timer(0.5).timeout
 				b.b.round_no = b.b.swap_from_round()
 				b._refresh()
-				b._open_swap(1)
+				b._open_swap(0 if OS.get_cmdline_user_args().has("--lordswap") else 1)  # --lordswap (with --forms): the lord changes card
 			if OS.get_cmdline_user_args().has("--boost"):  # a strengthened (BOOST) card must stand out
 				await get_tree().create_timer(0.5).timeout
 				b.b.leaders[1]["boosted"] = true
@@ -1207,6 +1207,18 @@ func demo(name: String) -> void:
 				b.b.enemy["guard"] = {"name": "虎卫军", "hp": gm * 2 / 3, "max_hp": gm, "strike": 0.6}
 				b.b.enemy["stance"] = {"name": "画戟架势", "power": 0.9, "turns": 1}
 				b._refresh()
+			if OS.get_cmdline_user_args().has("--mech"):  # 点名 / 护盾 / 变阵 / 封技 all on at once (the status lines, badges and the marked card)
+				await get_tree().create_timer(0.5).timeout
+				var sm: int = int(round(b.b.enemy["max_hp"] * 0.12))
+				b.b.enemy["data"]["moves"].append({"name": "画戟斩将", "power": 0, "weight": 0})
+				b.b.enemy["mark"] = {"card": str(b.b.leaders[1]["leader"]["card"]["id"]), "who": Battle.unit_name(b.b.leaders[1]), "move": "画戟斩将"}
+				b.b.enemy["shield"] = {"name": "相国铁甲", "hp": sm * 2 / 3, "max_hp": sm}
+				b.b.enemy["form"] = {"name": "八门金锁·休门", "vs": "attack", "cut": 0.6, "turns": 2}
+				b.b.seal = {"name": "反间计", "kind": "ultimate", "turns": 1}
+				b.b._plan_intents()
+				b._refresh()
+				b._sync_fx()
+				b._sync_skill_bars()
 			if name == "fight" and OS.get_cmdline_user_args().has("--break"):  # v3 破招: the lord's 扔刀 on a wound-up enemy
 				await get_tree().create_timer(0.5).timeout
 				b.b.enemy["charging"] = "天下无双"

@@ -317,7 +317,7 @@ func _rebuild() -> void:
 func _rebuild_swap() -> void:
 	var save := Game.save
 	var db := GameData.get_db()
-	if _sel != "lord" and not save.has_card(_sel):
+	if _sel != "lord" and not swap_ids.has(_sel) and not save.has_card(_sel):
 		_sel = "lord"
 	for k in swap_field.size():
 		var cid: String = swap_field[k]
@@ -329,7 +329,7 @@ func _rebuild_swap() -> void:
 	_summary.add_child(_stat_line("可上场", "%d 位" % swap_ids.size()))
 	var troops: Array = []
 	for cid in swap_ids:
-		var tr: String = db.cards[cid]["troop"]
+		var tr: String = _swap_troop(cid)
 		if not troops.has(tr):
 			troops.append(tr)
 	var tabs: Array = [["all", "全部"]]
@@ -346,16 +346,28 @@ func _rebuild_swap() -> void:
 			_rebuild())
 		_tabs.add_child(b)
 	_sort_btn.text = "按战力 ▼" if _sort == "power" else "按稀有度 ▼"
-	var ids: Array = swap_ids.filter(func(cid): return _filter == "all" or db.cards[cid]["troop"] == _filter)
+	var ids: Array = swap_ids.filter(func(cid): return _filter == "all" or _swap_troop(cid) == _filter)
 	var rank := {"SSR": 5, "SR": 4, "R": 3, "C": 2, "N": 1}
 	var power := {}
+	var rarity := {}
 	for cid in ids:
-		power[cid] = SaveData.leader_power(save.leader_for(cid))
+		var is_form := str(cid).begins_with("lordform:")
+		var f: Dictionary = save.lord_with_form(_form_of(cid)) if is_form else {}
+		power[cid] = SaveData.leader_power(f if is_form else save.leader_for(cid))
+		rarity[cid] = str(f.get("rarity", "R")) if is_form else str(db.cards[cid]["rarity"])
 	ids.sort_custom(func(a, b):
-		if _sort == "rarity" and rank.get(db.cards[a]["rarity"], 0) != rank.get(db.cards[b]["rarity"], 0):
-			return rank.get(db.cards[a]["rarity"], 0) > rank.get(db.cards[b]["rarity"], 0)
+		if _sort == "rarity" and rank.get(rarity[a], 0) != rank.get(rarity[b], 0):
+			return rank.get(rarity[a], 0) > rank.get(rarity[b], 0)
 		return power[a] > power[b])
 	for cid in ids:
+		if str(cid).begins_with("lordform:"):  # 主公换卡: another of his lord cards (tap to look, 上场 on the right)
+			var fid := str(cid).substr(9)
+			var lv := CardView.make("lord", Vector2(108, 151), {"skills": false, "form": _form_of(cid), "tier": _form_card_tier(fid)})
+			lv.set_state(false, _sel == cid)
+			lv.pressed.connect(_tap.bind(cid))
+			lv.tap_on_release = true
+			_grid.add_child(lv)
+			continue
 		var v := CardView.make(cid, Vector2(108, 151), {"skills": false})
 		v.set_state(false, _sel == cid)
 		v.pressed.connect(_tap.bind(cid))
@@ -539,6 +551,21 @@ func _stat_line(name: String, value: String) -> Control:
 	return row
 
 
+func _swap_troop(cid: String) -> String:
+	return "lord" if cid.begins_with("lordform:") else str(GameData.get_db().cards[cid]["troop"])
+
+
+func _form_of(key: String) -> String:
+	## lordform:<fid> -> the form ("" = the plain lord)
+	var fid := key.substr(9)
+	return "" if fid == "base" else fid
+
+
+func _swap_out_name() -> String:
+	var cid: String = swap_field[swap_slot]
+	return Game.save.lord_name if cid == "lord" else str(GameData.get_db().cards[cid]["name"]).split("·")[0]
+
+
 func _form_name(fid: String) -> String:
 	return "主公" if fid == "base" else GameData.get_db().lord_forms[fid]["name"]
 
@@ -554,6 +581,13 @@ func _fill_lordform_detail(fid: String) -> void:
 		info.add_child(_info_line("兵种", GameData.get_db().troops[f["troop"]]["name"]))
 	info.add_child(_level_box(save.form_tier(form), save.form_copies_of(form)))  # every lord card has its own level, like any other card
 	info.add_child(_info_line("单卡", "攻 %d · 兵 %d" % [f["at"], f["hp"]]))
+	if swap_mode:  # 换人: this lord card comes on in place of the one he fights with now
+		var go := Kit.button("上　场（换下现在这张主公卡）", "green")
+		go.disabled = not swap_ids.has("lordform:" + fid)
+		go.custom_minimum_size = Vector2(340, 50)
+		go.pressed.connect(_swap_go.bind("lordform:" + fid, swap_slot))
+		_detail.add_child(go)
+		return
 	var in_use := save.lord_form() == form
 	var act := Kit.button("使用中" if in_use else "换上这张主公卡", "gray" if in_use else "green")
 	act.disabled = in_use
@@ -636,7 +670,7 @@ func _fill_detail() -> void:
 	if swap_mode:
 		var go: Button
 		if swap_ids.has(_sel):
-			go = Kit.button("上　场（换下 %s）" % db.cards[swap_field[swap_slot]]["name"].split("·")[0], "green")
+			go = Kit.button("上　场（换下 %s）" % _swap_out_name(), "green")
 			go.pressed.connect(_swap_go.bind(_sel, swap_slot))
 		else:
 			go = Kit.button("场上的人", "gray")

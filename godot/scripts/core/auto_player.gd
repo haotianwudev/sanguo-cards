@@ -25,11 +25,15 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 					hit *= 0.4  # 架势: the blow is answered
 				if (e["type"] == "magic" or e.get("pierce", false)) and b.enemy_state("guarded"):
 					hit *= 1.5  # over the 前卫, straight at the boss
+				hit *= b.form_mult(str(e["type"]))  # 变阵: the kind it shuts out barely goes in
+				if e["type"] == "attack" and b.enemy_state("shielded") and not e.get("pierce", false) \
+						and str(u["leader"]["card"]["troop"]) != "archer" and not Battle.is_ult(sk):
+					hit *= 0.6  # 护盾 soaks it (弓兵、大招、法术 go through)
 				v += hit
 			"heal":
 				v += at * float(e["power"]) * (1.5 if b.party_hp < 0.4 * b.party_max else 0.0)  # healing only pays when hurt
 			"stun":
-				v += float(e["chance"]) * b.enemy["data"]["at"] * 2 * (2.0 if b.enemy_state("stance") else 1.0)
+				v += float(e["chance"]) * b.enemy["data"]["at"] * 2 * (2.0 if b.enemy_state("stance") or b.enemy_state("formation") else 1.0)
 			"interrupt":  # 打断: worth a lot while the enemy winds up, nothing otherwise
 				v += float(b.enemy["at"]) * 4.0 if b.enemy_state("charging") else 0.0
 			"poison":  # what the new layers take over the turns left, while there is room to stack
@@ -108,6 +112,16 @@ static func is_boss(b: Battle) -> bool:
 	return str(b.mods.get("enemy_tier", "normal")) in ["boss", "lose"]
 
 
+static func marked_unit(b: Battle) -> int:
+	## the slot of the leader the enemy's 点名 blow is coming for (-1: none, or he is already off the field)
+	if b.enemy["mark"].is_empty():
+		return -1
+	for k in b.leaders.size():
+		if str(b.leaders[k]["leader"]["card"]["id"]) == str(b.enemy["mark"]["card"]):
+			return k
+	return -1
+
+
 static func charged_blow_coming(b: Battle) -> bool:
 	## this round's plan opens with a wound-up move that hits
 	if b.enemy["intents"].is_empty() or str(b.enemy["charging"]) == "":
@@ -130,6 +144,14 @@ static func cond_holds(b: Battle, cond: String) -> bool:
 			return ct.has("summon")
 		"enemy_stance":
 			return b.enemy_state("stance")
+		"enemy_marking":
+			return marked_unit(b) >= 0
+		"enemy_shield":
+			return b.enemy_state("shielded")
+		"enemy_form_attack":
+			return b.enemy_state("formation") and str(b.enemy["form"]["vs"]) == "attack"
+		"enemy_form_magic":
+			return b.enemy_state("formation") and str(b.enemy["form"]["vs"]) == "magic"
 		"enemy_guard":
 			return b.enemy_state("guarded")
 		"enemy_stunned":
@@ -143,7 +165,7 @@ static func cond_holds(b: Battle, cond: String) -> bool:
 		"party_low_hp":
 			return b.party_hp * 10 < b.party_max * 4
 		"party_status":
-			return int(b.party_burn.get("turns", 0)) > 0 or int(b.party_poison.get("turns", 0)) > 0 \
+			return int(b.party_burn.get("turns", 0)) > 0 or int(b.party_poison.get("turns", 0)) > 0 or not b.seal.is_empty() \
 				or b.leaders.any(func(t): return t["confused"] or t["confuse_next"])
 		"ap_full":
 			return b.ap >= b.ap_max()
@@ -285,6 +307,13 @@ static func _party_act(b: Battle, tactics: Dictionary) -> Dictionary:
 			return {"kind": "defend"}
 		if act == "end":
 			return {"kind": "end"}
+		if act == "swap_marked":  # 换下被点名的: the strongest bench card in for the marked leader (the blow then misses)
+			var mk := marked_unit(b)
+			if mk >= 0 and b.can_swap(mk):
+				var opts: Array = b.swap_options(mk)
+				opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
+				if not opts.is_empty():
+					return {"kind": "swap", "unit": mk, "card": Battle.swap_key(opts[0])}
 		if act == "swap_fresh":
 			var sf := _swap_fresh(b)
 			if not sf.is_empty():
@@ -309,7 +338,7 @@ static func _swap_to(b: Battle, troop: String) -> Array:
 		opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
 		if float(b.leaders[i]["leader"]["at"]) < weakest:
 			weakest = float(b.leaders[i]["leader"]["at"])
-			best = [i, opts[0]["card"]["id"]]
+			best = [i, Battle.swap_key(opts[0])]
 	return best
 
 
@@ -327,7 +356,7 @@ static func _swap_fresh(b: Battle) -> Array:
 		var opts: Array = b.swap_options(i)
 		opts.sort_custom(func(x, y): return SaveData.leader_power(x) > SaveData.leader_power(y))
 		if not opts.is_empty():
-			return [i, opts[0]["card"]["id"]]
+			return [i, Battle.swap_key(opts[0])]
 	return []
 
 

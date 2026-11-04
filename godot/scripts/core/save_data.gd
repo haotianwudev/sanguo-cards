@@ -1303,6 +1303,12 @@ func swap_roster() -> Array:
 	for c in owned_ids():
 		if not party.has(c) and not benched.has(c):
 			out.append(leader_for(c))
+	if lord_fields():  # the lord's other cards: he can change card mid-fight (user call), keeping his own unit
+		var mw := troop_members("lord")
+		var mult := float(_db().battle.get("lord_member_mult", 1.0))
+		for fid in [""] + route_lord_forms():
+			if fid != lord_form():
+				out.append(_db().build_leader(lord_with_form(fid), mw[0], mw[1].map(func(w): return float(w) * mult)))
 	return out
 
 
