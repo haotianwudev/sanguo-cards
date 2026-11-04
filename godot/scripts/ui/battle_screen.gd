@@ -95,6 +95,10 @@ func _open_settings() -> void:
 	var o := SettingsOverlay.new()
 	o.name = "Settings"
 	o.in_battle = true
+	o.tree_exited.connect(func():  # 自动战斗的快慢 is set there
+		if is_inside_tree():
+			_apply_speed()
+			_sync_auto_btn())
 	add_child(o)
 
 
@@ -675,14 +679,8 @@ func _open_tactics() -> void:
 
 
 func _toggle_auto() -> void:
-	## the 自动 button cycles 关 → 快 → 慢 → 关 (the speed is kept in options.cfg)
-	if not auto_on:
-		auto_on = true
-		Game.set_option("auto_speed", "fast")
-	elif str(Game.options.get("auto_speed", "fast")) == "fast":
-		Game.set_option("auto_speed", "slow")
-	else:
-		auto_on = false
+	## the 自动 button is on / off; how fast it plays is a setting (设置 → 选项 → 自动战斗慢速)
+	auto_on = not auto_on
 	_apply_speed()
 	_sync_auto_btn()
 	_sync_skill_bars()
@@ -701,7 +699,7 @@ func _apply_speed() -> void:
 
 
 func _sync_auto_btn() -> void:
-	_auto_btn.text = ("自动：慢" if _auto_slow() else "自动：快") if auto_on else "自动"
+	_auto_btn.text = "自动中" if auto_on else "自动"
 	_auto_btn.add_theme_color_override("font_color", Kit.c("gold") if auto_on else Kit.c("text"))
 
 

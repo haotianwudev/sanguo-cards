@@ -107,6 +107,12 @@ func _options() -> void:
 		Game.set_option("fast", on)
 		Engine.time_scale = Game.battle_speed() if in_battle else 1.0)
 	col.add_child(fast)
+	var slow := CheckButton.new()
+	slow.text = "自动战斗慢速（看清每一步）"
+	slow.button_pressed = str(Game.options.get("auto_speed", "fast")) == "slow"
+	slow.add_theme_font_size_override("font_size", Kit.FONT_BODY)
+	slow.toggled.connect(func(on): Game.set_option("auto_speed", "slow" if on else "fast"))  # the battle re-applies it when this closes
+	col.add_child(slow)
 	var vol_row := HBoxContainer.new()
 	vol_row.add_theme_constant_override("separation", 16)
 	vol_row.add_child(Kit.label("音效音量", Kit.FONT_BODY))
