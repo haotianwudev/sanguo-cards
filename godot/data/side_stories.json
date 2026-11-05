@@ -2,7 +2,7 @@
   "_comment": "？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, keyed by the chapter (quest id) after which they open. They are read from 整备 (the ？ button) or the chapter recap, any time after; unread ones show as a big ？. Each: id (unique), title, portraits, text (story.json line style: @speaker / {lord}), optional cg, requires / unless (a recorded line, like interludes), cost (战功 to open it, default `cost` below) and reward (what opening it gives). Use only people who are in the party by the end of that chapter; anyone who joins by a choice needs that choice's line in requires.",
   "cost": 10,
   "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 10 — like a 点化; a draw is 5); a story can still set its own `cost`; reading it again is free",
-  "_reward": "every story names its reward, paid when it is opened: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
+  "_reward": "every story names its reward, paid when it is opened — and it must be worth more than the 10 战功 it costs (so merit, if used, is at least 30; user rule), and never a 孙坚 card: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
   "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless (a line or a list of lines, all must hold) pick the route for the shared first chapter, or need the people in it (董白：留下).",
   "chapters": {
     "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}, {"requires": "出生：冀州无极", "cg": "rc_wuji"}],
@@ -125,7 +125,7 @@
         "窗外月光底下，孙策蹲在墙根的泥地里，死死攥着自己那件线头乱飞、缝得歪歪扭扭的破棉袄。",
         "他眼泪汪汪，又咬着牙，从窗缝里往屋里瞅：「……我也要。」"
       ]},
-      {"id": "s_i_cash", "title": "私房钱", "portraits": ["zhouyu"], "requires": "跟周瑜上山，挖出了他的私房钱", "reward": {"merit": 10}, "cg": "ss_cash", "text": [
+      {"id": "s_i_cash", "title": "私房钱", "portraits": ["zhouyu"], "requires": "跟周瑜上山，挖出了他的私房钱", "reward": {"merit": 30}, "cg": "ss_cash", "text": [
         "半夜，你看见周瑜扛着小锄头，鬼鬼祟祟地往后山走——又是那个陶罐。",
         "「换个地方埋，」他一脸严肃，「知道的人太多了。」",
         "他盯着你：「你发誓，谁也不说。」你举手发誓。他点点头，翻开账本：「保密费，每月五文，从你那边扣。」"
@@ -134,7 +134,7 @@
         "孙策在村口给小孩们讲他是怎么一枪挑翻水寨寨门的，越讲越神，最后变成了一枪挑翻了三座寨子。",
         "你路过时他冲你挤眼睛：「对吧？三座！」小孩们齐刷刷地看向你。你只好点头。"
       ]},
-      {"id": "s_i_pack", "title": "整装待发", "portraits": ["zhangfuren", "zhenmi_young"], "requires": "出生：冀州无极", "reward": {"merit": 10}, "cg": "i1_north_pack", "text": [
+      {"id": "s_i_pack", "title": "整装待发", "portraits": ["zhangfuren", "zhenmi_young"], "requires": "出生：冀州无极", "reward": {"upgrade": {"zhangfuren": 2}}, "cg": "i1_north_pack", "text": [
         "出征前夜，甄家的院子里灯火通明。几十辆大车正往外搬运粮草和布匹。",
         "张夫人披着外衣站在院中，指挥下人们把最结实的一辆大马车套好。",
         "你凑过去：「夫人，真要跟我们上前线啊？」",
@@ -184,7 +184,7 @@
         "最后你们俩扛着袁术营里顺来的半罐蜂蜜回营，被周瑜堵在门口。",
         "@zhouyu 周瑜：「蜂蜜交出来。……分我一半，我就当没看见。」"
       ]},
-      {"id": "s_i_yuxi", "title": "玉玺", "portraits": ["sunjian", "wuguotai"], "reward": {"upgrade": {"sunjian": 2}}, "cg": "i2_yuxi", "text": [
+      {"id": "s_i_yuxi", "title": "玉玺", "portraits": ["sunjian", "wuguotai"], "reward": {"upgrade": {"wuguotai": 2}}, "cg": "i2_yuxi", "text": [
         "回江东的船上，孙坚夜夜不睡，抱着一只锦盒坐在船头。",
         "谁走近，他就把盒子往怀里一揣，眼神像一头护食的老虎。",
         "吴夫人端着宵夜站在舱门口，站了很久，又端了回去。",
@@ -198,7 +198,7 @@
         "董白喘着气，突然笑了——你第一次看见她笑：「……还行，没给你爹丢人。」",
         "孙策也笑：「明天再来！」周瑜在一边记账：「两人打坏河堤一丈，照价赔偿。」"
       ]},
-      {"id": "s_i_river", "title": "河边", "portraits": ["sunce"], "requires": "董白：交给袁绍", "reward": {"merit": 10}, "cg": "ss_river", "text": [
+      {"id": "s_i_river", "title": "河边", "portraits": ["sunce"], "requires": "董白：交给袁绍", "reward": {"upgrade": {"sunce": 2}}, "cg": "ss_river", "text": [
         "船靠岸后，孙策一个人在河边坐了很久。",
         "「她说过，伤好了要跟我单挑的。」他往河里扔了块石头，「……算了。」",
         "那天晚上，他破天荒地没抢你碗里的肉。"
@@ -356,7 +356,7 @@
         "郭嘉也往外挪了三丈。",
         "@lord {lord}（内心）：……这两个人，以后有得磨了。"
       ]},
-      {"id": "s_i_news", "title": "山外的消息", "portraits": ["guojia", "zhangfuren"], "reward": {"merit": 10}, "cg": "ss_news", "text": [
+      {"id": "s_i_news", "title": "山外的消息", "portraits": ["guojia", "zhangfuren"], "reward": {"upgrade": {"guojia": 2}}, "cg": "ss_news", "text": [
         "【初平三年 · 夏】山外传来了两个消息。",
         "一个是：董卓在长安死了，杀他的是他的干儿子吕布。吕布丢了长安，带着并州军往东跑，没人知道他要去哪儿。",
         "郭嘉听完，往吕玲绮那边看了一眼，什么也没说。",
