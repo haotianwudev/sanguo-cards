@@ -2,7 +2,7 @@
   "_comment": "？小故事 (like Rance's 整备 ？ events): short side stories, often nothing to do with the main plot, keyed by the chapter (quest id) after which they open. They are read from 整备 (the ？ button) or the chapter recap, any time after; unread ones show as a big ？. Each: id (unique), title, portraits, text (story.json line style: @speaker / {lord}), optional cg, requires / unless (a recorded line, like interludes), cost (战功 to open it, default `cost` below) and reward (what opening it gives). Use only people who are in the party by the end of that chapter; anyone who joins by a choice needs that choice's line in requires.",
   "cost": 10,
   "_cost": "战功 to open a story the first time this 周目 (user rule: every story costs the same, 10 — like a 点化; a draw is 5); a story can still set its own `cost`; reading it again is free",
-  "_reward": "every story names its reward, paid when it is opened — and it must be worth more than the 10 战功 it costs (so merit, if used, is at least 30; user rule), and never a 孙坚 card: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids], merit n",
+  "_reward": "every story names its reward, paid when it is opened — never 战功 (user rule: only cards, 点化 and 宝物), and never a 孙坚 card: upgrade {card: copies} (点化 the story's lead — a card not held is handed over), relics [ids] (kept for the rest of the 周目; one already held pays its cost back as 战功), cards [ids]",
   "_chapters": "the chapter-end page (the recap): a warm CG of that chapter's core people, all on the left (the right is the menu), no hero; the same picture is also a card (cards.json, its portrait is the left part of the CG), but not handed over here: user rule — it comes from an extra ？小故事 of that chapter that only opens once the route's next bad end has been reached (requires that ending's line), its CG the page's picture. requires / unless (a line or a list of lines, all must hold) pick the route for the shared first chapter, or need the people in it (董白：留下).",
   "chapters": {
     "prologue": [{"unless": "出生：冀州无极", "cg": "rc_fuchun"}, {"requires": "出生：冀州无极", "cg": "rc_wuji"}],
@@ -125,7 +125,7 @@
         "窗外月光底下，孙策蹲在墙根的泥地里，死死攥着自己那件线头乱飞、缝得歪歪扭扭的破棉袄。",
         "他眼泪汪汪，又咬着牙，从窗缝里往屋里瞅：「……我也要。」"
       ]},
-      {"id": "s_i_cash", "title": "私房钱", "portraits": ["zhouyu"], "requires": "跟周瑜上山，挖出了他的私房钱", "reward": {"merit": 30}, "cg": "ss_cash", "text": [
+      {"id": "s_i_cash", "title": "私房钱", "portraits": ["zhouyu"], "requires": "跟周瑜上山，挖出了他的私房钱", "reward": {"upgrade": {"zhouyu": 2}}, "cg": "ss_cash", "text": [
         "半夜，你看见周瑜扛着小锄头，鬼鬼祟祟地往后山走——又是那个陶罐。",
         "「换个地方埋，」他一脸严肃，「知道的人太多了。」",
         "他盯着你：「你发誓，谁也不说。」你举手发誓。他点点头，翻开账本：「保密费，每月五文，从你那边扣。」"

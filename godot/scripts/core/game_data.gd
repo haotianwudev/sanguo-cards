@@ -220,7 +220,7 @@ func _load(dir: String) -> void:
 				assert(not st.get("text", []).is_empty(), "side story %s: no text" % st["id"])
 				var rw: Dictionary = st.get("reward", {})
 				assert(not rw.is_empty(), "side story %s: no reward" % st["id"])
-				assert(rw.size() > 1 or not rw.has("merit") or int(rw["merit"]) > int(st.get("cost", side_cost)), "side story %s: 战功 back no more than it costs = no reward" % st["id"])
+				assert(not rw.has("merit"), "side story %s: rewards are cards / 点化 / 宝物, never 战功 (user rule)" % st["id"])
 				for cid in rw.get("cards", []) + rw.get("upgrade", {}).keys():
 					assert(cards.has(cid), "side story %s: unknown card %s" % [st["id"], cid])
 					assert(not cid.begins_with("sunjian"), "side story %s: never hands out a 孙坚 card (user rule)" % st["id"])
