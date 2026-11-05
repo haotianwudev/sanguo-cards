@@ -475,7 +475,11 @@ func test_relics_change_battles() -> void:
 	check_eq(b.ap, plain.ap + 2, "兵符 +1 at start, 玉玺 +1 per round")
 	check_eq(b.turn_limit, plain.turn_limit + 2, "孙子兵法")
 	check(b.party_max < plain.party_max, "玉玺 costs HP")
-	check(b.enemy["stunned"], "赤帻")
+	var dazed := 0
+	for seed in range(1, 201):
+		if Battle.start("boar", s.party_leaders(), seed, 0, {}, {}, false, m).enemy["stunned"]:
+			dazed += 1
+	check(dazed > 30 and dazed < 90, "赤帻 dazes about 30%% of fights (%d / 200)" % dazed)
 	check(b.leaders.all(func(u): return u["boosted"]), "战鼓")
 
 

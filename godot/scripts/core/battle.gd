@@ -117,7 +117,8 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		for u in b.leaders:
 			u["boosted"] = true
 		b.opening.append("战鼓擂响，全军 BOOST！")
-	if mods.get("stun_start", 0) > 0:
+	var daze := float(mods.get("stun_start", 0.0))  # 赤帻: a chance, not a sure thing (roll only when held, so other fights keep their dice)
+	if daze > 0.0 and b.rng.randf() < daze:
 		b.enemy["stunned"] = true
 		b.opening.append("%s 盯着赤帻发愣——第一回合无法行动" % e["name"])
 	b.opening.append_array(b._start_round())
