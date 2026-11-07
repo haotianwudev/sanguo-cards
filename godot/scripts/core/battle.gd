@@ -700,11 +700,14 @@ func intent_label(mv: Dictionary, first := false) -> String:
 
 
 func intent_text() -> String:
-	if enemy["stunned"]:
-		return "眩晕"
 	var out: Array = []
-	for k in enemy["intents"].size():
-		out.append(intent_label(enemy["intents"][k], k == 0))
+	if enemy["stunned"]:
+		out.append("眩晕")
+	else:
+		for k in enemy["intents"].size():
+			out.append(intent_label(enemy["intents"][k], k == 0))
+	if not enemy["guard"].is_empty():  # the 前卫 swings a 普通攻击 every enemy turn, even with its boss stunned
+		out.append("%s·普攻" % enemy["guard"]["name"])
 	return " · ".join(out)
 
 
@@ -1177,8 +1180,8 @@ func _enemy_phase(defend_cut: float) -> Array:
 		var g: Dictionary = enemy["guard"]
 		var gd := maxi(1, int(round(float(enemy["at"]) * float(db.battle.get("damage_mult", 1.0)) * float(g["strike"]) * _variance() * (1.0 - cut))))
 		party_hp = maxi(0, party_hp - gd)
-		_ev({"t": "enemy_hit", "dmg": gd, "move": g["name"], "cut": cut, "hp": party_hp, "guard": true})
-		log.append("%s 跟着砍了一刀，我军受到 %d 伤害" % [g["name"], gd])
+		_ev({"t": "enemy_hit", "dmg": gd, "move": "%s·普攻" % g["name"], "cut": cut, "hp": party_hp, "guard": true})
+		log.append("%s 普通攻击，我军受到 %d 伤害" % [g["name"], gd])
 		if party_hp > 0:
 			log.append_array(_counter_strike())
 		_check_end()

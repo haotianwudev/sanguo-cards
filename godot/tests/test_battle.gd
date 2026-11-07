@@ -833,6 +833,14 @@ func test_a_summoned_guard_soaks_physical_but_not_magic_or_pierce() -> void:
 	check(b.enemy["guard"].is_empty(), "a guard at 0 is gone")
 
 
+func test_a_guard_shows_and_swings_a_plain_attack_every_round() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.enemy["guard"] = {"name": "虎卫军", "hp": 999999, "max_hp": 999999, "strike": 0.5}
+	check(b.intent_text().contains("虎卫军·普攻"), "the 意图 names its 普通攻击: " + b.intent_text())
+	b.enemy["stunned"] = true
+	check(b.intent_text().contains("虎卫军·普攻"), "…even with its boss stunned: " + b.intent_text())
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true
