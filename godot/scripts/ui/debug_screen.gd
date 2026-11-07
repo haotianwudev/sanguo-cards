@@ -126,10 +126,10 @@ func _gallery(tabs: Array, build: Callable) -> Control:
 	return box
 
 
-const _POOLS := [["public", "公共招贤池"], ["recruit", "章节招贤馆"], ["story", "剧情给卡"], ["side", "小故事给卡"], ["foe", "打败敌将得"],
+const _POOLS := [["public", "公共招贤池"], ["recruit", "章节招贤馆"], ["story", "剧情给卡"], ["event", "事件给卡"], ["side", "小故事给卡"], ["foe", "打败敌将得"],
 	["soldier", "兵卡"], ["lord", "主角卡"], ["none", "没有来路"]]  # where a card comes from; a card can come from several
 const _RARITIES := ["SSR", "SR", "R", "C", "N"]
-const _CHAPTERED := ["recruit", "story", "side", "foe"]  # pools that belong to a chapter: a 章节 row opens under them
+const _CHAPTERED := ["recruit", "story", "side", "foe", "event"]  # (for 事件给卡 the row lists the events)  # pools that belong to a chapter: a 章节 row opens under them
 var _sources := {}  # card id -> {pool: [chapter titles]}, built once
 
 
@@ -169,6 +169,19 @@ func _card_sources() -> Dictionary:
 				var foe: Dictionary = db.enemies[db.scenarios[s["battle"]]["enemy"]]
 				if not foe.get("card_public", false):
 					add.call(str(foe.get("drop", "")), "foe", title)
+	for eid in db.events:  # ？ random events: a card outright, or one of an offer's picks (deep inside chance / battle branches too)
+		var stack: Array = [db.events[eid]["options"]]
+		while not stack.is_empty():
+			var o: Variant = stack.pop_back()
+			if o is Dictionary:
+				if o.get("card") is String:
+					add.call(str(o["card"]), "event", str(db.events[eid]["title"]))
+				if o.get("offer") is Dictionary:
+					for c in o["offer"].get("from", []):
+						add.call(str(c), "event", str(db.events[eid]["title"]))
+				stack.append_array(o.values())
+			elif o is Array:
+				stack.append_array(o)
 	for qid in db.side_stories:
 		for st in db.side_stories[qid]:
 			for c in st.get("reward", {}).get("cards", []):
@@ -249,12 +262,16 @@ func _cards_panel() -> Control:
 			ch.queue_free()
 		chip_row.call("来路", "pool", _POOLS)
 		if pick["pool"] in _CHAPTERED:
-			var chapters: Array = []
+			var chapters: Array = []  # chapter titles in story order (for 事件给卡: the event titles)
 			for q in db.quests:
-				var title := str(q["title"])
-				if src.keys().any(func(cid): return src[cid].has(pick["pool"]) and src[cid][pick["pool"]].has(title)) and not chapters.has(title):
-					chapters.append(title)
-			chip_row.call("章节", "chapter", chapters.map(func(x): return [x, x]))
+				chapters.append(str(q["title"]))
+			var seen: Array = []
+			for cid in src:
+				for w in src[cid].get(pick["pool"], []):
+					if not seen.has(w):
+						seen.append(w)
+			seen.sort_custom(func(a, b): return chapters.find(a) < chapters.find(b) if chapters.has(a) and chapters.has(b) else str(a) < str(b))
+			chip_row.call("事件" if pick["pool"] == "event" else "章节", "chapter", seen.map(func(x): return [x, x]))
 		chip_row.call("稀有度", "rarity", _RARITIES.map(func(x): return [x, x]))
 		var troops: Array = troop_order.map(func(x): return [x, str(db.troops[x]["name"])])
 		chip_row.call("兵种", "troop", troops)

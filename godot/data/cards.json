@@ -1254,8 +1254,7 @@
       "rarity": "R",
       "troop": "logistics",
       "hp": 80,
-      "at": 66,
-      "pool": false
+      "at": 66
     },
     "gaoshun": {
       "name": "高顺",
@@ -1700,7 +1699,6 @@
       "troop": "infantry",
       "hp": 70,
       "at": 92,
-      "pool": false,
       "skills": [
         "baiyi"
       ],
@@ -2223,8 +2221,7 @@
       "at": 80,
       "skills": [
         "taiping"
-      ],
-      "pool": false
+      ]
     },
     "lvbu": {
       "name": "吕布",
@@ -3424,7 +3421,6 @@
       "troop": "strategist",
       "hp": 64,
       "at": 50,
-      "pool": false,
       "scope": "south"
     },
     "yufan": {
@@ -3666,7 +3662,6 @@
       "skills": [
         "yidaizhao"
       ],
-      "pool": false,
       "scope": "south"
     },
     "guotu": {
@@ -3679,11 +3674,11 @@
     },
     "yuantan": {
       "name": "袁谭",
+      "pool": false,
       "rarity": "C",
       "troop": "cavalry",
       "hp": 54,
       "at": 60,
-      "pool": false,
       "scope": "north"
     },
     "yuanshang": {
@@ -3692,7 +3687,6 @@
       "troop": "cavalry",
       "hp": 52,
       "at": 62,
-      "pool": false,
       "scope": "north"
     },
     "caiyong": {
@@ -3701,16 +3695,15 @@
       "troop": "logistics",
       "hp": 74,
       "at": 58,
-      "pool": false,
       "scope": "south"
     },
     "shenpei": {
       "name": "审配",
+      "pool": false,
       "rarity": "R",
       "troop": "spear",
       "hp": 72,
       "at": 72,
-      "pool": false,
       "scope": "north"
     },
     "caochun": {
@@ -3727,7 +3720,6 @@
       "troop": "infantry",
       "hp": 60,
       "at": 58,
-      "pool": false,
       "scope": "north"
     },
     "xinping": {
@@ -3736,7 +3728,6 @@
       "troop": "strategist",
       "hp": 56,
       "at": 50,
-      "pool": false,
       "scope": "north"
     },
     "qiaogong": {
@@ -3745,7 +3736,6 @@
       "troop": "logistics",
       "hp": 62,
       "at": 48,
-      "pool": false,
       "scope": "south"
     },
     "xinpi": {
@@ -3754,7 +3744,6 @@
       "troop": "strategist",
       "hp": 74,
       "at": 40,
-      "pool": false,
       "scope": "north"
     },
     "manchong": {
@@ -3771,16 +3760,15 @@
       "rarity": "C",
       "troop": "strategist",
       "hp": 74,
-      "at": 42,
-      "pool": false
+      "at": 42
     },
     "yanyu": {
       "name": "严舆",
+      "pool": false,
       "rarity": "C",
       "troop": "infantry",
       "hp": 58,
       "at": 62,
-      "pool": false,
       "scope": "south"
     },
     "zanghong": {
@@ -3789,7 +3777,6 @@
       "troop": "infantry",
       "hp": 72,
       "at": 66,
-      "pool": false,
       "scope": "north"
     },
     "simahui": {
@@ -3797,16 +3784,14 @@
       "rarity": "R",
       "troop": "strategist",
       "hp": 78,
-      "at": 60,
-      "pool": false
+      "at": 60
     },
     "guanlu": {
       "name": "管辂",
       "rarity": "C",
       "troop": "strategist",
       "hp": 66,
-      "at": 54,
-      "pool": false
+      "at": 54
     },
     "chengyu": {
       "name": "程昱",
@@ -3822,20 +3807,20 @@
     },
     "houcheng": {
       "name": "侯成",
+      "pool": false,
       "rarity": "C",
       "troop": "cavalry",
       "hp": 58,
       "at": 64,
-      "pool": false,
       "scope": "north"
     },
     "zhangrao": {
       "name": "张饶",
+      "pool": false,
       "rarity": "C",
       "troop": "bandit",
       "hp": 60,
       "at": 62,
-      "pool": false,
       "scope": "north"
     },
     "pangdegong": {
@@ -3843,16 +3828,14 @@
       "rarity": "R",
       "troop": "strategist",
       "hp": 74,
-      "at": 58,
-      "pool": false
+      "at": 58
     },
     "xushao": {
       "name": "许劭",
       "rarity": "C",
       "troop": "strategist",
       "hp": 78,
-      "at": 42,
-      "pool": false
+      "at": 42
     },
     "fanneng": {
       "name": "樊能",
@@ -3860,7 +3843,6 @@
       "troop": "infantry",
       "hp": 58,
       "at": 62,
-      "pool": false,
       "scope": "south"
     },
     "yangsong": {
@@ -3869,7 +3851,6 @@
       "troop": "logistics",
       "hp": 64,
       "at": 48,
-      "pool": false,
       "scope": "south"
     },
     "maliang": {
@@ -3878,7 +3859,6 @@
       "troop": "strategist",
       "hp": 72,
       "at": 64,
-      "pool": false,
       "scope": "south"
     },
     "xuyou": {
@@ -3901,11 +3881,11 @@
     },
     "changxi": {
       "name": "昌豨",
+      "pool": false,
       "rarity": "C",
       "troop": "bandit",
       "hp": 54,
       "at": 60,
-      "pool": false,
       "scope": "north"
     },
     "lingcao": {
@@ -3914,7 +3894,6 @@
       "troop": "infantry",
       "hp": 54,
       "at": 62,
-      "pool": false,
       "scope": "south"
     },
     "qinyilu": {
@@ -3923,7 +3902,6 @@
       "troop": "logistics",
       "hp": 60,
       "at": 48,
-      "pool": false,
       "scope": "north"
     },
     "gongsundu": {
@@ -3932,7 +3910,6 @@
       "troop": "infantry",
       "hp": 60,
       "at": 56,
-      "pool": false,
       "scope": "north"
     },
     "dongxi": {
@@ -3977,7 +3954,6 @@
       "troop": "infantry",
       "hp": 58,
       "at": 64,
-      "pool": false,
       "scope": "north"
     },
     "zhanghong": {
@@ -4004,7 +3980,6 @@
       "troop": "strategist",
       "hp": 70,
       "at": 64,
-      "pool": false,
       "scope": "south"
     },
     "zhangsong": {
@@ -4022,7 +3997,6 @@
       "troop": "bandit",
       "hp": 60,
       "at": 62,
-      "pool": false,
       "scope": "south"
     },
     "songxian": {
@@ -4031,7 +4005,6 @@
       "troop": "cavalry",
       "hp": 58,
       "at": 64,
-      "pool": false,
       "scope": "north"
     },
     "tiankai": {
@@ -4040,7 +4013,6 @@
       "troop": "cavalry",
       "hp": 64,
       "at": 68,
-      "pool": false,
       "scope": "north"
     },
     "shanjing": {
@@ -4049,7 +4021,6 @@
       "troop": "cavalry",
       "hp": 60,
       "at": 62,
-      "pool": false,
       "scope": "north"
     },
     "liuyu": {
@@ -4058,7 +4029,6 @@
       "troop": "logistics",
       "hp": 74,
       "at": 56,
-      "pool": false,
       "scope": "north"
     },
     "bairao": {
@@ -4067,7 +4037,6 @@
       "troop": "bandit",
       "hp": 62,
       "at": 60,
-      "pool": false,
       "scope": "north"
     },
     "suigu": {
@@ -4076,7 +4045,6 @@
       "troop": "bandit",
       "hp": 58,
       "at": 62,
-      "pool": false,
       "scope": "north"
     },
     "yangfeng": {
@@ -4085,7 +4053,6 @@
       "troop": "bandit",
       "hp": 60,
       "at": 58,
-      "pool": false,
       "scope": "north"
     },
     "baotao": {
@@ -4094,7 +4061,6 @@
       "troop": "cavalry",
       "hp": 56,
       "at": 62,
-      "pool": false,
       "scope": "north"
     },
     "chenrong": {
@@ -4103,7 +4069,6 @@
       "troop": "logistics",
       "hp": 62,
       "at": 50,
-      "pool": false,
       "scope": "north"
     },
     "wangkuang": {
@@ -4112,7 +4077,6 @@
       "troop": "infantry",
       "hp": 56,
       "at": 52,
-      "pool": false,
       "scope": "north"
     },
     "liudai": {
@@ -4121,7 +4085,6 @@
       "troop": "infantry",
       "hp": 60,
       "at": 58,
-      "pool": false,
       "scope": "north"
     },
     "kongzhou": {
@@ -4130,7 +4093,6 @@
       "troop": "strategist",
       "hp": 60,
       "at": 52,
-      "pool": false,
       "scope": "north"
     },
     "qiaomao": {
@@ -4139,7 +4101,6 @@
       "troop": "infantry",
       "hp": 58,
       "at": 56,
-      "pool": false,
       "scope": "north"
     },
     "yuejin": {
@@ -4158,7 +4119,6 @@
       "skills": ["wulei"],
       "hp": 68,
       "at": 64,
-      "pool": false,
       "scope": "north"
     },
     "zhangliang": {
@@ -4167,7 +4127,6 @@
       "troop": "infantry",
       "hp": 64,
       "at": 72,
-      "pool": false,
       "scope": "north"
     },
     "lukang": {
@@ -4176,7 +4135,6 @@
       "troop": "logistics",
       "hp": 62,
       "at": 48,
-      "pool": false,
       "scope": "south"
     },
     "mifuren": {
@@ -4185,7 +4143,6 @@
       "troop": "logistics",
       "hp": 72,
       "at": 56,
-      "pool": false,
       "scope": "north"
     },
     "caoxing": {
@@ -4194,7 +4151,6 @@
       "troop": "archer",
       "hp": 52,
       "at": 62,
-      "pool": false,
       "scope": "north"
     },
     "dingfeng": {
@@ -4248,7 +4204,6 @@
       "troop": "bandit",
       "hp": 62,
       "at": 60,
-      "pool": false,
       "scope": "south"
     },
     "hanhao": {
@@ -4374,11 +4329,11 @@
     },
     "yang_ang": {
       "name": "杨昂",
+      "pool": false,
       "rarity": "C",
       "troop": "infantry",
       "hp": 52,
-      "at": 62,
-      "pool": false
+      "at": 62
     },
     "wudou_guizu": {
       "name": "五斗米鬼卒",
