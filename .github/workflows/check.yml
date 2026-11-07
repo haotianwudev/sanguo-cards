@@ -1,0 +1,44 @@
+name: check
+# The same one-command check as locally (tools/check.sh): texture import policy, Godot import, the tests (game data
+# schema included), every generated doc up to date. Several agents push to master — this catches what one breaks.
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GODOT_VERSION: 4.7.2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Godot (cached)
+        id: godot
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}
+      - name: Download Godot
+        if: steps.godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot && cd ~/godot
+          curl -sSLo godot.zip "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip && rm godot.zip && mv Godot_v*_linux.x86_64 godot && chmod +x godot
+      - name: Imported assets (cached by the .import files)
+        uses: actions/cache@v4
+        with:
+          path: godot/.godot
+          key: imported-${{ hashFiles('godot/**/*.import') }}
+          restore-keys: imported-
+      - name: tools/check.sh
+        env:
+          SANGUO_GODOT: ${{ github.workspace }}/../godot-bin
+          PYTHONIOENCODING: utf-8
+        run: |
+          ln -sf ~/godot/godot "$SANGUO_GODOT"
+          sh tools/check.sh

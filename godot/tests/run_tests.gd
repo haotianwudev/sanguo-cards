@@ -28,7 +28,13 @@ func _init() -> void:
 	var failed: Array = []
 	var t0 := Time.get_ticks_msec()
 	for f in files:
-		var inst: Object = load("res://tests/" + f).new()
+		var scr: Script = load("res://tests/" + f)
+		if scr == null or not scr.can_instantiate():  # a parse error: say so and go on (it used to hang the runner)
+			total += 1
+			failed.append(f)
+			print("  FAIL  %s  does not compile (parse error, see above)" % f.get_basename())
+			continue
+		var inst: Object = scr.new()
 		for m in inst.get_method_list():
 			var name: String = m["name"]
 			if not name.begins_with("test_") or (only != "" and not name.contains(only)):
