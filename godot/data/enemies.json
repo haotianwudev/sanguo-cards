@@ -756,7 +756,7 @@
         {"name": "护驾·蓄力", "power": 0, "weight": 1, "charge": "亲兵护驾", "prefer": "self_low_hp"},
         {"name": "亲兵护驾", "power": 0, "weight": 0, "summon": {"name": "仲氏亲兵", "hp_pct": 0.14, "strike": 0.5}},
         {"name": "天子点名", "power": 0, "weight": 1, "mark": "伪帝诛臣"},
-        {"name": "伪帝诛臣", "power": 0, "weight": 0}
+        {"name": "伪帝诛臣", "power": 0, "weight": 0}, {"name": "蜜水·蓄力", "power": 0, "weight": 1, "charge": "一碗蜜水", "prefer": "self_low_hp"}, {"name": "一碗蜜水", "power": 0, "weight": 0, "heal": 0.15}
       ],
       "card": "yuanshu"
     },
@@ -1887,7 +1887,7 @@
           "pierce": true
         },
         {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "唐周护卫", "prefer": "player_buffed"},
-        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}
+        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "符水·蓄力", "power": 0, "weight": 1, "charge": "符水疗伤", "prefer": "self_low_hp"}, {"name": "符水疗伤", "power": 0, "weight": 0, "heal": 0.15}
       ],
       "card": "yaodao_card"
     },
@@ -2260,7 +2260,7 @@
           "power": 3.8,
           "weight": 0,
           "pierce": true
-        }
+        }, {"name": "太平·蓄力", "power": 0, "weight": 1, "charge": "太平清领道", "prefer": "self_low_hp"}, {"name": "太平清领道", "power": 0, "weight": 0, "heal": 0.2}
       ],
       "card": "zhangjiao"
     },
@@ -2858,7 +2858,7 @@
           "pierce": true
         },
         {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "张修护卫", "prefer": "player_buffed"},
-        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}
+        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "五斗米·蓄力", "power": 0, "weight": 1, "charge": "五斗米道", "prefer": "self_low_hp"}, {"name": "五斗米道", "power": 0, "weight": 0, "heal": 0.15}
       ],
       "card": "xuanjizi_card"
     },
