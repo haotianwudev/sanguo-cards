@@ -873,6 +873,18 @@ func test_war_spirit_counts_double_on_strategy_damage() -> void:
 	check(absf(float(buffed) / plain - 1.2) < 0.02, "战意 +10 gives 谋略 +20 percent: %d -> %d" % [plain, buffed])
 
 
+func test_every_cao_ren_raises_a_shield() -> void:
+	## 曹仁 is the 铁壁 general (user rule): every enemy of his has a 护盾 move
+	var db := GameData.get_db()
+	var n := 0
+	for id in db.enemies:
+		var e: Dictionary = db.enemies[id]
+		if str(e["name"]).contains("曹仁"):
+			n += 1
+			check(e["moves"].any(func(m): return m.has("shield")), "%s has a 护盾" % id)
+	check(n >= 5, "found the 曹仁s: %d" % n)
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true
