@@ -3855,6 +3855,7 @@
     },
     "maliang": {
       "name": "马良",
+      "pool": false,
       "rarity": "R",
       "troop": "strategist",
       "hp": 72,

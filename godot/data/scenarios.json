@@ -963,7 +963,7 @@
     "m8_han_bazhen_bei": {"name": "汉水北岸·虎步军", "turn_limit": 6, "enemy": "m8_han_bazhen", "art": "m8_han_bazhen"},
     "m8_han_nu_bei": {"name": "汉水北岸·连弩兵", "turn_limit": 6, "enemy": "m8_han_nu", "art": "m8_han_nu"},
     "m8_han_wudang_bai": {"name": "白河上游·无当飞军", "turn_limit": 6, "enemy": "m8_han_wudang", "art": "m8_han_wudang"},
-    "m8_han_menshen": {"name": "白河营寨·卧龙门生", "turn_limit": 6, "enemy": "m8_han_menshen"},
+    "m8_han_menshen": {"name": "白河营寨·马良", "turn_limit": 6, "enemy": "m8_han_menshen"},
     "m9_yexi": {"name": "汉水·汉军夜袭", "turn_limit": 10, "enemy": "m9_yexi", "art": "m8_han_bazhen"},
     "m9_han_nu": {"name": "汉水下游·连弩兵", "turn_limit": 6, "enemy": "m9_han_nu", "art": "m8_han_nu"},
     "m9_han_bazhen": {"name": "芦苇荡·虎步军", "turn_limit": 6, "enemy": "m9_han_bazhen", "art": "m8_han_bazhen"},

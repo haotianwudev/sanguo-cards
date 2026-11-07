@@ -1839,7 +1839,7 @@ func test_the_han_army_soldiers_only_come_from_fighting_liu_bei() -> void:
 		var e: Dictionary = db.enemies[eid]
 		var cid: String = e.get("card", "")
 		if cid != "" and db.cards[cid].get("faction", "") == "han":
-			check(e["name"].begins_with("汉军") or ["guanping", "chendao", "zhangfei", "guanyu", "zhugeliang", "liubei"].has(e["portrait"]),
+			check(e["name"].begins_with("汉军") or ["guanping", "chendao", "zhangfei", "guanyu", "zhugeliang", "liubei", "maliang"].has(e["portrait"]),
 				"%s drops a 汉军 card but isn't 刘备's (%s)" % [eid, e["name"]])
 
 
