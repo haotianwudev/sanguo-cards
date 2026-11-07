@@ -1695,6 +1695,7 @@
     },
     "lvmeng": {
       "name": "吕蒙",
+      "pool": false,
       "rarity": "SR",
       "troop": "infantry",
       "hp": 70,
