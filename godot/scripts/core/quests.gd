@@ -96,8 +96,7 @@ static func current_quest(save: SaveData) -> Variant:
 	for q in GameData.get_db().quests:
 		# a chapter with requires only comes on the route that earned it (story flags from earlier chapters);
 		# unless hides it on a route that earned something else (e.g. the other birthplace)
-		if not save.quests_cleared.has(q["id"]) and _flags_hold(q.get("requires", ""), save, false) \
-				and not (q.get("unless", "") != "" and _flags_hold(q["unless"], save, false)):
+		if not save.quests_cleared.has(q["id"]) and gate(q, save, false):
 			return q
 	return null
 
@@ -450,13 +449,35 @@ static func is_open(s: Dictionary, save: SaveData) -> bool:
 	## A square with requires / unless only exists when the flag says so: a story flag from an earlier chapter, or a
 	## line recorded earlier in this run (a choice made in this chapter).
 	## Either may be a list: requires needs all of them, unless hides the square when all of them hold.
-	return _flags_hold(s["requires"], save, true) and (_as_list(s["unless"]).is_empty() or not _flags_hold(s["unless"], save, true))
+	return gate(s, save, true)
 
 
 static func is_ghost(s: Dictionary, save: SaveData) -> bool:
 	## a square of a route not taken (or not yet) that the map still draws, greyed, so the fork is visible;
 	## ghost_requires (story flags) keeps a route the player has not unlocked from showing at all
 	return s["ghost"] and not is_open(s, save) and _flags_hold(s["ghost_requires"], save, false)
+
+
+static func gate(entry: Dictionary, save: SaveData, this_run := true, ending_level := true) -> bool:
+	## THE requires / unless rule — every gated thing (quests, squares, pool / title / map overrides, ？小故事, chapter
+	## pages) goes through here, so the meaning can't drift between them:
+	##   requires: a line or a list — every line must hold;
+	##   unless:   a line or a list — the entry is hidden only when EVERY line holds (第五章: unless [结局五 · 恨海, 贾诩：入队]
+	##             keeps the 恨海 squares unless both are true).
+	## A line holds when it is a lasting story flag, or (this_run) a line this run recorded. ending_level: an 「结局…」 line
+	## also needs the 难度 that ending opens (_ending_active); ？小故事 / chapter pages pass false — they open on the ending itself.
+	var req := _as_list(entry.get("requires", ""))
+	var bar := _as_list(entry.get("unless", ""))
+	return _lines_hold(req, save, this_run, ending_level) and (bar.is_empty() or not _lines_hold(bar, save, this_run, ending_level))
+
+
+static func _lines_hold(lines: Array, save: SaveData, this_run: bool, ending_level: bool) -> bool:
+	for line in lines:
+		if ending_level and str(line).contains("结局") and not _ending_active(str(line), save):
+			return false  # played below the 难度 this ending opens: what it unlocks stays shut
+		if not (save.flags.has(line) or (this_run and save.run_records.has(line))):
+			return false
+	return true
 
 
 static func _as_list(v: Variant) -> Array:
@@ -474,13 +495,9 @@ static func _ending_active(title: String, save: SaveData) -> bool:
 
 
 static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
-	## every line in v is a story flag (or, with this_run, a line recorded earlier in this run)
-	for line in _as_list(v):
-		if str(line).contains("结局") and not _ending_active(str(line), save):
-			return false  # played below the 难度 this ending opens: what it unlocks stays shut
-		if not (save.flags.has(line) or (this_run and save.run_records.has(line))):
-			return false
-	return true
+	## every line in v is a story flag (or, with this_run, a line recorded earlier in this run) — requires-only checks
+	## (an option's requires, card_unless); anything with requires AND unless goes through gate()
+	return _lines_hold(_as_list(v), save, this_run, true)
 
 
 static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Dictionary:
@@ -497,7 +514,7 @@ static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Diction
 	var soldier_scope: String = q["soldier_scope"]
 	var event_scope: String = q["event_scope"]
 	for o in q["pool_overrides"]:
-		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+		if gate(o, save):
 			if not o["recruit_pool"].is_empty():
 				out["recruit_pool"] = o["recruit_pool"]
 			if o["soldier_scope"] != "":
@@ -527,7 +544,7 @@ static func title(q: Dictionary, save: SaveData) -> String:
 	## q["title"], swapped by the first matching entry in title_overrides — same reasoning as pools(): a
 	## quest shared by two routes (south/north prologue) shouldn't keep showing the other route's chapter name.
 	for o in q["title_overrides"]:
-		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+		if gate(o, save):
 			return o["title"]
 	return q["title"]
 
@@ -538,7 +555,7 @@ static func map_key(q: Dictionary, save: SaveData) -> String:
 	## instead of sharing the other route's — e.g. prologue's south/north halves are different enough
 	## (river town vs. snowy mountains) that one stretched image can't cover both well.
 	for o in q["map_overrides"]:
-		if _flags_hold(o["requires"], save) and not (o["unless"] != "" and _flags_hold(o["unless"], save)):
+		if gate(o, save):
 			return o["map"]
 	return q["id"]
 
@@ -1002,11 +1019,10 @@ static func side_stories(save: SaveData, also := "") -> Array:
 	if save.ended and save.replay == "":  # an ending closed this 周目: its stories wait for the next one
 		return []
 	var now := also if also != "" else (str(save.quests_cleared[-1]) if not save.quests_cleared.is_empty() else "")
-	var have: Array = save.flags + save.run_records
 	var out: Array = []
 	for qid in db.side_stories:
 		for st in db.side_stories[qid]:
-			if qid != now or not _story_open(st, have):
+			if qid != now or not gate(st, save, true, false):
 				continue
 			var s: Dictionary = st.duplicate()
 			s["quest"] = qid
@@ -1016,22 +1032,14 @@ static func side_stories(save: SaveData, also := "") -> Array:
 	return out
 
 
-static func _story_open(st: Dictionary, have: Array) -> bool:
-	## requires: a recorded line, or a list of them (all must hold); unless: a line (or list) none of which may hold
-	var req: Array = st["requires"] if st.get("requires") is Array else ([st["requires"]] if st.has("requires") else [])
-	var bar: Array = st["unless"] if st.get("unless") is Array else ([st["unless"]] if st.has("unless") else [])
-	return req.all(func(f): return have.has(f)) and not bar.any(func(f): return have.has(f))
-
-
 static func side_unread(save: SaveData, also := "") -> int:
 	return side_stories(save, also).filter(func(s): return not s["read"]).size()
 
 
 static func chapter_page(quest_id: String, save: SaveData) -> Dictionary:
 	## the chapter-end page's {cg} for this route ({} = none drawn yet)
-	var have: Array = save.flags + save.run_records
 	for pg in GameData.get_db().chapter_pages.get(quest_id, []):
-		if not _story_open(pg, have):
+		if not gate(pg, save, true, false):
 			continue
 		return pg
 	return {}

@@ -2396,3 +2396,17 @@ func test_ssr_lord_cards_come_only_from_their_fixed_chapter() -> void:
 		var s2 := SaveData.create()
 		s2.flags = ["出生：冀州无极"] if north else []
 		check_eq(Quests.grant_lord_form(q2, s2, rng), db.lord_form_fixed[qid], "%s always gives its SSR card" % qid)
+
+
+func test_gate_is_one_rule_everywhere() -> void:
+	## Quests.gate: requires = every line holds; unless = hidden only when every line holds (第五章 恨海 squares)
+	var s := SaveData.new()
+	s.flags = ["甲"]
+	check(Quests.gate({"requires": "甲"}, s), "requires one line")
+	check(not Quests.gate({"requires": ["甲", "乙"]}, s), "requires needs every line")
+	check(not Quests.gate({"unless": "甲"}, s), "unless one line")
+	check(Quests.gate({"unless": ["甲", "乙"]}, s), "unless a list hides only when all hold")
+	s.run_records = ["乙"]
+	check(not Quests.gate({"unless": ["甲", "乙"]}, s), "this run's records count")
+	check(Quests.gate({"unless": ["甲", "乙"]}, s, false), "story flags only")
+	check(Quests.gate({}, s), "no gate = open")
