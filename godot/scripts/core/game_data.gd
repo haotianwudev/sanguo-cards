@@ -37,7 +37,7 @@ var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the 
 var side_cost := 10  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
 var ui: Dictionary
 var routes: Dictionary  # route id -> the birth line that puts a journey on it (story.json routes; the first is the default)
-var errors: Array = []  # every data/schema.json failure (and the few checks code makes), all at once — test_data_has_no_schema_errors prints them
+var errors: Array = []  # the few data checks code makes at load (fail_if); check_schema() adds data/schema.json's
 
 
 static func get_db() -> GameData:
@@ -238,11 +238,20 @@ func _load(dir: String) -> void:
 		side_cost = int(ss.get("cost", 10))
 		chapter_pages = ss.get("chapters", {})
 
-	var root: Dictionary = raw.duplicate()
-	root.merge({"story": story, "endings": en, "ui": ui, "side_stories": ss}, true)
-	errors.append_array(Schema.check(root, read_json(dir + "/schema.json")))
 	for e in errors:
 		push_error("data: " + e)
+
+
+static func check_schema(dir: String = DATA_DIR) -> Array:
+	## every data/schema.json failure plus the checks code makes at load (errors), all at once. Not run at startup — the
+	## shipped data never changes and the full check costs ~70 ms; the tests, tools/export_facts.gd and the pre-commit
+	## hook run it, so bad data never gets that far.
+	var root: Dictionary = read_json(dir + "/cards.json")
+	for part in DATA_PARTS:
+		root.merge(read_json(dir + "/" + part))
+	for f in ["story", "endings", "ui", "side_stories"]:
+		root[f] = read_json("%s/%s.json" % [dir, f])
+	return get_db().errors + Schema.check(root, read_json(dir + "/schema.json"))
 
 
 func _index_card_chapters() -> void:

@@ -48,7 +48,7 @@ func _init() -> void:
 		var s := SaveData.new()
 		s.flags = [db.routes[r]]
 		public[r] = s.chest_pools()["public"]["soldier"].map(func(c): return c["id"])
-	var facts := {"routes": db.routes, "chapters": chapters, "card_chapters": db.card_chapters, "public_soldiers": public, "errors": db.errors}
+	var facts := {"routes": db.routes, "chapters": chapters, "card_chapters": db.card_chapters, "public_soldiers": public, "errors": GameData.check_schema()}
 	var f := FileAccess.open(out_path, FileAccess.WRITE) if out_path != "" else null
 	if f == null:
 		print(JSON.stringify(facts))

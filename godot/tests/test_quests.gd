@@ -2456,7 +2456,7 @@ func test_a_cut_off_save_falls_back_to_its_tmp() -> void:
 
 func test_data_has_no_schema_errors() -> void:
 	## data/schema.json: every reference and enum in the game data, all failures listed at once
-	var errs: Array = GameData.get_db().errors
+	var errs: Array = GameData.check_schema()
 	for e in errs.slice(0, 40):
 		print("  data: ", e)
 	check(errs.is_empty(), "%d data error(s), see above" % errs.size())
