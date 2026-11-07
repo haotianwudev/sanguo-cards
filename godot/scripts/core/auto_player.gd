@@ -26,9 +26,10 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 				if (e["type"] == "magic" or e.get("pierce", false)) and b.enemy_state("guarded"):
 					hit *= 1.5  # over the 前卫, straight at the boss
 				hit *= b.form_mult(str(e["type"]))  # 变阵: the kind it shuts out barely goes in
-				if b.enemy_state("shielded"):  # 护盾 swallows the 兵刃 part whole (it only breaks it); 谋略 goes over
+				if b.enemy_state("shielded"):  # 护盾: a 兵刃 part that can't break it is swallowed; one that breaks it lands in full; 谋略 goes over
 					var share := b.split_share(u) if b.split_share(u) > 0.0 else (1.0 if e["type"] == "magic" else 0.0)
-					hit *= share + (1.0 - share) * 0.3
+					if hit * (1.0 - share) < float(b.enemy["shield"]["hp"]):
+						hit *= share + (1.0 - share) * 0.3
 				v += hit
 			"heal":
 				v += at * float(e["power"]) * (1.5 if b.party_hp < 0.4 * b.party_max else 0.0)  # healing only pays when hurt

@@ -455,11 +455,14 @@ func _land(d: int, kind: String, pierce: bool) -> int:
 			enemy["guard"] = {}
 		return dealt
 	_absorbed = 0
-	if shield_takes(kind, pierce):  # 护盾 takes the whole 兵刃 blow — the one that breaks it too, nothing spills over (user rule)
+	if shield_takes(kind, pierce):  # 护盾 (user rule): a 兵刃 blow that can't break it is swallowed whole; one that breaks it lands in full, as if no shield
 		var s: Dictionary = enemy["shield"]
-		_absorbed = d
-		s["hp"] = maxi(0, int(s["hp"]) - d)
-		d = 0
+		if d >= int(s["hp"]):
+			s["hp"] = 0
+		else:
+			_absorbed = d
+			s["hp"] = int(s["hp"]) - d
+			d = 0
 		_ev({"t": "shield_hit", "dmg": _absorbed, "hp": s["hp"], "max": s["max_hp"]})
 		if int(s["hp"]) <= 0:
 			_ev({"t": "shield_down", "name": s["name"]})
@@ -469,7 +472,7 @@ func _land(d: int, kind: String, pierce: bool) -> int:
 
 
 func shield_takes(kind: String, pierce: bool) -> bool:
-	## 护盾: every 兵刃 blow (穿甲, 弓兵 and 大招 included); only 谋略 goes over it (user rule 2026-11-07)
+	## 护盾: every 兵刃 blow (穿甲, 弓兵 and 大招 included) meets it; only 谋略 goes over it (user rule 2026-11-07)
 	return not enemy["shield"].is_empty() and kind == "attack"
 
 
@@ -1133,12 +1136,12 @@ func _enemy_phase(defend_cut: float) -> Array:
 				_ev({"t": "form_on", "name": enemy["form"]["name"], "vs": enemy["form"]["vs"]})
 				log.append("[color=red]  %s 变阵【%s】：%s伤害 -%d%%（%d 回合，眩晕可破）[/color]" % [data["name"], enemy["form"]["name"],
 					"兵刃" if enemy["form"]["vs"] == "attack" else "谋略", int(round(enemy["form"]["cut"] * 100)), enemy["form"]["turns"]])
-			if mv.has("shield"):  # 护盾: swallows every 兵刃 blow whole until broken; 谋略 goes over
+			if mv.has("shield"):  # 护盾: a 兵刃 blow under its HP is swallowed, the one that breaks it lands in full; 谋略 goes over
 				var sh: Dictionary = mv["shield"]
-				var shp := maxi(1, int(round(float(enemy["max_hp"]) * float(sh.get("hp_pct", 0.1)))))
+				var shp := maxi(1, int(round(float(enemy["max_hp"]) * float(sh.get("hp_pct", 0.2)))))
 				enemy["shield"] = {"name": str(sh.get("name", mv["name"])), "hp": shp, "max_hp": shp}
 				_ev({"t": "shield_on", "name": enemy["shield"]["name"], "hp": shp})
-				log.append("[color=red]  %s【%s】：护盾 %d（兵刃打在盾上，打破它的那一下也不溢出；谋略直接越过）[/color]" % [data["name"], enemy["shield"]["name"], shp])
+				log.append("[color=red]  %s【%s】：护盾 %d（打不破它的兵刃整下被挡；一下打破就伤害全中；谋略直接越过）[/color]" % [data["name"], enemy["shield"]["name"], shp])
 			if mv.has("summon"):  # 前卫: plain physical blows land on it until it falls
 				var sm: Dictionary = mv["summon"]
 				var ghp := maxi(1, int(round(float(enemy["max_hp"]) * float(sm.get("hp_pct", 0.15)))))

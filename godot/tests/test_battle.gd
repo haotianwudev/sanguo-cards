@@ -1312,7 +1312,7 @@ func test_a_mark_takes_a_quarter_of_max_hp_and_fells_the_marked_one_unless_swapp
 	check(ev.any(func(e): return e["t"] == "mark_miss") and not ev.any(func(e): return e["t"] == "enemy_hit" and e.has("mark")), "swapped out: it misses")
 
 
-func test_a_shield_swallows_every_blade_blow_whole_and_strategy_goes_over() -> void:
+func test_a_shield_swallows_blade_blows_it_survives_the_breaking_one_lands_in_full() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["shield"] = {"name": "铁甲", "hp": 999999, "max_hp": 999999}
 	var ehp := int(b.enemy["hp"])
@@ -1326,7 +1326,7 @@ func test_a_shield_swallows_every_blade_blow_whole_and_strategy_goes_over() -> v
 	b.enemy["shield"]["hp"] = 1
 	b._apply(b.leaders[0], {"type": "attack", "power": 3.0}, 1.0)
 	check(b.enemy["shield"].is_empty(), "a broken shield is gone")
-	check_eq(int(b.enemy["hp"]), ehp2, "and the blow that broke it spilled nothing over")
+	check(ehp2 - int(b.enemy["hp"]) > 1, "and the blow that broke it lands in full, as if there were no shield")
 
 
 func test_a_formation_cuts_one_kind_of_damage_and_a_stun_breaks_it() -> void:

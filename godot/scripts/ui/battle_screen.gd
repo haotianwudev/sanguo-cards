@@ -419,7 +419,7 @@ func _refresh() -> void:
 	if not e["mark"].is_empty():
 		st.append("⚠ 点名 %s：下回合【%s】——换下他就扑空；不换，他被打倒（本场不能行动）、我军掉体力上限 1/4" % [e["mark"]["who"], e["mark"]["move"]])
 	if not e["shield"].is_empty():
-		st.append("【盾】%s %d/%d：兵刃全挡（破盾那下也不溢出），谋略越过" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
+		st.append("【盾】%s %d/%d：打不破的兵刃整下被挡，一下打破就全中；谋略越过" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
 	if not e["form"].is_empty():
 		st.append("【阵】%s：%s伤害 -%d%%（%d 回合，眩晕可破）" % [e["form"]["name"], "兵刃" if e["form"]["vs"] == "attack" else "谋略",
 			int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]])
