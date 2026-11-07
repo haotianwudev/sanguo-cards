@@ -3758,6 +3758,7 @@
     },
     "huangchengyan": {
       "name": "黄承彦",
+      "pool": false,
       "rarity": "C",
       "troop": "strategist",
       "hp": 74,
@@ -3782,6 +3783,7 @@
     },
     "simahui": {
       "name": "司马徽",
+      "pool": false,
       "rarity": "R",
       "troop": "strategist",
       "hp": 78,
@@ -3826,6 +3828,7 @@
     },
     "pangdegong": {
       "name": "庞德公",
+      "pool": false,
       "rarity": "R",
       "troop": "strategist",
       "hp": 74,

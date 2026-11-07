@@ -555,8 +555,8 @@
 | `caochun` | 曹纯 | R | 骑兵 | 剧情限定 | 第十一章 · 洛阳天倾：招贤 |
 | `chendao` | 陈到 | R | 刀兵 | 是 | 卡池 |
 | `guanxing` | 关兴 | R | 刀兵 | 是 | 卡池 |
-| `pangdegong` | 庞德公 | R | 策士 | 是 | 卡池 |
-| `simahui` | 司马徽 | R | 策士 | 是 | 卡池 |
+| `pangdegong` | 庞德公 | R | 策士 | 剧情限定 | —（拿不到） |
+| `simahui` | 司马徽 | R | 策士 | 剧情限定 | —（拿不到） |
 | `taoqian` | 陶谦 | R | 后勤 | 是 | 卡池 |
 | `xinxianying` | 辛宪英 | R | 策士 | 是 | 卡池 |
 | `yuji` | 于吉 | R | 策士 | 是 | 卡池 |
@@ -582,7 +582,7 @@
 | `yang_ang` | 杨昂 | C | 刀兵 | 剧情限定 | 第十章 · 奇袭关中：掉落 |
 | `chengui` | 陈珪 | C | 策士 | 是 | 卡池 |
 | `guanlu` | 管辂 | C | 策士 | 是 | 卡池 |
-| `huangchengyan` | 黄承彦 | C | 策士 | 是 | 卡池 |
+| `huangchengyan` | 黄承彦 | C | 策士 | 剧情限定 | —（拿不到） |
 | `jianyong` | 简雍 | C | 策士 | 是 | 卡池 |
 | `liuzhang` | 刘璋 | C | 后勤 | 是 | 卡池 |
 | `wangping` | 王平 | C | 枪兵 | 是 | 卡池 |
