@@ -4,6 +4,7 @@
     python tools/import_policy.py --check   # exit 1 if any texture strays from the policy (CI / tools/check.sh)
 """
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -39,6 +40,18 @@ def apply(text: str, params: dict) -> str:
     return "\n".join(out)
 
 
+def untracked_imports() -> list:
+    """committed images under godot/data whose .import isn't committed: a fresh clone (CI, a phone build) re-imports
+    them with the defaults instead of the policy. [] outside a git checkout."""
+    try:
+        out = subprocess.run(["git", "ls-files", "godot/data"], cwd=ROOT, capture_output=True, check=True,
+                             text=True, encoding="utf-8").stdout
+    except (OSError, subprocess.CalledProcessError):
+        return []
+    files = set(out.splitlines())
+    return sorted(f for f in files if f.lower().endswith((".jpg", ".jpeg", ".png", ".webp")) and f + ".import" not in files)
+
+
 def main() -> int:
     write = "--write" in sys.argv
     drift = []
@@ -57,6 +70,11 @@ def main() -> int:
     print("%d texture(s) %s" % (len(drift), "rewritten" if write else "off policy"))
     if not write and drift:
         print("\n".join(drift[:20]))
+        return 1
+    missing = untracked_imports()
+    if missing and not write:
+        print("%d committed image(s) without a committed .import, git add these:" % len(missing))
+        print("\n".join(f + ".import" for f in missing[:20]))
         return 1
     return 0
 
