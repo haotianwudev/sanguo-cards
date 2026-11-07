@@ -26,6 +26,7 @@ var ap := 0
 var combo := 0
 var guard_cut := 0.0
 var defend_streak := 0
+var guarded_this_round := false  # a 防御 skill was played this round: the round counts as a defend for the 连续防御 streak (user rule)
 var result := ""  # "" | "win" | "lose"
 var lose_reason := ""  # why it was lost: "wiped" (party HP gone) | "turns" (round limit up, HP left) | "retreat"
 var overkill := 0.0  # excess damage on the killing blow, as a share of the enemy's max HP
@@ -361,8 +362,20 @@ func act(i: int, skill_id: String) -> Array:
 
 
 func end_round() -> Array:
-	defend_streak = 0
+	defend_streak = defend_streak + 1 if guarded_this_round else 0  # a round with a 防御 skill keeps the 连续防御 going
 	return _enemy_phase(0.0)
+
+
+func defend_cut() -> float:
+	## what the 防御 button cuts now: battle.defend_cuts by the 连续防御 streak (+ 宝物)
+	var cuts: Array = db.battle["defend_cuts"]
+	return minf(0.95, float(cuts[mini(defend_streak, cuts.size() - 1)]) + float(mods.get("defend", 0.0)))
+
+
+func streak_bonus() -> float:
+	## 连续防御 lifts 防御 skills too: the streak's step over the first defend (0 / +10% / +20% / +30% with the default cuts)
+	var cuts: Array = db.battle["defend_cuts"]
+	return float(cuts[mini(defend_streak, cuts.size() - 1)]) - float(cuts[0])
 
 
 func defend_cost() -> int:
@@ -378,8 +391,7 @@ func defend() -> Array:
 	if not can_defend():
 		return ["AP 不够，无法防御（需要 %d）" % defend_cost()]
 	ap -= defend_cost()
-	var cuts: Array = db.battle["defend_cuts"]
-	var cut: float = minf(0.95, float(cuts[mini(defend_streak, cuts.size() - 1)]) + float(mods.get("defend", 0.0)))
+	var cut := defend_cut()
 	defend_streak += 1
 	_ev({"t": "defend", "cut": cut})
 	var log: Array = ["全军防御（伤害 -%d%%）" % int(round(cut * 100))]
@@ -867,9 +879,11 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "heal", "amt": amt, "hp": party_hp})
 			return ["  体力恢复 %d" % amt]
 		"guard":
-			guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - float(eff["cut"]))
+			var sbon := streak_bonus()
+			guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - minf(0.9, float(eff["cut"]) + sbon))
+			guarded_this_round = true
 			_ev({"t": "guard", "cut": guard_cut})
-			return ["  本回合受到伤害 -%d%%" % int(round(guard_cut * 100))]
+			return ["  本回合受到伤害 -%d%%%s" % [int(round(guard_cut * 100)), ("（连续防御 +%d%%）" % int(round(sbon * 100))) if sbon > 0.0 else ""]]
 		"boost":
 			var bm := str(db.battle["boost_mult"])
 			if eff["target"] == "all":
@@ -1334,6 +1348,7 @@ func _start_round() -> Array:
 		ap_drain = 0
 	combo = 0
 	guard_cut = 0.0
+	guarded_this_round = false
 	counters = []
 	swaps_done = 0
 	if buff["turns"] > 0:

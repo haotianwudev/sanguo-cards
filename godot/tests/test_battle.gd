@@ -900,6 +900,24 @@ func test_an_untouched_shield_mends_at_the_round_end_a_hit_one_does_not() -> voi
 	check(b.enemy["shield"].is_empty() or int(b.enemy["shield"]["hp"]) <= after_hit, "hit this round: no mending")
 
 
+func test_guard_skills_join_the_defend_streak() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	b.enemy["data"]["moves"] = [{"name": "斩", "power": 0.01, "weight": 1}]
+	b.party_hp = b.party_max
+	b._apply(b.leaders[0], {"type": "guard", "cut": 0.2}, 1.0)
+	check(is_equal_approx(b.guard_cut, 0.2), "a first 防御 skill: just its own cut")
+	b.end_round()
+	check_eq(b.defend_streak, 1, "a round with a 防御 skill counts as a defend")
+	b._start_round()
+	b._apply(b.leaders[0], {"type": "guard", "cut": 0.2}, 1.0)
+	check(is_equal_approx(b.guard_cut, 0.3), "the streak lifts the next one: 0.2 + 0.1")
+	b.defend()
+	check_eq(b.defend_streak, 2, "and the button carries it on")
+	b._start_round()
+	b.end_round()
+	check_eq(b.defend_streak, 0, "a round with neither resets it")
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true

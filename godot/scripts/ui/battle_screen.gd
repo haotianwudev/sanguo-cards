@@ -341,6 +341,7 @@ func _build() -> void:
 	_end.pressed.connect(_on_end_round)
 	acts.add_child(_end)
 	_defend = Kit.button("防御", "blue", Kit.FONT_BIG)
+	_defend.add_theme_font_size_override("font_size", Kit.FONT_BODY)  # two lines: AP, then the cut (连续防御 raises it)
 	_defend.custom_minimum_size = Vector2(190, 62) if not has_cg else Vector2(170, 52)
 	_defend.pressed.connect(_on_defend)
 	acts.add_child(_defend)
@@ -471,7 +472,7 @@ func _refresh() -> void:
 		v.set_state(u["acted"] or u["confused"] or not b.can_act(i), false)
 		v.focus_mode = Control.FOCUS_NONE if (_busy or not b.can_act(i)) else Control.FOCUS_ALL
 	_end.disabled = _busy
-	_defend.text = "防御  AP%d" % b.defend_cost() if b.defend_cost() > 0 else "防御"
+	_defend.text = ("防御 AP%d" % b.defend_cost() if b.defend_cost() > 0 else "防御") + ("\n减伤 %d%%" % int(round(b.defend_cut() * 100)))  # the cut grows with 连续防御
 	_defend.disabled = _busy or not b.can_defend()
 	_retreat.disabled = _busy
 	_sync_fx()
@@ -953,6 +954,10 @@ func _sync_badges() -> void:
 		party.append(_tipped(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]), "我军灼烧", "-%d/回合，剩 %d 回合" % [b.party_burn["dmg"], b.party_burn["turns"]], "party_burn"))
 	if b.party_poison["turns"] > 0:
 		party.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]), "我军中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [b.party_poison["layers"], int(round(b.party_poison["pct"] * b.party_poison["layers"] * 100)), b.party_poison["turns"]], "party_poison"))
+	if b.defend_streak > 0 or b.guarded_this_round:  # 连续防御: rounds in a row of 防御 (button or skill)
+		var sk_n := b.defend_streak + (1 if b.guarded_this_round else 0)
+		party.append(_tipped(BattleFx.badge("守", Color(0.45, 0.62, 0.85), sk_n), "连续防御",
+			"已连续 %d 回合：防御按钮 -%d%%，防御技能 +%d%%" % [b.defend_streak, int(round(b.defend_cut() * 100)), int(round(b.streak_bonus() * 100))], "defend_streak"))
 	if b.ap_drain > 0:
 		party.append(_tipped(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain), "夺气", "下回合 AP -%d" % b.ap_drain, "ap_drain"))
 	if not b.seal.is_empty():
