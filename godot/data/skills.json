@@ -275,7 +275,7 @@
           "type": "break",
           "amount": 0.3,
           "turns": 3
-        }
+        }, {"type": "poison", "stacks": 1, "pct": 0.02, "max": 5, "turns": 3}
       ]
     },
     "quanfu": {
@@ -1392,6 +1392,7 @@
         }
       ]
     },
+    "yanzhidu": {"name": "胭脂毒", "cost": 2, "cumulative": true, "effects": [{"type": "magic"}, {"type": "poison", "stacks": 1, "pct": 0.02, "max": 5, "turns": 3}]},
     "quhu_tunlang": {
       "name": "驱虎吞狼",
       "cost": 3,

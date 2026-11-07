@@ -1364,6 +1364,7 @@
       "name": "冯夫人",
       "rarity": "R",
       "troop": "strategist",
+      "skills": ["yanzhidu"],
       "hp": 74,
       "at": 60,
       "pool": false
