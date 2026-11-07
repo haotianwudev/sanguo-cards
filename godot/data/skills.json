@@ -1396,6 +1396,7 @@
     },
     "yanzhidu": {"name": "胭脂毒", "cost": 2, "cumulative": true, "effects": [{"type": "magic"}, {"type": "poison", "stacks": 1, "pct": 0.02, "max": 5, "turns": 3}]},
     "wulei": {"name": "五雷正法", "cost": 3, "uses": 1, "effects": [{"type": "magic", "rate": 1.5}, {"type": "stun", "chance": 0.5}]},
+    "tianshi_lei": {"name": "天师雷", "elem": "thunder", "cost": 2, "cumulative": true, "effects": [{"type": "magic"}, {"type": "stun", "chance": 0.3}]},
     "quhu_tunlang": {
       "name": "驱虎吞狼",
       "cost": 3,
@@ -2014,6 +2015,7 @@
     },
     "mihun": {
       "name": "摄魂咒",
+      "elem": "thunder",
       "cost": 3,
       "uses": 1,
       "effects": [

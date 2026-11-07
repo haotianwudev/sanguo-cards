@@ -4339,7 +4339,7 @@
       "hp": 84,
       "at": 56,
       "skills": [
-        "fushui_heal"
+        "tianshi_lei", "fushui_heal"
       ],
       "pool": false
     },

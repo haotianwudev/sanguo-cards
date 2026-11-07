@@ -94,7 +94,7 @@ func _do_jump(jump: Dictionary) -> void:
 	Game.show_screen(MapScreen.new())
 
 
-const _CARD_TABS := [["SSR", "SSR"], ["SR", "SR"], ["R", "R"], ["C", "C"], ["N", "兵卡"], ["story", "剧情 / 敌方卡"]]
+const _CARD_TABS := [["SSR", "SSR"], ["SR", "SR"], ["R", "R"], ["C", "C"], ["N", "兵卡"], ["story", "剧情 / 敌方卡"], ["lord", "主角卡"]]
 const _CG_GROUPS := {"c1": "第一章（南线）", "jz": "第一章（北线）", "e": "随机事件", "i": "幕间", "end": "结局"}  # prefix groups for what no quest square owns
 
 
@@ -133,6 +133,8 @@ func _card_ids(tab: String) -> Array:
 	for cid in db.cards:
 		var c: Dictionary = db.cards[cid]
 		if SaveData.is_lord_card(cid):  # the lord cards have their own tab (主角卡)
+			if tab == "lord":
+				out.append(cid)
 			continue
 		var story: bool = not c["in_pool"]
 		if (tab == "story" and story) or (not story and tab == c["rarity"]):
