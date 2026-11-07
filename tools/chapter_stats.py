@@ -12,13 +12,16 @@ art = json.loads((ROOT / "pics/art.json").read_text("utf-8"))
 have_cg = set(art["cgs"])
 sys.path.insert(0, str(ROOT / "tools"))
 from gamedata import load_cards
+from facts import load_facts
 cards = load_cards()
-shuffle = lambda q: len(q.get("shuffle", []))
+facts = load_facts()  # which squares each route-chapter has, its title and pools — the game's own answer (tools/facts.py)
+QUEST = {q["id"]: q for q in story["quests"]}
 TYPE_ORDER = ["event", "choose", "battle", "treasure", "recover", "recruit", "mystery"]  # 事 选 战 宝 休 募 ？
 
 
-def stats(q, xs=None):
-    sq = {k: v for k, v in q["squares"].items() if xs is None or xs[0] <= v.get("x", 0) <= xs[1]}
+def stats(ch):
+    q = QUEST[ch["quest"]]
+    sq = {k: q["squares"][k] for k in ch["squares"]}
     n = len(sq)
     b = [v for v in sq.values() if v["type"] == "battle"]
     boss = sum(1 for v in b if v.get("boss"))
@@ -28,16 +31,10 @@ def stats(q, xs=None):
     cgs = {v["cg"] for v in sq.values() if v.get("cg")}
     types = [sum(1 for v in sq.values() if v["type"] == ty) for ty in TYPE_ORDER]
     return dict(n=n, types=types, normal=normal, elite=elite, boss=boss, forks=forks, cg_have=len(cgs & have_cg), cg_all=len(cgs),
-                pools="%d / %d / %d / %d" % (len(q.get("soldier_pool", [])), len(q.get("recruit_pool", [])), len(q.get("event_pool", [])), shuffle(q)))
+                pools="%d / %d / %d / %d" % (len(ch["soldier_pool"]), len(ch["recruit_pool"]), len(ch["event_pool"]), len(q.get("shuffle", []))))
 
 
-rows = {}
-for q in story["quests"]:
-    if q["id"] == "prologue":
-        rows["prologue_s"] = stats(q, (0, 22))
-        rows["prologue_n"] = stats(q, (23, 10**6))
-    else:
-        rows[q["id"]] = stats(q)
+rows = {ch["key"]: stats(ch) for ch in facts["chapters"]}
 tot = dict(n=0, normal=0, elite=0, boss=0, cg_have=0, cg_all=0)
 for r in rows.values():
     for k in tot:
@@ -112,32 +109,6 @@ def card_section() -> str:
         out.append(f"| {'主公亲卫（丫鬟、家丁等，跟主公一队）' if tid == 'lord' else tr.get('name', tid)} | {by['SSR']} / {by['SR']} / {by['R']} | {len(g)} | {len(s)}（{elite}） | {r['南']} / {r['北']} / {r['通用']} |")
     return "\n".join(out)
 
-quests_by_id = {q["id"]: q for q in story["quests"] if q["id"] != "prologue"}
-for _q in story["quests"]:
-    if _q["id"] == "prologue":  # one quest, two routes: the north route's pool_overrides entry replaces the south settings
-        quests_by_id["prologue_s"] = _q
-        _n = dict(_q)
-        for _o in _q.get("pool_overrides", []):
-            _n.update({k: v for k, v in _o.items() if k not in ("requires", "unless") and v})
-        quests_by_id["prologue_n"] = _n
-
-
-def distinct_lists(q, field):
-    """how many different explicit card lists a chapter uses for `field` (soldier_pool / recruit_pool): its own plus the squares' local ones"""
-    found = set()
-    for src in [q] + list(q["squares"].values()):
-        if src.get(field):
-            found.add(tuple(sorted(src[field])))
-    return len(found)
-
-
-def pools_cell(q) -> str:
-    """兵卡池 / 招贤池 (distinct lists, local ones included) / 事件池 (events open to the chapter) / 洗牌组"""
-    events = sum(1 for e in story["events"].values() if e.get("scope") in ("universal", q.get("event_scope"), q["id"]))
-    soldier = distinct_lists(q, "soldier_pool") or (1 if q.get("soldier_scope") else 0)  # no explicit list: the route's scope pool counts as one
-    return "%d / %d / %d / %d" % (soldier, distinct_lists(q, "recruit_pool"), events, len(q.get("shuffle", [])))
-
-
 COMPARE_BEGIN, COMPARE_END ="<!-- compare:begin -->", "<!-- compare:end -->"
 # chapter -> (south row key, north row key); None = that route has nothing built for the chapter yet
 CHAPTERS = [
@@ -156,14 +127,12 @@ CHAPTERS = [
     ("第十二章（世界二）", "chibi", "dujiang"),
     ("第十二章（归一）", "guiyi", "guiyi"),
 ]
-ROW_NAMES = {"prologue_s": "富春", "prologue_n": "冀州风云"}
 SUM_KEYS = ("n", "normal", "elite", "boss", "forks", "cg_have", "cg_all")
 TYPE_HEAD = "事/选/战/宝/休/募/？"
 
 
 def compare_section() -> str:
-    titles = {q["id"]: q["title"].split(" · ", 1)[-1] for q in story["quests"]}
-    titles.update(ROW_NAMES)
+    titles = {ch["key"]: ch["title"].split(" · ", 1)[-1] for ch in facts["chapters"]}
 
     def cells(key):
         if key is None:
@@ -177,7 +146,7 @@ def compare_section() -> str:
            "- **%s**＝七种格子各有几个：事＝剧情 `event`、选＝抉择 `choose`、战＝战斗 `battle`、宝＝宝箱 `treasure`、休＝回复 `recover`、募＝招贤 `recruit`、？＝奇遇 `mystery`（每种的玩法见 `sanguo-dev` skill 的「Square types」）。" % TYPE_HEAD,
            "- **战斗 普/精/首**＝普通 / 精英（`elite`）/ 首领（`boss`）三档战斗格数，它们合起来就是「战」那一项。",
            "- **分叉**＝`choose` 格 + 有 `lose_goto` 的战斗格。",
-           "- **CG**＝格子挂了 `cg` 的张数 / 其中 `pics/art.json` 已交付的张数。第一章是一个 quest 的两条线，按 x 坐标分开（南 0–22，北 23 起）。", "",
+           "- **CG**＝格子挂了 `cg` 的张数 / 其中 `pics/art.json` 已交付的张数。第一章是一个 quest 的两条线，按出生选择分开（出生那一格两线都算）。", "",
            "| 章 | 南线 | 格数 | %s | 战斗 普/精/首 | 分叉 | CG | 北线 | 格数 | %s | 战斗 普/精/首 | 分叉 | CG |" % (TYPE_HEAD, TYPE_HEAD),
            "|---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|"]
     sums = {"s": dict.fromkeys(SUM_KEYS, 0), "n": dict.fromkeys(SUM_KEYS, 0)}

@@ -13,6 +13,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from gamedata import load_cards
+from facts import load_facts, ROUTE_CN
 import art_prompts as AP
 
 db = load_cards()
@@ -21,6 +22,8 @@ story = json.loads((ROOT / "godot/data/story.json").read_text("utf-8"))
 endings = json.loads((ROOT / "godot/data/endings.json").read_text("utf-8"))["endings"]
 art = json.loads((ROOT / "pics/art.json").read_text("utf-8"))
 side = json.loads((ROOT / "godot/data/side_stories.json").read_text("utf-8"))
+facts = load_facts()  # which squares / events / ？小故事 each route-chapter has — the game's own answer (tools/facts.py)
+QUEST = {q["id"]: q for q in story["quests"]}
 OUT = ROOT / "docs/chapters"
 TYPE = {"event": "剧情", "battle": "战斗", "choose": "选择", "treasure": "宝箱", "recruit": "招募", "recover": "休整", "mystery": "？"}
 
@@ -58,36 +61,6 @@ def as_list(v):
     return v if isinstance(v, list) else [v] if v else []
 
 
-def _prologue_records():
-    ## which lines each birth's half of 第一章 records (south x ≤ 22, north x ≥ 23)
-    q = next(x for x in story["quests"] if x["id"] == "prologue")
-    rec = {"s": set(), "n": set()}
-    for s in q["squares"].values():
-        side_ = "n" if s.get("x", 0) >= 23 else "s"
-        for f in ("record", "record_win", "record_lose"):
-            if s.get(f):
-                rec[side_].add(s[f])
-        for o in s.get("choose", []):
-            if o.get("record"):
-                rec[side_].add(o["record"])
-    return rec
-
-
-PROLOGUE_REC = _prologue_records()
-
-
-def on_route(entry, key):
-    ## 第一章 is one quest for both births: a south-only entry needs 江东富春 or excludes 冀州无极 (or needs a line only the
-    ## south half records, e.g. 「定计：孙策正面强攻」), a north-only one the reverse; an event may also say "route"
-    req, unl = as_list(entry.get("requires")), as_list(entry.get("unless"))
-    births = {"出生：冀州无极", "出生：江东富春"}  # recorded on the shared birth square, not one half's own lines
-    only_s = PROLOGUE_REC["s"] - PROLOGUE_REC["n"] - births
-    only_n = PROLOGUE_REC["n"] - PROLOGUE_REC["s"] - births
-    north = "出生：冀州无极" in req or "出生：江东富春" in unl or any(r in only_n for r in req) or entry.get("route") == "north"
-    south = "出生：江东富春" in req or "出生：冀州无极" in unl or any(r in only_s for r in req) or entry.get("route") == "south"
-    return not (key == "prologue_s" and north or key == "prologue_n" and south)
-
-
 def reward_text(r):
     out = ["点化 %s +%d 张" % (cname(c), n) for c, n in r.get("upgrade", {}).items()]
     out += ["宝物 " + "、".join(db.get("relics", {}).get(x, {}).get("name", x) for x in r.get("relics", []))] if r.get("relics") else []
@@ -104,11 +77,11 @@ def side_cg(key, shown):
     return cg_block(key, scene if isinstance(scene, str) else None)
 
 
-def side_docs(key, qid):
-    ## the chapter-end page CG(s), every ？小故事 that opens after this chapter
+def side_docs(ch):
+    ## the chapter-end page CG(s), every ？小故事 that opens after this chapter on this route
     out, shown = [], set()
-    pages = [p for p in side.get("chapters", {}).get(qid, []) if on_route(p, key)]
-    stories = [st for st in side.get("after", {}).get(qid, []) if on_route(st, key)]
+    pages = [p for p in side.get("chapters", {}).get(ch["quest"], []) if p["cg"] in ch["chapter_pages"]]
+    stories = [st for st in side.get("after", {}).get(ch["quest"], []) if st["id"] in ch["side_stories"]]
     out += ["## 章末页与 ？小故事（%d 篇）" % len(stories), ""]
     for p in pages:
         out += ["**章末页 CG**" + ("（%s）" % flags(p) if flags(p) else "") + "：", ""] + side_cg(p["cg"], shown) + [""]
@@ -128,9 +101,11 @@ def side_docs(key, qid):
     return out
 
 
-def chapter_doc(key, q, xr, route):
-    sq = {k: v for k, v in q["squares"].items() if xr is None or xr[0] <= v.get("x", 0) <= xr[1]}
-    order = sorted(sq, key=lambda k: (sq[k].get("x", 0), sq[k].get("y", 0), k))
+def chapter_doc(ch):
+    q = QUEST[ch["quest"]]
+    route = ROUTE_CN[ch["route"]]
+    order = ch["squares"]  # map order: x, y, id
+    sq = {k: q["squares"][k] for k in order}
     battles = [k for k in order if sq[k]["type"] == "battle"]
     nb = {t: sum(1 for k in battles if tier(sq[k]) == t) for t in ("普通", "精英", "首领")}
     cgs = []
@@ -138,10 +113,8 @@ def chapter_doc(key, q, xr, route):
         if sq[k].get("cg") and sq[k]["cg"] not in cgs:
             cgs.append(sq[k]["cg"])
     xs = [sq[k].get("x", 0) for k in order]
-    ov = q.get("pool_overrides", [{}])[0] if key == "prologue_n" else {}
-    title = "第一章 · 冀州风云" if key == "prologue_n" else "第一章 · 富春" if key == "prologue_s" else q["title"]
-    end = endings.get(q.get("ending", ""), {}) if key != "prologue_n" else {}
-    out = ["# %s（`%s`，%s线）" % (title, q["id"], route), "", "> `python tools/chapter_docs.py` 自动生成，别手改。改剧情去改 `godot/data/story.json`。", "",
+    end = endings.get(ch["ending"], {})
+    out = ["# %s（`%s`，%s线）" % (ch["title"], q["id"], route), "", "> `python tools/chapter_docs.py` 自动生成，别手改。改剧情去改 `godot/data/story.json`。", "",
            "## 概要", "",
            "| 项 | 内容 |", "|---|---|",
            "| 开启条件 | %s |" % ("、".join(q["requires"] if isinstance(q.get("requires"), list) else [q["requires"]]) if q.get("requires") else "—"),
@@ -150,9 +123,9 @@ def chapter_doc(key, q, xr, route):
            "| 战斗 普通 / 精英 / 首领 | %d / %d / %d |" % (nb["普通"], nb["精英"], nb["首领"]),
            "| ？ 格 | %d |" % sum(1 for k in order if sq[k]["type"] == "mystery"),
            "| CG 已有 / 合计 | %d / %d |" % (sum(1 for c in cgs if c in art.get("cgs", {})), len(cgs)),
-           "| 招贤池 | %s |" % ("、".join(cname(c) for c in (ov.get("recruit_pool") or q.get("recruit_pool", []))) or "—"),
-           "| 兵池 / 兵卡范围 | %s / %s |" % ("、".join(cname(c) for c in (ov.get("soldier_pool") or q.get("soldier_pool", []))) or "—", ov.get("soldier_scope") or q.get("soldier_scope") or "—"),
-           "| 事件范围 | %s + 本章专属 |" % (ov.get("event_scope") or q.get("event_scope") or "—"),
+           "| 招贤池 | %s |" % ("、".join(cname(c) for c in ch["recruit_pool"]) or "—"),
+           "| 兵池 / 兵卡范围 | %s / %s |" % ("、".join(cname(c) for c in ch["soldier_pool"]) or "—", ch["soldier_scope"] or "—"),
+           "| 事件范围 | %s + 本章专属 |" % (ch["event_scope"] or "—"),
            "| 洗牌组 | %s |" % ("；".join("、".join(g) for g in q.get("shuffle", [])) or "—"),
            "| 结局 | %s |" % (end.get("title", "—")), ""]
     # ---- map ----
@@ -226,7 +199,7 @@ def chapter_doc(key, q, xr, route):
         out.append("- **%s** `%s`：血 %s / 攻 %s / 行动 %s；%s" % (e.get("name"), en, hp, at, e.get("actions"), "、".join(mv)))
     out.append("")
     # ---- events ----
-    own = {eid: ev for eid, ev in story["events"].items() if ev.get("scope") == q["id"] and on_route(ev, key)}
+    own = {eid: story["events"][eid] for eid in ch["own_events"]}
     out += ["## 本章专属 ？ 事件（%d）" % len(own), ""]
     for eid, ev in own.items():
         out += ["### %s `%s`" % (ev.get("title", eid), eid), "", "> " + ev.get("prompt", ""), ""] + ["- " + t for t in ev.get("text", [])]
@@ -249,17 +222,11 @@ def chapter_doc(key, q, xr, route):
     if end:
         out += ["## 结局：%s" % end.get("title", ""), "", "- 谁：%s" % end.get("who", ""), "- 触发：%s" % end.get("trigger", ""), "- 破局：%s" % end.get("unlock", ""),
                 "- 铭文：%s" % end.get("text", ""), "- 结局卡：`%s` %s" % (end.get("cg", ""), "✅" if end.get("cg") in art.get("cgs", {}) else "⬜"), ""]
-    out += side_docs(key, q["id"])
+    out += side_docs(ch)
     return "\n".join(out) + "\n"
 
 
-docs = {}
-for q in story["quests"]:
-    if q["id"] == "prologue":
-        docs["prologue_s"] = chapter_doc("prologue_s", q, (0, 22), "南")
-        docs["prologue_n"] = chapter_doc("prologue_n", q, (23, 10 ** 6), "北")
-    else:
-        docs[q["id"]] = chapter_doc(q["id"], q, None, {"north": "北", "universal": "南北"}.get(q.get("event_scope"), "南"))
+docs = {ch["key"]: chapter_doc(ch) for ch in facts["chapters"]}
 CN = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
 
 

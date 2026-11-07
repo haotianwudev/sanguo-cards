@@ -514,7 +514,7 @@ static func migrate_legacy() -> void:
 		return
 	var s := read(SAVE_PATH)
 	if s != null:
-		var born := s.run_records.has("出生：冀州无极") or s.run_records.has("出生：江东富春") or s.flags.has("出生：冀州无极") or s.flags.has("出生：江东富春") or not s.quests_cleared.is_empty()
+		var born := s.birth_route() != "" or not s.quests_cleared.is_empty()
 		var target := slot_path(s.route()) if born else PENDING_PATH
 		if not FileAccess.file_exists(target):
 			s.write(target)
@@ -633,7 +633,7 @@ func effective_level() -> int:
 
 func is_north() -> bool:
 	## the north-route lord: the birth record is in this run's records during chapter one and in the lasting flags after it
-	return run_records.has("出生：冀州无极") or flags.has("出生：冀州无极")
+	return route() == "north"
 
 
 func route_lord_forms() -> Array:
@@ -870,7 +870,18 @@ func chest_general_chance() -> float:
 
 
 func route() -> String:
-	return "north" if is_north() else "south"
+	## the route this journey is on; before a birth is chosen, the south (the first entry of story.json routes)
+	var b := birth_route()
+	return b if b != "" else str(_db().routes.keys()[0])
+
+
+func birth_route() -> String:
+	## the route whose birth line (story.json routes) this save has recorded — this run's records in chapter one, the lasting
+	## flags after it; "" before the birth is chosen
+	for r in _db().routes:
+		if run_records.has(_db().routes[r]) or flags.has(_db().routes[r]):
+			return r
+	return ""
 
 
 func chest_pools(chapter := "", only: Array = []) -> Dictionary:

@@ -3,10 +3,9 @@
    python tools/roster.py --write    # write docs/ROSTER.md
    python tools/roster.py --check    # exit 1 when docs/ROSTER.md is stale (pre-commit / CI)
 
-Chest rules this mirrors (SaveData.chest_pools): a soldier is 公共 when no chapter hands it out and it has no `faction` —
-it can then show up in every chapter of its route (`scope`; none = both). A soldier with a `faction`, or one a chapter hands out
-(an enemy fought there drops it, a square / choice gives it, a 招贤 list names it), only comes from those chapters; a chapter's
-`soldier_pool` lists (quest, square, pool_overrides) add more. Events that `offer` soldiers are listed separately."""
+Which soldiers are 公共 / 章节限定 and which squares each route-chapter has come from the game itself (tools/facts.py:
+SaveData.chest_pools, GameData.card_chapters, Quests.gate3) — this file only describes where each card is handed out.
+Events that `offer` soldiers are listed separately."""
 import json, sys
 from collections import defaultdict
 from pathlib import Path
@@ -15,6 +14,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from gamedata import load_cards
+from facts import load_facts, ROUTE_CN
 
 db = load_cards()
 cards = db["cards"]
@@ -22,6 +22,8 @@ troops = db["troops"]
 enemies = db["enemies"]
 scenarios = db["scenarios"]
 story = json.loads((ROOT / "godot/data/story.json").read_text("utf-8"))
+facts = load_facts()
+QUEST = {q["id"]: q for q in story["quests"]}
 FACTION = {"han": "汉军（刘备）", "wei": "魏军（曹操）", "yuan": "袁军（袁绍）", "xiliang": "西凉（董卓、李傕郭汜、马家）", "bingzhou": "并州（吕布）",
            "chaoting": "洛阳朝廷", "huangjin": "黄巾", "zei": "山贼水贼", "jingzhou": "荆州", "shanyue": "山越", "yizhou": "益州、南中",
            "hanzhong": "汉中", "wuhuan": "乌桓"}
@@ -36,34 +38,19 @@ def troop_name(c):
     return troops.get(c["troop"], {}).get("name", c["troop"])
 
 
-# ---- chapters: one row per route-chapter (第一章 is one quest with two routes, split at x 23) ----
-chapters = []  # (key, title, route, quest, x-range)
-for q in story["quests"]:
-    if q["id"] == "prologue":
-        chapters.append(("prologue_s", "第一章 · 富春", "南", q, (0, 22)))
-        chapters.append(("prologue_n", "第一章 · 冀州风云", "北", q, (23, 10 ** 6)))
-    else:
-        chapters.append((q["id"], q["title"], "北" if q.get("event_scope") == "north" else "南", q, None))
-
-
-def in_range(s, xr):
-    return xr is None or xr[0] <= s.get("x", 0) <= xr[1]
-
+# ---- chapters: one row per route-chapter, as the game splits them (第一章 is one quest, two routes) ----
+chapters = [(ch["key"], ch["title"], ROUTE_CN[ch["route"]], ch) for ch in facts["chapters"]]
 
 src = defaultdict(lambda: defaultdict(set))  # card -> chapter key -> {how}
 pool_src = defaultdict(lambda: defaultdict(set))  # soldier -> chapter key -> {place}
-for key, title, rt, q, xr in chapters:
-    north_override = key == "prologue_n"
-    ov = [o for o in q.get("pool_overrides", [])] if north_override else []
-    recruit = ov[0]["recruit_pool"] if ov and ov[0].get("recruit_pool") else q.get("recruit_pool", [])
-    for c in recruit:
+for key, title, rt, ch in chapters:
+    q = QUEST[ch["quest"]]
+    for c in ch["recruit_pool"]:
         src[c][key].add("招贤")
-    spool = ov[0]["soldier_pool"] if ov and ov[0].get("soldier_pool") else q.get("soldier_pool", [])
-    for c in spool:
+    for c in ch["soldier_pool"]:
         pool_src[c][key].add("本章兵池")
-    for s in q["squares"].values():
-        if not in_range(s, xr):
-            continue
+    for sid in ch["squares"]:
+        s = q["squares"][sid]
         for c in s.get("cards", []):
             src[c][key].add("剧情「%s」" % s.get("label", ""))
         for o in s.get("choose", []):
@@ -97,7 +84,6 @@ for eid, ev in story["events"].items():
         walk(o.get("effects", []), eid, ev.get("scope", ""))
 
 ch_title = {k: t for k, t, *_ in chapters}
-ch_route = {k: r for k, _, r, *_ in chapters}
 order = {k: i for i, (k, *_) in enumerate(chapters)}
 
 
@@ -121,7 +107,7 @@ def category(cid, c):
         return "野兽（不进宝箱）"
     if c.get("faction"):
         return "阵营 · " + FACTION.get(c["faction"], c["faction"])
-    if src.get(cid) and not c.get("public"):
+    if facts["card_chapters"].get(cid) and not c.get("public"):
         return "章节限定（只在发它的章节出）"
     return "公共 · %s（这条线每章都可能出）" % route_of(c)
 
@@ -148,14 +134,13 @@ for cat in sorted(cats, key=lambda x: (not x.startswith("阵营"), not x.startsw
     out.append("")
 
 # ---------------- soldiers per chapter ----------------
-public = {r: sorted(k for k, c in soldiers.items() if not c.get("beast") and not c.get("faction") and (not src.get(k) or c.get("public")) and route_of(c) in ("两线", r))
-          for r in ("南", "北")}
+public = {ROUTE_CN[r]: sorted(ids) for r, ids in facts["public_soldiers"].items()}  # SaveData.chest_pools' public soldiers
 out += ["## 二、每章能出的兵", "",
         "「本章」= 这一章打过的敌人掉的、剧情 / 招贤给的、兵池写的；另外这条线的公共兵每章都可能出（南线 %d 张、北线 %d 张，见上面公共类）。" % (len(public["南"]), len(public["北"])), ""]
 for rt in ("南", "北"):
     out += ["### %s线" % rt, "", "| 章 | 本章的兵 |", "|---|---|"]
-    for key, title, r, q, xr in chapters:
-        if r != rt:
+    for key, title, r, ch in chapters:
+        if rt not in r:
             continue
         here = sorted({cid for cid in soldiers if key in src[cid] or key in pool_src[cid]}, key=lambda k: soldiers[k]["name"])
         cells = []
@@ -182,7 +167,7 @@ for rt in ("南", "北", "两线"):
     out.append("")
 
 out += ["### 每章入队、招贤、掉落的武将", "", "| 章 | 剧情入队 | 招贤 | 掉落 |", "|---|---|---|---|"]
-for key, title, r, q, xr in chapters:
+for key, title, r, ch in chapters:
     join, rec, drop = [], [], []
     for cid in generals:
         how = src[cid].get(key, set())

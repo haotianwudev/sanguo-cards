@@ -416,18 +416,36 @@ static func gate(entry: Dictionary, save: SaveData, this_run := true, ending_lev
 	##             keeps the 恨海 squares unless both are true).
 	## A line holds when it is a lasting story flag, or (this_run) a line this run recorded. ending_level: an 「结局…」 line
 	## also needs the 难度 that ending opens (_ending_active); ？小故事 / chapter pages pass false — they open on the ending itself.
-	var req := _as_list(entry.get("requires", ""))
+	return gate3(entry, func(line: String) -> int: return 1 if _line_holds(line, save, this_run, ending_level) else 0) == 1
+
+
+static func gate3(entry: Dictionary, truth: Callable) -> int:
+	## gate() over three values — truth(line) says 1 (holds), 0 (doesn't) or -1 (can't tell); the answer is the same three.
+	## The game always knows (gate); tools/export_facts.gd asks "could this be open on this route?" with only the route's
+	## own birth line known, everything else -1, so the docs read the one rule the game plays by.
+	var req := _all3(_as_list(entry.get("requires", "")), truth)
 	var bar := _as_list(entry.get("unless", ""))
-	return _lines_hold(req, save, this_run, ending_level) and (bar.is_empty() or not _lines_hold(bar, save, this_run, ending_level))
+	var hidden := 0 if bar.is_empty() else _all3(bar, truth)
+	var shown := -1 if hidden == -1 else 1 - hidden
+	return 0 if req == 0 or shown == 0 else (1 if req == 1 and shown == 1 else -1)
 
 
-static func _lines_hold(lines: Array, save: SaveData, this_run: bool, ending_level: bool) -> bool:
+static func _all3(lines: Array, truth: Callable) -> int:
+	## every line holds: 0 if one is known not to, 1 if all are known to, else -1
+	var out := 1
 	for line in lines:
-		if ending_level and str(line).contains("结局") and not _ending_active(str(line), save):
-			return false  # played below the 难度 this ending opens: what it unlocks stays shut
-		if not (save.flags.has(line) or (this_run and save.run_records.has(line))):
-			return false
-	return true
+		var t: int = truth.call(str(line))
+		if t == 0:
+			return 0
+		if t == -1:
+			out = -1
+	return out
+
+
+static func _line_holds(line: String, save: SaveData, this_run: bool, ending_level: bool) -> bool:
+	if ending_level and line.contains("结局") and not _ending_active(line, save):
+		return false  # played below the 难度 this ending opens: what it unlocks stays shut
+	return save.flags.has(line) or (this_run and save.run_records.has(line))
 
 
 static func _as_list(v: Variant) -> Array:
@@ -447,7 +465,7 @@ static func _ending_active(title: String, save: SaveData) -> bool:
 static func _flags_hold(v: Variant, save: SaveData, this_run := true) -> bool:
 	## every line in v is a story flag (or, with this_run, a line recorded earlier in this run) — requires-only checks
 	## (an option's requires, card_unless); anything with requires AND unless goes through gate()
-	return _lines_hold(_as_list(v), save, this_run, true)
+	return _as_list(v).all(func(line): return _line_holds(str(line), save, this_run, true))
 
 
 static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Dictionary:
@@ -482,6 +500,8 @@ static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Diction
 		if db.events[eid]["scope"] in ["universal", event_scope, q["id"]] and db.events[eid]["route"] in ["", event_scope]:
 			event_pool.append(eid)
 	out["event_pool"] = event_pool
+	out["soldier_scope"] = soldier_scope
+	out["event_scope"] = event_scope
 	if not sq.is_empty():
 		if not sq.get("recruit_pool", []).is_empty():
 			out["recruit_pool"] = sq["recruit_pool"]
@@ -493,10 +513,7 @@ static func pools(q: Dictionary, save: SaveData, sq: Dictionary = {}) -> Diction
 static func title(q: Dictionary, save: SaveData) -> String:
 	## q["title"], swapped by the first matching entry in title_overrides — same reasoning as pools(): a
 	## quest shared by two routes (south/north prologue) shouldn't keep showing the other route's chapter name.
-	for o in q["title_overrides"]:
-		if gate(o, save):
-			return o["title"]
-	return q["title"]
+	return _first_override(q["title_overrides"], save, "title", q["title"])
 
 
 static func map_key(q: Dictionary, save: SaveData) -> String:
@@ -504,10 +521,15 @@ static func map_key(q: Dictionary, save: SaveData) -> String:
 	## title_overrides) swaps in a different file key for a route that needs its own separate map image
 	## instead of sharing the other route's — e.g. prologue's south/north halves are different enough
 	## (river town vs. snowy mountains) that one stretched image can't cover both well.
-	for o in q["map_overrides"]:
+	return _first_override(q["map_overrides"], save, "map", q["id"])
+
+
+static func _first_override(list: Array, save: SaveData, field: String, default: String) -> String:
+	## title_overrides / map_overrides: the first entry whose gate holds names the value
+	for o in list:
 		if gate(o, save):
-			return o["map"]
-	return q["id"]
+			return o[field]
+	return default
 
 
 static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Array:

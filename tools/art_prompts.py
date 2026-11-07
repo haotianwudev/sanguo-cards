@@ -52,21 +52,23 @@ _NORTH_CGS: set = set()
 
 
 def _north_cgs() -> set:
-    ## every CG the north route shows: squares of north quests (event_scope north) and the north half of the prologue,
-    ## events scoped to the north or to a north quest, and north endings — read from the game data, not from key prefixes
+    ## every CG the north route shows: squares the north walks, the ？ events only the north draws, and north endings —
+    ## which squares / events are the north's is the game's answer (tools/facts.py), not key prefixes or x ranges
     if not _NORTH_CGS:
+        from facts import load_facts
         gd = ROOT / "godot" / "data"
         story = json.loads((gd / "story.json").read_text("utf-8"))
-        north_q = {q["id"] for q in story["quests"] if q.get("event_scope") == "north"}
-        for q in story["quests"]:
-            for sid, s in q["squares"].items():
-                if s.get("cg") and (q["id"] in north_q or sid.startswith("jz_")):
-                    _NORTH_CGS.add(s["cg"])
-        for eid, ev in story["events"].items():
-            if ev.get("scope") in north_q | {"north"}:
-                _NORTH_CGS.add(eid)  # an event's prompt is keyed by its id
-                if ev.get("cg"):
-                    _NORTH_CGS.add(ev["cg"])
+        quests = {q["id"]: q for q in story["quests"]}
+        chapters = load_facts()["chapters"]
+        drawn = {r: {e for ch in chapters if ch["route"] == r for e in ch["event_pool"]} for r in ("north", "south")}
+        walked = {r: {(ch["quest"], sid) for ch in chapters if ch["route"] == r for sid in ch["squares"]} for r in ("north", "south")}
+        for qid, sid in walked["north"] - walked["south"]:  # 第一章's birth square is both routes': not the north's own
+            if quests[qid]["squares"][sid].get("cg"):
+                _NORTH_CGS.add(quests[qid]["squares"][sid]["cg"])
+        for eid in drawn["north"] - drawn["south"]:
+            _NORTH_CGS.add(eid)  # an event's prompt is keyed by its id
+            if story["events"][eid].get("cg"):
+                _NORTH_CGS.add(story["events"][eid]["cg"])
         for e in json.loads((gd / "endings.json").read_text("utf-8"))["endings"].values():
             if e.get("cg") and e.get("route") == "north":
                 _NORTH_CGS.add(e["cg"])

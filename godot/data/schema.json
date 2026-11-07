@@ -37,6 +37,7 @@
     {"each": "story.quests.*", "refs": "squares.*.choose.*.goto", "to": "squares.@keys"},
     {"each": "story.quests.*", "refs": "squares.*.lose_goto", "to": "squares.@keys"},
     {"unique": "story.quests.*.id"},
+    {"refs": "story.routes.*", "to": "story.quests.*.squares.*.choose.*.record", "why": "a route's birth line must be a choice the game records"},
     {"refs": "story.quests.*.squares.*.type", "to": "ui.map.type_names.@keys"},
     {"refs": "story.quests.*.squares.*.battle", "to": "scenarios.@keys"},
     {"refs": "story.quests.*.squares.*.event", "to": "story.events.@keys"},

@@ -36,6 +36,7 @@ var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 onc
 var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the chapter-end page's picture (its card comes from a ？小故事)
 var side_cost := 10  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
 var ui: Dictionary
+var routes: Dictionary  # route id -> the birth line that puts a journey on it (story.json routes; the first is the default)
 var errors: Array = []  # every data/schema.json failure (and the few checks code makes), all at once — test_data_has_no_schema_errors prints them
 
 
@@ -196,6 +197,7 @@ func _load(dir: String) -> void:
 		endings[eid] = en["endings"][eid].merged({"id": eid})
 		ending_order.append(eid)
 	var story: Dictionary = read_json(dir + "/story.json")
+	routes = story["routes"]
 	for q in story["quests"]:
 		var squares := {}
 		for sq_id in q["squares"]:
@@ -288,7 +290,8 @@ func _ending_card(id: Variant) -> Dictionary:
 		return id
 	if str(id) == "":
 		return {}
-	assert(endings.has(str(id)), "unknown ending %s" % str(id))
+	if not endings.has(str(id)):
+		return {}  # an unknown id is a schema.json error
 	var e: Dictionary = endings[str(id)]
 	return {"id": str(id), "title": e["title"], "text": e["text"], "cg": e["cg"]}
 

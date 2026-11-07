@@ -2475,3 +2475,22 @@ func test_the_schema_checker_catches_each_kind_of_mistake() -> void:
 		{"refs": "cards.*.typo2", "to": "skills.@keys", "optional": true}]})
 	check_eq(errs.size(), 6, "one error per rule but the optional one: %s" % str(errs))
 	check(str(errs[0]).contains("cards.a.skills[1] = nope"), "the error says where: %s" % str(errs[0]))
+
+
+func test_gate3_answers_maybe_only_when_it_cannot_tell() -> void:
+	var known := {"甲": 1, "乙": 0}
+	var truth := func(line: String) -> int: return known.get(line, -1)
+	check_eq(Quests.gate3({"requires": "甲"}, truth), 1)
+	check_eq(Quests.gate3({"requires": ["甲", "丙"]}, truth), -1, "one line unknown")
+	check_eq(Quests.gate3({"requires": ["乙", "丙"]}, truth), 0, "one line known false decides it")
+	check_eq(Quests.gate3({"unless": "乙"}, truth), 1)
+	check_eq(Quests.gate3({"unless": ["甲", "丙"]}, truth), -1, "hidden only if 丙 also holds")
+	check_eq(Quests.gate3({"unless": ["甲", "乙"]}, truth), 1, "乙 is known false: never hidden")
+	check_eq(Quests.gate3({"requires": "丙", "unless": "甲"}, truth), 0, "known hidden beats an unknown requires")
+
+
+func test_the_route_comes_from_the_birth_lines_in_story_json() -> void:
+	var s := SaveData.new()
+	check_eq(s.route(), "south", "no birth yet: the first route")
+	s.run_records = [GameData.get_db().routes["north"]]
+	check(s.is_north() and s.birth_route() == "north")

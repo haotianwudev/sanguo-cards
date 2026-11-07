@@ -151,12 +151,16 @@ def write_needs(pics: Path = PICS) -> None:
     def key_of(cid: str) -> str:
         return cards["cards"][cid].get("person", cid.split("_")[0] if cid.endswith("_card") else cid)
 
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    from facts import load_facts
+    event_pools: dict[str, list[str]] = {}  # quest -> the ？ events any route can draw there (the game's Quests.pools)
+    for ch in load_facts()["chapters"]:
+        pool = event_pools.setdefault(ch["quest"], [])
+        pool += [e for e in ch["event_pool"] if e not in pool]
+
     def event_pool_of(q: dict) -> list[str]:
-        # mirrors Quests.pools()' event_pool resolution (scope "universal" / the quest's event_scope(s),
-        # across every route a shared quest like prologue can take / the quest's own id for one-off cameos)
-        scopes = {q.get("event_scope", "south"), q["id"], "universal"}
-        scopes |= {o["event_scope"] for o in q.get("pool_overrides", []) if o.get("event_scope")}
-        return [eid for eid, ev in story["events"].items() if ev.get("scope", "south") in scopes]
+        return event_pools.get(q["id"], [])
 
     def status(key: str) -> str:
         if key not in cfg:
