@@ -560,10 +560,11 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 			var left: Array = p["recruit_pool"].map(func(c): return db.cards[c]).filter(
 				func(c): return not save.maxed(c["id"]))
 			cards = []
-			if sq["recruit_pool"].is_empty():  # the chapter's whole list is shown (it is short)
+			var cap := int(db.gacha.get("recruit_list_max", 5))
+			if sq["recruit_pool"].is_empty() and left.size() <= cap:  # the chapter's whole list is shown (it is short)
 				cards = left
-			else:  # a place's own list: a few of them each visit
-				var n := int(db.gacha["offer_size"]) + save.offer_extra()
+			else:  # a place's own list, or a chapter list longer than recruit_list_max: a few of them each visit
+				var n := (int(db.gacha["offer_size"]) if not sq["recruit_pool"].is_empty() else cap) + save.offer_extra()
 				while not left.is_empty() and cards.size() < n:
 					cards.append(left.pop_at(rng.randi_range(0, left.size() - 1)))
 		elif kind == "recruit":
@@ -581,7 +582,7 @@ static func offer_rerollable(q: Dictionary, save: SaveData) -> bool:
 	## after the pick — see fixed_list())
 	q = view(q, save)
 	var sq := here(q, save)
-	if sq["type"] != "recruit" or save.perk("reroll") <= 0 or save.offer_rerolled or save.offer_kind != "":
+	if true:  # 三顾茅庐 no longer deals again: it lets you keep two (user rule 2026-11-07)
 		return false
 	return fixed_list(q, save).is_empty()
 
@@ -592,7 +593,8 @@ static func fixed_list(q: Dictionary, save: SaveData) -> Array:
 	var sq := here(q, save)
 	if sq["type"] != "recruit" or not sq["recruit_pool"].is_empty():
 		return []
-	return pools(q, save, sq)["recruit_pool"].filter(func(c): return not save.maxed(c))
+	var ids: Array = pools(q, save, sq)["recruit_pool"].filter(func(c): return not save.maxed(c))
+	return ids if ids.size() <= int(GameData.get_db().gacha.get("recruit_list_max", 5)) else []  # longer: dealt at random, 重摆 allowed
 
 
 static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, choice: int = -1) -> Array:
@@ -637,9 +639,9 @@ static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, c
 				gained.append(save.take(cid0))
 				if save.pick_again(cid0):  # 兼收并蓄: one more from the same offer
 					return gained
-				if save.perk("reroll") > 0 and not save.offer_rerolled:  # 三顾茅庐 on a short list: the same list once more
+				if s["type"] == "recruit" and save.perk("reroll") > 0 and not save.offer_rerolled:  # 三顾茅庐 (user rule): keep a second one from the same offer
 					save.offer_rerolled = true
-					save.offer = fixed_list(q, save)
+					save.offer = save.offer.filter(func(c): return c != cid0 and not save.maxed(c))
 					if not save.offer.is_empty():
 						return gained
 			save.offer = []

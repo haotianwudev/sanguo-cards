@@ -251,34 +251,11 @@ func test_merit_up_and_befriend() -> void:
 	check(drops[1] == 300 and drops[0] < 300, "化敌为友: the beaten enemy's card every time (%d vs %d)" % [drops[1], drops[0]])
 
 
-func test_reroll_on_a_fixed_list_lays_it_out_again() -> void:
-	var db := GameData.get_db()
-	var q: Dictionary = db.quests[0]
-	var n := _lap2()
-	Quests.begin(q, n)
-	n.square = "draft"  # 江东征兵: the chapter's whole short list, the same every time
-	n.perks["reroll"] = 1
-	check(not Quests.offer_rerollable(q, n), "no 重摆 button on a fixed list")
-	var r := RandomNumberGenerator.new()
-	var first: Array = Quests.offer(q, n, r).map(func(c): return c["id"])
-	var got := Quests.resolve(q, n, r, 0)
-	check(got.size() == 1 and n.offer_rerolled and n.offer == Quests.fixed_list(q, n), "the same list once more after the pick: %s" % [n.offer])
-	check(not n.offer.is_empty() and n.offer.all(func(c): return first.has(c)), "not dealt at random")
-	Quests.resolve(q, n, r, 0)
-	check(n.offer.is_empty() and not n.offer_rerolled, "only once: %s" % [n.offer])
-	var m := _lap2()
-	Quests.begin(q, m)
-	m.square = "draft"
-	Quests.offer(q, m, r)
-	Quests.resolve(q, m, r, 0)
-	check(m.offer.is_empty(), "no perk: one pick")
-
-func test_every_recruit_square_deals_something_new() -> void:
-	## 三顾茅庐 must do something wherever it shows: the dealt-again offer is never empty and never the same cards
+func test_three_visits_keeps_a_second_one_on_every_recruit_square() -> void:
+	## 三顾茅庐 (user rule 2026-11-07): no 重摆 — after the pick, a second one from the same offer, once; never on a chest
 	var db := GameData.get_db()
 	var r := RandomNumberGenerator.new()
-	var same: Array = []
-	var n_squares := 0
+	var bad: Array = []
 	for q in db.quests:
 		for sid in q["squares"]:
 			if q["squares"][sid]["type"] != "recruit":
@@ -288,28 +265,22 @@ func test_every_recruit_square_deals_something_new() -> void:
 			n.perks["public"] = 1
 			Quests.begin(q, n)
 			n.square = sid
-			if not Quests.fixed_list(q, n).is_empty():  # a short list: laid out again after the pick instead
-				Quests.offer(q, n, r)
-				Quests.resolve(q, n, r, 0)
-				if n.offer.is_empty():
-					same.append("%s/%s: not laid out again" % [q["id"], sid])
+			check(not Quests.offer_rerollable(q, n), "no 重摆 button")
+			var first: Array = Quests.offer(q, n, r).map(func(c): return c["id"])
+			if first.size() < 2:
 				continue
-			if not Quests.offer_rerollable(q, n):
-				same.append("%s/%s: no button" % [q["id"], sid])
+			var got := Quests.resolve(q, n, r, 0)
+			if not (got.size() == 1 and n.offer_rerolled and not n.offer.is_empty() and not n.offer.has(first[0]) and n.offer.all(func(c): return first.has(c))):
+				bad.append("%s/%s: %s" % [q["id"], sid, n.offer])
 				continue
-			n_squares += 1
-			var changed := false
-			for sd in 5:  # a random deal can land on the same cards by chance: one of a few tries must differ
-				r.seed = sd
-				n.offer = []
-				n.offer_rerolled = false
-				var first: Array = Quests.offer(q, n, r).map(func(c): return c["id"])
-				n.offer = []
-				n.offer_rerolled = true
-				var again: Array = Quests.offer(q, n, r).map(func(c): return c["id"])
-				if not again.is_empty() and again != first:
-					changed = true
-			if not changed:
-				same.append("%s/%s" % [q["id"], sid])
-	check(n_squares > 0 and same.is_empty(), "三顾茅庐 changes the offer on every 招贤 square: %s" % [same])
+			Quests.resolve(q, n, r, 0)
+			if not n.offer.is_empty():
+				bad.append("%s/%s: a third pick" % [q["id"], sid])
+	check(bad.is_empty(), "a second one from the same offer, once: %s" % [bad])
+	var m := _lap2()
+	Quests.begin(db.quests[0], m)
+	m.square = "draft"
+	Quests.offer(db.quests[0], m, r)
+	Quests.resolve(db.quests[0], m, r, 0)
+	check(m.offer.is_empty(), "no perk: one pick")
 
