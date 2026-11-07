@@ -914,11 +914,12 @@ func demo(name: String) -> void:
 			for a in OS.get_cmdline_user_args():
 				if a.begins_with("--at="):
 					dbg._show(a.trim_prefix("--at="))
-				if a.begins_with("--tab="):  # --at=cards --tab=<tab name>: open that tab (e.g. 主角卡)
-					for btn in dbg._view.find_children("*", "Button", true, false):
-						if str(btn.text).begins_with(a.trim_prefix("--tab=") + "（"):
-							btn.pressed.emit()
-							break
+				if a.begins_with("--tab="):  # --at=cards --tab=<chip,chip…>: press those filter chips in turn (e.g. 章节招贤馆,R)
+					for want in a.trim_prefix("--tab=").split(","):
+						for btn in dbg._view.find_children("*", "Button", true, false):
+							if str(btn.text).begins_with(want + " ") and not btn.is_queued_for_deletion():
+								btn.pressed.emit()
+								break
 				if a.begins_with("--card="):  # open that card's preview straight away
 					dbg._preview_card(a.trim_prefix("--card="))
 		"map", "pick":

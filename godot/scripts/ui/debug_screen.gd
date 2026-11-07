@@ -94,7 +94,6 @@ func _do_jump(jump: Dictionary) -> void:
 	Game.show_screen(MapScreen.new())
 
 
-const _CARD_TABS := [["SSR", "SSR"], ["SR", "SR"], ["R", "R"], ["C", "C"], ["N", "兵卡"], ["story", "剧情 / 敌方卡"], ["lord", "主角卡"]]
 const _CG_GROUPS := {"c1": "第一章（南线）", "jz": "第一章（北线）", "e": "随机事件", "i": "幕间", "end": "结局"}  # prefix groups for what no quest square owns
 
 
@@ -127,45 +126,145 @@ func _gallery(tabs: Array, build: Callable) -> Control:
 	return box
 
 
-func _card_ids(tab: String) -> Array:
+const _POOLS := [["public", "公共招贤池"], ["recruit", "章节招贤馆"], ["story", "剧情给卡"], ["side", "小故事给卡"], ["foe", "打败敌将得"],
+	["soldier", "兵卡"], ["lord", "主角卡"], ["none", "没有来路"]]  # where a card comes from; a card can come from several
+const _RARITIES := ["SSR", "SR", "R", "C", "N"]
+const _CHAPTERED := ["recruit", "story", "side", "foe"]  # pools that belong to a chapter: a 章节 row opens under them
+var _sources := {}  # card id -> {pool: [chapter titles]}, built once
+
+
+func _card_sources() -> Dictionary:
+	## every way a card reaches the player: 公共招贤池 (in the draw pool and tied to no chapter), a chapter's 招贤馆 list, a story square,
+	## a ？小故事, beating that enemy (its drop), a soldier (chests), a lord card — or none of these
+	if not _sources.is_empty():
+		return _sources
 	var db := GameData.get_db()
-	var out: Array = []
+	var titles := {}
+	for q in db.quests:
+		titles[q["id"]] = str(q["title"])
+	var add := func(cid: String, src: String, where: String) -> void:
+		if cid == "" or not db.cards.has(cid):
+			return
+		if not _sources.has(cid):
+			_sources[cid] = {}
+		if not _sources[cid].has(src):
+			_sources[cid][src] = []
+		if where != "" and not _sources[cid][src].has(where):
+			_sources[cid][src].append(where)
+	for q in db.quests:
+		var title := str(q["title"])
+		for c in q["recruit_pool"]:
+			add.call(c, "recruit", title)
+		for o in q["pool_overrides"]:
+			for c in o["recruit_pool"]:
+				add.call(c, "recruit", title)
+		for s in q["squares"].values():
+			for c in s.get("recruit_pool", []):
+				add.call(c, "recruit", title)
+			for c in s["cards"]:
+				add.call(c, "story", title)
+			for o in s["choose"]:
+				add.call(str(o.get("card", "")), "story", title)
+			if s["type"] == "battle" and db.scenarios.has(s["battle"]):
+				var foe: Dictionary = db.enemies[db.scenarios[s["battle"]]["enemy"]]
+				if not foe.get("card_public", false):
+					add.call(str(foe.get("drop", "")), "foe", title)
+	for qid in db.side_stories:
+		for st in db.side_stories[qid]:
+			for c in st.get("reward", {}).get("cards", []):
+				add.call(c, "side", str(titles.get(qid, qid)))
 	for cid in db.cards:
 		var c: Dictionary = db.cards[cid]
-		if SaveData.is_lord_card(cid):  # the lord cards have their own tab (主角卡)
-			if tab == "lord":
-				out.append(cid)
-			continue
-		var story: bool = not c["in_pool"]
-		if (tab == "story" and story) or (not story and tab == c["rarity"]):
-			out.append(cid)
-	out.sort()
-	return out
+		if SaveData.is_lord_card(cid):
+			add.call(cid, "lord", "")
+		elif c["soldier"]:
+			add.call(cid, "soldier", "")
+		elif c["in_pool"] and db.is_public(cid):
+			add.call(cid, "public", "")
+		if not _sources.has(cid):
+			add.call(cid, "none", "")
+	return _sources
 
 
 func _cards_panel() -> Control:
+	## 查看所有卡牌: filter rows — 来路 (which pool), 章节 (only under a chapter pool), 稀有度, 兵种 — each one pick (全部 by default), all
+	## of them together; every chip shows how many cards it would leave given the other rows (user call)
+	var db := GameData.get_db()
+	var src := _card_sources()
+	var pick := {"pool": "public", "chapter": "", "rarity": "", "troop": ""}
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 8)
-	var row1 := HBoxContainer.new()
-	row1.add_theme_constant_override("separation", 6)
-	box.add_child(row1)
-	var row2 := HBoxContainer.new()
-	row2.add_theme_constant_override("separation", 6)
-	box.add_child(row2)
+	box.add_theme_constant_override("separation", 6)
+	var rows := VBoxContainer.new()
+	rows.add_theme_constant_override("separation", 4)
+	box.add_child(rows)
 	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(1224, 484)
+	scroll.custom_minimum_size = Vector2(1224, 400)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	box.add_child(scroll)
+	var order := {"SSR": 0, "SR": 1, "R": 2, "C": 3, "N": 4}
+	var troop_order: Array = db.troops.keys()
 
-	var db := GameData.get_db()
-	var all_troops: Array = db.troops.keys()
+	var passes := func(cid: String, f: Dictionary, skip: String) -> bool:
+		var c: Dictionary = db.cards[cid]
+		if skip != "pool" and f["pool"] != "" and not src[cid].has(f["pool"]):
+			return false
+		if skip != "chapter" and f["chapter"] != "" and not (src[cid].has(f["pool"]) and src[cid][f["pool"]].has(f["chapter"])):
+			return false
+		if skip != "rarity" and f["rarity"] != "" and str(c["rarity"]) != f["rarity"]:
+			return false
+		if skip != "troop" and f["troop"] != "" and str(c["troop"]) != f["troop"]:
+			return false
+		return true
 
-	var buttons1: Array = []
-	var buttons2: Array = []
+	var hold := {}  # the refresh callable, reached through this so the chips made before it existed can still call it
+	var chip_row := func(title: String, key: String, opts: Array) -> void:
+		## opts: [[value, label]]; "" = 全部
+		var row := HFlowContainer.new()
+		row.add_theme_constant_override("h_separation", 5)
+		row.add_theme_constant_override("v_separation", 4)
+		var head := Kit.label(title, 15, "muted")
+		head.custom_minimum_size = Vector2(52, 34)
+		head.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		row.add_child(head)
+		for o in [["", "全部"]] + opts:
+			var f: Dictionary = pick.duplicate()
+			f[key] = o[0]
+			if key == "pool":
+				f["chapter"] = ""
+			var n: int = src.keys().filter(func(cid): return passes.call(cid, f, "")).size()
+			if n == 0 and o[0] != "" and o[0] != pick[key]:
+				continue  # nothing left behind this chip: leave it out
+			var b := Kit.button("%s %d" % [o[1], n], "gold" if pick[key] == o[0] else "blue", 14)
+			b.custom_minimum_size = Vector2(0, 34)
+			b.pressed.connect(func():
+				pick[key] = o[0]
+				if key == "pool":
+					pick["chapter"] = ""
+				hold["refresh"].call())
+			row.add_child(b)
+		rows.add_child(row)
 
-	var build_grid = func(cids: Array) -> void:
+	var refresh := func() -> void:
+		for ch in rows.get_children():
+			ch.queue_free()
+		chip_row.call("来路", "pool", _POOLS)
+		if pick["pool"] in _CHAPTERED:
+			var chapters: Array = []
+			for q in db.quests:
+				var title := str(q["title"])
+				if src.keys().any(func(cid): return src[cid].has(pick["pool"]) and src[cid][pick["pool"]].has(title)) and not chapters.has(title):
+					chapters.append(title)
+			chip_row.call("章节", "chapter", chapters.map(func(x): return [x, x]))
+		chip_row.call("稀有度", "rarity", _RARITIES.map(func(x): return [x, x]))
+		var troops: Array = troop_order.map(func(x): return [x, str(db.troops[x]["name"])])
+		chip_row.call("兵种", "troop", troops)
 		for ch in scroll.get_children():
 			ch.queue_free()
+		var cids: Array = src.keys().filter(func(cid): return passes.call(cid, pick, ""))
+		cids.sort_custom(func(a, b):
+			var ra: int = order.get(str(db.cards[a]["rarity"]), 5)
+			var rb: int = order.get(str(db.cards[b]["rarity"]), 5)
+			return ra < rb if ra != rb else str(a) < str(b))
 		var grid := GridContainer.new()
 		grid.columns = 9
 		grid.add_theme_constant_override("h_separation", 6)
@@ -176,61 +275,8 @@ func _cards_panel() -> Control:
 			grid.add_child(v)
 		scroll.add_child(grid)
 
-	var pick2 = func(i: int, cids: Array, sub_tabs: Array) -> void:
-		for j in buttons2.size():
-			buttons2[j].add_theme_color_override("font_color", Kit.c("gold") if j == i else Kit.c("text"))
-		var troop: String = sub_tabs[i][0]
-		var filter_cids := cids if troop == "all" else cids.filter(func(cid): return db.cards[cid]["troop"] == troop)
-		build_grid.call(filter_cids)
-
-	var pick1 = func(i: int) -> void:
-		for j in buttons1.size():
-			buttons1[j].add_theme_color_override("font_color", Kit.c("gold") if j == i else Kit.c("text"))
-		
-		var tab_id: String = _CARD_TABS[i][0]
-		var cids := _card_ids(tab_id)
-		
-		for ch in row2.get_children():
-			ch.queue_free()
-		buttons2.clear()
-		
-		var troops_in_tab := {}
-		for cid in cids:
-			var troop: String = db.cards[cid]["troop"]
-			if not troops_in_tab.has(troop):
-				troops_in_tab[troop] = []
-			troops_in_tab[troop].append(cid)
-		var sorted_troops := troops_in_tab.keys()
-		sorted_troops.sort_custom(func(a, b): return all_troops.find(a) < all_troops.find(b))
-		
-		var sub_tabs := [["all", "全部（%d）" % cids.size()]]
-		for troop in sorted_troops:
-			var count: int = troops_in_tab[troop].size()
-			var tname: String = db.troops[troop]["name"] if db.troops.has(troop) else troop
-			sub_tabs.append([troop, "%s（%d）" % [tname, count]])
-			
-		for j in sub_tabs.size():
-			var b := Kit.button(sub_tabs[j][1], "blue", 15)
-			b.custom_minimum_size = Vector2(0, 38)
-			b.pressed.connect(pick2.bind(j, cids, sub_tabs))
-			row2.add_child(b)
-			buttons2.append(b)
-			
-		if not sub_tabs.is_empty():
-			pick2.call(0, cids, sub_tabs)
-
-	for i in _CARD_TABS.size():
-		var tab_id: String = _CARD_TABS[i][0]
-		var count: int = _card_ids(tab_id).size()
-		var b := Kit.button("%s（%d）" % [_CARD_TABS[i][1], count], "blue", 15)
-		b.custom_minimum_size = Vector2(0, 38)
-		b.pressed.connect(pick1.bind(i))
-		row1.add_child(b)
-		buttons1.append(b)
-
-	if not _CARD_TABS.is_empty():
-		pick1.call(0)
-
+	hold["refresh"] = refresh
+	refresh.call()
 	return box
 
 
