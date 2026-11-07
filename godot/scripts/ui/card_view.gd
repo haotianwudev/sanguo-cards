@@ -14,8 +14,16 @@ var leader: Dictionary = {}  # when shown as a party leader: uses leader AT/HP a
 var count := 0  # soldier copies (0 = hide)
 var note := ""
 var show_skills := true
-var glow := true  # the rarity aura round the card (opts.glow = false turns it off)
-var glow_boost := 1.0  # > 1: a carried card (整备 drag) — a stronger aura that always breathes
+var glow := true:  # the rarity aura round the card (opts.glow = false turns it off)
+	set(v):
+		glow = v
+		_sync_aura()
+var glow_boost := 1.0:  # > 1: a carried card (整备 drag) — a stronger aura that always breathes
+	set(v):
+		glow_boost = v
+		_sync_aura()
+var _aura: ColorRect = null
+const AURA_SHADER := preload("res://scripts/ui/card_aura.gdshader")
 var dimmed := false
 var selected := false
 var tap_on_release := false  # true = `pressed` fires on lift, and not at all when the press turned into a drag (整备)
@@ -146,6 +154,8 @@ func _add(node: Control, pos: Vector2, sz: Vector2) -> Control:
 func _build() -> void:
 	for ch in get_children():
 		ch.queue_free()
+	_aura = null
+	_sync_aura()
 	var w := size.x
 	var db := GameData.get_db()
 	var troop: Dictionary = db.troops[fighter["troop"]]
@@ -356,58 +366,45 @@ func _glow_spec() -> Array:
 	return [Color.html(spec[0]), float(spec[1]) * glow_boost, bool(spec[2]) or glow_boost > 1.0, fname == "ssr"]
 
 
-func _sparkles(r: Rect2, t: float) -> void:
-	## ssr: little four-pointed stars running round the frame, each twinkling on and off
-	var per := 2.0 * (r.size.x + r.size.y)
-	for i in 10:
-		var d := fmod(t * 34.0 + per * i / 10.0, per)
-		var p := r.position + (Vector2(d, 0) if d < r.size.x else Vector2(r.size.x, d - r.size.x) if d < r.size.x + r.size.y
-			else Vector2(r.size.x - (d - r.size.x - r.size.y), r.size.y) if d < 2.0 * r.size.x + r.size.y else Vector2(0, per - d))
-		var a := maxf(0.0, sin(t * 3.1 + i * 1.7))
-		if a < 0.05:
-			continue
-		var s := (5.0 + 7.0 * a) * clampf(size.x / 150.0, 0.6, 1.4)
-		var c := Color.from_hsv(fmod(t * 0.12 + i / 10.0, 1.0), 0.25, 1.0, a)
-		draw_colored_polygon(PackedVector2Array([p + Vector2(0, -s), p + Vector2(s * 0.22, -s * 0.22), p + Vector2(s, 0), p + Vector2(s * 0.22, s * 0.22),
-			p + Vector2(0, s), p + Vector2(-s * 0.22, s * 0.22), p + Vector2(-s, 0), p + Vector2(-s * 0.22, -s * 0.22)]), c)
-		draw_circle(p, s * 0.25, Color(1, 1, 1, a))
-
-
-func _process(_delta: float) -> void:
-	queue_redraw()  # only on while a breathing aura (SR / SSR) is shown
+func _sync_aura() -> void:
+	## the aura is card_aura.gdshader on one child drawn behind the card: set up once per build, animated by the GPU —
+	## no per-frame script work (it used to redraw eight style boxes + sparkles every frame for every SR / SSR card)
+	if not is_inside_tree() or fighter.is_empty():
+		return
+	var g := _glow_spec()
+	if g.is_empty():
+		if _aura != null:
+			_aura.visible = false
+		return
+	if _aura == null:
+		_aura = ColorRect.new()
+		_aura.show_behind_parent = true
+		_aura.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_aura.material = ShaderMaterial.new()
+		_aura.material.shader = AURA_SHADER
+		add_child(_aura)
+		move_child(_aura, 0)
+	var card_h := minf(size.y, size.x * 1.4)
+	var reach := 2.0 + 18.0 * float(g[1])  # how far the light spreads past the card's edge: bronze a thin halo, ssr a wide one
+	var star := clampf(size.x / 150.0, 0.6, 1.4)
+	var pad := reach + 14.0 * star  # room for the rings and the ssr stars
+	_aura.position = Vector2(-pad, -pad)
+	_aura.size = Vector2(size.x + pad * 2.0, card_h + pad * 2.0)
+	var m: ShaderMaterial = _aura.material
+	m.set_shader_parameter("col", g[0])
+	m.set_shader_parameter("k", float(g[1]))
+	m.set_shader_parameter("breathe", 1.0 if g[2] else 0.0)
+	m.set_shader_parameter("rainbow", 1.0 if g[3] else 0.0)
+	m.set_shader_parameter("reach", reach)
+	m.set_shader_parameter("card", Vector2(size.x, card_h))
+	m.set_shader_parameter("pad", pad)
+	m.set_shader_parameter("phase", float(get_instance_id() % 97))
+	m.set_shader_parameter("star_scale", star)
+	_aura.visible = true
 
 
 func _draw() -> void:
 	var card_h := minf(size.y, size.x * 1.4)
-	var g := _glow_spec()
-	set_process(not g.is_empty() and g[2] and is_visible_in_tree())
-	if not g.is_empty():  # the aura: soft rounded rings spreading out behind the frame, SR / SSR slowly breathing
-		var col: Color = g[0]
-		var k: float = g[1]
-		var t := Time.get_ticks_msec() / 1000.0 + float(get_instance_id() % 97)
-		if g[2]:
-			k *= 0.75 + 0.25 * sin(t * 2.4)
-		var layers := 8
-		var reach := 2.0 + 18.0 * float(g[1])  # how far the light spreads past the card's edge: bronze a thin halo, ssr a wide one
-		for i in layers:
-			var f := float(i + 1) / layers
-			var grow := reach * f
-			if g[3]:  # ssr: each ring a different hue, the whole aura slowly turning through the rainbow
-				col = Color.from_hsv(fmod(t * 0.12 + f * 0.35, 1.0), 0.7, 1.0)
-			var sb := StyleBoxFlat.new()
-			sb.bg_color = Color(col.r, col.g, col.b, minf(0.42 * k, 0.5) * pow(1.0 - f + 1.0 / layers, 1.4))
-			sb.set_corner_radius_all(int(8.0 + grow))
-			draw_style_box(sb, Rect2(Vector2(-grow, -grow), Vector2(size.x + grow * 2.0, card_h + grow * 2.0)))
-		var rim := StyleBoxFlat.new()  # a thin bright edge right on the frame
-		rim.bg_color = Color(0, 0, 0, 0)
-		if g[3]:
-			col = Color.from_hsv(fmod(t * 0.12, 1.0), 0.35, 1.0)
-		rim.border_color = Color(col.r, col.g, col.b, minf(0.85 * k, 1.0))
-		rim.set_border_width_all(3 if g[3] else 2)
-		rim.set_corner_radius_all(8)
-		draw_style_box(rim, Rect2(Vector2(-2, -2), Vector2(size.x + 4.0, card_h + 4.0)))
-		if g[3]:
-			_sparkles(Rect2(Vector2(-3, -3), Vector2(size.x + 6.0, card_h + 6.0)), t)
 	if selected:
 		draw_rect(Rect2(Vector2(-5, -5), Vector2(size.x + 10, card_h + 10)), Kit.c("gold"), false, 5.0)
 	elif has_focus():
