@@ -1,6 +1,6 @@
 #!/bin/sh
 # Everything that must hold before a push, in one place (CI runs exactly this):
-#   texture import policy → Godot import → tests (data schema included) → every generated doc up to date.
+#   story.json format → texture import policy → Godot import → tests (data schema included) → every generated doc up to date.
 #     sh tools/check.sh            # from the repo root; Godot from $SANGUO_GODOT (default: the path every skill uses)
 #     sh tools/check.sh --fast     # skip the Godot import (nothing new under godot/data/art)
 # Exits non-zero on the first failure, saying which step.
@@ -9,6 +9,9 @@ cd "$(dirname "$0")/.." || exit 1
 G="${SANGUO_GODOT:-/f/workspace/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe}"
 PY="${PYTHON:-python}"
 fail() { echo "check.sh: FAILED at $1" >&2; exit 1; }
+
+echo "== story.json format"
+"$PY" tools/fmt_story.py --check || fail "story.json format (run: python tools/fmt_story.py)"
 
 echo "== texture import policy"
 "$PY" tools/import_policy.py --check || fail "import policy (run: python tools/import_policy.py --write, then the Godot import)"
