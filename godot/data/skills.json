@@ -232,7 +232,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic", "rate": 0.71
+          "type": "magic", "rate": 0.7
         },
         {
           "type": "break",
@@ -786,7 +786,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic", "rate": 0.84
+          "type": "magic", "rate": 0.8
         },
         {
           "type": "stun",
@@ -826,7 +826,7 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 1.68
+          "rate": 1.675
         },
         {
           "type": "stun",
@@ -851,7 +851,7 @@
       "cost": 2,
       "effects": [
         {
-          "type": "magic", "rate": 1.02
+          "type": "magic", "rate": 1.0
         }
       ]
     },
@@ -910,7 +910,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic", "rate": 1.51
+          "type": "magic", "rate": 1.5
         },
         {
           "type": "stun",
@@ -924,7 +924,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic", "rate": 0.71
+          "type": "magic", "rate": 0.7
         },
         {
           "type": "break",
@@ -1053,7 +1053,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic", "rate": 1.51
+          "type": "magic", "rate": 1.5
         },
         {
           "type": "stun",
@@ -1378,7 +1378,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic", "rate": 1.51
+          "type": "magic", "rate": 1.5
         },
         {
           "type": "stun",
@@ -1421,7 +1421,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic", "hit_rate": 0.76,
+          "type": "magic", "hit_rate": 0.75,
           "hits": 2
         },
         {
@@ -1583,7 +1583,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic", "hit_rate": 0.76,
+          "type": "magic", "hit_rate": 0.75,
           "hits": 2
         },
         {
@@ -1994,7 +1994,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic", "rate": 1.51
+          "type": "magic", "rate": 1.5
         },
         {
           "type": "stun",
@@ -2336,7 +2336,7 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 1.44
+          "rate": 1.425
         },
         {
           "type": "poison",
