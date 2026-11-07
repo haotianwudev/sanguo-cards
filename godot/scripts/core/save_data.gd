@@ -132,14 +132,34 @@ func snapshot() -> Dictionary:
 	return d
 
 
+func push_step() -> void:
+	## 重返上一格's record of the save just before a step. A step keeps only the fields that differ from the step before it
+	## (the first: from chapter_start) — a whole snapshot per square made the save grow by a full copy every step.
+	## An old save's full snapshots are valid steps too: a step is just the fields to lay over the one before.
+	var now := snapshot()
+	var prev := step_state(steps.size())
+	var d := {}
+	for f in now:
+		if not prev.has(f) or prev[f] != now[f]:
+			d[f] = now[f]
+	steps.append(d)
+
+
+func step_state(n: int) -> Dictionary:
+	## the save as it stood just before step n + 1: chapter_start with the first n steps laid over it
+	var s: Dictionary = chapter_start.duplicate()
+	for i in n:
+		s.merge(steps[i], true)
+	return s
+
+
 func rewind_step() -> void:
 	## 重返上一格: back to just before the last step; again and again, as far as the chapter's first square
 	if steps.is_empty():
 		return
-	var rest := steps.duplicate()
-	var snap: Dictionary = rest.pop_back()
+	var snap := step_state(steps.size())
+	steps = steps.slice(0, steps.size() - 1)
 	_restore(snap)
-	steps = rest
 
 
 func _restore(snap: Dictionary) -> void:
@@ -418,14 +438,12 @@ static func from_dict(d: Dictionary) -> SaveData:
 
 
 func write(path: String = SAVE_PATH) -> void:
-	var f := FileAccess.open(path, FileAccess.WRITE)
-	f.store_string(JSON.stringify(to_dict(), " "))
+	GameData.write_json(path, to_dict())
 
 
 static func read(path: String = SAVE_PATH) -> SaveData:
-	if not FileAccess.file_exists(path):
-		return null
-	return from_dict(GameData.read_json(path))
+	var d: Variant = GameData.read_user_json(path)
+	return from_dict(d) if d is Dictionary else null
 
 
 ## ---- two saves, one per route: south and north can be played side by side ----------------------------------
@@ -443,9 +461,7 @@ static func read_slot(route_id: String) -> SaveData:
 
 
 static func _read_shared() -> Dictionary:
-	if not FileAccess.file_exists(SHARED_PATH):
-		return {}
-	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(SHARED_PATH))
+	var d: Variant = GameData.read_user_json(SHARED_PATH)
 	return d if d is Dictionary else {}
 
 
@@ -470,8 +486,7 @@ func write_shared() -> void:
 		if str(fl).contains("结局") and not ends.has(fl):
 			ends.append(fl)
 	d["endings"] = ends
-	var out := FileAccess.open(SHARED_PATH, FileAccess.WRITE)
-	out.store_string(JSON.stringify(d, " "))
+	GameData.write_json(SHARED_PATH, d)
 
 
 func apply_shared() -> void:

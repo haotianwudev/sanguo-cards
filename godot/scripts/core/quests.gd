@@ -718,7 +718,7 @@ static func move(q: Dictionary, save: SaveData, square_id: String, rng: RandomNu
 	q = view(q, save)
 	var ok := next_options(q, save).any(func(s): return s["id"] == square_id)
 	assert(ok, "cannot move to " + square_id)
-	save.steps.append(save.snapshot())
+	save.push_step()
 	save.square = square_id
 	save.visited.append(square_id)
 	save.resolved = false

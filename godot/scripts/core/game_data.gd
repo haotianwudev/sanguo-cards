@@ -46,10 +46,37 @@ static func get_db() -> GameData:
 
 
 static func read_json(path: String) -> Variant:
-	var text := FileAccess.get_file_as_string(path)
-	var parsed: Variant = JSON.parse_string(text)
+	var parsed: Variant = try_read_json(path)
 	assert(parsed != null, "could not parse %s" % path)
 	return parsed
+
+
+static func try_read_json(path: String) -> Variant:
+	## null when the file is missing or not JSON — for user files (saves), which must never crash the game
+	if not FileAccess.file_exists(path):
+		return null
+	return JSON.parse_string(FileAccess.get_file_as_string(path))
+
+
+static func write_json(path: String, data: Variant) -> void:
+	## every user file is written the same way: compact JSON into <path>.tmp, then renamed over <path> — a phone killing
+	## the game mid-write leaves the old file whole (and read_user_json falls back to the .tmp if the rename never happened)
+	var tmp := path + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		push_error("cannot write %s" % tmp)
+		return
+	f.store_string(JSON.stringify(data))
+	f.close()
+	if FileAccess.file_exists(path):
+		DirAccess.remove_absolute(path)
+	DirAccess.rename_absolute(tmp, path)
+
+
+static func read_user_json(path: String) -> Variant:
+	## a user file written by write_json: the file itself, else the .tmp a cut-off write left behind
+	var d: Variant = try_read_json(path)
+	return d if d != null else try_read_json(path + ".tmp")
 
 
 func _load(dir: String) -> void:

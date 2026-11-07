@@ -2410,3 +2410,45 @@ func test_gate_is_one_rule_everywhere() -> void:
 	check(not Quests.gate({"unless": ["甲", "乙"]}, s), "this run's records count")
 	check(Quests.gate({"unless": ["甲", "乙"]}, s, false), "story flags only")
 	check(Quests.gate({}, s), "no gate = open")
+
+
+func _plain(d: Variant) -> Variant:
+	return JSON.parse_string(JSON.stringify(d))  # ints and floats compare alike after a trip through a file
+
+
+func test_steps_store_only_what_changed_and_survive_a_save_file() -> void:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s, rng(3))
+	Quests.resolve(q, s, rng(0), 0)
+	var before: Array = []
+	for i in 12:
+		var opts: Array = Quests.next_options(Quests.view(q, s), s)
+		if opts.is_empty():
+			break
+		before.append(_plain(s.snapshot()))
+		Quests.move(q, s, opts[0]["id"])
+		Quests.resolve(q, s, rng(0), 0)
+	var full := JSON.stringify(before[0]).length() * before.size()
+	var kept := JSON.stringify(s.steps).length()
+	check(before.size() >= 8, "walked %d squares" % before.size())
+	check(kept * 4 < full, "steps keep only the changes: %d bytes vs %d for whole snapshots" % [kept, full])
+	var path := "user://test_steps.json"
+	s.write(path)
+	var back := SaveData.read(path)
+	DirAccess.remove_absolute(path)
+	for i in range(before.size() - 1, -1, -1):
+		back.rewind_step()
+		check_eq(_plain(back.snapshot()), before[i], "step %d back, after a save file" % i)
+	check(back.steps.is_empty())
+
+
+func test_a_cut_off_save_falls_back_to_its_tmp() -> void:
+	var s := SaveData.create()
+	s.merit = 7
+	var path := "user://test_cut.json"
+	s.write(path)
+	DirAccess.rename_absolute(path, path + ".tmp")  # as if the game died between writing the .tmp and renaming it
+	var back := SaveData.read(path)
+	DirAccess.remove_absolute(path + ".tmp")
+	check(back != null and back.merit == 7, "the .tmp is read when the save itself is missing")
