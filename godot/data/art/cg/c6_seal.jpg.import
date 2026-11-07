@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/c6_seal.jpg-a36fbd977fe2fce4abfb4e15b2b2f482.
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

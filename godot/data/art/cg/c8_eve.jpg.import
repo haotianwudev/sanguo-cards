@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/c8_eve.jpg-d3b1f4e30f73438b507af9fd9c42a50d.c
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

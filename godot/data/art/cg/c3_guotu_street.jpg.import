@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/c3_guotu_street.jpg-61e5d4aa1dbfde52e385a3fc9
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

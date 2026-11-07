@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/xz_caobao.jpg-c4e1e6ffd0f47ed923a8174816d7c6d
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -1,0 +1,11 @@
+{
+  "_doc": "How every texture under godot/data is imported. tools/import_policy.py --write applies it to the .import files, --check exits 1 on drift. The first rule whose prefix matches a file's folder wins; 'params' are written into the [params] block. Big pictures go lossy WebP (lossless ctex was 3.7x the jpg: the APK hit 1.2 GB); small icons stay lossless so they stay crisp.",
+  "rules": [
+    {"prefix": "data/art/cg/", "params": {"compress/mode": 1, "compress/lossy_quality": 0.85, "mipmaps/generate": false}},
+    {"prefix": "data/art/battle/", "params": {"compress/mode": 1, "compress/lossy_quality": 0.85, "mipmaps/generate": false}},
+    {"prefix": "data/art/map/icons/", "params": {"compress/mode": 0, "mipmaps/generate": false}},
+    {"prefix": "data/art/map/", "params": {"compress/mode": 1, "compress/lossy_quality": 0.85, "mipmaps/generate": false}},
+    {"prefix": "data/portraits/", "params": {"compress/mode": 1, "compress/lossy_quality": 0.9, "mipmaps/generate": false}},
+    {"prefix": "data/", "params": {"compress/mode": 0, "mipmaps/generate": false}}
+  ]
+}
