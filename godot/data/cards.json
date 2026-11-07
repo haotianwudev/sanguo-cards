@@ -1460,6 +1460,7 @@
     },
     "zhangfei": {
       "name": "张飞",
+      "pool": false,
       "rarity": "SR",
       "troop": "spear",
       "hp": 70,
@@ -1507,6 +1508,7 @@
     },
     "xuchu": {
       "name": "许褚",
+      "pool": false,
       "rarity": "SR",
       "troop": "infantry",
       "hp": 86,
@@ -1519,6 +1521,7 @@
     },
     "liubei": {
       "name": "刘备",
+      "pool": false,
       "rarity": "SR",
       "troop": "infantry",
       "hp": 90,
@@ -1584,6 +1587,7 @@
     },
     "guanyu": {
       "name": "关羽",
+      "pool": false,
       "rarity": "SR",
       "troop": "infantry",
       "hp": 76,
@@ -1621,6 +1625,7 @@
     },
     "dianwei": {
       "name": "典韦",
+      "pool": false,
       "rarity": "SR",
       "troop": "infantry",
       "hp": 70,
@@ -1748,6 +1753,7 @@
     },
     "luxun": {
       "name": "陆逊",
+      "pool": false,
       "rarity": "SR",
       "troop": "strategist",
       "hp": 88,
@@ -1783,6 +1789,7 @@
     },
     "huatuo": {
       "name": "华佗·神医",
+      "pool": false,
       "rarity": "SR",
       "troop": "logistics",
       "hp": 94,
@@ -1966,6 +1973,7 @@
     },
     "yanzhihu": {
       "name": "王悦·压寨夫人",
+      "pool": false,
       "rarity": "R",
       "troop": "bandit",
       "hp": 55,
@@ -3265,6 +3273,7 @@
     },
     "caocao": {
       "name": "曹操",
+      "pool": false,
       "rarity": "SR",
       "troop": "strategist",
       "hp": 90,
@@ -3276,6 +3285,7 @@
     },
     "xiahouyuan": {
       "name": "夏侯渊",
+      "pool": false,
       "rarity": "SR",
       "troop": "archer",
       "hp": 64,
@@ -4477,6 +4487,7 @@
     },
     "mateng": {
       "name": "马腾",
+      "pool": false,
       "rarity": "SR",
       "troop": "cavalry",
       "hp": 72,
@@ -4506,6 +4517,7 @@
     },
     "huangxu": {
       "name": "黄叙·天才射手",
+      "pool": false,
       "rarity": "SR",
       "troop": "archer",
       "hp": 70,

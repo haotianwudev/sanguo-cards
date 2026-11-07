@@ -830,12 +830,12 @@ func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
 		check_eq(s.square, pair[1])
 
 
-func test_north_chapter6_sparring_generals_drop_their_own_cards_and_stay_public() -> void:
-	## 比武 典韦 / 许褚 / 张飞 / 关羽 drop their own card (card_public): it doesn't make them chapter-only, both routes still recruit them
+func test_north_chapter6_sparring_generals_drop_their_own_cards_and_stay_out_of_the_public_pool() -> void:
+	## 比武 典韦 / 许褚 / 张飞 / 关羽 drop their own card; they are fought in the story too, so (user rule 2026-11-07) they are not in the public pool
 	var db := GameData.get_db()
 	for pair in [["hnn_bw_dw", "dianwei"], ["hnn_bw_xc", "xuchu"], ["hnn_bw_zf", "zhangfei"], ["hnn_bw_gy", "guanyu"]]:
 		check_eq(db.enemies[db.scenarios[pair[0]]["enemy"]]["card"], pair[1], "%s drops %s" % pair)
-		check(db.is_public(pair[1]), "%s stays in the public pool" % pair[1])
+		check(not db.is_public(pair[1]), "%s is not in the public pool" % pair[1])
 
 
 func test_south_chapter6_burning_the_clans_deeds_ends_in_ending_ten() -> void:
