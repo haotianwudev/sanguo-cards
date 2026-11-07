@@ -773,7 +773,9 @@ func test_an_enemy_holds_its_charge_while_the_player_can_interrupt() -> void:
 	for _i in 400:
 		if b._pick_move([]).has("charge"):
 			with_lord += 1
-	b.leaders[0]["uses_left"]["rengdao"] = 0  # the lord's 扔刀 is spent
+	for u in b.leaders:  # every limited 打断 is spent: the lord's 扔刀, 马超's 西凉铁骑
+		for sid in u["uses_left"]:
+			u["uses_left"][sid] = 0
 	var spent := 0
 	for _i in 400:
 		if b._pick_move([]).has("charge"):
