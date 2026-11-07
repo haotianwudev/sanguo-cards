@@ -1438,33 +1438,34 @@
 - [x] 2026-10-31 cg `n11_jianlou` ← n11_jianlou.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-31 cg `n11_g_xiaoxi` ← n11_g_xiaoxi.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-10-31 cg `n11_guanzhang` ← n11_guanzhang.jpg 裁 2528×1696→2528×1422 · ok
-- [ ] 2026-10-31 map `prologue` ← prologue_strip.jpg · ok
-- [ ] 2026-10-31 map `taodong` ← taodong_strip.jpg · ⚠ 分辨率偏低 8192×512
-- [ ] 2026-10-31 map `yuxi` ← yuxi_strip.jpg · ok
-- [ ] 2026-10-31 map `dongui` ← dongui_strip.jpg · 强制：太小 8192×413（至少高 480）
-- [ ] 2026-10-31 map `jingxiang` ← jingxiang_strip.jpg · 强制：太小 8192×447（至少高 480）
-- [ ] 2026-10-31 map `dongui` ← dongui_strip.jpg · ok
-- [ ] 2026-10-31 map `jingxiang` ← jingxiang_strip.jpg · 强制：太小 8192×447（至少高 480）
-- [ ] 2026-10-31 map `huainan_n` ← huainan_n_strip.jpg · 强制：太小 8192×447（至少高 480）
-- [ ] 2026-11-02 battle `n5_caobao_ren` ← n5_caobao_ren.jpg · ok
-- [ ] 2026-11-02 battle `n5_caobao_jiulou` ← n5_caobao_jiulou.jpg · ok
-- [ ] 2026-11-02 battle `n5_caobao` ← n5_caobao.jpg · ok
-- [ ] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok
-- [ ] 2026-11-02 battle `m11_zhangliao` ← m11_zhangliao.jpg · ok
-- [ ] 2026-11-02 battle `s12c_zhangliao` ← s12c_zhangliao.jpg · ok
-- [ ] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok
-- [ ] 2026-11-03 cg `n6_beimen` ← n6_beimen2.jpg · ok
-- [ ] 2026-11-03 cg `n6_zhujiu` ← n6_zhujiu.jpg · ok
-- [ ] 2026-11-03 battle `hnn_bw_zf` ← hnn_bw_zf.jpg · ok
-- [ ] 2026-11-03 battle `n5_changxi` ← n5_changxi.jpg · ok
-- [ ] 2026-11-03 cg `n7_xingyuan` ← n7_xingyuan.jpg · ok
-- [ ] 2026-11-03 cg `n7_jiufang` ← n7_jiufang.jpg · ok
-- [ ] 2026-11-03 cg `n7_start` ← n7_start.jpg · ok
-- [ ] 2026-11-03 cg `n7_beishang` ← n7_beishang.jpg · ok
-- [ ] 2026-11-03 cg `n7_rucheng` ← n7_rucheng.jpg · ok
-- [ ] 2026-11-03 cg `n7_b_anmin` ← n7_b_anmin.jpg · ok
-- [ ] 2026-11-03 cg `n7_b_huijiu` ← n7_b_huijiu.jpg · ok
-- [ ] 2026-11-03 cg `n7_g_dalao` ← n7_g_dalao.jpg · ok
-- [ ] 2026-11-03 battle `n7_guotu` ← n7_guotu.jpg · ok
-- [ ] 2026-11-03 map `yecheng` ← yecheng_strip.jpg · ok
-- [ ] 2026-11-03 cg `n7_kujing` ← n7_kujing.jpg · ok
+- [x] 2026-10-31 map `prologue` ← prologue_strip.jpg · ok
+- [x] 2026-10-31 map `taodong` ← taodong_strip.jpg · ⚠ 分辨率偏低 8192×512
+- [x] 2026-10-31 map `yuxi` ← yuxi_strip.jpg · ok
+- [x] 2026-10-31 map `dongui` ← dongui_strip.jpg · 强制：太小 8192×413（至少高 480）
+- [x] 2026-10-31 map `jingxiang` ← jingxiang_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [x] 2026-10-31 map `dongui` ← dongui_strip.jpg · ok
+- [x] 2026-10-31 map `jingxiang` ← jingxiang_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [x] 2026-10-31 map `huainan_n` ← huainan_n_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [x] 2026-11-02 battle `n5_caobao_ren` ← n5_caobao_ren.jpg · ok
+- [x] 2026-11-02 battle `n5_caobao_jiulou` ← n5_caobao_jiulou.jpg · ok
+- [x] 2026-11-02 battle `n5_caobao` ← n5_caobao.jpg · ok
+- [x] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok
+- [x] 2026-11-02 battle `m11_zhangliao` ← m11_zhangliao.jpg · ok
+- [x] 2026-11-02 battle `s12c_zhangliao` ← s12c_zhangliao.jpg · ok
+- [x] 2026-11-02 battle `n5_zhangliao` ← n5_zhangliao.jpg · ok
+- [x] 2026-11-03 cg `n6_beimen` ← n6_beimen2.jpg · ok
+- [x] 2026-11-03 cg `n6_zhujiu` ← n6_zhujiu.jpg · ok
+- [x] 2026-11-03 battle `hnn_bw_zf` ← hnn_bw_zf.jpg · ok
+- [x] 2026-11-03 battle `n5_changxi` ← n5_changxi.jpg · ok
+- [x] 2026-11-03 cg `n7_xingyuan` ← n7_xingyuan.jpg · ok
+- [x] 2026-11-03 cg `n7_jiufang` ← n7_jiufang.jpg · ok
+- [x] 2026-11-03 cg `n7_start` ← n7_start.jpg · ok
+- [x] 2026-11-03 cg `n7_beishang` ← n7_beishang.jpg · ok
+- [x] 2026-11-03 cg `n7_rucheng` ← n7_rucheng.jpg · ok
+- [x] 2026-11-03 cg `n7_b_anmin` ← n7_b_anmin.jpg · ok
+- [x] 2026-11-03 cg `n7_b_huijiu` ← n7_b_huijiu.jpg · ok
+- [x] 2026-11-03 cg `n7_g_dalao` ← n7_g_dalao.jpg · ok
+- [x] 2026-11-03 battle `n7_guotu` ← n7_guotu.jpg · ok
+- [x] 2026-11-03 map `yecheng` ← yecheng_strip.jpg · ok
+- [x] 2026-11-03 cg `n7_kujing` ← n7_kujing.jpg · ok
+- [x] 2026-11-07 cg `ss_xiamen_shouji` ← ss_xiamen_shouji.jpg · ok

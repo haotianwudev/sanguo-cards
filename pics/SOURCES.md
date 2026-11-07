@@ -458,9 +458,9 @@
 | `lord_south_river` | source/generals/lord_south_river.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_q` | source/generals/lord_south_q.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_north_q` | source/generals/lord_north_q.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `map:prologue` | source/map/bg_prologue.jpg | 用户提供 | 用户提供 | — |
+| `map:prologue` | source/map/prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/prologue_north.jpg | 用户提供 | 用户提供 | — |
-| `map:taodong` | source/map/bg_taodong.jpg | 用户提供 | 用户提供 | — |
+| `map:taodong` | source/map/taodong.jpg | 用户提供 | 用户提供 | — |
 | `map:changan` | source/map/changan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:luoyang_n` | source/map/luoyang_n.jpg | 用户提供 | 用户提供 | — |
 | `map:beihai` | source/map/beihai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -758,6 +758,13 @@
 | `battle:jd_shuifei` | source/battles/jd_shuifei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:hnn_bw_dw` | source/battles/hnn_bw_dw.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:hnn_bw_xc` | source/battles/hnn_bw_xc.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:n5_caobao_ren` | source/battles/n5_caobao_ren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:n5_caobao_jiulou` | source/battles/n5_caobao_jiulou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:n5_caobao` | source/battles/n5_caobao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:n5_zhangliao` | source/battles/n5_zhangliao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:hnn_bw_zf` | source/battles/hnn_bw_zf.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:n5_changxi` | source/battles/n5_changxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:n7_guotu` | source/battles/n7_guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -1363,3 +1370,11 @@
 | `cg:n4_mifang` | source/cg/n4_mifang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n5_meet` | source/cg/n5_meet.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n6_xueye` | source/cg/n6_xueye.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_jiufang` | source/cg/n7_jiufang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_start` | source/cg/n7_start.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_beishang` | source/cg/n7_beishang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_rucheng` | source/cg/n7_rucheng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_b_anmin` | source/cg/n7_b_anmin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_b_huijiu` | source/cg/n7_b_huijiu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:n7_g_dalao` | source/cg/n7_g_dalao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_xiamen_shouji` | source/cg/ss_xiamen_shouji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
