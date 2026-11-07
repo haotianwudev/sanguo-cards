@@ -22,70 +22,20 @@ static var _views := {}
 ## Damage and cumulative skill costs carry from battle to battle within a quest; they reset at a recover
 ## square or when the quest ends. Losing restarts the quest; choices already made are remembered.
 
-const TYPES := ["event", "choose", "battle", "treasure", "recover", "recruit", "mystery"]
-
 
 static func validate(db: GameData) -> void:
+	## references and enums are data/schema.json; here only what a path can't say
 	for q in db.quests:
-		assert(q["squares"].has(q["start"]), "quest %s: unknown start" % q["id"])
 		for s in q["squares"].values():
-			var where: String = "quest %s square %s" % [q["id"], s["id"]]
-			assert(s["type"] in TYPES, where + ": unknown type " + s["type"])
-			var targets: Array = s["next"].duplicate()
-			for o in s["choose"]:
-				if o["locked"]:
-					continue
-				targets.append(o["goto"])
-				assert(o["card"] == "" or db.cards.has(o["card"]), where + ": unknown card")
+			var targets: Array = s["next"] + s["choose"].filter(func(o): return not o["locked"]).map(func(o): return o["goto"])
 			if s["lose_goto"] != "":
 				targets.append(s["lose_goto"])
-			for t in targets:
-				assert(q["squares"].has(t), where + ": unknown next " + t)
-				assert(q["squares"][t]["x"] > s["x"], where + ": next square must be further right")
-			if s["type"] == "battle":
-				assert(db.scenarios.has(s["battle"]), where + ": unknown battle")
-			if s["event"] != "":
-				assert(db.events.has(s["event"]), where + ": unknown event " + s["event"])
-			for c in s["cards"]:
-				assert(db.cards.has(c), where + ": unknown card " + c)
-			for r in s["relics"]:
-				assert(db.relics.has(r), where + ": unknown relic " + r)
-		for eid in q["event_pool"]:
-			assert(db.events.has(eid), "quest %s: unknown event %s" % [q["id"], eid])
-		var scopes: Array = [q["event_scope"], q["id"]] + q["pool_overrides"].map(func(o): return o["event_scope"]).filter(func(s): return s != "")
+			for tid in targets:
+				db.fail_if(q["squares"].has(tid) and q["squares"][tid]["x"] <= s["x"], "quest %s square %s: next square %s must be further right" % [q["id"], s["id"], tid])
+		var scopes: Array = [q["event_scope"], q["id"]] + q["pool_overrides"].map(func(o): return o["event_scope"]).filter(func(sc): return sc != "")
 		if q["squares"].values().any(func(s): return s["type"] == "mystery" and s["event"] == ""):
 			var covered: bool = not q["event_pool"].is_empty() or db.events.values().any(func(e): return e["scope"] in scopes)
-			assert(covered, "quest %s: ？ squares need an event_pool/event_scope" % q["id"])
-		for o in q["pool_overrides"]:
-			for c in o["recruit_pool"]:
-				assert(db.cards.has(c), "quest %s: unknown card %s in a pool override" % [q["id"], c])
-			assert(o["soldier_scope"] == "" or o["soldier_scope"] in ["south", "north"], "quest %s: unknown soldier_scope in a pool override" % q["id"])
-		assert(q["soldier_scope"] == "" or q["soldier_scope"] in ["south", "north"], "quest %s: unknown soldier_scope" % q["id"])
-	var quest_ids: Array = db.quests.map(func(q): return q["id"])
-	for eid in db.events:
-		var scope: String = db.events[eid]["scope"]
-		assert(scope in ["universal", "south", "north"] or scope in quest_ids, "event %s: unknown scope" % eid)
-	for cid in db.cards:
-		var cscope: String = db.cards[cid].get("scope", "")
-		assert(cscope in ["", "south", "north"], "card %s: unknown scope" % cid)
-	for ev in db.events.values():
-		for o in ev["options"]:
-			_validate_effects(db, o["effects"] + o["win"], "event " + ev["id"])
-
-
-static func _validate_effects(db: GameData, effects: Array, where: String) -> void:
-	for e in effects:
-		if e.has("battle"):
-			assert(db.scenarios.has(e["battle"]), where + ": unknown battle " + e["battle"])
-		if e.has("card"):
-			assert(db.cards.has(e["card"]), where + ": unknown card " + e["card"])
-		if e.has("offer"):
-			for c in e["offer"].get("from", []):
-				assert(db.cards.has(c), where + ": unknown card " + c)
-		if e.has("relic") and e["relic"] is String:
-			assert(db.relics.has(e["relic"]), where + ": unknown relic " + e["relic"])
-		if e.has("chance"):
-			_validate_effects(db, e.get("then", []) + e.get("else", []), where)
+			db.fail_if(not covered, "quest %s: ？ squares need an event_pool/event_scope" % q["id"])
 
 
 static func current_quest(save: SaveData) -> Variant:

@@ -36,6 +36,7 @@ var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 onc
 var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the chapter-end page's picture (its card comes from a ？小故事)
 var side_cost := 10  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
 var ui: Dictionary
+var errors: Array = []  # every data/schema.json failure (and the few checks code makes), all at once — test_data_has_no_schema_errors prints them
 
 
 static func get_db() -> GameData:
@@ -153,18 +154,17 @@ func _load(dir: String) -> void:
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)), "armor": str(e.get("armor", "")), "armor_own": e.has("armor"),
 			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "drop": e.get("drop", e.get("card", "")), "card_public": e.get("card_public", false)}
 		if e.has("armor"):  # 护甲类型 (battle.armors): its resists replace the enemy's own
-			assert(battle.get("armors", {}).has(e["armor"]), "enemy %s: unknown armor %s" % [eid, e["armor"]])
-			var arm: Dictionary = battle["armors"][e["armor"]]
-			enemies[eid]["phys_resist"] = float(arm["phys"])
-			enemies[eid]["magic_resist"] = float(arm["magic"])
+			var arm: Dictionary = battle.get("armors", {}).get(e["armor"], {})  # an unknown id is a schema.json error
+			enemies[eid]["phys_resist"] = float(arm.get("phys", 0.0))
+			enemies[eid]["magic_resist"] = float(arm.get("magic", 0.0))
 		else:  # no armor of its own: its card's troop sets one (battle.troop_armor)
 			var troop := str(cards.get(str(e.get("card", "")), {}).get("troop", ""))
 			var ta := str(battle.get("troop_armor", {}).get(troop, ""))
 			if ta != "":
-				assert(battle["armors"].has(ta), "troop_armor %s: unknown armor %s" % [troop, ta])
+				var arm: Dictionary = battle.get("armors", {}).get(ta, {})
 				enemies[eid]["armor"] = ta
-				enemies[eid]["phys_resist"] = float(battle["armors"][ta]["phys"])
-				enemies[eid]["magic_resist"] = float(battle["armors"][ta]["magic"])
+				enemies[eid]["phys_resist"] = float(arm.get("phys", 0.0))
+				enemies[eid]["magic_resist"] = float(arm.get("magic", 0.0))
 	for rid in raw.get("relics", {}):
 		var r: Dictionary = raw["relics"][rid]
 		relics[rid] = {"id": rid, "name": r["name"], "icon": r.get("icon", r["name"].left(1)),
@@ -229,30 +229,18 @@ func _load(dir: String) -> void:
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")
+	var ss: Dictionary = {}
 	if FileAccess.file_exists(dir + "/side_stories.json"):
-		var ss: Dictionary = read_json(dir + "/side_stories.json")
+		ss = read_json(dir + "/side_stories.json")
 		side_stories = ss.get("after", {})
 		side_cost = int(ss.get("cost", 10))
 		chapter_pages = ss.get("chapters", {})
-		for qid in chapter_pages:
-			for pg in chapter_pages[qid]:
-				assert(pg.get("card", "") == "" or cards.has(pg["card"]), "chapter page %s: unknown card %s" % [qid, pg.get("card")])
-		var ids := {}
-		var qids: Array = quests.map(func(q): return q["id"])
-		for qid in side_stories:
-			assert(qids.has(qid), "side_stories: unknown quest %s" % qid)
-			for st in side_stories[qid]:
-				assert(not ids.has(st["id"]), "side_stories: id %s used twice" % st["id"])
-				ids[st["id"]] = true
-				assert(not st.get("text", []).is_empty(), "side story %s: no text" % st["id"])
-				var rw: Dictionary = st.get("reward", {})
-				assert(not rw.is_empty(), "side story %s: no reward" % st["id"])
-				assert(not rw.has("merit"), "side story %s: rewards are cards / 点化 / 宝物, never 战功 (user rule)" % st["id"])
-				for cid in rw.get("cards", []) + rw.get("upgrade", {}).keys():
-					assert(cards.has(cid), "side story %s: unknown card %s" % [st["id"], cid])
-					assert(not cid.begins_with("sunjian"), "side story %s: never hands out a 孙坚 card (user rule)" % st["id"])
-				for rid in rw.get("relics", []):
-					assert(relics.has(rid), "side story %s: unknown relic %s" % [st["id"], rid])
+
+	var root: Dictionary = raw.duplicate()
+	root.merge({"story": story, "endings": en, "ui": ui, "side_stories": ss}, true)
+	errors.append_array(Schema.check(root, read_json(dir + "/schema.json")))
+	for e in errors:
+		push_error("data: " + e)
 
 
 func _index_card_chapters() -> void:
@@ -317,46 +305,20 @@ static func _choose_option(o: Dictionary) -> Dictionary:
 
 
 func _validate() -> void:
-	for en in enemies.values():
-		assert(en["drop"] == "" or cards.has(en["drop"]), "enemy %s: unknown drop %s" % [en["id"], en["drop"]])
-	for sk in skills.values():
-		for e in sk["effects"]:
-			assert(e["type"] in ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot", "shred", "interrupt"],
-				"skill %s: unknown effect %s" % [sk["id"], e["type"]])
-			for cond in e.get("vs", {}):
-				assert(cond in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance", "marking", "shielded", "formation"], "skill %s: unknown vs %s" % [sk["id"], cond])
-			assert(not e.has("crit_if") or e["crit_if"] in ["broken", "burning", "poisoned", "stunned", "charging", "guarded", "stance", "marking", "shielded", "formation"], "skill %s: unknown crit_if" % sk["id"])
+	## references and enums are data/schema.json; here only the few checks a path can't say
 	for c in cards.values():
-		assert(troops.has(c["troop"]), "card %s: bad troop" % c["id"])
-		assert(c["troop"] != "lord" or c["soldier"], "card %s: only soldier cards can be of the lord's own troop (亲卫 / 侍从)" % c["id"])
-		for s in c["skills"]:
-			assert(skills.has(s), "card %s: unknown skill %s" % [c["id"], s])
-	for k in kits.values():
-		assert(not k["normal"].is_empty() and not k["special"].is_empty(), "kit %s: needs normal and special skills" % k["id"])
-		for s in k["normal"] + k["special"]:
-			assert(skills.has(s), "kit %s: unknown skill %s" % [k["id"], s])
-	for tid in troops:
-		assert(kits.has(kit_default.get(tid, "")), "troop %s: no default kit" % tid)
-	for c in cards.values():
-		assert(c["kit"] == "" or kits.has(c["kit"]), "card %s: unknown kit %s" % [c["id"], c["kit"]])
-	for sc in scenarios.values():
-		assert(enemies.has(sc["enemy"]), "scenario %s: unknown enemy" % sc["id"])
+		fail_if(c["troop"] == "lord" and not c["soldier"], "card %s: only soldier cards can be of the lord's own troop (亲卫 / 侍从)" % c["id"])
 	for e in enemies.values():
-		assert(e["card"] == "" or cards.has(e["card"]), "enemy %s: unknown card %s" % [e["id"], e["card"]])
-		var names: Array = e["moves"].map(func(m): return m["name"])
 		for m in e["moves"]:
-			assert(not m.has("charge") or names.has(m["charge"]), "enemy %s: charges an unknown move" % e["id"])
-			assert(not m.has("chain") or names.has(m["chain"]), "enemy %s: chains an unknown move" % e["id"])
-			assert(not m.has("mark") or names.has(m["mark"]), "enemy %s: marks with an unknown move" % e["id"])
-			assert(not m.has("seal") or m["seal"] in ["ultimate", "magic", "attack"], "enemy %s: unknown seal %s" % [e["id"], m.get("seal")])
-			assert(not m.has("formation") or str(m["formation"].get("vs", "")) in ["attack", "magic"], "enemy %s: a formation needs vs attack / magic" % e["id"])
-			assert(not m.has("shield") or float(m["shield"].get("hp_pct", 0.0)) > 0.0, "enemy %s: a shield needs hp_pct" % e["id"])
-			assert(not m.has("stance") or float(m["stance"].get("power", 0.0)) > 0.0, "enemy %s: a stance needs power" % e["id"])
-			assert(not m.has("summon") or (m["summon"].has("name") and float(m["summon"].get("hp_pct", 0.0)) > 0.0), "enemy %s: a summon needs name and hp_pct" % e["id"])
 			var pref: Variant = m.get("prefer", [])
 			for cond in (pref if pref is Array else [pref]):
-				assert(cond in Battle.PREFERS, "enemy %s: unknown prefer %s" % [e["id"], cond])
+				fail_if(not cond in Battle.PREFERS, "enemy %s: unknown prefer %s" % [e["id"], cond])
 
+
+func fail_if(bad: bool, msg: String) -> void:
+	## a data check made in code: collected with the schema's, never stops the load
+	if bad:
+		errors.append(msg)
 
 # ---- cards -------------------------------------------------------------------
 

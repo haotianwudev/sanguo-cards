@@ -2452,3 +2452,26 @@ func test_a_cut_off_save_falls_back_to_its_tmp() -> void:
 	var back := SaveData.read(path)
 	DirAccess.remove_absolute(path + ".tmp")
 	check(back != null and back.merit == 7, "the .tmp is read when the save itself is missing")
+
+
+func test_data_has_no_schema_errors() -> void:
+	## data/schema.json: every reference and enum in the game data, all failures listed at once
+	var errs: Array = GameData.get_db().errors
+	for e in errs.slice(0, 40):
+		print("  data: ", e)
+	check(errs.is_empty(), "%d data error(s), see above" % errs.size())
+
+
+func test_the_schema_checker_catches_each_kind_of_mistake() -> void:
+	var root := {"cards": {"a": {"troop": "x", "skills": ["s1", "nope"]}}, "skills": {"s1": {}}, "troops": {"x": {}},
+		"list": [{"id": 1}, {"id": 1}], "story": {"r": {"reward": {"merit": 3}}}}
+	var errs := Schema.check(root, {"rules": [
+		{"refs": "cards.*.skills.*", "to": "skills.@keys"},
+		{"enum": "cards.*.troop", "values": ["y"]},
+		{"unique": "list.*.id"},
+		{"forbid": "story.*.reward.merit"},
+		{"each": "cards.*", "required": "name"},
+		{"refs": "cards.*.typo", "to": "skills.@keys"},
+		{"refs": "cards.*.typo2", "to": "skills.@keys", "optional": true}]})
+	check_eq(errs.size(), 6, "one error per rule but the optional one: %s" % str(errs))
+	check(str(errs[0]).contains("cards.a.skills[1] = nope"), "the error says where: %s" % str(errs[0]))
