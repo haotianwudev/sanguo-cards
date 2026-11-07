@@ -1228,6 +1228,13 @@ func demo(name: String) -> void:
 				elif OS.get_cmdline_user_args().has("--markon"):
 					await get_tree().create_timer(0.3).timeout
 					b._play([{"t": "mark_on", "unit": 1, "move": "画戟斩将"}])
+			for a in OS.get_cmdline_user_args():  # --tip=intent|guard|<n>: the panel a tap on the 意图 / 前卫 / the n-th status badge opens
+				if a.begins_with("--tip="):
+					await get_tree().create_timer(0.4).timeout
+					var which := a.trim_prefix("--tip=")
+					var tn: Control = b._intent_label if which == "intent" else (b._guard_row if which == "guard" else b._badges.filter(func(n): return is_instance_valid(n) and n.has_meta("tip"))[int(which)])
+					var tp: Array = tn.get_meta("tip")
+					b._show_info(str(tp[0]), str(tp[1]))
 			if name == "fight" and OS.get_cmdline_user_args().has("--break"):  # v3 破招: the lord's 扔刀 on a wound-up enemy
 				await get_tree().create_timer(0.5).timeout
 				b.b.enemy["charging"] = "天下无双"

@@ -440,11 +440,14 @@ func _refresh() -> void:
 	var it := b.intent_text() if b.result == "" else ""
 	_intent_label.text = ("意图：" + it) if it != "" else ""
 	_intent_label.visible = it != ""
+	if it != "":
+		_tip_on(_intent_label, "敌人意图", _intent_tip())
 	_guard_row.visible = not e["guard"].is_empty()
 	if _guard_row.visible:
 		_guard_label.text = "前卫：%s %d/%d" % [e["guard"]["name"], e["guard"]["hp"], e["guard"]["max_hp"]]
 		_guard_bar.max_value = e["guard"]["max_hp"]
 		_guard_bar.value = e["guard"]["hp"]
+		_tip_on(_guard_row, "前卫：%s" % e["guard"]["name"], "%d/%d，普攻 = 首领攻击 ×%s\n%s" % [e["guard"]["hp"], e["guard"]["max_hp"], str(e["guard"]["strike"]), _status_help("status", "guard")])
 	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
 		ch.queue_free()
@@ -552,6 +555,7 @@ func _sync_skill_bars() -> void:
 				_bar_open = -1
 				_on_skill(i, sid))
 			_hold_detail(btn, sk)
+			btn.tooltip_text = "%s　AP%d\n%s" % [sk["name"], b.cost(u, sk), Kit.skill_desc(sk)]  # mouse hover shows what it does; on a phone hold it (_hold_detail)
 			bar.add_child(btn)
 		if not b.swap_options(i).is_empty():  # 换人 is the last button of the column (nearest the card), shown or summoned
 			var sw := Button.new()
@@ -611,6 +615,12 @@ func _hold_detail(btn: Button, sk: Dictionary) -> void:
 
 
 func _show_skill_detail(sk: Dictionary) -> void:
+	var tag := Kit.skill_tag(sk)
+	_show_info("%s　AP%d%s" % [sk["name"], int(sk["cost"]), ("　［%s］" % tag) if tag != "" else ""], Kit.skill_desc(sk))
+
+
+func _show_info(title: String, body: String) -> void:
+	## a dimmed overlay with a gold-edged panel: a skill's description, or what a status / the 意图 means; a fresh touch closes it
 	_close_skill_popup()
 	var overlay := Control.new()
 	overlay.z_index = 75  # above the skill strip (_skill_layer, 70): at 65 its buttons were drawn over this panel
@@ -631,9 +641,8 @@ func _show_skill_detail(sk: Dictionary) -> void:
 	col.add_theme_constant_override("separation", 8)
 	col.custom_minimum_size = Vector2(460, 0)
 	panel.add_child(col)
-	var tag := Kit.skill_tag(sk)
-	col.add_child(Kit.label("%s　AP%d%s" % [sk["name"], int(sk["cost"]), ("　［%s］" % tag) if tag != "" else ""], Kit.FONT_BODY + 2, "gold"))
-	var d := Kit.label(Kit.skill_desc(sk), Kit.FONT_BODY)
+	col.add_child(Kit.label(title, Kit.FONT_BODY + 2, "gold"))
+	var d := Kit.label(body, Kit.FONT_BODY)
 	d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	d.custom_minimum_size = Vector2(460, 0)
 	col.add_child(d)
@@ -777,7 +786,7 @@ func _armor_label(e: Dictionary) -> Label:
 		return null
 	var l := Kit.label(("%s：" % arm["name"] if not arm.is_empty() else "") + res, Kit.FONT_SMALL, "amber")
 	if not arm.is_empty():
-		l.tooltip_text = arm["hint"]
+		_tip_on(l, str(arm["name"]), str(arm["hint"]))
 	return l
 
 
@@ -902,44 +911,45 @@ func _sync_badges() -> void:
 	var e := b.enemy
 	var row: Array = []
 	if e["burn_turns"] > 0:
-		row.append(BattleFx.badge("灼", Color(1.0, 0.5, 0.15), e["burn_turns"]))
+		row.append(_tipped(BattleFx.badge("灼", Color(1.0, 0.5, 0.15), e["burn_turns"]), "灼烧", ("现有体力 -%d%%/回合" % int(round(e["burn_pct"] * 100)) if e["burn_pct"] > 0.0 else "-%d/回合" % e["burn_dmg"]) + "，剩 %d 回合" % e["burn_turns"], "burn"))
 	if e["poison_turns"] > 0:
-		row.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), e["poison"]))
+		row.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), e["poison"]), "中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [e["poison"], int(round(e["poison_pct"] * e["poison"] * 100)), e["poison_turns"]], "poison"))
 	if e["break_turns"] > 0:
-		row.append(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]))
+		row.append(_tipped(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]), "破防", "受到伤害 +%d%%，剩 %d 回合" % [int(round(e["break_amount"] * 100)), e["break_turns"]], "break"))
 	if e["resist_turns"] > 0:
-		row.append(BattleFx.badge("抗", Color(0.45, 0.8, 0.95), e["resist_turns"]))
+		row.append(_tipped(BattleFx.badge("抗", Color(0.45, 0.8, 0.95), e["resist_turns"]), "降抗", "双抗 -%d%%，剩 %d 回合" % [int(round(e["resist_down"] * 100)), e["resist_turns"]], "resist"))
 	if e["stunned"]:
-		row.append(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)))
+		row.append(_tipped(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)), "眩晕", "", "stun"))
 	if e["at"] > e["data"]["at"] * 1.01:
-		row.append(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)))
+		row.append(_tipped(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)), "狂暴", "攻击 %d（原本 %d）" % [int(round(e["at"])), int(round(e["data"]["at"]))], "rage"))
 	if e["charging"] != "":
-		row.append(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false))
+		row.append(_tipped(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false), "蓄力", "下回合【%s】" % e["charging"], "charge"))
 	if not e["stance"].is_empty():
-		row.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))))
+		row.append(_tipped(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))), "反击架势", "【%s】" % e["stance"]["name"], "stance"))
 	if not e["shield"].is_empty():
-		row.append(BattleFx.badge("盾", Color(0.55, 0.62, 0.72)))
+		row.append(_tipped(BattleFx.badge("盾", Color(0.55, 0.62, 0.72)), "护盾", "%s %d/%d" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]], "shield"))
 	if not e["form"].is_empty():
-		row.append(BattleFx.badge("阵", Color(0.3, 0.55, 0.95) if e["form"]["vs"] == "magic" else Color(0.85, 0.55, 0.2), int(e["form"]["turns"])))
+		row.append(_tipped(BattleFx.badge("阵", Color(0.3, 0.55, 0.95) if e["form"]["vs"] == "magic" else Color(0.85, 0.55, 0.2), int(e["form"]["turns"])), "阵型",
+			"%s：%s伤害 -%d%%，剩 %d 回合" % [e["form"]["name"], "物理" if e["form"]["vs"] == "attack" else "法术", int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]], "form"))
 	if not e["mark"].is_empty():
-		row.append(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false))
+		row.append(_tipped(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false), "点名", "%s，下回合【%s】" % [e["mark"]["who"], e["mark"]["move"]], "mark"))
 	var at := _enemy_hp.global_position - global_position + Vector2(_enemy_hp.size.x - 40.0, -40.0)
 	for k in row.size():
 		row[k].position = at - Vector2(k * 38.0, 0)
 		_badge_add(row[k])
 	var party: Array = []
 	if b.buff["layers"] > 0:
-		party.append(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]))
+		party.append(_tipped(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]), "战意", "×%d 层：攻击 +%d%%，受伤 -%d%%，剩 %d 回合" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), int(round(b.buff["def"] * 100)), b.buff["turns"]], "buff"))
 	if b.party_burn["turns"] > 0:
-		party.append(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]))
+		party.append(_tipped(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]), "我军灼烧", "-%d/回合，剩 %d 回合" % [b.party_burn["dmg"], b.party_burn["turns"]], "party_burn"))
 	if b.party_poison["turns"] > 0:
-		party.append(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]))
+		party.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]), "我军中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [b.party_poison["layers"], int(round(b.party_poison["pct"] * b.party_poison["layers"] * 100)), b.party_poison["turns"]], "party_poison"))
 	if b.ap_drain > 0:
-		party.append(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain))
+		party.append(_tipped(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain), "夺气", "下回合 AP -%d" % b.ap_drain, "ap_drain"))
 	if not b.seal.is_empty():
-		party.append(BattleFx.badge("封", Color(0.45, 0.3, 0.6), int(b.seal["turns"])))
+		party.append(_tipped(BattleFx.badge("封", Color(0.45, 0.3, 0.6), int(b.seal["turns"])), "封技", "我军%s被封，剩 %d 回合" % [Battle.SEAL_NAMES.get(b.seal["kind"], "技能"), b.seal["turns"]], "seal"))
 	if b.loot_chest > 0.0:  # 劫掠: the chance of a second chest so far (%)
-		party.append(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(b.loot_chest * 100))))
+		party.append(_tipped(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(b.loot_chest * 100))), "劫掠", "现在 %d%%" % int(round(b.loot_chest * 100)), "loot"))
 	var pr := _party_rect()
 	for k in party.size():
 		party[k].position = Vector2(pr.end.x - 40.0 - k * 38.0, pr.position.y - 20.0)
@@ -949,22 +959,69 @@ func _sync_badges() -> void:
 		var rr := _card_rect(i)
 		var mine: Array = []
 		if u["confused"]:
-			mine.append(BattleFx.badge("混", Color(0.62, 0.42, 0.95)))
+			mine.append(_tipped(BattleFx.badge("混", Color(0.62, 0.42, 0.95)), "混乱", "", "confused"))
 		elif u["confuse_next"]:
-			mine.append(BattleFx.badge("混", Color(0.62, 0.42, 0.95), -1, true))
+			mine.append(_tipped(BattleFx.badge("混", Color(0.62, 0.42, 0.95), -1, true), "将要混乱", "", "confuse_next"))
 		if u["boosted"]:
-			mine.append(BattleFx.badge("强", Color(1.0, 0.5, 0.15)))
+			mine.append(_tipped(BattleFx.badge("强", Color(1.0, 0.5, 0.15)), "BOOST", "下次出手 ×%s" % str(GameData.get_db().battle["boost_mult"]), "boosted"))
 			var rib := _boost_ribbon(rr)
 			_badge_add(rib)
 		if b.counters.any(func(c): return int(c.get("unit", -1)) == i):
-			mine.append(BattleFx.badge("反", Color(0.25, 0.78, 0.78)))
+			mine.append(_tipped(BattleFx.badge("反", Color(0.25, 0.78, 0.78)), "反击", "", "counter"))
 		if u.get("slain", false):
-			mine.append(BattleFx.badge("倒", Color(0.45, 0.45, 0.45)))
+			mine.append(_tipped(BattleFx.badge("倒", Color(0.45, 0.45, 0.45)), "被斩", "", "slain"))
 		elif not e["mark"].is_empty() and Battle.swap_key(u["leader"]) == str(e["mark"]["card"]):
-			mine.append(BattleFx.badge("点", Color(0.9, 0.15, 0.15)))
+			mine.append(_tipped(BattleFx.badge("点", Color(0.9, 0.15, 0.15)), "被点名", "下回合【%s】" % e["mark"]["move"], "marked"))
 		for k in mine.size():
 			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
 			_badge_add(mine[k])
+
+
+func _status_help(group: String, key: String) -> String:
+	return str(GameData.get_db().battle.get("status_help", {}).get(group, {}).get(key, ""))
+
+
+func _tipped(n: Control, title: String, line: String, key: String) -> Control:
+	## a status badge that explains itself (user call): hover with the mouse shows a tooltip, a tap opens the same text as a panel
+	var body := "\n".join([line, _status_help("status", key)].filter(func(s): return s != ""))
+	_tip_on(n, title, body)
+	return n
+
+
+func _tip_on(n: Control, title: String, body: String) -> void:
+	n.mouse_filter = Control.MOUSE_FILTER_STOP
+	n.tooltip_text = title + ("\n" + body if body != "" else "")
+	n.set_meta("tip", [title, body])
+	for ch in n.find_children("*", "Control", true, false):  # a bar inside (前卫) must not eat the tap
+		(ch as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if n.has_meta("tip_wired"):  # _refresh re-arms the same label every time
+		return
+	n.set_meta("tip_wired", true)
+	n.gui_input.connect(_on_tip_input.bind(n))
+
+
+func _on_tip_input(ev: InputEvent, n: Control) -> void:
+	if ev is InputEventMouseButton and ev.button_index == MOUSE_BUTTON_LEFT and not ev.pressed and n.has_meta("tip"):
+		var tp: Array = n.get_meta("tip")
+		_show_info(str(tp[0]), str(tp[1]))
+		n.accept_event()
+
+
+func _intent_tip() -> String:
+	## the meaning of each word in the 意图 line (status_help.intent, matched by prefix; a 前卫's 「X·普攻」 by its suffix)
+	var help: Dictionary = GameData.get_db().battle.get("status_help", {}).get("intent", {})
+	var keys: Array = help.keys()
+	keys.sort_custom(func(x, y): return str(x).length() > str(y).length())
+	var lines: Array = []
+	for part in b.intent_text().split(" · "):
+		for word in part.split("+"):
+			for key in keys:
+				if word.begins_with(key) or (key == "普攻" and word.ends_with("·普攻")):
+					var line := "%s：%s" % [word, help[key]]
+					if not lines.has(line):
+						lines.append(line)
+					break
+	return "\n".join(lines)
 
 
 func _badge_add(n: Control) -> void:
