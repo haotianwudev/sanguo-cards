@@ -415,13 +415,13 @@ func _refresh() -> void:
 	if e["charging"] != "":
 		st.append("⚠ 蓄力中：下回合【%s】——打断技能可破" % e["charging"])
 	if not e["stance"].is_empty():
-		st.append("【反】%s：物理攻击会被反击" % e["stance"]["name"])
+		st.append("【反】%s：兵刃攻击会被反击" % e["stance"]["name"])
 	if not e["mark"].is_empty():
 		st.append("⚠ 点名 %s：下回合【%s】——换下他就扑空；不换，他被打倒（本场不能行动）、我军掉体力上限 1/4" % [e["mark"]["who"], e["mark"]["move"]])
 	if not e["shield"].is_empty():
-		st.append("【盾】%s %d/%d：挡物理（弓兵、法术、大招穿透）" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
+		st.append("【盾】%s %d/%d：兵刃全挡（破盾那下也不溢出），谋略越过" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
 	if not e["form"].is_empty():
-		st.append("【阵】%s：%s伤害 -%d%%（%d 回合，眩晕可破）" % [e["form"]["name"], "物理" if e["form"]["vs"] == "attack" else "法术",
+		st.append("【阵】%s：%s伤害 -%d%%（%d 回合，眩晕可破）" % [e["form"]["name"], "兵刃" if e["form"]["vs"] == "attack" else "谋略",
 			int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]])
 	if not b.seal.is_empty():
 		st.append("我军%s被封（%d 回合，解除状态可解）" % [Battle.SEAL_NAMES.get(b.seal["kind"], "技能"), b.seal["turns"]])
@@ -554,8 +554,9 @@ func _sync_skill_bars() -> void:
 				_close_skill_popup()
 				_bar_open = -1
 				_on_skill(i, sid))
-			_hold_detail(btn, sk)
-			btn.tooltip_text = "%s　AP%d\n%s" % [sk["name"], b.cost(u, sk), Kit.skill_desc(sk)]  # mouse hover shows what it does; on a phone hold it (_hold_detail)
+			var split_note := _split_note(u, sk)
+			_hold_detail(btn, sk, split_note)
+			btn.tooltip_text = "%s　AP%d\n%s%s" % [sk["name"], b.cost(u, sk), Kit.skill_desc(sk), split_note]  # mouse hover shows what it does; on a phone hold it (_hold_detail)
 			bar.add_child(btn)
 		if not b.swap_options(i).is_empty():  # 换人 is the last button of the column (nearest the card), shown or summoned
 			var sw := Button.new()
@@ -604,19 +605,27 @@ func _close_skill_popup() -> void:
 var _held_skill := false  # a long press just showed the detail: the release that follows must not play the skill
 
 
-func _hold_detail(btn: Button, sk: Dictionary) -> void:
+func _split_note(u: Dictionary, sk: Dictionary) -> String:
+	## 弓兵 / 贼 (battle.split_troops): their damage skills land half 兵刃 half 谋略 whatever the skill says
+	var share := b.split_share(u)
+	if share <= 0.0 or not sk["effects"].any(func(e): return e["type"] in ["attack", "magic"]):
+		return ""
+	return "\n（%s：伤害 %d%% 兵刃 + %d%% 谋略）" % [GameData.get_db().troops[str(u["leader"]["card"]["troop"])]["name"], int(round((1.0 - share) * 100)), int(round(share * 100))]
+
+
+func _hold_detail(btn: Button, sk: Dictionary, note := "") -> void:
 	## hold a skill button for 0.45 s to read what it does (Kit.skill_desc) instead of playing it
 	btn.button_down.connect(func():
 		_held_skill = false
 		await get_tree().create_timer(0.45).timeout
 		if is_instance_valid(btn) and btn.button_pressed:
 			_held_skill = true
-			_show_skill_detail(sk))
+			_show_skill_detail(sk, note))
 
 
-func _show_skill_detail(sk: Dictionary) -> void:
+func _show_skill_detail(sk: Dictionary, note := "") -> void:
 	var tag := Kit.skill_tag(sk)
-	_show_info("%s　AP%d%s" % [sk["name"], int(sk["cost"]), ("　［%s］" % tag) if tag != "" else ""], Kit.skill_desc(sk))
+	_show_info("%s　AP%d%s" % [sk["name"], int(sk["cost"]), ("　［%s］" % tag) if tag != "" else ""], Kit.skill_desc(sk) + note)
 
 
 func _show_info(title: String, body: String) -> void:
@@ -779,7 +788,7 @@ func _on_retreat() -> void:
 # ---- animation ---------------------------------------------------------------
 
 func _armor_label(e: Dictionary) -> Label:
-	## the enemy's 护甲 and resists in one short line (「藤甲：物理抗性 80%　法术弱点 +100%」), or null when it has neither
+	## the enemy's 护甲 and resists in one short line (「藤甲：兵刃抗性 80%　谋略弱点 +100%」), or null when it has neither
 	var res := Kit.resist_text(e, false, true)
 	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
 	if res == "" and arm.is_empty():
@@ -930,7 +939,7 @@ func _sync_badges() -> void:
 		row.append(_tipped(BattleFx.badge("盾", Color(0.55, 0.62, 0.72)), "护盾", "%s %d/%d" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]], "shield"))
 	if not e["form"].is_empty():
 		row.append(_tipped(BattleFx.badge("阵", Color(0.3, 0.55, 0.95) if e["form"]["vs"] == "magic" else Color(0.85, 0.55, 0.2), int(e["form"]["turns"])), "阵型",
-			"%s：%s伤害 -%d%%，剩 %d 回合" % [e["form"]["name"], "物理" if e["form"]["vs"] == "attack" else "法术", int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]], "form"))
+			"%s：%s伤害 -%d%%，剩 %d 回合" % [e["form"]["name"], "兵刃" if e["form"]["vs"] == "attack" else "谋略", int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]], "form"))
 	if not e["mark"].is_empty():
 		row.append(_tipped(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false), "点名", "%s，下回合【%s】" % [e["mark"]["who"], e["mark"]["move"]], "mark"))
 	var at := _enemy_hp.global_position - global_position + Vector2(_enemy_hp.size.x - 40.0, -40.0)
@@ -1476,7 +1485,7 @@ func _play(events: Array) -> void:
 				BattleFx.scale = _enemy_fx_scale()
 				BattleFx.counter_stance(self, _enemy_rect())
 				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势！物理会被反击", Kit.c("red"), 38)
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势！兵刃会被反击", Kit.c("red"), 38)
 				_refresh()
 				await get_tree().create_timer(0.4).timeout
 			"stance_hit":  # the enemy answers the card that struck it
@@ -1548,7 +1557,7 @@ func _play(events: Array) -> void:
 				BattleFx.scale = _enemy_fx_scale()
 				BattleFx.ring(self, _enemy_center(), Color(0.3, 0.55, 0.95) if ev["vs"] == "magic" else Color(0.85, 0.55, 0.2), 30.0, 220.0, 0.45, 7)
 				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "变阵【%s】：%s" % [ev["name"], "挡法术" if ev["vs"] == "magic" else "挡物理"], Kit.c("amber"), 38)
+				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "变阵【%s】：%s" % [ev["name"], "挡谋略" if ev["vs"] == "magic" else "挡兵刃"], Kit.c("amber"), 38)
 				_refresh()
 				await get_tree().create_timer(0.4).timeout
 			"form_off":
@@ -1792,7 +1801,7 @@ func _sfx_act(ev: Dictionary) -> void:
 	var guard_voice := str(Sfx.voice_defaults.get("guard", "")) if role == "male" else ""
 	Sfx.voice([str(leader_card.get("voice", "")), troop_voice, guard_voice, str(Sfx.voice_defaults.get(role, role))], moments)
 
-	# 出招声按技能分：兵刃破风（攻击 / 打断）、治疗、守御、法术（命中时另有法术声）、其余增益
+	# 出招声按技能分：兵刃破风（攻击 / 打断）、治疗、守御、谋略（命中时另有谋略声）、其余增益
 	if "attack" in kinds or "interrupt" in kinds:
 		Sfx.play("slash")
 	elif "heal" in kinds or "cleanse" in kinds:

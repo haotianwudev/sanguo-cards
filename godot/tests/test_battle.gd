@@ -155,15 +155,15 @@ func test_archers_stack_a_resist_cut_that_stops_at_minus_25() -> void:
 	b._apply(b.leaders[0], {"type": "shred", "amount": 0.2, "turns": 3}, 1.0)
 	b._apply(b.leaders[0], {"type": "shred", "amount": 0.2, "turns": 3}, 1.0)
 	check(is_equal_approx(float(b.enemy["resist_down"]), 0.4), "two shots stack: -40%")
-	check(is_equal_approx(b._cut(0.3), -0.1), "30% 物抗 -40% = -10%")
+	check(is_equal_approx(b._cut(0.3), -0.1), "30% 兵刃抗性 -40% = -10%")
 	b._apply(b.leaders[0], {"type": "shred", "amount": 0.2, "turns": 3}, 1.0)
 	check(is_equal_approx(float(b.enemy["resist_down"]), 0.5), "the stack stops at -50%")
-	check(is_equal_approx(b._cut(0.1), -0.25), "10% 物抗 -50% stops at -25%")
+	check(is_equal_approx(b._cut(0.1), -0.25), "10% 兵刃抗性 -50% stops at -25%")
 	check(is_equal_approx(b._cut(-0.4), -0.4), "a weakness already below -25% is left as it is")
 
 
 func test_late_elites_and_bosses_wear_heavier_armor() -> void:
-	## battle.late_armor: past 黄忠 / 太史慈's join (and from 第五章 on) an elite / boss without its own 护甲 takes its troop's heavy one — 物抗 up
+	## battle.late_armor: past 黄忠 / 太史慈's join (and from 第五章 on) an elite / boss without its own 护甲 takes its troop's heavy one — 兵刃抗性 up
 	var db := GameData.get_db()
 	var inf := ""
 	for eid in db.enemies:
@@ -179,7 +179,7 @@ func test_late_elites_and_bosses_wear_heavier_armor() -> void:
 	check_eq(Quests.late_armor("jingxiang", {"x": 3}, inf), "", "a plain fight keeps the troop armor")
 	check_eq(Quests.late_armor("jingxiang", {"x": 3, "boss": true}, inf), "zhongjia", "第五章 on: every elite / boss")
 	var heavy := Quests.with_armor(db.enemies[inf], "zhongjia")
-	check(float(heavy["phys_resist"]) > float(db.enemies[inf]["phys_resist"]), "物抗 goes up")
+	check(float(heavy["phys_resist"]) > float(db.enemies[inf]["phys_resist"]), "兵刃抗性 goes up")
 	for eid in db.enemies:
 		if db.enemies[eid]["armor_own"]:
 			check_eq(Quests.late_armor("jingxiang", {"x": 3, "boss": true}, eid), "", "a hand-set armor stays")
@@ -841,6 +841,38 @@ func test_a_guard_shows_and_swings_a_plain_attack_every_round() -> void:
 	check(b.intent_text().contains("虎卫军·普攻"), "…even with its boss stunned: " + b.intent_text())
 
 
+func test_archer_and_bandit_blows_are_half_and_half() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	var u: Dictionary = b.leaders[1]
+	check_eq(b.split_share(u), 0.0, "a cavalry blow is all 兵刃")
+	u["leader"]["card"] = u["leader"]["card"].duplicate()
+	u["leader"]["card"]["troop"] = "archer"
+	check_eq(b.split_share(u), 0.5, "an archer's is half 谋略")
+	b.enemy["guard"] = {"name": "虎卫军", "hp": 999999, "max_hp": 999999, "strike": 0.5}
+	var ehp := int(b.enemy["hp"])
+	b._apply(u, {"type": "attack", "power": 1.0}, 1.0)
+	check(int(b.enemy["guard"]["hp"]) < 999999, "the 兵刃 half hits the 前卫")
+	check(int(b.enemy["hp"]) < ehp, "the 谋略 half goes over it to the boss")
+
+
+func test_war_spirit_counts_double_on_strategy_damage() -> void:
+	var b := Battle.start("hulao", party(["zhouyu"]), 2)
+	var z: Dictionary = b.leaders.filter(func(x): return str(x["leader"]["card"]["troop"]) == "strategist")[0]
+	b.enemy["hp"] = 99999999
+	b.enemy["max_hp"] = 99999999
+	var h0 := int(b.enemy["hp"])
+	b.rng.seed = 7  # the same dice for both blows: same variance, same crit roll
+	b._apply(z, {"type": "magic", "power": 1.0}, 1.0)
+	var plain := h0 - int(b.enemy["hp"])
+	b.combo = 0
+	b.buff["atk"] = 0.1
+	var h1 := int(b.enemy["hp"])
+	b.rng.seed = 7
+	b._apply(z, {"type": "magic", "power": 1.0}, 1.0)
+	var buffed := h1 - int(b.enemy["hp"])
+	check(absf(float(buffed) / plain - 1.2) < 0.02, "战意 +10 gives 谋略 +20 percent: %d -> %d" % [plain, buffed])
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true
@@ -1280,22 +1312,21 @@ func test_a_mark_takes_a_quarter_of_max_hp_and_fells_the_marked_one_unless_swapp
 	check(ev.any(func(e): return e["t"] == "mark_miss") and not ev.any(func(e): return e["t"] == "enemy_hit" and e.has("mark")), "swapped out: it misses")
 
 
-func test_a_shield_soaks_plain_blows_but_not_magic_archers_or_ultimates() -> void:
+func test_a_shield_swallows_every_blade_blow_whole_and_strategy_goes_over() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["shield"] = {"name": "铁甲", "hp": 999999, "max_hp": 999999}
 	var ehp := int(b.enemy["hp"])
 	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
-	check_eq(int(b.enemy["hp"]), ehp, "a plain blow is soaked")
+	check_eq(int(b.enemy["hp"]), ehp, "a 兵刃 blow is soaked")
+	b._apply(b.leaders[0], {"type": "attack", "power": 1.0, "pierce": true}, 1.0)
+	check_eq(int(b.enemy["hp"]), ehp, "穿甲 too")
 	b._apply(b.leaders[0], {"type": "magic", "power": 1.0}, 1.0)
-	check(int(b.enemy["hp"]) < ehp, "magic goes through")
+	check(int(b.enemy["hp"]) < ehp, "谋略 goes over")
 	var ehp2 := int(b.enemy["hp"])
-	b._through_shield = true  # a 弓兵's skill or a 大招
-	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
-	b._through_shield = false
-	check(int(b.enemy["hp"]) < ehp2, "an archer / 大招 blow goes through")
 	b.enemy["shield"]["hp"] = 1
-	b._apply(b.leaders[0], {"type": "attack", "power": 1.0}, 1.0)
+	b._apply(b.leaders[0], {"type": "attack", "power": 3.0}, 1.0)
 	check(b.enemy["shield"].is_empty(), "a broken shield is gone")
+	check_eq(int(b.enemy["hp"]), ehp2, "and the blow that broke it spilled nothing over")
 
 
 func test_a_formation_cuts_one_kind_of_damage_and_a_stun_breaks_it() -> void:

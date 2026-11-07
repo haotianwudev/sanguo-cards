@@ -369,9 +369,9 @@ static func icon(key: String) -> Texture2D:
 
 
 static func resist_text(e: Dictionary, bbcode := true, short := false) -> String:
-	## 「物理抗性 80%　法术弱点 +100%」: a resist above 0 cuts that kind of damage, below 0 is a weakness (the enemy takes more)
+	## 「兵刃抗性 80%　谋略弱点 +100%」: a resist above 0 cuts that kind of damage, below 0 is a weakness (the enemy takes more)
 	var parts: Array = []
-	for k in [["phys_resist", "物理"], ["magic_resist", "法术"]]:
+	for k in [["phys_resist", "兵刃"], ["magic_resist", "谋略"]]:
 		var v := float(e.get(k[0], 0.0))
 		if v > 0.0:
 			parts.append(("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))]) if short else ("%s抗性 %d%%" % [k[1], int(round(v * 100))]))
@@ -387,7 +387,7 @@ const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal
 
 
 static func skill_icon(skill: Dictionary) -> Texture2D:
-	## the icon for a skill's first effect (物理 / 法术 / 回复 / 防御 / BOOST / 混乱 / 破防 / 加 AP)
+	## the icon for a skill's first effect (兵刃 / 谋略 / 回复 / 防御 / BOOST / 混乱 / 破防 / 加 AP)
 	var effects: Array = skill.get("effects", [])
 	if effects.is_empty():
 		return null
@@ -443,10 +443,10 @@ static func skill_desc(sk: Dictionary) -> String:
 	for e in sk.get("effects", []):
 		match e["type"]:
 			"attack":
-				parts.append("物理 ×%s%s%s%s" % [_num(e["power"]), (" %d连" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else "",
+				parts.append("兵刃 ×%s%s%s%s" % [_num(e["power"]), (" %d连" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else "",
 					(" 连击+%s" % _num(e["per_combo"])) if e.has("per_combo") else "", " 穿甲" if e.get("pierce", false) else ""])
 			"magic":
-				parts.append("法术 ×%s%s" % [_num(e["power"]), (" 对灼烧×%s" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
+				parts.append("谋略 ×%s%s" % [_num(e["power"]), (" 对灼烧×%s" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
 			"buff":
 				parts.append("战意+1（攻+%d%% 减伤%d%%%s）" % [int(round(float(e["atk"]) * 100)), int(round(float(e["def"]) * 100)),
 					(" 附法伤%d%%" % int(round(float(e["magic"]) * 100))) if e.has("magic") else ""])

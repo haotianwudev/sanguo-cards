@@ -1,5 +1,5 @@
 {
-  "_relics": "宝物: kept for one run (a chapter attempt). rarity: common / rare / curse (strong with a cost). mods: at, magic, heal, hp, guard (damage taken cut), combo (extra per combo step), desperate (attack when below half HP), ap_start, ap_round, ap_max, turns, start_heal, boost_start, stun_start (chance the enemy loses round 1), calm, no_ambush, chest, offer_extra, pierce (ignore resists), first_hit (first hit each battle), defend (extra defend cut), stun (confuse chance), troop_at / troop_hp {troop: share} (Rance X faction items), troop_cost {troop: AP off each skill, min 1}; after_win: heal this share of HP after every win; proc {troop: share} (每个兵种自带 15% 的自动小技能：后勤回血、刀兵举盾、枪兵反击、贼 BOOST、策士战意、弓兵降敌双抗——宝物在这个几率上加), resist_cut (弓兵: the enemy's 物抗 and 法抗 each lowered by this, for good), raid (骑兵: more 插入 突袭 chance, 骑兵自带 30%) — base chances: battle.json passive_chance / interrupt_by_troop — all automatic, no AP; 每个兵种的宝物各有特点：后勤回复、刀兵防御、枪兵反击、骑兵突袭、贼 BOOST、策士攻防、弓兵破抗",
+  "_relics": "宝物: kept for one run (a chapter attempt). rarity: common / rare / curse (strong with a cost). mods: at, magic, heal, hp, guard (damage taken cut), combo (extra per combo step), desperate (attack when below half HP), ap_start, ap_round, ap_max, turns, start_heal, boost_start, stun_start (chance the enemy loses round 1), calm, no_ambush, chest, offer_extra, pierce (ignore resists), first_hit (first hit each battle), defend (extra defend cut), stun (confuse chance), troop_at / troop_hp {troop: share} (Rance X faction items), troop_cost {troop: AP off each skill, min 1}; after_win: heal this share of HP after every win; proc {troop: share} (每个兵种自带 15% 的自动小技能：后勤回血、刀兵举盾、枪兵反击、贼 BOOST、策士战意、弓兵降敌双抗——宝物在这个几率上加), resist_cut (弓兵: the enemy's 兵刃抗性 and 谋略抗性 each lowered by this, for good), raid (骑兵: more 插入 突袭 chance, 骑兵自带 30%) — base chances: battle.json passive_chance / interrupt_by_troop — all automatic, no AP; 每个兵种的宝物各有特点：后勤回复、刀兵防御、枪兵反击、骑兵突袭、贼 BOOST、策士攻防、弓兵破抗",
   "_fates": "天命: every run of a chapter starts by picking one of fate_offer fates; its mods (same keys as relics) last the run. common = 吉, rare = 大吉, curse = double-edged, bad = 凶 (pure drawback), divine = 天授 (far stronger than the rest) — neither is offered at the start, only a ？ event's `fate` hands them out",
   "fate_offer": 3,
   "fates": {
@@ -242,7 +242,7 @@
       "troop": "archer",
       "icon": "箭",
       "rarity": "story",
-      "desc": "黄忠的令箭，号令一响第一支箭就要见血。每场第一击伤害 +50%，敌人的物抗、法抗各 -5%（队里有弓手才生效）",
+      "desc": "黄忠的令箭，号令一响第一支箭就要见血。每场第一击伤害 +50%，敌人的兵刃、谋略抗性各 -5%（队里有弓手才生效）",
       "mods": {
         "first_hit": 0.5,
         "resist_cut": 0.05
@@ -391,7 +391,7 @@
       "troop": "cavalry",
       "icon": "釭",
       "rarity": "rare",
-      "desc": "削铁如泥。无视敌人一半的物理和法术抗性",
+      "desc": "削铁如泥。无视敌人一半的兵刃和谋略抗性",
       "mods": {
         "pierce": 0.5
       }
@@ -569,7 +569,7 @@
       "troop": "archer",
       "icon": "弩",
       "rarity": "common",
-      "desc": "一次十发，诸葛亮还没出山，图纸先到了。弓兵部队：攻击 +10%，体力 +5%；敌人的物抗、法抗各 -5%（队里有弓兵才生效）",
+      "desc": "一次十发，诸葛亮还没出山，图纸先到了。弓兵部队：攻击 +10%，体力 +5%；敌人的兵刃、谋略抗性各 -5%（队里有弓兵才生效）",
       "mods": {
         "troop_at": {
           "archer": 0.1
@@ -585,7 +585,7 @@
       "troop": "archer",
       "icon": "箭",
       "rarity": "rare",
-      "desc": "百步穿杨，专找甲缝。弓兵：敌人的物抗、法抗各 -10%；弓兵自动「射穿甲缝」（降抗）的几率 +20%（队里有弓兵才生效）",
+      "desc": "百步穿杨，专找甲缝。弓兵：敌人的兵刃、谋略抗性各 -10%；弓兵自动「射穿甲缝」（降抗）的几率 +20%（队里有弓兵才生效）",
       "mods": {
         "proc": {
           "archer": 0.2
@@ -693,7 +693,7 @@
       "troop": "strategist",
       "icon": "黄",
       "rarity": "curse",
-      "desc": "【诅咒】法术伤害 +20%，但受到的伤害 +5%",
+      "desc": "【诅咒】谋略伤害 +20%，但受到的伤害 +5%",
       "mods": {
         "magic": 0.2,
         "guard": -0.05

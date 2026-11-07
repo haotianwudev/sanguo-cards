@@ -1,6 +1,6 @@
 class_name BattleFx
 extends RefCounted
-## 战斗特效：打击（斩击 / 法术 / 穿甲 / 反击 / 敌人的爪击）和异常状态（混乱 / 灼烧 / 破防 / 眩晕 / 夺气 / 战意 / 解除）。
+## 战斗特效：打击（斩击 / 谋略 / 穿甲 / 反击 / 敌人的爪击）和异常状态（混乱 / 灼烧 / 破防 / 眩晕 / 夺气 / 战意 / 解除）。
 ## 全部是程序画的（Polygon2D / Line2D / Panel / CPUParticles2D），不需要美术资源；每个函数在 parent 的局部坐标 `at` 处生成节点，
 ## 一次性的自己消失，持续的（orbit / embers / cracks / glow）返回节点，由调用者在状态结束时 queue_free。
 
@@ -96,7 +96,7 @@ static func ring(parent: Control, at: Vector2, color: Color, r0 := 12.0, r1 := 9
 
 
 static func hit(parent: Control, at: Vector2, kind: String, combo: int, dmg_ratio: float, pierce := false, boosted := false, elem := "") -> void:
-	## our blow landing on the enemy: 物理 = crossing slashes (the combo adds the cross), 法术 = violet burst + rune ring,
+	## our blow landing on the enemy: 兵刃 = crossing slashes (the combo adds the cross), 谋略 = violet burst + rune ring,
 	## 穿甲 = one long thin lance streak; a big hit (share of the enemy's max HP) adds a shockwave
 	var p := at + Vector2(randf_range(-34, 34), randf_range(-26, 26))
 	if kind == "magic" and elem == "fire":  # 火计 / 业火: a red-gold blaze instead of the violet ring
@@ -205,7 +205,7 @@ static func ult_slash(parent: Control, at: Vector2, combo: int, dmg_ratio: float
 
 
 static func ult_magic(parent: Control, at: Vector2, combo: int, dmg_ratio: float) -> void:
-	## 法术大招: a descending arcane-fire pillar, spinning rune stars, twin shockwave rings and a crimson-violet flash
+	## 谋略大招: a descending arcane-fire pillar, spinning rune stars, twin shockwave rings and a crimson-violet flash
 	var beam_w := 140.0 * scale
 	var pillar := Polygon2D.new()
 	pillar.polygon = PackedVector2Array([Vector2(-beam_w * 0.5, -360), Vector2(beam_w * 0.5, -360), Vector2(beam_w * 0.72, 110), Vector2(-beam_w * 0.72, 110)])

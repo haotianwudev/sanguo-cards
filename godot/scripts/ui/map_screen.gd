@@ -1578,12 +1578,12 @@ func _bb_chip(text: String, color_name: String) -> String:
 
 
 func _resists(e: Dictionary) -> String:
-	## the 护甲 and both resists as tags — a weakness (negative resist) in red, so a 法术弱点 jumps out: 「藤甲（刀枪不入，一点就着）」「物抗 80%」「法术弱点 +100%」
+	## the 护甲 and both resists as tags — a weakness (negative resist) in red, so a 谋略弱点 jumps out: 「藤甲（刀枪不入，一点就着）」「兵刃抗性 80%」「谋略弱点 +100%」
 	var out: Array = []
 	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
 	if not arm.is_empty():
 		out.append(_bb_chip(str(arm["name"]), "amber"))
-	for k in [["phys_resist", "物理"], ["magic_resist", "法术"]]:
+	for k in [["phys_resist", "兵刃"], ["magic_resist", "谋略"]]:
 		var v := float(e.get(k[0], 0.0))
 		if v > 0.0:
 			out.append(_bb_chip("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))], "gray"))
