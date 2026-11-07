@@ -5319,6 +5319,10 @@
     "n7_guotu": {
       "src": "source/battles/n7_guotu.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "m8_maliang": {
+      "src": "source/battles/m8_maliang.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
@@ -7773,6 +7777,18 @@
     },
     "ss_xiamen_shouji": {
       "src": "source/cg/ss_xiamen_shouji.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "e_sangong": {
+      "src": "source/cg/e_sangong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_zhen_zaideng": {
+      "src": "source/cg/b_zhen_zaideng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "b_qinyilu": {
+      "src": "source/cg/b_qinyilu.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

@@ -1469,3 +1469,7 @@
 - [x] 2026-11-03 map `yecheng` ← yecheng_strip.jpg · ok
 - [x] 2026-11-03 cg `n7_kujing` ← n7_kujing.jpg · ok
 - [x] 2026-11-07 cg `ss_xiamen_shouji` ← ss_xiamen_shouji.jpg · ok
+- [x] 2026-11-07 cg `e_sangong` ← e_sangong.jpg · ok
+- [x] 2026-11-07 cg `b_zhen_zaideng` ← b_zhen_zaideng.jpg · ok
+- [x] 2026-11-07 cg `b_qinyilu` ← b_qinyilu.jpg · ok
+- [x] 2026-11-07 battle `m8_maliang` ← m8_maliang.jpg · ok

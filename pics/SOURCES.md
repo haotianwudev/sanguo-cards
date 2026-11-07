@@ -765,6 +765,7 @@
 | `battle:hnn_bw_zf` | source/battles/hnn_bw_zf.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:n5_changxi` | source/battles/n5_changxi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `battle:n7_guotu` | source/battles/n7_guotu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:m8_maliang` | source/battles/m8_maliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
@@ -1378,3 +1379,6 @@
 | `cg:n7_b_huijiu` | source/cg/n7_b_huijiu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:n7_g_dalao` | source/cg/n7_g_dalao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_xiamen_shouji` | source/cg/ss_xiamen_shouji.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_sangong` | source/cg/e_sangong.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_zhen_zaideng` | source/cg/b_zhen_zaideng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:b_qinyilu` | source/cg/b_qinyilu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
