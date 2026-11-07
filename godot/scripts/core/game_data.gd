@@ -249,6 +249,8 @@ func _index_card_chapters() -> void:
 			for c in o["recruit_pool"]:
 				add.call(c, q["id"])
 		for s in q["squares"].values():
+			for c in s.get("recruit_pool", []):  # a 招贤 square's own list ties its cards to the chapter too (they were leaking into the public pool)
+				add.call(c, q["id"])
 			if not s.get("cards_public", false):  # 关张来投：名将入队，但两线的公共池里照样有
 				for c in s["cards"]:
 					add.call(c, q["id"])

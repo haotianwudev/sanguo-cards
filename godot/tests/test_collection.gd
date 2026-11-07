@@ -778,7 +778,7 @@ func test_lord_cards_share_the_draw_pool_with_the_generals_of_their_route() -> v
 	var south := SaveData.create()
 	var south_ids: Array = _pool_ids(south)
 	check(south_ids.has("lord") and south_ids.has("lord:lord_south_armor") and not south_ids.has("lord:lord_north_silver"), "south: the plain lord card and the south lord cards, one pool with the generals")
-	check(south_ids.has("huanggai"), "…next to the other generals")
+	check(south_ids.has("bulianshi"), "…next to the other generals")
 	var north := SaveData.create()
 	north.flags = ["出生：冀州无极"]
 	var north_ids: Array = _pool_ids(north)
