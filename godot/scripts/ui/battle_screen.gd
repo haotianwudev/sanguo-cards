@@ -1101,515 +1101,11 @@ var _act_troop := ""  # the acting card's troop: its plain blows take that troop
 
 
 func _play(events: Array) -> void:
+	## plays the engine's events one after another; each kind of event has its own show (_ev_<kind> below)
 	_busy = true
 	_refresh()
 	for ev in events:
-		match ev["t"]:
-			"act":
-				var v: CardView = _cards[ev["unit"]]
-				_boost_hits = bool(ev.get("boost", false))
-				var used: Dictionary = GameData.get_db().skills.get(str(ev.get("skill", "")), {})
-				_card_lunge(v, _is_ult(used) or _boost_hits)
-				_sfx_act(ev)
-				var kinds: Array = used.get("effects", []).map(func(e): return str(e.get("type", "")))
-				_act_troop = str(b.leaders[int(ev["unit"])].get("leader", {}).get("card", {}).get("troop", "")) if int(ev["unit"]) < b.leaders.size() else ""
-				var uname := str(used.get("name", ""))
-				_act_elem = "thunder" if (str(used.get("elem", "")) == "thunder" or "雷" in uname or "霹雳" in uname or "电" in uname) \
-					else "fire" if ("burn" in kinds or "火" in uname) else "poison" if "poison" in kinds else ""
-				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] in ["attack", "magic"])  # 大招: physical or magic ultimate blows
-				if _is_ult(used):
-					await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
-				if _boost_hits:
-					BattleFx.boost_cast(self, _card_rect(ev["unit"]))
-					Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
-				await get_tree().create_timer(0.02).timeout
-			"passive":  # another card's own move (a troop's small-chance trick): its name over the card
-				var pu: int = int(ev.get("unit", -1))
-				if pu >= 0 and pu < _cards.size():
-					_card_lunge(_cards[pu], false)
-					Kit.float_text(self, _card_rect(pu).get_center() + Vector2(0, -70), "%s：%s！" % [str(ev["name"]).split("·")[0], str(ev["text"])], Kit.c("gold"), 28)
-					await get_tree().create_timer(0.35).timeout
-			"hit", "interrupt", "burn", "counter", "poison":
-				var is_rider: bool = ev.get("rider", false)
-				if ev["t"] == "interrupt" and int(ev.get("unit", -1)) >= 0 and int(ev["unit"]) < _cards.size():
-					var iu: int = int(ev["unit"])
-					_card_lunge(_cards[iu], false)
-					Kit.float_text(self, _card_rect(iu).get_center() + Vector2(0, -54), "%s 突袭！" % str(ev.get("member", "部队")), Kit.c("gold"), 30)
-					BattleFx.interrupt_slash(self, _card_rect(iu).get_center(), _enemy_center())
-					await get_tree().create_timer(0.09).timeout
-				elif ev["t"] == "counter" and int(ev.get("slot", -1)) >= 0 and int(ev["slot"]) < _cards.size():
-					var cs: int = int(ev["slot"])
-					_card_lunge(_cards[cs], false)
-					Kit.float_text(self, _card_rect(cs).get_center() + Vector2(0, -54), "反击！", Color(0.45, 0.95, 0.9), 32)
-				var on_guard: bool = ev.get("guard", false) and _guard_row.visible
-				if on_guard:  # the 前卫 takes the blow: sparks on its bar, the boss stands still
-					Kit.shake(_guard_row, 6.0, 0.16)
-					BattleFx.guard_spark(self, _guard_row.global_position - global_position + _guard_row.size / 2.0)
-				else:
-					Kit.shake(_enemy_art, 5.0 if is_rider else 9.0, 0.14 if is_rider else 0.2)
-					_flash(_enemy_art, Color(1.4, 0.9, 1.7) if is_rider else Color(1.6, 0.6, 0.6))
-				var big: bool = not is_rider and ev["dmg"] > b.enemy["max_hp"] * 0.08
-				var ratio := float(ev["dmg"]) / maxf(1.0, float(b.enemy["max_hp"]))
-				_sfx_hit(ev, big)
-				BattleFx.scale = _enemy_fx_scale()
-				match ev["t"]:
-					"hit":
-						if is_rider:
-							BattleFx.rider_hit(self, _enemy_center())
-						elif _ult_hits:
-							if ev["kind"] == "magic":
-								BattleFx.ult_magic(self, _enemy_center(), ev["combo"], ratio)
-							elif _act_troop == "archer":
-								BattleFx.ult_arrow(self, _enemy_center())
-							else:
-								BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
-							Kit.shake(self, 22.0, 0.3)
-						elif ev["kind"] == "magic" or _act_elem == "thunder" or _boost_hits or ev.get("pierce", false) or not BattleFx.troop_hit(self, _enemy_center(), _act_troop, int(ev["combo"])):
-							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits, _act_elem)
-						elif ratio > 0.08:
-							BattleFx.ring(self, _enemy_center(), Color(1.0, 0.55, 0.3), 14.0, 150.0, 0.36, 7)
-					"counter":
-						BattleFx.counter(self, _enemy_center())
-					"burn":
-						BattleFx.flame_lick(self, _enemy_rect())
-					"poison":
-						BattleFx.poison_cloud(self, _enemy_rect())
-					"interrupt":
-						if ev.get("kind", "attack") == "magic":
-							BattleFx.hit(self, _enemy_center(), "magic", 1, ratio)
-						else:
-							BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
-				BattleFx.scale = 1.0
-				var crit_hit: bool = ev.get("crit", false)
-				if is_rider:
-					Kit.float_text(self, _enemy_center() + Vector2(54, -18), "战意 +%d" % ev["dmg"], Color(0.88, 0.72, 1.0), 36)
-				elif not (int(ev["dmg"]) == 0 and int(ev.get("shield", 0)) > 0):  # all soaked by the 护盾: only its 「盾 -N」 shows
-					Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
-						Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
-				if crit_hit:
-					Kit.shake(self, 14.0, 0.2)
-					BattleFx.scale = _enemy_fx_scale()
-					BattleFx.crit_star(self, _enemy_center())
-					BattleFx.scale = 1.0
-					await _hit_stop(0.05)
-				if float(ev.get("vs", 1.0)) > 1.01 and not is_rider:  # 追击: the combo worked (vs broken / burning / stunned …)
-					Kit.float_text(self, _enemy_center() + Vector2(0, -92), "破绽追击！×%s" % str(snappedf(float(ev["vs"]), 0.1)), Color(1.0, 0.6, 0.25), 32)
-					BattleFx.ring(self, _enemy_center(), Color(1.0, 0.6, 0.25), 20.0, 170.0, 0.34, 4)
-				Kit.tween_bar(_enemy_hp, ev["hp"])
-				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
-				if ev["t"] == "hit" and not is_rider and ev["combo"] >= 2:
-					_combo_label.text = "%d 连击 +%d%%" % [ev["combo"], ev["combo"] * 10]
-					_combo_heat(int(ev["combo"]))
-					Kit.pop(_combo_label, 1.3 if ev["combo"] < 8 else 1.5)
-				if int(ev.get("hp", 1)) <= 0:
-					BattleFx.scale = _enemy_fx_scale()
-					BattleFx.kill_blow(self, _enemy_center())
-					BattleFx.scale = 1.0
-					_flash(_enemy_art, Color(2.2, 2.0, 1.8))
-					Kit.shake(self, 20.0, 0.32)
-					await _kill_freeze()
-				elif big:
-					Kit.shake(self, 6.0 + 24.0 * minf(ratio, 0.3), 0.18)
-					await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
-				if _ult_hits and ev["t"] == "hit" and not is_rider:
-					await get_tree().create_timer(0.22).timeout  # let the big cut finish before the next blow
-				await get_tree().create_timer(0.07 if is_rider else 0.16).timeout
-			"resist_down":  # 射穿甲缝: a steel arrow streak through the armour, 双抗 down
-				Sfx.play("break")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.slash(self, _enemy_center(), BattleFx.STEEL, -12.0, 420.0, 6.0)
-				BattleFx.burst(self, _enemy_center(), Color(0.45, 0.8, 0.95), 12, 10.0, 96.0, 3.0, 0.24)
-				BattleFx.scale = 1.0
-				_flash(_enemy_art, Color(0.8, 1.2, 1.6))
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "甲缝洞穿　双抗 -%d%%" % int(round(float(ev["amount"]) * 100)), Color(0.55, 0.85, 1.0), 34)
-				_refresh()
-				await get_tree().create_timer(0.3).timeout
-			"loot":  # 劫掠: gold scatters, the haul odds float up
-				Sfx.play("buff")
-				BattleFx.burst(self, _enemy_center(), BattleFx.GOLD, 16, 12.0, 130.0, 5.0, 0.32)
-				BattleFx.embers(self, _enemy_rect(), BattleFx.GOLD, 18, 80.0, true)
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "劫掠！宝箱 %d%%　多卡 %d%%" % [int(round(float(ev["chest"]) * 100)), int(round(float(ev["card"]) * 100))], Kit.c("gold"), 32)
-				_refresh()
-				await get_tree().create_timer(0.3).timeout
-			"burn_on":
-				Sfx.play("burn")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.flame_lick(self, _enemy_rect())
-				BattleFx.scale = 1.0
-				_flash(_enemy_art, Color(1.8, 0.75, 0.35))
-				Kit.float_text(self, _enemy_center() + Vector2(0, -30), "灼烧！", Kit.c("red"), 40)
-				_refresh()
-				await get_tree().create_timer(0.26).timeout
-			"poison_on":
-				Sfx.play("burn")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.poison_cloud(self, _enemy_rect())
-				BattleFx.scale = 1.0
-				_flash(_enemy_art, Color(0.65, 1.5, 0.65))
-				Kit.float_text(self, _enemy_center() + Vector2(0, -30), "中毒 ×%d" % int(ev.get("layers", 1)), Kit.c("green"), 40)
-				_refresh()
-				await get_tree().create_timer(0.26).timeout
-			"counter_on":
-				Sfx.play("guard")
-				var cu: int = int(ev.get("unit", 0))
-				BattleFx.counter_stance(self, _card_rect(cu))
-				Kit.pop(_cards[cu], 1.08)
-				Kit.float_text(self, _card_rect(cu).get_center() + Vector2(0, -40), "反击架势", Color(0.45, 0.95, 0.9), 34)
-				_refresh()
-				await get_tree().create_timer(0.26).timeout
-			"swap":
-				var leaving: CardView = _cards[ev["unit"]]
-				var ot := leaving.create_tween().set_parallel()
-				ot.tween_property(leaving, "modulate:a", 0.0, 0.18)
-				ot.tween_property(leaving, "position:y", leaving.position.y + 40.0, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-				await get_tree().create_timer(0.18).timeout
-				_rebuild_card(ev["unit"])
-				await get_tree().process_frame  # the row lays the new card out first, then it leaps in from below
-				var arriving: CardView = _cards[ev["unit"]]
-				var home := arriving.position
-				arriving.position.y = home.y + 140.0
-				arriving.modulate.a = 0.0
-				var nt := arriving.create_tween().set_parallel()
-				nt.tween_property(arriving, "position:y", home.y, 0.26).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-				nt.tween_property(arriving, "modulate:a", 1.0, 0.12)
-				await get_tree().create_timer(0.24).timeout
-				Sfx.play("guard")
-				var arc := _card_rect(ev["unit"])
-				BattleFx.ring(self, arc.get_center(), BattleFx.GOLD, 20.0, 170.0, 0.34, 6)
-				BattleFx.burst(self, Vector2(arc.get_center().x, arc.end.y - 20.0), BattleFx.GOLD, 12, 10.0, 110.0, 4.0, 0.3)
-				Kit.shake(arriving, 4.0, 0.12)
-				_party_hp.max_value = ev["max"]
-				Kit.tween_bar(_party_hp, ev["hp"])
-				_party_hp_label.text = "%d / %d" % [ev["hp"], ev["max"]]
-				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "登场！", Kit.c("gold"), 40)
-				Kit.pop(_cards[ev["unit"]], 1.08)
-				await get_tree().create_timer(0.35).timeout
-			"buff":
-				Sfx.play("buff")
-				Kit.float_text(self, _party_center(), "战意 ×%d" % ev["layers"], Kit.c("gold"), 36)
-				BattleFx.buff_cast(self, range(_cards.size()).map(func(i): return _card_rect(i).get_center()))
-				_refresh()
-				await get_tree().create_timer(0.3).timeout
-			"cleanse":
-				Kit.float_text(self, _party_center(), "状态解除" if ev["n"] > 0 else "无状态", Kit.c("green"), 34)
-				BattleFx.cleanse_wave(self, _cards_rect())
-				_refresh()
-				await get_tree().create_timer(0.3).timeout
-			"ap_drain":
-				var pips: Array = _ap_row.get_children().filter(func(n): return n is Panel)
-				var gone: Array = pips.slice(int(ev["ap"]), int(ev["ap"]) + int(ev["amount"]))
-				BattleFx.drain_shatter(self, gone, gone.size())
-				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP -%d" % ev["amount"], Kit.c("red"), 34)
-				await get_tree().create_timer(0.35).timeout
-			"hurt":
-				_flash(_party_box, Color(1.6, 0.5, 0.5))
-				Kit.shake(_party_box, 7.0, 0.18)
-				BattleFx.slash(self, _party_center(), BattleFx.BLOOD, -25.0, 180.0, 10.0)
-				Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
-				Kit.tween_bar(_party_hp, ev["hp"])
-				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
-				await get_tree().create_timer(0.3).timeout
-			"heal":
-				Sfx.play("heal")
-				BattleFx.heal_wave(self, _party_rect())
-				Kit.float_text(self, _party_center(), "+%d" % ev["amt"], Kit.c("green"))
-				Kit.tween_bar(_party_hp, ev["hp"])
-				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
-				await get_tree().create_timer(0.3).timeout
-			"guard", "defend":
-				Sfx.play("guard")
-				if ev["t"] == "defend":  # the 防御 button: the whole party raises shields (audio.json voice_defaults.guard)
-					Sfx.voice([str(Sfx.voice_defaults.get("guard", ""))], ["guard"])
-				BattleFx.shield_wall(self, _party_rect(), ev["t"] == "defend")
-				Kit.float_text(self, _party_center(), "减伤 %d%%" % int(round(ev["cut"] * 100)), Kit.c("blue"), 32)
-				await get_tree().create_timer(0.3).timeout
-			"boost":
-				Sfx.play("buff")
-				for k in ev["units"]:
-					Kit.pop(_cards[k], 1.08)
-					_flash(_cards[k], Color(1.5, 1.35, 0.7))
-					BattleFx.boost_cast(self, _card_rect(k))
-				Kit.float_text(self, _party_center(), "BOOST", Kit.c("gold"), 34)
-				await get_tree().create_timer(0.3).timeout
-			"stun":
-				Kit.float_text(self, _enemy_center(), "眩晕！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
-				if ev["ok"]:
-					Sfx.play("stun")
-					BattleFx.stun_burst(self, _enemy_center() + Vector2(0, -50))
-				await get_tree().create_timer(0.3).timeout
-			"break":
-				Sfx.play("break")
-				Kit.float_text(self, _enemy_center(), "破防 +%d%%" % int(round(ev["amount"] * 100)), Kit.c("amber"), 34)
-				var crack := BattleFx.break_flash(self, _enemy_rect())
-				crack.get_tree().create_timer(0.8).timeout.connect(crack.queue_free)
-				await get_tree().create_timer(0.3).timeout
-			"ap":
-				_refresh()
-				var all_pips: Array = _ap_row.get_children().filter(func(n): return n is Panel)
-				var top_ap: int = int(ev.get("ap", b.ap))
-				var gained: Array = all_pips.slice(maxi(0, top_ap - int(ev["amount"])), top_ap)
-				BattleFx.ap_gain(self, gained)
-				Kit.float_text(self, _party_center() + Vector2(300, 0), "AP +%d" % ev["amount"], Kit.c("gold"), 34)
-				await get_tree().create_timer(0.25).timeout
-			"enemy_turn":
-				_enemy_shouted_this_turn = false
-				await _banner("%s 的行动" % b.enemy["data"]["name"], Kit.c("red"))
-			"enemy_stunned":
-				Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
-				await get_tree().create_timer(0.45).timeout
-			"enemy_move":
-				_enemy_move_tag(str(ev.get("move", "")))
-				await get_tree().create_timer(0.18).timeout
-			"enemy_burn_party":
-				Sfx.play("burn")
-				BattleFx.flame_lick(self, _party_rect())
-				Kit.float_text(self, _party_center(), "我军灼烧！", Kit.c("red"), 38)
-				_refresh()
-				await get_tree().create_timer(0.28).timeout
-			"enemy_poison_party":
-				Sfx.play("burn")
-				BattleFx.poison_cloud(self, _party_rect())
-				Kit.float_text(self, _party_center(), "我军中毒 ×%d！" % int(ev.get("layers", 1)), Kit.c("green"), 38)
-				_refresh()
-				await get_tree().create_timer(0.28).timeout
-			"enemy_ap_drain":
-				Sfx.play("break")
-				BattleFx.ring(self, _party_center() + Vector2(300, 0), BattleFx.BLOOD, 14.0, 95.0, 0.3, 5)
-				Kit.float_text(self, _party_center() + Vector2(300, 0), "夺气 -%d" % int(ev.get("amount", 1)), Kit.c("red"), 36)
-				_refresh()
-				await get_tree().create_timer(0.26).timeout
-			"enemy_hit":
-				var mv_name := str(ev.get("move", ""))
-				var is_fire: bool = mv_name in ["火", "毒"]  # a burn / poison tick on us: no move plaque, no lunge, no war cry
-				if not is_fire and _enemy_big_move(mv_name):  # the wound-up 大招 lands: cut-in, and it roars
-					var ed: Dictionary = b.enemy.get("data", {})
-					Sfx.voice(_enemy_voices(), ["roar", "attack"])
-					_enemy_shouted_this_turn = true
-					await _cutin(str(ed.get("name", "")), str(ed.get("portrait", "")), mv_name, true)
-				elif not is_fire:
-					_enemy_move_tag(mv_name)
-				var heavy_mv: Dictionary = b._move_named(mv_name)
-				if not is_fire and (_enemy_big_move(mv_name) or float(heavy_mv.get("power", 0.0)) >= 1.5):  # a heavy blow: winds back, then lunges at the camera
-					_enemy_art.pivot_offset = _enemy_art.size / 2.0
-					var tws := _enemy_art.create_tween()
-					tws.tween_property(_enemy_art, "scale", Vector2(0.93, 0.93), 0.12).set_trans(Tween.TRANS_QUAD)
-					tws.tween_property(_enemy_art, "scale", Vector2(1.18, 1.18), 0.08).set_trans(Tween.TRANS_BACK)
-					tws.tween_property(_enemy_art, "scale", Vector2.ONE, 0.18)
-					await get_tree().create_timer(0.2).timeout
-				else:
-					var x := _enemy_art.position.y
-					var tw := _enemy_art.create_tween()
-					tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
-					tw.tween_property(_enemy_art, "position:y", x, 0.16)
-				# 敌人一回合只喊一次战吼，且灼烧掉血绝不喊叫
-				if not is_fire and not _enemy_shouted_this_turn:
-					Sfx.voice(_enemy_voices(), ["attack"])
-					_enemy_shouted_this_turn = true
-					await get_tree().create_timer(0.04).timeout
-				Sfx.play("burn" if is_fire else "enemy_hit")
-				Kit.shake(self, 10.0, 0.22)
-				if mv_name != "毒":
-					_flash(_party_box, Color(1.6, 0.6, 0.6))
-				if mv_name == "毒":
-					BattleFx.poison_cloud(self, _party_rect())
-					_flash(_party_box, Color(0.7, 1.5, 0.8))
-				elif is_fire:
-					BattleFx.flame_lick(self, _party_rect())
-				elif _enemy_big_move(mv_name):
-					BattleFx.enemy_ult_slash(self, _cards_rect())
-					Kit.shake(self, 22.0, 0.4)
-					for c in _cards:
-						Kit.shake(c, 9.0, 0.3)
-				elif int(ev.get("mark", -1)) >= 0 and int(ev["mark"]) < _cards.size():  # 点名 lands: an X cut across the marked card
-					var mr := _card_rect(int(ev["mark"]))
-					BattleFx.slash(self, mr.get_center(), Color(1.0, 0.15, 0.1), -40.0, mr.size.length() * 1.1, 16.0)
-					BattleFx.slash(self, mr.get_center(), Color(1.0, 0.85, 0.75), 40.0, mr.size.length() * 1.1, 10.0, 0.1)
-					BattleFx.burst(self, mr.get_center(), Color(1.0, 0.25, 0.15), 16, 20.0, 170.0, 6.0, 0.35)
-					_flash(_cards[int(ev["mark"])], Color(2.2, 0.5, 0.45))
-					Kit.shake(_cards[int(ev["mark"])], 16.0, 0.35)
-					Kit.shake(self, 14.0, 0.3)
-					BattleFx.vignette(self, Color(0.8, 0.0, 0.0, 0.5), 0.6)
-				else:
-					BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
-					for c in _cards:
-						Kit.shake(c, 5.0, 0.16)
-				Kit.float_text(self, _party_center(), ("暴击 " if ev.get("crit", false) else "") + "-%d" % ev["dmg"], Kit.c("red"), 56 if ev.get("crit", false) else 44)
-				Kit.tween_bar(_party_hp, ev["hp"])
-				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
-				await get_tree().create_timer(0.35).timeout
-			"enemy_charge":
-				if not _enemy_shouted_this_turn:
-					Sfx.voice(_enemy_voices(), ["roar", "attack"])
-					_enemy_shouted_this_turn = true
-				Sfx.play("charge")
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "蓄力！", Kit.c("red"), 44)
-				Kit.shake(_enemy_art, 5.0, 0.4)
-				_refresh()
-				await get_tree().create_timer(0.45).timeout
-			"enemy_rage":
-				if not _enemy_shouted_this_turn:
-					Sfx.voice(_enemy_voices(), ["roar", "attack"])
-					_enemy_shouted_this_turn = true
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "狂暴！", Kit.c("red"), 44)
-				_flash(_enemy_art, Color(1.8, 0.5, 0.5))
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.ring(self, _enemy_center(), BattleFx.BLOOD, 20.0, 200.0, 0.4, 7)
-				BattleFx.embers(self, _enemy_rect(), Color(1.0, 0.25, 0.2, 0.9), 22, 90.0, true)
-				BattleFx.scale = 1.0
-				_refresh()
-				await get_tree().create_timer(0.4).timeout
-			"enemy_heal":
-				Sfx.play("heal")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.heal_wave(self, _enemy_rect())
-				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center(), "+%d" % ev["amt"], Kit.c("green"), 40)
-				Kit.tween_bar(_enemy_hp, ev["hp"])
-				_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
-				await get_tree().create_timer(0.35).timeout
-			"confuse":
-				Kit.pop(_cards[ev["unit"]], 1.06)
-				Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60),
-					"重创" if ev.get("mark", false) else "混乱", Kit.c("red") if ev.get("mark", false) else Kit.c("purple"), 32)
-				BattleFx.stun_burst(self, _card_rect(ev["unit"]).position + Vector2(_card_rect(ev["unit"]).size.x / 2, 30))
-				BattleFx.burst(self, _card_rect(ev["unit"]).get_center(), BattleFx.VIOLET, 10, 20.0, 110.0, 5.0)
-				await get_tree().create_timer(0.3).timeout
-			"charge_break":  # 破招: the wind-up shatters, an AP flies back
-				Sfx.play("break")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.burst(self, _enemy_center(), Kit.c("gold"), 22, 30.0, 220.0, 6.0)
-				BattleFx.scale = 1.0
-				_flash(_enemy_art, Color(2.0, 1.8, 0.9))
-				Kit.shake(self, 16.0, 0.26)
-				await _alert("破招！", "【%s】被打断　AP +%d" % [ev["move"], int(ev.get("gain", 1))], Kit.c("gold"), 0.9)
-				_refresh()
-				var pips2: Array = _ap_row.get_children().filter(func(n): return n is Panel)
-				var top2: int = int(ev.get("ap", b.ap))
-				BattleFx.ap_gain(self, pips2.slice(maxi(0, top2 - int(ev.get("gain", 1))), top2))
-				await get_tree().create_timer(0.2).timeout
-			"stance_on":
-				Sfx.play("guard")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.counter_stance(self, _enemy_rect())
-				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势！兵刃会被反击", Kit.c("red"), 38)
-				_refresh()
-				await get_tree().create_timer(0.4).timeout
-			"stance_hit":  # the enemy answers the card that struck it
-				var su: int = int(ev.get("unit", 0))
-				Sfx.play("enemy_hit")
-				if su >= 0 and su < _cards.size():
-					BattleFx.claw(self, _card_rect(su).get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), 0.0)
-					Kit.shake(_cards[su], 8.0, 0.2)
-				Kit.float_text(self, _party_center(), "反击 -%d" % ev["dmg"], Kit.c("red"), 40)
-				Kit.tween_bar(_party_hp, ev["hp"])
-				_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
-				await get_tree().create_timer(0.3).timeout
-			"stance_off":
-				if ev.get("broken", false):  # 眩晕 / 破招 shattered it (not just run out)
-					Sfx.play("break")
-					BattleFx.scale = _enemy_fx_scale()
-					BattleFx.slash(self, _enemy_center(), Color(0.45, 0.95, 0.9), -38.0, 260.0, 10.0)
-					BattleFx.burst(self, _enemy_center(), Color(0.82, 1.0, 0.98), 16, 14.0, 150.0, 4.0, 0.3)
-					BattleFx.scale = 1.0
-					Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势击破！", Kit.c("gold"), 42)
-					Kit.shake(self, 10.0, 0.2)
-					await get_tree().create_timer(0.35).timeout
-				_refresh()
-			"guard_on":
-				Sfx.play("charge")
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "前卫：%s！" % ev["name"], Kit.c("amber"), 40)
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.shield_wall(self, _enemy_rect())
-				BattleFx.scale = 1.0
-				_refresh()
-				Kit.pop(_guard_row, 1.1)
-				await get_tree().create_timer(0.45).timeout
-			"guard_hit":
-				_guard_bar.max_value = ev["max"]
-				Kit.tween_bar(_guard_bar, ev["hp"])
-			"mark_on":  # 点名: a red line from the enemy to the marked card
-				Sfx.play("charge")
-				var mu: int = int(ev.get("unit", 0))
-				if mu >= 0 and mu < _cards.size():
-					BattleFx.arrow(self, _enemy_center(), _card_rect(mu).get_center(), Color(1.0, 0.25, 0.15), 0.0, 1.6)
-					await get_tree().create_timer(0.18).timeout
-					await _mark_stamp(mu)
-				await _alert("点名", "下回合【%s】→ %s　换下他就扑空，不换就被打倒" % [ev["move"], b.unit_name(b.leaders[mu]) if mu < b.leaders.size() else ""], Kit.c("red"), 0.9)
-				_refresh()
-			"slain":  # 点名 landed: the card goes dark and cracks, out of action this fight
-				var xu: int = int(ev.get("unit", 0))
-				if xu >= 0 and xu < _cards.size():
-					Sfx.play("break")
-					var xc: Control = _cards[xu]
-					xc.create_tween().tween_property(xc, "modulate", Color(0.3, 0.3, 0.3), 0.45)
-					BattleFx.burst(self, _card_rect(xu).get_center(), Color(0.55, 0.5, 0.5), 12, 20.0, 130.0, 4.0, 0.3)
-					Kit.float_text(self, _card_rect(xu).get_center() + Vector2(0, -40), "被打倒！", Kit.c("red"), 44)
-					await get_tree().create_timer(0.6).timeout
-				_refresh()
-			"mark_miss":
-				Sfx.play("guard")
-				Kit.float_text(self, _party_center() + Vector2(0, -50), "扑空！", Kit.c("gold"), 44)
-				await get_tree().create_timer(0.35).timeout
-			"seal_on":
-				Sfx.play("break")
-				BattleFx.ring(self, _party_center(), Color(0.6, 0.4, 0.9), 20.0, 260.0, 0.4, 6)
-				Kit.float_text(self, _party_center() + Vector2(0, -50), "%s被封！" % Battle.SEAL_NAMES.get(str(ev["kind"]), "技能"), Kit.c("purple"), 40)
-				_refresh()
-				await get_tree().create_timer(0.4).timeout
-			"seal_off":
-				_refresh()
-			"form_on":
-				Sfx.play("guard")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.ring(self, _enemy_center(), Color(0.3, 0.55, 0.95) if ev["vs"] == "magic" else Color(0.85, 0.55, 0.2), 30.0, 220.0, 0.45, 7)
-				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "变阵【%s】：%s" % [ev["name"], "挡谋略" if ev["vs"] == "magic" else "挡兵刃"], Kit.c("amber"), 38)
-				_refresh()
-				await get_tree().create_timer(0.4).timeout
-			"form_off":
-				if ev.get("broken", false):
-					Sfx.play("break")
-					Kit.float_text(self, _enemy_center() + Vector2(0, -40), "阵型大乱！", Kit.c("gold"), 42)
-					Kit.shake(self, 8.0, 0.18)
-					await get_tree().create_timer(0.3).timeout
-				_refresh()
-			"shield_on":
-				Sfx.play("guard")
-				BattleFx.scale = _enemy_fx_scale()
-				BattleFx.shield_wall(self, _enemy_rect(), true)
-				BattleFx.scale = 1.0
-				Kit.float_text(self, _enemy_center() + Vector2(0, -40), "护盾【%s】%d" % [ev["name"], ev["hp"]], Kit.c("amber"), 38)
-				_refresh()
-				await get_tree().create_timer(0.4).timeout
-			"shield_hit":
-				BattleFx.guard_spark(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)))
-				Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 -%d" % ev["dmg"], Color(0.75, 0.82, 0.95), 28)
-			"shield_regen":
-				Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 +%d" % ev["add"], Color(0.75, 0.82, 0.95), 30)
-				_refresh()
-			"shield_down":
-				Sfx.play("break")
-				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "护盾碎了！", Kit.c("gold"), 42)
-				BattleFx.burst(self, _enemy_center(), Color(0.8, 0.88, 1.0), 16, 14.0, 170.0, 4.0, 0.3)
-				Kit.shake(self, 8.0, 0.18)
-				_refresh()
-			"guard_down":
-				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "%s 溃散！" % ev["name"], Kit.c("gold"), 40)
-				Kit.shake(self, 10.0, 0.2)
-				var gc := _guard_row.global_position - global_position + _guard_row.size / 2.0
-				BattleFx.ring(self, gc, BattleFx.STEEL, 10.0, 180.0, 0.36, 6)
-				BattleFx.burst(self, gc, Color(1.0, 0.85, 0.4), 14, 10.0, 120.0, 4.0, 0.3)
-				_refresh()
-				await get_tree().create_timer(0.3).timeout
-			"round":
-				var left: int = b.turn_limit - int(ev["n"])
-				if left <= 0:  # the last round: lose it and the run is lost — make it impossible to miss
-					await _alert("最后回合！", "击破 %s，否则撤退" % b.enemy["data"]["name"], Kit.c("red"), 1.3)
-				elif left == 1:
-					await _alert("还剩 2 回合", "", Kit.c("orange") if Kit.pal().has("orange") else Kit.c("gold"), 0.8)
-				else:
-					await _banner("第 %d 回合" % ev["n"], Kit.c("gold"))
+		await _play_one(ev)
 	_busy = false
 	_refresh()
 	if b.result != "":
@@ -1617,6 +1113,718 @@ func _play(events: Array) -> void:
 		_finish()
 	elif auto_on:
 		_auto_step.call_deferred()
+
+
+func _play_one(ev: Dictionary) -> void:
+	match ev["t"]:
+		"act":
+			await _ev_act(ev)
+		"passive":
+			await _ev_passive(ev)
+		"hit", "interrupt", "burn", "counter", "poison":
+			await _ev_hit(ev)
+		"resist_down":
+			await _ev_resist_down(ev)
+		"loot":
+			await _ev_loot(ev)
+		"burn_on":
+			await _ev_burn_on(ev)
+		"poison_on":
+			await _ev_poison_on(ev)
+		"counter_on":
+			await _ev_counter_on(ev)
+		"swap":
+			await _ev_swap(ev)
+		"buff":
+			await _ev_buff(ev)
+		"cleanse":
+			await _ev_cleanse(ev)
+		"ap_drain":
+			await _ev_ap_drain(ev)
+		"hurt":
+			await _ev_hurt(ev)
+		"heal":
+			await _ev_heal(ev)
+		"guard", "defend":
+			await _ev_guard(ev)
+		"boost":
+			await _ev_boost(ev)
+		"stun":
+			await _ev_stun(ev)
+		"break":
+			await _ev_break(ev)
+		"ap":
+			await _ev_ap(ev)
+		"enemy_turn":
+			await _ev_enemy_turn(ev)
+		"enemy_stunned":
+			await _ev_enemy_stunned(ev)
+		"enemy_move":
+			await _ev_enemy_move(ev)
+		"enemy_burn_party":
+			await _ev_enemy_burn_party(ev)
+		"enemy_poison_party":
+			await _ev_enemy_poison_party(ev)
+		"enemy_ap_drain":
+			await _ev_enemy_ap_drain(ev)
+		"enemy_hit":
+			await _ev_enemy_hit(ev)
+		"enemy_charge":
+			await _ev_enemy_charge(ev)
+		"enemy_rage":
+			await _ev_enemy_rage(ev)
+		"enemy_heal":
+			await _ev_enemy_heal(ev)
+		"confuse":
+			await _ev_confuse(ev)
+		"charge_break":
+			await _ev_charge_break(ev)
+		"stance_on":
+			await _ev_stance_on(ev)
+		"stance_hit":
+			await _ev_stance_hit(ev)
+		"stance_off":
+			await _ev_stance_off(ev)
+		"guard_on":
+			await _ev_guard_on(ev)
+		"guard_hit":
+			_ev_guard_hit(ev)
+		"mark_on":
+			await _ev_mark_on(ev)
+		"slain":
+			await _ev_slain(ev)
+		"mark_miss":
+			await _ev_mark_miss(ev)
+		"seal_on":
+			await _ev_seal_on(ev)
+		"seal_off":
+			_ev_seal_off(ev)
+		"form_on":
+			await _ev_form_on(ev)
+		"form_off":
+			await _ev_form_off(ev)
+		"shield_on":
+			await _ev_shield_on(ev)
+		"shield_hit":
+			_ev_shield_hit(ev)
+		"shield_regen":
+			_ev_shield_regen(ev)
+		"shield_down":
+			_ev_shield_down(ev)
+		"guard_down":
+			await _ev_guard_down(ev)
+		"round":
+			await _ev_round(ev)
+
+
+func _ev_act(ev: Dictionary) -> void:
+	var v: CardView = _cards[ev["unit"]]
+	_boost_hits = bool(ev.get("boost", false))
+	var used: Dictionary = GameData.get_db().skills.get(str(ev.get("skill", "")), {})
+	_card_lunge(v, _is_ult(used) or _boost_hits)
+	_sfx_act(ev)
+	var kinds: Array = used.get("effects", []).map(func(e): return str(e.get("type", "")))
+	_act_troop = str(b.leaders[int(ev["unit"])].get("leader", {}).get("card", {}).get("troop", "")) if int(ev["unit"]) < b.leaders.size() else ""
+	var uname := str(used.get("name", ""))
+	_act_elem = "thunder" if (str(used.get("elem", "")) == "thunder" or "雷" in uname or "霹雳" in uname or "电" in uname) \
+		else "fire" if ("burn" in kinds or "火" in uname) else "poison" if "poison" in kinds else ""
+	_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] in ["attack", "magic"])  # 大招: physical or magic ultimate blows
+	if _is_ult(used):
+		await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
+	if _boost_hits:
+		BattleFx.boost_cast(self, _card_rect(ev["unit"]))
+		Kit.float_text(self, _card_rect(ev["unit"]).get_center() + Vector2(0, -60), "BOOST ×1.5", Kit.c("gold"), 34)
+	await get_tree().create_timer(0.02).timeout
+
+
+func _ev_passive(ev: Dictionary) -> void:
+	## another card's own move (a troop's small-chance trick): its name over the card
+	var pu: int = int(ev.get("unit", -1))
+	if pu >= 0 and pu < _cards.size():
+		_card_lunge(_cards[pu], false)
+		Kit.float_text(self, _card_rect(pu).get_center() + Vector2(0, -70), "%s：%s！" % [str(ev["name"]).split("·")[0], str(ev["text"])], Kit.c("gold"), 28)
+		await get_tree().create_timer(0.35).timeout
+
+
+func _ev_hit(ev: Dictionary) -> void:
+	var is_rider: bool = ev.get("rider", false)
+	if ev["t"] == "interrupt" and int(ev.get("unit", -1)) >= 0 and int(ev["unit"]) < _cards.size():
+		var iu: int = int(ev["unit"])
+		_card_lunge(_cards[iu], false)
+		Kit.float_text(self, _card_rect(iu).get_center() + Vector2(0, -54), "%s 突袭！" % str(ev.get("member", "部队")), Kit.c("gold"), 30)
+		BattleFx.interrupt_slash(self, _card_rect(iu).get_center(), _enemy_center())
+		await get_tree().create_timer(0.09).timeout
+	elif ev["t"] == "counter" and int(ev.get("slot", -1)) >= 0 and int(ev["slot"]) < _cards.size():
+		var cs: int = int(ev["slot"])
+		_card_lunge(_cards[cs], false)
+		Kit.float_text(self, _card_rect(cs).get_center() + Vector2(0, -54), "反击！", Color(0.45, 0.95, 0.9), 32)
+	var on_guard: bool = ev.get("guard", false) and _guard_row.visible
+	if on_guard:  # the 前卫 takes the blow: sparks on its bar, the boss stands still
+		Kit.shake(_guard_row, 6.0, 0.16)
+		BattleFx.guard_spark(self, _guard_row.global_position - global_position + _guard_row.size / 2.0)
+	else:
+		Kit.shake(_enemy_art, 5.0 if is_rider else 9.0, 0.14 if is_rider else 0.2)
+		_flash(_enemy_art, Color(1.4, 0.9, 1.7) if is_rider else Color(1.6, 0.6, 0.6))
+	var big: bool = not is_rider and ev["dmg"] > b.enemy["max_hp"] * 0.08
+	var ratio := float(ev["dmg"]) / maxf(1.0, float(b.enemy["max_hp"]))
+	_sfx_hit(ev, big)
+	BattleFx.scale = _enemy_fx_scale()
+	match ev["t"]:
+		"hit":
+			if is_rider:
+				BattleFx.rider_hit(self, _enemy_center())
+			elif _ult_hits:
+				if ev["kind"] == "magic":
+					BattleFx.ult_magic(self, _enemy_center(), ev["combo"], ratio)
+				elif _act_troop == "archer":
+					BattleFx.ult_arrow(self, _enemy_center())
+				else:
+					BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
+				Kit.shake(self, 22.0, 0.3)
+			elif ev["kind"] == "magic" or _act_elem == "thunder" or _boost_hits or ev.get("pierce", false) or not BattleFx.troop_hit(self, _enemy_center(), _act_troop, int(ev["combo"])):
+				BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits, _act_elem)
+			elif ratio > 0.08:
+				BattleFx.ring(self, _enemy_center(), Color(1.0, 0.55, 0.3), 14.0, 150.0, 0.36, 7)
+		"counter":
+			BattleFx.counter(self, _enemy_center())
+		"burn":
+			BattleFx.flame_lick(self, _enemy_rect())
+		"poison":
+			BattleFx.poison_cloud(self, _enemy_rect())
+		"interrupt":
+			if ev.get("kind", "attack") == "magic":
+				BattleFx.hit(self, _enemy_center(), "magic", 1, ratio)
+			else:
+				BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
+	BattleFx.scale = 1.0
+	var crit_hit: bool = ev.get("crit", false)
+	if is_rider:
+		Kit.float_text(self, _enemy_center() + Vector2(54, -18), "战意 +%d" % ev["dmg"], Color(0.88, 0.72, 1.0), 36)
+	elif not (int(ev["dmg"]) == 0 and int(ev.get("shield", 0)) > 0):  # all soaked by the 护盾: only its 「盾 -N」 shows
+		Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
+			Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
+	if crit_hit:
+		Kit.shake(self, 14.0, 0.2)
+		BattleFx.scale = _enemy_fx_scale()
+		BattleFx.crit_star(self, _enemy_center())
+		BattleFx.scale = 1.0
+		await _hit_stop(0.05)
+	if float(ev.get("vs", 1.0)) > 1.01 and not is_rider:  # 追击: the combo worked (vs broken / burning / stunned …)
+		Kit.float_text(self, _enemy_center() + Vector2(0, -92), "破绽追击！×%s" % str(snappedf(float(ev["vs"]), 0.1)), Color(1.0, 0.6, 0.25), 32)
+		BattleFx.ring(self, _enemy_center(), Color(1.0, 0.6, 0.25), 20.0, 170.0, 0.34, 4)
+	Kit.tween_bar(_enemy_hp, ev["hp"])
+	_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
+	if ev["t"] == "hit" and not is_rider and ev["combo"] >= 2:
+		_combo_label.text = "%d 连击 +%d%%" % [ev["combo"], ev["combo"] * 10]
+		_combo_heat(int(ev["combo"]))
+		Kit.pop(_combo_label, 1.3 if ev["combo"] < 8 else 1.5)
+	if int(ev.get("hp", 1)) <= 0:
+		BattleFx.scale = _enemy_fx_scale()
+		BattleFx.kill_blow(self, _enemy_center())
+		BattleFx.scale = 1.0
+		_flash(_enemy_art, Color(2.2, 2.0, 1.8))
+		Kit.shake(self, 20.0, 0.32)
+		await _kill_freeze()
+	elif big:
+		Kit.shake(self, 6.0 + 24.0 * minf(ratio, 0.3), 0.18)
+		await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
+	if _ult_hits and ev["t"] == "hit" and not is_rider:
+		await get_tree().create_timer(0.22).timeout  # let the big cut finish before the next blow
+	await get_tree().create_timer(0.07 if is_rider else 0.16).timeout
+
+
+func _ev_resist_down(ev: Dictionary) -> void:
+	## 射穿甲缝: a steel arrow streak through the armour, 双抗 down
+	Sfx.play("break")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.slash(self, _enemy_center(), BattleFx.STEEL, -12.0, 420.0, 6.0)
+	BattleFx.burst(self, _enemy_center(), Color(0.45, 0.8, 0.95), 12, 10.0, 96.0, 3.0, 0.24)
+	BattleFx.scale = 1.0
+	_flash(_enemy_art, Color(0.8, 1.2, 1.6))
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "甲缝洞穿　双抗 -%d%%" % int(round(float(ev["amount"]) * 100)), Color(0.55, 0.85, 1.0), 34)
+	_refresh()
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_loot(ev: Dictionary) -> void:
+	## 劫掠: gold scatters, the haul odds float up
+	Sfx.play("buff")
+	BattleFx.burst(self, _enemy_center(), BattleFx.GOLD, 16, 12.0, 130.0, 5.0, 0.32)
+	BattleFx.embers(self, _enemy_rect(), BattleFx.GOLD, 18, 80.0, true)
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "劫掠！宝箱 %d%%　多卡 %d%%" % [int(round(float(ev["chest"]) * 100)), int(round(float(ev["card"]) * 100))], Kit.c("gold"), 32)
+	_refresh()
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_burn_on(ev: Dictionary) -> void:
+	Sfx.play("burn")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.flame_lick(self, _enemy_rect())
+	BattleFx.scale = 1.0
+	_flash(_enemy_art, Color(1.8, 0.75, 0.35))
+	Kit.float_text(self, _enemy_center() + Vector2(0, -30), "灼烧！", Kit.c("red"), 40)
+	_refresh()
+	await get_tree().create_timer(0.26).timeout
+
+
+func _ev_poison_on(ev: Dictionary) -> void:
+	Sfx.play("burn")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.poison_cloud(self, _enemy_rect())
+	BattleFx.scale = 1.0
+	_flash(_enemy_art, Color(0.65, 1.5, 0.65))
+	Kit.float_text(self, _enemy_center() + Vector2(0, -30), "中毒 ×%d" % int(ev.get("layers", 1)), Kit.c("green"), 40)
+	_refresh()
+	await get_tree().create_timer(0.26).timeout
+
+
+func _ev_counter_on(ev: Dictionary) -> void:
+	Sfx.play("guard")
+	var cu: int = int(ev.get("unit", 0))
+	BattleFx.counter_stance(self, _card_rect(cu))
+	Kit.pop(_cards[cu], 1.08)
+	Kit.float_text(self, _card_rect(cu).get_center() + Vector2(0, -40), "反击架势", Color(0.45, 0.95, 0.9), 34)
+	_refresh()
+	await get_tree().create_timer(0.26).timeout
+
+
+func _ev_swap(ev: Dictionary) -> void:
+	var leaving: CardView = _cards[ev["unit"]]
+	var ot := leaving.create_tween().set_parallel()
+	ot.tween_property(leaving, "modulate:a", 0.0, 0.18)
+	ot.tween_property(leaving, "position:y", leaving.position.y + 40.0, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await get_tree().create_timer(0.18).timeout
+	_rebuild_card(ev["unit"])
+	await get_tree().process_frame  # the row lays the new card out first, then it leaps in from below
+	var arriving: CardView = _cards[ev["unit"]]
+	var home := arriving.position
+	arriving.position.y = home.y + 140.0
+	arriving.modulate.a = 0.0
+	var nt := arriving.create_tween().set_parallel()
+	nt.tween_property(arriving, "position:y", home.y, 0.26).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	nt.tween_property(arriving, "modulate:a", 1.0, 0.12)
+	await get_tree().create_timer(0.24).timeout
+	Sfx.play("guard")
+	var arc := _card_rect(ev["unit"])
+	BattleFx.ring(self, arc.get_center(), BattleFx.GOLD, 20.0, 170.0, 0.34, 6)
+	BattleFx.burst(self, Vector2(arc.get_center().x, arc.end.y - 20.0), BattleFx.GOLD, 12, 10.0, 110.0, 4.0, 0.3)
+	Kit.shake(arriving, 4.0, 0.12)
+	_party_hp.max_value = ev["max"]
+	Kit.tween_bar(_party_hp, ev["hp"])
+	_party_hp_label.text = "%d / %d" % [ev["hp"], ev["max"]]
+	Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60), "登场！", Kit.c("gold"), 40)
+	Kit.pop(_cards[ev["unit"]], 1.08)
+	await get_tree().create_timer(0.35).timeout
+
+
+func _ev_buff(ev: Dictionary) -> void:
+	Sfx.play("buff")
+	Kit.float_text(self, _party_center(), "战意 ×%d" % ev["layers"], Kit.c("gold"), 36)
+	BattleFx.buff_cast(self, range(_cards.size()).map(func(i): return _card_rect(i).get_center()))
+	_refresh()
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_cleanse(ev: Dictionary) -> void:
+	Kit.float_text(self, _party_center(), "状态解除" if ev["n"] > 0 else "无状态", Kit.c("green"), 34)
+	BattleFx.cleanse_wave(self, _cards_rect())
+	_refresh()
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_ap_drain(ev: Dictionary) -> void:
+	var pips: Array = _ap_row.get_children().filter(func(n): return n is Panel)
+	var gone: Array = pips.slice(int(ev["ap"]), int(ev["ap"]) + int(ev["amount"]))
+	BattleFx.drain_shatter(self, gone, gone.size())
+	Kit.float_text(self, _party_center() + Vector2(300, 0), "AP -%d" % ev["amount"], Kit.c("red"), 34)
+	await get_tree().create_timer(0.35).timeout
+
+
+func _ev_hurt(ev: Dictionary) -> void:
+	_flash(_party_box, Color(1.6, 0.5, 0.5))
+	Kit.shake(_party_box, 7.0, 0.18)
+	BattleFx.slash(self, _party_center(), BattleFx.BLOOD, -25.0, 180.0, 10.0)
+	Kit.float_text(self, _party_center(), "-%d" % ev["dmg"], Kit.c("red"), 36)
+	Kit.tween_bar(_party_hp, ev["hp"])
+	_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_heal(ev: Dictionary) -> void:
+	Sfx.play("heal")
+	BattleFx.heal_wave(self, _party_rect())
+	Kit.float_text(self, _party_center(), "+%d" % ev["amt"], Kit.c("green"))
+	Kit.tween_bar(_party_hp, ev["hp"])
+	_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_guard(ev: Dictionary) -> void:
+	Sfx.play("guard")
+	if ev["t"] == "defend":  # the 防御 button: the whole party raises shields (audio.json voice_defaults.guard)
+		Sfx.voice([str(Sfx.voice_defaults.get("guard", ""))], ["guard"])
+	BattleFx.shield_wall(self, _party_rect(), ev["t"] == "defend")
+	Kit.float_text(self, _party_center(), "减伤 %d%%" % int(round(ev["cut"] * 100)), Kit.c("blue"), 32)
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_boost(ev: Dictionary) -> void:
+	Sfx.play("buff")
+	for k in ev["units"]:
+		Kit.pop(_cards[k], 1.08)
+		_flash(_cards[k], Color(1.5, 1.35, 0.7))
+		BattleFx.boost_cast(self, _card_rect(k))
+	Kit.float_text(self, _party_center(), "BOOST", Kit.c("gold"), 34)
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_stun(ev: Dictionary) -> void:
+	Kit.float_text(self, _enemy_center(), "眩晕！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
+	if ev["ok"]:
+		Sfx.play("stun")
+		BattleFx.stun_burst(self, _enemy_center() + Vector2(0, -50))
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_break(ev: Dictionary) -> void:
+	Sfx.play("break")
+	Kit.float_text(self, _enemy_center(), "破防 +%d%%" % int(round(ev["amount"] * 100)), Kit.c("amber"), 34)
+	var crack := BattleFx.break_flash(self, _enemy_rect())
+	crack.get_tree().create_timer(0.8).timeout.connect(crack.queue_free)
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_ap(ev: Dictionary) -> void:
+	_refresh()
+	var all_pips: Array = _ap_row.get_children().filter(func(n): return n is Panel)
+	var top_ap: int = int(ev.get("ap", b.ap))
+	var gained: Array = all_pips.slice(maxi(0, top_ap - int(ev["amount"])), top_ap)
+	BattleFx.ap_gain(self, gained)
+	Kit.float_text(self, _party_center() + Vector2(300, 0), "AP +%d" % ev["amount"], Kit.c("gold"), 34)
+	await get_tree().create_timer(0.25).timeout
+
+
+func _ev_enemy_turn(ev: Dictionary) -> void:
+	_enemy_shouted_this_turn = false
+	await _banner("%s 的行动" % b.enemy["data"]["name"], Kit.c("red"))
+
+
+func _ev_enemy_stunned(ev: Dictionary) -> void:
+	Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
+	await get_tree().create_timer(0.45).timeout
+
+
+func _ev_enemy_move(ev: Dictionary) -> void:
+	_enemy_move_tag(str(ev.get("move", "")))
+	await get_tree().create_timer(0.18).timeout
+
+
+func _ev_enemy_burn_party(ev: Dictionary) -> void:
+	Sfx.play("burn")
+	BattleFx.flame_lick(self, _party_rect())
+	Kit.float_text(self, _party_center(), "我军灼烧！", Kit.c("red"), 38)
+	_refresh()
+	await get_tree().create_timer(0.28).timeout
+
+
+func _ev_enemy_poison_party(ev: Dictionary) -> void:
+	Sfx.play("burn")
+	BattleFx.poison_cloud(self, _party_rect())
+	Kit.float_text(self, _party_center(), "我军中毒 ×%d！" % int(ev.get("layers", 1)), Kit.c("green"), 38)
+	_refresh()
+	await get_tree().create_timer(0.28).timeout
+
+
+func _ev_enemy_ap_drain(ev: Dictionary) -> void:
+	Sfx.play("break")
+	BattleFx.ring(self, _party_center() + Vector2(300, 0), BattleFx.BLOOD, 14.0, 95.0, 0.3, 5)
+	Kit.float_text(self, _party_center() + Vector2(300, 0), "夺气 -%d" % int(ev.get("amount", 1)), Kit.c("red"), 36)
+	_refresh()
+	await get_tree().create_timer(0.26).timeout
+
+
+func _ev_enemy_hit(ev: Dictionary) -> void:
+	var mv_name := str(ev.get("move", ""))
+	var is_fire: bool = mv_name in ["火", "毒"]  # a burn / poison tick on us: no move plaque, no lunge, no war cry
+	if not is_fire and _enemy_big_move(mv_name):  # the wound-up 大招 lands: cut-in, and it roars
+		var ed: Dictionary = b.enemy.get("data", {})
+		Sfx.voice(_enemy_voices(), ["roar", "attack"])
+		_enemy_shouted_this_turn = true
+		await _cutin(str(ed.get("name", "")), str(ed.get("portrait", "")), mv_name, true)
+	elif not is_fire:
+		_enemy_move_tag(mv_name)
+	var heavy_mv: Dictionary = b._move_named(mv_name)
+	if not is_fire and (_enemy_big_move(mv_name) or float(heavy_mv.get("power", 0.0)) >= 1.5):  # a heavy blow: winds back, then lunges at the camera
+		_enemy_art.pivot_offset = _enemy_art.size / 2.0
+		var tws := _enemy_art.create_tween()
+		tws.tween_property(_enemy_art, "scale", Vector2(0.93, 0.93), 0.12).set_trans(Tween.TRANS_QUAD)
+		tws.tween_property(_enemy_art, "scale", Vector2(1.18, 1.18), 0.08).set_trans(Tween.TRANS_BACK)
+		tws.tween_property(_enemy_art, "scale", Vector2.ONE, 0.18)
+		await get_tree().create_timer(0.2).timeout
+	else:
+		var x := _enemy_art.position.y
+		var tw := _enemy_art.create_tween()
+		tw.tween_property(_enemy_art, "position:y", x + 28, 0.08).set_trans(Tween.TRANS_QUAD)
+		tw.tween_property(_enemy_art, "position:y", x, 0.16)
+	# 敌人一回合只喊一次战吼，且灼烧掉血绝不喊叫
+	if not is_fire and not _enemy_shouted_this_turn:
+		Sfx.voice(_enemy_voices(), ["attack"])
+		_enemy_shouted_this_turn = true
+		await get_tree().create_timer(0.04).timeout
+	Sfx.play("burn" if is_fire else "enemy_hit")
+	Kit.shake(self, 10.0, 0.22)
+	if mv_name != "毒":
+		_flash(_party_box, Color(1.6, 0.6, 0.6))
+	if mv_name == "毒":
+		BattleFx.poison_cloud(self, _party_rect())
+		_flash(_party_box, Color(0.7, 1.5, 0.8))
+	elif is_fire:
+		BattleFx.flame_lick(self, _party_rect())
+	elif _enemy_big_move(mv_name):
+		BattleFx.enemy_ult_slash(self, _cards_rect())
+		Kit.shake(self, 22.0, 0.4)
+		for c in _cards:
+			Kit.shake(c, 9.0, 0.3)
+	elif int(ev.get("mark", -1)) >= 0 and int(ev["mark"]) < _cards.size():  # 点名 lands: an X cut across the marked card
+		var mr := _card_rect(int(ev["mark"]))
+		BattleFx.slash(self, mr.get_center(), Color(1.0, 0.15, 0.1), -40.0, mr.size.length() * 1.1, 16.0)
+		BattleFx.slash(self, mr.get_center(), Color(1.0, 0.85, 0.75), 40.0, mr.size.length() * 1.1, 10.0, 0.1)
+		BattleFx.burst(self, mr.get_center(), Color(1.0, 0.25, 0.15), 16, 20.0, 170.0, 6.0, 0.35)
+		_flash(_cards[int(ev["mark"])], Color(2.2, 0.5, 0.45))
+		Kit.shake(_cards[int(ev["mark"])], 16.0, 0.35)
+		Kit.shake(self, 14.0, 0.3)
+		BattleFx.vignette(self, Color(0.8, 0.0, 0.0, 0.5), 0.6)
+	else:
+		BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
+		for c in _cards:
+			Kit.shake(c, 5.0, 0.16)
+	Kit.float_text(self, _party_center(), ("暴击 " if ev.get("crit", false) else "") + "-%d" % ev["dmg"], Kit.c("red"), 56 if ev.get("crit", false) else 44)
+	Kit.tween_bar(_party_hp, ev["hp"])
+	_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
+	await get_tree().create_timer(0.35).timeout
+
+
+func _ev_enemy_charge(ev: Dictionary) -> void:
+	if not _enemy_shouted_this_turn:
+		Sfx.voice(_enemy_voices(), ["roar", "attack"])
+		_enemy_shouted_this_turn = true
+	Sfx.play("charge")
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "蓄力！", Kit.c("red"), 44)
+	Kit.shake(_enemy_art, 5.0, 0.4)
+	_refresh()
+	await get_tree().create_timer(0.45).timeout
+
+
+func _ev_enemy_rage(ev: Dictionary) -> void:
+	if not _enemy_shouted_this_turn:
+		Sfx.voice(_enemy_voices(), ["roar", "attack"])
+		_enemy_shouted_this_turn = true
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "狂暴！", Kit.c("red"), 44)
+	_flash(_enemy_art, Color(1.8, 0.5, 0.5))
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.ring(self, _enemy_center(), BattleFx.BLOOD, 20.0, 200.0, 0.4, 7)
+	BattleFx.embers(self, _enemy_rect(), Color(1.0, 0.25, 0.2, 0.9), 22, 90.0, true)
+	BattleFx.scale = 1.0
+	_refresh()
+	await get_tree().create_timer(0.4).timeout
+
+
+func _ev_enemy_heal(ev: Dictionary) -> void:
+	Sfx.play("heal")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.heal_wave(self, _enemy_rect())
+	BattleFx.scale = 1.0
+	Kit.float_text(self, _enemy_center(), "+%d" % ev["amt"], Kit.c("green"), 40)
+	Kit.tween_bar(_enemy_hp, ev["hp"])
+	_enemy_hp_label.text = "%d / %d" % [ev["hp"], b.enemy["max_hp"]]
+	await get_tree().create_timer(0.35).timeout
+
+
+func _ev_confuse(ev: Dictionary) -> void:
+	Kit.pop(_cards[ev["unit"]], 1.06)
+	Kit.float_text(self, _cards[ev["unit"]].global_position - global_position + Vector2(100, 60),
+		"重创" if ev.get("mark", false) else "混乱", Kit.c("red") if ev.get("mark", false) else Kit.c("purple"), 32)
+	BattleFx.stun_burst(self, _card_rect(ev["unit"]).position + Vector2(_card_rect(ev["unit"]).size.x / 2, 30))
+	BattleFx.burst(self, _card_rect(ev["unit"]).get_center(), BattleFx.VIOLET, 10, 20.0, 110.0, 5.0)
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_charge_break(ev: Dictionary) -> void:
+	## 破招: the wind-up shatters, an AP flies back
+	Sfx.play("break")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.burst(self, _enemy_center(), Kit.c("gold"), 22, 30.0, 220.0, 6.0)
+	BattleFx.scale = 1.0
+	_flash(_enemy_art, Color(2.0, 1.8, 0.9))
+	Kit.shake(self, 16.0, 0.26)
+	await _alert("破招！", "【%s】被打断　AP +%d" % [ev["move"], int(ev.get("gain", 1))], Kit.c("gold"), 0.9)
+	_refresh()
+	var pips2: Array = _ap_row.get_children().filter(func(n): return n is Panel)
+	var top2: int = int(ev.get("ap", b.ap))
+	BattleFx.ap_gain(self, pips2.slice(maxi(0, top2 - int(ev.get("gain", 1))), top2))
+	await get_tree().create_timer(0.2).timeout
+
+
+func _ev_stance_on(ev: Dictionary) -> void:
+	Sfx.play("guard")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.counter_stance(self, _enemy_rect())
+	BattleFx.scale = 1.0
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势！兵刃会被反击", Kit.c("red"), 38)
+	_refresh()
+	await get_tree().create_timer(0.4).timeout
+
+
+func _ev_stance_hit(ev: Dictionary) -> void:
+	## the enemy answers the card that struck it
+	var su: int = int(ev.get("unit", 0))
+	Sfx.play("enemy_hit")
+	if su >= 0 and su < _cards.size():
+		BattleFx.claw(self, _card_rect(su).get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), 0.0)
+		Kit.shake(_cards[su], 8.0, 0.2)
+	Kit.float_text(self, _party_center(), "反击 -%d" % ev["dmg"], Kit.c("red"), 40)
+	Kit.tween_bar(_party_hp, ev["hp"])
+	_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_stance_off(ev: Dictionary) -> void:
+	if ev.get("broken", false):  # 眩晕 / 破招 shattered it (not just run out)
+		Sfx.play("break")
+		BattleFx.scale = _enemy_fx_scale()
+		BattleFx.slash(self, _enemy_center(), Color(0.45, 0.95, 0.9), -38.0, 260.0, 10.0)
+		BattleFx.burst(self, _enemy_center(), Color(0.82, 1.0, 0.98), 16, 14.0, 150.0, 4.0, 0.3)
+		BattleFx.scale = 1.0
+		Kit.float_text(self, _enemy_center() + Vector2(0, -40), "架势击破！", Kit.c("gold"), 42)
+		Kit.shake(self, 10.0, 0.2)
+		await get_tree().create_timer(0.35).timeout
+	_refresh()
+
+
+func _ev_guard_on(ev: Dictionary) -> void:
+	Sfx.play("charge")
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "前卫：%s！" % ev["name"], Kit.c("amber"), 40)
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.shield_wall(self, _enemy_rect())
+	BattleFx.scale = 1.0
+	_refresh()
+	Kit.pop(_guard_row, 1.1)
+	await get_tree().create_timer(0.45).timeout
+
+
+func _ev_guard_hit(ev: Dictionary) -> void:
+	_guard_bar.max_value = ev["max"]
+	Kit.tween_bar(_guard_bar, ev["hp"])
+
+
+func _ev_mark_on(ev: Dictionary) -> void:
+	## 点名: a red line from the enemy to the marked card
+	Sfx.play("charge")
+	var mu: int = int(ev.get("unit", 0))
+	if mu >= 0 and mu < _cards.size():
+		BattleFx.arrow(self, _enemy_center(), _card_rect(mu).get_center(), Color(1.0, 0.25, 0.15), 0.0, 1.6)
+		await get_tree().create_timer(0.18).timeout
+		await _mark_stamp(mu)
+	await _alert("点名", "下回合【%s】→ %s　换下他就扑空，不换就被打倒" % [ev["move"], b.unit_name(b.leaders[mu]) if mu < b.leaders.size() else ""], Kit.c("red"), 0.9)
+	_refresh()
+
+
+func _ev_slain(ev: Dictionary) -> void:
+	## 点名 landed: the card goes dark and cracks, out of action this fight
+	var xu: int = int(ev.get("unit", 0))
+	if xu >= 0 and xu < _cards.size():
+		Sfx.play("break")
+		var xc: Control = _cards[xu]
+		xc.create_tween().tween_property(xc, "modulate", Color(0.3, 0.3, 0.3), 0.45)
+		BattleFx.burst(self, _card_rect(xu).get_center(), Color(0.55, 0.5, 0.5), 12, 20.0, 130.0, 4.0, 0.3)
+		Kit.float_text(self, _card_rect(xu).get_center() + Vector2(0, -40), "被打倒！", Kit.c("red"), 44)
+		await get_tree().create_timer(0.6).timeout
+	_refresh()
+
+
+func _ev_mark_miss(ev: Dictionary) -> void:
+	Sfx.play("guard")
+	Kit.float_text(self, _party_center() + Vector2(0, -50), "扑空！", Kit.c("gold"), 44)
+	await get_tree().create_timer(0.35).timeout
+
+
+func _ev_seal_on(ev: Dictionary) -> void:
+	Sfx.play("break")
+	BattleFx.ring(self, _party_center(), Color(0.6, 0.4, 0.9), 20.0, 260.0, 0.4, 6)
+	Kit.float_text(self, _party_center() + Vector2(0, -50), "%s被封！" % Battle.SEAL_NAMES.get(str(ev["kind"]), "技能"), Kit.c("purple"), 40)
+	_refresh()
+	await get_tree().create_timer(0.4).timeout
+
+
+func _ev_seal_off(ev: Dictionary) -> void:
+	_refresh()
+
+
+func _ev_form_on(ev: Dictionary) -> void:
+	Sfx.play("guard")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.ring(self, _enemy_center(), Color(0.3, 0.55, 0.95) if ev["vs"] == "magic" else Color(0.85, 0.55, 0.2), 30.0, 220.0, 0.45, 7)
+	BattleFx.scale = 1.0
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "变阵【%s】：%s" % [ev["name"], "挡谋略" if ev["vs"] == "magic" else "挡兵刃"], Kit.c("amber"), 38)
+	_refresh()
+	await get_tree().create_timer(0.4).timeout
+
+
+func _ev_form_off(ev: Dictionary) -> void:
+	if ev.get("broken", false):
+		Sfx.play("break")
+		Kit.float_text(self, _enemy_center() + Vector2(0, -40), "阵型大乱！", Kit.c("gold"), 42)
+		Kit.shake(self, 8.0, 0.18)
+		await get_tree().create_timer(0.3).timeout
+	_refresh()
+
+
+func _ev_shield_on(ev: Dictionary) -> void:
+	Sfx.play("guard")
+	BattleFx.scale = _enemy_fx_scale()
+	BattleFx.shield_wall(self, _enemy_rect(), true)
+	BattleFx.scale = 1.0
+	Kit.float_text(self, _enemy_center() + Vector2(0, -40), "护盾【%s】%d" % [ev["name"], ev["hp"]], Kit.c("amber"), 38)
+	_refresh()
+	await get_tree().create_timer(0.4).timeout
+
+
+func _ev_shield_hit(ev: Dictionary) -> void:
+	BattleFx.guard_spark(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)))
+	Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 -%d" % ev["dmg"], Color(0.75, 0.82, 0.95), 28)
+
+
+func _ev_shield_regen(ev: Dictionary) -> void:
+	Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 +%d" % ev["add"], Color(0.75, 0.82, 0.95), 30)
+	_refresh()
+
+
+func _ev_shield_down(ev: Dictionary) -> void:
+	Sfx.play("break")
+	Kit.float_text(self, _enemy_center() + Vector2(0, 30), "护盾碎了！", Kit.c("gold"), 42)
+	BattleFx.burst(self, _enemy_center(), Color(0.8, 0.88, 1.0), 16, 14.0, 170.0, 4.0, 0.3)
+	Kit.shake(self, 8.0, 0.18)
+	_refresh()
+
+
+func _ev_guard_down(ev: Dictionary) -> void:
+	Kit.float_text(self, _enemy_center() + Vector2(0, 30), "%s 溃散！" % ev["name"], Kit.c("gold"), 40)
+	Kit.shake(self, 10.0, 0.2)
+	var gc := _guard_row.global_position - global_position + _guard_row.size / 2.0
+	BattleFx.ring(self, gc, BattleFx.STEEL, 10.0, 180.0, 0.36, 6)
+	BattleFx.burst(self, gc, Color(1.0, 0.85, 0.4), 14, 10.0, 120.0, 4.0, 0.3)
+	_refresh()
+	await get_tree().create_timer(0.3).timeout
+
+
+func _ev_round(ev: Dictionary) -> void:
+	var left: int = b.turn_limit - int(ev["n"])
+	if left <= 0:  # the last round: lose it and the run is lost — make it impossible to miss
+		await _alert("最后回合！", "击破 %s，否则撤退" % b.enemy["data"]["name"], Kit.c("red"), 1.3)
+	elif left == 1:
+		await _alert("还剩 2 回合", "", Kit.c("orange") if Kit.pal().has("orange") else Kit.c("gold"), 0.8)
+	else:
+		await _banner("第 %d 回合" % ev["n"], Kit.c("gold"))
 
 
 func _is_female(card: Dictionary) -> bool:
