@@ -1183,7 +1183,7 @@
         {
           "type": "counter",
           "power": 0.6
-        }
+        }, {"type": "guard", "cut": 0.3}
       ]
     },
     "baier_hujia": {
@@ -1238,7 +1238,7 @@
         {
           "type": "stun",
           "chance": 0.3
-        }
+        }, {"type": "guard", "cut": 0.3}
       ]
     },
     "rangma": {
@@ -1872,7 +1872,7 @@
         {
           "type": "heal",
           "rate": 3.0
-        }
+        }, {"type": "guard", "cut": 0.3}
       ]
     },
     "bawang": {
@@ -2148,7 +2148,7 @@
         {
           "type": "counter",
           "power": 1.0
-        }
+        }, {"type": "guard", "cut": 0.4}
       ]
     },
     "guding": {
@@ -2459,7 +2459,7 @@
         {
           "type": "counter",
           "power": 1.0
-        }
+        }, {"type": "guard", "cut": 0.4}
       ]
     },
     "ziwu": {
