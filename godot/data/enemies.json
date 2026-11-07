@@ -756,7 +756,7 @@
         {"name": "护驾·蓄力", "power": 0, "weight": 1, "charge": "亲兵护驾", "prefer": "self_low_hp"},
         {"name": "亲兵护驾", "power": 0, "weight": 0, "summon": {"name": "仲氏亲兵", "hp_pct": 0.14, "strike": 0.5}},
         {"name": "天子点名", "power": 0, "weight": 1, "mark": "伪帝诛臣"},
-        {"name": "伪帝诛臣", "power": 0, "weight": 0}, {"name": "蜜水·蓄力", "power": 0, "weight": 1, "charge": "一碗蜜水", "prefer": "self_low_hp"}, {"name": "一碗蜜水", "power": 0, "weight": 0, "heal": 0.15}
+        {"name": "伪帝诛臣", "power": 0, "weight": 0}, {"name": "蜜水·蓄力", "power": 0, "weight": 1, "charge": "一碗蜜水", "prefer": "self_low_hp"}, {"name": "一碗蜜水", "power": 0, "weight": 0, "heal": 0.25}
       ],
       "card": "yuanshu"
     },
@@ -934,7 +934,7 @@
           "once": true
         },
         {"name": "酒池·蓄力", "power": 0, "weight": 1, "charge": "酒池肉林", "prefer": "self_low_hp"},
-        {"name": "酒池肉林", "power": 0, "weight": 0, "heal": 0.3},
+        {"name": "酒池肉林", "power": 0, "weight": 0, "heal": 0.25},
         {"name": "相国铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.2}},
         {"name": "相国瞪眼", "power": 0, "weight": 1, "mark": "肥躯碾杀"},
         {"name": "肥躯碾杀", "power": 0, "weight": 0},
@@ -1887,7 +1887,7 @@
           "pierce": true
         },
         {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "唐周护卫", "prefer": "player_buffed"},
-        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "符水·蓄力", "power": 0, "weight": 1, "charge": "符水疗伤", "prefer": "self_low_hp"}, {"name": "符水疗伤", "power": 0, "weight": 0, "heal": 0.15}
+        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "符水·蓄力", "power": 0, "weight": 1, "charge": "符水疗伤", "prefer": "self_low_hp"}, {"name": "符水疗伤", "power": 0, "weight": 0, "heal": 0.25}
       ],
       "card": "yaodao_card"
     },
@@ -2260,7 +2260,7 @@
           "power": 3.8,
           "weight": 0,
           "pierce": true
-        }, {"name": "太平·蓄力", "power": 0, "weight": 1, "charge": "太平清领道", "prefer": "self_low_hp"}, {"name": "太平清领道", "power": 0, "weight": 0, "heal": 0.2}
+        }, {"name": "太平·蓄力", "power": 0, "weight": 1, "charge": "太平清领道", "prefer": "self_low_hp"}, {"name": "太平清领道", "power": 0, "weight": 0, "heal": 0.25}
       ],
       "card": "zhangjiao"
     },
@@ -2858,7 +2858,7 @@
           "pierce": true
         },
         {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "张修护卫", "prefer": "player_buffed"},
-        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "五斗米·蓄力", "power": 0, "weight": 1, "charge": "五斗米道", "prefer": "self_low_hp"}, {"name": "五斗米道", "power": 0, "weight": 0, "heal": 0.15}
+        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "五斗米·蓄力", "power": 0, "weight": 1, "charge": "五斗米道", "prefer": "self_low_hp"}, {"name": "五斗米道", "power": 0, "weight": 0, "heal": 0.25}
       ],
       "card": "xuanjizi_card"
     },
@@ -4759,7 +4759,7 @@
     "n5_sx_liubei": {"hp": 90, "at": 84, "name": "白门·刘备", "portrait": "liubei", "actions": 2, "moves": [{"name": "双股剑", "power": 1.0, "weight": 4}, {"name": "仁义之师", "power": 0, "weight": 1, "heal": 0.05}, {"name": "以泪服人", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "双剑·蓄力", "power": 0, "weight": 1, "charge": "双剑斩"}, {"name": "双剑斩", "power": 3.1, "weight": 0}, {"name": "汉室容不得", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "inf_n"},
     "n5_sx_taoqian": {"hp": 67, "at": 58, "name": "白门城楼·陶谦", "portrait": "taoqian", "actions": 3, "moves": [{"name": "万弩齐发", "power": 1.2, "weight": 3}, {"name": "毒箭", "power": 0.8, "weight": 1, "poison_party": 0.05, "turns": 3}, {"name": "令旗一挥", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "咳血", "power": 0, "weight": 1, "heal": 0.03}, {"name": "令旗封阵", "power": 0.4, "weight": 1, "seal": "ultimate"}, {"name": "城楼女墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.2}}], "card": "inf_n"},
     "n5_caobao_ren": {"name": "曹豹的人", "portrait": "caobao", "actions": 2, "moves": [{"name": "家兵乱刀", "power": 1.0, "weight": 3}, {"name": "仗势欺人", "power": 0.6, "weight": 1, "confuse": 0.4}, {"name": "强抢", "power": 1.4, "weight": 1}], "card": "xuzhou_qiang"},
-    "n5_caobao": {"name": "徐州大将·曹豹", "portrait": "caobao", "actions": 2, "moves": [{"name": "长刀", "power": 1.0, "weight": 3}, {"name": "家兵齐上", "power": 1.3, "weight": 1}, {"name": "仗势欺人", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "醉酒·蓄力", "power": 0, "weight": 1, "charge": "痛饮三坛", "prefer": "self_low_hp"}, {"name": "痛饮三坛", "power": 0, "weight": 0, "heal": 0.2}, {"name": "叫家兵·蓄力", "power": 0, "weight": 1, "charge": "曹府家兵", "prefer": "player_buffed"}, {"name": "曹府家兵", "power": 0, "weight": 0, "summon": {"name": "曹府家兵", "hp_pct": 0.15, "strike": 0.5}}], "card": "caobao"},
+    "n5_caobao": {"name": "徐州大将·曹豹", "portrait": "caobao", "actions": 2, "moves": [{"name": "长刀", "power": 1.0, "weight": 3}, {"name": "家兵齐上", "power": 1.3, "weight": 1}, {"name": "仗势欺人", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "醉酒·蓄力", "power": 0, "weight": 1, "charge": "痛饮三坛", "prefer": "self_low_hp"}, {"name": "痛饮三坛", "power": 0, "weight": 0, "heal": 0.25}, {"name": "叫家兵·蓄力", "power": 0, "weight": 1, "charge": "曹府家兵", "prefer": "player_buffed"}, {"name": "曹府家兵", "power": 0, "weight": 0, "summon": {"name": "曹府家兵", "hp_pct": 0.15, "strike": 0.5}}], "card": "caobao"},
     "n5_yanxiao": {"name": "泗水盐枭", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.06}], "card": "shanzei_bing"},
     "n5_yanxiao_tou": {"name": "盐枭头子", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "铁胆", "power": 1.0, "weight": 3}, {"name": "盐包砸人", "power": 1.3, "weight": 1}, {"name": "撒盐迷眼", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "抽三成", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "盐包堵路", "power": 0.4, "weight": 1, "seal": "attack"}], "card": "shanzei_bing"},
     "n5_yujin": {"name": "曹军后队·于禁", "portrait": "yujin", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "后队结阵", "power": 0, "weight": 1, "heal": 0.04}, {"name": "军令如山", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "反击", "power": 1.4, "weight": 1}, {"name": "后队盾阵", "power": 0, "weight": 1, "shield": {"hp_pct": 0.2}}], "card": "inf_n"},
