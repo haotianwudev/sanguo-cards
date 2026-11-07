@@ -527,7 +527,7 @@ func _sync_skill_bars() -> void:
 		var skills: Array = [] if u.get("slain", false) else u["leader"]["card"]["skills"]
 		for sid in skills:
 			var sk: Dictionary = GameData.get_db().skills[sid]
-			var ult: bool = _is_ult(sk) or (b.enemy_state("charging") and sk["effects"].any(func(e): return e["type"] == "interrupt"))  # 打断 lights up while the enemy winds up
+			var ult: bool = _is_ult(sk) or (b.enemy_state("charging") and Battle.can_interrupt(sk))  # 打断 lights up while the enemy winds up
 			var btn := Button.new()
 			var tag := Kit.skill_tag(sk)
 			btn.text = "%s  AP%d%s" % [sk["name"], b.cost(u, sk), (" " + tag) if tag != "" else ""]

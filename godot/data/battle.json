@@ -46,6 +46,8 @@
     "buff_magic_mult": 2,
     "_shield_regen": "护盾这一回合没挨打（没被兵刃碰过），敌人回合结束时回复 敌人最大体力 × 这个比例 的盾量，不超过盾的上限（用户 2026-11-07）。",
     "shield_regen": 0.05,
+    "_stun_interrupts": "带眩晕的技能（不管几成概率）对蓄力中的敌人一定打断，奖励同打断技能（battle.charge_break）；眩晕本身照常掷骰（用户 2026-11-07）。",
+    "stun_interrupts": true,
     "boost_mult": 1.5,
     "boost_idle_rounds": 3,
     "boost_chance": 0.5,

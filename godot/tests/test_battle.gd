@@ -918,6 +918,15 @@ func test_guard_skills_join_the_defend_streak() -> void:
 	check_eq(b.defend_streak, 0, "a round with neither resets it")
 
 
+func test_a_stun_skill_always_breaks_a_wind_up() -> void:
+	## any 眩晕, whatever its chance, breaks the charge for sure (battle.stun_interrupts)
+	var sk := {"id": "x", "name": "x", "cost": 1, "effects": [{"type": "attack", "power": 1.0}, {"type": "stun", "chance": 0.0}]}
+	check(Battle.can_interrupt(sk), "a 0% stun still counts as an 打断")
+	check_eq(Battle.play_effects(sk).map(func(e): return e["type"]), ["attack", "interrupt", "stun"], "the 打断 goes in before the stun")
+	check(GameData.get_db().cards["liuye"]["skills"].has("piliche"), "刘晔 throws 霹雳车")
+	check(Battle.can_interrupt(GameData.get_db().skills["piliche"]), "…which, stunning, breaks a wind-up")
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true

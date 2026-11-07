@@ -1378,6 +1378,20 @@
         }, {"type": "interrupt"}
       ]
     },
+    "piliche": {
+      "name": "霹雳车",
+      "cost": 4,
+      "uses": 1,
+      "effects": [
+        {
+          "type": "attack", "hits": 3
+        },
+        {
+          "type": "stun",
+          "chance": 0.5
+        }
+      ]
+    },
     "quhu_tunlang": {
       "name": "驱虎吞狼",
       "cost": 3,
@@ -1436,7 +1450,7 @@
         },
         {
           "type": "interrupt"
-        }
+        }, {"type": "poison", "stacks": 1, "pct": 0.02, "max": 5, "turns": 3}
       ]
     },
     "dingjunshan": {

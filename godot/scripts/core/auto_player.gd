@@ -15,7 +15,7 @@ extends RefCounted
 static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 	var v := 0.0
 	var at: float = u["leader"]["at"]
-	for e in sk["effects"]:
+	for e in Battle.play_effects(sk):
 		match e["type"]:
 			"attack", "magic":
 				var hit := at * float(e["power"]) * int(e.get("hits", 1)) * b.vs_mult(e)
@@ -202,7 +202,7 @@ static func _allowed(b: Battle, sk: Dictionary, pre: Dictionary) -> bool:
 static func _held_interrupt(b: Battle, sk: Dictionary, pre: Dictionary) -> bool:
 	## an 打断 skill kept back for the enemy's wind-up: under a preset that interrupts, against an enemy that can wind up at all,
 	## while it isn't winding up and isn't nearly dead (then it is just a blow — spend it)
-	if not pre.get("interrupt", true) or b.enemy_state("charging") or not sk["effects"].any(func(e): return e["type"] == "interrupt"):
+	if not pre.get("interrupt", true) or b.enemy_state("charging") or not Battle.can_interrupt(sk):
 		return false
 	if int(b.enemy["hp"]) * 4 < int(b.enemy["max_hp"]):
 		return false
@@ -217,7 +217,7 @@ static func _interrupt_act(b: Battle) -> Array:
 			continue
 		var u: Dictionary = b.leaders[i]
 		for sk in b.skills_of(u):
-			if b.usable(u, sk) and sk["effects"].any(func(e): return e["type"] == "interrupt"):
+			if b.usable(u, sk) and Battle.can_interrupt(sk):
 				return [i, sk["id"]]
 	return []
 
@@ -268,7 +268,7 @@ static func _row_act(b: Battle, tactics: Dictionary) -> Array:
 
 static func skill_kind(sk: Dictionary) -> Array:
 	## which 兵种军令 kinds a skill answers to: basic 普通技 / signature 招牌技 / ult 大招 / interrupt 打断技 / heal 治疗解除 / support 增益防守
-	var types: Array = sk["effects"].map(func(e): return e["type"])
+	var types: Array = Battle.play_effects(sk).map(func(e): return e["type"])
 	var kinds: Array = []
 	var hits: bool = types.has("attack") or types.has("magic")
 	if types.has("interrupt"):

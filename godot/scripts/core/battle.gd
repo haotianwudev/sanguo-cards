@@ -316,6 +316,28 @@ static func is_ult(sk: Dictionary) -> bool:
 	return sk.get("uses") != null or sk.get("per_battle", false)
 
 
+static func play_effects(sk: Dictionary) -> Array:
+	## the effects a skill really plays: one with a 眩晕 (any chance) breaks a wind-up for sure (battle.stun_interrupts, user rule 2026-11-07),
+	## so an 打断 goes in just before its first stun when it has none of its own
+	var effs: Array = sk.get("effects", [])
+	if not bool(GameData.get_db().battle.get("stun_interrupts", false)) or effs.any(func(e): return e["type"] == "interrupt"):
+		return effs
+	var at := -1
+	for k in effs.size():
+		if effs[k]["type"] == "stun":
+			at = k
+			break
+	if at < 0:
+		return effs
+	var out := effs.duplicate()
+	out.insert(at, {"type": "interrupt"})
+	return out
+
+
+static func can_interrupt(sk: Dictionary) -> bool:
+	return play_effects(sk).any(func(e): return e["type"] == "interrupt")
+
+
 func usable(u: Dictionary, sk: Dictionary) -> bool:
 	if sealed(sk):
 		return false
@@ -353,7 +375,9 @@ func act(i: int, skill_id: String) -> Array:
 	_ev({"t": "act", "unit": i, "skill": skill_id, "boost": u["boosted"]})
 	var log: Array = ["%s【%s】%s" % [unit_name(u), sk["name"], "（BOOST）" if u["boosted"] else ""]]
 	u["boosted"] = false
-	for eff in sk["effects"]:
+	for eff in play_effects(sk):
+		if eff["type"] == "interrupt" and enemy["charging"] == "" and not sk["effects"].has(eff):
+			continue  # the 眩晕's own 打断 says nothing when there is no wind-up
 		log.append_array(_apply(u, eff, mult))
 	if enemy["hp"] > 0 and sk["effects"].any(func(e): return e["type"] == "attack"):
 		log.append_array(_stance_strike(i))  # 反击架势: a physical skill is answered once
@@ -538,7 +562,7 @@ func party_interrupts_left() -> int:
 	var n := 0
 	for u in leaders:
 		for sk in skills_of(u):
-			if sk["effects"].any(func(e): return e["type"] == "interrupt"):
+			if can_interrupt(sk):
 				var left: Variant = u["uses_left"][sk["id"]]
 				if left == null or int(left) > 0:
 					n += 1

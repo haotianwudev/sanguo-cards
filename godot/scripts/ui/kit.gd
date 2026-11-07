@@ -440,7 +440,7 @@ const _COND_WORDS := {"broken": "破防", "burning": "灼烧", "poisoned": "中�
 static func skill_desc(sk: Dictionary) -> String:
 	## what a skill does, as short tags from its effects — no explanations (user call: the old sentences were too long)
 	var parts: Array = []
-	for e in sk.get("effects", []):
+	for e in Battle.play_effects(sk):
 		match e["type"]:
 			"attack":
 				parts.append("兵刃 ×%s%s%s%s" % [_num(e["power"]), (" %d连" % int(e["hits"])) if int(e.get("hits", 1)) > 1 else "",
