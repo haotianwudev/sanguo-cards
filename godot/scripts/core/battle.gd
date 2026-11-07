@@ -463,6 +463,7 @@ func _land(d: int, kind: String, pierce: bool) -> int:
 			_absorbed = d
 			s["hp"] = int(s["hp"]) - d
 			d = 0
+		s["hit"] = true  # touched this round: no 回盾 at the round's end
 		_ev({"t": "shield_hit", "dmg": _absorbed, "hp": s["hp"], "max": s["max_hp"]})
 		if int(s["hp"]) <= 0:
 			_ev({"t": "shield_down", "name": s["name"]})
@@ -1224,6 +1225,15 @@ func _enemy_phase(defend_cut: float) -> Array:
 			return log
 	if not was_stunned and result == "":
 		log.append_array(_affix_status())
+	if not enemy["shield"].is_empty() and result == "":  # 回盾 (user rule): a shield nobody hit this round mends battle.shield_regen of the enemy's max HP
+		var sd: Dictionary = enemy["shield"]
+		if not sd.get("hit", false) and int(sd["hp"]) < int(sd["max_hp"]):
+			var add := mini(int(sd["max_hp"]) - int(sd["hp"]), maxi(1, int(round(float(enemy["max_hp"]) * float(db.battle.get("shield_regen", 0.0))))))
+			if add > 0 and float(db.battle.get("shield_regen", 0.0)) > 0.0:
+				sd["hp"] = int(sd["hp"]) + add
+				_ev({"t": "shield_regen", "add": add, "hp": sd["hp"], "max": sd["max_hp"]})
+				log.append("  %s 的护盾没挨打，回复 %d（%d/%d）" % [enemy["data"]["name"], add, sd["hp"], sd["max_hp"]])
+		sd["hit"] = false
 	if enemy["break_turns"] > 0:
 		enemy["break_turns"] -= 1
 		if enemy["break_turns"] == 0:

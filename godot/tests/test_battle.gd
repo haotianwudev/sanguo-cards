@@ -885,6 +885,19 @@ func test_every_cao_ren_raises_a_shield() -> void:
 	check(n >= 5, "found the 曹仁s: %d" % n)
 
 
+func test_an_untouched_shield_mends_at_the_round_end_a_hit_one_does_not() -> void:
+	var b := Battle.start("hulao", party(["machao"]), 2)
+	var mh := int(b.enemy["max_hp"])
+	b.enemy["shield"] = {"name": "铁壁", "hp": 10, "max_hp": mh}
+	b.end_round()
+	check_eq(int(b.enemy["shield"]["hp"]), 10 + int(round(mh * 0.05)), "nobody hit it: +5% of max HP")
+	b.enemy["shield"]["hp"] = 10
+	b._apply(b.leaders[0], {"type": "attack", "power": 0.01}, 1.0)
+	var after_hit := int(b.enemy["shield"]["hp"])
+	b.end_round()
+	check(b.enemy["shield"].is_empty() or int(b.enemy["shield"]["hp"]) <= after_hit, "hit this round: no mending")
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true

@@ -1578,6 +1578,9 @@ func _play(events: Array) -> void:
 			"shield_hit":
 				BattleFx.guard_spark(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)))
 				Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 -%d" % ev["dmg"], Color(0.75, 0.82, 0.95), 28)
+			"shield_regen":
+				Kit.float_text(self, _enemy_center() + Vector2(70, -10), "盾 +%d" % ev["add"], Color(0.75, 0.82, 0.95), 30)
+				_refresh()
 			"shield_down":
 				Sfx.play("break")
 				Kit.float_text(self, _enemy_center() + Vector2(0, 30), "护盾碎了！", Kit.c("gold"), 42)
