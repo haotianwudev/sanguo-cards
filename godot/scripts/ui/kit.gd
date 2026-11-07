@@ -448,8 +448,9 @@ static func skill_desc(sk: Dictionary) -> String:
 			"magic":
 				parts.append("谋略 ×%s%s" % [_num(e["power"]), (" 对灼烧×%s" % _num(e["burning_mult"])) if e.has("burning_mult") else ""])
 			"buff":
-				parts.append("战意+1（攻+%d%% 减伤%d%%%s）" % [int(round(float(e["atk"]) * 100)), int(round(float(e["def"]) * 100)),
-					(" 附法伤%d%%" % int(round(float(e["magic"]) * 100))) if e.has("magic") else ""])
+				parts.append("战意+1（攻+%d%%%s%s）" % [int(round(float(e["atk"]) * 100)),
+					(" 减伤%d%%" % int(round(float(e["def"]) * 100))) if float(e.get("def", 0.0)) > 0.0 else "",
+					(" 兵刃附谋略%d%%" % int(round(float(e["magic"]) * 100))) if e.has("magic") else ""])
 			"poison":
 				parts.append("中毒+%d（每层%d%%）" % [int(e.get("stacks", 1)), int(round(float(e["pct"]) * 100))])
 			"cleanse":

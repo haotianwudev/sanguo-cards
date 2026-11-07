@@ -90,7 +90,7 @@ func test_defend_cut_grows_with_consecutive_defends() -> void:
 	for _i in 3:
 		b.party_hp = b.party_max
 		lines.append(b.defend()[0])
-	check("30%" in lines[0] and "40%" in lines[1] and "50%" in lines[2], str(lines))
+	check("30%" in lines[0] and "35%" in lines[1] and "40%" in lines[2], str(lines))
 	b.party_hp = b.party_max
 	b.end_round()
 	check("30%" in b.defend()[0])
@@ -910,7 +910,7 @@ func test_guard_skills_join_the_defend_streak() -> void:
 	check_eq(b.defend_streak, 1, "a round with a 防御 skill counts as a defend")
 	b._start_round()
 	b._apply(b.leaders[0], {"type": "guard", "cut": 0.2}, 1.0)
-	check(is_equal_approx(b.guard_cut, 0.3), "the streak lifts the next one: 0.2 + 0.1")
+	check(is_equal_approx(b.guard_cut, 0.25), "the streak lifts the next one: 0.2 + 0.05")
 	b.defend()
 	check_eq(b.defend_streak, 2, "and the button carries it on")
 	b._start_round()

@@ -960,7 +960,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				buff["magic"] = float(buff.get("magic", 0.0)) + float(eff.get("magic", 0.0))
 			buff["turns"] = int(eff.get("turns", 3))
 			_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
-			return ["  战意 ×%d：全军攻击 +%d%%，受到伤害 -%d%%%s（%d 回合）" % [buff["layers"], int(round(buff["atk"] * 100)), int(round(buff["def"] * 100)),
+			return ["  战意 ×%d：全军攻击 +%d%%%s%s（%d 回合）" % [buff["layers"], int(round(buff["atk"] * 100)), ("，受到伤害 -%d%%" % int(round(buff["def"] * 100))) if buff["def"] > 0.0 else "",
 				("，兵刃攻击附带 %d%% 谋略伤害" % int(round(buff["magic"] * 100))) if buff["magic"] > 0.0 else "", buff["turns"]]]
 		"cleanse":  # 解状态: confusion, the enemy's fire on us and the AP it drained are all lifted
 			var n := 0
@@ -1437,7 +1437,7 @@ func _troop_trick(k: int) -> Array:
 				buff["def"] += minf(0.2, float(sb.get("def", 0.0)) * ps)
 			buff["turns"] = maxi(int(buff["turns"]), int(sb.get("turns", 2)))
 			_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
-			log.append("  %s 出谋划策：全军攻防上升（战意 ×%d）" % [pname, buff["layers"]])
+			log.append("  %s 出谋划策：全军攻击上升（战意 ×%d）" % [pname, buff["layers"]])
 		"archer":
 			var ab: Dictionary = db.battle.get("archer_resist", {})
 			_ev({"t": "passive", "unit": k, "name": pname, "text": "射穿甲缝"})

@@ -429,7 +429,7 @@ func _refresh() -> void:
 	if e["at"] > e["data"]["at"] * 1.01:
 		st.append("狂暴 攻击 %d" % int(round(e["at"])))
 	if b.buff["layers"] > 0:
-		st.append("战意 ×%d：攻击 +%d%% 受伤 -%d%%（%d 回合）" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), int(round(b.buff["def"] * 100)), b.buff["turns"]])
+		st.append("战意 ×%d：攻击 +%d%%%s（%d 回合）" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), (" 受伤 -%d%%" % int(round(b.buff["def"] * 100))) if b.buff["def"] > 0.0 else "", b.buff["turns"]])
 	if b.party_burn["turns"] > 0:
 		st.append("我军灼烧 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
 	if b.party_poison["turns"] > 0:
@@ -949,7 +949,7 @@ func _sync_badges() -> void:
 		_badge_add(row[k])
 	var party: Array = []
 	if b.buff["layers"] > 0:
-		party.append(_tipped(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]), "战意", "×%d 层：攻击 +%d%%，受伤 -%d%%，剩 %d 回合" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), int(round(b.buff["def"] * 100)), b.buff["turns"]], "buff"))
+		party.append(_tipped(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]), "战意", "×%d 层：攻击 +%d%%%s，剩 %d 回合" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), ("，受伤 -%d%%" % int(round(b.buff["def"] * 100))) if b.buff["def"] > 0.0 else "", b.buff["turns"]], "buff"))
 	if b.party_burn["turns"] > 0:
 		party.append(_tipped(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]), "我军灼烧", "-%d/回合，剩 %d 回合" % [b.party_burn["dmg"], b.party_burn["turns"]], "party_burn"))
 	if b.party_poison["turns"] > 0:
