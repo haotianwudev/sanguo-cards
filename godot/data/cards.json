@@ -4155,6 +4155,7 @@
       "name": "张宝",
       "rarity": "R",
       "troop": "strategist",
+      "skills": ["wulei"],
       "hp": 68,
       "at": 64,
       "pool": false,

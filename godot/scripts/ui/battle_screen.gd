@@ -1113,7 +1113,9 @@ func _play(events: Array) -> void:
 				_sfx_act(ev)
 				var kinds: Array = used.get("effects", []).map(func(e): return str(e.get("type", "")))
 				_act_troop = str(b.leaders[int(ev["unit"])].get("leader", {}).get("card", {}).get("troop", "")) if int(ev["unit"]) < b.leaders.size() else ""
-				_act_elem = "fire" if ("burn" in kinds or "火" in str(used.get("name", ""))) else "poison" if "poison" in kinds else ""
+				var uname := str(used.get("name", ""))
+				_act_elem = "thunder" if (str(used.get("elem", "")) == "thunder" or "雷" in uname or "霹雳" in uname or "电" in uname) \
+					else "fire" if ("burn" in kinds or "火" in uname) else "poison" if "poison" in kinds else ""
 				_ult_hits = _is_ult(used) and used.get("effects", []).any(func(e): return e["type"] in ["attack", "magic"])  # 大招: physical or magic ultimate blows
 				if _is_ult(used):
 					await _ult_cutin(int(ev["unit"]), str(ev["skill"]))
@@ -1162,7 +1164,7 @@ func _play(events: Array) -> void:
 							else:
 								BattleFx.ult_slash(self, _enemy_center(), ev["combo"], ratio)
 							Kit.shake(self, 22.0, 0.3)
-						elif ev["kind"] == "magic" or _boost_hits or ev.get("pierce", false) or not BattleFx.troop_hit(self, _enemy_center(), _act_troop, int(ev["combo"])):
+						elif ev["kind"] == "magic" or _act_elem == "thunder" or _boost_hits or ev.get("pierce", false) or not BattleFx.troop_hit(self, _enemy_center(), _act_troop, int(ev["combo"])):
 							BattleFx.hit(self, _enemy_center(), ev["kind"], ev["combo"], ratio, ev.get("pierce", false), _boost_hits, _act_elem)
 						elif ratio > 0.08:
 							BattleFx.ring(self, _enemy_center(), Color(1.0, 0.55, 0.3), 14.0, 150.0, 0.36, 7)

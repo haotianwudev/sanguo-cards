@@ -99,7 +99,20 @@ static func hit(parent: Control, at: Vector2, kind: String, combo: int, dmg_rati
 	## our blow landing on the enemy: 兵刃 = crossing slashes (the combo adds the cross), 谋略 = violet burst + rune ring,
 	## 穿甲 = one long thin lance streak; a big hit (share of the enemy's max HP) adds a shockwave
 	var p := at + Vector2(randf_range(-34, 34), randf_range(-26, 26))
-	if kind == "magic" and elem == "fire":  # 火计 / 业火: a red-gold blaze instead of the violet ring
+	if elem == "thunder":  # 雷法 (五雷正法 / 霹雳车 / 黄巾的天雷): a jagged white-gold bolt down onto the target, a pale flash ring
+		var top := p - Vector2(randf_range(-30, 30), 300)
+		var pts: Array = [top]
+		for k in 4:
+			pts.append(top.lerp(p, float(k + 1) / 5.0) + Vector2(randf_range(-38, 38), 0))
+		pts.append(p)
+		for k in pts.size() - 1:
+			var a: Vector2 = pts[k]
+			var b: Vector2 = pts[k + 1]
+			slash(parent, (a + b) / 2.0, Color(1.0, 0.97, 0.7), rad_to_deg((b - a).angle()), a.distance_to(b) + 12.0, 9.0, k * 0.012)
+			slash(parent, (a + b) / 2.0, Color(0.65, 0.8, 1.0, 0.8), rad_to_deg((b - a).angle()), a.distance_to(b) + 18.0, 16.0, k * 0.012)
+		burst(parent, p, Color(1.0, 0.95, 0.55), 14, 16.0, 130.0, 4.0)
+		ring(parent, p, Color(0.8, 0.9, 1.0), 10.0, 110.0, 0.28, 5)
+	elif kind == "magic" and elem == "fire":  # 火计 / 业火: a red-gold blaze instead of the violet ring
 		embers(parent, Rect2(p - Vector2(90, 70), Vector2(180, 140)), EMBER, 26, 110.0, true)
 		burst(parent, p, Color(1.0, 0.6, 0.15), 14, 16.0, 120.0, 5.0)
 		ring(parent, p, GOLD, 10.0, 96.0, 0.3, 5)

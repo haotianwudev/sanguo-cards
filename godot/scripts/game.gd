@@ -957,7 +957,7 @@ func demo(name: String) -> void:
 				if a.begins_with("--fx="):
 					want = a.substr(5)
 			var eng: Battle = fb.b
-			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "pierce", "boosthit", "counter", "burn", "break", "ultmagic", "rider", "poison", "kill", "archer", "volley", "spear", "cavalry", "bandit", "ultarrow"] else 1.0
+			BattleFx.scale = fb._enemy_fx_scale() if want in ["hit", "magic", "thunder", "pierce", "boosthit", "counter", "burn", "break", "ultmagic", "rider", "poison", "kill", "archer", "volley", "spear", "cavalry", "bandit", "ultarrow"] else 1.0
 			match want:
 				"hit":
 					BattleFx.hit(fb, fb._enemy_center(), "attack", 3, 0.12)
@@ -981,6 +981,8 @@ func demo(name: String) -> void:
 					fb._sync_fx()
 				"magic":
 					BattleFx.hit(fb, fb._enemy_center(), "magic", 1, 0.05)
+				"thunder":  # 雷法: the jagged bolt
+					BattleFx.hit(fb, fb._enemy_center(), "magic", 1, 0.05, false, false, "thunder")
 				"ultmagic":
 					BattleFx.ult_magic(fb, fb._enemy_center(), 1, 0.2)
 					Kit.tween_bar(fb._enemy_hp, fb.b.enemy["max_hp"] * 0.6)
