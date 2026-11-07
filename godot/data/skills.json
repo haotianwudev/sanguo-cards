@@ -90,10 +90,7 @@
           "type": "ap",
           "amount": 2
         },
-        {
-          "type": "guard",
-          "cut": 0.1
-        }
+        {"type": "buff", "atk": 0.1, "def": 0.08, "magic": 0.1, "max": 4, "turns": 3}
       ]
     },
     "touxi": {
