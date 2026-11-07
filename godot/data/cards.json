@@ -2218,6 +2218,7 @@
     },
     "zhangjiao": {
       "name": "张角",
+      "pool": false,
       "rarity": "SR",
       "troop": "strategist",
       "hp": 88,
@@ -3658,6 +3659,7 @@
     },
     "xiandi": {
       "name": "汉献帝",
+      "pool": false,
       "rarity": "SR",
       "troop": "logistics",
       "hp": 94,
@@ -3905,6 +3907,7 @@
     },
     "qinyilu": {
       "name": "秦宜禄",
+      "pool": false,
       "rarity": "C",
       "troop": "logistics",
       "hp": 60,
@@ -4121,6 +4124,7 @@
     },
     "zhangbao_hj": {
       "name": "张宝",
+      "pool": false,
       "rarity": "R",
       "troop": "strategist",
       "skills": ["wulei"],
@@ -4130,6 +4134,7 @@
     },
     "zhangliang": {
       "name": "张梁",
+      "pool": false,
       "rarity": "R",
       "troop": "infantry",
       "hp": 64,
