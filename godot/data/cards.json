@@ -3388,7 +3388,7 @@
     "mifang": {
       "name": "糜芳",
       "rarity": "R",
-      "troop": "logistics",
+      "troop": "archer",
       "hp": 67,
       "at": 58
     },
