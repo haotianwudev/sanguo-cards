@@ -32,7 +32,9 @@
           "name": "泰山压顶",
           "power": 3.8,
           "weight": 0
-        }
+        },
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "颜良亲兵", "prefer": "player_buffed"},
+        {"name": "颜良亲兵", "power": 0, "weight": 0, "summon": {"name": "颜良亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "yanliang"
     },
@@ -111,7 +113,9 @@
         },
         {"name": "狂沙·蓄力", "power": 0, "weight": 1, "charge": "狂沙劈斩"},
         {"name": "狂沙劈斩", "power": 3.2, "weight": 0},
-        {"name": "黄巾蒙皮盾", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "黄巾蒙皮盾", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "管亥喽啰", "prefer": "self_low_hp"},
+        {"name": "管亥喽啰", "power": 0, "weight": 0, "summon": {"name": "管亥喽啰", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "guanhai"
     },
@@ -149,7 +153,9 @@
           "power": 3.2,
           "weight": 0,
           "pierce": true
-        }
+        },
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "姜巧喽啰", "prefer": "player_buffed"},
+        {"name": "姜巧喽啰", "power": 0, "weight": 0, "summon": {"name": "姜巧喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "jiangqiao",
       "drop": "jiang_jiguanshou"
@@ -176,7 +182,9 @@
           "weight": 1,
           "ap_drain": 2
         },
-        {"name": "虎皮护心", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}
+        {"name": "虎皮护心", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "郑好喽啰", "prefer": "player_buffed"},
+        {"name": "郑好喽啰", "power": 0, "weight": 0, "summon": {"name": "郑好喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "zhenghao",
       "drop": "zheng_daoshou"
@@ -340,7 +348,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "抢来的铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}
+        {"name": "抢来的铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}},
+        {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "郭汜亲骑", "prefer": "player_buffed"},
+        {"name": "郭汜亲骑", "power": 0, "weight": 0, "summon": {"name": "郭汜亲骑", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "guosi"
     },
@@ -472,7 +482,9 @@
           "rage": 0.3,
           "when": "half",
           "once": true
-        }
+        },
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "董白亲兵", "prefer": "player_buffed"},
+        {"name": "董白亲兵", "power": 0, "weight": 0, "summon": {"name": "董白亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "dongbai"
     },
@@ -539,7 +551,9 @@
         {"name": "绣帕·拖延", "power": 0.6, "weight": 1, "ap_drain": 1},
         {"name": "招手唤弓手·蓄力", "power": 0, "weight": 1, "charge": "弓手赶到"},
         {"name": "弓手赶到", "power": 3.2, "weight": 0},
-        {"name": "夫君等我", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}
+        {"name": "夫君等我", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true},
+        {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "冯夫人护卫", "prefer": "player_buffed"},
+        {"name": "冯夫人护卫", "power": 0, "weight": 0, "summon": {"name": "冯夫人护卫", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "fengfuren"
     },
@@ -584,7 +598,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "仲家铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "仲家铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "纪灵亲兵", "prefer": "self_low_hp"},
+        {"name": "纪灵亲兵", "power": 0, "weight": 0, "summon": {"name": "纪灵亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "jiling"
     },
@@ -692,7 +708,9 @@
           "rage": 0.3,
           "when": "half",
           "once": true
-        }
+        },
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "陈兰亲兵", "prefer": "player_buffed"},
+        {"name": "陈兰亲兵", "power": 0, "weight": 0, "summon": {"name": "陈兰亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "chenlan"
     },
@@ -773,7 +791,9 @@
           "turns": 3
         },
         {"name": "三刀·蓄力", "power": 0, "weight": 1, "charge": "三刀追斩"},
-        {"name": "三刀追斩", "power": 3.2, "weight": 0}
+        {"name": "三刀追斩", "power": 3.2, "weight": 0},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "樊稠亲兵", "prefer": "player_buffed"},
+        {"name": "樊稠亲兵", "power": 0, "weight": 0, "summon": {"name": "樊稠亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "fanchou"
     },
@@ -840,7 +860,9 @@
           "power": 1.0,
           "weight": 1,
           "confuse": 0.5
-        }
+        },
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "牛辅亲兵", "prefer": "player_buffed"},
+        {"name": "牛辅亲兵", "power": 0, "weight": 0, "summon": {"name": "牛辅亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "niufu"
     },
@@ -915,7 +937,9 @@
         {"name": "酒池肉林", "power": 0, "weight": 0, "heal": 0.3},
         {"name": "相国铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
         {"name": "相国瞪眼", "power": 0, "weight": 1, "mark": "肥躯碾杀"},
-        {"name": "肥躯碾杀", "power": 0, "weight": 0}
+        {"name": "肥躯碾杀", "power": 0, "weight": 0},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "董卓亲兵", "prefer": "self_low_hp"},
+        {"name": "董卓亲兵", "power": 0, "weight": 0, "summon": {"name": "董卓亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "dongzhuo_card"
     },
@@ -1004,7 +1028,9 @@
           "weight": 0, "pct": 0.1,
           "pierce": true
         },
-        {"name": "巫祝禁咒", "power": 0.4, "weight": 1, "seal": "magic"}
+        {"name": "巫祝禁咒", "power": 0.4, "weight": 1, "seal": "magic"},
+        {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "李傕亲骑", "prefer": "self_low_hp"},
+        {"name": "李傕亲骑", "power": 0, "weight": 0, "summon": {"name": "李傕亲骑", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "lijue"
     },
@@ -1723,7 +1749,9 @@
           "weight": 0, "pct": 0.1,
           "pierce": true
         },
-        {"name": "巫祝禁咒", "power": 0.4, "weight": 1, "seal": "magic"}
+        {"name": "巫祝禁咒", "power": 0.4, "weight": 1, "seal": "magic"},
+        {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "李傕亲骑", "prefer": "self_low_hp"},
+        {"name": "李傕亲骑", "power": 0, "weight": 0, "summon": {"name": "李傕亲骑", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "lijue"
     },
@@ -1857,7 +1885,9 @@
           "power": 3.6,
           "weight": 0,
           "pierce": true
-        }
+        },
+        {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "唐周护卫", "prefer": "player_buffed"},
+        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "yaodao_card"
     },
@@ -1940,7 +1970,9 @@
           "weight": 2,
           "poison_party": 0.04,
           "turns": 3
-        }
+        },
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "胡玉喽啰", "prefer": "player_buffed"},
+        {"name": "胡玉喽啰", "power": 0, "weight": 0, "summon": {"name": "胡玉喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "langlijiao"
     },
@@ -1980,7 +2012,9 @@
           "weight": 0, "pct": 0.1,
           "pierce": true
         },
-        {"name": "船舷挡板", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "船舷挡板", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "何仪护卫", "prefer": "self_low_hp"},
+        {"name": "何仪护卫", "power": 0, "weight": 0, "summon": {"name": "何仪护卫", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "heyi"
     },
@@ -2006,7 +2040,9 @@
           "ap_drain": 2
         },
         {"name": "伏兵·蓄力", "power": 0, "weight": 1, "charge": "伏兵四面"},
-        {"name": "伏兵四面", "power": 3.2, "weight": 0}
+        {"name": "伏兵四面", "power": 3.2, "weight": 0},
+        {"name": "亲卫·蓄力", "power": 0, "weight": 1, "charge": "徐荣亲卫", "prefer": "player_buffed"},
+        {"name": "徐荣亲卫", "power": 0, "weight": 0, "summon": {"name": "徐荣亲卫", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "xurong_card"
     },
@@ -2038,7 +2074,9 @@
         },
         {"name": "伏兵·蓄力", "power": 0, "weight": 1, "charge": "伏兵四面"},
         {"name": "伏兵四面", "power": 3.2, "weight": 0},
-        {"name": "截粮断道", "power": 0.4, "weight": 1, "seal": "ultimate"}
+        {"name": "截粮断道", "power": 0.4, "weight": 1, "seal": "ultimate"},
+        {"name": "亲卫·蓄力", "power": 0, "weight": 1, "charge": "徐荣亲卫", "prefer": "self_low_hp"},
+        {"name": "徐荣亲卫", "power": 0, "weight": 0, "summon": {"name": "徐荣亲卫", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "xurong_card"
     },
@@ -2159,7 +2197,9 @@
           "confuse": 0.5
         },
         {"name": "叫阵", "power": 0, "weight": 1, "mark": "斩将夺首"},
-        {"name": "斩将夺首", "power": 0, "weight": 0}
+        {"name": "斩将夺首", "power": 0, "weight": 0},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "华雄亲兵", "prefer": "self_low_hp"},
+        {"name": "华雄亲兵", "power": 0, "weight": 0, "summon": {"name": "华雄亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "huaxiong_card"
     },
@@ -2359,7 +2399,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "蒙冲铁壁", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "蒙冲铁壁", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "黄祖亲兵", "prefer": "self_low_hp"},
+        {"name": "黄祖亲兵", "power": 0, "weight": 0, "summon": {"name": "黄祖亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "huangzu"
     },
@@ -2460,7 +2502,9 @@
         },
         {"name": "独眼·蓄力", "power": 0, "weight": 1, "charge": "困兽一刀"},
         {"name": "困兽一刀", "power": 3.2, "weight": 0},
-        {"name": "死士人墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "死士人墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "蔡瑁亲兵", "prefer": "self_low_hp"},
+        {"name": "蔡瑁亲兵", "power": 0, "weight": 0, "summon": {"name": "蔡瑁亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "caimao"
     },
@@ -2496,7 +2540,9 @@
         {"name": "令旗·乱射", "power": 1.2, "weight": 1, "confuse": 0.3},
         {"name": "万弩·蓄力", "power": 0, "weight": 1, "charge": "万弩齐发"},
         {"name": "万弩齐发", "power": 3.3, "weight": 0},
-        {"name": "蔡家的狠劲", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}
+        {"name": "蔡家的狠劲", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true},
+        {"name": "亲卫·蓄力", "power": 0, "weight": 1, "charge": "蔡和亲卫", "prefer": "player_buffed"},
+        {"name": "蔡和亲卫", "power": 0, "weight": 0, "summon": {"name": "蔡和亲卫", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "caihe"
     },
@@ -2541,7 +2587,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "外戚弄权", "power": 0.4, "weight": 1, "seal": "ultimate"}
+        {"name": "外戚弄权", "power": 0.4, "weight": 1, "seal": "ultimate"},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "蔡瑁亲兵", "prefer": "self_low_hp"},
+        {"name": "蔡瑁亲兵", "power": 0, "weight": 0, "summon": {"name": "蔡瑁亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "caimao"
     },
@@ -2619,7 +2667,9 @@
           "burn_party": 0.08,
           "turns": 3
         },
-        {"name": "稳守盾阵", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}
+        {"name": "稳守盾阵", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "张济亲兵", "prefer": "player_buffed"},
+        {"name": "张济亲兵", "power": 0, "weight": 0, "summon": {"name": "张济亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "zhangji"
     },
@@ -2806,7 +2856,9 @@
           "power": 3.4,
           "weight": 0,
           "pierce": true
-        }
+        },
+        {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "张修护卫", "prefer": "player_buffed"},
+        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "xuanjizi_card"
     },
@@ -2840,7 +2892,9 @@
           "confuse": 0.5
         },
         {"name": "黑山寨门", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
-        {"name": "凶寇架势", "power": 0.5, "weight": 1, "stance": {"name": "凶寇架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}
+        {"name": "凶寇架势", "power": 0.5, "weight": 1, "stance": {"name": "凶寇架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "李大目喽啰", "prefer": "self_low_hp"},
+        {"name": "李大目喽啰", "power": 0, "weight": 0, "summon": {"name": "李大目喽啰", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "lidamu_card"
     },
@@ -2866,7 +2920,9 @@
           "weight": 1,
           "ap_drain": 1
         },
-        {"name": "黄天符咒", "power": 0.4, "weight": 1, "seal": "magic"}
+        {"name": "黄天符咒", "power": 0.4, "weight": 1, "seal": "magic"},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "张白骑喽啰", "prefer": "player_buffed"},
+        {"name": "张白骑喽啰", "power": 0, "weight": 0, "summon": {"name": "张白骑喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "zhangbaiqi_card"
     },
@@ -2892,7 +2948,9 @@
           "weight": 1,
           "ap_drain": 1
         },
-        {"name": "黄天符咒", "power": 0.4, "weight": 1, "seal": "magic"}
+        {"name": "黄天符咒", "power": 0.4, "weight": 1, "seal": "magic"},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "张白骑喽啰", "prefer": "player_buffed"},
+        {"name": "张白骑喽啰", "power": 0, "weight": 0, "summon": {"name": "张白骑喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "zhangbaiqi_card"
     },
@@ -2921,7 +2979,9 @@
           "burn_party": 0.08,
           "turns": 3
         },
-        {"name": "山寨木栅", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}
+        {"name": "山寨木栅", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "于毒喽啰", "prefer": "player_buffed"},
+        {"name": "于毒喽啰", "power": 0, "weight": 0, "summon": {"name": "于毒喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "yudu_card"
     },
@@ -3041,7 +3101,9 @@
           "power": 1.0,
           "weight": 1,
           "ap_drain": 2
-        }
+        },
+        {"name": "亲卫·蓄力", "power": 0, "weight": 1, "charge": "麹义亲卫", "prefer": "player_buffed"},
+        {"name": "麹义亲卫", "power": 0, "weight": 0, "summon": {"name": "麹义亲卫", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "quyi"
     },
@@ -3076,7 +3138,9 @@
         },
         {"name": "庭柱点将", "power": 0, "weight": 1, "mark": "斩将夺旗"},
         {"name": "斩将夺旗", "power": 0, "weight": 0},
-        {"name": "河北重甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "河北重甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "文丑亲骑", "prefer": "self_low_hp"},
+        {"name": "文丑亲骑", "power": 0, "weight": 0, "summon": {"name": "文丑亲骑", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "wenchou"
     },
@@ -3286,7 +3350,9 @@
           "weight": 0, "pct": 0.1,
           "confuse": 0.4
         },
-        {"name": "城垛", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "城垛", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "刘勋亲兵", "prefer": "self_low_hp"},
+        {"name": "刘勋亲兵", "power": 0, "weight": 0, "summon": {"name": "刘勋亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "liuxun"
     },
@@ -3341,7 +3407,9 @@
           "power": 3.0,
           "weight": 0,
           "pierce": true
-        }
+        },
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "陈兰亲兵", "prefer": "player_buffed"},
+        {"name": "陈兰亲兵", "power": 0, "weight": 0, "summon": {"name": "陈兰亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "chenlan"
     },
@@ -3366,7 +3434,9 @@
           "power": 1.5,
           "weight": 1
         },
-        {"name": "楼船挡板", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}
+        {"name": "楼船挡板", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "张勋亲兵", "prefer": "player_buffed"},
+        {"name": "张勋亲兵", "power": 0, "weight": 0, "summon": {"name": "张勋亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "zhangxun"
     },
@@ -3503,7 +3573,9 @@
           "pierce": true
         },
         {"name": "刚烈", "power": 0, "weight": 1, "stance": {"name": "刚烈", "power": 1.0, "turns": 1}, "prefer": "player_buffed"},
-        {"name": "独眼铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "独眼铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "夏侯惇亲兵", "prefer": "self_low_hp"},
+        {"name": "夏侯惇亲兵", "power": 0, "weight": 0, "summon": {"name": "夏侯惇亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "xiahoudun"
     },
@@ -3661,7 +3733,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "一身肥膘", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "一身肥膘", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "桥蕤亲兵", "prefer": "self_low_hp"},
+        {"name": "桥蕤亲兵", "power": 0, "weight": 0, "summon": {"name": "桥蕤亲兵", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "qiaorui"
     },
@@ -3705,7 +3779,9 @@
           "rage": 0.3,
           "when": "half",
           "once": true
-        }
+        },
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "纪灵亲兵", "prefer": "player_buffed"},
+        {"name": "纪灵亲兵", "power": 0, "weight": 0, "summon": {"name": "纪灵亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "jiling"
     },
@@ -3946,7 +4022,9 @@
           "rage": 0.25,
           "when": "half",
           "once": true
-        }
+        },
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "雷绪喽啰", "prefer": "player_buffed"},
+        {"name": "雷绪喽啰", "power": 0, "weight": 0, "summon": {"name": "雷绪喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "leixu"
     },
@@ -4088,7 +4166,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "结阵盾墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}
+        {"name": "结阵盾墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}},
+        {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "樊能亲兵", "prefer": "player_buffed"},
+        {"name": "樊能亲兵", "power": 0, "weight": 0, "summon": {"name": "樊能亲兵", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "liuyao"
     },
@@ -4184,7 +4264,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "水寨木栅", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}
+        {"name": "水寨木栅", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}},
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "严白虎喽啰", "prefer": "self_low_hp"},
+        {"name": "严白虎喽啰", "power": 0, "weight": 0, "summon": {"name": "严白虎喽啰", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "yanbaihu"
     },
@@ -4393,7 +4475,9 @@
           "when": "half",
           "once": true
         },
-        {"name": "礼法所拘", "power": 0.4, "weight": 1, "seal": "ultimate"}
+        {"name": "礼法所拘", "power": 0.4, "weight": 1, "seal": "ultimate"},
+        {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "王朗护卫", "prefer": "self_low_hp"},
+        {"name": "王朗护卫", "power": 0, "weight": 0, "summon": {"name": "王朗护卫", "hp_pct": 0.15, "strike": 0.5}}
       ],
       "card": "wanglang"
     },
@@ -4508,7 +4592,9 @@
           "power": 3.2,
           "weight": 0,
           "pierce": true
-        }
+        },
+        {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "严舆喽啰", "prefer": "player_buffed"},
+        {"name": "严舆喽啰", "power": 0, "weight": 0, "summon": {"name": "严舆喽啰", "hp_pct": 0.12, "strike": 0.5}}
       ],
       "card": "yanbaihu"
     },
@@ -4586,14 +4672,14 @@
     },
     "m8_shanyue": {"name": "山越游寇", "portrait": "shanyue_nu", "actions": 2, "moves": [{"name": "竹弩", "power": 1.0, "weight": 3}, {"name": "山林游斗", "power": 1.3, "weight": 1}, {"name": "毒矢", "power": 0.6, "weight": 1, "poison_party": 0.025, "turns": 2}], "card": "shanyue_nu"},
     "m8_shanyue_dao": {"name": "山越刀客", "portrait": "shanyue_daoke", "actions": 2, "moves": [{"name": "砍刀", "power": 1.0, "weight": 3}, {"name": "竹林突袭", "power": 1.3, "weight": 1}, {"name": "劫营", "power": 0.5, "weight": 1, "ap_drain": 1}], "card": "shanyue_daoke"},
-    "m8_zulang": {"name": "丹阳宗帅祖郎", "portrait": "zulang", "actions": 2, "moves": [{"name": "山刀", "power": 1.0, "weight": 4}, {"name": "砍鞍", "power": 1.5, "weight": 1}, {"name": "竹哨", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "万山伏兵·蓄力", "power": 0, "weight": 1, "charge": "万山伏兵"}, {"name": "万山伏兵", "power": 3.2, "weight": 0, "pct": 0.1}, {"name": "宗帅的蛮劲", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "山越藤牌", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}], "card": "zulang"},
+    "m8_zulang": {"name": "丹阳宗帅祖郎", "portrait": "zulang", "actions": 2, "moves": [{"name": "山刀", "power": 1.0, "weight": 4}, {"name": "砍鞍", "power": 1.5, "weight": 1}, {"name": "竹哨", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "万山伏兵·蓄力", "power": 0, "weight": 1, "charge": "万山伏兵"}, {"name": "万山伏兵", "power": 3.2, "weight": 0, "pct": 0.1}, {"name": "宗帅的蛮劲", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "山越藤牌", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}, {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "祖郎喽啰", "prefer": "self_low_hp"}, {"name": "祖郎喽啰", "power": 0, "weight": 0, "summon": {"name": "祖郎喽啰", "hp_pct": 0.15, "strike": 0.5}}], "card": "zulang"},
     "m8_jiangzei": {"name": "长江水贼", "portrait": "shuizei_bing", "actions": 2, "moves": [{"name": "鱼叉", "power": 1.0, "weight": 3}, {"name": "跳帮", "power": 1.3, "weight": 1}, {"name": "劫掠", "power": 0.5, "weight": 1, "ap_drain": 1}], "card": "shuizei_bing"},
     "m8_han_nu": {"name": "汉军连弩兵", "portrait": "liannu", "actions": 2, "moves": [{"name": "连弩", "power": 1.0, "weight": 3}, {"name": "十矢齐发", "power": 1.5, "weight": 1}, {"name": "火矢", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "liannu"},
     "m8_han_baier": {"name": "汉军白毦兵", "portrait": "baier", "actions": 2, "moves": [{"name": "白毦枪林", "power": 1.0, "weight": 3}, {"name": "护主", "power": 0, "weight": 1, "heal": 0.04}, {"name": "枪阵推进", "power": 1.3, "weight": 1}], "card": "baier"},
     "m8_han_wudang": {"name": "汉军无当飞军", "portrait": "wudang_feijun", "actions": 2, "moves": [{"name": "山林突袭", "power": 1.0, "weight": 3}, {"name": "飞军伏击", "power": 1.4, "weight": 1}, {"name": "断后路", "power": 0.5, "weight": 1, "ap_drain": 1}], "card": "wudang_feijun"},
     "m8_han_muniu": { "armor": "muqi","name": "汉军木牛流马营", "portrait": "han_yigong", "actions": 2, "moves": [{"name": "木牛冲撞", "power": 1.0, "weight": 3}, {"name": "补给", "power": 0, "weight": 1, "heal": 0.05}, {"name": "粮车阵", "power": 0.5, "weight": 1, "ap_drain": 1}], "card": "han_yigong"},
     "m8_han_menshen": { "armor": "moushi","name": "汉军卧龙门生", "portrait": "han_shuzuo", "actions": 2, "moves": [{"name": "奇谋", "power": 1.0, "weight": 3}, {"name": "疑兵", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "火计", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "han_shuzuo"},
-    "m8_liaohua": {"name": "先锋廖化", "portrait": "liaohua", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "先锋突阵", "power": 1.4, "weight": 1}, {"name": "黄巾旧吼", "power": 0.4, "weight": 1, "confuse": 0.4}, {"name": "先锋的骨头", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "先锋架势", "power": 0.5, "weight": 1, "stance": {"name": "先锋架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}], "card": "liaohua"},
+    "m8_liaohua": {"name": "先锋廖化", "portrait": "liaohua", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "先锋突阵", "power": 1.4, "weight": 1}, {"name": "黄巾旧吼", "power": 0.4, "weight": 1, "confuse": 0.4}, {"name": "先锋的骨头", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "先锋架势", "power": 0.5, "weight": 1, "stance": {"name": "先锋架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}, {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "廖化喽啰", "prefer": "player_buffed"}, {"name": "廖化喽啰", "power": 0, "weight": 0, "summon": {"name": "廖化喽啰", "hp_pct": 0.12, "strike": 0.5}}], "card": "liaohua"},
     "m8_liubei": {"name": "汉室宗亲刘备", "portrait": "liubei", "actions": 2, "moves": [{"name": "双股剑", "power": 1.0, "weight": 4}, {"name": "仁义之师", "power": 0, "weight": 1, "heal": 0.05}, {"name": "以泪服人", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "双剑·蓄力", "power": 0, "weight": 1, "charge": "双剑斩"}, {"name": "双剑斩", "power": 3.3, "weight": 0, "pct": 0.1}, {"name": "汉室等不得", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "以仁止戈", "power": 0.4, "weight": 1, "seal": "attack"}], "card": "han_yigong"},
     "m9_yexi": {"name": "汉军夜袭", "portrait": "han_bazhen", "actions": 2, "moves": [{"name": "虎步压阵", "power": 1.0, "weight": 3}, {"name": "连弩火矢", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}, {"name": "阵变", "power": 0.3, "weight": 1, "confuse": 0.4}, {"name": "汉旗不退", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "虎步盾阵", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "han_bazhen"},
     "m9_han_nu": {"name": "汉军连弩兵", "portrait": "liannu", "actions": 2, "moves": [{"name": "连弩", "power": 1.0, "weight": 3}, {"name": "十矢齐发", "power": 1.5, "weight": 1}, {"name": "火矢", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "liannu"},
@@ -4659,13 +4745,13 @@
     "n6_youqi": {"name": "袁军游骑", "portrait": "inf_n", "actions": 2, "moves": [{"name": "射击", "power": 1.0, "weight": 3}, {"name": "齐射", "power": 1.4, "weight": 1}, {"name": "火箭", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "inf_n"},
     "n6_liangdui": {"name": "袁军粮队", "portrait": "inf_n", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "盘查", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "围攻", "power": 1.3, "weight": 1}], "card": "inf_n"},
     "n6_kuibing": {"name": "蕲阳溃兵", "portrait": "inf_n", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "盘查", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "围攻", "power": 1.3, "weight": 1}], "card": "inf_n"},
-    "n6_zhangxun": {"name": "仲氏大将军·张勋", "portrait": "zhangxun", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "大将军令", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "金甲", "power": 0, "weight": 1, "heal": 0.05}, {"name": "冲阵", "power": 1.4, "weight": 1}, {"name": "金甲护身", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "zhangxun"},
-    "n6_leibo": {"name": "仲氏将军·雷薄", "portrait": "leibo", "actions": 2, "moves": [{"name": "大斧", "power": 1.0, "weight": 3}, {"name": "劈山", "power": 1.5, "weight": 1}, {"name": "不耐烦", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "要喝酒", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "瞪眼·蓄力", "power": 0, "weight": 1, "charge": "劈山追砍"}, {"name": "劈山追砍", "power": 3.2, "weight": 0}], "card": "leibo"},
-    "n9_yanxing": {"name": "韩遂之婿·阎行", "portrait": "yanxing", "actions": 2, "moves": [{"name": "长矛", "power": 1.0, "weight": 3}, {"name": "刺颈", "power": 1.6, "weight": 1}, {"name": "军报", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "狼骑合围", "power": 1.2, "weight": 1}, {"name": "盯住咽喉·蓄力", "power": 0, "weight": 1, "charge": "矛刺咽喉"}, {"name": "矛刺咽喉", "power": 3.2, "weight": 0}], "card": "yanxing"},
+    "n6_zhangxun": {"name": "仲氏大将军·张勋", "portrait": "zhangxun", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "大将军令", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "金甲", "power": 0, "weight": 1, "heal": 0.05}, {"name": "冲阵", "power": 1.4, "weight": 1}, {"name": "金甲护身", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "张勋亲兵", "prefer": "player_buffed"}, {"name": "张勋亲兵", "power": 0, "weight": 0, "summon": {"name": "张勋亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "zhangxun"},
+    "n6_leibo": {"name": "仲氏将军·雷薄", "portrait": "leibo", "actions": 2, "moves": [{"name": "大斧", "power": 1.0, "weight": 3}, {"name": "劈山", "power": 1.5, "weight": 1}, {"name": "不耐烦", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "要喝酒", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "瞪眼·蓄力", "power": 0, "weight": 1, "charge": "劈山追砍"}, {"name": "劈山追砍", "power": 3.2, "weight": 0}, {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "雷薄亲骑", "prefer": "player_buffed"}, {"name": "雷薄亲骑", "power": 0, "weight": 0, "summon": {"name": "雷薄亲骑", "hp_pct": 0.12, "strike": 0.5}}], "card": "leibo"},
+    "n9_yanxing": {"name": "韩遂之婿·阎行", "portrait": "yanxing", "actions": 2, "moves": [{"name": "长矛", "power": 1.0, "weight": 3}, {"name": "刺颈", "power": 1.6, "weight": 1}, {"name": "军报", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "狼骑合围", "power": 1.2, "weight": 1}, {"name": "盯住咽喉·蓄力", "power": 0, "weight": 1, "charge": "矛刺咽喉"}, {"name": "矛刺咽喉", "power": 3.2, "weight": 0}, {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "阎行亲骑", "prefer": "player_buffed"}, {"name": "阎行亲骑", "power": 0, "weight": 0, "summon": {"name": "阎行亲骑", "hp_pct": 0.12, "strike": 0.5}}], "card": "yanxing"},
     "bw_xuchu": {"name": "比武·许褚", "portrait": "xuchu", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "裸衣", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "虎痴扑击", "power": 1.5, "weight": 1}, {"name": "一把抱住", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "虎卫架势", "power": 0.5, "weight": 1, "stance": {"name": "虎卫架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}], "card": "xuchu", "card_public": true},
     "bw_dianwei": {"name": "比武·典韦", "portrait": "dianwei", "actions": 2, "moves": [{"name": "双铁戟", "power": 1.0, "weight": 3}, {"name": "掷戟", "power": 1.4, "weight": 1}, {"name": "虎吼", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "古之恶来·蓄力", "power": 0, "weight": 1, "charge": "恶来"}, {"name": "恶来", "power": 3.2, "weight": 0, "pierce": true}], "card": "dianwei", "card_public": true},
     "bw_zhangfei": {"name": "比武·张飞", "portrait": "zhangfei", "actions": 2, "moves": [{"name": "丈八蛇矛", "power": 1.0, "weight": 3}, {"name": "燕人一声吼", "power": 0.6, "weight": 1, "confuse": 0.5}, {"name": "连刺", "power": 1.5, "weight": 1}, {"name": "蛇矛·蓄力", "power": 0, "weight": 1, "charge": "万人敌"}, {"name": "万人敌", "power": 3.3, "weight": 0, "pierce": true}], "card": "zhangfei", "card_public": true},
-    "n6_chenlan": {"name": "仲氏宫门·陈兰", "portrait": "chenlan", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "禁军结阵", "power": 0, "weight": 1, "heal": 0.05}, {"name": "宫在大仲在", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "死守", "power": 1.3, "weight": 1}, {"name": "宫门禁军盾", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "chenlan"},
+    "n6_chenlan": {"name": "仲氏宫门·陈兰", "portrait": "chenlan", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "禁军结阵", "power": 0, "weight": 1, "heal": 0.05}, {"name": "宫在大仲在", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "死守", "power": 1.3, "weight": 1}, {"name": "宫门禁军盾", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "陈兰亲兵", "prefer": "player_buffed"}, {"name": "陈兰亲兵", "power": 0, "weight": 0, "summon": {"name": "陈兰亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "chenlan"},
     "n5_taishan": {"name": "泰山贼", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.06}], "card": "shanzei_bing"},
     "n5_changxi": {"name": "泰山贼·昌豨", "portrait": "changxi", "actions": 2, "moves": [{"name": "鬼头刀", "power": 1.0, "weight": 3}, {"name": "山口滚石", "power": 1.3, "weight": 1}, {"name": "泰山规矩", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "见好就收", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}, {"name": "山口石墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "shanzei_bing"},
     "n5_sx_zhangfei": {"hp": 100, "at": 112, "name": "刺史府外·张飞", "portrait": "zhangfei", "actions": 2, "moves": [{"name": "丈八蛇矛", "power": 1.0, "weight": 3}, {"name": "燕人一声吼", "power": 0.6, "weight": 1, "confuse": 0.5}, {"name": "火把围堵", "power": 0.8, "weight": 1, "burn_party": 0.06, "turns": 3}, {"name": "蛇矛·蓄力", "power": 0, "weight": 1, "charge": "万人敌"}, {"name": "万人敌", "power": 3.6, "weight": 0}], "card": "inf_n"},
@@ -4681,12 +4767,12 @@
     "n5_gaoshun": {"name": "小沛城下·高顺", "portrait": "gaoshun", "actions": 2, "moves": [{"name": "陷阵", "power": 1.0, "weight": 3}, {"name": "盾墙", "power": 0, "weight": 1, "heal": 0.045}, {"name": "陷阵·蓄力", "power": 0, "weight": 1, "charge": "所向披靡"}, {"name": "所向披靡", "power": 3.2, "weight": 0, "pierce": true}, {"name": "陷阵压境", "power": 1.0, "weight": 1, "ap_drain": 2}], "card": "xianzhen"},
     "n5_canbing": {"name": "吕布残兵", "portrait": "bingzhou", "actions": 2, "moves": [{"name": "马刀", "power": 1.0, "weight": 3}, {"name": "狼群冲阵", "power": 1.5, "weight": 1, "confuse": 0.4}, {"name": "回马箭", "power": 1.2, "weight": 1}], "card": "bingzhou"},
     "n5_kuibing": {"name": "并州溃兵", "portrait": "inf_n", "actions": 2, "moves": [{"name": "长戟", "power": 1.0, "weight": 3}, {"name": "盾墙", "power": 0, "weight": 1, "heal": 0.045}, {"name": "推进", "power": 1.4, "weight": 1}], "card": "xianzhen"},
-    "n4_yudu": {"name": "太行·于毒", "portrait": "yudu", "actions": 2, "moves": [{"name": "开山斧", "power": 1.2, "weight": 3}, {"name": "狂暴", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "放火烧林", "power": 0.8, "weight": 2, "burn_party": 0.08, "turns": 3}, {"name": "黑山叫骂", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "山寨木栅", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "yudu_card"},
-    "n4_weixu": {"name": "并州精骑·魏续", "portrait": "weixu", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "精骑冲锋", "power": 1.4, "weight": 1}, {"name": "我是吕将军的亲戚", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "抢了就跑", "power": 0, "weight": 1, "heal": 0.04}, {"name": "并州皮甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "weixu"},
+    "n4_yudu": {"name": "太行·于毒", "portrait": "yudu", "actions": 2, "moves": [{"name": "开山斧", "power": 1.2, "weight": 3}, {"name": "狂暴", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "放火烧林", "power": 0.8, "weight": 2, "burn_party": 0.08, "turns": 3}, {"name": "黑山叫骂", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "山寨木栅", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "于毒喽啰", "prefer": "player_buffed"}, {"name": "于毒喽啰", "power": 0, "weight": 0, "summon": {"name": "于毒喽啰", "hp_pct": 0.12, "strike": 0.5}}], "card": "yudu_card"},
+    "n4_weixu": {"name": "并州精骑·魏续", "portrait": "weixu", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "精骑冲锋", "power": 1.4, "weight": 1}, {"name": "我是吕将军的亲戚", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "抢了就跑", "power": 0, "weight": 1, "heal": 0.04}, {"name": "并州皮甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "魏续亲兵", "prefer": "player_buffed"}, {"name": "魏续亲兵", "power": 0, "weight": 0, "summon": {"name": "魏续亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "weixu"},
     "n4_bingzhou": {"name": "并州追兵", "portrait": "bingzhou", "actions": 2, "moves": [{"name": "马刀", "power": 1.0, "weight": 3}, {"name": "狼群冲阵", "power": 1.5, "weight": 1, "confuse": 0.4}, {"name": "回马箭", "power": 1.2, "weight": 1}], "card": "bingzhou"},
     "n4_houcheng": {"name": "突围·侯成", "portrait": "bingzhou", "actions": 2, "moves": [{"name": "马刀", "power": 1.0, "weight": 3}, {"name": "拦路", "power": 1.3, "weight": 1}, {"name": "并州号角", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "回马箭", "power": 1.1, "weight": 1}, {"name": "拦路拒马", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "bingzhou"},
     "n4_zhangrao": { "armor": "fushui","name": "青州黄巾·张饶", "portrait": "huangjin", "actions": 2, "moves": [{"name": "鬼头刀", "power": 1.0, "weight": 3}, {"name": "人海", "power": 1.3, "weight": 1}, {"name": "黄天当立", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "烧粮", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}, {"name": "黄天咒", "power": 0.4, "weight": 1, "seal": "magic"}], "card": "huangjin_lishi"},
-    "n4_wuanguo": {"name": "北海猛将·武安国", "portrait": "wuanguo", "actions": 2, "moves": [{"name": "铁锤", "power": 1.0, "weight": 3}, {"name": "千斤一锤", "power": 1.5, "weight": 1}, {"name": "震地", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "守城的脾气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "铁锤护身", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "wuanguo"},
+    "n4_wuanguo": {"name": "北海猛将·武安国", "portrait": "wuanguo", "actions": 2, "moves": [{"name": "铁锤", "power": 1.0, "weight": 3}, {"name": "千斤一锤", "power": 1.5, "weight": 1}, {"name": "震地", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "守城的脾气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "铁锤护身", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "武安国亲兵", "prefer": "player_buffed"}, {"name": "武安国亲兵", "power": 0, "weight": 0, "summon": {"name": "武安国亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "wuanguo"},
     "n7_taishan_zei": {"name": "泰山贼", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "乱砍", "power": 1.0, "weight": 3}, {"name": "扔石头", "power": 1.2, "weight": 1}, {"name": "抢了就跑", "power": 0.5, "weight": 1, "heal": 0.06}], "card": "shanzei_bing"},
     "n7_taishan_gong": {"name": "泰山弓手", "portrait": "shanzei_bing", "actions": 2, "moves": [{"name": "齐射", "power": 1.0, "weight": 3}, {"name": "火箭", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "shanzei_bing"},
     "n7_haizei": {"name": "东海海贼", "portrait": "inf_n", "actions": 2, "moves": [{"name": "抢掠", "power": 1.0, "weight": 3}, {"name": "放火", "power": 0.6, "weight": 1, "burn_party": 0.06, "turns": 2}, {"name": "围船", "power": 1.3, "weight": 1}], "card": "shanzei_bing"},
@@ -4694,15 +4780,15 @@
     "n7_jizhou_nu": {"name": "冀州强弩", "portrait": "inf_n", "actions": 2, "moves": [{"name": "齐射", "power": 1.0, "weight": 3}, {"name": "火箭", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "jizhou_nu"},
     "n7_jizhou_bu": {"name": "冀州步卒", "portrait": "inf_n", "actions": 2, "moves": [{"name": "挥砍", "power": 1.0, "weight": 3}, {"name": "军阵", "power": 0, "weight": 1, "heal": 0.038}], "card": "inf_n"},
     "n7_xiandeng": { "armor": "zhongjia","name": "冀州先登营", "portrait": "inf_n", "actions": 2, "moves": [{"name": "举盾推进", "power": 0.5, "weight": 2}, {"name": "强弩齐射·蓄力", "power": 0, "weight": 1, "charge": "强弩齐射"}, {"name": "强弩齐射", "power": 3.3, "weight": 0, "pierce": true}, {"name": "先登绞杀", "power": 1.0, "weight": 1, "ap_drain": 2}], "card": "jizhou_nu", "drop": "xiandeng_sishi"},
-    "n7_zangba": {"name": "泰山臧霸", "portrait": "zangba", "actions": 2, "moves": [{"name": "环首刀", "power": 1.0, "weight": 3}, {"name": "山寨乱箭", "power": 1.3, "weight": 1}, {"name": "义气", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "抽税", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "见势不妙", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}, {"name": "泰山寨墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "zangba"},
-    "n7_fukou": {"name": "滏口陉·淳于琼", "portrait": "chunyuqiong", "actions": 2, "moves": [{"name": "醉刀", "power": 1.0, "weight": 3}, {"name": "一线天", "power": 1.4, "weight": 1}, {"name": "酒气熏天", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "再来一碗", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "一线天关隘", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "chunyuqiong"},
-    "n7_shenrong": {"name": "邺城·审荣守军", "portrait": "shenrong", "actions": 2, "moves": [{"name": "守军齐上", "power": 1.0, "weight": 3}, {"name": "城头乱箭", "power": 1.3, "weight": 1}, {"name": "我叔父是审配", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "冀州强弩·蓄力", "power": 0, "weight": 1, "charge": "强弩齐发"}, {"name": "强弩齐发", "power": 3.2, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "拼了", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "邺城城墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}], "card": "shenrong"},
+    "n7_zangba": {"name": "泰山臧霸", "portrait": "zangba", "actions": 2, "moves": [{"name": "环首刀", "power": 1.0, "weight": 3}, {"name": "山寨乱箭", "power": 1.3, "weight": 1}, {"name": "义气", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "抽税", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "见势不妙", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}, {"name": "泰山寨墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "喽啰·蓄力", "power": 0, "weight": 1, "charge": "臧霸喽啰", "prefer": "player_buffed"}, {"name": "臧霸喽啰", "power": 0, "weight": 0, "summon": {"name": "臧霸喽啰", "hp_pct": 0.12, "strike": 0.5}}], "card": "zangba"},
+    "n7_fukou": {"name": "滏口陉·淳于琼", "portrait": "chunyuqiong", "actions": 2, "moves": [{"name": "醉刀", "power": 1.0, "weight": 3}, {"name": "一线天", "power": 1.4, "weight": 1}, {"name": "酒气熏天", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "再来一碗", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "一线天关隘", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "淳于琼亲兵", "prefer": "player_buffed"}, {"name": "淳于琼亲兵", "power": 0, "weight": 0, "summon": {"name": "淳于琼亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "chunyuqiong"},
+    "n7_shenrong": {"name": "邺城·审荣守军", "portrait": "shenrong", "actions": 2, "moves": [{"name": "守军齐上", "power": 1.0, "weight": 3}, {"name": "城头乱箭", "power": 1.3, "weight": 1}, {"name": "我叔父是审配", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "冀州强弩·蓄力", "power": 0, "weight": 1, "charge": "强弩齐发"}, {"name": "强弩齐发", "power": 3.2, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "拼了", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "邺城城墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "审荣亲兵", "prefer": "player_buffed"}, {"name": "审荣亲兵", "power": 0, "weight": 0, "summon": {"name": "审荣亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "shenrong"},
     "n7_guotu": {"name": "州衙后院·郭图", "portrait": "guotu", "actions": 2, "moves": [{"name": "家兵齐上", "power": 1.0, "weight": 3}, {"name": "金锭砸人", "power": 1.3, "weight": 1}, {"name": "烧账房", "power": 0.5, "weight": 1, "burn_party": 0.05, "turns": 3}, {"name": "谗言", "power": 0.4, "weight": 1, "seal": "ultimate"}, {"name": "家兵护主", "power": 0, "weight": 1, "once": true, "summon": {"name": "郭府家兵", "hp_pct": 0.14, "strike": 0.5}}, {"name": "拿钱买命", "power": 0, "weight": 1, "heal": 0.08, "when": "half", "once": true}], "card": "guotu"},
     "n7_xinshi": {"name": "漳水·沮授信使护骑", "portrait": "xiliang_bing", "actions": 2, "card": "jizhou_ji", "moves": [{"name": "快马加鞭", "power": 1.0, "weight": 3}, {"name": "沮授的密令", "power": 0.6, "weight": 2, "confuse": 0.45}, {"name": "烧信", "power": 0, "weight": 1, "ap_drain": 2}, {"name": "回身骑射", "power": 1.6, "weight": 1}, {"name": "回身瞄准·蓄力", "power": 0, "weight": 1, "charge": "一箭封喉"}, {"name": "一箭封喉", "power": 3.2, "weight": 0}]},
-    "n7_yanliang": {"name": "河北庭柱·颜良", "portrait": "yanliang", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "狂劈", "power": 1.6, "weight": 1}, {"name": "震慑", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "蓄力", "power": 0, "weight": 1, "charge": "泰山压顶"}, {"name": "泰山压顶", "power": 3.8, "weight": 0}], "card": "yanliang"},
-    "n7_wenchou": {"name": "河北庭柱·文丑", "portrait": "wenchou", "actions": 2, "moves": [{"name": "长枪横扫", "power": 1.0, "weight": 3}, {"name": "猛将突刺", "power": 1.5, "weight": 1}, {"name": "庭柱之威", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "枪出如龙", "power": 1.0, "weight": 1, "ap_drain": 2}, {"name": "庭柱点将", "power": 0, "weight": 1, "mark": "斩将夺旗"}, {"name": "斩将夺旗", "power": 0, "weight": 0}, {"name": "河北重甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}], "card": "wenchou"},
+    "n7_yanliang": {"name": "河北庭柱·颜良", "portrait": "yanliang", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "狂劈", "power": 1.6, "weight": 1}, {"name": "震慑", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "蓄力", "power": 0, "weight": 1, "charge": "泰山压顶"}, {"name": "泰山压顶", "power": 3.8, "weight": 0}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "颜良亲兵", "prefer": "player_buffed"}, {"name": "颜良亲兵", "power": 0, "weight": 0, "summon": {"name": "颜良亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "yanliang"},
+    "n7_wenchou": {"name": "河北庭柱·文丑", "portrait": "wenchou", "actions": 2, "moves": [{"name": "长枪横扫", "power": 1.0, "weight": 3}, {"name": "猛将突刺", "power": 1.5, "weight": 1}, {"name": "庭柱之威", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "枪出如龙", "power": 1.0, "weight": 1, "ap_drain": 2}, {"name": "庭柱点将", "power": 0, "weight": 1, "mark": "斩将夺旗"}, {"name": "斩将夺旗", "power": 0, "weight": 0}, {"name": "河北重甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}, {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "文丑亲骑", "prefer": "self_low_hp"}, {"name": "文丑亲骑", "power": 0, "weight": 0, "summon": {"name": "文丑亲骑", "hp_pct": 0.15, "strike": 0.5}}], "card": "wenchou"},
     "n7_wenchou_bad": {"name": "渡口·文丑", "portrait": "wenchou", "hp": 65000, "at": 730, "actions": 3, "moves": [{"name": "长枪横扫", "power": 1.0, "weight": 3}, {"name": "三千河北兵", "power": 1.3, "weight": 1}, {"name": "围村", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "火烧渡口", "power": 0.8, "weight": 1, "burn_party": 0.1, "turns": 3}, {"name": "枪出如龙·蓄力", "power": 0, "weight": 1, "charge": "枪出如龙"}, {"name": "枪出如龙", "power": 3.6, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "界桥那一场", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "庭柱点将", "power": 0, "weight": 1, "mark": "斩将夺旗"}, {"name": "斩将夺旗", "power": 0, "weight": 0}], "card": "wenchou"},
-    "n7_zhanghe": {"name": "河北名将·张郃", "portrait": "zhanghe", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "料敌先机", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "变阵", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "巧变突刺", "power": 1.4, "weight": 1}, {"name": "沉着", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}, {"name": "巧变架势", "power": 0.5, "weight": 1, "stance": {"name": "巧变架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}], "card": "zhanghe"},
+    "n7_zhanghe": {"name": "河北名将·张郃", "portrait": "zhanghe", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "料敌先机", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "变阵", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "巧变突刺", "power": 1.4, "weight": 1}, {"name": "沉着", "power": 0, "weight": 1, "heal": 0.05, "when": "half", "once": true}, {"name": "巧变架势", "power": 0.5, "weight": 1, "stance": {"name": "巧变架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "张郃亲兵", "prefer": "player_buffed"}, {"name": "张郃亲兵", "power": 0, "weight": 0, "summon": {"name": "张郃亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "zhanghe"},
     "n8_jizhou_qi": {"name": "袁军冀州骑卒", "portrait": "xiliang_bing", "actions": 2, "moves": [{"name": "冲锋", "power": 1.2, "weight": 3}, {"name": "游斗", "power": 0.8, "weight": 1}], "card": "jizhou_qi"},
     "n8_jizhou_nu": {"name": "袁军冀州强弩", "portrait": "inf_n", "actions": 2, "moves": [{"name": "齐射", "power": 1.0, "weight": 3}, {"name": "火箭", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}], "card": "jizhou_nu"},
     "n8_jizhou_bu": {"name": "袁军冀州步卒", "portrait": "inf_n", "actions": 2, "moves": [{"name": "挥砍", "power": 1.0, "weight": 3}, {"name": "军阵", "power": 0, "weight": 1, "heal": 0.038}], "card": "jizhou_ji"},
@@ -4741,11 +4827,11 @@
     "n9_gaogouli_gong": {"name": "高句丽弓手", "portrait": "inf_n", "actions": 2, "moves": [{"name": "长弓", "power": 1.0, "weight": 3}, {"name": "山道冷箭", "power": 1.2, "weight": 1}, {"name": "躲进山里", "power": 0, "weight": 1, "heal": 0.03}], "card": "wuhuan_sheshou"},
     "n9_g_gaogouli": {"name": "高句丽援军", "portrait": "inf_n", "actions": 2, "moves": [{"name": "长弓齐射", "power": 1.0, "weight": 3}, {"name": "冰面箭雨", "power": 1.3, "weight": 1}, {"name": "听不懂的号令", "power": 0.5, "weight": 1, "confuse": 0.45}, {"name": "火箭", "power": 0.6, "weight": 1, "burn_party": 0.05, "turns": 2}, {"name": "冰河冻甲", "power": 0.4, "weight": 1, "seal": "attack"}], "card": "wuhuan_sheshou"},
     "n9_g_gongsunkang": {"name": "辽东王·公孙康", "portrait": "gongsunkang", "actions": 2, "moves": [{"name": "襄平守军", "power": 1.0, "weight": 3}, {"name": "城头乱箭", "power": 1.3, "weight": 1}, {"name": "辽东王令", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "滚木礌石·蓄力", "power": 0, "weight": 1, "charge": "滚木礌石"}, {"name": "滚木礌石", "power": 3.2, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "孤城死守", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "孤城城墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}], "card": "youzhou_qiang"},
-    "n7_gaolan": {"name": "河北名将·高览", "portrait": "gaolan", "actions": 2, "moves": [{"name": "枪法凌厉", "power": 1.0, "weight": 3}, {"name": "连环枪", "power": 1.4, "weight": 1}, {"name": "断后", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "死战", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "断后架势", "power": 0.5, "weight": 1, "stance": {"name": "断后架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}], "card": "gaolan"},
+    "n7_gaolan": {"name": "河北名将·高览", "portrait": "gaolan", "actions": 2, "moves": [{"name": "枪法凌厉", "power": 1.0, "weight": 3}, {"name": "连环枪", "power": 1.4, "weight": 1}, {"name": "断后", "power": 0.5, "weight": 1, "confuse": 0.4}, {"name": "死战", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "断后架势", "power": 0.5, "weight": 1, "stance": {"name": "断后架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "高览亲兵", "prefer": "player_buffed"}, {"name": "高览亲兵", "power": 0, "weight": 0, "summon": {"name": "高览亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "gaolan"},
     "m8_han_tuqi": {"name": "汉军虎骑", "portrait": "han_tuqi", "actions": 2, "moves": [{"name": "突骑冲锋", "power": 1.0, "weight": 3}, {"name": "回马枪", "power": 1.4, "weight": 1}, {"name": "截粮", "power": 0.5, "weight": 1, "ap_drain": 1}], "card": "han_tuqi"},
     "m8_han_bazhen": {"name": "汉军虎步军", "portrait": "han_bazhen", "actions": 2, "moves": [{"name": "八阵", "power": 1.0, "weight": 3}, {"name": "阵变", "power": 0.3, "weight": 1, "confuse": 0.4}, {"name": "盾墙", "power": 0, "weight": 1, "heal": 0.035}], "card": "han_bazhen"},
     "m8_caoren": {"name": "曹军大将曹仁", "portrait": "caoren", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "铁壁", "power": 0, "weight": 1, "heal": 0.04}, {"name": "枪阵压境", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "八门金锁·休门", "power": 0, "weight": 1, "formation": {"vs": "attack", "cut": 0.6, "turns": 2}}, {"name": "八门金锁·惊门", "power": 0, "weight": 1, "formation": {"vs": "magic", "cut": 0.6, "turns": 2}}, {"name": "宗亲的硬气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "wu_nushou"},
-    "m8_guanping": {"name": "关羽之子关平", "portrait": "guanping", "actions": 2, "moves": [{"name": "青缨枪", "power": 1.0, "weight": 3}, {"name": "江岸突骑", "power": 1.3, "weight": 1}, {"name": "截江", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "父命在身", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "江岸盾阵", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}], "card": "guanping"},
+    "m8_guanping": {"name": "关羽之子关平", "portrait": "guanping", "actions": 2, "moves": [{"name": "青缨枪", "power": 1.0, "weight": 3}, {"name": "江岸突骑", "power": 1.3, "weight": 1}, {"name": "截江", "power": 0.5, "weight": 1, "ap_drain": 1}, {"name": "父命在身", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "江岸盾阵", "power": 0, "weight": 1, "shield": {"hp_pct": 0.1}}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "关平亲兵", "prefer": "player_buffed"}, {"name": "关平亲兵", "power": 0, "weight": 0, "summon": {"name": "关平亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "guanping"},
     "m8_chendao": {"name": "白毦兵陈到", "portrait": "chendao", "actions": 2, "moves": [{"name": "铁枪", "power": 1.0, "weight": 3}, {"name": "白毦冲阵", "power": 0.4, "weight": 1, "confuse": 0.4}, {"name": "枪阵不动", "power": 0, "weight": 1, "heal": 0.04}, {"name": "白毦·蓄力", "power": 0, "weight": 1, "charge": "白毦突击"}, {"name": "白毦突击", "power": 3.1, "weight": 0}], "card": "baier"},
     "m8_zhoucang": {"name": "扛刀的周仓", "portrait": "zhoucang", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "抡刀", "power": 1.3, "weight": 1}, {"name": "黄巾吼", "power": 0.4, "weight": 1, "ap_drain": 1}], "card": "zhoucang"},
     "m8_zhangfei": {"name": "博望坡·张飞", "portrait": "zhangfei", "actions": 2, "moves": [{"name": "丈八蛇矛", "power": 1.0, "weight": 3}, {"name": "燕人一声吼", "power": 0.6, "weight": 1, "confuse": 0.5}, {"name": "伏兵火阵", "power": 0.8, "weight": 1, "burn_party": 0.08, "turns": 3}, {"name": "蛇矛·蓄力", "power": 0, "weight": 1, "charge": "万人敌"}, {"name": "万人敌", "power": 3.3, "weight": 0, "pierce": true}], "card": "wudang_feijun"},
@@ -4753,11 +4839,11 @@
     "m8_kongming_bad": { "drop": "zhugeliang", "armor": "moushi","name": "卧龙诸葛亮", "portrait": "zhugeliang", "hp": 30000, "at": 520, "actions": 2, "moves": [{"name": "羽扇", "power": 1.0, "weight": 3}, {"name": "上游之火", "power": 0.8, "weight": 1, "burn_party": 0.1, "turns": 3}, {"name": "八阵", "power": 0.5, "weight": 1, "ap_drain": 2}, {"name": "空营", "power": 0.4, "weight": 1, "confuse": 0.5}, {"name": "决白河·蓄力", "power": 0, "weight": 1, "charge": "决白河"}, {"name": "决白河", "power": 3.8, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "算无遗策", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "门生·蓄力", "power": 0, "weight": 1, "charge": "卧龙门生", "prefer": "self_low_hp"}, {"name": "卧龙门生", "power": 0, "weight": 0, "summon": {"name": "卧龙门生", "hp_pct": 0.14, "strike": 0.5}}, {"name": "八阵·生门", "power": 0, "weight": 1, "formation": {"vs": "attack", "cut": 0.6, "turns": 2}}, {"name": "八阵·景门", "power": 0, "weight": 1, "formation": {"vs": "magic", "cut": 0.6, "turns": 2}}], "card": "han_shuzuo"},
     "m8_kongming": { "drop": "zhugeliang", "armor": "moushi","name": "卧龙诸葛亮", "portrait": "zhugeliang", "actions": 2, "moves": [{"name": "羽扇", "power": 1.0, "weight": 3}, {"name": "火计", "power": 0.8, "weight": 1, "burn_party": 0.08, "turns": 3}, {"name": "八阵", "power": 0.5, "weight": 1, "ap_drain": 2}, {"name": "伏兵·蓄力", "power": 0, "weight": 1, "charge": "伏兵齐出"}, {"name": "伏兵齐出", "power": 3.4, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "兄长……", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "门生·蓄力", "power": 0, "weight": 1, "charge": "卧龙门生", "prefer": "self_low_hp"}, {"name": "卧龙门生", "power": 0, "weight": 0, "summon": {"name": "卧龙门生", "hp_pct": 0.14, "strike": 0.5}}, {"name": "八阵·生门", "power": 0, "weight": 1, "formation": {"vs": "attack", "cut": 0.6, "turns": 2}}, {"name": "八阵·景门", "power": 0, "weight": 1, "formation": {"vs": "magic", "cut": 0.6, "turns": 2}}], "card": "liannu"},
     "m8_guanyu": {"name": "八阵·关羽", "portrait": "guanyu", "hp": 30000, "at": 520, "actions": 2, "moves": [{"name": "青龙偃月刀", "power": 1.0, "weight": 4}, {"name": "乱石八阵", "power": 0.5, "weight": 1, "confuse": 0.5}, {"name": "丹凤眼一睁", "power": 0.6, "weight": 1, "ap_drain": 2}, {"name": "拖刀·蓄力", "power": 0, "weight": 1, "charge": "拖刀斩"}, {"name": "拖刀斩", "power": 3.4, "weight": 0, "pct": 0.1, "pierce": true}, {"name": "抚髯", "power": 0, "weight": 1, "rage": 0.3, "when": "half", "once": true}, {"name": "石阵·坚", "power": 0, "weight": 1, "formation": {"vs": "attack", "cut": 0.6, "turns": 2}}, {"name": "石阵·散", "power": 0, "weight": 1, "formation": {"vs": "magic", "cut": 0.6, "turns": 2}}], "card": "han_bazhen"},
-    "weiyan_e": {"name": "荆州将魏延", "portrait": "weiyan", "actions": 2, "moves": [{"name": "挑刺", "power": 1.1, "weight": 3}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "拖刀计·蓄力", "power": 0, "weight": 1, "charge": "拖刀计"}, {"name": "拖刀计", "power": 3.2, "weight": 0}, {"name": "不服气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "weiyan"},
-    "wenpin_e": {"name": "荆州大将文聘", "portrait": "wenpin", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "盾阵", "power": 0, "weight": 1, "heal": 0.038}, {"name": "枪阵压境", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "雁行突刺·蓄力", "power": 0, "weight": 1, "charge": "雁行突刺"}, {"name": "雁行突刺", "power": 3.4, "weight": 0, "pct": 0.1}, {"name": "老将的稳", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "盾墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}], "card": "wenpin"},
-    "zhangyun_e": {"name": "水军督将张允", "portrait": "zhangyun", "actions": 2, "moves": [{"name": "水军刀", "power": 1.0, "weight": 3}, {"name": "火船", "power": 0.4, "weight": 1, "burn_party": 0.05, "turns": 2}, {"name": "劝酒", "power": 0.3, "weight": 1, "ap_drain": 1}, {"name": "家酒·蓄力", "power": 0, "weight": 1, "charge": "家酒"}, {"name": "家酒", "power": 3.4, "weight": 0, "pct": 0.1}, {"name": "外甥的醉意", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "劝酒误事", "power": 0.4, "weight": 1, "seal": "attack"}], "card": "zhangyun"},
-    "sufei_e": {"name": "江夏苏飞", "portrait": "sufei", "actions": 2, "moves": [{"name": "钩索", "power": 1.0, "weight": 3}, {"name": "钩索拖船", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "水卒围攻", "power": 1.4, "weight": 1}, {"name": "斩缆·蓄力", "power": 0, "weight": 1, "charge": "斩缆"}, {"name": "斩缆", "power": 3.4, "weight": 0, "pct": 0.1}, {"name": "败将的不甘", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "钩索缠身", "power": 0.4, "weight": 1, "seal": "attack"}], "card": "sufei"},
-    "liupan_e": {"name": "荆州刘磐", "portrait": "liupan", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "铁骑冲阵", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "枪挑·蓄力", "power": 0, "weight": 1, "charge": "枪挑"}, {"name": "枪挑", "power": 3.5, "weight": 0, "pct": 0.1}, {"name": "少将军的傲气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "少将军架势", "power": 0.5, "weight": 1, "stance": {"name": "少将军架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}], "card": "liupan"},
+    "weiyan_e": {"name": "荆州将魏延", "portrait": "weiyan", "actions": 2, "moves": [{"name": "挑刺", "power": 1.1, "weight": 3}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "拖刀计·蓄力", "power": 0, "weight": 1, "charge": "拖刀计"}, {"name": "拖刀计", "power": 3.2, "weight": 0}, {"name": "不服气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "魏延亲兵", "prefer": "player_buffed"}, {"name": "魏延亲兵", "power": 0, "weight": 0, "summon": {"name": "魏延亲兵", "hp_pct": 0.12, "strike": 0.5}}], "card": "weiyan"},
+    "wenpin_e": {"name": "荆州大将文聘", "portrait": "wenpin", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "盾阵", "power": 0, "weight": 1, "heal": 0.038}, {"name": "枪阵压境", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "雁行突刺·蓄力", "power": 0, "weight": 1, "charge": "雁行突刺"}, {"name": "雁行突刺", "power": 3.4, "weight": 0, "pct": 0.1}, {"name": "老将的稳", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "盾墙", "power": 0, "weight": 1, "shield": {"hp_pct": 0.12}}, {"name": "亲卫·蓄力", "power": 0, "weight": 1, "charge": "文聘亲卫", "prefer": "self_low_hp"}, {"name": "文聘亲卫", "power": 0, "weight": 0, "summon": {"name": "文聘亲卫", "hp_pct": 0.15, "strike": 0.5}}], "card": "wenpin"},
+    "zhangyun_e": {"name": "水军督将张允", "portrait": "zhangyun", "actions": 2, "moves": [{"name": "水军刀", "power": 1.0, "weight": 3}, {"name": "火船", "power": 0.4, "weight": 1, "burn_party": 0.05, "turns": 2}, {"name": "劝酒", "power": 0.3, "weight": 1, "ap_drain": 1}, {"name": "家酒·蓄力", "power": 0, "weight": 1, "charge": "家酒"}, {"name": "家酒", "power": 3.4, "weight": 0, "pct": 0.1}, {"name": "外甥的醉意", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "劝酒误事", "power": 0.4, "weight": 1, "seal": "attack"}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "张允亲兵", "prefer": "self_low_hp"}, {"name": "张允亲兵", "power": 0, "weight": 0, "summon": {"name": "张允亲兵", "hp_pct": 0.15, "strike": 0.5}}], "card": "zhangyun"},
+    "sufei_e": {"name": "江夏苏飞", "portrait": "sufei", "actions": 2, "moves": [{"name": "钩索", "power": 1.0, "weight": 3}, {"name": "钩索拖船", "power": 0.4, "weight": 1, "ap_drain": 1}, {"name": "水卒围攻", "power": 1.4, "weight": 1}, {"name": "斩缆·蓄力", "power": 0, "weight": 1, "charge": "斩缆"}, {"name": "斩缆", "power": 3.4, "weight": 0, "pct": 0.1}, {"name": "败将的不甘", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "钩索缠身", "power": 0.4, "weight": 1, "seal": "attack"}, {"name": "亲兵·蓄力", "power": 0, "weight": 1, "charge": "苏飞亲兵", "prefer": "self_low_hp"}, {"name": "苏飞亲兵", "power": 0, "weight": 0, "summon": {"name": "苏飞亲兵", "hp_pct": 0.15, "strike": 0.5}}], "card": "sufei"},
+    "liupan_e": {"name": "荆州刘磐", "portrait": "liupan", "actions": 2, "moves": [{"name": "长枪", "power": 1.0, "weight": 3}, {"name": "铁骑冲阵", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "枪挑·蓄力", "power": 0, "weight": 1, "charge": "枪挑"}, {"name": "枪挑", "power": 3.5, "weight": 0, "pct": 0.1}, {"name": "少将军的傲气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}, {"name": "少将军架势", "power": 0.5, "weight": 1, "stance": {"name": "少将军架势", "power": 0.8, "turns": 1}, "prefer": "player_buffed"}, {"name": "亲骑·蓄力", "power": 0, "weight": 1, "charge": "刘磐亲骑", "prefer": "self_low_hp"}, {"name": "刘磐亲骑", "power": 0, "weight": 0, "summon": {"name": "刘磐亲骑", "hp_pct": 0.15, "strike": 0.5}}], "card": "liupan"},
     "n10_wei_qingzhou": {"name": "魏军青州老兵", "portrait": "wei_qingzhou", "actions": 2, "moves": [{"name": "长枪阵", "power": 1.0, "weight": 3}, {"name": "老兵突刺", "power": 1.3, "weight": 1}, {"name": "结阵", "power": 0, "weight": 1, "heal": 0.03}], "card": "wei_qingzhou"},
     "n10_hanhao": {"name": "魏军屯田将·韩浩", "portrait": "hanhao", "actions": 2, "moves": [{"name": "拒马长枪", "power": 1.0, "weight": 3}, {"name": "屯田兵推进", "power": 1.3, "weight": 1}, {"name": "连人质一起打", "power": 0.4, "weight": 1, "confuse": 0.35}], "card": "wei_tuntian"},
     "n11_caoren": {"name": "首阳山·曹仁", "portrait": "caoren", "actions": 2, "moves": [{"name": "大刀", "power": 1.0, "weight": 3}, {"name": "铁壁", "power": 0, "weight": 1, "heal": 0.04}, {"name": "枪阵压境", "power": 1.4, "weight": 1}, {"name": "战鼓", "power": 0.3, "weight": 1, "confuse": 0.5}, {"name": "八门金锁·休门", "power": 0, "weight": 1, "formation": {"vs": "attack", "cut": 0.6, "turns": 2}}, {"name": "八门金锁·惊门", "power": 0, "weight": 1, "formation": {"vs": "magic", "cut": 0.6, "turns": 2}}, {"name": "宗亲的硬气", "power": 0, "weight": 1, "rage": 0.25, "when": "half", "once": true}], "card": "wei_qingzhou"},
