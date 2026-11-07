@@ -182,7 +182,7 @@ func _load(dir: String) -> void:
 				"record_lose": s.get("record_lose", ""), "requires": s.get("requires", ""), "unless": s.get("unless", ""),
 				"soldier_pool": s.get("soldier_pool", []), "recruit_pool": s.get("recruit_pool", []), "cg": s.get("cg", ""), "prompt": s.get("prompt", ""), "card_unless": s.get("card_unless", {}), "ghost": s.get("ghost", false), "ghost_requires": s.get("ghost_requires", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
-			"soldier_pool": q.get("soldier_pool", []), "soldier_scope": q.get("soldier_scope", ""), "recruit_pool": q.get("recruit_pool", []),
+			"soldier_pool": q.get("soldier_pool", []), "soldier_scope": q.get("soldier_scope", ""), "recruit_pool": q.get("recruit_pool", []), "chest_pool": q.get("chest_pool", []),
 			"subtitle": q.get("subtitle", ""), "ending": _ending_card(q.get("ending", "")), "requires": q.get("requires", ""), "unless": q.get("unless", ""),
 			"event_pool": q.get("event_pool", []), "event_scope": q.get("event_scope", "south"), "shuffle": q.get("shuffle", []),
 				"pool_overrides": q.get("pool_overrides", []).map(func(o): return {"requires": o.get("requires", ""),
@@ -242,6 +242,8 @@ func _index_card_chapters() -> void:
 				card_chapters[cid].append(qid)
 	for q in quests:
 		for c in q["recruit_pool"]:
+			add.call(c, q["id"])
+		for c in q["chest_pool"]:  # this chapter's own soldiers for its chests only (user rule: no soldiers on a 招贤 list)
 			add.call(c, q["id"])
 		for o in q["pool_overrides"]:
 			for c in o["recruit_pool"]:
