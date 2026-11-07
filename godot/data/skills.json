@@ -456,13 +456,13 @@
     },
     "jinzhen": {
       "name": "金针度穴",
-      "cost": 1,
-      "cumulative": true,
+      "cost": 3,
+      "uses": 1,
       "special": true,
       "effects": [
         {
           "type": "heal",
-          "rate": 2.4
+          "rate": 3.5
         }
       ]
     },
