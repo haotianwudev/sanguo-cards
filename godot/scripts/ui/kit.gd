@@ -321,51 +321,44 @@ static func name_font(size: int, spacing: int) -> Font:
 	return _textures[key]
 
 
-static func badge(troop_id: String) -> Texture2D:
-	var key := "badge:" + troop_id
-	if not _textures.has(key):
-		var path := "res://data/art/badges/%s.png" % troop_id
-		_textures[key] = load(path) if ResourceLoader.exists(path) else null
-	return _textures[key]
+static func _art(path: String) -> Texture2D:
+	## a picture, or null while it isn't drawn yet — big ones (CGs, the title) aren't kept: the engine frees them when unused
+	return load(path) if path != "" and ResourceLoader.exists(path) else null
 
 
-static func relic_icon(relic_id: String) -> Texture2D:
-	var key := "relic:" + relic_id
-	if not _textures.has(key):
-		var path := "res://data/art/relics/%s.png" % relic_id
-		_textures[key] = load(path) if ResourceLoader.exists(path) else null
-	return _textures[key]
-
-
-static func map_icon(kind: String) -> Texture2D:
-	var key := "map_icon:" + kind
-	if not _textures.has(key):
-		var path := "res://data/art/map/icons/%s.png" % kind
-		_textures[key] = load(path) if ResourceLoader.exists(path) else null
-	return _textures[key]
-
-
-static func token_icon(north := false) -> Texture2D:
-	## the chibi hero who walks the map: token_lord_<route>.png, else the old generic token_lord.png
-	var route := "north" if north else "south"
-	var key := "token:" + route
+static func _kept(key: String, paths: Array) -> Texture2D:
+	## a small picture (badge, icon, frame), loaded once and kept: the first of `paths` that exists, or null
 	if not _textures.has(key):
 		var tex: Texture2D = null
-		for path in ["res://data/art/map/token_lord_%s.png" % route, "res://data/art/map/token_lord.png"]:
-			if ResourceLoader.exists(path):
-				tex = load(path)
+		for path in paths:
+			tex = _art(path)
+			if tex != null:
 				break
 		_textures[key] = tex
 	return _textures[key]
 
 
+static func badge(troop_id: String) -> Texture2D:
+	return _kept("badge:" + troop_id, ["res://data/art/badges/%s.png" % troop_id])
+
+
+static func relic_icon(relic_id: String) -> Texture2D:
+	return _kept("relic:" + relic_id, ["res://data/art/relics/%s.png" % relic_id])
+
+
+static func map_icon(kind: String) -> Texture2D:
+	return _kept("map_icon:" + kind, ["res://data/art/map/icons/%s.png" % kind])
+
+
+static func token_icon(north := false) -> Texture2D:
+	## the chibi hero who walks the map: token_lord_<route>.png, else the old generic token_lord.png
+	var route := "north" if north else "south"
+	return _kept("token:" + route, ["res://data/art/map/token_lord_%s.png" % route, "res://data/art/map/token_lord.png"])
+
+
 static func icon(key: String) -> Texture2D:
 	## a small UI icon: data/art/icons/<key>.png (stat_at / stat_hp / stat_ap, skill_*), or null
-	var k := "icon:" + key
-	if not _textures.has(k):
-		var path := "res://data/art/icons/%s.png" % key
-		_textures[k] = load(path) if ResourceLoader.exists(path) else null
-	return _textures[k]
+	return _kept("icon:" + key, ["res://data/art/icons/%s.png" % key])
 
 
 static func resist_text(e: Dictionary, bbcode := true, short := false) -> String:
@@ -502,11 +495,7 @@ static func _num(x: Variant) -> String:
 
 
 static func card_back() -> Texture2D:
-	var key := "card:back"
-	if not _textures.has(key):
-		var path := "res://data/art/frames/card_back.png"
-		_textures[key] = load(path) if ResourceLoader.exists(path) else null
-	return _textures[key]
+	return _kept("card:back", ["res://data/art/frames/card_back.png"])
 
 
 # ---- portraits ---------------------------------------------------------------
@@ -566,8 +555,7 @@ static func enemy_portrait_key(enemy: Dictionary) -> String:
 
 static func fate_icon(fate_id: String) -> Texture2D:
 	## a 天命 card picture (data/art/fates/<id>.png), or null (the pick shows its one-character glyph)
-	var path := "res://data/art/fates/%s.png" % fate_id
-	return load(path) if ResourceLoader.exists(path) else null
+	return _art("res://data/art/fates/%s.png" % fate_id)
 
 
 static func affix_icon_path(affix_id: String) -> String:
@@ -578,24 +566,33 @@ static func affix_icon_path(affix_id: String) -> String:
 
 static func ui_art(key: String) -> Texture2D:
 	## a full-screen UI picture (data/art/ui/<key>.jpg: title, …), or null
-	var path := "res://data/art/ui/%s.jpg" % key
-	return load(path) if ResourceLoader.exists(path) else null
+	return _art("res://data/art/ui/%s.jpg" % key)
 
 
 static func cg(key: String) -> Texture2D:
 	## a story illustration (data/art/cg/<key>.jpg), or null until it's drawn
-	var path := "res://data/art/cg/%s.jpg" % key
-	return load(path) if key != "" and ResourceLoader.exists(path) else null
+	return _art("res://data/art/cg/%s.jpg" % key) if key != "" else null
 
 
 static var _warming := {}  # portrait key -> path, loading on a background thread
+static var _portraits := {}  # portrait key -> texture, least recently used first (at most ui.json portrait_cache)
+
+
+static func _keep_portrait(key: String, tex: Texture2D) -> void:
+	## portraits are ~1.2 MB each once decoded and there are 450+: keep the most recently used ui.json portrait_cache of
+	## them (the 卡牌收藏 / 测试工具 galleries used to keep every one they ever showed — hundreds of MB on a phone)
+	_portraits.erase(key)
+	_portraits[key] = tex  # re-inserted = most recent
+	var cap := int(GameData.get_db().ui.get("portrait_cache", 160))
+	while _portraits.size() > cap:
+		_portraits.erase(_portraits.keys()[0])
 
 
 static func warm_portraits(keys: Array) -> void:
 	## start loading these portraits off the main thread, so a screen that shows them all (整备) opens without the
 	## first-time disk read; portrait() picks them up
 	for key in keys:
-		if key == "" or _textures.has(key) or _warming.has(key) or not _portrait_index().has(key):
+		if key == "" or _portraits.has(key) or _warming.has(key) or not _portrait_index().has(key):
 			continue
 		var path: String = "res://data/portraits/" + _portrait_index()[key]["file"]
 		if ResourceLoader.load_threaded_request(path) == OK:
@@ -607,13 +604,13 @@ static func portrait(key: String, aspect: float, heads: float) -> Texture2D:
 	if key == "" or not _portrait_index().has(key):  # no art yet
 		return null
 	var entry: Dictionary = _portrait_index()[key]
-	var tex: Texture2D = _textures.get(key)
+	var tex: Texture2D = _portraits.get(key)
 	if tex == null and _warming.has(key):  # warm_portraits() started it in the background: take it (waits if not done yet)
 		tex = ResourceLoader.load_threaded_get(_warming[key]) as Texture2D
 		_warming.erase(key)
 	if tex == null:
 		tex = load("res://data/portraits/" + entry["file"])
-		_textures[key] = tex
+	_keep_portrait(key, tex)
 	var w := float(tex.get_width())
 	var h := float(tex.get_height())
 	var bh: float = minf(h, heads * float(entry["head"]) * h)

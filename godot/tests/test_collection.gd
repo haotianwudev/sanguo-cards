@@ -842,3 +842,16 @@ func test_auto_party_picks_the_strongest_lord_card() -> void:
 		var f := s.lord_with_form(SaveData.lord_card_form(card))
 		var best := s.lord_with_form("" if pick == "base" else pick)
 		check(best["at"] + best["hp"] / 5.0 >= f["at"] + f["hp"] / 5.0 - 0.01, "%s not stronger than %s" % [card, pick])
+
+
+func test_the_portrait_cache_keeps_only_the_most_recent() -> void:
+	## Kit keeps at most ui.json portrait_cache decoded portraits (galleries used to keep every one they showed)
+	var ui: Dictionary = GameData.get_db().ui
+	var cap: Variant = ui.get("portrait_cache")
+	ui["portrait_cache"] = 3
+	var keys: Array = Kit._portrait_index().keys().filter(func(k): return k != "_index").slice(0, 5)
+	for k in keys:
+		Kit.portrait(k, 0.75, 3.0)
+	check_eq(Kit._portraits.size(), 3, "only the cap is kept")
+	check(Kit._portraits.has(keys[4]) and not Kit._portraits.has(keys[0]), "the oldest went first")
+	ui["portrait_cache"] = cap
