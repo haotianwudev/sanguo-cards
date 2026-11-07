@@ -791,7 +791,7 @@ func _on_retreat() -> void:
 func _armor_label(e: Dictionary) -> Label:
 	## the enemy's 护甲 and resists in one short line (「藤甲：兵刃抗性 80%　谋略弱点 +100%」), or null when it has neither
 	var res := Kit.resist_text(e, false, true)
-	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
+	var arm := Kit.armor_of(e)
 	if res == "" and arm.is_empty():
 		return null
 	var l := Kit.label(("%s：" % arm["name"] if not arm.is_empty() else "") + res, Kit.FONT_SMALL, "amber")

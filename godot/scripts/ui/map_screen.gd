@@ -76,188 +76,6 @@ var _token_spr: Control
 var _progress: ProgressBar
 
 
-class MapNode extends Control:
-	## High-fidelity Rance X style battlefield token:
-	## Distinct die-cut icons (martial shield, spiked crest, boss warlord mask, gilded chest, camp tent, bamboo scroll...),
-	## with atmospheric aura for elite/boss, smooth interaction states,
-	## and authentic cinnabar seal on victory.
-	var icon_tex: Texture2D = null
-	var glyph := ""
-	var col := Color.WHITE
-	var kind := ""  # boss / elite / …
-	var state := "open"
-	var show_glyph_on_icon := false
-
-	func _draw() -> void:
-		var big := kind == "boss" or kind == "elite"
-		var s := size
-		var center := s / 2.0
-		
-		# 1. Atmospheric Back Aura for Boss / Elite
-		if kind == "boss" and state != "visited":
-			var aura_rad := s.x * 0.60
-			draw_circle(center, aura_rad + 4.0, Color(0.75, 0.12, 0.10, 0.35))
-			draw_circle(center, aura_rad, Color(0.95, 0.35, 0.10, 0.25))
-			draw_arc(center, aura_rad + 2.0, 0, TAU, 32, Color(1.0, 0.85, 0.40, 0.65), 2.2, true)
-		elif kind == "elite" and state != "visited":
-			var aura_rad := s.x * 0.52
-			draw_circle(center, aura_rad, Color(0.95, 0.45, 0.05, 0.28))
-			draw_arc(center, aura_rad + 1.0, 0, TAU, 28, Color(1.0, 0.75, 0.25, 0.55), 1.5, true)
-		
-		# 2. Render Icon Texture
-		if icon_tex != null:
-			var icon_size := s.x if not big else (s.x * 1.18)
-			var rect := Rect2(center - Vector2(icon_size, icon_size) * 0.5, Vector2(icon_size, icon_size))
-			
-			var icon_mod := Color.WHITE
-			match state:
-				"visited":
-					icon_mod = Color(0.62, 0.58, 0.55, 0.85)  # Historical muted ink/sepia
-				"closed":
-					icon_mod = Color(0.40, 0.40, 0.45, 0.55)  # Faint closed path
-				"reachable":
-					icon_mod = Color(1.08, 1.05, 1.0)        # Crisp glowing active
-				"current":
-					icon_mod = Color(1.15, 1.10, 0.95)       # Heroic highlight
-			
-			draw_texture_rect(icon_tex, rect, false, icon_mod)
-
-			# If this node displays a glyph over the icon (e.g. random_event jade plaque)
-			if show_glyph_on_icon and glyph != "":
-				var font_size := 22
-				var f: Font = Kit.name_font(font_size, 0)
-				var gs := f.get_string_size(glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-				# Center of the cream jade medallion is at center.y + s.y * 0.065
-				var text_center := center + Vector2(0, s.y * 0.065)
-				var at := Vector2(text_center.x - gs.x * 0.5, text_center.y + font_size * 0.35)
-				
-				# Engraved ambient shadow
-				var shadow_ink := Color(0.72, 0.62, 0.50, 0.85) if state != "visited" else Color(0.35, 0.32, 0.30, 0.5)
-				draw_string(f, at + Vector2(0, 1.2), glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, shadow_ink)
-				
-				# Deep calligraphy ink
-				var text_ink := Color(0.16, 0.10, 0.06) if state != "visited" else Color(0.42, 0.38, 0.35)
-				if state == "closed":
-					text_ink = Color(0.35, 0.32, 0.30, 0.6)
-				draw_string(f, at, glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, text_ink)
-		else:
-			# Custom Glyph Medallion (e.g. 马, 沼, 寨, 甲):
-			# Rich dark lacquer disc with gold bezel and 3D carved calligraphy
-			var radius := s.x * 0.44
-			# Drop shadow
-			draw_circle(center + Vector2(0, 4), radius + 2.0, Color(0, 0, 0, 0.45))
-			# Outer gold bezel
-			draw_circle(center, radius, Color(0.85, 0.70, 0.38))
-			draw_circle(center, radius - 2.5, Color(0.14, 0.10, 0.08))
-			# Inner lacquer disc with faction/event tint
-			var disc_col := col.darkened(0.65)
-			if disc_col.get_luminance() < 0.08:
-				disc_col = Color(0.12, 0.10, 0.09)
-			if state == "visited":
-				disc_col = Color(0.18, 0.16, 0.15)
-			elif state == "closed":
-				disc_col = disc_col.darkened(0.4)
-			draw_circle(center, radius - 4.5, disc_col)
-			# Top specular highlight
-			draw_arc(center, radius - 3.5, -PI * 0.75, -PI * 0.25, 16, Color(1, 1, 1, 0.25 if state != "visited" else 0.08), 1.2, true)
-			# 3D carved calligraphy
-			var f: Font = Kit.name_font(30, 0)
-			var gs := f.get_string_size(glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30)
-			var at := Vector2(center.x - gs.x * 0.5, center.y + 30 * 0.35)
-			draw_string(f, at + Vector2(0, 2), glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color(0, 0, 0, 0.85))
-			var glyph_ink := Color(1.0, 0.94, 0.82) if state != "visited" else Color(0.65, 0.62, 0.58)
-			draw_string(f, at, glyph, HORIZONTAL_ALIGNMENT_LEFT, -1, 30, glyph_ink)
-
-		# 3. Victory stamp: a cinnabar 胜 seal on won battles only (a passed story square is just greyed)
-		if state == "visited" and kind in ["boss", "elite", "battle"]:
-			var c := center + Vector2(s.x * 0.28, s.y * 0.28)
-			draw_circle(c, 11, Color(0.82, 0.18, 0.12, 0.95))
-			draw_arc(c, 11, 0, TAU, 24, Color(1, 0.88, 0.78, 0.9), 1.2, true)
-			var sf: Font = Kit.name_font(13, 0)
-			var seal_txt := "胜"
-			var ss := sf.get_string_size(seal_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 13)
-			draw_string(sf, c + Vector2(-ss.x * 0.5, 4.5), seal_txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1, 0.96, 0.9))
-
-
-class MapToken extends Control:
-	## the hero's holder: draws a soft ground shadow under the feet (the sprite child bobs above it)
-	func _draw() -> void:
-		var c := Vector2(size.x / 2.0, size.y - 3.0)
-		draw_set_transform(c, 0.0, Vector2(1.0, 0.32))
-		draw_circle(Vector2.ZERO, size.x * 0.30, Color(0, 0, 0, 0.38))
-		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-
-
-class MapLines extends Control:
-	## Rance X style roads: gently curved paths (walked = solid gold, ahead = dashed ivory, routes not taken = faint),
-	## a pulsing halo under every square you can step onto, a soft ring under the current square
-	var segs: Array = []  # [from, to, kind] kind: "walked" / "ahead" / "closed" / "ghost"
-	var halos: Array = []  # reachable square centres
-	var here := Vector2(-999, -999)
-	var t := 0.0
-
-	func _process(delta: float) -> void:
-		if not is_visible_in_tree():  # CG mode hides the map: don't redraw roads nobody sees
-			return
-		t += delta
-		if not halos.is_empty() or here.x > -900:
-			queue_redraw()
-
-	static func _curve(a: Vector2, b: Vector2) -> PackedVector2Array:
-		var pts := PackedVector2Array()
-		var dy := b.y - a.y
-		for i in 17:
-			var k := i / 16.0
-			var e := k * k * (3.0 - 2.0 * k)  # smoothstep: lanes bend like a road, not a zigzag
-			pts.append(Vector2(lerpf(a.x, b.x, k), a.y + dy * e))
-		return pts
-
-	func _dashed(pts: PackedVector2Array, col: Color, w: float, dash := 10.0, gap := 8.0, phase := 0.0) -> void:
-		var on := true
-		var left := dash - fmod(phase, dash + gap)
-		if left < 0.0:
-			on = false
-			left += gap
-		for i in pts.size() - 1:
-			var a := pts[i]
-			var b := pts[i + 1]
-			var seg := a.distance_to(b)
-			var pos := 0.0
-			while pos < seg:
-				var step := minf(left, seg - pos)
-				if on:
-					draw_line(a.lerp(b, pos / seg), a.lerp(b, (pos + step) / seg), col, w, true)
-				pos += step
-				left -= step
-				if left <= 0.0:
-					on = not on
-					left = dash if on else gap
-
-	func _draw() -> void:
-		for s in segs:
-			var pts := _curve(s[0], s[1])
-			match s[2]:
-				"ghost":
-					_dashed(pts, Color(0.96, 0.93, 0.85, 0.22), 2.0, 6.0, 8.0)
-				"closed":
-					draw_polyline(pts, Color(0.1, 0.07, 0.05, 0.35), 6.0, true)
-					_dashed(pts, Color(0.85, 0.8, 0.7, 0.45), 2.0, 6.0, 7.0)
-				"walked":
-					draw_polyline(pts, Color(0.12, 0.08, 0.04, 0.6), 11.0, true)
-					draw_polyline(pts, Color(0.88, 0.7, 0.35), 6.0, true)
-					draw_polyline(pts, Color(1.0, 0.92, 0.7, 0.8), 2.0, true)
-				_:  # ahead: marching dashes towards the next squares
-					draw_polyline(pts, Color(0.1, 0.07, 0.05, 0.5), 8.0, true)
-					_dashed(pts, Color(0.98, 0.95, 0.86, 0.95), 3.5, 12.0, 8.0, -t * 18.0)
-		var p := 0.5 + 0.5 * sin(t * 3.2)
-		for c in halos:
-			draw_circle(c, 46.0 + 6.0 * p, Color(1.0, 0.85, 0.4, 0.10 + 0.10 * p))
-			draw_arc(c, 42.0 + 6.0 * p, 0, TAU, 48, Color(1.0, 0.88, 0.5, 0.55 - 0.3 * p), 3.0, true)
-		if here.x > -900:
-			draw_circle(here, 44.0, Color(0.9, 0.2, 0.15, 0.18))
-			draw_arc(here, 44.0, t * 1.5, t * 1.5 + TAU * 0.8, 40, Color(1.0, 0.8, 0.4, 0.9), 3.0, true)
-
-
 func _ready() -> void:
 	Bgm.play("map")
 	_warm_party_portraits.call_deferred()
@@ -1126,12 +944,12 @@ func _show_square(s: Dictionary) -> void:
 				if body == "":  # nothing to read first
 					_open_choose(s)
 		"battle":
-			text.text = _battle_info(s, Quests.battle_here(q, save))
+			text.text = BattleIntel.info(s, Quests.battle_here(q, save))
 			_fight_button(s, buttons)
 			_enemy_face(s)
 		"mystery":
 			if not save.event_battle.is_empty():
-				text.text = "\n".join(save.event_note) + "\n\n" + _battle_info(s, Quests.battle_here(q, save))
+				text.text = "\n".join(save.event_note) + "\n\n" + BattleIntel.info(s, Quests.battle_here(q, save))
 				_fight_button(s, buttons)
 			elif not save.offer.is_empty():
 				text.text = "\n".join(save.event_note)  # the outcome, not the event again
@@ -1185,7 +1003,7 @@ func _show_square(s: Dictionary) -> void:
 	# narrative text: one line per click, then the buttons
 	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()) \
 		or (s["type"] in ["battle", "recover", "recruit"] and not save.resolved)  # a battle / rest / recruit with lines of its own plays them first
-	_dlg_after = _battle_info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
+	_dlg_after = BattleIntel.info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
 	if s["type"] == "recover" and not save.resolved:  # after a rest's own lines, what resting does
 		_dlg_after = text.text
 	if narrative and lines.size() > 1 and _story_read == "":
@@ -1541,88 +1359,6 @@ func _apply_dlg_size() -> void:
 	_fit_sheet()
 	await get_tree().process_frame
 	_fit_sheet()
-
-
-func _battle_info(s: Dictionary, fight: Dictionary) -> String:
-	## the intel before a fight, three short lines of tags instead of a wall of text:
-	## 1 what kind of fight + the enemy's numbers; 2 its armor, resists and weaknesses; 3 its moves (a charged one says: bring an interrupt)
-	var db := GameData.get_db()
-	var sc: Dictionary = db.scenarios[fight["battle"]]
-	var e: Dictionary = Quests.with_armor(db.enemies[sc["enemy"]], Quests.late_armor(Game.save.quest, s, sc["enemy"]))
-	var tags: Array = []
-	if s["boss"]:
-		tags.append(_bb_chip("首领", "purple"))
-	if s["lose_goto"] != "":
-		tags.append(_bb_chip("输了也能过", "green"))
-	elif s["elite"]:
-		tags.append(_bb_chip("精英", "red"))
-	if fight["ambush"]:
-		tags.append(_bb_chip("埋伏", "red"))
-	var afx_id: String = Game.save.affixes.get(s["id"], "")
-	if afx_id != "" and db.battle.get("affixes", {}).has(afx_id):  # this run's 词缀
-		var afx: Dictionary = db.battle["affixes"][afx_id]
-		var afx_img := Kit.affix_icon_path(afx_id)
-		tags.append(("[img=26]%s[/img]" % afx_img if afx_img != "" else "") + _bb_chip("%s：%s" % [afx["name"], afx["desc"]], "amber"))
-	var turns := Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))
-	var head := ("　".join(tags) + "　" if not tags.is_empty() else "") + "体力 %d · 攻 %d · %d 动 · %d 回合" % [e["hp"], e["at"], e["actions"], turns]
-	var res := _resists(e)
-	return "[font_size=%d]%s%s\n%s[/font_size]" % [Kit.FONT_SMALL, head, ("\n" + res if res != "" else ""), _moves_text(e)]
-
-
-func _bb_chip(text: String, color_name: String) -> String:
-	## a coloured tag inside rich text (the intel's badges)
-	var bg := Kit.c(color_name)
-	var fg := Color(0.1, 0.07, 0.04) if bg.get_luminance() > 0.55 else Color(1, 1, 1)
-	bg.a = 0.85
-	return "[bgcolor=%s][color=%s] %s [/color][/bgcolor]" % [bg.to_html(), fg.to_html(), text]
-
-
-func _resists(e: Dictionary) -> String:
-	## the 护甲 and both resists as tags — a weakness (negative resist) in red, so a 谋略弱点 jumps out: 「藤甲（刀枪不入，一点就着）」「兵刃抗性 80%」「谋略弱点 +100%」
-	var out: Array = []
-	var arm: Dictionary = GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
-	if not arm.is_empty():
-		out.append(_bb_chip(str(arm["name"]), "amber"))
-	for k in [["phys_resist", "兵刃"], ["magic_resist", "谋略"]]:
-		var v := float(e.get(k[0], 0.0))
-		if v > 0.0:
-			out.append(_bb_chip("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))], "gray"))
-		elif v < 0.0:
-			out.append(_bb_chip("%s弱 +%d%%" % [k[1].left(1), int(round(-v * 100))], "red"))
-	return "　".join(out)
-
-
-func _moves_text(e: Dictionary) -> String:
-	## the enemy's moves with what makes them dangerous, so the player can plan (the wind-up itself is skipped);
-	## the charged move is a gold tag that says what answers it: an interrupt (扔刀、回马枪 …)
-	var parts: Array = []
-	var charged: Array = e["moves"].filter(func(m): return m.has("charge")).map(func(m): return m["charge"])
-	for m in e["moves"]:
-		if m.has("charge"):
-			continue
-		var tags: Array = []
-		if m.get("pierce", false):
-			tags.append("无视防御")
-		if m.has("confuse"):
-			tags.append("混乱")
-		if m.has("rage"):
-			tags.append("狂暴" + ("·残血" if m.get("when", "") == "half" else ""))
-		if m.has("heal"):
-			tags.append("回复")
-		if m.has("ap_drain"):
-			tags.append("夺AP")
-		if m.has("burn_party"):
-			tags.append("火烧")
-		if m.has("summon"):
-			tags.append("叫援")
-		if m.has("stance"):
-			tags.append("架势")
-		var label: String = m["name"] + ("·%s" % "·".join(tags) if not tags.is_empty() else "")
-		if charged.has(m["name"]):
-			parts.append(_bb_chip("蓄力 " + label, "gold"))
-		else:
-			parts.append(_bb_chip(label, "red" if not tags.is_empty() else "blue"))
-	return " ".join(parts)
 
 
 func _fight_button(s: Dictionary, buttons: Control) -> void:

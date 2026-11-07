@@ -364,14 +364,28 @@ static func icon(key: String) -> Texture2D:
 static func resist_text(e: Dictionary, bbcode := true, short := false) -> String:
 	## 「兵刃抗性 80%　谋略弱点 +100%」: a resist above 0 cuts that kind of damage, below 0 is a weakness (the enemy takes more)
 	var parts: Array = []
-	for k in [["phys_resist", "兵刃"], ["magic_resist", "谋略"]]:
-		var v := float(e.get(k[0], 0.0))
-		if v > 0.0:
-			parts.append(("%s抗 %d%%" % [k[1].left(1), int(round(v * 100))]) if short else ("%s抗性 %d%%" % [k[1], int(round(v * 100))]))
-		elif v < 0.0:
-			var w := "%s弱点 +%d%%" % [k[1], int(round(-v * 100))]
+	for r in resist_parts(e):
+		if not r["weak"]:
+			parts.append(("%s抗 %d%%" % [r["kind"].left(1), r["pct"]]) if short else ("%s抗性 %d%%" % [r["kind"], r["pct"]]))
+		else:
+			var w := "%s弱点 +%d%%" % [r["kind"], r["pct"]]
 			parts.append(("[color=%s]%s[/color]" % [c("red").to_html(), w]) if bbcode else w)
 	return (" · " if short else "　").join(parts)
+
+
+static func resist_parts(e: Dictionary) -> Array:
+	## the enemy's non-zero resists, 兵刃 then 谋略: [{kind: 兵刃 / 谋略, pct: whole percent, weak: below 0 = a weakness}]
+	var out: Array = []
+	for k in [["phys_resist", "兵刃"], ["magic_resist", "谋略"]]:
+		var v := float(e.get(k[0], 0.0))
+		if v != 0.0:
+			out.append({"kind": k[1], "pct": int(round(absf(v) * 100)), "weak": v < 0.0})
+	return out
+
+
+static func armor_of(e: Dictionary) -> Dictionary:
+	## the enemy's 护甲 entry (battle.json armors: name, hint, phys, magic), or {}
+	return GameData.get_db().battle.get("armors", {}).get(str(e.get("armor", "")), {})
 
 
 const SKILL_ICONS := {"attack": "phys", "magic": "magic", "burn": "magic", "heal": "heal", "guard": "guard",
