@@ -934,7 +934,7 @@
           "once": true
         },
         {"name": "酒池·蓄力", "power": 0, "weight": 1, "charge": "酒池肉林", "prefer": "self_low_hp"},
-        {"name": "酒池肉林", "power": 0, "weight": 0, "heal": 0.25},
+        {"name": "酒池肉林", "power": 0, "weight": 0, "heal": 0.3},
         {"name": "相国铁甲", "power": 0, "weight": 1, "shield": {"hp_pct": 0.2}},
         {"name": "相国瞪眼", "power": 0, "weight": 1, "mark": "肥躯碾杀"},
         {"name": "肥躯碾杀", "power": 0, "weight": 0},
@@ -1887,7 +1887,7 @@
           "pierce": true
         },
         {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "唐周护卫", "prefer": "player_buffed"},
-        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "符水·蓄力", "power": 0, "weight": 1, "charge": "符水疗伤", "prefer": "self_low_hp"}, {"name": "符水疗伤", "power": 0, "weight": 0, "heal": 0.25}
+        {"name": "唐周护卫", "power": 0, "weight": 0, "summon": {"name": "唐周护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "符水·蓄力", "power": 0, "weight": 1, "charge": "符水疗伤", "prefer": "self_low_hp"}, {"name": "符水疗伤", "power": 0, "weight": 0, "heal": 0.15}
       ],
       "card": "yaodao_card"
     },
@@ -2858,7 +2858,7 @@
           "pierce": true
         },
         {"name": "护卫·蓄力", "power": 0, "weight": 1, "charge": "张修护卫", "prefer": "player_buffed"},
-        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "五斗米·蓄力", "power": 0, "weight": 1, "charge": "五斗米道", "prefer": "self_low_hp"}, {"name": "五斗米道", "power": 0, "weight": 0, "heal": 0.25}
+        {"name": "张修护卫", "power": 0, "weight": 0, "summon": {"name": "张修护卫", "hp_pct": 0.12, "strike": 0.5}}, {"name": "五斗米·蓄力", "power": 0, "weight": 1, "charge": "五斗米道", "prefer": "self_low_hp"}, {"name": "五斗米道", "power": 0, "weight": 0, "heal": 0.15}
       ],
       "card": "xuanjizi_card"
     },
