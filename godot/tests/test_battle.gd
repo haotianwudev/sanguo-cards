@@ -927,6 +927,15 @@ func test_a_stun_skill_always_breaks_a_wind_up() -> void:
 	check(Battle.can_interrupt(GameData.get_db().skills["piliche"]), "…which, stunning, breaks a wind-up")
 
 
+func test_every_heal_is_an_ultimate_or_cumulative() -> void:
+	## user rule 2026-11-07: a heal is either a 大招 (limited uses) or 累积 (dearer each time) — never a cheap repeatable one
+	var db := GameData.get_db()
+	for sid in db.skills:
+		var sk: Dictionary = db.skills[sid]
+		if sk["effects"].any(func(e): return e["type"] == "heal"):
+			check(Battle.is_ult(sk) or sk.get("cumulative", false), "%s %s heals but is neither 大招 nor 累积" % [sid, sk["name"]])
+
+
 func test_crit_if_stunned_always_crits() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["stunned"] = true
