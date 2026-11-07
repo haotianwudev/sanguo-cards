@@ -1328,10 +1328,11 @@ func _raid(k: int, lead := "插入！") -> Array:
 	var members: Array = u["leader"]["members"]
 	var m: Dictionary = members[rng.randi_range(0, members.size() - 1)] if not members.is_empty() \
 		else {"name": unit_name(u), "at": u["leader"]["at"]}
-	var d := _dmg(float(m["at"]) * float(db.battle["interrupt_power"]), "attack")
-	d = _land(d, "attack", false)
+	var kind := "magic" if str(u["leader"]["card"]["troop"]) == "strategist" else "attack"  # 策士 strike with magic (user rule): magic resist, past the 前卫
+	var d := _dmg(float(m["at"]) * float(db.battle["interrupt_power"]), kind)
+	d = _land(d, kind, false)
 	combo += 1
-	_ev({"t": "interrupt", "unit": k, "member": m["name"], "dmg": d, "hp": enemy["hp"]})
+	_ev({"t": "interrupt", "unit": k, "member": m["name"], "dmg": d, "hp": enemy["hp"], "kind": kind})
 	return ["%s%s部队的 %s 突袭，造成 %d 伤害" % [lead, unit_name(u), m["name"], d]]
 
 

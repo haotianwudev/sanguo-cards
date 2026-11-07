@@ -1102,7 +1102,10 @@ func _play(events: Array) -> void:
 					"poison":
 						BattleFx.poison_cloud(self, _enemy_rect())
 					"interrupt":
-						BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
+						if ev.get("kind", "attack") == "magic":
+							BattleFx.hit(self, _enemy_center(), "magic", 1, ratio)
+						else:
+							BattleFx.slash(self, _enemy_center() + Vector2(randf_range(-40, 40), randf_range(-30, 30)), Color(0.9, 0.95, 1.0), 25.0, 170.0, 8.0)
 				BattleFx.scale = 1.0
 				var crit_hit: bool = ev.get("crit", false)
 				if is_rider:

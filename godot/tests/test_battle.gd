@@ -1236,6 +1236,18 @@ func test_a_troops_own_trick_is_named_and_grows_with_the_card() -> void:
 	check(not named.is_empty() and str(named[0]["name"]) != "", "the move says which card made it")
 
 
+func test_a_strategist_raid_is_magic() -> void:
+	## 策士 突袭 deals magic damage (user rule 2026-11-06); everyone else's stays physical
+	var b := Battle.start("boar", party(["zhouyu", "sunce"]), 1)
+	var j := b.leaders.find_custom(func(u): return u["leader"]["card"]["troop"] == "strategist")
+	var o := b.leaders.find_custom(func(u): return u["leader"]["card"]["troop"] != "strategist")
+	b.take_events()
+	b._raid(j)
+	b._raid(o)
+	var ev: Array = b.take_events().filter(func(e): return e["t"] == "interrupt")
+	check_eq(ev.map(func(e): return e["kind"]), ["magic", "attack"], "策士 raid with magic, others physically")
+
+
 # ---- 点名 / 护盾 / 变阵 / 封技 (user rules 2026-11-03) ----------------------------------------------
 
 func test_a_mark_takes_a_quarter_of_max_hp_and_fells_the_marked_one_unless_swapped_out() -> void:
