@@ -232,7 +232,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 0.71
         },
         {
           "type": "break",
@@ -786,7 +786,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 0.84
         },
         {
           "type": "stun",
@@ -826,7 +826,7 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 1.4
+          "rate": 1.68
         },
         {
           "type": "stun",
@@ -851,7 +851,7 @@
       "cost": 2,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.02
         }
       ]
     },
@@ -910,7 +910,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.51
         },
         {
           "type": "stun",
@@ -924,7 +924,7 @@
       "cumulative": true,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 0.71
         },
         {
           "type": "break",
@@ -1053,7 +1053,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.51
         },
         {
           "type": "stun",
@@ -1378,7 +1378,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.51
         },
         {
           "type": "stun",
@@ -1406,7 +1406,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.6
         },
         {
           "type": "break",
@@ -1421,7 +1421,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic",
+          "type": "magic", "hit_rate": 0.76,
           "hits": 2
         },
         {
@@ -1439,7 +1439,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.6
         },
         {
           "type": "boost",
@@ -1583,7 +1583,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic",
+          "type": "magic", "hit_rate": 0.76,
           "hits": 2
         },
         {
@@ -1781,7 +1781,7 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 1.5
+          "rate": 1.8
         },
         {
           "type": "burn",
@@ -1909,7 +1909,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.6
         },
         {
           "type": "break",
@@ -1994,7 +1994,7 @@
       "uses": 1,
       "effects": [
         {
-          "type": "magic"
+          "type": "magic", "rate": 1.51
         },
         {
           "type": "stun",
@@ -2336,7 +2336,7 @@
       "effects": [
         {
           "type": "magic",
-          "rate": 1.2
+          "rate": 1.44
         },
         {
           "type": "poison",
