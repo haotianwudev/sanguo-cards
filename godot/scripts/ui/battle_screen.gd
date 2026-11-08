@@ -11,11 +11,14 @@ var ambush := false
 
 var b: Battle
 var _busy := false
+const BADGE_SIZE := 34.0  # BattleFx.badge
+const BADGE_STEP := 38.0  # one badge and the gap to the next
 const BAND_ALPHA := 0.5  # how much the dark band under our cards hides the battle CG
 var _enemy_art: Control
 var _enemy_hp: ProgressBar
 var _enemy_hp_label: Label
-var _enemy_status: Label
+var _enemy_panel: PanelContainer
+var _enemy_name: Control
 var _intent_label: Label  # v3 意图
 var _guard_row: HBoxContainer  # v3 前卫
 var _guard_label: Label
@@ -145,16 +148,17 @@ func _build() -> void:
 		add_child(band)
 	# enemy (top-left)
 	var enemy_panel := PanelContainer.new()
-	enemy_panel.position = Vector2(20, 14)
-	enemy_panel.size = Vector2(760, 250) if not has_cg else Vector2(560, 0)
+	enemy_panel.position = Vector2(20, 26)  # the status badges sit on its top edge, like ours on the party bar: they need the screen above it
+	enemy_panel.size = Vector2(760, 244) if not has_cg else Vector2(560, 0)
 	# a max height of 0 is not "unlimited": with clip_contents it cut the whole CG-mode panel (name, HP bar) away
-	enemy_panel.custom_maximum_size = Vector2(760, 250) if not has_cg else Vector2(560, 200)
+	enemy_panel.custom_maximum_size = Vector2(760, 244) if not has_cg else Vector2(560, 240)
 	enemy_panel.clip_contents = true
 	var ebg := Kit.c("enemy_bg")
 	if has_cg:
 		ebg.a = 0.72
-	enemy_panel.add_theme_stylebox_override("panel", Kit.box(ebg, 16, 3 if not has_cg else 2, Kit.c("enemy_border"), 14 if not has_cg else 10))
+	enemy_panel.add_theme_stylebox_override("panel", Kit.box(ebg, 16, 3 if not has_cg else 2, Kit.c("enemy_border"), 10))
 	add_child(enemy_panel)
+	_enemy_panel = enemy_panel
 	var er := HBoxContainer.new()
 	er.add_theme_constant_override("separation", 22)
 	enemy_panel.add_child(er)
@@ -204,19 +208,12 @@ func _build() -> void:
 	var info := VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	info.alignment = BoxContainer.ALIGNMENT_CENTER
-	info.add_theme_constant_override("separation", 6 if not has_cg else 4)
+	info.add_theme_constant_override("separation", 4)
 	er.add_child(info)
-	if has_cg:  # one line: name and stats, then the bar
-		var top := HBoxContainer.new()
-		top.add_theme_constant_override("separation", 14)
-		top.add_child(Kit.title_label(e["name"], Kit.FONT_BIG + 2, "red"))
-		var st := Kit.label("攻击 %d · 每回合 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted")
-		st.size_flags_vertical = Control.SIZE_SHRINK_END
-		top.add_child(st)
-		info.add_child(top)
-	else:
-		info.add_child(Kit.title_label(e["name"], Kit.FONT_TITLE, "red"))
-	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 30 if not has_cg else 20)
+	_enemy_name = Kit.title_label(e["name"], Kit.FONT_BIG + 2, "red")
+	info.add_child(_enemy_name)
+	_enemy_hp = Kit.bar(b.enemy["hp"], b.enemy["max_hp"], "red", 26)
+	_enemy_hp_label = Kit.bar_text(_enemy_hp)
 	info.add_child(_enemy_hp)
 	_guard_row = HBoxContainer.new()  # 前卫 (summon): a thin second bar under the boss's, hidden while there is none
 	_guard_row.add_theme_constant_override("separation", 10)
@@ -228,35 +225,19 @@ func _build() -> void:
 	_guard_row.add_child(_guard_bar)
 	_guard_row.visible = false
 	info.add_child(_guard_row)
-	_intent_label = Kit.label("", Kit.FONT_SMALL if has_cg else Kit.FONT_BODY, "red")  # 意图: what the enemy will do this round
-	_intent_label.clip_text = true
+	_intent_label = Kit.label("", Kit.FONT_SMALL, "red")  # 意图: what the enemy will do this round; a long one wraps, it never widens the panel
+	_intent_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_intent_label.custom_minimum_size = Vector2(10, 0)
 	_intent_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_intent_label.max_lines_visible = 2
 	info.add_child(_intent_label)
-	_enemy_hp_label = Kit.label("", Kit.FONT_BODY if not has_cg else Kit.FONT_SMALL)
-	if not has_cg:  # HP and attack share a line: the status list below needs the height
-		var hp_row := HBoxContainer.new()
-		hp_row.add_theme_constant_override("separation", 18)
-		hp_row.add_child(_enemy_hp_label)
-		hp_row.add_child(Kit.label("攻击 %d · 每回合行动 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
-		info.add_child(hp_row)
-		var arm_l := _armor_label(e)
-		if arm_l != null:
-			info.add_child(arm_l)
-	else:  # the HP numbers share their line with the 护甲
-		var hp_line := HBoxContainer.new()
-		hp_line.add_theme_constant_override("separation", 16)
-		hp_line.add_child(_enemy_hp_label)
-		var arm_cg := _armor_label(e)
-		if arm_cg != null:
-			hp_line.add_child(arm_cg)
-		info.add_child(hp_line)
-	_enemy_status = Kit.label("", Kit.FONT_SMALL, "purple")
-	# a long list of statuses must wrap, never widen the panel (it stretched the enemy HP bar behind the log)
-	_enemy_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_enemy_status.custom_minimum_size = Vector2(10, 0)
-	_enemy_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_enemy_status.max_lines_visible = 3
-	info.add_child(_enemy_status)
+	var stats_row := HBoxContainer.new()  # attack and 护甲 share a line
+	stats_row.add_theme_constant_override("separation", 16)
+	stats_row.add_child(Kit.label("攻击 %d · 每回合 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
+	var arm_l := _armor_label(e)
+	if arm_l != null:
+		stats_row.add_child(arm_l)
+	info.add_child(stats_row)
 
 	# log (top-right)
 	var log_panel := PanelContainer.new()
@@ -289,10 +270,8 @@ func _build() -> void:
 	_party_hp.custom_minimum_size = Vector2(120, 26)  # the bar gives way: AP pips, round and combo must always fit
 	_party_hp.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_party_hp.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_party_hp_label = Kit.bar_text(_party_hp)
 	pr.add_child(_party_hp)
-	_party_hp_label = Kit.label("", Kit.FONT_BODY)
-	_party_hp_label.custom_minimum_size = Vector2(130, 0)
-	pr.add_child(_party_hp_label)
 	pr.add_child(Kit.label("AP", Kit.FONT_BODY, "gold"))
 	_ap_row = HBoxContainer.new()
 	_ap_row.add_theme_constant_override("separation", 6)
@@ -401,45 +380,6 @@ func _rebuild_card(i: int) -> void:
 func _refresh() -> void:
 	var e := b.enemy
 	_enemy_hp_label.text = "%d / %d" % [e["hp"], e["max_hp"]]
-	var st: Array = []
-	if e["stunned"]:
-		st.append("混乱：下回合无法行动")
-	if e["break_turns"] > 0:
-		st.append("破防 +%d%%（%d 回合）" % [int(round(e["break_amount"] * 100)), e["break_turns"]])
-	if e["resist_turns"] > 0:
-		st.append("降抗 双抗 -%d%%（%d 回合）" % [int(round(e["resist_down"] * 100)), e["resist_turns"]])
-	if e["burn_turns"] > 0:
-		if e["burn_pct"] > 0.0:
-			st.append("🔥 灼烧 现有体力 -%d%%/回合（%d 回合）" % [int(round(e["burn_pct"] * 100)), e["burn_turns"]])
-		else:
-			st.append("🔥 灼烧 -%d/回合（%d 回合）" % [e["burn_dmg"], e["burn_turns"]])
-	if e["poison_turns"] > 0:
-		st.append("☠ 中毒 ×%d 最大体力 -%d%%/回合（%d 回合）" % [e["poison"], int(round(e["poison_pct"] * e["poison"] * 100)), e["poison_turns"]])
-	if e["charging"] != "":
-		st.append("⚠ 蓄力中：下回合【%s】——打断技能可破" % e["charging"])
-	if not e["stance"].is_empty():
-		st.append("【反】%s：兵刃攻击会被反击" % e["stance"]["name"])
-	if not e["mark"].is_empty():
-		st.append("⚠ 点名 %s：下回合【%s】——换下他就扑空；不换，他被打倒（本场不能行动）、我军掉体力上限 1/4" % [e["mark"]["who"], e["mark"]["move"]])
-	if not e["shield"].is_empty():
-		st.append("【盾】%s %d/%d：打不破的兵刃整下被挡，一下打破就全中；谋略越过" % [e["shield"]["name"], e["shield"]["hp"], e["shield"]["max_hp"]])
-	if not e["form"].is_empty():
-		st.append("【阵】%s：%s伤害 -%d%%（%d 回合，眩晕可破）" % [e["form"]["name"], "兵刃" if e["form"]["vs"] == "attack" else "谋略",
-			int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]])
-	if not b.seal.is_empty():
-		st.append("我军%s被封（%d 回合，解除状态可解）" % [Battle.SEAL_NAMES.get(b.seal["kind"], "技能"), b.seal["turns"]])
-	if e["at"] > e["data"]["at"] * 1.01:
-		st.append("狂暴 攻击 %d" % int(round(e["at"])))
-	if b.buff["layers"] > 0:
-		st.append("战意 ×%d：攻击 +%d%%%s（%d 回合）" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), (" 受伤 -%d%%" % int(round(b.buff["def"] * 100))) if b.buff["def"] > 0.0 else "", b.buff["turns"]])
-	if b.party_burn["turns"] > 0:
-		st.append("我军灼烧 -%d（%d 回合）" % [b.party_burn["dmg"], b.party_burn["turns"]])
-	if b.party_poison["turns"] > 0:
-		st.append("我军中毒 ×%d 最大体力 -%d%%/回合（%d 回合）" % [b.party_poison["layers"], int(round(b.party_poison["pct"] * b.party_poison["layers"] * 100)), b.party_poison["turns"]])
-	if b.ap_drain > 0:
-		st.append("下回合 AP -%d" % b.ap_drain)
-	_enemy_status.text = "　".join(st)
-	_enemy_status.visible = not st.is_empty()  # no empty line under the enemy bar
 	var it := b.intent_text() if b.result == "" else ""
 	_intent_label.text = ("意图：" + it) if it != "" else ""
 	_intent_label.visible = it != ""
@@ -658,9 +598,11 @@ func _show_info(title: String, body: String) -> void:
 	d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	d.custom_minimum_size = Vector2(460, 0)
 	col.add_child(d)
+	panel.set_anchors_preset(Control.PRESET_CENTER)
+	panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	overlay.add_child(panel)
 	add_child(overlay)
-	panel.position = Vector2(400, 220)
 	_skill_popup = overlay
 	_skill_popup_at = Time.get_ticks_msec()
 
@@ -923,28 +865,17 @@ func _boost_ribbon(rr: Rect2) -> Control:
 
 
 func _sync_badges() -> void:
-	## 角标: a small round badge per status or buff — enemy (灼 破 晕 怒 蓄) above its HP bar, party-wide (战 灼 夺) over the party bar,
+	## 角标: a small round badge per status or buff — enemy (灼 破 晕 怒 蓄) on its panel's top edge, party-wide (战 灼 夺) on the party bar's,
 	## and per card (混 强) in its top-right corner; the little number is the turns / layers left
-	for n in _badges:
-		if is_instance_valid(n):
-			n.queue_free()
-	_badges.clear()
+	_clear_badges()
 	var e := b.enemy
-	var row: Array = []
-	if e["burn_turns"] > 0:
-		row.append(_tipped(BattleFx.badge("灼", Color(1.0, 0.5, 0.15), e["burn_turns"]), "灼烧", ("现有体力 -%d%%/回合" % int(round(e["burn_pct"] * 100)) if e["burn_pct"] > 0.0 else "-%d/回合" % e["burn_dmg"]) + "，剩 %d 回合" % e["burn_turns"], "burn"))
-	if e["poison_turns"] > 0:
-		row.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), e["poison"]), "中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [e["poison"], int(round(e["poison_pct"] * e["poison"] * 100)), e["poison_turns"]], "poison"))
-	if e["break_turns"] > 0:
-		row.append(_tipped(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]), "破防", "受到伤害 +%d%%，剩 %d 回合" % [int(round(e["break_amount"] * 100)), e["break_turns"]], "break"))
-	if e["resist_turns"] > 0:
-		row.append(_tipped(BattleFx.badge("抗", Color(0.45, 0.8, 0.95), e["resist_turns"]), "降抗", "双抗 -%d%%，剩 %d 回合" % [int(round(e["resist_down"] * 100)), e["resist_turns"]], "resist"))
-	if e["stunned"]:
-		row.append(_tipped(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)), "眩晕", "", "stun"))
-	if e["at"] > e["data"]["at"] * 1.01:
-		row.append(_tipped(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)), "狂暴", "攻击 %d（原本 %d）" % [int(round(e["at"])), int(round(e["data"]["at"]))], "rage"))
+	var row: Array = []  # most urgent first, rightmost
+	if not e["mark"].is_empty():
+		row.append(_tipped(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false), "点名", "%s，下回合【%s】" % [e["mark"]["who"], e["mark"]["move"]], "mark"))
 	if e["charging"] != "":
 		row.append(_tipped(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false), "蓄力", "下回合【%s】" % e["charging"], "charge"))
+	if e["stunned"]:
+		row.append(_tipped(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)), "眩晕", "", "stun"))
 	if not e["stance"].is_empty():
 		row.append(_tipped(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))), "反击架势", "【%s】" % e["stance"]["name"], "stance"))
 	if not e["shield"].is_empty():
@@ -952,12 +883,18 @@ func _sync_badges() -> void:
 	if not e["form"].is_empty():
 		row.append(_tipped(BattleFx.badge("阵", Color(0.3, 0.55, 0.95) if e["form"]["vs"] == "magic" else Color(0.85, 0.55, 0.2), int(e["form"]["turns"])), "阵型",
 			"%s：%s伤害 -%d%%，剩 %d 回合" % [e["form"]["name"], "兵刃" if e["form"]["vs"] == "attack" else "谋略", int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]], "form"))
-	if not e["mark"].is_empty():
-		row.append(_tipped(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false), "点名", "%s，下回合【%s】" % [e["mark"]["who"], e["mark"]["move"]], "mark"))
-	var at := _enemy_hp.global_position - global_position + Vector2(_enemy_hp.size.x - 40.0, -40.0)
-	for k in row.size():
-		row[k].position = at - Vector2(k * 38.0, 0)
-		_badge_add(row[k])
+	if e["at"] > e["data"]["at"] * 1.01:
+		row.append(_tipped(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)), "狂暴", "攻击 %d（原本 %d）" % [int(round(e["at"])), int(round(e["data"]["at"]))], "rage"))
+	if e["break_turns"] > 0:
+		row.append(_tipped(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]), "破防", "受到伤害 +%d%%，剩 %d 回合" % [int(round(e["break_amount"] * 100)), e["break_turns"]], "break"))
+	if e["resist_turns"] > 0:
+		row.append(_tipped(BattleFx.badge("抗", Color(0.45, 0.8, 0.95), e["resist_turns"]), "降抗", "双抗 -%d%%，剩 %d 回合" % [int(round(e["resist_down"] * 100)), e["resist_turns"]], "resist"))
+	if e["burn_turns"] > 0:
+		row.append(_tipped(BattleFx.badge("灼", Color(1.0, 0.5, 0.15), e["burn_turns"]), "灼烧", ("现有体力 -%d%%/回合" % int(round(e["burn_pct"] * 100)) if e["burn_pct"] > 0.0 else "-%d/回合" % e["burn_dmg"]) + "，剩 %d 回合" % e["burn_turns"], "burn"))
+	if e["poison_turns"] > 0:
+		row.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), e["poison"]), "中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [e["poison"], int(round(e["poison_pct"] * e["poison"] * 100)), e["poison_turns"]], "poison"))
+	var er := Rect2(_enemy_panel.position, _enemy_panel.size)
+	_lay_badges(row, Vector2(er.end.x - 6.0, er.position.y - 20.0), er.size.x - 12.0)
 	var party: Array = []
 	if b.buff["layers"] > 0:
 		party.append(_tipped(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]), "战意", "×%d 层：攻击 +%d%%%s，剩 %d 回合" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), ("，受伤 -%d%%" % int(round(b.buff["def"] * 100))) if b.buff["def"] > 0.0 else "", b.buff["turns"]], "buff"))
@@ -976,9 +913,7 @@ func _sync_badges() -> void:
 	if b.loot_chest > 0.0:  # 劫掠: the chance of a second chest so far (%)
 		party.append(_tipped(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(b.loot_chest * 100))), "劫掠", "现在 %d%%" % int(round(b.loot_chest * 100)), "loot"))
 	var pr := _party_rect()
-	for k in party.size():
-		party[k].position = Vector2(pr.end.x - 40.0 - k * 38.0, pr.position.y - 20.0)
-		_badge_add(party[k])
+	_lay_badges(party, Vector2(pr.end.x - 6.0, pr.position.y - 20.0), pr.size.x * 0.5)
 	for i in b.leaders.size():
 		var u: Dictionary = b.leaders[i]
 		var rr := _card_rect(i)
@@ -997,9 +932,7 @@ func _sync_badges() -> void:
 			mine.append(_tipped(BattleFx.badge("倒", Color(0.45, 0.45, 0.45)), "被斩", "", "slain"))
 		elif not e["mark"].is_empty() and Battle.swap_key(u["leader"]) == str(e["mark"]["card"]):
 			mine.append(_tipped(BattleFx.badge("点", Color(0.9, 0.15, 0.15)), "被点名", "下回合【%s】" % e["mark"]["move"], "marked"))
-		for k in mine.size():
-			mine[k].position = Vector2(rr.end.x - 40.0 - k * 36.0, rr.position.y + 6.0)
-			_badge_add(mine[k])
+		_lay_badges(mine, Vector2(rr.end.x - 6.0, rr.position.y + 6.0), rr.size.x - 40.0)
 
 
 func _status_help(group: String, key: String) -> String:
@@ -1049,10 +982,39 @@ func _intent_tip() -> String:
 	return "\n".join(lines)
 
 
+func _fold_badges(list: Array, room: float) -> Array:
+	## as many as fit in `room` px; past that the last slot is 「+N」, and a tap on it lists the ones folded away
+	var fit := maxi(1, int((room + BADGE_STEP - BADGE_SIZE) / BADGE_STEP))
+	if list.size() <= fit:
+		return list
+	var lines: Array = []
+	for n in list.slice(fit - 1):
+		var tp: Array = n.get_meta("tip")
+		lines.append("%s：%s" % [tp[0], str(tp[1]).get_slice("\n", 0)])
+		n.free()
+	var more := _tipped(BattleFx.badge("+%d" % lines.size(), Color(0.5, 0.5, 0.55)), "还有 %d 个状态" % lines.size(), "\n".join(lines), "")
+	return list.slice(0, fit - 1) + [more]
+
+
+func _lay_badges(list: Array, top_right: Vector2, room: float) -> void:
+	## a line of badges placed on the screen itself, the first one rightmost
+	var shown := _fold_badges(list, room)
+	for k in shown.size():
+		shown[k].position = top_right - Vector2(BADGE_SIZE + k * BADGE_STEP, 0)
+		_badge_add(shown[k])
+
+
 func _badge_add(n: Control) -> void:
 	n.z_index = 48
 	add_child(n)
 	_badges.append(n)
+
+
+func _clear_badges() -> void:
+	for n in _badges:
+		if is_instance_valid(n):
+			n.queue_free()
+	_badges.clear()
 
 
 func _enemy_center() -> Vector2:
@@ -2274,10 +2236,7 @@ func _clear_marks() -> void:
 	## the battle is over: every lasting effect (auras, status embers, corner badges, the boosted cards' lift) goes now,
 	## so nothing keeps floating above the 胜利 banner or the chest pick
 	_fx_set({})
-	for n in _badges:
-		if is_instance_valid(n):
-			n.queue_free()
-	_badges.clear()
+	_clear_badges()
 	for c in _cards:
 		_boost_pop(c, false)
 		c.modulate = Color.WHITE

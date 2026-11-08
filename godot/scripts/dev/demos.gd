@@ -893,6 +893,8 @@ static func run(name: String) -> void:
 				if a.begins_with("--fate="):  # --fate=xiansheng: fight under a 天命 (its mods apply from the first frame, e.g. 开局全军 BOOST)
 					Game.save.fate = a.trim_prefix("--fate=")
 					b.carry = true
+			if OS.get_cmdline_user_args().has("--noskills"):  # the enemy panel with no skill column over it (not saved)
+				Game.options["hide_skill_bars"] = true
 			Game.show_screen(b)
 			if OS.get_cmdline_user_args().has("--swapui"):  # 换人: the 整备 screen in swap mode, for the second leader
 				await Game.get_tree().create_timer(0.5).timeout
@@ -915,13 +917,19 @@ static func run(name: String) -> void:
 				b.b.result = "win"
 				b._refresh()
 				b._finish()
-			if OS.get_cmdline_user_args().has("--longstatus"):  # every status line at once: the enemy panel must not grow
+			if OS.get_cmdline_user_args().has("--longstatus"):  # every status at once (with --mech --guard: all of them): the panel must not grow
 				await Game.get_tree().create_timer(0.5).timeout
 				var en: Dictionary = b.b.enemy
 				en["break_turns"] = 3
 				en["break_amount"] = 0.3
 				en["burn_turns"] = 3
 				en["burn_pct"] = 0.1
+				en["resist_turns"] = 2
+				en["resist_down"] = 0.2
+				en["poison"] = 2
+				en["poison_turns"] = 3
+				en["poison_pct"] = 0.02
+				en["stunned"] = true
 				en["charging"] = "天下无双"
 				en["at"] = en["data"]["at"] * 1.6
 				b.b.buff["layers"] = 3
@@ -931,6 +939,10 @@ static func run(name: String) -> void:
 				b.b.party_burn["turns"] = 2
 				b.b.party_burn["dmg"] = 120
 				b.b.ap_drain = 2
+				if OS.get_cmdline_user_args().has("--longname"):  # worst case: a long name under the badges, a long 意图 wraps
+					b._enemy_name.text = "「河北庭柱」颜良·大将军"
+					en["stunned"] = false
+					b.b._plan_intents()
 				b._refresh()
 			if OS.get_cmdline_user_args().has("--manyap"):  # more AP than usual + a combo: the party bar must still show them all
 				await Game.get_tree().create_timer(0.5).timeout

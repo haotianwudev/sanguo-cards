@@ -263,6 +263,20 @@ static func bar(value: float, max_value: float, color_name := "green", height :=
 	return p
 
 
+static func bar_text(bar: ProgressBar, size := FONT_SMALL) -> Label:
+	## the numbers on the bar itself, readable over both the fill and the empty track
+	var l := label("", size, "text")
+	l.add_theme_color_override("font_color", Color.WHITE)
+	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	l.add_theme_constant_override("outline_size", 5)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	l.set_anchors_preset(Control.PRESET_FULL_RECT)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bar.add_child(l)
+	return l
+
+
 # ---- card frames ---------------------------------------------------------------
 
 static func frame(kind: String) -> Dictionary:
