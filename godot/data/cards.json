@@ -2091,6 +2091,7 @@
     "caifuren": {
       "name": "蔡夫人·荆州",
       "rarity": "R",
+      "pool": false,
       "troop": "strategist",
       "hp": 70,
       "at": 62,
