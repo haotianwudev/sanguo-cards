@@ -881,6 +881,9 @@ static func run(name: String) -> void:
 			for a in OS.get_cmdline_user_args():  # --scenario=<id>: any battle, e.g. one with a battle CG
 				if a.begins_with("--scenario="):
 					b.scenario_id = a.trim_prefix("--scenario=")
+				if a.begins_with("--fate="):  # --fate=xiansheng: fight under a 天命 (its mods apply from the first frame, e.g. 开局全军 BOOST)
+					Game.save.fate = a.trim_prefix("--fate=")
+					b.carry = true
 			Game.show_screen(b)
 			if OS.get_cmdline_user_args().has("--swapui"):  # 换人: the 整备 screen in swap mode, for the second leader
 				await Game.get_tree().create_timer(0.5).timeout

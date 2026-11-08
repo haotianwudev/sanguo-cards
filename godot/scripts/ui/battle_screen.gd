@@ -45,6 +45,7 @@ var _has_cg := false
 var _fx := {}  # persistent status effects on screen: key -> node (see _sync_fx)
 var _badges: Array = []  # corner badges currently on screen (freed and rebuilt on every refresh)
 var _boost_hits := false  # the blows now landing come from a BOOSTed leader
+var _laid_out := false  # the card row has its real positions (the first _refresh runs before the containers sort, every card at one spot)
 var _ult_hits := false  # the blows of a physical 大招 play as the big curved cut (BattleFx.ult_slash)
 var _intro_wait := 0.0  # seconds of the enemy's entrance line, so 自动 doesn't talk over it
 var _enemy_shouted_this_turn := false  # 敌人本回合是否已经战吼过（防止多段行动或灼烧连喊）
@@ -70,6 +71,7 @@ func _ready() -> void:
 	_log_lines(b.opening)
 	b.take_events()
 	_refresh()
+	_after_layout()
 	if b.result != "":  # decided before anyone moved (round 1's 插入 finished a weak enemy): every button is shut, so settle it here
 		_busy = true
 		_finish_at_start.call_deferred()
@@ -835,9 +837,18 @@ func _fx_set(want: Dictionary) -> void:
 			_fx[key] = want[key].call()
 
 
+func _after_layout() -> void:
+	## the auras, ribbons and badges sit on the cards' rects: draw them once the row has been laid out, or a fight that opens
+	## with statuses (先声夺人's 全军 BOOST) piles every card's 「强化」 onto the first card until the next refresh
+	await get_tree().process_frame
+	_laid_out = true
+	if is_inside_tree():
+		_sync_fx()
+
+
 func _sync_fx() -> void:
 	## the statuses that last (灼烧 / 破防 / 眩晕 on the enemy, 灼烧 on us, 混乱 / BOOST / 战意 on the cards)
-	if b == null or _cards.is_empty() or b.result != "":
+	if b == null or _cards.is_empty() or b.result != "" or not _laid_out:
 		return
 	var want := {}
 	var e := b.enemy
