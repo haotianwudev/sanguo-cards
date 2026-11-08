@@ -3546,6 +3546,7 @@
     },
     "yuanshao": {
       "name": "袁绍",
+      "pool": false,
       "rarity": "SR",
       "troop": "logistics",
       "hp": 92,
