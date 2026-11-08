@@ -1473,3 +1473,8 @@
 - [x] 2026-11-07 cg `b_zhen_zaideng` ← b_zhen_zaideng.jpg · ok
 - [x] 2026-11-07 cg `b_qinyilu` ← b_qinyilu.jpg · ok
 - [x] 2026-11-07 battle `m8_maliang` ← m8_maliang.jpg · ok
+- [x] 2026-11-07 portrait `dingfeng` ← dingfeng_new2.jpg · ok
+- [x] 2026-11-07 portrait `lukang` ← lukang_new.jpg · ok
+- [x] 2026-11-07 battle `jd_xugong` ← jd_xugong3.jpg · ok
+- [x] 2026-11-07 cg `ss_caifuren` ← ss_caifuren4.jpg · ok
+- [x] 2026-11-07 cg `ss_yuanshao` ← ss_yuanshao2.jpg · ok

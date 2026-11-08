@@ -3770,7 +3770,7 @@
         0.5,
         0.22
       ],
-      "head": 0.22
+      "head": 0.15
     },
     "xizhicai": {
       "src": "source/generals/xizhicai.jpg",
@@ -5322,6 +5322,10 @@
     },
     "m8_maliang": {
       "src": "source/battles/m8_maliang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jd_xugong": {
+      "src": "source/battles/jd_xugong.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   },
@@ -7789,6 +7793,14 @@
     },
     "b_qinyilu": {
       "src": "source/cg/b_qinyilu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_caifuren": {
+      "src": "source/cg/ss_caifuren.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_yuanshao": {
+      "src": "source/cg/ss_yuanshao.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }

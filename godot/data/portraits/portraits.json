@@ -418,7 +418,7 @@
   "ganfuren": {"file": "ganfuren.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhangliang": {"file": "zhangliang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "caoxing": {"file": "caoxing.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "dingfeng": {"file": "dingfeng.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "dingfeng": {"file": "dingfeng.jpg", "face": [0.5, 0.22], "head": 0.15},
   "xizhicai": {"file": "xizhicai.jpg", "face": [0.5, 0.22], "head": 0.22},
   "liupi": {"file": "liupi.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zoushi": {"file": "zoushi.jpg", "face": [0.5, 0.22], "head": 0.22},
