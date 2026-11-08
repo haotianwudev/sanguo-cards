@@ -1,12 +1,6 @@
 extends TestCase
 
 
-func rng(seed_value: int) -> RandomNumberGenerator:
-	var r := RandomNumberGenerator.new()
-	r.seed = seed_value
-	return r
-
-
 func test_recruit_offers_unowned_generals_and_you_keep_one() -> void:
 	var s := SaveData.create()
 	s.owned = ["guanyu"]

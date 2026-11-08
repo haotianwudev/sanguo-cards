@@ -10,12 +10,6 @@ const E10 := "结局七 · 深锁"
 const E11 := "结局九 · 匹夫"
 
 
-func rng(seed_value: int) -> RandomNumberGenerator:
-	var r := RandomNumberGenerator.new()
-	r.seed = seed_value
-	return r
-
-
 func quest_by_id(id: String) -> Dictionary:
 	return GameData.get_db().quests.filter(func(q): return q["id"] == id)[0]
 

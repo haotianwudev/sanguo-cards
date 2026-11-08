@@ -28,6 +28,39 @@ static func party(leaders: Array, extra: Array = []) -> Array:
 	return s.party_leaders()
 
 
+# ---- shared helpers (were copied in several test files) ----
+
+func rng(seed_value: int) -> RandomNumberGenerator:
+	var r := RandomNumberGenerator.new()
+	r.seed = seed_value
+	return r
+
+
+func quest(i: int) -> Dictionary:
+	return GameData.get_db().quests[i]
+
+
+func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
+	for sid in ids:
+		Quests.move(q, s, sid)
+		Quests.resolve(q, s, rng(0), choice)
+
+
+func _plain(d: Variant) -> Variant:
+	return JSON.parse_string(JSON.stringify(d))  # ints and floats compare alike after a trip through a file
+
+
+func event_on_road(eid: String, option: int, seed_value := 0) -> SaveData:
+	var q := quest(0)
+	var s := SaveData.create()
+	Quests.begin(q, s)
+	s.square = "road"
+	s.resolved = false
+	s.events = {"road": eid}
+	Quests.choose_event(q, s, rng(seed_value), option)
+	return s
+
+
 # ---- naive bot, shared by the balance tests ----------------------------------------
 
 static func expected_value(b: Battle, u: Dictionary, sk: Dictionary) -> float:

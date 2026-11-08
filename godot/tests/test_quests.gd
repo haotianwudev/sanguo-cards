@@ -1,36 +1,5 @@
 extends TestCase
-
-
-func rng(seed_value: int) -> RandomNumberGenerator:
-	var r := RandomNumberGenerator.new()
-	r.seed = seed_value
-	return r
-
-
-func quest(i: int) -> Dictionary:
-	return GameData.get_db().quests[i]
-
-
-func test_maps_only_move_forward_one_row_at_a_time() -> void:
-	for q in GameData.get_db().quests:
-		for s in q["squares"].values():
-			var targets: Array = s["next"].duplicate()
-			for o in s["choose"]:
-				if not o["locked"]:
-					targets.append(o["goto"])
-			for t in targets:
-				var ts: Dictionary = q["squares"][t]
-				check(ts["x"] > s["x"] and absi(ts["y"] - s["y"]) <= 1, "%s -> %s" % [s["id"], t])
-
-
-func test_story_runs_prologue_then_dongzhuo() -> void:
-	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "yecheng", "jiangdong", "longhu", "menghu", "xiliang", "tianfu", "guanzhong", "luoyang_s", "sanfang", "tianqing", "beifa", "chibi", "guandu", "dujiang", "guiyi"])
-
-
-func walk_to(q: Dictionary, s: SaveData, ids: Array, choice := 0) -> void:
-	for sid in ids:
-		Quests.move(q, s, sid)
-		Quests.resolve(q, s, rng(0), choice)
+## 章节与剧情流程：每章的路线、分支、入队、结局（从原来 2500 行的 test_quests.gd 按主题拆出）
 
 
 func test_cannot_move_before_resolving() -> void:
@@ -105,57 +74,6 @@ func test_a_once_only_skill_stays_spent_until_a_rest() -> void:
 	check(s.carry_uses.is_empty(), "a rest brings it back")
 
 
-func test_failing_steps_back_one_square() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar", "raid"])
-	Quests.move(q, s, "plan")
-	Quests.resolve(q, s, rng(0), 1)
-	s.damage = 999
-	Quests.fail(q, s)
-	check(s.square == "raid" and s.damage == 0, "steps back to the previous square at full HP (no 1-HP retry loop)")
-	check(s.resolved, "the previous square remains resolved")
-	check(s.has_card("zhouyu"))
-	Quests.move(q, s, "plan")
-	check(s.resolved, "earlier plan stands")
-	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["zy_lure"])
-
-
-func test_every_event_colour_is_in_the_palette() -> void:
-	## the map paints a dealt ？ square in its event's colour via Kit.c — a name the theme lacks ("yellow") crashed the map
-	var pal: Dictionary = Kit.pal()
-	for eid in GameData.get_db().events:
-		var col := str(GameData.get_db().events[eid].get("color", "blue"))
-		check(pal.has(col), "event %s: colour %s is not in the palette" % [eid, col])
-
-
-func test_every_event_option_resolves_or_leads_somewhere() -> void:
-	var q := quest(0)
-	var all: Array = []
-	for qq in GameData.get_db().quests:
-		for eid in qq["event_pool"]:
-			if not all.has(eid):
-				all.append(eid)
-	for eid in all:
-		var ev: Dictionary = GameData.get_db().events[eid]
-		for i in ev["options"].size():
-			for seed_value in 4:
-				var s := SaveData.create()
-				Quests.begin(q, s)
-				s.square = "road"
-				s.resolved = false
-				s.events = {"road": eid}
-				s.relics = ["hupi", "jiunang"]  # enough to trade with (options with needs)
-				s.soldiers = {"danyang": 2, "changsha": 2}
-				Quests.choose_event(q, s, rng(seed_value), i)
-				check(s.resolved or not s.event_battle.is_empty() or not s.offer.is_empty(), "%s option %d" % [eid, i])
-				if not s.offer.is_empty():
-					Quests.resolve(q, s, rng(0), 0)
-					check(s.resolved, "%s pick" % eid)
-
-
 func test_story_cards_do_not_stack() -> void:
 	for pick in 2:
 		var q := quest(0)
@@ -167,124 +85,6 @@ func test_story_cards_do_not_stack() -> void:
 		Quests.resolve(q, s, rng(0), pick)
 		walk_to(q, s, [["sc_gate", "sc_road", "sc_hall"], ["zy_lure", "zy_back", "zy_hall"]][pick] + ["rescue"])
 		check(s.copies(["sunce", "zhouyu"][pick]) == 1, "rescue doesn't give a second copy")
-
-
-func event_on_road(eid: String, option: int, seed_value := 0) -> SaveData:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "road"
-	s.resolved = false
-	s.events = {"road": eid}
-	Quests.choose_event(q, s, rng(seed_value), option)
-	return s
-
-
-func test_zuoci_can_upgrade_a_general_or_reset_skills() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	s.take("sunce")
-	Quests.begin(q, s)
-	s.square = "road"
-	s.resolved = false
-	s.events = {"road": "zuoci"}
-	s.carry_extra = {"sunce": {"xiaobawang": 2}}
-	var labels: Array = GameData.get_db().events["zuoci"]["options"].map(func(o): return o["label"])
-	Quests.choose_event(q, s, rng(0), labels.find("求点化"))
-	check_eq(s.offer.size(), 2)  # 点化 offers up to gacha.upgrade_offer random cards: here the lord and 孙策, in either order
-	check(s.offer.has("lord") and s.offer.has("sunce"), "the lord and 孙策 are both offered")
-	Quests.resolve(q, s, rng(0), s.offer.find("sunce"))
-	check(s.copies("sunce") == 1 + s.upgrade_copies() and s.tier("sunce") == 1 and s.resolved and s.offer_kind == "", "点化: +3 copies, 铜 → 银")
-	var s2 := SaveData.create()
-	Quests.begin(q, s2)
-	s2.square = "road"
-	s2.resolved = false
-	s2.events = {"road": "zuoci"}
-	s2.carry_extra = {"sunce": {"xiaobawang": 2}}
-	s2.damage = 100
-	Quests.choose_event(q, s2, rng(0), labels.find("求静心"))
-	check(s2.carry_extra.is_empty() and s2.damage == 100, "skills reset, HP untouched")
-
-
-func test_poison_costs_the_configured_share_of_the_hp() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "road"
-	s.resolved = false
-	s.events = {"road": "snake"}
-	Quests.choose_event(q, s, rng(0), 1)  # squeeze the venom out yourself: always poisoned
-	check_eq(s.damage, int(round(Quests.party_max(s) * float(GameData.get_db().battle["event_scale"]["poison"]))))
-
-
-func test_an_event_never_kills_the_party_it_leaves_1_hp() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	var top := Quests.party_max(s)
-	Quests._apply([{"damage": 5.0}], q, s, rng(0))  # far more than the whole bar
-	check_eq(top - s.damage, 1, "a huge hit leaves exactly 1 HP")
-	Quests._apply([{"damage": 0.5}, {"poison": true}], q, s, rng(0))
-	check_eq(top - s.damage, 1, "further hits and poison on 1 HP take nothing more")
-
-
-func test_events_can_lower_difficulty_danger_and_merit_but_not_past_the_floor() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	var floor_lvl := int(GameData.get_db().battle["difficulty_min"])
-	for _n in 5:
-		Quests._apply([{"difficulty": -1}, {"danger": -1}, {"merit": -3}], q, s, rng(0))
-	check_eq(s.difficulty, floor_lvl, "难度 stops at difficulty_min")
-	check_eq(s.danger, 0, "险 never goes negative")
-	check_eq(s.merit, 0, "战功 never goes negative")
-	Quests._apply([{"difficulty": 2}, {"danger": 1}, {"merit": 5}], q, s, rng(0))
-	check_eq(s.difficulty, floor_lvl + 2)
-	check_eq(s.danger, 1)
-	check_eq(s.merit, 5)
-
-
-func test_events_can_change_the_fate_drop_a_tier_and_set_every_ambush() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	var db := GameData.get_db()
-	s.fate = db.fates.keys()[0]
-	Quests._apply([{"fate": "curse"}], q, s, rng(0))
-	check_eq(db.fates[s.fate]["rarity"], "curse", "a cursed 天命")
-	var cursed := s.fate
-	Quests._apply([{"fate": "good"}], q, s, rng(0))
-	check(s.fate != cursed and db.fates[s.fate]["rarity"] in ["common", "rare"], "a good 天命 replaces it")
-	Quests._apply([{"fate": "bad"}], q, s, rng(0))
-	check_eq(db.fates[s.fate]["rarity"], "bad", "a 凶 天命")
-	for seed_value in 30:
-		var t := SaveData.create()
-		Quests.begin(q, t, rng(seed_value))
-		check(t.fate_offer.all(func(f): return not db.fates[f]["rarity"] in ["bad", "divine"]), "凶 / 天授 天命 are never offered at the start")
-	Quests._apply([{"fate": "divine"}], q, s, rng(0))
-	check_eq(db.fates[s.fate]["rarity"], "divine", "a 天授 天命")
-	for seed_value in 30:
-		Quests._apply([{"fate": true}], q, s, rng(seed_value))
-		check(db.fates[s.fate]["rarity"] != "divine", "a plain 改命 never lands on 天授")
-	var opts: Array = db.events["fate_shift"]["options"]
-	check(opts.any(func(o): return o["weight"] < 1.0), "an option's weight survives loading (天命所归 is the rare one)")
-	var cid: String = db.cards.values().filter(func(c): return not c["soldier"] and c.get("person", "") != "lord")[0]["id"]
-	s.grant_card(cid)
-	s.upgrade(cid)
-	check_eq(s.tier(cid), 1, "银 after one 点化")
-	var before := s.copies(cid)
-	Quests._apply([{"downgrade": 1}], q, s, rng(0))
-	check(s.copies(cid) < before and s.copies(cid) >= before - 2 and s.copies(cid) >= 1, "降级 takes 1-2 levels, not a whole tier")
-	for _i in 6:
-		Quests._apply([{"downgrade": 1}], q, s, rng(0))
-	check_eq(s.copies(cid), 1, "level 1 is the floor")
-	check(s.has_card(cid), "a level-1 card stays in the party")
-	Quests._apply([{"ambush_all": true}], q, s, rng(0))
-	var laid: Dictionary = Quests.view(q, s)["squares"]
-	var fights: Array = laid.keys().filter(func(sid): return laid[sid]["type"] == "battle" and not laid[sid]["boss"])
-	check(not fights.is_empty() and fights.all(func(sid): return s.ambushes.has(sid)), "every fight is an 埋伏")
-	Quests._apply([{"ambush_all": false}], q, s, rng(0))
-	check(s.ambushes.is_empty(), "and then none")
 
 
 func test_a_party_change_keeps_the_hp_share() -> void:
@@ -325,14 +125,6 @@ func test_chapter_one_is_a_long_road() -> void:
 	check(fights >= 10, "battles and ？ squares: %d" % fights)
 
 
-func test_an_old_save_on_a_removed_square_restarts_the_quest() -> void:
-	var s := SaveData.create()
-	s.quest = "prologue"
-	s.square = "hg_talk"
-	Quests.ensure_started(s)
-	check_eq(s.square, "era")
-
-
 func test_recruit_offer_does_not_reroll() -> void:
 	var q := quest(1)  # 讨伐董卓: a normal recruit square (the prologue's only offers soldiers)
 	var s := SaveData.create()
@@ -348,89 +140,6 @@ func test_recruit_offer_does_not_reroll() -> void:
 
 
 # ---- whole-quest balance (HP carries between battles) --------------------------------
-
-func play_quest(q: Dictionary, s: SaveData, pick: int, fork: int, seed_value: int) -> bool:
-	var r := rng(seed_value)
-	Quests.begin(q, s)
-	for _step in 100:
-		var sq := Quests.here(q, s)
-		if sq["type"] == "mystery" and not s.resolved:
-			var ev := Quests.event_here(q, s, r)
-			var ok: Array = range(ev["options"].size()).filter(func(i): return Quests.option_blocked(s, ev["options"][i]) == "")
-			Quests.choose_event(q, s, r, ok[0])  # the first option you can afford
-		if (sq["type"] == "battle" or not s.event_battle.is_empty()) and not s.resolved:
-			if not fight(q, s, r):
-				if not Quests.lose(q, s, r):
-					return false
-				continue
-		var offered := Quests.offer(q, s, r)
-		var choice := 0 if not offered.is_empty() else -1
-		if sq["type"] == "choose":
-			choice = pick if pick < sq["choose"].size() and not sq["choose"][pick]["locked"] else 0
-		Quests.resolve(q, s, r, choice)
-		var opts := Quests.next_options(q, s)
-		if opts.is_empty():
-			Quests.complete(q, s)
-			return true
-		var idx: int = fork if fork >= 0 and fork < opts.size() else r.randi_range(0, opts.size() - 1)
-		Quests.move(q, s, opts[idx]["id"])
-	return false
-
-
-func fight(q: Dictionary, s: SaveData, r: RandomNumberGenerator) -> bool:
-	var f := Quests.battle_here(q, s)
-	s.party = s.auto_party()
-	var b := Battle.start(f["battle"], s.party_leaders(), r.randi(), s.damage, s.carry_extra, s.carry_uses, f["ambush"], Quests.mods(s))
-	if bot_fight(b) != "win":
-		return false
-	var carry := b.carry_out()
-	s.damage = carry[0]
-	s.carry_extra.merge(carry[1], true)
-	s.carry_uses.merge(carry[2], true)
-	var chest := s.chest_after_battle(r, b.overkill, f["boss"])
-	if not chest.is_empty():
-		s.take(chest[0]["id"])
-	return true
-
-
-func rate(qi: int, owned: Array, pick := 0, fork := -1, n := 60) -> float:
-	var wins := 0
-	for seed_value in n:
-		var s := SaveData.new()
-		s.owned = owned.duplicate()
-		if play_quest(quest(qi), s, pick, fork, seed_value):
-			wins += 1
-	return float(wins) / n
-
-
-const START_LINEUP := [["sunce", "zhouyu"], ["zhaoyun", "guojia", "xiahoulan"]]  # who walks into the prologue: the south / north birth's own people (the curve starts at 0.4 and climbs to 3.9, so it is meant for a party with its lead generals)
-
-
-func test_chapter_one_is_winnable_with_either_plan() -> void:
-	for pick in 2:  # south / north share one coefficient (battle.scaling.chapter.prologue): 主公的大招每场只一次，所以第一章比以前容易
-		check_between(rate(0, START_LINEUP[pick], pick, -1, 100), 0.35, 1.01, "pick %d" % pick)
-
-
-func campaign_rate(pick: int, fork: int, n := 60) -> float:
-	## Play the prologue, then chapter 1 with whatever the prologue left you.
-	var wins := 0
-	for seed_value in n:
-		var s := SaveData.create()
-		s.owned = START_LINEUP[pick].duplicate()
-		if play_quest(quest(0), s, pick, -1, seed_value) and play_quest(quest(1), s, 0, fork, seed_value + 1000):
-			wins += 1
-	return float(wins) / n
-
-
-func test_dongzhuo_chapter_is_fair_after_chapter_one() -> void:
-	# pick=1 at every choose square along the way means: era → north route, jz_route → 抄小路, jz_plan → 郭嘉's
-	# plan — then whatever cards/damage that carries out of prologue gets thrown at taodong (quest(1), picked
-	# purely by array position; a north-route save would never actually reach taodong in real play — this is
-	# just a stress test that the carried-over state doesn't trivialize or break an unrelated later chapter).
-	# South quests share one big event_scope pool now instead of each chapter's own narrowly curated list, and
-	# north chapter 1 picked up its own loot squares, so the win rate crept up — 1.0 here isn't a balance miss,
-	# just confirms it isn't a guaranteed LOSS.
-	check_between(campaign_rate(1, -1), 0.2, 1.01, "north route into chapter two, random forks")
 
 
 func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
@@ -454,57 +163,6 @@ func test_chapter_one_only_gives_local_soldiers_and_prisoners() -> void:
 	check_eq(q["squares"]["north"]["cards"], ["danyang"], "freed men and prisoners")
 
 
-func test_changsha_is_weaker_than_danyang() -> void:
-	var db := GameData.get_db()
-	var cs := db.build_fighter("changsha")
-	var dy := db.build_fighter("danyang")
-	check(cs["at"] < dy["at"] and cs["hp"] < dy["hp"], "长沙刀兵 %d/%d vs 丹阳兵 %d/%d" % [cs["at"], cs["hp"], dy["at"], dy["hp"]])
-
-
-# ---- 宝物 / 险 / shuffled runs ------------------------------------------------------
-
-func test_relics_change_battles() -> void:
-	var s := SaveData.create()
-	for c in ["sunce", "zhouyu", "sunjian", "zhenghao"]:  # 谋士, 刀兵 and 贼 units carry 兵符 / 兵法, 赤帻 and 战鼓
-		s.take(c)
-	s.party = ["zhouyu", "sunjian", "zhenghao"]
-	var plain := Battle.start("boar", s.party_leaders(), 1)
-	s.relics = ["bingfu", "bingfa", "yuxi", "chize", "zhangu"]
-	var m := Quests.mods(s)
-	var b := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, m)
-	check_eq(b.ap, plain.ap + 2, "兵符 +1 at start, 玉玺 +1 per round")
-	check_eq(b.turn_limit, plain.turn_limit + 2, "孙子兵法")
-	check(b.party_max < plain.party_max, "玉玺 costs HP")
-	var dazed := 0
-	for seed in range(1, 201):
-		if Battle.start("boar", s.party_leaders(), seed, 0, {}, {}, false, m).enemy["stunned"]:
-			dazed += 1
-	check(dazed > 30 and dazed < 90, "赤帻 dazes about 30%% of fights (%d / 200)" % dazed)
-	check(b.leaders.all(func(u): return u["boosted"]), "战鼓")
-
-
-func test_troop_relics_only_help_their_troop() -> void:
-	var s := SaveData.create()
-	s.relics = ["chitu"]
-	check(not Quests.mods(s).has("troop_at"), "no 骑兵 unit out: 赤兔马 rests")
-	s.take("sunce")
-	var m := Quests.mods(s)
-	check(m["troop_at"].has("cavalry") and not m["troop_at"].has("infantry"))
-
-
-func test_temple_upgrades_a_general() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	s.take("zhouyu")
-	Quests.begin(q, s)
-	s.square = "road"
-	s.resolved = false
-	s.events = {"road": "temple"}
-	Quests.choose_event(q, s, rng(0), 0)
-	check(s.resolved and s.offer.is_empty(), "no pick: the mountain god chooses")
-	check_eq(s.tier("zhouyu"), 1, "+3 copies: 铜 → 银")
-
-
 func test_every_lvbu_fight_uses_the_lose_coefficient() -> void:
 	var db := GameData.get_db()
 	var lose := float(db.battle["enemy_coef"]["lose"])
@@ -523,27 +181,6 @@ func test_every_lvbu_fight_uses_the_lose_coefficient() -> void:
 			check(sq["lose_goto"] != "", "losing to 吕布 is not the end: %s / %s carries on" % [q["id"], sid])
 			seen_fights += 1
 	check(seen_fights >= 3, "found the 吕布 fights (%d)" % seen_fights)
-
-
-func test_only_a_boss_offers_a_relic_pick_and_danger_toughens_enemies() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "yaodao"  # an elite: no 宝物
-	s.resolved = false
-	Quests.resolve(q, s, rng(0))
-	check(s.offer.is_empty() and s.relics.is_empty(), "an elite drops no 宝物")
-	s.square = "lair"  # the boss
-	s.resolved = false
-	Quests.resolve(q, s, rng(0))
-	check(s.offer_kind == "relic" and s.offer.size() == 3)
-	Quests.take_relic(s, s.offer[0])
-	check(s.relics.size() == 1 and s.offer.is_empty())
-	s.danger = 1
-	s.square = "oath"  # off a battle square the chapter curve does not move the fight
-	var calm := Battle.start("boar", s.party_leaders(), 1)
-	var risky := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, Quests.mods(s))
-	check(risky.enemy["max_hp"] > calm.enemy["max_hp"])
 
 
 func test_each_run_deals_the_shuffle_groups_anew() -> void:
@@ -576,16 +213,6 @@ func test_famous_weapons() -> void:
 	check(b.take_events().any(func(e): return e["t"] == "defend" and e["cut"] > 0.3), "八阵图 deepens defend")
 
 
-func test_the_enemy_card_can_turn_up_in_its_chest() -> void:
-	var s := SaveData.create()
-	var seen := 0
-	for seed_value in 40:
-		var chest := s.chest_after_battle(rng(seed_value), 0.0, true, quest(0)["soldier_pool"], "heyi")
-		if chest.any(func(c): return c["id"] == "heyi"):
-			seen += 1
-	check(seen > 8 and seen < 32, "about half the boss chests: %d/40" % seen)
-
-
 func test_lvbu_cannot_really_be_lost_to_and_brings_the_three_brothers() -> void:
 	var q := quest(1)
 	var s := SaveData.create()
@@ -596,49 +223,6 @@ func test_lvbu_cannot_really_be_lost_to_and_brings_the_three_brothers() -> void:
 	check(Quests.lose(q, s, rng(0)), "not a defeat")
 	check(s.square == "sanying" and s.damage == 0, "三英战吕布, HP restored")
 	check(s.quest == "taodong" and not s.visited.has("triple"))
-
-
-func test_beating_lvbu_leads_past_three_chests_one_of_them_grand() -> void:
-	var q := quest(1)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "lvbu"
-	s.resolved = false
-	Quests.resolve(q, s, rng(0))  # won
-	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["triple"])
-	Quests.move(q, s, "triple")
-	check_eq(q["squares"]["triple"]["type"], "event", "a plain story square, not a ？")
-	Quests.resolve(q, s, rng(1))
-	check_eq(s.difficulty, 1, "beating 吕布 raises the 难度 by itself")
-	check(Quests.mods(s)["enemy"] > 0.0, "every enemy is tougher now")
-	var db := GameData.get_db()
-	for seed_value in 10:
-		var r := SaveData.create()
-		Quests.begin(q, r, rng(seed_value))
-		var v := Quests.view(q, r)
-		var grand: Array = ["box1", "box2", "box3"].filter(func(b): return v["squares"][b]["event"] == "grand_chest")
-		check_eq(grand.size(), 1, "exactly one grand chest")
-	s.square = "box1"
-	s.resolved = false
-	Quests.choose_event(q, s, rng(2), 0)
-	check(not s.offer.is_empty() and s.offer.all(func(c): return db.cards[c]["rarity"] in ["SR", "SSR"]), "the grand chest holds SR/SSR")
-	var s2 := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
-	Quests.begin(quest(0), s2)
-	check_eq(s2.difficulty, 1, "difficulty stays for the whole campaign")
-
-
-func test_lvbu_is_nearly_unbeatable() -> void:
-	check(rate(1, ["machao", "zhangfei", "zhaoyun", "guanyu", "daqiao", "cav_n", "spear_n"], 0, 0, 30) >= 0.0)
-	var wins := 0
-	for seed_value in 30:
-		var s := SaveData.create()
-		for c in ["sunce", "zhouyu", "wuguotai", "sunjian", "danyang", "danyang"]:
-			s.grant_card(c)
-		s.party = s.auto_party()
-		var b := Battle.start("hulao_ch1", s.party_leaders(), seed_value)
-		if bot_fight(b) == "win":
-			wins += 1
-	check(wins <= 3, "吕布 wins %d/30 against the chapter-2 party" % (30 - wins))
 
 
 func test_chapter_one_ends_with_the_riverside_oath_before_heading_north() -> void:
@@ -656,31 +240,6 @@ func test_after_fuchun_you_follow_zhouyu_uphill_or_sunce_to_the_boars() -> void:
 	check_eq(q["squares"]["sc_home"]["next"], ["boar"])
 	for g in q["shuffle"]:
 		check(not g.has("hill") and not g.has("boar"), "the two paths keep their places")
-
-
-func test_huatuo_heals_joins_or_leaves_his_book() -> void:
-	var db := GameData.get_db()
-	check(Quests.pools(quest(0), SaveData.create())["event_pool"].has("huatuo"))
-	check(db.cards["huatuo"]["troop"] == "logistics" and db.cards["huatuo"]["skills"] == ["mafei", "guagu_liaodu"])
-	var joined := 0
-	var book := 0
-	for seed_value in 20:
-		var s := event_on_road("huatuo", 1, seed_value)
-		if s.has_card("huatuo"):
-			joined += 1
-		if s.relics.has("qingnang"):
-			book += 1
-	check(joined > 0 and book > 0 and joined + book == 20, "joins %d, leaves 青囊书 %d" % [joined, book])
-
-
-func test_yuji_only_brings_trouble() -> void:
-	check(Quests.pools(quest(0), SaveData.create())["event_pool"].has("yuji"))
-	var drank := event_on_road("yuji", 0)
-	check(drank.damage > 0 and drank.relics.has("huangjinfu"), "poisoned and cursed")
-	var chased := event_on_road("yuji", 1)
-	check_eq(chased.danger, 1, "险 +1")
-	var fled := event_on_road("yuji", 2)
-	check(fled.event_battle.get("ambush", false), "his followers ambush you")
 
 
 func test_chapter_two_follows_the_dongbai_story() -> void:
@@ -722,48 +281,6 @@ func test_lending_grain_to_caocao_costs_a_quarter_of_hp_and_pays_the_seven_star_
 	Quests.resolve(q, s, rng(0))
 	check(s.relics.has("qixing") and not s.relics.has("mengde"), "the blade, not a book written years later")
 	check_eq(s.damage, int(round(top * 0.25)), "lending costs 1/4 of the party's HP")
-
-
-func test_handing_dongbai_over_pays_a_relic() -> void:
-	var q := quest(1)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "give"
-	s.resolved = false
-	check_eq(q["squares"]["give"]["type"], "event", "a plain story square, not a ？")
-	Quests.resolve(q, s, rng(0))
-	check_eq(s.relics, ["jubaopen"])
-
-
-func test_trades_take_something_away() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.relics = ["hupi"]
-	s.grant_card("danyang")
-	s.grant_card("danyang")
-	s.square = "road"
-	s.resolved = false
-	s.events = {"road": "merchant"}
-	Quests.choose_event(q, s, rng(0), 0)
-	check(s.relics.is_empty() and not s.offer.is_empty(), "a relic for a pick of generals")
-	var s2 := SaveData.create()
-	Quests.begin(q, s2)
-	s2.grant_card("danyang")
-	s2.grant_card("danyang")
-	s2.take("sunce")
-	s2.square = "road"
-	s2.resolved = false
-	s2.events = {"road": "smith"}
-	Quests.choose_event(q, s2, rng(0), 0)
-	check(s2.copies("danyang") == 0 and s2.offer_kind == "upgrade", "two soldiers melted into an upgrade")
-
-
-func test_each_chapter_has_a_big_event_pool() -> void:
-	var p0: Array = Quests.pools(quest(0), SaveData.create())["event_pool"]
-	var p1: Array = Quests.pools(quest(1), SaveData.create())["event_pool"]
-	check(p0.size() >= 20, "chapter 1: %d events" % p0.size())
-	check(p1.size() >= 15, "chapter 2: %d events" % p1.size())
 
 
 func test_chapter_two_is_full_of_dong_zhuo_troops() -> void:
@@ -836,55 +353,6 @@ func test_yellow_turban_remnants_and_their_medics() -> void:
 	check_eq(GameData.get_db().cards["huangjin_nvyi"]["troop"], "logistics")
 
 
-func test_the_chapter_recap_remembers_the_run() -> void:
-	var q := quest(1)
-	var s := SaveData.create()
-	s.take("sunce")
-	Quests.begin(q, s)
-	s.take("zhouyu")
-	s.grant_card("gongnv")
-	s.grant_card("gongnv")
-	s.square = "lvbu"
-	s.resolved = false
-	Quests.lose(q, s, rng(0))
-	s.square = "fate"
-	s.resolved = false
-	Quests.resolve(q, s, rng(0), 1)
-	Quests.take_relic(s, "hupi")
-	var r := Quests.recap(s)
-	check(r["records"].has("吕布：三英战吕布") and r["records"].has("董白：留下"), str(r["records"]))
-	check(r["cards"].has(["zhouyu", 1]) and r["cards"].has(["gongnv", 2]) and not r["cards"].any(func(c): return c[0] == "sunce"), str(r["cards"]))
-	check_eq(r["relics"], ["hupi"])
-	Quests.fail(q, s)
-	check(not Quests.recap(s)["records"].is_empty(), "a setback keeps the run's recap")
-
-
-func test_merit_is_paid_once_per_chapter_and_spent_between_chapters() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.run_battles = 6
-	s.run_bosses = 2
-	check_eq(Quests.pay_merit(q, s), 6 + 2 * 2)
-	check_eq(Quests.pay_merit(q, s), 0, "a reopened recap doesn't pay twice")
-	check_eq(s.merit, 10)
-	check(Quests.spend_merit(s, "draw"), "5 for a draw")
-	check_eq(s.merit, 5)
-	check(not Quests.spend_merit(s, "upgrade"), "8 for an upgrade — not enough left")
-	var back := SaveData.from_dict(JSON.parse_string(JSON.stringify(s.to_dict())))
-	check(back.merit == 5 and back.merit_paid == "prologue")
-
-
-func test_beating_a_boss_or_elite_counts_for_merit() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "yaodao"
-	s.resolved = false
-	Quests.resolve(q, s, rng(0))
-	check_eq(s.run_bosses, 1)
-
-
 func test_finished_chapters_leave_story_flags_that_pick_the_side_stories() -> void:
 	var q := quest(1)
 	var s := SaveData.create()
@@ -901,40 +369,6 @@ func test_finished_chapters_leave_story_flags_that_pick_the_side_stories() -> vo
 	check(t2.has("河边") and not t2.has("单挑"), str(t2))
 	Quests.begin(quest(0), s)
 	check(s.flags.has("董白：留下"), "flags outlive a new run")
-
-
-func test_relics_carry_into_the_next_chapter_but_new_ones_reset_on_a_restart() -> void:
-	var s := SaveData.create()
-	Quests.begin(quest(0), s)
-	s.relics = ["hupi", "jiunang"]
-	Quests.complete(quest(0), s)
-	Quests.begin(quest(1), s)
-	check_eq(s.relics, ["hupi", "jiunang"], "all of chapter 1's relics come along")
-	s.relics.append("bingfu")
-	Quests.fail(quest(1), s)
-	check_eq(s.relics, ["hupi", "jiunang"], "a restart drops only what this chapter gave")
-
-
-func test_replaying_a_chapter_is_harder_and_returns_to_the_story() -> void:
-	var s := SaveData.create()
-	Quests.begin(quest(0), s)
-	Quests.complete(quest(0), s)
-	Quests.begin(quest(1), s)
-	s.square = "counter"
-	s.damage = 123
-	s.take("sunce")
-	Quests.start_replay(quest(0), s, rng(0))
-	check(s.quest == "prologue" and s.danger == 1, "进阶: one clear = +1 险")
-	s.grant_card("danyang")
-	Quests.complete(quest(0), s)
-	check(s.replay == "" and s.quest == "taodong" and s.square == "counter" and s.damage == 123, "back where the story was")
-	check(s.has_card("danyang"), "replay rewards stay")
-	check_eq(s.clears["prologue"], 2)
-	check_eq(s.quests_cleared, ["prologue"])
-	Quests.start_replay(quest(0), s, rng(0))
-	check_eq(s.danger, 2, "harder again")
-	Quests.stop_replay(s)
-	check(s.quest == "taodong" and s.square == "counter", "giving up returns to the story too")
 
 
 func test_squares_can_depend_on_earlier_chapters() -> void:
@@ -983,58 +417,6 @@ func test_chapter_three_branches_on_dongbai_and_ends_in_ending_one() -> void:
 	check(sq["wenji_join"]["cards"].has("caiwenji"), "saved, she joins")
 	check_eq(sq["yuanshu"]["lose_goto"], "end", "袁术 can't really be beaten: losing leads on to the ending")
 	check(q["ending"].get("title", "").begins_with("结局一"), "the chapter ends in 结局一")
-
-
-func test_every_run_offers_fates_and_rolls_affixes() -> void:
-	var db := GameData.get_db()
-	var q: Dictionary = db.quests[1]
-	var s := SaveData.create()
-	Quests.begin(q, s, rng(4))
-	check_eq(s.fate_offer.size(), 3, "three 天命 to pick from")
-	check(s.fate == "", "none picked yet")
-	var f := Quests.pick_fate(s, 0)
-	check(s.fate == f["id"] and s.fate_offer.is_empty())
-	var m := Quests.mods(s)
-	for k in f["mods"]:
-		check(m.has(k), "the 天命's %s is in the run's mods" % k)
-	var elite_squares: Array = q["squares"].keys().filter(func(k): return q["squares"][k]["boss"] or q["squares"][k]["elite"])
-	check(not elite_squares.is_empty() and elite_squares.all(func(k): return s.affixes.has(k)), "every elite / boss has a 词缀")
-	var plain := SaveData.create()
-	Quests.begin(q, plain)
-	check(plain.fate_offer.is_empty() and plain.affixes.is_empty(), "no rng (tests): nothing rolled")
-
-
-func test_affixes_change_the_enemy() -> void:
-	var db := GameData.get_db()
-	var s := SaveData.create()
-	s.take("sunce")
-	var base := Battle.start("dongbai", s.party_leaders(), 1)
-	var afx: Dictionary = db.battle["affixes"]
-	var thick := Battle.start("dongbai", s.party_leaders(), 1, 0, {}, {}, false, {"affix": afx["houxue"]})
-	check(thick.enemy["max_hp"] > base.enemy["max_hp"], "厚血: more HP")
-	var fast := Battle.start("dongbai", s.party_leaders(), 1, 0, {}, {}, false, {"affix": afx["xunjie"]})
-	check(int(fast.enemy["data"]["actions"]) == int(base.enemy["data"]["actions"]) + 1, "迅捷: one more action")
-	check(int(db.enemies["dongbai"]["actions"]) == int(base.enemy["data"]["actions"]), "the enemy's own data is untouched")
-	var regen := Battle.start("dongbai", s.party_leaders(), 1, 0, {}, {}, false, {"affix": afx["zaisheng"]})
-	regen.enemy["hp"] -= 2000
-	var hp0: int = regen.enemy["hp"]
-	regen.end_round()
-	check(regen.take_events().any(func(e): return e["t"] == "enemy_heal") or regen.enemy["hp"] >= hp0, "再生 heals each enemy turn")
-
-
-func test_trades_need_something_to_trade() -> void:
-	var db := GameData.get_db()
-	var s := SaveData.create()
-	var swap: Dictionary = db.events["merchant"]["options"][0]  # a relic for a general
-	check(Quests.option_blocked(s, swap) != "", "no relic: can't trade one")
-	s.relics = ["hupi"]
-	check_eq(Quests.option_blocked(s, swap), "", "with a relic: fine")
-	var pay: Dictionary = db.events["shanzei"]["options"][1]  # pay the toll with a soldier
-	check(Quests.option_blocked(s, pay) != "", "no soldiers: can't pay the toll")
-	s.grant_card("danyang")
-	check_eq(Quests.option_blocked(s, pay), "")
-	var flee: Dictionary = db.events["storm"]["options"][1]  # losing a soldier is just a cost here
-	check_eq(Quests.option_blocked(SaveData.create(), flee), "", "costs aren't trades")
 
 
 func test_dongbai_choice_reaches_the_right_luoyang_after_the_wait() -> void:
@@ -1106,16 +488,6 @@ func test_mengde_makes_strategist_skills_cheaper() -> void:
 	check_eq(b.cost(lord, db.skills["rengdao"]), 3, "not a 策士: no discount")
 
 
-func _event_text(x: Variant) -> String:
-	if x is String:
-		return x
-	if x is Array:
-		return " ".join(x.map(func(i): return _event_text(i)))
-	if x is Dictionary:
-		return " ".join(x.values().map(func(v): return _event_text(v)))
-	return ""
-
-
 func test_lvbu_zhugeliang_and_baosanniang_are_never_drawn_the_first_time() -> void:
 	## user rule: the first 吕布 / 诸葛亮 comes only from beating him (his fights drop him) or the story (he joins); 鲍三娘 only from her
 	## event — never a random draw or chest. Once had, they come back through the history pool like any other card
@@ -1136,40 +508,6 @@ func test_lvbu_zhugeliang_and_baosanniang_are_never_drawn_the_first_time() -> vo
 	check(got.any(func(c): return c["id"] == "zhugeliang"), "the first win always hands him over")
 
 
-func test_the_north_birth_never_draws_a_south_event() -> void:
-	## prologue is one quest for both births: its chapter-only events (二乔, 于吉) carry "route": "south" and stay out of the north pool
-	var db := GameData.get_db()
-	var q: Dictionary = db.quests[0]
-	check_eq(q["id"], "prologue")
-	var s := SaveData.create()
-	s.run_records = ["出生：冀州无极"]
-	var north: Array = Quests.pools(q, s)["event_pool"]
-	check(not north.has("qiao") and not north.has("yuji"), "no 二乔 / 于吉 after the north birth")
-	for eid in north:
-		var text := _event_text(db.events[eid]) + _event_text(GameData.get_db().events[eid]["options"])
-		for w in ["孙策", "周瑜", "孙坚", "吴夫人", "二乔", "大乔", "小乔", "伯符", "公瑾"]:
-			check(not text.contains(w), "north prologue event %s mentions %s" % [eid, w])
-	var south: Array = Quests.pools(q, SaveData.create())["event_pool"]
-	check(south.has("qiao") and south.has("yuji"), "the south birth still meets them")
-
-
-func test_the_north_birth_redeals_the_events_dealt_before_it() -> void:
-	## the ？ squares are dealt when 第一章 begins, before the birth is picked (the south pool then): picking the north
-	## birth must swap every south event still waiting (孙策's 斗酒 showed up in the north once)
-	var db := GameData.get_db()
-	var q: Dictionary = db.quests[0]
-	for seed in range(1, 30):
-		var s := SaveData.create()
-		var rng := RandomNumberGenerator.new()
-		rng.seed = seed
-		Quests.begin(q, s, rng)
-		s.events["jz_mystery1"] = "drink"  # as the south deal could leave it
-		Quests.record(s, "出生：冀州无极")
-		var north: Array = Quests.pools(q, s)["event_pool"]
-		for sid in s.events:
-			check(north.has(s.events[sid]), "seed %d: %s keeps the south event %s" % [seed, sid, s.events[sid]])
-
-
 func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> void:
 	var db := GameData.get_db()
 	var s := SaveData.create()
@@ -1187,46 +525,6 @@ func test_each_chapter_cleared_hands_out_the_next_lord_card_for_the_route() -> v
 	check_eq(Quests.grant_lord_form(q, south), "lord_south_boat", "the south route has its own card")
 	check(s.new_lap().lord_forms.is_empty(), "a new lap starts without the lord cards")
 	check(s.new_lap(true).lord_forms.has("lord_north_cloak"), "…unless the test option keeps the collection")
-
-func test_a_chapters_first_step_hands_out_its_lord_card() -> void:
-	## in play (an rng given) the card comes with the first square the chapter steps onto, once per chapter; tests without one stay fixed
-	## the first chapter's is the route's fixed default (every 周目); the lord has no card before it, and the next 周目 remembers them
-	var db := GameData.get_db()
-	var q: Dictionary = db.quests[0]
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 3
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	check(s.lord_forms.is_empty(), "no lord card before the first square")
-	s.run_records.append("出生：冀州无极")  # the birth choice is made on the start square (era), before the first step
-	s.choices["era"] = "jz_arrive"
-	s.resolved = true
-	var got := Quests.move(q, s, "jz_arrive", rng)
-	check_eq(got.size(), 1, "the first step: one card")
-	check_eq(got[0]["form"], "lord_default", "…the fixed default one")
-	check_eq(s.lord_forms, ["lord_default"], "…and kept")
-	check_eq(s.lord_form_paid, q["id"], "marked as paid for this chapter")
-	s.commit_history()  # an ending was reached
-	var lap2 := s.new_lap()
-	check(lap2.lord_forms.is_empty(), "the next 周目 does not keep the card itself…")
-	check(lap2.cleared_forms.has("lord_default"), "…but remembers it")
-	Quests.begin(q, lap2)
-	lap2.run_records.append("出生：冀州无极")
-	lap2.choices["era"] = "jz_arrive"
-	lap2.resolved = true
-	var before := lap2.lord_copies
-	var again := Quests.move(q, lap2, "jz_arrive", rng)
-	check_eq(again[0]["form"], "lord_default", "the default card again on the next 周目's first step")
-	check(again[0]["dupe"] and again[0]["fresh"], "…the card is yours again, and the lord's level goes up with it")
-	check_eq(lap2.lord_copies, before + 1, "…one more copy of the lord (+1, not a whole tier)")
-	check_eq(lap2.lord_forms, ["lord_default"], "…and the card is in hand")
-	var fixed := SaveData.create()
-	Quests.begin(q, fixed)
-	fixed.run_records.append("出生：冀州无极")
-	fixed.choices["era"] = "jz_arrive"
-	fixed.resolved = true
-	check(Quests.move(q, fixed, "jz_arrive").is_empty(), "without an rng (tests) nothing is handed out")
-	check(fixed.lord_forms.is_empty(), "…and the collection stays empty")
 
 
 func test_the_default_lord_card_is_not_a_second_lord_in_the_party_screen() -> void:
@@ -1384,40 +682,6 @@ func test_north_chapters_two_to_four_fork_into_a_battle_lane_and_a_rogue_lane() 
 	check(forks >= 12, "found the forks (%d)" % forks)
 
 
-func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_lane_too() -> void:
-	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng", "wenji_tale", "plan", "xizi", "caiyong", "yuexia", "xian"],
-		"jingxiang": ["jx_diaochan", "jx_bubing", "jx_rest", "jx_shaoka", "jx_zongzei", "jx_xiangyang", "jx_xunluo", "jx_shuijun"],
-		"dongui": ["route", "tuwei", "luan", "luo_ruin", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"],
-		"tianfu": ["t9_yexi", "t9_yexi_lx", "t9_jiangzhou", "t9_wuxian", "t9_xizheng", "t9_kuimen", "t9_xiuzheng", "t9_fazheng_take", "t9_fazheng_go", "t9_nanzhong", "t9_zhurong_join", "t9_yiqin"],
-		"guanzhong": ["g10_start", "g10_xiuzheng", "g10_jishi", "g10_zw_start", "g10_fenbing", "g10_huzhen", "g10_xurong", "g10_kongming"],
-		"yecheng": ["n7_start", "n7_tiqin", "n7_beishang", "n7_bieyuan", "n7_g_qin", "n7_b_anmin"],
-		"longhu": ["n8_yishi", "n8_yishi_t", "n8_dumai", "n8_b_nan", "n8_g_nan", "n8_g_jincheng", "n8_g_tuijun"],
-		"xiliang": ["n9_start", "n9_lunu", "n9_yanjin_f", "n9_yanjin_p", "n9_g_yizheng", "n9_g_zhanta"],
-		"sanfang": ["n10_start", "n10_qiandu", "n10_xiuzheng", "n10_caoren", "n10_g_shangchuan"],
-		"tianqing": ["n11_start", "n11_beidu", "n11_gehe", "n11_a_xiaoxi", "n11_a_jianlou"],
-		"luoyang_s": ["l11_start", "l11_chengxia", "l11_xiuzheng", "l11_yingzhan", "l11_yulin", "l11_b_xunyu", "l11_a_weicheng"],
-		"menghu": ["m8_shankou", "m8_liniang", "m8_xianfeng", "m8_t_liu", "m8_bowang", "m8_xunchuan", "m8_yuye", "m8_xiangyang", "m8_t_hanshui"]}
-	var db := GameData.get_db()
-	for q in db.quests:
-		for fid in forks.get(q["id"], []):
-			var sq: Dictionary = q["squares"]
-			var preds := {}
-			for s in sq.values():
-				for n in s["next"]:
-					preds[n] = int(preds.get(n, 0)) + 1
-			var fights := 0
-			for first in sq[fid]["next"]:
-				var lane: Array = [first]
-				while sq[lane[-1]]["next"].size() == 1 and int(preds.get(sq[lane[-1]]["next"][0], 0)) == 1:
-					lane.append(sq[lane[-1]]["next"][0])
-				check(lane.size() >= 2, "%s/%s: lane %s is one square" % [q["id"], fid, first])
-				if lane.any(func(id): return sq[id]["type"] == "battle"):
-					fights += 1
-					if q["id"] in ["dongui", "jingxiang"]:
-						check(sq[lane[-1]].get("elite", false) or sq[lane[-1]].get("boss", false), "%s/%s: the fight lane ends on an elite (%s)" % [q["id"], fid, lane[-1]])
-			check_eq(fights, 1, "%s/%s: one lane fights, the other does not" % [q["id"], fid])
-
-
 func test_difficulty_lasts_the_whole_lap_but_danger_is_this_chapters() -> void:
 	## 难度 (what beating 吕布 raises) stays for every later chapter of the lap; 险 taken from a ？ event only lasts the chapter
 	var db := GameData.get_db()
@@ -1510,42 +774,6 @@ func test_enemy_strength_follows_one_formula_and_never_inverts() -> void:
 	check(absf(strong / weak - sqrt(2.0)) < 0.001, "strength x2 = power x2 (hp and attack x sqrt 2)")
 
 
-func test_mystery_events_are_dealt_up_front_and_resolved_by_chance() -> void:
-	var q: Dictionary = GameData.get_db().quests[4]
-	var s := SaveData.create()
-	Quests.begin(q, s, rng(11))
-	var ids: Array = Quests.view(q, s)["squares"].values().filter(func(sq): return sq["type"] == "mystery" and sq["event"] == "")
-	check(not ids.is_empty(), "the chapter has ？ squares")
-	var met: Array = []
-	for sq in ids:
-		check(s.events.has(sq["id"]), "%s already holds its event when the run begins" % sq["id"])
-		met.append(s.events.get(sq["id"], ""))
-	var distinct := {}
-	for m in met:
-		distinct[m] = true
-	check(distinct.size() >= mini(met.size(), 8), "events are not repeated within a run")
-	var ev: Dictionary = GameData.get_db().events["bad_thief"]
-	var r := rng(3)
-	for _i in 30:
-		var i := Quests.random_option(s, ev, r)
-		check(Quests.option_blocked(s, ev["options"][i]) == "", "chance never picks an option that cannot be taken")
-	var seen := {}
-	s.relics = ["x"] if false else s.relics
-	for _i in 60:
-		seen[Quests.random_option(SaveData.create(), GameData.get_db().events["bad_stampede"], r)] = true
-	check_eq(seen.size(), GameData.get_db().events["bad_stampede"]["options"].size(), "every outcome can come up")
-
-
-func test_each_run_deals_different_events() -> void:
-	var q: Dictionary = GameData.get_db().quests[4]
-	var layouts := {}
-	for seed_value in 10:
-		var s := SaveData.create()
-		Quests.begin(q, s, rng(seed_value))
-		layouts[JSON.stringify(s.events)] = true
-	check(layouts.size() > 6, "the same chapter plays out with different events each run (%d of 10 differ)" % layouts.size())
-
-
 func test_every_chapter_levels_the_lord_card_it_hands_out_on_its_own() -> void:
 	## the lord is split into many cards (cards.json lord_forms); each chapter hands one out and THAT card gains a level (a copy of its own)
 	var db := GameData.get_db()
@@ -1572,7 +800,6 @@ func test_every_chapter_levels_the_lord_card_it_hands_out_on_its_own() -> void:
 	check_eq(s.tier("lord"), 0, "…while the plain lord is still 铜")
 	var up := s.lord_with_form(second)
 	check(up["hp"] > lord_a["hp"], "the card's bonus grows with its own tier")
-
 
 
 func test_after_four_chapters_the_lord_holds_four_cards_all_level_one() -> void:
@@ -1613,30 +840,6 @@ func test_second_lap_chapter_one_levels_the_default_lord_card_to_two() -> void:
 			break
 
 
-func test_a_squares_own_pools_decide_what_its_chest_and_recruits_offer() -> void:
-	var db := GameData.get_db()
-	for qq in db.quests:
-		for s in qq["squares"].values():
-			for c in s["soldier_pool"]:
-				check(db.cards.has(c) and db.cards[c]["soldier"], "%s/%s: soldier_pool %s is a soldier card" % [qq["id"], s["id"], c])
-			for c in s["recruit_pool"]:
-				check(db.cards.has(c) and not db.cards[c]["soldier"], "%s/%s: recruit_pool %s is a general" % [qq["id"], s["id"], c])
-	var jx: Dictionary = db.quests.filter(func(x): return x["id"] == "jingxiang")[0]
-	var s := SaveData.create()
-	Quests.begin(jx, s)
-	s.square = "t_jx1"  # 袁术旧府: a chest of 宛城's own soldiers
-	s.resolved = false
-	var offer: Array = Quests.offer(jx, s, rng(1)).map(func(c): return c["id"])
-	check(not offer.is_empty() and offer.all(func(c): return jx["squares"]["t_jx1"]["soldier_pool"].has(c)), "the chest only holds this place's soldiers: %s" % [offer])
-	var yx: Dictionary = db.quests.filter(func(x): return x["id"] == "yuxi")[0]
-	var s2 := SaveData.create()
-	Quests.begin(yx, s2)
-	s2.square = "liukou3"  # 荒村·溃兵投军: a few of 孙坚's old guard
-	s2.resolved = false
-	var recruits: Array = Quests.offer(yx, s2, rng(2)).map(func(c): return c["id"])
-	check(not recruits.is_empty() and recruits.size() <= int(db.gacha["offer_size"]) and recruits.all(func(c): return yx["squares"]["liukou3"]["recruit_pool"].has(c)), "the recruits come from this place's own list: %s" % [recruits])
-
-
 func test_a_chapters_soldier_pool_holds_only_soldiers() -> void:
 	## the pool is picked by scope; generals share the scope but must never turn up in a soldier offer
 	var db := GameData.get_db()
@@ -1663,19 +866,6 @@ func test_a_chapters_lord_card_comes_with_its_first_square() -> void:
 	check(Quests.start_grant(q2, s2, rng(3)).is_empty(), "only once per chapter")
 
 
-func test_a_rolled_event_says_which_option_the_dice_landed_on() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	s.square = "road"
-	s.resolved = false
-	s.events = {"road": "zuoci"}
-	var ev: Dictionary = GameData.get_db().events["zuoci"]
-	var i := Quests.random_option(s, ev, rng(5))
-	Quests.choose_event(q, s, rng(5), i, true)
-	check(str(s.event_note[0]).begins_with("随机到了：") and str(s.event_note[0]).ends_with(str(ev["options"][i]["label"])), "the note names the option that was rolled: %s" % [s.event_note])
-
-
 func test_the_dice_land_when_the_square_is_reached_and_stay() -> void:
 	var q := quest(0)
 	var s := SaveData.create()
@@ -1688,136 +878,6 @@ func test_the_dice_land_when_the_square_is_reached_and_stay() -> void:
 	for seed_value in 10:
 		check_eq(Quests.rolled_option(s, ev, rng(seed_value)), first, "the same option every time the square is shown")
 	check(s.event_rolls.has("road"), "and it is kept in the save")
-
-
-func test_restarting_a_chapter_goes_back_to_how_it_began() -> void:
-	var s := SaveData.create()
-	Quests.begin(quest(0), s, rng(3))
-	Quests.complete(quest(0), s)
-	s.grant_card("danyang")
-	Quests.begin(quest(1), s, rng(3))
-	var before: Dictionary = s.snapshot()
-	s.square = "counter"
-	s.visited.append("counter")
-	s.take("sunce")
-	s.grant_card("danyang")
-	s.relics.append("bingfu")
-	s.merit += 5
-	s.run_records.append("董白：留下")
-	Quests.fail(quest(1), s, rng(1))  # a lost fight must not overwrite the snapshot
-	Quests.restart(s, rng(9))
-	check_eq(s.snapshot(), before, "every field back to the chapter's start, the dealt map included")
-	check(not s.has_card("sunce") and s.copies("danyang") == 1)
-
-
-func test_restarting_an_old_save_without_a_snapshot_returns_the_cards() -> void:
-	var s := SaveData.create()
-	Quests.begin(quest(0), s)
-	s.chapter_start = {}  # a save from before the snapshot existed
-	s.grant_card("danyang")
-	s.take("sunce")
-	Quests.restart(s, rng(0))
-	check(not s.has_card("sunce") and s.copies("danyang") == 0, "cards gained this chapter are given back")
-	check_eq(s.square, quest(0)["start"])
-
-
-func test_stepping_back_undoes_one_square_at_a_time() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s, rng(3))
-	Quests.resolve(q, s, rng(0), 0)
-	var at_start: Dictionary = s.snapshot()
-	Quests.move(q, s, "wake")
-	Quests.resolve(q, s, rng(0), 0)
-	var at_wake: Dictionary = s.snapshot()
-	Quests.move(q, s, "bandage")
-	Quests.resolve(q, s, rng(0), 0)
-	s.grant_card("danyang")
-	s.relics.append("bingfu")
-	check_eq(s.steps.size(), 2)
-	s.rewind_step()
-	check_eq(s.snapshot(), at_wake, "back on 「wake」 as it was, before stepping on")
-	s.rewind_step()
-	check_eq(s.snapshot(), at_start, "and once more, to the first square")
-	check(s.steps.is_empty())
-	print("  snapshot size: %d bytes" % JSON.stringify(at_wake).length())
-
-
-func test_stepping_back_onto_a_made_choice_lets_you_choose_again() -> void:
-	## a choose square moves on by itself once picked: 重返上一格 from there lands before the pick, not on the made choice
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar", "raid"])
-	Quests.move(q, s, "plan")
-	Quests.resolve(q, s, rng(0), 1)
-	Quests.move(q, s, "zy_lure")
-	Quests.step_back(s)
-	check(s.square == "plan" and not s.resolved, "back on 「plan」 with its options open again")
-	check(not s.choices.has("plan") and not s.run_records.has("定计：周瑜调虎离山"), "the old pick is undone")
-	Quests.resolve(q, s, rng(0), 0)
-	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["sc_gate"])
-	Quests.move(q, s, "sc_gate")
-	Quests.step_back(s)
-	check(s.square == "plan" and not s.resolved, "and again, after the other pick")
-	Quests.step_back(s)
-	check_eq(s.square, "raid", "once more goes past the choice to the square before it")
-
-
-func test_stepping_back_reopens_the_xunyou_or_huangzhong_choice() -> void:
-	## 第五章 刘表来袭: 听荀攸 / 听黄忠 — the pick (and its 宝物) is undone and can be made the other way
-	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "jingxiang")[0]
-	var s := SaveData.create()
-	s.replay = "jingxiang"  # so current_quest finds this chapter without the earlier ones' flags
-	Quests.begin(q, s)
-	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["jx_diaochan", "t_jx1", "t_jx1_b", "jx_laixi"])
-	walk_to(q, s, ["jx_plan_xun"])
-	check(s.relics.has("xunyou_qizi"))
-	Quests.step_back(s)
-	check(s.square == "jx_laixi" and not s.resolved, "one step back reopens the choice")
-	check(not s.relics.has("xunyou_qizi") and not s.run_records.has("议事：荀攸示弱诱敌"))
-	Quests.resolve(q, s, rng(0), 1)
-	check_eq(Quests.next_options(q, s).map(func(x): return x["id"]), ["jx_plan_huang"])
-
-
-func test_a_save_left_on_a_made_choice_can_reopen_it() -> void:
-	## an older build stepped back onto the made pick and saved there: the map's 「重新选择」 reopens it
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar", "raid"])
-	Quests.move(q, s, "plan")
-	Quests.resolve(q, s, rng(0), 1)
-	Quests.move(q, s, "zy_lure")
-	s.rewind_step()  # the old 重返上一格
-	check(s.square == "plan" and s.resolved, "sitting on the made choice")
-	Quests.reopen_choice(s)
-	check(s.square == "plan" and not s.resolved, "its options are open again")
-	check(not s.run_records.has("定计：周瑜调虎离山"), "the old pick is undone")
-
-
-func test_stepping_back_onto_the_first_square_choice_restarts_it() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	Quests.resolve(q, s, rng(0), 0)
-	Quests.move(q, s, "wake")
-	Quests.step_back(s)
-	check(s.square == "era" and not s.resolved, "the birth choice is open again")
-
-
-func test_a_lost_fight_drops_its_step() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s)
-	Quests.resolve(q, s, rng(0), 0)
-	walk_to(q, s, ["wake", "bandage", "village", "sc_home", "boar"])
-	var n := s.steps.size()
-	Quests.fail(q, s)
-	check_eq(s.steps.size(), n - 1, "fail already stepped back: one step fewer to undo")
 
 
 func test_the_han_army_soldiers_only_come_from_fighting_liu_bei() -> void:
@@ -1882,24 +942,6 @@ func test_gongsun_zan_like_sun_jian_is_never_drawn() -> void:
 	check(db.card_chapters.get("gongsunzan", []).is_empty(), "no chapter hands 公孙瓒 out")
 
 
-func test_a_mystery_square_picks_its_pool_first_then_an_event() -> void:
-	## battle.event_sources: chapter-own, route and universal events each get a share of the ？ squares
-	var db := GameData.get_db()
-	var q: Dictionary = db.quests.filter(func(qq): return qq["id"] == "xuzhou")[0]
-	var pool: Array = Quests.pools(q, SaveData.create())["event_pool"]
-	var seen := {"chapter": 0, "route": 0, "universal": 0}
-	var r := RandomNumberGenerator.new()
-	r.seed = 7
-	for i in 600:
-		seen[Quests.event_source(q, Quests.pick_event(q, pool, r))] += 1
-	var w: Dictionary = db.battle["event_sources"]
-	var total := float(w["chapter"] + w["route"] + w["universal"])
-	for k in seen:
-		check(abs(seen[k] / 600.0 - float(w[k]) / total) < 0.08, "%s share %d/600 near its weight" % [k, seen[k]])
-	var only_universal: Array = pool.filter(func(e): return Quests.event_source(q, e) == "universal")
-	check_eq(Quests.event_source(q, Quests.pick_event(q, only_universal, r)), "universal", "an empty pool drops out")
-
-
 func test_a_chapter_hands_out_only_its_own_soldiers_and_the_routes_public_ones() -> void:
 	## a soldier with a faction, or one some chapter hands out, never turns up in another chapter (chests, event 「soldier」 / offers from the pool)
 	var db := GameData.get_db()
@@ -1933,58 +975,10 @@ func test_a_bad_end_lists_no_side_stories() -> void:
 	check(Quests.side_stories(s).is_empty(), "no ？小故事 after a bad end: %s" % [Quests.side_stories(s).map(func(x): return x["id"])])
 
 
-func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> void:
-	var db := GameData.get_db()
-	check(db.side_stories.size() >= 20, "every chapter has ？小故事")
-	var s := SaveData.create()
-	s.flags = ["出生：江东富春"]
-	check(Quests.side_stories(s).is_empty(), "nothing before a chapter is done")
-	var south := Quests.side_stories(s, "prologue")
-	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine", "s_i_sewing"]), "the south birth gets only the south prologue stories")
-	s.quests_cleared = ["prologue"]
-	s.grant_card("sunce")
-	s.merit = 9
-	check(not Quests.open_side(s, "s_jiujiu")["ok"], "10 战功 to open: 9 is not enough")
-	check_eq(Quests.side_unread(s), south.size())
-	s.merit = 12
-	var before := s.copies("sunce")
-	var r := Quests.open_side(s, "s_jiujiu")
-	check(r["ok"] and r["got"] != "", "opened: %s" % r)
-	check_eq(s.merit, 2)
-	check_eq(s.copies("sunce"), before + 2, "九九歌 点化 孙策 +2")
-	check_eq(Quests.open_side(s, "s_jiujiu")["got"], "", "a re-read in its chapter is free and gives nothing")
-	check_eq(s.merit, 2)
-	s.merit = 10
-	Quests.open_side(s, "s_firstwine")  # 酒囊
-	check(s.kept_relics.has("jiunang") and s.relics.has("jiunang"), "a 宝物 stays for the rest of the 周目")
-
-
-func test_a_held_relic_pays_the_cost_back() -> void:
-	var s := SaveData.create()
-	s.flags = ["出生：江东富春"]
-	s.quests_cleared = ["prologue"]
-	s.relics = ["jiunang"]
-	s.kept_relics = ["jiunang"]
-	s.merit = 10
-	Quests.open_side(s, "s_firstwine")
-	check_eq(s.merit, 10, "already had 酒囊: the 10 战功 come back")
-
-
 func test_every_side_story_has_a_reward() -> void:
 	for list in GameData.get_db().side_stories.values():
 		for st in list:
 			check(Quests.side_reward_text(st) != "", "%s: no reward" % st["id"])
-
-
-func test_side_story_portraits_and_requires_exist() -> void:
-	var db := GameData.get_db()
-	var recs := FileAccess.get_file_as_string("res://data/story.json")
-	for list in db.side_stories.values():
-		for st in list:
-			for key in st.get("portraits", []):
-				check(FileAccess.file_exists("res://data/art/portraits/%s.jpg" % key) or Kit.portrait(key, 0.75, 5.0) != null, "%s: portrait %s" % [st["id"], key])
-			for f in ((st["requires"] if st.get("requires") is Array else [st.get("requires", "")]) + (st["unless"] if st.get("unless") is Array else [st.get("unless", "")])):
-				check(f == "" or recs.contains("\"%s\"" % f), "%s: no story line records %s" % [st["id"], f])
 
 
 func test_a_side_story_can_hand_over_a_card() -> void:
@@ -2221,7 +1215,6 @@ func test_the_hero_himself_closes_the_north_and_his_lord_card_waits_for_guandu()
 	check(s.lord_forms.has("lord_north_snow"), "初雪 hands over the lord card 主公·初雪")
 
 
-
 func test_wenji_page_and_card() -> void:
 	var s := SaveData.create()
 	s.run_records = ["出生：江东富春", "董白：留下"]
@@ -2357,23 +1350,6 @@ func test_upgrade_never_offers_a_soldier() -> void:
 	check(s.upgradable().has("sunce"), "the general is still there")
 
 
-func test_a_chapters_events_and_outcomes_stay_the_same_when_it_is_restarted() -> void:
-	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "prologue")[0]
-	var s := SaveData.create()
-	Quests.begin(q, s, rng(1))
-	var events: Dictionary = s.events.duplicate()
-	check(not events.is_empty(), "the chapter has ？ squares with events")
-	for seed_value in [2, 3, 4]:
-		Quests.begin(q, s, rng(seed_value))
-		check_eq(s.events, events, "restarting deals the same events")
-	var sid: String = events.keys()[0]
-	var ev: Dictionary = GameData.get_db().events[events[sid]]
-	s.square = sid
-	var a := Quests.rolled_option(s, ev, rng(10))
-	s.event_rolls = {}
-	check_eq(Quests.rolled_option(s, ev, rng(99)), a, "…and the dice land the same")
-
-
 func test_ssr_lord_cards_come_only_from_their_fixed_chapter() -> void:
 	var db := GameData.get_db()
 	var ssr: Array = db.lord_forms.keys().filter(func(f): return db.lord_forms[f]["rarity"] == "SSR" and f in db.lord_form_grants)
@@ -2396,101 +1372,3 @@ func test_ssr_lord_cards_come_only_from_their_fixed_chapter() -> void:
 		var s2 := SaveData.create()
 		s2.flags = ["出生：冀州无极"] if north else []
 		check_eq(Quests.grant_lord_form(q2, s2, rng), db.lord_form_fixed[qid], "%s always gives its SSR card" % qid)
-
-
-func test_gate_is_one_rule_everywhere() -> void:
-	## Quests.gate: requires = every line holds; unless = hidden only when every line holds (第五章 恨海 squares)
-	var s := SaveData.new()
-	s.flags = ["甲"]
-	check(Quests.gate({"requires": "甲"}, s), "requires one line")
-	check(not Quests.gate({"requires": ["甲", "乙"]}, s), "requires needs every line")
-	check(not Quests.gate({"unless": "甲"}, s), "unless one line")
-	check(Quests.gate({"unless": ["甲", "乙"]}, s), "unless a list hides only when all hold")
-	s.run_records = ["乙"]
-	check(not Quests.gate({"unless": ["甲", "乙"]}, s), "this run's records count")
-	check(Quests.gate({"unless": ["甲", "乙"]}, s, false), "story flags only")
-	check(Quests.gate({}, s), "no gate = open")
-
-
-func _plain(d: Variant) -> Variant:
-	return JSON.parse_string(JSON.stringify(d))  # ints and floats compare alike after a trip through a file
-
-
-func test_steps_store_only_what_changed_and_survive_a_save_file() -> void:
-	var q := quest(0)
-	var s := SaveData.create()
-	Quests.begin(q, s, rng(3))
-	Quests.resolve(q, s, rng(0), 0)
-	var before: Array = []
-	for i in 12:
-		var opts: Array = Quests.next_options(Quests.view(q, s), s)
-		if opts.is_empty():
-			break
-		before.append(_plain(s.snapshot()))
-		Quests.move(q, s, opts[0]["id"])
-		Quests.resolve(q, s, rng(0), 0)
-	var full := JSON.stringify(before[0]).length() * before.size()
-	var kept := JSON.stringify(s.steps).length()
-	check(before.size() >= 8, "walked %d squares" % before.size())
-	check(kept * 4 < full, "steps keep only the changes: %d bytes vs %d for whole snapshots" % [kept, full])
-	var path := "user://test_steps.json"
-	s.write(path)
-	var back := SaveData.read(path)
-	DirAccess.remove_absolute(path)
-	for i in range(before.size() - 1, -1, -1):
-		back.rewind_step()
-		check_eq(_plain(back.snapshot()), before[i], "step %d back, after a save file" % i)
-	check(back.steps.is_empty())
-
-
-func test_a_cut_off_save_falls_back_to_its_tmp() -> void:
-	var s := SaveData.create()
-	s.merit = 7
-	var path := "user://test_cut.json"
-	s.write(path)
-	DirAccess.rename_absolute(path, path + ".tmp")  # as if the game died between writing the .tmp and renaming it
-	var back := SaveData.read(path)
-	DirAccess.remove_absolute(path + ".tmp")
-	check(back != null and back.merit == 7, "the .tmp is read when the save itself is missing")
-
-
-func test_data_has_no_schema_errors() -> void:
-	## data/schema.json: every reference and enum in the game data, all failures listed at once
-	var errs: Array = GameData.check_schema()
-	for e in errs.slice(0, 40):
-		print("  data: ", e)
-	check(errs.is_empty(), "%d data error(s), see above" % errs.size())
-
-
-func test_the_schema_checker_catches_each_kind_of_mistake() -> void:
-	var root := {"cards": {"a": {"troop": "x", "skills": ["s1", "nope"]}}, "skills": {"s1": {}}, "troops": {"x": {}},
-		"list": [{"id": 1}, {"id": 1}], "story": {"r": {"reward": {"merit": 3}}}}
-	var errs := Schema.check(root, {"rules": [
-		{"refs": "cards.*.skills.*", "to": "skills.@keys"},
-		{"enum": "cards.*.troop", "values": ["y"]},
-		{"unique": "list.*.id"},
-		{"forbid": "story.*.reward.merit"},
-		{"each": "cards.*", "required": "name"},
-		{"refs": "cards.*.typo", "to": "skills.@keys"},
-		{"refs": "cards.*.typo2", "to": "skills.@keys", "optional": true}]})
-	check_eq(errs.size(), 6, "one error per rule but the optional one: %s" % str(errs))
-	check(str(errs[0]).contains("cards.a.skills[1] = nope"), "the error says where: %s" % str(errs[0]))
-
-
-func test_gate3_answers_maybe_only_when_it_cannot_tell() -> void:
-	var known := {"甲": 1, "乙": 0}
-	var truth := func(line: String) -> int: return known.get(line, -1)
-	check_eq(Quests.gate3({"requires": "甲"}, truth), 1)
-	check_eq(Quests.gate3({"requires": ["甲", "丙"]}, truth), -1, "one line unknown")
-	check_eq(Quests.gate3({"requires": ["乙", "丙"]}, truth), 0, "one line known false decides it")
-	check_eq(Quests.gate3({"unless": "乙"}, truth), 1)
-	check_eq(Quests.gate3({"unless": ["甲", "丙"]}, truth), -1, "hidden only if 丙 also holds")
-	check_eq(Quests.gate3({"unless": ["甲", "乙"]}, truth), 1, "乙 is known false: never hidden")
-	check_eq(Quests.gate3({"requires": "丙", "unless": "甲"}, truth), 0, "known hidden beats an unknown requires")
-
-
-func test_the_route_comes_from_the_birth_lines_in_story_json() -> void:
-	var s := SaveData.new()
-	check_eq(s.route(), "south", "no birth yet: the first route")
-	s.run_records = [GameData.get_db().routes["north"]]
-	check(s.is_north() and s.birth_route() == "north")
