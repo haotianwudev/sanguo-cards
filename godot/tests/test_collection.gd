@@ -535,7 +535,6 @@ func test_north_chapters_one_to_three_draw_north_spear_cards() -> void:
 
 func test_the_two_routes_recruit_from_their_own_casts() -> void:
 	## 南北对称、其余分开: a general's scope keeps the 江东 cast out of the north's offers and the 河北 cast out of the south's
-	var db := GameData.get_db()
 	var south := SaveData.create()
 	var north := SaveData.create()
 	north.flags = ["出生：冀州无极"]

@@ -358,7 +358,6 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 	## troop's signature; "troop_skills": false on either = its own `skills` only); a general has the plain move plus its own signature, or the troop's signature if it has
 	## none ("troop_skills": false = own skills only).
 	var c: Dictionary = cards[card_id]
-	var t: Dictionary = troops[c["troop"]]
 	var kit: Dictionary = kit_of(c)
 	var sk: Array = []
 	if c["troop"] == "lord":
@@ -378,7 +377,7 @@ func build_fighter(card_id: String, mult := 1.0) -> Dictionary:
 		"hp": int(round(c["hp"] * mult)), "at": int(round(c["at"] * mult)), "base_hp": c["hp"], "base_at": c["at"], "skills": sk, "rarity": c["rarity"], "voice": c.get("voice", "")}
 
 
-func build_lord(lord_name: String, mult := 1.0, north := false, form := "", forms: Array = [], form_mult := -1.0) -> Dictionary:
+func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form_mult := -1.0) -> Dictionary:
 	## "id" stays "lord" everywhere (card/collection/leader lookups all key on it); "person" carries the
 	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]

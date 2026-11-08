@@ -44,7 +44,6 @@ static func button(pos: Vector2, on_change: Callable, also_quest := "") -> SideB
 	b.on_change = on_change
 	b.text = "？ 小故事"
 	b.add_theme_font_size_override("font_size", Kit.FONT_BODY + 2)
-	var base := Kit.c("gold")
 	var s := Kit.button_styles("gold")  # a gold plaque like the other main buttons, kept low (≤ 44 px) so it clears the 整备 panels under it
 	for st in ["normal", "hover", "pressed", "disabled"]:
 		var sb: StyleBoxFlat = s[st].duplicate()

@@ -5,7 +5,6 @@ extends Control
 signal closed
 
 var in_battle := false
-var _box: VBoxContainer
 var _page: Control
 
 

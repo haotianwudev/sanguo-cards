@@ -17,6 +17,9 @@ func _ready() -> void:
 		if a.begins_with("--"):
 			var kv := a.substr(2).split("=", true, 1)
 			args[kv[0]] = kv[1] if kv.size() > 1 else ""
+	if args.has("check-scripts"):  # tools/check.sh: every script compiles (see ScriptCheck)
+		get_tree().quit(ScriptCheck.run())
+		return
 	if args.has("demo"):
 		Demos.run(args["demo"])
 		if args.has("skip") and args["demo"] != "firststep":  # --skip on any map demo: the story played through, its options showing

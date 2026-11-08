@@ -677,12 +677,11 @@ func lord_with_form(form: String) -> Dictionary:
 	## levelled like any other card: that card's own tier scales him and its bonus (the plain lord card's level = lord_copies)
 	var db := _db()
 	var card_mult := float(db.gacha["tiers"][form_tier(form)]["mult"])
-	return db.build_lord(lord_name, card_mult, is_north(), form, [form] if form != "" else [], card_mult)
+	return db.build_lord(lord_name, card_mult, is_north(), form, card_mult)
 
 
 func lord() -> Dictionary:
 	## the lord's fighter at its tier; the north route starts in a different host body (own hair, no armor)
-	var db := _db()
 	return lord_with_form(lord_form())
 
 

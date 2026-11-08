@@ -195,7 +195,6 @@ static func run(name: String) -> void:
 		"lordreveal":  # the lord-card moment a cleared chapter gives: --demo=lordreveal [--dupe]
 			Game.save.flags = ["出生：冀州无极"]
 			var rv := LordReveal.new()
-			var forms: Array = Game.save.route_lord_forms()
 			rv.form = "lord_north_silver" if Game.save.is_north() else "lord_south_armor"
 			Game.save.lord_forms.append(rv.form)
 			rv.dupe = OS.get_cmdline_user_args().has("--dupe")

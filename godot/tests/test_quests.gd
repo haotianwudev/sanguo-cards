@@ -209,7 +209,7 @@ func test_famous_weapons() -> void:
 	b.act(0, "tuji")
 	plain.act(0, "tuji")
 	check(hp0 - b.enemy["hp"] > (hp1 - plain.enemy["hp"]) * 1.3, "七星宝刀 adds half again to the first hit")
-	var d1 := b.defend()
+	b.defend()
 	check(b.take_events().any(func(e): return e["t"] == "defend" and e["cut"] > 0.3), "八阵图 deepens defend")
 
 
@@ -635,7 +635,6 @@ func test_endings_are_config_and_every_story_ending_is_in_it() -> void:
 
 
 func test_the_book_tracks_which_endings_were_reached() -> void:
-	var db := GameData.get_db()
 	var s := SaveData.create()
 	check_eq(s.endings_reached(), [], "none yet")
 	s.flags = ["结局二 · 覆巢", "董白：留下"]

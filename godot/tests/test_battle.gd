@@ -1175,7 +1175,7 @@ func test_every_ssr_has_three_skills_and_a_5_ap_ultimate() -> void:
 		var f: Dictionary
 		if c.has("lord_form"):
 			var fid: String = c["lord_form"]
-			f = db.build_lord("阿明", 1.0, db.lord_forms[fid]["route"] == "north", fid, [fid])
+			f = db.build_lord("阿明", 1.0, db.lord_forms[fid]["route"] == "north", fid)
 		else:
 			f = db.build_fighter(cid)
 		check_eq(f["skills"].size(), 3, cid + " has three skills")

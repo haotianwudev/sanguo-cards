@@ -37,3 +37,14 @@ textures/canvas_textures/default_texture_filter=3
 texture={
 "mipmaps/generate": true
 }
+
+[debug]
+
+gdscript/warnings/unused_variable=2
+gdscript/warnings/unused_local_constant=2
+gdscript/warnings/unused_private_class_variable=2
+gdscript/warnings/unused_parameter=2
+gdscript/warnings/unreachable_code=2
+gdscript/warnings/standalone_expression=2
+gdscript/warnings/redundant_await=2
+gdscript/warnings/unassigned_variable=2

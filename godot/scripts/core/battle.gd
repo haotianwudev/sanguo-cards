@@ -491,7 +491,7 @@ func _land(d: int, kind: String, pierce: bool) -> int:
 			enemy["guard"] = {}
 		return dealt
 	_absorbed = 0
-	if shield_takes(kind, pierce):  # 护盾 (user rule): a 兵刃 blow that can't break it is swallowed whole; one that breaks it lands in full, as if no shield
+	if shield_takes(kind):  # 护盾 (user rule): a 兵刃 blow that can't break it is swallowed whole; one that breaks it lands in full, as if no shield
 		var s: Dictionary = enemy["shield"]
 		if d >= int(s["hp"]):
 			s["hp"] = 0
@@ -508,7 +508,7 @@ func _land(d: int, kind: String, pierce: bool) -> int:
 	return d
 
 
-func shield_takes(kind: String, pierce: bool) -> bool:
+func shield_takes(kind: String) -> bool:
 	## 护盾: every 兵刃 blow (穿甲, 弓兵 and 大招 included) meets it; only 谋略 goes over it (user rule 2026-11-07)
 	return not enemy["shield"].is_empty() and kind == "attack"
 
@@ -797,7 +797,7 @@ func _split_blow(base: float, mult: float, share: float, pierce: bool, crit_mult
 	var da := int(round(_dmg(base * (1.0 - share) * mult, "attack", pierce) * crit_mult))
 	var dm := int(round(_dmg(base * share * (mult + float(mods.get("magic", 0.0)) + magic_extra), "magic", pierce) * crit_mult))
 	var on_guard := guard_takes("attack", pierce)
-	var shielded := not on_guard and shield_takes("attack", pierce)
+	var shielded := not on_guard and shield_takes("attack")
 	var boss_part := dm + (0 if on_guard else da)
 	if boss_part > enemy["hp"]:
 		overkill = float(boss_part - enemy["hp"]) / enemy["max_hp"]
@@ -879,7 +879,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 				var target_name: String = str(enemy["guard"]["name"]) if on_guard else ename
 				if not on_guard and d > enemy["hp"]:
 					overkill = float(d - enemy["hp"]) / enemy["max_hp"]
-				var shielded := not on_guard and shield_takes(kind, pierce)
+				var shielded := not on_guard and shield_takes(kind)
 				d = _land(d, kind, pierce)
 				var soaked := _absorbed if shielded else 0
 				combo += 1

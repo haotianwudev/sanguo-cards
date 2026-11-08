@@ -1357,7 +1357,7 @@ func _ev_loot(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.3).timeout
 
 
-func _ev_burn_on(ev: Dictionary) -> void:
+func _ev_burn_on(_ev: Dictionary) -> void:
 	Sfx.play("burn")
 	BattleFx.scale = _enemy_fx_scale()
 	BattleFx.flame_lick(self, _enemy_rect())
@@ -1505,12 +1505,12 @@ func _ev_ap(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.25).timeout
 
 
-func _ev_enemy_turn(ev: Dictionary) -> void:
+func _ev_enemy_turn(_ev: Dictionary) -> void:
 	_enemy_shouted_this_turn = false
 	await _banner("%s 的行动" % b.enemy["data"]["name"], Kit.c("red"))
 
 
-func _ev_enemy_stunned(ev: Dictionary) -> void:
+func _ev_enemy_stunned(_ev: Dictionary) -> void:
 	Kit.float_text(self, _enemy_center(), "眩晕中，无法行动", Kit.c("purple"), 32)
 	await get_tree().create_timer(0.45).timeout
 
@@ -1520,7 +1520,7 @@ func _ev_enemy_move(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.18).timeout
 
 
-func _ev_enemy_burn_party(ev: Dictionary) -> void:
+func _ev_enemy_burn_party(_ev: Dictionary) -> void:
 	Sfx.play("burn")
 	BattleFx.flame_lick(self, _party_rect())
 	Kit.float_text(self, _party_center(), "我军灼烧！", Kit.c("red"), 38)
@@ -1605,7 +1605,7 @@ func _ev_enemy_hit(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.35).timeout
 
 
-func _ev_enemy_charge(ev: Dictionary) -> void:
+func _ev_enemy_charge(_ev: Dictionary) -> void:
 	if not _enemy_shouted_this_turn:
 		Sfx.voice(_enemy_voices(), ["roar", "attack"])
 		_enemy_shouted_this_turn = true
@@ -1616,7 +1616,7 @@ func _ev_enemy_charge(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.45).timeout
 
 
-func _ev_enemy_rage(ev: Dictionary) -> void:
+func _ev_enemy_rage(_ev: Dictionary) -> void:
 	if not _enemy_shouted_this_turn:
 		Sfx.voice(_enemy_voices(), ["roar", "attack"])
 		_enemy_shouted_this_turn = true
@@ -1666,7 +1666,7 @@ func _ev_charge_break(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.2).timeout
 
 
-func _ev_stance_on(ev: Dictionary) -> void:
+func _ev_stance_on(_ev: Dictionary) -> void:
 	Sfx.play("guard")
 	BattleFx.scale = _enemy_fx_scale()
 	BattleFx.counter_stance(self, _enemy_rect())
@@ -1743,7 +1743,7 @@ func _ev_slain(ev: Dictionary) -> void:
 	_refresh()
 
 
-func _ev_mark_miss(ev: Dictionary) -> void:
+func _ev_mark_miss(_ev: Dictionary) -> void:
 	Sfx.play("guard")
 	Kit.float_text(self, _party_center() + Vector2(0, -50), "扑空！", Kit.c("gold"), 44)
 	await get_tree().create_timer(0.35).timeout
@@ -1757,7 +1757,7 @@ func _ev_seal_on(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.4).timeout
 
 
-func _ev_seal_off(ev: Dictionary) -> void:
+func _ev_seal_off(_ev: Dictionary) -> void:
 	_refresh()
 
 
@@ -1800,7 +1800,7 @@ func _ev_shield_regen(ev: Dictionary) -> void:
 	_refresh()
 
 
-func _ev_shield_down(ev: Dictionary) -> void:
+func _ev_shield_down(_ev: Dictionary) -> void:
 	Sfx.play("break")
 	Kit.float_text(self, _enemy_center() + Vector2(0, 30), "护盾碎了！", Kit.c("gold"), 42)
 	BattleFx.burst(self, _enemy_center(), Color(0.8, 0.88, 1.0), 16, 14.0, 170.0, 4.0, 0.3)

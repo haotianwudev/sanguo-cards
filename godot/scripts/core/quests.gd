@@ -570,7 +570,6 @@ static func offer_rerollable(q: Dictionary, save: SaveData) -> bool:
 	## 三顾茅庐 on a 招贤 square dealt at random: one 重摆 button (a chapter's short list instead comes round again
 	## after the pick — see fixed_list())
 	q = view(q, save)
-	var sq := here(q, save)
 	if true:  # 三顾茅庐 no longer deals again: it lets you keep two (user rule 2026-11-07)
 		return false
 	return fixed_list(q, save).is_empty()

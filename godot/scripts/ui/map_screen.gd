@@ -414,7 +414,7 @@ func _type_color(s: Dictionary) -> Color:
 	return Kit.c(_fixed_event(s).get("color", names[_kind(s)]))
 
 
-func _style_square(b: Button, s: Dictionary, state: String) -> void:
+func _style_square(b: Button, state: String) -> void:
 	var empty_sb := StyleBoxEmpty.new()
 	for st in ["normal", "hover", "pressed", "disabled", "focus"]:
 		b.add_theme_stylebox_override(st, empty_sb)
@@ -443,7 +443,6 @@ func _refresh() -> void:
 		_show_end()
 		return
 	_title.text = Quests.title(q, save) + ("　（重玩 · 进阶 +%d%%）" % int(round(save.danger * float(GameData.get_db().battle["danger_step"]) * 100)) if save.replay != "" else "")
-	var party := save.party_leaders()
 	var hp_max := Quests.party_max(save)
 	var hp := maxi(1, hp_max - save.damage)
 	_hp_bar.max_value = hp_max
@@ -502,7 +501,6 @@ func _refresh() -> void:
 	_update_progress(ahead)
 
 	for sid in _nodes:
-		var s: Dictionary = q["squares"][sid]
 		var b: Button = _nodes[sid]
 		var state := "open"
 		if sid == save.square:
@@ -513,7 +511,7 @@ func _refresh() -> void:
 			state = "visited"
 		elif not ahead.has(sid):
 			state = "closed"
-		_style_square(b, s, state)
+		_style_square(b, state)
 		if _ghosts.has(sid):
 			b.modulate = Color(0.5, 0.5, 0.55, 0.55)
 		b.disabled = state != "reachable"
@@ -797,7 +795,6 @@ func _clear_sheet() -> void:
 func _show_square(s: Dictionary) -> void:
 	_clear_sheet()
 	var save := Game.save
-	var db := GameData.get_db()
 	var ev: Dictionary = {}
 	if s["type"] == "mystery" and s["id"] == save.square:
 		ev = Quests.event_here(q, save, Game.rng)
@@ -844,7 +841,7 @@ func _show_square(s: Dictionary) -> void:
 		_story_read = ""
 	if _story_read != "":  # back from 整备 (or the party screen) with the lines already read: straight to the options
 		talking = false
-	if (talking and _any_face(Kit.speakers(raw_lines, s.get("portraits", [])))) or (fight_ahead and _enemy_has_face(s)):
+	if (talking and _any_face(Kit.speakers(raw_lines, s.get("portraits", [])))) or (fight_ahead and _enemy_has_face()):
 		# a face for whoever is speaking, changed line by line (before a fight: the enemy's at the end); no faces drawn → no frame
 		_make_face_slot(outer, Vector2(128, 128) if art != null else Vector2(172, 230))
 	outer.add_child(col)
@@ -1079,7 +1076,7 @@ func _any_face(keys: Array) -> bool:
 	return false
 
 
-func _enemy_has_face(s: Dictionary) -> bool:
+func _enemy_has_face() -> bool:
 	var sc: Dictionary = GameData.get_db().scenarios.get(Quests.battle_here(q, Game.save).get("battle", ""), {})
 	return not sc.is_empty() and Kit.enemy_portrait_key(GameData.get_db().enemies[sc["enemy"]]) != ""
 
@@ -1623,7 +1620,7 @@ func _open_relics() -> void:
 	o.relic_ids = Game.save.offer.duplicate()
 	o.set_anchors_preset(Control.PRESET_FULL_RECT)
 	o.picked.connect(func(i):
-		var got := Quests.take_relic(Game.save, o.relic_ids[i])
+		Quests.take_relic(Game.save, o.relic_ids[i])
 		Game.persist()
 		var taken: String = o.relic_ids[i]
 		o.queue_free()
@@ -1657,7 +1654,6 @@ func _complete() -> void:
 	## A bad end or the final end gets the same settlement page with that ending's symbolic picture and no ？小故事.
 	if get_node_or_null("Recap") != null:
 		return
-	var db := GameData.get_db()
 	_recap_qid = q.get("_raw", q)["id"]
 	_recap_r = Quests.recap(Game.save)
 	_recap_earned = Quests.pay_merit(q, Game.save)

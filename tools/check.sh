@@ -1,6 +1,6 @@
 #!/bin/sh
 # Everything that must hold before a push, in one place (CI runs exactly this):
-#   story.json format → texture import policy → Godot import → tests (data schema included) → every generated doc up to date.
+#   story.json format → texture import policy → Godot import → every script compiles → tests (data schema included) → every generated doc up to date.
 #     sh tools/check.sh            # from the repo root; Godot from $SANGUO_GODOT (default: the path every skill uses)
 #     sh tools/check.sh --fast     # skip the Godot import (nothing new under godot/data/art)
 # Exits non-zero on the first failure, saying which step.
@@ -21,6 +21,12 @@ if [ "${1:-}" != "--fast" ]; then
 	timeout 1200 "$G" --headless --path godot --import >/dev/null 2>&1
 	"$PY" tools/import_policy.py --check || fail "import policy after import (new art came in: python tools/import_policy.py --write)"
 fi
+
+echo "== every script compiles"
+out=$(timeout 300 "$G" --headless --path godot -- --check-scripts 2>&1)
+code=$?
+echo "$out" | grep "check-scripts"
+[ $code -eq 0 ] || fail "scripts (one does not compile, or breaks a warning project.godot treats as an error)"
 
 echo "== tests"
 LOG="${TMPDIR:-/tmp}/sanguo-tests.log"
