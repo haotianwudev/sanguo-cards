@@ -83,7 +83,14 @@ def walk(effs, eid, scope):
 
 for eid, ev in story["events"].items():
     for o in ev.get("options", []):
-        walk(o.get("effects", []), eid, ev.get("scope", ""))
+        for k in ("effects", "win", "lose"):  # win / lose: what a battle option pays after the fight (王悦 joins in 压寨's win)
+            walk(o.get(k, []), eid, ev.get("scope", ""))
+
+side = json.loads((ROOT / "godot/data/side_stories.json").read_text("utf-8"))
+for qid, stories in side["after"].items():  # ？小故事 rewards (the debug tool's 小故事给卡)
+    for st in stories:
+        for c in st.get("reward", {}).get("cards", []):
+            event_offer[c].add("小故事「%s」（%s）" % (st.get("title", st["id"]), qid))
 
 ch_title = {k: t for k, t, *_ in chapters}
 order = {k: i for i, (k, *_) in enumerate(chapters)}
@@ -165,7 +172,7 @@ for rt in ("南", "北", "两线"):
     for cid in sorted(gs, key=lambda k: (rk.get(generals[k]["rarity"], 9), min([order[x] for x in src[k]] or [99]), k)):
         c = generals[cid]
         out.append("| `%s` | %s | %s | %s | %s | %s |" % (cid, c["name"], c["rarity"], troop_name(c), "是" if c.get("pool", True) else "剧情限定",
-                                                     "<br>".join(where(cid, False) + ["事件「%s」" % x for x in sorted(event_offer.get(cid, []))])
+                                                     "<br>".join(where(cid, False) + [x if x.startswith("小故事") else "事件「%s」" % x for x in sorted(event_offer.get(cid, []))])
                                                      or ("卡池" if c.get("pool", True) else "—（拿不到）")))
     out.append("")
 
