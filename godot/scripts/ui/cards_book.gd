@@ -14,11 +14,7 @@ var _cur_scope := "all"  # all / universal / south / north
 var _cur_type := "all"   # all / SSR / SR / R / soldier
 var _cleared_ids: Array = []
 
-var _dragging := false
-var _touch_start := Vector2.ZERO
-var _last_pos := Vector2.ZERO
-var _velocity := 0.0
-var _last_time := 0.0
+var _kin: KineticScroll  # drag / momentum / page swipes for _scroll
 
 
 func _card_scope(cid: String) -> String:
@@ -145,7 +141,7 @@ func _ready() -> void:
 	_scroll = scroll
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.gui_input.connect(_on_scroll_input)
+	_kin = KineticScroll.attach(scroll)
 	col.add_child(scroll)
 
 	var vbar := scroll.get_v_scroll_bar()
@@ -170,7 +166,7 @@ func _ready() -> void:
 
 	var prev := Kit.button("▲ 上一页", "blue", Kit.FONT_BODY)
 	prev.custom_minimum_size = Vector2(160, 48)
-	prev.pressed.connect(func(): _page_scroll(-1))
+	prev.pressed.connect(func(): _kin.page(-1))
 	btm.add_child(prev)
 
 	var back := Kit.button("关　闭", "gray", Kit.FONT_BIG)
@@ -180,76 +176,10 @@ func _ready() -> void:
 
 	var next := Kit.button("▼ 下一页", "blue", Kit.FONT_BODY)
 	next.custom_minimum_size = Vector2(160, 48)
-	next.pressed.connect(func(): _page_scroll(1))
+	next.pressed.connect(func(): _kin.page(1))
 	btm.add_child(next)
 
 	Kit.focus(back)
-
-
-func _process(delta: float) -> void:
-	if _scroll == null:
-		return
-	if not _dragging and absf(_velocity) > 15.0:
-		_scroll.scroll_vertical += int(_velocity * delta)
-		_velocity = lerpf(_velocity, 0.0, 8.0 * delta)
-	elif not _dragging:
-		_velocity = 0.0
-
-
-func _on_scroll_input(e: InputEvent) -> void:
-	if e is InputEventScreenTouch:
-		if e.pressed:
-			_dragging = true
-			_velocity = 0.0
-			_touch_start = e.position
-			_last_pos = e.position
-			_last_time = Time.get_ticks_msec()
-		else:
-			_dragging = false
-			var dx: float = e.position.x - _touch_start.x
-			var dy: float = e.position.y - _touch_start.y
-			if absf(dx) > 120.0 and absf(dx) > absf(dy) * 1.5:
-				_page_scroll(1 if dx < 0 else -1)
-	elif e is InputEventScreenDrag:
-		_dragging = true
-		_scroll.scroll_vertical -= int(e.relative.y)
-		var now := Time.get_ticks_msec()
-		var dt := maxf(0.001, float(now - _last_time) / 1000.0)
-		_velocity = -e.relative.y / dt
-		_last_pos = e.position
-		_last_time = now
-	elif e is InputEventMouseButton:
-		if e.button_index == MOUSE_BUTTON_LEFT:
-			if e.pressed:
-				_dragging = true
-				_velocity = 0.0
-				_touch_start = e.position
-				_last_pos = e.position
-				_last_time = Time.get_ticks_msec()
-			else:
-				_dragging = false
-				var dx: float = e.position.x - _touch_start.x
-				var dy: float = e.position.y - _touch_start.y
-				if absf(dx) > 120.0 and absf(dx) > absf(dy) * 1.5:
-					_page_scroll(1 if dx < 0 else -1)
-	elif e is InputEventMouseMotion and _dragging:
-		_scroll.scroll_vertical -= int(e.relative.y)
-		var now := Time.get_ticks_msec()
-		var dt := maxf(0.001, float(now - _last_time) / 1000.0)
-		_velocity = -e.relative.y / dt
-		_last_pos = e.position
-		_last_time = now
-
-
-func _page_scroll(dir: int) -> void:
-	if _scroll == null:
-		return
-	var step := int(_scroll.size.y * 0.85)
-	var vbar := _scroll.get_v_scroll_bar()
-	var max_val: int = int(vbar.max_value - _scroll.size.y) if vbar != null else 10000
-	var target := clampi(_scroll.scroll_vertical + dir * step, 0, maxi(0, max_val))
-	var tw := create_tween()
-	tw.tween_property(_scroll, "scroll_vertical", target, 0.22).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
 func _switch_scope(scope_id: String) -> void:
@@ -257,8 +187,7 @@ func _switch_scope(scope_id: String) -> void:
 	_update_tab_highlights()
 	_populate_grid()
 	if _scroll != null:
-		_scroll.scroll_vertical = 0
-		_velocity = 0.0
+		_kin.top()
 
 
 func _switch_type(type_id: String) -> void:
@@ -266,8 +195,7 @@ func _switch_type(type_id: String) -> void:
 	_update_tab_highlights()
 	_populate_grid()
 	if _scroll != null:
-		_scroll.scroll_vertical = 0
-		_velocity = 0.0
+		_kin.top()
 
 
 func _update_tab_highlights() -> void:

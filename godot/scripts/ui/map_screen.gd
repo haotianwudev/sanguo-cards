@@ -498,7 +498,7 @@ func _refresh() -> void:
 		if _nodes.has(sid):
 			_lines.halos.append(_pos(q["squares"][sid]))
 	_lines.here = _pos(q["squares"][save.square]) if _nodes.has(save.square) else Vector2(-999, -999)
-	_lines.queue_redraw()
+	_lines.rebuild()
 	_update_progress(ahead)
 
 	for sid in _nodes:
