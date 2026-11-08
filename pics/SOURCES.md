@@ -419,7 +419,7 @@
 | `lukang` | source/generals/lukang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `liudai` | source/generals/liudai.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `kongzhou` | source/generals/kongzhou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
-| `mifuren` | source/generals/mifuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `ganfuren` | source/generals/ganfuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `zhangliang` | source/generals/zhangliang.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `caoxing` | source/generals/caoxing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `dingfeng` | source/generals/dingfeng.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

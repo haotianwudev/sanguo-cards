@@ -415,7 +415,7 @@
   "lukang": {"file": "lukang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "liudai": {"file": "liudai.jpg", "face": [0.5, 0.22], "head": 0.22},
   "kongzhou": {"file": "kongzhou.jpg", "face": [0.5, 0.22], "head": 0.22},
-  "mifuren": {"file": "mifuren.jpg", "face": [0.5, 0.22], "head": 0.22},
+  "ganfuren": {"file": "ganfuren.jpg", "face": [0.5, 0.22], "head": 0.22},
   "zhangliang": {"file": "zhangliang.jpg", "face": [0.5, 0.22], "head": 0.22},
   "caoxing": {"file": "caoxing.jpg", "face": [0.5, 0.22], "head": 0.22},
   "dingfeng": {"file": "dingfeng.jpg", "face": [0.5, 0.22], "head": 0.22},

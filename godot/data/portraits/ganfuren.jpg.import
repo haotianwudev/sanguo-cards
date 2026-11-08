@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8eh8pcvnse5l"
-path="res://.godot/imported/mifuren.jpg-ae570c555289f121b52995b4b69ad730.ctex"
+uid="uid://4eje2whdsel8"
+path="res://.godot/imported/ganfuren.jpg-197d6a456e0464ff32494746afe676e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/portraits/mifuren.jpg"
-dest_files=["res://.godot/imported/mifuren.jpg-ae570c555289f121b52995b4b69ad730.ctex"]
+source_file="res://data/portraits/ganfuren.jpg"
+dest_files=["res://.godot/imported/ganfuren.jpg-197d6a456e0464ff32494746afe676e6.ctex"]
 
 [params]
 

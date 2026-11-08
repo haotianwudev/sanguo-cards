@@ -4162,8 +4162,8 @@
       "at": 48,
       "scope": "south"
     },
-    "mifuren": {
-      "name": "糜夫人",
+    "ganfuren": {
+      "name": "甘夫人",
       "rarity": "R",
       "troop": "logistics",
       "hp": 72,
