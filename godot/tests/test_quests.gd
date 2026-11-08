@@ -322,11 +322,13 @@ func test_luoyang_brings_palace_maids_and_dongbais_guards_follow_her() -> void:
 
 func test_tangji_can_be_escorted_and_join() -> void:
 	check(Quests.pools(quest(1), SaveData.create())["event_pool"].has("tangji"))
-	var s := event_on_road("tangji", 0)
-	check(not s.event_battle.is_empty(), "the pursuers attack")
-	s.event_battle = s.event_battle  # won
-	Quests.resolve(quest(0), s, rng(0))
-	check(s.has_card("tangji"), "唐姬 joins after the fight")
+	var joined := 0
+	for seed_value in 100:
+		var s := event_on_road("tangji", 0, seed_value)
+		check(not s.event_battle.is_empty(), "the pursuers attack")
+		Quests.resolve(quest(0), s, rng(seed_value))  # won
+		joined += 1 if s.has_card("tangji") else 0
+	check(joined > 0 and joined < 15, "唐姬 joins after the fight, rarely (%d / 100)" % joined)
 
 
 func test_bandits_turn_up_everywhere() -> void:
@@ -337,10 +339,13 @@ func test_bandits_turn_up_everywhere() -> void:
 
 
 func test_beating_the_bandit_queen_brings_her_along() -> void:
-	var s := event_on_road("yazhai", 1)
-	check(s.event_battle.get("battle", "") == "yanzhihu")
-	Quests.resolve(quest(0), s, rng(0))
-	check(s.has_card("yanzhihu"))
+	var joined := 0
+	for seed_value in 100:
+		var s := event_on_road("yazhai", 1, seed_value)
+		check(s.event_battle.get("battle", "") == "yanzhihu")
+		Quests.resolve(quest(0), s, rng(seed_value))
+		joined += 1 if s.has_card("yanzhihu") else 0
+	check(joined > 0 and joined < 15, "王悦 comes along, rarely (%d / 100)" % joined)
 
 
 func test_yellow_turban_remnants_and_their_medics() -> void:

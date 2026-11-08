@@ -217,13 +217,32 @@ func test_huatuo_heals_joins_or_leaves_his_book() -> void:
 	check(db.cards["huatuo"]["troop"] == "logistics" and db.cards["huatuo"]["skills"] == ["mafei", "guagu_liaodu"])
 	var joined := 0
 	var book := 0
-	for seed_value in 20:
+	for seed_value in 200:
 		var s := event_on_road("huatuo", 1, seed_value)
 		if s.has_card("huatuo"):
 			joined += 1
 		if s.relics.has("qingnang"):
 			book += 1
-	check(joined > 0 and book > 0 and joined + book == 20, "joins %d, leaves 青囊书 %d" % [joined, book])
+	check(joined > 0 and joined <= 20 and joined + book == 200, "joins %d (rare), leaves 青囊书 %d" % [joined, book])
+
+
+func test_events_hand_over_generals_rarely() -> void:
+	## user rule: a general who joins through a ？ event joins at most 5% of the time (the chance around his {"card"})
+	var db := GameData.get_db()
+	var bad: Array = []
+	var walk := func(f: Callable, o: Variant, ch: float, eid: String) -> void:
+		if o is Dictionary:
+			var c := str(o.get("card", ""))
+			if db.cards.has(c) and not db.cards[c]["soldier"] and ch > 0.05:
+				bad.append("%s→%s %d%%" % [eid, c, int(ch * 100)])
+			for k in o:
+				f.call(f, o[k], ch * float(o["chance"]) if k == "then" else ch, eid)
+		elif o is Array:
+			for x in o:
+				f.call(f, x, ch, eid)
+	for eid in db.events:
+		walk.call(walk, db.events[eid]["options"], 1.0, eid)
+	check(bad.is_empty(), str(bad))
 
 
 func test_yuji_only_brings_trouble() -> void:
