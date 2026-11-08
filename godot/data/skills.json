@@ -1264,6 +1264,21 @@
         }
       ]
     },
+    "huyuan": {
+      "name": "护援",
+      "cost": 1,
+      "cumulative": true,
+      "effects": [
+        {
+          "type": "guard",
+          "cut": 0.6
+        },
+        {
+          "type": "boost",
+          "target": "random_idle"
+        }
+      ]
+    },
     "xingyang_duanhou": {
       "name": "荥阳断后",
       "cost": 2,
