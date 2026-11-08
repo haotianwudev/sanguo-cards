@@ -3435,6 +3435,7 @@
     },
     "xugong": {
       "name": "许贡",
+      "pool": false,
       "rarity": "C",
       "troop": "strategist",
       "hp": 64,
@@ -3701,6 +3702,7 @@
     },
     "yuanshang": {
       "name": "袁尚",
+      "pool": false,
       "rarity": "C",
       "troop": "cavalry",
       "hp": 52,
@@ -3734,6 +3736,7 @@
     },
     "yuanxi": {
       "name": "袁熙",
+      "pool": false,
       "rarity": "C",
       "troop": "infantry",
       "hp": 60,
