@@ -74,6 +74,8 @@ def walk(effs, eid, scope):
         if "offer" in e:
             for c in e["offer"].get("from", []):
                 event_offer[c].add("%s（%s）" % (story["events"][eid].get("title", eid), scope))
+        if e.get("card"):  # the event hands the card over outright (于吉 in 白衣道人)
+            event_offer[e["card"]].add("%s（%s）" % (story["events"][eid].get("title", eid), scope))
         for k in ("then", "else"):
             if k in e:
                 walk(e[k], eid, scope)
@@ -163,7 +165,8 @@ for rt in ("南", "北", "两线"):
     for cid in sorted(gs, key=lambda k: (rk.get(generals[k]["rarity"], 9), min([order[x] for x in src[k]] or [99]), k)):
         c = generals[cid]
         out.append("| `%s` | %s | %s | %s | %s | %s |" % (cid, c["name"], c["rarity"], troop_name(c), "是" if c.get("pool", True) else "剧情限定",
-                                                     "<br>".join(where(cid, False)) or ("卡池" if c.get("pool", True) else "—（拿不到）")))
+                                                     "<br>".join(where(cid, False) + ["事件「%s」" % x for x in sorted(event_offer.get(cid, []))])
+                                                     or ("卡池" if c.get("pool", True) else "—（拿不到）")))
     out.append("")
 
 out += ["### 每章入队、招贤、掉落的武将", "", "| 章 | 剧情入队 | 招贤 | 掉落 |", "|---|---|---|---|"]

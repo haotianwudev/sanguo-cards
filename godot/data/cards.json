@@ -1578,6 +1578,7 @@
     "yuji": {
       "name": "于吉",
       "rarity": "R",
+      "pool": false,
       "troop": "strategist",
       "hp": 74,
       "at": 62,
