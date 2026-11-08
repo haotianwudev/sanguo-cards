@@ -18,7 +18,7 @@ func _ready() -> void:
 			var kv := a.substr(2).split("=", true, 1)
 			args[kv[0]] = kv[1] if kv.size() > 1 else ""
 	if args.has("demo"):
-		Game.demo(args["demo"])
+		Demos.run(args["demo"])
 		if args.has("skip") and args["demo"] != "firststep":  # --skip on any map demo: the story played through, its options showing
 			await get_tree().create_timer(0.5).timeout
 			var ms: Node = get_child(get_child_count() - 1)
