@@ -378,6 +378,8 @@ func act(i: int, skill_id: String) -> Array:
 	for eff in play_effects(sk):
 		if eff["type"] == "interrupt" and enemy["charging"] == "" and not sk["effects"].has(eff):
 			continue  # the 眩晕's own 打断 says nothing when there is no wind-up
+		if enemy["hp"] <= 0 and eff["type"] != "loot":
+			continue  # that blow ended it: the rest of the skill never happens (only 劫掠's odds, they count towards the win)
 		log.append_array(_apply(u, eff, mult))
 	if enemy["hp"] > 0 and sk["effects"].any(func(e): return e["type"] == "attack"):
 		log.append_array(_stance_strike(i))  # 反击架势: a physical skill is answered once
@@ -1217,6 +1219,9 @@ func _enemy_phase(defend_cut: float) -> Array:
 			else:
 				_ev({"t": "enemy_move", "move": mv["name"]})
 				log.append("%s【%s】" % [data["name"], mv["name"]])
+			_check_end()  # either side at 0 HP (a counter can kill it too): the rest of the move never happens
+			if result != "":
+				return log
 			if mv.has("rage"):
 				enemy["at"] *= 1.0 + float(mv["rage"])
 				_ev({"t": "enemy_rage", "amount": float(mv["rage"])})
@@ -1246,9 +1251,6 @@ func _enemy_phase(defend_cut: float) -> Array:
 				victim["confuse_next"] = true
 				_ev({"t": "confuse", "unit": leaders.find(victim)})
 				log.append("  %s 陷入混乱，下回合无法行动" % unit_name(victim))
-			_check_end()
-			if result != "":
-				return log
 	enemy["intents"] = []
 	if not enemy["guard"].is_empty() and result == "":  # the 前卫 strikes too, every enemy turn (even with its boss stunned)
 		var g: Dictionary = enemy["guard"]

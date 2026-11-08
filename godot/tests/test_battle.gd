@@ -1458,3 +1458,53 @@ func test_the_lord_swaps_only_for_another_lord_card() -> void:
 	b.take_events()
 	b.end_round()
 	check(b.take_events().any(func(e): return e["t"] == "mark_miss"), "a lord marked on one lord card dodges by swapping to another")
+
+
+func test_the_fight_ends_the_moment_either_side_has_no_hp_left() -> void:
+	## user rule: HP at 0 = 胜利 / 战败 at once, on every path. Plays every scenario at low HP on both sides, so blows, counters, 架势,
+	## poison and fire all get to be the last one; nothing may play after the blow (only 劫掠's odds, which count towards the win)
+	var enemy_events := ["hit", "interrupt", "counter", "poison", "burn"]
+	var party_events := ["enemy_hit", "stance_hit"]
+	var tactics := AutoPlayer.with_defaults({})
+	var problems := {}
+	for sid in GameData.get_db().scenarios:
+		for sd in 3:
+			var b := Battle.start(sid, party(["zhangfei", "zhouyu", "jiaxu"]), 2)
+			b.rng = rng(sd)
+			b.take_events()
+			b.enemy["hp"] = maxi(1, b.enemy["max_hp"] / (8 if sd == 0 else 25))
+			b.party_hp = maxi(1, b.party_max / (25 if sd == 1 else 6))
+			if sd == 2:
+				b.enemy["poison"] = 3
+				b.enemy["poison_turns"] = 5
+				b.enemy["poison_pct"] = 0.02
+				b.party_burn = {"dmg": maxi(1, b.party_max / 40), "turns": 5}
+			for _s in 60:
+				if b.result != "":
+					break
+				var step := AutoPlayer.plan(b, tactics)
+				match str(step["kind"]):
+					"act":
+						b.act(step["unit"], step["skill"])
+					"swap":
+						b.swap(step["unit"], step["card"])
+					"defend":
+						b.defend()
+					_:
+						b.end_round()
+				var evs := b.take_events()
+				var at := -1
+				for k in evs.size():
+					var ev: Dictionary = evs[k]
+					if (ev["t"] in enemy_events or ev["t"] in party_events) and int(ev["hp"]) <= 0:
+						at = k
+						break
+				if at >= 0:
+					var after := evs.slice(at + 1).map(func(e): return e["t"]).filter(func(t): return t != "loot")
+					if not after.is_empty():
+						problems["%s: %s after the last blow" % [sid, str(after)]] = true
+				if (int(b.enemy["hp"]) <= 0 or b.party_hp <= 0) and b.result == "":
+					problems["%s: nobody won at 0 HP" % sid] = true
+				if b.result == "win" and int(b.enemy["hp"]) > 0:
+					problems["%s: won with the enemy at %d HP" % [sid, int(b.enemy["hp"])]] = true
+	check(problems.is_empty(), "%d: %s" % [problems.size(), str(problems.keys().slice(0, 6))])
