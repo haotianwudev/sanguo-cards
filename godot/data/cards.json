@@ -3619,7 +3619,6 @@
       "troop": "logistics",
       "hp": 56,
       "at": 64,
-      "pool": false,
       "scope": "north"
     },
     "baoxin": {
@@ -3628,7 +3627,6 @@
       "troop": "cavalry",
       "hp": 54,
       "at": 60,
-      "pool": false,
       "scope": "north"
     },
     "yanxing": {
@@ -4185,7 +4183,6 @@
       "troop": "spear",
       "hp": 62,
       "at": 72,
-      "pool": false,
       "scope": "south"
     },
     "xizhicai": {
