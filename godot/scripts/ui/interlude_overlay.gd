@@ -128,12 +128,7 @@ func _toggle_log() -> void:
 	txt.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)
 	txt.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY)
 	txt.add_theme_color_override("default_color", Color(0.95, 0.92, 0.85))
-	var dim := Kit.c("dim").lightened(0.2).to_html()
-	var out: Array = []
-	for i in mini(_line + 1, _scene_lines.size()):
-		var key: String = str(_scene_keys[i]) if i < _scene_keys.size() else ""
-		out.append(Kit.named_line(str(_scene_lines[i]), key, Game.save.lord_name) if key != "" else "[color=%s]%s[/color]" % [dim, _scene_lines[i]])
-	txt.text = "\n\n".join(out)
+	txt.text = Kit.log_text(_scene_lines, _scene_keys, _line + 1, Kit.c("dim").lightened(0.2), Game.save.lord_name)  # a bit brighter on the dark panel
 	_log.add_child(txt)
 	_update_tools()
 

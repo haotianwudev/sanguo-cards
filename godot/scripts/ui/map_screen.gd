@@ -1290,15 +1290,7 @@ func _toggle_log() -> void:
 	if is_instance_valid(_dlg_slot):  # a list of many voices: no single face (the slot keeps its place, the text doesn't move)
 		_dlg_slot.modulate.a = 0.0
 	var upto: int = _dlg_lines.size() if _dlg_i < 0 else _dlg_i + 1
-	var dim_hex := Kit.c("dim").to_html()
-	var out: Array = []
-	for i in upto:
-		var spoken: bool = i < _dlg_keys.size() and str(_dlg_keys[i]) != ""
-		out.append(Kit.named_line(str(_dlg_lines[i]), str(_dlg_keys[i]), Game.save.lord_name) if spoken \
-			else "[color=%s]%s[/color]" % [dim_hex, _dlg_lines[i]])
-	_dlg_text.text = "
-
-".join(out)
+	_dlg_text.text = Kit.log_text(_dlg_lines, _dlg_keys, upto, Kit.c("dim"), Game.save.lord_name)
 	_dlg_text.scroll_active = true
 	_dlg_text.scroll_following = true  # land on the newest line
 	_dlg_text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY)

@@ -321,6 +321,17 @@ static func name_font(size: int, spacing: int) -> Font:
 	return _textures[key]
 
 
+static func log_text(lines: Array, keys: Array, upto: int, dim: Color, lord_name: String) -> String:
+	## 记录 (map story box and InterludeOverlay): the first `upto` lines, speech named after its speaker, narration dimmed
+	var out: Array = []
+	for i in mini(upto, lines.size()):
+		var key: String = str(keys[i]) if i < keys.size() else ""
+		out.append(named_line(str(lines[i]), key, lord_name) if key != "" else "[color=%s]%s[/color]" % [dim.to_html(), lines[i]])
+	return "
+
+".join(out)
+
+
 static func loop(node: Node) -> Tween:
 	## a decoration that repeats (a pulse, a breath, an orbit): loops forever — or, in 省电模式, plays once and rests, so a
 	## still screen can stop redrawing (Power). Every looping tween goes through here.
