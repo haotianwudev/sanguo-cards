@@ -3649,7 +3649,7 @@
     "liyan": {
       "name": "李严",
       "rarity": "R",
-      "troop": "infantry",
+      "troop": "archer",
       "hp": 68,
       "at": 68,
       "pool": false,
