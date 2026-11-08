@@ -4161,7 +4161,7 @@
     "lukang": {
       "name": "陆康",
       "rarity": "C",
-      "troop": "logistics",
+      "troop": "archer",
       "hp": 62,
       "at": 48,
       "scope": "south"
