@@ -320,6 +320,33 @@ func apply_prep() -> void:
 			relics.append(rid)
 
 
+func prep_lines() -> Array:
+	## what this 周目 bought with 前尘点, one line each (for 查看前尘): perks with their copies, cards brought, 宝物 bought
+	var db := _db()
+	var out: Array = []
+	for p in prep_cfg().get("perks", []):
+		if perk(p["id"]) > 0:
+			out.append("%s%s：%s" % [p["name"], " ×%d" % perk(p["id"]) if perk(p["id"]) > 1 else "", p["desc"]])
+	var named := prep_named()
+	var born := birth_route() != ""
+	for cid in prep_cards:
+		if not db.cards.has(cid):
+			continue
+		var c: Dictionary = db.cards[cid]
+		var scope := str(c.get("scope", ""))
+		var head: String = str(named[cid]["name"]) if named.has(cid) else str(prep_cfg().get("card_soldier_name" if c["soldier"] else "card_general_name", ""))
+		var note := ""
+		if scope != "" and not born:
+			note = "（%s，选定出生地后加入）" % ("北线" if scope == "north" else "南线")
+		elif scope != "" and scope != route():
+			note = "（%s卡，这条线没有加入）" % ("北线" if scope == "north" else "南线")
+		out.append("%s：%s%s" % [head, str(c["name"]).split("·")[0], note])
+	for rid in prep_relics:
+		if db.relics.has(rid):
+			out.append("宝物：%s" % db.relics[rid]["name"])
+	return out
+
+
 func route_prep_cards() -> Array:
 	## the birthplace is chosen: the waiting route-only cards of this route join (the other route's are gone)
 	var out: Array = []

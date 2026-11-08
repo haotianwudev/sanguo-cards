@@ -70,6 +70,10 @@ func _menu() -> void:
 	var opts := Kit.button("选项", "blue")
 	opts.pressed.connect(_options)
 	col.add_child(opts)
+	if Game.save != null and Game.save.prep_points() > 0:  # 前尘整备 exists from the second 周目 on
+		var prep := Kit.button("查看前尘整备", "blue")
+		prep.pressed.connect(_prep)
+		col.add_child(prep)
 	if OS.is_debug_build():
 		var dbg := Kit.button("测试工具（开发者界面）", "purple")
 		dbg.pressed.connect(_open_debug)
@@ -146,6 +150,28 @@ func _options() -> void:
 func _open_debug() -> void:
 	var d := DebugScreen.new()
 	Game.root.add_child(d)
+
+
+func _prep() -> void:
+	## what this 周目 bought with 前尘点 at its start (SaveData.prep_lines), read-only
+	var save := Game.save
+	var col := _panel(640)
+	_title(col, "前尘整备")
+	col.add_child(Kit.label("本周目开局用了 %d / %d 点" % [save.prep_spent(), save.prep_points()], Kit.FONT_BODY, "gold"))
+	var lines := save.prep_lines()
+	var l := Kit.label("
+".join(lines.map(func(x): return "· " + str(x))) if not lines.is_empty() else "这个周目开局没有用前尘点。", Kit.FONT_BODY, "text" if not lines.is_empty() else "muted")
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var scroll := ScrollContainer.new()  # many remembered cards brought along: the list scrolls instead of leaving the screen
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.custom_minimum_size = Vector2(0, minf(400.0, 38.0 * maxi(1, lines.size())))
+	scroll.add_child(l)
+	col.add_child(scroll)
+	var back := Kit.button("返回", "gray")
+	back.pressed.connect(_menu)
+	col.add_child(back)
+	Kit.focus(back)
 
 
 func _confirm_step_back() -> void:

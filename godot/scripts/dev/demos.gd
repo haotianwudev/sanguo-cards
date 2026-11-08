@@ -663,7 +663,16 @@ static func run(name: String) -> void:
 			Game.save.commit_history()
 			Game.save = Game.save.new_lap()
 			Game.save.perks = {"ap_max": 1, "public": 1, "lord_bench": 1}
-			Game.show_screen(PrepScreen.new())
+			if OS.get_cmdline_user_args().has("--view"):  # 设置 → 查看前尘整备: what this 周目 bought, read back mid-run
+				Game.save.perks = {"merit": 2, "start_chest": 1}
+				Game.save.prep_cards = ["jiangwei", "taishici"]
+				Game.save.prep_relics = ["jiunang"]
+				Game.show_screen(TitleScreen.new())
+				var so := SettingsOverlay.new()
+				Game.root.add_child(so)
+				so._prep()
+			else:
+				Game.show_screen(PrepScreen.new())
 		"title":
 			Game.show_screen(TitleScreen.new())
 		"debug":  # --at=jump/cards/cgs picks the opening tab
