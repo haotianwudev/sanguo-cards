@@ -1,4 +1,4 @@
-"""`sanguo-art`: build the game's portraits from pics/art.json.
+"""`python tools/sanguo_art.py` (was the `sanguo-art` command): build the game's art from pics/art.json.
 
 pics/art.json is the single place art is configured:
   "portraits": {
@@ -25,11 +25,13 @@ import argparse
 import json
 from pathlib import Path
 
+import sys
+
 from PIL import Image
 
-from .cards import CardDB, load_db
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 PICS = ROOT / "pics"
 OUT = ROOT / "godot" / "data" / "portraits"  # the Godot project is the game now
 MAX_H = 640
@@ -151,8 +153,6 @@ def write_needs(pics: Path = PICS) -> None:
     def key_of(cid: str) -> str:
         return cards["cards"][cid].get("person", cid.split("_")[0] if cid.endswith("_card") else cid)
 
-    import sys
-    sys.path.insert(0, str(ROOT / "tools"))
     from facts import load_facts
     event_pools: dict[str, list[str]] = {}  # quest -> the ？ events any route can draw there (the game's Quests.pools)
     for ch in load_facts()["chapters"]:
@@ -354,7 +354,7 @@ def write_sources(pics: Path = PICS) -> None:
 
 
 def main(argv: list[str] | None = None) -> None:
-    ap = argparse.ArgumentParser(prog="sanguo-art", description="从 pics/art.json 生成游戏头像")
+    ap = argparse.ArgumentParser(prog="sanguo_art.py", description="从 pics/art.json 生成游戏头像")
     ap.parse_args(argv)
     built = build()
     maps = build_maps()

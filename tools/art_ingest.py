@@ -166,7 +166,7 @@ def pending() -> int:
 
 
 def rebuild() -> None:  # (relics are copied straight in by add_one)
-    from sanguo import art
+    import sanguo_art as art
 
     art.build()
     art.build_maps()
@@ -300,7 +300,7 @@ def main(argv=None) -> None:
     elif args.cmd == "flush":
         rebuild()
         subprocess.run([sys.executable, str(ROOT / "tools" / "art_prompts.py")], check=True, cwd=ROOT)
-        from sanguo import art
+        import sanguo_art as art
 
         art.write_needs()
         art.write_sources()
