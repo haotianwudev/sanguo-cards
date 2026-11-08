@@ -1488,3 +1488,11 @@
 - [x] 2026-11-08 map `guandu` ← guandu_strip.jpg · ok
 - [x] 2026-11-08 map `dujiang` ← dujiang_strip.jpg · ok
 - [x] 2026-11-08 map `xuzhou` ← xuzhou_strip.jpg · ⚠ 分辨率偏低 8192×500
+- [x] 2026-11-08 map `huainan_s` ← huainan_s_strip.jpg · 强制：太小 8192×346（至少高 480）
+- [x] 2026-11-08 map `jiangdong` ← jiangdong_strip.jpg · ⚠ 分辨率偏低 8192×489
+- [x] 2026-11-08 map `menghu` ← menghu_strip.jpg · 强制：太小 8192×438（至少高 480）
+- [x] 2026-11-08 map `tianfu` ← tianfu_strip.jpg · 强制：太小 8192×478（至少高 480）
+- [x] 2026-11-08 map `guanzhong` ← guanzhong_strip.jpg · 强制：太小 8192×457（至少高 480）
+- [x] 2026-11-08 map `luoyang_s` ← luoyang_s_strip.jpg · 强制：太小 8192×457（至少高 480）
+- [x] 2026-11-08 map `beifa` ← beifa_strip.jpg · ok
+- [x] 2026-11-08 map `chibi` ← chibi_strip.jpg · ok
