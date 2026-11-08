@@ -3510,7 +3510,7 @@
     "zhangxun": {
       "name": "张勋",
       "rarity": "C",
-      "troop": "infantry",
+      "troop": "spear",
       "hp": 56,
       "at": 65,
       "scope": "south"
@@ -3613,7 +3613,7 @@
     "zhangmiao": {
       "name": "张邈",
       "rarity": "C",
-      "troop": "infantry",
+      "troop": "logistics",
       "hp": 56,
       "at": 64,
       "pool": false,
@@ -4094,7 +4094,7 @@
     "wangkuang": {
       "name": "王匡",
       "rarity": "C",
-      "troop": "infantry",
+      "troop": "archer",
       "hp": 56,
       "at": 52,
       "scope": "north"
@@ -4118,7 +4118,7 @@
     "qiaomao": {
       "name": "乔瑁",
       "rarity": "C",
-      "troop": "infantry",
+      "troop": "archer",
       "hp": 58,
       "at": 56,
       "scope": "north"
@@ -4710,7 +4710,7 @@
     "sufei": {
       "name": "苏飞·黄祖部将",
       "rarity": "C",
-      "troop": "infantry",
+      "troop": "archer",
       "hp": 42,
       "at": 64,
       "pool": false
