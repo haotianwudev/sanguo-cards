@@ -895,6 +895,7 @@
     "xiaoqiao": {
       "name": "小乔",
       "rarity": "SR",
+      "pool": false,
       "troop": "logistics",
       "hp": 90,
       "at": 66,
@@ -2009,6 +2010,7 @@
     "zuoci": {
       "name": "左慈·乌角先生",
       "rarity": "SR",
+      "pool": false,
       "troop": "strategist",
       "hp": 88,
       "at": 76,
