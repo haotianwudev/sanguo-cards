@@ -18,14 +18,6 @@ func test_story_runs_prologue_then_dongzhuo() -> void:
 	check_eq(GameData.get_db().quests.map(func(q): return q["id"]), ["prologue", "taodong", "luoyang_n", "heishan", "yuxi", "beihai", "xuzhou", "dongui", "jingxiang", "huainan_s", "huainan_n", "yecheng", "jiangdong", "longhu", "menghu", "xiliang", "tianfu", "guanzhong", "luoyang_s", "sanfang", "tianqing", "beifa", "chibi", "guandu", "dujiang", "guiyi"])
 
 
-func test_every_event_colour_is_in_the_palette() -> void:
-	## the map paints a dealt ？ square in its event's colour via Kit.c — a name the theme lacks ("yellow") crashed the map
-	var pal: Dictionary = Kit.pal()
-	for eid in GameData.get_db().events:
-		var col := str(GameData.get_db().events[eid].get("color", "blue"))
-		check(pal.has(col), "event %s: colour %s is not in the palette" % [eid, col])
-
-
 func test_every_event_option_resolves_or_leads_somewhere() -> void:
 	var q := quest(0)
 	var all: Array = []
@@ -85,17 +77,6 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 			check_eq(fights, 1, "%s/%s: one lane fights, the other does not" % [q["id"], fid])
 
 
-func test_side_story_portraits_and_requires_exist() -> void:
-	var db := GameData.get_db()
-	var recs := FileAccess.get_file_as_string("res://data/story.json")
-	for list in db.side_stories.values():
-		for st in list:
-			for key in st.get("portraits", []):
-				check(FileAccess.file_exists("res://data/art/portraits/%s.jpg" % key) or Kit.portrait(key, 0.75, 5.0) != null, "%s: portrait %s" % [st["id"], key])
-			for f in ((st["requires"] if st.get("requires") is Array else [st.get("requires", "")]) + (st["unless"] if st.get("unless") is Array else [st.get("unless", "")])):
-				check(f == "" or recs.contains("\"%s\"" % f), "%s: no story line records %s" % [st["id"], f])
-
-
 func test_gate_is_one_rule_everywhere() -> void:
 	## Quests.gate: requires = every line holds; unless = hidden only when every line holds (第五章 恨海 squares)
 	var s := SaveData.new()
@@ -150,3 +131,11 @@ func test_the_route_comes_from_the_birth_lines_in_story_json() -> void:
 	check_eq(s.route(), "south", "no birth yet: the first route")
 	s.run_records = [GameData.get_db().routes["north"]]
 	check(s.is_north() and s.birth_route() == "north")
+
+
+func test_a_refs_path_from_the_top_inside_each() -> void:
+	## {"each": "themes.*", "refs": "/events.*.color", "to": "@keys"}: every theme must hold every event's colour
+	var root := {"themes": {"ink": {"red": 1, "blue": 1}, "light": {"red": 1}}, "events": {"a": {"color": "red"}, "b": {"color": "blue"}}}
+	var errs := Schema.check(root, {"rules": [{"each": "themes.*", "refs": "/events.*.color", "to": "@keys"}]})
+	check_eq(errs.size(), 1, str(errs))
+	check(str(errs[0]).contains("events.b.color = blue"), str(errs))

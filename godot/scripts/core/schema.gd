@@ -10,7 +10,7 @@ extends RefCounted
 ##   **     the node itself and everything under it, at any depth
 ##   @keys  a dict's keys
 ## Rules (each may carry "each": <path> — then its other paths are read from every node "each" finds, and a path that
-## starts with "/" is read from the top instead; "why" is printed with every failure):
+## starts with "/" (in "refs" or "to") is read from the top instead; "why" is printed with every failure):
 ##   {"refs": <path>, "to": <path or [paths]>, "also": [..]}   every string found must be one of the values the "to"
 ##                                               paths find (or one of "also"); a "to" entry may be {"path", "prefix"}
 ##   {"enum": <path>, "values": [..]}            every value found must be one of these
@@ -67,7 +67,8 @@ static func _rule(root: Dictionary, rule: Dictionary, node: Variant, at: String,
 			allowed.merge(got)
 		for v in rule.get("also", []):
 			allowed[v] = true
-		var hits := walk(node, rule["refs"], at, crumbs, top)
+		var rp: String = rule["refs"]  # "/…" = read from the top even inside "each" (every theme checks every event)
+		var hits := walk(root, rp.substr(1), "", crumbs, memo if not crumbs else null) if rp.begins_with("/") else walk(node, rp, at, crumbs, top)
 		for hit in hits:
 			if hit[0] is String and hit[0] != "" and not allowed.has(hit[0]):
 				errors.append("%s = %s: not in %s%s" % [hit[1], hit[0], str(tos), why])

@@ -50,24 +50,6 @@ func test_default_voices_cover_every_role() -> void:
 	sfx.free()
 
 
-func test_cards_and_enemies_name_existing_voices() -> void:
-	## a card's or enemy's `voice` must be a profile in audio.json
-	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/audio.json"))
-	var voices: Dictionary = data.get("voices", {})
-	var db := GameData.get_db()
-	var bad: Array = []
-	for cid in db.cards:
-		var v := str(db.cards[cid].get("voice", ""))
-		if v != "" and not voices.has(v):
-			bad.append("card %s: %s" % [cid, v])
-	for eid in db.enemies:
-		var v := str(db.enemies[eid].get("voice", ""))
-		if v != "" and not voices.has(v):
-			bad.append("enemy %s: %s" % [eid, v])
-	check(bad.is_empty(), "voice that names no profile: %s" % str(bad))
-
-
-
 func test_every_fight_against_a_voiced_general_uses_his_voice() -> void:
 	## a general with his own voice (吕布, 赵云 …) sounds like himself in every fight against him — every enemy drawn
 	## with his face resolves to his voice, even one that drops a soldier card (吕布 dropping 并州兵, 赵云 常山亲卫)

@@ -974,12 +974,6 @@ func test_a_bad_end_lists_no_side_stories() -> void:
 	check(Quests.side_stories(s).is_empty(), "no ？小故事 after a bad end: %s" % [Quests.side_stories(s).map(func(x): return x["id"])])
 
 
-func test_every_side_story_has_a_reward() -> void:
-	for list in GameData.get_db().side_stories.values():
-		for st in list:
-			check(Quests.side_reward_text(st) != "", "%s: no reward" % st["id"])
-
-
 func test_a_side_story_can_hand_over_a_card() -> void:
 	var s := SaveData.create()
 	s.flags = ["出生：冀州无极"]

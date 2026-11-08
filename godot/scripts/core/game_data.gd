@@ -249,8 +249,9 @@ static func check_schema(dir: String = DATA_DIR) -> Array:
 	var root: Dictionary = read_json(dir + "/cards.json")
 	for part in DATA_PARTS:
 		root.merge(read_json(dir + "/" + part))
-	for f in ["story", "endings", "ui", "side_stories"]:
+	for f in ["story", "endings", "ui", "side_stories", "audio"]:
 		root[f] = read_json("%s/%s.json" % [dir, f])
+	root["portraits"] = read_json(dir + "/portraits/portraits.json")
 	return get_db().errors + Schema.check(root, read_json(dir + "/schema.json"))
 
 
