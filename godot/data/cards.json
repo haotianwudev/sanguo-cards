@@ -3414,7 +3414,7 @@
     "liuye": {
       "name": "刘晔",
       "rarity": "R",
-      "troop": "strategist",
+      "troop": "archer",
       "skills": ["piliche"],
       "hp": 74,
       "at": 64,
@@ -3764,7 +3764,7 @@
     "manchong": {
       "name": "满宠",
       "rarity": "R",
-      "troop": "strategist",
+      "troop": "archer",
       "hp": 72,
       "at": 66,
       "pool": false,
