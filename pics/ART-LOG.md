@@ -1479,4 +1479,12 @@
 - [x] 2026-11-07 cg `ss_caifuren` ← ss_caifuren4.jpg · ok
 - [x] 2026-11-07 cg `ss_yuanshao` ← ss_yuanshao2.jpg · ok
 - [x] 2026-11-07 cg `e_zhangzhongjing` ← e_zhangzhongjing.jpg · ok
-- [ ] 2026-11-08 cg `n5_guonian` ← n5_guonian_new.jpg · ok
+- [x] 2026-11-08 cg `n5_guonian` ← n5_guonian_new.jpg · ok
+- [x] 2026-11-08 map `longhu` ← longhu_strip.jpg · ⚠ 分辨率偏低 8192×538
+- [x] 2026-11-08 map `xiliang` ← xiliang_strip.jpg · ok
+- [x] 2026-11-08 map `sanfang` ← sanfang_strip.jpg · ok
+- [x] 2026-11-08 map `tianqing` ← tianqing_strip.jpg · ok
+- [x] 2026-11-08 map `huainan_n` ← huainan_n_strip.jpg · 强制：太小 8192×447（至少高 480）
+- [x] 2026-11-08 map `guandu` ← guandu_strip.jpg · ok
+- [x] 2026-11-08 map `dujiang` ← dujiang_strip.jpg · ok
+- [x] 2026-11-08 map `xuzhou` ← xuzhou_strip.jpg · ⚠ 分辨率偏低 8192×500
