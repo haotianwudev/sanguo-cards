@@ -82,7 +82,7 @@
 
 ### 5.2 优先级
 
-1. ~~M2 格子图标~~（程序生成占位，15 个已接入；「交」「甲」「寨」这几个固定事件没有图标，格子上直接写字）+ ~~M1 序章底图~~（画师图）；第二章底图目前是**程序生成占位**（`tools/build_chapter2_map.py`），画风和序章的山水画差很多，要换成真图
+1. ~~M2 格子图标~~（程序生成占位，15 个已接入；「交」「甲」「寨」这几个固定事件没有图标，格子上直接写字）+ ~~M1 序章底图~~（画师图）；~~第二章底图~~（已换成按格子拼接的正式图：`tools/map_guide.py` + `map_strip.py`，见 sanguo-dev skill「Chapter map backgrounds」）
    第二章底图的出图提示词见 `ART-PROMPTS.md`「章节地图底图」
 2. ~~M5 主公棋子~~（程序生成占位）、M8 首领标记
 3. M4 未知格、M7 迷雾（配合迷雾玩法）
@@ -349,7 +349,7 @@
 
 | 规格 | 说明 |
 |---|---|
-| 横版 16:9，≥ 1280×720（推荐 1920×1080），JPG | 文件名 = 下表的 key，放 `pics/source/battles/`，在 `pics/art.json` 的 `battles` 里登记（`"<key>": {"src": "source/battles/<key>.jpg"}`），跑 `sanguo-art` |
+| 横版 16:9，≥ 1280×720（推荐 1920×1080），JPG | 文件名 = 下表的 key，放 `pics/source/battles/`，在 `pics/art.json` 的 `battles` 里登记（`"<key>": {"src": "source/battles/<key>.jpg"}`），跑 `python tools/sanguo_art.py` |
 | 画面 | 敌人在场景里摆出迎战的姿态（兰斯十式战斗 CG），可以带上它的手下；**敌人大、居中、头脸在画面上方 30–45% 处**；风格和立绘一致 |
 
 | key | 战斗 | 画面建议 |
@@ -399,7 +399,7 @@
 > 每一条都有现成的完整出图提示词：见 `pics/ART-PROMPTS.md`（`python tools/art_prompts.py` 生成）。
 
 剧情格和幕间过场的插图：兰斯十那样铺满全屏，文字在底部一条半透明字幕条里（说话人的头像在字幕条左侧），可以切回地图、也能隐藏字幕；幕间过场也铺满全屏。
-规格：横版 16:9，≥ 1280×720，JPG；文件名 = key，放 `pics/source/cg/`，在 `pics/art.json` 的 `cgs` 里登记，跑 `sanguo-art`。
+规格：横版 16:9，≥ 1280×720，JPG；文件名 = key，放 `pics/source/cg/`，在 `pics/art.json` 的 `cgs` 里登记，跑 `python tools/sanguo_art.py`。
 新的剧情格或事件要插图时，在数据里加 `"cg": "<key>"`，再把 key 和画面写进下表。
 
 | key | 画什么 |

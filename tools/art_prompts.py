@@ -284,7 +284,7 @@ NEXT_RULES = [
     "文件名 = key：宝物放 `pics/source/relics/<key>.png`（同时复制到 `godot/data/art/relics/<key>.png`），立绘放 `pics/source/generals/`（兵卡放 `soldiers/`）。",
     "战斗 CG 放 `pics/source/battles/<key>.jpg`、在 `pics/art.json` 的 battles 登记；构图：敌人大、居中、在画面中上部。",
     "宝箱图：PNG 透明底 512×512，直接放 `godot/data/art/ui/<key>.png`（开宝箱动画会自动用上）。",
-    "立绘在 `pics/art.json` 对应段登记；然后跑 `sanguo-art`，再跑 `python tools/art_prompts.py` 刷新本文件。",
+    "立绘在 `pics/art.json` 对应段登记；然后跑 `python tools/sanguo_art.py`，再跑 `python tools/art_prompts.py` 刷新本文件。",
     "每条提示词下面的「参考立绘」列出画面里每个人物已交付的立绘文件，出图时一起上传给 Gemini；主角穿常服的场景参考 `lord_south_casual` / `lord_north_casual`，其余参考 `lord` / `lord_north`。",
     "**不要覆盖已经交付的图**；重画某张时旧图别留在 `pics/source/` 里（`backup_old/` 之类的文件夹不要提交）。",
     "提交时按路径 `git add`，只提交自己的图和登记，别带上别人没提交的改动。",
@@ -457,7 +457,7 @@ def main() -> None:
            "> 由 `python tools/art_prompts.py` 生成：每一条都能直接复制去出图。已有正式美术的会自动跳过。",
            "> 新角色 / 新战斗 / 新剧情插图：先在 `tools/art_prompts.py` 的表里加一行，再运行它。",
            "> 出好的图按 key 命名：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），战斗 CG 放 `pics/source/battles/`，",
-           "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。", "",
+           "> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `python tools/sanguo_art.py`（见 `CARD-DESIGN.md`）。", "",
            ]
     maps_done = {k for k, v in art.get("maps", {}).items() if "程序生成" not in v.get("license", "")}
     # the 22 icons made by generate_ui_assets.py (a gold medallion with one character) are placeholders, not delivered art:

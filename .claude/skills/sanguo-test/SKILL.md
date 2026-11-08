@@ -90,6 +90,6 @@ print(round(o, 3), [round(x, 1) for x in curve(o)])   # 第 1..14 章开头
 
 - 新机制至少一个测试：规则本身（边界值）+ 数据配置合法（例如每章每档强度单调、所有 ？ 格都分到事件、事件选项没有被 `needs` 全部堵死）。
 - 数据驱动的断言写成「按配置算出期望值」，不要写死数字，免得改配置就要改测试。
-- 剧情路线测试放 `test_routes.gd`（走完一章，检查经过的格子、入队的卡、记录、结局），战斗 / 数值放 `test_battle.gd`，任务 / 事件 / 难度放 `test_quests.gd`，卡牌收藏放 `test_collection.gd`。
+- 剧情路线测试放 `test_routes.gd`（走完一章，检查经过的格子、入队的卡、记录、结局），战斗 / 数值放 `test_battle.gd`，章节流程放 `test_quests.gd`，事件 / 宝物 / 战功放 `test_events.gd`，存档 / 回退放 `test_saves.gd`，胜率放 `test_balance.gd`，数据完整性（多半该写成 `godot/data/schema.json` 规则）放 `test_data.gd`，卡牌收藏放 `test_collection.gd`。
 - 美术只改图不改数据时，**不用跑测试 / 导入 / 截图**（见 sanguo-art-ingest）。
 - 平衡有变化的提交，在提交说明里写模拟的通关率（几局、几周目、什么参数）。

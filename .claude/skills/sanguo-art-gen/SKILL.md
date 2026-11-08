@@ -103,7 +103,7 @@ Guidelines and toolchains for generating and ingesting art into `sanguo-cards`.
 3. 用户说「可以」才 `python tools/art_ingest.py add <img> <key> --kind cg --force`（`--force` 因为已有旧图），然后 `git add` 这张图的三个文件（`godot/data/art/cg/<key>.jpg`、`pics/source/cg/<key>.jpg`、`pics/ART-LOG.md`）提交推送。只改美术不跑测试。紧接着 `git commit` 偶尔会遇到 `index.lock`，等 2 秒重试即可。
 4. 每批做完跑 `python tools/art_prompts.py` 和 `python tools/art_ingest.py flush` 刷新文档。
 
-**要重画的图先登记**：`tools/art_prompts.py` 的 `REDO = [(key, why, seen)]`（`seen` = 这个 key 在 `pics/ART-LOG.md` 里已有几条「`key` ←」入库记录，再多一条就自动算完成）。地图用 `MAP_REDO`。登记后 `ART-PROMPTS.md` 的「先重画」会列出，已交付的图也会出现在对应分节里。**描述改了，对应的提示词表（`CGS` / `CGS_ZH` / `HERO`）和 `CARD-DESIGN.md` 要一起改**，否则以后重出又变回旧样子。
+**要重画的图先登记**：`tools/art_prompts.py` 的 `REDO = [(key, why, seen)]`（`seen` = 这个 key 在 `pics/ART-LOG.md` 里已有几条「`key` ←」入库记录，再多一条就自动算完成）。地图用 `MAP_REDO`。登记后 `ART-PROMPTS.md` 的「先重画」会列出，已交付的图也会出现在对应分节里。**描述改了，对应的提示词（`pics/prompts/cgs.json` / `overrides.json`、`tools/art_prompts.py` 的 `HERO`）和 `CARD-DESIGN.md` 要一起改**，否则以后重出又变回旧样子。
 
 **参考图怎么给**（`--ref a b c ...`，提示词里按「参考图1/2/3」编号引用）：
 - 主角永远是**第 1 张**：`pics/source/generals/lord_south_armor.jpg`（全身、细节最多；南线形象以它为准）。

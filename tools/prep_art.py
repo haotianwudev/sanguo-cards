@@ -1,7 +1,7 @@
 """Prepare a generated illustration for a card: cut off a title band at the top and pad the canvas with
 the paper colour, so the figure can be framed smaller inside a portrait card window.
 
-Normally you don't run this by hand: give the art.json entry a "prep" block and `sanguo-art` does it.
+Normally you don't run this by hand: give the art.json entry a "prep" block and `python tools/sanguo_art.py` does it.
     "danyang": {"src": "processed/danyang_card.jpg",
                 "prep": {"from": "source/soldiers/danyang.jpg", "cut_top": 0.15, "figure": 0.70}, ...}
 

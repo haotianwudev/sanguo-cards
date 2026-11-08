@@ -1,57 +1,32 @@
 # 重开三国 (sanguo-cards)
 
-三国题材卡牌策略游戏，借鉴兰斯10的卡牌战斗/战役节奏与三国群侠传的武将收集。终端界面（[Textual](https://textual.textualize.io/)），鼠标键盘都能操作，也能用 `textual serve` 放到浏览器里玩。战斗照搬兰斯10。
+三国题材的肉鸽卡牌游戏：战斗和走格子的战役节奏借鉴兰斯10（Rance X），武将收集借鉴三国群侠传。
+你是穿越到汉末的现代社畜，南线从江东富春、北线从冀州无极出发，十二章，多个结局，多周目。
+
+Godot 4.7（GDScript），横屏 1280×720，给手机和 Switch 做的。
 
 ## 运行
 
+- **电脑**：用 Godot 4.7 打开 `godot/project.godot`，按 F5。
+- **手机（安卓）**：
+  ```bash
+  cd godot
+  godot --headless --path . --export-debug "Android" ../build/sanguo-cards.apk
+  adb install -r ../build/sanguo-cards.apk
+  ```
+  导出模板和 SDK 的设置见 `.claude/skills/sanguo-dev/SKILL.md`。设置里有「省电模式」（30 帧，手机不发热）。
+- **截图某个状态**：`godot --path godot -- --demo=map --shot=out.png --wait=1.5`（全部 demo 在 `godot/scripts/dev/demos.gd`）。
+
+## 检查
+
 ```bash
-python -m pip install -e ".[dev]"   # 一次即可
-sanguo                               # 终端界面（或：python -m sanguo）
-sanguo --seed 7                      # 固定随机种子，复现同一局
-sanguo --new                         # 放弃存档重新开始（存档在 ~/.sanguo-cards/save.json）
-python -m pytest                     # 规则 + 数值平衡测试
+sh tools/check.sh          # 格式、导入规则、每个脚本能编译、全部测试、生成的文档是最新的
 ```
 
-推荐用 Windows Terminal，窗口至少 120×36。
-
-### 手机上玩（同一个 Wi-Fi）
-
-1. **只做一次**：在管理员 PowerShell 里放行端口（只对局域网开放）：
-   ```powershell
-   New-NetFirewallRule -DisplayName "sanguo-cards LAN" -Direction Inbound -Protocol TCP -LocalPort 8766 -RemoteAddress LocalSubnet -Profile Private -Action Allow
-   ```
-2. **每次玩**：双击 `scripts\serve-lan.cmd`（或在项目文件夹运行 `scripts\serve-lan.cmd`），它会打印手机要打开的网址（如 `http://192.168.1.172:8766`）。
-3. 手机浏览器打开那个网址，横屏玩。电脑和手机共用一个存档。
-
-## 操作
-
-| 画面 | 操作 |
-|---|---|
-| 主菜单 | 数字键 1–6 或点击；`T` 切换亮色 / 暗色主题（默认亮色，会记住） |
-| 剧情地图 | 回车 = 继续 / 出战 / 只有一条路时前进；数字键选岔路、三选一、宝箱和招募的卡；Esc 回主菜单（进度会保存） |
-| 招募 | 回车 = 招募一次（亮出 3 位武将）；数字键 1–3 选一位带走 |
-| 编成 | 表格里回车 / 点击 = 加入（同兵种、同武将会替换）；点上方卡片 = 移出；`a` 自动编成 |
-| 战斗 | 直接点队长卡上的技能；或数字键选队长 → 数字键选技能。`D` 防御，`E` 回合结束，`R` 撤退，Esc 取消 |
-
-## 玩法
-
-1. **剧情（任务地图）**：兰斯10式走格子——一格一格前进不能后退，岔路自己选；体力在整张图里连续计算，只有「休」格回满。
-   你穿越到江东遇到孙策、周瑜，三选一决定走哪条分支。
-2. **招募**：每次亮出 3 位没拿过的**武将**，选 1 位带走；次数不限，不会重复。卡池里有同一武将的不同版本（孙策·中年、周瑜·赤壁……）。
-   **兵卡**从战斗宝箱里拿（打得越狠越容易掉宝箱），宝箱亮出几张、只能拿一张；兵卡可以重复，但同一种越叠收益越低，缺什么拿什么。
-3. **编成**：主公（你自己）+ 3 张卡；同一兵种只能一人指挥，同一武将只能上一个版本。可以一键自动编成。
-4. **自由出战**：剿灭山贼、黄巾之乱、虎牢关之战。
-
-战斗规则（兰斯10）：
-- 全军只有**一条体力**，等于所有队长体力之和；敌人也只有一条血条。
-- 每个兵种由一名**队长**指挥；同兵种的其他卡自动编入他的部队，队长攻击 = 5×自身 + 部队其他卡之和。
-- **AP** 开局 2，每回合 +2，最多 6。每位队长每回合行动一次；「累积」技能每用一次 AP +1，「限1」每场一次。
-- 每一击 +10% 连击伤害；3 回合没出手的队长可能 BOOST（×1.5）；部下偶尔会插入攻击。
-- 防御：结束本回合并减伤，连续防御 30% → 50% → 70% → 90%。
+CI（GitHub Actions）每次推送都跑同一个脚本。
 
 ## 改内容
 
-全部走配置：卡牌/敌人/数值在 `src/sanguo/data/cards.json`，地图剧情在 `story.json`，界面配色和文字在 `ui.json`，
-美术在 `pics/art.json`（改完运行 `sanguo-art`）。缺哪些图看 `pics/ART-NEEDS.md`。
-
-设计说明与路线图见 [docs/design.md](docs/design.md)。
+几乎所有东西都是 `godot/data/*.json` 里的配置，改配置不用改代码；对照表见 [AGENTS.md](AGENTS.md)。
+设计思路见 [docs/design.md](docs/design.md)，剧情大纲见 [docs/STORY.md](docs/STORY.md)，美术见 [pics/README.md](pics/README.md)。
+Python 工具（美术流水线、文档生成、配音）在 `tools/`，依赖见 `pyproject.toml`（`uv sync`）。

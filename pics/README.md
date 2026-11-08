@@ -3,8 +3,8 @@
 ```
 pics/
   art.json          美术配置：每张头像用哪张图、脸在哪、多大（唯一需要手改的文件）
-  ART-NEEDS.md      还缺哪些图（sanguo-art 自动生成）
-  SOURCES.md        每张图的来源和协议（sanguo-art 自动生成）
+  ART-NEEDS.md      还缺哪些图（`python tools/sanguo_art.py` 自动生成）
+  SOURCES.md        每张图的来源和协议（`python tools/sanguo_art.py` 自动生成）
   CARD-DESIGN.md    卡牌版式和美术规格
   ART-PROMPTS.md    每张缺的图的完整出图提示词（python tools/art_prompts.py 生成）
   source/           原图：只放原始文件，工具永远不改它们
@@ -21,10 +21,10 @@ pics/
 ## 常用操作
 
 - **加 / 换一张立绘**：把原图放进 `source/generals/` 或 `source/soldiers/`，文件名用 key（卡牌 id 或人物 id，如 `huanggai.jpg`），
-  在 `art.json` 里改那一行的 `src`、`face`、`head`，然后运行 `sanguo-art`。
+  在 `art.json` 里改那一行的 `src`、`face`、`head`，然后运行 `python tools/sanguo_art.py`。
 - **换卡框**：放进 `source/frames/`（文件名 `frame_<名字>.jpg`），运行
   `python tools/key_frames.py pics/source/frames godot/data/art/frames`（自动抠掉棋盘格背景）。
 - **换 / 加章节地图底图**：放进 `source/map/`（如 `bg_prologue.jpg`），在 `art.json` 的 `maps` 里登记（key = 任务 id：prologue / huangjin / hulao），
-  运行 `sanguo-art`，生成到 `godot/data/art/map/<任务id>.jpg`，地图界面自动铺上。
+  运行 `python tools/sanguo_art.py`，生成到 `godot/data/art/map/<任务id>.jpg`，地图界面自动铺上。
 - **原图注意**：`source/generals/sunce.jpg`、`zhouyu.jpg` 的原图丢失了，现在是游戏里保留的 640px 版本；
   有高清原图直接替换同名文件即可。

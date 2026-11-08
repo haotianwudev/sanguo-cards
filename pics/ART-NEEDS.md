@@ -1,6 +1,6 @@
 # 美术需求
 
-> 本文件由 `sanguo-art` 根据游戏数据（godot/data）和 `pics/art.json` 自动生成，别手改。
+> 本文件由 `python tools/sanguo_art.py` 根据游戏数据（godot/data）和 `pics/art.json` 自动生成，别手改。
 > 按章节列出立绘、战斗背景、剧情 CG、奇遇插图和地图底图；宝物、天命、词缀、标题等见 `ART-PLAN.md`，出图提示词见 `ART-PROMPTS.md`。
 
 ## 怎么换图
@@ -9,7 +9,7 @@
 2. 在 `pics/art.json` 的 `portraits` 里加一行：`"<key>": {"src": "source/generals/<key>.jpg", "face": [x, y], "head": h}`
    - `face`：脸中心在图里的位置（0–1，左上角是 0,0）；`head`：头高占整图高的比例（越大人物越小）
    - 换掉占位图时，把 `"placeholder": true` 删掉
-3. 运行 `sanguo-art`。
+3. 运行 `python tools/sanguo_art.py`。
 
 规格：竖版 5:7（≥ 1000×1400），人物居中、脸在上 1/3，半身到全身，背景简单。
 

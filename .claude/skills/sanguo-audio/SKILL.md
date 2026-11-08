@@ -62,7 +62,7 @@ godot/data/audio/
 
 ### B. 战斗配音
 
-**配音的一切（配置、三种引擎、试音、生成、接进战斗和 CG）见 `sanguo-voice` skill**（`.claude/skills/sanguo-voice/SKILL.md`，`.agents/skills/sanguo-voice/` 是同一份）。这里只留音频处理的通用规则。
+**配音的一切（配置、三种引擎、试音、生成、接进战斗和 CG）见 `sanguo-voice` skill**（`.claude/skills/sanguo-voice/SKILL.md`）。这里只留音频处理的通用规则。
 
 #### 关键技术：统一声学通道 (Unified Acoustic Chain)、峰值标准化与纵深声场 (Soundstage Positioning)
 1. **同轨高保真声学空间**：所有角色语音（主角、武将、军师、敌将）必须通过**完全相同**的纯净 ffmpeg 通道转换输出（严禁针对个别角色强加重度 EQ 或动态压缩滤镜，否则会导致声染色脱节、“不在同一个音轨”）。

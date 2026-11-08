@@ -1,6 +1,6 @@
 # 图片来源
 
-> 由 `sanguo-art` 根据 `pics/art.json` 生成。
+> 由 `python tools/sanguo_art.py` 根据 `pics/art.json` 生成。
 
 | key | 文件 | 来源 | 协议 | 作者 |
 |---|---|---|---|---|

@@ -3,7 +3,7 @@
 > 由 `python tools/art_prompts.py` 生成：每一条都能直接复制去出图。已有正式美术的会自动跳过。
 > 新角色 / 新战斗 / 新剧情插图：先在 `tools/art_prompts.py` 的表里加一行，再运行它。
 > 出好的图按 key 命名：立绘放 `pics/source/generals/`（兵卡放 `soldiers/`），战斗 CG 放 `pics/source/battles/`，
-> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `sanguo-art`（见 `CARD-DESIGN.md`）。
+> 剧情 CG 放 `pics/source/cg/`；然后在 `pics/art.json` 登记、运行 `python tools/sanguo_art.py`（见 `CARD-DESIGN.md`）。
 
 ## 立绘（竖版 3:4）
 

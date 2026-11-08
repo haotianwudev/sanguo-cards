@@ -40,7 +40,7 @@ opening; after a story they flip in (`SideStoryList.reveal`).
 2. **Generate the CG** (art-gen skill / `tools/art_gen.py`, nano-banana-2, refs = the people's portraits from
    `pics/source/generals/` or `pics/source/soldiers/`). Prompt pattern (Chinese):
    `16:9 横版章节过场插画，视觉小说 CG，兰斯10赛璐珞厚涂风格，精致清晰黑色墨线勾勒，<温暖的光>，温馨宁静。<地点、时间>，中景视角，人物是完整的全身、画得比较小。<N>个人物紧紧挨在一起，全部位于画面左侧 40% 的范围内，人物高度大约占画面高度的一半：<每个人：和参考图 <id> 一样：外貌、衣着、动作、表情>。<N>个人的脸都清楚可见。画面右侧 60% 没有任何人物：<空景>，色调柔和、细节简洁。画面里只有这<N>个人物，没有<主角/男子>。服装是汉代风格，交领右衽，不要旗袍、不要立领盘扣。不要文字、不要 UI。`
-   Save the prompt to the scratchpad (it goes into `OVERRIDES_ZH` later).
+   Save the prompt to the scratchpad (it goes into `pics/prompts/overrides.json` later).
 3. **Self-check** (the user lets me approve CGs myself): faces match the refs, nobody extra, no hero, no text, Han
    clothes (the model drifts to qipao / 盘扣 — regenerate), and the **group's width ≤ ~0.43 of the picture** (that is all
    the card can show at full height). Regenerate on any miss.
@@ -68,8 +68,8 @@ opening; after a story they flip in (`SideStoryList.reveal`).
    page's scene; **stands at the door / behind a tree and doesn't go in** — he wants to remember it (why he isn't in the
    picture); someone notices him and calls him over. Tie a line back to that chapter's small stories where it fits
    (甄宓's 37 pieces of candy). Keep 12–19 lines.
-8. **Prompts**: add the label `"rc_X": "<线>第N章·章末（过场 CG，也是卡）"` and `OVERRIDES_ZH["rc_X"] = <prompt>` in
-   `tools/art_prompts_zh.py`, and a one-line description in `tools/art_prompts.py` (next to the other `rc_*`).
+8. **Prompts**: add `"rc_X": <prompt>` to `pics/prompts/overrides.json` (one entry per line) and the label
+   `"rc_X": "<线>第N章·章末（过场 CG，也是卡）"` to `pics/prompts/cgs.json` (next to the other `rc_*`).
 9. **Test** in `godot/tests/test_quests.gd`: page cg for the route, story closed before the bad end, open after, opening
    hands over the card. Run `--import` once (new art) then the suite.
 10. **Look**: `--demo=recap1` (south ch1) / `--demo=recap1 --north` / `--demo=recap` (south ch2) for the page —
@@ -133,5 +133,5 @@ Chapter 12 ends in an ending — no page.
   `--demo=recap --north --chapter=heishan --ending`.
 - The north pages were made by another session in parallel — edit cards.json / side_stories.json in place, never
   regenerate them from an older read.
-- Every ？小故事 has a `cg` key: everyday stories use a planned `ss_<id>` (prompt in OVERRIDES_ZH, shows up in
+- Every ？小故事 has a `cg` key: everyday stories use a planned `ss_<id>` (prompt in `pics/prompts/overrides.json`, shows up in
   `pics/ART-PROMPTS.md`'s next batch); add the key and prompt whenever a story is added.
