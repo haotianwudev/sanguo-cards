@@ -813,7 +813,7 @@
       "requires": "荆襄：督荆襄九郡大都督",
       "_pools": "南线第六章：宝箱/战利品走 south 兵卡，招贤馆沿用第五章荆州池",
       "soldier_pool": [],
-      "recruit_pool": ["wenpin", "yiji", "qiaogong", "qiaoguolao"],
+      "recruit_pool": ["wenpin", "yiji", "qiaoguolao"],
       "event_pool": [],
       "event_scope": "south",
       "soldier_scope": "south",
