@@ -321,6 +321,31 @@ static func name_font(size: int, spacing: int) -> Font:
 	return _textures[key]
 
 
+static func loop(node: Node) -> Tween:
+	## a decoration that repeats (a pulse, a breath, an orbit): loops forever — or, in 省电模式, plays once and rests, so a
+	## still screen can stop redrawing (Power). Every looping tween goes through here.
+	var tw := node.create_tween()
+	return tw if power_saver() else tw.set_loops()
+
+
+static func _power() -> Node:
+	## the Power autoload, or null (the test runner runs without autoloads)
+	var tree := Engine.get_main_loop() as SceneTree
+	return tree.root.get_node_or_null("Power") if tree != null else null
+
+
+static func power_saver() -> bool:
+	var pw := _power()
+	return pw != null and bool(pw.saver)
+
+
+static func poke() -> void:
+	## keep the frame rate up while something plays that nobody is touching (Power.poke)
+	var pw := _power()
+	if pw != null:
+		pw.poke()
+
+
 static func _art(path: String) -> Texture2D:
 	## a picture, or null while it isn't drawn yet — big ones (CGs, the title) aren't kept: the engine frees them when unused
 	return load(path) if path != "" and ResourceLoader.exists(path) else null

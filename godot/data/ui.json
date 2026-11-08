@@ -1,4 +1,5 @@
 {
+  "power": {"_doc": "frame rate caps (Power autoload): fps_active while touched or animating, fps_idle after idle_after seconds still, fps_saver in 省电模式", "fps_active": 60, "fps_idle": 30, "idle_after": 3.0, "fps_saver": 30},
   "portrait_cache": 160,
   "_comment": "Presentation config for the terminal UI. Colour values in rarity_colors / map colours are palette names from themes.*",
   "default_theme": "ink",

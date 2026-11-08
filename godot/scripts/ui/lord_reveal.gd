@@ -109,7 +109,7 @@ func _play(labels: Array) -> void:
 	# keep the card breathing so the screen stays alive until the tap
 	await get_tree().create_timer(0.6).timeout
 	_ready_to_close = true
-	var pulse := _card.create_tween().set_loops()
+	var pulse := Kit.loop(_card)
 	pulse.tween_property(_card, "scale", Vector2(1.03, 1.03), 0.9).set_trans(Tween.TRANS_SINE)
 	pulse.tween_property(_card, "scale", Vector2.ONE, 0.9).set_trans(Tween.TRANS_SINE)
 

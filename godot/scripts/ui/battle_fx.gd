@@ -595,7 +595,7 @@ static func orbit(parent: Control, center: Vector2, rx := 60.0, ry := 18.0, n :=
 		s.color = color
 		holder.add_child(s)
 		stars.append(s)
-	var tw := holder.create_tween().set_loops()
+	var tw := Kit.loop(holder)
 	tw.tween_method(func(a: float):
 		for i in stars.size():
 			stars[i].position = Vector2(cos(a + TAU * i / n) * rx, sin(a + TAU * i / n) * ry)
@@ -793,7 +793,7 @@ static func glow(parent: Node, rect: Rect2, color: Color) -> Panel:
 	outer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	p.add_child(outer)
 	parent.add_child(p)
-	var tw := p.create_tween().set_loops()
+	var tw := Kit.loop(p)
 	tw.tween_property(p, "modulate:a", 1.0, 0.8).set_trans(Tween.TRANS_SINE)
 	tw.tween_property(p, "modulate:a", 0.4, 0.8).set_trans(Tween.TRANS_SINE)
 	return p

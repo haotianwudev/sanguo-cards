@@ -93,26 +93,15 @@ func _options() -> void:
 	var col := _panel(520)
 	_title(col, "选　项")
 	if not OS.has_feature("mobile"):
-		var fs := CheckButton.new()
-		fs.text = "全屏"
-		fs.button_pressed = bool(Game.options["fullscreen"])
-		fs.add_theme_font_size_override("font_size", Kit.FONT_BODY)
-		fs.toggled.connect(func(on): Game.set_option("fullscreen", on))
-		col.add_child(fs)
-	var fast := CheckButton.new()
-	fast.text = "战斗加速（动画 ×1.6）"
-	fast.button_pressed = bool(Game.options["fast"])
-	fast.add_theme_font_size_override("font_size", Kit.FONT_BODY)
-	fast.toggled.connect(func(on):
+		_switch(col, "全屏", bool(Game.options["fullscreen"]), func(on): Game.set_option("fullscreen", on))
+	_switch(col, "战斗加速（动画 ×1.6）", bool(Game.options["fast"]), func(on):
 		Game.set_option("fast", on)
 		Engine.time_scale = Game.battle_speed() if in_battle else 1.0)
-	col.add_child(fast)
-	var slow := CheckButton.new()
-	slow.text = "自动战斗慢速（看清每一步）"
-	slow.button_pressed = str(Game.options.get("auto_speed", "fast")) == "slow"
-	slow.add_theme_font_size_override("font_size", Kit.FONT_BODY)
-	slow.toggled.connect(func(on): Game.set_option("auto_speed", "slow" if on else "fast"))  # the battle re-applies it when this closes
-	col.add_child(slow)
+	# the battle re-applies it when this closes
+	_switch(col, "自动战斗慢速（看清每一步）", str(Game.options.get("auto_speed", "fast")) == "slow",
+		func(on): Game.set_option("auto_speed", "slow" if on else "fast"))
+	_switch(col, "省电模式（30 帧，装饰动画只播一次，手机不发热）", bool(Game.options.get("power_saver", false)),
+		func(on): Game.set_option("power_saver", on))
 	var vol_row := HBoxContainer.new()
 	vol_row.add_theme_constant_override("separation", 16)
 	vol_row.add_child(Kit.label("音效音量", Kit.FONT_BODY))
@@ -225,3 +214,13 @@ func _cards() -> void:
 	cb.save = Game.save
 	Game.root.add_child(cb)
 
+
+func _switch(col: Control, text: String, on: bool, changed: Callable) -> CheckButton:
+	## one on/off row of the 选项 page
+	var b := CheckButton.new()
+	b.text = text
+	b.button_pressed = on
+	b.add_theme_font_size_override("font_size", Kit.FONT_BODY)
+	b.toggled.connect(changed)
+	col.add_child(b)
+	return b

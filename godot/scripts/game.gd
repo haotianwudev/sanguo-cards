@@ -7,7 +7,7 @@ var root: Control  # the main scene; screens are its children
 var persist_enabled := true
 var save_path := ""  # the file the current save lives in: a route slot, or "" for a journey still choosing its birthplace
 var battle_ctx: Dictionary = {}  # set while a quest battle is running
-var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto", "auto_speed": "fast",
+var options := {"fullscreen": false, "fast": false, "inherit_all": false, "sfx_volume": 0.8, "bgm_volume": 0.7, "dlg_size": "auto", "auto_speed": "fast", "power_saver": false,
 	"tactics": {}}  # player options, kept in user://options.cfg (not in the save); tactics = 军令 (三层), shared by every save and lap — read it through AutoPlayer.with_defaults
 const OPTIONS_PATH := "user://options.cfg"
 
@@ -30,6 +30,10 @@ func set_option(key: String, value: Variant) -> void:
 	options[key] = value
 	if key == "fullscreen":
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if value else DisplayServer.WINDOW_MODE_WINDOWED)
+	elif key == "power_saver":
+		var pw := get_node_or_null("/root/Power")
+		if pw:
+			pw.apply(bool(value))
 	elif key == "bgm_volume":
 		var bgm = get_node_or_null("/root/Bgm")
 		if bgm:

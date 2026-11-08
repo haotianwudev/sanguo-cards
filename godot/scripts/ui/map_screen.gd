@@ -520,7 +520,7 @@ func _refresh() -> void:
 		b.focus_mode = Control.FOCUS_ALL if state == "reachable" else Control.FOCUS_NONE
 		b.scale = Vector2.ONE
 		if state == "reachable":
-			var tw := b.create_tween().set_loops()
+			var tw := Kit.loop(b)
 			tw.tween_property(b, "scale", Vector2(1.12, 1.12), 0.5).set_trans(Tween.TRANS_SINE)
 			tw.tween_property(b, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_SINE)
 			_pulses.append(tw)
@@ -576,7 +576,7 @@ func _bob_token() -> void:
 	_token_spr.rotation = 0.0
 	_token_spr.position = Vector2.ZERO
 	_token_spr.scale = Vector2.ONE
-	_bob = _token_spr.create_tween().set_loops()
+	_bob = Kit.loop(_token_spr)
 	_bob.tween_property(_token_spr, "scale", Vector2(0.97, 1.04), 0.7).set_trans(Tween.TRANS_SINE)
 	_bob.tween_property(_token_spr, "scale", Vector2.ONE, 0.7).set_trans(Tween.TRANS_SINE)
 
@@ -686,6 +686,7 @@ func _foot_to_pos(foot: Vector2) -> Vector2:
 
 func _walk_to(target: Dictionary) -> void:
 	## the chibi hero walks the curved road to the target square: waddling, a hop on every step, a squash on landing
+	Kit.poke()
 	if _bob != null and _bob.is_valid():
 		_bob.kill()
 	_token_spr.position = Vector2.ZERO

@@ -30,7 +30,7 @@ class SideButton extends Button:
 		scale = Vector2.ONE
 		if n > 0 and is_inside_tree():
 			pivot_offset = size / 2
-			_tw = create_tween().set_loops()
+			_tw = Kit.loop(self)
 			_tw.tween_property(self, "scale", Vector2.ONE * 1.06, 0.6).set_trans(Tween.TRANS_SINE)
 			_tw.tween_property(self, "scale", Vector2.ONE, 0.6).set_trans(Tween.TRANS_SINE)
 
