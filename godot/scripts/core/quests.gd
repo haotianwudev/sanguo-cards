@@ -1361,8 +1361,8 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 
 
 static func holds_unless_beaten(q: Dictionary, save: SaveData) -> bool:
-	## a story fight (lose_goto) moves the story on only when the party is really beaten: retreating or running out of rounds
-	## leaves it on the square to fight again (user 2026-11-08)
+	## a story fight (lose_goto) moves the story on only when it is lost (HP gone or the rounds ran out): retreating
+	## leaves the party on the square to fight again (user 2026-11-08)
 	return here(view(q, save), save)["lose_goto"] != ""
 
 

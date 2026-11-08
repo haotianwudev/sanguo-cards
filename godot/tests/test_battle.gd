@@ -610,15 +610,13 @@ func test_a_burn_takes_a_share_of_current_hp_and_never_kills() -> void:
 
 
 func test_boost_strengthens_every_number_a_skill_has() -> void:
-	## user 2026-11-08: BOOST lifts every numeric effect, not only damage; a skill's own cost (苦肉 hurt) and its durations stay as written
+	## user 2026-11-08: BOOST lifts every numeric effect, not only damage; odds (眩晕, 劫掠), a skill's own cost (苦肉 hurt) and its durations stay as written
 	var cases := [
 		[{"type": "guard", "cut": 0.2}, func(b): return b.guard_cut],
 		[{"type": "break", "amount": 0.2, "turns": 2}, func(b): return b.enemy["break_amount"]],
 		[{"type": "buff", "atk": 0.1, "def": 0.1, "magic": 0.1, "max": 4, "turns": 3}, func(b): return b.buff["atk"]],
 		[{"type": "buff", "atk": 0.1, "def": 0.1, "magic": 0.1, "max": 4, "turns": 3}, func(b): return b.buff["def"]],
 		[{"type": "buff", "atk": 0.1, "def": 0.1, "magic": 0.1, "max": 4, "turns": 3}, func(b): return b.buff["magic"]],
-		[{"type": "loot", "chest": 0.1, "card": 0.1}, func(b): return b.loot_chest],
-		[{"type": "loot", "chest": 0.1, "card": 0.1}, func(b): return b.loot_card],
 		[{"type": "shred", "amount": 0.1, "turns": 3}, func(b): return b.enemy["resist_down"]],
 		[{"type": "burn", "pct": 0.1, "turns": 2}, func(b): return b.enemy["burn_pct"]],
 		[{"type": "poison", "pct": 0.02, "turns": 3}, func(b): return b.enemy["poison_pct"]],
@@ -634,9 +632,16 @@ func test_boost_strengthens_every_number_a_skill_has() -> void:
 	ap.ap = 0
 	ap._apply(ap.leaders[0], {"type": "ap", "amount": 1}, 1.5)
 	check_eq(ap.ap, 2, "1 AP rounds up to 2")
-	var sure := Battle.start("hulao", party(["cav_n"]), 4)
-	sure._apply(sure.leaders[0], {"type": "stun", "chance": 0.67}, 1.5)
-	check(sure.enemy["stunned"], "a 67% stun is certain when boosted")
+	var missed := 0
+	for seed in 40:
+		var s := Battle.start("hulao", party(["cav_n"]), seed)
+		s._apply(s.leaders[0], {"type": "stun", "chance": 0.67}, 1.5)
+		if not s.enemy["stunned"]:
+			missed += 1
+	check(missed > 0, "a boosted 67% stun still misses: BOOST doesn't lift odds")
+	var loot := Battle.start("hulao", party(["cav_n"]), 4)
+	loot._apply(loot.leaders[0], {"type": "loot", "chest": 0.1, "card": 0.1}, 1.5)
+	check_between(loot.loot_chest, 0.099, 0.101, "劫掠 odds stay as written")
 
 
 func test_a_helper_boosts_a_random_teammate_who_has_not_acted() -> void:

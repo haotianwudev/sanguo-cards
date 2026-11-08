@@ -932,7 +932,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "boost", "units": [leaders.find(u)]})
 			return ["  %s 进入 BOOST（下次行动 ×%s）" % [unit_name(u), bm]]
 		"stun":
-			if rng.randf() < (float(eff["chance"]) + float(mods.get("stun", 0.0))) * mult:
+			if rng.randf() < float(eff["chance"]) + float(mods.get("stun", 0.0)):  # BOOST lifts numbers, never odds
 				enemy["stunned"] = true
 				_ev({"t": "stun", "ok": true})
 				var slog: Array = ["  %s 陷入眩晕！下回合无法行动%s" % [ename, "（蓄力顺延）" if enemy["charging"] != "" else ""]]
@@ -1017,8 +1017,8 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "hurt", "dmg": lost, "hp": party_hp})
 			return ["  我军折损 %d 体力" % lost]
 		"loot":  # 劫掠: every use raises the odds of a bigger haul when the fight is won
-			loot_chest = minf(1.0, loot_chest + float(eff["chest"]) * mult)
-			loot_card = minf(1.0, loot_card + float(eff["card"]) * mult)
+			loot_chest = minf(1.0, loot_chest + float(eff["chest"]))
+			loot_card = minf(1.0, loot_card + float(eff["card"]))
 			_ev({"t": "loot", "chest": loot_chest, "card": loot_card})
 			return ["  战利品：多一个宝箱 %d%%，宝箱多一张卡 %d%%" % [int(round(loot_chest * 100)), int(round(loot_card * 100))]]
 		"ap":

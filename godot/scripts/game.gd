@@ -209,7 +209,7 @@ func start_quest_battle(q: Dictionary, sq: Dictionary) -> void:
 
 
 func battle_finished(won: bool, beaten := true) -> void:
-	## beaten: the party's HP really ran out (false: it retreated, or the rounds ran out)
+	## beaten: the fight was lost (HP gone or the rounds ran out); false: the party chose to retreat
 	var q: Dictionary = battle_ctx.get("quest", {})
 	battle_ctx = {}
 	var note := ""
@@ -222,7 +222,7 @@ func battle_finished(won: bool, beaten := true) -> void:
 			note = "　".join(gained.filter(func(c): return not c.get("relic", false)).map(func(c): return "获得：" + c["name"]))
 		elif not beaten and Quests.holds_unless_beaten(q, save):
 			held = true
-			note = "还没分出胜负，这一仗躲不过去——整备之后再打"
+			note = "这一仗躲不过去——整备之后再打"
 		elif Quests.lose(q, save, rng):
 			note = "……打不过。就在这时——"
 		else:

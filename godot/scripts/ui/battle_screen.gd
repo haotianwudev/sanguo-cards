@@ -2313,5 +2313,5 @@ func _finish() -> void:
 				"retreat": "撤出战场，整备之后再打" if again else "撤出战场，这一轮重新来过"}.get(b.lose_reason, "全军体力耗尽") as String
 		await _alert(why, more, Kit.c("red"), 1.6)
 		await get_tree().create_timer(0.3).timeout
-		Game.battle_finished(false, not ["turns", "retreat"].has(b.lose_reason))
+		Game.battle_finished(false, b.lose_reason != "retreat")
 
