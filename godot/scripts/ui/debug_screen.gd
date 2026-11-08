@@ -287,7 +287,7 @@ func _cards_panel() -> Control:
 		grid.add_theme_constant_override("h_separation", 6)
 		grid.add_theme_constant_override("v_separation", 6)
 		for cid in cids:
-			var v := CardView.make(cid, Vector2(126, 176), {"skills": false})
+			var v := CardView.make(cid, Vector2(126, 176), _card_opts(cid))
 			v.pressed.connect(_preview_card.bind(cid))
 			grid.add_child(v)
 		scroll.add_child(grid)
@@ -473,9 +473,14 @@ func _overlay(alpha: float) -> Control:
 	return overlay
 
 
+static func _card_opts(cid: String) -> Dictionary:
+	## the plain 主公 card is the plain lord, not whichever lord card the loaded save is using right now
+	return {"skills": false, "form": ""} if cid == "lord" else {"skills": false}
+
+
 func _preview_card(cid: String) -> void:
 	var overlay := _overlay(0.82)
-	var v := CardView.make(cid, Vector2(320, 448), {"skills": false})
+	var v := CardView.make(cid, Vector2(320, 448), _card_opts(cid))
 	v.position = Vector2(300, 120)
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(v)

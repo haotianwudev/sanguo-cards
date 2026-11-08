@@ -382,8 +382,10 @@ func build_lord(lord_name: String, mult := 1.0, north := false, form := "", form
 	## "id" stays "lord" everywhere (card/collection/leader lookups all key on it); "person" carries the
 	## north-route portrait override so Kit.portrait_key can find lord_north without touching those checks.
 	var t: Dictionary = troops["lord"]
-	var skills: Array = kits["lord_north"]["special"] if north and kits.has("lord_north") else default_kit("lord", true)
 	var f: Dictionary = lord_forms.get(form, {})  # the lord card in use: its own stats, skills and (once drawn) face
+	if str(f.get("route", "")) != "":
+		north = f["route"] == "north"  # a route's lord card is always that route's lord (face, kit) — the 测试工具 shows every card from one save
+	var skills: Array = kits["lord_north"]["special"] if north and kits.has("lord_north") else default_kit("lord", true)
 	var fm := form_mult if form_mult >= 0.0 else mult  # a lord card levels on its own (SaveData.form_tier); callers without one use the lord's tier
 	var rar: String = str(f.get("rarity", gacha.get("lord_rarity", "R")))
 	var extra: Array = f.get("skills", [])

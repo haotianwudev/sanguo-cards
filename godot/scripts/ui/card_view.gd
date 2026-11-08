@@ -53,8 +53,11 @@ static func make(card_id: String, size := Vector2(180, 252), opts := {}) -> Card
 			v.fighter = Game.save.lord_with_form(SaveData.lord_card_form(card_id))
 		elif opts.has("form") and Game.save != null:  # a specific lord card ("" = the plain lord)
 			v.fighter = Game.save.lord_with_form(opts["form"])
-		else:
-			v.fighter = Game.save.lord() if Game.save != null else db.build_lord(opts.get("lord_name", "主公"))
+		elif Game.save != null:
+			v.fighter = Game.save.lord()
+		else:  # no save (测试工具 from a fresh title screen): still the card asked for
+			var form: String = SaveData.lord_card_form(card_id) if card_id != "lord" else str(opts.get("form", ""))
+			v.fighter = db.build_lord(opts.get("lord_name", "主公"), 1.0, false, form)
 	elif Game.save != null and Game.save.has_card(card_id):
 		v.fighter = Game.save.fighter(card_id)  # at its 铜/银/金 tier
 	else:
