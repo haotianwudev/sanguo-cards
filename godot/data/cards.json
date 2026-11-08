@@ -4136,7 +4136,7 @@
       "name": "张宝",
       "pool": false,
       "rarity": "R",
-      "troop": "strategist",
+      "troop": "bandit",
       "skills": ["wulei"],
       "hp": 68,
       "at": 64,
@@ -4146,7 +4146,7 @@
       "name": "张梁",
       "pool": false,
       "rarity": "R",
-      "troop": "infantry",
+      "troop": "bandit",
       "hp": 64,
       "at": 72,
       "scope": "north"
