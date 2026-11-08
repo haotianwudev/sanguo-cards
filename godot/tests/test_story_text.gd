@@ -21,12 +21,12 @@ func _texts() -> Array:
 	return out
 
 
-func test_only_a_battle_square_has_win_text() -> void:
+func test_every_battle_square_and_only_a_battle_square_has_win_text() -> void:
+	## user 2026-11-08: a won fight says what happened and where the story stands, never a bare 「已击破」
 	for q in GameData.get_db().quests:
 		for sid in q["squares"]:
 			var s: Dictionary = q["squares"][sid]
-			if not s["win_text"].is_empty():
-				check_eq(s["type"], "battle", "%s/%s" % [q["id"], sid])
+			check_eq(not s["win_text"].is_empty(), s["type"] == "battle", "%s/%s" % [q["id"], sid])
 
 
 static func _strip_tag(line: String) -> String:
