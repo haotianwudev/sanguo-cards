@@ -1479,3 +1479,4 @@
 - [x] 2026-11-07 cg `ss_caifuren` ← ss_caifuren4.jpg · ok
 - [x] 2026-11-07 cg `ss_yuanshao` ← ss_yuanshao2.jpg · ok
 - [x] 2026-11-07 cg `e_zhangzhongjing` ← e_zhangzhongjing.jpg · ok
+- [ ] 2026-11-08 cg `n5_guonian` ← n5_guonian_new.jpg · ok
