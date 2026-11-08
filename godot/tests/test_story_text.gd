@@ -13,12 +13,20 @@ func _texts() -> Array:
 	var db := GameData.get_db()
 	for q in db.quests:
 		for sid in q["squares"]:
-			for l in q["squares"][sid].get("text", []):
+			for l in q["squares"][sid].get("text", []) + q["squares"][sid].get("win_text", []):
 				out.append(["%s/%s" % [q["id"], sid], str(l), q.get("event_scope", "")])
 	for eid in db.events:
 		for l in db.events[eid].get("text", []):
 			out.append(["event/%s" % eid, str(l), ""])
 	return out
+
+
+func test_only_a_battle_square_has_win_text() -> void:
+	for q in GameData.get_db().quests:
+		for sid in q["squares"]:
+			var s: Dictionary = q["squares"][sid]
+			if not s["win_text"].is_empty():
+				check_eq(s["type"], "battle", "%s/%s" % [q["id"], sid])
 
 
 static func _strip_tag(line: String) -> String:

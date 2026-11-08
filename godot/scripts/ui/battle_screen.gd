@@ -2307,9 +2307,11 @@ func _finish() -> void:
 	else:
 		# say why: running out of rounds with HP left is not the same as being wiped out
 		var why := {"turns": "回合用尽", "retreat": "全军撤退"}.get(b.lose_reason, "战　败") as String
+		var q: Dictionary = Game.battle_ctx.get("quest", {})
+		var again: bool = not q.is_empty() and Quests.holds_unless_beaten(q, save)  # a story fight: only a real defeat moves the story on
 		var more := {"turns": "时间到了——敌人还剩 %d%% 体力" % int(ceil(100.0 * float(b.enemy["hp"]) / float(b.enemy["max_hp"]))),
-				"retreat": "撤出战场，这一轮重新来过"}.get(b.lose_reason, "全军体力耗尽") as String
+				"retreat": "撤出战场，整备之后再打" if again else "撤出战场，这一轮重新来过"}.get(b.lose_reason, "全军体力耗尽") as String
 		await _alert(why, more, Kit.c("red"), 1.6)
 		await get_tree().create_timer(0.3).timeout
-		Game.battle_finished(false)
+		Game.battle_finished(false, not ["turns", "retreat"].has(b.lose_reason))
 

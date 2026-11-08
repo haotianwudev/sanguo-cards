@@ -14,6 +14,7 @@ const TOKEN := Vector2(80, 80)  # the chibi hero
 const TOKEN_FOOT := Vector2(-SQ * 0.62, SQ * 0.30)
 
 var toast := ""
+var just_won := false  # straight from a won fight: the square's win_text plays once (not on a reload or a step back onto it)
 var q: Dictionary
 var _scroll: ScrollContainer
 var _layer: Control
@@ -830,9 +831,13 @@ func _show_square(s: Dictionary) -> void:
 		if not save.resolved:  # first time through, not on the way back from its battle: said once the lines are set up
 			cg_new = str(ev.get("cg", s["cg"]))
 	_apply_cg_mode()
-	var raw_lines: Array = ev.get("text", s["text"])
-	var talking: bool = not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover", "recruit"] \
-		or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()))
+	var won_text: Array = s["win_text"] if s["type"] == "battle" and save.resolved else []
+	var raw_lines: Array = won_text if not won_text.is_empty() else ev.get("text", s["text"])
+	var win_story: bool = just_won and not won_text.is_empty() and save.offer.is_empty()  # a boss's 宝物 pick comes first, this plays once it is taken
+	if save.offer.is_empty():
+		just_won = false
+	var talking: bool = win_story or (not save.resolved and raw_lines.size() > 1 and (s["type"] in ["event", "choose", "battle", "recover", "recruit"] \
+		or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty())))
 	_dlg_face = null
 	_dlg_slot = null
 	_dlg_name = null
@@ -862,7 +867,7 @@ func _show_square(s: Dictionary) -> void:
 	_sheet_buttons = buttons
 
 	var lines: Array = []
-	for t in ev.get("text", s["text"]):
+	for t in raw_lines:
 		lines.append(Kit.strip_tag(t).replace("{lord}", "[color=%s][b]%s[/b][/color]" % [Kit.c("red").to_html(), save.lord_name]))
 	var body := "\n\n".join(lines)
 	_dlg_lines = []
@@ -874,7 +879,7 @@ func _show_square(s: Dictionary) -> void:
 	if save.resolved:
 		var opts := Quests.next_options(q, save)
 		if s["type"] == "battle":
-			body = "[color=%s]已击破。[/color]" % Kit.c("green").to_html()
+			body = str(lines[-1]) if not won_text.is_empty() else "[color=%s]已击破。[/color]" % Kit.c("green").to_html()
 		elif s["type"] == "recover":
 			body = "休整完毕，体力全满。"
 		elif s["type"] == "choose":  # a made pick: its summary, and a way to pick again
@@ -911,6 +916,8 @@ func _show_square(s: Dictionary) -> void:
 				if first:
 					Kit.focus(go)
 					first = false
+		if win_story:
+			_play_lines(lines, raw_lines, text, buttons, s, prompt, cg_new)
 		return
 
 	match s["type"]:
@@ -1005,30 +1012,34 @@ func _show_square(s: Dictionary) -> void:
 	if s["type"] == "recover" and not save.resolved:  # after a rest's own lines, what resting does
 		_dlg_after = text.text
 	if narrative and lines.size() > 1 and _story_read == "":
-		_dlg_lines = lines
-		_dlg_raw = raw_lines
-		_dlg_text = text
-		_dlg_buttons = buttons
-		_dlg_recap = s["type"] == "choose" or s["type"] == "mystery"
-		_dlg_prompt = prompt
-		_dlg_i = 0
-		_dlg_keys = Kit.speakers(raw_lines, s.get("portraits", []))
-		text.scroll_active = false
-		text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
-		text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 4)
-		text.mouse_filter = Control.MOUSE_FILTER_PASS
-		_show_buttons(buttons, false)
-		_dlg_cg = cg_new
-		_dialog_show()
-	elif narrative and lines.size() > 1:  # read already (back from 整备): the summary and the options, never the scene again
-		if s["type"] in ["choose", "mystery", "event"]:
-			text.text = prompt if prompt != "" else str(lines[-1])
-		elif fight_ahead:
-			_enemy_face(s)
+		_play_lines(lines, raw_lines, text, buttons, s, prompt, cg_new)
+	elif narrative and lines.size() > 1 and s["type"] in ["choose", "mystery", "event"]:  # read already (back from 整备): the summary and the options, never the scene again
+		text.text = prompt if prompt != "" else str(lines[-1])
+	elif fight_ahead:  # lines read already, or none to read: the enemy's face over its intel
+		_enemy_face(s)
 	if cg_new != "":  # everyone in it with a voice of his own says it on his line (Sfx.cg_line from _dialog_show)
 		Sfx.cg_voice(cg_new, raw_lines, Kit.speakers(raw_lines, s.get("portraits", [])), _dlg_cg != "")
 	_update_tools()
 	_apply_dlg_size()
+
+
+func _play_lines(lines: Array, raw_lines: Array, text: RichTextLabel, buttons: Control, s: Dictionary, prompt: String, cg_new: String) -> void:
+	## a square's story, one line per click; the buttons appear after the last one
+	_dlg_lines = lines
+	_dlg_raw = raw_lines
+	_dlg_text = text
+	_dlg_buttons = buttons
+	_dlg_recap = s["type"] == "choose" or s["type"] == "mystery"
+	_dlg_prompt = prompt
+	_dlg_i = 0
+	_dlg_keys = Kit.speakers(raw_lines, s.get("portraits", []))
+	text.scroll_active = false
+	text.add_theme_font_size_override("normal_font_size", Kit.FONT_BODY + 4)
+	text.add_theme_font_size_override("bold_font_size", Kit.FONT_BODY + 4)
+	text.mouse_filter = Control.MOUSE_FILTER_PASS
+	_show_buttons(buttons, false)
+	_dlg_cg = cg_new
+	_dialog_show()
 
 
 func _make_face_slot(parent: Control, at: Vector2) -> void:
@@ -1065,29 +1076,31 @@ func _make_face_slot(parent: Control, at: Vector2) -> void:
 	stack.add_child(_dlg_name)
 
 
+func _has_face(k: Variant) -> bool:
+	## is a portrait drawn for this speaker key? (one rule for every frame decision: the frame is never left empty)
+	var key := str(k)
+	if key == "lord":
+		key = Game.save.lord()["person"]
+	return key != "" and Kit.portrait(key, 1.0, 2.4) != null
+
+
 func _any_face(keys: Array) -> bool:
 	## does anyone speaking in these lines have a portrait drawn?
-	for k in keys:
-		var key := str(k)
-		if key == "lord":
-			key = Game.save.lord()["person"]
-		if key != "" and Kit.portrait(key, 1.0, 2.4) != null:
-			return true
-	return false
+	return keys.any(_has_face)
 
 
 func _enemy_has_face() -> bool:
 	var sc: Dictionary = GameData.get_db().scenarios.get(Quests.battle_here(q, Game.save).get("battle", ""), {})
-	return not sc.is_empty() and Kit.enemy_portrait_key(GameData.get_db().enemies[sc["enemy"]]) != ""
+	return not sc.is_empty() and _has_face(Kit.enemy_portrait_key(GameData.get_db().enemies[sc["enemy"]]))
 
 
 func _near_speaker(i: int) -> String:
-	## the speaker of the nearest line before i (else after it); "" when nobody in the scene speaks
+	## the speaker with a face on the nearest line before i (else after it); "" when nobody in the scene has one
 	for j in range(mini(i, _dlg_keys.size()) - 1, -1, -1):
-		if str(_dlg_keys[j]) != "":
+		if _has_face(_dlg_keys[j]):
 			return str(_dlg_keys[j])
 	for j in range(i + 1, _dlg_keys.size()):
-		if str(_dlg_keys[j]) != "":
+		if _has_face(_dlg_keys[j]):
 			return str(_dlg_keys[j])
 	return ""
 
@@ -1170,10 +1183,13 @@ func _dialog_show() -> void:
 	Sfx.cg_line(_dlg_cg, _dlg_i)
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""
-		if key != "":
+		var near := _near_speaker(_dlg_i)
+		if _has_face(key):
 			_set_face(key)
-		else:  # narration: the nearest speaker stays in the frame, dimmed and unnamed (no face blinking out and back between lines)
-			_set_face(_near_speaker(_dlg_i), "", true)
+		elif near != "":  # narration, or a speaker with no portrait: the nearest face stays in the frame, dimmed and unnamed (no face blinking out and back between lines)
+			_set_face(near, "", true)
+		else:  # nobody here has a face, so the frame is there for the enemy ahead
+			_enemy_face(q["squares"][Game.save.square])
 	if last:
 		_story_read = Game.save.square
 		if _dlg_after != "":  # before a fight: the last line, then what you're up against

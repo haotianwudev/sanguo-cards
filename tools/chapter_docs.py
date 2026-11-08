@@ -154,7 +154,7 @@ def chapter_doc(ch):
     out += ["## 剧本（按地图顺序）", ""]
     for k in order:
         s = sq[k]
-        if not (s.get("text") or s.get("prompt") or s.get("choose")):
+        if not (s.get("text") or s.get("win_text") or s.get("prompt") or s.get("choose")):
             continue
         head = "### x%d · %s「%s」`%s`" % (s.get("x", 0), TYPE.get(s["type"], s["type"]), s.get("label", ""), k)
         out += [head, ""]
@@ -170,6 +170,8 @@ def chapter_doc(ch):
             extra = [x for x in ("要：" + "、".join(o["requires"] if isinstance(o["requires"], list) else [o["requires"]]) if o.get("requires") else "", "记「%s」" % o["record"] if o.get("record") else "",
                                  "入队 " + cname(o["card"]) if o.get("card") else "") if x]
             out.append("- **选项**「%s」→ `%s`%s" % (o.get("label", ""), o["goto"], "（%s）" % "；".join(extra) if extra else ""))
+        if s.get("win_text"):
+            out += ["", "*战后：*", ""] + ["- " + line for line in s["win_text"]]
         out.append("")
     # ---- battles ----
     out += ["## 战斗", "", "| 格子 | 名字 | 档 | 敌人 | 回合 | 掉落 | 背景图 |", "|---|---|---|---|---:|---|---|"]

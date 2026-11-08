@@ -17,7 +17,7 @@ extends RefCounted
 ## Rogue runs: every attempt at a quest is a run. 宝物 and 险 last for the run; `shuffle` groups of squares
 ## trade contents at the start of each run (the paths stay, what's on them moves).
 
-const CONTENT := ["type", "label", "battle", "boss", "elite", "ambush", "event", "text", "portraits", "cg", "prompt", "soldier_pool", "recruit_pool"]  # what a shuffle moves (a square's own pools belong to its place)
+const CONTENT := ["type", "label", "battle", "boss", "elite", "ambush", "event", "text", "win_text", "portraits", "cg", "prompt", "soldier_pool", "recruit_pool"]  # what a shuffle moves (a square's own pools belong to its place)
 static var _views := {}
 ## Damage and cumulative skill costs carry from battle to battle within a quest; they reset at a recover
 ## square or when the quest ends. Losing restarts the quest; choices already made are remembered.
@@ -1358,6 +1358,12 @@ static func complete(q: Dictionary, save: SaveData) -> void:
 	save.kept_relics = save.relics.duplicate()  # every 宝物 goes on to the next chapter
 	save.quest = ""
 	reset_carry(save)
+
+
+static func holds_unless_beaten(q: Dictionary, save: SaveData) -> bool:
+	## a story fight (lose_goto) moves the story on only when the party is really beaten: retreating or running out of rounds
+	## leaves it on the square to fight again (user 2026-11-08)
+	return here(view(q, save), save)["lose_goto"] != ""
 
 
 static func lose(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = null) -> bool:

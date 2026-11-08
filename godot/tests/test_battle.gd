@@ -609,6 +609,36 @@ func test_a_burn_takes_a_share_of_current_hp_and_never_kills() -> void:
 	check_eq(b.enemy["hp"], 1, "a fire leaves the last HP")
 
 
+func test_boost_strengthens_every_number_a_skill_has() -> void:
+	## user 2026-11-08: BOOST lifts every numeric effect, not only damage; a skill's own cost (苦肉 hurt) and its durations stay as written
+	var cases := [
+		[{"type": "guard", "cut": 0.2}, func(b): return b.guard_cut],
+		[{"type": "break", "amount": 0.2, "turns": 2}, func(b): return b.enemy["break_amount"]],
+		[{"type": "buff", "atk": 0.1, "def": 0.1, "magic": 0.1, "max": 4, "turns": 3}, func(b): return b.buff["atk"]],
+		[{"type": "buff", "atk": 0.1, "def": 0.1, "magic": 0.1, "max": 4, "turns": 3}, func(b): return b.buff["def"]],
+		[{"type": "buff", "atk": 0.1, "def": 0.1, "magic": 0.1, "max": 4, "turns": 3}, func(b): return b.buff["magic"]],
+		[{"type": "loot", "chest": 0.1, "card": 0.1}, func(b): return b.loot_chest],
+		[{"type": "loot", "chest": 0.1, "card": 0.1}, func(b): return b.loot_card],
+		[{"type": "shred", "amount": 0.1, "turns": 3}, func(b): return b.enemy["resist_down"]],
+		[{"type": "burn", "pct": 0.1, "turns": 2}, func(b): return b.enemy["burn_pct"]],
+		[{"type": "poison", "pct": 0.02, "turns": 3}, func(b): return b.enemy["poison_pct"]],
+	]
+	for c in cases:
+		var plain := Battle.start("hulao", party(["cav_n"]), 4)
+		var boosted := Battle.start("hulao", party(["cav_n"]), 4)
+		var before: float = c[1].call(plain)
+		plain._apply(plain.leaders[0], c[0], 1.0)
+		boosted._apply(boosted.leaders[0], c[0], 1.5)
+		check_between(float(c[1].call(boosted)) - before, (float(c[1].call(plain)) - before) * 1.49, (float(c[1].call(plain)) - before) * 1.51, str(c[0]))
+	var ap := Battle.start("hulao", party(["cav_n"]), 4)
+	ap.ap = 0
+	ap._apply(ap.leaders[0], {"type": "ap", "amount": 1}, 1.5)
+	check_eq(ap.ap, 2, "1 AP rounds up to 2")
+	var sure := Battle.start("hulao", party(["cav_n"]), 4)
+	sure._apply(sure.leaders[0], {"type": "stun", "chance": 0.67}, 1.5)
+	check(sure.enemy["stunned"], "a 67% stun is certain when boosted")
+
+
 func test_a_helper_boosts_a_random_teammate_who_has_not_acted() -> void:
 	var b := Battle.start("hulao", party(["liaohua", "cav_n"]), 4)
 	var helper := -1

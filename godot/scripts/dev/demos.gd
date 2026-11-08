@@ -181,6 +181,9 @@ static func run(name: String) -> void:
 				if a.begins_with("--dmg="):  # --dmg=<n>: wear carried in from earlier fights
 					Game.save.damage = int(a.substr(6))
 			var qm := MapScreen.new()
+			if OS.get_cmdline_user_args().has("--won"):  # --won: that fight was just won (its win_text plays)
+				Game.save.resolved = true
+				qm.just_won = true
 			Game.show_screen(qm)
 			if OS.get_cmdline_user_args().has("--skip"):  # --skip: skip that square's story lines (to see a fight's intel)
 				await Game.get_tree().create_timer(1.0).timeout
@@ -188,10 +191,10 @@ static func run(name: String) -> void:
 			if OS.get_cmdline_user_args().has("--go"):  # --go: press 出战 on that square (the real quest-battle path)
 				await Game.get_tree().create_timer(0.3).timeout
 				Game.start_quest_battle(q, Quests.here(q, Game.save))
-				if OS.get_cmdline_user_args().has("--end"):  # --end: then press 回合结束 once
+				if OS.get_cmdline_user_args().has("--end") or OS.get_cmdline_user_args().has("--retreat"):  # --end: then press 回合结束 once; --retreat: press 撤退
 					await Game.get_tree().create_timer(1.5).timeout
 					var bs: BattleScreen = Game.root.get_children().filter(func(c): return c is BattleScreen and not c.is_queued_for_deletion())[0]
-					bs._end.pressed.emit()
+					(bs._end if OS.get_cmdline_user_args().has("--end") else bs._retreat).pressed.emit()
 		"lordreveal":  # the lord-card moment a cleared chapter gives: --demo=lordreveal [--dupe]
 			Game.save.flags = ["出生：冀州无极"]
 			var rv := LordReveal.new()

@@ -813,6 +813,35 @@ func test_north_chapter6_a_missing_debt_ends_at_the_broken_bridge() -> void:
 		check(Quests.current_quest(s) == null, "the story stops at 结局八")
 
 
+func test_north_chapter6_good_line_needs_guanyu_beaten() -> void:
+	## both favours are not enough: 比武招亲 lost to 关羽 goes to 坏账 too (user 2026-11-08), and that bout must be winnable
+	var q := quest_by_id("huainan_n")
+	var favours := ["曹操：借粮", "夏侯惇：放他回兖州"]
+	var open := func(lines: Array, sid: String) -> bool:
+		var s := huainan_n_save(lines)
+		return Quests.gate(q["squares"][sid], s)
+	for sid in ["hnn_xj_a", "hnn_du", "hnn_niaodun", "hnn_news", "hnn_end"]:
+		check(open.call(favours + ["比武招亲：北海胜"], sid), "won: %s is open" % sid)
+		check(not open.call(favours + ["比武招亲：关羽胜"], sid), "lost: %s is shut" % sid)
+	for sid in ["hnn_xj_d", "hnn_maofang", "hnn_gongmen_f", "hnn_fire", "hnn_duanqiao", "hnn_caught", "hnn_bad_end"]:
+		check(open.call(favours + ["比武招亲：关羽胜"], sid), "lost: %s is open" % sid)
+	for sid in ["hnn_xj_d", "hnn_maofang", "hnn_bad_end"]:
+		check(not open.call(favours + ["比武招亲：北海胜"], sid), "won: %s is shut" % sid)
+	check(q["squares"]["hnn_bw3"]["beatable"], "the bout is a real, winnable fight")
+	check(q["squares"]["hnn_feast"]["next"].has("hnn_xj_d"), "the banquet leads on to it")
+
+
+func test_only_a_story_fight_holds_a_party_that_was_not_beaten() -> void:
+	## retreat / rounds up on a lose_goto fight must not walk past the story: it stays on the square, nothing recorded
+	var q := quest_by_id("huainan_n")
+	var s := huainan_n_save(["曹操：借粮", "夏侯惇：放他回兖州"])
+	Quests.begin(q, s, rng(3))
+	s.square = "hnn_bw3"
+	check(Quests.holds_unless_beaten(q, s), "比武·关羽 holds")
+	s.square = "hnn_wait_a1"
+	check(not Quests.holds_unless_beaten(q, s), "a plain fight fails the run as before")
+
+
 func test_north_chapter6_lost_fights_carry_the_story_on() -> void:
 	for pair in [["hnn_bw3", "hnn_choose_b", ["曹操：借粮", "夏侯惇：放他回兖州"]], ["hnn_gongmen", "hnn_fire", ["曹操：没借", "夏侯惇：痛击殿后"]],
 			["hnn_duanqiao", "hnn_caught", ["曹操：没借", "夏侯惇：痛击殿后"]]]:

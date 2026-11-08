@@ -14,7 +14,7 @@ static func info(s: Dictionary, fight: Dictionary) -> String:
 	if s["boss"]:
 		tags.append(chip("首领", "purple"))
 	if s["lose_goto"] != "":
-		tags.append(chip("输了也能过", "green"))
+		tags.append(chip("输了也能过", "green") if s["lose_tag"] == "" else chip(s["lose_tag"], "red"))  # lose_tag: the story goes on, but losing costs something
 	elif s["elite"]:
 		tags.append(chip("精英", "red"))
 	if fight["ambush"]:

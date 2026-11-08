@@ -906,7 +906,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			return ["  体力恢复 %d" % amt]
 		"guard":
 			var sbon := streak_bonus()
-			guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - minf(0.9, float(eff["cut"]) + sbon))
+			guard_cut = 1.0 - (1.0 - guard_cut) * (1.0 - minf(0.9, (float(eff["cut"]) + sbon) * mult))
 			guarded_this_round = true
 			_ev({"t": "guard", "cut": guard_cut})
 			return ["  本回合受到伤害 -%d%%%s" % [int(round(guard_cut * 100)), ("（连续防御 +%d%%）" % int(round(sbon * 100))) if sbon > 0.0 else ""]]
@@ -932,7 +932,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "boost", "units": [leaders.find(u)]})
 			return ["  %s 进入 BOOST（下次行动 ×%s）" % [unit_name(u), bm]]
 		"stun":
-			if rng.randf() < float(eff["chance"]) + float(mods.get("stun", 0.0)):
+			if rng.randf() < (float(eff["chance"]) + float(mods.get("stun", 0.0))) * mult:
 				enemy["stunned"] = true
 				_ev({"t": "stun", "ok": true})
 				var slog: Array = ["  %s 陷入眩晕！下回合无法行动%s" % [ename, "（蓄力顺延）" if enemy["charging"] != "" else ""]]
@@ -949,10 +949,11 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "resist_down", "amount": enemy["resist_down"], "turns": enemy["resist_turns"]})
 			return ["  射穿甲缝：%s 的兵刃、谋略抗性累计 -%d%%（%d 回合）" % [ename, int(round(enemy["resist_down"] * 100)), enemy["resist_turns"]]]
 		"break":
-			enemy["break_amount"] = maxf(enemy["break_amount"], float(eff["amount"]))
+			var broke := float(eff["amount"]) * mult
+			enemy["break_amount"] = maxf(enemy["break_amount"], broke)
 			enemy["break_turns"] = maxi(enemy["break_turns"], int(eff["turns"]))
 			_ev({"t": "break", "amount": enemy["break_amount"], "turns": enemy["break_turns"]})
-			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(float(eff["amount"]) * 100)), int(eff["turns"])]]
+			return ["  %s 破防：受到伤害 +%d%%（%d 回合）" % [ename, int(round(broke * 100)), int(eff["turns"])]]
 		"burn":  # 火攻: the enemy loses HP before each of its turns; one fire at a time — a new one keeps the bigger, restarts the count
 			# "pct": a share of the enemy's CURRENT HP each turn (so it eases off as it burns); "power": a flat amount,
 			# × the caster's attack. Fire and poison share the magic resist, taken when they tick (`_dot_resist`). Either way the fire never takes the last HP.
@@ -981,9 +982,9 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 		"buff":  # 战意: +1 layer (up to max) of attack and damage-taken cut for the whole party; recasting refreshes the timer
 			if buff["layers"] < int(eff.get("max", 4)):
 				buff["layers"] += 1
-				buff["atk"] += float(eff.get("atk", 0.0))
-				buff["def"] += float(eff.get("def", 0.0))
-				buff["magic"] = float(buff.get("magic", 0.0)) + float(eff.get("magic", 0.0))
+				buff["atk"] += float(eff.get("atk", 0.0)) * mult
+				buff["def"] += float(eff.get("def", 0.0)) * mult
+				buff["magic"] = float(buff.get("magic", 0.0)) + float(eff.get("magic", 0.0)) * mult
 			buff["turns"] = int(eff.get("turns", 3))
 			_ev({"t": "buff", "layers": buff["layers"], "atk": buff["atk"], "def": buff["def"]})
 			return ["  战意 ×%d：全军攻击 +%d%%%s%s（%d 回合）" % [buff["layers"], int(round(buff["atk"] * 100)), ("，受到伤害 -%d%%" % int(round(buff["def"] * 100))) if buff["def"] > 0.0 else "",
@@ -1016,14 +1017,15 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "hurt", "dmg": lost, "hp": party_hp})
 			return ["  我军折损 %d 体力" % lost]
 		"loot":  # 劫掠: every use raises the odds of a bigger haul when the fight is won
-			loot_chest = minf(1.0, loot_chest + float(eff["chest"]))
-			loot_card = minf(1.0, loot_card + float(eff["card"]))
+			loot_chest = minf(1.0, loot_chest + float(eff["chest"]) * mult)
+			loot_card = minf(1.0, loot_card + float(eff["card"]) * mult)
 			_ev({"t": "loot", "chest": loot_chest, "card": loot_card})
 			return ["  战利品：多一个宝箱 %d%%，宝箱多一张卡 %d%%" % [int(round(loot_chest * 100)), int(round(loot_card * 100))]]
 		"ap":
-			ap = mini(ap_max(), ap + int(eff["amount"]))
-			_ev({"t": "ap", "amount": int(eff["amount"]), "ap": ap})
-			return ["  AP +%d" % int(eff["amount"])]
+			var gained := int(ceil(float(eff["amount"]) * mult))  # BOOST rounds up: 1 AP becomes 2
+			ap = mini(ap_max(), ap + gained)
+			_ev({"t": "ap", "amount": gained, "ap": ap})
+			return ["  AP +%d" % gained]
 		"interrupt":  # 打断 (扔刀 / 回马枪 …): a charge in progress is spent for nothing; AP back and an opening (battle.charge_break)
 			if enemy["charging"] == "":
 				return ["  （%s 没有在蓄力）" % ename]
