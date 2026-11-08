@@ -1478,3 +1478,4 @@
 - [x] 2026-11-07 battle `jd_xugong` ← jd_xugong3.jpg · ok
 - [x] 2026-11-07 cg `ss_caifuren` ← ss_caifuren4.jpg · ok
 - [x] 2026-11-07 cg `ss_yuanshao` ← ss_yuanshao2.jpg · ok
+- [x] 2026-11-07 cg `e_zhangzhongjing` ← e_zhangzhongjing.jpg · ok

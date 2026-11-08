@@ -1385,3 +1385,4 @@
 | `cg:b_qinyilu` | source/cg/b_qinyilu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_caifuren` | source/cg/ss_caifuren.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:ss_yuanshao` | source/cg/ss_yuanshao.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:e_zhangzhongjing` | source/cg/e_zhangzhongjing.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
