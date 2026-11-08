@@ -441,7 +441,7 @@
       "name": "破釜",
       "troop": "infantry",
       "icon": "釜",
-      "rarity": "rare",
+      "rarity": "common",
       "desc": "破釜沉舟。体力低于一半时，攻击 +15%",
       "mods": {
         "desperate": 0.15
@@ -451,7 +451,7 @@
       "name": "定心丸",
       "troop": "logistics",
       "icon": "丸",
-      "rarity": "rare",
+      "rarity": "common",
       "desc": "不会陷入混乱",
       "mods": {
         "calm": 1
@@ -512,7 +512,7 @@
       "name": "白马义从旗",
       "troop": "cavalry",
       "icon": "旗",
-      "rarity": "rare",
+      "rarity": "common",
       "desc": "公孙瓒的白马义从，一冲就乱。骑兵：骑兵「插入」突袭的几率 +30%（骑兵本身 30%；不占 AP；队里有骑兵才生效）",
       "mods": {
         "raid": 0.3
@@ -522,7 +522,7 @@
       "name": "丈八蛇矛",
       "troop": "spear",
       "icon": "矛",
-      "rarity": "common",
+      "rarity": "rare",
       "desc": "燕人张翼德的矛，有点沉。枪兵部队：攻击 +10%，体力 +5%；枪兵被打时自动反击的几率 +20%（枪兵本身有 15%；不占 AP；队里有枪兵才生效）",
       "mods": {
         "troop_at": {
@@ -568,7 +568,7 @@
       "name": "诸葛连弩",
       "troop": "archer",
       "icon": "弩",
-      "rarity": "common",
+      "rarity": "rare",
       "desc": "一次十发，诸葛亮还没出山，图纸先到了。弓兵部队：攻击 +10%，体力 +5%；敌人的兵刃、谋略抗性各 -5%（队里有弓兵才生效）",
       "mods": {
         "troop_at": {
@@ -584,7 +584,7 @@
       "name": "穿杨箭",
       "troop": "archer",
       "icon": "箭",
-      "rarity": "rare",
+      "rarity": "common",
       "desc": "百步穿杨，专找甲缝。弓兵：敌人的兵刃、谋略抗性各 -10%；弓兵自动「射穿甲缝」（降抗）的几率 +20%（队里有弓兵才生效）",
       "mods": {
         "proc": {
@@ -626,7 +626,7 @@
       "name": "孟德新书",
       "troop": "strategist",
       "icon": "孟",
-      "rarity": "common",
+      "rarity": "rare",
       "desc": "曹操写的兵书，据说被张松背下来了。策士的技能每个少花 1 AP（最低 1；队里有策士才生效）",
       "mods": {
         "troop_cost": {
@@ -638,7 +638,7 @@
       "name": "黑山令",
       "troop": "bandit",
       "icon": "黑",
-      "rarity": "common",
+      "rarity": "rare",
       "desc": "黑山张燕的令牌，贼见了都给面子。贼部队：攻击 +10%，体力 +5%；开战全军 BOOST（队里有贼才生效）",
       "mods": {
         "troop_at": {
@@ -666,7 +666,7 @@
       "name": "青囊书",
       "troop": "logistics",
       "icon": "囊",
-      "rarity": "common",
+      "rarity": "rare",
       "desc": "华佗的医书，差点被狱卒的老婆烧了。后勤部队：体力 +15%；后勤自动照料伤兵的几率 +15%（队里有后勤才生效）",
       "mods": {
         "troop_hp": {
