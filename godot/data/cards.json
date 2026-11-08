@@ -3687,7 +3687,6 @@
       "name": "郭图",
       "rarity": "R",
       "troop": "strategist",
-      "skills": ["huyuan"],
       "hp": 72,
       "at": 64,
       "pool": false

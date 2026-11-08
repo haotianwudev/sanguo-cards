@@ -818,6 +818,24 @@ func test_a_stance_answers_physical_skills_not_magic() -> void:
 	check(b.party_hp < hp1, "a physical skill is answered")
 
 
+func test_guotu_winds_up_then_calls_in_his_men_in_both_fights() -> void:
+	for sc in [["hs_guotu", "督战弩手"], ["n7_guotu", "郭府家兵"]]:
+		var b := Battle.start(sc[0], party(["machao"]), 2)
+		b.rng = rng(7)
+		var charged := false
+		for _r in 40:  # nobody interrupts: sooner or later he picks the wind-up
+			b.party_hp = b.party_max
+			b.round_no = 1
+			b.result = ""
+			b.end_round()
+			for ev in b.take_events():
+				charged = charged or ev["t"] == "enemy_charge"
+			if not b.enemy["guard"].is_empty():
+				break
+		check(charged, "%s winds up first, so the player can interrupt" % sc[0])
+		check_eq(str(b.enemy["guard"].get("name", "")), sc[1])
+
+
 func test_a_summoned_guard_soaks_physical_but_not_magic_or_pierce() -> void:
 	var b := Battle.start("hulao", party(["machao"]), 2)
 	b.enemy["guard"] = {"name": "虎卫军", "hp": 999999, "max_hp": 999999, "strike": 0.5}
