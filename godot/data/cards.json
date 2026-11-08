@@ -4500,7 +4500,7 @@
     "hansui": {
       "name": "韩遂",
       "rarity": "R",
-      "troop": "strategist",
+      "troop": "archer",
       "hp": 70,
       "at": 78,
       "scope": "north"
