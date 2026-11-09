@@ -1499,3 +1499,4 @@
 - [ ] 2026-11-08 portrait `xuyou` ← xuyou_new2.jpg · ok
 - [ ] 2026-11-08 map `yecheng` ← yecheng_strip.jpg · ok
 - [ ] 2026-11-08 cg `ss_yuanshao` ← ss_yuanshao.jpg · ok
+- [ ] 2026-11-08 cg `ss_jushou` ← ss_jushou.jpg · ok
