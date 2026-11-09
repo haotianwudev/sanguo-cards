@@ -1350,7 +1350,7 @@
       "requires": "北线：西凉默契",
       "_pools": "北线第九章：宝箱/战利品走 north 兵卡；招贤出阎柔、鲜于辅、牵招（白狼山下来投的幽州人）和养好伤的颜良、文丑；本章专属 ？ 事件 4 个",
       "soldier_pool": [],
-      "recruit_pool": ["yanrou", "xianyufu", "qianzhao", "xinping", "xinpi", "yanliang", "wenchou"],
+      "recruit_pool": ["yanrou", "xianyufu", "qianzhao", "yanliang", "wenchou"],
       "event_pool": [],
       "ending": "duanxian",
       "event_scope": "north",

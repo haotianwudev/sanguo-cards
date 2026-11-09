@@ -549,7 +549,7 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 			var left: Array = p["recruit_pool"].map(func(c): return db.cards[c]).filter(
 				func(c): return not save.maxed(c["id"]))
 			cards = []
-			var cap := int(db.gacha.get("recruit_list_max", 5))
+			var cap := int(db.gacha["recruit_list_max"])
 			if sq["recruit_pool"].is_empty() and left.size() <= cap:  # the chapter's whole list is shown (it is short)
 				cards = left
 				var missed := _missed_generals(q, save).filter(func(c): return not left.any(func(l): return l["id"] == c))
@@ -571,14 +571,16 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 
 static func _missed_generals(q: Dictionary, save: SaveData) -> Array:
 	## the generals on the chapter lists of the chapters already finished this 周目 that you still don't have
+	## (no soldier cards; gacha.recruit_fill_skip: those the story has since killed or sent away)
+	var db := GameData.get_db()
 	var out: Array = []
 	for qid in save.quests_cleared:
 		if qid == q["id"]:
 			continue
-		for done in GameData.get_db().quests:
+		for done in db.quests:
 			if done["id"] == qid:
 				for c in pools(done, save)["recruit_pool"]:
-					if not out.has(c) and not save.has_card(c):
+					if not out.has(c) and not db.cards[c]["soldier"] and not db.gacha["recruit_fill_skip"].has(c) and not save.has_card(c):
 						out.append(c)
 	return out
 
@@ -599,7 +601,7 @@ static func fixed_list(q: Dictionary, save: SaveData) -> Array:
 	if sq["type"] != "recruit" or not sq["recruit_pool"].is_empty():
 		return []
 	var ids: Array = pools(q, save, sq)["recruit_pool"].filter(func(c): return not save.maxed(c))
-	return ids if ids.size() <= int(GameData.get_db().gacha.get("recruit_list_max", 5)) else []  # longer: dealt at random, 重摆 allowed
+	return ids if ids.size() <= int(GameData.get_db().gacha["recruit_list_max"]) else []  # longer: dealt at random, 重摆 allowed
 
 
 static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, choice: int = -1) -> Array:
