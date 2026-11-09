@@ -26,8 +26,18 @@ static func info(s: Dictionary, fight: Dictionary) -> String:
 		tags.append(("[img=26]%s[/img]" % afx_img if afx_img != "" else "") + chip("%s：%s" % [afx["name"], afx["desc"]], "amber"))
 	var turns := Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))
 	var head := ("　".join(tags) + "　" if not tags.is_empty() else "") + "体力 %d · 攻 %d · %d 动 · %d 回合" % [e["hp"], e["at"], e["actions"], turns]
-	var res := resists(e)
+	var res := "　".join([troop_tag(e), resists(e)].filter(func(t): return t != ""))
 	return "[font_size=%d]%s%s\n%s[/font_size]" % [Kit.FONT_SMALL, head, ("\n" + res if res != "" else ""), moves(e)]
+
+
+static func troop_tag(e: Dictionary) -> String:
+	## the enemy's troop and who beats it (兵种克制), so the player can field the right one from 整备: 「骑兵 · 枪兵克制」「后勤 · 中立」; nothing for a beast
+	var db := GameData.get_db()
+	var troop := str(e.get("troop", ""))
+	if troop == "":
+		return ""
+	var by := db.counter_of(troop)
+	return chip("%s · %s克制" % [db.troops[troop]["name"], db.troops[by]["name"]], "green") if by != "" else chip("%s · 中立" % db.troops[troop]["name"], "gray")
 
 
 static func chip(text: String, color_name: String) -> String:
