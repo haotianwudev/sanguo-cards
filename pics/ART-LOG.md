@@ -1497,3 +1497,4 @@
 - [x] 2026-11-08 map `beifa` ← beifa_strip.jpg · ok
 - [x] 2026-11-08 map `chibi` ← chibi_strip.jpg · ok
 - [ ] 2026-11-08 portrait `xuyou` ← xuyou_new2.jpg · ok
+- [ ] 2026-11-08 map `yecheng` ← yecheng_strip.jpg · ok

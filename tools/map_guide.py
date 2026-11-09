@@ -20,7 +20,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from map_strip import BLEND, COL_W, LANE_H, MAP_TOP, geometry  # noqa: E402
+from map_strip import BLEND, COL_W, LANE_H, MAP_TOP, cover, geometry  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "pics/inbox/_map_guides"
@@ -35,8 +35,16 @@ COMMON = ("中国传统国风手绘鸟瞰地图长卷中的一段，画风和后
           "营帐都是汉代的方形军帐，不要蒙古包。")
 SKETCH = ("第一张参考图是这幅画的构图草图，必须严格按它的位置作画：草图里浅褐色的粗线是道路，在同样的位置画成手绘的土路或大路（有车辙、有路边的草和石头，线条和整幅画一致，不要画成一条平涂的色带）；"
           "草图里每个彩色圆块标出一个地标的位置，在圆块所在的位置画出对应的地标（大小和圆块差不多）：{spots}。"
+          "每个地标的高度必须和它的圆块一样，绝对不要把地标往画面下半部挪。"
           "草图里空白的地方画开阔平坦的地面（原野、雪地或河滩），不要放建筑和高山。画面最上方一窄条可以画远山和天空。"
           "成品里绝对不能出现任何彩色圆点、色块、彩色圆圈描边、标记框或草图线条——圆块只是告诉你位置，要用画出来的建筑和地形把它完全替换掉。")
+# "continuous": true in a chapter's config: each panel is painted on from the end of the one before it, so seams don't show.
+# Generate those left to right, one at a time (--gen 2, then --gen 3 ...): every sketch reads the panel before it.
+CONTINUE = ("草图最左边那一竖条已经是画好的画，是这幅长卷上一段的右端：原样保留它，从它接着往右画，"
+            "地面、道路、河流、山势、颜色和光线都从它自然延续过去，绝对不要出现竖直的分界线；季节和色调的变化放在画面左边三分之一里慢慢过渡。")
+FLOOR = "草图下面那一大片也已经是画好的地面：原样保留，不要在上面加建筑和地标；所有地标都画在它上方的空白区域里，只把地面颜色自然接上。"
+FLOOR_GAP = 70  # game px kept free under the lowest square (its name plate)
+MEND = (0.5, 1.45)  # strip --mend wipes, in band widths from the picture's left edge
 
 
 def chapter(key):
@@ -99,6 +107,21 @@ def sketches(key):
             return ((g[0] - l + ox) / k, (g[1] + oy) / k)
 
         im = Image.new("RGB", (IW, IH), (246, 242, 232))
+        cont = cfg.get("continuous") and i > 0
+        if cont:  # the last BLEND game px of the panel before, exactly where the cross-fade will lay it
+            prev_l = max(0, cuts[i - 1] - (BLEND / 2 if i > 1 else 0))
+            prev_w = round(l + BLEND - prev_l)
+            prev = cover(Image.open(ROOT / "pics" / panels[i - 1]["src"]).convert("RGB"), prev_w, round(gh))
+            band = prev.crop((prev_w - BLEND, 0, prev_w, round(gh)))
+            im.paste(band.resize((round(BLEND / k), round(gh / k)), Image.LANCZOS), (0, round(oy / k)))
+            # empty ground below the lowest square gets painted too (the panel before, mirrored at the seam), else the
+            # model moves the landmarks down to fill it
+            floor = max(pos[s][1] for s in sq if l <= pos[s][0] <= r) + FLOOR_GAP
+            if gh - floor >= 200:  # a big empty lower half only: a thin strip would copy the buildings above it
+                ground = prev.transpose(Image.FLIP_LEFT_RIGHT).crop((0, round(floor), min(prev_w, round(r - l)), round(gh)))
+                im.paste(ground.resize((round(ground.width / k), round(ground.height / k)), Image.LANCZOS),
+                         (round((BLEND - 0) / k), round((floor + oy) / k)))
+                cont = "floor"
         d = ImageDraw.Draw(im)
         for a, b in edges(sq):
             pts = [to_img(q) for q in curve(pos[a], pos[b])]
@@ -113,7 +136,9 @@ def sketches(key):
             blobs.append((cx / IW, cy / IH, rad * 1.3 / IW, rad / IH, rgb))
         guide = OUT / f"{Path(p['src']).stem}.png"
         im.save(guide)
-        prompt = f"{cfg.get('season', '')}{p['scene']} " + SKETCH.format(spots="；".join(spot_words)) + COMMON
+        p["_band"] = BLEND / k / IW  # share of the picture's width the pasted band takes (--mend)
+        prompt = (f"{cfg.get('season', '')}{p['scene']} " + SKETCH.format(spots="；".join(spot_words))
+                  + (CONTINUE if cont else "") + (FLOOR if cont == "floor" else "") + COMMON)
         jobs.append((p, guide, prompt, blobs))
     return cfg, jobs
 
@@ -148,13 +173,37 @@ def leaked(path, blobs):
     return worst
 
 
+def mend(jobs, n):
+    """A continuous panel often keeps the pasted band with a hard vertical edge beside it, and an edit that only asks
+    to remove the edge won't. So wipe a strip across that edge and have the strip painted in from both sides."""
+    p = jobs[n - 1][0]
+    path = ROOT / "pics" / p["src"]
+    im = Image.open(path).convert("RGB")
+    x0, x1 = round(p["_band"] * MEND[0] * im.width), round(p["_band"] * MEND[1] * im.width)
+    ImageDraw.Draw(im).rectangle((x0, 0, x1, im.height), fill=(246, 242, 232))
+    OUT.mkdir(parents=True, exist_ok=True)
+    wiped = OUT / f"{path.stem}_mend.png"
+    im.save(wiped)
+    prompt = ("参考图左边有一条竖直的空白长条。只把这条空白从上到下补画完整，别的地方一笔也不要改、一样东西也不要移动："
+              "空白两边的天空、远山、地面、山崖、道路、河流、建筑都在这里接上，建筑被空白切掉的部分要补完整，"
+              "颜色从左边自然过渡到右边，看不出任何竖线、方块边缘或色差。淡彩水墨线稿，画风和两边完全一样。不要文字、边框、人物特写。")
+    subprocess.run([sys.executable, str(ROOT / "tools/art_gen.py"), "--key", path.stem, "--size", "3:2", "--out", str(path),
+                    "--prompt", prompt, "--ref", str(wiped)], cwd=ROOT, check=True, stdout=subprocess.DEVNULL)
+    print(f"mended panel {n}: strip {x0}-{x1} of {im.width}")
+
+
 def main():
     """--gen: generate the panels in parallel, then check each for copied sketch blobs and regenerate those
-    (up to 2 more rounds). --check: only report the blob check for the existing panels."""
+    (up to 2 more rounds). --check: only report the blob check for the existing panels.
+    --mend <n>: paint over the hard edge a continuous panel left beside its pasted band."""
     key = sys.argv[1]
     gen = "--gen" in sys.argv
     only = [int(a) for a in sys.argv[2:] if a.isdigit()]
     cfg, jobs = sketches(key)
+    if "--mend" in sys.argv:
+        for n in only:
+            mend(jobs, n)
+        return
     todo = []
     for n, (p, guide, prompt, blobs) in enumerate(jobs, 1):
         print(f"--- {n} {p['src']}\n{guide.relative_to(ROOT)}\n{prompt}\n")
