@@ -1496,3 +1496,4 @@
 - [x] 2026-11-08 map `luoyang_s` ← luoyang_s_strip.jpg · 强制：太小 8192×457（至少高 480）
 - [x] 2026-11-08 map `beifa` ← beifa_strip.jpg · ok
 - [x] 2026-11-08 map `chibi` ← chibi_strip.jpg · ok
+- [ ] 2026-11-08 portrait `xuyou` ← xuyou_new2.jpg · ok
