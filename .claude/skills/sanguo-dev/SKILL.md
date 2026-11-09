@@ -486,6 +486,7 @@ to this file — read it before writing or changing any story text. The rules th
   romantic-tinged ever touches a character under 18** (甄宓 before adulthood, 孙尚香 as a child, 孙权, 汉献帝, anyone 13–17).
 - The hero stays a clown (逗比), never read 三国演义, knows only the famous names; each named character's first appearance
   gets one `{lord}（内心）：` aside. `docs/STORY.md` is the outline; `story.json` wins where they differ.
+- **The hero remembers nothing of earlier 周目 / badends（用户 2026-11-08）.** A branch an ending unlocks stays a gate only: his lines there never say 「上一回……这一回……」 about what happened in another run. Same-run callbacks and 上辈子 (his modern life) are fine.
 
 ## Story text rules (新写的剧情都要照这几条；`tests/test_story_text.gd` 会拦)
 
