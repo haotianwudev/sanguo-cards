@@ -153,7 +153,8 @@ func _load(dir: String) -> void:
 			"at": int(round(float(foe_card["at"]) * float(fc["at"]))) if not foe_card.is_empty() else int(e["at"]),
 			"actions": int(e["actions"]), "moves": e["moves"],
 			"phys_resist": float(e.get("phys_resist", 0.0)), "magic_resist": float(e.get("magic_resist", 0.0)), "armor": str(e.get("armor", "")), "armor_own": e.has("armor"),
-			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "drop": e.get("drop", e.get("card", "")), "card_public": e.get("card_public", false)}
+			"portrait": e.get("portrait", ""), "card": e.get("card", ""), "drop": e.get("drop", e.get("card", "")), "card_public": e.get("card_public", false),
+			"troop": str(cards.get(str(e.get("card", "")), {}).get("troop", ""))}  # 兵种克制 reads it; no card (野兽) = neutral
 		if e.has("armor"):  # 护甲类型 (battle.armors): its resists replace the enemy's own
 			var arm: Dictionary = battle.get("armors", {}).get(e["armor"], {})  # an unknown id is a schema.json error
 			enemies[eid]["phys_resist"] = float(arm.get("phys", 0.0))
@@ -315,6 +316,15 @@ static func _choose_option(o: Dictionary) -> Dictionary:
 	## A choice on a choose square. `card` (optional) joins the party; `locked` options are shown but can't be picked; `requires` (a story flag, e.g. an ending that has to have happened before) keeps one locked until the save has it.
 	return {"card": o.get("card", ""), "label": o.get("label", ""), "goto": o.get("goto", ""), "locked": o.get("locked", false),
 		"record": o.get("record", ""), "requires": o.get("requires", "")}
+
+
+func counter_of(troop: String) -> String:
+	## the troop that beats this one (battle.troop_counter), "" for a neutral one
+	var table: Dictionary = battle.get("troop_counter", {})
+	for k in table:
+		if str(table[k]) == troop:
+			return str(k)
+	return ""
 
 
 func _validate() -> void:

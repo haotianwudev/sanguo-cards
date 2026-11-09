@@ -609,6 +609,65 @@ func test_a_burn_takes_a_share_of_current_hp_and_never_kills() -> void:
 	check_eq(b.enemy["hp"], 1, "a fire leaves the last HP")
 
 
+func _mult_of(troop: String, enemy_troop: String, boosted := false) -> float:
+	var b := Battle.start("hulao", party(["cav_n"]), 4)
+	b.enemy["data"] = b.enemy["data"].duplicate()
+	b.enemy["data"]["troop"] = enemy_troop
+	return b.act_mult({"leader": {"card": {"troop": troop}}, "boosted": boosted})
+
+
+func test_troop_counters_form_one_closed_ring_and_add_up_with_boost() -> void:
+	## user 2026-11-08: 骑 > 贼 > 策 > 刀 > 弓 > 枪 > 骑; 后勤、主公 and beasts are neutral; +25%, with BOOST ×1.75; the enemy never gets it
+	var db := GameData.get_db()
+	var t := "cavalry"
+	var seen := []
+	for _i in 6:
+		seen.append(t)
+		t = str(db.battle["troop_counter"][t])
+	check_eq(t, "cavalry", "the ring closes after six troops")
+	check_eq(seen, ["cavalry", "bandit", "strategist", "infantry", "archer", "spear"], "the ring's order")
+	check_eq(db.counter_of("logistics"), "", "logistics is neutral")
+	check_eq(db.counter_of("lord"), "", "the lord is neutral")
+	check_eq(db.enemies["boar"]["troop"], "", "a beast has no troop")
+	check_eq(_mult_of("cavalry", "bandit"), 1.25, "cavalry beats bandits")
+	check_eq(_mult_of("cavalry", "bandit", true), 1.75, "boost and counter add up")
+	check_eq(_mult_of("cavalry", "spear", true), 1.5, "boost alone")
+	check_eq(_mult_of("bandit", "cavalry"), 1.0, "not the other way round")
+	check_eq(_mult_of("logistics", "bandit"), 1.0, "a neutral troop beats nobody")
+	check_eq(_mult_of("cavalry", ""), 1.0, "nobody beats a beast")
+
+
+func test_a_counter_lifts_a_skills_damage_and_every_enemy_has_its_cards_troop() -> void:
+	var db := GameData.get_db()
+	for eid in db.enemies:
+		var e: Dictionary = db.enemies[eid]
+		if str(e["card"]) != "":
+			check_eq(e["troop"], db.cards[e["card"]]["troop"], str(eid))
+	var total := {"bandit": 0, "": 0}
+	for seed in 20:
+		for troop in total:
+			var b := Battle.start("hulao", party(["cav_n"]), seed)
+			b.enemy["data"] = b.enemy["data"].duplicate()
+			b.enemy["data"]["troop"] = troop
+			var k := -1
+			for i in b.leaders.size():
+				if b.leaders[i]["leader"]["card"]["troop"] == "cavalry":
+					k = i
+			var skill := ""
+			for sid in b.leaders[k]["leader"]["card"]["skills"]:
+				if skill == "" and db.skills[sid]["effects"].any(func(ef): return ef["type"] == "attack"):
+					skill = sid
+			b.ap = b.ap_max()
+			var before: int = b.enemy["hp"]
+			b.act(k, skill)
+			total[troop] += before - int(b.enemy["hp"])
+	check_between(float(total["bandit"]) / total[""], 1.2, 1.3, "same seeds, the countered enemy takes 25% more")
+	var ap := Battle.start("hulao", party(["cav_n"]), 4)
+	ap.ap = 0
+	ap._apply(ap.leaders[0], {"type": "ap", "amount": 1}, 1.25)
+	check_eq(ap.ap, 1, "a counter alone doesn't turn 1 AP into 2")
+
+
 func test_boost_strengthens_every_number_a_skill_has() -> void:
 	## user 2026-11-08: BOOST lifts every numeric effect, not only damage; odds (眩晕, 劫掠), a skill's own cost (苦肉 hurt) and its durations stay as written
 	var cases := [

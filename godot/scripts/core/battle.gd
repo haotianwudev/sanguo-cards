@@ -371,9 +371,10 @@ func act(i: int, skill_id: String) -> Array:
 		u["uses_left"][skill_id] -= 1
 	u["acted"] = true
 	u["idle_rounds"] = 0
-	var mult: float = float(db.battle["boost_mult"]) if u["boosted"] else 1.0
-	_ev({"t": "act", "unit": i, "skill": skill_id, "boost": u["boosted"]})
-	var log: Array = ["%s【%s】%s" % [unit_name(u), sk["name"], "（BOOST）" if u["boosted"] else ""]]
+	var mult := act_mult(u)
+	var beats := beat_bonus(u) > 0.0
+	_ev({"t": "act", "unit": i, "skill": skill_id, "boost": u["boosted"], "beats": beats, "mult": mult})
+	var log: Array = ["%s【%s】%s%s" % [unit_name(u), sk["name"], "（BOOST）" if u["boosted"] else "", "（克制）" if beats else ""]]
 	u["boosted"] = false
 	for eff in play_effects(sk):
 		if eff["type"] == "interrupt" and enemy["charging"] == "" and not sk["effects"].has(eff):
@@ -385,6 +386,17 @@ func act(i: int, skill_id: String) -> Array:
 		log.append_array(_stance_strike(i))  # 反击架势: a physical skill is answered once
 	_check_end()
 	return log
+
+
+func beat_bonus(u: Dictionary) -> float:
+	## 兵种克制 (battle.troop_counter): this unit's troop beats the enemy's: its numbers + counter_bonus. One way only, the enemy never gets it
+	var beats := str(db.battle.get("troop_counter", {}).get(str(u["leader"]["card"]["troop"]), ""))
+	return float(db.battle.get("counter_bonus", 0.0)) if beats != "" and beats == str(enemy["data"].get("troop", "")) else 0.0
+
+
+func act_mult(u: Dictionary) -> float:
+	## what this unit's next skill multiplies every number by: BOOST and 克制 add up (1 + 0.5 + 0.25 = 1.75)
+	return 1.0 + (float(db.battle["boost_mult"]) - 1.0 if u["boosted"] else 0.0) + beat_bonus(u)
 
 
 func end_round() -> Array:
@@ -1022,7 +1034,7 @@ func _apply(u: Dictionary, eff: Dictionary, mult: float) -> Array:
 			_ev({"t": "loot", "chest": loot_chest, "card": loot_card})
 			return ["  战利品：多一个宝箱 %d%%，宝箱多一张卡 %d%%" % [int(round(loot_chest * 100)), int(round(loot_card * 100))]]
 		"ap":
-			var gained := int(ceil(float(eff["amount"]) * mult))  # BOOST rounds up: 1 AP becomes 2
+			var gained := int(round(float(eff["amount"]) * mult))  # to the nearest, halves up: BOOST 1 AP becomes 2, 克制 alone (×1.25) stays 1
 			ap = mini(ap_max(), ap + gained)
 			_ev({"t": "ap", "amount": gained, "ap": ap})
 			return ["  AP +%d" % gained]
@@ -1342,7 +1354,7 @@ func _counter_strike() -> Array:
 			break
 		if u["leader"]["card"]["troop"] == "spear" and not u["confused"] and not u.get("slain", false) and (u.get("sure_counter", false) or rng.randf() < proc_chance("spear")):
 			_ev({"t": "passive", "unit": k, "name": unit_name(u), "text": "顺势反击"})
-			var d2 := _land(_dmg(float(SaveData.leader_power(u["leader"])) * float(db.battle.get("counter_power", 0.3)) * (1.0 + float(buff["atk"])), "attack"), "attack", false)
+			var d2 := _land(_dmg(float(SaveData.leader_power(u["leader"])) * float(db.battle.get("counter_power", 0.3)) * (1.0 + float(buff["atk"])) * (1.0 + beat_bonus(u)), "attack"), "attack", false)
 			_ev({"t": "counter", "unit": unit_name(u), "slot": k, "dmg": d2, "hp": enemy["hp"]})
 			log.append("  %s 顺势反击，造成 %d 伤害" % [unit_name(u), d2])
 	_check_end()
@@ -1421,10 +1433,11 @@ func _raid(k: int, lead := "插入！") -> Array:
 		else {"name": unit_name(u), "at": u["leader"]["at"]}
 	var kind := "magic" if str(u["leader"]["card"]["troop"]) == "strategist" else "attack"  # 策士 strike with magic (user rule): magic resist, past the 前卫
 	var d := 0
+	var base := float(m["at"]) * float(db.battle["interrupt_power"]) * (1.0 + beat_bonus(u))
 	if split_share(u) > 0.0:  # 弓兵 / 贼: half and half, like all their blows
-		d = int(_split_blow(float(m["at"]) * float(db.battle["interrupt_power"]), 1.0, split_share(u), false)["d"])
+		d = int(_split_blow(base, 1.0, split_share(u), false)["d"])
 	else:
-		d = _land(_dmg(float(m["at"]) * float(db.battle["interrupt_power"]), kind), kind, false)
+		d = _land(_dmg(base, kind), kind, false)
 	combo += 1
 	_ev({"t": "interrupt", "unit": k, "member": m["name"], "dmg": d, "hp": enemy["hp"], "kind": kind})
 	return ["%s%s部队的 %s 突袭，造成 %d 伤害" % [lead, unit_name(u), m["name"], d]]
@@ -1434,7 +1447,7 @@ func _troop_trick(k: int) -> Array:
 	## a troop's small trick (no AP): rolled each round by `_start_round`, sure on a 登场 (`_entry_trick`). Its size follows the card (passive_scale)
 	var pu: Dictionary = leaders[k]
 	var pname := unit_name(pu)
-	var ps := passive_scale(pu)  # the card's whole strength (攻 + 体力) sets how much it does
+	var ps := passive_scale(pu) * (1.0 + beat_bonus(pu))  # the card's whole strength (攻 + 体力) sets how much it does; 克制 lifts it too
 	var log: Array = []
 	match str(pu["leader"]["card"]["troop"]):
 		"logistics":

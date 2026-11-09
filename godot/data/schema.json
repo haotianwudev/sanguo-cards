@@ -24,6 +24,8 @@
     {"refs": "enemies.*.drop", "to": "cards.@keys"},
     {"refs": "enemies.*.armor", "to": "battle.armors.@keys"},
     {"refs": "battle.troop_armor.*", "to": "battle.armors.@keys"},
+    {"refs": "battle.troop_counter.*", "to": "troops.@keys"},
+    {"refs": "battle.troop_counter.@keys", "to": "troops.@keys"},
     {"each": "enemies.*", "refs": "moves.*.charge", "to": "moves.*.name", "why": "charges a move the enemy doesn't have"},
     {"each": "enemies.*", "refs": "moves.*.chain", "to": "moves.*.name", "optional": true},
     {"each": "enemies.*", "refs": "moves.*.mark", "to": "moves.*.name"},

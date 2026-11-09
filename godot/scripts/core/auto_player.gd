@@ -73,8 +73,7 @@ static func value(b: Battle, u: Dictionary, sk: Dictionary) -> float:
 				v += 0.6 * at if bad else 0.0
 			_:
 				v += 0.2 * at
-	if u["boosted"]:  # a boosted unit's next skill is worth boost_mult times (the boost is spent on whatever it plays)
-		v *= float(b.db.battle["boost_mult"])
+	v *= b.act_mult(u)  # BOOST (spent on whatever it plays) and 兵种克制
 	return v
 
 
