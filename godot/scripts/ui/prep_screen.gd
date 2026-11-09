@@ -14,6 +14,7 @@ var _relic_btns := {}  # relic id -> Button
 
 
 func _ready() -> void:
+	Bgm.play("strategy")
 	var save := Game.save
 	_trim(save)
 	var bg := ColorRect.new()

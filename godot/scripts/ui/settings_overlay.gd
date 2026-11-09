@@ -59,8 +59,9 @@ func _title(col: VBoxContainer, text: String) -> void:
 
 
 func _menu() -> void:
-	var col := _panel(420)
+	var col := _panel(460)
 	_title(col, "设　置")
+	_bgm_status_row(col)
 	var resume := Kit.button("继续游戏", "green", Kit.FONT_BIG)
 	resume.pressed.connect(_close)
 	col.add_child(resume)
@@ -132,6 +133,7 @@ func _options() -> void:
 	bgm_vol.value_changed.connect(func(v): Game.set_option("bgm_volume", v))
 	bgm_row.add_child(bgm_vol)
 	col.add_child(bgm_row)
+	_bgm_status_row(col)
 	var inherit := CheckButton.new()
 	inherit.text = "新的开始继承全部卡牌（测试用）"
 	inherit.button_pressed = bool(Game.options["inherit_all"])
@@ -238,6 +240,30 @@ func _cards() -> void:
 	var cb := CardsBook.new()
 	cb.save = Game.save
 	Game.root.add_child(cb)
+
+
+func _bgm_status_row(col: VBoxContainer) -> void:
+	## shows the currently playing BGM track and a button to switch to another track in the current scene pool
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	var lbl := Kit.label("♪ 当前配乐：" + Bgm.current_display_text(), 15, "gold")
+	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	row.add_child(lbl)
+	var nxt := Kit.tool_button("换一首")
+	nxt.focus_mode = Control.FOCUS_NONE
+	nxt.pressed.connect(func():
+		Bgm.next_in_scene()
+		lbl.text = "♪ 当前配乐：" + Bgm.current_display_text())
+	row.add_child(nxt)
+	var on_change := func(_tid: String) -> void:
+		if is_instance_valid(lbl):
+			lbl.text = "♪ 当前配乐：" + Bgm.current_display_text()
+	Bgm.track_changed.connect(on_change)
+	row.tree_exiting.connect(func():
+		if Bgm.track_changed.is_connected(on_change):
+			Bgm.track_changed.disconnect(on_change))
+	col.add_child(row)
 
 
 func _switch(col: Control, text: String, on: bool, changed: Callable) -> CheckButton:

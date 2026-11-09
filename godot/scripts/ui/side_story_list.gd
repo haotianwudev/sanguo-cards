@@ -67,6 +67,7 @@ static func button(pos: Vector2, on_change: Callable, also_quest := "") -> SideB
 
 
 func _ready() -> void:
+	Bgm.play("leisure")
 	z_index = 85  # above 整备 (60) and the recap (60)
 	size = Vector2(1280, 720)
 	var bg := ColorRect.new()

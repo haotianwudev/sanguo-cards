@@ -55,7 +55,7 @@ var _enemy_shouted_this_turn := false  # 敌人本回合是否已经战吼过（
 
 
 func _ready() -> void:
-	Bgm.play("battle")
+	Bgm.play("boss" if boss else ("ambush" if ambush else "battle"), true)
 	var save := Game.save
 	if carry:
 		var m := Quests.mods(save)

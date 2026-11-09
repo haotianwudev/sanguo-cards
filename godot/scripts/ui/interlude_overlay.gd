@@ -286,6 +286,7 @@ func _show_title() -> void:
 	_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_box)
 	if not ending.is_empty():  # 结局: its name, a line under it, then back to the title screen
+		Bgm.play("victory" if ending.get("final", false) else "tragic")
 		var bg := ColorRect.new()
 		bg.color = Color(0, 0, 0, 1)
 		bg.size = size

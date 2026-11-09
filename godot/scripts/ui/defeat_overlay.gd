@@ -11,6 +11,7 @@ var _ready_to_close := false
 
 
 func _ready() -> void:
+	Bgm.play("tragic")
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	z_index = 80

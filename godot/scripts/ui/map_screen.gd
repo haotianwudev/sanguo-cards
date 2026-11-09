@@ -796,6 +796,13 @@ func _clear_sheet() -> void:
 func _show_square(s: Dictionary) -> void:
 	_clear_sheet()
 	var save := Game.save
+	if s["id"] == save.square and get_node_or_null("Recap") == null:
+		if not save.resolved and s["type"] in ["recover", "recruit", "treasure", "mystery"]:
+			Bgm.play("leisure")
+		elif not save.resolved and s["type"] == "choose":
+			Bgm.play("strategy")
+		else:
+			Bgm.play("map")
 	var ev: Dictionary = {}
 	if s["type"] == "mystery" and s["id"] == save.square:
 		ev = Quests.event_here(q, save, Game.rng)
@@ -1679,6 +1686,7 @@ func _complete() -> void:
 		_recap_end = {}
 	if not _recap_end.is_empty():
 		page = {"cg": _recap_end.get("cg", "")}
+	Bgm.play("tragic" if not _recap_end.is_empty() and not _recap_end.get("final", false) else "victory")
 	Game.persist()
 	var root := Control.new()
 	root.name = "Recap"

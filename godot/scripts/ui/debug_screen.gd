@@ -39,11 +39,25 @@ func _ready() -> void:
 	tabs.position = Vector2(28, 64)
 	tabs.add_theme_constant_override("separation", 10)
 	add_child(tabs)
-	for t in [["jump", "跳到某关"], ["cards", "查看所有卡牌"], ["cgs", "查看所有 CG"], ["quit", "退出游戏"]]:
+	for t in [["jump", "跳到某关"], ["cards", "查看所有卡牌"], ["cgs", "查看所有 CG"], ["bgm", "试听配乐"], ["quit", "退出游戏"]]:
 		var b := Kit.button(t[1], "red" if t[0] == "quit" else "blue", Kit.FONT_BODY)
 		b.custom_minimum_size = Vector2(0, 46)
 		b.pressed.connect(_show.bind(t[0]))
 		tabs.add_child(b)
+
+	var bgm_lbl := Kit.label("♪ " + Bgm.current_display_text(), 14, "gold")
+	bgm_lbl.position = Vector2(680, 74)
+	bgm_lbl.size = Vector2(430, 30)
+	bgm_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	bgm_lbl.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	add_child(bgm_lbl)
+	var sync_top := func(_tid: String = "") -> void:
+		if is_instance_valid(bgm_lbl):
+			bgm_lbl.text = "♪ " + Bgm.current_display_text()
+	Bgm.track_changed.connect(sync_top)
+	tree_exiting.connect(func():
+		if Bgm.track_changed.is_connected(sync_top):
+			Bgm.track_changed.disconnect(sync_top))
 
 	_show("jump")
 
@@ -62,6 +76,8 @@ func _show(which: String) -> void:
 			_view = _cards_panel()
 		"cgs":
 			_view = _cgs_panel()
+		"bgm":
+			_view = _bgm_panel()
 	_view.position = Vector2(28, 122)
 	add_child(_view)
 
@@ -512,3 +528,117 @@ func _preview_cg(key: String) -> void:
 	lbl.position = Vector2(20, 14)
 	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(lbl)
+
+
+func _bgm_panel() -> Control:
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
+	box.size = Vector2(1224, 580)
+
+	var top := HBoxContainer.new()
+	top.add_theme_constant_override("separation", 10)
+	top.custom_minimum_size = Vector2(1208, 36)
+	box.add_child(top)
+
+	var status_lbl := Kit.label("♪ 当前配乐：" + Bgm.current_display_text(), 16, "gold")
+	status_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	top.add_child(status_lbl)
+
+	var next_btn := Kit.button("同场合随机换一首", "gold", 14)
+	next_btn.custom_minimum_size = Vector2(150, 36)
+	next_btn.pressed.connect(func(): Bgm.next_in_scene())
+	top.add_child(next_btn)
+
+	var stop_btn := Kit.button("停止播放", "gray", 14)
+	stop_btn.custom_minimum_size = Vector2(100, 36)
+	stop_btn.pressed.connect(func(): Bgm.stop())
+	top.add_child(stop_btn)
+
+	var filter_row := HFlowContainer.new()
+	filter_row.add_theme_constant_override("h_separation", 6)
+	filter_row.add_theme_constant_override("v_separation", 4)
+	filter_row.custom_minimum_size = Vector2(1208, 0)
+	box.add_child(filter_row)
+
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1224, 460)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	box.add_child(scroll)
+
+	var state := {"scene": ""}
+	var hold := {}
+	var scene_order := ["title", "map", "battle", "boss", "ambush", "leisure", "strategy", "victory", "tragic"]
+
+	var refresh := func() -> void:
+		status_lbl.text = "♪ 当前配乐：" + Bgm.current_display_text()
+		for ch in filter_row.get_children():
+			ch.queue_free()
+		var head := Kit.label("场合筛选", 15, "muted")
+		head.custom_minimum_size = Vector2(72, 34)
+		head.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		filter_row.add_child(head)
+
+		var cur_scene: String = str(state["scene"])
+		var all_btn := Kit.button("全部 %d" % Bgm.TRACKS.size(), "gold" if cur_scene == "" else "blue", 14)
+		all_btn.custom_minimum_size = Vector2(0, 34)
+		all_btn.pressed.connect(func():
+			state["scene"] = ""
+			hold["refresh"].call())
+		filter_row.add_child(all_btn)
+
+		for sc in scene_order:
+			var pool: Array = Bgm.POOLS.get(sc, [])
+			var sc_name: String = str(Bgm.SCENE_NAMES.get(sc, sc))
+			var b := Kit.button("%s %d" % [sc_name, pool.size()], "gold" if cur_scene == sc else "blue", 14)
+			b.custom_minimum_size = Vector2(0, 34)
+			b.pressed.connect(func():
+				state["scene"] = sc
+				Bgm.play(sc, true)
+				hold["refresh"].call())
+			filter_row.add_child(b)
+
+		for ch in scroll.get_children():
+			ch.queue_free()
+		var grid := GridContainer.new()
+		grid.columns = 2
+		grid.add_theme_constant_override("h_separation", 10)
+		grid.add_theme_constant_override("v_separation", 8)
+		scroll.add_child(grid)
+
+		var tids: Array = []
+		if cur_scene != "" and Bgm.POOLS.has(cur_scene):
+			tids = Bgm.POOLS[cur_scene].duplicate()
+		else:
+			tids = Bgm.TRACKS.keys()
+
+		var playing_tid := Bgm.current_track_id()
+		for tid_v in tids:
+			var tid: String = str(tid_v)
+			var info: Dictionary = Bgm.INFO.get(tid, {})
+			var t_name: String = str(info.get("name", tid))
+			var t_src: String = str(info.get("src", ""))
+			var t_desc: String = str(info.get("desc", ""))
+			var scenes_str := " / ".join(Bgm.scenes_of(tid))
+			var is_playing := (tid == playing_tid)
+			var label_text := "%s《%s》 (%s)  [%s]\n场合：%s  |  %s" % [
+				"▶ " if is_playing else "", t_name, tid, t_src, scenes_str, t_desc
+			]
+			var item_btn := Kit.button(label_text, "gold" if is_playing else "gray", 13)
+			item_btn.custom_minimum_size = Vector2(596, 58)
+			item_btn.clip_text = true
+			item_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			item_btn.pressed.connect(func():
+				Bgm.play_track(tid, cur_scene))
+			grid.add_child(item_btn)
+
+	hold["refresh"] = refresh
+	var on_track := func(_tid: String) -> void:
+		if is_instance_valid(box):
+			refresh.call()
+	Bgm.track_changed.connect(on_track)
+	box.tree_exiting.connect(func():
+		if Bgm.track_changed.is_connected(on_track):
+			Bgm.track_changed.disconnect(on_track))
+	refresh.call()
+	return box
