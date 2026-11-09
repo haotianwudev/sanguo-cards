@@ -1370,3 +1370,37 @@ func test_ssr_lord_cards_come_only_from_their_fixed_chapter() -> void:
 		var s2 := SaveData.create()
 		s2.flags = ["出生：冀州无极"] if north else []
 		check_eq(Quests.grant_lord_form(q2, s2, rng), db.lord_form_fixed[qid], "%s always gives its SSR card" % qid)
+
+
+func test_recruit_empty_seats_go_to_generals_you_passed_over() -> void:
+	## user rule: a chapter's list under 5 fills its empty seats with people missed in the chapters already finished
+	var by_id := func(id): return GameData.get_db().quests.filter(func(x): return x["id"] == id)[0]
+	var q: Dictionary = by_id.call("yecheng")
+	var old: Array = by_id.call("xuzhou")["recruit_pool"]
+	var deal := func(save: SaveData) -> Array:
+		Quests.begin(q, save)
+		save.square = "n7_x_t1"
+		save.resolved = false
+		save.offer = []
+		return Quests.offer(q, save, rng(4)).map(func(c): return c["id"])
+	check_eq(deal.call(SaveData.create()).size(), q["recruit_pool"].size(), "no chapter finished: only this chapter's list")
+	var s := SaveData.create()
+	s.quests_cleared = ["xuzhou"]
+	var ids: Array = deal.call(s)
+	check_eq(ids.size(), 5, "the empty seats are filled")
+	check(q["recruit_pool"].all(func(c): return ids.has(c)), "this chapter's own people always sit")
+	check(ids.all(func(c): return q["recruit_pool"].has(c) or old.has(c)), "the rest are from the finished chapter")
+	var held := SaveData.create()
+	held.quests_cleared = ["xuzhou"]
+	var extra: Array = old.filter(func(c): return not q["recruit_pool"].has(c))
+	for c in extra.slice(0, extra.size() - 1):
+		held.grant_card(c, true)
+	var one_left: Array = deal.call(held)
+	check_eq(one_left.size(), q["recruit_pool"].size() + 1, "someone you already have takes no seat")
+	check(one_left.has(extra[-1]), "the one you missed does")
+
+
+func test_chapter_nine_has_a_recruit_square_for_the_yecheng_two() -> void:
+	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "xiliang")[0]
+	check_eq(q["squares"]["n9_g_d_t1"]["type"], "recruit")
+	check(q["recruit_pool"].has("yanliang") and q["recruit_pool"].has("wenchou"), "颜良、文丑 come in chapter 9")

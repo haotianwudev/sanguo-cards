@@ -552,6 +552,9 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 			var cap := int(db.gacha.get("recruit_list_max", 5))
 			if sq["recruit_pool"].is_empty() and left.size() <= cap:  # the chapter's whole list is shown (it is short)
 				cards = left
+				var missed := _missed_generals(q, save).filter(func(c): return not left.any(func(l): return l["id"] == c))
+				while not missed.is_empty() and cards.size() < cap:  # 空位: someone you passed over in an earlier chapter
+					cards.append(db.cards[missed.pop_at(rng.randi_range(0, missed.size() - 1))])
 			else:  # a place's own list, or a chapter list longer than recruit_list_max: a few of them each visit
 				var n := (int(db.gacha["offer_size"]) if not sq["recruit_pool"].is_empty() else cap) + save.offer_extra()
 				while not left.is_empty() and cards.size() < n:
@@ -564,6 +567,20 @@ static func offer(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> 
 			cards = save.chest_mix(rng, int(db.gacha["chest_cards"]) + save.offer_extra(), [], q["id"])
 		save.offer = cards.map(func(c): return c["id"])
 	return save.offer.map(func(c): return db.cards[c])
+
+
+static func _missed_generals(q: Dictionary, save: SaveData) -> Array:
+	## the generals on the chapter lists of the chapters already finished this 周目 that you still don't have
+	var out: Array = []
+	for qid in save.quests_cleared:
+		if qid == q["id"]:
+			continue
+		for done in GameData.get_db().quests:
+			if done["id"] == qid:
+				for c in pools(done, save)["recruit_pool"]:
+					if not out.has(c) and not save.has_card(c):
+						out.append(c)
+	return out
 
 
 static func offer_rerollable(q: Dictionary, save: SaveData) -> bool:
