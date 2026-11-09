@@ -298,7 +298,7 @@ func _rebuild() -> void:
 			continue
 		var c: Dictionary = db.cards[cid]
 		var v := CardView.make(cid, Vector2(108, 151), {"skills": false, "count": save.copies(cid) if c["soldier"] else 0})
-		v.note = "大招已用" if not save.spent_skills(cid).is_empty() else ""
+		v.note = save.card_note(cid)
 		v.set_state(save.benched.has(cid), _sel == cid)  # left behind: greyed
 		v.pressed.connect(_tap.bind(cid))
 		v.tap_on_release = true
@@ -385,7 +385,7 @@ func _slot(cid: String, ld: Dictionary, role: String) -> Control:
 	if cid == "lord":
 		opts["lord_name"] = Game.save.lord_name
 	var v := CardView.make(cid, DRAG_SIZE, opts)
-	v.note = "大招已用" if not Game.save.spent_skills(cid).is_empty() else ""
+	v.note = Game.save.card_note(cid)
 	v.set_state(false, _sel == cid)
 	v.pressed.connect(_tap.bind(cid))
 	v.tap_on_release = true
@@ -656,7 +656,8 @@ func _fill_detail() -> void:
 		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		ic.custom_minimum_size = Vector2(24, 24)
 		row.add_child(ic)
-		row.add_child(Kit.label("%s　AP%d" % [sk["name"], sk["cost"]], Kit.FONT_BODY, "gold"))
+		var extra := save.skill_extra(_sel, sid)
+		row.add_child(Kit.label("%s　AP%d" % [sk["name"], int(sk["cost"]) + extra], Kit.FONT_BODY, "gold"))
 		_detail.add_child(row)
 		var d := Kit.label(Kit.skill_desc(sk), 15)
 		d.add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
@@ -665,6 +666,8 @@ func _fill_detail() -> void:
 		_detail.add_child(d)
 		if save.spent_skills(_sel).has(sk["name"]):
 			_detail.add_child(Kit.label("已用完，到休整格才恢复", 15, "red"))
+		if extra > 0:
+			_detail.add_child(Kit.label("累积 +%d AP，到休整格才恢复" % extra, 15, "red"))
 
 	# the actions: lead the troop / step down; bring along or leave behind
 	if swap_mode:

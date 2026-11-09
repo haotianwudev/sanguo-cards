@@ -46,6 +46,35 @@ func test_recover_square_clears_carried_wear() -> void:
 	check(s.damage == 0 and s.carry_extra.is_empty())
 
 
+func test_a_cumulative_skill_stays_dearer_in_the_next_fight_and_the_card_says_so() -> void:
+	## user 2026-11-08: the 累积 surcharge doesn't come back at the next fight (only a 休整格 / 重置技能 clears it), and 整备 shows it on the general
+	var db := GameData.get_db()
+	var fielded := party(["sunce_zhong"])
+	var b := Battle.start("boar", fielded, 1)
+	var k := -1
+	var sid := ""
+	for i in b.leaders.size():
+		for id in b.leaders[i]["leader"]["card"]["skills"]:
+			if k < 0 and db.skills[id]["cumulative"]:
+				k = i
+				sid = id
+	var cid: String = b.leaders[k]["leader"]["card"]["id"]
+	var first: int = b.cost(b.leaders[k], db.skills[sid])
+	b.ap = b.ap_max()
+	b.act(k, sid)
+	var carry := b.carry_out()
+	var b2 := Battle.start("boar", fielded, 2, 0, carry[1], carry[2])
+	check_eq(b2.cost(b2.leaders[k], db.skills[sid]), first + 1, "still dearer in the next fight")
+	var s := SaveData.create()
+	s.carry_extra = carry[1]
+	check_eq(s.skill_extra(cid, sid), 1)
+	check_eq(s.card_note(cid), "累积+1")
+	s.carry_uses = {cid: {sid: 0}}
+	check_eq(s.card_note(cid), "大招已用\n累积+1")
+	Quests.reset_carry(s)
+	check_eq(s.card_note(cid), "", "a rest clears it")
+
+
 func test_a_once_only_skill_stays_spent_until_a_rest() -> void:
 	## 大招 are once per stretch of map, not once per battle: used up, they stay used up until a 休整 square
 	var s := SaveData.create()

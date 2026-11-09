@@ -1179,6 +1179,24 @@ func spent_skills(cid: String) -> Array:
 	return out
 
 
+func skill_extra(cid: String, sid: String) -> int:
+	## how much dearer this 累积 skill has got since the last 休整格 (it carries from fight to fight)
+	return int(carry_extra.get(cid, {}).get(sid, 0))
+
+
+func card_note(cid: String) -> String:
+	## the tag across a card in 整备: what wear it carries into the next fight — 「大招已用」 and / or 「累积+N」
+	var parts: Array = []
+	if not spent_skills(cid).is_empty():
+		parts.append("大招已用")
+	var extra := 0
+	for sid in carry_extra.get(cid, {}):
+		extra += skill_extra(cid, sid)
+	if extra > 0:
+		parts.append("累积+%d" % extra)
+	return "\n".join(parts)
+
+
 func relic_unit(rid: String) -> String:
 	## the unit a worn 宝物 sits in (its troop's leader, or the lord); "" when it's left in the pool or its troop
 	## isn't out

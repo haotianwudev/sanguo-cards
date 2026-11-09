@@ -364,14 +364,17 @@ static func run(name: String) -> void:
 			Game.save.quests_cleared = ["prologue", "taodong"]  # the ？小故事 of those chapters are open
 			Game.save.flags = ["出生：江东富春"]
 			Game.save.merit = 7  # enough for one story (5), not two
-			if OS.get_cmdline_user_args().has("--spent"):  # --spent: every owned card's 本章限 N 次 大招 used up (the 「大招已用」 tag)
+			var m := MapScreen.new()
+			Game.show_screen(m)
+			if OS.get_cmdline_user_args().has("--spent"):  # --spent: every owned card's 本章限 N 次 大招 used up and 累积 skills 2 AP dearer (the 「大招已用」「累积+N」 tags)
 				for cid in Game.save.owned:
-					for sid in GameData.get_db().cards.get(cid, {}).get("skills", []):
+					for sid in GameData.get_db().build_fighter(cid)["skills"]:
+						if GameData.get_db().skills[sid].get("cumulative", false):
+							Game.save.carry_extra[cid] = Game.save.carry_extra.get(cid, {})
+							Game.save.carry_extra[cid][sid] = 2
 						if GameData.get_db().skills[sid].get("uses", null) != null:
 							Game.save.carry_uses[cid] = Game.save.carry_uses.get(cid, {})
 							Game.save.carry_uses[cid][sid] = 0
-			var m := MapScreen.new()
-			Game.show_screen(m)
 			m.call_deferred("_open_party")
 			if OS.get_cmdline_user_args().has("--side"):  # --side: open the ？小故事 list (and with --read, the first story)
 				(func():

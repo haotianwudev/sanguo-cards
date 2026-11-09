@@ -347,7 +347,7 @@ func _build() -> void:
 		n.add_theme_stylebox_override("normal", Kit.box(nb, 6, 1, Color("#ffd27a"), 2))
 		n.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		n.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		_add(n, Vector2(w * 0.12, card_h * 0.42), Vector2(w * 0.76, 26))
+		_add(n, Vector2(w * 0.12, card_h * 0.42), Vector2(w * 0.76, 26 + 20 * note.count("\n")))
 	if count > 0:
 		var cnt := Label.new()
 		cnt.text = "×%d" % count
