@@ -1443,12 +1443,12 @@ func test_north_chapter8_follows_yecheng() -> void:
 
 
 func test_north_chapter8_without_tian_feng_guo_jia_stays_north_and_the_lord_falls_at_beihai() -> void:
-	for fork in [[], ["n8_q_m1", "n8_y_m1", "n8_b_l_m1"]]:
+	for fork in [[], ["n8_q_m1", "n8_y_m1", "n8_b_l_m1", "n8_b_c_m1"]]:
 		var s := longhu_save()
 		var q := quest_by_id("longhu")
 		var p := walk(q, s, fork)
 		for sid in ["n8_start", "n8_yishi", "n8_weiping", "n8_yuantan", "n8_dumai", "n8_wuhuan", "n8_shenpei", "n8_chusai", "n8_dingbei",
-				"n8_liushou", "n8_b_nan", "n8_b_xin", "n8_b_chengyu", "n8_b_end"]:
+				"n8_liushou", "n8_b_nan", "n8_b_deng", "n8_b_xin", "n8_b_yaoxiang", "n8_b_lin", "n8_b_xiahoudun", "n8_b_dangjian", "n8_b_chengyu", "n8_b_end"]:
 			check(p.has(sid), "郭嘉留守 passes %s (forks %s)" % [sid, str(fork)])
 		for sid in ["n8_yishi_t", "n8_liushou_t", "n8_g_nan", "n8_g_jincheng", "n8_g_end"]:
 			check(not p.has(sid), "郭嘉留守 never reaches " + sid)

@@ -50,7 +50,7 @@ func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_l
 		"tianfu": ["t9_yexi", "t9_yexi_lx", "t9_jiangzhou", "t9_wuxian", "t9_xizheng", "t9_kuimen", "t9_xiuzheng", "t9_fazheng_take", "t9_fazheng_go", "t9_nanzhong", "t9_zhurong_join", "t9_yiqin"],
 		"guanzhong": ["g10_start", "g10_xiuzheng", "g10_jishi", "g10_zw_start", "g10_fenbing", "g10_huzhen", "g10_xurong", "g10_kongming"],
 		"yecheng": ["n7_start", "n7_tiqin", "n7_beishang", "n7_bieyuan", "n7_g_qin", "n7_b_anmin"],
-		"longhu": ["n8_yishi", "n8_yishi_t", "n8_dumai", "n8_b_nan", "n8_g_nan", "n8_g_jincheng", "n8_g_tuijun"],
+		"longhu": ["n8_yishi", "n8_yishi_t", "n8_dumai", "n8_b_nan", "n8_b_deng", "n8_g_nan", "n8_g_jincheng", "n8_g_tuijun"],
 		"xiliang": ["n9_start", "n9_lunu", "n9_yanjin_f", "n9_yanjin_p", "n9_g_yizheng", "n9_g_zhanta"],
 		"sanfang": ["n10_start", "n10_qiandu", "n10_xiuzheng", "n10_caoren", "n10_g_shangchuan"],
 		"tianqing": ["n11_start", "n11_beidu", "n11_gehe", "n11_a_xiaoxi", "n11_a_jianlou"],
