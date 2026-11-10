@@ -8,7 +8,7 @@ func test_bgm_tracks_exist() -> void:
 	var bgm_script: GDScript = load("res://scripts/audio/bgm.gd")
 	check(bgm_script != null, "bgm.gd should load")
 	var inst = bgm_script.new()
-	check(inst.TRACKS.size() >= 36, "expected at least 36 BGM tracks (3 original + 33 CC-BY 4.0 added)")
+	check(inst.TRACKS.size() >= 44, "expected at least 44 BGM tracks (3 original + 41 CC-BY 4.0 added)")
 	for orig in ["title", "map", "battle"]:
 		check(inst.TRACKS.has(orig), "original BGM track must be preserved: " + orig)
 		check(inst.POOLS.has(orig) and inst.POOLS[orig].has(orig), "original BGM track must stay in its scene pool: " + orig)
