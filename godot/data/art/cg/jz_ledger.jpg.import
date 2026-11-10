@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/jz_ledger.jpg-4fbd65b4ffe59b8ac2f3d78a9f4710d
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

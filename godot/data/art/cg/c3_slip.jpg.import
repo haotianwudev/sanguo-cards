@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_slip.jpg-5f2de30c0aa40cd252584366ef521983.
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

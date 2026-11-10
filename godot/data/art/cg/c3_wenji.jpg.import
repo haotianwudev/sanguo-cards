@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_wenji.jpg-8a006d643095a177e58cc4c711187da6
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

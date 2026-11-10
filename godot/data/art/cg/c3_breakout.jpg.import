@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_breakout.jpg-7d337bcad9ea7225c3688ca8913a5
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/e_zuoci.jpg-9e521386af062fabf3c61d37b94e39f8.
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/e_tangji.jpg-1e17da32b443f41869e988af9460e2bd
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

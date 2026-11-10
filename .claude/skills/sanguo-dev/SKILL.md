@@ -68,7 +68,7 @@ timeout 60 $G --path . --resolution 1280x720 -- --demo=<name> --shot=<scratchpad
   routes play (第一章); a `universal` quest (天命归一) is one chapter with route "".
 - **story.json formatting**: `python tools/fmt_story.py` (house style: one square / one event per line); patch scripts use
   `from fmt_story import dump_story`. `--check` runs in check.sh and the pre-commit hook.
-- **Texture imports are config**: `tools/import_policy.json` (big pictures lossy WebP 0.85 / portraits 0.9, icons lossless).
+- **Texture imports are config**: `tools/import_policy.json` (big pictures lossy WebP 0.85 / portraits 0.9, icons lossless; a rule may carry `max_width`: the old 1024-wide CGs and battle pictures (74, ~52 MB imported) stay **lossless** — compressed again they looked blurry on a phone (user, 2026-11-09); a new picture under 1280 wide lands there automatically).
   After new art: Godot `--import`, then `python tools/import_policy.py --write`, `--import` again, and **commit every
   `.jpg.import` with its jpg** (`--check` fails on an image committed without its `.import` — CI caught 15 of those).
 - **Saves**: `GameData.write_json` (compact, `.tmp` then rename) / `read_user_json` (falls back to the `.tmp`) for every user

@@ -13,9 +13,19 @@ GODOT = ROOT / "godot"
 POLICY = json.loads((ROOT / "tools" / "import_policy.json").read_text("utf-8"))
 
 
+def _width(rel: str) -> int:
+    """pixel width of the image an .import file belongs to (0 if it can't be read)"""
+    try:
+        from PIL import Image
+        with Image.open(GODOT / rel[: -len(".import")]) as im:
+            return im.width
+    except Exception:
+        return 0
+
+
 def rule_for(rel: str) -> dict:
     for r in POLICY["rules"]:
-        if rel.startswith(r["prefix"]):
+        if rel.startswith(r["prefix"]) and ("max_width" not in r or 0 < _width(rel) <= r["max_width"]):
             return r["params"]
     return {}
 

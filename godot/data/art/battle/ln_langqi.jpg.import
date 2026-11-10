@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/ln_langqi.jpg-7fa5d3f4a439132e966150bef868a9b
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

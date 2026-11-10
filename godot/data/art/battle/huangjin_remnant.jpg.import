@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/huangjin_remnant.jpg-183659866f841d5d60db24ca
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

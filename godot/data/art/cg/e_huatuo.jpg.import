@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/e_huatuo.jpg-ba3f2cca18195668cab932a8ff3c6e48
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

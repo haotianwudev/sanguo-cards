@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/end_yusui.jpg-1f91d1df986e1c1f25a5b2d7994f366
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

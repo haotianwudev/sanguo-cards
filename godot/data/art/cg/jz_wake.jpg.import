@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/jz_wake.jpg-164f8f442e31555d56f1f490be9acf1d.
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

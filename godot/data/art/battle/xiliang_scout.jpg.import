@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/xiliang_scout.jpg-97de0286a87063c9757d960b8d9
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0
