@@ -1169,7 +1169,8 @@ func test_south_chapter9_losing_in_the_valley_is_ending_thirteen_too() -> void:
 	Quests.begin(q, s, rng(3))
 	s.square = "t9_panshe_bad"
 	check(Quests.lose(q, s, rng(3)), "the 盘蛇谷 fire carries on into the ending")
-	check_eq(s.square, "t9_xiangjin")
+	check_eq(s.square, "t9_x_huoli", "win or lose, into the fire after her")
+	check_eq(q["squares"]["t9_x_huoli"]["next"], ["t9_xiangjin"])
 
 
 func test_south_chapter9_after_ending_thirteen_luxun_reads_the_wind() -> void:
