@@ -1496,8 +1496,30 @@
 - [x] 2026-11-08 map `luoyang_s` ← luoyang_s_strip.jpg · 强制：太小 8192×457（至少高 480）
 - [x] 2026-11-08 map `beifa` ← beifa_strip.jpg · ok
 - [x] 2026-11-08 map `chibi` ← chibi_strip.jpg · ok
-- [ ] 2026-11-08 portrait `xuyou` ← xuyou_new2.jpg · ok
-- [ ] 2026-11-08 map `yecheng` ← yecheng_strip.jpg · ok
-- [ ] 2026-11-08 cg `ss_yuanshao` ← ss_yuanshao.jpg · ok
-- [ ] 2026-11-08 cg `ss_jushou` ← ss_jushou.jpg · ok
-- [ ] 2026-11-08 map `longhu` ← longhu_strip.jpg · ⚠ 分辨率偏低 8192×538
+- [x] 2026-11-08 portrait `xuyou` ← xuyou_new2.jpg · ok
+- [x] 2026-11-08 map `yecheng` ← yecheng_strip.jpg · ok
+- [x] 2026-11-08 cg `ss_yuanshao` ← ss_yuanshao.jpg · ok
+- [x] 2026-11-08 cg `ss_jushou` ← ss_jushou.jpg · ok
+- [x] 2026-11-08 map `longhu` ← longhu_strip.jpg · ⚠ 分辨率偏低 8192×538
+- [x] 2026-11-09 map `longhu_b` ← longhu_b_strip.jpg · ⚠ 分辨率偏低 8192×538
+- [x] 2026-11-09 map `tianfu` ← tianfu_strip.jpg · 强制：太小 8192×438（至少高 480）
+- [x] 2026-11-09 map `tianfu_b` ← tianfu_b_strip.jpg · 强制：太小 8192×438（至少高 480）
+- [x] 2026-11-09 map `huainan_s_b` ← huainan_s_b_strip.jpg · 强制：太小 8192×346（至少高 480）
+- [x] 2026-11-09 map `jiangdong_b` ← jiangdong_b_strip.jpg · ⚠ 分辨率偏低 8192×489
+- [x] 2026-11-09 map `guanzhong_b` ← guanzhong_b_strip.jpg · 强制：太小 8192×457（至少高 480）
+- [x] 2026-11-09 cg `n8_b_deng` ← n8_b_deng.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `n8_b_yaoxiang` ← n8_b_yaoxiang.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `n8_b_linzi` ← n8_b_linzi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `n8_b_dangjian` ← n8_b_dangjian.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c12_bujv` ← c12_bujv.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c12_fengzhuan` ← c12_fengzhuan.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c12_huoli` ← c12_huoli.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c9_qiaogong` ← c9_qiaogong.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c9_zhailou` ← c9_zhailou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c10_lingdang` ← c10_lingdang.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c10_shaocun` ← c10_shaocun.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c10_qianye` ← c10_qianye.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c13_shumi` ← c13_shumi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c13_lastgrain` ← c13_lastgrain.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c13_wanglou` ← c13_wanglou.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 map `jiangdong_b` ← jiangdong_b_strip.jpg · ⚠ 分辨率偏低 8192×489

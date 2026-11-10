@@ -14,7 +14,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from map_guide import ROOT, chapter, curve, edges, square_pos  # noqa: E402
+from map_guide import ROOT, chapter, curve, edges, on_route, square_pos  # noqa: E402
 from map_strip import geometry  # noqa: E402
 
 TILE = 1300
@@ -31,6 +31,8 @@ def main():
     x_min = cfg.get("x_min", 0)
     gw, gh = geometry(quest, x_min, cfg.get("x_max"))
     pos, sq = square_pos(quest, x_min, cfg.get("x_max"), a.key)
+    if "route" in cfg:  # a route's own map: only that route's squares
+        sq = {k: s for k, s in sq.items() if on_route(s, set(cfg["route"]))}
     src = Path(a.map) if a.map else ROOT / "godot/data/art/map" / f"{a.key}.jpg"
     im = Image.open(src).convert("RGB").resize((gw, gh), Image.LANCZOS)
     d = ImageDraw.Draw(im)

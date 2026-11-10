@@ -69,5 +69,13 @@
     "n7_g_end": [40, 70],
     "n7_b_wenchou": [0, -40],
     "n7_b_kujing": [15, 25]
+  },
+  "huainan_s_b": {
+    "hn_city_night": [70, 0],
+    "hn_jibao": [40, 50]
+  },
+  "jiangdong_b": {
+    "jd_x_lie": [70, 0],
+    "jd_b_menke": [60, 0]
   }
 }

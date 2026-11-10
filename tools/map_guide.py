@@ -66,6 +66,16 @@ def square_pos(quest, x_min, x_max, key=""):
     return {k: at(k, s) for k, s in sq.items()}, sq
 
 
+def on_route(s, lines):
+    """Quests.gate over a fixed set of record lines: every `requires` holds; a list `unless` hides only when every
+    line holds. A map config's "route" lists the lines that route has (map_overrides gives it its own picture)."""
+    req = s.get("requires") or []
+    req = [req] if isinstance(req, str) else req
+    unl = s.get("unless") or []
+    unl = [unl] if isinstance(unl, str) else unl
+    return all(r in lines for r in req) and not (unl and all(u in lines for u in unl))
+
+
 def edges(sq):
     for k, s in sq.items():
         nx = s.get("next") or []
@@ -91,6 +101,8 @@ def sketches(key):
     x_min = cfg.get("x_min", 0)
     gw, gh = geometry(quest, x_min, cfg.get("x_max"))
     pos, sq = square_pos(quest, x_min, cfg.get("x_max"), key)
+    if "route" in cfg:  # a route's own map (map_overrides): draw only the squares that route can see
+        sq = {k: s for k, s in sq.items() if on_route(s, set(cfg["route"]))}
     panels = sorted(cfg["panels"], key=lambda p: p["from"])
     cuts = [0] + [90 + (p["from"] - x_min) * COL_W - COL_W / 2 for p in panels[1:]] + [gw]
     OUT.mkdir(parents=True, exist_ok=True)

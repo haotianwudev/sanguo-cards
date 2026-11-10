@@ -4205,6 +4205,26 @@
     "guiyi": {
       "src": "source/map/guiyi.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "longhu_b": {
+      "src": "source/map/longhu_b.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "tianfu_b": {
+      "src": "source/map/tianfu_b.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "huainan_s_b": {
+      "src": "source/map/huainan_s_b.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "jiangdong_b": {
+      "src": "source/map/jiangdong_b.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "guanzhong_b": {
+      "src": "source/map/guanzhong_b.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "battles": {
@@ -7809,6 +7829,66 @@
     },
     "ss_jushou": {
       "src": "source/cg/ss_jushou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_b_deng": {
+      "src": "source/cg/n8_b_deng.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_b_yaoxiang": {
+      "src": "source/cg/n8_b_yaoxiang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_b_linzi": {
+      "src": "source/cg/n8_b_linzi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "n8_b_dangjian": {
+      "src": "source/cg/n8_b_dangjian.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_bujv": {
+      "src": "source/cg/c12_bujv.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_fengzhuan": {
+      "src": "source/cg/c12_fengzhuan.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c12_huoli": {
+      "src": "source/cg/c12_huoli.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c9_qiaogong": {
+      "src": "source/cg/c9_qiaogong.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c9_zhailou": {
+      "src": "source/cg/c9_zhailou.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_lingdang": {
+      "src": "source/cg/c10_lingdang.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_shaocun": {
+      "src": "source/cg/c10_shaocun.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c10_qianye": {
+      "src": "source/cg/c10_qianye.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_shumi": {
+      "src": "source/cg/c13_shumi.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_lastgrain": {
+      "src": "source/cg/c13_lastgrain.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "c13_wanglou": {
+      "src": "source/cg/c13_wanglou.jpg",
       "license": "用户提供（Gemini 生成）"
     }
   }
