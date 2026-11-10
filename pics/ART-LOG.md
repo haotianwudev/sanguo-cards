@@ -1523,3 +1523,4 @@
 - [x] 2026-11-09 cg `c13_lastgrain` ← c13_lastgrain.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-11-09 cg `c13_wanglou` ← c13_wanglou.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-11-09 map `jiangdong_b` ← jiangdong_b_strip.jpg · ⚠ 分辨率偏低 8192×489
+- [x] 2026-11-09 cg `n8_liushi` ← n8_liushi.jpg 裁 2528×1696→2528×1422 · ok
