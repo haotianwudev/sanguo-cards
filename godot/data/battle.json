@@ -551,7 +551,7 @@
       "card_general_name": "旧雨重逢",
       "perks": [
         {"id": "merit", "name": "富甲一方", "cost": 1, "max": 3, "desc": "开局战功 +5（够一次招贤）"},
-        {"id": "start_chest", "name": "开门大吉", "cost": 2, "max": 2, "desc": "出发时先开一个宝箱"},
+        {"id": "start_chest", "name": "开门大吉", "cost": 1, "max": 2, "desc": "出发时先开一个宝箱"},
         {"id": "ap_max", "name": "运筹帷幄", "cost": 2, "max": 2, "desc": "战斗 AP 上限 +1", "mods": {"ap_max": 1}},
         {"id": "chest", "name": "满载而归", "cost": 2, "max": 2, "desc": "战后宝箱几率 +15%", "mods": {"chest": 0.15}},
         {"id": "public", "name": "招贤纳士", "cost": 3, "max": 1, "desc": "公共武将重新进招贤和宝箱（不买：只有本章的和记得的武将）"},
@@ -562,7 +562,7 @@
         {"id": "ap_start", "name": "先声夺人", "cost": 3, "max": 1, "desc": "每场战斗开局 AP +1", "mods": {"ap_start": 1}},
         {"id": "merit_up", "name": "功成名就", "cost": 5, "max": 1, "desc": "章节结算的战功 +50%"},
         {"id": "easy", "name": "化险为夷", "cost": 5, "max": 2, "desc": "敌人强度 −15%（等于降一级难度，但难度解锁的剧情照样触发）", "mods": {"enemy": -0.15}},
-        {"id": "lord_bench", "name": "坐镇中军", "cost": 5, "max": 1, "desc": "主公可以不上场，把位置让给武将（整备里切换）"},
+        {"id": "lord_bench", "name": "坐镇中军", "cost": 4, "max": 1, "desc": "主公可以不上场，把位置让给武将（整备里切换）"},
         {"id": "foresight", "name": "未卜先知", "cost": 8, "max": 1, "desc": "？事件自己选选项，不再随机抽"},
         {"id": "pick_extra", "name": "兼收并蓄", "cost": 8, "max": 1, "desc": "每次选卡（宝箱、招贤）可以多拿一张"},
         {"id": "ap_round", "name": "源源不断", "cost": 10, "max": 1, "desc": "战斗中每回合多回 1 AP", "mods": {"ap_round": 1}},
