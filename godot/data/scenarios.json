@@ -1122,7 +1122,7 @@
     "g10_x_guosi": {"name": "子午谷口·郭汜", "turn_limit": 10, "enemy": "m10_guosi", "art": "m10_guosi"},
     "g10_x_feixiong": {"name": "谷口·飞熊军", "turn_limit": 6, "enemy": "m10_feixiong", "art": "m10_feixiong"},
     "n8_b_fubing": {"name": "城东林·魏军伏兵", "turn_limit": 6, "enemy": "n8_b_fubing", "art": "n8_b_chengyu"},
-    "n8_b_zangba": {"name": "青州道·臧霸", "turn_limit": 10, "enemy": "n8_b_zangba", "art": "n8_g_zangba"},
+    "n8_b_songxian": {"name": "青州道·宋宪", "turn_limit": 10, "enemy": "n8_b_songxian", "art": "n8_langqi"},
     "n8_b_xiahoudun": {"name": "城东林·夏侯惇", "turn_limit": 10, "enemy": "n8_b_xiahoudun", "art": "n8_g_xiahoudun"},
     "n8_g_xiahoudun": {"name": "城东林·夏侯惇", "turn_limit": 10, "enemy": "n8_g_xiahoudun"},
     "n8_langqi": {"name": "北海城外·并州狼骑", "turn_limit": 6, "enemy": "n8_langqi"},
