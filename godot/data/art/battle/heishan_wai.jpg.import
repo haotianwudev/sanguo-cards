@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/heishan_wai.jpg-931de926bad47d1ddf2ca8217fbe7
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

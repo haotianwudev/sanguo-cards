@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/huaxiong.jpg-802dbec9c43d50c940fcbd65bb1fe029
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

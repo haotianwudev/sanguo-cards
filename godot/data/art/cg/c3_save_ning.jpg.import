@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_save_ning.jpg-96f608fc2f47dcfea9cf0bc39ee0
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_shanfei.jpg-895d68d2eceda63305876f723d70dd
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

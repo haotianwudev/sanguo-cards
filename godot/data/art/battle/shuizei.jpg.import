@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/shuizei.jpg-b3feeb2ff4e3b88915be2dd7ca5fd422.
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

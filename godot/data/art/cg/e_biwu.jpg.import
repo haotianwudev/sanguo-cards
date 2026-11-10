@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/e_biwu.jpg-e91a8593e73f067b4dadb8b81b0970b3.c
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

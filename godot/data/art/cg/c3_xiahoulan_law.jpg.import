@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_xiahoulan_law.jpg-e25c6e9f47e469b089bab792
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

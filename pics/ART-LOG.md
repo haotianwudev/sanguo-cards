@@ -1524,3 +1524,75 @@
 - [x] 2026-11-09 cg `c13_wanglou` ← c13_wanglou.jpg 裁 2528×1696→2528×1422 · ok
 - [x] 2026-11-09 map `jiangdong_b` ← jiangdong_b_strip.jpg · ⚠ 分辨率偏低 8192×489
 - [x] 2026-11-09 cg `n8_liushi` ← n8_liushi.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 cg `c1_wake` ← Gemini_Generated_Image_614sn0614sn0614s.jpg · ok
+- [x] 2026-11-09 cg `c1_bandage` ← Gemini_Generated_Image_i60mjii60mjii60m.jpg · ok
+- [x] 2026-11-09 cg `c1_village` ← Gemini_Generated_Image_fos4wafos4wafos4.jpg · ok
+- [x] 2026-11-09 cg `c1_raid` ← Gemini_Generated_Image_e67n36e67n36e67n.jpg · ok
+- [x] 2026-11-09 cg `c1_rescue` ← Gemini_Generated_Image_ul3h7zul3h7zul3h.jpg · ok
+- [x] 2026-11-09 cg `c1_dinner` ← Gemini_Generated_Image_dthdpodthdpodthd.jpg · ok
+- [x] 2026-11-09 cg `i1_sewing` ← Gemini_Generated_Image_5ic9yt5ic9yt5ic9.jpg · ok
+- [x] 2026-11-09 cg `i1_north_pack` ← Gemini_Generated_Image_3kppjz3kppjz3kpp.jpg · ok
+- [x] 2026-11-09 cg `c2_raid` ← Gemini_Generated_Image_gyz6wcgyz6wcgyz6.jpg · ok
+- [x] 2026-11-09 cg `c2_yuxi` ← Gemini_Generated_Image_yr18v6yr18v6yr18.jpg · ok
+- [x] 2026-11-09 cg `c2_sanying` ← Gemini_Generated_Image_21b5gw21b5gw21b5.jpg · ok
+- [x] 2026-11-09 cg `c2_zumao` ← Gemini_Generated_Image_e6b0pfe6b0pfe6b0.jpg · ok
+- [x] 2026-11-09 cg `e_biwu` ← Gemini_Generated_Image_8bo94w8bo94w8bo9.jpg · ok
+- [x] 2026-11-09 cg `c2_heqin` ← Gemini_Generated_Image_g2wu9wg2wu9wg2wu.jpg · ok
+- [x] 2026-11-09 cg `e_grand_chest` ← Gemini_Generated_Image_c1zq1lc1zq1lc1zq.jpg · ok
+- [x] 2026-11-09 cg `end_yusui` ← Gemini_Generated_Image_nid5fenid5fenid5.jpg · ok
+- [x] 2026-11-09 cg `c3_wenji` ← Gemini_Generated_Image_fj41anfj41anfj41.jpg · ok
+- [x] 2026-11-09 cg `c3_slip` ← Gemini_Generated_Image_tmh6hhtmh6hhtmh6.jpg · ok
+- [x] 2026-11-09 cg `c3_news` ← Gemini_Generated_Image_gws3krgws3krgws3.jpg · ok
+- [x] 2026-11-09 cg `e_tangji` ← Gemini_Generated_Image_y0f6i7y0f6i7y0f6.jpg · ok
+- [x] 2026-11-09 cg `jz_ambush` ← Gemini_Generated_Image_j1u7gwj1u7gwj1u7.jpg · ok
+- [x] 2026-11-09 cg `jz_rescue` ← Gemini_Generated_Image_j6lze7j6lze7j6lz.jpg · ok
+- [x] 2026-11-09 cg `jz_end` ← Gemini_Generated_Image_yk02h9yk02h9yk02.jpg · ok
+- [x] 2026-11-09 cg `jz_wake` ← Gemini_Generated_Image_6yewun6yewun6yew.jpg · ok
+- [x] 2026-11-09 cg `jz_ledger` ← Gemini_Generated_Image_jcwc80jcwc80jcwc.jpg · ok
+- [x] 2026-11-09 cg `jz_guojia` ← Gemini_Generated_Image_yigmnuyigmnuyigm.jpg · ok
+- [x] 2026-11-09 cg `jz_boss` ← Gemini_Generated_Image_f643lf643lf643lf.jpg · ok
+- [x] 2026-11-09 cg `ln_camp` ← Gemini_Generated_Image_ag9a30ag9a30ag9a.jpg · ok
+- [x] 2026-11-09 cg `ln_handhold` ← Gemini_Generated_Image_t8n0itt8n0itt8n0.jpg · ok
+- [x] 2026-11-09 cg `c2_lingqi_oath` ← Gemini_Generated_Image_i0m8zzi0m8zzi0m8.jpg · ok
+- [x] 2026-11-09 cg `c1_era` ← Gemini_Generated_Image_mjr3c4mjr3c4mjr3.jpg · ok
+- [x] 2026-11-09 cg `e_yazhai` ← Gemini_Generated_Image_taqcg9taqcg9taqc.jpg · ok
+- [x] 2026-11-09 cg `c2_ln_caocao` ← Gemini_Generated_Image_1zod541zod541zod.jpg · ok
+- [x] 2026-11-09 cg `c2_ln_bianshui` ← Gemini_Generated_Image_vgkl7yvgkl7yvgkl.jpg · ok
+- [x] 2026-11-09 cg `c3_bribe_villager` ← 常山真定城招贤榜前场景插画 (1).png · ok
+- [x] 2026-11-09 cg `c3_encounter_ning` ← 常山真定城招贤榜前场景插画 (3).png · ok
+- [x] 2026-11-09 cg `c3_leave_ning` ← 常山真定城招贤榜前场景插画 (4).png · ok
+- [x] 2026-11-09 cg `c3_guojia_map` ← 常山真定城招贤榜前场景插画 (7).png · ok
+- [x] 2026-11-09 cg `c3_secret_path` ← 常山真定城招贤榜前场景插画 (8).png · ok
+- [x] 2026-11-09 cg `c3_breakout` ← 常山真定城招贤榜前场景插画 (9).png · ok
+- [x] 2026-11-09 cg `c3_xiahoulan_law` ← 真定县夏侯兰惩兵痞剧情CG_横版.png · ok
+- [x] 2026-11-09 cg `c3_save_ning` ← 太行山深谷战斗剧情CG修正版.jpg · ok
+- [x] 2026-11-09 battle `boar` ← Gemini_Generated_Image_l3i3vml3i3vml3i3.jpg · ok
+- [x] 2026-11-09 battle `shuizei_scout` ← Gemini_Generated_Image_d1pxd9d1pxd9d1px.jpg · ok
+- [x] 2026-11-09 battle `shuizei` ← Gemini_Generated_Image_3c59003c59003c59.jpg · ok
+- [x] 2026-11-09 battle `shuizei_guard` ← Gemini_Generated_Image_psn046psn046psn0.jpg · ok
+- [x] 2026-11-09 battle `yaodao` ← Gemini_Generated_Image_qzfpveqzfpveqzfp.jpg · ok
+- [x] 2026-11-09 battle `shuizei_main` ← Gemini_Generated_Image_7c2uca7c2uca7c2u.jpg · ok
+- [x] 2026-11-09 battle `tiger` ← Gemini_Generated_Image_ufbdr3ufbdr3ufbd.jpg · ok
+- [x] 2026-11-09 battle `yuji_xintu` ← Gemini_Generated_Image_h1ecqth1ecqth1ec.jpg · ok
+- [x] 2026-11-09 battle `yanzhihu` ← Gemini_Generated_Image_g5vvm6g5vvm6g5vv.jpg · ok
+- [x] 2026-11-09 battle `huangjin_remnant` ← Gemini_Generated_Image_joo50ujoo50ujoo5.jpg · ok
+- [x] 2026-11-09 battle `shanzei_band` ← Gemini_Generated_Image_nqj9wgnqj9wgnqj9.jpg · ok
+- [x] 2026-11-09 battle `dongbai` ← Gemini_Generated_Image_snqc3rsnqc3rsnqc.jpg · ok
+- [x] 2026-11-09 battle `huaxiong` ← Gemini_Generated_Image_fsqpz7fsqpz7fsqp.jpg · ok
+- [x] 2026-11-09 battle `hulao_ch1` ← Gemini_Generated_Image_nhwjhjnhwjhjnhwj.jpg · ok
+- [x] 2026-11-09 battle `feixiong` ← Gemini_Generated_Image_8nsavd8nsavd8nsa.jpg · ok
+- [x] 2026-11-09 battle `biwu` ← Gemini_Generated_Image_8bo94w8bo94w8bo9.jpg · ok
+- [x] 2026-11-09 battle `lijue` ← ChatGPT Image Sep 29, 2026, 10_20_46 PM.png · ok
+- [x] 2026-11-09 battle `xiliang_youqi` ← Gemini_Generated_Image_2gr74c2gr74c2gr7 (1).jpg · ok
+- [x] 2026-11-09 battle `xiliang_scout` ← Gemini_Generated_Image_969cxw969cxw969c.jpg · ok
+- [x] 2026-11-09 battle `c3_jiling` ← Gemini_Generated_Image_1e284b1e284b1e28.jpg · ok
+- [x] 2026-11-09 battle `c3_qiaorui` ← Gemini_Generated_Image_tsjx8ttsjx8ttsjx.jpg · ok
+- [x] 2026-11-09 battle `c3_chenlan` ← Gemini_Generated_Image_4zwjec4zwjec4zwj.jpg · ok
+- [x] 2026-11-09 battle `c3_leibo` ← Gemini_Generated_Image_ypvjvxypvjvxypvj.jpg · ok
+- [x] 2026-11-09 battle `c3_shanfei` ← Gemini_Generated_Image_2z1ybf2z1ybf2z1y.jpg · ok
+- [x] 2026-11-09 battle `heishan_wai` ← Gemini_Generated_Image_2qe0px2qe0px2qe0.jpg 裁 2528×1696→2528×1422 · ok
+- [x] 2026-11-09 battle `heishan_zhai` ← Gemini_Generated_Image_ggyuimggyuimggyu.jpg · ok
+- [x] 2026-11-09 battle `ln_lvlingqi` ← Gemini_Generated_Image_qgvb06qgvb06qgvb.jpg · ok
+- [x] 2026-11-09 battle `c2_gongqi` ← Gemini_Generated_Image_jo8m28jo8m28jo8m.jpg · ok
+- [x] 2026-11-09 battle `c4_langqi` ← Gemini_Generated_Image_qltq65qltq65qltq.jpg · ok
+- [x] 2026-11-09 battle `ln_langqi` ← Gemini_Generated_Image_qltq65qltq65qltq.jpg · ok

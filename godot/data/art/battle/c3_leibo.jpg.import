@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c3_leibo.jpg-78b207183ff5426fa3343e431c5ecc1a
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

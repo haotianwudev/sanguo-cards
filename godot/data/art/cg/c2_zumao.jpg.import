@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/c2_zumao.jpg-77acc98b00a490f305071c32bc5afc58
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

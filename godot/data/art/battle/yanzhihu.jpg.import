@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/yanzhihu.jpg-abc59394a8dae63f3d8fd5a5f42bb22e
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0

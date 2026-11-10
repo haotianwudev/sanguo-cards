@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/lijue.jpg-dbd85311df86a05a62ac4b1192ad71e6.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.85
 compress/uastc_level=0
