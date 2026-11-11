@@ -891,6 +891,9 @@ static func run(name: String) -> void:
 			Game.save.owned = ["sunce_zhong", "sunce_bawang", "zhouyu_chibi", "wuguotai", "guanyu", "sunjian"]
 			Game.save.soldiers = {"cav_n": 2, "strat_n": 1, "log_n": 1}
 			Game.save.party = ["sunce_zhong", "zhouyu_chibi", "sunjian"]
+			if OS.get_cmdline_user_args().has("--five"):  # 猛将如云: a 5th leader, the row shrinks to fit
+				Game.save.party_slots = 5
+				Game.save.party.append("guanyu")
 			var b := BattleScreen.new()
 			b.scenario_id = "hulao"
 			for a in OS.get_cmdline_user_args():  # --scenario=<id>: any battle, e.g. one with a battle CG

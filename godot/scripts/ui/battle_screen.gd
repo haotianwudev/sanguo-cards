@@ -283,8 +283,7 @@ func _build() -> void:
 	pr.add_child(_combo_label)
 
 	# leaders (bottom-left) — skills live in a popup now (tap the card), not stacked buttons under it,
-	# so the card itself can run much bigger; the 5th "locked" slot is a slim strip, not full card width,
-	# so it doesn't eat into the 4 real cards' size (a future 5-member chapter can revisit this split)
+	# so the card itself can run much bigger
 	var row := HBoxContainer.new()
 	_row = row
 	_has_cg = has_cg
@@ -292,8 +291,13 @@ func _build() -> void:
 	row.add_theme_constant_override("separation", 2)
 	add_child(row)
 	var card_size := Vector2(240, 336) if not has_cg else Vector2(190, 266)
+	# 猛将如云 fields a 5th leader: shrink every card so the row still ends before the action column
+	var room := (1060.0 if not has_cg else 1080.0) - row.position.x
+	var n := maxi(b.leaders.size(), 1)
+	var fit := (room - 2.0 * (n - 1)) / n
+	if fit < card_size.x:
+		card_size *= fit / card_size.x
 	_card_size = card_size
-	var locked_w := 70.0
 	for i in b.leaders.size():
 		var v := _make_card(i)
 		row.add_child(v)
@@ -302,14 +306,6 @@ func _build() -> void:
 	_skill_layer.z_index = 70  # over the opening tip and the enemy's side
 	_skill_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_skill_layer)
-	var locked := PanelContainer.new()  # one slim slot for a future 5th party member
-	locked.custom_minimum_size = Vector2(locked_w, card_size.y)
-	locked.add_theme_stylebox_override("panel", Kit.box(Kit.c("card").darkened(0.5), 10, 2, Kit.c("gray"), 0))
-	var lbl := Kit.label("第五人\n敬请\n期待", 12, "gray")
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	locked.add_child(lbl)
-	row.add_child(locked)
 
 	# actions (bottom-right) — narrower than before so the leader cards (left) can run bigger
 	var acts := VBoxContainer.new()
