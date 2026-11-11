@@ -1597,3 +1597,4 @@
 - [x] 2026-11-09 battle `c4_langqi` ← Gemini_Generated_Image_qltq65qltq65qltq.jpg · ok
 - [x] 2026-11-09 battle `ln_langqi` ← Gemini_Generated_Image_qltq65qltq65qltq.jpg · ok
 - [ ] 2026-11-10 cg `c5_feast` ← c5_feast_v2.jpg · ok
+- [ ] 2026-11-10 battle `c5_niufu` ← c5_niufu_v1.jpg · ok
