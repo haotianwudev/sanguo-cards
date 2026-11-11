@@ -1599,3 +1599,4 @@
 - [ ] 2026-11-10 cg `c5_feast` ← c5_feast_v2.jpg · ok
 - [ ] 2026-11-10 battle `c5_niufu` ← c5_niufu_v1.jpg · ok
 - [ ] 2026-11-10 cg `c5_rescue` ← c5_rescue_v2.jpg · ok
+- [ ] 2026-11-10 cg `c5_rescue` ← c5_rescue_v3.jpg · ok
