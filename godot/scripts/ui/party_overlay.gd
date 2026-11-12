@@ -24,7 +24,7 @@ var swap_note := ""  # what the swap costs
 
 
 var _party_row: HBoxContainer
-var _summary: VBoxContainer
+var _summary: HBoxContainer
 var _side_btn: Control  # ？小故事 (Rance 式的整备问号): hidden when this 周目 has none yet
 var _tabs: HBoxContainer
 var _grid: GridContainer
@@ -54,11 +54,13 @@ func _ready() -> void:
 	var title := Kit.title_label("换　人" if swap_mode else "整　备", Kit.FONT_BIG + 8, "gold")
 	title.position = Vector2(28, 10)
 	add_child(title)
-	var hint := Kit.label("点卡查看 · 再点一次出阵 / 下阵 · 也可以拖：拖上去出阵（拖到队长身上替换），拖回卡池下阵，队长之间拖动换位置", 15)
-	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
-	hint.position = Vector2(170, 22)
-	hint.text = "点卡查看 · 按「上场」，或把卡拖到场上的人身上换下他 · 换下的人本场不能再上" if swap_mode else hint.text
-	add_child(hint)
+	# the 全军 numbers sit in the header (they replaced the how-to line): the party row gets the panel's full width,
+	# so 猛将如云's 5th leader fits at full size (user 2026-11-11: don't shrink the cards)
+	_summary = HBoxContainer.new()
+	_summary.position = Vector2(170, 12)
+	_summary.size = Vector2(920, 40)
+	_summary.add_theme_constant_override("separation", 28)
+	add_child(_summary)
 
 	# the party: lord + leaders, with a summary box
 	var party_box := _panel(Vector2(20, 58), Vector2(850, 262))
@@ -68,11 +70,6 @@ func _ready() -> void:
 	_party_row.position = Vector2(14, 6)
 	_party_row.add_theme_constant_override("separation", 12)
 	party_box.add_child(_party_row)
-	_summary = VBoxContainer.new()
-	_summary.position = Vector2(662, 14)
-	_summary.size = Vector2(176, 236)
-	_summary.add_theme_constant_override("separation", 6)
-	party_box.add_child(_summary)
 
 	# the pool
 	var pool_box := _panel(Vector2(20, 330), Vector2(850, 318))
@@ -202,7 +199,6 @@ func _rebuild() -> void:
 		empty.add_theme_color_override("font_color", Color(1, 1, 1, 0.45))
 		empty.add_theme_stylebox_override("normal", Kit.box(Color(1, 1, 1, 0.04), 10, 2, Color(1, 1, 1, 0.22), 8))
 		_party_row.add_child(empty)
-	_fit_row()
 	var at_sum := 0
 	for ld in save.field_leaders():
 		at_sum += int(ld["at"])
@@ -226,10 +222,12 @@ func _rebuild() -> void:
 		if not used.has(tr) and not idle.has(db.troops[tr]["name"]):
 			idle.append(db.troops[tr]["name"])
 	if not idle.is_empty():
-		var l := Kit.label("没人带的兵种：\n" + "、".join(idle), 14)
+		var l := Kit.label("没人带：" + "、".join(idle), 14)
 		l.add_theme_color_override("font_color", Color(1, 0.8, 0.5, 0.85))
-		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		l.custom_minimum_size = Vector2(176, 0)
+		l.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		l.clip_text = true
+		l.tooltip_text = "没人带的兵种：" + "、".join(idle)
 		_summary.add_child(l)
 
 	# ---- filter tabs + sort
@@ -315,16 +313,6 @@ func _rebuild() -> void:
 	_fill_detail()
 
 
-## 猛将如云 makes the row 5 slots wide (5 × 150 + gaps runs past the 全军 numbers): shrink the whole row so it
-## ends before the summary column, as the battle screen does with its cards. 4 slots fit and stay at full size.
-func _fit_row() -> void:
-	var n := _party_row.get_child_count()
-	var wide := n * DRAG_SIZE.x + maxi(0, n - 1) * _party_row.get_theme_constant("separation")
-	var room := _summary.position.x - _party_row.position.x - 8.0
-	var s := minf(1.0, room / maxf(1.0, wide))
-	_party_row.scale = Vector2(s, s)
-
-
 func _rebuild_swap() -> void:
 	var save := Game.save
 	var db := GameData.get_db()
@@ -336,9 +324,12 @@ func _rebuild_swap() -> void:
 		if k == swap_slot:
 			box.get_child(0).note = "将换下"
 		_party_row.add_child(box)
-	_fit_row()
 	_summary.add_child(_stat_line("费用", swap_note))
 	_summary.add_child(_stat_line("可上场", "%d 位" % swap_ids.size()))
+	var rule := Kit.label("换下的人本场不能再上", 14)
+	rule.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
+	rule.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_summary.add_child(rule)
 	var troops: Array = []
 	for cid in swap_ids:
 		var tr: String = _swap_troop(cid)
@@ -554,11 +545,10 @@ func _stat_line(name: String, value: String) -> Control:
 	var row := HBoxContainer.new()
 	var a := Kit.label(name, 14)
 	a.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
-	a.custom_minimum_size = Vector2(62, 0)
+	a.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(a)
 	var v := Kit.label(value, Kit.FONT_BODY if value.length() <= 8 else Kit.FONT_SMALL + 1, "gold")  # long values (体力 1216/1216) step down a size
-	v.clip_text = true
-	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	v.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(v)
 	return row
 
