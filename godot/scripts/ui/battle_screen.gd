@@ -413,14 +413,15 @@ func _refresh() -> void:
 		var v: CardView = _cards[i]
 		v.set_state(u["acted"] or u["confused"] or not b.can_act(i), false)
 		v.focus_mode = Control.FOCUS_NONE if (_busy or not b.can_act(i)) else Control.FOCUS_ALL
-	_end.disabled = _busy
+	_end.disabled = _busy or b.result != ""
 	_defend.text = ("防御 AP%d" % b.defend_cost() if b.defend_cost() > 0 else "防御") + ("\n减伤 %d%%" % int(round(b.defend_cut() * 100)))  # the cut grows with 连续防御
-	_defend.disabled = _busy or not b.can_defend()
-	_retreat.disabled = _busy
+	_defend.disabled = _busy or not b.can_defend() or b.result != ""
+	_retreat.disabled = _busy or b.result != ""
 	_sync_fx()
 	_sync_skill_bars.call_deferred()  # after the row has laid itself out
 	if not _busy:
 		_snap()  # what a coming move's events start from
+	if not _busy and b.result == "":  # the fight is over: nothing to press (the 胜利 / 战败 plaque is up)
 		var first_card: CardView = _cards.filter(func(v): return v.focus_mode == Control.FOCUS_ALL).front() if _cards.any(func(v): return v.focus_mode == Control.FOCUS_ALL) else null
 		Kit.focus(first_card if first_card != null else _end)
 
@@ -1344,7 +1345,10 @@ func _ev_hit(ev: Dictionary) -> void:
 	if is_rider:
 		Kit.float_text(self, _enemy_center() + Vector2(54, -18), "战意 +%d" % ev["dmg"], Color(0.88, 0.72, 1.0), 36)
 	elif not (int(ev["dmg"]) == 0 and int(ev.get("shield", 0)) > 0):  # all soaked by the 护盾: only its 「盾 -N」 shows
-		Kit.float_text(self, _enemy_center() + Vector2(0, -30), ("暴击 " if crit_hit else "") + str(ev["dmg"]),
+		var num_at := Vector2(0, -30)
+		if ev["t"] == "interrupt":  # several 突袭 in a row: each number on its own spot, by the striking unit's place in the row
+			num_at.x = (float(ev.get("unit", 0)) - (_cards.size() - 1) / 2.0) * 56.0
+		Kit.float_text(self, _enemy_center() + num_at, ("暴击 " if crit_hit else "") + str(ev["dmg"]),
 			Kit.c("gold") if crit_hit else {"hit": Kit.c("amber"), "burn": Kit.c("red"), "poison": Kit.c("green")}.get(ev["t"], Kit.c("purple")), 64 if crit_hit else (52 if big else 40))
 	if crit_hit:
 		Kit.shake(self, 14.0, 0.2)
@@ -1373,6 +1377,8 @@ func _ev_hit(ev: Dictionary) -> void:
 		await get_tree().create_timer(0.06).timeout  # a beat of hit-stop on the heavy ones
 	if _ult_hits and ev["t"] == "hit" and not is_rider:
 		await get_tree().create_timer(0.22).timeout  # let the big cut finish before the next blow
+	if ev["t"] == "interrupt" and int(ev.get("hp", 1)) > 0:
+		await get_tree().create_timer(0.3).timeout  # 突袭 come one by one: each strike reads before the next (the killing one freezes instead)
 	await get_tree().create_timer(0.07 if is_rider else 0.16).timeout
 
 
