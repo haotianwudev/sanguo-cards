@@ -10,7 +10,7 @@ var title := "获得宝物"
 var _cells: Array = []
 var _ready_to_close := false
 
-const RARITY := {"common": ["普通", "blue"], "rare": ["稀有", "purple"], "curse": ["诅咒", "red"], "story": ["剧情", "gold"]}
+const RARITY := {"common": ["普通", "blue"], "rare": ["稀有", "purple"], "legend": ["传说", "gold"], "curse": ["诅咒", "red"], "story": ["剧情", "green"]}
 
 
 func _ready() -> void:

@@ -13,7 +13,7 @@
     {"each": "kits.*", "required": "special"},
     {"refs": "lord_forms.forms.*.skills.*", "to": "skills.@keys"},
     {"refs": "relics.*.troop", "to": "troops.@keys"},
-    {"enum": "relics.*.rarity", "values": ["common", "rare", "curse", "story"]},
+    {"enum": "relics.*.rarity", "values": ["common", "rare", "legend", "curse", "story"]},
     {"enum": "fates.*.rarity", "values": ["common", "rare", "curse", "bad", "divine"]},
 
     {"enum": "skills.*.effects.*.type", "values": ["attack", "magic", "heal", "guard", "boost", "stun", "break", "ap", "burn", "counter", "hurt", "cleanse", "buff", "poison", "loot", "shred", "interrupt"]},

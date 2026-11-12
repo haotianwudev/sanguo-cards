@@ -373,7 +373,7 @@ Every status badge / the 意图 line / the 前卫 bar / the 护甲 line explains
   `power (0 = no hit), weight (0 = only after a charge), confuse, rage, heal, ap_drain, burn_party, pierce,
   charge (wind-up announced a turn ahead), when: "half", once`. Make fights strong; make their cards modest. The charged move (`weight: 0`) hits
   **3–4× attack** (user rule: the wind-up must be worth fearing); only the test-only `hulao` 吕布 (`lvbu`) stays at 2.2 so `test_hulao_is_hard_for_naive_play` keeps its floor.
-- **宝物设计规则（用户 2026-11-11）**：每件最多两种效果，描述 = 一句来历 + 效果，不写「（队里有 X 才生效）」（所有宝物本来就只在它的兵种上场时生效）；长得像的要各有特点（同一种效果别出两件）；每个兵种能掉的宝物不少于 4 件。随机给的宝物（首领三选一、事件里的 `{"relic": true}`）都走 `Quests.random_relic`，按 `relic_pick.weights` 逐件加权，诅咒和普通同权重。赤帻 = 普通，`stun_round` 每回合 10% 眩晕。
+- **宝物设计规则（用户 2026-11-11）**：每件最多两种效果，描述 = 一句来历 + 效果，不写「（队里有 X 才生效）」（所有宝物本来就只在它的兵种上场时生效）；长得像的要各有特点（同一种效果别出两件）；每个兵种能掉的宝物不少于 4 件。随机给的宝物（首领三选一、事件里的 `{"relic": true}`）都走 `Quests.random_relic`，按 `relic_pick.weights` 逐件加权（普通 60 / 诅咒 60 / 稀有 35 / 传说 12）。**稀有度：普通 < 稀有 < 传说（金色，最稀有）；加 AP 的（ap_start / ap_round / ap_max / troop_cost）只能是传说**（`test_only_the_rarest_relics_give_ap`）。剧情宝物只有一种小效果（≈ 一件普通）；小故事奖励不送传说，优先送普通宝物。主公的宝物别再加（主公一直在场，等于全队常驻），新宝物给宝物少的兵种。赤帻 = 普通，`stun_round` 每回合 10% 眩晕。测试工具「查看所有宝物」列出每件的出处。
 - **Relic 宝物** (`cards.json` relics): found during a chapter; all carry into the next chapter (`kept_relics`), but ones found in the current chapter reset on a restart; `rarity common/rare/curse, icon, desc, mods {...}, after_win`. Mods are
   summed by `Quests.mods(save)` and passed to `Battle.start(..., ambush, mods)`. New mod ⇒ read it in `battle.gd`.
   A story square can hand one over directly on arrival with `"relics": ["<id>"]` (same shape as `"cards"`; a

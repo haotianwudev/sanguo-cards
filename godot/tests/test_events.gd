@@ -591,19 +591,19 @@ func test_the_grand_chest_is_never_a_random_roll() -> void:
 func test_a_random_relic_follows_the_rarity() -> void:
 	# an event's {"relic": true} draws like the boss pick (relic_pick.weights), not evenly (user 2026-11-11)
 	var db := GameData.get_db()
-	var n := {"common": 0, "rare": 0, "curse": 0}
+	var n := {"common": 0, "rare": 0, "legend": 0, "curse": 0}
 	var r := rng(5)
 	for i in 600:
 		var rid := Quests.random_relic(SaveData.create(), r)
 		n[db.relics[rid]["rarity"]] += 1
 	var per := func(k: String) -> float: return float(n[k]) / db.relics.values().filter(func(x): return x["rarity"] == k).size()
-	check(per.call("common") > per.call("rare") * 1.3 and per.call("curse") > per.call("rare") * 1.3, "each common / curse comes up more often than each rare: %s" % str(n))
+	check(per.call("common") > per.call("rare") * 1.3 and per.call("curse") > per.call("rare") * 1.3 and per.call("rare") > per.call("legend") * 1.5, "common / curse > rare > legend, per relic: %s" % str(n))
 
 
 func test_only_the_rarest_relics_give_ap() -> void:
-	# AP is the strongest bonus there is: only rare 宝物 carry it, never a common, curse or story keepsake (user 2026-11-11)
+	# AP is the strongest bonus there is: only 传说 (legend, above rare) 宝物 carry it, never a common, curse or story keepsake (user 2026-11-11)
 	var db := GameData.get_db()
 	for rid in db.relics:
 		var m: Dictionary = db.relics[rid]["mods"]
 		if ["ap_start", "ap_round", "ap_max", "troop_cost"].any(func(k): return m.has(k)):
-			check_eq(db.relics[rid]["rarity"], "rare", rid + " gives AP")
+			check_eq(db.relics[rid]["rarity"], "legend", rid + " gives AP")

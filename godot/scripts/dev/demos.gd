@@ -242,7 +242,7 @@ static func run(name: String) -> void:
 				Quests.resolve(q, Game.save, Game.rng)
 			Game.save.relics = ["hupi", "yuxi"]
 			Game.save.danger = 1
-			Game.save.offer = ["shoushihe", "bingfa", "dunjia"]
+			Game.save.offer = ["shoushihe", "bingfa", "yushan"]  # 普通 · 稀有 · 传说
 			Game.save.offer_kind = "relic"
 			var m := MapScreen.new()
 			Game.show_screen(m)

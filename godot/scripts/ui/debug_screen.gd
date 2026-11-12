@@ -316,7 +316,7 @@ func _cards_panel() -> Control:
 
 
 const _RELIC_POOLS := [["drop", "首领三选一 / 随机宝物"], ["story", "剧情给"], ["event", "事件给"], ["side", "小故事给"], ["prep", "前尘整备买"], ["none", "没有来路"]]
-const _RELIC_RARITY := {"common": "普通", "rare": "稀有", "curse": "诅咒", "story": "剧情"}
+const _RELIC_RARITY := {"common": "普通", "rare": "稀有", "legend": "传说", "curse": "诅咒", "story": "剧情"}
 
 
 func _relic_sources() -> Dictionary:
@@ -414,7 +414,7 @@ func _relics_panel() -> Control:
 		var list := VBoxContainer.new()
 		list.add_theme_constant_override("separation", 4)
 		var ids: Array = src.keys().filter(func(rid): return passes.call(rid, pick))
-		var ro := {"rare": 0, "common": 1, "curse": 2, "story": 3}
+		var ro := {"legend": 0, "rare": 1, "common": 2, "curse": 3, "story": 4}
 		ids.sort_custom(func(a, b): return [db.troops.keys().find(db.relics[a]["troop"]), ro.get(db.relics[a]["rarity"], 4), a] < [db.troops.keys().find(db.relics[b]["troop"]), ro.get(db.relics[b]["rarity"], 4), b])
 		for rid in ids:
 			var r: Dictionary = db.relics[rid]

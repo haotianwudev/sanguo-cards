@@ -451,7 +451,7 @@ func _relic_card(rid: String) -> Control:
 	## a 宝物 as a card in the pool: icon, name, where it sits
 	var save := Game.save
 	var r: Dictionary = GameData.get_db().relics[rid]
-	var col: String = {"rare": "purple", "curse": "red", "story": "gold"}.get(r["rarity"], "amber")
+	var col: String = {"rare": "purple", "legend": "gold", "curse": "red", "story": "green"}.get(r["rarity"], "amber")
 	var sel := _sel == "relic:" + rid
 	var b := Button.new()
 	b.custom_minimum_size = Vector2(108, 151)
@@ -513,7 +513,7 @@ func _fill_relic_detail(rid: String) -> void:
 	var info := VBoxContainer.new()
 	top.add_child(info)
 	info.add_child(Kit.title_label(r["name"], Kit.FONT_BIG + 2, "gold"))
-	info.add_child(_info_line("种类", {"rare": "稀有", "curse": "诅咒", "story": "传家宝"}.get(r["rarity"], "普通")))
+	info.add_child(_info_line("种类", {"rare": "稀有", "legend": "传说", "curse": "诅咒", "story": "传家宝"}.get(r["rarity"], "普通")))
 	var unit := save.relic_unit(rid)
 	info.add_child(_info_line("属于", _team_name(rid)))
 	var state := Kit.label("没装，放在卡池里" if save.unworn.has(rid) else (("生效中：在 %s" % _unit_name(unit)) if unit != ""
