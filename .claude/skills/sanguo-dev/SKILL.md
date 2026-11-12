@@ -343,6 +343,7 @@ Every status badge / the 意图 line / the 前卫 bar / the 护甲 line explains
   sits in that troop's fielded unit (never as leader, any number) and only works while that unit is out
   (`SaveData.relic_unit / active_relics`, `Quests.mods` uses active ones). The player can leave a 宝物 in the pool
   (`unworn`) and leave any card behind (`benched`: joins no unit; a leader is always brought). Both in 整备.
+  **5 slots (猛将如云) don't fit the 整备 row** (5 × 150 px runs over the 全军体力 / 攻击 column at x 662): `PartyOverlay._fit_row` scales the whole row down to end before `_summary` (4 slots stay full size), like the battle screen shrinks its cards; `--demo=party --five`.
   整备 also drags (Godot's `set_drag_forwarding`, `PartyOverlay._dnd`): pool card → party row (onto a leader = take his place, `_add(cid, at)`),
   leader → pool (下阵) or onto another leader (swap), lord card → lord, 宝物 → party (装上) / pool (不装). Its cards use `CardView.tap_on_release`
   (`pressed` on lift, none after a drag) — the default fires on touch-down, and 整备 rebuilds on every tap, which would free the card before a drag could start.

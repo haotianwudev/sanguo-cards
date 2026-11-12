@@ -363,6 +363,9 @@ static func run(name: String) -> void:
 					if not Game.save.relics.has(rid):
 						Game.save.relics.append(rid)
 						Game.save.kept_relics.append(rid)
+			if OS.get_cmdline_user_args().has("--five"):  # 猛将如云: 5 slots, the row shrinks so it ends before the 全军 numbers
+				Game.save.party_slots = 5
+				Game.save.party = Game.save.auto_party()
 			Game.save.quests_cleared = ["prologue", "taodong"]  # the ？小故事 of those chapters are open
 			Game.save.flags = ["出生：江东富春"]
 			Game.save.merit = 7  # enough for one story (5), not two

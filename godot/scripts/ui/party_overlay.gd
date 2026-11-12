@@ -202,6 +202,7 @@ func _rebuild() -> void:
 		empty.add_theme_color_override("font_color", Color(1, 1, 1, 0.45))
 		empty.add_theme_stylebox_override("normal", Kit.box(Color(1, 1, 1, 0.04), 10, 2, Color(1, 1, 1, 0.22), 8))
 		_party_row.add_child(empty)
+	_fit_row()
 	var at_sum := 0
 	for ld in save.field_leaders():
 		at_sum += int(ld["at"])
@@ -314,6 +315,16 @@ func _rebuild() -> void:
 	_fill_detail()
 
 
+## 猛将如云 makes the row 5 slots wide (5 × 150 + gaps runs past the 全军 numbers): shrink the whole row so it
+## ends before the summary column, as the battle screen does with its cards. 4 slots fit and stay at full size.
+func _fit_row() -> void:
+	var n := _party_row.get_child_count()
+	var wide := n * DRAG_SIZE.x + maxi(0, n - 1) * _party_row.get_theme_constant("separation")
+	var room := _summary.position.x - _party_row.position.x - 8.0
+	var s := minf(1.0, room / maxf(1.0, wide))
+	_party_row.scale = Vector2(s, s)
+
+
 func _rebuild_swap() -> void:
 	var save := Game.save
 	var db := GameData.get_db()
@@ -325,6 +336,7 @@ func _rebuild_swap() -> void:
 		if k == swap_slot:
 			box.get_child(0).note = "将换下"
 		_party_row.add_child(box)
+	_fit_row()
 	_summary.add_child(_stat_line("费用", swap_note))
 	_summary.add_child(_stat_line("可上场", "%d 位" % swap_ids.size()))
 	var troops: Array = []
