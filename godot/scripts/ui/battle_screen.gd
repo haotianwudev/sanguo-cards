@@ -374,10 +374,11 @@ func _rebuild_card(i: int) -> void:
 
 
 func _refresh() -> void:
-	var e := b.enemy
-	_enemy_hp_label.text = "%d / %d" % [e["hp"], e["max_hp"]]
+	var e := _view("e", b.enemy)
+	if not _busy:  # while a move plays, each hit / heal event sets the HP numbers itself
+		_enemy_hp_label.text = "%d / %d" % [e["hp"], e["max_hp"]]
 	var it := b.intent_text() if b.result == "" else ""
-	if not _stun_held:  # the old 意图 stays up until the stunning blow lands
+	if not _held.has("intent"):  # the old 意图 stays up until the event that changes it plays
 		_intent_label.text = ("意图：" + it) if it != "" else ""
 		_intent_label.visible = it != ""
 		if it != "":
@@ -388,7 +389,8 @@ func _refresh() -> void:
 		_guard_bar.max_value = e["guard"]["max_hp"]
 		_guard_bar.value = e["guard"]["hp"]
 		_tip_on(_guard_row, "前卫：%s" % e["guard"]["name"], "%d/%d，普攻 = 首领攻击 ×%s\n%s" % [e["guard"]["hp"], e["guard"]["max_hp"], str(e["guard"]["strike"]), _status_help("status", "guard")])
-	_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
+	if not _busy:
+		_party_hp_label.text = "%d / %d" % [b.party_hp, b.party_max]
 	for ch in _ap_row.get_children():
 		ch.queue_free()
 	var pips: int = b.ap_max()
@@ -402,7 +404,8 @@ func _refresh() -> void:
 	if b.ap_drain > 0:  # 夺气: the enemy will take AP next round
 		_ap_row.add_child(Kit.label("夺气 -%d" % b.ap_drain, Kit.FONT_BODY, "red"))
 	var left := b.turn_limit - b.round_no
-	_round_label.text = "最后回合！" if left <= 0 else "第 %d/%d 回合" % [b.round_no, b.turn_limit]
+	if not _held.has("round"):  # the round number turns over with its banner, not when the enemy starts to act
+		_round_label.text = "最后回合！" if left <= 0 else "第 %d/%d 回合" % [b.round_no, b.turn_limit]
 	_round_label.add_theme_color_override("font_color", Kit.c("red") if left <= 1 else Kit.c("text"))
 	_combo_label.text = "%d 连击 +%d%%" % [b.combo, b.combo * 10] if b.combo > 0 else ""
 	for i in b.leaders.size():
@@ -417,6 +420,7 @@ func _refresh() -> void:
 	_sync_fx()
 	_sync_skill_bars.call_deferred()  # after the row has laid itself out
 	if not _busy:
+		_snap()  # what a coming move's events start from
 		var first_card: CardView = _cards.filter(func(v): return v.focus_mode == Control.FOCUS_ALL).front() if _cards.any(func(v): return v.focus_mode == Control.FOCUS_ALL) else null
 		Kit.focus(first_card if first_card != null else _end)
 
@@ -790,14 +794,15 @@ func _sync_fx() -> void:
 	if b == null or _cards.is_empty() or b.result != "" or not _laid_out:
 		return
 	var want := {}
-	var e := b.enemy
+	var e := _view("e", b.enemy)
+	var pv := _party_view()
 	if e["burn_turns"] > 0:
 		want["e_burn"] = func(): return BattleFx.embers(self, _enemy_rect(), BattleFx.EMBER, 22, 70.0)
 	if e["poison_turns"] > 0:
 		want["e_poison"] = func(): return BattleFx.embers(self, _enemy_rect(), Color(0.45, 0.95, 0.35, 0.85), 18, 40.0)
 	if e["break_turns"] > 0:
 		want["e_break"] = func(): return BattleFx.cracks(self, _enemy_rect(), Color(1.0, 0.82, 0.35, 0.8))
-	if e["stunned"] and not _stun_held:
+	if e["stunned"]:
 		want["e_stun"] = func(): return BattleFx.orbit(self, _enemy_center() + Vector2(0, -80), 80.0, 22.0, 4, BattleFx.GOLD, 11.0)
 	if e["charging"] != "":
 		var cr := _enemy_rect() if _has_cg else Rect2(_enemy_art.global_position - global_position, _enemy_art.size)
@@ -806,12 +811,12 @@ func _sync_fx() -> void:
 		want["e_stance"] = func(): return BattleFx.glow(self, _enemy_rect(), Color(0.45, 0.95, 0.9, 0.8))
 	if b.party_hp * 4 < b.party_max:  # 残血: the party bar pulses red until healed
 		want["p_low"] = func(): return BattleFx.glow(self, _party_rect(), Color(1.0, 0.2, 0.15))
-	if b.party_burn["turns"] > 0:
+	if pv["party_burn"]["turns"] > 0:
 		want["p_burn"] = func(): return BattleFx.embers(self, _party_rect(), BattleFx.EMBER, 26, 50.0)
-	if b.party_poison["turns"] > 0:
+	if pv["party_poison"]["turns"] > 0:
 		want["p_poison"] = func(): return BattleFx.embers(self, _party_rect(), Color(0.45, 0.95, 0.35, 0.85), 18, 40.0)
 	for i in b.leaders.size():
-		var u: Dictionary = b.leaders[i]
+		var u: Dictionary = _view("u", b.leaders[i], i)
 		var id: String = u["leader"]["card"]["id"]
 		var r := _card_rect(i)
 		if u["confused"]:
@@ -823,7 +828,7 @@ func _sync_fx() -> void:
 			want["mark_%s" % key] = func(): return BattleFx.charge_aura(self, r)
 		if u.get("slain", false):  # 被斩: cracked and dark for the rest of the fight
 			want["slain_%s" % key] = func(): return BattleFx.cracks(self, r, Color(0.9, 0.2, 0.15, 0.85), 6, true)
-		if b.buff["layers"] > 0:
+		if pv["buff"]["layers"] > 0:
 			want["buff_%s" % id] = func(): return BattleFx.glow(self, r, BattleFx.GOLD)
 		var tint := Color(0.78, 0.68, 1.0) if u["confused"] else Color.WHITE  # a card that can't act stays grey (set_state dimmed it)
 		_cards[i].modulate = Color(0.3, 0.3, 0.3) if u.get("slain", false) else (tint * Color(0.55, 0.55, 0.55) if _cards[i].dimmed else tint)
@@ -865,13 +870,14 @@ func _sync_badges() -> void:
 	## 角标: a small round badge per status or buff — enemy (灼 破 晕 怒 蓄) on its panel's top edge, party-wide (战 灼 夺) on the party bar's,
 	## and per card (混 强) in its top-right corner; the little number is the turns / layers left
 	_clear_badges()
-	var e := b.enemy
+	var e := _view("e", b.enemy)
+	var pv := _party_view()
 	var row: Array = []  # most urgent first, rightmost
 	if not e["mark"].is_empty():
 		row.append(_tipped(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false), "点名", "%s，下回合【%s】" % [e["mark"]["who"], e["mark"]["move"]], "mark"))
 	if e["charging"] != "":
 		row.append(_tipped(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false), "蓄力", "下回合【%s】" % e["charging"], "charge"))
-	if e["stunned"] and not _stun_held:
+	if e["stunned"]:
 		row.append(_tipped(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)), "眩晕", "", "stun"))
 	if not e["stance"].is_empty():
 		row.append(_tipped(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))), "反击架势", "【%s】" % e["stance"]["name"], "stance"))
@@ -893,26 +899,26 @@ func _sync_badges() -> void:
 	var er := Rect2(_enemy_panel.position, _enemy_panel.size)
 	_lay_badges(row, Vector2(er.end.x - 6.0, er.position.y - 20.0), er.size.x - 12.0)
 	var party: Array = []
-	if b.buff["layers"] > 0:
-		party.append(_tipped(BattleFx.badge("战", Color(0.95, 0.75, 0.25), b.buff["layers"]), "战意", "×%d 层：攻击 +%d%%%s，剩 %d 回合" % [b.buff["layers"], int(round(b.buff["atk"] * 100)), ("，受伤 -%d%%" % int(round(b.buff["def"] * 100))) if b.buff["def"] > 0.0 else "", b.buff["turns"]], "buff"))
-	if b.party_burn["turns"] > 0:
-		party.append(_tipped(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), b.party_burn["turns"]), "我军灼烧", "-%d/回合，剩 %d 回合" % [b.party_burn["dmg"], b.party_burn["turns"]], "party_burn"))
-	if b.party_poison["turns"] > 0:
-		party.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), b.party_poison["layers"]), "我军中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [b.party_poison["layers"], int(round(b.party_poison["pct"] * b.party_poison["layers"] * 100)), b.party_poison["turns"]], "party_poison"))
+	if pv["buff"]["layers"] > 0:
+		party.append(_tipped(BattleFx.badge("战", Color(0.95, 0.75, 0.25), pv["buff"]["layers"]), "战意", "×%d 层：攻击 +%d%%%s，剩 %d 回合" % [pv["buff"]["layers"], int(round(pv["buff"]["atk"] * 100)), ("，受伤 -%d%%" % int(round(pv["buff"]["def"] * 100))) if pv["buff"]["def"] > 0.0 else "", pv["buff"]["turns"]], "buff"))
+	if pv["party_burn"]["turns"] > 0:
+		party.append(_tipped(BattleFx.badge("灼", Color(0.9, 0.3, 0.15), pv["party_burn"]["turns"]), "我军灼烧", "-%d/回合，剩 %d 回合" % [pv["party_burn"]["dmg"], pv["party_burn"]["turns"]], "party_burn"))
+	if pv["party_poison"]["turns"] > 0:
+		party.append(_tipped(BattleFx.badge("毒", Color(0.35, 0.8, 0.3), pv["party_poison"]["layers"]), "我军中毒", "×%d 层，最大体力 -%d%%/回合，剩 %d 回合" % [pv["party_poison"]["layers"], int(round(pv["party_poison"]["pct"] * pv["party_poison"]["layers"] * 100)), pv["party_poison"]["turns"]], "party_poison"))
 	if b.defend_streak > 0 or b.guarded_this_round:  # 连续防御: rounds in a row of 防御 (button or skill)
 		var sk_n := b.defend_streak + (1 if b.guarded_this_round else 0)
 		party.append(_tipped(BattleFx.badge("守", Color(0.45, 0.62, 0.85), sk_n), "连续防御",
 			"已连续 %d 回合：防御按钮 -%d%%，防御技能 +%d%%" % [b.defend_streak, int(round(b.defend_cut() * 100)), int(round(b.streak_bonus() * 100))], "defend_streak"))
-	if b.ap_drain > 0:
-		party.append(_tipped(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), b.ap_drain), "夺气", "下回合 AP -%d" % b.ap_drain, "ap_drain"))
-	if not b.seal.is_empty():
-		party.append(_tipped(BattleFx.badge("封", Color(0.45, 0.3, 0.6), int(b.seal["turns"])), "封技", "我军%s被封，剩 %d 回合" % [Battle.SEAL_NAMES.get(b.seal["kind"], "技能"), b.seal["turns"]], "seal"))
-	if b.loot_chest > 0.0:  # 劫掠: the chance of a second chest so far (%)
-		party.append(_tipped(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(b.loot_chest * 100))), "劫掠", "现在 %d%%" % int(round(b.loot_chest * 100)), "loot"))
+	if pv["ap_drain"] > 0:
+		party.append(_tipped(BattleFx.badge("夺", Color(0.75, 0.2, 0.3), pv["ap_drain"]), "夺气", "下回合 AP -%d" % pv["ap_drain"], "ap_drain"))
+	if not pv["seal"].is_empty():
+		party.append(_tipped(BattleFx.badge("封", Color(0.45, 0.3, 0.6), int(pv["seal"]["turns"])), "封技", "我军%s被封，剩 %d 回合" % [Battle.SEAL_NAMES.get(pv["seal"]["kind"], "技能"), pv["seal"]["turns"]], "seal"))
+	if pv["loot_chest"] > 0.0:  # 劫掠: the chance of a second chest so far (%)
+		party.append(_tipped(BattleFx.badge("掠", Color(0.95, 0.75, 0.25), int(round(pv["loot_chest"] * 100))), "劫掠", "现在 %d%%" % int(round(pv["loot_chest"] * 100)), "loot"))
 	var pr := _party_rect()
 	_lay_badges(party, Vector2(pr.end.x - 6.0, pr.position.y - 20.0), pr.size.x * 0.5)
 	for i in b.leaders.size():
-		var u: Dictionary = b.leaders[i]
+		var u: Dictionary = _view("u", b.leaders[i], i)
 		var rr := _card_rect(i)
 		var mine: Array = []
 		if u["confused"]:
@@ -923,7 +929,7 @@ func _sync_badges() -> void:
 			mine.append(_tipped(BattleFx.badge("强", Color(1.0, 0.5, 0.15)), "BOOST", "下次出手 ×%s" % str(GameData.get_db().battle["boost_mult"]), "boosted"))
 			var rib := _boost_ribbon(rr)
 			_badge_add(rib)
-		if b.counters.any(func(c): return int(c.get("unit", -1)) == i):
+		if pv["counters"].any(func(c): return int(c.get("unit", -1)) == i):
 			mine.append(_tipped(BattleFx.badge("反", Color(0.25, 0.78, 0.78)), "反击", "", "counter"))
 		if u.get("slain", false):
 			mine.append(_tipped(BattleFx.badge("倒", Color(0.45, 0.45, 0.45)), "被斩", "", "slain"))
@@ -1070,18 +1076,77 @@ var _act_elem := ""  # the acting skill's element (fire / poison): its magic blo
 var _act_troop := ""  # the acting card's troop: its plain blows take that troop's shape (arrows, thrust, heavy arc, cross cut)
 
 
-var _stun_held := false  # the engine has already stunned the enemy, but the blow that does it hasn't played yet: no 晕 until it lands
+## The engine has already applied a whole move when its events start to play, so the screen would show every result
+## (晕, 灼, 破, a shield gone, the next 意图, the HP numbers …) before the blow that causes it. Each status field below
+## keeps the value shown before the move (`_shown`) until an event that changes it plays (`_held` → `_release`).
+## e: = the enemy dict, p: = a battle field (b.buff …), u: = every leader's unit dict, intent = the 意图 line.
+const SHOWN_BY := {
+	"stun": ["e:stunned", "intent"], "enemy_stunned": ["e:stunned", "intent"],
+	"break": ["e:break_turns", "e:break_amount"], "resist_down": ["e:resist_turns", "e:resist_down"],
+	"burn_on": ["e:burn_turns", "e:burn_pct", "e:burn_dmg"], "poison_on": ["e:poison_turns", "e:poison", "e:poison_pct"],
+	"enemy_charge": ["e:charging", "intent"], "charge_break": ["e:charging", "intent"], "enemy_rage": ["e:at"],
+	"stance_on": ["e:stance"], "stance_off": ["e:stance"], "form_on": ["e:form"], "form_off": ["e:form"],
+	"shield_on": ["e:shield"], "shield_hit": ["e:shield"], "shield_regen": ["e:shield"], "shield_down": ["e:shield"],
+	"guard_on": ["e:guard", "intent"], "guard_hit": ["e:guard"], "guard_down": ["e:guard", "intent"],
+	"mark_on": ["e:mark", "intent"], "mark_miss": ["e:mark"], "slain": ["e:mark", "u:slain"],
+	"confuse": ["u:confused", "u:confuse_next"], "boost": ["u:boosted"], "counter_on": ["p:counters"],
+	"cleanse": ["u:confused", "u:confuse_next", "p:party_poison", "p:party_burn"],
+	"buff": ["p:buff"], "enemy_burn_party": ["p:party_burn"], "enemy_poison_party": ["p:party_poison"],
+	"enemy_ap_drain": ["p:ap_drain"], "seal_on": ["p:seal"], "seal_off": ["p:seal"], "loot": ["p:loot_chest"],
+	"round": ["intent", "round"],
+}
+const PARTY_FIELDS := ["buff", "party_burn", "party_poison", "ap_drain", "seal", "loot_chest", "counters"]
+var _shown := {}  # the statuses as last shown with nothing playing
+var _held := {}  # SHOWN_BY fields whose event hasn't played yet
+
+
+func _snap() -> void:
+	var p := {}
+	for f in PARTY_FIELDS:
+		p[f] = b.get(f).duplicate(true) if b.get(f) is Dictionary or b.get(f) is Array else b.get(f)
+	_shown = {"e": b.enemy.duplicate(true), "p": p, "u": b.leaders.map(func(u): return u.duplicate())}
+
+
+func _view(kind: String, live: Dictionary, i := -1) -> Dictionary:
+	## the dict the status display reads: live values, except fields still held at what was shown before the move
+	if _held.is_empty() or _shown.is_empty():
+		return live
+	var old: Dictionary = _shown[kind] if i < 0 else (_shown["u"][i] if i < _shown["u"].size() else {})
+	var v := live.duplicate()
+	for f in _held:
+		if f.begins_with(kind + ":") and old.has(f.substr(2)):
+			v[f.substr(2)] = old[f.substr(2)]
+	return v
+
+
+func _party_view() -> Dictionary:
+	var live := {}
+	for f in PARTY_FIELDS:
+		live[f] = b.get(f)
+	return _view("p", live)
+
+
+func _release(ev: Dictionary) -> void:
+	## an event plays: what it changes may now show its new value
+	var hit := false
+	for f in SHOWN_BY.get(ev["t"], []):
+		hit = _held.erase(f) or hit
+	if hit:
+		_refresh()
 
 
 func _play(events: Array) -> void:
 	## plays the engine's events one after another; each kind of event has its own show (_ev_<kind> below)
 	_busy = true
-	_stun_held = events.any(func(ev): return ev["t"] == "stun" and ev["ok"])
+	_held = {}
+	for ev in events:
+		for f in SHOWN_BY.get(ev["t"], []):
+			_held[f] = true
 	_refresh()
 	for ev in events:
 		await _play_one(ev)
 	_busy = false
-	_stun_held = false
+	_held = {}
 	_refresh()
 	if b.result != "":
 		await get_tree().create_timer(0.4).timeout
@@ -1092,6 +1157,8 @@ func _play(events: Array) -> void:
 
 func _play_one(ev: Dictionary) -> void:
 	Kit.poke()  # an auto battle plays with nobody touching the screen: keep it at full frame rate
+	if ev["t"] != "stun":  # 眩晕 waits a beat inside _ev_stun first
+		_release(ev)
 	match ev["t"]:
 		"act":
 			await _ev_act(ev)
@@ -1456,9 +1523,7 @@ func _ev_boost(ev: Dictionary) -> void:
 
 func _ev_stun(ev: Dictionary) -> void:
 	await get_tree().create_timer(0.25).timeout  # the blow's numbers read first, then the enemy reels
-	if ev["ok"]:
-		_stun_held = false
-		_refresh()  # 晕 badge and the star ring come in now, with the burst
+	_release(ev)  # 晕 badge, the star ring and 意图：眩晕 come in now, with the burst
 	Kit.float_text(self, _enemy_center(), "眩晕！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
 	if ev["ok"]:
 		Sfx.play("stun")
