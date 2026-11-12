@@ -640,7 +640,7 @@
         "@diaochan 貂蝉：「……公子怎么知道，妾身想吃这个？」",
         "@zhouyu 不远处，周瑜翻开账本：「{lord}：糖炒栗子一包，十二文（貂蝉）。」"
       ]},
-      {"id": "s_quwu", "title": "曲有误", "portraits": ["zhouyu"], "reward": {"relics": ["yushan"]}, "cg": "ss_quwu", "text": [
+      {"id": "s_quwu", "title": "曲有误", "portraits": ["zhouyu"], "reward": {"relics": ["dingxin"]}, "cg": "ss_quwu", "text": [
         "听说周瑜精通音律，弹错一个音，他就会回头看。你不信。",
         "宴席上，乐师在弹琴。你偷偷塞给乐师一串钱，让他故意弹错一个音。",
         "琴声一错，周瑜放下酒杯，回头看了一眼。",
@@ -718,7 +718,7 @@
         "@xunyu 荀彧：「比明公还会算。」",
         "曹操按着额角，笑了很久。笑完了，他的头又开始疼。"
       ]},
-      {"id": "s_lvmeng_book", "title": "有图的书", "portraits": ["lvmeng_qingnian", "lusu"], "requires": "吕蒙：入队", "reward": {"relics": ["mengde"]}, "cg": "ss_lvmeng_book", "text": [
+      {"id": "s_lvmeng_book", "title": "有图的书", "portraits": ["lvmeng_qingnian", "lusu"], "requires": "吕蒙：入队", "reward": {"relics": ["shuijing"]}, "cg": "ss_lvmeng_book", "text": [
         "吕蒙一个大字不识，一拿起书就犯困。",
         "你翻遍了行李，找出一本自己画的兵法图解：一页一幅画，火攻画着火，水攻画着水，伏兵画着草堆里露出半个屁股的小人。",
         "吕蒙两眼放光：「这书有图！」",
@@ -959,7 +959,7 @@
         "@guojia 郭嘉：「大哥，你来晚了。……刚交的，你想讨一口，得跟照儿商量。」",
         "@guonvwang 郭照：「不给。」"
       ]},
-      {"id": "s_xiamen_shouji", "title": "城头那颗头", "portraits": ["taishici", "zangba"], "requires": "北线：北海守住", "reward": {"cards": ["zangba"]}, "cg": "ss_xiamen_shouji", "text": ["北海守住以后的第三天夜里，太史慈来敲你的门。", "他身后跟着一个人，脸上缠着布，两只手反绑在背后。", "@taishici 太史慈：「使君。西门城头那颗首级……不是臧霸的。」", "@lord {lord}：「……那是谁的？」", "@taishici 太史慈：「他的替身。那天夜里火太大，吕布在城下，看不清胡子是粘上去的。」", "太史慈把那人脸上的布扯了下来。满脸胡子，锦袍底下是皮甲，眼睛还在转。", "@zangba 臧霸：「北海的。要杀就杀，啰嗦什么。」", "@lord {lord}：「子义，你为什么不杀他？」", "@taishici 太史慈：「泰山那一回，他跑了，没伤我们一个弟兄。这回在西门，他烧的是一扇空城门。」", "@taishici 「……末将觉得，这个人，留着比挂着有用。」", "臧霸愣了一下。他看了太史慈很久，又看了看你。", "@zangba 臧霸：「泰山上，老子还有三千弟兄。……你管饭吗？」", "@lord {lord}：「管饱。」", "@zangba 臧霸：「那就行。」", "@zangba 「替我挂在城头上那个兄弟，叫尹礼。他自己要扮的。……给他立块牌位。」", "@lord {lord}（内心）：……那天早上，太史慈坐在城门洞里擦了一上午的戟，一句话也没说。", "@lord {lord}（内心）：原来他是在等这一晚。"]}, {"id": "b_xuduye", "title": "许都夜议", "portraits": ["caocao", "xunyu", "chengyu"], "reward": {"relics": ["mengde"]}, "cg": "b_xuduye", "text": [
+      {"id": "s_xiamen_shouji", "title": "城头那颗头", "portraits": ["taishici", "zangba"], "requires": "北线：北海守住", "reward": {"cards": ["zangba"]}, "cg": "ss_xiamen_shouji", "text": ["北海守住以后的第三天夜里，太史慈来敲你的门。", "他身后跟着一个人，脸上缠着布，两只手反绑在背后。", "@taishici 太史慈：「使君。西门城头那颗首级……不是臧霸的。」", "@lord {lord}：「……那是谁的？」", "@taishici 太史慈：「他的替身。那天夜里火太大，吕布在城下，看不清胡子是粘上去的。」", "太史慈把那人脸上的布扯了下来。满脸胡子，锦袍底下是皮甲，眼睛还在转。", "@zangba 臧霸：「北海的。要杀就杀，啰嗦什么。」", "@lord {lord}：「子义，你为什么不杀他？」", "@taishici 太史慈：「泰山那一回，他跑了，没伤我们一个弟兄。这回在西门，他烧的是一扇空城门。」", "@taishici 「……末将觉得，这个人，留着比挂着有用。」", "臧霸愣了一下。他看了太史慈很久，又看了看你。", "@zangba 臧霸：「泰山上，老子还有三千弟兄。……你管饭吗？」", "@lord {lord}：「管饱。」", "@zangba 臧霸：「那就行。」", "@zangba 「替我挂在城头上那个兄弟，叫尹礼。他自己要扮的。……给他立块牌位。」", "@lord {lord}（内心）：……那天早上，太史慈坐在城门洞里擦了一上午的戟，一句话也没说。", "@lord {lord}（内心）：原来他是在等这一晚。"]}, {"id": "b_xuduye", "title": "许都夜议", "portraits": ["caocao", "xunyu", "chengyu"], "reward": {"relics": ["beishui"]}, "cg": "b_xuduye", "text": [
         "许都相府，夜里点着一盏灯。曹操的头又疼了。",
         "@chengyu 程昱：「北海相的兵，全压在青州打袁谭。徐州只剩一个糜竺守着粮仓。明公，这是天给的。」",
         "@xunyu 荀彧：「明公和北海有盟约在先。讨袁术那一回，两家是并肩打的仗。」",
@@ -1030,7 +1030,7 @@
         "一曲弹完，周瑜朝船尾看了一眼。",
         "@zhouyu_chibi 周瑜：「大哥，听了半曲，记账。」"
       ]},
-      {"id": "b_lamei", "title": "腊月那一夜", "portraits": ["caocao", "sunjian", "xunyu"], "reward": {"relics": ["gudingdao"]}, "cg": "b_lamei", "text": [
+      {"id": "b_lamei", "title": "腊月那一夜", "portraits": ["caocao", "sunjian", "xunyu"], "reward": {"relics": ["hubendun"]}, "cg": "b_lamei", "text": [
         "【建安四年 · 腊月】曹操进京朝贺。他只带了几百个亲兵。",
         "孙坚亲自到城门口接他。十八路诸侯里，真敢跟董卓拼命的，就他们俩——一个在汴水，一个在阳人。",
         "德阳殿的宴席摆到半夜。曹操举起酒杯。",
