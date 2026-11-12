@@ -5,6 +5,8 @@ extends Control
 var _col: VBoxContainer
 
 
+var demo_slots := {}  # --demo=title_slot: route → save shown as if read from disk (demos never touch the real saves)
+
 func _ready() -> void:
 	Bgm.play("title")
 	var art := Kit.ui_art("title")  # title picture in full colour; only the middle, behind the menu, is shaded (user rule)
@@ -34,7 +36,7 @@ func _ready() -> void:
 	col.add_child(sub)
 	col.add_child(Control.new())
 
-	var slots := {}  # the two routes each keep a save of their own: both can be played side by side
+	var slots := demo_slots.duplicate()  # the two routes each keep a save of their own: both can be played side by side
 	if Game.persist_enabled:
 		for r in ["south", "north"]:
 			var sv := SaveData.read_slot(r)
@@ -50,13 +52,15 @@ func _ready() -> void:
 		col.add_child(row)
 		var first := true
 		for r in ["south", "north"]:
+			var vb := VBoxContainer.new()
+			vb.add_theme_constant_override("separation", 8)
+			vb.custom_minimum_size = Vector2(400, 0)
+			row.add_child(vb)
 			if slots.has(r):
-				var vb := VBoxContainer.new()
-				vb.add_theme_constant_override("separation", 8)
-				vb.custom_minimum_size = Vector2(400, 0)
-				row.add_child(vb)
 				_slot_block(vb, r, slots[r], first)
 				first = false
+			else:  # the route with no save yet: started from its own column, so it is plain how to play the other line
+				_empty_block(vb, r, slots.keys()[0])
 		var any: SaveData = slots.values()[0]
 		var edb := GameData.get_db()
 		var books := HBoxContainer.new()
@@ -83,16 +87,18 @@ func _ready() -> void:
 		pend.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		col.add_child(pend)
 
-	var start := Kit.button("新的旅程" if not has_save else "新的旅程（选出生点，占用对应路线的存档）", "gold", Kit.FONT_BIG if not has_save else Kit.FONT_BODY)
-	start.pressed.connect(func():
-		var d := NewGameDialog.new()
-		Game.root.add_child(d))
-	if has_save:
+	if slots.size() < 2:  # with one save the other route starts from its own column above
+		if not has_save:
+			var start := Kit.button("新的旅程", "gold", Kit.FONT_BIG)
+			start.pressed.connect(func(): Game.root.add_child(NewGameDialog.new()))
+			col.add_child(start)
+			Kit.focus(start)
+	else:
+		var start := Kit.button("新的旅程（选出生点后，覆盖那条线的存档）", "gray", Kit.FONT_BODY)
+		start.pressed.connect(func(): Game.root.add_child(NewGameDialog.new()))
 		start.custom_minimum_size = Vector2(620, 0)
 		start.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	col.add_child(start)
-	if not has_save:
-		Kit.focus(start)
+		col.add_child(start)
 
 	if OS.is_debug_build():  # QA tool: jump chapters / browse all cards & CGs / quit — never shown in a release build
 		var dbg := Kit.button("测试工具", "gray", 14)
@@ -155,6 +161,24 @@ func _slot_block(col: VBoxContainer, r: String, saved: SaveData, focus_first: bo
 		var replay := Kit.button("重玩章节", "gold")
 		replay.pressed.connect(func(): _replay_menu(col, saved, r))
 		col.add_child(replay)
+
+
+func _empty_block(col: VBoxContainer, r: String, other: String) -> void:
+	## a route with no save yet, beside the one that has: 开始X线 starts a journey born on this route (its own save, the other untouched)
+	var route_name := "南线" if r == "south" else "北线"
+	var head := Kit.label("%s　还没有存档" % route_name, Kit.FONT_BODY + 2, "muted")
+	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(head)
+	var go := Kit.button("开始%s" % route_name, "gold", Kit.FONT_BIG)
+	go.pressed.connect(func():
+		var d := NewGameDialog.new()
+		d.route = r
+		Game.root.add_child(d))
+	col.add_child(go)
+	var note := Kit.label("%s存档不受影响，两条线可以同时玩" % ("南线" if other == "south" else "北线"), Kit.FONT_BODY - 2, "muted")
+	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	col.add_child(note)
 
 
 func _replay_menu(col: VBoxContainer, saved: SaveData, r: String) -> void:

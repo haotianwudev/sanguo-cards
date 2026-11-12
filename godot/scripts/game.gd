@@ -119,7 +119,8 @@ func _curtain(to_battle: bool) -> void:
 	_veil.set_meta("tw", tw)
 
 
-func new_game(lord_name: String) -> void:
+func new_game(lord_name: String, route_id := "") -> void:
+	## route_id: 开始北线 / 开始南线 on the title (the other route already has a save) — the birth square then offers only that route
 	save_path = ""
 	save = SaveData.create()
 	var shared := SaveData.create()  # the endings and the collection already earned come along into the new journey
@@ -129,6 +130,7 @@ func new_game(lord_name: String) -> void:
 	save.cleared_lord_copies = shared.cleared_lord_copies
 	save.flags = shared.flags.duplicate()
 	save.lord_name = lord_name if lord_name.strip_edges() != "" else "主公"
+	save.slot_route = route_id
 	Quests.ensure_started(save, rng)
 	persist()
 	show_screen(MapScreen.new())

@@ -68,6 +68,7 @@ var cleared_lord_copies := 1  # lord copies permanently confirmed upon clearing 
 var story_cards: Array = []  # cards a story square handed out this 周目 (they never enter the history)
 var play_level := 0  # the 难度 level chosen after the birthplace (0 = not chosen: the route's highest); capped by what its endings have unlocked (route_max_level)
 var lap := 1  # 周目: how many times the story has been started with the collection carried over
+var slot_route := ""  # the route this journey was started for (a 新周目 of a route's save, or 开始北线 / 开始南线 on the title): the birth square offers only that route; "" = both
 var lord_forms: Array = []  # the lord's extra cards (versions) handed out so far (cards.json lord_forms)
 var ended := false  # an ending was reached: this run is over (no 继续 on the title; a new 周目 or a chapter replay is what is left)
 var lord_form_pick := ""  # the lord card in use: "" = the newest this route has, "base" = the plain lord, else a lord_forms id
@@ -93,7 +94,7 @@ var side_seen: Array = []  # ？小故事 ids read in any 周目 (shown as 看�
 var steps: Array = []  # the save just before each step on the map this chapter, oldest first (重返上一格 pops the last one)
 
 const FIELDS := ["owned", "dupes", "soldiers", "party", "cleared", "quest", "square", "visited", "resolved", "damage",
-	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out", "prep_pending", "prep_relics", "offer_rerolled",
+	"carry_extra", "carry_uses", "choices", "offer", "quests_cleared", "lord_name", "lord_form_pick", "ended", "play_level", "story_cards", "lord_forms", "lord_form_paid", "lord_copies", "lap", "seen", "cleared_cards", "cleared_copies", "cleared_lord_copies", "cleared_forms", "form_copies", "cleared_form_copies", "unworn", "benched", "fate", "fate_offer", "affixes", "ambushes", "party_slots", "slot_route", "theme", "perks", "prep_cards", "extra_pick_open", "lord_out", "prep_pending", "prep_relics", "offer_rerolled",
 	"events", "event_seed", "event_rolls", "event_battle", "event_note", "offer_kind", "relics", "danger", "layout", "difficulty", "picks_left", "offer_rates", "run_start", "run_battles", "run_relics", "run_records", "merit", "merit_paid", "run_bosses", "flags", "kept_relics", "clears", "replay", "stash", "chapter_start", "steps", "side_read", "side_seen"]
 
 
@@ -199,6 +200,7 @@ func new_lap(inherit_all := false) -> SaveData:
 	_sync()
 	var s := SaveData.create()
 	s.lap = lap + 1
+	s.slot_route = route()  # a 新周目 stays in its route's save: the birth square offers only that route
 	s.lord_name = lord_name
 	if inherit_all:
 		s.merit = merit

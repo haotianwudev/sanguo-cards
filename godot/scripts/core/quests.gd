@@ -808,7 +808,23 @@ static func random_option(save: SaveData, ev: Dictionary, rng: RandomNumberGener
 
 static func option_locked(save: SaveData, o: Dictionary) -> bool:
 	## a choose-square option that can't be picked: locked outright, or needing a lasting story flag (an ending reached earlier)
-	return o["locked"] or (not _as_list(o["requires"]).is_empty() and not _flags_hold(o["requires"], save, false))
+	return o["locked"] or option_hidden(save, o) or (not _as_list(o["requires"]).is_empty() and not _flags_hold(o["requires"], save, false))
+
+
+static func option_hidden(save: SaveData, o: Dictionary) -> bool:
+	## a birth option (its `record` is a story.json `routes` line) for another route than the one this journey was started for
+	## (`save.slot_route`: a 新周目 of a route's save, or 开始北线 / 开始南线) — not shown at all
+	var r := option_route(o)
+	return save.slot_route != "" and r != "" and r != save.slot_route
+
+
+static func option_route(o: Dictionary) -> String:
+	## the route whose birth line this option records, "" for any other option
+	var routes: Dictionary = GameData.get_db().routes
+	for r in routes:
+		if str(o.get("record", "")) == routes[r]:
+			return r
+	return ""
 
 
 static func option_hint(save: SaveData, o: Dictionary) -> String:

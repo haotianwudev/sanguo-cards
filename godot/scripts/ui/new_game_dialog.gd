@@ -4,6 +4,7 @@ extends Control
 ## endings and card levels too), then the lord's name. Nothing about the name lives on the title screen itself.
 
 var wipes_save := false
+var route := ""  # 开始北线 / 开始南线: the journey is for this route only ("" = the birth square offers both)
 
 var _box: VBoxContainer
 
@@ -79,7 +80,7 @@ func _ask_name() -> void:
 	row.add_child(no)
 	var go := Kit.button("出发", "blue", Kit.FONT_BIG)
 	go.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	go.pressed.connect(func(): Game.new_game(edit.text))
+	go.pressed.connect(func(): Game.new_game(edit.text, route))
 	row.add_child(go)
-	edit.text_submitted.connect(func(s): Game.new_game(s))
+	edit.text_submitted.connect(func(s): Game.new_game(s, route))
 	edit.grab_focus.call_deferred()

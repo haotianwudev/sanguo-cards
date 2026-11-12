@@ -1731,3 +1731,18 @@ func test_endings_outside_the_numbered_ones_survive_a_new_lap() -> void:
 	for f in ["南线结局 · 赤壁", "北线结局 · 官渡", "真结局 · 归一", "结局十七 · 虎噬"]:
 		check(t.flags.has(f), f + " is remembered on the next lap")
 	check(not t.flags.has("南线：入主洛阳"), "a route record is not")
+
+
+func test_a_journey_started_for_one_route_offers_only_that_birth() -> void:
+	## 新周目 of a route's save (and 开始北线 / 开始南线 on the title) stays in that route: the other birth option is hidden
+	var era: Dictionary = quest_by_id("prologue")["squares"]["era"]
+	var routes: Dictionary = GameData.get_db().routes
+	for r in routes:
+		var s := SaveData.create()
+		s.flags = [routes[r], "结局一 · 玉碎"]
+		var n := s.new_lap()
+		check_eq(n.slot_route, r, "a 新周目 remembers its route")
+		var open: Array = era["choose"].filter(func(o): return not Quests.option_locked(n, o))
+		check_eq(open.map(func(o): return Quests.option_route(o)), [r], "only the %s birth is offered" % r)
+	var fresh := SaveData.create()  # a journey with no route yet still offers both
+	check_eq(era["choose"].filter(func(o): return not Quests.option_locked(fresh, o)).size(), routes.size())

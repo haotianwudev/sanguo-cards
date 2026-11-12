@@ -941,6 +941,8 @@ func _show_square(s: Dictionary) -> void:
 				var first := true
 				for i in s["choose"].size():
 					var o: Dictionary = s["choose"][i]
+					if Quests.option_hidden(Game.save, o):  # the other route's birth, on a journey started for one route
+						continue
 					var b := Kit.button(o["label"] + Quests.option_hint(Game.save, o), "gold")
 					b.disabled = Quests.option_locked(Game.save, o)
 					b.pressed.connect(_resolve.bind(i))
@@ -1413,8 +1415,7 @@ func _resolve(choice := -1) -> void:
 	var kind: String = Quests.here(q, Game.save)["type"]
 	var was_era: bool = Quests.here(q, Game.save)["id"] == "era"
 	if was_era and choice >= 0 and Game.save_path == "" and Game.persist_enabled:  # a new journey takes its route's slot: ask before it overwrites one
-		var born := str(Quests.here(q, Game.save)["choose"][choice].get("record", ""))
-		var rid := "north" if born.contains("冀州") else "south"
+		var rid := Quests.option_route(Quests.here(q, Game.save)["choose"][choice])
 		if FileAccess.file_exists(SaveData.slot_path(rid)):
 			var ask := ConfirmOverlay.new()
 			ask.title = "%s已有存档" % ("北线" if rid == "north" else "南线")

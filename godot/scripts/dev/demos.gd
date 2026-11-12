@@ -17,6 +17,8 @@ static func run(name: String) -> void:
 	for a in OS.get_cmdline_user_args():  # any --demo: --dlg=auto|mid|small, the CG text box size (the 框 button)
 		if a.begins_with("--dlg="):
 			Game.options["dlg_size"] = a.trim_prefix("--dlg=")
+		if a.begins_with("--slot="):  # any --demo: --slot=north, a journey started for one route (its birth square offers only that one)
+			Game.save.slot_route = a.trim_prefix("--slot=")
 		if a.begins_with("--perk="):  # any --demo: --perk=reroll,foresight buys those 前尘整备 perks
 			for pid in a.trim_prefix("--perk=").split(","):
 				Game.save.perks[pid] = 1
@@ -567,6 +569,14 @@ static func run(name: String) -> void:
 			o.next_subtitle = GameData.get_db().quests[1]["subtitle"]
 			Game.show_screen(TitleScreen.new())
 			Game.root.add_child(o)
+		"title_slot":  # the title with one route's save (--north: the north's): the other route's column offers 开始X线; --start opens it
+			var ts1 := TitleScreen.new()
+			ts1.demo_slots = {"north" if OS.get_cmdline_user_args().has("--north") else "south": Game.save}
+			Game.show_screen(ts1)
+			if OS.get_cmdline_user_args().has("--start"):
+				var d := NewGameDialog.new()
+				d.route = "south" if OS.get_cmdline_user_args().has("--north") else "north"
+				Game.root.add_child(d)
 		"replays":  # the title screen's 重玩章节 list
 			Game.save.quests_cleared = ["prologue", "taodong"]
 			Game.save.clears = {"prologue": 3, "taodong": 1}
