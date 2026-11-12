@@ -125,7 +125,15 @@ func test_relics_change_battles() -> void:
 	for seed in range(1, 201):
 		if Battle.start("boar", s.party_leaders(), seed, 0, {}, {}, false, m).enemy["stunned"]:
 			dazed += 1
-	check(dazed > 30 and dazed < 90, "赤帻 dazes about 30%% of fights (%d / 200)" % dazed)
+	check(dazed > 5 and dazed < 40, "赤帻 dazes the enemy about 10%% of rounds — round 1 here (%d / 200)" % dazed)
+	var later := 0  # …and every later round rolls again
+	for seed in range(1, 201):
+		var b2 := Battle.start("boar", s.party_leaders(), seed, 0, {}, {}, false, m)
+		b2.enemy["stunned"] = false
+		b2._start_round()
+		if b2.enemy["stunned"]:
+			later += 1
+	check(later > 5 and later < 40, "赤帻 rolls each round (%d / 200)" % later)
 	check(b.leaders.all(func(u): return u["boosted"]), "战鼓")
 
 
@@ -578,3 +586,15 @@ func test_the_grand_chest_is_never_a_random_roll() -> void:
 	for q in db.quests:
 		var s := SaveData.create()
 		check(not Quests.pools(q, s)["event_pool"].has("grand_chest"), "no ？ pool in %s draws the grand chest" % q["id"])
+
+
+func test_a_random_relic_follows_the_rarity() -> void:
+	# an event's {"relic": true} draws like the boss pick (relic_pick.weights), not evenly (user 2026-11-11)
+	var db := GameData.get_db()
+	var n := {"common": 0, "rare": 0, "curse": 0}
+	var r := rng(5)
+	for i in 600:
+		var rid := Quests.random_relic(SaveData.create(), r)
+		n[db.relics[rid]["rarity"]] += 1
+	var per := func(k: String) -> float: return float(n[k]) / db.relics.values().filter(func(x): return x["rarity"] == k).size()
+	check(per.call("common") > per.call("rare") * 1.3 and per.call("curse") > per.call("rare") * 1.3, "each common / curse comes up more often than each rare: %s" % str(n))

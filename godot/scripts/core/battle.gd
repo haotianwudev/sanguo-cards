@@ -1419,6 +1419,11 @@ func _start_round() -> Array:
 		var raid := float(cfg.get("interrupt_by_troop", {}).get(u["leader"]["card"]["troop"], cfg["interrupt_chance"])) + (float(mods.get("raid", 0.0)) if u["leader"]["card"]["troop"] == "cavalry" else 0.0)  # 突袭 (宝物 raise the cavalry's)
 		if not u["leader"]["members"].is_empty() and not u.get("slain", false) and enemy["hp"] > 0 and rng.randf() < raid:
 			log.append_array(_raid(k))
+	var daze := float(mods.get("stun_round", 0.0))  # 赤帻: every round a small chance the enemy loses its turn (rolled only when held)
+	if daze > 0.0 and enemy["hp"] > 0 and not enemy["stunned"] and rng.randf() < daze:
+		enemy["stunned"] = true
+		_ev({"t": "stun", "ok": true})
+		log.append("%s 盯着赤帻发愣——这回合无法行动" % enemy["data"]["name"])
 	_check_end()
 	if result == "":
 		_plan_intents()

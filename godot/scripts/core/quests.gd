@@ -1198,16 +1198,24 @@ static func rescale_hp(save: SaveData, old_top: int, new_top: int) -> void:
 
 static func relic_offer(save: SaveData, rng: RandomNumberGenerator) -> Array:
 	## A few 宝物 not held yet, drawn by rarity weight (relic_pick in cards.json).
+	var ids: Array = []
+	while ids.size() < int(GameData.get_db().relic_pick["n"]):
+		var r := random_relic(save, rng, ids)
+		if r == "":
+			break
+		ids.append(r)
+	return ids
+
+
+static func random_relic(save: SaveData, rng: RandomNumberGenerator, skip: Array = []) -> String:
+	## one 宝物 not held yet (story ones never), drawn by rarity weight (relic_pick.weights) — the boss pick and every
+	## random 宝物 an event hands out alike (user 2026-11-11: a random one follows the rarity too); "" when none is left
 	var db := GameData.get_db()
 	var weights: Dictionary = db.relic_pick["weights"]
-	var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r) and db.relics[r]["rarity"] != "story")
-	var ids: Array = []
-	while not left.is_empty() and ids.size() < int(db.relic_pick["n"]):
-		var w: Array = left.map(func(r): return float(weights.get(db.relics[r]["rarity"], 0)))
-		var r: String = GameData.weighted_pick(rng, left, w)
-		ids.append(r)
-		left.erase(r)
-	return ids
+	var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r) and not skip.has(r) and db.relics[r]["rarity"] != "story")
+	if left.is_empty():
+		return ""
+	return GameData.weighted_pick(rng, left, left.map(func(r): return float(weights.get(db.relics[r]["rarity"], 0))))
 
 
 static func take_relic(save: SaveData, rid: String) -> Dictionary:
@@ -1313,9 +1321,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			if e["relic"] is String:
 				rid = e["relic"]
 			else:
-				var left: Array = db.relics.keys().filter(func(r): return not save.relics.has(r) and db.relics[r]["rarity"] != "story")
-				if not left.is_empty():
-					rid = left[rng.randi_range(0, left.size() - 1)]
+				rid = random_relic(save, rng)
 			if rid != "" and not save.relics.has(rid):
 				save.relics.append(rid)
 				if not save.run_relics.has(rid):

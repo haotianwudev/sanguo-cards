@@ -1413,11 +1413,11 @@ func test_troop_relics_work_by_themselves_without_ap() -> void:
 	var db := GameData.get_db()
 	for rid in ["xiangnang", "qingnang"]:
 		check(db.relics[rid]["mods"]["proc"].has("logistics"), rid + " raises 后勤's own chance")
-	for rid in ["zhangba", "liangyinqiang", "qiangzhen"]:
+	for rid in ["zhangba", "qiangzhen"]:
 		check_eq(db.relics[rid]["troop"], "spear", rid + " is a spear relic")
 		check(db.relics[rid]["mods"]["proc"].has("spear"), rid + " raises 枪兵's own chance")
 	check(db.relics["chitu"]["mods"].has("raid") and db.relics["baima_qi"]["mods"].has("raid"), "cavalry relics raise the 突袭")
-	check(db.relics["chuanyang"]["mods"].has("resist_cut") and db.relics["tengjia"]["troop"] == "infantry", "archers pierce, infantry guard")
+	check(db.relics["zhugenu"]["mods"].has("resist_cut") and db.relics["chuanyang"]["mods"]["proc"].has("archer") and db.relics["tengjia"]["troop"] == "infantry", "archers pierce, infantry guard")
 	var b := Battle.start("boar", s.party_leaders(), 1, 0, {}, {}, false, {"proc": {"logistics": 1.0, "spear": 1.0}})  # a certain chance: the base one is small, the relics add to it
 	b.party_hp = b.party_max / 2
 	var ap_before := b.ap

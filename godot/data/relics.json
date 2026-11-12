@@ -1,5 +1,5 @@
 {
-  "_relics": "宝物: kept for one run (a chapter attempt). rarity: common / rare / curse (strong with a cost). mods: at, magic, heal, hp, guard (damage taken cut), combo (extra per combo step), desperate (attack when below half HP), ap_start, ap_round, ap_max, turns, start_heal, boost_start, stun_start (chance the enemy loses round 1), calm, no_ambush, chest, offer_extra, pierce (ignore resists), first_hit (first hit each battle), defend (extra defend cut), stun (confuse chance), troop_at / troop_hp {troop: share} (Rance X faction items), troop_cost {troop: AP off each skill, min 1}; after_win: heal this share of HP after every win; proc {troop: share} (每个兵种自带 15% 的自动小技能：后勤回血、刀兵举盾、枪兵反击、贼 BOOST、策士战意、弓兵降敌双抗——宝物在这个几率上加), resist_cut (弓兵: the enemy's 兵刃抗性 and 谋略抗性 each lowered by this, for good), raid (骑兵: more 插入 突袭 chance, 骑兵自带 30%) — base chances: battle.json passive_chance / interrupt_by_troop — all automatic, no AP; 每个兵种的宝物各有特点：后勤回复、刀兵防御、枪兵反击、骑兵突袭、贼 BOOST、策士攻防、弓兵破抗",
+  "_relics": "宝物: kept for one run (a chapter attempt). rarity: common / rare / curse (strong with a cost). mods: at, magic, heal, hp, guard (damage taken cut), combo (extra per combo step), desperate (attack when below half HP), ap_start, ap_round, ap_max, turns, start_heal, boost_start, stun_start (chance the enemy loses round 1), stun_round (each round: chance the enemy is stunned and loses that turn), calm, no_ambush, chest, offer_extra, pierce (ignore resists), first_hit (first hit each battle), defend (extra defend cut), stun (confuse chance), troop_at / troop_hp {troop: share} (Rance X faction items), troop_cost {troop: AP off each skill, min 1}; after_win: heal this share of HP after every win; proc {troop: share} (每个兵种自带 15% 的自动小技能：后勤回血、刀兵举盾、枪兵反击、贼 BOOST、策士战意、弓兵降敌双抗——宝物在这个几率上加), resist_cut (弓兵: the enemy's 兵刃抗性 and 谋略抗性 each lowered by this, for good), raid (骑兵: more 插入 突袭 chance, 骑兵自带 30%) — base chances: battle.json passive_chance / interrupt_by_troop — all automatic, no AP; 每个兵种的宝物各有特点：后勤回复、刀兵防御、枪兵反击、骑兵突袭、贼 BOOST、策士攻防、弓兵破抗",
   "_fates": "天命: every run of a chapter starts by picking one of fate_offer fates; its mods (same keys as relics) last the run. common = 吉, rare = 大吉, curse = double-edged, bad = 凶 (pure drawback), divine = 天授 (far stronger than the rest) — neither is offered at the start, only a ？ event's `fate` hands them out",
   "fate_offer": 3,
   "fates": {
@@ -185,12 +185,12 @@
     }
   },
   "relic_pick": {
-    "_comment": "only a boss win offers n relics to pick one from, drawn by rarity weight; elites and normal fights drop none",
+    "_comment": "only a boss win offers n relics to pick one from, drawn by rarity weight (per relic; a curse counts as a common, user 2026-11-11); every random 宝物 an event hands out uses the same weights (Quests.random_relic); elites and normal fights drop none",
     "n": 3,
     "weights": {
       "common": 60,
       "rare": 35,
-      "curse": 5
+      "curse": 60
     }
   },
   "relics": {
@@ -199,21 +199,29 @@
       "troop": "lord",
       "icon": "甲",
       "rarity": "story",
-      "desc": "文台年轻时的铜甲，吴夫人亲手给你系上的。受到的伤害 -5%，体力 +3%",
+      "desc": "孙坚年轻时的铜甲，吴夫人亲手系上。受到伤害 -7%",
       "mods": {
-        "guard": 0.05,
-        "hp": 0.03
+        "guard": 0.07
       }
     },
-    "zhen_diaopi": {"name": "雪貂披风", "troop": "lord", "icon": "氅", "rarity": "story", "desc": "张夫人亲手系上的雪白貂皮披风，里子缝得比账本还密。攻击 +3%，受到的伤害 -4%", "mods": {"at": 0.03, "guard": 0.04}},
+    "zhen_diaopi": {
+      "name": "雪貂披风",
+      "troop": "lord",
+      "icon": "氅",
+      "rarity": "story",
+      "desc": "张夫人亲手系上的貂皮披风，里子缝得比账本还密。体力 +7%",
+      "mods": {
+        "hp": 0.07
+      }
+    },
     "hupi": {
       "name": "虎皮披风",
       "troop": "lord",
       "icon": "虎",
       "rarity": "common",
-      "desc": "孙坚同款。攻击 +8%",
+      "desc": "孙坚同款。攻击 +5%",
       "mods": {
-        "at": 0.08
+        "at": 0.05
       }
     },
     "shoushihe": {
@@ -221,7 +229,7 @@
       "troop": "logistics",
       "icon": "盒",
       "rarity": "common",
-      "desc": "吴夫人的宝贝，打开就想起她。回复 +25%",
+      "desc": "吴夫人的宝贝。回复 +25%",
       "mods": {
         "heal": 0.25
       }
@@ -231,18 +239,28 @@
       "troop": "strategist",
       "icon": "酒",
       "rarity": "common",
-      "desc": "左慈送的，喝不完。酒后出奇谋：全队暴击率 +8%",
+      "desc": "左慈送的，喝不完。暴击率 +8%",
       "mods": {
         "crit": 0.08
       }
     },
-    "xunyou_qizi": {"name": "荀攸的黑棋", "troop": "strategist", "icon": "棋", "rarity": "story", "desc": "荀攸按在沙盘上的那枚黑棋。棋看三步，不会被伏兵偷袭（队里有策士才生效）", "mods": {"no_ambush": 1}},
+    "xunyou_qizi": {
+      "name": "荀攸的黑棋",
+      "troop": "strategist",
+      "icon": "棋",
+      "rarity": "story",
+      "desc": "荀攸按在沙盘上的黑棋，棋看三步。开战 AP +1，回合上限 +1",
+      "mods": {
+        "ap_start": 1,
+        "turns": 1
+      }
+    },
     "bandu_lingjian": {
       "name": "半渡令箭",
       "troop": "archer",
       "icon": "箭",
       "rarity": "story",
-      "desc": "黄忠的令箭，号令一响第一支箭就要见血。每场第一击伤害 +50%，敌人的兵刃、谋略抗性各 -5%（队里有弓手才生效）",
+      "desc": "黄忠的令箭。每场第一击 +50%，敌人双抗 -5%",
       "mods": {
         "first_hit": 0.5,
         "resist_cut": 0.05
@@ -253,7 +271,7 @@
       "troop": "strategist",
       "icon": "符",
       "rarity": "common",
-      "desc": "调兵的信物。开战时 AP +1",
+      "desc": "调兵的信物。开战 AP +1",
       "mods": {
         "ap_start": 1
       }
@@ -263,10 +281,10 @@
       "troop": "lord",
       "icon": "旗",
       "rarity": "story",
-      "desc": "酸枣大营里打出的赞助商旗号，诸侯都认得。士气所在，攻防俱佳。攻击 +4%，体力 +4%",
+      "desc": "酸枣大营里诸侯都认得的赞助商旗。宝箱几率 +6%，攻击 +3%",
       "mods": {
-        "at": 0.04,
-        "hp": 0.04
+        "chest": 0.06,
+        "at": 0.03
       }
     },
     "lizigao": {
@@ -274,15 +292,16 @@
       "troop": "logistics",
       "icon": "糕",
       "rarity": "common",
-      "desc": "甄宓塞的，一路揣在怀里，还热乎。每打赢一场，回复 4% 体力",
-      "after_win": 0.04
+      "desc": "甄宓塞的，一路揣在怀里还热乎。每打赢一场回复 4% 体力",
+      "after_win": 0.04,
+      "mods": {}
     },
     "hushenfu": {
       "name": "平安符",
       "troop": "strategist",
       "icon": "安",
       "rarity": "common",
-      "desc": "浣纱姑娘塞给你的。受到的伤害 -5%",
+      "desc": "浣纱姑娘塞给你的。受到伤害 -5%",
       "mods": {
         "guard": 0.05
       }
@@ -292,7 +311,7 @@
       "troop": "logistics",
       "icon": "香",
       "rarity": "common",
-      "desc": "闻一口就精神。后勤每回合自动照料伤兵的几率 +25%（后勤本身有 15%；不占 AP）",
+      "desc": "闻一口就精神。后勤自动照料伤兵几率 +25%",
       "mods": {
         "proc": {
           "logistics": 0.25
@@ -304,7 +323,7 @@
       "troop": "bandit",
       "icon": "铃",
       "rarity": "common",
-      "desc": "甘宁腰上的铃铛，一响就知道有人埋伏。不会被埋伏",
+      "desc": "甘宁的铃铛，一响就知道有埋伏。不会被埋伏",
       "mods": {
         "no_ambush": 1
       }
@@ -314,7 +333,7 @@
       "troop": "strategist",
       "icon": "镜",
       "rarity": "common",
-      "desc": "司马徽草庐里的一面铜镜，照人照心。计略伤害 +8%",
+      "desc": "司马徽草庐里的铜镜。计略伤害 +8%",
       "mods": {
         "magic": 0.08
       }
@@ -324,13 +343,10 @@
       "troop": "strategist",
       "icon": "策",
       "rarity": "rare",
-      "desc": "三分天下的那一卷。策士：攻击 +5%，受到的伤害 -5%；策士自动「出谋划策」的几率 +20%（队里有策士才生效）",
+      "desc": "三分天下的那一卷。攻击 +6%，受到伤害 -6%",
       "mods": {
-        "proc": {
-          "strategist": 0.2
-        },
-        "at": 0.05,
-        "guard": 0.05
+        "at": 0.06,
+        "guard": 0.06
       }
     },
     "bingfa": {
@@ -348,7 +364,7 @@
       "troop": "infantry",
       "icon": "锭",
       "rarity": "rare",
-      "desc": "孙坚的佩刀。每次连击，伤害额外 +2.5%",
+      "desc": "孙坚的佩刀。每段连击伤害额外 +2.5%",
       "mods": {
         "combo": 0.025
       }
@@ -358,9 +374,10 @@
       "troop": "strategist",
       "icon": "扇",
       "rarity": "rare",
-      "desc": "周瑜的扇子，扇着扇着就有了主意。AP 上限 +1",
+      "desc": "周瑜的扇子，扇着扇着就有了主意。AP 上限 +1，开战 AP +1",
       "mods": {
-        "ap_max": 1
+        "ap_max": 1,
+        "ap_start": 1
       }
     },
     "zhangu": {
@@ -368,22 +385,22 @@
       "troop": "bandit",
       "icon": "鼓",
       "rarity": "rare",
-      "desc": "开战时全军进入 BOOST；贼自动 BOOST 的几率 +15%（队里有贼才生效）",
+      "desc": "开战全军 BOOST；贼自动 BOOST 几率 +15%",
       "mods": {
+        "boost_start": 1,
         "proc": {
           "bandit": 0.15
-        },
-        "boost_start": 1
+        }
       }
     },
     "chize": {
       "name": "赤帻",
       "troop": "infantry",
       "icon": "帻",
-      "rarity": "rare",
-      "desc": "孙坚的红头巾，敌人都盯着它看。开战时 30% 几率让敌人第一回合混乱",
+      "rarity": "common",
+      "desc": "孙坚的红头巾，敌人都盯着它看。每回合 10% 几率让敌人眩晕、这回合不能行动",
       "mods": {
-        "stun_start": 0.3
+        "stun_round": 0.1
       }
     },
     "qinggang": {
@@ -391,17 +408,17 @@
       "troop": "cavalry",
       "icon": "釭",
       "rarity": "rare",
-      "desc": "削铁如泥。无视敌人一半的兵刃和谋略抗性",
+      "desc": "削铁如泥。无视敌人 40% 的抗性",
       "mods": {
-        "pierce": 0.5
+        "pierce": 0.4
       }
     },
     "qixing": {
       "name": "七星宝刀",
       "troop": "lord",
       "icon": "星",
-      "rarity": "rare",
-      "desc": "曹操献刀用的那把。每场第一击伤害 +50%",
+      "rarity": "common",
+      "desc": "曹操献刀用的那把。每场第一击 +50%",
       "mods": {
         "first_hit": 0.5
       }
@@ -411,9 +428,9 @@
       "troop": "strategist",
       "icon": "阵",
       "rarity": "rare",
-      "desc": "石头摆的阵，敌人进去就迷路。防御时减伤再 +8%",
+      "desc": "石头摆的阵，敌人进去就迷路。防御时减伤再 +15%",
       "mods": {
-        "defend": 0.08
+        "defend": 0.15
       }
     },
     "dunjia": {
@@ -421,9 +438,9 @@
       "troop": "strategist",
       "icon": "遁",
       "rarity": "rare",
-      "desc": "左慈的书，字会自己动。使敌人混乱的成功率 +15%",
+      "desc": "左慈的书，字会自己动。混乱成功率 +25%",
       "mods": {
-        "stun": 0.15
+        "stun": 0.25
       }
     },
     "muniu": {
@@ -431,9 +448,9 @@
       "troop": "logistics",
       "icon": "牛",
       "rarity": "rare",
-      "desc": "不吃草的牛。战后宝箱几率 +5%，每胜一场回复 3% 体力",
+      "desc": "不吃草的牛，粮草跟得上。回合上限 +1，每打赢一场回复 3% 体力",
       "mods": {
-        "chest": 0.05
+        "turns": 1
       },
       "after_win": 0.03
     },
@@ -442,7 +459,7 @@
       "troop": "infantry",
       "icon": "釜",
       "rarity": "common",
-      "desc": "破釜沉舟。体力低于一半时，攻击 +15%",
+      "desc": "破釜沉舟。体力低于一半时攻击 +15%",
       "mods": {
         "desperate": 0.15
       }
@@ -452,7 +469,7 @@
       "troop": "logistics",
       "icon": "丸",
       "rarity": "common",
-      "desc": "不会陷入混乱",
+      "desc": "吃一颗，心就定了。不会陷入混乱",
       "mods": {
         "calm": 1
       }
@@ -462,7 +479,7 @@
       "troop": "logistics",
       "icon": "盆",
       "rarity": "rare",
-      "desc": "战后掉宝箱的几率 +12%",
+      "desc": "放进去一个，拿出来一堆。宝箱几率 +12%",
       "mods": {
         "chest": 0.12
       }
@@ -472,7 +489,7 @@
       "troop": "lord",
       "icon": "榜",
       "rarity": "rare",
-      "desc": "招募、宝箱、三选一都多给一张",
+      "desc": "贴出去，人就来了。招募、宝箱、三选一都多一张",
       "mods": {
         "offer_extra": 1
       }
@@ -482,14 +499,10 @@
       "troop": "lord",
       "icon": "倚",
       "rarity": "rare",
-      "desc": "曹操的佩剑，不知怎么到了你手上。主公部队：攻击 +10%，体力 +5%（队里有主公才生效）",
+      "desc": "曹操的佩剑，不知怎么到了你手上。攻击 +6%，暴击率 +6%",
       "mods": {
-        "troop_at": {
-          "lord": 0.1
-        },
-        "troop_hp": {
-          "lord": 0.05
-        }
+        "at": 0.06,
+        "crit": 0.06
       }
     },
     "chitu": {
@@ -497,13 +510,10 @@
       "troop": "cavalry",
       "icon": "赤",
       "rarity": "rare",
-      "desc": "人中吕布，马中赤兔——马先到你这儿了。骑兵部队：攻击 +10%，体力 +5%；骑兵「插入」突袭的几率 +15%（骑兵本身 30%，其他兵种 15%；不占 AP；队里有骑兵才生效）",
+      "desc": "马中赤兔。骑兵攻击 +15%，突袭几率 +15%",
       "mods": {
         "troop_at": {
-          "cavalry": 0.1
-        },
-        "troop_hp": {
-          "cavalry": 0.05
+          "cavalry": 0.15
         },
         "raid": 0.15
       }
@@ -513,9 +523,9 @@
       "troop": "cavalry",
       "icon": "旗",
       "rarity": "common",
-      "desc": "公孙瓒的白马义从，一冲就乱。骑兵：骑兵「插入」突袭的几率 +30%（骑兵本身 30%；不占 AP；队里有骑兵才生效）",
+      "desc": "公孙瓒的白马义从。骑兵突袭几率 +20%",
       "mods": {
-        "raid": 0.3
+        "raid": 0.2
       }
     },
     "zhangba": {
@@ -523,16 +533,13 @@
       "troop": "spear",
       "icon": "矛",
       "rarity": "rare",
-      "desc": "燕人张翼德的矛，有点沉。枪兵部队：攻击 +10%，体力 +5%；枪兵被打时自动反击的几率 +20%（枪兵本身有 15%；不占 AP；队里有枪兵才生效）",
+      "desc": "燕人张翼德的矛。枪兵攻击 +15%，反击几率 +15%",
       "mods": {
         "troop_at": {
-          "spear": 0.1
-        },
-        "troop_hp": {
-          "spear": 0.05
+          "spear": 0.15
         },
         "proc": {
-          "spear": 0.2
+          "spear": 0.15
         }
       }
     },
@@ -541,14 +548,12 @@
       "troop": "spear",
       "icon": "枪",
       "rarity": "rare",
-      "desc": "赵子龙七进七出的那杆枪。枪兵被打时自动反击的几率 +30%（不占 AP；队里有枪兵才生效）",
+      "desc": "赵子龙七进七出的那杆枪。枪兵体力 +15%，体力低于一半时攻击 +12%",
       "mods": {
-        "proc": {
-          "spear": 0.3
+        "troop_hp": {
+          "spear": 0.15
         },
-        "troop_at": {
-          "spear": 0.05
-        }
+        "desperate": 0.12
       }
     },
     "qiangzhen": {
@@ -556,12 +561,11 @@
       "troop": "spear",
       "icon": "阵",
       "rarity": "common",
-      "desc": "枪尖朝外，骑兵撞上来就是自己找死。枪兵被打时自动反击的几率 +20%；受到的伤害 -3%（队里有枪兵才生效）",
+      "desc": "枪尖朝外，骑兵撞上来就是找死。枪兵反击几率 +25%",
       "mods": {
         "proc": {
-          "spear": 0.2
-        },
-        "guard": 0.03
+          "spear": 0.25
+        }
       }
     },
     "zhugenu": {
@@ -569,15 +573,12 @@
       "troop": "archer",
       "icon": "弩",
       "rarity": "rare",
-      "desc": "一次十发，诸葛亮还没出山，图纸先到了。弓兵部队：攻击 +10%，体力 +5%；敌人的兵刃、谋略抗性各 -5%（队里有弓兵才生效）",
+      "desc": "一次十发。弓兵攻击 +15%，敌人兵刃、谋略抗性 -6%",
       "mods": {
         "troop_at": {
-          "archer": 0.1
+          "archer": 0.15
         },
-        "troop_hp": {
-          "archer": 0.05
-        },
-        "resist_cut": 0.05
+        "resist_cut": 0.06
       }
     },
     "chuanyang": {
@@ -585,12 +586,11 @@
       "troop": "archer",
       "icon": "箭",
       "rarity": "common",
-      "desc": "百步穿杨，专找甲缝。弓兵：敌人的兵刃、谋略抗性各 -10%；弓兵自动「射穿甲缝」（降抗）的几率 +20%（队里有弓兵才生效）",
+      "desc": "百步穿杨，专找甲缝。弓兵自动「射穿甲缝」（降敌双抗）几率 +25%",
       "mods": {
         "proc": {
-          "archer": 0.2
-        },
-        "resist_cut": 0.1
+          "archer": 0.25
+        }
       }
     },
     "qinglong": {
@@ -598,15 +598,12 @@
       "troop": "infantry",
       "icon": "龙",
       "rarity": "rare",
-      "desc": "八十二斤，要两个人抬。刀兵部队：攻击 +10%，体力 +5%；受到的伤害 -5%（队里有刀兵才生效）",
+      "desc": "八十二斤，要两个人抬。刀兵攻击 +15%，受到伤害 -8%",
       "mods": {
         "troop_at": {
-          "infantry": 0.1
+          "infantry": 0.15
         },
-        "troop_hp": {
-          "infantry": 0.05
-        },
-        "guard": 0.05
+        "guard": 0.08
       }
     },
     "hubendun": {
@@ -614,12 +611,12 @@
       "troop": "infantry",
       "icon": "盾",
       "rarity": "common",
-      "desc": "盾厚三指，刀劈上去只留一道白印。刀兵：受到的伤害 -8%；刀兵「举盾」自动触发的几率 +15%（队里有刀兵才生效）",
+      "desc": "刀劈上去只留一道白印。受到伤害 -5%，刀兵举盾几率 +15%",
       "mods": {
+        "guard": 0.05,
         "proc": {
           "infantry": 0.15
-        },
-        "guard": 0.08
+        }
       }
     },
     "mengde": {
@@ -627,7 +624,7 @@
       "troop": "strategist",
       "icon": "孟",
       "rarity": "rare",
-      "desc": "曹操写的兵书，据说被张松背下来了。策士的技能每个少花 1 AP（最低 1；队里有策士才生效）",
+      "desc": "曹操写的兵书。策士技能各少 1 AP（最低 1）",
       "mods": {
         "troop_cost": {
           "strategist": 1
@@ -639,15 +636,14 @@
       "troop": "bandit",
       "icon": "黑",
       "rarity": "rare",
-      "desc": "黑山张燕的令牌，贼见了都给面子。贼部队：攻击 +10%，体力 +5%；开战全军 BOOST（队里有贼才生效）",
+      "desc": "黑山张燕的令牌。贼攻击 +15%，体力 +10%",
       "mods": {
         "troop_at": {
-          "bandit": 0.1
+          "bandit": 0.15
         },
         "troop_hp": {
-          "bandit": 0.05
-        },
-        "boost_start": 1
+          "bandit": 0.1
+        }
       }
     },
     "taipingyaoshu": {
@@ -655,11 +651,10 @@
       "troop": "logistics",
       "icon": "太",
       "rarity": "rare",
-      "desc": "张角的天书，南下黄巾一直在找它。后勤部队：体力 +15%（队里有后勤才生效）",
+      "desc": "张角的天书。计略伤害 +10%，混乱成功率 +10%",
       "mods": {
-        "troop_hp": {
-          "logistics": 0.15
-        }
+        "magic": 0.1,
+        "stun": 0.1
       }
     },
     "qingnang": {
@@ -667,7 +662,7 @@
       "troop": "logistics",
       "icon": "囊",
       "rarity": "rare",
-      "desc": "华佗的医书，差点被狱卒的老婆烧了。后勤部队：体力 +15%；后勤自动照料伤兵的几率 +15%（队里有后勤才生效）",
+      "desc": "华佗的医书。后勤体力 +15%，照料伤兵几率 +15%",
       "mods": {
         "troop_hp": {
           "logistics": 0.15
@@ -682,7 +677,7 @@
       "troop": "lord",
       "icon": "玺",
       "rarity": "curse",
-      "desc": "【诅咒】每回合 AP +1，但体力上限 -15%",
+      "desc": "【诅咒】传国玉玺。每回合 AP +1，体力上限 -15%",
       "mods": {
         "ap_round": 1,
         "hp": -0.15
@@ -693,7 +688,7 @@
       "troop": "strategist",
       "icon": "黄",
       "rarity": "curse",
-      "desc": "【诅咒】谋略伤害 +20%，但受到的伤害 +5%",
+      "desc": "【诅咒】黄巾的符水。计略伤害 +20%，受到伤害 +5%",
       "mods": {
         "magic": 0.2,
         "guard": -0.05
@@ -704,11 +699,10 @@
       "troop": "cavalry",
       "icon": "卢",
       "rarity": "curse",
-      "desc": "【诅咒】妨主之马。回合上限 +1、开战全军 BOOST，但开战先掉 5% 体力",
+      "desc": "【诅咒】妨主之马。回合上限 +1，开战掉 8% 体力",
       "mods": {
         "turns": 1,
-        "boost_start": 1,
-        "start_heal": -0.05
+        "start_heal": -0.08
       }
     },
     "fangtian": {
@@ -716,7 +710,7 @@
       "troop": "cavalry",
       "icon": "戟",
       "rarity": "curse",
-      "desc": "【诅咒】吕布的戟，太重了。攻击 +15%，但受到的伤害 +8%",
+      "desc": "【诅咒】吕布的戟，太重了。攻击 +15%，受到伤害 +8%",
       "mods": {
         "at": 0.15,
         "guard": -0.08
@@ -727,7 +721,7 @@
       "troop": "infantry",
       "icon": "藤",
       "rarity": "curse",
-      "desc": "【诅咒】刀枪不入，就怕火。受到的伤害 -15%，但体力上限 -5%",
+      "desc": "【诅咒】刀枪不入，就怕火。受到伤害 -15%，体力上限 -5%",
       "mods": {
         "guard": 0.15,
         "hp": -0.05
@@ -738,7 +732,7 @@
       "troop": "lord",
       "icon": "书",
       "rarity": "story",
-      "desc": "孙坚的家书，字又大又歪，墨洇透了纸背。先骂人，再求人。攻击 +4%，每场开局 AP +1",
+      "desc": "孙坚的家书，先骂人再求人。攻击 +4%，开战 AP +1",
       "mods": {
         "at": 0.04,
         "ap_start": 1
@@ -749,7 +743,7 @@
       "troop": "strategist",
       "icon": "谱",
       "rarity": "story",
-      "desc": "周家族老交给周瑜的族谱，最后一片竹简是新削的。策士部队：体力 +8%；回复 +8%（队里有策士才生效）",
+      "desc": "周家族老交给周瑜的族谱。策士体力 +8%，回复 +8%",
       "mods": {
         "troop_hp": {
           "strategist": 0.08
@@ -762,10 +756,10 @@
       "troop": "lord",
       "icon": "仲",
       "rarity": "story",
-      "desc": "【诅咒】袁术刻的假玉玺，刻工比真的还精细。每回合 AP +1，但受到的伤害 +10%",
+      "desc": "【诅咒】袁术刻的假玉玺，拿着就想称帝。攻击 +12%，体力上限 -8%",
       "mods": {
-        "ap_round": 1,
-        "guard": -0.1
+        "at": 0.12,
+        "hp": -0.08
       }
     },
     "xuzhou_yin": {
@@ -773,11 +767,10 @@
       "troop": "lord",
       "icon": "印",
       "rarity": "story",
-      "desc": "陶谦遗表里交到你手上的大印。刘备捧过一回，没捧热。攻击 +3%，体力 +3%，受到的伤害 -3%",
+      "desc": "陶谦遗表里交到你手上的大印。回合上限 +1，体力 +4%",
       "mods": {
-        "at": 0.03,
-        "hp": 0.03,
-        "guard": 0.03
+        "turns": 1,
+        "hp": 0.04
       }
     },
     "dujiu": {
@@ -785,7 +778,7 @@
       "troop": "logistics",
       "icon": "酒",
       "rarity": "story",
-      "desc": "杜夫人酿的酒，主角说有五十二度。后勤部队在场时：攻击 +4%，开局回复 3% 体力",
+      "desc": "杜夫人酿的，主角说有五十二度。攻击 +4%，开局回复 3% 体力",
       "mods": {
         "at": 0.04,
         "start_heal": 0.03
@@ -796,24 +789,93 @@
       "troop": "logistics",
       "icon": "船",
       "rarity": "story",
-      "desc": "糜贞的嫁妆：糜家的船队，东海的鱼盐一船一船往回运。开局回复 5% 体力；每打赢一场，回复 3% 体力",
+      "desc": "糜贞的嫁妆船队，鱼盐一船船往回运。宝箱几率 +8%，开局回复 5% 体力",
       "mods": {
+        "chest": 0.08,
         "start_heal": 0.05
-      },
-      "after_win": 0.03
+      }
     },
     "chen_mago": {
       "name": "陈先生的骂稿",
       "troop": "strategist",
       "icon": "骂",
       "rarity": "story",
-      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士部队：体力 +12%；但受到的伤害 +5%",
+      "desc": "【诅咒】陈宫天天写的骂稿，郭嘉每篇都读。策士体力 +20%，受到伤害 +3%",
       "mods": {
         "troop_hp": {
-          "strategist": 0.12
+          "strategist": 0.2
         },
-        "guard": -0.05
+        "guard": -0.03
       }
+    },
+    "quehua_gong": {
+      "name": "鹊画弓",
+      "troop": "archer",
+      "icon": "鹊",
+      "rarity": "rare",
+      "mods": {
+        "troop_at": {
+          "archer": 0.12
+        },
+        "crit": 0.06
+      },
+      "desc": "弓背上画着喜鹊，拉满了像要飞。弓兵攻击 +12%，暴击率 +6%"
+    },
+    "dujian": {
+      "name": "毒箭",
+      "troop": "archer",
+      "icon": "毒",
+      "rarity": "curse",
+      "mods": {
+        "resist_cut": 0.12,
+        "guard": -0.06
+      },
+      "desc": "【诅咒】箭头泡过毒，自己人也怕碰。敌人兵刃、谋略抗性 -12%，受到伤害 +6%"
+    },
+    "xiandeng_ling": {
+      "name": "先登令",
+      "troop": "spear",
+      "icon": "先",
+      "rarity": "rare",
+      "mods": {
+        "troop_at": {
+          "spear": 0.1
+        },
+        "stun_start": 0.25
+      },
+      "desc": "先登死士的令牌，第一个冲上去的人拿着。枪兵攻击 +10%，开战 25% 几率让敌人第一回合混乱"
+    },
+    "duanhou_ling": {
+      "name": "断后令",
+      "troop": "spear",
+      "icon": "断",
+      "rarity": "curse",
+      "mods": {
+        "desperate": 0.25,
+        "hp": -0.06
+      },
+      "desc": "【诅咒】断后的人，没打算活着回去。体力低于一半时攻击 +25%，体力上限 -6%"
+    },
+    "zeizang_dai": {
+      "name": "贼赃袋",
+      "troop": "bandit",
+      "icon": "赃",
+      "rarity": "common",
+      "mods": {
+        "chest": 0.08
+      },
+      "desc": "鼓鼓囊囊，不知道从谁家顺来的。宝箱几率 +8%"
+    },
+    "lulin_jiu": {
+      "name": "绿林酒",
+      "troop": "bandit",
+      "icon": "绿",
+      "rarity": "curse",
+      "mods": {
+        "boost_start": 1,
+        "start_heal": -0.06
+      },
+      "desc": "【诅咒】绿林好汉的烈酒，一口上头。开战全军 BOOST，开战掉 6% 体力"
     }
   }
 }
