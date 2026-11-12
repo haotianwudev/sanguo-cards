@@ -5347,6 +5347,18 @@
     "jd_xugong": {
       "src": "source/battles/jd_xugong.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "ev_zhiren": {
+      "src": "source/battles/ev_zhiren.jpg",
+      "license": "Claude Code 生成（nano-banana-2）"
+    },
+    "ev_jiading": {
+      "src": "source/battles/ev_jiading.jpg",
+      "license": "Claude Code 生成（nano-banana-2）"
+    },
+    "ev_bingpi": {
+      "src": "source/battles/ev_bingpi.jpg",
+      "license": "Claude Code 生成（nano-banana-2）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",

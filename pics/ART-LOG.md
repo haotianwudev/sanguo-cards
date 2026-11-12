@@ -1601,3 +1601,6 @@
 - [ ] 2026-11-10 cg `c5_rescue` ← c5_rescue_v2.jpg · ok
 - [ ] 2026-11-10 cg `c5_rescue` ← c5_rescue_v3.jpg · ok
 - [ ] 2026-11-10 cg `c4_tonggui` ← c4_tonggui_v1.jpg · ok
+- [ ] 2026-11-11 battle `ev_zhiren` ← ev_zhiren.jpg · ok
+- [ ] 2026-11-11 battle `ev_jiading` ← ev_jiading.jpg · ok
+- [ ] 2026-11-11 battle `ev_bingpi` ← ev_bingpi.jpg · ok

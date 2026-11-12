@@ -23,7 +23,7 @@
 
 敌人（战斗界面上方；和它的卡共用一张图）
 
-✅ 全部到位（16 项）
+✅ 全部到位（17 项）
 
 能拿到的卡
 
@@ -31,7 +31,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（19 项）
+✅ 全部到位（22 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -57,7 +57,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（19 项）
+✅ 全部到位（22 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -83,7 +83,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（12 项）
+✅ 全部到位（14 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -105,7 +105,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（19 项）
+✅ 全部到位（21 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -127,7 +127,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（29 项）
+✅ 全部到位（32 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -153,7 +153,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（21 项）
+✅ 全部到位（23 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -175,7 +175,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（22 项）
+✅ 全部到位（24 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -201,7 +201,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（29 项）
+✅ 全部到位（32 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -223,7 +223,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（23 项）
+✅ 全部到位（26 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -249,7 +249,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（23 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -275,7 +275,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（19 项）
+✅ 全部到位（21 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -301,7 +301,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（22 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -323,7 +323,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（23 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -349,7 +349,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（21 项）
+✅ 全部到位（23 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -371,7 +371,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（24 项）
+✅ 全部到位（27 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -397,7 +397,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（21 项）
+✅ 全部到位（23 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -419,7 +419,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（21 项）
+✅ 全部到位（24 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -445,7 +445,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（30 项）
+✅ 全部到位（33 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -467,7 +467,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（30 项）
+✅ 全部到位（33 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -489,7 +489,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（18 项）
+✅ 全部到位（20 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -511,7 +511,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（21 项）
+✅ 全部到位（23 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -533,7 +533,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（14 项）
+✅ 全部到位（17 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -555,7 +555,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（16 项）
+✅ 全部到位（19 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -577,7 +577,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（11 项）
+✅ 全部到位（13 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -599,7 +599,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（9 项）
+✅ 全部到位（11 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -621,7 +621,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（6 项）
+✅ 全部到位（8 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
