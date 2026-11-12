@@ -217,8 +217,10 @@ func test_huatuo_heals_joins_or_leaves_his_book() -> void:
 	check(db.cards["huatuo"]["troop"] == "logistics" and db.cards["huatuo"]["skills"] == ["mafei", "guagu_liaodu"])
 	var joined := 0
 	var book := 0
-	for seed_value in 200:
+	for seed_value in 200:  # asking him along means a fight first (收卡 events all do, user 2026-11-11); the roll comes with the win
 		var s := event_on_road("huatuo", 1, seed_value)
+		check(not s.event_battle.is_empty(), "bandits come for his medicine box")
+		Quests.resolve(quest(0), s, rng(seed_value))
 		if s.has_card("huatuo"):
 			joined += 1
 		if s.relics.has("qingnang"):

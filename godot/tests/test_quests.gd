@@ -1438,3 +1438,10 @@ func test_chapter_nine_has_a_recruit_square_for_the_yecheng_two() -> void:
 	var q: Dictionary = GameData.get_db().quests.filter(func(x): return x["id"] == "xiliang")[0]
 	check_eq(q["squares"]["n9_g_d_t1"]["type"], "recruit")
 	check(q["recruit_pool"].has("yanliang") and q["recruit_pool"].has("wenchou"), "颜良、文丑 come in chapter 9")
+
+
+func test_every_square_has_a_name() -> void:
+	# the map puts a name plaque under every square: a blank or a bare ？ left squares unnamed (user 2026-11-11)
+	for q in GameData.get_db().quests:
+		for s in q["squares"].values():
+			check(s["label"] != "" and s["label"] != "？", "%s.%s has a name" % [q["id"], s["id"]])

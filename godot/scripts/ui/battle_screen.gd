@@ -7,6 +7,7 @@ extends Control
 var scenario_id := "hulao"
 var carry := false  # quest battle: start with the quest's wear, hand it back afterwards
 var boss := false  # boss or elite: the chest always drops, with more cards
+var no_chest := false  # a fight a ？ event started: its own win effects are the reward, no chest (user 2026-11-11)
 var ambush := false
 
 var b: Battle
@@ -233,7 +234,7 @@ func _build() -> void:
 	info.add_child(_intent_label)
 	var stats_row := HBoxContainer.new()  # attack and 护甲 share a line
 	stats_row.add_theme_constant_override("separation", 16)
-	stats_row.add_child(Kit.label("攻击 %d · 每回合 %d 次" % [e["at"], e["actions"]], Kit.FONT_SMALL, "muted"))
+	stats_row.add_child(Kit.label("攻击 %d · 每回合 %d 次" % [int(round(b.enemy["at"])), e["actions"]], Kit.FONT_SMALL, "muted"))  # the scaled attack (data.at is the raw table value)
 	var arm_l := _armor_label(e)
 	if arm_l != null:
 		stats_row.add_child(arm_l)
@@ -887,8 +888,8 @@ func _sync_badges() -> void:
 	if not e["form"].is_empty():
 		row.append(_tipped(BattleFx.badge("阵", Color(0.3, 0.55, 0.95) if e["form"]["vs"] == "magic" else Color(0.85, 0.55, 0.2), int(e["form"]["turns"])), "阵型",
 			"%s：%s伤害 -%d%%，剩 %d 回合" % [e["form"]["name"], "兵刃" if e["form"]["vs"] == "attack" else "谋略", int(round(float(e["form"]["cut"]) * 100)), e["form"]["turns"]], "form"))
-	if e["at"] > e["data"]["at"] * 1.01:
-		row.append(_tipped(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)), "狂暴", "攻击 %d（原本 %d）" % [int(round(e["at"])), int(round(e["data"]["at"]))], "rage"))
+	if e["at"] > float(e.get("at0", e["at"])) * 1.01:  # compared with its own starting attack (data.at is the raw, unscaled table value)
+		row.append(_tipped(BattleFx.badge("怒", Color(0.9, 0.2, 0.2)), "狂暴", "攻击 %d（原本 %d）" % [int(round(e["at"])), int(round(float(e.get("at0", e["at"]))))], "rage"))
 	if e["break_turns"] > 0:
 		row.append(_tipped(BattleFx.badge("破", Color(0.95, 0.72, 0.2), e["break_turns"]), "破防", "受到伤害 +%d%%，剩 %d 回合" % [int(round(e["break_amount"] * 100)), e["break_turns"]], "break"))
 	if e["resist_turns"] > 0:
@@ -2366,6 +2367,9 @@ func _finish() -> void:
 			save.carry_uses.merge(out[2], true)
 		await _victory_plaque(b.overkill)
 		var q: Dictionary = Game.battle_ctx.get("quest", {})
+		if no_chest:
+			Game.battle_finished(true)
+			return
 		var bonus := float(b.mods.get("chest", 0.0))
 		var chance := save.chest_chance(b.overkill, boss, bonus)
 		var extra_card := 1 if Game.rng.randf() < b.loot_card else 0  # 劫掠: one more card to pick from in every chest

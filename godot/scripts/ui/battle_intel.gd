@@ -25,7 +25,15 @@ static func info(s: Dictionary, fight: Dictionary) -> String:
 		var afx_img := Kit.affix_icon_path(afx_id)
 		tags.append(("[img=26]%s[/img]" % afx_img if afx_img != "" else "") + chip("%s：%s" % [afx["name"], afx["desc"]], "amber"))
 	var turns := Battle.turns_for(db, sc, "boss" if s["boss"] else ("elite" if s["elite"] else "normal"))
-	var head := ("　".join(tags) + "　" if not tags.is_empty() else "") + "体力 %d · 攻 %d · %d 动 · %d 回合" % [e["hp"], e["at"], e["actions"], turns]
+	# the numbers the fight will really have (chapter scaling, tier, 难度, 宝物, 词缀): the raw table values said 体力 30000
+	# for 比武·关羽, which read as a fight nobody can win (user 2026-11-11)
+	var m := Quests.mods(Game.save)
+	var afx_mod := Quests.affix_here(Game.save)
+	if not afx_mod.is_empty():
+		m["affix"] = afx_mod
+	var dry := Battle.start(fight["battle"], Game.save.field_leaders(), 0, 0, {}, {}, false, m)
+	var head := ("　".join(tags) + "　" if not tags.is_empty() else "") + "体力 %d · 攻 %d · %d 动 · %d 回合" % [dry.enemy["max_hp"], dry.enemy["at"], dry.enemy["data"]["actions"], turns]
+	e = dry.enemy["data"]  # with its 护甲 and 词缀, as the fight has it
 	var res := "　".join([troop_tag(e), resists(e)].filter(func(t): return t != ""))
 	return "[font_size=%d]%s%s\n%s[/font_size]" % [Kit.FONT_SMALL, head, ("\n" + res if res != "" else ""), moves(e)]
 

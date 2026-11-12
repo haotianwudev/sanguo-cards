@@ -206,6 +206,7 @@ func start_quest_battle(q: Dictionary, sq: Dictionary) -> void:
 	b.scenario_id = fight["battle"]
 	b.carry = true
 	b.boss = fight["boss"]
+	b.no_chest = fight.get("no_chest", false)
 	b.ambush = fight["ambush"]
 	show_screen(b)
 

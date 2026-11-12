@@ -91,10 +91,12 @@ static func start(scenario_id: String, party: Array, seed_value: int = -1, damag
 		* (1.0 + float(b.db.battle["enemy_hp_per_extra_leader"]) * (party.size() - 1))))
 	b.enemy = {"data": e, "hp": max_hp, "max_hp": max_hp, "at": e["at"] * float(b.db.battle.get("attack_mult", 1.0)) * tough_at * (1.0 + float(afx.get("at", 0.0))),
 		"regen": float(afx.get("regen", 0.0)), "stunned": false,
+		"at0": 0.0,  # the attack it started with (set below): 狂暴 raises "at" above it
 		"break_amount": 0.0, "break_turns": 0, "resist_down": 0.0, "resist_turns": 0, "burn_dmg": 0, "burn_pct": 0.0, "burn_turns": 0, "poison": 0, "poison_pct": 0.0, "poison_turns": 0, "charging": "", "charge_ready": false, "used": [],
 		"intents": [], "stance": {}, "guard": {},
 		"mark": {}, "shield": {}, "form": {}}  # v3: this round's planned moves (意图), 反击架势 {name, power, turns}, 前卫 {name, hp, max_hp, strike};
 		# 点名 {card, who, move}, 护盾 {name, hp, max_hp}, 阵 {name, vs (attack / magic), cut, turns}
+	b.enemy["at0"] = b.enemy["at"]
 	b.party_burn = {"dmg": 0, "turns": 0}
 	b.party_poison = {"layers": 0, "pct": 0.0, "turns": 0}
 	b.roster = roster.duplicate()

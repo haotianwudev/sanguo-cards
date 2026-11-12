@@ -121,7 +121,7 @@ static func begin(q: Dictionary, save: SaveData, rng: RandomNumberGenerator = nu
 	save.event_battle = {}
 	save.event_note = []
 	if rng != null:
-		_roll_events(q, save, event_rng(save, "deal", rng))  # which ？ event waits where is known from the start (the map names it); how it turns out is chance
+		_roll_events(q, save, event_rng(save, "deal", rng))  # which ？ event waits where is fixed from the start (a restart meets the same ones); the map shows ？ until it is reached
 	reset_carry(save)
 	_auto_resolve(q, save)
 	# remember how the chapter began (once per chapter: a lost first square calls begin again and must not overwrite it)
@@ -259,7 +259,7 @@ static func enemy_scales(save: SaveData) -> Array:
 	for q in db.quests:
 		if q["id"] != save.quest:
 			continue
-		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		var sq: Dictionary = fight_square(view(q, save)["squares"].get(save.square, {}), save)
 		if sq.is_empty():
 			return [1.0, 1.0]
 		var bid: String = sq["battle"] if sq["battle"] != "" else str(save.event_battle.get("battle", ""))
@@ -275,6 +275,16 @@ static func enemy_scales(save: SaveData) -> Array:
 		var base := _scale_for(q["id"], _position_t(q, int(sq["x"])), _enemy_power(bid))
 		return [base * c, base * c]  # hp and attack both take the tier coefficient: 精英 / 首领 hit as hard as they are tough
 	return [1.0, 1.0]
+
+
+static func fight_square(sq: Dictionary, save: SaveData) -> Dictionary:
+	## the square as its fight sees it: a fight a ？ event starts is always 精英 (user 2026-11-11) — a gamble that turns
+	## into a fight should be a real one, with the elite's scaling and 护甲 (but no chest: battle_here)
+	if sq.get("type", "") == "mystery" and not save.event_battle.is_empty() and not sq.get("elite", false):
+		var out := sq.duplicate()
+		out["elite"] = true
+		return out
+	return sq
 
 
 static func late_armor(qid: String, sq: Dictionary, enemy_id: String) -> String:
@@ -313,7 +323,7 @@ static func armor_here(save: SaveData) -> String:
 	for q in db.quests:
 		if q["id"] != save.quest:
 			continue
-		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		var sq: Dictionary = fight_square(view(q, save)["squares"].get(save.square, {}), save)
 		var bid: String = str(sq.get("battle", "")) if str(sq.get("battle", "")) != "" else str(save.event_battle.get("battle", ""))
 		if sq.is_empty() or bid == "" or not db.scenarios.has(bid):
 			return ""
@@ -327,7 +337,7 @@ static func enemy_tier(save: SaveData) -> String:
 	for q in db.quests:
 		if q["id"] != save.quest:
 			continue
-		var sq: Dictionary = view(q, save)["squares"].get(save.square, {})
+		var sq: Dictionary = fight_square(view(q, save)["squares"].get(save.square, {}), save)
 		if sq.is_empty():
 			return "normal"
 		var bid: String = sq["battle"] if sq["battle"] != "" else str(save.event_battle.get("battle", ""))
@@ -738,6 +748,42 @@ static func start_grant(q: Dictionary, save: SaveData, rng: RandomNumberGenerato
 
 # ---- ？ squares ------------------------------------------------------------------
 
+static func event_shown_ahead(db, ev: Dictionary) -> bool:
+	## A ？ event the map names before the square is reached (else a plain ？, user 2026-11-11): one that can bring a
+	## general (华佗 — players hunting a card should find him), or one whose outcomes go both ways. An all-good one
+	## (宝箱) or an all-bad one (险) shown ahead lets players walk to the good ones and round the bad.
+	var seen := {"good": false, "bad": false, "general": false}
+	for o in ev["options"]:
+		_sides(db, o["effects"], seen)
+	return seen["general"] or (seen["good"] and seen["bad"])
+
+
+static func _sides(db, effects: Array, seen: Dictionary) -> void:
+	for e in effects:
+		if not e is Dictionary:
+			continue
+		if e.has("chance"):
+			_sides(db, e.get("then", []), seen)
+			_sides(db, e.get("else", []), seen)
+		if e.has("card") and db.cards.has(str(e["card"])) and not db.cards[str(e["card"])]["soldier"]:
+			seen["general"] = true
+		if e.has("offer") and e["offer"] is Dictionary and e["offer"].get("generals", false):
+			seen["general"] = true
+		for k in ["heal", "upgrade", "offer", "soldier", "card", "merit", "refresh", "rest"]:
+			if e.has(k):
+				seen["good"] = true
+		if e.has("relic") and e["relic"]:
+			seen["good"] = true
+		for k in ["damage", "poison", "downgrade", "lose_soldier", "drop_relic", "battle"]:
+			if e.has(k):
+				seen["bad"] = true
+		for k in ["difficulty", "danger"]:  # +1 = the enemies get tougher, -1 = easier
+			if e.has(k) and (e[k] is int or e[k] is float):
+				seen["bad" if e[k] > 0 else "good"] = true
+		if e.has("ambush_all"):
+			seen["bad" if e["ambush_all"] else "good"] = true
+
+
 static func event_here(q: Dictionary, save: SaveData, rng: RandomNumberGenerator) -> Dictionary:
 	## The event on the current ？ square: rolled on arrival, kept for the run, never one already met this run.
 	var s := here(q, save)
@@ -865,11 +911,11 @@ static func choose_event(q: Dictionary, save: SaveData, rng: RandomNumberGenerat
 
 
 static func battle_here(q: Dictionary, save: SaveData) -> Dictionary:
-	## What fighting on the current square means: {battle, boss (always a chest), ambush}.
+	## What fighting on the current square means: {battle, boss (always a chest), ambush, no_chest (an event's fight)}.
 	q = view(q, save)
 	var s := here(q, save)
-	if s["type"] == "mystery":
-		return {"battle": save.event_battle.get("battle", ""), "boss": false,
+	if s["type"] == "mystery":  # a fight a ？ event starts: elite strength (fight_square), but no chest — the event's own win is the reward
+		return {"battle": save.event_battle.get("battle", ""), "boss": false, "no_chest": true,
 			"ambush": save.event_battle.get("ambush", false)}
 	return {"battle": s["battle"], "boss": s["boss"] or s["elite"], "ambush": s["ambush"] or save.ambushes.has(s["id"])}
 

@@ -228,6 +228,9 @@ func _load(dir: String) -> void:
 			"text": ev.get("text", []), "cg": ev.get("cg", ""), "prompt": ev.get("prompt", ""), "scope": ev.get("scope", "south"), "route": ev.get("route", ""),
 			"portraits": ev.get("portraits", []), "options": ev["options"].map(func(o): return {
 				"label": o["label"], "effects": o.get("effects", []), "win": o.get("win", []), "needs": o.get("needs", {}), "weight": float(o.get("weight", 1.0))})}
+	for eid in events:  # whether the map may name this ？ event before the square is reached (story.json "reveal" overrides)
+		var r: Variant = story["events"][eid].get("reveal", null)
+		events[eid]["shown_ahead"] = Quests.event_shown_ahead(self, events[eid]) if r == null else bool(r)
 	_index_card_chapters()
 	Quests.validate(self)
 

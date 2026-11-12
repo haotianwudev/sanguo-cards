@@ -312,31 +312,26 @@ func _rebuild_map() -> void:
 		b.add_child(node_view)
 
 		_layer.add_child(b)
-		var ev_known: Dictionary = _fixed_event(s) if s["type"] == "mystery" and s["label"] in ["", "？"] else {}
-		var title: String = ev_known.get("title", s["label"])
-		var needs_plaque: bool = title != "" or s["boss"] or s["elite"] or s["type"] in ["event", "choose", "temple", "physician", "curse", "red_turban", "glory", "hazard"]
-		
-		var full_title: String = title if title != "" else _type_name(s)
+		# every square wears its name (a test makes sure each one has a label)
+		var full_title: String = s["label"] if s["label"] != "" else _type_name(s)
 		b.tooltip_text = full_title
-		
-		if needs_plaque:
-			var lbl := Kit.label(full_title, LABEL_FS, "text")
-			lbl.add_theme_color_override("font_color", Color(1.0, 0.95, 0.85))
-			var plaque := Kit.box(Color(0.12, 0.08, 0.06, 0.92), 3, 1, Color(0.82, 0.68, 0.38, 0.9), 0)
-			plaque.content_margin_left = 6
-			plaque.content_margin_right = 6
-			plaque.content_margin_top = 1
-			plaque.content_margin_bottom = 2
-			lbl.add_theme_stylebox_override("normal", plaque)
-			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, LABEL_FS).x + 14
-			lbl.position = _pos(s) + Vector2(-w / 2.0, SQ / 2.0 + 3)
-			lbl.size = Vector2(w, LABEL_FS + 8)
-			lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			_layer.add_child(lbl)
-			_labels.append(lbl)
-			if not Quests.is_open(s, Game.save):
-				lbl.modulate.a = 0.5
+		var lbl := Kit.label(full_title, LABEL_FS, "text")
+		lbl.add_theme_color_override("font_color", Color(1.0, 0.95, 0.85))
+		var plaque := Kit.box(Color(0.12, 0.08, 0.06, 0.92), 3, 1, Color(0.82, 0.68, 0.38, 0.9), 0)
+		plaque.content_margin_left = 6
+		plaque.content_margin_right = 6
+		plaque.content_margin_top = 1
+		plaque.content_margin_bottom = 2
+		lbl.add_theme_stylebox_override("normal", plaque)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		var w := lbl.get_theme_font("font").get_string_size(lbl.text, HORIZONTAL_ALIGNMENT_LEFT, -1, LABEL_FS).x + 14
+		lbl.position = _pos(s) + Vector2(-w / 2.0, SQ / 2.0 + 3)
+		lbl.size = Vector2(w, LABEL_FS + 8)
+		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_layer.add_child(lbl)
+		_labels.append(lbl)
+		if not Quests.is_open(s, Game.save):
+			lbl.modulate.a = 0.5
 		_nodes[s["id"]] = b
 		if not Quests.is_open(s, Game.save):
 			_ghosts[s["id"]] = true
@@ -380,6 +375,10 @@ func _kind(s: Dictionary) -> String:
 	return "boss" if s["boss"] else ("elite" if s["elite"] else s["type"])
 
 
+func _reached(s: Dictionary) -> bool:
+	return Game.save != null and (Game.save.square == s["id"] or Game.save.visited.has(s["id"]))
+
+
 func _icon_key(s: Dictionary) -> String:
 	var fe: Dictionary = _fixed_event(s)
 	if fe.has("glyph"):
@@ -397,11 +396,14 @@ func _icon_key(s: Dictionary) -> String:
 
 
 func _fixed_event(s: Dictionary) -> Dictionary:
-	## a ？ square holding a set event (险) — or an event dealt to it when the run began — shows that event's glyph and colour
+	## a ？ square holding a set event (the 高级宝箱) shows that event's glyph and colour. An event dealt to it at random
+	## shows ahead only if it can bring a general or goes both ways (`shown_ahead`, Quests.event_shown_ahead); else it is
+	## a plain ？ until reached (user 2026-11-11). Designed 宝箱 squares stay 宝 — no gamble to give away.
 	var db := GameData.get_db()
 	if s["event"] != "":
 		return db.events[s["event"]]
-	if s["type"] == "mystery" and Game.save != null and Game.save.events.has(s["id"]) and db.events.has(Game.save.events[s["id"]]):
+	if s["type"] == "mystery" and Game.save != null and db.events.has(Game.save.events.get(s["id"], "")) \
+			and (_reached(s) or db.events[Game.save.events[s["id"]]]["shown_ahead"]):
 		return db.events[Game.save.events[s["id"]]]
 	return {}
 
@@ -958,12 +960,12 @@ func _show_square(s: Dictionary) -> void:
 				if body == "":  # nothing to read first
 					_open_choose(s)
 		"battle":
-			text.text = BattleIntel.info(s, Quests.battle_here(q, save))
+			text.text = BattleIntel.info(Quests.fight_square(s, save), Quests.battle_here(q, save))
 			_fight_button(s, buttons)
 			_enemy_face(s)
 		"mystery":
 			if not save.event_battle.is_empty():
-				text.text = "\n".join(save.event_note) + "\n\n" + BattleIntel.info(s, Quests.battle_here(q, save))
+				text.text = "\n".join(save.event_note) + "\n\n" + BattleIntel.info(Quests.fight_square(s, save), Quests.battle_here(q, save))
 				_fight_button(s, buttons)
 			elif not save.offer.is_empty():
 				text.text = "\n".join(save.event_note)  # the outcome, not the event again
@@ -1017,7 +1019,7 @@ func _show_square(s: Dictionary) -> void:
 	# narrative text: one line per click, then the buttons
 	var narrative: bool = s["type"] in ["event", "choose"] or (s["type"] == "mystery" and save.event_battle.is_empty() and save.offer.is_empty()) \
 		or (s["type"] in ["battle", "recover", "recruit"] and not save.resolved)  # a battle / rest / recruit with lines of its own plays them first
-	_dlg_after = BattleIntel.info(s, Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
+	_dlg_after = BattleIntel.info(Quests.fight_square(s, save), Quests.battle_here(q, save)) if s["type"] == "battle" and not save.resolved else ""
 	if s["type"] == "recover" and not save.resolved:  # after a rest's own lines, what resting does
 		_dlg_after = text.text
 	if narrative and lines.size() > 1 and _story_read == "":
