@@ -598,3 +598,12 @@ func test_a_random_relic_follows_the_rarity() -> void:
 		n[db.relics[rid]["rarity"]] += 1
 	var per := func(k: String) -> float: return float(n[k]) / db.relics.values().filter(func(x): return x["rarity"] == k).size()
 	check(per.call("common") > per.call("rare") * 1.3 and per.call("curse") > per.call("rare") * 1.3, "each common / curse comes up more often than each rare: %s" % str(n))
+
+
+func test_only_the_rarest_relics_give_ap() -> void:
+	# AP is the strongest bonus there is: only rare 宝物 carry it, never a common, curse or story keepsake (user 2026-11-11)
+	var db := GameData.get_db()
+	for rid in db.relics:
+		var m: Dictionary = db.relics[rid]["mods"]
+		if ["ap_start", "ap_round", "ap_max", "troop_cost"].any(func(k): return m.has(k)):
+			check_eq(db.relics[rid]["rarity"], "rare", rid + " gives AP")

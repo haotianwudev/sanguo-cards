@@ -199,9 +199,9 @@
       "troop": "lord",
       "icon": "甲",
       "rarity": "story",
-      "desc": "孙坚年轻时的铜甲，吴夫人亲手系上。受到伤害 -7%",
+      "desc": "孙坚年轻时的铜甲，吴夫人亲手系上。受到伤害 -5%",
       "mods": {
-        "guard": 0.07
+        "guard": 0.05
       }
     },
     "zhen_diaopi": {
@@ -209,17 +209,17 @@
       "troop": "lord",
       "icon": "氅",
       "rarity": "story",
-      "desc": "张夫人亲手系上的貂皮披风，里子缝得比账本还密。体力 +7%",
+      "desc": "张夫人亲手系上的貂皮披风，里子缝得比账本还密。体力 +5%",
       "mods": {
-        "hp": 0.07
+        "hp": 0.05
       }
     },
     "hupi": {
       "name": "虎皮披风",
-      "troop": "lord",
+      "troop": "bandit",
       "icon": "虎",
       "rarity": "common",
-      "desc": "孙坚同款。攻击 +5%",
+      "desc": "一张整虎皮，山大王坐上去才像样。攻击 +5%",
       "mods": {
         "at": 0.05
       }
@@ -249,10 +249,9 @@
       "troop": "strategist",
       "icon": "棋",
       "rarity": "story",
-      "desc": "荀攸按在沙盘上的黑棋，棋看三步。开战 AP +1，回合上限 +1",
+      "desc": "荀攸按在沙盘上的黑棋，棋看三步。开战 20% 几率让敌人第一回合混乱",
       "mods": {
-        "ap_start": 1,
-        "turns": 1
+        "stun_start": 0.2
       }
     },
     "bandu_lingjian": {
@@ -260,17 +259,16 @@
       "troop": "archer",
       "icon": "箭",
       "rarity": "story",
-      "desc": "黄忠的令箭。每场第一击 +50%，敌人双抗 -5%",
+      "desc": "黄忠的令箭，号令一响第一支箭就要见血。每场第一击 +40%",
       "mods": {
-        "first_hit": 0.5,
-        "resist_cut": 0.05
+        "first_hit": 0.4
       }
     },
     "bingfu": {
       "name": "虎符",
       "troop": "strategist",
       "icon": "符",
-      "rarity": "common",
+      "rarity": "rare",
       "desc": "调兵的信物。开战 AP +1",
       "mods": {
         "ap_start": 1
@@ -278,13 +276,12 @@
     },
     "zhongshan_banner": {
       "name": "中山甄记大旗",
-      "troop": "lord",
+      "troop": "cavalry",
       "icon": "旗",
       "rarity": "story",
-      "desc": "酸枣大营里诸侯都认得的赞助商旗。宝箱几率 +6%，攻击 +3%",
+      "desc": "酸枣大营里诸侯都认得的赞助商旗。宝箱几率 +6%",
       "mods": {
-        "chest": 0.06,
-        "at": 0.03
+        "chest": 0.06
       }
     },
     "lizigao": {
@@ -364,9 +361,9 @@
       "troop": "infantry",
       "icon": "锭",
       "rarity": "rare",
-      "desc": "孙坚的佩刀。每段连击伤害额外 +2.5%",
+      "desc": "孙坚的佩刀。每段连击伤害额外 +4%",
       "mods": {
-        "combo": 0.025
+        "combo": 0.04
       }
     },
     "yushan": {
@@ -415,20 +412,20 @@
     },
     "qixing": {
       "name": "七星宝刀",
-      "troop": "lord",
+      "troop": "bandit",
       "icon": "星",
       "rarity": "common",
-      "desc": "曹操献刀用的那把。每场第一击 +50%",
+      "desc": "曹操献刀用的那把，藏在袖子里。每场第一击 +50%",
       "mods": {
         "first_hit": 0.5
       }
     },
     "bazhen": {
       "name": "八阵图",
-      "troop": "strategist",
+      "troop": "spear",
       "icon": "阵",
       "rarity": "rare",
-      "desc": "石头摆的阵，敌人进去就迷路。防御时减伤再 +15%",
+      "desc": "石头摆的阵，枪尖朝外守着阵眼。防御时减伤再 +15%",
       "mods": {
         "defend": 0.15
       }
@@ -496,10 +493,10 @@
     },
     "yitian": {
       "name": "倚天剑",
-      "troop": "lord",
+      "troop": "cavalry",
       "icon": "倚",
       "rarity": "rare",
-      "desc": "曹操的佩剑，不知怎么到了你手上。攻击 +6%，暴击率 +6%",
+      "desc": "曹操的佩剑，和青釭剑是一对。攻击 +6%，暴击率 +6%",
       "mods": {
         "at": 0.06,
         "crit": 0.06
@@ -611,11 +608,10 @@
       "troop": "infantry",
       "icon": "盾",
       "rarity": "common",
-      "desc": "刀劈上去只留一道白印。受到伤害 -5%，刀兵举盾几率 +15%",
+      "desc": "刀劈上去只留一道白印。刀兵自动举盾几率 +25%",
       "mods": {
-        "guard": 0.05,
         "proc": {
-          "infantry": 0.15
+          "infantry": 0.25
         }
       }
     },
@@ -676,8 +672,8 @@
       "name": "传国玉玺",
       "troop": "lord",
       "icon": "玺",
-      "rarity": "curse",
-      "desc": "【诅咒】传国玉玺。每回合 AP +1，体力上限 -15%",
+      "rarity": "rare",
+      "desc": "传国玉玺，拿着它的人都没好下场。每回合 AP +1，体力上限 -15%",
       "mods": {
         "ap_round": 1,
         "hp": -0.15
@@ -699,9 +695,9 @@
       "troop": "cavalry",
       "icon": "卢",
       "rarity": "curse",
-      "desc": "【诅咒】妨主之马。回合上限 +1，开战掉 8% 体力",
+      "desc": "【诅咒】妨主之马。开战全军 BOOST，开战掉 8% 体力",
       "mods": {
-        "turns": 1,
+        "boost_start": 1,
         "start_heal": -0.08
       }
     },
@@ -732,10 +728,9 @@
       "troop": "lord",
       "icon": "书",
       "rarity": "story",
-      "desc": "孙坚的家书，先骂人再求人。攻击 +4%，开战 AP +1",
+      "desc": "孙坚的家书，先骂人再求人。攻击 +4%",
       "mods": {
-        "at": 0.04,
-        "ap_start": 1
+        "at": 0.04
       }
     },
     "zhou_pu": {
@@ -743,12 +738,9 @@
       "troop": "strategist",
       "icon": "谱",
       "rarity": "story",
-      "desc": "周家族老交给周瑜的族谱。策士体力 +8%，回复 +8%",
+      "desc": "周家族老交给周瑜的族谱。回复 +12%",
       "mods": {
-        "troop_hp": {
-          "strategist": 0.08
-        },
-        "heal": 0.08
+        "heal": 0.12
       }
     },
     "weixi": {
@@ -767,10 +759,9 @@
       "troop": "lord",
       "icon": "印",
       "rarity": "story",
-      "desc": "陶谦遗表里交到你手上的大印。回合上限 +1，体力 +4%",
+      "desc": "陶谦遗表里交到你手上的大印。回合上限 +1",
       "mods": {
-        "turns": 1,
-        "hp": 0.04
+        "turns": 1
       }
     },
     "dujiu": {
@@ -778,10 +769,9 @@
       "troop": "logistics",
       "icon": "酒",
       "rarity": "story",
-      "desc": "杜夫人酿的，主角说有五十二度。攻击 +4%，开局回复 3% 体力",
+      "desc": "杜夫人酿的，主角说有五十二度。暴击率 +5%",
       "mods": {
-        "at": 0.04,
-        "start_heal": 0.03
+        "crit": 0.05
       }
     },
     "mijia_chuan": {
@@ -789,10 +779,9 @@
       "troop": "logistics",
       "icon": "船",
       "rarity": "story",
-      "desc": "糜贞的嫁妆船队，鱼盐一船船往回运。宝箱几率 +8%，开局回复 5% 体力",
+      "desc": "糜贞的嫁妆船队，鱼盐一船船往回运。开局回复 6% 体力",
       "mods": {
-        "chest": 0.08,
-        "start_heal": 0.05
+        "start_heal": 0.06
       }
     },
     "chen_mago": {

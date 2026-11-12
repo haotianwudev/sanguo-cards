@@ -1604,3 +1604,9 @@
 - [ ] 2026-11-11 battle `ev_zhiren` ← ev_zhiren.jpg · ok
 - [ ] 2026-11-11 battle `ev_jiading` ← ev_jiading.jpg · ok
 - [ ] 2026-11-11 battle `ev_bingpi` ← ev_bingpi.jpg · ok
+- [ ] 2026-11-11 relic `quehua_gong` ← quehua_gong.jpg · ok
+- [ ] 2026-11-11 relic `dujian` ← dujian.jpg · ok
+- [ ] 2026-11-11 relic `xiandeng_ling` ← xiandeng_ling.jpg · ok
+- [ ] 2026-11-11 relic `duanhou_ling` ← duanhou_ling.jpg · ok
+- [ ] 2026-11-11 relic `zeizang_dai` ← zeizang_dai.jpg · ok
+- [ ] 2026-11-11 relic `lulin_jiu` ← lulin_jiu.jpg · ok

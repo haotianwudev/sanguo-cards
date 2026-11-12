@@ -39,15 +39,15 @@ func _ready() -> void:
 	tabs.position = Vector2(28, 64)
 	tabs.add_theme_constant_override("separation", 10)
 	add_child(tabs)
-	for t in [["jump", "跳到某关"], ["cards", "查看所有卡牌"], ["cgs", "查看所有 CG"], ["bgm", "试听配乐"], ["quit", "退出游戏"]]:
+	for t in [["jump", "跳到某关"], ["cards", "查看所有卡牌"], ["relics", "查看所有宝物"], ["cgs", "查看所有 CG"], ["bgm", "试听配乐"], ["quit", "退出游戏"]]:
 		var b := Kit.button(t[1], "red" if t[0] == "quit" else "blue", Kit.FONT_BODY)
 		b.custom_minimum_size = Vector2(0, 46)
 		b.pressed.connect(_show.bind(t[0]))
 		tabs.add_child(b)
 
 	var bgm_lbl := Kit.label("♪ " + Bgm.current_display_text(), 14, "gold")
-	bgm_lbl.position = Vector2(680, 74)
-	bgm_lbl.size = Vector2(430, 30)
+	bgm_lbl.position = Vector2(905, 74)  # right of the tab row (it reaches ~x 895 with 6 tabs)
+	bgm_lbl.size = Vector2(215, 30)
 	bgm_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	bgm_lbl.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	add_child(bgm_lbl)
@@ -74,6 +74,8 @@ func _show(which: String) -> void:
 			_view = _jump_panel()
 		"cards":
 			_view = _cards_panel()
+		"relics":
+			_view = _relics_panel()
 		"cgs":
 			_view = _cgs_panel()
 		"bgm":
@@ -308,6 +310,137 @@ func _cards_panel() -> Control:
 			grid.add_child(v)
 		scroll.add_child(grid)
 
+	hold["refresh"] = refresh
+	refresh.call()
+	return box
+
+
+const _RELIC_POOLS := [["drop", "首领三选一 / 随机宝物"], ["story", "剧情给"], ["event", "事件给"], ["side", "小故事给"], ["prep", "前尘整备买"], ["none", "没有来路"]]
+const _RELIC_RARITY := {"common": "普通", "rare": "稀有", "curse": "诅咒", "story": "剧情"}
+
+
+func _relic_sources() -> Dictionary:
+	## where each 宝物 comes from: the boss pick and every random one ({"relic": true}) draw all but the story ones by rarity
+	## (Quests.random_relic); a story square / choice, a named event effect, a ？小故事 reward, or 前尘整备's shop
+	var db := GameData.get_db()
+	var out := {}
+	var add := func(rid: String, src: String, where: String) -> void:
+		if not db.relics.has(rid):
+			return
+		if not out.has(rid):
+			out[rid] = {}
+		if not out[rid].has(src):
+			out[rid][src] = []
+		if where != "" and not out[rid][src].has(where):
+			out[rid][src].append(where)
+	for rid in db.relics:
+		if db.relics[rid]["rarity"] != "story":
+			add.call(rid, "drop", "")
+	for q in db.quests:
+		for s in q["squares"].values():
+			for rid in s["relics"]:
+				add.call(rid, "story", "%s · %s" % [q["title"], s["label"]])
+			for o in s["choose"]:
+				for rid in o.get("relics", []):
+					add.call(rid, "story", "%s · %s" % [q["title"], s["label"]])
+	for eid in db.events:
+		var stack: Array = [db.events[eid]["options"]]
+		while not stack.is_empty():
+			var o: Variant = stack.pop_back()
+			if o is Dictionary:
+				if o.get("relic") is String:
+					add.call(str(o["relic"]), "event", str(db.events[eid]["title"]))
+				stack.append_array(o.values())
+			elif o is Array:
+				stack.append_array(o)
+	for qid in db.side_stories:
+		for st in db.side_stories[qid]:
+			for rid in st.get("reward", {}).get("relics", []):
+				add.call(rid, "side", str(st.get("title", "")))
+	for r in db.battle.get("prep", {}).get("relics", []):
+		add.call(str(r["id"]), "prep", "%d 点" % int(r.get("cost", 0)))
+	for rid in db.relics:
+		if not out.has(rid):
+			add.call(rid, "none", "")
+	return out
+
+
+func _relics_panel() -> Control:
+	## 查看所有宝物: filter by 来路 / 兵种 / 稀有度; each row = icon, name, rarity, team, effect, and every place it comes from
+	var db := GameData.get_db()
+	var src := _relic_sources()
+	var pick := {"pool": "", "troop": "", "rarity": ""}
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 6)
+	var rows := VBoxContainer.new()
+	rows.add_theme_constant_override("separation", 4)
+	box.add_child(rows)
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(1224, 440)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	box.add_child(scroll)
+	var passes := func(rid: String, f: Dictionary) -> bool:
+		var r: Dictionary = db.relics[rid]
+		return (f["pool"] == "" or src[rid].has(f["pool"])) and (f["troop"] == "" or r["troop"] == f["troop"]) 			and (f["rarity"] == "" or r["rarity"] == f["rarity"])
+	var hold := {}
+	var chip_row := func(title: String, key: String, opts: Array) -> void:
+		var row := HFlowContainer.new()
+		row.add_theme_constant_override("h_separation", 5)
+		var head := Kit.label(title, 15, "muted")
+		head.custom_minimum_size = Vector2(52, 34)
+		head.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		row.add_child(head)
+		for o in [["", "全部"]] + opts:
+			var f: Dictionary = pick.duplicate()
+			f[key] = o[0]
+			var n: int = src.keys().filter(func(rid): return passes.call(rid, f)).size()
+			if n == 0 and o[0] != "":
+				continue
+			var b := Kit.button("%s %d" % [o[1], n], "gold" if pick[key] == o[0] else "blue", 14)
+			b.custom_minimum_size = Vector2(0, 34)
+			b.pressed.connect(func():
+				pick[key] = o[0]
+				hold["refresh"].call())
+			row.add_child(b)
+		rows.add_child(row)
+	var refresh := func() -> void:
+		for ch in rows.get_children():
+			ch.queue_free()
+		chip_row.call("来路", "pool", _RELIC_POOLS)
+		chip_row.call("兵种", "troop", db.troops.keys().map(func(x): return [x, str(db.troops[x]["name"])]))
+		chip_row.call("稀有度", "rarity", _RELIC_RARITY.keys().map(func(x): return [x, _RELIC_RARITY[x]]))
+		for ch in scroll.get_children():
+			ch.queue_free()
+		var list := VBoxContainer.new()
+		list.add_theme_constant_override("separation", 4)
+		var ids: Array = src.keys().filter(func(rid): return passes.call(rid, pick))
+		var ro := {"rare": 0, "common": 1, "curse": 2, "story": 3}
+		ids.sort_custom(func(a, b): return [db.troops.keys().find(db.relics[a]["troop"]), ro.get(db.relics[a]["rarity"], 4), a] < [db.troops.keys().find(db.relics[b]["troop"]), ro.get(db.relics[b]["rarity"], 4), b])
+		for rid in ids:
+			var r: Dictionary = db.relics[rid]
+			var line := HBoxContainer.new()
+			line.add_theme_constant_override("separation", 10)
+			var ic := TextureRect.new()
+			ic.texture = Kit.relic_icon(rid)
+			ic.custom_minimum_size = Vector2(48, 48)
+			ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			line.add_child(ic)
+			var where: Array = []
+			for k in _RELIC_POOLS:
+				if src[rid].has(k[0]):
+					where.append(k[1] + ("（%s）" % "、".join(src[rid][k[0]]) if not src[rid][k[0]].is_empty() else ""))
+			var txt := RichTextLabel.new()
+			txt.bbcode_enabled = true
+			txt.fit_content = true
+			txt.custom_minimum_size = Vector2(1150, 0)
+			txt.add_theme_font_size_override("normal_font_size", 15)
+			txt.text = "[color=#e8c66a]%s[/color]　%s · %s　%s
+[color=#9aa4b0]出处：%s[/color]" % [r["name"], _RELIC_RARITY.get(r["rarity"], r["rarity"]),
+				str(db.troops.get(r["troop"], {}).get("name", r["troop"])), r["desc"], "；".join(where)]
+			line.add_child(txt)
+			list.add_child(line)
+		scroll.add_child(list)
 	hold["refresh"] = refresh
 	refresh.call()
 	return box

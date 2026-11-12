@@ -231,8 +231,11 @@ func test_famous_weapons() -> void:
 	s.take("zhouyu")
 	s.party = s.auto_party()
 	var plain := Battle.start("yaodao", s.party_leaders(), 3)
-	s.relics = ["qinggang", "qixing", "bazhen"]
-	var b := Battle.start("yaodao", s.party_leaders(), 3, 0, {}, {}, false, Quests.mods(s))
+	var db := GameData.get_db()  # their mods straight in: each 宝物 belongs to a troop this party doesn't field
+	var m := {}
+	for rid in ["qinggang", "qixing", "bazhen"]:
+		m.merge(db.relics[rid]["mods"])
+	var b := Battle.start("yaodao", s.party_leaders(), 3, 0, {}, {}, false, m)
 	var hp0: int = b.enemy["hp"]
 	var hp1: int = plain.enemy["hp"]
 	b.act(0, "tuji")
