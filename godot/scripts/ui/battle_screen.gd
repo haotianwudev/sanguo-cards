@@ -377,10 +377,11 @@ func _refresh() -> void:
 	var e := b.enemy
 	_enemy_hp_label.text = "%d / %d" % [e["hp"], e["max_hp"]]
 	var it := b.intent_text() if b.result == "" else ""
-	_intent_label.text = ("意图：" + it) if it != "" else ""
-	_intent_label.visible = it != ""
-	if it != "":
-		_tip_on(_intent_label, "敌人意图", _intent_tip())
+	if not _stun_held:  # the old 意图 stays up until the stunning blow lands
+		_intent_label.text = ("意图：" + it) if it != "" else ""
+		_intent_label.visible = it != ""
+		if it != "":
+			_tip_on(_intent_label, "敌人意图", _intent_tip())
 	_guard_row.visible = not e["guard"].is_empty()
 	if _guard_row.visible:
 		_guard_label.text = "前卫：%s %d/%d" % [e["guard"]["name"], e["guard"]["hp"], e["guard"]["max_hp"]]
@@ -796,7 +797,7 @@ func _sync_fx() -> void:
 		want["e_poison"] = func(): return BattleFx.embers(self, _enemy_rect(), Color(0.45, 0.95, 0.35, 0.85), 18, 40.0)
 	if e["break_turns"] > 0:
 		want["e_break"] = func(): return BattleFx.cracks(self, _enemy_rect(), Color(1.0, 0.82, 0.35, 0.8))
-	if e["stunned"]:
+	if e["stunned"] and not _stun_held:
 		want["e_stun"] = func(): return BattleFx.orbit(self, _enemy_center() + Vector2(0, -80), 80.0, 22.0, 4, BattleFx.GOLD, 11.0)
 	if e["charging"] != "":
 		var cr := _enemy_rect() if _has_cg else Rect2(_enemy_art.global_position - global_position, _enemy_art.size)
@@ -870,7 +871,7 @@ func _sync_badges() -> void:
 		row.append(_tipped(BattleFx.badge("斩", Color(0.9, 0.2, 0.2), -1, false), "点名", "%s，下回合【%s】" % [e["mark"]["who"], e["mark"]["move"]], "mark"))
 	if e["charging"] != "":
 		row.append(_tipped(BattleFx.badge("蓄", Color(0.9, 0.2, 0.2), -1, false), "蓄力", "下回合【%s】" % e["charging"], "charge"))
-	if e["stunned"]:
+	if e["stunned"] and not _stun_held:
 		row.append(_tipped(BattleFx.badge("晕", Color(0.62, 0.42, 0.95)), "眩晕", "", "stun"))
 	if not e["stance"].is_empty():
 		row.append(_tipped(BattleFx.badge("反", Color(0.25, 0.78, 0.78), int(e["stance"].get("turns", -1))), "反击架势", "【%s】" % e["stance"]["name"], "stance"))
@@ -1069,13 +1070,18 @@ var _act_elem := ""  # the acting skill's element (fire / poison): its magic blo
 var _act_troop := ""  # the acting card's troop: its plain blows take that troop's shape (arrows, thrust, heavy arc, cross cut)
 
 
+var _stun_held := false  # the engine has already stunned the enemy, but the blow that does it hasn't played yet: no 晕 until it lands
+
+
 func _play(events: Array) -> void:
 	## plays the engine's events one after another; each kind of event has its own show (_ev_<kind> below)
 	_busy = true
+	_stun_held = events.any(func(ev): return ev["t"] == "stun" and ev["ok"])
 	_refresh()
 	for ev in events:
 		await _play_one(ev)
 	_busy = false
+	_stun_held = false
 	_refresh()
 	if b.result != "":
 		await get_tree().create_timer(0.4).timeout
@@ -1449,6 +1455,10 @@ func _ev_boost(ev: Dictionary) -> void:
 
 
 func _ev_stun(ev: Dictionary) -> void:
+	await get_tree().create_timer(0.25).timeout  # the blow's numbers read first, then the enemy reels
+	if ev["ok"]:
+		_stun_held = false
+		_refresh()  # 晕 badge and the star ring come in now, with the burst
 	Kit.float_text(self, _enemy_center(), "眩晕！" if ev["ok"] else "未生效", Kit.c("purple"), 36)
 	if ev["ok"]:
 		Sfx.play("stun")
