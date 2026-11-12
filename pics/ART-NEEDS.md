@@ -39,7 +39,7 @@
 
 奇遇插图（这一章第一次会抽到的「？」事件）
 
-✅ 全部到位（45 项）
+✅ 全部到位（44 项）
 
 ## 第二章 · 讨伐董卓
 
@@ -65,7 +65,7 @@
 
 奇遇插图（这一章第一次会抽到的「？」事件）
 
-✅ 全部到位（2 项）
+✅ 全部到位（3 项）
 
 ## 第二章 · 洛阳烟云
 
@@ -105,7 +105,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（18 项）
+✅ 全部到位（19 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -153,7 +153,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（21 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -175,7 +175,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（21 项）
+✅ 全部到位（22 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -275,7 +275,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（18 项）
+✅ 全部到位（19 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -301,7 +301,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（19 项）
+✅ 全部到位（20 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -349,7 +349,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（21 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -397,7 +397,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（21 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -489,7 +489,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（17 项）
+✅ 全部到位（18 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -511,7 +511,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（20 项）
+✅ 全部到位（21 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -577,7 +577,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（10 项）
+✅ 全部到位（11 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
@@ -599,7 +599,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（8 项）
+✅ 全部到位（9 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 

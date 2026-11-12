@@ -90,6 +90,9 @@
       "turn_limit": 6,
       "enemy": "guanjun"
     },
+    "ev_zhiren": {"name": "左慈的纸人甲兵", "turn_limit": 6, "enemy": "ev_zhiren"},
+    "ev_jiading": {"name": "豪强家丁", "turn_limit": 6, "enemy": "ev_jiading"},
+    "ev_bingpi": {"name": "衙门口·兵痞", "turn_limit": 6, "enemy": "ev_bingpi"},
     "shanzei_band": {
       "name": "山贼",
       "turn_limit": 6,

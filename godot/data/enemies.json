@@ -239,6 +239,9 @@
       ],
       "card": "inf_n"
     },
+    "ev_zhiren": {"name": "纸人甲兵", "portrait": "inf_n", "actions": 2, "card": "inf_n", "moves": [{"name": "纸刀", "power": 1.0, "weight": 3}, {"name": "纸甲叠阵", "power": 0.4, "weight": 1, "heal": 0.06}, {"name": "一阵紫烟", "power": 0.6, "weight": 1, "confuse": 0.4}]},
+    "ev_jiading": {"name": "豪强家丁", "portrait": "jiading", "actions": 2, "card": "jiading", "moves": [{"name": "抡棍", "power": 1.0, "weight": 3}, {"name": "砸摊子", "power": 1.2, "weight": 1}, {"name": "仗势叫骂", "power": 0.3, "weight": 1, "ap_drain": 1}]},
+    "ev_bingpi": {"name": "兵痞", "portrait": "inf_n", "actions": 2, "card": "inf_n", "moves": [{"name": "推人", "power": 0.8, "weight": 2}, {"name": "拔刀乱砍", "power": 1.1, "weight": 3}, {"name": "抢了药就跑", "power": 0.5, "weight": 1, "heal": 0.06}]},
     "shanzei_band": {
       "name": "山贼",
       "portrait": "shanzei_bing",
