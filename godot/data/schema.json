@@ -63,7 +63,7 @@
     {"enum": "story.quests.*.soldier_scope", "values": ["", "south", "north"]},
     {"enum": "story.quests.*.pool_overrides.*.soldier_scope", "values": ["", "south", "north"]},
 
-    {"refs": "story.events.*.scope", "to": "story.quests.*.id", "also": ["universal", "south", "north"]},
+    {"refs": "story.events.*.scope", "to": "story.quests.*.id", "also": ["universal", "south", "north", "fixed"]},
     {"each": "ui.themes.*", "refs": "/story.events.*.color", "to": "@keys", "why": "the map paints a ？ square in its event's colour from the theme (a missing one crashed the map)"},
     {"enum": "story.events.*.route", "values": ["", "south", "north"]},
     {"refs": "story.events.*.options.**.battle", "to": "scenarios.@keys"},

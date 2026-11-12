@@ -568,3 +568,11 @@ func test_a_held_relic_pays_the_cost_back() -> void:
 	s.merit = 10
 	Quests.open_side(s, "s_firstwine")
 	check_eq(s.merit, 10, "already had 酒囊: the 10 战功 come back")
+
+
+func test_the_grand_chest_is_never_a_random_roll() -> void:
+	# only the designed row of three chests in chapter 2 holds it (a ？ in chapter 3 handed out 袁绍's chest, user 2026-11-11)
+	var db := GameData.get_db()
+	for q in db.quests:
+		var s := SaveData.create()
+		check(not Quests.pools(q, s)["event_pool"].has("grand_chest"), "no ？ pool in %s draws the grand chest" % q["id"])
