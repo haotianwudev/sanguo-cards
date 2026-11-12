@@ -35,11 +35,8 @@ const TRACKS := {
 	"heroic_age": "res://data/audio/bgm/heroic_age.ogg",
 	"crusade": "res://data/audio/bgm/crusade.ogg",
 	"five_armies": "res://data/audio/bgm/five_armies.ogg",
-	"volatile_reaction": "res://data/audio/bgm/volatile_reaction.ogg",
 	"strength_of_titans": "res://data/audio/bgm/strength_of_titans.ogg",
 	"achilles": "res://data/audio/bgm/achilles.ogg",
-	"movement_proposition": "res://data/audio/bgm/movement_proposition.ogg",
-	"impending_boom": "res://data/audio/bgm/impending_boom.ogg",
 	"heavy_heart": "res://data/audio/bgm/heavy_heart.ogg",
 	"the_pyre": "res://data/audio/bgm/the_pyre.ogg",
 	"battlefield2": "res://data/audio/bgm/battlefield2.ogg",
@@ -53,8 +50,6 @@ const TRACKS := {
 	"teller_of_the_tales": "res://data/audio/bgm/teller_of_the_tales.ogg",
 	"eastern_thought": "res://data/audio/bgm/eastern_thought.ogg",
 	"ishikari_lore": "res://data/audio/bgm/ishikari_lore.ogg",
-	"suonatore_di_liuto": "res://data/audio/bgm/suonatore_di_liuto.ogg",
-	"village_consort": "res://data/audio/bgm/village_consort.ogg",
 }
 
 const INFO := {
@@ -82,11 +77,8 @@ const INFO := {
 	"heroic_age": {"name": "Heroic Age · 英雄纪元", "src": "Kevin MacLeod CC-BY", "desc": "古典铜管号角与恢弘弦乐序曲，与原主页曲同风"},
 	"crusade": {"name": "Crusade · 军团会战", "src": "Kevin MacLeod CC-BY", "desc": "厚重战鼓与史诗管弦推进，两军主力正面交锋"},
 	"five_armies": {"name": "Five Armies · 五军交锋", "src": "Kevin MacLeod CC-BY", "desc": "厚重管弦交响与定音鼓推进，主力兵团正面对决"},
-	"volatile_reaction": {"name": "Volatile Reaction · 兵临城下", "src": "Kevin MacLeod CC-BY", "desc": "紧迫弦乐疾奏与战鼓齐鸣，攻城拔寨、刻不容缓"},
 	"strength_of_titans": {"name": "Strength of the Titans · 霸王军威", "src": "Kevin MacLeod CC-BY", "desc": "雄浑铜管与磅礴战鼓，首领压境与凯旋加冕"},
 	"achilles": {"name": "Achilles · 破阵突击", "src": "Kevin MacLeod CC-BY", "desc": "凌厉急促的古典管弦冲锋，骑兵突袭、撕裂敌阵"},
-	"movement_proposition": {"name": "Movement Proposition · 兵贵神速", "src": "Kevin MacLeod CC-BY", "desc": "高速管弦律动与铜管呼应，千里奔袭、短兵相接"},
-	"impending_boom": {"name": "Impending Boom · 擂鼓进军", "src": "Kevin MacLeod CC-BY", "desc": "军鼓与铜管交织的战场推进曲，短兵相接"},
 	"heavy_heart": {"name": "Heavy Heart · 乱世悲歌", "src": "Kevin MacLeod CC-BY", "desc": "二胡与大提琴交织的苍凉挽歌，战火苍生、英雄饮恨"},
 	"the_pyre": {"name": "The Pyre · 将星陨落", "src": "Kevin MacLeod CC-BY", "desc": "庄严肃穆的古典弦乐挽歌，名将凋零、壮志未酬"},
 	"battlefield2": {"name": "BattleField2 · 旌旗蔽日", "src": "PeriTune CC-BY", "desc": "正统战棋古典管弦战斗曲，两军对垒、旌旗猎猎"},
@@ -100,8 +92,6 @@ const INFO := {
 	"teller_of_the_tales": {"name": "Teller of the Tales · 行吟山水", "src": "Kevin MacLeod CC-BY", "desc": "古竖琴与木管舒缓慢板，与原大地图曲同风"},
 	"eastern_thought": {"name": "Eastern Thought · 云水禅心", "src": "Kevin MacLeod CC-BY", "desc": "悠远长笛与东方拨弦慢曲，山林古道、心境澄明"},
 	"ishikari_lore": {"name": "Ishikari Lore · 山林古道", "src": "Kevin MacLeod CC-BY", "desc": "幽静尺八竹笛与柔和弦乐铺底，苍茫群山行旅"},
-	"suonatore_di_liuto": {"name": "Suonatore di Liuto · 孤舟远影", "src": "Kevin MacLeod CC-BY", "desc": "宁静古朴的古典拨弦独奏，江畔独行、岁月静好"},
-	"village_consort": {"name": "Village Consort · 乡野行旅", "src": "Kevin MacLeod CC-BY", "desc": "轻松悠闲的古典木管与弦乐慢板，踏遍乡野城郭"},
 }
 
 const SCENE_NAMES := {
@@ -120,17 +110,17 @@ const POOLS := {
 	"title": ["title", "heroic_age", "dramatic4"],
 	"map": [
 		"map", "shenyang", "shenxian", "taohua", "shizima", "breeze2", "harvest",
-		"teller_of_the_tales", "eastern_thought", "ishikari_lore", "suonatore_di_liuto", "village_consort",
+		"teller_of_the_tales", "eastern_thought", "ishikari_lore",
 	],
 	"battle": [
 		"battle", "wuxia", "wuxia2", "prairie5", "kengeki", "amenoshita3", "ametsuchi", "battlefield5",
-		"five_armies", "crusade", "volatile_reaction", "movement_proposition", "impending_boom",
+		"five_armies", "crusade",
 		"battlefield2", "battlefield3", "battlefield4",
 	],
 	"boss": ["wuxia3", "epic_battle_j", "five_armies", "crusade", "strength_of_titans", "dramatic2", "dramatic4", "battlefield3", "kengeki", "amenoshita3"],
-	"ambush": ["asian_drums", "achilles", "volatile_reaction", "movement_proposition", "prairie5", "kengeki", "numina", "wuxia2"],
-	"leisure": ["folk_chinese", "chinatown", "taohua", "guzheng_city", "breeze2", "harvest", "village_consort"],
-	"strategy": ["shenxian", "guzheng_city", "taohua", "shizima", "eastern_thought", "suonatore_di_liuto"],
+	"ambush": ["asian_drums", "achilles", "prairie5", "kengeki", "numina", "wuxia2"],
+	"leisure": ["folk_chinese", "chinatown", "taohua", "guzheng_city", "breeze2", "harvest"],
+	"strategy": ["shenxian", "guzheng_city", "taohua", "shizima", "eastern_thought"],
 	"victory": ["heroic_age", "strength_of_titans", "dramatic4", "battlefield4", "taohua"],
 	"tragic": ["heavy_heart", "the_pyre", "sakuya4"],
 }
