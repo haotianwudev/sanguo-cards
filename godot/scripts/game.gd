@@ -18,6 +18,7 @@ func _ready() -> void:
 		persist_enabled = false
 	if persist_enabled:
 		SaveData.migrate_legacy()
+		SaveData.fix_slots()
 	var cfg := ConfigFile.new()
 	if persist_enabled and cfg.load(OPTIONS_PATH) == OK:
 		for k in options:
@@ -63,11 +64,13 @@ func persist() -> void:
 
 
 func assign_slot() -> void:
-	## the birthplace is chosen: this journey now lives in its route's slot (the pending file goes)
-	if save_path != "":
+	## the birthplace is chosen: this journey now lives in its route's slot (the pending file goes; a 新周目 that came from a
+	## slot stays there — the birth square only offers that slot's route, and any other birth still lands in its own slot)
+	if save_path == SaveData.slot_path(save.route()):
 		return
+	var was_pending := save_path == ""
 	save_path = SaveData.slot_path(save.route())
-	if persist_enabled and FileAccess.file_exists(SaveData.PENDING_PATH):
+	if was_pending and persist_enabled and FileAccess.file_exists(SaveData.PENDING_PATH):
 		DirAccess.remove_absolute(SaveData.PENDING_PATH)
 
 

@@ -848,3 +848,25 @@ func test_the_portrait_cache_keeps_only_the_most_recent() -> void:
 	check_eq(Kit._portraits.size(), 3, "only the cap is kept")
 	check(Kit._portraits.has(keys[4]) and not Kit._portraits.has(keys[0]), "the oldest went first")
 	ui["portrait_cache"] = cap
+
+
+func test_a_save_in_the_other_routes_slot_moves_back() -> void:
+	## an old north 新周目 that picked the south birthplace was written into the north slot: on start it moves to the south slot
+	var fmt := "user://test_slot_%s.json"
+	var routes: Dictionary = GameData.get_db().routes
+	for r in ["south", "north", "swap"]:
+		DirAccess.remove_absolute(fmt % r)
+	var south := SaveData.create()
+	south.flags = [routes["south"]]
+	south.write(fmt % "north")
+	SaveData.fix_slots(fmt)
+	check(not FileAccess.file_exists(fmt % "north"), "the north slot is free again")
+	check_eq(SaveData.read(fmt % "south").birth_route(), "south", "the south journey now opens as 南线")
+	var north := SaveData.create()
+	north.flags = [routes["north"]]
+	north.write(fmt % "south")  # two crossed saves …
+	south.write(fmt % "north")
+	SaveData.fix_slots(fmt)
+	check(SaveData.read(fmt % "south").birth_route() == "south" and SaveData.read(fmt % "north").birth_route() == "north", "… swap back, neither is lost")
+	for r in ["south", "north"]:
+		DirAccess.remove_absolute(fmt % r)

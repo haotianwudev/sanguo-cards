@@ -477,8 +477,11 @@ static func read(path: String = SAVE_PATH) -> SaveData:
 
 ## ---- two saves, one per route: south and north can be played side by side ----------------------------------
 
+const SLOT_FMT := "user://save_%s.json"
+
+
 static func slot_path(route_id: String) -> String:
-	return "user://save_%s.json" % route_id
+	return SLOT_FMT % route_id
 
 
 static func read_slot(route_id: String) -> SaveData:
@@ -549,6 +552,31 @@ static func migrate_legacy() -> void:
 			s.write(target)
 			s.write_shared()
 	DirAccess.rename_absolute(SAVE_PATH, SAVE_PATH + ".bak")
+
+
+static func fix_slots(fmt := SLOT_FMT) -> void:
+	## a save sitting in the other route's slot (an old 新周目 that picked the other birthplace wrote into the slot it came from)
+	## moves to the slot of the route it is really on; two crossed saves swap. One whose own slot is taken by a save of that
+	## same route stays where it is (nothing is ever thrown away)
+	var held := {}  # slot route → the route of the save in it ("" = no birthplace chosen yet)
+	for r in GameData.get_db().routes:
+		var s := read(fmt % r) if FileAccess.file_exists(fmt % r) else null
+		if s != null:
+			held[r] = s.birth_route()
+	for r in held.keys():
+		var b: String = held[r]
+		if b == "" or b == r:
+			continue
+		if not held.has(b):
+			DirAccess.rename_absolute(fmt % r, fmt % b)
+			held.erase(r)
+			held[b] = b
+		elif held[b] == r:
+			DirAccess.rename_absolute(fmt % r, fmt % "swap")
+			DirAccess.rename_absolute(fmt % b, fmt % r)
+			DirAccess.rename_absolute(fmt % "swap", fmt % b)
+			held[r] = r
+			held[b] = b
 
 
 func _db() -> GameData:
