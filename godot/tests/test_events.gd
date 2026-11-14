@@ -550,12 +550,12 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 	s.flags = ["出生：江东富春"]
 	check(Quests.side_stories(s).is_empty(), "nothing before a chapter is done")
 	var south := Quests.side_stories(s, "prologue")
-	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_jiujiu", "s_firstwine", "s_i_sewing"]), "the south birth gets only the south prologue stories")
-	s.quests_cleared = ["prologue"]
+	check(not south.is_empty() and south.all(func(x): return x["id"] in ["s_rc_fuchun", "s_i_sewing", "s_i_cash", "s_i_boast"]), "the south birth gets only the south prologue stories")
+	s.quests_cleared = ["prologue", "taodong", "yuxi"]  # 九九歌 / 一杯倒 open after 第三章 (moved out of the crowded 第一章, user 2026-11-13)
 	s.grant_card("sunce")
 	s.merit = 9
 	check(not Quests.open_side(s, "s_jiujiu")["ok"], "10 战功 to open: 9 is not enough")
-	check_eq(Quests.side_unread(s), south.size())
+	check_eq(Quests.side_unread(s), Quests.side_stories(s).size())
 	s.merit = 12
 	var before := s.copies("sunce")
 	var r := Quests.open_side(s, "s_jiujiu")
@@ -572,7 +572,7 @@ func test_side_stories_open_after_their_chapter_cost_merit_and_reward_once() -> 
 func test_a_held_relic_pays_the_cost_back() -> void:
 	var s := SaveData.create()
 	s.flags = ["出生：江东富春"]
-	s.quests_cleared = ["prologue"]
+	s.quests_cleared = ["prologue", "taodong", "yuxi"]
 	s.relics = ["jiunang"]
 	s.kept_relics = ["jiunang"]
 	s.merit = 10

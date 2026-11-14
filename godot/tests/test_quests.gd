@@ -1342,9 +1342,9 @@ func test_a_story_shows_in_one_chapter_only_and_stays_read_across_laps() -> void
 	s.run_records = ["出生：江东富春"]
 	s.quests_cleared = ["prologue"]
 	var ids := func(sv): return Quests.side_stories(sv).map(func(x): return x["id"])
-	check(ids.call(s).has("s_jiujiu"), "open after its chapter")
+	check(ids.call(s).has("s_i_sewing"), "open after its chapter")
 	s.quests_cleared.append("taodong")
-	check(not ids.call(s).has("s_jiujiu"), "missed: gone once the next chapter is done")
+	check(not ids.call(s).has("s_i_sewing"), "missed: gone once the next chapter is done")
 	check(ids.call(s).has("s_zumao"))
 	s.merit = 10
 	Quests.open_side(s, "s_zumao")
