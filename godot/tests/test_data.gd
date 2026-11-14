@@ -45,7 +45,7 @@ func test_every_event_option_resolves_or_leads_somewhere() -> void:
 
 func test_the_filler_forks_of_the_other_chapters_have_a_fight_lane_and_a_rogue_lane_too() -> void:
 	var forks := {"taodong": ["captive"], "yuxi": ["supply", "warn", "feng", "wenji_tale", "plan", "xizi", "caiyong", "yuexia", "xian"],
-		"jingxiang": ["jx_diaochan", "jx_bubing", "jx_rest", "jx_shaoka", "jx_zongzei", "jx_xiangyang", "jx_xunluo", "jx_shuijun"],
+		"jingxiang": ["jx_diaochan", "jx_rest", "jx_shaoka", "jx_zongzei", "jx_xiangyang", "jx_xunluo", "jx_shuijun"],
 		"dongui": ["route", "tuwei", "luan", "luo_ruin", "luoyang_rest", "luoyang_rest4", "qiao7", "huangzhong", "leibo7"],
 		"tianfu": ["t9_yexi", "t9_yexi_lx", "t9_jiangzhou", "t9_wuxian", "t9_xizheng", "t9_kuimen", "t9_xiuzheng", "t9_fazheng_take", "t9_fazheng_go", "t9_nanzhong", "t9_zhurong_join", "t9_yiqin", "t9_x_bujv"],
 		"guanzhong": ["g10_start", "g10_xiuzheng", "g10_jishi", "g10_zw_start", "g10_zw_fire", "g10_fenbing", "g10_huzhen", "g10_xurong", "g10_kongming"],

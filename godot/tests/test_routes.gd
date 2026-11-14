@@ -283,15 +283,17 @@ func ch5_save(flags: Array) -> SaveData:
 
 
 func test_chapter5_first_time_the_banquet_ends_in_ending_three() -> void:
+	# the 刘表来袭 pick sets the lane: 荀攸 (0) → 文聘 → upper 荆州步卒 → x8 y0; 黄忠 (1) → 苏飞 → lower 荆州步卒 → x8 y2
 	for fork in [["jx_gongshou", "m_jx1", "m_jx3"], ["m_jx2", "t_jx1", "t_jx3"]]:
 		var s := ch5_save([])
 		var q := quest_by_id("jingxiang")
 		check_eq(Quests.current_quest(s)["id"], "jingxiang")
-		var p := walk(q, s, fork)
-		for sid in ["jx_wan", "jx_diaochan", "jx_laixi", "jx_bubing", fork[0], "jx_huangzu", "jx_rest", "jx_tianshi", "jx_qinggong",
+		var p := walk(q, s, fork, 1, 0, 0 if fork[0] == "jx_gongshou" else 1)
+		for sid in ["jx_wan", "jx_diaochan", "jx_laixi", fork[0], "jx_huangzu", "jx_rest", "jx_tianshi", "jx_qinggong",
 				"jx_jinggao", "jx_xiangyang", "jx_mimou", "jx_shuijun", "jx_yiguan", "jx_a_fuyan", "jx_a_nushou", "jx_a_caimao",
 				"jx_a_xiangxiao", "jx_a_xuexi", "jx_a_henhai"]:
 			check(p.has(sid), "恨海 route passes %s (fork %s)" % [sid, fork[0]])
+		check(p.has("jx_bubing" if fork[0] == "jx_gongshou" else "jx_bubing_h"), "the lane's own 荆州步卒 square")
 		for sid in ["jx_meng", "jx_b_dingce", "jx_b_kuaiyue", "jx_b_shuige", "jx_b_dianxing", "jx_b_louchuan"]:
 			check(not p.has(sid), "恨海 route never reaches " + sid)
 		check_eq(p[-1], "jx_a_henhai")
