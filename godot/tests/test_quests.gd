@@ -1345,17 +1345,17 @@ func test_a_story_shows_in_one_chapter_only_and_stays_read_across_laps() -> void
 	check(ids.call(s).has("s_i_sewing"), "open after its chapter")
 	s.quests_cleared.append("taodong")
 	check(not ids.call(s).has("s_i_sewing"), "missed: gone once the next chapter is done")
-	check(ids.call(s).has("s_zumao"))
+	check(ids.call(s).has("s_huoshi"))
 	s.merit = 10
-	Quests.open_side(s, "s_zumao")
+	Quests.open_side(s, "s_huoshi")
 	s.quests_cleared.append("yuxi")
-	check(not ids.call(s).has("s_zumao"), "read or not, it is gone once its chapter window has passed")
+	check(not ids.call(s).has("s_huoshi"), "read or not, it is gone once its chapter window has passed")
 	var n := s.new_lap()
-	check(n.side_seen.has("s_zumao") and not n.side_read.has("s_zumao"), "remembered as 看过 in the next 周目")
+	check(n.side_seen.has("s_huoshi") and not n.side_read.has("s_huoshi"), "remembered as 看过 in the next 周目")
 	n.run_records = ["出生：江东富春"]
 	n.quests_cleared = ["prologue", "taodong"]
 	n.merit = 10
-	check(Quests.open_side(n, "s_zumao")["got"] != "" and n.merit == 0, "back in its chapter: paid and rewarded again")
+	check(Quests.open_side(n, "s_huoshi")["got"] != "" and n.merit == 0, "back in its chapter: paid and rewarded again")
 
 
 func test_south_last_page_is_the_hero_and_his_lord_card() -> void:
