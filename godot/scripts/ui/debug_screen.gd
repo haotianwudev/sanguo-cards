@@ -551,9 +551,10 @@ func _cgs_panel() -> Control:
 			btn.custom_minimum_size = Vector2(228, 128)
 			btn.pressed.connect(_preview_cg.bind(key))
 			col.add_child(btn)
-			var lbl := Kit.label(key, 13, "muted")
+			var lbl := Kit.label(_cg_name(key), 14, "text")
 			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			lbl.custom_minimum_size = Vector2(228, 0)
+			lbl.clip_text = true
 			col.add_child(lbl)
 			grid.add_child(col)
 		scroll.add_child(grid)
@@ -657,10 +658,75 @@ func _preview_cg(key: String) -> void:
 	pic.size = Vector2(1280, 720)
 	pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(pic)
-	var lbl := Kit.label(key, Kit.FONT_BODY, "gold")
-	lbl.position = Vector2(20, 14)
-	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	overlay.add_child(lbl)
+	## name / description / where the game shows it, on a dark band at the bottom so the picture stays readable
+	var info: Dictionary = GameData.get_db().cg_info.get(key, {})
+	var band := PanelContainer.new()
+	band.add_theme_stylebox_override("panel", Kit.box(Color(0, 0, 0, 0.72), 0, 0, Color.TRANSPARENT, 0))
+	band.position = Vector2(0, 560)
+	band.size = Vector2(1280, 160)
+	band.custom_minimum_size = Vector2(1280, 160)
+	band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.add_child(band)
+	var pad := MarginContainer.new()
+	for side in ["left", "right", "top", "bottom"]:
+		pad.add_theme_constant_override("margin_" + side, 20 if side in ["left", "right"] else 12)
+	pad.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	band.add_child(pad)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 4)
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	pad.add_child(col)
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 14)
+	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.add_child(head)
+	var title := Kit.title_label(_cg_name(key), Kit.FONT_BIG)
+	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.add_child(title)
+	var key_lbl := Kit.label(key, Kit.FONT_SMALL, "muted")
+	key_lbl.size_flags_vertical = Control.SIZE_SHRINK_END
+	key_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.add_child(key_lbl)
+	var lines := [[str(info.get("desc", "（还没有简介）")), Kit.FONT_BODY, "text"]]
+	var where := _cg_where(key)
+	lines.append(["出处：" + ("；".join(where) if not where.is_empty() else "游戏里还没有地方用到"), Kit.FONT_SMALL, "muted"])
+	for l in lines:
+		var t := Kit.label(l[0], l[1], l[2])
+		t.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		t.custom_minimum_size = Vector2(1240, 0)
+		t.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_child(t)
+
+
+func _cg_name(key: String) -> String:
+	return str(GameData.get_db().cg_info.get(key, {}).get("name", key))
+
+
+func _cg_where(key: String) -> Array:
+	## every place the game shows this CG: chapter squares (章名 · 格子名), ？ events, ？小故事, chapter-end pages, endings
+	var db := GameData.get_db()
+	var out: Array = []
+	var titles := {}
+	for q in db.quests:
+		titles[q["id"]] = q["title"]
+		for s in q["squares"].values():
+			if s["cg"] == key:
+				out.append("%s · %s" % [q["title"], s["label"]])
+	for e in db.events.values():
+		if e["cg"] == key:
+			out.append("奇遇 · " + e["title"])
+	for qid in db.side_stories:
+		for st in db.side_stories[qid]:
+			if st.get("cg", "") == key:
+				out.append("小故事 · " + str(st.get("title", "")))
+	for qid in db.chapter_pages:
+		for p in db.chapter_pages[qid]:
+			if p.get("cg", "") == key:
+				out.append("章末页 · " + str(titles.get(qid, qid)))
+	for id in db.ending_order:
+		if db.endings[id]["cg"] == key:
+			out.append("结局 · " + db.endings[id]["title"])
+	return out
 
 
 func _bgm_panel() -> Control:

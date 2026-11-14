@@ -184,6 +184,7 @@ smaller face x ⇒ figure moves right; bigger face y ⇒ figure moves up. Enemie
 Story CGs: squares, events and interlude scenes take `"cg": "<key>"`; the art goes in `pics/source/cg/<key>.jpg` +
 `pics/art.json` "cgs" (→ `godot/data/art/cg/`). Like Rance X, a CG dominates: arriving at a square with one switches the map screen to CG mode (the picture fills
 the screen, the text box sits over it, a top-bar tab switches back to the map); the interlude shows it full screen.
+**Every delivered CG has a Chinese name and a one-line description** in `godot/data/cg_info.json` (`{"cgs": {key: {name, desc}}}`, one per line; user 2026-11-13): name ≤ 10 characters, desc says what the picture shows and the moment it belongs to. The 测试工具 CG gallery shows the name under each tile and name + desc + 出处 in the full view (出处 is worked out from story / side_stories / chapter pages / endings by `DebugScreen._cg_where`, never written into the desc). `test_every_delivered_cg_has_a_chinese_name_and_description` fails on a CG with no entry or an entry with no CG — add the entry in the same change as the art, then `python tools/build_fonts.py`. Screenshot: `--demo=debug --at=cgs --cg=<key>`.
 **One `cg` per square.** A square with two CG-worthy beats needs two squares: split its `text` array at the second
 beat, give the tail half a new square id with the new `cg`, point `next` at it, and shift every later square's `x`
 by the number you inserted (none, if it was the last square on that path). Wire a square's `cg` field as soon as you

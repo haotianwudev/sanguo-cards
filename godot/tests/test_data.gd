@@ -139,3 +139,23 @@ func test_a_refs_path_from_the_top_inside_each() -> void:
 	var errs := Schema.check(root, {"rules": [{"each": "themes.*", "refs": "/events.*.color", "to": "@keys"}]})
 	check_eq(errs.size(), 1, str(errs))
 	check(str(errs[0]).contains("events.b.color = blue"), str(errs))
+
+
+func test_every_delivered_cg_has_a_chinese_name_and_description() -> void:
+	## data/cg_info.json: the 测试工具 CG gallery shows each picture's name and description (user 2026-11-13);
+	## a new CG needs its entry in the same change, and a CG that was removed takes its entry with it
+	var info: Dictionary = GameData.get_db().cg_info
+	var shipped := {}
+	for f in ResourceLoader.list_directory("res://data/art/cg"):
+		if f.ends_with(".jpg"):
+			shipped[f.trim_suffix(".jpg")] = true
+	check(shipped.size() > 0, "no CG found under res://data/art/cg")
+	var missing: Array = shipped.keys().filter(func(k): return not info.has(k))
+	check(missing.is_empty(), "CGs with no name / description in data/cg_info.json: %s" % [missing])
+	var stale: Array = info.keys().filter(func(k): return not shipped.has(k))
+	check(stale.is_empty(), "data/cg_info.json names CGs that don't exist: %s" % [stale])
+	for k in info:
+		var name: String = str(info[k].get("name", ""))
+		var desc: String = str(info[k].get("desc", ""))
+		check(name != "" and desc != "", "%s: name and desc must both be written" % k)
+		check(name.length() <= 10, "%s: name「%s」is too long for the gallery tile (max 10)" % [k, name])

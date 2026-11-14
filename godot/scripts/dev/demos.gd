@@ -701,6 +701,8 @@ static func run(name: String) -> void:
 			for a in OS.get_cmdline_user_args():
 				if a.begins_with("--at="):
 					dbg._show(a.trim_prefix("--at="))
+				if a.begins_with("--cg="):  # --at=cgs --cg=<key>: open that CG's full view (name, description, 出处)
+					dbg._preview_cg(a.trim_prefix("--cg="))
 				if a.begins_with("--tab="):  # --at=cards --tab=<chip,chip…>: press those filter chips in turn (e.g. 章节招贤馆,R)
 					for want in a.trim_prefix("--tab=").split(","):
 						for btn in dbg._view.find_children("*", "Button", true, false):

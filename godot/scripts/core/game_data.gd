@@ -36,6 +36,7 @@ var side_stories: Dictionary  # quest id -> [？小故事 opened from 整备 onc
 var chapter_pages: Dictionary = {}  # quest id -> [{cg, requires, unless}]: the chapter-end page's picture (its card comes from a ？小故事)
 var side_cost := 10  # 战功 to open a ？小故事 the first time in a 周目, unless it names its own cost
 var ui: Dictionary
+var cg_info: Dictionary  # CG key -> {name, desc}: every delivered story CG's Chinese name and one-line description (data/cg_info.json)
 var routes: Dictionary  # route id -> the birth line that puts a journey on it (story.json routes; the first is the default)
 var errors: Array = []  # the few data checks code makes at load (fail_if); check_schema() adds data/schema.json's
 
@@ -235,6 +236,8 @@ func _load(dir: String) -> void:
 	Quests.validate(self)
 
 	ui = read_json(dir + "/ui.json")
+	if FileAccess.file_exists(dir + "/cg_info.json"):
+		cg_info = read_json(dir + "/cg_info.json").get("cgs", {})
 	var ss: Dictionary = {}
 	if FileAccess.file_exists(dir + "/side_stories.json"):
 		ss = read_json(dir + "/side_stories.json")
