@@ -943,6 +943,7 @@
     "hn_nan_weiyan": {"name": "长沙·魏延", "turn_limit": 10, "enemy": "weiyan_e", "art": "jx_bubing"},
     "jx_wenpin": {"name": "淯水北岸·文聘", "turn_limit": 10, "enemy": "wenpin_e", "art": "jx_bubing"},
     "jx_sufei": {"name": "汉水·苏飞", "turn_limit": 10, "enemy": "sufei_e", "art": "jx_huangzu"},
+    "jx_tantou": {"name": "汉水滩头·荆州水军", "turn_limit": 8, "enemy": "jing_shuijun", "art": "jx_shuijun"},
     "jx_zhangyun": {"name": "襄阳城外·张允", "turn_limit": 10, "enemy": "zhangyun_e", "art": "jx_shuijun"},
     "jx_zhuiji": {"name": "汉水北岸·追击溃兵", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
     "jx_zhuiji_b": {"name": "汉水浅滩·黄祖死士", "turn_limit": 8, "enemy": "jing_gongshou", "art": "jx_gongshou"},
