@@ -1411,3 +1411,4 @@
 | `cg:c13_shumi` | source/cg/c13_shumi.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c13_lastgrain` | source/cg/c13_lastgrain.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c13_wanglou` | source/cg/c13_wanglou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:c8_fubing_b` | source/cg/c8_fubing_b.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
