@@ -1596,25 +1596,28 @@
 - [x] 2026-11-09 battle `c2_gongqi` ← Gemini_Generated_Image_jo8m28jo8m28jo8m.jpg · ok
 - [x] 2026-11-09 battle `c4_langqi` ← Gemini_Generated_Image_qltq65qltq65qltq.jpg · ok
 - [x] 2026-11-09 battle `ln_langqi` ← Gemini_Generated_Image_qltq65qltq65qltq.jpg · ok
-- [ ] 2026-11-10 cg `c5_feast` ← c5_feast_v2.jpg · ok
-- [ ] 2026-11-10 battle `c5_niufu` ← c5_niufu_v1.jpg · ok
-- [ ] 2026-11-10 cg `c5_rescue` ← c5_rescue_v2.jpg · ok
-- [ ] 2026-11-10 cg `c5_rescue` ← c5_rescue_v3.jpg · ok
-- [ ] 2026-11-10 cg `c4_tonggui` ← c4_tonggui_v1.jpg · ok
-- [ ] 2026-11-11 battle `ev_zhiren` ← ev_zhiren.jpg · ok
-- [ ] 2026-11-11 battle `ev_jiading` ← ev_jiading.jpg · ok
-- [ ] 2026-11-11 battle `ev_bingpi` ← ev_bingpi.jpg · ok
-- [ ] 2026-11-11 relic `quehua_gong` ← quehua_gong.jpg · ok
-- [ ] 2026-11-11 relic `dujian` ← dujian.jpg · ok
-- [ ] 2026-11-11 relic `xiandeng_ling` ← xiandeng_ling.jpg · ok
-- [ ] 2026-11-11 relic `duanhou_ling` ← duanhou_ling.jpg · ok
-- [ ] 2026-11-11 relic `zeizang_dai` ← zeizang_dai.jpg · ok
-- [ ] 2026-11-11 relic `lulin_jiu` ← lulin_jiu.jpg · ok
-- [ ] 2026-11-14 battle `jx_gongshou` ← jx_gongshou_new.jpg · ok
-- [ ] 2026-11-14 cg `c8_qinggong` ← c8_qinggong_new.jpg · ok
-- [ ] 2026-11-14 battle `jx_zongzei` ← jx_zongzei_new.jpg · ok
-- [ ] 2026-11-14 battle `jx_liupan` ← jx_liupan_new.jpg · ok
-- [ ] 2026-11-14 battle `jx_shuijun` ← jx_shuijun_new.jpg · ok
-- [ ] 2026-11-14 cg `c8_eve` ← c8_eve_new.jpg · ok
-- [ ] 2026-11-14 cg `c8_shuige` ← c8_shuige_new.jpg · ok
-- [ ] 2026-11-14 cg `c8_nushou` ← c8_nushou_new.jpg · ok
+- [x] 2026-11-10 cg `c5_feast` ← c5_feast_v2.jpg · ok
+- [x] 2026-11-10 battle `c5_niufu` ← c5_niufu_v1.jpg · ok
+- [x] 2026-11-10 cg `c5_rescue` ← c5_rescue_v2.jpg · ok
+- [x] 2026-11-10 cg `c5_rescue` ← c5_rescue_v3.jpg · ok
+- [x] 2026-11-10 cg `c4_tonggui` ← c4_tonggui_v1.jpg · ok
+- [x] 2026-11-11 battle `ev_zhiren` ← ev_zhiren.jpg · ok
+- [x] 2026-11-11 battle `ev_jiading` ← ev_jiading.jpg · ok
+- [x] 2026-11-11 battle `ev_bingpi` ← ev_bingpi.jpg · ok
+- [x] 2026-11-11 relic `quehua_gong` ← quehua_gong.jpg · ok
+- [x] 2026-11-11 relic `dujian` ← dujian.jpg · ok
+- [x] 2026-11-11 relic `xiandeng_ling` ← xiandeng_ling.jpg · ok
+- [x] 2026-11-11 relic `duanhou_ling` ← duanhou_ling.jpg · ok
+- [x] 2026-11-11 relic `zeizang_dai` ← zeizang_dai.jpg · ok
+- [x] 2026-11-11 relic `lulin_jiu` ← lulin_jiu.jpg · ok
+- [x] 2026-11-14 battle `jx_gongshou` ← jx_gongshou_new.jpg · ok
+- [x] 2026-11-14 cg `c8_qinggong` ← c8_qinggong_new.jpg · ok
+- [x] 2026-11-14 battle `jx_zongzei` ← jx_zongzei_new.jpg · ok
+- [x] 2026-11-14 battle `jx_liupan` ← jx_liupan_new.jpg · ok
+- [x] 2026-11-14 battle `jx_shuijun` ← jx_shuijun_new.jpg · ok
+- [x] 2026-11-14 cg `c8_eve` ← c8_eve_new.jpg · ok
+- [x] 2026-11-14 cg `c8_shuige` ← c8_shuige_new.jpg · ok
+- [x] 2026-11-14 cg `c8_nushou` ← c8_nushou_new.jpg · ok
+- [x] 2026-11-14 cg `c8_fubing` ← c8_fubing_new.jpg · ok
+- [x] 2026-11-14 cg `c8_xuexi` ← c8_xuexi_new.jpg · ok
+- [x] 2026-11-14 cg `c8_henhai` ← c8_henhai_new.jpg · ok

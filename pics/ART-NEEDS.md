@@ -227,7 +227,7 @@
 
 战斗背景（`pics/source/battles/<key>.jpg`，横版 16:9）
 
-✅ 全部到位（26 项）
+✅ 全部到位（27 项）
 
 剧情 CG（`pics/source/cg/<key>.jpg`，横版 16:9）
 
