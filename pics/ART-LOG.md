@@ -1617,3 +1617,4 @@
 - [ ] 2026-11-14 battle `jx_shuijun` ← jx_shuijun_new.jpg · ok
 - [ ] 2026-11-14 cg `c8_eve` ← c8_eve_new.jpg · ok
 - [ ] 2026-11-14 cg `c8_shuige` ← c8_shuige_new.jpg · ok
+- [ ] 2026-11-14 cg `c8_nushou` ← c8_nushou_new.jpg · ok
