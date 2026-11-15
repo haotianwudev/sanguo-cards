@@ -325,7 +325,7 @@ Every status badge / the 意图 line / the 前卫 bar / the 护甲 line explains
 - **Card** (`cards.json` cards): `name, rarity (N = soldier, C/R/SR/SSR = general; C 杂将 is the lowest, the opening trio 主公/孙策·青年/周瑜·青年 are R), troop, hp, at (face numbers, see Card stats), skills,
   person (shared portrait / one version in a party), pool (false = story or drop only), troop_skills (false = own skills
   replace the troop's)`. Every troop has two skills — a plain 1-AP move and a signature (骑 马刀/冲锋, 枪 刺击/枪阵,
-  弓 射击/齐射, 刀 步战/举盾, 策 计略/献策 (+AP; 策士 took in the old 法师 troop — too few cards), 贼 劫掠/偷袭 (break), 勤 包扎/鼓舞) — soldier
+  弓 射击/齐射, 刀 步战/举盾, 策 计略/献策 (+AP; 策士 took in the old 法师 troop — too few cards), 贼 劫掠/偷袭 (break), 勤 包扎/解毒; female 后勤 cards name kit `logistics_beauty` = 包扎/鼓舞 (全军 BOOST + 解状态) — 鼓舞 is a beauty-only skill, user 2026-11-14) — soldier
   cards get only the plain move (精兵 marked `"elite": true` — 丹阳兵, 陷阵营, 白毦兵 … — get both); a general gets
   the plain move plus its own signature (or the troop's signature if it has none). Leader stat = 5 × own + troop members; soldier copies decay ×0.6; generals repeat → tiers
   铜 1 / 银 2 / 金 4 copies (`gacha.tiers`, frame `tier0/1/2` in ui.json).
