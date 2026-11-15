@@ -1623,3 +1623,5 @@
 - [x] 2026-11-14 cg `c8_henhai` ← c8_henhai_new.jpg · ok
 - [ ] 2026-11-14 cg `c8_qibing` ← c8_qibing_new.jpg · ok
 - [ ] 2026-11-14 battle `jx_b_qibing` ← c8_qibing.jpg · ok
+- [ ] 2026-11-14 cg `c8_caihe` ← c8_caihe_new.jpg · ok
+- [ ] 2026-11-14 cg `c8_zhangyun` ← c8_zhangyun_new.jpg · ok
