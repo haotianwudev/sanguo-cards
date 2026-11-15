@@ -1168,7 +1168,7 @@
     "m8_kongming_bad": {"name": "白河·诸葛亮", "turn_limit": 8, "enemy": "m8_kongming_bad", "art": "m8_kongming"},
     "m8_kongming": {"name": "白河·诸葛亮", "turn_limit": 12, "enemy": "m8_kongming"},
     "m8_guanyu": {"name": "八阵·关羽", "turn_limit": 8, "enemy": "m8_guanyu"},
-    "jx_liupan": {"name": "新野·刘磐", "turn_limit": 10, "enemy": "liupan_e", "art": "jx_zongzei"},
+    "jx_liupan": {"name": "新野·刘磐", "turn_limit": 10, "enemy": "liupan_e"},
     "jx_xizuo": {"name": "宛城·荆州细作", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},
     "jx_shaoka": {"name": "南下官道·荆州哨卡", "turn_limit": 8, "enemy": "jing_bubing", "art": "jx_bubing"},
     "jx_menjin": {"name": "襄阳北门·盘查", "turn_limit": 8, "enemy": "jing_sibing", "art": "jx_bubing"},

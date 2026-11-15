@@ -5359,6 +5359,10 @@
     "ev_bingpi": {
       "src": "source/battles/ev_bingpi.jpg",
       "license": "Claude Code 生成（nano-banana-2）"
+    },
+    "jx_liupan": {
+      "src": "source/battles/jx_liupan.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   },
   "_cgs": "story illustrations (CG) for story squares, events and interludes, keyed by the cg key in the story data; 16:9, scaled to 720px high into godot/data/art/cg/",
