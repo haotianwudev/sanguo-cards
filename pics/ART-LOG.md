@@ -1610,3 +1610,4 @@
 - [ ] 2026-11-11 relic `duanhou_ling` ← duanhou_ling.jpg · ok
 - [ ] 2026-11-11 relic `zeizang_dai` ← zeizang_dai.jpg · ok
 - [ ] 2026-11-11 relic `lulin_jiu` ← lulin_jiu.jpg · ok
+- [ ] 2026-11-14 battle `jx_gongshou` ← jx_gongshou_new.jpg · ok
