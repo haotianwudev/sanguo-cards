@@ -1615,3 +1615,4 @@
 - [ ] 2026-11-14 battle `jx_zongzei` ← jx_zongzei_new.jpg · ok
 - [ ] 2026-11-14 battle `jx_liupan` ← jx_liupan_new.jpg · ok
 - [ ] 2026-11-14 battle `jx_shuijun` ← jx_shuijun_new.jpg · ok
+- [ ] 2026-11-14 cg `c8_eve` ← c8_eve_new.jpg · ok
