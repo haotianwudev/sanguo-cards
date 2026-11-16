@@ -172,6 +172,27 @@ static func ken_burns(pic: Control, from := 1.012, secs := 2.5) -> void:
 	pic.set_meta("kb", tw)
 
 
+static func cg_fx(pic: Control, kind: String) -> void:
+	## a CG that lands with a blow (a square's `cg_fx`, the kinds are ui.json cg_fx): white flash, shake, a harder push-in
+	var fx: Dictionary = GameData.get_db().ui.get("cg_fx", {}).get(kind, {})
+	if fx.is_empty():
+		return
+	poke()
+	ken_burns(pic, float(fx.get("zoom", 1.012)), float(fx.get("zoom_secs", 2.5)))
+	if float(fx.get("shake", 0.0)) > 0.0:
+		shake(pic, float(fx["shake"]), float(fx.get("shake_secs", 0.3)))
+	var a := float(fx.get("flash", 0.0))
+	if a > 0.0:
+		var f := ColorRect.new()
+		f.color = Color(1, 1, 1, a)
+		f.set_anchors_preset(Control.PRESET_FULL_RECT)
+		f.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		pic.add_child(f)
+		var tw := f.create_tween()
+		tw.tween_property(f, "modulate:a", 0.0, float(fx.get("flash_secs", 0.3))).set_ease(Tween.EASE_IN)
+		tw.tween_callback(f.queue_free)
+
+
 static func calligraphy(l: Control, size: int, spacing := 1, outline := 6) -> Control:
 	## titles in the bundled 霞鹜文楷 with a dark outline and a soft shadow (body text, numbers and buttons stay 思源黑体)
 	l.add_theme_font_override("font" if l is Label else "normal_font", name_font(size, spacing))

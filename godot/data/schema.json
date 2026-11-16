@@ -47,6 +47,7 @@
     {"refs": "story.routes.*", "to": "story.quests.*.squares.*.choose.*.record", "why": "a route's birth line must be a choice the game records"},
     {"refs": "story.quests.*.squares.*.type", "to": "ui.map.type_names.@keys"},
     {"refs": "story.quests.*.squares.*.battle", "to": "scenarios.@keys"},
+    {"refs": "story.quests.*.squares.*.cg_fx", "to": "ui.cg_fx.@keys"},
     {"refs": "story.quests.*.squares.*.event", "to": "story.events.@keys"},
     {"refs": "story.quests.*.squares.*.cards.*", "to": ["cards.@keys", {"path": "lord_forms.forms.@keys", "prefix": "lord:"}]},
     {"refs": "story.quests.*.squares.*.card_unless.@keys", "to": "cards.@keys"},

@@ -539,7 +539,7 @@ func _refresh() -> void:
 			_cg_tab.visible = true
 			_cg_mode = true
 			_apply_cg_mode()
-			_cg_push(here["id"])
+			_cg_push(here["id"], here["cg_fx"])
 		_open_fates()
 		return
 	_show_square(here)
@@ -547,11 +547,15 @@ func _refresh() -> void:
 		_open_relics.call_deferred()
 
 
-func _cg_push(sid: String) -> void:
-	## the CG's slow push-in, once per square (the 天命 pick shows the first square's CG before its story: no second push after it)
+func _cg_push(sid: String, fx := "") -> void:
+	## the CG's slow push-in, once per square (the 天命 pick shows the first square's CG before its story: no second push after it);
+	## a square with `cg_fx` lands with that effect instead
 	if str(_cg_view.get_meta("kb_for", "")) != sid:
 		_cg_view.set_meta("kb_for", sid)
-		Kit.ken_burns(_cg_view)
+		if fx != "":
+			Kit.cg_fx(_cg_view, fx)
+		else:
+			Kit.ken_burns(_cg_view)
 
 
 func _fate_pending() -> bool:
@@ -835,7 +839,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = false
 	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
 		_cg_square = s["id"]
-		_cg_push(s["id"])
+		_cg_push(s["id"], s["cg_fx"])
 		_cg_mode = not OS.get_cmdline_user_args().has("--map")  # --map: screenshots of the map itself, even on a CG square
 		if not save.resolved:  # first time through, not on the way back from its battle: said once the lines are set up
 			cg_new = str(ev.get("cg", s["cg"]))

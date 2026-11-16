@@ -1,6 +1,7 @@
 {
   "power": {"_doc": "frame rate caps (Power autoload): fps_active while touched or animating, fps_idle after idle_after seconds still, fps_saver in 省电模式", "fps_active": 60, "fps_idle": 30, "idle_after": 3.0, "fps_saver": 30},
   "portrait_cache": 160,
+  "cg_fx": {"_doc": "how a CG lands when its square names a cg_fx (Kit.cg_fx): flash = white flash alpha over flash_secs, shake = px over shake_secs, zoom = push-in start scale over zoom_secs", "clash": {"flash": 0.85, "flash_secs": 0.35, "shake": 14, "shake_secs": 0.4, "zoom": 1.05, "zoom_secs": 0.9}},
   "_comment": "Presentation config for the terminal UI. Colour values in rarity_colors / map colours are palette names from themes.*",
   "default_theme": "ink",
   "_themes": "ink = the default: warm dark lacquer (easy on a phone screen, lets the art stand out, like Rance X); light / dark kept as alternatives",
