@@ -539,12 +539,17 @@ func _refresh() -> void:
 			_cg_tab.visible = true
 			_cg_mode = true
 			_apply_cg_mode()
-			_cg_push(here["id"], here["cg_fx"])
+			_cg_push(here["id"], _arrival_fx(here))
 		_open_fates()
 		return
 	_show_square(here)
 	if save.offer_kind == "relic" and not save.offer.is_empty():
 		_open_relics.call_deferred()
+
+
+func _arrival_fx(s: Dictionary) -> String:
+	## a square's cg_fx plays as the CG arrives — unless cg_fx_at names the line it waits for (_dialog_show)
+	return s["cg_fx"] if s["cg_fx_at"] == "" else ""
 
 
 func _cg_push(sid: String, fx := "") -> void:
@@ -839,7 +844,7 @@ func _show_square(s: Dictionary) -> void:
 		_cg_mode = false
 	elif _cg_square != s["id"]:  # arriving at a square with a CG: the CG takes the screen
 		_cg_square = s["id"]
-		_cg_push(s["id"], s["cg_fx"])
+		_cg_push(s["id"], _arrival_fx(s))
 		_cg_mode = not OS.get_cmdline_user_args().has("--map")  # --map: screenshots of the map itself, even on a CG square
 		if not save.resolved:  # first time through, not on the way back from its battle: said once the lines are set up
 			cg_new = str(ev.get("cg", s["cg"]))
@@ -1196,6 +1201,9 @@ func _dialog_show() -> void:
 	var hint := "" if last else "　[color=%s]▼[/color]" % Kit.c("gold").to_html()
 	_dlg_text.text = str(_dlg_lines[_dlg_i]) + hint
 	Sfx.cg_line(_dlg_cg, _dlg_i)
+	var here: Dictionary = q["squares"][Game.save.square]
+	if _cg_mode and here["cg_fx_at"] != "" and _dlg_i < _dlg_raw.size() and str(_dlg_raw[_dlg_i]).contains(here["cg_fx_at"]):  # the blow lands on this line
+		Kit.cg_fx(_cg_view, here["cg_fx"])
 	if _dlg_face != null:
 		var key: String = _dlg_keys[_dlg_i] if _dlg_i < _dlg_keys.size() else ""
 		var near := _near_speaker(_dlg_i)

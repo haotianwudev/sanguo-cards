@@ -211,7 +211,7 @@ func _load(dir: String) -> void:
 				"event": s.get("event", ""), "lose_goto": s.get("lose_goto", ""), "lose_tag": s.get("lose_tag", ""), "beatable": s.get("beatable", false),
 				"label": s.get("label", ""), "record": s.get("record", ""), "record_win": s.get("record_win", ""),
 				"record_lose": s.get("record_lose", ""), "requires": s.get("requires", ""), "unless": s.get("unless", ""),
-				"soldier_pool": s.get("soldier_pool", []), "recruit_pool": s.get("recruit_pool", []), "cg": s.get("cg", ""), "cg_fx": s.get("cg_fx", ""), "prompt": s.get("prompt", ""), "card_unless": s.get("card_unless", {}), "ghost": s.get("ghost", false), "ghost_requires": s.get("ghost_requires", "")}
+				"soldier_pool": s.get("soldier_pool", []), "recruit_pool": s.get("recruit_pool", []), "cg": s.get("cg", ""), "cg_fx": s.get("cg_fx", ""), "cg_fx_at": s.get("cg_fx_at", ""), "prompt": s.get("prompt", ""), "card_unless": s.get("card_unless", {}), "ghost": s.get("ghost", false), "ghost_requires": s.get("ghost_requires", "")}
 		quests.append({"id": q["id"], "title": q["title"], "start": q["start"], "squares": squares,
 			"soldier_pool": q.get("soldier_pool", []), "soldier_scope": q.get("soldier_scope", ""), "recruit_pool": q.get("recruit_pool", []), "chest_pool": q.get("chest_pool", []),
 			"subtitle": q.get("subtitle", ""), "ending": _ending_card(q.get("ending", "")), "requires": q.get("requires", ""), "unless": q.get("unless", ""),

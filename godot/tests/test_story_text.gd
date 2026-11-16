@@ -29,6 +29,18 @@ func test_every_battle_square_and_only_a_battle_square_has_win_text() -> void:
 			check_eq(not s["win_text"].is_empty(), s["type"] == "battle", "%s/%s" % [q["id"], sid])
 
 
+func test_a_cg_effect_waits_for_a_line_the_square_really_has() -> void:
+	## cg_fx_at is a piece of one line of the square's text: a typo would silently never flash
+	for q in GameData.get_db().quests:
+		for sid in q["squares"]:
+			var s: Dictionary = q["squares"][sid]
+			if s["cg_fx_at"] == "":
+				continue
+			var where := "%s/%s" % [q["id"], sid]
+			check(s["cg_fx"] != "" and s["cg"] != "", where + ": cg_fx_at needs cg and cg_fx")
+			check_eq(s["text"].filter(func(l): return str(l).contains(s["cg_fx_at"])).size(), 1, where + ": cg_fx_at must match exactly one line")
+
+
 static func _strip_tag(line: String) -> String:
 	if line.begins_with("@") and line.find(" ") > 0:
 		return line.substr(line.find(" ") + 1)
