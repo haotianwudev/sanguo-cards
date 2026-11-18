@@ -461,7 +461,7 @@ func _sync_skill_bars() -> void:
 		if _skills_hidden():  # 隐藏技能: only the column of the leader whose card was just tapped, the same strip as when shown
 			if i != _bar_open or not (b.can_act(i) or b.can_swap(i)):
 				continue
-		elif not (b.can_act(i) or (b.leaders[i].get("slain", false) and b.can_swap(i))):  # 被点名打倒: only 换人 is left in his column
+		elif not (b.can_act(i) or b.can_swap(i)):  # no skill usable (AP short, all spent) or 被点名打倒: the column still shows, greyed, for its 换人
 			continue
 		var v: CardView = _cards[i]
 		var u: Dictionary = b.leaders[i]

@@ -925,6 +925,12 @@ static func run(name: String) -> void:
 				b.b.round_no = b.b.swap_from_round()
 				b._refresh()
 				b._open_swap(0 if OS.get_cmdline_user_args().has("--lordswap") else 1)  # --lordswap (with --forms): the lord changes card
+			if OS.get_cmdline_user_args().has("--noap"):  # no skill usable but 换人 is: the column must still show, skills greyed, 换人 live
+				await Game.get_tree().create_timer(0.5).timeout
+				b.b.db.battle["swap_ap"] = 0
+				b.b.ap = 0
+				b.b.round_no = b.b.swap_from_round()
+				b._refresh()
 			if OS.get_cmdline_user_args().has("--boost"):  # a strengthened (BOOST) card must stand out
 				await Game.get_tree().create_timer(0.5).timeout
 				b.b.leaders[1]["boosted"] = true
