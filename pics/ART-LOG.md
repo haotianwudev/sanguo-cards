@@ -1626,3 +1626,4 @@
 - [x] 2026-11-14 cg `c8_caihe` ← c8_caihe_new.jpg · ok
 - [x] 2026-11-14 cg `c8_zhangyun` ← c8_zhangyun_new.jpg · ok
 - [x] 2026-11-14 cg `c8_fubing_b` ← c8_fubing_b.jpg · ok
+- [ ] 2026-11-17 cg `c2_counter` ← c2_counter_v2.jpg · ok
