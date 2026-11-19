@@ -1438,7 +1438,14 @@ func _resolve(choice := -1) -> void:
 			add_child(ask)
 			if not await ask.answered:
 				return
+	var diff_was: int = Game.save.difficulty
 	var gained := Quests.resolve(q, Game.save, Game.rng, choice)
+	if Game.save.difficulty != diff_was:  # a square's own `difficulty` (威震诸侯 / 惊退温侯 after 吕布): show it, as an event's would be
+		Game.persist()
+		var o := EventFx.new()
+		o.fx = [Quests.difficulty_fx(Game.save, diff_was)]
+		add_child(o)
+		await o.closed
 	if was_era:  # the birthplace is chosen: south and north count apart, so only now can the 难度 be picked
 		Game.assign_slot()
 		gained.append_array(Game.save.route_prep_cards())  # 前尘整备: this route's named cards join now

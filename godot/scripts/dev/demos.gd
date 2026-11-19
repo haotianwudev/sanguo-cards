@@ -190,6 +190,9 @@ static func run(name: String) -> void:
 			if OS.get_cmdline_user_args().has("--skip"):  # --skip: skip that square's story lines (to see a fight's intel)
 				await Game.get_tree().create_timer(1.0).timeout
 				qm._dialog_skip()
+			if OS.get_cmdline_user_args().has("--resolve"):  # --resolve (with --skip): press the story square's 继续 (e.g. 威震诸侯's 难度 +1 card)
+				await Game.get_tree().create_timer(0.5).timeout
+				qm._resolve()
 			if OS.get_cmdline_user_args().has("--go"):  # --go: press 出战 on that square (the real quest-battle path)
 				await Game.get_tree().create_timer(0.3).timeout
 				Game.start_quest_battle(q, Quests.here(q, Game.save))

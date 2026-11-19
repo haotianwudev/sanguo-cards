@@ -614,6 +614,12 @@ static func fixed_list(q: Dictionary, save: SaveData) -> Array:
 	return ids if ids.size() <= int(GameData.get_db().gacha["recruit_list_max"]) else []  # longer: dealt at random, 重摆 allowed
 
 
+static func difficulty_fx(save: SaveData, was: int) -> Dictionary:
+	## the EventFx entry for a 难度 change from `was` to save.difficulty, counted as the map's 难度 chip counts
+	var pct := int(round(save.difficulty * float(GameData.get_db().battle["difficulty_step"]) * 100))
+	return {"k": "difficulty", "from": save.effective_level() + was, "to": save.effective_level() + save.difficulty, "pct": pct}
+
+
 static func resolve(q: Dictionary, save: SaveData, rng: RandomNumberGenerator, choice: int = -1) -> Array:
 	## Resolve the current square (battles: only after a win). Returns the cards gained.
 	q = view(q, save)
@@ -1350,7 +1356,7 @@ static func _apply(effects: Array, q: Dictionary, save: SaveData, rng: RandomNum
 			save.difficulty = maxi(int(db.battle.get("difficulty_min", 0)), save.difficulty + int(e["difficulty"]))
 			var pct := int(round(save.difficulty * float(db.battle["difficulty_step"]) * 100))
 			if save.difficulty != was:
-				out["fx"].append({"k": "difficulty", "from": save.effective_level() + was, "to": save.effective_level() + save.difficulty, "pct": pct})  # as the map's 难度 chip counts
+				out["fx"].append(difficulty_fx(save, was))
 			if save.difficulty > was:
 				out["log"].append("难度上升到 %d！今后所有敌人 %+d%%，宝箱里的武将也更多了" % [save.level(), pct])
 			elif save.difficulty < was:
