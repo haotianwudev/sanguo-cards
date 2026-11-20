@@ -27,7 +27,8 @@
     "qingsun": [30, -10],
     "fenghou": [70, -10],
     "jail": [70, -10],
-    "xunyou": [20, -10]
+    "xunyou": [20, -10],
+    "d_b2": [55, 8]
   },
   "jingxiang": {
     "jx_qinggong": [0, -36],
