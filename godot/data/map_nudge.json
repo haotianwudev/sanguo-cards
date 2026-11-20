@@ -23,7 +23,11 @@
     "xz_chaos": [0, 42]
   },
   "dongui": {
-    "chaohui": [60, 45]
+    "chaohui": [60, 45],
+    "qingsun": [30, -10],
+    "fenghou": [70, -10],
+    "jail": [70, -10],
+    "xunyou": [20, -10]
   },
   "jingxiang": {
     "jx_qinggong": [0, -36],
