@@ -207,7 +207,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate art using AtlasCloud")
     parser.add_argument("--key", required=True, help="Art key (e.g. c6_fanchou)")
     parser.add_argument("--prompt", help="Text prompt (default: the key's entry in pics/prompts/, with its reference portraits)")
-    parser.add_argument("--style", help="style anchor picture, sent first (default: a delivered picture of the same chapter)")
+    parser.add_argument("--style", help="style anchor picture, sent first (default for cg / battle: a delivered picture of the same chapter; a portrait gets one only from this)")
+    parser.add_argument("--note", help="extra line appended to the prompt (e.g. which ref is the old portrait)")
     parser.add_argument("--no-style", action="store_true", help="send no style anchor")
     parser.add_argument("--allow-text", action="store_true", help="the picture may carry lettering (default: none)")
     parser.add_argument("--allow-flags", action="store_true", help="the picture may show flags / banners (default: none)")
@@ -229,7 +230,7 @@ def main() -> None:
         kind, args.prompt, auto = found
         args.kind = args.kind or kind
         refs += [str(ROOT / "pics" / r) for r in auto if str(ROOT / "pics" / r) not in refs]
-    if args.kind in ("cg", "battle") and not args.no_style:
+    if (args.kind in ("cg", "battle") or args.style) and not args.no_style:  # a portrait gets one only when --style names it
         anchor = Path(args.style) if args.style else style_anchor(args.key, args.kind)
         if anchor is not None:
             print(f"Style anchor: {anchor}")
@@ -237,6 +238,8 @@ def main() -> None:
             args.prompt = STYLE_NOTE + "\n" + args.prompt
     if args.kind in ("cg", "battle") and any("/generals/" in r.replace("\\", "/") or "/soldiers/" in r.replace("\\", "/") for r in refs):
         args.prompt += "\n" + PORTRAIT_NOTE
+    if args.note:
+        args.prompt += "\n" + args.note
     args.ref = refs
 
     api_key = load_api_key()

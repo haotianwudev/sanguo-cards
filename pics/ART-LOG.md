@@ -1642,3 +1642,5 @@
 - [x] 2026-11-20 cg `ss_mofu` ← ss_mofu.jpg · ok
 - [x] 2026-11-20 cg `ss_juma` ← ss_juma2.jpg · ok
 - [x] 2026-11-20 cg `ss_huixin` ← ss_huixin.jpg · ok
+- [x] 2026-11-20 portrait `sufei` ← sufei_new.jpg · ok
+- [x] 2026-11-20 battle `jx_sufei` ← jx_sufei2.jpg · ok

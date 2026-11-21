@@ -777,6 +777,7 @@
 | `battle:ev_jiading` | source/battles/ev_jiading.jpg | 用户提供 | Claude Code 生成（nano-banana-2） | — |
 | `battle:ev_bingpi` | source/battles/ev_bingpi.jpg | 用户提供 | Claude Code 生成（nano-banana-2） | — |
 | `battle:jx_liupan` | source/battles/jx_liupan.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `battle:jx_sufei` | source/battles/jx_sufei.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_wake` | source/cg/c1_wake.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_bandage` | source/cg/c1_bandage.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c1_village` | source/cg/c1_village.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
