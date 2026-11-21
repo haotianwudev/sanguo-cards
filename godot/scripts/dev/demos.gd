@@ -928,6 +928,19 @@ static func run(name: String) -> void:
 				b.b.round_no = b.b.swap_from_round()
 				b._refresh()
 				b._open_swap(0 if OS.get_cmdline_user_args().has("--lordswap") else 1)  # --lordswap (with --forms): the lord changes card
+			if OS.get_cmdline_user_args().has("--counterhit"):  # a 反击 lunge and the enemy's blow at once, twice: every card must end back in the row
+				await Game.get_tree().create_timer(0.5).timeout
+				for rep in 2:
+					for c in b._cards:
+						b._card_lunge(c, rep == 1)
+					await Game.get_tree().create_timer(0.08).timeout
+					for c in b._cards:
+						b._shake_card(c, 9.0, 0.3)
+					Kit.shake(b, 22.0, 0.4)
+					await Game.get_tree().create_timer(0.1).timeout
+					Kit.shake(b, 14.0, 0.3)
+				await Game.get_tree().create_timer(1.5).timeout
+				print("COUNTERHIT cards y=", b._cards.map(func(c): return c.position.y), " screen=", b.position)
 			if OS.get_cmdline_user_args().has("--noap"):  # no skill usable but 换人 is: the column must still show, skills greyed, 换人 live
 				await Game.get_tree().create_timer(0.5).timeout
 				b.b.db.battle["swap_ap"] = 0

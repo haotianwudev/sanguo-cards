@@ -1037,12 +1037,16 @@ func _party_center() -> Vector2:
 
 
 func _card_lunge(v: CardView, big := false) -> void:
-	## 出招前冲: crouch slightly, spring up toward the enemy with a warm flash, then settle back into the row
+	## 出招前冲: crouch slightly, spring up toward the enemy with a warm flash, then settle back into the row (y 0 in the row's HBox)
 	v.pivot_offset = v.size / 2
 	var y0 := 0.0
 	var jump := -44.0 if big else -32.0
 	var sc := 1.14 if big else 1.08
+	var prev: Variant = v.get_meta("_lunge_tw", null)  # a second lunge (反击 right after an attack) restarts it instead of fighting it
+	if prev is Tween and (prev as Tween).is_valid():
+		(prev as Tween).kill()
 	var tw := v.create_tween()
+	v.set_meta("_lunge_tw", tw)
 	tw.tween_property(v, "position:y", y0 + 8.0, 0.05)
 	tw.parallel().tween_property(v, "scale", Vector2(0.95, 0.95), 0.05)
 	tw.tween_property(v, "position:y", y0 + jump, 0.09).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
@@ -1050,6 +1054,11 @@ func _card_lunge(v: CardView, big := false) -> void:
 	tw.tween_property(v, "position:y", y0, 0.16).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tw.parallel().tween_property(v, "scale", Vector2.ONE, 0.16)
 	_flash(v, Color(1.35, 1.28, 1.05))
+
+
+func _shake_card(v: CardView, strength: float, duration: float) -> void:
+	## a card in the row shakes around its row place (y 0), not wherever a lunge has lifted it to — a 枪兵's 反击 lunges just as the blow lands
+	Kit.shake(v, strength, duration, Vector2(v.position.x, 0.0))
 
 
 func _enemy_move_tag(move_name: String) -> void:
@@ -1636,20 +1645,20 @@ func _ev_enemy_hit(ev: Dictionary) -> void:
 		BattleFx.enemy_ult_slash(self, _cards_rect())
 		Kit.shake(self, 22.0, 0.4)
 		for c in _cards:
-			Kit.shake(c, 9.0, 0.3)
+			_shake_card(c, 9.0, 0.3)
 	elif int(ev.get("mark", -1)) >= 0 and int(ev["mark"]) < _cards.size():  # 点名 lands: an X cut across the marked card
 		var mr := _card_rect(int(ev["mark"]))
 		BattleFx.slash(self, mr.get_center(), Color(1.0, 0.15, 0.1), -40.0, mr.size.length() * 1.1, 16.0)
 		BattleFx.slash(self, mr.get_center(), Color(1.0, 0.85, 0.75), 40.0, mr.size.length() * 1.1, 10.0, 0.1)
 		BattleFx.burst(self, mr.get_center(), Color(1.0, 0.25, 0.15), 16, 20.0, 170.0, 6.0, 0.35)
 		_flash(_cards[int(ev["mark"])], Color(2.2, 0.5, 0.45))
-		Kit.shake(_cards[int(ev["mark"])], 16.0, 0.35)
+		_shake_card(_cards[int(ev["mark"])], 16.0, 0.35)
 		Kit.shake(self, 14.0, 0.3)
 		BattleFx.vignette(self, Color(0.8, 0.0, 0.0, 0.5), 0.6)
 	else:
 		BattleFx.claw(self, _cards_rect().get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), float(ev["cut"]))
 		for c in _cards:
-			Kit.shake(c, 5.0, 0.16)
+			_shake_card(c, 5.0, 0.16)
 	Kit.float_text(self, _party_center(), ("暴击 " if ev.get("crit", false) else "") + "-%d" % ev["dmg"], Kit.c("red"), 56 if ev.get("crit", false) else 44)
 	Kit.tween_bar(_party_hp, ev["hp"])
 	_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]
@@ -1733,7 +1742,7 @@ func _ev_stance_hit(ev: Dictionary) -> void:
 	Sfx.play("enemy_hit")
 	if su >= 0 and su < _cards.size():
 		BattleFx.claw(self, _card_rect(su).get_center(), float(ev["dmg"]) / maxf(1.0, float(b.party_max)), 0.0)
-		Kit.shake(_cards[su], 8.0, 0.2)
+		_shake_card(_cards[su], 8.0, 0.2)
 	Kit.float_text(self, _party_center(), "反击 -%d" % ev["dmg"], Kit.c("red"), 40)
 	Kit.tween_bar(_party_hp, ev["hp"])
 	_party_hp_label.text = "%d / %d" % [ev["hp"], b.party_max]

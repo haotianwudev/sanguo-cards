@@ -758,9 +758,17 @@ static func float_text(parent: Control, at: Vector2, text: String, color: Color,
 	tw.tween_callback(l.queue_free)
 
 
-static func shake(node: Control, strength := 10.0, duration := 0.25) -> void:
-	var origin := node.position
+static func shake(node: Control, strength := 10.0, duration := 0.25, home: Variant = null) -> void:
+	## shake and come back. `home` = where the node belongs (a battle card mid-lunge is not at home); without it, a shake that starts
+	## while another is running keeps the first one's origin — taking the shaken position as the new home left nodes stuck off place
+	var prev: Variant = node.get_meta("_shake_tw", null)
+	var running: bool = prev is Tween and (prev as Tween).is_valid() and (prev as Tween).is_running()
+	var origin: Vector2 = home if home != null else (node.get_meta("_shake_home", node.position) if running else node.position)
+	if prev is Tween and (prev as Tween).is_valid():
+		(prev as Tween).kill()
+	node.set_meta("_shake_home", origin)
 	var tw := node.create_tween()
+	node.set_meta("_shake_tw", tw)
 	var steps := 6
 	for i in steps:
 		var k := 1.0 - float(i) / steps
