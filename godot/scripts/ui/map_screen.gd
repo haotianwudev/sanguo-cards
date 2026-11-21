@@ -7,7 +7,8 @@ const COL_W := 150.0
 const LANE_H := 104.0
 const SQ := 74.0
 const MAP_TOP := 22.0
-const NUDGE_MAX := 70.0  # data/map_nudge.json shifts stay inside the square's column (COL_W 150) and lane
+const NUDGE_MAX := 70.0  # data/map_nudge.json sideways shifts stay inside the square's column (COL_W 150)
+const NUDGE_MAX_Y := 100.0  # up / down may go further: a lane-middle square can reach a road drawn near the next row
 const LABEL_FS := 15  # square name plates: 13 was too small on a phone
 const TOKEN := Vector2(80, 80)  # the chibi hero
 ## where the hero stands relative to a square's centre: just left of the icon, so it never covers it
@@ -219,7 +220,7 @@ static var _nudges: Dictionary = {}
 
 func _nudge(s: Dictionary) -> Vector2:
 	## a hand-tuned pixel shift that sets a square on its landmark in the chapter's background
-	## (data/map_nudge.json: {map key: {square id: [dx, dy]}}, clamped to ±NUDGE_MAX so it never leaves its column)
+	## (data/map_nudge.json: {map key: {square id: [dx, dy]}}, clamped to ±NUDGE_MAX sideways so it never leaves its column, ±NUDGE_MAX_Y up / down)
 	if _nudges.is_empty():
 		var path := "res://data/map_nudge.json"
 		_nudges = GameData.read_json(path) if FileAccess.file_exists(path) else {"_": {}}
@@ -227,7 +228,7 @@ func _nudge(s: Dictionary) -> Vector2:
 	var d: Array = m.get(s.get("id", ""), [])
 	if d.size() != 2:
 		return Vector2.ZERO
-	return Vector2(clampf(d[0], -NUDGE_MAX, NUDGE_MAX), clampf(d[1], -NUDGE_MAX, NUDGE_MAX))
+	return Vector2(clampf(d[0], -NUDGE_MAX, NUDGE_MAX), clampf(d[1], -NUDGE_MAX_Y, NUDGE_MAX_Y))
 
 
 func _shown(s: Dictionary) -> bool:

@@ -60,7 +60,8 @@ def square_pos(quest, x_min, x_max, key=""):
     nudge = json.loads((ROOT / "godot/data/map_nudge.json").read_text(encoding="utf-8")).get(key, {})
 
     def at(k, s):  # same as map_screen._pos, hand nudges included
-        dx, dy = (max(-70, min(70, v)) for v in nudge.get(k, [0, 0]))
+        dx, dy = nudge.get(k, [0, 0])
+        dx, dy = max(-70, min(70, dx)), max(-100, min(100, dy))  # as map_screen.gd NUDGE_MAX / NUDGE_MAX_Y
         return (90 + (s["x"] - x_min) * COL_W + dx, MAP_TOP + 50 + (s["y"] - min_y) * LANE_H + dy)
 
     return {k: at(k, s) for k, s in sq.items()}, sq
