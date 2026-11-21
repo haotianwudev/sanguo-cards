@@ -418,6 +418,24 @@ def ref_portraits(text: str, key: str) -> list[str]:
     return out
 
 
+def prompt_for(key: str) -> tuple[str, str, list[str]] | None:
+    ## (kind, full prompt, reference portrait paths under pics/) for a battle / CG / ？ event picture, exactly as ART-PROMPTS.md
+    ## lists it (template with STYLE and the hero's outfit, or the owner's OVERRIDES entry) — art_gen.py uses it when no --prompt is given
+    if key in BATTLES:
+        kind, zh = "battle", OVERRIDES.get(key) or battle_prompt(BATTLES[key], key)
+    elif key in CGS:
+        kind, zh = "cg", OVERRIDES.get(key) or cg_prompt(CGS[key], key)
+    elif key.startswith("e_") and key[2:] in EVENTS:
+        kind, zh = "cg", OVERRIDES.get(key) or cg_prompt(EVENTS[key[2:]], key, True)
+    elif key in OVERRIDES:
+        kind, zh = "cg", OVERRIDES[key]
+    else:
+        return None
+    text = zh if key in OVERRIDES else zh.split(NL)[0]  # the scene line only: the appended outfit notes would match names
+    refs = [_re2.search(r"`pics/([^`]+)`", r).group(1) for r in ref_portraits(text, key)]
+    return kind, zh, refs
+
+
 def ref_lines(text: str, key: str) -> list[str]:
     refs = ref_portraits(text, key)
     return [f"参考立绘（一起上传给 Gemini，保持长相一致）：{'；'.join(refs)}", ""] if refs else []

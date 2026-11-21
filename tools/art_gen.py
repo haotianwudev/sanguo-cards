@@ -1,7 +1,13 @@
 """Generate art using AtlasCloud API fallback when built-in generator is unavailable or exhausted.
 
 Usage:
-    python tools/art_gen.py --key <art_key> --prompt "<prompt>" [--model nano-banana-2] [--size 1280*720] [--ingest]
+    python tools/art_gen.py --key <art_key> [--prompt "<prompt>"] [--model nano-banana-2] [--size 1280*720] [--ingest]
+
+Battle / CG / ？ event pictures: leave out --prompt and the key's entry in pics/prompts/ is used, built by
+art_prompts.prompt_for (STYLE line, the hero's outfit, the owner's override) with its reference portraits.
+Every battle / CG picture also gets a style anchor as its FIRST reference: a delivered picture of the same chapter
+(same key prefix, e.g. c6_), else pics/prompts/style_refs.json — a hand-written prompt with only portraits as refs
+drifted to semi-realistic painting (c6_wall, 2026-11-20). --style <img> picks another anchor, --no-style drops it.
 
 Reads ATLASCLOUD_API_KEY from .env in project root.
 """
@@ -177,10 +183,28 @@ def generate_image_atlas(
     raise TimeoutError(f"Generation timed out after 300s: {pred_id}")
 
 
+STYLE_NOTE = ("画风必须和第一张参考图完全一致，像同一部作品里的另一张图：同样的墨线粗细、赛璐珞平涂、上色和色调；"
+              "第一张图只用来对齐画风，不要照搬它的人物、场景和构图。")
+
+
+def style_anchor(key: str, kind: str) -> Path | None:
+    ## a delivered picture of the same chapter (key prefix before the first _) and kind, else the default in style_refs.json
+    art = json.loads((ROOT / "pics" / "art.json").read_text("utf-8"))
+    table = art.get("battles" if kind == "battle" else "cgs", {})
+    prefix = key.split("_", 1)[0] + "_"
+    for k in sorted(table):
+        if k != key and k.startswith(prefix) and (ROOT / "pics" / table[k]["src"]).exists():
+            return ROOT / "pics" / table[k]["src"]
+    default = json.loads((ROOT / "pics" / "prompts" / "style_refs.json").read_text("utf-8")).get(kind)
+    return ROOT / "pics" / default if default else None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate art using AtlasCloud")
     parser.add_argument("--key", required=True, help="Art key (e.g. c6_fanchou)")
-    parser.add_argument("--prompt", required=True, help="Text prompt")
+    parser.add_argument("--prompt", help="Text prompt (default: the key's entry in pics/prompts/, with its reference portraits)")
+    parser.add_argument("--style", help="style anchor picture, sent first (default: a delivered picture of the same chapter)")
+    parser.add_argument("--no-style", action="store_true", help="send no style anchor")
     parser.add_argument("--allow-text", action="store_true", help="the picture may carry lettering (default: none)")
     parser.add_argument("--allow-flags", action="store_true", help="the picture may show flags / banners (default: none)")
     parser.add_argument("--model", default="nano-banana-2", help="Model ID (default: nano-banana-2; nano-banana-lite is the cheap 1k one, gpt-image-2 the fallback)")
@@ -190,6 +214,24 @@ def main() -> None:
     parser.add_argument("--kind", help="Art kind (e.g. battle, cg, portrait)")
     parser.add_argument("--ingest", action="store_true", help="Auto ingest via tools/art_ingest.py after generation")
     args = parser.parse_args()
+
+    refs = list(args.ref or [])
+    if not args.prompt:
+        sys.path.insert(0, str(ROOT / "tools"))
+        from art_prompts import prompt_for
+        found = prompt_for(args.key)
+        if found is None:
+            parser.error(f"no prompt for {args.key} in pics/prompts/: pass --prompt")
+        kind, args.prompt, auto = found
+        args.kind = args.kind or kind
+        refs += [str(ROOT / "pics" / r) for r in auto if str(ROOT / "pics" / r) not in refs]
+    if args.kind in ("cg", "battle") and not args.no_style:
+        anchor = Path(args.style) if args.style else style_anchor(args.key, args.kind)
+        if anchor is not None:
+            print(f"Style anchor: {anchor}")
+            refs.insert(0, str(anchor))
+            args.prompt = STYLE_NOTE + "\n" + args.prompt
+    args.ref = refs
 
     api_key = load_api_key()
     print(f"Generating for key: {args.key} using model: {args.model}")
