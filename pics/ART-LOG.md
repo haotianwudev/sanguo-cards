@@ -1626,5 +1626,15 @@
 - [x] 2026-11-14 cg `c8_caihe` ← c8_caihe_new.jpg · ok
 - [x] 2026-11-14 cg `c8_zhangyun` ← c8_zhangyun_new.jpg · ok
 - [x] 2026-11-14 cg `c8_fubing_b` ← c8_fubing_b.jpg · ok
-- [ ] 2026-11-17 cg `c2_counter` ← c2_counter_v2.jpg · ok
-- [ ] 2026-11-20 cg `c6_wall` ← c6_wall_v2.jpg · ok
+- [x] 2026-11-17 cg `c2_counter` ← c2_counter_v2.jpg · ok
+- [x] 2026-11-20 cg `c6_wall` ← c6_wall_v2.jpg · ok
+- [x] 2026-11-20 portrait `xiandi_robe` ← xiandi_robe.jpg · ok ；取景用默认值，需看一眼调 face/head（--face X Y --head H）
+- [x] 2026-11-20 battle `c6_zhangji` ← c6_zhangji_v3.jpg · ok
+- [x] 2026-11-20 cg `c6_ruin` ← e_ruin.jpg · ok
+- [x] 2026-11-20 cg `c6_xuhuang` ← e_xuhuang.jpg · ok
+- [x] 2026-11-20 cg `c6_rebuild` ← e_rebuild2.jpg · ok
+- [x] 2026-11-20 cg `rc_dongui` ← e_rcdongui2.jpg · ok
+- [x] 2026-11-20 cg `c6_escape` ← e_escape.jpg · ok
+- [x] 2026-11-20 cg `c6_jiaxu_join` ← e_jiaxu_join.jpg · ok
+- [x] 2026-11-20 cg `c6_seal` ← e_seal.jpg · ok
+- [x] 2026-11-20 portrait `rc_dongui` ← rc_dongui_card.jpg · ok

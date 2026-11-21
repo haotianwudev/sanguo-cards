@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PICS = ROOT / "pics"
 NL = "\n"
 
-DONGBAI = ("董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄长柄青铜骨朵（木柄缠皮绳，一端是圆球瓜棱形的青铜骨朵头，不是圆筒锤、不是方锤）（她已交付的立绘和 CG 都是这个样子）")
+DONGBAI = ("董白：完全照参考立绘里的董白画（长相、银灰色双马尾、紫色毛边皮甲和长柄骨朵都照立绘，不要画成单马尾或高马尾，不要自己改发型）")
 # the hero is drawn from his delivered portrait (ref_portraits sends it): these lines say only what the scene changes —
 # never his hair / armor in words, a description fought the portrait (黑色短发 vs the brown shaved-sides portrait, user 2026-11-20)
 HERO = "主角：完全照参考立绘里的主角画（长相、发型、发色、肤色、铠甲、披风和兵器都照立绘，不要自己改发型发色）；兵器只有立绘里那一把古锭刀，不要另加刀剑"
@@ -363,6 +363,12 @@ def _young_zhenmi(text: str, key: str) -> bool:
     return any(w in near for w in ("十几岁", "少女", "孩子", "小姑娘", "十三", "十四")) or key.startswith(_EARLY_NORTH)
 
 
+# a person drawn from another of his portraits when the scene names its look: {portrait key: (word in the scene, other portrait key)}
+# scene words that name a person without his card name: {word: card name}
+NAME_ALIASES = {"小皇帝": "汉献帝", "献帝": "汉献帝"}
+PORTRAIT_VARIANTS = {"xiandi": ("明黄", "xiandi_robe")}
+
+
 def ref_portraits(text: str, key: str) -> list[str]:
     ## the delivered portraits a scene should be drawn from: every card name the prompt mentions (clauses that say who must NOT be
     ## there are skipped) plus the lord when 主角 appears — south `lord`, north `lord_north`, none before the transmigration
@@ -380,6 +386,10 @@ def ref_portraits(text: str, key: str) -> list[str]:
                 _NAMES[m.group(1)] = (pk, portraits[pk]["src"] if pk in portraits else f"source/generals/{pk}.jpg")
         _NAMES["__lord"] = {k: (k, portraits[k]["src"]) for k in ("lord", "lord_north", "lord_south_casual", "lord_north_casual") if k in portraits}
         _NAMES["__young"] = {k: portraits[k]["src"] for k in ("zhenmi_young",) if k in portraits}
+        for alias, real in NAME_ALIASES.items():  # what the scene lines call a person (小皇帝) → his card name's portrait
+            if real in _NAMES and alias not in _NAMES:
+                _NAMES[alias] = _NAMES[real]
+        _NAMES["__variants"] = {v[1]: portraits[v[1]]["src"] for v in PORTRAIT_VARIANTS.values() if v[1] in portraits}
     keep = _wanted(text)
     out, seen = [], set()
     if "主角" in keep and key != "c1_era":
@@ -413,6 +423,9 @@ def ref_portraits(text: str, key: str) -> list[str]:
         pk, src = _NAMES[name]
         if pk == "zhenmi" and _young_zhenmi(keep, key) and "zhenmi_young" in _NAMES["__young"]:
             pk, src = "zhenmi_young", _NAMES["__young"]["zhenmi_young"]
+        if pk in PORTRAIT_VARIANTS and PORTRAIT_VARIANTS[pk][0] in keep:  # 明黄便袍 → the emperor's robe portrait, not the throne one
+            pk = PORTRAIT_VARIANTS[pk][1]
+            src = _NAMES["__variants"].get(pk, src)
         if name in keep and pk not in seen:
             seen.add(pk)
             keep = keep.replace(name, "")
@@ -431,6 +444,8 @@ def prompt_for(key: str) -> tuple[str, str, list[str]] | None:
         kind, zh = "cg", OVERRIDES.get(key) or cg_prompt(EVENTS[key[2:]], key, True)
     elif key in OVERRIDES:
         kind, zh = "cg", OVERRIDES[key]
+    elif key in PORTRAITS:
+        return "portrait", portrait_prompt(PORTRAITS[key], key), []
     else:
         return None
     text = zh if key in OVERRIDES else zh.split(NL)[0]  # the scene line only: the appended outfit notes would match names

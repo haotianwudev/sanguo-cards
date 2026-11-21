@@ -458,6 +458,7 @@
 | `lord_south_river` | source/generals/lord_south_river.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_south_q` | source/generals/lord_south_q.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `lord_north_q` | source/generals/lord_north_q.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `xiandi_robe` | source/generals/xiandi_robe.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `map:prologue` | source/map/prologue.jpg | 用户提供 | 用户提供 | — |
 | `map:prologue_north` | source/map/prologue_north.jpg | 用户提供 | 用户提供 | — |
 | `map:taodong` | source/map/taodong.jpg | 用户提供 | 用户提供 | — |

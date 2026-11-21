@@ -453,5 +453,6 @@
   "rc_luoyang_s": {"file": "rc_luoyang_s.jpg", "face": [0.48, 0.42], "head": 0.24},
   "lord_south_river": {"file": "lord_south_river.jpg", "face": [0.48, 0.42], "head": 0.24},
   "lord_south_q": {"file": "lord_south_q.jpg", "face": [0.47, 0.27], "head": 0.24},
-  "lord_north_q": {"file": "lord_north_q.jpg", "face": [0.5, 0.25], "head": 0.24}
+  "lord_north_q": {"file": "lord_north_q.jpg", "face": [0.5, 0.25], "head": 0.24},
+  "xiandi_robe": {"file": "xiandi_robe.jpg", "face": [0.5, 0.22], "head": 0.22}
 }

@@ -187,6 +187,10 @@ STYLE_NOTE = ("画风必须和第一张参考图完全一致，像同一部作�
               "第一张图只用来对齐画风，不要照搬它的人物、场景和构图。")
 
 
+PORTRAIT_NOTE = ("人物立绘参考图：画面里有立绘的人物，长相、发型、发色、服饰颜色与款式、铠甲、冠帽和兵器都完全照各自的立绘画，"
+                 "不要自己换衣服或换配色（张济画成一身黑甲、小皇帝画成灰布衣都是错的）。")
+
+
 def style_anchor(key: str, kind: str) -> Path | None:
     ## a delivered picture of the same chapter (key prefix before the first _) and kind, else the default in style_refs.json
     art = json.loads((ROOT / "pics" / "art.json").read_text("utf-8"))
@@ -231,6 +235,8 @@ def main() -> None:
             print(f"Style anchor: {anchor}")
             refs.insert(0, str(anchor))
             args.prompt = STYLE_NOTE + "\n" + args.prompt
+    if args.kind in ("cg", "battle") and any("/generals/" in r.replace("\\", "/") or "/soldiers/" in r.replace("\\", "/") for r in refs):
+        args.prompt += "\n" + PORTRAIT_NOTE
     args.ref = refs
 
     api_key = load_api_key()
