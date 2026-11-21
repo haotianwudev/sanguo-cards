@@ -19,18 +19,20 @@ PICS = ROOT / "pics"
 NL = "\n"
 
 DONGBAI = ("董白：成年女将，银白色长发高马尾，紫色毛边皮甲，双持两柄长柄青铜骨朵（木柄缠皮绳，一端是圆球瓜棱形的青铜骨朵头，不是圆筒锤、不是方锤）（她已交付的立绘和 CG 都是这个样子）")
-HERO = "主角：年轻男子，黑色短发（现代发型，在汉代很扎眼），穿孙坚留下的古铜鎏金旧甲（古铜色札甲、金边勾勒，胸甲与肩甲有云纹浮雕，鳞片纹甲裙与护腿，带划痕与旧锈），内衬朱红战袍，披纯黑色披风（无毛边），腰束带玉扣的皮带，肩扛孙坚的古锭刀（巨大的宽刃厚背砍刀，刀身像一整块带锈斑的铁板，刀背平直、刀尖斜削上翘，没有刀鞘；短柄缠棕色皮绳，圆形金色回纹护手，柄尾圆金属头；整个画面只有这一把刀，不要背带背刀、不要另一把剑）"
+# the hero is drawn from his delivered portrait (ref_portraits sends it): these lines say only what the scene changes —
+# never his hair / armor in words, a description fought the portrait (黑色短发 vs the brown shaved-sides portrait, user 2026-11-20)
+HERO = "主角：完全照参考立绘里的主角画（长相、发型、发色、肤色、铠甲、披风和兵器都照立绘，不要自己改发型发色）；兵器只有立绘里那一把古锭刀，不要另加刀剑"
 import re as _re
 # the same lord without 古锭刀 on his shoulder, for scenes where he must be empty-handed (the generic line would otherwise put the broadsword back in)
-HERO_NOBLADE = _re.sub(r"，?肩扛孙坚的古锭刀（.*?）(?=。|$)", "；手里、肩上、背上都没有任何兵器，不要古锭刀、不要大刀、不要任何刀剑", HERO)
+HERO_NOBLADE = "主角：完全照参考立绘里的主角画（长相、发型、发色、肤色、铠甲和披风都照立绘，不要自己改发型发色）；这一幕手里、肩上、背上都没有任何兵器，不要古锭刀、不要任何刀剑"
 NOBLADE_CGS = {"c8_fubing", "c8_qibing", "c8_caihe", "c8_zhangyun", "c8_zupu", "c8_shuige", "c9_changsha",
                "c11_hanqi", "c11_baihe_han", "c11_zhugejin", "c11_modao", "c11_liaochuang", "c12_liushou", "c12_qiqin", "c13_zhanglu",
                "s12_beifa", "s12_hushi", "s12_nanyang", "s12_sang", "s12_pangtong", "s12_kurou", "s12_dongfeng", "s12_guan", "tm_digong"}
 # the same lord out of armor, for scenes whose own text says 常服 (at home, at a feast) — the armor line would otherwise put the armor and blade back
-HERO_CASUAL = "主角：年轻男子，深棕近黑的短寸头（两侧推短、头顶短发微微上翘，额头露出，不要盖眉的刘海；现代发型，在汉代很扎眼），穿常服（和立绘 lord_south_casual 一样：深棕色交领长袍，青绿色镶金边的衣领与袖口，白色内衬领，黑色宽腰带；不穿任何盔甲、不披披风），手里、肩上、背上都没有任何兵器，不要古锭刀、不要任何刀剑"
-HERO_NORTH_CASUAL = "北线主角：二十出头的年轻男子，干净斯文，浅棕色长发，头顶挽一个小发髻，其余长发披在肩背上，额前有碎刘海（不是现代短发，不缠布巾、不戴头带），穿常服（和立绘 lord_north_casual 一样：灰蓝色交领长袍，外披雪白狐裘，不穿任何鱼鳞甲或铁甲），手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑"
-HERO_NORTH = "北线主角：二十出头的年轻男子，干净斯文，浅棕色长发，头顶挽一个小发髻，其余长发披在肩背上，额前有碎刘海（不是现代短发，不缠布巾、不戴头带），穿甄宓亡父留下的河北式旧札甲（银灰色，不要绿色和金色），外披雪白毛领貂裘大氅（和立绘 lord_north 一样），手持白蜡杆长枪（枪头下系一个红色平安结）"
-HERO_NORTH_NOBLADE = _re.sub(r"，?手持白蜡杆长枪（.*?）(?=。|$)", "；手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑", HERO_NORTH)
+HERO_CASUAL = "主角：完全照参考的主角常服立绘画（长相、发型、发色、肤色和常服都照立绘，不要自己改发型发色）；不穿盔甲、不披披风，手里、肩上、背上都没有任何兵器"
+HERO_NORTH_CASUAL = "北线主角：完全照参考的北线主角常服立绘画（长相、发型、发色、肤色和常服都照立绘，不要自己改发型发色）；不穿任何铠甲，手里、肩上、背上都没有任何兵器"
+HERO_NORTH = "北线主角：完全照参考立绘里的北线主角画（长相、发型、发色、肤色、铠甲、大氅和长枪都照立绘，不要自己改发型发色）；兵器只有立绘里那一杆长枪"
+HERO_NORTH_NOBLADE = "北线主角：完全照参考立绘里的北线主角画（长相、发型、发色、肤色、铠甲和大氅都照立绘，不要自己改发型发色）；这一幕手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑"
 NORTH_NOBLADE_CGS = {
     "n10_zhenmi", "n10_lianhuan", "n10_luoshui_bad", "n10_luoshang", "n10_huitou",
     "n11_start", "n11_beidu", "n11_huishi", "n11_qiye", "n11_kongming", "n11_yinzhang",
@@ -38,8 +40,8 @@ NORTH_NOBLADE_CGS = {
     "n11_tuishou", "n11_guanzhang", "n12_xuchang", "n12_guandu", "n12_huo", "n12_jiaozhang",
     "n12_nanzheng", "tm_xiangjian", "tm_digong",
 }
-HERO_SOUTH_EMPEROR = "南线主角：年轻男子，黑色短寸头（现代发型），身穿庄重华丽的汉代玄衣纁裳帝王冕服（不穿古铜旧甲），手里、肩上、背上都没有任何兵器，不要古锭刀、不要任何刀剑"
-HERO_NORTH_EMPEROR = "北线主角：二十出头的年轻男子，干净斯文，头发束冠（不是现代短发），身穿庄重华丽的汉代玄衣纁裳帝王冕服（不穿鱼鳞甲、不披貂裘），手里、肩上、背上都没有任何兵器，不要长枪、不要任何刀剑"
+HERO_SOUTH_EMPEROR = "南线主角：长相和发型照参考立绘里的主角；这一幕身穿庄重华丽的汉代玄衣纁裳帝王冕服（不穿古铜旧甲），手里、肩上、背上都没有任何兵器"
+HERO_NORTH_EMPEROR = "北线主角：长相照参考立绘里的北线主角，头发束冠；这一幕身穿庄重华丽的汉代玄衣纁裳帝王冕服（不穿鱼鳞甲、不披貂裘），手里、肩上、背上都没有任何兵器"
 HERO_MERGED = "归一后的主角：二十多岁的年轻男子，面容与南北线主角一致，中等长度黑发半束，身穿兼具江东古铜鎏金札甲与河北素铁鱼鳞甲特征的战甲，双手空着不拿任何兵器"
 HERO_MODERN = "主角（穿越前）：三十岁的现代社畜，寸头，衬衫领带，一脸熬夜的疲惫；这时还没有穿越，不要古装、不要铠甲、不要兵器"
 
