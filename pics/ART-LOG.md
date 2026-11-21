@@ -1639,3 +1639,6 @@
 - [x] 2026-11-20 cg `c6_seal` ← e_seal.jpg · ok
 - [x] 2026-11-20 portrait `rc_dongui` ← rc_dongui_card.jpg · ok
 - [x] 2026-11-20 cg `c7_huangzhong` ← e_huangzhong.jpg · ok
+- [x] 2026-11-20 cg `ss_mofu` ← ss_mofu.jpg · ok
+- [x] 2026-11-20 cg `ss_juma` ← ss_juma2.jpg · ok
+- [x] 2026-11-20 cg `ss_huixin` ← ss_huixin.jpg · ok

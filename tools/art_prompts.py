@@ -392,6 +392,7 @@ def ref_portraits(text: str, key: str) -> list[str]:
         _NAMES["__variants"] = {v[1]: portraits[v[1]]["src"] for v in PORTRAIT_VARIANTS.values() if v[1] in portraits}
     keep = _wanted(text)
     out, seen = [], set()
+    casual = "常服" in keep or "_casual" in keep  # a prompt that names lord_south_casual / lord_north_casual wants that portrait
     if "主角" in keep and key != "c1_era":
         if "归一后的主角" in keep:
             for label, lk in (("南线主角（合并参考）", "lord"), ("北线主角（合并参考）", "lord_north")):
@@ -400,20 +401,20 @@ def ref_portraits(text: str, key: str) -> list[str]:
                     seen.add(lk)
             keep = keep.replace("归一后的主角", "")
         if "南线主角" in keep:
-            lk = "lord_south_casual" if "常服" in keep else "lord"
+            lk = "lord_south_casual" if casual else "lord"
             if lk in _NAMES["__lord"] and lk not in seen:
                 out.append(f"南线主角 → `pics/{_NAMES['__lord'][lk][1]}`")
                 seen.add(lk)
             keep = keep.replace("南线主角", "")
         if "北线主角" in keep:
-            lk = "lord_north_casual" if "常服" in keep else "lord_north"
+            lk = "lord_north_casual" if casual else "lord_north"
             if lk in _NAMES["__lord"] and lk not in seen:
                 out.append(f"北线主角 → `pics/{_NAMES['__lord'][lk][1]}`")
                 seen.add(lk)
             keep = keep.replace("北线主角", "")
         if "主角" in keep:
             north = _is_north_key(key, keep)
-            lk = ("lord_north" if north else "lord") + ("_casual" if "常服" in keep else "")
+            lk = ("lord_north" if north else "lord") + ("_casual" if casual else "")
             lk = {"lord_casual": "lord_south_casual"}.get(lk, lk)
             if lk in _NAMES["__lord"] and lk not in seen:
                 out.append(f"主角 → `pics/{_NAMES['__lord'][lk][1]}`")

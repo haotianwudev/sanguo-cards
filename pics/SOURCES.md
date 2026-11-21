@@ -1414,3 +1414,6 @@
 | `cg:c13_wanglou` | source/cg/c13_wanglou.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c8_fubing_b` | source/cg/c8_fubing_b.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
 | `cg:c6_wall` | source/cg/c6_wall.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_mofu` | source/cg/ss_mofu.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_juma` | source/cg/ss_juma.jpg | 用户提供 | 用户提供（Gemini 生成） | — |
+| `cg:ss_huixin` | source/cg/ss_huixin.jpg | 用户提供 | 用户提供（Gemini 生成） | — |

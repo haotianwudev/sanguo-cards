@@ -7923,6 +7923,18 @@
     "c6_wall": {
       "src": "source/cg/c6_wall.jpg",
       "license": "用户提供（Gemini 生成）"
+    },
+    "ss_mofu": {
+      "src": "source/cg/ss_mofu.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_juma": {
+      "src": "source/cg/ss_juma.jpg",
+      "license": "用户提供（Gemini 生成）"
+    },
+    "ss_huixin": {
+      "src": "source/cg/ss_huixin.jpg",
+      "license": "用户提供（Gemini 生成）"
     }
   }
 }
